@@ -1825,7 +1825,12 @@
             updateStatus('🔄 Loading booth-level electoral analysis data...');
             
             try {
-                const url = 'https://docs.google.com/spreadsheets/d/1ABCD1234567890/export?format=csv';
+                const url = 'REPLACE_WITH_YOUR_BOOTH_DATA_CSV_URL';
+                
+                if (url.includes('REPLACE_WITH_YOUR')) {
+                    throw new Error('Please replace placeholder URL with your actual Google Sheets CSV URL');
+                }
+                
                 const response = await fetch(url);
                 
                 if (!response.ok) {
@@ -1864,7 +1869,12 @@
             updateStatus('🔄 Loading demographic surname classification data...');
             
             try {
-                const url = 'https://docs.google.com/spreadsheets/d/1EFGH5678901234/export?format=csv';
+                const url = 'REPLACE_WITH_YOUR_SURNAME_DATA_CSV_URL';
+                
+                if (url.includes('REPLACE_WITH_YOUR')) {
+                    throw new Error('Please replace placeholder URL with your actual Google Sheets CSV URL');
+                }
+                
                 const response = await fetch(url);
                 
                 if (!response.ok) {
@@ -1903,7 +1913,12 @@
             updateStatus('🔄 Loading guardian demographic analysis data...');
             
             try {
-                const url = 'https://docs.google.com/spreadsheets/d/1IJKL9012345678/export?format=csv';
+                const url = 'REPLACE_WITH_YOUR_GUARDIAN_DATA_CSV_URL';
+                
+                if (url.includes('REPLACE_WITH_YOUR')) {
+                    throw new Error('Please replace placeholder URL with your actual Google Sheets CSV URL');
+                }
+                
                 const response = await fetch(url);
                 
                 if (!response.ok) {
@@ -1937,7 +1952,12 @@
             updateStatus('🔄 Loading Bihar caste-surname ethnographic mapping...');
             
             try {
-                const url = 'https://docs.google.com/spreadsheets/d/1QRST4567890123/export?format=csv';
+                const url = 'REPLACE_WITH_YOUR_CASTE_DATA_CSV_URL';
+                
+                if (url.includes('REPLACE_WITH_YOUR')) {
+                    throw new Error('Please replace placeholder URL with your actual Google Sheets CSV URL');
+                }
+                
                 const response = await fetch(url);
                 
                 if (!response.ok) {
