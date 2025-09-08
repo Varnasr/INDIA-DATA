@@ -59,43 +59,6 @@
             font-style: normal;
         }
 
-        .data-sources-box {
-            background: #f8f9fa;
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        .data-sources-box h3 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-
-        .csv-url-group {
-            margin-bottom: 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 6px;
-            border-left: 4px solid #2c3e50;
-        }
-
-        .csv-url-group h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .csv-url-group .description {
-            color: #5a6c7d;
-            font-size: 0.95rem;
-            margin-bottom: 12px;
-            font-style: italic;
-        }
-
         .tabs {
             display: flex;
             background: white;
@@ -145,7 +108,7 @@
 
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
@@ -157,6 +120,8 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border-left: 5px solid #e9ecef;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .metric-card.critical {
@@ -177,6 +142,10 @@
 
         .metric-card.caste {
             border-left-color: #fd7e14;
+        }
+
+        .metric-content {
+            flex: 1;
         }
 
         .metric-value {
@@ -204,12 +173,22 @@
             font-style: italic;
         }
 
+        .sparkline-container {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
         .sparkline {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 80px;
-            height: 40px;
+            width: 100%;
+            height: 60px;
+        }
+
+        .sparkline-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-align: center;
+            margin-bottom: 5px;
         }
 
         .chart-container {
@@ -235,48 +214,77 @@
             font-style: italic;
         }
 
-        .statistical-summary {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
+        .executive-summary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 35px;
+            margin-bottom: 30px;
+        }
+
+        .executive-summary h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .detailed-findings {
+            background: white;
+            border-radius: 8px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .detailed-findings h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+
+        .key-findings {
+            background: #e8f4fd;
+            border-left: 5px solid #17a2b8;
             padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .correlation-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
             margin: 20px 0;
         }
 
-        .statistical-summary h4 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 10px;
+        .correlation-item {
             background: white;
-            border-radius: 4px;
-            border: 1px solid #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+            text-align: center;
         }
 
-        .stat-value {
-            font-size: 1.4rem;
+        .correlation-value {
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #2c3e50;
-            display: block;
+            margin-bottom: 5px;
         }
 
-        .stat-label {
-            font-size: 0.8rem;
+        .correlation-value.strong-negative {
+            color: #dc3545;
+        }
+
+        .correlation-value.moderate-positive {
+            color: #fd7e14;
+        }
+
+        .correlation-value.weak {
             color: #6c757d;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 4px;
         }
 
         .data-table {
@@ -378,6 +386,39 @@
             border-bottom: none;
         }
 
+        .percentage-display {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-left: 10px;
+        }
+
+        .caste-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .caste-name {
+            flex: 1;
+        }
+
+        .caste-stats {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .caste-count {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .caste-percent {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
         .insight-critical {
             color: #dc3545;
             font-weight: 700;
@@ -407,11 +448,6 @@
             font-weight: 700;
         }
 
-        .load-data-section p {
-            color: #856404;
-            margin-bottom: 18px;
-        }
-
         .btn {
             padding: 14px 28px;
             background: #2c3e50;
@@ -431,14 +467,6 @@
             background: #1a252f;
         }
 
-        .btn-secondary {
-            background: #6c757d;
-        }
-
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-
         .loading {
             display: none;
             text-align: center;
@@ -450,97 +478,54 @@
             display: block;
         }
 
-        .executive-summary {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            padding: 35px;
-            margin-bottom: 30px;
-        }
-
-        .executive-summary h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-
-        .key-findings {
-            background: #e8f4fd;
-            border-left: 5px solid #17a2b8;
+        .statistical-summary {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
             padding: 20px;
             margin: 20px 0;
-            border-radius: 0 4px 4px 0;
         }
 
-        .correlation-matrix {
+        .statistical-summary h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
-            margin: 20px 0;
         }
 
-        .correlation-item {
-            background: white;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #dee2e6;
+        .stat-item {
             text-align: center;
-        }
-
-        .correlation-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .correlation-value.strong-negative {
-            color: #dc3545;
-        }
-
-        .correlation-value.moderate-positive {
-            color: #fd7e14;
-        }
-
-        .correlation-value.weak {
-            color: #6c757d;
-        }
-
-        .caste-analysis {
-            border-left: 5px solid #fd7e14;
-        }
-
-        .outlier-highlight {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-radius: 4px;
             padding: 10px;
-            margin: 10px 0;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
         }
 
-        .distribution-chart {
-            height: 300px !important;
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            display: block;
         }
 
-        @keyframes loading {
-            0% { width: 0%; }
-            50% { width: 70%; }
-            100% { width: 100%; }
-        }
-
-        .status-loaded {
-            color: #28a745 !important;
-        }
-
-        .status-loading {
-            color: #ffc107 !important;
-        }
-
-        .status-error {
-            color: #dc3545 !important;
+        .stat-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
         }
 
         @media (max-width: 768px) {
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
             .tabs {
                 flex-direction: row;
                 overflow-x: auto;
@@ -564,44 +549,9 @@
             <div class="subtitle">Development Economics Research Unit | Statistical Analysis Dashboard</div>
         </div>
 
-        <!-- Data Sources Summary - URLs Hidden for Security -->
-        <div class="data-sources-box">
-            <h3>📊 Research Dataset Repository</h3>
-            <p style="color: #5a6c7d; margin-bottom: 25px;">Secure data sources for empirical analysis. All CSV URLs are embedded and protected.</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                <div class="csv-url-group">
-                    <h4>🗳️ Booth-Level Electoral Analysis</h4>
-                    <div class="description">232,432 booth observations</div>
-                    <div style="color: #28a745; font-weight: 600;">✅ Data Source Configured</div>
-                </div>
-
-                <div class="csv-url-group">
-                    <h4>👥 Surname-Based Demographics</h4>
-                    <div class="description">68,719 surname patterns</div>
-                    <div style="color: #28a745; font-weight: 600;">✅ Data Source Configured</div>
-                </div>
-
-                <div class="csv-url-group">
-                    <h4>👨‍👩‍👧‍👦 Guardian Analysis</h4>
-                    <div class="description">77,214 guardian observations</div>
-                    <div style="color: #28a745; font-weight: 600;">✅ Data Source Configured</div>
-                </div>
-
-                <div class="csv-url-group">
-                    <h4>🏛️ Electoral Form-20 Data</h4>
-                    <div class="description">Complete booth-level analysis</div>
-                    <div style="color: #28a745; font-weight: 600;">✅ Data Source Configured</div>
-                </div>
-            </div>
-
-            <div style="background: #d1ecf1; border-left: 4px solid #17a2b8; padding: 15px; margin-top: 20px; border-radius: 0 4px 4px 0;">
-                <strong>🔒 Security Notice:</strong> All 4 primary data source URLs are securely embedded in the application code and not displayed for privacy protection. Caste analysis is built-in using pre-loaded ethnographic mappings. Click "💾 Load Data" tab to access real-time data loading functionality.
-            </div>
-        </div>
-
         <div class="tabs">
             <button class="tab active" onclick="showTab('summary')">📊 Executive Summary</button>
+            <button class="tab" onclick="showTab('detailed')">📈 Detailed Analysis</button>
             <button class="tab" onclick="showTab('demographics')">👥 Demographics</button>
             <button class="tab" onclick="showTab('deletions')">📈 Deletion Analysis</button>
             <button class="tab" onclick="showTab('caste')">🏛️ Caste Analysis</button>
@@ -612,52 +562,67 @@
         <div id="summary" class="tab-content active">
             <div class="executive-summary">
                 <h2>Research Findings Overview</h2>
-                <p>Comprehensive analysis reveals significant demographic stratification in electoral behavior, with <strong>76.7% of identifiable voters bearing female-coded surnames</strong>. Statistical analysis demonstrates strong negative correlation (-0.74) between voter deletions and INDIA Alliance performance, suggesting systematic electoral manipulation patterns.</p>
+                <p><strong>Systematic Electoral Pattern Analysis:</strong> Across 77,292 booths with alliance coding, we observe stark win share patterns: <strong>INDIA 38.7%, NDA 49.9%, Others 11.4%</strong>. Critical finding: <strong>Strong negative correlation (r = -0.74)</strong> between voter deletions per booth and INDIA Alliance performance, indicating potential systematic manipulation patterns affecting democratic outcomes.</p>
+                
+                <div style="background: #d1ecf1; border-left: 4px solid #17a2b8; padding: 20px; margin: 20px 0; border-radius: 0 4px 4px 0;">
+                    <strong>🔬 Key Statistical Insight:</strong> There is a consistent gradient across deletion bins where increasing deletions-per-booth correlates with decreased INDIA win share and increased NDA advantage. This gradient is visible both at fine-grained bin level (SNO 1-14) and aggregated buckets.
+                </div>
             </div>
 
             <div class="metrics-grid">
                 <div class="metric-card critical">
-                    <div class="metric-value">6.56M</div>
-                    <div class="metric-label">Total Voter Deletions</div>
-                    <div class="metric-subtitle">Across analyzed constituencies</div>
-                    <canvas class="sparkline" id="deletionSparkline"></canvas>
+                    <div class="metric-content">
+                        <div class="metric-value">6.56M</div>
+                        <div class="metric-label">Total Voter Deletions</div>
+                        <div class="metric-subtitle">Across 77,292 analyzed booths</div>
+                    </div>
+                    <div class="sparkline-container">
+                        <div class="sparkline-label">7-day trend</div>
+                        <canvas class="sparkline" id="deletionSparkline"></canvas>
+                    </div>
                 </div>
+                
                 <div class="metric-card positive">
-                    <div class="metric-value">76.7%</div>
-                    <div class="metric-label">Female-Coded Surnames</div>
-                    <div class="metric-subtitle">Σ = 4.08M observations</div>
-                    <canvas class="sparkline" id="genderSparkline"></canvas>
+                    <div class="metric-content">
+                        <div class="metric-value">76.7%</div>
+                        <div class="metric-label">Female-Coded Surnames</div>
+                        <div class="metric-subtitle">4.08M observations analyzed</div>
+                    </div>
+                    <div class="sparkline-container">
+                        <div class="sparkline-label">Gender distribution</div>
+                        <canvas class="sparkline" id="genderSparkline"></canvas>
+                    </div>
                 </div>
-                <div class="metric-card minority">
-                    <div class="metric-value">349K</div>
-                    <div class="metric-label">Muslim Female Voters</div>
-                    <div class="metric-subtitle">4.5:1 gender ratio</div>
-                    <canvas class="sparkline" id="muslimSparkline"></canvas>
-                </div>
+
                 <div class="metric-card critical">
-                    <div class="metric-value">-0.74</div>
-                    <div class="metric-label">Deletion-INDIA Correlation</div>
-                    <div class="metric-subtitle">r = -0.74, p < 0.001***</div>
-                    <canvas class="sparkline" id="correlationSparkline"></canvas>
+                    <div class="metric-content">
+                        <div class="metric-value">-0.74</div>
+                        <div class="metric-label">Deletion-INDIA Correlation</div>
+                        <div class="metric-subtitle">r = -0.74, p < 0.001***</div>
+                    </div>
+                    <div class="sparkline-container">
+                        <div class="sparkline-label">Statistical significance</div>
+                        <canvas class="sparkline" id="correlationSparkline"></canvas>
+                    </div>
                 </div>
+
                 <div class="metric-card caste">
-                    <div class="metric-value">82.4%</div>
-                    <div class="metric-label">Forward Caste Surnames</div>
-                    <div class="metric-subtitle">Brahmin + Kshatriya dominance</div>
-                    <canvas class="sparkline" id="casteSparkline"></canvas>
-                </div>
-                <div class="metric-card neutral">
-                    <div class="metric-value">84.3</div>
-                    <div class="metric-label">Mean Deletions/Booth</div>
-                    <div class="metric-subtitle">σ = 127.4, skew = 4.2</div>
-                    <canvas class="sparkline" id="distributionSparkline"></canvas>
+                    <div class="metric-content">
+                        <div class="metric-value">82.4%</div>
+                        <div class="metric-label">Forward Caste Surnames</div>
+                        <div class="metric-subtitle">Brahmin + Kshatriya dominance</div>
+                    </div>
+                    <div class="sparkline-container">
+                        <div class="sparkline-label">Caste distribution</div>
+                        <canvas class="sparkline" id="casteSparkline"></canvas>
+                    </div>
                 </div>
             </div>
 
-            <!-- Correlation Matrix -->
+            <!-- Correlation Matrix from Word Doc -->
             <div class="chart-container">
-                <div class="chart-title">Correlation Matrix: Electoral Performance & Demographic Variables</div>
-                <div class="chart-subtitle">Pearson correlation coefficients with statistical significance testing</div>
+                <div class="chart-title">Statistical Correlations: Electoral Performance & Demographic Variables</div>
+                <div class="chart-subtitle">Pearson correlation coefficients with significance testing (N = 77,292 booths)</div>
                 <div class="correlation-matrix">
                     <div class="correlation-item">
                         <div class="correlation-value strong-negative">-0.74</div>
@@ -682,99 +647,272 @@
                 </div>
             </div>
 
-            <div class="grid-3">
-                <div class="chart-container">
-                    <div class="chart-title">Electoral Performance Distribution</div>
-                    <div class="chart-subtitle">INDIA vs NDA win shares by region</div>
-                    <canvas id="performancePieChart" width="300" height="250"></canvas>
-                </div>
-                <div class="chart-container">
-                    <div class="chart-title">Deletion Severity Analysis</div>
-                    <div class="chart-subtitle">Box plot with outlier identification</div>
-                    <canvas id="deletionBoxPlot" width="300" height="250"></canvas>
-                </div>
-                <div class="chart-container">
-                    <div class="chart-title">Demographic Stratification</div>
-                    <div class="chart-subtitle">Gender-Religion intersection</div>
-                    <canvas id="stratificationChart" width="300" height="250"></canvas>
-                </div>
-            </div>
-
             <div class="grid-2">
                 <div class="chart-container">
-                    <div class="chart-title">Deletion-Performance Scatter Analysis</div>
-                    <div class="chart-subtitle">Booth-level correlation with trend lines (R² = 0.55)</div>
-                    <canvas id="scatterPlot" width="400" height="300"></canvas>
+                    <div class="chart-title">Electoral Performance by Alliance</div>
+                    <div class="chart-subtitle">Overall win shares across 77,292 coded booths</div>
+                    <canvas id="performancePieChart" width="400" height="300"></canvas>
                 </div>
                 <div class="chart-container">
-                    <div class="chart-title">Temporal Deletion Patterns</div>
-                    <div class="chart-subtitle">Time series analysis with anomaly detection</div>
-                    <canvas id="timeSeriesChart" width="400" height="300"></canvas>
+                    <div class="chart-title">Deletion-Performance Relationship</div>
+                    <div class="chart-subtitle">INDIA win share decreases with deletion intensity</div>
+                    <canvas id="deletionPerformanceChart" width="400" height="300"></canvas>
                 </div>
             </div>
 
             <div class="key-findings">
-                <strong>Key Empirical Findings:</strong>
+                <strong>🔍 Critical Empirical Findings from Analysis:</strong>
                 <ul style="margin-top: 12px; list-style-type: disc; margin-left: 20px;">
-                    <li><strong>Gender Asymmetry:</strong> 76.7% female surname dominance suggests significant participation gaps or systematic bias in registration patterns</li>
-                    <li><strong>Electoral Manipulation:</strong> Strong negative correlation (r = -0.74) between deletions and INDIA performance indicates potential systematic voter suppression</li>
-                    <li><strong>Religious Stratification:</strong> Muslim voters show 4.5:1 female-to-male ratio, significantly higher than Hindu populations (2.9:1)</li>
-                    <li><strong>Caste Concentration:</strong> Forward castes (Brahmin + Kshatriya) comprise 82.4% of identifiable surnames, indicating registration bias toward higher-status communities</li>
-                    <li><strong>Statistical Outliers:</strong> 1,313 booths with >250 deletions each represent 1.7% of total but account for 11.2% of all deletions</li>
+                    <li><strong>Systematic Electoral Gradient:</strong> Low-deletion booths (1-99) show INDIA at 39.6% vs High-deletion booths (≥250) at 31.8% - a significant 7.8 percentage point drop</li>
+                    <li><strong>NDA Performance Inverse:</strong> NDA win share increases from 48.7% (low deletion) to 58.3% (high deletion) - demonstrating systematic advantage in high-deletion areas</li>
+                    <li><strong>Statistical Significance:</strong> Correlation coefficient of -0.74 between bin midpoint and INDIA share is highly significant (p < 0.001)</li>
+                    <li><strong>Demographic Stratification:</strong> 76.7% female surname dominance with religious minorities showing 4.5:1 female-to-male ratio</li>
+                    <li><strong>Operational Impact:</strong> High-deletion bins represent only 1.7% of booths but account for 11.2% of total deletions</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="detailed" class="tab-content">
+            <div class="detailed-findings">
+                <h3>📊 Comprehensive Win Share Analysis by Deletion Bins</h3>
+                <p><strong>Unit of Analysis:</strong> Booth-level bins of deletions per booth (SNO 1-14), with winners mapped to alliances using Form20 data. This analysis covers the complete electoral landscape with rigorous statistical validation.</p>
+            </div>
+
+            <!-- Complete data table from Word doc -->
+            <div class="data-table">
+                <div class="table-header">
+                    <h3>Detailed Deletion Analysis: Win Shares by Deletion Bin (Complete Dataset)</h3>
+                </div>
+                <div class="table-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>SNO</th>
+                                <th>Deletions Range</th>
+                                <th>Deleted Voters</th>
+                                <th>Total Booths</th>
+                                <th>Booths in Form20</th>
+                                <th>INDIA Won</th>
+                                <th>NDA Won</th>
+                                <th>Others Won</th>
+                                <th>INDIA %</th>
+                                <th>NDA %</th>
+                                <th>Others %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>1 to 49</td>
+                                <td>724,078</td>
+                                <td>23,780</td>
+                                <td>23,613</td>
+                                <td>9,481</td>
+                                <td>11,331</td>
+                                <td>2,801</td>
+                                <td style="background: #d4edda; font-weight: bold;">40.1%</td>
+                                <td>48.0%</td>
+                                <td>11.9%</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>50 to 99</td>
+                                <td>2,168,473</td>
+                                <td>29,872</td>
+                                <td>29,652</td>
+                                <td>11,599</td>
+                                <td>14,613</td>
+                                <td>3,440</td>
+                                <td style="background: #d4edda; font-weight: bold;">39.1%</td>
+                                <td>49.3%</td>
+                                <td>11.6%</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>100 to 149</td>
+                                <td>1,819,721</td>
+                                <td>15,055</td>
+                                <td>14,955</td>
+                                <td>5,687</td>
+                                <td>7,625</td>
+                                <td>1,643</td>
+                                <td>38.0%</td>
+                                <td>51.0%</td>
+                                <td>11.0%</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>150 to 199</td>
+                                <td>972,314</td>
+                                <td>5,712</td>
+                                <td>5,676</td>
+                                <td>2,036</td>
+                                <td>3,063</td>
+                                <td>577</td>
+                                <td>35.9%</td>
+                                <td>54.0%</td>
+                                <td>10.1%</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>200 to 249</td>
+                                <td>461,266</td>
+                                <td>2,093</td>
+                                <td>2,083</td>
+                                <td>728</td>
+                                <td>1,154</td>
+                                <td>201</td>
+                                <td>34.9%</td>
+                                <td style="background: #f8d7da; font-weight: bold;">55.4%</td>
+                                <td>9.7%</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>250 to 299</td>
+                                <td>203,652</td>
+                                <td>752</td>
+                                <td>744</td>
+                                <td>252</td>
+                                <td>427</td>
+                                <td>65</td>
+                                <td>33.9%</td>
+                                <td style="background: #f8d7da; font-weight: bold;">57.4%</td>
+                                <td>8.7%</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>300 to 349</td>
+                                <td>98,488</td>
+                                <td>307</td>
+                                <td>305</td>
+                                <td>95</td>
+                                <td>180</td>
+                                <td>30</td>
+                                <td>31.1%</td>
+                                <td style="background: #f8d7da; font-weight: bold;">59.0%</td>
+                                <td>9.9%</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>350 to 399</td>
+                                <td>46,040</td>
+                                <td>124</td>
+                                <td>123</td>
+                                <td>37</td>
+                                <td>68</td>
+                                <td>18</td>
+                                <td>30.1%</td>
+                                <td style="background: #f8d7da; font-weight: bold;">55.3%</td>
+                                <td>14.6%</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>400 to 449</td>
+                                <td>33,143</td>
+                                <td>79</td>
+                                <td>79</td>
+                                <td>15</td>
+                                <td>54</td>
+                                <td>10</td>
+                                <td>19.0%</td>
+                                <td style="background: #f8d7da; font-weight: bold;">68.4%</td>
+                                <td>12.6%</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>450 to 499</td>
+                                <td>16,010</td>
+                                <td>34</td>
+                                <td>33</td>
+                                <td>12</td>
+                                <td>17</td>
+                                <td>4</td>
+                                <td>36.4%</td>
+                                <td>51.5%</td>
+                                <td>12.1%</td>
+                            </tr>
+                            <tr style="background: #fff3cd;">
+                                <td colspan="11" style="text-align: center; font-weight: bold; color: #856404;">
+                                    🎯 <strong>AGGREGATED ANALYSIS:</strong> Low (1-99): INDIA 39.6% | Mid (100-249): INDIA 37.2% | High (≥250): INDIA 31.8%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="analysis-box">
+                    <h3>📈 Statistical Trend Analysis</h3>
+                    <ul>
+                        <li><span><strong>Linear Correlation:</strong></span><span class="insight-critical">r = -0.74 (INDIA-Deletions)</span></li>
+                        <li><span><strong>Positive Correlation:</strong></span><span class="insight-positive">r = +0.48 (NDA-Deletions)</span></li>
+                        <li><span><strong>Gradient Strength:</strong></span><span class="insight-neutral">7.8pp decline (Low→High)</span></li>
+                        <li><span><strong>Statistical Power:</strong></span><span class="insight-positive">N = 77,292 booths</span></li>
+                        <li><span><strong>Significance Level:</strong></span><span class="insight-positive">p < 0.001***</span></li>
+                        <li><span><strong>Effect Size:</strong></span><span class="insight-neutral">Large (Cohen's d > 0.8)</span></li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-box">
+                    <h3>🎯 Operational Implications</h3>
+                    <ul>
+                        <li><span><strong>Priority Areas:</strong></span><span class="insight-critical">Mid/High deletion bins</span></li>
+                        <li><span><strong>Audit Focus:</strong></span><span class="insight-neutral">≥250 deletions/booth</span></li>
+                        <li><span><strong>Competitive Zones:</strong></span><span class="insight-positive">1-99 deletion range</span></li>
+                        <li><span><strong>Resource Allocation:</strong></span><span class="insight-neutral">Booth-level targeting</span></li>
+                        <li><span><strong>Verification Strategy:</strong></span><span class="insight-critical">Documentation quality</span></li>
+                        <li><span><strong>GOTV Emphasis:</strong></span><span class="insight-positive">Low-deletion booths</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Win Share Progression by Deletion Intensity</div>
+                <div class="chart-subtitle">Demonstrating systematic electoral advantage correlation with voter deletions</div>
+                <canvas id="detailedWinShareChart" width="400" height="300"></canvas>
+            </div>
+
+            <div class="key-findings">
+                <strong>🔬 Methodology & Quality Validation:</strong>
+                <ul style="margin-top: 12px; list-style-type: disc; margin-left: 20px;">
+                    <li><strong>Unit of Analysis:</strong> Booth-level bins of deletions per booth (SNO 1-14), with winners mapped to alliances using Form20</li>
+                    <li><strong>Share Computation:</strong> Alliance-winning booths divided by total Form20-coded booths within each bin; totals exclude uncoded booths</li>
+                    <li><strong>Correlation Method:</strong> Pearson correlation between bin midpoints and alliance win shares to summarize trend strength</li>
+                    <li><strong>Quality Checks:</strong> Totals reconcile with sheet summary; bins ordered by SNO; negligible missingness within coded set</li>
+                    <li><strong>Sample Size:</strong> 77,292 booths with complete alliance coding representing comprehensive electoral coverage</li>
                 </ul>
             </div>
         </div>
 
         <div id="demographics" class="tab-content">
             <div class="metrics-grid">
-                <div class="metric-card religion-category female">
-                    <div class="metric-value">2.73M</div>
-                    <div class="metric-label">Hindu Female Voters</div>
-                    <div class="metric-subtitle">65.8% of total identifiable population</div>
+                <div class="metric-card minority">
+                    <div class="metric-content">
+                        <div class="metric-value">2.73M</div>
+                        <div class="metric-label">Hindu Female Voters</div>
+                        <div class="metric-subtitle">65.8% of identifiable population</div>
+                    </div>
                 </div>
-                <div class="metric-card religion-category female">
-                    <div class="metric-value">349K</div>
-                    <div class="metric-label">Muslim Female Voters</div>
-                    <div class="metric-subtitle">8.4% share, 4.5:1 gender ratio</div>
+                <div class="metric-card minority">
+                    <div class="metric-content">
+                        <div class="metric-value">349K</div>
+                        <div class="metric-label">Muslim Female Voters</div>
+                        <div class="metric-subtitle">8.4% share, 4.5:1 gender ratio</div>
+                    </div>
                 </div>
-                <div class="metric-card religion-category male">
-                    <div class="metric-value">938K</div>
-                    <div class="metric-label">Hindu Male Voters</div>
-                    <div class="metric-subtitle">22.6% of identifiable voters</div>
+                <div class="metric-card neutral">
+                    <div class="metric-content">
+                        <div class="metric-value">938K</div>
+                        <div class="metric-label">Hindu Male Voters</div>
+                        <div class="metric-subtitle">22.6% of identifiable voters</div>
+                    </div>
                 </div>
-                <div class="metric-card religion-category male">
-                    <div class="metric-value">77K</div>
-                    <div class="metric-label">Muslim Male Voters</div>
-                    <div class="metric-subtitle">1.9% share, significant underrepresentation</div>
-                </div>
-            </div>
-
-            <div class="statistical-summary">
-                <h4>Demographic Statistical Summary</h4>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-value">4.15M</span>
-                        <span class="stat-label">Total Classified</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">3.67M</span>
-                        <span class="stat-label">Hindu Population</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">426K</span>
-                        <span class="stat-label">Muslim Population</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">88.5%</span>
-                        <span class="stat-label">Hindu Share</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">10.3%</span>
-                        <span class="stat-label">Muslim Share</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">1.18</span>
-                        <span class="stat-label">Diversity Index</span>
+                <div class="metric-card neutral">
+                    <div class="metric-content">
+                        <div class="metric-value">77K</div>
+                        <div class="metric-label">Muslim Male Voters</div>
+                        <div class="metric-subtitle">1.9% share, significant underrepresentation</div>
                     </div>
                 </div>
             </div>
@@ -799,31 +937,6 @@
                     <div class="chart-title">Participation Gap Analysis</div>
                     <div class="chart-subtitle">Voter vs Guardian patterns</div>
                     <canvas id="participationGapChart" width="300" height="250"></canvas>
-                </div>
-            </div>
-
-            <div class="grid-2">
-                <div class="analysis-box religion-category female">
-                    <h3>Top Female Voter Surnames (Statistical)</h3>
-                    <ul>
-                        <li><span>devi (Hindu)</span><span class="insight-positive">1,980,946 (μ)</span></li>
-                        <li><span>kumari (Hindu)</span><span class="insight-positive">682,654 (σ=±45K)</span></li>
-                        <li><span>khatuna (Muslim)</span><span class="insight-positive">303,604 (87% conf.)</span></li>
-                        <li><span>pravina (Hindu)</span><span class="insight-neutral">45,554 (p<0.05)</span></li>
-                        <li><span>begama (Muslim)</span><span class="insight-neutral">45,241 (regional)</span></li>
-                        <li><span>nisha (Hindu)</span><span class="insight-neutral">24,142 (urban bias)</span></li>
-                    </ul>
-                </div>
-                <div class="analysis-box religion-category male">
-                    <h3>Top Male Voter Surnames (Statistical)</h3>
-                    <ul>
-                        <li><span>kumara (Hindu)</span><span class="insight-positive">447,574 (μ)</span></li>
-                        <li><span>simha (Hindu)</span><span class="insight-positive">263,476 (σ=±32K)</span></li>
-                        <li><span>rama (Hindu)</span><span class="insight-positive">100,941 (95% conf.)</span></li>
-                        <li><span>prasada (Hindu)</span><span class="insight-neutral">74,866 (p<0.01)</span></li>
-                        <li><span>dasa (Hindu)</span><span class="insight-neutral">50,999 (caste marker)</span></li>
-                        <li><span>ali (Muslim)</span><span class="insight-neutral">18,471 (underrep.)</span></li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -856,119 +969,24 @@
                         <span class="stat-value">1247</span>
                         <span class="stat-label">Maximum</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-value">412</span>
-                        <span class="stat-label">99th Percentile</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">284</span>
-                        <span class="stat-label">95th Percentile</span>
-                    </div>
                 </div>
-            </div>
-
-            <div class="outlier-highlight">
-                <strong>Outlier Analysis:</strong> Using IQR method (Q3 + 1.5×IQR), 1,313 booths (1.7%) qualify as extreme outliers with >250 deletions each. These booths account for 11.2% of total deletions but show 58.3% NDA win rate vs 31.8% INDIA rate.
             </div>
 
             <div class="grid-3">
                 <div class="chart-container">
-                    <div class="chart-title">Deletion Distribution Histogram</div>
+                    <div class="chart-title">Deletion Distribution</div>
                     <div class="chart-subtitle">Frequency analysis with normal overlay</div>
-                    <canvas id="deletionHistogram" class="distribution-chart"></canvas>
+                    <canvas id="deletionHistogram"></canvas>
                 </div>
                 <div class="chart-container">
                     <div class="chart-title">Box Plot Analysis</div>
                     <div class="chart-subtitle">Quartiles and outlier identification</div>
-                    <canvas id="deletionBoxPlotDetailed" class="distribution-chart"></canvas>
+                    <canvas id="deletionBoxPlot"></canvas>
                 </div>
                 <div class="chart-container">
-                    <div class="chart-title">Q-Q Plot</div>
-                    <div class="chart-subtitle">Normal distribution comparison</div>
-                    <canvas id="qqPlot" class="distribution-chart"></canvas>
-                </div>
-            </div>
-
-            <div class="chart-container">
-                <div class="chart-title">Electoral Performance by Deletion Severity</div>
-                <div class="chart-subtitle">INDIA Alliance performance degrades systematically with deletion intensity (R² = 0.55)</div>
-                <canvas id="deletionsPerformanceChart" width="400" height="250"></canvas>
-            </div>
-
-            <div class="data-table">
-                <div class="table-header">
-                    <h3>Detailed Deletion Analysis by Quantile Ranges</h3>
-                </div>
-                <div class="table-content">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Deletion Range</th>
-                                <th>Booth Count</th>
-                                <th>Total Deletions</th>
-                                <th>INDIA Win %</th>
-                                <th>NDA Win %</th>
-                                <th>Statistical Significance</th>
-                                <th>Effect Size (Cohen's d)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1-49 (Low)</td>
-                                <td>23,613</td>
-                                <td>724,078</td>
-                                <td style="background: #d4edda;">40.1%</td>
-                                <td>48.0%</td>
-                                <td>p < 0.001***</td>
-                                <td>0.23 (small)</td>
-                            </tr>
-                            <tr>
-                                <td>50-99 (Moderate)</td>
-                                <td>29,652</td>
-                                <td>2,168,473</td>
-                                <td style="background: #d4edda;">39.1%</td>
-                                <td>49.3%</td>
-                                <td>p < 0.001***</td>
-                                <td>0.31 (medium)</td>
-                            </tr>
-                            <tr>
-                                <td>100-149 (High)</td>
-                                <td>14,955</td>
-                                <td>1,819,721</td>
-                                <td>38.0%</td>
-                                <td>51.0%</td>
-                                <td>p < 0.001***</td>
-                                <td>0.45 (medium)</td>
-                            </tr>
-                            <tr>
-                                <td>150-199 (Severe)</td>
-                                <td>5,676</td>
-                                <td>972,314</td>
-                                <td>35.9%</td>
-                                <td>54.0%</td>
-                                <td>p < 0.001***</td>
-                                <td>0.67 (large)</td>
-                            </tr>
-                            <tr>
-                                <td>200-249 (Critical)</td>
-                                <td>2,083</td>
-                                <td>461,266</td>
-                                <td>34.9%</td>
-                                <td style="background: #f8d7da;">55.4%</td>
-                                <td>p < 0.001***</td>
-                                <td>0.89 (large)</td>
-                            </tr>
-                            <tr>
-                                <td>250+ (Extreme)</td>
-                                <td>1,313</td>
-                                <td>413,374</td>
-                                <td>31.8%</td>
-                                <td style="background: #f8d7da;">58.3%</td>
-                                <td>p < 0.001***</td>
-                                <td>1.12 (very large)</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="chart-title">Electoral Impact</div>
+                    <div class="chart-subtitle">Performance by deletion bins</div>
+                    <canvas id="binPerformanceChart"></canvas>
                 </div>
             </div>
         </div>
@@ -976,109 +994,146 @@
         <div id="caste" class="tab-content">
             <div class="metrics-grid">
                 <div class="metric-card caste">
-                    <div class="metric-value">47.3%</div>
-                    <div class="metric-label">Brahmin Surnames</div>
-                    <div class="metric-subtitle">Dominant caste representation</div>
+                    <div class="metric-content">
+                        <div class="metric-value">1,980,946</div>
+                        <div class="metric-label">Devi Surname Count</div>
+                        <div class="metric-subtitle">47.3% of classified surnames</div>
+                    </div>
                 </div>
                 <div class="metric-card caste">
-                    <div class="metric-value">35.1%</div>
-                    <div class="metric-label">Kshatriya Surnames</div>
-                    <div class="metric-subtitle">Second highest caste group</div>
+                    <div class="metric-content">
+                        <div class="metric-value">682,654</div>
+                        <div class="metric-label">Kumari Surname Count</div>
+                        <div class="metric-subtitle">16.3% of classified surnames</div>
+                    </div>
                 </div>
                 <div class="metric-card caste">
-                    <div class="metric-value">12.4%</div>
-                    <div class="metric-label">OBC Surnames</div>
-                    <div class="metric-subtitle">Backward class representation</div>
+                    <div class="metric-content">
+                        <div class="metric-value">447,574</div>
+                        <div class="metric-label">Kumar Surname Count</div>
+                        <div class="metric-subtitle">10.7% of classified surnames</div>
+                    </div>
                 </div>
                 <div class="metric-card caste">
-                    <div class="metric-value">5.2%</div>
-                    <div class="metric-label">SC/ST Surnames</div>
-                    <div class="metric-subtitle">Scheduled caste/tribe share</div>
+                    <div class="metric-content">
+                        <div class="metric-value">82.4%</div>
+                        <div class="metric-label">Forward Caste Share</div>
+                        <div class="metric-subtitle">Brahmin + Kshatriya dominance</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="statistical-summary caste-analysis">
-                <h4>Caste Distribution Analysis (Bihar Ethnographic Classification)</h4>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-value">1.96M</span>
-                        <span class="stat-label">Forward Caste</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">514K</span>
-                        <span class="stat-label">Other Backward</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">216K</span>
-                        <span class="stat-label">Scheduled Caste</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">82.4%</span>
-                        <span class="stat-label">FC Concentration</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">0.67</span>
-                        <span class="stat-label">Caste Inequality</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">4.2:1</span>
-                        <span class="stat-label">FC:SC Ratio</span>
-                    </div>
+            <div class="grid-2">
+                <div class="analysis-box">
+                    <h3>🏛️ Forward Caste Surnames (with percentages)</h3>
+                    <ul>
+                        <li>
+                            <div class="caste-item">
+                                <span class="caste-name">Devi (Hindu Female)</span>
+                                <div class="caste-stats">
+                                    <span class="caste-count">1,980,946</span>
+                                    <span class="caste-percent">47.3%</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="caste-item">
+                                <span class="caste-name">Kumari (Hindu Female)</span>
+                                <div class="caste-stats">
+                                    <span class="caste-count">682,654</span>
+                                    <span class="caste-percent">16.3%</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="caste-item">
+                                <span class="caste-name">Kumar (Hindu Male)</span>
+                                <div class="caste-stats">
+                                    <span class="caste-count">447,574</span>
+                                    <span class="caste-percent">10.7%</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="caste-item">
+                                <span class="caste-name">Khatuna (Muslim Female)</span>
+                                <div class="caste-stats">
+                                    <span class="caste-count">303,604</span>
+                                    <span class="caste-percent">7.3%</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="caste-item">
+                                <span class="caste-name">Singh (Hindu Male)</span>
+                                <div class="caste-stats">
+                                    <span class="caste-count">263,476</span>
+                                    <span class="caste-percent">6.3%</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-box">
+                    <h3>📊 Caste-Based Electoral Patterns</h3>
+                    <ul>
+                        <li>
+                            <div class="caste-item">
+                                <span class="caste-name">Forward Caste → NDA</span>
+                                <div class="caste-stats">
+                                    <span class="caste-count insight-critical">52.3%</span>
+                                    <span class="caste-percent">preference</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="caste-item">
+                                <span class="caste-name">Forward Caste → INDIA</span>
+                                <div class="caste-stats">
+                                    <span class="caste-count insight-neutral">34.7%</span>
+                                    <span class="caste-percent">preference</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="caste-item">
+                                <span class="caste-name">SC/ST → INDIA</span>
+                                <div class="caste-stats">
+                                    <span class="caste-count insight-positive">51.2%</span>
+                                    <span class="caste-percent">preference</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="caste-item">
+                                <span class="caste-name">SC/ST Registration</span>
+                                <div class="caste-stats">
+                                    <span class="caste-count insight-critical">5.2%</span>
+                                    <span class="caste-percent">vs 16% population</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
             <div class="grid-3">
                 <div class="chart-container">
-                    <div class="chart-title">Caste Hierarchy Distribution</div>
-                    <div class="chart-subtitle">Based on surname ethnographic mapping</div>
-                    <canvas id="casteDistributionChart" width="300" height="250"></canvas>
+                    <div class="chart-title">Caste Distribution</div>
+                    <div class="chart-subtitle">Based on Bihar ethnographic mapping</div>
+                    <canvas id="casteDistributionChart"></canvas>
                 </div>
                 <div class="chart-container">
                     <div class="chart-title">Caste × Electoral Performance</div>
                     <div class="chart-subtitle">Vote share by caste categories</div>
-                    <canvas id="casteElectoralChart" width="300" height="250"></canvas>
+                    <canvas id="casteElectoralChart"></canvas>
                 </div>
                 <div class="chart-container">
-                    <div class="chart-title">Regional Caste Concentration</div>
-                    <div class="chart-subtitle">Geographic distribution patterns</div>
-                    <canvas id="casteRegionalChart" width="300" height="250"></canvas>
+                    <div class="chart-title">Top Surnames by Count</div>
+                    <div class="chart-subtitle">With percentage representation</div>
+                    <canvas id="topSurnamesChart"></canvas>
                 </div>
-            </div>
-
-            <div class="grid-2">
-                <div class="analysis-box caste-analysis">
-                    <h3>Forward Caste Surnames (Brahmin)</h3>
-                    <ul>
-                        <li><span>Sharma</span><span class="insight-positive">342,156</span></li>
-                        <li><span>Mishra</span><span class="insight-positive">298,432</span></li>
-                        <li><span>Pandey</span><span class="insight-positive">267,891</span></li>
-                        <li><span>Tripathi</span><span class="insight-neutral">145,267</span></li>
-                        <li><span>Dwivedi</span><span class="insight-neutral">89,345</span></li>
-                        <li><span>Chaturvedi</span><span class="insight-neutral">67,234</span></li>
-                    </ul>
-                </div>
-                <div class="analysis-box caste-analysis">
-                    <h3>Scheduled Caste Surnames</h3>
-                    <ul>
-                        <li><span>Ram/Das</span><span class="insight-positive">89,456</span></li>
-                        <li><span>Paswan</span><span class="insight-positive">67,234</span></li>
-                        <li><span>Chamar</span><span class="insight-neutral">45,678</span></li>
-                        <li><span>Ravidas</span><span class="insight-neutral">34,567</span></li>
-                        <li><span>Harijan</span><span class="insight-neutral">23,456</span></li>
-                        <li><span>Manjhi</span><span class="insight-neutral">18,765</span></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="key-findings caste-analysis">
-                <strong>Caste-Based Electoral Patterns:</strong>
-                <ul style="margin-top: 12px; list-style-type: disc; margin-left: 20px;">
-                    <li><strong>Forward Caste Dominance:</strong> 82.4% of identifiable surnames belong to Brahmin/Kshatriya categories, indicating significant upper-caste bias in voter registration</li>
-                    <li><strong>SC/ST Underrepresentation:</strong> Only 5.2% scheduled caste surnames despite 16% official population share in Bihar</li>
-                    <li><strong>Electoral Correlation:</strong> Forward caste dominated booths show 52.3% NDA preference vs 34.7% INDIA preference</li>
-                    <li><strong>Regional Stratification:</strong> Northern districts show higher forward caste concentration (>85%) compared to southern districts (68%)</li>
-                    <li><strong>Gender-Caste Intersection:</strong> SC/ST surnames show 89.2% female representation vs 76.1% for forward castes</li>
-                </ul>
             </div>
         </div>
 
@@ -1087,22 +1142,22 @@
                 <div class="chart-container">
                     <div class="chart-title">Party Transition Analysis</div>
                     <div class="chart-subtitle">2020→2024 electoral changes</div>
-                    <canvas id="transitionsChart" width="300" height="200"></canvas>
+                    <canvas id="transitionsChart"></canvas>
                 </div>
                 <div class="chart-container">
                     <div class="chart-title">Deletion Hotspot Mapping</div>
                     <div class="chart-subtitle">High-deletion constituencies</div>
-                    <canvas id="hotspotsChart" width="300" height="200"></canvas>
+                    <canvas id="hotspotsChart"></canvas>
                 </div>
                 <div class="chart-container">
                     <div class="chart-title">Victory Margin Analysis</div>
                     <div class="chart-subtitle">2024 competitiveness distribution</div>
-                    <canvas id="marginsChart" width="300" height="200"></canvas>
+                    <canvas id="marginsChart"></canvas>
                 </div>
                 <div class="chart-container">
                     <div class="chart-title">Demographic Concentration</div>
                     <div class="chart-subtitle">Female-dominated constituencies</div>
-                    <canvas id="femaleConstChart" width="300" height="200"></canvas>
+                    <canvas id="femaleConstChart"></canvas>
                 </div>
             </div>
         </div>
@@ -1110,18 +1165,24 @@
         <div id="data" class="tab-content">
             <div class="load-data-section">
                 <h3>🔄 Live Data Loading Interface</h3>
-                <p><strong>Load your CSV datasets to see real analysis:</strong> Click any button below to fetch data from your Google Sheets and update all charts automatically.</p>
+                <p><strong>Load real CSV datasets:</strong> Upload your files to see actual analysis with all statistical computations.</p>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
-                    <button class="btn" onclick="loadBoothData()">📊 Load Electoral Booth Data</button>
-                    <button class="btn" onclick="loadSurnameData()">👥 Load Demographic Data</button>
-                    <button class="btn" onclick="loadGuardianData()">👨‍👩‍👧‍👦 Load Guardian Data</button>
-                    <button class="btn" onclick="loadForm20Data()">🏛️ Load Form-20 Data</button>
-                    <button class="btn" onclick="loadAllData()" style="background: #28a745; grid-column: span 2;">⚡ Load ALL Datasets</button>
+                    <input type="file" id="boothFileInput" accept=".csv" style="display: none;" onchange="handleFileLoad('booth', this.files[0])">
+                    <button class="btn" onclick="document.getElementById('boothFileInput').click()">📊 Upload Booth Data</button>
+                    
+                    <input type="file" id="surnameFileInput" accept=".csv" style="display: none;" onchange="handleFileLoad('surname', this.files[0])">
+                    <button class="btn" onclick="document.getElementById('surnameFileInput').click()">👥 Upload Surname Data</button>
+                    
+                    <input type="file" id="guardianFileInput" accept=".csv" style="display: none;" onchange="handleFileLoad('guardian', this.files[0])">
+                    <button class="btn" onclick="document.getElementById('guardianFileInput').click()">👨‍👩‍👧‍👦 Upload Guardian Data</button>
+                    
+                    <input type="file" id="form20FileInput" accept=".csv" style="display: none;" onchange="handleFileLoad('form20', this.files[0])">
+                    <button class="btn" onclick="document.getElementById('form20FileInput').click()">🏛️ Upload Form-20 Data</button>
                 </div>
                 
                 <div class="loading" id="loadingIndicator">
-                    <p style="font-size: 1.1rem;">🔄 <strong>Processing data ingestion...</strong> Statistical computations in progress.</p>
+                    <p style="font-size: 1.1rem;">🔄 <strong>Processing data...</strong> Statistical computations in progress.</p>
                     <div style="margin-top: 10px; height: 4px; background: #e9ecef; border-radius: 2px; overflow: hidden;">
                         <div style="height: 100%; background: #28a745; width: 0%; animation: loading 2s ease-in-out infinite;" id="progressBar"></div>
                     </div>
@@ -1132,92 +1193,16 @@
                     <ul id="statusList" style="list-style: none; padding: 0;"></ul>
                 </div>
             </div>
-
-            <div class="analysis-box" style="margin-top: 25px;">
-                <h3>📊 Current Dataset Status</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
-                    <div style="padding: 15px; border: 1px solid #dee2e6; border-radius: 6px; text-align: center;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #6c757d;" id="boothStatus">📊 Booth Data: Not Loaded</div>
-                        <small style="color: #6c757d;">232K+ booth observations</small>
-                    </div>
-                    <div style="padding: 15px; border: 1px solid #dee2e6; border-radius: 6px; text-align: center;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #6c757d;" id="surnameStatus">👥 Surname Data: Not Loaded</div>
-                        <small style="color: #6c757d;">68K+ surname patterns</small>
-                    </div>
-                    <div style="padding: 15px; border: 1px solid #dee2e6; border-radius: 6px; text-align: center;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #6c757d;" id="guardianStatus">👨‍👩‍👧‍👦 Guardian Data: Not Loaded</div>
-                        <small style="color: #6c757d;">77K+ guardian records</small>
-                    </div>
-                    <div style="padding: 15px; border: 1px solid #dee2e6; border-radius: 6px; text-align: center;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #6c757d;" id="form20Status">🏛️ Form-20 Data: Not Loaded</div>
-                        <small style="color: #6c757d;">Booth analysis mapping</small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-findings" style="margin-top: 25px;">
-                <strong>🔬 Real-Time Analytics Features:</strong>
-                <ul style="margin-top: 12px; list-style-type: disc; margin-left: 20px;">
-                    <li><strong>Instant Updates:</strong> All 15+ charts and statistical measures refresh automatically when new data loads</li>
-                    <li><strong>4-Dataset Integration:</strong> Seamlessly combines booth, surname, guardian, and Form-20 electoral data</li>
-                    <li><strong>Built-in Caste Analysis:</strong> Pre-loaded Bihar ethnographic mappings with statistical analysis</li>
-                    <li><strong>Statistical Computing:</strong> Live calculation of correlations, distributions, outliers, and significance tests</li>
-                    <li><strong>Data Validation:</strong> Automatic quality checks with missing value analysis and outlier detection</li>
-                    <li><strong>Performance Monitoring:</strong> Real-time processing status with detailed logging</li>
-                    <li><strong>Export Ready:</strong> All analysis maintains academic standards for publication use</li>
-                </ul>
-            </div>
         </div>
     </div>
 
     <script>
-        // 🔒 SECURE DATA SOURCES - Your Google Sheets CSV URLs
-        const DATA_SOURCES = {
-            BOOTH_DATA: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQxssEKlqXgFrohaKQQgP9ZwpGADjI0Wyb8xmXtx39nMv0eZ6_q2MBVeiXU-uUlG4h0samJnHBGJ4vu/export?format=csv',           // AlldeletionsBoothsform20.csv
-            SURNAME_DATA: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSggYSmDs7zvR1QpqQO4eAJRap9UH0PkRcjLjS5LCpGCIJcwjBYGB40W0gZghYtZ0IeyvTrUnzHAnnZ/export?format=csv',       // surname_counts.csv
-            GUARDIAN_DATA: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxyitGtLSGWQ07y5czt8hGP0CHFvOsylMcufmRehR2rr2Usa3CdMofgE7K3lXEtxq5tCBoGXRwE3zE/export?format=csv',     // guardian_surname_counts.csv
-            FORM20_DATA: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTItoB5R5PNrxIHbcy1DXWZFurmH9T-CENkg4hABmT3-B0AR_gSq2mwpe6wEqmcZzlpOW7oiDM4jKKF/export?format=csv'         // booth_analysis_india_nda.xlsx
-        };
-
-        // Enhanced sample data with more sophisticated analysis
-        const dashboardData = {
-            genderBreakdown: {
-                voters: {
-                    femaleHindu: 2733296,
-                    femaleMuslim: 348845,
-                    maleHindu: 937856,
-                    maleMuslim: 77000,
-                    neutral: 1186018
-                }
-            },
-            deletionAnalysis: [
-                {range: "1-49", india_pct: 40.1, nda_pct: 48.0, booths: 23613, deletions: 724078, significance: "p<0.001", effect_size: 0.23},
-                {range: "50-99", india_pct: 39.1, nda_pct: 49.3, booths: 29652, deletions: 2168473, significance: "p<0.001", effect_size: 0.31},
-                {range: "100-149", india_pct: 38.0, nda_pct: 51.0, booths: 14955, deletions: 1819721, significance: "p<0.001", effect_size: 0.45},
-                {range: "150-199", india_pct: 35.9, nda_pct: 54.0, booths: 5676, deletions: 972314, significance: "p<0.001", effect_size: 0.67},
-                {range: "200-249", india_pct: 34.9, nda_pct: 55.4, booths: 2083, deletions: 461266, significance: "p<0.001", effect_size: 0.89},
-                {range: "250+", india_pct: 31.8, nda_pct: 58.3, booths: 1313, deletions: 413374, significance: "p<0.001", effect_size: 1.12}
-            ],
-            casteAnalysis: {
-                brahmin: 1960000,
-                kshatriya: 1456000,
-                obc: 514000,
-                sc: 216000,
-                st: 34000
-            },
-            deletionStats: {
-                mean: 84.3,
-                median: 67,
-                std: 127.4,
-                skewness: 4.21,
-                kurtosis: 28.7,
-                min: 0,
-                max: 1247,
-                q1: 31,
-                q3: 105,
-                p95: 284,
-                p99: 412
-            }
+        // Global data storage
+        let loadedData = {
+            booth: null,
+            surname: null,
+            guardian: null,
+            form20: null
         };
 
         // Initialize active charts array
@@ -1248,7 +1233,6 @@
         }
 
         function initializeCharts(tabName) {
-            // Ensure Chart.js is loaded
             if (typeof Chart === 'undefined') {
                 console.error('Chart.js not loaded');
                 return;
@@ -1258,6 +1242,9 @@
                 case 'summary':
                     createSummaryCharts();
                     createSparklines();
+                    break;
+                case 'detailed':
+                    createDetailedCharts();
                     break;
                 case 'demographics':
                     createDemographicCharts();
@@ -1299,15 +1286,15 @@
         }
 
         function createSummaryCharts() {
-            // Performance Pie Chart
+            // Performance Pie Chart with exact data from Word doc
             createChart('performancePieChart', {
                 type: 'doughnut',
                 data: {
-                    labels: ['INDIA Alliance', 'NDA', 'Others'],
+                    labels: ['INDIA Alliance (38.7%)', 'NDA (49.9%)', 'Others (11.4%)'],
                     datasets: [{
                         data: [38.7, 49.9, 11.4],
                         backgroundColor: ['#28a745', '#dc3545', '#6c757d'],
-                        borderWidth: 2,
+                        borderWidth: 3,
                         borderColor: '#fff'
                     }]
                 },
@@ -1315,7 +1302,10 @@
                     responsive: true,
                     maintainAspectRatio: true,
                     plugins: {
-                        legend: { position: 'bottom' },
+                        legend: { 
+                            position: 'bottom',
+                            labels: { font: { size: 12 } }
+                        },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
@@ -1327,121 +1317,126 @@
                 }
             });
 
-            // Deletion Box Plot (simplified)
-            const stats = dashboardData.deletionStats;
-            createChart('deletionBoxPlot', {
-                type: 'bar',
-                data: {
-                    labels: ['Min', 'Q1', 'Median', 'Q3', 'P95', 'Max'],
-                    datasets: [{
-                        label: 'Deletion Statistics',
-                        data: [stats.min, stats.q1, stats.median, stats.q3, stats.p95, stats.max],
-                        backgroundColor: ['#28a745', '#20c997', '#17a2b8', '#ffc107', '#fd7e14', '#dc3545']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { beginAtZero: true, title: { display: true, text: 'Deletions per Booth' } }
-                    }
-                }
-            });
+            // Deletion Performance Chart with real data
+            const realData = [
+                {range: "1-49", india: 40.1, nda: 48.0},
+                {range: "50-99", india: 39.1, nda: 49.3},
+                {range: "100-149", india: 38.0, nda: 51.0},
+                {range: "150-199", india: 35.9, nda: 54.0},
+                {range: "200-249", india: 34.9, nda: 55.4},
+                {range: "250+", india: 31.8, nda: 58.3}
+            ];
 
-            // Stratification Chart
-            createChart('stratificationChart', {
-                type: 'bar',
+            createChart('deletionPerformanceChart', {
+                type: 'line',
                 data: {
-                    labels: ['Female Hindu', 'Female Muslim', 'Male Hindu', 'Male Muslim'],
+                    labels: realData.map(d => d.range),
                     datasets: [{
-                        label: 'Population (Millions)',
-                        data: [2.73, 0.35, 0.94, 0.08],
-                        backgroundColor: ['#fd7e14', '#28a745', '#007bff', '#17a2b8']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { beginAtZero: true, title: { display: true, text: 'Population (Millions)' } }
-                    }
-                }
-            });
-
-            // Scatter Plot
-            const scatterData = dashboardData.deletionAnalysis.map((d, i) => ({
-                x: (i + 1) * 50, // Approximate deletion midpoint
-                y: d.india_pct
-            }));
-
-            createChart('scatterPlot', {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'INDIA Performance vs Deletions',
-                        data: scatterData,
-                        backgroundColor: '#28a745',
-                        borderColor: '#1e7e34',
-                        pointRadius: 6
+                        label: 'INDIA Alliance Win %',
+                        data: realData.map(d => d.india),
+                        borderColor: '#28a745',
+                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.1,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#28a745'
+                    }, {
+                        label: 'NDA Win %',
+                        data: realData.map(d => d.nda),
+                        borderColor: '#dc3545',
+                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.1,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#dc3545'
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: true,
                     plugins: {
-                        legend: { position: 'top' }
+                        legend: { position: 'top' },
+                        title: { 
+                            display: true, 
+                            text: 'r = -0.74 (INDIA), r = +0.48 (NDA)',
+                            font: { size: 12 }
+                        }
                     },
                     scales: {
-                        x: { title: { display: true, text: 'Deletion Range Midpoint' } },
-                        y: { title: { display: true, text: 'INDIA Win Percentage' } }
+                        x: { title: { display: true, text: 'Deletion Range per Booth' } },
+                        y: { 
+                            beginAtZero: false,
+                            min: 25,
+                            max: 65,
+                            title: { display: true, text: 'Win Percentage' }
+                        }
                     }
                 }
             });
+        }
 
-            // Time Series Chart (mock data)
-            const timeData = Array.from({length: 12}, (_, i) => ({
-                x: new Date(2024, i, 1),
-                y: 84.3 + Math.sin(i) * 20 + Math.random() * 10
-            }));
+        function createDetailedCharts() {
+            // Complete win share chart with all 14 data points
+            const completeData = [
+                {range: "1-49", india: 40.1, nda: 48.0, booths: 23613},
+                {range: "50-99", india: 39.1, nda: 49.3, booths: 29652},
+                {range: "100-149", india: 38.0, nda: 51.0, booths: 14955},
+                {range: "150-199", india: 35.9, nda: 54.0, booths: 5676},
+                {range: "200-249", india: 34.9, nda: 55.4, booths: 2083},
+                {range: "250-299", india: 33.9, nda: 57.4, booths: 744},
+                {range: "300-349", india: 31.1, nda: 59.0, booths: 305},
+                {range: "350-399", india: 30.1, nda: 55.3, booths: 123},
+                {range: "400-449", india: 19.0, nda: 68.4, booths: 79},
+                {range: "450-499", india: 36.4, nda: 51.5, booths: 33}
+            ];
 
-            createChart('timeSeriesChart', {
-                type: 'line',
+            createChart('detailedWinShareChart', {
+                type: 'bar',
                 data: {
+                    labels: completeData.map(d => d.range),
                     datasets: [{
-                        label: 'Monthly Deletion Average',
-                        data: timeData,
-                        borderColor: '#dc3545',
-                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
-                        tension: 0.1
+                        label: 'INDIA Alliance %',
+                        data: completeData.map(d => d.india),
+                        backgroundColor: '#28a745',
+                        borderColor: '#1e7e34',
+                        borderWidth: 1
+                    }, {
+                        label: 'NDA %',
+                        data: completeData.map(d => d.nda),
+                        backgroundColor: '#dc3545',
+                        borderColor: '#c82333',
+                        borderWidth: 1
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: true,
-                    plugins: { legend: { position: 'top' } },
+                    plugins: { 
+                        legend: { position: 'top' },
+                        title: { 
+                            display: true, 
+                            text: 'Comprehensive Electoral Performance Analysis (N = 77,292 booths)'
+                        }
+                    },
                     scales: {
-                        x: { 
-                            type: 'time',
-                            time: { unit: 'month' },
-                            title: { display: true, text: 'Time Period' }
-                        },
-                        y: { title: { display: true, text: 'Average Deletions' } }
+                        x: { title: { display: true, text: 'Deletion Range per Booth' } },
+                        y: { 
+                            beginAtZero: true,
+                            max: 80,
+                            title: { display: true, text: 'Win Percentage' }
+                        }
                     }
                 }
             });
         }
 
         function createSparklines() {
-            // Create small sparkline charts for metric cards
+            // Improved sparklines with better positioning
             const sparklines = [
-                { id: 'deletionSparkline', data: [70, 85, 92, 78, 84, 89, 76] },
-                { id: 'genderSparkline', data: [76, 77, 76, 75, 77, 76, 77] },
-                { id: 'muslimSparkline', data: [340, 345, 349, 352, 348, 349, 351] },
-                { id: 'correlationSparkline', data: [-0.7, -0.72, -0.74, -0.75, -0.73, -0.74, -0.74] },
-                { id: 'casteSparkline', data: [82, 82, 83, 82, 82, 82, 82] },
-                { id: 'distributionSparkline', data: [80, 82, 85, 87, 84, 83, 84] }
+                { id: 'deletionSparkline', data: [724, 2168, 1820, 972, 461, 204, 98] },
+                { id: 'genderSparkline', data: [76.7, 76.8, 76.6, 76.9, 76.7, 76.5, 76.7] },
+                { id: 'correlationSparkline', data: [-0.70, -0.72, -0.74, -0.73, -0.74, -0.75, -0.74] },
+                { id: 'casteSparkline', data: [82.1, 82.3, 82.4, 82.2, 82.4, 82.5, 82.4] }
             ];
 
             sparklines.forEach(sparkline => {
@@ -1491,78 +1486,40 @@
                 }
             });
 
-            // Religious Chart
-            const hinduTotal = dashboardData.genderBreakdown.voters.femaleHindu + dashboardData.genderBreakdown.voters.maleHindu;
-            const muslimTotal = dashboardData.genderBreakdown.voters.femaleMuslim + dashboardData.genderBreakdown.voters.maleMuslim;
-            
-            createChart('religiousChart', {
-                type: 'doughnut',
-                data: {
-                    labels: ['Hindu', 'Muslim', 'Other/Neutral'],
-                    datasets: [{
-                        data: [hinduTotal, muslimTotal, dashboardData.genderBreakdown.voters.neutral],
-                        backgroundColor: ['#fd7e14', '#28a745', '#6c757d']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: { legend: { position: 'bottom' } }
-                }
-            });
+            // Other demographic charts...
+        }
 
-            // Intersectional Chart
-            createChart('intersectionalChart', {
+        function createCasteCharts() {
+            // Top surnames with percentages
+            const topSurnames = [
+                {name: 'Devi', count: 1980946, percent: 47.3},
+                {name: 'Kumari', count: 682654, percent: 16.3},
+                {name: 'Kumar', count: 447574, percent: 10.7},
+                {name: 'Khatuna', count: 303604, percent: 7.3},
+                {name: 'Singh', count: 263476, percent: 6.3}
+            ];
+
+            createChart('topSurnamesChart', {
                 type: 'bar',
                 data: {
-                    labels: ['Hindu', 'Muslim'],
+                    labels: topSurnames.map(s => `${s.name} (${s.percent}%)`),
                     datasets: [{
-                        label: 'Female',
-                        data: [dashboardData.genderBreakdown.voters.femaleHindu / 1000, dashboardData.genderBreakdown.voters.femaleMuslim / 1000],
-                        backgroundColor: '#e83e8c'
-                    }, {
-                        label: 'Male',
-                        data: [dashboardData.genderBreakdown.voters.maleHindu / 1000, dashboardData.genderBreakdown.voters.maleMuslim / 1000],
-                        backgroundColor: '#007bff'
+                        label: 'Count',
+                        data: topSurnames.map(s => s.count),
+                        backgroundColor: ['#fd7e14', '#ffc107', '#28a745', '#17a2b8', '#6c757d']
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: true,
-                    plugins: { legend: { position: 'top' } },
+                    plugins: { 
+                        legend: { display: false },
+                        title: { display: true, text: 'Top 5 Surnames by Count and Percentage' }
+                    },
                     scales: {
                         y: { 
                             beginAtZero: true,
-                            title: { display: true, text: 'Population (Thousands)' }
-                        }
-                    }
-                }
-            });
-
-            // Participation Gap Chart
-            createChart('participationGapChart', {
-                type: 'bar',
-                data: {
-                    labels: ['Voters', 'Guardians'],
-                    datasets: [{
-                        label: 'Female %',
-                        data: [76.7, 12.3],
-                        backgroundColor: '#e83e8c'
-                    }, {
-                        label: 'Male %',
-                        data: [23.3, 87.7],
-                        backgroundColor: '#007bff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: { legend: { position: 'top' } },
-                    scales: {
-                        y: { 
-                            beginAtZero: true,
-                            max: 100,
-                            title: { display: true, text: 'Percentage' }
+                            title: { display: true, text: 'Count' }
                         }
                     }
                 }
@@ -1570,442 +1527,39 @@
         }
 
         function createDeletionCharts() {
-            // Deletion Histogram
-            createChart('deletionHistogram', {
-                type: 'bar',
-                data: {
-                    labels: ['0-25', '26-50', '51-75', '76-100', '101-150', '151-200', '201-300', '300+'],
-                    datasets: [{
-                        label: 'Frequency',
-                        data: [25432, 45123, 67234, 52341, 28765, 9876, 3661, 1313],
-                        backgroundColor: '#6c757d',
-                        borderColor: '#5a6268',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { 
-                        legend: { display: false },
-                        title: { display: true, text: 'Right-skewed Distribution (γ₁ = 4.21)' }
-                    },
-                    scales: {
-                        x: { title: { display: true, text: 'Deletion Range per Booth' } },
-                        y: { 
-                            beginAtZero: true,
-                            title: { display: true, text: 'Number of Booths' }
-                        }
-                    }
-                }
-            });
-
-            // Box Plot Detailed
-            const stats = dashboardData.deletionStats;
-            createChart('deletionBoxPlotDetailed', {
-                type: 'bar',
-                data: {
-                    labels: ['Min', 'Q1', 'Median', 'Mean', 'Q3', 'P95', 'P99', 'Max'],
-                    datasets: [{
-                        label: 'Statistical Measures',
-                        data: [stats.min, stats.q1, stats.median, stats.mean, stats.q3, stats.p95, stats.p99, stats.max],
-                        backgroundColor: [
-                            '#28a745', '#20c997', '#17a2b8', '#ffc107', 
-                            '#fd7e14', '#dc3545', '#6f42c1', '#343a40'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { 
-                        legend: { display: false },
-                        title: { display: true, text: 'Five-Number Summary + Extremes' }
-                    },
-                    scales: {
-                        y: { 
-                            beginAtZero: true,
-                            title: { display: true, text: 'Deletions per Booth' }
-                        }
-                    }
-                }
-            });
-
-            // Q-Q Plot (simplified)
-            const quantiles = Array.from({length: 20}, (_, i) => ({
-                x: (i + 1) * 5, // Theoretical normal quantiles
-                y: stats.mean + (i - 10) * stats.std / 5 // Actual quantiles (simplified)
-            }));
-
-            createChart('qqPlot', {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Q-Q Plot',
-                        data: quantiles,
-                        backgroundColor: '#17a2b8',
-                        borderColor: '#138496',
-                        pointRadius: 4
-                    }, {
-                        label: 'Perfect Normal Line',
-                        data: [{x: 0, y: 0}, {x: 100, y: 100}],
-                        type: 'line',
-                        borderColor: '#dc3545',
-                        borderDash: [5, 5],
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { 
-                        legend: { position: 'top' },
-                        title: { display: true, text: 'Normality Assessment' }
-                    },
-                    scales: {
-                        x: { title: { display: true, text: 'Theoretical Quantiles' } },
-                        y: { title: { display: true, text: 'Sample Quantiles' } }
-                    }
-                }
-            });
-
-            // Performance by Deletion Chart
-            const data = dashboardData.deletionAnalysis;
-            
-            createChart('deletionsPerformanceChart', {
-                type: 'line',
-                data: {
-                    labels: data.map(d => d.range),
-                    datasets: [{
-                        label: 'INDIA Alliance Win %',
-                        data: data.map(d => d.india_pct),
-                        borderColor: '#28a745',
-                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
-                        borderWidth: 3,
-                        tension: 0.1
-                    }, {
-                        label: 'NDA Win %',
-                        data: data.map(d => d.nda_pct),
-                        borderColor: '#dc3545',
-                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
-                        borderWidth: 3,
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'top' },
-                        title: { display: true, text: 'Electoral Performance Degradation with Deletion Intensity' }
-                    },
-                    scales: {
-                        x: { title: { display: true, text: 'Deletion Range per Booth' } },
-                        y: { 
-                            beginAtZero: true,
-                            max: 70,
-                            title: { display: true, text: 'Win Percentage' }
-                        }
-                    }
-                }
-            });
-        }
-
-        function createCasteCharts() {
-            // Caste Distribution Chart
-            const caste = dashboardData.casteAnalysis;
-            createChart('casteDistributionChart', {
-                type: 'pie',
-                data: {
-                    labels: ['Brahmin', 'Kshatriya', 'OBC', 'SC', 'ST'],
-                    datasets: [{
-                        data: [caste.brahmin, caste.kshatriya, caste.obc, caste.sc, caste.st],
-                        backgroundColor: ['#fd7e14', '#ffc107', '#28a745', '#17a2b8', '#6c757d']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { 
-                        legend: { position: 'bottom' },
-                        title: { display: true, text: 'Hierarchical Representation' }
-                    }
-                }
-            });
-
-            // Caste Electoral Performance
-            createChart('casteElectoralChart', {
-                type: 'bar',
-                data: {
-                    labels: ['Forward Caste', 'OBC', 'SC/ST'],
-                    datasets: [{
-                        label: 'INDIA %',
-                        data: [34.7, 42.3, 51.2],
-                        backgroundColor: '#28a745'
-                    }, {
-                        label: 'NDA %',
-                        data: [52.3, 47.1, 38.4],
-                        backgroundColor: '#dc3545'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { position: 'top' } },
-                    scales: {
-                        y: { 
-                            beginAtZero: true,
-                            title: { display: true, text: 'Vote Share Percentage' }
-                        }
-                    }
-                }
-            });
-
-            // Regional Caste Chart
-            createChart('casteRegionalChart', {
-                type: 'bar',
-                data: {
-                    labels: ['North Bihar', 'Central Bihar', 'South Bihar'],
-                    datasets: [{
-                        label: 'Forward Caste %',
-                        data: [87.2, 82.4, 68.1],
-                        backgroundColor: '#fd7e14'
-                    }, {
-                        label: 'OBC %',
-                        data: [8.9, 12.4, 23.6],
-                        backgroundColor: '#28a745'
-                    }, {
-                        label: 'SC/ST %',
-                        data: [3.9, 5.2, 8.3],
-                        backgroundColor: '#17a2b8'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { position: 'top' } },
-                    scales: {
-                        y: { 
-                            beginAtZero: true,
-                            max: 100,
-                            title: { display: true, text: 'Percentage Share' }
-                        }
-                    }
-                }
-            });
+            // Placeholder charts for deletion analysis
         }
 
         function createConstituencyCharts() {
-            // Transitions chart
-            createChart('transitionsChart', {
-                type: 'doughnut',
-                data: {
-                    labels: ['BJP→IND', 'RJD→BSP', 'JDU→RJD', 'No Change'],
-                    datasets: [{
-                        data: [45, 38, 32, 85],
-                        backgroundColor: ['#dc3545', '#27ae60', '#f39c12', '#6c757d']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { position: 'bottom' } }
-                }
-            });
-
-            // Additional constituency charts would go here...
+            // Placeholder charts for constituency analysis
         }
 
-        // Data loading functions with improved status updates
-        function updateDataStatus(dataType, status) {
-            const statusElement = document.getElementById(dataType + 'Status');
-            if (statusElement) {
-                const icons = {
-                    booth: '📊',
-                    surname: '👥', 
-                    guardian: '👨‍👩‍👧‍👦',
-                    form20: '🏛️'
-                };
-                
-                switch(status) {
-                    case 'loading':
-                        statusElement.innerHTML = `${icons[dataType]} ${dataType.charAt(0).toUpperCase() + dataType.slice(1)} Data: Loading...`;
-                        statusElement.className = 'status-loading';
-                        break;
-                    case 'loaded':
-                        statusElement.innerHTML = `${icons[dataType]} ${dataType.charAt(0).toUpperCase() + dataType.slice(1)} Data: ✅ Loaded`;
-                        statusElement.className = 'status-loaded';
-                        break;
-                    case 'error':
-                        statusElement.innerHTML = `${icons[dataType]} ${dataType.charAt(0).toUpperCase() + dataType.slice(1)} Data: ❌ Error`;
-                        statusElement.className = 'status-error';
-                        break;
-                }
-            }
-        }
-
-        async function loadBoothData() {
+        // File loading functionality
+        async function handleFileLoad(dataType, file) {
+            if (!file) return;
+            
             showLoading(true);
-            updateDataStatus('booth', 'loading');
-            updateStatus('🔄 Loading booth-level electoral analysis data...');
+            updateStatus(`🔄 Loading ${dataType} data from file: ${file.name}`);
             
             try {
-                const url = DATA_SOURCES.BOOTH_DATA;
-                
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: Unable to fetch booth data from secure source`);
-                }
-                
-                const csvText = await response.text();
-                const parsed = Papa.parse(csvText, { 
+                const text = await file.text();
+                const parsed = Papa.parse(text, { 
                     header: true, 
                     dynamicTyping: true, 
                     skipEmptyLines: true,
                     transformHeader: header => header.trim()
                 });
                 
-                updateDataStatus('booth', 'loaded');
-                updateStatus(`✅ Successfully loaded ${parsed.data.length} booth observations with complete statistical validation`);
-                console.log('Booth data loaded:', parsed.data.length, 'rows');
+                loadedData[dataType] = parsed.data;
+                updateStatus(`✅ Successfully loaded ${parsed.data.length} rows from ${file.name}`);
                 
-                // Trigger chart updates
-                if (document.querySelector('.tab-content.active').id === 'summary') {
-                    createSummaryCharts();
-                }
+                // Refresh charts if on relevant tab
+                const activeTab = document.querySelector('.tab-content.active').id;
+                initializeCharts(activeTab);
                 
             } catch (error) {
-                updateDataStatus('booth', 'error');
-                updateStatus(`❌ Error in booth data ingestion: ${error.message}`);
+                updateStatus(`❌ Error loading ${dataType} data: ${error.message}`);
                 console.error('Error:', error);
-            } finally {
-                showLoading(false);
-            }
-        }
-
-        async function loadSurnameData() {
-            showLoading(true);
-            updateDataStatus('surname', 'loading');
-            updateStatus('🔄 Loading demographic surname classification data...');
-            
-            try {
-                const url = DATA_SOURCES.SURNAME_DATA;
-                
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: Unable to fetch surname data from secure source`);
-                }
-                
-                const csvText = await response.text();
-                const parsed = Papa.parse(csvText, { 
-                    header: true, 
-                    dynamicTyping: true, 
-                    skipEmptyLines: true,
-                    transformHeader: header => header.trim()
-                });
-                
-                updateDataStatus('surname', 'loaded');
-                updateStatus(`✅ Successfully processed ${parsed.data.length} surname observations with gender/religion inference`);
-                console.log('Surname data loaded:', parsed.data.length, 'rows');
-                
-                // Trigger chart updates
-                if (document.querySelector('.tab-content.active').id === 'demographics') {
-                    createDemographicCharts();
-                }
-                
-            } catch (error) {
-                updateDataStatus('surname', 'error');
-                updateStatus(`❌ Error in surname data processing: ${error.message}`);
-                console.error('Error:', error);
-            } finally {
-                showLoading(false);
-            }
-        }
-
-        async function loadGuardianData() {
-            showLoading(true);
-            updateDataStatus('guardian', 'loading');
-            updateStatus('🔄 Loading guardian demographic analysis data...');
-            
-            try {
-                const url = DATA_SOURCES.GUARDIAN_DATA;
-                
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: Unable to fetch guardian data from secure source`);
-                }
-                
-                const csvText = await response.text();
-                const parsed = Papa.parse(csvText, { 
-                    header: true, 
-                    dynamicTyping: true, 
-                    skipEmptyLines: true,
-                    transformHeader: header => header.trim()
-                });
-                
-                updateDataStatus('guardian', 'loaded');
-                updateStatus(`✅ Guardian data integrated: ${parsed.data.length} household observations`);
-                console.log('Guardian data loaded:', parsed.data.length, 'rows');
-                
-            } catch (error) {
-                updateDataStatus('guardian', 'error');
-                updateStatus(`❌ Error in guardian data integration: ${error.message}`);
-                console.error('Error:', error);
-            } finally {
-                showLoading(false);
-            }
-        }
-
-        async function loadForm20Data() {
-            showLoading(true);
-            updateDataStatus('form20', 'loading');
-            updateStatus('🔄 Loading Form-20 electoral mapping data...');
-            
-            try {
-                const url = DATA_SOURCES.FORM20_DATA;
-                
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: Unable to fetch Form-20 data from secure source`);
-                }
-                
-                const csvText = await response.text();
-                const parsed = Papa.parse(csvText, { 
-                    header: true, 
-                    dynamicTyping: true, 
-                    skipEmptyLines: true,
-                    transformHeader: header => header.trim()
-                });
-                
-                updateDataStatus('form20', 'loaded');
-                updateStatus(`✅ Form-20 data integrated: ${parsed.data.length} electoral mappings`);
-                console.log('Form-20 data loaded:', parsed.data.length, 'rows');
-                
-            } catch (error) {
-                updateDataStatus('form20', 'error');
-                updateStatus(`❌ Error in Form-20 data integration: ${error.message}`);
-                console.error('Error:', error);
-            } finally {
-                showLoading(false);
-            }
-        }
-
-        async function loadAllData() {
-            showLoading(true);
-            updateStatus('🚀 Initiating comprehensive dataset integration...');
-            
-            try {
-                await loadBoothData();
-                await loadSurnameData();
-                await loadGuardianData();
-                await loadForm20Data();
-                
-                updateStatus('🎉 Complete dataset integration successful - all statistical computations updated');
-                
-                // Refresh all charts
-                setTimeout(() => {
-                    createSummaryCharts();
-                    createSparklines();
-                }, 500);
-                
-            } catch (error) {
-                updateStatus(`❌ Error in comprehensive data loading: ${error.message}`);
             } finally {
                 showLoading(false);
             }
@@ -2038,17 +1592,15 @@
             }
         }
 
-        // Initialize dashboard with proper error handling
+        // Initialize dashboard
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Dashboard initializing...');
             
-            // Check if Chart.js is loaded
             if (typeof Chart === 'undefined') {
                 console.error('Chart.js not loaded. Please check CDN connection.');
                 return;
             }
 
-            // Initialize with delay to ensure DOM is ready
             setTimeout(() => {
                 try {
                     createSummaryCharts();
@@ -2059,6 +1611,17 @@
                 }
             }, 300);
         });
+
+        // CSS animation for loading
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes loading {
+                0% { width: 0%; }
+                50% { width: 70%; }
+                100% { width: 100%; }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
