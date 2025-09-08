@@ -379,15 +379,299 @@
             color: #6c757d;
         }
 
+        /* Enhanced Mobile Responsiveness */
         @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.4rem;
+                margin-bottom: 6px;
+            }
+
+            .header p {
+                font-size: 0.9rem;
+                margin: 3px 0;
+            }
+
+            .tabs {
+                flex-direction: row;
+                overflow-x: auto;
+                scrollbar-width: thin;
+                scrollbar-color: #dee2e6 transparent;
+                margin-bottom: 15px;
+            }
+
+            .tabs::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .tabs::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .tabs::-webkit-scrollbar-thumb {
+                background: #dee2e6;
+                border-radius: 2px;
+            }
+
+            .tab {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+                min-width: 100px;
+                flex-shrink: 0;
+            }
+
             .metrics-grid {
                 grid-template-columns: 1fr;
+                gap: 10px;
+                margin-bottom: 20px;
             }
+
+            .metric-card {
+                padding: 15px;
+            }
+
+            .metric-value {
+                font-size: 1.6rem;
+                margin-bottom: 6px;
+            }
+
+            .metric-label {
+                font-size: 0.8rem;
+            }
+
+            .metric-subtitle {
+                font-size: 0.75rem;
+            }
+
             .grid-2, .grid-3, .grid-4 {
                 grid-template-columns: 1fr;
+                gap: 10px;
             }
+
+            .chart-container {
+                padding: 15px;
+                margin-bottom: 10px;
+            }
+
+            .chart-title {
+                font-size: 1rem;
+                margin-bottom: 4px;
+            }
+
+            .chart-subtitle {
+                font-size: 0.85rem;
+                margin-bottom: 10px;
+            }
+
             .chart-wrapper {
+                height: 200px;
+            }
+
+            .chart-wrapper.small {
+                height: 180px;
+            }
+
+            .chart-wrapper.large {
                 height: 250px;
+            }
+
+            .chart-wrapper.xlarge {
+                height: 300px;
+            }
+
+            .export-btn {
+                top: 5px;
+                right: 5px;
+                padding: 6px 12px;
+                font-size: 0.7rem;
+            }
+
+            .executive-summary {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .executive-summary h2 {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+
+            .key-findings, .statistical-insight {
+                padding: 12px;
+                margin: 10px 0;
+            }
+
+            .correlation-matrix {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 8px;
+                margin: 10px 0;
+            }
+
+            .correlation-item {
+                padding: 8px;
+            }
+
+            .correlation-value {
+                font-size: 1.2rem;
+            }
+
+            .data-table {
+                margin-bottom: 10px;
+            }
+
+            .table-header {
+                padding: 12px;
+            }
+
+            .table-header h3 {
+                font-size: 0.9rem;
+            }
+
+            .table-content {
+                max-height: 300px;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th, td {
+                padding: 6px 8px;
+            }
+
+            .analysis-box {
+                padding: 15px;
+            }
+
+            .analysis-box h3 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            .analysis-box li {
+                padding: 6px 0;
+                font-size: 0.85rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .caste-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .caste-stats {
+                align-items: flex-start;
+            }
+
+            .caste-count {
+                font-size: 0.85rem;
+            }
+
+            .caste-percent {
+                font-size: 0.7rem;
+            }
+
+            /* Key findings lists on mobile */
+            .key-findings ul, .statistical-insight ul {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .key-findings li, .statistical-insight li {
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-container {
+                padding: 8px;
+            }
+
+            .header {
+                padding: 12px;
+            }
+
+            .header h1 {
+                font-size: 1.2rem;
+            }
+
+            .header p {
+                font-size: 0.8rem;
+            }
+
+            .tab {
+                padding: 8px 10px;
+                font-size: 0.75rem;
+                min-width: 90px;
+            }
+
+            .metric-card {
+                padding: 12px;
+            }
+
+            .metric-value {
+                font-size: 1.4rem;
+            }
+
+            .chart-container {
+                padding: 12px;
+            }
+
+            .chart-wrapper {
+                height: 180px;
+            }
+
+            .chart-wrapper.small {
+                height: 160px;
+            }
+
+            .chart-wrapper.large {
+                height: 220px;
+            }
+
+            .chart-wrapper.xlarge {
+                height: 250px;
+            }
+
+            .export-btn {
+                position: static;
+                margin-top: 5px;
+                margin-bottom: 10px;
+                width: 100%;
+                padding: 8px;
+                font-size: 0.8rem;
+            }
+
+            .correlation-matrix {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+
+            .correlation-item {
+                padding: 6px;
+            }
+
+            .correlation-value {
+                font-size: 1rem;
+            }
+
+            table {
+                font-size: 0.7rem;
+            }
+
+            th, td {
+                padding: 4px 6px;
             }
         }
     </style>
