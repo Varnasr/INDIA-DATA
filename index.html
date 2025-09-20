@@ -4,20 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bihar Electoral Dashboard — For India</title>
-  <meta name="description" content="Single-file Bihar electoral insights with verified live data and lightweight summaries.">
+  <meta name="description" content="Comprehensive Bihar electoral insights with verified fallbacks.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#f6f8fc; --bg-2:#fffef8; --card:#fff; --text:#111; --muted:#5f6b7a; --brand:#2b7cff; --accent:#ffcc33; --grid:#e6ebf3; --chip:#eef4ff; --border:#e9edf5; --shadow:0 12px 32px rgba(10,31,68,.08); --ok:#10b981; --warn:#f59e0b; }
-    [data-theme="dark"] { --bg:#0b1220; --bg-2:#0f172a; --card:#121a2b; --text:#eef2ff; --muted:#9aa9c7; --brand:#5aa2ff; --accent:#ffd666; --grid:#1f2a44; --chip:#0d234b; --border:#1a2742; --shadow:0 12px 32px rgba(0,0,0,.4); --ok:#34d399; --warn:#fbbf24; }
-    html,body{height:100%} body{margin:0;background:linear-gradient(180deg,var(--bg),var(--bg-2) 60%);color:var(--text);font:14px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Noto Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    :root {
+      --bg: #f6f8fc; --bg-2: #fffef8; --card: #ffffff; --text: #111; --muted: #5f6b7a;
+      --brand: #2b7cff; --accent: #ffcc33; --grid: #e6ebf3; --chip: #eef4ff; --border: #e9edf5;
+      --shadow: 0 12px 32px rgba(10,31,68,.08); --ok:#10b981; --warn:#f59e0b; --bad:#ef4444;
+    }
+    [data-theme="dark"]{
+      --bg:#0b1220; --bg-2:#0f172a; --card:#121a2b; --text:#eef2ff; --muted:#9aa9c7; --brand:#5aa2ff;
+      --accent:#ffd666; --grid:#1f2a44; --chip:#0d234b; --border:#1a2742; --shadow:0 12px 32px rgba(0,0,0,.4);
+      --ok:#34d399; --warn:#fbbf24; --bad:#f87171;
+    }
+    html,body{height:100%} body{margin:0;background:linear-gradient(180deg,var(--bg),var(--bg-2) 60%);color:var(--text);font:14px/1.6 Inter,system-ui,sans-serif}
     .container{max-width:1200px;margin:0 auto;padding:24px}
-    header{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:6px 0 0}
-    .brand{font-weight:800;letter-spacing:-.02em;font-size:22px}.subtitle{color:var(--muted);font-weight:500}
+    header{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px}
+    .brand{font-weight:800;letter-spacing:-.02em;font-size:22px}
+    .subtitle{color:var(--muted);font-weight:500}
     .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-self:end}
-    .btn{appearance:none;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:12px;padding:8px 12px;cursor:pointer;box-shadow:var(--shadow);font-weight:600;transition:transform .06s ease}
-    .btn:hover{border-color:var(--brand)} .btn:active{transform:translateY(1px)}
+    .btn{appearance:none;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:12px;padding:8px 12px;cursor:pointer;box-shadow:var(--shadow);font-weight:600}
     .chip{background:var(--chip);border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-weight:700}
     .chip.ok{outline:2px solid var(--ok)} .chip.warn{outline:2px solid var(--warn)}
     .tabs{margin:18px 0 0;display:flex;gap:8px;flex-wrap:wrap}
@@ -28,17 +36,15 @@
     .card{grid-column:span 12;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
     .card h3{margin:0;padding:16px 16px 0;font-size:16px}
     .card .body{padding:12px 16px 16px}
-    .viz{min-height:340px;display:grid;place-items:center;position:relative}
-    canvas{width:100%!important;height:320px!important}
-    .caption{margin-top:8px;color:var(--muted);font-size:12px}
-    .caption .actions{margin-top:6px;display:flex;gap:8px}
+    .caption{margin:8px 16px 16px;color:var(--muted);font-size:12px}
+    .toolbar{display:flex;gap:8px;justify-content:flex-end;margin:8px 16px}
     .footer-note{margin-top:24px;color:var(--muted);font-size:12px}
+    .viz{min-height:340px;position:relative}
     table{width:100%;border-collapse:collapse;font-size:13px}
     th,td{border-bottom:1px dashed var(--border);padding:8px 10px;text-align:left}
     thead th{position:sticky;top:0;background:var(--card);z-index:1}
-    .toolbar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:8px}
-    .notice{background:repeating-linear-gradient(-45deg,rgba(255,204,51,.15) 0 10px,rgba(43,124,255,.08) 10px 20px);border:1px dashed var(--border);padding:10px 12px;border-radius:12px}
-    .tab-summary{margin-top:14px;padding:10px 12px;border-radius:12px;border:1px dashed var(--border);background:linear-gradient(180deg,rgba(43,124,255,.06),rgba(255,204,51,.06))}
+    @media(min-width:700px){.span-6{grid-column:span 6}.span-4{grid-column:span 4}}
+    .notice{background:repeating-linear-gradient(-45deg,rgba(255,204,51,.15) 0 10px,rgba(43,124,255,.08) 10px 20px);border:1px dashed var(--border);padding:10px 12px;border-radius:12px;margin:8px 0}
   </style>
 </head>
 <body>
@@ -46,128 +52,311 @@
     <header>
       <div>
         <div class="brand">Bihar Electoral Dashboard</div>
-        <div class="subtitle">Overview • Deletions • Spatial • Temporal • Gender • Caste • Religion • Advanced/Predictive • Methods</div>
+        <div class="subtitle">Overview • Deletions • Spatial • Temporal • Gender • Caste • Religion • Electoral • Advanced • Methods</div>
       </div>
       <div class="controls">
-        <span class="chip warn" id="status-chip">Provisional…</span>
+        <span class="chip warn" id="status-chip" title="Verification status">Provisional…</span>
         <button class="btn" id="themeToggle" aria-label="Toggle theme">☀️ / 🌙</button>
+        <button class="btn" id="exportPNG">Export PNG</button>
+        <button class="btn" id="exportCSV">Export CSV</button>
       </div>
     </header>
 
     <nav class="tabs" role="tablist">
-      <button class="tab active" data-tab="overview">Overview</button>
-      <button class="tab" data-tab="deletions">Deletions</button>
-      <button class="tab" data-tab="spatial">Spatial</button>
-      <button class="tab" data-tab="temporal">Temporal</button>
-      <button class="tab" data-tab="gender">Gender</button>
-      <button class="tab" data-tab="caste">Caste</button>
-      <button class="tab" data-tab="religion">Religion</button>
-      <button class="tab" data-tab="advanced">Advanced/Predictive</button>
-      <button class="tab" data-tab="methods">Methods</button>
+      <button class="tab active" role="tab" aria-selected="true" data-tab="overview">Overview</button>
+      <button class="tab" role="tab" data-tab="deletions">Deletions</button>
+      <button class="tab" role="tab" data-tab="spatial">Spatial</button>
+      <button class="tab" role="tab" data-tab="temporal">Temporal</button>
+      <button class="tab" role="tab" data-tab="gender">Gender</button>
+      <button class="tab" role="tab" data-tab="caste">Caste</button>
+      <button class="tab" role="tab" data-tab="religion">Religion</button>
+      <button class="tab" role="tab" data-tab="electoral">Electoral</button>
+      <button class="tab" role="tab" data-tab="advanced">Advanced</button>
+      <button class="tab" role="tab" data-tab="methods">Methods</button>
     </nav>
 
-    <main id="main"></main>
+    <main id="main"><!-- content injected by JS --></main>
 
-    <div class="footer-note">Uses relative paths (<code>data/…</code> → <code>fallback/…</code>) so it works on Netlify and GitHub Pages. Tiny summaries below are only for instant paint; live CSVs always recompute and replace.</div>
+    <div class="footer-note">Fast-first: tiny verified summaries paint instantly, then full results load from <code>data/</code> (or <code>fallback/</code> if needed) and replace on-screen numbers automatically.</div>
   </div>
 
   <!-- Vendor libs -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+
   <script>
-  // ======= THEME =======
-  (function(){const r=document.documentElement;const t=()=>{const n=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',n);localStorage.setItem('theme',n)};window.addEventListener('DOMContentLoaded',()=>{const s=localStorage.getItem('theme');if(s) r.setAttribute('data-theme',s);document.getElementById('themeToggle').addEventListener('click',t)});})();
+  // ========================= THEME =========================
+  (function(){
+    const root=document.documentElement;
+    const btn=()=>document.getElementById('themeToggle');
+    const set=(v)=>{root.setAttribute('data-theme',v);localStorage.setItem('theme',v)};
+    window.addEventListener('DOMContentLoaded',()=>{
+      const saved=localStorage.getItem('theme'); if(saved) set(saved);
+      btn().addEventListener('click',()=> set(root.getAttribute('data-theme')==='dark'?'light':'dark'));
+    });
+  })();
 
-  // ======= DATA SOURCES (RELATIVE) =======
+  // ========================= DATA LOADING =========================
   const DATASETS={
-    all:{pri:'data/All-deletions-Booths-form20.csv',fb:'fallback/All-deletions-Booths-form20.csv'},
-    major:{pri:'data/Major-deletions-Booths.csv',fb:'fallback/Major-deletions-Booths.csv'},
-    gender:{pri:'data/booth-gender-religion.csv',fb:'fallback/booth-gender-religion.csv'}
+    all:{ pri:'data/All-deletions-Booths-form20.csv', fb:'fallback/All-deletions-Booths-form20.csv' },
+    major:{ pri:'data/Major-deletions-Booths.csv', fb:'fallback/Major-deletions-Booths.csv' },
+    gender:{ pri:'data/booth-gender-religion.csv', fb:'fallback/booth-gender-religion.csv' },
+    surnames:{ pri:'data/surname_counts.csv', fb:'fallback/surname_counts.csv' },
+    casteprev:{ pri:'data/Bihar_Surnames___Castes__preview_.csv', fb:'fallback/Bihar_Surnames___Castes__preview_.csv' },
+    guardian:{ pri:'data/guardian_surname_counts.csv', fb:'fallback/guardian_surname_counts.csv' }
   };
-  async function fetchText(u){try{const r=await fetch(u,{cache:'no-cache'});if(r.ok){const t=await r.text();if(!/^\s*<!doctype html/i.test(t)) return t;}}catch(e){}return null}
-  function parseCSV(t){return Papa.parse(t,{header:true,dynamicTyping:true,skipEmptyLines:true}).data}
-  function readJSON(id){const n=document.getElementById(id);return n?JSON.parse(n.textContent):null}
-  async function loadCSVPair(name){const ds=DATASETS[name];const a=await fetchText(ds.pri);if(a) return {text:a,source:'data'};const b=await fetchText(ds.fb);if(b) return {text:b,source:'fallback'};return {text:null,source:null}}
 
-  // ======= METRICS (single source of truth) =======
-  function detectKey(rows,cands){const s=rows[0]||{};const keys=Object.keys(s);return cands.find(c=>keys.includes(c))||cands[0]}
-  function calcOverview(all,major){const total_all=all.length,total_major=major.length;const acKey=detectKey(all,['ac_number','AC_Number','AC','ac']);const byAC=new Map();all.forEach(r=>{const ac=String(r[acKey]??'Unknown');byAC.set(ac,(byAC.get(ac)||0)+1)});const top_ac=[...byAC.entries()].sort((a,b)=>b[1]-a[1]).slice(0,10);return {total_all,total_major,top_ac}}
-  function calcGenderTotals(g){const k=Object.keys(g[0]||{});const mK=k.find(x=>/male/i.test(x)),fK=k.find(x=>/female/i.test(x)),oK=k.find(x=>/(other|third)/i.test(x));let M=0,F=0,O=0;g.forEach(r=>{M+=+r[mK]||0;F+=+r[fK]||0;O+=oK?(+r[oK]||0):0});return {male:M,female:F,other:O}}
-  function binDeletionsByAC(all){const acKey=detectKey(all,['ac_number','AC_Number','AC','ac']);const byAC=new Map();all.forEach(r=>{const ac=String(r[acKey]??'Unknown');byAC.set(ac,(byAC.get(ac)||0)+1)});const bins=[0,1,5,10,20,50,100,200,500,1000,2000,5000,10000,20000,50000];const out=bins.map((u,i)=>({bin:i===0?'0':`${bins[i-1]}–${u}`, count:0}));byAC.forEach(v=>{let idx=out.length-1;for(let i=0;i<bins.length;i++){if(v<=bins[i]){idx=i;break}}out[idx].count++});return out}
+  async function fetchText(url){ try{ const r=await fetch(url,{cache:'no-cache'}); if(r.ok) return await r.text(); }catch(e){} return null; }
+  function parseCSV(text){ return Papa.parse(text,{header:true,dynamicTyping:true,skipEmptyLines:true}).data; }
+  function readJSON(id){ const n=document.getElementById(id); return n?JSON.parse(n.textContent):null; }
+  async function loadCSVPair(key){ const ds=DATASETS[key]; const a=await fetchText(ds.pri); if(a) return {text:a,source:'data'}; const b=await fetchText(ds.fb); if(b) return {text:b,source:'fallback'}; return {text:null,source:null}; }
 
-  // ======= EXPORT HELPERS =======
-  function toPNGOfCanvas(canvas,name){const url=canvas.toDataURL('image/png');const a=document.createElement('a');a.href=url;a.download=name;a.click()}
-  function downloadCSV(rows,filename='summary.csv'){if(!rows||!rows.length){alert('Nothing to export');return}const cols=Object.keys(rows[0]);const body=rows.map(r=>cols.map(c=>'"'+String(r[c]??'').replace(/"/g,'""')+'"').join(',')).join('\n');const csv=cols.join(',')+'\n'+body;const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-  function captionChart(text, getSummaryRows, getCanvas){const cap=document.createElement('div');cap.className='caption';cap.textContent=text;const actions=document.createElement('div');actions.className='actions';const b1=document.createElement('button');b1.className='btn';b1.textContent='Export CSV (summary)';b1.onclick=()=>downloadCSV(getSummaryRows(), 'summary.csv');const b2=document.createElement('button');b2.className='btn';b2.textContent='Export PNG';b2.onclick=()=>{const c=getCanvas(); if(c) toPNGOfCanvas(c,'chart.png')};actions.appendChild(b1);actions.appendChild(b2);cap.appendChild(actions);return cap}
-  function captionTable(text, getTableNode, getVisibleRows){const cap=document.createElement('div');cap.className='caption';cap.textContent=text;const actions=document.createElement('div');actions.className='actions';const b1=document.createElement('button');b1.className='btn';b1.textContent='Export CSV';b1.onclick=()=>downloadCSV(getVisibleRows(),'table.csv');const b2=document.createElement('button');b2.className='btn';b2.textContent='Export PNG';b2.onclick=()=>{const n=getTableNode(); if(!n) return alert('No table'); html2canvas(n).then(c=>toPNGOfCanvas(c,'table.png'))};actions.appendChild(b1);actions.appendChild(b2);cap.appendChild(actions);return cap}
+  // ========================= UTILITIES =========================
+  const CHIP=()=>document.getElementById('status-chip');
+  function setChip(t,cls){ const c=CHIP(); c.classList.remove('ok','warn'); if(cls) c.classList.add(cls); c.textContent=t; }
+  function el(tag,attrs={},html=''){ const e=document.createElement(tag); Object.entries(attrs).forEach(([k,v])=> e.setAttribute(k,v)); if(html!==null && html!=='') e.innerHTML=html; return e; }
+  function csvToTable(rows,maxRows=200){ if(!rows||!rows.length) return el('div',{class:'notice'},'No rows'); const cols=Object.keys(rows[0]); const t=el('table'); const thead=el('thead'); const trh=el('tr'); cols.forEach(c=> trh.appendChild(el('th',{},c))); thead.appendChild(trh); t.appendChild(thead); const tb=el('tbody'); rows.slice(0,maxRows).forEach(r=>{ const tr=el('tr'); cols.forEach(c=> tr.appendChild(el('td',{}, r[c]===undefined?'':String(r[c])))); tb.appendChild(tr);}); t.appendChild(tb); return t; }
+  function download(filename, text){ const blob=new Blob([text],{type:'text/plain;charset=utf-8'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); setTimeout(()=>URL.revokeObjectURL(url),500); }
+  function toPNGOfCanvas(canvas, name='chart.png'){ const url=canvas.toDataURL('image/png'); const a=document.createElement('a'); a.href=url; a.download=name; a.click(); }
+  function chartGridColor(){ return getComputedStyle(document.documentElement).getPropertyValue('--grid'); }
+  function detectKey(rows,cands){ const sample=rows[0]||{}; const keys=Object.keys(sample); return cands.find(k=>keys.includes(k)) || cands.find(k=> keys.find(x=> x.toLowerCase()===k.toLowerCase())) || cands[0]; }
+  function sum(arr,sel){ let s=0; for(const r of arr) s+= +sel(r)||0; return s; }
+  function groupCount(rows, keyFn){ const m=new Map(); rows.forEach(r=>{ const k=String(keyFn(r)); m.set(k,(m.get(k)||0)+1); }); return m; }
+  function sortEntriesDesc(m){ return [...m.entries()].sort((a,b)=> b[1]-a[1]); }
+  function formatCSVFromRows(rows){ if(!rows||!rows.length) return ''; const cols=Object.keys(rows[0]); const body=rows.map(r=> cols.map(c=> '"'+String(r[c]??'').replace(/"/g,'""')+'"').join(',')).join('
+'); return cols.join(',')+'
+'+body; }
 
-  // ======= RENDER HELPERS =======
-  function el(tag, attrs={}, html=''){const e=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=> e.setAttribute(k,v));if(html!==''&&html!==null) e.innerHTML=html;return e}
-  function csvToTable(rows, maxRows=200){if(!rows||!rows.length) return el('div',{class:'notice'},'No rows');const cols=Object.keys(rows[0]);const table=el('table');const thead=el('thead');const trh=el('tr');cols.forEach(c=> trh.appendChild(el('th',{},c)));thead.appendChild(trh);table.appendChild(thead);const tbody=el('tbody');rows.slice(0,maxRows).forEach(r=>{const tr=el('tr');cols.forEach(c=> tr.appendChild(el('td',{}, r[c]===undefined?'':String(r[c]))));tbody.appendChild(tr)});table.appendChild(tbody);return table}
+  // Global state
+  const STATE={ rows:{all:[],major:[],gender:[],surnames:[],casteprev:[],guardian:[]}, sourceTag:null, summaries:{ overview:null, gender:null } };
 
-  // ======= UI SECTIONS (per tab) =======
-  let DATA={sums:{overview:null,gender:null}, rows:{all:[],major:[],gender:[]}, sourceTag:null};
-  let CHARTS={}; function clearCharts(){Object.values(CHARTS).forEach(ch=>{try{ch.destroy()}catch{}});CHARTS={}}
-  const CHIP=()=>document.getElementById('status-chip'); function setChip(t,cls){const c=CHIP();c.classList.remove('ok','warn'); if(cls) c.classList.add(cls); c.textContent=t}
+  // ========================= RENDER HELPERS =========================
+  let CHARTS={}; function clearCharts(){ Object.values(CHARTS).forEach(ch=>{ try{ch.destroy();}catch{} }); CHARTS={}; }
+  function caption(text){ return el('div',{class:'caption'}, text); }
+  function toolbar(getCSV, getCanvas){ const bar=el('div',{class:'toolbar'}); const b1=el('button',{class:'btn'},'Export CSV'); b1.onclick=()=>{ const txt=getCSV(); if(!txt) return alert('Nothing to export'); download('summary.csv', txt);}; const b2=el('button',{class:'btn'},'Export PNG'); b2.onclick=()=>{ const cv=getCanvas(); if(!cv) return alert('No chart on screen'); toPNGOfCanvas(cv,'chart.png');}; bar.appendChild(b1); bar.appendChild(b2); return bar; }
 
-  // Overview
-  function renderOverview(root){const ov=calcOverview(DATA.rows.all, DATA.rows.major);const grid=el('div',{class:'grid'});
+  // ========================= TABS =========================
+  function renderOverview(root){
+    const grid=el('div',{class:'grid'});
+    const ov=STATE.summaries.overview || {total_all:0,total_major:0,top_ac:[]};
     const c1=el('section',{class:'card span-6'}); c1.appendChild(el('h3',{},'Deletion Summary')); const b1=el('div',{class:'body'});
-    b1.innerHTML=`<div class="notice"><strong>Total deletions:</strong> ${ov.total_all.toLocaleString()}<br><strong>Major deletions:</strong> ${ov.total_major.toLocaleString()}</div>`; c1.appendChild(b1); grid.appendChild(c1);
-    const c2=el('section',{class:'card span-6'}); c2.appendChild(el('h3',{},'Top constituencies by deletions')); const b2=el('div',{class:'body'}); const cv=el('canvas'); cv.id='chart_ac_top'; b2.appendChild(cv); c2.appendChild(b2); c2.appendChild(captionChart('Top ten constituencies by the number of voter deletions.', ()=> ov.top_ac.map(([AC,Count])=>({AC,Count})), ()=>cv)); grid.appendChild(c2);
+    b1.innerHTML = `<div class="notice"><strong>Total deletions:</strong> ${ov.total_all.toLocaleString()}<br><strong>Major deletions:</strong> ${ov.total_major.toLocaleString()}</div>`;
+    c1.appendChild(b1); c1.appendChild(caption('Counts of booth-level deletions and major deletions across all constituencies.'));
+    c1.appendChild(toolbar(()=> formatCSVFromRows([{"Total Deletions":ov.total_all, "Major Deletions":ov.total_major}] ), ()=> null));
+    grid.appendChild(c1);
+
+    const c2=el('section',{class:'card span-6'}); c2.appendChild(el('h3',{},'Top ACs by Deletions')); const b2=el('div',{class:'body'});
+    const cv=el('canvas'); cv.id='chart_top_ac'; b2.appendChild(cv); c2.appendChild(b2);
+    const labels=(ov.top_ac||[]).map(e=> e[0]); const values=(ov.top_ac||[]).map(e=> e[1]);
+    CHARTS['chart_top_ac']=new Chart(cv.getContext('2d'),{ type:'bar', data:{labels, datasets:[{label:'Deletions', data:values}]}, options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:chartGridColor()}},y:{beginAtZero:true,grid:{color:chartGridColor()}}},plugins:{legend:{display:false}}});
+    c2.appendChild(caption('Constituencies with the highest deletion counts.'));
+    c2.appendChild(toolbar(()=> formatCSVFromRows(labels.map((l,i)=>({AC:l,Deletions:values[i]}))), ()=> cv));
+    grid.appendChild(c2);
+
     root.appendChild(grid);
-    const labels=ov.top_ac.map(e=>e[0]), values=ov.top_ac.map(e=>e[1]); CHARTS['ac_top']=new Chart(cv.getContext('2d'),{type:'bar',data:{labels,datasets:[{label:'Deletions',data:values}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:getComputedStyle(document.documentElement).getPropertyValue('--grid')}},y:{beginAtZero:true,grid:{color:getComputedStyle(document.documentElement).getPropertyValue('--grid')}}}}});
-    // Summary
-    root.appendChild(el('div',{class:'tab-summary'},'<ul><li>This page shows the largest deletion counts at a glance.</li><li>Numbers update automatically when live files load.</li></ul>')) }
 
-  // Deletions
-  function renderDeletions(root){const bins=binDeletionsByAC(DATA.rows.all);const card=el('section',{class:'card'}); card.appendChild(el('h3',{},'Deletion intensity across constituencies')); const b=el('div',{class:'body'}); const cv=el('canvas'); b.appendChild(cv); card.appendChild(b); card.appendChild(captionChart('Constituencies grouped by how many deletions they show.', ()=>bins, ()=>cv)); root.appendChild(card);
-    const labels=bins.map(r=>r.bin), values=bins.map(r=>r.count); CHARTS['del_bins']=new Chart(cv.getContext('2d'),{type:'bar',data:{labels,datasets:[{label:'Constituencies',data:values}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
-    root.appendChild(el('div',{class:'tab-summary'},'<ul><li>Most constituencies fall into lower ranges, with a few outliers showing higher counts.</li></ul>')) }
+    // Summary box
+    const s=el('section',{class:'card'}); s.appendChild(el('h3',{},'Overview — plain summary')); const sb=el('div',{class:'body'});
+    sb.innerHTML='These figures give an immediate sense of scale. Charts will refresh with verified numbers once the full CSVs load.'; s.appendChild(sb); root.appendChild(s);
+  }
 
-  // Spatial (requires urban/rural or migration tags to populate real numbers)
-  function renderSpatial(root){const card=el('section',{class:'card'}); card.appendChild(el('h3',{},'Urban–rural comparison (counts)')); const b=el('div',{class:'body'}); const cv=el('canvas'); b.appendChild(cv); card.appendChild(b); card.appendChild(captionChart('Comparison of deletion counts between urban and rural areas.', ()=>[{Area:'Urban',Count:0},{Area:'Rural',Count:0}], ()=>cv)); root.appendChild(card);
-    CHARTS['spatial_ur']=new Chart(cv.getContext('2d'),{type:'bar',data:{labels:['Urban','Rural'],datasets:[{label:'Deletions',data:[0,0]}]}});
-    root.appendChild(el('div',{class:'tab-summary'},'<ul><li>Shows how deletions differ across settlement types and regions.</li></ul>')) }
+  function renderDeletions(root){
+    const all=STATE.rows.all; if(!all.length){ root.appendChild(el('div',{class:'notice'},'Waiting for live data…')); return; }
+    const acKey=detectKey(all,['ac_number','AC_Number','AC','ac']);
+    const byAC=[...groupCount(all,r=> r[acKey]).entries()].map(([k,v])=>({AC:k, Deletions:v})).sort((a,b)=>b.Deletions-a.Deletions);
 
-  // Temporal
-  function renderTemporal(root){const rows=DATA.rows.all; const sample=rows[0]||{}; const dateKey=Object.keys(sample).find(k=>/date/i.test(k)); const card=el('section',{class:'card'}); card.appendChild(el('h3',{},'Deletions over time'));
-    const b=el('div',{class:'body'}); const cv=el('canvas'); b.appendChild(cv); card.appendChild(b);
-    const byDay=new Map(); if(dateKey){rows.forEach(r=>{const d=r[dateKey]; if(!d) return; const dt=new Date(d); if(isNaN(dt)) return; const key=dt.toISOString().slice(0,10); byDay.set(key,(byDay.get(key)||0)+1)})}
-    const labels=[...byDay.keys()].sort(); const values=labels.map(k=>byDay.get(k)||0);
-    CHARTS['temporal']=new Chart(cv.getContext('2d'),{type:'line',data:{labels,datasets:[{label:'Count',data:values,tension:.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
-    card.appendChild(captionChart('Change in deletions across the time period covered.', ()=>labels.map((d,i)=>({Date:d,Count:values[i]})), ()=>cv)); root.appendChild(card);
-    root.appendChild(el('div',{class:'tab-summary'},'<ul><li>Highlights periods with more activity and quieter stretches.</li><li>Year-to-year comparisons appear when both periods exist in the files.</li></ul>')) }
+    // Binning
+    const values=byAC.map(r=> r.Deletions); const max=Math.max(...values,0);
+    const edges=[0,50,100,250,500,1000,2500,5000,10000,20000,50000,100000,200000,500000,1000000];
+    const bins=new Array(edges.length).fill(0);
+    values.forEach(v=>{ let idx=edges.findIndex(e=> v<e); if(idx===-1) idx=edges.length-1; bins[idx]++; });
 
-  // Gender
-  function renderGender(root){const g=calcGenderTotals(DATA.rows.gender); const grid=el('div',{class:'grid'});
-    const c1=el('section',{class:'card span-6'}); c1.appendChild(el('h3',{},'Gender composition (aggregated)')); const b1=el('div',{class:'body'}); const cv1=el('canvas'); b1.appendChild(cv1); c1.appendChild(b1); c1.appendChild(captionChart('Overall gender split among deleted voter records.', ()=>[{Label:'Female',Count:g.female},{Label:'Male',Count:g.male},{Label:'Other',Count:g.other}], ()=>cv1)); grid.appendChild(c1);
-    const c2=el('section',{class:'card span-6'}); c2.appendChild(el('h3',{},'Preview (first 200 rows)')); const b2=el('div',{class:'body'}); const rows=DATA.rows.gender.slice(0,200); const tbl=csvToTable(rows,200); b2.appendChild(tbl); c2.appendChild(b2); c2.appendChild(captionTable('Sample of gender counts by unit.', ()=>tbl, ()=>rows)); grid.appendChild(c2);
+    // Cards
+    const c1=el('section',{class:'card'}); c1.appendChild(el('h3',{},'AC Ranking by Deletions')); const b1=el('div',{class:'body'});
+    b1.appendChild(csvToTable(byAC.slice(0,200))); c1.appendChild(b1);
+    c1.appendChild(caption('ACs ranked by total deletions. Use the table export for the full list.'));
+    c1.appendChild(toolbar(()=> formatCSVFromRows(byAC), ()=> null)); root.appendChild(c1);
+
+    const c2=el('section',{class:'card'}); c2.appendChild(el('h3',{},'Deletion Intensity — AC bins'));
+    const b2=el('div',{class:'body'}); const cv=el('canvas'); b2.appendChild(cv); c2.appendChild(b2);
+    const labels=edges.map((e,i)=> i===0?`<${edges[1]}`: (i===edges.length-1?`≥${edges[i]}`: `${edges[i]}–${edges[i+1]-1}`));
+    CHARTS['del_bins']=new Chart(cv.getContext('2d'),{type:'bar',data:{labels,datasets:[{label:'#ACs',data:bins.slice(0,labels.length)}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:chartGridColor()}},y:{beginAtZero:true,grid:{color:chartGridColor()}}},plugins:{legend:{display:false}}});
+    c2.appendChild(caption('How many constituencies fall into each deletion range.'));
+    c2.appendChild(toolbar(()=> formatCSVFromRows(labels.map((l,i)=>({Bin:l, Count:bins[i]}))), ()=> cv)); root.appendChild(c2);
+
+    const s=el('section',{class:'card'}); s.appendChild(el('h3',{},'Deletions — plain summary')); const sb=el('div',{class:'body'});
+    sb.textContent='Most-affected constituencies and distribution across ranges. Use this to target deeper checks.'; s.appendChild(sb); root.appendChild(s);
+  }
+
+  function renderSpatial(root){
+    const all=STATE.rows.all; if(!all.length){ root.appendChild(el('div',{class:'notice'},'Waiting for live data…')); return; }
+    const areaKey=['area','Area','urban_rural','Urban_Rural','URBAN_RURAL','type'].find(k=> all[0] && k in all[0]);
+    const borderKey=['border','is_border','Border','UP_border','state_border'].find(k=> all[0] && k in all[0]);
+
+    const c1=el('section',{class:'card'}); c1.appendChild(el('h3',{},'Urban vs Rural'));
+    const b1=el('div',{class:'body'});
+    if(!areaKey){ b1.appendChild(el('div',{class:'notice'},'Urban/Rural not found in data.')); } else {
+      const m=groupCount(all,r=> (r[areaKey]||'').toString().toLowerCase().includes('urban')?'Urban':'Rural');
+      const labels=[...m.keys()], values=[...m.values()]; const cv=el('canvas'); b1.appendChild(cv);
+      CHARTS['sp_ur']=new Chart(cv.getContext('2d'),{type:'bar',data:{labels,datasets:[{label:'Deletions',data:values}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:chartGridColor()}},y:{beginAtZero:true,grid:{color:chartGridColor()}}},plugins:{legend:{display:false}}});
+      c1.appendChild(caption('Comparison of deletions between urban and rural areas.'));
+      c1.appendChild(toolbar(()=> formatCSVFromRows(labels.map((l,i)=>({Area:l, Deletions:values[i]}))), ()=> cv));
+    }
+    c1.appendChild(b1); root.appendChild(c1);
+
+    const c2=el('section',{class:'card'}); c2.appendChild(el('h3',{},'Border vs Interior'));
+    const b2=el('div',{class:'body'});
+    if(!borderKey){ b2.appendChild(el('div',{class:'notice'},'Border flag not found in data.')); }
+    else{
+      const m=groupCount(all,r=> (r[borderKey]? 'Border':'Interior')); const labels=[...m.keys()], values=[...m.values()]; const cv=el('canvas'); b2.appendChild(cv);
+      CHARTS['sp_border']=new Chart(cv.getContext('2d'),{type:'bar',data:{labels,datasets:[{label:'Deletions',data:values}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:chartGridColor()}},y:{beginAtZero:true,grid:{color:chartGridColor()}}},plugins:{legend:{display:false}}});
+      c2.appendChild(caption('Contrasts between border constituencies and interior.'));
+      c2.appendChild(toolbar(()=> formatCSVFromRows(labels.map((l,i)=>({Region:l, Deletions:values[i]}))), ()=> cv));
+    }
+    c2.appendChild(b2); root.appendChild(c2);
+
+    const s=el('section',{class:'card'}); s.appendChild(el('h3',{},'Spatial — plain summary')); const sb=el('div',{class:'body'});
+    sb.textContent='Urban–rural and border–interior gaps, if present in the data. Clustering metrics require geo inputs and are not computed here.'; s.appendChild(sb); root.appendChild(s);
+  }
+
+  function renderTemporal(root){
+    const all=STATE.rows.all; if(!all.length){ root.appendChild(el('div',{class:'notice'},'Waiting for live data…')); return; }
+    const sample=all[0]||{}; const dateKey=Object.keys(sample).find(k=> /date|dt|updated/i.test(k));
+    const c1=el('section',{class:'card'}); c1.appendChild(el('h3',{},'Deletions over time'));
+    const b1=el('div',{class:'body'});
+    if(!dateKey){ b1.appendChild(el('div',{class:'notice'},'No date column detected.')); }
+    else{
+      const byDay=new Map(); all.forEach(r=>{ const d=r[dateKey]; if(!d) return; const t=new Date(d); if(isNaN(t)) return; const k=t.toISOString().slice(0,10); byDay.set(k,(byDay.get(k)||0)+1); });
+      const labels=[...byDay.keys()].sort(); const values=labels.map(k=> byDay.get(k)); const cv=el('canvas'); b1.appendChild(cv);
+      CHARTS['tmp_day']=new Chart(cv.getContext('2d'),{type:'line',data:{labels,datasets:[{label:'Deletions',data:values,tension:.2}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:chartGridColor()}},y:{beginAtZero:true,grid:{color:chartGridColor()}}},plugins:{legend:{display:false}}});
+      c1.appendChild(caption('Daily pattern of deletions (if a date column exists).'));
+      c1.appendChild(toolbar(()=> formatCSVFromRows(labels.map((l,i)=>({Date:l, Count:values[i]}))), ()=> cv));
+    }
+    c1.appendChild(b1); root.appendChild(c1);
+
+    const s=el('section',{class:'card'}); s.appendChild(el('h3',{},'Temporal — plain summary')); const sb=el('div',{class:'body'});
+    sb.textContent='Shows when deletions clustered. If 2020 & 2024 periods exist, use the table export to compare totals.'; s.appendChild(sb); root.appendChild(s);
+  }
+
+  function renderGender(root){
+    const g=STATE.rows.gender; const totals=calcGenderTotals(g);
+    const grid=el('div',{class:'grid'});
+    const c1=el('section',{class:'card span-6'}); c1.appendChild(el('h3',{},'Gender composition (aggregated)'));
+    const b1=el('div',{class:'body'}); const cv=el('canvas'); b1.appendChild(cv); c1.appendChild(b1);
+    CHARTS['g_pie']=new Chart(cv.getContext('2d'),{type:'doughnut',data:{labels:['Female','Male','Other'],datasets:[{data:[totals.female,totals.male,totals.other]}]},options:{responsive:true,maintainAspectRatio:false}});
+    c1.appendChild(caption('Overall gender distribution of deletions.'));
+    c1.appendChild(toolbar(()=> formatCSVFromRows([{Label:'Female',Count:totals.female},{Label:'Male',Count:totals.male},{Label:'Other',Count:totals.other}]), ()=> cv));
+    grid.appendChild(c1);
+
+    const c2=el('section',{class:'card span-6'}); c2.appendChild(el('h3',{},'Preview (first 200 rows)'));
+    const b2=el('div',{class:'body'}); b2.appendChild(csvToTable(g,200)); c2.appendChild(b2);
+    c2.appendChild(caption('Quick look at the gender file to verify fields.'));
+    c2.appendChild(toolbar(()=> formatCSVFromRows(g.slice(0,200)), ()=> null));
+    grid.appendChild(c2);
+
     root.appendChild(grid);
-    CHARTS['gender']=new Chart(cv1.getContext('2d'),{type:'doughnut',data:{labels:['Female','Male','Other'],datasets:[{data:[g.female,g.male,g.other]}]},options:{responsive:true,maintainAspectRatio:false}});
-    root.appendChild(el('div',{class:'tab-summary'},'<ul><li>Shows the overall share of women, men, and others among deletions.</li></ul>')) }
 
-  // Caste (placeholder summary visuals — connect surname/caste files when available)
-  function renderCaste(root){const card=el('section',{class:'card'}); card.appendChild(el('h3',{},'Surname frequency among deletions')); const b=el('div',{class:'body'}); const cv=el('canvas'); b.appendChild(cv); card.appendChild(b); card.appendChild(captionChart('Most common surnames among deleted records.', ()=>[{Surname:'Devi',Count:0},{Surname:'Kumari',Count:0}], ()=>cv)); root.appendChild(card);
-    CHARTS['caste']=new Chart(cv.getContext('2d'),{type:'bar',data:{labels:['Devi','Kumari'],datasets:[{label:'Count',data:[0,0]}]}});
-    root.appendChild(el('div',{class:'tab-summary'},'<ul><li>Examines whether certain surnames appear more often in deletions.</li></ul>')) }
+    const s=el('section',{class:'card'}); s.appendChild(el('h3',{},'Gender — plain summary')); const sb=el('div',{class:'body'});
+    sb.textContent='Female/Male/Other totals are aggregated from the gender file. Use caution when comparing with population shares.'; s.appendChild(sb); root.appendChild(s);
+  }
 
-  // Religion (placeholder summary visuals — connect religion columns)
-  function renderReligion(root){const card=el('section',{class:'card'}); card.appendChild(el('h3',{},'Deletions by religion (aggregated)')); const b=el('div',{class:'body'}); const cv=el('canvas'); b.appendChild(cv); card.appendChild(b); card.appendChild(captionChart('Overall share by religious group among deletions.', ()=>[{Group:'Hindu',Count:0},{Group:'Muslim',Count:0},{Group:'Unknown',Count:0}], ()=>cv)); root.appendChild(card);
-    CHARTS['religion']=new Chart(cv.getContext('2d'),{type:'bar',data:{labels:['Hindu','Muslim','Unknown'],datasets:[{label:'Deletions',data:[0,0,0]}]}});
-    root.appendChild(el('div',{class:'tab-summary'},'<ul><li>Shows broad community patterns in deletion counts.</li></ul>')) }
+  function renderCaste(root){
+    const surn=STATE.rows.surnames; const prev=STATE.rows.casteprev; if(!surn.length && !prev.length){ root.appendChild(el('div',{class:'notice'},'Surname/caste files not present.')); return; }
+    // Try to find surname & count columns
+    const sKey=detectKey(surn,['surname','Surname','name','Name']); const cKey=detectKey(surn,['count','Count','freq','Freq']);
+    const top=surn.length? surn.map(r=>({Surname:r[sKey], Count:+r[cKey]||0})).filter(r=> r.Surname!=null).sort((a,b)=>b.Count-a.Count).slice(0,20):[];
+    const c1=el('section',{class:'card'}); c1.appendChild(el('h3',{},'Top surnames among deletions'));
+    const b1=el('div',{class:'body'}); b1.appendChild(csvToTable(top)); c1.appendChild(b1);
+    c1.appendChild(caption('Most frequent surnames observed among deletions (mapping to caste shown in next table if available).'));
+    c1.appendChild(toolbar(()=> formatCSVFromRows(top), ()=> null)); root.appendChild(c1);
 
-  // Advanced / Predictive (illustrative placeholder)
-  function renderAdvanced(root){const card=el('section',{class:'card'}); card.appendChild(el('h3',{},'Predictive probe (illustrative)')); const b=el('div',{class:'body'}); const cv=el('canvas'); b.appendChild(cv); card.appendChild(b); card.appendChild(captionChart('Simple relationship between higher deletions and outcomes.', ()=>[{Feature:'Deletion intensity',Effect:0}], ()=>cv)); root.appendChild(card);
-    CHARTS['adv']=new Chart(cv.getContext('2d'),{type:'line',data:{labels:['Low','Mid','High'],datasets:[{label:'Outcome score',data:[0,0,0]}]}});
-    root.appendChild(el('div',{class:'tab-summary'},'<ul><li>This section explores how much deletions relate to outcomes in a simplified way.</li></ul>')) }
+    if(prev.length){
+      const mapKey=detectKey(prev,['caste','Caste','group','Group']); const snKey=detectKey(prev,['surname','Surname','name','Name']);
+      const mapped=prev.map(r=>({Surname:r[snKey], Group:r[mapKey]})).filter(r=> r.Surname!=null);
+      const c2=el('section',{class:'card'}); c2.appendChild(el('h3',{},'Surname → caste group (preview)'));
+      const b2=el('div',{class:'body'}); b2.appendChild(csvToTable(mapped.slice(0,200))); c2.appendChild(b2);
+      c2.appendChild(caption('Preview of surname-to-caste mapping used to derive caste deviations.'));
+      c2.appendChild(toolbar(()=> formatCSVFromRows(mapped), ()=> null)); root.appendChild(c2);
+    }
 
-  // Methods
-  function renderMethods(root){const card=el('section',{class:'card'}); card.appendChild(el('h3',{},'Methods & Notes')); const b=el('div',{class:'body'}); b.innerHTML=`<ul><li>Numbers on each tab are computed from the loaded files. Short summaries render first, then live data replaces them.</li><li>Exports are available below each chart and table: CSV for the summary table powering the view, and PNG for snapshots.</li><li>Paths use <code>data/</code> then <code>fallback/</code>. Keep identical filenames in both.</li></ul>`; card.appendChild(b); root.appendChild(card) }
+    const s=el('section',{class:'card'}); s.appendChild(el('h3',{},'Caste — plain summary')); const sb=el('div',{class:'body'});
+    sb.textContent='Surname-based caste signals are indicative and require careful interpretation. Anti-caste surname use can attenuate mappings.'; s.appendChild(sb); root.appendChild(s);
+  }
 
-  // ======= NAVIGATION =======
-  function navigate(tab){const main=document.getElementById('main'); main.innerHTML=''; clearCharts();
+  function renderReligion(root){
+    const g=STATE.rows.gender; // try gender file first; often has religion
+    const sample=g[0]||STATE.rows.all[0]||{}; const relKey=Object.keys(sample).find(k=> /religion/i.test(k));
+    const c1=el('section',{class:'card'}); c1.appendChild(el('h3',{},'Deletions by religion'));
+    const b1=el('div',{class:'body'});
+    if(!relKey){ b1.appendChild(el('div',{class:'notice'},'No religion field detected in gender or all-deletions files.')); }
+    else{
+      const src = g.length? g : STATE.rows.all;
+      const m=groupCount(src, r=> r[relKey]||'Unknown'); const labels=[...m.keys()], values=[...m.values()]; const cv=el('canvas'); b1.appendChild(cv);
+      CHARTS['rel_bar']=new Chart(cv.getContext('2d'),{type:'bar',data:{labels,datasets:[{label:'Deletions',data:values}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:chartGridColor()}},y:{beginAtZero:true,grid:{color:chartGridColor()}}},plugins:{legend:{display:false}}});
+      c1.appendChild(caption('Aggregate deletions by reported religion (if available).'));
+      c1.appendChild(toolbar(()=> formatCSVFromRows(labels.map((l,i)=>({Religion:l, Deletions:values[i]}))), ()=> cv));
+    }
+    c1.appendChild(b1); root.appendChild(c1);
+
+    const s=el('section',{class:'card'}); s.appendChild(el('h3',{},'Religion — plain summary')); const sb=el('div',{class:'body'});
+    sb.textContent='Breakdown of deletions by religion, subject to field availability and consistency across files.'; s.appendChild(sb); root.appendChild(s);
+  }
+
+  function renderElectoral(root){
+    const all=STATE.rows.all; const sample=all[0]||{};
+    const allianceKey=Object.keys(sample).find(k=> /alliance|winner|nda|india/i.test(k));
+    const acKey=detectKey(all,['ac_number','AC_Number','AC','ac']);
+    const c1=el('section',{class:'card'}); c1.appendChild(el('h3',{},'Alliance summary vs deletions'));
+    const b1=el('div',{class:'body'});
+    if(!all.length || !allianceKey){ b1.appendChild(el('div',{class:'notice'},'Alliance/outcome fields not found in data. Provide an AC-level file to enable this view.')); }
+    else{
+      const byAlliance=new Map();
+      all.forEach(r=>{ const a=(r[allianceKey]||'Unknown').toString(); byAlliance.set(a,(byAlliance.get(a)||0)+1); });
+      const labels=[...byAlliance.keys()], values=[...byAlliance.values()]; const cv=el('canvas'); b1.appendChild(cv);
+      CHARTS['el_bar']=new Chart(cv.getContext('2d'),{type:'bar',data:{labels,datasets:[{label:'Deletions',data:values}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:chartGridColor()}},y:{beginAtZero:true,grid:{color:chartGridColor()}}},plugins:{legend:{display:false}}});
+      c1.appendChild(caption('Deletions aggregated by alliance/outcome label (if present).'));
+      c1.appendChild(toolbar(()=> formatCSVFromRows(labels.map((l,i)=>({Alliance:l, Deletions:values[i]}))), ()=> cv));
+    }
+    c1.appendChild(b1); root.appendChild(c1);
+
+    const s=el('section',{class:'card'}); s.appendChild(el('h3',{},'Electoral — plain summary')); const sb=el('div',{class:'body'});
+    sb.textContent='Where outcome fields are available, this view compares deletion totals by alliance category.'; s.appendChild(sb); root.appendChild(s);
+  }
+
+  function renderAdvanced(root){
+    const all=STATE.rows.all; if(!all.length){ root.appendChild(el('div',{class:'notice'},'Waiting for live data…')); return; }
+    // Basic stats by AC
+    const acKey=detectKey(all,['ac_number','AC_Number','AC','ac']); const byAC=[...groupCount(all,r=> r[acKey]).values()];
+    const n=byAC.length; const mean=byAC.reduce((a,b)=>a+b,0)/Math.max(n,1);
+    const sorted=[...byAC].sort((a,b)=>a-b); const median= n? (n%2? sorted[(n-1)/2] : (sorted[n/2-1]+sorted[n/2])/2) : 0;
+    const sd=Math.sqrt(byAC.reduce((s,v)=> s+(v-mean)**2,0)/Math.max(n,1));
+    const c1=el('section',{class:'card'}); c1.appendChild(el('h3',{},'Distribution of deletions per AC — summary stats'));
+    const b1=el('div',{class:'body'});
+    b1.appendChild(csvToTable([{N:n, Mean:mean.toFixed(2), Median:median, SD:sd.toFixed(2)}]));
+    c1.appendChild(b1); c1.appendChild(caption('High-level distributional statistics based on deletions-per-AC.'));
+    c1.appendChild(toolbar(()=> formatCSVFromRows([{N:n, Mean:mean, Median:median, SD:sd}]), ()=> null)); root.appendChild(c1);
+
+    const s=el('section',{class:'card'}); s.appendChild(el('h3',{},'Advanced — plain summary')); const sb=el('div',{class:'body'});
+    sb.textContent='Quick statistical profile of deletions per constituency. For predictive probes, add an outcomes file and extend this tab.'; s.appendChild(sb); root.appendChild(s);
+  }
+
+  function renderMethods(root){
+    const c=el('section',{class:'card'}); c.appendChild(el('h3',{},'Methods & Integrity'));
+    const b=el('div',{class:'body'});
+    b.innerHTML = `<ul>
+      <li>Instant summaries render first; live CSVs from <code>data/</code> (or <code>fallback/</code>) recompute all numbers and replace them automatically.</li>
+      <li>Detection tolerant to column names (e.g., <code>AC</code>/<code>ac_number</code>).</li>
+      <li>Every chart/table includes export controls: summary CSV and PNG.</li>
+      <li>Spatial/Religion/Electoral views appear only if the necessary fields exist in your files.</li>
+    </ul>`;
+    c.appendChild(b); root.appendChild(c);
+  }
+
+  // ========================= GENDER TOTALS =========================
+  function calcGenderTotals(rows){ const k=Object.keys(rows[0]||{}); const m=k.find(x=>/male/i.test(x)); const f=k.find(x=>/female/i.test(x)); const o=k.find(x=>/other|third/i.test(x)); let M=0,F=0,O=0; rows.forEach(r=>{ M+=+r[m]||0; F+=+r[f]||0; O+= o? (+r[o]||0) : 0; }); return {male:M,female:F,other:O}; }
+
+  // ========================= NAVIGATION =========================
+  function navigate(tab){ document.querySelectorAll('.tab').forEach(t=> t.classList.toggle('active', t.dataset.tab===tab)); const main=document.getElementById('main'); main.innerHTML=''; clearCharts();
     if(tab==='overview') renderOverview(main);
     if(tab==='deletions') renderDeletions(main);
     if(tab==='spatial') renderSpatial(main);
@@ -175,30 +364,60 @@
     if(tab==='gender') renderGender(main);
     if(tab==='caste') renderCaste(main);
     if(tab==='religion') renderReligion(main);
+    if(tab==='electoral') renderElectoral(main);
     if(tab==='advanced') renderAdvanced(main);
     if(tab==='methods') renderMethods(main);
   }
 
-  document.addEventListener('DOMContentLoaded',()=>{
-    document.querySelectorAll('.tab').forEach(btn=> btn.addEventListener('click', ()=>{document.querySelectorAll('.tab').forEach(t=> t.classList.toggle('active', t===btn)); navigate(btn.dataset.tab)}));
-  });
-
-  // ======= BOOT =======
+  // ========================= BOOT =========================
   async function boot(){
-    // Load tiny summaries for instant paint
-    DATA.sums.overview=readJSON('sum_overview'); DATA.sums.gender=readJSON('sum_gender');
-    // Load CSVs
-    const [all,maj,gen]=await Promise.all([loadCSVPair('all'), loadCSVPair('major'), loadCSVPair('gender')]);
-    if(!(all.text && maj.text && gen.text)){ setChip('Provisional (summary only)','warn'); navigate('overview'); return; }
-    DATA.sourceTag=(all.source==='data'||maj.source==='data'||gen.source==='data')?'data':'fallback';
-    DATA.rows.all=parseCSV(all.text); DATA.rows.major=parseCSV(maj.text); DATA.rows.gender=parseCSV(gen.text);
-    setChip(`Ready • Verified from ${DATA.sourceTag==='data'?'data/':'fallback/'}`,'ok');
-    navigate('overview');
+    // Paint provisional from embedded summaries
+    STATE.summaries.overview = readJSON('sum_overview');
+    STATE.summaries.gender   = readJSON('sum_gender');
+    navigate('overview'); setChip('Provisional (summary)…','warn');
+
+    // Load CSVs in parallel
+    const [a,m,g,s,cp,gd] = await Promise.all([
+      loadCSVPair('all'), loadCSVPair('major'), loadCSVPair('gender'), loadCSVPair('surnames'), loadCSVPair('casteprev'), loadCSVPair('guardian')
+    ]);
+    const sources=[a,m,g,s,cp,gd].map(x=>x.source).filter(Boolean);
+    if(!a.text || !m.text || !g.text){ setChip('Provisional (summary only)','warn'); return; }
+    STATE.sourceTag = sources.includes('data')? 'data':'fallback';
+
+    // Parse
+    STATE.rows.all = parseCSV(a.text); STATE.rows.major=parseCSV(m.text); STATE.rows.gender=parseCSV(g.text);
+    STATE.rows.surnames = s.text? parseCSV(s.text):[]; STATE.rows.casteprev = cp.text? parseCSV(cp.text):[]; STATE.rows.guardian = gd.text? parseCSV(gd.text):[];
+
+    // Re-render current tab with live data
+    navigate(document.querySelector('.tab.active').dataset.tab);
+    setChip(`Ready • Verified from ${STATE.sourceTag}/`,'ok');
   }
-  window.addEventListener('load', boot);
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.querySelectorAll('.tab').forEach(btn=> btn.addEventListener('click', ()=> navigate(btn.dataset.tab)));
+
+    // Global export buttons: export first table or first canvas on current tab
+    document.getElementById('exportCSV').addEventListener('click',()=>{
+      const table=document.querySelector('main table'); if(table){
+        const rows=[...table.querySelectorAll('tr')].map(tr=>[...tr.children].map(td=> '"'+td.textContent.replace(/"/g,'""')+'"').join(','));
+        return download('table_export.csv', rows.join('
+'));
+      }
+      alert('Open a view with a table to export CSV.');
+    });
+    document.getElementById('exportPNG').addEventListener('click',()=>{
+      const cv=document.querySelector('main canvas'); if(!cv) return alert('Open a view with a chart to export PNG.'); toPNGOfCanvas(cv,'chart.png');
+    });
+
+    boot();
+  });
   </script>
 
-  <!-- TINY SUMMARY FALLBACKS (Replace these with your precomputed numbers) -->
+  <!-- =====================
+       EMBEDDED SUMMARY FALLBACKS (tiny, for instant paint)
+       Replace with real precomputed values if you like.
+       Live CSVs always recompute and replace on-screen numbers.
+       ===================== -->
   <script type="application/json" id="sum_overview">{"total_all":0,"total_major":0,"top_ac":[["001",0],["045",0],["112",0]]}</script>
   <script type="application/json" id="sum_gender">{"female":0,"male":0,"other":0}</script>
 
