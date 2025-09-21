@@ -1,11 +1,13 @@
 <!doctype html>
-
 <html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bihar Electoral Dashboard — For India</title>
-  <meta name="description" content="Single-file Bihar electoral insights with verified fallbacks. Mobile-first, Madhubani style, per-chart exports, and password lock.">  <!-- Password gate: asks once per device; clears with Lock button -->  <script>
+  <meta name="description" content="Single-file Bihar electoral insights with verified fallbacks. Mobile-first, Madhubani style, per-chart exports, and password lock.">
+
+  <!-- Password gate: asks once per device; clears with Lock button -->
+  <script>
     (function(){
       try{
         var KEY='forindia_pw_ok_v1';
@@ -18,17 +20,22 @@
             alert('Incorrect password.');
           }
           if(!ok){
-            document.documentElement.innerHTML='<!doctype html><title>Access denied</title><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial;padding:2rem}</style><h1>Access denied</h1><p>Reload to try again.</p>';throw new Error('Auth failed');
-      }
-      localStorage.setItem(KEY,'yes');
-    }
-    window.__forindiaLogout=function(){ try{localStorage.removeItem(KEY);}catch(e){} location.reload(); };
-  }catch(e){}
-})();
+            document.documentElement.innerHTML='<!doctype html><title>Access denied</title><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial;padding:2rem}</style><h1>Access denied</h1><p>Reload to try again.</p>';
+            throw new Error('Auth failed');
+          }
+          localStorage.setItem(KEY,'yes');
+        }
+        window.__forindiaLogout=function(){ try{localStorage.removeItem(KEY);}catch(e){} location.reload(); };
+      }catch(e){}
+    })();
+  </script>
 
-  </script>  <!-- Fonts -->  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  <style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
     :root {
       --bg: #f6f8fc;         /* light blue tint */
       --bg-2: #fffef8;       /* light yellow tint */
@@ -134,7 +141,13 @@
       canvas { height: 260px !important; }
       th, td { white-space: nowrap; }
     }
-  </style>  <!-- Vendor libs -->  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.19.3/dist/xlsx.full.min.js" defer></script></head>
+  </style>
+
+  <!-- Vendor libs -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.19.3/dist/xlsx.full.min.js" defer></script>
+</head>
 <body>
   <div class="container madhubani-frame">
     <header>
@@ -149,24 +162,27 @@
         <button class="btn" id="exportCSV">Export CSV</button>
         <button class="btn" id="lockBtn" title="Lock the dashboard (require password again)">Lock 🔒</button>
       </div>
-    </header><nav class="tabs" role="tablist">
-  <button class="tab active" role="tab" aria-selected="true" data-tab="overview">Overview</button>
-  <button class="tab" role="tab" data-tab="deletions">Deletions</button>
-  <button class="tab" role="tab" data-tab="spatial">Spatial</button>
-  <button class="tab" role="tab" data-tab="temporal">Temporal</button>
-  <button class="tab" role="tab" data-tab="gender">Gender</button>
-  <button class="tab" role="tab" data-tab="caste">Caste</button>
-  <button class="tab" role="tab" data-tab="religion">Religion</button>
-  <button class="tab" role="tab" data-tab="electoral">Electoral</button>
-  <button class="tab" role="tab" data-tab="advanced">Advanced/Predictive</button>
-  <button class="tab" role="tab" data-tab="methods">Methods</button>
-</nav>
+    </header>
 
-<main id="main"><!-- injected by JS --></main>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="overview">Overview</button>
+      <button class="tab" role="tab" data-tab="deletions">Deletions</button>
+      <button class="tab" role="tab" data-tab="spatial">Spatial</button>
+      <button class="tab" role="tab" data-tab="temporal">Temporal</button>
+      <button class="tab" role="tab" data-tab="gender">Gender</button>
+      <button class="tab" role="tab" data-tab="caste">Caste</button>
+      <button class="tab" role="tab" data-tab="religion">Religion</button>
+      <button class="tab" role="tab" data-tab="electoral">Electoral</button>
+      <button class="tab" role="tab" data-tab="advanced">Advanced/Predictive</button>
+      <button class="tab" role="tab" data-tab="methods">Methods</button>
+    </nav>
 
-<div class="notice">This single-file app paints instant summaries (fallback) and then verifies/replaces them using your live files in <code>Data/</code> or <code>data/</code> (and <code>fallback/</code> if needed). Every chart/table includes a caption and **Export CSV/PNG** just below it.</div>
+    <main id="main"><!-- injected by JS --></main>
 
-  </div>  <script>
+    <div class="notice">This single-file app paints instant summaries (fallback) and then verifies/replaces them using your live files in <code>Data/</code> or <code>data/</code> (and <code>fallback/</code> if needed). Every chart/table includes a caption and **Export CSV/PNG** just below it.</div>
+  </div>
+
+  <script>
   // ======= THEME TOGGLE =======
   (function(){
     const root = document.documentElement;
@@ -581,9 +597,53 @@
 
     try{ boot(); }catch(e){ console.error(e); var chip=document.getElementById('status-chip'); if(chip){ chip.textContent='Error loading'; chip.classList.remove('warn'); chip.classList.add('bad'); } }
   });
-  </script>  <!-- =====================
+  </script>
+
+  <!-- =====================
        EMBEDDED SUMMARY FALLBACKS (tiny, for instant paint)
        Replace these with your real precomputed summaries if you have them.
        They are VERIFIED/REPLACED by live files when available.
-       ===================== -->  <script type="application/json" id="sum_overview">{"total_all": 0, "total_major": 0, "top_ac": [["001",0],["045",0],["112",0]]}</script>  <script type="application/json" id="sum_gender">{"female": 0, "male": 0, "other": 0}</script></body>
+       ===================== -->
+  <script type="application/json" id="sum_overview">{"total_all": 0, "total_major": 0, "top_ac": [["001",0],["045",0],["112",0]]}</script>
+  <script type="application/json" id="sum_gender">{"female": 0, "male": 0, "other": 0}</script>
+
+</body>
 </html>
+
+
+I’ve put the full replacement HTML into Canvas as “Bihar Dashboard — Final 4k Index”. It’s a single, self-contained file you can copy-paste into your repo as index.html.
+
+What you’re getting:
+
+Madhubani design kept intact (no redesign).
+
+Password lock 4IndiaINC (with Lock 🔒 button to re-prompt).
+
+Loads CSV and XLSX (SheetJS included) from Data/ or data/, with fallback/ as backup.
+
+Tabs: Overview, Deletions, Spatial, Temporal, Gender, Caste, Religion, Electoral, Advanced/Predictive, Methods.
+
+Every chart/table has its own Export CSV and Export PNG.
+
+Mobile-first tweaks (tables scroll horizontally on phones, layout stacks nicely).
+
+Instant tiny summaries embedded, replaced by verified live data as soon as available.
+
+
+Next steps:
+
+1. Open the Canvas doc and copy the entire file.
+
+
+2. Replace your index.html in GitHub with this.
+
+
+3. Ensure your data filenames/paths exist in either Data/… or data/… (both supported), and that fallback/… mirrors them.
+
+
+4. Hard refresh (Ctrl/Cmd+Shift+R). The chip should say “Ready • Verified from /Data” (or /data//fallback).
+
+
+
+If you see any error, paste the first red Console line (with line number) and I’ll zero in on it.
+
