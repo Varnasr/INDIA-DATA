@@ -543,7 +543,10 @@
     // Provisional paint using embedded summaries
     const sumOv = readJSON('sum_overview') || { total_all:0, total_major:0, top_ac: [] };
     const sumGender = readJSON('sum_gender') || { female:0, male:0, other:0 };
-    document.getElementById('main').innerHTML=''; renderOverview(main, sumOv); renderGender(main, sumGender, [ { Note:'Provisional summary — awaiting live verification' } ]);
+    const main = document.getElementById('main');
+    main.innerHTML='';
+    renderOverview(main, sumOv);
+    renderGender(main, sumGender, [ { Note:'Provisional summary — awaiting live verification' } ]);
     setChip('Provisional (summary)…','warn');
 
     // Fetch live rows
