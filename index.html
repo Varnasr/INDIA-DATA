@@ -109,6 +109,9 @@
       -moz-osx-font-smoothing: grayscale;
       position: relative;
       overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Madhubani Art Background Pattern */
@@ -136,6 +139,7 @@
       padding: 1rem;
       position: relative;
       z-index: 1;
+      flex: 1;
     }
 
     /* Header */
@@ -622,6 +626,19 @@
       to { transform: rotate(360deg); }
     }
 
+    /* Footer */
+    footer {
+      background: var(--card-bg);
+      border-top: 2px solid var(--border);
+      margin-top: 3rem;
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      width: 100%;
+    }
+
     /* Responsive Design - Mobile First */
     @media (max-width: 768px) {
       .container {
@@ -680,6 +697,11 @@
 
       th, td {
         padding: 0.5rem;
+      }
+
+      footer {
+        padding: 1.5rem 1rem;
+        font-size: 0.8125rem;
       }
     }
 
@@ -773,7 +795,7 @@
           <div class="language-selector">
             <button class="language-btn" id="languageBtn">
               <span>🌐</span>
-              <span data-translate="language">English</span>
+              <span data-translate="language" id="languageText">English</span>
             </button>
             <div class="language-dropdown" id="languageDropdown">
               <div class="language-option" data-lang="en">English</div>
@@ -818,6 +840,22 @@
       </div>
     </main>
   </div>
+
+  <!-- Footer with Disclaimer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;">
+        <strong>Disclaimer:</strong> This is an academic work for research purposes only. 
+        This analysis is non-partisan and based solely on publicly available electoral records. 
+        The findings and interpretations are those of the researchers and do not represent any political position.
+      </p>
+      <p style="margin-top: 0.5rem;">
+        <strong>Data Source:</strong> Public Electoral Records | 
+        <strong>License:</strong> MIT License | 
+        <strong>Purpose:</strong> Academic Research Only
+      </p>
+    </div>
+  </footer>
 
   <script>
     // ===== Translation System =====
@@ -908,7 +946,7 @@
         loading: 'டாஷ்போர்டு ஏற்றுகிறது...',
         'tab-overview': 'மேலோட்டம்',
         'tab-deletions': 'நீக்குதல் பகுப்பாய்வு',
-        'tab-spatial': 'இடஞ்சார் முறைகள்',
+        'tab-spatial': 'இடச்சார் முறைகள்',
         'tab-temporal': 'கால போக்குகள்',
         'tab-gender': 'பாலின பகுப்பாய்வு',
         'tab-caste': 'சாதி & குடும்பப்பெயர்கள்',
@@ -959,10 +997,16 @@
     function translate() {
       document.querySelectorAll('[data-translate]').forEach(element => {
         const key = element.getAttribute('data-translate');
-        if (translations[currentLang][key]) {
+        if (translations[currentLang] && translations[currentLang][key]) {
           element.textContent = translations[currentLang][key];
         }
       });
+      
+      // Update the language button text
+      const languageText = document.getElementById('languageText');
+      if (languageText) {
+        languageText.textContent = translations[currentLang]['language'];
+      }
     }
 
     // ===== Data Management =====
@@ -2211,63 +2255,6 @@
       `;
     }
 
-    // ===== Event Handlers =====
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    });
-
-    document.getElementById('lockBtn').addEventListener('click', () => {
-      if (window.__forindiaLogout) window.__forindiaLogout();
-    });
-
-    // Language selector
-    const languageBtn = document.getElementById('languageBtn');
-    const languageDropdown = document.getElementById('languageDropdown');
-    
-    languageBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      languageDropdown.classList.toggle('show');
-    });
-
-    document.addEventListener('click', () => {
-      languageDropdown.classList.remove('show');
-    });
-
-    document.querySelectorAll('.language-option').forEach(option => {
-      option.addEventListener('click', () => {
-        currentLang = option.dataset.lang;
-        translate();
-        languageDropdown.classList.remove('show');
-      });
-    });
-
-    // Tab navigation
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        clearCharts();
-        
-        switch(tab.dataset.tab) {
-          case 'overview': renderOverview(); break;
-          case 'deletions': renderDeletions(); break;
-          case 'spatial': renderSpatial(); break;
-          case 'temporal': renderTemporal(); break;
-          case 'gender': renderGender(); break;
-          case 'caste': renderCaste(); break;
-          case 'religion': renderReligion(); break;
-          case 'electoral': renderElectoral(); break;
-          case 'border': renderBorder(); break;
-          case 'integrity': renderIntegrity(); break;
-          case 'methods': renderMethods(); break;
-        }
-      });
-    });
-
     function renderTemporal() {
       const main = document.getElementById('main');
       main.innerHTML = `
@@ -2352,10 +2339,75 @@
       }, 100);
     }
 
+    // ===== Event Handlers =====
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    document.getElementById('lockBtn').addEventListener('click', () => {
+      if (window.__forindiaLogout) window.__forindiaLogout();
+    });
+
+    // Fixed Language selector
+    const languageBtn = document.getElementById('languageBtn');
+    const languageDropdown = document.getElementById('languageDropdown');
+    
+    languageBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      languageDropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+      languageDropdown.classList.remove('show');
+    });
+
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', () => {
+        currentLang = option.dataset.lang;
+        translate();
+        languageDropdown.classList.remove('show');
+        localStorage.setItem('language', currentLang);
+      });
+    });
+
+    // Tab navigation
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        clearCharts();
+        
+        switch(tab.dataset.tab) {
+          case 'overview': renderOverview(); break;
+          case 'deletions': renderDeletions(); break;
+          case 'spatial': renderSpatial(); break;
+          case 'temporal': renderTemporal(); break;
+          case 'gender': renderGender(); break;
+          case 'caste': renderCaste(); break;
+          case 'religion': renderReligion(); break;
+          case 'electoral': renderElectoral(); break;
+          case 'border': renderBorder(); break;
+          case 'integrity': renderIntegrity(); break;
+          case 'methods': renderMethods(); break;
+        }
+      });
+    });
+
     // Initialize
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+
+    // Load saved language
+    const savedLang = localStorage.getItem('language');
+    if (savedLang && translations[savedLang]) {
+      currentLang = savedLang;
+      setTimeout(() => translate(), 100);
     }
 
     // Load initial view
