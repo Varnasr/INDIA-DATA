@@ -179,7 +179,7 @@
 
     <main id="main"><!-- injected by JS --></main>
 
-    <div class="notice">This single-file app paints instant summaries (fallback) and then verifies/replaces them using your live files in <code>Data/</code> or <code>data/</code> (and <code>fallback/</code> if needed). Every chart/table includes a caption and **Export CSV/PNG** just below it.</div>
+    <div class="notice">This single-file app paints instant summaries (fallback) and then verifies/replaces them using your live files in <code>data/</code> (and <code>fallback/</code> if needed). Every chart/table includes a caption and **Export CSV/PNG** just below it.</div>
   </div>
 
   <script>
@@ -198,14 +198,14 @@
     });
   })();
 
-  // ======= DATA SOURCES (tries Data/ and data/, then fallback/) =======
+  // ======= DATA SOURCES (tries data/, then fallback/) =======
   const DATASETS = {
-    all:     { pri: ['data/All-deletions-Booths-form20.csv','data/All-deletions-Booths-form20.csv'], fb: ['fallback/All-deletions-Booths-form20.csv'] },
-    major:   { pri: ['data/Major-deletions-Booths.csv','data/Major-deletions-Booths.csv'],         fb: ['fallback/Major-deletions-Booths.csv'] },
-    gender:  { pri: ['data/booth-gender-religion.xlsx','data/booth-gender-religion.xlsx','Data/booth-gender-religion.csv','data/booth-gender-religion.csv'], fb: ['fallback/booth-gender-religion.xlsx','fallback/booth-gender-religion.csv'] },
-    surnames:{ pri: ['data/surname_counts.csv','data/surname_counts.csv'],                           fb: ['fallback/surname_counts.csv'] },
-    casteprev:{pri: ['data/Bihar_Surnames___Castes__preview_.csv','data/Bihar_Surnames___Castes__preview_.csv'], fb:['fallback/Bihar_Surnames___Castes__preview_.csv'] },
-    guardian:{ pri: ['data/guardian_surname_counts.csv','data/guardian_surname_counts.csv'],         fb: ['fallback/guardian_surname_counts.csv'] }
+    all:     { pri: ['data/All-deletions-Booths-form20.csv'], fb: ['fallback/All-deletions-Booths-form20.csv'] },
+    major:   { pri: ['data/Major-deletions-Booths.csv'], fb: ['fallback/Major-deletions-Booths.csv'] },
+    gender:  { pri: ['data/booth-gender-religion.xlsx','data/booth-gender-religion.csv'], fb: ['fallback/booth-gender-religion.xlsx','fallback/booth-gender-religion.csv'] },
+    surnames:{ pri: ['data/surname_counts.csv'], fb: ['fallback/surname_counts.csv'] },
+    casteprev:{pri: ['data/Bihar_Surnames___Castes__preview_.csv'], fb:['fallback/Bihar_Surnames___Castes__preview_.csv'] },
+    guardian:{ pri: ['data/guardian_surname_counts.csv'], fb: ['fallback/guardian_surname_counts.csv'] }
   };
 
   // ======= FETCH HELPERS & PARSERS (CSV + XLSX) =======
@@ -286,7 +286,7 @@
     const b1=el('div',{class:'body'});
     b1.innerHTML = `<div class="notice"><strong>Total deletions (Form 20 booths):</strong> ${overview.total_all.toLocaleString()}<br><strong>Major deletions:</strong> ${overview.total_major.toLocaleString()}</div>`;
     c1.appendChild(b1); c1.appendChild(caption('Counts recomputed from live booth-level deletions then summarized. Export provides this table as CSV/PNG.'));
-    c1.appendChild(summary('This page gives a quick, high-level picture. Totals are booth-level deletions; “major” are high-threshold cases.'));
+    c1.appendChild(summary('This page gives a quick, high-level picture. Totals are booth-level deletions; "major" are high-threshold cases.'));
     grid.appendChild(c1);
 
     // Card 2: Top ACs by deletions (bar)
@@ -476,7 +476,7 @@
     const ref2={value:null};
     const marginK = allRows.length? firstKeyLike(allRows[0],[/margin/i,/lead/i]) : null;
     const delK = allRows.length? firstKeyLike(allRows[0],[/del(eted)?(_)?(count|num|number)?/i,/^count$/i]) : null;
-    let X=[],Y=[]; if(marginK&&delK){ allRows.forEach(r=>{ X.push(num(r[delK])); Y.push(num(r[marginK]])); }); }
+    let X=[],Y=[]; if(marginK&&delK){ allRows.forEach(r=>{ X.push(num(r[delK])); Y.push(num(r[marginK])); }); }
     addToolbar(b2, ()=> X.map((x,i)=>({Deletions:x, Margin:Y[i]})), ref2);
     chartRefs['chart_margin'] = ref2.value = new Chart(cv2.getContext('2d'),{ type:'scatter', data:{ datasets:[{label:'ACs', data:X.map((x,i)=>({x, y:Y[i]}))}]}, options:{ responsive:true, maintainAspectRatio:false, scales:{ x:{title:{display:true,text:'Deletions'}}, y:{title:{display:true,text:'Margin'}} } }});
     c2.appendChild(caption('Scatter explores whether higher deletions correspond to tighter or wider margins.'));
@@ -508,7 +508,7 @@
     const card = el('section',{class:'card'}); card.appendChild(el('h3',{},'Methods & Integrity'));
     const body = el('div',{class:'body'});
     body.innerHTML = `<ol>
-      <li><strong>Data flow:</strong> The app first shows tiny embedded summaries, then fetches live files from <code>Data/</code> or <code>data/</code>. If unavailable it uses <code>fallback/</code>.</li>
+      <li><strong>Data flow:</strong> The app first shows tiny embedded summaries, then fetches live files from <code>data/</code>. If unavailable it uses <code>fallback/</code>.</li>
       <li><strong>Accuracy:</strong> All totals and charts are recomputed in-browser from the live rows where possible. Captions explain what each chart shows.</li>
       <li><strong>Performance:</strong> CSV/XLSX are parsed per-tab and big tables are paginated with horizontal scroll on mobile.</li>
       <li><strong>Exports:</strong> Every chart and table includes local CSV/PNG export.</li>
@@ -609,41 +609,3 @@
 
 </body>
 </html>
-
-
-I’ve put the full replacement HTML into Canvas as “Bihar Dashboard — Final 4k Index”. It’s a single, self-contained file you can copy-paste into your repo as index.html.
-
-What you’re getting:
-
-Madhubani design kept intact (no redesign).
-
-Password lock 4IndiaINC (with Lock 🔒 button to re-prompt).
-
-Loads CSV and XLSX (SheetJS included) from Data/ or data/, with fallback/ as backup.
-
-Tabs: Overview, Deletions, Spatial, Temporal, Gender, Caste, Religion, Electoral, Advanced/Predictive, Methods.
-
-Every chart/table has its own Export CSV and Export PNG.
-
-Mobile-first tweaks (tables scroll horizontally on phones, layout stacks nicely).
-
-Instant tiny summaries embedded, replaced by verified live data as soon as available.
-
-
-Next steps:
-
-1. Open the Canvas doc and copy the entire file.
-
-
-2. Replace your index.html in GitHub with this.
-
-
-3. Ensure your data filenames/paths exist in either Data/… or data/… (both supported), and that fallback/… mirrors them.
-
-
-4. Hard refresh (Ctrl/Cmd+Shift+R). The chip should say “Ready • Verified from /Data” (or /data//fallback).
-
-
-
-If you see any error, paste the first red Console line (with line number) and I’ll zero in on it.
-
