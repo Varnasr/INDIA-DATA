@@ -39,7 +39,7 @@
   </script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* CSS Variables for Theming */
@@ -111,7 +111,7 @@
     }
 
     body {
-      font-family: 'Inter', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', 'Noto Sans Devanagari', 'Mukta', system-ui, -apple-system, sans-serif;
       background-color: var(--bg);
       color: var(--text-primary);
       line-height: 1.6;
@@ -336,19 +336,11 @@
       display: block;
     }
 
-    .tab-text-hindi {
+    .tab-text-hindi,
+    .tab-text-bengali,
+    .tab-text-tamil,
+    .tab-text-marathi {
       display: none;
-      font-family: 'Noto Sans Devanagari', sans-serif;
-    }
-
-    .tab-text-bengali {
-      display: none;
-      font-family: 'Noto Sans Bengali', sans-serif;
-    }
-
-    .tab-text-tamil {
-      display: none;
-      font-family: 'Noto Sans Tamil', sans-serif;
     }
 
     [data-lang="hi"] .tab-text { display: none; }
@@ -357,6 +349,8 @@
     [data-lang="bn"] .tab-text-bengali { display: block; }
     [data-lang="ta"] .tab-text { display: none; }
     [data-lang="ta"] .tab-text-tamil { display: block; }
+    [data-lang="mr"] .tab-text { display: none; }
+    [data-lang="mr"] .tab-text-marathi { display: block; }
 
     /* Main Content */
     main {
@@ -385,6 +379,10 @@
 
     .grid-2col {
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+    }
+
+    .grid-3col {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
     }
 
     .grid-full {
@@ -904,6 +902,7 @@
           <button class="lang-btn" data-lang="hi">हि</button>
           <button class="lang-btn" data-lang="bn">বা</button>
           <button class="lang-btn" data-lang="ta">த</button>
+          <button class="lang-btn" data-lang="mr">म</button>
         </div>
         
         <div class="controls">
@@ -930,66 +929,77 @@
           <span class="tab-text-hindi">सिंहावलोकन</span>
           <span class="tab-text-bengali">সারসংক্ষেপ</span>
           <span class="tab-text-tamil">மேலோட்டம்</span>
+          <span class="tab-text-marathi">आढावा</span>
         </button>
         <button class="tab" data-tab="deletions">
           <span class="tab-text">Deletions</span>
           <span class="tab-text-hindi">विलोपन</span>
           <span class="tab-text-bengali">মুছে ফেলা</span>
           <span class="tab-text-tamil">நீக்கங்கள்</span>
+          <span class="tab-text-marathi">हटविणे</span>
         </button>
         <button class="tab" data-tab="demographic">
           <span class="tab-text">Demographics</span>
           <span class="tab-text-hindi">जनसांख्यिकी</span>
           <span class="tab-text-bengali">জনতত্ত্ব</span>
           <span class="tab-text-tamil">மக்கள்தொகை</span>
+          <span class="tab-text-marathi">लोकसंख्या</span>
         </button>
         <button class="tab" data-tab="temporal">
           <span class="tab-text">2020-2024</span>
           <span class="tab-text-hindi">2020-2024</span>
           <span class="tab-text-bengali">2020-2024</span>
           <span class="tab-text-tamil">2020-2024</span>
+          <span class="tab-text-marathi">2020-2024</span>
         </button>
         <button class="tab" data-tab="gender">
           <span class="tab-text">Gender</span>
           <span class="tab-text-hindi">लिंग</span>
           <span class="tab-text-bengali">লিঙ্গ</span>
           <span class="tab-text-tamil">பாலினம்</span>
+          <span class="tab-text-marathi">लिंग</span>
         </button>
         <button class="tab" data-tab="caste">
           <span class="tab-text">Caste</span>
           <span class="tab-text-hindi">जाति</span>
           <span class="tab-text-bengali">জাতি</span>
           <span class="tab-text-tamil">சாதி</span>
+          <span class="tab-text-marathi">जात</span>
         </button>
         <button class="tab" data-tab="religion">
           <span class="tab-text">Religion</span>
           <span class="tab-text-hindi">धर्म</span>
           <span class="tab-text-bengali">ধর্ম</span>
           <span class="tab-text-tamil">மதம்</span>
+          <span class="tab-text-marathi">धर्म</span>
         </button>
         <button class="tab" data-tab="electoral">
           <span class="tab-text">Electoral</span>
           <span class="tab-text-hindi">चुनावी</span>
           <span class="tab-text-bengali">নির্বাচনী</span>
           <span class="tab-text-tamil">தேர்தல்</span>
+          <span class="tab-text-marathi">निवडणूक</span>
         </button>
         <button class="tab" data-tab="geographic">
           <span class="tab-text">Geographic</span>
           <span class="tab-text-hindi">भौगोलिक</span>
           <span class="tab-text-bengali">ভৌগোলিক</span>
           <span class="tab-text-tamil">புவியியல்</span>
+          <span class="tab-text-marathi">भौगोलिक</span>
         </button>
         <button class="tab" data-tab="integrity">
           <span class="tab-text">Integrity</span>
           <span class="tab-text-hindi">अखंडता</span>
           <span class="tab-text-bengali">সততা</span>
           <span class="tab-text-tamil">நேர்மை</span>
+          <span class="tab-text-marathi">अखंडता</span>
         </button>
         <button class="tab" data-tab="methods">
           <span class="tab-text">Methods</span>
           <span class="tab-text-hindi">विधि</span>
           <span class="tab-text-bengali">পদ্ধতি</span>
           <span class="tab-text-tamil">முறைகள்</span>
+          <span class="tab-text-marathi">पद्धती</span>
         </button>
       </div>
     </div>
@@ -1014,826 +1024,6 @@
     </div>
   </footer>
 
-  <script>
-    // Include all the JavaScript from dashboard.js here with enhancements
-    
-    // ===== Data Management =====
-    const DATA = {
-      // From AlldeletionsBoothsform20.csv - LS 2020 and 2024 election data  
-      electionComparison: {
-        ls2020: { 
-          totalDeletions: 6559626,
-          indiaVotes: 2842195,
-          ndaVotes: 3717431,
-          indiaSeats: 89,
-          ndaSeats: 151 
-        },
-        ls2024: {
-          totalDeletions: 7283456,
-          indiaVotes: 2651298,
-          ndaVotes: 3988754,
-          indiaSeats: 71,
-          ndaSeats: 169
-        }
-      },
-      
-      // Demographics from Bihar Caste Survey 2022 and NFHS-5
-      demographics: {
-        population2022: {
-          total: 130700000,  // 13.07 crore
-          female: 64033500,  // 49% as per NFHS-5
-          male: 66666500,    // 51% as per NFHS-5
-          femalePercent: 49,
-          malePercent: 51
-        },
-        voterPopulation: {
-          total: 78000000,
-          female: 38220000,
-          male: 39780000,
-        },
-        casteDistribution: {
-          'EBC': 36.01,
-          'OBC': 27.12,
-          'SC': 19.65,
-          'Forward': 15.52,
-          'ST': 1.70
-        }
-      },
-      
-      // Caste-wise deletion analysis from surnames
-      casteAnalysis: [
-        { caste: 'EBC (Extremely Backward Classes)', deletions: 2362467, percent: 36.0, 
-          populationPercent: 36.01, surnames: ['MANDAL', 'MAHTO', 'MANJHI', 'MUSAHAR'] },
-        { caste: 'OBC (Other Backward Classes)', deletions: 1779210, percent: 27.1, 
-          populationPercent: 27.12, surnames: ['YADAV', 'KURMI', 'KOERI'] },
-        { caste: 'SC (Scheduled Castes)', deletions: 1288393, percent: 19.6, 
-          populationPercent: 19.65, surnames: ['PASWAN', 'RAM', 'RAVIDAS'] },
-        { caste: 'Forward Castes', deletions: 1017741, percent: 15.5, 
-          populationPercent: 15.52, surnames: ['SINGH', 'SHARMA', 'MISHRA'] },
-        { caste: 'ST (Scheduled Tribes)', deletions: 111613, percent: 1.7, 
-          populationPercent: 1.70, surnames: ['ORAON', 'MUNDA'] },
-        { caste: 'Protective Surnames (Anti-caste)', deletions: 3154534, percent: 48.1, 
-          populationPercent: null, surnames: ['DEVI', 'KUMARI', 'KUMAR'] }
-      ],
-      
-      // Top and bottom deleted surnames by caste
-      topDeletedCastes: [
-        { surname: 'DEVI', count: 1862345, caste: 'Caste-neutral (Women)', rank: 1 },
-        { surname: 'KUMARI', count: 1292178, caste: 'Caste-neutral (Women)', rank: 2 },
-        { surname: 'YADAV', count: 234567, caste: 'OBC', rank: 3 },
-        { surname: 'PASWAN', count: 156789, caste: 'SC', rank: 4 },
-        { surname: 'MANDAL', count: 134567, caste: 'EBC', rank: 5 }
-      ],
-      
-      leastDeletedCastes: [
-        { surname: 'THAKUR', count: 8234, caste: 'Forward', rank: 150 },
-        { surname: 'SINHA', count: 9456, caste: 'Forward', rank: 149 },
-        { surname: 'VERMA', count: 11234, caste: 'Forward', rank: 148 },
-        { surname: 'GUPTA', count: 12567, caste: 'Forward', rank: 147 },
-        { surname: 'PANDEY', count: 13890, caste: 'Forward', rank: 146 }
-      ],
-      
-      // Geographic analysis beyond borders
-      geographicPatterns: {
-        'Urban Centers': { avgDeletions: 112.5, constituencies: 32, pattern: 'High deletion in slum areas' },
-        'Rural Agricultural': { avgDeletions: 78.3, constituencies: 87, pattern: 'Moderate, seasonal migration' },
-        'Industrial Belts': { avgDeletions: 95.7, constituencies: 24, pattern: 'High, worker displacement' },
-        'Flood-Prone Areas': { avgDeletions: 125.4, constituencies: 41, pattern: 'Highest, forced migration' },
-        'West Bengal Border': { avgDeletions: 105.2, constituencies: 18, pattern: 'Cross-border movement' },
-        'Nepal Border': { avgDeletions: 94.1, constituencies: 13, pattern: 'International migration' },
-        'UP Border': { avgDeletions: 93.4, constituencies: 45, pattern: 'Interstate migration' },
-        'Jharkhand Border': { avgDeletions: 69.0, constituencies: 28, pattern: 'Lowest deletion rate' }
-      },
-
-      deletionBins: [
-        { range: '0-49', booths: 23780, india: 9481, nda: 11331, other: 2968, indiaRate: 39.9, ndaRate: 47.7, otherRate: 12.5, deletedVoters: 724078 },
-        { range: '50-99', booths: 29872, india: 11599, nda: 14613, other: 3660, indiaRate: 38.8, ndaRate: 48.9, otherRate: 12.3, deletedVoters: 2168473 },
-        { range: '100-149', booths: 15055, india: 5687, nda: 7625, other: 1743, indiaRate: 37.8, ndaRate: 50.6, otherRate: 11.6, deletedVoters: 1819721 },
-        { range: '150-199', booths: 5712, india: 2036, nda: 3063, other: 613, indiaRate: 35.6, ndaRate: 53.6, otherRate: 10.7, deletedVoters: 972314 },
-        { range: '200-249', booths: 2093, india: 728, nda: 1154, other: 211, indiaRate: 34.8, ndaRate: 55.1, otherRate: 10.1, deletedVoters: 461266 },
-        { range: '250-299', booths: 752, india: 252, nda: 427, other: 73, indiaRate: 33.5, ndaRate: 56.8, otherRate: 9.7, deletedVoters: 203652 },
-        { range: '300+', booths: 573, india: 165, nda: 339, other: 69, indiaRate: 28.8, ndaRate: 59.2, otherRate: 12.0, deletedVoters: 210122 }
-      ],
-      
-      genderAnalysis: {
-        female: { total: 4697088, percent: 71.6 },
-        male: { total: 1862538, percent: 28.4 },
-        expected: {
-          femalePercent: 49,
-          malePercent: 51
-        },
-        overRepresentation: {
-          female: 46.1
-        }
-      },
-      
-      religionComposition: {
-        hindu: { percent: 74.4, deletions: 4880757 },
-        muslim: { percent: 15.2, deletions: 997063 },
-        unknown: { percent: 8.9, deletions: 583806 },
-        other: { percent: 1.5, deletions: 98394 }
-      },
-      
-      // Top constituencies by deletions
-      topConstituencies: [
-        { name: 'Pipra', deletions: 169161 },
-        { name: 'Valmikinagar', deletions: 132166 },
-        { name: 'Nalanda', deletions: 115873 },
-        { name: 'Vaishali', deletions: 114613 },
-        { name: 'Siwan', deletions: 113272 }
-      ],
-
-      // Additional data for filling whitespace
-      monthlyTrends: [
-        { month: 'Jan', deletions: 423567, indiaLoss: 234 },
-        { month: 'Feb', deletions: 512789, indiaLoss: 289 },
-        { month: 'Mar', deletions: 489234, indiaLoss: 267 },
-        { month: 'Apr', deletions: 567890, indiaLoss: 312 },
-        { month: 'May', deletions: 612345, indiaLoss: 345 },
-        { month: 'Jun', deletions: 578901, indiaLoss: 323 }
-      ],
-
-      boothAnomalies: {
-        extreme: 1086,
-        high: 5645,
-        moderate: 19872,
-        normal: 51234
-      }
-    };
-
-    // Chart instances
-    let charts = {};
-
-    // ===== Utility Functions =====
-    function clearCharts() {
-      Object.values(charts).forEach(chart => {
-        if (chart) chart.destroy();
-      });
-      charts = {};
-    }
-
-    function exportToCSV(data, filename) {
-      const csv = Papa.unparse(data);
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      link.setAttribute('download', filename);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-    function exportToPNG(canvasId, filename) {
-      const canvas = document.getElementById(canvasId);
-      if (canvas) {
-        const link = document.createElement('a');
-        link.download = filename;
-        link.href = canvas.toDataURL();
-        link.click();
-      }
-    }
-
-    function createExportButtons(data, canvasId) {
-      return `
-        <div class="card-tools">
-          <button class="btn btn-export" onclick="exportToCSV(${JSON.stringify(data).replace(/"/g, '&quot;')}, 'data.csv')">
-            <span>📊</span>
-            <span>CSV</span>
-          </button>
-          ${canvasId ? `
-            <button class="btn btn-export" onclick="exportToPNG('${canvasId}', 'chart.png')">
-              <span>🖼️</span>
-              <span>PNG</span>
-            </button>
-          ` : ''}
-        </div>
-      `;
-    }
-
-    // Enhanced Export Report Function with PDF support
-    async function exportReport() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF('p', 'mm', 'a4');
-      
-      // Title
-      doc.setFontSize(24);
-      doc.setTextColor(33, 33, 33);
-      doc.text('Bihar Electoral Analysis Report', 105, 20, { align: 'center' });
-      
-      doc.setFontSize(12);
-      doc.setTextColor(117, 117, 117);
-      doc.text('Comprehensive Analysis of 6.56 Million Voter Deletions', 105, 30, { align: 'center' });
-      
-      doc.setFontSize(10);
-      doc.text(`Generated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`, 105, 40, { align: 'center' });
-      
-      // Executive Summary
-      doc.setFontSize(14);
-      doc.setTextColor(74, 144, 226);
-      doc.text('Executive Summary', 20, 55);
-      
-      doc.setFontSize(10);
-      doc.setTextColor(33, 33, 33);
-      const summaryText = `Analysis of 77,837 polling booths reveals a systematic pattern: as voter deletions increase, 
-INDIA Alliance win rates drop from 39.9% to below 30%, while NDA win rates rise from 
-47.7% to over 59%. Between 2020 and 2024, INDIA Alliance lost 18 seats while deletions 
-increased by 11% (723,830 voters).`;
-      
-      const summaryLines = doc.splitTextToSize(summaryText, 170);
-      doc.text(summaryLines, 20, 65);
-      
-      // Key Statistics
-      doc.setFontSize(14);
-      doc.setTextColor(74, 144, 226);
-      doc.text('Key Statistics', 20, 95);
-      
-      doc.setFontSize(10);
-      doc.setTextColor(33, 33, 33);
-      doc.text('• Total Deletions: 6.56 Million (8.4% of electorate)', 25, 105);
-      doc.text('• Total Booths Analyzed: 77,837 across 243 ACs', 25, 112);
-      doc.text('• Female Deletions: 71.6% (vs 49% population baseline)', 25, 119);
-      doc.text('• Caste-neutral Surnames: 48.1% of all deletions', 25, 126);
-      doc.text('• Correlation (INDIA): -0.52 (negative impact)', 25, 133);
-      doc.text('• Electoral Impact: 18 seats shifted from INDIA to NDA', 25, 140);
-      
-      // Add new page for detailed findings
-      doc.addPage();
-      
-      // Demographic Analysis
-      doc.setFontSize(14);
-      doc.setTextColor(74, 144, 226);
-      doc.text('Demographic Targeting Analysis', 20, 20);
-      
-      doc.setFontSize(10);
-      doc.setTextColor(33, 33, 33);
-      doc.text('Gender Disparity:', 25, 30);
-      doc.text('• Women: 71.6% of deletions (4.7M) vs 49% of population', 30, 37);
-      doc.text('• Over-representation: 46.1% more women deleted than expected', 30, 44);
-      doc.text('• Protective surnames: DEVI (1.86M), KUMARI (1.29M)', 30, 51);
-      
-      doc.text('Caste Dynamics:', 25, 65);
-      doc.text('• EBC: 36.0% of deletions (proportional to population)', 30, 72);
-      doc.text('• OBC: 27.1% of deletions (proportional)', 30, 79);
-      doc.text('• SC: 19.6% of deletions (proportional)', 30, 86);
-      doc.text('• Protective Surnames: 48.1% (HIGHLY TARGETED)', 30, 93);
-      
-      // Geographic Patterns
-      doc.setFontSize(14);
-      doc.setTextColor(74, 144, 226);
-      doc.text('Geographic Distribution Patterns', 20, 110);
-      
-      doc.setFontSize(10);
-      doc.setTextColor(33, 33, 33);
-      doc.text('Highest Deletion Areas:', 25, 120);
-      doc.text('• Flood-Prone Areas: 125.4 deletions/booth', 30, 127);
-      doc.text('• Urban Centers: 112.5 deletions/booth', 30, 134);
-      doc.text('• West Bengal Border: 105.2 deletions/booth', 30, 141);
-      doc.text('• Nepal Border: 94.1 deletions/booth', 30, 148);
-      
-      // Footer
-      doc.setFontSize(8);
-      doc.setTextColor(117, 117, 117);
-      doc.text('Disclaimer: Academic analysis based on publicly available electoral records.', 105, 280, { align: 'center' });
-      
-      // Save the PDF
-      doc.save(`Bihar_Electoral_Analysis_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
-    }
-
-    // Language switcher functionality
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const lang = btn.dataset.lang;
-        document.body.dataset.lang = lang;
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        // Update brand text based on language
-        const brandText = document.querySelector('.brand-text');
-        const translations = {
-          'en': 'Bihar Electoral Dashboard',
-          'hi': 'बिहार चुनावी डैशबोर्ड',
-          'bn': 'বিহার নির্বাচনী ড্যাশবোর্ড',
-          'ta': 'பீகார் தேர்தல் டாஷ்போர்டு'
-        };
-        brandText.textContent = translations[lang];
-      });
-    });
-
-    // ===== Tab Rendering Functions (keeping all existing ones) =====
-    function renderOverview() {
-      const main = document.getElementById('main');
-      main.innerHTML = `
-        <div class="critical-section">
-          <h3>
-            <span>⚠️</span>
-            <span>CRITICAL FINDING: Electoral Outcome Correlation</span>
-          </h3>
-          <p>As voter deletions increase from 0-49 to 650-700 per booth:</p>
-          <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-            <li>INDIA Alliance win rate drops from 39.9% to below 30%</li>
-            <li>NDA win rate increases from 47.7% to over 59%</li>
-            <li>Pattern consistent across all 77,837 booths analyzed</li>
-            <li>From 2020 to 2024: INDIA lost 18 seats while deletions increased by 11%</li>
-          </ul>
-        </div>
-
-        <div class="stat-grid">
-          <div class="stat-card">
-            <div class="stat-label">Total Deletions</div>
-            <div class="stat-value">6.56M</div>
-            <div class="stat-change negative">8.4% of electorate</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Total Booths</div>
-            <div class="stat-value">77,837</div>
-            <div class="stat-change">Across 243 ACs</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">2020→2024 Impact</div>
-            <div class="stat-value">-18</div>
-            <div class="stat-change negative">INDIA seats lost</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">INDIA Win Rate</div>
-            <div class="stat-value">38.7%</div>
-            <div class="stat-change negative">vs NDA 49.9%</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Female Deletions</div>
-            <div class="stat-value">71.6%</div>
-            <div class="stat-change negative">vs 49% population</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Caste-neutral</div>
-            <div class="stat-value">48.1%</div>
-            <div class="stat-change negative">of deletions</div>
-          </div>
-        </div>
-
-        <div class="grid grid-2col">
-          <div class="card">
-            <div class="card-header">
-              <h3>Alliance Performance by Deletion Intensity</h3>
-              ${createExportButtons(DATA.deletionBins, 'chart-alliance')}
-            </div>
-            <div class="card-body">
-              <div class="viz">
-                <canvas id="chart-alliance"></canvas>
-              </div>
-              <div class="takeaway takeaway-critical">
-                <p><strong>What This Means:</strong> The correlation is -0.52 (negative) for INDIA and +0.48 (positive) for NDA. Deletions systematically favor NDA outcomes.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <h3>Caste-wise Deletion Impact</h3>
-              ${createExportButtons(DATA.casteAnalysis, 'chart-caste')}
-            </div>
-            <div class="card-body">
-              <div class="viz">
-                <canvas id="chart-caste"></canvas>
-              </div>
-              <div class="takeaway takeaway-warning">
-                <p><strong>Key Finding:</strong> EBC (36%) and OBC (27.1%) together account for 63.1% of deletions. 48.1% have protective surnames.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-3col">
-          <div class="card">
-            <div class="card-header">
-              <h3>Deletion Size Distribution</h3>
-              ${createExportButtons([], 'chart-deletion-dist')}
-            </div>
-            <div class="card-body">
-              <div class="viz">
-                <canvas id="chart-deletion-dist"></canvas>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <h3>Top 10 ACs by Deletion</h3>
-              ${createExportButtons([], 'chart-top-acs')}
-            </div>
-            <div class="card-body">
-              <div class="viz">
-                <canvas id="chart-top-acs"></canvas>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <h3>Monthly Deletion Trends</h3>
-              ${createExportButtons(DATA.monthlyTrends, 'chart-monthly')}
-            </div>
-            <div class="card-body">
-              <div class="viz">
-                <canvas id="chart-monthly"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-2col">
-          <div class="card">
-            <div class="card-header">
-              <h3>Booth Anomaly Distribution</h3>
-              ${createExportButtons([], 'chart-anomalies')}
-            </div>
-            <div class="card-body">
-              <div class="viz">
-                <canvas id="chart-anomalies"></canvas>
-              </div>
-              <div class="takeaway takeaway-warning">
-                <p><strong>Statistical Alert:</strong> 1,086 booths show extreme anomalies (Z-score > 3).</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <h3>Religion Composition</h3>
-              ${createExportButtons([], 'chart-religion-comp')}
-            </div>
-            <div class="card-body">
-              <div class="viz">
-                <canvas id="chart-religion-comp"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="key-insight">
-          <h3>
-            <span>💡</span>
-            <span>KEY INSIGHT: The Missing Voters Pattern</span>
-          </h3>
-          <p>Our analysis reveals three interconnected patterns:</p>
-          <ol style="margin: 1rem 0; padding-left: 1.5rem;">
-            <li><strong>WHO:</strong> Women with protective surnames (DEVI, KUMARI) - historically marginalized communities</li>
-            <li><strong>WHERE:</strong> Flood-prone areas, urban slums, and border regions - vulnerable populations</li>
-            <li><strong>IMPACT:</strong> Every 100,000 deletions correlates with 2.5 seats shifting from INDIA to NDA</li>
-          </ol>
-          <p style="margin-top: 1rem;">This is not random administrative cleanup - it's a pattern that changed who governs Bihar.</p>
-        </div>
-      `;
-
-      setTimeout(() => {
-        // Alliance performance chart
-        const ctx1 = document.getElementById('chart-alliance').getContext('2d');
-        charts['alliance'] = new Chart(ctx1, {
-          type: 'line',
-          data: {
-            labels: DATA.deletionBins.map(b => b.range),
-            datasets: [{
-              label: 'INDIA Alliance Win %',
-              data: DATA.deletionBins.map(b => b.indiaRate),
-              borderColor: getComputedStyle(document.documentElement).getPropertyValue('--india-color'),
-              backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--india-color') + '33',
-              borderWidth: 3,
-              tension: 0.3
-            }, {
-              label: 'NDA Win %',
-              data: DATA.deletionBins.map(b => b.ndaRate),
-              borderColor: getComputedStyle(document.documentElement).getPropertyValue('--nda-color'),
-              backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--nda-color') + '33',
-              borderWidth: 3,
-              tension: 0.3
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { position: 'top' }
-            },
-            scales: {
-              y: {
-                beginAtZero: true,
-                max: 70,
-                title: {
-                  display: true,
-                  text: 'Win Percentage (%)'
-                }
-              }
-            }
-          }
-        });
-
-        // Caste analysis chart
-        const ctx2 = document.getElementById('chart-caste').getContext('2d');
-        charts['caste'] = new Chart(ctx2, {
-          type: 'bar',
-          data: {
-            labels: DATA.casteAnalysis.map(c => c.caste),
-            datasets: [{
-              label: 'Deletions by Caste',
-              data: DATA.casteAnalysis.map(c => c.deletions),
-              backgroundColor: [
-                getComputedStyle(document.documentElement).getPropertyValue('--warning'),
-                getComputedStyle(document.documentElement).getPropertyValue('--primary-yellow'),
-                getComputedStyle(document.documentElement).getPropertyValue('--primary-blue'),
-                getComputedStyle(document.documentElement).getPropertyValue('--accent'),
-                getComputedStyle(document.documentElement).getPropertyValue('--success'),
-                getComputedStyle(document.documentElement).getPropertyValue('--danger')
-              ]
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { display: false }
-            },
-            scales: {
-              y: {
-                beginAtZero: true,
-                title: {
-                  display: true,
-                  text: 'Number of Deletions'
-                }
-              },
-              x: {
-                ticks: {
-                  autoSkip: false,
-                  maxRotation: 45,
-                  minRotation: 45
-                }
-              }
-            }
-          }
-        });
-
-        // Deletion distribution chart
-        const ctx3 = document.getElementById('chart-deletion-dist').getContext('2d');
-        const distribution = [23780, 29872, 15055, 5712, 2093, 752, 573];
-        charts['deletionDist'] = new Chart(ctx3, {
-          type: 'bar',
-          data: {
-            labels: ['0-50', '50-100', '100-150', '150-200', '200-250', '250-300', '300+'],
-            datasets: [{
-              label: 'Booth Count',
-              data: distribution,
-              backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-blue'),
-              borderColor: getComputedStyle(document.documentElement).getPropertyValue('--accent'),
-              borderWidth: 1
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { display: false }
-            },
-            scales: {
-              y: { beginAtZero: true }
-            }
-          }
-        });
-
-        // Top ACs chart
-        const ctx4 = document.getElementById('chart-top-acs').getContext('2d');
-        charts['topACs'] = new Chart(ctx4, {
-          type: 'bar',
-          data: {
-            labels: DATA.topConstituencies.map(c => c.name),
-            datasets: [{
-              label: 'Deletions',
-              data: DATA.topConstituencies.map(c => c.deletions),
-              backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--warning'),
-              borderColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-yellow'),
-              borderWidth: 1
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { display: false }
-            },
-            scales: {
-              y: { beginAtZero: true },
-              x: {
-                ticks: {
-                  autoSkip: false,
-                  maxRotation: 45,
-                  minRotation: 45
-                }
-              }
-            }
-          }
-        });
-
-        // Monthly trends chart
-        const ctx5 = document.getElementById('chart-monthly').getContext('2d');
-        charts['monthly'] = new Chart(ctx5, {
-          type: 'bar',
-          data: {
-            labels: DATA.monthlyTrends.map(m => m.month),
-            datasets: [{
-              label: 'Deletions',
-              data: DATA.monthlyTrends.map(m => m.deletions),
-              backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-blue'),
-              yAxisID: 'y',
-            }, {
-              label: 'INDIA Seat Impact',
-              data: DATA.monthlyTrends.map(m => m.indiaLoss),
-              type: 'line',
-              borderColor: getComputedStyle(document.documentElement).getPropertyValue('--danger'),
-              backgroundColor: 'transparent',
-              yAxisID: 'y1',
-              borderWidth: 2
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              y: {
-                type: 'linear',
-                display: true,
-                position: 'left',
-                title: {
-                  display: true,
-                  text: 'Deletions'
-                }
-              },
-              y1: {
-                type: 'linear',
-                display: true,
-                position: 'right',
-                title: {
-                  display: true,
-                  text: 'Seat Loss'
-                },
-                grid: {
-                  drawOnChartArea: false
-                }
-              }
-            }
-          }
-        });
-
-        // Anomalies chart
-        const ctx6 = document.getElementById('chart-anomalies').getContext('2d');
-        charts['anomalies'] = new Chart(ctx6, {
-          type: 'doughnut',
-          data: {
-            labels: ['Normal', 'Moderate', 'High', 'Extreme'],
-            datasets: [{
-              data: [DATA.boothAnomalies.normal, DATA.boothAnomalies.moderate, DATA.boothAnomalies.high, DATA.boothAnomalies.extreme],
-              backgroundColor: [
-                getComputedStyle(document.documentElement).getPropertyValue('--success'),
-                getComputedStyle(document.documentElement).getPropertyValue('--primary-blue'),
-                getComputedStyle(document.documentElement).getPropertyValue('--warning'),
-                getComputedStyle(document.documentElement).getPropertyValue('--danger')
-              ]
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                position: 'bottom'
-              }
-            }
-          }
-        });
-
-        // Religion composition chart
-        const ctx7 = document.getElementById('chart-religion-comp').getContext('2d');
-        charts['religionComp'] = new Chart(ctx7, {
-          type: 'pie',
-          data: {
-            labels: ['Hindu', 'Muslim', 'Unknown', 'Other'],
-            datasets: [{
-              data: [74.4, 15.2, 8.9, 1.5],
-              backgroundColor: [
-                getComputedStyle(document.documentElement).getPropertyValue('--primary-yellow'),
-                getComputedStyle(document.documentElement).getPropertyValue('--success'),
-                getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'),
-                getComputedStyle(document.documentElement).getPropertyValue('--primary-blue')
-              ]
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                position: 'bottom'
-              }
-            }
-          }
-        });
-      }, 100);
-    }
-
-    // Keep all other render functions from the original code
-    // I'll include just the structure here to save space, but they should all be included
-
-    function renderDemographic() {
-      // [Include full implementation from original code]
-      const main = document.getElementById('main');
-      main.innerHTML = `
-        <h2 style="padding: 1rem 0;">Demographic Benchmarking Analysis</h2>
-        <!-- Include all the content from original renderDemographic function -->
-      `;
-    }
-
-    function renderDeletions() {
-      // [Include full implementation from original code]
-    }
-
-    function renderTemporal() {
-      // [Include full implementation from original code]
-    }
-
-    function renderGender() {
-      // [Include full implementation from original code]
-    }
-
-    function renderCaste() {
-      // [Include full implementation from original code]
-    }
-
-    function renderReligion() {
-      // [Include full implementation from original code]
-    }
-
-    function renderGeographic() {
-      // [Include full implementation from original code]
-    }
-
-    function renderElectoral() {
-      // [Include full implementation from original code]
-    }
-
-    function renderIntegrity() {
-      // [Include full implementation from original code]
-    }
-
-    function renderMethods() {
-      // [Include full implementation from original code]
-    }
-
-    // ===== Event Handlers =====
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    });
-
-    document.getElementById('lockBtn').addEventListener('click', () => {
-      if (window.__forindiaLogout) window.__forindiaLogout();
-    });
-
-    document.getElementById('exportReport').addEventListener('click', exportReport);
-
-    // Tab navigation
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        clearCharts();
-        
-        switch(tab.dataset.tab) {
-          case 'overview': renderOverview(); break;
-          case 'demographic': renderDemographic(); break;
-          case 'deletions': renderDeletions(); break;
-          case 'temporal': renderTemporal(); break;
-          case 'gender': renderGender(); break;
-          case 'caste': renderCaste(); break;
-          case 'religion': renderReligion(); break;
-          case 'electoral': renderElectoral(); break;
-          case 'geographic': renderGeographic(); break;
-          case 'integrity': renderIntegrity(); break;
-          case 'methods': renderMethods(); break;
-        }
-      });
-    });
-
-    // Initialize
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    }
-
-    // Initial render
-    setTimeout(() => {
-      renderOverview();
-    }, 500);
-  </script>
+  <script src="dashboard.js"></script>
 </body>
 </html>
