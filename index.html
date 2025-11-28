@@ -1462,8 +1462,14 @@
           });
 
           const groupEntries = Object.entries(groupTotals).sort((a, b) => b[1] - a[1]);
-          const labelsBlocks = groupEntries.map(([g]) => g);
-          const dataBlocks = groupEntries.map(([, v]) => v);
+
+          // Focus the donut on mapped groups; keep "Unmapped" in the text and tooltips
+          const mappedEntries = groupEntries.filter(([g]) => g !== 'Unmapped');
+          const hasMapped = mappedEntries.reduce((s, [, v]) => s + v, 0) > 0;
+
+          const entriesForChart = hasMapped ? mappedEntries : groupEntries;
+          const labelsBlocks = entriesForChart.map(([g]) => g);
+          const dataBlocks = entriesForChart.map(([, v]) => v);
 
           buildChart('chart-surname-blocks', 'surname-blocks', {
             type: 'doughnut',
