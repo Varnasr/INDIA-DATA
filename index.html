@@ -530,7 +530,6 @@
           <button class="tab" data-tab="religion">Religious Composition</button>
           <button class="tab" data-tab="electoral">Electoral Impact</button>
           <button class="tab" data-tab="geographic">Geographic Patterns</button>
-          <button class="tab" data-tab="integrity">Integrity Lenses</button>
           <button class="tab" data-tab="methods">Methods & Sources</button>
         </div>
       </div>
@@ -2134,11 +2133,7 @@
           electionsQuartiles,
           overviewMetrics,
           bcsACShares,
-          acReserved,
-          surnameCounts,
-          guardianSurnameCounts,
-          surnameCasteMap,
-          acBorderMapping
+          acReserved
         ] = await Promise.all([
           loadCSV(base + '/booth-gender-religion.csv'),
           loadCSV(base + '/religion_overall.csv'),
@@ -2148,12 +2143,21 @@
           loadCSV(base + '/elections_quartiles_2024_by_deletion.csv'),
           loadCSV(base + '/overview_metrics.csv'),
           loadCSV(base + '/bcs_ac_shares_estimated.csv'),
-          loadCSV(base + '/ac_reserved_from_name.csv'),
-          loadCSV(base + '/surname_counts.csv'),
-          loadCSV(base + '/guardian_surname_counts.csv'),
-          loadCSV(base + '/Bihar_Surnames___Castes__preview_.csv'),
-          loadCSV(base + '/bihar_ac_border_mapping.csv')
+          loadCSV(base + '/ac_reserved_from_name.csv')
         ]);
+
+        // Optional surname and border mapping files; failure should not stop the dashboard.
+        let surnameCounts = [], guardianSurnameCounts = [], surnameCasteMap = [], acBorderMapping = [];
+        try {
+          [surnameCounts, guardianSurnameCounts, surnameCasteMap, acBorderMapping] = await Promise.all([
+            loadCSV(base + '/surname_counts.csv').catch(() => []),
+            loadCSV(base + '/guardian_surname_counts.csv').catch(() => []),
+            loadCSV(base + '/Bihar_Surnames___Castes__preview_.csv').catch(() => []),
+            loadCSV(base + '/bihar_ac_border_mapping.csv').catch(() => [])
+          ]);
+        } catch (e) {
+          console.warn('Optional surname/border files missing or could not be parsed', e);
+        }
 
         APP_STATE.raw = {
           booth_gender_religion: boothGenderReligion,
@@ -2210,7 +2214,6 @@
       if (name === 'religion') { renderReligion(); attachExportButtons(); return; }
       if (name === 'electoral') { renderElectoral(); attachExportButtons(); return; }
       if (name === 'geographic') { renderGeographic(); attachExportButtons(); return; }
-      if (name === 'integrity') { renderIntegrity(); attachExportButtons(); return; }
       if (name === 'methods') { renderMethods(); attachExportButtons(); return; }
       renderOverview();
       attachExportButtons();
