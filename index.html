@@ -1,1384 +1,2008 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Bihar Voter Deletions – Bihar 2025 Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <title>Bihar Voter Deletions – Analysis Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Basic reset and layout -->
+  <!-- Password Gate -->
+  <script>
+    (function () {
+      try {
+        var KEY = 'forindia_pw_ok_v1';
+        if (localStorage.getItem(KEY) !== 'yes') {
+          var ok = false;
+          for (var i = 0; i < 5; i++) {
+            var p = window.prompt('Enter password to view the dashboard:');
+            if (p === null) break;
+            if (p === '4IndiaINC') { ok = true; break; }
+            alert('Incorrect password.');
+          }
+          if (!ok) {
+            document.documentElement.innerHTML =
+              '<!doctype html><html><head><meta charset="utf-8"><title>Access denied</title>' +
+              '<style>body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#020617;color:#f9fafb;margin:0}div{max-width:32rem;padding:2.5rem;border-radius:1.25rem;background:radial-gradient(circle at top,#1f2937,#020617);box-shadow:0 20px 60px rgba(15,23,42,.9)}h1{font-size:1.35rem;margin:0 0 .5rem}p{margin:.15rem 0 .5rem;font-size:.95rem;line-height:1.5;color:#e5e7eb}code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:.85rem;padding:.15rem .3rem;border-radius:.35rem;background:rgba(15,23,42,.7);border:1px solid rgba(148,163,184,.6);color:#e5e7eb}</style></head>' +
+              '<body><div><h1>Access denied</h1><p>Reload the page to try again.</p></div></body></html>';
+            throw new Error('Auth failed');
+          }
+          localStorage.setItem(KEY, 'yes');
+        }
+        window.__forindiaLogout = function () {
+          try { localStorage.removeItem(KEY); } catch (e) {}
+          location.reload();
+        };
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inconsolata:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Chart.js & PapaParse -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
   <style>
     :root {
-      --bg: #0b1020;
-      --bg-alt: #151b30;
-      --card-bg: #1d2438;
-      --card-border: #2d3650;
-      --accent: #f4b400;
-      --accent-soft: rgba(244, 180, 0, 0.12);
-      --accent-2: #00bcd4;
-      --accent-3: #ef6c00;
-      --text: #f5f7ff;
-      --muted: #a6b0d8;
-      --danger-soft: rgba(244, 67, 54, 0.15);
-      --danger: #ef5350;
-      --success: #66bb6a;
-      --warning: #ffb74d;
+      --bg: #f3f4f6;
+      --bg-soft: #e5e7eb;
+      --bg-card: #ffffff;
+      --border-subtle: #d1d5db;
+      --text: #111827;
+      --muted: #4b5563;
+      --accent: #2563eb;
+      --accent-soft: rgba(37,99,235,.08);
+      --accent-strong: #1d4ed8;
+      --danger: #ea580c;
+      --safe: #16a34a;
+      --india-color: #16a34a;
+      --nda-color: #ea580c;
+      --other-color: #6b7280;
+
+      --card-radius: 0.9rem;
+      --shadow-soft: 0 10px 30px rgba(15,23,42,.12);
     }
 
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1c2440 0, #050814 55%);
-      color: var(--text);
-      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1200px;
+      padding: 1.5rem 1.25rem 2rem;
+    }
+
+    @media (min-width: 960px) {
+      .page {
+        padding: 1.8rem 0 2.4rem;
+      }
     }
 
     header {
-      padding: 1.5rem 2rem 0.75rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      background: linear-gradient(90deg, rgba(4,8,20,0.95), rgba(10,19,46,0.98));
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(14px);
-    }
-
-    header h1 {
-      margin: 0 0 0.25rem;
-      font-size: 1.4rem;
-      letter-spacing: 0.03em;
-    }
-
-    header p {
-      margin: 0;
-      font-size: 0.85rem;
-      color: var(--muted);
-      max-width: 720px;
-    }
-
-    .tagline-highlight {
-      display: inline-block;
-      padding: 0.15rem 0.5rem;
-      margin-left: 0.4rem;
-      border-radius: 999px;
-      background: rgba(0,188,212,0.16);
-      color: var(--accent-2);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .layout {
-      padding: 1.25rem 2rem 2rem;
-      max-width: 1320px;
-      margin: 0 auto;
-    }
-
-    /* Tabs */
-    .tab-bar {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .tab-button {
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      padding: 0.55rem 0.9rem;
-      font-size: 0.85rem;
-      border-radius: 0.75rem 0.75rem 0 0;
-      cursor: pointer;
-      position: relative;
-      top: 1px;
-      display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      transition: background 0.18s ease, color 0.18s ease;
-    }
-
-    .tab-button span.badge {
-      font-size: 0.65rem;
-      padding: 0.05rem 0.4rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .tab-button.active {
-      background: var(--bg-alt);
-      color: var(--text);
-      border-bottom: 2px solid var(--accent);
-    }
-
-    .tab-panel {
-      display: none;
-      padding: 1.25rem 1rem 0.5rem;
-      border-radius: 0 1rem 1rem 1rem;
-      background: radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 60%), var(--bg-alt);
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 18px 30px rgba(0,0,0,0.45);
-      margin-bottom: 1.5rem;
-    }
-
-    .tab-panel.active {
-      display: block;
-    }
-
-    .panel-header {
-      display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
-    .panel-header h2 {
-      margin: 0;
-      font-size: 1.05rem;
-    }
-
-    .panel-header p {
-      margin: 0;
-      font-size: 0.8rem;
-      color: var(--muted);
-      max-width: 720px;
-    }
-
-    .panel-header-right {
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-align: right;
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 0.1rem 0.4rem;
-      border-radius: 0.75rem;
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    /* Cards grid */
-    .grid {
-      display: grid;
-      gap: 0.9rem;
-    }
-
-    .grid-4 {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    @media (max-width: 1100px) {
-      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
     @media (max-width: 720px) {
-      header { padding: 1.1rem 1.2rem 0.7rem; }
-      .layout { padding: 1rem 1.2rem 1.5rem; }
-      .grid-4, .grid-3, .grid-2 { grid-template-columns: minmax(0, 1fr); }
-      .tab-panel { padding: 1rem 0.8rem 0.6rem; }
-      .panel-header {
+      header {
         flex-direction: column;
         align-items: flex-start;
       }
-      .panel-header-right {
-        text-align: left;
-      }
     }
 
-    .card {
-      background: var(--card-bg);
-      border-radius: 0.9rem;
-      border: 1px solid var(--card-border);
-      padding: 0.8rem 0.9rem;
-      position: relative;
-      overflow: hidden;
-      min-height: 86px;
+    .title-block h1 {
+      margin: 0 0 0.35rem;
+      font-size: 1.45rem;
+      letter-spacing: -0.02em;
     }
 
-    .card.accent {
-      border-color: rgba(244, 180, 0, 0.6);
-      background: linear-gradient(145deg, rgba(244, 180, 0, 0.08), var(--card-bg));
-    }
-
-    .card.soft-danger {
-      background: var(--danger-soft);
-      border-color: rgba(244, 67, 54, 0.4);
-    }
-
-    .card.soft-accent {
-      background: var(--accent-soft);
-      border-color: rgba(244,180,0,0.35);
-    }
-
-    .card-title {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+    .title-block p {
+      margin: 0.1rem 0;
       color: var(--muted);
+      font-size: 0.86rem;
+      max-width: 40rem;
+    }
+
+    .title-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.75);
+      background: rgba(15,23,42,.02);
+      color: #4b5563;
+      font-size: 0.7rem;
+      margin-bottom: 0.35rem;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .title-pill span {
+      height: 0.48rem;
+      width: 0.48rem;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34,197,94,.18);
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-mark {
+      height: 34px;
+      width: 34px;
+      border-radius: 0.8rem;
+      border: 1px solid rgba(148,163,184,.8);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 0 0, rgba(34,197,94,.3), transparent 50%), #020617;
+      color: #e5e7eb;
+      font-family: "Inconsolata", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(15,23,42,.8);
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+    }
+
+    .brand-meta strong {
+      font-size: 0.8rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .brand-meta span {
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.7);
+      background: #f9fafb;
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 0.3rem 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: all 0.15s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: #eef2ff;
+      border-color: rgba(129,140,248,.9);
+      color: #4338ca;
+    }
+
+    .btn svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 1.8;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.7);
+      background: #f9fafb;
+      color: var(--muted);
+    }
+
+    .tabs-container {
+      border-bottom: 1px solid rgba(209,213,219,1);
+      background: #f9fafb;
+    }
+
+    .tabs-scroll {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.4rem 1.25rem 0.55rem;
+      overflow-x: auto;
+    }
+
+    .tabs {
+      display: inline-flex;
+      gap: 0.35rem;
+    }
+
+    .tab {
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      padding: 0.3rem 0.9rem;
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      white-space: nowrap;
+      transition: all 0.12s ease-out;
+    }
+
+    .tab span.dot {
+      height: 0.44rem;
+      width: 0.44rem;
+      border-radius: 999px;
+      background: rgba(148,163,184,.8);
+    }
+
+    .tab.active {
+      border-color: rgba(37,99,235,.9);
+      background: rgba(37,99,235,.08);
+      color: #1d4ed8;
+      box-shadow: 0 6px 18px rgba(37,99,235,.18);
+    }
+
+    .tab.active span.dot {
+      background: #2563eb;
+    }
+
+    main {
+      padding-top: 1.1rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    @media (min-width: 720px) {
+      .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (min-width: 900px) {
+      .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    .metric {
+      border-radius: var(--card-radius);
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      padding: 0.8rem 0.95rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .metric-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #6b7280;
+      font-weight: 600;
       margin-bottom: 0.3rem;
     }
 
-    .card-value {
-      font-size: 1.2rem;
+    .metric-value {
+      font-size: 1.4rem;
       font-weight: 600;
+      letter-spacing: -0.03em;
     }
 
-    .card-sub {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.1rem;
+    .metric-note {
+      margin: 0.45rem 0 0;
+      font-size: 0.8rem;
+      color: #6b7280;
+      line-height: 1.4;
     }
 
-    .chip {
+    .metric-pill {
       display: inline-flex;
       align-items: center;
       gap: 0.25rem;
-      font-size: 0.7rem;
-      padding: 0.05rem 0.4rem;
+      padding: 0.14rem 0.6rem 0.16rem;
       border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--muted);
-      margin-top: 0.4rem;
-    }
-
-    .chip-indicator {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-    }
-
-    .chip-indicator.green { background: var(--success); }
-    .chip-indicator.red { background: var(--danger); }
-    .chip-indicator.amber { background: var(--warning); }
-
-    .chart-wrapper {
-      background: rgba(4,8,20,0.6);
-      border-radius: 0.9rem;
-      border: 1px solid var(--card-border);
-      padding: 0.7rem 0.9rem 0.6rem;
-    }
-
-    .chart-title {
-      font-size: 0.78rem;
+      border: 1px solid rgba(148,163,184,.85);
+      background: #f9fafb;
+      color: #4b5563;
+      font-size: 0.68rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 0.2rem;
+      letter-spacing: .08em;
+      margin-bottom: 0.55rem;
+    }
+
+    .metric-pill::before {
+      content: "";
+      height: 0.4rem;
+      width: 0.4rem;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .card {
+      border-radius: var(--card-radius);
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      padding: 0.75rem 1rem 0.4rem;
+      border-bottom: 1px solid rgba(229,231,235,1);
+    }
+
+    .card-header h3 {
+      margin: 0;
+      font-size: 0.98rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card-header .sub {
+      margin-top: 0.2rem;
+      font-size: 0.76rem;
+      color: #6b7280;
+    }
+
+    .card-body {
+      padding: 0.7rem 0.9rem 0.85rem;
+    }
+
+    .viz {
+      position: relative;
+      width: 100%;
+      height: 260px;
+    }
+
+    @media (min-width: 960px) {
+      .viz {
+        height: 280px;
+      }
+    }
+
+    .viz canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .takeaway {
+      margin-top: 0.55rem;
+      font-size: 0.78rem;
+      color: #4b5563;
+      line-height: 1.4;
+    }
+
+    .loading-block {
+      border-radius: var(--card-radius);
+      border: 1px dashed rgba(148,163,184,.9);
+      padding: 1rem 1.1rem;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(248,250,252,1),
+        rgba(248,250,252,1) 6px,
+        rgba(241,245,249,1) 6px,
+        rgba(241,245,249,1) 12px
+      );
+      color: #4b5563;
+      font-size: 0.84rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .loading-block span {
+      font-family: "Inconsolata", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.76rem;
+      color: #6b7280;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 2px solid rgba(148,163,184,.8);
+      border-top-color: #2563eb;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    code {
+      font-family: "Inconsolata", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.78rem;
+      background: #f9fafb;
+      border-radius: 0.35rem;
+      padding: 0.1rem 0.28rem;
+      border: 1px solid rgba(209,213,219,1);
+    }
+
+    .footer-note {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: #6b7280;
       display: flex;
       justify-content: space-between;
-      gap: 0.5rem;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
-    .chart-sub {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin: 0.1rem 0 0.35rem;
+    .footer-note button {
+      font-size: 0.72rem;
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.7);
+      background: #f9fafb;
+      color: #4b5563;
+      cursor: pointer;
     }
 
-    .chart-legend-inline {
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    .chart-legend-inline span {
-      margin-right: 0.45rem;
-    }
-
-    .chart-legend-inline span::before {
-      content: "● ";
-    }
-
-    .note {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.4rem;
-    }
-
-    .note strong {
-      color: var(--accent-2);
-      font-weight: 500;
-    }
-
-    .error-message {
-      font-size: 0.8rem;
-      color: var(--danger);
-      margin-top: 0.4rem;
-    }
-
-    table.small {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 0.3rem;
-      font-size: 0.75rem;
-    }
-
-    table.small th,
-    table.small td {
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 0.25rem 0.4rem;
-      text-align: right;
-    }
-
-    table.small th {
-      text-align: left;
-      background: rgba(255,255,255,0.04);
-      font-weight: 500;
-    }
-
-    .pill-danger {
-      border-color: var(--danger);
-      color: var(--danger);
+    .footer-note button:hover {
+      background: #e5e7eb;
     }
   </style>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<header>
-  <h1>
-    Bihar Voter Deletions, 2024–25
-    <span class="tagline-highlight">Internal analysis dashboard</span>
-  </h1>
-  <p>
-    Booth-level deletions in Bihar, linked to alliances, caste structure, gender, and religion.
-    All visuals are driven from CSVs in <code>/data/</code> – you can regenerate and swap them
-    without touching this HTML.
-  </p>
-</header>
+  <div class="page">
+    <header>
+      <div class="title-block">
+        <div class="title-pill"><span></span> Internal analysis – Bihar voter deletions</div>
+        <h1>Bihar voter deletions dashboard</h1>
+        <p>
+          This internal dashboard brings together district and AC-level summaries of voter deletions in Bihar,
+          organised to support political and research conversations. It is descriptive and exploratory.
+        </p>
+        <div class="pill-row">
+          <div class="pill">Source: Bihar electoral rolls &amp; derived aggregates</div>
+          <div class="pill">Unit: booths, ACs, districts</div>
+          <div class="pill">For: internal Congress analysis – do not share publicly</div>
+        </div>
+      </div>
+      <div class="brand-block">
+        <div class="brand-mark">BV</div>
+        <div class="brand-meta">
+          <strong>Bihar Voter Study</strong>
+          <span>Protected dashboard &mdash; <a href="javascript:void(0)" onclick="window.__forindiaLogout && window.__forindiaLogout()" style="color:#2563eb;text-decoration:none;border-bottom:1px dashed rgba(37,99,235,.4);">reset password</a></span>
+        </div>
+      </div>
+    </header>
 
-<main class="layout">
-  <div class="tab-bar">
-    <button class="tab-button active" data-tab="overview">
-      Overview <span class="badge">Summary</span>
-    </button>
-    <button class="tab-button" data-tab="ac-outcomes">
-      AC &amp; Outcomes <span class="badge">Alliances</span>
-    </button>
-    <button class="tab-button" data-tab="gender-religion">
-      Gender &amp; Religion <span class="badge">Booth mix</span>
-    </button>
-    <button class="tab-button" data-tab="caste-reservation">
-      Caste &amp; Reservation <span class="badge">BCS/AC</span>
-    </button>
-    <button class="tab-button" data-tab="quartiles">
-      Deletion quartiles <span class="badge">Risk bands</span>
-    </button>
-    <button class="tab-button" data-tab="methods">
-      Methods &amp; notes <span class="badge">Read first</span>
-    </button>
+    <div class="tabs-container">
+      <div class="tabs-scroll">
+        <nav class="tabs">
+          <button class="tab active" data-tab="overview"><span class="dot"></span>Overview</button>
+          <button class="tab" data-tab="deletions"><span class="dot"></span>Deletions analysis</button>
+          <button class="tab" data-tab="demographic"><span class="dot"></span>Demographic benchmarking</button>
+          <button class="tab" data-tab="temporal"><span class="dot"></span>2020–2024 trends</button>
+          <button class="tab" data-tab="gender"><span class="dot"></span>Gender lens</button>
+          <button class="tab" data-tab="caste"><span class="dot"></span>Caste lens</button>
+          <button class="tab" data-tab="religion"><span class="dot"></span>Religion lens</button>
+          <button class="tab" data-tab="electoral"><span class="dot"></span>Electoral competition</button>
+          <button class="tab" data-tab="geographic"><span class="dot"></span>Border &amp; geography</button>
+          <button class="tab" data-tab="integrity"><span class="dot"></span>Integrity checks</button>
+          <button class="tab" data-tab="methods"><span class="dot"></span>Methods</button>
+        </nav>
+      </div>
+    </div>
+
+    <div id="loading" class="loading-block">
+      <div>
+        <strong>Loading summary files…</strong>
+        <div style="margin-top:0.12rem;">The dashboard reads pre-aggregated CSVs from the <code>data/</code> folder (no raw 65L row file).</div>
+      </div>
+      <div class="spinner"></div>
+    </div>
+
+    <main id="main">
+      <!-- Content injected by JS -->
+    </main>
+
+    <div class="footer-note">
+      <div>All figures here are based on pre-aggregated internal CSVs. Use alongside on-ground feedback and booth-level lists.</div>
+      <button type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top</button>
+    </div>
   </div>
 
-  <!-- Overview -->
-  <section id="tab-overview" class="tab-panel active">
-    <div class="panel-header">
-      <div>
-        <h2>Overview – deletions at a glance</h2>
-        <p>
-          Core metrics from the cleaned roll deletion data. The cards below come directly
-          from <code>overview_metrics.csv</code>.
-        </p>
-      </div>
-      <div class="panel-header-right">
-        <span class="pill">Source: ECI rolls, Bihar 2024–25</span>
-      </div>
-    </div>
+  <script>
+    const APP_STATE = {
+      raw: {},
+      charts: {},
+      currentTab: 'overview',
+      loaded: false,
+      loadError: null
+    };
 
-    <div id="overview-error" class="error-message" style="display:none;"></div>
-
-    <div class="grid grid-4" id="overview-metric-cards">
-      <!-- Filled by JS from overview_metrics.csv -->
-    </div>
-
-    <div class="grid grid-2" style="margin-top:0.9rem;">
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          <span>Gender share of deletions</span>
-          <span class="chart-legend-inline">
-            <span>Female</span>
-            <span>Male</span>
-          </span>
-        </div>
-        <p class="chart-sub">
-          Splits the total deletion pool using the female share from the overview metrics CSV.
-        </p>
-        <canvas id="overviewGenderChart" height="120"></canvas>
-        <p class="note">
-          <strong>Interpretation:</strong> This reflects the composition of deletions, not turnout.
-        </p>
-      </div>
-
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          <span>High-deletion booths</span>
-          <span class="chart-legend-inline"><span>Share of booths above internal high-risk cut-off</span></span>
-        </div>
-        <p class="chart-sub">
-          Uses <code>share_high_del_booths_pct</code> from the overview metrics to flag the extreme tail.
-        </p>
-        <canvas id="overviewHighRiskChart" height="120"></canvas>
-        <p class="note">
-          These are the booths in the top deletion band. Exact thresholds are specified in the methods tab.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- AC & Outcomes -->
-  <section id="tab-ac-outcomes" class="tab-panel">
-    <div class="panel-header">
-      <div>
-        <h2>Assembly constituencies &amp; alliance outcomes</h2>
-        <p>
-          Links deletions per booth and total deletions with alliance outcomes in 2024 LS,
-          using <code>elections_summary_working.csv</code>.
-        </p>
-      </div>
-      <div class="panel-header-right">
-        <span class="pill">Unit: AC (n = 243)</span>
-      </div>
-    </div>
-
-    <div id="ac-outcomes-error" class="error-message" style="display:none;"></div>
-
-    <div class="grid grid-2">
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          <span>Total deletions by LS alliance (2024)</span>
-        </div>
-        <p class="chart-sub">
-          Sums deletions across ACs grouped by <code>alliance_2024_ls</code> (NDA, INDIA, OTHER).
-        </p>
-        <canvas id="acAllianceTotalsChart" height="150"></canvas>
-        <p class="note">
-          This is deletions in the roll, not votes polled. It gives a sense of how deletion volume
-          sits across alliances.
-        </p>
-      </div>
-
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          <span>Deletions per booth vs total deletions</span>
-          <span class="chart-legend-inline">
-            <span>NDA</span><span>INDIA</span><span>Other</span>
-          </span>
-        </div>
-        <p class="chart-sub">
-          Each point is an AC: x-axis is deletions per booth, y-axis is total deletions, colour-coded by alliance.
-        </p>
-        <canvas id="acScatterChart" height="150"></canvas>
-        <p class="note">
-          Hover over points in the live dashboard to see AC names; outliers at the top right are high-risk
-          for both density and volume.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gender & Religion -->
-  <section id="tab-gender-religion" class="tab-panel">
-    <div class="panel-header">
-      <div>
-        <h2>Gender &amp; religion profile of deletions</h2>
-        <p>
-          Summaries from <code>religion_overall.csv</code>, <code>religion_gender_crosstab.csv</code>,
-          <code>religion_by_band.csv</code>, and <code>booth-gender-religion.csv</code>.
-        </p>
-      </div>
-      <div class="panel-header-right">
-        <span class="pill">Unit: deleted electors</span>
-      </div>
-    </div>
-
-    <div id="gender-religion-error" class="error-message" style="display:none;"></div>
-
-    <div class="grid grid-3">
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          <span>Deletions by religion</span>
-        </div>
-        <p class="chart-sub">
-          Overall religious composition of deleted electors.
-        </p>
-        <canvas id="religionOverallChart" height="150"></canvas>
-        <p class="note">
-          Sourced from <code>religion_overall.csv</code> (counts and shares).
-        </p>
-      </div>
-
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          <span>Gender share within each religion</span>
-        </div>
-        <p class="chart-sub">
-          Female vs male share of deletions within each religious category.
-        </p>
-        <canvas id="religionGenderChart" height="150"></canvas>
-        <p class="note">
-          <code>share_female</code> and <code>share_male</code> are row-wise shares by religion.
-        </p>
-      </div>
-
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          <span>Religious mix across deletion bands</span>
-        </div>
-        <p class="chart-sub">
-          For low, medium, and high deletion bands (by booth counts), shows religion shares.
-        </p>
-        <canvas id="religionBandChart" height="150"></canvas>
-        <p class="note">
-          Bands and thresholds are specified in the methods tab. Use this to see whether high-deletion
-          bands skew differently by religion.
-        </p>
-      </div>
-    </div>
-
-    <div class="card soft-accent" style="margin-top:0.9rem;">
-      <div class="card-title">Booth-level cross-tab</div>
-      <div class="card-sub">
-        The file <code>booth-gender-religion.csv</code> holds booth-wise counts by gender and religion.
-        For browser performance, the dashboard aggregates this file into the summary charts above rather
-        than plotting all 1.5 lakh rows directly.
-      </div>
-    </div>
-  </section>
-
-  <!-- Caste & Reservation -->
-  <section id="tab-caste-reservation" class="tab-panel">
-    <div class="panel-header">
-      <div>
-        <h2>Caste structure &amp; reservation status by AC</h2>
-        <p>
-          Uses Bihar caste survey shares at AC level (<code>bcs_ac_shares_estimated.csv</code>), reservation
-          status (<code>ac_reserved_from_name.csv</code>), and alliance outcomes
-          (<code>elections_summary_working.csv</code>).
-        </p>
-      </div>
-      <div class="panel-header-right">
-        <span class="pill">Unit: AC (shares, not head-counts)</span>
-      </div>
-    </div>
-
-    <div id="caste-reservation-error" class="error-message" style="display:none;"></div>
-
-    <div class="grid grid-2">
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          <span>Average caste shares by LS alliance</span>
-        </div>
-        <p class="chart-sub">
-          For ACs won by each alliance in 2024 LS, shows average share of EBC, OBC, SC, ST, and “forward” groups.
-        </p>
-        <canvas id="casteAllianceChart" height="160"></canvas>
-        <p class="note">
-          Shares are derived from the Bihar caste survey and mapped to ACs. They should be read as composition,
-          not as exact counts.
-        </p>
-      </div>
-
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          <span>Reservation mix across ACs</span>
-        </div>
-        <p class="chart-sub">
-          Distribution of <code>reserved_type</code> (GEN, SC, ST, etc.) across all 243 ACs.
-        </p>
-        <canvas id="reservationPieChart" height="160"></canvas>
-        <p class="note">
-          Reservation type is taken directly from the AC metadata derived from ECI / roll naming conventions.
-        </p>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:0.9rem;">
-      <div class="card-title">Reading these visuals with caution</div>
-      <div class="card-sub">
-        This tab is meant for pattern-finding, not deterministic claims. For example, a higher average EBC share
-        in one alliance’s ACs does not by itself imply “EBC vote banks” – that would require turnout and vote
-        share analysis layered on top of this structural picture.
-      </div>
-    </div>
-  </section>
-
-  <!-- Quartiles -->
-  <section id="tab-quartiles" class="tab-panel">
-    <div class="panel-header">
-      <div>
-        <h2>Deletion quartiles by AC</h2>
-        <p>
-          ACs grouped into quartiles by deletion intensity, with LS alliance win rates.
-          Driven by <code>elections_quartiles_2024_by_deletion.csv</code>.
-        </p>
-      </div>
-      <div class="panel-header-right">
-        <span class="pill pill-danger">High-deletion bands need scrutiny</span>
-      </div>
-    </div>
-
-    <div id="quartiles-error" class="error-message" style="display:none;"></div>
-
-    <div class="grid grid-2">
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          <span>Alliance win rates by deletion quartile</span>
-        </div>
-        <p class="chart-sub">
-          For each quartile of ACs by deletion volume, shows LS win rate of NDA and INDIA blocs.
-        </p>
-        <canvas id="quartilesAllianceChart" height="170"></canvas>
-        <p class="note">
-          This is a simple descriptive statistic: “of ACs in this quartile, what proportion were won by each alliance?”
-        </p>
-      </div>
-
-      <div class="card soft-danger">
-        <div class="card-title">Number of ACs in each quartile</div>
-        <div class="card-sub">
-          Pulled from <code>n_ac</code> in the quartiles CSV.
-        </div>
-        <table class="small" id="quartiles-table">
-          <thead>
-            <tr>
-              <th>Quartile</th>
-              <th style="text-align:right;">ACs</th>
-              <th style="text-align:right;">NDA win rate</th>
-              <th style="text-align:right;">INDIA win rate</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Filled by JS -->
-          </tbody>
-        </table>
-        <p class="note">
-          Quartiles are constructed on deletions, not on electorate size. The logic is documented in the methods tab.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Methods & Notes -->
-  <section id="tab-methods" class="tab-panel">
-    <div class="panel-header">
-      <div>
-        <h2>Methods, data sources, and cautions</h2>
-        <p>
-          A compact record of what each CSV represents, and how it has been used here. You can expand or edit
-          this text to match your final paper.
-        </p>
-      </div>
-      <div class="panel-header-right">
-        <span class="pill">Change log: manual</span>
-      </div>
-    </div>
-
-    <div class="grid grid-2">
-      <div class="card">
-        <div class="card-title">Core deletions and AC summaries</div>
-        <div class="card-sub">
-          <ul style="margin:0.3rem 0 0.1rem 1rem; padding:0; font-size:0.78rem; color:var(--muted);">
-            <li><code>overview_metrics.csv</code> – total deletions, number of booths, female share of deletions, and share of high-deletion booths.</li>
-            <li><code>elections_summary_working.csv</code> – one row per AC with alliance labels for 2020 VS and 2024 LS, number of booths, deletions, and deletions per booth.</li>
-            <li><code>elections_quartiles_2024_by_deletion.csv</code> – quartile labels, alliance win rates by quartile, and the number of ACs in each band.</li>
-          </ul>
-          <p style="margin-top:0.4rem; font-size:0.78rem; color:var(--muted);">
-            All AC-level deletions are based on the cleaned roll data, not on turnout or votes cast.
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Religion, gender, and booth-level structure</div>
-        <div class="card-sub">
-          <ul style="margin:0.3rem 0 0.1rem 1rem; padding:0; font-size:0.78rem; color:var(--muted);">
-            <li><code>religion_overall.csv</code> – overall counts and percentage shares of deletions by broad religious category.</li>
-            <li><code>religion_gender_crosstab.csv</code> – deletions by religion and gender, with row-wise gender shares.</li>
-            <li><code>religion_by_band.csv</code> – religious composition within low, medium, and high deletion bands (by booth count).</li>
-            <li><code>booth-gender-religion.csv</code> – raw booth-level counts of deletions by gender and religion, used here only in aggregated form.</li>
-          </ul>
-          <p style="margin-top:0.4rem; font-size:0.78rem; color:var(--muted);">
-            Bands and thresholds are defined upstream in the data preparation scripts; this dashboard does not recompute them in the browser.
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Caste survey mapping and reservation</div>
-        <div class="card-sub">
-          <ul style="margin:0.3rem 0 0.1rem 1rem; padding:0; font-size:0.78rem; color:var(--muted);">
-            <li><code>bcs_ac_shares_estimated.csv</code> – estimated caste category shares (EBC, OBC, SC, ST, “forward”) for each AC, mapped from the Bihar caste survey.</li>
-            <li><code>ac_reserved_from_name.csv</code> – reservation type by AC (GEN / SC / ST / others), parsed from the constituency naming / ECI documentation.</li>
-          </ul>
-          <p style="margin-top:0.4rem; font-size:0.78rem; color:var(--muted);">
-            All caste measures are structural shares at AC level. Inferring actual political behaviour from these
-            requires further modelling and, ideally, survey or booth-level voting data.
-          </p>
-        </div>
-      </div>
-
-      <div class="card soft-danger">
-        <div class="card-title">Key cautions for interpretation</div>
-        <div class="card-sub" style="font-size:0.78rem; color:var(--muted);">
-          <ul style="margin:0.3rem 0 0.1rem 1rem; padding:0;">
-            <li>These are deletions from the electoral roll, not vote counts or turnout levels.</li>
-            <li>Alliance labels are simplified to NDA / INDIA / OTHER for descriptive clarity.</li>
-            <li>The Bihar caste survey provides compositional information; it does not encode partisan preference.</li>
-            <li>High deletion quartiles are flags for further investigation, not proof of manipulation on their own.</li>
-          </ul>
-          <p style="margin-top:0.4rem;">
-            Treat this dashboard as the descriptive front-end to a deeper paper. Any strong causal claims should be
-            made only in that fuller analytical context.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<script>
-  // --- Utility functions ----------------------------------------------------
-
-  function parseCSV(text) {
-    const lines = text.trim().split(/\r?\n/);
-    const headers = lines[0].split(",");
-    return lines.slice(1).filter(l => l.trim().length > 0).map(line => {
-      const cols = line.split(",");
-      const obj = {};
-      headers.forEach((h, idx) => {
-        obj[h] = cols[idx] !== undefined ? cols[idx] : "";
-      });
-      return obj;
-    });
-  }
-
-  function loadCSV(path) {
-    return fetch(path)
-      .then(resp => {
-        if (!resp.ok) {
-          throw new Error("HTTP " + resp.status + " for " + path);
-        }
-        return resp.text();
-      })
-      .then(text => parseCSV(text));
-  }
-
-  function safeNumber(v) {
-    const n = parseFloat(v);
-    return isNaN(n) ? 0 : n;
-  }
-
-  function groupBy(arr, keyFn) {
-    const map = {};
-    arr.forEach(row => {
-      const k = keyFn(row);
-      if (!map[k]) map[k] = [];
-      map[k].push(row);
-    });
-    return map;
-  }
-
-  function sum(arr, numFn) {
-    return arr.reduce((acc, row) => acc + safeNumber(numFn(row)), 0);
-  }
-
-  function mean(arr, numFn) {
-    if (!arr.length) return 0;
-    return sum(arr, numFn) / arr.length;
-  }
-
-  // --- Tabs -----------------------------------------------------------------
-
-  function initTabs() {
-    const buttons = document.querySelectorAll(".tab-button");
-    const panels = document.querySelectorAll(".tab-panel");
-
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const tab = btn.getAttribute("data-tab");
-        buttons.forEach(b => b.classList.toggle("active", b === btn));
-        panels.forEach(p => {
-          p.classList.toggle("active", p.id === "tab-" + tab);
+    function loadCSV(path) {
+      return new Promise((resolve, reject) => {
+        Papa.parse(path, {
+          download: true,
+          header: true,
+          dynamicTyping: true,
+          skipEmptyLines: true,
+          complete: (results) => resolve(results.data || []),
+          error: (err) => reject(err)
         });
       });
-    });
-  }
-
-  // --- Chart helpers --------------------------------------------------------
-
-  let charts = {};
-
-  function destroyChart(id) {
-    if (charts[id]) {
-      charts[id].destroy();
-      delete charts[id];
-    }
-  }
-
-  // --- Builders -------------------------------------------------------------
-
-  function buildOverview(overviewMetrics) {
-    const errEl = document.getElementById("overview-error");
-    const cardsContainer = document.getElementById("overview-metric-cards");
-
-    if (!overviewMetrics || !overviewMetrics.length) {
-      errEl.textContent = "overview_metrics.csv not found or empty.";
-      errEl.style.display = "block";
-      return;
     }
 
-    errEl.style.display = "none";
-    cardsContainer.innerHTML = "";
-
-    const metrics = {};
-    overviewMetrics.forEach(row => {
-      metrics[row.metric] = safeNumber(row.value);
-    });
-
-    const totalDel = metrics["total_deletions"] || 0;
-    const booths = metrics["booths"] || 0;
-    const femalePct = metrics["female_pct_del"] || 0;
-    const highBoothShare = metrics["share_high_del_booths_pct"] || 0;
-
-    const cards = [
-      {
-        title: "Total deletions",
-        value: totalDel.toLocaleString("en-IN"),
-        sub: "Deleted electors across Bihar",
-        accent: true
-      },
-      {
-        title: "Booths with any deletion",
-        value: booths.toLocaleString("en-IN"),
-        sub: "Booths counted in this analysis"
-      },
-      {
-        title: "Female share of deletions",
-        value: femalePct.toFixed(1) + " %",
-        sub: "Among all deleted electors",
-        softAccent: true
-      },
-      {
-        title: "High-deletion booths",
-        value: highBoothShare.toFixed(1) + " %",
-        sub: "Booths above internal high-risk threshold",
-        softDanger: true
+    function formatNumber(x) {
+      if (x === null || x === undefined || isNaN(x)) return '–';
+      try {
+        return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(x);
+      } catch (e) {
+        return String(Math.round(x));
       }
-    ];
+    }
 
-    cards.forEach(card => {
-      const div = document.createElement("div");
-      div.className = "card" +
-        (card.accent ? " accent" : "") +
-        (card.softDanger ? " soft-danger" : "") +
-        (card.softAccent ? " soft-accent" : "");
-      div.innerHTML = `
-        <div class="card-title">${card.title}</div>
-        <div class="card-value">${card.value}</div>
-        <div class="card-sub">${card.sub}</div>
+    function formatPercent(x, digits = 1) {
+      if (x === null || x === undefined || isNaN(x)) return '–';
+      return x.toFixed(digits) + '%';
+    }
+
+    function clearCharts() {
+      Object.keys(APP_STATE.charts).forEach(key => {
+        try {
+          APP_STATE.charts[key].destroy();
+        } catch (e) {}
+      });
+      APP_STATE.charts = {};
+    }
+
+    function buildChart(canvasId, key, config) {
+      const el = document.getElementById(canvasId);
+      if (!el) return null;
+      const ctx = el.getContext('2d');
+      if (APP_STATE.charts[key]) {
+        try { APP_STATE.charts[key].destroy(); } catch (e) {}
+      }
+      const chart = new Chart(ctx, config);
+      APP_STATE.charts[key] = chart;
+      return chart;
+    }
+
+    function computeDerived() {
+      const raw = APP_STATE.raw;
+      const d = {};
+
+      // Overview metrics
+      const ov = raw.overview_metrics || [];
+      function getMetric(name) {
+        const row = ov.find(r => String(r.metric).trim() === name);
+        return row ? Number(row.value) : null;
+      }
+      d.overview = {
+        totalDeletions: getMetric('total_deletions'),
+        booths: getMetric('booths'),
+        femalePctDel: getMetric('female_pct_del'),
+        shareHighDelBoothsPct: getMetric('share_high_del_booths_pct')
+      };
+
+      // Gender totals from religion_gender_crosstab
+      const relGen = raw.religion_gender_crosstab || [];
+      let female = 0, male = 0, other = 0;
+      relGen.forEach(row => {
+        female += Number(row.female || 0);
+        male += Number(row.male || 0);
+        other += Number(row.unknown || 0);
+      });
+      const totalGen = female + male + other;
+      d.genderTotals = {
+        female,
+        male,
+        other,
+        femalePct: totalGen ? 100 * female / totalGen : null,
+        malePct: totalGen ? 100 * male / totalGen : null,
+        otherPct: totalGen ? 100 * other / totalGen : null,
+        total: totalGen
+      };
+
+      // High-level district summaries from district_demography_summary
+      const demo = raw.district_demography_summary || [];
+      if (demo.length) {
+        const byDel = [...demo].sort((a, b) => Number(b.deletions_2024 || b.deletions || 0) - Number(a.deletions_2024 || a.deletions || 0));
+        d.topDistrictsByDeletion = byDel.slice(0, 10).map(r => ({
+          name: r.district_name,
+          deletions: Number(r.deletions_2024 || r.deletions || 0),
+          delPerBooth: Number(r.del_per_booth || 0)
+        }));
+      } else {
+        d.topDistrictsByDeletion = [];
+      }
+
+      // Rural vs urban totals (state-level) from district_rural_urban_profile
+      const ru = raw.district_rural_urban_profile || [];
+      if (ru.length) {
+        let totalUrban = 0, totalRural = 0;
+        ru.forEach(r => {
+          totalUrban += Number(r.proj_2025_urban_pop || 0);
+          totalRural += Number(r.proj_2025_rural_pop || 0);
+        });
+        const total = totalUrban + totalRural;
+        d.ruralUrbanTotals = {
+          ruralPop: totalRural,
+          urbanPop: totalUrban,
+          ruralPct: total ? 100 * totalRural / total : null,
+          urbanPct: total ? 100 * totalUrban / total : null,
+          totalPop: total
+        };
+      } else {
+        d.ruralUrbanTotals = null;
+      }
+
+      // GDP distribution from district_gdp_profile
+      const gdpRows = raw.district_gdp_profile || [];
+      if (gdpRows.length) {
+        const sortedGdp = [...gdpRows].sort((a, b) =>
+          Number(b.per_capita_gddp_2021_22_constant_inr || 0) -
+          Number(a.per_capita_gddp_2021_22_constant_inr || 0)
+        );
+        d.gdpTop = sortedGdp.slice(0, 10).map(r => ({
+          name: r.district_name,
+          pcGddp: Number(r.per_capita_gddp_2021_22_constant_inr || 0)
+        }));
+      } else {
+        d.gdpTop = [];
+      }
+
+      // Quartiles (AC-level) from elections_quartiles_2024_by_deletion
+      d.quartiles = raw.elections_quartiles_2024_by_deletion || [];
+
+      APP_STATE.derived = d;
+    }
+
+    // --- RENDER FUNCTIONS ---
+
+    function renderOverview() {
+      const d = APP_STATE.derived;
+      const ov = d.overview || {};
+      const g = d.genderTotals || {};
+      const topDist = d.topDistrictsByDeletion || [];
+      const el = document.getElementById('main');
+
+      el.innerHTML = `
+        <div class="grid grid-3" style="margin-bottom:1rem;">
+          <div class="metric">
+            <span class="metric-pill">Scale</span>
+            <div class="metric-label">Total deletions (all ACs)</div>
+            <div class="metric-value">${formatNumber(ov.totalDeletions)}</div>
+            <p class="metric-note">Sum of voter deletions across all Assembly constituencies in Bihar in the 2024 roll.</p>
+          </div>
+          <div class="metric">
+            <span class="metric-pill">Intensity</span>
+            <div class="metric-label">Average deletions per booth</div>
+            <div class="metric-value">${
+              ov.totalDeletions && ov.booths
+                ? Math.round(ov.totalDeletions / ov.booths)
+                : '–'
+            }</div>
+            <p class="metric-note">Approximate deletions per polling booth, derived from total deletions and total booths.</p>
+          </div>
+          <div class="metric">
+            <span class="metric-pill">Gender skew</span>
+            <div class="metric-label">Female share of deletions</div>
+            <div class="metric-value">${formatPercent(ov.femalePctDel || g.femalePct || 0)}</div>
+            <p class="metric-note">Share of deletions recorded as women, based on aggregated gender–religion cross-tab.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Top districts by deletions</h3>
+              <span class="sub">Using 2024 voter roll deletions</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-overview-districts"></canvas></div>
+              <div class="takeaway">
+                This chart highlights districts with the highest absolute number of deletions. It can be read alongside the
+                more detailed caste, gender and border analyses in later tabs.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Deletions per booth – top districts</h3>
+              <span class="sub">Normalised by number of booths</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-overview-delperbooth"></canvas></div>
+              <div class="takeaway">
+                Deletions per booth provide a more intensity-focused view than absolute counts. High values here flag
+                districts where deletions are concentrated relative to the polling infrastructure.
+              </div>
+            </div>
+          </div>
+        </div>
       `;
-      cardsContainer.appendChild(div);
-    });
 
-    // Gender donut
-    destroyChart("overviewGenderChart");
-    const femaleShare = femalePct;
-    const maleShare = Math.max(0, 100 - femaleShare);
-    const ctxG = document.getElementById("overviewGenderChart").getContext("2d");
-    charts["overviewGenderChart"] = new Chart(ctxG, {
-      type: "doughnut",
-      data: {
-        labels: ["Female deletions", "Male deletions"],
-        datasets: [{
-          data: [femaleShare, maleShare]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: ctx => ctx.label + ": " + ctx.parsed.toFixed(1) + " %"
-            }
-          }
-        },
-        cutout: "65%"
-      }
-    });
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
+      const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
 
-    // High-risk gauge (simple bar)
-    destroyChart("overviewHighRiskChart");
-    const ctxH = document.getElementById("overviewHighRiskChart").getContext("2d");
-    charts["overviewHighRiskChart"] = new Chart(ctxH, {
-      type: "bar",
-      data: {
-        labels: ["High-deletion booths"],
-        datasets: [{
-          data: [highBoothShare],
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: ctx => ctx.parsed.toFixed(1) + " % of booths"
-            }
-          }
+      const labels = topDist.map(r => r.name);
+      const delVals = topDist.map(r => r.deletions);
+      const dpbVals = topDist.map(r => r.delPerBooth);
+
+      buildChart('chart-overview-districts', 'overview-districts', {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Deletions (2024)',
+            data: delVals,
+            backgroundColor: accent
+          }]
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: Math.max(10, Math.ceil(highBoothShare / 10) * 10),
-            ticks: { callback: v => v + " %" }
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: {
+              ticks: { color: '#6b7280' },
+              grid: { color: 'rgba(209,213,219,1)' }
+            },
+            y: {
+              ticks: { color: '#374151' }
+            }
+          },
+          plugins: {
+            legend: { display: false }
           }
         }
-      }
-    });
-  }
+      });
 
-  function buildACOutcomes(electionsSummary) {
-    const errEl = document.getElementById("ac-outcomes-error");
-    if (!electionsSummary || !electionsSummary.length) {
-      errEl.textContent = "elections_summary_working.csv not found or empty.";
-      errEl.style.display = "block";
-      return;
+      buildChart('chart-overview-delperbooth', 'overview-dpb', {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Deletions per booth',
+            data: dpbVals,
+            backgroundColor: ndaColor
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: {
+              ticks: { color: '#6b7280' },
+              grid: { color: 'rgba(209,213,219,1)' }
+            },
+            y: {
+              ticks: { color: '#374151' }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
     }
-    errEl.style.display = "none";
 
-    // Alliance totals
-    const allianceGroups = groupBy(electionsSummary, r => (r.alliance_2024_ls || "UNKNOWN").toUpperCase());
-    const alliances = Object.keys(allianceGroups);
-    const allianceTotals = alliances.map(a =>
-      sum(allianceGroups[a], r => r.deletions)
-    );
+    function renderDeletions() {
+      const raw = APP_STATE.raw;
+      const el = document.getElementById('main');
+      const ac = raw.ac_correlation_ready || raw.elections_summary_working || [];
 
-    destroyChart("acAllianceTotalsChart");
-    const ctx1 = document.getElementById("acAllianceTotalsChart").getContext("2d");
-    charts["acAllianceTotalsChart"] = new Chart(ctx1, {
-      type: "bar",
-      data: {
-        labels: alliances,
-        datasets: [{
-          label: "Total deletions",
-          data: allianceTotals
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: ctx => ctx.parsed.toLocaleString("en-IN") + " deletions"
-            }
-          }
+      const sorted = [...ac].sort((a, b) => Number(b.del_per_booth || 0) - Number(a.del_per_booth || 0));
+      const top = sorted.slice(0, 20);
+
+      const flipped = ac.filter(r => String(r.flipped_alliance) === 'True' || r.flipped_alliance === true);
+      const stable = ac.filter(r => !flipped.includes(r));
+
+      function avgDelPerBooth(list) {
+        if (!list.length) return null;
+        const sum = list.reduce((acc, r) => acc + Number(r.del_per_booth || 0), 0);
+        return sum / list.length;
+      }
+
+      el.innerHTML = `
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3>ACs with highest deletions per booth</h3>
+              <span class="sub">Top 20 Assembly constituencies</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-del-ac-top"></canvas></div>
+              <div class="takeaway">
+                This chart shows Assembly constituencies with the highest deletions per booth, using the correlation-ready file.
+                It is a starting point for detailed political and caste reading, not a conclusion.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Average deletions per booth: flipped vs stable ACs</h3>
+              <span class="sub">Using 2020–2024 alliance changes</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-del-flip"></canvas></div>
+              <div class="takeaway">
+                Flipped ACs are those where the alliance holding the seat changes between 2020 and 2024. Any difference in
+                average deletions per booth between flipped and stable ACs should be interpreted cautiously.
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
+      const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
+
+      const labels = top.map(r => r.ac_name || `AC ${r.ac_number}`);
+      const vals = top.map(r => Number(r.del_per_booth || 0));
+
+      buildChart('chart-del-ac-top', 'del-ac-top', {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Deletions per booth',
+            data: vals,
+            backgroundColor: accent
+          }]
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: v => v.toLocaleString("en-IN")
-            }
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            y: { ticks: { color: '#374151' } }
+          },
+          plugins: {
+            legend: { display: false }
           }
         }
-      }
-    });
+      });
 
-    // Scatter: del_per_booth vs deletions
-    const ndaPoints = [];
-    const indiaPoints = [];
-    const otherPoints = [];
+      buildChart('chart-del-flip', 'del-flip', {
+        type: 'bar',
+        data: {
+          labels: ['Flipped ACs', 'Stable ACs'],
+          datasets: [{
+            data: [avgDelPerBooth(flipped) || 0, avgDelPerBooth(stable) || 0],
+            backgroundColor: [accent, ndaColor]
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            x: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
 
-    electionsSummary.forEach(r => {
-      const alliance = (r.alliance_2024_ls || "OTHER").toUpperCase();
-      const x = safeNumber(r.del_per_booth);
-      const y = safeNumber(r.deletions);
-      if (!x && !y) return;
-      const point = { x, y };
-      if (alliance === "NDA") ndaPoints.push(point);
-      else if (alliance === "INDIA") indiaPoints.push(point);
-      else otherPoints.push(point);
-    });
+    function renderDemographic() {
+      const d = APP_STATE.derived;
+      const el = document.getElementById('main');
+      const ru = d.ruralUrbanTotals;
+      const demo = APP_STATE.raw.district_demography_summary || [];
 
-    destroyChart("acScatterChart");
-    const ctx2 = document.getElementById("acScatterChart").getContext("2d");
-    charts["acScatterChart"] = new Chart(ctx2, {
-      type: "scatter",
-      data: {
-        datasets: [
-          { label: "NDA", data: ndaPoints },
-          { label: "INDIA", data: indiaPoints },
-          { label: "OTHER", data: otherPoints }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: ctx => {
-                const p = ctx.raw;
-                return `del/booth: ${p.x.toFixed(1)}, deletions: ${p.y.toLocaleString("en-IN")}`;
+      el.innerHTML = `
+        <div class="grid grid-2" style="margin-bottom:1rem;">
+          <div class="card">
+            <div class="card-header">
+              <h3>Rural vs urban population (projected 2025)</h3>
+              <span class="sub">Aggregated across all districts</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-dem-ru"></canvas></div>
+              <div class="takeaway">
+                This chart uses district-level projections to show the split between rural and urban population for Bihar as a
+                whole. It provides the context within which deletions are occurring.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Districts by urbanisation level</h3>
+              <span class="sub">Projected 2025 urban share of population</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-dem-urban-share"></canvas></div>
+              <div class="takeaway">
+                Districts are ordered by projected urban share of population, not by deletions. Combining this with the
+                deletions per booth and gender tabs helps identify patterns in more urbanised districts.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>District demographic and deletion profile</h3>
+            <span class="sub">Literacy, density and deletions per booth</span>
+          </div>
+          <div class="card-body">
+            <div class="viz"><canvas id="chart-dem-literacy-del"></canvas></div>
+            <div class="takeaway">
+              This scatter plot places deletions per booth against literacy rates at district level. The purpose is to help
+              detect whether deletions are systematically higher in districts with particular demographic characteristics.
+            </div>
+          </div>
+        </div>
+      `;
+
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
+      const indiaColor = styles.getPropertyValue('--india-color').trim() || '#16a34a';
+
+      // Rural vs urban chart
+      const ruLabels = ['Rural', 'Urban'];
+      const ruVals = [
+        ru ? ru.ruralPop || 0 : 0,
+        ru ? ru.urbanPop || 0 : 0
+      ];
+
+      buildChart('chart-dem-ru', 'dem-ru', {
+        type: 'doughnut',
+        data: {
+          labels: ruLabels,
+          datasets: [{
+            data: ruVals,
+            backgroundColor: [accent, indiaColor]
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { position: 'bottom', labels: { usePointStyle: true, color: '#374151' } }
+          }
+        }
+      });
+
+      // Urbanisation share by district
+      const ruProfile = APP_STATE.raw.district_rural_urban_profile || [];
+      const sortedRu = [...ruProfile].sort((a, b) =>
+        Number(b.proj_2025_urban_pct || 0) - Number(a.proj_2025_urban_pct || 0)
+      );
+      const ruTop = sortedRu.slice(0, 20);
+      const labelsUrban = ruTop.map(r => r.district_name);
+      const valsUrban = ruTop.map(r => Number(r.proj_2025_urban_pct || 0));
+
+      buildChart('chart-dem-urban-share', 'dem-urban-share', {
+        type: 'bar',
+        data: {
+          labels: labelsUrban,
+          datasets: [{
+            label: 'Urban share of population (2025, %)',
+            data: valsUrban,
+            backgroundColor: accent
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: {
+              beginAtZero: true,
+              max: 100,
+              ticks: { color: '#6b7280', callback: v => v + '%' },
+              grid: { color: 'rgba(209,213,219,1)' }
+            },
+            y: {
+              ticks: { color: '#374151' }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+
+      // Literacy vs deletions per booth – scatter
+      const scatterData = demo.map(r => ({
+        x: Number(r.census_2011_literacy_rate || 0),
+        y: Number(r.del_per_booth || 0),
+        label: r.district_name
+      }));
+
+      buildChart('chart-dem-literacy-del', 'dem-lit-del', {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: 'Districts',
+            data: scatterData,
+            backgroundColor: accent,
+            parsing: false
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              title: { display: true, text: 'Literacy rate (%)' },
+              ticks: { color: '#6b7280' },
+              grid: { color: 'rgba(209,213,219,1)' }
+            },
+            y: {
+              title: { display: true, text: 'Deletions per booth' },
+              ticks: { color: '#6b7280' },
+              grid: { color: 'rgba(209,213,219,1)' }
+            }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => {
+                  const p = ctx.raw;
+                  return `${p.label}: literacy ${p.x.toFixed(1)}%, deletions/booth ${p.y.toFixed(1)}`;
+                }
               }
             }
           }
-        },
-        scales: {
-          x: {
-            title: { display: true, text: "Deletions per booth" }
-          },
-          y: {
-            title: { display: true, text: "Total deletions" },
-            ticks: {
-              callback: v => v.toLocaleString("en-IN")
-            }
-          }
         }
-      }
-    });
-  }
-
-  function buildGenderReligion(religionOverall, religionGender, religionBand) {
-    const errEl = document.getElementById("gender-religion-error");
-    if (!religionOverall || !religionOverall.length ||
-        !religionGender || !religionGender.length ||
-        !religionBand || !religionBand.length) {
-      errEl.textContent = "Religion/gender CSVs missing or empty. Check religion_overall.csv, religion_gender_crosstab.csv, and religion_by_band.csv in /data.";
-      errEl.style.display = "block";
-      return;
+      });
     }
-    errEl.style.display = "none";
 
-    // Pie: religion overall
-    destroyChart("religionOverallChart");
-    const labelsOverall = religionOverall.map(r => r.religion);
-    const sharesOverall = religionOverall.map(r => safeNumber(r.share_pct));
-    const ctxR1 = document.getElementById("religionOverallChart").getContext("2d");
-    charts["religionOverallChart"] = new Chart(ctxR1, {
-      type: "pie",
-      data: {
-        labels: labelsOverall,
-        datasets: [{ data: sharesOverall }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.label}: ${ctx.parsed.toFixed(1)} %`
-            }
-          }
-        }
-      }
-    });
+    function renderTemporal() {
+      const delta = APP_STATE.raw.ac_deletions_change_2020_2024 || [];
+      const el = document.getElementById('main');
 
-    // Gender shares within religion
-    destroyChart("religionGenderChart");
-    const labelsRG = religionGender.map(r => r.religion);
-    const femaleShares = religionGender.map(r => safeNumber(r.share_female));
-    const maleShares = religionGender.map(r => safeNumber(r.share_male));
-    const ctxRG = document.getElementById("religionGenderChart").getContext("2d");
-    charts["religionGenderChart"] = new Chart(ctxRG, {
-      type: "bar",
-      data: {
-        labels: labelsRG,
-        datasets: [
-          { label: "Female share", data: femaleShares },
-          { label: "Male share", data: maleShares }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.dataset.label}: ${ctx.parsed.toFixed(1)} %`
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100,
-            ticks: { callback: v => v + " %" }
-          }
-        }
-      }
-    });
+      const sorted = [...delta].sort((a, b) =>
+        Number(b.pct_change_del_per_booth || 0) - Number(a.pct_change_del_per_booth || 0)
+      );
+      const topInc = sorted.slice(0, 15);
+      const topDec = sorted.slice(-15).reverse();
 
-    // Band composition
-    destroyChart("religionBandChart");
-    const labelsBand = religionBand.map(r => r.band);
-    const hinduBand = religionBand.map(r => safeNumber(r.Hindu_pct));
-    const muslimBand = religionBand.map(r => safeNumber(r.Muslim_pct));
-    const unknownBand = religionBand.map(r => safeNumber(r.Unknown_pct));
-    const ctxRB = document.getElementById("religionBandChart").getContext("2d");
-    charts["religionBandChart"] = new Chart(ctxRB, {
-      type: "bar",
-      data: {
-        labels: labelsBand,
-        datasets: [
-          { label: "Hindu %", data: hinduBand, stack: "stack1" },
-          { label: "Muslim %", data: muslimBand, stack: "stack1" },
-          { label: "Unknown %", data: unknownBand, stack: "stack1" }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.dataset.label}: ${ctx.parsed.toFixed(1)} %`
-            }
-          }
-        },
-        scales: {
-          x: { stacked: true },
-          y: {
-            stacked: true,
-            beginAtZero: true,
-            max: 100,
-            ticks: { callback: v => v + " %" }
-          }
-        }
-      }
-    });
-  }
+      el.innerHTML = `
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Largest increases in deletions per booth</h3>
+              <span class="sub">2020 to 2024, by Assembly constituency</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-temp-inc"></canvas></div>
+              <div class="takeaway">
+                ACs at the top of this list have the sharpest percentage increase in deletions per booth. These deserve closer,
+                qualitative scrutiny before interpreting intent.
+              </div>
+            </div>
+          </div>
 
-  function buildCasteReservation(electionsSummary, bcsShares, acReserved) {
-    const errEl = document.getElementById("caste-reservation-error");
-    if (!electionsSummary || !electionsSummary.length ||
-        !bcsShares || !bcsShares.length ||
-        !acReserved || !acReserved.length) {
-      errEl.textContent = "One or more caste/reservation CSVs are missing or empty. Check elections_summary_working.csv, bcs_ac_shares_estimated.csv, and ac_reserved_from_name.csv.";
-      errEl.style.display = "block";
-      return;
-    }
-    errEl.style.display = "none";
-
-    // Index BCS and reservation by ac_number
-    const sharesByAC = {};
-    bcsShares.forEach(r => {
-      const ac = r.ac_number;
-      sharesByAC[ac] = {
-        ebc: safeNumber(r.ebc_share),
-        obc: safeNumber(r.obc_share),
-        sc: safeNumber(r.sc_share),
-        st: safeNumber(r.st_share),
-        fc: safeNumber(r.fc_share)
-      };
-    });
-
-    const reservedByAC = {};
-    acReserved.forEach(r => {
-      reservedByAC[r.ac_number] = r.reserved_type || "GEN";
-    });
-
-    const allianceGroups = groupBy(electionsSummary, r => (r.alliance_2024_ls || "OTHER").toUpperCase());
-
-    const alliances = Object.keys(allianceGroups);
-    const avgEBC = [];
-    const avgOBC = [];
-    const avgSC = [];
-    const avgST = [];
-    const avgFC = [];
-
-    alliances.forEach(alliance => {
-      const rows = allianceGroups[alliance];
-      const shares = rows.map(r => sharesByAC[r.ac_number]).filter(x => !!x);
-      avgEBC.push(shares.length ? mean(shares, s => s.ebc) * 100 : 0);
-      avgOBC.push(shares.length ? mean(shares, s => s.obc) * 100 : 0);
-      avgSC.push(shares.length ? mean(shares, s => s.sc) * 100 : 0);
-      avgST.push(shares.length ? mean(shares, s => s.st) * 100 : 0);
-      avgFC.push(shares.length ? mean(shares, s => s.fc) * 100 : 0);
-    });
-
-    destroyChart("casteAllianceChart");
-    const ctxC = document.getElementById("casteAllianceChart").getContext("2d");
-    charts["casteAllianceChart"] = new Chart(ctxC, {
-      type: "bar",
-      data: {
-        labels: alliances,
-        datasets: [
-          { label: "EBC %", data: avgEBC },
-          { label: "OBC %", data: avgOBC },
-          { label: "SC %", data: avgSC },
-          { label: "ST %", data: avgST },
-          { label: "Forward %", data: avgFC }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.dataset.label}: ${ctx.parsed.toFixed(1)} %`
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100,
-            ticks: { callback: v => v + " %" }
-          }
-        }
-      }
-    });
-
-    // Reservation pie
-    const countsByType = {};
-    Object.keys(reservedByAC).forEach(ac => {
-      const t = reservedByAC[ac] || "GEN";
-      countsByType[t] = (countsByType[t] || 0) + 1;
-    });
-
-    const resLabels = Object.keys(countsByType);
-    const resCounts = resLabels.map(l => countsByType[l]);
-
-    destroyChart("reservationPieChart");
-    const ctxR = document.getElementById("reservationPieChart").getContext("2d");
-    charts["reservationPieChart"] = new Chart(ctxR, {
-      type: "pie",
-      data: {
-        labels: resLabels,
-        datasets: [{
-          data: resCounts
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.label}: ${ctx.parsed} ACs`
-            }
-          }
-        }
-      }
-    });
-  }
-
-  function buildQuartiles(quartiles) {
-    const errEl = document.getElementById("quartiles-error");
-    if (!quartiles || !quartiles.length) {
-      errEl.textContent = "elections_quartiles_2024_by_deletion.csv not found or empty.";
-      errEl.style.display = "block";
-      return;
-    }
-    errEl.style.display = "none";
-
-    const labels = quartiles.map(r => r.quartile);
-    const nda = quartiles.map(r => safeNumber(r.nda_win_rate) * 100);
-    const india = quartiles.map(r => safeNumber(r.india_win_rate) * 100);
-
-    destroyChart("quartilesAllianceChart");
-    const ctxQ = document.getElementById("quartilesAllianceChart").getContext("2d");
-    charts["quartilesAllianceChart"] = new Chart(ctxQ, {
-      type: "bar",
-      data: {
-        labels: labels,
-        datasets: [
-          { label: "NDA win rate", data: nda },
-          { label: "INDIA win rate", data: india }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.dataset.label}: ${ctx.parsed.toFixed(1)} %`
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100,
-            ticks: { callback: v => v + " %" }
-          }
-        }
-      }
-    });
-
-    // Table
-    const tbody = document.querySelector("#quartiles-table tbody");
-    tbody.innerHTML = "";
-    quartiles.forEach(r => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td style="text-align:left;">${r.quartile}</td>
-        <td>${safeNumber(r.n_ac)}</td>
-        <td>${(safeNumber(r.nda_win_rate) * 100).toFixed(1)} %</td>
-        <td>${(safeNumber(r.india_win_rate) * 100).toFixed(1)} %</td>
+          <div class="card">
+            <div class="card-header">
+              <h3>Largest decreases in deletions per booth</h3>
+              <span class="sub">2020 to 2024, by Assembly constituency</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-temp-dec"></canvas></div>
+              <div class="takeaway">
+                ACs with sharp declines may reflect corrections, demographic shifts, or other administrative choices. They are
+                as important as high increases in understanding the full picture.
+              </div>
+            </div>
+          </div>
+        </div>
       `;
-      tbody.appendChild(tr);
-    });
-  }
 
-  // --- Init -----------------------------------------------------------------
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
+      const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    initTabs();
+      buildChart('chart-temp-inc', 'temp-inc', {
+        type: 'bar',
+        data: {
+          labels: topInc.map(r => r.ac_name || `AC ${r.ac_number}`),
+          datasets: [{
+            label: 'Pct change in deletions per booth',
+            data: topInc.map(r => Number(r.pct_change_del_per_booth || 0)),
+            backgroundColor: accent
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            y: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
 
-    try {
-      const [
-        overviewMetrics,
-        electionsSummary,
-        quartiles,
-        religionOverall,
-        religionGender,
-        religionBand,
-        boothGenderReligion,
-        bcsShares,
-        acReserved
-      ] = await Promise.all([
-        loadCSV("./data/overview_metrics.csv"),
-        loadCSV("./data/elections_summary_working.csv"),
-        loadCSV("./data/elections_quartiles_2024_by_deletion.csv"),
-        loadCSV("./data/religion_overall.csv"),
-        loadCSV("./data/religion_gender_crosstab.csv"),
-        loadCSV("./data/religion_by_band.csv"),
-        loadCSV("./data/booth-gender-religion.csv"),
-        loadCSV("./data/bcs_ac_shares_estimated.csv"),
-        loadCSV("./data/ac_reserved_from_name.csv")
-      ]);
-
-      buildOverview(overviewMetrics);
-      buildACOutcomes(electionsSummary);
-      buildGenderReligion(religionOverall, religionGender, religionBand);
-      buildCasteReservation(electionsSummary, bcsShares, acReserved);
-      buildQuartiles(quartiles);
-
-      // boothGenderReligion is intentionally not charted directly due to size;
-      // it is only read so that the CSV is checked and can be used later if needed.
-      console.log("booth-gender-religion.csv loaded, rows:", boothGenderReligion.length);
-    } catch (e) {
-      console.error("Error loading one or more datasets:", e);
-      // We rely on per-panel error messages above rather than a global alert.
+      buildChart('chart-temp-dec', 'temp-dec', {
+        type: 'bar',
+        data: {
+          labels: topDec.map(r => r.ac_name || `AC ${r.ac_number}`),
+          datasets: [{
+            label: 'Pct change in deletions per booth',
+            data: topDec.map(r => Number(r.pct_change_del_per_booth || 0)),
+            backgroundColor: ndaColor
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            y: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
     }
-  });
-</script>
+
+    function renderGender() {
+      const d = APP_STATE.derived;
+      const g = d.genderTotals || {};
+      const demo = APP_STATE.raw.district_demography_summary || [];
+      const el = document.getElementById('main');
+
+      el.innerHTML = `
+        <div class="grid grid-2" style="margin-bottom:1rem;">
+          <div class="card">
+            <div class="card-header">
+              <h3>Overall gender composition of deletions</h3>
+              <span class="sub">Summed across all districts</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-gen-overall"></canvas></div>
+              <div class="takeaway">
+                This chart shows the share of deletions recorded as women, men and other/unknown across the entire dataset.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Districts with highest female share of deletions</h3>
+              <span class="sub">Based on district demographic summary</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-gen-districts"></canvas></div>
+              <div class="takeaway">
+                Districts here appear because the share of deletions recorded as female is higher than in others. This tab
+                does not, by itself, prove discrimination, but points to where further qualitative checks are needed.
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
+      const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
+      const grey = '#9ca3af';
+
+      // Overall gender composition
+      buildChart('chart-gen-overall', 'gen-overall', {
+        type: 'doughnut',
+        data: {
+          labels: ['Female', 'Male', 'Other / unknown'],
+          datasets: [{
+            data: [g.female || 0, g.male || 0, g.other || 0],
+            backgroundColor: [accent, ndaColor, grey]
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { position: 'bottom', labels: { usePointStyle: true, color: '#374151' } }
+          }
+        }
+      });
+
+      // Districts with highest female share of deletions
+      const withFemaleShare = demo
+        .filter(r => r.del_f_share_pct !== null && r.del_f_share_pct !== undefined)
+        .sort((a, b) => Number(b.del_f_share_pct || 0) - Number(a.del_f_share_pct || 0))
+        .slice(0, 15);
+
+      buildChart('chart-gen-districts', 'gen-districts', {
+        type: 'bar',
+        data: {
+          labels: withFemaleShare.map(r => r.district_name),
+          datasets: [{
+            label: 'Female share of deletions (%)',
+            data: withFemaleShare.map(r => Number(r.del_f_share_pct || 0)),
+            backgroundColor: accent
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: {
+              beginAtZero: true,
+              max: 100,
+              ticks: { color: '#6b7280', callback: v => v + '%' },
+              grid: { color: 'rgba(209,213,219,1)' }
+            },
+            y: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    function renderCaste() {
+      const raw = APP_STATE.raw;
+      const dc = raw.district_caste_summary_master || [];
+      const topGroups = raw.top5_caste_groups_deleted || [];
+      const bottomGroups = raw.bottom5_caste_groups_deleted || [];
+      const topNames = raw.top5_caste_names_deleted || [];
+      const bottomNames = raw.bottom5_caste_names_deleted || [];
+      const el = document.getElementById('main');
+
+      el.innerHTML = `
+        <div class="grid grid-2" style="margin-bottom:1rem;">
+          <div class="card">
+            <div class="card-header">
+              <h3>Caste block shares of deletions (district-level median)</h3>
+              <span class="sub">EBC, OBC, SC, ST, Forward caste</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-caste-blocks"></canvas></div>
+              <div class="takeaway">
+                This view summarises, in a simplified way, the share of deletions attributed to broad caste blocks across
+                districts. It is built from the district caste summary and should be read as indicative, not definitive.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Top and bottom caste blocks by deletions</h3>
+              <span class="sub">State-wide totals across all districts</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-caste-top-bottom"></canvas></div>
+              <div class="takeaway">
+                Blocks with the highest and lowest total deletions. Differences here interact with reservation status, party
+                competition and geography, which are explored in other tabs.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Top 5 surnames by deletions</h3>
+              <span class="sub">Surname–caste groups with highest deletions</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-caste-names-top"></canvas></div>
+              <div class="takeaway">
+                These surnames should be interpreted with care: they often straddle multiple sub-castes or communities.
+                The purpose is to spot protective-surname patterns, not to stereotype groups.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Bottom 5 surnames by deletions</h3>
+              <span class="sub">Very low observed deletions</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-caste-names-bottom"></canvas></div>
+              <div class="takeaway">
+                Surnames with very few deletions may also be informative, especially when compared to their population base.
+                This is a starting point for protective-surname questions.
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
+      const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
+      const grey = '#9ca3af';
+
+      // Caste block shares – median across districts
+      const labelsBlocks = ['EBC', 'OBC', 'SC', 'ST', 'FC'];
+
+      function medianShare(field) {
+        const vals = dc
+          .map(r => Number(r[field] || 0))
+          .filter(v => !isNaN(v))
+          .sort((a, b) => a - b);
+        if (!vals.length) return 0;
+        const mid = Math.floor(vals.length / 2);
+        return vals.length % 2 ? vals[mid] : (vals[mid - 1] + vals[mid]) / 2;
+      }
+
+      const blockVals = [
+        medianShare('ebc_share_share_pct'),
+        medianShare('obc_share_share_pct'),
+        medianShare('sc_share_share_pct'),
+        medianShare('st_share_share_pct'),
+        medianShare('fc_share_share_pct')
+      ];
+
+      buildChart('chart-caste-blocks', 'caste-blocks', {
+        type: 'bar',
+        data: {
+          labels: labelsBlocks,
+          datasets: [{
+            label: 'Median share of deletions (%)',
+            data: blockVals,
+            backgroundColor: accent
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, max: 100, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            x: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // Top vs bottom caste groups (total_deleted)
+      const tg = topGroups;
+      const bg = bottomGroups;
+
+      buildChart('chart-caste-top-bottom', 'caste-top-bottom', {
+        type: 'bar',
+        data: {
+          labels: tg.map(r => r.BroadGroup),
+          datasets: [{
+            label: 'Top groups – total deletions',
+            data: tg.map(r => Number(r.total_deleted || 0)),
+            backgroundColor: accent
+          }, {
+            label: 'Bottom groups – total deletions',
+            data: bg.map(r => Number(r.total_deleted || 0)),
+            backgroundColor: ndaColor
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            x: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { labels: { color: '#374151' } } }
+        }
+      });
+
+      // Top 5 surnames
+      buildChart('chart-caste-names-top', 'caste-names-top', {
+        type: 'bar',
+        data: {
+          labels: topNames.map(r => r.lastname),
+          datasets: [{
+            label: 'Total deletions',
+            data: topNames.map(r => Number(r.total_deleted || 0)),
+            backgroundColor: accent
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            y: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // Bottom 5 surnames
+      buildChart('chart-caste-names-bottom', 'caste-names-bottom', {
+        type: 'bar',
+        data: {
+          labels: bottomNames.map(r => r.lastname),
+          datasets: [{
+            label: 'Total deletions',
+            data: bottomNames.map(r => Number(r.total_deleted || 0)),
+            backgroundColor: grey
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            y: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    function renderReligion() {
+      const raw = APP_STATE.raw;
+      const overall = raw.religion_overall || [];
+      const byBand = raw.religion_by_band || [];
+      const el = document.getElementById('main');
+
+      el.innerHTML = `
+        <div class="grid grid-2" style="margin-bottom:1rem;">
+          <div class="card">
+            <div class="card-header">
+              <h3>Religion-wise share of deletions</h3>
+              <span class="sub">Across all districts</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-rel-overall"></canvas></div>
+              <div class="takeaway">
+                The distribution of deletions by religion is shown here at a descriptive level, using the aggregated
+                religion totals.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Religion mix by deletion band</h3>
+              <span class="sub">Booths grouped by deletions per booth</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-rel-bands"></canvas></div>
+              <div class="takeaway">
+                Bands with higher deletions per booth may have different religious compositions. This chart simply describes
+                that pattern; it does not infer intent.
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
+      const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
+      const grey = '#9ca3af';
+
+      // Overall
+      buildChart('chart-rel-overall', 'rel-overall', {
+        type: 'doughnut',
+        data: {
+          labels: overall.map(r => r.religion),
+          datasets: [{
+            data: overall.map(r => Number(r.count || 0)),
+            backgroundColor: [accent, ndaColor, grey]
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { position: 'bottom', labels: { usePointStyle: true, color: '#374151' } }
+          }
+        }
+      });
+
+      // By band – stacked bar
+      buildChart('chart-rel-bands', 'rel-bands', {
+        type: 'bar',
+        data: {
+          labels: byBand.map(r => r.band),
+          datasets: [{
+            label: 'Hindu (%)',
+            data: byBand.map(r => Number(r.Hindu_pct || 0)),
+            backgroundColor: accent
+          }, {
+            label: 'Muslim (%)',
+            data: byBand.map(r => Number(r.Muslim_pct || 0)),
+            backgroundColor: ndaColor
+          }, {
+            label: 'Unknown (%)',
+            data: byBand.map(r => Number(r.Unknown_pct || 0)),
+            backgroundColor: grey
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              stacked: true,
+              beginAtZero: true,
+              max: 100,
+              ticks: { color: '#6b7280', callback: v => v + '%' },
+              grid: { color: 'rgba(209,213,219,1)' }
+            },
+            x: { stacked: true, ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { labels: { color: '#374151' } } }
+        }
+      });
+    }
+
+    function renderElectoral() {
+      const raw = APP_STATE.raw;
+      const ac = raw.ac_correlation_ready || raw.elections_summary_working || [];
+      const el = document.getElementById('main');
+
+      // Aggregate deletions by alliance_2024_ls
+      const byAlliance = {};
+      ac.forEach(r => {
+        const key = r.alliance_2024_ls || 'Unknown';
+        if (!byAlliance[key]) byAlliance[key] = { del: 0, booths: 0, acs: 0 };
+        byAlliance[key].del += Number(r.deletions || 0);
+        byAlliance[key].booths += Number(r.booths || r.booths_2024 || 0);
+        byAlliance[key].acs += 1;
+      });
+
+      const allianceLabels = Object.keys(byAlliance);
+      const allianceDel = allianceLabels.map(k => byAlliance[k].del);
+      const allianceDpb = allianceLabels.map(k => {
+        const obj = byAlliance[k];
+        return obj.booths ? obj.del / obj.booths : 0;
+      });
+
+      el.innerHTML = `
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Deletions by LS alliance (2024)</h3>
+              <span class="sub">Summed across Assembly constituencies</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-elec-del"></canvas></div>
+              <div class="takeaway">
+                This chart is based on Assembly constituencies mapped to their 2024 Lok Sabha alliances. It is a descriptive
+                view, not a statement about motive.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Average deletions per booth by alliance</h3>
+              <span class="sub">Normalising for number of booths</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-elec-dpb"></canvas></div>
+              <div class="takeaway">
+                Differences here may reflect geography, caste composition and reservation patterns as much as party strategy.
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
+      const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
+
+      buildChart('chart-elec-del', 'elec-del', {
+        type: 'bar',
+        data: {
+          labels: allianceLabels,
+          datasets: [{
+            label: 'Total deletions',
+            data: allianceDel,
+            backgroundColor: accent
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            x: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      buildChart('chart-elec-dpb', 'elec-dpb', {
+        type: 'bar',
+        data: {
+          labels: allianceLabels,
+          datasets: [{
+            label: 'Deletions per booth',
+            data: allianceDpb,
+            backgroundColor: ndaColor
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            x: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    function renderGeographic() {
+      const raw = APP_STATE.raw;
+      const demo = raw.district_demography_summary || [];
+      const distBorder = raw.district_border_classification || [];
+      const el = document.getElementById('main');
+
+      // Join district_demography_summary with border classification on district_name
+      const mapBorder = {};
+      distBorder.forEach(r => { mapBorder[String(r.district_name).trim()] = r.border_group || 'Interior'; });
+
+      const byGroup = {};
+      demo.forEach(r => {
+        const name = String(r.district_name).trim();
+        const group = mapBorder[name] || r.border_group || 'Interior';
+        if (!byGroup[group]) byGroup[group] = { del: 0, booths: 0, districts: 0 };
+        const del = Number(r.deletions_2024 || r.deletions || 0);
+        const booths = Number(r.booths_2024 || 0);
+        byGroup[group].del += del;
+        byGroup[group].booths += booths;
+        byGroup[group].districts += 1;
+      });
+
+      const groups = Object.keys(byGroup);
+      const groupDel = groups.map(g => byGroup[g].del);
+      const groupDpb = groups.map(g => {
+        const obj = byGroup[g];
+        return obj.booths ? obj.del / obj.booths : 0;
+      });
+
+      el.innerHTML = `
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Border vs interior districts</h3>
+              <span class="sub">Total deletions by border grouping</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-geo-del"></canvas></div>
+              <div class="takeaway">
+                Border groups (for example, Nepal-facing or Jharkhand-facing) are grouped here using a district classification.
+                This is one of several lenses, not a standalone conclusion.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Deletions per booth by border group</h3>
+              <span class="sub">Normalised by booth count</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-geo-dpb"></canvas></div>
+              <div class="takeaway">
+                Comparing deletions per booth across border groups helps distinguish between sheer population size and
+                intensity of deletions.
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
+      const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
+
+      buildChart('chart-geo-del', 'geo-del', {
+        type: 'bar',
+        data: {
+          labels: groups,
+          datasets: [{
+            label: 'Total deletions',
+            data: groupDel,
+            backgroundColor: accent
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            x: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      buildChart('chart-geo-dpb', 'geo-dpb', {
+        type: 'bar',
+        data: {
+          labels: groups,
+          datasets: [{
+            label: 'Deletions per booth',
+            data: groupDpb,
+            backgroundColor: ndaColor
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            x: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    function renderIntegrity() {
+      const raw = APP_STATE.raw;
+      const ac = raw.ac_correlation_ready || [];
+      const el = document.getElementById('main');
+
+      // Use quartile_2024 to summarise
+      const byQ = {};
+      ac.forEach(r => {
+        const q = r.quartile_2024 || 'Unknown';
+        if (!byQ[q]) byQ[q] = { del: 0, booths: 0, acs: 0, femaleShare: 0, count: 0 };
+        const del = Number(r.deletions || 0);
+        const booths = Number(r.booths || 0);
+        byQ[q].del += del;
+        byQ[q].booths += booths;
+        byQ[q].acs += 1;
+        const fShare = Number(r.del_f_share_pct || 0);
+        byQ[q].femaleShare += fShare;
+        byQ[q].count += 1;
+      });
+
+      const quartiles = Object.keys(byQ).sort();
+      const delPerBooth = quartiles.map(q => {
+        const obj = byQ[q];
+        return obj.booths ? obj.del / obj.booths : 0;
+      });
+      const femaleShare = quartiles.map(q => {
+        const obj = byQ[q];
+        return obj.count ? obj.femaleShare / obj.count : 0;
+      });
+
+      el.innerHTML = `
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Deletions per booth by risk quartile</h3>
+              <span class="sub">Quartiles based on deletions per booth</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-int-dpb"></canvas></div>
+              <div class="takeaway">
+                Higher quartiles correspond to ACs with higher deletions per booth. Integrity questions are most pressing in
+                the upper quartiles but should be addressed using both data and field evidence.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Female share of deletions by quartile</h3>
+              <span class="sub">From AC-level correlation file</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-int-female"></canvas></div>
+              <div class="takeaway">
+                If female share of deletions is systematically higher in high-risk quartiles, it strengthens the case for a
+                gendered pattern in deletions that needs investigation.
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
+      const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
+
+      buildChart('chart-int-dpb', 'int-dpb', {
+        type: 'bar',
+        data: {
+          labels: quartiles,
+          datasets: [{
+            label: 'Deletions per booth',
+            data: delPerBooth,
+            backgroundColor: accent
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            x: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      buildChart('chart-int-female', 'int-female', {
+        type: 'bar',
+        data: {
+          labels: quartiles,
+          datasets: [{
+            label: 'Female share of deletions (%)',
+            data: femaleShare,
+            backgroundColor: ndaColor
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, max: 100, ticks: { color: '#6b7280', callback: v => v + '%' }, grid: { color: 'rgba(209,213,219,1)' } },
+            x: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    function renderMethods() {
+      const el = document.getElementById('main');
+      el.innerHTML = `
+        <div class="card">
+          <div class="card-header">
+            <h3>Methods and data sources</h3>
+            <span class="sub">How this dashboard was assembled</span>
+          </div>
+          <div class="card-body">
+            <p>This dashboard stitches together multiple pre-aggregated datasets prepared from the Bihar electoral rolls and
+            Census/district-level profiles. The key tables used here include:</p>
+            <ul>
+              <li><code>overview_metrics.csv</code> – state-level totals and headline indicators.</li>
+              <li><code>elections_summary_working.csv</code>, <code>ac_correlation_ready.csv</code> – AC-level deletions, booths and political alignment.</li>
+              <li><code>ac_deletions_change_2020_2024.csv</code> – change in deletions per booth between 2020 and 2024.</li>
+              <li><code>district_demography_summary.csv</code>, <code>district_population_profile.csv</code> – density, literacy, demographic structure and deletions at district level.</li>
+              <li><code>district_rural_urban_profile.csv</code> – rural/urban splits and projections.</li>
+              <li><code>district_gdp_profile.csv</code> – per-capita GDDP and prosperity ranking by district.</li>
+              <li><code>district_caste_summary_master.csv</code>, <code>district_caste_block_shares.csv</code> – caste block shares of deletions.</li>
+              <li><code>religion_overall.csv</code>, <code>religion_by_band.csv</code>, <code>religion_gender_crosstab.csv</code>, <code>booth-gender-religion.csv</code> – religion and gender cross-tabs.</li>
+              <li><code>top5_caste_groups_deleted.csv</code>, <code>bottom5_caste_groups_deleted.csv</code>, <code>top5_caste_names_deleted.csv</code>, <code>bottom5_caste_names_deleted.csv</code> – protective-surname and caste-group summaries.</li>
+              <li><code>district_border_classification.csv</code>, <code>ac_border_classification.csv</code> – classification of districts and ACs into border vs interior groups.</li>
+            </ul>
+            <p>All computations on this page are descriptive summaries. They do not, by themselves, establish intent or
+            illegality. Interpretation must be combined with ground reports, party records, and administrative documentation.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTab(name) {
+      clearCharts();
+      APP_STATE.currentTab = name;
+
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.tab === name);
+      });
+
+      if (name === 'overview') return renderOverview();
+      if (name === 'deletions') return renderDeletions();
+      if (name === 'demographic') return renderDemographic();
+      if (name === 'temporal') return renderTemporal();
+      if (name === 'gender') return renderGender();
+      if (name === 'caste') return renderCaste();
+      if (name === 'religion') return renderReligion();
+      if (name === 'electoral') return renderElectoral();
+      if (name === 'geographic') return renderGeographic();
+      if (name === 'integrity') return renderIntegrity();
+      if (name === 'methods') return renderMethods();
+      renderOverview();
+    }
+
+    async function initDashboard() {
+      const main = document.getElementById('main');
+      const loading = document.getElementById('loading');
+      if (loading) loading.style.display = 'flex';
+
+      try {
+        const base = 'data';
+        const [
+          boothGenderReligion,
+          religionOverall,
+          religionByBand,
+          religionGenderCrosstab,
+          electionsSummary,
+          electionsQuartiles,
+          overviewMetrics,
+          bcsACShares,
+          acReserved,
+          partyAllianceMap,
+          districtDemographySummary,
+          districtPopulationProfile,
+          districtRuralUrbanProfile,
+          districtGdpProfile,
+          districtCasteSummaryMaster,
+          districtCasteBlockShares,
+          districtBorderClassification,
+          acBorderClassification,
+          acDeletionsChange,
+          acCorrelationReady,
+          top5CasteGroupsDeleted,
+          bottom5CasteGroupsDeleted,
+          top5CasteNamesDeleted,
+          bottom5CasteNamesDeleted
+        ] = await Promise.all([
+          loadCSV(base + '/booth-gender-religion.csv'),
+          loadCSV(base + '/religion_overall.csv'),
+          loadCSV(base + '/religion_by_band.csv'),
+          loadCSV(base + '/religion_gender_crosstab.csv'),
+          loadCSV(base + '/elections_summary_working.csv'),
+          loadCSV(base + '/elections_quartiles_2024_by_deletion.csv'),
+          loadCSV(base + '/overview_metrics.csv'),
+          loadCSV(base + '/bcs_ac_shares_estimated.csv'),
+          loadCSV(base + '/ac_reserved_from_name.csv'),
+          loadCSV(base + '/party_to_alliance_mapping.csv'),
+          loadCSV(base + '/district_demography_summary.csv'),
+          loadCSV(base + '/district_population_profile.csv'),
+          loadCSV(base + '/district_rural_urban_profile.csv'),
+          loadCSV(base + '/district_gdp_profile.csv'),
+          loadCSV(base + '/district_caste_summary_master.csv'),
+          loadCSV(base + '/district_caste_block_shares.csv'),
+          loadCSV(base + '/district_border_classification.csv'),
+          loadCSV(base + '/ac_border_classification.csv'),
+          loadCSV(base + '/ac_deletions_change_2020_2024.csv'),
+          loadCSV(base + '/ac_correlation_ready.csv'),
+          loadCSV(base + '/top5_caste_groups_deleted.csv'),
+          loadCSV(base + '/bottom5_caste_groups_deleted.csv'),
+          loadCSV(base + '/top5_caste_names_deleted.csv'),
+          loadCSV(base + '/bottom5_caste_names_deleted.csv')
+        ]);
+
+        APP_STATE.raw = {
+          booth_gender_religion: boothGenderReligion,
+          religion_overall: religionOverall,
+          religion_by_band: religionByBand,
+          religion_gender_crosstab: religionGenderCrosstab,
+          elections_summary_working: electionsSummary,
+          elections_quartiles_2024_by_deletion: electionsQuartiles,
+          overview_metrics: overviewMetrics,
+          bcs_ac_shares_estimated: bcsACShares,
+          ac_reserved_from_name: acReserved,
+          party_to_alliance_mapping: partyAllianceMap,
+          district_demography_summary: districtDemographySummary,
+          district_population_profile: districtPopulationProfile,
+          district_rural_urban_profile: districtRuralUrbanProfile,
+          district_gdp_profile: districtGdpProfile,
+          district_caste_summary_master: districtCasteSummaryMaster,
+          district_caste_block_shares: districtCasteBlockShares,
+          district_border_classification: districtBorderClassification,
+          ac_border_classification: acBorderClassification,
+          ac_deletions_change_2020_2024: acDeletionsChange,
+          ac_correlation_ready: acCorrelationReady,
+          top5_caste_groups_deleted: top5CasteGroupsDeleted,
+          bottom5_caste_groups_deleted: bottom5CasteGroupsDeleted,
+          top5_caste_names_deleted: top5CasteNamesDeleted,
+          bottom5_caste_names_deleted: bottom5CasteNamesDeleted
+        };
+
+        computeDerived();
+        APP_STATE.loaded = true;
+        if (loading) loading.style.display = 'none';
+        renderOverview();
+      } catch (err) {
+        console.error(err);
+        APP_STATE.loadError = err;
+        if (loading) loading.remove();
+        main.innerHTML = '<div class="loading-block"><p>Could not load one or more aggregate files from the data folder.</p></div>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => renderTab(tab.dataset.tab));
+      });
+      initDashboard();
+    });
+  </script>
 </body>
 </html>
