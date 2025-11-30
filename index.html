@@ -21,7 +21,7 @@
           if (!ok) {
             document.documentElement.innerHTML =
               '<!doctype html><html><head><meta charset="utf-8"><title>Access denied</title>' +
-              '<style>body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#020617;color:#f9fafb;margin:0}div{max-width:32rem;padding:2.5rem;border-radius:1.25rem;background:radial-gradient(circle at top,#1f2937,#020617);box-shadow:0 20px 60px rgba(15,23,42,.9)}h1{font-size:1.35rem;margin:0 0 .5rem}p{margin:.15rem 0 .5rem;font-size:.95rem;line-height:1.5;color:#e5e7eb}code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:.85rem;padding:.15rem .3rem;border-radius:.35rem;background:rgba(15,23,42,.7);border:1px solid rgba(148,163,184,.6);color:#e5e7eb}</style></head>' +
+              '<style>body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#020617;color:#f9fafb;margin:0}div{max-width:32rem;padding:2.5rem;border-radius:1.25rem;background:radial-gradient(circle at top,#1f2937,#020617);box-shadow:0 20px 60px rgba(15,23,42,.9)}h1{font-size:1.35rem;margin:0 0 .5rem}p{margin:.15rem 0 .5rem;font-size:.95rem;line-height:1.5;color:#e5e7eb}</style></head>' +
               '<body><div><h1>Access denied</h1><p>Reload the page to try again.</p></div></body></html>';
             throw new Error('Auth failed');
           }
@@ -57,8 +57,6 @@
       --accent: #2563eb;
       --accent-soft: rgba(37,99,235,.08);
       --accent-strong: #1d4ed8;
-      --danger: #ea580c;
-      --safe: #16a34a;
       --india-color: #16a34a;
       --nda-color: #ea580c;
       --other-color: #6b7280;
@@ -187,33 +185,6 @@
       color: var(--muted);
     }
 
-    .btn {
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,.7);
-      background: #f9fafb;
-      color: var(--muted);
-      font-size: 0.78rem;
-      padding: 0.3rem 0.8rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      cursor: pointer;
-      transition: all 0.15s ease-out;
-      white-space: nowrap;
-    }
-
-    .btn:hover {
-      background: #eef2ff;
-      border-color: rgba(129,140,248,.9);
-      color: #4338ca;
-    }
-
-    .btn svg {
-      width: 14px;
-      height: 14px;
-      stroke-width: 1.8;
-    }
-
     .pill-row {
       display: flex;
       flex-wrap: wrap;
@@ -303,7 +274,6 @@
 
     @media (min-width: 900px) {
       .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     .metric {
@@ -507,7 +477,7 @@
         <div class="brand-mark">BV</div>
         <div class="brand-meta">
           <strong>Bihar Voter Study</strong>
-          <span>Protected dashboard &mdash; <a href="javascript:void(0)" onclick="window.__forindiaLogout && window.__forindiaLogout()" style="color:#2563eb;text-decoration:none;border-bottom:1px dashed rgba(37,99,235,.4);">reset password</a></span>
+          <span>Protected dashboard — <a href="javascript:void(0)" onclick="window.__forindiaLogout && window.__forindiaLogout()" style="color:#2563eb;text-decoration:none;border-bottom:1px dashed rgba(37,99,235,.4);">reset password</a></span>
         </div>
       </div>
     </header>
@@ -519,13 +489,12 @@
           <button class="tab" data-tab="deletions"><span class="dot"></span>Deletions analysis</button>
           <button class="tab" data-tab="demographic"><span class="dot"></span>Demographic benchmarking</button>
           <button class="tab" data-tab="temporal"><span class="dot"></span>2020–2024 trends</button>
-          <button class="tab" data-tab="gender"><span class="dot"></span>Gender lens</button>
-          <button class="tab" data-tab="caste"><span class="dot"></span>Caste lens</button>
-          <button class="tab" data-tab="religion"><span class="dot"></span>Religion lens</button>
-          <button class="tab" data-tab="electoral"><span class="dot"></span>Electoral competition</button>
+          <button class="tab" data-tab="gender"><span class="dot"></span>Gender analysis</button>
+          <button class="tab" data-tab="caste"><span class="dot"></span>Caste dynamics</button>
+          <button class="tab" data-tab="religion"><span class="dot"></span>Religious composition</button>
+          <button class="tab" data-tab="electoral"><span class="dot"></span>Electoral impact</button>
           <button class="tab" data-tab="geographic"><span class="dot"></span>Border &amp; geography</button>
-          <button class="tab" data-tab="integrity"><span class="dot"></span>Integrity checks</button>
-          <button class="tab" data-tab="methods"><span class="dot"></span>Methods</button>
+          <button class="tab" data-tab="methods"><span class="dot"></span>Methods &amp; integrity</button>
         </nav>
       </div>
     </div>
@@ -557,15 +526,26 @@
       loadError: null
     };
 
+    // tolerant CSV loader – never throws, just logs and returns []
     function loadCSV(path) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         Papa.parse(path, {
           download: true,
           header: true,
           dynamicTyping: true,
           skipEmptyLines: true,
-          complete: (results) => resolve(results.data || []),
-          error: (err) => reject(err)
+          complete: (results) => {
+            if (!results || !results.data) {
+              console.warn('CSV had no data:', path);
+              resolve([]);
+            } else {
+              resolve(results.data);
+            }
+          },
+          error: (err) => {
+            console.warn('Error loading CSV', path, err);
+            resolve([]);
+          }
         });
       });
     }
@@ -641,10 +621,13 @@
         total: totalGen
       };
 
-      // High-level district summaries from district_demography_summary
+      // District deletions – top districts by absolute deletions
       const demo = raw.district_demography_summary || [];
       if (demo.length) {
-        const byDel = [...demo].sort((a, b) => Number(b.deletions_2024 || b.deletions || 0) - Number(a.deletions_2024 || a.deletions || 0));
+        const byDel = [...demo].sort((a, b) =>
+          Number(b.deletions_2024 || b.deletions || 0) -
+          Number(a.deletions_2024 || a.deletions || 0)
+        );
         d.topDistrictsByDeletion = byDel.slice(0, 10).map(r => ({
           name: r.district_name,
           deletions: Number(r.deletions_2024 || r.deletions || 0),
@@ -676,21 +659,23 @@
 
       // GDP distribution from district_gdp_profile
       const gdpRows = raw.district_gdp_profile || [];
-      if (gdpRows.length) {
-        const sortedGdp = [...gdpRows].sort((a, b) =>
-          Number(b.per_capita_gddp_2021_22_constant_inr || 0) -
-          Number(a.per_capita_gddp_2021_22_constant_inr || 0)
+      const getPcGddp = (r) =>
+        Number(
+          r.per_capita_gddp_2021_22_constant_inr ||
+          r.per_capita_gddp ||
+          r.pc_gddp ||
+          r.pc_gddp_inr ||
+          0
         );
+      if (gdpRows.length) {
+        const sortedGdp = [...gdpRows].sort((a, b) => getPcGddp(b) - getPcGddp(a));
         d.gdpTop = sortedGdp.slice(0, 10).map(r => ({
           name: r.district_name,
-          pcGddp: Number(r.per_capita_gddp_2021_22_constant_inr || 0)
+          pcGddp: getPcGddp(r)
         }));
       } else {
         d.gdpTop = [];
       }
-
-      // Quartiles (AC-level) from elections_quartiles_2024_by_deletion
-      d.quartiles = raw.elections_quartiles_2024_by_deletion || [];
 
       APP_STATE.derived = d;
     }
@@ -739,8 +724,8 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-overview-districts"></canvas></div>
               <div class="takeaway">
-                This chart highlights districts with the highest absolute number of deletions. It can be read alongside the
-                more detailed caste, gender and border analyses in later tabs.
+                This chart highlights districts with the highest absolute number of deletions. It is a starting point for
+                reading the political and social patterning in later tabs.
               </div>
             </div>
           </div>
@@ -809,13 +794,8 @@
         options: {
           indexAxis: 'y',
           scales: {
-            x: {
-              ticks: { color: '#6b7280' },
-              grid: { color: 'rgba(209,213,219,1)' }
-            },
-            y: {
-              ticks: { color: '#374151' }
-            }
+            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            y: { ticks: { color: '#374151' } }
           },
           plugins: {
             legend: { display: false }
@@ -827,7 +807,9 @@
     function renderDeletions() {
       const raw = APP_STATE.raw;
       const el = document.getElementById('main');
-      const ac = raw.ac_correlation_ready || raw.elections_summary_working || [];
+      const ac = raw.ac_correlation_ready && raw.ac_correlation_ready.length
+        ? raw.ac_correlation_ready
+        : (raw.elections_summary_working || []);
 
       const sorted = [...ac].sort((a, b) => Number(b.del_per_booth || 0) - Number(a.del_per_booth || 0));
       const top = sorted.slice(0, 20);
@@ -851,8 +833,8 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-del-ac-top"></canvas></div>
               <div class="takeaway">
-                This chart shows Assembly constituencies with the highest deletions per booth, using the correlation-ready file.
-                It is a starting point for detailed political and caste reading, not a conclusion.
+                These ACs have the highest deletions per booth. They should be priority candidates for deeper political,
+                caste and gender reading using the other tabs and qualitative inputs.
               </div>
             </div>
           </div>
@@ -924,8 +906,10 @@
     function renderDemographic() {
       const d = APP_STATE.derived;
       const el = document.getElementById('main');
-      const ru = d.ruralUrbanTotals;
+      const ruTotals = d.ruralUrbanTotals;
+      const ruProfile = APP_STATE.raw.district_rural_urban_profile || [];
       const demo = APP_STATE.raw.district_demography_summary || [];
+      const gdpTop = d.gdpTop || [];
 
       el.innerHTML = `
         <div class="grid grid-2" style="margin-bottom:1rem;">
@@ -945,6 +929,22 @@
 
           <div class="card">
             <div class="card-header">
+              <h3>Top districts by per capita GDDP</h3>
+              <span class="sub">Income profile as a backdrop to deletions</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-dem-gdp"></canvas></div>
+              <div class="takeaway">
+                Higher per capita GDDP does not automatically mean higher or lower deletions, but this ranking situates
+                deletion patterns against the basic economic profile of districts.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-header">
               <h3>Districts by urbanisation level</h3>
               <span class="sub">Projected 2025 urban share of population</span>
             </div>
@@ -952,22 +952,22 @@
               <div class="viz"><canvas id="chart-dem-urban-share"></canvas></div>
               <div class="takeaway">
                 Districts are ordered by projected urban share of population, not by deletions. Combining this with the
-                deletions per booth and gender tabs helps identify patterns in more urbanised districts.
+                deletions and gender tabs helps track patterns in more urbanised districts.
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <h3>District demographic and deletion profile</h3>
-            <span class="sub">Literacy, density and deletions per booth</span>
-          </div>
-          <div class="card-body">
-            <div class="viz"><canvas id="chart-dem-literacy-del"></canvas></div>
-            <div class="takeaway">
-              This scatter plot places deletions per booth against literacy rates at district level. The purpose is to help
-              detect whether deletions are systematically higher in districts with particular demographic characteristics.
+          <div class="card">
+            <div class="card-header">
+              <h3>District demographic and deletion profile</h3>
+              <span class="sub">Literacy vs deletions per booth</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-dem-literacy-del"></canvas></div>
+              <div class="takeaway">
+                This scatter places deletions per booth against literacy rates at district level. It is meant to guide
+                questions, not to settle them.
+              </div>
             </div>
           </div>
         </div>
@@ -978,16 +978,15 @@
       const indiaColor = styles.getPropertyValue('--india-color').trim() || '#16a34a';
 
       // Rural vs urban chart
-      const ruLabels = ['Rural', 'Urban'];
       const ruVals = [
-        ru ? ru.ruralPop || 0 : 0,
-        ru ? ru.urbanPop || 0 : 0
+        ruTotals ? ruTotals.ruralPop || 0 : 0,
+        ruTotals ? ruTotals.urbanPop || 0 : 0
       ];
 
       buildChart('chart-dem-ru', 'dem-ru', {
         type: 'doughnut',
         data: {
-          labels: ruLabels,
+          labels: ['Rural', 'Urban'],
           datasets: [{
             data: ruVals,
             backgroundColor: [accent, indiaColor]
@@ -1000,22 +999,39 @@
         }
       });
 
+      // GDP top districts
+      buildChart('chart-dem-gdp', 'dem-gdp', {
+        type: 'bar',
+        data: {
+          labels: gdpTop.map(r => r.name),
+          datasets: [{
+            label: 'Per capita GDDP (constant ₹)',
+            data: gdpTop.map(r => r.pcGddp),
+            backgroundColor: accent
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+            y: { ticks: { color: '#374151' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
       // Urbanisation share by district
-      const ruProfile = APP_STATE.raw.district_rural_urban_profile || [];
       const sortedRu = [...ruProfile].sort((a, b) =>
         Number(b.proj_2025_urban_pct || 0) - Number(a.proj_2025_urban_pct || 0)
       );
       const ruTop = sortedRu.slice(0, 20);
-      const labelsUrban = ruTop.map(r => r.district_name);
-      const valsUrban = ruTop.map(r => Number(r.proj_2025_urban_pct || 0));
-
       buildChart('chart-dem-urban-share', 'dem-urban-share', {
         type: 'bar',
         data: {
-          labels: labelsUrban,
+          labels: ruTop.map(r => r.district_name),
           datasets: [{
             label: 'Urban share of population (2025, %)',
-            data: valsUrban,
+            data: ruTop.map(r => Number(r.proj_2025_urban_pct || 0)),
             backgroundColor: accent
           }]
         },
@@ -1028,19 +1044,15 @@
               ticks: { color: '#6b7280', callback: v => v + '%' },
               grid: { color: 'rgba(209,213,219,1)' }
             },
-            y: {
-              ticks: { color: '#374151' }
-            }
+            y: { ticks: { color: '#374151' } }
           },
-          plugins: {
-            legend: { display: false }
-          }
+          plugins: { legend: { display: false } }
         }
       });
 
       // Literacy vs deletions per booth – scatter
       const scatterData = demo.map(r => ({
-        x: Number(r.census_2011_literacy_rate || 0),
+        x: Number(r.census_2011_literacy_rate || r.literacy_rate || 0),
         y: Number(r.del_per_booth || 0),
         label: r.district_name
       }));
@@ -1280,8 +1292,8 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-caste-blocks"></canvas></div>
               <div class="takeaway">
-                This view summarises, in a simplified way, the share of deletions attributed to broad caste blocks across
-                districts. It is built from the district caste summary and should be read as indicative, not definitive.
+                This summarises the share of deletions attributed to broad caste blocks across districts. It is built from the
+                district caste summary and should be read as indicative, not definitive.
               </div>
             </div>
           </div>
@@ -1295,7 +1307,7 @@
               <div class="viz"><canvas id="chart-caste-top-bottom"></canvas></div>
               <div class="takeaway">
                 Blocks with the highest and lowest total deletions. Differences here interact with reservation status, party
-                competition and geography, which are explored in other tabs.
+                competition and geography, explored in other tabs.
               </div>
             </div>
           </div>
@@ -1337,9 +1349,7 @@
       const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
       const grey = '#9ca3af';
 
-      // Caste block shares – median across districts
       const labelsBlocks = ['EBC', 'OBC', 'SC', 'ST', 'FC'];
-
       function medianShare(field) {
         const vals = dc
           .map(r => Number(r[field] || 0))
@@ -1349,7 +1359,6 @@
         const mid = Math.floor(vals.length / 2);
         return vals.length % 2 ? vals[mid] : (vals[mid - 1] + vals[mid]) / 2;
       }
-
       const blockVals = [
         medianShare('ebc_share_share_pct'),
         medianShare('obc_share_share_pct'),
@@ -1378,20 +1387,17 @@
       });
 
       // Top vs bottom caste groups (total_deleted)
-      const tg = topGroups;
-      const bg = bottomGroups;
-
       buildChart('chart-caste-top-bottom', 'caste-top-bottom', {
         type: 'bar',
         data: {
-          labels: tg.map(r => r.BroadGroup),
+          labels: topGroups.map(r => r.BroadGroup),
           datasets: [{
             label: 'Top groups – total deletions',
-            data: tg.map(r => Number(r.total_deleted || 0)),
+            data: topGroups.map(r => Number(r.total_deleted || 0)),
             backgroundColor: accent
           }, {
             label: 'Bottom groups – total deletions',
-            data: bg.map(r => Number(r.total_deleted || 0)),
+            data: bottomGroups.map(r => Number(r.total_deleted || 0)),
             backgroundColor: ndaColor
           }]
         },
@@ -1477,8 +1483,8 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-rel-bands"></canvas></div>
               <div class="takeaway">
-                Bands with higher deletions per booth may have different religious compositions. This chart simply describes
-                that pattern; it does not infer intent.
+                Bands with higher deletions per booth may have different religious compositions. This simply describes that
+                pattern; it does not infer intent.
               </div>
             </div>
           </div>
@@ -1490,7 +1496,6 @@
       const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
       const grey = '#9ca3af';
 
-      // Overall
       buildChart('chart-rel-overall', 'rel-overall', {
         type: 'doughnut',
         data: {
@@ -1507,7 +1512,6 @@
         }
       });
 
-      // By band – stacked bar
       buildChart('chart-rel-bands', 'rel-bands', {
         type: 'bar',
         data: {
@@ -1544,17 +1548,17 @@
 
     function renderElectoral() {
       const raw = APP_STATE.raw;
-      const ac = raw.ac_correlation_ready || raw.elections_summary_working || [];
+      const ac = raw.ac_correlation_ready && raw.ac_correlation_ready.length
+        ? raw.ac_correlation_ready
+        : (raw.elections_summary_working || []);
       const el = document.getElementById('main');
 
-      // Aggregate deletions by alliance_2024_ls
       const byAlliance = {};
       ac.forEach(r => {
         const key = r.alliance_2024_ls || 'Unknown';
-        if (!byAlliance[key]) byAlliance[key] = { del: 0, booths: 0, acs: 0 };
+        if (!byAlliance[key]) byAlliance[key] = { del: 0, booths: 0 };
         byAlliance[key].del += Number(r.deletions || 0);
         byAlliance[key].booths += Number(r.booths || r.booths_2024 || 0);
-        byAlliance[key].acs += 1;
       });
 
       const allianceLabels = Object.keys(byAlliance);
@@ -1574,8 +1578,8 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-elec-del"></canvas></div>
               <div class="takeaway">
-                This chart is based on Assembly constituencies mapped to their 2024 Lok Sabha alliances. It is a descriptive
-                view, not a statement about motive.
+                This chart is based on Assembly constituencies mapped to their 2024 Lok Sabha alliances. It is descriptive,
+                not a statement about motive.
               </div>
             </div>
           </div>
@@ -1644,7 +1648,6 @@
       const distBorder = raw.district_border_classification || [];
       const el = document.getElementById('main');
 
-      // Join district_demography_summary with border classification on district_name
       const mapBorder = {};
       distBorder.forEach(r => { mapBorder[String(r.district_name).trim()] = r.border_group || 'Interior'; });
 
@@ -1652,12 +1655,11 @@
       demo.forEach(r => {
         const name = String(r.district_name).trim();
         const group = mapBorder[name] || r.border_group || 'Interior';
-        if (!byGroup[group]) byGroup[group] = { del: 0, booths: 0, districts: 0 };
+        if (!byGroup[group]) byGroup[group] = { del: 0, booths: 0 };
         const del = Number(r.deletions_2024 || r.deletions || 0);
         const booths = Number(r.booths_2024 || 0);
         byGroup[group].del += del;
         byGroup[group].booths += booths;
-        byGroup[group].districts += 1;
       });
 
       const groups = Object.keys(byGroup);
@@ -1677,8 +1679,8 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-geo-del"></canvas></div>
               <div class="takeaway">
-                Border groups (for example, Nepal-facing or Jharkhand-facing) are grouped here using a district classification.
-                This is one of several lenses, not a standalone conclusion.
+                Border groups (for example, Nepal-facing or Jharkhand-facing) are grouped using a district classification.
+                This is one lens among several.
               </div>
             </div>
           </div>
@@ -1742,136 +1744,49 @@
       });
     }
 
-    function renderIntegrity() {
-      const raw = APP_STATE.raw;
-      const ac = raw.ac_correlation_ready || [];
-      const el = document.getElementById('main');
-
-      // Use quartile_2024 to summarise
-      const byQ = {};
-      ac.forEach(r => {
-        const q = r.quartile_2024 || 'Unknown';
-        if (!byQ[q]) byQ[q] = { del: 0, booths: 0, acs: 0, femaleShare: 0, count: 0 };
-        const del = Number(r.deletions || 0);
-        const booths = Number(r.booths || 0);
-        byQ[q].del += del;
-        byQ[q].booths += booths;
-        byQ[q].acs += 1;
-        const fShare = Number(r.del_f_share_pct || 0);
-        byQ[q].femaleShare += fShare;
-        byQ[q].count += 1;
-      });
-
-      const quartiles = Object.keys(byQ).sort();
-      const delPerBooth = quartiles.map(q => {
-        const obj = byQ[q];
-        return obj.booths ? obj.del / obj.booths : 0;
-      });
-      const femaleShare = quartiles.map(q => {
-        const obj = byQ[q];
-        return obj.count ? obj.femaleShare / obj.count : 0;
-      });
-
-      el.innerHTML = `
-        <div class="grid grid-2">
-          <div class="card">
-            <div class="card-header">
-              <h3>Deletions per booth by risk quartile</h3>
-              <span class="sub">Quartiles based on deletions per booth</span>
-            </div>
-            <div class="card-body">
-              <div class="viz"><canvas id="chart-int-dpb"></canvas></div>
-              <div class="takeaway">
-                Higher quartiles correspond to ACs with higher deletions per booth. Integrity questions are most pressing in
-                the upper quartiles but should be addressed using both data and field evidence.
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <h3>Female share of deletions by quartile</h3>
-              <span class="sub">From AC-level correlation file</span>
-            </div>
-            <div class="card-body">
-              <div class="viz"><canvas id="chart-int-female"></canvas></div>
-              <div class="takeaway">
-                If female share of deletions is systematically higher in high-risk quartiles, it strengthens the case for a
-                gendered pattern in deletions that needs investigation.
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-
-      const styles = getComputedStyle(document.documentElement);
-      const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
-      const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
-
-      buildChart('chart-int-dpb', 'int-dpb', {
-        type: 'bar',
-        data: {
-          labels: quartiles,
-          datasets: [{
-            label: 'Deletions per booth',
-            data: delPerBooth,
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          scales: {
-            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            x: { ticks: { color: '#374151' } }
-          },
-          plugins: { legend: { display: false } }
-        }
-      });
-
-      buildChart('chart-int-female', 'int-female', {
-        type: 'bar',
-        data: {
-          labels: quartiles,
-          datasets: [{
-            label: 'Female share of deletions (%)',
-            data: femaleShare,
-            backgroundColor: ndaColor
-          }]
-        },
-        options: {
-          scales: {
-            y: { beginAtZero: true, max: 100, ticks: { color: '#6b7280', callback: v => v + '%' }, grid: { color: 'rgba(209,213,219,1)' } },
-            x: { ticks: { color: '#374151' } }
-          },
-          plugins: { legend: { display: false } }
-        }
-      });
-    }
-
     function renderMethods() {
       const el = document.getElementById('main');
       el.innerHTML = `
         <div class="card">
           <div class="card-header">
-            <h3>Methods and data sources</h3>
-            <span class="sub">How this dashboard was assembled</span>
+            <h3>Methods, research questions and integrity frame</h3>
+            <span class="sub">How this dashboard was assembled and how to read it</span>
           </div>
           <div class="card-body">
-            <p>This dashboard stitches together multiple pre-aggregated datasets prepared from the Bihar electoral rolls and
-            Census/district-level profiles. The key tables used here include:</p>
-            <ul>
-              <li><code>overview_metrics.csv</code> – state-level totals and headline indicators.</li>
-              <li><code>elections_summary_working.csv</code>, <code>ac_correlation_ready.csv</code> – AC-level deletions, booths and political alignment.</li>
-              <li><code>ac_deletions_change_2020_2024.csv</code> – change in deletions per booth between 2020 and 2024.</li>
-              <li><code>district_demography_summary.csv</code>, <code>district_population_profile.csv</code> – density, literacy, demographic structure and deletions at district level.</li>
-              <li><code>district_rural_urban_profile.csv</code> – rural/urban splits and projections.</li>
-              <li><code>district_gdp_profile.csv</code> – per-capita GDDP and prosperity ranking by district.</li>
-              <li><code>district_caste_summary_master.csv</code>, <code>district_caste_block_shares.csv</code> – caste block shares of deletions.</li>
-              <li><code>religion_overall.csv</code>, <code>religion_by_band.csv</code>, <code>religion_gender_crosstab.csv</code>, <code>booth-gender-religion.csv</code> – religion and gender cross-tabs.</li>
-              <li><code>top5_caste_groups_deleted.csv</code>, <code>bottom5_caste_groups_deleted.csv</code>, <code>top5_caste_names_deleted.csv</code>, <code>bottom5_caste_names_deleted.csv</code> – protective-surname and caste-group summaries.</li>
-              <li><code>district_border_classification.csv</code>, <code>ac_border_classification.csv</code> – classification of districts and ACs into border vs interior groups.</li>
+            <h4 style="margin:0 0 .4rem;font-size:.9rem;">Core research questions guiding this view</h4>
+            <ul style="margin:.1rem 0 .8rem;padding-left:1.1rem;font-size:.8rem;line-height:1.4;color:#4b5563;">
+              <li>What is the overall scale and geographic distribution of voter deletions in Bihar’s 2024 rolls?</li>
+              <li>Are deletions disproportionately concentrated among women, particular caste blocks or religious communities?</li>
+              <li>Do deletions differ systematically between rural and urban areas, and between border and interior districts?</li>
+              <li>How do deletions per booth relate to electoral competition, especially flipped vs stable Assembly constituencies?</li>
+              <li>Within high-deletion constituencies, do gender, caste and religion patterns suggest any systematic integrity concerns?</li>
             </ul>
-            <p>All computations on this page are descriptive summaries. They do not, by themselves, establish intent or
-            illegality. Interpretation must be combined with ground reports, party records, and administrative documentation.</p>
+
+            <h4 style="margin:0 0 .4rem;font-size:.9rem;">Key data sources used in this dashboard</h4>
+            <ul style="margin:.1rem 0 .8rem;padding-left:1.1rem;font-size:.8rem;line-height:1.4;color:#4b5563;">
+              <li><code>overview_metrics.csv</code> &mdash; state-level totals and headline indicators.</li>
+              <li><code>elections_summary_working.csv</code>, <code>ac_correlation_ready.csv</code> &mdash; AC-level deletions, booths, quartiles and political alignment.</li>
+              <li><code>ac_deletions_change_2020_2024.csv</code> &mdash; change in deletions per booth between 2020 and 2024.</li>
+              <li><code>district_demography_summary.csv</code>, <code>district_population_profile.csv</code> &mdash; density, literacy, demographic structure and deletions at district level.</li>
+              <li><code>district_rural_urban_profile.csv</code> &mdash; rural/urban population splits and projections.</li>
+              <li><code>district_gdp_profile.csv</code> &mdash; per-capita GDDP and basic economic context by district.</li>
+              <li><code>district_caste_summary_master.csv</code>, <code>district_caste_block_shares.csv</code> &mdash; caste block shares of deletions.</li>
+              <li><code>religion_overall.csv</code>, <code>religion_by_band.csv</code>, <code>religion_gender_crosstab.csv</code>, <code>booth-gender-religion.csv</code> &mdash; religion and gender cross-tabs.</li>
+              <li><code>top5_caste_groups_deleted.csv</code>, <code>bottom5_caste_groups_deleted.csv</code>, <code>top5_caste_names_deleted.csv</code>, <code>bottom5_caste_names_deleted.csv</code> &mdash; top/bottom caste groups and surnames by deletions.</li>
+              <li><code>district_border_classification.csv</code>, <code>ac_border_classification.csv</code> &mdash; classification of districts and ACs into border vs interior groups.</li>
+            </ul>
+
+            <h4 style="margin:0 0 .4rem;font-size:.9rem;">Integrity and risk-reading frame</h4>
+            <p style="margin:.1rem 0 .6rem;font-size:.8rem;line-height:1.5;color:#4b5563;">
+              Quartiles for deletions per booth are constructed from the AC-level summary files, with higher quartiles
+              representing ACs with higher deletions per booth. The other tabs (gender, caste, religion, geography, electoral)
+              can all be read through this quartile frame: patterns that repeat in high-deletion spaces are the most
+              concerning from an integrity perspective.
+            </p>
+            <p style="margin:.1rem 0 .2rem;font-size:.8rem;line-height:1.5;color:#4b5563;">
+              All figures here are descriptive. They do not, by themselves, establish motive or illegality. Any strong claim
+              should combine this analysis with booth lists, field reports and party records.
+            </p>
           </div>
         </div>
       `;
@@ -1894,7 +1809,6 @@
       if (name === 'religion') return renderReligion();
       if (name === 'electoral') return renderElectoral();
       if (name === 'geographic') return renderGeographic();
-      if (name === 'integrity') return renderIntegrity();
       if (name === 'methods') return renderMethods();
       renderOverview();
     }
@@ -1907,82 +1821,58 @@
       try {
         const base = 'data';
         const [
-          boothGenderReligion,
-          religionOverall,
-          religionByBand,
-          religionGenderCrosstab,
-          electionsSummary,
-          electionsQuartiles,
           overviewMetrics,
-          bcsACShares,
-          acReserved,
-          partyAllianceMap,
+          religionGenderCrosstab,
           districtDemographySummary,
-          districtPopulationProfile,
           districtRuralUrbanProfile,
           districtGdpProfile,
-          districtCasteSummaryMaster,
-          districtCasteBlockShares,
-          districtBorderClassification,
-          acBorderClassification,
-          acDeletionsChange,
           acCorrelationReady,
+          electionsSummary,
+          acDeletionsChange,
+          districtCasteSummaryMaster,
           top5CasteGroupsDeleted,
           bottom5CasteGroupsDeleted,
           top5CasteNamesDeleted,
-          bottom5CasteNamesDeleted
+          bottom5CasteNamesDeleted,
+          religionOverall,
+          religionByBand,
+          districtBorderClassification
         ] = await Promise.all([
-          loadCSV(base + '/booth-gender-religion.csv'),
-          loadCSV(base + '/religion_overall.csv'),
-          loadCSV(base + '/religion_by_band.csv'),
-          loadCSV(base + '/religion_gender_crosstab.csv'),
-          loadCSV(base + '/elections_summary_working.csv'),
-          loadCSV(base + '/elections_quartiles_2024_by_deletion.csv'),
           loadCSV(base + '/overview_metrics.csv'),
-          loadCSV(base + '/bcs_ac_shares_estimated.csv'),
-          loadCSV(base + '/ac_reserved_from_name.csv'),
-          loadCSV(base + '/party_to_alliance_mapping.csv'),
+          loadCSV(base + '/religion_gender_crosstab.csv'),
           loadCSV(base + '/district_demography_summary.csv'),
-          loadCSV(base + '/district_population_profile.csv'),
           loadCSV(base + '/district_rural_urban_profile.csv'),
           loadCSV(base + '/district_gdp_profile.csv'),
-          loadCSV(base + '/district_caste_summary_master.csv'),
-          loadCSV(base + '/district_caste_block_shares.csv'),
-          loadCSV(base + '/district_border_classification.csv'),
-          loadCSV(base + '/ac_border_classification.csv'),
-          loadCSV(base + '/ac_deletions_change_2020_2024.csv'),
           loadCSV(base + '/ac_correlation_ready.csv'),
+          loadCSV(base + '/elections_summary_working.csv'),
+          loadCSV(base + '/ac_deletions_change_2020_2024.csv'),
+          loadCSV(base + '/district_caste_summary_master.csv'),
           loadCSV(base + '/top5_caste_groups_deleted.csv'),
           loadCSV(base + '/bottom5_caste_groups_deleted.csv'),
           loadCSV(base + '/top5_caste_names_deleted.csv'),
-          loadCSV(base + '/bottom5_caste_names_deleted.csv')
+          loadCSV(base + '/bottom5_caste_names_deleted.csv'),
+          loadCSV(base + '/religion_overall.csv'),
+          loadCSV(base + '/religion_by_band.csv'),
+          loadCSV(base + '/district_border_classification.csv')
         ]);
 
         APP_STATE.raw = {
-          booth_gender_religion: boothGenderReligion,
-          religion_overall: religionOverall,
-          religion_by_band: religionByBand,
-          religion_gender_crosstab: religionGenderCrosstab,
-          elections_summary_working: electionsSummary,
-          elections_quartiles_2024_by_deletion: electionsQuartiles,
           overview_metrics: overviewMetrics,
-          bcs_ac_shares_estimated: bcsACShares,
-          ac_reserved_from_name: acReserved,
-          party_to_alliance_mapping: partyAllianceMap,
+          religion_gender_crosstab: religionGenderCrosstab,
           district_demography_summary: districtDemographySummary,
-          district_population_profile: districtPopulationProfile,
           district_rural_urban_profile: districtRuralUrbanProfile,
           district_gdp_profile: districtGdpProfile,
-          district_caste_summary_master: districtCasteSummaryMaster,
-          district_caste_block_shares: districtCasteBlockShares,
-          district_border_classification: districtBorderClassification,
-          ac_border_classification: acBorderClassification,
-          ac_deletions_change_2020_2024: acDeletionsChange,
           ac_correlation_ready: acCorrelationReady,
+          elections_summary_working: electionsSummary,
+          ac_deletions_change_2020_2024: acDeletionsChange,
+          district_caste_summary_master: districtCasteSummaryMaster,
           top5_caste_groups_deleted: top5CasteGroupsDeleted,
           bottom5_caste_groups_deleted: bottom5CasteGroupsDeleted,
           top5_caste_names_deleted: top5CasteNamesDeleted,
-          bottom5_caste_names_deleted: bottom5CasteNamesDeleted
+          bottom5_caste_names_deleted: bottom5CasteNamesDeleted,
+          religion_overall: religionOverall,
+          religion_by_band: religionByBand,
+          district_border_classification: districtBorderClassification
         };
 
         computeDerived();
