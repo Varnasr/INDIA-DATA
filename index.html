@@ -360,6 +360,12 @@
       padding: 0.7rem 0.9rem 0.85rem;
     }
 
+    .card-body p {
+      margin: 0.25rem 0;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
     .viz {
       position: relative;
       width: 100%;
@@ -423,6 +429,17 @@
       to { transform: rotate(360deg); }
     }
 
+    .no-data {
+      font-size: 0.8rem;
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      padding: 0.5rem;
+    }
+
     code {
       font-family: "Inconsolata", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 0.78rem;
@@ -464,20 +481,22 @@
         <div class="title-pill"><span></span> Internal analysis – Bihar voter deletions</div>
         <h1>Bihar voter deletions dashboard</h1>
         <p>
-          This internal dashboard brings together district and AC-level summaries of voter deletions in Bihar,
-          organised to support political and research conversations. It is descriptive and exploratory.
+          This internal dashboard brings together district and AC-level summaries of voter deletions in Bihar, organised to
+          support political and research conversations. It is descriptive and exploratory.
         </p>
         <div class="pill-row">
           <div class="pill">Source: Bihar electoral rolls &amp; derived aggregates</div>
           <div class="pill">Unit: booths, ACs, districts</div>
-          <div class="pill">For: internal Congress analysis – do not share publicly</div>
+          <div class="pill">For: internal Congress analysis – not for public circulation</div>
         </div>
       </div>
       <div class="brand-block">
         <div class="brand-mark">BV</div>
         <div class="brand-meta">
           <strong>Bihar Voter Study</strong>
-          <span>Protected dashboard — <a href="javascript:void(0)" onclick="window.__forindiaLogout && window.__forindiaLogout()" style="color:#2563eb;text-decoration:none;border-bottom:1px dashed rgba(37,99,235,.4);">reset password</a></span>
+          <span>Protected dashboard — <a href="javascript:void(0)"
+             onclick="window.__forindiaLogout && window.__forindiaLogout()"
+             style="color:#2563eb;text-decoration:none;border-bottom:1px dashed rgba(37,99,235,.4);">reset password</a></span>
         </div>
       </div>
     </header>
@@ -501,7 +520,7 @@
 
     <div id="loading" class="loading-block">
       <div>
-        <strong>Loading summary files…</strong>
+        <strong>Loading summary tables…</strong>
         <div style="margin-top:0.12rem;">The dashboard reads pre-aggregated CSVs from the <code>data/</code> folder (no raw 65L row file).</div>
       </div>
       <div class="spinner"></div>
@@ -512,7 +531,7 @@
     </main>
 
     <div class="footer-note">
-      <div>All figures here are based on pre-aggregated internal CSVs. Use alongside on-ground feedback and booth-level lists.</div>
+      <div>All figures are based on pre-aggregated internal tables. Use alongside on-ground feedback and booth-level lists.</div>
       <button type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top</button>
     </div>
   </div>
@@ -564,6 +583,11 @@
       return x.toFixed(digits) + '%';
     }
 
+    function allZero(arr) {
+      if (!arr || !arr.length) return true;
+      return arr.every(v => !v || v === 0);
+    }
+
     function clearCharts() {
       Object.keys(APP_STATE.charts).forEach(key => {
         try {
@@ -573,10 +597,21 @@
       APP_STATE.charts = {};
     }
 
-    function buildChart(canvasId, key, config) {
-      const el = document.getElementById(canvasId);
-      if (!el) return null;
-      const ctx = el.getContext('2d');
+    function buildChart(canvasId, key, config, hasData) {
+      const wrap = document.getElementById(canvasId)?.parentElement;
+      const canvas = document.getElementById(canvasId);
+      if (!canvas || !wrap) return null;
+
+      if (!hasData) {
+        canvas.remove();
+        const msg = document.createElement('div');
+        msg.className = 'no-data';
+        msg.textContent = 'No usable data loaded for this view. Please check that the corresponding table in the data folder is present and has rows.';
+        wrap.appendChild(msg);
+        return null;
+      }
+
+      const ctx = canvas.getContext('2d');
       if (APP_STATE.charts[key]) {
         try { APP_STATE.charts[key].destroy(); } catch (e) {}
       }
@@ -606,9 +641,9 @@
       const relGen = raw.religion_gender_crosstab || [];
       let female = 0, male = 0, other = 0;
       relGen.forEach(row => {
-        female += Number(row.female || 0);
-        male += Number(row.male || 0);
-        other += Number(row.unknown || 0);
+        female += Number(row.female || row.Female || 0);
+        male += Number(row.male || row.Male || 0);
+        other += Number(row.unknown || row.Other || 0);
       });
       const totalGen = female + male + other;
       d.genderTotals = {
@@ -629,7 +664,7 @@
           Number(a.deletions_2024 || a.deletions || 0)
         );
         d.topDistrictsByDeletion = byDel.slice(0, 10).map(r => ({
-          name: r.district_name,
+          name: r.district_name || r.District || '',
           deletions: Number(r.deletions_2024 || r.deletions || 0),
           delPerBooth: Number(r.del_per_booth || 0)
         }));
@@ -637,13 +672,13 @@
         d.topDistrictsByDeletion = [];
       }
 
-      // Rural vs urban totals (state-level) from district_rural_urban_profile
+      // Rural vs urban totals (state-level)
       const ru = raw.district_rural_urban_profile || [];
       if (ru.length) {
         let totalUrban = 0, totalRural = 0;
         ru.forEach(r => {
-          totalUrban += Number(r.proj_2025_urban_pop || 0);
-          totalRural += Number(r.proj_2025_rural_pop || 0);
+          totalUrban += Number(r.proj_2025_urban_pop || r.urban_pop || 0);
+          totalRural += Number(r.proj_2025_rural_pop || r.rural_pop || 0);
         });
         const total = totalUrban + totalRural;
         d.ruralUrbanTotals = {
@@ -670,7 +705,7 @@
       if (gdpRows.length) {
         const sortedGdp = [...gdpRows].sort((a, b) => getPcGddp(b) - getPcGddp(a));
         d.gdpTop = sortedGdp.slice(0, 10).map(r => ({
-          name: r.district_name,
+          name: r.district_name || r.District || '',
           pcGddp: getPcGddp(r)
         }));
       } else {
@@ -715,7 +750,7 @@
           </div>
         </div>
 
-        <div class="grid grid-2">
+        <div class="grid grid-2" style="margin-bottom:1rem;">
           <div class="card">
             <div class="card-header">
               <h3>Top districts by deletions</h3>
@@ -724,8 +759,8 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-overview-districts"></canvas></div>
               <div class="takeaway">
-                This chart highlights districts with the highest absolute number of deletions. It is a starting point for
-                reading the political and social patterning in later tabs.
+                These districts have the highest absolute deletions. They are starting points for deeper political,
+                caste and gender reading using the other tabs and qualitative inputs.
               </div>
             </div>
           </div>
@@ -738,10 +773,27 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-overview-delperbooth"></canvas></div>
               <div class="takeaway">
-                Deletions per booth provide a more intensity-focused view than absolute counts. High values here flag
-                districts where deletions are concentrated relative to the polling infrastructure.
+                Deletions per booth give a more intensity-focused view than absolute counts. High values flag districts
+                where deletions are concentrated relative to the polling infrastructure.
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>How to use this overview</h3>
+            <span class="sub">Linking this tab to the rest of the dashboard</span>
+          </div>
+          <div class="card-body">
+            <p>
+              Use this tab to anchor the conversation: which districts are structurally large, which look intense on deletions
+              per booth, and where the gender skew is already visible.
+            </p>
+            <p>
+              The other tabs (gender, caste, religion, border, electoral) are best read as overlays on this picture, not as
+              independent stories.
+            </p>
           </div>
         </div>
       `;
@@ -754,54 +806,55 @@
       const delVals = topDist.map(r => r.deletions);
       const dpbVals = topDist.map(r => r.delPerBooth);
 
-      buildChart('chart-overview-districts', 'overview-districts', {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [{
-            label: 'Deletions (2024)',
-            data: delVals,
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          scales: {
-            x: {
-              ticks: { color: '#6b7280' },
-              grid: { color: 'rgba(209,213,219,1)' }
+      buildChart(
+        'chart-overview-districts',
+        'overview-districts',
+        {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Deletions (2024)',
+              data: delVals,
+              backgroundColor: accent
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              y: { ticks: { color: '#374151' } }
             },
-            y: {
-              ticks: { color: '#374151' }
-            }
-          },
-          plugins: {
-            legend: { display: false }
+            plugins: { legend: { display: false } }
           }
-        }
-      });
-
-      buildChart('chart-overview-delperbooth', 'overview-dpb', {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [{
-            label: 'Deletions per booth',
-            data: dpbVals,
-            backgroundColor: ndaColor
-          }]
         },
-        options: {
-          indexAxis: 'y',
-          scales: {
-            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            y: { ticks: { color: '#374151' } }
+        labels.length && !allZero(delVals)
+      );
+
+      buildChart(
+        'chart-overview-delperbooth',
+        'overview-dpb',
+        {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Deletions per booth',
+              data: dpbVals,
+              backgroundColor: ndaColor
+            }]
           },
-          plugins: {
-            legend: { display: false }
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              y: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
           }
-        }
-      });
+        },
+        labels.length && !allZero(dpbVals)
+      );
     }
 
     function renderDeletions() {
@@ -823,8 +876,16 @@
         return sum / list.length;
       }
 
+      const quartiles = { Q1: 0, Q2: 0, Q3: 0, Q4: 0 };
+      ac.forEach(r => {
+        const q = String(r.del_quartile || r.del_quart || '').toUpperCase();
+        if (quartiles[q] !== undefined) quartiles[q] += 1;
+      });
+      const qLabels = Object.keys(quartiles);
+      const qVals = qLabels.map(k => quartiles[k]);
+
       el.innerHTML = `
-        <div class="grid grid-2">
+        <div class="grid grid-2" style="margin-bottom:1rem;">
           <div class="card">
             <div class="card-header">
               <h3>ACs with highest deletions per booth</h3>
@@ -848,8 +909,36 @@
               <div class="viz"><canvas id="chart-del-flip"></canvas></div>
               <div class="takeaway">
                 Flipped ACs are those where the alliance holding the seat changes between 2020 and 2024. Any difference in
-                average deletions per booth between flipped and stable ACs should be interpreted cautiously.
+                average deletions per booth should be interpreted cautiously and cross-checked against local narratives.
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-bottom:1rem;">
+          <div class="card">
+            <div class="card-header">
+              <h3>Distribution of ACs by deletion quartile</h3>
+              <span class="sub">Number of ACs falling in each deletion band</span>
+            </div>
+            <div class="card-body">
+              <div class="viz"><canvas id="chart-del-quartiles"></canvas></div>
+              <div class="takeaway">
+                Quartiles are built from deletions per booth. The upper bands mark ACs that are structurally high on deletions,
+                where other patterns deserve extra scrutiny.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Reading deletions with caution</h3>
+              <span class="sub">Questions to keep in mind</span>
+            </div>
+            <div class="card-body">
+              <p>Use deletions per booth primarily as a pointer, not as proof of wrongdoing.</p>
+              <p>Always ask: is this AC unusual compared to structurally similar ACs (reservation status, caste mix, border group)?</p>
+              <p>Whenever possible, pair this tab with booth lists and local feedback from party workers.</p>
             </div>
           </div>
         </div>
@@ -862,45 +951,77 @@
       const labels = top.map(r => r.ac_name || `AC ${r.ac_number}`);
       const vals = top.map(r => Number(r.del_per_booth || 0));
 
-      buildChart('chart-del-ac-top', 'del-ac-top', {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [{
-            label: 'Deletions per booth',
-            data: vals,
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          scales: {
-            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            y: { ticks: { color: '#374151' } }
+      buildChart(
+        'chart-del-ac-top',
+        'del-ac-top',
+        {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Deletions per booth',
+              data: vals,
+              backgroundColor: accent
+            }]
           },
-          plugins: {
-            legend: { display: false }
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              y: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
           }
-        }
-      });
-
-      buildChart('chart-del-flip', 'del-flip', {
-        type: 'bar',
-        data: {
-          labels: ['Flipped ACs', 'Stable ACs'],
-          datasets: [{
-            data: [avgDelPerBooth(flipped) || 0, avgDelPerBooth(stable) || 0],
-            backgroundColor: [accent, ndaColor]
-          }]
         },
-        options: {
-          scales: {
-            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            x: { ticks: { color: '#374151' } }
+        labels.length && !allZero(vals)
+      );
+
+      buildChart(
+        'chart-del-flip',
+        'del-flip',
+        {
+          type: 'bar',
+          data: {
+            labels: ['Flipped ACs', 'Stable ACs'],
+            datasets: [{
+              data: [avgDelPerBooth(flipped) || 0, avgDelPerBooth(stable) || 0],
+              backgroundColor: [accent, ndaColor]
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            scales: {
+              y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        Boolean(avgDelPerBooth(flipped) || avgDelPerBooth(stable))
+      );
+
+      buildChart(
+        'chart-del-quartiles',
+        'del-quartiles',
+        {
+          type: 'bar',
+          data: {
+            labels: qLabels,
+            datasets: [{
+              label: 'Number of ACs',
+              data: qVals,
+              backgroundColor: accent
+            }]
+          },
+          options: {
+            scales: {
+              y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        qLabels.length && !allZero(qVals)
+      );
     }
 
     function renderDemographic() {
@@ -921,7 +1042,7 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-dem-ru"></canvas></div>
               <div class="takeaway">
-                This chart uses district-level projections to show the split between rural and urban population for Bihar as a
+                This bar view uses district-level projections to show the split between rural and urban population for Bihar as a
                 whole. It provides the context within which deletions are occurring.
               </div>
             </div>
@@ -930,37 +1051,37 @@
           <div class="card">
             <div class="card-header">
               <h3>Top districts by per capita GDDP</h3>
-              <span class="sub">Income profile as a backdrop to deletions</span>
+              <span class="sub">Income profile as backdrop to deletions</span>
             </div>
             <div class="card-body">
               <div class="viz"><canvas id="chart-dem-gdp"></canvas></div>
               <div class="takeaway">
-                Higher per capita GDDP does not automatically mean higher or lower deletions, but this ranking situates
-                deletion patterns against the basic economic profile of districts.
+                Higher per capita GDDP does not automatically mean higher or lower deletions, but this ranking situates deletion
+                patterns against the basic economic profile of districts.
               </div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-2">
+        <div class="grid grid-2" style="margin-bottom:1rem;">
           <div class="card">
             <div class="card-header">
               <h3>Districts by urbanisation level</h3>
-              <span class="sub">Projected 2025 urban share of population</span>
+              <span class="sub">Projected urban share of population</span>
             </div>
             <div class="card-body">
               <div class="viz"><canvas id="chart-dem-urban-share"></canvas></div>
               <div class="takeaway">
-                Districts are ordered by projected urban share of population, not by deletions. Combining this with the
-                deletions and gender tabs helps track patterns in more urbanised districts.
+                Districts are ordered by projected urban share of population. Combining this with the deletions and gender tabs
+                helps track patterns in more urbanised districts.
               </div>
             </div>
           </div>
 
           <div class="card">
             <div class="card-header">
-              <h3>District demographic and deletion profile</h3>
-              <span class="sub">Literacy vs deletions per booth</span>
+              <h3>Literacy vs deletions per booth</h3>
+              <span class="sub">District demographic and deletion profile</span>
             </div>
             <div class="card-body">
               <div class="viz"><canvas id="chart-dem-literacy-del"></canvas></div>
@@ -971,128 +1092,164 @@
             </div>
           </div>
         </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Key demographic questions</h3>
+            <span class="sub">What to ask while reading this tab</span>
+          </div>
+          <div class="card-body">
+            <p>Are high-deletion districts mostly rural, mostly urban, or mixed?</p>
+            <p>Do districts with better economic indicators show different deletion intensities?</p>
+            <p>Are there pockets where low literacy and high deletions coincide in politically sensitive ways?</p>
+          </div>
+        </div>
       `;
 
       const styles = getComputedStyle(document.documentElement);
       const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
       const indiaColor = styles.getPropertyValue('--india-color').trim() || '#16a34a';
 
-      // Rural vs urban chart
+      // Rural vs urban chart (bar, not pie)
+      const ruLabels = ['Rural', 'Urban'];
       const ruVals = [
         ruTotals ? ruTotals.ruralPop || 0 : 0,
         ruTotals ? ruTotals.urbanPop || 0 : 0
       ];
-
-      buildChart('chart-dem-ru', 'dem-ru', {
-        type: 'doughnut',
-        data: {
-          labels: ['Rural', 'Urban'],
-          datasets: [{
-            data: ruVals,
-            backgroundColor: [accent, indiaColor]
-          }]
-        },
-        options: {
-          plugins: {
-            legend: { position: 'bottom', labels: { usePointStyle: true, color: '#374151' } }
+      buildChart(
+        'chart-dem-ru',
+        'dem-ru',
+        {
+          type: 'bar',
+          data: {
+            labels: ruLabels,
+            datasets: [{
+              label: 'Population (projected 2025)',
+              data: ruVals,
+              backgroundColor: [accent, indiaColor]
+            }]
+          },
+          options: {
+            scales: {
+              y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
           }
-        }
-      });
+        },
+        ruTotals && !allZero(ruVals)
+      );
 
       // GDP top districts
-      buildChart('chart-dem-gdp', 'dem-gdp', {
-        type: 'bar',
-        data: {
-          labels: gdpTop.map(r => r.name),
-          datasets: [{
-            label: 'Per capita GDDP (constant ₹)',
-            data: gdpTop.map(r => r.pcGddp),
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          scales: {
-            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            y: { ticks: { color: '#374151' } }
+      buildChart(
+        'chart-dem-gdp',
+        'dem-gdp',
+        {
+          type: 'bar',
+          data: {
+            labels: gdpTop.map(r => r.name),
+            datasets: [{
+              label: 'Per capita GDDP (constant ₹)',
+              data: gdpTop.map(r => r.pcGddp),
+              backgroundColor: accent
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              y: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        gdpTop.length && !allZero(gdpTop.map(r => r.pcGddp))
+      );
 
       // Urbanisation share by district
       const sortedRu = [...ruProfile].sort((a, b) =>
-        Number(b.proj_2025_urban_pct || 0) - Number(a.proj_2025_urban_pct || 0)
+        Number(b.proj_2025_urban_pct || b.urban_pct || 0) -
+        Number(a.proj_2025_urban_pct || a.urban_pct || 0)
       );
       const ruTop = sortedRu.slice(0, 20);
-      buildChart('chart-dem-urban-share', 'dem-urban-share', {
-        type: 'bar',
-        data: {
-          labels: ruTop.map(r => r.district_name),
-          datasets: [{
-            label: 'Urban share of population (2025, %)',
-            data: ruTop.map(r => Number(r.proj_2025_urban_pct || 0)),
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          scales: {
-            x: {
-              beginAtZero: true,
-              max: 100,
-              ticks: { color: '#6b7280', callback: v => v + '%' },
-              grid: { color: 'rgba(209,213,219,1)' }
-            },
-            y: { ticks: { color: '#374151' } }
+      const ruShareVals = ruTop.map(r => Number(r.proj_2025_urban_pct || r.urban_pct || 0));
+      buildChart(
+        'chart-dem-urban-share',
+        'dem-urban-share',
+        {
+          type: 'bar',
+          data: {
+            labels: ruTop.map(r => r.district_name || r.District || ''),
+            datasets: [{
+              label: 'Urban share of population (%, projected)',
+              data: ruShareVals,
+              backgroundColor: accent
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: {
+                beginAtZero: true,
+                max: 100,
+                ticks: { color: '#6b7280', callback: v => v + '%' },
+                grid: { color: 'rgba(209,213,219,1)' }
+              },
+              y: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        ruTop.length && !allZero(ruShareVals)
+      );
 
       // Literacy vs deletions per booth – scatter
       const scatterData = demo.map(r => ({
         x: Number(r.census_2011_literacy_rate || r.literacy_rate || 0),
         y: Number(r.del_per_booth || 0),
-        label: r.district_name
+        label: r.district_name || r.District || ''
       }));
-
-      buildChart('chart-dem-literacy-del', 'dem-lit-del', {
-        type: 'scatter',
-        data: {
-          datasets: [{
-            label: 'Districts',
-            data: scatterData,
-            backgroundColor: accent,
-            parsing: false
-          }]
-        },
-        options: {
-          scales: {
-            x: {
-              title: { display: true, text: 'Literacy rate (%)' },
-              ticks: { color: '#6b7280' },
-              grid: { color: 'rgba(209,213,219,1)' }
-            },
-            y: {
-              title: { display: true, text: 'Deletions per booth' },
-              ticks: { color: '#6b7280' },
-              grid: { color: 'rgba(209,213,219,1)' }
-            }
+      buildChart(
+        'chart-dem-literacy-del',
+        'dem-lit-del',
+        {
+          type: 'scatter',
+          data: {
+            datasets: [{
+              label: 'Districts',
+              data: scatterData,
+              backgroundColor: accent,
+              parsing: false
+            }]
           },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              callbacks: {
-                label: ctx => {
-                  const p = ctx.raw;
-                  return `${p.label}: literacy ${p.x.toFixed(1)}%, deletions/booth ${p.y.toFixed(1)}`;
+          options: {
+            scales: {
+              x: {
+                title: { display: true, text: 'Literacy rate (%)' },
+                ticks: { color: '#6b7280' },
+                grid: { color: 'rgba(209,213,219,1)' }
+              },
+              y: {
+                title: { display: true, text: 'Deletions per booth' },
+                ticks: { color: '#6b7280' },
+                grid: { color: 'rgba(209,213,219,1)' }
+              }
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: ctx => {
+                    const p = ctx.raw;
+                    return `${p.label}: literacy ${p.x.toFixed(1)}%, deletions/booth ${p.y.toFixed(1)}`;
+                  }
                 }
               }
             }
           }
-        }
-      });
+        },
+        scatterData.length && !allZero(scatterData.map(p => p.y))
+      );
     }
 
     function renderTemporal() {
@@ -1106,7 +1263,7 @@
       const topDec = sorted.slice(-15).reverse();
 
       el.innerHTML = `
-        <div class="grid grid-2">
+        <div class="grid grid-2" style="margin-bottom:1rem;">
           <div class="card">
             <div class="card-header">
               <h3>Largest increases in deletions per booth</h3>
@@ -1135,51 +1292,79 @@
             </div>
           </div>
         </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>How to read time trends</h3>
+            <span class="sub">Avoiding over-interpretation</span>
+          </div>
+          <div class="card-body">
+            <p>Look for ACs where large increases in deletions sit alongside politically sensitive patterns in gender, caste or religion.</p>
+            <p>Check whether neighbouring ACs with similar social structure show similar changes; if not, that contrast matters.</p>
+            <p>Always note that two censuses and migration patterns sit in the background of these numbers.</p>
+          </div>
+        </div>
       `;
 
       const styles = getComputedStyle(document.documentElement);
       const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
       const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
 
-      buildChart('chart-temp-inc', 'temp-inc', {
-        type: 'bar',
-        data: {
-          labels: topInc.map(r => r.ac_name || `AC ${r.ac_number}`),
-          datasets: [{
-            label: 'Pct change in deletions per booth',
-            data: topInc.map(r => Number(r.pct_change_del_per_booth || 0)),
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          scales: {
-            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            y: { ticks: { color: '#374151' } }
-          },
-          plugins: { legend: { display: false } }
-        }
-      });
+      const incLabels = topInc.map(r => r.ac_name || `AC ${r.ac_number}`);
+      const incVals = topInc.map(r => Number(r.pct_change_del_per_booth || 0));
 
-      buildChart('chart-temp-dec', 'temp-dec', {
-        type: 'bar',
-        data: {
-          labels: topDec.map(r => r.ac_name || `AC ${r.ac_number}`),
-          datasets: [{
-            label: 'Pct change in deletions per booth',
-            data: topDec.map(r => Number(r.pct_change_del_per_booth || 0)),
-            backgroundColor: ndaColor
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          scales: {
-            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            y: { ticks: { color: '#374151' } }
+      const decLabels = topDec.map(r => r.ac_name || `AC ${r.ac_number}`);
+      const decVals = topDec.map(r => Number(r.pct_change_del_per_booth || 0));
+
+      buildChart(
+        'chart-temp-inc',
+        'temp-inc',
+        {
+          type: 'bar',
+          data: {
+            labels: incLabels,
+            datasets: [{
+              label: 'Pct change in deletions per booth',
+              data: incVals,
+              backgroundColor: accent
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              y: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        incLabels.length && !allZero(incVals)
+      );
+
+      buildChart(
+        'chart-temp-dec',
+        'temp-dec',
+        {
+          type: 'bar',
+          data: {
+            labels: decLabels,
+            datasets: [{
+              label: 'Pct change in deletions per booth',
+              data: decVals,
+              backgroundColor: ndaColor
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              y: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        decLabels.length && !allZero(decVals)
+      );
     }
 
     function renderGender() {
@@ -1198,7 +1383,7 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-gen-overall"></canvas></div>
               <div class="takeaway">
-                This chart shows the share of deletions recorded as women, men and other/unknown across the entire dataset.
+                This bar view shows the share of deletions recorded as women, men and other/unknown across the entire dataset.
               </div>
             </div>
           </div>
@@ -1211,10 +1396,22 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-gen-districts"></canvas></div>
               <div class="takeaway">
-                Districts here appear because the share of deletions recorded as female is higher than in others. This tab
-                does not, by itself, prove discrimination, but points to where further qualitative checks are needed.
+                Districts here appear because the share of deletions recorded as female is higher than in others. This does
+                not, by itself, prove discrimination, but points to where further qualitative checks are needed.
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Key gender questions</h3>
+            <span class="sub">Points to probe with field teams</span>
+          </div>
+          <div class="card-body">
+            <p>Where female-heavy deletions coincide with migration-heavy or male-out migration areas.</p>
+            <p>Whether women in certain age bands or marital statuses appear more frequently in deletions.</p>
+            <p>How these patterns align with local stories about ration cards, Aadhaar, marital homes and natal homes.</p>
           </div>
         </div>
       `;
@@ -1224,53 +1421,71 @@
       const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
       const grey = '#9ca3af';
 
-      // Overall gender composition
-      buildChart('chart-gen-overall', 'gen-overall', {
-        type: 'doughnut',
-        data: {
-          labels: ['Female', 'Male', 'Other / unknown'],
-          datasets: [{
-            data: [g.female || 0, g.male || 0, g.other || 0],
-            backgroundColor: [accent, ndaColor, grey]
-          }]
-        },
-        options: {
-          plugins: {
-            legend: { position: 'bottom', labels: { usePointStyle: true, color: '#374151' } }
+      // Overall gender composition (bar, not pie)
+      const genderLabels = ['Female', 'Male', 'Other / unknown'];
+      const genderVals = [g.female || 0, g.male || 0, g.other || 0];
+
+      buildChart(
+        'chart-gen-overall',
+        'gen-overall',
+        {
+          type: 'bar',
+          data: {
+            labels: genderLabels,
+            datasets: [{
+              label: 'Total deletions',
+              data: genderVals,
+              backgroundColor: [accent, ndaColor, grey]
+            }]
+          },
+          options: {
+            scales: {
+              y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
           }
-        }
-      });
+        },
+        !allZero(genderVals)
+      );
 
       // Districts with highest female share of deletions
       const withFemaleShare = demo
         .filter(r => r.del_f_share_pct !== null && r.del_f_share_pct !== undefined)
         .sort((a, b) => Number(b.del_f_share_pct || 0) - Number(a.del_f_share_pct || 0))
         .slice(0, 15);
+      const dfLabels = withFemaleShare.map(r => r.district_name || r.District || '');
+      const dfVals = withFemaleShare.map(r => Number(r.del_f_share_pct || 0));
 
-      buildChart('chart-gen-districts', 'gen-districts', {
-        type: 'bar',
-        data: {
-          labels: withFemaleShare.map(r => r.district_name),
-          datasets: [{
-            label: 'Female share of deletions (%)',
-            data: withFemaleShare.map(r => Number(r.del_f_share_pct || 0)),
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          scales: {
-            x: {
-              beginAtZero: true,
-              max: 100,
-              ticks: { color: '#6b7280', callback: v => v + '%' },
-              grid: { color: 'rgba(209,213,219,1)' }
-            },
-            y: { ticks: { color: '#374151' } }
+      buildChart(
+        'chart-gen-districts',
+        'gen-districts',
+        {
+          type: 'bar',
+          data: {
+            labels: dfLabels,
+            datasets: [{
+              label: 'Female share of deletions (%)',
+              data: dfVals,
+              backgroundColor: accent
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: {
+                beginAtZero: true,
+                max: 100,
+                ticks: { color: '#6b7280', callback: v => v + '%' },
+                grid: { color: 'rgba(209,213,219,1)' }
+              },
+              y: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        dfLabels.length && !allZero(dfVals)
+      );
     }
 
     function renderCaste() {
@@ -1306,14 +1521,14 @@
             <div class="card-body">
               <div class="viz"><canvas id="chart-caste-top-bottom"></canvas></div>
               <div class="takeaway">
-                Blocks with the highest and lowest total deletions. Differences here interact with reservation status, party
-                competition and geography, explored in other tabs.
+                Blocks with the highest and lowest total deletions interact with reservation status, party competition and
+                geography, explored in other tabs.
               </div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-2">
+        <div class="grid grid-2" style="margin-bottom:1rem;">
           <div class="card">
             <div class="card-header">
               <h3>Top 5 surnames by deletions</h3>
@@ -1342,6 +1557,18 @@
             </div>
           </div>
         </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Principles for reading caste patterns</h3>
+            <span class="sub">Protective names, over-targeted blocks and caution</span>
+          </div>
+          <div class="card-body">
+            <p>Always separate structural presence (population share) from deletion share before inferring bias.</p>
+            <p>Look for surnames with low deletions but large population presence, and compare across alliances and border groups.</p>
+            <p>Use field experience to check whether “safe” surnames align with specific parties, communities or class positions.</p>
+          </div>
+        </div>
       `;
 
       const styles = getComputedStyle(document.documentElement);
@@ -1367,90 +1594,122 @@
         medianShare('fc_share_share_pct')
       ];
 
-      buildChart('chart-caste-blocks', 'caste-blocks', {
-        type: 'bar',
-        data: {
-          labels: labelsBlocks,
-          datasets: [{
-            label: 'Median share of deletions (%)',
-            data: blockVals,
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          scales: {
-            y: { beginAtZero: true, max: 100, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            x: { ticks: { color: '#374151' } }
+      buildChart(
+        'chart-caste-blocks',
+        'caste-blocks',
+        {
+          type: 'bar',
+          data: {
+            labels: labelsBlocks,
+            datasets: [{
+              label: 'Median share of deletions (%)',
+              data: blockVals,
+              backgroundColor: accent
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            scales: {
+              y: { beginAtZero: true, max: 100, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        labelsBlocks.length && !allZero(blockVals)
+      );
 
       // Top vs bottom caste groups (total_deleted)
-      buildChart('chart-caste-top-bottom', 'caste-top-bottom', {
-        type: 'bar',
-        data: {
-          labels: topGroups.map(r => r.BroadGroup),
-          datasets: [{
-            label: 'Top groups – total deletions',
-            data: topGroups.map(r => Number(r.total_deleted || 0)),
-            backgroundColor: accent
-          }, {
-            label: 'Bottom groups – total deletions',
-            data: bottomGroups.map(r => Number(r.total_deleted || 0)),
-            backgroundColor: ndaColor
-          }]
-        },
-        options: {
-          scales: {
-            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            x: { ticks: { color: '#374151' } }
+      const cgTopLabels = topGroups.map(r => r.BroadGroup || r.group || '');
+      const cgTopVals = topGroups.map(r => Number(r.total_deleted || 0));
+      const cgBottomLabels = bottomGroups.map(r => r.BroadGroup || r.group || '');
+      const cgBottomVals = bottomGroups.map(r => Number(r.total_deleted || 0));
+
+      buildChart(
+        'chart-caste-top-bottom',
+        'caste-top-bottom',
+        {
+          type: 'bar',
+          data: {
+            labels: cgTopLabels.length ? cgTopLabels : cgBottomLabels,
+            datasets: [{
+              label: 'Top groups – total deletions',
+              data: cgTopVals,
+              backgroundColor: accent
+            }, {
+              label: 'Bottom groups – total deletions',
+              data: cgBottomVals,
+              backgroundColor: ndaColor
+            }]
           },
-          plugins: { legend: { labels: { color: '#374151' } } }
-        }
-      });
+          options: {
+            scales: {
+              y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { labels: { color: '#374151' } } }
+          }
+        },
+        (cgTopLabels.length || cgBottomLabels.length) &&
+          !allZero(cgTopVals.concat(cgBottomVals))
+      );
 
       // Top 5 surnames
-      buildChart('chart-caste-names-top', 'caste-names-top', {
-        type: 'bar',
-        data: {
-          labels: topNames.map(r => r.lastname),
-          datasets: [{
-            label: 'Total deletions',
-            data: topNames.map(r => Number(r.total_deleted || 0)),
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          scales: {
-            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            y: { ticks: { color: '#374151' } }
+      const tnLabels = topNames.map(r => r.lastname || r.surname || '');
+      const tnVals = topNames.map(r => Number(r.total_deleted || 0));
+
+      buildChart(
+        'chart-caste-names-top',
+        'caste-names-top',
+        {
+          type: 'bar',
+          data: {
+            labels: tnLabels,
+            datasets: [{
+              label: 'Total deletions',
+              data: tnVals,
+              backgroundColor: accent
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              y: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        tnLabels.length && !allZero(tnVals)
+      );
 
       // Bottom 5 surnames
-      buildChart('chart-caste-names-bottom', 'caste-names-bottom', {
-        type: 'bar',
-        data: {
-          labels: bottomNames.map(r => r.lastname),
-          datasets: [{
-            label: 'Total deletions',
-            data: bottomNames.map(r => Number(r.total_deleted || 0)),
-            backgroundColor: grey
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          scales: {
-            x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            y: { ticks: { color: '#374151' } }
+      const bnLabels = bottomNames.map(r => r.lastname || r.surname || '');
+      const bnVals = bottomNames.map(r => Number(r.total_deleted || 0));
+
+      buildChart(
+        'chart-caste-names-bottom',
+        'caste-names-bottom',
+        {
+          type: 'bar',
+          data: {
+            labels: bnLabels,
+            datasets: [{
+              label: 'Total deletions',
+              data: bnVals,
+              backgroundColor: grey
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: { ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              y: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        bnLabels.length && !allZero(bnVals)
+      );
     }
 
     function renderReligion() {
@@ -1489,6 +1748,18 @@
             </div>
           </div>
         </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Questions to carry into field work</h3>
+            <span class="sub">Connecting religio-political narratives and data</span>
+          </div>
+          <div class="card-body">
+            <p>Compare booths with high deletions and unusual religious composition to local narratives about polarisation.</p>
+            <p>Check whether high-deletion religious minorities sit in specific alliances or are spread across parties.</p>
+            <p>Always contrast deletion shares with vote shares and population shares before drawing strong conclusions.</p>
+          </div>
+        </div>
       `;
 
       const styles = getComputedStyle(document.documentElement);
@@ -1496,54 +1767,75 @@
       const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
       const grey = '#9ca3af';
 
-      buildChart('chart-rel-overall', 'rel-overall', {
-        type: 'doughnut',
-        data: {
-          labels: overall.map(r => r.religion),
-          datasets: [{
-            data: overall.map(r => Number(r.count || 0)),
-            backgroundColor: [accent, ndaColor, grey]
-          }]
-        },
-        options: {
-          plugins: {
-            legend: { position: 'bottom', labels: { usePointStyle: true, color: '#374151' } }
-          }
-        }
-      });
+      const relLabels = overall.map(r => r.religion || r.Religion || '');
+      const relVals = overall.map(r => Number(r.count || r.total || 0));
 
-      buildChart('chart-rel-bands', 'rel-bands', {
-        type: 'bar',
-        data: {
-          labels: byBand.map(r => r.band),
-          datasets: [{
-            label: 'Hindu (%)',
-            data: byBand.map(r => Number(r.Hindu_pct || 0)),
-            backgroundColor: accent
-          }, {
-            label: 'Muslim (%)',
-            data: byBand.map(r => Number(r.Muslim_pct || 0)),
-            backgroundColor: ndaColor
-          }, {
-            label: 'Unknown (%)',
-            data: byBand.map(r => Number(r.Unknown_pct || 0)),
-            backgroundColor: grey
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              stacked: true,
-              beginAtZero: true,
-              max: 100,
-              ticks: { color: '#6b7280', callback: v => v + '%' },
-              grid: { color: 'rgba(209,213,219,1)' }
-            },
-            x: { stacked: true, ticks: { color: '#374151' } }
+      buildChart(
+        'chart-rel-overall',
+        'rel-overall',
+        {
+          type: 'bar',
+          data: {
+            labels: relLabels,
+            datasets: [{
+              label: 'Total deletions',
+              data: relVals,
+              backgroundColor: [accent, ndaColor, grey]
+            }]
           },
-          plugins: { legend: { labels: { color: '#374151' } } }
-        }
-      });
+          options: {
+            scales: {
+              y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        relLabels.length && !allZero(relVals)
+      );
+
+      const bandLabels = byBand.map(r => r.band || r.Band || '');
+      const hinduVals = byBand.map(r => Number(r.Hindu_pct || 0));
+      const muslimVals = byBand.map(r => Number(r.Muslim_pct || 0));
+      const otherVals = byBand.map(r => Number(r.Unknown_pct || r.Other_pct || 0));
+
+      buildChart(
+        'chart-rel-bands',
+        'rel-bands',
+        {
+          type: 'bar',
+          data: {
+            labels: bandLabels,
+            datasets: [{
+              label: 'Hindu (%)',
+              data: hinduVals,
+              backgroundColor: accent
+            }, {
+              label: 'Muslim (%)',
+              data: muslimVals,
+              backgroundColor: ndaColor
+            }, {
+              label: 'Other / unknown (%)',
+              data: otherVals,
+              backgroundColor: grey
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                stacked: true,
+                beginAtZero: true,
+                max: 100,
+                ticks: { color: '#6b7280', callback: v => v + '%' },
+                grid: { color: 'rgba(209,213,219,1)' }
+              },
+              x: { stacked: true, ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { labels: { color: '#374151' } } }
+          }
+        },
+        bandLabels.length && !allZero(hinduVals.concat(muslimVals, otherVals))
+      );
     }
 
     function renderElectoral() {
@@ -1555,9 +1847,9 @@
 
       const byAlliance = {};
       ac.forEach(r => {
-        const key = r.alliance_2024_ls || 'Unknown';
+        const key = r.alliance_2024_ls || r.ls_alliance_2024 || 'Unknown';
         if (!byAlliance[key]) byAlliance[key] = { del: 0, booths: 0 };
-        byAlliance[key].del += Number(r.deletions || 0);
+        byAlliance[key].del += Number(r.deletions || r.del_2024 || 0);
         byAlliance[key].booths += Number(r.booths || r.booths_2024 || 0);
       });
 
@@ -1569,7 +1861,7 @@
       });
 
       el.innerHTML = `
-        <div class="grid grid-2">
+        <div class="grid grid-2" style="margin-bottom:1rem;">
           <div class="card">
             <div class="card-header">
               <h3>Deletions by LS alliance (2024)</h3>
@@ -1597,49 +1889,71 @@
             </div>
           </div>
         </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Using electoral patterns responsibly</h3>
+            <span class="sub">Avoiding over-confident claims</span>
+          </div>
+          <div class="card-body">
+            <p>Compare alliances only between structurally similar seats (border status, caste mix, urbanisation).</p>
+            <p>Cross-check any strong pattern with booth-level lists, turnout data and ground reports.</p>
+            <p>Use these charts to frame questions for strategy discussions, not as proof of malpractice.</p>
+          </div>
+        </div>
       `;
 
       const styles = getComputedStyle(document.documentElement);
       const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
       const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
 
-      buildChart('chart-elec-del', 'elec-del', {
-        type: 'bar',
-        data: {
-          labels: allianceLabels,
-          datasets: [{
-            label: 'Total deletions',
-            data: allianceDel,
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          scales: {
-            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            x: { ticks: { color: '#374151' } }
+      buildChart(
+        'chart-elec-del',
+        'elec-del',
+        {
+          type: 'bar',
+          data: {
+            labels: allianceLabels,
+            datasets: [{
+              label: 'Total deletions',
+              data: allianceDel,
+              backgroundColor: accent
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            scales: {
+              y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        allianceLabels.length && !allZero(allianceDel)
+      );
 
-      buildChart('chart-elec-dpb', 'elec-dpb', {
-        type: 'bar',
-        data: {
-          labels: allianceLabels,
-          datasets: [{
-            label: 'Deletions per booth',
-            data: allianceDpb,
-            backgroundColor: ndaColor
-          }]
-        },
-        options: {
-          scales: {
-            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            x: { ticks: { color: '#374151' } }
+      buildChart(
+        'chart-elec-dpb',
+        'elec-dpb',
+        {
+          type: 'bar',
+          data: {
+            labels: allianceLabels,
+            datasets: [{
+              label: 'Deletions per booth',
+              data: allianceDpb,
+              backgroundColor: ndaColor
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            scales: {
+              y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        allianceLabels.length && !allZero(allianceDpb)
+      );
     }
 
     function renderGeographic() {
@@ -1649,15 +1963,18 @@
       const el = document.getElementById('main');
 
       const mapBorder = {};
-      distBorder.forEach(r => { mapBorder[String(r.district_name).trim()] = r.border_group || 'Interior'; });
+      distBorder.forEach(r => {
+        const name = String(r.district_name || r.District || '').trim();
+        mapBorder[name] = r.border_group || r.group || 'Interior';
+      });
 
       const byGroup = {};
       demo.forEach(r => {
-        const name = String(r.district_name).trim();
+        const name = String(r.district_name || r.District || '').trim();
         const group = mapBorder[name] || r.border_group || 'Interior';
         if (!byGroup[group]) byGroup[group] = { del: 0, booths: 0 };
         const del = Number(r.deletions_2024 || r.deletions || 0);
-        const booths = Number(r.booths_2024 || 0);
+        const booths = Number(r.booths_2024 || r.booths || 0);
         byGroup[group].del += del;
         byGroup[group].booths += booths;
       });
@@ -1670,7 +1987,7 @@
       });
 
       el.innerHTML = `
-        <div class="grid grid-2">
+        <div class="grid grid-2" style="margin-bottom:1rem;">
           <div class="card">
             <div class="card-header">
               <h3>Border vs interior districts</h3>
@@ -1680,7 +1997,7 @@
               <div class="viz"><canvas id="chart-geo-del"></canvas></div>
               <div class="takeaway">
                 Border groups (for example, Nepal-facing or Jharkhand-facing) are grouped using a district classification.
-                This is one lens among several.
+                This is one analytic lens among several.
               </div>
             </div>
           </div>
@@ -1699,49 +2016,71 @@
             </div>
           </div>
         </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Geographic questions</h3>
+            <span class="sub">Where to look closer</span>
+          </div>
+          <div class="card-body">
+            <p>Check whether high-deletion border groups also carry distinctive caste or religious compositions.</p>
+            <p>Look for clusters of border ACs where deletions rise sharply over time while neighbouring interior ACs do not.</p>
+            <p>Combine this with migration narratives and security narratives before jumping to conclusions.</p>
+          </div>
+        </div>
       `;
 
       const styles = getComputedStyle(document.documentElement);
       const accent = styles.getPropertyValue('--accent').trim() || '#2563eb';
       const ndaColor = styles.getPropertyValue('--nda-color').trim() || '#ea580c';
 
-      buildChart('chart-geo-del', 'geo-del', {
-        type: 'bar',
-        data: {
-          labels: groups,
-          datasets: [{
-            label: 'Total deletions',
-            data: groupDel,
-            backgroundColor: accent
-          }]
-        },
-        options: {
-          scales: {
-            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            x: { ticks: { color: '#374151' } }
+      buildChart(
+        'chart-geo-del',
+        'geo-del',
+        {
+          type: 'bar',
+          data: {
+            labels: groups,
+            datasets: [{
+              label: 'Total deletions',
+              data: groupDel,
+              backgroundColor: accent
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            scales: {
+              y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        groups.length && !allZero(groupDel)
+      );
 
-      buildChart('chart-geo-dpb', 'geo-dpb', {
-        type: 'bar',
-        data: {
-          labels: groups,
-          datasets: [{
-            label: 'Deletions per booth',
-            data: groupDpb,
-            backgroundColor: ndaColor
-          }]
-        },
-        options: {
-          scales: {
-            y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
-            x: { ticks: { color: '#374151' } }
+      buildChart(
+        'chart-geo-dpb',
+        'geo-dpb',
+        {
+          type: 'bar',
+          data: {
+            labels: groups,
+            datasets: [{
+              label: 'Deletions per booth',
+              data: groupDpb,
+              backgroundColor: ndaColor
+            }]
           },
-          plugins: { legend: { display: false } }
-        }
-      });
+          options: {
+            scales: {
+              y: { beginAtZero: true, ticks: { color: '#6b7280' }, grid: { color: 'rgba(209,213,219,1)' } },
+              x: { ticks: { color: '#374151' } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        },
+        groups.length && !allZero(groupDpb)
+      );
     }
 
     function renderMethods() {
@@ -1749,7 +2088,7 @@
       el.innerHTML = `
         <div class="card">
           <div class="card-header">
-            <h3>Methods, research questions and integrity frame</h3>
+            <h3>Methods, questions and integrity frame</h3>
             <span class="sub">How this dashboard was assembled and how to read it</span>
           </div>
           <div class="card-body">
@@ -1759,33 +2098,32 @@
               <li>Are deletions disproportionately concentrated among women, particular caste blocks or religious communities?</li>
               <li>Do deletions differ systematically between rural and urban areas, and between border and interior districts?</li>
               <li>How do deletions per booth relate to electoral competition, especially flipped vs stable Assembly constituencies?</li>
-              <li>Within high-deletion constituencies, do gender, caste and religion patterns suggest any systematic integrity concerns?</li>
+              <li>Within high-deletion spaces, do gender, caste and religion patterns suggest any systematic integrity concerns?</li>
             </ul>
 
-            <h4 style="margin:0 0 .4rem;font-size:.9rem;">Key data sources used in this dashboard</h4>
+            <h4 style="margin:0 0 .4rem;font-size:.9rem;">What sits underneath each tab</h4>
+            <p>All views in this dashboard are built from pre-aggregated tables constructed out of the official electoral rolls and supporting state datasets.</p>
+            <p>In broad terms:</p>
             <ul style="margin:.1rem 0 .8rem;padding-left:1.1rem;font-size:.8rem;line-height:1.4;color:#4b5563;">
-              <li><code>overview_metrics.csv</code> &mdash; state-level totals and headline indicators.</li>
-              <li><code>elections_summary_working.csv</code>, <code>ac_correlation_ready.csv</code> &mdash; AC-level deletions, booths, quartiles and political alignment.</li>
-              <li><code>ac_deletions_change_2020_2024.csv</code> &mdash; change in deletions per booth between 2020 and 2024.</li>
-              <li><code>district_demography_summary.csv</code>, <code>district_population_profile.csv</code> &mdash; density, literacy, demographic structure and deletions at district level.</li>
-              <li><code>district_rural_urban_profile.csv</code> &mdash; rural/urban population splits and projections.</li>
-              <li><code>district_gdp_profile.csv</code> &mdash; per-capita GDDP and basic economic context by district.</li>
-              <li><code>district_caste_summary_master.csv</code>, <code>district_caste_block_shares.csv</code> &mdash; caste block shares of deletions.</li>
-              <li><code>religion_overall.csv</code>, <code>religion_by_band.csv</code>, <code>religion_gender_crosstab.csv</code>, <code>booth-gender-religion.csv</code> &mdash; religion and gender cross-tabs.</li>
-              <li><code>top5_caste_groups_deleted.csv</code>, <code>bottom5_caste_groups_deleted.csv</code>, <code>top5_caste_names_deleted.csv</code>, <code>bottom5_caste_names_deleted.csv</code> &mdash; top/bottom caste groups and surnames by deletions.</li>
-              <li><code>district_border_classification.csv</code>, <code>ac_border_classification.csv</code> &mdash; classification of districts and ACs into border vs interior groups.</li>
+              <li><strong>Overview &amp; deletions:</strong> Assembly- and district-level roll summaries, including deletions, booths and simple quartiles.</li>
+              <li><strong>Demographic:</strong> District population profiles, literacy, urban–rural splits and district-level income estimates.</li>
+              <li><strong>Gender:</strong> Cross-tabulations of deletions by gender at district and booth level.</li>
+              <li><strong>Caste:</strong> District caste composition from the Bihar caste survey, linked to deletions via surname–caste mapping.</li>
+              <li><strong>Religion:</strong> Aggregated deletions by religion and by deletion band.</li>
+              <li><strong>Electoral &amp; geography:</strong> Mapping of AC-level summaries to Lok Sabha alliances and border/interior classifications.</li>
             </ul>
 
             <h4 style="margin:0 0 .4rem;font-size:.9rem;">Integrity and risk-reading frame</h4>
             <p style="margin:.1rem 0 .6rem;font-size:.8rem;line-height:1.5;color:#4b5563;">
-              Quartiles for deletions per booth are constructed from the AC-level summary files, with higher quartiles
-              representing ACs with higher deletions per booth. The other tabs (gender, caste, religion, geography, electoral)
-              can all be read through this quartile frame: patterns that repeat in high-deletion spaces are the most
-              concerning from an integrity perspective.
+              Quartiles for deletions per booth are constructed from the AC-level summaries, with higher quartiles representing
+              ACs with higher deletions per booth. The other tabs (gender, caste, religion, geography, electoral) can all be read
+              through this quartile frame: patterns that repeat in high-deletion spaces are the most concerning from an integrity
+              perspective.
             </p>
             <p style="margin:.1rem 0 .2rem;font-size:.8rem;line-height:1.5;color:#4b5563;">
               All figures here are descriptive. They do not, by themselves, establish motive or illegality. Any strong claim
-              should combine this analysis with booth lists, field reports and party records.
+              should combine this analysis with booth lists, field reports, party records and, wherever possible, direct
+              conversations with affected voters.
             </p>
           </div>
         </div>
@@ -1883,7 +2221,7 @@
         console.error(err);
         APP_STATE.loadError = err;
         if (loading) loading.remove();
-        main.innerHTML = '<div class="loading-block"><p>Could not load one or more aggregate files from the data folder.</p></div>';
+        main.innerHTML = '<div class="loading-block"><p>Could not load one or more aggregate tables from the data folder.</p></div>';
       }
     }
 
