@@ -9,3 +9,15 @@ Thumbs.db
 
 # Ignore any temporary HTML files
 temp_*.html
+
+# Added by git standards propagation
+# Environment files
+.env
+.env.*
+!.env.example
+node_modules/
+*.log
+build/
+dist/
+coverage/
+*.swp
