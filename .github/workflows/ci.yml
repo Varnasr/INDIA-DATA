@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      # This dashboard publishes political claims about electoral roll deletions.
+      # Nothing checked the data behind them until 2026-09-22, and five of the
+      # columns those claims rest on do not survive contact with published
+      # election results. See DATA_INTEGRITY.md.
+      - name: Data integrity
+        run: python3 scripts/check_data.py
+
+      - name: Every CSV parses and is rectangular
+        run: |
+          python3 - <<'PY'
+          import csv, glob, sys
+          bad = []
+          for f in sorted(glob.glob("data/**/*.csv", recursive=True)):
+              with open(f, newline="", encoding="utf-8") as fh:
+                  rows = list(csv.reader(fh))
+              if not rows:
+                  bad.append(f"{f}: empty"); continue
+              widths = {len(r) for r in rows if r}
+              if len(widths) != 1:
+                  bad.append(f"{f}: ragged rows, widths {sorted(widths)}")
+              else:
+                  print(f"  ok  {f}  {len(rows)-1} rows x {widths.pop()} cols")
+          if bad:
+              sys.exit("FAIL\n  " + "\n  ".join(bad))
+          print("PASS")
+          PY
+
+      - name: Dashboard carries the data quality notice
+        run: |
+          set -euo pipefail
+          # The notice is the only thing telling a reader the comparisons below it
+          # are unsound. Removing it should be a deliberate act, not a side effect.
+          grep -q 'class="data-caveat"' index.html
+          grep -q 'DATA_INTEGRITY.md' index.html
+          echo "PASS - notice present"
