@@ -156,6 +156,20 @@
                 <div class="summary-card o"><div class="summary-value">179</div><div class="summary-label">Alliance Flips</div></div>
                 <div class="summary-card p"><div class="summary-value">77,837</div><div class="summary-label">Polling Booths</div></div>
             </div>
+            <div class="data-caveat" role="note" style="margin:16px 0;padding:14px 16px;border:2px solid #b45309;background:#fffbeb;color:#7c2d12;border-radius:6px;font-size:14px;line-height:1.55">
+              <strong style="display:block;margin-bottom:6px">Data quality notice &mdash; audited 22 September 2026</strong>
+              The year-on-year and alliance comparisons on this page rest on three columns that do not hold up.
+              <code>booths_2020</code> is a verbatim copy of <code>booths_2024</code> in all 243 constituencies, so
+              the per-booth comparison is arithmetically identical to the raw deletion ratio.
+              <code>deletions_2020</code> totals 39.2 million, about 54% of Bihar's electorate, and has no source
+              anywhere in this repository. <code>party_2024</code> records BSP and independents leading 105 of 243
+              assembly segments, though neither won a Bihar seat in 2024, and omits RJD and LJP(RV) entirely; the
+              alliance comparison below therefore covers only 131 of 243 constituencies and
+              <em>reverses direction</em> under the 2020 labels, which cover 235.
+              The 2024 deletion total of 6,559,626 is consistent with the reported Special Intensive Revision figure
+              and is not in question. Full write-up:
+              <a href="DATA_INTEGRITY.md" style="color:#7c2d12;text-decoration:underline">DATA_INTEGRITY.md</a>.
+            </div>
             <div class="takeaway"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> <div><div class="takeaway-title">Key Finding</div>Bihar saw ~6.56M voter deletions in 2024, an 83.3% reduction from 39.2M in 2020. Patterns vary by region, demographics, and political affiliation.</div></div>
             <div class="charts-grid">
                 
@@ -174,7 +188,7 @@
                 <div class="card">
                     <div class="card-title"><span>3. How Do NDA and INDIA Compare?</span><div class="card-actions"><button onclick="exportPNG('overview3')">PNG</button></div></div>
                     <div class="chart-container tall"><canvas id="overview3"></canvas></div>
-                    <div class="chart-takeaway"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L12 12"/><circle cx="12" cy="17" r="4"/></svg> <div><strong>Key Insight:</strong> NDA constituencies average 81.2 deletions per booth vs INDIA's 93.0.<br>Both alliances show similar demographic profiles despite intensity differences.</div></div>
+                    <div class="chart-takeaway"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L12 12"/><circle cx="12" cy="17" r="4"/></svg> <div><strong>Key Insight:</strong> NDA constituencies average 81.2 deletions per booth vs INDIA's 93.0.<br><strong style="color:#b45309">Not robust:</strong> this uses the 2024 labels, which classify 131 of 243 constituencies. Under the 2020 labels, which classify 235, the comparison reverses to NDA 87.4 vs INDIA 79.6.</div></div>
                 </div>
                 
                 <div class="card">
