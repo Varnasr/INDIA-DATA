@@ -23,6 +23,13 @@ jobs:
       - name: Data integrity
         run: python3 scripts/check_data.py
 
+      # The dark block redefines the surfaces. Until 2026-09-23 it redefined
+      # almost none of the inks painted on them, so the same blue that reads at
+      # 6.3:1 on a white card was 2.9:1 on the dark one and the active tab was
+      # 2.3:1. Nothing errored; the tab you were on was simply hard to read.
+      - name: Colour tokens clear AA in both themes
+        run: python3 scripts/check_contrast.py
+
       - name: Every CSV parses and is rectangular
         run: |
           python3 - <<'PY'

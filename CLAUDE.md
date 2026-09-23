@@ -8,6 +8,7 @@ by `.github/workflows/static.yml`. `index.html` is the dashboard; the data is in
 
 ```bash
 python3 scripts/check_data.py     # integrity checks, run by CI
+python3 scripts/check_contrast.py # colour tokens, both themes, run by CI
 python3 -m http.server 8000       # then open http://localhost:8000
 ```
 
@@ -50,6 +51,36 @@ That inversion is deliberate. When you repair the data, the matching KNOWN DEFEC
 check fails and tells you which finding in `DATA_INTEGRITY.md` to delete and which
 derived columns to recompute. A list of known problems that nothing enforces
 rots into a blindfold; this one cannot go stale without saying so.
+
+## The dark theme redefined the surfaces and almost none of the inks
+
+`index.html` declares the palette twice, `:root` and `[data-theme="dark"]`. The
+dark block moved `--bg`, `--bg2`, `--card`, `--text`, `--text-light` and
+`--border`, and left every brand colour at its light-theme value. So on
+2026-09-23, measured:
+
+| token | where | was | now |
+|---|---|---|---|
+| `--tab-inactive` #7F8C8D | the ten inactive tab labels, light theme | 3.29:1 | `#5D6D7E`, 5.08:1 |
+| `--dblue` #2980B9 | every takeaway lead-in and section heading, light | 4.08:1 | `#1F618D`, 6.31:1 |
+| `--dblue` #2980B9 | the same text on the dark card | **2.88:1** | `#7FB3D5`, 5.50:1 |
+| `--red` #C0392B | the **active** tab, dark theme | **2.29:1** | `--tab-active` `#F1948A`, 5.55:1 |
+| `#b45309` inline | the "Not robust" caveat on the alliance chart, dark | 3.16:1 | `--warn-ink` `#FBBF24`, 9.5:1 |
+
+Two of those are worth naming. `--dblue` is only ever ink here, never a fill, so
+darkening it for the light theme costs nothing; a token used both ways cannot be
+moved that freely. And `--red` had to become a separate `--tab-active`, because
+the same red is also the tab underline and the Madhubani stripe, where a light
+pink would be wrong.
+
+`scripts/check_contrast.py` measures the pairs the page actually paints — the
+twelve in `PAIRS`, in both themes — rather than every combination, because most
+combinations never occur and a check reporting them is a check nobody runs. It
+follows `var()` chains and falls back to the light block for anything the dark
+block does not redeclare, which is what the browser does and is exactly how the
+inks came to be wrong. Fault-injected against both real failures.
+
+The language `<select>` in the header had no label of any kind. It has one now.
 
 ## Watch out for
 
