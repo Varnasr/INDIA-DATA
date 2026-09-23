@@ -14,15 +14,15 @@
         :root {
             --yellow: #F4D03F; --blue: #85C1E9; --grey: #D5D8DC; --white: #FFFFFF;
             --text: #1C2833; --text-light: #566573; --teal: #48C9B0; --coral: #F1948A; --mint: #A9DFBF;
-            --red: #C0392B; --orange: #E67E22; --green: #27AE60; --dblue: #2980B9; --purple: #8E44AD;
+            --red: #C0392B; --orange: #E67E22; --green: #27AE60; --dblue: #1F618D; --purple: #8E44AD;
             --bg: var(--white); --bg2: #F8F9FA; --card: var(--white);
             --border: #E5E8E8; --shadow: rgba(0,0,0,0.1);
-            --tab-text: #2C3E50; --tab-inactive: #7F8C8D;
+            --tab-text: #2C3E50; --tab-inactive: #5D6D7E; --tab-active: #C0392B; --warn-ink: #b45309;
         }
         [data-theme="dark"] {
             --bg: #1a1a2e; --bg2: #16213e; --card: #0f3460;
             --text: #EAECEE; --text-light: #AEB6BF; --border: #2C3E50; --shadow: rgba(0,0,0,0.3);
-            --tab-text: #EAECEE; --tab-inactive: #85929E;
+            --tab-text: #EAECEE; --tab-inactive: #85929E; --tab-active: #F1948A; --dblue: #7FB3D5; --warn-ink: #FBBF24;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -49,7 +49,7 @@
         .nav-tab { padding: 0.6rem 1rem; border: none; background: transparent; color: var(--tab-inactive); cursor: pointer; white-space: nowrap; border-radius: 8px 8px 0 0; transition: all 0.3s; font-weight: 600; position: relative; display: flex; align-items: center; gap: 0.4rem; }
         .nav-tab::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 3px; background: var(--red); transform: scaleX(0); transition: 0.3s; }
         .nav-tab.active::after { transform: scaleX(1); }
-        .nav-tab.active { color: var(--red); background: var(--card); }
+        .nav-tab.active { color: var(--tab-active); background: var(--card); }
         .nav-tab:hover { color: var(--tab-text); }
         
         main { max-width: 1800px; margin: 0 auto; padding: 1.5rem; }
@@ -118,7 +118,8 @@
                 </div>
             </div>
             <div class="controls">
-                <select id="lang" onchange="changeLang(this.value)">
+                <label for="lang" class="sr-only">Language</label>
+                <select id="lang" onchange="changeLang(this.value)" aria-label="Language">
                     <option value="en">English</option>
                     <option value="hi">हिंदी</option>
                     <option value="bn">বাংলা</option>
@@ -188,7 +189,7 @@
                 <div class="card">
                     <div class="card-title"><span>3. How Do NDA and INDIA Compare?</span><div class="card-actions"><button onclick="exportPNG('overview3')">PNG</button></div></div>
                     <div class="chart-container tall"><canvas id="overview3"></canvas></div>
-                    <div class="chart-takeaway"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L12 12"/><circle cx="12" cy="17" r="4"/></svg> <div><strong>Key Insight:</strong> NDA constituencies average 81.2 deletions per booth vs INDIA's 93.0.<br><strong style="color:#b45309">Not robust:</strong> this uses the 2024 labels, which classify 131 of 243 constituencies. Under the 2020 labels, which classify 235, the comparison reverses to NDA 87.4 vs INDIA 79.6.</div></div>
+                    <div class="chart-takeaway"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L12 12"/><circle cx="12" cy="17" r="4"/></svg> <div><strong>Key Insight:</strong> NDA constituencies average 81.2 deletions per booth vs INDIA's 93.0.<br><strong style="color:var(--warn-ink)">Not robust:</strong> this uses the 2024 labels, which classify 131 of 243 constituencies. Under the 2020 labels, which classify 235, the comparison reverses to NDA 87.4 vs INDIA 79.6.</div></div>
                 </div>
                 
                 <div class="card">
