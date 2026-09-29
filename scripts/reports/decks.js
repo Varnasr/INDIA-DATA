@@ -413,7 +413,7 @@ function hyderabad() {
   K.title(s, 'What the lists show, and what they do not');
   K.callout(s, 'How many electors were struck off, from which parts, and who they were by age, sex, religion estimated from name, and 2002 linkage.', M, 1.5, 5.9, 2.2);
   K.callout(s, 'Whether any individual removal was right. A household that moved out is a correct "shifted" deletion; the files cannot tell it from an elector who was at home and missed.', 6.83, 1.5, 5.9, 2.2);
-  K.body(s, 'The Malakpet list used here is incomplete: 1,42,688 names against the 1,47,799 counted in the published list, with no part numbers and no 2002 link. For the other four constituencies the counts agree exactly with the Sabar Institute\'s independent count. These are the September lists; restorations after hearings are not in them.', M, 4.1, W - 2 * M, 2.6, 17);
+  K.body(s, 'The Malakpet list used here is incomplete: 1,42,688 names against the 1,47,799 counted in the published list, with no part numbers and no 2002 link. For the other four constituencies the counts agree exactly with an independent count of the same lists. These are the September lists; restorations after hearings are not in them.', M, 4.1, W - 2 * M, 2.6, 17);
   K.foot(s, n);
 
   s = pres.addSlide(); n++;
