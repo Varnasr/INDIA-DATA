@@ -22,7 +22,8 @@ site at [forindia.netlify.app](https://forindia.netlify.app).
 The full reports, in the structure of the Sabar Institute's SIR reports, are
 in `reports/` as PDF and Word and are linked from every page:
 `bihar-sir-2025-report` and `hyderabad-old-city-sir-2026-report`. Rebuild with
-`scripts/reports/build.sh`.
+`scripts/reports/build.sh`, which also writes the two slide decks
+(`bihar-sir-2025-deck.pptx`, `hyderabad-old-city-sir-2026-deck.pptx`).
 
 ## The two kinds of evidence
 
