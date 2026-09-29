@@ -1,0 +1,508 @@
+#!/usr/bin/env python3
+"""Build every Bihar figure the site shows, from the booth-level sources.
+
+    python3 scripts/build_bihar.py          # writes data/bihar/*.json and booths/
+    python3 scripts/build_bihar.py --check  # fails if the committed output is stale
+
+Inputs (data/bihar/raw/):
+  booths_deletions_ls2024.csv.gz   one row per booth x 2024 Lok Sabha party
+                                   (top three parties per booth, from Form 20),
+                                   carrying the booth's SIR deletions and the
+                                   2020 Assembly winner of its constituency
+  booth_gender_religion.csv.gz     SIR deletions per booth x sex, split by
+                                   name-estimated religion
+  sir_deletions_by_ac_gender_phase.xlsx  CEO Bihar SIR deletions by
+                                   constituency, phase and sex
+  wikipedia_*.csv                  constituency-to-seat map, 2024 seat results
+                                   and alliances, 2025 Assembly results
+
+Two errors in the earlier dashboard are corrected here, and both are why this
+script exists rather than a spreadsheet:
+
+1. The booth file has about three rows per booth (one per party) and the
+   gender-religion file two (one per sex). Joining them and summing gave every
+   booth's deletions six times over: 39.2 million, reported as "2020". There is
+   no 2020 deletion series. Every figure below takes one row per booth first.
+
+2. The party labels in the Form 20 extract are wrong in nine seats. Vote
+   shares match the official results to a tenth of a point; the names do not
+   (LJP(RV) appears as "BSP", HAM(S) as "JD(S)" and so on). LABEL_FIXES
+   corrects them, and verify_labels() fails the build unless every seat's
+   first and second party then match the declared winner and runner-up.
+"""
+
+import gzip
+import json
+import os
+import re
+import sys
+
+import pandas as pd
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RAW = os.path.join(ROOT, 'data', 'bihar', 'raw')
+OUT = os.path.join(ROOT, 'data', 'bihar')
+
+# ------------------------------------------------------------------ parties
+# Spelling variants, applied everywhere.
+SPELLING = {'CPI(ML)(L)': 'CPI(ML)L', 'CPIM-L': 'CPI(ML)L', 'CPI(ML)': 'CPI(ML)L',
+            'CPM': 'CPI(M)', 'LJPRV': 'LJP(RV)', 'JDU': 'JD(U)', 'HAM': 'HAM(S)'}
+
+# Label errors, per Lok Sabha seat, with the evidence for each. "verified"
+# means the relabelled party's share matches the official winner or runner-up
+# share within half a point; "probable" means it matches the third-placed
+# candidate, which the published table does not carry, so it rests on the
+# share and on who contested.
+LABEL_FIXES = {
+    'Hajipur':    {'BSP': ('LJP(RV)', 'verified', '53.3% against the winner\'s 53.29%')},
+    'Samastipur': {'BSP': ('LJP(RV)', 'verified', '53.0% against 52.97%')},
+    'Khagaria':   {'BSP': ('LJP(RV)', 'verified', '50.8% against 50.73%')},
+    'Vaishali':   {'BSP': ('LJP(RV)', 'verified', '48.2% against 48.38%')},
+    'Jamui':      {'BSP': ('LJP(RV)', 'verified', 'BSP 33.8% and LJPRV 18.8% together 52.6% against 51.98%: one party under two labels')},
+    'Gaya':       {'JD(S)': ('HAM(S)', 'verified', '51.4% against 51.36%; JD(S) does not contest in Bihar')},
+    'Jahanabad':  {'IND': ('JD(U)', 'verified', 'runner-up 32.5% against JD(U)\'s 32.47%')},
+    'Karakat':    {'JVM': ('IND', 'verified', 'runner-up 26.4% against Pawan Singh (independent) 26.63%'),
+                   'IND': ('RLM', 'probable', 'third at 24.9%; Upendra Kushwaha (RLM) was the NDA candidate')},
+    'Kishanganj': {'CPI': ('AIMIM', 'probable', 'third at 26.9%; CPI fielded no candidate, AIMIM\'s Akhtarul Iman came third')},
+}
+
+INDIA = {'RJD', 'INC', 'CPI(ML)L', 'CPI', 'CPI(M)', 'VIP', 'IIP'}
+
+
+def alliance(party, year):
+    """NDA / INDIA / Other. VIP was with the NDA in 2020 and INDIA from 2024;
+    LJP fought 2020 alone."""
+    if party is None or pd.isna(party):
+        return None
+    p = SPELLING.get(party, party)
+    if year == 2020:
+        if p in ('BJP', 'JD(U)', 'VIP', 'HAM(S)'):
+            return 'NDA'
+        if p in ('RJD', 'INC', 'CPI(ML)L', 'CPI', 'CPI(M)'):
+            return 'INDIA'
+        return 'Other'
+    if p in ('BJP', 'JD(U)', 'LJP(RV)', 'HAM(S)', 'RLM'):
+        return 'NDA'
+    if p in INDIA:
+        return 'INDIA'
+    return 'Other'
+
+
+def norm(s):
+    return re.sub(r'\(.*?\)|\[.*?\]|[^a-z]', '', str(s).lower())
+
+
+# ------------------------------------------------------------------- loaders
+def load_booth_rows():
+    b = pd.read_csv(os.path.join(RAW, 'booths_deletions_ls2024.csv.gz'))
+    b.columns = ['key', 'ac', 'booth', 'deleted', 'ac_name', 'win2020',
+                 'margin2020', 'margin2020_pct', 'party', 'votes', 'share']
+    return b
+
+
+def load_map():
+    m = pd.read_csv(os.path.join(RAW, 'wikipedia_ac_pc_map.csv'))
+    m = m.rename(columns={'No.': 'ac', 'Name': 'name', 'Reservation': 'reserved',
+                          'District': 'district', 'Lok Sabha constituency': 'pc'})
+    m = m.rename(columns={c: 'electorate_2025' for c in m.columns if c.startswith('Electorate')})
+    # Wikipedia files Minapur (90) under Muzaffarpur. It is a Vaishali segment:
+    # Muzaffarpur then has six segments and Vaishali six, as delimited in 2008,
+    # and both seats' booth totals match the declared results.
+    m.loc[m.ac == 90, 'pc'] = 'Vaishali'
+    m['reserved'] = m.reserved.fillna('GEN')
+    return m
+
+
+def fix_labels(rows, amap):
+    rows = rows.merge(amap[['ac', 'pc']], on='ac', how='left')
+    fixed = []
+    for pc, party in zip(rows.pc, rows.party):
+        if pd.isna(party):
+            fixed.append(None)
+            continue
+        rule = LABEL_FIXES.get(pc, {}).get(party)
+        p = rule[0] if rule else party
+        fixed.append(SPELLING.get(p, p))
+    rows['party_fixed'] = fixed
+    return rows
+
+
+def party_votes(rows):
+    """One row per booth x party. Identical source rows are duplicates and are
+    dropped; two different source labels that name the same party (Jamui's
+    "BSP" and "LJPRV") are one party's votes split, and are added."""
+    d = rows.dropna(subset=['party_fixed']).drop_duplicates(['key', 'party'])
+    return d.groupby(['key', 'ac', 'pc', 'party_fixed'], as_index=False)[['votes', 'share']].sum()
+
+
+def verify_labels(rows):
+    """Every seat's top two parties, summed from booths, must be the declared
+    winner and runner-up, at shares within a point of the published ones."""
+    w = pd.read_csv(os.path.join(RAW, 'wikipedia_ls2024_pc_results.csv'))
+    w['n'] = w.Constituency_Name.map(norm)
+    d = party_votes(rows)
+    d = d[d.share > 0].copy()
+    d['booth_total'] = d.votes / (d.share / 100)
+    btot = d.groupby('key').booth_total.median()
+    report, bad = [], []
+    for pc, g in d.groupby('pc'):
+        tot = btot[g.key.unique()].sum()
+        s = g.groupby('party_fixed').votes.sum().sort_values(ascending=False)
+        r = w[w.n == norm(pc)].iloc[0]
+        want = [SPELLING.get(r['Winner_Party.1'], r['Winner_Party.1']),
+                SPELLING.get(r['Runner Up_Party.1'], r['Runner Up_Party.1'])]
+        got = list(s.index[:2])
+        shares = [round(100 * v / tot, 2) for v in s.values[:2]]
+        pub = [float(r['Winner_%']), float(r['Runner Up_%'])]
+        ok = got == want and all(abs(a - b) < 1.0 for a, b in zip(shares, pub))
+        report.append({'pc': pc, 'first': got[0], 'first_share': shares[0], 'published_first_share': pub[0],
+                       'second': got[1], 'second_share': shares[1], 'published_second_share': pub[1], 'match': ok})
+        if not ok:
+            bad.append((pc, got, want, shares, pub))
+    return report, bad
+
+
+# ------------------------------------------------------------------- build
+def build():
+    amap = load_map()
+    rows = fix_labels(load_booth_rows(), amap)
+    report, bad = verify_labels(rows)
+    if bad:
+        for b in bad:
+            print('LABEL MISMATCH', b)
+        raise SystemExit('2024 labels do not reconcile with the declared results')
+
+    # one row per booth
+    booth = rows.drop_duplicates('key')[['key', 'ac', 'booth', 'deleted', 'win2020', 'margin2020', 'margin2020_pct']].copy()
+    assert len(booth) == 77837 and int(booth.deleted.sum()) == 6559626, 'booth totals moved'
+
+    # 2024 booth leader and margin
+    v = party_votes(rows)
+    v = v[v.party_fixed != 'NOTA']
+    v = v.sort_values(['key', 'votes'], ascending=[True, False])
+    first = v.drop_duplicates('key').set_index('key')
+    second = v.drop(v.drop_duplicates('key').index).drop_duplicates('key').set_index('key')
+    booth = booth.set_index('key')
+    booth['lead24'] = first.party_fixed
+    booth['lead24_share'] = first.share
+    booth['lead24_margin'] = (first.share - second.share.reindex(first.index).fillna(0))
+    booth['lead24_alliance'] = booth.lead24.map(lambda p: alliance(p, 2024))
+
+    # sex and name-estimated religion per booth
+    g = pd.read_csv(os.path.join(RAW, 'booth_gender_religion.csv.gz'))
+    g.columns = ['ac', 'key', 'sex', 'hindu', 'muslim', 'unknown']
+    g['n'] = g.hindu + g.muslim + g.unknown
+    rel = g.groupby('key')[['hindu', 'muslim', 'unknown']].sum()
+    sex = g.pivot_table(index='key', columns='sex', values='n', aggfunc='sum').fillna(0)
+    for c in ['F', 'M', 'T']:
+        booth[c.lower() if c != 'T' else 'third'] = sex.get(c, 0)
+    booth = booth.join(rel)
+    booth[['f', 'm', 'third', 'hindu', 'muslim', 'unknown']] = booth[['f', 'm', 'third', 'hindu', 'muslim', 'unknown']].fillna(0).astype(int)
+    booth = booth.reset_index()
+
+    # constituency level
+    sir = pd.read_excel(os.path.join(RAW, 'sir_deletions_by_ac_gender_phase.xlsx'), header=None, skiprows=3)
+    sir = sir.iloc[:, :11]
+    sir.columns = ['ac', 'sir_name', 'p1_f', 'p1_m', 'p1', 'p2_f', 'p2_m', 'p2', 't_f', 't_m', 'total']
+    sir = sir[pd.to_numeric(sir.ac, errors='coerce').notna()].astype({'ac': int})
+    ae = pd.read_csv(os.path.join(RAW, 'wikipedia_ae2025_ac_results.csv'))
+    ae = ae.rename(columns={'Constituency_No.': 'ac', 'Winner_Party.1': 'win2025', 'Margin_Votes': 'margin2025',
+                            'Margin_%': 'margin2025_pct', 'Runner-up_Party.1': 'ru2025'})[['ac', 'win2025', 'ru2025', 'margin2025', 'margin2025_pct']]
+    ae['win2025'] = ae.win2025.map(lambda p: SPELLING.get(p, p))
+    border = pd.read_csv(os.path.join(ROOT, 'data', 'ac_border_classification.csv'))[['ac_number', 'border_group', 'is_border_ac']].rename(columns={'ac_number': 'ac'})
+
+    seg = v.groupby(['ac', 'party_fixed']).votes.sum().reset_index().sort_values('votes', ascending=False)
+    seglead = seg.drop_duplicates('ac').set_index('ac').party_fixed
+
+    a = booth.groupby('ac').agg(booths=('key', 'size'), deleted=('deleted', 'sum'),
+                                booth_median=('deleted', 'median'), booth_p90=('deleted', lambda s: s.quantile(.9)),
+                                booths_200=('deleted', lambda s: int((s >= 200).sum())),
+                                hindu=('hindu', 'sum'), muslim=('muslim', 'sum'), unknown=('unknown', 'sum'),
+                                win2020=('win2020', 'first'), margin2020=('margin2020', 'first'),
+                                margin2020_pct=('margin2020_pct', 'first'))
+    for al in ['NDA', 'INDIA', 'Other']:
+        sub = booth[booth.lead24_alliance == al].groupby('ac')
+        a['booths_' + al.lower()] = sub.size()
+        a['del_' + al.lower()] = sub.deleted.sum()
+    a = a.fillna(0).reset_index()
+    a['seg2024'] = a.ac.map(seglead)
+    a = a.merge(amap, on='ac').merge(sir, on='ac').merge(ae, on='ac', how='left').merge(border, on='ac', how='left')
+    assert int(a.p1.sum()) == 6559409 and abs(int(a.p1.sum()) - int(a.deleted.sum())) < 500, 'SIR phase 1 and booth totals diverge'
+    a['win2020'] = a.win2020.map(lambda p: SPELLING.get(p, p))
+    a['al2020'] = a.win2020.map(lambda p: alliance(p, 2020))
+    a['al2024'] = a.seg2024.map(lambda p: alliance(p, 2024))
+    a['al2025'] = a.win2025.map(lambda p: alliance(p, 2025))
+    a['per_booth'] = a.deleted / a.booths
+    a['per_100_electors'] = 100 * a.total / a.electorate_2025
+
+    return booth, a, report
+
+
+# ---------------------------------------------------------------- identity
+# Caste and religion are estimated from names. Neither is recorded on the
+# roll. Everything below reports a range rather than a point, and says what
+# share of deletions the estimate could not classify at all.
+
+# The 2022-23 Bihar caste-based survey, released 2 October 2023: population
+# 130,725,310. Muslim castes are listed inside EBC (10.29 points), BC (2.09)
+# and General (4.80); subtracting them gives the Hindu-caste baseline.
+SURVEY = {'EBC': 36.01 - 10.29, 'BC': 27.12 - 2.09, 'SC': 19.65, 'ST': 1.68,
+          'General': 15.52 - 4.80, 'Muslim': 17.70}
+GROUPS = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim']
+
+
+def _variants(s):
+    s = str(s).lower().replace('.', '').replace("'", '')
+    out = {s}
+    rules = [(r'rr', 'r'), (r'ii', 'i'), (r'uu', 'u'), (r'aa', 'a'), (r'm(?=[bcdfgjklpqrstvz])', 'n'),
+             (r'v', 'w'), (r'a$', ''), (r'eya$', 'ey'), (r'ri$', 'ry'), (r'i$', 'y'), (r'mha$', 'ngh'),
+             (r'sh', 's'), (r'kh', 'k'), (r'ya$', 'i'), (r'ama$', 'am'), (r'ada$', 'ad')]
+    for _ in range(3):
+        out |= {re.sub(a, b, x) for x in list(out) for a, b in rules}
+    return out
+
+
+def _mapping_class():
+    """The project's own surname mapping, as given, keyed on a plain spelling.
+    A surname the mapping files under more than one category is 'cross'."""
+    m = pd.read_excel(os.path.join(RAW, 'caste_mapping.xlsx'))
+    m['k'] = m.lastname.str.lower().str.strip().str.replace(r'[^a-z]', '', regex=True)
+
+    def grp(r):
+        c = str(r.CasteCategory).upper()
+        if str(r.Religion).strip() == 'Islam' or c == 'MINORITY':
+            return 'Muslim'
+        return {'OBC': 'BC', 'GENERAL': 'General'}.get(c, c)
+    m['g'] = m.apply(grp, axis=1)
+    return m.groupby('k').g.agg(lambda x: x.iloc[0] if x.nunique() == 1 else 'cross')
+
+
+def caste_estimates():
+    strict = pd.read_csv(os.path.join(OUT, 'surname_classes.csv')).set_index('romanised').strict_class
+    mapping = _mapping_class()
+    titles = set(strict[strict == 'none'].index)
+    res = {}
+    for who, fn in [('guardian', 'deleted_guardian_surname_counts.csv.gz'), ('own', 'deleted_surname_counts.csv.gz')]:
+        d = pd.read_csv(os.path.join(RAW, fn)).iloc[:, :2]
+        d.columns = ['s', 'n']
+        d = d.dropna()
+        total = float(d.n.sum())
+        est = {}
+        # A: the project mapping, reached through the spelling bridge, titles removed
+        def a_class(s):
+            if s in titles:
+                return 'none'
+            hits = sorted({mapping[v] for v in _variants(s) if v in mapping.index})
+            if not hits:
+                return 'unmatched'
+            return hits[0] if len(hits) == 1 else 'cross'
+        d['A'] = d.s.map(a_class)
+        d['B'] = d.s.map(lambda s: strict.get(s, 'unmatched'))
+        for k in ['A', 'B']:
+            t = d.groupby(k).n.sum()
+            classified = float(sum(t.get(g, 0) for g in GROUPS))
+            unresolved = total - classified
+            est[k] = {
+                'coverage_pct': round(100 * classified / total, 1),
+                'cross_pct': round(100 * t.get('cross', 0) / total, 1),
+                'no_information_pct': round(100 * t.get('none', 0) / total, 1),
+                'unmatched_pct': round(100 * t.get('unmatched', 0) / total, 1),
+                'groups': {g: {
+                    'deleted': int(t.get(g, 0)),
+                    'share_of_classified': round(100 * t.get(g, 0) / classified, 1),
+                    # bounds over all deletions: none of the unresolved belong / all do
+                    'share_low': round(100 * t.get(g, 0) / total, 1),
+                    'share_high': round(100 * (t.get(g, 0) + unresolved) / total, 1),
+                    'survey_share': round(SURVEY[g], 2),
+                    'ratio_to_survey': round((100 * t.get(g, 0) / classified) / SURVEY[g], 2),
+                } for g in GROUPS},
+            }
+        top = d.sort_values('n', ascending=False).head(25)
+        est['top_surnames'] = [{'surname': r.s, 'deleted': int(r.n), 'strict': r.B, 'mapping': r.A} for r in top.itertuples()]
+        res[who] = est
+    return res
+
+
+DISTRICT_NAMES = {'West Champaran': 'Pashchim Champaran', 'East Champaran': 'Purba Champaran',
+                  'Kaimur': 'Kaimur (Bhabua)', 'Jehanabad': 'Jehanabad', 'Purnia': 'Purnia',
+                  'Kishanganj': 'Kishanganj', 'Sheikhpura': 'Sheikhpura'}
+
+
+def district_identity(a):
+    c = pd.read_csv(os.path.join(RAW, 'census2011_districts_all_india.csv'))
+    c = c[c['State name'] == 'BIHAR'].copy()
+    assert abs(100 * c.Muslims.sum() / c.Population.sum() - 16.87) < 0.01, 'census religion total moved'
+    assert abs(100 * c.SC.sum() / c.Population.sum() - 15.91) < 0.01, 'census SC total moved'
+    c['key'] = c['District name'].map(norm)
+    a = a.copy()
+    a['key'] = a.district.map(lambda d: norm(DISTRICT_NAMES.get(d, d)))
+    missing = set(a.key) - set(c.key)
+    assert not missing, 'districts not matched to the census: %s' % missing
+    g = a.groupby(['district', 'key']).agg(acs=('ac', 'size'), total=('total', 'sum'), p1=('p1', 'sum'),
+                                           t_f=('t_f', 'sum'), t_m=('t_m', 'sum'), electorate=('electorate_2025', 'sum'),
+                                           hindu=('hindu', 'sum'), muslim=('muslim', 'sum'), unknown=('unknown', 'sum')).reset_index()
+    g = g.merge(c[['key', 'Population', 'Female', 'Muslims', 'SC']], on='key')
+    out = []
+    for x in g.itertuples():
+        cls = x.hindu + x.muslim + x.unknown
+        out.append({
+            'district': x.district, 'acs': int(x.acs), 'deleted': int(x.total), 'per_100': round(100 * x.total / x.electorate, 2),
+            'female_share_deleted': round(100 * x.t_f / (x.t_f + x.t_m), 1),
+            'female_share_population_2011': round(100 * x.Female / x.Population, 1),
+            'muslim_share_deleted_low': round(100 * x.muslim / cls, 1),
+            'muslim_share_deleted_high': round(100 * (x.muslim + x.unknown) / cls, 1),
+            'muslim_share_population_2011': round(100 * x.Muslims / x.Population, 1),
+            'sc_share_population_2011': round(100 * x.SC / x.Population, 1),
+        })
+    return sorted(out, key=lambda r: r['district'])
+
+
+def district_economy(a):
+    """Census 2011 and the state's district GDP series, from the file the old
+    dashboard already carried. Only its census and GDDP columns are used: its
+    deletion columns were computed from the duplicated join."""
+    d = pd.read_csv(os.path.join(ROOT, 'data', 'district_demography_summary.csv'))
+    keep = ['district_name', 'census_2011_total_pop', 'census_2011_density_per_sqkm', 'census_2011_literacy_rate',
+            'census_2011_female_literacy', 'census_2011_urban_pct', 'per_capita_gddp_2021_22_constant_inr',
+            'gddp_prosperity_rank']
+    d = d[keep].copy()
+    d['key'] = d.district_name.map(norm)
+    bd = pd.read_csv(os.path.join(ROOT, 'data', 'district_border_classification.csv'))
+    alias = {'jahanabad': 'jehanabad', 'paschimchamparan': 'pashchimchamparan', 'purvichamparan': 'purbachamparan'}
+    bd['key'] = bd.district_name.map(norm).map(lambda k: alias.get(k, k))
+    d = d.merge(bd[['key', 'border_group']], on='key', how='left')
+    assert d.border_group.notna().all(), 'a district has no border classification'
+    a = a.copy()
+    a['key'] = a.district.map(lambda x: norm(DISTRICT_NAMES.get(x, x)))
+    g = a.groupby(['district', 'key']).agg(acs=('ac', 'size'), total=('total', 'sum'), electorate=('electorate_2025', 'sum'),
+                                           booths=('booths', 'sum'), deleted=('deleted', 'sum')).reset_index()
+    m = g.merge(d, on='key', how='left')
+    missing = m[m.census_2011_total_pop.isna()].district.tolist()
+    assert not missing, 'districts not matched to the demography file: %s' % missing
+    return [{'district': x.district, 'acs': int(x.acs), 'deleted': int(x.total),
+             'per_100': round(100 * x.total / x.electorate, 2), 'per_booth': round(x.deleted / x.booths, 1),
+             'electors_per_booth': round(x.electorate / x.booths, 0),
+             'density': int(x.census_2011_density_per_sqkm), 'literacy': float(x.census_2011_literacy_rate),
+             'female_literacy': float(x.census_2011_female_literacy), 'urban_pct': float(x.census_2011_urban_pct),
+             'gddp_pc': int(x.per_capita_gddp_2021_22_constant_inr), 'gddp_rank': int(x.gddp_prosperity_rank),
+             'border': x.border_group} for x in m.sort_values('district').itertuples()]
+
+
+def within_seat(booth):
+    """NDA-led against INDIA-led booths inside the same constituency.
+
+    Comparing seats mixes politics with geography: Seemanchal loses more names
+    and votes differently. Comparing booths within one seat holds the seat
+    fixed. The pooled figure is the booth-level difference after removing each
+    constituency's mean (a fixed-effects estimate), and the seat-by-seat list
+    shows how often the direction holds."""
+    b = booth.dropna(subset=['lead24_alliance']).copy()
+    b = b[b.lead24_alliance.isin(['NDA', 'INDIA'])]
+    b['dm'] = b.deleted - b.groupby('ac').deleted.transform('mean')
+    pooled = b.groupby('lead24_alliance').dm.mean()
+    seats = []
+    for ac, g in b.groupby('ac'):
+        n = g.lead24_alliance.value_counts()
+        if n.get('NDA', 0) >= 20 and n.get('INDIA', 0) >= 20:
+            m = g.groupby('lead24_alliance').deleted.mean()
+            seats.append({'ac': int(ac), 'n_nda': int(n['NDA']), 'n_india': int(n['INDIA']),
+                          'mean_nda': round(float(m['NDA']), 1), 'mean_india': round(float(m['INDIA']), 1),
+                          'diff': round(float(m['NDA'] - m['INDIA']), 1)})
+    diffs = [x['diff'] for x in seats]
+    return {'pooled_nda_minus_india': round(float(pooled['NDA'] - pooled['INDIA']), 2),
+            'booths': int(len(b)), 'seats_compared': len(seats),
+            'seats_nda_higher': int(sum(d > 0 for d in diffs)), 'seats_india_higher': int(sum(d < 0 for d in diffs)),
+            'median_seat_diff': round(float(pd.Series(diffs).median()), 1), 'seats': seats}
+
+
+# ------------------------------------------------------------------- outputs
+def r(x, n=2):
+    return None if pd.isna(x) else round(float(x), n)
+
+
+def outputs(booth, a, report):
+    acs = []
+    for _, x in a.sort_values('ac').iterrows():
+        acs.append({
+            'ac': int(x.ac), 'name': x['name'], 'district': x.district, 'pc': x.pc, 'reserved': x.reserved,
+            'border': x.border_group, 'is_border': bool(x.is_border_ac),
+            'electorate_2025': int(x.electorate_2025), 'booths': int(x.booths),
+            'p1': int(x.p1), 'p2': int(x.p2), 'total': int(x.total),
+            'p1_f': int(x.p1_f), 'p1_m': int(x.p1_m), 't_f': int(x.t_f), 't_m': int(x.t_m),
+            'per_booth': r(x.per_booth, 1), 'per_100': r(x.per_100_electors, 2),
+            'booth_median': r(x.booth_median, 0), 'booth_p90': r(x.booth_p90, 0), 'booths_200': int(x.booths_200),
+            'hindu': int(x.hindu), 'muslim': int(x.muslim), 'unknown': int(x.unknown),
+            'win2020': x.win2020, 'al2020': x.al2020, 'margin2020': int(x.margin2020), 'margin2020_pct': r(100 * x.margin2020_pct, 1),
+            'seg2024': x.seg2024, 'al2024': x.al2024,
+            'booths_nda': int(x.booths_nda), 'booths_india': int(x.booths_india), 'booths_other': int(x.booths_other),
+            'del_nda': int(x.del_nda), 'del_india': int(x.del_india), 'del_other': int(x.del_other),
+            'win2025': x.win2025, 'ru2025': x.ru2025, 'al2025': x.al2025,
+            'margin2025': None if pd.isna(x.margin2025) else int(x.margin2025), 'margin2025_pct': r(x.margin2025_pct, 2),
+        })
+
+    # booth files, one per constituency, loaded on demand
+    bdir = os.path.join(OUT, 'booths')
+    os.makedirs(bdir, exist_ok=True)
+    for ac, g in booth.sort_values(['ac', 'booth']).groupby('ac'):
+        recs = [[int(b.booth), int(b.deleted), b.lead24 if isinstance(b.lead24, str) else None,
+                 r(b.lead24_margin, 1), int(b.f), int(b.m), int(b.hindu), int(b.muslim), int(b.unknown)]
+                for b in g.itertuples()]
+        write(os.path.join(bdir, 'ac_%03d.json' % ac),
+              {'fields': ['booth', 'deleted', 'lead2024', 'lead_margin_pp', 'female', 'male', 'hindu', 'muslim', 'unknown'], 'rows': recs})
+
+    # state summary
+    bins = [0, 50, 100, 150, 200, 250, 300, 400, 10**6]
+    labels = ['0-49', '50-99', '100-149', '150-199', '200-249', '250-299', '300-399', '400+']
+    hist = pd.cut(booth.deleted, bins=bins, right=False, labels=labels).value_counts().reindex(labels)
+    lab = {}
+    for year, col in [(2020, 'al2020'), (2024, 'al2024'), (2025, 'al2025')]:
+        grp = a.groupby(col).agg(acs=('ac', 'size'), deleted=('total', 'sum'), electorate=('electorate_2025', 'sum'), booths=('booths', 'sum'))
+        lab[str(year)] = {k: {'acs': int(v.acs), 'deleted': int(v.deleted), 'per_100': r(100 * v.deleted / v.electorate, 2),
+                              'per_booth': r(v.deleted / v.booths, 1)} for k, v in grp.iterrows()}
+    bl = booth.dropna(subset=['lead24_alliance']).groupby('lead24_alliance').deleted.agg(['size', 'sum', 'mean', 'median'])
+    summary = {
+        'totals': {'booths': int(len(booth)), 'acs': int(a.ac.nunique()), 'p1': int(a.p1.sum()), 'p2': int(a.p2.sum()),
+                   'total': int(a.total.sum()), 'female': int(a.t_f.sum()), 'male': int(a.t_m.sum()),
+                   'electorate_2025': int(a.electorate_2025.sum()),
+                   'booths_with_2024_result': int(booth.lead24.notna().sum()),
+                   'religion_classified': int((booth.hindu + booth.muslim + booth.unknown).sum()),
+                   'hindu': int(booth.hindu.sum()), 'muslim': int(booth.muslim.sum()), 'unknown': int(booth.unknown.sum())},
+        'booth_histogram': {k: int(v) for k, v in hist.items()},
+        'by_alliance_label': lab,
+        'by_booth_leader_2024': {k: {'booths': int(v['size']), 'deleted': int(v['sum']), 'mean': r(v['mean'], 1), 'median': r(v['median'], 1)}
+                                 for k, v in bl.iterrows()},
+        'within_seat_2024': within_seat(booth),
+        'label_verification': report,
+        'label_fixes': {pc: {src: {'party': t[0], 'status': t[1], 'evidence': t[2]} for src, t in fx.items()} for pc, fx in LABEL_FIXES.items()},
+    }
+    write(os.path.join(OUT, 'constituencies.json'), acs)
+    write(os.path.join(OUT, 'districts.json'), district_economy(a))
+    write(os.path.join(OUT, 'identity.json'), {'caste': caste_estimates(), 'districts': district_identity(a),
+                                               'survey_baseline': SURVEY})
+    write(os.path.join(OUT, 'summary.json'), summary)
+
+
+def write(path, obj):
+    s = json.dumps(obj, ensure_ascii=False, separators=(',', ':'), sort_keys=False)
+    if CHECK:
+        with open(path, encoding='utf-8') as fh:
+            if fh.read() != s:
+                STALE.append(os.path.relpath(path, ROOT))
+        return
+    with open(path, 'w', encoding='utf-8') as fh:
+        fh.write(s)
+
+
+CHECK = '--check' in sys.argv
+STALE = []
+
+if __name__ == '__main__':
+    booth, a, report = build()
+    outputs(booth, a, report)
+    if CHECK:
+        if STALE:
+            print('STALE: %d generated file(s) differ from the sources: %s' % (len(STALE), STALE[:5]))
+            sys.exit(1)
+        print('OK: generated Bihar data matches its sources')
+    else:
+        print('wrote data/bihar: %d constituencies, %d booths, %d deletions' % (a.ac.nunique(), len(booth), booth.deleted.sum()))

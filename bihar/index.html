@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bihar SIR 2025: overview</title>
+<meta name="description" content="Bihar's Special Intensive Revision of 2025, booth by booth: 69.1 lakh electors removed from the draft roll across 243 constituencies, and how that sits against three elections.">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="../assets/sir.css">
+</head>
+<body data-root="../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="brand"><a class="home" href="../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
+  <h1>Bihar SIR 2025: who was dropped from the draft roll</h1>
+  <p class="lede">The Special Intensive Revision removed 65.6 lakh names from Bihar's roll in its first phase and 3.5 lakh more in the second. These pages follow those removals down to the polling booth and set them against the 2020, 2024 and 2025 results.</p>
+  <nav class="sub" aria-label="Bihar"><a href="./" aria-current="page">Overview</a><a href="constituencies/">Constituencies</a><a href="results/">Deletions and results</a><a href="border/">Border</a><a href="districts/">Districts</a><a href="people/">Gender, religion, caste</a><a href="method/">Method</a></nav>
+</header>
+<main id="main">
+  <div class="kpis" id="kpis"></div>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>How deletions are spread across booths</h3>
+      <p>Booths by the number of names deleted in phase 1. Most booths lost under a hundred; a long tail lost several hundred.</p>
+      <div class="chart"><canvas id="cHist" aria-label="Histogram of booths by deletions"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>The two phases</h3>
+      <p>Phase 1 is the draft roll of 1 August 2025; phase 2 the further removals before the final roll. Women and men, as the Chief Electoral Officer reports them.</p>
+      <div class="chart"><canvas id="cPhase" aria-label="Deletions by phase and sex"></canvas></div>
+    </div>
+    <div class="panel wide">
+      <h3>Constituencies by intensity</h3>
+      <p>All 243 constituencies, sorted by deletions per 100 electors on the 2025 roll. Colour is the alliance that won the seat in 2025. Hover for the name.</p>
+      <div class="chart tall"><canvas id="cRank" aria-label="Constituencies ranked by deletions per 100 electors"></canvas></div>
+    </div>
+  </div>
+
+  <h2>Deletions and the three elections</h2>
+  <p class="sub">The same deletions, grouped by which alliance held each seat. The comparison depends on which election labels the seat, so all three are shown.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart short"><canvas id="cAlliance" aria-label="Deletions per 100 electors by alliance under three labellings"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="allianceFinding"></p>
+  <p class="caveat">This is an association across constituencies, not evidence of targeting. Deletions are highest in Seemanchal and the border belt, where out-migration is heaviest and where the "Other" seats (Purnia's independent MP, AIMIM) sit. The <a href="results/">results page</a> compares booths within the same constituency, which holds geography fixed.</p>
+
+  <h2>Where to go next</h2>
+  <div class="cards">
+    <a class="card" href="constituencies/"><h3>Constituencies</h3><p>All 243 seats, sortable, each opening to its booths.</p><span class="go">Open</span></a>
+    <a class="card" href="results/"><h3>Deletions and results</h3><p>Three labellings, booth leaders within a seat, parties, reserved seats, and seats where deletions exceed the 2025 margin.</p><span class="go">Open</span></a>
+    <a class="card" href="border/"><h3>Border</h3><p>The Nepal, Bengal, Jharkhand and UP border belts against the interior.</p><span class="go">Open</span></a>
+    <a class="card" href="districts/"><h3>Districts</h3><p>38 districts against income, urbanisation, literacy and booth size.</p><span class="go">Open</span></a>
+    <a class="card" href="people/"><h3>Gender, religion, caste</h3><p>Who the deleted are, with ranges where names are all there is to go on.</p><span class="go">Open</span></a>
+    <a class="card" href="method/"><h3>Method</h3><p>Sources, the corrections, and the research questions answered.</p><span class="go">Open</span></a>
+  </div>
+
+  <p class="note">Deletions are the Chief Electoral Officer's SIR lists: phase 1 against the draft roll of 1 August 2025, and phase 2. Booth counts use phase 1 (6,559,626 across 77,837 booths); constituency totals add phase 2. "Per 100 electors" divides by the constituency's 2025 electorate. Election results: 2020 Assembly winner from the booth file, 2024 Lok Sabha from booth-level Form 20 with labels reconciled to the declared result, 2025 Assembly from the published results.</p>
+</main>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="../assets/sir.js"></script>
+<script>
+Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json')]).then(function (r) {
+  var s = r[0], acs = r[1], t = s.totals;
+  document.getElementById('kpis').innerHTML = [
+    [SIR.n(t.total), 'names removed, both phases'],
+    [SIR.n(t.p1), 'phase 1, draft roll'],
+    [SIR.d(100 * t.total / t.electorate_2025, 2), 'per 100 electors on the 2025 roll'],
+    [SIR.pct(100 * t.female / (t.female + t.male)), 'of those removed were women'],
+    [SIR.n(t.booths), 'polling booths'],
+    ['243', 'assembly constituencies']
+  ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+
+  var h = s.booth_histogram;
+  SIR.chart('cHist', { type: 'bar', data: { labels: Object.keys(h), datasets: [{ label: 'Booths', data: Object.values(h), $token: '--fill-navy' }] },
+    options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Names deleted in the booth' } }, y: { title: { display: true, text: 'Booths' } } } } });
+
+  var p1f = SIR.sum(acs, 'p1_f'), p1m = SIR.sum(acs, 'p1_m'), tf = SIR.sum(acs, 't_f'), tm = SIR.sum(acs, 't_m');
+  SIR.chart('cPhase', { type: 'bar', data: { labels: ['Phase 1', 'Phase 2'], datasets: [
+      { label: 'Women', data: [p1f, tf - p1f], $token: '--female' }, { label: 'Men', data: [p1m, tm - p1m], $token: '--male' }] },
+    options: { scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Names removed' } } } } });
+
+  var ranked = acs.slice().sort(function (a, b) { return b.per_100 - a.per_100; });
+  SIR.chart('cRank', { type: 'bar', data: { labels: ranked.map(function (a) { return a.name; }), datasets: [{ label: 'Per 100 electors', data: ranked.map(function (a) { return a.per_100; }),
+      $tokens: ranked.map(function (a) { return SIR.alliance[a.al2025]; }) }] },
+    options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { display: false }, grid: { display: false } }, y: { title: { display: true, text: 'Deleted per 100 electors' } } } } });
+
+  var L = s.by_alliance_label, years = ['2020', '2024', '2025'], names = { '2020': '2020 Assembly winner', '2024': '2024 Lok Sabha segment leader', '2025': '2025 Assembly winner' };
+  SIR.chart('cAlliance', { type: 'bar', data: { labels: years.map(function (y) { return names[y]; }), datasets: ['NDA', 'INDIA', 'Other'].map(function (al) {
+      return { label: al, data: years.map(function (y) { return L[y][al] ? L[y][al].per_100 : null; }), $token: SIR.alliance[al] }; }) },
+    options: { indexAxis: 'y', scales: { x: { title: { display: true, text: 'Deleted per 100 electors' }, beginAtZero: true } } } });
+  document.getElementById('allianceFinding').innerHTML = '<b>Under every labelling, NDA-held seats lost more names per elector than INDIA-held ones:</b> ' +
+    years.map(function (y) { return SIR.d(L[y].NDA.per_100, 2) + ' against ' + SIR.d(L[y].INDIA.per_100, 2) + ' (' + names[y].toLowerCase() + ')'; }).join('; ') +
+    '. The earlier dashboard reported the opposite, 81.2 against 93.0 per booth; that figure rested on mislabelled 2024 parties, which also left 112 of the 243 seats out of the comparison.';
+}).catch(SIR.fail);
+</script>
+</body>
+</html>
