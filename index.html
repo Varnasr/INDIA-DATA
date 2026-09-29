@@ -3,67 +3,494 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIR analyses: who the revisions removed</title>
-<meta name="description" content="Independent analyses of India's Special Intensive Revision of the electoral rolls: Bihar 2025, booth by booth across 243 constituencies, and Hyderabad's Old City 2026, elector by elector.">
-<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/><path d='M20 20l5 5M25 20l-5 5' stroke='%23f08a86' stroke-width='2.4' stroke-linecap='round'/></svg>">
-<link rel="stylesheet" href="assets/sir.css">
+<title>Bihar Electoral Dashboard: Special Intensive Revision 2025</title>
+<meta name="description" content="The Bihar Special Intensive Revision of 2025, booth by booth: 69 lakh names removed across 243 constituencies, set against the margins by which each seat was won, with women, religion, caste, border and district analysis.">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23C0392B'/><path d='M9 16l4 4 9-9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/></svg>">
+<style>
+:root {
+  --yellow: #F4D03F; --blue: #85C1E9; --white: #FFFFFF;
+  --text: #1C2833; --text-light: #4D5B69; --teal: #1A8F7A; --mint: #A9DFBF;
+  --red: #C0392B; --orange: #E67E22; --green: #27AE60; --dblue: #1F618D; --purple: #8E44AD;
+  --bg: var(--white); --bg2: #F4F6F7; --card: var(--white);
+  --border: #E1E5E8; --shadow: rgba(0,0,0,0.08);
+  --tab-text: #1C2833; --tab-inactive: #4F5F6E; --tab-active: #B03A2E;
+  --grad-a: #B03A2E; --grad-b: #B85A10;
+}
+[data-theme="dark"] {
+  --bg: #111827; --bg2: #172033; --card: #1B2740;
+  --text: #EAECEE; --text-light: #B7C0C9; --border: #2E3B55; --shadow: rgba(0,0,0,0.35);
+  --tab-text: #EAECEE; --tab-inactive: #A9B4C0; --tab-active: #F5A79E; --dblue: #8EC1E6; --teal: #5FD3BD;
+  --grad-a: #F5A79E; --grad-b: #F8C471;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow-x: clip; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+a { color: var(--dblue); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.skip { position: absolute; left: -999px; } .skip:focus { left: 12px; top: 8px; background: var(--card); padding: 6px 10px; z-index: 200; }
+.icon { width: 18px; height: 18px; display: inline-block; vertical-align: middle; flex: none; }
+.madhubani { height: 6px; background: repeating-linear-gradient(90deg, var(--red) 0 20px, var(--orange) 20px 40px, var(--green) 40px 60px, var(--dblue) 60px 80px, var(--purple) 80px 100px); animation: scroll 8s linear infinite; }
+@keyframes scroll { to { background-position: 100px 0; } }
+header { background: var(--card); padding: 1rem 1.25rem; box-shadow: 0 2px 10px var(--shadow); position: sticky; top: 0; z-index: 100; }
+.header-content { max-width: 1800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.logo { display: flex; align-items: center; gap: 1rem; }
+.logo-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--red), var(--orange)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; animation: glow 3s infinite; flex: none; }
+@keyframes glow { 0%,100% { box-shadow: 0 0 10px var(--orange); } 50% { box-shadow: 0 0 25px var(--red); } }
+h1 { font-size: 1.4rem; line-height: 1.25; }
+.subtitle { font-size: 0.85rem; color: var(--text-light); }
+.controls { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+button, select, .btn { font: inherit; font-size: 0.9rem; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg2); color: var(--text); cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; }
+button:hover, .btn:hover { background: var(--blue); color: #1C2833; transform: translateY(-2px); }
+button:focus-visible, select:focus-visible, .btn:focus-visible, a:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.btn-primary { background: linear-gradient(135deg, var(--yellow), var(--orange)); color: #1C2833; border: none; font-weight: 600; }
+.nav-tabs { display: flex; gap: 0.25rem; padding: 0.5rem 0.75rem 0; background: var(--bg2); overflow-x: auto; border-bottom: 2px solid var(--border); }
+.nav-tab { padding: 0.6rem 1rem; border: none; background: transparent; color: var(--tab-inactive); white-space: nowrap; border-radius: 8px 8px 0 0; font-weight: 600; position: relative; }
+.nav-tab::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 3px; background: var(--red); transform: scaleX(0); transition: 0.3s; }
+.nav-tab[aria-selected="true"]::after { transform: scaleX(1); }
+.nav-tab[aria-selected="true"] { color: var(--tab-active); background: var(--card); }
+.nav-tab:hover { color: var(--tab-text); background: var(--card); transform: none; }
+main { max-width: 1800px; margin: 0 auto; padding: 1.5rem 1.25rem; }
+.tab-content { display: none; animation: fadeIn 0.4s; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
+.summary-card { background: var(--card); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--red); box-shadow: 0 4px 15px var(--shadow); transition: 0.3s; }
+.summary-card:hover { transform: translateY(-3px); }
+.summary-card.y { border-color: var(--yellow); } .summary-card.b { border-color: var(--dblue); } .summary-card.g { border-color: var(--green); } .summary-card.o { border-color: var(--orange); } .summary-card.p { border-color: var(--purple); }
+.summary-value { font-size: 1.6rem; font-weight: 700; color: var(--grad-a); background: linear-gradient(135deg, var(--grad-a), var(--grad-b)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.3; }
+.summary-label { font-size: 0.8rem; color: var(--text-light); }
+.takeaway { background: linear-gradient(135deg, var(--yellow), var(--mint)); color: #1C2833; padding: 1rem 1.1rem; border-radius: 10px; margin: 0.5rem 0 1.25rem; border-left: 4px solid var(--green); display: flex; align-items: flex-start; gap: 0.75rem; }
+[data-theme="dark"] .takeaway { background: linear-gradient(135deg, rgba(244,208,63,0.18), rgba(169,223,191,0.18)); color: var(--text); }
+.takeaway-title { font-weight: 700; }
+.chart-takeaway { background: var(--bg2); padding: 0.75rem; border-radius: 8px; margin-top: 0.75rem; font-size: 0.85rem; border-left: 3px solid var(--teal); }
+.chart-takeaway strong { color: var(--dblue); }
+.charts-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem; }
+@media (max-width: 1400px) { .charts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .charts-grid { grid-template-columns: minmax(0, 1fr); } .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } h1 { font-size: 1.1rem; } .summary-grid { gap: .6rem; } .summary-card { padding: .75rem; } .summary-value { font-size: 1.2rem; } .logo-icon { width: 40px; height: 40px; } }
+.card { background: var(--card); border-radius: 12px; padding: 1.25rem; box-shadow: 0 4px 20px var(--shadow); border: 1px solid var(--border); min-width: 0; }
+.card.wide { grid-column: 1 / -1; }
+.card-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+.card-actions button { padding: 0.2rem 0.55rem; font-size: 0.7rem; }
+.chart-container { position: relative; height: 300px; width: 100%; }
+.chart-container.tall { height: 380px; }
+.chart-container.rows { height: 760px; }
+.research-section { background: var(--card); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.25rem; border: 1px solid var(--border); }
+.research-q { font-weight: 700; color: var(--dblue); margin-bottom: 0.5rem; font-size: 1rem; }
+.research-a { color: var(--text); padding: 0.75rem; background: var(--bg2); border-radius: 8px; border-left: 4px solid var(--green); }
+.methodology { background: var(--bg2); padding: 1.25rem; border-radius: 10px; margin: 1rem 0; }
+.methodology h2 { color: var(--dblue); margin-bottom: 0.5rem; font-size: 1.05rem; }
+.methodology ul { margin-left: 1.25rem; font-size: 0.92rem; }
+.methodology p { font-size: 0.92rem; margin-bottom: 0.5rem; }
+.twrap { overflow-x: auto; max-height: 560px; overflow-y: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+th, td { padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--border); text-align: right; font-variant-numeric: tabular-nums; }
+th.l, td.l { text-align: left; }
+th { position: sticky; top: 0; background: var(--bg2); z-index: 1; }
+th button { all: unset; cursor: pointer; font-weight: 600; }
+th button:focus-visible { outline: 2px solid var(--text); }
+th[aria-sort="descending"] button::after { content: " \25BE"; } th[aria-sort="ascending"] button::after { content: " \25B4"; }
+.tag { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 0 6px; border-radius: 4px; }
+.tag.NDA { background: #F5B041; color: #1C2833; } .tag.INDIA { background: #1E8449; color: #fff; } .tag.Other { background: #BB8FCE; color: #1C2833; }
+.search { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; }
+.search input { font: inherit; padding: 0.45rem 0.7rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); min-width: 240px; }
+.hubs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 0 0 1.25rem; }
+.hub { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; text-decoration: none; color: var(--text); box-shadow: 0 4px 15px var(--shadow); display: block; }
+.hub:hover { border-color: var(--red); }
+.hub b { display: block; font-size: 1rem; }
+.hub span { font-size: 0.85rem; color: var(--text-light); }
+footer { background: var(--card); padding: 1.5rem; text-align: center; border-top: 1px solid var(--border); margin-top: 1rem; font-size: 0.85rem; color: var(--text-light); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media print { header, .nav-tabs, .card-actions, .search { display: none; } .tab-content { display: block !important; } }
+</style>
 </head>
-<body data-root="">
-<a class="skip" href="#main">Skip to content</a>
-<header class="site">
-  <div class="brand"><span class="pill">forindia.netlify.app</span><button class="theme" type="button">Dark theme</button></div>
-  <h1>The Special Intensive Revision: who was struck off the rolls</h1>
-  <p class="lede">In 2025 the Election Commission began re-verifying every elector, state by state, instead of revising the existing rolls. These pages follow two of those revisions through the Commission's own lists: Bihar, the first state to go through it, and five constituencies of Hyderabad's Old City.</p>
-  <nav class="sub" aria-label="Sections"><a href="./" aria-current="page">Both analyses</a><a href="bihar/">Bihar 2025</a><a href="hyderabad/">Hyderabad Old City 2026</a></nav>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="madhubani"></div>
+<header>
+  <div class="header-content">
+    <div class="logo">
+      <div class="logo-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></div>
+      <div>
+        <h1 data-translate="title">Bihar Electoral Dashboard</h1>
+        <div class="subtitle">Special Intensive Revision 2025 · every booth, every constituency</div>
+      </div>
+    </div>
+    <div class="controls">
+      <label for="lang" class="sr-only">Language</label>
+      <select id="lang" aria-label="Language">
+        <option value="en">English</option><option value="hi">हिंदी</option><option value="bn">বাংলা</option><option value="ta">தமிழ்</option><option value="mr">मराठी</option>
+      </select>
+      <a class="btn" href="hyderabad/">Hyderabad 2026</a>
+      <button type="button" id="themeBtn" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
+      <button type="button" class="btn-primary" id="pdfBtn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
+    </div>
+  </div>
 </header>
-<main id="main">
-  <h2>Bihar 2025</h2>
-  <p class="sub">Every name removed from Bihar's roll in both phases of the revision, booth by booth across 243 constituencies, set against the margins by which the seats were won.</p>
-  <ul class="claims" id="bihar"></ul>
-  <p><a href="bihar/">Open the Bihar explorer</a> · <a href="bihar/results/">Elections</a> · <a href="bihar/people/">Women, religion, caste</a> · <a href="bihar/faq/">FAQ</a></p>
-
-  <h2>Hyderabad Old City 2026</h2>
-  <p class="sub">Every elector on the pre-revision rolls of Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, sorted into struck off, kept but summoned to a hearing, or left alone, down to the polling part.</p>
-  <ul class="claims" id="hyd"></ul>
-  <p><a href="hyderabad/">Open the Hyderabad pages</a> · <a href="hyderabad/explorer/">Explorer</a> · <a href="hyderabad/hearings/">Hearings</a> · <a href="hyderabad/faq/">FAQ</a></p>
-
-  <h2>What an audit needs</h2>
-  <p class="sub">Neither set of lists says whose votes the removals were. Three things would settle it.</p>
-  <ul class="claims">
-    <li><b>1</b><span>A name-by-name verification of removals in every Bihar constituency where they exceed the 2025 winning margin, beginning with the seats that changed hands.</span></li>
-    <li><b>2</b><span>Publication, booth by booth, of every claim and objection filed after the draft roll and what became of it.</span></li>
-    <li><b>3</b><span>In Hyderabad, a review before the final roll of every removal entered as "untraceable or absent", and of removals of electors with no link to the 2002 roll.</span></li>
-  </ul>
-
-  <h2>Two kinds of list</h2>
-  <p class="sub">Bihar's lists name the removed, booth by booth, so the Bihar pages compare where removals fell and who the removed were against census and survey baselines. Hyderabad's lists cover every elector on the pre-revision roll, so each group there has its own removal rate, and groups can be compared inside the same polling part.</p>
-</main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
-<script src="assets/sir.js"></script>
+<nav class="nav-tabs" role="tablist" aria-label="Dashboard sections">
+  <button type="button" class="nav-tab" role="tab" data-tab="overview"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> Overview</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="deletions"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> Deletions</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="phases"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Phases</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="gender"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Gender</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="caste"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> Caste</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="religion"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 8v2h20V8L12 2z"/><path d="M4 10v10h16V10"/><path d="M10 20v-6h4v6"/></svg> Religion</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="electoral"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> Electoral</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="geographic"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16"/><path d="M16 6v16"/></svg> Geographic</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="economic"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12"/><path d="M6 8h12"/><path d="M6 13l6 8"/><path d="M18 13c-3 0-6-3-6-8"/></svg> Economic</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="research"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Research</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="methodology"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Methods</button>
+</nav>
+<main id="content"></main>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers are published. · <a href="bihar/">Booth explorer</a> · <a href="bihar/faq/">Questions and answers</a> · <a href="hyderabad/">Hyderabad Old City 2026</a></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/identity.json'), SIR.json('data/hyderabad/summary.json')]).then(function (r) {
-  var s = r[0], acs = r[1], D = r[2].districts, h = r[3], t = s.totals, L = s.by_alliance_label, W = s.within_seat_2024, I = s.intensity;
-  var li = function (rows) { return rows.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join(''); };
-  var fOver = D.filter(function (d) { return d.female_share_deleted > d.female_share_population_2011; }).length;
-  var mOver = acs.filter(function (a) { return a.margin2025 != null && a.total > a.margin2025; }).length;
-  var withM = acs.filter(function (a) { return a.margin2025; }), took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; });
-  document.getElementById('bihar').innerHTML = li([
-    [SIR.lakh(t.total), 'names removed from Bihar\'s roll, ' + SIR.d(100 * t.total / t.electorate_2025, 2) + ' for every 100 electors on the 2025 roll.'],
-    [mOver + ' of ' + acs.length, 'constituencies lost more names than the margin by which they were won in 2025.'],
-    [took.filter(function (a) { return a.total > a.margin2025; }).length + ' of ' + took.length, 'seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA\'s winning margin.'],
-    [SIR.pct(100 * t.female / (t.female + t.male)), 'of those removed were women, above their share of the population in ' + fOver + ' of ' + D.length + ' districts.']
-  ]);
-  var A = h.acs, tt = h.totals, age80 = 100 * SIR.sum(A, function (a) { return a.counts.age_asd[7]; }) / SIR.sum(A, function (a) { return a.age_all[7]; });
-  var L2 = A.filter(function (a) { return a.linked; }), ul = L2.map(function (a) { return a.within_part.unlinked_minus_linked.diff_pp; });
-  var yak = A.filter(function (a) { return a.name === 'Yakutpura'; })[0], heavy = Math.max.apply(null, A.map(function (a) { return a.max_slot; }));
-  document.getElementById('hyd').innerHTML = li([
-    [SIR.pct(tt.rate), 'of electors on the pre-revision rolls were struck off: ' + SIR.n(tt.deleted) + ' of ' + SIR.n(tt.electors) + '. Another ' + SIR.n(tt.hearing) + ' were kept but summoned to a hearing.'],
-    [SIR.pct(age80), 'of electors aged 80 and over were struck off.'],
-    ['+' + SIR.d(Math.min.apply(null, ul), 0) + ' to +' + SIR.d(Math.max.apply(null, ul), 0), 'percentage points: how much more often electors with no link to the 2002 roll were struck off than linked electors in the same polling part.'],
-    [SIR.n(heavy), 'cases listed in a single hearing slot, the heaviest in the five constituencies.'],
-    [SIR.d(yak.e2023.deleted_over_margin, 0) + '×', 'Yakutpura\'s 2023 winning margin of ' + SIR.n(yak.e2023.margin) + ' votes: the number of names struck off there.']
-  ]);
-}).catch(SIR.fail);
+(function () {
+  // ------------------------------------------------------------------ helpers
+  var nf = new Intl.NumberFormat('en-IN');
+  function n(x) { return x == null || isNaN(x) ? '–' : nf.format(Math.round(x)); }
+  function d(x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k); }
+  function pct(x, k) { return d(x, k) + '%'; }
+  function lakh(x) { return (x / 1e5).toFixed(1) + ' lakh'; }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function sum(a, f) { return a.reduce(function (s, x) { return s + (typeof f === 'function' ? f(x) : x[f]); }, 0); }
+  function mean(a) { return a.length ? sum(a, function (x) { return x; }) / a.length : NaN; }
+  function median(a) { var s = a.slice().sort(function (x, y) { return x - y; }), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
+  function corr(x, y) { var mx = mean(x), my = mean(y), sxy = 0, sx = 0, sy = 0; x.forEach(function (v, i) { sxy += (v - mx) * (y[i] - my); sx += (v - mx) * (v - mx); sy += (y[i] - my) * (y[i] - my); }); return sxy / Math.sqrt(sx * sy); }
+  function rank(a) { var o = a.map(function (v, i) { return [v, i]; }).sort(function (p, q) { return p[0] - q[0]; }), r = new Array(a.length); for (var i = 0; i < o.length;) { var j = i; while (j + 1 < o.length && o[j + 1][0] === o[i][0]) j++; for (var k = i; k <= j; k++) r[o[k][1]] = (i + j) / 2 + 1; i = j + 1; } return r; }
+  function rho(x, y) { return corr(rank(x), rank(y)); }
+  function groupBy(a, k) { var o = {}; a.forEach(function (r) { var g = typeof k === 'function' ? k(r) : r[k]; (o[g] = o[g] || []).push(r); }); return o; }
+  function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' : '–'; }
+  var C = { red: '#C0392B', orange: '#E67E22', green: '#27AE60', dblue: '#1F618D', purple: '#8E44AD', yellow: '#D4AC0D', teal: '#17A589', grey: '#95A5A6', pink: '#AF3B6E', nda: '#E67E22', india: '#1E8449', other: '#8E7CC3' };
+  var AL = { NDA: C.nda, INDIA: C.india, Other: C.other };
+  var ICON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v10"/><circle cx="12" cy="17" r="4"/></svg>';
+
+  // ------------------------------------------------------------------ theme
+  var root = document.documentElement, themeBtn = document.getElementById('themeBtn');
+  try { if (localStorage.getItem('sir-dash-theme') === 'dark') root.setAttribute('data-theme', 'dark'); } catch (e) {}
+  function isDark() { return root.getAttribute('data-theme') === 'dark'; }
+  function setThemeLabel() { themeBtn.querySelector('span').textContent = isDark() ? 'Light' : 'Dark'; themeBtn.setAttribute('aria-pressed', isDark() ? 'true' : 'false'); }
+  setThemeLabel();
+
+  // ------------------------------------------------------------------ language (title, as before)
+  var T = { en: 'Bihar Electoral Dashboard', hi: 'बिहार चुनाव डैशबोर्ड', bn: 'বিহার নির্বাচনী ড্যাশবোর্ড', ta: 'பீகார் தேர்தல் டாஷ்போர்ட்', mr: 'बिहार निवडणूक डॅशबोर्ड' };
+  document.getElementById('lang').addEventListener('change', function () { document.querySelector('[data-translate="title"]').textContent = T[this.value] || T.en; });
+
+  // ------------------------------------------------------------------ charts
+  var charts = {}, specs = {};
+  function chart(id, cfg) { specs[id] = cfg; }
+  function draw(id) {
+    if (typeof Chart === 'undefined') return;
+    var el = document.getElementById(id); if (!el || !specs[id]) return;
+    if (charts[id]) charts[id].destroy();
+    var ink = isDark() ? '#D5DBE1' : '#34495E', grid = isDark() ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
+    Chart.defaults.color = ink; Chart.defaults.borderColor = grid;
+    Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+    Chart.defaults.font.size = window.innerWidth < 600 ? 11 : 12;
+    Chart.defaults.maintainAspectRatio = false;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) Chart.defaults.animation = false;
+    var cfg = JSON.parse(JSON.stringify(specs[id], function (k, v) { return typeof v === 'function' ? undefined : v; }));
+    // Put back any callbacks the clone dropped.
+    if (specs[id].options && specs[id].options.plugins && specs[id].options.plugins.tooltip) cfg.options.plugins.tooltip = specs[id].options.plugins.tooltip;
+    cfg.options = cfg.options || {};
+    if (cfg.options.indexAxis === 'y') { cfg.options.scales = cfg.options.scales || {}; cfg.options.scales.y = cfg.options.scales.y || {}; cfg.options.scales.y.ticks = Object.assign({ autoSkip: false }, cfg.options.scales.y.ticks || {}); }
+    if (window.innerWidth < 600) { cfg.options.plugins = cfg.options.plugins || {}; cfg.options.plugins.legend = Object.assign({}, cfg.options.plugins.legend || {}); cfg.options.plugins.legend.labels = { boxWidth: 10, boxHeight: 10, padding: 6 }; }
+    charts[id] = new Chart(el, cfg);
+  }
+  function drawTab(tab) { document.querySelectorAll('#tab-' + tab + ' canvas').forEach(function (c) { draw(c.id); }); }
+
+  // ------------------------------------------------------------------ page building
+  var main = document.getElementById('content');
+  function kpis(list) { var cls = ['', 'y', 'b', 'g', 'o', 'p']; return '<div class="summary-grid">' + list.map(function (k, i) { return '<div class="summary-card ' + cls[i % 6] + '"><div class="summary-value">' + k[0] + '</div><div class="summary-label">' + k[1] + '</div></div>'; }).join('') + '</div>'; }
+  function banner(title, text) { return '<div class="takeaway" role="note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg><div><div class="takeaway-title">' + title + '</div>' + text + '</div></div>'; }
+  function card(num, id, title, insight, opts) {
+    opts = opts || {};
+    return '<div class="card' + (opts.wide ? ' wide' : '') + '"><div class="card-title"><span>' + num + '. ' + title + '</span><div class="card-actions"><button type="button" data-png="' + id + '" aria-label="Download this chart as PNG">PNG</button></div></div>' +
+      '<div class="chart-container ' + (opts.size || '') + '"><canvas id="' + id + '" role="img" aria-label="' + esc(title) + '"></canvas></div>' +
+      '<div class="chart-takeaway">' + ICON + ' <strong>Key insight:</strong> ' + insight + '</div></div>';
+  }
+  function section(id, html) { return '<section class="tab-content" id="tab-' + id + '" role="tabpanel" aria-labelledby="tabbtn-' + id + '">' + html + '</section>'; }
+  function barOpts(x, y, extra) { return Object.assign({ plugins: { legend: { display: false } }, scales: { x: { title: { display: !!x, text: x } }, y: { beginAtZero: true, title: { display: !!y, text: y } } } }, extra || {}); }
+  function hbar(labels, data, colors, xt) { return { type: 'bar', data: { labels: labels, datasets: [{ label: xt, data: data, backgroundColor: colors }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: xt } } } } }; }
+  function scatter(pts, xt, yt, color, labelFn) { return { type: 'scatter', data: { datasets: [{ label: yt, data: pts, backgroundColor: color, pointRadius: 3.5 }] }, options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: labelFn } } }, scales: { x: { title: { display: true, text: xt } }, y: { title: { display: true, text: yt } } } } }; }
+
+  Promise.all(['summary', 'constituencies', 'districts', 'identity'].map(function (f) { return fetch('data/bihar/' + f + '.json').then(function (r) { if (!r.ok) throw new Error(f + ' ' + r.status); return r.json(); }); })).then(function (r) {
+    var S = r[0], A = r[1], DS = r[2], ID = r[3], t = S.totals, DI = ID.districts;
+    var byD = {}; DS.forEach(function (x) { byD[x.district] = x; });
+    var per100 = 100 * t.total / t.electorate_2025, fem = 100 * t.female / (t.female + t.male), cls = t.hindu + t.muslim + t.unknown;
+    var withM = A.filter(function (a) { return a.margin2025; }), overM = withM.filter(function (a) { return a.total > a.margin2025; });
+    var nda25 = withM.filter(function (a) { return a.al2025 === 'NDA'; }), nda25o = nda25.filter(function (a) { return a.total > a.margin2025; });
+    var took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; }), tookO = took.filter(function (a) { return a.total > a.margin2025; });
+    var rate = function (rows) { return 100 * sum(rows, 'total') / sum(rows, 'electorate_2025'); };
+    var byBorder = groupBy(A, function (a) { return a.border || 'Interior'; });
+    var shortB = function (k) { return k.split(';').map(function (x) { return { 'Uttar Pradesh': 'UP', 'West Bengal': 'Bengal' }[x] || x; }).join(' + '); };
+    var borders = Object.keys(byBorder).sort(function (a, b) { return a === 'Interior' ? 1 : b === 'Interior' ? -1 : rate(byBorder[b]) - rate(byBorder[a]); });
+    var rankedA = A.slice().sort(function (a, b) { return b.per_100 - a.per_100; });
+    var rankedD = DS.slice().sort(function (a, b) { return b.per_100 - a.per_100; });
+    var html = '';
+
+    // ============================================================ OVERVIEW
+    var ratio = withM.map(function (a) { return a.total / a.margin2025; }), cuts = [0, 1, 2, 5, 10, 20, Infinity], cutL = ['under 1×', '1–2×', '2–5×', '5–10×', '10–20×', '20× +'];
+    chart('ov1', { type: 'bar', data: { labels: cutL, datasets: [{ label: 'Constituencies', data: cutL.map(function (l, i) { return ratio.filter(function (x) { return x >= cuts[i] && x < cuts[i + 1]; }).length; }), backgroundColor: cutL.map(function (l, i) { return i ? C.red : C.grey; }) }] }, options: barOpts('Names removed ÷ 2025 winning margin', 'Constituencies') });
+    chart('ov2', { type: 'bar', data: { labels: ['Phase 1', 'Phase 2'], datasets: [{ label: 'Women', data: [sum(A, 'p1_f'), sum(A, function (a) { return a.t_f - a.p1_f; })], backgroundColor: C.pink }, { label: 'Men', data: [sum(A, 'p1_m'), sum(A, function (a) { return a.t_m - a.p1_m; })], backgroundColor: C.dblue }] }, options: { scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Names removed' } } } } });
+    var hk = Object.keys(S.booth_histogram);
+    chart('ov3', { type: 'bar', data: { labels: hk, datasets: [{ label: 'Booths', data: hk.map(function (k) { return S.booth_histogram[k]; }), backgroundColor: C.dblue }] }, options: barOpts('Names removed in the booth', 'Booths') });
+    var rc = [4, 6, 8, 10, 12, 14, 16, 30], rl = ['4–6', '6–8', '8–10', '10–12', '12–14', '14–16', '16 +'];
+    chart('ov4', { type: 'bar', data: { labels: rl, datasets: [{ label: 'Constituencies', data: rl.map(function (l, i) { return A.filter(function (a) { return a.per_100 >= rc[i] && a.per_100 < rc[i + 1]; }).length; }), backgroundColor: C.orange }] }, options: barOpts('Removed per 100 electors', 'Constituencies') });
+    var tookS = took.slice().sort(function (a, b) { return b.total / b.margin2025 - a.total / a.margin2025; }).slice(0, 15);
+    var ov5 = hbar(tookS.map(function (a) { return a.name; }), tookS.map(function (a) { return +(a.total / a.margin2025).toFixed(1); }), C.red, 'Names removed ÷ NDA\'s 2025 margin (log scale)');
+    ov5.options.scales.x = { type: 'logarithmic', min: 1, title: ov5.options.scales.x.title };
+    chart('ov5', ov5);
+    var topD = rankedD.slice(0, 15);
+    chart('ov6', hbar(topD.map(function (x) { return x.district; }), topD.map(function (x) { return x.per_100; }), C.orange, 'Removed per 100 electors'));
+    html += section('overview',
+      kpis([[n(t.total), 'Names removed, both phases'], [d(per100, 2), 'Removed per 100 electors'], [overM.length + ' of ' + withM.length, 'Seats where removals exceed the 2025 margin'], [tookO.length + ' of ' + took.length, 'Seats taken from INDIA where removals exceed the NDA margin'], [pct(fem), 'Of the removed are women'], [n(t.booths), 'Polling booths']]) +
+      banner('Key finding', 'The revision removed ' + lakh(t.total) + ' names from Bihar\'s roll: more than the winning margin in ' + overM.length + ' of ' + withM.length + ' constituencies, and in ' + tookO.length + ' of the ' + took.length + ' seats the NDA took from INDIA in 2025.') +
+      '<div class="hubs"><a class="hub" href="bihar/"><b>Booth explorer</b><span>Every constituency and every booth, with its removals against its margin.</span></a><a class="hub" href="bihar/faq/"><b>Questions and answers</b><span>The criticisms put to this analysis, answered from the lists.</span></a><a class="hub" href="hyderabad/"><b>Hyderabad Old City 2026</b><span>Four in ten electors struck off in five constituencies.</span></a></div>' +
+      '<div class="charts-grid">' +
+      card(1, 'ov1', 'Did removals exceed the winning margins?', 'In ' + overM.length + ' of ' + withM.length + ' seats the names removed outnumber the 2025 winning margin, in ' + ratio.filter(function (x) { return x >= 5; }).length + ' of them by five times or more. The NDA won ' + nda25o.length + ' of those seats.') +
+      card(2, 'ov2', 'How many were removed in each phase?', n(t.p1) + ' names came off before the draft roll of 1 August 2025 and ' + n(t.p2) + ' more before the final roll. Women were ' + pct(fem) + ' of all removals.') +
+      card(3, 'ov3', 'How are removals spread across booths?', 'The median booth lost ' + n(median(A.map(function (a) { return a.booth_median; }))) + ' names; ' + n(sum(A, 'booths_200')) + ' booths lost more than 200 each.') +
+      card(4, 'ov4', 'How are constituencies spread by intensity?', 'Removals range from ' + d(rankedA[rankedA.length - 1].per_100, 1) + ' per 100 electors in ' + rankedA[rankedA.length - 1].name + ' to ' + d(rankedA[0].per_100, 1) + ' in ' + rankedA[0].name + '.') +
+      card(5, 'ov5', 'Where did the NDA take seats by less than the removals?', 'In ' + tookO.length + ' of the ' + took.length + ' seats INDIA held in 2020 and lost in 2025, more names were removed than the NDA\'s margin; in the median such seat, ' + d(median(took.map(function (a) { return a.total / a.margin2025; })), 1) + ' times as many. Shown: the fifteen largest multiples.', { size: 'tall' }) +
+      card(6, 'ov6', 'Which districts lost the most per elector?', topD.slice(0, 3).map(function (x) { return x.district + ' (' + d(x.per_100, 1) + ')'; }).join(', ') + ' lead the state. Figures are removals per 100 electors on the 2025 roll.', { size: 'tall' }) +
+      '</div>' +
+      '<div class="card wide"><div class="card-title"><span>All 243 constituencies</span></div><div class="search"><label for="seatq">Find a constituency or district</label><input id="seatq" type="search" placeholder="e.g. Gopalganj"></div><div class="twrap" tabindex="0" role="region" aria-label="All constituencies"><table id="seatTable"></table></div><div class="chart-takeaway">' + ICON + ' Sorted by names removed as a multiple of the 2025 margin. Click a column to sort; the constituency name opens its booths in the explorer.</div></div>');
+
+    // ============================================================ DELETIONS
+    var dShare = DS.slice().sort(function (a, b) { return b.deleted - a.deleted; }), top10 = dShare.slice(0, 10), top10s = 100 * sum(top10, 'deleted') / t.total;
+    chart('de1', hbar(top10.map(function (x) { return x.district; }), top10.map(function (x) { return +(100 * x.deleted / t.total).toFixed(2); }), C.red, '% of all removals in Bihar'));
+    chart('de2', { type: 'bar', data: { labels: rankedD.map(function (x) { return x.district; }), datasets: [{ label: 'Per booth', data: rankedD.map(function (x) { return x.per_booth; }), backgroundColor: C.orange }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: 'Names removed per booth' } } } } });
+    chart('de3', scatter(A.map(function (a) { return { x: a.total, y: a.per_100, n: a.name }; }), 'Names removed', 'Removed per 100 electors', C.dblue, function (c) { return c.raw.n + ': ' + n(c.raw.x) + ' names, ' + d(c.raw.y, 1) + ' per 100'; }));
+    var b200 = DS.map(function (x) { return { d: x.district, v: sum(A.filter(function (a) { return a.district === x.district; }), 'booths_200') }; }).sort(function (a, b) { return b.v - a.v; }).slice(0, 15);
+    chart('de4', hbar(b200.map(function (x) { return x.d; }), b200.map(function (x) { return x.v; }), C.purple, 'Booths that lost more than 200 names'));
+    var ts = ID.caste.guardian.top_surnames.slice(0, 15);
+    chart('de5', hbar(ts.map(function (x) { return x.surname; }), ts.map(function (x) { return x.deleted; }), C.teal, 'Removed electors with this guardian surname'));
+    chart('de6', hbar(borders.map(function (k) { return shortB(k) + ' (' + byBorder[k].length + ')'; }), borders.map(function (k) { return +rate(byBorder[k]).toFixed(2); }), borders.map(function (k) { return k === 'Interior' ? C.grey : C.dblue; }), 'Removed per 100 electors'));
+    var rVI = rho(A.map(function (a) { return a.total; }), A.map(function (a) { return a.per_100; }));
+    html += section('deletions',
+      banner('Deletion patterns', 'The ten districts that lost the most names account for ' + pct(top10s) + ' of all removals. The heaviest districts lost more than twice as many names per elector as the lightest.') +
+      '<div class="charts-grid">' +
+      card(1, 'de1', 'Which districts have the highest shares?', top10.slice(0, 3).map(function (x) { return x.district + ' (' + pct(100 * x.deleted / t.total) + ')'; }).join(', ') + ' carry the largest shares of the state\'s removals.', { size: 'tall' }) +
+      card(2, 'de2', 'How do districts compare per booth?', rankedD.slice().sort(function (a, b) { return b.per_booth - a.per_booth; }).slice(0, 3).map(function (x) { return x.district + ' (' + d(x.per_booth, 0) + ')'; }).join(', ') + ' lost the most names per booth.', { size: 'rows' }) +
+      card(3, 'de3', 'Does volume relate to intensity?', 'Seats that lost more names also lost more per elector (rank correlation ' + d(rVI, 2) + '): the large totals are not simply large constituencies.', { size: 'tall' }) +
+      card(4, 'de4', 'Where are the heaviest booths?', b200.slice(0, 3).map(function (x) { return x.d + ' (' + x.v + ')'; }).join(', ') + ' hold the most booths that lost more than 200 names.', { size: 'tall' }) +
+      card(5, 'de5', 'Which guardian surnames are most common?', 'The surname of the father or husband listed with each removed elector. ' + ts[0].surname + ', ' + ts[1].surname + ' and ' + ts[2].surname + ' lead; most are carried across several castes. See the Caste tab.', { size: 'tall' }) +
+      card(6, 'de6', 'How does intensity vary by border region?', 'Constituencies grouped by the neighbours of their district. ' + shortB(borders[0]) + ' seats lost the most per elector (' + d(rate(byBorder[borders[0]]), 2) + ' per 100), the interior ' + d(rate(byBorder.Interior), 2) + '.') +
+      '</div>');
+
+    // ============================================================ PHASES
+    var p2share = function (rows) { return 100 * sum(rows, 'p2') / sum(rows, 'p1'); };
+    var ph = A.slice().sort(function (a, b) { return b.p2 / b.p1 - a.p2 / a.p1; }).slice(0, 20);
+    chart('ph1', scatter(A.map(function (a) { return { x: a.p1, y: a.p2, n: a.name }; }), 'Phase 1 removals', 'Phase 2 removals', C.purple, function (c) { return c.raw.n + ': ' + n(c.raw.x) + ' then ' + n(c.raw.y); }));
+    chart('ph2', hbar(ph.map(function (a) { return a.name; }), ph.map(function (a) { return +(100 * a.p2 / a.p1).toFixed(1); }), C.purple, 'Phase 2 as % of phase 1'));
+    var dp = DS.map(function (x) { var rows = A.filter(function (a) { return a.district === x.district; }); return { d: x.district, v: p2share(rows) }; }).sort(function (a, b) { return b.v - a.v; }).slice(0, 15);
+    chart('ph3', hbar(dp.map(function (x) { return x.d; }), dp.map(function (x) { return +x.v.toFixed(1); }), C.dblue, 'Phase 2 as % of phase 1'));
+    var f1 = 100 * sum(A, 'p1_f') / sum(A, 'p1'), f2 = 100 * sum(A, function (a) { return a.t_f - a.p1_f; }) / sum(A, 'p2');
+    chart('ph4', { type: 'bar', data: { labels: ['Phase 1', 'Phase 2', 'Both'], datasets: [{ label: 'Women %', data: [f1, f2, fem], backgroundColor: C.pink }] }, options: barOpts('', '% of removals who are women', { scales: { y: { min: 40, max: 65, title: { display: true, text: '% of removals who are women' } } } }) });
+    chart('ph5', hbar(borders.map(function (k) { return shortB(k); }), borders.map(function (k) { return +p2share(byBorder[k]).toFixed(1); }), C.teal, 'Phase 2 as % of phase 1'));
+    chart('ph6', { type: 'bar', data: { labels: ['Phase 1', 'Phase 2'], datasets: [{ label: 'Names removed', data: [t.p1, t.p2], backgroundColor: [C.red, '#7B241C'] }] }, options: barOpts('', 'Names removed') });
+    html += section('phases',
+      kpis([[n(t.p1), 'Phase 1, before the draft roll'], [n(t.p2), 'Phase 2, before the final roll'], [pct(100 * t.p2 / t.p1), 'Phase 2 as a share of phase 1']]) +
+      banner('Two phases', 'Phase 1 removed ' + n(t.p1) + ' names before the draft roll of 1 August 2025. Phase 2 removed ' + n(t.p2) + ' more before the final roll, and it fell unevenly: ' + (function () { var r = A.filter(function (a) { return a.p1; }).map(function (a) { return { n: a.name, v: 100 * a.p2 / a.p1 }; }).sort(function (x, y) { return x.v - y.v; }); return 'from ' + d(r[0].v, 1) + '% of the phase 1 count in ' + r[0].n + ' to ' + d(r[r.length - 1].v, 1) + '% in ' + r[r.length - 1].n + '.'; })()) +
+      '<div class="charts-grid">' +
+      card(1, 'ph1', 'How did each constituency move between phases?', (function () { var r = rho(A.map(function (a) { return a.p1; }), A.map(function (a) { return a.p2; })); return (Math.abs(r) < 0.2 ? 'The second pass did not follow the first: seats heavy in phase 1 were no more likely to be heavy in phase 2' : r > 0 ? 'Seats heavy in phase 1 tended to be heavy in phase 2 as well' : 'Seats heavy in phase 1 tended to be lighter in phase 2') + ' (rank correlation ' + d(r, 2) + ').'; })(), { size: 'tall' }) +
+      card(2, 'ph2', 'Where was the second pass heaviest?', ph[0].name + ' lost ' + pct(100 * ph[0].p2 / ph[0].p1) + ' of its phase 1 count again in phase 2.', { size: 'rows' }) +
+      card(3, 'ph3', 'Which districts saw the heaviest second pass?', dp.slice(0, 3).map(function (x) { return x.d + ' (' + pct(x.v) + ')'; }).join(', ') + '.', { size: 'tall' }) +
+      card(4, 'ph4', 'Were women a larger share in either phase?', 'Women were ' + pct(f1) + ' of phase 1 removals and ' + pct(f2) + ' of phase 2.') +
+      card(5, 'ph5', 'Did the second pass fall evenly by region?', 'Phase 2 as a share of phase 1 was highest in ' + shortB(borders.slice().sort(function (a, b) { return p2share(byBorder[b]) - p2share(byBorder[a]); })[0]) + ' seats.') +
+      card(6, 'ph6', 'What was the overall scale?', 'Across both phases, ' + n(t.total) + ' names: ' + d(per100, 2) + ' for every 100 electors on the 2025 roll.') +
+      '</div>');
+
+    // ============================================================ GENDER
+    var gdi = DI.slice().sort(function (a, b) { return (b.female_share_deleted - b.female_share_population_2011) - (a.female_share_deleted - a.female_share_population_2011); });
+    var fOver = DI.filter(function (x) { return x.female_share_deleted > x.female_share_population_2011; }).length;
+    chart('ge1', { type: 'bar', data: { labels: ['Women', 'Men'], datasets: [{ label: 'Removed', data: [t.female, t.male], backgroundColor: [C.pink, C.dblue] }] }, options: barOpts('', 'Names removed') });
+    chart('ge2', { type: 'scatter', data: { datasets: [{ label: 'District', data: DI.map(function (x) { return { x: x.female_share_population_2011, y: x.female_share_deleted, n: x.district }; }), backgroundColor: C.pink, pointRadius: 4 }, { type: 'line', label: 'Equal share', data: [{ x: 46, y: 46 }, { x: 51, y: 51 }], borderColor: C.grey, borderDash: [5, 4], pointRadius: 0 }] }, options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n ? c.raw.n + ': ' + d(c.raw.y, 1) + '% of removals, ' + d(c.raw.x, 1) + '% of population' : ''; } } } }, scales: { x: { title: { display: true, text: 'Women, % of population (2011)' } }, y: { title: { display: true, text: 'Women, % of removals' } } } } });
+    chart('ge3', scatter(A.map(function (a) { return { x: a.per_100, y: 100 * a.t_f / (a.t_f + a.t_m), n: a.name }; }), 'Removed per 100 electors', 'Women, % of removals', C.pink, function (c) { return c.raw.n + ': ' + d(c.raw.y, 1) + '% women'; }));
+    chart('ge4', hbar(borders.map(function (k) { return shortB(k); }), borders.map(function (k) { return +(100 * sum(byBorder[k], 't_f') / sum(byBorder[k], function (a) { return a.t_f + a.t_m; })).toFixed(1); }), C.pink, 'Women, % of removals'));
+    chart('ge5', { type: 'bar', data: { labels: gdi.map(function (x) { return x.district; }), datasets: [{ label: 'Points above population share', data: gdi.map(function (x) { return +(x.female_share_deleted - x.female_share_population_2011).toFixed(1); }), backgroundColor: C.pink }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Women\'s share of removals minus share of population (points)' } } } } });
+    var byA25 = groupBy(A, 'al2025');
+    chart('ge6', { type: 'bar', data: { labels: ['NDA', 'INDIA', 'Other'], datasets: [{ label: 'Women %', data: ['NDA', 'INDIA', 'Other'].map(function (k) { return 100 * sum(byA25[k], 't_f') / sum(byA25[k], function (a) { return a.t_f + a.t_m; }); }), backgroundColor: [C.nda, C.india, C.other] }] }, options: barOpts('Seats by 2025 winner', 'Women, % of removals', { scales: { y: { min: 45, max: 65 } } }) });
+    html += section('gender',
+      kpis([[pct(fem), 'Women among the removed'], [pct(100 - fem), 'Men among the removed'], [n(t.female), 'Women removed'], [n(t.male), 'Men removed'], [fOver + ' of ' + DI.length, 'Districts where women are over-represented']]) +
+      banner('Gender', 'Women are ' + pct(fem) + ' of those removed and 47.86% of Bihar\'s population (Census 2011). Their share of the removed is above their share of the population in ' + fOver + ' of ' + DI.length + ' districts. Sex is recorded on the roll; this needs no estimate.') +
+      '<div class="charts-grid">' +
+      card(1, 'ge1', 'What is the gender split?', n(t.female - t.male) + ' more women than men were removed.') +
+      card(2, 'ge2', 'Were women over-removed in every district?', 'Every point above the dashed line is a district where women\'s share of the removed exceeds their share of the population: ' + fOver + ' of ' + DI.length + '.', { size: 'tall' }) +
+      card(3, 'ge3', 'Does gender relate to intensity?', 'Rank correlation between a seat\'s removal rate and women\'s share of its removals: ' + d(rho(A.map(function (a) { return a.per_100; }), A.map(function (a) { return a.t_f / (a.t_f + a.t_m); })), 2) + '.', { size: 'tall' }) +
+      card(4, 'ge4', 'How does it vary by region?', 'Women are the majority of the removed in every region.') +
+      card(5, 'ge5', 'Which districts show the widest gap?', gdi.slice(0, 3).map(function (x) { return x.district + ' (+' + d(x.female_share_deleted - x.female_share_population_2011, 1) + ')'; }).join(', ') + ' show the widest gap between women\'s share of the removed and of the population.', { size: 'rows' }) +
+      card(6, 'ge6', 'Does it vary by who won the seat?', 'Women\'s share of removals by the alliance that won the seat in 2025: ' + ['NDA', 'INDIA', 'Other'].map(function (k) { return k + ' ' + d(100 * sum(byA25[k], 't_f') / sum(byA25[k], function (a) { return a.t_f + a.t_m; }), 1) + '%'; }).join(', ') + '.') +
+      '</div>');
+
+    // ============================================================ CASTE
+    var cg = ID.caste.guardian, co = ID.caste.own, G = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'], SV = ID.survey_baseline;
+    var up = G.filter(function (g) { return cg.A.groups[g].ratio_to_survey >= 1 && cg.B.groups[g].ratio_to_survey >= 1; }), down = G.filter(function (g) { return cg.A.groups[g].ratio_to_survey < 1 && cg.B.groups[g].ratio_to_survey < 1; }), split = G.filter(function (g) { return up.indexOf(g) < 0 && down.indexOf(g) < 0; });
+    chart('ca1', { type: 'bar', data: { labels: G, datasets: [{ label: 'A: project mapping', data: G.map(function (g) { return cg.A.groups[g].share_of_classified; }), backgroundColor: C.purple }, { label: 'B: strict', data: G.map(function (g) { return cg.B.groups[g].share_of_classified; }), backgroundColor: C.dblue }, { label: '2023 caste survey', data: G.map(function (g) { return SV[g]; }), backgroundColor: C.grey }] }, options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% of classified removals' } } } } });
+    chart('ca2', { type: 'bar', data: { labels: G, datasets: [{ label: 'A', data: G.map(function (g) { return cg.A.groups[g].ratio_to_survey; }), backgroundColor: C.purple }, { label: 'B', data: G.map(function (g) { return cg.B.groups[g].ratio_to_survey; }), backgroundColor: C.dblue }] }, options: { scales: { y: { beginAtZero: true, title: { display: true, text: 'Share of removals ÷ share of population' } } } } });
+    chart('ca3', { type: 'bar', data: { labels: ['A: project mapping', 'B: strict'], datasets: [{ label: 'Placed in a group', data: [cg.A.coverage_pct, cg.B.coverage_pct], backgroundColor: C.dblue }, { label: 'Spans groups', data: [cg.A.cross_pct, cg.B.cross_pct], backgroundColor: C.yellow }, { label: 'No caste information', data: [cg.A.no_information_pct, cg.B.no_information_pct], backgroundColor: C.grey }, { label: 'Not in either list', data: [cg.A.unmatched_pct, cg.B.unmatched_pct], backgroundColor: C.other }] }, options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of all removals' } }, y: { stacked: true } } } });
+    chart('ca4', { type: 'bar', data: { labels: G, datasets: [{ label: 'Possible share of all removals (B)', data: G.map(function (g) { return [cg.B.groups[g].share_low, cg.B.groups[g].share_high]; }), backgroundColor: C.teal }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { min: 0, max: 100, title: { display: true, text: '% of all removals' } } } } });
+    var tsc = cg.top_surnames.slice(0, 20), nm = { none: 'no caste information', cross: 'spans groups', unmatched: 'not listed' };
+    chart('ca5', { type: 'bar', data: { labels: tsc.map(function (x) { return x.surname + ' (' + (nm[x.strict] || x.strict) + ')'; }), datasets: [{ label: 'Removed', data: tsc.map(function (x) { return x.deleted; }), backgroundColor: tsc.map(function (x) { return x.strict === 'cross' ? C.yellow : x.strict === 'none' ? C.grey : C.dblue; }) }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Removed electors, guardian surname' } } } } });
+    chart('ca6', { type: 'bar', data: { labels: G, datasets: [{ label: 'Guardian surname (B)', data: G.map(function (g) { return cg.B.groups[g].share_of_classified; }), backgroundColor: C.dblue }, { label: 'Own surname (B)', data: G.map(function (g) { return co.B.groups[g].share_of_classified; }), backgroundColor: C.orange }] }, options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% of classified removals' } } } } });
+    html += section('caste',
+      kpis([[pct(cg.A.coverage_pct, 0), 'Removals placed by classification A'], [pct(cg.B.coverage_pct, 0), 'Removals placed by strict classification B'], [up.join(', '), 'At or above survey share under both'], [down.join(', '), 'Below survey share under both']]) +
+      banner('Caste composition', 'Read from the surname of the father or husband and set against the 2023 Bihar caste survey, ' + up.join(' and ') + ' families are removed at or above their share of the population under both classifications, and ' + down.join(' and ') + ' families below it.' + (split.length ? ' The classifications disagree on ' + split.join(' and ') + '.' : '')) +
+      '<div class="charts-grid">' +
+      card(1, 'ca1', 'What is the caste breakdown?', 'Shares of the removals each classification could place, beside the 2023 survey (Hindu castes; Muslims as one group).', { size: 'tall' }) +
+      card(2, 'ca2', 'Which groups are over- and under-represented?', 'Above 1 means a group\'s share of the removed exceeds its share of the population. ' + up.map(function (g) { return g + ' ' + d(cg.A.groups[g].ratio_to_survey, 2) + ' and ' + d(cg.B.groups[g].ratio_to_survey, 2); }).join('; ') + '.', { size: 'tall' }) +
+      card(3, 'ca3', 'How much can surnames tell?', 'Classification A places ' + pct(cg.A.coverage_pct, 0) + ' of removals; the strict B places ' + pct(cg.B.coverage_pct, 0) + ', setting aside surnames carried across castes.') +
+      card(4, 'ca4', 'What is the possible range for each group?', 'Under B, each bar runs from counting only names placed in the group to adding every name that could not be placed.') +
+      card(5, 'ca5', 'Which guardian surnames are commonest?', 'Colour shows the strict reading: blue for a single group, yellow for surnames carried across groups, grey for no caste information.', { size: 'rows' }) +
+      card(6, 'ca6', 'Does the elector\'s own surname tell the same story?', 'Most women are listed as Devi, Kumari or Khatun, so the guardian\'s surname carries more; the two are shown side by side.', { size: 'tall' }) +
+      '</div>');
+
+    // ============================================================ RELIGION
+    var lo = 100 * t.muslim / cls, hi = 100 * (t.muslim + t.unknown) / cls;
+    var inside = DI.filter(function (x) { return x.muslim_share_population_2011 >= x.muslim_share_deleted_low && x.muslim_share_population_2011 <= x.muslim_share_deleted_high; }).length;
+    var above = DI.filter(function (x) { return x.muslim_share_deleted_low > x.muslim_share_population_2011 + 1; });
+    var Ds = DI.slice().sort(function (a, b) { return b.muslim_share_population_2011 - a.muslim_share_population_2011; });
+    chart('re1', { type: 'bar', data: { labels: ['Hindu names', 'Muslim names', 'Unclassified'], datasets: [{ label: '% of removals', data: [100 * t.hindu / cls, lo, 100 * t.unknown / cls], backgroundColor: [C.orange, C.india, C.grey] }] }, options: barOpts('', '% of removals') });
+    chart('re2', { type: 'bar', data: { labels: borders.map(shortB), datasets: [{ label: 'Muslim names, low', data: borders.map(function (k) { var x = byBorder[k]; return 100 * sum(x, 'muslim') / sum(x, function (a) { return a.hindu + a.muslim + a.unknown; }); }), backgroundColor: C.india }, { label: 'Muslim names, high', data: borders.map(function (k) { var x = byBorder[k]; return 100 * sum(x, function (a) { return a.muslim + a.unknown; }) / sum(x, function (a) { return a.hindu + a.muslim + a.unknown; }); }), backgroundColor: C.other }] }, options: { indexAxis: 'y', scales: { x: { beginAtZero: true, max: 100, title: { display: true, text: '% of removals' } } } } });
+    chart('re3', { type: 'bar', data: { labels: Ds.map(function (x) { return x.district; }), datasets: [{ type: 'bar', label: 'Muslim-name share of removals (range)', data: Ds.map(function (x) { return [x.muslim_share_deleted_low, x.muslim_share_deleted_high]; }), backgroundColor: C.other, order: 2 }, { type: 'line', label: 'Muslim share of population, 2011', data: Ds.map(function (x) { return x.muslim_share_population_2011; }), showLine: false, backgroundColor: '#1C2833', borderColor: '#1C2833', pointRadius: 4, order: 1 }] }, options: { indexAxis: 'y', scales: { x: { beginAtZero: true, title: { display: true, text: '%' } } } } });
+    chart('re4', scatter(A.map(function (a) { return { x: 100 * a.muslim / (a.hindu + a.muslim + a.unknown), y: a.per_100, n: a.name }; }), 'Muslim names, % of removals (low)', 'Removed per 100 electors', C.india, function (c) { return c.raw.n + ': ' + d(c.raw.x, 1) + '% Muslim names, ' + d(c.raw.y, 1) + ' per 100'; }));
+    var ab = above.slice().sort(function (a, b) { return (b.muslim_share_deleted_low - b.muslim_share_population_2011) - (a.muslim_share_deleted_low - a.muslim_share_population_2011); });
+    chart('re5', { type: 'bar', data: { labels: ab.map(function (x) { return x.district; }), datasets: [{ label: 'Muslim names, % of removals (low)', data: ab.map(function (x) { return x.muslim_share_deleted_low; }), backgroundColor: C.india }, { label: 'Muslim share of population, 2011', data: ab.map(function (x) { return x.muslim_share_population_2011; }), backgroundColor: C.grey }] }, options: { indexAxis: 'y', scales: { x: { beginAtZero: true, title: { display: true, text: '%' } } } } });
+    chart('re6', { type: 'bar', data: { labels: ['NDA', 'INDIA', 'Other'], datasets: [{ label: 'Muslim names, low', data: ['NDA', 'INDIA', 'Other'].map(function (k) { var x = byA25[k]; return 100 * sum(x, 'muslim') / sum(x, function (a) { return a.hindu + a.muslim + a.unknown; }); }), backgroundColor: C.india }] }, options: barOpts('Seats by 2025 winner', 'Muslim names, % of removals') });
+    html += section('religion',
+      kpis([[pct(100 * t.hindu / cls), 'Hindu names among the removed'], [pct(lo) + '–' + pct(hi), 'Muslim names, counting unclassified'], ['16.87%', 'Muslim share of population, 2011'], [pct(100 * t.unknown / cls), 'Names unclassified']]) +
+      banner('Religious composition', 'Names the lists classify as Muslim are ' + pct(lo) + ' of removals, and ' + pct(hi) + ' if every unclassified name were Muslim, against 16.87% of the population in 2011 and 17.70% in the 2023 caste survey. In ' + above.length + ' districts of south and central Bihar the classified Muslim share alone is more than a point above the census share.') +
+      '<div class="charts-grid">' +
+      card(1, 're1', 'What is the religious split?', 'Religion is read from names; the roll records none.') +
+      card(2, 're2', 'How does it vary by region?', 'Seemanchal, on the Nepal and Bengal borders, carries the largest Muslim shares of removals, as it does of population.') +
+      card(3, 're3', 'How does each district compare with the census?', 'The census share lies inside the range in ' + inside + ' of ' + DI.length + ' districts.', { size: 'rows' }) +
+      card(4, 're4', 'Does religion relate to intensity?', 'Rank correlation between a seat\'s Muslim-name share of removals and its removal rate: ' + d(rho(A.map(function (a) { return a.muslim / (a.hindu + a.muslim + a.unknown); }), A.map(function (a) { return a.per_100; })), 2) + '.', { size: 'tall' }) +
+      card(5, 're5', 'Where does the Muslim share run above the census?', ab.map(function (x) { return x.district; }).join(', ') + ': the lowest estimate exceeds the 2011 share by more than a point.', { size: 'tall' }) +
+      card(6, 're6', 'Does it vary by who won the seat?', 'Muslim-name shares of removals are highest in seats won by neither alliance, most of them in Seemanchal.') +
+      '</div>');
+
+    // ============================================================ ELECTORAL
+    var L = S.by_alliance_label, W = S.within_seat_2024;
+    var tops = withM.slice().sort(function (a, b) { return b.total / b.margin2025 - a.total / a.margin2025; }).slice(0, 20);
+    chart('el1', { type: 'scatter', data: { datasets: ['NDA', 'INDIA', 'Other'].map(function (al) { return { label: al + ' won (2025)', data: withM.filter(function (a) { return a.al2025 === al; }).map(function (a) { return { x: a.margin2025, y: a.total, n: a.name }; }), backgroundColor: AL[al], pointRadius: 3.5 }; }).concat([{ type: 'line', label: 'Removed = margin', data: [10000, 20000, 40000, 70000].map(function (v) { return { x: v, y: v }; }), borderColor: C.grey, borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0, fill: false }]) }, options: { plugins: { tooltip: { filter: function (c) { return !!c.raw.n; }, callbacks: { label: function (c) { return c.raw.n + ': ' + n(c.raw.y) + ' removed, margin ' + n(c.raw.x); } } } }, scales: { x: { type: 'logarithmic', title: { display: true, text: '2025 winning margin (votes, log scale)' } }, y: { title: { display: true, text: 'Names removed' } } } } });
+    var el2 = hbar(tops.map(function (a) { return a.name; }), tops.map(function (a) { return +(a.total / a.margin2025).toFixed(1); }), tops.map(function (a) { return AL[a.al2025]; }), 'Names removed ÷ 2025 margin (log scale)');
+    el2.options.scales.x = { type: 'logarithmic', min: 1, title: el2.options.scales.x.title };
+    chart('el2', el2);
+    var byP = groupBy(A, 'win2025'), parties = Object.keys(byP).sort(function (a, b) { return rate(byP[b]) - rate(byP[a]); }), al25 = {}; A.forEach(function (a) { al25[a.win2025] = a.al2025; });
+    chart('el3', hbar(parties.map(function (p) { return p + ' (' + byP[p].length + ')'; }), parties.map(function (p) { return +rate(byP[p]).toFixed(2); }), parties.map(function (p) { return AL[al25[p]]; }), 'Removed per 100 electors'));
+    chart('el4', { type: 'bar', data: { labels: ['2020 Assembly', '2024 Lok Sabha', '2025 Assembly'], datasets: ['NDA', 'INDIA', 'Other'].map(function (al) { return { label: al, data: ['2020', '2024', '2025'].map(function (y) { return L[y][al] ? L[y][al].per_100 : null; }), backgroundColor: AL[al] }; }) }, options: { scales: { y: { beginAtZero: true, title: { display: true, text: 'Removed per 100 electors' } } } } });
+    var byR = groupBy(A, 'reserved');
+    chart('el5', { type: 'bar', data: { labels: ['GEN', 'SC', 'ST'].map(function (k) { return (k === 'GEN' ? 'General' : k) + ' (' + byR[k].length + ')'; }), datasets: [{ label: 'Per 100', data: ['GEN', 'SC', 'ST'].map(function (k) { return rate(byR[k]); }), backgroundColor: C.dblue }] }, options: barOpts('', 'Removed per 100 electors') });
+    var flows = [['INDIA', 'NDA'], ['INDIA', 'INDIA'], ['NDA', 'NDA'], ['NDA', 'INDIA'], ['Other', 'NDA'], ['NDA', 'Other']];
+    var fl = flows.map(function (f) { var x = withM.filter(function (a) { return a.al2020 === f[0] && a.al2025 === f[1]; }); return { l: f[0] + ' → ' + f[1] + ' (' + x.length + ')', over: x.filter(function (a) { return a.total > a.margin2025; }).length, n: x.length }; }).filter(function (x) { return x.n; });
+    chart('el6', { type: 'bar', data: { labels: fl.map(function (x) { return x.l; }), datasets: [{ label: 'Removals exceed margin', data: fl.map(function (x) { return x.over; }), backgroundColor: C.red }, { label: 'Removals below margin', data: fl.map(function (x) { return x.n - x.over; }), backgroundColor: C.grey }] }, options: { indexAxis: 'y', scales: { x: { stacked: true, title: { display: true, text: 'Seats' } }, y: { stacked: true } } } });
+    var flipped = A.filter(function (a) { return a.al2020 !== a.al2025; }).length;
+    html += section('electoral',
+      kpis([[overM.length + ' of ' + withM.length, 'Seats: removals exceed 2025 margin'], [nda25o.length + ' of ' + nda25.length, 'NDA wins: removals exceed margin'], [tookO.length + ' of ' + took.length, 'Seats taken from INDIA: removals exceed NDA margin'], [flipped, 'Seats that changed alliance, 2020 to 2025']]) +
+      banner('Electoral patterns', 'The removals were larger than the margins that decided most seats. In ' + tookO.length + ' of the ' + took.length + ' seats the NDA took from INDIA, more names were removed than the NDA won by. The lists do not say how the removed would have voted; a name-by-name audit of these seats would.') +
+      '<div class="charts-grid">' +
+      card(1, 'el1', 'How do removals compare with margins?', 'The dashed line marks removals equal to the winning margin. Seats above it, and every seat to its left, lost more names than they were won by: ' + overM.length + ' of ' + withM.length + '.', { size: 'tall' }) +
+      card(2, 'el2', 'Which seats were decided by the smallest margins against the removals?', tops.slice(0, 3).map(function (a) { return a.name + ' (' + d(a.total / a.margin2025, 0) + '×)'; }).join(', ') + ' lost many times more names than their winning margins.', { size: 'rows' }) +
+      card(3, 'el3', 'How do the parties\' seats compare?', 'Removals per 100 electors in the seats each party won in 2025. Seats won by neither alliance, mostly in Seemanchal, lost the most.', { size: 'tall' }) +
+      card(4, 'el4', 'How do alliances compare across elections?', 'Seats held by the NDA lost ' + d(L['2020'].NDA.per_100, 2) + ' per 100 electors and INDIA seats ' + d(L['2020'].INDIA.per_100, 2) + ' (2020 winners); the order is the same under 2024 and 2025 labels. Within the same seat, NDA-led booths lost ' + d(W.pooled_nda_minus_india, 1) + ' more names each.') +
+      card(5, 'el5', 'How do reserved seats compare?', 'SC seats lost ' + d(rate(byR.SC), 2) + ' per 100 electors, ST seats ' + d(rate(byR.ST), 2) + ', general seats ' + d(rate(byR.GEN), 2) + '.') +
+      card(6, 'el6', 'In seats that changed hands, did removals exceed margins?', 'Seats grouped by the alliance that won in 2020 and in 2025, split by whether the removals exceed the 2025 margin.', { size: 'tall' }) +
+      '</div>');
+
+    // ============================================================ GEOGRAPHIC
+    var tot = t.total, el = t.electorate_2025;
+    chart('ge_1', hbar(borders.map(function (k) { return shortB(k) + ' (' + byBorder[k].length + ')'; }), borders.map(function (k) { return +rate(byBorder[k]).toFixed(2); }), borders.map(function (k) { return k === 'Interior' ? C.grey : C.dblue; }), 'Removed per 100 electors'));
+    chart('ge_2', { type: 'bar', data: { labels: borders.map(shortB), datasets: [{ label: '% of removals', data: borders.map(function (k) { return 100 * sum(byBorder[k], 'total') / tot; }), backgroundColor: C.red }, { label: '% of electorate', data: borders.map(function (k) { return 100 * sum(byBorder[k], 'electorate_2025') / el; }), backgroundColor: C.grey }] }, options: { indexAxis: 'y', scales: { x: { beginAtZero: true, title: { display: true, text: '% of Bihar' } } } } });
+    var bd = A.filter(function (a) { return a.border && a.border !== 'Interior'; }), inn = byBorder.Interior;
+    chart('ge_3', { type: 'bar', data: { labels: ['Border seats (' + bd.length + ')', 'Interior (' + inn.length + ')'], datasets: [{ label: 'Per 100', data: [rate(bd), rate(inn)], backgroundColor: [C.dblue, C.grey] }] }, options: barOpts('', 'Removed per 100 electors') });
+    chart('ge_4', { type: 'bar', data: { labels: borders.map(shortB), datasets: [{ label: 'Women %', data: borders.map(function (k) { return 100 * sum(byBorder[k], 't_f') / sum(byBorder[k], function (a) { return a.t_f + a.t_m; }); }), backgroundColor: C.pink }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { min: 40, max: 65, title: { display: true, text: 'Women, % of removals' } } } } });
+    chart('ge_5', { type: 'bar', data: { labels: rankedD.map(function (x) { return x.district; }), datasets: [{ label: 'Per 100', data: rankedD.map(function (x) { return x.per_100; }), backgroundColor: rankedD.map(function (x) { return x.border === 'Interior' ? C.grey : C.dblue; }) }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: 'Removed per 100 electors' } } } } });
+    chart('ge_6', { type: 'bar', data: { labels: borders.map(shortB), datasets: [{ label: 'Booths over 200', data: borders.map(function (k) { return 100 * sum(byBorder[k], 'booths_200') / sum(byBorder[k], 'booths'); }), backgroundColor: C.purple }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: '% of booths that lost more than 200 names' } } } } });
+    html += section('geographic',
+      kpis([[bd.length, 'Border constituencies'], [d(rate(bd), 2), 'Removed per 100, border seats'], [d(rate(inn), 2), 'Removed per 100, interior'], [pct(100 * sum(bd, 'total') / tot), 'Of all removals were in border seats']]) +
+      banner('Geographic patterns', 'Border constituencies lost ' + d(rate(bd), 2) + ' names per 100 electors, the interior ' + d(rate(inn), 2) + '. The Bengal and Nepal belts, which include Seemanchal, lost the most. A constituency counts as a border seat when its district touches Nepal, West Bengal, Jharkhand or Uttar Pradesh.') +
+      '<div class="charts-grid">' +
+      card(1, 'ge_1', 'How does intensity vary by border?', shortB(borders[0]) + ' seats lost the most per elector.') +
+      card(2, 'ge_2', 'Which regions lost more than their size?', 'A red bar longer than its grey pair means the region\'s share of removals exceeds its share of the electorate.', { size: 'tall' }) +
+      card(3, 'ge_3', 'Border or interior: which is higher?', 'Border seats lost ' + d(rate(bd) - rate(inn), 2) + ' more names per 100 electors than the interior.') +
+      card(4, 'ge_4', 'Were women over-removed everywhere?', 'Women are the majority of those removed in every region.') +
+      card(5, 'ge_5', 'How do all 38 districts rank?', 'Blue marks a border district, grey the interior.', { size: 'rows' }) +
+      card(6, 'ge_6', 'Where are the heaviest booths concentrated?', 'Share of each region\'s booths that lost more than 200 names.') +
+      '</div>');
+
+    // ============================================================ ECONOMIC
+    var F = [['gddp_pc', 'Per-capita district product, 2021-22 (₹)', 'Does income relate to removals?'], ['urban_pct', 'Urban population, 2011 (%)', 'Does urbanisation matter?'], ['literacy', 'Literacy, 2011 (%)', 'Does literacy relate to removals?'], ['female_literacy', 'Female literacy, 2011 (%)', 'And women\'s literacy?'], ['density', 'Density, 2011 (per sq km)', 'Does density matter?'], ['electors_per_booth', 'Electors per booth, 2025', 'Does booth size relate to removals?']];
+    var ecoCards = F.map(function (f, i) {
+      var xs = DS.map(function (x) { return x[f[0]]; }), ys = DS.map(function (x) { return x.per_100; }), rr = rho(xs, ys);
+      chart('ec' + (i + 1), scatter(DS.map(function (x) { return { x: x[f[0]], y: x.per_100, n: x.district }; }), f[1], 'Removed per 100 electors', C.dblue, function (c) { return c.raw.n + ': ' + d(c.raw.y, 1) + ' per 100'; }));
+      var word = Math.abs(rr) < 0.2 ? 'No clear relationship' : rr < 0 ? 'Higher values go with fewer removals' : 'Higher values go with more removals';
+      return card(i + 1, 'ec' + (i + 1), f[2], word + ' across the 38 districts (rank correlation ' + d(rr, 2) + ').');
+    });
+    html += section('economic',
+      banner('Economic analysis', 'District income, urbanisation, literacy, density and booth size, each set against removals per 100 electors across Bihar\'s 38 districts. Bihar is 89% rural (Census 2011).') +
+      '<div class="charts-grid">' + ecoCards.join('') + '</div>');
+
+    // ============================================================ RESEARCH
+    var RQ = [
+      ['How many names were removed, and where?', n(t.total) + ' across both phases, ' + d(per100, 2) + ' for every 100 electors on the 2025 roll, from ' + d(rankedA[rankedA.length - 1].per_100, 1) + ' per 100 in ' + rankedA[rankedA.length - 1].name + ' to ' + d(rankedA[0].per_100, 1) + ' in ' + rankedA[0].name + '.'],
+      ['Did the removals exceed the margins that decided seats?', 'In ' + overM.length + ' of ' + withM.length + ' constituencies, including ' + nda25o.length + ' of the NDA\'s ' + nda25.length + ' wins and ' + tookO.length + ' of the ' + took.length + ' seats the NDA took from INDIA.'],
+      ['Were women removed out of proportion?', 'Yes. Women are ' + pct(fem) + ' of the removed against 47.86% of the population, over-represented in ' + fOver + ' of ' + DI.length + ' districts.'],
+      ['Which caste groups carried the removals?', up.join(' and ') + ' families at or above their population share under both surname classifications; ' + down.join(' and ') + ' below it.'],
+      ['How does the Muslim share of removals compare with the population?', pct(lo) + ' to ' + pct(hi) + ' of removals against 16.87% in 2011; above the census share by more than a point in ' + above.length + ' districts.'],
+      ['Do border constituencies differ?', 'Border seats lost ' + d(rate(bd), 2) + ' per 100 electors, the interior ' + d(rate(inn), 2) + '.'],
+      ['How did NDA and INDIA seats compare?', 'NDA-held seats lost ' + d(L['2020'].NDA.per_100, 2) + ' per 100 electors and INDIA seats ' + d(L['2020'].INDIA.per_100, 2) + ' (2020 winners). A seat\'s winner does not say how its removed electors voted; the margin comparison above is the one the lists can support.'],
+      ['What would settle whose votes these were?', 'A name-by-name verification of removals in the seats where they exceed the margin, and booth-by-booth publication of every claim and objection filed after the draft roll and its outcome.']
+    ];
+    html += section('research', RQ.map(function (q) { return '<div class="research-section"><div class="research-q">' + q[0] + '</div><div class="research-a">' + q[1] + '</div></div>'; }).join('') + '<p><a href="bihar/faq/">More questions and answers</a> · <a href="bihar/method/">Full method</a></p>');
+
+    // ============================================================ METHODS
+    html += section('methodology',
+      '<div class="methodology"><h2>Data sources</h2><ul><li>Removals by polling booth: the phase 1 deletion lists the Chief Electoral Officer, Bihar published against the draft roll of 1 August 2025, for all 77,837 booths.</li><li>Removals by constituency, phase and sex: Chief Electoral Officer, Bihar.</li><li>Religion and surnames of the removed: counts from the same lists, by booth; no individual records.</li><li>2024 Lok Sabha result by booth: Form 20. 2020 and 2025 Assembly results: Election Commission of India.</li><li>Census of India 2011; Bihar caste-based survey, 2 October 2023; Bihar Economic Survey.</li></ul></div>' +
+      '<div class="methodology"><h2>How the figures are built</h2><p>Each booth is counted once. Party names in the booth results are matched to the declared seat results, which the booth sums reproduce in all 40 Lok Sabha seats. Religion and caste are read from names and are estimates: religion as a range, caste under two classifications, with only what holds under both reported. Every headline figure is recomputed from the lists by a second, independent program before publication.</p></div>' +
+      '<div class="methodology"><h2>What this shows and what it does not</h2><p>The lists show how many names were removed, where, and who the removed were by sex and by name, and they allow the removals to be set against the margins that decided each seat. They do not show why an individual name was removed, whether the removal was right, or how the elector voted. A name-by-name verification, starting with the seats where removals exceed the margin, would settle those questions.</p><p><a href="bihar/method/">Full method</a></p></div>');
+
+    main.innerHTML = html;
+
+    // ------------------------------------------------------------------ table
+    var rows = A.map(function (a) { return Object.assign({}, a, { fem: 100 * a.t_f / (a.t_f + a.t_m), xm: a.margin2025 ? a.total / a.margin2025 : null }); });
+    var cols = [['name', 'Constituency', 1], ['district', 'District', 1], ['total', 'Removed'], ['per_100', 'Per 100'], ['fem', 'Women %'], ['win2025', '2025 winner', 1], ['margin2025', '2025 margin'], ['xm', 'Removed ÷ margin']];
+    var key = 'xm', dir = -1, q = '';
+    function renderTable() {
+      var list = rows.filter(function (a) { return !q || (a.name + ' ' + a.district).toLowerCase().indexOf(q) >= 0; }).sort(function (a, b) { var x = a[key], y = b[key]; if (typeof x === 'string') return dir * x.localeCompare(y); return dir * ((x == null ? -1e9 : x) - (y == null ? -1e9 : y)); });
+      document.getElementById('seatTable').innerHTML = '<thead><tr>' + cols.map(function (c) { return '<th scope="col" class="' + (c[2] ? 'l' : '') + '" aria-sort="' + (c[0] === key ? (dir < 0 ? 'descending' : 'ascending') : 'none') + '"><button type="button" data-k="' + c[0] + '">' + c[1] + '</button></th>'; }).join('') + '</tr></thead><tbody>' +
+        list.map(function (a) { return '<tr><td class="l"><a href="bihar/#ac' + ('00' + a.ac).slice(-3) + '">' + a.ac + ' ' + esc(a.name) + '</a></td><td class="l">' + esc(a.district) + '</td><td>' + n(a.total) + '</td><td>' + d(a.per_100, 2) + '</td><td>' + d(a.fem, 1) + '</td><td class="l">' + esc(a.win2025) + ' ' + tag(a.al2025) + '</td><td>' + n(a.margin2025) + '</td><td>' + d(a.xm, 1) + '</td></tr>'; }).join('') + '</tbody>';
+    }
+    document.getElementById('seatTable').addEventListener('click', function (e) { var b = e.target.closest('th button'); if (!b) return; var k = b.getAttribute('data-k'); dir = k === key ? -dir : -1; key = k; renderTable(); });
+    document.getElementById('seatq').addEventListener('input', function () { q = this.value.trim().toLowerCase(); renderTable(); });
+    renderTable();
+
+    // ------------------------------------------------------------------ tabs
+    var tabs = document.querySelectorAll('.nav-tab'), drawn = {};
+    function show(tab, push) {
+      tabs.forEach(function (b) { var on = b.getAttribute('data-tab') === tab; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.id = 'tabbtn-' + b.getAttribute('data-tab'); b.tabIndex = on ? 0 : -1; });
+      document.querySelectorAll('.tab-content').forEach(function (s) { s.classList.toggle('active', s.id === 'tab-' + tab); });
+      if (!drawn[tab]) { drawTab(tab); drawn[tab] = true; }
+      if (push) history.replaceState(null, '', '#' + tab);
+    }
+    tabs.forEach(function (b, i) {
+      b.addEventListener('click', function () { show(b.getAttribute('data-tab'), true); });
+      b.addEventListener('keydown', function (e) { var j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null; if (j == null) return; var nb = tabs[(j + tabs.length) % tabs.length]; nb.focus(); nb.click(); });
+    });
+    var start = (location.hash || '#overview').slice(1); show(document.getElementById('tab-' + start) ? start : 'overview');
+
+    // ------------------------------------------------------------------ actions
+    themeBtn.addEventListener('click', function () {
+      if (isDark()) root.removeAttribute('data-theme'); else root.setAttribute('data-theme', 'dark');
+      try { localStorage.setItem('sir-dash-theme', isDark() ? 'dark' : 'light'); } catch (e) {}
+      setThemeLabel(); Object.keys(charts).forEach(draw);
+    });
+    main.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-png]'); if (!b || !charts[b.getAttribute('data-png')]) return;
+      var a = document.createElement('a'); a.href = charts[b.getAttribute('data-png')].toBase64Image('image/png', 1); a.download = 'bihar-sir-' + b.getAttribute('data-png') + '.png'; a.click();
+    });
+    document.getElementById('pdfBtn').addEventListener('click', function () { Object.keys(specs).forEach(function (id) { if (!charts[id]) draw(id); }); document.querySelectorAll('.tab-content').forEach(function (s) { s.classList.add('active'); }); setTimeout(function () { window.print(); document.querySelectorAll('.tab-content').forEach(function (s) { s.classList.toggle('active', s.id === 'tab-' + (location.hash.slice(1) || 'overview')); }); }, 400); });
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { Object.keys(charts).forEach(draw); }, 250); });
+  }).catch(function (e) { main.innerHTML = '<p role="alert">The dashboard data did not load (' + esc(e.message) + '). Please reload the page.</p>'; });
+})();
 </script>
 </body>
 </html>
