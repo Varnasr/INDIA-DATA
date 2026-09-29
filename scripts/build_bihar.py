@@ -210,6 +210,19 @@ def build():
     ae = ae.rename(columns={'Constituency_No.': 'ac', 'Winner_Party.1': 'win2025', 'Margin_Votes': 'margin2025',
                             'Margin_%': 'margin2025_pct', 'Runner-up_Party.1': 'ru2025'})[['ac', 'win2025', 'ru2025', 'margin2025', 'margin2025_pct']]
     ae['win2025'] = ae.win2025.map(lambda p: SPELLING.get(p, p))
+    # Votes come from a second table, not from the one above. Its margin
+    # column is wrong in seven seats (two pairs of neighbours swapped, and
+    # Daraunda, Raghopur and Bahadurpur mistyped) and its runner-up votes in
+    # six more. ae2025_results.csv gives winner and runner-up votes, whose
+    # difference is the margin in every seat, and the turnout; Daraunda's
+    # 18,367 is also the figure India Today and Deccan Herald reported.
+    # Parties still come from the table above.
+    res = pd.read_csv(os.path.join(RAW, 'ae2025_results.csv'))
+    assert len(res) == 243 and res.ac.is_unique and (res.winner_votes - res.runner_up_votes == res.margin).all()
+    ae = ae.drop(columns=['margin2025', 'margin2025_pct']).merge(
+        res[['ac', 'winner_votes', 'runner_up_votes', 'margin', 'turnout_pct']].rename(columns={
+            'winner_votes': 'winner_votes2025', 'runner_up_votes': 'runner_up_votes2025', 'margin': 'margin2025', 'turnout_pct': 'turnout2025'}),
+        on='ac', how='left')
     border = pd.read_csv(os.path.join(ROOT, 'data', 'ac_border_classification.csv'))[['ac_number', 'border_group', 'is_border_ac']].rename(columns={'ac_number': 'ac'})
 
     seg = v.groupby(['ac', 'party_fixed']).votes.sum().reset_index().sort_values('votes', ascending=False)
@@ -235,6 +248,10 @@ def build():
     a['al2025'] = a.win2025.map(lambda p: alliance(p, 2025))
     a['per_booth'] = a.deleted / a.booths
     a['per_100_electors'] = 100 * a.total / a.electorate_2025
+    # Votes polled: turnout on the 2025 roll. Within about 1% of the winner's
+    # votes divided by the winner's share, which the pages do not need.
+    a['votes2025'] = (a.turnout2025 / 100 * a.electorate_2025).round()
+    a['margin2025_pct'] = 100 * a.margin2025 / a.votes2025
 
     return booth, a, report
 
@@ -472,6 +489,8 @@ def outputs(booth, a, report):
             'del_nda': int(x.del_nda), 'del_india': int(x.del_india), 'del_other': int(x.del_other),
             'win2025': x.win2025, 'ru2025': x.ru2025, 'al2025': x.al2025,
             'margin2025': None if pd.isna(x.margin2025) else int(x.margin2025), 'margin2025_pct': r(x.margin2025_pct, 2),
+            'votes2025': int(x.votes2025), 'turnout2025': r(x.turnout2025, 1),
+            'winner_votes2025': int(x.winner_votes2025), 'runner_up_votes2025': int(x.runner_up_votes2025),
         })
 
     # booth files, one per constituency, loaded on demand

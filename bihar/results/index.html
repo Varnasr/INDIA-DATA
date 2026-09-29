@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="../../assets/i18n.js"></script>
 <title>Bihar SIR 2025: removals and election results</title>
 <meta name="description" content="Bihar's SIR removals set against the 2020, 2024 and 2025 results: seats by the alliance that held them, booths within the same seat, parties, reserved seats, and removals against winning margins.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
@@ -16,6 +17,7 @@
     <a class="logo" href="../../"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span><span class="h-title">Bihar Electoral Dashboard</span><span class="subtitle">Special Intensive Revision 2025 · every booth, every constituency</span></span></a>
     <div class="controls">
       <a class="btn" href="../../hyderabad/">Hyderabad 2026</a>
+      <a class="btn report" href="../../reports/bihar-sir-2025-report.pdf" download><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
     </div>
@@ -84,71 +86,71 @@ function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' 
 function rate(rows) { return 100 * SIR.sum(rows, 'total') / SIR.sum(rows, 'electorate_2025'); }
 Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json')]).then(function (r) {
   var s = r[0], acs = r[1], byAc = {}; acs.forEach(function (a) { byAc[a.ac] = a; });
-  var L = s.by_alliance_label, years = ['2020', '2024', '2025'], name = { '2020': '2020 Assembly', '2024': '2024 Lok Sabha', '2025': '2025 Assembly' };
+  var LBL = s.by_alliance_label, years = ['2020', '2024', '2025'], name = { '2020': L('2020 Assembly'), '2024': L('2024 Lok Sabha'), '2025': L('2025 Assembly') };
 
   SIR.chart('cLabels', { type: 'bar', data: { labels: years.map(function (y) { return name[y]; }), datasets: ['NDA', 'INDIA', 'Other'].map(function (al) {
-      return { label: al, data: years.map(function (y) { return L[y][al] && L[y][al].per_100; }), $token: SIR.alliance[al] }; }) },
-    options: { scales: { y: { title: { display: true, text: 'Deleted per 100 electors' }, beginAtZero: true } } } });
-  var rows = []; years.forEach(function (y) { ['NDA', 'INDIA', 'Other'].forEach(function (al) { var v = L[y][al]; if (v) rows.push({ y: name[y], al: al, acs: v.acs, deleted: v.deleted, per_100: v.per_100, per_booth: v.per_booth }); }); });
+      return { label: al, data: years.map(function (y) { return LBL[y][al] && LBL[y][al].per_100; }), $token: SIR.alliance[al] }; }) },
+    options: { scales: { y: { title: { display: true, text: L('Deleted per 100 electors') }, beginAtZero: true } } } });
+  var rows = []; years.forEach(function (y) { ['NDA', 'INDIA', 'Other'].forEach(function (al) { var v = LBL[y][al]; if (v) rows.push({ y: name[y], al: al, acs: v.acs, deleted: v.deleted, per_100: v.per_100, per_booth: v.per_booth }); }); });
   SIR.table(document.getElementById('tLabels'), [
-    { k: 'y', label: 'Labelling', left: true }, { k: 'al', label: 'Alliance', left: true, fmt: tag }, { k: 'acs', label: 'Seats' },
-    { k: 'deleted', label: 'Removed', fmt: SIR.n }, { k: 'per_100', label: 'Per 100', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'per_booth', label: 'Per booth', fmt: function (v) { return SIR.d(v); } }
+    { k: 'y', label: L('Labelling'), left: true }, { k: 'al', label: L('Alliance'), left: true, fmt: tag }, { k: 'acs', label: L('Seats') },
+    { k: 'deleted', label: L('Removed'), fmt: SIR.n }, { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 2); } }, { k: 'per_booth', label: L('Per booth'), fmt: function (v) { return SIR.d(v); } }
   ], rows, { sort: 'y', dir: 1 });
-  var gaps = years.map(function (y) { return L[y].NDA.per_100 - L[y].INDIA.per_100; }), p100 = acs.map(function (a) { return a.per_100; });
-  document.getElementById('fLabels').innerHTML = '<b>NDA seats lost more names per elector than INDIA seats under all three labellings</b>, by ' + SIR.d(Math.min.apply(null, gaps), 2) + ' to ' + SIR.d(Math.max.apply(null, gaps), 2) + ' per 100 electors. Seats held by neither alliance, most of them in Seemanchal, lost the most of all.';
+  var gaps = years.map(function (y) { return LBL[y].NDA.per_100 - LBL[y].INDIA.per_100; }), p100 = acs.map(function (a) { return a.per_100; });
+  document.getElementById('fLabels').innerHTML = L('<b>NDA seats lost more names per elector than INDIA seats under all three labellings</b>, by {lo} to {hi} per 100 electors. Seats held by neither alliance, most of them in Seemanchal, lost the most of all.', { lo: SIR.d(Math.min.apply(null, gaps), 2), hi: SIR.d(Math.max.apply(null, gaps), 2) });
 
   var w = s.within_seat_2024;
   document.getElementById('kWithin').innerHTML = [
-    [(w.pooled_nda_minus_india > 0 ? '+' : '') + SIR.d(w.pooled_nda_minus_india), 'more removed per NDA-led booth than per INDIA-led booth in the same seat'],
-    [w.seats_nda_higher + ' of ' + w.seats_compared, 'seats where NDA-led booths lost more'],
-    [w.seats_india_higher + ' of ' + w.seats_compared, 'seats where INDIA-led booths lost more'],
-    [SIR.n(w.booths), 'booths compared']
+    [(w.pooled_nda_minus_india > 0 ? '+' : '') + SIR.d(w.pooled_nda_minus_india), L('more removed per NDA-led booth than per INDIA-led booth in the same seat')],
+    [L('{a} of {b}', { a: w.seats_nda_higher, b: w.seats_compared }), L('seats where NDA-led booths lost more')],
+    [L('{a} of {b}', { a: w.seats_india_higher, b: w.seats_compared }), L('seats where INDIA-led booths lost more')],
+    [SIR.n(w.booths), L('booths compared')]
   ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   var F = s.intensity.within_seat_fifths;
-  document.getElementById('fWithin').innerHTML = '<b>Inside the same constituency, NDA-led booths lost ' + SIR.d(w.pooled_nda_minus_india, 1) + ' more names each than INDIA-led booths</b>, and they lost more in ' + w.seats_nda_higher + ' of ' + w.seats_compared + ' seats. The pattern runs through the whole range: rank each seat\'s booths into fifths by names removed, and the NDA led ' + SIR.d(F[0].nda_pct, 1) + '% of the lightest fifth and ' + SIR.d(F[4].nda_pct, 1) + '% of the heaviest.';
+  document.getElementById('fWithin').innerHTML = L('<b>Inside the same constituency, NDA-led booths lost {diff} more names each than INDIA-led booths</b>, and they lost more in {a} of {b} seats. The pattern runs through the whole range: rank each seat\'s booths into fifths by names removed, and the NDA led {lo}% of the lightest fifth and {hi}% of the heaviest.', { diff: SIR.d(w.pooled_nda_minus_india, 1), a: w.seats_nda_higher, b: w.seats_compared, lo: SIR.d(F[0].nda_pct, 1), hi: SIR.d(F[4].nda_pct, 1) });
   var ws = w.seats.slice().sort(function (a, b) { return a.diff - b.diff; });
-  SIR.chart('cWithin', { type: 'bar', data: { labels: ws.map(function (x) { return byAc[x.ac].name; }), datasets: [{ label: 'NDA minus INDIA', data: ws.map(function (x) { return x.diff; }),
+  SIR.chart('cWithin', { type: 'bar', data: { labels: ws.map(function (x) { return byAc[x.ac].name; }), datasets: [{ label: L('NDA minus INDIA'), data: ws.map(function (x) { return x.diff; }),
       $tokens: ws.map(function (x) { return x.diff > 0 ? '--fill-nda' : '--fill-india'; }) }] },
-    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { var x = ws[c.dataIndex]; return 'NDA-led ' + x.mean_nda + ' (' + x.n_nda + ' booths), INDIA-led ' + x.mean_india + ' (' + x.n_india + ')'; } } } },
-      scales: { x: { ticks: { display: false }, grid: { display: false } }, y: { title: { display: true, text: 'Difference in mean removed per booth' } } } } });
+    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { var x = ws[c.dataIndex]; return L('NDA-led {nda} ({n_nda} booths), INDIA-led {india} ({n_india})', { nda: x.mean_nda, n_nda: x.n_nda, india: x.mean_india, n_india: x.n_india }); } } } },
+      scales: { x: { ticks: { display: false }, grid: { display: false } }, y: { title: { display: true, text: L('Difference in mean removed per booth') } } } } });
 
   var byP = SIR.groupBy(acs, 'win2025'), parties = Object.keys(byP).sort(function (a, b) { return rate(byP[b]) - rate(byP[a]); });
   var al25 = {}; acs.forEach(function (a) { al25[a.win2025] = a.al2025; });
-  SIR.chart('cParty', { type: 'bar', data: { labels: parties.map(function (p) { return p + ' (' + byP[p].length + ')'; }), datasets: [{ label: 'Per 100 electors', data: parties.map(function (p) { return rate(byP[p]); }),
+  SIR.chart('cParty', { type: 'bar', data: { labels: parties.map(function (p) { return p + ' (' + byP[p].length + ')'; }), datasets: [{ label: L('Per 100 electors'), data: parties.map(function (p) { return rate(byP[p]); }),
       $tokens: parties.map(function (p) { return SIR.alliance[al25[p]]; }) }] },
-    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: 'Deleted per 100 electors' } } } } });
+    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Deleted per 100 electors') } } } } });
   var byR = SIR.groupBy(acs, 'reserved'), res = ['GEN', 'SC', 'ST'];
-  SIR.chart('cRes', { type: 'bar', data: { labels: res.map(function (k) { return (k === 'GEN' ? 'General' : k) + ' (' + byR[k].length + ')'; }), datasets: [{ label: 'Per 100 electors', data: res.map(function (k) { return rate(byR[k]); }), $token: '--fill-navy' }] },
-    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Deleted per 100 electors' } } } } });
+  SIR.chart('cRes', { type: 'bar', data: { labels: res.map(function (k) { return (k === 'GEN' ? L('General') : k) + ' (' + byR[k].length + ')'; }), datasets: [{ label: L('Per 100 electors'), data: res.map(function (k) { return rate(byR[k]); }), $token: '--fill-navy' }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: L('Deleted per 100 electors') } } } } });
 
   var als = ['NDA', 'INDIA', 'Other'];
-  var head = '<thead><tr><th scope="col" class="l">2020 → 2025</th>' + als.map(function (a) { return '<th scope="col">' + a + ' in 2025</th>'; }).join('') + '</tr></thead><tbody>';
+  var head = '<thead><tr><th scope="col" class="l">2020 → 2025</th>' + als.map(function (a) { return '<th scope="col">' + L('{al} in 2025', { al: a }) + '</th>'; }).join('') + '</tr></thead><tbody>';
   var flipped = 0;
   var body = als.map(function (a0) {
-    return '<tr><th scope="row" class="l">' + tag(a0) + ' in 2020</th>' + als.map(function (a1) {
+    return '<tr><th scope="row" class="l">' + L('{al} in 2020', { al: tag(a0) }) + '</th>' + als.map(function (a1) {
       var cell = acs.filter(function (a) { return a.al2020 === a0 && a.al2025 === a1; });
       if (a0 !== a1) flipped += cell.length;
-      return '<td>' + (cell.length ? cell.length + (cell.length === 1 ? ' seat' : ' seats') + '<br><span class="pill">' + SIR.d(rate(cell), 2) + ' per 100</span>' : '–') + '</td>';
+      return '<td>' + (cell.length ? (cell.length === 1 ? L('{n} seat', { n: cell.length }) : L('{n} seats', { n: cell.length })) + '<br><span class="pill">' + L('{rate} per 100', { rate: SIR.d(rate(cell), 2) }) + '</span>' : '–') + '</td>';
     }).join('') + '</tr>';
   }).join('');
   document.getElementById('tFlow').innerHTML = head + body + '</tbody>';
   var gained = acs.filter(function (a) { return a.al2020 !== 'NDA' && a.al2025 === 'NDA'; }), held = acs.filter(function (a) { return a.al2020 === 'NDA' && a.al2025 === 'NDA'; });
-  document.getElementById('fFlow').innerHTML = '<b>' + flipped + ' of 243 seats (' + SIR.pct(100 * flipped / 243) + ') changed alliance between 2020 and 2025.</b> Seats the NDA gained lost ' + SIR.d(rate(gained), 2) + ' per 100 electors; seats it held lost ' + SIR.d(rate(held), 2) + '.';
+  document.getElementById('fFlow').innerHTML = L('<b>{n} of 243 seats ({share}) changed alliance between 2020 and 2025.</b> Seats the NDA gained lost {gained} per 100 electors; seats it held lost {held}.', { n: flipped, share: SIR.pct(100 * flipped / 243), gained: SIR.d(rate(gained), 2), held: SIR.d(rate(held), 2) });
 
   var withM = acs.filter(function (a) { return a.margin2025 != null; });
   SIR.chart('cMargin', { type: 'scatter', data: { datasets: als.map(function (al) {
-      return { label: al + ' (2025)', data: withM.filter(function (a) { return a.al2025 === al; }).map(function (a) { return { x: a.margin2025, y: a.total, n: a.name }; }), $token: SIR.alliance[al], pointRadius: 3 }; }) },
-    options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n + ': margin ' + SIR.n(c.raw.x) + ', removed ' + SIR.n(c.raw.y); } } } },
-      scales: { x: { type: 'logarithmic', title: { display: true, text: '2025 winning margin (votes, log scale)' } }, y: { title: { display: true, text: 'Names removed' } } } } });
+      return { label: L('{al} (2025)', { al: al }), data: withM.filter(function (a) { return a.al2025 === al; }).map(function (a) { return { x: a.margin2025, y: a.total, n: a.name }; }), $token: SIR.alliance[al], pointRadius: 3 }; }) },
+    options: { plugins: { tooltip: { callbacks: { label: function (c) { return L('{name}: margin {margin}, removed {removed}', { name: c.raw.n, margin: SIR.n(c.raw.x), removed: SIR.n(c.raw.y) }); } } } },
+      scales: { x: { type: 'logarithmic', title: { display: true, text: L('2025 winning margin (votes, log scale)') } }, y: { title: { display: true, text: L('Names removed') } } } } });
   var over = withM.filter(function (a) { return a.total > a.margin2025; });
   var overBy = SIR.groupBy(over, 'al2025');
   document.getElementById('fMargin').innerHTML = (function () {
     var took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; }), tookOver = took.filter(function (a) { return a.total > a.margin2025; });
-    return '<b>In ' + over.length + ' of ' + withM.length + ' seats the revision removed more names than the 2025 winning margin.</b> Of those, ' + als.map(function (al) { return (overBy[al] || []).length + ' went to ' + al; }).join(', ') + '. Of the ' + took.length + ' seats INDIA held in 2020 and the NDA won in 2025, ' + tookOver.length + ' lost more names than the NDA\'s winning margin; in the median such seat the removals were ' + SIR.d(SIR.median(took.map(function (a) { return a.total / a.margin2025; })), 1) + ' times the margin. The median seat lost ' + SIR.n(SIR.median(withM.map(function (a) { return a.total; }))) + ' names; the median 2025 margin was ' + SIR.n(SIR.median(withM.map(function (a) { return a.margin2025; }))) + ' votes.';
+    return L('<b>In {over} of {seats} seats the revision removed more names than the 2025 winning margin.</b> Of those, {list}. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {tookOver} lost more names than the NDA\'s winning margin; in the median such seat the removals were {x} times the margin. The median seat lost {medRemoved} names; the median 2025 margin was {medMargin} votes.', { over: over.length, seats: withM.length, list: als.map(function (al) { return L('{n} went to {al}', { n: (overBy[al] || []).length, al: al }); }).join(', '), took: took.length, tookOver: tookOver.length, x: SIR.d(SIR.median(took.map(function (a) { return a.total / a.margin2025; })), 1), medRemoved: SIR.n(SIR.median(withM.map(function (a) { return a.total; }))), medMargin: SIR.n(SIR.median(withM.map(function (a) { return a.margin2025; }))) });
   })();
   SIR.table(document.getElementById('tMargin'), [
-    { k: 'name', label: 'Constituency', left: true, fmt: function (v, r) { return SIR.esc(r.ac + ' ' + v); } }, { k: 'win2025', label: '2025 winner', left: true, fmt: function (v, r) { return tag(r.al2025) + ' ' + SIR.esc(v); } },
-    { k: 'margin2025', label: 'Margin', fmt: SIR.n }, { k: 'total', label: 'Removed', fmt: SIR.n }, { k: 'ratio', label: 'Removed / margin', fmt: function (v) { return SIR.d(v, 1) + '×'; } }
+    { k: 'name', label: L('Constituency'), left: true, fmt: function (v, r) { return SIR.esc(r.ac + ' ' + v); } }, { k: 'win2025', label: L('2025 winner'), left: true, fmt: function (v, r) { return tag(r.al2025) + ' ' + SIR.esc(v); } },
+    { k: 'margin2025', label: L('Margin'), fmt: SIR.n }, { k: 'total', label: L('Removed'), fmt: SIR.n }, { k: 'ratio', label: L('Removed / margin'), fmt: function (v) { return SIR.d(v, 1) + '×'; } }
   ], over.map(function (a) { a.ratio = a.total / a.margin2025; return a; }), { sort: 'ratio', limit: 40 });
 }).catch(SIR.fail);
 </script>

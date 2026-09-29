@@ -3,6 +3,9 @@
    the JSON under data/ resolves on Netlify and in a local server alike. */
 (function () {
   'use strict';
+  // No i18n.js on the page: every string stays as written.
+  if (!window.L) { window.L = function (k, v) { return v ? k.replace(/\{(\w+)\}/g, function (m, x) { return v[x] != null ? v[x] : m; }) : k; }; window.L.apply = function () {}; window.L.lang = 'en'; }
+  L.apply(document.body);
   var root = document.body.getAttribute('data-root') || '';
   var nf = new Intl.NumberFormat('en-IN');
 
@@ -11,7 +14,7 @@
     n: function (x) { return x == null || isNaN(x) ? '–' : nf.format(Math.round(x)); },
     d: function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k); },
     pct: function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k) + '%'; },
-    lakh: function (x) { return (x / 1e5).toFixed(1) + ' lakh'; },
+    lakh: function (x) { return L('{x} lakh', { x: (x / 1e5).toFixed(1) }); },
     esc: function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); },
     json: function (path) {
       return fetch(root + path).then(function (r) {
@@ -51,7 +54,7 @@
     var dark = SIR.isDark();
     if (btn) {
       var s = btn.querySelector('span');
-      if (s) s.textContent = dark ? 'Light' : 'Dark'; else btn.textContent = dark ? 'Light' : 'Dark';
+      if (s) s.textContent = dark ? L('Light') : L('Dark'); else btn.textContent = dark ? L('Light') : L('Dark');
       btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
     }
     return dark;
@@ -75,7 +78,7 @@
   SIR.chart = function (id, cfg) {
     if (typeof Chart === 'undefined') {
       var el = document.getElementById(id);
-      if (el) el.parentNode.insertAdjacentHTML('beforeend', '<p class="pill">The chart library did not load; the table below carries the same figures.</p>');
+      if (el) el.parentNode.insertAdjacentHTML('beforeend', '<p class="pill">' + L('The chart library did not load; the table below carries the same figures.') + '</p>');
       return null;
     }
     Chart.defaults.font.family = '"Helvetica Neue", Arial, sans-serif';
@@ -172,6 +175,6 @@
   SIR.fail = function (e) {
     if (window.console) console.error(e && e.stack);
     var m = document.querySelector('main');
-    if (m) m.insertAdjacentHTML('afterbegin', '<p class="caveat">The data for this page did not load (' + SIR.esc(e.message) + '). If you opened the file directly, serve the folder instead: <code>python3 -m http.server</code>.</p>');
+    if (m) m.insertAdjacentHTML('afterbegin', '<p class="caveat">' + L('The data for this page did not load ({msg}). If you opened the file directly, serve the folder instead: <code>python3 -m http.server</code>.', { msg: SIR.esc(e.message) }) + '</p>');
   };
 })();

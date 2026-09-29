@@ -9,7 +9,7 @@
   D.n = function (x) { return x == null || isNaN(x) ? '–' : nf.format(Math.round(x)); };
   D.d = function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k); };
   D.pct = function (x, k) { return D.d(x, k) + '%'; };
-  D.lakh = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; };
+  D.lakh = function (x) { return L('{x} lakh', { x: (x / 1e5).toFixed(1) }); };
   D.esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   D.sum = function (a, f) { return a.reduce(function (s, x) { return s + (typeof f === 'function' ? f(x) : x[f]); }, 0); };
   D.mean = function (a) { return a.length ? D.sum(a, function (x) { return x; }) / a.length : NaN; };
@@ -29,9 +29,9 @@
   D.banner = function (title, text) { return '<div class="takeaway" role="note">' + BAR + '<div><div class="takeaway-title">' + title + '</div>' + text + '</div></div>'; };
   D.card = function (num, id, title, insight, opts) {
     opts = opts || {};
-    return '<div class="card' + (opts.wide ? ' wide' : '') + '"><div class="card-title"><span>' + num + '. ' + title + '</span><div class="card-actions"><button type="button" data-png="' + id + '" aria-label="Download this chart as PNG">PNG</button></div></div>' +
+    return '<div class="card' + (opts.wide ? ' wide' : '') + '"><div class="card-title"><span>' + num + '. ' + title + '</span><div class="card-actions"><button type="button" data-png="' + id + '" aria-label="' + L('Download this chart as PNG') + '">PNG</button></div></div>' +
       '<div class="chart-container ' + (opts.size || '') + '"><canvas id="' + id + '" role="img" aria-label="' + D.esc(title) + '"></canvas></div>' +
-      '<div class="chart-takeaway">' + ICON + ' <strong>Key insight:</strong> ' + insight + '</div></div>';
+      '<div class="chart-takeaway">' + ICON + ' <strong>' + L('Key insight:') + '</strong> ' + insight + '</div></div>';
   };
   D.section = function (id, html) { return '<section class="tab-content" id="tab-' + id + '" role="tabpanel" aria-labelledby="tabbtn-' + id + '">' + html + '</section>'; };
   D.grid = function (html) { return '<div class="charts-grid">' + html + '</div>'; };

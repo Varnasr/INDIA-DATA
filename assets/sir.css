@@ -35,7 +35,8 @@ h1,h2,h3{margin:0;line-height:1.3}
 a{color:var(--navy)}
 p a,li a,td a,.note a,.takeaway a,.research-a a{text-decoration:underline}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:8px;background:var(--card);padding:6px 10px;z-index:200}
+.skip{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip:focus{width:auto;height:auto;clip:auto;overflow:visible;inset-inline-start:12px;top:8px;background:var(--card);padding:6px 10px;z-index:200}
 .icon{width:18px;height:18px;display:inline-block;vertical-align:middle;flex:none}
 
 /* ------------------------------------------------------------ the bands */
@@ -73,7 +74,7 @@ button:focus-visible,select:focus-visible,.btn:focus-visible,a:focus-visible,inp
 /* ------------------------------------------------------------- the page */
 main{max-width:1800px;margin:0 auto;padding:1.5rem 1.25rem 2.5rem}
 .page-head h1{font-size:1.5rem;margin:0 0 .5rem}
-main h2{font-size:1.2rem;margin:2rem 0 .35rem;padding-left:.7rem;border-left:4px solid var(--fill-red)}
+main h2{font-size:1.2rem;margin:2rem 0 .35rem;padding-inline-start:.7rem;border-inline-start:4px solid var(--fill-red)}
 main h2:first-child{margin-top:0}
 .sub{color:var(--muted);margin:0 0 1rem;max-width:90ch}
 .tab-content{display:none;animation:fadeIn .4s}
@@ -82,7 +83,7 @@ main h2:first-child{margin-top:0}
 
 /* summary cards: .summary-grid on the dashboards, .kpis on the other pages */
 .summary-grid,.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin:0 0 1.25rem}
-.summary-card,.kpis>div{background:var(--card);padding:1rem;border-radius:12px;border-left:4px solid var(--fill-red);box-shadow:0 4px 15px var(--shadow);transition:.3s}
+.summary-card,.kpis>div{background:var(--card);padding:1rem;border-radius:12px;border-inline-start:4px solid var(--fill-red);box-shadow:0 4px 15px var(--shadow);transition:.3s}
 .summary-card:hover,.kpis>div:hover{transform:translateY(-3px)}
 .summary-card.y,.kpis>div:nth-child(6n+2){border-color:var(--s-yellow)}
 .summary-card.b,.kpis>div:nth-child(6n+3){border-color:var(--fill-navy)}
@@ -93,7 +94,7 @@ main h2:first-child{margin-top:0}
 .summary-label,.kpis span{font-size:.8rem;color:var(--muted)}
 
 /* key-finding banners: .takeaway on the dashboards, .finding and .caveat elsewhere */
-.takeaway,.finding,.caveat{background:linear-gradient(135deg,var(--s-yellow),var(--s-mint));color:#1c2833;padding:1rem 1.1rem;border-radius:10px;margin:.5rem 0 1.25rem;border-left:4px solid var(--s-green);max-width:none}
+.takeaway,.finding,.caveat{background:linear-gradient(135deg,var(--s-yellow),var(--s-mint));color:#1c2833;padding:1rem 1.1rem;border-radius:10px;margin:.5rem 0 1.25rem;border-inline-start:4px solid var(--s-green);max-width:none}
 .takeaway{display:flex;align-items:flex-start;gap:.75rem}
 .caveat{border-left-color:var(--fill-amber)}
 .finding:empty{display:none}
@@ -118,7 +119,7 @@ main h2:first-child{margin-top:0}
 /* A panel's note sits under its chart, as a card's key insight does. */
 .panel{display:flex;flex-direction:column}
 .panel>h3{order:1}.panel>.chart,.panel>.twrap,.panel>.controls,.panel>.legend{order:2}.panel>p{order:3}
-.panel>p,.chart-takeaway{background:var(--soft);padding:.75rem;border-radius:8px;margin:.75rem 0 0;font-size:.85rem;border-left:3px solid var(--fill-teal);color:var(--ink)}
+.panel>p,.chart-takeaway{background:var(--soft);padding:.75rem;border-radius:8px;margin:.75rem 0 0;font-size:.85rem;border-inline-start:3px solid var(--fill-teal);color:var(--ink)}
 .chart-takeaway strong{color:var(--navy)}
 .panel .chart{position:relative;height:300px}
 .panel .chart.tall{height:380px}
@@ -131,15 +132,18 @@ main h2:first-child{margin-top:0}
 .hub:hover,.cards .card:hover{border-color:var(--fill-red)}
 .hub b,.cards .card h3{display:block;font-size:1rem;font-weight:700}
 .hub span,.cards .card p{font-size:.85rem;color:var(--muted)}
+.hub .dl{display:block;margin-top:.35rem;font-weight:600}
+.hub .dl a{color:var(--navy);text-decoration:underline}
+.btn.report{background:var(--card)}
 .research-section,.qa{background:var(--card);padding:1.25rem 1.5rem;border-radius:12px;margin-bottom:1rem;border:1px solid var(--line)}
 .research-q,.qa h3{font-weight:700;color:var(--navy);margin-bottom:.5rem;font-size:1rem}
-.research-a,.qa p{color:var(--ink);padding:.75rem;background:var(--soft);border-radius:8px;border-left:4px solid var(--s-green);margin:0}
+.research-a,.qa p{color:var(--ink);padding:.75rem;background:var(--soft);border-radius:8px;border-inline-start:4px solid var(--s-green);margin:0}
 .methodology{background:var(--soft);padding:1.25rem;border-radius:10px;margin:1rem 0}
 .methodology h2{color:var(--navy);margin:0 0 .5rem;font-size:1.05rem;border:0;padding:0}
-.methodology ul{margin:0 0 0 1.25rem;padding:0;font-size:.92rem}
+.methodology ul{margin:0;margin-inline-start:1.25rem;padding:0;font-size:.92rem}
 .methodology p{font-size:.92rem;margin:0 0 .5rem}
 .claims{list-style:none;padding:0;margin:.5rem 0 1.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
-.claims li{background:var(--card);border-radius:12px;border-left:4px solid var(--fill-red);box-shadow:0 4px 15px var(--shadow);padding:1rem}
+.claims li{background:var(--card);border-radius:12px;border-inline-start:4px solid var(--fill-red);box-shadow:0 4px 15px var(--shadow);padding:1rem}
 .claims b{display:block;font-size:1.4rem;font-weight:700;color:var(--grad-a);line-height:1.3}
 .claims span{font-size:.9rem}
 .lead{font-size:1.05rem;max-width:90ch;margin:.25rem 0 1rem}
@@ -150,8 +154,8 @@ main h2:first-child{margin-top:0}
 .twrap{overflow-x:auto;max-width:100%}
 .twrap.scroll{max-height:560px;overflow-y:auto}
 table{border-collapse:collapse;width:100%;font-size:.85rem;margin-top:.5rem}
-th,td{padding:.45rem .6rem;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
-th.l,td.l{text-align:left}
+th,td{padding:.45rem .6rem;border-bottom:1px solid var(--line);text-align:end;font-variant-numeric:tabular-nums}
+th.l,td.l{text-align:start}
 th{background:var(--soft);font-weight:600;position:sticky;top:0;z-index:1}
 th button{all:unset;cursor:pointer;font-weight:600}
 th button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
@@ -180,7 +184,7 @@ footer{background:var(--card);padding:1.5rem;text-align:center;border-top:1px so
 /* ------------------------------------------ explorers: rail and detail pane */
 .xp{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:calc(100vh - 160px)}
 .xp>*{min-width:0}
-.xp aside{background:var(--card);border-right:1px solid var(--line);padding:18px 16px;overflow:auto;max-height:calc(100vh - 150px);position:sticky;top:150px}
+.xp aside{background:var(--card);border-inline-end:1px solid var(--line);padding:18px 16px;overflow:auto;max-height:calc(100vh - 150px);position:sticky;top:150px}
 .xp aside input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;background:var(--bg);color:var(--ink)}
 .xp .legend{margin:10px 0 0}
 .xstrip{display:grid;grid-template-columns:repeat(18,minmax(0,1fr));gap:2px;margin:12px 0}
@@ -189,7 +193,7 @@ footer{background:var(--card);padding:1.5rem;text-align:center;border-top:1px so
 .xstrip button.sel,.xstrip button:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
 .xstrip button.dim{opacity:.18}
 .xlist{list-style:none;padding:0;margin:10px 0 0}
-.xlist li button{width:100%;text-align:left;background:none;border:0;border-radius:0;border-top:1px solid var(--line);padding:7px 4px;font:inherit;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;gap:8px;color:var(--ink)}
+.xlist li button{width:100%;text-align:start;background:none;border:0;border-radius:0;border-top:1px solid var(--line);padding:7px 4px;font:inherit;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;gap:8px;color:var(--ink)}
 .xlist li button:hover,.xlist li button.sel{background:var(--soft);transform:none;color:var(--ink)}
 .xlist li button:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
 .xlist .rate{color:var(--red);font-variant-numeric:tabular-nums}
@@ -216,9 +220,23 @@ footer{background:var(--card);padding:1.5rem;text-align:center;border-top:1px so
   .controls{gap:.35rem}.controls .btn,.controls button{padding:.35rem .7rem;font-size:.8rem}
   .logo{gap:.6rem}
   .xp{grid-template-columns:minmax(0,1fr)}
-  .xp aside{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line)}
+  .xp aside{position:static;max-height:none;border-inline-end:0;border-bottom:1px solid var(--line)}
   .xlist{max-height:260px;overflow:auto}
   .search input{min-width:0;width:100%}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @media print{header.top,.nav-tabs,.card-actions,.search,.controls,.tools,.band{display:none}.tab-content{display:block!important}.card,.panel{break-inside:avoid;box-shadow:none}}
+
+/* ------------------------------------------------------------ languages */
+.i18n-note{max-width:1800px;margin:.75rem auto 0;padding:.55rem 1.25rem;font-size:.85rem;color:var(--ink);background:var(--soft);border-inline-start:4px solid var(--fill-amber)}
+.i18n-note a{color:var(--navy);text-decoration:underline}
+html[data-lang="hi"] body{font-family:"Noto Sans Devanagari","Segoe UI",system-ui,sans-serif}
+html[data-lang="te"] body{font-family:"Noto Sans Telugu","Segoe UI",system-ui,sans-serif}
+html[data-lang="ur"] body{font-family:"Noto Nastaliq Urdu","Segoe UI",system-ui,sans-serif;line-height:2}
+html[data-lang="ur"] .h-title,html[data-lang="ur"] h1,html[data-lang="ur"] h2,html[data-lang="ur"] h3{line-height:1.9}
+html[data-lang="ur"] .summary-value,html[data-lang="ur"] .kpis b,html[data-lang="ur"] .claims b{line-height:1.6}
+html[data-lang="ur"] .nav-tab,html[data-lang="ur"] button,html[data-lang="ur"] .btn{line-height:1.9}
+/* Figures, tags and tables of numbers read left to right in every language. */
+[dir="rtl"] .summary-value,[dir="rtl"] .kpis b,[dir="rtl"] .claims b,[dir="rtl"] .tag,[dir="rtl"] td:not(.l){unicode-bidi:plaintext}
+[dir="rtl"] .nav-tab::after{left:auto;right:0}
+[dir="rtl"] .xstrip,[dir="rtl"] .fate{direction:ltr}

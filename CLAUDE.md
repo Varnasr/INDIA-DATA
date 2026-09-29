@@ -30,6 +30,12 @@ Things the build depends on, each asserted by `check_data.py`:
   top-three 2024 party) and the gender-religion file two (one per sex). Any
   join of the two must aggregate first. Totals: 77,837 booths, 6,559,626 phase 1
   deletions in the booth file, 6,910,559 across both phases.
+- **2025 margins and votes polled come from `data/bihar/raw/ae2025_results.csv`**
+  (winner and runner-up votes and turnout for all 243 seats), not from the
+  Wikipedia results table, whose margin column is wrong in seven seats and
+  runner-up votes in six more. The margin is winner minus runner-up in every
+  row; votes polled are turnout on the 2025 roll. `verify_bihar.py` recomputes
+  both.
 - **`LABEL_FIXES` in `build_bihar.py`.** Each carries its evidence and a status,
   verified or probable. After the fixes, all 40 seats' top two match the
   declared result within 1 point. A new fix needs evidence, not a plausible
@@ -91,6 +97,46 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 - Audited with axe at 1280 and 390, both schemes, all 15 pages: 0 serious or
   critical. In a sandbox cdnjs is unreachable; stub Chart.js by route or the
   audit sees pages with no charts.
+
+## Languages
+
+English, Hindi, Urdu and Telugu, chosen from the menu in the header and kept
+in the address (`?lang=hi`) and in the reader's browser.
+
+- `assets/i18n.js` loads first, in `<head>`: it sets `lang` and `dir` (Urdu is
+  right to left), loads the Noto font for the script and the dictionary
+  `assets/i18n/<lang>.js`, and defines `L()`.
+- **A sentence built by a script** goes through
+  `L('English template with {placeholders}', {placeholders: values})`. The
+  template is the key. The first argument must be one string literal:
+  `check_i18n.py` reads the keys from the source and fails on anything else.
+  Write whole sentences, never fragments, and pass values already formatted.
+  A page-local variable named `L` hides the function; several pages had one.
+- **Fixed text in the markup** is translated by `L.apply()`, which `sir.js`
+  calls before a page's own script runs. The key is an element's inner HTML
+  as the browser serialises it, so `scripts/i18n_collect.mjs` reads the keys
+  with a browser and writes `i18n/catalogue.json`. Re-run it after changing
+  any text, then translate the new keys; CI fails until every key in every
+  language is translated with its placeholders and links intact.
+- Figures stay in Western digits with Indian grouping. Names that arrive from
+  the data (constituencies, localities, parties, the Commission's reason and
+  rule codes) stay as the data spells them.
+- **The menu is off until the translations are signed off.** `MENU` in
+  `assets/i18n.js` is `false`, so a language is reached only by a link with
+  `?lang=hi|ur|te`, and a translated page carries a notice that the English
+  page governs. `scripts/i18n_workbook.py` writes the review workbook; fold the
+  reviewer's corrections into `assets/i18n/<lang>.js`, then set `MENU = true`.
+
+## Reports
+
+`reports/` holds the two full reports, PDF and Word, linked from every page's
+header ("Full report") and from each dashboard. `scripts/reports/build.sh`
+rebuilds them from the published JSON: python-docx writes the Word file, the
+same builder writes print-ready HTML, and headless Chromium prints that to PDF
+(LibreOffice is not needed). They follow the Sabar Institute's structure: Part
+I for the whole area, Part II a chapter per district or constituency, one
+section on what the lists show and do not, and what an audit needs. Rebuild
+them after any data change; nothing checks that they are current.
 
 ## Watch out for
 

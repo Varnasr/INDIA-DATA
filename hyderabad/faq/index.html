@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="../../assets/i18n.js"></script>
 <title>Hyderabad Old City SIR 2026: questions and answers</title>
 <meta name="description" content="Answers to the questions most often put to the Hyderabad Old City SIR analysis: the shifted and untraceable, religion, the 2002 roll, hearings, margins and the reliability of the lists.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23b13b38'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
@@ -16,6 +17,7 @@
     <a class="logo" href="../../hyderabad/"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span><span class="h-title">Hyderabad Old City Electoral Dashboard</span><span class="subtitle">Special Intensive Revision 2026 · five constituencies, every polling part</span></span></a>
     <div class="controls">
       <a class="btn" href="../../">Bihar 2025</a>
+      <a class="btn report" href="../../reports/hyderabad-old-city-sir-2026-report.pdf" download><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
     </div>
@@ -33,31 +35,31 @@
 SIR.json('data/hyderabad/summary.json').then(function (s) {
   var A = s.acs, t = s.totals, sum = function (f) { return SIR.sum(A, f); };
   var R = function (r) { return 100 * sum(function (a) { return a.reasons[r]; }) / t.deleted; };
-  var W = A.map(function (a) { return a.within_part.hindu_minus_muslim; }), L = A.filter(function (a) { return a.linked; });
-  var ul = L.map(function (a) { return a.within_part.unlinked_minus_linked.diff_pp; });
+  var W = A.map(function (a) { return a.within_part.hindu_minus_muslim; }), LK = A.filter(function (a) { return a.linked; });
+  var ul = LK.map(function (a) { return a.within_part.unlinked_minus_linked.diff_pp; });
   var age = s.bands.map(function (b, i) { return 100 * sum(function (a) { return a.counts.age_asd[i]; }) / sum(function (a) { return a.age_all[i]; }); });
   var valid = A.filter(function (a) { return a.e2023.deleted_over_valid > 100; }).map(function (a) { return a.name; });
   var yak = A.filter(function (a) { return a.name === 'Yakutpura'; })[0], mal = A.filter(function (a) { return a.name === 'Malakpet'; })[0];
   var heavy = A.slice().sort(function (a, b) { return b.max_slot - a.max_slot; })[0];
   var QA = [
-    ['Were most of those struck off not people who had moved away?',
-     'The largest recorded reason is "permanently shifted", ' + SIR.pct(R('Permanently Shifted')) + ' of removals, and the Old City does have a large moving population. But ' + SIR.pct(R('Untraceable/Absent')) + ' were entered as "untraceable or absent", ' + SIR.pct(R('Death')) + ' as dead and ' + SIR.pct(R('Already enrolled')) + ' as enrolled elsewhere. Each is what an officer entered, not a finding. The untraceable entries in particular rest on an officer not finding someone, and they are where verification should begin.'],
-    ['Was the revision aimed at Muslim electors?',
-     'The lists do not show that. Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors, by ' + SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 0) + ' to ' + SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 0) + ' points. What the lists do show is who carried the burden: the old, and those who could not be traced to the 2002 roll. <a href="../people/">Age, sex, religion, 2002</a>.'],
-    ['Why does the 2002 roll matter so much?',
-     'The revision asks each elector to show a link to the 2002 intensive revision, through their own name or a parent\'s. Where the lists record it, electors with no such link were struck off ' + SIR.d(Math.min.apply(null, ul), 0) + ' to ' + SIR.d(Math.max.apply(null, ul), 0) + ' points more often than linked electors in the same part. Anyone who moved into the city after 2002, or whose family name is spelt differently on the old roll, starts at a disadvantage.'],
-    ['Why are the old struck off so often?',
-     SIR.pct(age[7]) + ' of electors aged 80 and over were struck off, against ' + SIR.pct(age[0]) + ' of those aged 18 to 24. Some of that is death. The rest is electors least able to answer a visit, attend a hearing or produce papers.'],
-    ['Could hearings be held properly?',
-     SIR.n(t.hearing) + ' electors kept on the draft roll were summoned. The heaviest single slot listed ' + SIR.n(heavy.max_slot) + ' cases, in ' + heavy.name + '. A slot of that size leaves each elector a minute or two. <a href="../hearings/">Hearings</a>.'],
-    ['Did this change an election result?',
-     'No election has been held on the revised roll. What can be said is the scale: every one of the five constituencies lost more names than its 2023 winning margin, and in ' + valid.join(' and ') + ' the names struck off outnumber every valid vote cast in 2023. Yakutpura was won by ' + SIR.n(yak.e2023.margin) + ' votes and lost ' + SIR.n(yak.deleted) + ' names.'],
-    ['How reliable are the lists?',
-     'For Charminar, Yakutpura, Chandrayangutta and Bahadurpura, the counts of names struck off agree exactly with Sabar Institute\'s independent count of the same lists, as do the recorded reasons and women\'s share. The Malakpet list used here is incomplete: it holds ' + SIR.n(mal.deleted) + ' names against Sabar Institute\'s 1,47,799, and carries no part numbers or 2002 link.'],
-    ['Why only five constituencies?',
-     'These are the five Old City constituencies whose full lists were available elector by elector. The figures describe these five and no others.'],
-    ['Why are no names published?',
-     'The analysis is about the revision, not about individuals. Only counts are published: no name, EPIC number or address appears anywhere on these pages.']
+    [L('Were most of those struck off not people who had moved away?'),
+     L('The largest recorded reason is "permanently shifted", {shifted} of removals, and the Old City does have a large moving population. But {untraceable} were entered as "untraceable or absent", {death} as dead and {enrolled} as enrolled elsewhere.', { shifted: SIR.pct(R('Permanently Shifted')), untraceable: SIR.pct(R('Untraceable/Absent')), death: SIR.pct(R('Death')), enrolled: SIR.pct(R('Already enrolled')) }) + ' ' + L('Each is what an officer entered, not a finding.') + ' ' + L('The untraceable entries in particular rest on an officer not finding someone, and they are where verification should begin.')],
+    [L('Was the revision aimed at Muslim electors?'),
+     L('The lists do not show that.') + ' ' + L('Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors, by {gap_min} to {gap_max} points.', { gap_min: SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 0), gap_max: SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 0) }) + ' ' + L('What the lists do show is who carried the burden: the old, and those who could not be traced to the 2002 roll. <a href="../people/">Age, sex, religion, 2002</a>.')],
+    [L('Why does the 2002 roll matter so much?'),
+     L('The revision asks each elector to show a link to the 2002 intensive revision, through their own name or a parent\'s.') + ' ' + L('Where the lists record it, electors with no such link were struck off {gap_min} to {gap_max} points more often than linked electors in the same part.', { gap_min: SIR.d(Math.min.apply(null, ul), 0), gap_max: SIR.d(Math.max.apply(null, ul), 0) }) + ' ' + L('Anyone who moved into the city after 2002, or whose family name is spelt differently on the old roll, starts at a disadvantage.')],
+    [L('Why are the old struck off so often?'),
+     L('{old} of electors aged 80 and over were struck off, against {young} of those aged 18 to 24.', { old: SIR.pct(age[7]), young: SIR.pct(age[0]) }) + ' ' + L('Some of that is death.') + ' ' + L('The rest is electors least able to answer a visit, attend a hearing or produce papers.')],
+    [L('Could hearings be held properly?'),
+     L('{summoned} electors kept on the draft roll were summoned.', { summoned: SIR.n(t.hearing) }) + ' ' + L('The heaviest single slot listed {cases} cases, in {name}.', { cases: SIR.n(heavy.max_slot), name: heavy.name }) + ' ' + L('A slot of that size leaves each elector a minute or two. <a href="../hearings/">Hearings</a>.')],
+    [L('Did this change an election result?'),
+     L('No election has been held on the revised roll.') + ' ' + L('What can be said is the scale: every one of the five constituencies lost more names than its 2023 winning margin, and in {names} the names struck off outnumber every valid vote cast in 2023.', { names: valid.join(L(' and ')) }) + ' ' + L('Yakutpura was won by {margin} votes and lost {deleted} names.', { margin: SIR.n(yak.e2023.margin), deleted: SIR.n(yak.deleted) })],
+    [L('How reliable are the lists?'),
+     L('For Charminar, Yakutpura, Chandrayangutta and Bahadurpura, the counts of names struck off agree exactly with Sabar Institute\'s independent count of the same lists, as do the recorded reasons and women\'s share.') + ' ' + L('The Malakpet list used here is incomplete: it holds {held} names against Sabar Institute\'s 1,47,799, and carries no part numbers or 2002 link.', { held: SIR.n(mal.deleted) })],
+    [L('Why only five constituencies?'),
+     L('These are the five Old City constituencies whose full lists were available elector by elector. The figures describe these five and no others.')],
+    [L('Why are no names published?'),
+     L('The analysis is about the revision, not about individuals. Only counts are published: no name, EPIC number or address appears anywhere on these pages.')]
   ];
   document.getElementById('qas').innerHTML = QA.map(function (q) { return '<div class="qa"><h3>' + q[0] + '</h3><p>' + q[1] + '</p></div>'; }).join('');
 }).catch(SIR.fail);

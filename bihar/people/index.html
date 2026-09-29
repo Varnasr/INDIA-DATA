@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="../../assets/i18n.js"></script>
 <title>Bihar SIR 2025: gender, religion, caste</title>
 <meta name="description" content="Who Bihar's SIR removed: women against their share of the population in every district, name-estimated religion as a range against the census, and caste from surnames under two classifications with bounds.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
@@ -16,6 +17,7 @@
     <a class="logo" href="../../"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span><span class="h-title">Bihar Electoral Dashboard</span><span class="subtitle">Special Intensive Revision 2025 · every booth, every constituency</span></span></a>
     <div class="controls">
       <a class="btn" href="../../hyderabad/">Hyderabad 2026</a>
+      <a class="btn report" href="../../reports/bihar-sir-2025-report.pdf" download><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
     </div>
@@ -88,66 +90,71 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
   // ---- gender
   var fs = 100 * t.female / (t.female + t.male), popF = 47.86;
   var above = D.filter(function (d) { return d.female_share_deleted > d.female_share_population_2011; }).length;
-  document.getElementById('kGender').innerHTML = [[SIR.pct(fs), 'of those removed were women'], [SIR.pct(popF, 2), 'women in Bihar’s population, 2011'],
-    [above + ' of ' + D.length, 'districts where women were removed out of proportion'], [SIR.n(t.female - t.male), 'more women than men removed']]
+  document.getElementById('kGender').innerHTML = [[SIR.pct(fs), L('of those removed were women')], [SIR.pct(popF, 2), L('women in Bihar’s population, 2011')],
+    [L('{a} of {b}', { a: above, b: D.length }), L('districts where women were removed out of proportion')], [SIR.n(t.female - t.male), L('more women than men removed')]]
     .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   SIR.chart('cGender', { type: 'scatter', data: { datasets: [
-      { label: 'District', data: D.map(function (d) { return { x: d.female_share_population_2011, y: d.female_share_deleted, n: d.district }; }), $token: '--female', pointRadius: 4 },
-      { label: 'Equal share', type: 'line', data: [{ x: 46, y: 46 }, { x: 51, y: 51 }], $token: '--fill-grey', pointRadius: 0, borderDash: [4, 4] }] },
-    options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n ? c.raw.n + ': ' + c.raw.y + '% of removals, ' + c.raw.x + '% of population' : ''; } } } },
-      scales: { x: { min: 46, max: 51, title: { display: true, text: 'Women, % of population (2011)' } }, y: { min: 46, max: 63, title: { display: true, text: 'Women, % of removals' } } } } });
-  var G = SIR.groupBy(acs, 'al2025'), als = ['NDA', 'INDIA', 'Other'];
-  SIR.chart('cGenderAl', { type: 'bar', data: { labels: als.map(function (a) { return a + ' (' + G[a].length + ')'; }), datasets: [{ label: 'Women %', data: als.map(function (a) { return 100 * SIR.sum(G[a], 't_f') / (SIR.sum(G[a], 't_f') + SIR.sum(G[a], 't_m')); }), $tokens: als.map(function (a) { return SIR.alliance[a]; }) }] },
-    options: { plugins: { legend: { display: false } }, scales: { y: { min: 40, title: { display: true, text: 'Women, % of removals' } } } } });
+      { label: L('District'), data: D.map(function (d) { return { x: d.female_share_population_2011, y: d.female_share_deleted, n: d.district }; }), $token: '--female', pointRadius: 4 },
+      { label: L('Equal share'), type: 'line', data: [{ x: 46, y: 46 }, { x: 51, y: 51 }], $token: '--fill-grey', pointRadius: 0, borderDash: [4, 4] }] },
+    options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n ? L('{n}: {y}% of removals, {x}% of population', { n: c.raw.n, y: c.raw.y, x: c.raw.x }) : ''; } } } },
+      scales: { x: { min: 46, max: 51, title: { display: true, text: L('Women, % of population (2011)') } }, y: { min: 46, max: 63, title: { display: true, text: L('Women, % of removals') } } } } });
+  var G = SIR.groupBy(acs, 'al2025'), als = ['NDA', 'INDIA', 'Other'], ALN = { Other: L('Other') };
+  SIR.chart('cGenderAl', { type: 'bar', data: { labels: als.map(function (a) { return (ALN[a] || a) + ' (' + G[a].length + ')'; }), datasets: [{ label: L('Women %'), data: als.map(function (a) { return 100 * SIR.sum(G[a], 't_f') / (SIR.sum(G[a], 't_f') + SIR.sum(G[a], 't_m')); }), $tokens: als.map(function (a) { return SIR.alliance[a]; }) }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { min: 40, title: { display: true, text: L('Women, % of removals') } } } } });
   var gaps = D.map(function (d) { return d.female_share_deleted - d.female_share_population_2011; });
-  document.getElementById('fGender').innerHTML = '<b>Women were removed out of proportion in ' + above + ' of ' + D.length + ' districts</b>, by ' + SIR.d(Math.min.apply(null, gaps), 1) + ' to ' + SIR.d(Math.max.apply(null, gaps), 1) + ' points above their share of the population. Sex is recorded on the roll, so this needs no inference from names. Women who moved on marriage and were marked "shifted" at their parents\' address are likely part of it; the lists do not show whether any of them were enrolled again where they now live.';
+  document.getElementById('fGender').innerHTML = L('<b>Women were removed out of proportion in {a} of {b} districts</b>, by {lo} to {hi} points above their share of the population. Sex is recorded on the roll, so this needs no inference from names. Women who moved on marriage and were marked "shifted" at their parents\' address are likely part of it; the lists do not show whether any of them were enrolled again where they now live.', { a: above, b: D.length, lo: SIR.d(Math.min.apply(null, gaps), 1), hi: SIR.d(Math.max.apply(null, gaps), 1) });
 
   // ---- religion
   var cls = t.hindu + t.muslim + t.unknown, lo = 100 * t.muslim / cls, hi = 100 * (t.muslim + t.unknown) / cls;
-  document.getElementById('kRel').innerHTML = [[SIR.pct(lo) + '–' + SIR.pct(hi), 'Muslim-name share of removals'], ['16.87%', 'Muslim share of population, 2011'], ['17.70%', 'Muslim share, 2023 caste survey'], [SIR.pct(100 * t.unknown / cls), 'of removed names unclassified']]
+  document.getElementById('kRel').innerHTML = [[SIR.pct(lo) + '–' + SIR.pct(hi), L('Muslim-name share of removals')], ['16.87%', L('Muslim share of population, 2011')], ['17.70%', L('Muslim share, 2023 caste survey')], [SIR.pct(100 * t.unknown / cls), L('of removed names unclassified')]]
     .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   var Ds = D.slice().sort(function (a, b) { return b.muslim_share_population_2011 - a.muslim_share_population_2011; });
   SIR.chart('cRel', { type: 'bar', data: { labels: Ds.map(function (d) { return d.district; }), datasets: [
-      { type: 'bar', label: 'Muslim-name share of removals (range)', data: Ds.map(function (d) { return [d.muslim_share_deleted_low, d.muslim_share_deleted_high]; }), $token: '--fill-other', barPercentage: 0.75, order: 2 },
-      { type: 'line', label: 'Muslim share of population, 2011', data: Ds.map(function (d) { return d.muslim_share_population_2011; }), showLine: false, $token: '--ink', pointRadius: 4, pointHoverRadius: 5, order: 1 }] },
-    options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: '% of removals, and % of population' } } } } });
+      { type: 'bar', label: L('Muslim-name share of removals (range)'), data: Ds.map(function (d) { return [d.muslim_share_deleted_low, d.muslim_share_deleted_high]; }), $token: '--fill-other', barPercentage: 0.75, order: 2 },
+      { type: 'line', label: L('Muslim share of population, 2011'), data: Ds.map(function (d) { return d.muslim_share_population_2011; }), showLine: false, $token: '--ink', pointRadius: 4, pointHoverRadius: 5, order: 1 }] },
+    options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('% of removals, and % of population') } } } } });
   var growth = 17.70 - 16.87;
   var inside = D.filter(function (d) { return d.muslim_share_population_2011 >= d.muslim_share_deleted_low && d.muslim_share_population_2011 <= d.muslim_share_deleted_high; });
   var over = D.filter(function (d) { return d.muslim_share_deleted_low > d.muslim_share_population_2011; });
   var clear = over.filter(function (d) { return d.muslim_share_deleted_low - d.muslim_share_population_2011 > 1; }).sort(function (a, b) { return (b.muslim_share_deleted_low / b.muslim_share_population_2011) - (a.muslim_share_deleted_low / a.muslim_share_population_2011); });
-  document.getElementById('fRel').innerHTML = '<b>Statewide the range, ' + SIR.pct(lo) + ' to ' + SIR.pct(hi) + ', contains the 2011 share of 16.87%. District by district it does not.</b> The census share lies inside the range in ' + inside.length + ' of ' + D.length + ' districts; in the other ' + over.length + ', more Muslim-name electors were removed than the 2011 population share would predict, even counting none of the unclassified names. Most of those gaps are within the ' + SIR.d(growth, 2) + '-point statewide rise in the Muslim share since 2011. <b>In ' + clear.length + ' districts they are not:</b> ' + clear.map(function (d) { return d.district + ' (' + SIR.pct(d.muslim_share_deleted_low) + ' at least, against ' + SIR.pct(d.muslim_share_population_2011) + ')'; }).join(', ') + '. All ' + clear.length + ' lie in south and central Bihar, where Muslims are a small minority; there the lowest estimate runs ' + Math.round(100 * (Math.min.apply(null, clear.map(function (d) { return d.muslim_share_deleted_low / d.muslim_share_population_2011; })) - 1)) + ' to ' + Math.round(100 * (Math.max.apply(null, clear.map(function (d) { return d.muslim_share_deleted_low / d.muslim_share_population_2011; })) - 1)) + '% above the population share. Muslims in Bihar are younger than average, so their share of <em>electors</em> is below their share of population, which would widen these gaps rather than close them. Migration into Patna and errors in name classification could narrow them.';
+  var rr = clear.map(function (d) { return d.muslim_share_deleted_low / d.muslim_share_population_2011; });
+  document.getElementById('fRel').innerHTML = L('<b>Statewide the range, {lo} to {hi}, contains the 2011 share of 16.87%. District by district it does not.</b> The census share lies inside the range in {inside} of {n} districts; in the other {over}, more Muslim-name electors were removed than the 2011 population share would predict, even counting none of the unclassified names. Most of those gaps are within the {growth}-point statewide rise in the Muslim share since 2011. <b>In {clear} districts they are not:</b> {list}. All {clear} lie in south and central Bihar, where Muslims are a small minority; there the lowest estimate runs {rmin} to {rmax}% above the population share. Muslims in Bihar are younger than average, so their share of <em>electors</em> is below their share of population, which would widen these gaps rather than close them. Migration into Patna and errors in name classification could narrow them.', { lo: SIR.pct(lo), hi: SIR.pct(hi), inside: inside.length, n: D.length, over: over.length, growth: SIR.d(growth, 2), clear: clear.length, list: clear.map(function (d) { return L('{d} ({lo} at least, against {pop})', { d: d.district, lo: SIR.pct(d.muslim_share_deleted_low), pop: SIR.pct(d.muslim_share_population_2011) }); }).join(', '), rmin: Math.round(100 * (Math.min.apply(null, rr) - 1)), rmax: Math.round(100 * (Math.max.apply(null, rr) - 1)) });
 
   // ---- caste
   var C = id.caste, who = 'guardian', GR = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'], charts = {};
+  var GL = { General: L('General'), Muslim: L('Muslim') }, gl = function (g) { return GL[g] || g; };
   function drawCaste() {
     var c = C[who];
     [charts.cover, charts.comp, charts.bounds].forEach(function (x) { if (x) x.destroy(); });
     SIR.charts = SIR.charts.filter(function (x) { return [charts.cover, charts.comp, charts.bounds].indexOf(x) < 0; });
-    charts.cover = SIR.chart('cCover', { type: 'bar', data: { labels: ['A: project mapping', 'B: strict'], datasets: [
-        { label: 'Placed in a group', data: [c.A.coverage_pct, c.B.coverage_pct], $token: '--fill-navy' },
-        { label: 'Spans groups', data: [c.A.cross_pct, c.B.cross_pct], $token: '--fill-amber' },
-        { label: 'No caste information (Devi, Kumar…)', data: [c.A.no_information_pct, c.B.no_information_pct], $token: '--fill-grey' },
-        { label: 'Not in either list', data: [c.A.unmatched_pct, c.B.unmatched_pct], $token: '--fill-other' }] },
-      options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of all removals' } }, y: { stacked: true } } } });
-    charts.comp = SIR.chart('cComp', { type: 'bar', data: { labels: GR, datasets: [
-        { label: 'A: project mapping', data: GR.map(function (g) { return c.A.groups[g].share_of_classified; }), $token: '--fill-other' },
-        { label: 'B: strict', data: GR.map(function (g) { return c.B.groups[g].share_of_classified; }), $token: '--fill-navy' },
-        { label: '2023 survey', data: GR.map(function (g) { return c.B.groups[g].survey_share; }), $token: '--fill-grey' }] },
-      options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% of classified removals' } } } } });
-    charts.bounds = SIR.chart('cBounds', { type: 'bar', data: { labels: GR, datasets: [
-        { label: 'Share of all removals, B (low to high)', data: GR.map(function (g) { return [c.B.groups[g].share_low, c.B.groups[g].share_high]; }), $token: '--fill-navy' }] },
-      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { min: 0, max: 100, title: { display: true, text: '% of all removals' } } } } });
+    charts.cover = SIR.chart('cCover', { type: 'bar', data: { labels: [L('A: project mapping'), L('B: strict')], datasets: [
+        { label: L('Placed in a group'), data: [c.A.coverage_pct, c.B.coverage_pct], $token: '--fill-navy' },
+        { label: L('Spans groups'), data: [c.A.cross_pct, c.B.cross_pct], $token: '--fill-amber' },
+        { label: L('No caste information (Devi, Kumar…)'), data: [c.A.no_information_pct, c.B.no_information_pct], $token: '--fill-grey' },
+        { label: L('Not in either list'), data: [c.A.unmatched_pct, c.B.unmatched_pct], $token: '--fill-other' }] },
+      options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: L('% of all removals') } }, y: { stacked: true } } } });
+    charts.comp = SIR.chart('cComp', { type: 'bar', data: { labels: GR.map(gl), datasets: [
+        { label: L('A: project mapping'), data: GR.map(function (g) { return c.A.groups[g].share_of_classified; }), $token: '--fill-other' },
+        { label: L('B: strict'), data: GR.map(function (g) { return c.B.groups[g].share_of_classified; }), $token: '--fill-navy' },
+        { label: L('2023 survey'), data: GR.map(function (g) { return c.B.groups[g].survey_share; }), $token: '--fill-grey' }] },
+      options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% of classified removals') } } } } });
+    charts.bounds = SIR.chart('cBounds', { type: 'bar', data: { labels: GR.map(gl), datasets: [
+        { label: L('Share of all removals, B (low to high)'), data: GR.map(function (g) { return [c.B.groups[g].share_low, c.B.groups[g].share_high]; }), $token: '--fill-navy' }] },
+      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { min: 0, max: 100, title: { display: true, text: L('% of all removals') } } } } });
     SIR.table(document.getElementById('tSur'), [
-      { k: 'surname', label: 'Surname (as romanised in the lists)', left: true }, { k: 'deleted', label: 'Removed', fmt: SIR.n },
-      { k: 'mapping', label: 'A: project mapping', left: true }, { k: 'strict', label: 'B: strict', left: true }
-    ], c.top_surnames.map(function (x) { var nm = { none: 'no caste information', cross: 'spans groups', unmatched: 'not listed' }; return { surname: x.surname, deleted: x.deleted, mapping: nm[x.mapping] || x.mapping, strict: nm[x.strict] || x.strict }; }), { sort: 'deleted' });
+      { k: 'surname', label: L('Surname (as romanised in the lists)'), left: true }, { k: 'deleted', label: L('Removed'), fmt: SIR.n },
+      { k: 'mapping', label: L('A: project mapping'), left: true }, { k: 'strict', label: L('B: strict'), left: true }
+    ], c.top_surnames.map(function (x) { var nm = { none: L('no caste information'), cross: L('spans groups'), unmatched: L('not listed') }; return { surname: x.surname, deleted: x.deleted, mapping: nm[x.mapping] || x.mapping, strict: nm[x.strict] || x.strict }; }), { sort: 'deleted' });
     document.getElementById('fCaste').innerHTML = (function () {
       var gs = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'], up = [], down = [], split = [];
       gs.forEach(function (g) { var a = c.A.groups[g].ratio_to_survey, b = c.B.groups[g].ratio_to_survey; (a >= 1 && b >= 1 ? up : a < 1 && b < 1 ? down : split).push(g); });
-      var ratio = function (g) { return g + ' (' + SIR.d(c.A.groups[g].ratio_to_survey, 2) + ' and ' + SIR.d(c.B.groups[g].ratio_to_survey, 2) + ')'; };
-      return '<b>Under both classifications, ' + up.join(' and ') + ' families are removed at or above their share of Bihar\'s population, and ' + down.join(' and ') + ' families below it.</b> Using ' + (who === 'guardian' ? 'guardians\'' : 'electors\' own') + ' surnames, the ratios to the 2023 survey share, under A and then B, are: ' + up.concat(down).map(ratio).join('; ') + '.' +
-        (split.length ? ' The two classifications disagree on ' + split.map(ratio).join('; ') + ', so no reading is offered for ' + (split.length > 1 ? 'those groups' : 'that group') + '.' : '') +
-        ' Surnames that span several castes cannot be placed, so these are shares of the removals each classification could place: ' + SIR.pct(c.A.coverage_pct, 0) + ' under A and ' + SIR.pct(c.B.coverage_pct, 0) + ' under B.';
+      var ratio = function (g) { return L('{g} ({a} and {b})', { g: gl(g), a: SIR.d(c.A.groups[g].ratio_to_survey, 2), b: SIR.d(c.B.groups[g].ratio_to_survey, 2) }); };
+      var and = function (list) { return list.map(gl).reduce(function (acc, g, i) { return i ? L('{a} and {b}', { a: acc, b: g }) : g; }, ''); };
+      var ratios = up.concat(down).map(ratio).join('; ');
+      return L('<b>Under both classifications, {up} families are removed at or above their share of Bihar\'s population, and {down} families below it.</b>', { up: and(up), down: and(down) }) + ' ' +
+        (who === 'guardian' ? L('Using guardians\' surnames, the ratios to the 2023 survey share, under A and then B, are: {ratios}.', { ratios: ratios }) : L('Using electors\' own surnames, the ratios to the 2023 survey share, under A and then B, are: {ratios}.', { ratios: ratios })) +
+        (split.length ? ' ' + (split.length > 1 ? L('The two classifications disagree on {list}, so no reading is offered for those groups.', { list: split.map(ratio).join('; ') }) : L('The two classifications disagree on {list}, so no reading is offered for that group.', { list: split.map(ratio).join('; ') })) : '') +
+        ' ' + L('Surnames that span several castes cannot be placed, so these are shares of the removals each classification could place: {a} under A and {b} under B.', { a: SIR.pct(c.A.coverage_pct, 0), b: SIR.pct(c.B.coverage_pct, 0) });
     })();
   }
   drawCaste();
