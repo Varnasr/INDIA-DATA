@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bihar SIR 2025: deletion explorer</title>
-<meta name="description" content="Every name Bihar's Special Intensive Revision struck off the roll, down to the polling booth, set against who led each booth in the 2024 Lok Sabha election and who won each seat in 2025. Aggregates only; no names.">
+<meta name="description" content="Every name Bihar's Special Intensive Revision struck off the roll, down to the polling booth, set against the margins by which each seat was won. Aggregates only; no names.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 23V12M14 23V9M20 23v-7M26 23v-4' stroke='white' stroke-width='2.6' fill='none' stroke-linecap='round'/><path d='M6 26h20' stroke='%23c0504d' stroke-width='2.6' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="../assets/sir.css">
 </head>
@@ -12,9 +12,9 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site">
   <div class="brand"><span class="crumbs"><a class="home" href="../">SIR analyses</a> · <a class="home" href="../hyderabad/">Hyderabad Old City 2026</a></span><button class="theme" type="button">Dark theme</button></div>
-  <h1>Bihar SIR 2025: who was struck off, where, and on whose ground</h1>
-  <p class="lede">Every name the Special Intensive Revision removed from Bihar's roll, in both phases, down to the polling booth, set against the party that led each booth in the 2024 Lok Sabha election and the alliance that won each seat in 2025. Start with the whole state, or choose a constituency.</p>
-  <nav class="sub" aria-label="Bihar"><a href="./" aria-current="page">Explorer</a><a href="results/">Elections</a><a href="people/">Women, religion, caste</a><a href="border/">Border</a><a href="districts/">Districts</a><a href="method/">Method</a></nav>
+  <h1>Bihar SIR 2025: 69 lakh names struck off, booth by booth</h1>
+  <p class="lede">Every name the Special Intensive Revision removed from Bihar's roll, in both phases, down to the polling booth, and set against the margins by which each seat was won. Start with the whole state, or choose a constituency.</p>
+  <nav class="sub" aria-label="Bihar"><a href="./" aria-current="page">Explorer</a><a href="results/">Elections</a><a href="people/">Women, religion, caste</a><a href="border/">Border</a><a href="districts/">Districts</a><a href="faq/">FAQ</a><a href="method/">Method</a></nav>
 </header>
 <div class="xp">
 <aside aria-label="Constituencies">
@@ -28,17 +28,17 @@
   <h2 id="title"></h2>
   <p class="sub" id="sub"></p>
   <div class="fate" id="fate" role="img"></div>
-  <div class="fatekey"><span><i style="background:var(--fill-nda)"></i>Removed from NDA-led booths</span><span><i style="background:#1f6f43"></i>INDIA-led booths</span><span><i style="background:var(--fill-other)"></i>Other-led booths</span><span><i style="background:var(--fill-grey)"></i>No 2024 result for the booth</span></div>
+  <div class="fatekey"><span><i style="background:var(--fill-red)"></i>Removed in phase 1</span><span><i style="background:#7a1f1c"></i>Removed in phase 2</span><span><i style="background:var(--fill-navy)"></i>On the 2025 roll</span></div>
   <div class="kpis" id="kpis"></div>
   <div id="claimsWrap"><h2 style="font-size:22px">What the lists show</h2><ul class="claims" id="claims"></ul></div>
   <div class="grid">
-    <div class="panel"><h3 id="p1t"></h3><p id="p1p"></p><div class="chart"><canvas id="c1" aria-label="Booths by the number of names they lost"></canvas></div></div>
-    <div class="panel"><h3>Names removed per booth, by who led it in 2024</h3><p id="p2p"></p><div class="chart"><canvas id="c2" aria-label="Mean names removed per booth by 2024 leader"></canvas></div></div>
+    <div class="panel"><h3>How many names each booth lost</h3><p id="p1p"></p><div class="chart"><canvas id="c1" aria-label="Booths by the number of names they lost"></canvas></div></div>
+    <div class="panel"><h3 id="p2t"></h3><p id="p2p"></p><div class="chart"><canvas id="c2" aria-label="Names removed against winning margins"></canvas></div></div>
     <div class="panel"><h3>Who was removed</h3><p>Women, and the religion the booth lists assign from each name. Unclassified names could belong to either.</p><div class="chart"><canvas id="c3" aria-label="Share of removals by sex and name-classified religion"></canvas></div></div>
-    <div class="panel"><h3 id="p4t"></h3><p id="p4p"></p><div class="chart"><canvas id="c4" aria-label="Share of booths led by each alliance, by names removed"></canvas></div></div>
+    <div class="panel"><h3 id="p4t"></h3><p id="p4p"></p><div class="chart"><canvas id="c4" aria-label="Distribution of removals"></canvas></div></div>
     <div class="panel wide"><h3 id="tblTitle"></h3><p>Click a column to sort, a row to open it.</p><div class="twrap" tabindex="0" role="region" aria-labelledby="tblTitle"><table id="tbl"></table></div></div>
   </div>
-  <p class="note">Removals: the Chief Electoral Officer's SIR deletion lists, phase 1 against the draft roll of 1 August 2025 and phase 2 before the final roll. Booth figures are phase 1, the only phase listed by booth; constituency figures add phase 2. Per 100 electors divides by the constituency's 2025 electorate. The 2024 booth leader is the party with most votes in the booth on Form 20; the 2025 winner is the declared result. NDA is BJP, JD(U), LJP(RV), HAM(S) and RLM; INDIA is RJD, INC, the Left parties, VIP and IIP. Aggregates only; no names or EPIC numbers. <a href="method/">How the figures are built</a>.</p>
+  <p class="note">Removals: the Chief Electoral Officer's SIR deletion lists, phase 1 against the draft roll of 1 August 2025 and phase 2 before the final roll. Booth figures are phase 1, the only phase listed by booth; constituency figures add phase 2. Per 100 electors divides by the constituency's 2025 electorate. Margins are the declared 2025 Assembly results. NDA is BJP, JD(U), LJP(RV), HAM(S) and RLM; INDIA is RJD, INC, the Left parties, VIP and IIP. Aggregates only; no names or EPIC numbers. <a href="faq/">FAQ</a> · <a href="method/">Method</a>.</p>
 </main>
 </div>
 <footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
@@ -48,7 +48,6 @@
 Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/identity.json')]).then(function (r) {
   var s = r[0], acs = r[1], idn = r[2], t = s.totals, byAc = {}, cache = {};
   acs.forEach(function (a) { byAc[a.ac] = a; });
-  var within = {}; s.within_seat_2024.seats.forEach(function (w) { within[w.ac] = w; });
   function col(v) { return v < 7 ? '#c9d6e3' : v < 10 ? '#7fa1c0' : v < 13 ? '#c0504d' : '#7a1f1c'; }
   function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' : '–'; }
   function relShare(h, m, u) { var n = h + m + u; return { lo: 100 * m / n, hi: 100 * (m + u) / n, hin: 100 * h / n, unk: 100 * u / n }; }
@@ -65,30 +64,37 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     strip.querySelectorAll('button').forEach(function (b) { var a = byAc[b.getAttribute('data-ac')]; b.classList.toggle('dim', !!q && (a.name + ' ' + a.district + ' ' + a.ac).toLowerCase().indexOf(q) < 0); });
   });
 
-  function fate(nda, india, other, none) {
-    var tot = nda + india + other + none, parts = [[nda, 'var(--fill-nda)', '#1c1c1c'], [india, '#1f6f43', '#ffffff'], [other, 'var(--fill-other)', '#16112a'], [none, 'var(--fill-grey)', '#1c1c1c']];
+  function fate(p1, p2, roll) {
+    var tot = p1 + p2 + roll, parts = [[p1, 'var(--fill-red)', '#ffffff', 'Phase 1'], [p2, '#7a1f1c', '#ffffff', 'Phase 2'], [roll, 'var(--fill-navy)', '#ffffff', 'On the roll']];
     var el = document.getElementById('fate');
-    el.innerHTML = parts.map(function (p) { var w = 100 * p[0] / tot; return w > 0 ? '<div style="width:' + w + '%;background:' + p[1] + ';color:' + p[2] + '">' + (w > 9 ? SIR.n(p[0]) + ' (' + SIR.d(w, 1) + '%)' : '') + '</div>' : ''; }).join('');
-    el.setAttribute('aria-label', 'Removals by 2024 booth leader: NDA-led ' + SIR.n(nda) + ', INDIA-led ' + SIR.n(india) + ', Other-led ' + SIR.n(other) + ', no result ' + SIR.n(none));
+    el.innerHTML = parts.map(function (p) { var w = 100 * p[0] / tot; return w > 0 ? '<div style="width:' + w + '%;background:' + p[1] + ';color:' + p[2] + '">' + (w > 14 ? SIR.n(p[0]) + ' (' + SIR.d(w, 1) + '%)' : w > 4 ? SIR.d(w, 1) + '%' : '') + '</div>' : ''; }).join('');
+    el.setAttribute('aria-label', 'Removed in phase 1 ' + SIR.n(p1) + ', removed in phase 2 ' + SIR.n(p2) + ', on the 2025 roll ' + SIR.n(roll));
   }
   function kpis(k) { document.getElementById('kpis').innerHTML = k.map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join(''); }
   function select(ac) {
     strip.querySelectorAll('button').forEach(function (b) { b.classList.toggle('sel', +b.getAttribute('data-ac') === ac); });
     list.querySelectorAll('button').forEach(function (b) { b.classList.toggle('sel', +b.getAttribute('data-ac') === ac); });
   }
+  function who(fem, rel) {
+    SIR.redraw('c3', { type: 'bar', data: { labels: ['Women', 'Hindu names', 'Muslim names', 'Unclassified'], datasets: [{ label: '% of removed', data: [fem, rel.hin, rel.lo, rel.unk], $tokens: ['--female', '--fill-amber', '--fill-india', '--fill-grey'] }] },
+      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, max: 100, title: { display: true, text: '% of those removed' } } } } });
+  }
 
   // ------------------------------------------------------- all Bihar
-  var L = s.by_alliance_label, W = s.within_seat_2024, I = s.intensity, B = s.by_booth_leader_2024;
-  var marginSeats = acs.filter(function (a) { return a.margin2025 != null && a.total > a.margin2025; }).length;
-  var dz = idn.districts, over = dz.filter(function (d) { return d.female_share_deleted > d.female_share_population_2011; });
+  var withM = acs.filter(function (a) { return a.margin2025; });
+  var overAll = withM.filter(function (a) { return a.total > a.margin2025; });
+  var nda = withM.filter(function (a) { return a.al2025 === 'NDA'; }), ndaOver = nda.filter(function (a) { return a.total > a.margin2025; });
+  var took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; }), tookOver = took.filter(function (a) { return a.total > a.margin2025; });
+  var tookMed = SIR.median(took.map(function (a) { return a.total / a.margin2025; }));
+  var dz = idn.districts, fOver = dz.filter(function (d) { return d.female_share_deleted > d.female_share_population_2011; });
   var gap = dz.map(function (d) { return d.female_share_deleted - d.female_share_population_2011; });
-  var first = I.bins[0], last = I.bins[I.bins.length - 1], f1 = I.within_seat_fifths[0], f5 = I.within_seat_fifths[4];
+  var b200 = SIR.sum(acs, 'booths_200'), I = s.intensity, b400 = I.bins[I.bins.length - 1].booths;
   var claims = [
-    [SIR.d(L['2025'].NDA.per_100, 2), 'names removed per 100 electors in seats the NDA won in 2025, against ' + SIR.d(L['2025'].INDIA.per_100, 2) + ' in seats INDIA won. The gap holds whichever election labels the seat: ' + SIR.d(L['2024'].NDA.per_100, 2) + ' against ' + SIR.d(L['2024'].INDIA.per_100, 2) + ' by the 2024 Lok Sabha leader, ' + SIR.d(L['2020'].NDA.per_100, 2) + ' against ' + SIR.d(L['2020'].INDIA.per_100, 2) + ' by the 2020 winner.'],
-    ['+' + SIR.d(W.pooled_nda_minus_india, 1), 'more names removed from each NDA-led booth than from an INDIA-led booth in the same constituency, where the officers, the villages and the migration are shared. NDA-led booths lost more in ' + W.seats_nda_higher + ' of the ' + W.seats_compared + ' seats with enough of both.'],
-    [SIR.d(last.nda_pct, 0) + '%', 'of the booths that lost 400 names or more were NDA-led in 2024, against ' + SIR.d(first.nda_pct, 0) + '% of booths that lost under 50. Ranked inside their own seat, the heaviest fifth of booths was ' + SIR.d(f5.nda_pct, 1) + '% NDA-led and the lightest fifth ' + SIR.d(f1.nda_pct, 1) + '%.'],
-    [SIR.pct(100 * t.female / (t.female + t.male)), 'of those removed were women. Women\'s share of the removed exceeds their share of the population in ' + over.length + ' of ' + dz.length + ' districts, by up to ' + SIR.d(Math.max.apply(null, gap), 1) + ' points.'],
-    [marginSeats + ' of ' + acs.length, 'seats lost more names in the revision than the 2025 winner\'s margin of victory.']
+    [SIR.lakh(t.total), 'names removed from Bihar\'s roll: ' + SIR.n(t.p1) + ' before the draft roll of 1 August 2025 and ' + SIR.n(t.p2) + ' more before the final roll. That is ' + SIR.d(100 * t.total / t.electorate_2025, 2) + ' for every 100 electors on the 2025 roll, and as many as ' + SIR.d(Math.max.apply(null, acs.map(function (a) { return a.per_100; })), 1) + ' in a single constituency.'],
+    [overAll.length + ' of ' + withM.length, 'constituencies lost more names in the revision than the margin by which they were won in 2025. That includes ' + ndaOver.length + ' of the ' + nda.length + ' seats the NDA won.'],
+    [tookOver.length + ' of ' + took.length, 'seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA\'s winning margin. In the median such seat, the removals were ' + SIR.d(tookMed, 1) + ' times the margin.'],
+    [SIR.pct(100 * t.female / (t.female + t.male)), 'of those removed were women, against 47.86% of Bihar\'s population. Women\'s share of the removed exceeds their share of the population in ' + fOver.length + ' of ' + dz.length + ' districts, by up to ' + SIR.d(Math.max.apply(null, gap), 1) + ' points.'],
+    [SIR.n(b200), 'polling booths lost more than 200 names each, and ' + SIR.n(b400) + ' lost 400 or more.']
   ];
   document.getElementById('claims').innerHTML = claims.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join('');
 
@@ -97,44 +103,36 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     document.getElementById('claimsWrap').hidden = false;
     document.getElementById('crumb').textContent = 'Whole state';
     document.getElementById('title').textContent = 'All Bihar, 243 constituencies';
-    var nda = acs.reduce(function (x, a) { return x + a.del_nda; }, 0), ind = acs.reduce(function (x, a) { return x + a.del_india; }, 0), oth = acs.reduce(function (x, a) { return x + a.del_other; }, 0);
-    document.getElementById('sub').textContent = SIR.n(t.total) + ' names removed across both phases, ' + SIR.d(100 * t.total / t.electorate_2025, 2) + ' for every 100 electors on the 2025 roll. The bar splits the ' + SIR.n(t.p1) + ' phase 1 removals by the alliance that led each booth in 2024: NDA led ' + SIR.pct(100 * B.NDA.booths / (B.NDA.booths + B.INDIA.booths + B.Other.booths)) + ' of booths and ' + SIR.pct(100 * nda / t.p1) + ' of the removals came from them.';
-    fate(nda, ind, oth, t.p1 - nda - ind - oth);
+    document.getElementById('sub').textContent = SIR.n(t.total) + ' names removed across both phases, set beside the ' + SIR.n(t.electorate_2025) + ' electors on the 2025 roll.';
+    fate(t.p1, t.p2, t.electorate_2025);
     var rel = relShare(t.hindu, t.muslim, t.unknown);
     kpis([[SIR.n(t.total), 'names removed, both phases'], [SIR.d(100 * t.total / t.electorate_2025, 2), 'per 100 electors on the 2025 roll'],
       [SIR.pct(100 * t.female / (t.female + t.male)), 'of the removed are women'], [SIR.pct(rel.lo) + ' to ' + SIR.pct(rel.hi), 'Muslim names among the removed, by name classification'],
-      [SIR.n(t.booths), 'polling booths'], [SIR.d(B.NDA.mean, 1) + ' vs ' + SIR.d(B.INDIA.mean, 1), 'names per NDA-led and INDIA-led booth']]);
+      [overAll.length + ' of ' + withM.length, 'seats lost more names than their 2025 margin'], [SIR.n(t.booths), 'polling booths']]);
     var hk = Object.keys(s.booth_histogram);
-    document.getElementById('p1t').textContent = 'How many names each booth lost';
-    document.getElementById('p1p').textContent = 'Booths by the number of names removed in phase 1. Most lost under a hundred; ' + SIR.n(acs.reduce(function (x, a) { return x + a.booths_200; }, 0)) + ' lost more than 200.';
+    document.getElementById('p1p').textContent = 'Booths by the number of names removed in phase 1. Most lost under a hundred; ' + SIR.n(b200) + ' lost more than 200.';
     SIR.redraw('c1', { type: 'bar', data: { labels: hk, datasets: [{ label: 'Booths', data: hk.map(function (k) { return s.booth_histogram[k]; }), $token: '--fill-navy' }] },
       options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Names removed in the booth' } }, y: { title: { display: true, text: 'Booths' } } } } });
-    document.getElementById('p2p').textContent = 'Mean phase 1 removals per booth, statewide.';
-    leaders(B.NDA.mean, B.INDIA.mean, B.Other.mean);
+    var cuts = [0, 1, 2, 5, 10, 20, Infinity], lab = ['under 1×', '1 to 2×', '2 to 5×', '5 to 10×', '10 to 20×', '20× or more'];
+    var ratio = withM.map(function (a) { return a.total / a.margin2025; });
+    document.getElementById('p2t').textContent = 'Removals against the 2025 margin';
+    document.getElementById('p2p').textContent = 'Constituencies by names removed as a multiple of the 2025 winning margin.';
+    SIR.redraw('c2', { type: 'bar', data: { labels: lab, datasets: [{ label: 'Constituencies', data: lab.map(function (l, i) { return ratio.filter(function (x) { return x >= cuts[i] && x < cuts[i + 1]; }).length; }), $tokens: lab.map(function (l, i) { return i === 0 ? '--fill-grey' : '--fill-red'; }) }] },
+      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Names removed ÷ winning margin' } }, y: { beginAtZero: true, title: { display: true, text: 'Constituencies' } } } } });
     who(100 * t.female / (t.female + t.male), rel);
-    document.getElementById('p4t').textContent = 'The more names a booth lost, the more often the NDA led it';
-    document.getElementById('p4p').textContent = 'Share of booths led by each alliance in 2024, grouped by names removed.';
-    SIR.redraw('c4', { type: 'bar', data: { labels: I.bins.map(function (b) { return b.bin; }), datasets: [
-        { label: 'NDA-led', data: I.bins.map(function (b) { return b.nda_pct; }), $token: '--fill-nda' },
-        { label: 'INDIA-led', data: I.bins.map(function (b) { return b.india_pct; }), $token: '--fill-india' },
-        { label: 'Other', data: I.bins.map(function (b) { return b.other_pct; }), $token: '--fill-other' }] },
-      options: { scales: { x: { stacked: true, title: { display: true, text: 'Names removed in the booth' } }, y: { stacked: true, max: 100, title: { display: true, text: '% of booths' } } } } });
+    var rc = [4, 6, 8, 10, 12, 14, 16, 25], rl = ['4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16+'];
+    document.getElementById('p4t').textContent = 'Constituencies by removals per 100 electors';
+    document.getElementById('p4p').textContent = 'How the 243 constituencies are spread, from the lightest to the heaviest removals.';
+    SIR.redraw('c4', { type: 'bar', data: { labels: rl, datasets: [{ label: 'Constituencies', data: rl.map(function (l, i) { return acs.filter(function (a) { return a.per_100 >= rc[i] && a.per_100 < rc[i + 1]; }).length; }), $token: '--fill-red' }] },
+      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Removed per 100 electors' } }, y: { beginAtZero: true, title: { display: true, text: 'Constituencies' } } } } });
     document.getElementById('tblTitle').textContent = 'All 243 constituencies';
     SIR.table(document.getElementById('tbl'), [
       { k: 'name', label: 'Constituency', left: true, fmt: function (v, a) { return SIR.esc(a.ac + ' ' + v); } }, { k: 'district', label: 'District', left: true },
       { k: 'total', label: 'Removed', fmt: SIR.n }, { k: 'per_100', label: 'Per 100', fmt: function (v) { return SIR.d(v, 2); } },
-      { k: 'fem', label: 'Women %', fmt: function (v) { return SIR.d(v, 1); } }, { k: 'al2024', label: '2024 leader', fmt: tag }, { k: 'al2025', label: '2025 winner', fmt: tag },
+      { k: 'fem', label: 'Women %', fmt: function (v) { return SIR.d(v, 1); } }, { k: 'win2025', label: '2025 winner', left: true, fmt: function (v, a) { return SIR.esc(v) + ' ' + tag(a.al2025); } },
       { k: 'margin2025', label: '2025 margin', fmt: SIR.n }, { k: 'xm', label: 'Removed ÷ margin', fmt: function (v) { return SIR.d(v, 1); } }],
       acs.map(function (a) { return Object.assign({}, a, { fem: 100 * a.t_f / (a.t_f + a.t_m), xm: a.margin2025 ? a.total / a.margin2025 : null }); }),
-      { sort: 'per_100', id: 'ac', onRow: function (id) { go(+id); } });
-  }
-  function leaders(nda, india, other) {
-    SIR.redraw('c2', { type: 'bar', data: { labels: ['NDA-led', 'INDIA-led', 'Other-led'], datasets: [{ label: 'Names per booth', data: [nda, india, other], $tokens: ['--fill-nda', '--fill-india', '--fill-other'] }] },
-      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: 'Mean names removed per booth' } } } } });
-  }
-  function who(fem, rel) {
-    SIR.redraw('c3', { type: 'bar', data: { labels: ['Women', 'Hindu names', 'Muslim names', 'Unclassified'], datasets: [{ label: '% of removed', data: [fem, rel.hin, rel.lo, rel.unk], $tokens: ['--female', '--fill-amber', '--fill-india', '--fill-grey'] }] },
-      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, max: 100, title: { display: true, text: '% of those removed' } } } } });
+      { sort: 'xm', id: 'ac', onRow: function (id) { go(+id); } });
   }
 
   // --------------------------------------------------------- one seat
@@ -144,49 +142,41 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     document.getElementById('crumb').innerHTML = '<button type="button" id="back">All Bihar</button> › ' + SIR.esc(a.district);
     document.getElementById('back').addEventListener('click', function () { go(0); });
     document.getElementById('title').textContent = a.ac + ' ' + a.name + (a.reserved !== 'GEN' ? ' (' + a.reserved + ')' : '');
-    var nda = a.booths_nda, ind = a.booths_india, oth = a.booths_other, nb = nda + ind + oth;
-    document.getElementById('sub').innerHTML = SIR.esc(a.district) + ' district, ' + SIR.esc(a.pc) + ' Lok Sabha seat, ' + SIR.n(a.booths) + ' booths. ' + SIR.n(a.total) + ' names removed, ' + SIR.d(a.per_100, 2) + ' per 100 electors. Won in 2025 by ' + SIR.esc(a.win2025) + ' ' + tag(a.al2025) + (a.margin2025 != null ? ' by ' + SIR.n(a.margin2025) + ' votes' : '') + '. NDA led ' + SIR.pct(100 * nda / nb) + ' of its booths in 2024, and those booths lost ' + SIR.pct(100 * a.del_nda / a.p1) + ' of its phase 1 removals.';
-    fate(a.del_nda, a.del_india, a.del_other, a.p1 - a.del_nda - a.del_india - a.del_other);
-    var rel = relShare(a.hindu, a.muslim, a.unknown), w = within[a.ac];
+    document.getElementById('sub').innerHTML = SIR.esc(a.district) + ' district, ' + SIR.esc(a.pc) + ' Lok Sabha seat, ' + SIR.n(a.booths) + ' booths. ' + SIR.n(a.total) + ' names removed, ' + SIR.d(a.per_100, 2) + ' per 100 electors. Won in 2025 by ' + SIR.esc(a.win2025) + ' ' + tag(a.al2025) + (a.margin2025 != null ? ' by ' + SIR.n(a.margin2025) + ' votes' + (a.total > a.margin2025 ? '; ' + SIR.d(a.total / a.margin2025, 1) + ' times as many names were removed' : '') : '') + '.';
+    fate(a.p1, a.p2, a.electorate_2025);
+    var rel = relShare(a.hindu, a.muslim, a.unknown);
     kpis([[SIR.n(a.total), 'names removed, both phases'], [SIR.d(a.per_100, 2), 'per 100 electors on the 2025 roll'],
       [SIR.pct(100 * a.t_f / (a.t_f + a.t_m)), 'of the removed are women'], [SIR.pct(rel.lo) + ' to ' + SIR.pct(rel.hi), 'Muslim names among the removed'],
       [SIR.d(a.per_booth, 1), 'names per booth; ' + a.booths_200 + ' booths lost over 200'],
-      [a.margin2025 ? SIR.d(a.total / a.margin2025, 1) + '×' : '–', 'the 2025 winning margin'],
-      [w ? (w.diff > 0 ? '+' : '') + SIR.d(w.diff, 1) : '–', w ? 'names per NDA-led booth, minus per INDIA-led booth, in this seat' : 'too few booths of one alliance to compare']]);
+      [a.margin2025 ? SIR.d(a.total / a.margin2025, 1) + '×' : '–', 'the 2025 winning margin']]);
     var edges = [0, 50, 100, 150, 200, 250, 300, 400, Infinity], lab = ['0-49', '50-99', '100-149', '150-199', '200-249', '250-299', '300-399', '400+'];
-    var hist = lab.map(function (l, i) { return rows.filter(function (b) { return b.deleted >= edges[i] && b.deleted < edges[i + 1]; }).length; });
-    document.getElementById('p1t').textContent = 'How many names each booth lost';
     document.getElementById('p1p').textContent = 'Booths in ' + a.name + ' by the number of names removed in phase 1.';
-    SIR.redraw('c1', { type: 'bar', data: { labels: lab, datasets: [{ label: 'Booths', data: hist, $token: '--fill-navy' }] },
+    SIR.redraw('c1', { type: 'bar', data: { labels: lab, datasets: [{ label: 'Booths', data: lab.map(function (l, i) { return rows.filter(function (b) { return b.deleted >= edges[i] && b.deleted < edges[i + 1]; }).length; }), $token: '--fill-navy' }] },
       options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Names removed in the booth' } }, y: { beginAtZero: true, title: { display: true, text: 'Booths' } } } } });
-    var g = SIR.groupBy(rows.filter(function (b) { return b.al; }), 'al'), mean = function (k) { return g[k] ? SIR.mean(g[k].map(function (b) { return b.deleted; })) : null; };
-    document.getElementById('p2p').textContent = 'Mean phase 1 removals per booth in this seat.';
-    leaders(mean('NDA'), mean('INDIA'), mean('Other'));
+    document.getElementById('p2t').textContent = 'Names removed against the margins';
+    document.getElementById('p2p').textContent = 'Names removed in both phases, beside the winning margins in 2020 and 2025.';
+    SIR.redraw('c2', { type: 'bar', data: { labels: ['Names removed', '2025 margin', '2020 margin'], datasets: [{ label: 'Names or votes', data: [a.total, a.margin2025, a.margin2020], $tokens: ['--fill-red', '--fill-navy', '--fill-grey'] }] },
+      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: 'Names or votes' } } } } });
     who(100 * a.t_f / (a.t_f + a.t_m), rel);
-    var led = rows.filter(function (b) { return b.al; }).sort(function (x, y) { return x.deleted - y.deleted; }), n = led.length, q = [0, 1, 2, 3, 4].map(function (i) { return led.slice(Math.floor(i * n / 5), Math.floor((i + 1) * n / 5)); });
-    document.getElementById('p4t').textContent = 'Booths from fewest to most names removed';
-    document.getElementById('p4p').textContent = 'This seat\'s booths in five equal groups by names removed, and the alliance that led each group in 2024.';
-    var sh = function (grp, k) { return grp.length ? 100 * grp.filter(function (b) { return b.al === k; }).length / grp.length : null; };
-    SIR.redraw('c4', { type: 'bar', data: { labels: ['Lightest fifth', 'Second', 'Middle', 'Fourth', 'Heaviest fifth'], datasets: [
-        { label: 'NDA-led', data: q.map(function (x) { return sh(x, 'NDA'); }), $token: '--fill-nda' },
-        { label: 'INDIA-led', data: q.map(function (x) { return sh(x, 'INDIA'); }), $token: '--fill-india' },
-        { label: 'Other', data: q.map(function (x) { return sh(x, 'Other'); }), $token: '--fill-other' }] },
-      options: { scales: { x: { stacked: true }, y: { stacked: true, max: 100, title: { display: true, text: '% of booths' } } } } });
+    var sorted = rows.slice().sort(function (x, y) { return y.deleted - x.deleted; });
+    document.getElementById('p4t').textContent = 'Every booth, from most to fewest names removed';
+    document.getElementById('p4p').textContent = 'Each bar is one booth in ' + a.name + '. Open the table below for booth numbers.';
+    SIR.redraw('c4', { type: 'bar', data: { labels: sorted.map(function (b) { return 'Booth ' + b.booth; }), datasets: [{ label: 'Names removed', data: sorted.map(function (b) { return b.deleted; }), $token: '--fill-red', barPercentage: 1, categoryPercentage: 1 }] },
+      options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { display: false }, grid: { display: false } }, y: { beginAtZero: true, title: { display: true, text: 'Names removed' } } } } });
     document.getElementById('tblTitle').textContent = 'All ' + rows.length + ' booths in ' + a.name;
     SIR.table(document.getElementById('tbl'), [
       { k: 'booth', label: 'Booth', left: true }, { k: 'deleted', label: 'Removed', fmt: SIR.n }, { k: 'female', label: 'Women', fmt: SIR.n },
-      { k: 'muslim', label: 'Muslim names', fmt: SIR.n }, { k: 'lead2024', label: '2024 leader', left: true, fmt: function (v, b) { return v ? SIR.esc(v) + ' ' + tag(b.al) : '–'; } },
+      { k: 'muslim', label: 'Muslim names', fmt: SIR.n }, { k: 'lead2024', label: '2024 leader', left: true, fmt: function (v) { return v ? SIR.esc(v) : '–'; } },
       { k: 'lead_margin_pp', label: 'Lead, points', fmt: function (v) { return SIR.d(v, 1); } }], rows, { sort: 'deleted' });
     document.getElementById('main').scrollIntoView({ block: 'start' });
   }
-  var NDA = ['BJP', 'JD(U)', 'LJP(RV)', 'HAM(S)', 'RLM'], INDIA = ['RJD', 'INC', 'CPI(ML)L', 'CPI', 'CPI(M)', 'VIP', 'IIP'];
   function go(ac) {
     if (!ac) { if (location.hash) history.replaceState(null, '', location.pathname); return showAll(); }
     var a = byAc[ac]; if (!a) return showAll();
     history.replaceState(null, '', '#ac' + ('00' + ac).slice(-3));
     if (cache[ac]) return showSeat(a, cache[ac]);
     SIR.json('data/bihar/booths/ac_' + ('00' + ac).slice(-3) + '.json').then(function (b) {
-      cache[ac] = b.rows.map(function (x) { var o = {}; b.fields.forEach(function (f, i) { o[f] = x[i]; }); o.al = !o.lead2024 ? null : NDA.indexOf(o.lead2024) >= 0 ? 'NDA' : INDIA.indexOf(o.lead2024) >= 0 ? 'INDIA' : 'Other'; return o; });
+      cache[ac] = b.rows.map(function (x) { var o = {}; b.fields.forEach(function (f, i) { o[f] = x[i]; }); return o; });
       showSeat(a, cache[ac]);
     }).catch(SIR.fail);
   }

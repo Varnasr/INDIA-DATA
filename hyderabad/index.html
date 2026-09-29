@@ -11,44 +11,33 @@
 <body data-root="../">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site">
-  <div class="brand"><a class="home" href="../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
+  <div class="brand"><span class="crumbs"><a class="home" href="../">SIR analyses</a> · <a class="home" href="../bihar/">Bihar 2025</a></span><button class="theme" type="button">Dark theme</button></div>
   <h1>Hyderabad Old City SIR 2026: who was struck off</h1>
-  <p class="lede">Every elector on the pre-revision rolls of Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, sorted into three fates: struck off, kept but summoned to a hearing, or untouched. Because the files cover every elector, these pages can give true rates for every group, and compare groups inside the same polling part.</p>
-  <nav class="sub" aria-label="Hyderabad"><a href="./" aria-current="page">Overview</a><a href="explorer/">Part explorer</a><a href="people/">Age, sex, religion, 2002</a><a href="parts/">Parts</a><a href="hearings/">Hearings</a><a href="method/">Method</a></nav>
+  <p class="lede">The Special Intensive Revision reached Hyderabad in 2026. These pages follow every elector on the pre-revision rolls of five Old City constituencies, Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, to one of three outcomes: struck off, kept but summoned to a hearing, or left on the roll.</p>
+  <nav class="sub" aria-label="Hyderabad"><a href="./" aria-current="page">Overview</a><a href="explorer/">Explorer</a><a href="people/">Age, sex, religion, 2002</a><a href="parts/">Polling parts</a><a href="hearings/">Hearings</a><a href="faq/">FAQ</a><a href="method/">Method</a></nav>
 </header>
 <main id="main">
   <div class="kpis" id="kpis"></div>
+  <h2 style="font-size:22px">What the lists show</h2>
+  <ul class="claims" id="claims"></ul>
   <div class="grid">
     <div class="panel wide">
-      <h3>Three fates, constituency by constituency</h3>
-      <p>Share of each constituency's pre-revision roll struck off, summoned to a hearing, or left untouched.</p>
-      <div class="chart short"><canvas id="cFate" aria-label="Fates by constituency"></canvas></div>
+      <h3>Three outcomes, constituency by constituency</h3>
+      <p>Share of each pre-revision roll struck off, summoned to a hearing, or left on the roll.</p>
+      <div class="chart short"><canvas id="cFate" aria-label="Outcomes by constituency"></canvas></div>
     </div>
     <div class="panel">
-      <h3>Why names were struck</h3>
-      <p>The Commission's reason code on the Absent-Shifted-Dead list.</p>
-      <div class="chart"><canvas id="cReason" aria-label="Reasons for deletion by constituency"></canvas></div>
+      <h3>The reason entered against each name</h3>
+      <p>The Commission's reason code on the list of the absent, shifted and dead.</p>
+      <div class="chart"><canvas id="cReason" aria-label="Recorded reasons by constituency"></canvas></div>
     </div>
     <div class="panel">
-      <h3>Deletion rate by age</h3>
+      <h3>Struck off, by age</h3>
       <p>Share of electors in each age band struck off, all five constituencies.</p>
-      <div class="chart"><canvas id="cAge" aria-label="Deletion rate by age band"></canvas></div>
+      <div class="chart"><canvas id="cAge" aria-label="Share struck off by age band"></canvas></div>
     </div>
   </div>
-
-  <h2>What the Old City files show</h2>
-  <div id="findings"></div>
-  <p class="note" style="margin-top:0;border:0;padding-top:0">Religion is estimated from names; the roll records none. The lists record the reason entered against each name, not whether it was right. Counts are from the September lists; the Commission extended the schedule on 7 September, so the final roll will differ.</p>
-
-  <h2>Where to go next</h2>
-  <div class="cards">
-    <a class="card" href="explorer/"><h3>Part explorer</h3><p>Open any constituency and any of its 1,158 polling parts.</p><span class="go">Open</span></a>
-    <a class="card" href="people/"><h3>Age, sex, religion, 2002</h3><p>Rates for each group, constituency by constituency and within parts.</p><span class="go">Open</span></a>
-    <a class="card" href="parts/"><h3>Parts</h3><p>How deletions spread across parts, which parts stand out, and what moves with the rate.</p><span class="go">Open</span></a>
-    <a class="card" href="hearings/"><h3>Hearings</h3><p>Who was summoned, under which rule, and how heavy the schedule was.</p><span class="go">Open</span></a>
-    <a class="card" href="method/"><h3>Method</h3><p>Sources, definitions, and the research questions answered.</p><span class="go">Open</span></a>
-  </div>
-  <p class="note">Source: the CEO Telangana SIR lists for the five constituencies, September 2026. Hearing schedules run 28 August to 12 October. Aggregates only; no names, EPIC numbers or addresses.</p>
+  <p class="note">The lists record the reason entered against each name, not whether it was right. Religion is estimated from names; the roll records none. Counts are from the September lists; the Commission extended the schedule on 7 September, so the final roll will differ. The Malakpet list used here is incomplete: see <a href="method/">Method</a>. Aggregates only; no names, EPIC numbers or addresses.</p>
 </main>
 <footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -56,29 +45,35 @@
 <script>
 SIR.json('data/hyderabad/summary.json').then(function (s) {
   var A = s.acs, t = s.totals, names = A.map(function (a) { return a.name; });
-  document.getElementById('kpis').innerHTML = [[SIR.n(t.electors), 'electors on the pre-revision rolls'], [SIR.n(t.deleted), 'struck off'], [SIR.pct(t.rate), 'deletion rate'], [SIR.n(t.hearing), 'kept but summoned to a hearing'], [SIR.n(t.parts), 'polling parts']]
-    .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+  var kp = [[SIR.n(t.electors), 'electors on the pre-revision rolls'], [SIR.n(t.deleted), 'struck off'], [SIR.pct(t.rate), 'of the rolls'], [SIR.n(t.hearing), 'kept but summoned to a hearing'], [SIR.n(t.parts), 'polling parts']];
+  document.getElementById('kpis').innerHTML = kp.map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+  var sum = function (f) { return SIR.sum(A, f); };
+  var age = s.bands.map(function (b, i) { return 100 * sum(function (a) { return a.counts.age_asd[i]; }) / sum(function (a) { return a.age_all[i]; }); });
+  var over = A.filter(function (a) { return a.deleted > a.e2023.margin; }), valid = A.filter(function (a) { return a.e2023.deleted_over_valid > 100; });
+  var L = A.filter(function (a) { return a.linked; }), ul = L.map(function (a) { return a.within_part.unlinked_minus_linked.diff_pp; });
+  var shifted = 100 * sum(function (a) { return a.reasons['Permanently Shifted']; }) / t.deleted, untr = 100 * sum(function (a) { return a.reasons['Untraceable/Absent']; }) / t.deleted;
+  var W = A.map(function (a) { return a.within_part.hindu_minus_muslim; });
+  var heavy = A.slice().sort(function (a, b) { return b.max_slot - a.max_slot; })[0];
+  var claims = [
+    [SIR.pct(t.rate), 'of the electors on the five pre-revision rolls were struck off: ' + SIR.n(t.deleted) + ' of ' + SIR.n(t.electors) + ', from ' + SIR.pct(Math.min.apply(null, A.map(function (a) { return a.rate; }))) + ' in ' + A.slice().sort(function (a, b) { return a.rate - b.rate; })[0].name + ' to ' + SIR.pct(Math.max.apply(null, A.map(function (a) { return a.rate; }))) + ' in ' + A.slice().sort(function (a, b) { return b.rate - a.rate; })[0].name + '. Another ' + SIR.n(t.hearing) + ' were kept on the roll but summoned to a hearing.'],
+    [over.length + ' of 5', 'constituencies lost more names than their 2023 winning margin. In ' + valid.map(function (a) { return a.name; }).join(' and ') + ' the names struck off outnumber every valid vote cast in 2023. Yakutpura, won by ' + SIR.n(A.filter(function (a) { return a.name === 'Yakutpura'; })[0].e2023.margin) + ' votes, lost ' + SIR.n(A.filter(function (a) { return a.name === 'Yakutpura'; })[0].deleted) + ' names.'],
+    [SIR.pct(age[7]), 'of electors aged 80 and over were struck off, against ' + SIR.pct(age[0]) + ' of those aged 18 to 24.'],
+    ['+' + SIR.d(Math.min.apply(null, ul), 0) + ' to +' + SIR.d(Math.max.apply(null, ul), 0), 'percentage points: how much more often electors with no link to the 2002 roll were struck off than linked electors in the same polling part, in each constituency whose list records the link.'],
+    [SIR.pct(shifted), 'of removals were entered as "permanently shifted" and ' + SIR.pct(untr) + ' as "untraceable or absent". The untraceable share runs from ' + SIR.pct(Math.min.apply(null, A.map(function (a) { return 100 * a.reasons['Untraceable/Absent'] / a.deleted; }))) + ' to ' + SIR.pct(Math.max.apply(null, A.map(function (a) { return 100 * a.reasons['Untraceable/Absent'] / a.deleted; }))) + ' between constituencies.'],
+    [SIR.n(heavy.max_slot), 'cases were listed for a single hearing slot in ' + heavy.name + '.'],
+    [SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 0) + ' to ' + SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 0), 'percentage points: how much more often Hindu-name electors were struck off than Muslim-name electors in the same polling part. <a href="people/">Age, sex, religion, 2002</a>.']
+  ];
+  document.getElementById('claims').innerHTML = claims.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join('');
   SIR.chart('cFate', { type: 'bar', data: { labels: names, datasets: [
       { label: 'Struck off', data: A.map(function (a) { return a.rate; }), $token: '--fill-red' },
       { label: 'Summoned to a hearing', data: A.map(function (a) { return a.hearing_rate; }), $token: '--fill-amber' },
-      { label: 'Untouched', data: A.map(function (a) { return 100 - a.rate - a.hearing_rate - 100 * a.unaccounted / a.electors; }), $token: '--fill-navy' }] },
+      { label: 'Left on the roll', data: A.map(function (a) { return 100 - a.rate - a.hearing_rate - 100 * a.unaccounted / a.electors; }), $token: '--fill-navy' }] },
     options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of pre-revision roll' } }, y: { stacked: true } } } });
   var rt = ['--fill-navy', '--fill-amber', '--fill-red', '--fill-grey'];
   SIR.chart('cReason', { type: 'bar', data: { labels: names, datasets: s.reasons.map(function (r, i) { return { label: r, data: A.map(function (a) { return 100 * a.reasons[r] / a.deleted; }), $token: rt[i] }; }) },
-    options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of deletions' } }, y: { stacked: true } } } });
-  var all = s.bands.map(function (b, i) { var d = SIR.sum(A, function (a) { return a.age_rate[i] * a.age_all[i] / 100; }), n = SIR.sum(A, function (a) { return a.age_all[i]; }); return 100 * d / n; });
-  SIR.chart('cAge', { type: 'bar', data: { labels: s.bands, datasets: [{ label: 'Deletion rate', data: all, $token: '--fill-red' }] },
-    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: '% of electors in the band struck off' } } } } });
-
-  var agg = function (num, den) { return 100 * SIR.sum(A, function (a) { return a.counts[num]; }) / SIR.sum(A, function (a) { return a.counts[den]; }); };
-  var w = A.map(function (a) { return a.within_part.hindu_minus_muslim; });
-  var link = A.filter(function (a) { return a.linked; });
-  document.getElementById('findings').innerHTML = [
-    '<p class="finding"><b>Age is the steepest gradient.</b> ' + SIR.pct(all[7]) + ' of electors aged 80 and over were struck off, against ' + SIR.pct(all[0]) + ' of those aged 18 to 24.</p>',
-    '<p class="finding"><b>Hindu-name electors were struck off more often than Muslim-name electors, and the gap holds inside the same polling part.</b> Within parts, the difference is ' + A.map(function (a) { return SIR.d(a.within_part.hindu_minus_muslim.diff_pp, 1) + ' points in ' + a.name; }).join(', ') + '; it runs the same way in ' + SIR.sum(w, 'a_higher') + ' of ' + SIR.sum(w, 'parts') + ' parts large enough to compare. <a href="people/">People</a>.</p>',
-    '<p class="finding"><b>The 2002 link is the sharpest single cut.</b> Where the file carries it (all but Malakpet), electors with no link to the 2002 roll were struck off ' + link.map(function (a) { return SIR.d(a.within_part.unlinked_minus_linked.diff_pp, 0); }).join(', ') + ' points more often than linked electors in the same part.</p>',
-    '<p class="finding"><b>Sex barely separates.</b> Women were struck off at ' + SIR.pct(agg('f_asd', 'f_all')) + ' against men at ' + SIR.pct(agg('m_asd', 'm_all')) + ', with no consistent direction within parts.</p>'
-  ].join('');
+    options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of names struck off' } }, y: { stacked: true } } } });
+  SIR.chart('cAge', { type: 'bar', data: { labels: s.bands, datasets: [{ label: 'Struck off', data: age, $token: '--fill-red' }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: '% of the age band struck off' } } } } });
 }).catch(SIR.fail);
 </script>
 </body>

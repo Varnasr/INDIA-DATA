@@ -11,10 +11,11 @@ site at [forindia.netlify.app](https://forindia.netlify.app).
 | `/bihar/results/` | Deletions against the 2020, 2024 and 2025 results, within seats and across them |
 | `/bihar/border/`, `/bihar/districts/` | Nepal and Bengal border seats; district economy and census against deletions |
 | `/bihar/people/` | Gender, religion as a range, caste under two classifications with bounds |
-| `/bihar/method/` | Sources, how the lists were prepared, research questions |
+| `/bihar/faq/` | Questions and answers: the criticisms put to the analysis, answered from the lists |
+| `/bihar/method/` | Sources, how the lists were prepared, research questions, what an audit needs |
 | [`/hyderabad/`](https://forindia.netlify.app/hyderabad/) | 6,62,063 of 16,57,207 electors struck off in Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura |
 | `/hyderabad/explorer/` | Any constituency, any of its 1,158 polling parts |
-| `/hyderabad/people/`, `/parts/`, `/hearings/`, `/method/` | Rates by age, sex, religion and 2002 linkage within parts; part outliers; hearings; fourteen research questions |
+| `/hyderabad/people/`, `/parts/`, `/hearings/`, `/faq/`, `/method/` | Rates by age, sex, religion and 2002 linkage within parts; part outliers; hearings; fourteen research questions |
 
 ## The two kinds of evidence
 
