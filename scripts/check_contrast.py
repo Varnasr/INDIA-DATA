@@ -19,9 +19,14 @@ CSS = (Path(__file__).resolve().parent.parent / 'assets' / 'sir.css').read_text(
 PAIRS = [(ink, surf, '%s on %s' % (ink, surf))
          for ink in ['--ink', '--muted', '--navy', '--red', '--amber', '--female', '--male']
          for surf in ['--bg', '--soft', '--card']]
-PAIRS += [('--bg', '--navy', 'the current tab and pressed buttons')]
+PAIRS += [('--tab', '--soft', 'tab labels on the tab bar'), ('--tab-on', '--card', 'the current tab'),
+          ('--grad-a', '--card', 'summary-card figures, gradient start'), ('--grad-b', '--card', 'summary-card figures, gradient end')]
 # Fills that carry text: the alliance tags.
-LITERAL = [('#1c1c1c', '--fill-nda', 'NDA tag'), ('#ffffff', '#1f6f43', 'INDIA tag'), ('#16112a', '--fill-other', 'Other tag')]
+LITERAL = [('#1c2833', '#f5b041', 'NDA tag'), ('#ffffff', '#1e8449', 'INDIA tag'), ('#1c2833', '#bb8fce', 'Other tag'),
+           ('#1c2833', '--s-yellow', 'key-finding banner text, gradient start'), ('#1c2833', '--s-mint', 'key-finding banner text, gradient end'),
+           ('#14405f', '--s-yellow', 'links in a key-finding banner'), ('#14405f', '--s-mint', 'links in a key-finding banner'),
+           ('#ffffff', '--fill-navy', 'pressed segment buttons'), ('#1c2833', '--s-blue', 'button hover'),
+           ('#1c2833', '--s-orange', 'Export PDF button'), ('#ffffff', '--fill-red', 'struck-off segment of the fate bar')]
 MIN = 4.5
 
 

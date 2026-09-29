@@ -43,10 +43,17 @@
   try { saved = localStorage.getItem('sir-theme'); } catch (e) {}
   if (saved) document.documentElement.setAttribute('data-theme', saved);
   var btn = document.querySelector('.theme');
+  SIR.isDark = function () {
+    var t = document.documentElement.getAttribute('data-theme');
+    return t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches);
+  };
   function label() {
-    var dark = document.documentElement.getAttribute('data-theme') === 'dark' ||
-      (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
-    if (btn) { btn.textContent = dark ? 'Light theme' : 'Dark theme'; btn.setAttribute('aria-pressed', dark ? 'true' : 'false'); }
+    var dark = SIR.isDark();
+    if (btn) {
+      var s = btn.querySelector('span');
+      if (s) s.textContent = dark ? 'Light' : 'Dark'; else btn.textContent = dark ? 'Light' : 'Dark';
+      btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+    }
     return dark;
   }
   if (btn) btn.addEventListener('click', function () {
@@ -55,8 +62,13 @@
     try { localStorage.setItem('sir-theme', next); } catch (e) {}
     label();
     SIR.charts.forEach(function (c) { SIR.recolour(c); });
+    document.dispatchEvent(new Event('sir-theme'));
   });
   label();
+  // Export PDF prints the page; the print stylesheet drops the header and
+  // shows every tab. A dashboard can set SIR.beforePrint to draw its charts.
+  var pr = document.querySelector('.print');
+  if (pr) pr.addEventListener('click', function () { if (SIR.beforePrint) SIR.beforePrint(); setTimeout(function () { window.print(); }, 300); });
 
   // --------------------------------------------------------------- charts
   SIR.charts = [];

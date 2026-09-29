@@ -3,78 +3,288 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hyderabad Old City SIR 2026: overview</title>
-<meta name="description" content="The Special Intensive Revision in five Old City constituencies of Hyderabad, 2026: every elector on the pre-revision roll, and who was struck off, by age, sex, religion and 2002 linkage.">
-<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23b13b38'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
+<title>Hyderabad Old City Electoral Dashboard: Special Intensive Revision 2026</title>
+<meta name="description" content="The 2026 Special Intensive Revision in five Old City constituencies of Hyderabad, polling part by polling part: 6.6 lakh of 16.6 lakh electors struck off, set against the 2023 margins, with age, sex, religion, the 2002 link and the hearings.">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%238B1E3F'/><path d='M9 16l4 4 9-9' stroke='%23E0A526' stroke-width='3' fill='none' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="../assets/sir.css">
 </head>
-<body data-root="../">
-<a class="skip" href="#main">Skip to content</a>
-<header class="site">
-  <div class="brand"><span class="crumbs"><a class="home" href="../">SIR analyses</a> · <a class="home" href="../bihar/">Bihar 2025</a></span><button class="theme" type="button">Dark theme</button></div>
-  <h1>Hyderabad Old City SIR 2026: who was struck off</h1>
-  <p class="lede">The Special Intensive Revision reached Hyderabad in 2026. These pages follow every elector on the pre-revision rolls of five Old City constituencies, Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, to one of three outcomes: struck off, kept but summoned to a hearing, or left on the roll.</p>
-  <nav class="sub" aria-label="Hyderabad"><a href="./" aria-current="page">Overview</a><a href="explorer/">Explorer</a><a href="people/">Age, sex, religion, 2002</a><a href="parts/">Polling parts</a><a href="hearings/">Hearings</a><a href="faq/">FAQ</a><a href="method/">Method</a></nav>
-</header>
-<main id="main">
-  <div class="kpis" id="kpis"></div>
-  <h2 style="font-size:22px">What the lists show</h2>
-  <ul class="claims" id="claims"></ul>
-  <div class="grid">
-    <div class="panel wide">
-      <h3>Three outcomes, constituency by constituency</h3>
-      <p>Share of each pre-revision roll struck off, summoned to a hearing, or left on the roll.</p>
-      <div class="chart short"><canvas id="cFate" aria-label="Outcomes by constituency"></canvas></div>
-    </div>
-    <div class="panel">
-      <h3>The reason entered against each name</h3>
-      <p>The Commission's reason code on the list of the absent, shifted and dead.</p>
-      <div class="chart"><canvas id="cReason" aria-label="Recorded reasons by constituency"></canvas></div>
-    </div>
-    <div class="panel">
-      <h3>Struck off, by age</h3>
-      <p>Share of electors in each age band struck off, all five constituencies.</p>
-      <div class="chart"><canvas id="cAge" aria-label="Share struck off by age band"></canvas></div>
+<body class="hyd" data-root="../">
+<a class="skip" href="#content">Skip to content</a>
+<div class="band ikat" aria-hidden="true"></div>
+<header class="top">
+  <div class="header-content">
+    <a class="logo" href="./"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span><h1 class="h-title">Hyderabad Old City Electoral Dashboard</h1><span class="subtitle">Special Intensive Revision 2026 · five constituencies, every polling part</span></span></a>
+    <div class="controls">
+      <a class="btn" href="../">Bihar 2025</a>
+      <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
+      <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
     </div>
   </div>
-  <p class="note">The lists record the reason entered against each name, not whether it was right. Religion is estimated from names; the roll records none. Counts are from the September lists; the Commission extended the schedule on 7 September, so the final roll will differ. The Malakpet list used here is incomplete: see <a href="method/">Method</a>. Aggregates only; no names, EPIC numbers or addresses.</p>
-</main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
+</header>
+<nav class="nav-tabs" role="tablist" aria-label="Dashboard sections">
+  <button type="button" class="nav-tab" role="tab" data-tab="overview"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> Overview</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="deletions"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> Deletions</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="age"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Age and sex</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="religion"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 8v2h20V8L12 2z"/><path d="M4 10v10h16V10"/><path d="M10 20v-6h4v6"/></svg> Religion</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="link"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> 2002 link</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="hearings"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 13l-7.5 7.5a2.1 2.1 0 0 1-3-3L11 10"/><path d="M16 16l6-6"/><path d="M8 8l6-6"/><path d="M9 7l8 8"/></svg> Hearings</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="parts"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Polling parts</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="electoral"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> Electoral</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="research"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Research</button>
+  <button type="button" class="nav-tab" role="tab" data-tab="methodology"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Methods</button>
+</nav>
+<main id="content"></main>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers are published. · <a href="explorer/">Part explorer</a> · <a href="faq/">Questions and answers</a> · <a href="../">Bihar 2025</a></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../assets/sir.js"></script>
+<script src="../assets/dash.js"></script>
 <script>
-SIR.json('data/hyderabad/summary.json').then(function (s) {
-  var A = s.acs, t = s.totals, names = A.map(function (a) { return a.name; });
-  var kp = [[SIR.n(t.electors), 'electors on the pre-revision rolls'], [SIR.n(t.deleted), 'struck off'], [SIR.pct(t.rate), 'of the rolls'], [SIR.n(t.hearing), 'kept but summoned to a hearing'], [SIR.n(t.parts), 'polling parts']];
-  document.getElementById('kpis').innerHTML = kp.map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
-  var sum = function (f) { return SIR.sum(A, f); };
-  var age = s.bands.map(function (b, i) { return 100 * sum(function (a) { return a.counts.age_asd[i]; }) / sum(function (a) { return a.age_all[i]; }); });
-  var over = A.filter(function (a) { return a.deleted > a.e2023.margin; }), valid = A.filter(function (a) { return a.e2023.deleted_over_valid > 100; });
-  var L = A.filter(function (a) { return a.linked; }), ul = L.map(function (a) { return a.within_part.unlinked_minus_linked.diff_pp; });
-  var shifted = 100 * sum(function (a) { return a.reasons['Permanently Shifted']; }) / t.deleted, untr = 100 * sum(function (a) { return a.reasons['Untraceable/Absent']; }) / t.deleted;
-  var W = A.map(function (a) { return a.within_part.hindu_minus_muslim; });
-  var heavy = A.slice().sort(function (a, b) { return b.max_slot - a.max_slot; })[0];
-  var claims = [
-    [SIR.pct(t.rate), 'of the electors on the five pre-revision rolls were struck off: ' + SIR.n(t.deleted) + ' of ' + SIR.n(t.electors) + ', from ' + SIR.pct(Math.min.apply(null, A.map(function (a) { return a.rate; }))) + ' in ' + A.slice().sort(function (a, b) { return a.rate - b.rate; })[0].name + ' to ' + SIR.pct(Math.max.apply(null, A.map(function (a) { return a.rate; }))) + ' in ' + A.slice().sort(function (a, b) { return b.rate - a.rate; })[0].name + '. Another ' + SIR.n(t.hearing) + ' were kept on the roll but summoned to a hearing.'],
-    [over.length + ' of 5', 'constituencies lost more names than their 2023 winning margin. In ' + valid.map(function (a) { return a.name; }).join(' and ') + ' the names struck off outnumber every valid vote cast in 2023. Yakutpura, won by ' + SIR.n(A.filter(function (a) { return a.name === 'Yakutpura'; })[0].e2023.margin) + ' votes, lost ' + SIR.n(A.filter(function (a) { return a.name === 'Yakutpura'; })[0].deleted) + ' names.'],
-    [SIR.pct(age[7]), 'of electors aged 80 and over were struck off, against ' + SIR.pct(age[0]) + ' of those aged 18 to 24.'],
-    ['+' + SIR.d(Math.min.apply(null, ul), 0) + ' to +' + SIR.d(Math.max.apply(null, ul), 0), 'percentage points: how much more often electors with no link to the 2002 roll were struck off than linked electors in the same polling part, in each constituency whose list records the link.'],
-    [SIR.pct(shifted), 'of removals were entered as "permanently shifted" and ' + SIR.pct(untr) + ' as "untraceable or absent". The untraceable share runs from ' + SIR.pct(Math.min.apply(null, A.map(function (a) { return 100 * a.reasons['Untraceable/Absent'] / a.deleted; }))) + ' to ' + SIR.pct(Math.max.apply(null, A.map(function (a) { return 100 * a.reasons['Untraceable/Absent'] / a.deleted; }))) + ' between constituencies.'],
-    [SIR.n(heavy.max_slot), 'cases were listed for a single hearing slot in ' + heavy.name + '.'],
-    [SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 0) + ' to ' + SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 0), 'percentage points: how much more often Hindu-name electors were struck off than Muslim-name electors in the same polling part. <a href="people/">Age, sex, religion, 2002</a>.']
-  ];
-  document.getElementById('claims').innerHTML = claims.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join('');
-  SIR.chart('cFate', { type: 'bar', data: { labels: names, datasets: [
-      { label: 'Struck off', data: A.map(function (a) { return a.rate; }), $token: '--fill-red' },
-      { label: 'Summoned to a hearing', data: A.map(function (a) { return a.hearing_rate; }), $token: '--fill-amber' },
-      { label: 'Left on the roll', data: A.map(function (a) { return 100 - a.rate - a.hearing_rate - 100 * a.unaccounted / a.electors; }), $token: '--fill-navy' }] },
-    options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of pre-revision roll' } }, y: { stacked: true } } } });
-  var rt = ['--fill-navy', '--fill-amber', '--fill-red', '--fill-grey'];
-  SIR.chart('cReason', { type: 'bar', data: { labels: names, datasets: s.reasons.map(function (r, i) { return { label: r, data: A.map(function (a) { return 100 * a.reasons[r] / a.deleted; }), $token: rt[i] }; }) },
-    options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of names struck off' } }, y: { stacked: true } } } });
-  SIR.chart('cAge', { type: 'bar', data: { labels: s.bands, datasets: [{ label: 'Struck off', data: age, $token: '--fill-red' }] },
-    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: '% of the age band struck off' } } } } });
-}).catch(SIR.fail);
+(function () {
+  var X = DASH, n = X.n, d = X.d, pct = X.pct, lakh = X.lakh, esc = X.esc, sum = X.sum, median = X.median, rho = X.rho;
+  var C = X.C, kpis = X.kpis, banner = X.banner, card = X.card, section = X.section, grid = X.grid, barOpts = X.barOpts, hbar = X.hbar, chart = X.chart;
+  var main = document.getElementById('content');
+  var ACC = ['#8B1E3F', '#0E5E6F', '#E0A526', '#1F618D', '#8E7CC3'];
+
+  Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/parts.json')]).then(function (r) {
+    var S = r[0], A = S.acs, t = S.totals, names = A.map(function (a) { return a.name; });
+    var F = r[1].fields, PR = r[1].rows.map(function (row) { var o = {}; F.forEach(function (f, i) { o[f] = row[i]; }); if (o.locality === 'nan') o.locality = null; return o; });
+    var byName = {}; A.forEach(function (a) { byName[a.name] = a; });
+    var s = function (f) { return sum(A, f); };
+    var L = A.filter(function (a) { return a.linked; });
+    var ageAll = S.bands.map(function (b, i) { return 100 * s(function (a) { return a.counts.age_asd[i]; }) / s(function (a) { return a.age_all[i]; }); });
+    var reasonTot = S.reasons.map(function (k) { return s(function (a) { return a.reasons[k]; }); });
+    var rsh = function (k) { return 100 * s(function (a) { return a.reasons[k]; }) / t.deleted; };
+    var untrAC = A.map(function (a) { return 100 * a.reasons['Untraceable/Absent'] / a.deleted; });
+    var overM = A.filter(function (a) { return a.deleted > a.e2023.margin; }), overV = A.filter(function (a) { return a.e2023.deleted_over_valid > 100; });
+    var yak = byName.Yakutpura;
+    var hin = 100 * s(function (a) { return a.counts.hin_asd; }) / s(function (a) { return a.counts.hin_all; });
+    var mus = 100 * s(function (a) { return a.counts.mus_asd; }) / s(function (a) { return a.counts.mus_all; });
+    var HM = A.map(function (a) { return a.within_part.hindu_minus_muslim; });
+    var hmParts = sum(HM, 'parts'), hmA = sum(HM, 'a_higher');
+    var UL = L.map(function (a) { return a.within_part.unlinked_minus_linked; });
+    var ulParts = sum(UL, 'parts'), ulA = sum(UL, 'a_higher');
+    var lkRate = 100 * sum(L, function (a) { return a.counts.lk_asd; }) / sum(L, function (a) { return a.counts.lk_all; });
+    var ulRate = 100 * sum(L, function (a) { return a.deleted - a.counts.lk_asd; }) / sum(L, function (a) { return a.electors - a.counts.lk_all; });
+    var fRate = 100 * s(function (a) { return a.counts.f_asd; }) / s(function (a) { return a.counts.f_all; });
+    var mRate = 100 * s(function (a) { return a.counts.m_asd; }) / s(function (a) { return a.counts.m_all; });
+    var FM = A.map(function (a) { return a.within_part.female_minus_male.diff_pp; });
+    var slots = s('slots'), heavy = A.slice().sort(function (a, b) { return b.max_slot - a.max_slot; })[0];
+    var ruleTot = S.rules.map(function (k) { return s(function (a) { return a.rules[k] || 0; }); });
+    var P100 = PR.filter(function (p) { return p.electors >= 100; });
+    var over60 = P100.filter(function (p) { return p.rate > 60; });
+    var minMax = function (arr) { return [Math.min.apply(null, arr), Math.max.apply(null, arr)]; };
+    var rateRange = minMax(P100.map(function (p) { return p.rate; }));
+    var mc = A.map(function (a) { return a.part_correlations.muslim_share_vs_rate; });
+    var sortedRate = A.slice().sort(function (a, b) { return b.rate - a.rate; });
+    var html = '';
+
+    // ============================================================ OVERVIEW
+    chart('ov1', { type: 'bar', data: { labels: names, datasets: [
+      { label: 'Struck off', data: A.map(function (a) { return a.rate; }), backgroundColor: C.red },
+      { label: 'Kept, summoned to a hearing', data: A.map(function (a) { return a.hearing_rate; }), backgroundColor: C.yellow },
+      { label: 'Kept, untouched', data: A.map(function (a) { return 100 - a.rate - a.hearing_rate - 100 * a.unaccounted / a.electors; }), backgroundColor: C.dblue }] },
+      options: { indexAxis: 'y', plugins: { legend: { position: 'bottom' } }, scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of the pre-revision roll' } }, y: { stacked: true } } } });
+    var ov2 = hbar(names, A.map(function (a) { return a.e2023.deleted_over_margin; }), ACC, 'Names struck off ÷ 2023 winning margin (log scale)');
+    ov2.options.scales.x = { type: 'logarithmic', min: 1, title: ov2.options.scales.x.title };
+    chart('ov2', ov2);
+    chart('ov3', { type: 'bar', data: { labels: S.bands, datasets: [{ label: 'Struck off', data: ageAll.map(function (v) { return +v.toFixed(1); }), backgroundColor: C.maroon }] }, options: barOpts('Age band', '% of the band struck off') });
+    chart('ov4', { type: 'bar', data: { labels: L.map(function (a) { return a.name; }), datasets: [{ label: 'Linked to the 2002 roll', data: L.map(function (a) { return a.linked_rate; }), backgroundColor: C.ikat }, { label: 'No link to the 2002 roll', data: L.map(function (a) { return a.unlinked_rate; }), backgroundColor: C.red }] }, options: barOpts('', '% struck off', { plugins: { legend: { position: 'bottom' } } }) });
+    chart('ov5', { type: 'doughnut', data: { labels: S.reasons, datasets: [{ data: reasonTot, backgroundColor: [C.dblue, C.red, C.grey, C.gold] }] }, options: { plugins: { legend: { position: 'bottom' } } } });
+    chart('ov6', { type: 'bar', data: { labels: names, datasets: [{ label: 'Median cases per slot', data: A.map(function (a) { return a.median_slot; }), backgroundColor: C.ikat }, { label: 'Heaviest single slot', data: A.map(function (a) { return a.max_slot; }), backgroundColor: C.maroon }] }, options: barOpts('', 'Cases listed for one hearing slot', { plugins: { legend: { position: 'bottom' } } }) });
+    html += section('overview',
+      kpis([[n(t.electors), 'Electors on the pre-revision rolls'], [n(t.deleted), 'Struck off'], [pct(t.rate), 'Of the rolls struck off'], [n(t.hearing), 'Kept, summoned to a hearing'], [overM.length + ' of ' + A.length, 'Seats where names struck off exceed the 2023 margin'], [n(t.parts), 'Polling parts']]) +
+      banner('Key finding', 'The revision struck ' + lakh(t.deleted) + ' names off the rolls of five Old City constituencies, ' + pct(t.rate) + ' of all electors, and summoned ' + lakh(t.hearing) + ' more to hearings. Every constituency lost more names than its 2023 winning margin; Yakutpura, won by ' + n(yak.e2023.margin) + ' votes, lost ' + n(yak.deleted) + '.') +
+      '<div class="hubs"><a class="hub" href="explorer/"><b>Part explorer</b><span>Any constituency and any of its ' + n(t.parts) + ' polling parts, with every fate, reason and rule.</span></a><a class="hub" href="faq/"><b>Questions and answers</b><span>The criticisms put to this analysis, answered from the lists.</span></a><a class="hub" href="../"><b>Bihar 2025</b><span>69 lakh names removed across 243 constituencies, booth by booth.</span></a></div>' +
+      grid(
+        card(1, 'ov1', 'What happened to each elector?', 'Of ' + n(t.electors) + ' electors, ' + pct(t.rate) + ' were struck off and ' + pct(100 * t.hearing / t.electors) + ' kept but summoned to a hearing. ' + sortedRate[0].name + ' lost the most (' + pct(sortedRate[0].rate) + '), ' + sortedRate[4].name + ' the least (' + pct(sortedRate[4].rate) + ').') +
+        card(2, 'ov2', 'Did removals exceed the winning margins?', 'In all ' + A.length + ' constituencies. Yakutpura lost ' + d(yak.e2023.deleted_over_margin, 1) + ' times its 2023 margin; in ' + overV.map(function (a) { return a.name; }).join(' and ') + ' the names struck off outnumber every valid vote cast in 2023.') +
+        card(3, 'ov3', 'Who was struck off, by age?', pct(ageAll[7]) + ' of electors aged 80 and over were struck off, against ' + pct(ageAll[0]) + ' of those aged 18 to 24.') +
+        card(4, 'ov4', 'How much did the 2002 link matter?', 'Electors with no link to the 2002 roll were struck off ' + d(Math.min.apply(null, UL.map(function (u) { return u.diff_pp; })), 0) + ' to ' + d(Math.max.apply(null, UL.map(function (u) { return u.diff_pp; })), 0) + ' points more often than linked electors in the same polling part.') +
+        card(5, 'ov5', 'What reasons did officers record?', pct(rsh('Permanently Shifted')) + ' "permanently shifted", ' + pct(rsh('Untraceable/Absent')) + ' "untraceable or absent", ' + pct(rsh('Death')) + ' dead, ' + pct(rsh('Already enrolled')) + ' enrolled elsewhere. Each is an officer\'s entry, not a finding.') +
+        card(6, 'ov6', 'Could the hearings be held properly?', 'The heaviest single slot listed ' + n(heavy.max_slot) + ' cases, in ' + heavy.name + '. A slot of that size leaves each elector a minute or two.')
+      ) +
+      '<div class="card wide"><div class="card-title"><span>The five constituencies</span></div><div class="twrap" tabindex="0" role="region" aria-label="The five constituencies"><table><thead><tr><th scope="col" class="l">Constituency</th><th scope="col">Electors</th><th scope="col">Struck off</th><th scope="col">% struck off</th><th scope="col">% summoned</th><th scope="col" class="l">2023 winner</th><th scope="col">2023 margin</th><th scope="col">Struck off ÷ margin</th><th scope="col">Struck off ÷ valid votes</th></tr></thead><tbody>' +
+      A.map(function (a) { return '<tr><td class="l"><a href="explorer/#' + a.name + '">' + a.name + '</a></td><td>' + n(a.electors) + '</td><td>' + n(a.deleted) + '</td><td>' + d(a.rate, 1) + '</td><td>' + d(a.hearing_rate, 1) + '</td><td class="l">' + esc(a.e2023.winner) + '</td><td>' + n(a.e2023.margin) + '</td><td>' + d(a.e2023.deleted_over_margin, 1) + '×</td><td>' + d(a.e2023.deleted_over_valid, 1) + '%</td></tr>'; }).join('') +
+      '</tbody></table></div><div class="chart-takeaway">' + X.ICON + ' Each constituency name opens it in the part explorer.</div></div>');
+
+    // ============================================================ DELETIONS
+    var tops = A.map(function (a) { return a.name; });
+    chart('de1', { type: 'bar', data: { labels: names, datasets: S.reasons.map(function (k, i) { return { label: k, data: A.map(function (a) { return +(100 * a.reasons[k] / a.deleted).toFixed(1); }), backgroundColor: [C.dblue, C.red, C.grey, C.gold][i] }; }) }, options: { indexAxis: 'y', plugins: { legend: { position: 'bottom' } }, scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of names struck off' } }, y: { stacked: true } } } });
+    chart('de2', { type: 'bar', data: { labels: names, datasets: [{ label: 'Struck off', data: A.map(function (a) { return a.deleted; }), backgroundColor: ACC }] }, options: barOpts('', 'Names struck off') });
+    chart('de3', hbar(names, untrAC.map(function (v) { return +v.toFixed(1); }), C.red, '"Untraceable or absent", % of names struck off'));
+    chart('de4', { type: 'bar', data: { labels: names, datasets: [{ label: 'Deaths recorded', data: A.map(function (a) { return a.reasons.Death; }), backgroundColor: C.grey }, { label: 'Struck off aged 70 and over', data: A.map(function (a) { return a.counts.age_asd[6] + a.counts.age_asd[7]; }), backgroundColor: C.maroon }] }, options: barOpts('', 'Electors', { plugins: { legend: { position: 'bottom' } } }) });
+    chart('de5', { type: 'bar', data: { labels: names, datasets: [{ label: 'In none of the three fates', data: A.map(function (a) { return a.unaccounted; }), backgroundColor: C.grey }] }, options: barOpts('', 'Electors') });
+    chart('de6', hbar(names, A.map(function (a) { return +(100 * a.reasons['Already enrolled'] / a.deleted).toFixed(1); }), C.gold, '"Already enrolled", % of names struck off'));
+    var deaths = s(function (a) { return a.reasons.Death; }), old70 = s(function (a) { return a.counts.age_asd[6] + a.counts.age_asd[7]; });
+    var unA = minMax(untrAC);
+    html += section('deletions',
+      kpis([[pct(rsh('Permanently Shifted')), '"Permanently shifted"'], [pct(rsh('Untraceable/Absent')), '"Untraceable or absent"'], [pct(rsh('Death')), 'Dead'], [pct(rsh('Already enrolled')), 'Enrolled elsewhere']]) +
+      banner('Reasons recorded', 'The Commission\'s list of the absent, shifted and dead carries a reason against each name. Most say the elector moved. The untraceable share runs from ' + pct(unA[0]) + ' to ' + pct(unA[1]) + ' between constituencies. Those entries rest on an officer not finding someone, and they are where verification should begin.') +
+      grid(
+        card(1, 'de1', 'Which reasons, in which constituency?', 'Untraceable or absent is ' + A.map(function (a, i) { return pct(untrAC[i]) + ' in ' + a.name; }).join(', ') + '.') +
+        card(2, 'de2', 'How many names did each lose?', A.slice().sort(function (a, b) { return b.deleted - a.deleted; }).map(function (a) { return a.name + ' ' + n(a.deleted); }).join(', ') + '.') +
+        card(3, 'de3', 'Where is "untraceable" most common?', A[untrAC.indexOf(unA[1])].name + ' records ' + pct(unA[1]) + ' of its removals as untraceable or absent; ' + A[untrAC.indexOf(unA[0])].name + ' ' + pct(unA[0]) + '.') +
+        card(4, 'de4', 'Does death explain the old?', n(deaths) + ' deaths were recorded, against ' + n(old70) + ' electors aged 70 and over struck off. Death is part of the top of the age range, not all of it.') +
+        card(5, 'de5', 'Are the lists complete?', 'Electors in none of the three fates: ' + A.map(function (a) { return a.name + ' ' + n(a.unaccounted); }).join(', ') + '. Malakpet\'s list is incomplete and is read by polling-station name.') +
+        card(6, 'de6', 'How many were enrolled twice?', 'Enrolled elsewhere is ' + pct(rsh('Already enrolled')) + ' of all removals, the smallest of the four reasons.')
+      ));
+
+    // ============================================================ AGE AND SEX
+    chart('ag1', { type: 'line', data: { labels: S.bands, datasets: A.map(function (a, i) { return { label: a.name, data: a.age_rate, borderColor: ACC[i], backgroundColor: ACC[i], tension: 0.3, pointRadius: 3 }; }) }, options: barOpts('Age band', '% struck off', { plugins: { legend: { position: 'bottom' } } }) });
+    chart('ag2', { type: 'bar', data: { labels: S.bands, datasets: [{ label: 'Share of all names struck off', data: S.bands.map(function (b, i) { return +(100 * s(function (a) { return a.counts.age_asd[i]; }) / t.deleted).toFixed(1); }), backgroundColor: C.ikat }] }, options: barOpts('Age band', '% of names struck off') });
+    chart('ag3', { type: 'bar', data: { labels: names, datasets: [{ label: 'Women', data: A.map(function (a) { return a.female_rate; }), backgroundColor: C.pink }, { label: 'Men', data: A.map(function (a) { return a.male_rate; }), backgroundColor: C.dblue }] }, options: barOpts('', '% struck off', { plugins: { legend: { position: 'bottom' } } }) });
+    chart('ag4', hbar(names, FM, FM.map(function (v) { return v > 0 ? C.pink : C.dblue; }), 'Women\'s rate minus men\'s, inside each part (points)'));
+    chart('ag5', { type: 'bar', data: { labels: names, datasets: [{ label: 'Women, % of the roll', data: A.map(function (a) { return a.female_share_roll; }), backgroundColor: C.grey }, { label: 'Women, % of those struck off', data: A.map(function (a) { return a.female_share_deleted; }), backgroundColor: C.pink }] }, options: barOpts('', '%', { plugins: { legend: { position: 'bottom' } }, scales: { y: { min: 40, max: 55, title: { display: true, text: '%' } } } }) });
+    chart('ag6', hbar(names, A.map(function (a) { return a.age_rate[7]; }), C.maroon, '% of electors aged 80+ struck off'));
+    var a80 = minMax(A.map(function (a) { return a.age_rate[7]; })), a18 = minMax(A.map(function (a) { return a.age_rate[0]; }));
+    html += section('age',
+      kpis([[pct(ageAll[7]), 'Aged 80+ struck off'], [pct(ageAll[0]), 'Aged 18 to 24 struck off'], [pct(fRate), 'Women struck off'], [pct(mRate), 'Men struck off']]) +
+      banner('Age and sex', 'The older the elector, the likelier the removal, in every constituency: between ' + pct(a80[0]) + ' and ' + pct(a80[1]) + ' of electors aged 80 and over were struck off, against ' + pct(a18[0]) + ' to ' + pct(a18[1]) + ' of those aged 18 to 24. Women and men were struck off at similar rates.') +
+      grid(
+        card(1, 'ag1', 'How does removal rise with age?', 'The rate roughly doubles between 18 to 24 and 30 to 39, ages at which almost nobody dies, so death is not the whole of it.') +
+        card(2, 'ag2', 'Which ages make up the removed?', 'Share of all names struck off falling in each age band.') +
+        card(3, 'ag3', 'Were women struck off more than men?', 'Women ' + pct(fRate) + ', men ' + pct(mRate) + ' across the five constituencies.') +
+        card(4, 'ag4', 'And inside the same polling part?', 'The within-part gap runs from ' + d(Math.min.apply(null, FM), 1) + ' to ' + d(Math.max.apply(null, FM), 1) + ' points and changes sign between constituencies.') +
+        card(5, 'ag5', 'Are women over-represented among the removed?', 'Women\'s share of those struck off sits close to their share of the roll in every constituency.') +
+        card(6, 'ag6', 'How many of the oldest were struck off?', A.map(function (a) { return a.name + ' ' + pct(a.age_rate[7]); }).join(', ') + '.')
+      ));
+
+    // ============================================================ RELIGION
+    chart('re1', { type: 'bar', data: { labels: names, datasets: [{ label: 'Hindu names', data: A.map(function (a) { return a.hindu_rate; }), backgroundColor: C.gold }, { label: 'Muslim names', data: A.map(function (a) { return a.muslim_rate; }), backgroundColor: C.india }] }, options: barOpts('', '% struck off', { plugins: { legend: { position: 'bottom' } } }) });
+    chart('re2', hbar(names, HM.map(function (w) { return w.diff_pp; }), C.dblue, 'Hindu-name rate minus Muslim-name rate, inside each part (points)'));
+    var sc = P100.filter(function (p) { return p.muslim_share_roll != null; });
+    chart('re3', { type: 'scatter', data: { datasets: A.map(function (a, i) { return { label: a.name, data: sc.filter(function (p) { return p.ac === a.name; }).map(function (p) { return { x: p.muslim_share_roll, y: p.rate }; }), backgroundColor: ACC[i], pointRadius: 2.5 }; }) }, options: { plugins: { legend: { position: 'bottom' } }, scales: { x: { min: 0, max: 100, title: { display: true, text: 'Muslim-name share of the part\'s roll (%)' } }, y: { title: { display: true, text: '% of the part struck off' } } } } });
+    chart('re4', hbar(names, mc, C.purple, 'Rank correlation across parts: Muslim share and removal rate'));
+    chart('re5', hbar(names, A.map(function (a) { return a.muslim_share_roll; }), C.india, 'Muslim-name share of the pre-revision roll (%)'));
+    chart('re6', { type: 'bar', data: { labels: names, datasets: [{ label: 'Parts where Hindu-name rate was higher', data: HM.map(function (w) { return w.a_higher; }), backgroundColor: C.gold }, { label: 'Parts where Muslim-name rate was higher', data: HM.map(function (w) { return w.b_higher; }), backgroundColor: C.india }] }, options: { plugins: { legend: { position: 'bottom' } }, scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Polling parts' } } } } });
+    var hmR = minMax(HM.map(function (w) { return w.diff_pp; })), mcR = minMax(mc);
+    html += section('religion',
+      kpis([[pct(hin), 'Hindu-name electors struck off'], [pct(mus), 'Muslim-name electors struck off'], [hmA + ' of ' + hmParts, 'Comparable parts where the Hindu-name rate was higher'], [pct(100 * s(function (a) { return a.counts.mus_all; }) / t.electors), 'Muslim-name share of the rolls']]) +
+      banner('Religion', 'Across the five constituencies ' + pct(hin) + ' of Hindu-name electors were struck off, and ' + pct(mus) + ' of Muslim-name electors. Inside the same polling part the gap is ' + d(hmR[0], 1) + ' to ' + d(hmR[1], 1) + ' points in the same direction. Religion is estimated from names; the roll records none, and the lists give religion and age separately, so part of the gap may be an age gap.') +
+      grid(
+        card(1, 're1', 'Which names were struck off more?', 'Hindu-name electors, in every constituency.') +
+        card(2, 're2', 'Does the gap hold inside a part?', 'Yes: ' + d(hmR[0], 1) + ' to ' + d(hmR[1], 1) + ' points, pooled across parts with at least 20 of each group.') +
+        card(3, 're3', 'Did parts with more Muslim electors lose more?', 'Fewer. Each dot is a polling part with at least 100 electors.', { size: 'tall' }) +
+        card(4, 're4', 'How strong is that pattern?', 'Rank correlations of ' + d(mcR[0], 2) + ' to ' + d(mcR[1], 2) + ', negative in every constituency.', { size: 'tall' }) +
+        card(5, 're5', 'Who is on the rolls?', 'Muslim-name share of each pre-revision roll.') +
+        card(6, 're6', 'In how many parts does the gap hold?', hmA + ' of ' + hmParts + ' parts large enough to compare.')
+      ));
+
+    // ============================================================ 2002 LINK
+    chart('li1', { type: 'bar', data: { labels: L.map(function (a) { return a.name; }), datasets: [{ label: 'Linked', data: L.map(function (a) { return a.linked_rate; }), backgroundColor: C.ikat }, { label: 'Not linked', data: L.map(function (a) { return a.unlinked_rate; }), backgroundColor: C.red }] }, options: barOpts('', '% struck off', { plugins: { legend: { position: 'bottom' } } }) });
+    chart('li2', hbar(L.map(function (a) { return a.name; }), UL.map(function (u) { return u.diff_pp; }), C.red, 'Unlinked rate minus linked rate, inside each part (points)'));
+    chart('li3', hbar(L.map(function (a) { return a.name; }), L.map(function (a) { return a.linked_share_roll; }), C.ikat, '% of the roll linked to 2002'));
+    chart('li4', { type: 'bar', data: { labels: L.map(function (a) { return a.name; }), datasets: [{ label: 'Parts where unlinked electors fared worse', data: UL.map(function (u) { return u.a_higher; }), backgroundColor: C.red }, { label: 'Parts where linked electors fared worse', data: UL.map(function (u) { return u.b_higher; }), backgroundColor: C.ikat }] }, options: { plugins: { legend: { position: 'bottom' } }, scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Polling parts' } } } } });
+    chart('li5', hbar(names, A.map(function (a) { return a.nomap; }), C.maroon, 'Kept, on the no-mapping list'));
+    chart('li6', { type: 'doughnut', data: { labels: ['Linked, struck off', 'Linked, kept', 'Not linked, struck off', 'Not linked, kept'], datasets: [{ data: [sum(L, function (a) { return a.counts.lk_asd; }), sum(L, function (a) { return a.counts.lk_all - a.counts.lk_asd; }), sum(L, function (a) { return a.deleted - a.counts.lk_asd; }), sum(L, function (a) { return (a.electors - a.counts.lk_all) - (a.deleted - a.counts.lk_asd); })], backgroundColor: [C.ikat, '#9CC5CE', C.red, '#E6A39A'] }] }, options: { plugins: { legend: { position: 'bottom' } } } });
+    var ulR = minMax(UL.map(function (u) { return u.diff_pp; }));
+    html += section('link',
+      kpis([[pct(ulRate), 'Unlinked electors struck off'], [pct(lkRate), 'Linked electors struck off'], ['+' + d(ulR[0], 0) + ' to +' + d(ulR[1], 0), 'Points more, inside the same part'], [n(ulA) + ' of ' + n(ulParts), 'Parts where unlinked electors fared worse']]) +
+      banner('The 2002 roll', 'The revision asks each elector to show a link to the 2002 intensive revision, through their own name or a parent\'s. Having no link roughly doubled an elector\'s chance of being struck off, and the gap holds inside the same polling part in ' + n(ulA) + ' of ' + n(ulParts) + ' parts. Anyone who moved to the city after 2002, or whose family name is spelt differently on the old roll, starts at a disadvantage. Malakpet\'s list carries no linkage.') +
+      grid(
+        card(1, 'li1', 'Linked or not: who was struck off?', 'Linked ' + pct(lkRate) + ', not linked ' + pct(ulRate) + ', in the four constituencies whose lists record the link.') +
+        card(2, 'li2', 'Does the gap hold inside a part?', L.map(function (a, i) { return a.name + ' +' + d(UL[i].diff_pp, 1); }).join(', ') + ' points.') +
+        card(3, 'li3', 'How much of each roll could be traced?', 'About half of each roll links to 2002.') +
+        card(4, 'li4', 'In how many parts?', n(ulA) + ' of ' + n(ulParts) + ' parts.') +
+        card(5, 'li5', 'How many kept electors could not be traced?', n(s('nomap')) + ' electors kept on the draft roll were put on the no-mapping list for want of a trace to the last intensive revision, and summoned to prove it.') +
+        card(6, 'li6', 'How do the four groups compare in size?', 'Electors in the four constituencies with linkage, by link and by fate.')
+      ));
+
+    // ============================================================ HEARINGS
+    var days = {}; A.forEach(function (a) { a.daily.forEach(function (x) { days[x[0]] = (days[x[0]] || 0) + x[1]; }); });
+    var mon = { Aug: 8, Sep: 9, Oct: 10 }, dk = Object.keys(days).sort(function (p, q) { var a = p.split(' '), b = q.split(' '); return (mon[a[1]] * 100 + +a[0]) - (mon[b[1]] * 100 + +b[0]); });
+    chart('he1', hbar(names, A.map(function (a) { return a.hearing_rate; }), C.yellow, '% of the pre-revision roll summoned'));
+    chart('he2', hbar(S.rules, ruleTot, C.ikat, 'Electors flagged'));
+    chart('he3', { type: 'bar', data: { labels: dk, datasets: [{ label: 'Cases listed', data: dk.map(function (k) { return days[k]; }), backgroundColor: C.gold }] }, options: barOpts('', 'Cases listed per day') });
+    chart('he4', { type: 'bar', data: { labels: names, datasets: [{ label: 'Median cases per slot', data: A.map(function (a) { return a.median_slot; }), backgroundColor: C.ikat }, { label: 'Heaviest single slot', data: A.map(function (a) { return a.max_slot; }), backgroundColor: C.maroon }] }, options: barOpts('', 'Cases per slot', { plugins: { legend: { position: 'bottom' } } }) });
+    chart('he5', { type: 'bar', data: { labels: names, datasets: S.rules.map(function (k, i) { return { label: k, data: A.map(function (a) { return a.rules[k] || 0; }), backgroundColor: [C.maroon, C.ikat, C.gold, C.dblue, C.purple, C.grey, C.pink][i] }; }) }, options: { indexAxis: 'y', plugins: { legend: { position: 'bottom' } }, scales: { x: { stacked: true, title: { display: true, text: 'Flags' } }, y: { stacked: true } } } });
+    chart('he6', hbar(names, A.map(function (a) { return a.slots; }), C.dblue, 'Hearing slots scheduled'));
+    var peak = dk.reduce(function (m, k) { return days[k] > days[m] ? k : m; }, dk[0]);
+    html += section('hearings',
+      kpis([[n(t.hearing), 'Kept, summoned to a hearing'], [pct(100 * t.hearing / t.electors), 'Of the pre-revision roll'], [n(slots), 'Hearing slots'], [n(heavy.max_slot), 'Cases in the heaviest single slot']]) +
+      banner('Hearings', 'An elector kept on the draft roll could still be summoned to prove eligibility. ' + n(t.hearing) + ' were. Not being traceable to the last intensive revision was the commonest reason, ' + pct(100 * ruleTot[0] / sum(ruleTot, function (x) { return x; })) + ' of flags. The heaviest single slot listed ' + n(heavy.max_slot) + ' cases, in ' + heavy.name + ', where the median slot listed ' + n(heavy.median_slot) + '.') +
+      grid(
+        card(1, 'he1', 'How many were summoned?', A.map(function (a) { return a.name + ' ' + pct(a.hearing_rate); }).join(', ') + ' of each roll.') +
+        card(2, 'he2', 'Which rule sent them?', 'One elector can carry more than one rule, so the flags sum to more than the people summoned.', { size: 'tall' }) +
+        card(3, 'he3', 'How was the load spread over the days?', 'The busiest day, ' + peak.replace(/^0/, '') + ', listed ' + n(days[peak]) + ' cases across the five constituencies.', { size: 'tall' }) +
+        card(4, 'he4', 'How many cases per slot?', 'Median cases per slot: ' + A.map(function (a) { return a.name + ' ' + n(a.median_slot); }).join(', ') + '.') +
+        card(5, 'he5', 'Which rules, in which constituency?', 'Flags under each rule, constituency by constituency.', { size: 'tall' }) +
+        card(6, 'he6', 'How many slots were scheduled?', n(slots) + ' slots across the five constituencies, 28 August to 12 October.')
+      ));
+
+    // ============================================================ PARTS
+    var bins = [0, 20, 30, 40, 50, 60, 70, 101], binL = ['under 20%', '20–30%', '30–40%', '40–50%', '50–60%', '60–70%', '70% +'];
+    chart('pa1', { type: 'bar', data: { labels: binL, datasets: [{ label: 'Parts', data: binL.map(function (l, i) { return P100.filter(function (p) { return p.rate >= bins[i] && p.rate < bins[i + 1]; }).length; }), backgroundColor: binL.map(function (l, i) { return i >= 5 ? C.red : C.ikat; }) }] }, options: barOpts('Share of the part struck off', 'Polling parts') });
+    chart('pa2', { type: 'bar', data: { labels: names, datasets: [{ label: 'Lowest to highest part', data: A.map(function (a) { var q = a.part_rate_quartiles; return [q[0], q[4]]; }), backgroundColor: 'rgba(149,165,166,0.45)', barPercentage: 0.5 }, { label: 'Middle half of parts', data: A.map(function (a) { var q = a.part_rate_quartiles; return [q[1], q[3]]; }), backgroundColor: C.maroon, barPercentage: 0.5 }] }, options: { indexAxis: 'y', plugins: { legend: { position: 'bottom' } }, scales: { x: { min: 0, max: 100, title: { display: true, text: '% of the part struck off' } }, y: { stacked: true } } } });
+    chart('pa3', hbar(names, A.map(function (a) { return a.parts_over_60; }), C.red, 'Parts that lost more than 60% of their roll'));
+    var topP = P100.slice().sort(function (a, b) { return b.rate - a.rate; }).slice(0, 15);
+    chart('pa4', hbar(topP.map(function (p) { return p.ac + ' ' + p.part + (p.locality ? ' · ' + p.locality : ''); }), topP.map(function (p) { return p.rate; }), topP.map(function (p) { return ACC[names.indexOf(p.ac)]; }), '% of the part struck off'));
+    var su = P100.filter(function (p) { return p.untraceable_share_of_deleted != null && p.deleted >= 20; });
+    chart('pa5', { type: 'scatter', data: { datasets: A.map(function (a, i) { return { label: a.name, data: su.filter(function (p) { return p.ac === a.name; }).map(function (p) { return { x: p.untraceable_share_of_deleted, y: p.rate }; }), backgroundColor: ACC[i], pointRadius: 2.5 }; }) }, options: { plugins: { legend: { position: 'bottom' } }, scales: { x: { min: 0, max: 100, title: { display: true, text: '"Untraceable", % of the part\'s removals' } }, y: { title: { display: true, text: '% of the part struck off' } } } } });
+    chart('pa6', hbar(names, A.map(function (a) { return a.part_correlations.untraceable_share_vs_rate; }), C.grey, 'Rank correlation across parts: untraceable share and removal rate'));
+    html += section('parts',
+      kpis([[n(t.parts), 'Polling parts'], [d(rateRange[0], 0) + '% to ' + d(rateRange[1], 0) + '%', 'Range of part removal rates'], [over60.length, 'Parts that lost more than 60%'], [pct(median(P100.map(function (p) { return p.rate; }))), 'The median part\'s removal rate']]) +
+      banner('Polling parts', 'Part removal rates run from ' + d(rateRange[0], 0) + '% to ' + d(rateRange[1], 0) + '%, and ' + over60.length + ' parts lost more than 60% of their roll: ' + A.filter(function (a) { return a.parts_over_60; }).map(function (a) { return a.parts_over_60 + ' in ' + a.name; }).join(', ') + '. A part far above its neighbours is where verification on the ground should start.') +
+      grid(
+        card(1, 'pa1', 'How are part rates spread?', 'Parts with at least 100 electors, by the share of their roll struck off.') +
+        card(2, 'pa2', 'How wide is the range in each constituency?', 'The bar runs from the lowest part to the highest; the dark band holds the middle half.') +
+        card(3, 'pa3', 'Where are the heaviest parts?', A.map(function (a) { return a.name + ' ' + a.parts_over_60; }).join(', ') + '.') +
+        card(4, 'pa4', 'Which parts lost the most?', 'The fifteen heaviest parts; the part explorer opens any of them.', { size: 'tall' }) +
+        card(5, 'pa5', 'Does "untraceable" cluster in the heaviest parts?', 'Barely: the share entered as untraceable does not rise with the part rate.', { size: 'tall' }) +
+        card(6, 'pa6', 'How strong is that?', 'Rank correlations: ' + A.map(function (a) { return a.name + ' ' + d(a.part_correlations.untraceable_share_vs_rate, 2); }).join(', ') + '.', { size: 'tall' })
+      ) +
+      '<div class="card wide"><div class="card-title"><span>All ' + n(PR.length) + ' parts</span></div><div class="search"><label for="partq">Find a part or locality</label><input id="partq" type="search" placeholder="e.g. Kalikaman"></div><div class="twrap scroll" tabindex="0" role="region" aria-label="All polling parts"><table id="partTable"></table></div><div class="chart-takeaway">' + X.ICON + ' Click a column to sort; the part number opens it in the part explorer. Malakpet is listed by polling station.</div></div>');
+
+    // ============================================================ ELECTORAL
+    chart('el1', { type: 'bar', data: { labels: names, datasets: [{ label: '2023 winning margin', data: A.map(function (a) { return a.e2023.margin; }), backgroundColor: C.grey }, { label: 'Names struck off', data: A.map(function (a) { return a.deleted; }), backgroundColor: C.red }] }, options: barOpts('', 'Votes or names', { plugins: { legend: { position: 'bottom' } } }) });
+    chart('el2', { type: 'bar', data: { labels: names, datasets: [{ label: 'Valid votes cast, 2023', data: A.map(function (a) { return a.e2023.valid; }), backgroundColor: C.ikat }, { label: 'Names struck off', data: A.map(function (a) { return a.deleted; }), backgroundColor: C.red }] }, options: barOpts('', 'Votes or names', { plugins: { legend: { position: 'bottom' } } }) });
+    chart('el3', hbar(names, A.map(function (a) { return a.e2023.deleted_over_valid; }), A.map(function (a) { return a.e2023.deleted_over_valid > 100 ? C.red : C.gold; }), 'Names struck off as % of valid votes cast in 2023'));
+    chart('el4', { type: 'bar', data: { labels: names, datasets: [{ label: 'Winner\'s votes, 2023', data: A.map(function (a) { return a.e2023.winner_votes; }), backgroundColor: C.dblue }, { label: 'Names struck off', data: A.map(function (a) { return a.deleted; }), backgroundColor: C.red }] }, options: barOpts('', 'Votes or names', { plugins: { legend: { position: 'bottom' } } }) });
+    html += section('electoral',
+      kpis([[overM.length + ' of ' + A.length, 'Seats where names struck off exceed the 2023 margin'], [overV.length + ' of ' + A.length, 'Seats where they exceed all valid votes cast'], [n(yak.e2023.margin), 'Yakutpura\'s 2023 margin'], [n(yak.deleted), 'Names struck off in Yakutpura']]) +
+      banner('Electoral stakes', 'No election has been held on the revised roll. What can be said is the scale: every constituency lost more names than its 2023 winning margin, and in ' + overV.map(function (a) { return a.name; }).join(' and ') + ' the names struck off outnumber every valid vote cast in 2023. The roll records no one\'s vote, so none of this says whom the removed would have chosen.') +
+      grid(
+        card(1, 'el1', 'Names struck off against the margin', A.map(function (a) { return a.name + ' ' + d(a.e2023.deleted_over_margin, 1) + '×'; }).join(', ') + '.') +
+        card(2, 'el2', 'Names struck off against the votes cast', 'Names struck off as a share of valid votes: ' + A.map(function (a) { return a.name + ' ' + d(a.e2023.deleted_over_valid, 0) + '%'; }).join(', ') + '.') +
+        card(3, 'el3', 'Where do removals exceed the whole vote?', overV.map(function (a) { return a.name; }).join(' and ') + '.') +
+        card(4, 'el4', 'Against the winner\'s own vote', 'In ' + A.filter(function (a) { return a.deleted > a.e2023.winner_votes; }).length + ' of ' + A.length + ' constituencies more names were struck off than the winner received in 2023.')
+      ));
+
+    // ============================================================ RESEARCH
+    var RQ = [
+      ['How many names were struck off, and where?', n(t.deleted) + ' of ' + n(t.electors) + ' electors on the five pre-revision rolls, ' + pct(t.rate) + '. By constituency: ' + sortedRate.map(function (a) { return a.name + ' ' + pct(a.rate); }).join(', ') + '.'],
+      ['Did the removals exceed the margins that decided seats?', 'In all ' + A.length + '. Yakutpura was won by ' + n(yak.e2023.margin) + ' votes and lost ' + n(yak.deleted) + ' names; in ' + overV.map(function (a) { return a.name; }).join(' and ') + ' the names struck off exceed every valid vote cast in 2023.'],
+      ['Who carried the burden?', 'The old and those with no link to the 2002 roll. ' + pct(ageAll[7]) + ' of electors aged 80 and over were struck off; unlinked electors were struck off ' + d(ulR[0], 0) + ' to ' + d(ulR[1], 0) + ' points more often than linked electors in the same part.'],
+      ['Were women struck off more often than men?', 'No. Women ' + pct(fRate) + ', men ' + pct(mRate) + '; within parts the gap changes sign between constituencies.'],
+      ['Were Muslim-name electors struck off more often?', 'No: less often. Hindu-name electors ' + pct(hin) + ', Muslim-name electors ' + pct(mus) + '; inside the same part the gap holds in ' + hmA + ' of ' + hmParts + ' comparable parts. The lists cannot separate this from age.'],
+      ['Could the hearings be held as scheduled?', n(t.hearing) + ' electors were summoned across ' + n(slots) + ' slots; the heaviest single slot listed ' + n(heavy.max_slot) + ' cases.'],
+      ['Where should verification start?', 'With every removal entered as "untraceable or absent", every removal of an elector with no link to the 2002 roll, and every part that lost far more than the rest of its constituency, before the final roll is published.']
+    ];
+    html += section('research', X.qa(RQ) + '<p><a href="faq/">More questions and answers</a> · <a href="method/">Full method and fourteen research questions</a></p>');
+
+    // ============================================================ METHODS
+    html += section('methodology',
+      '<div class="methodology"><h2>Data sources</h2><ul><li>Pre-revision rolls, the list of the absent, shifted and dead, and the discrepancy and no-mapping lists: the Chief Electoral Officer, Telangana, for the five constituencies, September 2026, aggregated to the polling part.</li><li>Religion: estimated from each elector\'s name; a second, independent classification agrees on 99% of names. The roll records none.</li><li>Hearing schedules: the same lists, 28 August to 12 October.</li><li>2023 Assembly result: Election Commission of India.</li></ul></div>' +
+      '<div class="methodology"><h2>How the figures are built</h2><p>The lists cover every elector on the pre-revision roll, so each group has a true removal rate. Within-part differences compare two groups inside the same polling part, pooled across parts with at least 20 of each and weighted by the smaller group; this holds the locality and the booth officer fixed. Part counts sum exactly to the constituency totals.</p></div>' +
+      '<div class="methodology"><h2>What this shows and what it does not</h2><p>The lists show how many electors were struck off, from which parts, and who they were by age, sex, religion estimated from name, and 2002 linkage. They do not show whether any individual removal was right. The Malakpet list used here is incomplete and carries no part numbers or 2002 link. These are the September lists; restorations after hearings are not in these counts.</p><p><a href="method/">Full method</a></p></div>');
+
+    main.innerHTML = html;
+
+    // ------------------------------------------------------------------ parts table
+    var cols = [['ac', 'Constituency', 1], ['part', 'Part'], ['locality', 'Locality', 1], ['electors', 'Electors'], ['deleted', 'Struck off'], ['rate', '% struck off'], ['hearing_rate', '% summoned'], ['muslim_share_roll', 'Muslim names %'], ['untraceable_share_of_deleted', 'Untraceable % of removals']];
+    var key = 'rate', dir = -1, q = '';
+    function renderTable() {
+      var list = PR.filter(function (p) { return !q || (p.ac + ' ' + p.part + ' ' + (p.locality || '')).toLowerCase().indexOf(q) >= 0; }).sort(function (a, b) { var x = a[key], y = b[key]; if (typeof x === 'string' || typeof y === 'string') return dir * String(x || '').localeCompare(String(y || '')); return dir * ((x == null ? -1e9 : x) - (y == null ? -1e9 : y)); });
+      document.getElementById('partTable').innerHTML = '<thead><tr>' + cols.map(function (c) { return '<th scope="col" class="' + (c[2] ? 'l' : '') + '" aria-sort="' + (c[0] === key ? (dir < 0 ? 'descending' : 'ascending') : 'none') + '"><button type="button" data-k="' + c[0] + '">' + c[1] + '</button></th>'; }).join('') + '</tr></thead><tbody>' +
+        list.map(function (p) { return '<tr><td class="l">' + p.ac + '</td><td><a href="explorer/#' + p.ac + '-' + p.part + '">' + p.part + '</a></td><td class="l">' + esc(p.locality || '–') + '</td><td>' + n(p.electors) + '</td><td>' + n(p.deleted) + '</td><td>' + d(p.rate, 1) + '</td><td>' + d(p.hearing_rate, 1) + '</td><td>' + d(p.muslim_share_roll, 0) + '</td><td>' + d(p.untraceable_share_of_deleted, 0) + '</td></tr>'; }).join('') + '</tbody>';
+    }
+    document.getElementById('partTable').addEventListener('click', function (e) { var b = e.target.closest('th button'); if (!b) return; var k = b.getAttribute('data-k'); dir = k === key ? -dir : -1; key = k; renderTable(); });
+    document.getElementById('partq').addEventListener('input', function () { q = this.value.trim().toLowerCase(); renderTable(); });
+    renderTable();
+
+    DASH.start(main, 'hyderabad-sir');
+  }).catch(function (e) { main.innerHTML = '<p role="alert">The dashboard data did not load (' + esc(e.message) + '). Please reload the page.</p>'; });
+})();
 </script>
 </body>
 </html>

@@ -65,15 +65,23 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 
 ## Front end
 
-- **The homepage is the Bihar dashboard and stands alone.** `index.html` carries
-  its own inline stylesheet and script (the tabbed design PC asked to keep) and
-  does not load `sir.css` or `sir.js`. It reads the same `data/bihar/*.json`,
-  draws each tab's charts when the tab opens, and computes every sentence from
-  the data, including the verdict words: a rank correlation under 0.2 is
-  reported as no relationship. No page states the site's own address.
+- **One look on every page: the Bihar dashboard's.** A folk-art band across
+  the top (`.band.madhubani` for Bihar, `.band.ikat` for Hyderabad, a
+  Pochampally ikat tile drawn as an SVG data URI), a card header with the
+  controls, a tab bar, summary cards, key-finding banners and chart cards.
+  All of it is in `assets/sir.css`; no page carries its own palette.
+- **Two dashboards, many pages.** `index.html` (Bihar) and
+  `hyderabad/index.html` are tabbed dashboards built by `assets/dash.js`:
+  cards, banners, charts drawn when a tab first opens, PNG export and
+  printing. Every other page carries the same header and a tab bar of links,
+  written into its markup so it works without JavaScript. Sentences
+  are computed from the JSON, including the verdict words: a rank
+  correlation under 0.2 is reported as no relationship.
+- **The part explorer takes a link to a part**: `hyderabad/explorer/#Yakutpura-297`.
+- No page states the site's own address.
 - Colour tokens live in `assets/sir.css`, with the dark block written twice
   (`prefers-color-scheme` and `[data-theme="dark"]`). `check_contrast.py`
-  measures 50 pairs and fails if the two dark blocks differ.
+  measures 72 pairs, including the tab bar, the banners and the tags, and fails if the two dark blocks differ.
 - `SIR.chart` resolves `$token` colours before Chart.js sees them and disables
   the colours plugin; `SIR.recolour` sets option fields in place on a theme
   change. Replacing an options object wholesale breaks Chart.js's proxies

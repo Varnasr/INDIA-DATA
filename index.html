@@ -6,123 +6,18 @@
 <title>Bihar Electoral Dashboard: Special Intensive Revision 2025</title>
 <meta name="description" content="The Bihar Special Intensive Revision of 2025, booth by booth: 69 lakh names removed across 243 constituencies, set against the margins by which each seat was won, with women, religion, caste, border and district analysis.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23C0392B'/><path d='M9 16l4 4 9-9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/></svg>">
-<style>
-:root {
-  --yellow: #F4D03F; --blue: #85C1E9; --white: #FFFFFF;
-  --text: #1C2833; --text-light: #4D5B69; --teal: #1A8F7A; --mint: #A9DFBF;
-  --red: #C0392B; --orange: #E67E22; --green: #27AE60; --dblue: #1F618D; --purple: #8E44AD;
-  --bg: var(--white); --bg2: #F4F6F7; --card: var(--white);
-  --border: #E1E5E8; --shadow: rgba(0,0,0,0.08);
-  --tab-text: #1C2833; --tab-inactive: #4F5F6E; --tab-active: #B03A2E;
-  --grad-a: #B03A2E; --grad-b: #B85A10;
-}
-[data-theme="dark"] {
-  --bg: #111827; --bg2: #172033; --card: #1B2740;
-  --text: #EAECEE; --text-light: #B7C0C9; --border: #2E3B55; --shadow: rgba(0,0,0,0.35);
-  --tab-text: #EAECEE; --tab-inactive: #A9B4C0; --tab-active: #F5A79E; --dblue: #8EC1E6; --teal: #5FD3BD;
-  --grad-a: #F5A79E; --grad-b: #F8C471;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { overflow-x: clip; }
-body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-a { color: var(--dblue); }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.skip { position: absolute; left: -999px; } .skip:focus { left: 12px; top: 8px; background: var(--card); padding: 6px 10px; z-index: 200; }
-.icon { width: 18px; height: 18px; display: inline-block; vertical-align: middle; flex: none; }
-.madhubani { height: 6px; background: repeating-linear-gradient(90deg, var(--red) 0 20px, var(--orange) 20px 40px, var(--green) 40px 60px, var(--dblue) 60px 80px, var(--purple) 80px 100px); animation: scroll 8s linear infinite; }
-@keyframes scroll { to { background-position: 100px 0; } }
-header { background: var(--card); padding: 1rem 1.25rem; box-shadow: 0 2px 10px var(--shadow); position: sticky; top: 0; z-index: 100; }
-.header-content { max-width: 1800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-.logo { display: flex; align-items: center; gap: 1rem; }
-.logo-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--red), var(--orange)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; animation: glow 3s infinite; flex: none; }
-@keyframes glow { 0%,100% { box-shadow: 0 0 10px var(--orange); } 50% { box-shadow: 0 0 25px var(--red); } }
-h1 { font-size: 1.4rem; line-height: 1.25; }
-.subtitle { font-size: 0.85rem; color: var(--text-light); }
-.controls { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
-button, select, .btn { font: inherit; font-size: 0.9rem; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg2); color: var(--text); cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; }
-button:hover, .btn:hover { background: var(--blue); color: #1C2833; transform: translateY(-2px); }
-button:focus-visible, select:focus-visible, .btn:focus-visible, a:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
-.btn-primary { background: linear-gradient(135deg, var(--yellow), var(--orange)); color: #1C2833; border: none; font-weight: 600; }
-.nav-tabs { display: flex; gap: 0.25rem; padding: 0.5rem 0.75rem 0; background: var(--bg2); overflow-x: auto; border-bottom: 2px solid var(--border); }
-.nav-tab { padding: 0.6rem 1rem; border: none; background: transparent; color: var(--tab-inactive); white-space: nowrap; border-radius: 8px 8px 0 0; font-weight: 600; position: relative; }
-.nav-tab::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 3px; background: var(--red); transform: scaleX(0); transition: 0.3s; }
-.nav-tab[aria-selected="true"]::after { transform: scaleX(1); }
-.nav-tab[aria-selected="true"] { color: var(--tab-active); background: var(--card); }
-.nav-tab:hover { color: var(--tab-text); background: var(--card); transform: none; }
-main { max-width: 1800px; margin: 0 auto; padding: 1.5rem 1.25rem; }
-.tab-content { display: none; animation: fadeIn 0.4s; }
-.tab-content.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
-.summary-card { background: var(--card); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--red); box-shadow: 0 4px 15px var(--shadow); transition: 0.3s; }
-.summary-card:hover { transform: translateY(-3px); }
-.summary-card.y { border-color: var(--yellow); } .summary-card.b { border-color: var(--dblue); } .summary-card.g { border-color: var(--green); } .summary-card.o { border-color: var(--orange); } .summary-card.p { border-color: var(--purple); }
-.summary-value { font-size: 1.6rem; font-weight: 700; color: var(--grad-a); background: linear-gradient(135deg, var(--grad-a), var(--grad-b)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.3; }
-.summary-label { font-size: 0.8rem; color: var(--text-light); }
-.takeaway { background: linear-gradient(135deg, var(--yellow), var(--mint)); color: #1C2833; padding: 1rem 1.1rem; border-radius: 10px; margin: 0.5rem 0 1.25rem; border-left: 4px solid var(--green); display: flex; align-items: flex-start; gap: 0.75rem; }
-[data-theme="dark"] .takeaway { background: linear-gradient(135deg, rgba(244,208,63,0.18), rgba(169,223,191,0.18)); color: var(--text); }
-.takeaway-title { font-weight: 700; }
-.chart-takeaway { background: var(--bg2); padding: 0.75rem; border-radius: 8px; margin-top: 0.75rem; font-size: 0.85rem; border-left: 3px solid var(--teal); }
-.chart-takeaway strong { color: var(--dblue); }
-.charts-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem; }
-@media (max-width: 1400px) { .charts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 900px) { .charts-grid { grid-template-columns: minmax(0, 1fr); } .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } h1 { font-size: 1.1rem; } .summary-grid { gap: .6rem; } .summary-card { padding: .75rem; } .summary-value { font-size: 1.2rem; } .logo-icon { width: 40px; height: 40px; } }
-.card { background: var(--card); border-radius: 12px; padding: 1.25rem; box-shadow: 0 4px 20px var(--shadow); border: 1px solid var(--border); min-width: 0; }
-.card.wide { grid-column: 1 / -1; }
-.card-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
-.card-actions button { padding: 0.2rem 0.55rem; font-size: 0.7rem; }
-.chart-container { position: relative; height: 300px; width: 100%; }
-.chart-container.tall { height: 380px; }
-.chart-container.rows { height: 760px; }
-.research-section { background: var(--card); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.25rem; border: 1px solid var(--border); }
-.research-q { font-weight: 700; color: var(--dblue); margin-bottom: 0.5rem; font-size: 1rem; }
-.research-a { color: var(--text); padding: 0.75rem; background: var(--bg2); border-radius: 8px; border-left: 4px solid var(--green); }
-.methodology { background: var(--bg2); padding: 1.25rem; border-radius: 10px; margin: 1rem 0; }
-.methodology h2 { color: var(--dblue); margin-bottom: 0.5rem; font-size: 1.05rem; }
-.methodology ul { margin-left: 1.25rem; font-size: 0.92rem; }
-.methodology p { font-size: 0.92rem; margin-bottom: 0.5rem; }
-.twrap { overflow-x: auto; max-height: 560px; overflow-y: auto; }
-table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
-th, td { padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--border); text-align: right; font-variant-numeric: tabular-nums; }
-th.l, td.l { text-align: left; }
-th { position: sticky; top: 0; background: var(--bg2); z-index: 1; }
-th button { all: unset; cursor: pointer; font-weight: 600; }
-th button:focus-visible { outline: 2px solid var(--text); }
-th[aria-sort="descending"] button::after { content: " \25BE"; } th[aria-sort="ascending"] button::after { content: " \25B4"; }
-.tag { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 0 6px; border-radius: 4px; }
-.tag.NDA { background: #F5B041; color: #1C2833; } .tag.INDIA { background: #1E8449; color: #fff; } .tag.Other { background: #BB8FCE; color: #1C2833; }
-.search { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; }
-.search input { font: inherit; padding: 0.45rem 0.7rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); min-width: 240px; }
-.hubs { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 0 0 1.25rem; }
-.hub { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; text-decoration: none; color: var(--text); box-shadow: 0 4px 15px var(--shadow); display: block; }
-.hub:hover { border-color: var(--red); }
-.hub b { display: block; font-size: 1rem; }
-.hub span { font-size: 0.85rem; color: var(--text-light); }
-footer { background: var(--card); padding: 1.5rem; text-align: center; border-top: 1px solid var(--border); margin-top: 1rem; font-size: 0.85rem; color: var(--text-light); }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
-@media print { header, .nav-tabs, .card-actions, .search { display: none; } .tab-content { display: block !important; } }
-</style>
+<link rel="stylesheet" href="assets/sir.css">
 </head>
-<body>
+<body data-root="">
 <a class="skip" href="#content">Skip to content</a>
-<div class="madhubani"></div>
-<header>
+<div class="band madhubani" aria-hidden="true"></div>
+<header class="top">
   <div class="header-content">
-    <div class="logo">
-      <div class="logo-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></div>
-      <div>
-        <h1 data-translate="title">Bihar Electoral Dashboard</h1>
-        <div class="subtitle">Special Intensive Revision 2025 · every booth, every constituency</div>
-      </div>
-    </div>
+    <a class="logo" href=""><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span><h1 class="h-title">Bihar Electoral Dashboard</h1><span class="subtitle">Special Intensive Revision 2025 · every booth, every constituency</span></span></a>
     <div class="controls">
-      <label for="lang" class="sr-only">Language</label>
-      <select id="lang" aria-label="Language">
-        <option value="en">English</option><option value="hi">हिंदी</option><option value="bn">বাংলা</option><option value="ta">தமிழ்</option><option value="mr">मराठी</option>
-      </select>
       <a class="btn" href="hyderabad/">Hyderabad 2026</a>
-      <button type="button" id="themeBtn" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
-      <button type="button" class="btn-primary" id="pdfBtn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
+      <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
+      <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
     </div>
   </div>
 </header>
@@ -142,75 +37,13 @@ footer { background: var(--card); padding: 1.5rem; text-align: center; border-to
 <main id="content"></main>
 <footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers are published. · <a href="bihar/">Booth explorer</a> · <a href="bihar/faq/">Questions and answers</a> · <a href="hyderabad/">Hyderabad Old City 2026</a></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="assets/sir.js"></script>
+<script src="assets/dash.js"></script>
 <script>
 (function () {
-  // ------------------------------------------------------------------ helpers
-  var nf = new Intl.NumberFormat('en-IN');
-  function n(x) { return x == null || isNaN(x) ? '–' : nf.format(Math.round(x)); }
-  function d(x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k); }
-  function pct(x, k) { return d(x, k) + '%'; }
-  function lakh(x) { return (x / 1e5).toFixed(1) + ' lakh'; }
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-  function sum(a, f) { return a.reduce(function (s, x) { return s + (typeof f === 'function' ? f(x) : x[f]); }, 0); }
-  function mean(a) { return a.length ? sum(a, function (x) { return x; }) / a.length : NaN; }
-  function median(a) { var s = a.slice().sort(function (x, y) { return x - y; }), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
-  function corr(x, y) { var mx = mean(x), my = mean(y), sxy = 0, sx = 0, sy = 0; x.forEach(function (v, i) { sxy += (v - mx) * (y[i] - my); sx += (v - mx) * (v - mx); sy += (y[i] - my) * (y[i] - my); }); return sxy / Math.sqrt(sx * sy); }
-  function rank(a) { var o = a.map(function (v, i) { return [v, i]; }).sort(function (p, q) { return p[0] - q[0]; }), r = new Array(a.length); for (var i = 0; i < o.length;) { var j = i; while (j + 1 < o.length && o[j + 1][0] === o[i][0]) j++; for (var k = i; k <= j; k++) r[o[k][1]] = (i + j) / 2 + 1; i = j + 1; } return r; }
-  function rho(x, y) { return corr(rank(x), rank(y)); }
-  function groupBy(a, k) { var o = {}; a.forEach(function (r) { var g = typeof k === 'function' ? k(r) : r[k]; (o[g] = o[g] || []).push(r); }); return o; }
-  function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' : '–'; }
-  var C = { red: '#C0392B', orange: '#E67E22', green: '#27AE60', dblue: '#1F618D', purple: '#8E44AD', yellow: '#D4AC0D', teal: '#17A589', grey: '#95A5A6', pink: '#AF3B6E', nda: '#E67E22', india: '#1E8449', other: '#8E7CC3' };
-  var AL = { NDA: C.nda, INDIA: C.india, Other: C.other };
-  var ICON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v10"/><circle cx="12" cy="17" r="4"/></svg>';
-
-  // ------------------------------------------------------------------ theme
-  var root = document.documentElement, themeBtn = document.getElementById('themeBtn');
-  try { if (localStorage.getItem('sir-dash-theme') === 'dark') root.setAttribute('data-theme', 'dark'); } catch (e) {}
-  function isDark() { return root.getAttribute('data-theme') === 'dark'; }
-  function setThemeLabel() { themeBtn.querySelector('span').textContent = isDark() ? 'Light' : 'Dark'; themeBtn.setAttribute('aria-pressed', isDark() ? 'true' : 'false'); }
-  setThemeLabel();
-
-  // ------------------------------------------------------------------ language (title, as before)
-  var T = { en: 'Bihar Electoral Dashboard', hi: 'बिहार चुनाव डैशबोर्ड', bn: 'বিহার নির্বাচনী ড্যাশবোর্ড', ta: 'பீகார் தேர்தல் டாஷ்போர்ட்', mr: 'बिहार निवडणूक डॅशबोर्ड' };
-  document.getElementById('lang').addEventListener('change', function () { document.querySelector('[data-translate="title"]').textContent = T[this.value] || T.en; });
-
-  // ------------------------------------------------------------------ charts
-  var charts = {}, specs = {};
-  function chart(id, cfg) { specs[id] = cfg; }
-  function draw(id) {
-    if (typeof Chart === 'undefined') return;
-    var el = document.getElementById(id); if (!el || !specs[id]) return;
-    if (charts[id]) charts[id].destroy();
-    var ink = isDark() ? '#D5DBE1' : '#34495E', grid = isDark() ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
-    Chart.defaults.color = ink; Chart.defaults.borderColor = grid;
-    Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
-    Chart.defaults.font.size = window.innerWidth < 600 ? 11 : 12;
-    Chart.defaults.maintainAspectRatio = false;
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) Chart.defaults.animation = false;
-    var cfg = JSON.parse(JSON.stringify(specs[id], function (k, v) { return typeof v === 'function' ? undefined : v; }));
-    // Put back any callbacks the clone dropped.
-    if (specs[id].options && specs[id].options.plugins && specs[id].options.plugins.tooltip) cfg.options.plugins.tooltip = specs[id].options.plugins.tooltip;
-    cfg.options = cfg.options || {};
-    if (cfg.options.indexAxis === 'y') { cfg.options.scales = cfg.options.scales || {}; cfg.options.scales.y = cfg.options.scales.y || {}; cfg.options.scales.y.ticks = Object.assign({ autoSkip: false }, cfg.options.scales.y.ticks || {}); }
-    if (window.innerWidth < 600) { cfg.options.plugins = cfg.options.plugins || {}; cfg.options.plugins.legend = Object.assign({}, cfg.options.plugins.legend || {}); cfg.options.plugins.legend.labels = { boxWidth: 10, boxHeight: 10, padding: 6 }; }
-    charts[id] = new Chart(el, cfg);
-  }
-  function drawTab(tab) { document.querySelectorAll('#tab-' + tab + ' canvas').forEach(function (c) { draw(c.id); }); }
-
-  // ------------------------------------------------------------------ page building
+  var D = DASH, n = D.n, d = D.d, pct = D.pct, lakh = D.lakh, esc = D.esc, sum = D.sum, mean = D.mean, median = D.median, rho = D.rho, groupBy = D.groupBy, tag = D.tag;
+  var ICON = D.ICON, C = D.C, AL = D.AL, kpis = D.kpis, banner = D.banner, card = D.card, section = D.section, barOpts = D.barOpts, hbar = D.hbar, scatter = D.scatter, chart = D.chart;
   var main = document.getElementById('content');
-  function kpis(list) { var cls = ['', 'y', 'b', 'g', 'o', 'p']; return '<div class="summary-grid">' + list.map(function (k, i) { return '<div class="summary-card ' + cls[i % 6] + '"><div class="summary-value">' + k[0] + '</div><div class="summary-label">' + k[1] + '</div></div>'; }).join('') + '</div>'; }
-  function banner(title, text) { return '<div class="takeaway" role="note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg><div><div class="takeaway-title">' + title + '</div>' + text + '</div></div>'; }
-  function card(num, id, title, insight, opts) {
-    opts = opts || {};
-    return '<div class="card' + (opts.wide ? ' wide' : '') + '"><div class="card-title"><span>' + num + '. ' + title + '</span><div class="card-actions"><button type="button" data-png="' + id + '" aria-label="Download this chart as PNG">PNG</button></div></div>' +
-      '<div class="chart-container ' + (opts.size || '') + '"><canvas id="' + id + '" role="img" aria-label="' + esc(title) + '"></canvas></div>' +
-      '<div class="chart-takeaway">' + ICON + ' <strong>Key insight:</strong> ' + insight + '</div></div>';
-  }
-  function section(id, html) { return '<section class="tab-content" id="tab-' + id + '" role="tabpanel" aria-labelledby="tabbtn-' + id + '">' + html + '</section>'; }
-  function barOpts(x, y, extra) { return Object.assign({ plugins: { legend: { display: false } }, scales: { x: { title: { display: !!x, text: x } }, y: { beginAtZero: true, title: { display: !!y, text: y } } } }, extra || {}); }
-  function hbar(labels, data, colors, xt) { return { type: 'bar', data: { labels: labels, datasets: [{ label: xt, data: data, backgroundColor: colors }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: xt } } } } }; }
-  function scatter(pts, xt, yt, color, labelFn) { return { type: 'scatter', data: { datasets: [{ label: yt, data: pts, backgroundColor: color, pointRadius: 3.5 }] }, options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: labelFn } } }, scales: { x: { title: { display: true, text: xt } }, y: { title: { display: true, text: yt } } } } }; }
 
   Promise.all(['summary', 'constituencies', 'districts', 'identity'].map(function (f) { return fetch('data/bihar/' + f + '.json').then(function (r) { if (!r.ok) throw new Error(f + ' ' + r.status); return r.json(); }); })).then(function (r) {
     var S = r[0], A = r[1], DS = r[2], ID = r[3], t = S.totals, DI = ID.districts;
@@ -463,32 +296,7 @@ footer { background: var(--card); padding: 1.5rem; text-align: center; border-to
     document.getElementById('seatq').addEventListener('input', function () { q = this.value.trim().toLowerCase(); renderTable(); });
     renderTable();
 
-    // ------------------------------------------------------------------ tabs
-    var tabs = document.querySelectorAll('.nav-tab'), drawn = {};
-    function show(tab, push) {
-      tabs.forEach(function (b) { var on = b.getAttribute('data-tab') === tab; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.id = 'tabbtn-' + b.getAttribute('data-tab'); b.tabIndex = on ? 0 : -1; });
-      document.querySelectorAll('.tab-content').forEach(function (s) { s.classList.toggle('active', s.id === 'tab-' + tab); });
-      if (!drawn[tab]) { drawTab(tab); drawn[tab] = true; }
-      if (push) history.replaceState(null, '', '#' + tab);
-    }
-    tabs.forEach(function (b, i) {
-      b.addEventListener('click', function () { show(b.getAttribute('data-tab'), true); });
-      b.addEventListener('keydown', function (e) { var j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null; if (j == null) return; var nb = tabs[(j + tabs.length) % tabs.length]; nb.focus(); nb.click(); });
-    });
-    var start = (location.hash || '#overview').slice(1); show(document.getElementById('tab-' + start) ? start : 'overview');
-
-    // ------------------------------------------------------------------ actions
-    themeBtn.addEventListener('click', function () {
-      if (isDark()) root.removeAttribute('data-theme'); else root.setAttribute('data-theme', 'dark');
-      try { localStorage.setItem('sir-dash-theme', isDark() ? 'dark' : 'light'); } catch (e) {}
-      setThemeLabel(); Object.keys(charts).forEach(draw);
-    });
-    main.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-png]'); if (!b || !charts[b.getAttribute('data-png')]) return;
-      var a = document.createElement('a'); a.href = charts[b.getAttribute('data-png')].toBase64Image('image/png', 1); a.download = 'bihar-sir-' + b.getAttribute('data-png') + '.png'; a.click();
-    });
-    document.getElementById('pdfBtn').addEventListener('click', function () { Object.keys(specs).forEach(function (id) { if (!charts[id]) draw(id); }); document.querySelectorAll('.tab-content').forEach(function (s) { s.classList.add('active'); }); setTimeout(function () { window.print(); document.querySelectorAll('.tab-content').forEach(function (s) { s.classList.toggle('active', s.id === 'tab-' + (location.hash.slice(1) || 'overview')); }); }, 400); });
-    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { Object.keys(charts).forEach(draw); }, 250); });
+    DASH.start(main, 'bihar-sir');
   }).catch(function (e) { main.innerHTML = '<p role="alert">The dashboard data did not load (' + esc(e.message) + '). Please reload the page.</p>'; });
 })();
 </script>
