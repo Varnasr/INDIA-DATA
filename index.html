@@ -18,14 +18,22 @@
 </header>
 <main id="main">
   <h2>Bihar 2025</h2>
-  <p class="sub">Every name removed from Bihar's roll in both phases of the revision, booth by booth across 243 constituencies, set against the 2020, 2024 and 2025 results.</p>
+  <p class="sub">Every name removed from Bihar's roll in both phases of the revision, booth by booth across 243 constituencies, set against the margins by which the seats were won.</p>
   <ul class="claims" id="bihar"></ul>
-  <p><a href="bihar/">Open the Bihar explorer</a> · <a href="bihar/results/">Elections</a> · <a href="bihar/people/">Women, religion, caste</a></p>
+  <p><a href="bihar/">Open the Bihar explorer</a> · <a href="bihar/results/">Elections</a> · <a href="bihar/people/">Women, religion, caste</a> · <a href="bihar/faq/">FAQ</a></p>
 
   <h2>Hyderabad Old City 2026</h2>
   <p class="sub">Every elector on the pre-revision rolls of Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, sorted into struck off, kept but summoned to a hearing, or left alone, down to the polling part.</p>
   <ul class="claims" id="hyd"></ul>
-  <p><a href="hyderabad/">Open the Hyderabad pages</a> · <a href="hyderabad/explorer/">Part explorer</a> · <a href="hyderabad/hearings/">Hearings</a></p>
+  <p><a href="hyderabad/">Open the Hyderabad pages</a> · <a href="hyderabad/explorer/">Explorer</a> · <a href="hyderabad/hearings/">Hearings</a> · <a href="hyderabad/faq/">FAQ</a></p>
+
+  <h2>What an audit needs</h2>
+  <p class="sub">Neither set of lists says whose votes the removals were. Three things would settle it.</p>
+  <ul class="claims">
+    <li><b>1</b><span>A name-by-name verification of removals in every Bihar constituency where they exceed the 2025 winning margin, beginning with the seats that changed hands.</span></li>
+    <li><b>2</b><span>Publication, booth by booth, of every claim and objection filed after the draft roll and what became of it.</span></li>
+    <li><b>3</b><span>In Hyderabad, a review before the final roll of every removal entered as "untraceable or absent", and of removals of electors with no link to the 2002 roll.</span></li>
+  </ul>
 
   <h2>Two kinds of list</h2>
   <p class="sub">Bihar's lists name the removed, booth by booth, so the Bihar pages compare where removals fell and who the removed were against census and survey baselines. Hyderabad's lists cover every elector on the pre-revision roll, so each group there has its own removal rate, and groups can be compared inside the same polling part.</p>
@@ -37,12 +45,13 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var s = r[0], acs = r[1], D = r[2].districts, h = r[3], t = s.totals, L = s.by_alliance_label, W = s.within_seat_2024, I = s.intensity;
   var li = function (rows) { return rows.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join(''); };
   var fOver = D.filter(function (d) { return d.female_share_deleted > d.female_share_population_2011; }).length;
-  var mOver = acs.filter(function (a) { return a.margin2025 != null && a.total > a.margin2025; }).length, last = I.bins[I.bins.length - 1], first = I.bins[0];
+  var mOver = acs.filter(function (a) { return a.margin2025 != null && a.total > a.margin2025; }).length;
+  var withM = acs.filter(function (a) { return a.margin2025; }), took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; });
   document.getElementById('bihar').innerHTML = li([
-    [SIR.lakh(t.total), 'names removed, ' + SIR.d(100 * t.total / t.electorate_2025, 2) + ' for every 100 electors on the 2025 roll.'],
-    [SIR.d(L['2025'].NDA.per_100, 2) + ' vs ' + SIR.d(L['2025'].INDIA.per_100, 2), 'names removed per 100 electors in NDA-held and INDIA-held seats. Inside the same constituency, NDA-led booths lost ' + SIR.d(W.pooled_nda_minus_india, 1) + ' more names each, in ' + W.seats_nda_higher + ' of ' + W.seats_compared + ' seats; of the booths that lost 400 or more, ' + SIR.d(last.nda_pct, 0) + '% were NDA-led, against ' + SIR.d(first.nda_pct, 0) + '% of those that lost under 50.'],
-    [SIR.pct(100 * t.female / (t.female + t.male)), 'of those removed were women, above their share of the population in ' + fOver + ' of ' + D.length + ' districts.'],
-    [mOver + ' of ' + acs.length, 'seats lost more names than the 2025 winning margin.']
+    [SIR.lakh(t.total), 'names removed from Bihar\'s roll, ' + SIR.d(100 * t.total / t.electorate_2025, 2) + ' for every 100 electors on the 2025 roll.'],
+    [mOver + ' of ' + acs.length, 'constituencies lost more names than the margin by which they were won in 2025.'],
+    [took.filter(function (a) { return a.total > a.margin2025; }).length + ' of ' + took.length, 'seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA\'s winning margin.'],
+    [SIR.pct(100 * t.female / (t.female + t.male)), 'of those removed were women, above their share of the population in ' + fOver + ' of ' + D.length + ' districts.']
   ]);
   var A = h.acs, tt = h.totals, age80 = 100 * SIR.sum(A, function (a) { return a.counts.age_asd[7]; }) / SIR.sum(A, function (a) { return a.age_all[7]; });
   var L2 = A.filter(function (a) { return a.linked; }), ul = L2.map(function (a) { return a.within_part.unlinked_minus_linked.diff_pp; });

@@ -86,5 +86,12 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   sources without naming the people or organisations who compiled them.
 - **Writing**: plain explanatory prose. Never refer to earlier versions of the
   analysis or to corrections on a public page.
+- **Framing**: the pages make an accountability case. They lead with the scale
+  of the removals, the removals against winning margins, women's
+  over-representation and, in Hyderabad, the process (the 2002 link, hearing
+  loads), and end with what an audit needs. The alliance comparisons stay on
+  the Elections page and in the FAQ, stated plainly: the lists show more
+  removals on NDA ground, and no page may say otherwise. The lists cannot show
+  intent, and no page may claim they do.
 - `pandas` and `openpyxl` are pinned in CI because a reader change could move
   the numbers without an error.

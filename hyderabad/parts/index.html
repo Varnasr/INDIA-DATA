@@ -11,10 +11,10 @@
 <body data-root="../../">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site">
-  <div class="brand"><a class="home" href="../../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
-  <h1>Parts</h1>
-  <p class="lede">A constituency rate hides the spread underneath it. Here are the 1,158 polling parts: how their deletion rates are distributed, which parts stand far from their neighbours, and what moves with the rate from part to part.</p>
-  <nav class="sub" aria-label="Hyderabad"><a href="../">Overview</a><a href="../explorer/">Part explorer</a><a href="../people/">Age, sex, religion, 2002</a><a href="./" aria-current="page">Parts</a><a href="../hearings/">Hearings</a><a href="../method/">Method</a></nav>
+  <div class="brand"><span class="crumbs"><a class="home" href="../../">SIR analyses</a> · <a class="home" href="../">Hyderabad overview</a> · <a class="home" href="../../bihar/">Bihar 2025</a></span><button class="theme" type="button">Dark theme</button></div>
+  <h1>Polling parts</h1>
+  <p class="lede">The five constituencies are made up of 1,158 polling parts, and their removal rates vary widely. This page shows how widely, which parts stand furthest from the rest of their constituency, and what rises and falls with the rate from part to part.</p>
+  <nav class="sub" aria-label="Hyderabad"><a href="../">Overview</a><a href="../explorer/">Explorer</a><a href="../people/">Age, sex, religion, 2002</a><a href="./" aria-current="page">Polling parts</a><a href="../hearings/">Hearings</a><a href="../faq/">FAQ</a><a href="../method/">Method</a></nav>
 </header>
 <main id="main">
   <div class="grid">
@@ -42,7 +42,7 @@
   <p class="finding" id="fParts"></p>
 
   <h2>Parts that stand apart</h2>
-  <p class="sub">Parts whose deletion rate is furthest from their own constituency's median, in either direction. A part far above its neighbours is where a check on the ground would start.</p>
+  <p class="sub">Parts whose removal rate is furthest from their own constituency's median, in either direction. A part far above its neighbours is where verification on the ground should start.</p>
   <div class="controls"><label for="fac">Constituency</label><select id="fac"><option value="">All five</option></select></div>
   <div class="twrap" tabindex="0" role="region" aria-label="Outlying parts"><table id="tOut"></table></div>
   <p class="note">Parts with fewer than 100 electors are left out of the rates, since one household moves them by several points. Muslim share of a part is the share of its pre-revision roll with names estimated Muslim. "Untraceable" is the ECI reason code Untraceable/Absent as a share of the part's deletions.</p>
@@ -67,7 +67,7 @@ Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/p
   SIR.table(document.getElementById('tCorr'), [{ k: 'name', label: 'Constituency', left: true }, { k: 'm', label: 'Muslim share', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'o', label: 'Aged 80+ share', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'u', label: 'Untraceable share', fmt: function (v) { return SIR.d(v, 2); } }],
     A.map(function (a) { var c = a.part_correlations; return { name: a.name, m: c.muslim_share_vs_rate, o: c.aged80_share_vs_rate, u: c.untraceable_share_vs_rate }; }), { sort: 'name', dir: 1 });
   var ms = A.map(function (a) { return a.part_correlations.muslim_share_vs_rate; });
-  document.getElementById('fParts').innerHTML = '<b>Where an elector lived mattered as well as who they were.</b> Rates run from ' + SIR.d(Math.min.apply(null, A.map(function (a) { return a.part_rate_quartiles[0]; })), 0) + '% to ' + SIR.d(Math.max.apply(null, A.map(function (a) { return a.part_rate_quartiles[4]; })), 0) + '% across parts, and ' + SIR.sum(A, 'parts_over_60') + ' parts lost more than 60% of their roll, all in Charminar and Yakutpura. Across parts the Muslim share and the deletion rate move in opposite directions in every constituency (ρ ' + SIR.d(Math.max.apply(null, ms), 2) + ' to ' + SIR.d(Math.min.apply(null, ms), 2) + '), while the share of elderly electors and the share coded untraceable barely move with it.';
+  document.getElementById('fParts').innerHTML = '<b>Part rates run from ' + SIR.d(Math.min.apply(null, A.map(function (a) { return a.part_rate_quartiles[0]; })), 0) + '% to ' + SIR.d(Math.max.apply(null, A.map(function (a) { return a.part_rate_quartiles[4]; })), 0) + '%, and ' + SIR.sum(A, 'parts_over_60') + ' parts lost more than 60% of their roll</b>, ' + A.filter(function (a) { return a.parts_over_60; }).map(function (a) { return a.parts_over_60 + ' in ' + a.name; }).join(' and ') + '. Across parts, the Muslim-name share of the roll and the removal rate move in opposite directions in every constituency (rank correlations ' + SIR.d(Math.max.apply(null, ms), 2) + ' to ' + SIR.d(Math.min.apply(null, ms), 2) + '); the share of elderly electors and the share entered as untraceable barely move with it.';
 
   var med = {}; A.forEach(function (a) { med[a.name] = a.part_rate_quartiles[2]; });
   var sel = document.getElementById('fac'); sel.innerHTML += A.map(function (a) { return '<option>' + a.name + '</option>'; }).join('');
