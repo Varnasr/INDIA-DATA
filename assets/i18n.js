@@ -12,7 +12,8 @@
      before the page's own script runs. A unit is an element whose children
      are all inline (a, b, strong, em, span, br, code...); its innerHTML is
      the key. Other elements have their own text nodes translated one by
-     one. Attributes (aria-label, placeholder, title), the page title and
+     one, as are the children of an element marked data-i18n-each (a row of
+     links whose addresses change from page to page). Attributes (aria-label, placeholder, title), the page title and
      the meta description are keys too. Mark anything that must stay as it
      is with data-no-i18n.
 
@@ -88,7 +89,7 @@
   function walk(el) {
     if (SKIP[el.tagName] || el.hasAttribute('data-no-i18n')) return;
     attrs(el);
-    if (el.firstElementChild && el.tagName !== 'BODY' && isUnit(el) && has(el.textContent)) {
+    if (el.firstElementChild && el.tagName !== 'BODY' && !el.hasAttribute('data-i18n-each') && isUnit(el) && has(el.textContent)) {
       var key = norm(el.innerHTML), t = tr(key);
       if (t) el.innerHTML = t;
       el.querySelectorAll('*').forEach(attrs);
@@ -110,10 +111,13 @@
     if (md) { var tm = tr(norm(md.content)); if (tm) md.content = tm; }
     walk(root);
     // The language menu, beside the other controls in the header.
-    var ctl = document.querySelector('header.top .controls');
+    // It goes after the Bihar/Hyderabad switch, so a phone can put the two
+    // side by side on the second line of the header.
+    var ctl = document.querySelector('header.top .controls'), sw = document.querySelector('header.top .switch');
     if (ctl && (MENU || lang !== 'en') && !document.getElementById('lang')) {
       var opts = Object.keys(LANGS).map(function (k) { return '<option value="' + k + '"' + (k === lang ? ' selected' : '') + ' lang="' + k + '">' + LANGS[k].name + '</option>'; }).join('');
-      ctl.insertAdjacentHTML('afterbegin', '<select id="lang" aria-label="' + L('Language') + '" data-no-i18n>' + opts + '</select>');
+      var sel = '<select id="lang" aria-label="' + L('Language') + '" data-no-i18n>' + opts + '</select>';
+      if (sw) sw.insertAdjacentHTML('afterend', sel); else ctl.insertAdjacentHTML('afterbegin', sel);
       document.getElementById('lang').addEventListener('change', function () {
         try { localStorage.setItem('sir-lang', this.value); } catch (e) {}
         var u = new URL(location.href); u.searchParams.set('lang', this.value); location.href = u.toString();

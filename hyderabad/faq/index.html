@@ -14,12 +14,12 @@
 <div class="band ikat" aria-hidden="true"></div>
 <header class="top">
   <div class="header-content">
-    <a class="logo" href="../../hyderabad/"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span><span class="h-title">Hyderabad Old City Electoral Dashboard</span><span class="subtitle">Special Intensive Revision 2026 · five constituencies, every polling part</span></span></a>
+    <a class="logo" href="../../hyderabad/"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span class="titles"><span class="h-title">SIR analysis for India</span><span class="subtitle">Hyderabad Old City 2026 · five constituencies, every polling part</span></span></a>
+    <nav class="switch" aria-label="Analyses" data-i18n-each><a href="../../">Bihar 2025</a><a href="../../hyderabad/" aria-current="true">Hyderabad 2026</a></nav>
     <div class="controls">
-      <a class="btn" href="../../">Bihar 2025</a>
-      <a class="btn report" href="../../reports/hyderabad-old-city-sir-2026-report.pdf" download><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a>
-      <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
-      <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
+      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../reports/hyderabad-old-city-sir-2026-report.pdf" download>Full report, PDF</a><a href="../../reports/hyderabad-old-city-sir-2026-report.docx" download>Full report, Word</a><a href="../../reports/hyderabad-old-city-sir-2026-deck.pptx" download>Slides, PowerPoint</a></div></details>
+      <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
+      <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span class="lbl">Export PDF</span></button>
     </div>
   </div>
 </header>
@@ -55,7 +55,7 @@ SIR.json('data/hyderabad/summary.json').then(function (s) {
     [L('Did this change an election result?'),
      L('No election has been held on the revised roll.') + ' ' + L('What can be said is the scale: every one of the five constituencies lost more names than its 2023 winning margin, and in {names} the names struck off outnumber every valid vote cast in 2023.', { names: valid.join(L(' and ')) }) + ' ' + L('Yakutpura was won by {margin} votes and lost {deleted} names.', { margin: SIR.n(yak.e2023.margin), deleted: SIR.n(yak.deleted) })],
     [L('How reliable are the lists?'),
-     L('For Charminar, Yakutpura, Chandrayangutta and Bahadurpura, the counts of names struck off agree exactly with Sabar Institute\'s independent count of the same lists, as do the recorded reasons and women\'s share.') + ' ' + L('The Malakpet list used here is incomplete: it holds {held} names against Sabar Institute\'s 1,47,799, and carries no part numbers or 2002 link.', { held: SIR.n(mal.deleted) })],
+     L('For Charminar, Yakutpura, Chandrayangutta and Bahadurpura, the counts of names struck off agree exactly with an independent count of the same lists, as do the recorded reasons and women\'s share.') + ' ' + L('The Malakpet list used here is incomplete: it holds {held} names against 1,47,799 in an independent count of the published list, and carries no part numbers or 2002 link.', { held: SIR.n(mal.deleted) })],
     [L('Why only five constituencies?'),
      L('These are the five Old City constituencies whose full lists were available elector by elector. The figures describe these five and no others.')],
     [L('Why are no names published?'),

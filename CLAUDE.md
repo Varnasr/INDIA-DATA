@@ -83,6 +83,17 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   written into its markup so it works without JavaScript. Sentences
   are computed from the JSON, including the verdict words: a rank
   correlation under 0.2 is reported as no relationship.
+- **The site is "SIR analysis for India"; Bihar and Hyderabad are two
+  analyses inside it.** Every page carries the same header: that title, a
+  subtitle naming the analysis, a two-way switch (Bihar 2025 / Hyderabad 2026),
+  and a Downloads menu with the report in PDF and Word and the slides. The
+  header is identical markup on all 15 pages; change it everywhere at once.
+- **The tab bar is sticky.** On a wide screen the header sticks and the bar
+  sticks beneath it (`sir.js` writes the header's height to `--hh`); on a phone
+  the header scrolls away and the bar sticks at the top. The bar fades at
+  whichever edge has more tabs, and the active tab is scrolled into view.
+  Measured at 390px before this: a 176px header and a 1,451px tab bar showing
+  two and a half tabs, gone from the screen after the first scroll.
 - **The part explorer takes a link to a part**: `hyderabad/explorer/#Yakutpura-297`.
 - No page states the site's own address.
 - Colour tokens live in `assets/sir.css`, with the dark block written twice
@@ -112,6 +123,9 @@ in the address (`?lang=hi`) and in the reader's browser.
   `check_i18n.py` reads the keys from the source and fails on anything else.
   Write whole sentences, never fragments, and pass values already formatted.
   A page-local variable named `L` hides the function; several pages had one.
+- **A row of links** (the switch, the Downloads menu) carries `data-i18n-each`,
+  so each link is its own key; without it the whole row, addresses and all,
+  becomes one key that differs on every page.
 - **Fixed text in the markup** is translated by `L.apply()`, which `sir.js`
   calls before a page's own script runs. The key is an element's inner HTML
   as the browser serialises it, so `scripts/i18n_collect.mjs` reads the keys
