@@ -55,8 +55,21 @@ header.top{background:var(--card);padding:1rem 1.25rem;box-shadow:0 2px 10px var
 .hyd .logo-icon{background:linear-gradient(135deg,#8b1e3f,#0e5e6f);animation-name:glow-hyd}
 @keyframes glow{0%,100%{box-shadow:0 0 10px var(--s-orange)}50%{box-shadow:0 0 25px var(--fill-red)}}
 @keyframes glow-hyd{0%,100%{box-shadow:0 0 10px #e0a526}50%{box-shadow:0 0 25px #8b1e3f}}
+.titles{display:block;margin:0;font-size:inherit;font-weight:inherit;min-width:0}
 .h-title{display:block;font-size:1.4rem;font-weight:700;line-height:1.25}
-.subtitle{display:block;font-size:.85rem;color:var(--muted)}
+.subtitle{display:block;font-size:.85rem;color:var(--muted);font-weight:400}
+/* Bihar or Hyderabad: a two-way switch beside the title. */
+.switch{display:flex;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px}
+.switch a{padding:.4rem .9rem;border-radius:7px;color:var(--tab);text-decoration:none;font-weight:600;font-size:.9rem;white-space:nowrap;text-align:center}
+.switch a:hover{color:var(--ink);background:var(--card)}
+.switch a[aria-current]{background:var(--card);color:var(--tab-on);box-shadow:0 1px 4px var(--shadow)}
+/* Downloads: the report in PDF and Word, and the slides. */
+.dl{position:relative}
+.dl summary{list-style:none}
+.dl summary::-webkit-details-marker{display:none}
+.dl .menu{position:absolute;inset-inline-end:0;top:calc(100% + 6px);z-index:120;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px var(--shadow);padding:.35rem;min-width:13rem;display:flex;flex-direction:column}
+.dl .menu a{padding:.6rem .75rem;border-radius:7px;color:var(--ink);text-decoration:none;font-size:.9rem;white-space:nowrap}
+.dl .menu a:hover,.dl .menu a:focus-visible{background:var(--soft)}
 .controls{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
 button,select,.btn{font:inherit;font-size:.9rem;padding:.5rem 1rem;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;text-decoration:none}
 button:hover,.btn:hover{background:var(--s-blue);color:#1c2833;transform:translateY(-2px)}
@@ -64,7 +77,13 @@ button:focus-visible,select:focus-visible,.btn:focus-visible,a:focus-visible,inp
 .btn-primary{background:linear-gradient(135deg,var(--s-yellow),var(--s-orange));color:#1c2833;border:none;font-weight:600}
 
 /* ------------------------------------------------------------- the tabs */
-.nav-tabs{display:flex;gap:.25rem;padding:.5rem .75rem 0;background:var(--soft);overflow-x:auto;border-bottom:2px solid var(--line)}
+.nav-tabs{display:flex;gap:.25rem;padding:.5rem .75rem 0;background:var(--soft);overflow-x:auto;border-bottom:2px solid var(--line);position:sticky;top:var(--hh,0px);z-index:90;scrollbar-width:none;scroll-snap-type:x proximity}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{scroll-snap-align:start}
+/* A fade at whichever edge has more tabs beyond it, set by sir.js. */
+.nav-tabs.more-end{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 48px),transparent)}
+.nav-tabs.more-start{-webkit-mask-image:linear-gradient(to left,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(to left,#000 calc(100% - 48px),transparent)}
+.nav-tabs.more-start.more-end{-webkit-mask-image:linear-gradient(to right,transparent,#000 48px,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(to right,transparent,#000 48px,#000 calc(100% - 48px),transparent)}
 .nav-tab{padding:.6rem 1rem;border:none;background:transparent;color:var(--tab);white-space:nowrap;border-radius:8px 8px 0 0;font-weight:600;position:relative;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem}
 .nav-tab::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:3px;background:var(--fill-red);transform:scaleX(0);transition:.3s}
 .nav-tab[aria-selected="true"]::after,.nav-tab[aria-current="page"]::after{transform:scaleX(1)}
@@ -217,15 +236,40 @@ footer{background:var(--card);padding:1.5rem;text-align:center;border-top:1px so
   .summary-value,.kpis b{font-size:1.2rem}
   .h-title{font-size:1.1rem}.logo-icon{width:40px;height:40px}
   header.top{position:static;padding:.75rem 1rem}
-  .controls{gap:.35rem}.controls .btn,.controls button{padding:.35rem .7rem;font-size:.8rem}
+  .nav-tabs{--hh:0px}
+  .controls{gap:.35rem}.controls .btn,.controls button,.controls summary{padding:.35rem .7rem;font-size:.8rem}
   .logo{gap:.6rem}
   .xp{grid-template-columns:minmax(0,1fr)}
   .xp aside{position:static;max-height:none;border-inline-end:0;border-bottom:1px solid var(--line)}
   .xlist{max-height:260px;overflow:auto}
   .search input{min-width:0;width:100%}
 }
+/* A phone: title and three icon buttons on one line, the switch on the next,
+   and a tab bar that stays at the top of the screen as the page scrolls. */
+@media (max-width:700px){
+  header.top{padding:.55rem .75rem .6rem}
+  .header-content{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem .5rem}
+  .logo{gap:.55rem;min-width:0}
+  .logo-icon{display:none}
+  .h-title{font-size:1.02rem}
+  .subtitle{font-size:.72rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .titles{overflow:hidden}
+  .controls{flex-wrap:nowrap;gap:.3rem}
+  .controls .btn,.controls button,.controls summary{width:40px;height:40px;padding:0;justify-content:center;border-radius:10px}
+  .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .switch{grid-column:1/-1;order:3;padding:2px;border-radius:9px}
+  .switch a{flex:1;padding:.4rem .5rem;font-size:.84rem}
+  .header-content:has(#lang) .switch{grid-column:1}
+  #lang{order:4;padding:.3rem .5rem;font-size:.84rem;max-width:7.5rem}
+  .nav-tabs{padding:.35rem .5rem;gap:.3rem;border-bottom-width:1px;box-shadow:0 2px 8px var(--shadow)}
+  .nav-tab{padding:.45rem .75rem;font-size:.84rem;border-radius:999px;min-height:36px}
+  .nav-tab .icon{width:15px;height:15px}
+  .nav-tab::after{display:none}
+  .nav-tab[aria-selected="true"],.nav-tab[aria-current="page"]{background:var(--card);box-shadow:inset 0 0 0 2px var(--fill-red)}
+  main{padding:1rem .75rem 2rem}
+}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
-@media print{header.top,.nav-tabs,.card-actions,.search,.controls,.tools,.band{display:none}.tab-content{display:block!important}.card,.panel{break-inside:avoid;box-shadow:none}}
+@media print{header.top,.nav-tabs,.switch,.dl,.card-actions,.search,.controls,.tools,.band{display:none}.tab-content{display:block!important}.card,.panel{break-inside:avoid;box-shadow:none}}
 
 /* ------------------------------------------------------------ languages */
 .i18n-note{max-width:1800px;margin:.75rem auto 0;padding:.55rem 1.25rem;font-size:.85rem;color:var(--ink);background:var(--soft);border-inline-start:4px solid var(--fill-amber)}

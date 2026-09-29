@@ -73,6 +73,40 @@
   var pr = document.querySelector('.print');
   if (pr) pr.addEventListener('click', function () { if (SIR.beforePrint) SIR.beforePrint(); setTimeout(function () { window.print(); }, 300); });
 
+  // ----------------------------------------------------- header and tabs
+  // On a wide screen the header is sticky and the tab bar sticks beneath it,
+  // so the bar needs the header's height; on a phone the header scrolls away
+  // and the bar sticks at the top on its own (the stylesheet zeroes --hh).
+  var head = document.querySelector('header.top'), nav = document.querySelector('.nav-tabs');
+  function measure() {
+    if (head) document.documentElement.style.setProperty('--hh', (getComputedStyle(head).position === 'sticky' ? head.offsetHeight : 0) + 'px');
+    if (nav) {
+      var over = nav.scrollWidth - nav.clientWidth, x = Math.abs(nav.scrollLeft), rtl = getComputedStyle(nav).direction === 'rtl';
+      var before = x > 4, after = x < over - 4;
+      nav.classList.toggle(rtl ? 'more-end' : 'more-start', over > 4 && before);
+      nav.classList.toggle(rtl ? 'more-start' : 'more-end', over > 4 && after);
+    }
+  }
+  SIR.tabIntoView = function (t) {
+    if (!nav || !t) return;
+    var n = nav.getBoundingClientRect(), r = t.getBoundingClientRect();
+    nav.scrollBy({ left: (r.left + r.width / 2) - (n.left + n.width / 2), behavior: 'smooth' });
+  };
+  if (nav) {
+    nav.addEventListener('scroll', measure, { passive: true });
+    SIR.tabIntoView(nav.querySelector('[aria-current="page"]'));
+  }
+  window.addEventListener('resize', measure);
+  measure();
+  // The downloads menu closes on a click elsewhere and on Escape.
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('details.dl[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('details.dl[open]').forEach(function (d) { d.removeAttribute('open'); d.querySelector('summary').focus(); });
+  });
+
   // --------------------------------------------------------------- charts
   SIR.charts = [];
   SIR.chart = function (id, cfg) {

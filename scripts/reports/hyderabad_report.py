@@ -80,7 +80,7 @@ R.table(['Constituency', 'Electors', 'Struck off', '% struck off', 'Summoned', '
         [[a['name'], indian(a['electors']), indian(a['deleted']), pct(a['rate']), indian(a['hearing']), pct(a['hearing_rate']), a['parts']] for a in A] +
         [['All five', indian(t['electors']), indian(t['deleted']), pct(t['rate']), indian(t['hearing']), pct(100 * t['hearing'] / t['electors']), indian(t['parts'])]],
         widths=[3.4, 2.4, 2.3, 2, 2.3, 2, 1.5], right={1, 2, 3, 4, 5, 6})
-R.p('Malakpet\'s list is read by polling-station name, which gives %d stations rather than parts, and it is incomplete: it holds %s names struck off against the %s the Sabar Institute counted in the published Malakpet list. For the other four constituencies the two counts agree exactly.'
+R.p('Malakpet\'s list is read by polling-station name, which gives %d stations rather than parts, and it is incomplete: it holds %s names struck off against the %s in an independent count of the published Malakpet list. For the other four constituencies the two counts agree exactly.'
     % (mal['parts'], indian(mal['deleted']), '1,47,799'))
 
 R.h2('Deletions against the margin and the votes polled')
