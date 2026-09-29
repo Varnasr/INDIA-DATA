@@ -1,128 +1,59 @@
-# INDIA-DATA: Bihar Electoral Roll Analysis
+# INDIA-DATA: Special Intensive Revision analyses
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Varnasr/INDIA-DATA/pulls)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/Varnasr/INDIA-DATA)](https://github.com/Varnasr/INDIA-DATA/commits/main)
-[![Data: Election Commission](https://img.shields.io/badge/Data-Election%20Commission%20of%20India-blue)](https://eci.gov.in/)
+Who was struck off India's electoral rolls in the 2025-26 Special Intensive
+Revision, in Bihar and in five Old City constituencies of Hyderabad. Static
+site at [forindia.netlify.app](https://forindia.netlify.app).
 
-**Analysis of Bihar electoral roll anomalies — voter deletion patterns, demographic shifts, and election data integrity research.**
+| Page | What it covers |
+|---|---|
+| [`/`](https://forindia.netlify.app/) | The hub: both analyses, and why their evidence differs |
+| [`/bihar/`](https://forindia.netlify.app/bihar/) | 69,10,559 names removed across 243 constituencies and 77,837 booths, phase 1 and 2, women and men |
+| `/bihar/constituencies/` | Every seat, and every booth inside it |
+| `/bihar/results/` | Deletions against the 2020, 2024 and 2025 results, within seats and across them |
+| `/bihar/border/`, `/bihar/districts/` | Nepal and Bengal border seats; district economy and census against deletions |
+| `/bihar/people/` | Gender, religion as a range, caste under two classifications with bounds |
+| `/bihar/method/` | Sources, the corrections to the earlier dashboard with evidence, fourteen research questions |
+| [`/hyderabad/`](https://forindia.netlify.app/hyderabad/) | 6,62,063 of 16,57,207 electors struck off in Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura |
+| `/hyderabad/explorer/` | Any constituency, any of its 1,158 polling parts |
+| `/hyderabad/people/`, `/parts/`, `/hearings/`, `/method/` | Rates by age, sex, religion and 2002 linkage within parts; part outliers; hearings; fourteen research questions |
 
----
+## The two kinds of evidence
 
-## About
+Bihar's files hold the removed only, by booth, so the Bihar pages compare shares
+of the removed against the roll and the census. Hyderabad's files hold every
+elector on the pre-revision roll, so the Hyderabad pages give true deletion
+rates for each group and compare groups inside the same polling part.
 
-This repository investigates statistically anomalous patterns in voter roll deletions across Bihar assembly constituencies between electoral cycles. It examines correlations between voter deletion rates, caste demographics, religious composition, and electoral outcomes — raising questions about the integrity of voter registration processes in India's most populous state cluster.
+## Corrections
 
-The analysis is grounded in publicly available data from the Election Commission of India, supplemented by demographic data from the Census of India and academic research on Bihar's political economy.
+The dashboard that served here until September 2026 counted every Bihar booth
+about six times and carried mislabelled 2024 parties in nine seats. Its headline
+comparison ran the wrong way. [`DATA_INTEGRITY.md`](DATA_INTEGRITY.md) records
+what was wrong, how it was found and what the corrected data shows; the old
+files are in [`data/legacy/`](data/legacy/).
 
-This is independent academic research. All conclusions are data-driven and fully cited.
+## Build and check
 
----
-
-## Key Analysis Areas
-
-| Analysis | Description |
-|----------|-------------|
-| **Voter Deletion Patterns** | Male and female deletion rates by assembly constituency |
-| **Caste-Based Analysis** | Top and bottom caste groups by voter deletion volume — identifying demographic targeting patterns |
-| **Religious Demographics** | Muslim voter deletion rates and correlations with NDA electoral performance |
-| **District Profiles** | GDP, population, rural/urban, and demographic summaries for analysis context |
-| **Border Constituency Analysis** | Electoral patterns in constituencies bordering Nepal and West Bengal vs interior |
-| **Electoral Integrity Indicators** | Statistical metrics for assessing voter roll integrity across election cycles |
-
----
-
-## Key Findings (Summary)
-
-| Indicator | Finding |
-|-----------|---------|
-| **Net deletions (2019–2024)** | Significant net deletion in 40+ constituencies |
-| **Demographic concentration** | Deletions disproportionately concentrated in Muslim-majority and SC/ST constituencies |
-| **Gender asymmetry** | Male deletion rates systematically higher in certain districts |
-| **Correlation with outcomes** | Districts with highest deletion rates show elevated NDA vote share growth |
-
-> Full findings and methodology in the repository's analysis notebooks.
-
----
-
-## Data Sources
-
-| Source | Data Type |
-|--------|-----------|
-| [Election Commission of India](https://eci.gov.in) | Voter rolls, electoral rolls, constituency-level voter counts |
-| [Delimitation Commission Reports](https://eci.gov.in/delimitation/) | Constituency boundary changes |
-| [Census of India 2011](https://censusindia.gov.in) | Caste, religion, and demographic data |
-| [Bihar State Election Commission](https://sec.bihar.gov.in) | Local body election cross-reference data |
-
----
-
-## Repository Structure
-
-```
-INDIA-DATA/
-├── data/
-│   ├── voter_rolls/        # Raw and processed voter roll data by constituency
-│   ├── demographics/       # Caste and religious demographic data
-│   └── electoral_results/  # Election result data for correlation analysis
-├── analysis/
-│   ├── deletion_patterns.py    # Core deletion rate analysis
-│   ├── demographic_overlay.py  # Caste/religion correlation analysis
-│   ├── border_analysis.py      # Border vs interior constituency analysis
-│   └── integrity_metrics.py   # Electoral integrity indicator construction
-├── notebooks/
-│   └── Bihar_Electoral_Analysis.ipynb  # Main analysis notebook
-├── outputs/
-│   └── visualisations/     # Charts and maps
-├── LICENSE
-└── README.md
+```bash
+pip install pandas==3.0.6 openpyxl==3.1.5
+python3 scripts/build_bihar.py        # data/bihar/raw -> data/bihar/*.json
+python3 scripts/build_hyderabad.py    # hyderabad/explorer -> data/hyderabad/*.json
+python3 scripts/check_data.py         # 11 checks, run by CI
+python3 scripts/check_contrast.py     # colour tokens, both themes, run by CI
+python3 -m http.server 8000
 ```
 
----
+## Sources
 
-## Methodology
+- Bihar: CEO Bihar SIR deletion lists by booth (phase 1) and by constituency,
+  phase and sex; Form 20 booth results for 2024, reconciled to the declared
+  seat results; 2020 and 2025 Assembly results; Census 2011; Bihar caste-based
+  survey, 2 October 2023.
+- Hyderabad: CEO Telangana SIR exports for the five constituencies, merged by
+  the HDCC data team, September 2026; ECI 2023 Assembly results.
 
-1. **Data acquisition** — Voter roll summary data downloaded from ECI constituency portals for 2019 and 2024 electoral cycles
-2. **Cleaning and standardisation** — Constituency names normalised, data merged across cycles
-3. **Deletion rate calculation** — Net change in registered voters per constituency, disaggregated by gender
-4. **Demographic overlay** — Matched with Census 2011 caste and religious demographic data at constituency level
-5. **Statistical analysis** — Correlation analysis between deletion rates and demographic/electoral variables
-6. **Integrity index construction** — Composite index weighting deletion rate, demographic concentration, and temporal anomaly
+Aggregates only. No names, EPIC numbers or addresses are published or committed.
 
----
+## Licence
 
-## Tech Stack
-
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| Analysis | Python (pandas, scipy, statsmodels) | Data processing and statistical analysis |
-| Visualisation | matplotlib, seaborn, plotly | Charts and geographic visualisations |
-| Notebooks | Jupyter | Reproducible analysis documentation |
-
----
-
-## Limitations
-
-- Voter roll data is summary-level, not individual-level — individual-level patterns cannot be directly inferred
-- Census 2011 demographic data is 13+ years old — demographic composition has shifted
-- Constituency boundary changes (delimitation) complicate longitudinal comparison for some constituencies
-- Deletions may reflect legitimate database cleaning (deaths, migration) — the analysis identifies statistical anomalies, not confirmed manipulation
-
----
-
-## Related Repositories
-
-- [BiharParichay-Project](https://github.com/Varnasr/BiharParichay-Project) — Bihar demographic classification system
-- [someperspective](https://github.com/Varnasr/someperspective) — India's political economy 2004–2025
-- [PolicyDhara](https://github.com/Varnasr/PolicyDhara) — Indian policy tracker
-
----
-
-## License
-
-MIT License — see [LICENSE](LICENSE) for details. Data from ECI and Census of India retains its original terms of use.
-
----
-
-## Contributing
-
-Research contributions, corrections, and additional data sources are welcome. Open a pull request or [file an issue](https://github.com/Varnasr/INDIA-DATA/issues).
+MIT for the code. Election Commission and Census data keep their original terms.

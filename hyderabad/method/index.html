@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyderabad Old City SIR 2026: method</title>
+<meta name="description" content="Where the Hyderabad Old City SIR figures come from, how each rate is defined, and fourteen research questions answered from the data.">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23b13b38'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="../../assets/sir.css">
+</head>
+<body data-root="../../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="brand"><a class="home" href="../../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
+  <h1>Method and research questions</h1>
+  <p class="lede">Where every number on the Hyderabad pages comes from, how each rate is defined, what the files cannot tell you, and fourteen questions the Bihar pages ask, asked here of the Old City.</p>
+  <nav class="sub" aria-label="Hyderabad"><a href="../">Overview</a><a href="../explorer/">Part explorer</a><a href="../people/">Age, sex, religion, 2002</a><a href="../parts/">Parts</a><a href="../hearings/">Hearings</a><a href="./" aria-current="page">Method</a></nav>
+</header>
+<main id="main">
+  <h2>Sources</h2>
+  <div class="twrap" tabindex="0" role="region" aria-label="Sources"><table>
+    <thead><tr><th scope="col" class="l">What</th><th scope="col" class="l">Source</th><th scope="col" class="l">Used for</th></tr></thead>
+    <tbody>
+      <tr><td class="l">Pre-revision roll, Absent-Shifted-Dead list, discrepancy and no-mapping lists</td><td class="l">CEO Telangana SIR exports for five constituencies, merged by the HDCC data team, September 2026</td><td class="l">Every elector's fate, age band, sex, reason code and 2002 linkage, aggregated to the polling part</td></tr>
+      <tr><td class="l">Religion</td><td class="l">Estimated from names by the HDCC team; agrees 99% with an independent rebuild. The roll records none</td><td class="l">Hindu-name and Muslim-name rates</td></tr>
+      <tr><td class="l">Hearing schedules</td><td class="l">The same exports, 28 August to 12 October</td><td class="l">Rules, slots, daily load</td></tr>
+      <tr><td class="l">2023 Assembly result</td><td class="l">ECI, Telangana general election 2023</td><td class="l">Valid votes and margins</td></tr>
+    </tbody></table></div>
+  <p class="sub" style="margin-top:12px">The explorer carries the part-level counts. <code>scripts/build_hyderabad.py</code> reads the same object and derives every rate, within-part comparison and correlation on these pages, and CI fails if the published JSON drifts from it. No row-level file, name, EPIC number or address is in this repository.</p>
+
+  <h2>Definitions</h2>
+  <div class="qa"><h3>Deletion rate</h3><p>Electors on the Absent-Shifted-Dead list divided by electors on the pre-revision roll, for the group in question. Because the files cover every elector, this is a true rate for each group. In Bihar the files cover only the removed, so the Bihar pages give shares of removals and rates per 100 electors on the 2025 roll instead.</p></div>
+  <div class="qa"><h3>Within-part difference</h3><p>For two groups, the rate of one minus the rate of the other inside each polling part, pooled across parts with each part weighted by its smaller group. Parts with fewer than 20 of either group are left out. This holds the locality, the booth-level officer and the housing stock fixed, and is the Hyderabad counterpart of the within-seat comparison in Bihar.</p></div>
+  <div class="qa"><h3>Part correlations</h3><p>Spearman rank correlations across parts with at least 100 electors, within each constituency. The untraceable share uses parts with at least 20 deletions.</p></div>
+  <div class="qa"><h3>Summoned</h3><p>Kept on the draft roll but listed for a hearing: the ECI discrepancy list plus the no-mapping list. One elector can carry more than one rule, so rule counts sum to more than the people summoned.</p></div>
+
+  <h2>What the files cannot say</h2>
+  <div id="limits"></div>
+
+  <h2>The research questions</h2>
+  <p class="sub">The same questions the Bihar pages answer, asked of the Old City, each computed from the published data when this page loads.</p>
+  <div id="qas"></div>
+</main>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<script src="../../assets/sir.js"></script>
+<script>
+Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/parts.json'), SIR.json('data/bihar/summary.json')]).then(function (r) {
+  var s = r[0], P = r[1], b = r[2].totals, A = s.acs, t = s.totals;
+  var by = function (k, desc) { return A.slice().sort(function (x, y) { return desc ? y[k] - x[k] : x[k] - y[k]; }); };
+  var c = function (k) { return SIR.sum(A, function (a) { return a.counts[k]; }); };
+  var list = function (arr, fn) { return arr.map(fn).join(', '); };
+  var reasonTot = function (r) { return SIR.sum(A, function (a) { return a.reasons[r]; }); };
+  var mal = A.filter(function (a) { return !a.linked; })[0];
+  var L = A.filter(function (a) { return a.linked; });
+  var hi = by('rate', true), marg = A.slice().sort(function (x, y) { return y.e2023.deleted_over_margin - x.e2023.deleted_over_margin; });
+  var over = A.filter(function (a) { return a.e2023.deleted_over_valid > 100; });
+  var ms = A.map(function (a) { return a.part_correlations.muslim_share_vs_rate; });
+  var ut = A.map(function (a) { return a.part_correlations.untraceable_share_vs_rate; });
+  var W = A.map(function (a) { return a.within_part.hindu_minus_muslim; });
+  var FM = A.map(function (a) { return a.within_part.female_minus_male; });
+  var UL = L.map(function (a) { return a.within_part.unlinked_minus_linked; });
+  var idx = P.fields.indexOf('rate'), rates = P.rows.map(function (x) { return x[idx]; });
+  var age = s.bands.map(function (bd, i) { return 100 * SIR.sum(A, function (a) { return a.counts.age_asd[i]; }) / SIR.sum(A, function (a) { return a.age_all[i]; }); });
+  var heard = SIR.sum(A, 'hearing');
+  var ruleTot = s.rules.map(function (ru) { return [ru, SIR.sum(A, function (a) { return a.rules[ru]; })]; }).sort(function (x, y) { return y[1] - x[1]; });
+
+  document.getElementById('limits').innerHTML = [
+    ['Why a name was struck', 'The reason code records the officer\'s entry, not the truth of it. A household that moved out of the Old City is a correct "shifted" deletion; the files cannot tell it from an elector who was at home and missed.'],
+    ['Religion together with age', 'Religion and age are aggregated separately, never jointly, so any religion gap may partly be an age gap if one group is older.'],
+    ['Malakpet', mal.name + '\'s export carries no part numbers and no 2002 linkage. It is read by polling-station name, which gives ' + mal.parts + ' stations rather than parts, and ' + SIR.n(mal.unaccounted) + ' electors on its roll appear in none of the three fates, against ' + SIR.n(SIR.sum(L, 'unaccounted')) + ' across the other four together.'],
+    ['The final roll', 'These are the September exports. The Commission extended the calendar on 7 September (claims to 7 October, hearings to 5 November, final roll 9 November), so restorations after hearings are not in these counts.'],
+    ['Five constituencies', 'The five are the Old City seats the HDCC team exported, not a sample of Hyderabad. Nothing here generalises to the district.']
+  ].map(function (q) { return '<div class="qa"><h3>' + q[0] + '</h3><p>' + q[1] + '</p></div>'; }).join('');
+
+  var QA = [
+    ['How many names were struck off, and where?',
+     SIR.n(t.deleted) + ' of ' + SIR.n(t.electors) + ' electors on the five pre-revision rolls, ' + SIR.pct(t.rate) + '. By constituency: ' + list(hi, function (a) { return a.name + ' ' + SIR.pct(a.rate); }) + '. The five sit within eleven points of one another; the variation that matters is inside them (Q7).'],
+    ['What reasons did the officers record?',
+     list(s.reasons, function (re) { return re + ' ' + SIR.pct(100 * reasonTot(re) / t.deleted); }) + '. The mix differs sharply: untraceable or absent is ' + list(A, function (a) { return SIR.pct(100 * a.reasons['Untraceable/Absent'] / a.deleted) + ' in ' + a.name; }) + '.'],
+    ['Does deletion rise with age?',
+     'Yes, though not smoothly. ' + list(s.bands, function (bd, i) { return bd + ': ' + SIR.pct(age[i]); }) + '. Death is ' + SIR.n(reasonTot('Death')) + ' deletions, enough to be a large part of the bands over 70, but the doubling between 18 to 24 and 30 to 39 happens at ages where almost nobody dies, so death is not the whole of it.'],
+    ['Were women struck off more often than men?',
+     'Women ' + SIR.pct(100 * c('f_asd') / c('f_all')) + ', men ' + SIR.pct(100 * c('m_asd') / c('m_all')) + '. Within parts the gap is ' + SIR.d(Math.min.apply(null, FM.map(function (w) { return w.diff_pp; })), 1) + ' to ' + SIR.d(Math.max.apply(null, FM.map(function (w) { return w.diff_pp; })), 1) + ' points and changes sign between constituencies. In Bihar women were ' + SIR.pct(100 * b.female / b.total) + ' of the removed and over-represented in every district; the Old City shows no such pattern.'],
+    ['Were Muslim-name electors struck off more often?',
+     'No: less often. Hindu-name electors ' + SIR.pct(100 * c('hin_asd') / c('hin_all')) + ', Muslim-name electors ' + SIR.pct(100 * c('mus_asd') / c('mus_all')) + '. Inside the same part Hindu-name electors were struck off ' + SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 1) + ' to ' + SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 1) + ' points more, in ' + SIR.sum(W, 'a_higher') + ' of ' + SIR.sum(W, 'parts') + ' comparable parts. The files cannot rule out that this is age or genuine out-migration (see limits above).'],
+    ['How much did the 2002 link matter?',
+     'More than any other attribute in the files. Unlinked electors were struck off ' + list(L, function (a) { return SIR.d(a.within_part.unlinked_minus_linked.diff_pp, 1) + ' points more in ' + a.name; }) + ', within the same part, and in ' + SIR.sum(UL, 'a_higher') + ' of ' + SIR.sum(UL, 'parts') + ' parts. Linked share of the roll: ' + list(L, function (a) { return SIR.pct(a.linked_share_roll) + ' (' + a.name + ')'; }) + '. Not measurable for ' + mal.name + '.'],
+    ['Were deletions spread evenly across parts?',
+     'No. Part rates run from ' + SIR.d(Math.min.apply(null, rates), 0) + '% to ' + SIR.d(Math.max.apply(null, rates), 0) + '%, and ' + SIR.sum(A, 'parts_over_60') + ' parts lost more than 60% of their roll (' + list(A.filter(function (a) { return a.parts_over_60; }), function (a) { return a.parts_over_60 + ' in ' + a.name; }) + '). Interquartile ranges: ' + list(A, function (a) { return a.name + ' ' + a.part_rate_quartiles[1] + ' to ' + a.part_rate_quartiles[3]; }) + '. <a href="../parts/">Parts</a> lists the outliers.'],
+    ['Did parts with more Muslim electors lose more names?',
+     'Fewer. Across parts the Muslim-name share and the deletion rate have rank correlations of ' + SIR.d(Math.max.apply(null, ms), 2) + ' to ' + SIR.d(Math.min.apply(null, ms), 2) + ', negative in all five constituencies. Taken with Q5, both the part and the person point the same way.'],
+    ['Does "untraceable" cluster where deletion is heaviest?',
+     'Barely. The rank correlation between a part\'s untraceable share and its deletion rate runs from ' + SIR.d(Math.min.apply(null, ut), 2) + ' to ' + SIR.d(Math.max.apply(null, ut), 2) + ', and the share of electors aged 80 and over does no better. The one part characteristic that moves with the rate in every constituency is the Muslim-name share (Q8).'],
+    ['Who was summoned, and why?',
+     SIR.n(heard) + ' electors kept on the draft roll were summoned, ' + SIR.pct(100 * heard / t.electors) + ' of the pre-revision roll. Flags by rule: ' + list(ruleTot, function (x) { return x[0] + ' ' + SIR.n(x[1]); }) + '. See <a href="../hearings/">hearings</a>.'],
+    ['Could the hearings be held as scheduled?',
+     'Median cases per slot: ' + list(A, function (a) { return SIR.d(a.median_slot, 0) + ' (' + a.name + ')'; }) + '. Heaviest single slot: ' + list(A, function (a) { return SIR.n(a.max_slot) + ' (' + a.name + ')'; }) + '. A slot listing several hundred cases cannot give each elector more than a minute or two in a working day.'],
+    ['How do deletions compare with the 2023 result?',
+     'In every seat the names struck off exceed the 2023 winning margin: ' + list(marg, function (a) { return a.name + ' ' + SIR.d(a.e2023.deleted_over_margin, 1) + ' times'; }) + '. In ' + over.map(function (a) { return a.name; }).join(' and ') + ' they exceed the total valid votes cast in 2023. Yakutpura was decided by ' + SIR.n(A.filter(function (a) { return a.name === 'Yakutpura'; })[0].e2023.margin) + ' votes. None of this says who the removed would have voted for; the roll records no such thing.'],
+    ['Are the files internally consistent?',
+     'Part counts sum exactly to the constituency totals for all five (the build script asserts it). Electors in none of the three fates: ' + list(A, function (a) { return SIR.n(a.unaccounted) + ' in ' + a.name; }) + '. Malakpet\'s ' + SIR.n(mal.unaccounted) + ' is the one to resolve before its figures are cited alone.'],
+    ['How does Hyderabad compare with Bihar?',
+     'Different scale and different denominators. Bihar removed ' + SIR.n(b.total) + ' names, ' + SIR.d(100 * b.total / b.electorate_2025, 2) + ' per 100 electors on the 2025 roll; the Old City struck off ' + SIR.pct(t.rate) + ' of its pre-revision roll. The denominators differ, but no choice of denominator brings the two within a factor of three. Bihar\'s files hold only the removed, so group comparisons there are shares against census baselines; Hyderabad\'s hold every elector, so they are true rates within parts. The firmest Bihar finding is women\'s over-representation; the firmest Hyderabad finding is the 2002 link.']
+  ];
+  document.getElementById('qas').innerHTML = QA.map(function (q, i) {
+    return '<div class="qa"><h3>Q' + (i + 1) + '. ' + q[0] + '</h3><p>' + q[1] + '</p></div>';
+  }).join('');
+}).catch(SIR.fail);
+</script>
+</body>
+</html>

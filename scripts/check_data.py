@@ -43,6 +43,21 @@ def _fresh():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-600:]
 
 
+def _hyderabad_fresh():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_hyderabad.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-600:]
+
+
+def _hyderabad_totals():
+    with open(os.path.join(ROOT, 'data', 'hyderabad', 'summary.json'), encoding='utf-8') as fh:
+        H = json.load(fh)
+    t = H['totals']
+    assert len(H['acs']) == 5 and t['parts'] == 1158, 'expected five constituencies and 1,158 parts'
+    assert t['electors'] == 1657207 and t['deleted'] == 662063, 'Hyderabad totals moved: %s' % t
+    mal = [a for a in H['acs'] if a['name'] == 'Malakpet'][0]
+    assert not mal['linked'] and mal['within_part']['unlinked_minus_linked'] is None, 'Malakpet has no 2002 linkage and must not be given a linked rate'
+
+
 def _one_row_per_booth():
     # The six-fold join gave 39.2 million. One row per booth gives 6,559,626,
     # which the constituency-level SIR sheet confirms to within its own rounding.
@@ -96,13 +111,16 @@ def _no_people():
 
 
 def _pages_link_method():
-    for p in ['bihar/index.html', 'bihar/results/index.html', 'bihar/people/index.html']:
+    for p in ['bihar/index.html', 'bihar/results/index.html', 'bihar/people/index.html',
+              'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html']:
         with open(os.path.join(ROOT, p), encoding='utf-8') as fh:
             assert 'method/' in fh.read(), '%s no longer links to the method page' % p
 
 
 for name, fn in [
     ('generated data matches its sources', _fresh),
+    ('Hyderabad data matches the explorer', _hyderabad_fresh),
+    ('Hyderabad totals, parts and Malakpet linkage', _hyderabad_totals),
     ('booth deletions counted once per booth', _one_row_per_booth),
     ('phases and sexes add to the total', _phases),
     ('243 constituencies, joined by number', _constituencies),
