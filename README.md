@@ -6,7 +6,7 @@ site at [forindia.netlify.app](https://forindia.netlify.app).
 
 | Page | What it covers |
 |---|---|
-| [`/`](https://forindia.netlify.app/) | The hub: both analyses, and why their evidence differs |
+| [`/`](https://forindia.netlify.app/) | The Bihar dashboard: eleven tabs of charts and the table of all 243 constituencies, with links to Hyderabad |
 | [`/bihar/`](https://forindia.netlify.app/bihar/) | Explorer: 69,10,559 names removed across 243 constituencies and 77,837 booths, every seat and every booth |
 | `/bihar/results/` | Deletions against the 2020, 2024 and 2025 results, within seats and across them |
 | `/bihar/border/`, `/bihar/districts/` | Nepal and Bengal border seats; district economy and census against deletions |

@@ -65,6 +65,12 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 
 ## Front end
 
+- **The homepage is the Bihar dashboard and stands alone.** `index.html` carries
+  its own inline stylesheet and script (the tabbed design PC asked to keep) and
+  does not load `sir.css` or `sir.js`. It reads the same `data/bihar/*.json`,
+  draws each tab's charts when the tab opens, and computes every sentence from
+  the data, including the verdict words: a rank correlation under 0.2 is
+  reported as no relationship. No page states the site's own address.
 - Colour tokens live in `assets/sir.css`, with the dark block written twice
   (`prefers-color-scheme` and `[data-theme="dark"]`). `check_contrast.py`
   measures 50 pairs and fails if the two dark blocks differ.
