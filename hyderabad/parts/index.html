@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyderabad Old City SIR 2026: parts</title>
+<meta name="description" content="How Hyderabad Old City SIR deletions spread across 1,158 polling parts, which parts stand out, and what moves with the part deletion rate.">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23b13b38'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="../../assets/sir.css">
+</head>
+<body data-root="../../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="brand"><a class="home" href="../../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
+  <h1>Parts</h1>
+  <p class="lede">A constituency rate hides the spread underneath it. Here are the 1,158 polling parts: how their deletion rates are distributed, which parts stand far from their neighbours, and what moves with the rate from part to part.</p>
+  <nav class="sub" aria-label="Hyderabad"><a href="../">Overview</a><a href="../explorer/">Part explorer</a><a href="../people/">Age, sex, religion, 2002</a><a href="./" aria-current="page">Parts</a><a href="../hearings/">Hearings</a><a href="../method/">Method</a></nav>
+</header>
+<main id="main">
+  <div class="grid">
+    <div class="panel">
+      <h3>How part rates are spread</h3>
+      <p>Parts with at least 100 electors, by the share struck off.</p>
+      <div class="chart"><canvas id="cHist" aria-label="Distribution of part deletion rates"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Range within each constituency</h3>
+      <p>Lowest, lower quartile, median, upper quartile and highest part rate.</p>
+      <div class="twrap" tabindex="0" role="region" aria-label="Part rate quartiles"><table id="tQ"></table></div>
+    </div>
+    <div class="panel">
+      <h3>Muslim share of a part against its deletion rate</h3>
+      <p>Each dot a part. Parts with more Muslim-name electors lost fewer names.</p>
+      <div class="chart"><canvas id="cMus" aria-label="Muslim share of part against deletion rate"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>What moves with the part rate</h3>
+      <p>Rank correlations across parts, within each constituency.</p>
+      <div class="twrap" tabindex="0" role="region" aria-label="Part correlations"><table id="tCorr"></table></div>
+    </div>
+  </div>
+  <p class="finding" id="fParts"></p>
+
+  <h2>Parts that stand apart</h2>
+  <p class="sub">Parts whose deletion rate is furthest from their own constituency's median, in either direction. A part far above its neighbours is where a check on the ground would start.</p>
+  <div class="controls"><label for="fac">Constituency</label><select id="fac"><option value="">All five</option></select></div>
+  <div class="twrap" tabindex="0" role="region" aria-label="Outlying parts"><table id="tOut"></table></div>
+  <p class="note">Parts with fewer than 100 electors are left out of the rates, since one household moves them by several points. Muslim share of a part is the share of its pre-revision roll with names estimated Muslim. "Untraceable" is the ECI reason code Untraceable/Absent as a share of the part's deletions.</p>
+</main>
+<footer>Research by Varna Sri Raman. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="../../assets/sir.js"></script>
+<script>
+Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/parts.json')]).then(function (r) {
+  var s = r[0], F = r[1].fields, rows = r[1].rows.map(function (x) { var o = {}; F.forEach(function (f, i) { o[f] = x[i]; }); return o; });
+  var A = s.acs, pal = { Charminar: '--fill-red', Yakutpura: '--fill-navy', Malakpet: '--fill-amber', Chandrayangutta: '--fill-india', Bahadurpura: '--fill-other' };
+  var bins = []; for (var b = 0; b < 90; b += 5) bins.push(b);
+  SIR.chart('cHist', { type: 'bar', data: { labels: bins.map(function (b) { return b + '–' + (b + 5); }), datasets: A.map(function (a) {
+      return { label: a.name, data: bins.map(function (b) { return rows.filter(function (p) { return p.ac === a.name && p.rate >= b && p.rate < b + 5; }).length; }), $token: pal[a.name] }; }) },
+    options: { scales: { x: { stacked: true, title: { display: true, text: '% of part struck off' } }, y: { stacked: true, title: { display: true, text: 'Parts' } } } } });
+  SIR.table(document.getElementById('tQ'), [{ k: 'name', label: 'Constituency', left: true }, { k: 'q0', label: 'Low' }, { k: 'q1', label: 'Q1' }, { k: 'q2', label: 'Median' }, { k: 'q3', label: 'Q3' }, { k: 'q4', label: 'High' }, { k: 'o', label: 'Parts over 60%' }],
+    A.map(function (a) { var q = a.part_rate_quartiles; return { name: a.name, q0: q[0], q1: q[1], q2: q[2], q3: q[3], q4: q[4], o: a.parts_over_60 }; }), { sort: 'name', dir: 1 });
+  SIR.chart('cMus', { type: 'scatter', data: { datasets: A.map(function (a) {
+      return { label: a.name, data: rows.filter(function (p) { return p.ac === a.name; }).map(function (p) { return { x: p.muslim_share_roll, y: p.rate, n: a.name + ' ' + (p.locality || 'part ' + p.part) }; }), $token: pal[a.name], pointRadius: 2 }; }) },
+    options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n + ': ' + SIR.d(c.raw.x, 0) + '% Muslim names, ' + SIR.d(c.raw.y, 1) + '% struck off'; } } } },
+      scales: { x: { min: 0, max: 100, title: { display: true, text: 'Muslim-name share of part roll (%)' } }, y: { beginAtZero: true, title: { display: true, text: '% struck off' } } } } });
+  SIR.table(document.getElementById('tCorr'), [{ k: 'name', label: 'Constituency', left: true }, { k: 'm', label: 'Muslim share', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'o', label: 'Aged 80+ share', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'u', label: 'Untraceable share', fmt: function (v) { return SIR.d(v, 2); } }],
+    A.map(function (a) { var c = a.part_correlations; return { name: a.name, m: c.muslim_share_vs_rate, o: c.aged80_share_vs_rate, u: c.untraceable_share_vs_rate }; }), { sort: 'name', dir: 1 });
+  var ms = A.map(function (a) { return a.part_correlations.muslim_share_vs_rate; });
+  document.getElementById('fParts').innerHTML = '<b>Where an elector lived mattered as well as who they were.</b> Rates run from ' + SIR.d(Math.min.apply(null, A.map(function (a) { return a.part_rate_quartiles[0]; })), 0) + '% to ' + SIR.d(Math.max.apply(null, A.map(function (a) { return a.part_rate_quartiles[4]; })), 0) + '% across parts, and ' + SIR.sum(A, 'parts_over_60') + ' parts lost more than 60% of their roll, all in Charminar and Yakutpura. Across parts the Muslim share and the deletion rate move in opposite directions in every constituency (ρ ' + SIR.d(Math.max.apply(null, ms), 2) + ' to ' + SIR.d(Math.min.apply(null, ms), 2) + '), while the share of elderly electors and the share coded untraceable barely move with it.';
+
+  var med = {}; A.forEach(function (a) { med[a.name] = a.part_rate_quartiles[2]; });
+  var sel = document.getElementById('fac'); sel.innerHTML += A.map(function (a) { return '<option>' + a.name + '</option>'; }).join('');
+  function draw() {
+    var ac = sel.value, R = rows.filter(function (p) { return !ac || p.ac === ac; }).map(function (p) { p.dev = p.rate - med[p.ac]; p.adev = Math.abs(p.dev); return p; });
+    SIR.table(document.getElementById('tOut'), [{ k: 'ac', label: 'Constituency', left: true }, { k: 'part', label: 'Part' }, { k: 'locality', label: 'Locality', left: true },
+      { k: 'electors', label: 'Electors', fmt: SIR.n }, { k: 'rate', label: '% struck off', fmt: function (v) { return SIR.d(v, 1); } }, { k: 'dev', label: 'Points from median', fmt: function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 1); } },
+      { k: 'muslim_share_roll', label: 'Muslim names %', fmt: function (v) { return SIR.d(v, 0); } }, { k: 'untraceable_share_of_deleted', label: 'Untraceable % of deleted', fmt: function (v) { return SIR.d(v, 0); } }, { k: 'adev', label: 'Distance', fmt: function (v) { return SIR.d(v, 1); } }], R, { sort: 'adev', limit: 40 });
+  }
+  sel.addEventListener('change', draw); draw();
+}).catch(SIR.fail);
+</script>
+</body>
+</html>

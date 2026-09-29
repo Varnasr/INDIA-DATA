@@ -1,27 +1,52 @@
-# Data integrity: known defects in the Bihar deletions dataset
+# Data integrity: the September 2026 corrections
 
-Audited 2026-09-22. Five defects in `data/ac_deletions_change_2020_2024.csv`, the
-file behind every political claim on the dashboard. Each is pinned by a check in
-`scripts/check_data.py`, so none can be forgotten or silently reintroduced. When
-one is repaired its check fails and tells you to delete it and the finding here.
+Audited 2026-09-22, resolved 2026-09-29. The dashboard that served at
+forindia.netlify.app until September 2026 rested on
+`data/ac_deletions_change_2020_2024.csv`, and the five findings below were
+recorded against it while the cause was unknown. The cause was then found in the
+original booth files, and every published figure was rebuilt from those files by
+`scripts/build_bihar.py`. The old files are kept, unused, in `data/legacy/`, with
+a README saying what was wrong in each.
 
-**None of this is fixed.** Repairing it needs authoritative data the repository
-does not contain, and inventing plausible numbers for an electoral integrity
-analysis would be far worse than leaving the gap visible.
+## What caused the five findings
 
-## What is sound
+**A fan-out join.** The booth file carries about three rows per booth, one for
+each of its top three 2024 parties; the gender-religion file carries two rows
+per booth, one per sex. Joining the two and summing counted each booth's
+deletions about six times. 39,248,769 divided by the true 6,559,626 is 5.98; the
+source has 464,881 booth rows for 77,837 booths, 5.97. There is no 2020 deletion
+series in these files: the column header "deletion by Booth in Jan 2020" refers
+to the January 2025 roll the SIR lists are keyed to. That explains findings 1
+and 2, and the "83% decline" the dashboard reported.
 
-The 2024 column is credible. `deletions_2024` sums to **6,559,626** across the
-243 constituencies, close to the roughly 65 lakh deletions widely reported for
-the Bihar Special Intensive Revision. `del_per_booth_2024` recomputes exactly
-from `deletions_2024 / booths_2024` in every row. `ac_number` covers 1 to 243
-once each, and the district files carry 38 rows.
+**Unreconciled party labels.** The 2024 extract names the wrong party in nine
+seats (LJP(RV) as BSP in five, HAM(S) as JD(S), JD(U) as IND, and two probable
+fixes in Karakat and Kishanganj). Vote shares summed from booths match the
+declared result to within 0.62 points in all 40 seats; the names attached to
+them did not. After correction the top two in every seat are the declared
+winner and runner-up, and `check_data.py` asserts it. That explains findings 3
+and 4: every seat now has a 2024 segment leader and an alliance.
 
-Note that the SIR was conducted in 2025, so the `_2024` suffix on a column
-holding what appears to be the SIR figure may itself be mislabelled. That is
-worth resolving before the column is cited.
+**Finding 5 now has an answer.** Measured as deletions per 100 electors on the
+2025 roll, with all 243 seats labelled, NDA seats lost more names than INDIA
+seats under all three labellings (2020 Assembly 9.58 against 8.79; 2024 Lok
+Sabha segment leader 9.36 against 8.50; 2025 Assembly 9.28 against 8.82), and
+within the same seat, NDA-leading booths lost 2.4 more names per booth than
+INDIA-leading ones. The published headline, which said the reverse, came from
+the six-fold count and the mislabelled parties.
 
-## Finding 1: `booths_2020` is a verbatim copy of `booths_2024`
+**Caste.** Separately from the five findings: the caste figures mapped "Devi", a
+title, to Lohar (EBC), which put two million women in the EBC total, and the
+district caste figures were the 2023 state survey shares repeated in every
+district. Caste is now read from guardians' surnames under two classifications
+with bounds, and the pages say plainly what the surname counts can and cannot
+identify.
+
+## The findings as recorded before the cause was known
+
+Kept as written, because they are the record of what was published.
+
+### Finding 1: `booths_2020` is a verbatim copy of `booths_2024`
 
 Identical in **all 243 rows**. Bihar's booth count did change between the 2020
 assembly election and 2024, so this is wrong as a matter of fact.
@@ -43,7 +68,7 @@ So "average deletions per booth fell from 504 to 84" states nothing that
 "deletions fell from 39.2M to 6.56M" does not, while implying a booth-level
 normalisation that was not performed.
 
-## Finding 2: `deletions_2020` totals 39.2 million, which is not plausible
+### Finding 2: `deletions_2020` totals 39.2 million, which is not plausible
 
 39,248,769 across 243 constituencies, or 504 per booth. Bihar's electorate at the
 2020 assembly election was roughly 7.3 crore. This figure is therefore about 54%
@@ -57,7 +82,7 @@ repository for this number.
 Either it is not deletions, or it is not 2020. It should not be published as
 either until it is traced.
 
-## Finding 3: `party_2024` cannot be the 2024 Lok Sabha result
+### Finding 3: `party_2024` cannot be the 2024 Lok Sabha result
 
 Bihar's 40 parliamentary seats in 2024 went BJP 12, JD(U) 12, LJP(RV) 5, RJD 4,
 INC 3, CPI(ML)(L) 2, HAM 1. At roughly six assembly segments per parliamentary
@@ -85,13 +110,13 @@ all. `CPI(ML)(L)` and `CPIM-L` are two spellings of one party.
 This looks like a join or label-mapping failure rather than noise. It has not
 been diagnosed.
 
-## Finding 4: `alliance_2024_ls` classifies only 131 of 243 constituencies
+### Finding 4: `alliance_2024_ls` classifies only 131 of 243 constituencies
 
 It is derived from `party_2024`, so it inherits finding 3. 105 constituencies are
 `OTHER` and 7 are blank. Any figure grouped by this column silently drops **46%
 of Bihar**.
 
-## Finding 5: the headline political comparison reverses with the labelling year
+### Finding 5: the headline political comparison reverses with the labelling year
 
 The dashboard states:
 
@@ -109,21 +134,17 @@ The direction flips. The published version says INDIA-held seats saw more
 deletions per booth; the 2020 labelling, which covers 104 more constituencies,
 says the opposite. The claim is presented without either qualification.
 
-## What repairing this would take
+## What remains open
 
-1. Booth counts per assembly constituency for the 2020 electoral roll, from the
-   Bihar CEO or ECI, to replace the copied column and recompute the four derived
-   columns.
-2. A source for `deletions_2020`, or its removal.
-3. 2024 assembly-segment leads from ECI Form 20 data, to rebuild `party_2024`
-   and `alliance_2024_ls`.
-4. Once 1 and 3 are done, every claim on the dashboard that compares years or
-   groups by alliance needs recomputing, and finding 5 needs re-testing: a
-   comparison that reverses with a defensible change of specification should be
-   reported with both specifications, not one.
-
-Until then the affected panels should carry the defect on their face or come
-down. The dashboard currently states them without qualification.
+- Caste composition of the removed cannot be identified from surname counts of
+  the removed alone. It needs the same counts for the draft roll, so a surname's
+  removal rate can be set against its presence on the roll.
+- Religion is a name-based range. The census share sits inside it in 18 of 38
+  districts; in 20 the classified Muslim share alone exceeds the census share,
+  by more than a point in eight south and central Bihar districts (Aurangabad,
+  Jehanabad, Sheikhpura, Gaya, Lakhisarai, Nalanda, Nawada, Patna).
+- The Karakat (RLM) and Kishanganj (AIMIM) label fixes are marked probable on
+  the method page, with the evidence for each.
 
 ## Sources
 

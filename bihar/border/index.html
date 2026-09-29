@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bihar SIR 2025: the border belts</title>
+<meta name="description" content="SIR deletions in Bihar's constituencies on the Nepal, West Bengal, Jharkhand and Uttar Pradesh borders, against the interior.">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="../../assets/sir.css">
+</head>
+<body data-root="../../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="brand"><a class="home" href="../../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
+  <h1>The border belts</h1>
+  <p class="lede">Bihar borders Nepal to the north, West Bengal and Jharkhand to the east and south, and Uttar Pradesh to the west. The revision's stated purpose included removing those not entitled to be on the roll, so the border constituencies were watched closely. Here they are against the interior.</p>
+  <nav class="sub" aria-label="Bihar"><a href="../">Overview</a><a href="../constituencies/">Constituencies</a><a href="../results/">Deletions and results</a><a href="./" aria-current="page">Border</a><a href="../districts/">Districts</a><a href="../people/">Gender, religion, caste</a><a href="../method/">Method</a></nav>
+</header>
+<main id="main">
+  <div class="kpis" id="kpis"></div>
+  <div class="grid">
+    <div class="panel">
+      <h3>Deletions per 100 electors, by border</h3>
+      <p>Constituencies grouped by the border they touch. Seats on two borders form their own group.</p>
+      <div class="chart"><canvas id="cRate" aria-label="Deletions per 100 electors by border group"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Share of all removals</h3>
+      <p>Each group's share of Bihar's removals set beside its share of the electorate. A bar longer than its pair means the group lost more than its size.</p>
+      <div class="chart"><canvas id="cShare" aria-label="Share of removals against share of electorate"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Who was removed</h3>
+      <p>Women's share of removals, and the range for Muslim-name share (unclassified names counted neither way, then all one way).</p>
+      <div class="chart"><canvas id="cWho" aria-label="Women and Muslim-name share of removals by border group"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Phase 2 against phase 1</h3>
+      <p>Phase 2 removals as a share of phase 1. Where the second pass was heavier, more was found after the draft roll.</p>
+      <div class="chart"><canvas id="cPhase" aria-label="Phase 2 as a share of phase 1 by border group"></canvas></div>
+    </div>
+    <div class="panel wide">
+      <h3>Every border constituency</h3>
+      <p>Click a column to sort.</p>
+      <div class="twrap" tabindex="0" role="region" aria-label="Border constituencies"><table id="tbl"></table></div>
+    </div>
+  </div>
+  <p class="caveat">The Nepal and Bengal belts, and Seemanchal within them, are also where seasonal and long-term out-migration is heaviest, and a migrant who has moved is a legitimate "shifted" deletion. A higher border rate is consistent with that as much as with anything else; these data record the removal, not its reason.</p>
+  <p class="note">Border classification: the constituency touches the named state or country, from the constituency and district maps used by the earlier dashboard. Muslim-name shares come from the name classification in the booth files; the low end counts only names classified Muslim, the high end adds every unclassified name.</p>
+</main>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="../../assets/sir.js"></script>
+<script>
+function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' : ''; }
+SIR.json('data/bihar/constituencies.json').then(function (acs) {
+  acs.forEach(function (a) { a.border = a.border || 'Interior'; });
+  var G = SIR.groupBy(acs, 'border');
+  var order = Object.keys(G).sort(function (a, b) { return a === 'Interior' ? 1 : b === 'Interior' ? -1 : a.localeCompare(b); });
+  var lbl = function (k) { return k.replace(/;/g, ' and ') + ' (' + G[k].length + ')'; };
+  var rate = function (rows) { return 100 * SIR.sum(rows, 'total') / SIR.sum(rows, 'electorate_2025'); };
+  var tot = SIR.sum(acs, 'total'), el = SIR.sum(acs, 'electorate_2025');
+  var border = acs.filter(function (a) { return a.border !== 'Interior'; }), interior = G.Interior;
+
+  document.getElementById('kpis').innerHTML = [
+    [border.length, 'constituencies on a border'],
+    [SIR.d(rate(border), 2), 'removed per 100 electors, border'],
+    [SIR.d(rate(interior), 2), 'removed per 100 electors, interior'],
+    [SIR.pct(100 * SIR.sum(border, 'total') / tot), 'of all removals were in border seats']
+  ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+
+  SIR.chart('cRate', { type: 'bar', data: { labels: order.map(lbl), datasets: [{ label: 'Per 100 electors', data: order.map(function (k) { return rate(G[k]); }),
+      $tokens: order.map(function (k) { return k === 'Interior' ? '--fill-grey' : '--fill-navy'; }) }] },
+    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: 'Deleted per 100 electors' } } } } });
+
+  SIR.chart('cShare', { type: 'bar', data: { labels: order.map(lbl), datasets: [
+      { label: '% of removals', data: order.map(function (k) { return 100 * SIR.sum(G[k], 'total') / tot; }), $token: '--fill-red' },
+      { label: '% of electorate', data: order.map(function (k) { return 100 * SIR.sum(G[k], 'electorate_2025') / el; }), $token: '--fill-grey' }] },
+    options: { indexAxis: 'y', scales: { x: { beginAtZero: true, title: { display: true, text: '% of Bihar' } } } } });
+
+  var rel = function (rows, hi) { var h = SIR.sum(rows, 'hindu'), m = SIR.sum(rows, 'muslim'), u = SIR.sum(rows, 'unknown'); return 100 * (m + (hi ? u : 0)) / (h + m + u); };
+  SIR.chart('cWho', { type: 'bar', data: { labels: order.map(lbl), datasets: [
+      { label: 'Women %', data: order.map(function (k) { return 100 * SIR.sum(G[k], 't_f') / (SIR.sum(G[k], 't_f') + SIR.sum(G[k], 't_m')); }), $token: '--female' },
+      { label: 'Muslim names, low %', data: order.map(function (k) { return rel(G[k], false); }), $token: '--fill-india' },
+      { label: 'Muslim names, high %', data: order.map(function (k) { return rel(G[k], true); }), $token: '--fill-other' }] },
+    options: { indexAxis: 'y', scales: { x: { beginAtZero: true, max: 100, title: { display: true, text: '% of removals' } } } } });
+
+  SIR.chart('cPhase', { type: 'bar', data: { labels: order.map(lbl), datasets: [{ label: 'Phase 2 as % of phase 1', data: order.map(function (k) { return 100 * SIR.sum(G[k], 'p2') / SIR.sum(G[k], 'p1'); }), $token: '--fill-amber' }] },
+    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: 'Phase 2 / phase 1, %' } } } } });
+
+  SIR.table(document.getElementById('tbl'), [
+    { k: 'name', label: 'Constituency', left: true, fmt: function (v, r) { return SIR.esc(r.ac + ' ' + v); } }, { k: 'district', label: 'District', left: true },
+    { k: 'border', label: 'Border', left: true, fmt: function (v) { return SIR.esc(v.replace(/;/g, ', ')); } },
+    { k: 'total', label: 'Removed', fmt: SIR.n }, { k: 'per_100', label: 'Per 100', fmt: function (v) { return SIR.d(v, 2); } },
+    { k: 'muslim_lo', label: 'Muslim names %', fmt: function (v, r) { return SIR.d(v, 0) + '–' + SIR.d(r.muslim_hi, 0); } },
+    { k: 'al2025', label: '2025 winner', left: true, fmt: function (v, r) { return tag(v) + ' ' + SIR.esc(r.win2025); } }
+  ], border.map(function (a) { var c = a.hindu + a.muslim + a.unknown; a.muslim_lo = 100 * a.muslim / c; a.muslim_hi = 100 * (a.muslim + a.unknown) / c; return a; }), { sort: 'per_100' });
+}).catch(SIR.fail);
+</script>
+</body>
+</html>

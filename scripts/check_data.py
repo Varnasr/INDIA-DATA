@@ -1,201 +1,139 @@
 #!/usr/bin/env python3
-"""Integrity checks for the Bihar electoral datasets.
+"""Integrity checks for the SIR analyses. Run by CI.
 
-This dashboard makes political claims about electoral roll deletions. Nothing in
-the repository checked the data those claims rest on, and three of the columns
-they depend on do not survive contact with published election results. The
-findings are written up in DATA_INTEGRITY.md; this script is what keeps them
-from being quietly forgotten or quietly reintroduced.
+    python3 scripts/check_data.py
 
-Two kinds of check:
-
-  STRUCTURAL   invariants that must hold. Bihar has 243 assembly constituencies
-               and 38 districts; ac_number runs 1..243 exactly once; derived
-               columns recompute from their inputs. These pass, and a change
-               that breaks one is a new defect.
-
-  KNOWN DEFECT conditions that are currently WRONG and are pinned here so the
-               state is explicit. Each asserts the defect is still exactly as
-               documented. If you repair the data, the corresponding check fails
-               and tells you to update DATA_INTEGRITY.md and delete it. That is
-               the intended way for these to die.
-
-Run:  python3 scripts/check_data.py
+Until September 2026 this file pinned five known defects in the Bihar data so
+that they could not be forgotten. Those defects are now corrected, and the
+checks below pin the corrections instead, so that none of them can come back
+quietly. Each names the failure it guards against.
 """
-import csv
-import statistics as st
+import json
+import os
+import subprocess
 import sys
-from collections import Counter
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-DEL = ROOT / "data" / "ac_deletions_change_2020_2024.csv"
-
-failures = []
-notes = []
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+B = os.path.join(ROOT, 'data', 'bihar')
+results = []
 
 
-def check(name, fn, kind="STRUCTURAL"):
+def check(name, fn):
     try:
-        note = fn()
-        print(f"  ok    [{kind}] {name}" + (f" ({note})" if note else ""))
+        fn()
+        results.append((True, name, ''))
     except AssertionError as e:
-        failures.append(name)
-        print(f"  FAIL  [{kind}] {name}\n        {e}")
+        results.append((False, name, str(e)))
 
 
-def load(path):
-    with open(path, newline="", encoding="utf-8") as fh:
-        return list(csv.DictReader(fh))
+def load(name):
+    with open(os.path.join(B, name), encoding='utf-8') as fh:
+        txt = fh.read()
+    assert 'NaN' not in txt, '%s contains NaN, which is not JSON and breaks every page that reads it' % name
+    return json.loads(txt)
 
 
-rows = load(DEL)
-
-# --------------------------------------------------------------------------
-# Structural
-# --------------------------------------------------------------------------
-
-def _count():
-    assert len(rows) == 243, f"Bihar has 243 assembly constituencies, found {len(rows)}"
-    return "243 ACs"
-check("one row per assembly constituency", _count)
+S = load('summary.json')
+A = load('constituencies.json')
+T = S['totals']
 
 
-def _acnum():
-    nums = sorted(int(r["ac_number"]) for r in rows)
-    assert nums == list(range(1, 244)), "ac_number is not exactly 1..243 with no gaps or repeats"
-check("ac_number covers 1..243 exactly once", _acnum)
+def _fresh():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_bihar.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-600:]
 
 
-def _names():
-    """ac_name is NOT a key, and joining on it silently merges two constituencies.
-
-    Bihar has two Kalyanpur constituencies (16, Purvi Champaran; 131, Samastipur,
-    SC-reserved) and two Pipra constituencies (17 and 42). These are genuinely
-    distinct seats that happen to share a name, verified against the Wikipedia
-    constituency pages and the Bihar CEO's own Form 20 for AC 131. Any join or
-    lookup in this repository must use ac_number.
-    """
-    dupes = sorted(n for n, c in Counter(r["ac_name"] for r in rows).items() if c > 1)
-    assert dupes == ["Kalyanpur", "Pipra"], (
-        f"the set of duplicate constituency names changed: {dupes}. Confirm against "
-        f"the ECI list before treating either as an error; two Bihar seats really do "
-        f"share each of these names."
-    )
-    return "Kalyanpur and Pipra are each two real seats; join on ac_number, not name"
-check("duplicate constituency names are the two known legitimate pairs", _names)
+def _hyderabad_fresh():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_hyderabad.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-600:]
 
 
-def _derived_2024():
-    bad = []
-    for r in rows:
-        want = int(r["deletions_2024"]) / int(r["booths_2024"])
-        if abs(want - float(r["del_per_booth_2024"])) > 1e-6:
-            bad.append(r["ac_name"])
-    assert not bad, f"del_per_booth_2024 does not equal deletions/booths for: {bad[:5]}"
-    return "recomputes exactly"
-check("del_per_booth_2024 is consistent with its inputs", _derived_2024)
+def _hyderabad_totals():
+    with open(os.path.join(ROOT, 'data', 'hyderabad', 'summary.json'), encoding='utf-8') as fh:
+        H = json.load(fh)
+    t = H['totals']
+    assert len(H['acs']) == 5 and t['parts'] == 1158, 'expected five constituencies and 1,158 parts'
+    assert t['electors'] == 1657207 and t['deleted'] == 662063, 'Hyderabad totals moved: %s' % t
+    mal = [a for a in H['acs'] if a['name'] == 'Malakpet'][0]
+    assert not mal['linked'] and mal['within_part']['unlinked_minus_linked'] is None, 'Malakpet has no 2002 linkage and must not be given a linked rate'
 
 
-def _no_negative():
-    bad = [r["ac_name"] for r in rows if int(r["deletions_2024"]) < 0 or int(r["booths_2024"]) <= 0]
-    assert not bad, f"non-positive booths or negative deletions: {bad[:5]}"
-check("booth counts positive and deletions non-negative", _no_negative)
+def _one_row_per_booth():
+    # The six-fold join gave 39.2 million. One row per booth gives 6,559,626,
+    # which the constituency-level SIR sheet confirms to within its own rounding.
+    assert T['booths'] == 77837, T['booths']
+    assert 6_500_000 < T['p1'] < 6_600_000, 'phase 1 total %s is not the SIR draft-roll figure' % T['p1']
+    assert abs(sum(a['booths'] for a in A) - 77837) == 0
 
 
-def _sir_total():
-    total = sum(int(r["deletions_2024"]) for r in rows)
-    assert 6_000_000 <= total <= 7_000_000, (
-        f"total 'deletions_2024' is {total:,}; it had been ~6.56M, consistent with the "
-        f"reported Bihar SIR figure of roughly 65 lakh"
-    )
-    return f"{total:,}"
-check("2024 deletions total stays near the reported SIR figure", _sir_total)
+def _phases():
+    assert T['p1'] + T['p2'] == T['total'] == 6910559, T
+    assert T['female'] + T['male'] == T['total']
 
 
-# --------------------------------------------------------------------------
-# Known defects. See DATA_INTEGRITY.md. Each of these SHOULD eventually fail.
-# --------------------------------------------------------------------------
-
-def _booths_copied():
-    same = sum(1 for r in rows if r["booths_2020"] == r["booths_2024"])
-    assert same == 243, (
-        f"booths_2020 now differs from booths_2024 in {243 - same} rows. If the 2020 "
-        f"booth counts have been sourced, delete this check and finding 1 in "
-        f"DATA_INTEGRITY.md, and recompute del_per_booth_2020, delta_del_per_booth, "
-        f"pct_change_del_per_booth and quartile_2020, which were all derived from the "
-        f"wrong denominator."
-    )
-    return "still a verbatim copy in all 243 rows, as documented"
-check("DEFECT 1: booths_2020 is a copy of booths_2024", _booths_copied, "KNOWN DEFECT")
+def _constituencies():
+    assert len(A) == 243 and sorted(a['ac'] for a in A) == list(range(1, 244))
+    # Two pairs of different seats share a name; a join on name merges them.
+    names = [a['name'] for a in A]
+    assert names.count('Kalyanpur') == 2 and names.count('Pipra') == 2, 'Kalyanpur and Pipra must stay two seats each'
 
 
-def _deletions_2020_implausible():
-    total = sum(int(r["deletions_2020"]) for r in rows)
-    assert total > 30_000_000, (
-        f"deletions_2020 now totals {total:,}, no longer the implausible 39.2M. If this "
-        f"column has been sourced or corrected, delete this check and finding 2 in "
-        f"DATA_INTEGRITY.md."
-    )
-    return f"{total:,}, still ~54% of Bihar's electorate, as documented"
-check("DEFECT 2: deletions_2020 remains implausibly large", _deletions_2020_implausible,
-      "KNOWN DEFECT")
+def _labels_reconcile():
+    bad = [r['pc'] for r in S['label_verification'] if not r['match']]
+    assert len(S['label_verification']) == 40 and not bad, 'seats whose 2024 top two do not match the declared result: %s' % bad
 
 
-def _party_2024_unreconciled():
-    """BJP and JD(U) each won 12 of Bihar's 40 Lok Sabha seats in 2024.
-
-    At roughly six assembly segments per parliamentary seat that is about 72
-    segments each. RJD won 4 and LJP(RV) 5. BSP and independents won none.
-    """
-    c = Counter(r["party_2024"] for r in rows)
-    assert c.get("JD(U)", 0) < 40 or c.get("BSP", 0) > 20, (
-        "party_2024 now reconciles with the 2024 Lok Sabha result. Delete this check "
-        "and finding 3 in DATA_INTEGRITY.md, and recheck every claim that groups by "
-        "alliance_2024_ls."
-    )
-    return (f"JD(U)={c.get('JD(U)', 0)} (expect ~72), BSP={c.get('BSP', 0)} (expect 0), "
-            f"RJD={c.get('RJD', 0)} (expect ~24)")
-check("DEFECT 3: party_2024 does not match the 2024 Lok Sabha result",
-      _party_2024_unreconciled, "KNOWN DEFECT")
+def _alliances_cover_all():
+    # The old alliance_2024_ls classified 131 of 243 seats.
+    for y in ['al2020', 'al2024', 'al2025']:
+        missing = [a['ac'] for a in A if a[y] not in ('NDA', 'INDIA', 'Other')]
+        assert not missing, '%s unlabelled in %s' % (len(missing), y)
+    assert sum(1 for a in A if a['al2025'] == 'NDA') == 202, '2025 NDA seats should be 202'
 
 
-def _alliance_coverage():
-    c = Counter(r["alliance_2024_ls"] for r in rows)
-    classified = c.get("NDA", 0) + c.get("INDIA", 0)
-    assert classified < 200, (
-        f"alliance_2024_ls now classifies {classified} of 243 ACs. Delete this check "
-        f"and finding 4 in DATA_INTEGRITY.md."
-    )
-    return f"{classified} of 243 classified NDA or INDIA, as documented"
-check("DEFECT 4: alliance_2024_ls leaves most constituencies unclassified",
-      _alliance_coverage, "KNOWN DEFECT")
+def _caste_not_uniform():
+    # The old district caste file carried identical shares everywhere.
+    I = load('identity.json')
+    g = I['caste']['guardian']['A']['groups']
+    assert abs(g['EBC']['share_of_classified'] - 60.9) > 5, 'EBC back at the Devi-inflated 60.9%'
+    shares = {round(d['muslim_share_deleted_low'], 1) for d in I['districts']}
+    assert len(shares) > 20, 'district religion shares are suspiciously uniform'
 
 
-def _comparison_not_robust():
-    """The dashboard's headline political claim flips with the labelling year."""
-    def mean_for(col, label):
-        v = [float(r["del_per_booth_2024"]) for r in rows if r[col] == label]
-        return st.mean(v) if v else float("nan")
-    nda24, ind24 = mean_for("alliance_2024_ls", "NDA"), mean_for("alliance_2024_ls", "INDIA")
-    nda20, ind20 = mean_for("alliance_2020_vs", "NDA"), mean_for("alliance_2020_vs", "INDIA")
-    flips = (nda24 < ind24) != (nda20 < ind20)
-    assert flips, (
-        "the NDA/INDIA comparison no longer reverses between the 2020 and 2024 "
-        "labellings. Delete this check and finding 5 in DATA_INTEGRITY.md."
-    )
-    return (f"2024 labels NDA {nda24:.1f} vs INDIA {ind24:.1f}; "
-            f"2020 labels NDA {nda20:.1f} vs INDIA {ind20:.1f}")
-check("DEFECT 5: the NDA/INDIA comparison reverses with the labelling year",
-      _comparison_not_robust, "KNOWN DEFECT")
+def _no_people():
+    # Aggregates only: no file under data/bihar may carry an EPIC-like field.
+    for dirpath, _, files in os.walk(B):
+        for f in files:
+            if f.endswith('.json'):
+                with open(os.path.join(dirpath, f), encoding='utf-8') as fh:
+                    head = fh.read(4000).lower()
+                assert 'epic' not in head and 'elector_name' not in head, '%s looks like it carries individual records' % f
 
 
-# --------------------------------------------------------------------------
+def _pages_link_method():
+    for p in ['bihar/index.html', 'bihar/results/index.html', 'bihar/people/index.html',
+              'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html']:
+        with open(os.path.join(ROOT, p), encoding='utf-8') as fh:
+            assert 'method/' in fh.read(), '%s no longer links to the method page' % p
 
-print()
-if failures:
-    print(f"FAIL - {len(failures)} check(s) failed: {', '.join(failures)}")
-    print("If a KNOWN DEFECT check failed, the data was repaired: update "
-          "DATA_INTEGRITY.md and remove the check.")
-    sys.exit(1)
-print("PASS - structural invariants hold; 5 documented defects unchanged")
+
+for name, fn in [
+    ('generated data matches its sources', _fresh),
+    ('Hyderabad data matches the explorer', _hyderabad_fresh),
+    ('Hyderabad totals, parts and Malakpet linkage', _hyderabad_totals),
+    ('booth deletions counted once per booth', _one_row_per_booth),
+    ('phases and sexes add to the total', _phases),
+    ('243 constituencies, joined by number', _constituencies),
+    ('2024 labels reconcile in all 40 seats', _labels_reconcile),
+    ('every seat has an alliance in all three elections', _alliances_cover_all),
+    ('caste and religion figures are measured, not repeated', _caste_not_uniform),
+    ('no individual records in published data', _no_people),
+    ('findings pages link to the method page', _pages_link_method),
+]:
+    check(name, fn)
+
+bad = [r for r in results if not r[0]]
+for ok, name, msg in results:
+    print(('  ok    ' if ok else '  FAIL  ') + name + ('' if ok else ': ' + msg))
+print('FAIL: %d of %d' % (len(bad), len(results)) if bad else 'PASS: %d checks' % len(results))
+sys.exit(1 if bad else 0)

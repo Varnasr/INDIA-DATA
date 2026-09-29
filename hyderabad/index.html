@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyderabad Old City SIR 2026: overview</title>
+<meta name="description" content="The Special Intensive Revision in five Old City constituencies of Hyderabad, 2026: every elector on the pre-revision roll, and who was struck off, by age, sex, religion and 2002 linkage.">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23b13b38'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="../assets/sir.css">
+</head>
+<body data-root="../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="brand"><a class="home" href="../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
+  <h1>Hyderabad Old City SIR 2026: who was struck off</h1>
+  <p class="lede">Every elector on the pre-revision rolls of Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, sorted into three fates: struck off, kept but summoned to a hearing, or untouched. Because the files cover every elector, these pages can give true rates for every group, and compare groups inside the same polling part.</p>
+  <nav class="sub" aria-label="Hyderabad"><a href="./" aria-current="page">Overview</a><a href="explorer/">Part explorer</a><a href="people/">Age, sex, religion, 2002</a><a href="parts/">Parts</a><a href="hearings/">Hearings</a><a href="method/">Method</a></nav>
+</header>
+<main id="main">
+  <div class="kpis" id="kpis"></div>
+  <div class="grid">
+    <div class="panel wide">
+      <h3>Three fates, constituency by constituency</h3>
+      <p>Share of each constituency's pre-revision roll struck off, summoned to a hearing, or left untouched.</p>
+      <div class="chart short"><canvas id="cFate" aria-label="Fates by constituency"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Why names were struck</h3>
+      <p>The Commission's reason code on the Absent-Shifted-Dead list.</p>
+      <div class="chart"><canvas id="cReason" aria-label="Reasons for deletion by constituency"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Deletion rate by age</h3>
+      <p>Share of electors in each age band struck off, all five constituencies.</p>
+      <div class="chart"><canvas id="cAge" aria-label="Deletion rate by age band"></canvas></div>
+    </div>
+  </div>
+
+  <h2>What the Old City files show</h2>
+  <div id="findings"></div>
+  <p class="caveat">Religion is estimated from names; the roll records none. Old City wards carry large migrant populations, so genuine shifting sits alongside any erroneous deletion, and these data describe what the revision did, not why. The count is from the September exports; the Commission extended the schedule on 7 September, so final figures will differ.</p>
+
+  <h2>Where to go next</h2>
+  <div class="cards">
+    <a class="card" href="explorer/"><h3>Part explorer</h3><p>Open any constituency and any of its 1,158 polling parts.</p><span class="go">Open</span></a>
+    <a class="card" href="people/"><h3>Age, sex, religion, 2002</h3><p>Rates for each group, constituency by constituency and within parts.</p><span class="go">Open</span></a>
+    <a class="card" href="parts/"><h3>Parts</h3><p>How deletions spread across parts, which parts stand out, and what moves with the rate.</p><span class="go">Open</span></a>
+    <a class="card" href="hearings/"><h3>Hearings</h3><p>Who was summoned, under which rule, and how heavy the schedule was.</p><span class="go">Open</span></a>
+    <a class="card" href="method/"><h3>Method</h3><p>Sources, definitions, and the research questions answered.</p><span class="go">Open</span></a>
+  </div>
+  <p class="note">Source: CEO Telangana SIR exports as merged by the HDCC data team, September 2026. Hearing schedules run 28 August to 12 October. Aggregates only; no names, EPIC numbers or addresses.</p>
+</main>
+<footer>Research by Varna Sri Raman. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="../assets/sir.js"></script>
+<script>
+SIR.json('data/hyderabad/summary.json').then(function (s) {
+  var A = s.acs, t = s.totals, names = A.map(function (a) { return a.name; });
+  document.getElementById('kpis').innerHTML = [[SIR.n(t.electors), 'electors on the pre-revision rolls'], [SIR.n(t.deleted), 'struck off'], [SIR.pct(t.rate), 'deletion rate'], [SIR.n(t.hearing), 'kept but summoned to a hearing'], [SIR.n(t.parts), 'polling parts']]
+    .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+  SIR.chart('cFate', { type: 'bar', data: { labels: names, datasets: [
+      { label: 'Struck off', data: A.map(function (a) { return a.rate; }), $token: '--fill-red' },
+      { label: 'Summoned to a hearing', data: A.map(function (a) { return a.hearing_rate; }), $token: '--fill-amber' },
+      { label: 'Untouched', data: A.map(function (a) { return 100 - a.rate - a.hearing_rate - 100 * a.unaccounted / a.electors; }), $token: '--fill-navy' }] },
+    options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of pre-revision roll' } }, y: { stacked: true } } } });
+  var rt = ['--fill-navy', '--fill-amber', '--fill-red', '--fill-grey'];
+  SIR.chart('cReason', { type: 'bar', data: { labels: names, datasets: s.reasons.map(function (r, i) { return { label: r, data: A.map(function (a) { return 100 * a.reasons[r] / a.deleted; }), $token: rt[i] }; }) },
+    options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: '% of deletions' } }, y: { stacked: true } } } });
+  var all = s.bands.map(function (b, i) { var d = SIR.sum(A, function (a) { return a.age_rate[i] * a.age_all[i] / 100; }), n = SIR.sum(A, function (a) { return a.age_all[i]; }); return 100 * d / n; });
+  SIR.chart('cAge', { type: 'bar', data: { labels: s.bands, datasets: [{ label: 'Deletion rate', data: all, $token: '--fill-red' }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: '% of electors in the band struck off' } } } } });
+
+  var agg = function (num, den) { return 100 * SIR.sum(A, function (a) { return a.counts[num]; }) / SIR.sum(A, function (a) { return a.counts[den]; }); };
+  var w = A.map(function (a) { return a.within_part.hindu_minus_muslim; });
+  var link = A.filter(function (a) { return a.linked; });
+  document.getElementById('findings').innerHTML = [
+    '<p class="finding"><b>Age is the steepest gradient.</b> ' + SIR.pct(all[7]) + ' of electors aged 80 and over were struck off, against ' + SIR.pct(all[0]) + ' of those aged 18 to 24.</p>',
+    '<p class="finding"><b>Hindu-name electors were struck off more often than Muslim-name electors, and the gap holds inside the same polling part.</b> Within parts, the difference is ' + A.map(function (a) { return SIR.d(a.within_part.hindu_minus_muslim.diff_pp, 1) + ' points in ' + a.name; }).join(', ') + '; it runs the same way in ' + SIR.sum(w, 'a_higher') + ' of ' + SIR.sum(w, 'parts') + ' parts large enough to compare. <a href="people/">People</a>.</p>',
+    '<p class="finding"><b>The 2002 link is the sharpest single cut.</b> Where the file carries it (all but Malakpet), electors with no link to the 2002 roll were struck off ' + link.map(function (a) { return SIR.d(a.within_part.unlinked_minus_linked.diff_pp, 0); }).join(', ') + ' points more often than linked electors in the same part.</p>',
+    '<p class="finding"><b>Sex barely separates.</b> Women were struck off at ' + SIR.pct(agg('f_asd', 'f_all')) + ' against men at ' + SIR.pct(agg('m_asd', 'm_all')) + ', with no consistent direction within parts.</p>'
+  ].join('');
+}).catch(SIR.fail);
+</script>
+</body>
+</html>

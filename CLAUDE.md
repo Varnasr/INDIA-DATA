@@ -1,105 +1,88 @@
 # INDIA-DATA
 
-Bihar electoral and demographic dashboard. Static HTML, deployed to GitHub Pages
-by `.github/workflows/static.yml`. `index.html` is the dashboard; the data is in
-`data/`.
+The SIR analyses hub at forindia.netlify.app: Bihar (2025) and five Old City
+constituencies of Hyderabad (2026). Static HTML, Chart.js from cdnjs, one
+stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
+every page. Netlify deploys the repository root from `main`; `static.yml` also
+publishes it to GitHub Pages.
 
 ## Commands
 
 ```bash
-python3 scripts/check_data.py     # integrity checks, run by CI
-python3 scripts/check_contrast.py # colour tokens, both themes, run by CI
-python3 -m http.server 8000       # then open http://localhost:8000
+pip install pandas==3.0.6 openpyxl==3.1.5
+python3 scripts/build_bihar.py          # rebuild data/bihar from data/bihar/raw
+python3 scripts/build_hyderabad.py      # rebuild data/hyderabad from the explorer
+python3 scripts/check_data.py           # 11 checks, run by CI; rebuilds both with --check
+python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
+python3 -m http.server 8000
 ```
 
-## Read DATA_INTEGRITY.md before citing anything from this repository
+## Read DATA_INTEGRITY.md before touching the Bihar numbers
 
-The dashboard publishes political claims about electoral roll deletions. Five
-defects in `data/ac_deletions_change_2020_2024.csv`, audited 2026-09-22, sit
-underneath them. In short:
+Until September 2026 this site published a Bihar dashboard built on a join that
+counted every booth about six times (39.2 million "2020 deletions" against a
+true 6.56 million), with 2024 party labels wrong in nine seats and caste figures
+that were the state survey repeated in every district. Its headline comparison
+ran the wrong way. Everything was rebuilt from the booth files; the old files
+are in `data/legacy/` with a README. Do not bring any of them back into a page.
 
-1. `booths_2020` is a verbatim copy of `booths_2024` in all 243 rows, so four
-   derived columns are wrong and the per-booth comparison is arithmetically
-   identical to the raw deletion ratio.
-2. `deletions_2020` totals 39.2 million, roughly 54% of Bihar's electorate, with
-   no source anywhere in the repository.
-3. `party_2024` records BSP leading 59 assembly segments and independents 46,
-   though neither won a Bihar seat in 2024, gives JD(U) 3 where the result
-   implies about 72, and omits RJD and LJP(RV) entirely.
-4. `alliance_2024_ls`, derived from it, classifies only 131 of 243
-   constituencies, so anything grouped by it drops 46% of Bihar.
-5. The headline claim "NDA 81.2 vs INDIA 93.0" **reverses** to NDA 87.4 vs INDIA
-   79.6 under the 2020 alliance labels, which cover 104 more constituencies.
+Things the rebuild depends on, each asserted by `check_data.py`:
 
-**None of this is fixed**, and it should not be fixed by guessing. Repairing it
-needs booth counts from the 2020 roll and assembly-segment leads from ECI Form 20
-data. Inventing plausible numbers for an electoral integrity analysis would be
-much worse than the gap.
+- **One row per booth.** The booth file has about three rows per booth (one per
+  top-three 2024 party) and the gender-religion file two (one per sex). Any
+  join of the two must aggregate first. Totals: 77,837 booths, 6,559,626 phase 1
+  deletions in the booth file, 6,910,559 across both phases.
+- **`LABEL_FIXES` in `build_bihar.py`.** Each carries its evidence and a status,
+  verified or probable. After the fixes, all 40 seats' top two match the
+  declared result within 1 point. A new fix needs evidence, not a plausible
+  party.
+- **`ac_name` is not a key.** Kalyanpur (16, 131) and Pipra (17, 42) are
+  different seats sharing a name. Join on `ac_number`.
+- **Minapur (90) is in Vaishali**, not Muzaffarpur, whatever the public table
+  says.
+- **Caste is not identified.** Two surname classifications give different
+  compositions and wide bounds. The pages say so. Do not collapse them into
+  one number, and do not reintroduce "Devi" or any title as a caste marker.
+- **Religion is a range**, low bound classified names only, high bound adding
+  every unclassified name. The census share is inside it in 18 of 38 districts
+  and below the low bound in 20.
 
-What *is* sound: `deletions_2024` totals 6,559,626, close to the reported Special
-Intensive Revision figure, and `del_per_booth_2024` recomputes exactly from its
-inputs in every row.
+## Hyderabad
 
-## How the defect checks work
+`hyderabad/explorer/index.html` carries the part-level counts inline as
+`const D={...}`. `build_hyderabad.py` reads that object and derives
+`data/hyderabad/summary.json` and `parts.json`, so the explorer and the analysis
+pages cannot disagree. Edit the counts in the explorer, then rebuild.
 
-`scripts/check_data.py` has two kinds of check. **STRUCTURAL** ones assert
-invariants that must hold and currently do. **KNOWN DEFECT** ones assert each
-documented defect is still exactly as described, so the state is explicit rather
-than remembered.
+Malakpet's export has no part numbers and no 2002 linkage: it is read by
+polling-station name (60 stations), it has 7,891 electors in none of the three
+fates, and it must never be given a linked or unlinked rate. A check enforces
+the last point.
 
-That inversion is deliberate. When you repair the data, the matching KNOWN DEFECT
-check fails and tells you which finding in `DATA_INTEGRITY.md` to delete and which
-derived columns to recompute. A list of known problems that nothing enforces
-rots into a blindfold; this one cannot go stale without saying so.
+## Privacy
 
-## The dark theme redefined the surfaces and almost none of the inks
+Aggregates only. A row-level sample of the Bihar lists exists in the project's
+Drive with names and EPIC numbers; it must never be committed or published. A
+check fails if any JSON under `data/bihar` carries an EPIC-like field.
 
-`index.html` declares the palette twice, `:root` and `[data-theme="dark"]`. The
-dark block moved `--bg`, `--bg2`, `--card`, `--text`, `--text-light` and
-`--border`, and left every brand colour at its light-theme value. So on
-2026-09-23, measured:
+## Front end
 
-| token | where | was | now |
-|---|---|---|---|
-| `--tab-inactive` #7F8C8D | the ten inactive tab labels, light theme | 3.29:1 | `#5D6D7E`, 5.08:1 |
-| `--dblue` #2980B9 | every takeaway lead-in and section heading, light | 4.08:1 | `#1F618D`, 6.31:1 |
-| `--dblue` #2980B9 | the same text on the dark card | **2.88:1** | `#7FB3D5`, 5.50:1 |
-| `--red` #C0392B | the **active** tab, dark theme | **2.29:1** | `--tab-active` `#F1948A`, 5.55:1 |
-| `#b45309` inline | the "Not robust" caveat on the alliance chart, dark | 3.16:1 | `--warn-ink` `#FBBF24`, 9.5:1 |
-
-Two of those are worth naming. `--dblue` is only ever ink here, never a fill, so
-darkening it for the light theme costs nothing; a token used both ways cannot be
-moved that freely. And `--red` had to become a separate `--tab-active`, because
-the same red is also the tab underline and the Madhubani stripe, where a light
-pink would be wrong.
-
-`scripts/check_contrast.py` measures the pairs the page actually paints — the
-twelve in `PAIRS`, in both themes — rather than every combination, because most
-combinations never occur and a check reporting them is a check nobody runs. It
-follows `var()` chains and falls back to the light block for anything the dark
-block does not redeclare, which is what the browser does and is exactly how the
-inks came to be wrong. Fault-injected against both real failures.
-
-The language `<select>` in the header had no label of any kind. It has one now.
+- Colour tokens live in `assets/sir.css`, with the dark block written twice
+  (`prefers-color-scheme` and `[data-theme="dark"]`). `check_contrast.py`
+  measures 50 pairs and fails if the two dark blocks differ.
+- `SIR.chart` resolves `$token` colours before Chart.js sees them and disables
+  the colours plugin; `SIR.recolour` sets option fields in place on a theme
+  change. Replacing an options object wholesale breaks Chart.js's proxies
+  (`this._fn is not a function`).
+- Every finding sentence on a page is computed from the JSON when the page
+  loads. Do not hardcode a figure in prose.
+- Audited with axe at 1280 and 390, both schemes, all 15 pages: 0 serious or
+  critical. In a sandbox cdnjs is unreachable; stub Chart.js by route or the
+  audit sees pages with no charts.
 
 ## Watch out for
 
-- **`ac_name` is not a key.** Bihar has two Kalyanpur constituencies (16, Purvi
-  Champaran; 131, Samastipur) and two Pipra constituencies (17 and 42). These are
-  genuinely different seats sharing a name, verified against the constituency
-  pages and the Bihar CEO's Form 20 for AC 131. Join on `ac_number`. A join on
-  name silently merges two constituencies and nothing errors.
-- **The data quality notice in `index.html` is load-bearing.** It is the only
-  thing telling a reader that the comparisons below it are unsound. CI fails if
-  it or the link to `DATA_INTEGRITY.md` is removed, so taking it out has to be
-  deliberate.
-- **The SIR was conducted in 2025.** A column named `deletions_2024` holding what
-  looks like the SIR total may be mislabelled by a year. Resolve before citing.
-- **`BUindex.html` and `backups/` are served publicly.** Seven backup copies of
-  the dashboard, 604 KB, are deployed to Pages alongside the real one and are
-  reachable by URL. They carry older versions of the same claims and none of them
-  carry the data quality notice. Consider moving them out of the published root.
-- **`METHODOLOGY_NOTES.md` covers the census, caste survey and GDDP projections
-  in detail and says nothing at all about the deletions data.** That gap is how
-  findings 1 to 3 survived: the documented half of the repository is not the half
-  the dashboard's claims depend on.
+- `data/Bihar Dashboard Context/` holds the Word reports written on the old
+  data. They are served publicly and their conclusions predate the correction.
+- `pandas` and `openpyxl` are pinned in CI because a reader change could move
+  the numbers without an error.

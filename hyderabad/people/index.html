@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyderabad Old City SIR 2026: age, sex, religion, 2002</title>
+<meta name="description" content="Deletion rates in Hyderabad's Old City SIR by age, sex, name-estimated religion and 2002 linkage, across constituencies and within the same polling part.">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23b13b38'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="../../assets/sir.css">
+</head>
+<body data-root="../../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="brand"><a class="home" href="../../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
+  <h1>Age, sex, religion and the 2002 roll</h1>
+  <p class="lede">The Old City files cover every elector, so each group has a true deletion rate: the share of that group on the pre-revision roll who were struck off. And because groups live side by side in the same polling parts, each gap can be tested inside the part, where the officer, the locality and the housing are shared.</p>
+  <nav class="sub" aria-label="Hyderabad"><a href="../">Overview</a><a href="../explorer/">Part explorer</a><a href="./" aria-current="page">Age, sex, religion, 2002</a><a href="../parts/">Parts</a><a href="../hearings/">Hearings</a><a href="../method/">Method</a></nav>
+</header>
+<main id="main">
+  <h2>Age</h2>
+  <div class="grid">
+    <div class="panel wide">
+      <h3>Deletion rate by age band, each constituency</h3>
+      <p>Share of electors in each band struck off.</p>
+      <div class="chart"><canvas id="cAge" aria-label="Deletion rate by age band for each constituency"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fAge"></p>
+
+  <h2>Religion</h2>
+  <div class="grid">
+    <div class="panel">
+      <h3>Deletion rate by name-estimated religion</h3>
+      <p>Hindu-name and Muslim-name electors, constituency by constituency.</p>
+      <div class="chart"><canvas id="cRel" aria-label="Deletion rate by religion and constituency"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>The same gap, inside each part</h3>
+      <p>Hindu-name rate minus Muslim-name rate, pooled across parts with at least 20 of each, each part weighted by its smaller group.</p>
+      <div class="chart"><canvas id="cRelW" aria-label="Within-part religion gap"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fRel"></p>
+  <p class="caveat">Two things this cannot separate. Age: the files give religion and age separately, not together, so if Hindu-name electors in these wards are older, part of the gap is age. And movement: a Hindu-name household that has left the Old City is a legitimate "shifted" deletion. The within-part comparison removes differences between localities, not differences between households.</p>
+
+  <h2>The 2002 roll</h2>
+  <div class="grid">
+    <div class="panel">
+      <h3>Linked and unlinked to 2002</h3>
+      <p>Deletion rate for electors who map to the 2002 intensive revision roll and those who do not. Malakpet's export carries no linkage.</p>
+      <div class="chart"><canvas id="cLink" aria-label="Deletion rate by 2002 linkage"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Share of the roll linked to 2002</h3>
+      <p>How much of each roll could be traced back.</p>
+      <div class="chart"><canvas id="cLinkShare" aria-label="Share of roll linked to 2002"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fLink"></p>
+
+  <h2>Sex</h2>
+  <div class="grid">
+    <div class="panel">
+      <h3>Women and men</h3>
+      <p>Deletion rate for each, constituency by constituency.</p>
+      <div class="chart"><canvas id="cSex" aria-label="Deletion rate by sex"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Within parts</h3>
+      <p>Women's rate minus men's, pooled within parts, and how many parts go each way.</p>
+      <div class="twrap" tabindex="0" role="region" aria-label="Within-part sex gap"><table id="tSex"></table></div>
+    </div>
+  </div>
+  <p class="finding" id="fSex"></p>
+
+  <h2>Set beside Bihar</h2>
+  <p class="sub">In Bihar women were over-represented among the removed in every district; here sex barely separates. In Bihar the Muslim-name share of removals is a range that brackets the census in most of Seemanchal and exceeds it in south and central Bihar; here, with every elector counted, Hindu-name electors were struck off more often. The designs differ (<a href="../../">why</a>), and so do the places: an old urban core with heavy movement, against a largely rural state whose workforce leaves for months at a time.</p>
+  <p class="note">Religion: a name-based estimate that agrees 99% with an independent rebuild; the roll records none. Electors whose names were classified as neither are left out of both religion rates. 2002 linkage: the elector maps to the 2002 intensive revision roll in the export.</p>
+</main>
+<footer>Research by Varna Sri Raman. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="../../assets/sir.js"></script>
+<script>
+SIR.json('data/hyderabad/summary.json').then(function (s) {
+  var A = s.acs, names = A.map(function (a) { return a.name; }), pal = ['--fill-red', '--fill-navy', '--fill-amber', '--fill-india', '--fill-other'];
+  SIR.chart('cAge', { type: 'line', data: { labels: s.bands, datasets: A.map(function (a, i) { return { label: a.name, data: a.age_rate, $token: pal[i], tension: 0.2, pointRadius: 3 }; }) },
+    options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% struck off' } }, x: { title: { display: true, text: 'Age band' } } } } });
+  var lo = A.map(function (a) { return a.age_rate[0]; }), hi = A.map(function (a) { return a.age_rate[7]; });
+  document.getElementById('fAge').innerHTML = '<b>Deletion climbs with age in every constituency.</b> Between ' + SIR.pct(Math.min.apply(null, hi)) + ' and ' + SIR.pct(Math.max.apply(null, hi)) + ' of electors aged 80 and over were struck off, against ' + SIR.pct(Math.min.apply(null, lo)) + ' to ' + SIR.pct(Math.max.apply(null, lo)) + ' of those aged 18 to 24. Death accounts for part of that; the reason codes on the <a href="../">overview</a> say how much.';
+
+  SIR.chart('cRel', { type: 'bar', data: { labels: names, datasets: [
+      { label: 'Hindu names', data: A.map(function (a) { return a.hindu_rate; }), $token: '--fill-amber' },
+      { label: 'Muslim names', data: A.map(function (a) { return a.muslim_rate; }), $token: '--fill-india' }] },
+    options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% struck off' } } } } });
+  SIR.chart('cRelW', { type: 'bar', data: { labels: names, datasets: [{ label: 'Hindu minus Muslim, within parts', data: A.map(function (a) { return a.within_part.hindu_minus_muslim.diff_pp; }), $token: '--fill-navy' }] },
+    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: function (c) { var w = A[c.dataIndex].within_part.hindu_minus_muslim; return w.a_higher + ' of ' + w.parts + ' parts: Hindu-name rate higher'; } } } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Percentage points' } } } } });
+  var W = A.map(function (a) { return a.within_part.hindu_minus_muslim; });
+  var c = function (k) { return 100 * SIR.sum(A, function (a) { return a.counts[k]; }); };
+  document.getElementById('fRel').innerHTML = '<b>Pooled across the five, ' + SIR.pct(c('hin_asd') / SIR.sum(A, function (a) { return a.counts.hin_all; })) + ' of Hindu-name electors were struck off against ' + SIR.pct(c('mus_asd') / SIR.sum(A, function (a) { return a.counts.mus_all; })) + ' of Muslim-name electors.</b> Inside the same part the gap is ' + SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 1) + ' to ' + SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 1) + ' points, and runs the same way in ' + SIR.sum(W, 'a_higher') + ' of ' + SIR.sum(W, 'parts') + ' parts. So it is not that Hindu-name electors live in parts where everyone was struck off more: parts with more Muslim electors lost fewer names overall (see <a href="../parts/">parts</a>), and within a part Hindu-name electors still lost more.';
+
+  var L = A.filter(function (a) { return a.linked; });
+  SIR.chart('cLink', { type: 'bar', data: { labels: L.map(function (a) { return a.name; }), datasets: [
+      { label: 'Linked to 2002', data: L.map(function (a) { return a.linked_rate; }), $token: '--fill-navy' },
+      { label: 'No 2002 link', data: L.map(function (a) { return a.unlinked_rate; }), $token: '--fill-red' }] },
+    options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% struck off' } } } } });
+  SIR.chart('cLinkShare', { type: 'bar', data: { labels: L.map(function (a) { return a.name; }), datasets: [{ label: '% of roll linked', data: L.map(function (a) { return a.linked_share_roll; }), $token: '--fill-navy' }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: '% of roll' } } } } });
+  document.getElementById('fLink').innerHTML = '<b>No link to 2002 roughly doubles the chance of being struck off.</b> Within parts, unlinked electors were removed ' + L.map(function (a) { return SIR.d(a.within_part.unlinked_minus_linked.diff_pp, 0) + ' points more (' + a.name + ')'; }).join(', ') + ', and in almost every part. The link is the revision’s own test, so this measures how heavily the process leaned on it, not whether it was applied correctly.';
+
+  SIR.chart('cSex', { type: 'bar', data: { labels: names, datasets: [
+      { label: 'Women', data: A.map(function (a) { return a.female_rate; }), $token: '--female' },
+      { label: 'Men', data: A.map(function (a) { return a.male_rate; }), $token: '--male' }] },
+    options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% struck off' } } } } });
+  SIR.table(document.getElementById('tSex'), [{ k: 'name', label: 'Constituency', left: true }, { k: 'd', label: 'Women minus men (points)', fmt: function (v) { return SIR.d(v, 1); } }, { k: 'w', label: 'Parts: women higher' }, { k: 'm', label: 'Parts: men higher' }],
+    A.map(function (a) { var w = a.within_part.female_minus_male; return { name: a.name, d: w.diff_pp, w: w.a_higher, m: w.b_higher }; }), { sort: 'name', dir: 1 });
+  document.getElementById('fSex').innerHTML = '<b>Sex barely separates, and not in one direction.</b> Men were struck off slightly more often in Charminar, Yakutpura and Malakpet, women in Chandrayangutta and Bahadurpura; the within-part gaps are under two and a half points.';
+}).catch(SIR.fail);
+</script>
+</body>
+</html>
