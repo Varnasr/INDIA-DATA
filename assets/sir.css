@@ -50,6 +50,7 @@ main h2:first-child{margin-top:0}
 .panel .chart{position:relative;height:260px}
 .panel .chart.tall{height:380px}
 .panel .chart.short{height:200px}
+.panel .chart.rows{height:820px}
 .wide{grid-column:1/-1}
 .finding{border-left:3px solid var(--navy);padding:4px 0 4px 14px;margin:14px 0 22px;max-width:80ch}
 .finding b{font-weight:600}
@@ -95,5 +96,35 @@ tr button.open:focus-visible{outline:2px solid var(--ink)}
 .note{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:34px;padding-top:12px;max-width:84ch}
 footer{padding:18px 32px 36px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
 @media (max-width:820px){.grid{grid-template-columns:1fr}main{padding:18px 16px 40px}header.site{padding:18px 16px 0}footer{padding:16px}header.site h1{font-size:25px}}
+/* Explorer layout, ported from the Hyderabad part explorer: a rail with
+   search, a colour grid and a list; a detail pane with a fate bar. */
+.xp{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 120px)}
+.xp>*{min-width:0}
+.xp aside{border-right:1px solid var(--line);padding:18px 16px;overflow:auto;max-height:100vh;position:sticky;top:0}
+.xp aside input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:4px;font:inherit;font-size:14px;background:var(--bg);color:var(--ink)}
+.xp .legend{margin:10px 0 0}
+.xstrip{display:grid;grid-template-columns:repeat(18,minmax(0,1fr));gap:2px;margin:12px 0}
+.xstrip button{aspect-ratio:1;border:0;padding:0;cursor:pointer;border-radius:2px;min-width:0}
+.xstrip button.sel,.xstrip button:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.xstrip button.dim{opacity:.18}
+.xlist{list-style:none;padding:0;margin:10px 0 0}
+.xlist li button{width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:7px 4px;font:inherit;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;gap:8px;color:var(--ink)}
+.xlist li button:hover,.xlist li button.sel{background:var(--soft)}
+.xlist li button:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.xlist .rate{color:var(--red);font-variant-numeric:tabular-nums}
+.xp main{padding:22px 32px 48px;max-width:1120px}
+.crumb{font-size:13px;color:var(--muted);margin-bottom:6px}
+.crumb button{background:none;border:0;color:var(--navy);text-decoration:underline;cursor:pointer;font:inherit;font-size:13px;padding:0}
+.xp main h2{font-size:26px;margin:0 0 4px}
+.fate{display:flex;height:44px;border-radius:3px;overflow:hidden;margin:8px 0 6px}
+.fate div{display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden}
+.fatekey{display:flex;gap:18px;font-size:13px;color:var(--muted);margin-bottom:22px;flex-wrap:wrap}
+.fatekey i{display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:5px;border-radius:2px}
+.lead{font-size:17px;line-height:1.5;max-width:74ch;margin:6px 0 20px}
+.claims{list-style:none;padding:0;margin:8px 0 28px;display:grid;gap:0}
+.claims li{display:grid;grid-template-columns:150px 1fr;gap:18px;border-top:1px solid var(--line);padding:14px 0;align-items:baseline}
+.claims b{font-family:Georgia,serif;font-weight:normal;font-size:30px;line-height:1}
+.claims span{max-width:70ch}
+@media (max-width:820px){.xp{grid-template-columns:1fr}.xp aside{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line)}.xlist{max-height:260px;overflow:auto}.xp main{padding:18px 16px}.claims li{grid-template-columns:1fr;gap:4px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media print{nav.sub,.theme,.controls{display:none}}

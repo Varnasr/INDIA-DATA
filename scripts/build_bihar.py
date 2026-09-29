@@ -33,6 +33,7 @@ script exists rather than a spreadsheet:
 
 import gzip
 import json
+import math
 import os
 import re
 import sys
@@ -407,12 +408,45 @@ def within_seat(booth):
             m = g.groupby('lead24_alliance').deleted.mean()
             seats.append({'ac': int(ac), 'n_nda': int(n['NDA']), 'n_india': int(n['INDIA']),
                           'mean_nda': round(float(m['NDA']), 1), 'mean_india': round(float(m['INDIA']), 1),
-                          'diff': round(float(m['NDA'] - m['INDIA']), 1)})
-    diffs = [x['diff'] for x in seats]
+                          'diff': round(float(m['NDA'] - m['INDIA']), 1), '_d': float(m['NDA'] - m['INDIA'])})
+    # Count the direction on the unrounded difference: rounding first turns a
+    # small real gap into 0.0 and drops the seat from both counts.
+    diffs = [x.pop('_d') for x in seats]
     return {'pooled_nda_minus_india': round(float(pooled['NDA'] - pooled['INDIA']), 2),
             'booths': int(len(b)), 'seats_compared': len(seats),
             'seats_nda_higher': int(sum(d > 0 for d in diffs)), 'seats_india_higher': int(sum(d < 0 for d in diffs)),
             'median_seat_diff': round(float(pd.Series(diffs).median()), 1), 'seats': seats}
+
+
+def intensity(booth):
+    """Who led the booths that lost the most names.
+
+    `bins` groups booths by how many names they lost, statewide. `within_seat`
+    ranks booths inside their own constituency into fifths, so the lightest
+    and heaviest fifth of every seat are compared with geography held fixed."""
+    b = booth.copy()
+    edges = [0, 50, 100, 150, 200, 250, 300, 400, 10**6]
+    labels = ['1-49', '50-99', '100-149', '150-199', '200-249', '250-299', '300-399', '400+']
+    b['bin'] = pd.cut(b.deleted, bins=edges, right=False, labels=labels)
+    out = []
+    for lab, g in b.groupby('bin', observed=False):
+        led = g.lead24_alliance.value_counts()
+        coded = int(led.get('NDA', 0) + led.get('INDIA', 0) + led.get('Other', 0))
+        d = int(g.deleted.sum())
+        out.append({'bin': lab, 'booths': int(len(g)), 'deleted': d, 'coded': coded,
+                    'nda': int(led.get('NDA', 0)), 'india': int(led.get('INDIA', 0)), 'other': int(led.get('Other', 0)),
+                    'nda_pct': r(100 * led.get('NDA', 0) / coded, 1), 'india_pct': r(100 * led.get('INDIA', 0) / coded, 1),
+                    'other_pct': r(100 * led.get('Other', 0) / coded, 1),
+                    'women_pct': r(100 * g.f.sum() / d, 1), 'muslim_pct': r(100 * g.muslim.sum() / d, 1),
+                    'hindu_pct': r(100 * g.hindu.sum() / d, 1), 'unknown_pct': r(100 * g.unknown.sum() / d, 1)})
+    c = b.dropna(subset=['lead24_alliance']).copy()
+    c['q'] = c.groupby('ac').deleted.rank(method='first', pct=True).mul(5).apply(lambda v: min(int(math.ceil(v)), 5))
+    ws = []
+    for q, g in c.groupby('q'):
+        led = g.lead24_alliance.value_counts()
+        ws.append({'fifth': int(q), 'booths': int(len(g)), 'mean_deleted': r(g.deleted.mean(), 1),
+                   'nda_pct': r(100 * led.get('NDA', 0) / len(g), 1), 'india_pct': r(100 * led.get('INDIA', 0) / len(g), 1)})
+    return {'bins': out, 'within_seat_fifths': ws}
 
 
 # ------------------------------------------------------------------- outputs
@@ -472,6 +506,7 @@ def outputs(booth, a, report):
         'by_booth_leader_2024': {k: {'booths': int(v['size']), 'deleted': int(v['sum']), 'mean': r(v['mean'], 1), 'median': r(v['median'], 1)}
                                  for k, v in bl.iterrows()},
         'within_seat_2024': within_seat(booth),
+        'intensity': intensity(booth),
         'label_verification': report,
         'label_fixes': {pc: {src: {'party': t[0], 'status': t[1], 'evidence': t[2]} for src, t in fx.items()} for pc, fx in LABEL_FIXES.items()},
     }

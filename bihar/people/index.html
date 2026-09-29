@@ -11,10 +11,10 @@
 <body data-root="../../">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site">
-  <div class="brand"><a class="home" href="../../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
-  <h1>Gender, religion, caste</h1>
-  <p class="lede">The roll records sex. It records neither religion nor caste, so those two are read from names, and a name is weaker evidence than a record. This page says how much weaker, sets each estimate beside a population baseline, and gives a range wherever the names cannot decide.</p>
-  <nav class="sub" aria-label="Bihar"><a href="../">Overview</a><a href="../constituencies/">Constituencies</a><a href="../results/">Deletions and results</a><a href="../border/">Border</a><a href="../districts/">Districts</a><a href="./" aria-current="page">Gender, religion, caste</a><a href="../method/">Method</a></nav>
+  <div class="brand"><span class="crumbs"><a class="home" href="../../">SIR analyses</a> · <a class="home" href="../">Bihar explorer</a> · <a class="home" href="../../hyderabad/">Hyderabad Old City 2026</a></span><button class="theme" type="button">Dark theme</button></div>
+  <h1>Women, religion, caste</h1>
+  <p class="lede">The roll records each elector's sex. It does not record religion or caste, so this page reads those from names: the removed elector's own name, and the surname of the father or husband listed beside it. Each estimate is set against a population baseline, the 2011 census for sex and religion and the 2023 Bihar caste survey for caste.</p>
+  <nav class="sub" aria-label="Bihar"><a href="../">Explorer</a><a href="../results/">Elections</a><a href="./" aria-current="page">Women, religion, caste</a><a href="../border/">Border</a><a href="../districts/">Districts</a><a href="../method/">Method</a></nav>
 </header>
 <main id="main">
   <h2>Gender</h2>
@@ -40,19 +40,18 @@
     <div class="panel wide">
       <h3>Muslim share of removals against the 2011 census, by district</h3>
       <p>The bar spans the range from name classification; the dot is the district's Muslim share of population in 2011. Where the dot sits inside the bar, the removals are consistent with the population.</p>
-      <div class="chart tall"><canvas id="cRel" aria-label="Muslim share of removals, range, against census share by district"></canvas></div>
+      <div class="chart rows"><canvas id="cRel" aria-label="Muslim share of removals, range, against census share by district"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fRel"></p>
-  <p class="caveat">The 2011 census is fifteen years old, and Bihar's Muslim share has risen since (17.70% in the 2023 caste survey against 16.87% in 2011). A baseline that is too low makes removals look heavier than they are. Name classification is also least reliable exactly where it matters, among names shared across communities.</p>
+  <p class="note" style="margin-top:0;border:0;padding-top:0">The 2011 census is the latest with religion by district. Bihar's Muslim share rose from 16.87% then to 17.70% in the 2023 caste survey.</p>
 
   <h2>Caste</h2>
-  <p class="corrected">The earlier dashboard reported that 60.9% of classified deletions were EBC. That figure rested on one entry: the surname mapping filed <em>Devi</em>, the title most married women carry in place of a surname, under Lohar (EBC). Devi is the commonest "surname" among the removed, 19.8 lakh of them, so two million women were counted as EBC. Its district caste charts were not measurements either: every district carried the same five shares, the 2023 state survey's, multiplied by its deletions. Both are replaced below.</p>
-  <p class="sub">What the files do hold is the surname of each removed elector and of their guardian (father or husband). The guardian's surname is far more informative, since women's own entries are mostly Devi, Kumari or Khatun. Both are classified two ways: A with the project's own surname mapping, reached through a spelling bridge from the romanised Hindi of the lists; B strictly, counting only surnames that belong almost entirely to one group and setting names like Singh, Prasad, Ray, Mahato, Mandal, Sharma, Thakur, Chaudhary and Manjhi aside as spanning groups.</p>
+  <p class="sub">The lists give a surname for each removed elector and for the father or husband named beside them. The guardian's surname carries more: most women are listed as Devi, Kumari or Khatun, which say nothing about caste. Surnames are classified two ways. Classification A uses the project's surname-to-caste mapping. Classification B is strict: it counts only surnames that belong almost entirely to one group, and sets aside names such as Singh, Prasad, Ray, Mahato, Mandal, Sharma, Thakur, Chaudhary and Manjhi that are carried across groups. A finding that holds under both is one to rely on.</p>
   <div class="controls"><span class="pill">Surname of</span><div class="seg" role="group" aria-label="Surname of"><button type="button" data-who="guardian" aria-pressed="true">Guardian</button><button type="button" data-who="own" aria-pressed="false">Elector</button></div></div>
   <div class="grid">
     <div class="panel">
-      <h3>How much the names can tell</h3>
+      <h3>How many removals each classification can place</h3>
       <p>Share of all removals each classification could place, and why the rest could not be placed.</p>
       <div class="chart"><canvas id="cCover" aria-label="Classification coverage"></canvas></div>
     </div>
@@ -62,18 +61,18 @@
       <div class="chart"><canvas id="cComp" aria-label="Group shares of classified removals against survey"></canvas></div>
     </div>
     <div class="panel wide">
-      <h3>The range that honesty allows</h3>
-      <p>Each group's share of <em>all</em> removals, from assuming none of the unplaced names belong to it (left end) to assuming all do (right end), under the strict classification B.</p>
+      <h3>Each group's possible share of all removals</h3>
+      <p>Under the strict classification B: the left end counts only names placed in the group, the right end adds every name that could not be placed.</p>
       <div class="chart short"><canvas id="cBounds" aria-label="Bounds on group shares of all removals"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fCaste"></p>
   <h3 style="margin-top:18px">The 25 commonest surnames among the removed</h3>
   <div class="twrap" tabindex="0" role="region" aria-label="Commonest surnames"><table id="tSur"></table></div>
-  <p class="caveat"><b>Why no caste can be called over- or under-represented yet.</b> A share among the removed means something only against the same share among all electors, surname by surname. These files hold surnames of the removed alone. With surname counts from the full draft roll, even for a sample of booths, each surname would have its own deletion rate, as each age and religion does in the Hyderabad analysis, and the caste question could be answered rather than bounded.</p>
-  <p class="note">Caste survey baseline: the Bihar caste-based survey released on 2 October 2023 (population 13,07,25,310: EBC 36.01%, BC 27.12%, SC 19.65%, ST 1.68%, unreserved 15.52%; Muslims 17.70%). Muslim castes listed within EBC (10.29 points), BC (2.09) and unreserved (4.80) are moved to the Muslim group, so the Hindu-caste shares are EBC 25.72, BC 25.03 and General 10.72. The strict classification and the basis for each surname are in <a href="https://github.com/Varnasr/INDIA-DATA/blob/main/data/bihar/surname_classes.csv">surname_classes.csv</a>; the project mapping is in the raw data folder.</p>
+  <p class="note" style="margin-top:12px">A surname's share among the removed becomes a removal rate once the same surname is counted on the whole draft roll. Draft-roll surname counts, even for a sample of booths, would give each caste group its own removal rate, as age and religion have in the <a href="../../hyderabad/people/">Hyderabad analysis</a>.</p>
+  <p class="note">Caste survey baseline: the Bihar caste-based survey released on 2 October 2023 (population 13,07,25,310: EBC 36.01%, BC 27.12%, SC 19.65%, ST 1.68%, unreserved 15.52%; Muslims 17.70%). Muslim castes listed within EBC (10.29 points), BC (2.09) and unreserved (4.80) are moved to the Muslim group, so the Hindu-caste shares are EBC 25.72, BC 25.03 and General 10.72. The strict classification assigns a surname to a group only where it belongs almost entirely to that group.</p>
 </main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../../assets/sir.js"></script>
 <script>
@@ -94,7 +93,7 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
   SIR.chart('cGenderAl', { type: 'bar', data: { labels: als.map(function (a) { return a + ' (' + G[a].length + ')'; }), datasets: [{ label: 'Women %', data: als.map(function (a) { return 100 * SIR.sum(G[a], 't_f') / (SIR.sum(G[a], 't_f') + SIR.sum(G[a], 't_m')); }), $tokens: als.map(function (a) { return SIR.alliance[a]; }) }] },
     options: { plugins: { legend: { display: false } }, scales: { y: { min: 40, title: { display: true, text: 'Women, % of removals' } } } } });
   var gaps = D.map(function (d) { return d.female_share_deleted - d.female_share_population_2011; });
-  document.getElementById('fGender').innerHTML = '<b>This is the firmest finding in the Bihar data.</b> Women were removed out of proportion in ' + above + ' of ' + D.length + ' districts, by ' + SIR.d(Math.min.apply(null, gaps), 1) + ' to ' + SIR.d(Math.max.apply(null, gaps), 1) + ' points above their population share. Sex is recorded on the roll, so this rests on no inference. A likely part of it is women who moved on marriage and were marked "shifted" at their parents’ address; whether they were re-enrolled at the new one is not in these files.';
+  document.getElementById('fGender').innerHTML = '<b>Women were removed out of proportion in ' + above + ' of ' + D.length + ' districts</b>, by ' + SIR.d(Math.min.apply(null, gaps), 1) + ' to ' + SIR.d(Math.max.apply(null, gaps), 1) + ' points above their share of the population. Sex is recorded on the roll, so this needs no inference from names. Women who moved on marriage and were marked "shifted" at their parents\' address are likely part of it; the lists do not show whether any of them were enrolled again where they now live.';
 
   // ---- religion
   var cls = t.hindu + t.muslim + t.unknown, lo = 100 * t.muslim / cls, hi = 100 * (t.muslim + t.unknown) / cls;
@@ -102,9 +101,9 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
     .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   var Ds = D.slice().sort(function (a, b) { return b.muslim_share_population_2011 - a.muslim_share_population_2011; });
   SIR.chart('cRel', { type: 'bar', data: { labels: Ds.map(function (d) { return d.district; }), datasets: [
-      { type: 'bar', label: 'Muslim-name share of removals (range)', data: Ds.map(function (d) { return [d.muslim_share_deleted_low, d.muslim_share_deleted_high]; }), $token: '--fill-other', barPercentage: 0.7 },
-      { type: 'scatter', label: 'Muslim share of population, 2011', data: Ds.map(function (d, i) { return { x: d.district, y: d.muslim_share_population_2011 }; }), $token: '--ink', pointRadius: 4 }] },
-    options: { scales: { x: { ticks: { autoSkip: false, maxRotation: 70, minRotation: 50 } }, y: { beginAtZero: true, title: { display: true, text: '%' } } } } });
+      { type: 'bar', label: 'Muslim-name share of removals (range)', data: Ds.map(function (d) { return [d.muslim_share_deleted_low, d.muslim_share_deleted_high]; }), $token: '--fill-other', barPercentage: 0.75, order: 2 },
+      { type: 'line', label: 'Muslim share of population, 2011', data: Ds.map(function (d) { return d.muslim_share_population_2011; }), showLine: false, $token: '--ink', pointRadius: 4, pointHoverRadius: 5, order: 1 }] },
+    options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: '% of removals, and % of population' } } } } });
   var growth = 17.70 - 16.87;
   var inside = D.filter(function (d) { return d.muslim_share_population_2011 >= d.muslim_share_deleted_low && d.muslim_share_population_2011 <= d.muslim_share_deleted_high; });
   var over = D.filter(function (d) { return d.muslim_share_deleted_low > d.muslim_share_population_2011; });
@@ -135,7 +134,14 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
       { k: 'surname', label: 'Surname (as romanised in the lists)', left: true }, { k: 'deleted', label: 'Removed', fmt: SIR.n },
       { k: 'mapping', label: 'A: project mapping', left: true }, { k: 'strict', label: 'B: strict', left: true }
     ], c.top_surnames.map(function (x) { var nm = { none: 'no caste information', cross: 'spans groups', unmatched: 'not listed' }; return { surname: x.surname, deleted: x.deleted, mapping: nm[x.mapping] || x.mapping, strict: nm[x.strict] || x.strict }; }), { sort: 'deleted' });
-    document.getElementById('fCaste').innerHTML = '<b>The two classifications disagree too much to support a caste finding.</b> Using ' + (who === 'guardian' ? 'guardians’' : 'electors’ own') + ' surnames, the project mapping places ' + SIR.pct(c.A.coverage_pct, 0) + ' of removals and puts General castes at ' + SIR.d(c.A.groups.General.ratio_to_survey, 1) + ' times their survey share; the strict reading places ' + SIR.pct(c.B.coverage_pct, 0) + ' and puts them at ' + SIR.d(c.B.groups.General.ratio_to_survey, 1) + ' times, because the mapping counts every Singh as Rajput. Shares among the classified also favour groups with distinctive surnames (Paswan, Musahar, Muslim names), which is why SC and Muslim look high under B. The bounds are the honest summary: every group’s share of all removals lies somewhere inside a very wide range.';
+    document.getElementById('fCaste').innerHTML = (function () {
+      var gs = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'], up = [], down = [], split = [];
+      gs.forEach(function (g) { var a = c.A.groups[g].ratio_to_survey, b = c.B.groups[g].ratio_to_survey; (a >= 1 && b >= 1 ? up : a < 1 && b < 1 ? down : split).push(g); });
+      var ratio = function (g) { return g + ' (' + SIR.d(c.A.groups[g].ratio_to_survey, 2) + ' and ' + SIR.d(c.B.groups[g].ratio_to_survey, 2) + ')'; };
+      return '<b>Under both classifications, ' + up.join(' and ') + ' families are removed at or above their share of Bihar\'s population, and ' + down.join(' and ') + ' families below it.</b> Using ' + (who === 'guardian' ? 'guardians\'' : 'electors\' own') + ' surnames, the ratios to the 2023 survey share, under A and then B, are: ' + up.concat(down).map(ratio).join('; ') + '.' +
+        (split.length ? ' The two classifications disagree on ' + split.map(ratio).join('; ') + ', so no reading is offered for ' + (split.length > 1 ? 'those groups' : 'that group') + '.' : '') +
+        ' Surnames that span several castes cannot be placed, so these are shares of the removals each classification could place: ' + SIR.pct(c.A.coverage_pct, 0) + ' under A and ' + SIR.pct(c.B.coverage_pct, 0) + ' under B.';
+    })();
   }
   drawCaste();
   document.querySelectorAll('[data-who]').forEach(function (b) { b.addEventListener('click', function () {

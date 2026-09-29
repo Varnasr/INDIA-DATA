@@ -13,51 +13,47 @@
 <header class="site">
   <div class="brand"><span class="pill">forindia.netlify.app</span><button class="theme" type="button">Dark theme</button></div>
   <h1>The Special Intensive Revision: who was struck off the rolls</h1>
-  <p class="lede">In 2025 the Election Commission began re-verifying every elector, state by state, instead of revising the existing rolls. These pages follow two of those revisions from the Commission's own lists: Bihar, the first state to go through it, and five constituencies in Hyderabad's Old City. No names or EPIC numbers appear anywhere on this site.</p>
-  <nav class="sub" aria-label="Sections"><a href="./" aria-current="page">All analyses</a><a href="bihar/">Bihar 2025</a><a href="hyderabad/">Hyderabad Old City 2026</a></nav>
+  <p class="lede">In 2025 the Election Commission began re-verifying every elector, state by state, instead of revising the existing rolls. These pages follow two of those revisions through the Commission's own lists: Bihar, the first state to go through it, and five constituencies of Hyderabad's Old City.</p>
+  <nav class="sub" aria-label="Sections"><a href="./" aria-current="page">Both analyses</a><a href="bihar/">Bihar 2025</a><a href="hyderabad/">Hyderabad Old City 2026</a></nav>
 </header>
 <main id="main">
-  <div class="cards">
-    <a class="card" href="bihar/">
-      <h3>Bihar 2025</h3>
-      <p id="bihar-line">243 constituencies and 77,837 polling booths: how many electors were dropped from the draft roll, where, and how that sits against the 2020, 2024 and 2025 results.</p>
-      <div class="kpis" id="bihar-kpis" style="margin:10px 0"></div>
-      <span class="go">Open the Bihar analysis</span>
-    </a>
-    <a class="card" href="hyderabad/">
-      <h3>Hyderabad Old City 2026</h3>
-      <p>Every elector on the pre-revision rolls of Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, sorted into deleted, summoned to a hearing, or untouched, down to the polling part.</p>
-      <div class="kpis" style="margin:10px 0"><div><b>6,62,063</b><span>deleted</span></div><div><b>39.9%</b><span>of 16,57,207 electors</span></div><div><b>1,158</b><span>polling parts</span></div></div>
-      <span class="go">Open the Hyderabad explorer</span>
-    </a>
-  </div>
+  <h2>Bihar 2025</h2>
+  <p class="sub">Every name removed from Bihar's roll in both phases of the revision, booth by booth across 243 constituencies, set against the 2020, 2024 and 2025 results.</p>
+  <ul class="claims" id="bihar"></ul>
+  <p><a href="bihar/">Open the Bihar explorer</a> · <a href="bihar/results/">Elections</a> · <a href="bihar/people/">Women, religion, caste</a></p>
 
-  <h2>Two revisions, two kinds of evidence</h2>
-  <p class="sub">The two analyses cannot be read against each other number for number, and the reason is the data rather than the places.</p>
-  <div class="grid">
-    <div class="panel">
-      <h3>Hyderabad: every elector</h3>
-      <p>The Old City exports list each elector on the pre-revision roll with a fate. That gives a true deletion <em>rate</em> for any group the file describes: by age, sex, name-estimated religion, and whether the elector links to the 2002 roll. It is the stronger design.</p>
-    </div>
-    <div class="panel">
-      <h3>Bihar: the deleted, by booth</h3>
-      <p>Bihar's evidence is the list of those removed from the draft roll, booth by booth, with the booth's 2024 Lok Sabha result from Form 20. The count per booth and per constituency is solid. Composition is not: without the full roll, the share of a group among the deleted cannot be set against its share among electors except through a census baseline, and the Bihar pages say so wherever it matters.</p>
-    </div>
-  </div>
+  <h2>Hyderabad Old City 2026</h2>
+  <p class="sub">Every elector on the pre-revision rolls of Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, sorted into struck off, kept but summoned to a hearing, or left alone, down to the polling part.</p>
+  <ul class="claims" id="hyd"></ul>
+  <p><a href="hyderabad/">Open the Hyderabad pages</a> · <a href="hyderabad/explorer/">Part explorer</a> · <a href="hyderabad/hearings/">Hearings</a></p>
 
-  <h2>How the Bihar figures were rebuilt</h2>
-  <p class="corrected">The earlier Bihar dashboard at this address reported 39.2 million deletions "in 2020" falling to 6.56 million "in 2024", and an NDA-INDIA comparison that ran the wrong way. Both came from how the booth files were joined, not from the rolls: each booth's deletions were counted about six times, and the 2024 party labels were wrong in nine seats. The figures now on these pages are rebuilt from the booth files, reconcile with the Commission's totals, and match the declared 2024 result in all 40 seats. The <a href="bihar/method/">method page</a> sets out what changed and why.</p>
-
-  <p class="note">Built from the Commission's own lists; aggregates only. Source code and data: <a href="https://github.com/Varnasr/INDIA-DATA">github.com/Varnasr/INDIA-DATA</a>. Research by Varna Sri Raman. Corrections are welcome as issues on the repository.</p>
+  <h2>Two kinds of list</h2>
+  <p class="sub">Bihar's lists name the removed, booth by booth, so the Bihar pages compare where removals fell and who the removed were against census and survey baselines. Hyderabad's lists cover every elector on the pre-revision roll, so each group there has its own removal rate, and groups can be compared inside the same polling part.</p>
 </main>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
 <script src="assets/sir.js"></script>
 <script>
-SIR.json('data/bihar/summary.json').then(function (s) {
-  var t = s.totals;
-  document.getElementById('bihar-kpis').innerHTML =
-    '<div><b>' + SIR.n(t.total) + '</b><span>removed across both phases</span></div>' +
-    '<div><b>' + SIR.pct(100 * t.female / (t.female + t.male)) + '</b><span>of them women</span></div>' +
-    '<div><b>' + SIR.n(t.booths) + '</b><span>polling booths</span></div>';
+Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/identity.json'), SIR.json('data/hyderabad/summary.json')]).then(function (r) {
+  var s = r[0], acs = r[1], D = r[2].districts, h = r[3], t = s.totals, L = s.by_alliance_label, W = s.within_seat_2024, I = s.intensity;
+  var li = function (rows) { return rows.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join(''); };
+  var fOver = D.filter(function (d) { return d.female_share_deleted > d.female_share_population_2011; }).length;
+  var mOver = acs.filter(function (a) { return a.margin2025 != null && a.total > a.margin2025; }).length, last = I.bins[I.bins.length - 1], first = I.bins[0];
+  document.getElementById('bihar').innerHTML = li([
+    [SIR.lakh(t.total), 'names removed, ' + SIR.d(100 * t.total / t.electorate_2025, 2) + ' for every 100 electors on the 2025 roll.'],
+    [SIR.d(L['2025'].NDA.per_100, 2) + ' vs ' + SIR.d(L['2025'].INDIA.per_100, 2), 'names removed per 100 electors in NDA-held and INDIA-held seats. Inside the same constituency, NDA-led booths lost ' + SIR.d(W.pooled_nda_minus_india, 1) + ' more names each, in ' + W.seats_nda_higher + ' of ' + W.seats_compared + ' seats; of the booths that lost 400 or more, ' + SIR.d(last.nda_pct, 0) + '% were NDA-led, against ' + SIR.d(first.nda_pct, 0) + '% of those that lost under 50.'],
+    [SIR.pct(100 * t.female / (t.female + t.male)), 'of those removed were women, above their share of the population in ' + fOver + ' of ' + D.length + ' districts.'],
+    [mOver + ' of ' + acs.length, 'seats lost more names than the 2025 winning margin.']
+  ]);
+  var A = h.acs, tt = h.totals, age80 = 100 * SIR.sum(A, function (a) { return a.counts.age_asd[7]; }) / SIR.sum(A, function (a) { return a.age_all[7]; });
+  var L2 = A.filter(function (a) { return a.linked; }), ul = L2.map(function (a) { return a.within_part.unlinked_minus_linked.diff_pp; });
+  var yak = A.filter(function (a) { return a.name === 'Yakutpura'; })[0], heavy = Math.max.apply(null, A.map(function (a) { return a.max_slot; }));
+  document.getElementById('hyd').innerHTML = li([
+    [SIR.pct(tt.rate), 'of electors on the pre-revision rolls were struck off: ' + SIR.n(tt.deleted) + ' of ' + SIR.n(tt.electors) + '. Another ' + SIR.n(tt.hearing) + ' were kept but summoned to a hearing.'],
+    [SIR.pct(age80), 'of electors aged 80 and over were struck off.'],
+    ['+' + SIR.d(Math.min.apply(null, ul), 0) + ' to +' + SIR.d(Math.max.apply(null, ul), 0), 'percentage points: how much more often electors with no link to the 2002 roll were struck off than linked electors in the same polling part.'],
+    [SIR.n(heavy), 'cases listed in a single hearing slot, the heaviest in the five constituencies.'],
+    [SIR.d(yak.e2023.deleted_over_margin, 0) + '×', 'Yakutpura\'s 2023 winning margin of ' + SIR.n(yak.e2023.margin) + ' votes: the number of names struck off there.']
+  ]);
 }).catch(SIR.fail);
 </script>
 </body>

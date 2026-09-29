@@ -17,16 +17,14 @@ python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
 python3 -m http.server 8000
 ```
 
-## Read DATA_INTEGRITY.md before touching the Bihar numbers
+## Before touching the Bihar numbers
 
-Until September 2026 this site published a Bihar dashboard built on a join that
-counted every booth about six times (39.2 million "2020 deletions" against a
-true 6.56 million), with 2024 party labels wrong in nine seats and caste figures
-that were the state survey repeated in every district. Its headline comparison
-ran the wrong way. Everything was rebuilt from the booth files; the old files
-are in `data/legacy/` with a README. Do not bring any of them back into a page.
+Run `scripts/verify_bihar.py`: it recomputes every headline figure from the raw
+files with its own code and fails on any disagreement with the published JSON.
+Old working files live in `archive/`, which is never served; do not bring any
+of them back into a page.
 
-Things the rebuild depends on, each asserted by `check_data.py`:
+Things the build depends on, each asserted by `check_data.py`:
 
 - **One row per booth.** The booth file has about three rows per booth (one per
   top-three 2024 party) and the gender-religion file two (one per sex). Any
@@ -82,7 +80,11 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 
 ## Watch out for
 
-- `data/Bihar Dashboard Context/` holds the Word reports written on the old
-  data. They are served publicly and their conclusions predate the correction.
+- **Publishing**: the site serves only pages and aggregate JSON. `_redirects`
+  answers 404 for raw files, scripts, notes and `archive/`; `static.yml` stages
+  the same set for Pages. Do not link source files from a page, and describe
+  sources without naming the people or organisations who compiled them.
+- **Writing**: plain explanatory prose. Never refer to earlier versions of the
+  analysis or to corrections on a public page.
 - `pandas` and `openpyxl` are pinned in CI because a reader change could move
   the numbers without an error.

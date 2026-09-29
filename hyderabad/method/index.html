@@ -21,12 +21,12 @@
   <div class="twrap" tabindex="0" role="region" aria-label="Sources"><table>
     <thead><tr><th scope="col" class="l">What</th><th scope="col" class="l">Source</th><th scope="col" class="l">Used for</th></tr></thead>
     <tbody>
-      <tr><td class="l">Pre-revision roll, Absent-Shifted-Dead list, discrepancy and no-mapping lists</td><td class="l">CEO Telangana SIR exports for five constituencies, merged by the HDCC data team, September 2026</td><td class="l">Every elector's fate, age band, sex, reason code and 2002 linkage, aggregated to the polling part</td></tr>
-      <tr><td class="l">Religion</td><td class="l">Estimated from names by the HDCC team; agrees 99% with an independent rebuild. The roll records none</td><td class="l">Hindu-name and Muslim-name rates</td></tr>
-      <tr><td class="l">Hearing schedules</td><td class="l">The same exports, 28 August to 12 October</td><td class="l">Rules, slots, daily load</td></tr>
+      <tr><td class="l">Pre-revision roll, Absent-Shifted-Dead list, discrepancy and no-mapping lists</td><td class="l">CEO Telangana SIR lists for the five constituencies, compiled elector by elector and aggregated to the polling part, September 2026</td><td class="l">Every elector's fate, age band, sex, reason code and 2002 linkage, aggregated to the polling part</td></tr>
+      <tr><td class="l">Religion</td><td class="l">Estimated from each elector's name; a second, independent classification agrees on 99% of names. The roll records none</td><td class="l">Hindu-name and Muslim-name rates</td></tr>
+      <tr><td class="l">Hearing schedules</td><td class="l">The same lists, 28 August to 12 October</td><td class="l">Rules, slots, daily load</td></tr>
       <tr><td class="l">2023 Assembly result</td><td class="l">ECI, Telangana general election 2023</td><td class="l">Valid votes and margins</td></tr>
     </tbody></table></div>
-  <p class="sub" style="margin-top:12px">The explorer carries the part-level counts. <code>scripts/build_hyderabad.py</code> reads the same object and derives every rate, within-part comparison and correlation on these pages, and CI fails if the published JSON drifts from it. No row-level file, name, EPIC number or address is in this repository.</p>
+  <p class="sub" style="margin-top:12px">Every rate, within-part comparison and correlation on these pages is computed from the part-level counts shown in the explorer. No name, EPIC number or address is published.</p>
 
   <h2>Definitions</h2>
   <div class="qa"><h3>Deletion rate</h3><p>Electors on the Absent-Shifted-Dead list divided by electors on the pre-revision roll, for the group in question. Because the files cover every elector, this is a true rate for each group. In Bihar the files cover only the removed, so the Bihar pages give shares of removals and rates per 100 electors on the 2025 roll instead.</p></div>
@@ -41,7 +41,7 @@
   <p class="sub">The same questions the Bihar pages answer, asked of the Old City, each computed from the published data when this page loads.</p>
   <div id="qas"></div>
 </main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
 <script src="../../assets/sir.js"></script>
 <script>
 Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/parts.json'), SIR.json('data/bihar/summary.json')]).then(function (r) {
@@ -67,9 +67,9 @@ Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/p
   document.getElementById('limits').innerHTML = [
     ['Why a name was struck', 'The reason code records the officer\'s entry, not the truth of it. A household that moved out of the Old City is a correct "shifted" deletion; the files cannot tell it from an elector who was at home and missed.'],
     ['Religion together with age', 'Religion and age are aggregated separately, never jointly, so any religion gap may partly be an age gap if one group is older.'],
-    ['Malakpet', mal.name + '\'s export carries no part numbers and no 2002 linkage. It is read by polling-station name, which gives ' + mal.parts + ' stations rather than parts, and ' + SIR.n(mal.unaccounted) + ' electors on its roll appear in none of the three fates, against ' + SIR.n(SIR.sum(L, 'unaccounted')) + ' across the other four together.'],
-    ['The final roll', 'These are the September exports. The Commission extended the calendar on 7 September (claims to 7 October, hearings to 5 November, final roll 9 November), so restorations after hearings are not in these counts.'],
-    ['Five constituencies', 'The five are the Old City seats the HDCC team exported, not a sample of Hyderabad. Nothing here generalises to the district.']
+    ['Malakpet', 'The Malakpet list used here holds ' + SIR.n(mal.deleted) + ' struck-off names; Sabar Institute\'s count of the published Malakpet list is 1,47,799, so about 5,100 names are missing from this copy. For the other four constituencies the two counts agree exactly. ' + mal.name + '\'s list also carries no part numbers and no 2002 linkage. It is read by polling-station name, which gives ' + mal.parts + ' stations rather than parts, and ' + SIR.n(mal.unaccounted) + ' electors on its roll appear in none of the three fates, against ' + SIR.n(SIR.sum(L, 'unaccounted')) + ' across the other four together.'],
+    ['The final roll', 'These are the September lists. The Commission extended the calendar on 7 September (claims to 7 October, hearings to 5 November, final roll 9 November), so restorations after hearings are not in these counts.'],
+    ['Five constituencies', 'The five are the Old City seats, not a sample of Hyderabad. Figures here describe these five and no others.']
   ].map(function (q) { return '<div class="qa"><h3>' + q[0] + '</h3><p>' + q[1] + '</p></div>'; }).join('');
 
   var QA = [

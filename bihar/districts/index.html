@@ -11,17 +11,17 @@
 <body data-root="../../">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site">
-  <div class="brand"><a class="home" href="../../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
+  <div class="brand"><span class="crumbs"><a class="home" href="../../">SIR analyses</a> · <a class="home" href="../">Bihar explorer</a> · <a class="home" href="../../hyderabad/">Hyderabad Old City 2026</a></span><button class="theme" type="button">Dark theme</button></div>
   <h1>Districts</h1>
   <p class="lede">Which districts lost the most, and does that follow income, towns, schooling or the size of the booth? With 38 districts every relationship here is a rough one, and each is shown with both a linear and a rank correlation so that one extreme district cannot carry it alone.</p>
-  <nav class="sub" aria-label="Bihar"><a href="../">Overview</a><a href="../constituencies/">Constituencies</a><a href="../results/">Deletions and results</a><a href="../border/">Border</a><a href="./" aria-current="page">Districts</a><a href="../people/">Gender, religion, caste</a><a href="../method/">Method</a></nav>
+  <nav class="sub" aria-label="Bihar"><a href="../">Explorer</a><a href="../results/">Elections</a><a href="../people/">Women, religion, caste</a><a href="../border/">Border</a><a href="./" aria-current="page">Districts</a><a href="../method/">Method</a></nav>
 </header>
 <main id="main">
   <div class="grid">
     <div class="panel wide">
       <h3>Deletions per 100 electors, by district</h3>
       <p>Bar colour marks the border the district lies on; grey is the interior.</p>
-      <div class="chart tall"><canvas id="cRank" aria-label="Districts ranked by deletions per 100 electors"></canvas></div>
+      <div class="chart rows"><canvas id="cRank" aria-label="Districts ranked by deletions per 100 electors"></canvas></div>
     </div>
   </div>
   <h2>What moves with the deletion rate</h2>
@@ -32,9 +32,9 @@
   <p class="caveat">Thirty-eight districts cannot separate these factors from one another: the poorest districts are also the least urban, least literate and, in the north-east, the most exposed to migration. Treat each panel as a description.</p>
   <h2>Every district</h2>
   <div class="twrap" tabindex="0" role="region" aria-label="Districts"><table id="tbl"></table></div>
-  <p class="note">Population, density, literacy and urban share: Census 2011. Per-capita district domestic product: Bihar Economic Survey, 2021-22 at constant prices, as carried in the earlier dashboard's district file. Electors per booth: the 2025 electorate over the number of booths with SIR lists.</p>
+  <p class="note">Population, density, literacy and urban share: Census 2011. Per-capita district domestic product: Bihar Economic Survey, 2021-22 at constant prices. Electors per booth: the 2025 electorate over the number of booths with SIR lists.</p>
 </main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../../assets/sir.js"></script>
 <script>
@@ -42,7 +42,7 @@ SIR.json('data/bihar/districts.json').then(function (ds) {
   var col = function (b) { return /Nepal/.test(b) ? '--fill-navy' : /Bengal/.test(b) ? '--fill-other' : /Jharkhand/.test(b) ? '--fill-amber' : /Uttar/.test(b) ? '--fill-india' : '--fill-grey'; };
   var ranked = ds.slice().sort(function (a, b) { return b.per_100 - a.per_100; });
   SIR.chart('cRank', { type: 'bar', data: { labels: ranked.map(function (d) { return d.district; }), datasets: [{ label: 'Per 100 electors', data: ranked.map(function (d) { return d.per_100; }), $tokens: ranked.map(function (d) { return col(d.border); }) }] },
-    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: function (c) { return 'Border: ' + ranked[c.dataIndex].border.replace(/;/g, ', '); } } } }, scales: { y: { title: { display: true, text: 'Deleted per 100 electors' } } } } });
+    options: { indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: function (c) { return 'Border: ' + ranked[c.dataIndex].border.replace(/;/g, ', '); } } } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: 'Removed per 100 electors' } } } } });
 
   var F = [
     ['gddp_pc', 'Per-capita district product, 2021-22 (₹)', 'Does income relate to deletions?'],

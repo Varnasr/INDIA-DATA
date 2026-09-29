@@ -7,7 +7,7 @@ constituencies, as they stood in the Special Intensive Revision of 2026, sorted
 into three fates: struck off, kept but summoned to a hearing, or untouched. The
 page opens at the constituency and drills to the polling part.
 
-Source: CEO Telangana SIR exports, merged by the HDCC data team. Hearing
+Source: CEO Telangana SIR lists for the five constituencies. Hearing
 schedules run 28 August to 12 October 2026. The Commission extended the
 calendar on 7 September (claims to 7 October, hearings to 5 November, final
 roll 9 November), so these are figures from the September exports and the final
@@ -94,7 +94,7 @@ repository, and neither belongs in a public one.
   paint, every constituency tab, the part drill-down, the locality search and
   the sortable table work, no console errors, no horizontal page scroll.
 - Not checked: the aggregates were not recomputed from the CEO Telangana
-  exports. Cell counts are taken as the HDCC data team produced them.
+  exports. Cell counts are taken as compiled from the lists.
 
 ## Changes made for hosting
 
