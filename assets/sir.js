@@ -81,11 +81,30 @@
       if (ds.$token) { var v = SIR.css(ds.$token); ds.backgroundColor = v; ds.borderColor = v; }
       if (ds.$tokens) { var vs = ds.$tokens.map(SIR.css); ds.backgroundColor = vs; ds.borderColor = vs; }
     });
+    // Horizontal bars carry their categories as tick labels: never skip one.
+    cfg.options = cfg.options || {};
+    if (cfg.options.indexAxis === 'y') { cfg.options.scales = cfg.options.scales || {}; var ys = cfg.options.scales.y = cfg.options.scales.y || {}; ys.ticks = ys.ticks || {}; if (ys.ticks.autoSkip == null) ys.ticks.autoSkip = false; }
+    // On a phone, smaller type and compact legend keys leave room for the data.
+    if (window.innerWidth < 600) {
+      Chart.defaults.font.size = 11;
+      cfg.options.plugins = cfg.options.plugins || {};
+      var lg = cfg.options.plugins.legend = cfg.options.plugins.legend || {};
+      lg.labels = lg.labels || {}; lg.labels.boxWidth = 10; lg.labels.boxHeight = 10; lg.labels.padding = 6;
+    }
     var c = new Chart(document.getElementById(id), cfg);
     c.$tokens = cfg.$tokens || null;
     SIR.recolour(c);
     SIR.charts.push(c);
     return c;
+  };
+  // For pages that redraw on selection: drop the chart on this canvas first,
+  // or Chart.js refuses to reuse it.
+  SIR.redraw = function (id, cfg) {
+    if (typeof Chart !== 'undefined') {
+      var old = Chart.getChart(document.getElementById(id));
+      if (old) { SIR.charts = SIR.charts.filter(function (c) { return c !== old; }); old.destroy(); }
+    }
+    return SIR.chart(id, cfg);
   };
   SIR.recolour = function (c) {
     var ink = SIR.css('--ink'), muted = SIR.css('--muted'), line = SIR.css('--line');

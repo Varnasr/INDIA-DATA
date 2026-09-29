@@ -33,11 +33,19 @@ jobs:
         uses: actions/checkout@v7
       - name: Setup Pages
         uses: actions/configure-pages@v6
+      # The pages and the aggregate data they read, and nothing else: source
+      # files, scripts, notes and the archive are not published (Netlify
+      # answers 404 for the same paths through _redirects).
+      - name: Stage the pages and their data
+        run: |
+          mkdir -p "$RUNNER_TEMP/site"
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'archive' --exclude 'scripts' \
+            --exclude 'data/bihar/raw' --exclude 'data/*.csv' --exclude '*.md' --exclude 'CITATION.cff' \
+            ./ "$RUNNER_TEMP/site/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          # Upload entire repository
-          path: '.'
+          path: ${{ runner.temp }}/site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

@@ -28,6 +28,11 @@ jobs:
       - name: Data integrity
         run: python3 scripts/check_data.py
 
+      # An independent recomputation of every headline figure from the raw
+      # files, with code that does not share the build's.
+      - name: Recompute the Bihar figures from the raw files
+        run: python3 scripts/verify_bihar.py
+
       # One palette for every page, in assets/sir.css, measured in both themes.
       - name: Colour tokens clear AA in both themes
         run: python3 scripts/check_contrast.py

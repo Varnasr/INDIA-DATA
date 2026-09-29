@@ -11,10 +11,10 @@
 <body data-root="../../">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site">
-  <div class="brand"><a class="home" href="../../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
+  <div class="brand"><span class="crumbs"><a class="home" href="../../">SIR analyses</a> · <a class="home" href="../">Bihar explorer</a> · <a class="home" href="../../hyderabad/">Hyderabad Old City 2026</a></span><button class="theme" type="button">Dark theme</button></div>
   <h1>The border belts</h1>
   <p class="lede">Bihar borders Nepal to the north, West Bengal and Jharkhand to the east and south, and Uttar Pradesh to the west. The revision's stated purpose included removing those not entitled to be on the roll, so the border constituencies were watched closely. Here they are against the interior.</p>
-  <nav class="sub" aria-label="Bihar"><a href="../">Overview</a><a href="../constituencies/">Constituencies</a><a href="../results/">Deletions and results</a><a href="./" aria-current="page">Border</a><a href="../districts/">Districts</a><a href="../people/">Gender, religion, caste</a><a href="../method/">Method</a></nav>
+  <nav class="sub" aria-label="Bihar"><a href="../">Explorer</a><a href="../results/">Elections</a><a href="../people/">Women, religion, caste</a><a href="./" aria-current="page">Border</a><a href="../districts/">Districts</a><a href="../method/">Method</a></nav>
 </header>
 <main id="main">
   <div class="kpis" id="kpis"></div>
@@ -46,9 +46,9 @@
     </div>
   </div>
   <p class="caveat">The Nepal and Bengal belts, and Seemanchal within them, are also where seasonal and long-term out-migration is heaviest, and a migrant who has moved is a legitimate "shifted" deletion. A higher border rate is consistent with that as much as with anything else; these data record the removal, not its reason.</p>
-  <p class="note">Border classification: the constituency touches the named state or country, from the constituency and district maps used by the earlier dashboard. Muslim-name shares come from the name classification in the booth files; the low end counts only names classified Muslim, the high end adds every unclassified name.</p>
+  <p class="note">Border classification: a constituency counts as a border constituency when its district touches Nepal, West Bengal, Jharkhand or Uttar Pradesh. Muslim-name shares come from the name classification in the booth files; the low end counts only names classified Muslim, the high end adds every unclassified name.</p>
 </main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../../assets/sir.js"></script>
 <script>
@@ -57,7 +57,8 @@ SIR.json('data/bihar/constituencies.json').then(function (acs) {
   acs.forEach(function (a) { a.border = a.border || 'Interior'; });
   var G = SIR.groupBy(acs, 'border');
   var order = Object.keys(G).sort(function (a, b) { return a === 'Interior' ? 1 : b === 'Interior' ? -1 : a.localeCompare(b); });
-  var lbl = function (k) { return k.replace(/;/g, ' and ') + ' (' + G[k].length + ')'; };
+  var short = { 'Uttar Pradesh': 'UP', 'West Bengal': 'Bengal', 'Jharkhand': 'Jharkhand', 'Nepal': 'Nepal', 'Interior': 'Interior' };
+  var lbl = function (k) { return k.split(';').map(function (x) { return short[x] || x; }).join(' + ') + ' (' + G[k].length + ')'; };
   var rate = function (rows) { return 100 * SIR.sum(rows, 'total') / SIR.sum(rows, 'electorate_2025'); };
   var tot = SIR.sum(acs, 'total'), el = SIR.sum(acs, 'electorate_2025');
   var border = acs.filter(function (a) { return a.border !== 'Interior'; }), interior = G.Interior;

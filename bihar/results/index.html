@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bihar SIR 2025: deletions and results</title>
-<meta name="description" content="Bihar's SIR deletions against the 2020, 2024 and 2025 results: three labellings, booth leaders within a seat, parties, reserved seats, and deletions against winning margins.">
+<title>Bihar SIR 2025: removals and election results</title>
+<meta name="description" content="Bihar's SIR removals set against the 2020, 2024 and 2025 results: seats by the alliance that held them, booths within the same seat, parties, reserved seats, and removals against winning margins.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="../../assets/sir.css">
 </head>
 <body data-root="../../">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site">
-  <div class="brand"><a class="home" href="../../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
+  <div class="brand"><span class="crumbs"><a class="home" href="../../">SIR analyses</a> · <a class="home" href="../">Bihar explorer</a> · <a class="home" href="../../hyderabad/">Hyderabad Old City 2026</a></span><button class="theme" type="button">Dark theme</button></div>
   <h1>Deletions and results</h1>
-  <p class="lede">Did the revision fall harder on one side's seats? The answer depends on how the question is asked, so this page asks it four ways: by which alliance held each seat in three elections, by booths within the same seat, by party, and by whether deletions exceed the margin a seat was won by.</p>
-  <nav class="sub" aria-label="Bihar"><a href="../">Overview</a><a href="../constituencies/">Constituencies</a><a href="./" aria-current="page">Deletions and results</a><a href="../border/">Border</a><a href="../districts/">Districts</a><a href="../people/">Gender, religion, caste</a><a href="../method/">Method</a></nav>
+  <p class="lede">The revision removed more names from NDA ground than from INDIA ground. This page shows it four ways: seats grouped by the alliance that held them in three elections, booths compared inside the same seat, seats by party, and seats where the removals exceed the 2025 winning margin.</p>
+  <nav class="sub" aria-label="Bihar"><a href="../">Explorer</a><a href="./" aria-current="page">Elections</a><a href="../people/">Women, religion, caste</a><a href="../border/">Border</a><a href="../districts/">Districts</a><a href="../method/">Method</a></nav>
 </header>
 <main id="main">
   <h2>1. Seats, grouped by who held them</h2>
@@ -26,7 +26,7 @@
   <p class="finding" id="fLabels"></p>
 
   <h2>2. Booths within the same seat</h2>
-  <p class="sub">Across seats, politics and geography move together: Seemanchal loses more names and votes differently. Inside one constituency the geography is shared, so booths the NDA led in 2024 can be set against booths INDIA led, seat by seat.</p>
+  <p class="sub">Comparing whole seats mixes politics with geography. Comparing booths inside one constituency does not: the registration officer, the villages and the pattern of migration are the same on both sides. Here the booths the NDA led in 2024 are set against the booths INDIA led, seat by seat.</p>
   <div class="kpis" id="kWithin"></div>
   <div class="grid">
     <div class="panel wide">
@@ -35,7 +35,7 @@
       <div class="chart"><canvas id="cWithin" aria-label="Within-seat difference by constituency"></canvas></div>
     </div>
   </div>
-  <p class="caveat">A booth's 2024 leader tracks who lives there: caste, religion, and how many work away from home. The within-seat gap is a description of where names were removed, and cannot say why.</p>
+  <p class="finding" id="fWithin"></p>
 
   <h2>3. Parties and reserved seats</h2>
   <div class="grid">
@@ -57,19 +57,18 @@
   <p class="finding" id="fFlow"></p>
 
   <h2>5. Deletions against the 2025 margin</h2>
-  <p class="sub">In how many seats did the revision remove more names than the 2025 winner's margin of victory?</p>
+  <p class="sub">Names removed in each seat set against the margin by which the seat was won in 2025.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="chart"><canvas id="cMargin" aria-label="2025 margin against names removed"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fMargin"></p>
-  <p class="caveat">This is a scale comparison, not a claim that any result would have differed. The deleted include the dead, those enrolled twice and those who have moved away, and no one knows how the rest would have voted.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Seats where deletions exceed the margin"><table id="tMargin"></table></div>
 
-  <p class="note">2024 segment leaders are summed from booth-level Form 20 votes. In nine seats the extract's party labels were wrong and have been corrected (LJP(RV) appeared as "BSP", HAM(S) as "JD(S)", and so on); after correction the top two parties in all 40 seats match the declared winner and runner-up, at shares within a point of the published ones. The <a href="../method/">method page</a> lists each correction with its evidence. Alliances: NDA is BJP, JD(U), LJP(RV), HAM(S) and RLM (with VIP in 2020); INDIA is RJD, INC, the three Left parties, VIP from 2024, and IIP; everything else is Other.</p>
+  <p class="note">2024 booth leaders come from Form 20, the booth-level count; the top two parties in every Lok Sabha seat match the declared result. Alliances: NDA is BJP, JD(U), LJP(RV), HAM(S) and RLM (with VIP in 2020); INDIA is RJD, INC, the three Left parties, VIP from 2024, and IIP; everything else is Other. <a href="../method/">Method</a>.</p>
 </main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../../assets/sir.js"></script>
 <script>
@@ -88,7 +87,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     { k: 'deleted', label: 'Removed', fmt: SIR.n }, { k: 'per_100', label: 'Per 100', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'per_booth', label: 'Per booth', fmt: function (v) { return SIR.d(v); } }
   ], rows, { sort: 'y', dir: 1 });
   var gaps = years.map(function (y) { return L[y].NDA.per_100 - L[y].INDIA.per_100; }), p100 = acs.map(function (a) { return a.per_100; });
-  document.getElementById('fLabels').innerHTML = '<b>NDA seats lost more names per elector than INDIA seats under all three labellings</b>, by ' + SIR.d(Math.min.apply(null, gaps), 2) + ' to ' + SIR.d(Math.max.apply(null, gaps), 2) + ' per 100 electors. The gap is small beside the spread between seats (' + SIR.d(Math.min.apply(null, p100), 1) + ' to ' + SIR.d(Math.max.apply(null, p100), 1) + ' per 100), and "Other" seats, mostly in Seemanchal, are highest of all.';
+  document.getElementById('fLabels').innerHTML = '<b>NDA seats lost more names per elector than INDIA seats under all three labellings</b>, by ' + SIR.d(Math.min.apply(null, gaps), 2) + ' to ' + SIR.d(Math.max.apply(null, gaps), 2) + ' per 100 electors. Seats held by neither alliance, most of them in Seemanchal, lost the most of all.';
 
   var w = s.within_seat_2024;
   document.getElementById('kWithin').innerHTML = [
@@ -97,6 +96,8 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     [w.seats_india_higher + ' of ' + w.seats_compared, 'seats where INDIA-led booths lost more'],
     [SIR.n(w.booths), 'booths compared']
   ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+  var F = s.intensity.within_seat_fifths;
+  document.getElementById('fWithin').innerHTML = '<b>Inside the same constituency, NDA-led booths lost ' + SIR.d(w.pooled_nda_minus_india, 1) + ' more names each than INDIA-led booths</b>, and they lost more in ' + w.seats_nda_higher + ' of ' + w.seats_compared + ' seats. The pattern runs through the whole range: rank each seat\'s booths into fifths by names removed, and the NDA led ' + SIR.d(F[0].nda_pct, 1) + '% of the lightest fifth and ' + SIR.d(F[4].nda_pct, 1) + '% of the heaviest.';
   var ws = w.seats.slice().sort(function (a, b) { return a.diff - b.diff; });
   SIR.chart('cWithin', { type: 'bar', data: { labels: ws.map(function (x) { return byAc[x.ac].name; }), datasets: [{ label: 'NDA minus INDIA', data: ws.map(function (x) { return x.diff; }),
       $tokens: ws.map(function (x) { return x.diff > 0 ? '--fill-nda' : '--fill-india'; }) }] },
@@ -133,7 +134,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
       scales: { x: { type: 'logarithmic', title: { display: true, text: '2025 winning margin (votes, log scale)' } }, y: { title: { display: true, text: 'Names removed' } } } } });
   var over = withM.filter(function (a) { return a.total > a.margin2025; });
   var overBy = SIR.groupBy(over, 'al2025');
-  document.getElementById('fMargin').innerHTML = '<b>In ' + over.length + ' of ' + withM.length + ' seats the revision removed more names than the 2025 margin.</b> Of those, ' + als.map(function (al) { return (overBy[al] || []).length + ' went to ' + al; }).join(', ') + '. That is mostly a matter of scale: the median seat has ' + SIR.n(SIR.median(withM.map(function (a) { return a.electorate_2025; }))) + ' electors, and the median 2025 margin was ' + SIR.n(SIR.median(withM.map(function (a) { return a.margin2025; }))) + ' votes.';
+  document.getElementById('fMargin').innerHTML = '<b>In ' + over.length + ' of ' + withM.length + ' seats the revision removed more names than the 2025 margin.</b> Of those, ' + als.map(function (al) { return (overBy[al] || []).length + ' went to ' + al; }).join(', ') + '. The median seat lost ' + SIR.n(SIR.median(withM.map(function (a) { return a.total; }))) + ' names; the median 2025 margin was ' + SIR.n(SIR.median(withM.map(function (a) { return a.margin2025; }))) + ' votes.';
   SIR.table(document.getElementById('tMargin'), [
     { k: 'name', label: 'Constituency', left: true, fmt: function (v, r) { return SIR.esc(r.ac + ' ' + v); } }, { k: 'win2025', label: '2025 winner', left: true, fmt: function (v, r) { return tag(r.al2025) + ' ' + SIR.esc(v); } },
     { k: 'margin2025', label: 'Margin', fmt: SIR.n }, { k: 'total', label: 'Removed', fmt: SIR.n }, { k: 'ratio', label: 'Removed / margin', fmt: function (v) { return SIR.d(v, 1) + '×'; } }

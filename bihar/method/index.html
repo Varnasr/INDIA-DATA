@@ -3,109 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bihar SIR 2025: method and corrections</title>
-<meta name="description" content="How the Bihar SIR figures were built: sources, the corrections to the earlier dashboard with evidence, and the research questions answered again from the corrected data.">
+<title>Bihar SIR 2025: method</title>
+<meta name="description" content="How the Bihar SIR figures are built: sources, how the lists were prepared, and the research questions the analysis answers.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="../../assets/sir.css">
 </head>
 <body data-root="../../">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site">
-  <div class="brand"><a class="home" href="../../">SIR analyses</a><button class="theme" type="button">Dark theme</button></div>
-  <h1>Method and corrections</h1>
-  <p class="lede">Where every number on these pages comes from, what was wrong in the earlier version of this dashboard and how each fault was found, and the fourteen research questions it asked, answered again.</p>
-  <nav class="sub" aria-label="Bihar"><a href="../">Overview</a><a href="../constituencies/">Constituencies</a><a href="../results/">Deletions and results</a><a href="../border/">Border</a><a href="../districts/">Districts</a><a href="../people/">Gender, religion, caste</a><a href="./" aria-current="page">Method</a></nav>
+  <div class="brand"><span class="crumbs"><a class="home" href="../../">SIR analyses</a> · <a class="home" href="../">Bihar explorer</a> · <a class="home" href="../../hyderabad/">Hyderabad Old City 2026</a></span><button class="theme" type="button">Dark theme</button></div>
+  <h1>Method</h1>
+  <p class="lede">Where each figure on the Bihar pages comes from, how the lists were prepared for analysis, and the questions the analysis answers.</p>
+  <nav class="sub" aria-label="Bihar"><a href="../">Explorer</a><a href="../results/">Elections</a><a href="../people/">Women, religion, caste</a><a href="../border/">Border</a><a href="../districts/">Districts</a><a href="./" aria-current="page">Method</a></nav>
 </header>
 <main id="main">
   <h2>Sources</h2>
   <div class="twrap" tabindex="0" role="region" aria-label="Sources"><table>
     <thead><tr><th scope="col" class="l">What</th><th scope="col" class="l">Source</th><th scope="col" class="l">Used for</th></tr></thead>
     <tbody>
-      <tr><td class="l">SIR deletions by booth</td><td class="l">Chief Electoral Officer, Bihar: phase 1 lists against the draft roll of 1 August 2025, keyed to the January 2025 booth numbers</td><td class="l">77,837 booths, 65,59,626 names</td></tr>
-      <tr><td class="l">SIR deletions by constituency, phase and sex</td><td class="l">CEO Bihar</td><td class="l">Phase 2, totals, women and men</td></tr>
-      <tr><td class="l">Sex and name-estimated religion by booth</td><td class="l">Classification of the booth lists in the project's working files</td><td class="l">Gender, and religion as a range</td></tr>
-      <tr><td class="l">Surnames of the removed and of their guardians</td><td class="l">Counts from the same lists; no individual records</td><td class="l">Caste, as two classifications with bounds</td></tr>
-      <tr><td class="l">2024 Lok Sabha, booth by booth</td><td class="l">Form 20, top three parties per booth, labels reconciled to the declared result</td><td class="l">Booth leaders, segment leaders</td></tr>
-      <tr><td class="l">2020 Assembly winner</td><td class="l">Carried in the booth file</td><td class="l">2020 labelling</td></tr>
-      <tr><td class="l">2025 Assembly result, 2024 seat results, constituency map, 2025 electorate</td><td class="l">Published results as tabulated on Wikipedia, checked against the booth sums</td><td class="l">2025 labelling, margins, rates per 100 electors</td></tr>
-      <tr><td class="l">Religion, sex and SC population by district</td><td class="l">Census 2011 (totals reconcile: Muslims 16.87%, SC 15.91% of Bihar)</td><td class="l">District baselines</td></tr>
-      <tr><td class="l">Caste composition</td><td class="l">Bihar caste-based survey, released 2 October 2023</td><td class="l">State baseline for surname classes</td></tr>
+      <tr><td class="l">Removals by polling booth</td><td class="l">The phase 1 deletion lists the Chief Electoral Officer, Bihar published against the draft roll of 1 August 2025, counted for each of the state's polling booths</td><td class="l">77,837 booths, 65,59,626 names</td></tr>
+      <tr><td class="l">Removals by constituency, phase and sex</td><td class="l">Chief Electoral Officer, Bihar, both phases</td><td class="l">Totals, phase 2, women and men</td></tr>
+      <tr><td class="l">Religion of the removed, by booth</td><td class="l">Each removed elector's name classified as Hindu, Muslim or unclassified, counted by booth and sex</td><td class="l">Muslim share of removals, as a range</td></tr>
+      <tr><td class="l">Surnames of the removed</td><td class="l">Counts of each surname among the removed, for the elector and for the father or husband listed with them; counts only, no individual records</td><td class="l">Caste, under two classifications</td></tr>
+      <tr><td class="l">2024 Lok Sabha result by booth</td><td class="l">Form 20, the booth-level count, top three parties in each booth</td><td class="l">The party that led each booth</td></tr>
+      <tr><td class="l">2020 and 2025 Assembly results, 2025 electorate</td><td class="l">Election Commission of India, declared results</td><td class="l">Seat labels, margins, removals per 100 electors</td></tr>
+      <tr><td class="l">Population by district</td><td class="l">Census of India 2011</td><td class="l">Baselines for sex and religion</td></tr>
+      <tr><td class="l">Caste composition</td><td class="l">Bihar caste-based survey, released 2 October 2023</td><td class="l">Baseline for caste</td></tr>
     </tbody></table></div>
-  <p class="sub" style="margin-top:12px">Everything is rebuilt by <code>scripts/build_bihar.py</code> from the files in <code>data/bihar/raw</code>, and CI fails if the published JSON drifts from them.</p>
+  <p class="note" style="margin-top:12px">All figures are aggregates. No name, EPIC number or address appears anywhere on these pages.</p>
 
-  <h2>What was corrected</h2>
-  <div class="qa"><h3>1. Every booth was counted about six times</h3><p>The booth file carries one row per booth for each of its top three 2024 parties; the religion file one row per booth for each sex. Joining the two and summing gave each booth's deletions roughly six times over: 39.2 million, which the dashboard labelled "2020" and set against the true 6.56 million as a decline of 83%. There is no 2020 deletion series in these files. The column name "deletion by Booth in Jan 2020" refers to the January 2025 roll that the SIR lists are keyed to. Found by noting that the "2020" total divided by the true total was 5.98, and that the source had 464,881 booth rows against 77,837 booths: 5.97.</p></div>
-  <div class="qa"><h3>2. Party labels in the 2024 extract were wrong in nine seats</h3><p>Vote shares summed from booths match the declared results to a tenth of a point; the party names attached to them do not. Each correction below is shown with its evidence. After correction, the top two parties in all 40 seats are the declared winner and runner-up.</p>
-    <div class="twrap" tabindex="0" role="region" aria-label="Label corrections"><table id="tFix"></table></div></div>
-  <div class="qa"><h3>3. "Devi" was classified as a caste</h3><p>The surname mapping filed Devi under Lohar (EBC). Devi is a title, not a surname, and the commonest entry among the removed, so two million women were counted as EBC and the caste chart showed EBC at 60.9%. Titles and given names are now set aside as carrying no caste information, and caste is read from guardians' surnames first.</p></div>
-  <div class="qa"><h3>4. The district and constituency caste figures were the state survey, repeated</h3><p>Every district in <code>district_caste_block_shares.csv</code> carried EBC 36.01%, BC 27.12%, SC 19.65%, ST 1.68%, General 15.52%: the 2023 survey's state shares, multiplied by each district's deletions. They said nothing about who was removed there. They are no longer used.</p></div>
-  <div class="qa"><h3>5. Smaller things</h3><p>Minapur (90) is a Vaishali segment, not Muzaffarpur, correcting the public constituency table. The 2020 labels in the booth file are the 2020 Assembly winners, not Lok Sabha as the column header said. Kalyanpur (16, 131) and Pipra (17, 42) are joined by number, never by name.</p></div>
+  <h2>How the lists were prepared</h2>
+  <div class="qa"><h3>One count per booth</h3><p>The booth list carries each booth once for each of its three leading parties in 2024, with the same removal count on every row. Each booth is counted once, which gives 77,837 booths and 65,59,626 phase 1 removals, the Chief Electoral Officer's total.</p></div>
+  <div class="qa"><h3>Party names matched to the declared result</h3><p>Vote counts summed from the booths match the declared 2024 result in every Lok Sabha seat. In nine seats the party name attached to a column of votes differed from the declared result, and is matched to it, with the evidence for each below. After matching, the first and second parties in all 40 seats are the declared winner and runner-up.</p>
+    <div class="twrap" tabindex="0" role="region" aria-label="Party names matched"><table id="tFix"></table></div></div>
+  <div class="qa"><h3>Titles are not surnames</h3><p>Devi, Kumari and Khatun are carried by most women in place of a surname and say nothing about caste. They are set aside, and caste is read first from the surname of the father or husband.</p></div>
+  <div class="qa"><h3>Constituencies are joined by number</h3><p>Bihar has two Kalyanpurs (16 and 131) and two Pipras (17 and 42), so every join uses the constituency number. Minapur (90) belongs to the Vaishali Lok Sabha seat.</p></div>
+  <div class="qa"><h3>Border constituencies</h3><p>A constituency counts as a border constituency when its district touches Nepal, West Bengal, Jharkhand or Uttar Pradesh.</p></div>
 
-  <h2>Reconciliation, seat by seat</h2>
-  <p class="sub">The 2024 result summed from booths after correction, against the published figures.</p>
-  <div class="twrap" tabindex="0" role="region" aria-label="2024 reconciliation"><table id="tRec"></table></div>
+  <h2>The 2024 result, seat by seat</h2>
+  <p class="sub">Vote shares summed from the booths, beside the declared figures.</p>
+  <div class="twrap" tabindex="0" role="region" aria-label="2024 result by seat"><table id="tRec"></table></div>
 
-  <h2>The research questions, answered again</h2>
-  <p class="sub">The earlier dashboard posed fourteen questions. Each is restated, with the earlier answer where it changed, and the answer the corrected data gives.</p>
+  <h2>Research questions</h2>
   <div id="qas"></div>
 
-  <p class="note">Definitions. <b>Removed</b>: named on the SIR deletion lists (absent, shifted, dead or enrolled twice); the lists in these files do not carry the reason. <b>Per 100 electors</b>: removed across both phases, divided by the constituency's 2025 electorate. <b>Segment leader</b>: the party with most votes in the assembly segment, summed from booths. <b>Booth leader</b>: the party with most votes in the booth. Nothing on these pages identifies an individual.</p>
+  <h2>What this shows and what it does not</h2>
+  <p>The lists show where names were removed, from whose booths, and who the removed were by sex and by name. They do not record why an individual name was removed, and they do not show how any elector voted. Religion and caste are read from names and are estimates. Disparity alone does not prove discrimination or misconduct; the patterns above show where individual removals most need to be checked, and where safeguards and remedies are most needed.</p>
+
+  <p class="note"><b>Removed</b>: named on the SIR deletion lists. <b>Per 100 electors</b>: removals across both phases divided by the constituency's 2025 electorate. <b>Booth leader</b>: the party with most votes in the booth in 2024. <b>Segment leader</b>: the party with most votes in the assembly segment in 2024.</p>
 </main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers. <a href="https://github.com/Varnasr/INDIA-DATA">Source and data</a>.</footer>
+<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
 <script src="../../assets/sir.js"></script>
 <script>
-function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' : ''; }
 Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/districts.json'), SIR.json('data/bihar/identity.json')]).then(function (r) {
   var s = r[0], acs = r[1], ds = r[2], id = r[3], t = s.totals;
   var fixes = []; Object.keys(s.label_fixes).forEach(function (pc) { Object.keys(s.label_fixes[pc]).forEach(function (src) { var f = s.label_fixes[pc][src]; fixes.push({ pc: pc, src: src, party: f.party, status: f.status, evidence: f.evidence }); }); });
-  SIR.table(document.getElementById('tFix'), [{ k: 'pc', label: 'Seat', left: true }, { k: 'src', label: 'Label in extract', left: true }, { k: 'party', label: 'Party', left: true }, { k: 'status', label: 'Status', left: true }, { k: 'evidence', label: 'Evidence', left: true }], fixes, { sort: 'pc', dir: 1 });
+  SIR.table(document.getElementById('tFix'), [{ k: 'pc', label: 'Seat', left: true }, { k: 'src', label: 'Name in the list', left: true }, { k: 'party', label: 'Party', left: true }, { k: 'status', label: 'Status', left: true }, { k: 'evidence', label: 'Evidence', left: true }], fixes, { sort: 'pc', dir: 1 });
   SIR.table(document.getElementById('tRec'), [
-    { k: 'pc', label: 'Seat', left: true }, { k: 'first', label: 'First', left: true }, { k: 'first_share', label: 'Booth sum %', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'published_first_share', label: 'Published %', fmt: function (v) { return SIR.d(v, 2); } },
-    { k: 'second', label: 'Second', left: true }, { k: 'second_share', label: 'Booth sum %', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'published_second_share', label: 'Published %', fmt: function (v) { return SIR.d(v, 2); } },
+    { k: 'pc', label: 'Seat', left: true }, { k: 'first', label: 'First', left: true }, { k: 'first_share', label: 'Booth sum %', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'published_first_share', label: 'Declared %', fmt: function (v) { return SIR.d(v, 2); } },
+    { k: 'second', label: 'Second', left: true }, { k: 'second_share', label: 'Booth sum %', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'published_second_share', label: 'Declared %', fmt: function (v) { return SIR.d(v, 2); } },
     { k: 'match', label: 'Matches', left: true, fmt: function (v) { return v ? 'yes' : '<b>no</b>'; } }], s.label_verification, { sort: 'pc', dir: 1 });
 
   var rate = function (rows) { return 100 * SIR.sum(rows, 'total') / SIR.sum(rows, 'electorate_2025'); };
-  var L = s.by_alliance_label, w = s.within_seat_2024, fs = 100 * t.female / (t.female + t.male);
-  var cls = t.hindu + t.muslim + t.unknown;
-  var by20 = SIR.groupBy(acs, 'win2020'), byR = SIR.groupBy(acs, 'reserved');
+  var L = s.by_alliance_label, w = s.within_seat_2024, I = s.intensity, fs = 100 * t.female / (t.female + t.male);
+  var cls = t.hindu + t.muslim + t.unknown, byR = SIR.groupBy(acs, 'reserved'), by25 = SIR.groupBy(acs, 'win2025');
   var border = acs.filter(function (a) { return a.border && a.border !== 'Interior'; }), interior = acs.filter(function (a) { return !a.border || a.border === 'Interior'; });
-  var gd = ds.map(function (d) { return d.gddp_pc; }), dr = ds.map(function (d) { return d.per_100; });
+  var gd = ds.map(function (d) { return d.gddp_pc; }), dr = ds.map(function (d) { return d.per_100; }), eb = ds.map(function (d) { return d.electors_per_booth; });
   var ranked = acs.slice().sort(function (a, b) { return b.per_100 - a.per_100; });
-  var bpc = acs.map(function (a) { return a.booths; }), rpc = acs.map(function (a) { return a.per_100; });
-  var eb = ds.map(function (d) { return d.electors_per_booth; });
-  var cg = id.caste.guardian;
+  var D = id.districts, fOver = D.filter(function (d) { return d.female_share_deleted > d.female_share_population_2011; }).length;
+  var inside = D.filter(function (d) { return d.muslim_share_population_2011 >= d.muslim_share_deleted_low && d.muslim_share_population_2011 <= d.muslim_share_deleted_high; }).length;
+  var cg = id.caste.guardian, both = function (g) { return cg.A.groups[g].ratio_to_survey >= 1 && cg.B.groups[g].ratio_to_survey >= 1; }, neither = function (g) { return cg.A.groups[g].ratio_to_survey < 1 && cg.B.groups[g].ratio_to_survey < 1; };
+  var G = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'];
+  var withM = acs.filter(function (a) { return a.margin2025; }), overM = withM.filter(function (a) { return a.total > a.margin2025; });
+  var b200 = SIR.sum(acs, 'booths_200'), last = I.bins[I.bins.length - 1];
   var QA = [
-    ['How significant was the reduction in voter deletions between 2020 and 2024?', 'An 83.3% decline, from 41.4 million to 6.9 million.',
-     'There was no reduction, because there is no 2020 series. The "2020" figure was the 2025 SIR deletions counted about six times over (correction 1). The SIR removed ' + SIR.n(t.total) + ' names across two phases.'],
-    ['Do deletion patterns differ between NDA and INDIA areas?', 'NDA areas 81.2 per booth against INDIA 93.0.',
-     'Reversed. NDA-held seats lost ' + SIR.d(L['2025'].NDA.per_100, 2) + ' per 100 electors against INDIA’s ' + SIR.d(L['2025'].INDIA.per_100, 2) + ' (2025 labels), and the direction holds under 2020 and 2024 labels. Within the same seat, NDA-led booths lost ' + SIR.d(w.pooled_nda_minus_india, 1) + ' more names than INDIA-led ones, in ' + w.seats_nda_higher + ' of ' + w.seats_compared + ' seats. Small, consistent, and descriptive: <a href="../results/">results</a>.'],
-    ['Is there a gender disparity in deletions?', 'Women 55.5% against a 50.7% population share.',
-     'Yes, and it survives correction: women are ' + SIR.pct(fs) + ' of those removed, against 47.86% of the population in 2011 (the 50.7% cited before was not Bihar’s figure), and over-represented in every district. Sex is recorded, not inferred. <a href="../people/">People</a>.'],
-    ['What is the caste composition of deleted voters?', 'EBC 60.9%, OBC 18.3%, SC 14.8%.',
-     'Not identifiable from these files. The 60.9% EBC came from classifying "Devi" as a caste (correction 3). Read from guardians’ surnames, the project mapping places ' + SIR.pct(cg.A.coverage_pct, 0) + ' of removals and a strict reading ' + SIR.pct(cg.B.coverage_pct, 0) + ', and the two disagree on nearly every group. Surname counts for the full roll would settle it. <a href="../people/">People</a>.'],
-    ['Do border districts differ from the interior?', '10 to 15% higher intensity.',
-     'Border constituencies lost ' + SIR.d(rate(border), 2) + ' per 100 electors against ' + SIR.d(rate(interior), 2) + ' in the interior. <a href="../border/">Border</a>.'],
-    ['Is economic development related to deletions?', 'A weak inverse relationship.',
-     'Across 38 districts the rank correlation between per-capita district product and deletions per 100 electors is ' + SIR.d(SIR.spearman(gd, dr), 2) + ' (linear ' + SIR.d(SIR.corr(gd, dr), 2) + '). <a href="../districts/">Districts</a>.'],
-    ['How does religious composition relate to deletions?', 'Hindu about 76%, Muslim about 15%, close to the census.',
-     'Muslim-name share of removals is ' + SIR.pct(100 * t.muslim / cls) + ' to ' + SIR.pct(100 * (t.muslim + t.unknown) / cls) + ' depending on unclassified names, a range that contains the 2011 share of 16.87%, statewide and in most districts. <a href="../people/">People</a>.'],
-    ['What explains the 83% reduction?', 'Election type, post-COVID normalisation, procedure.',
-     'Nothing: the reduction was an artefact of the join (correction 1).'],
-    ['Are there constituencies with anomalous patterns?', 'None; every seat declined by 82 to 85%.',
-     'The uniform decline was the artefact again: a constant six-fold count gives every seat the same "reduction". The real spread is wide: ' + ranked.slice(0, 3).map(function (a) { return a.name + ' ' + SIR.d(a.per_100, 1); }).join(', ') + ' per 100 at the top, ' + ranked.slice(-3).map(function (a) { return a.name + ' ' + SIR.d(a.per_100, 1); }).join(', ') + ' at the bottom. <a href="../constituencies/">Constituencies</a>.'],
-    ['What are the limitations?', 'Surname error, correlation, election type, missing variables.',
-     'Religion and caste come from names; the lists do not record why a name was removed (death, migration, duplicate), which is the single most important missing variable; and without the full roll, composition can be bounded but not measured.'],
-    ['Do patterns differ by party?', 'BJP 89.5, JD(U) 85.5, RJD 78.7 per booth (2020 seats).',
-     'By 2020 winner, per 100 electors: ' + ['BJP', 'JD(U)', 'RJD', 'INC', 'CPI(ML)L'].filter(function (p) { return by20[p]; }).map(function (p) { return p + ' ' + SIR.d(rate(by20[p]), 2) + ' (' + by20[p].length + ' seats)'; }).join(', ') + '. <a href="../results/">Results</a> has the 2025 parties.'],
-    ['Do SC and ST reserved seats differ?', 'SC seats slightly higher; the evidence row read "243 General, 0 SC".',
-     'The earlier evidence line was wrong about the seats themselves. There are ' + byR.SC.length + ' SC and ' + byR.ST.length + ' ST seats; they lost ' + SIR.d(rate(byR.SC), 2) + ' and ' + SIR.d(rate(byR.ST), 2) + ' per 100 electors, against ' + SIR.d(rate(byR.GEN), 2) + ' in general seats.'],
-    ['Does booth size relate to deletion intensity?', 'A moderate positive relationship.',
-     'Across districts, electors per booth and deletions per 100 electors correlate at ρ = ' + SIR.d(SIR.spearman(eb, dr), 2) + '; across constituencies the number of booths and the rate correlate at ρ = ' + SIR.d(SIR.spearman(bpc, rpc), 2) + '.'],
-    ['Which constituencies improved most and least?', 'Sitamarhi most, Digha least; all within 83 to 84%.',
-     'There was no improvement to measure. The question is better asked of the rate: the seats with the highest and lowest removals per elector are listed above and on the <a href="../constituencies/">constituencies</a> page.']
+    ['How many names were removed, and where?',
+     SIR.n(t.total) + ' across both phases: ' + SIR.n(t.p1) + ' in phase 1 and ' + SIR.n(t.p2) + ' in phase 2, or ' + SIR.d(100 * t.total / t.electorate_2025, 2) + ' for every 100 electors on the 2025 roll. The rate ranges from ' + SIR.d(ranked[ranked.length - 1].per_100, 1) + ' per 100 in ' + ranked[ranked.length - 1].name + ' to ' + SIR.d(ranked[0].per_100, 1) + ' in ' + ranked[0].name + '. The highest: ' + ranked.slice(0, 5).map(function (a) { return a.name + ' (' + SIR.d(a.per_100, 1) + ')'; }).join(', ') + '. <a href="../">Explorer</a>.'],
+    ['Did NDA and INDIA ground lose names at the same rate?',
+     'No. NDA-held seats lost ' + SIR.d(L['2025'].NDA.per_100, 2) + ' names per 100 electors against ' + SIR.d(L['2025'].INDIA.per_100, 2) + ' in INDIA-held seats (2025 winners), ' + SIR.d(L['2024'].NDA.per_100, 2) + ' against ' + SIR.d(L['2024'].INDIA.per_100, 2) + ' by the 2024 Lok Sabha leader, and ' + SIR.d(L['2020'].NDA.per_100, 2) + ' against ' + SIR.d(L['2020'].INDIA.per_100, 2) + ' by the 2020 winner. Inside the same constituency, NDA-led booths lost ' + SIR.d(w.pooled_nda_minus_india, 1) + ' more names each than INDIA-led booths, in ' + w.seats_nda_higher + ' of ' + w.seats_compared + ' seats. Of the booths that lost 400 names or more, ' + SIR.d(last.nda_pct, 0) + '% were NDA-led. <a href="../results/">Elections</a>.'],
+    ['Were women removed out of proportion?',
+     'Yes. Women are ' + SIR.pct(fs) + ' of those removed and 47.86% of Bihar\'s population (Census 2011). Their share of the removed is higher than their share of the population in ' + fOver + ' of ' + D.length + ' districts. Sex is recorded on the roll. <a href="../people/">Women, religion, caste</a>.'],
+    ['Which caste groups carried the removals?',
+     'Read from the surname of the father or husband, and set against the 2023 caste survey, ' + G.filter(both).join(' and ') + ' families are removed at or above their population share under both classifications, and ' + G.filter(neither).join(' and ') + ' families below it. The classifications disagree on ' + G.filter(function (g) { return !both(g) && !neither(g); }).join(' and ') + '. <a href="../people/">Women, religion, caste</a>.'],
+    ['How does the Muslim share of removals compare with the population?',
+     'Names classified Muslim are ' + SIR.pct(100 * t.muslim / cls) + ' of removals, and ' + SIR.pct(100 * (t.muslim + t.unknown) / cls) + ' if every unclassified name is counted, against 16.87% of the population in 2011 and 17.70% in the 2023 survey. The census share lies inside that range in ' + inside + ' of ' + D.length + ' districts. <a href="../people/">Women, religion, caste</a>.'],
+    ['Do border constituencies differ from the interior?',
+     'Border constituencies lost ' + SIR.d(rate(border), 2) + ' per 100 electors, the interior ' + SIR.d(rate(interior), 2) + '. <a href="../border/">Border</a>.'],
+    ['Is district prosperity related to removals?',
+     'Across 38 districts, the rank correlation between per-capita district product and removals per 100 electors is ' + SIR.d(SIR.spearman(gd, dr), 2) + '. <a href="../districts/">Districts</a>.'],
+    ['Do reserved seats differ?',
+     'The ' + byR.SC.length + ' SC-reserved seats lost ' + SIR.d(rate(byR.SC), 2) + ' per 100 electors, the ' + byR.ST.length + ' ST-reserved seats ' + SIR.d(rate(byR.ST), 2) + ', and the general seats ' + SIR.d(rate(byR.GEN), 2) + '.'],
+    ['Do removals exceed winning margins?',
+     'In ' + overM.length + ' of ' + withM.length + ' seats the revision removed more names than the 2025 winning margin. <a href="../results/">Elections</a>.'],
+    ['How do the parties\' seats compare?',
+     'Removals per 100 electors in the seats each party won in 2025: ' + ['BJP', 'JD(U)', 'LJP(RV)', 'RJD', 'INC', 'AIMIM'].filter(function (p) { return by25[p]; }).map(function (p) { return p + ' ' + SIR.d(rate(by25[p]), 2) + ' (' + by25[p].length + ' seats)'; }).join(', ') + '.'],
+    ['Does booth size relate to removal intensity?',
+     'Across districts, electors per booth and removals per 100 electors have a rank correlation of ' + SIR.d(SIR.spearman(eb, dr), 2) + '.'],
+    ['Which booths stand out?',
+     SIR.n(b200) + ' booths lost more than 200 names and ' + SIR.n(last.booths) + ' lost 400 or more. Each constituency\'s booths can be sorted in the <a href="../">explorer</a>.']
   ];
   document.getElementById('qas').innerHTML = QA.map(function (q, i) {
-    return '<div class="qa"><h3>Q' + (i + 1) + '. ' + q[0] + '</h3><p><span class="pill">Earlier answer: ' + q[1] + '</span></p><p>' + q[2] + '</p></div>';
+    return '<div class="qa"><h3>' + (i + 1) + '. ' + q[0] + '</h3><p>' + q[1] + '</p></div>';
   }).join('');
 }).catch(SIR.fail);
 </script>

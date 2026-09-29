@@ -1,0 +1,19 @@
+# Only the pages and the aggregate data they read are served. Source files,
+# build scripts, notes and the archive stay in the repository.
+/archive/*          /404.html  404!
+/data/bihar/raw/*   /404.html  404!
+/data/bihar/surname_classes.csv  /404.html  404!
+/data/METHODOLOGY_NOTES.md  /404.html  404!
+/data/ac_border_classification.csv  /404.html  404!
+/data/district_border_classification.csv  /404.html  404!
+/data/district_demography_summary.csv  /404.html  404!
+/data/district_gdp_profile.csv  /404.html  404!
+/data/district_population_profile.csv  /404.html  404!
+/data/district_rural_urban_profile.csv  /404.html  404!
+/scripts/*          /404.html  404!
+/.github/*          /404.html  404!
+/README.md          /404.html  404!
+/CLAUDE.md          /404.html  404!
+/CITATION.cff       /404.html  404!
+/hyderabad/README.md  /404.html  404!
+/bihar/constituencies/*  /bihar/  301
