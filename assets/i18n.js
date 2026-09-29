@@ -129,7 +129,7 @@
     if (lang !== 'en') document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
       var u = new URL(a.href, location.href);
-      if (u.origin !== location.origin || u.searchParams.has('lang') || /\.(json|pdf|png|csv)$/.test(u.pathname)) return;
+      if (u.origin !== location.origin || u.searchParams.has('lang') || /\.(json|pdf|png|csv|docx|pptx)$/.test(u.pathname)) return;
       u.searchParams.set('lang', lang); a.href = u.toString();
     });
   };

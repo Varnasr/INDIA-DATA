@@ -138,6 +138,14 @@ I for the whole area, Part II a chapter per district or constituency, one
 section on what the lists show and do not, and what an audit needs. Rebuild
 them after any data change; nothing checks that they are current.
 
+Beside them are two slide decks, `*-deck.pptx`, written by
+`scripts/reports/decks.js` (pptxgenjs) from the same JSON and linked as
+"Slides" from each dashboard's report card. Every figure and every verdict in
+them is computed, including the slide titles that make a claim (the Hyderabad
+margin slide checks that every seat lost more names than its winner polled
+before saying so). The decks state no site address, and the speaker notes
+carry the caveats. `build.sh` rebuilds them with the reports.
+
 ## Watch out for
 
 - **Publishing**: the site serves only pages and aggregate JSON. `_redirects`
