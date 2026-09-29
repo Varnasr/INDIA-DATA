@@ -1,5 +1,7 @@
-# Ignore all CSV files
+# Ignore stray CSV files, but never the data: the Bihar build reads its
+# sources from data/, and an ignored source file fails CI on a clean checkout.
 *.csv
+!data/**/*.csv
 
 # Ignore common OS and editor files
 .DS_Store
