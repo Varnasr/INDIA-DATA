@@ -17,6 +17,13 @@ site at [forindia.netlify.app](https://forindia.netlify.app).
 | `/hyderabad/explorer/` | Any constituency, any of its 1,158 polling parts |
 | `/hyderabad/people/`, `/parts/`, `/hearings/`, `/faq/`, `/method/` | Rates by age, sex, religion and 2002 linkage within parts; part outliers; hearings; fourteen research questions |
 
+## Reports
+
+The full reports, in the structure of the Sabar Institute's SIR reports, are
+in `reports/` as PDF and Word and are linked from every page:
+`bihar-sir-2025-report` and `hyderabad-old-city-sir-2026-report`. Rebuild with
+`scripts/reports/build.sh`.
+
 ## The two kinds of evidence
 
 Bihar's files hold the removed only, by booth, so the Bihar pages compare shares

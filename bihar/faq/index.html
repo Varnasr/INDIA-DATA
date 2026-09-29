@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="../../assets/i18n.js"></script>
 <title>Bihar SIR 2025: questions and answers</title>
 <meta name="description" content="Answers to the questions most often put to the Bihar SIR analysis: the dead and the shifted, NDA and INDIA seats, margins, women, religion, caste and the reliability of the lists.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
@@ -16,6 +17,7 @@
     <a class="logo" href="../../"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span><span class="h-title">Bihar Electoral Dashboard</span><span class="subtitle">Special Intensive Revision 2025 · every booth, every constituency</span></span></a>
     <div class="controls">
       <a class="btn" href="../../hyderabad/">Hyderabad 2026</a>
+      <a class="btn report" href="../../reports/bihar-sir-2025-report.pdf" download><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
     </div>
@@ -31,7 +33,7 @@
 <script src="../../assets/sir.js"></script>
 <script>
 Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/identity.json')]).then(function (r) {
-  var s = r[0], acs = r[1], id = r[2], t = s.totals, L = s.by_alliance_label, W = s.within_seat_2024, D = id.districts;
+  var s = r[0], acs = r[1], id = r[2], t = s.totals, AL = s.by_alliance_label, W = s.within_seat_2024, D = id.districts;
   var withM = acs.filter(function (a) { return a.margin2025; }), over = withM.filter(function (a) { return a.total > a.margin2025; });
   var took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; }), tookOver = took.filter(function (a) { return a.total > a.margin2025; });
   var held = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'INDIA'; });
@@ -41,26 +43,28 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var inside = D.filter(function (d) { return d.muslim_share_population_2011 >= d.muslim_share_deleted_low && d.muslim_share_population_2011 <= d.muslim_share_deleted_high; }).length;
   var above = D.filter(function (d) { return d.muslim_share_deleted_low > d.muslim_share_population_2011 + 1; }).map(function (d) { return d.district; });
   var cg = id.caste.guardian, G = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'];
+  // Group names shown in prose: two are English words, the rest acronyms.
+  var GW = { General: L('General'), Muslim: L('Muslim') }, GN = function (g) { return GW[g] || g; };
   var up = G.filter(function (g) { return cg.A.groups[g].ratio_to_survey >= 1 && cg.B.groups[g].ratio_to_survey >= 1; }), down = G.filter(function (g) { return cg.A.groups[g].ratio_to_survey < 1 && cg.B.groups[g].ratio_to_survey < 1; });
   var QA = [
-    ['Were most of the removed not simply dead, or moved away?',
-     'The Commission\'s own categories for the phase 1 list were the dead, the permanently shifted or absent, and those enrolled in more than one place. The lists used here do not carry the category against each name, so they cannot say how many in each were rightly removed. A category is what an officer entered after a visit or its absence, not a finding. Someone marked "shifted" may have been away for work at the time of the visit; someone marked "absent" may have been at home. That is why the case here is for verification: the ' + SIR.n(t.total) + ' removals are large enough that the accuracy of those entries decides elections.'],
-    ['Did the removals exceed the margins by which seats were won?',
-     'Yes, in ' + over.length + ' of ' + withM.length + ' constituencies. Of the ' + took.length + ' seats INDIA held in 2020 and the NDA won in 2025, ' + tookOver.length + ' lost more names than the NDA\'s winning margin. This does not mean each of those results would have been different: it means the change to the roll was larger than the decision at the ballot box, and no one outside the Commission can say whose names they were.'],
-    ['Did NDA seats not lose more names than INDIA seats?',
-     'They did. Seats the NDA held lost ' + SIR.d(L['2020'].NDA.per_100, 2) + ' names per 100 electors against ' + SIR.d(L['2020'].INDIA.per_100, 2) + ' in INDIA seats (2020 winners), and booths the NDA led in 2024 lost ' + SIR.d(W.pooled_nda_minus_india, 1) + ' more names each than INDIA-led booths in the same constituency. A booth\'s leader says how most of its voters voted in 2024, not how the removed electors voted; every booth holds voters of both sides. The seats INDIA lost in 2025 were not removed at a higher rate than the seats it kept (' + SIR.d(pre(took), 2) + ' and ' + SIR.d(pre(held), 2) + ' per 100 electors before the revision, counted as the 2025 roll plus the names removed). What the lists establish is the scale of the removals against the margins, which the previous answer sets out.'],
-    ['Why are women over-represented?',
-     'Women are ' + SIR.pct(fs) + ' of those removed and 47.86% of the population, and their share of the removed is higher than their share of the population in ' + fOver + ' of ' + D.length + ' districts. Sex is recorded on the roll, so this rests on no estimate. Women who moved on marriage and were marked "shifted" at their parents\' address are likely a large part of it. The lists do not show whether any of them were enrolled again where they now live; if they were not, they have lost the vote.'],
-    ['Were Muslims removed out of proportion?',
-     'Names the booth lists classify as Muslim are ' + SIR.pct(100 * t.muslim / cls) + ' of removals, and ' + SIR.pct(100 * (t.muslim + t.unknown) / cls) + ' if every unclassified name were Muslim, against 16.87% of the population in 2011 and 17.70% in the 2023 caste survey. The census share lies inside that range in ' + inside + ' of ' + D.length + ' districts. In ' + above.length + ' districts the classified Muslim share alone is more than a point above the census share: ' + above.join(', ') + '. <a href="../people/">Women, religion, caste</a>.'],
-    ['How can caste be read from surnames?',
-     'Only partly, which is why two classifications are used and only what holds under both is reported. Read from the surname of the father or husband, ' + up.join(' and ') + ' families are removed at or above their share of the 2023 caste survey under both, and ' + down.join(' and ') + ' families below it.'],
-    ['How reliable are the lists?',
-     'The booth list accounts for every one of Bihar\'s ' + SIR.n(t.booths) + ' polling booths and totals ' + SIR.n(t.p1) + ' phase 1 removals; the constituency totals for both phases match the Chief Electoral Officer\'s table. Vote counts summed from the booths give the declared winner and runner-up in all 40 Lok Sabha seats. Every headline figure is recomputed from the lists by a second, independent program before publication.'],
-    ['Does this show that the removals were intended to change results?',
-     'No list of removals can show intent. What it can show is where the removals fell, who they were, and how their number compares with the margins. Establishing whose votes they were, and whether they were rightly removed, needs the name-by-name audit described on the <a href="../../">front page</a>.'],
-    ['Why are no names published?',
-     'The analysis is about the revision, not about individuals. Only counts are published: no name, EPIC number or address appears anywhere on these pages.']
+    [L('Were most of the removed not simply dead, or moved away?'),
+     L('The Commission\'s own categories for the phase 1 list were the dead, the permanently shifted or absent, and those enrolled in more than one place. The lists used here do not carry the category against each name, so they cannot say how many in each were rightly removed. A category is what an officer entered after a visit or its absence, not a finding. Someone marked "shifted" may have been away for work at the time of the visit; someone marked "absent" may have been at home. That is why the case here is for verification: the {removed} removals are large enough that the accuracy of those entries decides elections.', { removed: SIR.n(t.total) })],
+    [L('Did the removals exceed the margins by which seats were won?'),
+     L('Yes, in {over} of {seats} constituencies. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {took_over} lost more names than the NDA\'s winning margin. This does not mean each of those results would have been different: it means the change to the roll was larger than the decision at the ballot box, and no one outside the Commission can say whose names they were.', { over: over.length, seats: withM.length, took: took.length, took_over: tookOver.length })],
+    [L('Did NDA seats not lose more names than INDIA seats?'),
+     L('They did. Seats the NDA held lost {nda} names per 100 electors against {india} in INDIA seats (2020 winners), and booths the NDA led in 2024 lost {gap} more names each than INDIA-led booths in the same constituency. A booth\'s leader says how most of its voters voted in 2024, not how the removed electors voted; every booth holds voters of both sides. The seats INDIA lost in 2025 were not removed at a higher rate than the seats it kept ({lost} and {kept} per 100 electors before the revision, counted as the 2025 roll plus the names removed). What the lists establish is the scale of the removals against the margins, which the previous answer sets out.', { nda: SIR.d(AL['2020'].NDA.per_100, 2), india: SIR.d(AL['2020'].INDIA.per_100, 2), gap: SIR.d(W.pooled_nda_minus_india, 1), lost: SIR.d(pre(took), 2), kept: SIR.d(pre(held), 2) })],
+    [L('Why are women over-represented?'),
+     L('Women are {share} of those removed and 47.86% of the population, and their share of the removed is higher than their share of the population in {over} of {districts} districts. Sex is recorded on the roll, so this rests on no estimate. Women who moved on marriage and were marked "shifted" at their parents\' address are likely a large part of it. The lists do not show whether any of them were enrolled again where they now live; if they were not, they have lost the vote.', { share: SIR.pct(fs), over: fOver, districts: D.length })],
+    [L('Were Muslims removed out of proportion?'),
+     L('Names the booth lists classify as Muslim are {low} of removals, and {high} if every unclassified name were Muslim, against 16.87% of the population in 2011 and 17.70% in the 2023 caste survey. The census share lies inside that range in {inside} of {districts} districts. In {above} districts the classified Muslim share alone is more than a point above the census share: {above_list}. <a href="../people/">Women, religion, caste</a>.', { low: SIR.pct(100 * t.muslim / cls), high: SIR.pct(100 * (t.muslim + t.unknown) / cls), inside: inside, districts: D.length, above: above.length, above_list: above.join(', ') })],
+    [L('How can caste be read from surnames?'),
+     L('Only partly, which is why two classifications are used and only what holds under both is reported. Read from the surname of the father or husband, {up} families are removed at or above their share of the 2023 caste survey under both, and {down} families below it.', { up: up.map(GN).join(L(' and ')), down: down.map(GN).join(L(' and ')) })],
+    [L('How reliable are the lists?'),
+     L('The booth list accounts for every one of Bihar\'s {booths} polling booths and totals {p1} phase 1 removals; the constituency totals for both phases match the Chief Electoral Officer\'s table. Vote counts summed from the booths give the declared winner and runner-up in all 40 Lok Sabha seats. Every headline figure is recomputed from the lists by a second, independent program before publication.', { booths: SIR.n(t.booths), p1: SIR.n(t.p1) })],
+    [L('Does this show that the removals were intended to change results?'),
+     L('No list of removals can show intent. What it can show is where the removals fell, who they were, and how their number compares with the margins. Establishing whose votes they were, and whether they were rightly removed, needs the name-by-name audit described on the <a href="../../">front page</a>.')],
+    [L('Why are no names published?'),
+     L('The analysis is about the revision, not about individuals. Only counts are published: no name, EPIC number or address appears anywhere on these pages.')]
   ];
   document.getElementById('qas').innerHTML = QA.map(function (q) { return '<div class="qa"><h3>' + q[0] + '</h3><p>' + q[1] + '</p></div>'; }).join('');
 }).catch(SIR.fail);

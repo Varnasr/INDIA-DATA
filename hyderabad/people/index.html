@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="../../assets/i18n.js"></script>
 <title>Hyderabad Old City SIR 2026: age, sex, religion, 2002</title>
 <meta name="description" content="Deletion rates in Hyderabad's Old City SIR by age, sex, name-estimated religion and 2002 linkage, across constituencies and within the same polling part.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23b13b38'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
@@ -16,6 +17,7 @@
     <a class="logo" href="../../hyderabad/"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span><span class="h-title">Hyderabad Old City Electoral Dashboard</span><span class="subtitle">Special Intensive Revision 2026 · five constituencies, every polling part</span></span></a>
     <div class="controls">
       <a class="btn" href="../../">Bihar 2025</a>
+      <a class="btn report" href="../../reports/hyderabad-old-city-sir-2026-report.pdf" download><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
     </div>
@@ -89,36 +91,36 @@
 SIR.json('data/hyderabad/summary.json').then(function (s) {
   var A = s.acs, names = A.map(function (a) { return a.name; }), pal = ['--fill-red', '--fill-navy', '--fill-amber', '--fill-india', '--fill-other'];
   SIR.chart('cAge', { type: 'line', data: { labels: s.bands, datasets: A.map(function (a, i) { return { label: a.name, data: a.age_rate, $token: pal[i], tension: 0.2, pointRadius: 3 }; }) },
-    options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% struck off' } }, x: { title: { display: true, text: 'Age band' } } } } });
+    options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% struck off') } }, x: { title: { display: true, text: L('Age band') } } } } });
   var lo = A.map(function (a) { return a.age_rate[0]; }), hi = A.map(function (a) { return a.age_rate[7]; });
-  document.getElementById('fAge').innerHTML = '<b>The older the elector, the likelier the removal, in every constituency.</b> Between ' + SIR.pct(Math.min.apply(null, hi)) + ' and ' + SIR.pct(Math.max.apply(null, hi)) + ' of electors aged 80 and over were struck off, against ' + SIR.pct(Math.min.apply(null, lo)) + ' to ' + SIR.pct(Math.max.apply(null, lo)) + ' of those aged 18 to 24. Death accounts for part of the top of the range; the recorded reasons are on the <a href="../">overview</a>.';
+  document.getElementById('fAge').innerHTML = L('<b>The older the elector, the likelier the removal, in every constituency.</b> Between {hi_min} and {hi_max} of electors aged 80 and over were struck off, against {lo_min} to {lo_max} of those aged 18 to 24. Death accounts for part of the top of the range; the recorded reasons are on the <a href="../">overview</a>.', { hi_min: SIR.pct(Math.min.apply(null, hi)), hi_max: SIR.pct(Math.max.apply(null, hi)), lo_min: SIR.pct(Math.min.apply(null, lo)), lo_max: SIR.pct(Math.max.apply(null, lo)) });
 
   SIR.chart('cRel', { type: 'bar', data: { labels: names, datasets: [
-      { label: 'Hindu names', data: A.map(function (a) { return a.hindu_rate; }), $token: '--fill-amber' },
-      { label: 'Muslim names', data: A.map(function (a) { return a.muslim_rate; }), $token: '--fill-india' }] },
-    options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% struck off' } } } } });
-  SIR.chart('cRelW', { type: 'bar', data: { labels: names, datasets: [{ label: 'Hindu minus Muslim, within parts', data: A.map(function (a) { return a.within_part.hindu_minus_muslim.diff_pp; }), $token: '--fill-navy' }] },
-    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: function (c) { var w = A[c.dataIndex].within_part.hindu_minus_muslim; return w.a_higher + ' of ' + w.parts + ' parts: Hindu-name rate higher'; } } } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Percentage points' } } } } });
+      { label: L('Hindu names'), data: A.map(function (a) { return a.hindu_rate; }), $token: '--fill-amber' },
+      { label: L('Muslim names'), data: A.map(function (a) { return a.muslim_rate; }), $token: '--fill-india' }] },
+    options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% struck off') } } } } });
+  SIR.chart('cRelW', { type: 'bar', data: { labels: names, datasets: [{ label: L('Hindu minus Muslim, within parts'), data: A.map(function (a) { return a.within_part.hindu_minus_muslim.diff_pp; }), $token: '--fill-navy' }] },
+    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: function (c) { var w = A[c.dataIndex].within_part.hindu_minus_muslim; return L('{higher} of {parts} parts: Hindu-name rate higher', { higher: w.a_higher, parts: w.parts }); } } } }, scales: { y: { beginAtZero: true, title: { display: true, text: L('Percentage points') } } } } });
   var W = A.map(function (a) { return a.within_part.hindu_minus_muslim; });
   var c = function (k) { return 100 * SIR.sum(A, function (a) { return a.counts[k]; }); };
-  document.getElementById('fRel').innerHTML = '<b>Across the five constituencies, ' + SIR.pct(c('hin_asd') / SIR.sum(A, function (a) { return a.counts.hin_all; })) + ' of Hindu-name electors were struck off, and ' + SIR.pct(c('mus_asd') / SIR.sum(A, function (a) { return a.counts.mus_all; })) + ' of Muslim-name electors.</b> Inside the same polling part the gap is ' + SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 1) + ' to ' + SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 1) + ' points, in the same direction in ' + SIR.sum(W, 'a_higher') + ' of ' + SIR.sum(W, 'parts') + ' parts large enough to compare.';
+  document.getElementById('fRel').innerHTML = L('<b>Across the five constituencies, {hindu} of Hindu-name electors were struck off, and {muslim} of Muslim-name electors.</b> Inside the same polling part the gap is {gap_min} to {gap_max} points, in the same direction in {higher} of {parts} parts large enough to compare.', { hindu: SIR.pct(c('hin_asd') / SIR.sum(A, function (a) { return a.counts.hin_all; })), muslim: SIR.pct(c('mus_asd') / SIR.sum(A, function (a) { return a.counts.mus_all; })), gap_min: SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 1), gap_max: SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 1), higher: SIR.sum(W, 'a_higher'), parts: SIR.sum(W, 'parts') });
 
-  var L = A.filter(function (a) { return a.linked; });
-  SIR.chart('cLink', { type: 'bar', data: { labels: L.map(function (a) { return a.name; }), datasets: [
-      { label: 'Linked to 2002', data: L.map(function (a) { return a.linked_rate; }), $token: '--fill-navy' },
-      { label: 'No 2002 link', data: L.map(function (a) { return a.unlinked_rate; }), $token: '--fill-red' }] },
-    options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% struck off' } } } } });
-  SIR.chart('cLinkShare', { type: 'bar', data: { labels: L.map(function (a) { return a.name; }), datasets: [{ label: '% of roll linked', data: L.map(function (a) { return a.linked_share_roll; }), $token: '--fill-navy' }] },
-    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: '% of roll' } } } } });
-  document.getElementById('fLink').innerHTML = '<b>Having no link to the 2002 roll roughly doubled an elector\'s chance of being struck off.</b> Inside the same polling part, unlinked electors were struck off ' + L.map(function (a) { return SIR.d(a.within_part.unlinked_minus_linked.diff_pp, 0) + ' points more often in ' + a.name; }).join(', ') + '. The 2002 link is the revision\'s own test, so the gap measures how heavily the process leaned on it.';
+  var LK = A.filter(function (a) { return a.linked; });
+  SIR.chart('cLink', { type: 'bar', data: { labels: LK.map(function (a) { return a.name; }), datasets: [
+      { label: L('Linked to 2002'), data: LK.map(function (a) { return a.linked_rate; }), $token: '--fill-navy' },
+      { label: L('No 2002 link'), data: LK.map(function (a) { return a.unlinked_rate; }), $token: '--fill-red' }] },
+    options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% struck off') } } } } });
+  SIR.chart('cLinkShare', { type: 'bar', data: { labels: LK.map(function (a) { return a.name; }), datasets: [{ label: L('% of roll linked'), data: LK.map(function (a) { return a.linked_share_roll; }), $token: '--fill-navy' }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: L('% of roll') } } } } });
+  document.getElementById('fLink').innerHTML = L('<b>Having no link to the 2002 roll roughly doubled an elector\'s chance of being struck off.</b> Inside the same polling part, unlinked electors were struck off {gaps}. The 2002 link is the revision\'s own test, so the gap measures how heavily the process leaned on it.', { gaps: LK.map(function (a) { return L('{points} points more often in {name}', { points: SIR.d(a.within_part.unlinked_minus_linked.diff_pp, 0), name: a.name }); }).join(', ') });
 
   SIR.chart('cSex', { type: 'bar', data: { labels: names, datasets: [
-      { label: 'Women', data: A.map(function (a) { return a.female_rate; }), $token: '--female' },
-      { label: 'Men', data: A.map(function (a) { return a.male_rate; }), $token: '--male' }] },
-    options: { scales: { y: { beginAtZero: true, title: { display: true, text: '% struck off' } } } } });
-  SIR.table(document.getElementById('tSex'), [{ k: 'name', label: 'Constituency', left: true }, { k: 'd', label: 'Women minus men (points)', fmt: function (v) { return SIR.d(v, 1); } }, { k: 'w', label: 'Parts: women higher' }, { k: 'm', label: 'Parts: men higher' }],
+      { label: L('Women'), data: A.map(function (a) { return a.female_rate; }), $token: '--female' },
+      { label: L('Men'), data: A.map(function (a) { return a.male_rate; }), $token: '--male' }] },
+    options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% struck off') } } } } });
+  SIR.table(document.getElementById('tSex'), [{ k: 'name', label: L('Constituency'), left: true }, { k: 'd', label: L('Women minus men (points)'), fmt: function (v) { return SIR.d(v, 1); } }, { k: 'w', label: L('Parts: women higher') }, { k: 'm', label: L('Parts: men higher') }],
     A.map(function (a) { var w = a.within_part.female_minus_male; return { name: a.name, d: w.diff_pp, w: w.a_higher, m: w.b_higher }; }), { sort: 'name', dir: 1 });
-  document.getElementById('fSex').innerHTML = '<b>Women and men were struck off at similar rates.</b> Men slightly more often in Charminar, Yakutpura and Malakpet, women in Chandrayangutta and Bahadurpura; inside the same part the gaps are under two and a half points.';
+  document.getElementById('fSex').innerHTML = L('<b>Women and men were struck off at similar rates.</b> Men slightly more often in Charminar, Yakutpura and Malakpet, women in Chandrayangutta and Bahadurpura; inside the same part the gaps are under two and a half points.');
 }).catch(SIR.fail);
 </script>
 </body>

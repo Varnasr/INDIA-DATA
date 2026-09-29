@@ -171,9 +171,21 @@ for i, pb in enumerate(S['intensity']['bins']):
     c = q.al.value_counts()
     same('booths %s, NDA share' % pb['bin'], round(100 * c.get('NDA', 0) / (c.get('NDA', 0) + c.get('INDIA', 0) + c.get('Other', 0)), 1), pb['nda_pct'])
 
-print('Margins')
-over = sum(1 for ac in x.index if pd.notna(ae.loc[ac, 'Margin_Votes']) and tot[ac] > ae.loc[ac, 'Margin_Votes'])
+print('Margins and votes polled')
+res = pd.read_csv(os.path.join(RAW, 'ae2025_results.csv')).set_index('ac')
+mg = res.winner_votes - res.runner_up_votes
+same('margins recomputed as winner minus runner-up', int(sum(mg[ac] == C[ac]['margin2025'] for ac in x.index)), len(x.index))
+over = sum(1 for ac in x.index if tot[ac] > mg[ac])
 same('seats where removals exceed the 2025 margin', over, sum(1 for a in C.values() if a['margin2025'] is not None and a['total'] > a['margin2025']))
+polled = {ac: round(res.turnout_pct[ac] / 100 * el[ac]) for ac in x.index}
+same('votes polled, turnout on the 2025 roll', int(sum(polled.values())), sum(a['votes2025'] for a in C.values()))
+share = round(100 * sum(tot[ac] for ac in x.index) / sum(polled.values()), 2)
+same('removals as a share of all votes polled', share, round(100 * sum(a['total'] for a in C.values()) / sum(a['votes2025'] for a in C.values()), 2))
+# The second table's own arithmetic: winner's votes over winner's share.
+alt = ae['Winner_Votes'] / (ae['Winner_%'] / 100)
+dev = max(abs(polled[ac] / alt[ac] - 1) for ac in x.index)
+print('  note  turnout-based votes polled are within %.1f%% of winner votes / winner share in every seat' % (100 * dev))
+assert dev < 0.06, 'votes polled disagree with the second source by more than 6%'
 
 print('Women by district')
 cen = pd.read_csv(os.path.join(RAW, 'census2011_districts_all_india.csv'))

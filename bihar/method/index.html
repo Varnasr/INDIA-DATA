@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="../../assets/i18n.js"></script>
 <title>Bihar SIR 2025: method</title>
 <meta name="description" content="How the Bihar SIR figures are built: sources, how the lists were prepared, and the research questions the analysis answers.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
@@ -16,6 +17,7 @@
     <a class="logo" href="../../"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span><span class="h-title">Bihar Electoral Dashboard</span><span class="subtitle">Special Intensive Revision 2025 · every booth, every constituency</span></span></a>
     <div class="controls">
       <a class="btn" href="../../hyderabad/">Hyderabad 2026</a>
+      <a class="btn report" href="../../reports/bihar-sir-2025-report.pdf" download><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span>Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export PDF</button>
     </div>
@@ -65,14 +67,14 @@
 Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/districts.json'), SIR.json('data/bihar/identity.json')]).then(function (r) {
   var s = r[0], acs = r[1], ds = r[2], id = r[3], t = s.totals;
   var fixes = []; Object.keys(s.label_fixes).forEach(function (pc) { Object.keys(s.label_fixes[pc]).forEach(function (src) { var f = s.label_fixes[pc][src]; fixes.push({ pc: pc, src: src, party: f.party, status: f.status, evidence: f.evidence }); }); });
-  SIR.table(document.getElementById('tFix'), [{ k: 'pc', label: 'Seat', left: true }, { k: 'src', label: 'Name in the list', left: true }, { k: 'party', label: 'Party', left: true }, { k: 'status', label: 'Status', left: true }, { k: 'evidence', label: 'Evidence', left: true }], fixes, { sort: 'pc', dir: 1 });
+  SIR.table(document.getElementById('tFix'), [{ k: 'pc', label: L('Seat'), left: true }, { k: 'src', label: L('Name in the list'), left: true }, { k: 'party', label: L('Party'), left: true }, { k: 'status', label: L('Status'), left: true }, { k: 'evidence', label: L('Evidence'), left: true }], fixes, { sort: 'pc', dir: 1 });
   SIR.table(document.getElementById('tRec'), [
-    { k: 'pc', label: 'Seat', left: true }, { k: 'first', label: 'First', left: true }, { k: 'first_share', label: 'Booth sum %', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'published_first_share', label: 'Declared %', fmt: function (v) { return SIR.d(v, 2); } },
-    { k: 'second', label: 'Second', left: true }, { k: 'second_share', label: 'Booth sum %', fmt: function (v) { return SIR.d(v, 2); } }, { k: 'published_second_share', label: 'Declared %', fmt: function (v) { return SIR.d(v, 2); } },
-    { k: 'match', label: 'Matches', left: true, fmt: function (v) { return v ? 'yes' : '<b>no</b>'; } }], s.label_verification, { sort: 'pc', dir: 1 });
+    { k: 'pc', label: L('Seat'), left: true }, { k: 'first', label: L('First'), left: true }, { k: 'first_share', label: L('Booth sum %'), fmt: function (v) { return SIR.d(v, 2); } }, { k: 'published_first_share', label: L('Declared %'), fmt: function (v) { return SIR.d(v, 2); } },
+    { k: 'second', label: L('Second'), left: true }, { k: 'second_share', label: L('Booth sum %'), fmt: function (v) { return SIR.d(v, 2); } }, { k: 'published_second_share', label: L('Declared %'), fmt: function (v) { return SIR.d(v, 2); } },
+    { k: 'match', label: L('Matches'), left: true, fmt: function (v) { return v ? L('yes') : L('<b>no</b>'); } }], s.label_verification, { sort: 'pc', dir: 1 });
 
   var rate = function (rows) { return 100 * SIR.sum(rows, 'total') / SIR.sum(rows, 'electorate_2025'); };
-  var L = s.by_alliance_label, w = s.within_seat_2024, I = s.intensity, fs = 100 * t.female / (t.female + t.male);
+  var AL = s.by_alliance_label, w = s.within_seat_2024, I = s.intensity, fs = 100 * t.female / (t.female + t.male);
   var cls = t.hindu + t.muslim + t.unknown, byR = SIR.groupBy(acs, 'reserved'), by25 = SIR.groupBy(acs, 'win2025');
   var border = acs.filter(function (a) { return a.border && a.border !== 'Interior'; }), interior = acs.filter(function (a) { return !a.border || a.border === 'Interior'; });
   var gd = ds.map(function (d) { return d.gddp_pc; }), dr = ds.map(function (d) { return d.per_100; }), eb = ds.map(function (d) { return d.electors_per_booth; });
@@ -81,33 +83,35 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var inside = D.filter(function (d) { return d.muslim_share_population_2011 >= d.muslim_share_deleted_low && d.muslim_share_population_2011 <= d.muslim_share_deleted_high; }).length;
   var cg = id.caste.guardian, both = function (g) { return cg.A.groups[g].ratio_to_survey >= 1 && cg.B.groups[g].ratio_to_survey >= 1; }, neither = function (g) { return cg.A.groups[g].ratio_to_survey < 1 && cg.B.groups[g].ratio_to_survey < 1; };
   var G = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'];
+  // Group names shown in prose: two are English words, the rest acronyms.
+  var GW = { General: L('General'), Muslim: L('Muslim') }, GN = function (g) { return GW[g] || g; };
   var withM = acs.filter(function (a) { return a.margin2025; }), overM = withM.filter(function (a) { return a.total > a.margin2025; });
   var b200 = SIR.sum(acs, 'booths_200'), last = I.bins[I.bins.length - 1];
   var QA = [
-    ['How many names were removed, and where?',
-     SIR.n(t.total) + ' across both phases: ' + SIR.n(t.p1) + ' in phase 1 and ' + SIR.n(t.p2) + ' in phase 2, or ' + SIR.d(100 * t.total / t.electorate_2025, 2) + ' for every 100 electors on the 2025 roll. The rate ranges from ' + SIR.d(ranked[ranked.length - 1].per_100, 1) + ' per 100 in ' + ranked[ranked.length - 1].name + ' to ' + SIR.d(ranked[0].per_100, 1) + ' in ' + ranked[0].name + '. The highest: ' + ranked.slice(0, 5).map(function (a) { return a.name + ' (' + SIR.d(a.per_100, 1) + ')'; }).join(', ') + '. <a href="../">Explorer</a>.'],
-    ['Did NDA and INDIA ground lose names at the same rate?',
-     'No. NDA-held seats lost ' + SIR.d(L['2025'].NDA.per_100, 2) + ' names per 100 electors against ' + SIR.d(L['2025'].INDIA.per_100, 2) + ' in INDIA-held seats (2025 winners), ' + SIR.d(L['2024'].NDA.per_100, 2) + ' against ' + SIR.d(L['2024'].INDIA.per_100, 2) + ' by the 2024 Lok Sabha leader, and ' + SIR.d(L['2020'].NDA.per_100, 2) + ' against ' + SIR.d(L['2020'].INDIA.per_100, 2) + ' by the 2020 winner. Inside the same constituency, NDA-led booths lost ' + SIR.d(w.pooled_nda_minus_india, 1) + ' more names each than INDIA-led booths, in ' + w.seats_nda_higher + ' of ' + w.seats_compared + ' seats. Of the booths that lost 400 names or more, ' + SIR.d(last.nda_pct, 0) + '% were NDA-led. <a href="../results/">Elections</a>.'],
-    ['Were women removed out of proportion?',
-     'Yes. Women are ' + SIR.pct(fs) + ' of those removed and 47.86% of Bihar\'s population (Census 2011). Their share of the removed is higher than their share of the population in ' + fOver + ' of ' + D.length + ' districts. Sex is recorded on the roll. <a href="../people/">Women, religion, caste</a>.'],
-    ['Which caste groups carried the removals?',
-     'Read from the surname of the father or husband, and set against the 2023 caste survey, ' + G.filter(both).join(' and ') + ' families are removed at or above their population share under both classifications, and ' + G.filter(neither).join(' and ') + ' families below it. The classifications disagree on ' + G.filter(function (g) { return !both(g) && !neither(g); }).join(' and ') + '. <a href="../people/">Women, religion, caste</a>.'],
-    ['How does the Muslim share of removals compare with the population?',
-     'Names classified Muslim are ' + SIR.pct(100 * t.muslim / cls) + ' of removals, and ' + SIR.pct(100 * (t.muslim + t.unknown) / cls) + ' if every unclassified name is counted, against 16.87% of the population in 2011 and 17.70% in the 2023 survey. The census share lies inside that range in ' + inside + ' of ' + D.length + ' districts. <a href="../people/">Women, religion, caste</a>.'],
-    ['Do border constituencies differ from the interior?',
-     'Border constituencies lost ' + SIR.d(rate(border), 2) + ' per 100 electors, the interior ' + SIR.d(rate(interior), 2) + '. <a href="../border/">Border</a>.'],
-    ['Is district prosperity related to removals?',
-     'Across 38 districts, the rank correlation between per-capita district product and removals per 100 electors is ' + SIR.d(SIR.spearman(gd, dr), 2) + '. <a href="../districts/">Districts</a>.'],
-    ['Do reserved seats differ?',
-     'The ' + byR.SC.length + ' SC-reserved seats lost ' + SIR.d(rate(byR.SC), 2) + ' per 100 electors, the ' + byR.ST.length + ' ST-reserved seats ' + SIR.d(rate(byR.ST), 2) + ', and the general seats ' + SIR.d(rate(byR.GEN), 2) + '.'],
-    ['Do removals exceed winning margins?',
-     'In ' + overM.length + ' of ' + withM.length + ' seats the revision removed more names than the 2025 winning margin. <a href="../results/">Elections</a>.'],
-    ['How do the parties\' seats compare?',
-     'Removals per 100 electors in the seats each party won in 2025: ' + ['BJP', 'JD(U)', 'LJP(RV)', 'RJD', 'INC', 'AIMIM'].filter(function (p) { return by25[p]; }).map(function (p) { return p + ' ' + SIR.d(rate(by25[p]), 2) + ' (' + by25[p].length + ' seats)'; }).join(', ') + '.'],
-    ['Does booth size relate to removal intensity?',
-     'Across districts, electors per booth and removals per 100 electors have a rank correlation of ' + SIR.d(SIR.spearman(eb, dr), 2) + '.'],
-    ['Which booths stand out?',
-     SIR.n(b200) + ' booths lost more than 200 names and ' + SIR.n(last.booths) + ' lost 400 or more. Each constituency\'s booths can be sorted in the <a href="../">explorer</a>.']
+    [L('How many names were removed, and where?'),
+     L('{total} across both phases: {p1} in phase 1 and {p2} in phase 2, or {rate} for every 100 electors on the 2025 roll. The rate ranges from {low} per 100 in {low_seat} to {high} in {high_seat}. The highest: {top}. <a href="../">Explorer</a>.', { total: SIR.n(t.total), p1: SIR.n(t.p1), p2: SIR.n(t.p2), rate: SIR.d(100 * t.total / t.electorate_2025, 2), low: SIR.d(ranked[ranked.length - 1].per_100, 1), low_seat: ranked[ranked.length - 1].name, high: SIR.d(ranked[0].per_100, 1), high_seat: ranked[0].name, top: ranked.slice(0, 5).map(function (a) { return a.name + ' (' + SIR.d(a.per_100, 1) + ')'; }).join(', ') })],
+    [L('Did NDA and INDIA ground lose names at the same rate?'),
+     L('No. NDA-held seats lost {nda25} names per 100 electors against {india25} in INDIA-held seats (2025 winners), {nda24} against {india24} by the 2024 Lok Sabha leader, and {nda20} against {india20} by the 2020 winner. Inside the same constituency, NDA-led booths lost {gap} more names each than INDIA-led booths, in {seats_higher} of {seats_compared} seats. Of the booths that lost 400 names or more, {nda_pct}% were NDA-led. <a href="../results/">Elections</a>.', { nda25: SIR.d(AL['2025'].NDA.per_100, 2), india25: SIR.d(AL['2025'].INDIA.per_100, 2), nda24: SIR.d(AL['2024'].NDA.per_100, 2), india24: SIR.d(AL['2024'].INDIA.per_100, 2), nda20: SIR.d(AL['2020'].NDA.per_100, 2), india20: SIR.d(AL['2020'].INDIA.per_100, 2), gap: SIR.d(w.pooled_nda_minus_india, 1), seats_higher: w.seats_nda_higher, seats_compared: w.seats_compared, nda_pct: SIR.d(last.nda_pct, 0) })],
+    [L('Were women removed out of proportion?'),
+     L('Yes. Women are {share} of those removed and 47.86% of Bihar\'s population (Census 2011). Their share of the removed is higher than their share of the population in {over} of {districts} districts. Sex is recorded on the roll. <a href="../people/">Women, religion, caste</a>.', { share: SIR.pct(fs), over: fOver, districts: D.length })],
+    [L('Which caste groups carried the removals?'),
+     L('Read from the surname of the father or husband, and set against the 2023 caste survey, {both} families are removed at or above their population share under both classifications, and {neither} families below it. The classifications disagree on {disagree}. <a href="../people/">Women, religion, caste</a>.', { both: G.filter(both).map(GN).join(L(' and ')), neither: G.filter(neither).map(GN).join(L(' and ')), disagree: G.filter(function (g) { return !both(g) && !neither(g); }).map(GN).join(L(' and ')) })],
+    [L('How does the Muslim share of removals compare with the population?'),
+     L('Names classified Muslim are {low} of removals, and {high} if every unclassified name is counted, against 16.87% of the population in 2011 and 17.70% in the 2023 survey. The census share lies inside that range in {inside} of {districts} districts. <a href="../people/">Women, religion, caste</a>.', { low: SIR.pct(100 * t.muslim / cls), high: SIR.pct(100 * (t.muslim + t.unknown) / cls), inside: inside, districts: D.length })],
+    [L('Do border constituencies differ from the interior?'),
+     L('Border constituencies lost {border} per 100 electors, the interior {interior}. <a href="../border/">Border</a>.', { border: SIR.d(rate(border), 2), interior: SIR.d(rate(interior), 2) })],
+    [L('Is district prosperity related to removals?'),
+     L('Across 38 districts, the rank correlation between per-capita district product and removals per 100 electors is {rho}. <a href="../districts/">Districts</a>.', { rho: SIR.d(SIR.spearman(gd, dr), 2) })],
+    [L('Do reserved seats differ?'),
+     L('The {sc_seats} SC-reserved seats lost {sc_rate} per 100 electors, the {st_seats} ST-reserved seats {st_rate}, and the general seats {gen_rate}.', { sc_seats: byR.SC.length, sc_rate: SIR.d(rate(byR.SC), 2), st_seats: byR.ST.length, st_rate: SIR.d(rate(byR.ST), 2), gen_rate: SIR.d(rate(byR.GEN), 2) })],
+    [L('Do removals exceed winning margins?'),
+     L('In {over} of {seats} seats the revision removed more names than the 2025 winning margin. <a href="../results/">Elections</a>.', { over: overM.length, seats: withM.length })],
+    [L('How do the parties\' seats compare?'),
+     L('Removals per 100 electors in the seats each party won in 2025: {parties}.', { parties: ['BJP', 'JD(U)', 'LJP(RV)', 'RJD', 'INC', 'AIMIM'].filter(function (p) { return by25[p]; }).map(function (p) { return L('{party} {rate} ({seats} seats)', { party: p, rate: SIR.d(rate(by25[p]), 2), seats: by25[p].length }); }).join(', ') })],
+    [L('Does booth size relate to removal intensity?'),
+     L('Across districts, electors per booth and removals per 100 electors have a rank correlation of {rho}.', { rho: SIR.d(SIR.spearman(eb, dr), 2) })],
+    [L('Which booths stand out?'),
+     L('{b200} booths lost more than 200 names and {b400} lost 400 or more. Each constituency\'s booths can be sorted in the <a href="../">explorer</a>.', { b200: SIR.n(b200), b400: SIR.n(last.booths) })]
   ];
   document.getElementById('qas').innerHTML = QA.map(function (q, i) {
     return '<div class="qa"><h3>' + (i + 1) + '. ' + q[0] + '</h3><p>' + q[1] + '</p></div>';
