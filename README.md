@@ -13,7 +13,7 @@ site at [forindia.netlify.app](https://forindia.netlify.app).
 | `/bihar/people/` | Gender, religion as a range, caste under two classifications with bounds |
 | `/bihar/faq/` | Questions and answers: the criticisms put to the analysis, answered from the lists |
 | `/bihar/method/` | Sources, how the lists were prepared, research questions, what an audit needs |
-| [`/hyderabad/`](https://forindia.netlify.app/hyderabad/) | 6,62,063 of 16,57,207 electors struck off in Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura |
+| [`/hyderabad/`](https://forindia.netlify.app/hyderabad/) | The Hyderabad dashboard: 6,62,063 of 16,57,207 electors struck off in Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, in ten tabs |
 | `/hyderabad/explorer/` | Any constituency, any of its 1,158 polling parts |
 | `/hyderabad/people/`, `/parts/`, `/hearings/`, `/faq/`, `/method/` | Rates by age, sex, religion and 2002 linkage within parts; part outliers; hearings; fourteen research questions |
 
@@ -32,7 +32,7 @@ python3 scripts/build_bihar.py        # data/bihar/raw -> data/bihar/*.json
 python3 scripts/build_hyderabad.py    # hyderabad/explorer -> data/hyderabad/*.json
 python3 scripts/check_data.py         # 11 checks, run by CI
 python3 scripts/verify_bihar.py       # recomputes every Bihar figure from the raw files, run by CI
-python3 scripts/check_contrast.py     # colour tokens, both themes, run by CI
+python3 scripts/check_contrast.py     # 72 colour pairs, both themes, run by CI
 python3 -m http.server 8000
 ```
 
