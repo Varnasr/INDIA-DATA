@@ -68,8 +68,12 @@
     <div class="panel"><div class="twrap" tabindex="0" role="region" aria-label="Seats by alliance"><table id="tLabels"></table></div></div>
   </div>
   <p class="finding" id="fLabels"></p>
+  <h3 style="margin-top:1.5rem">Did seats with more removals swing to the NDA?</h3>
+  <p class="sub">If the removals had handed seats to the NDA, the seats INDIA held in 2020 that lost the most names should have gone to the NDA most often in 2025. Here those seats are split into thirds by names removed per 100 electors.</p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Seats INDIA held in 2020, by removals, and how many the NDA won in 2025"><table id="tFlip"></table></div>
+  <p class="finding" id="fFlip"></p>
 
-  <h2>3. Booths within the same seat</h2>
+  <h2 id="within">3. Booths within the same seat</h2>
   <p class="sub">Comparing whole seats mixes politics with geography. Inside one constituency the registration officer, the villages and the pattern of migration are the same for every booth, so comparing booths there avoids that. Here the booths the NDA led in 2024 are compared with the booths INDIA led, seat by seat.</p>
   <div class="kpis" id="kWithin"></div>
   <div class="grid">
@@ -127,6 +131,32 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   ], rows, { sort: 'y', dir: 1 });
   var gaps = years.map(function (y) { return LBL[y].NDA.per_100 - LBL[y].INDIA.per_100; }), p100 = acs.map(function (a) { return a.per_100; });
   document.getElementById('fLabels').innerHTML = L('<b>NDA seats lost more names per elector than INDIA seats under all three labellings</b>, by {lo} to {hi} per 100 electors. Seats held by neither alliance, most of them in Seemanchal, lost the most of all.', { lo: SIR.d(Math.min.apply(null, gaps), 2), hi: SIR.d(Math.max.apply(null, gaps), 2) });
+
+  (function () {
+    var thirds = function (rows) {
+      var r = rows.slice().sort(function (x, y) { return x.per_100 - y.per_100; }), n = r.length;
+      return [r.slice(0, Math.round(n / 3)), r.slice(Math.round(n / 3), Math.round(2 * n / 3)), r.slice(Math.round(2 * n / 3))];
+    };
+    var held = acs.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025; }), T = thirds(held);
+    var names = [L('Fewest removals'), L('Middle'), L('Most removals')];
+    var rows = T.map(function (g, i) {
+      var nda = g.filter(function (a) { return a.al2025 === 'NDA'; }).length;
+      return { k: i, band: names[i], seats: g.length, per: SIR.sum(g, 'per_100') / g.length, lo: Math.min.apply(null, g.map(function (a) { return a.per_100; })), hi: Math.max.apply(null, g.map(function (a) { return a.per_100; })), nda: nda, share: 100 * nda / g.length };
+    });
+    SIR.table(document.getElementById('tFlip'), [
+      { k: 'band', label: L('Seats INDIA held in 2020'), left: true },
+      { k: 'seats', label: L('Seats') },
+      { k: 'per', label: L('Removed per 100, average'), fmt: function (v, r) { return SIR.d(v, 1) + ' (' + SIR.d(r.lo, 1) + '–' + SIR.d(r.hi, 1) + ')'; } },
+      { k: 'nda', label: L('Won by the NDA in 2025') },
+      { k: 'share', label: L('Share won by the NDA'), fmt: function (v) { return SIR.pct(v); } }
+    ], rows, { sort: 'k', dir: 1 });
+    var p1 = rows[0].share / 100, p3 = rows[2].share / 100, se = Math.sqrt(p1 * (1 - p1) / rows[0].seats + p3 * (1 - p3) / rows[2].seats), d = 100 * (p3 - p1);
+    document.getElementById('fFlip').innerHTML = L('<b>The NDA won {lo} of the INDIA seats with the fewest removals and {hi} of those with the most.</b> The gap is {d} points, or about {k} seats.', {
+      lo: SIR.pct(rows[0].share), hi: SIR.pct(rows[2].share), d: SIR.d(Math.abs(d), 0), k: Math.round(Math.abs(p3 - p1) * rows[2].seats) }) + ' ' +
+      (Math.abs(d) < 2 * 100 * se ? L('Groups of this size differ by that much by chance often, so the table shows no clear link between removals and seats changing hands.') : L('That is more than groups of this size would usually differ by chance.')) + ' ' +
+      (rows[0].share > 50 ? L('Even where removals were lowest, the NDA took most of the seats INDIA held, which shows how large the swing across the state was.') + ' ' : '') +
+      L('Inside each seat, the booths show the removals falling more on NDA ground. <a href="#within">Booths within the same seat</a>.');
+  })();
 
   var w = s.within_seat_2024;
   document.getElementById('kWithin').innerHTML = [
