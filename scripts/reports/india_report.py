@@ -41,7 +41,7 @@ AD = N['after_draft']
 
 # ------------------------------------------------------------ cover
 R.cover('Special Intensive Revision 2025-26', 'India: %s names left off the draft rolls' % crore(T['removed']),
-        'The reasons recorded for every removal, state by state: who was removed by sex where states published it, and what goes with the removal rate',
+        'The reasons recorded for removals in each state, who was removed by sex where states published it, and what goes with the removal rate',
         [('names left off the draft rolls in %d states and union territories' % T['states'], indian(T['removed'])),
          ('of those split by reason entered as shifted, absent or other', pct(T['shares']['shifted_absent_other'])),
          ('entered as dead', pct(T['shares']['dead'])),
@@ -60,7 +60,7 @@ R.p('Every state gave a reason for most of its removals. Of the %s names it spli
     'Deaths are about one in five. The other four in five rest on an officer\'s entry that the elector was not where the roll placed them, or was on it twice.'
     % (crore(T['removed'] - T['unsplit']), crore(T['dead']), pct(T['shares']['dead']), crore(T['shifted_absent_other']), pct(T['shares']['shifted_absent_other']),
        crore(T['duplicate']), pct(T['shares']['duplicate'])))
-R.p('A reason is what an officer entered after a visit or its absence. It is not a finding. The figures cannot say how many entries were wrong.')
+R.p('A reason is what an officer wrote down after a visit, or after failing to find the elector, and nobody has checked it. The figures cannot say how many entries were wrong.')
 
 R.h2('State by state, on one map')
 BIN, FILL = [8, 12, 16, 20], ['#deebf7', '#9ecae1', '#2878b3', '#1c5f96', '#08306b']
@@ -84,7 +84,7 @@ for i, (l, f) in enumerate(zip(labs, FILL)):
     ax.add_patch(plt.Rectangle((5.2, -5.2 - i * 0.42), 0.3, 0.3, facecolor=f))
     ax.text(5.6, -5.05 - i * 0.42, l, va='center', fontsize=7)
 ax.set_title('Removed per 100 electors', fontsize=9, fontweight='bold', loc='left')
-R.figure(fig, 'Figure 1. One tile per state or union territory, placed roughly where it lies; the tiles carry no boundaries. Grey: not in the revision (Jammu and Kashmir, Ladakh, Himachal Pradesh, Assam), no draft roll yet (Tripura), or no exact roll before it (Chandigarh).', width=13)
+R.figure(fig, 'Figure 1. One tile per state or union territory, placed roughly where it lies, so the tiles show no borders. Grey tiles are states not in the revision (Jammu and Kashmir, Ladakh, Himachal Pradesh, Assam), with no draft roll yet (Tripura), or with no exact roll from before it (Chandigarh).', width=13)
 
 R.h2('The rolls against the adult population')
 ADU = N['adults']
@@ -155,7 +155,7 @@ R.table(['State or UT', 'Phase', 'Removed', 'Per 100', 'Dead', 'Shifted, absent,
         [[s['state'], s['phase'], fmt(s['removed']), '%.1f' % s['per_100'] if s['per_100'] is not None else '–', fmt(s['dead']), fmt(s['shifted_absent_other']), fmt(s['duplicate']),
           SPN[s['split']], s['figures'] or '–'] for s in sorted(S, key=lambda s: -(s['removed'] or 0))],
         widths=[3.6, 1.1, 2.1, 1.3, 1.9, 2.3, 1.8, 1.3, 1.5], right={1, 2, 3, 4, 5, 6}, size=7.5)
-R.p('Split: Full, the reasons account for the total (within rounding); Short, the reasons leave some names unexplained (%s); None, no split was found (%s). Figures: rounded where the state published in lakh or crore (%d states).'
+R.p('Under Split, Full means the reasons account for the total within rounding, Short means they leave some names unexplained (%s), and None means no split was found (%s). Under Figures, rounded means the state published in lakh or crore (%d states).'
     % (andj(short), andj(none), len(rounded)))
 
 R.h2('Women among the removed')
@@ -173,7 +173,7 @@ ax.set_yticklabels([g['state'] for g in G], fontsize=8)
 ax.set_xlim(40, 60)
 ax.legend(fontsize=7, frameon=False, loc='lower right')
 style_axes(ax, 'Women\'s share of removals and of the roll')
-R.figure(fig, 'Figure 5. States that published a split by sex. Bihar is compared with women\'s share of the 2011 population.', width=14)
+R.figure(fig, 'Figure 5. States that published a split by sex. Bihar\'s roll before the revision is its draft roll plus the names removed at the draft, by sex.', width=14)
 R.p('Only ten states have published their removals by sex, or their roll by sex before the revision and on the draft. In %d of the ten, women are a larger share of the names removed than of the roll, by up to %.1f points in %s. %s %s within a point of even, and %s runs the other way, by %.1f points. '
     'Most phase 3 states have published no split by sex, so this is not the national picture.'
     % (len(gOver), G[0]['gap'], G[0]['state'], andj([g['state'] for g in gEven]), 'is' if len(gEven) == 1 else 'are',
@@ -202,7 +202,7 @@ R.p('Across all states the removal rate goes most with the %s (%.2f), but that d
     'The Muslim share of a state\'s population shows no consistent relationship: %.2f across all states, %.2f in phase 2 and %.2f in phase 3. Among the larger states, the share entered as enrolled more than once goes most with %s (%.2f).'
     % (CL[top['key']], top['per_100_all'], top['per_100_phase2'], top['per_100_phase3'], andj(p3), top['n_per_100_phase3'],
        mus['per_100_all'], mus['per_100_phase2'], mus['per_100_phase3'], CL[dupTop['key']], dupTop['duplicate_big']))
-R.p('States on an international border removed fewer names, not more: a median of %.1f per 100 electors across %d border states, against %.1f across %d interior states. None of these relationships says who was removed within a state; a state-level relationship is not a finding about individuals.'
+R.p('States on an international border removed fewer names than interior states. The typical border state removed %.1f per 100 electors across %d states, and the typical interior state %.1f across %d. None of these relationships says who was removed inside a state, because a pattern across states tells us nothing about individuals.'
     % (B['per_100_yes'], B['n_per_100_yes'], B['per_100_no'], B['n_per_100_no']))
 
 R.h2('After the final rolls')
@@ -235,7 +235,7 @@ R.table(['State or UT', 'Removed at draft', 'Added after', 'Removed after', 'Fin
           '%.1f' % s['net_fall_per_100'] if s['net_fall_per_100'] is not None else '–', RCN[s['reconciles']]]
          for s in sorted([s for s in S if s['electors_final'] is not None], key=lambda s: -s['removed'])],
         widths=[3.6, 2.2, 2.0, 2.0, 2.2, 1.5, 1.7, 2.0], right={1, 2, 3, 4, 5, 6}, size=7.5)
-R.p('Figures: adds up, the draft plus additions less removals equals the final roll; net only, the state published the draft and final rolls but not the additions and removals behind the difference; does not add up, the published figures do not reconcile (%s). '
+R.p('Under Figures, adds up means the draft plus additions less removals equals the final roll, net only means the state published the draft and final rolls but not the additions and removals behind the difference, and does not add up means the published figures do not match (%s). '
     'Removals after the draft carry no reason in any state except Bihar, so they are outside every figure by reason in this report. %s have not yet published a final roll.'
     % (andj([s['state'] for s in S if s['reconciles'] == 'no']), andj(FN['waiting'])))
 
@@ -251,8 +251,8 @@ R.numbered([
 ])
 
 R.h1('Method and sources')
-R.p('The All India figures are the Chief Electoral Officers\' own, published when each draft roll came out: from their press notes where those could be read (%s), and otherwise as reported in the press. Bihar\'s row is counted from the deletion lists. '
-    'The reasons are grouped into the three every state reported. The state rows add to %s removed, against the %s reported nationally on 30 September 2026; the difference is rounding. Each row\'s source is listed on the method page of the site and in the downloadable table.'
+R.p('The All India figures are the Chief Electoral Officers\' own, published when each draft roll came out. They are taken from the press notes where those could be read (%s) and from press reports otherwise. Bihar\'s row is counted from the deletion lists. '
+    'The reasons are grouped into the three every state reported. The state rows add up to %s removed, against the %s reported nationally on 30 September 2026, and the difference is rounding. Each row\'s source is listed on the method page of the site and in the downloadable table.'
     % (andj([s['state'] for s in S if s['source'] == 'primary']), crore(T['removed']), 'about 13.3 crore'))
 R.p('No name, EPIC number or address is published.')
 

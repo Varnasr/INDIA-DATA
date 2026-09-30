@@ -195,7 +195,7 @@ f = xd.groupby('district')[['tf', 'tm']].sum()
 same('districts', len(f), 38)
 same('women\'s share of removals, every district', int(sum(abs(100 * r.tf / (r.tf + r.tm) - ID[k]['female_share_deleted']) < 0.05 for k, r in f.iterrows() if k in ID)), 38)
 same('districts where women are over-represented among the removed',
-     int(sum(100 * r.tf / (r.tf + r.tm) > ID[k]['female_share_population_2011'] for k, r in f.iterrows())), 38)
+     int(sum(100 * r.tf / (r.tf + r.tm) > ID[k]['female_share_roll'] for k, r in f.iterrows())), 38)
 
 print('Reasons for removal')
 # Read the counts file with the csv module, not pandas, and check it three

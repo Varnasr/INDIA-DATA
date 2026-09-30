@@ -17,13 +17,13 @@ import sys
 ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
 META = {
     'india': ('All India SIR: full report',
-              'The All India report on the Special Intensive Revision: the reasons recorded for every removal in each state and union territory, women among the removed, what goes with the removal rate, and what the Election Commission should do.',
+              'The All India report on the Special Intensive Revision. It covers the reasons recorded for removals in each state and union territory, women among the removed, what goes with the removal rate, and what the Election Commission should do.',
               'sir-india-report.pdf'),
     'bihar': ('Bihar SIR 2025: full report',
-              'The full report on the Bihar Special Intensive Revision of 2025: Bihar as a whole, a chapter for each of the 38 districts, what the lists show and do not, and what the Election Commission should do.',
+              'The full report on the Bihar Special Intensive Revision of 2025. It covers Bihar as a whole, gives each of the 38 districts a chapter, sets out what the lists show and what they cannot, and ends with what the Election Commission should do.',
               'bihar-sir-2025-report.pdf'),
     'hyderabad': ('Hyderabad Old City SIR 2026: full report',
-                  'The full report on the 2026 Special Intensive Revision in five Old City constituencies of Hyderabad: the five together, a chapter for each constituency, and what the Election Commission should do before the final roll.',
+                  'The full report on the 2026 Special Intensive Revision in five Old City constituencies of Hyderabad. It covers the five together, gives each constituency a chapter, and ends with what the Election Commission should do before the final roll.',
                   'hyderabad-old-city-sir-2026-report.pdf'),
 }
 

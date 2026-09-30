@@ -137,7 +137,7 @@ function closing(pres, K, P, head, lines) {
 function bihar() {
   const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json'), FB = J('bihar/final.json'), TS = J('bihar/tests.json');
   const t = S.totals, DI = ID.districts;
-  const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · Varna Sri Raman · aggregates only; no names or EPIC numbers' };
+  const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · Varna Sri Raman · totals only, never names or EPIC numbers' };
   const AL = { NDA: 'E67E22', INDIA: '1E8449', Other: '8E7CC3' };
   const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'Varna Sri Raman'; pres.title = 'Bihar SIR 2025';
   const K = kit(pres, P);
@@ -148,7 +148,7 @@ function bihar() {
   const share = (a) => 100 * a.total / a.votes2025, ratio = (a) => a.total / a.margin2025;
   const fem = 100 * t.female / (t.female + t.male), p100 = 100 * t.total / t.electorate_2025;
   const cls = t.hindu + t.muslim + t.unknown, mlo = 100 * t.muslim / cls, mhi = 100 * (t.muslim + t.unknown) / cls;
-  const fOver = DI.filter((d) => d.female_share_deleted > d.female_share_population_2011);
+  const fOver = DI.filter((d) => d.female_share_deleted > d.female_share_roll);
   const above = DI.filter((d) => d.muslim_share_deleted_low > d.muslim_share_population_2011 + 1).sort((a, b) => (b.muslim_share_deleted_low / b.muslim_share_population_2011) - (a.muslim_share_deleted_low / a.muslim_share_population_2011));
   const inside = DI.filter((d) => d.muslim_share_deleted_low <= d.muslim_share_population_2011 && d.muslim_share_population_2011 <= d.muslim_share_deleted_high);
   const rankD = DS.slice().sort((a, b) => b.per_100 - a.per_100), rankA = A.slice().sort((a, b) => b.per_100 - a.per_100);
@@ -195,7 +195,7 @@ function bihar() {
   K.right(s, [
     'Shifted ' + indian(RT.shifted) + ', dead ' + indian(RT.dead) + ', absent ' + indian(RT.absent) + ', already enrolled ' + indian(RT.already_enrolled) + '.',
     indian(xsS) + ' of the ' + indian(xsF) + ' more women than men removed in phase 1 were entered as shifted.',
-    'A reason is an officer\'s entry after a visit or its absence, not a finding. The ' + indian(t.p2) + ' phase 2 removals carry no reason in the lists.',
+    'A reason is what the officer wrote down, and nobody checked it. The ' + indian(t.p2) + ' phase 2 removals have no reason in the lists.',
   ], 13.5);
   s.addNotes('Counted from the row-level phase 1 list as entered. The counts agree with the booth list in all ' + indian(t.booths) + ' booths, and the women and men with the Chief Electoral Officer\'s phase 1 figures in every constituency.');
 
@@ -204,7 +204,7 @@ function bihar() {
     K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'percentStacked', chartColors: ['dead', 'shifted', 'absent', 'already_enrolled'].map((k) => RCol[k]), showLegend: true, valAxisHidden: true })));
   K.right(s, [
     'Dead is ' + pct(100 * RS.by_age.dead[RS.bands.length - 1] / ageTot[RS.bands.length - 1]) + ' of the removed aged 80 and over, and ' + pct(100 * RS.by_age.dead[0] / ageTot[0]) + ' of those aged 18 to 24.',
-    'Women are ' + pct(100 * yW / yS) + ' of those aged 18 to 29 marked shifted, and about half of those aged 50 and over: the pattern women who move on marriage would produce.',
+    'Women are ' + pct(100 * yW / yS) + ' of those aged 18 to 29 marked shifted, and about half of those aged 50 and over. Marriage could produce that number, but the district pattern does not match it.',
     'The lists do not show whether any of them were enrolled again where they now live.',
   ], 13.5);
 
@@ -212,15 +212,15 @@ function bihar() {
   s.addChart(pres.charts.BAR, ['NDA', 'INDIA', 'Other'].map((al) => ({ name: al, labels: ['Dead', 'Shifted', 'Absent', 'Already enrolled'], values: ['r_dead', 'r_shifted', 'r_absent', 'r_enrolled'].map((k) => withM.filter((a) => a[k] > a.margin2025 && a.al2025 === al).length) })),
     K.chart(Object.assign({}, K.left, { w: 6.2, barDir: 'col', barGrouping: 'stacked', chartColors: [AL.NDA, AL.INDIA, AL.Other], showLegend: true, showTitle: true, title: 'Seats, by the alliance that won in 2025' })));
   K.table(s, ['District', 'Absent', 'Shifted', 'Dead'], RD.slice(0, 8).map((d) => [d.district, pct(100 * d.absent / dsum(d)), pct(100 * d.shifted / dsum(d)), pct(100 * d.dead / dsum(d))]), 7.1, TOP, W - M - 7.1, [2.2, 1.1, 1.1, 1.23], 12);
-  s.addNotes('Absent rests on the least of the four reasons: it records only that the elector was not found. Already enrolled is a removal only if the other entry is the same person. Shifted exceeds the margin in ' + rOver('r_shifted') + ' seats, dead in ' + rOver('r_dead') + ', already enrolled in ' + rOver('r_enrolled') + '.');
+  s.addNotes('Absent rests on the least of the four reasons, because it records only that the officer did not find the elector. Already enrolled is a fair removal only if the other entry is the same person. Shifted exceeds the margin in ' + rOver('r_shifted') + ' seats, dead in ' + rOver('r_dead') + ', already enrolled in ' + rOver('r_enrolled') + '.');
 
   const TD = TS.deaths, TM = TS.marriage;
   s = K.slide('Reasons', 'The names entered as dead equal ' + TD.years_of_deaths.toFixed(1) + ' years of adult deaths, but ' + pct(TD.women_share_dead) + ' of them are women, against ' + pct(TD.women_share_expected) + ' of deaths', 'Two reasons set against the death and migration records');
   K.stats(s, [[TD.years_of_deaths.toFixed(1) + ' years', 'of adult deaths at 2024 rates, in the ' + lakh(TD.dead_removed) + ' entered as dead'], [pct(TD.women_share_dead), 'of those entered as dead are women; ' + pct(TD.women_share_expected) + ' of adult deaths are'], [indian(TM.excess), 'more young women than men marked shifted: ' + TM.excess_years.toFixed(2) + ' of a year\'s marriage moves']], TOP - 0.2, 1.55);
   K.bullets(s, [
     'Ages fit: ' + pct(TD.over70_share_dead) + ' of those entered as dead (25 and over) were 70 or older, against ' + pct(TD.over70_share_registered) + ' of registered deaths.',
-    'Registered deaths are ' + pct(TD.registered_women_share) + ' women, so women\'s deaths are registered less often and may have stayed on the roll; or women still living were entered as dead.',
-    'Marriage fits the number of young women marked shifted, not where: districts with more marriage movement have a ' + (TM.rho_share < 0 ? 'smaller' : 'larger') + ' share of women among them (rank correlation ' + TM.rho_share.toFixed(2) + ').',
+    'Women are only ' + pct(TD.registered_women_share) + ' of registered deaths, so their deaths are registered less often and may have stayed on the roll. The other possibility is that women who are alive were entered as dead.',
+    'Marriage can explain how many young women were marked shifted, but not where. Districts with more marriage movement have a ' + (TM.rho_share < 0 ? 'smaller' : 'larger') + ' share of women among them (rank correlation ' + TM.rho_share.toFixed(2) + ').',
   ], M, TOP + 1.6, W - 2 * M, CH - 1.6, 14);
   s.addNotes('Deaths: SRS Statistical Report 2024, death rates by age and sex weighted by the 2024 population by age, ages 20 and over; CRS 2024 for population and registered deaths. Marriage: Census 2011 table D-3, women who moved on marriage in the ten years before the census, counted where they arrived.');
 
@@ -237,11 +237,11 @@ function bihar() {
     { name: 'Net fall at the final roll exceeds the margin', labels: ['NDA', 'INDIA', 'Other'], values: ['NDA', 'INDIA', 'Other'].map((al) => FM.net_by_alliance[al] || 0) },
   ], K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'clustered', chartColors: [GREY, 'E67E22', P.accent], showValue: true, dataLabelPosition: 'outEnd', showLegend: true, valAxisHidden: true })));
   K.right(s, [
-    'After the draft, ' + lakh(FT.added) + ' names were added on claims and ' + lakh(FT.removed_after) + ' removed on objections: a net rise of ' + lakh(FT.net_after) + ', ' + pct(FT.made_up_pct) + ' of the ' + lakh(FT.p1) + ' removed at the draft.',
+    'After the draft, ' + lakh(FT.added) + ' names were added on claims and ' + lakh(FT.removed_after) + ' removed on objections, a net rise of ' + lakh(FT.net_after) + ', or ' + pct(FT.made_up_pct) + ' of the ' + lakh(FT.p1) + ' removed at the draft.',
     'The final roll was ' + lakh(FT.net_fall_press) + ' smaller than the roll before the revision, and smaller in every seat.',
     'Women were ' + pct(FT.women_share_p1) + ' of those removed at the draft and ' + pct(FT.women_share_added) + ' of those added; their share of the roll fell from ' + pct(FT.women_share_before) + ' to ' + pct(FT.women_share_final) + '.',
   ], 13.5);
-  s.addNotes('Source: Format 4B, the Election Commission\'s return for the final roll, which matches the Chief Electoral Officer\'s press note of 30 September 2025. The rise from draft to final counts new electors as well as names put back; the Commission has not said how many of those added had been removed at the draft. A seat\'s roll before is its draft plus the names on its phase 1 list. Of the ' + indian(FT.removed_after) + ' removed after the draft, ' + indian(FT.r_unstated) + ' carry no reason.');
+  s.addNotes('Source: Format 4B, the Election Commission\'s return for the final roll, which matches the Chief Electoral Officer\'s press note of 30 September 2025. New electors are part of the rise from draft to final, and the Commission has not said how many of those added had been removed at the draft. A seat\'s roll before is its draft plus the names on its phase 1 list. Of the ' + indian(FT.removed_after) + ' removed after the draft, ' + indian(FT.r_unstated) + ' carry no reason.');
 
   s = K.slide('Elections', lakh(t.total) + ' names removed, against a combined NDA winning margin of ' + lakh(mNDA), 'Names removed set against the sum of the winning margins in each group of seats, in lakh');
   const grp = ['All ' + withM.length + ' seats', 'The NDA\'s ' + nda.length + ' wins', 'The ' + took.length + ' seats the NDA took from INDIA'];
@@ -250,11 +250,11 @@ function bihar() {
     { name: 'Combined winning margins', labels: grp, values: [mAll, mNDA, tookM].map((v) => +(v / 1e5).toFixed(1)) },
   ], K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'clustered', chartColors: [P.accent, GREY], showValue: true, dataLabelPosition: 'outEnd', showLegend: true, valAxisHidden: true })));
   K.right(s, [
-    'Across all ' + withM.length + ' seats, ' + lakh(t.total) + ' names were removed; the margins add up to ' + lakh(mAll) + '.',
+    'Across all ' + withM.length + ' seats, ' + lakh(t.total) + ' names were removed, and the margins add up to ' + lakh(mAll) + '.',
     'The NDA won ' + nda.length + ' seats with a combined margin of ' + lakh(mNDA) + '. In ' + ndaO.length + ' of them the removals exceeded the margin.',
     'In the ' + took.length + ' seats the NDA took from INDIA, ' + lakh(tookRem) + ' names were removed against combined margins of ' + lakh(tookM) + '.',
   ]);
-  s.addNotes('A combined margin is the sum of each seat\'s margin of victory. The comparison measures size only; the lists do not say how the removed would have voted.');
+  s.addNotes('A combined margin is the sum of each seat\'s margin of victory. The comparison measures size only. The lists cannot say how the removed would have voted.');
 
   s = K.slide('Elections', 'The twelve seats where removals were largest relative to the margin', 'Names removed against the 2025 winning margin');
   K.table(s, ['Constituency', 'District', 'Won by', 'Margin', 'Names removed', '× margin', '% of votes polled'],
@@ -285,14 +285,14 @@ function bihar() {
   K.right(s, [
     'Under each of the three groupings, NDA seats lost ' + Math.min(...gapsA).toFixed(2) + ' to ' + Math.max(...gapsA).toFixed(2) + ' more names per 100 electors than INDIA seats.',
     'Seats held by neither alliance, most of them in Seemanchal, lost the most: ' + LB['2020'].Other.per_100.toFixed(2) + ' per 100 by the 2020 winner.',
-    'A seat\'s winner says how most of its voters voted, not how the removed voted.',
+    'Who won a seat says nothing about how its removed electors voted.',
   ]);
 
   s = K.slide('Elections', 'Inside the same seat, booths the NDA led in 2024 lost ' + Wt.pooled_nda_minus_india.toFixed(1) + ' more names each', 'Booths compared with other booths in their own constituency, where the officer, the villages and the migration are the same');
   K.stats(s, [['+' + Wt.pooled_nda_minus_india.toFixed(1), 'more names per NDA-led booth than INDIA-led, same seat'], [Wt.seats_nda_higher + ' of ' + Wt.seats_compared, 'seats where NDA-led booths lost more'], [Wt.seats_india_higher + ' of ' + Wt.seats_compared, 'seats where INDIA-led booths lost more'], [indian(Wt.booths), 'booths compared']], TOP, 1.5, 4);
   s.addChart(pres.charts.BAR, [{ name: 'NDA-led share of booths', labels: F5.map((f) => ['Lightest', 'Second', 'Middle', 'Fourth', 'Heaviest'][f.fifth - 1] + ' fifth'), values: F5.map((f) => f.nda_pct) }],
     K.chart({ x: M, y: TOP + 1.75, w: 7.7, h: CH - 1.75, barDir: 'col', chartColors: [AL.NDA], showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0"%"', valAxisHidden: true, valAxisMinVal: 50, showTitle: true, title: 'Share of booths the NDA led, by fifth of removals within each seat' }));
-  K.bullets(s, ['Rank each seat\'s booths into fifths by names removed. The NDA led ' + pct(F5[0].nda_pct) + ' of the lightest fifth and ' + pct(F5[4].nda_pct) + ' of the heaviest.', 'Every booth holds voters of both sides, so this is where removals fell, not whose votes they were.'], 8.65, TOP + 1.9, W - M - 8.65, CH - 1.9, 13);
+  K.bullets(s, ['Rank each seat\'s booths into fifths by names removed. The NDA led ' + pct(F5[0].nda_pct) + ' of the lightest fifth and ' + pct(F5[4].nda_pct) + ' of the heaviest.', 'Every booth has voters on both sides, so this shows where removals fell and says nothing about whose votes they were.'], 8.65, TOP + 1.9, W - M - 8.65, CH - 1.9, 13);
 
   const byParty = {}; A.forEach((a) => { (byParty[a.win2025] = byParty[a.win2025] || []).push(a); });
   const parties = Object.keys(byParty).filter((p) => byParty[p].length >= 4).sort((a, b) => per100(byParty[b]) - per100(byParty[a]));
@@ -310,17 +310,17 @@ function bihar() {
   const ALS = ['NDA', 'INDIA', 'Other'];
   K.table(s, ['2020 winner → 2025 winner', ...ALS.map((a) => a + ' in 2025')], ALS.map((a20) => [a20 + ' in 2020', ...ALS.map((a25) => { const xs = A.filter((a) => a.al2020 === a20 && a.al2025 === a25); return xs.length ? xs.length + ' seats · ' + per100(xs).toFixed(2) : '–'; })]),
     M, TOP, 7.6, [2.8, 1.6, 1.6, 1.6], 13);
-  K.right(s, ['Seats the NDA gained lost ' + per100(gained).toFixed(2) + ' per 100 electors; seats it held lost ' + per100(held).toFixed(2) + '.', 'Each cell: number of seats, then names removed per 100 electors.']);
+  K.right(s, ['Seats the NDA gained lost ' + per100(gained).toFixed(2) + ' per 100 electors, and seats it held lost ' + per100(held).toFixed(2) + '.', 'Each cell gives the number of seats, then names removed per 100 electors.']);
 
   // ---- Women, religion, caste
-  const gaps = DI.slice().sort((a, b) => (b.female_share_deleted - b.female_share_population_2011) - (a.female_share_deleted - a.female_share_population_2011));
-  s = K.slide('Women, religion, caste', 'Women are ' + pct(fem) + ' of those removed and 47.86% of the population', 'Over-represented in ' + fOver.length + ' of ' + DI.length + ' districts; the ten with the widest gap');
+  const gaps = DI.slice().sort((a, b) => (b.female_share_deleted - b.female_share_roll) - (a.female_share_deleted - a.female_share_roll));
+  s = K.slide('Women, religion, caste', 'Women are ' + pct(fem) + ' of those removed and ' + pct(t.female_share_roll) + ' of the roll they were removed from', 'Over-represented in ' + fOver.length + ' of ' + DI.length + ' districts. The ten with the widest gap are shown');
   const g10 = gaps.slice(0, 10).reverse();
   s.addChart(pres.charts.BAR, [
-    { name: 'Women, % of population 2011', labels: g10.map((d) => d.district), values: g10.map((d) => +d.female_share_population_2011.toFixed(1)) },
+    { name: 'Women, % of the roll before the revision', labels: g10.map((d) => d.district), values: g10.map((d) => +d.female_share_roll.toFixed(1)) },
     { name: 'Women, % of names removed', labels: g10.map((d) => d.district), values: g10.map((d) => +d.female_share_deleted.toFixed(1)) },
   ], K.chart(Object.assign({}, K.left, { barDir: 'bar', barGrouping: 'clustered', chartColors: [GREY, 'AF3B6E'], showLegend: true, valAxisMinVal: 40, valAxisMaxVal: 65 })));
-  const gv = DI.map((d) => d.female_share_deleted - d.female_share_population_2011);
+  const gv = DI.map((d) => d.female_share_deleted - d.female_share_roll);
   K.right(s, [
     indian(t.female) + ' women and ' + indian(t.male) + ' men were removed, ' + indian(t.female - t.male) + ' more women.',
     'The gap runs from ' + Math.min(...gv).toFixed(1) + ' to ' + Math.max(...gv).toFixed(1) + ' points by district.',
@@ -330,11 +330,11 @@ function bihar() {
 
   s = K.slide('Women, religion, caste', 'Muslim-name electors are ' + pct(mlo) + ' to ' + pct(mhi) + ' of the removed, against 16.87% of the population', 'The roll records no religion. The lists classify names as Hindu, Muslim or unclassified, so the share is a range');
   K.stats(s, [[pct(mlo) + ' to ' + pct(mhi), 'Muslim-name share of removals: classified names only, then adding every unclassified name', { size: 24 }], ['16.87%', 'Muslim share of the population, 2011 census'], ['17.70%', 'Muslim share in the 2023 Bihar caste survey'], [pct(100 * t.unknown / cls), 'of removed names unclassified']], TOP, 1.9, 2, M, 6.2);
-  K.right(s, ['Statewide, the range contains the population share.', 'District by district it does not: the census share lies inside the range in ' + inside.length + ' of ' + DI.length + ' districts.', 'In the rest, the classified share alone is above the census share. Most of those gaps are within the 0.83-point rise in the Muslim share since 2011.'], 13.5);
+  K.right(s, ['Statewide, the range contains the population share.', 'District by district it often does not. The census share lies inside the range in ' + inside.length + ' of ' + DI.length + ' districts.', 'In the rest, the classified share alone is above the census share. Most of those gaps are smaller than the 0.83-point rise in the Muslim share since 2011.'], 13.5);
 
   s = K.slide('Women, religion, caste', 'In ' + above.length + ' districts the Muslim-name share of removals is more than a point above the census share', 'Counting only names classified Muslim, the low end of the range');
   K.table(s, ['District', 'Census 2011', 'Removals, low', 'Removals, high', 'Low ÷ census'], above.map((d) => [d.district, pct(d.muslim_share_population_2011), pct(d.muslim_share_deleted_low), pct(d.muslim_share_deleted_high), (d.muslim_share_deleted_low / d.muslim_share_population_2011).toFixed(2)]), M, TOP, 7.4, [2.2, 1.3, 1.3, 1.3, 1.3], 13);
-  K.right(s, ['All ' + above.length + ' lie in south and central Bihar, where Muslims are a small minority.', 'Muslims in Bihar are younger than average, so their share of electors is below their share of population. That would widen these gaps, not close them.', 'Migration into Patna and errors in classifying names could narrow them.'], 13.5);
+  K.right(s, ['All ' + above.length + ' lie in south and central Bihar, where Muslims are a small minority.', 'Muslims in Bihar are younger than average, so their share of electors is below their share of the population, which would make these gaps wider.', 'Migration into Patna and mistakes in classifying names could make them narrower.'], 13.5);
 
   const cg = ID.caste.guardian, G = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'];
   const up = G.filter((g) => g !== 'Muslim' && cg.A.groups[g].ratio_to_survey >= 1 && cg.B.groups[g].ratio_to_survey >= 1), down = G.filter((g) => g !== 'Muslim' && cg.A.groups[g].ratio_to_survey < 1 && cg.B.groups[g].ratio_to_survey < 1);
@@ -380,10 +380,10 @@ function bihar() {
 
   // ---- Questions
   const fq = [
-    ['Were most of the removed not simply dead, or moved away?', 'Not most. Of the ' + indian(RS.total) + ' phase 1 removals, ' + pct(rsh('shifted')) + ' were entered as shifted, ' + pct(rsh('dead')) + ' dead, ' + pct(rsh('absent')) + ' absent and ' + pct(rsh('already_enrolled')) + ' already enrolled. Each is an officer\'s entry, not a finding; the ' + indian(RT.absent) + ' marked absent rest on the least: the entry records only that the elector was not found.'],
-    ['Did the removals exceed the margins?', 'Yes, in ' + over.length + ' of ' + withM.length + ' constituencies, and in ' + tookO.length + ' of the ' + took.length + ' seats the NDA took from INDIA. That does not mean each result would have been different; it means the change to the roll was larger than the decision at the ballot box.'],
-    ['Did NDA seats not lose more names than INDIA seats?', 'They did: ' + LB['2020'].NDA.per_100.toFixed(2) + ' per 100 electors against ' + LB['2020'].INDIA.per_100.toFixed(2) + ' by the 2020 winner, and NDA-led booths lost ' + Wt.pooled_nda_minus_india.toFixed(1) + ' more names each than INDIA-led booths in the same seat. A booth\'s leader says how most voters voted, not how the removed voted.'],
-    ['Why are women over-represented?', 'Women are ' + pct(fem) + ' of those removed and 47.86% of the population, over-represented in ' + fOver.length + ' of ' + DI.length + ' districts. ' + indian(xsS) + ' of the ' + indian(xsF) + ' more women than men removed in phase 1 were entered as shifted, and ' + pct(100 * yW / yS) + ' of those marked shifted aged 18 to 29 are women.'],
+    ['Were most of the removed not simply dead, or moved away?', 'Most were not. Of the ' + indian(RS.total) + ' phase 1 removals, ' + pct(rsh('shifted')) + ' were entered as shifted, ' + pct(rsh('dead')) + ' dead, ' + pct(rsh('absent')) + ' absent and ' + pct(rsh('already_enrolled')) + ' already enrolled. Each is what the officer wrote down, and nobody checked it. The ' + indian(RT.absent) + ' marked absent rest on the least, because the entry records only that the officer did not find the elector.'],
+    ['Did the removals exceed the margins?', 'Yes, in ' + over.length + ' of ' + withM.length + ' constituencies, and in ' + tookO.length + ' of the ' + took.length + ' seats the NDA took from INDIA. That does not mean those results would have gone the other way. It means the roll changed by more than the vote that decided the seat.'],
+    ['Did NDA seats not lose more names than INDIA seats?', 'They did. ' + LB['2020'].NDA.per_100.toFixed(2) + ' per 100 electors against ' + LB['2020'].INDIA.per_100.toFixed(2) + ' by the 2020 winner, and NDA-led booths lost ' + Wt.pooled_nda_minus_india.toFixed(1) + ' more names each than INDIA-led booths in the same seat. A booth\'s leading party says nothing about how the removed electors voted.'],
+    ['Why are women over-represented?', 'Women are ' + pct(fem) + ' of those removed and ' + pct(t.female_share_roll) + ' of the roll, over-represented in ' + fOver.length + ' of ' + DI.length + ' districts. ' + indian(xsS) + ' of the ' + indian(xsF) + ' more women than men removed in phase 1 were entered as shifted, and ' + pct(100 * yW / yS) + ' of those marked shifted aged 18 to 29 are women.'],
   ];
   const fq2 = [
     ['Were Muslims removed out of proportion?', 'Muslim-name electors are ' + pct(mlo) + ' to ' + pct(mhi) + ' of removals, against 16.87% of the population in 2011. The census share lies inside that range in ' + inside.length + ' of ' + DI.length + ' districts; in ' + above.length + ' the classified share alone is more than a point above it.'],
@@ -398,7 +398,7 @@ function bihar() {
   s = K.slide('Limits', 'What the lists show, and what they cannot show');
   K.box(s, 'The lists show how many names were removed and where, who the removed were by sex, and by religion and caste as read from names, and they allow the removals to be set against the margins and votes that decided each seat.', M, TOP - 0.4, 5.95, 2.3, 15);
   K.box(s, 'They record the reason an officer entered against each phase 1 removal, but not whether it was true, whether the removal was right, or how the elector voted. Religion and caste are estimates from names. No list can show intent.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
-  K.body(s, 'The reasons officers entered (dead, shifted, absent, enrolled twice) are entries made after a visit or its absence, not findings. Names marked absent alone exceed the margin in ' + rOver('r_absent') + ' seats. A change to the roll larger than the margin in ' + over.length + ' of ' + withM.length + ' seats is large enough to have decided those seats. Whether it did depends on how the removed would have voted, which no list records.', M, TOP + 2.2, W - 2 * M, 2.3, 16);
+  K.body(s, 'The reasons (dead, shifted, absent, enrolled twice) are what officers wrote down, and nobody checked them. Names marked absent alone exceed the margin in ' + rOver('r_absent') + ' seats. A change to the roll larger than the margin in ' + over.length + ' of ' + withM.length + ' seats is large enough to have decided those seats. Whether it did depends on how the removed would have voted, which no list records.', M, TOP + 2.2, W - 2 * M, 2.3, 16);
 
   s = K.slide('What the Election Commission should do', 'Publish what the lists leave out');
   K.numbered(s, [
@@ -411,19 +411,19 @@ function bihar() {
   // ---- Method
   s = K.slide('Method', 'Where the figures come from');
   K.bullets(s, [
-    'Removals by booth: the Chief Electoral Officer\'s phase 1 deletion lists against the draft roll of 1 August 2025, for all ' + indian(t.booths) + ' booths. Removals by constituency, phase and sex: the Chief Electoral Officer\'s table. Reason, sex and age of each phase 1 removal: counts from the row-level list.',
-    '2025 results: winner, runner-up and turnout for each seat, from the declared results; votes polled are turnout applied to the 2025 roll. 2024 booth leaders from Form 20, the booth-level count.',
-    'Population: Census 2011 for sex, religion, literacy, density and urban share; the Bihar caste-based survey of 2 October 2023 for caste; income per head from the Bihar Economic Survey 2021-22.',
+    'Removals by booth come from the Chief Electoral Officer\'s phase 1 deletion lists with the draft roll of 1 August 2025, for all ' + indian(t.booths) + ' booths. Removals by constituency, phase and sex are from the Chief Electoral Officer\'s table, and the reason, sex and age of each phase 1 removal are counted from the deletion list.',
+    'The 2025 winner, runner-up and turnout for each seat are the declared results, and votes polled are turnout applied to the 2025 roll. The 2024 booth leaders are from Form 20, the booth-level count.',
+    'Women\'s share is compared with the roll before the revision, the draft roll by sex plus the phase 1 removals by sex. Religion, literacy, density and urban share are from Census 2011, caste from the Bihar caste-based survey of 2 October 2023, and income per head from the Bihar Economic Survey 2021-22.',
     'Alliances: NDA is BJP, JD(U), LJP(RV), HAM(S) and RLM; INDIA is RJD, INC, the Left parties, VIP and IIP; everything else is Other.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
   s = K.slide('Method', 'How the lists were prepared');
   K.bullets(s, [
-    'One count per booth. The booth file lists each booth once for each of its three leading 2024 parties; each booth is counted once.',
+    'One count per booth. The booth file repeats each booth once for each of its three leading 2024 parties, and each booth is counted only once.',
     'Party names matched to the declared result. In nine Lok Sabha seats a party name in the booth file differed from the declared result and was matched to it, with evidence. After matching, the top two in all 40 seats are the declared winner and runner-up.',
-    'Titles are not surnames. Devi, Kumari and Khatun say nothing about caste and are set aside; caste is read from the father\'s or husband\'s surname.',
+    'Titles are not surnames. Devi, Kumari and Khatun say nothing about caste and are set aside, and caste is read from the father\'s or husband\'s surname.',
     'Seats are joined by number: Bihar has two Kalyanpurs and two Pipras.',
-    'A second, independent program recomputes every headline figure from the raw files before publication. Only counts are published: no name, EPIC number or address.',
+    'A second program, written separately, recomputes every headline figure from the raw files before publication. Only counts are published, never a name, EPIC number or address.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
   closing(pres, K, P, 'The full analysis', ['The dashboard, the booth explorer for every constituency and booth, and the full report with a chapter for each of the 38 districts, are published online alongside this deck.', 'Varna Sri Raman']);
@@ -436,7 +436,7 @@ function hyderabad() {
   const S = J('hyderabad/summary.json'), PJ = J('hyderabad/parts.json');
   const PR = PJ.rows.map((r) => Object.fromEntries(PJ.fields.map((f, i) => [f, r[i]])));
   const A = S.acs, t = S.totals, names = A.map((a) => a.name);
-  const P = { dark: '6E1832', darker: '52101F', accent: '8B1E3F', light: 'F2D9B8', soft: 'F7ECEF', band: ['8B1E3F', '0E5E6F', 'E0A526', '0E5E6F'], foot: 'Hyderabad Old City SIR 2026 · Varna Sri Raman · aggregates only; no names or EPIC numbers' };
+  const P = { dark: '6E1832', darker: '52101F', accent: '8B1E3F', light: 'F2D9B8', soft: 'F7ECEF', band: ['8B1E3F', '0E5E6F', 'E0A526', '0E5E6F'], foot: 'Hyderabad Old City SIR 2026 · Varna Sri Raman · totals only, never names or EPIC numbers' };
   const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'Varna Sri Raman'; pres.title = 'Hyderabad Old City SIR 2026';
   const K = kit(pres, P);
   const s_ = (f) => sum(A, f);
@@ -457,7 +457,7 @@ function hyderabad() {
   cover(pres, K, P, 'Special Intensive Revision · Hyderabad Old City 2026', 'The 2026 revision struck ' + lakh(t.deleted) + ' electors off five Old City rolls',
     'Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, polling part by polling part',
     [[indian(t.deleted), 'electors struck off the pre-revision rolls'], [pct(t.rate), 'of every elector on those rolls'], [pct(100 * t.deleted / valid), 'of the valid votes cast in 2023'], [indian(t.hearing), 'kept but summoned to a hearing']])
-    .addNotes('The lists cover every elector on the pre-revision rolls of the five constituencies, so each group has a true removal rate. These are the September 2026 lists; the final roll is due on 9 November, so restorations after hearings are not in them.');
+    .addNotes('The lists cover every elector on the pre-revision rolls of the five constituencies, so each group has a true removal rate. These are the September 2026 lists and the final roll is due on 9 November, so names put back after hearings are not in them.');
   const toc = contentsSlide(pres, K, P);
 
   // ---- Overview
@@ -475,7 +475,7 @@ function hyderabad() {
     A.slice().sort((a, b) => b.e2023.deleted_over_valid - a.e2023.deleted_over_valid).map((a) => [a.name, a.e2023.winner, indian(a.e2023.winner_votes), indian(a.e2023.margin), indian(a.deleted), a.e2023.deleted_over_margin.toFixed(1) + '×', pct(a.e2023.deleted_over_valid)]),
     M, TOP - 0.2, W - 2 * M, [2.2, 3.0, 1.45, 1.2, 1.4, 1.1, 1.78], 13, [0, 1]);
   K.box(s, 'In ' + andj(overV.map((a) => a.name)) + ' the names struck off exceed every valid vote cast in 2023. Yakutpura was won by ' + indian(yak.e2023.margin) + ' votes and lost ' + indian(yak.deleted) + ' names. Across the five, the names struck off equal ' + pct(100 * t.deleted / valid) + ' of the 2023 vote.', M, TOP + 2.3, W - 2 * M, 1.5, 15);
-  s.addNotes('No election has been held on the revised roll. The comparison is one of size; the roll records no one\'s vote.');
+  s.addNotes('No election has been held on the revised roll. The comparison is of size only, because the roll records nobody\'s vote.');
 
   s = K.slide('Overview', pct(rsh('Permanently Shifted'), 0) + ' of removals were entered as "permanently shifted" and ' + pct(rsh('Untraceable/Absent'), 0) + ' as untraceable', 'Share of names struck off, by the reason the officer recorded');
   s.addChart(pres.charts.BAR, S.reasons.map((k) => ({ name: RN[k] || k, labels: names, values: A.map((a) => +(100 * a.reasons[k] / a.deleted).toFixed(1)) })),
@@ -484,7 +484,7 @@ function hyderabad() {
   K.bullets(s, [
     pct(rsh('Death')) + ' were entered as dead and ' + pct(rsh('Already enrolled')) + ' as enrolled elsewhere.',
     'The untraceable share runs from ' + pct(Math.min(...ut)) + ' to ' + pct(Math.max(...ut)) + ' by constituency.',
-    'Each reason is an officer\'s entry, not a finding. An untraceable entry records only that someone was not found.',
+    'Each reason is what the officer wrote down, and nobody checked it. An untraceable entry records only that the officer did not find the person.',
   ], 9.15, TOP + 0.1, W - M - 9.15, CH - 0.1, 13.5);
 
   // ---- Against Hyderabad and Telangana
@@ -493,7 +493,7 @@ function hyderabad() {
     s = K.slide('Hyderabad and Telangana', 'The Old City seats lost ' + pct(TG.old_city.rate) + ' of their roll, Hyderabad\'s other ten seats ' + pct(TG.other_hyderabad.rate), 'Share of each roll left off the state\'s draft of 17 August 2026; Old City seats in maroon');
     s.addChart(pres.charts.BAR, [{ name: '% left off', labels: seats.map((x) => x.name), values: seats.map((x) => x.rate) }],
       K.chart(Object.assign({}, K.left, { barDir: 'bar', chartColors: seats.map((x) => x.old_city ? '8B1E3F' : '1F618D'), showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', valAxisHidden: true, catAxisLabelFontSize: 10 })));
-    K.right(s, ['Hyderabad district: ' + pct(TG.hyderabad.rate) + '. The rest of Telangana: ' + pct(TG.rest_of_state.rate) + '.', 'The removals follow the capital region, not the Old City.', 'The state publishes totals only below the district: no split by reason.'], 13.5);
+    K.right(s, ['Hyderabad district: ' + pct(TG.hyderabad.rate) + '. The rest of Telangana: ' + pct(TG.rest_of_state.rate) + '.', 'The removals are heavy across the whole capital region.', 'Below the district the state publishes totals only, with no split by reason.'], 13.5);
   }
 
   // ---- Age, sex, religion, 2002
@@ -525,7 +525,7 @@ function hyderabad() {
   K.right(s, [
     'Inside the same polling part, Hindu-name electors were struck off ' + Math.min(...HM.map((h) => h.diff_pp)).toFixed(1) + ' to ' + Math.max(...HM.map((h) => h.diff_pp)).toFixed(1) + ' points more often, in ' + sum(HM, 'a_higher') + ' of ' + sum(HM, 'parts') + ' parts large enough to compare.',
     'The lists give religion and age separately, so part of this gap may be an age gap.',
-    'Religion is estimated from names; the roll records none.',
+    'Religion is guessed from names, because the roll does not record it.',
   ]);
 
   s = K.slide('Age, sex, religion, 2002', 'Women and men were struck off at similar rates, ' + pct(fr) + ' and ' + pct(mr), 'Share struck off by sex, constituency by constituency');
@@ -544,7 +544,7 @@ function hyderabad() {
 
   s = K.slide('Polling parts', 'Parts with more Muslim-name electors lost fewer names, in every constituency', 'Rank correlation across parts within each constituency, with the part\'s removal rate');
   K.table(s, ['Constituency', 'Muslim-name share', 'Share aged 80+', 'Share untraceable'], LK.map((a) => [a.name, a.part_correlations.muslim_share_vs_rate.toFixed(2), a.part_correlations.aged80_share_vs_rate.toFixed(2), a.part_correlations.untraceable_share_vs_rate.toFixed(2)]), M, TOP, 7.6, [2.35, 1.75, 1.75, 1.75], 14);
-  K.right(s, ['Negative: parts with more of that group lost fewer names.', 'The share of elderly electors and the share entered as untraceable barely move with a part\'s rate.', 'Parts with at least 100 electors; the untraceable share uses parts with at least 20 removals.'], 13.5);
+  K.right(s, ['A negative figure means parts with more of that group lost fewer names.', 'The share of elderly electors and the share entered as untraceable barely move with a part\'s rate.', 'Parts with at least 100 electors, and for the untraceable share, parts with at least 20 removals.'], 13.5);
 
   s = K.slide('Polling parts', o60.length + ' polling parts lost more than 60% of their roll', 'The fifteen heaviest parts with 100 or more electors');
   K.table(s, ['Constituency', 'Part', 'Locality', 'Electors', 'Struck off', '% struck off'],
@@ -567,12 +567,12 @@ function hyderabad() {
   ], K.chart({ x: M, y: TOP, w: 6.2, h: CH, barDir: 'col', barGrouping: 'clustered', chartColors: ['0E5E6F', P.accent], showValue: true, dataLabelPosition: 'outEnd', showLegend: true, valAxisHidden: true }));
   s.addChart(pres.charts.LINE, [{ name: 'Cases listed per day', labels: days, values: perDay }],
     K.chart({ x: 7.0, y: TOP, w: W - M - 7.0, h: CH, chartColors: [P.accent], lineSize: 2, lineDataSymbol: 'none', catAxisLabelFontSize: 9, showTitle: true, title: 'Cases listed per day, all five', valAxisLabelFormatCode: '#,##0' }));
-  s.addNotes('The Commission extended the calendar on 7 September: claims to 7 October, hearings to 5 November, final roll 9 November. The schedules here are those in the September lists. The length of a slot is not recorded.');
+  s.addNotes('On 7 September the Commission extended the calendar, with claims to 7 October, hearings to 5 November and the final roll on 9 November. The schedules here are those in the September lists. The length of a slot is not recorded.');
 
   // ---- Questions
   K.qa(K.slide('Questions put to this analysis', 'What the lists say about moves, religion, the 2002 roll and age'), [
-    ['Were most of those struck off not people who had moved away?', 'The largest recorded reason is "permanently shifted", ' + pct(rsh('Permanently Shifted')) + ' of removals, and the Old City has a large moving population. But ' + pct(rsh('Untraceable/Absent')) + ' were entered as untraceable or absent, ' + pct(rsh('Death')) + ' as dead and ' + pct(rsh('Already enrolled')) + ' as enrolled elsewhere. Each is an officer\'s entry, not a finding.'],
-    ['Was the revision aimed at Muslim electors?', 'The lists do not show that. Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors. What the lists show is who carried the burden: the old, and those who could not be traced to the 2002 roll.'],
+    ['Were most of those struck off not people who had moved away?', 'The largest recorded reason is "permanently shifted", ' + pct(rsh('Permanently Shifted')) + ' of removals, and the Old City has a large moving population. But ' + pct(rsh('Untraceable/Absent')) + ' were entered as untraceable or absent, ' + pct(rsh('Death')) + ' as dead and ' + pct(rsh('Already enrolled')) + ' as enrolled elsewhere. Each is what the officer wrote down, and nobody checked it.'],
+    ['Was the revision aimed at Muslim electors?', 'The lists do not show that. Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors. The lists do show who bore the removals, the old and those who could not be traced to the 2002 roll.'],
     ['Why does the 2002 roll matter so much?', 'The revision asks each elector to show a link to the 2002 intensive revision, through their own name or a parent\'s. Where the lists record it, electors with no link were struck off ' + Math.min(...UL.map((u) => u.diff_pp)).toFixed(0) + ' to ' + Math.max(...UL.map((u) => u.diff_pp)).toFixed(0) + ' points more often than linked electors in the same part.'],
     ['Why are the old struck off so often?', pct(age[age.length - 1]) + ' of electors aged 80 and over were struck off, against ' + pct(age[0]) + ' of those aged 18 to 24. Some of that is death. The rest falls on electors least able to answer a visit, attend a hearing or produce papers.'],
   ]);
@@ -586,12 +586,12 @@ function hyderabad() {
   // ---- Limits
   s = K.slide('Limits', 'What the lists show, and what they cannot show');
   K.box(s, 'How many electors were struck off, from which parts, and who they were by age, sex, religion estimated from names, and link to the 2002 roll. Because the lists hold every elector, each group has a true removal rate.', M, TOP - 0.4, 5.95, 2.3, 15);
-  K.box(s, 'Whether any single removal was right. A household that moved out is a correct "shifted" deletion; the files cannot tell it from an elector who was at home and missed. Religion and age are given separately, never together.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
+  K.box(s, 'Whether any single removal was right. A household that moved out is rightly marked "shifted", and the files cannot tell it apart from an elector who was at home when the officer missed them. Religion and age are given separately and never together.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
   K.body(s, 'These are the September lists. The final roll is due on 9 November, so restorations after hearings are not in these counts. Malakpet\'s list is read by polling-station name (' + mal.parts + ' stations) and ' + indian(mal.unaccounted) + ' electors on its roll appear in none of the three outcomes.', M, TOP + 2.2, W - 2 * M, 2.2, 16);
 
   s = K.slide('What the Election Commission should do', 'Before the final roll');
   K.numbered(s, [
-    'Record and publish the basis for every removal entered as "untraceable or absent", ' + indian(s_((a) => a.reasons['Untraceable/Absent'])) + ' names: the visits made and the notice given.',
+    'Record and publish the basis for every removal entered as "untraceable or absent", ' + indian(s_((a) => a.reasons['Untraceable/Absent'])) + ' names in all, including the visits made and the notice given.',
     'Publish how removals of electors with no link to the 2002 roll were decided.',
     'Schedule hearings so that each case can be heard, rather than listing hundreds of cases in one slot.',
     'Explain the removals in the ' + o60.length + ' parts that lost more than 60% of their roll.',
@@ -601,11 +601,11 @@ function hyderabad() {
   // ---- Method
   s = K.slide('Method', 'Where the figures come from and how the rates are defined');
   K.bullets(s, [
-    'Source: the September 2026 SIR lists for the five constituencies, which record the outcome for every elector on the pre-revision roll: struck off (with the officer\'s reason), kept but summoned to a hearing (with the rule), or kept.',
-    'Removal rate: electors on the absent-shifted-dead list divided by electors on the pre-revision roll, for each group. In Bihar the lists hold only the removed, so the Bihar deck gives shares of removals instead.',
-    'Within-part difference: one group\'s rate minus another\'s inside each polling part, pooled with each part weighted by its smaller group; parts with fewer than 20 of either are left out. This holds the locality and the officer fixed.',
+    'The source is the September 2026 SIR lists for the five constituencies, compiled for these five seats only. They record the outcome for every elector on the roll before the revision, whether struck off (with the officer\'s reason), kept but summoned to a hearing (with the rule), or kept.',
+    'The removal rate is the electors on the absent-shifted-dead list divided by the electors on the roll before the revision, for each group. The Bihar lists hold only the removed, so the Bihar deck gives shares of removals.',
+    'The within-part difference is one group\'s rate minus another\'s inside each polling part, pooled and weighted by the smaller group in each part. Parts with fewer than 20 of either group are left out. This holds the neighbourhood and the officer constant.',
     'Part correlations: Spearman rank correlations across parts with at least 100 electors, within each constituency.',
-    '2023 results: the declared Assembly results. Only counts are published: no name, EPIC number or address.',
+    'The 2023 results are the declared Assembly results. Only counts are published, never a name, EPIC number or address.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
   closing(pres, K, P, 'The full analysis', ['The dashboard, the part explorer for every polling part, and the full report with a chapter for each constituency, are published online alongside this deck.', 'Varna Sri Raman']);
@@ -616,7 +616,7 @@ function hyderabad() {
 // ============================================================ ALL INDIA
 function india() {
   const N = J('india/states.json'), T = N.total, S = N.states, P = N.by_phase;
-  const Pal = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'SIR 2025-26 · All India · Varna Sri Raman · aggregates only; no names or EPIC numbers' };
+  const Pal = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'SIR 2025-26 · All India · Varna Sri Raman · totals only, never names or EPIC numbers' };
   const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'Varna Sri Raman'; pres.title = 'SIR 2025-26: All India';
   const K = kit(pres, Pal);
   const RK = ['dead', 'shifted_absent_other', 'duplicate'], RN = { dead: 'Dead', shifted_absent_other: 'Shifted, absent or other', duplicate: 'Enrolled more than once' };
@@ -636,12 +636,12 @@ function india() {
 
   let s = K.slide('All India', crore(T.removed) + ' names left off the draft rolls, ' + T.per_100.toFixed(1) + ' for every 100 electors', 'All ' + T.states + ' states and union territories that have published a draft roll; Tripura publishes in December');
   K.stats(s, [[crore(T.removed), 'names left off the draft rolls'], [crore(T.shifted_absent_other), 'entered as shifted, absent or other'], [crore(T.dead), 'entered as dead'], [crore(T.duplicate), 'entered as enrolled more than once']], TOP, 1.7);
-  K.body(s, 'A reason is what an officer entered after a visit or its absence, not a finding. Deaths are about one in five of the removals split by reason. The other four in five rest on an entry that the elector was not where the roll placed them, or was on it twice. ' + (T.unsplit / 1e5).toFixed(1) + ' lakh names are in states that have not published a full split.', M, TOP + 2.1, W - 2 * M, 2.4, 17);
+  K.body(s, 'A reason is what an officer wrote down, and nobody has checked it. About one in five of the removals split by reason was a death. The other four in five rest on an officer writing down that the elector was not where the roll said, or was on it twice. ' + (T.unsplit / 1e5).toFixed(1) + ' lakh names are in states that have not published a full split.', M, TOP + 2.1, W - 2 * M, 2.4, 17);
 
   {
     const BIN = [8, 12, 16, 20], FILL = ['DEEBF7', '9ECAE1', '2878B3', '1C5F96', '08306B'], byS = {};
     S.forEach((x) => { byS[x.state] = x; });
-    s = K.slide('All India', andj(rated.slice(0, 4).map((x) => x.state)) + ' removed the most for every 100 electors', 'Removed per 100 electors; one tile per state or union territory, placed roughly where it lies, with no boundaries');
+    s = K.slide('All India', andj(rated.slice(0, 4).map((x) => x.state)) + ' removed the most for every 100 electors', 'Removed per 100 electors, with one tile per state or union territory placed roughly where it lies');
     const sz = 0.56, gap = 0.06, x0 = M + 0.2, y0 = TOP - 0.35;
     N.tiles.forEach((t) => {
       const x = byS[t.state], v = x ? x.per_100 : null, b = v == null ? null : BIN.filter((c) => v >= c).length;
@@ -655,7 +655,7 @@ function india() {
       s.addShape(pres.shapes.RECTANGLE, { x: 7.0, y: TOP + 2.2 + i * 0.36, w: 0.26, h: 0.26, fill: { color: i < 5 ? FILL[i] : 'F2F3F4' }, line: i < 5 ? { type: 'none' } : { color: '95A5A6', width: 0.75, dashType: 'dash' } });
       s.addText(l, { x: 7.35, y: TOP + 2.17 + i * 0.36, w: 1.6, h: 0.32, fontFace: BODY, fontSize: 11, color: INK, margin: 0, isTextBox: true, valign: 'middle' });
     });
-    K.bullets(s, [rated[0].state + ' ' + rated[0].per_100.toFixed(1) + ', ' + rated[1].state + ' ' + rated[1].per_100.toFixed(1) + ', ' + rated[2].state + ' ' + rated[2].per_100.toFixed(1) + '.', 'Fewest: ' + rated[rated.length - 1].state + ' ' + rated[rated.length - 1].per_100.toFixed(1) + '.', 'Grey: not in the revision, no draft yet (Tripura), or no exact roll before it (Chandigarh).'], 9.2, TOP, W - M - 9.2, 2.2, 12.5);
+    K.bullets(s, [rated[0].state + ' ' + rated[0].per_100.toFixed(1) + ', ' + rated[1].state + ' ' + rated[1].per_100.toFixed(1) + ', ' + rated[2].state + ' ' + rated[2].per_100.toFixed(1) + '.', 'Fewest: ' + rated[rated.length - 1].state + ' ' + rated[rated.length - 1].per_100.toFixed(1) + '.', 'Grey tiles are states not in the revision, with no draft yet (Tripura), or with no exact roll from before it (Chandigarh).'], 9.2, TOP, W - M - 9.2, 2.2, 12.5);
   }
 
   {
@@ -694,11 +694,11 @@ function india() {
   const TH = ['State or UT', 'Phase', 'Removed', 'Per 100', 'Dead', 'Shifted, absent, other', 'Duplicate', 'Note'], TW = [3.2, 0.8, 1.8, 1.1, 1.1, 2.2, 1.3, 1.3];
   s = K.slide('All India', 'Every state and union territory, the sixteen largest', 'Names left off the draft roll, and the share of those split by reason');
   K.table(s, TH, rows.slice(0, 16).map(trow), M, TOP - 0.3, 12.8, TW, 11, [0, 7]);
-  s = K.slide('All India', 'Every state and union territory, the remaining sixteen', 'Rounded: published in lakh or crore. Short: the reasons leave some names unexplained. No split: none found');
+  s = K.slide('All India', 'Every state and union territory, the remaining sixteen', 'Rounded means published in lakh or crore, Short that the reasons leave some names unexplained, and No split that none was found');
   K.table(s, TH, rows.slice(16).map(trow), M, TOP - 0.3, 12.8, TW, 11, [0, 7]);
 
   const G = N.gender.slice().sort((a, b) => b.gap - a.gap), gOver = G.filter((g) => g.gap > 1), gUnder = G.filter((g) => g.gap < -1);
-  s = K.slide('All India', 'In ' + gOver.length + ' of the ' + G.length + ' states with a split by sex, women are a larger share of the removed than of the roll', 'Women\'s share of names removed and of the roll; most phase 3 states published no split by sex');
+  s = K.slide('All India', 'In ' + gOver.length + ' of the ' + G.length + ' states with a split by sex, women are a larger share of the removed than of the roll', 'Women\'s share of names removed and of the roll. Most phase 3 states published no split by sex');
   const gv = G.slice().reverse();
   s.addChart(pres.charts.BAR, [
     { name: 'Women, % of the roll', labels: gv.map((g) => g.state), values: gv.map((g) => g.women_share_roll) },
@@ -707,7 +707,7 @@ function india() {
   K.right(s, [
     'Largest gap: ' + G[0].state + ', ' + G[0].gap.toFixed(1) + ' points; then ' + G[1].state + ' and ' + G[2].state + '.',
     (gUnder.length ? gUnder.map((g) => g.state).join(' and ') + ' runs the other way, by ' + (-gUnder[0].gap).toFixed(1) + ' points.' : ''),
-    'Figures are exact for ' + G.filter((g) => g.quality === 'exact' || g.quality === 'lists').length + ' states; rounded, from an earlier roll or unverified for the rest. Bihar is compared with the 2011 population.',
+    'Figures are exact for ' + G.filter((g) => g.quality === 'exact' || g.quality === 'lists').length + ' states; rounded, from an earlier roll or unverified for the rest. Bihar is compared with its roll before the revision.',
   ], 13);
 
   const CR = N.correlations, CL = { income_pc: 'Income per head', urban_pct: 'Urban share', literacy: 'Literacy', female_literacy: 'Women\'s literacy', muslim_pct: 'Muslim share', sc_pct: 'SC share', st_pct: 'ST share', sex_ratio: 'Sex ratio', out_migration: 'Born here, living elsewhere', in_migration: 'Living here, born elsewhere' };
@@ -718,7 +718,7 @@ function india() {
   K.right(s, [
     'In phase 3 income, urban share, migration and the Muslim share rise together, because the large destination states are revised alongside the North-East. ' + ctop.n_per_100_phase3 + ' states cannot separate them.',
     'Muslim share: ' + fr(cm.per_100_all) + ' across all states, ' + fr(cm.per_100_phase2) + ' in phase 2. No consistent relationship.',
-    'Border states removed fewer: a median of ' + N.border.per_100_yes.toFixed(1) + ' per 100 against ' + N.border.per_100_no.toFixed(1) + ' in the interior.',
+    'Border states removed fewer, typically ' + N.border.per_100_yes.toFixed(1) + ' per 100 against ' + N.border.per_100_no.toFixed(1) + ' in the interior.',
     'A state-level relationship says nothing about who was removed within a state.',
   ], 12.5);
 
@@ -731,14 +731,14 @@ function india() {
   const wbS = S.find((x) => x.withheld);
   K.right(s, [
     'The final rolls came out ' + crore(FN.net_after_draft) + ' larger than the drafts, against ' + crore(FN.removed) + ' left off them.',
-    wbS.state + ' kept ' + lakh(FN.withheld) + ' names off its final roll while they are decided; without them the rise is ' + pct(FN.made_up_pct_ex_withheld) + ' of the fall.',
+    wbS.state + ' kept ' + lakh(FN.withheld) + ' names off its final roll while their cases are decided. Leaving those out, the rise is ' + pct(FN.made_up_pct_ex_withheld) + ' of the fall.',
     'The final roll is smaller than the draft in ' + FN.shrank.length + ' states. The fall is ' + FN.net_per_100.toFixed(1) + ' per 100 electors at the final roll, from ' + FN.per_100.toFixed(1) + ' at the draft.',
     'The rise counts new electors as well as names put back, so it is the most that can have been put back.',
   ], 12.5);
   s.addNotes('Still to publish a final roll: ' + FN.waiting.join(', ') + '. Removals after the draft carry no reason in any state except Bihar. Rank correlation between the removal rate at the draft and the share made up: ' + FN.rho_made_up.toFixed(2) + (Math.abs(FN.rho_made_up) < 0.2 ? ', no relationship.' : '.'));
 
   s = K.slide('All India', 'What the state figures show, and what they cannot', 'The limits of totals published state by state');
-  K.box(s, 'They show how many names each state left off its draft roll and the reason its officers entered: dead, shifted or absent (with "others" where reported), or enrolled more than once, and for ' + FN.states + ' states the final roll.', M, TOP - 0.4, 5.95, 2.1, 15);
+  K.box(s, 'They show how many names each state left off its draft roll and the reason its officers wrote down, which was dead, shifted or absent (with "others" where reported), or enrolled more than once. For ' + FN.states + ' states they also show the final roll.', M, TOP - 0.4, 5.95, 2.1, 15);
   K.box(s, 'They cannot show whether an entry was right, or break removals down by sex, age or booth. Outside Bihar they are the states\' published totals, some rounded, gathered from press notes and reports.', 6.78, TOP - 0.4, 5.95, 2.1, 15);
   K.body(s, 'Removals after the draft, at hearings and on objections, carry no reason outside Bihar, and no state has said how many of those added at the final roll had been removed at the draft. The Election Commission has published no state table of its own.', M, TOP + 2.0, W - 2 * M, 2.2, 16);
 
@@ -754,9 +754,9 @@ function india() {
 
   s = K.slide('Method', 'Where the figures come from');
   K.bullets(s, [
-    'All India: each state\'s Chief Electoral Officer\'s figures at the draft roll. Press notes read directly for ' + andj(S.filter((x) => x.source === 'primary').map((x) => x.state)) + '; the rest as reported in the press, each linked on the method page and in the downloadable table.',
-    'Bihar: counted from the phase 1 deletion lists, with shifted and absent combined to match the other states.',
-    'Reasons grouped into the three every state reported: dead; shifted, absent or other; enrolled more than once.',
+    'The All India figures are each state\'s Chief Electoral Officer\'s figures at the draft roll. Press notes were read directly for ' + andj(S.filter((x) => x.source === 'primary').map((x) => x.state)) + ', and the rest are as reported in the press, each linked on the method page and in the downloadable table.',
+    'Bihar is counted from the phase 1 deletion lists, with shifted and absent combined to match the other states.',
+    'Reasons are grouped into the three every state reported, namely dead, shifted, absent or other, and enrolled more than once.',
     'The state rows add to ' + crore(T.removed) + ', against about 13.3 crore reported nationally on 30 September 2026; the difference is rounding.',
     'No name, EPIC number or address is published.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);

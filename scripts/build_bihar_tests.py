@@ -10,7 +10,8 @@ age and sex (SRS Statistical Report 2024, Table 8) weighted by the 2024
 population by age (Table 1) and the mid-year population (Civil Registration
 System 2024, Statement 2). Ages 20 and over stand for the roll, because the
 rates come in five-year groups and 15-19 straddles the voting age. Women's
-share of the population is the 2011 census share, 47.86%.
+share of adults is their share of the roll before the revision, from
+data/bihar/summary.json.
 
 Marriage. The excess of young women over young men among those entered as
 shifted is set against the women who moved on marriage, from the 2011
@@ -35,21 +36,21 @@ from build_india import spearman  # noqa: E402
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 RAW = lambda f: os.path.join(ROOT, 'data', 'bihar', 'raw', f)
 OUT = os.path.join(ROOT, 'data', 'bihar', 'tests.json')
-WOMEN_2011 = 0.4786
 ADULT = ['20-24', '25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59', '60-64', '65-69', '70-74', '75-79', '80-84', '85+']
 YOUNG = ('18-24', '25-29')
 NAMES = {'East Champaran': 'Purba Champaran', 'West Champaran': 'Pashchim Champaran', 'Kaimur': 'Kaimur (Bhabua)'}
 
 
 def deaths(rs):
+    WOMEN = json.load(open(os.path.join(ROOT, 'data', 'bihar', 'summary.json'), encoding='utf-8'))['totals']['female_share_roll'] / 100
     srs = list(csv.DictReader(open(RAW('srs_bihar.csv'), encoding='utf-8')))
     crs = list(csv.DictReader(open(RAW('crs_bihar.csv'), encoding='utf-8')))
     A = {(x['sex'], x['age_group']): float(x['value']) for x in srs if x['table'] == 'ASDR' and x['year'] == '2024' and x['residence'] == 'Total'}
     P = {(x['sex'], x['age_group']): float(x['value']) for x in srs if x['table'] == 'POP_AGE_DIST_PCT' and x['year'] == '2024' and x['residence'] == 'Total'}
     pop = 1000 * int(next(x['value'] for x in crs if x['table'] == 'MIDYEAR_POPULATION_000' and x['year'] == '2024'))
     rate = sum(P[('Persons', a)] / 100 * A[('Persons', a)] for a in ADULT) / 1000
-    dF = sum(P[('Female', a)] / 100 * A[('Female', a)] for a in ADULT) / 1000 * WOMEN_2011
-    dM = sum(P[('Male', a)] / 100 * A[('Male', a)] for a in ADULT) / 1000 * (1 - WOMEN_2011)
+    dF = sum(P[('Female', a)] / 100 * A[('Female', a)] for a in ADULT) / 1000 * WOMEN
+    dM = sum(P[('Male', a)] / 100 * A[('Male', a)] for a in ADULT) / 1000 * (1 - WOMEN)
     adult = round(rate * pop)
     dead = rs['totals']['dead']
     dead_f, dead_m = rs['by_sex']['dead']['F'], rs['by_sex']['dead']['M']

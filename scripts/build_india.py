@@ -220,8 +220,9 @@ def build():
     bf = sum(rs['by_sex'][k]['F'] for k in rs['by_sex'])
     bm = sum(rs['by_sex'][k]['M'] for k in rs['by_sex'])
     gender = [{'state': 'Bihar', 'women_removed': bf, 'men_removed': bm, 'women_share_removed': round(100 * bf / (bf + bm), 2),
-               'women_share_roll': 47.86, 'quality': 'lists', 'source_url': '',
-               'note': 'Counted from the phase 1 deletion lists. The roll by sex is not in these sources, so the comparison is with women\'s share of the 2011 population.'}]
+               'women_share_roll': json.load(open(os.path.join(ROOT, 'data', 'bihar', 'summary.json'), encoding='utf-8'))['totals']['female_share_roll'],
+               'quality': 'lists', 'source_url': '',
+               'note': 'Counted from the phase 1 deletion lists. The roll before the revision by sex is the draft roll by sex (Format 4B) plus the names removed at the draft by sex.'}]
     for x in csv.DictReader(open(GEN, encoding='utf-8')):
         assert x['state'] in names, x['state']
         g = dict(x)
