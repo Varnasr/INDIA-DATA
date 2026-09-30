@@ -13,7 +13,7 @@ publishes it to GitHub Pages.
 pip install pandas==3.0.6 openpyxl==3.1.5
 python3 scripts/build_bihar.py          # rebuild data/bihar from data/bihar/raw
 python3 scripts/build_hyderabad.py      # rebuild data/hyderabad from the explorer
-python3 scripts/check_data.py           # 11 checks, run by CI; rebuilds both with --check
+python3 scripts/check_data.py           # 15 checks, run by CI; rebuilds both with --check
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
 python3 -m http.server 8000
 ```
@@ -96,6 +96,24 @@ Lok Sabha electors and votes by state. The rolls before the revision held 98.3%
 of projected adults across those 19 states; the drafts hold 84.4%. Keep the
 caveat with it: projections count residents, so migrant-receiving states
 count adults registered at home.
+
+`data/india/raw/final.csv` holds each final roll: draft, added and removed
+after it, names withheld (West Bengal's 60 lakh under adjudication), final,
+and whether the figures add up. It is the only source for removals after the
+draft. **Several states reported the net rise from draft to final as
+"additions"** (Gujarat, Madhya Pradesh, Chhattisgarh, Uttar Pradesh): leave
+their gross columns blank and mark them `net only`. The share "made up" is the
+net rise over the draft removals; it counts new electors too, so it is an upper
+bound on names put back, and every page says so.
+
+`data/bihar/raw/final_roll_format4b.csv` is the Commission's Format 4B return
+for Bihar's final roll, seat by seat and by sex; `scripts/build_bihar_final.py`
+writes `data/bihar/final.json` and fails unless every seat adds up and the
+totals equal the press note of 30 September 2025. A seat's roll before is its
+draft plus its phase 1 list, because the June roll exists only as a state
+total. Findings: the net fall still exceeds the 2025 margin in 124 of 243
+seats (174 on the draft removals); women were 55.5% of those removed at the
+draft and 47.9% of those added.
 
 ## Hyderabad
 

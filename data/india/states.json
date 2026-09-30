@@ -844,8 +844,41 @@
   "Tripura"
  ],
  "after_draft": {
-  "states": 17,
-  "removed": 2762998
+  "states": 16,
+  "removed": 2669836
+ },
+ "final": {
+  "states": 20,
+  "removed": 74874746,
+  "net_after_draft": 10644782,
+  "withheld": 6006675,
+  "gross": 13,
+  "per_100": 11.94,
+  "net_per_100": 10.24,
+  "shrank": [
+   "West Bengal",
+   "Goa",
+   "Arunachal Pradesh",
+   "Dadra and Nagar Haveli and Daman and Diu",
+   "Sikkim"
+  ],
+  "waiting": [
+   "Maharashtra",
+   "Karnataka",
+   "Telangana",
+   "Delhi",
+   "Andhra Pradesh",
+   "Jharkhand",
+   "Haryana",
+   "Punjab",
+   "Uttarakhand",
+   "Meghalaya",
+   "Nagaland"
+  ],
+  "made_up_pct": 14.2,
+  "made_up_pct_ex_withheld": 22.2,
+  "net_per_100_ex_withheld": 9.28,
+  "rho_made_up": -0.12
  },
  "states": [
   {
@@ -861,8 +894,6 @@
    "figures": "exact",
    "source": "lists",
    "source_url": "",
-   "removed_after_draft": 351150,
-   "final_date": "2025-09-30",
    "note": "Counted from the phase 1 deletion lists on this site. Shifted and absent are separate reasons in the lists (26,55,900 and 9,70,081) and are combined here to match the other states.",
    "unsplit": 0,
    "shares": {
@@ -889,7 +920,22 @@
    "adults_2026": 83027000.0,
    "roll_adult_pct": 95.0,
    "draft_adult_pct": 87.1,
-   "removed_pct_votes24": 15.1
+   "removed_pct_votes24": 15.1,
+   "removed_after_draft": 366742,
+   "added_after_draft": 2153343,
+   "withheld": null,
+   "electors_final": 74192357,
+   "final_date": "2025-09-30",
+   "reconciles": "exact",
+   "net_after_draft": 1786601,
+   "net_fall": 4773025,
+   "net_fall_per_100": 6.05,
+   "made_up_pct": 27.2,
+   "final_source": {
+    "source": "primary",
+    "url": "http://ceoelection.bihar.gov.in/PDF/Year_2025/Format1-8/Format_4B.pdf",
+    "note": "The Chief Electoral Officer's final-roll press note and the Commission's Format 4B return, which agree. Added: claims admitted. Removed: objections admitted, of which 62,441 dead, 2,12,999 shifted and 81,334 repeated; 9,968 carry no reason."
+   }
   },
   {
    "state": "Uttar Pradesh",
@@ -904,8 +950,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://timesofindia.indiatimes.com/india/up-sir-2-89-cr-voters-removed-from-draft-electoral-roll-46-23-lakh-declared-dead/articleshow/126371776.cms",
-   "removed_after_draft": 815996,
-   "final_date": "2026-04-10",
    "note": "Reported in lakh and crore; the reasons sum to about 1 lakh short of the rounded total. A later press report gives a different split for dead and duplicates that cannot be squared with the Chief Electoral Officer's.",
    "unsplit": 30000,
    "shares": {
@@ -932,7 +976,22 @@
    "adults_2026": 161685000.0,
    "roll_adult_pct": 95.5,
    "draft_adult_pct": 77.6,
-   "removed_pct_votes24": 32.8
+   "removed_pct_votes24": 32.8,
+   "removed_after_draft": 815996,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": 133984792,
+   "final_date": "2026-04-10",
+   "reconciles": "net only",
+   "net_after_draft": 8428767,
+   "net_fall": 20471233,
+   "net_fall_per_100": 13.26,
+   "made_up_pct": 29.2,
+   "final_source": {
+    "source": "press",
+    "url": "https://www.newindianexpress.com/india/2026/Apr/11/up-final-voter-list-at-1339-crore-after-revision-over-2-crore-names-deleted",
+    "note": "The state published the net rise from draft to final (84,28,767) and the removals after the draft (8,15,996), not the additions."
+   }
   },
   {
    "state": "Tamil Nadu",
@@ -947,8 +1006,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://organiser.org/2025/12/20/331153/bharat/sir-in-tamil-nadu-more-than-97-lakh-electors-removed-from-eci-draft/",
-   "removed_after_draft": 423000,
-   "final_date": "2026-02-23",
    "note": "",
    "unsplit": 0,
    "shares": {
@@ -975,7 +1032,22 @@
    "adults_2026": 60189000.0,
    "roll_adult_pct": 106.5,
    "draft_adult_pct": 90.3,
-   "removed_pct_votes24": 22.2
+   "removed_pct_votes24": 22.2,
+   "removed_after_draft": 423000,
+   "added_after_draft": 2753000,
+   "withheld": null,
+   "electors_final": 56707380,
+   "final_date": "2026-02-23",
+   "reconciles": "rounded",
+   "net_after_draft": 2330624,
+   "net_fall": 7407207,
+   "net_fall_per_100": 11.55,
+   "made_up_pct": 23.9,
+   "final_source": {
+    "source": "press",
+    "url": "https://x.com/airnewsalerts/status/2025924114599600147",
+    "note": "Additions (27.53 lakh) and removals after the draft (4.23 lakh) were published in lakh; they add up within that rounding."
+   }
   },
   {
    "state": "Gujarat",
@@ -990,8 +1062,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://www.hindustantimes.com/india-news/gujarat-releases-first-draft-list-after-sir-73-7-lakh-voters-deleted-101766150928767.html",
-   "removed_after_draft": null,
-   "final_date": "2026-02-17",
    "note": "Electors before the revision reported rounded (5.08 crore). Shifted 40,25,553 and absent 9,69,662 reported separately; 1,89,364 other.",
    "unsplit": 0,
    "shares": {
@@ -1018,7 +1088,22 @@
    "adults_2026": 53301000.0,
    "roll_adult_pct": 95.3,
    "draft_adult_pct": 81.5,
-   "removed_pct_votes24": 25.3
+   "removed_pct_votes24": 25.3,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": 44030725,
+   "final_date": "2026-02-17",
+   "reconciles": "net only",
+   "net_after_draft": 560616,
+   "net_fall": 6812711,
+   "net_fall_per_100": 13.41,
+   "made_up_pct": 7.6,
+   "final_source": {
+    "source": "press",
+    "url": "https://deshgujarat.com/2026/02/17/final-electoral-roll-for-gujarat-published-with-4-40-crore-voters-district-wise-data-here/",
+    "note": "The 5.60 lakh reported as added is the net rise from draft to final. Additions and removals after the draft were not published."
+   }
   },
   {
    "state": "West Bengal",
@@ -1033,8 +1118,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://www.thehindu.com/news/national/ec-publishes-list-of-voters-deleted-from-draft-electoral-rolls-in-bengal-under-sir-2026/article70401624.ece",
-   "removed_after_draft": 546000,
-   "final_date": "2026-02-28",
    "note": "Total exact; the three reasons were reported rounded to the thousand and sum to 20 short of it.",
    "unsplit": 1899,
    "shares": {
@@ -1061,7 +1144,22 @@
    "adults_2026": 77030000.0,
    "roll_adult_pct": 99.5,
    "draft_adult_pct": 91.9,
-   "removed_pct_votes24": 9.6
+   "removed_pct_votes24": 9.6,
+   "removed_after_draft": 546053,
+   "added_after_draft": 188707,
+   "withheld": 6006675,
+   "electors_final": 64452609,
+   "final_date": "2026-02-28",
+   "reconciles": "exact",
+   "net_after_draft": -6364021,
+   "net_fall": 12184920,
+   "net_fall_per_100": 15.9,
+   "made_up_pct": -109.3,
+   "final_source": {
+    "source": "primary",
+    "url": "https://ceowestbengal.wb.gov.in/Downloads/News/Final%20Press%20Note%20CEO-PN-05-2026.pdf",
+    "note": "Added: 1,82,036 on Form 6 and 6A and 6,671 on Form 8. Removed: 5,46,053 on Form 7. Another 60,06,675 were under adjudication and are not on the final roll of 28 February 2026."
+   }
   },
   {
    "state": "Madhya Pradesh",
@@ -1076,8 +1174,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://www.siasat.com/42-74l-voters-in-madhya-pradesh-face-deletion-from-electoral-rolls-3315402/",
-   "removed_after_draft": null,
-   "final_date": "2026-02-21",
    "note": "Reasons reported in lakh.",
    "unsplit": 160,
    "shares": {
@@ -1104,7 +1200,22 @@
    "adults_2026": 60196000.0,
    "roll_adult_pct": 95.4,
    "draft_adult_pct": 88.3,
-   "removed_pct_votes24": 11.3
+   "removed_pct_votes24": 11.3,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": 53981065,
+   "final_date": "2026-02-21",
+   "reconciles": "net only",
+   "net_after_draft": 849082,
+   "net_fall": 3425078,
+   "net_fall_per_100": 5.97,
+   "made_up_pct": 19.9,
+   "final_source": {
+    "source": "press",
+    "url": "https://zeenews.india.com/hindi/india/madhya-pradesh-chhattisgarh/bhopal/mp-sir-revision-complete-in-madhya-pradesh-final-voter-list-2026-indore-bhopal-voter-data/3117919",
+    "note": "The 8,49,082 reported as added is the net rise from draft to final. Additions and removals after the draft were not published."
+   }
   },
   {
    "state": "Rajasthan",
@@ -1119,8 +1230,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://www.livemint.com/news/india/eci-releases-sir-draft-rolls-over-1-crore-voters-deleted-across-west-bengal-rajasthan-goa-puducherry-full-details-11765892938802.html",
-   "removed_after_draft": 242760,
-   "final_date": "2026-02-21",
    "note": "The total is reported as 41.79, 41.85 and 44 lakh in different reports; the figure whose reasons add up is used.",
    "unsplit": 0,
    "shares": {
@@ -1147,7 +1256,22 @@
    "adults_2026": 56611000.0,
    "roll_adult_pct": 96.5,
    "draft_adult_pct": 89.2,
-   "removed_pct_votes24": 12.6
+   "removed_pct_votes24": 12.6,
+   "removed_after_draft": 242760,
+   "added_after_draft": 1291365,
+   "withheld": null,
+   "electors_final": 51519929,
+   "final_date": "2026-02-21",
+   "reconciles": "exact",
+   "net_after_draft": 1048605,
+   "net_fall": 3130395,
+   "net_fall_per_100": 5.73,
+   "made_up_pct": 25.1,
+   "final_source": {
+    "source": "primary",
+    "url": "https://election.rajasthan.gov.in/Elector%20Statics/Fact%20Sheet%2021.02.2026.pdf",
+    "note": "The Chief Electoral Officer's fact sheet, for 199 seats; Anta, which held a by-election, is outside it."
+   }
   },
   {
    "state": "Chhattisgarh",
@@ -1162,8 +1286,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://www.aninews.in/news/national/general-news/over-27-lakh-voters-deleted-in-chhattisgarhs-electoral-list20251224044314/",
-   "removed_after_draft": 108807,
-   "final_date": "2026-02-21",
    "note": "",
    "unsplit": 0,
    "shares": {
@@ -1190,7 +1312,22 @@
    "adults_2026": 21477000.0,
    "roll_adult_pct": 98.9,
    "draft_adult_pct": 86.1,
-   "removed_pct_votes24": 18.1
+   "removed_pct_votes24": 18.1,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": 18730914,
+   "final_date": "2026-02-21",
+   "reconciles": "net only",
+   "net_after_draft": 234994,
+   "net_fall": 2499823,
+   "net_fall_per_100": 11.77,
+   "made_up_pct": 8.6,
+   "final_source": {
+    "source": "press",
+    "url": "https://www.thehawk.in/news/india/eci-publishes-final-electoral-roll-for-chhattisgarh-total-voters-at-18730914",
+    "note": "The 2,34,994 reported as added is the net rise from draft to final. Additions and removals after the draft were not published."
+   }
   },
   {
    "state": "Kerala",
@@ -1205,8 +1342,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://www.etvbharat.com/en/state/draft-electoral-roll-published-in-kerala-as-part-of-sir-over-24-lakh-names-removed-enn25122306022",
-   "removed_after_draft": 53229,
-   "final_date": "2026-02-21",
    "note": "The reasons sum 10 more than the reported total. Another report of the same press note gives 24,17,503 removed from a roll of 2,78,59,855.",
    "unsplit": 0,
    "shares": {
@@ -1233,7 +1368,22 @@
    "adults_2026": 27740000.0,
    "roll_adult_pct": 100.4,
    "draft_adult_pct": 91.7,
-   "removed_pct_votes24": 12.0
+   "removed_pct_votes24": 12.0,
+   "removed_after_draft": 53229,
+   "added_after_draft": 1511292,
+   "withheld": null,
+   "electors_final": 26953644,
+   "final_date": "2026-02-21",
+   "reconciles": "no",
+   "net_after_draft": 1511292,
+   "net_fall": 897211,
+   "net_fall_per_100": 3.22,
+   "made_up_pct": 62.7,
+   "final_source": {
+    "source": "primary",
+    "url": "https://www.ceo.kerala.gov.in/uploads/sir-2026/final_electorate_sir_2026.pdf",
+    "note": "The final roll equals the draft plus the 15,11,292 added, so the 53,229 reported as removed after the draft are either already netted in the additions or not reflected in the final roll."
+   }
   },
   {
    "state": "Puducherry",
@@ -1248,8 +1398,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://www.deccanherald.com/india/puducherry/sir-in-puducherry-103-lakh-voters-marked-uncollectible-forms-in-draft-roll-3833002",
-   "removed_after_draft": 16619,
-   "final_date": "2026-02-14",
    "note": "Puducherry, Mahe and Yanam regions summed.",
    "unsplit": 0,
    "shares": {
@@ -1276,7 +1424,22 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 12.8
+   "removed_pct_votes24": 12.8,
+   "removed_after_draft": 16619,
+   "added_after_draft": 41492,
+   "withheld": null,
+   "electors_final": 944211,
+   "final_date": "2026-02-14",
+   "reconciles": "no",
+   "net_after_draft": 26100,
+   "net_fall": 77367,
+   "net_fall_per_100": 7.57,
+   "made_up_pct": 25.2,
+   "final_source": {
+    "source": "press",
+    "url": "https://x.com/ceopuducherry/status/2022544949041074407",
+    "note": "The final roll is 1,227 higher than the draft plus additions less removals; 1,227 electors were marked as shifted outside the union territory."
+   }
   },
   {
    "state": "Goa",
@@ -1291,8 +1454,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://www.livemint.com/news/india/eci-releases-sir-draft-rolls-over-1-crore-voters-deleted-across-west-bengal-rajasthan-goa-puducherry-full-details-11765892938802.html",
-   "removed_after_draft": 39592,
-   "final_date": "2026-02-21",
    "note": "",
    "unsplit": 0,
    "shares": {
@@ -1319,7 +1480,22 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 11.0
+   "removed_pct_votes24": 11.0,
+   "removed_after_draft": 39592,
+   "added_after_draft": 12166,
+   "withheld": null,
+   "electors_final": 1057566,
+   "final_date": "2026-02-21",
+   "reconciles": "exact",
+   "net_after_draft": -27426,
+   "net_fall": 127468,
+   "net_fall_per_100": 10.76,
+   "made_up_pct": -27.4,
+   "final_source": {
+    "source": "primary",
+    "url": "https://ceogoa.nic.in/PDF/SIR2026/press-note-Final-publication.pdf",
+    "note": "Removed: 3,812 on forms and 35,780 found ineligible at hearings."
+   }
   },
   {
    "state": "Andaman and Nicobar Islands",
@@ -1334,8 +1510,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://scroll.in/latest/1089536/voter-list-revision-95-lakh-names-deleted-from-draft-rolls-of-andamans-chhattisgarh-mp-kerala",
-   "removed_after_draft": 5269,
-   "final_date": "2026-02-21",
    "note": "",
    "unsplit": 0,
    "shares": {
@@ -1362,7 +1536,22 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 31.6
+   "removed_pct_votes24": 31.6,
+   "removed_after_draft": 5269,
+   "added_after_draft": 16919,
+   "withheld": null,
+   "electors_final": 258040,
+   "final_date": "2026-02-21",
+   "reconciles": "exact",
+   "net_after_draft": 11650,
+   "net_fall": 52364,
+   "net_fall_per_100": 16.87,
+   "made_up_pct": 18.2,
+   "final_source": {
+    "source": "press",
+    "url": "https://x.com/Andaman_Admin/status/2025442063752511792",
+    "note": ""
+   }
   },
   {
    "state": "Lakshadweep",
@@ -1377,8 +1566,6 @@
    "figures": "exact",
    "source": "primary",
    "source_url": "https://ceolakshadweep.gov.in/Users/download_pdf_draft_roll_2024/UHJlc3MgTm90ZS0gUHVibGljYXRpb24gb2YgRHJhZnQgRWxlY3RvcmFsIFJvbGwgKDEpLnBkZg==",
-   "removed_after_draft": 47,
-   "final_date": "2026-02-14",
    "note": "Press note of the Chief Electoral Officer. Others is one elector who refused to sign.",
    "unsplit": 0,
    "shares": {
@@ -1405,7 +1592,22 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 2.9
+   "removed_pct_votes24": 2.9,
+   "removed_after_draft": 47,
+   "added_after_draft": 1270,
+   "withheld": null,
+   "electors_final": 57607,
+   "final_date": "2026-02-14",
+   "reconciles": "exact",
+   "net_after_draft": 1223,
+   "net_fall": 206,
+   "net_fall_per_100": 0.36,
+   "made_up_pct": 85.6,
+   "final_source": {
+    "source": "press",
+    "url": "https://www.newsclick.in/exclusive-sir-probe-how-many-voters-did-eci-really-disenfranchise",
+    "note": ""
+   }
   },
   {
    "state": "Maharashtra",
@@ -1420,8 +1622,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://indianexpress.com/article/cities/mumbai/maharashtra-draft-electoral-rolls-sir-2-crore-voters-excluded-claims-objections-portal-10857667/",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Reported in lakh; the reasons sum 10,513 more than the total. Includes 2.23 lakh \"others\". Claims extended to 12 October 2026.",
    "unsplit": 0,
    "shares": {
@@ -1448,7 +1648,18 @@
    "adults_2026": 98127000.0,
    "roll_adult_pct": 99.7,
    "draft_adult_pct": 78.6,
-   "removed_pct_votes24": 36.1
+   "removed_pct_votes24": 36.1,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Karnataka",
@@ -1463,8 +1674,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://www.moneycontrol.com/news/india/karnataka-sir-draft-electoral-roll-published-1-08-crore-electors-marked-absent-shifted-dead-or-duplicate-14014100.html",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Includes 3,83,884 \"others\".",
    "unsplit": 0,
    "shares": {
@@ -1491,7 +1700,18 @@
    "adults_2026": 51906000.0,
    "roll_adult_pct": 106.8,
    "draft_adult_pct": 86.0,
-   "removed_pct_votes24": 27.8
+   "removed_pct_votes24": 27.8,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Telangana",
@@ -1506,8 +1726,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://indianexpress.com/article/india/voters-dropped-telangana-sir-draft-rolls-10837552/",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Electors before the revision reported rounded (3.38 crore).",
    "unsplit": 0,
    "shares": {
@@ -1534,7 +1752,18 @@
    "adults_2026": 29351000.0,
    "roll_adult_pct": 115.2,
    "draft_adult_pct": 90.2,
-   "removed_pct_votes24": 33.3
+   "removed_pct_votes24": 33.3,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Delhi",
@@ -1549,8 +1778,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://www.thehindu.com/news/cities/Delhi/66-names-dropped-from-delhi-draft-roll-marked-shifted/article71417199.ece",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Reported in lakh. Claims and objections extended to 30 October 2026.",
    "unsplit": 1000,
    "shares": {
@@ -1577,7 +1804,18 @@
    "adults_2026": 16956000.0,
    "roll_adult_pct": 85.5,
    "draft_adult_pct": 57.5,
-   "removed_pct_votes24": 53.2
+   "removed_pct_votes24": 53.2,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Andhra Pradesh",
@@ -1592,8 +1830,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://www.deccanherald.com/india/more-than-one-crore-names-deleted-in-10-statesuts-after-sir-3rd-phase-4095354",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Reported in lakh.",
    "unsplit": 512,
    "shares": {
@@ -1620,7 +1856,18 @@
    "adults_2026": 41332000.0,
    "roll_adult_pct": 100.6,
    "draft_adult_pct": 89.8,
-   "removed_pct_votes24": 13.3
+   "removed_pct_votes24": 13.3,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Jharkhand",
@@ -1635,8 +1882,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://www.ndtv.com/india-news/over-43-lakh-names-deleted-from-jharkhand-draft-voter-rolls-after-revision-11869880",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Reported in lakh. The three reasons leave 1,18,987 names unexplained; no \"others\" figure was reported.",
    "unsplit": 118987,
    "shares": {
@@ -1663,7 +1908,18 @@
    "adults_2026": 27791000.0,
    "roll_adult_pct": 95.0,
    "draft_adult_pct": 79.3,
-   "removed_pct_votes24": 25.2
+   "removed_pct_votes24": 25.2,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Haryana",
@@ -1678,8 +1934,6 @@
    "figures": "rounded",
    "source": "press",
    "source_url": "https://www.deccanherald.com/india/more-than-one-crore-names-deleted-in-10-statesuts-after-sir-3rd-phase-4095354",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Reported in lakh.",
    "unsplit": 302,
    "shares": {
@@ -1706,7 +1960,18 @@
    "adults_2026": 22552000.0,
    "roll_adult_pct": 91.3,
    "draft_adult_pct": 76.3,
-   "removed_pct_votes24": 25.9
+   "removed_pct_votes24": 25.9,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Punjab",
@@ -1721,8 +1986,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://timesofindia.indiatimes.com/city/chandigarh/punjab-sir-identifies-over-20-lakh-ineligible-voters/articleshow/132869355.cms",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Figures at the end of enumeration, before the draft. The three reasons leave 16,076 names unexplained.",
    "unsplit": 16076,
    "shares": {
@@ -1749,7 +2012,18 @@
    "adults_2026": 24152000.0,
    "roll_adult_pct": 88.9,
    "draft_adult_pct": 80.3,
-   "removed_pct_votes24": 15.3
+   "removed_pct_votes24": 15.3,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Odisha",
@@ -1764,8 +2038,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://www.thehindu.com/news/national/odisha/odishas-final-electoral-roll-has-316-crore-voters-1766-lakh-names-struck-off/article71491775.ece",
-   "removed_after_draft": 44777,
-   "final_date": "2026-09-21",
    "note": "The three reasons leave 14,441 names unexplained; no \"others\" figure was reported.",
    "unsplit": 14441,
    "shares": {
@@ -1792,7 +2064,22 @@
    "adults_2026": 32847000.0,
    "roll_adult_pct": 101.7,
    "draft_adult_pct": 95.6,
-   "removed_pct_votes24": 8.0
+   "removed_pct_votes24": 8.0,
+   "removed_after_draft": 44777,
+   "added_after_draft": 290497,
+   "withheld": null,
+   "electors_final": 31632754,
+   "final_date": "2026-09-21",
+   "reconciles": "exact",
+   "net_after_draft": 245720,
+   "net_fall": 1766837,
+   "net_fall_per_100": 5.29,
+   "made_up_pct": 12.2,
+   "final_source": {
+    "source": "press",
+    "url": "https://www.thehindu.com/news/national/odisha/odishas-final-electoral-roll-has-316-crore-voters-1766-lakh-names-struck-off/article71491775.ece",
+    "note": "Removed: 24,070 found ineligible at hearings and 20,707 on Form 7."
+   }
   },
   {
    "state": "Uttarakhand",
@@ -1807,8 +2094,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://www.newindianexpress.com/india/2026/Aug/06/2027-lakh-voter-notices-trigger-political-row-in-uttarakhand-amid-electoral-roll-revision",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "No split by reason found for the draft figure.",
    "unsplit": 826977,
    "shares": null,
@@ -1831,7 +2116,18 @@
    "adults_2026": 8822000.0,
    "roll_adult_pct": 90.2,
    "draft_adult_pct": 80.9,
-   "removed_pct_votes24": 17.0
+   "removed_pct_votes24": 17.0,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Meghalaya",
@@ -1846,8 +2142,6 @@
    "figures": "exact",
    "source": "primary",
    "source_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2295108",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Press note of the Chief Electoral Officer, via the Press Information Bureau. Others is \"enumeration form refused or other\".",
    "unsplit": 0,
    "shares": {
@@ -1874,7 +2168,18 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 10.5
+   "removed_pct_votes24": 10.5,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Arunachal Pradesh",
@@ -1889,8 +2194,6 @@
    "figures": "exact",
    "source": "primary",
    "source_url": "https://ceoarunachal.nic.in/componenthelper/getcomponentfile/68",
-   "removed_after_draft": 30823,
-   "final_date": "2026-09-22",
    "note": "Press note of the Chief Electoral Officer.",
    "unsplit": 0,
    "shares": {
@@ -1917,7 +2220,22 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 23.3
+   "removed_pct_votes24": 23.3,
+   "removed_after_draft": 30823,
+   "added_after_draft": 8803,
+   "withheld": null,
+   "electors_final": 696026,
+   "final_date": "2026-09-22",
+   "reconciles": "exact",
+   "net_after_draft": -22020,
+   "net_fall": 191479,
+   "net_fall_per_100": 21.57,
+   "made_up_pct": -13.0,
+   "final_source": {
+    "source": "primary",
+    "url": "https://ceoarunachal.nic.in/componenthelper/getcomponentfile/68",
+    "note": "Removed: 28,899 found ineligible at hearings and 1,924 on claims and objections."
+   }
   },
   {
    "state": "Manipur",
@@ -1932,8 +2250,6 @@
    "figures": "exact",
    "source": "primary",
    "source_url": "https://ceomanipur.nic.in/Documents/PressNote/2026-2027/PRESS%20NOTE%20SIR%20FINAL%20EROLL%202026.pdf",
-   "removed_after_draft": 30650,
-   "final_date": "2026-09-06",
    "note": "Press note of the Chief Electoral Officer.",
    "unsplit": 0,
    "shares": {
@@ -1960,7 +2276,22 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 9.9
+   "removed_pct_votes24": 9.9,
+   "removed_after_draft": 30650,
+   "added_after_draft": 56871,
+   "withheld": null,
+   "electors_final": 1960620,
+   "final_date": "2026-09-06",
+   "reconciles": "exact",
+   "net_after_draft": 26221,
+   "net_fall": 132456,
+   "net_fall_per_100": 6.33,
+   "made_up_pct": 16.5,
+   "final_source": {
+    "source": "primary",
+    "url": "https://ceomanipur.nic.in/Documents/PressNote/2026-2027/PRESS%20NOTE%20SIR%20FINAL%20EROLL%202026.pdf",
+    "note": ""
+   }
   },
   {
    "state": "Nagaland",
@@ -1975,8 +2306,6 @@
    "figures": "exact",
    "source": "primary",
    "source_url": "https://ceo.nagaland.gov.in/media/sir2026/PressNoteSIR20092026.pdf",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Press note of the Chief Electoral Officer. Absent, shifted and others are one category in the note.",
    "unsplit": 0,
    "shares": {
@@ -2003,7 +2332,18 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 20.6
+   "removed_pct_votes24": 20.6,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   },
   {
    "state": "Dadra and Nagar Haveli and Daman and Diu",
@@ -2018,8 +2358,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://www.deccanherald.com/india/more-than-one-crore-names-deleted-in-10-statesuts-after-sir-3rd-phase-4095354",
-   "removed_after_draft": null,
-   "final_date": "2026-09-11",
    "note": "Only shares of the electorate were reported (absent 22.5%, shifted 4.6%, dead 1.7%, duplicate 0.6%); not converted to counts.",
    "unsplit": 126894,
    "shares": null,
@@ -2042,7 +2380,22 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 42.6
+   "removed_pct_votes24": 42.6,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": 295833,
+   "final_date": "2026-09-11",
+   "reconciles": "net only",
+   "net_after_draft": -5309,
+   "net_fall": 132203,
+   "net_fall_per_100": 30.89,
+   "made_up_pct": -4.2,
+   "final_source": {
+    "source": "press",
+    "url": "https://www.deccanherald.com/india/sir-dadra-nagar-haveli-and-daman-diu-sees-3088-voter-drop-highest-among-4-final-rolls-no-transgender-voter-named-in-list-4147035",
+    "note": "Only the final roll was published; additions and removals after the draft were not."
+   }
   },
   {
    "state": "Chandigarh",
@@ -2057,8 +2410,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://www.hindustantimes.com/cities/chandigarh-news/sir-aftermath-tewari-seeks-details-of-each-voter-deleted-from-chandigarh-s-electoral-roll-101790278557775.html",
-   "removed_after_draft": 5190,
-   "final_date": "published ",
    "note": "The total is confirmed; a split by reason has been seen only in an unofficial excerpt and is not used. Electors before the revision were not reported exactly.",
    "unsplit": 66145,
    "shares": null,
@@ -2081,7 +2432,22 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 14.7
+   "removed_pct_votes24": 14.7,
+   "removed_after_draft": 5190,
+   "added_after_draft": 15117,
+   "withheld": null,
+   "electors_final": 460209,
+   "final_date": "",
+   "reconciles": "exact",
+   "net_after_draft": 9927,
+   "net_fall": 56218,
+   "net_fall_per_100": null,
+   "made_up_pct": 15.0,
+   "final_source": {
+    "source": "press",
+    "url": "https://www.hindustantimes.com/cities/chandigarh-news/sir-aftermath-tewari-seeks-details-of-each-voter-deleted-from-chandigarh-s-electoral-roll-101790278557775.html",
+    "note": "Published by 23 September 2026; the exact date was not found."
+   }
   },
   {
    "state": "Mizoram",
@@ -2096,8 +2462,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://www.thehindu.com/news/national/mizoram/mizoram-electoral-rolls-see-78442-deletions-39243-additions-after-sir-final-count-at-835-lakh/article71440012.ece",
-   "removed_after_draft": 32280,
-   "final_date": "2026-09-07",
    "note": "No split by reason found.",
    "unsplit": 46162,
    "shares": null,
@@ -2120,7 +2484,22 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 9.4
+   "removed_pct_votes24": 9.4,
+   "removed_after_draft": 32280,
+   "added_after_draft": 39243,
+   "withheld": null,
+   "electors_final": 835869,
+   "final_date": "2026-09-07",
+   "reconciles": "exact",
+   "net_after_draft": 6963,
+   "net_fall": 39199,
+   "net_fall_per_100": 4.48,
+   "made_up_pct": 15.1,
+   "final_source": {
+    "source": "press",
+    "url": "https://www.thehindu.com/news/national/mizoram/mizoram-electoral-rolls-see-78442-deletions-39243-additions-after-sir-final-count-at-835-lakh/article71440012.ece",
+    "note": ""
+   }
   },
   {
    "state": "Sikkim",
@@ -2135,8 +2514,6 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://northeasttoday.in/northeast/sikkim-publishes-final-electoral-roll-under-sir-2026-electorate-declines-by-3-42/",
-   "removed_after_draft": 16809,
-   "final_date": "2026-09-06",
    "note": "Reports differ slightly: 37,724 or 37,737 removed.",
    "unsplit": 0,
    "shares": {
@@ -2163,7 +2540,22 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": 9.7
+   "removed_pct_votes24": 9.7,
+   "removed_after_draft": 16809,
+   "added_after_draft": 1982,
+   "withheld": null,
+   "electors_final": 418467,
+   "final_date": "2026-09-06",
+   "reconciles": "exact",
+   "net_after_draft": -14827,
+   "net_fall": 52564,
+   "net_fall_per_100": 11.16,
+   "made_up_pct": -39.3,
+   "final_source": {
+    "source": "press",
+    "url": "https://northeasttoday.in/northeast/sikkim-publishes-final-electoral-roll-under-sir-2026-electorate-declines-by-3-42/",
+    "note": ""
+   }
   },
   {
    "state": "Tripura",
@@ -2178,8 +2570,6 @@
    "figures": "",
    "source": "",
    "source_url": "https://newsonair.gov.in/eci-revises-schedule-of-ongoing-sir-of-electoral-rolls-in-tripura/",
-   "removed_after_draft": null,
-   "final_date": "",
    "note": "Draft roll not yet published; rescheduled to 12 December 2026.",
    "unsplit": null,
    "shares": null,
@@ -2202,7 +2592,18 @@
    "adults_2026": null,
    "roll_adult_pct": null,
    "draft_adult_pct": null,
-   "removed_pct_votes24": null
+   "removed_pct_votes24": null,
+   "removed_after_draft": null,
+   "added_after_draft": null,
+   "withheld": null,
+   "electors_final": null,
+   "final_date": null,
+   "reconciles": null,
+   "net_after_draft": null,
+   "net_fall": null,
+   "net_fall_per_100": null,
+   "made_up_pct": null,
+   "final_source": null
   }
  ]
 }

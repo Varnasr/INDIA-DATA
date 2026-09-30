@@ -131,6 +131,11 @@ def _telangana():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
+def _bihar_final():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_bihar_final.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
+
 def _pages_link_method():
     for p in ['bihar/index.html', 'bihar/results/index.html', 'bihar/people/index.html',
               'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html']:
@@ -152,6 +157,7 @@ for name, fn in [
     ('All India table current, and Bihar row equal to the lists', _india),
     ('downloadable tables current', _downloads),
     ('Hyderabad against Telangana current, and two seats equal to the lists', _telangana),
+    ('Bihar final roll current, and equal to the press note', _bihar_final),
     ('findings pages link to the method page', _pages_link_method),
 ]:
     check(name, fn)

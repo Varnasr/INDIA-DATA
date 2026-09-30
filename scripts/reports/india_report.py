@@ -205,9 +205,39 @@ R.p('Across all states the removal rate goes most with the %s (%.2f), but that d
 R.p('States on an international border removed fewer names, not more: a median of %.1f per 100 electors across %d border states, against %.1f across %d interior states. None of these relationships says who was removed within a state; a state-level relationship is not a finding about individuals.'
     % (B['per_100_yes'], B['n_per_100_yes'], B['per_100_no'], B['n_per_100_no']))
 
-R.h2('After the draft roll')
-R.p('After the draft rolls, %d states have published how many more names they removed at hearings and on objections: %s in all. No state has said why, so these removals are outside every figure by reason in this report. '
-    'Additions after the draft are outside it too; the final rolls of twelve phase 3 states are still to come.' % (AD['states'], lakh(AD['removed'])))
+R.h2('After the final rolls')
+FN = N['final']
+fS = sorted([s for s in S if s['electors_final'] is not None and s['net_fall_per_100'] is not None], key=lambda s: s['net_fall_per_100'])
+fig, ax = plt.subplots(figsize=(8, 6.5))
+y = list(range(len(fS)))
+ax.barh([i + 0.2 for i in y], [s['per_100'] for s in fS], height=0.4, color='#9aa5b1', label='Removed at the draft')
+ax.barh([i - 0.2 for i in y], [s['net_fall_per_100'] for s in fS], height=0.4, color='#1f3a5f', label='Net fall at the final roll')
+ax.set_yticks(y)
+ax.set_yticklabels([s['state'] for s in fS], fontsize=7)
+ax.set_xlabel('Per 100 electors on the roll before the revision', fontsize=8)
+ax.legend(fontsize=7, ncol=2, loc='upper center', bbox_to_anchor=(0.5, -0.08), frameon=False)
+style_axes(ax, 'Removed at the draft, and the fall that remains at the final roll')
+R.figure(fig, 'Figure 6. States whose final roll is out and whose roll before the revision was published exactly enough to set against it.', width=15)
+wb = next(s for s in S if s['withheld'])
+R.p('In the %d states and union territories with a final roll, %s names were left off the drafts, and the final rolls came out %s larger than the drafts: %s of the fall. '
+    '%s kept %s names off its final roll while they are decided, and without them the final rolls were %s larger, %s of the fall. '
+    'Against the rolls before the revision, the fall is %.1f per 100 electors at the final roll, from %.1f at the draft.'
+    % (FN['states'], crore(FN['removed']), crore(FN['net_after_draft']), pct(FN['made_up_pct']), wb['state'], lakh(FN['withheld']),
+       crore(FN['net_after_draft'] + FN['withheld']), pct(FN['made_up_pct_ex_withheld']), FN['net_per_100'], FN['per_100']))
+R.p('The rise from draft to final counts new electors as well as names put back, and no state has said how many of those added had been removed at the draft, so it is the most that can have been put back. '
+    'The final roll is smaller than the draft in %d states: %s. %s'
+    % (len(FN['shrank']), andj(FN['shrank']), ('How many names a state removed at the draft has no relationship with how much of that its final roll made up (rank correlation %.2f).' if abs(FN['rho_made_up']) < 0.2
+                             else 'States that removed more at the draft made up a different share of it at the final roll (rank correlation %.2f).') % FN['rho_made_up']))
+RCN = {'exact': 'Adds up', 'rounded': 'Rounded', 'net only': 'Net only', 'no': 'Does not add up'}
+sn = lambda v: '–' if v is None else ('−' + indian(-v) if v < 0 else indian(v))
+R.table(['State or UT', 'Removed at draft', 'Added after', 'Removed after', 'Final less draft', 'Made up', 'Net fall per 100', 'Figures'],
+        [[s['state'], fmt(s['removed']), fmt(s['added_after_draft']), fmt(s['removed_after_draft']), sn(s['net_after_draft']), pct(s['made_up_pct']),
+          '%.1f' % s['net_fall_per_100'] if s['net_fall_per_100'] is not None else '–', RCN[s['reconciles']]]
+         for s in sorted([s for s in S if s['electors_final'] is not None], key=lambda s: -s['removed'])],
+        widths=[3.6, 2.2, 2.0, 2.0, 2.2, 1.5, 1.7, 2.0], right={1, 2, 3, 4, 5, 6}, size=7.5)
+R.p('Figures: adds up, the draft plus additions less removals equals the final roll; net only, the state published the draft and final rolls but not the additions and removals behind the difference; does not add up, the published figures do not reconcile (%s). '
+    'Removals after the draft carry no reason in any state except Bihar, so they are outside every figure by reason in this report. %s have not yet published a final roll.'
+    % (andj([s['state'] for s in S if s['reconciles'] == 'no']), andj(FN['waiting'])))
 
 # ============================================================ CONCLUSION
 R.h1('What the Election Commission should do')
@@ -216,7 +246,7 @@ R.numbered([
     '**Publish a state-by-state table of its own**, with the reason for every removal at the draft and after it, exact rather than rounded.',
     '**Publish the deletion lists with the reason against each name for every state**, as it did for Bihar, so that removals can be counted by booth, sex and age.',
     '**Publish the basis for entries marked absent and enrolled more than once.**',
-    '**Publish the outcome of every claim and objection**, so that restorations can be set against removals.',
+    '**Publish the outcome of every claim and objection, and say how many of those added at the final roll had been removed at the draft**, so that restorations can be set against removals.',
     '**Explain why the mix of reasons differs so widely between states** under one set of instructions.',
 ])
 
