@@ -1,6 +1,6 @@
 /* SIR analyses: one stylesheet for every page, Bihar and Hyderabad.
    The look is the Bihar dashboard's: a folk-art band across the top
-   (Madhubani for Bihar, Pochampally ikat for Hyderabad), a card header with
+   (Madhubani for Bihar, Pochampally ikat for Hyderabad, five regions together for All India), a card header with
    the controls, a tab bar, summary cards, key-finding banners and chart
    cards. Every ink is measured against every surface it is painted on, in
    both themes, by scripts/check_contrast.py. */
@@ -42,6 +42,10 @@ p a,li a,td a,.note a,.takeaway a,.research-a a{text-decoration:underline}
 /* ------------------------------------------------------------ the bands */
 .band{height:6px}
 .madhubani{background:repeating-linear-gradient(90deg,var(--fill-red) 0 20px,var(--s-orange) 20px 40px,var(--s-green) 40px 60px,var(--fill-navy) 60px 80px,var(--s-purple) 80px 100px);animation:scroll 8s linear infinite}
+/* All India: one strip of five regions' motifs, so no state stands for the country.
+   Madhubani (Bihar), Pochampally ikat (Telangana), Warli (Maharashtra),
+   Ajrakh (Kutch and Sindh), Kantha (Bengal and Odisha). */
+.motifs{height:12px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='12'><rect width='24' height='12' fill='%23b3261e'/><rect width='24' height='1.5' fill='%231c1c1c'/><path d='M0 12L4 5L8 12ZM8 12L12 5L16 12ZM16 12L20 5L24 12Z' fill='%23f2c14e'/><path d='M4 8.5v2M12 8.5v2M20 8.5v2' stroke='%231c1c1c' stroke-width='1'/><rect x='24' width='24' height='12' fill='%238b1e3f'/><path d='M36 0L44 6L36 12L28 6Z' fill='%230e5e6f'/><path d='M36 3L40 6L36 9L32 6Z' fill='%23e0a526'/><rect x='48' width='24' height='12' fill='%239a4a2a'/><g fill='%23f5efe6'><circle cx='60' cy='2' r='1.4'/><path d='M57.4 3.8H62.6L60 6.6ZM60 6.6L57.4 9.4H62.6Z'/></g><path d='M56 5.4L58.4 4.6M64 5.4L61.6 4.6M58.4 9.4L57.4 12M61.6 9.4L62.6 12' stroke='%23f5efe6' stroke-width='.8'/><circle cx='51.5' cy='6' r='1' fill='%23f5efe6'/><circle cx='68.5' cy='6' r='1' fill='%23f5efe6'/><rect x='72' width='24' height='12' fill='%231f3a68'/><path d='M84 1.5L85.6 4.4L88.5 6L85.6 7.6L84 10.5L82.4 7.6L79.5 6L82.4 4.4Z' fill='%23a4262c'/><circle cx='84' cy='6' r='1.1' fill='%23f5efe6'/><g fill='%23f5efe6'><circle cx='75' cy='2.5' r='.7'/><circle cx='93' cy='2.5' r='.7'/><circle cx='75' cy='9.5' r='.7'/><circle cx='93' cy='9.5' r='.7'/></g><rect x='96' width='24' height='12' fill='%23f3e3c3'/><path d='M97 3H120M97 6H120M97 9H120' stroke='%23b4441c' stroke-width='1' stroke-dasharray='2 1.5'/></svg>") repeat-x;background-size:120px 12px;animation:scroll 8s linear infinite}
 /* Pochampally ikat: rows of diamonds in maroon and gold on indigo-teal, the
    double-ikat weave of the Telangana handloom town (GI tag, 2004). */
 .ikat{height:12px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='12' shape-rendering='crispEdges'><rect width='24' height='12' fill='%238b1e3f'/><path d='M12 0h2v2h2v2h2v2h2v2h-2v2h-2v2h-2v-0h-4v0h-2v-2h-2v-2h-2v-2h2v-2h2v-2h2v-2z' fill='%230e5e6f'/><path d='M11 3h2v2h2v2h-2v2h-2v-2h-2v-2h2z' fill='%23e0a526'/><rect x='0' y='5' width='2' height='2' fill='%23e0a526'/><rect x='22' y='5' width='2' height='2' fill='%23e0a526'/></svg>") repeat-x;background-size:24px 12px;animation:scroll 8s linear infinite}
@@ -122,6 +126,7 @@ main h2:first-child{margin-top:0}
 :root[data-theme="dark"] .takeaway a,:root[data-theme="dark"] .finding a,:root[data-theme="dark"] .caveat a{color:var(--navy)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .takeaway,:root:not([data-theme="light"]) .finding,:root:not([data-theme="light"]) .caveat{background:linear-gradient(135deg,rgba(244,208,63,.18),rgba(169,223,191,.18));color:var(--ink)}:root:not([data-theme="light"]) .takeaway a,:root:not([data-theme="light"]) .finding a,:root:not([data-theme="light"]) .caveat a{color:var(--navy)}}
 .takeaway-title{font-weight:700}
+.takeaway ol.short{margin:.4rem 0 .5rem;padding-inline-start:1.2rem}.takeaway ol.short li{margin:.3rem 0;line-height:1.45}.takeaway .short-note{margin:.4rem 0 0;font-size:.88rem}
 .finding b{font-weight:700}
 
 /* chart cards: .card on the dashboards, .panel elsewhere */
