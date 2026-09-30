@@ -109,6 +109,16 @@ polling-station name (60 stations), it has 7,891 electors in none of the three
 fates, and it must never be given a linked or unlinked rate. A check enforces
 the last point.
 
+`data/hyderabad/raw/telangana_districts.csv` and `hyderabad_district_acs.csv`
+are the state's draft-roll totals for all 33 districts and Hyderabad
+district's 15 seats; `scripts/build_telangana.py` writes
+`data/hyderabad/telangana.json` for the `hyderabad/telangana/` page and checks
+that the districts add to the state, the seats to the district, and that
+Charminar and Yakutpura equal the lists exactly. The finding it carries: the
+Old City seats (39.9%) removed no more than Hyderabad's other ten (41.6%);
+the removals follow the capital region. Totals only; do not bring in a
+per-seat split by reason that is not the state's own.
+
 ## Privacy
 
 Aggregates only. A row-level sample of the Bihar lists exists in the project's

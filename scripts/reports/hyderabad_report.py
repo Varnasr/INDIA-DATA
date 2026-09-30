@@ -27,6 +27,7 @@ for p in PR:
     if p['locality'] in (None, 'nan'):
         p['locality'] = None
 A, t = S['acs'], S['totals']
+TG = json.load(open(os.path.join(ROOT, 'data', 'hyderabad', 'telangana.json')))
 ACC = ['#8B1E3F', '#0E5E6F', '#E0A526', '#1F618D', '#8E7CC3']
 R = Report(RGBColor(0x8B, 0x1E, 0x3F))
 s = lambda f: sum(f(a) for a in A)
@@ -170,8 +171,23 @@ R.table(['Constituency', 'Part', 'Locality', 'Electors', 'Struck off', '% struck
           '%.0f' % p['untraceable_share_of_deleted'] if p['untraceable_share_of_deleted'] is not None else '–'] for p in top],
         widths=[2.4, 1.1, 3.4, 1.6, 1.6, 1.7, 1.9, 2.3], right={1, 3, 4, 5, 6, 7}, size=7.5)
 
+R.h2('Against Hyderabad and Telangana')
+seats = sorted(TG['seats'], key=lambda x: -x['rate'])
+ocmax = max(x['rate'] for x in seats if x['old_city'])
+fig, ax = plt.subplots(figsize=(7, 4.4))
+ax.barh([x['name'] for x in seats][::-1], [x['rate'] for x in seats][::-1], color=[ACC[0] if x['old_city'] else '#1F618D' for x in seats][::-1])
+ax.set_xlabel('% of the roll left off the draft of 17 August 2026', fontsize=8)
+ax.tick_params(axis='y', labelsize=7)
+style_axes(ax, 'The fifteen seats of Hyderabad district; Old City in maroon')
+R.figure(fig, 'Figure. The state\'s own draft-roll figures, which give totals only.', width=13)
+R.p('On the state\'s draft-roll figures, the five Old City seats lost %s of their roll and Hyderabad\'s other ten seats %s. Every seat in the district lost between %s and %s, and %d seats outside the Old City lost more than any Old City seat. '
+    'Across Hyderabad district the draft left off %s, and in the rest of Telangana %s. The removals follow the capital region, not the Old City.'
+    % (pct(TG['old_city']['rate']), pct(TG['other_hyderabad']['rate']), pct(seats[-1]['rate']), pct(seats[0]['rate']), sum(1 for x in seats if not x['old_city'] and x['rate'] > ocmax),
+       pct(TG['hyderabad']['rate']), pct(TG['rest_of_state']['rate'])))
+
 R.h2('Key insights')
 R.bullets([
+    '**Not an Old City outlier**: the five seats lost %s of their roll on the state\'s figures, Hyderabad\'s other ten %s, the rest of Telangana %s.' % (pct(TG['old_city']['rate']), pct(TG['other_hyderabad']['rate']), pct(TG['rest_of_state']['rate'])),
     '**%s electors struck off**, %s of the five pre-revision rolls, and %s more summoned to a hearing.' % (indian(t['deleted']), pct(t['rate']), indian(t['hearing'])),
     '**More names struck off than the 2023 margin in all %d constituencies**; more than every valid vote cast in %s.' % (len(A), andj([a['name'] for a in overV])),
     '**Yakutpura was won by %s votes** and lost %s names, %.0f times the margin.' % (indian(yak['e2023']['margin']), indian(yak['deleted']), yak['e2023']['deleted_over_margin']),
