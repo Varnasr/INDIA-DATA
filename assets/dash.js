@@ -76,7 +76,7 @@
         history.replaceState(null, '', '#' + tab);
         // A tab opened from far down the page starts at its own top, just
         // under the sticky tab bar, rather than halfway through.
-        var bar = document.querySelector('.nav-tabs'), m = document.getElementById('content') || document.querySelector('main');
+        var sb = document.querySelector('.secbar'), bar = sb && sb.offsetHeight ? sb : document.querySelector('.nav-tabs'), m = document.getElementById('content') || document.querySelector('main');
         var top = m.getBoundingClientRect().top + window.scrollY - bar.offsetHeight - (parseFloat(getComputedStyle(bar).top) || 0);
         if (window.scrollY > top) window.scrollTo(0, top);
       }
