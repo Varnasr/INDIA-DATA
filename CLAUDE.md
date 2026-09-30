@@ -86,7 +86,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 - **The site is "SIR analysis for India"; Bihar and Hyderabad are two
   analyses inside it.** Every page carries the same header: that title, a
   subtitle naming the analysis, a two-way switch (Bihar 2025 / Hyderabad 2026),
-  and a Downloads menu with the report in PDF and Word and the slides. The
+  and a Downloads menu with the report online, the PDF and the slides. The
   header is identical markup on all 15 pages; change it everywhere at once.
 - **The tab bar is sticky.** On a wide screen the header sticks and the bar
   sticks beneath it (`sir.js` writes the header's height to `--hh`); on a phone
@@ -172,12 +172,24 @@ The report pages are in English only: the article carries `lang="en"` and
 them would add some 70,000 characters to the review.
 
 Beside them are two slide decks, `*-deck.pptx`, written by
-`scripts/reports/decks.js` (pptxgenjs) from the same JSON and linked as
-"Slides" from each dashboard's report card. Every figure and every verdict in
-them is computed, including the slide titles that make a claim (the Hyderabad
-margin slide checks that every seat lost more names than its winner polled
-before saying so). The decks state no site address, and the speaker notes
-carry the caveats. `build.sh` rebuilds them with the reports.
+`scripts/reports/decks.js` (pptxgenjs) from the same JSON: Bihar 27 slides,
+Hyderabad 20. Each has one section per page of the site (Bihar: the scale,
+elections, women/religion/caste, border, districts, the FAQ, limits, method;
+Hyderabad: overview, age/sex/religion/2002, polling parts, hearings, the FAQ,
+limits, method), named in a small label above every title, and a contents
+slide numbered from the sections. **Titles are plain sentences stating the
+finding, computed from the data**, never a slogan: "In 174 of 243 seats, more
+names were removed than the 2025 winning margin", not "Where the removals
+dwarfed the margin". A title that makes a claim checks it first (the
+Hyderabad margin slide checks every seat lost more names than its winner
+polled; the districts slide names the factor with the largest rank
+correlation and lists those under 0.2 as unrelated). The decks state no site
+address, and the speaker notes carry the caveats. `build.sh` rebuilds them
+with the reports.
+
+**Say only what the lists record.** No page, report or deck may say how long a
+hearing slot lasted or how many minutes an elector had: the lists record cases
+per slot, not the slot's length.
 
 ## Watch out for
 

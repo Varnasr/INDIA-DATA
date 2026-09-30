@@ -153,7 +153,7 @@ R.figure(fig, 'Figure 3. The four constituencies whose lists record the 2002 lin
 
 R.h2('Hearings')
 R.p('%s electors kept on the draft roll were summoned to a hearing, %s of the pre-revision rolls, across %s hearing slots. Not being traceable to the last intensive revision was the commonest reason, %s of flags. '
-    'The heaviest single slot listed %s cases, in %s, where the median slot listed %d. A slot of that size leaves each elector a minute or two.'
+    'The heaviest single slot listed %s cases, in %s, where the median slot listed %d. The lists do not record how long a slot lasted.'
     % (indian(t['hearing']), pct(100 * t['hearing'] / t['electors']), indian(s(lambda a: a['slots'])), pct(100 * ruleTot['Unmapped with Last SIR'] / sum(ruleTot.values())),
        indian(heavy['max_slot']), heavy['name'], heavy['median_slot']))
 R.table(['Rule that sent the elector to a hearing'] + names + ['All five'],

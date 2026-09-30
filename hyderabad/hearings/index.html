@@ -72,7 +72,7 @@ SIR.json('data/hyderabad/summary.json').then(function (s) {
     options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: L('% of roll') } } } } });
   var un = SIR.sum(A, function (a) { return a.rules[s.rules[0]]; }), all = SIR.sum(A, function (a) { return SIR.sum(s.rules.map(function (r) { return a.rules[r]; }), function (x) { return x; }); });
   var heavy = A.slice().sort(function (a, b) { return b.max_slot - a.max_slot; })[0];
-  document.getElementById('fHear').innerHTML = L('<b>Not being traceable to the last intensive revision was the commonest reason to be summoned</b>, {share} of flags; mismatched names of parents and of the elector came next. The heaviest single slot listed {max} cases, in {name}, where the median slot listed {median}. A slot of that size leaves each elector a minute or two.', { share: SIR.pct(100 * un / all), max: SIR.n(heavy.max_slot), name: heavy.name, median: SIR.d(heavy.median_slot, 0) });
+  document.getElementById('fHear').innerHTML = L('<b>Not being traceable to the last intensive revision was the commonest reason to be summoned</b>, {share} of flags; mismatched names of parents and of the elector came next. The heaviest single slot listed {max} cases, in {name}, where the median slot listed {median}. The lists do not record how long a slot lasted.', { share: SIR.pct(100 * un / all), max: SIR.n(heavy.max_slot), name: heavy.name, median: SIR.d(heavy.median_slot, 0) });
 }).catch(SIR.fail);
 </script>
 </body>

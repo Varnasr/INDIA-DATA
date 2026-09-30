@@ -51,7 +51,7 @@ SIR.json('data/hyderabad/summary.json').then(function (s) {
     [L('Why are the old struck off so often?'),
      L('{old} of electors aged 80 and over were struck off, against {young} of those aged 18 to 24.', { old: SIR.pct(age[7]), young: SIR.pct(age[0]) }) + ' ' + L('Some of that is death.') + ' ' + L('The rest is electors least able to answer a visit, attend a hearing or produce papers.')],
     [L('Could hearings be held properly?'),
-     L('{summoned} electors kept on the draft roll were summoned.', { summoned: SIR.n(t.hearing) }) + ' ' + L('The heaviest single slot listed {cases} cases, in {name}.', { cases: SIR.n(heavy.max_slot), name: heavy.name }) + ' ' + L('A slot of that size leaves each elector a minute or two. <a href="../hearings/">Hearings</a>.')],
+     L('{summoned} electors kept on the draft roll were summoned.', { summoned: SIR.n(t.hearing) }) + ' ' + L('The heaviest single slot listed {cases} cases, in {name}.', { cases: SIR.n(heavy.max_slot), name: heavy.name }) + ' ' + L('The lists do not record how long a slot lasted. <a href="../hearings/">Hearings</a>.')],
     [L('Did this change an election result?'),
      L('No election has been held on the revised roll.') + ' ' + L('What can be said is the scale: every one of the five constituencies lost more names than its 2023 winning margin, and in {names} the names struck off outnumber every valid vote cast in 2023.', { names: valid.join(L(' and ')) }) + ' ' + L('Yakutpura was won by {margin} votes and lost {deleted} names.', { margin: SIR.n(yak.e2023.margin), deleted: SIR.n(yak.deleted) })],
     [L('How reliable are the lists?'),
