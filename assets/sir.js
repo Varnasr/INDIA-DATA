@@ -98,6 +98,61 @@
   }
   window.addEventListener('resize', measure);
   measure();
+  // ------------------------------------------------------- section bar
+  // On a phone the row of tabs is replaced by one line: where you are
+  // ("Bihar 2025 › Overview", 1 of 11), arrows to the previous and next
+  // section, and a list of every section behind a tap. It is built from the
+  // tabs themselves, so the markup is unchanged and a page without
+  // JavaScript keeps the scrolling row. The stylesheet shows one or the other.
+  if (nav) (function () {
+    var items = [].slice.call(nav.querySelectorAll('.nav-tab'));
+    if (items.length < 2) return;
+    var cur = document.querySelector('header.top .switch [aria-current]');
+    var place = cur ? cur.textContent.trim() : '';
+    function label(t) { return t.textContent.trim(); }
+    function icon(t) { var i = t.querySelector('svg'); return i ? i.outerHTML : ''; }
+    function index() {
+      for (var i = 0; i < items.length; i++) if (items[i].getAttribute('aria-selected') === 'true' || items[i].getAttribute('aria-current') === 'page') return i;
+      return 0;
+    }
+    function go(i) {
+      var t = items[i]; if (!t) return;
+      if (t.tagName === 'A') location.href = t.href; else t.click();
+    }
+    var arrowPrev = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>';
+    var arrowNext = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>';
+    var caret = '<svg class="icon caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
+    var bar = document.createElement('div');
+    bar.className = 'secbar';
+    bar.innerHTML = '<button type="button" class="sec-step sec-prev" aria-label="' + L('Previous section') + '">' + arrowPrev + '</button>' +
+      '<button type="button" class="sec-now" aria-expanded="false" aria-controls="secmenu"><span class="sec-where"></span><span class="sec-count"></span>' + caret + '</button>' +
+      '<button type="button" class="sec-step sec-next" aria-label="' + L('Next section') + '">' + arrowNext + '</button>' +
+      '<div class="secmenu" id="secmenu" hidden><div class="secgrid">' + items.map(function (t, i) {
+        return '<button type="button" data-i="' + i + '">' + icon(t) + '<span>' + label(t) + '</span></button>';
+      }).join('') + '</div></div>';
+    nav.parentNode.insertBefore(bar, nav);
+    document.documentElement.classList.add('has-secbar');
+    var now = bar.querySelector('.sec-now'), menu = bar.querySelector('.secmenu');
+    function paint() {
+      var i = index();
+      bar.querySelector('.sec-where').innerHTML = (place ? '<span class="sec-crumb">' + place + ' <span aria-hidden="true">›</span></span> ' : '') + '<b>' + label(items[i]) + '</b>';
+      bar.querySelector('.sec-prev').disabled = i === 0;
+      bar.querySelector('.sec-next').disabled = i === items.length - 1;
+      bar.querySelector('.sec-count').textContent = L('{i} of {n}', { i: i + 1, n: items.length });
+      menu.querySelectorAll('[data-i]').forEach(function (b) { var on = +b.getAttribute('data-i') === i; b.classList.toggle('on', on); if (on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+    }
+    function open(v) { menu.hidden = !v; now.setAttribute('aria-expanded', v ? 'true' : 'false'); if (v) { var o = menu.querySelector('.on'); (o || menu.querySelector('button')).focus(); } }
+    now.addEventListener('click', function () { open(menu.hidden); });
+    bar.querySelector('.sec-prev').addEventListener('click', function () { open(false); go(index() - 1); });
+    bar.querySelector('.sec-next').addEventListener('click', function () { open(false); go(index() + 1); });
+    menu.addEventListener('click', function (e) { var b = e.target.closest('[data-i]'); if (!b) return; open(false); go(+b.getAttribute('data-i')); now.focus(); });
+    document.addEventListener('click', function (e) { if (!menu.hidden && !bar.contains(e.target)) open(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { open(false); now.focus(); } });
+    // A dashboard switches tabs without loading a page; follow it.
+    new MutationObserver(paint).observe(nav, { attributes: true, subtree: true, attributeFilter: ['aria-selected'] });
+    paint();
+  })();
+
   // The downloads menu closes on a click elsewhere and on Escape.
   document.addEventListener('click', function (e) {
     document.querySelectorAll('details.dl[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });

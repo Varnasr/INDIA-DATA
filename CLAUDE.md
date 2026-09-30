@@ -94,6 +94,12 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   whichever edge has more tabs, and the active tab is scrolled into view.
   Measured at 390px before this: a 176px header and a 1,451px tab bar showing
   two and a half tabs, gone from the screen after the first scroll.
+- **On a phone the tab row becomes a section bar** (`sir.js`, built from the
+  tabs, so no page markup changes): "Bihar 2025 › Overview · 1 of 11", arrows
+  for the previous and next section (disabled at either end, never wrapping),
+  and the full list of sections as a grid behind a tap. It follows a
+  dashboard's tab changes through a MutationObserver on `aria-selected`.
+  Without JavaScript the scrolling row stays, so nothing depends on it.
 - **The part explorer takes a link to a part**: `hyderabad/explorer/#Yakutpura-297`.
 - No page states the site's own address.
 - Colour tokens live in `assets/sir.css`, with the dark block written twice
