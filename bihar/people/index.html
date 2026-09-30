@@ -66,12 +66,13 @@
   <div class="grid">
     <div class="panel wide">
       <h3>Muslim share of removals against the 2011 census, by district</h3>
-      <p>The bar is the range from name classification, and the dot is the district's Muslim share of the population in 2011. Where the dot sits inside the bar, the removals match the population.</p>
+      <p>The bar is the range from name classification. The dark dot is the district's Muslim share of the population in 2011, and the open dot is that share carried forward to 2025. Where a dot sits inside the bar, the removals match the population.</p>
       <div class="chart rows"><canvas id="cRel" aria-label="Muslim share of removals, range, against census share by district"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fRel"></p>
-  <p class="note" style="margin-top:0;border:0;padding-top:0">The 2011 census is the most recent count of religion by district. Bihar's Muslim share was 16.87% then and 17.70% in the 2023 caste survey.</p>
+  <p class="finding" id="fProj"></p>
+  <p class="note" style="margin-top:0;border:0;padding-top:0">The 2011 census is the most recent count of religion by district. The 2025 figures carry each district's 2011 share forward at the growth rates of its Muslim and total populations between the 2001 and 2011 censuses. Jehanabad and Arwal were one district in 2001, so both take their joint rate.</p>
 
   <h2>Caste</h2>
   <p class="sub">The lists give a surname for each removed elector and for the father or husband named beside them. The father's or husband's surname tells more, because most women are listed as Devi, Kumari or Khatun, which say nothing about caste. Surnames are classified in two ways. Classification A uses the project's mapping of surnames to castes. Classification B is strict and counts only surnames that belong almost entirely to one group, setting aside names such as Singh, Prasad, Ray, Mahato, Mandal, Sharma, Thakur, Chaudhary and Manjhi, which several groups carry. Only findings that hold under both are reported.</p>
@@ -135,8 +136,12 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
   var Ds = D.slice().sort(function (a, b) { return b.muslim_share_population_2011 - a.muslim_share_population_2011; });
   SIR.chart('cRel', { type: 'bar', data: { labels: Ds.map(function (d) { return d.district; }), datasets: [
       { type: 'bar', label: L('Muslim-name share of removals (range)'), data: Ds.map(function (d) { return [d.muslim_share_deleted_low, d.muslim_share_deleted_high]; }), $token: '--fill-other', barPercentage: 0.75, order: 2 },
-      { type: 'line', label: L('Muslim share of population, 2011'), data: Ds.map(function (d) { return d.muslim_share_population_2011; }), showLine: false, $token: '--ink', pointRadius: 4, pointHoverRadius: 5, order: 1 }] },
+      { type: 'line', label: L('Muslim share of population, 2011'), data: Ds.map(function (d) { return d.muslim_share_population_2011; }), showLine: false, $token: '--ink', pointRadius: 4, pointHoverRadius: 5, order: 1 },
+      { type: 'line', label: L('Muslim share of population, carried forward to 2025'), data: Ds.map(function (d) { return d.muslim_share_projected_2025; }), showLine: false, $token: '--ink', pointStyle: 'circle', pointRadius: 4, pointHoverRadius: 5, pointBackgroundColor: 'rgba(0,0,0,0)', borderWidth: 1.5, order: 0 }] },
     options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('% of removals, and % of population') } } } } });
+  var pin = D.filter(function (d) { return d.muslim_share_projected_2025 >= d.muslim_share_deleted_low && d.muslim_share_projected_2025 <= d.muslim_share_deleted_high; });
+  var pclear = D.filter(function (d) { return d.muslim_share_deleted_low - d.muslim_share_projected_2025 > 1; });
+  document.getElementById('fProj').innerHTML = L('<b>Carried forward to 2025, the census shares give much the same picture.</b> At each district\'s growth rates from 2001 to 2011, Bihar\'s Muslim share comes to {st} in 2025, close to the {sv} counted by the 2023 caste survey, and no district moves by more than {mx} points. On the 2025 shares the range holds the population share in {inside} of {n} districts, and the lowest estimate is more than a point above it in {clear} districts ({list}).', { st: SIR.pct(id.muslim_projected_2025), sv: SIR.pct(id.survey_baseline.Muslim), mx: SIR.d(Math.max.apply(null, D.map(function (d) { return Math.abs(d.muslim_share_projected_2025 - d.muslim_share_population_2011); })), 1), inside: pin.length, n: D.length, clear: pclear.length, list: pclear.map(function (d) { return d.district; }).join(', ') });
   var growth = 17.70 - 16.87;
   var inside = D.filter(function (d) { return d.muslim_share_population_2011 >= d.muslim_share_deleted_low && d.muslim_share_population_2011 <= d.muslim_share_deleted_high; });
   var over = D.filter(function (d) { return d.muslim_share_deleted_low > d.muslim_share_population_2011; });

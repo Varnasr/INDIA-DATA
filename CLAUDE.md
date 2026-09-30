@@ -50,7 +50,14 @@ Things the build depends on, each asserted by `check_data.py`:
   of the roll before the revision: the Format 4B draft roll by sex plus the
   phase 1 removals by sex. Women are over-represented among the removed in all
   38 districts, by 2.8 to 13.7 points. Religion stays on Census 2011, the last
-  count by religion at district level, and the pages say so.
+  count by religion at district level, and the pages say so. Beside it,
+  `muslim_share_projected_2025` carries each district forward 14 years at its
+  2001-2011 Muslim and total growth rates (`data/bihar/raw/census_religion_2001_2011.csv`;
+  Jehanabad and Arwal share their 2001 unit). The state comes to 17.34% against
+  17.70% in the 2023 caste survey; the same eight districts stay more than a
+  point above either way. District literacy and early marriage come from NFHS-5
+  (`data/bihar/raw/nfhs5_districts.csv`, fact-sheet definitions, Bihar fielded
+  2019-20); only density and urban share are still Census 2011.
 - **Caste is not identified.** Two surname classifications give different
   compositions and wide bounds. The pages say so. Do not collapse them into
   one number, and do not reintroduce "Devi" or any title as a caste marker.
@@ -86,8 +93,14 @@ state publishes a final roll or a primary press note, update its row and its
 flags, not the totals.
 
 Two more curated files feed the same build. `data/india/raw/covariates.csv`
-holds each state's characteristics (Census 2011, RBI income per head 2023-24,
-Home Ministry borders) with a source per variable; `build_india.py` computes
+holds each state's 2011 characteristics, RBI income per head 2023-24 and Home
+Ministry borders; `data/india/raw/benchmarks_recent.csv` holds the post-2011
+replacements (`PICK` in `build_india.py`): literacy from PLFS 2023-24, spending
+from HCES 2023-24, the urban share projected to 1 March 2026, and Muslim, SC, ST
+shares and the sex ratio from NFHS-5. NFHS shares are of households, a little
+below shares of people. Migration has no state figure after 2011 and stays on
+the census. `robustness_2011` reruns the correlations on the 2011 values and
+the method page reports which readings change; `build_india.py` computes
 rank correlations with the removal rate and the reason shares, for all states,
 by phase and for states of 50 lakh or more. **Report the phase split with
 every pooled figure**: the pooled correlations with in-migration, income and

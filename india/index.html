@@ -87,7 +87,7 @@
   <div class="twrap" tabindex="0" role="region" aria-label="Women among the removed, by state"><table id="tGender"></table></div>
 
   <h2>What goes with the removal rate</h2>
-  <p class="sub">Each state's removals per 100 electors, and the share of its removals entered as dead or as enrolled more than once, against its characteristics. The figures are rank correlations across states: 1 means the two rise together, 0 no relationship, and anything under 0.2 either way is read as none. Characteristics are from the 2011 census, except income per head (2023-24).</p>
+  <p class="sub">Each state's removals per 100 electors, and the share of its removals entered as dead or as enrolled more than once, against its characteristics. The figures are rank correlations across states: 1 means the two rise together, 0 no relationship, and anything under 0.2 either way is read as none. Each characteristic's source is shown beside it. Migration is from the 2011 census because no newer figure is published by state. Everything else is from 2019 to 2026.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Rank correlations with state characteristics"><table id="tCorr"></table></div>
   <div class="grid">
     <div class="panel wide">
@@ -213,11 +213,12 @@ SIR.json('data/india/states.json').then(function (d) {
   ], G, { sort: 'gap' });
 
   // ---- correlations
-  var CL = { income_pc: L('income per head'), urban_pct: L('urban share'), literacy: L('literacy'), female_literacy: L('women\'s literacy'), muslim_pct: L('Muslim share'), sc_pct: L('SC share'), st_pct: L('ST share'), sex_ratio: L('sex ratio'), out_migration: L('share born here but living in another state'), in_migration: L('share of residents born in another state') };
+  var CL = { income_pc: L('income per head'), mpce_rural: L('rural spending per head'), mpce_urban: L('urban spending per head'), urban_pct: L('urban share'), literacy: L('literacy'), female_literacy: L('women\'s literacy'), muslim_pct: L('Muslim share of households'), sc_pct: L('SC share of households'), st_pct: L('ST share of households'), sex_ratio: L('sex ratio'), out_migration: L('share born here but living in another state'), in_migration: L('share of residents born in another state') };
+  var CS = {}; d.characteristics.forEach(function (c) { CS[c.key] = c.source; });
   var C = d.correlations;
   var cell = function (k) { return function (v, row) { return v == null ? '–' : SIR.d(v, 2) + ' <span class="muted">(' + row['n_' + k] + ')</span>'; }; };
   SIR.table(document.getElementById('tCorr'), [
-    { k: 'key', label: L('Characteristic'), left: true, fmt: function (v) { return CL[v].charAt(0).toUpperCase() + CL[v].slice(1); } },
+    { k: 'key', label: L('Characteristic'), left: true, fmt: function (v) { return CL[v].charAt(0).toUpperCase() + CL[v].slice(1) + ' <span class="muted">(' + SIR.esc(CS[v]) + ')</span>'; } },
     { k: 'per_100_all', label: L('Removal rate, all states'), fmt: cell('per_100_all') },
     { k: 'per_100_phase2', label: L('Removal rate, phase 2'), fmt: cell('per_100_phase2') },
     { k: 'per_100_phase3', label: L('Removal rate, phase 3'), fmt: cell('per_100_phase3') },
@@ -233,8 +234,10 @@ SIR.json('data/india/states.json').then(function (d) {
   var p3 = C.filter(function (c) { return c.per_100_phase3 != null && Math.abs(c.per_100_phase3) >= 0.4; }).map(function (c) { return CL[c.key]; });
   var dupTop = C.slice().sort(function (a, b) { return Math.abs(b.duplicate_big) - Math.abs(a.duplicate_big); })[0];
   var mus = C.filter(function (c) { return c.key === 'muslim_pct'; })[0];
-  document.getElementById('fCorr').innerHTML = L('<b>Across all states the removal rate goes most with {top} ({r}), but that does not hold within phase 2 ({r2}); it comes from phase 3 ({r3}).</b> In phase 3, {p3} are all related to the removal rate, because the large destination states of phase 3 are richer, more urban and home to more migrants than the North-Eastern states revised with them, and {n3} states cannot separate one of these from another. The Muslim share of a state\'s population shows no consistent relationship: {m1} across all states, {m2} in phase 2 and {m3} in phase 3. Among the larger states, the share entered as enrolled more than once goes most with {dup} ({rd}). None of this says who was removed within a state; a state-level relationship is not a finding about individuals.', {
-    top: CL[top.key], r: SIR.d(top.per_100_all, 2), r2: SIR.d(top.per_100_phase2, 2), r3: SIR.d(top.per_100_phase3, 2), p3: p3.join(', '), n3: top.n_per_100_phase3,
+  var both = C.filter(function (c) { return c.per_100_phase2 != null && c.per_100_phase3 != null && Math.abs(c.per_100_phase2) >= 0.2 && Math.abs(c.per_100_phase3) >= 0.2 && (c.per_100_phase2 > 0) === (c.per_100_phase3 > 0); });
+  var bothTxt = both.length ? L('The only characteristics that go with the removal rate the same way in both phases are {list}.', { list: both.map(function (c) { return L('{c} ({a} in phase 2, {b} in phase 3)', { c: CL[c.key], a: SIR.d(c.per_100_phase2, 2), b: SIR.d(c.per_100_phase3, 2) }); }).join(L(' and ')) }) : L('No characteristic goes with the removal rate the same way in both phases.');
+  document.getElementById('fCorr').innerHTML = L('<b>Across all states the removal rate goes most with the {top} ({r}), and that comes from phase 3 ({r3}). In phase 2 it is {r2}.</b> In phase 3, {p3} all go with the removal rate, because the big states that draw migrants were revised in the same phase as the North-East, and they differ from it on all of these at once. With only {n3} states in the phase, there is no telling these apart. {both} The Muslim share of households has no consistent relationship, {m1} across all states, {m2} in phase 2 and {m3} in phase 3. Among the larger states, the share entered as enrolled more than once goes most with {dup} ({rd}). None of this says who was removed inside a state, because a pattern across states tells us nothing about individuals.', {
+    top: CL[top.key], r: SIR.d(top.per_100_all, 2), r2: SIR.d(top.per_100_phase2, 2), r3: SIR.d(top.per_100_phase3, 2), p3: p3.join(', '), n3: top.n_per_100_phase3, both: bothTxt,
     m1: SIR.d(mus.per_100_all, 2), m2: SIR.d(mus.per_100_phase2, 2), m3: SIR.d(mus.per_100_phase3, 2), dup: CL[dupTop.key], rd: SIR.d(dupTop.duplicate_big, 2) });
   var B = d.border;
   document.getElementById('fBorder').innerHTML = L('<b>States on an international border removed fewer names than interior states.</b> The typical border state removed {y} per 100 electors across {ny} states, and the typical interior state {n} across {nn}. The median share entered as dead is {dy} in border states and {dn} in the interior, and the share entered as enrolled more than once is {py} and {pn}.', {

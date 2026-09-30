@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="../../assets/i18n.js"></script>
 <title>Bihar SIR 2025: districts</title>
-<meta name="description" content="SIR deletions in Bihar's 38 districts against income, urbanisation, literacy, density and booth size.">
+<meta name="description" content="SIR deletions in Bihar's 38 districts against income, urbanisation, women's literacy, early marriage, density and booth size.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="../../assets/sir.css">
 </head>
@@ -41,7 +41,7 @@
   <p class="caveat">With only 38 districts these factors cannot be told apart. The poorest districts are also the least urban and least literate, and in the north-east they send the most migrants out. Read each panel as a description of the districts, not as a cause.</p>
   <h2>Every district</h2>
   <div class="twrap" tabindex="0" role="region" aria-label="Districts"><table id="tbl"></table></div>
-  <p class="note">Population, density, literacy and urban share: Census 2011. Per-capita district domestic product: Bihar Economic Survey, 2021-22 at constant prices. Electors per booth: the 2025 electorate over the number of booths with SIR lists.</p>
+  <p class="note">Density and urban share: Census 2011, the last count at district level. Women's literacy and marriage before 18: National Family Health Survey (NFHS-5), district fact sheets, fielded in Bihar in 2019-20. Per-capita district domestic product: Bihar Economic Survey, 2021-22 at constant prices. Electors per booth: the 2025 electorate over the number of booths with SIR lists.</p>
 </main>
 <footer>Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -56,8 +56,8 @@ SIR.json('data/bihar/districts.json').then(function (ds) {
   var F = [
     ['gddp_pc', L('Per-capita district product, 2021-22 (₹)'), L('Does income relate to deletions?')],
     ['urban_pct', L('Urban population, 2011 (%)'), L('Does urbanisation matter?')],
-    ['literacy', L('Literacy, 2011 (%)'), L('Does literacy relate to deletions?')],
-    ['female_literacy', L('Female literacy, 2011 (%)'), L('And women’s literacy?')],
+    ['women_literate', L('Women aged 15 to 49 who are literate, 2019-20 (%)'), L('Does women\'s literacy relate to deletions?')],
+    ['child_marriage', L('Women aged 20 to 24 married before 18, 2019-20 (%)'), L('Does early marriage relate to deletions?')],
     ['density', L('Density, 2011 (per sq km)'), L('Does density matter?')],
     ['electors_per_booth', L('Electors per booth, 2025'), L('Does booth size relate to deletions?')]
   ];
@@ -76,7 +76,7 @@ SIR.json('data/bihar/districts.json').then(function (ds) {
     { k: 'district', label: L('District'), left: true }, { k: 'acs', label: L('Seats') }, { k: 'deleted', label: L('Removed'), fmt: SIR.n },
     { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 2); } }, { k: 'per_booth', label: L('Per booth'), fmt: function (v) { return SIR.d(v); } },
     { k: 'gddp_pc', label: L('Per-capita product (₹)'), fmt: SIR.n }, { k: 'urban_pct', label: L('Urban %'), fmt: function (v) { return SIR.d(v); } },
-    { k: 'literacy', label: L('Literacy %'), fmt: function (v) { return SIR.d(v); } }, { k: 'border', label: L('Border'), left: true, fmt: function (v) { return v === 'Interior' ? L('Interior') : SIR.esc(v.replace(/;/g, ', ')); } }
+    { k: 'women_literate', label: L('Women literate %'), fmt: function (v) { return SIR.d(v); } }, { k: 'border', label: L('Border'), left: true, fmt: function (v) { return v === 'Interior' ? L('Interior') : SIR.esc(v.replace(/;/g, ', ')); } }
   ], ds, { sort: 'per_100' });
 }).catch(SIR.fail);
 </script>

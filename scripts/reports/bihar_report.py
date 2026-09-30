@@ -253,16 +253,24 @@ R.p('The roll records no religion. The booth lists classify removed names as Hin
     'Bihar\'s Muslim population was 16.87%% in the 2011 census and 17.70%% in the 2023 caste survey. The census share lies inside the range in %d of %d districts. '
     'In %d districts the classified Muslim share alone runs more than a point above the census share: %s.'
     % (pct(100 * t['unknown'] / cls), pct(mlo), pct(mhi), len(inside), len(DI), len(above), andj([d['district'] for d in above])))
+pin = [d for d in DI if d['muslim_share_deleted_low'] <= d['muslim_share_projected_2025'] <= d['muslim_share_deleted_high']]
+pab = [d for d in DI if d['muslim_share_deleted_low'] > d['muslim_share_projected_2025'] + 1]
+pmx = max(abs(d['muslim_share_projected_2025'] - d['muslim_share_population_2011']) for d in DI)
+R.p('The 2011 census is the last count of religion by district, so each district\'s share is also carried forward to 2025 at the growth rates of its Muslim and total populations between the 2001 and 2011 censuses. '
+    'That puts Bihar\'s Muslim share at %s in 2025, close to the caste survey\'s %s, and moves no district by more than %.1f points. '
+    'On the 2025 shares the range holds the population share in %d districts, and the classified Muslim share is still more than a point above it in %d districts (%s).'
+    % (pct(ID['muslim_projected_2025']), pct(ID['survey_baseline']['Muslim']), pmx, len(pin), len(pab), andj([d['district'] for d in pab])))
 fig, ax = plt.subplots(figsize=(8, 7))
 dd = sorted(DI, key=lambda d: d['muslim_share_population_2011'])
 y = range(len(dd))
 ax.hlines(y, [d['muslim_share_deleted_low'] for d in dd], [d['muslim_share_deleted_high'] for d in dd], color='#9CC5CE', lw=5)
 ax.scatter([d['muslim_share_population_2011'] for d in dd], y, color='#1C2833', s=14, zorder=3, label='Census 2011')
+ax.scatter([d['muslim_share_projected_2025'] for d in dd], y, facecolors='none', edgecolors='#1C2833', s=14, lw=0.9, zorder=4, label='Carried forward to 2025')
 ax.set_yticks(list(y), [d['district'] for d in dd], fontsize=7)
 ax.set_xlabel('Muslim share, %', fontsize=8)
 ax.legend(fontsize=8, frameon=False, loc='lower right')
 style_axes(ax, 'Muslim share of removals, as a range, against the census')
-R.figure(fig, 'Figure 8. The bar runs from names classified Muslim to all names that could be Muslim, and the dot is the 2011 census share.')
+R.figure(fig, 'Figure 8. The bar runs from names classified Muslim to all names that could be Muslim, the filled dot is the 2011 census share, and the open dot that share carried forward to 2025.')
 
 R.h2('Caste')
 R.p('Caste is not recorded either. It can be read, in part, from the surname of the father or husband listed with each removed elector, and two classifications are used because surnames cross caste lines. '
@@ -384,7 +392,7 @@ R.bullets([
     'The reason, sex and age of every phase 1 removal are counted by constituency and booth from the deletion list, with no individual records kept.',
     'Deaths come from the Sample Registration System Statistical Report 2024 and the Civil Registration System 2024, and marriage migration from Census of India 2011, table D-3.',
     'The 2025 Assembly results give the winner, runner-up and turnout for each constituency, checked across two separate tables. Where they disagreed, the figure matching the reported result was used.',
-    'The 2024 Lok Sabha result by booth is from Form 20. The other sources are Census of India 2011 for religion by district, the Bihar caste-based survey of 2 October 2023, and the Bihar Economic Survey.',
+    'The 2024 Lok Sabha result by booth is from Form 20. The other sources are the Census of India 2001 and 2011 for religion by district, the National Family Health Survey 2019-20 for women\'s literacy, schooling and marriage before 18 by district, the Bihar caste-based survey of 2 October 2023, and the Bihar Economic Survey.',
 ])
 R.p('Each booth is counted once. A second program, written separately, recomputes every headline figure from the lists before publication. Votes polled are the turnout applied to the 2025 roll. No name, EPIC number or address is published.')
 

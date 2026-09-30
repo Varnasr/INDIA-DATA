@@ -437,7 +437,7 @@
    "/hyderabad/method/"
   ]
  },
- "<b>Across all states the removal rate goes most with {top} ({r}), but that does not hold within phase 2 ({r2}); it comes from phase 3 ({r3}).</b> In phase 3, {p3} are all related to the removal rate, because the large destination states of phase 3 are richer, more urban and home to more migrants than the North-Eastern states revised with them, and {n3} states cannot separate one of these from another. The Muslim share of a state's population shows no consistent relationship: {m1} across all states, {m2} in phase 2 and {m3} in phase 3. Among the larger states, the share entered as enrolled more than once goes most with {dup} ({rd}). None of this says who was removed within a state; a state-level relationship is not a finding about individuals.": {
+ "<b>Across all states the removal rate goes most with the {top} ({r}), and that comes from phase 3 ({r3}). In phase 2 it is {r2}.</b> In phase 3, {p3} all go with the removal rate, because the big states that draw migrants were revised in the same phase as the North-East, and they differ from it on all of these at once. With only {n3} states in the phase, there is no telling these apart. {both} The Muslim share of households has no consistent relationship, {m1} across all states, {m2} in phase 2 and {m3} in phase 3. Among the larger states, the share entered as enrolled more than once goes most with {dup} ({rd}). None of this says who was removed inside a state, because a pattern across states tells us nothing about individuals.": {
   "kind": "script",
   "pages": [
    "/india/"
@@ -462,6 +462,12 @@
   ]
  },
  "<b>Among those aged 18 to 29 marked shifted, {f} were women and {m} men, so women outnumber men by {x}.</b> Marriage alone could account for a number that size. In the ten years before the 2011 census, {mr} women in Bihar moved on marriage, about {py} a year, so the excess is about {yrs} of one year's marriage moves. {rel} Women were the largest share in {top}. The census counts women in the district they moved to, so this measures marriage movement in general and not removals from the home roll. The figures are also fifteen years old.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/people/"
+  ]
+ },
+ "<b>Carried forward to 2025, the census shares give much the same picture.</b> At each district's growth rates from 2001 to 2011, Bihar's Muslim share comes to {st} in 2025, close to the {sv} counted by the 2023 caste survey, and no district moves by more than {mx} points. On the 2025 shares the range holds the population share in {inside} of {n} districts, and the lowest estimate is more than a point above it in {clear} districts ({list}).": {
   "kind": "script",
   "pages": [
    "/bihar/people/"
@@ -1134,12 +1140,6 @@
    "/"
   ]
  },
- "And women’s literacy?": {
-  "kind": "script",
-  "pages": [
-   "/bihar/districts/"
-  ]
- },
  "Answers to the questions people most often ask about the Bihar SIR analysis, on the dead and the shifted, NDA and INDIA seats, margins, women, religion, caste and how far the lists can be trusted.": {
   "kind": "markup",
   "pages": [
@@ -1609,7 +1609,13 @@
    "/"
   ]
  },
- "Census of India 2011, the latest count by religion at district level": {
+ "Census of India 2011, the last count at district level": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
+  ]
+ },
+ "Census of India 2011, the latest count by religion at district level, and Census of India 2001, table C-01, used to carry each district's 2011 share forward to 2025 at its 2001-2011 growth rates": {
   "kind": "markup",
   "pages": [
    "/bihar/method/"
@@ -2045,6 +2051,12 @@
    "/bihar/results/"
   ]
  },
+ "Density and urban share: Census 2011, the last count at district level. Women's literacy and marriage before 18: National Family Health Survey (NFHS-5), district fact sheets, fielded in Bihar in 2019-20. Per-capita district domestic product: Bihar Economic Survey, 2021-22 at constant prices. Electors per booth: the 2025 electorate over the number of booths with SIR lists.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/districts/"
+  ]
+ },
  "Density, 2011 (per sq km)": {
   "kind": "script",
   "pages": [
@@ -2158,6 +2170,12 @@
   "kind": "script",
   "pages": [
    "/bihar/people/"
+  ]
+ },
+ "District characteristics": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
   ]
  },
  "District table, CSV": {
@@ -2284,6 +2302,12 @@
    "/bihar/districts/"
   ]
  },
+ "Does early marriage relate to deletions?": {
+  "kind": "script",
+  "pages": [
+   "/bihar/districts/"
+  ]
+ },
  "Does gender relate to intensity?": {
   "kind": "script",
   "pages": [
@@ -2303,18 +2327,6 @@
   ]
  },
  "Does it vary by who won the seat?": {
-  "kind": "script",
-  "pages": [
-   "/"
-  ]
- },
- "Does literacy relate to deletions?": {
-  "kind": "script",
-  "pages": [
-   "/bihar/districts/"
-  ]
- },
- "Does literacy relate to removals?": {
   "kind": "script",
   "pages": [
    "/"
@@ -2359,6 +2371,18 @@
   ]
  },
  "Does volume relate to intensity?": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "Does women's literacy relate to deletions?": {
+  "kind": "script",
+  "pages": [
+   "/bihar/districts/"
+  ]
+ },
+ "Does women's literacy relate to removals?": {
   "kind": "script",
   "pages": [
    "/"
@@ -2513,7 +2537,7 @@
    "/bihar/method/"
   ]
  },
- "Each of Bihar's 38 districts, with its removals per 100 electors set against its income, urban share, literacy, density and booth size.": {
+ "Each of Bihar's 38 districts, with its removals per 100 electors set against its income, urban share, women's literacy, early marriage, density and booth size.": {
   "kind": "script",
   "pages": [
    "/"
@@ -2549,7 +2573,7 @@
    "/india/"
   ]
  },
- "Each state's removals per 100 electors, and the share of its removals entered as dead or as enrolled more than once, against its characteristics. The figures are rank correlations across states: 1 means the two rise together, 0 no relationship, and anything under 0.2 either way is read as none. Characteristics are from the 2011 census, except income per head (2023-24).": {
+ "Each state's removals per 100 electors, and the share of its removals entered as dead or as enrolled more than once, against its characteristics. The figures are rank correlations across states: 1 means the two rise together, 0 no relationship, and anything under 0.2 either way is read as none. Each characteristic's source is shown beside it. Migration is from the 2011 census because no newer figure is published by state. Everything else is from 2019 to 2026.": {
   "kind": "markup",
   "pages": [
    "/india/"
@@ -2890,8 +2914,7 @@
  "Female literacy, 2011 (%)": {
   "kind": "script",
   "pages": [
-   "/",
-   "/bihar/districts/"
+   "/"
   ]
  },
  "Fewer.": {
@@ -4135,17 +4158,16 @@
    "/india/method/"
   ]
  },
- "Literacy %": {
+ "Literacy": {
   "kind": "script",
   "pages": [
-   "/bihar/districts/"
+   "/india/method/"
   ]
  },
- "Literacy, 2011 (%)": {
-  "kind": "script",
+ "Literacy for everyone and for women, aged 7 and over, is from the Periodic Labour Force Survey 2023-24 (annual report, appendix table 7). Spending per head, rural and urban, is from the Household Consumption Expenditure Survey 2023-24 (fact sheet, statement 7), the series without the value of free items. The urban share is the Technical Group's projection for 1 March 2026 (table 10). Dadra and Nagar Haveli and Daman and Diu are projected as two territories, so the merged union territory has no figure. The Muslim, SC and ST shares and the sex ratio are from the National Family Health Survey 2019-21. The shares are of households, by the religion and caste of the household head (India report, table 2.10), and run a little below shares of people because Muslim households are larger than average. The sex ratio is of the whole population. The two migration measures are from the 2011 census place-of-birth tables, because the migration survey of 2020-21 was published for India as a whole and not by state. Telangana and Andhra Pradesh have no migration figure, because the 2011 tables count a move between them as a move within one state. Income per head is net state domestic product per head at current prices for 2023-24, from the Reserve Bank's handbook of state statistics. International borders are from the Ministry of Home Affairs.": {
+  "kind": "markup",
   "pages": [
-   "/",
-   "/bihar/districts/"
+   "/india/method/"
   ]
  },
  "Load per slot": {
@@ -4454,7 +4476,7 @@
   "kind": "script",
   "pages": [
    "/hyderabad/parts/",
-   "/india/"
+   "/india/method/"
   ]
  },
  "Muslim share of a part against its deletion rate": {
@@ -4463,7 +4485,20 @@
    "/hyderabad/parts/"
   ]
  },
+ "Muslim share of households": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Muslim share of population, 2011": {
+  "kind": "script",
+  "pages": [
+   "/",
+   "/bihar/people/"
+  ]
+ },
+ "Muslim share of population, carried forward to 2025": {
   "kind": "script",
   "pages": [
    "/",
@@ -4787,6 +4822,12 @@
    "/"
   ]
  },
+ "National Family Health Survey (NFHS-5), district fact sheets for Bihar, fielded in 2019-20: women aged 15 to 49 who are literate, and women aged 20 to 24 married before 18": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
+  ]
+ },
  "Net fall": {
   "kind": "script",
   "pages": [
@@ -4847,6 +4888,12 @@
   "kind": "script",
   "pages": [
    "/bihar/people/"
+  ]
+ },
+ "No characteristic goes with the removal rate the same way in both phases.": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "No clear relationship across the 38 districts (rank correlation {rho}).": {
@@ -5524,12 +5571,6 @@
    "/bihar/method/"
   ]
  },
- "Population, density, literacy and urban share: Census 2011. Per-capita district domestic product: Bihar Economic Survey, 2021-22 at constant prices. Electors per booth: the 2025 electorate over the number of booths with SIR lists.": {
-  "kind": "markup",
-  "pages": [
-   "/bihar/districts/"
-  ]
- },
  "Possible share of all removals (B)": {
   "kind": "script",
   "pages": [
@@ -6080,6 +6121,12 @@
    "/hyderabad/method/"
   ]
  },
+ "Run on the 2011 census values instead, the rank correlations with the removal rate across all states come out as follows. {list}. The reading changes for {n} of them ({changed}).": {
+  "kind": "script",
+  "pages": [
+   "/india/method/"
+  ]
+ },
  "SC seats lost {sc} per 100 electors, ST seats {st}, general seats {gen}.": {
   "kind": "script",
   "pages": [
@@ -6089,10 +6136,16 @@
  "SC share": {
   "kind": "script",
   "pages": [
+   "/india/method/"
+  ]
+ },
+ "SC share of households": {
+  "kind": "script",
+  "pages": [
    "/india/"
   ]
  },
- "SIR deletions in Bihar's 38 districts against income, urbanisation, literacy, density and booth size.": {
+ "SIR deletions in Bihar's 38 districts against income, urbanisation, women's literacy, early marriage, density and booth size.": {
   "kind": "markup",
   "pages": [
    "/bihar/districts/"
@@ -6105,6 +6158,12 @@
   ]
  },
  "ST share": {
+  "kind": "script",
+  "pages": [
+   "/india/method/"
+  ]
+ },
+ "ST share of households": {
   "kind": "script",
   "pages": [
    "/india/"
@@ -6308,6 +6367,12 @@
   "kind": "markup",
   "pages": [
    "/hyderabad/people/"
+  ]
+ },
+ "Sex ratio": {
+  "kind": "script",
+  "pages": [
+   "/india/method/"
   ]
  },
  "Share dead": {
@@ -6694,7 +6759,7 @@
    "/hyderabad/people/"
   ]
  },
- "The 2011 census is the most recent count of religion by district. Bihar's Muslim share was 16.87% then and 17.70% in the 2023 caste survey.": {
+ "The 2011 census is the most recent count of religion by district. The 2025 figures carry each district's 2011 share forward at the growth rates of its Muslim and total populations between the 2001 and 2011 censuses. Jehanabad and Arwal were one district in 2001, so both take their joint rate.": {
   "kind": "markup",
   "pages": [
    "/bihar/people/"
@@ -6803,7 +6868,7 @@
    "/hyderabad/faq/"
   ]
  },
- "The bar is the range from name classification, and the dot is the district's Muslim share of the population in 2011. Where the dot sits inside the bar, the removals match the population.": {
+ "The bar is the range from name classification. The dark dot is the district's Muslim share of the population in 2011, and the open dot is that share carried forward to 2025. Where a dot sits inside the bar, the removals match the population.": {
   "kind": "markup",
   "pages": [
    "/bihar/people/"
@@ -6851,7 +6916,7 @@
    "/bihar/people/"
   ]
  },
- "The census share lies inside the range in {inside} of {districts} districts.": {
+ "The census share lies inside the range in {inside} of {districts} districts. The open dots carry each district's share forward to 2025 at its growth rates from 2001 to 2011, and they lie inside it in {pin}.": {
   "kind": "script",
   "pages": [
    "/"
@@ -7147,6 +7212,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
+  ]
+ },
+ "The only characteristics that go with the removal rate the same way in both phases are {list}.": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "The party that led each booth": {
@@ -7489,10 +7560,16 @@
    "/bihar/districts/"
   ]
  },
- "Urban share, literacy, SC and ST shares, sex ratio and population are from the 2011 census primary census abstract; the Muslim share from the 2011 religion tables; the two migration measures from the 2011 place-of-birth tables (born in the state and living in another, and living in the state and born in another, each as a share of the state's population). Telangana and Andhra Pradesh are rebuilt from their 2011 districts and have no migration figure, because the 2011 tables count a move between them as a move within one state. Income per head is per capita net state domestic product at current prices for 2023-24, from the Reserve Bank's handbook of state statistics; Lakshadweep and Dadra and Nagar Haveli and Daman and Diu have none. International borders are from the Ministry of Home Affairs.": {
-  "kind": "markup",
+ "Urban share": {
+  "kind": "script",
   "pages": [
    "/india/method/"
+  ]
+ },
+ "Urban share and density by district": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
   ]
  },
  "Used for": {
@@ -8115,6 +8192,19 @@
    "/bihar/people/"
   ]
  },
+ "Women aged 15 to 49 who are literate, 2019-20 (%)": {
+  "kind": "script",
+  "pages": [
+   "/",
+   "/bihar/districts/"
+  ]
+ },
+ "Women aged 20 to 24 married before 18, 2019-20 (%)": {
+  "kind": "script",
+  "pages": [
+   "/bihar/districts/"
+  ]
+ },
  "Women among the removed": {
   "kind": "script",
   "pages": [
@@ -8183,6 +8273,12 @@
    "/hyderabad/explorer/"
   ]
  },
+ "Women literate %": {
+  "kind": "script",
+  "pages": [
+   "/bihar/districts/"
+  ]
+ },
  "Women minus men (points)": {
   "kind": "script",
   "pages": [
@@ -8224,6 +8320,18 @@
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
+  ]
+ },
+ "Women's literacy": {
+  "kind": "script",
+  "pages": [
+   "/india/method/"
+  ]
+ },
+ "Women's literacy and marriage by district": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
   ]
  },
  "Women's rate minus men's, inside each part (points)": {
@@ -8620,6 +8728,12 @@
    "/india/"
   ]
  },
+ "none": {
+  "kind": "script",
+  "pages": [
+   "/india/method/"
+  ]
+ },
  "not listed": {
   "kind": "script",
   "pages": [
@@ -8747,6 +8861,12 @@
    "/bihar/border/"
   ]
  },
+ "rural spending per head": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "seats lost more names than their 2025 margin": {
   "kind": "script",
   "pages": [
@@ -8828,6 +8948,12 @@
   ]
  },
  "urban share": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "urban spending per head": {
   "kind": "script",
   "pages": [
    "/india/"
@@ -8974,6 +9100,18 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "{c} ({a} in phase 2, {b} in phase 3)": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "{c} {a} with the recent figure and {b} with 2011": {
+  "kind": "script",
+  "pages": [
+   "/india/method/"
   ]
  },
  "{deaths} deaths were recorded, and {old} electors aged 70 and over were struck off, so death accounts for only part of the removals at the oldest ages.": {

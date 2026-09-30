@@ -104,7 +104,7 @@ R.figure(fig, 'Figure 2. Nineteen states with projections by age. The dashed lin
 dl = sorted(adS, key=lambda x: x['draft_adult_pct'])
 R.p('A roll larger than the adult population is what a roll swollen by the dead and the departed would look like, and it is the case the revision was meant to answer. Across the %d states with projections by age, the rolls before the revision held %s of the projected population aged 18 and over, and the draft rolls hold %s. '
     'Only %d had a roll larger than their adult population: %s. How far a roll exceeded its adult population has no relationship with how many names the state removed (rank correlation %.2f). The lowest draft rolls against the adult population are in %s. '
-    'The projections are from the 2011 census and count residents, so a state that receives many migrants counts adults who may be registered in their home state, which lowers its ratio.'
+    'The projections count residents, so a state that receives many migrants counts adults who may be registered in their home state, which lowers its ratio.'
     % (ADU['states'], pct(100 * ADU['roll_total'] / ADU['adults_total']), pct(100 * ADU['draft_total'] / ADU['adults_total']), len(ADU['over_100']), andj(ADU['over_100']), ADU['rho_rate'],
        andj(['%s (%s)' % (x['state'], pct(x['draft_adult_pct'])) for x in dl[:3]])))
 vS = sorted([x for x in S if x.get('removed_pct_votes24') is not None], key=lambda x: -x['removed_pct_votes24'])
@@ -184,9 +184,11 @@ R.table(['State', 'Women removed', 'Men removed', 'Women, % removed', 'Women, % 
 
 R.h2('What goes with the removal rate')
 CR = N['correlations']
-CL = {'income_pc': 'income per head', 'urban_pct': 'urban share', 'literacy': 'literacy', 'female_literacy': 'women\'s literacy', 'muslim_pct': 'Muslim share',
-      'sc_pct': 'SC share', 'st_pct': 'ST share', 'sex_ratio': 'sex ratio', 'out_migration': 'share born here but living in another state',
+CL = {'income_pc': 'income per head', 'mpce_rural': 'rural spending per head', 'mpce_urban': 'urban spending per head', 'urban_pct': 'urban share', 'literacy': 'literacy', 'female_literacy': 'women\'s literacy', 'muslim_pct': 'Muslim share of households',
+      'sc_pct': 'SC share of households', 'st_pct': 'ST share of households', 'sex_ratio': 'sex ratio', 'out_migration': 'share born here but living in another state',
       'in_migration': 'share of residents born in another state'}
+CS = {c['key']: c['source'] for c in N['characteristics']}
+both = [c for c in CR if c['per_100_phase2'] is not None and c['per_100_phase3'] is not None and abs(c['per_100_phase2']) >= 0.2 and abs(c['per_100_phase3']) >= 0.2 and (c['per_100_phase2'] > 0) == (c['per_100_phase3'] > 0)]
 fmtr = lambda c, k: '–' if c[k] is None else '%.2f (%d)' % (c[k], c['n_' + k])
 top = max(CR, key=lambda c: abs(c['per_100_all']))
 p3 = [CL[c['key']] for c in CR if c['per_100_phase3'] is not None and abs(c['per_100_phase3']) >= 0.4]
@@ -195,13 +197,16 @@ dupTop = max(CR, key=lambda c: abs(c['duplicate_big']))
 B = N['border']
 R.p('Each state\'s removals per 100 electors, and the shares of its removals entered as dead or as enrolled more than once, are set against its characteristics as rank correlations across states: 1 means the two rise together, 0 no relationship, and anything under 0.2 either way is read as none. The number of states in each is in brackets.')
 R.table(['Characteristic', 'Rate, all states', 'Rate, phase 2', 'Rate, phase 3', 'Share dead', 'Share twice, larger states'],
-        [[CL[c['key']][0].upper() + CL[c['key']][1:], fmtr(c, 'per_100_all'), fmtr(c, 'per_100_phase2'), fmtr(c, 'per_100_phase3'), fmtr(c, 'dead_all'), fmtr(c, 'duplicate_big')]
+        [[CL[c['key']][0].upper() + CL[c['key']][1:] + ' (' + CS[c['key']] + ')', fmtr(c, 'per_100_all'), fmtr(c, 'per_100_phase2'), fmtr(c, 'per_100_phase3'), fmtr(c, 'dead_all'), fmtr(c, 'duplicate_big')]
          for c in sorted(CR, key=lambda c: -c['per_100_all'])],
-        widths=[5.2, 2.4, 2.4, 2.4, 2.2, 2.6], right={1, 2, 3, 4, 5}, size=8)
-R.p('Across all states the removal rate goes most with the %s (%.2f), but that does not hold within phase 2 (%.2f); it comes from phase 3 (%.2f). In phase 3, %s are all related to the removal rate, because the large destination states of phase 3 are richer, more urban and home to more migrants than the North-Eastern states revised with them, and %d states cannot separate one of these from another. '
-    'The Muslim share of a state\'s population shows no consistent relationship: %.2f across all states, %.2f in phase 2 and %.2f in phase 3. Among the larger states, the share entered as enrolled more than once goes most with %s (%.2f).'
-    % (CL[top['key']], top['per_100_all'], top['per_100_phase2'], top['per_100_phase3'], andj(p3), top['n_per_100_phase3'],
-       mus['per_100_all'], mus['per_100_phase2'], mus['per_100_phase3'], CL[dupTop['key']], dupTop['duplicate_big']))
+        widths=[6.0, 2.2, 2.2, 2.2, 2.0, 2.4], right={1, 2, 3, 4, 5}, size=7.5)
+R.p('Across all states the removal rate goes most with the %s (%.2f), and that comes from phase 3 (%.2f). In phase 2 it is %.2f. In phase 3, %s all go with the removal rate, because the big states that draw migrants were revised in the same phase as the North-East, and they differ from it on all of these at once. With only %d states in the phase, there is no telling these apart. '
+    '%s The Muslim share of households has no consistent relationship, %.2f across all states, %.2f in phase 2 and %.2f in phase 3. Among the larger states, the share entered as enrolled more than once goes most with %s (%.2f). '
+    'Migration is from the 2011 census because no newer figure is published by state, and every other characteristic is from 2019 to 2026. Run on the 2011 census values instead, the reading changes only for %s.'
+    % (CL[top['key']], top['per_100_all'], top['per_100_phase3'], top['per_100_phase2'], andj(p3), top['n_per_100_phase3'],
+       ('The only characteristics that go with the removal rate the same way in both phases are %s.' % andj(['%s (%.2f in phase 2, %.2f in phase 3)' % (CL[c['key']], c['per_100_phase2'], c['per_100_phase3']) for c in both])) if both else 'No characteristic goes with the removal rate the same way in both phases.',
+       mus['per_100_all'], mus['per_100_phase2'], mus['per_100_phase3'], CL[dupTop['key']], dupTop['duplicate_big'],
+       andj([x['key'].replace('_pct', ' share').replace('_', ' ') for x in N['robustness_2011'] if x['rho_recent'] is not None and x['rho_2011'] is not None and ((abs(x['rho_recent']) >= 0.2) != (abs(x['rho_2011']) >= 0.2) or (abs(x['rho_recent']) >= 0.2 and (x['rho_recent'] > 0) != (x['rho_2011'] > 0)))]) or 'none of them'))
 R.p('States on an international border removed fewer names than interior states. The typical border state removed %.1f per 100 electors across %d states, and the typical interior state %.1f across %d. None of these relationships says who was removed inside a state, because a pattern across states tells us nothing about individuals.'
     % (B['per_100_yes'], B['n_per_100_yes'], B['per_100_no'], B['n_per_100_no']))
 
