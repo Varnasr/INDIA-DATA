@@ -635,6 +635,20 @@ function india() {
     .addNotes('Outside Bihar the figures are the Chief Electoral Officers\' own, from their press notes or as reported in the press; Bihar is counted from the deletion lists. Shares are of the removals each state split by reason.');
   const toc = contentsSlide(pres, K, Pal);
 
+  {
+    const A0 = N.adults, F0 = N.final, G0 = N.gender, bigS = big.slice().reverse(), r0 = A0.rho_rate;
+    const pts = [
+      'Before the revision, the rolls already held ' + pct(100 * A0.roll_total / A0.adults_total) + ' of adults in the ' + A0.states + ' states with population projections. Only ' + A0.over_100.length + ' of those states had more names on the roll than adults.',
+      'The revision still took off ' + crore(T.removed) + ' names in ' + T.states + ' states, ' + T.per_100.toFixed(1) + ' of every 100 electors, and the draft rolls now hold ' + pct(100 * A0.draft_total / A0.adults_total) + ' of adults. ' + (Math.abs(r0) < 0.2 ? 'States whose rolls were most over-full did not cut more.' : r0 > 0 ? 'States whose rolls were most over-full did cut more.' : 'States whose rolls were most over-full cut less.'),
+      'Of the names removed with a reason given, only ' + pct(T.shares.dead) + ' were entered as dead. The rest were marked moved, not found or on the roll twice, and nobody has checked those entries.',
+      'The same rules gave very different results. ' + rated[0].state + ' removed ' + rated[0].per_100.toFixed(1) + ' of every 100 electors and ' + rated[rated.length - 1].state + ' ' + rated[rated.length - 1].per_100.toFixed(1) + '. Among big states, the share marked moved or not found runs from ' + pct(bigS[0].shares.shifted_absent_other) + ' in ' + bigS[0].state + ' to ' + pct(bigS[bigS.length - 1].shares.shifted_absent_other) + ' in ' + bigS[bigS.length - 1].state + '.',
+      'Women were more likely to be removed. In ' + G0.filter((g) => g.gap > 1).length + ' of the ' + G0.length + ' states that report by sex, women are a bigger share of the names removed than of the roll.',
+      'Little has come back. In the ' + F0.states + ' states with a final roll, the rolls grew back by at most ' + pct(F0.made_up_pct) + ' of what was cut, and that rise includes new voters.'];
+    const s0 = K.slide('All India', 'The rolls held ' + pct(100 * A0.roll_total / A0.adults_total) + ' of adults before the revision, and it removed ' + T.per_100.toFixed(1) + ' of every 100 electors', 'Six findings in short, each computed from the state figures');
+    s0.addText(pts.map((t, i, a) => ({ text: t, options: { bullet: { type: 'number' }, breakLine: i < a.length - 1 } })), { x: M, y: TOP, w: W - 2 * M, h: CH - 0.7, fontFace: BODY, fontSize: 15, color: INK, margin: 0, isTextBox: true, valign: 'top', paraSpaceAfter: 9, fit: 'shrink' });
+    K.body(s0, 'Two limits. The adult figures count people where they live, so states that draw migrants look short of electors registered at home. The figures show what happened, not why.', M, TOP + CH - 0.6, W - 2 * M, 0.6, 12);
+    s0.addNotes('Point 1 covers the 19 states with projections by age, from the Technical Group on Population Projections. Point 6 is an upper bound on names put back, because the rise from draft to final includes new electors.');
+  }
   let s = K.slide('All India', crore(T.removed) + ' names left off the draft rolls, ' + T.per_100.toFixed(1) + ' for every 100 electors', 'All ' + T.states + ' states and union territories that have published a draft roll; Tripura publishes in December');
   K.stats(s, [[crore(T.removed), 'names left off the draft rolls'], [crore(T.shifted_absent_other), 'entered as shifted, absent or other'], [crore(T.dead), 'entered as dead'], [crore(T.duplicate), 'entered as enrolled more than once']], TOP, 1.7);
   K.body(s, 'A reason is what an officer wrote down, and nobody has checked it. About one in five of the removals split by reason was a death. The other four in five rest on an officer writing down that the elector was not where the roll said, or was on it twice. ' + (T.unsplit / 1e5).toFixed(1) + ' lakh names are in states that have not published a full split.', M, TOP + 2.1, W - 2 * M, 2.4, 17);
