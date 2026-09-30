@@ -141,6 +141,11 @@ def _bihar_tests():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
+def _impact():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_impact.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
+
 def _pages_link_method():
     for p in ['bihar/index.html', 'bihar/results/index.html', 'bihar/people/index.html',
               'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html']:
@@ -164,6 +169,7 @@ for name, fn in [
     ('Hyderabad against Telangana current, and two seats equal to the lists', _telangana),
     ('Bihar final roll current, and equal to the press note', _bihar_final),
     ('Bihar deaths and marriage tests current, and the census districts add up', _bihar_tests),
+    ('Impact estimates for Bihar and Hyderabad current', _impact),
     ('findings pages link to the method page', _pages_link_method),
 ]:
     check(name, fn)

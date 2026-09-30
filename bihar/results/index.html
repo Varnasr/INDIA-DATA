@@ -53,6 +53,13 @@
     </div>
   </div>
   <p class="finding" id="fMarginR"></p>
+  <h3 style="margin-top:1.5rem">Could the removals have changed who won?</h3>
+  <p class="sub">How the removed electors might have voted, estimated three ways, and one figure that needs no estimate at all. The count is each seat's names still off the final roll, less those entered as dead, at the seat's 2025 turnout. That count is low, because the names added after the draft include new electors, so every estimate is also run on all the names removed, with nothing added back.</p>
+  <p class="finding" id="fBreak"></p>
+  <p class="finding" id="fImpact"></p>
+  <p class="finding" id="fGroups"></p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Seats where the runner-up needed under 65 per cent of the removed"><table id="tImpact"></table></div>
+  <p class="caveat" id="cImpact"></p>
 
   <h2>2. Seats, grouped by who held them</h2>
   <p class="sub">Deletions per 100 electors, with each seat labelled by the 2020 Assembly winner, the 2024 Lok Sabha segment leader, and the 2025 Assembly winner.</p>
@@ -194,6 +201,38 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
       { k: 'net_fall', label: L('Net fall'), fmt: SIR.n }, { k: 'ratio', label: L('Net fall / margin'), fmt: function (v) { return SIR.d(v, 1) + '×'; } }
     ], netOver.map(function (a) { a.ratio = a.net_fall / a.margin2025; return a; }), { sort: 'ratio', limit: 40 });
   });
+}).catch(SIR.fail);
+
+SIR.json('data/bihar/impact.json').then(function (I) {
+  var B = I.breakeven_bands.lower, S = I.summary;
+  var name = function (x) { return L('{seat} to {party}', { seat: x.name, party: x.runner_up }); };
+  var list = function (k) { return S[k].seats.length ? S[k].seats.map(name).join(', ') : L('none'); };
+  var close = I.close.map(function (x) { return x.name; });
+  document.getElementById('fBreak').innerHTML = L('<b>In {n} of {seats} seats the runner-up could not have won even if every removed elector who would have voted had voted for them.</b> In {mid} more the runner-up needed more than 55% of those votes. Only in {k} seats, {list}, would a lean of under 55% have been enough.', {
+    n: B.over_100, seats: I.seats_total, mid: B['55_to_65'] + B['65_to_100'], k: B.under_55, list: close.join(', ') });
+  var models = ['booth_lower', 'booth_upper', 'religion_lower', 'religion_upper', 'sex_lower', 'sex_upper'];
+  var won = I.seats.filter(function (x) { return x.alliance_w === 'NDA'; }).length;
+  var nda = models.map(function (k) { return won - S[k].to_india + S[k].to_nda; });
+  var c = I.comp_booth_all;
+  document.getElementById('fImpact').innerHTML = L('<b>Had the removed voted the way their own polling booths voted in 2024, the NDA would have lost more of them than INDIA.</b> In the {n} seats the two alliances fought each other, those who would have voted lean {nda} NDA, {india} INDIA and {oth} other parties. Counting only the names still off the final roll, {k1} seats would have changed hands ({l1}). Counting every name removed, {k2} would have ({l2}).', {
+    n: I.seats_nda_vs_india, nda: SIR.pct(c.NDA), india: SIR.pct(c.INDIA), oth: SIR.pct(c.Other), k1: S.booth_lower.flips, l1: list('booth_lower'), k2: S.booth_upper.flips, l2: list('booth_upper') });
+  document.getElementById('fGroups').innerHTML = L('Weighting instead by how Muslims and others voted in the exit poll, {r1} seats change hands on the low count and {r2} on the high count ({rl}). Weighting by how women and men voted, {s1} and {s2} do ({sl}). On every estimate the NDA keeps between {min} and {max} of the 243 seats.', {
+    r1: S.religion_lower.flips, r2: S.religion_upper.flips, rl: list('religion_upper'), s1: S.sex_lower.flips, s2: S.sex_upper.flips, sl: list('sex_upper'),
+    min: Math.min.apply(null, nda), max: Math.max.apply(null, nda) });
+  document.getElementById('cImpact').innerHTML = L('Each estimate assumes something the lists cannot show. People marked shifted may be voting where they now live, people who moved may vote less than their neighbours, and an exit poll is a survey with its own error. The exit poll is the {src}. It found 6% of Muslims voting NDA and 79% Mahagathbandhan, women 45% and 40%, and men 41% and 42%. Seats where the winner or runner-up is outside the two alliances ({k} of them) get the break-even figure only, because both sources count every other party together.', {
+    src: I.poll_source, k: I.seats_total - I.seats_nda_vs_india });
+  var out = I.seats.filter(function (x) { return !x.modelled && x.breakeven_lower < 55; });
+  if (out.length) document.getElementById('cImpact').innerHTML += ' ' + L('Of the close seats, {list} fall outside the estimates for that reason, and both could have turned on a lean of just over half of the removed.', {
+    list: out.map(function (x) { return L('{seat} ({w} over {r} by {m})', { seat: x.name, w: x.winner, r: x.runner_up, m: SIR.n(x.margin) }); }).join(L(' and ')) });
+  var rows = I.seats.filter(function (x) { return x.breakeven_lower < 65; });
+  SIR.table(document.getElementById('tImpact'), [
+    { k: 'name', label: L('Constituency'), left: true, fmt: function (v, r) { return SIR.esc(r.ac + ' ' + v); } },
+    { k: 'winner', label: L('2025 winner'), left: true, fmt: function (v, r) { return SIR.esc(v + ' / ' + r.runner_up); } },
+    { k: 'margin', label: L('Margin'), fmt: SIR.n },
+    { k: 'voters_lower', label: L('Removed who would have voted'), fmt: SIR.n },
+    { k: 'breakeven_lower', label: L('Share the runner-up needed'), fmt: function (v) { return SIR.pct(v); } },
+    { k: 'booth_lower', label: L('Booth estimate, net to runner-up'), fmt: function (v) { return v == null ? '–' : SIR.n(v); } }
+  ], rows, { sort: 'breakeven_lower', dir: 1, limit: 40 });
 }).catch(SIR.fail);
 </script>
 </body>

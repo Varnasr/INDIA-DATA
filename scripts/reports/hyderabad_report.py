@@ -28,6 +28,7 @@ for p in PR:
         p['locality'] = None
 A, t = S['acs'], S['totals']
 TG = json.load(open(os.path.join(ROOT, 'data', 'hyderabad', 'telangana.json')))
+HI = json.load(open(os.path.join(ROOT, 'data', 'hyderabad', 'impact.json')))['seats']
 ACC = ['#8B1E3F', '#0E5E6F', '#E0A526', '#1F618D', '#8E7CC3']
 R = Report(RGBColor(0x8B, 0x1E, 0x3F))
 s = lambda f: sum(f(a) for a in A)
@@ -100,6 +101,16 @@ R.figure(fig, 'Figure 1. Past the dashed line, more names were struck off than t
 R.p('Across the five constituencies the names struck off equal %s of the valid votes cast in 2023. In every constituency more names were struck off than the winning candidate received.'
     % pct(100 * t['deleted'] / valid) if all(a['deleted'] > a['e2023']['winner_votes'] for a in A) else
     'Across the five constituencies the names struck off equal %s of the valid votes cast in 2023.' % pct(100 * t['deleted'] / valid))
+
+hy = [x for x in HI if x['name'] == 'Yakutpura'][0]
+mid = [x for x in HI if 55 <= x['breakeven'] <= 100]
+none = [x for x in HI if x['breakeven'] > 100]
+gap = [x['muslim_share_roll'] - x['muslim_share_removed'] for x in HI]
+R.p('No election has been held on the revised roll, so no result has been changed. Against the 2023 margins, only Yakutpura is close. There the runner-up would need %s of the removed electors who would vote, at 2023 turnout and leaving out those entered as dead, to overturn a margin of %s. '
+    'In %s the runner-up would need %s to %s, and in %s no split of the removed would be enough. '
+    'Muslim names are a smaller share of those struck off than of the roll in all five seats, by %.1f to %.1f points, so where Muslim electors lean to AIMIM, the removals take fewer of its voters than of its opponents\'.'
+    % (pct(hy['breakeven']), indian(hy['margin']), andj([x['name'] for x in mid]), pct(min(x['breakeven'] for x in mid)), pct(max(x['breakeven'] for x in mid)),
+       andj([x['name'] for x in none]), min(gap), max(gap)))
 
 R.h2('The reasons recorded')
 R.p('The list of the absent, shifted and dead gives the reason an officer wrote against each name. %s of removals were entered as "permanently shifted", %s as "untraceable or absent", %s as dead and %s as enrolled elsewhere. Each is what the officer wrote down after a visit, or after failing to find the elector, and nobody checked it.'

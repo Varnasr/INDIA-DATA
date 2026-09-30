@@ -135,7 +135,7 @@ function closing(pres, K, P, head, lines) {
 
 // ============================================================ BIHAR
 function bihar() {
-  const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json'), FB = J('bihar/final.json'), TS = J('bihar/tests.json');
+  const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json'), FB = J('bihar/final.json'), TS = J('bihar/tests.json'), IM = J('bihar/impact.json');
   const t = S.totals, DI = ID.districts;
   const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · Varna Sri Raman · totals only, never names or EPIC numbers' };
   const AL = { NDA: 'E67E22', INDIA: '1E8449', Other: '8E7CC3' };
@@ -243,6 +243,14 @@ function bihar() {
   ], 13.5);
   s.addNotes('Source: Format 4B, the Election Commission\'s return for the final roll, which matches the Chief Electoral Officer\'s press note of 30 September 2025. New electors are part of the rise from draft to final, and the Commission has not said how many of those added had been removed at the draft. A seat\'s roll before is its draft plus the names on its phase 1 list. Of the ' + indian(FT.removed_after) + ' removed after the draft, ' + indian(FT.r_unstated) + ' carry no reason.');
 
+  {
+    const IS = IM.summary, IB = IM.breakeven_bands.lower, c = IM.comp_booth_all;
+    const sl = (k) => IS[k].seats.length ? andj(IS[k].seats.map((x) => x.name + ' to ' + x.runner_up)) : 'none';
+    s = K.slide('Elections', 'In ' + IB.over_100 + ' of ' + IM.seats_total + ' seats the runner-up could not have won with every removed voter, and the removed leaned ' + (c.NDA > c.INDIA ? 'NDA' : 'INDIA'), 'Could the removals have changed who won? The removed who would have voted, less the dead, at 2025 turnout');
+    K.stats(s, [[IB.over_100 + ' seats', 'where the runner-up could not have won even with every removed elector who would have voted'], [IB.under_55 + ' seats', 'where a lean of under 55% would have been enough: ' + andj(IM.close.map((x) => x.name))], [pct(c.NDA) + ' / ' + pct(c.INDIA), 'NDA and INDIA share of the removed, had they voted like their booths in 2024']], TOP, 1.9, 2, M, 6.2);
+    K.right(s, ['Booth estimate: ' + IS.booth_lower.flips + ' to ' + IS.booth_upper.flips + ' seats change hands, ' + IS.booth_upper.to_india + ' to INDIA and ' + IS.booth_upper.to_nda + ' to the NDA on the fuller count (' + sl('booth_upper') + ').', 'Weighting by religion or by sex from the exit poll changes ' + IS.religion_upper.flips + ' and ' + IS.sex_upper.flips + ' seats' + (IS.religion_upper.to_india + IS.sex_upper.to_india === 0 ? ', all to the NDA.' : '.'), 'The NDA keeps its majority on every estimate.'], 12.5);
+    s.addNotes('Low count: names still off the final roll, less those entered as dead, at each seat\'s 2025 turnout. High count: every name removed, with nothing added back. Booth estimate: each removed elector votes like their own booth in the 2024 Lok Sabha election. Group estimates: ' + IM.poll_source + '. Seats where the winner or runner-up is outside the two alliances get the break-even figure only. Balrampur (LJP(RV) over AIMIM by 389) and Ramgarh (BSP over BJP by 30) are close seats outside the estimates.');
+  }
   s = K.slide('Elections', lakh(t.total) + ' names removed, against a combined NDA winning margin of ' + lakh(mNDA), 'Names removed set against the sum of the winning margins in each group of seats, in lakh');
   const grp = ['All ' + withM.length + ' seats', 'The NDA\'s ' + nda.length + ' wins', 'The ' + took.length + ' seats the NDA took from INDIA'];
   s.addChart(pres.charts.BAR, [
@@ -434,7 +442,7 @@ function bihar() {
 
 // ============================================================ HYDERABAD
 function hyderabad() {
-  const S = J('hyderabad/summary.json'), PJ = J('hyderabad/parts.json');
+  const S = J('hyderabad/summary.json'), PJ = J('hyderabad/parts.json'), HI = J('hyderabad/impact.json').seats;
   const PR = PJ.rows.map((r) => Object.fromEntries(PJ.fields.map((f, i) => [f, r[i]])));
   const A = S.acs, t = S.totals, names = A.map((a) => a.name);
   const P = { dark: '6E1832', darker: '52101F', accent: '8B1E3F', light: 'F2D9B8', soft: 'F7ECEF', band: ['8B1E3F', '0E5E6F', 'E0A526', '0E5E6F'], foot: 'Hyderabad Old City SIR 2026 · Varna Sri Raman · totals only, never names or EPIC numbers' };
@@ -579,7 +587,7 @@ function hyderabad() {
   ]);
   K.qa(K.slide('Questions put to this analysis', 'What the lists say about hearings, results, reliability and coverage'), [
     ['Could the hearings be held properly?', indian(t.hearing) + ' electors kept on the draft roll were summoned. The busiest single slot listed ' + heavy.max_slot + ' cases, in ' + heavy.name + ', where the median slot listed ' + heavy.median_slot + '. The lists do not record how long a slot was.'],
-    ['Did this change an election result?', 'No election has been held on the revised roll. Every one of the five constituencies lost more names than its 2023 winning margin, and in ' + andj(overV.map((a) => a.name)) + ' the names struck off outnumber every valid vote cast in 2023.'],
+    ['Did this change an election result?', 'No election has been held on the revised roll. Every one of the five constituencies lost more names than its 2023 winning margin, and in ' + andj(overV.map((a) => a.name)) + ' the names struck off outnumber every valid vote cast in 2023. Only Yakutpura is close. Its runner-up would need ' + pct(HI.find((x) => x.name === 'Yakutpura').breakeven) + ' of the removed who would vote to overturn the 2023 margin.'],
     ['How reliable are the lists?', 'For four constituencies the counts agree exactly with an independent count of the same lists, as do the recorded reasons and women\'s share. The Malakpet list used here is incomplete: ' + indian(mal.deleted) + ' names against 1,47,799 in the published list, with no part numbers or 2002 link.'],
     ['Why only five constituencies?', 'These are the five Old City seats whose full lists were available elector by elector. The figures describe these five and no others.'],
   ]);

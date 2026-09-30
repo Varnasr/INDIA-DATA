@@ -24,6 +24,7 @@ J = lambda f: json.load(open(os.path.join(ROOT, 'data', 'bihar', f)))
 S, A, DS, ID, RS = J('summary.json'), J('constituencies.json'), J('districts.json'), J('identity.json'), J('reasons.json')
 FB = J('final.json')
 TS = J('tests.json')
+IM = J('impact.json')
 TD, TM = TS['deaths'], TS['marriage']
 FT, FM = FB['totals'], FB['margin']
 t = S['totals']
@@ -152,6 +153,34 @@ ax.set_ylabel('Lakh', fontsize=8)
 ax.legend(fontsize=8, frameon=False)
 style_axes(ax, 'Removals against the combined winning margins')
 R.figure(fig, 'Figure 3. In lakh. The combined margin of a group of seats is the sum of each seat\'s margin of victory.')
+
+IS, IB = IM['summary'], IM['breakeven_bands']['lower']
+seatlist = lambda k: andj(['%s to %s' % (x['name'], x['runner_up']) for x in IS[k]['seats']]) if IS[k]['seats'] else 'none'
+nda_won = sum(1 for x in IM['seats'] if x['alliance_w'] == 'NDA')
+kept = [nda_won - IS[k]['to_india'] + IS[k]['to_nda'] for k in IS]
+R.h2('Could the removals have changed who won?')
+R.p('A name removed is not a vote lost to one side. Some of the removed had died, many would not have voted, and those who would have voted would have split between the parties. '
+    'Each seat\'s count here is the names still off the final roll, less those entered as dead, at the seat\'s 2025 turnout: %s electors across Bihar. That count is low, because the names added after the draft include new electors, so every estimate is also run on all the names removed, with nothing added back (%s).'
+    % (indian(IM['voters_lower']), indian(IM['voters_upper'])))
+R.p('The one figure that needs no assumption about how anyone votes is the share of the removed, of those who would have voted, that the runner-up needed to win. '
+    'In %d of %d seats the runner-up could not have won even if every one of them had voted for the runner-up. In %d more the runner-up needed over 55%%. Only in %d seats, %s, would a lean of under 55%% have been enough.'
+    % (IB['over_100'], IM['seats_total'], IB['55_to_65'] + IB['65_to_100'], IB['under_55'], andj([x['name'] for x in IM['close']])))
+c = IM['comp_booth_all']
+R.p('Had the removed voted the way their own polling booths voted in 2024, the NDA would have lost more of them than INDIA. In the %d seats the two alliances fought each other, those who would have voted lean %s NDA, %s INDIA and %s other parties. '
+    'On the low count %d seats would have changed hands (%s), and on the high count %d (%s).'
+    % (IM['seats_nda_vs_india'], pct(c['NDA']), pct(c['INDIA']), pct(c['Other']), IS['booth_lower']['flips'], seatlist('booth_lower'), IS['booth_upper']['flips'], seatlist('booth_upper')))
+R.p('Weighting instead by how Muslims and others, or women and men, voted in the %s, %d and %d seats change hands on the high count (%s; %s). On every estimate the NDA keeps between %d and %d of the 243 seats.'
+    % (IM['poll_source'], IS['religion_upper']['flips'], IS['sex_upper']['flips'], seatlist('religion_upper'), seatlist('sex_upper'), min(kept), max(kept)))
+out = [x for x in IM['seats'] if not x['modelled'] and x['breakeven_lower'] < 55]
+if out:
+    R.p('Seats where the winner or runner-up is outside the two alliances get the break-even figure only, because the booth results and the poll both count every other party together. Two of those were close: %s.'
+        % andj(['%s (%s over %s by %s)' % (x['name'], x['winner'], x['runner_up'], indian(x['margin'])) for x in out]))
+rows = sorted([x for x in IM['seats'] if x['breakeven_lower'] < 65], key=lambda x: x['breakeven_lower'])
+R.table(['Constituency', 'Winner / runner-up', 'Margin', 'Removed who would have voted', 'Share the runner-up needed', 'Booth estimate, net to runner-up'],
+        [['%d %s' % (x['ac'], x['name']), '%s / %s' % (x['winner'], x['runner_up']), indian(x['margin']), indian(x['voters_lower']), pct(x['breakeven_lower']),
+          '–' if x['booth_lower'] is None else indian(x['booth_lower'])] for x in rows],
+        widths=[3.2, 3.0, 1.6, 2.6, 2.4, 2.6], right={2, 3, 4, 5}, size=7.5)
+R.p('Each estimate assumes something the lists cannot show. People marked shifted may vote where they now live, people who moved may vote less than their neighbours, and an exit poll carries its own error. None of it can say whether any removal was right.', italic=True, size=8.5)
 
 R.h2('After the final roll')
 R.p('The final roll of 30 September 2025 was published after the claims and objections on the draft. The Election Commission\'s Format 4B return for it gives, seat by seat and by sex, the names added and removed after the draft and the final roll, and agrees with the Chief Electoral Officer\'s press note. '
