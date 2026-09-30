@@ -50,6 +50,27 @@ R.h1('Contents')
 R.toc()
 
 # ============================================================ PART I
+ADU0, FN0, GG0 = N['adults'], N['final'], N['gender']
+bigS = sorted(big, key=lambda x: x['shares']['shifted_absent_other'])
+rho0 = ADU0['rho_rate']
+R.h2('In short')
+R.numbered([
+    'Before the revision, the rolls already held %s of adults in the %d states with population projections. Only %d of those states had more names on the roll than adults.'
+    % (pct(100 * ADU0['roll_total'] / ADU0['adults_total']), ADU0['states'], len(ADU0['over_100'])),
+    'The revision still took off %s names in %d states, %.1f of every 100 electors, and the draft rolls now hold %s of adults. %s'
+    % (crore(T['removed']), T['states'], T['per_100'], pct(100 * ADU0['draft_total'] / ADU0['adults_total']),
+       'States whose rolls were most over-full did not cut more.' if abs(rho0) < 0.2 else ('States whose rolls were most over-full did cut more.' if rho0 > 0 else 'States whose rolls were most over-full cut less.')),
+    'Of the names removed with a reason given, only %s were entered as dead. The rest are names an officer marked as moved, not found or on the roll twice, and nobody has checked those entries.' % pct(T['shares']['dead']),
+    'The same rules gave very different results. %s removed %.1f of every 100 electors and %s %.1f. Among the big states, the share marked moved or not found runs from %s in %s to %s in %s.'
+    % (rated[0]['state'], rated[0]['per_100'], rated[-1]['state'], rated[-1]['per_100'], pct(bigS[0]['shares']['shifted_absent_other']), bigS[0]['state'],
+       pct(bigS[-1]['shares']['shifted_absent_other']), bigS[-1]['state']),
+    'Women were more likely to be removed. In %d of the %d states that report by sex, women are a bigger share of the names removed than of the roll.'
+    % (len([g for g in GG0 if g['gap'] > 1]), len(GG0)),
+    'Little has come back. In the %d states with a final roll, the rolls grew back by at most %s of what was cut, and that rise includes new voters.' % (FN0['states'], pct(FN0['made_up_pct'])),
+])
+R.p('Two limits. The adult figures count people where they live, so states that draw migrants look short of electors who are registered in their home states. '
+    'And these figures show what happened, not why, so they cannot show anyone meant it to happen.', italic=True)
+
 R.h2('At a glance')
 R.stats([(crore(T['removed']), 'left off the draft rolls'), (pct(T['shares']['shifted_absent_other']), 'shifted, absent or other'),
          (pct(T['shares']['dead']), 'dead'), ('%.1f' % T['per_100'], 'removed per 100 electors')])
