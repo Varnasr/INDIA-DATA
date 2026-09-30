@@ -243,6 +243,11 @@ def build():
     a['seg2024'] = a.ac.map(seglead)
     a = a.merge(amap, on='ac').merge(sir, on='ac').merge(ae, on='ac', how='left').merge(border, on='ac', how='left')
     assert int(a.p1.sum()) == 6559409 and abs(int(a.p1.sum()) - int(a.deleted.sum())) < 500, 'SIR phase 1 and booth totals diverge'
+    # Gaighat (88): the booth file carries a 2020 margin of 22,927. The
+    # candidate-wise result is RJD 59,778, JD(U) 52,212, LJP 36,851, a margin of
+    # 7,566 on 1,79,336 votes (data/bihar/raw/ae_party_votes_2020_2025.csv).
+    for ac, margin, votes in [(88, 7566, 179336)]:
+        a.loc[a.ac == ac, ['margin2020', 'margin2020_pct']] = [margin, margin / votes]
     a['win2020'] = a.win2020.map(lambda p: SPELLING.get(p, p))
     a['al2020'] = a.win2020.map(lambda p: alliance(p, 2020))
     a['al2024'] = a.seg2024.map(lambda p: alliance(p, 2024))
