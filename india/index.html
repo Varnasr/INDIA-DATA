@@ -99,6 +99,16 @@
   <p class="finding" id="fCorr"></p>
   <p class="finding" id="fBorder"></p>
 
+  <h2>After the final rolls</h2>
+  <p class="sub">Each state's final roll set against its draft. The grey bar is the names left off the draft roll for every 100 electors on the roll before; the blue bar is the fall that remains once the final roll is out, after the names added and removed on claims and objections. States are shown once their final roll is published.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart xtall"><canvas id="cFinal" aria-label="Names removed per 100 electors at the draft and the net fall at the final roll, by state"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fFinal"></p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Draft and final rolls by state"><table id="tFinal"></table></div>
+
   <h2>Every state and union territory</h2>
   <p class="sub">Figures at the draft roll. <b>Rounded</b>: the state's figures were published in lakh or crore. <b>Short</b>: the reasons published leave some names unexplained. <b>None</b>: no split by reason was found. Sources for each row are on the <a href="method/">method page</a>.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Every state and union territory"><table id="tStates"></table></div>
@@ -238,6 +248,30 @@ SIR.json('data/india/states.json').then(function (d) {
     { k: 'unsplit', label: L('Not split'), fmt: function (v) { return v ? SIR.n(v) : '–'; } },
     { k: 'split', label: L('Split'), left: true, fmt: function (v) { return SPN[v] || v; } }, { k: 'figures', label: L('Figures'), left: true, fmt: function (v) { return FN[v] || '–'; } }
   ], S, { sort: 'removed' });
+  // ---- the final rolls
+  var F = d.final, fS = S.filter(function (x) { return x.electors_final != null && x.net_fall_per_100 != null; }).sort(function (a, b) { return b.net_fall_per_100 - a.net_fall_per_100; });
+  SIR.chart('cFinal', { type: 'bar', data: { labels: fS.map(function (x) { return x.state; }), datasets: [
+      { label: L('Removed at the draft, per 100'), data: fS.map(function (x) { return x.per_100; }), $token: '--fill-grey' },
+      { label: L('Net fall at the final roll, per 100'), data: fS.map(function (x) { return x.net_fall_per_100; }), $token: '--fill-navy' }] },
+    options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Per 100 electors on the roll before the revision') } } } } });
+  var wb = S.filter(function (x) { return x.withheld; })[0], big = function (x) { return x >= 1e7 ? cr(x) : SIR.lakh(x); };
+  var rel = Math.abs(F.rho_made_up) < 0.2
+    ? L('How many names a state removed at the draft has no relationship with how much of that its final roll made up (rank correlation {rho}).', { rho: SIR.d(F.rho_made_up, 2) })
+    : L('States that removed more at the draft made up a different share of it at the final roll (rank correlation {rho}).', { rho: SIR.d(F.rho_made_up, 2) });
+  document.getElementById('fFinal').innerHTML = L('<b>In the {n} states and union territories with a final roll, {r} names were left off the drafts, and the final rolls came out {a} larger than the drafts: {m} of the fall.</b> {wb} kept {w} names off its final roll while they are decided, and without them the final rolls were {a2} larger, {m2} of the fall. Against the rolls before the revision, the fall is {np} per 100 electors at the final roll, from {p} at the draft. The rise from draft to final counts new electors as well as names put back, and no state has said how many of those added had been removed at the draft, so it is the most that can have been put back. The final roll is smaller than the draft in {k} states: {shrank}. {rel} {wait} have not yet published a final roll.', {
+    n: F.states, r: big(F.removed), a: big(F.net_after_draft), m: SIR.pct(F.made_up_pct), wb: wb ? wb.state : '', w: SIR.lakh(F.withheld),
+    a2: big(F.net_after_draft + F.withheld), m2: SIR.pct(F.made_up_pct_ex_withheld), np: SIR.d(F.net_per_100, 1), p: SIR.d(F.per_100, 1),
+    k: F.shrank.length, shrank: F.shrank.join(', '), rel: rel, wait: F.waiting.join(', ') });
+  var RCN = { exact: L('Adds up'), rounded: L('Rounded'), 'net only': L('Net only'), no: L('Does not add up') };
+  var sn = function (v) { return v == null ? '–' : (v < 0 ? '−' + SIR.n(-v) : SIR.n(v)); };
+  SIR.table(document.getElementById('tFinal'), [
+    { k: 'state', label: L('State or union territory'), left: true, fmt: function (v) { return SIR.esc(v); } },
+    { k: 'removed', label: L('Removed at the draft'), fmt: num }, { k: 'added_after_draft', label: L('Added after'), fmt: num },
+    { k: 'removed_after_draft', label: L('Removed after'), fmt: num }, { k: 'withheld', label: L('Kept off, undecided'), fmt: function (v) { return v ? SIR.n(v) : '–'; } },
+    { k: 'net_after_draft', label: L('Final less draft'), fmt: sn }, { k: 'made_up_pct', label: L('Share of the fall made up'), fmt: function (v) { return v == null ? '–' : SIR.pct(v); } },
+    { k: 'net_fall_per_100', label: L('Net fall per 100'), fmt: function (v) { return v == null ? '–' : SIR.d(v, 1); } },
+    { k: 'reconciles', label: L('Figures'), left: true, fmt: function (v) { return RCN[v] || '–'; } }
+  ], S.filter(function (x) { return x.electors_final != null; }), { sort: 'removed' });
   var A = d.after_draft;
   document.getElementById('fAfter').innerHTML = L('After the draft rolls, {n} states have published how many more names they removed at hearings and on objections: {x} in all. No state has said why, so these removals are outside every figure by reason on this page. {pending} has not yet published a draft roll.', { n: A.states, x: SIR.lakh(A.removed), pending: d.pending.join(', ') });
   document.getElementById('cav').innerHTML = L('<b>What these figures cannot show.</b> Each is a count of officers\' entries, not of findings: a person marked shifted may have been away for work, and a person marked absent may have been at home. The Commission has published no state table of its own, so outside Bihar the figures are the Chief Electoral Officers\', in their press notes where those could be read and as reported in the press otherwise; {rounded} states published theirs rounded to the lakh. Categories differ at the margin: some states counted refusals or "others" separately and some folded them into absent, which is why the three groups here are the ones every state reports.', { rounded: S.filter(function (s) { return s.figures === 'rounded'; }).length });

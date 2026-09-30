@@ -31,6 +31,13 @@ def outputs():
         'ac', 'name', 'district', 'pc', 'reserved', 'border', 'electorate_2025', 'booths', 'p1', 'p2', 'total', 'per_100',
         't_f', 't_m', 'r_dead', 'r_shifted', 'r_absent', 'r_enrolled', 'hindu', 'muslim', 'unknown',
         'win2020', 'al2020', 'margin2020', 'seg2024', 'al2024', 'win2025', 'al2025', 'margin2025', 'votes2025']])
+    FS = {f['ac']: f for f in J('bihar', 'final.json')['seats']}
+    ac = table(A, [(k, (lambda k: lambda r: r[k])(k)) for k in [
+        'ac', 'name', 'district', 'pc', 'reserved', 'border', 'electorate_2025', 'booths', 'p1', 'p2', 'total', 'per_100',
+        't_f', 't_m', 'r_dead', 'r_shifted', 'r_absent', 'r_enrolled', 'hindu', 'muslim', 'unknown',
+        'win2020', 'al2020', 'margin2020', 'seg2024', 'al2024', 'win2025', 'al2025', 'margin2025', 'votes2025']] +
+               [(n, (lambda k: lambda r: FS[r['ac']][k])(k)) for n, k in (('draft_roll', 'draft'), ('added_after_draft', 'added'), ('removed_after_draft', 'removed_after'),
+                                                                     ('final_roll', 'final'), ('final_less_draft', 'net_after'), ('net_fall', 'net_fall'))])
     D = J('bihar', 'districts.json')
     RS = {d['district']: d for d in J('bihar', 'reasons.json')['districts']}
     ID = {d['district']: d for d in J('bihar', 'identity.json')['districts']}

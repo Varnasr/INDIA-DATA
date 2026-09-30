@@ -135,7 +135,7 @@ function closing(pres, K, P, head, lines) {
 
 // ============================================================ BIHAR
 function bihar() {
-  const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json');
+  const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json'), FB = J('bihar/final.json');
   const t = S.totals, DI = ID.districts;
   const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · Varna Sri Raman · aggregates only; no names or EPIC numbers' };
   const AL = { NDA: 'E67E22', INDIA: '1E8449', Other: '8E7CC3' };
@@ -218,6 +218,20 @@ function bihar() {
   s.addChart(pres.charts.BAR, [{ name: 'Constituencies', labels: labs, values: vals }], K.chart(Object.assign({}, K.left, { barDir: 'col', chartColors: [GREY, P.accent, P.accent, P.accent, P.accent, P.accent], showValue: true, dataLabelPosition: 'outEnd', valAxisHidden: true })));
   K.stats(s, [[five + ' seats', 'where removals were five times the margin or more'], [median(withM.map(ratio)).toFixed(2) + '×', 'removals against the margin in the median seat'], [indian(smallest.margin2025) + ' votes', smallest.name + '\'s margin, with ' + indian(smallest.total) + ' names removed']], TOP, 1.45, 1, 8.65, W - M - 8.65);
   s.addNotes('Grey: the ' + vals[0] + ' seats where removals were below the margin. Of the ' + over.length + ' seats above it, the NDA won ' + over.filter((a) => a.al2025 === 'NDA').length + ', INDIA ' + over.filter((a) => a.al2025 === 'INDIA').length + ' and others ' + over.filter((a) => a.al2025 === 'Other').length + '.');
+
+  const FT = FB.totals, FM = FB.margin;
+  s = K.slide('Elections', 'At the final roll, the fall still exceeded the 2025 margin in ' + FM.net + ' of ' + FM.seats + ' seats', 'Seats where the names removed exceed the winning margin, at the draft and after the final roll of 30 September 2025, by the alliance that won');
+  s.addChart(pres.charts.BAR, [
+    { name: 'Seats won', labels: ['NDA', 'INDIA', 'Other'], values: ['NDA', 'INDIA', 'Other'].map((al) => FM.won_by_alliance[al] || 0) },
+    { name: 'Removed at the draft exceed the margin', labels: ['NDA', 'INDIA', 'Other'], values: ['NDA', 'INDIA', 'Other'].map((al) => over.filter((a) => a.al2025 === al).length) },
+    { name: 'Net fall at the final roll exceeds the margin', labels: ['NDA', 'INDIA', 'Other'], values: ['NDA', 'INDIA', 'Other'].map((al) => FM.net_by_alliance[al] || 0) },
+  ], K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'clustered', chartColors: [GREY, 'E67E22', P.accent], showValue: true, dataLabelPosition: 'outEnd', showLegend: true, valAxisHidden: true })));
+  K.right(s, [
+    'After the draft, ' + lakh(FT.added) + ' names were added on claims and ' + lakh(FT.removed_after) + ' removed on objections: a net rise of ' + lakh(FT.net_after) + ', ' + pct(FT.made_up_pct) + ' of the ' + lakh(FT.p1) + ' removed at the draft.',
+    'The final roll was ' + lakh(FT.net_fall_press) + ' smaller than the roll before the revision, and smaller in every seat.',
+    'Women were ' + pct(FT.women_share_p1) + ' of those removed at the draft and ' + pct(FT.women_share_added) + ' of those added; their share of the roll fell from ' + pct(FT.women_share_before) + ' to ' + pct(FT.women_share_final) + '.',
+  ], 13.5);
+  s.addNotes('Source: Format 4B, the Election Commission\'s return for the final roll, which matches the Chief Electoral Officer\'s press note of 30 September 2025. The rise from draft to final counts new electors as well as names put back; the Commission has not said how many of those added had been removed at the draft. A seat\'s roll before is its draft plus the names on its phase 1 list. Of the ' + indian(FT.removed_after) + ' removed after the draft, ' + indian(FT.r_unstated) + ' carry no reason.');
 
   s = K.slide('Elections', lakh(t.total) + ' names removed, against a combined NDA winning margin of ' + lakh(mNDA), 'Names removed set against the sum of the winning margins in each group of seats, in lakh');
   const grp = ['All ' + withM.length + ' seats', 'The NDA\'s ' + nda.length + ' wins', 'The ' + took.length + ' seats the NDA took from INDIA'];
@@ -698,10 +712,25 @@ function india() {
     'A state-level relationship says nothing about who was removed within a state.',
   ], 12.5);
 
-  s = K.slide('All India', 'After the draft, ' + (N.after_draft.removed / 1e5).toFixed(1) + ' lakh more names were removed in ' + N.after_draft.states + ' states, with no reason given', 'What the state figures show, and what they cannot');
-  K.box(s, 'They show how many names each state left off its draft roll and the reason its officers entered: dead, shifted or absent (with "others" where reported), or enrolled more than once.', M, TOP - 0.4, 5.95, 2.1, 15);
+  const FN = N.final, fS = S.filter((x) => x.electors_final != null && x.net_fall_per_100 != null).sort((a, b) => b.net_fall_per_100 - a.net_fall_per_100);
+  s = K.slide('All India', 'The final rolls made up ' + pct(FN.made_up_pct) + ' of the names left off the drafts in ' + FN.states + ' states', 'Removed at the draft, and the fall that remains at the final roll, per 100 electors on the roll before');
+  s.addChart(pres.charts.BAR, [
+    { name: 'Removed at the draft', labels: fS.map((x) => x.state), values: fS.map((x) => x.per_100) },
+    { name: 'Net fall at the final roll', labels: fS.map((x) => x.state), values: fS.map((x) => x.net_fall_per_100) },
+  ], K.chart(Object.assign({}, K.left, { barDir: 'bar', barGrouping: 'clustered', chartColors: [GREY, Pal.accent], showLegend: true, catAxisLabelFontSize: 9, valAxisLabelFormatCode: '0' })));
+  const wbS = S.find((x) => x.withheld);
+  K.right(s, [
+    'The final rolls came out ' + crore(FN.net_after_draft) + ' larger than the drafts, against ' + crore(FN.removed) + ' left off them.',
+    wbS.state + ' kept ' + lakh(FN.withheld) + ' names off its final roll while they are decided; without them the rise is ' + pct(FN.made_up_pct_ex_withheld) + ' of the fall.',
+    'The final roll is smaller than the draft in ' + FN.shrank.length + ' states. The fall is ' + FN.net_per_100.toFixed(1) + ' per 100 electors at the final roll, from ' + FN.per_100.toFixed(1) + ' at the draft.',
+    'The rise counts new electors as well as names put back, so it is the most that can have been put back.',
+  ], 12.5);
+  s.addNotes('Still to publish a final roll: ' + FN.waiting.join(', ') + '. Removals after the draft carry no reason in any state except Bihar. Rank correlation between the removal rate at the draft and the share made up: ' + FN.rho_made_up.toFixed(2) + (Math.abs(FN.rho_made_up) < 0.2 ? ', no relationship.' : '.'));
+
+  s = K.slide('All India', 'What the state figures show, and what they cannot', 'The limits of totals published state by state');
+  K.box(s, 'They show how many names each state left off its draft roll and the reason its officers entered: dead, shifted or absent (with "others" where reported), or enrolled more than once, and for ' + FN.states + ' states the final roll.', M, TOP - 0.4, 5.95, 2.1, 15);
   K.box(s, 'They cannot show whether an entry was right, or break removals down by sex, age or booth. Outside Bihar they are the states\' published totals, some rounded, gathered from press notes and reports.', 6.78, TOP - 0.4, 5.95, 2.1, 15);
-  K.body(s, 'Removals after the draft, at hearings and on objections, are outside every figure by reason, because no state has said why. Twelve phase 3 final rolls are still to come. The Election Commission has published no state table of its own.', M, TOP + 2.0, W - 2 * M, 2.2, 16);
+  K.body(s, 'Removals after the draft, at hearings and on objections, carry no reason outside Bihar, and no state has said how many of those added at the final roll had been removed at the draft. The Election Commission has published no state table of its own.', M, TOP + 2.0, W - 2 * M, 2.2, 16);
 
   // ---- The Election Commission
   s = K.slide('What the Election Commission should do', 'Publish its own table, and the lists behind it');
@@ -709,7 +738,7 @@ function india() {
     'Publish a state-by-state table of its own, with the reason for every removal at the draft and after it, exact rather than rounded.',
     'Publish the deletion lists with the reason against each name for every state, as it did for Bihar.',
     'Publish the basis for entries marked absent and enrolled more than once.',
-    'Publish the outcome of every claim and objection, so that restorations can be set against removals.',
+    'Publish the outcome of every claim and objection, and say how many of those added at the final roll had been removed at the draft.',
     'Explain why the mix of reasons differs so widely between states under one set of instructions.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 17);
 

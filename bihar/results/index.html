@@ -35,6 +35,16 @@
   </div>
   <p class="finding" id="fMargin"></p>
   <div class="twrap" tabindex="0" role="region" aria-label="Seats where deletions exceed the margin"><table id="tMargin"></table></div>
+  <h3 style="margin-top:1.5rem">After the final roll</h3>
+  <p class="sub">The final roll of 30 September 2025, after the names added on claims and removed on objections, set against the roll before the revision. A seat's roll before is its draft roll plus the names on its phase 1 deletion list, because the roll of June 2025 is published only as a state total.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart"><canvas id="cNet" aria-label="Seats won in 2025, and seats where the removals exceed the margin at the draft and at the final roll, by alliance"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fNet"></p>
+  <p class="finding" id="fNetW"></p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Seats where the net fall exceeds the margin"><table id="tNet"></table></div>
   <h3 style="margin-top:1.5rem">Each reason for removal, on its own, against the margin</h3>
   <p class="sub">The phase 1 list records the reason the officer entered against every name. Here each reason is taken alone: the number of seats where the names removed for that one reason exceed the 2025 margin, by the alliance that won.</p>
   <div class="grid">
@@ -164,6 +174,26 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     { k: 'name', label: L('Constituency'), left: true, fmt: function (v, r) { return SIR.esc(r.ac + ' ' + v); } }, { k: 'win2025', label: L('2025 winner'), left: true, fmt: function (v, r) { return tag(r.al2025) + ' ' + SIR.esc(v); } },
     { k: 'margin2025', label: L('Margin'), fmt: SIR.n }, { k: 'total', label: L('Removed'), fmt: SIR.n }, { k: 'ratio', label: L('Removed / margin'), fmt: function (v) { return SIR.d(v, 1) + '×'; } }
   ], over.map(function (a) { a.ratio = a.total / a.margin2025; return a; }), { sort: 'ratio', limit: 40 });
+  return SIR.json('data/bihar/final.json').then(function (F) {
+    var T = F.totals, M = F.margin, fs = F.seats.filter(function (a) { return a.margin2025; });
+    var netOver = fs.filter(function (a) { return a.net_fall > a.margin2025; }), nob = SIR.groupBy(netOver, 'al2025');
+    SIR.chart('cNet', { type: 'bar', data: { labels: als, datasets: [
+        { label: L('Seats won in 2025'), data: als.map(function (al) { return M.won_by_alliance[al] || 0; }), $token: '--fill-grey' },
+        { label: L('Removed at the draft exceed the margin'), data: als.map(function (al) { return (overBy[al] || []).length; }), $token: '--fill-amber' },
+        { label: L('Net fall at the final roll exceeds the margin'), data: als.map(function (al) { return M.net_by_alliance[al] || 0; }), $token: '--fill-navy' }] },
+      options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('Seats') } } } } });
+    document.getElementById('fNet').innerHTML = L('<b>The final roll was {nf} names smaller than the roll before the revision, and smaller in every one of the {n} seats.</b> After the draft, {a} names were added on claims and {r} removed on objections, a net rise of {na}: {m} of the {p1} names removed at the draft. That rise counts new electors as well as names put back, and the Commission has not said how many of those added had been removed at the draft. <b>In {net} of {seats} seats the fall that remained at the final roll was still larger than the 2025 winning margin</b>, against {tot} when the draft removals are counted alone. Of those {net}, {list}.', {
+      nf: SIR.lakh(T.net_fall_press), n: F.seats.length, a: SIR.lakh(T.added), r: SIR.lakh(T.removed_after), na: SIR.lakh(T.net_after), m: SIR.pct(T.made_up_pct), p1: SIR.lakh(T.p1),
+      net: M.net, seats: M.seats, tot: M.total, list: als.map(function (al) { return L('{n} went to {al}', { n: (nob[al] || []).length, al: al }); }).join(', ') });
+    document.getElementById('fNetW').innerHTML = L('<b>Women were {wp1} of the names removed at the draft and {wadd} of those added after it</b>, so their share of the roll fell from {wb} before the revision to {wf} on the final roll. Of the {ra} names removed after the draft, {rd} were entered as dead, {rs} as shifted and {rr} as repeated; {ru} carry no reason at all.', {
+      wp1: SIR.pct(T.women_share_p1), wadd: SIR.pct(T.women_share_added), wb: SIR.pct(T.women_share_before), wf: SIR.pct(T.women_share_final),
+      ra: SIR.n(T.removed_after), rd: SIR.n(T.r_expired), rs: SIR.n(T.r_shifted), rr: SIR.n(T.r_repeated), ru: SIR.n(T.r_unstated) });
+    SIR.table(document.getElementById('tNet'), [
+      { k: 'name', label: L('Constituency'), left: true, fmt: function (v, r) { return SIR.esc(r.ac + ' ' + v); } }, { k: 'win2025', label: L('2025 winner'), left: true, fmt: function (v, r) { return tag(r.al2025) + ' ' + SIR.esc(v); } },
+      { k: 'margin2025', label: L('Margin'), fmt: SIR.n }, { k: 'p1', label: L('Removed at the draft'), fmt: SIR.n }, { k: 'net_after', label: L('Final less draft'), fmt: SIR.n },
+      { k: 'net_fall', label: L('Net fall'), fmt: SIR.n }, { k: 'ratio', label: L('Net fall / margin'), fmt: function (v) { return SIR.d(v, 1) + '×'; } }
+    ], netOver.map(function (a) { a.ratio = a.net_fall / a.margin2025; return a; }), { sort: 'ratio', limit: 40 });
+  });
 }).catch(SIR.fail);
 </script>
 </body>

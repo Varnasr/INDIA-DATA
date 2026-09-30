@@ -72,7 +72,9 @@ def median(v):
     v = sorted(v)
     n = len(v)
     return None if not n else (v[n // 2] if n % 2 else (v[n // 2 - 1] + v[n // 2]) / 2)
-INT = ['electors_before', 'removed', 'removed_after_draft'] + R
+INT = ['electors_before', 'removed'] + R
+FIN = os.path.join(ROOT, 'data', 'india', 'raw', 'final.csv')
+FIN_INT = ['electors_draft', 'added_after_draft', 'removed_after_draft', 'withheld', 'electors_final']
 
 
 def load():
@@ -168,6 +170,51 @@ def build():
               'roll_total': sum(x['electors_before'] for x in ra), 'draft_total': sum(x['electors_before'] - x['removed'] for x in ra),
               'adults_total': sum(x['adults_2026'] for x in ra)}
 
+    # ---- the final rolls. The draft and final come from one source per state;
+    # the fall at the draft is the one used everywhere else on the page.
+    fin = {}
+    for f in csv.DictReader(open(FIN, encoding='utf-8')):
+        assert f['state'] in names, f['state']
+        for k in FIN_INT:
+            f[k] = int(f[k]) if f[k] else None
+        a, r_, w_ = f['added_after_draft'], f['removed_after_draft'], f['withheld'] or 0
+        if f['reconciles'] in ('exact', 'rounded'):
+            gap = f['electors_draft'] + a - r_ - w_ - f['electors_final']
+            assert abs(gap) <= (0 if f['reconciles'] == 'exact' else 0.001 * f['electors_final']), (f['state'], gap)
+        else:
+            assert f['reconciles'] in ('net only', 'no') and f['note'], f['state']
+        assert f['source'] in ('primary', 'press') and f['source_url'].startswith('http'), f['state']
+        fin[f['state']] = f
+    for x in rows:
+        f = fin.get(x['state'])
+        for k in ('removed_after_draft', 'added_after_draft', 'withheld', 'electors_final', 'final_date', 'reconciles'):
+            x[k] = f[k] if f else None
+        x['net_after_draft'] = x['net_fall'] = x['net_fall_per_100'] = x['made_up_pct'] = None
+        x['final_source'] = f and {'source': f['source'], 'url': f['source_url'], 'note': f['note']}
+        if f:
+            dr = x['electors_before'] - x['removed'] if x['electors_before'] and x['removed'] else None
+            # The draft in the final-roll source must agree with the draft figures above.
+            if dr is not None:
+                assert abs(dr - f['electors_draft']) <= 0.005 * dr or x['figures'] == 'rounded' or x['state'] in ('Kerala', 'Bihar'), (x['state'], dr, f['electors_draft'])
+            x['net_after_draft'] = f['electors_final'] - f['electors_draft']
+            x['net_fall'] = x['removed'] - x['net_after_draft']
+            x['made_up_pct'] = round(100 * x['net_after_draft'] / x['removed'], 1)
+            if x['electors_before']:
+                x['net_fall_per_100'] = round(100 * x['net_fall'] / x['electors_before'], 2)
+    fr = [x for x in rows if x['electors_final'] is not None]
+    fb = [x for x in fr if x['electors_before']]
+    final = {'states': len(fr), 'removed': sum(x['removed'] for x in fr), 'net_after_draft': sum(x['net_after_draft'] for x in fr),
+             'withheld': sum(x['withheld'] or 0 for x in fr),
+             'gross': sum(1 for x in fr if x['reconciles'] in ('exact', 'rounded')),
+             'per_100': round(100 * sum(x['removed'] for x in fb) / sum(x['electors_before'] for x in fb), 2),
+             'net_per_100': round(100 * sum(x['net_fall'] for x in fb) / sum(x['electors_before'] for x in fb), 2),
+             'shrank': [x['state'] for x in fr if x['net_after_draft'] < 0],
+             'waiting': [x['state'] for x in rows if x['removed'] is not None and x['electors_final'] is None]}
+    final['made_up_pct'] = round(100 * final['net_after_draft'] / final['removed'], 1)
+    final['made_up_pct_ex_withheld'] = round(100 * (final['net_after_draft'] + final['withheld']) / final['removed'], 1)
+    final['net_per_100_ex_withheld'] = round(100 * (sum(x['net_fall'] for x in fb) - final['withheld']) / sum(x['electors_before'] for x in fb), 2)
+    final['rho_made_up'] = spearman([(x['per_100'], x['made_up_pct']) for x in fb])
+
     # ---- women among the removed
     rs = json.load(open(BIHAR_REASONS, encoding='utf-8'))
     bf = sum(rs['by_sex'][k]['F'] for k in rs['by_sex'])
@@ -202,6 +249,7 @@ def build():
         'pending': [x['state'] for x in rows if x['removed'] is None],
         'after_draft': {'states': sum(1 for x in rows if x['removed_after_draft'] is not None),
                         'removed': sum(x['removed_after_draft'] or 0 for x in rows)},
+        'final': final,
         'states': rows,
     }
     return out
@@ -210,7 +258,7 @@ def build():
 def dump_csv(d):
     import io
     cols = ['state', 'phase', 'draft_date', 'electors_before', 'removed', 'per_100', 'dead', 'shifted_absent_other', 'duplicate', 'unsplit',
-            'split', 'figures', 'source', 'source_url', 'removed_after_draft', 'final_date', 'note']
+            'split', 'figures', 'source', 'source_url', 'final_date', 'added_after_draft', 'removed_after_draft', 'withheld', 'electors_final', 'net_after_draft', 'net_fall', 'net_fall_per_100', 'made_up_pct', 'note']
     gen = {g['state']: g for g in d['gender']}
     b = io.StringIO()
     cols = cols + ['roll_adult_pct', 'draft_adult_pct', 'removed_pct_votes24', 'women_share_removed', 'women_share_roll', 'sex_split_quality'] + [k for k, _ in CHAR] + ['intl_border']
