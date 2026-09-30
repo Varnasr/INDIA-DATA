@@ -605,6 +605,26 @@ function india() {
   K.stats(s, [[crore(T.removed), 'names left off the draft rolls'], [crore(T.shifted_absent_other), 'entered as shifted, absent or other'], [crore(T.dead), 'entered as dead'], [crore(T.duplicate), 'entered as enrolled more than once']], TOP, 1.7);
   K.body(s, 'A reason is what an officer entered after a visit or its absence, not a finding. Deaths are about one in five of the removals split by reason. The other four in five rest on an entry that the elector was not where the roll placed them, or was on it twice. ' + (T.unsplit / 1e5).toFixed(1) + ' lakh names are in states that have not published a full split.', M, TOP + 2.1, W - 2 * M, 2.4, 17);
 
+  {
+    const BIN = [8, 12, 16, 20], FILL = ['DEEBF7', '9ECAE1', '2878B3', '1C5F96', '08306B'], byS = {};
+    S.forEach((x) => { byS[x.state] = x; });
+    s = K.slide('All India', andj(rated.slice(0, 4).map((x) => x.state)) + ' removed the most for every 100 electors', 'Removed per 100 electors; one tile per state or union territory, placed roughly where it lies, with no boundaries');
+    const sz = 0.56, gap = 0.06, x0 = M + 0.2, y0 = TOP - 0.35;
+    N.tiles.forEach((t) => {
+      const x = byS[t.state], v = x ? x.per_100 : null, b = v == null ? null : BIN.filter((c) => v >= c).length;
+      const fx = x0 + t.col * (sz + gap), fy = y0 + t.row * (sz + gap);
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: fx, y: fy, w: sz, h: sz, rectRadius: 0.05, fill: { color: b == null ? 'F2F3F4' : FILL[b] }, line: b == null ? { color: '95A5A6', width: 0.75, dashType: 'dash' } : { type: 'none' } });
+      s.addText([{ text: t.code, options: { bold: true, fontSize: 10, breakLine: true } }, { text: v == null ? '–' : v.toFixed(1), options: { fontSize: 9 } }],
+        { x: fx, y: fy, w: sz, h: sz, align: 'center', valign: 'middle', fontFace: BODY, color: b == null || b < 2 ? INK : 'FFFFFF', margin: 0, isTextBox: true });
+    });
+    const labs = ['under 8', '8 to 12', '12 to 16', '16 to 20', '20 or more', 'no rate'];
+    labs.forEach((l, i) => {
+      s.addShape(pres.shapes.RECTANGLE, { x: 7.0, y: TOP + 2.2 + i * 0.36, w: 0.26, h: 0.26, fill: { color: i < 5 ? FILL[i] : 'F2F3F4' }, line: i < 5 ? { type: 'none' } : { color: '95A5A6', width: 0.75, dashType: 'dash' } });
+      s.addText(l, { x: 7.35, y: TOP + 2.17 + i * 0.36, w: 1.6, h: 0.32, fontFace: BODY, fontSize: 11, color: INK, margin: 0, isTextBox: true, valign: 'middle' });
+    });
+    K.bullets(s, [rated[0].state + ' ' + rated[0].per_100.toFixed(1) + ', ' + rated[1].state + ' ' + rated[1].per_100.toFixed(1) + ', ' + rated[2].state + ' ' + rated[2].per_100.toFixed(1) + '.', 'Fewest: ' + rated[rated.length - 1].state + ' ' + rated[rated.length - 1].per_100.toFixed(1) + '.', 'Grey: not in the revision, no draft yet (Tripura), or no exact roll before it (Chandigarh).'], 9.2, TOP, W - M - 9.2, 2.2, 12.5);
+  }
+
   s = K.slide('All India', 'The share entered as dead fell from ' + pct(P['1'].shares.dead, 0) + ' in Bihar to ' + pct(P['3'].shares.dead, 0) + ' in phase 3', 'Names left off the draft rolls in each phase, by reason, in lakh');
   s.addChart(pres.charts.BAR, RK.map((k) => ({ name: RN[k], labels: PL, values: ph.map((p) => +(P[p][k] / 1e5).toFixed(1)) })).concat([{ name: 'Not split', labels: PL, values: ph.map((p) => +(P[p].unsplit / 1e5).toFixed(1)) }]),
     K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'stacked', chartColors: [RC.dead, RC.shifted_absent_other, RC.duplicate, '8E7CC3'], showLegend: true, valAxisLabelFormatCode: '#,##0' })));

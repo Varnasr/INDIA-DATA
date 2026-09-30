@@ -121,6 +121,11 @@ def _india():
     assert b['shifted_absent_other'] == rs['totals']['shifted'] + rs['totals']['absent']
 
 
+def _downloads():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_downloads.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
+
 def _pages_link_method():
     for p in ['bihar/index.html', 'bihar/results/index.html', 'bihar/people/index.html',
               'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html']:
@@ -140,6 +145,7 @@ for name, fn in [
     ('caste and religion figures are measured, not repeated', _caste_not_uniform),
     ('no individual records in published data', _no_people),
     ('All India table current, and Bihar row equal to the lists', _india),
+    ('downloadable tables current', _downloads),
     ('findings pages link to the method page', _pages_link_method),
 ]:
     check(name, fn)

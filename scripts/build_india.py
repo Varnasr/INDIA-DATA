@@ -36,6 +36,9 @@ CHAR = [('income_pc', 'Income per head'), ('urban_pct', 'Urban share'), ('litera
         ('st_pct', 'ST share'), ('sex_ratio', 'Sex ratio'), ('out_migration', 'Born here, living elsewhere'),
         ('in_migration', 'Living here, born elsewhere')]
 BIG = 5e6  # states of 50 lakh people or more in 2011
+# A tile map: one equal square per state or union territory, placed roughly
+# where it lies, so the picture carries no boundaries. (state, code, row, column)
+TILES = [('Jammu and Kashmir', 'JK', 0, 2), ('Ladakh', 'LA', 0, 3), ('Chandigarh', 'CH', 1, 1), ('Punjab', 'PB', 1, 2), ('Himachal Pradesh', 'HP', 1, 3), ('Arunachal Pradesh', 'AR', 1, 7), ('Rajasthan', 'RJ', 2, 1), ('Haryana', 'HR', 2, 2), ('Delhi', 'DL', 2, 3), ('Uttarakhand', 'UK', 2, 4), ('Sikkim', 'SK', 2, 5), ('Assam', 'AS', 2, 6), ('Nagaland', 'NL', 2, 7), ('Gujarat', 'GJ', 3, 1), ('Madhya Pradesh', 'MP', 3, 2), ('Uttar Pradesh', 'UP', 3, 3), ('Bihar', 'BR', 3, 4), ('West Bengal', 'WB', 3, 5), ('Meghalaya', 'ML', 3, 6), ('Manipur', 'MN', 3, 7), ('Dadra and Nagar Haveli and Daman and Diu', 'DD', 4, 0), ('Maharashtra', 'MH', 4, 1), ('Chhattisgarh', 'CG', 4, 2), ('Jharkhand', 'JH', 4, 3), ('Odisha', 'OD', 4, 4), ('Tripura', 'TR', 4, 6), ('Mizoram', 'MZ', 4, 7), ('Goa', 'GA', 5, 1), ('Telangana', 'TG', 5, 2), ('Andhra Pradesh', 'AP', 5, 3), ('Lakshadweep', 'LD', 6, 0), ('Karnataka', 'KA', 6, 1), ('Tamil Nadu', 'TN', 6, 2), ('Puducherry', 'PY', 6, 3), ('Kerala', 'KL', 7, 1), ('Andaman and Nicobar Islands', 'AN', 7, 4)]
 
 
 def ranks(x):
@@ -169,6 +172,7 @@ def build():
 
     out = {
         'as_of': '2026-09-30',
+        'tiles': [{'state': a, 'code': c, 'row': r, 'col': k} for a, c, r, k in TILES],
         'characteristics': [{'key': k, 'label': l} for k, l in CHAR],
         'correlations': corr,
         'border': border,

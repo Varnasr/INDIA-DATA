@@ -29,6 +29,11 @@
   <div class="kpis" id="kIndia"></div>
   <p class="finding" id="fIndia"></p>
 
+  <h2>Removals per 100 electors, state by state</h2>
+  <p class="sub">One tile for each state and union territory, placed roughly where it lies. Tiles are equal in size, so the map shows no boundaries and no area. Grey tiles have no rate: Jammu and Kashmir, Ladakh, Himachal Pradesh and Assam were not part of the revision, Tripura has no draft roll yet, and Chandigarh published no exact roll before it.</p>
+  <div class="tilemap" id="tiles" role="list" aria-label="Removals per 100 electors, by state"></div>
+  <div class="tilekey" id="tilekey" aria-hidden="true"></div>
+
   <h2>The three reasons, by phase</h2>
   <div class="grid">
     <div class="panel">
@@ -104,6 +109,22 @@ SIR.json('data/india/states.json').then(function (d) {
   ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   document.getElementById('fIndia').innerHTML = L('<b>Of the {total} names left off the draft rolls, {sao} were entered as shifted, absent or other, {dead} as dead and {dup} as enrolled more than once.</b> Deaths are about one in five. The other four in five rest on an officer\'s entry that the elector was not where the roll placed them, or was on it twice.', { total: cr(T.removed), sao: cr(T.shifted_absent_other), dead: cr(T.dead), dup: T.duplicate >= 1e7 ? cr(T.duplicate) : SIR.lakh(T.duplicate) });
 
+
+  // ---- tile map
+  var TILES = d.tiles.map(function (t) { return [t.state, t.code, t.row, t.col]; });
+  var BIN = [8, 12, 16, 20], FILL = ['#deebf7', '#9ecae1', '#2878b3', '#1c5f96', '#08306b'];
+  var lum = function (h) { var c = [1, 3, 5].map(function (i) { var v = parseInt(h.substr(i, 2), 16) / 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+  var ink = function (h) { var l = lum(h), dark = (l + 0.05) / (lum('#1c2833') + 0.05), light = 1.05 / (l + 0.05); return dark >= light ? '#1c2833' : '#ffffff'; };
+  var binOf = function (v) { var i = 0; while (i < BIN.length && v >= BIN[i]) i++; return i; };
+  var byName = {}; S.forEach(function (x) { byName[x.state] = x; });
+  document.getElementById('tiles').innerHTML = TILES.map(function (t) {
+    var x = byName[t[0]], v = x && x.per_100, st = 'grid-row:' + (t[2] + 1) + ';grid-column:' + (t[3] + 1) + ';';
+    if (v == null) return '<div role="listitem" class="tile off" style="' + st + '" aria-label="' + L('{s}: no figure', { s: t[0] }) + '"><b>' + t[1] + '</b><span>–</span></div>';
+    var f = FILL[binOf(v)];
+    return '<div role="listitem" class="tile" style="' + st + 'background:' + f + ';color:' + ink(f) + '" aria-label="' + L('{s}: {v} per 100 electors', { s: t[0], v: SIR.d(v, 1) }) + '" title="' + SIR.esc(t[0]) + '"><b>' + t[1] + '</b><span>' + SIR.d(v, 1) + '</span></div>';
+  }).join('');
+  var KL = [L('under {b}', { b: BIN[0] })].concat(BIN.slice(0, -1).map(function (b, i) { return L('{a} to {b}', { a: b, b: BIN[i + 1] }); })).concat([L('{b} or more', { b: BIN[BIN.length - 1] })]);
+  document.getElementById('tilekey').innerHTML = KL.map(function (k, i) { return '<span><i style="background:' + FILL[i] + '"></i>' + k + '</span>'; }).join('') + '<span><i class="off"></i>' + L('no figure') + '</span>';
   var ph = ['1', '2', '3'], PN = { '1': L('Phase 1 (Bihar)'), '2': L('Phase 2 ({n} states)', { n: P['2'].states }), '3': L('Phase 3 ({n} states)', { n: P['3'].states }) };
   SIR.chart('cPhase', { type: 'bar', data: { labels: ph.map(function (p) { return PN[p]; }), datasets: R.map(function (k) { return { label: RN[k], data: ph.map(function (p) { return +(P[p][k] / 1e5).toFixed(1); }), $token: RC[k] }; }).concat([{ label: L('Not split'), data: ph.map(function (p) { return +(P[p].unsplit / 1e5).toFixed(1); }), $token: '--fill-other' }]) },
     options: { scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, title: { display: true, text: L('Names removed, lakh') } } } } });
