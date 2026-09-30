@@ -25,7 +25,7 @@ const { chromium } = await import(PW);
 // added later is collected without anyone remembering to list it here.
 const walk = (d) => fs.readdirSync(path.join(ROOT, d), { withFileTypes: true }).flatMap((e) =>
   e.isDirectory() ? walk(path.join(d, e.name)) : e.name === 'index.html' ? [d ? d + '/' : ''] : []);
-const PAGES = ['', ...walk('bihar'), ...walk('hyderabad')].sort();
+const PAGES = ['', ...walk('india'), ...walk('bihar'), ...walk('hyderabad')].sort();
 const SOURCES = ['index.html', 'assets/sir.js', 'assets/dash.js', 'assets/i18n.js', ...PAGES.filter(Boolean).map(p => p + 'index.html')];
 
 const cat = {};

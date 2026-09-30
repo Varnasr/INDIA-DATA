@@ -110,6 +110,17 @@ def _no_people():
                 assert 'epic' not in head and 'elector_name' not in head, '%s looks like it carries individual records' % f
 
 
+def _india():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_india.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+    d = json.load(open(os.path.join(ROOT, 'data', 'india', 'states.json'), encoding='utf-8'))
+    b = next(x for x in d['states'] if x['state'] == 'Bihar')
+    rs = load('reasons.json')
+    # Bihar's row is the lists' own count, not a rounded press figure.
+    assert b['removed'] == rs['total'] and b['dead'] == rs['totals']['dead'] and b['duplicate'] == rs['totals']['already_enrolled'], 'Bihar row differs from the lists'
+    assert b['shifted_absent_other'] == rs['totals']['shifted'] + rs['totals']['absent']
+
+
 def _pages_link_method():
     for p in ['bihar/index.html', 'bihar/results/index.html', 'bihar/people/index.html',
               'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html']:
@@ -128,6 +139,7 @@ for name, fn in [
     ('every seat has an alliance in all three elections', _alliances_cover_all),
     ('caste and religion figures are measured, not repeated', _caste_not_uniform),
     ('no individual records in published data', _no_people),
+    ('All India table current, and Bihar row equal to the lists', _india),
     ('findings pages link to the method page', _pages_link_method),
 ]:
     check(name, fn)

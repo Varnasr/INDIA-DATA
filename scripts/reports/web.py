@@ -1,4 +1,4 @@
-"""The full reports as pages on the site: bihar/report/ and hyderabad/report/.
+"""The full reports as pages on the site: india/report/, bihar/report/ and hyderabad/report/.
 
 Each report builder writes report.fragment.html and its figures into the page
 folder (Report.save_web). This script puts that fragment into the site's page
@@ -16,11 +16,14 @@ import sys
 
 ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
 META = {
+    'india': ('All India SIR: full report',
+              'The overall report on the Special Intensive Revision: the reasons recorded for every removal in each state and union territory, with the list-level findings for Bihar and Hyderabad Old City, and what the Election Commission should do.',
+              'sir-india-report.pdf'),
     'bihar': ('Bihar SIR 2025: full report',
-              'The full report on the Bihar Special Intensive Revision of 2025: Bihar as a whole, a chapter for each of the 38 districts, what the lists show and do not, and what an audit needs.',
+              'The full report on the Bihar Special Intensive Revision of 2025: Bihar as a whole, a chapter for each of the 38 districts, what the lists show and do not, and what the Election Commission should do.',
               'bihar-sir-2025-report.pdf'),
     'hyderabad': ('Hyderabad Old City SIR 2026: full report',
-                  'The full report on the 2026 Special Intensive Revision in five Old City constituencies of Hyderabad: the five together, a chapter for each constituency, and what verification needs before the final roll.',
+                  'The full report on the 2026 Special Intensive Revision in five Old City constituencies of Hyderabad: the five together, a chapter for each constituency, and what the Election Commission should do before the final roll.',
                   'hyderabad-old-city-sir-2026-report.pdf'),
 }
 
@@ -57,5 +60,5 @@ def build(site):
 
 
 if __name__ == '__main__':
-    for s in sys.argv[1:] or ['bihar', 'hyderabad']:
+    for s in sys.argv[1:] or ['india', 'bihar', 'hyderabad']:
         build(s)
