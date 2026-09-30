@@ -32,7 +32,8 @@
 <footer>Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers.</footer>
 <script src="../../assets/sir.js"></script>
 <script>
-Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/reasons.json'), SIR.json('data/bihar/final.json'), SIR.json('data/bihar/tests.json')]).then(function (r) {
+Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/reasons.json'), SIR.json('data/bihar/final.json'), SIR.json('data/bihar/tests.json'), SIR.json('data/bihar/impact.json')]).then(function (r) {
+  var IM = r[6], IS = IM.summary, IB = IM.breakeven_bands.lower;
   var FN = r[4], FT = FN.totals, TD = r[5].deaths, TM = r[5].marriage;
   var RS = r[3], RT = RS.totals, rp = function (k) { return SIR.pct(100 * RT[k] / RS.total); };
   var xsF = SIR.sum(Object.keys(RT), function (k) { return RS.by_sex[k].F - RS.by_sex[k].M; }), xsS = RS.by_sex.shifted.F - RS.by_sex.shifted.M;
@@ -55,6 +56,9 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
      L('Most of them were not. The phase 1 list gives a reason for every one of the {removed} names. {shifted} were entered as permanently shifted, {dead} as dead, {absent} as absent and {enrolled} as already enrolled elsewhere. The reason is what the officer wrote down, and nobody checked it. Someone marked "shifted" may have been away for work when the officer called, and someone marked "absent" may have been at home. The {absent_n} marked absent rest on the least of the four, because the entry records only that the officer did not find the elector. The phase 2 lists give no reasons.', { removed: SIR.n(RS.total), shifted: rp('shifted'), dead: rp('dead'), absent: rp('absent'), enrolled: rp('already_enrolled'), absent_n: SIR.n(RT.absent) })],
     [L('Did the removals exceed the margins by which seats were won?'),
      L('Yes, in {over} of {seats} constituencies. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {took_over} lost more names than the NDA\'s winning margin. That does not mean those results would have gone the other way. It means the roll changed by more than the vote that decided the seat, and nobody outside the Commission can say whose names they were.', { over: over.length, seats: withM.length, took: took.length, took_over: tookOver.length })],
+    [L('Could the removals have changed who won?'),
+     L('In a handful of seats, and in both directions.') + ' ' + L('In {n} of {seats} seats the runner-up could not have won even if every removed elector who would have voted had backed them. Had the removed voted the way their own booths voted in 2024, the NDA would have lost more of them than INDIA, and {k1} to {k2} seats would have changed hands, {i1} to INDIA and {n2} to the NDA on the fuller count. The NDA\'s majority holds on every estimate. <a href="../results/">Elections</a>.', {
+       n: IB.over_100, seats: IM.seats_total, k1: IS.booth_lower.flips, k2: IS.booth_upper.flips, i1: IS.booth_upper.to_india, n2: IS.booth_upper.to_nda })],
     [L('Are the names entered as dead plausible?'),
      L('In number, yes. They equal about {y} years of Bihar\'s adult deaths at 2024 death rates, and their ages are close to those of registered deaths. By sex, no. Women are {wd} of those entered as dead but {we} of adult deaths. Either women\'s deaths, which are registered less often, stayed on the roll longer, or women still alive were entered as dead. <a href="../people/">Women, religion and caste</a>.', { y: SIR.d(TD.years_of_deaths, 1), wd: SIR.pct(TD.women_share_dead), we: SIR.pct(TD.women_share_expected) })],
     [L('Is marriage why so many young women were marked shifted?'),

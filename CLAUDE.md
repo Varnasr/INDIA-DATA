@@ -13,7 +13,7 @@ publishes it to GitHub Pages.
 pip install pandas==3.0.6 openpyxl==3.1.5
 python3 scripts/build_bihar.py          # rebuild data/bihar from data/bihar/raw
 python3 scripts/build_hyderabad.py      # rebuild data/hyderabad from the explorer
-python3 scripts/check_data.py           # 16 checks, run by CI; rebuilds both with --check
+python3 scripts/check_data.py           # 17 checks, run by CI; rebuilds both with --check
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
 python3 -m http.server 8000
 ```
@@ -145,6 +145,22 @@ but the district pattern runs the other way (rank correlation -0.51). D-3
 counts women where they arrived; district out-migration is not published.
 Raw tables are in `data/bihar/raw/srs_bihar.csv`, `crs_bihar.csv` and
 `census2011_marriage_migration.csv`, each row with its table and page.
+
+`scripts/build_impact.py` asks whether the removals could have changed a
+result and writes `data/bihar/impact.json` and `data/hyderabad/impact.json`.
+Bihar gets three estimates and a break-even figure, each on a low count (net
+fall to the final roll) and a high count (every name removed), less the dead,
+at 2025 turnout: removed electors voting like their own booth in 2024, or like
+their religion or sex in the Axis My India exit poll (NDTV, 12 November 2025).
+Seats where the winner or runner-up is outside the two alliances get the
+break-even figure only, because both sources lump every other party together.
+Findings: in 187 of 243 seats the runner-up could not have won with every
+removed voter; the removed lean NDA (49.0% against 37.8%) on the booth
+estimate; 4 to 6 seats change hands, both ways; the NDA keeps 200 to 204.
+**Do not present the removals as having won Bihar for the NDA**: the lists
+point the other way. Hyderabad gets break-even against 2023 and the religion
+of the removed only; its runner-ups (Yakutpura's MBT) draw on the same voters
+as AIMIM, so no split by religion is assumed.
 
 ## Hyderabad
 

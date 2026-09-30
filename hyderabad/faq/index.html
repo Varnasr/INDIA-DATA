@@ -32,8 +32,8 @@
 <footer>Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers.</footer>
 <script src="../../assets/sir.js"></script>
 <script>
-Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/telangana.json')]).then(function (r) {
-  var s = r[0], TG = r[1];
+Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/telangana.json'), SIR.json('data/hyderabad/impact.json')]).then(function (r) {
+  var s = r[0], TG = r[1], HI = r[2].seats;
   var A = s.acs, t = s.totals, sum = function (f) { return SIR.sum(A, f); };
   var R = function (r) { return 100 * sum(function (a) { return a.reasons[r]; }) / t.deleted; };
   var W = A.map(function (a) { return a.within_part.hindu_minus_muslim; }), LK = A.filter(function (a) { return a.linked; });
@@ -56,7 +56,13 @@ Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/t
     [L('Could hearings be held properly?'),
      L('{summoned} electors kept on the draft roll were summoned.', { summoned: SIR.n(t.hearing) }) + ' ' + L('The heaviest single slot listed {cases} cases, in {name}.', { cases: SIR.n(heavy.max_slot), name: heavy.name }) + ' ' + L('The lists do not record how long a slot lasted. <a href="../hearings/">Hearings</a>.')],
     [L('Did this change an election result?'),
-     L('No election has been held on the revised roll.') + ' ' + L('What can be measured is the scale. Every one of the five constituencies lost more names than its 2023 winning margin, and in {names} more names were struck off than there were valid votes in 2023.', { names: valid.join(L(' and ')) }) + ' ' + L('Yakutpura was won by {margin} votes and lost {deleted} names.', { margin: SIR.n(yak.e2023.margin), deleted: SIR.n(yak.deleted) })],
+     L('No election has been held on the revised roll.') + ' ' + L('What can be measured is the scale. Every one of the five constituencies lost more names than its 2023 winning margin, and in {names} more names were struck off than there were valid votes in 2023.', { names: valid.join(L(' and ')) }) + ' ' + L('Yakutpura was won by {margin} votes and lost {deleted} names.', { margin: SIR.n(yak.e2023.margin), deleted: SIR.n(yak.deleted) }) + ' ' + L('Measured against the 2023 margins, only Yakutpura is close. Its runner-up would need {yak} of the removed electors who would vote, at 2023 turnout, to overturn a margin of {m}. In {mid} the runner-up would need {r1} to {r2}, and in {none} no split of the removed would be enough.', {
+       yak: SIR.pct(HI.filter(function (x) { return x.name === 'Yakutpura'; })[0].breakeven), m: SIR.n(yak.e2023.margin),
+       mid: HI.filter(function (x) { return x.breakeven >= 55 && x.breakeven <= 100; }).map(function (x) { return x.name; }).join(L(' and ')),
+       r1: SIR.pct(Math.min.apply(null, HI.filter(function (x) { return x.breakeven >= 55 && x.breakeven <= 100; }).map(function (x) { return x.breakeven; }))),
+       r2: SIR.pct(Math.max.apply(null, HI.filter(function (x) { return x.breakeven >= 55 && x.breakeven <= 100; }).map(function (x) { return x.breakeven; }))),
+       none: HI.filter(function (x) { return x.breakeven > 100; }).map(function (x) { return x.name; }).join(L(' and ')) }) + ' ' + L('Muslim names are a smaller share of those struck off than of the roll in all five seats, by {lo} to {hi} points, so where Muslim electors lean to AIMIM, the removals take fewer of its voters than of its opponents\'.', {
+       lo: SIR.d(Math.min.apply(null, HI.map(function (x) { return x.muslim_share_roll - x.muslim_share_removed; })), 1), hi: SIR.d(Math.max.apply(null, HI.map(function (x) { return x.muslim_share_roll - x.muslim_share_removed; })), 1) })],
     [L('How reliable are the lists?'),
      L('For Charminar, Yakutpura, Chandrayangutta and Bahadurpura, the counts of names struck off, the recorded reasons and women\'s share all agree exactly with a separate count of the same lists.') + ' ' + L('The Malakpet list used here is incomplete: it holds {held} names against 1,47,799 in an independent count of the published list, and carries no part numbers or 2002 link.', { held: SIR.n(mal.deleted) })],
     [L('Why only five constituencies?'),
