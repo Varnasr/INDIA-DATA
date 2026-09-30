@@ -99,7 +99,7 @@ function kit(pres, P) {
   K.left = { x: M, y: TOP, w: 7.7, h: CH };
   K.right = (s, items, size = 14) => K.bullets(s, items, 8.65, TOP + 0.1, W - M - 8.65, CH - 0.1, size);
   K.contents = (s) => {
-    const rows = K.sections.map((x, i) => [x.name, String(x.from) + (K.sections[i + 1] ? '–' + (K.sections[i + 1].from - 1) : '–' + K.n)]);
+    const rows = K.sections.map((x, i) => { const to = K.sections[i + 1] ? K.sections[i + 1].from - 1 : K.n; return [x.name, to > x.from ? x.from + '–' + to : String(x.from)]; });
     const half = Math.ceil(rows.length / 2);
     [rows.slice(0, half), rows.slice(half)].forEach((col, c) => s.addText(col.map((r, i) => ({ text: r[0] + '   ' + r[1], options: { breakLine: i < col.length - 1 } })),
       { x: M + c * 6.2, y: 1.6, w: 5.9, h: 4.9, fontFace: BODY, fontSize: 17, color: INK, margin: 0, isTextBox: true, valign: 'top', paraSpaceAfter: 12 }));
