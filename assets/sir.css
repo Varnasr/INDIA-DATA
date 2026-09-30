@@ -229,6 +229,52 @@ footer{background:var(--card);padding:1.5rem;text-align:center;border-top:1px so
 .fatekey{display:flex;gap:18px;font-size:13px;color:var(--muted);margin-bottom:22px;flex-wrap:wrap}
 .fatekey i{display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:5px;border-radius:2px}
 
+/* ------------------------------------------------------ the full report
+   bihar/report/ and hyderabad/report/: the report as a page, in the site's
+   palette so both themes work. Figures are drawn on white and sit on a white
+   card in either theme. */
+.report-page{max-width:880px}
+.report-lang{display:none;background:var(--soft);border-inline-start:4px solid var(--fill-amber);padding:.55rem .9rem;font-size:.9rem}
+html:not([data-lang="en"]) .report-lang{display:block}
+.report-actions{margin:0 0 1rem}
+.report{line-height:1.65;font-size:1rem}
+.report .cover{background:var(--card);border-radius:14px;padding:1.5rem 1.4rem;box-shadow:0 2px 10px var(--shadow);margin-bottom:1.5rem}
+.report .kicker{margin:0;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+.report .title{font-size:1.9rem;line-height:1.2;margin:.3rem 0 .4rem}
+.report .subtitle{color:var(--muted);margin:0 0 1rem}
+.report .cover dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem;margin:0 0 1rem}
+.report .cover dl div{background:var(--soft);border-radius:10px;padding:.7rem .8rem}
+.report .cover dt{font-size:1.35rem;font-weight:700;color:var(--red)}
+.report .cover dd{margin:0;font-size:.85rem;color:var(--muted)}
+.report .by{color:var(--muted);font-size:.9rem;margin:0}
+.report .toc{background:var(--card);border-radius:14px;padding:1rem 1.3rem;margin-bottom:1.5rem;box-shadow:0 2px 10px var(--shadow)}
+.report .toc ol{list-style:none;margin:0;padding:0;columns:2;column-gap:2rem}
+.report .toc li{break-inside:avoid;margin:.2rem 0}
+.report .toc li.l1{font-weight:700;margin-top:.5rem}
+.report .toc li.l2{padding-inline-start:.9rem;font-size:.92rem}
+.report .toc a{color:var(--navy)}
+.report h2{font-size:1.45rem;margin:2.2rem 0 .6rem;padding-top:.3rem;border-top:2px solid var(--line);scroll-margin-top:calc(var(--hh,0px) + 70px)}
+.report h3{font-size:1.12rem;margin:1.5rem 0 .4rem;scroll-margin-top:calc(var(--hh,0px) + 70px)}
+.report h4{font-size:1rem;margin:1.2rem 0 .3rem}
+.report p{margin:0 0 .8rem}
+.report .note{font-size:.85rem;color:var(--muted);font-style:italic}
+.report ul,.report ol{padding-inline-start:1.3rem;margin:0 0 .9rem}
+.report li{margin-bottom:.3rem}
+.report .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin:.8rem 0 1.1rem}
+.report .stats div{background:var(--card);border-inline-start:4px solid var(--fill-red);border-radius:8px;padding:.6rem .8rem;box-shadow:0 1px 4px var(--shadow)}
+.report .stats b{display:block;font-size:1.3rem;color:var(--red)}
+.report .stats span{font-size:.82rem;color:var(--muted)}
+.report .callout{background:var(--soft);border-inline-start:4px solid var(--fill-amber);border-radius:8px;padding:.7rem .9rem;margin:.9rem 0}
+.report .twrap{overflow-x:auto;margin:.6rem 0 1.1rem;background:var(--card);border-radius:10px;box-shadow:0 1px 4px var(--shadow)}
+.report table{border-collapse:collapse;width:100%;font-size:.88rem}
+.report th{background:var(--soft);color:var(--ink);text-align:start;padding:.45rem .6rem;border-bottom:2px solid var(--line);white-space:nowrap}
+.report td{padding:.4rem .6rem;border-bottom:1px solid var(--line)}
+.report td.r,.report th.r{text-align:end;font-variant-numeric:tabular-nums}
+.report figure{margin:1rem 0 1.3rem;background:#fff;border-radius:10px;padding:.6rem;box-shadow:0 1px 4px var(--shadow)}
+.report figure img{display:block;width:100%;height:auto}
+.report figcaption{font-size:.84rem;color:#4d5b69;margin-top:.4rem}
+@media (max-width:700px){.report .toc ol{columns:1}.report .title{font-size:1.5rem}.report .cover{padding:1.1rem}}
+
 @media (max-width:900px){
   .charts-grid,.grid{grid-template-columns:minmax(0,1fr)}
   .summary-grid,.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
@@ -252,7 +298,7 @@ footer{background:var(--card);padding:1.5rem;text-align:center;border-top:1px so
   .logo{gap:.55rem;min-width:0}
   .logo-icon{display:none}
   .h-title{font-size:1.02rem}
-  .subtitle{font-size:.72rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  header.top .subtitle{font-size:.72rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .titles{overflow:hidden}
   .controls{flex-wrap:nowrap;gap:.3rem}
   .controls .btn,.controls button,.controls summary{width:40px;height:40px;padding:0;justify-content:center;border-radius:10px}

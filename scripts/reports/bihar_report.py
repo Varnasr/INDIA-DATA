@@ -290,4 +290,6 @@ R.p('Each booth is counted once. Every headline figure is recomputed from the li
 out = sys.argv[1] if len(sys.argv) > 1 else '/home/user/reports/Bihar_SIR_2025_Report.docx'
 R.save(out)
 R.save_html(out[:-5] + '.html')
+if len(sys.argv) > 2:
+    R.save_web(sys.argv[2])  # the page on the site, e.g. bihar/report
 print('ok')

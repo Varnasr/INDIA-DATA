@@ -135,6 +135,8 @@ in the address (`?lang=hi`) and in the reader's browser.
 - **A row of links** (the switch, the Downloads menu) carries `data-i18n-each`,
   so each link is its own key; without it the whole row, addresses and all,
   becomes one key that differs on every page.
+- `scripts/i18n_collect.mjs` walks `bihar/` and `hyderabad/` for pages rather
+  than keeping a list, so a new page is collected without anyone remembering.
 - **Fixed text in the markup** is translated by `L.apply()`, which `sir.js`
   calls before a page's own script runs. The key is an element's inner HTML
   as the browser serialises it, so `scripts/i18n_collect.mjs` reads the keys
@@ -152,14 +154,22 @@ in the address (`?lang=hi`) and in the reader's browser.
 
 ## Reports
 
-`reports/` holds the two full reports, PDF and Word, linked from every page's
-header ("Full report") and from each dashboard. `scripts/reports/build.sh`
-rebuilds them from the published JSON: python-docx writes the Word file, the
-same builder writes print-ready HTML, and headless Chromium prints that to PDF
-(LibreOffice is not needed). They follow the Sabar Institute's structure: Part
-I for the whole area, Part II a chapter per district or constituency, one
-section on what the lists show and do not, and what an audit needs. Rebuild
-them after any data change; nothing checks that they are current.
+Each full report is published twice: as a page on the site
+(`bihar/report/`, `hyderabad/report/`, a tab on every sub-page and first in
+the Downloads menu) and as a PDF in `reports/`. There is no Word file on the
+site. `scripts/reports/build.sh` rebuilds both from the published JSON: the
+builder (python-docx, via `docxkit.Report`) writes print-ready HTML that
+headless Chromium prints to PDF, and a web fragment with its figures as PNGs
+that `scripts/reports/web.py` puts into the site's page shell, taken from the
+method page. The Word file the builder writes on the way is deleted. They
+follow the Sabar Institute's structure: Part I for the whole area, Part II a
+chapter per district or constituency, one section on what the lists show and
+do not, and what an audit needs. Rebuild them after any data change; nothing
+checks that they are current.
+
+The report pages are in English only: the article carries `lang="en"` and
+`data-no-i18n`, and a translated page shows a line saying so. Translating
+them would add some 70,000 characters to the review.
 
 Beside them are two slide decks, `*-deck.pptx`, written by
 `scripts/reports/decks.js` (pptxgenjs) from the same JSON and linked as
