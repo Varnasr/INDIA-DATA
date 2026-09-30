@@ -127,6 +127,7 @@ main h2:first-child{margin-top:0}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .takeaway,:root:not([data-theme="light"]) .finding,:root:not([data-theme="light"]) .caveat{background:linear-gradient(135deg,rgba(244,208,63,.18),rgba(169,223,191,.18));color:var(--ink)}:root:not([data-theme="light"]) .takeaway a,:root:not([data-theme="light"]) .finding a,:root:not([data-theme="light"]) .caveat a{color:var(--navy)}}
 .takeaway-title{font-weight:700}
 .takeaway ol.short{margin:.4rem 0 .5rem;padding-inline-start:1.2rem}.takeaway ol.short li{margin:.3rem 0;line-height:1.45}.takeaway .short-note{margin:.4rem 0 0;font-size:.88rem}
+.page-short .takeaway{margin-top:0}.page-faq{margin-top:2.5rem}.page-faq .note{margin-top:.5rem}
 .finding b{font-weight:700}
 
 /* chart cards: .card on the dashboards, .panel elsewhere */
