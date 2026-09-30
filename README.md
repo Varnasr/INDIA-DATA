@@ -7,12 +7,13 @@ site at [forindia.netlify.app](https://forindia.netlify.app).
 | Page | What it covers |
 |---|---|
 | [`/`](https://forindia.netlify.app/) | The Bihar dashboard: eleven tabs of charts and the table of all 243 constituencies, with links to Hyderabad |
+| [`/india/`](https://forindia.netlify.app/india/) | All India: the reasons recorded for 13.39 crore names left off the draft rolls, state by state, with a source for every row |
 | [`/bihar/`](https://forindia.netlify.app/bihar/) | Explorer: 69,10,559 names removed across 243 constituencies and 77,837 booths, every seat and every booth |
 | `/bihar/results/` | Deletions against the 2020, 2024 and 2025 results, within seats and across them |
 | `/bihar/border/`, `/bihar/districts/` | Nepal and Bengal border seats; district economy and census against deletions |
 | `/bihar/people/` | Gender, religion as a range, caste under two classifications with bounds |
 | `/bihar/faq/` | Questions and answers: the criticisms put to the analysis, answered from the lists |
-| `/bihar/method/` | Sources, how the lists were prepared, research questions, what an audit needs |
+| `/bihar/method/` | Sources, how the lists were prepared, research questions |
 | [`/hyderabad/`](https://forindia.netlify.app/hyderabad/) | The Hyderabad dashboard: 6,62,063 of 16,57,207 electors struck off in Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, in ten tabs |
 | `/hyderabad/explorer/` | Any constituency, any of its 1,158 polling parts |
 | `/hyderabad/people/`, `/parts/`, `/hearings/`, `/faq/`, `/method/` | Rates by age, sex, religion and 2002 linkage within parts; part outliers; hearings; fourteen research questions |

@@ -305,6 +305,10 @@ class Report:
     def save_html(self, path):
         toc = '<section class="toc"><h1>Contents</h1><ol>' + ''.join('<li class="l%d"><a href="#s%d">%s</a></li>' % (lvl, i, H.escape(t)) for i, (lvl, t) in enumerate(self.heads)) + '</ol></section><div class="pb"></div>'
         body = ''.join(self.html).replace('<!--TOC-->', toc)
+        # One break between pages: the cover already breaks after itself, and
+        # the contents carry their own, so repeated markers would print blank pages.
+        body = re.sub(r'(<div class="pb"></div>)+', '<div class="pb"></div>', body)
+        body = re.sub(r'(<section class="cover">.*?</section>)<div class="pb"></div>', r'\1', body, flags=re.S)
         for i, (png, width, cap) in enumerate(self.figs):
             body = body.replace('<!--FIG%d-->' % i, '<figure><img src="data:image/png;base64,%s" style="width:%.1fcm" alt="%s"><figcaption>%s</figcaption></figure>' % (base64.b64encode(png).decode(), width, H.escape(cap), H.escape(cap)))
         a = self._hex(self.accent)

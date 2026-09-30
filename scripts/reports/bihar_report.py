@@ -5,7 +5,7 @@
 
 Part I analyses the state; Part II gives one chapter per district; a single
 section says what the lists show and what they do not; the conclusion sets out
-what an audit needs. Every figure is computed from data/bihar/*.json.
+what the Election Commission should do. Every figure is computed from data/bihar/*.json.
 """
 import json
 import os
@@ -189,7 +189,7 @@ R.figure(fig, 'Figure 5. The reason entered against each phase 1 removal, by the
 R.p('Among the removed aged 80 and over, %s were entered as dead; among those aged 18 to 24, %s. The young were mostly marked shifted or absent.'
     % (pct(100 * RS['by_age']['dead'][-1] / sum(RS['by_age'][k][-1] for k in RK)), pct(100 * RS['by_age']['dead'][0] / sum(RS['by_age'][k][0] for k in RK))))
 R.p('Taken alone, the names marked absent exceed the 2025 margin in %d of %d seats, and the names marked already enrolled in %d. The names marked shifted exceed it in %d and the dead in %d. '
-    'The absent share is highest in %s. That is where a check of the entries should start.'
+    'The absent share is highest in %s.'
     % (rOver('r_absent'), len(withM), rOver('r_enrolled'), rOver('r_shifted'), rOver('r_dead'), andj(['%s (%s)' % (d['district'], pct(100 * d['absent'] / dsum(d))) for d in RD[:3]])))
 R.table(['District', 'Phase 1 removed', 'Shifted', 'Dead', 'Absent', 'Already enrolled'],
         [[d['district'], indian(dsum(d))] + [pct(100 * d[k] / dsum(d)) for k in RK] for d in RD],
@@ -307,20 +307,19 @@ for d in rankD:
 
 # ============================================================ CONCLUSION
 R.page_break()
-R.h1('Conclusion and what an audit needs')
+R.h1('Conclusion and what the Election Commission should do')
 R.p('The revision removed %s names from Bihar\'s roll in the months before an Assembly election. '
     % indian(t['total']) + 
     'The names removed exceed the margin in %d of %d seats and equal %s of all votes polled. Whatever the reason entered against each name, a change to the roll of that size is larger than the decision at the ballot box in most of the state.'
     % (len(over), len(withM), pct(100 * t['total'] / polled)))
 R.p('Women carried a larger share of the removals than their share of the population in every district, and the lists cannot show whether those women were enrolled again where they now live. '
     'The reasons officers entered, dead, shifted, absent or enrolled twice, are entries after a visit or its absence, not findings. %s names were removed as absent, the entry that rests on the least, and they alone exceed the margin in %d seats.' % (indian(RT['absent']), rOver('r_absent')))
-R.p('What would settle the questions the lists leave open:')
+R.p('What the Election Commission should do:')
 R.numbered([
-    '**A name-by-name verification** of the removals in every constituency where they exceed the margin, starting with the %d where they exceed it five times or more.' % sum(ratio(a) >= 5 for a in withM),
-    '**Publication, booth by booth, of every claim and objection** filed after the draft roll, with its outcome, so that restorations can be counted against removals.',
-    '**The evidence for each "absent" and "already enrolled" entry**, starting with the %s names marked absent, and the reason for each of the %s phase 2 removals, which the lists do not carry.' % (indian(RT['absent']), indian(t['p2'])),
-    '**A check of women removed as "shifted"** against new enrolments in the constituencies they moved to.',
-    '**An independent review** of the revision\'s method before it is repeated in other states.',
+    '**Publish the reason for each of the %s phase 2 removals**, which the lists do not carry.' % indian(t['p2']),
+    '**Publish the basis for each entry marked absent or already enrolled**: %s marked absent and %s marked already enrolled in phase 1.' % (indian(RT['absent']), indian(RT['already_enrolled'])),
+    '**Publish every claim and objection filed after the draft roll, booth by booth, with its outcome**, so that restorations can be counted against removals.',
+    '**Publish new enrolments by constituency after the revision**, so that women removed as shifted can be matched against enrolments where they now live.',
 ])
 
 R.h1('Method and sources')

@@ -1,7 +1,8 @@
 # INDIA-DATA
 
-The SIR analyses hub at forindia.netlify.app: Bihar (2025) and five Old City
-constituencies of Hyderabad (2026). Static HTML, Chart.js from cdnjs, one
+The SIR analyses hub at forindia.netlify.app: All India (the reasons for
+removal, state by state), Bihar (2025) and five Old City constituencies of
+Hyderabad (2026). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main`; `static.yml` also
 publishes it to GitHub Pages.
@@ -62,6 +63,21 @@ Things the build depends on, each asserted by `check_data.py`:
   reasons. Never commit the list itself or its download link.
 - **A reason is an officer's entry, not a finding.** Pages say so wherever a
   reason is quoted. "Absent" rests on the least and is where checking starts.
+
+## All India
+
+`data/india/raw/states.csv` is curated by hand, one row per state or union
+territory: the draft-roll removals and their reasons as each Chief Electoral
+Officer published them, with a flag for rounded figures, a flag for how
+complete the split is, and a source link. `scripts/build_india.py` writes
+`data/india/states.json` and the downloadable `data/india/states.csv`, and
+fails if a "complete" split misses its total by more than 0.5% or a "short"
+one does not fall short. Bihar's row is the lists' own count, and a check
+holds it equal to `data/bihar/reasons.json`. Reasons are folded into the three
+every state reported: dead; shifted, absent or other; enrolled more than once.
+Removals after the draft carry no reason anywhere and are kept apart. When a
+state publishes a final roll or a primary press note, update its row and its
+flags, not the totals.
 
 ## Hyderabad
 
@@ -177,7 +193,7 @@ that `scripts/reports/web.py` puts into the site's page shell, taken from the
 method page. The Word file the builder writes on the way is deleted. They
 follow the Sabar Institute's structure: Part I for the whole area, Part II a
 chapter per district or constituency, one section on what the lists show and
-do not, and what an audit needs. Rebuild them after any data change; nothing
+do not, and what the Election Commission should do. Rebuild them after any data change; nothing
 checks that they are current.
 
 The report pages are in English only: the article carries `lang="en"` and
@@ -212,10 +228,12 @@ per slot, not the slot's length.
   sources without naming the people or organisations who compiled them.
 - **Writing**: plain explanatory prose. Never refer to earlier versions of the
   analysis or to corrections on a public page.
-- **Framing**: the pages make an accountability case. They lead with the scale
-  of the removals, the removals against winning margins, women's
+- **Framing**: this is an analysis, not a petition site. The pages lead with
+  the scale of the removals, the removals against winning margins, women's
   over-representation and, in Hyderabad, the process (the 2002 link, hearing
-  loads), and end with what an audit needs. The alliance comparisons stay on
+  loads). Where something is asked for, it is a short, plain section on what
+  the Election Commission should do or publish; never "what an audit needs",
+  never "where checking should start", never a call to readers. The alliance comparisons stay on
   the Elections page and in the FAQ, stated plainly: the lists show more
   removals on NDA ground, and no page may say otherwise. The lists cannot show
   intent, and no page may claim they do.

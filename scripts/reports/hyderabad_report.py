@@ -5,7 +5,7 @@
 
 Part I analyses the five constituencies together; Part II gives one chapter
 per constituency; one section says what the lists show and what they do not;
-the conclusion sets out what verification needs before the final roll. Every
+the conclusion sets out what the Election Commission should do before the final roll. Every
 figure is computed from data/hyderabad/*.json.
 """
 import json
@@ -106,7 +106,7 @@ R.p('The list of the absent, shifted and dead carries the reason an officer ente
 R.table(['Constituency'] + ['Shifted', 'Untraceable or absent', 'Dead', 'Enrolled elsewhere'],
         [[a['name']] + [pct(100 * a['reasons'][k] / a['deleted']) for k in S['reasons']] for a in A], widths=[3.4, 2.6, 3.4, 2, 3], right={1, 2, 3, 4})
 ut = [100 * a['reasons']['Untraceable/Absent'] / a['deleted'] for a in A]
-R.p('The untraceable share runs from %s in %s to %s in %s. Those entries rest on an officer not finding someone, and they are where verification should begin.'
+R.p('The untraceable share runs from %s in %s to %s in %s. Those entries record only that an officer did not find someone.'
     % (pct(min(ut)), A[ut.index(min(ut))]['name'], pct(max(ut)), A[ut.index(max(ut))]['name']))
 
 R.h2('Age')
@@ -161,7 +161,7 @@ R.table(['Rule that sent the elector to a hearing'] + names + ['All five'],
         widths=[4.4, 1.9, 1.9, 1.9, 2.2, 1.9, 1.9], right={1, 2, 3, 4, 5, 6}, size=7.5)
 
 R.h2('Polling parts')
-R.p('Part removal rates run from %.0f%% to %.0f%%, and %d parts lost more than 60%% of their roll: %s. Across parts, the Muslim-name share of the roll and the removal rate move in opposite directions in every constituency. A part far above its neighbours is where verification on the ground should start.'
+R.p('Part removal rates run from %.0f%% to %.0f%%, and %d parts lost more than 60%% of their roll: %s. Across parts, the Muslim-name share of the roll and the removal rate move in opposite directions in every constituency.'
     % (min(p['rate'] for p in P100), max(p['rate'] for p in P100), len(o60),
        andj(['%d in %s' % (a['parts_over_60'], a['name']) for a in A if a['parts_over_60']])))
 top = sorted(P100, key=lambda p: -p['rate'])[:15]
@@ -219,17 +219,17 @@ for i, a in enumerate(A):
 
 # ============================================================ CONCLUSION
 R.page_break()
-R.h1('Conclusion and what verification needs')
+R.h1('Conclusion and what the Election Commission should do')
 R.p('In five constituencies the revision struck off %s of the electors on the rolls, more names than the margin that decided every one of the five seats in 2023, and in two of them more than every valid vote cast. '
     'The burden fell on the old, and on those the process could not trace to a roll prepared 24 years earlier. The final roll has not yet been published, and the hearings are still being held.'
     % pct(t['rate']))
-R.p('What would settle the questions the lists leave open, before the final roll:')
+R.p('What the Election Commission should do before the final roll:')
 R.numbered([
-    '**Verification of every removal entered as "untraceable or absent"**, %s names, by a visit with notice and a record of the attempt.' % indian(s(lambda a: a['reasons']['Untraceable/Absent'])),
-    '**A review of every removal of an elector with no link to the 2002 roll**, since the link is the revision\'s own test and the gap it produces is the largest in the files.',
-    '**Hearing schedules that allow each elector a real hearing**: no slot of several hundred cases.',
-    '**Ground checks in the %d parts that lost more than 60%% of their roll**, and in every part far above the rest of its constituency.' % len(o60),
-    '**Publication of restorations after hearings**, part by part, so that the final count can be set against these.',
+    '**Record and publish the basis for every removal entered as "untraceable or absent"**, %s names: the visits made and the notice given.' % indian(s(lambda a: a['reasons']['Untraceable/Absent'])),
+    '**Publish how removals of electors with no link to the 2002 roll were decided**, since the link is the revision\'s own test and the gap it produces is the largest in the files.',
+    '**Schedule hearings so that each case can be heard**, rather than listing several hundred cases in one slot.',
+    '**Explain the removals in the %d parts that lost more than 60%% of their roll.**' % len(o60),
+    '**Publish restorations after hearings, part by part**, so that the final count can be set against these lists.',
 ])
 
 R.h1('Method and sources')
