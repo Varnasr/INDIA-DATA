@@ -34,6 +34,24 @@
   <div class="tilemap" id="tiles" role="list" aria-label="Removals per 100 electors, by state"></div>
   <div class="tilekey" id="tilekey" aria-hidden="true"></div>
 
+  <h2>The rolls against the adult population</h2>
+  <p class="sub">Each state's roll before the revision, and its draft roll, as a share of its projected population aged 18 and over on 1 March 2026. A roll above 100% holds more names than there are adults, which is what a roll swollen by the dead and the departed would look like. Projections exist by age for 19 states.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart tall"><canvas id="cAdult" aria-label="Roll before the revision and draft roll as a share of the projected adult population, by state"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fAdult"></p>
+
+  <h2>Removals against the 2024 vote</h2>
+  <p class="sub">Names left off each state's draft roll, as a share of the votes polled in that state in the 2024 Lok Sabha election.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart xtall"><canvas id="cVote" aria-label="Names removed as a share of votes polled in 2024, by state"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fVote"></p>
+
   <h2>The three reasons, by phase</h2>
   <div class="grid">
     <div class="panel">
@@ -125,6 +143,23 @@ SIR.json('data/india/states.json').then(function (d) {
   }).join('');
   var KL = [L('under {b}', { b: BIN[0] })].concat(BIN.slice(0, -1).map(function (b, i) { return L('{a} to {b}', { a: b, b: BIN[i + 1] }); })).concat([L('{b} or more', { b: BIN[BIN.length - 1] })]);
   document.getElementById('tilekey').innerHTML = KL.map(function (k, i) { return '<span><i style="background:' + FILL[i] + '"></i>' + k + '</span>'; }).join('') + '<span><i class="off"></i>' + L('no figure') + '</span>';
+
+  // ---- rolls against adults, removals against the 2024 vote
+  var AD = d.adults, adS = S.filter(function (x) { return x.roll_adult_pct != null; }).sort(function (a, b) { return b.roll_adult_pct - a.roll_adult_pct; });
+  SIR.chart('cAdult', { type: 'bar', data: { labels: adS.map(function (x) { return x.state; }), datasets: [
+      { label: L('Roll before the revision, % of adults'), data: adS.map(function (x) { return x.roll_adult_pct; }), $token: '--fill-grey' },
+      { label: L('Draft roll, % of adults'), data: adS.map(function (x) { return x.draft_adult_pct; }), $token: '--fill-navy' }] },
+    options: { scales: { x: { ticks: { autoSkip: false, maxRotation: 60, minRotation: 45 } }, y: { min: 50, title: { display: true, text: L('% of projected population aged 18 and over') } } } } });
+  var dl = adS.slice().sort(function (a, b) { return a.draft_adult_pct - b.draft_adult_pct; });
+  document.getElementById('fAdult').innerHTML = L('<b>Across these {n} states the rolls before the revision held {pre} of the projected adult population, and the draft rolls hold {post}.</b> Only {k} states had a roll larger than their adult population: {over}. How far a roll exceeded its adult population has no relationship with how many names the state removed (rank correlation {rho}). The lowest draft rolls against the adult population are in {low}. The projections are from the 2011 census and count residents, so a state that receives many migrants counts adults who may be registered in their home state, which lowers its ratio.', {
+    n: AD.states, pre: SIR.pct(100 * AD.roll_total / AD.adults_total), post: SIR.pct(100 * AD.draft_total / AD.adults_total), k: AD.over_100.length, over: AD.over_100.join(', '), rho: SIR.d(AD.rho_rate, 2),
+    low: dl.slice(0, 3).map(function (x) { return L('{s} ({v})', { s: x.state, v: SIR.pct(x.draft_adult_pct) }); }).join(', ') });
+  var vS = S.filter(function (x) { return x.removed_pct_votes24 != null; }).sort(function (a, b) { return b.removed_pct_votes24 - a.removed_pct_votes24; });
+  SIR.chart('cVote', { type: 'bar', data: { labels: vS.map(function (x) { return x.state; }), datasets: [{ label: L('Removed, % of votes polled in 2024'), data: vS.map(function (x) { return x.removed_pct_votes24; }), $tokens: vS.map(function (x) { return x.state === 'Bihar' ? '--fill-red' : '--fill-navy'; }) }] },
+    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Names removed, % of votes polled in 2024') } } } } });
+  var over20 = vS.filter(function (x) { return x.removed_pct_votes24 >= 20; });
+  document.getElementById('fVote').innerHTML = L('<b>In {k} states the names left off the draft roll equal a fifth or more of the votes polled in 2024</b>, led by {top}. Bihar\'s draft-stage removals were {b} of its 2024 vote.', {
+    k: over20.length, top: vS.slice(0, 3).map(function (x) { return L('{s} ({v})', { s: x.state, v: SIR.pct(x.removed_pct_votes24) }); }).join(', '), b: SIR.pct(byName['Bihar'].removed_pct_votes24) });
   var ph = ['1', '2', '3'], PN = { '1': L('Phase 1 (Bihar)'), '2': L('Phase 2 ({n} states)', { n: P['2'].states }), '3': L('Phase 3 ({n} states)', { n: P['3'].states }) };
   SIR.chart('cPhase', { type: 'bar', data: { labels: ph.map(function (p) { return PN[p]; }), datasets: R.map(function (k) { return { label: RN[k], data: ph.map(function (p) { return +(P[p][k] / 1e5).toFixed(1); }), $token: RC[k] }; }).concat([{ label: L('Not split'), data: ph.map(function (p) { return +(P[p].unsplit / 1e5).toFixed(1); }), $token: '--fill-other' }]) },
     options: { scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, title: { display: true, text: L('Names removed, lakh') } } } } });

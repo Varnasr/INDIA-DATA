@@ -28,6 +28,7 @@ OUT_C = os.path.join(ROOT, 'data', 'india', 'states.csv')
 R = ['dead', 'shifted_absent_other', 'duplicate']
 COV = os.path.join(ROOT, 'data', 'india', 'raw', 'covariates.csv')
 GEN = os.path.join(ROOT, 'data', 'india', 'raw', 'gender.csv')
+ADU = os.path.join(ROOT, 'data', 'india', 'raw', 'adults_ls2024.csv')
 BIHAR_REASONS = os.path.join(ROOT, 'data', 'bihar', 'reasons.json')
 # Characteristics set against the removal rate and the mix of reasons. Census
 # 2011 unless stated; income is per capita NSDP, 2023-24.
@@ -150,6 +151,23 @@ def build():
             border[yk + '_' + side] = round(median(v), 2)
             border['n_' + yk + '_' + side] = len(v)
 
+    # ---- the rolls against the projected adult population, and the 2024 vote
+    adu = {x['state']: x for x in csv.DictReader(open(ADU, encoding='utf-8'))}
+    assert set(adu) == set(names), 'an adults and 2024 row for every state'
+    for x in rows:
+        a = adu[x['state']]
+        ad = float(a['adults_2026']) if a['adults_2026'] else None
+        v24 = float(a['votes_2024']) if a['votes_2024'] else None
+        x['adults_2026'] = ad
+        x['roll_adult_pct'] = round(100 * x['electors_before'] / ad, 1) if ad and x['electors_before'] else None
+        x['draft_adult_pct'] = round(100 * (x['electors_before'] - x['removed']) / ad, 1) if ad and x['electors_before'] and x['removed'] else None
+        x['removed_pct_votes24'] = round(100 * x['removed'] / v24, 1) if v24 and x['removed'] else None
+    ra = [x for x in rows if x['roll_adult_pct'] is not None and x['per_100'] is not None]
+    adults = {'states': len(ra), 'rho_rate': spearman([(x['roll_adult_pct'], x['per_100']) for x in ra]),
+              'over_100': [x['state'] for x in sorted(ra, key=lambda x: -x['roll_adult_pct']) if x['roll_adult_pct'] > 100],
+              'roll_total': sum(x['electors_before'] for x in ra), 'draft_total': sum(x['electors_before'] - x['removed'] for x in ra),
+              'adults_total': sum(x['adults_2026'] for x in ra)}
+
     # ---- women among the removed
     rs = json.load(open(BIHAR_REASONS, encoding='utf-8'))
     bf = sum(rs['by_sex'][k]['F'] for k in rs['by_sex'])
@@ -172,6 +190,7 @@ def build():
 
     out = {
         'as_of': '2026-09-30',
+        'adults': adults,
         'tiles': [{'state': a, 'code': c, 'row': r, 'col': k} for a, c, r, k in TILES],
         'characteristics': [{'key': k, 'label': l} for k, l in CHAR],
         'correlations': corr,
@@ -194,12 +213,13 @@ def dump_csv(d):
             'split', 'figures', 'source', 'source_url', 'removed_after_draft', 'final_date', 'note']
     gen = {g['state']: g for g in d['gender']}
     b = io.StringIO()
-    cols = cols + ['women_share_removed', 'women_share_roll', 'sex_split_quality'] + [k for k, _ in CHAR] + ['intl_border']
+    cols = cols + ['roll_adult_pct', 'draft_adult_pct', 'removed_pct_votes24', 'women_share_removed', 'women_share_roll', 'sex_split_quality'] + [k for k, _ in CHAR] + ['intl_border']
     w = csv.DictWriter(b, fieldnames=cols, extrasaction='ignore', lineterminator='\n')
     w.writeheader()
     for x in d['states']:
         g = gen.get(x['state'], {})
         row = {k: ('' if x.get(k) is None else x[k]) for k in cols}
+        row.update({'roll_adult_pct': x.get('roll_adult_pct') or '', 'draft_adult_pct': x.get('draft_adult_pct') or '', 'removed_pct_votes24': x.get('removed_pct_votes24') or ''})
         row.update({'women_share_removed': g.get('women_share_removed', ''), 'women_share_roll': g.get('women_share_roll', ''), 'sex_split_quality': g.get('quality', '')})
         row.update({k: ('' if x['char'][k] is None else x['char'][k]) for k, _ in CHAR})
         row['intl_border'] = 'yes' if x['char']['intl_border'] else 'no'

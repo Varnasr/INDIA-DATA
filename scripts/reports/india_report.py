@@ -86,6 +86,31 @@ for i, (l, f) in enumerate(zip(labs, FILL)):
 ax.set_title('Removed per 100 electors', fontsize=9, fontweight='bold', loc='left')
 R.figure(fig, 'Figure 1. One tile per state or union territory, placed roughly where it lies; the tiles carry no boundaries. Grey: not in the revision (Jammu and Kashmir, Ladakh, Himachal Pradesh, Assam), no draft roll yet (Tripura), or no exact roll before it (Chandigarh).', width=13)
 
+R.h2('The rolls against the adult population')
+ADU = N['adults']
+adS = sorted([x for x in S if x.get('roll_adult_pct') is not None], key=lambda x: -x['roll_adult_pct'])
+fig, ax = plt.subplots(figsize=(8, 4.2))
+xs = range(len(adS))
+ax.bar([i - 0.2 for i in xs], [x['roll_adult_pct'] for x in adS], width=0.4, color=C['dead'], label='Roll before the revision')
+ax.bar([i + 0.2 for i in xs], [x['draft_adult_pct'] for x in adS], width=0.4, color=C['shifted_absent_other'], label='Draft roll')
+ax.axhline(100, color='#1C2833', lw=0.8, ls='--')
+ax.set_xticks(list(xs))
+ax.set_xticklabels([x['state'] for x in adS], rotation=60, ha='right', fontsize=7)
+ax.set_ylim(50, 120)
+ax.set_ylabel('% of projected adults, 1 March 2026', fontsize=8)
+ax.legend(fontsize=7, frameon=False)
+style_axes(ax, 'Rolls as a share of the projected adult population')
+R.figure(fig, 'Figure 2. Nineteen states with projections by age. The dashed line is a roll equal to the adult population.', width=15)
+dl = sorted(adS, key=lambda x: x['draft_adult_pct'])
+R.p('A roll larger than the adult population is what a roll swollen by the dead and the departed would look like, and it is the case the revision was meant to answer. Across the %d states with projections by age, the rolls before the revision held %s of the projected population aged 18 and over, and the draft rolls hold %s. '
+    'Only %d had a roll larger than their adult population: %s. How far a roll exceeded its adult population has no relationship with how many names the state removed (rank correlation %.2f). The lowest draft rolls against the adult population are in %s. '
+    'The projections are from the 2011 census and count residents, so a state that receives many migrants counts adults who may be registered in their home state, which lowers its ratio.'
+    % (ADU['states'], pct(100 * ADU['roll_total'] / ADU['adults_total']), pct(100 * ADU['draft_total'] / ADU['adults_total']), len(ADU['over_100']), andj(ADU['over_100']), ADU['rho_rate'],
+       andj(['%s (%s)' % (x['state'], pct(x['draft_adult_pct'])) for x in dl[:3]])))
+vS = sorted([x for x in S if x.get('removed_pct_votes24') is not None], key=lambda x: -x['removed_pct_votes24'])
+R.p('Set against the 2024 Lok Sabha election, the names left off the draft roll equal a fifth or more of the votes polled in %d states, led by %s.'
+    % (sum(x['removed_pct_votes24'] >= 20 for x in vS), andj(['%s (%s)' % (x['state'], pct(x['removed_pct_votes24'])) for x in vS[:3]])))
+
 R.h2('The three reasons, by phase')
 fig, ax = plt.subplots(figsize=(7, 4))
 labs = ['Phase 1\n(Bihar)', 'Phase 2\n(%d states)' % P['2']['states'], 'Phase 3\n(%d states)' % P['3']['states']]
@@ -97,7 +122,7 @@ for k in RK + ['unsplit']:
 ax.set_ylabel('Names removed, lakh', fontsize=8)
 ax.legend(fontsize=7, ncol=4, loc='upper center', bbox_to_anchor=(0.5, -0.16), frameon=False)
 style_axes(ax, 'Names left off the draft rolls, by reason')
-R.figure(fig, 'Figure 2. Names left off the draft rolls in each phase, by the reason entered, in lakh.', width=14)
+R.figure(fig, 'Figure 3. Names left off the draft rolls in each phase, by the reason entered, in lakh.', width=14)
 R.p('The share entered as dead fell from %s in Bihar to %s in phase 2 and %s in phase 3, while the share entered as shifted, absent or other rose from %s to %s and %s. '
     'Removals per 100 electors rose with each phase: %.1f, %.1f and %.1f.'
     % (pct(P['1']['shares']['dead']), pct(P['2']['shares']['dead']), pct(P['3']['shares']['dead']),
@@ -117,7 +142,7 @@ ax.tick_params(axis='y', labelsize=7)
 ax.set_xlabel('% of the state\'s removals split by reason', fontsize=8)
 ax.legend(fontsize=7, ncol=3, loc='upper center', bbox_to_anchor=(0.5, -0.07), frameon=False)
 style_axes(ax, 'Reasons entered, share of each state\'s removals')
-R.figure(fig, 'Figure 3. States that published a split by reason, ordered by the share entered as shifted, absent or other.', width=15)
+R.figure(fig, 'Figure 4. States that published a split by reason, ordered by the share entered as shifted, absent or other.', width=15)
 R.p('Among states that removed ten lakh names or more, the share entered as shifted, absent or other runs from %s in %s to %s in %s. Among them the share entered as dead is highest in %s (%s), and the share entered as enrolled more than once in %s (%s). '
     'One revision under one set of instructions produced very different mixes of reasons from state to state, and the Commission has not explained why.'
     % (pct(big[-1]['shares']['shifted_absent_other']), big[-1]['state'], pct(big[0]['shares']['shifted_absent_other']), big[0]['state'],
@@ -148,7 +173,7 @@ ax.set_yticklabels([g['state'] for g in G], fontsize=8)
 ax.set_xlim(40, 60)
 ax.legend(fontsize=7, frameon=False, loc='lower right')
 style_axes(ax, 'Women\'s share of removals and of the roll')
-R.figure(fig, 'Figure 4. States that published a split by sex. Bihar is compared with women\'s share of the 2011 population.', width=14)
+R.figure(fig, 'Figure 5. States that published a split by sex. Bihar is compared with women\'s share of the 2011 population.', width=14)
 R.p('Only ten states have published their removals by sex, or their roll by sex before the revision and on the draft. In %d of the ten, women are a larger share of the names removed than of the roll, by up to %.1f points in %s. %s %s within a point of even, and %s runs the other way, by %.1f points. '
     'Most phase 3 states have published no split by sex, so this is not the national picture.'
     % (len(gOver), G[0]['gap'], G[0]['state'], andj([g['state'] for g in gEven]), 'is' if len(gEven) == 1 else 'are',
