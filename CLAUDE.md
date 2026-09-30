@@ -13,7 +13,7 @@ publishes it to GitHub Pages.
 pip install pandas==3.0.6 openpyxl==3.1.5
 python3 scripts/build_bihar.py          # rebuild data/bihar from data/bihar/raw
 python3 scripts/build_hyderabad.py      # rebuild data/hyderabad from the explorer
-python3 scripts/check_data.py           # 15 checks, run by CI; rebuilds both with --check
+python3 scripts/check_data.py           # 16 checks, run by CI; rebuilds both with --check
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
 python3 -m http.server 8000
 ```
@@ -114,6 +114,18 @@ draft plus its phase 1 list, because the June roll exists only as a state
 total. Findings: the net fall still exceeds the 2025 margin in 124 of 243
 seats (174 on the draft removals); women were 55.5% of those removed at the
 draft and 47.9% of those added.
+
+`scripts/build_bihar_tests.py` sets two reasons against outside records and
+writes `data/bihar/tests.json`. Deaths: SRS 2024 death rates by age and sex,
+weighted by the 2024 population by age, ages 20 and over (the rates come in
+five-year groups), against the names entered as dead: about 3.4 years of adult
+deaths, the right ages, but 52.0% women against 43.4% of deaths. Marriage:
+Census 2011 D-3, women who moved on marriage in the ten years to 2011, against
+the excess of young women marked shifted: about half a year's marriage moves,
+but the district pattern runs the other way (rank correlation -0.51). D-3
+counts women where they arrived; district out-migration is not published.
+Raw tables are in `data/bihar/raw/srs_bihar.csv`, `crs_bihar.csv` and
+`census2011_marriage_migration.csv`, each row with its table and page.
 
 ## Hyderabad
 

@@ -23,6 +23,8 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 J = lambda f: json.load(open(os.path.join(ROOT, 'data', 'bihar', f)))
 S, A, DS, ID, RS = J('summary.json'), J('constituencies.json'), J('districts.json'), J('identity.json'), J('reasons.json')
 FB = J('final.json')
+TS = J('tests.json')
+TD, TM = TS['deaths'], TS['marriage']
 FT, FM = FB['totals'], FB['margin']
 t = S['totals']
 C = {'NDA': '#E67E22', 'INDIA': '#1E8449', 'Other': '#8E7CC3', 'red': '#C0392B', 'grey': '#95A5A6', 'blue': '#1F618D', 'pink': '#AF3B6E'}
@@ -225,6 +227,26 @@ R.table(['District', 'Phase 1 removed', 'Shifted', 'Dead', 'Absent', 'Already en
         [[d['district'], indian(dsum(d))] + [pct(100 * d[k] / dsum(d)) for k in RK] for d in RD],
         widths=[4.2, 2.8, 2.2, 2.2, 2.2, 2.8], right={1, 2, 3, 4, 5})
 
+R.h3('Two reasons, set against the records')
+R.p('The %s names entered as dead equal about %.1f years of adult deaths in Bihar: at the Sample Registration System\'s 2024 death rates by age and sex, the population aged 20 and over has about %s deaths a year. '
+    'Their ages are close to those of registered deaths: %s of those entered as dead and aged 25 or over were 70 or older, against %s of registered deaths at those ages in 2024. '
+    'Their sex is not: women are %s of those entered as dead, against %s of adult deaths, or %s women where %s would be expected. Registered deaths at 25 and over were %s women in 2024, below their share of deaths, so women\'s deaths are registered less often and more of them may have stayed on the roll; or more women still living were entered as dead. The lists cannot say which.'
+    % (lakh(TD['dead_removed']), TD['years_of_deaths'], lakh(TD['adult_deaths']), pct(TD['over70_share_dead']), pct(TD['over70_share_registered']),
+       pct(TD['women_share_dead']), pct(TD['women_share_expected']), lakh(TD['women_dead']), lakh(TD['women_expected']), pct(TD['registered_women_share'])))
+fig, ax = plt.subplots(figsize=(7, 3.6))
+ax.scatter([d['recent_marriage_pct'] for d in TM['districts']], [d['women_share'] for d in TM['districts']], color=C['blue'], s=18)
+for d in TM['districts']:
+    if d['district'] in TM['top'][:3]:
+        ax.annotate(d['district'], (d['recent_marriage_pct'], d['women_share']), fontsize=7, xytext=(4, 2), textcoords='offset points')
+ax.set_xlabel('Women who moved on marriage in the ten years to 2011, % of women', fontsize=8)
+ax.set_ylabel('Women, % of those aged 18-29 marked shifted', fontsize=8)
+style_axes(ax, 'Young women marked shifted, against marriage movement, by district')
+R.figure(fig, 'Figure 7. Each dot is a district. Marriage movement from the 2011 census migration table D-3, counted where women arrived.')
+R.p('Among those aged 18 to 29 marked shifted, %s were women and %s men, an excess of %s women. In scale that is within what marriage produces: in the ten years before the 2011 census, %s women in Bihar had moved on marriage, about %s a year, so the excess is about %.2f of a year\'s marriage moves. '
+    'District by district it does not follow: where more women had moved on marriage, women were %s share of the young marked shifted (rank correlation %.2f). Marriage can account for the number of young women marked shifted, not for where they were. The census counts women where they arrived, not where they left, and it is fifteen years old.'
+    % (indian(TM['young_shifted_f']), indian(TM['young_shifted_m']), indian(TM['excess']), lakh(TM['recent_marriage']), lakh(TM['recent_marriage_per_year']), TM['excess_years'],
+       'a smaller' if TM['rho_share'] <= -0.2 else ('a larger' if TM['rho_share'] >= 0.2 else 'neither a larger nor a smaller'), TM['rho_share']))
+
 R.h2('Religion')
 R.p('The roll records no religion. The booth lists classify removed names as Hindu or Muslim where the name allows it, and leave %s of names unclassified. '
     'The Muslim share of removals is therefore a range: %s counting only names classified Muslim, and %s if every unclassified name were Muslim. '
@@ -240,7 +262,7 @@ ax.set_yticks(list(y), [d['district'] for d in dd], fontsize=7)
 ax.set_xlabel('Muslim share, %', fontsize=8)
 ax.legend(fontsize=8, frameon=False, loc='lower right')
 style_axes(ax, 'Muslim share of removals, as a range, against the census')
-R.figure(fig, 'Figure 7. The bar runs from names classified Muslim to all names that could be Muslim; the dot is the 2011 census share.')
+R.figure(fig, 'Figure 8. The bar runs from names classified Muslim to all names that could be Muslim; the dot is the 2011 census share.')
 
 R.h2('Caste')
 R.p('Caste is not recorded either. It can be read, in part, from the surname of the father or husband listed with each removed elector, and two classifications are used because surnames cross caste lines. '
@@ -260,7 +282,7 @@ ax.bar(hk, [S['booth_histogram'][k] for k in hk], color=C['blue'])
 ax.set_xlabel('Names removed in the booth', fontsize=8)
 ax.set_ylabel('Booths', fontsize=8)
 style_axes(ax, 'How many names each booth lost')
-R.figure(fig, 'Figure 8. Booths by the number of names removed.')
+R.figure(fig, 'Figure 9. Booths by the number of names removed.')
 R.p('The median booth lost %d names. %s booths lost 200 or more each, and %d lost 400 or more. A booth serves on average about %d electors, so 200 removals is a fifth of a booth\'s roll.'
     % (st.median(a['booth_median'] for a in A), indian(b200), S['booth_histogram']['400+'], round(t['electorate_2025'] / t['booths'])))
 
@@ -360,6 +382,7 @@ R.bullets([
     'The final roll: Format 4B, the Election Commission\'s return for the final roll of 30 September 2025, as the Chief Electoral Officer, Bihar published it, by constituency and sex.',
     'Religion and surnames of the removed: counts from the same lists, by booth; no individual records.',
     'Reason, sex and age of every phase 1 removal: counts from the row-level deletion list, by constituency and booth; no individual records.',
+    'Deaths: Sample Registration System, Statistical Report 2024, and Civil Registration System 2024. Marriage migration: Census of India 2011, table D-3.',
     '2025 Assembly results: winner, runner-up and turnout for each constituency, cross-checked between two independent tables; where they disagreed, the figure matching the reported result was used.',
     '2024 Lok Sabha result by booth: Form 20. Census of India 2011; Bihar caste-based survey, 2 October 2023; Bihar Economic Survey.',
 ])
