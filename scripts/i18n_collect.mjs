@@ -21,8 +21,11 @@ import { fileURLToPath } from 'url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PW = process.env.PLAYWRIGHT_CORE || 'playwright-core';
 const { chromium } = await import(PW);
-const PAGES = ['', 'bihar/', 'bihar/results/', 'bihar/people/', 'bihar/border/', 'bihar/districts/', 'bihar/faq/', 'bihar/method/',
-  'hyderabad/', 'hyderabad/explorer/', 'hyderabad/people/', 'hyderabad/parts/', 'hyderabad/hearings/', 'hyderabad/faq/', 'hyderabad/method/'];
+// Every page on disk under the two analyses, plus the home page, so a page
+// added later is collected without anyone remembering to list it here.
+const walk = (d) => fs.readdirSync(path.join(ROOT, d), { withFileTypes: true }).flatMap((e) =>
+  e.isDirectory() ? walk(path.join(d, e.name)) : e.name === 'index.html' ? [d ? d + '/' : ''] : []);
+const PAGES = ['', ...walk('bihar'), ...walk('hyderabad')].sort();
 const SOURCES = ['index.html', 'assets/sir.js', 'assets/dash.js', 'assets/i18n.js', ...PAGES.filter(Boolean).map(p => p + 'index.html')];
 
 const cat = {};

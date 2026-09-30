@@ -244,4 +244,6 @@ R.p('Deletion rate: electors on the list of the absent, shifted and dead divided
 out = sys.argv[1] if len(sys.argv) > 1 else '/home/user/reports/Hyderabad_OldCity_SIR_2026_Report.docx'
 R.save(out)
 R.save_html(out[:-5] + '.html')
+if len(sys.argv) > 2:
+    R.save_web(sys.argv[2])  # the page on the site, e.g. hyderabad/report
 print('ok')

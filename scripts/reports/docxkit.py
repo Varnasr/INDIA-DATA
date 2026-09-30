@@ -6,6 +6,7 @@ constituency, and a single section says what the lists show and what they do
 not. Every figure is computed from the published JSON when the report is built.
 """
 import base64
+from PIL import Image
 import html as H
 import io
 import os
@@ -63,6 +64,7 @@ class Report:
         # and printed to PDF by headless Chromium (scripts/reports/pdf.mjs).
         self.html = []
         self.heads = []
+        self.figs = []
         sec = self.doc.sections[0]
         sec.page_width, sec.page_height = Cm(21), Cm(29.7)
         for side in ('left_margin', 'right_margin'):
@@ -257,7 +259,10 @@ class Report:
         fig.savefig(buf, format='png', dpi=200, bbox_inches='tight')
         plt.close(fig)
         buf.seek(0)
-        self.html.append('<figure><img src="data:image/png;base64,%s" style="width:%.1fcm" alt="%s"><figcaption>%s</figcaption></figure>' % (base64.b64encode(buf.getvalue()).decode(), width, H.escape(caption), H.escape(caption)))
+        # A marker for now: the print copy embeds the image, the web copy
+        # links a file beside the page (save_html, save_web).
+        self.figs.append((buf.getvalue(), width, caption))
+        self.html.append('<!--FIG%d-->' % (len(self.figs) - 1))
         buf.seek(0)
         self.doc.add_picture(buf, width=Cm(width))
         self.doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -300,11 +305,35 @@ class Report:
     def save_html(self, path):
         toc = '<section class="toc"><h1>Contents</h1><ol>' + ''.join('<li class="l%d"><a href="#s%d">%s</a></li>' % (lvl, i, H.escape(t)) for i, (lvl, t) in enumerate(self.heads)) + '</ol></section><div class="pb"></div>'
         body = ''.join(self.html).replace('<!--TOC-->', toc)
+        for i, (png, width, cap) in enumerate(self.figs):
+            body = body.replace('<!--FIG%d-->' % i, '<figure><img src="data:image/png;base64,%s" style="width:%.1fcm" alt="%s"><figcaption>%s</figcaption></figure>' % (base64.b64encode(png).decode(), width, H.escape(cap), H.escape(cap)))
         a = self._hex(self.accent)
         css = CSS.replace('ACCENT', '#' + a)
         doc = '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>%s</title><style>%s</style></head><body>%s</body></html>' % (H.escape(self.title), css, body)
         os.makedirs(os.path.dirname(path), exist_ok=True)
         open(path, 'w', encoding='utf-8').write(doc)
+
+    def save_web(self, folder):
+        """The report as a fragment for a page on the site: the contents list,
+        the body, and each figure as a PNG beside the page. Tables go in a
+        scrolling wrapper so a phone can read them. scripts/reports/web.py
+        puts the fragment into the site's page shell."""
+        os.makedirs(folder, exist_ok=True)
+        for f in os.listdir(folder):
+            if f.startswith('fig-') and f.endswith('.png'):
+                os.remove(os.path.join(folder, f))
+        toc = '<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">Contents</h2><ol>' + ''.join('<li class="l%d"><a href="#s%d">%s</a></li>' % (lvl, i, H.escape(t)) for i, (lvl, t) in enumerate(self.heads)) + '</ol></nav>'
+        body = ''.join(self.html).replace('<!--TOC-->', toc).replace('<div class="pb"></div>', '')
+        for i, (png, width, cap) in enumerate(self.figs):
+            name = 'fig-%02d.png' % (i + 1)
+            # The print copy is 200 dpi; a screen needs no more than 1,400px.
+            im = Image.open(io.BytesIO(png))
+            if im.width > 1400:
+                im = im.resize((1400, round(im.height * 1400 / im.width)), Image.LANCZOS)
+            im.save(os.path.join(folder, name), optimize=True)
+            body = body.replace('<!--FIG%d-->' % i, '<figure><img src="%s" alt="%s" loading="lazy"><figcaption>%s</figcaption></figure>' % (name, H.escape(cap), H.escape(cap)))
+        body = body.replace('<table', '<div class="twrap" tabindex="0"><table').replace('</table>', '</table></div>')
+        open(os.path.join(folder, 'report.fragment.html'), 'w', encoding='utf-8').write(body)
 
     # ------------------------------------------------------------ plumbing
     @staticmethod
