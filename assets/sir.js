@@ -101,23 +101,39 @@
   // ------------------------------------------------------- section bar
   // On a phone the row of tabs is replaced by one line: where you are
   // ("Bihar 2025 › Overview", 1 of 11), arrows to the previous and next
-  // section, and a list of every section behind a tap. It is built from the
-  // tabs themselves, so the markup is unchanged and a page without
-  // JavaScript keeps the scrolling row. The stylesheet shows one or the other.
+  // section, and a menu behind a tap listing the dashboard's tabs and the
+  // analysis's other pages under separate headings. The arrows and the count
+  // run over whichever list the reader is in: the tabs on a dashboard, the
+  // pages elsewhere. A page without JavaScript keeps the scrolling row.
+  // The map below is the dashboards' tabs and each analysis's pages, with
+  // their icons; labels are the English keys the dictionaries already hold.
+  var ICONS = {"i0": "<path d=\"M3 3v18h18\"/><path d=\"M18 17V9\"/><path d=\"M13 17V5\"/><path d=\"M8 17v-3\"/>", "i1": "<polyline points=\"23 6 13.5 15.5 8.5 10.5 1 18\"/><polyline points=\"17 6 23 6 23 12\"/>", "i2": "<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6l4 2\"/>", "i3": "<path d=\"M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M23 21v-2a4 4 0 0 0-3-3.87\"/><path d=\"M16 3.13a4 4 0 0 1 0 7.75\"/>", "i4": "<polygon points=\"12 2 2 7 12 12 22 7 12 2\"/><polyline points=\"2 17 12 22 22 17\"/><polyline points=\"2 12 12 17 22 12\"/>", "i5": "<path d=\"M12 2L2 8v2h20V8L12 2z\"/><path d=\"M4 10v10h16V10\"/><path d=\"M10 20v-6h4v6\"/>", "i6": "<path d=\"M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z\"/><line x1=\"4\" y1=\"22\" x2=\"4\" y2=\"15\"/>", "i7": "<path d=\"M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z\"/><path d=\"M8 2v16\"/><path d=\"M16 6v16\"/>", "i8": "<path d=\"M6 3h12\"/><path d=\"M6 8h12\"/><path d=\"M6 13l6 8\"/><path d=\"M18 13c-3 0-6-3-6-8\"/>", "i9": "<circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"M21 21l-4.35-4.35\"/>", "i10": "<path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/><path d=\"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\"/>", "i11": "<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\"/>", "i12": "<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/>", "i13": "<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/>", "i14": "<path d=\"M14 13l-7.5 7.5a2.1 2.1 0 0 1-3-3L11 10\"/><path d=\"M16 16l6-6\"/><path d=\"M8 8l6-6\"/><path d=\"M9 7l8 8\"/>"};
+  var SITES = {"bihar": {"tabs": [["overview", "Overview", "i0"], ["deletions", "Deletions", "i1"], ["phases", "Phases", "i2"], ["gender", "Gender", "i3"], ["caste", "Caste", "i4"], ["religion", "Religion", "i5"], ["electoral", "Electoral", "i6"], ["geographic", "Geographic", "i7"], ["economic", "Economic", "i8"], ["research", "Research", "i9"], ["methodology", "Methods", "i10"]], "pages": [["bihar/", "Booth explorer", "i9"], ["bihar/results/", "Elections", "i6"], ["bihar/people/", "Women, religion, caste", "i3"], ["bihar/border/", "Border", "i7"], ["bihar/districts/", "Districts", "i11"], ["bihar/faq/", "FAQ", "i12"], ["bihar/method/", "Method", "i10"]]}, "hyd": {"tabs": [["overview", "Overview", "i0"], ["deletions", "Deletions", "i1"], ["age", "Age and sex", "i3"], ["religion", "Religion", "i5"], ["link", "2002 link", "i13"], ["hearings", "Hearings", "i14"], ["parts", "Polling parts", "i11"], ["electoral", "Electoral", "i6"], ["research", "Research", "i9"], ["methodology", "Methods", "i10"]], "pages": [["hyderabad/explorer/", "Part explorer", "i9"], ["hyderabad/people/", "Age, sex, religion, 2002", "i3"], ["hyderabad/parts/", "Polling parts", "i11"], ["hyderabad/hearings/", "Hearings", "i14"], ["hyderabad/faq/", "FAQ", "i12"], ["hyderabad/method/", "Method", "i10"]]}};
   if (nav) (function () {
-    var items = [].slice.call(nav.querySelectorAll('.nav-tab'));
-    if (items.length < 2) return;
+    var body = document.body, site = body.classList.contains('hyd') ? 'hyd' : 'bihar', map = SITES[site];
+    var root = body.getAttribute('data-root') || '', dash = root + (site === 'hyd' ? 'hyderabad/' : '');
+    var tabs = [].slice.call(nav.querySelectorAll('.nav-tab[data-tab]')), onDash = tabs.length > 0;
+    function tr(k) { return (L.lang !== 'en' && window.SIR_DICT && window.SIR_DICT[k]) || k; }
+    function ico(n) { return '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' + ICONS[n] + '</svg>'; }
+    var here = location.pathname.replace(/index\.html$/, '');
+    function path(h) { return new URL(h, location.href).pathname.replace(/index\.html$/, ''); }
+    // Each entry: label, icon, and either a tab to click or an address.
+    var A = map.tabs.map(function (t) { return { key: t[0], label: tr(t[1]), icon: t[2], tab: onDash ? nav.querySelector('[data-tab="' + t[0] + '"]') : null, href: onDash ? null : dash + '#' + t[0] }; });
+    var B = map.pages.map(function (p) { return { label: tr(p[1]), icon: p[2], href: root + p[0] }; });
+    var seq = onDash ? A : B;
+    if (seq.length < 2) return;
     var cur = document.querySelector('header.top .switch [aria-current]');
     var place = cur ? cur.textContent.trim() : '';
-    function label(t) { return t.textContent.trim(); }
-    function icon(t) { var i = t.querySelector('svg'); return i ? i.outerHTML : ''; }
     function index() {
-      for (var i = 0; i < items.length; i++) if (items[i].getAttribute('aria-selected') === 'true' || items[i].getAttribute('aria-current') === 'page') return i;
-      return 0;
+      for (var i = 0; i < seq.length; i++) {
+        if (onDash ? seq[i].tab && seq[i].tab.getAttribute('aria-selected') === 'true' : path(seq[i].href) === here) return i;
+      }
+      return -1;
     }
-    function go(i) {
-      var t = items[i]; if (!t) return;
-      if (t.tagName === 'A') location.href = t.href; else t.click();
+    function go(e) { if (!e) return; if (e.tab) e.tab.click(); else location.href = e.href; }
+    function item(e, g, i) {
+      var inner = ico(e.icon) + '<span>' + e.label + '</span>';
+      return e.tab ? '<button type="button" data-g="' + g + '" data-i="' + i + '">' + inner + '</button>' : '<a href="' + e.href + '" data-g="' + g + '" data-i="' + i + '">' + inner + '</a>';
     }
     var arrowPrev = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>';
     var arrowNext = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>';
@@ -127,25 +143,35 @@
     bar.innerHTML = '<button type="button" class="sec-step sec-prev" aria-label="' + L('Previous section') + '">' + arrowPrev + '</button>' +
       '<button type="button" class="sec-now" aria-expanded="false" aria-controls="secmenu"><span class="sec-where"></span><span class="sec-count"></span>' + caret + '</button>' +
       '<button type="button" class="sec-step sec-next" aria-label="' + L('Next section') + '">' + arrowNext + '</button>' +
-      '<div class="secmenu" id="secmenu" hidden><div class="secgrid">' + items.map(function (t, i) {
-        return '<button type="button" data-i="' + i + '">' + icon(t) + '<span>' + label(t) + '</span></button>';
-      }).join('') + '</div></div>';
+      '<div class="secmenu" id="secmenu" hidden>' +
+        '<p class="sechead">' + L('Dashboard') + '</p><div class="secgrid">' + A.map(function (e, i) { return item(e, 'a', i); }).join('') + '</div>' +
+        '<p class="sechead">' + L('More pages') + '</p><div class="secgrid">' + B.map(function (e, i) { return item(e, 'b', i); }).join('') + '</div>' +
+      '</div>';
     nav.parentNode.insertBefore(bar, nav);
     document.documentElement.classList.add('has-secbar');
     var now = bar.querySelector('.sec-now'), menu = bar.querySelector('.secmenu');
     function paint() {
-      var i = index();
-      bar.querySelector('.sec-where').innerHTML = (place ? '<span class="sec-crumb">' + place + ' <span aria-hidden="true">›</span></span> ' : '') + '<b>' + label(items[i]) + '</b>';
-      bar.querySelector('.sec-prev').disabled = i === 0;
-      bar.querySelector('.sec-next').disabled = i === items.length - 1;
-      bar.querySelector('.sec-count').textContent = L('{i} of {n}', { i: i + 1, n: items.length });
-      menu.querySelectorAll('[data-i]').forEach(function (b) { var on = +b.getAttribute('data-i') === i; b.classList.toggle('on', on); if (on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+      var i = index(), e = seq[i];
+      var name = e ? e.label : (document.querySelector('.page-head h1') || {}).textContent || '';
+      bar.querySelector('.sec-where').innerHTML = (place ? '<span class="sec-crumb">' + place + ' <span aria-hidden="true">›</span></span> ' : '') + '<b>' + name + '</b>';
+      bar.querySelector('.sec-count').textContent = i < 0 ? '' : L('{i} of {n}', { i: i + 1, n: seq.length });
+      bar.querySelector('.sec-prev').disabled = i <= 0;
+      bar.querySelector('.sec-next').disabled = i < 0 || i === seq.length - 1;
+      var g = onDash ? 'a' : 'b';
+      menu.querySelectorAll('[data-i]').forEach(function (b) {
+        var on = b.getAttribute('data-g') === g && +b.getAttribute('data-i') === i;
+        b.classList.toggle('on', on);
+        if (on) b.setAttribute('aria-current', onDash ? 'true' : 'page'); else b.removeAttribute('aria-current');
+      });
     }
-    function open(v) { menu.hidden = !v; now.setAttribute('aria-expanded', v ? 'true' : 'false'); if (v) { var o = menu.querySelector('.on'); (o || menu.querySelector('button')).focus(); } }
+    function open(v) { menu.hidden = !v; now.setAttribute('aria-expanded', v ? 'true' : 'false'); if (v) { var o = menu.querySelector('.on'); (o || menu.querySelector('[data-i]')).focus(); } }
     now.addEventListener('click', function () { open(menu.hidden); });
-    bar.querySelector('.sec-prev').addEventListener('click', function () { open(false); go(index() - 1); });
-    bar.querySelector('.sec-next').addEventListener('click', function () { open(false); go(index() + 1); });
-    menu.addEventListener('click', function (e) { var b = e.target.closest('[data-i]'); if (!b) return; open(false); go(+b.getAttribute('data-i')); now.focus(); });
+    bar.querySelector('.sec-prev').addEventListener('click', function () { open(false); go(seq[index() - 1]); });
+    bar.querySelector('.sec-next').addEventListener('click', function () { open(false); go(seq[index() + 1]); });
+    menu.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-i]'); if (!b) return; // links navigate on their own
+      open(false); go(A[+b.getAttribute('data-i')]); now.focus();
+    });
     document.addEventListener('click', function (e) { if (!menu.hidden && !bar.contains(e.target)) open(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { open(false); now.focus(); } });
     // A dashboard switches tabs without loading a page; follow it.

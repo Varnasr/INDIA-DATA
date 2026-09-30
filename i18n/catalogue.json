@@ -1502,8 +1502,9 @@
   ]
  },
  "Dashboard": {
-  "kind": "markup",
+  "kind": "script",
   "pages": [
+   "/assets/sir.js",
    "/bihar/",
    "/bihar/results/",
    "/bihar/people/",
@@ -3508,6 +3509,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "More pages": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
   ]
  },
  "More questions and answers": {

@@ -97,7 +97,10 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 - **On a phone the tab row becomes a section bar** (`sir.js`, built from the
   tabs, so no page markup changes): "Bihar 2025 › Overview · 1 of 11", arrows
   for the previous and next section (disabled at either end, never wrapping),
-  and the full list of sections as a grid behind a tap. It follows a
+  and a menu behind a tap with two headings: the dashboard's tabs and the
+  analysis's other pages. The arrows and count run over the list the reader
+  is in. The tabs and pages, with icons, are one map in `sir.js` (`SITES`);
+  add a page there as well as to the tab row. It follows a
   dashboard's tab changes through a MutationObserver on `aria-selected`.
   Without JavaScript the scrolling row stays, so nothing depends on it.
 - **The part explorer takes a link to a part**: `hyderabad/explorer/#Yakutpura-297`.
