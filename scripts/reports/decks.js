@@ -625,6 +625,20 @@ function india() {
     K.bullets(s, [rated[0].state + ' ' + rated[0].per_100.toFixed(1) + ', ' + rated[1].state + ' ' + rated[1].per_100.toFixed(1) + ', ' + rated[2].state + ' ' + rated[2].per_100.toFixed(1) + '.', 'Fewest: ' + rated[rated.length - 1].state + ' ' + rated[rated.length - 1].per_100.toFixed(1) + '.', 'Grey: not in the revision, no draft yet (Tripura), or no exact roll before it (Chandigarh).'], 9.2, TOP, W - M - 9.2, 2.2, 12.5);
   }
 
+  {
+    const AD = N.adults, adS = S.filter((x) => x.roll_adult_pct != null).sort((a, b) => b.roll_adult_pct - a.roll_adult_pct);
+    s = K.slide('All India', 'The rolls held ' + pct(100 * AD.roll_total / AD.adults_total) + ' of projected adults before the revision; the draft rolls hold ' + pct(100 * AD.draft_total / AD.adults_total), 'Roll before the revision and draft roll as a share of the projected population aged 18 and over, 1 March 2026; ' + AD.states + ' states with projections by age');
+    s.addChart(pres.charts.BAR, [
+      { name: 'Roll before the revision', labels: adS.map((x) => x.state), values: adS.map((x) => x.roll_adult_pct) },
+      { name: 'Draft roll', labels: adS.map((x) => x.state), values: adS.map((x) => x.draft_adult_pct) },
+    ], K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'clustered', chartColors: [GREY, '1F618D'], showLegend: true, valAxisMinVal: 50, valAxisMaxVal: 120, catAxisLabelFontSize: 8, catAxisLabelRotate: 300 })));
+    K.right(s, [
+      'Only ' + AD.over_100.length + ' states had a roll larger than their adult population: ' + andj(AD.over_100) + '.',
+      'How far a roll exceeded its adults has no relationship with how many names were removed (rank correlation ' + AD.rho_rate.toFixed(2) + ').',
+      'Projections count residents; states receiving migrants count adults who may be registered at home, which lowers their ratio.',
+    ], 13);
+  }
+
   s = K.slide('All India', 'The share entered as dead fell from ' + pct(P['1'].shares.dead, 0) + ' in Bihar to ' + pct(P['3'].shares.dead, 0) + ' in phase 3', 'Names left off the draft rolls in each phase, by reason, in lakh');
   s.addChart(pres.charts.BAR, RK.map((k) => ({ name: RN[k], labels: PL, values: ph.map((p) => +(P[p][k] / 1e5).toFixed(1)) })).concat([{ name: 'Not split', labels: PL, values: ph.map((p) => +(P[p].unsplit / 1e5).toFixed(1)) }]),
     K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'stacked', chartColors: [RC.dead, RC.shifted_absent_other, RC.duplicate, '8E7CC3'], showLegend: true, valAxisLabelFormatCode: '#,##0' })));

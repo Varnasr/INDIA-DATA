@@ -1,5 +1,20 @@
 {
  "as_of": "2026-09-30",
+ "adults": {
+  "states": 19,
+  "rho_rate": 0.03,
+  "over_100": [
+   "Telangana",
+   "Karnataka",
+   "Tamil Nadu",
+   "Odisha",
+   "Andhra Pradesh",
+   "Kerala"
+  ],
+  "roll_total": 938943633,
+  "draft_total": 806234439,
+  "adults_total": 955092000.0
+ },
  "tiles": [
   {
    "state": "Jammu and Kashmir",
@@ -870,7 +885,11 @@
     "population_2011": 104099452.0,
     "intl_border": true,
     "border_countries": "Nepal"
-   }
+   },
+   "adults_2026": 83027000.0,
+   "roll_adult_pct": 95.0,
+   "draft_adult_pct": 87.1,
+   "removed_pct_votes24": 15.1
   },
   {
    "state": "Uttar Pradesh",
@@ -909,7 +928,11 @@
     "population_2011": 199812341.0,
     "intl_border": true,
     "border_countries": "Nepal"
-   }
+   },
+   "adults_2026": 161685000.0,
+   "roll_adult_pct": 95.5,
+   "draft_adult_pct": 77.6,
+   "removed_pct_votes24": 32.8
   },
   {
    "state": "Tamil Nadu",
@@ -948,7 +971,11 @@
     "population_2011": 72147030.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 60189000.0,
+   "roll_adult_pct": 106.5,
+   "draft_adult_pct": 90.3,
+   "removed_pct_votes24": 22.2
   },
   {
    "state": "Gujarat",
@@ -987,7 +1014,11 @@
     "population_2011": 60439692.0,
     "intl_border": true,
     "border_countries": "Pakistan"
-   }
+   },
+   "adults_2026": 53301000.0,
+   "roll_adult_pct": 95.3,
+   "draft_adult_pct": 81.5,
+   "removed_pct_votes24": 25.3
   },
   {
    "state": "West Bengal",
@@ -1026,7 +1057,11 @@
     "population_2011": 91276115.0,
     "intl_border": true,
     "border_countries": "Bangladesh; Nepal; Bhutan"
-   }
+   },
+   "adults_2026": 77030000.0,
+   "roll_adult_pct": 99.5,
+   "draft_adult_pct": 91.9,
+   "removed_pct_votes24": 9.6
   },
   {
    "state": "Madhya Pradesh",
@@ -1065,7 +1100,11 @@
     "population_2011": 72626809.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 60196000.0,
+   "roll_adult_pct": 95.4,
+   "draft_adult_pct": 88.3,
+   "removed_pct_votes24": 11.3
   },
   {
    "state": "Rajasthan",
@@ -1104,7 +1143,11 @@
     "population_2011": 68548437.0,
     "intl_border": true,
     "border_countries": "Pakistan"
-   }
+   },
+   "adults_2026": 56611000.0,
+   "roll_adult_pct": 96.5,
+   "draft_adult_pct": 89.2,
+   "removed_pct_votes24": 12.6
   },
   {
    "state": "Chhattisgarh",
@@ -1143,7 +1186,11 @@
     "population_2011": 25545198.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 21477000.0,
+   "roll_adult_pct": 98.9,
+   "draft_adult_pct": 86.1,
+   "removed_pct_votes24": 18.1
   },
   {
    "state": "Kerala",
@@ -1182,7 +1229,11 @@
     "population_2011": 33406061.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 27740000.0,
+   "roll_adult_pct": 100.4,
+   "draft_adult_pct": 91.7,
+   "removed_pct_votes24": 12.0
   },
   {
    "state": "Puducherry",
@@ -1221,7 +1272,11 @@
     "population_2011": 1247953.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 12.8
   },
   {
    "state": "Goa",
@@ -1260,7 +1315,11 @@
     "population_2011": 1458545.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 11.0
   },
   {
    "state": "Andaman and Nicobar Islands",
@@ -1299,7 +1358,11 @@
     "population_2011": 380581.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 31.6
   },
   {
    "state": "Lakshadweep",
@@ -1338,7 +1401,11 @@
     "population_2011": 64473.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 2.9
   },
   {
    "state": "Maharashtra",
@@ -1377,7 +1444,11 @@
     "population_2011": 112374333.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 98127000.0,
+   "roll_adult_pct": 99.7,
+   "draft_adult_pct": 78.6,
+   "removed_pct_votes24": 36.1
   },
   {
    "state": "Karnataka",
@@ -1416,7 +1487,11 @@
     "population_2011": 61095297.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 51906000.0,
+   "roll_adult_pct": 106.8,
+   "draft_adult_pct": 86.0,
+   "removed_pct_votes24": 27.8
   },
   {
    "state": "Telangana",
@@ -1455,7 +1530,11 @@
     "population_2011": 35193978.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 29351000.0,
+   "roll_adult_pct": 115.2,
+   "draft_adult_pct": 90.2,
+   "removed_pct_votes24": 33.3
   },
   {
    "state": "Delhi",
@@ -1494,7 +1573,11 @@
     "population_2011": 16787941.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 16956000.0,
+   "roll_adult_pct": 85.5,
+   "draft_adult_pct": 57.5,
+   "removed_pct_votes24": 53.2
   },
   {
    "state": "Andhra Pradesh",
@@ -1533,7 +1616,11 @@
     "population_2011": 49386799.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 41332000.0,
+   "roll_adult_pct": 100.6,
+   "draft_adult_pct": 89.8,
+   "removed_pct_votes24": 13.3
   },
   {
    "state": "Jharkhand",
@@ -1572,7 +1659,11 @@
     "population_2011": 32988134.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 27791000.0,
+   "roll_adult_pct": 95.0,
+   "draft_adult_pct": 79.3,
+   "removed_pct_votes24": 25.2
   },
   {
    "state": "Haryana",
@@ -1611,7 +1702,11 @@
     "population_2011": 25351462.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 22552000.0,
+   "roll_adult_pct": 91.3,
+   "draft_adult_pct": 76.3,
+   "removed_pct_votes24": 25.9
   },
   {
    "state": "Punjab",
@@ -1650,7 +1745,11 @@
     "population_2011": 27743338.0,
     "intl_border": true,
     "border_countries": "Pakistan"
-   }
+   },
+   "adults_2026": 24152000.0,
+   "roll_adult_pct": 88.9,
+   "draft_adult_pct": 80.3,
+   "removed_pct_votes24": 15.3
   },
   {
    "state": "Odisha",
@@ -1689,7 +1788,11 @@
     "population_2011": 41974218.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": 32847000.0,
+   "roll_adult_pct": 101.7,
+   "draft_adult_pct": 95.6,
+   "removed_pct_votes24": 8.0
   },
   {
    "state": "Uttarakhand",
@@ -1724,7 +1827,11 @@
     "population_2011": 10086292.0,
     "intl_border": true,
     "border_countries": "Nepal; China"
-   }
+   },
+   "adults_2026": 8822000.0,
+   "roll_adult_pct": 90.2,
+   "draft_adult_pct": 80.9,
+   "removed_pct_votes24": 17.0
   },
   {
    "state": "Meghalaya",
@@ -1763,7 +1870,11 @@
     "population_2011": 2966889.0,
     "intl_border": true,
     "border_countries": "Bangladesh"
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 10.5
   },
   {
    "state": "Arunachal Pradesh",
@@ -1802,7 +1913,11 @@
     "population_2011": 1383727.0,
     "intl_border": true,
     "border_countries": "China; Bhutan; Myanmar"
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 23.3
   },
   {
    "state": "Manipur",
@@ -1841,7 +1956,11 @@
     "population_2011": 2855794.0,
     "intl_border": true,
     "border_countries": "Myanmar"
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 9.9
   },
   {
    "state": "Nagaland",
@@ -1880,7 +1999,11 @@
     "population_2011": 1978502.0,
     "intl_border": true,
     "border_countries": "Myanmar"
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 20.6
   },
   {
    "state": "Dadra and Nagar Haveli and Daman and Diu",
@@ -1915,7 +2038,11 @@
     "population_2011": 586956.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 42.6
   },
   {
    "state": "Chandigarh",
@@ -1950,7 +2077,11 @@
     "population_2011": 1055450.0,
     "intl_border": false,
     "border_countries": ""
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 14.7
   },
   {
    "state": "Mizoram",
@@ -1985,7 +2116,11 @@
     "population_2011": 1097206.0,
     "intl_border": true,
     "border_countries": "Bangladesh; Myanmar"
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 9.4
   },
   {
    "state": "Sikkim",
@@ -2024,7 +2159,11 @@
     "population_2011": 610577.0,
     "intl_border": true,
     "border_countries": "China; Nepal; Bhutan"
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": 9.7
   },
   {
    "state": "Tripura",
@@ -2059,7 +2198,11 @@
     "population_2011": 3673917.0,
     "intl_border": true,
     "border_countries": "Bangladesh"
-   }
+   },
+   "adults_2026": null,
+   "roll_adult_pct": null,
+   "draft_adult_pct": null,
+   "removed_pct_votes24": null
   }
  ]
 }

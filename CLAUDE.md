@@ -90,6 +90,12 @@ North-East differ on all of them at once, and none holds in phase 2.
 `data/india/raw/gender.csv` has the ten states with a split by sex, each
 flagged exact, rounded, earlier roll or unverified; add a state only with its
 source, and keep Tamil Nadu flagged until a primary figure turns up.
+`data/india/raw/adults_ls2024.csv` holds the projected population aged 18+
+(1 March 2026, 19 states; the North-East and small UTs have none) and the 2024
+Lok Sabha electors and votes by state. The rolls before the revision held 98.3%
+of projected adults across those 19 states; the drafts hold 84.4%. Keep the
+caveat with it: projections count residents, so migrant-receiving states
+count adults registered at home.
 
 ## Hyderabad
 
