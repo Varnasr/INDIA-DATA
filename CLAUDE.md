@@ -50,6 +50,18 @@ Things the build depends on, each asserted by `check_data.py`:
 - **Religion is a range**, low bound classified names only, high bound adding
   every unclassified name. The census share is inside it in 18 of 38 districts
   and below the low bound in 20.
+- **Reasons come from the row-level phase 1 list, as counts.**
+  `scripts/aggregate_bihar_reasons.py` reads that list on stdin and writes
+  only `data/bihar/raw/reasons_by_ac.csv.gz` (seat, reason, sex, age band) and
+  `reasons_by_booth.csv.gz` (seat, booth, reason, sex). The reason cell
+  sometimes carries a stray line of text after the reason; only the text
+  before the first newline is read. Four reasons, counted as entered: dead,
+  shifted, absent, already enrolled. They total 65,59,626, agree with the
+  booth file in every booth and with the official women and men in every
+  seat (the 217 third-gender entries are the difference). Phase 2 has no
+  reasons. Never commit the list itself or its download link.
+- **A reason is an officer's entry, not a finding.** Pages say so wherever a
+  reason is quoted. "Absent" rests on the least and is where checking starts.
 
 ## Hyderabad
 
@@ -66,7 +78,8 @@ the last point.
 ## Privacy
 
 Aggregates only. A row-level sample of the Bihar lists exists in the project's
-Drive with names and EPIC numbers; it must never be committed or published. A
+Drive with names and EPIC numbers; it must never be committed or published.
+The same goes for the full phase 1 list behind the reason counts. A
 check fails if any JSON under `data/bihar` carries an EPIC-like field.
 
 ## Front end

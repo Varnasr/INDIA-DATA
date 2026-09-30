@@ -135,7 +135,7 @@ function closing(pres, K, P, head, lines) {
 
 // ============================================================ BIHAR
 function bihar() {
-  const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json');
+  const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json');
   const t = S.totals, DI = ID.districts;
   const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · Varna Sri Raman · aggregates only; no names or EPIC numbers' };
   const AL = { NDA: 'E67E22', INDIA: '1E8449', Other: '8E7CC3' };
@@ -156,6 +156,13 @@ function bihar() {
   const cuts = [0, 1, 2, 5, 10, 20, 1e9], labs = ['under 1×', '1–2×', '2–5×', '5–10×', '10–20×', '20× or more'];
   const vals = labs.map((l, i) => withM.filter((a) => ratio(a) >= cuts[i] && ratio(a) < cuts[i + 1]).length), five = sum(vals.slice(3), (v) => v);
   const smallest = withM.slice().sort((a, b) => a.margin2025 - b.margin2025)[0];
+  const RK = ['shifted', 'dead', 'absent', 'already_enrolled'], RNm = { shifted: 'Shifted', dead: 'Dead', absent: 'Absent', already_enrolled: 'Already enrolled' }, RCol = { shifted: '1F618D', dead: GREY, absent: 'C0392B', already_enrolled: 'D4AC0D' };
+  const RT = RS.totals, rsh = (k) => 100 * RT[k] / RS.total;
+  const xsF = sum(RK, (k) => RS.by_sex[k].F - RS.by_sex[k].M), xsS = RS.by_sex.shifted.F - RS.by_sex.shifted.M;
+  const yS = RS.by_age.shifted[0] + RS.by_age.shifted[1], yW = RS.by_age_women.shifted[0] + RS.by_age_women.shifted[1];
+  const rOver = (k) => withM.filter((a) => a[k] > a.margin2025).length;
+  const dsum = (d) => sum(RK, (k) => d[k]), RD = RS.districts.slice().sort((a, b) => b.absent / dsum(b) - a.absent / dsum(a));
+  const ageTot = RS.bands.map((b, i) => sum(RK, (k) => RS.by_age[k][i]));
   const b200 = sum(Object.keys(BH).filter((k) => parseInt(k, 10) >= 200), (k) => BH[k]);
 
   cover(pres, K, P, 'Special Intensive Revision · Bihar 2025', 'The 2025 revision removed ' + lakh(t.total) + ' names from Bihar\'s electoral roll',
@@ -179,6 +186,34 @@ function bihar() {
   ]);
 
   // ---- Elections
+  // ---- Reasons
+  s = K.slide('Reasons', pct(rsh('shifted'), 0) + ' of phase 1 removals were entered as shifted and ' + pct(rsh('dead'), 0) + ' as dead', 'The reason the officer entered against each of the ' + indian(RS.total) + ' names removed in phase 1, by sex');
+  s.addChart(pres.charts.BAR, [
+    { name: 'Women', labels: RK.map((k) => RNm[k]), values: RK.map((k) => RS.by_sex[k].F) },
+    { name: 'Men', labels: RK.map((k) => RNm[k]), values: RK.map((k) => RS.by_sex[k].M) },
+  ], K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'clustered', chartColors: ['AF3B6E', '1F618D'], showLegend: true, valAxisLabelFormatCode: '#,##0' })));
+  K.right(s, [
+    'Shifted ' + indian(RT.shifted) + ', dead ' + indian(RT.dead) + ', absent ' + indian(RT.absent) + ', already enrolled ' + indian(RT.already_enrolled) + '.',
+    indian(xsS) + ' of the ' + indian(xsF) + ' more women than men removed in phase 1 were entered as shifted.',
+    'A reason is an officer\'s entry after a visit or its absence, not a finding. The ' + indian(t.p2) + ' phase 2 removals carry no reason in the lists.',
+  ], 13.5);
+  s.addNotes('Counted from the row-level phase 1 list as entered. The counts agree with the booth list in all ' + indian(t.booths) + ' booths, and the women and men with the Chief Electoral Officer\'s phase 1 figures in every constituency.');
+
+  s = K.slide('Reasons', 'Among those marked shifted aged 18 to 29, ' + pct(100 * yW / yS) + ' are women', 'The reason entered, as a share of the removed in each age band');
+  s.addChart(pres.charts.BAR, ['dead', 'shifted', 'absent', 'already_enrolled'].map((k) => ({ name: RNm[k], labels: RS.bands, values: RS.bands.map((b, i) => +(100 * RS.by_age[k][i] / ageTot[i]).toFixed(1)) })),
+    K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'percentStacked', chartColors: ['dead', 'shifted', 'absent', 'already_enrolled'].map((k) => RCol[k]), showLegend: true, valAxisHidden: true })));
+  K.right(s, [
+    'Dead is ' + pct(100 * RS.by_age.dead[RS.bands.length - 1] / ageTot[RS.bands.length - 1]) + ' of the removed aged 80 and over, and ' + pct(100 * RS.by_age.dead[0] / ageTot[0]) + ' of those aged 18 to 24.',
+    'Women are ' + pct(100 * yW / yS) + ' of those aged 18 to 29 marked shifted, and about half of those aged 50 and over: the pattern women who move on marriage would produce.',
+    'The lists do not show whether any of them were enrolled again where they now live.',
+  ], 13.5);
+
+  s = K.slide('Reasons', 'Names marked absent alone exceed the 2025 margin in ' + rOver('r_absent') + ' of ' + withM.length + ' seats', 'Seats where the names removed for one reason exceed the winning margin; districts with the highest absent share');
+  s.addChart(pres.charts.BAR, ['NDA', 'INDIA', 'Other'].map((al) => ({ name: al, labels: ['Dead', 'Shifted', 'Absent', 'Already enrolled'], values: ['r_dead', 'r_shifted', 'r_absent', 'r_enrolled'].map((k) => withM.filter((a) => a[k] > a.margin2025 && a.al2025 === al).length) })),
+    K.chart(Object.assign({}, K.left, { w: 6.2, barDir: 'col', barGrouping: 'stacked', chartColors: [AL.NDA, AL.INDIA, AL.Other], showLegend: true, showTitle: true, title: 'Seats, by the alliance that won in 2025' })));
+  K.table(s, ['District', 'Absent', 'Shifted', 'Dead'], RD.slice(0, 8).map((d) => [d.district, pct(100 * d.absent / dsum(d)), pct(100 * d.shifted / dsum(d)), pct(100 * d.dead / dsum(d))]), 7.1, TOP, W - M - 7.1, [2.2, 1.1, 1.1, 1.23], 12);
+  s.addNotes('Absent rests on the least of the four reasons: it records only that the elector was not found. Already enrolled is a removal only if the other entry is the same person. Shifted exceeds the margin in ' + rOver('r_shifted') + ' seats, dead in ' + rOver('r_dead') + ', already enrolled in ' + rOver('r_enrolled') + '.');
+
   s = K.slide('Elections', 'In ' + over.length + ' of ' + withM.length + ' seats, more names were removed than the 2025 winning margin', 'Constituencies by names removed as a multiple of the margin');
   s.addChart(pres.charts.BAR, [{ name: 'Constituencies', labels: labs, values: vals }], K.chart(Object.assign({}, K.left, { barDir: 'col', chartColors: [GREY, P.accent, P.accent, P.accent, P.accent, P.accent], showValue: true, dataLabelPosition: 'outEnd', valAxisHidden: true })));
   K.stats(s, [[five + ' seats', 'where removals were five times the margin or more'], [median(withM.map(ratio)).toFixed(2) + '×', 'removals against the margin in the median seat'], [indian(smallest.margin2025) + ' votes', smallest.name + '\'s margin, with ' + indian(smallest.total) + ' names removed']], TOP, 1.45, 1, 8.65, W - M - 8.65);
@@ -266,7 +301,7 @@ function bihar() {
     indian(t.female) + ' women and ' + indian(t.male) + ' men were removed, ' + indian(t.female - t.male) + ' more women.',
     'The gap runs from ' + Math.min(...gv).toFixed(1) + ' to ' + Math.max(...gv).toFixed(1) + ' points by district.',
     'The roll records sex, so this needs no inference from names.',
-    'Women who moved on marriage and were marked "shifted" at their parents\' address would produce this pattern. The lists do not record the reason against each name, or whether anyone was enrolled again elsewhere.',
+    indian(xsS) + ' of the ' + indian(xsF) + ' more women than men removed in phase 1 were entered as shifted. The lists do not show whether any were enrolled again elsewhere.',
   ], 13);
 
   s = K.slide('Women, religion, caste', 'Muslim-name electors are ' + pct(mlo) + ' to ' + pct(mhi) + ' of the removed, against 16.87% of the population', 'The roll records no religion. The lists classify names as Hindu, Muslim or unclassified, so the share is a range');
@@ -300,7 +335,7 @@ function bihar() {
   K.right(s, [
     pct(100 * sum(bord, 'total') / t.total) + ' of all removals were in border seats, which hold ' + pct(100 * sum(bord, 'electorate_2025') / t.electorate_2025) + ' of the electorate.',
     'The Nepal and Bengal belts, and Seemanchal within them, are also where out-migration is heaviest, and a migrant who has moved is a legitimate "shifted" deletion.',
-    'The lists record the removal, not its reason.',
+    'Border seats: ' + pct(100 * sum(bord, 'r_shifted') / sum(bord, (a) => a.r_dead + a.r_shifted + a.r_absent + a.r_enrolled)) + ' of phase 1 removals entered as shifted; interior seats: ' + pct(100 * sum(intr, 'r_shifted') / sum(intr, (a) => a.r_dead + a.r_shifted + a.r_absent + a.r_enrolled)) + '.',
   ], 13.5);
 
   // ---- Districts
@@ -321,10 +356,10 @@ function bihar() {
 
   // ---- Questions
   const fq = [
-    ['Were most of the removed not simply dead, or moved away?', 'The lists used here do not carry the reason against each name, so they cannot say how many were rightly removed. A reason is what an officer entered after a visit or its absence. That is why the case is for verification: ' + indian(t.total) + ' removals are enough for the accuracy of those entries to decide elections.'],
+    ['Were most of the removed not simply dead, or moved away?', 'Not most. Of the ' + indian(RS.total) + ' phase 1 removals, ' + pct(rsh('shifted')) + ' were entered as shifted, ' + pct(rsh('dead')) + ' dead, ' + pct(rsh('absent')) + ' absent and ' + pct(rsh('already_enrolled')) + ' already enrolled. Each is an officer\'s entry, not a finding; the ' + indian(RT.absent) + ' marked absent rest on the least and are where checking should start.'],
     ['Did the removals exceed the margins?', 'Yes, in ' + over.length + ' of ' + withM.length + ' constituencies, and in ' + tookO.length + ' of the ' + took.length + ' seats the NDA took from INDIA. That does not mean each result would have been different; it means the change to the roll was larger than the decision at the ballot box.'],
     ['Did NDA seats not lose more names than INDIA seats?', 'They did: ' + LB['2020'].NDA.per_100.toFixed(2) + ' per 100 electors against ' + LB['2020'].INDIA.per_100.toFixed(2) + ' by the 2020 winner, and NDA-led booths lost ' + Wt.pooled_nda_minus_india.toFixed(1) + ' more names each than INDIA-led booths in the same seat. A booth\'s leader says how most voters voted, not how the removed voted.'],
-    ['Why are women over-represented?', 'Women are ' + pct(fem) + ' of those removed and 47.86% of the population, over-represented in ' + fOver.length + ' of ' + DI.length + ' districts. Sex is on the roll, so this rests on no estimate. The lists do not show whether women removed as "shifted" were enrolled again where they now live.'],
+    ['Why are women over-represented?', 'Women are ' + pct(fem) + ' of those removed and 47.86% of the population, over-represented in ' + fOver.length + ' of ' + DI.length + ' districts. ' + indian(xsS) + ' of the ' + indian(xsF) + ' more women than men removed in phase 1 were entered as shifted, and ' + pct(100 * yW / yS) + ' of those marked shifted aged 18 to 29 are women.'],
   ];
   const fq2 = [
     ['Were Muslims removed out of proportion?', 'Muslim-name electors are ' + pct(mlo) + ' to ' + pct(mhi) + ' of removals, against 16.87% of the population in 2011. The census share lies inside that range in ' + inside.length + ' of ' + DI.length + ' districts; in ' + above.length + ' the classified share alone is more than a point above it.'],
@@ -338,14 +373,14 @@ function bihar() {
   // ---- Limits and next steps
   s = K.slide('Limits and next steps', 'What the lists show, and what they cannot show');
   K.box(s, 'The lists show how many names were removed and where, who the removed were by sex, and by religion and caste as read from names, and they allow the removals to be set against the margins and votes that decided each seat.', M, TOP - 0.4, 5.95, 2.3, 15);
-  K.box(s, 'They do not show why a name was removed, whether the removal was right, or how the elector voted. Religion and caste are estimates from names. No list can show intent.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
-  K.body(s, 'The reasons officers entered (dead, shifted, absent, enrolled twice) are entries made after a visit or its absence, not findings, and the lists used here do not carry them against each name. A change to the roll larger than the margin in ' + over.length + ' of ' + withM.length + ' seats is large enough to have decided those seats. Whether it did depends on how the removed would have voted, which no list records.', M, TOP + 2.2, W - 2 * M, 2.3, 16);
+  K.box(s, 'They record the reason an officer entered against each phase 1 removal, but not whether it was true, whether the removal was right, or how the elector voted. Religion and caste are estimates from names. No list can show intent.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
+  K.body(s, 'The reasons officers entered (dead, shifted, absent, enrolled twice) are entries made after a visit or its absence, not findings. Names marked absent alone exceed the margin in ' + rOver('r_absent') + ' seats. A change to the roll larger than the margin in ' + over.length + ' of ' + withM.length + ' seats is large enough to have decided those seats. Whether it did depends on how the removed would have voted, which no list records.', M, TOP + 2.2, W - 2 * M, 2.3, 16);
 
   s = K.slide('Limits and next steps', 'What an audit needs to settle');
   K.numbered(s, [
     'A name-by-name check of removals in every seat where they exceed the margin, starting with the ' + five + ' where they exceed it five times or more.',
     'Publication, booth by booth, of every claim and objection filed after the draft roll, with its outcome.',
-    'The reason entered against each removed name, and the evidence for each "shifted" and "absent" entry.',
+    'The evidence for each "absent" and "already enrolled" entry, starting with the ' + indian(RT.absent) + ' marked absent, and the reason for each phase 2 removal, which the lists do not carry.',
     'A check of women removed as "shifted" against new enrolments where they now live.',
     'Surname counts for the whole draft roll, even for a sample of booths, so each caste group has its own removal rate.',
     'An independent review of the method before the revision is repeated in other states.',
@@ -354,7 +389,7 @@ function bihar() {
   // ---- Method
   s = K.slide('Method', 'Where the figures come from');
   K.bullets(s, [
-    'Removals by booth: the Chief Electoral Officer\'s phase 1 deletion lists against the draft roll of 1 August 2025, for all ' + indian(t.booths) + ' booths. Removals by constituency, phase and sex: the Chief Electoral Officer\'s table.',
+    'Removals by booth: the Chief Electoral Officer\'s phase 1 deletion lists against the draft roll of 1 August 2025, for all ' + indian(t.booths) + ' booths. Removals by constituency, phase and sex: the Chief Electoral Officer\'s table. Reason, sex and age of each phase 1 removal: counts from the row-level list.',
     '2025 results: winner, runner-up and turnout for each seat, from the declared results; votes polled are turnout applied to the 2025 roll. 2024 booth leaders from Form 20, the booth-level count.',
     'Population: Census 2011 for sex, religion, literacy, density and urban share; the Bihar caste-based survey of 2 October 2023 for caste; income per head from the Bihar Economic Survey 2021-22.',
     'Alliances: NDA is BJP, JD(U), LJP(RV), HAM(S) and RLM; INDIA is RJD, INC, the Left parties, VIP and IIP; everything else is Other.',

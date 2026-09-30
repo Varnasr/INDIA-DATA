@@ -21,7 +21,7 @@ from docxkit import Report, indian, lakh, pct, style_axes
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 J = lambda f: json.load(open(os.path.join(ROOT, 'data', 'bihar', f)))
-S, A, DS, ID = J('summary.json'), J('constituencies.json'), J('districts.json'), J('identity.json')
+S, A, DS, ID, RS = J('summary.json'), J('constituencies.json'), J('districts.json'), J('identity.json'), J('reasons.json')
 t = S['totals']
 C = {'NDA': '#E67E22', 'INDIA': '#1E8449', 'Other': '#8E7CC3', 'red': '#C0392B', 'grey': '#95A5A6', 'blue': '#1F618D', 'pink': '#AF3B6E'}
 R = Report(RGBColor(0xB0, 0x3A, 0x2E))
@@ -60,6 +60,17 @@ G = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim']
 up = [g for g in G if cg['A']['groups'][g]['ratio_to_survey'] >= 1 and cg['B']['groups'][g]['ratio_to_survey'] >= 1]
 down = [g for g in G if cg['A']['groups'][g]['ratio_to_survey'] < 1 and cg['B']['groups'][g]['ratio_to_survey'] < 1]
 b200 = sum(a['booths_200'] for a in A)
+RK = ['shifted', 'dead', 'absent', 'already_enrolled']
+RN = {'dead': 'dead', 'shifted': 'shifted', 'absent': 'absent', 'already_enrolled': 'already enrolled'}
+RT, rtot = RS['totals'], RS['total']
+rsh = lambda k: 100 * RT[k] / rtot
+xsF = sum(RS['by_sex'][k]['F'] - RS['by_sex'][k]['M'] for k in RK)
+xsS = RS['by_sex']['shifted']['F'] - RS['by_sex']['shifted']['M']
+yS = RS['by_age']['shifted'][0] + RS['by_age']['shifted'][1]
+yW = RS['by_age_women']['shifted'][0] + RS['by_age_women']['shifted'][1]
+rOver = lambda k: sum(1 for a in withM if a[k] > a['margin2025'])
+RD = sorted(RS['districts'], key=lambda d: -d['absent'] / sum(d[k] for k in RK))
+dsum = lambda d: sum(d[k] for k in RK)
 andj = lambda xs: xs[0] if len(xs) == 1 else ', '.join(xs[:-1]) + ' and ' + xs[-1]
 
 # ------------------------------------------------------------ cover and contents
@@ -152,7 +163,37 @@ ax.set_xlabel('Women, % of district population (2011)', fontsize=8)
 ax.set_ylabel('Women, % of names removed', fontsize=8)
 style_axes(ax, 'Every district above the line')
 R.figure(fig, 'Figure 4. Each dot is a district. Above the dashed line, women\'s share of the removed exceeds their share of the population.', width=12)
-R.p('Women who move on marriage and are marked "shifted" at their parents\' address are likely to be a large part of this. The lists do not show whether any of them were enrolled again where they now live. If they were not, they have lost the vote.')
+R.p('Phase 1 removed %s more women than men, and %s of that difference (%s) were entered as shifted. Among those marked shifted aged 18 to 29, %s are women, the pattern that women who move on marriage would produce. '
+    'The lists do not show whether any of them were enrolled again where they now live. If they were not, they have lost the vote.'
+    % (indian(xsF), indian(xsS), pct(100 * xsS / xsF), pct(100 * yW / yS)))
+
+R.h2('Reasons for removal')
+R.p('The phase 1 lists record, against every one of the %s names, the reason the officer entered for removing it. Counted as entered: %s were marked permanently shifted (%s), %s dead (%s), %s absent (%s) and %s already enrolled elsewhere (%s). '
+    'The counts agree with the booth list in every booth, and the counts of women and men agree with the Chief Electoral Officer\'s phase 1 figures in every constituency. The %s names removed in phase 2 carry no reason in the lists.'
+    % (indian(rtot), indian(RT['shifted']), pct(rsh('shifted')), indian(RT['dead']), pct(rsh('dead')), indian(RT['absent']), pct(rsh('absent')),
+       indian(RT['already_enrolled']), pct(rsh('already_enrolled')), indian(t['p2'])))
+R.p('A reason is what an officer entered after a visit or its absence. It is not a finding. Someone marked shifted may have been away for work when the officer called; someone marked absent may have been at home. '
+    'Of the four, absent rests on the least: it records only that the elector was not found. Already enrolled is a removal only if the other entry is the same person.')
+fig, ax = plt.subplots(figsize=(8, 4.2))
+bands = RS['bands']; bottom = [0] * len(bands)
+RCOL = {'dead': C['grey'], 'shifted': C['blue'], 'absent': C['red'], 'already_enrolled': '#D4AC0D'}
+for k in ['dead', 'shifted', 'absent', 'already_enrolled']:
+    tot = [sum(RS['by_age'][j][i] for j in RK) for i in range(len(bands))]
+    v = [100 * RS['by_age'][k][i] / tot[i] for i in range(len(bands))]
+    ax.bar(bands, v, bottom=bottom, color=RCOL[k], label=RN[k].capitalize())
+    bottom = [b + x for b, x in zip(bottom, v)]
+ax.set_ylabel('% of the removed in each age band', fontsize=8)
+ax.legend(fontsize=7, ncol=4, loc='upper center', bbox_to_anchor=(0.5, -0.12), frameon=False)
+style_axes(ax, 'Reason entered, by age')
+R.figure(fig, 'Figure 5. The reason entered against each phase 1 removal, by the elector\'s age.', width=15)
+R.p('Among the removed aged 80 and over, %s were entered as dead; among those aged 18 to 24, %s. The young were mostly marked shifted or absent.'
+    % (pct(100 * RS['by_age']['dead'][-1] / sum(RS['by_age'][k][-1] for k in RK)), pct(100 * RS['by_age']['dead'][0] / sum(RS['by_age'][k][0] for k in RK))))
+R.p('Taken alone, the names marked absent exceed the 2025 margin in %d of %d seats, and the names marked already enrolled in %d. The names marked shifted exceed it in %d and the dead in %d. '
+    'The absent share is highest in %s. That is where a check of the entries should start.'
+    % (rOver('r_absent'), len(withM), rOver('r_enrolled'), rOver('r_shifted'), rOver('r_dead'), andj(['%s (%s)' % (d['district'], pct(100 * d['absent'] / dsum(d))) for d in RD[:3]])))
+R.table(['District', 'Phase 1 removed', 'Shifted', 'Dead', 'Absent', 'Already enrolled'],
+        [[d['district'], indian(dsum(d))] + [pct(100 * d[k] / dsum(d)) for k in RK] for d in RD],
+        widths=[4.2, 2.8, 2.2, 2.2, 2.2, 2.8], right={1, 2, 3, 4, 5})
 
 R.h2('Religion')
 R.p('The roll records no religion. The booth lists classify removed names as Hindu or Muslim where the name allows it, and leave %s of names unclassified. '
@@ -169,7 +210,7 @@ ax.set_yticks(list(y), [d['district'] for d in dd], fontsize=7)
 ax.set_xlabel('Muslim share, %', fontsize=8)
 ax.legend(fontsize=8, frameon=False, loc='lower right')
 style_axes(ax, 'Muslim share of removals, as a range, against the census')
-R.figure(fig, 'Figure 5. The bar runs from names classified Muslim to all names that could be Muslim; the dot is the 2011 census share.')
+R.figure(fig, 'Figure 6. The bar runs from names classified Muslim to all names that could be Muslim; the dot is the 2011 census share.')
 
 R.h2('Caste')
 R.p('Caste is not recorded either. It can be read, in part, from the surname of the father or husband listed with each removed elector, and two classifications are used because surnames cross caste lines. '
@@ -189,7 +230,7 @@ ax.bar(hk, [S['booth_histogram'][k] for k in hk], color=C['blue'])
 ax.set_xlabel('Names removed in the booth', fontsize=8)
 ax.set_ylabel('Booths', fontsize=8)
 style_axes(ax, 'How many names each booth lost')
-R.figure(fig, 'Figure 6. Booths by the number of names removed.')
+R.figure(fig, 'Figure 7. Booths by the number of names removed.')
 R.p('The median booth lost %d names. %s booths lost 200 or more each, and %d lost 400 or more. A booth serves on average about %d electors, so 200 removals is a fifth of a booth\'s roll.'
     % (st.median(a['booth_median'] for a in A), indian(b200), S['booth_histogram']['400+'], round(t['electorate_2025'] / t['booths'])))
 
@@ -222,11 +263,13 @@ R.bullets([
     '**Women are %s of the removed**, over-represented in %d of %d districts.' % (pct(fem), len(fOver), len(DI)),
     '**Muslim names are %s to %s of removals**, against 16.87%% of the population; above the census share by more than a point in %d districts.' % (pct(mlo), pct(mhi), len(above)),
     '**%s booths lost 200 names or more each.**' % indian(b200),
+    '**Reasons entered in phase 1**: shifted %s, dead %s, absent %s, already enrolled %s. %s of the %s more women than men removed were marked shifted.' % (pct(rsh('shifted')), pct(rsh('dead')), pct(rsh('absent')), pct(rsh('already_enrolled')), indian(xsS), indian(xsF)),
+    '**Names marked absent alone exceed the margin in %d seats**, names marked already enrolled in %d.' % (rOver('r_absent'), rOver('r_enrolled')),
 ])
 
 R.h2('What this shows and what it does not')
-R.p('The lists show how many names were removed, where, and who the removed were by sex and by name, and they allow the removals to be set against the margins and votes that decided each seat. '
-    'They do not show why an individual name was removed, whether the removal was right, or how the elector voted. Religion and caste are read from names and are estimates, given as ranges or under two classifications. '
+R.p('The lists show how many names were removed, where, who the removed were by sex, age and name, and the reason the officer entered against each phase 1 removal, and they allow the removals to be set against the margins and votes that decided each seat. '
+    'They do not show whether that reason was true of the person, whether the removal was right, or how the elector voted. Religion and caste are read from names and are estimates, given as ranges or under two classifications. '
     'Votes polled are the turnout on the 2025 roll, within about 1% of a second calculation from each winner\'s vote and share.')
 
 # ============================================================ PART II
@@ -254,6 +297,9 @@ for d in rankD:
            pct(di['muslim_share_deleted_low']), pct(di['muslim_share_deleted_high']), pct(di['muslim_share_population_2011']),
            heavy['name'], heavy['per_100'], worst['name'], indian(worst['total']), indian(worst['margin2025']), wins['NDA'], wins['INDIA'],
            (', and %d went to neither alliance' % wins['Other']) if wins['Other'] else ''))
+    rd = next(x for x in RS['districts'] if x['district'] == d['district'])
+    R.p('Of its %s phase 1 removals, the officers entered %s as shifted, %s as dead, %s as absent and %s as already enrolled.'
+        % (indian(dsum(rd)), pct(100 * rd['shifted'] / dsum(rd)), pct(100 * rd['dead'] / dsum(rd)), pct(100 * rd['absent'] / dsum(rd)), pct(100 * rd['already_enrolled'] / dsum(rd))))
     R.table(['Constituency', 'Removed', 'Per 100', 'Women %', 'Won by (2025)', 'Margin', '× margin', '% polled'],
             [['%d %s' % (a['ac'], a['name']), indian(a['total']), '%.2f' % a['per_100'], pct(100 * a['t_f'] / (a['t_f'] + a['t_m'])),
               '%s (%s)' % (a['win2025'], a['al2025']), indian(a['margin2025']), '%.1f×' % ratio(a), pct(share(a))] for a in rows],
@@ -267,12 +313,12 @@ R.p('The revision removed %s names from Bihar\'s roll in the months before an As
     'The names removed exceed the margin in %d of %d seats and equal %s of all votes polled. Whatever the reason entered against each name, a change to the roll of that size is larger than the decision at the ballot box in most of the state.'
     % (len(over), len(withM), pct(100 * t['total'] / polled)))
 R.p('Women carried a larger share of the removals than their share of the population in every district, and the lists cannot show whether those women were enrolled again where they now live. '
-    'The reasons officers entered, dead, shifted, absent or enrolled twice, are entries after a visit or its absence, not findings, and the lists used here do not carry them against each name.')
+    'The reasons officers entered, dead, shifted, absent or enrolled twice, are entries after a visit or its absence, not findings. %s names were removed as absent, the entry that rests on the least, and they alone exceed the margin in %d seats.' % (indian(RT['absent']), rOver('r_absent')))
 R.p('What would settle the questions the lists leave open:')
 R.numbered([
     '**A name-by-name verification** of the removals in every constituency where they exceed the margin, starting with the %d where they exceed it five times or more.' % sum(ratio(a) >= 5 for a in withM),
     '**Publication, booth by booth, of every claim and objection** filed after the draft roll, with its outcome, so that restorations can be counted against removals.',
-    '**The reason entered against each removed name**, published with the booth lists, and the evidence for each "shifted" and "absent" entry.',
+    '**The evidence for each "absent" and "already enrolled" entry**, starting with the %s names marked absent, and the reason for each of the %s phase 2 removals, which the lists do not carry.' % (indian(RT['absent']), indian(t['p2'])),
     '**A check of women removed as "shifted"** against new enrolments in the constituencies they moved to.',
     '**An independent review** of the revision\'s method before it is repeated in other states.',
 ])
@@ -282,6 +328,7 @@ R.bullets([
     'Removals by polling booth: the phase 1 deletion lists the Chief Electoral Officer, Bihar published against the draft roll of 1 August 2025, for all %s booths.' % indian(t['booths']),
     'Removals by constituency, phase and sex: Chief Electoral Officer, Bihar.',
     'Religion and surnames of the removed: counts from the same lists, by booth; no individual records.',
+    'Reason, sex and age of every phase 1 removal: counts from the row-level deletion list, by constituency and booth; no individual records.',
     '2025 Assembly results: winner, runner-up and turnout for each constituency, cross-checked between two independent tables; where they disagreed, the figure matching the reported result was used.',
     '2024 Lok Sabha result by booth: Form 20. Census of India 2011; Bihar caste-based survey, 2 October 2023; Bihar Economic Survey.',
 ])
