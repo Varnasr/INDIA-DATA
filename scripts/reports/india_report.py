@@ -62,6 +62,30 @@ R.p('Every state gave a reason for most of its removals. Of the %s names it spli
        crore(T['duplicate']), pct(T['shares']['duplicate'])))
 R.p('A reason is what an officer entered after a visit or its absence. It is not a finding. The figures cannot say how many entries were wrong.')
 
+R.h2('State by state, on one map')
+BIN, FILL = [8, 12, 16, 20], ['#deebf7', '#9ecae1', '#2878b3', '#1c5f96', '#08306b']
+byS = {x['state']: x for x in S}
+fig, ax = plt.subplots(figsize=(6.2, 5.6))
+for t in N['tiles']:
+    x = byS.get(t['state'])
+    v = x['per_100'] if x else None
+    b = sum(v >= c for c in BIN) if v is not None else None
+    f = FILL[b] if b is not None else '#F2F3F4'
+    ax.add_patch(plt.Rectangle((t['col'], -t['row']), 0.92, 0.92, facecolor=f, edgecolor='#95A5A6' if b is None else f, linestyle='--' if b is None else '-', lw=0.8))
+    ink = '#1C2833' if b is None or b < 2 else 'white'
+    ax.text(t['col'] + 0.46, -t['row'] + 0.58, t['code'], ha='center', va='center', fontsize=8, fontweight='bold', color=ink)
+    ax.text(t['col'] + 0.46, -t['row'] + 0.30, '%.1f' % v if v is not None else '–', ha='center', va='center', fontsize=7, color=ink)
+ax.set_xlim(-0.1, 9)
+ax.set_ylim(-7.1, 1)
+ax.set_aspect('equal')
+ax.axis('off')
+labs = ['under 8', '8 to 12', '12 to 16', '16 to 20', '20 or more']
+for i, (l, f) in enumerate(zip(labs, FILL)):
+    ax.add_patch(plt.Rectangle((5.2, -5.2 - i * 0.42), 0.3, 0.3, facecolor=f))
+    ax.text(5.6, -5.05 - i * 0.42, l, va='center', fontsize=7)
+ax.set_title('Removed per 100 electors', fontsize=9, fontweight='bold', loc='left')
+R.figure(fig, 'Figure 1. One tile per state or union territory, placed roughly where it lies; the tiles carry no boundaries. Grey: not in the revision (Jammu and Kashmir, Ladakh, Himachal Pradesh, Assam), no draft roll yet (Tripura), or no exact roll before it (Chandigarh).', width=13)
+
 R.h2('The three reasons, by phase')
 fig, ax = plt.subplots(figsize=(7, 4))
 labs = ['Phase 1\n(Bihar)', 'Phase 2\n(%d states)' % P['2']['states'], 'Phase 3\n(%d states)' % P['3']['states']]
@@ -73,7 +97,7 @@ for k in RK + ['unsplit']:
 ax.set_ylabel('Names removed, lakh', fontsize=8)
 ax.legend(fontsize=7, ncol=4, loc='upper center', bbox_to_anchor=(0.5, -0.16), frameon=False)
 style_axes(ax, 'Names left off the draft rolls, by reason')
-R.figure(fig, 'Figure 1. Names left off the draft rolls in each phase, by the reason entered, in lakh.', width=14)
+R.figure(fig, 'Figure 2. Names left off the draft rolls in each phase, by the reason entered, in lakh.', width=14)
 R.p('The share entered as dead fell from %s in Bihar to %s in phase 2 and %s in phase 3, while the share entered as shifted, absent or other rose from %s to %s and %s. '
     'Removals per 100 electors rose with each phase: %.1f, %.1f and %.1f.'
     % (pct(P['1']['shares']['dead']), pct(P['2']['shares']['dead']), pct(P['3']['shares']['dead']),
@@ -93,7 +117,7 @@ ax.tick_params(axis='y', labelsize=7)
 ax.set_xlabel('% of the state\'s removals split by reason', fontsize=8)
 ax.legend(fontsize=7, ncol=3, loc='upper center', bbox_to_anchor=(0.5, -0.07), frameon=False)
 style_axes(ax, 'Reasons entered, share of each state\'s removals')
-R.figure(fig, 'Figure 2. States that published a split by reason, ordered by the share entered as shifted, absent or other.', width=15)
+R.figure(fig, 'Figure 3. States that published a split by reason, ordered by the share entered as shifted, absent or other.', width=15)
 R.p('Among states that removed ten lakh names or more, the share entered as shifted, absent or other runs from %s in %s to %s in %s. Among them the share entered as dead is highest in %s (%s), and the share entered as enrolled more than once in %s (%s). '
     'One revision under one set of instructions produced very different mixes of reasons from state to state, and the Commission has not explained why.'
     % (pct(big[-1]['shares']['shifted_absent_other']), big[-1]['state'], pct(big[0]['shares']['shifted_absent_other']), big[0]['state'],
@@ -124,7 +148,7 @@ ax.set_yticklabels([g['state'] for g in G], fontsize=8)
 ax.set_xlim(40, 60)
 ax.legend(fontsize=7, frameon=False, loc='lower right')
 style_axes(ax, 'Women\'s share of removals and of the roll')
-R.figure(fig, 'Figure 3. States that published a split by sex. Bihar is compared with women\'s share of the 2011 population.', width=14)
+R.figure(fig, 'Figure 4. States that published a split by sex. Bihar is compared with women\'s share of the 2011 population.', width=14)
 R.p('Only ten states have published their removals by sex, or their roll by sex before the revision and on the draft. In %d of the ten, women are a larger share of the names removed than of the roll, by up to %.1f points in %s. %s %s within a point of even, and %s runs the other way, by %.1f points. '
     'Most phase 3 states have published no split by sex, so this is not the national picture.'
     % (len(gOver), G[0]['gap'], G[0]['state'], andj([g['state'] for g in gEven]), 'is' if len(gEven) == 1 else 'are',
