@@ -583,7 +583,6 @@ function hyderabad() {
 // ============================================================ ALL INDIA
 function india() {
   const N = J('india/states.json'), T = N.total, S = N.states, P = N.by_phase;
-  const BS = J('bihar/summary.json'), BA = J('bihar/constituencies.json'), BR = J('bihar/reasons.json'), HS = J('hyderabad/summary.json');
   const Pal = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'SIR 2025-26 · All India · Varna Sri Raman · aggregates only; no names or EPIC numbers' };
   const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'Varna Sri Raman'; pres.title = 'SIR 2025-26: All India';
   const K = kit(pres, Pal);
@@ -597,7 +596,7 @@ function india() {
   const ph = ['1', '2', '3'], PL = ['Phase 1 (Bihar)', 'Phase 2 (' + P['2'].states + ')', 'Phase 3 (' + P['3'].states + ')'];
 
   cover(pres, K, Pal, 'Special Intensive Revision · India 2025-26', crore(T.removed) + ' names were left off the draft rolls, and four in five were not entered as dead',
-    'The reason recorded for every removal, state by state, with the list-level findings for Bihar and Hyderabad Old City',
+    'The reason recorded for every removal, state by state: women among the removed, and what goes with the removal rate',
     [[crore(T.removed), 'left off the draft rolls in ' + T.states + ' states and union territories'], [pct(T.shares.shifted_absent_other), 'entered as shifted, absent or other'], [pct(T.shares.dead), 'entered as dead'], [pct(T.shares.duplicate), 'entered as enrolled more than once']])
     .addNotes('Outside Bihar the figures are the Chief Electoral Officers\' own, from their press notes or as reported in the press; Bihar is counted from the deletion lists. Shares are of the removals each state split by reason.');
   const toc = contentsSlide(pres, K, Pal);
@@ -661,31 +660,6 @@ function india() {
   K.box(s, 'They cannot show whether an entry was right, or break removals down by sex, age or booth. Outside Bihar they are the states\' published totals, some rounded, gathered from press notes and reports.', 6.78, TOP - 0.4, 5.95, 2.1, 15);
   K.body(s, 'Removals after the draft, at hearings and on objections, are outside every figure by reason, because no state has said why. Twelve phase 3 final rolls are still to come. The Election Commission has published no state table of its own.', M, TOP + 2.0, W - 2 * M, 2.2, 16);
 
-  // ---- Bihar
-  const bt = BS.totals, withM = BA.filter((a) => a.margin2025), bover = withM.filter((a) => a.total > a.margin2025), bfem = 100 * bt.female / (bt.female + bt.male);
-  const RT = BR.totals, brsh = (k) => 100 * RT[k] / BR.total, babs = withM.filter((a) => a.r_absent > a.margin2025).length;
-  const xsF = sum(Object.keys(RT), (k) => BR.by_sex[k].F - BR.by_sex[k].M), xsS = BR.by_sex.shifted.F - BR.by_sex.shifted.M;
-  const yS = BR.by_age.shifted[0] + BR.by_age.shifted[1], yW = BR.by_age_women.shifted[0] + BR.by_age_women.shifted[1];
-  s = K.slide('Bihar, from the lists', 'In Bihar, more names were removed than the 2025 winning margin in ' + bover.length + ' of ' + withM.length + ' seats', 'The one state where the deletion lists could be counted name by name');
-  K.stats(s, [[indian(bt.total), 'names removed, both phases'], [bover.length + ' of ' + withM.length, 'seats where removals exceed the margin'], [pct(bfem), 'of the removed are women'], [babs + ' seats', 'where names marked absent alone exceed the margin']], TOP, 1.7);
-  K.bullets(s, ['Phase 1 reasons: shifted ' + pct(brsh('shifted')) + ', dead ' + pct(brsh('dead')) + ', absent ' + pct(brsh('absent')) + ', already enrolled ' + pct(brsh('already_enrolled')) + '.',
-    indian(xsS) + ' of the ' + indian(xsF) + ' more women than men removed in phase 1 were entered as shifted; ' + pct(100 * yW / yS) + ' of those marked shifted aged 18 to 29 are women.',
-    'NDA seats lost ' + BS.by_alliance_label['2020'].NDA.per_100.toFixed(2) + ' names per 100 electors against ' + BS.by_alliance_label['2020'].INDIA.per_100.toFixed(2) + ' in INDIA seats, by the 2020 winner.',
-    'The full Bihar report and deck, with a chapter for each district, are published separately.'], M, TOP + 2.1, W - 2 * M, 2.6, 15);
-
-  // ---- Hyderabad
-  const HA = HS.acs, ht = HS.totals, hs = (f) => sum(HA, f);
-  const hover = HA.filter((a) => a.deleted > a.e2023.margin), hoverV = HA.filter((a) => a.e2023.deleted_over_valid > 100);
-  const hrsh = (k) => 100 * hs((a) => a.reasons[k]) / ht.deleted;
-  const hage = HS.bands.map((b, i) => 100 * hs((a) => a.counts.age_asd[i]) / hs((a) => a.age_all[i]));
-  const LK = HA.filter((a) => a.linked), hlk = 100 * sum(LK, (a) => a.counts.lk_asd) / sum(LK, (a) => a.counts.lk_all), hul = 100 * sum(LK, (a) => a.deleted - a.counts.lk_asd) / sum(LK, (a) => a.electors - a.counts.lk_all);
-  s = K.slide('Hyderabad Old City, from the lists', pct(ht.rate, 0) + ' of electors in five Old City seats were struck off, more than the 2023 margin in all ' + hover.length, 'Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura; the lists hold every elector, so each group has a true rate');
-  K.stats(s, [[indian(ht.deleted), 'electors struck off'], [pct(ht.rate), 'of the pre-revision rolls'], [indian(ht.hearing), 'kept but summoned to a hearing'], [pct(hage[hage.length - 1], 0), 'of electors aged 80 and over struck off']], TOP, 1.7);
-  K.bullets(s, ['Reasons entered: permanently shifted ' + pct(hrsh('Permanently Shifted')) + ', untraceable or absent ' + pct(hrsh('Untraceable/Absent')) + ', dead ' + pct(hrsh('Death')) + ', already enrolled ' + pct(hrsh('Already enrolled')) + '.',
-    'Struck off more names than every valid vote cast in 2023 in ' + andj(hoverV.map((a) => a.name)) + '.',
-    'Electors with no link to the 2002 roll were struck off at ' + pct(hul) + ', against ' + pct(hlk) + ' for those with one.',
-    'The full Hyderabad report and deck are published separately.'], M, TOP + 2.1, W - 2 * M, 2.6, 15);
-
   // ---- The Election Commission
   s = K.slide('What the Election Commission should do', 'Publish its own table, and the lists behind it');
   K.numbered(s, [
@@ -702,10 +676,10 @@ function india() {
     'Bihar: counted from the phase 1 deletion lists, with shifted and absent combined to match the other states.',
     'Reasons grouped into the three every state reported: dead; shifted, absent or other; enrolled more than once.',
     'The state rows add to ' + crore(T.removed) + ', against about 13.3 crore reported nationally on 30 September 2026; the difference is rounding.',
-    'Bihar and Hyderabad findings are counted from the lists; their methods are in their own reports. No name, EPIC number or address is published.',
+    'No name, EPIC number or address is published.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
-  closing(pres, K, Pal, 'The full analysis', ['The All India table with a source for every row, the Bihar and Hyderabad dashboards, and the three full reports are published online alongside this deck.', 'Varna Sri Raman']);
+  closing(pres, K, Pal, 'The full analysis', ['The All India table with a source for every row, and the full report, are published online alongside this deck.', 'Varna Sri Raman']);
   K.contents(toc);
   return pres.writeFile({ fileName: path.join(OUT, 'sir-india-deck.pptx') });
 }

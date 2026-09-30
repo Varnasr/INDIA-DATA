@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""The overall report: All India, then Bihar and Hyderabad Old City.
+"""The All India report: the reasons recorded for SIR removals, state by state.
 
     python3 scripts/reports/india_report.py OUT.docx [india/report]
 
-Part I sets the reasons recorded for SIR removals side by side for every
-state and union territory; Parts II and III give the headline findings of the
-two list-level analyses, whose full reports stand on their own. Every figure
-is computed from data/india, data/bihar and data/hyderabad.
+It sets the reasons recorded for SIR removals side by side for every state and
+union territory, with the split by sex where states published one and the
+state-level correlations. Every figure is computed from data/india.
 """
 import json
 import os
@@ -21,8 +20,6 @@ from docxkit import Report, indian, lakh, pct, style_axes
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 J = lambda *p: json.load(open(os.path.join(ROOT, 'data', *p)))
 N = J('india', 'states.json')
-BS, BA, BR = J('bihar', 'summary.json'), J('bihar', 'constituencies.json'), J('bihar', 'reasons.json')
-HS = J('hyderabad', 'summary.json')
 T, S, P = N['total'], N['states'], N['by_phase']
 RK = ['dead', 'shifted_absent_other', 'duplicate']
 RN = {'dead': 'Dead', 'shifted_absent_other': 'Shifted, absent or other', 'duplicate': 'Enrolled more than once'}
@@ -42,34 +39,9 @@ short = [s['state'] for s in S if s['split'] == 'short']
 none = [s['state'] for s in S if s['split'] == 'none']
 AD = N['after_draft']
 
-# Bihar headline figures
-bt = BS['totals']
-withM = [a for a in BA if a['margin2025']]
-bover = [a for a in withM if a['total'] > a['margin2025']]
-bfem = 100 * bt['female'] / (bt['female'] + bt['male'])
-RT = BR['totals']
-brsh = lambda k: 100 * RT[k] / BR['total']
-xsF = sum(BR['by_sex'][k]['F'] - BR['by_sex'][k]['M'] for k in RT)
-xsS = BR['by_sex']['shifted']['F'] - BR['by_sex']['shifted']['M']
-yS = BR['by_age']['shifted'][0] + BR['by_age']['shifted'][1]
-yW = BR['by_age_women']['shifted'][0] + BR['by_age_women']['shifted'][1]
-babs = sum(1 for a in withM if a['r_absent'] > a['margin2025'])
-bpolled = sum(a['votes2025'] for a in BA)
-# Hyderabad headline figures
-HA, ht = HS['acs'], HS['totals']
-hs = lambda f: sum(f(a) for a in HA)
-hover = [a for a in HA if a['deleted'] > a['e2023']['margin']]
-hoverV = [a for a in HA if a['e2023']['deleted_over_valid'] > 100]
-hrsh = {k: 100 * hs(lambda a: a['reasons'][k]) / ht['deleted'] for k in HS['reasons']}
-hage = [100 * hs(lambda a: a['counts']['age_asd'][i]) / hs(lambda a: a['age_all'][i]) for i in range(len(HS['bands']))]
-LK = [a for a in HA if a['linked']]
-hlk = 100 * sum(a['counts']['lk_asd'] for a in LK) / sum(a['counts']['lk_all'] for a in LK)
-hul = 100 * sum(a['deleted'] - a['counts']['lk_asd'] for a in LK) / sum(a['electors'] - a['counts']['lk_all'] for a in LK)
-yak = next(a for a in HA if a['name'] == 'Yakutpura')
-
 # ------------------------------------------------------------ cover
 R.cover('Special Intensive Revision 2025-26', 'India: %s names left off the draft rolls' % crore(T['removed']),
-        'The reasons recorded for every removal, state by state, with the list-level analyses of Bihar and Hyderabad Old City',
+        'The reasons recorded for every removal, state by state: who was removed by sex where states published it, and what goes with the removal rate',
         [('names left off the draft rolls in %d states and union territories' % T['states'], indian(T['removed'])),
          ('of those split by reason entered as shifted, absent or other', pct(T['shares']['shifted_absent_other'])),
          ('entered as dead', pct(T['shares']['dead'])),
@@ -78,7 +50,6 @@ R.h1('Contents')
 R.toc()
 
 # ============================================================ PART I
-R.h1('Part I: All India')
 R.h2('At a glance')
 R.stats([(crore(T['removed']), 'left off the draft rolls'), (pct(T['shares']['shifted_absent_other']), 'shifted, absent or other'),
          (pct(T['shares']['dead']), 'dead'), ('%.1f' % T['per_100'], 'removed per 100 electors')])
@@ -189,35 +160,7 @@ R.h2('After the draft roll')
 R.p('After the draft rolls, %d states have published how many more names they removed at hearings and on objections: %s in all. No state has said why, so these removals are outside every figure by reason in this report. '
     'Additions after the draft are outside it too; the final rolls of twelve phase 3 states are still to come.' % (AD['states'], lakh(AD['removed'])))
 
-# ============================================================ PART II
-R.page_break()
-R.h1('Part II: Bihar, from the deletion lists')
-R.p('Bihar is the one state where the deletion lists could be counted name by name. The full report, with a chapter for each of the 38 districts, is published separately.')
-R.stats([(indian(bt['total']), 'names removed, both phases'), ('%d of %d' % (len(bover), len(withM)), 'seats: removals exceed the 2025 margin'),
-         (pct(bfem), 'of the removed are women'), (pct(100 * bt['total'] / bpolled), 'of the votes polled in 2025')])
-R.bullets([
-    '**%s names removed** in both phases, %s before the draft roll and %s after it.' % (indian(bt['total']), indian(bt['p1']), indian(bt['p2'])),
-    '**More than the 2025 winning margin in %d of %d seats.**' % (len(bover), len(withM)),
-    '**Reasons entered in phase 1**: shifted %s, dead %s, absent %s, already enrolled %s. Names marked absent alone exceed the margin in %d seats.' % (pct(brsh('shifted')), pct(brsh('dead')), pct(brsh('absent')), pct(brsh('already_enrolled')), babs),
-    '**Women are %s of the removed.** %s of the %s more women than men removed in phase 1 were entered as shifted, and %s of those marked shifted aged 18 to 29 are women.' % (pct(bfem), indian(xsS), indian(xsF), pct(100 * yW / yS)),
-    '**NDA seats lost more names per elector than INDIA seats**, %.2f against %.2f per 100 by the 2020 winner.' % (BS['by_alliance_label']['2020']['NDA']['per_100'], BS['by_alliance_label']['2020']['INDIA']['per_100']),
-])
-
-# ============================================================ PART III
-R.h1('Part III: Hyderabad Old City, from the lists')
-R.p('In five Old City constituencies of Hyderabad the September lists hold every elector, not only the removed, so each group has a true rate of removal. The full report is published separately.')
-R.stats([(indian(ht['deleted']), 'electors struck off'), (pct(ht['rate']), 'of the pre-revision rolls'),
-         ('%d of %d' % (len(hover), len(HA)), 'seats: struck off exceed the 2023 margin'), (indian(ht['hearing']), 'kept but summoned to a hearing')])
-R.bullets([
-    '**%s electors struck off**, %s of the five rolls, and %s more summoned to a hearing.' % (indian(ht['deleted']), pct(ht['rate']), indian(ht['hearing'])),
-    '**Reasons entered**: permanently shifted %s, untraceable or absent %s, dead %s, already enrolled %s.' % (pct(hrsh['Permanently Shifted']), pct(hrsh['Untraceable/Absent']), pct(hrsh['Death']), pct(hrsh['Already enrolled'])),
-    '**More names struck off than every valid vote cast in 2023** in %s. Yakutpura was won by %s votes and lost %s names.' % (andj([a['name'] for a in hoverV]), indian(yak['e2023']['margin']), indian(yak['deleted'])),
-    '**%s of electors aged 80 and over struck off**, against %s of those aged 18 to 24.' % (pct(hage[-1]), pct(hage[0])),
-    '**No link to the 2002 roll roughly doubled the chance of being struck off**: %s against %s.' % (pct(hul), pct(hlk)),
-])
-
 # ============================================================ CONCLUSION
-R.page_break()
 R.h1('What the Election Commission should do')
 R.p('%s names came off the draft rolls, about four in five of them on an entry that the elector had moved, could not be found, or was on the roll twice. The Election Commission should:' % crore(T['removed']))
 R.numbered([
@@ -232,7 +175,7 @@ R.h1('Method and sources')
 R.p('The All India figures are the Chief Electoral Officers\' own, published when each draft roll came out: from their press notes where those could be read (%s), and otherwise as reported in the press. Bihar\'s row is counted from the deletion lists. '
     'The reasons are grouped into the three every state reported. The state rows add to %s removed, against the %s reported nationally on 30 September 2026; the difference is rounding. Each row\'s source is listed on the method page of the site and in the downloadable table.'
     % (andj([s['state'] for s in S if s['source'] == 'primary']), crore(T['removed']), 'about 13.3 crore'))
-R.p('Parts II and III are counted from the lists themselves; their methods are set out in their own reports. No name, EPIC number or address is published.')
+R.p('No name, EPIC number or address is published.')
 
 out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'reports', 'sir-india-report.docx')
 R.save(out)
