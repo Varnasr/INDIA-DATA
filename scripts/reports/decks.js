@@ -463,6 +463,15 @@ function hyderabad() {
     'Each reason is an officer\'s entry, not a finding. An untraceable entry records only that someone was not found.',
   ], 9.15, TOP + 0.1, W - M - 9.15, CH - 0.1, 13.5);
 
+  // ---- Against Hyderabad and Telangana
+  {
+    const TG = J('hyderabad/telangana.json'), seats = TG.seats.slice().sort((a, b) => a.rate - b.rate);
+    s = K.slide('Hyderabad and Telangana', 'The Old City seats lost ' + pct(TG.old_city.rate) + ' of their roll, Hyderabad\'s other ten seats ' + pct(TG.other_hyderabad.rate), 'Share of each roll left off the state\'s draft of 17 August 2026; Old City seats in maroon');
+    s.addChart(pres.charts.BAR, [{ name: '% left off', labels: seats.map((x) => x.name), values: seats.map((x) => x.rate) }],
+      K.chart(Object.assign({}, K.left, { barDir: 'bar', chartColors: seats.map((x) => x.old_city ? '8B1E3F' : '1F618D'), showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', valAxisHidden: true, catAxisLabelFontSize: 10 })));
+    K.right(s, ['Hyderabad district: ' + pct(TG.hyderabad.rate) + '. The rest of Telangana: ' + pct(TG.rest_of_state.rate) + '.', 'The removals follow the capital region, not the Old City.', 'The state publishes totals only below the district: no split by reason.'], 13.5);
+  }
+
   // ---- Age, sex, religion, 2002
   s = K.slide('Age, sex, religion, 2002', pct(age[age.length - 1], 0) + ' of electors aged 80 and over were struck off, against ' + pct(age[0], 0) + ' of those aged 18 to 24', 'Share of each age band struck off, all five constituencies');
   s.addChart(pres.charts.BAR, [{ name: '% struck off', labels: S.bands, values: age.map((v) => +v.toFixed(1)) }],
