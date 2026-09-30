@@ -7,7 +7,8 @@
    "/bihar/method/",
    "/hyderabad/faq/",
    "/hyderabad/method/",
-   "/hyderabad/parts/"
+   "/hyderabad/parts/",
+   "/india/"
   ]
  },
  "\"Already enrolled\", % of names struck off": {
@@ -429,6 +430,12 @@
    "/hyderabad/method/"
   ]
  },
+ "<b>Across all states the removal rate goes most with {top} ({r}), but that does not hold within phase 2 ({r2}); it comes from phase 3 ({r3}).</b> In phase 3, {p3} are all related to the removal rate, because the large destination states of phase 3 are richer, more urban and home to more migrants than the North-Eastern states revised with them, and {n3} states cannot separate one of these from another. The Muslim share of a state's population shows no consistent relationship: {m1} across all states, {m2} in phase 2 and {m3} in phase 3. Among the larger states, the share entered as enrolled more than once goes most with {dup} ({rd}). None of this says who was removed within a state; a state-level relationship is not a finding about individuals.": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "<b>Across the five constituencies, {hindu} of Hindu-name electors were struck off, and {muslim} of Muslim-name electors.</b> Inside the same polling part the gap is {gap_min} to {gap_max} points, in the same direction in {higher} of {parts} parts large enough to compare.": {
   "kind": "script",
   "pages": [
@@ -445,6 +452,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/people/"
+  ]
+ },
+ "<b>In {over} of the {n} states with a split by sex, women are a larger share of the names removed than of the roll</b>, by up to {max} points in {maxs}. {even} are within a point of even, and {under} runs the other way, by {u} points. Most phase 3 states have published no split by sex, so this covers {n} of {all} states and cannot be taken as the national picture.": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "<b>In {over} of {seats} seats the revision removed more names than the 2025 winning margin.</b> Of those, {list}. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {tookOver} lost more names than the NDA's winning margin; in the median such seat the removals were {x} times the margin. The median seat lost {medRemoved} names; the median 2025 margin was {medMargin} votes.": {
@@ -493,6 +506,12 @@
   "kind": "markup",
   "pages": [
    "/bihar/method/"
+  ]
+ },
+ "<b>States on an international border removed fewer names, not more: a median of {y} per 100 electors across {ny} border states, against {n} across {nn} interior states.</b> The median share entered as dead is {dy} in border states and {dn} in the interior; enrolled more than once, {py} and {pn}.": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "<b>Statewide the range, {lo} to {hi}, contains the 2011 share of 16.87%. District by district it does not.</b> The census share lies inside the range in {inside} of {n} districts; in the other {over}, more Muslim-name electors were removed than the 2011 population share would predict, even counting none of the unclassified names. Most of those gaps are within the {growth}-point statewide rise in the Muslim share since 2011. <b>In {clear} districts they are not:</b> {list}. All {clear} lie in south and central Bihar, where Muslims are a small minority; there the lowest estimate runs {rmin} to {rmax}% above the population share. Muslims in Bihar are younger than average, so their share of <em>electors</em> is below their share of population, which would widen these gaps rather than close them. Migration into Patna and errors in name classification could narrow them.": {
@@ -1508,7 +1527,8 @@
  "Characteristic": {
   "kind": "script",
   "pages": [
-   "/bihar/districts/"
+   "/bihar/districts/",
+   "/india/"
   ]
  },
  "Chief Electoral Officer, Bihar, both phases": {
@@ -1644,6 +1664,12 @@
   "kind": "markup",
   "pages": [
    "/bihar/districts/"
+  ]
+ },
+ "Correlations are rank correlations across states, so a single very large or very small state moves them less than it would a linear correlation. They are still based on a few dozen states at most, and a state-level relationship says nothing about which people within a state were removed.": {
+  "kind": "markup",
+  "pages": [
+   "/india/method/"
   ]
  },
  "Could hearings be held properly?": {
@@ -1965,6 +1991,12 @@
    "/bihar/results/"
   ]
  },
+ "Difference, points": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Different scale and different denominators.": {
   "kind": "script",
   "pages": [
@@ -2257,6 +2289,12 @@
    "/hyderabad/parts/"
   ]
  },
+ "Each dot is a state, coloured by phase.": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Each group's possible share of all removals": {
   "kind": "markup",
   "pages": [
@@ -2305,10 +2343,23 @@
    "/india/method/"
   ]
  },
+ "Each state's removals per 100 electors, and the share of its removals entered as dead or as enrolled more than once, against its characteristics. The figures are rank correlations across states: 1 means the two rise together, 0 no relationship, and anything under 0.2 either way is read as none. Characteristics are from the 2011 census, except income per head (2023-24).": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Each state's removals split by the reason entered, as a share of the removals it has split. States are ordered by the share entered as shifted, absent or other.": {
   "kind": "markup",
   "pages": [
    "/india/"
+  ]
+ },
+ "Earlier roll": {
+  "kind": "script",
+  "pages": [
+   "/india/",
+   "/india/method/"
   ]
  },
  "Economic": {
@@ -2573,7 +2624,8 @@
  "Exact": {
   "kind": "script",
   "pages": [
-   "/india/"
+   "/india/",
+   "/india/method/"
   ]
  },
  "Export PDF": {
@@ -2643,7 +2695,8 @@
  "Figures": {
   "kind": "script",
   "pages": [
-   "/india/"
+   "/india/",
+   "/india/method/"
   ]
  },
  "Figures at the draft roll. <b>Rounded</b>: the state's figures were published in lakh or crore. <b>Short</b>: the reasons published leave some names unexplained. <b>None</b>: no split by reason was found. Sources for each row are on the <a href=\"method/\">method page</a>.": {
@@ -3723,6 +3776,7 @@
  "Lists": {
   "kind": "script",
   "pages": [
+   "/india/",
    "/india/method/"
   ]
  },
@@ -3862,7 +3916,8 @@
  "Men removed": {
   "kind": "script",
   "pages": [
-   "/"
+   "/",
+   "/india/"
   ]
  },
  "Men struck off": {
@@ -4018,7 +4073,8 @@
  "Muslim share": {
   "kind": "script",
   "pages": [
-   "/hyderabad/parts/"
+   "/hyderabad/parts/",
+   "/india/"
   ]
  },
  "Muslim share of a part against its deletion rate": {
@@ -4555,6 +4611,12 @@
   "kind": "script",
   "pages": [
    "/bihar/faq/"
+  ]
+ },
+ "Only some states have published their removals by sex, or their roll by sex before and after the draft. For each of them, women's share of the names removed beside women's share of the roll.": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
   ]
  },
  "Other": {
@@ -5128,6 +5190,12 @@
    "/hyderabad/"
   ]
  },
+ "Rank correlations with state characteristics": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Rank correlations: {list}.": {
   "kind": "script",
   "pages": [
@@ -5258,6 +5326,30 @@
   "kind": "script",
   "pages": [
    "/"
+  ]
+ },
+ "Removal rate against the share of residents born in another state": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "Removal rate, all states": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "Removal rate, phase 2": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "Removal rate, phase 3": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "Removals against the 2025 margin": {
@@ -5474,10 +5566,17 @@
    "/bihar/results/"
   ]
  },
- "Rounded": {
+ "Residents born in another state, % (2011, log scale)": {
   "kind": "script",
   "pages": [
    "/india/"
+  ]
+ },
+ "Rounded": {
+  "kind": "script",
+  "pages": [
+   "/india/",
+   "/india/method/"
   ]
  },
  "Rules, slots, daily load": {
@@ -5492,10 +5591,22 @@
    "/"
   ]
  },
+ "SC share": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "SIR deletions in Bihar's constituencies on the Nepal, West Bengal, Jharkhand and Uttar Pradesh borders, against the interior.": {
   "kind": "markup",
   "pages": [
    "/bihar/border/"
+  ]
+ },
+ "ST share": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "Search constituencies": {
@@ -5666,6 +5777,18 @@
   "kind": "markup",
   "pages": [
    "/hyderabad/people/"
+  ]
+ },
+ "Share dead": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "Share enrolled twice, larger states": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "Share of all names struck off": {
@@ -5876,6 +5999,12 @@
    "/india/method/"
   ]
  },
+ "Sources for the split by sex": {
+  "kind": "markup",
+  "pages": [
+   "/india/method/"
+  ]
+ },
  "Spans groups": {
   "kind": "script",
   "pages": [
@@ -5893,6 +6022,12 @@
   "kind": "script",
   "pages": [
    "/india/"
+  ]
+ },
+ "State characteristics": {
+  "kind": "markup",
+  "pages": [
+   "/india/method/"
   ]
  },
  "State or union territory": {
@@ -5981,6 +6116,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
+  ]
+ },
+ "Ten states have a split by sex: removals by sex where a state published them, or the roll by sex before the revision and on the draft, from which women removed is the difference. <b>Exact</b>: whole numbers from the Chief Electoral Officer or a count of the list. <b>Rounded</b>: published in lakh or crore. <b>Earlier roll</b>: the roll before the revision is an older one than the roll frozen for it. <b>Unverified</b>: from a press analysis that cites no primary source. Bihar is compared with women's share of the 2011 population, because its roll by sex is not in these sources.": {
+  "kind": "markup",
+  "pages": [
+   "/india/method/"
   ]
  },
  "The 2002 roll": {
@@ -6705,6 +6846,13 @@
    "/hyderabad/parts/"
   ]
  },
+ "Unverified": {
+  "kind": "script",
+  "pages": [
+   "/india/",
+   "/india/method/"
+  ]
+ },
  "Urban %": {
   "kind": "script",
   "pages": [
@@ -6716,6 +6864,12 @@
   "pages": [
    "/",
    "/bihar/districts/"
+  ]
+ },
+ "Urban share, literacy, SC and ST shares, sex ratio and population are from the 2011 census primary census abstract; the Muslim share from the 2011 religion tables; the two migration measures from the 2011 place-of-birth tables (born in the state and living in another, and living in the state and born in another, each as a share of the state's population). Telangana and Andhra Pradesh are rebuilt from their 2011 districts and have no migration figure, because the 2011 tables count a move between them as a move within one state. Income per head is per capita net state domestic product at current prices for 2023-24, from the Reserve Bank's handbook of state statistics; Lakshadweep and Dadra and Nagar Haveli and Daman and Diu have none. International borders are from the Ministry of Home Affairs.": {
+  "kind": "markup",
+  "pages": [
+   "/india/method/"
   ]
  },
  "Used for": {
@@ -6853,6 +7007,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/faq/"
+  ]
+ },
+ "What goes with the removal rate": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
   ]
  },
  "What happened to each elector?": {
@@ -7323,13 +7483,21 @@
  "Women among the removed": {
   "kind": "script",
   "pages": [
-   "/"
+   "/",
+   "/india/",
+   "/india/method/"
   ]
  },
  "Women among the removed, by district": {
   "kind": "markup",
   "pages": [
    "/bihar/people/"
+  ]
+ },
+ "Women among the removed, by state": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
   ]
  },
  "Women among those marked shifted": {
@@ -7389,7 +7557,8 @@
  "Women removed": {
   "kind": "script",
   "pages": [
-   "/"
+   "/",
+   "/india/"
   ]
  },
  "Women struck off": {
@@ -7464,6 +7633,18 @@
    "/hyderabad/"
   ]
  },
+ "Women, %": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "Women, % of names removed": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Women, % of population (2011)": {
   "kind": "script",
   "pages": [
@@ -7478,10 +7659,17 @@
    "/bihar/people/"
   ]
  },
+ "Women, % of roll": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Women, % of the roll": {
   "kind": "script",
   "pages": [
-   "/hyderabad/"
+   "/hyderabad/",
+   "/india/"
   ]
  },
  "Women, % of those marked shifted": {
@@ -7494,6 +7682,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Women, % removed": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "Women, and the religion the booth lists assign from each name. Unclassified names could belong to either.": {
@@ -7623,10 +7817,22 @@
    "/hyderabad/hearings/"
   ]
  },
+ "income per head": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "kept but summoned": {
   "kind": "script",
   "pages": [
    "/hyderabad/hearings/"
+  ]
+ },
+ "literacy": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "median hearing cases per part per slot": {
@@ -7853,6 +8059,24 @@
    "/bihar/results/"
   ]
  },
+ "sex ratio": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "share born here but living in another state": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "share of residents born in another state": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "spans groups": {
   "kind": "script",
   "pages": [
@@ -7885,10 +8109,22 @@
    "/hyderabad/"
   ]
  },
+ "urban share": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "women in Bihar’s population, 2011": {
   "kind": "script",
   "pages": [
    "/bihar/people/"
+  ]
+ },
+ "women's literacy": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "yes": {
@@ -8273,6 +8509,12 @@
   "kind": "script",
   "pages": [
    "/bihar/districts/"
+  ]
+ },
+ "{n}: {y} per 100, {x}% born elsewhere": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "{n}: {y}% of removals, {x}% of population": {

@@ -631,6 +631,31 @@ function india() {
   s = K.slide('All India', 'Every state and union territory, the remaining sixteen', 'Rounded: published in lakh or crore. Short: the reasons leave some names unexplained. No split: none found');
   K.table(s, TH, rows.slice(16).map(trow), M, TOP - 0.3, 12.8, TW, 11, [0, 7]);
 
+  const G = N.gender.slice().sort((a, b) => b.gap - a.gap), gOver = G.filter((g) => g.gap > 1), gUnder = G.filter((g) => g.gap < -1);
+  s = K.slide('All India', 'In ' + gOver.length + ' of the ' + G.length + ' states with a split by sex, women are a larger share of the removed than of the roll', 'Women\'s share of names removed and of the roll; most phase 3 states published no split by sex');
+  const gv = G.slice().reverse();
+  s.addChart(pres.charts.BAR, [
+    { name: 'Women, % of the roll', labels: gv.map((g) => g.state), values: gv.map((g) => g.women_share_roll) },
+    { name: 'Women, % of names removed', labels: gv.map((g) => g.state), values: gv.map((g) => g.women_share_removed) },
+  ], K.chart(Object.assign({}, K.left, { barDir: 'bar', barGrouping: 'clustered', chartColors: [GREY, 'AF3B6E'], showLegend: true, valAxisMinVal: 40, valAxisMaxVal: 60 })));
+  K.right(s, [
+    'Largest gap: ' + G[0].state + ', ' + G[0].gap.toFixed(1) + ' points; then ' + G[1].state + ' and ' + G[2].state + '.',
+    (gUnder.length ? gUnder.map((g) => g.state).join(' and ') + ' runs the other way, by ' + (-gUnder[0].gap).toFixed(1) + ' points.' : ''),
+    'Figures are exact for ' + G.filter((g) => g.quality === 'exact' || g.quality === 'lists').length + ' states; rounded, from an earlier roll or unverified for the rest. Bihar is compared with the 2011 population.',
+  ], 13);
+
+  const CR = N.correlations, CL = { income_pc: 'Income per head', urban_pct: 'Urban share', literacy: 'Literacy', female_literacy: 'Women\'s literacy', muslim_pct: 'Muslim share', sc_pct: 'SC share', st_pct: 'ST share', sex_ratio: 'Sex ratio', out_migration: 'Born here, living elsewhere', in_migration: 'Living here, born elsewhere' };
+  const ctop = CR.slice().sort((a, b) => Math.abs(b.per_100_all) - Math.abs(a.per_100_all))[0], cm = CR.find((c) => c.key === 'muslim_pct');
+  const fr = (v) => v == null ? '–' : v.toFixed(2);
+  s = K.slide('All India', 'The removal rate goes with in-migration across all states (' + fr(ctop.per_100_all) + '), but only because of phase 3; in phase 2 it is ' + fr(ctop.per_100_phase2), 'Rank correlations across states with each state\'s removals per 100 electors; under 0.2 either way is read as none');
+  K.table(s, ['Characteristic', 'All states', 'Phase 2', 'Phase 3', 'Share enrolled twice, larger states'], CR.slice().sort((a, b) => b.per_100_all - a.per_100_all).map((c) => [CL[c.key], fr(c.per_100_all), fr(c.per_100_phase2), fr(c.per_100_phase3), fr(c.duplicate_big)]), M, TOP - 0.3, 7.9, [2.9, 1.1, 1.1, 1.1, 1.7], 12);
+  K.right(s, [
+    'In phase 3 income, urban share, migration and the Muslim share rise together, because the large destination states are revised alongside the North-East. ' + ctop.n_per_100_phase3 + ' states cannot separate them.',
+    'Muslim share: ' + fr(cm.per_100_all) + ' across all states, ' + fr(cm.per_100_phase2) + ' in phase 2. No consistent relationship.',
+    'Border states removed fewer: a median of ' + N.border.per_100_yes.toFixed(1) + ' per 100 against ' + N.border.per_100_no.toFixed(1) + ' in the interior.',
+    'A state-level relationship says nothing about who was removed within a state.',
+  ], 12.5);
+
   s = K.slide('All India', 'After the draft, ' + (N.after_draft.removed / 1e5).toFixed(1) + ' lakh more names were removed in ' + N.after_draft.states + ' states, with no reason given', 'What the state figures show, and what they cannot');
   K.box(s, 'They show how many names each state left off its draft roll and the reason its officers entered: dead, shifted or absent (with "others" where reported), or enrolled more than once.', M, TOP - 0.4, 5.95, 2.1, 15);
   K.box(s, 'They cannot show whether an entry was right, or break removals down by sex, age or booth. Outside Bihar they are the states\' published totals, some rounded, gathered from press notes and reports.', 6.78, TOP - 0.4, 5.95, 2.1, 15);
