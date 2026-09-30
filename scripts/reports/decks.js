@@ -135,7 +135,7 @@ function closing(pres, K, P, head, lines) {
 
 // ============================================================ BIHAR
 function bihar() {
-  const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json'), FB = J('bihar/final.json'), TS = J('bihar/tests.json'), IM = J('bihar/impact.json');
+  const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json'), FB = J('bihar/final.json'), TS = J('bihar/tests.json'), IM = J('bihar/impact.json'), SW = J('bihar/swing.json').summary;
   const t = S.totals, DI = ID.districts;
   const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · Varna Sri Raman · totals only, never names or EPIC numbers' };
   const AL = { NDA: 'E67E22', INDIA: '1E8449', Other: '8E7CC3' };
@@ -250,6 +250,19 @@ function bihar() {
     K.stats(s, [[IB.over_100 + ' seats', 'where the runner-up could not have won even with every removed elector who would have voted'], [IB.under_55 + ' seats', 'where a lean of under 55% would have been enough: ' + andj(IM.close.map((x) => x.name))], [pct(c.NDA) + ' / ' + pct(c.INDIA), 'NDA and INDIA share of the removed, had they voted like their booths in 2024']], TOP, 1.9, 2, M, 6.2);
     K.right(s, ['Booth estimate: ' + IS.booth_lower.flips + ' to ' + IS.booth_upper.flips + ' seats change hands, ' + IS.booth_upper.to_india + ' to INDIA and ' + IS.booth_upper.to_nda + ' to the NDA on the fuller count (' + sl('booth_upper') + ').', 'Weighting by religion or by sex from the exit poll changes ' + IS.religion_upper.flips + ' and ' + IS.sex_upper.flips + ' seats' + (IS.religion_upper.to_india + IS.sex_upper.to_india === 0 ? ', all to the NDA.' : '.'), 'The NDA keeps its majority on every estimate.'], 12.5);
     s.addNotes('Low count: names still off the final roll, less those entered as dead, at each seat\'s 2025 turnout. High count: every name removed, with nothing added back. Booth estimate: each removed elector votes like their own booth in the 2024 Lok Sabha election. Group estimates: ' + IM.poll_source + '. Seats where the winner or runner-up is outside the two alliances get the break-even figure only. Balrampur (LJP(RV) over AIMIM by 389) and Ramgarh (BSP over BJP by 30) are close seats outside the estimates.');
+  }
+  {
+    const T = SW.thirds, w = SW.within.lead, sg = (v) => (v > 0 ? '+' : '') + v.toFixed(1);
+    const nd = T.map((x) => x.d_nda);
+    s = K.slide('Elections', 'From 2020 to 2025 the NDA parties gained ' + Math.min(...nd).toFixed(1) + ' to ' + Math.max(...nd).toFixed(1) + ' points of the vote whether a seat lost few names or many', 'Did the vote move where more names were removed? Seats in thirds by names removed per 100 electors, parties grouped as in 2025');
+    K.table(s, ['Seats', 'Removed per 100', 'NDA share', 'INDIA share', 'Votes cast'],
+      T.map((x, i) => [['Fewest removals', 'Middle', 'Most removals'][i] + ' (' + x.n + ')', x.per_100.toFixed(1), sg(x.d_nda), sg(x.d_india), sg(x.votes_growth) + '%']), M, TOP, 7.7, [2.3, 1.6, 1.3, 1.3, 1.2], 13);
+    K.right(s, [
+      'INDIA lost the most where the fewest names were removed (' + sg(T[0].d_india) + ' against ' + sg(T[2].d_india) + ' points).',
+      'Within each district, an extra name removed per 100 electors went with ' + sg(w.slope) + ' points on the NDA\'s lead, most likely between ' + sg(w.lo) + ' and ' + sg(w.hi) + '.',
+      'Had the removed who would have voted all been against the NDA, its lead should have grown about ' + SW.scenario_all_against.toFixed(2) + ' points more per extra name removed. The results show no sign of it.',
+      'This says nothing about whether each name was rightly removed.'], 12.5);
+    s.addNotes('Candidate-wise Assembly results for 2020 and 2025 from the Election Commission. NDA in both years: BJP, JD(U), LJP(RV) (LJP in 2020), HAM(S), RLM (RLSP in 2020). INDIA: RJD, INC, CPI(ML)L, CPI, CPI(M), VIP, IIP. Shares are of all votes including NOTA. The within-district slope uses a dummy for each of the 38 districts, with robust standard errors, interval two either side. The scenario assumes ' + SW.alive_share.toFixed(0) + '% of the removed were alive, as the phase 1 reasons give, and that they would have voted at the seat\'s turnout. A small lean either way would not show; five years, LJP rejoining the NDA, VIP changing sides and Jan Suraaj entering all lie between the two elections.');
   }
   s = K.slide('Elections', lakh(t.total) + ' names removed, against a combined NDA winning margin of ' + lakh(mNDA), 'Names removed set against the sum of the winning margins in each group of seats, in lakh');
   const grp = ['All ' + withM.length + ' seats', 'The NDA\'s ' + nda.length + ' wins', 'The ' + took.length + ' seats the NDA took from INDIA'];

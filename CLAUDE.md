@@ -13,7 +13,7 @@ publishes it to GitHub Pages.
 pip install pandas==3.0.6 openpyxl==3.1.5
 python3 scripts/build_bihar.py          # rebuild data/bihar from data/bihar/raw
 python3 scripts/build_hyderabad.py      # rebuild data/hyderabad from the explorer
-python3 scripts/check_data.py           # 17 checks, run by CI; rebuilds both with --check
+python3 scripts/check_data.py           # 18 checks, run by CI; rebuilds both with --check
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
 python3 -m http.server 8000
 ```
@@ -161,6 +161,22 @@ estimate; 4 to 6 seats change hands, both ways; the NDA keeps 200 to 204.
 point the other way. Hyderabad gets break-even against 2023 and the religion
 of the removed only; its runner-ups (Yakutpura's MBT) draw on the same voters
 as AIMIM, so no split by religion is assumed.
+
+`scripts/build_swing.py` sets each seat's change in vote share from 2020 to
+2025 against its removals per 100 electors and writes `data/bihar/swing.json`.
+Its input, `data/bihar/raw/ae_party_votes_2020_2025.csv`, is the
+candidate-wise result pooled by party, with NOTA and electors, for every seat
+in both years; the build asserts the 2025 figures equal the declared result.
+Both years use the 2025 line-up (LJP and RLSP count as NDA in 2020, VIP as
+INDIA). Findings: the NDA parties gained 2.9 to 4.1 points in every third of
+seats by removals, INDIA lost most where removals were lowest, and within
+district the NDA's lead moved -0.83 points per extra removal per 100
+(interval -1.86 to +0.20), short of the +0.33 to +0.66 an anti-NDA pattern
+would give. **Say what this is**: no sign that the removals moved votes
+between the alliances, which is a separate finding from whether the removals
+were accurate. Never present it as the revision being clean. The same file
+corrected Gaighat's 2020 margin (7,566; the booth file had 22,927) in
+`build_bihar.py`.
 
 ## Hyderabad
 
