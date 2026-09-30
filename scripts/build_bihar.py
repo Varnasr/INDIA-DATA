@@ -471,7 +471,50 @@ def r(x, n=2):
     return None if pd.isna(x) else round(float(x), n)
 
 
+# ----------------------------------------------------------------- reasons
+# The reason the officer entered against each phase 1 removal: dead, shifted,
+# absent or already enrolled. Counted from the row-level list by
+# scripts/aggregate_bihar_reasons.py, which keeps counts only. Phase 2
+# removals (3,51,150) carry no reason in any file used here.
+REASONS = ['dead', 'shifted', 'absent', 'already_enrolled']
+
+
+def load_reasons():
+    rb = pd.read_csv(os.path.join(RAW, 'reasons_by_booth.csv.gz'))
+    ra = pd.read_csv(os.path.join(RAW, 'reasons_by_ac.csv.gz'))
+    assert set(rb.reason) <= set(REASONS) and set(ra.reason) <= set(REASONS), 'unknown reason code'
+    assert int(rb['count'].sum()) == 6559626 == int(ra['count'].sum()), 'reason totals moved'
+    wide = rb.pivot_table(index=['ac', 'jan_part'], columns='reason', values='count', aggfunc='sum').reindex(columns=REASONS).fillna(0).astype(int)
+    return wide.reset_index().rename(columns={'jan_part': 'booth'}), ra
+
+
+def reasons_summary(ra, a):
+    """Statewide, by sex, by age band and by district; phase 1 only."""
+    tot = ra.groupby('reason')['count'].sum().reindex(REASONS)
+    sx = ra.pivot_table(index='reason', columns='sex', values='count', aggfunc='sum').reindex(REASONS).fillna(0)
+    ag = ra.pivot_table(index='age_band', columns='reason', values='count', aggfunc='sum').reindex(columns=REASONS).fillna(0)
+    agf = ra[ra.sex == 'F'].pivot_table(index='age_band', columns='reason', values='count', aggfunc='sum').reindex(columns=REASONS).fillna(0)
+    bands = ['18-24', '25-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80+']
+    ag, agf = ag.reindex(bands).fillna(0), agf.reindex(bands).fillna(0)
+    d = a.groupby('district')[['r_' + k for k in REASONS]].sum()
+    return {
+        'phase': 1, 'total': int(tot.sum()),
+        'totals': {k: int(tot[k]) for k in REASONS},
+        'by_sex': {k: {sx_: int(sx.loc[k, sx_]) for sx_ in ['F', 'M', 'T'] if sx_ in sx.columns} for k in REASONS},
+        'bands': bands,
+        'by_age': {k: [int(v) for v in ag[k]] for k in REASONS},
+        'by_age_women': {k: [int(v) for v in agf[k]] for k in REASONS},
+        'districts': [{'district': dn, **{k: int(v['r_' + k]) for k in REASONS}} for dn, v in d.sort_index().iterrows()],
+    }
+
+
 def outputs(booth, a, report):
+    rb, ra = load_reasons()
+    booth = booth.merge(rb, on=['ac', 'booth'], how='left')
+    assert booth[REASONS].notna().all().all(), 'a booth has no reason counts'
+    assert (booth[REASONS].sum(axis=1) == booth.deleted).all(), 'reasons do not add up to a booth\'s removals'
+    ac_r = booth.groupby('ac')[REASONS].sum().add_prefix('r_').reset_index()
+    a = a.merge(ac_r, on='ac', how='left')
     acs = []
     for _, x in a.sort_values('ac').iterrows():
         acs.append({
@@ -491,6 +534,7 @@ def outputs(booth, a, report):
             'margin2025': None if pd.isna(x.margin2025) else int(x.margin2025), 'margin2025_pct': r(x.margin2025_pct, 2),
             'votes2025': int(x.votes2025), 'turnout2025': r(x.turnout2025, 1),
             'winner_votes2025': int(x.winner_votes2025), 'runner_up_votes2025': int(x.runner_up_votes2025),
+            'r_dead': int(x.r_dead), 'r_shifted': int(x.r_shifted), 'r_absent': int(x.r_absent), 'r_enrolled': int(x.r_already_enrolled),
         })
 
     # booth files, one per constituency, loaded on demand
@@ -498,10 +542,11 @@ def outputs(booth, a, report):
     os.makedirs(bdir, exist_ok=True)
     for ac, g in booth.sort_values(['ac', 'booth']).groupby('ac'):
         recs = [[int(b.booth), int(b.deleted), b.lead24 if isinstance(b.lead24, str) else None,
-                 r(b.lead24_margin, 1), int(b.f), int(b.m), int(b.hindu), int(b.muslim), int(b.unknown)]
+                 r(b.lead24_margin, 1), int(b.f), int(b.m), int(b.hindu), int(b.muslim), int(b.unknown),
+                 int(b.dead), int(b.shifted), int(b.absent), int(b.already_enrolled)]
                 for b in g.itertuples()]
         write(os.path.join(bdir, 'ac_%03d.json' % ac),
-              {'fields': ['booth', 'deleted', 'lead2024', 'lead_margin_pp', 'female', 'male', 'hindu', 'muslim', 'unknown'], 'rows': recs})
+              {'fields': ['booth', 'deleted', 'lead2024', 'lead_margin_pp', 'female', 'male', 'hindu', 'muslim', 'unknown', 'dead', 'shifted', 'absent', 'already_enrolled'], 'rows': recs})
 
     # state summary
     bins = [0, 50, 100, 150, 200, 250, 300, 400, 10**6]
@@ -534,6 +579,7 @@ def outputs(booth, a, report):
     write(os.path.join(OUT, 'identity.json'), {'caste': caste_estimates(), 'districts': district_identity(a),
                                                'survey_baseline': SURVEY})
     write(os.path.join(OUT, 'summary.json'), summary)
+    write(os.path.join(OUT, 'reasons.json'), reasons_summary(ra, a))
 
 
 def write(path, obj):

@@ -148,6 +148,12 @@
    "/hyderabad/"
   ]
  },
+ "% of the district's phase 1 removals": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "% of the part struck off": {
   "kind": "script",
   "pages": [
@@ -164,6 +170,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "% of the removed in each age band": {
+  "kind": "script",
+  "pages": [
+   "/"
   ]
  },
  "% of the roll linked to 2002": {
@@ -387,6 +399,12 @@
    "/bihar/method/"
   ]
  },
+ "80 and over": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "80+ deleted %": {
   "kind": "markup",
   "pages": [
@@ -459,6 +477,12 @@
    "/bihar/people/"
   ]
  },
+ "<b>The names marked absent alone exceed the 2025 margin in {absent} of {seats} seats</b>, and the names marked already enrolled elsewhere in {enrolled}. These are the two reasons that rest on the least: an absent entry records that the elector was not found, and a duplicate entry is only a removal if the other entry is the same person. The names marked shifted exceed the margin in {shifted} seats and the dead in {dead}.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "<b>The older the elector, the likelier the removal, in every constituency.</b> Between {hi_min} and {hi_max} of electors aged 80 and over were struck off, against {lo_min} to {lo_max} of those aged 18 to 24. Death accounts for part of the top of the range; the recorded reasons are on the <a href=\"../\">overview</a>.": {
   "kind": "script",
   "pages": [
@@ -477,7 +501,7 @@
    "/hyderabad/people/"
   ]
  },
- "<b>Women were removed out of proportion in {a} of {b} districts</b>, by {lo} to {hi} points above their share of the population. Sex is recorded on the roll, so this needs no inference from names. Women who moved on marriage and were marked \"shifted\" at their parents' address are likely part of it; the lists do not show whether any of them were enrolled again where they now live.": {
+ "<b>Women were removed out of proportion in {a} of {b} districts</b>, by {lo} to {hi} points above their share of the population. Sex is recorded on the roll, so this needs no inference from names. Phase 1 removed {xs} more women than men, and {xs_shifted} of that difference were entered as shifted. Among those marked shifted aged 18 to 29, {young} are women, the pattern that women moving on marriage would produce. The lists do not show whether any of them were enrolled again where they now live.": {
   "kind": "script",
   "pages": [
    "/bihar/people/"
@@ -564,6 +588,12 @@
    "/"
   ]
  },
+ "A reason is the officer's entry after a visit or its absence, not a finding. The lists do not show whether a removal was right, or whether anyone marked shifted was enrolled again where they now live.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "A red bar longer than its grey pair means the region's share of removals exceeds its share of the electorate.": {
   "kind": "script",
   "pages": [
@@ -593,6 +623,15 @@
   "kind": "script",
   "pages": [
    "/"
+  ]
+ },
+ "Absent": {
+  "kind": "script",
+  "pages": [
+   "/",
+   "/bihar/",
+   "/bihar/people/",
+   "/bihar/results/"
   ]
  },
  "Across 38 districts, the rank correlation between per-capita district product and removals per 100 electors is {rho}. <a href=\"../districts/\">Districts</a>.": {
@@ -638,8 +677,10 @@
   ]
  },
  "Age": {
-  "kind": "markup",
+  "kind": "script",
   "pages": [
+   "/",
+   "/bihar/people/",
    "/hyderabad/people/"
   ]
  },
@@ -747,6 +788,12 @@
    "/hyderabad/explorer/"
   ]
  },
+ "All phase 1 removals": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "All polling parts": {
   "kind": "script",
   "pages": [
@@ -787,6 +834,21 @@
   "kind": "markup",
   "pages": [
    "/bihar/results/"
+  ]
+ },
+ "Already enrolled": {
+  "kind": "script",
+  "pages": [
+   "/",
+   "/bihar/",
+   "/bihar/people/",
+   "/bihar/results/"
+  ]
+ },
+ "Among the removed aged 80 and over, {old} were entered as dead; among those aged 18 to 24, {youngdead}. The young were mostly marked shifted or absent.": {
+  "kind": "script",
+  "pages": [
+   "/"
   ]
  },
  "An elector kept on the draft roll could still be summoned to a hearing to prove eligibility. Seven Election Commission rules send someone to a hearing. This page counts who was summoned, under which rule, and how many cases were listed for each sitting.": {
@@ -1545,6 +1607,10 @@
  "Dead": {
   "kind": "script",
   "pages": [
+   "/",
+   "/bihar/",
+   "/bihar/people/",
+   "/bihar/results/",
    "/hyderabad/"
   ]
  },
@@ -1835,6 +1901,18 @@
    "/bihar/method/"
   ]
  },
+ "Do the reasons alone exceed the margins?": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "Do the reasons differ for women and men?": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "Does \"untraceable\" cluster in the heaviest parts?": {
   "kind": "script",
   "pages": [
@@ -2052,10 +2130,22 @@
    "/hyderabad/faq/"
   ]
  },
+ "Each name on the phase 1 lists carries the reason the officer entered for its removal. The four reasons are counted as written, with no reclassification. The counts agree with the booth list in every one of the 77,837 booths, and the counts of women and men agree with the Chief Electoral Officer's phase 1 figures in every constituency. The phase 2 lists carry no reason.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
+  ]
+ },
  "Each panel sets the district deletion rate against one characteristic. r is the linear correlation, ρ the rank correlation; both run from −1 to 1.": {
   "kind": "markup",
   "pages": [
    "/bihar/districts/"
+  ]
+ },
+ "Each reason for removal, on its own, against the margin": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "Each removed elector's name classified as Hindu, Muslim or unclassified, counted by booth and sex": {
@@ -2826,6 +2916,12 @@
    "/bihar/method/"
   ]
  },
+ "How do the reasons change with age?": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "How does Hyderabad compare with Bihar?": {
   "kind": "script",
   "pages": [
@@ -3461,6 +3557,18 @@
    "/bihar/results/"
   ]
  },
+ "Marked absent": {
+  "kind": "script",
+  "pages": [
+   "/bihar/"
+  ]
+ },
+ "Marked already enrolled": {
+  "kind": "script",
+  "pages": [
+   "/bihar/"
+  ]
+ },
  "Matches": {
   "kind": "script",
   "pages": [
@@ -3815,6 +3923,12 @@
    "/bihar/method/"
   ]
  },
+ "Names entered as absent alone exceed the 2025 margin in {a} of {m} seats, and names entered as already enrolled in {e}.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "Names or votes": {
   "kind": "script",
   "pages": [
@@ -3898,6 +4012,12 @@
   ]
  },
  "Names removed, both phases": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "Names removed, phase 1": {
   "kind": "script",
   "pages": [
    "/"
@@ -4091,6 +4211,12 @@
    "/hyderabad/method/"
   ]
  },
+ "Not most. The phase 1 list records a reason against every one of the {removed} names: {shifted} were entered as permanently shifted, {dead} as dead, {absent} as absent and {enrolled} as already enrolled elsewhere. A reason is what an officer entered after a visit or its absence, not a finding. Someone marked \"shifted\" may have been away for work at the time of the visit; someone marked \"absent\" may have been at home. The {absent_n} marked absent rest on the least evidence of the four, and are where checking should start. The phase 2 removals carry no reason in the lists.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/faq/"
+  ]
+ },
  "Of all removals were in border seats": {
   "kind": "script",
   "pages": [
@@ -4148,7 +4274,8 @@
  "Other": {
   "kind": "script",
   "pages": [
-   "/bihar/people/"
+   "/bihar/people/",
+   "/bihar/results/"
   ]
  },
  "Outlying parts": {
@@ -4702,6 +4829,43 @@
    "/hyderabad/"
   ]
  },
+ "Reason entered by the officer": {
+  "kind": "script",
+  "pages": [
+   "/",
+   "/bihar/results/"
+  ]
+ },
+ "Reason for each removal": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
+  ]
+ },
+ "Reason, sex and age of every phase 1 removal: counts from the row-level deletion list, by booth; no individual records.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "Reasons": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "Reasons are read as entered": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
+  ]
+ },
+ "Reasons for removal, by sex, age, district and seat": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
+  ]
+ },
  "Reasons recorded": {
   "kind": "script",
   "pages": [
@@ -5114,6 +5278,12 @@
    "/"
   ]
  },
+ "Seats where these removals exceed the 2025 margin": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "Seats where they exceed all valid votes cast": {
   "kind": "script",
   "pages": [
@@ -5223,6 +5393,21 @@
   ]
  },
  "Shares of the removals each classification could place, beside the 2023 survey (Hindu castes; Muslims as one group).": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "Shifted": {
+  "kind": "script",
+  "pages": [
+   "/",
+   "/bihar/",
+   "/bihar/people/",
+   "/bihar/results/"
+  ]
+ },
+ "Shifted or absent": {
   "kind": "script",
   "pages": [
    "/"
@@ -5431,12 +5616,6 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
-  ]
- },
- "The Commission's own categories for the phase 1 list were the dead, the permanently shifted or absent, and those enrolled in more than one place. The lists used here do not carry the category against each name, so they cannot say how many in each were rightly removed. A category is what an officer entered after a visit or its absence, not a finding. Someone marked \"shifted\" may have been away for work at the time of the visit; someone marked \"absent\" may have been at home. That is why the case here is for verification: the {removed} removals are large enough that the accuracy of those entries decides elections.": {
-  "kind": "script",
-  "pages": [
-   "/bihar/faq/"
   ]
  },
  "The Malakpet list used here holds {held} struck-off names; an independent count of the published Malakpet list gives 1,47,799, so about 5,100 names are missing from this copy.": {
@@ -5719,13 +5898,13 @@
    "/hyderabad/"
   ]
  },
- "The lists show how many names were removed, from which booths, and who the removed were by sex and by name, and they allow the removals to be set against the margins that decided each seat. They do not show why an individual name was removed, whether the removal was right, or how the elector voted; religion and caste are read from names and are estimates. Those questions can be settled only by a name-by-name verification, starting with the constituencies where the removals exceed the winning margin. <a href=\"../faq/\">Questions and answers</a>.": {
+ "The lists show how many names were removed, from which booths, and who the removed were by sex and by name, and they allow the removals to be set against the margins that decided each seat. They also record the reason an officer entered against each phase 1 removal. They do not show whether that reason was true of the person, whether the removal was right, or how the elector voted; religion and caste are read from names and are estimates. Those questions can be settled only by a name-by-name verification, starting with the constituencies where the removals exceed the winning margin. <a href=\"../faq/\">Questions and answers</a>.": {
   "kind": "markup",
   "pages": [
    "/bihar/method/"
   ]
  },
- "The lists show how many names were removed, where, and who the removed were by sex and by name, and they allow the removals to be set against the margins that decided each seat. They do not show why an individual name was removed, whether the removal was right, or how the elector voted. A name-by-name verification, starting with the seats where removals exceed the margin, would settle those questions.": {
+ "The lists show how many names were removed, where, who the removed were by sex, age and name, and the reason the officer entered against each phase 1 removal, and they allow the removals to be set against the margins that decided each seat. They do not show whether a removal was right or how the elector voted. A name-by-name verification, starting with the seats where removals exceed the margin, would settle those questions.": {
   "kind": "script",
   "pages": [
    "/"
@@ -5747,6 +5926,18 @@
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
+  ]
+ },
+ "The officer entered a reason against every phase 1 removal: {shifted} shifted, {dead} dead, {absent} absent and {enrolled} already enrolled elsewhere. Of the {excess} more women than men removed, {exshift} ({exshare}) were entered as shifted, and among those marked shifted aged 18 to 29, {young} are women. That is the pattern women who move on marriage would produce.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "The officer entered one of four reasons against every phase 1 removal. For each reason and age group, the share of those removed who were women. Half is parity.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/people/"
   ]
  },
  "The old and those with no link to the 2002 roll. {old} of electors aged 80 and over were struck off; unlinked electors were struck off {lo} to {hi} points more often than linked electors in the same part.": {
@@ -5779,6 +5970,12 @@
    "/bihar/method/"
   ]
  },
+ "The phase 1 list records the reason the officer entered against every name. Here each reason is taken alone: the number of seats where the names removed for that one reason exceed the 2025 margin, by the alliance that won.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "The questions most often put to this analysis, and what the lists say in reply.": {
   "kind": "markup",
   "pages": [
@@ -5802,6 +5999,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
+  ]
+ },
+ "The reason the officer entered against every name on the phase 1 lists (dead, permanently shifted, absent, already enrolled), counted by constituency, booth, sex and age; counts only, no individual records": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
   ]
  },
  "The removals were larger than the margins that decided most seats. In {tookOver} of the {took} seats the NDA took from INDIA, more names were removed than the NDA won by. The lists do not say how the removed would have voted; a name-by-name audit of these seats would.": {
@@ -6243,6 +6446,12 @@
    "/hyderabad/method/"
   ]
  },
+ "What reasons were entered?": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "What the lists do show is who carried the burden: the old, and those who could not be traced to the 2002 roll. <a href=\"../people/\">Age, sex, religion, 2002</a>.": {
   "kind": "script",
   "pages": [
@@ -6379,6 +6588,12 @@
    "/"
   ]
  },
+ "Which districts have the most absent entries?": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "Which districts lost the most per elector?": {
   "kind": "script",
   "pages": [
@@ -6480,6 +6695,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Who is marked shifted, by age?": {
+  "kind": "script",
+  "pages": [
+   "/"
   ]
  },
  "Who is on the rolls?": {
@@ -6635,6 +6856,12 @@
    "/bihar/people/"
   ]
  },
+ "Women among those marked shifted": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "Women and men": {
   "kind": "markup",
   "pages": [
@@ -6659,10 +6886,16 @@
    "/"
   ]
  },
- "Women are {share} of those removed and 47.86% of the population, and their share of the removed is higher than their share of the population in {over} of {districts} districts. Sex is recorded on the roll, so this rests on no estimate. Women who moved on marriage and were marked \"shifted\" at their parents' address are likely a large part of it. The lists do not show whether any of them were enrolled again where they now live; if they were not, they have lost the vote.": {
+ "Women are {share} of those removed and 47.86% of the population, and their share of the removed is higher than their share of the population in {over} of {districts} districts. Sex is recorded on the roll, so this rests on no estimate. Phase 1 removed {xs} more women than men, and {xs_shifted} of that difference were entered as shifted. Among those marked shifted aged 18 to 29, {young} are women, the pattern that women moving on marriage would produce. The lists do not show whether any of them were enrolled again where they now live; if they were not, they have lost the vote.": {
   "kind": "script",
   "pages": [
    "/bihar/faq/"
+  ]
+ },
+ "Women are {y} of those aged 18 to 29 marked shifted, and about half of those aged 50 and over.": {
+  "kind": "script",
+  "pages": [
+   "/"
   ]
  },
  "Women deleted %": {
@@ -6719,6 +6952,12 @@
    "/hyderabad/people/"
   ]
  },
+ "Women's share of each reason, by age": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/people/"
+  ]
+ },
  "Women's share of removals by the alliance that won the seat in 2025: {list}.": {
   "kind": "script",
   "pages": [
@@ -6767,6 +7006,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Women, % of those marked shifted": {
+  "kind": "script",
+  "pages": [
+   "/"
   ]
  },
  "Women, % of those struck off": {
@@ -7295,6 +7540,12 @@
    "/bihar/people/"
   ]
  },
+ "{exshift} of the {excess} more women than men removed were entered as shifted; dead, absent and already enrolled are close to even.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "{f} against deletions per 100 electors": {
   "kind": "script",
   "pages": [
@@ -7332,6 +7583,12 @@
   ]
  },
  "{list} carry the largest shares of the state's removals.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "{list} have the highest share entered as absent. An absent entry rests on the elector not being found, and is where checking should start.": {
   "kind": "script",
   "pages": [
    "/"
@@ -7468,6 +7725,12 @@
   "pages": [
    "/hyderabad/method/",
    "/hyderabad/parts/"
+  ]
+ },
+ "{n} names removed in phase 1, each with the reason the officer entered. The {p2} removed in phase 2 carry no reason in the lists.": {
+  "kind": "script",
+  "pages": [
+   "/"
   ]
  },
  "{n} seat": {

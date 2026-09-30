@@ -140,7 +140,8 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
       { k: 'name', label: L('Constituency'), left: true, fmt: function (v, a) { return SIR.esc(a.ac + ' ' + v); } }, { k: 'district', label: L('District'), left: true },
       { k: 'total', label: L('Removed'), fmt: SIR.n }, { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 2); } },
       { k: 'fem', label: L('Women %'), fmt: function (v) { return SIR.d(v, 1); } }, { k: 'win2025', label: L('2025 winner'), left: true, fmt: function (v, a) { return SIR.esc(v) + ' ' + tag(a.al2025); } },
-      { k: 'margin2025', label: L('2025 margin'), fmt: SIR.n }, { k: 'xm', label: L('Removed ÷ margin'), fmt: function (v) { return SIR.d(v, 1); } }],
+      { k: 'margin2025', label: L('2025 margin'), fmt: SIR.n }, { k: 'xm', label: L('Removed ÷ margin'), fmt: function (v) { return SIR.d(v, 1); } },
+      { k: 'r_absent', label: L('Marked absent'), fmt: SIR.n }, { k: 'r_enrolled', label: L('Marked already enrolled'), fmt: SIR.n }],
       acs.map(function (a) { return Object.assign({}, a, { fem: 100 * a.t_f / (a.t_f + a.t_m), xm: a.margin2025 ? a.total / a.margin2025 : null }); }),
       { sort: 'xm', id: 'ac', onRow: function (id) { go(+id); } });
   }
@@ -179,7 +180,8 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     document.getElementById('tblTitle').textContent = L('All {n} booths in {name}', { n: rows.length, name: a.name });
     SIR.table(document.getElementById('tbl'), [
       { k: 'booth', label: L('Booth'), left: true }, { k: 'deleted', label: L('Removed'), fmt: SIR.n }, { k: 'female', label: L('Women'), fmt: SIR.n },
-      { k: 'muslim', label: L('Muslim names'), fmt: SIR.n }, { k: 'lead2024', label: L('2024 leader'), left: true, fmt: function (v) { return v ? SIR.esc(v) : '–'; } },
+      { k: 'muslim', label: L('Muslim names'), fmt: SIR.n }, { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'shifted', label: L('Shifted'), fmt: SIR.n }, { k: 'absent', label: L('Absent'), fmt: SIR.n }, { k: 'already_enrolled', label: L('Already enrolled'), fmt: SIR.n },
+      { k: 'lead2024', label: L('2024 leader'), left: true, fmt: function (v) { return v ? SIR.esc(v) : '–'; } },
       { k: 'lead_margin_pp', label: L('Lead, points'), fmt: function (v) { return SIR.d(v, 1); } }], rows, { sort: 'deleted' });
     document.getElementById('main').scrollIntoView({ block: 'start' });
   }

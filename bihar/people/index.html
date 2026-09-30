@@ -39,6 +39,11 @@
       <p>Women's share of removals in each group of seats.</p>
       <div class="chart"><canvas id="cGenderAl" aria-label="Women's share of removals by 2025 alliance"></canvas></div>
     </div>
+    <div class="panel wide">
+      <h3>Women's share of each reason, by age</h3>
+      <p>The officer entered one of four reasons against every phase 1 removal. For each reason and age group, the share of those removed who were women. Half is parity.</p>
+      <div class="chart"><canvas id="cGenderReason" aria-label="Women's share of removals for each reason, by age group"></canvas></div>
+    </div>
   </div>
   <p class="finding" id="fGender"></p>
 
@@ -85,7 +90,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../../assets/sir.js"></script>
 <script>
-Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/summary.json')]).then(function (r) {
+Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/reasons.json')]).then(function (r) {
+  var RS = r[3];
   var id = r[0], acs = r[1], s = r[2], D = id.districts, t = s.totals;
   // ---- gender
   var fs = 100 * t.female / (t.female + t.male), popF = 47.86;
@@ -101,8 +107,13 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
   var G = SIR.groupBy(acs, 'al2025'), als = ['NDA', 'INDIA', 'Other'], ALN = { Other: L('Other') };
   SIR.chart('cGenderAl', { type: 'bar', data: { labels: als.map(function (a) { return (ALN[a] || a) + ' (' + G[a].length + ')'; }), datasets: [{ label: L('Women %'), data: als.map(function (a) { return 100 * SIR.sum(G[a], 't_f') / (SIR.sum(G[a], 't_f') + SIR.sum(G[a], 't_m')); }), $tokens: als.map(function (a) { return SIR.alliance[a]; }) }] },
     options: { plugins: { legend: { display: false } }, scales: { y: { min: 40, title: { display: true, text: L('Women, % of removals') } } } } });
+  var RK = ['shifted', 'absent', 'already_enrolled', 'dead'], RN = { dead: L('Dead'), shifted: L('Shifted'), absent: L('Absent'), already_enrolled: L('Already enrolled') }, RC = { dead: '--muted', shifted: '--navy', absent: '--red', already_enrolled: '--amber' };
+  SIR.chart('cGenderReason', { type: 'line', data: { labels: RS.bands, datasets: RK.map(function (k) { return { label: RN[k], data: RS.by_age[k].map(function (v, i) { return +(100 * RS.by_age_women[k][i] / v).toFixed(1); }), $token: RC[k], borderWidth: 2, pointRadius: 3, borderDash: k === 'dead' ? [4, 4] : undefined }; }) },
+    options: { scales: { x: { title: { display: true, text: L('Age') } }, y: { min: 40, max: 80, title: { display: true, text: L('Women, % of removals') } } } } });
+  var xsF = SIR.sum(RK, function (k) { return RS.by_sex[k].F - RS.by_sex[k].M; }), xsS = RS.by_sex.shifted.F - RS.by_sex.shifted.M;
+  var yS = RS.by_age.shifted[0] + RS.by_age.shifted[1], yW = RS.by_age_women.shifted[0] + RS.by_age_women.shifted[1];
   var gaps = D.map(function (d) { return d.female_share_deleted - d.female_share_population_2011; });
-  document.getElementById('fGender').innerHTML = L('<b>Women were removed out of proportion in {a} of {b} districts</b>, by {lo} to {hi} points above their share of the population. Sex is recorded on the roll, so this needs no inference from names. Women who moved on marriage and were marked "shifted" at their parents\' address are likely part of it; the lists do not show whether any of them were enrolled again where they now live.', { a: above, b: D.length, lo: SIR.d(Math.min.apply(null, gaps), 1), hi: SIR.d(Math.max.apply(null, gaps), 1) });
+  document.getElementById('fGender').innerHTML = L('<b>Women were removed out of proportion in {a} of {b} districts</b>, by {lo} to {hi} points above their share of the population. Sex is recorded on the roll, so this needs no inference from names. Phase 1 removed {xs} more women than men, and {xs_shifted} of that difference were entered as shifted. Among those marked shifted aged 18 to 29, {young} are women, the pattern that women moving on marriage would produce. The lists do not show whether any of them were enrolled again where they now live.', { xs: SIR.n(xsF), xs_shifted: SIR.n(xsS), young: SIR.pct(100 * yW / yS), a: above, b: D.length, lo: SIR.d(Math.min.apply(null, gaps), 1), hi: SIR.d(Math.max.apply(null, gaps), 1) });
 
   // ---- religion
   var cls = t.hindu + t.muslim + t.unknown, lo = 100 * t.muslim / cls, hi = 100 * (t.muslim + t.unknown) / cls;

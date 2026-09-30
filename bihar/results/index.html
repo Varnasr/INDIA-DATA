@@ -35,8 +35,15 @@
   </div>
   <p class="finding" id="fMargin"></p>
   <div class="twrap" tabindex="0" role="region" aria-label="Seats where deletions exceed the margin"><table id="tMargin"></table></div>
+  <h3 style="margin-top:1.5rem">Each reason for removal, on its own, against the margin</h3>
+  <p class="sub">The phase 1 list records the reason the officer entered against every name. Here each reason is taken alone: the number of seats where the names removed for that one reason exceed the 2025 margin, by the alliance that won.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart"><canvas id="cMarginR" aria-label="Seats where the names removed for one reason exceed the 2025 margin, by reason and winning alliance"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fMarginR"></p>
 
-  
   <h2>2. Seats, grouped by who held them</h2>
   <p class="sub">Deletions per 100 electors, with each seat labelled by the 2020 Assembly winner, the 2024 Lok Sabha segment leader, and the 2025 Assembly winner.</p>
   <div class="grid">
@@ -86,6 +93,11 @@ function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' 
 function rate(rows) { return 100 * SIR.sum(rows, 'total') / SIR.sum(rows, 'electorate_2025'); }
 Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json')]).then(function (r) {
   var s = r[0], acs = r[1], byAc = {}; acs.forEach(function (a) { byAc[a.ac] = a; });
+  var withM = acs.filter(function (a) { return a.margin2025; }), RK = ['r_dead', 'r_shifted', 'r_absent', 'r_enrolled'], RN = { r_dead: L('Dead'), r_shifted: L('Shifted'), r_absent: L('Absent'), r_enrolled: L('Already enrolled') };
+  var rOver = function (k, al) { return withM.filter(function (a) { return a[k] > a.margin2025 && (!al || a.al2025 === al); }).length; };
+  SIR.chart('cMarginR', { type: 'bar', data: { labels: RK.map(function (k) { return RN[k]; }), datasets: ['NDA', 'INDIA', 'Other'].map(function (al) { return { label: al === 'Other' ? L('Other') : al, data: RK.map(function (k) { return rOver(k, al); }), $token: SIR.alliance[al] }; }) },
+    options: { scales: { x: { stacked: true, title: { display: true, text: L('Reason entered by the officer') } }, y: { stacked: true, beginAtZero: true, title: { display: true, text: L('Seats') } } } } });
+  document.getElementById('fMarginR').innerHTML = L('<b>The names marked absent alone exceed the 2025 margin in {absent} of {seats} seats</b>, and the names marked already enrolled elsewhere in {enrolled}. These are the two reasons that rest on the least: an absent entry records that the elector was not found, and a duplicate entry is only a removal if the other entry is the same person. The names marked shifted exceed the margin in {shifted} seats and the dead in {dead}.', { absent: rOver('r_absent'), enrolled: rOver('r_enrolled'), shifted: rOver('r_shifted'), dead: rOver('r_dead'), seats: withM.length });
   var LBL = s.by_alliance_label, years = ['2020', '2024', '2025'], name = { '2020': L('2020 Assembly'), '2024': L('2024 Lok Sabha'), '2025': L('2025 Assembly') };
 
   SIR.chart('cLabels', { type: 'bar', data: { labels: years.map(function (y) { return name[y]; }), datasets: ['NDA', 'INDIA', 'Other'].map(function (al) {
