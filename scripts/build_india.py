@@ -32,10 +32,28 @@ ADU = os.path.join(ROOT, 'data', 'india', 'raw', 'adults_ls2024.csv')
 BIHAR_REASONS = os.path.join(ROOT, 'data', 'bihar', 'reasons.json')
 # Characteristics set against the removal rate and the mix of reasons. Census
 # 2011 unless stated; income is per capita NSDP, 2023-24.
-CHAR = [('income_pc', 'Income per head'), ('urban_pct', 'Urban share'), ('literacy', 'Literacy'),
-        ('female_literacy', 'Women\'s literacy'), ('muslim_pct', 'Muslim share'), ('sc_pct', 'SC share'),
-        ('st_pct', 'ST share'), ('sex_ratio', 'Sex ratio'), ('out_migration', 'Born here, living elsewhere'),
-        ('in_migration', 'Living here, born elsewhere')]
+CHAR = [('income_pc', 'Income per head'), ('mpce_rural', 'Rural spending per head'), ('mpce_urban', 'Urban spending per head'),
+        ('urban_pct', 'Urban share'), ('literacy', 'Literacy'), ('female_literacy', 'Women\'s literacy'),
+        ('muslim_pct', 'Muslim share'), ('sc_pct', 'SC share'), ('st_pct', 'ST share'), ('sex_ratio', 'Sex ratio'),
+        ('out_migration', 'Born here, living elsewhere'), ('in_migration', 'Living here, born elsewhere')]
+# Where each characteristic comes from. Census 2011 only where nothing newer is
+# published by state: the two migration measures.
+RECENT = os.path.join(ROOT, 'data', 'india', 'raw', 'benchmarks_recent.csv')
+PICK = {
+    'mpce_rural': ('HCES 2023-24: average monthly per capita consumption expenditure (MPCE)', 'all', 'rural'),
+    'mpce_urban': ('HCES 2023-24: average monthly per capita consumption expenditure (MPCE)', 'all', 'urban'),
+    'urban_pct': ('Projected urban population as % of total population, 1 March 2026', 'person', 'total'),
+    'literacy': ('Literacy rate, age 7 years and above (PLFS 2023-24)', 'person', 'total'),
+    'female_literacy': ('Literacy rate, age 7 years and above (PLFS 2023-24)', 'female', 'total'),
+    'muslim_pct': ('NFHS-5: households by religion of household head: Muslim', 'all', 'total'),
+    'sc_pct': ('NFHS-5: households by caste/tribe of household head: Scheduled caste', 'all', 'total'),
+    'st_pct': ('NFHS-5: households by caste/tribe of household head: Scheduled tribe', 'all', 'total'),
+    'sex_ratio': ('NFHS-5: 3. Sex ratio of the total population (females per 1,000 males)', 'person', 'total'),
+}
+SOURCE_OF = {'income_pc': 'RBI, 2023-24', 'mpce_rural': 'HCES 2023-24', 'mpce_urban': 'HCES 2023-24', 'urban_pct': 'Technical Group projection, 2026',
+             'literacy': 'PLFS 2023-24', 'female_literacy': 'PLFS 2023-24', 'muslim_pct': 'NFHS-5, 2019-21 (households)', 'sc_pct': 'NFHS-5, 2019-21 (households)',
+             'st_pct': 'NFHS-5, 2019-21 (households)', 'sex_ratio': 'NFHS-5, 2019-21', 'out_migration': 'Census 2011', 'in_migration': 'Census 2011'}
+CENSUS_2011 = ['urban_pct', 'literacy', 'female_literacy', 'muslim_pct', 'sc_pct', 'st_pct', 'sex_ratio']
 BIG = 5e6  # states of 50 lakh people or more in 2011
 # A tile map: one equal square per state or union territory, placed roughly
 # where it lies, so the picture carries no boundaries. (state, code, row, column)
@@ -126,12 +144,28 @@ def build():
     cov = {}
     for x in csv.DictReader(open(COV, encoding='utf-8')):
         c = {}
-        for k, _ in CHAR + [('population_2011', '')]:
+        for k, _ in [kv for kv in CHAR if kv[0] not in ('mpce_rural', 'mpce_urban')] + [('population_2011', '')]:
             c[k] = float(x[k]) if x[k] not in ('', None) else None
         c['intl_border'] = x['intl_border'] == 'yes'
         c['border_countries'] = x['border_countries'] or ''
         cov[x['state']] = c
     assert set(cov) == set(names), 'a characteristics row for every state'
+    # The 2011 values are kept beside the recent ones, to show which
+    # relationships survive the change of source.
+    rec = {}
+    for x in csv.DictReader(open(RECENT, encoding='utf-8')):
+        for k, (ind, sex, sec) in PICK.items():
+            if x['indicator'] == ind and x['sex'] == sex and x['sector'] == sec and x['value']:
+                assert (x['state'], k) not in rec, (x['state'], k)
+                rec[(x['state'], k)] = float(x['value'])
+    for st, c in cov.items():
+        for k in CENSUS_2011:
+            c[k + '_2011'] = c[k]
+        c['mpce_rural'] = c['mpce_urban'] = None
+        for k in PICK:
+            c[k] = rec.get((st, k))
+    missing = [(st, k) for st in names for k in PICK if (st, k) not in rec]
+    assert len(missing) <= 3, missing  # DNH & DD urban (projected in two parts); Chandigarh has no rural MPCE row if blank
     for x in rows:
         x['char'] = cov[x['state']]
     outcomes = [('per_100', lambda x: x['per_100'])] + [(k, (lambda k: lambda x: x['shares'][k] if x['shares'] else None)(k)) for k in R]
@@ -146,6 +180,11 @@ def build():
                 row[yk + '_' + g] = spearman(pts)
                 row['n_' + yk + '_' + g] = len(pts)
         corr.append(row)
+    robust = []
+    for k in CENSUS_2011:
+        pts_new = [(x['char'][k], x['per_100']) for x in has if x['char'][k] is not None and x['per_100'] is not None]
+        pts_old = [(x['char'][k + '_2011'], x['per_100']) for x in has if x['char'][k + '_2011'] is not None and x['per_100'] is not None]
+        robust.append({'key': k, 'rho_recent': spearman(pts_new), 'rho_2011': spearman(pts_old), 'n_recent': len(pts_new), 'n_2011': len(pts_old)})
     border = {}
     for yk, yf in outcomes:
         for side in ('yes', 'no'):
@@ -240,7 +279,8 @@ def build():
         'as_of': '2026-09-30',
         'adults': adults,
         'tiles': [{'state': a, 'code': c, 'row': r, 'col': k} for a, c, r, k in TILES],
-        'characteristics': [{'key': k, 'label': l} for k, l in CHAR],
+        'characteristics': [{'key': k, 'label': l, 'source': SOURCE_OF[k]} for k, l in CHAR],
+        'robustness_2011': robust,
         'correlations': corr,
         'border': border,
         'gender': gender,

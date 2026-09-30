@@ -333,8 +333,9 @@ function bihar() {
   K.right(s, ['Statewide, the range contains the population share.', 'District by district it often does not. The census share lies inside the range in ' + inside.length + ' of ' + DI.length + ' districts.', 'In the rest, the classified share alone is above the census share. Most of those gaps are smaller than the 0.83-point rise in the Muslim share since 2011.'], 13.5);
 
   s = K.slide('Women, religion, caste', 'In ' + above.length + ' districts the Muslim-name share of removals is more than a point above the census share', 'Counting only names classified Muslim, the low end of the range');
-  K.table(s, ['District', 'Census 2011', 'Removals, low', 'Removals, high', 'Low ÷ census'], above.map((d) => [d.district, pct(d.muslim_share_population_2011), pct(d.muslim_share_deleted_low), pct(d.muslim_share_deleted_high), (d.muslim_share_deleted_low / d.muslim_share_population_2011).toFixed(2)]), M, TOP, 7.4, [2.2, 1.3, 1.3, 1.3, 1.3], 13);
-  K.right(s, ['All ' + above.length + ' lie in south and central Bihar, where Muslims are a small minority.', 'Muslims in Bihar are younger than average, so their share of electors is below their share of the population, which would make these gaps wider.', 'Migration into Patna and mistakes in classifying names could make them narrower.'], 13.5);
+  K.table(s, ['District', 'Census 2011', '2025, carried forward', 'Removals, low', 'Removals, high', 'Low ÷ census'], above.map((d) => [d.district, pct(d.muslim_share_population_2011), pct(d.muslim_share_projected_2025), pct(d.muslim_share_deleted_low), pct(d.muslim_share_deleted_high), (d.muslim_share_deleted_low / d.muslim_share_population_2011).toFixed(2)]), M, TOP, 7.4, [1.9, 1.05, 1.25, 1.05, 1.1, 1.05], 12);
+  const pab = DI.filter((d) => d.muslim_share_deleted_low > d.muslim_share_projected_2025 + 1);
+  K.right(s, ['All ' + above.length + ' lie in south and central Bihar, where Muslims are a small minority.', 'Carried forward to 2025 at each district\'s growth rates from 2001 to 2011, Bihar\'s Muslim share is ' + pct(ID.muslim_projected_2025) + ', and ' + pab.length + ' districts are still more than a point above it.', 'Muslims in Bihar are younger than average, so their share of electors is below their share of the population, which would make these gaps wider.', 'Migration into Patna and mistakes in classifying names could make them narrower.'], 12.5);
 
   const cg = ID.caste.guardian, G = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'];
   const up = G.filter((g) => g !== 'Muslim' && cg.A.groups[g].ratio_to_survey >= 1 && cg.B.groups[g].ratio_to_survey >= 1), down = G.filter((g) => g !== 'Muslim' && cg.A.groups[g].ratio_to_survey < 1 && cg.B.groups[g].ratio_to_survey < 1);
@@ -369,14 +370,14 @@ function bihar() {
     K.chart(Object.assign({}, K.left, { barDir: 'bar', chartColors: td.map((d) => d.border && d.border !== 'Interior' ? P.accent : GREY), showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', valAxisHidden: true })));
   K.right(s, [rankD[rankD.length - 1].district + ' lost the fewest, ' + rankD[rankD.length - 1].per_100.toFixed(1) + ' per 100.', 'Red bars are border districts, grey the interior.', 'The full report has a chapter for each of the 38 districts.']);
 
-  const FAC = [['Income per head', 'gddp_pc'], ['Urban share', 'urban_pct'], ['Literacy', 'literacy'], ['Women\'s literacy', 'female_literacy'], ['Density', 'density'], ['Electors per booth', 'electors_per_booth']];
+  const FAC = [['Income per head', 'gddp_pc'], ['Urban share', 'urban_pct'], ['Women\'s literacy', 'women_literate'], ['Marriage before 18', 'child_marriage'], ['Density', 'density'], ['Electors per booth', 'electors_per_booth']];
   const y = DS.map((d) => d.per_100);
   const cor = FAC.map(([n, k]) => { const x = DS.map((d) => d[k]); return { n, r: pearson(x, y), rho: spearman(x, y) }; });
   const word = (c) => Math.abs(c.rho) < 0.2 ? 'no clear relationship' : c.rho < 0 ? 'fewer removals where higher' : 'more removals where higher';
   const flat = cor.filter((c) => Math.abs(c.rho) < 0.2).map((c) => c.n.toLowerCase()), strong = cor.slice().sort((a, b) => Math.abs(b.rho) - Math.abs(a.rho))[0];
   s = K.slide('Districts', 'District removal rates move most with ' + strong.n.toLowerCase() + ', and not with ' + orj(flat), 'Each district\'s removal rate against one characteristic: r is the linear correlation, ρ the rank correlation');
   K.table(s, ['Characteristic', 'r', 'ρ', 'Reading'], cor.map((c) => [c.n, c.r.toFixed(2), c.rho.toFixed(2), word(c)]), M, TOP, 7.6, [2.3, 0.9, 0.9, 3.5], 14, [0, 3]);
-  K.right(s, ['A rank correlation under 0.2 either way is read as no relationship.', 'Thirty-eight districts cannot separate these factors: the poorest districts are also the least urban and least literate, and in the north-east the most exposed to migration.', 'Census 2011; income per head from the Bihar Economic Survey 2021-22.'], 13);
+  K.right(s, ['A rank correlation under 0.2 either way is read as no relationship.', 'Thirty-eight districts cannot separate these factors: the poorest districts are also the least urban and least literate, and in the north-east the most exposed to migration.', 'Urban share and density from Census 2011, women\'s literacy and marriage before 18 from NFHS-5 (2019-20), income per head from the Bihar Economic Survey 2021-22.'], 13);
 
   // ---- Questions
   const fq = [
@@ -413,7 +414,7 @@ function bihar() {
   K.bullets(s, [
     'Removals by booth come from the Chief Electoral Officer\'s phase 1 deletion lists with the draft roll of 1 August 2025, for all ' + indian(t.booths) + ' booths. Removals by constituency, phase and sex are from the Chief Electoral Officer\'s table, and the reason, sex and age of each phase 1 removal are counted from the deletion list.',
     'The 2025 winner, runner-up and turnout for each seat are the declared results, and votes polled are turnout applied to the 2025 roll. The 2024 booth leaders are from Form 20, the booth-level count.',
-    'Women\'s share is compared with the roll before the revision, the draft roll by sex plus the phase 1 removals by sex. Religion, literacy, density and urban share are from Census 2011, caste from the Bihar caste-based survey of 2 October 2023, and income per head from the Bihar Economic Survey 2021-22.',
+    'Women\'s share is compared with the roll before the revision, the draft roll by sex plus the phase 1 removals by sex. Religion by district is from Census 2011, also carried forward to 2025 at 2001-2011 growth rates. Density and urban share are from Census 2011, women\'s literacy and marriage before 18 from NFHS-5 (2019-20), caste from the Bihar caste-based survey of 2 October 2023, and income per head from the Bihar Economic Survey 2021-22.',
     'Alliances: NDA is BJP, JD(U), LJP(RV), HAM(S) and RLM; INDIA is RJD, INC, the Left parties, VIP and IIP; everything else is Other.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
@@ -710,14 +711,16 @@ function india() {
     'Figures are exact for ' + G.filter((g) => g.quality === 'exact' || g.quality === 'lists').length + ' states; rounded, from an earlier roll or unverified for the rest. Bihar is compared with its roll before the revision.',
   ], 13);
 
-  const CR = N.correlations, CL = { income_pc: 'Income per head', urban_pct: 'Urban share', literacy: 'Literacy', female_literacy: 'Women\'s literacy', muslim_pct: 'Muslim share', sc_pct: 'SC share', st_pct: 'ST share', sex_ratio: 'Sex ratio', out_migration: 'Born here, living elsewhere', in_migration: 'Living here, born elsewhere' };
+  const CR = N.correlations, CL = { income_pc: 'Income per head', mpce_rural: 'Rural spending per head', mpce_urban: 'Urban spending per head', urban_pct: 'Urban share', literacy: 'Literacy', female_literacy: 'Women\'s literacy', muslim_pct: 'Muslim share of households', sc_pct: 'SC share of households', st_pct: 'ST share of households', sex_ratio: 'Sex ratio', out_migration: 'Born here, living elsewhere (2011)', in_migration: 'Living here, born elsewhere (2011)' };
   const ctop = CR.slice().sort((a, b) => Math.abs(b.per_100_all) - Math.abs(a.per_100_all))[0], cm = CR.find((c) => c.key === 'muslim_pct');
   const fr = (v) => v == null ? '–' : v.toFixed(2);
-  s = K.slide('All India', 'The removal rate goes with in-migration across all states (' + fr(ctop.per_100_all) + '), but only because of phase 3; in phase 2 it is ' + fr(ctop.per_100_phase2), 'Rank correlations across states with each state\'s removals per 100 electors; under 0.2 either way is read as none');
-  K.table(s, ['Characteristic', 'All states', 'Phase 2', 'Phase 3', 'Share enrolled twice, larger states'], CR.slice().sort((a, b) => b.per_100_all - a.per_100_all).map((c) => [CL[c.key], fr(c.per_100_all), fr(c.per_100_phase2), fr(c.per_100_phase3), fr(c.duplicate_big)]), M, TOP - 0.3, 7.9, [2.9, 1.1, 1.1, 1.1, 1.7], 12);
+  const both = CR.filter((c) => c.per_100_phase2 != null && c.per_100_phase3 != null && Math.abs(c.per_100_phase2) >= 0.2 && Math.abs(c.per_100_phase3) >= 0.2 && (c.per_100_phase2 > 0) === (c.per_100_phase3 > 0));
+  s = K.slide('All India', 'The removal rate goes most with ' + CL[ctop.key].toLowerCase().replace(' (2011)', '') + ' (' + fr(ctop.per_100_all) + '), and that comes from phase 3. In phase 2 it is ' + fr(ctop.per_100_phase2), 'Rank correlations across states with each state\'s removals per 100 electors. Under 0.2 either way is read as none');
+  K.table(s, ['Characteristic', 'All states', 'Phase 2', 'Phase 3', 'Share enrolled twice, larger states'], CR.slice().sort((a, b) => b.per_100_all - a.per_100_all).map((c) => [CL[c.key], fr(c.per_100_all), fr(c.per_100_phase2), fr(c.per_100_phase3), fr(c.duplicate_big)]), M, TOP - 0.3, 7.9, [2.9, 1.1, 1.1, 1.1, 1.7], 10.5);
   K.right(s, [
-    'In phase 3 income, urban share, migration and the Muslim share rise together, because the large destination states are revised alongside the North-East. ' + ctop.n_per_100_phase3 + ' states cannot separate them.',
-    'Muslim share: ' + fr(cm.per_100_all) + ' across all states, ' + fr(cm.per_100_phase2) + ' in phase 2. No consistent relationship.',
+    'In phase 3 income, migration and the Muslim share rise together, because the big states that draw migrants were revised with the North-East. ' + ctop.n_per_100_phase3 + ' states cannot tell them apart.',
+    both.length ? 'The same way in both phases: ' + both.map((c) => CL[c.key].toLowerCase() + ' (' + fr(c.per_100_phase2) + ', ' + fr(c.per_100_phase3) + ')').join(' and ') + '.' : 'Nothing goes with the rate the same way in both phases.',
+    'Muslim share of households: ' + fr(cm.per_100_all) + ' across all states, ' + fr(cm.per_100_phase2) + ' in phase 2, ' + fr(cm.per_100_phase3) + ' in phase 3. No consistent relationship.',
     'Border states removed fewer, typically ' + N.border.per_100_yes.toFixed(1) + ' per 100 against ' + N.border.per_100_no.toFixed(1) + ' in the interior.',
     'A state-level relationship says nothing about who was removed within a state.',
   ], 12.5);

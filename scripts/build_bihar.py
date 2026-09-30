@@ -38,6 +38,7 @@ import os
 import re
 import sys
 
+import numpy as np
 import pandas as pd
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -353,6 +354,26 @@ def women_roll_share(a):
     return round(100 * (fr.draft_women.sum() + a.p1_f.sum()) / (fr.electors_draft.sum() + a.p1.sum()), 2)
 
 
+def religion_projection():
+    """Each district's Muslim share carried from Census 2011 to 2025 at the
+    2001-2011 growth rates of its Muslim and total populations. Jehanabad and
+    Arwal were one district in 2001, so both take the joint unit's change."""
+    c = pd.read_csv(os.path.join(RAW, 'census_religion_2001_2011.csv'))
+    c = c[c.residence == 'Total']
+    u = c.pivot_table(index='comparable_unit_2001_2011', columns='census_year',
+                      values=['total_persons', 'muslim_persons'], aggfunc='sum')
+    gm = np.log(u.muslim_persons[2011] / u.muslim_persons[2001]) / 10
+    gt = np.log(u.total_persons[2011] / u.total_persons[2001]) / 10
+    ratio = np.exp(14 * (gm - gt))
+    c11 = c[(c.census_year == 2011) & (c.district != 'BIHAR (state)')]
+    out = {norm(x.district): 100 * x.muslim_persons / x.total_persons * ratio[x.comparable_unit_2001_2011]
+           for x in c11.itertuples()}
+    st = u.loc['BIHAR (state)']
+    state = 100 * st[('muslim_persons', 2011)] / st[('total_persons', 2011)] * ratio['BIHAR (state)']
+    assert abs(state - 17.34) < 0.01, 'projected state share moved'
+    return out, round(state, 2)
+
+
 def district_identity(a):
     c = pd.read_csv(os.path.join(RAW, 'census2011_districts_all_india.csv'))
     c = c[c['State name'] == 'BIHAR'].copy()
@@ -374,6 +395,7 @@ def district_identity(a):
     assert len(r) == 243, 'a draft roll for every seat'
     r = r.groupby('district').agg(roll=('electors_draft', 'sum'), roll_f=('draft_women', 'sum'), p1=('p1', 'sum'), p1_f=('p1_f', 'sum'))
     g = g.merge(r[['roll', 'roll_f']].rename(columns={'roll': 'draft', 'roll_f': 'draft_f'}), left_on='district', right_index=True)
+    proj, _ = religion_projection()
     out = []
     for x in g.itertuples():
         cls = x.hindu + x.muslim + x.unknown
@@ -384,6 +406,7 @@ def district_identity(a):
             'muslim_share_deleted_low': round(100 * x.muslim / cls, 1),
             'muslim_share_deleted_high': round(100 * (x.muslim + x.unknown) / cls, 1),
             'muslim_share_population_2011': round(100 * x.Muslims / x.Population, 1),
+            'muslim_share_projected_2025': round(proj[x.key], 1),
             'sc_share_population_2011': round(100 * x.SC / x.Population, 1),
         })
     return sorted(out, key=lambda r: r['district'])
@@ -411,11 +434,19 @@ def district_economy(a):
     m = g.merge(d, on='key', how='left')
     missing = m[m.census_2011_total_pop.isna()].district.tolist()
     assert not missing, 'districts not matched to the demography file: %s' % missing
+    n = pd.read_csv(os.path.join(RAW, 'nfhs5_districts.csv'))
+    n = n[n.indicator.str.startswith('NFHS-5:')].copy()
+    n['k'] = n.indicator.str.extract(r'NFHS-5: (\d+)\.')[0].map({'1': 'girls_schooled', '14': 'women_literate',
+                                                                  '15': 'women_10yrs', '16': 'child_marriage', '3': 'sex_ratio'})
+    n = n.assign(key=n.district.map(norm)).pivot(index='key', columns='k', values='value')
+    m = m.merge(n, left_on='key', right_index=True, how='left')
+    assert m.women_literate.notna().all(), 'a district has no NFHS-5 figures' 
     return [{'district': x.district, 'acs': int(x.acs), 'deleted': int(x.total),
              'per_100': round(100 * x.total / x.electorate, 2), 'per_booth': round(x.deleted / x.booths, 1),
              'electors_per_booth': round(x.electorate / x.booths, 0),
-             'density': int(x.census_2011_density_per_sqkm), 'literacy': float(x.census_2011_literacy_rate),
-             'female_literacy': float(x.census_2011_female_literacy), 'urban_pct': float(x.census_2011_urban_pct),
+             'density': int(x.census_2011_density_per_sqkm), 'urban_pct': float(x.census_2011_urban_pct),
+             'women_literate': float(x.women_literate), 'girls_schooled': float(x.girls_schooled),
+             'child_marriage': float(x.child_marriage),
              'gddp_pc': int(x.per_capita_gddp_2021_22_constant_inr), 'gddp_rank': int(x.gddp_prosperity_rank),
              'border': x.border_group} for x in m.sort_values('district').itertuples()]
 
@@ -592,7 +623,7 @@ def outputs(booth, a, report):
     write(os.path.join(OUT, 'constituencies.json'), acs)
     write(os.path.join(OUT, 'districts.json'), district_economy(a))
     write(os.path.join(OUT, 'identity.json'), {'caste': caste_estimates(), 'districts': district_identity(a),
-                                               'survey_baseline': SURVEY})
+                                               'survey_baseline': SURVEY, 'muslim_projected_2025': religion_projection()[1]})
     write(os.path.join(OUT, 'summary.json'), summary)
     write(os.path.join(OUT, 'reasons.json'), reasons_summary(ra, a))
 
