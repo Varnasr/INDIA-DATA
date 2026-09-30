@@ -240,26 +240,30 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
 }).catch(SIR.fail);
 
 SIR.json('data/bihar/swing.json').then(function (W) {
-  var S = W.summary, T = S.thirds, w = S.within.lead;
+  var S = W.summary, T = S.thirds, w = S.within.lead_adj, w0 = S.within.lead;
   var names = [L('Fewest removals'), L('Middle'), L('Most removals')];
   var sg = function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 1); };
+  var sg2 = function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 2); };
   SIR.table(document.getElementById('tSwing'), [
     { k: 'band', label: L('Seats'), left: true },
     { k: 'n', label: L('Number') },
     { k: 'per_100', label: L('Removed per 100, average'), fmt: function (v, r) { return SIR.d(v, 1) + ' (' + SIR.d(r.lo, 1) + '–' + SIR.d(r.hi, 1) + ')'; } },
     { k: 'd_nda', label: L('Change in NDA share, points'), fmt: sg },
     { k: 'd_india', label: L('Change in INDIA share, points'), fmt: sg },
+    { k: 'd_lead_adj', label: L('Change in NDA lead, allowing for 2020'), fmt: sg },
     { k: 'votes_growth', label: L('Growth in votes cast'), fmt: function (v) { return sg(v) + '%'; } }
   ], T.map(function (t, i) { t.k = i; t.band = names[i]; return t; }), { sort: 'k', dir: 1 });
-  var nd = T.map(function (t) { return t.d_nda; });
-  document.getElementById('fSwing').innerHTML = L('<b>The NDA parties gained between {lo} and {hi} points of the vote in each third, and INDIA\'s share changed by {i0} points where the fewest names were removed and {i2} where the most were.</b> Votes cast grew by {v0}%, {v1}% and {v2}%, so they did not grow less where more names came off the roll.', {
-    lo: SIR.d(Math.min.apply(null, nd), 1), hi: SIR.d(Math.max.apply(null, nd), 1), i0: sg(T[0].d_india), i2: sg(T[2].d_india),
+  var ad = T.map(function (t) { return t.d_lead_adj; });
+  document.getElementById('fSwing').innerHTML = L('<b>Once each seat\'s 2020 result is allowed for, the NDA\'s lead over INDIA grew by about the same amount whether a seat lost few names or many, between {lo} and {hi} points in each third.</b> Before that allowance INDIA seemed to lose most where the fewest names were removed ({i0} points against {i2}). Part of that is seats giving back in 2025 what they had gained in 2020, which happens whatever the removals. Votes cast grew by {v0}%, {v1}% and {v2}%, so they did not grow less where more names came off the roll.', {
+    lo: SIR.d(Math.min.apply(null, ad), 1), hi: SIR.d(Math.max.apply(null, ad), 1), i0: sg(T[0].d_india), i2: sg(T[2].d_india),
     v0: SIR.d(T[0].votes_growth, 1), v1: SIR.d(T[1].votes_growth, 1), v2: SIR.d(T[2].votes_growth, 1) });
-  document.getElementById('fSwing2').innerHTML = L('Comparing each seat only with other seats in its own district gives the same answer. For each extra name removed per 100 electors, the NDA\'s lead over INDIA changed by {s} points, and most likely by something between {lo} and {hi}.', { s: sg(w.slope), lo: sg(w.lo), hi: sg(w.hi) }) + ' ' +
+  document.getElementById('fSwing2').innerHTML = L('Comparing each seat only with other seats in its own district, and allowing for its 2020 result, each extra name removed per 100 electors went with a change of {s} points in the NDA\'s lead over INDIA, most likely somewhere between {lo} and {hi}.', { s: sg2(w.slope), lo: sg2(w.lo), hi: sg2(w.hi) }) + ' ' +
     L('Suppose every removed person who was alive and would have voted had voted against the NDA. Its lead would then have grown by about {a} points more for each extra name removed per 100 electors, and by about {b} if three in four of them had.', { a: SIR.d(S.scenario_all_against, 2), b: SIR.d(S.scenario_half, 2) }) + ' ' +
     (w.hi < S.scenario_half ? L('<b>The results fall short of both, so the vote shows no sign that the removals cost INDIA its voters on a scale large enough to see.</b>') :
-     w.hi < S.scenario_all_against ? L('<b>The results fall short of the first, so the vote rules out removals that took only INDIA\'s voters, though not a smaller lean.</b>') :
-     L('<b>The results cannot tell these apart.</b>'));
+     w.lo > 0 ? L('<b>The whole range lies above zero, so the vote points to the removals having cost INDIA some of its voters.</b>') :
+     w.hi >= S.scenario_all_against ? L('<b>That range takes in no effect at all and both of these, so the vote cannot tell whether the removals cost INDIA its voters.</b>') :
+     L('<b>That range takes in no effect at all and the second of these, so the vote cannot tell whether the removals cost INDIA its voters.</b>')) + ' ' +
+    L('Without the allowance for 2020 the figure is {s} (between {lo} and {hi}). The two models disagree even on the direction, which is itself a reason to read little into either.', { s: sg2(w0.slope), lo: sg2(w0.lo), hi: sg2(w0.hi) });
   document.getElementById('cSwing').innerHTML = L('This test asks one question, whether the removals moved votes between the alliances. It cannot say whether each name was rightly removed, and a voter wrongly removed has lost a vote whichever way it would have gone. A small lean either way, or harm spread evenly across parties, would not show here. Five years separate the two elections, in which LJP rejoined the NDA, VIP changed sides and Jan Suraaj entered. Both years come from the Election Commission\'s candidate-wise results. In both, NDA means BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA means RJD, Congress, the three Left parties, VIP and IIP.');
 }).catch(SIR.fail);
 

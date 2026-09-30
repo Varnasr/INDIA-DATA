@@ -164,19 +164,27 @@ as AIMIM, so no split by religion is assumed.
 
 `scripts/build_swing.py` sets each seat's change in vote share from 2020 to
 2025 against its removals per 100 electors and writes `data/bihar/swing.json`.
-Its input, `data/bihar/raw/ae_party_votes_2020_2025.csv`, is the
-candidate-wise result pooled by party, with NOTA and electors, for every seat
-in both years; the build asserts the 2025 figures equal the declared result.
+Its input, `data/bihar/raw/ae_party_votes_2020_2025.csv`, is the Election
+Commission's Detailed Results (statistical report 10) for each election,
+pooled by party, with NOTA and electors, for every seat; the build asserts the
+2025 figures equal the declared result. ECI's party codes are kept except
+where a label was needed (VSIP is VIP, RSHTLKM is RLM, LJPRV is LJP(RV)).
+In 2025 BLSP is a different party from the 2020 RLSP; do not merge them.
 Both years use the 2025 line-up (LJP and RLSP count as NDA in 2020, VIP as
-INDIA). Findings: the NDA parties gained 2.9 to 4.1 points in every third of
-seats by removals, INDIA lost most where removals were lowest, and within
-district the NDA's lead moved -0.83 points per extra removal per 100
-(interval -1.86 to +0.20), short of the +0.33 to +0.66 an anti-NDA pattern
-would give. **Say what this is**: no sign that the removals moved votes
-between the alliances, which is a separate finding from whether the removals
-were accurate. Never present it as the revision being clean. The same file
-corrected Gaighat's 2020 margin (7,566; the booth file had 22,927) in
-`build_bihar.py`.
+INDIA). The model is within district **and allows for each seat's 2020
+NDA lead**, because seats the NDA won big in 2020 gave some of it back
+whatever their removals (coefficient about -0.9). Leaving that out is how the
+first version went wrong: without it the slope is -0.83 (-1.86 to +0.20) and
+looked like evidence against an anti-NDA effect; with it the slope is +0.31
+(-0.27 to +0.89), which takes in both no effect and the +0.33 to +0.66 an
+anti-NDA pattern would give. Allowing for 2020, the NDA's lead grew 4.0 to 5.2
+points in every third of seats by removals. **Say what this is**: the vote
+cannot tell whether the removals moved votes between the alliances, and that
+question is separate from whether the removals were accurate. Never present
+it as the revision being clean, and never lead with the model that omits 2020.
+2020 margins come from `data/bihar/raw/ae2020_results.csv`, taken from the
+same ECI report: the booth file's differ in eight seats (Gaighat 22,927
+against 7,566) and its percentages are rounded to whole points.
 
 ## Hyderabad
 
