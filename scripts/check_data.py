@@ -151,6 +151,23 @@ def _swing():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
+def _short_and_faq():
+    # Every page but the full reports opens with an "In short" box and carries
+    # questions and answers: its own (#pageFaq) or, on an FAQ tab, all (#qas).
+    import glob
+    pages = ['index.html'] + sorted(glob.glob(os.path.join(ROOT, '*', '**', 'index.html'), recursive=True))
+    for p in pages:
+        rel = os.path.relpath(os.path.join(ROOT, p), ROOT)
+        if rel.split(os.sep)[0] not in ('india', 'bihar', 'hyderabad') and rel != 'index.html':
+            continue
+        if os.sep + 'report' + os.sep in rel:
+            continue
+        html = open(os.path.join(ROOT, rel), encoding='utf-8').read()
+        assert 'id="short"' in html, '%s has no In short box' % rel
+        assert 'id="pageFaq"' in html or 'id="qas"' in html, '%s has no questions and answers' % rel
+        assert 'SIR.showFaq(' in html or rel == os.path.join('india', 'index.html'), '%s never fills its box' % rel
+
+
 def _pages_link_method():
     for p in ['bihar/index.html', 'bihar/results/index.html', 'bihar/people/index.html',
               'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html']:
@@ -176,6 +193,7 @@ for name, fn in [
     ('Bihar deaths and marriage tests current, and the census districts add up', _bihar_tests),
     ('Impact estimates for Bihar and Hyderabad current', _impact),
     ('2020 to 2025 swing current, 2025 votes match the declared result', _swing),
+    ('every page opens with In short and carries questions', _short_and_faq),
     ('findings pages link to the method page', _pages_link_method),
 ]:
     check(name, fn)

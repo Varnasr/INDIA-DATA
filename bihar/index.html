@@ -34,6 +34,7 @@
   <ul class="xlist" id="list"></ul>
 </aside>
 <main id="main">
+  <div class="page-short"><div class="takeaway" role="note" aria-labelledby="shortH"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><div><b id="shortH">In short</b><ol class="short" id="short"></ol><p class="short-note" id="shortNote" hidden></p></div></div></div>
   <div class="crumb" id="crumb"></div>
   <h2 id="title"></h2>
   <p class="sub" id="sub"></p>
@@ -49,6 +50,7 @@
     <div class="panel wide"><h3 id="tblTitle"></h3><p>Click a column to sort, a row to open it.</p><div class="twrap" tabindex="0" role="region" aria-labelledby="tblTitle"><table id="tbl"></table></div></div>
   </div>
   <p class="note">Removals come from the Chief Electoral Officer's SIR deletion lists: phase 1 with the draft roll of 1 August 2025, and phase 2 before the final roll. Booth figures cover phase 1 only, because only phase 1 was listed by booth. Constituency figures include both phases. Removals per 100 electors are divided by the constituency's 2025 electorate, and margins are the declared 2025 Assembly results. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA is the RJD, INC, the Left parties, VIP and IIP. Only totals are published, never names or EPIC numbers. <a href="faq/">FAQ</a> · <a href="method/">Method</a>.</p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 </main>
 </div>
 <footer>Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers.</footer>
@@ -198,5 +200,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var m = /#ac(\d+)/.exec(location.hash); go(m ? +m[1] : 0);
 }).catch(SIR.fail);
 </script>
+<script src="../assets/faq/bihar.js"></script>
+<script>SIR.showFaq('bihar', 'explorer');</script>
 </body>
 </html>

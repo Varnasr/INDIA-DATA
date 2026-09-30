@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="assets/sir.css">
 </head>
 <body data-root="">
-<a class="skip" href="#content">Skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
 <div class="band madhubani" aria-hidden="true"></div>
 <header class="top">
   <div class="header-content">
@@ -37,7 +37,7 @@
   <button type="button" class="nav-tab" role="tab" data-tab="research"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Research</button>
   <button type="button" class="nav-tab" role="tab" data-tab="methodology"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Methods</button>
 </nav>
-<main id="content"></main>
+<main id="main"><div class="page-short"><div class="takeaway" role="note" aria-labelledby="shortH"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><div><b id="shortH">In short</b><ol class="short" id="short"></ol><p class="short-note" id="shortNote" hidden></p></div></div></div><div id="content"></div><section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section></main>
 <footer>Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers. · <a href="bihar/">Booth explorer</a> · <a href="bihar/faq/">Questions and answers</a> · <a href="hyderabad/">Hyderabad Old City 2026</a></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="assets/sir.js"></script>
@@ -356,5 +356,7 @@
   }).catch(function (e) { main.innerHTML = '<p role="alert">' + L('The dashboard data did not load ({error}). Please reload the page.', { error: esc(e.message) }) + '</p>'; });
 })();
 </script>
+<script src="assets/faq/bihar.js"></script>
+<script>SIR.showFaq('bihar', 'dash');</script>
 </body>
 </html>

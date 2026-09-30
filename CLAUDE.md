@@ -13,7 +13,7 @@ publishes it to GitHub Pages.
 pip install pandas==3.0.6 openpyxl==3.1.5
 python3 scripts/build_bihar.py          # rebuild data/bihar from data/bihar/raw
 python3 scripts/build_hyderabad.py      # rebuild data/hyderabad from the explorer
-python3 scripts/check_data.py           # 18 checks, run by CI; rebuilds both with --check
+python3 scripts/check_data.py           # 19 checks, run by CI; rebuilds both with --check
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
 python3 -m http.server 8000
 ```
@@ -257,6 +257,19 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   add a page there as well as to the tab row. It follows a
   dashboard's tab changes through a MutationObserver on `aria-selected`.
   Without JavaScript the scrolling row stays, so nothing depends on it.
+- **Every page but the full reports opens with an "In short" box and ends
+  with its own questions and answers.** Both come from one file per analysis,
+  `assets/faq/bihar.js`, `hyd.js` and `india.js`: it loads the data once and
+  returns `{qa, short}`, where each question carries the page keys it belongs
+  to (`dash`, `explorer`, `results`, `people`, `border`, `districts`, `parts`,
+  `hearings`, `telangana`, `method`, `main`) and `short` maps a page key to its
+  box. A page calls `SIR.showFaq(site, key)`; the FAQ tab calls
+  `SIR.showFaq(site)` and shows every question. Answers are written for the
+  FAQ tab, and their relative links are resolved against it wherever they
+  appear, so write links as seen from `<site>/faq/`. The All India landing
+  page keeps its own six-point box in its page script. `check_data.py` fails
+  if a page loses either block. When a finding changes, change it in the
+  module and every page that shows it moves together.
 - **The part explorer takes a link to a part**: `hyderabad/explorer/#Yakutpura-297`.
 - No page states the site's own address.
 - Colour tokens live in `assets/sir.css`, with the dark block written twice
@@ -289,8 +302,9 @@ in the address (`?lang=hi`) and in the reader's browser.
 - **A row of links** (the switch, the Downloads menu) carries `data-i18n-each`,
   so each link is its own key; without it the whole row, addresses and all,
   becomes one key that differs on every page.
-- `scripts/i18n_collect.mjs` walks `bihar/` and `hyderabad/` for pages rather
-  than keeping a list, so a new page is collected without anyone remembering.
+- `scripts/i18n_collect.mjs` walks `india/`, `bihar/` and `hyderabad/` for pages,
+  and reads `assets/faq/*.js`, rather than keeping a list, so a new page is
+  collected without anyone remembering.
 - **Fixed text in the markup** is translated by `L.apply()`, which `sir.js`
   calls before a page's own script runs. The key is an element's inner HTML
   as the browser serialises it, so `scripts/i18n_collect.mjs` reads the keys

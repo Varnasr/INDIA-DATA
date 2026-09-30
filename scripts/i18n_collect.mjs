@@ -26,7 +26,7 @@ const { chromium } = await import(PW);
 const walk = (d) => fs.readdirSync(path.join(ROOT, d), { withFileTypes: true }).flatMap((e) =>
   e.isDirectory() ? walk(path.join(d, e.name)) : e.name === 'index.html' ? [d ? d + '/' : ''] : []);
 const PAGES = ['', ...walk('india'), ...walk('bihar'), ...walk('hyderabad')].sort();
-const SOURCES = ['index.html', 'assets/sir.js', 'assets/dash.js', 'assets/i18n.js', ...PAGES.filter(Boolean).map(p => p + 'index.html')];
+const SOURCES = ['index.html', 'assets/sir.js', 'assets/dash.js', 'assets/i18n.js', ...fs.readdirSync(path.join(ROOT, 'assets/faq')).filter(f => f.endsWith('.js')).sort().map(f => 'assets/faq/' + f), ...PAGES.filter(Boolean).map(p => p + 'index.html')];
 
 const cat = {};
 const add = (k, page, kind) => { const e = cat[k] || (cat[k] = { kind, pages: [] }); if (!e.pages.includes(page)) e.pages.push(page); if (kind === 'script') e.kind = 'script'; };
