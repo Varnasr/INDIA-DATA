@@ -93,7 +93,7 @@ class Report:
     def _footer(self):
         p = self.doc.sections[0].footer.paragraphs[0]
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        r = p.add_run('Varna Sri Raman · Aggregates only; no names or EPIC numbers · Page ')
+        r = p.add_run('Varna Sri Raman · Totals only, never names or EPIC numbers · Page ')
         r.font.size = Pt(8)
         r.font.color.rgb = MUTED
         for code in ('begin', None, 'end'):

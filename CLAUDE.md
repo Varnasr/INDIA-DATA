@@ -45,6 +45,12 @@ Things the build depends on, each asserted by `check_data.py`:
   different seats sharing a name. Join on `ac_number`.
 - **Minapur (90) is in Vaishali**, not Muzaffarpur, whatever the public table
   says.
+- **Women are compared with the roll, not the census.** `female_share_roll`
+  in `identity.json` (by district) and `summary.json` (state) is women's share
+  of the roll before the revision: the Format 4B draft roll by sex plus the
+  phase 1 removals by sex. Women are over-represented among the removed in all
+  38 districts, by 2.8 to 13.7 points. Religion stays on Census 2011, the last
+  count by religion at district level, and the pages say so.
 - **Caste is not identified.** Two surname classifications give different
   compositions and wide bounds. The pages say so. Do not collapse them into
   one number, and do not reintroduce "Devi" or any title as a caste marker.
@@ -133,6 +139,14 @@ Raw tables are in `data/bihar/raw/srs_bihar.csv`, `crs_bihar.csv` and
 `const D={...}`. `build_hyderabad.py` reads that object and derives
 `data/hyderabad/summary.json` and `parts.json`, so the explorer and the analysis
 pages cannot disagree. Edit the counts in the explorer, then rebuild.
+
+**Why five seats.** The elector-by-elector lists were compiled for these five
+only. The Chief Electoral Officer, Telangana publishes the ASDD and notice
+lists per part as PDFs behind a captcha, from Indian networks only, in Telugu;
+the pre-revision roll with ages is not public. The other ten Hyderabad seats
+(2,670 parts) therefore appear as the state's totals on the Telangana page.
+Say this plainly wherever the five are introduced; do not name who compiled
+the lists.
 
 Malakpet's export has no part numbers and no 2002 linkage: it is read by
 polling-station name (60 stations), it has 7,891 electors in none of the three
@@ -285,7 +299,14 @@ per slot, not the slot's length.
   the same set for Pages. Do not link source files from a page, and describe
   sources without naming the people or organisations who compiled them.
 - **Writing**: plain explanatory prose. Never refer to earlier versions of the
-  analysis or to corrections on a public page.
+  analysis or to corrections on a public page. The owner's rules, applied to
+  every page, report and deck: no em dashes; no sentences hinged on a colon
+  ("X: Y") or strung on semicolons; no "X, not Y" or "not X but Y" turns; say
+  the caveat about reasons once per page in plain words ("what the officer wrote
+  down, and nobody checked it"), not as "an officer's entry, not a finding";
+  prefer "guessed from names" to "estimated", "typical" or "middle" to
+  "median" in prose. When rewriting an English key, carry its translations to
+  the new key only if the meaning is unchanged; retranslate otherwise.
 - **Framing**: this is an analysis, not a petition site. The pages lead with
   the scale of the removals, the removals against winning margins, women's
   over-representation and, in Hyderabad, the process (the 2002 link, hearing

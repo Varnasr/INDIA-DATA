@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="../../assets/i18n.js"></script>
 <title>Hyderabad Old City SIR 2026: questions and answers</title>
-<meta name="description" content="Answers to the questions most often put to the Hyderabad Old City SIR analysis: the shifted and untraceable, religion, the 2002 roll, hearings, margins and the reliability of the lists.">
+<meta name="description" content="Answers to the questions people most often ask about the Hyderabad Old City SIR analysis, on the shifted and untraceable, religion, the 2002 roll, hearings, margins and how far the lists can be trusted.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23b13b38'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="../../assets/sir.css">
 </head>
@@ -29,7 +29,7 @@
   <div id="qas"></div>
   <p class="note">Every figure on this page is computed from the published data when the page loads. <a href="../method/">Method</a>.</p>
 </main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
+<footer>Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers.</footer>
 <script src="../../assets/sir.js"></script>
 <script>
 Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/telangana.json')]).then(function (r) {
@@ -44,11 +44,11 @@ Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/t
   var heavy = A.slice().sort(function (a, b) { return b.max_slot - a.max_slot; })[0];
   var QA = [
     [L('Is the Old City an outlier?'),
-     L('No. The five Old City seats lost {oc} of their roll on the state\'s draft figures, and Hyderabad\'s other ten seats {oh}. Across Hyderabad district the draft left off {h}, and in the rest of Telangana {r}. The removals follow the city, not the Old City. <a href="../telangana/">Hyderabad and Telangana</a>.', { oc: SIR.pct(TG.old_city.rate), oh: SIR.pct(TG.other_hyderabad.rate), h: SIR.pct(TG.hyderabad.rate), r: SIR.pct(TG.rest_of_state.rate) })],
+     L('No. On the state\'s draft figures the five Old City seats lost {oc} of their roll, and Hyderabad\'s other ten seats lost {oh}. The draft left off {h} across Hyderabad district and {r} in the rest of Telangana. The removals are heavy across the whole city. <a href="../telangana/">Hyderabad and Telangana</a>.', { oc: SIR.pct(TG.old_city.rate), oh: SIR.pct(TG.other_hyderabad.rate), h: SIR.pct(TG.hyderabad.rate), r: SIR.pct(TG.rest_of_state.rate) })],
     [L('Were most of those struck off not people who had moved away?'),
-     L('The largest recorded reason is "permanently shifted", {shifted} of removals, and the Old City does have a large moving population. But {untraceable} were entered as "untraceable or absent", {death} as dead and {enrolled} as enrolled elsewhere.', { shifted: SIR.pct(R('Permanently Shifted')), untraceable: SIR.pct(R('Untraceable/Absent')), death: SIR.pct(R('Death')), enrolled: SIR.pct(R('Already enrolled')) }) + ' ' + L('Each is what an officer entered, not a finding.') + ' ' + L('The untraceable entries in particular record only that an officer did not find someone.')],
+     L('The commonest recorded reason is "permanently shifted", at {shifted} of removals, and many people do move in and out of the Old City. But {untraceable} were entered as "untraceable or absent", {death} as dead and {enrolled} as enrolled elsewhere.', { shifted: SIR.pct(R('Permanently Shifted')), untraceable: SIR.pct(R('Untraceable/Absent')), death: SIR.pct(R('Death')), enrolled: SIR.pct(R('Already enrolled')) }) + ' ' + L('Each is what an officer wrote down, and nobody has checked it.') + ' ' + L('The untraceable entries in particular record only that an officer did not find someone.')],
     [L('Was the revision aimed at Muslim electors?'),
-     L('The lists do not show that.') + ' ' + L('Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors, by {gap_min} to {gap_max} points.', { gap_min: SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 0), gap_max: SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 0) }) + ' ' + L('What the lists do show is who carried the burden: the old, and those who could not be traced to the 2002 roll. <a href="../people/">Age, sex, religion, 2002</a>.')],
+     L('The lists do not show that.') + ' ' + L('Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors, by {gap_min} to {gap_max} points.', { gap_min: SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 0), gap_max: SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 0) }) + ' ' + L('The lists do show who bore the removals: the old, and those who could not be traced to the 2002 roll. <a href="../people/">Age, sex, religion, 2002</a>.')],
     [L('Why does the 2002 roll matter so much?'),
      L('The revision asks each elector to show a link to the 2002 intensive revision, through their own name or a parent\'s.') + ' ' + L('Where the lists record it, electors with no such link were struck off {gap_min} to {gap_max} points more often than linked electors in the same part.', { gap_min: SIR.d(Math.min.apply(null, ul), 0), gap_max: SIR.d(Math.max.apply(null, ul), 0) }) + ' ' + L('Anyone who moved into the city after 2002, or whose family name is spelt differently on the old roll, starts at a disadvantage.')],
     [L('Why are the old struck off so often?'),
@@ -56,13 +56,13 @@ Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/t
     [L('Could hearings be held properly?'),
      L('{summoned} electors kept on the draft roll were summoned.', { summoned: SIR.n(t.hearing) }) + ' ' + L('The heaviest single slot listed {cases} cases, in {name}.', { cases: SIR.n(heavy.max_slot), name: heavy.name }) + ' ' + L('The lists do not record how long a slot lasted. <a href="../hearings/">Hearings</a>.')],
     [L('Did this change an election result?'),
-     L('No election has been held on the revised roll.') + ' ' + L('What can be said is the scale: every one of the five constituencies lost more names than its 2023 winning margin, and in {names} the names struck off outnumber every valid vote cast in 2023.', { names: valid.join(L(' and ')) }) + ' ' + L('Yakutpura was won by {margin} votes and lost {deleted} names.', { margin: SIR.n(yak.e2023.margin), deleted: SIR.n(yak.deleted) })],
+     L('No election has been held on the revised roll.') + ' ' + L('What can be measured is the scale. Every one of the five constituencies lost more names than its 2023 winning margin, and in {names} more names were struck off than there were valid votes in 2023.', { names: valid.join(L(' and ')) }) + ' ' + L('Yakutpura was won by {margin} votes and lost {deleted} names.', { margin: SIR.n(yak.e2023.margin), deleted: SIR.n(yak.deleted) })],
     [L('How reliable are the lists?'),
-     L('For Charminar, Yakutpura, Chandrayangutta and Bahadurpura, the counts of names struck off agree exactly with an independent count of the same lists, as do the recorded reasons and women\'s share.') + ' ' + L('The Malakpet list used here is incomplete: it holds {held} names against 1,47,799 in an independent count of the published list, and carries no part numbers or 2002 link.', { held: SIR.n(mal.deleted) })],
+     L('For Charminar, Yakutpura, Chandrayangutta and Bahadurpura, the counts of names struck off, the recorded reasons and women\'s share all agree exactly with a separate count of the same lists.') + ' ' + L('The Malakpet list used here is incomplete: it holds {held} names against 1,47,799 in an independent count of the published list, and carries no part numbers or 2002 link.', { held: SIR.n(mal.deleted) })],
     [L('Why only five constituencies?'),
-     L('These are the five Old City constituencies whose full lists were available elector by elector. The figures describe these five and no others.')],
+     L('The elector-by-elector lists were compiled for these five seats only. Hyderabad district\'s other ten seats, including Nampally and Karwan, appear only as the state\'s totals, on the Hyderabad and Telangana page. The figures here describe these five and no others.')],
     [L('Why are no names published?'),
-     L('The analysis is about the revision, not about individuals. Only counts are published: no name, EPIC number or address appears anywhere on these pages.')]
+     L('The analysis looks at the revision as a whole. Only counts are published, and no name, EPIC number or address appears anywhere on these pages.')]
   ];
   document.getElementById('qas').innerHTML = QA.map(function (q) { return '<div class="qa"><h3>' + q[0] + '</h3><p>' + q[1] + '</p></div>'; }).join('');
 }).catch(SIR.fail);

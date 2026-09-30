@@ -193,7 +193,7 @@
   SIR.chart = function (id, cfg) {
     if (typeof Chart === 'undefined') {
       var el = document.getElementById(id);
-      if (el) el.parentNode.insertAdjacentHTML('beforeend', '<p class="pill">' + L('The chart library did not load; the table below carries the same figures.') + '</p>');
+      if (el) el.parentNode.insertAdjacentHTML('beforeend', '<p class="pill">' + L('The chart library did not load, so use the table below, which has the same figures.') + '</p>');
       return null;
     }
     Chart.defaults.font.family = '"Helvetica Neue", Arial, sans-serif';
@@ -290,6 +290,6 @@
   SIR.fail = function (e) {
     if (window.console) console.error(e && e.stack);
     var m = document.querySelector('main');
-    if (m) m.insertAdjacentHTML('afterbegin', '<p class="caveat">' + L('The data for this page did not load ({msg}). If you opened the file directly, serve the folder instead: <code>python3 -m http.server</code>.', { msg: SIR.esc(e.message) }) + '</p>');
+    if (m) m.insertAdjacentHTML('afterbegin', '<p class="caveat">' + L('The data for this page did not load ({msg}). If you opened the file directly, serve the folder with <code>python3 -m http.server</code> and open it from there.', { msg: SIR.esc(e.message) }) + '</p>');
   };
 })();

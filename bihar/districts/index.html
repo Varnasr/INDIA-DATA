@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="../../assets/i18n.js"></script>
 <title>Bihar SIR 2025: districts</title>
-<meta name="description" content="Bihar's 38 districts: SIR deletions against income, urbanisation, literacy, density and booth size.">
+<meta name="description" content="SIR deletions in Bihar's 38 districts against income, urbanisation, literacy, density and booth size.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="../../assets/sir.css">
 </head>
@@ -25,7 +25,7 @@
 </header>
 <nav class="nav-tabs" aria-label="Bihar pages"><a class="nav-tab" href="../../"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> Dashboard</a><a class="nav-tab" href="../../bihar/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Booth explorer</a><a class="nav-tab" href="../../bihar/results/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> Elections</a><a class="nav-tab" href="../../bihar/people/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Women, religion, caste</a><a class="nav-tab" href="../../bihar/border/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16"/><path d="M16 6v16"/></svg> Border</a><a class="nav-tab" href="../../bihar/districts/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Districts</a><a class="nav-tab" href="../../bihar/faq/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> FAQ</a><a class="nav-tab" href="../../bihar/method/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Method</a><a class="nav-tab" href="../../bihar/report/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a></nav>
 <main id="main">
-<div class="page-head"><h1>Districts</h1><div class="takeaway" role="note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg><div>Which districts lost the most, and does that follow income, towns, schooling or the size of the booth? With 38 districts every relationship here is a rough one, and each is shown with both a linear and a rank correlation so that one extreme district cannot carry it alone.</div></div></div>
+<div class="page-head"><h1>Districts</h1><div class="takeaway" role="note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg><div>Which districts lost the most, and does it follow income, towns, schooling or booth size? With 38 districts every relationship here is rough. Each is shown with a linear and a rank correlation, so a single extreme district cannot drive the result.</div></div></div>
   <div class="grid">
     <div class="panel wide">
       <h3>Deletions per 100 electors, by district</h3>
@@ -34,16 +34,16 @@
     </div>
   </div>
   <h2>What moves with the deletion rate</h2>
-  <p class="sub">Each panel sets the district deletion rate against one characteristic. r is the linear correlation, ρ the rank correlation; both run from −1 to 1.</p>
+  <p class="sub">Each panel sets the district deletion rate against one characteristic. r is the linear correlation and ρ the rank correlation, and both run from −1 to 1.</p>
   <div class="grid" id="scatters"></div>
   <h2>All factors together</h2>
   <div class="twrap" tabindex="0" role="region" aria-label="Correlation summary"><table id="tCorr"></table></div>
-  <p class="caveat">Thirty-eight districts cannot separate these factors from one another: the poorest districts are also the least urban, least literate and, in the north-east, the most exposed to migration. Treat each panel as a description.</p>
+  <p class="caveat">With only 38 districts these factors cannot be told apart. The poorest districts are also the least urban and least literate, and in the north-east they send the most migrants out. Read each panel as a description of the districts, not as a cause.</p>
   <h2>Every district</h2>
   <div class="twrap" tabindex="0" role="region" aria-label="Districts"><table id="tbl"></table></div>
   <p class="note">Population, density, literacy and urban share: Census 2011. Per-capita district domestic product: Bihar Economic Survey, 2021-22 at constant prices. Electors per booth: the 2025 electorate over the number of booths with SIR lists.</p>
 </main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
+<footer>Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../../assets/sir.js"></script>
 <script>

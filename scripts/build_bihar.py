@@ -346,6 +346,13 @@ DISTRICT_NAMES = {'West Champaran': 'Pashchim Champaran', 'East Champaran': 'Pur
                   'Kishanganj': 'Kishanganj', 'Sheikhpura': 'Sheikhpura'}
 
 
+def women_roll_share(a):
+    """Women's share of the roll before the revision: the draft roll by sex
+    from Format 4B plus the phase 1 removals by sex."""
+    fr = pd.read_csv(os.path.join(RAW, 'final_roll_format4b.csv'))
+    return round(100 * (fr.draft_women.sum() + a.p1_f.sum()) / (fr.electors_draft.sum() + a.p1.sum()), 2)
+
+
 def district_identity(a):
     c = pd.read_csv(os.path.join(RAW, 'census2011_districts_all_india.csv'))
     c = c[c['State name'] == 'BIHAR'].copy()
@@ -356,17 +363,24 @@ def district_identity(a):
     a['key'] = a.district.map(lambda d: norm(DISTRICT_NAMES.get(d, d)))
     missing = set(a.key) - set(c.key)
     assert not missing, 'districts not matched to the census: %s' % missing
-    g = a.groupby(['district', 'key']).agg(acs=('ac', 'size'), total=('total', 'sum'), p1=('p1', 'sum'),
+    g = a.groupby(['district', 'key']).agg(acs=('ac', 'size'), total=('total', 'sum'), p1=('p1', 'sum'), p1_f=('p1_f', 'sum'),
                                            t_f=('t_f', 'sum'), t_m=('t_m', 'sum'), electorate=('electorate_2025', 'sum'),
                                            hindu=('hindu', 'sum'), muslim=('muslim', 'sum'), unknown=('unknown', 'sum')).reset_index()
     g = g.merge(c[['key', 'Population', 'Female', 'Muslims', 'SC']], on='key')
+    # Women's share of the roll the names were removed from: the draft roll by
+    # sex (Format 4B) plus the phase 1 removals by sex, seat by seat.
+    fr = pd.read_csv(os.path.join(RAW, 'final_roll_format4b.csv'))[['ac_number', 'electors_draft', 'draft_women']]
+    r = a[['ac', 'district', 'p1', 'p1_f']].merge(fr, left_on='ac', right_on='ac_number', validate='one_to_one')
+    assert len(r) == 243, 'a draft roll for every seat'
+    r = r.groupby('district').agg(roll=('electors_draft', 'sum'), roll_f=('draft_women', 'sum'), p1=('p1', 'sum'), p1_f=('p1_f', 'sum'))
+    g = g.merge(r[['roll', 'roll_f']].rename(columns={'roll': 'draft', 'roll_f': 'draft_f'}), left_on='district', right_index=True)
     out = []
     for x in g.itertuples():
         cls = x.hindu + x.muslim + x.unknown
         out.append({
             'district': x.district, 'acs': int(x.acs), 'deleted': int(x.total), 'per_100': round(100 * x.total / x.electorate, 2),
             'female_share_deleted': round(100 * x.t_f / (x.t_f + x.t_m), 1),
-            'female_share_population_2011': round(100 * x.Female / x.Population, 1),
+            'female_share_roll': round(100 * (x.draft_f + x.p1_f) / (x.draft + x.p1), 1),
             'muslim_share_deleted_low': round(100 * x.muslim / cls, 1),
             'muslim_share_deleted_high': round(100 * (x.muslim + x.unknown) / cls, 1),
             'muslim_share_population_2011': round(100 * x.Muslims / x.Population, 1),
@@ -561,6 +575,7 @@ def outputs(booth, a, report):
     summary = {
         'totals': {'booths': int(len(booth)), 'acs': int(a.ac.nunique()), 'p1': int(a.p1.sum()), 'p2': int(a.p2.sum()),
                    'total': int(a.total.sum()), 'female': int(a.t_f.sum()), 'male': int(a.t_m.sum()),
+                   'female_share_roll': women_roll_share(a),
                    'electorate_2025': int(a.electorate_2025.sum()),
                    'booths_with_2024_result': int(booth.lead24.notna().sum()),
                    'religion_classified': int((booth.hindu + booth.muslim + booth.unknown).sum()),

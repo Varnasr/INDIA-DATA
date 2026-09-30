@@ -54,9 +54,9 @@
   <p class="sub">Parts whose removal rate is furthest from their own constituency's median, in either direction.</p>
   <div class="controls"><label for="fac">Constituency</label><select id="fac"><option value="">All five</option></select></div>
   <div class="twrap" tabindex="0" role="region" aria-label="Outlying parts"><table id="tOut"></table></div>
-  <p class="note">Parts with fewer than 100 electors are left out of the rates, since one household moves them by several points. Muslim share of a part is the share of its pre-revision roll with names estimated Muslim. "Untraceable" is the ECI reason code Untraceable/Absent as a share of the part's deletions.</p>
+  <p class="note">Parts with fewer than 100 electors are left out of the rates, because one household can move them by several points. A part's Muslim share is the share of its roll before the revision whose names are classified Muslim. "Untraceable" is the ECI reason code Untraceable/Absent as a share of the part's deletions.</p>
 </main>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
+<footer>Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../../assets/sir.js"></script>
 <script>
@@ -76,7 +76,7 @@ Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/p
   SIR.table(document.getElementById('tCorr'), [{ k: 'name', label: L('Constituency'), left: true }, { k: 'm', label: L('Muslim share'), fmt: function (v) { return SIR.d(v, 2); } }, { k: 'o', label: L('Aged 80+ share'), fmt: function (v) { return SIR.d(v, 2); } }, { k: 'u', label: L('Untraceable share'), fmt: function (v) { return SIR.d(v, 2); } }],
     A.map(function (a) { var c = a.part_correlations; return { name: a.name, m: c.muslim_share_vs_rate, o: c.aged80_share_vs_rate, u: c.untraceable_share_vs_rate }; }), { sort: 'name', dir: 1 });
   var ms = A.map(function (a) { return a.part_correlations.muslim_share_vs_rate; });
-  document.getElementById('fParts').innerHTML = L('<b>Part rates run from {low}% to {high}%, and {over} parts lost more than 60% of their roll</b>, {where}. Across parts, the Muslim-name share of the roll and the removal rate move in opposite directions in every constituency (rank correlations {r_from} to {r_to}); the share of elderly electors and the share entered as untraceable barely move with it.', { low: SIR.d(Math.min.apply(null, A.map(function (a) { return a.part_rate_quartiles[0]; })), 0), high: SIR.d(Math.max.apply(null, A.map(function (a) { return a.part_rate_quartiles[4]; })), 0), over: SIR.sum(A, 'parts_over_60'), where: A.filter(function (a) { return a.parts_over_60; }).map(function (a) { return L('{n} in {name}', { n: a.parts_over_60, name: a.name }); }).join(L(' and ')), r_from: SIR.d(Math.max.apply(null, ms), 2), r_to: SIR.d(Math.min.apply(null, ms), 2) });
+  document.getElementById('fParts').innerHTML = L('<b>Part rates run from {low}% to {high}%, and {over} parts lost more than 60% of their roll</b>, {where}. In every constituency, parts with a larger Muslim-name share of the roll had lower removal rates (rank correlations {r_from} to {r_to}). The share of elderly electors and the share entered as untraceable hardly move with the rate.', { low: SIR.d(Math.min.apply(null, A.map(function (a) { return a.part_rate_quartiles[0]; })), 0), high: SIR.d(Math.max.apply(null, A.map(function (a) { return a.part_rate_quartiles[4]; })), 0), over: SIR.sum(A, 'parts_over_60'), where: A.filter(function (a) { return a.parts_over_60; }).map(function (a) { return L('{n} in {name}', { n: a.parts_over_60, name: a.name }); }).join(L(' and ')), r_from: SIR.d(Math.max.apply(null, ms), 2), r_to: SIR.d(Math.min.apply(null, ms), 2) });
 
   var med = {}; A.forEach(function (a) { med[a.name] = a.part_rate_quartiles[2]; });
   var sel = document.getElementById('fac'); sel.innerHTML += A.map(function (a) { return '<option>' + a.name + '</option>'; }).join('');

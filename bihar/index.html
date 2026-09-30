@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="../assets/i18n.js"></script>
 <title>Bihar SIR 2025: deletion explorer</title>
-<meta name="description" content="Every name Bihar's Special Intensive Revision struck off the roll, down to the polling booth, set against the margins by which each seat was won. Aggregates only; no names.">
+<meta name="description" content="Every name Bihar's Special Intensive Revision struck off the roll, counted down to the polling booth and set against the margin by which each seat was won. Only totals are shown, never names.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 23V12M14 23V9M20 23v-7M26 23v-4' stroke='white' stroke-width='2.6' fill='none' stroke-linecap='round'/><path d='M6 26h20' stroke='%23c0504d' stroke-width='2.6' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="../assets/sir.css">
 </head>
@@ -44,14 +44,14 @@
   <div class="grid">
     <div class="panel"><h3>How many names each booth lost</h3><p id="p1p"></p><div class="chart"><canvas id="c1" aria-label="Booths by the number of names they lost"></canvas></div></div>
     <div class="panel"><h3 id="p2t"></h3><p id="p2p"></p><div class="chart"><canvas id="c2" aria-label="Names removed against winning margins"></canvas></div></div>
-    <div class="panel"><h3>Who was removed</h3><p>Women, and the religion the booth lists assign from each name. Unclassified names could belong to either.</p><div class="chart"><canvas id="c3" aria-label="Share of removals by sex and name-classified religion"></canvas></div></div>
+    <div class="panel"><h3>Who was removed</h3><p>Women, and the religion the booth lists assign to each name. A name left unclassified could belong to either group.</p><div class="chart"><canvas id="c3" aria-label="Share of removals by sex and name-classified religion"></canvas></div></div>
     <div class="panel"><h3 id="p4t"></h3><p id="p4p"></p><div class="chart"><canvas id="c4" aria-label="Distribution of removals"></canvas></div></div>
     <div class="panel wide"><h3 id="tblTitle"></h3><p>Click a column to sort, a row to open it.</p><div class="twrap" tabindex="0" role="region" aria-labelledby="tblTitle"><table id="tbl"></table></div></div>
   </div>
-  <p class="note">Removals: the Chief Electoral Officer's SIR deletion lists, phase 1 against the draft roll of 1 August 2025 and phase 2 before the final roll. Booth figures are phase 1, the only phase listed by booth; constituency figures add phase 2. Per 100 electors divides by the constituency's 2025 electorate. Margins are the declared 2025 Assembly results. NDA is BJP, JD(U), LJP(RV), HAM(S) and RLM; INDIA is RJD, INC, the Left parties, VIP and IIP. Aggregates only; no names or EPIC numbers. <a href="faq/">FAQ</a> · <a href="method/">Method</a>.</p>
+  <p class="note">Removals come from the Chief Electoral Officer's SIR deletion lists: phase 1 with the draft roll of 1 August 2025, and phase 2 before the final roll. Booth figures cover phase 1 only, because only phase 1 was listed by booth. Constituency figures include both phases. Removals per 100 electors are divided by the constituency's 2025 electorate, and margins are the declared 2025 Assembly results. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA is the RJD, INC, the Left parties, VIP and IIP. Only totals are published, never names or EPIC numbers. <a href="faq/">FAQ</a> · <a href="method/">Method</a>.</p>
 </main>
 </div>
-<footer>Research by Varna Sri Raman. Aggregates only; no names or EPIC numbers.</footer>
+<footer>Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../assets/sir.js"></script>
 <script>
@@ -120,7 +120,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
       [SIR.pct(100 * t.female / (t.female + t.male)), L('of the removed are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among the removed, by name classification')],
       [L('{a} of {b}', { a: overAll.length, b: withM.length }), L('seats lost more names than their 2025 margin')], [SIR.n(t.booths), L('polling booths')]]);
     var hk = Object.keys(s.booth_histogram);
-    document.getElementById('p1p').textContent = L('Booths by the number of names removed in phase 1. Most lost under a hundred; {n} lost more than 200.', { n: SIR.n(b200) });
+    document.getElementById('p1p').textContent = L('Booths by the number of names removed in phase 1. Most lost fewer than a hundred, and {n} lost more than 200.', { n: SIR.n(b200) });
     SIR.redraw('c1', { type: 'bar', data: { labels: hk, datasets: [{ label: L('Booths'), data: hk.map(function (k) { return s.booth_histogram[k]; }), $token: '--fill-navy' }] },
       options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names removed in the booth') } }, y: { title: { display: true, text: L('Booths') } } } } });
     var cuts = [0, 1, 2, 5, 10, 20, Infinity], lab = [L('under 1×'), L('{a} to {b}×', { a: 1, b: 2 }), L('{a} to {b}×', { a: 2, b: 5 }), L('{a} to {b}×', { a: 5, b: 10 }), L('{a} to {b}×', { a: 10, b: 20 }), L('20× or more')];
@@ -161,7 +161,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     var rel = relShare(a.hindu, a.muslim, a.unknown);
     kpis([[SIR.n(a.total), L('names removed, both phases')], [SIR.d(a.per_100, 2), L('per 100 electors on the 2025 roll')],
       [SIR.pct(100 * a.t_f / (a.t_f + a.t_m)), L('of the removed are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among the removed')],
-      [SIR.d(a.per_booth, 1), L('names per booth; {n} booths lost over 200', { n: a.booths_200 })],
+      [SIR.d(a.per_booth, 1), L('names per booth, and {n} booths lost over 200', { n: a.booths_200 })],
       [a.margin2025 ? SIR.d(a.total / a.margin2025, 1) + '×' : '–', L('the 2025 winning margin')]]);
     var edges = [0, 50, 100, 150, 200, 250, 300, 400, Infinity], lab = ['0-49', '50-99', '100-149', '150-199', '200-249', '250-299', '300-399', '400+'];
     document.getElementById('p1p').textContent = L('Booths in {name} by the number of names removed in phase 1.', { name: a.name });
