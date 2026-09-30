@@ -40,6 +40,14 @@
   <p class="sub"><b>Press note</b>: the Chief Electoral Officer's own document. <b>Press report</b>: the Chief Electoral Officer's figures as reported by a newspaper or agency, linked. <b>Lists</b>: counted on this site.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Sources for each state"><table id="tSrc"></table></div>
 
+  <h2>Women among the removed</h2>
+  <p>Ten states have a split by sex: removals by sex where a state published them, or the roll by sex before the revision and on the draft, from which women removed is the difference. <b>Exact</b>: whole numbers from the Chief Electoral Officer or a count of the list. <b>Rounded</b>: published in lakh or crore. <b>Earlier roll</b>: the roll before the revision is an older one than the roll frozen for it. <b>Unverified</b>: from a press analysis that cites no primary source. Bihar is compared with women's share of the 2011 population, because its roll by sex is not in these sources.</p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Sources for the split by sex"><table id="tGsrc"></table></div>
+
+  <h2>State characteristics</h2>
+  <p>Urban share, literacy, SC and ST shares, sex ratio and population are from the 2011 census primary census abstract; the Muslim share from the 2011 religion tables; the two migration measures from the 2011 place-of-birth tables (born in the state and living in another, and living in the state and born in another, each as a share of the state's population). Telangana and Andhra Pradesh are rebuilt from their 2011 districts and have no migration figure, because the 2011 tables count a move between them as a move within one state. Income per head is per capita net state domestic product at current prices for 2023-24, from the Reserve Bank's handbook of state statistics; Lakshadweep and Dadra and Nagar Haveli and Daman and Diu have none. International borders are from the Ministry of Home Affairs.</p>
+  <p>Correlations are rank correlations across states, so a single very large or very small state moves them less than it would a linear correlation. They are still based on a few dozen states at most, and a state-level relationship says nothing about which people within a state were removed.</p>
+
   <h2>What the figures cannot show</h2>
   <p>A reason is what an officer entered after a visit or its absence. It is not a finding that the elector was dead, had moved or was enrolled twice, and the figures cannot say how many entries were wrong. Outside Bihar they are totals published by the states, not counts from the lists, so they cannot be broken down by sex, age, booth or constituency, or checked name by name. Several states' figures were published rounded, some reports of the same state disagree, and three states' reasons leave some names unexplained; each is noted against its row. The downloadable table carries every figure with its source.</p>
   <p class="note">Collected from the published figures up to 30 September 2026. <a href="../">All India</a>.</p>
@@ -58,6 +66,12 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/reasons.js
     { k: 'source', label: L('Source'), left: true, fmt: function (v, s) { var t = SK[v] || '–'; return s.source_url ? '<a href="' + SIR.esc(s.source_url) + '" rel="noopener">' + t + '</a>' : t; } },
     { k: 'note', label: L('Note'), left: true, fmt: function (v) { return v ? SIR.esc(v) : '–'; } }
   ], d.states, { sort: 'state', dir: 1 });
+  var GQ = { exact: L('Exact'), rounded: L('Rounded'), proxy: L('Earlier roll'), unverified: L('Unverified'), lists: L('Lists') };
+  SIR.table(document.getElementById('tGsrc'), [
+    { k: 'state', label: L('State or union territory'), left: true, fmt: function (v) { return SIR.esc(v); } },
+    { k: 'quality', label: L('Figures'), left: true, fmt: function (v, g) { var t = GQ[v] || v; return g.source_url ? '<a href="' + SIR.esc(g.source_url) + '" rel="noopener">' + t + '</a>' : t; } },
+    { k: 'note', label: L('Note'), left: true, fmt: function (v) { return SIR.esc(v); } }
+  ], d.gender, { sort: 'state', dir: 1 });
 }).catch(SIR.fail);
 </script>
 </body>

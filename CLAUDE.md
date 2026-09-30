@@ -79,6 +79,18 @@ Removals after the draft carry no reason anywhere and are kept apart. When a
 state publishes a final roll or a primary press note, update its row and its
 flags, not the totals.
 
+Two more curated files feed the same build. `data/india/raw/covariates.csv`
+holds each state's characteristics (Census 2011, RBI income per head 2023-24,
+Home Ministry borders) with a source per variable; `build_india.py` computes
+rank correlations with the removal rate and the reason shares, for all states,
+by phase and for states of 50 lakh or more. **Report the phase split with
+every pooled figure**: the pooled correlations with in-migration, income and
+the Muslim share come entirely from phase 3, where destination states and the
+North-East differ on all of them at once, and none holds in phase 2.
+`data/india/raw/gender.csv` has the ten states with a split by sex, each
+flagged exact, rounded, earlier roll or unverified; add a state only with its
+source, and keep Tamil Nadu flagged until a primary figure turns up.
+
 ## Hyderabad
 
 `hyderabad/explorer/index.html` carries the part-level counts inline as

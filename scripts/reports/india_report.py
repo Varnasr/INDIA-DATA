@@ -138,6 +138,53 @@ R.table(['State or UT', 'Phase', 'Removed', 'Per 100', 'Dead', 'Shifted, absent,
 R.p('Split: Full, the reasons account for the total (within rounding); Short, the reasons leave some names unexplained (%s); None, no split was found (%s). Figures: rounded where the state published in lakh or crore (%d states).'
     % (andj(short), andj(none), len(rounded)))
 
+R.h2('Women among the removed')
+G = sorted(N['gender'], key=lambda g: -g['gap'])
+gOver = [g for g in G if g['gap'] > 1]
+gEven = [g for g in G if abs(g['gap']) <= 1]
+gUnder = [g for g in G if g['gap'] < -1]
+QN = {'exact': 'exact', 'rounded': 'rounded', 'proxy': 'earlier roll', 'unverified': 'unverified', 'lists': 'lists'}
+fig, ax = plt.subplots(figsize=(7, 4.2))
+ys = list(range(len(G)))[::-1]
+ax.barh([y + 0.2 for y in ys], [g['women_share_removed'] for g in G], height=0.4, color='#AF3B6E', label='Women, % of names removed')
+ax.barh([y - 0.2 for y in ys], [g['women_share_roll'] for g in G], height=0.4, color=C['dead'], label='Women, % of the roll')
+ax.set_yticks(ys)
+ax.set_yticklabels([g['state'] for g in G], fontsize=8)
+ax.set_xlim(40, 60)
+ax.legend(fontsize=7, frameon=False, loc='lower right')
+style_axes(ax, 'Women\'s share of removals and of the roll')
+R.figure(fig, 'Figure 3. States that published a split by sex. Bihar is compared with women\'s share of the 2011 population.', width=14)
+R.p('Only ten states have published their removals by sex, or their roll by sex before the revision and on the draft. In %d of the ten, women are a larger share of the names removed than of the roll, by up to %.1f points in %s. %s %s within a point of even, and %s runs the other way, by %.1f points. '
+    'Most phase 3 states have published no split by sex, so this is not the national picture.'
+    % (len(gOver), G[0]['gap'], G[0]['state'], andj([g['state'] for g in gEven]), 'is' if len(gEven) == 1 else 'are',
+       andj([g['state'] for g in gUnder]), -gUnder[0]['gap'] if gUnder else 0))
+R.table(['State', 'Women removed', 'Men removed', 'Women, % removed', 'Women, % of roll', 'Difference', 'Figures'],
+        [[g['state'], indian(g['women_removed']), indian(g['men_removed']), '%.1f' % g['women_share_removed'], '%.1f' % g['women_share_roll'], '%+.1f' % g['gap'], QN[g['quality']]] for g in G],
+        widths=[3.2, 2.4, 2.4, 2.1, 2.1, 1.8, 2.2], right={1, 2, 3, 4, 5}, size=8)
+
+R.h2('What goes with the removal rate')
+CR = N['correlations']
+CL = {'income_pc': 'income per head', 'urban_pct': 'urban share', 'literacy': 'literacy', 'female_literacy': 'women\'s literacy', 'muslim_pct': 'Muslim share',
+      'sc_pct': 'SC share', 'st_pct': 'ST share', 'sex_ratio': 'sex ratio', 'out_migration': 'share born here but living in another state',
+      'in_migration': 'share of residents born in another state'}
+fmtr = lambda c, k: '–' if c[k] is None else '%.2f (%d)' % (c[k], c['n_' + k])
+top = max(CR, key=lambda c: abs(c['per_100_all']))
+p3 = [CL[c['key']] for c in CR if c['per_100_phase3'] is not None and abs(c['per_100_phase3']) >= 0.4]
+mus = next(c for c in CR if c['key'] == 'muslim_pct')
+dupTop = max(CR, key=lambda c: abs(c['duplicate_big']))
+B = N['border']
+R.p('Each state\'s removals per 100 electors, and the shares of its removals entered as dead or as enrolled more than once, are set against its characteristics as rank correlations across states: 1 means the two rise together, 0 no relationship, and anything under 0.2 either way is read as none. The number of states in each is in brackets.')
+R.table(['Characteristic', 'Rate, all states', 'Rate, phase 2', 'Rate, phase 3', 'Share dead', 'Share twice, larger states'],
+        [[CL[c['key']][0].upper() + CL[c['key']][1:], fmtr(c, 'per_100_all'), fmtr(c, 'per_100_phase2'), fmtr(c, 'per_100_phase3'), fmtr(c, 'dead_all'), fmtr(c, 'duplicate_big')]
+         for c in sorted(CR, key=lambda c: -c['per_100_all'])],
+        widths=[5.2, 2.4, 2.4, 2.4, 2.2, 2.6], right={1, 2, 3, 4, 5}, size=8)
+R.p('Across all states the removal rate goes most with the %s (%.2f), but that does not hold within phase 2 (%.2f); it comes from phase 3 (%.2f). In phase 3, %s are all related to the removal rate, because the large destination states of phase 3 are richer, more urban and home to more migrants than the North-Eastern states revised with them, and %d states cannot separate one of these from another. '
+    'The Muslim share of a state\'s population shows no consistent relationship: %.2f across all states, %.2f in phase 2 and %.2f in phase 3. Among the larger states, the share entered as enrolled more than once goes most with %s (%.2f).'
+    % (CL[top['key']], top['per_100_all'], top['per_100_phase2'], top['per_100_phase3'], andj(p3), top['n_per_100_phase3'],
+       mus['per_100_all'], mus['per_100_phase2'], mus['per_100_phase3'], CL[dupTop['key']], dupTop['duplicate_big']))
+R.p('States on an international border removed fewer names, not more: a median of %.1f per 100 electors across %d border states, against %.1f across %d interior states. None of these relationships says who was removed within a state; a state-level relationship is not a finding about individuals.'
+    % (B['per_100_yes'], B['n_per_100_yes'], B['per_100_no'], B['n_per_100_no']))
+
 R.h2('After the draft roll')
 R.p('After the draft rolls, %d states have published how many more names they removed at hearings and on objections: %s in all. No state has said why, so these removals are outside every figure by reason in this report. '
     'Additions after the draft are outside it too; the final rolls of twelve phase 3 states are still to come.' % (AD['states'], lakh(AD['removed'])))

@@ -53,6 +53,29 @@
   </div>
   <p class="finding" id="fMix"></p>
 
+  <h2>Women among the removed</h2>
+  <p class="sub">Only some states have published their removals by sex, or their roll by sex before and after the draft. For each of them, women's share of the names removed beside women's share of the roll.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart tall"><canvas id="cGender" aria-label="Women's share of removals and of the roll, by state"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fGender"></p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Women among the removed, by state"><table id="tGender"></table></div>
+
+  <h2>What goes with the removal rate</h2>
+  <p class="sub">Each state's removals per 100 electors, and the share of its removals entered as dead or as enrolled more than once, against its characteristics. The figures are rank correlations across states: 1 means the two rise together, 0 no relationship, and anything under 0.2 either way is read as none. Characteristics are from the 2011 census, except income per head (2023-24).</p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Rank correlations with state characteristics"><table id="tCorr"></table></div>
+  <div class="grid">
+    <div class="panel wide">
+      <h3>Removal rate against the share of residents born in another state</h3>
+      <p>Each dot is a state, coloured by phase.</p>
+      <div class="chart tall"><canvas id="cMig" aria-label="Removals per 100 electors against the share of residents born in another state"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fCorr"></p>
+  <p class="finding" id="fBorder"></p>
+
   <h2>Every state and union territory</h2>
   <p class="sub">Figures at the draft roll. <b>Rounded</b>: the state's figures were published in lakh or crore. <b>Short</b>: the reasons published leave some names unexplained. <b>None</b>: no split by reason was found. Sources for each row are on the <a href="method/">method page</a>.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Every state and union territory"><table id="tStates"></table></div>
@@ -102,6 +125,54 @@ SIR.json('data/india/states.json').then(function (d) {
     lo: SIR.pct(bigS[bigS.length - 1].shares.shifted_absent_other), lon: bigS[bigS.length - 1].state, hi: SIR.pct(bigS[0].shares.shifted_absent_other), hin: bigS[0].state,
     dn: hiDead[0].state, dv: SIR.pct(hiDead[0].shares.dead), pn: hiDup[0].state, pv: SIR.pct(hiDup[0].shares.duplicate) });
 
+
+  // ---- women among the removed
+  var G = d.gender.slice().sort(function (a, b) { return b.gap - a.gap; });
+  SIR.chart('cGender', { type: 'bar', data: { labels: G.map(function (g) { return g.state; }), datasets: [
+      { label: L('Women, % of names removed'), data: G.map(function (g) { return g.women_share_removed; }), $token: '--fill-pink' },
+      { label: L('Women, % of the roll'), data: G.map(function (g) { return g.women_share_roll; }), $token: '--fill-grey' }] },
+    options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { min: 40, max: 60, title: { display: true, text: L('Women, %') } } } } });
+  var gOver = G.filter(function (g) { return g.gap > 1; }), gUnder = G.filter(function (g) { return g.gap < -1; }), gEven = G.filter(function (g) { return Math.abs(g.gap) <= 1; });
+  document.getElementById('fGender').innerHTML = L('<b>In {over} of the {n} states with a split by sex, women are a larger share of the names removed than of the roll</b>, by up to {max} points in {maxs}. {even} are within a point of even, and {under} runs the other way, by {u} points. Most phase 3 states have published no split by sex, so this covers {n} of {all} states and cannot be taken as the national picture.', {
+    over: gOver.length, n: G.length, max: SIR.d(G[0].gap, 1), maxs: G[0].state, even: gEven.map(function (g) { return g.state; }).join(L(' and ')),
+    under: gUnder.map(function (g) { return g.state; }).join(L(' and ')), u: gUnder.length ? SIR.d(-gUnder[0].gap, 1) : '0', all: T.states });
+  var GQ = { exact: L('Exact'), rounded: L('Rounded'), proxy: L('Earlier roll'), unverified: L('Unverified'), lists: L('Lists') };
+  SIR.table(document.getElementById('tGender'), [
+    { k: 'state', label: L('State or union territory'), left: true, fmt: function (v) { return SIR.esc(v); } },
+    { k: 'women_removed', label: L('Women removed'), fmt: SIR.n }, { k: 'men_removed', label: L('Men removed'), fmt: SIR.n },
+    { k: 'women_share_removed', label: L('Women, % removed'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'women_share_roll', label: L('Women, % of roll'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'gap', label: L('Difference, points'), fmt: function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 1); } },
+    { k: 'quality', label: L('Figures'), left: true, fmt: function (v) { return GQ[v] || v; } }
+  ], G, { sort: 'gap' });
+
+  // ---- correlations
+  var CL = { income_pc: L('income per head'), urban_pct: L('urban share'), literacy: L('literacy'), female_literacy: L('women\'s literacy'), muslim_pct: L('Muslim share'), sc_pct: L('SC share'), st_pct: L('ST share'), sex_ratio: L('sex ratio'), out_migration: L('share born here but living in another state'), in_migration: L('share of residents born in another state') };
+  var C = d.correlations;
+  var cell = function (k) { return function (v, row) { return v == null ? '–' : SIR.d(v, 2) + ' <span class="muted">(' + row['n_' + k] + ')</span>'; }; };
+  SIR.table(document.getElementById('tCorr'), [
+    { k: 'key', label: L('Characteristic'), left: true, fmt: function (v) { return CL[v].charAt(0).toUpperCase() + CL[v].slice(1); } },
+    { k: 'per_100_all', label: L('Removal rate, all states'), fmt: cell('per_100_all') },
+    { k: 'per_100_phase2', label: L('Removal rate, phase 2'), fmt: cell('per_100_phase2') },
+    { k: 'per_100_phase3', label: L('Removal rate, phase 3'), fmt: cell('per_100_phase3') },
+    { k: 'dead_all', label: L('Share dead'), fmt: cell('dead_all') },
+    { k: 'duplicate_big', label: L('Share enrolled twice, larger states'), fmt: cell('duplicate_big') }
+  ], C, { sort: 'per_100_all' });
+  var PC = { '1': '--fill-red', '2': '--fill-navy', '3': '--fill-amber' };
+  var mig = has.filter(function (s) { return s.char.in_migration != null && s.per_100 != null; });
+  SIR.chart('cMig', { type: 'scatter', data: { datasets: ['1', '2', '3'].map(function (p) { return { label: PN[p], data: mig.filter(function (s) { return s.phase === p; }).map(function (s) { return { x: s.char.in_migration, y: s.per_100, n: s.state }; }), $token: PC[p], pointRadius: 5 }; }) },
+    options: { plugins: { tooltip: { callbacks: { label: function (c) { return L('{n}: {y} per 100, {x}% born elsewhere', { n: c.raw.n, y: SIR.d(c.raw.y, 1), x: SIR.d(c.raw.x, 1) }); } } } },
+      scales: { x: { type: 'logarithmic', title: { display: true, text: L('Residents born in another state, % (2011, log scale)') } }, y: { beginAtZero: true, title: { display: true, text: L('Removed per 100 electors') } } } } });
+  var top = C.slice().sort(function (a, b) { return Math.abs(b.per_100_all) - Math.abs(a.per_100_all); })[0];
+  var p3 = C.filter(function (c) { return c.per_100_phase3 != null && Math.abs(c.per_100_phase3) >= 0.4; }).map(function (c) { return CL[c.key]; });
+  var dupTop = C.slice().sort(function (a, b) { return Math.abs(b.duplicate_big) - Math.abs(a.duplicate_big); })[0];
+  var mus = C.filter(function (c) { return c.key === 'muslim_pct'; })[0];
+  document.getElementById('fCorr').innerHTML = L('<b>Across all states the removal rate goes most with {top} ({r}), but that does not hold within phase 2 ({r2}); it comes from phase 3 ({r3}).</b> In phase 3, {p3} are all related to the removal rate, because the large destination states of phase 3 are richer, more urban and home to more migrants than the North-Eastern states revised with them, and {n3} states cannot separate one of these from another. The Muslim share of a state\'s population shows no consistent relationship: {m1} across all states, {m2} in phase 2 and {m3} in phase 3. Among the larger states, the share entered as enrolled more than once goes most with {dup} ({rd}). None of this says who was removed within a state; a state-level relationship is not a finding about individuals.', {
+    top: CL[top.key], r: SIR.d(top.per_100_all, 2), r2: SIR.d(top.per_100_phase2, 2), r3: SIR.d(top.per_100_phase3, 2), p3: p3.join(', '), n3: top.n_per_100_phase3,
+    m1: SIR.d(mus.per_100_all, 2), m2: SIR.d(mus.per_100_phase2, 2), m3: SIR.d(mus.per_100_phase3, 2), dup: CL[dupTop.key], rd: SIR.d(dupTop.duplicate_big, 2) });
+  var B = d.border;
+  document.getElementById('fBorder').innerHTML = L('<b>States on an international border removed fewer names, not more: a median of {y} per 100 electors across {ny} border states, against {n} across {nn} interior states.</b> The median share entered as dead is {dy} in border states and {dn} in the interior; enrolled more than once, {py} and {pn}.', {
+    y: SIR.d(B.per_100_yes, 1), ny: B.n_per_100_yes, n: SIR.d(B.per_100_no, 1), nn: B.n_per_100_no, dy: SIR.pct(B.dead_yes), dn: SIR.pct(B.dead_no), py: SIR.pct(B.duplicate_yes), pn: SIR.pct(B.duplicate_no) });
   var SPN = { complete: L('Full'), 'short': L('Short'), none: L('None'), pending: L('No draft yet') }, FN = { exact: L('Exact'), rounded: L('Rounded') };
   var num = function (v) { return v == null ? '–' : SIR.n(v); };
   SIR.table(document.getElementById('tStates'), [

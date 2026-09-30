@@ -26,6 +26,48 @@ RAW = os.path.join(ROOT, 'data', 'india', 'raw', 'states.csv')
 OUT_J = os.path.join(ROOT, 'data', 'india', 'states.json')
 OUT_C = os.path.join(ROOT, 'data', 'india', 'states.csv')
 R = ['dead', 'shifted_absent_other', 'duplicate']
+COV = os.path.join(ROOT, 'data', 'india', 'raw', 'covariates.csv')
+GEN = os.path.join(ROOT, 'data', 'india', 'raw', 'gender.csv')
+BIHAR_REASONS = os.path.join(ROOT, 'data', 'bihar', 'reasons.json')
+# Characteristics set against the removal rate and the mix of reasons. Census
+# 2011 unless stated; income is per capita NSDP, 2023-24.
+CHAR = [('income_pc', 'Income per head'), ('urban_pct', 'Urban share'), ('literacy', 'Literacy'),
+        ('female_literacy', 'Women\'s literacy'), ('muslim_pct', 'Muslim share'), ('sc_pct', 'SC share'),
+        ('st_pct', 'ST share'), ('sex_ratio', 'Sex ratio'), ('out_migration', 'Born here, living elsewhere'),
+        ('in_migration', 'Living here, born elsewhere')]
+BIG = 5e6  # states of 50 lakh people or more in 2011
+
+
+def ranks(x):
+    o = sorted(range(len(x)), key=lambda i: x[i])
+    r = [0.0] * len(x)
+    i = 0
+    while i < len(o):
+        j = i
+        while j + 1 < len(o) and x[o[j + 1]] == x[o[i]]:
+            j += 1
+        for k in range(i, j + 1):
+            r[o[k]] = (i + j) / 2 + 1
+        i = j + 1
+    return r
+
+
+def spearman(pts):
+    """Rank correlation of (x, y) pairs; None below six pairs."""
+    if len(pts) < 6:
+        return None
+    x, y = ranks([a for a, _ in pts]), ranks([b for _, b in pts])
+    n = len(x)
+    mx, my = sum(x) / n, sum(y) / n
+    num = sum((x[i] - mx) * (y[i] - my) for i in range(n))
+    den = (sum((v - mx) ** 2 for v in x) * sum((v - my) ** 2 for v in y)) ** 0.5
+    return round(num / den, 2)
+
+
+def median(v):
+    v = sorted(v)
+    n = len(v)
+    return None if not n else (v[n // 2] if n % 2 else (v[n // 2 - 1] + v[n // 2]) / 2)
 INT = ['electors_before', 'removed', 'removed_after_draft'] + R
 
 
@@ -74,8 +116,63 @@ def build():
         t['per_100'] = round(100 * sum(x['removed'] for x in wb) / sum(x['electors_before'] for x in wb), 2)
         return t
 
+    # ---- characteristics
+    cov = {}
+    for x in csv.DictReader(open(COV, encoding='utf-8')):
+        c = {}
+        for k, _ in CHAR + [('population_2011', '')]:
+            c[k] = float(x[k]) if x[k] not in ('', None) else None
+        c['intl_border'] = x['intl_border'] == 'yes'
+        c['border_countries'] = x['border_countries'] or ''
+        cov[x['state']] = c
+    assert set(cov) == set(names), 'a characteristics row for every state'
+    for x in rows:
+        x['char'] = cov[x['state']]
+    outcomes = [('per_100', lambda x: x['per_100'])] + [(k, (lambda k: lambda x: x['shares'][k] if x['shares'] else None)(k)) for k in R]
+    groups = [('all', lambda x: True), ('big', lambda x: x['char']['population_2011'] >= BIG),
+              ('phase2', lambda x: x['phase'] == '2'), ('phase3', lambda x: x['phase'] == '3')]
+    corr = []
+    for k, label in CHAR:
+        row = {'key': k, 'label': label}
+        for yk, yf in outcomes:
+            for g, gf in groups:
+                pts = [(x['char'][k], yf(x)) for x in has if gf(x) and x['char'][k] is not None and yf(x) is not None]
+                row[yk + '_' + g] = spearman(pts)
+                row['n_' + yk + '_' + g] = len(pts)
+        corr.append(row)
+    border = {}
+    for yk, yf in outcomes:
+        for side in ('yes', 'no'):
+            v = [yf(x) for x in has if yf(x) is not None and x['char']['intl_border'] == (side == 'yes')]
+            border[yk + '_' + side] = round(median(v), 2)
+            border['n_' + yk + '_' + side] = len(v)
+
+    # ---- women among the removed
+    rs = json.load(open(BIHAR_REASONS, encoding='utf-8'))
+    bf = sum(rs['by_sex'][k]['F'] for k in rs['by_sex'])
+    bm = sum(rs['by_sex'][k]['M'] for k in rs['by_sex'])
+    gender = [{'state': 'Bihar', 'women_removed': bf, 'men_removed': bm, 'women_share_removed': round(100 * bf / (bf + bm), 2),
+               'women_share_roll': 47.86, 'quality': 'lists', 'source_url': '',
+               'note': 'Counted from the phase 1 deletion lists. The roll by sex is not in these sources, so the comparison is with women\'s share of the 2011 population.'}]
+    for x in csv.DictReader(open(GEN, encoding='utf-8')):
+        assert x['state'] in names, x['state']
+        g = dict(x)
+        for k in ('women_removed', 'men_removed'):
+            g[k] = int(g[k])
+        for k in ('women_share_removed', 'women_share_roll'):
+            g[k] = float(g[k])
+        assert abs(100 * g['women_removed'] / (g['women_removed'] + g['men_removed']) - g['women_share_removed']) < 0.01, x['state']
+        gender.append(g)
+    for g in gender:
+        g['gap'] = round(g['women_share_removed'] - g['women_share_roll'], 2)
+        g['phase'] = next(x['phase'] for x in rows if x['state'] == g['state'])
+
     out = {
         'as_of': '2026-09-30',
+        'characteristics': [{'key': k, 'label': l} for k, l in CHAR],
+        'correlations': corr,
+        'border': border,
+        'gender': gender,
         'reasons': R,
         'total': total(has),
         'by_phase': {p: total([x for x in has if x['phase'] == p]) for p in ('1', '2', '3')},
@@ -91,11 +188,18 @@ def dump_csv(d):
     import io
     cols = ['state', 'phase', 'draft_date', 'electors_before', 'removed', 'per_100', 'dead', 'shifted_absent_other', 'duplicate', 'unsplit',
             'split', 'figures', 'source', 'source_url', 'removed_after_draft', 'final_date', 'note']
+    gen = {g['state']: g for g in d['gender']}
     b = io.StringIO()
+    cols = cols + ['women_share_removed', 'women_share_roll', 'sex_split_quality'] + [k for k, _ in CHAR] + ['intl_border']
     w = csv.DictWriter(b, fieldnames=cols, extrasaction='ignore', lineterminator='\n')
     w.writeheader()
     for x in d['states']:
-        w.writerow({k: ('' if x.get(k) is None else x[k]) for k in cols})
+        g = gen.get(x['state'], {})
+        row = {k: ('' if x.get(k) is None else x[k]) for k in cols}
+        row.update({'women_share_removed': g.get('women_share_removed', ''), 'women_share_roll': g.get('women_share_roll', ''), 'sex_split_quality': g.get('quality', '')})
+        row.update({k: ('' if x['char'][k] is None else x['char'][k]) for k, _ in CHAR})
+        row['intl_border'] = 'yes' if x['char']['intl_border'] else 'no'
+        w.writerow(row)
     return b.getvalue()
 
 

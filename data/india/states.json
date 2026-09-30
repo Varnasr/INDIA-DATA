@@ -1,5 +1,549 @@
 {
  "as_of": "2026-09-30",
+ "characteristics": [
+  {
+   "key": "income_pc",
+   "label": "Income per head"
+  },
+  {
+   "key": "urban_pct",
+   "label": "Urban share"
+  },
+  {
+   "key": "literacy",
+   "label": "Literacy"
+  },
+  {
+   "key": "female_literacy",
+   "label": "Women's literacy"
+  },
+  {
+   "key": "muslim_pct",
+   "label": "Muslim share"
+  },
+  {
+   "key": "sc_pct",
+   "label": "SC share"
+  },
+  {
+   "key": "st_pct",
+   "label": "ST share"
+  },
+  {
+   "key": "sex_ratio",
+   "label": "Sex ratio"
+  },
+  {
+   "key": "out_migration",
+   "label": "Born here, living elsewhere"
+  },
+  {
+   "key": "in_migration",
+   "label": "Living here, born elsewhere"
+  }
+ ],
+ "correlations": [
+  {
+   "key": "income_pc",
+   "label": "Income per head",
+   "per_100_all": 0.4,
+   "n_per_100_all": 28,
+   "per_100_big": 0.55,
+   "n_per_100_big": 19,
+   "per_100_phase2": 0.17,
+   "n_per_100_phase2": 11,
+   "per_100_phase3": 0.5,
+   "n_per_100_phase3": 16,
+   "dead_all": -0.25,
+   "n_dead_all": 26,
+   "dead_big": -0.37,
+   "n_dead_big": 18,
+   "dead_phase2": 0.48,
+   "n_dead_phase2": 11,
+   "dead_phase3": -0.43,
+   "n_dead_phase3": 14,
+   "shifted_absent_other_all": 0.28,
+   "n_shifted_absent_other_all": 26,
+   "shifted_absent_other_big": 0.38,
+   "n_shifted_absent_other_big": 18,
+   "shifted_absent_other_phase2": -0.18,
+   "n_shifted_absent_other_phase2": 11,
+   "shifted_absent_other_phase3": 0.31,
+   "n_shifted_absent_other_phase3": 14,
+   "duplicate_all": -0.27,
+   "n_duplicate_all": 26,
+   "duplicate_big": -0.39,
+   "n_duplicate_big": 18,
+   "duplicate_phase2": -0.61,
+   "n_duplicate_phase2": 11,
+   "duplicate_phase3": 0.03,
+   "n_duplicate_phase3": 14
+  },
+  {
+   "key": "urban_pct",
+   "label": "Urban share",
+   "per_100_all": 0.21,
+   "n_per_100_all": 30,
+   "per_100_big": 0.48,
+   "n_per_100_big": 19,
+   "per_100_phase2": -0.23,
+   "n_per_100_phase2": 12,
+   "per_100_phase3": 0.52,
+   "n_per_100_phase3": 17,
+   "dead_all": -0.18,
+   "n_dead_all": 27,
+   "dead_big": -0.32,
+   "n_dead_big": 18,
+   "dead_phase2": 0.52,
+   "n_dead_phase2": 12,
+   "dead_phase3": -0.61,
+   "n_dead_phase3": 14,
+   "shifted_absent_other_all": 0.23,
+   "n_shifted_absent_other_all": 27,
+   "shifted_absent_other_big": 0.34,
+   "n_shifted_absent_other_big": 18,
+   "shifted_absent_other_phase2": -0.23,
+   "n_shifted_absent_other_phase2": 12,
+   "shifted_absent_other_phase3": 0.44,
+   "n_shifted_absent_other_phase3": 14,
+   "duplicate_all": -0.28,
+   "n_duplicate_all": 27,
+   "duplicate_big": -0.58,
+   "n_duplicate_big": 18,
+   "duplicate_phase2": -0.43,
+   "n_duplicate_phase2": 12,
+   "duplicate_phase3": 0.11,
+   "n_duplicate_phase3": 14
+  },
+  {
+   "key": "literacy",
+   "label": "Literacy",
+   "per_100_all": -0.07,
+   "n_per_100_all": 30,
+   "per_100_big": 0.18,
+   "n_per_100_big": 19,
+   "per_100_phase2": -0.05,
+   "n_per_100_phase2": 12,
+   "per_100_phase3": -0.04,
+   "n_per_100_phase3": 17,
+   "dead_all": 0.08,
+   "n_dead_all": 27,
+   "dead_big": 0.01,
+   "n_dead_big": 18,
+   "dead_phase2": 0.44,
+   "n_dead_phase2": 12,
+   "dead_phase3": -0.04,
+   "n_dead_phase3": 14,
+   "shifted_absent_other_all": 0.04,
+   "n_shifted_absent_other_all": 27,
+   "shifted_absent_other_big": 0.07,
+   "n_shifted_absent_other_big": 18,
+   "shifted_absent_other_phase2": -0.25,
+   "n_shifted_absent_other_phase2": 12,
+   "shifted_absent_other_phase3": 0.13,
+   "n_shifted_absent_other_phase3": 14,
+   "duplicate_all": -0.44,
+   "n_duplicate_all": 27,
+   "duplicate_big": -0.78,
+   "n_duplicate_big": 18,
+   "duplicate_phase2": -0.33,
+   "n_duplicate_phase2": 12,
+   "duplicate_phase3": -0.31,
+   "n_duplicate_phase3": 14
+  },
+  {
+   "key": "female_literacy",
+   "label": "Women's literacy",
+   "per_100_all": -0.14,
+   "n_per_100_all": 30,
+   "per_100_big": 0.17,
+   "n_per_100_big": 19,
+   "per_100_phase2": -0.09,
+   "n_per_100_phase2": 12,
+   "per_100_phase3": -0.18,
+   "n_per_100_phase3": 17,
+   "dead_all": 0.12,
+   "n_dead_all": 27,
+   "dead_big": 0.04,
+   "n_dead_big": 18,
+   "dead_phase2": 0.47,
+   "n_dead_phase2": 12,
+   "dead_phase3": 0.03,
+   "n_dead_phase3": 14,
+   "shifted_absent_other_all": 0.02,
+   "n_shifted_absent_other_all": 27,
+   "shifted_absent_other_big": 0.01,
+   "n_shifted_absent_other_big": 18,
+   "shifted_absent_other_phase2": -0.28,
+   "n_shifted_absent_other_phase2": 12,
+   "shifted_absent_other_phase3": 0.14,
+   "n_shifted_absent_other_phase3": 14,
+   "duplicate_all": -0.5,
+   "n_duplicate_all": 27,
+   "duplicate_big": -0.74,
+   "n_duplicate_big": 18,
+   "duplicate_phase2": -0.35,
+   "n_duplicate_phase2": 12,
+   "duplicate_phase3": -0.46,
+   "n_duplicate_phase3": 14
+  },
+  {
+   "key": "muslim_pct",
+   "label": "Muslim share",
+   "per_100_all": 0.12,
+   "n_per_100_all": 30,
+   "per_100_big": 0.15,
+   "n_per_100_big": 19,
+   "per_100_phase2": -0.34,
+   "n_per_100_phase2": 12,
+   "per_100_phase3": 0.53,
+   "n_per_100_phase3": 17,
+   "dead_all": -0.11,
+   "n_dead_all": 27,
+   "dead_big": -0.22,
+   "n_dead_big": 18,
+   "dead_phase2": 0.37,
+   "n_dead_phase2": 12,
+   "dead_phase3": -0.54,
+   "n_dead_phase3": 14,
+   "shifted_absent_other_all": 0.01,
+   "n_shifted_absent_other_all": 27,
+   "shifted_absent_other_big": 0.22,
+   "n_shifted_absent_other_big": 18,
+   "shifted_absent_other_phase2": -0.43,
+   "n_shifted_absent_other_phase2": 12,
+   "shifted_absent_other_phase3": 0.37,
+   "n_shifted_absent_other_phase3": 14,
+   "duplicate_all": 0.33,
+   "n_duplicate_all": 27,
+   "duplicate_big": 0.08,
+   "n_duplicate_big": 18,
+   "duplicate_phase2": 0.34,
+   "n_duplicate_phase2": 12,
+   "duplicate_phase3": 0.38,
+   "n_duplicate_phase3": 14
+  },
+  {
+   "key": "sc_pct",
+   "label": "SC share",
+   "per_100_all": 0.05,
+   "n_per_100_all": 30,
+   "per_100_big": -0.18,
+   "n_per_100_big": 19,
+   "per_100_phase2": 0.03,
+   "n_per_100_phase2": 12,
+   "per_100_phase3": 0.06,
+   "n_per_100_phase3": 17,
+   "dead_all": 0.07,
+   "n_dead_all": 27,
+   "dead_big": 0.22,
+   "n_dead_big": 18,
+   "dead_phase2": -0.02,
+   "n_dead_phase2": 12,
+   "dead_phase3": 0.06,
+   "n_dead_phase3": 14,
+   "shifted_absent_other_all": -0.15,
+   "n_shifted_absent_other_all": 27,
+   "shifted_absent_other_big": -0.16,
+   "n_shifted_absent_other_big": 18,
+   "shifted_absent_other_phase2": -0.05,
+   "n_shifted_absent_other_phase2": 12,
+   "shifted_absent_other_phase3": -0.26,
+   "n_shifted_absent_other_phase3": 14,
+   "duplicate_all": 0.19,
+   "n_duplicate_all": 27,
+   "duplicate_big": -0.18,
+   "n_duplicate_big": 18,
+   "duplicate_phase2": -0.08,
+   "n_duplicate_phase2": 12,
+   "duplicate_phase3": 0.42,
+   "n_duplicate_phase3": 14
+  },
+  {
+   "key": "st_pct",
+   "label": "ST share",
+   "per_100_all": -0.34,
+   "n_per_100_all": 30,
+   "per_100_big": -0.23,
+   "n_per_100_big": 19,
+   "per_100_phase2": -0.48,
+   "n_per_100_phase2": 12,
+   "per_100_phase3": -0.38,
+   "n_per_100_phase3": 17,
+   "dead_all": 0.18,
+   "n_dead_all": 27,
+   "dead_big": 0.01,
+   "n_dead_big": 18,
+   "dead_phase2": 0.19,
+   "n_dead_phase2": 12,
+   "dead_phase3": 0.21,
+   "n_dead_phase3": 14,
+   "shifted_absent_other_all": -0.14,
+   "n_shifted_absent_other_all": 27,
+   "shifted_absent_other_big": -0.02,
+   "n_shifted_absent_other_big": 18,
+   "shifted_absent_other_phase2": -0.33,
+   "n_shifted_absent_other_phase2": 12,
+   "shifted_absent_other_phase3": 0.02,
+   "n_shifted_absent_other_phase3": 14,
+   "duplicate_all": 0.07,
+   "n_duplicate_all": 27,
+   "duplicate_big": 0.27,
+   "n_duplicate_big": 18,
+   "duplicate_phase2": 0.5,
+   "n_duplicate_phase2": 12,
+   "duplicate_phase3": -0.31,
+   "n_duplicate_phase3": 14
+  },
+  {
+   "key": "sex_ratio",
+   "label": "Sex ratio",
+   "per_100_all": -0.31,
+   "n_per_100_all": 30,
+   "per_100_big": -0.17,
+   "n_per_100_big": 19,
+   "per_100_phase2": -0.22,
+   "n_per_100_phase2": 12,
+   "per_100_phase3": -0.46,
+   "n_per_100_phase3": 17,
+   "dead_all": 0.29,
+   "n_dead_all": 27,
+   "dead_big": 0.27,
+   "n_dead_big": 18,
+   "dead_phase2": 0.51,
+   "n_dead_phase2": 12,
+   "dead_phase3": 0.34,
+   "n_dead_phase3": 14,
+   "shifted_absent_other_all": -0.28,
+   "n_shifted_absent_other_all": 27,
+   "shifted_absent_other_big": -0.33,
+   "n_shifted_absent_other_big": 18,
+   "shifted_absent_other_phase2": -0.41,
+   "n_shifted_absent_other_phase2": 12,
+   "shifted_absent_other_phase3": -0.42,
+   "n_shifted_absent_other_phase3": 14,
+   "duplicate_all": -0.06,
+   "n_duplicate_all": 27,
+   "duplicate_big": 0.1,
+   "n_duplicate_big": 18,
+   "duplicate_phase2": -0.4,
+   "n_duplicate_phase2": 12,
+   "duplicate_phase3": 0.39,
+   "n_duplicate_phase3": 14
+  },
+  {
+   "key": "out_migration",
+   "label": "Born here, living elsewhere",
+   "per_100_all": 0.03,
+   "n_per_100_all": 28,
+   "per_100_big": 0.08,
+   "n_per_100_big": 17,
+   "per_100_phase2": -0.3,
+   "n_per_100_phase2": 12,
+   "per_100_phase3": 0.31,
+   "n_per_100_phase3": 15,
+   "dead_all": -0.01,
+   "n_dead_all": 25,
+   "dead_big": -0.19,
+   "n_dead_big": 16,
+   "dead_phase2": -0.08,
+   "n_dead_phase2": 12,
+   "dead_phase3": -0.17,
+   "n_dead_phase3": 12,
+   "shifted_absent_other_all": -0.0,
+   "n_shifted_absent_other_all": 25,
+   "shifted_absent_other_big": 0.14,
+   "n_shifted_absent_other_big": 16,
+   "shifted_absent_other_phase2": 0.24,
+   "n_shifted_absent_other_phase2": 12,
+   "shifted_absent_other_phase3": 0.02,
+   "n_shifted_absent_other_phase3": 12,
+   "duplicate_all": 0.24,
+   "n_duplicate_all": 25,
+   "duplicate_big": 0.24,
+   "n_duplicate_big": 16,
+   "duplicate_phase2": 0.05,
+   "n_duplicate_phase2": 12,
+   "duplicate_phase3": 0.27,
+   "n_duplicate_phase3": 12
+  },
+  {
+   "key": "in_migration",
+   "label": "Living here, born elsewhere",
+   "per_100_all": 0.53,
+   "n_per_100_all": 28,
+   "per_100_big": 0.53,
+   "n_per_100_big": 17,
+   "per_100_phase2": 0.04,
+   "n_per_100_phase2": 12,
+   "per_100_phase3": 0.68,
+   "n_per_100_phase3": 15,
+   "dead_all": -0.45,
+   "n_dead_all": 25,
+   "dead_big": -0.49,
+   "n_dead_big": 16,
+   "dead_phase2": -0.26,
+   "n_dead_phase2": 12,
+   "dead_phase3": -0.49,
+   "n_dead_phase3": 12,
+   "shifted_absent_other_all": 0.53,
+   "n_shifted_absent_other_all": 25,
+   "shifted_absent_other_big": 0.54,
+   "n_shifted_absent_other_big": 16,
+   "shifted_absent_other_phase2": 0.46,
+   "n_shifted_absent_other_phase2": 12,
+   "shifted_absent_other_phase3": 0.48,
+   "n_shifted_absent_other_phase3": 12,
+   "duplicate_all": -0.38,
+   "n_duplicate_all": 25,
+   "duplicate_big": -0.26,
+   "n_duplicate_big": 16,
+   "duplicate_phase2": -0.39,
+   "n_duplicate_phase2": 12,
+   "duplicate_phase3": -0.27,
+   "n_duplicate_phase3": 12
+  }
+ ],
+ "border": {
+  "per_100_yes": 8.31,
+  "n_per_100_yes": 13,
+  "per_100_no": 15.19,
+  "n_per_100_no": 17,
+  "dead_yes": 27.1,
+  "n_dead_yes": 11,
+  "dead_no": 21.37,
+  "n_dead_no": 16,
+  "shifted_absent_other_yes": 68.24,
+  "n_shifted_absent_other_yes": 11,
+  "shifted_absent_other_no": 72.06,
+  "n_shifted_absent_other_no": 16,
+  "duplicate_yes": 5.17,
+  "n_duplicate_yes": 11,
+  "duplicate_no": 6.52,
+  "n_duplicate_no": 16
+ },
+ "gender": [
+  {
+   "state": "Bihar",
+   "women_removed": 3639976,
+   "men_removed": 2919433,
+   "women_share_removed": 55.49,
+   "women_share_roll": 47.86,
+   "quality": "lists",
+   "source_url": "",
+   "note": "Counted from the phase 1 deletion lists. The roll by sex is not in these sources, so the comparison is with women's share of the 2011 population.",
+   "gap": 7.63,
+   "phase": "1"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "women_removed": 15500000,
+   "men_removed": 13400000,
+   "women_share_removed": 53.63,
+   "women_share_roll": 46.76,
+   "quality": "rounded",
+   "source_url": "https://www.hindustantimes.com/cities/lucknow-news/155-million-vs-13-4-million-names-of-more-women-than-men-deleted-in-uttar-pradesh-draft-electoral-rolls-101768679003877.html",
+   "note": "Chief Electoral Officer's figures in crore: 1.55 crore women and 1.34 crore men removed.",
+   "gap": 6.87,
+   "phase": "2"
+  },
+  {
+   "state": "Tamil Nadu",
+   "women_removed": 4990000,
+   "men_removed": 4730000,
+   "women_share_removed": 51.34,
+   "women_share_roll": 51.02,
+   "quality": "unverified",
+   "source_url": "https://m.thewire.in/article/government/70-lakh-names-deleted-sir-concludes-in-tamil-nadu",
+   "note": "Removals by sex from a press analysis that cites no primary source; the draft roll by sex is the Chief Electoral Officer's.",
+   "gap": 0.32,
+   "phase": "2"
+  },
+  {
+   "state": "Gujarat",
+   "women_removed": 3791000,
+   "men_removed": 3582000,
+   "women_share_removed": 51.42,
+   "women_share_roll": 48.82,
+   "quality": "rounded",
+   "source_url": "https://timesofindia.indiatimes.com/city/ahmedabad/sir-gujarat-voter-count-drops-by-73-73l-from-5-08cr-to-4-34cr/articleshow/126083258.cms",
+   "note": "Roll before and draft by sex in lakh, from official data as reported.",
+   "gap": 2.6,
+   "phase": "2"
+  },
+  {
+   "state": "West Bengal",
+   "women_removed": 3120834,
+   "men_removed": 2700065,
+   "women_share_removed": 53.61,
+   "women_share_roll": 49.24,
+   "quality": "exact",
+   "source_url": "https://behanbox.com/2026/04/13/over-61-lakh-women-dropped-from-bengal-voter-rolls-data-show-stark-gender-bias-in-sir/",
+   "note": "Women counted from the published list; men are the total less women, so they include any third-gender removals.",
+   "gap": 4.37,
+   "phase": "2"
+  },
+  {
+   "state": "Madhya Pradesh",
+   "women_removed": 2363850,
+   "men_removed": 1908541,
+   "women_share_removed": 55.33,
+   "women_share_roll": 48.59,
+   "quality": "exact",
+   "source_url": "https://www.thequint.com/news/politics/madhya-pradesh-special-intensive-revision-sir-male-female-voter-deletion-pattern-sc-st-rural-urban-seats",
+   "note": "Removals by sex as reported; another report gives 19.19 lakh men. The roll share is from the reported sex ratio of 945.",
+   "gap": 6.74,
+   "phase": "2"
+  },
+  {
+   "state": "Kerala",
+   "women_removed": 1310361,
+   "men_removed": 1058149,
+   "women_share_removed": 55.32,
+   "women_share_roll": 51.67,
+   "quality": "proxy",
+   "source_url": "https://www.thehindu.com/news/national/kerala/sir-2408-lakh-voters-out-of-the-draft-roll-in-the-state/article70430490.ece",
+   "note": "The roll before is the January 2025 roll, 39,913 smaller than the roll frozen for the revision.",
+   "gap": 3.65,
+   "phase": "2"
+  },
+  {
+   "state": "Karnataka",
+   "women_removed": 5364049,
+   "men_removed": 5430166,
+   "women_share_removed": 49.69,
+   "women_share_roll": 50.22,
+   "quality": "exact",
+   "source_url": "https://www.newindianexpress.com/states/karnataka/2026/Aug/24/karnataka-sir-draft-electoral-rolls-released-women-outnumber-men",
+   "note": "Frozen roll and draft roll by sex (general electors); removals add to the total exactly.",
+   "gap": -0.53,
+   "phase": "3"
+  },
+  {
+   "state": "Delhi",
+   "women_removed": 2034005,
+   "men_removed": 2722139,
+   "women_share_removed": 42.77,
+   "women_share_roll": 46.85,
+   "quality": "exact",
+   "source_url": "https://www.hindustantimes.com/cities/delhi-news/delhi-sir-narrows-gender-gap-as-voter-roll-shrinks-328-101788200888661.html",
+   "note": "Chief Electoral Officer's statement of the roll before and the draft by sex.",
+   "gap": -4.08,
+   "phase": "3"
+  },
+  {
+   "state": "Odisha",
+   "women_removed": 1146140,
+   "men_removed": 866107,
+   "women_share_removed": 56.96,
+   "women_share_roll": 49.44,
+   "quality": "exact",
+   "source_url": "https://www.etvbharat.com/en/state/over-20-lakh-voter-names-deleted-after-completion-of-sir-in-odisha-enn26092107667",
+   "note": "Before and draft rolls by sex, from the Chief Electoral Officer; removals add to the total exactly.",
+   "gap": 7.52,
+   "phase": "3"
+  }
+ ],
  "reasons": [
   "dead",
   "shifted_absent_other",
@@ -93,7 +637,22 @@
     "shifted_absent_other": 55.28,
     "duplicate": 10.69
    },
-   "per_100": 8.31
+   "per_100": 8.31,
+   "char": {
+    "income_pc": 62201.0,
+    "urban_pct": 11.29,
+    "literacy": 61.8,
+    "female_literacy": 51.5,
+    "muslim_pct": 16.87,
+    "sc_pct": 15.91,
+    "st_pct": 1.28,
+    "sex_ratio": 918.0,
+    "out_migration": 7.64,
+    "in_migration": 1.02,
+    "population_2011": 104099452.0,
+    "intl_border": true,
+    "border_countries": "Nepal"
+   }
   },
   {
    "state": "Uttar Pradesh",
@@ -117,7 +676,22 @@
     "shifted_absent_other": 75.16,
     "duplicate": 8.82
    },
-   "per_100": 18.72
+   "per_100": 18.72,
+   "char": {
+    "income_pc": 97364.0,
+    "urban_pct": 22.27,
+    "literacy": 67.68,
+    "female_literacy": 57.18,
+    "muslim_pct": 19.26,
+    "sc_pct": 20.7,
+    "st_pct": 0.57,
+    "sex_ratio": 912.0,
+    "out_migration": 6.5,
+    "in_migration": 2.01,
+    "population_2011": 199812341.0,
+    "intl_border": true,
+    "border_countries": "Nepal"
+   }
   },
   {
    "state": "Tamil Nadu",
@@ -141,7 +715,22 @@
     "shifted_absent_other": 68.24,
     "duplicate": 4.09
    },
-   "per_100": 15.19
+   "per_100": 15.19,
+   "char": {
+    "income_pc": 313329.0,
+    "urban_pct": 48.4,
+    "literacy": 80.09,
+    "female_literacy": 73.44,
+    "muslim_pct": 5.86,
+    "sc_pct": 20.01,
+    "st_pct": 1.1,
+    "sex_ratio": 996.0,
+    "out_migration": 2.93,
+    "in_migration": 2.61,
+    "population_2011": 72147030.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Gujarat",
@@ -165,7 +754,22 @@
     "shifted_absent_other": 70.32,
     "duplicate": 5.17
    },
-   "per_100": 14.51
+   "per_100": 14.51,
+   "char": {
+    "income_pc": 299861.0,
+    "urban_pct": 42.6,
+    "literacy": 78.03,
+    "female_literacy": 69.68,
+    "muslim_pct": 9.67,
+    "sc_pct": 6.74,
+    "st_pct": 14.75,
+    "sex_ratio": 919.0,
+    "out_migration": 2.58,
+    "in_migration": 6.89,
+    "population_2011": 60439692.0,
+    "intl_border": true,
+    "border_countries": "Pakistan"
+   }
   },
   {
    "state": "West Bengal",
@@ -189,7 +793,22 @@
     "shifted_absent_other": 56.11,
     "duplicate": 2.37
    },
-   "per_100": 7.6
+   "per_100": 7.6,
+   "char": {
+    "income_pc": 149515.0,
+    "urban_pct": 31.87,
+    "literacy": 76.26,
+    "female_literacy": 70.54,
+    "muslim_pct": 27.01,
+    "sc_pct": 23.51,
+    "st_pct": 5.8,
+    "sex_ratio": 950.0,
+    "out_migration": 2.78,
+    "in_migration": 2.67,
+    "population_2011": 91276115.0,
+    "intl_border": true,
+    "border_countries": "Bangladesh; Nepal; Bhutan"
+   }
   },
   {
    "state": "Madhya Pradesh",
@@ -213,7 +832,22 @@
     "shifted_absent_other": 73.72,
     "duplicate": 6.48
    },
-   "per_100": 7.45
+   "per_100": 7.45,
+   "char": {
+    "income_pc": 139713.0,
+    "urban_pct": 27.63,
+    "literacy": 69.32,
+    "female_literacy": 59.24,
+    "muslim_pct": 6.57,
+    "sc_pct": 15.62,
+    "st_pct": 21.09,
+    "sex_ratio": 931.0,
+    "out_migration": 4.23,
+    "in_migration": 3.88,
+    "population_2011": 72626809.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Rajasthan",
@@ -237,7 +871,22 @@
     "shifted_absent_other": 70.83,
     "duplicate": 8.23
    },
-   "per_100": 7.65
+   "per_100": 7.65,
+   "char": {
+    "income_pc": 166647.0,
+    "urban_pct": 24.87,
+    "literacy": 66.11,
+    "female_literacy": 52.12,
+    "muslim_pct": 9.07,
+    "sc_pct": 17.83,
+    "st_pct": 13.48,
+    "sex_ratio": 928.0,
+    "out_migration": 5.76,
+    "in_migration": 3.83,
+    "population_2011": 68548437.0,
+    "intl_border": true,
+    "border_countries": "Pakistan"
+   }
   },
   {
    "state": "Chhattisgarh",
@@ -261,7 +910,22 @@
     "shifted_absent_other": 69.97,
     "duplicate": 6.55
    },
-   "per_100": 12.88
+   "per_100": 12.88,
+   "char": {
+    "income_pc": 148922.0,
+    "urban_pct": 23.24,
+    "literacy": 70.28,
+    "female_literacy": 60.24,
+    "muslim_pct": 2.02,
+    "sc_pct": 12.82,
+    "st_pct": 30.62,
+    "sex_ratio": 991.0,
+    "out_migration": 2.69,
+    "in_migration": 5.11,
+    "population_2011": 25545198.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Kerala",
@@ -285,7 +949,22 @@
     "shifted_absent_other": 67.37,
     "duplicate": 5.65
    },
-   "per_100": 8.65
+   "per_100": 8.65,
+   "char": {
+    "income_pc": 281269.0,
+    "urban_pct": 47.7,
+    "literacy": 94.0,
+    "female_literacy": 92.07,
+    "muslim_pct": 26.56,
+    "sc_pct": 9.1,
+    "st_pct": 1.45,
+    "sex_ratio": 1084.0,
+    "out_migration": 4.72,
+    "in_migration": 1.84,
+    "population_2011": 33406061.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Puducherry",
@@ -309,7 +988,22 @@
     "shifted_absent_other": 77.94,
     "duplicate": 1.96
    },
-   "per_100": 10.13
+   "per_100": 10.13,
+   "char": {
+    "income_pc": 252164.0,
+    "urban_pct": 68.33,
+    "literacy": 85.85,
+    "female_literacy": 80.67,
+    "muslim_pct": 6.05,
+    "sc_pct": 15.73,
+    "st_pct": 0.0,
+    "sex_ratio": 1037.0,
+    "out_migration": 26.63,
+    "in_migration": 29.24,
+    "population_2011": 1247953.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Goa",
@@ -333,7 +1027,22 @@
     "shifted_absent_other": 72.44,
     "duplicate": 2.0
    },
-   "per_100": 8.44
+   "per_100": 8.44,
+   "char": {
+    "income_pc": 585953.0,
+    "urban_pct": 62.17,
+    "literacy": 88.7,
+    "female_literacy": 84.66,
+    "muslim_pct": 8.33,
+    "sc_pct": 1.74,
+    "st_pct": 10.23,
+    "sex_ratio": 973.0,
+    "out_migration": 6.68,
+    "in_migration": 22.71,
+    "population_2011": 1458545.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Andaman and Nicobar Islands",
@@ -357,7 +1066,22 @@
     "shifted_absent_other": 81.09,
     "duplicate": 4.56
    },
-   "per_100": 20.62
+   "per_100": 20.62,
+   "char": {
+    "income_pc": 276000.0,
+    "urban_pct": 37.7,
+    "literacy": 86.63,
+    "female_literacy": 82.43,
+    "muslim_pct": 8.52,
+    "sc_pct": 0.0,
+    "st_pct": 7.5,
+    "sex_ratio": 876.0,
+    "out_migration": 3.91,
+    "in_migration": 27.13,
+    "population_2011": 380581.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Lakshadweep",
@@ -381,7 +1105,22 @@
     "shifted_absent_other": 17.63,
     "duplicate": 33.03
    },
-   "per_100": 2.47
+   "per_100": 2.47,
+   "char": {
+    "income_pc": null,
+    "urban_pct": 78.07,
+    "literacy": 91.85,
+    "female_literacy": 87.95,
+    "muslim_pct": 96.58,
+    "sc_pct": 0.0,
+    "st_pct": 94.8,
+    "sex_ratio": 946.0,
+    "out_migration": 12.83,
+    "in_migration": 6.12,
+    "population_2011": 64473.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Maharashtra",
@@ -405,7 +1144,22 @@
     "shifted_absent_other": 74.67,
     "duplicate": 8.52
    },
-   "per_100": 21.15
+   "per_100": 21.15,
+   "char": {
+    "income_pc": 278681.0,
+    "urban_pct": 45.22,
+    "literacy": 82.34,
+    "female_literacy": 75.87,
+    "muslim_pct": 11.54,
+    "sc_pct": 11.81,
+    "st_pct": 9.35,
+    "sex_ratio": 929.0,
+    "out_migration": 2.67,
+    "in_migration": 8.73,
+    "population_2011": 112374333.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Karnataka",
@@ -429,7 +1183,22 @@
     "shifted_absent_other": 78.24,
     "duplicate": 6.58
    },
-   "per_100": 19.48
+   "per_100": 19.48,
+   "char": {
+    "income_pc": 339813.0,
+    "urban_pct": 38.67,
+    "literacy": 75.36,
+    "female_literacy": 68.08,
+    "muslim_pct": 12.92,
+    "sc_pct": 17.15,
+    "st_pct": 6.95,
+    "sex_ratio": 973.0,
+    "out_migration": 4.33,
+    "in_migration": 5.52,
+    "population_2011": 61095297.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Telangana",
@@ -453,7 +1222,22 @@
     "shifted_absent_other": 78.3,
     "duplicate": 9.13
    },
-   "per_100": 21.71
+   "per_100": 21.71,
+   "char": {
+    "income_pc": 347714.0,
+    "urban_pct": 38.67,
+    "literacy": 66.46,
+    "female_literacy": 57.92,
+    "muslim_pct": 12.69,
+    "sc_pct": 15.44,
+    "st_pct": 9.34,
+    "sex_ratio": 988.0,
+    "out_migration": null,
+    "in_migration": null,
+    "population_2011": 35193978.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Delhi",
@@ -477,7 +1261,22 @@
     "shifted_absent_other": 91.1,
     "duplicate": 2.97
    },
-   "per_100": 32.8
+   "per_100": 32.8,
+   "char": {
+    "income_pc": 459408.0,
+    "urban_pct": 97.5,
+    "literacy": 86.21,
+    "female_literacy": 80.76,
+    "muslim_pct": 12.86,
+    "sc_pct": 16.75,
+    "st_pct": 0.0,
+    "sex_ratio": 868.0,
+    "out_migration": 7.31,
+    "in_migration": 38.35,
+    "population_2011": 16787941.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Andhra Pradesh",
@@ -501,7 +1300,22 @@
     "shifted_absent_other": 49.68,
     "duplicate": 16.42
    },
-   "per_100": 10.79
+   "per_100": 10.79,
+   "char": {
+    "income_pc": 237951.0,
+    "urban_pct": 29.58,
+    "literacy": 67.41,
+    "female_literacy": 60.01,
+    "muslim_pct": 7.33,
+    "sc_pct": 17.1,
+    "st_pct": 5.33,
+    "sex_ratio": 996.0,
+    "out_migration": null,
+    "in_migration": null,
+    "population_2011": 49386799.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Jharkhand",
@@ -525,7 +1339,22 @@
     "shifted_absent_other": 71.69,
     "duplicate": 10.32
    },
-   "per_100": 16.52
+   "per_100": 16.52,
+   "char": {
+    "income_pc": 106529.0,
+    "urban_pct": 24.05,
+    "literacy": 66.41,
+    "female_literacy": 55.42,
+    "muslim_pct": 14.53,
+    "sc_pct": 12.08,
+    "st_pct": 26.21,
+    "sex_ratio": 948.0,
+    "out_migration": 5.34,
+    "in_migration": 6.87,
+    "population_2011": 32988134.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Haryana",
@@ -549,7 +1378,22 @@
     "shifted_absent_other": 71.33,
     "duplicate": 6.03
    },
-   "per_100": 16.42
+   "per_100": 16.42,
+   "char": {
+    "income_pc": 319363.0,
+    "urban_pct": 34.88,
+    "literacy": 75.55,
+    "female_literacy": 65.94,
+    "muslim_pct": 7.03,
+    "sc_pct": 20.17,
+    "st_pct": 0.0,
+    "sex_ratio": 879.0,
+    "out_migration": 9.2,
+    "in_migration": 14.56,
+    "population_2011": 25351462.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Punjab",
@@ -573,7 +1417,22 @@
     "shifted_absent_other": 66.17,
     "duplicate": 5.81
    },
-   "per_100": 9.63
+   "per_100": 9.63,
+   "char": {
+    "income_pc": 205374.0,
+    "urban_pct": 37.48,
+    "literacy": 75.84,
+    "female_literacy": 70.73,
+    "muslim_pct": 1.93,
+    "sc_pct": 31.94,
+    "st_pct": 0.0,
+    "sex_ratio": 895.0,
+    "out_migration": 6.42,
+    "in_migration": 9.23,
+    "population_2011": 27743338.0,
+    "intl_border": true,
+    "border_countries": "Pakistan"
+   }
   },
   {
    "state": "Odisha",
@@ -597,7 +1456,22 @@
     "shifted_absent_other": 50.42,
     "duplicate": 7.91
    },
-   "per_100": 6.03
+   "per_100": 6.03,
+   "char": {
+    "income_pc": 150414.0,
+    "urban_pct": 16.69,
+    "literacy": 72.87,
+    "female_literacy": 64.01,
+    "muslim_pct": 2.17,
+    "sc_pct": 17.13,
+    "st_pct": 22.85,
+    "sex_ratio": 979.0,
+    "out_migration": 3.21,
+    "in_migration": 1.96,
+    "population_2011": 41974218.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Uttarakhand",
@@ -617,7 +1491,22 @@
    "note": "No split by reason found for the draft figure.",
    "unsplit": 826977,
    "shares": null,
-   "per_100": 10.39
+   "per_100": 10.39,
+   "char": {
+    "income_pc": 246178.0,
+    "urban_pct": 30.23,
+    "literacy": 78.82,
+    "female_literacy": 70.01,
+    "muslim_pct": 13.95,
+    "sc_pct": 18.76,
+    "st_pct": 2.89,
+    "sex_ratio": 963.0,
+    "out_migration": 10.6,
+    "in_migration": 12.61,
+    "population_2011": 10086292.0,
+    "intl_border": true,
+    "border_countries": "Nepal; China"
+   }
   },
   {
    "state": "Meghalaya",
@@ -641,7 +1530,22 @@
     "shifted_absent_other": 51.11,
     "duplicate": 3.71
    },
-   "per_100": 7.68
+   "per_100": 7.68,
+   "char": {
+    "income_pc": 141195.0,
+    "urban_pct": 20.07,
+    "literacy": 74.43,
+    "female_literacy": 72.89,
+    "muslim_pct": 4.4,
+    "sc_pct": 0.58,
+    "st_pct": 86.15,
+    "sex_ratio": 989.0,
+    "out_migration": 2.31,
+    "in_migration": 3.98,
+    "population_2011": 2966889.0,
+    "intl_border": true,
+    "border_countries": "Bangladesh"
+   }
   },
   {
    "state": "Arunachal Pradesh",
@@ -665,7 +1569,22 @@
     "shifted_absent_other": 81.99,
     "duplicate": 2.92
    },
-   "per_100": 19.09
+   "per_100": 19.09,
+   "char": {
+    "income_pc": 217325.0,
+    "urban_pct": 22.94,
+    "literacy": 65.38,
+    "female_literacy": 57.7,
+    "muslim_pct": 1.95,
+    "sc_pct": 0.0,
+    "st_pct": 68.79,
+    "sex_ratio": 938.0,
+    "out_migration": 2.43,
+    "in_migration": 12.24,
+    "population_2011": 1383727.0,
+    "intl_border": true,
+    "border_countries": "China; Bhutan; Myanmar"
+   }
   },
   {
    "state": "Manipur",
@@ -689,7 +1608,22 @@
     "shifted_absent_other": 68.24,
     "duplicate": 4.66
    },
-   "per_100": 7.58
+   "per_100": 7.58,
+   "char": {
+    "income_pc": 119938.0,
+    "urban_pct": 29.21,
+    "literacy": 76.94,
+    "female_literacy": 70.26,
+    "muslim_pct": 8.4,
+    "sc_pct": 3.41,
+    "st_pct": 40.88,
+    "sex_ratio": 985.0,
+    "out_migration": 2.91,
+    "in_migration": 0.71,
+    "population_2011": 2855794.0,
+    "intl_border": true,
+    "border_countries": "Myanmar"
+   }
   },
   {
    "state": "Nagaland",
@@ -713,7 +1647,22 @@
     "shifted_absent_other": 78.45,
     "duplicate": 3.21
    },
-   "per_100": 11.62
+   "per_100": 11.62,
+   "char": {
+    "income_pc": 154828.0,
+    "urban_pct": 28.86,
+    "literacy": 79.55,
+    "female_literacy": 76.11,
+    "muslim_pct": 2.47,
+    "sc_pct": 0.0,
+    "st_pct": 86.48,
+    "sex_ratio": 931.0,
+    "out_migration": 2.16,
+    "in_migration": 5.83,
+    "population_2011": 1978502.0,
+    "intl_border": true,
+    "border_countries": "Myanmar"
+   }
   },
   {
    "state": "Dadra and Nagar Haveli and Daman and Diu",
@@ -733,7 +1682,22 @@
    "note": "Only shares of the electorate were reported (absent 22.5%, shifted 4.6%, dead 1.7%, duplicate 0.6%); not converted to counts.",
    "unsplit": 126894,
    "shares": null,
-   "per_100": 29.65
+   "per_100": 29.65,
+   "char": {
+    "income_pc": null,
+    "urban_pct": 58.51,
+    "literacy": 80.85,
+    "female_literacy": 70.25,
+    "muslim_pct": 5.49,
+    "sc_pct": 2.1,
+    "st_pct": 33.04,
+    "sex_ratio": 706.0,
+    "out_migration": 5.16,
+    "in_migration": 46.65,
+    "population_2011": 586956.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Chandigarh",
@@ -753,7 +1717,22 @@
    "note": "The total is confirmed; a split by reason has been seen only in an unofficial excerpt and is not used. Electors before the revision were not reported exactly.",
    "unsplit": 66145,
    "shares": null,
-   "per_100": null
+   "per_100": null,
+   "char": {
+    "income_pc": 453457.0,
+    "urban_pct": 97.25,
+    "literacy": 86.05,
+    "female_literacy": 81.19,
+    "muslim_pct": 4.87,
+    "sc_pct": 18.86,
+    "st_pct": 0.0,
+    "sex_ratio": 818.0,
+    "out_migration": 19.49,
+    "in_migration": 59.08,
+    "population_2011": 1055450.0,
+    "intl_border": false,
+    "border_countries": ""
+   }
   },
   {
    "state": "Mizoram",
@@ -773,7 +1752,22 @@
    "note": "No split by reason found.",
    "unsplit": 46162,
    "shares": null,
-   "per_100": 5.28
+   "per_100": 5.28,
+   "char": {
+    "income_pc": 234996.0,
+    "urban_pct": 52.11,
+    "literacy": 91.33,
+    "female_literacy": 89.27,
+    "muslim_pct": 1.35,
+    "sc_pct": 0.11,
+    "st_pct": 94.43,
+    "sex_ratio": 976.0,
+    "out_migration": 2.63,
+    "in_migration": 4.18,
+    "population_2011": 1097206.0,
+    "intl_border": true,
+    "border_countries": "Bangladesh; Myanmar"
+   }
   },
   {
    "state": "Sikkim",
@@ -797,7 +1791,22 @@
     "shifted_absent_other": 64.93,
     "duplicate": 6.35
    },
-   "per_100": 8.01
+   "per_100": 8.01,
+   "char": {
+    "income_pc": 587743.0,
+    "urban_pct": 25.15,
+    "literacy": 81.42,
+    "female_literacy": 75.61,
+    "muslim_pct": 1.62,
+    "sc_pct": 4.63,
+    "st_pct": 33.8,
+    "sex_ratio": 890.0,
+    "out_migration": 3.22,
+    "in_migration": 11.11,
+    "population_2011": 610577.0,
+    "intl_border": true,
+    "border_countries": "China; Nepal; Bhutan"
+   }
   },
   {
    "state": "Tripura",
@@ -817,7 +1826,22 @@
    "note": "Draft roll not yet published; rescheduled to 12 December 2026.",
    "unsplit": null,
    "shares": null,
-   "per_100": null
+   "per_100": null,
+   "char": {
+    "income_pc": 172299.0,
+    "urban_pct": 26.17,
+    "literacy": 87.22,
+    "female_literacy": 82.73,
+    "muslim_pct": 8.6,
+    "sc_pct": 17.83,
+    "st_pct": 31.76,
+    "sex_ratio": 960.0,
+    "out_migration": 2.48,
+    "in_migration": 2.35,
+    "population_2011": 3673917.0,
+    "intl_border": true,
+    "border_countries": "Bangladesh"
+   }
   }
  ]
 }
