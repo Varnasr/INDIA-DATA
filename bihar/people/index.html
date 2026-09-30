@@ -47,6 +47,19 @@
   </div>
   <p class="finding" id="fGender"></p>
 
+  <h2>Two reasons, set against the records</h2>
+  <p class="sub">Names entered as dead are set against the adult deaths Bihar has in a year, from the Sample Registration System for 2024. The excess of young women among those entered as shifted is set against the women who moved on marriage, from the 2011 census.</p>
+  <div class="kpis" id="kTests"></div>
+  <p class="finding" id="fDeaths"></p>
+  <div class="grid">
+    <div class="panel wide">
+      <h3>Young women marked shifted, against marriage movement, by district</h3>
+      <p>Each dot is a district: the women's share of those aged 18 to 29 marked shifted, against the share of its women who had moved on marriage in the ten years before the 2011 census.</p>
+      <div class="chart"><canvas id="cMarr" aria-label="Women's share of the young marked shifted against recent marriage migration, by district"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fMarr"></p>
+
   <h2>Religion</h2>
   <p class="sub">The booth files classify each removed elector's name as Hindu, Muslim, or unclassified. The unclassified could fall either way, so the Muslim share is a range: from counting none of them to counting all of them.</p>
   <div class="kpis" id="kRel"></div>
@@ -171,6 +184,25 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
   drawCaste();
   document.querySelectorAll('[data-who]').forEach(function (b) { b.addEventListener('click', function () {
     who = b.getAttribute('data-who'); document.querySelectorAll('[data-who]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); drawCaste(); }); });
+  return SIR.json('data/bihar/tests.json').then(function (T) {
+    var De = T.deaths, Ma = T.marriage;
+    document.getElementById('kTests').innerHTML = [[SIR.d(De.years_of_deaths, 1), L('years of Bihar\'s adult deaths, in the names entered as dead')],
+      [SIR.pct(De.women_share_dead), L('of those entered as dead were women')], [SIR.pct(De.women_share_expected), L('women\'s share of adult deaths, 2024')],
+      [SIR.n(Ma.excess), L('more young women than young men marked shifted')]].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+    document.getElementById('fDeaths').innerHTML = L('<b>The {dead} names entered as dead equal about {y} years of adult deaths in Bihar</b>: at the 2024 death rates, the state\'s population aged 20 and over has about {ad} deaths a year. Their age profile is close to that of registered deaths: {o1} of those entered as dead and aged 25 or over were 70 or older, against {o2} of registered deaths at those ages in 2024. <b>Women are {wd} of those entered as dead, against {we} of adult deaths</b>: {wdn} women, where {wen} would be expected if the dead removed matched the deaths the state has. Registered deaths at 25 and over in 2024 were {rw} women, below their share of deaths, so women\'s deaths are registered less often and more of them may have stayed on the roll; or more women still living were entered as dead. The lists cannot say which.', {
+      dead: SIR.lakh(De.dead_removed), y: SIR.d(De.years_of_deaths, 1), ad: SIR.lakh(De.adult_deaths), o1: SIR.pct(De.over70_share_dead), o2: SIR.pct(De.over70_share_registered),
+      wd: SIR.pct(De.women_share_dead), we: SIR.pct(De.women_share_expected), wdn: SIR.lakh(De.women_dead), wen: SIR.lakh(De.women_expected), rw: SIR.pct(De.registered_women_share) });
+    SIR.chart('cMarr', { type: 'scatter', data: { datasets: [{ label: L('Districts'), data: Ma.districts.map(function (d) { return { x: d.recent_marriage_pct, y: d.women_share, n: d.district }; }), $token: '--fill-navy', pointRadius: 4 }] },
+      options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { return L('{name}: {x} moved on marriage, {y} women', { name: c.raw.n, x: SIR.pct(c.raw.x), y: SIR.pct(c.raw.y) }); } } } },
+        scales: { x: { title: { display: true, text: L('Women who moved on marriage in the ten years to 2011, % of women') } }, y: { title: { display: true, text: L('Women\'s share of those aged 18 to 29 marked shifted') } } } } });
+    var rel = Math.abs(Ma.rho_share) < 0.2
+      ? L('District by district, the share of women among the young marked shifted has no relationship with how much women moved on marriage (rank correlation {r}).', { r: SIR.d(Ma.rho_share, 2) })
+      : (Ma.rho_share < 0
+        ? L('District by district, the relationship runs the other way: where more women had moved on marriage, women were a smaller share of the young marked shifted (rank correlation {r}).', { r: SIR.d(Ma.rho_share, 2) })
+        : L('District by district, where more women had moved on marriage, women were a larger share of the young marked shifted (rank correlation {r}).', { r: SIR.d(Ma.rho_share, 2) }));
+    document.getElementById('fMarr').innerHTML = L('<b>Among those aged 18 to 29 marked shifted, {f} were women and {m} men, an excess of {x} women.</b> In scale that is within what marriage produces: in the ten years before the 2011 census, {mr} women in Bihar had moved on marriage, about {py} a year, so the excess is about {yrs} of a year\'s marriage moves. {rel} Women were the largest share in {top}. The census counts women where they arrived rather than where they left, so this measures marriage movement, not removals from the home roll, and it is fifteen years old.', {
+      f: SIR.n(Ma.young_shifted_f), m: SIR.n(Ma.young_shifted_m), x: SIR.n(Ma.excess), mr: SIR.lakh(Ma.recent_marriage), py: SIR.lakh(Ma.recent_marriage_per_year), yrs: SIR.d(Ma.excess_years, 2), rel: rel, top: Ma.top.join(', ') });
+  });
 }).catch(SIR.fail);
 </script>
 </body>

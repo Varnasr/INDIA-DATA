@@ -135,7 +135,7 @@ function closing(pres, K, P, head, lines) {
 
 // ============================================================ BIHAR
 function bihar() {
-  const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json'), FB = J('bihar/final.json');
+  const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json'), FB = J('bihar/final.json'), TS = J('bihar/tests.json');
   const t = S.totals, DI = ID.districts;
   const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · Varna Sri Raman · aggregates only; no names or EPIC numbers' };
   const AL = { NDA: 'E67E22', INDIA: '1E8449', Other: '8E7CC3' };
@@ -213,6 +213,16 @@ function bihar() {
     K.chart(Object.assign({}, K.left, { w: 6.2, barDir: 'col', barGrouping: 'stacked', chartColors: [AL.NDA, AL.INDIA, AL.Other], showLegend: true, showTitle: true, title: 'Seats, by the alliance that won in 2025' })));
   K.table(s, ['District', 'Absent', 'Shifted', 'Dead'], RD.slice(0, 8).map((d) => [d.district, pct(100 * d.absent / dsum(d)), pct(100 * d.shifted / dsum(d)), pct(100 * d.dead / dsum(d))]), 7.1, TOP, W - M - 7.1, [2.2, 1.1, 1.1, 1.23], 12);
   s.addNotes('Absent rests on the least of the four reasons: it records only that the elector was not found. Already enrolled is a removal only if the other entry is the same person. Shifted exceeds the margin in ' + rOver('r_shifted') + ' seats, dead in ' + rOver('r_dead') + ', already enrolled in ' + rOver('r_enrolled') + '.');
+
+  const TD = TS.deaths, TM = TS.marriage;
+  s = K.slide('Reasons', 'The names entered as dead equal ' + TD.years_of_deaths.toFixed(1) + ' years of adult deaths, but ' + pct(TD.women_share_dead) + ' of them are women, against ' + pct(TD.women_share_expected) + ' of deaths', 'Two reasons set against the death and migration records');
+  K.stats(s, [[TD.years_of_deaths.toFixed(1) + ' years', 'of adult deaths at 2024 rates, in the ' + lakh(TD.dead_removed) + ' entered as dead'], [pct(TD.women_share_dead), 'of those entered as dead are women; ' + pct(TD.women_share_expected) + ' of adult deaths are'], [indian(TM.excess), 'more young women than men marked shifted: ' + TM.excess_years.toFixed(2) + ' of a year\'s marriage moves']], TOP - 0.2, 1.55);
+  K.bullets(s, [
+    'Ages fit: ' + pct(TD.over70_share_dead) + ' of those entered as dead (25 and over) were 70 or older, against ' + pct(TD.over70_share_registered) + ' of registered deaths.',
+    'Registered deaths are ' + pct(TD.registered_women_share) + ' women, so women\'s deaths are registered less often and may have stayed on the roll; or women still living were entered as dead.',
+    'Marriage fits the number of young women marked shifted, not where: districts with more marriage movement have a ' + (TM.rho_share < 0 ? 'smaller' : 'larger') + ' share of women among them (rank correlation ' + TM.rho_share.toFixed(2) + ').',
+  ], M, TOP + 1.6, W - 2 * M, CH - 1.6, 14);
+  s.addNotes('Deaths: SRS Statistical Report 2024, death rates by age and sex weighted by the 2024 population by age, ages 20 and over; CRS 2024 for population and registered deaths. Marriage: Census 2011 table D-3, women who moved on marriage in the ten years before the census, counted where they arrived.');
 
   s = K.slide('Elections', 'In ' + over.length + ' of ' + withM.length + ' seats, more names were removed than the 2025 winning margin', 'Constituencies by names removed as a multiple of the margin');
   s.addChart(pres.charts.BAR, [{ name: 'Constituencies', labels: labs, values: vals }], K.chart(Object.assign({}, K.left, { barDir: 'col', chartColors: [GREY, P.accent, P.accent, P.accent, P.accent, P.accent], showValue: true, dataLabelPosition: 'outEnd', valAxisHidden: true })));
