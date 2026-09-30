@@ -2,7 +2,8 @@
 
 Reads the candidate-wise Assembly results for both years
 (data/bihar/raw/ae_party_votes_2020_2025.csv, one row per seat, year and party,
-from the Election Commission's results) and sets each seat's change in vote
+pooled from the Election Commission's Detailed Results, statistical report 10,
+for each election) and sets each seat's change in vote
 share against its removals per 100 electors.
 
 Both years are counted on the 2025 line-up, so a change is a change in what the
@@ -14,7 +15,10 @@ same parties won together:
 
 Shares are of all votes, NOTA included. The slope is estimated within
 district (a dummy for each district), so a region that swung as a whole, such
-as Seemanchal, does not count as a removal effect. Intervals are two robust
+as Seemanchal, does not count as a removal effect, and again allowing for each
+seat's 2020 lead, because seats the NDA won big in 2020 gave some of it back
+whatever their removals. The second is the standard swing model and the one
+the pages lead with; it moves the slope from negative to positive. Intervals are two robust
 standard errors either side.
 
 The scenario figure is what the slope would be if every removed elector who
@@ -60,10 +64,10 @@ def load():
     return out
 
 
-def fe_slope(y, x, groups):
+def fe_slope(y, x, groups, controls=()):
     g = sorted(set(groups))
     D = np.array([[a == k for k in g] for a in groups], float)
-    X = np.column_stack([x, D])
+    X = np.column_stack([x, *controls, D])
     XtXi = np.linalg.inv(X.T @ X)
     b = XtXi @ X.T @ y
     e = y - X @ b
@@ -91,18 +95,27 @@ def build():
     di = np.array([s['india25'] - s['india20'] for s in rows])
     vg = np.array([100 * (s['votes25'] / s['votes20'] - 1) for s in rows])
     dist = [s['district'] for s in rows]
+    # A seat's 2020 lead predicts its swing on its own: seats the NDA won big
+    # in 2020 gave some of it back. Allowing for that is the standard swing
+    # model, and it changes the answer, so both are kept.
+    l20 = np.array([s['nda20'] - s['india20'] for s in rows])
+    dl = dn - di
+    X = np.column_stack([np.ones(len(rows)), l20])
+    adj = dl - X @ np.linalg.lstsq(X, dl, rcond=None)[0] + dl.mean()
     cut = np.quantile(P, [1 / 3, 2 / 3])
     g = np.digitize(P, cut)
     thirds = [{'n': int((g == i).sum()), 'lo': r(P[g == i].min(), 1), 'hi': r(P[g == i].max(), 1),
                'per_100': r(P[g == i].mean(), 1), 'd_nda': r(dn[g == i].mean(), 1),
-               'd_india': r(di[g == i].mean(), 1), 'votes_growth': r(vg[g == i].mean(), 1)} for i in range(3)]
+               'd_india': r(di[g == i].mean(), 1), 'd_lead': r(dl[g == i].mean(), 1),
+               'd_lead_adj': r(adj[g == i].mean(), 1), 'votes_growth': r(vg[g == i].mean(), 1)} for i in range(3)]
     dead = sum(c['r_dead'] for c in seats)
     p1 = sum(c['p1'] for c in seats)
     alive = 1 - dead / p1
     summary = {'n': len(rows), 'd_nda': r(dn.mean(), 1), 'd_india': r(di.mean(), 1), 'votes_growth': r(vg.mean(), 1),
                'thirds': thirds,
                'within': {'nda': fe_slope(dn, P, dist), 'india': fe_slope(di, P, dist),
-                          'lead': fe_slope(dn - di, P, dist), 'votes': fe_slope(vg, P, dist)},
+                          'lead': fe_slope(dl, P, dist), 'lead_adj': fe_slope(dl, P, dist, [l20]),
+                          'votes': fe_slope(vg, P, dist)},
                'alive_share': r(100 * alive, 1),
                'scenario_all_against': r(alive), 'scenario_half': r(alive / 2),
                'districts': len(set(dist))}

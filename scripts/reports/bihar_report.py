@@ -187,18 +187,23 @@ sg = lambda v: ('+' if v > 0 else '') + '%.1f' % v
 R.h2('Did the vote move where more names were removed?')
 R.p('Between the 2020 and 2025 Assembly elections the NDA parties gained votes across Bihar. If the removals had taken away more of INDIA\'s voters than the NDA\'s, INDIA\'s share should have fallen most where the most names came off the roll. '
     'The candidate-wise results for both elections were counted with the parties grouped as they stood in 2025: BJP, JD(U), LJP(RV), HAM(S) and RLM for the NDA, and RJD, Congress, the three Left parties, VIP and IIP for INDIA.')
-R.table(['Seats', 'Number', 'Removed per 100, average', 'Change in NDA share, points', 'Change in INDIA share, points', 'Growth in votes cast'],
-        [[n, str(x['n']), '%.1f (%.1f–%.1f)' % (x['per_100'], x['lo'], x['hi']), sg(x['d_nda']), sg(x['d_india']), sg(x['votes_growth']) + '%']
+R.table(['Seats', 'Number', 'Removed per 100, average', 'Change in NDA share, points', 'Change in INDIA share, points', 'Change in NDA lead, allowing for 2020', 'Growth in votes cast'],
+        [[n, str(x['n']), '%.1f (%.1f–%.1f)' % (x['per_100'], x['lo'], x['hi']), sg(x['d_nda']), sg(x['d_india']), sg(x['d_lead_adj']), sg(x['votes_growth']) + '%']
          for n, x in zip(['Fewest removals', 'Middle', 'Most removals'], SW['thirds'])],
-        widths=[3.0, 1.4, 3.2, 2.8, 2.8, 2.4], right={1, 2, 3, 4, 5})
-T, w = SW['thirds'], SW['within']['lead']
-R.p('The NDA parties gained between %.1f and %.1f points in each third, and INDIA\'s share changed by %s points where the fewest names were removed and %s where the most were. Votes cast grew by about the same amount in all three. '
-    'Comparing each seat only with other seats in its own district, each extra name removed per 100 electors went with a change of %s points in the NDA\'s lead over INDIA, most likely between %s and %s. '
-    'Had every removed person who was alive and would have voted voted against the NDA, its lead should have grown by about %.2f points more for each extra name removed per 100 electors, and by about %.2f if three in four of them had. '
-    'The results fall short of both, so the vote shows no sign that the removals cost INDIA its voters on a scale large enough to see.'
-    % (min(x['d_nda'] for x in T), max(x['d_nda'] for x in T), sg(T[0]['d_india']), sg(T[2]['d_india']), sg(w['slope']), sg(w['lo']), sg(w['hi']), SW['scenario_all_against'], SW['scenario_half']))
+        widths=[2.6, 1.2, 2.8, 2.3, 2.3, 2.5, 2.1], right={1, 2, 3, 4, 5, 6}, size=8)
+T, w, w0 = SW['thirds'], SW['within']['lead_adj'], SW['within']['lead']
+verdict = ('The results fall short of both, so the vote shows no sign that the removals cost INDIA its voters on a scale large enough to see.' if w['hi'] < SW['scenario_half'] else
+           'The whole range lies above zero, so the vote points to the removals having cost INDIA some of its voters.' if w['lo'] > 0 else
+           'That range takes in no effect at all and both of these, so the vote cannot tell whether the removals cost INDIA its voters.' if w['hi'] >= SW['scenario_all_against'] else
+           'That range takes in no effect at all and the second of these, so the vote cannot tell whether the removals cost INDIA its voters.')
+s2 = lambda v: ('+' if v > 0 else '') + '%.2f' % v
+R.p('Once each seat\'s 2020 result is allowed for, the NDA\'s lead over INDIA grew by between %.1f and %.1f points in each third, about the same whether a seat lost few names or many. Before that allowance INDIA seemed to lose most where the fewest names were removed (%s points against %s), and part of that is seats giving back in 2025 what they had gained in 2020. Votes cast grew by about the same amount in all three. '
+    'Comparing each seat only with other seats in its own district, and allowing for its 2020 result, each extra name removed per 100 electors went with a change of %s points in the NDA\'s lead, most likely somewhere between %s and %s. '
+    'Had every removed person who was alive and would have voted voted against the NDA, its lead should have grown by about %.2f points more for each extra name removed per 100 electors, and by about %.2f if three in four of them had. %s '
+    'Without the allowance for 2020 the figure is %s (between %s and %s). The two models disagree even on the direction, which is itself a reason to read little into either.'
+    % (min(x['d_lead_adj'] for x in T), max(x['d_lead_adj'] for x in T), sg(T[0]['d_india']), sg(T[2]['d_india']), s2(w['slope']), s2(w['lo']), s2(w['hi']),
+       SW['scenario_all_against'], SW['scenario_half'], verdict, s2(w0['slope']), s2(w0['lo']), s2(w0['hi'])))
 R.p('This asks only whether the removals moved votes between the alliances. It cannot say whether each name was rightly removed, and a voter wrongly removed has lost a vote whichever way it would have gone. A small lean either way would not show, and five years separate the two elections, in which LJP rejoined the NDA, VIP changed sides and Jan Suraaj entered.', italic=True, size=8.5)
-assert w['hi'] < SW['scenario_half']
 
 R.h2('After the final roll')
 R.p('The final roll of 30 September 2025 was published after the claims and objections on the draft. The Election Commission\'s Format 4B return for it gives, seat by seat and by sex, the names added and removed after the draft and the final roll, and agrees with the Chief Electoral Officer\'s press note. '

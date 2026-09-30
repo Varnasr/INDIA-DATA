@@ -546,6 +546,12 @@
    "/india/"
   ]
  },
+ "<b>Once each seat's 2020 result is allowed for, the NDA's lead over INDIA grew by about the same amount whether a seat lost few names or many, between {lo} and {hi} points in each third.</b> Before that allowance INDIA seemed to lose most where the fewest names were removed ({i0} points against {i2}). Part of that is seats giving back in 2025 what they had gained in 2020, which happens whatever the removals. Votes cast grew by {v0}%, {v1}% and {v2}%, so they did not grow less where more names came off the roll.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "<b>Part rates run from {low}% to {high}%, and {over} parts lost more than 60% of their roll</b>, {where}. In every constituency, parts with a larger Muslim-name share of the roll had lower removal rates (rank correlations {r_from} to {r_to}). The share of elderly electors and the share entered as untraceable hardly move with the rate.": {
   "kind": "script",
   "pages": [
@@ -564,7 +570,13 @@
    "/india/"
   ]
  },
- "<b>The NDA parties gained between {lo} and {hi} points of the vote in each third, and INDIA's share changed by {i0} points where the fewest names were removed and {i2} where the most were.</b> Votes cast grew by {v0}%, {v1}% and {v2}%, so they did not grow less where more names came off the roll.": {
+ "<b>That range takes in no effect at all and both of these, so the vote cannot tell whether the removals cost INDIA its voters.</b>": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "<b>That range takes in no effect at all and the second of these, so the vote cannot tell whether the removals cost INDIA its voters.</b>": {
   "kind": "script",
   "pages": [
    "/bihar/results/"
@@ -600,19 +612,7 @@
    "/bihar/results/"
   ]
  },
- "<b>The results cannot tell these apart.</b>": {
-  "kind": "script",
-  "pages": [
-   "/bihar/results/"
-  ]
- },
  "<b>The results fall short of both, so the vote shows no sign that the removals cost INDIA its voters on a scale large enough to see.</b>": {
-  "kind": "script",
-  "pages": [
-   "/bihar/results/"
-  ]
- },
- "<b>The results fall short of the first, so the vote rules out removals that took only INDIA's voters, though not a smaller lean.</b>": {
   "kind": "script",
   "pages": [
    "/bihar/results/"
@@ -628,6 +628,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/telangana/"
+  ]
+ },
+ "<b>The whole range lies above zero, so the vote points to the removals having cost INDIA some of its voters.</b>": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "<b>The {dead} names entered as dead equal about {y} years of adult deaths in Bihar.</b> At 2024 death rates, the state's population aged 20 and over has about {ad} deaths a year. The ages of those entered as dead are close to those of registered deaths: {o1} of those aged 25 or over were 70 or older, and {o2} of registered deaths at those ages in 2024. <b>Women are {wd} of those entered as dead, but {we} of adult deaths.</b> That is {wdn} women, where {wen} would be expected if the names matched the deaths the state actually has. Women were only {rw} of registered deaths at 25 and over in 2024, so women's deaths are registered less often and more of them may have stayed on the roll. The other possibility is that more women who are alive were entered as dead. The lists cannot tell the two apart.": {
@@ -1688,6 +1694,12 @@
    "/bihar/results/"
   ]
  },
+ "Change in NDA lead, allowing for 2020": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "Change in NDA share, points": {
   "kind": "script",
   "pages": [
@@ -1773,7 +1785,7 @@
    "/hyderabad/"
   ]
  },
- "Comparing each seat only with other seats in its own district gives the same answer. For each extra name removed per 100 electors, the NDA's lead over INDIA changed by {s} points, and most likely by something between {lo} and {hi}.": {
+ "Comparing each seat only with other seats in its own district, and allowing for its 2020 result, each extra name removed per 100 electors went with a change of {s} points in the NDA's lead over INDIA, most likely somewhere between {lo} and {hi}.": {
   "kind": "script",
   "pages": [
    "/bihar/results/"
@@ -7273,7 +7285,7 @@
    "/hyderabad/method/"
   ]
  },
- "The election results cannot say. They show whether the removals moved votes between the alliances, and they show no sign of that on a scale large enough to see. From 2020 to 2025 the NDA parties gained between {lo} and {hi} points of the vote whether a seat lost few names or many, and INDIA lost the most where the fewest were removed. Whether each name was rightly removed is a separate question, and on that the lists raise problems the vote cannot settle. Women are over-represented among the removed in every district, and more women were entered as dead than the death rates would give. A voter wrongly removed has lost a vote whichever way it would have gone. <a href=\"../results/#swing\">Elections</a>.": {
+ "The election results cannot say, and they cannot settle whether the removals moved votes between the alliances either. Once each seat's 2020 result is allowed for, the NDA's lead grew by between {lo} and {hi} points whether a seat lost few names or many, but the test is too blunt to rule out a sizeable lean against the NDA among those removed. Whether each name was rightly removed is a separate question, and on that the lists raise problems the vote cannot settle. Women are over-represented among the removed in every district, and more women were entered as dead than the death rates would give. A voter wrongly removed has lost a vote whichever way it would have gone. <a href=\"../results/#swing\">Elections</a>.": {
   "kind": "script",
   "pages": [
    "/bihar/faq/"
@@ -8503,6 +8515,12 @@
   "kind": "markup",
   "pages": [
    "/hyderabad/people/"
+  ]
+ },
+ "Without the allowance for 2020 the figure is {s} (between {lo} and {hi}). The two models disagree even on the direction, which is itself a reason to read little into either.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "Women": {
