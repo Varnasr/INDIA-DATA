@@ -197,5 +197,30 @@ same('women\'s share of removals, every district', int(sum(abs(100 * r.tf / (r.t
 same('districts where women are over-represented among the removed',
      int(sum(100 * r.tf / (r.tf + r.tm) > ID[k]['female_share_population_2011'] for k, r in f.iterrows())), 38)
 
+print('Reasons for removal')
+# Read the counts file with the csv module, not pandas, and check it three
+# ways: against the published reasons, against the booth file booth by booth,
+# and against the official table's phase 1 women and men in every seat.
+rs, sx_ac, bb = {}, {}, {}
+with gzip.open(os.path.join(RAW, 'reasons_by_booth.csv.gz'), 'rt', encoding='utf-8') as fh:
+    for row in csv.DictReader(fh):
+        n = int(row['count'])
+        rs[row['reason']] = rs.get(row['reason'], 0) + n
+        k = (int(row['ac']), row['sex'])
+        sx_ac[k] = sx_ac.get(k, 0) + n
+        kb = (int(row['ac']), int(row['jan_part']))
+        bb[kb] = bb.get(kb, 0) + n
+R = pub('reasons.json')
+for k in ['dead', 'shifted', 'absent', 'already_enrolled']:
+    same('removals entered as ' + k.replace('_', ' '), rs.get(k, 0), R['totals'][k])
+same('reasons cover every phase 1 removal', sum(rs.values()), int(x.p1.sum()) + sum(v for (ac, sx_), v in sx_ac.items() if sx_ == 'T'))
+same('women by reason add up to the official phase 1 women, every seat', int(sum(sx_ac.get((ac, 'F'), 0) == x.p1f[ac] for ac in x.index)), len(x.index))
+same('men by reason add up to the official phase 1 men, every seat', int(sum(sx_ac.get((ac, 'M'), 0) == x.p1m[ac] for ac in x.index)), len(x.index))
+booths = {}
+for ac in x.index:
+    for r_ in pub('booths/ac_%03d.json' % ac)['rows']:
+        booths[(ac, r_[0])] = r_[1]
+same('booths where the reasons add up to the booth\'s removals', int(sum(bb.get(k, -1) == v for k, v in booths.items())), len(booths))
+
 print('FAIL: %d' % len(FAIL) if FAIL else 'PASS: every recomputed figure matches the published data')
 sys.exit(1 if FAIL else 0)
