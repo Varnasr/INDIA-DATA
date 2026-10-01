@@ -2,7 +2,7 @@
 
 Who was struck off India's electoral rolls in the 2025-26 Special Intensive
 Revision: across India, in Bihar, in five Old City constituencies of
-Hyderabad and in Tamil Nadu. Static
+Hyderabad, in Tamil Nadu and in Karnataka. Static
 site at [offtheroll.in](https://offtheroll.in), by PinPoint Ventures. Every page is built
 from `site/` by `scripts/build_site.py`.
 
@@ -21,6 +21,7 @@ from `site/` by `scripts/build_site.py`.
 | `/hyderabad/explorer/` | Any constituency, any of its 1,158 polling parts |
 | `/hyderabad/people/`, `/parts/`, `/hearings/`, `/faq/`, `/method/` | Rates by age, sex, religion and 2002 linkage within parts; part outliers; hearings; fourteen research questions |
 | [`/tamilnadu/`](https://offtheroll.in/tamilnadu/) | Tamil Nadu: 97,37,831 names left off the draft roll in 234 constituencies, by district and reason, and what the final roll put back |
+| [`/karnataka/`](https://offtheroll.in/karnataka/) | Karnataka: 1,07,96,339 names left off the draft roll in 34 districts, by reason, with Bengaluru's four districts and the roll of 25 September |
 | `/tamilnadu/elections/`, `/faq/`, `/method/` | Removals against the 2026 margins and by the party that won, read against each seat's district |
 
 ## Reports
@@ -62,6 +63,9 @@ python3 -m http.server 8000
 - Tamil Nadu: CEO Tamil Nadu tables of removals by constituency and reason,
   and of the draft and final rolls; ECI 2026 constituency results; the 2021
   result from the ECI statistical report.
+- Karnataka: CEO Karnataka press notes of 24 August 2026 (removals by
+  district and reason, draft roll by sex) and 25 September 2026 (the roll by
+  district and sex).
 
 Aggregates only. No names, EPIC numbers or addresses are published or committed.
 

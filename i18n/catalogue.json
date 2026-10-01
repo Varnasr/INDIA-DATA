@@ -444,6 +444,12 @@
    "/hyderabad/people/"
   ]
  },
+ "<b>Across the state, {sh} of the names were entered as shifted and {ab} as absent, {dead} as dead and {dup} as already enrolled elsewhere.</b> The more names a district removed, the larger the share marked shifted or absent (rank correlation {rho}). Where fewer were removed, more were entered as dead, up to {dm} in {dmn}. A reason on the list is what the officer wrote down, and nobody checked it.": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "<b>Across the state, {sh} of the names were entered as shifted or absent and {dead} as dead.</b> In Chennai the share entered as shifted or absent is {csh}. Where fewer names were removed, more of them were entered as dead, up to {dmax} in {dmaxn}. A reason on the list is what the officer wrote down, and nobody checked it.": {
   "kind": "script",
   "pages": [
@@ -474,10 +480,28 @@
    "/bihar/people/"
   ]
  },
+ "<b>Bengaluru holds {roll} of Karnataka's roll and {rem} of the names removed, {n} names in all.</b> {sa} of them were entered as shifted or absent and {dead} as dead. In the rest of the state the figures are {rsa} and {rdead}.": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
+ "<b>Bengaluru's four districts lost between {lo} and {hi} of every 100 electors, against {s} for the state.</b> The next highest is {n1} at {n1v}. {low} lost the fewest, {lowv}.": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "<b>Bihar 2025</b><span id=\"hBihar\">Every constituency and every booth, set against the 2025 election result.</span>": {
   "kind": "markup",
   "pages": [
    "/"
+  ]
+ },
+ "<b>By 25 September the roll had risen by {a} since the draft, {m} of the {r} names removed.</b> In Bengaluru it rose by {ba}, against {bn} names removed. Elsewhere the rise came to {rm} of the names removed. The final roll may change this, and the rise includes new voters.": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
   ]
  },
  "<b>Carried forward to 2025, the census shares give much the same picture.</b> At each district's growth rates from 2001 to 2011, Bihar's Muslim share comes to {st} in 2025, close to the {sv} counted by the 2023 caste survey, and no district moves by more than {mx} points. On the 2025 shares the range holds the population share in {inside} of {n} districts, and the lowest estimate is more than a point above it in {clear} districts ({list}).": {
@@ -574,6 +598,12 @@
   "kind": "script",
   "pages": [
    "/bihar/results/"
+  ]
+ },
+ "<b>Karnataka 2026</b><span id=\"hKa\">Every district, with the reason recorded and what had been put back by the end of September.</span>": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "<b>NDA seats lost more names per elector than INDIA seats under all three labellings</b>, by {lo} to {hi} per 100 electors. Seats held by neither alliance, most of them in Seemanchal, lost the most of all.": {
@@ -775,6 +805,14 @@
    "/hyderabad/telangana/"
   ]
  },
+ "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Karnataka 2026 · every district, every recorded reason</span>": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/"
+  ]
+ },
  "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Names taken off the electoral rolls, counted from the published lists</span>": {
   "kind": "markup",
   "pages": [
@@ -880,12 +918,14 @@
    "/assets/faq/bihar.js",
    "/assets/faq/hyd.js",
    "/assets/faq/india.js",
+   "/assets/faq/karnataka.js",
    "/assets/faq/tamilnadu.js"
   ]
  },
  "A reason on the list is what the officer wrote down, and nobody checked it. The tables show where names were removed and cannot show why.": {
   "kind": "script",
   "pages": [
+   "/assets/faq/karnataka.js",
    "/assets/faq/tamilnadu.js"
   ]
  },
@@ -946,6 +986,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -964,7 +1007,8 @@
    "/bihar/",
    "/bihar/explorer/",
    "/bihar/people/",
-   "/bihar/results/"
+   "/bihar/results/",
+   "/karnataka/"
   ]
  },
  "Across 38 districts, the rank correlation between per-capita district product and removals per 100 electors is {rho}. <a href=\"../districts/\">Districts</a>.": {
@@ -1222,6 +1266,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -1375,7 +1422,8 @@
    "/bihar/",
    "/bihar/explorer/",
    "/bihar/people/",
-   "/bihar/results/"
+   "/bihar/results/",
+   "/karnataka/"
   ]
  },
  "Among the removed aged 80 and over, {old} were entered as dead; among those aged 18 to 24, {youngdead}. The young were mostly marked shifted or absent.": {
@@ -1475,6 +1523,12 @@
    "/bihar/people/"
   ]
  },
+ "Bangalore Urban and the three B.B.M.P districts, set against the rest of the state.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "Bar colour marks the border the district lies on; grey is the interior.": {
   "kind": "markup",
   "pages": [
@@ -1509,6 +1563,18 @@
   "kind": "script",
   "pages": [
    "/bihar/"
+  ]
+ },
+ "Bengaluru": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
+ "Bengaluru's four districts lost {p} of every 100 electors. They hold {roll} of the state's roll and {rem} of the names removed.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
   ]
  },
  "Between the 2020 and 2025 Assembly elections the NDA parties gained votes across Bihar. If the removals had taken away more of INDIA's voters than the NDA's, INDIA's share should have fallen most where the most names came off the roll. Here every seat is split into thirds by names removed per 100 electors, and both elections are counted with the parties grouped as they stood in 2025.": {
@@ -1549,6 +1615,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -1802,6 +1871,12 @@
    "/bihar/"
   ]
  },
+ "By 25 September the roll had risen by {a} since the draft, {m} of the names removed. In Bengaluru it rose by {ba}.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
  "By constituency: {list}.": {
   "kind": "script",
   "pages": [
@@ -1838,6 +1913,7 @@
    "/assets/faq/bihar.js",
    "/assets/faq/hyd.js",
    "/assets/faq/india.js",
+   "/assets/faq/karnataka.js",
    "/assets/faq/tamilnadu.js"
   ]
  },
@@ -2011,6 +2087,7 @@
  "Click a column heading to sort. The table scrolls.": {
   "kind": "markup",
   "pages": [
+   "/karnataka/",
    "/tamilnadu/",
    "/tamilnadu/elections/"
   ]
@@ -2263,6 +2340,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -2314,6 +2394,7 @@
    "/bihar/results/",
    "/hyderabad/",
    "/india/",
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -2583,6 +2664,7 @@
    "/bihar/districts/",
    "/bihar/explorer/",
    "/bihar/people/",
+   "/karnataka/",
    "/tamilnadu/",
    "/tamilnadu/elections/"
   ]
@@ -2623,6 +2705,9 @@
    "/bihar/people/",
    "/bihar/report/",
    "/bihar/results/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -2890,6 +2975,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -2914,6 +3002,7 @@
    "/hyderabad/telangana/",
    "/india/",
    "/india/method/",
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -2969,6 +3058,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Each district's removals split by the reason entered against the name. Districts are in the same order as above.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
   ]
  },
  "Each district's removals split by the reason entered against the name: dead, shifted or absent, and enrolled in more than one place. Districts are in the same order as above.": {
@@ -3370,7 +3465,8 @@
  "Every district": {
   "kind": "markup",
   "pages": [
-   "/bihar/districts/"
+   "/bihar/districts/",
+   "/karnataka/"
   ]
  },
  "Every elector on the rolls of Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura before the 2026 Special Intensive Revision, sorted into deleted, called to a hearing or untouched, down to the polling part. Only totals are shown, never names.": {
@@ -3390,6 +3486,7 @@
   "kind": "markup",
   "pages": [
    "/india/faq/",
+   "/karnataka/faq/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/"
   ]
@@ -3397,6 +3494,7 @@
  "Every figure on this page is computed from the published data when the page loads. <a href=\"method/\">Sources and method</a>.": {
   "kind": "markup",
   "pages": [
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -3492,6 +3590,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -3521,6 +3622,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -3650,6 +3754,12 @@
   "kind": "markup",
   "pages": [
    "/tamilnadu/"
+  ]
+ },
+ "For each district, the rise in the roll from the draft to 25 September, for every 100 names left off the draft. The rise counts new voters as well as names put back, so it is the most that could have been restored.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
   ]
  },
  "For each state whose final roll is out, this gives the draft and final rolls and the names added on claims and removed on objections in between, from one source per state. <b>Adds up</b> means the draft plus additions less removals equals the final roll. <b>Net only</b> means the state published the draft and final rolls but not the additions and removals behind the difference, and the figure reported as additions was in fact the net rise. <b>Does not add up</b> means the published figures do not match, as the note explains. The fall at the final roll is the names removed at the draft less the rise from draft to final. New electors are part of that rise, and no state has said how many of those added had been removed at the draft.": {
@@ -3873,6 +3983,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Have the names been put back?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
   ]
  },
  "Hearing load": {
@@ -4267,6 +4383,12 @@
    "/assets/faq/india.js"
   ]
  },
+ "How many names did the revision remove in Karnataka?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
  "How many names did the revision remove in Tamil Nadu?": {
   "kind": "script",
   "pages": [
@@ -4484,6 +4606,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -4867,6 +4992,79 @@
    "/assets/faq/hyd.js"
   ]
  },
+ "Karnataka 2026": {
+  "kind": "markup",
+  "pages": [
+   "/",
+   "/bihar/",
+   "/bihar/border/",
+   "/bihar/districts/",
+   "/bihar/explorer/",
+   "/bihar/faq/",
+   "/bihar/method/",
+   "/bihar/people/",
+   "/bihar/report/",
+   "/bihar/results/",
+   "/hyderabad/",
+   "/hyderabad/explorer/",
+   "/hyderabad/faq/",
+   "/hyderabad/hearings/",
+   "/hyderabad/method/",
+   "/hyderabad/parts/",
+   "/hyderabad/people/",
+   "/hyderabad/report/",
+   "/hyderabad/telangana/",
+   "/india/",
+   "/india/faq/",
+   "/india/method/",
+   "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
+   "/tamilnadu/",
+   "/tamilnadu/elections/",
+   "/tamilnadu/faq/",
+   "/tamilnadu/method/"
+  ]
+ },
+ "Karnataka SIR 2026: names removed, by district and reason": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
+ "Karnataka SIR 2026: questions and answers": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/faq/"
+  ]
+ },
+ "Karnataka SIR 2026: sources and method": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
+  ]
+ },
+ "Karnataka pages": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/"
+  ]
+ },
+ "Karnataka: the roll from 16 June to 25 September 2026": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
+ "Karnataka: who was taken off the roll": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "Kept off, undecided": {
   "kind": "script",
   "pages": [
@@ -5226,6 +5424,9 @@
    "/hyderabad/people/",
    "/hyderabad/report/",
    "/hyderabad/telangana/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -5599,6 +5800,7 @@
   "pages": [
    "/tamilnadu/elections/",
    "/india/method/",
+   "/karnataka/method/",
    "/tamilnadu/method/"
   ]
  },
@@ -5606,6 +5808,12 @@
   "kind": "markup",
   "pages": [
    "/tamilnadu/"
+  ]
+ },
+ "Names left off the draft roll of 24 August 2026, for every 100 electors on the roll of 16 June 2026, in each of the Chief Electoral Officer's 34 election districts. Bengaluru's four districts are marked in red.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
   ]
  },
  "Names left off the draft roll, divided by the electors on the roll before the revision began. Where that roll was published only in lakh or crore, the rate is rounded too. Chandigarh did not publish an exact roll from before the revision, so it has no rate.": {
@@ -5705,6 +5913,7 @@
  "Names removed per 100 electors, by district": {
   "kind": "script",
   "pages": [
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -5838,6 +6047,7 @@
   "kind": "script",
   "pages": [
    "/india/",
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -5877,6 +6087,7 @@
   "kind": "script",
   "pages": [
    "/india/",
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -6005,6 +6216,7 @@
    "/assets/faq/bihar.js",
    "/assets/faq/hyd.js",
    "/assets/faq/india.js",
+   "/assets/faq/karnataka.js",
    "/assets/faq/tamilnadu.js"
   ]
  },
@@ -6085,6 +6297,12 @@
   "kind": "script",
   "pages": [
    "/india/method/"
+  ]
+ },
+ "Nothing has been published by assembly constituency, and the removals are not split by sex or age.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
   ]
  },
  "Number": {
@@ -6224,7 +6442,8 @@
   "kind": "script",
   "pages": [
    "/bihar/people/",
-   "/bihar/results/"
+   "/bihar/results/",
+   "/karnataka/"
   ]
  },
  "Other parties": {
@@ -6239,11 +6458,20 @@
    "/hyderabad/parts/"
   ]
  },
+ "Outside Bengaluru the highest is {a} at {av} per 100, and the lowest is {lo} at {lov}.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
  "Overview": {
   "kind": "markup",
   "pages": [
    "/bihar/",
    "/hyderabad/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -6488,6 +6716,7 @@
    "/bihar/explorer/",
    "/bihar/results/",
    "/india/",
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -6668,6 +6897,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -6817,6 +7049,8 @@
    "/hyderabad/telangana/",
    "/india/",
    "/india/method/",
+   "/karnataka/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/method/"
@@ -6830,6 +7064,7 @@
    "/bihar/faq/",
    "/hyderabad/faq/",
    "/india/faq/",
+   "/karnataka/faq/",
    "/tamilnadu/faq/"
   ]
  },
@@ -6837,6 +7072,12 @@
   "kind": "markup",
   "pages": [
    "/india/faq/"
+  ]
+ },
+ "Questions and answers on the Special Intensive Revision in Karnataka: how many names were removed, where, and on what recorded reason.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/faq/"
   ]
  },
  "Questions and answers on the Special Intensive Revision in Tamil Nadu: how many names were removed, where, on what recorded reason, and against the 2026 result.": {
@@ -7154,6 +7395,7 @@
  "Removals per 100 electors, by district": {
   "kind": "markup",
   "pages": [
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -7197,6 +7439,7 @@
    "/bihar/people/",
    "/bihar/results/",
    "/india/",
+   "/karnataka/",
    "/tamilnadu/",
    "/tamilnadu/elections/"
   ]
@@ -7275,6 +7518,7 @@
    "/bihar/districts/",
    "/bihar/explorer/",
    "/india/",
+   "/karnataka/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/india/method/"
@@ -7356,6 +7600,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -7392,9 +7639,22 @@
    "/bihar/results/"
   ]
  },
+ "Rise in the roll from the draft to 25 September, per 100 names removed, by district": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
+ "Rise per 100 names removed": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "Roll before": {
   "kind": "script",
   "pages": [
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -7415,6 +7675,24 @@
   "kind": "script",
   "pages": [
    "/india/"
+  ]
+ },
+ "Roll of 16 June": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
+ "Roll of 25 Sept": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
+ "Roll of 25 September": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
   ]
  },
  "Rounded": {
@@ -7791,6 +8069,7 @@
  "Share of each district's removals by reason": {
   "kind": "script",
   "pages": [
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -7878,7 +8157,8 @@
    "/bihar/",
    "/bihar/explorer/",
    "/bihar/people/",
-   "/bihar/results/"
+   "/bihar/results/",
+   "/karnataka/"
   ]
  },
  "Shifted or absent": {
@@ -7926,6 +8206,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -8024,6 +8307,7 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/method/",
    "/tamilnadu/method/"
   ]
  },
@@ -8233,6 +8517,9 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
    "/tamilnadu/",
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
@@ -8300,6 +8587,12 @@
   "kind": "script",
   "pages": [
    "/bihar/results/"
+  ]
+ },
+ "That rise counts new voters too, so it is the most that could have been restored. The final roll is due on 27 October 2026.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
   ]
  },
  "The 2002 roll": {
@@ -8381,10 +8674,28 @@
    "/assets/faq/tamilnadu.js"
   ]
  },
+ "The Chief Electoral Officer published every table of the revision by its 34 election districts and for the state, and none by assembly constituency. Bengaluru appears as four of those districts: Bangalore Urban and the North, Central and South districts of the city corporation, B.B.M.P. A count by constituency could be made only by tallying the named lists, which this site does not do in Karnataka.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
+  ]
+ },
  "The Chief Electoral Officer published the removals against the draft roll, constituency by constituency, but no constituency table of the roll the revision started from. The draft plus the removals is that roll, and it adds up to the state total announced with the draft.": {
   "kind": "script",
   "pages": [
    "/assets/faq/tamilnadu.js"
+  ]
+ },
+ "The Chief Electoral Officer published the revision by its 34 election districts and for the state, and no table by assembly constituency. So the removals cannot be set against the margins of the 2023 election.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
+ "The Chief Electoral Officer, Karnataka, published the draft roll on 24 August 2026 with a table of the names left off it, by election district and under five reasons: absent, permanently shifted, dead, already enrolled and other. The 34 district rows add up to the state row, <span id=\"mRem\"></span> names out of <span id=\"mBefore\"></span>, and in every district the names removed and the forms digitised add up to the roll of 16 June 2026.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
   ]
  },
  "The Chief Electoral Officer, Tamil Nadu, published the names left off the draft roll of 19 December 2025 for each of the 234 assembly constituencies, under three reasons: deceased, shifted or absent, and enrolled at more than one place. The constituency rows add up to the district totals and to the state total of <span id=\"mRem\"></span>.": {
@@ -8599,6 +8910,18 @@
    "/assets/sir.js"
   ]
  },
+ "The district table behind every chart is in the Downloads menu at the top of the page.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
+  ]
+ },
+ "The draft roll and the roll of 25 September are published by sex. The roll of 16 June is published as a total only, and the names removed are not split by sex, so the share of women among those removed cannot be counted from the Chief Electoral Officer's tables.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
+  ]
+ },
  "The elector-by-elector lists were compiled for these five seats only, so they are a chosen group and not a sample of Hyderabad. The district's other ten seats appear only as the state's totals, on the Hyderabad and Telangana page.": {
   "kind": "script",
   "pages": [
@@ -8658,6 +8981,18 @@
   "pages": [
    "/hyderabad/method/",
    "/tamilnadu/method/"
+  ]
+ },
+ "The final roll is due on 27 October 2026.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
+ "The final roll is due on 27 October 2026. Until then the latest figures are the roll of 25 September 2026, by district and sex, published after claims and objections had closed and while notices were still being heard. The rise from the draft to that roll is the names added less those removed since, so it counts new voters as well as names put back, and it is the most that could have been restored.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
   ]
  },
  "The final roll of 23 February 2026 was {a} larger than the draft. That rise is at most {m} of the names removed, and it includes new voters.": {
@@ -8897,6 +9232,12 @@
    "/bihar/people/"
   ]
  },
+ "The names left off Karnataka's draft electoral roll in the Special Intensive Revision, by election district and recorded reason, with the roll during claims and objections.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "The names left off Tamil Nadu's draft electoral roll in the Special Intensive Revision, by district and constituency, with the reason recorded and what the final roll put back.": {
   "kind": "markup",
   "pages": [
@@ -9002,6 +9343,7 @@
  "The reasons, district by district": {
   "kind": "markup",
   "pages": [
+   "/karnataka/",
    "/tamilnadu/"
   ]
  },
@@ -9011,10 +9353,22 @@
    "/india/"
   ]
  },
+ "The removals and the draft roll are published by the Chief Electoral Officer by election district, and every table adds up to its state row.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
  "The removals by constituency and reason, and the draft and final rolls by constituency, are the Chief Electoral Officer's own tables. The 2026 result is from the Election Commission's result pages, and the 2021 result from the Commission's statistical report. The <a href=\"../method/\">method page</a> gives each source.": {
   "kind": "script",
   "pages": [
    "/assets/faq/tamilnadu.js"
+  ]
+ },
+ "The removals by district and reason, and the draft roll by district and sex, are from the Chief Electoral Officer's press note of 24 August 2026. The roll of 25 September is from the press note of that date. The <a href=\"../method/\">method page</a> gives each source.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
   ]
  },
  "The removals hit every community. Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors, by {a} to {b} points.": {
@@ -9059,6 +9413,12 @@
    "/"
   ]
  },
+ "The revision left {r} names off Karnataka's draft roll, {p} of every 100 electors on the roll before it began.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
  "The revision left {r} names off Tamil Nadu's draft roll, {p} of every 100 electors on the roll before it began.": {
   "kind": "script",
   "pages": [
@@ -9083,6 +9443,12 @@
    "/assets/faq/bihar.js"
   ]
  },
+ "The roll after the draft": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
+  ]
+ },
  "The roll before the revision": {
   "kind": "markup",
   "pages": [
@@ -9093,6 +9459,12 @@
   "kind": "script",
   "pages": [
    "/assets/faq/tamilnadu.js"
+  ]
+ },
+ "The roll of 16 June 2026 held {b} names and the draft roll of 24 August {d}.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
   ]
  },
  "The rolls against the adult population": {
@@ -9123,6 +9495,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/telangana/"
+  ]
+ },
+ "The state's roll, step by step, from 16 June to 25 September 2026, when claims and objections had closed and the notices were still being heard. The bars start above zero so that the changes can be seen, and the figure on each bar is the count. The final roll is due on 27 October 2026.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
   ]
  },
  "The state's roll, step by step, from before the revision to the final roll of 23 February 2026. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.": {
@@ -9225,6 +9603,12 @@
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
+  ]
+ },
+ "This cannot be counted from the Chief Electoral Officer's tables. The roll before the revision is published as a total only, and the names removed are not split by sex. Women were {d} of the draft roll and {f} of the roll of 25 September.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
   ]
  },
  "This site reads those lists and figures and turns them into counts. It shows where removals were heaviest, whether women were removed more than men, and what reason was written against the names. A reason on a list is what the officer wrote down, and nobody checked it. The counts can show where removals fell and on whom. They cannot show why any one name was removed, or whether that removal was right.": {
@@ -9465,6 +9849,12 @@
    "/bihar/results/"
   ]
  },
+ "Were Bengaluru's names removed for different reasons?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
  "Were Muslim-name electors struck off more often?": {
   "kind": "script",
   "pages": [
@@ -9549,6 +9939,7 @@
   "kind": "script",
   "pages": [
    "/assets/faq/india.js",
+   "/assets/faq/karnataka.js",
    "/assets/faq/tamilnadu.js"
   ]
  },
@@ -9597,10 +9988,17 @@
    "/hyderabad/"
   ]
  },
+ "What has been put back so far": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "What is counted": {
   "kind": "markup",
   "pages": [
    "/india/method/",
+   "/karnataka/method/",
    "/tamilnadu/method/"
   ]
  },
@@ -9686,6 +10084,7 @@
  "What these tables cannot show": {
   "kind": "markup",
   "pages": [
+   "/karnataka/method/",
    "/tamilnadu/method/"
   ]
  },
@@ -9756,6 +10155,7 @@
   "kind": "script",
   "pages": [
    "/assets/faq/india.js",
+   "/assets/faq/karnataka.js",
    "/assets/faq/tamilnadu.js"
   ]
  },
@@ -9789,6 +10189,12 @@
    "/hyderabad/method/"
   ]
  },
+ "Where the Karnataka figures come from, how they are checked, and what they cannot show.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
+  ]
+ },
  "Where the Tamil Nadu figures come from, how they are joined, and what they cannot show.": {
   "kind": "markup",
   "pages": [
@@ -9816,13 +10222,21 @@
  "Where were removals heaviest?": {
   "kind": "script",
   "pages": [
+   "/assets/faq/karnataka.js",
    "/assets/faq/tamilnadu.js"
   ]
  },
  "Whether each removal was right. A reason on the list is what the officer wrote down, and nobody checked it.": {
   "kind": "markup",
   "pages": [
+   "/karnataka/method/",
    "/tamilnadu/method/"
+  ]
+ },
+ "Whether women, the old or the young were removed more often.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
   ]
  },
  "Whether women, the old or the young were removed more often. The Chief Electoral Officer has not published the removals by sex or age.": {
@@ -9848,6 +10262,12 @@
   "pages": [
    "/bihar/",
    "/bihar/method/"
+  ]
+ },
+ "Which constituencies lost the most names, or how the removals compare with the margins of the 2023 election.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
   ]
  },
  "Which districts have the highest shares?": {
@@ -10081,6 +10501,12 @@
    "/assets/faq/india.js"
   ]
  },
+ "Why districts and not constituencies": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
+  ]
+ },
  "Why do some states look short of electors?": {
   "kind": "script",
   "pages": [
@@ -10111,6 +10537,12 @@
    "/assets/faq/tamilnadu.js"
   ]
  },
+ "Why is there no table by constituency?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
  "Why names were struck": {
   "kind": "markup",
   "pages": [
@@ -10133,6 +10565,7 @@
   "kind": "script",
   "pages": [
    "/assets/faq/india.js",
+   "/assets/faq/karnataka.js",
    "/assets/faq/tamilnadu.js"
   ]
  },
@@ -10269,7 +10702,8 @@
  "Women and men": {
   "kind": "markup",
   "pages": [
-   "/hyderabad/people/"
+   "/hyderabad/people/",
+   "/karnataka/method/"
   ]
  },
  "Women and men were struck off at close to the same rate, {f} against {m}.": {
@@ -10612,6 +11046,12 @@
    "/assets/faq/tamilnadu.js"
   ]
  },
+ "Yes. In Bengaluru {sa} of the names removed were entered as shifted or absent and {dead} as dead. In the rest of the state the figures are {rsa} and {rdead}. Across all 34 districts, the more names a district removed, the larger the share marked shifted or absent (rank correlation {rho}).": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
  "Yes. Women are {fem} of the removed against {roll} of the roll, over-represented in {over} of {districts} districts.": {
   "kind": "script",
   "pages": [
@@ -10880,6 +11320,12 @@
    "/bihar/people/"
   ]
  },
+ "of the names removed": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "of the pre-revision roll": {
   "kind": "script",
   "pages": [
@@ -10890,6 +11336,12 @@
   "kind": "script",
   "pages": [
    "/bihar/explorer/"
+  ]
+ },
+ "of the roll before the revision": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
   ]
  },
  "of those entered as dead were women": {
@@ -10950,6 +11402,12 @@
   "kind": "script",
   "pages": [
    "/bihar/districts/"
+  ]
+ },
+ "removed per 100 electors, against {r} in the rest of the state": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
   ]
  },
  "removed per 100 electors, border": {
@@ -11525,6 +11983,12 @@
    "/"
   ]
  },
+ "{n} names left off the draft roll in {d} districts, {p} of every 100 electors, and {b} in Bengaluru alone.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "{n} names removed across {acs} constituencies and {booths} booths, set against the 2025 election result.": {
   "kind": "script",
   "pages": [
@@ -11724,6 +12188,12 @@
    "/assets/faq/tamilnadu.js"
   ]
  },
+ "{sh} were entered as shifted, {ab} as absent, {dead} as dead and {dup} as already enrolled elsewhere.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/karnataka.js"
+  ]
+ },
  "{slots} slots across the five constituencies, 28 August to 12 October.": {
   "kind": "script",
   "pages": [
@@ -11814,6 +12284,7 @@
   "pages": [
    "/",
    "/assets/faq/india.js",
+   "/assets/faq/karnataka.js",
    "/assets/faq/tamilnadu.js",
    "/india/",
    "/india/method/"
