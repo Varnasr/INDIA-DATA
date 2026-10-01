@@ -396,6 +396,8 @@ per slot, not the slot's length.
   prefer "guessed from names" to "estimated", "typical" or "middle" to
   "median" in prose. When rewriting an English key, carry its translations to
   the new key only if the meaning is unchanged; retranslate otherwise.
+- **Bihar and Hyderabad are never compared** with each other, on a page,
+  in a report or in a deck. Each analysis stands on its own.
 - **Lead with what was lost.** Summaries, key insights and deck titles open
   with the scale of the removals, the seats where the removed could have
   changed the result, and who was removed. Facts that cut the other way (the

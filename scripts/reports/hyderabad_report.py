@@ -71,7 +71,7 @@ R.h2('At a glance')
 R.stats([(indian(t['deleted']), 'electors struck off'), (pct(t['rate']), 'of the pre-revision rolls'),
          ('%d of %d' % (len(overM), len(A)), 'seats where the names struck off exceed the 2023 margin'), (indian(t['hearing']), 'kept but summoned to a hearing')])
 R.p('The Special Intensive Revision reached Hyderabad in 2026. On the pre-revision rolls of five Old City constituencies stood %s electors. The September lists struck %s of them off, %s, and kept %s more on the draft roll only on condition that they attend a hearing. '
-    'The Bihar lists hold only the removed. These lists hold every elector, so each group has a true rate, the share of that group struck off.'
+    'These lists hold every elector, so each group has a true rate, the share of that group struck off.'
     % (indian(t['electors']), indian(t['deleted']), pct(t['rate']), indian(t['hearing'])))
 R.p('Every one of the five lost more names than its 2023 winning margin. In %s the names struck off exceed every valid vote cast in 2023. Yakutpura was won by %s votes and lost %s names. '
     'The heaviest burden fell on the oldest electors and on those who could not be traced to the 2002 roll: %s of electors aged 80 and over were struck off, and electors with no 2002 link were struck off at twice the rate of those with one.'
@@ -137,7 +137,7 @@ R.p('In every constituency, the older the elector, the likelier the removal. Bet
 
 R.h2('Women and men')
 fm = [a['within_part']['female_minus_male']['diff_pp'] for a in A]
-R.p('Women and men were struck off at similar rates, %s of women and %s of men. Inside the same polling part the gap runs from %.1f to %.1f points, one way in some constituencies and the other way in others. In Bihar women were 55.5%% of the removed and over-represented in every district, and the Old City shows no such pattern.'
+R.p('Women and men were struck off at similar rates, %s of women and %s of men. Inside the same polling part the gap runs from %.1f to %.1f points, one way in some constituencies and the other way in others.'
     % (pct(fr), pct(mr), min(fm), max(fm)))
 
 R.h2('Religion')

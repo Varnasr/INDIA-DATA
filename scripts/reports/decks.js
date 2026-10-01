@@ -568,7 +568,7 @@ function hyderabad() {
     { name: 'Women', labels: names, values: A.map((a) => a.female_rate) },
     { name: 'Men', labels: names, values: A.map((a) => a.male_rate) },
   ], K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'clustered', chartColors: ['AF3B6E', '1F618D'], showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', showLegend: true, valAxisHidden: true })));
-  K.right(s, ['Inside the same part the gaps are under ' + Math.ceil(Math.max(...FM.map((f) => Math.abs(f.diff_pp))) * 2) / 2 + ' points either way.', 'In Bihar, women were 55.5% of the removed. The Old City shows no such gap.']);
+  K.right(s, ['Inside the same part the gaps are under ' + Math.ceil(Math.max(...FM.map((f) => Math.abs(f.diff_pp))) * 2) / 2 + ' points either way.']);
 
   // ---- Polling parts
   const bins = [[10, 20], [20, 30], [30, 40], [40, 50], [50, 60], [60, 70], [70, 81]];
@@ -637,7 +637,7 @@ function hyderabad() {
   s = K.slide('Method', 'Where the figures come from and how the rates are defined');
   K.bullets(s, [
     'The source is the September 2026 SIR lists for the five constituencies, compiled for these five seats only. They record the outcome for every elector on the roll before the revision, whether struck off (with the officer\'s reason), kept but summoned to a hearing (with the rule), or kept.',
-    'The removal rate is the electors on the absent-shifted-dead list divided by the electors on the roll before the revision, for each group. The Bihar lists hold only the removed, so the Bihar deck gives shares of removals.',
+    'The removal rate is the electors on the absent-shifted-dead list divided by the electors on the roll before the revision, for each group.',
     'The within-part difference is one group\'s rate minus another\'s inside each polling part, pooled and weighted by the smaller group in each part. Parts with fewer than 20 of either group are left out. This holds the neighbourhood and the officer constant.',
     'Part correlations: Spearman rank correlations across parts with at least 100 electors, within each constituency.',
     'The 2023 results are the declared Assembly results. Only counts are published, never a name, EPIC number or address.',

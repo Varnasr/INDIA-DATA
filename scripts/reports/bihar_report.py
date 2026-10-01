@@ -141,7 +141,7 @@ style_axes(ax, 'The 20 constituencies where the removals were largest against th
 R.figure(fig, 'Figure 2. Colour marks the alliance that won the seat in 2025: orange NDA, green INDIA, purple neither.')
 ru = [a for a in A if a['total'] > a['runner_up_votes2025']]
 R.p('Across Bihar the removals equal %s of the votes polled. In %d constituencies they equal more than 15%%, in %d more than a fifth, and in %s they reach %s. '
-    'In %s the names removed exceed the runner-up\'s entire vote. In no constituency do they exceed the total votes polled: Bihar removed about nine names per hundred electors, where the Old City of Hyderabad removed forty.'
+    'In %s the names removed exceed the runner-up\'s entire vote. In no constituency do they exceed the total votes polled.'
     % (pct(100 * t['total'] / polled), sum(share(a) > 15 for a in A), sum(share(a) > 20 for a in A), bysh[0]['name'], pct(share(bysh[0])), andj([a['name'] for a in ru]) if ru else 'no constituency'))
 fig, ax = plt.subplots(figsize=(8, 3.4))
 groups = ['All %d seats' % len(withM), 'The NDA\'s %d wins' % len(nda), '%d seats taken from INDIA' % len(took)]
