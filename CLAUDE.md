@@ -1,11 +1,13 @@
 # INDIA-DATA
 
-The SIR analyses hub at forindia.netlify.app: All India (the reasons for
+The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025) and five Old City constituencies of
 Hyderabad (2026). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
-every page. Netlify deploys the repository root from `main`; `static.yml` also
-publishes it to GitHub Pages.
+every page. Netlify deploys the repository root from `main` to offtheroll.in
+(Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
+and forindia.netlify.app redirects to it); `static.yml` also publishes it to
+GitHub Pages.
 
 ## Commands
 

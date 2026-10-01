@@ -1,3 +1,7 @@
+# The site lives at offtheroll.in. Every old link to the Netlify address
+# lands on the same page there.
+https://forindia.netlify.app/*  https://offtheroll.in/:splat  301!
+
 # Only the pages and the aggregate data they read are served. Source files,
 # build scripts, notes and the archive stay in the repository.
 /archive/*          /404.html  404!
