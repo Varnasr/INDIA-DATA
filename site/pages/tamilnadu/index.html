@@ -6,7 +6,7 @@
   <p class="sub">Names left off the draft roll of 19 December 2025, for every 100 electors on the roll before the revision began. Chennai is marked in red.</p>
   <div class="grid">
     <div class="panel wide">
-      <div class="chart rows"><canvas id="cDist" aria-label="Names removed per 100 electors, by district"></canvas></div>
+      <div class="vizbox" id="cDist"></div>
     </div>
   </div>
   <p class="finding" id="fDist"></p>
@@ -15,7 +15,7 @@
   <p class="sub">Each district's removals split by the reason entered against the name: dead, shifted or absent, and enrolled in more than one place. Districts are in the same order as above.</p>
   <div class="grid">
     <div class="panel wide">
-      <div class="chart rows"><canvas id="cMix" aria-label="Share of each district's removals by reason"></canvas></div>
+      <div class="vizbox" id="cMix"></div>
     </div>
   </div>
   <p class="finding" id="fMix"></p>
@@ -58,15 +58,15 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
   var S = r[0], D = r[1], A = r[2];
   var RS = [['dead', L('Dead'), '--fill-grey'], ['shifted_absent', L('Shifted or absent'), '--fill-navy'], ['multiple', L('Enrolled in more than one place'), '--fill-amber']];
   var labels = D.map(function (d) { return d.district; });
-  SIR.chart('cDist', { type: 'bar', data: { labels: labels, datasets: [{ label: L('Per 100 electors'), data: D.map(function (d) { return d.per_100; }), $tokens: D.map(function (d) { return d.district === 'Chennai' ? '--fill-red' : '--fill-navy'; }) }] },
-    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Removed per 100 electors') } } } } });
+  VIZ.lollipop('cDist', { label: L('Names removed per 100 electors, by district'), axis: L('Removed per 100 electors'),
+    rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: SIR.d(d.per_100, 1), tok: d.district === 'Chennai' ? '--fill-red' : '--fill-navy', hi: d.district === 'Chennai' }; }) });
   var low = D[D.length - 1];
   document.getElementById('fDist').innerHTML = L('<b>Chennai lost {c} of every 100 electors, against {s} for the state.</b> The next four are {next}. {lo} lost the fewest, {lov}.', {
     c: SIR.d(D[0].per_100, 1), s: SIR.d(S.per_100, 1), lo: low.district, lov: SIR.d(low.per_100, 1),
     next: D.slice(1, 5).map(function (d) { return L('{s} ({v})', { s: d.district, v: SIR.d(d.per_100, 1) }); }).join(', ') });
 
-  SIR.chart('cMix', { type: 'bar', data: { labels: labels, datasets: RS.map(function (k) { return { label: k[1], data: D.map(function (d) { return +(100 * d[k[0]] / d.removed).toFixed(1); }), $token: k[2] }; }) },
-    options: { indexAxis: 'y', scales: { y: { stacked: true, ticks: { autoSkip: false } }, x: { stacked: true, max: 100, title: { display: true, text: L('% of the district\'s removals') } } } } });
+  VIZ.heat('cMix', { label: L('Share of each district\'s removals by reason'), cols: RS.map(function (k) { return k[1]; }), tok: ['--fill-purple', '--fill-navy', '--fill-amber'], unit: '%',
+    rows: D.map(function (d) { return { name: d.district, v: RS.map(function (k) { return 100 * d[k[0]] / d.removed; }) }; }) });
   var byDead = D.slice().sort(function (a, b) { return b.dead_share - a.dead_share; });
   document.getElementById('fMix').innerHTML = L('<b>Across the state, {sh} of the names were entered as shifted or absent and {dead} as dead.</b> In Chennai the share entered as shifted or absent is {csh}. Where fewer names were removed, more of them were entered as dead, up to {dmax} in {dmaxn}. A reason on the list is what the officer wrote down, and nobody checked it.', {
     sh: SIR.pct(S.shares.shifted_absent), dead: SIR.pct(S.shares.dead), csh: SIR.pct(S.chennai.shifted_share), dmax: SIR.pct(byDead[0].dead_share), dmaxn: byDead[0].district });

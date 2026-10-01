@@ -61,6 +61,7 @@
     cfg.options = cfg.options || {};
     if (cfg.options.indexAxis === 'y') { cfg.options.scales = cfg.options.scales || {}; cfg.options.scales.y = cfg.options.scales.y || {}; cfg.options.scales.y.ticks = Object.assign({ autoSkip: false }, cfg.options.scales.y.ticks || {}); }
     if (window.innerWidth < 600) { cfg.options.plugins = cfg.options.plugins || {}; cfg.options.plugins.legend = Object.assign({}, cfg.options.plugins.legend || {}); cfg.options.plugins.legend.labels = { boxWidth: 10, boxHeight: 10, padding: 6 }; if (window.SIR && SIR.fitPhone) SIR.fitPhone(cfg); }
+    if (window.SIR && SIR.polish) SIR.polish(cfg);
     charts[id] = new Chart(el, cfg);
   }
 

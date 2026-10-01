@@ -169,9 +169,9 @@
     var n = o.rows.length, W = phone() ? 360 : 900, lw = phone() ? 112 : 210, rh = phone() ? 30 : 24;
     var leg = phone() ? 44 : 24, H = leg + 16 + n * rh + 30;
     var s = svgIn(box, W, H, o.label);
-    var max = Math.ceil(Math.max.apply(null, o.rows.map(function (r) { return Math.max(r.a, r.b); })) / 5) * 5;
-    var x = function (v) { return lw + 10 + (W - lw - 30) * Math.max(v, 0) / max; };
-    for (var t = 0; t <= max; t += 5) {
+    var st = o.step || 5, mn = o.min || 0, max = Math.ceil(Math.max.apply(null, o.rows.map(function (r) { return Math.max(r.a, r.b); }).concat([o.ref || 0])) / st) * st;
+    var x = function (v) { return lw + 10 + (W - lw - 30) * Math.max(v - mn, 0) / (max - mn); };
+    for (var t = mn; t <= max; t += st) {
       el('line', { x1: x(t), x2: x(t), y1: leg + 6, y2: H - 26, class: 'vgrid' }, s);
       el('text', { x: x(t), y: H - 10, 'text-anchor': 'middle', class: 'vval' }, s, t);
     }
@@ -181,6 +181,7 @@
       el('circle', { cx: lx, cy: ly, r: 5, style: fill(k[1]) }, s);
       el('text', { x: lx + 10, y: ly, 'dominant-baseline': 'middle', class: 'vval' }, s, k[0]);
     });
+    if (o.ref != null) el('line', { x1: x(o.ref), x2: x(o.ref), y1: leg + 6, y2: H - 26, class: 'vzero' }, s);
     o.rows.forEach(function (r, i) {
       var y = leg + 16 + i * rh + rh / 2;
       label(s, lw - 4, y, SIR.short(r.name), phone() ? 16 : 28, 'end');
@@ -216,5 +217,51 @@
     if (o.axis) label(s, phone() ? W / 2 : lw + (W - lw - rw) / 2, H - 4, o.axis, phone() ? 44 : 90, 'middle', 'vval');
   }
 
-  window.VIZ = { sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest };
+  // ---- lollipop: ranked rows [{name, v, tok, text}], a stem and a dot each
+  function lollipop(box, o) {
+    var n = o.rows.length, W = phone() ? 360 : 900, lw = phone() ? 112 : 210, rh = phone() ? 26 : 22, top = 6;
+    var H = top + n * rh + 40, s = svgIn(box, W, H, o.label);
+    var max = o.max || Math.max.apply(null, o.rows.map(function (r) { return r.v; }));
+    var step = o.step || (max > 60 ? 20 : max > 25 ? 10 : 5); max = Math.ceil(max / step) * step;
+    var x = function (v) { return lw + 8 + (W - lw - 60) * Math.max(v, 0) / max; };
+    for (var t = 0; t <= max; t += step) {
+      el('line', { x1: x(t), x2: x(t), y1: top, y2: top + n * rh, class: 'vgrid' }, s);
+      el('text', { x: x(t), y: top + n * rh + 16, 'text-anchor': 'middle', class: 'vval' }, s, t);
+    }
+    if (o.ref != null) el('line', { x1: x(o.ref), x2: x(o.ref), y1: top, y2: top + n * rh, class: 'vzero' }, s);
+    o.rows.forEach(function (r, i) {
+      var y = top + i * rh + rh / 2;
+      label(s, lw - 4, y, SIR.short(r.name), phone() ? 16 : 30, 'end', r.hi ? 'vname' : 'vname light');
+      el('line', { x1: x(0), x2: x(r.v), y1: y, y2: y, class: 'vstem', style: 'stroke:var(' + (r.tok || o.tok || '--fill-navy') + ')' }, s);
+      var c = el('circle', { cx: x(r.v), cy: y, r: phone() ? 5 : 6, style: fill(r.tok || o.tok || '--fill-navy') }, s);
+      el('title', {}, c, r.name + ': ' + (r.text || r.v));
+      el('text', { x: x(r.v) + 10, y: y, 'dominant-baseline': 'middle', class: 'vval' }, s, r.text || r.v);
+    });
+    if (o.axis) label(s, lw + (W - lw) / 2, H - 6, o.axis, phone() ? 40 : 90, 'middle', 'vval');
+  }
+
+  // ---- heatmap: rows x cols of shares, each cell shaded by its value and
+  // written in an ink that clears contrast on its own shade
+  function heat(box, o) {
+    var nr = o.rows.length, nc = o.cols.length, W = phone() ? 360 : 900, lw = phone() ? 104 : 210, top = phone() ? 58 : 44, rh = phone() ? 26 : 24;
+    var H = top + nr * rh + 6, s = svgIn(box, W, H, o.label), cw = (W - lw - 4) / nc;
+    o.cols.forEach(function (c, j) { label(s, lw + cw * j + cw / 2, top / 2, c, phone() ? 12 : 22, 'middle', 'vname'); });
+    var max = o.max || 100;
+    o.rows.forEach(function (r, i) {
+      var y = top + i * rh;
+      label(s, lw - 6, y + rh / 2, SIR.short(r.name), phone() ? 16 : 30, 'end', 'vname light');
+      r.v.forEach(function (v, j) {
+        if (v == null) { el('rect', { x: lw + cw * j + 1, y: y + 1, width: cw - 2, height: rh - 2, class: 'vnone' }, s); return; }
+        // a tint from 6% to 45% of the colour: dark enough to read as a
+        // heatmap, light enough that the theme's ink clears 5:1 on every cell
+        // in both themes (checked against every token; at 50% amber falls to 4.6)
+        var a = 0.06 + 0.39 * Math.max(0, Math.min(1, v / max));
+        el('rect', { x: lw + cw * j + 1, y: y + 1, width: cw - 2, height: rh - 2, rx: 3, style: fill(o.tok[j]) + ';opacity:' + a.toFixed(2) }, s);
+        var t = el('text', { x: lw + cw * j + cw / 2, y: y + rh / 2, 'text-anchor': 'middle', 'dominant-baseline': 'middle', class: 'vcell' }, s, (+v).toFixed(o.dp == null ? 0 : o.dp) + (o.unit || ''));
+        el('title', {}, t, r.name + ', ' + o.cols[j] + ': ' + (+v).toFixed(1) + (o.unit || ''));
+      });
+    });
+  }
+
+  window.VIZ = { sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, heat: heat };
 })();
