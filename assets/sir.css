@@ -407,3 +407,21 @@ html[data-lang="ur"] .nav-tab,html[data-lang="ur"] button,html[data-lang="ur"] .
 [dir="rtl"] .sec-step svg{transform:scaleX(-1)}
 [dir="rtl"] .xstrip,[dir="rtl"] .fate{direction:ltr}
 .tab-lead{max-width:95ch;margin:.25rem 0 1.25rem;line-height:1.55}
+/* plain-SVG charts (assets/viz.js) */
+.viz{display:block;width:100%;height:auto;font-family:inherit;overflow:visible}
+.viz .vname{fill:var(--ink);font-size:13px;font-weight:600}
+.viz .vname.small{font-size:11px;font-weight:600}
+.viz .vval{fill:var(--muted);font-size:12px}
+.viz .vgrid{stroke:var(--line);stroke-width:1}
+.viz .vlink{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+.viz .vlink.thick{stroke-width:3;stroke-dasharray:none;opacity:.55}
+.viz .flow:hover{opacity:.7!important}
+.viz .vdot{stroke:var(--card);stroke-width:1}
+.vizbox{width:100%}
+.pick{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-weight:600;margin-bottom:.5rem;max-width:100%}
+.pick select{max-width:100%;min-width:0;font:inherit;padding:.35rem .5rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+@media (max-width:600px){.viz .vname{font-size:11px}.viz .vval{font-size:10.5px}.viz .vname.small{font-size:10px}}
+.viz .vname.light{font-weight:500}
+.viz .vzero{stroke:var(--ink);stroke-width:1.5}
+.viz .vci{stroke:var(--fill-navy);stroke-width:2.5}
+.viz .vci.main{stroke:var(--fill-red);stroke-width:3.5}

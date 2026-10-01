@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../../assets/i18n.js?v=368b4ca2"></script>
+<script src="../../assets/i18n.js?v=b25dadb4"></script>
 <title>Tamil Nadu SIR 2026: removals against the 2026 result</title>
 <meta name="description" content="The names left off Tamil Nadu&#x27;s draft roll, constituency by constituency, against the margins of the 2026 assembly election.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%238a2a1b'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
-<link rel="stylesheet" href="../../assets/sir.css?v=1649d9b5">
+<link rel="stylesheet" href="../../assets/sir.css?v=9f632019">
 </head>
 <body class="tn" data-place="tn" data-root="../../">
 <a class="skip" href="#main">Skip to content</a>
@@ -46,6 +46,13 @@
   <p class="finding" id="fCounts"></p>
 
   <h2>Removals by the party that won</h2>
+  <div class="grid">
+    <div class="panel wide">
+      <h3>Every seat, by the party that won it</h3>
+      <p>Each dot is a constituency, placed by the names removed for every 100 electors. Chennai's sixteen seats are in red. Hover or tap a dot for its name.</p>
+      <div class="vizbox" id="vSwarm"></div>
+    </div>
+  </div>
   <p class="sub">Names removed per 100 electors in the seats each party won in 2026. The last column sets each seat against the rate of its own district and averages the difference, so that a party is not credited with the city simply for winning there. A minus means fewer removals than the district as a whole.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Removals by the party that won"><table id="tWin"></table></div>
   <p class="finding" id="fWin"></p>
@@ -60,7 +67,8 @@
 </main>
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../">About this site</a></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="../../assets/sir.js?v=45c195b6"></script>
+<script src="../../assets/sir.js?v=aff9f6ea"></script>
+<script src="../../assets/viz.js?v=bacf0f91"></script>
 <script src="../../assets/faq/tamilnadu.js?v=44ec4aea"></script>
 <script>
 Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/constituencies.json')]).then(function (r) {
@@ -88,6 +96,14 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/c
     { k: 'vs_district', label: L('Against own district'), fmt: sg }
   ], S.winners, { sort: 'seats' });
   var W = {}; S.winners.forEach(function (w) { W[w.party] = w; });
+  var big = ['TVK', 'DMK', 'AIADMK'];
+  VIZ.strip('vSwarm', { label: L('Names removed per 100 electors in every constituency, by the party that won it in 2026'), axis: L('Removed per 100 electors'), r: 4,
+    key: [[L('Chennai'), '--fill-red'], [L('Rest of the state'), '--fill-navy']],
+    rows: big.concat(['other']).map(function (w) {
+      var pts = A.filter(function (a) { return w === 'other' ? big.indexOf(a.winner) < 0 : a.winner === w; });
+      return { name: w === 'other' ? L('Other parties') : L('{p} ({n} seats)', { p: w, n: pts.length }), tok: '--fill-navy',
+        points: pts.map(function (a) { return { v: a.per_100, tok: a.district === 'Chennai' ? '--fill-red' : null, label: L('{n} ({d}): {v} per 100', { n: a.name, d: a.district, v: SIR.d(a.per_100, 1) }) }; }) };
+    }) });
   document.getElementById('fWin').innerHTML = L('<b>Seats won by TVK lost {t} of every 100 electors, against {d} in DMK seats and {a} in AIADMK seats.</b> Most of the gap is about where the seats are. Against their own districts, TVK seats come out at {tv}, DMK seats at {dv} and AIADMK seats at {av}. {c} of the {n} seats changed hands from 2021.', {
     t: SIR.d(W.TVK.per_100, 1), d: SIR.d(W.DMK.per_100, 1), a: SIR.d(W.AIADMK.per_100, 1), tv: sg(W.TVK.vs_district), dv: sg(W.DMK.vs_district), av: sg(W.AIADMK.vs_district), c: S.changed_hands, n: S.acs });
 

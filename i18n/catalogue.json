@@ -1063,6 +1063,12 @@
    "/india/"
   ]
  },
+ "Added after the draft": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Adds up": {
   "kind": "script",
   "pages": [
@@ -1325,6 +1331,12 @@
   "kind": "script",
   "pages": [
    "/assets/sir.js"
+  ]
+ },
+ "All seats": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "All seats: {nda} per 100 electors where the NDA won in 2020, {india} where INDIA won. Seats in the same district: {wd} per 100. Booths in the same seat: NDA-led booths lost {ws} more names each, and more in {h} of {s} seats.": {
@@ -1972,8 +1984,9 @@
   ]
  },
  "Chennai": {
-  "kind": "markup",
+  "kind": "script",
   "pages": [
+   "/tamilnadu/elections/",
    "/tamilnadu/"
   ]
  },
@@ -2917,7 +2930,9 @@
   "kind": "script",
   "pages": [
    "/hyderabad/telangana/",
-   "/india/method/"
+   "/india/",
+   "/india/method/",
+   "/tamilnadu/"
   ]
  },
  "Draft roll, % of adults": {
@@ -2944,10 +2959,22 @@
    "/hyderabad/method/"
   ]
  },
+ "Each band is the names one phase removed for one reason, drawn to scale. Phase 1 is Bihar (2025), phase 2 the twelve states and union territories revised from November 2025, and phase 3 the eighteen revised in 2026. \"Not split\" counts names in states that have not published a split by reason.": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Each bar is one booth in {name}. Open the table below for booth numbers.": {
   "kind": "script",
   "pages": [
    "/bihar/explorer/"
+  ]
+ },
+ "Each bar is one step from the roll before the revision to the final roll. The first steps are the reasons for removal at the draft, and the last are the names added and removed on claims and objections. The bars start above zero so that the changes can be seen, and the figure on each bar is the count. Where a state published only its draft and final rolls, the change after the draft is one step.": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
   ]
  },
  "Each booth is counted once. Party names in the booth results were matched to the declared seat results, and the booth totals add up to the declared result in all 40 Lok Sabha seats. Religion and caste are guessed from names, so religion is given as a range and caste under two classifications, and only what holds under both is reported. A second program, written separately, recomputes every headline figure from the lists before anything is published.": {
@@ -2980,6 +3007,12 @@
    "/hyderabad/parts/"
   ]
  },
+ "Each dot is a constituency, placed by the names removed for every 100 electors. Chennai's sixteen seats are in red. Hover or tap a dot for its name.": {
+  "kind": "markup",
+  "pages": [
+   "/tamilnadu/elections/"
+  ]
+ },
  "Each dot is a constituency. Across, the names left off the draft roll; up, the 2026 winning margin in votes. Dots below the line are seats where more names were removed than the winner won by. Colour shows the party that won.": {
   "kind": "markup",
   "pages": [
@@ -2990,6 +3023,12 @@
   "kind": "markup",
   "pages": [
    "/bihar/people/"
+  ]
+ },
+ "Each dot is a state or union territory. Hover or tap a dot for its name and rate.": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
   ]
  },
  "Each dot is a state, coloured by phase.": {
@@ -3068,6 +3107,12 @@
   "kind": "markup",
   "pages": [
    "/bihar/method/"
+  ]
+ },
+ "Each row is one way of asking whether seats that lost more names moved further towards the NDA from 2020 to 2025. The square is the estimate, in points of NDA lead for each extra name removed per 100 electors, and the line is its 95% interval. A line that crosses zero cannot rule out no effect. The red row is the comparison that allows for each seat's 2020 lead, which the others leave out.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "Each state's figure is the number of electors on the roll before the revision who were not carried onto the draft roll when enumeration ended, with the reason the booth officer gave for each. Every state published a split by reason at that stage. Names removed later, at hearings and on objections before the final roll, are counted separately, because no state has said why they were removed.": {
@@ -3415,6 +3460,12 @@
    "/hyderabad/method/"
   ]
  },
+ "Every seat, by the party that won it": {
+  "kind": "markup",
+  "pages": [
+   "/tamilnadu/elections/"
+  ]
+ },
  "Every state and union territory": {
   "kind": "markup",
   "pages": [
@@ -3437,7 +3488,6 @@
  "Export PDF": {
   "kind": "markup",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
@@ -3549,6 +3599,7 @@
  "Final roll": {
   "kind": "script",
   "pages": [
+   "/india/",
    "/india/method/",
    "/tamilnadu/"
   ]
@@ -3611,6 +3662,12 @@
   "kind": "script",
   "pages": [
    "/assets/faq/hyd.js"
+  ]
+ },
+ "For each district, the grey dot is the names left off the draft roll for every 100 electors on the roll before the revision. The blue dot is the fall that remains on the final roll, after the names added and removed on claims and objections.": {
+  "kind": "markup",
+  "pages": [
+   "/tamilnadu/"
   ]
  },
  "For each state whose final roll is out, this gives the draft and final rolls and the names added on claims and removed on objections in between, from one source per state. <b>Adds up</b> means the draft plus additions less removals equals the final roll. <b>Net only</b> means the state published the draft and final rolls but not the additions and removals behind the difference, and the figure reported as additions was in fact the net rise. <b>Does not add up</b> means the published figures do not match, as the note explains. The fall at the final roll is the names removed at the draft less the rise from draft to final. New electors are part of that rise, and no state has said how many of those added had been removed at the draft.": {
@@ -4888,6 +4945,12 @@
    "/bihar/explorer/"
   ]
  },
+ "Leaving out Seemanchal": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "Left off": {
   "kind": "script",
   "pages": [
@@ -5557,12 +5620,6 @@
    "/tamilnadu/method/"
   ]
  },
- "Names left off the draft roll for every 100 electors on the roll before the revision began.": {
-  "kind": "markup",
-  "pages": [
-   "/india/"
-  ]
- },
  "Names left off the draft roll of 19 December 2025, for every 100 electors on the roll before the revision began. Chennai is marked in red.": {
   "kind": "markup",
   "pages": [
@@ -5608,8 +5665,8 @@
    "/bihar/"
   ]
  },
- "Names removed at the draft roll, by reason": {
-  "kind": "markup",
+ "Names removed at the draft roll, from each phase to each reason": {
+  "kind": "script",
   "pages": [
    "/india/"
   ]
@@ -5633,10 +5690,34 @@
    "/bihar/explorer/"
   ]
  },
+ "Names removed per 100 electors at the draft and the net fall at the final roll, by district": {
+  "kind": "script",
+  "pages": [
+   "/tamilnadu/"
+  ]
+ },
+ "Names removed per 100 electors at the draft and the net fall at the final roll, by state": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "Names removed per 100 electors in every constituency, by the party that won it in 2026": {
+  "kind": "script",
+  "pages": [
+   "/tamilnadu/elections/"
+  ]
+ },
  "Names removed per 100 electors in the seats each party won in 2026. The last column sets each seat against the rate of its own district and averages the difference, so that a party is not credited with the city simply for winning there. A minus means fewer removals than the district as a whole.": {
   "kind": "markup",
   "pages": [
    "/tamilnadu/elections/"
+  ]
+ },
+ "Names removed per 100 electors, each state by phase": {
+  "kind": "script",
+  "pages": [
+   "/india/"
   ]
  },
  "Names removed per booth": {
@@ -5685,12 +5766,6 @@
   "kind": "script",
   "pages": [
    "/bihar/"
-  ]
- },
- "Names removed, lakh": {
-  "kind": "script",
-  "pages": [
-   "/india/"
   ]
  },
  "Names removed, phase 1": {
@@ -5763,6 +5838,13 @@
   "kind": "markup",
   "pages": [
    "/bihar/method/"
+  ]
+ },
+ "Net change after the draft": {
+  "kind": "script",
+  "pages": [
+   "/india/",
+   "/tamilnadu/"
   ]
  },
  "Net fall": {
@@ -6107,6 +6189,12 @@
    "/hyderabad/"
   ]
  },
+ "One state's roll, step by step": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
+  ]
+ },
  "One tile for each state and union territory, placed roughly where it lies. The tiles are all the same size, so the map shows neither borders nor area. Grey tiles have no rate. Jammu and Kashmir, Ladakh, Himachal Pradesh and Assam were not part of the revision, Tripura has no draft roll yet, and Chandigarh did not publish an exact roll from before the revision.": {
   "kind": "markup",
   "pages": [
@@ -6415,14 +6503,6 @@
    "/bihar/border/",
    "/bihar/districts/",
    "/bihar/results/",
-   "/india/",
-   "/tamilnadu/"
-  ]
- },
- "Per 100 electors on the roll before the revision": {
-  "kind": "script",
-  "pages": [
-   "/india/",
    "/tamilnadu/"
   ]
  },
@@ -6467,12 +6547,6 @@
  },
  "Phase 1 (Bihar)": {
   "kind": "script",
-  "pages": [
-   "/india/"
-  ]
- },
- "Phase 1 is Bihar (2025), phase 2 the twelve states and union territories revised from November 2025, and phase 3 the eighteen revised in 2026. \"Not split\" counts names in states that have not published a split by reason.": {
-  "kind": "markup",
   "pages": [
    "/india/"
   ]
@@ -6623,6 +6697,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Points of NDA lead per extra name removed per 100 electors": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "Polling booths": {
@@ -7146,6 +7226,12 @@
    "/india/"
   ]
  },
+ "Removed after the draft": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Removed at the draft": {
   "kind": "script",
   "pages": [
@@ -7197,10 +7283,11 @@
    "/bihar/explorer/",
    "/india/",
    "/tamilnadu/",
+   "/tamilnadu/elections/",
    "/india/method/"
   ]
  },
- "Removed per 100 electors, by state": {
+ "Removed per 100 electors, every state by phase": {
   "kind": "markup",
   "pages": [
    "/india/"
@@ -7306,6 +7393,12 @@
    "/india/"
   ]
  },
+ "Rest of the state": {
+  "kind": "script",
+  "pages": [
+   "/tamilnadu/elections/"
+  ]
+ },
  "Result": {
   "kind": "script",
   "pages": [
@@ -7315,6 +7408,13 @@
  "Roll before": {
   "kind": "script",
   "pages": [
+   "/tamilnadu/"
+  ]
+ },
+ "Roll before the revision": {
+  "kind": "script",
+  "pages": [
+   "/india/",
    "/tamilnadu/"
   ]
  },
@@ -7524,6 +7624,12 @@
   "kind": "script",
   "pages": [
    "/bihar/"
+  ]
+ },
+ "Seats the NDA held in 2020": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "Seats the NDA won in 2020 lost {nda} names per 100 electors, and seats INDIA won lost {india}. The order stays the same when seats are labelled by the 2024 or 2025 result. Inside the same seat, booths the NDA led in 2024 lost {gap} more names each.": {
@@ -7965,6 +8071,12 @@
    "/india/"
   ]
  },
+ "State": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
+  ]
+ },
  "State characteristics": {
   "kind": "markup",
   "pages": [
@@ -8165,6 +8277,12 @@
    "/tamilnadu/elections/",
    "/tamilnadu/faq/",
    "/tamilnadu/method/"
+  ]
+ },
+ "Tamil Nadu: the roll from before the revision to the final roll": {
+  "kind": "script",
+  "pages": [
+   "/tamilnadu/"
   ]
  },
  "Tamil Nadu: who was taken off the roll": {
@@ -8648,12 +8766,6 @@
    "/bihar/report/"
   ]
  },
- "The grey bar is the names left off the draft roll for every 100 electors on the roll before the revision. The blue bar is the fall that remains on the final roll of 23 February 2026, after the names added and removed on claims and objections.": {
-  "kind": "markup",
-  "pages": [
-   "/tamilnadu/"
-  ]
- },
  "The heavier the removals in a booth, the more likely it was to have voted NDA in 2024, {lo} of the lightest booths against {hi} of the heaviest.": {
   "kind": "script",
   "pages": [
@@ -9020,10 +9132,28 @@
    "/hyderabad/telangana/"
   ]
  },
+ "The state's roll, step by step, from before the revision to the final roll of 23 February 2026. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.": {
+  "kind": "markup",
+  "pages": [
+   "/tamilnadu/"
+  ]
+ },
  "The surname of the father or husband listed with each removed elector. {s1}, {s2} and {s3} are the commonest, and most surnames are shared by several castes. The Caste tab has more.": {
   "kind": "script",
   "pages": [
    "/bihar/"
+  ]
+ },
+ "The swing towards the NDA against names removed, measured six ways, with 95% intervals": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "The swing, measured six ways": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "The ten districts that lost the most names account for {share} of all removals. The heaviest districts lost more than twice as many names per elector as the lightest.": {
@@ -9678,6 +9808,12 @@
    "/assets/faq/hyd.js"
   ]
  },
+ "Where the removed names went, by phase and reason": {
+  "kind": "markup",
+  "pages": [
+   "/india/"
+  ]
+ },
  "Where was the second pass heaviest?": {
   "kind": "script",
   "pages": [
@@ -10029,6 +10165,24 @@
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
+  ]
+ },
+ "Withheld for adjudication": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "Within districts": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "Within districts, allowing for the 2020 result": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "Within parts": {
@@ -11335,6 +11489,12 @@
    "/bihar/people/"
   ]
  },
+ "{n} ({d}): {v} per 100": {
+  "kind": "script",
+  "pages": [
+   "/tamilnadu/elections/"
+  ]
+ },
  "{n} ({pct} of hearings)": {
   "kind": "script",
   "pages": [
@@ -11463,6 +11623,12 @@
    "/hyderabad/people/"
   ]
  },
+ "{p} ({n} seats)": {
+  "kind": "script",
+  "pages": [
+   "/tamilnadu/elections/"
+  ]
+ },
  "{rate} per 100": {
   "kind": "script",
   "pages": [
@@ -11585,6 +11751,18 @@
   ]
  },
  "{s}: no figure": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "{s}: the roll from before the revision to the final roll": {
+  "kind": "script",
+  "pages": [
+   "/india/"
+  ]
+ },
+ "{s}: {v} per 100": {
   "kind": "script",
   "pages": [
    "/india/"

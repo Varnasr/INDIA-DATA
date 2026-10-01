@@ -89,6 +89,13 @@
     <h2 id="sure">How sure are we?</h2>
   <p class="sub">A pattern seen across all seats can weaken or turn round once seats are compared only with seats like them. Each finding here was measured again within each district, within each seat, and with Seemanchal left out.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Each finding and the checks put to it"><table id="tRobust"></table></div>
+  <div class="grid">
+    <div class="panel wide">
+      <h3>The swing, measured six ways</h3>
+      <p>Each row is one way of asking whether seats that lost more names moved further towards the NDA from 2020 to 2025. The square is the estimate, in points of NDA lead for each extra name removed per 100 electors, and the line is its 95% interval. A line that crosses zero cannot rule out no effect. The red row is the comparison that allows for each seat's 2020 lead, which the others leave out.</p>
+      <div class="vizbox" id="vForest"></div>
+    </div>
+  </div>
   <p class="finding" id="fRobust"></p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
@@ -96,6 +103,7 @@
 <!--scripts-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../../assets/sir.js"></script>
+<script src="../../assets/viz.js"></script>
 <script>
 function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' : ''; }
 function rate(rows) { return 100 * SIR.sum(rows, 'total') / SIR.sum(rows, 'electorate_2025'); }
@@ -266,6 +274,14 @@ SIR.json('data/bihar/robust.json').then(function (R) {
       c: L('All seats: {p}. Within districts: {w}. Within districts, allowing for the 2020 result: {a}. Seats the NDA held: {n}. Seats INDIA held: {i}. Leaving out Seemanchal: {x}. The slope is positive in {dp} of {dc} districts.', { p: iv(S.pooled), w: iv(S.within_district), a: iv(S.within_district_2020), n: iv(S.held_nda_2020), i: iv(S.held_india_2020), x: iv(S.ex_seemanchal), dp: S.districts_positive, dc: S.districts_compared }),
       v: L('Cannot tell. The answer changes with the comparison') }
   ];
+  var fr = function (x) { return { est: x.est, lo: x.lo, hi: x.hi, text: iv(x) }; };
+  VIZ.forest('vForest', { label: L('The swing towards the NDA against names removed, measured six ways, with 95% intervals'), axis: L('Points of NDA lead per extra name removed per 100 electors'),
+    rows: [Object.assign(fr(S.within_district_2020), { name: L('Within districts, allowing for the 2020 result'), main: true }),
+      Object.assign(fr(S.within_district), { name: L('Within districts') }),
+      Object.assign(fr(S.pooled), { name: L('All seats') }),
+      Object.assign(fr(S.held_nda_2020), { name: L('Seats the NDA held in 2020') }),
+      Object.assign(fr(S.held_india_2020), { name: L('Seats INDIA held in 2020') }),
+      Object.assign(fr(S.ex_seemanchal), { name: L('Leaving out Seemanchal') })] });
   SIR.table(document.getElementById('tRobust'), [
     { k: 'f', label: L('Finding'), left: true }, { k: 'c', label: L('How it was checked'), left: true }, { k: 'v', label: L('Result'), left: true }
   ], rows, { sort: 'k', dir: 1 });
