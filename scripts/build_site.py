@@ -106,6 +106,9 @@ def shell(out, meta, content, scripts):
               ' · <a href="%s">About this site</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './'))
     head_extra = ('\n' + meta['head']) if meta.get('head') else ''
     cls = place.get('class', place['id'])
+    # dashboards and explorers get the wider column (sir.css, body.wide)
+    if meta.get('own_tabs') or out.endswith('explorer/'):
+        cls += ' wide'
     return (
         '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'

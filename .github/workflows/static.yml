@@ -44,7 +44,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/site"
           rsync -a --exclude '.git' --exclude '.github' --exclude 'archive' --exclude 'scripts' --exclude 'site' \
-            --exclude 'data/bihar/raw' --exclude 'data/india/raw' --exclude 'data/hyderabad/raw' --exclude 'data/*.csv' --exclude '*.md' --exclude 'CITATION.cff' \
+            --exclude 'data/*/raw' --exclude 'data/*.csv' --exclude '*.md' --exclude 'CITATION.cff' \
             ./ "$RUNNER_TEMP/site/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
