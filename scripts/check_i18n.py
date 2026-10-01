@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-LANGS = ['hi', 'ur', 'te']
+LANGS = ['hi', 'ur', 'te', 'ta', 'bn']
 SOURCES = [ROOT / 'index.html', *sorted((ROOT / 'india').rglob('index.html')), *sorted((ROOT / 'bihar').rglob('index.html')), *sorted((ROOT / 'hyderabad').rglob('index.html')),
            ROOT / 'assets' / 'sir.js', ROOT / 'assets' / 'dash.js', ROOT / 'assets' / 'i18n.js', *sorted((ROOT / 'assets' / 'faq').glob('*.js'))]
 LIT = re.compile(r"(?<![\w.$])L\(\s*'((?:[^'\\]|\\.)*)'")
