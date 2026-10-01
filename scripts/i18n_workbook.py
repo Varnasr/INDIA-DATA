@@ -18,7 +18,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 
 ROOT = Path(__file__).resolve().parent.parent
-NAMES = {'hi': 'Hindi', 'ur': 'Urdu', 'te': 'Telugu'}
+NAMES = {'hi': 'Hindi', 'ur': 'Urdu', 'te': 'Telugu', 'ta': 'Tamil', 'bn': 'Bengali'}
 
 
 def load(lang):

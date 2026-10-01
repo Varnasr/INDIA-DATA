@@ -25,7 +25,9 @@
     en: { name: 'English', short: 'EN', dir: 'ltr' },
     hi: { name: 'हिन्दी', short: 'हिं', dir: 'ltr', font: 'Noto+Sans+Devanagari:wght@400;600;700' },
     ur: { name: 'اردو', short: 'اردو', dir: 'rtl', font: 'Noto+Nastaliq+Urdu:wght@400;700' },
-    te: { name: 'తెలుగు', short: 'తె', dir: 'ltr', font: 'Noto+Sans+Telugu:wght@400;600;700' }
+    te: { name: 'తెలుగు', short: 'తె', dir: 'ltr', font: 'Noto+Sans+Telugu:wght@400;600;700' },
+    ta: { name: 'தமிழ்', short: 'த', dir: 'ltr', font: 'Noto+Sans+Tamil:wght@400;600;700' },
+    bn: { name: 'বাংলা', short: 'বাং', dir: 'ltr', font: 'Noto+Sans+Bengali:wght@400;600;700' }
   };
   // The menu is in every page's header. Set this to false to hide it, and a
   // language is then reached only by a link carrying ?lang=.
