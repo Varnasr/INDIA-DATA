@@ -207,3 +207,69 @@ border districts" without naming them in a primary document.
 
 The ASDD lists, the BLO-BLA minutes, the supplementary and deletion lists,
 and the roll PDFs all carry names and EPIC numbers. None was downloaded.
+
+## District-wise search, 2026-10-01 (second pass)
+
+### electors_phase1_district.csv
+
+district, men, women, third, total. Electors by district for the 16 districts
+polling in phase 1 (23 April 2026), as printed in the CEO's press note. This
+is the election roll (final SIR roll as amended to the last date of
+nomination), not a count of removals. District names as the note prints them.
+
+- Source: CEO West Bengal, Press Note No. 38/CEO/PN/2026 dated 13.04.2026,
+  "Elector data for Phase 1":
+  https://ceowestbengal.wb.gov.in/Downloads/PressNoteMenu/Press%20note%2038.pdf
+  (1 page), listed at https://ceowestbengal.wb.gov.in/PressNoteMenu.
+- Asserts passed: 16 rows; men + women + third = total in every row; column
+  sums equal the note's "State Total (Phase - I)" (1,84,99,496 / 1,75,77,210 /
+  465 / 3,60,77,171); every district equals the sum of its phase 1 ACs in
+  electors_nomination_2026_ac.csv in all four columns.
+- No phase 2 counterpart by district was found. Press note 55/CEO/PN/2026
+  (27.04.2026) gives phase 2 electors by AC (3,21,73,837 general electors,
+  equal to the AC file) and adds 39,961 service electors.
+
+### What was looked for and not found (district level)
+
+None of the four SIR tables exists as a published CEO or ECI document that
+could be reached. No asd_district.csv, final_district.csv or
+adjudication_district.csv was written.
+
+1. District-wise removals at the draft (ASDD, by reason). Read in full:
+   PN-36/2025 of 16.12.2025
+   (https://ceowestbengal.wb.gov.in/Downloads/SIR2026/SIR_PressNote/CEO%20PN_36_16.12.2025.pdf,
+   state totals only, rounded to lakhs), PN-37/2025 (roll observers only) and
+   PN-33. The full lists of SIR press notes and press bulletins on
+   https://ceowestbengal.wb.gov.in/SIR (PN 10 to 37 of 2025, PN 01 and 03 of
+   2026, bulletins of 17.12.2025 to 20.01.2026) were checked by title; none is
+   a district table, and the first pass above found the bulletins state level.
+   The CEO page, the 24 district
+   links on https://ceowestbengal.wb.gov.in/Dist_link (Paschim Bardhaman's SIR
+   page checked: it links back to the CEO's per-part lists),
+   https://ceowestbengal.wb.gov.in/Publications and RollRevisionData (HTTP 500)
+   carry no district table. Press reports of 12 and 16 December 2025 (PTI via
+   ThePrint; The Hindu) attribute their district and AC figures to "a poll
+   panel official" and "data shared by the office of the CEO", which points to
+   a briefing handout rather than a published document.
+2. Final roll of 28.02.2026 by district: PN-05/2026
+   (https://ceowestbengal.wb.gov.in/Downloads/News/Final%20Press%20Note%20CEO-PN-05-2026.pdf)
+   is state level only. Press notes 08 to 58 of 2026 on
+   https://ceowestbengal.wb.gov.in/PressNoteMenu are election-period notes
+   (MCC, seizures, nominations, electors); the sampled ones (08, 25, 26, 27,
+   29, 30, 31, 38, 46, 51, 55, 58) carry no SIR table.
+3. Names under adjudication by district: The Indian Express (7 April 2026,
+   https://indianexpress.com/article/political-pulse/54-out-ec-releases-first-data-of-deletions-after-adjudication-10623077/)
+   reproduces a 24-district table it attributes to the ECI (action to be
+   taken 60,06,675; found eligible 32,68,119; found not eligible 27,16,393),
+   and UNI quotes an ECI official that "district-wise data has now been placed
+   in the public domain". The ECI document itself was not found: it is not on
+   the CEO site, and the ECI press-release listing
+   (https://www.eci.gov.in/issue-details-page/press-releases) shows only the
+   latest 20 items to a scraper while the file downloads and the listing API
+   answer "Access denied" or HTTP 406. The newspaper table is NOT recorded.
+4. AC-wise ASDD count by the CEO or ECI: not found. The PTI report of
+   12.12.2025 ("EC releases constituency-wise data") quotes an official, not
+   a document. The CEO's ASDD page (https://ceowestbengal.wb.gov.in/asd_sir)
+   offers only per-part lists of named electors, which were not opened.
+
+Not opened, again: no list of individual electors was downloaded.

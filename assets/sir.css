@@ -425,3 +425,14 @@ html[data-lang="ur"] .nav-tab,html[data-lang="ur"] button,html[data-lang="ur"] .
 .viz .vzero{stroke:var(--ink);stroke-width:1.5}
 .viz .vci{stroke:var(--fill-navy);stroke-width:2.5}
 .viz .vci.main{stroke:var(--fill-red);stroke-width:3.5}
+.viz .vstem{stroke-width:2.5;opacity:.55}
+.viz .vcell{fill:var(--ink);font-size:12px;font-weight:600}
+.viz .vcell.on{fill:#fff}
+.viz .vnone{fill:var(--line);opacity:.4}
+.bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.big{display:flex;flex-direction:column;gap:.25rem}
+.big b{font-size:clamp(2.2rem,6vw,3.4rem);line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
+.big .of{color:var(--muted);font-size:.9rem}
+.big i{display:block;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--fill-red) var(--w),var(--line) var(--w));margin:.4rem 0 .2rem}
+.big span:last-child{font-weight:600}
+@media (max-width:600px){.bigs{grid-template-columns:1fr}}

@@ -15,7 +15,7 @@
   <p class="sub">Three ways of setting the removals against the margin, from the widest to the narrowest. The first counts every name left off the draft. The second counts the fall that remains on the final roll. The third leaves out the names marked dead and counts the rest at the seat's own 2026 turnout.</p>
   <div class="grid">
     <div class="panel wide">
-      <div class="chart"><canvas id="cCounts" aria-label="Seats where the removals exceed the winning margin, on three counts"></canvas></div>
+      <div class="bigs" id="cCounts"></div>
     </div>
   </div>
   <p class="finding" id="fCounts"></p>
@@ -60,8 +60,9 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/c
   document.getElementById('fScatter').innerHTML = L('<b>In {k} of the {n} constituencies, more names were left off the draft roll than the 2026 winning margin.</b> The removals and the margins rise together a little (rank correlation between the removal rate and the margin as a share of votes, {rho}), so the seats that lost the most names were not the closest contests.', { k: S.over_margin, n: S.acs, rho: SIR.d(S.rho_rate_margin, 2) });
 
   var counts = [[L('Left off the draft'), S.over_margin], [L('Net fall at the final roll'), S.net_over_margin], [L('Living removed, at turnout'), S.could_change]];
-  SIR.chart('cCounts', { type: 'bar', data: { labels: counts.map(function (c) { return c[0]; }), datasets: [{ label: L('Seats where the count exceeds the margin'), data: counts.map(function (c) { return c[1]; }), $token: '--fill-navy' }] },
-    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, max: S.acs, title: { display: true, text: L('Seats, of {n}', { n: S.acs }) } } } } });
+  document.getElementById('cCounts').innerHTML = counts.map(function (c) {
+    return '<div class="big"><b>' + c[1] + '</b><span class="of">' + L('of {n} seats', { n: S.acs }) + '</span><i style="--w:' + (100 * c[1] / S.acs).toFixed(1) + '%"></i><span>' + c[0] + '</span></div>';
+  }).join('');
   document.getElementById('fCounts').innerHTML = L('<b>Even on the narrowest count, the removed voters outnumber the margin in {k} of the {n} seats.</b> In the other {o}, the runner-up could not have won even if every living person removed had voted, at the seat\'s turnout, for the runner-up. The lists cannot show how anyone removed would have voted.', { k: S.could_change, n: S.acs, o: S.acs - S.could_change });
 
   var sg = function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 1); };

@@ -236,6 +236,40 @@
     return cfg;
   };
   SIR.charts = [];
+  // One look for every Chart.js chart on the site, set here so the 110-odd
+  // bar charts across the pages and both dashboards share it: rounded bars
+  // of a sensible thickness, no grid along the category axis, no axis rules,
+  // rounded legend keys and a dark, padded tooltip.
+  SIR.polish = function (cfg) {
+    if (typeof Chart === 'undefined') return cfg;
+    var D = Chart.defaults;
+    D.elements.bar.borderRadius = 4;
+    D.elements.bar.borderSkipped = 'start';
+    D.datasets.bar.maxBarThickness = 26;
+    D.datasets.bar.categoryPercentage = 0.78;
+    D.datasets.bar.barPercentage = 0.9;
+    D.elements.line.tension = 0.3;
+    D.elements.line.borderWidth = 2.5;
+    D.elements.point.radius = 3;
+    D.elements.point.hoverRadius = 6;
+    D.scale.border = D.scale.border || {}; D.scale.border.display = false;
+    D.scale.ticks.padding = 6;
+    D.plugins.legend.labels.usePointStyle = true;
+    D.plugins.legend.labels.pointStyle = 'rectRounded';
+    var t = D.plugins.tooltip;
+    t.backgroundColor = 'rgba(20,28,38,0.94)'; t.padding = 10; t.cornerRadius = 8; t.boxPadding = 4;
+    t.titleFont = { weight: '600' }; t.displayColors = true; t.usePointStyle = true;
+    // a stacked bar needs no rounding between its segments
+    var stacked = false, sc = (cfg.options && cfg.options.scales) || {};
+    Object.keys(sc).forEach(function (k) { if (sc[k] && sc[k].stacked) stacked = true; });
+    if (cfg.type === 'bar') {
+      cfg.options = cfg.options || {}; cfg.options.scales = cfg.options.scales || {};
+      var cat = cfg.options.indexAxis === 'y' ? 'y' : 'x', a = cfg.options.scales[cat] = cfg.options.scales[cat] || {};
+      a.grid = a.grid || {}; if (a.grid.display == null) a.grid.display = false;
+      if (stacked) (cfg.data.datasets || []).forEach(function (ds) { if (ds.borderRadius == null) ds.borderRadius = 0; });
+    }
+    return cfg;
+  };
   SIR.chart = function (id, cfg) {
     if (typeof Chart === 'undefined') {
       var el = document.getElementById(id);
@@ -268,6 +302,7 @@
       lg.labels = lg.labels || {}; lg.labels.boxWidth = 10; lg.labels.boxHeight = 10; lg.labels.padding = 6;
       SIR.fitPhone(cfg);
     }
+    SIR.polish(cfg);
     var c = new Chart(document.getElementById(id), cfg);
     c.$tokens = cfg.$tokens || null;
     SIR.recolour(c);

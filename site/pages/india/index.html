@@ -11,7 +11,7 @@
   <p class="sub">Each state's roll before the revision, and its draft roll, as a share of its projected population aged 18 and over on 1 March 2026. A roll above 100% holds more names than there are adults, which is what a roll still carrying the dead and those who have left would look like. Projections by age exist for 19 states.</p>
   <div class="grid">
     <div class="panel wide">
-      <div class="chart tall"><canvas id="cAdult" aria-label="Roll before the revision and draft roll as a share of the projected adult population, by state"></canvas></div>
+      <div class="vizbox" id="cAdult"></div>
     </div>
   </div>
   <p class="finding" id="fAdult"></p>
@@ -20,7 +20,7 @@
   <p class="sub">Names left off each state's draft roll, as a share of the votes polled in that state in the 2024 Lok Sabha election.</p>
   <div class="grid">
     <div class="panel wide">
-      <div class="chart xtall"><canvas id="cVote" aria-label="Names removed as a share of votes polled in 2024, by state"></canvas></div>
+      <div class="vizbox" id="cVote"></div>
     </div>
   </div>
   <p class="finding" id="fVote"></p>
@@ -44,7 +44,7 @@
   <p class="sub">Each state's removals split by the reason entered, as a share of the removals it has split. States are ordered by the share entered as shifted, absent or other.</p>
   <div class="grid">
     <div class="panel wide">
-      <div class="chart xtall"><canvas id="cMix" aria-label="Share of each state's removals by reason"></canvas></div>
+      <div class="vizbox" id="cMix"></div>
     </div>
   </div>
   <p class="finding" id="fMix"></p>
@@ -53,7 +53,7 @@
   <p class="sub">Only some states have published their removals by sex, or their roll by sex before and after the draft. For each of them, women's share of the names removed beside women's share of the roll.</p>
   <div class="grid">
     <div class="panel wide">
-      <div class="chart tall"><canvas id="cGender" aria-label="Women's share of removals and of the roll, by state"></canvas></div>
+      <div class="vizbox" id="cGender"></div>
     </div>
   </div>
   <p class="finding" id="fGender"></p>
@@ -148,20 +148,16 @@ SIR.json('data/india/states.json').then(function (d) {
 
   // ---- rolls against adults, removals against the 2024 vote
   var AD = d.adults, adS = S.filter(function (x) { return x.roll_adult_pct != null; }).sort(function (a, b) { return b.roll_adult_pct - a.roll_adult_pct; });
-  if (innerWidth < 600) document.getElementById('cAdult').parentNode.style.height = (adS.length * 30 + 90) + 'px';
-  SIR.chart('cAdult', { type: 'bar', data: { labels: adS.map(function (x) { return x.state; }), datasets: [
-      { label: L('Roll before the revision, % of adults'), data: adS.map(function (x) { return x.roll_adult_pct; }), $token: '--fill-grey' },
-      { label: L('Draft roll, % of adults'), data: adS.map(function (x) { return x.draft_adult_pct; }), $token: '--fill-navy' }] },
-    // 19 states side by side do not fit a phone: lay the bars on their side there.
-    options: innerWidth < 600 ? { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { min: 50, title: { display: true, text: L('% of projected population aged 18 and over') } } } } :
-      { scales: { x: { ticks: { autoSkip: false, maxRotation: 60, minRotation: 45 } }, y: { min: 50, title: { display: true, text: L('% of projected population aged 18 and over') } } } } });
+  VIZ.dumbbell('cAdult', { label: L('Roll before the revision and draft roll as a share of the projected adult population, by state'), min: 50, step: 10, ref: 100,
+    aName: L('Roll before the revision, % of adults'), aTok: '--fill-grey', bName: L('Draft roll, % of adults'), bTok: '--fill-navy',
+    rows: adS.map(function (x) { return { name: x.state, a: x.roll_adult_pct, b: x.draft_adult_pct }; }) });
   var dl = adS.slice().sort(function (a, b) { return a.draft_adult_pct - b.draft_adult_pct; });
   document.getElementById('fAdult').innerHTML = L('<b>Across these {n} states the rolls before the revision held {pre} of the projected adult population, and the draft rolls hold {post}.</b> Only {k} states had more names on the roll than adults, namely {over}. How far a roll exceeded the adult population has no relationship with how many names the state removed (rank correlation {rho}). The draft rolls are lowest against the adult population in {low}. The projections count residents, so a state that draws many migrants counts adults who may still be registered at home, which lowers its ratio.', {
     n: AD.states, pre: SIR.pct(100 * AD.roll_total / AD.adults_total), post: SIR.pct(100 * AD.draft_total / AD.adults_total), k: AD.over_100.length, over: AD.over_100.join(', '), rho: SIR.d(AD.rho_rate, 2),
     low: dl.slice(0, 3).map(function (x) { return L('{s} ({v})', { s: x.state, v: SIR.pct(x.draft_adult_pct) }); }).join(', ') });
   var vS = S.filter(function (x) { return x.removed_pct_votes24 != null; }).sort(function (a, b) { return b.removed_pct_votes24 - a.removed_pct_votes24; });
-  SIR.chart('cVote', { type: 'bar', data: { labels: vS.map(function (x) { return x.state; }), datasets: [{ label: L('Removed, % of votes polled in 2024'), data: vS.map(function (x) { return x.removed_pct_votes24; }), $tokens: vS.map(function (x) { return x.state === 'Bihar' ? '--fill-red' : '--fill-navy'; }) }] },
-    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Names removed, % of votes polled in 2024') } } } } });
+  VIZ.lollipop('cVote', { label: L('Names removed as a share of votes polled in 2024, by state'), axis: L('Names removed, % of votes polled in 2024'),
+    rows: vS.map(function (x) { return { name: x.state, v: x.removed_pct_votes24, text: SIR.pct(x.removed_pct_votes24), tok: x.state === 'Bihar' ? '--fill-red' : '--fill-navy', hi: x.removed_pct_votes24 >= 20 }; }) });
   var over20 = vS.filter(function (x) { return x.removed_pct_votes24 >= 20; });
   document.getElementById('fVote').innerHTML = L('<b>In {k} states the names left off the draft roll equal a fifth or more of the votes polled in 2024</b>, led by {top}. Bihar\'s draft-stage removals were {b} of its 2024 vote.', {
     k: over20.length, top: vS.slice(0, 3).map(function (x) { return L('{s} ({v})', { s: x.state, v: SIR.pct(x.removed_pct_votes24) }); }).join(', '), b: SIR.pct(byName['Bihar'].removed_pct_votes24) });
@@ -188,8 +184,8 @@ SIR.json('data/india/states.json').then(function (d) {
     r1: SIR.d(P['1'].per_100, 1), r2: SIR.d(P['2'].per_100, 1), r3: SIR.d(P['3'].per_100, 1), top: byRate[0].state, topr: SIR.d(byRate[0].per_100, 1) });
 
   var mix = split.slice().sort(function (a, b) { return b.shares.shifted_absent_other - a.shares.shifted_absent_other; });
-  SIR.chart('cMix', { type: 'bar', data: { labels: mix.map(function (s) { return s.state; }), datasets: R.map(function (k) { return { label: RN[k], data: mix.map(function (s) { return s.shares[k]; }), $token: RC[k] }; }) },
-    options: { indexAxis: 'y', scales: { y: { stacked: true, ticks: { autoSkip: false } }, x: { stacked: true, max: 100, title: { display: true, text: L('% of the state\'s removals split by reason') } } } } });
+  VIZ.heat('cMix', { label: L('Share of each state\'s removals by reason'), cols: R.map(function (k) { return RN[k]; }), tok: R.map(function (k) { return RC[k] === '--fill-grey' ? '--fill-purple' : RC[k]; }), unit: '%',
+    rows: mix.map(function (x) { return { name: x.state, v: R.map(function (k) { return x.shares[k]; }) }; }) });
   var big = split.filter(function (s) { return s.removed >= 1e6; });
   var hiDead = big.slice().sort(function (a, b) { return b.shares.dead - a.shares.dead; }), hiDup = big.slice().sort(function (a, b) { return b.shares.duplicate - a.shares.duplicate; });
   var bigS = big.slice().sort(function (a, b) { return b.shares.shifted_absent_other - a.shares.shifted_absent_other; });
@@ -200,10 +196,9 @@ SIR.json('data/india/states.json').then(function (d) {
 
   // ---- women among the removed
   var G = d.gender.slice().sort(function (a, b) { return b.gap - a.gap; });
-  SIR.chart('cGender', { type: 'bar', data: { labels: G.map(function (g) { return g.state; }), datasets: [
-      { label: L('Women, % of names removed'), data: G.map(function (g) { return g.women_share_removed; }), $token: '--fill-pink' },
-      { label: L('Women, % of the roll'), data: G.map(function (g) { return g.women_share_roll; }), $token: '--fill-grey' }] },
-    options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { min: 40, max: 60, title: { display: true, text: L('Women, %') } } } } });
+  VIZ.dumbbell('cGender', { label: L('Women\'s share of removals and of the roll, by state'), min: 40, step: 5, ref: 50,
+    aName: L('Women, % of the roll'), aTok: '--fill-grey', bName: L('Women, % of names removed'), bTok: '--fill-pink',
+    rows: G.map(function (g) { return { name: g.state, a: g.women_share_roll, b: g.women_share_removed }; }) });
   var gOver = G.filter(function (g) { return g.gap > 1; }), gUnder = G.filter(function (g) { return g.gap < -1; }), gEven = G.filter(function (g) { return Math.abs(g.gap) <= 1; });
   document.getElementById('fGender').innerHTML = L('<b>In {over} of the {n} states with a split by sex, women are a larger share of the names removed than of the roll</b>, by up to {max} points in {maxs}. {even} are within a point of even, and in {under} it runs the other way, by {u} points. Most phase 3 states have published no split by sex, so this covers {n} of {all} states and does not describe the country as a whole.', {
     over: gOver.length, n: G.length, max: SIR.d(G[0].gap, 1), maxs: G[0].state, even: gEven.map(function (g) { return g.state; }).join(L(' and ')),
