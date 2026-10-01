@@ -44,8 +44,10 @@
   var charts = {}, specs = {};
   D.chart = function (id, cfg) { specs[id] = cfg; };
   function draw(id) {
-    if (typeof Chart === 'undefined') return;
     var el = document.getElementById(id); if (!el || !specs[id]) return;
+    // a ranked list or measures side by side are drawn in SVG (assets/viz.js)
+    if (window.SIR && SIR.viz) { var v = SIR.viz(id, specs[id]); if (v) { charts[id] = v; return; } }
+    if (typeof Chart === 'undefined') return;
     if (charts[id]) charts[id].destroy();
     var dark = window.SIR && SIR.isDark();
     Chart.defaults.color = dark ? '#D5DBE1' : '#34495E';
@@ -92,6 +94,7 @@
     document.addEventListener('sir-theme', function () { Object.keys(charts).forEach(draw); });
     main.addEventListener('click', function (e) {
       var b = e.target.closest('[data-png]'); if (!b || !charts[b.getAttribute('data-png')]) return;
+      if (charts[b.getAttribute('data-png')].viz) { VIZ.png(charts[b.getAttribute('data-png')].box, prefix + '-' + b.getAttribute('data-png')); return; }
       var a = document.createElement('a'); a.href = charts[b.getAttribute('data-png')].toBase64Image('image/png', 1); a.download = prefix + '-' + b.getAttribute('data-png') + '.png'; a.click();
     });
     if (window.SIR) SIR.beforePrint = function () {

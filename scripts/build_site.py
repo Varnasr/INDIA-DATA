@@ -108,6 +108,10 @@ def shell(out, meta, content, scripts):
     # key does not change with the page's depth.
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
               ' · <a href="%s">About this site</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './'))
+    # every page that loads sir.js gets viz.js after it: SIR.chart and the
+    # dashboards hand ranked lists and side-by-side measures to it
+    if 'assets/sir.js' in scripts and 'assets/viz.js' not in scripts:
+        scripts = re.sub(r'(<script src="[^"]*assets/sir\.js"></script>)', lambda m: m.group(1) + '\n' + m.group(1).replace('sir.js', 'viz.js'), scripts, count=1)
     head_extra = ('\n' + meta['head']) if meta.get('head') else ''
     cls = place.get('class', place['id'])
     # dashboards and explorers get the wider column (sir.css, body.wide)

@@ -270,7 +270,24 @@
     }
     return cfg;
   };
+  // Where a better form fits (a ranked list, measures side by side),
+  // assets/viz.js draws it in SVG in place of the canvas. Returns a stub with
+  // the destroy() the pages call before a redraw, or null to use Chart.js.
+  SIR.viz = function (id, cfg) {
+    if (!window.VIZ || cfg.$chartjs) return null;
+    var el = document.getElementById(id); if (!el) return null;
+    var box = el;
+    // put the box in the page first, so the chart can measure its width
+    if (el.tagName === 'CANVAS') { box = document.createElement('div'); box.className = 'vizbox'; el.parentNode.classList.add('has-viz'); el.parentNode.replaceChild(box, el); }
+    if (!VIZ.fromChart(box, cfg, el.getAttribute('aria-label'))) {
+      if (box !== el) { box.parentNode.classList.remove('has-viz'); box.parentNode.replaceChild(el, box); }
+      return null;
+    }
+    if (box !== el) box.id = id;
+    return { viz: true, box: box, destroy: function () {}, update: function () {} };
+  };
   SIR.chart = function (id, cfg) {
+    var v = SIR.viz(id, cfg); if (v) return v;
     if (typeof Chart === 'undefined') {
       var el = document.getElementById(id);
       if (el) el.parentNode.insertAdjacentHTML('beforeend', '<p class="pill">' + L('The chart library did not load, so use the table below, which has the same figures.') + '</p>');
