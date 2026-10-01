@@ -1,0 +1,6 @@
+# The site has no build step except cache busting: scripts/stamp.py gives
+# every script, stylesheet, data file and download a ?v=<content hash>
+# address, so a deploy can never pair a fresh page with a stale file.
+[build]
+  publish = "."
+  command = "python3 scripts/stamp.py"
