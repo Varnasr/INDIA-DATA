@@ -1,7 +1,8 @@
 # INDIA-DATA: Special Intensive Revision analyses
 
 Who was struck off India's electoral rolls in the 2025-26 Special Intensive
-Revision, in Bihar and in five Old City constituencies of Hyderabad. Static
+Revision: across India, in Bihar, in five Old City constituencies of
+Hyderabad and in Tamil Nadu. Static
 site at [offtheroll.in](https://offtheroll.in), by PinPoint Ventures. Every page is built
 from `site/` by `scripts/build_site.py`.
 
@@ -19,11 +20,13 @@ from `site/` by `scripts/build_site.py`.
 | [`/hyderabad/`](https://offtheroll.in/hyderabad/) | The Hyderabad dashboard: 6,62,063 of 16,57,207 electors struck off in Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, in ten tabs |
 | `/hyderabad/explorer/` | Any constituency, any of its 1,158 polling parts |
 | `/hyderabad/people/`, `/parts/`, `/hearings/`, `/faq/`, `/method/` | Rates by age, sex, religion and 2002 linkage within parts; part outliers; hearings; fourteen research questions |
+| [`/tamilnadu/`](https://offtheroll.in/tamilnadu/) | Tamil Nadu: 97,37,831 names left off the draft roll in 234 constituencies, by district and reason, and what the final roll put back |
+| `/tamilnadu/elections/`, `/faq/`, `/method/` | Removals against the 2026 margins and by the party that won, read against each seat's district |
 
 ## Reports
 
 The full reports, in the structure of the Sabar Institute's SIR reports, are
-in `reports/` as PDF and Word and are linked from every page:
+in `reports/` as PDF and are linked from every page:
 `bihar-sir-2025-report` and `hyderabad-old-city-sir-2026-report`. Rebuild with
 `scripts/reports/build.sh`, which also writes the two slide decks
 (`bihar-sir-2025-deck.pptx`, `hyderabad-old-city-sir-2026-deck.pptx`).
@@ -41,7 +44,8 @@ rates for each group and compare groups inside the same polling part.
 pip install pandas==3.0.6 openpyxl==3.1.5
 python3 scripts/build_bihar.py        # data/bihar/raw -> data/bihar/*.json
 python3 scripts/build_hyderabad.py    # hyderabad/explorer -> data/hyderabad/*.json
-python3 scripts/check_data.py         # 11 checks, run by CI
+python3 scripts/build_tamilnadu.py    # data/tamilnadu/raw -> data/tamilnadu/*
+python3 scripts/check_data.py         # 21 checks, run by CI
 python3 scripts/verify_bihar.py       # recomputes every Bihar figure from the raw files, run by CI
 python3 scripts/check_contrast.py     # 72 colour pairs, both themes, run by CI
 python3 -m http.server 8000
@@ -55,6 +59,9 @@ python3 -m http.server 8000
   survey, 2 October 2023.
 - Hyderabad: CEO Telangana SIR lists for the five constituencies, September
   2026; ECI 2023 Assembly results.
+- Tamil Nadu: CEO Tamil Nadu tables of removals by constituency and reason,
+  and of the draft and final rolls; ECI 2026 constituency results; the 2021
+  result from the ECI statistical report.
 
 Aggregates only. No names, EPIC numbers or addresses are published or committed.
 

@@ -24,7 +24,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 LANGS = ['hi', 'ur', 'te', 'ta', 'bn']
-SOURCES = [ROOT / 'index.html', *sorted((ROOT / 'india').rglob('index.html')), *sorted((ROOT / 'bihar').rglob('index.html')), *sorted((ROOT / 'hyderabad').rglob('index.html')),
+# the analyses are the first folder of every page each place lists
+SECTIONS = sorted({x[0].split('/')[0] for p in json.loads((ROOT / 'site' / 'places.json').read_text(encoding='utf-8'))['places'] for x in p['pages']})
+SOURCES = [ROOT / 'index.html', *[f for d in SECTIONS for f in sorted((ROOT / d).rglob('index.html'))],
            ROOT / 'assets' / 'sir.js', ROOT / 'assets' / 'dash.js', ROOT / 'assets' / 'i18n.js', *sorted((ROOT / 'assets' / 'faq').glob('*.js'))]
 LIT = re.compile(r"(?<![\w.$])L\(\s*'((?:[^'\\]|\\.)*)'")
 NONLIT = re.compile(r"(?<![\w.$])L\(\s*(?!'|\))")

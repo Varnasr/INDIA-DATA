@@ -1,8 +1,8 @@
 # INDIA-DATA
 
 The SIR analyses hub at offtheroll.in: All India (the reasons for
-removal, state by state), Bihar (2025) and five Old City constituencies of
-Hyderabad (2026). Static HTML, Chart.js from cdnjs, one
+removal, state by state), Bihar (2025), five Old City constituencies of
+Hyderabad (2026) and Tamil Nadu (2026). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
@@ -230,6 +230,43 @@ Charminar and Yakutpura equal the lists exactly. The finding it carries: the
 Old City seats (39.9%) removed no more than Hyderabad's other ten (41.6%);
 the removals follow the capital region. Totals only; do not bring in a
 per-seat split by reason that is not the state's own.
+
+## Tamil Nadu
+
+`scripts/build_tamilnadu.py` reads `data/tamilnadu/raw` (each file's source
+and checks are in `SOURCES.md` there) and writes `summary.json`,
+`constituencies.json`, `districts.json` and the two CSVs; `check_data.py` runs
+it with `--check`. Every table is the Chief Electoral Officer's or the
+Election Commission's own, constituency by constituency, and the build fails
+unless each adds up to the published totals (9,737,831 removed; draft
+54,376,756; final 56,707,380).
+
+- **The roll before the revision is the draft plus the names removed.** No
+  constituency table of the 27 October 2025 roll is published, and the sum
+  equals the state total announced with the draft.
+- **There is no split of the removals by sex or age.** The CEO has not
+  published one. The All India gender table carries a Tamil Nadu row from a
+  press analysis, flagged unverified; do not move it onto the Tamil Nadu pages
+  as a finding.
+- **Turnout is votes over the final roll of 23 February**, because the 2026
+  result pages carry no electors. The roll of 7 April 2026 is published and
+  not yet used.
+- **Removals by the party that won are read against the district.** TVK won
+  most of the city seats and the city seats lost the most names, so the raw
+  comparison mostly measures Chennai. `vs_district` is each seat's rate less
+  its district's; report it beside the raw figure, never instead of it.
+- **2021 is from a compilation of the ECI statistical report** whose seat
+  totals equal the declared result. The page says "the Election Commission's
+  statistical report, through a published compilation of it" and does not
+  name the compiler.
+
+## West Bengal (not yet built)
+
+`data/westbengal/raw` holds the draft roll, the roll at nomination and the
+2024 roll by constituency, and both results, but no primary table of removals
+by constituency. Those counts exist only inside the named lists. Compilations
+by others exist and are recorded in `SOURCES.md` as not used. The state row
+in the All India tables is the CEO's press note PN-05-2026, to the elector.
 
 ## Privacy
 
