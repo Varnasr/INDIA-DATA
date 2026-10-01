@@ -25,7 +25,8 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(ROOT, 'hyderabad', 'explorer', 'index.html')
+# The explorer's source in site/pages; scripts/build_site.py writes the page from it.
+SRC = os.path.join(ROOT, 'site', 'pages', 'hyderabad', 'explorer', 'index.html')
 OUT = os.path.join(ROOT, 'data', 'hyderabad')
 CHECK = '--check' in sys.argv
 STALE = []

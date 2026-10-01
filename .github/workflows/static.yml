@@ -38,12 +38,12 @@ jobs:
       # answers 404 for the same paths through _redirects).
       # Cache busting, as on Netlify: every file a page loads gets an address
       # that changes with its content.
-      - name: Stamp file addresses
-        run: python3 scripts/stamp.py
+      - name: Build pages and stamp file addresses
+        run: python3 scripts/build_site.py && python3 scripts/stamp.py
       - name: Stage the pages and their data
         run: |
           mkdir -p "$RUNNER_TEMP/site"
-          rsync -a --exclude '.git' --exclude '.github' --exclude 'archive' --exclude 'scripts' \
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'archive' --exclude 'scripts' --exclude 'site' \
             --exclude 'data/bihar/raw' --exclude 'data/india/raw' --exclude 'data/hyderabad/raw' --exclude 'data/*.csv' --exclude '*.md' --exclude 'CITATION.cff' \
             ./ "$RUNNER_TEMP/site/"
       - name: Upload artifact

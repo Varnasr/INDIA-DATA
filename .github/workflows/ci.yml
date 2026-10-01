@@ -33,6 +33,12 @@ jobs:
       - name: Recompute the Bihar figures from the raw files
         run: python3 scripts/verify_bihar.py
 
+      # Every page is built from site/places.json and site/pages by
+      # scripts/build_site.py. A page edited directly, or a source changed
+      # without rebuilding, fails here.
+      - name: Pages match their sources
+        run: python3 scripts/build_site.py --check
+
       # One palette for every page, in assets/sir.css, measured in both themes.
       - name: Colour tokens clear AA in both themes
         run: python3 scripts/check_contrast.py

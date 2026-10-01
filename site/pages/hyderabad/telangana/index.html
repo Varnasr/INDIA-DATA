@@ -1,0 +1,52 @@
+<!--page {"title": "Hyderabad Old City SIR 2026: against Hyderabad and Telangana", "description": "The five Old City constituencies set against the rest of Hyderabad and the rest of Telangana, from the state's draft-roll figures.", "place": "hyd"} -->
+<main id="main">
+<div class="page-head"><h1>Against Hyderabad and Telangana</h1><ol class="summary" id="short"></ol></div>
+  <div class="kpis" id="kT"></div>
+  <p class="finding" id="fT"></p>
+  <div class="grid">
+    <div class="panel">
+      <h3>The fifteen seats of Hyderabad district</h3>
+      <p>Share of each seat's roll left off the draft. The five Old City seats are in red.</p>
+      <div class="chart tall"><canvas id="cSeats" aria-label="Share of the roll left off the draft, Hyderabad district's fifteen seats"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Telangana's districts</h3>
+      <p>Share of each district's roll left off the draft. Hyderabad is in red; the two other districts of the capital region are in amber.</p>
+      <div class="chart xtall"><canvas id="cDist" aria-label="Share of the roll left off the draft, by district"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fD"></p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Hyderabad district's seats"><table id="tSeats"></table></div>
+  <p class="note" id="nT"></p>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="../../assets/sir.js"></script>
+<script>
+SIR.json('data/hyderabad/telangana.json').then(function (d) {
+  var OC = d.old_city, OH = d.other_hyderabad, H = d.hyderabad, R = d.rest_of_state;
+  document.getElementById('kT').innerHTML = [[SIR.pct(OC.rate), L('left off the draft in the five Old City seats')], [SIR.pct(OH.rate), L('in Hyderabad\'s other ten seats')], [SIR.pct(H.rate), L('in Hyderabad district')], [SIR.pct(R.rate), L('in the rest of Telangana')]]
+    .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+  var seats = d.seats.slice().sort(function (a, b) { return b.rate - a.rate; }), above = seats.filter(function (x) { return !x.old_city && x.rate > Math.max.apply(null, seats.filter(function (y) { return y.old_city; }).map(function (y) { return y.rate; })); });
+  document.getElementById('fT').innerHTML = L('<b>Four in ten Old City electors were struck off, {oc} of the roll, and Hyderabad\'s other ten seats lost even more, {oh}.</b> Every seat in Hyderabad district lost between {lo} and {hi}, and {n} seats outside the Old City lost more than any Old City seat. The draft left off {h} across Hyderabad district and {r} in the rest of Telangana.', {
+    oc: SIR.pct(OC.rate), oh: SIR.pct(OH.rate), lo: SIR.pct(seats[seats.length - 1].rate), hi: SIR.pct(seats[0].rate), n: above.length, h: SIR.pct(H.rate), r: SIR.pct(R.rate) });
+  SIR.chart('cSeats', { type: 'bar', data: { labels: seats.map(function (x) { return x.name; }), datasets: [{ label: L('% of the roll left off the draft'), data: seats.map(function (x) { return x.rate; }), $tokens: seats.map(function (x) { return x.old_city ? '--fill-red' : '--fill-navy'; }) }] },
+    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('% of the roll left off the draft') } } } } });
+  var METRO = ['Rangareddy', 'Medchal Malkajgiri'], ds = d.districts.slice().sort(function (a, b) { return b.rate - a.rate; });
+  SIR.chart('cDist', { type: 'bar', data: { labels: ds.map(function (x) { return x.district; }), datasets: [{ label: L('% of the roll left off the draft'), data: ds.map(function (x) { return x.rate; }), $tokens: ds.map(function (x) { return x.district === 'Hyderabad' ? '--fill-red' : METRO.indexOf(x.district) >= 0 ? '--fill-amber' : '--fill-navy'; }) }] },
+    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('% of the roll left off the draft') } } } } });
+  var m = ds.filter(function (x) { return METRO.indexOf(x.district) >= 0; }), next = ds.filter(function (x) { return x.district !== 'Hyderabad' && METRO.indexOf(x.district) < 0; })[0];
+  document.getElementById('fD').innerHTML = L('<b>The three districts of the capital region lost far more than the rest of the state.</b> Hyderabad lost {h}, {m1} {v1} and {m2} {v2}, and no other district lost more than {nx} ({nd}). The removals are heavy across the whole capital region.', {
+    h: SIR.pct(H.rate), m1: m[0].district, v1: SIR.pct(m[0].rate), m2: m[1].district, v2: SIR.pct(m[1].rate), nx: SIR.pct(next.rate), nd: next.district });
+  SIR.table(document.getElementById('tSeats'), [
+    { k: 'name', label: L('Constituency'), left: true, fmt: function (v, x) { return SIR.esc(v) + (x.old_city ? ' <span class="muted">' + L('(Old City)') + '</span>' : ''); } },
+    { k: 'electors_pre', label: L('Electors before'), fmt: SIR.n }, { k: 'electors_draft', label: L('Draft roll'), fmt: SIR.n },
+    { k: 'removed', label: L('Left off'), fmt: SIR.n }, { k: 'rate', label: L('% of roll'), fmt: function (v) { return SIR.d(v, 1); } }
+  ], d.seats, { sort: 'rate' });
+  document.getElementById('nT').innerHTML = L('The source is the Chief Electoral Officer, Telangana\'s draft roll of 17 August 2026, by district and for Hyderabad district\'s seats, <a href="{u}">as tabulated in the press</a>. The state gives no split by reason below the district, and no seat figures outside Hyderabad district. Malakpet\'s figures here are the state\'s own, because the part-level list used on the other pages holds only part of Malakpet.', { u: d.source });
+}).catch(SIR.fail);
+</script>
+<script src="../../assets/faq/hyd.js"></script>
+<script>SIR.showFaq('hyd', 'telangana');</script>

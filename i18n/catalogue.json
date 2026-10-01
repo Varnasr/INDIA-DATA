@@ -2,9 +2,9 @@
  " and ": {
   "kind": "script",
   "pages": [
-   "/",
    "/assets/faq/bihar.js",
    "/assets/faq/hyd.js",
+   "/bihar/",
    "/bihar/method/",
    "/bihar/results/",
    "/hyderabad/method/",
@@ -57,40 +57,40 @@
  "% of Bihar": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/border/"
   ]
  },
  "% of all removals": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
  "% of all removals in Bihar": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "% of booths that lost more than 200 names": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "% of classified removals": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
  "% of electorate": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/border/"
   ]
  },
@@ -121,14 +121,14 @@
  "% of removals": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/border/"
   ]
  },
  "% of removals who are women": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "% of removals, and % of population": {
@@ -140,7 +140,7 @@
  "% of removed": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "% of roll": {
@@ -166,7 +166,7 @@
  "% of the district's phase 1 removals": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "% of the part struck off": {
@@ -190,7 +190,7 @@
  "% of the removed in each age band": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "% of the roll left off the draft": {
@@ -214,7 +214,7 @@
  "% of those removed": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "% struck off": {
@@ -265,7 +265,7 @@
  "2020 Assembly": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/results/"
   ]
  },
@@ -278,7 +278,7 @@
  "2020 margin": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "2023 Assembly result": {
@@ -296,7 +296,7 @@
  "2023 caste survey": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "2023 margin": {
@@ -326,7 +326,7 @@
  "2024 Lok Sabha": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/results/"
   ]
  },
@@ -339,7 +339,7 @@
  "2024 leader": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "2024 result by seat": {
@@ -351,37 +351,37 @@
  "2025 Assembly": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/results/"
   ]
  },
  "2025 margin": {
   "kind": "script",
   "pages": [
-   "/",
-   "/bihar/"
+   "/bihar/",
+   "/bihar/explorer/"
   ]
  },
  "2025 winner": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
+   "/bihar/explorer/",
    "/bihar/results/"
   ]
  },
  "2025 winning margin (votes, log scale)": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/results/"
   ]
  },
  "20× or more": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "3. Booths within the same seat": {
@@ -417,7 +417,7 @@
  "80 and over": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "80+ deleted %": {
@@ -429,7 +429,7 @@
  "87 seats taken from INDIA": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "<a href=\"../parts/\">Parts</a> lists the outliers.": {
@@ -456,6 +456,12 @@
    "/india/"
   ]
  },
+ "<b>All India</b><span id=\"hIndia\">Every state and union territory in the revision, with the reasons each one recorded.</span>": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "<b>Among states that removed ten lakh names or more, the share entered as shifted, absent or other runs from {lo} in {lon} to {hi} in {hin}.</b> Of those states, {dn} has the highest share entered as dead ({dv}) and {pn} the highest share entered as enrolled more than once ({pv}). One revision under one set of instructions gave very different mixes of reasons in different states, and the Commission has not explained why.": {
   "kind": "script",
   "pages": [
@@ -466,6 +472,12 @@
   "kind": "script",
   "pages": [
    "/bihar/people/"
+  ]
+ },
+ "<b>Bihar 2025</b><span id=\"hBihar\">Every constituency and every booth, set against the 2025 election result.</span>": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "<b>Carried forward to 2025, the census shares give much the same picture.</b> At each district's growth rates from 2001 to 2011, Bihar's Muslim share comes to {st} in 2025, close to the {sv} counted by the 2023 caste survey, and no district moves by more than {mx} points. On the 2025 shares the range holds the population share in {inside} of {n} districts, and the lowest estimate is more than a point above it in {clear} districts ({list}).": {
@@ -490,6 +502,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/telangana/"
+  ]
+ },
+ "<b>Hyderabad Old City 2026</b><span id=\"hHyd\">Five constituencies, elector by elector, from the lists of who was struck off and who was summoned.</span>": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "<b>In every constituency, the older the elector, the likelier the removal.</b> Between {hi_min} and {hi_max} of electors aged 80 and over were struck off, and {lo_min} to {lo_max} of those aged 18 to 24. Death explains part of the removals at the oldest ages. The recorded reasons are on the <a href=\"../\">overview</a>.": {
@@ -690,10 +708,10 @@
  "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Bihar 2025 · every booth, every constituency</span>": {
   "kind": "markup",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -715,6 +733,12 @@
    "/hyderabad/telangana/"
   ]
  },
+ "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Names taken off the electoral rolls, counted from the published lists</span>": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "<span><i style=\"background:var(--fill-red)\"></i>Deleted (ASD list)</span><span><i style=\"background:var(--fill-amber)\"></i>Kept, summoned to hearing</span><span><i style=\"background:var(--fill-navy)\"></i>Kept, untouched</span>": {
   "kind": "markup",
   "pages": [
@@ -724,7 +748,7 @@
  "<span><i style=\"background:var(--fill-red)\"></i>Removed in phase 1</span><span><i style=\"background:#7a1f1c\"></i>Removed in phase 2</span><span><i style=\"background:var(--fill-navy)\"></i>On the 2025 roll</span>": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "<span>Deletion rate:</span><i style=\"background:#c9d6e3\"></i>under 30%<i style=\"background:#7fa1c0\"></i>30 to 45%<i style=\"background:#c0504d\"></i>45 to 60%<i style=\"background:#7a1f1c\"></i>over 60%": {
@@ -736,7 +760,7 @@
  "<span>Removed per 100 electors:</span><i style=\"background:#c9d6e3\"></i>under 7<i style=\"background:#7fa1c0\"></i>7 to 10<i style=\"background:#c0504d\"></i>10 to 13<i style=\"background:#7a1f1c\"></i>13 and over": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "A <b>press note</b> is the Chief Electoral Officer's own document. A <b>press report</b> gives the Chief Electoral Officer's figures as a newspaper or agency reported them, with a link. <b>Lists</b> means counted on this site.": {
@@ -784,7 +808,7 @@
  "A point above the dashed line is a district where women's share of the removed exceeds their share of the roll, and there are {over} such districts out of {districts}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "A reason is what an officer wrote down after a visit, or after failing to find the elector. Nobody has checked whether the elector was in fact dead, had moved or was enrolled twice, and the figures cannot say how many entries were wrong. Outside Bihar they are totals the states published, so they cannot be split by sex, age, booth or constituency, or checked name by name. Several states published rounded figures, some reports of the same state disagree, and in three states the reasons leave some names unexplained. Each of these is noted against its row. The downloadable table gives every figure with its source.": {
@@ -796,7 +820,7 @@
  "A reason is what the officer wrote down after a visit, or after failing to find the elector. The lists cannot say whether a removal was right, or whether anyone marked shifted was enrolled again where they now live.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "A reason on the list is what the officer wrote down, and nobody checked it.": {
@@ -810,7 +834,7 @@
  "A red bar longer than its grey pair means the region's share of removals exceeds its share of the electorate.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "A relationship across districts says nothing about why any one name was removed.": {
@@ -822,7 +846,7 @@
  "A: project mapping": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -832,17 +856,45 @@
    "/hyderabad/"
   ]
  },
+ "About this site": {
+  "kind": "markup",
+  "pages": [
+   "/",
+   "/bihar/",
+   "/bihar/border/",
+   "/bihar/districts/",
+   "/bihar/explorer/",
+   "/bihar/faq/",
+   "/bihar/method/",
+   "/bihar/people/",
+   "/bihar/report/",
+   "/bihar/results/",
+   "/hyderabad/",
+   "/hyderabad/explorer/",
+   "/hyderabad/faq/",
+   "/hyderabad/hearings/",
+   "/hyderabad/method/",
+   "/hyderabad/parts/",
+   "/hyderabad/people/",
+   "/hyderabad/report/",
+   "/hyderabad/telangana/",
+   "/india/",
+   "/india/faq/",
+   "/india/method/",
+   "/india/report/"
+  ]
+ },
  "Above 1 means a group's share of the removed exceeds its share of the population. {list}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Absent": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
+   "/bihar/explorer/",
    "/bihar/people/",
    "/bihar/results/"
   ]
@@ -856,7 +908,7 @@
  "Across Bihar, {removed} names were removed against a combined winning margin of {margins} in all 243 seats. In the 87 seats the NDA took from INDIA, {tookRem} names were removed against combined margins of {tookM}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Across Hyderabad district the revision struck off {h} of the roll, against {r} in the rest of Telangana.": {
@@ -892,7 +944,7 @@
  "Across both phases, {total} names: {rate} for every 100 electors on the 2025 roll.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Across districts the removal rate moves with {list}.": {
@@ -977,7 +1029,7 @@
  "Age": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/",
    "/hyderabad/people/"
   ]
@@ -1035,26 +1087,26 @@
  "All 243 constituencies": {
   "kind": "script",
   "pages": [
-   "/",
-   "/bihar/"
+   "/bihar/",
+   "/bihar/explorer/"
   ]
  },
  "All 243 seats": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "All Bihar": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "All Bihar, 243 constituencies": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "All India": {
@@ -1064,6 +1116,7 @@
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -1126,7 +1179,7 @@
  "All constituencies": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "All factors together": {
@@ -1156,7 +1209,7 @@
  "All phase 1 removals": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "All polling parts": {
@@ -1192,7 +1245,7 @@
  "All {n} booths in {name}": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "All {n} parts": {
@@ -1222,8 +1275,8 @@
  "Already enrolled": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
+   "/bihar/explorer/",
    "/bihar/people/",
    "/bihar/results/"
   ]
@@ -1231,40 +1284,13 @@
  "Among the removed aged 80 and over, {old} were entered as dead; among those aged 18 to 24, {youngdead}. The young were mostly marked shifted or absent.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "An elector kept on the draft roll could still be summoned to prove eligibility. {count} were. Not being traceable to the last intensive revision was the commonest reason, {share} of flags. The heaviest single slot listed {cases} cases, in {seat}, where the median slot listed {median}.": {
   "kind": "script",
   "pages": [
    "/hyderabad/"
-  ]
- },
- "Analyses": {
-  "kind": "markup",
-  "pages": [
-   "/",
-   "/bihar/",
-   "/bihar/border/",
-   "/bihar/districts/",
-   "/bihar/faq/",
-   "/bihar/method/",
-   "/bihar/people/",
-   "/bihar/report/",
-   "/bihar/results/",
-   "/hyderabad/",
-   "/hyderabad/explorer/",
-   "/hyderabad/faq/",
-   "/hyderabad/hearings/",
-   "/hyderabad/method/",
-   "/hyderabad/parts/",
-   "/hyderabad/people/",
-   "/hyderabad/report/",
-   "/hyderabad/telangana/",
-   "/india/",
-   "/india/faq/",
-   "/india/method/",
-   "/india/report/"
   ]
  },
  "And inside the same polling part?": {
@@ -1276,7 +1302,7 @@
  "And women's literacy?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Another {h} electors who stayed on the draft roll were summoned to a hearing to prove they were entitled to vote.": {
@@ -1342,13 +1368,13 @@
  "At or above survey share under both": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "B: strict": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -1385,7 +1411,7 @@
  "Below survey share under both": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Between the 2020 and 2025 Assembly elections the NDA parties gained votes across Bihar. If the removals had taken away more of INDIA's voters than the NDA's, INDIA's share should have fallen most where the most names came off the roll. Here every seat is split into thirds by names removed per 100 electors, and both elections are counted with the parties grouped as they stood in 2025.": {
@@ -1407,6 +1433,7 @@
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -1430,19 +1457,19 @@
  "Bihar 2025 dashboard · SIR analysis for India": {
   "kind": "markup",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Bihar SIR 2025: 69 lakh names struck off, booth by booth": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Bihar SIR 2025: deletion explorer": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Bihar SIR 2025: districts": {
@@ -1502,9 +1529,9 @@
  "Bihar pages": {
   "kind": "markup",
   "pages": [
-   "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -1527,13 +1554,13 @@
  "Blue marks a border district, grey the interior.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Booth": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Booth estimate, net to runner-up": {
@@ -1545,10 +1572,10 @@
  "Booth explorer": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -1565,38 +1592,38 @@
  "Booth {n}": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Booths": {
   "kind": "script",
   "pages": [
-   "/",
-   "/bihar/"
+   "/bihar/",
+   "/bihar/explorer/"
   ]
  },
  "Booths by the number of names removed in phase 1. Most lost fewer than a hundred, and {n} lost more than 200.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Booths in {name} by the number of names removed in phase 1.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Booths over 200": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Booths that lost more than 200 names": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Border": {
@@ -1604,7 +1631,7 @@
   "pages": [
    "/bihar/border/",
    "/bihar/districts/",
-   "/bihar/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -1615,7 +1642,7 @@
  "Border constituencies": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/border/",
    "/bihar/method/"
   ]
@@ -1623,7 +1650,7 @@
  "Border constituencies lost {border} names per 100 electors, the interior {interior}. The Bengal and Nepal belts, which include Seemanchal, lost the most. A constituency counts as a border seat when its district touches Nepal, West Bengal, Jharkhand or Uttar Pradesh.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Border constituencies lost {border} per 100 electors, the interior {interior}. <a href=\"../border/\">Border</a>.": {
@@ -1635,7 +1662,7 @@
  "Border seats ({n})": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Border seats hold {el} of Bihar's electors and account for {sh} of the removals.": {
@@ -1647,7 +1674,7 @@
  "Border seats lost {border} per 100 electors, the interior {interior}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Border seats lost {b} names per 100 electors, and interior seats {i}. The heaviest were the seats bordering {top}, at {topr}.": {
@@ -1659,7 +1686,7 @@
  "Border seats lost {gap} more names per 100 electors than the interior.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Border: {b}": {
@@ -1671,7 +1698,7 @@
  "Both": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "By constituency: {list}.": {
@@ -1764,14 +1791,14 @@
  "Caste": {
   "kind": "markup",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
  "Caste composition": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/method/"
   ]
  },
@@ -1790,7 +1817,7 @@
  "Census of India 2011, the Bihar caste-based survey of 2 October 2023, and the Bihar Economic Survey.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Census of India 2011, the last count at district level": {
@@ -1857,13 +1884,13 @@
  "Classification A places {a} of removals. The stricter B places {b}, because it sets aside surnames that more than one caste carries.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Click a column to sort, a row to open it.": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Click a column to sort, a row to open the part.": {
@@ -1893,13 +1920,13 @@
  "Colours follow the stricter reading. Blue marks a surname tied to one group, yellow a surname several groups carry, and grey a surname that says nothing about caste.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Combined winning margins": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Commonest surnames": {
@@ -1935,8 +1962,8 @@
  "Constituencies": {
   "kind": "script",
   "pages": [
-   "/",
-   "/bihar/"
+   "/bihar/",
+   "/bihar/explorer/"
   ]
  },
  "Constituencies are joined by number": {
@@ -1948,13 +1975,13 @@
  "Constituencies by names removed as a multiple of the 2025 winning margin.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Constituencies by removals per 100 electors": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Constituencies grouped by the border they touch. Seats on two borders form their own group.": {
@@ -1966,15 +1993,15 @@
  "Constituencies grouped by the neighbours of their district. {region} seats lost the most per elector ({rate} per 100), the interior {interior}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Constituency": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
+   "/bihar/explorer/",
    "/bihar/results/",
    "/hyderabad/",
    "/hyderabad/hearings/",
@@ -1987,10 +2014,10 @@
  "Constituency table, CSV": {
   "kind": "markup",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -2071,6 +2098,7 @@
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -2095,9 +2123,9 @@
   "kind": "script",
   "pages": [
    "/assets/sir.js",
-   "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -2116,22 +2144,22 @@
  "Dashboard sections": {
   "kind": "markup",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
  "Data sources": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
  "Dead": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
+   "/bihar/explorer/",
    "/bihar/people/",
    "/bihar/results/",
    "/hyderabad/",
@@ -2197,7 +2225,7 @@
  "Deletion patterns": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Deletion rate": {
@@ -2251,7 +2279,7 @@
  "Deletions": {
   "kind": "markup",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
@@ -2294,7 +2322,7 @@
  "Density, 2011 (per sq km)": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/districts/"
   ]
  },
@@ -2325,7 +2353,7 @@
  "Did removals exceed the winning margins?": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
@@ -2350,14 +2378,14 @@
  "Did the removals exceed the margins that decided seats?": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
  "Did the second pass fall evenly by region?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Did the vote move where more names were removed?": {
@@ -2393,10 +2421,10 @@
  "District": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/people/"
   ]
  },
@@ -2427,10 +2455,10 @@
  "District table, CSV": {
   "kind": "markup",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -2442,9 +2470,9 @@
   "kind": "script",
   "pages": [
    "/bihar/people/",
-   "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/report/",
@@ -2454,7 +2482,7 @@
  "Districts where women are over-represented": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Districts: {a} of {n}. Constituencies: {b} of {m}.": {
@@ -2472,13 +2500,13 @@
  "Do border constituencies differ?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Do border seats lose more than the interior?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Do poorer or less schooled districts lose more names?": {
@@ -2502,13 +2530,13 @@
  "Do the reasons alone exceed the margins?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Do the reasons differ for women and men?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Does \"untraceable\" cluster in the heaviest parts?": {
@@ -2538,7 +2566,7 @@
  "Does booth size relate to removals?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Does death explain the old?": {
@@ -2556,7 +2584,7 @@
  "Does density matter?": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/districts/"
   ]
  },
@@ -2569,7 +2597,7 @@
  "Does gender relate to intensity?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Does income relate to deletions?": {
@@ -2581,13 +2609,13 @@
  "Does income relate to removals?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Does it vary by who won the seat?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Does not add up": {
@@ -2600,13 +2628,13 @@
  "Does religion relate to intensity?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Does the elector's own surname tell the same story?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Does the gap hold inside a part?": {
@@ -2631,14 +2659,14 @@
  "Does urbanisation matter?": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/districts/"
   ]
  },
  "Does volume relate to intensity?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Does women's literacy relate to deletions?": {
@@ -2650,7 +2678,7 @@
  "Does women's literacy relate to removals?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Download the PDF": {
@@ -2670,10 +2698,10 @@
  "Downloads": {
   "kind": "markup",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -2740,13 +2768,13 @@
  "Each bar is one booth in {name}. Open the table below for booth numbers.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Each booth is counted once. Party names in the booth results were matched to the declared seat results, and the booth totals add up to the declared result in all 40 Lok Sabha seats. Religion and caste are guessed from names, so religion is given as a range and caste under two classifications, and only what holds under both is reported. A second program, written separately, recomputes every headline figure from the lists before anything is published.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Each constituency name opens it in the part explorer.": {
@@ -2830,7 +2858,7 @@
  "Each of Bihar's 38 districts, with its removals per 100 electors set against its income, urban share, women's literacy, early marriage, density and booth size.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Each panel sets the district deletion rate against one characteristic. r is the linear correlation and ρ the rank correlation, and both run from −1 to 1.": {
@@ -2897,13 +2925,13 @@
  "Economic": {
   "kind": "markup",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Economic analysis": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Election Commission of India, declared results": {
@@ -2915,9 +2943,9 @@
  "Elections": {
   "kind": "markup",
   "pages": [
-   "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -2934,14 +2962,14 @@
  "Electoral": {
   "kind": "markup",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
  "Electoral patterns": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Electoral stakes": {
@@ -3009,7 +3037,7 @@
  "Electors per booth, 2025": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/districts/"
   ]
  },
@@ -3064,7 +3092,7 @@
  "Equal share": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -3077,7 +3105,7 @@
  "Every booth, from most to fewest names removed": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Every border constituency": {
@@ -3089,7 +3117,7 @@
  "Every constituency and every booth, with its removals against its margin.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Every constituency lost more names than its 2023 winning margin, and in {list} the names struck off outnumber every valid vote cast in 2023. The next election will be held on the revised roll.": {
@@ -3132,7 +3160,7 @@
  "Every name Bihar's Special Intensive Revision struck off the roll, counted down to the polling booth and set against the margin by which each seat was won. Only totals are shown, never names.": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Every one of the five lost more names than its 2023 winning margin. {seat}, won by {margin} votes, lost {lost}.": {
@@ -3141,10 +3169,16 @@
    "/assets/faq/hyd.js"
   ]
  },
+ "Every page opens with what the data shows and ends with its limits and its own questions. The method pages give every source.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Every phase 1 removal has a reason written against it. {shifted} were marked shifted, {dead} dead, {absent} absent and {enrolled} already enrolled elsewhere. Of the {excess} more women than men removed, {exshift} ({exshare}) were marked shifted, and {young} of those marked shifted at ages 18 to 29 are women. Marriage could explain the number but not the places, since districts where more women moved on marriage do not have more young women marked shifted.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Every phase 1 removal has one of four reasons against it. For each reason and age group, this shows the share of those removed who were women. Half would be parity.": {
@@ -3185,6 +3219,7 @@
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -3208,9 +3243,9 @@
  "FAQ": {
   "kind": "markup",
   "pages": [
-   "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -3233,7 +3268,7 @@
  "Female literacy, 2011 (%)": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Few of them.": {
@@ -3289,7 +3324,7 @@
  "Find a constituency or district": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Find a part or locality": {
@@ -3403,7 +3438,7 @@
  "Full method": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
@@ -3416,9 +3451,9 @@
  "Full report": {
   "kind": "markup",
   "pages": [
-   "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -3441,10 +3476,10 @@
  "Full report, PDF": {
   "kind": "markup",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -3468,10 +3503,10 @@
  "Full report, online": {
   "kind": "markup",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -3495,7 +3530,7 @@
  "Gender": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -3508,8 +3543,8 @@
  "General": {
   "kind": "script",
   "pages": [
-   "/",
    "/assets/faq/bihar.js",
+   "/bihar/",
    "/bihar/method/",
    "/bihar/people/",
    "/bihar/results/"
@@ -3518,13 +3553,13 @@
  "Geographic": {
   "kind": "markup",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Geographic patterns": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Going by the surname of the father or husband and comparing with the 2023 caste survey, {both} families are removed at or above their share of the population under both classifications, and {neither} families below it. The two classifications disagree on {disagree}. <a href=\"../people/\">Women, religion, caste</a>.": {
@@ -3554,7 +3589,7 @@
  "Guardian surname (B)": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Guessed from each elector's name, because the roll does not record religion. A separate classification agrees on 99% of names": {
@@ -3665,7 +3700,7 @@
  "Higher values go with fewer removals across the 38 districts (rank correlation {rho}).": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Higher values go with more deletions.": {
@@ -3677,7 +3712,7 @@
  "Higher values go with more removals across the 38 districts (rank correlation {rho}).": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Hindu minus Muslim, within parts": {
@@ -3689,8 +3724,8 @@
  "Hindu names": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
+   "/bihar/explorer/",
    "/hyderabad/",
    "/hyderabad/people/"
   ]
@@ -3698,7 +3733,7 @@
  "Hindu names among the removed": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Hindu-name": {
@@ -3788,7 +3823,7 @@
  "How are constituencies spread by intensity?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How are part rates spread?": {
@@ -3800,7 +3835,7 @@
  "How are removals spread across booths?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How can caste be read from surnames?": {
@@ -3812,25 +3847,25 @@
  "How did NDA and INDIA seats compare?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How did each constituency move between phases?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How do all 38 districts rank?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How do alliances compare across elections?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How do deletions compare with the 2023 result?": {
@@ -3842,19 +3877,19 @@
  "How do districts compare per booth?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How do removals compare with margins?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How do reserved seats compare?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How do the four groups compare in size?": {
@@ -3866,38 +3901,38 @@
  "How do the parties' seats compare?": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/method/"
   ]
  },
  "How do the reasons change with age?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How does each district compare with the census?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How does intensity vary by border region?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How does intensity vary by border?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How does it vary by region?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How does removal rise with age?": {
@@ -3909,7 +3944,7 @@
  "How does the Muslim share of removals compare with the population?": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/method/"
   ]
  },
@@ -3922,7 +3957,7 @@
  "How large were the removals against the vote?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How many cases per slot?": {
@@ -3958,13 +3993,13 @@
  "How many names each booth lost": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "How many names were removed, and where?": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/method/"
   ]
  },
@@ -4002,7 +4037,7 @@
  "How many were removed in each phase?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How many were summoned?": {
@@ -4014,7 +4049,7 @@
  "How much can surnames tell?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "How much did the 2002 link matter?": {
@@ -4082,7 +4117,7 @@
  "How the 243 constituencies are spread, from the lightest to the heaviest removals.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "How the Bihar SIR figures are built, where they come from, how the lists were prepared, and the questions the analysis answers.": {
@@ -4094,7 +4129,7 @@
  "How the figures are built": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
@@ -4116,6 +4151,12 @@
    "/india/method/"
   ]
  },
+ "How to read it": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "How was the load spread over the days?": {
   "kind": "script",
   "pages": [
@@ -4135,6 +4176,7 @@
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -4248,6 +4290,24 @@
    "/bihar/results/"
   ]
  },
+ "In 2025 and 2026 the Election Commission revised the electoral rolls of most of India house by house, in what it called a Special Intensive Revision. Every elector had to fill in a fresh form, and names were left off the new rolls. This site counts those names from the lists and figures the Commission and the states have published, and sets out who was removed, where, and on what recorded reason.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "In 2025 and 2026 the Election Commission revised the electoral rolls of most of India, and crores of names were left off. This site counts who was removed, where, and on what recorded reason, from the published lists and figures.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "In 2025 and 2026 the Election Commission revised the electoral rolls of {s} states and union territories house by house, in what it called a Special Intensive Revision. Every elector had to fill in a fresh form, and {r} names were left off the draft rolls. This site counts those names from the lists and figures the Commission and the states have published, and sets out who was removed, where, and on what recorded reason.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "In all {count} constituencies. {seat} lost {times} times its 2023 margin; in {list} the names struck off outnumber every valid vote cast in 2023.": {
   "kind": "script",
   "pages": [
@@ -4299,7 +4359,7 @@
  "In most seats more names were removed than the margin that decided the seat. In {tookOver} of the {took} seats the NDA took from INDIA, more names were removed than the NDA won by.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "In none of the three fates": {
@@ -4317,7 +4377,7 @@
  "In seats that changed hands, did removals exceed margins?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "In the {n} states with a final roll, the rolls grew back by at most {m} of what the drafts removed, and that rise includes new voters.": {
@@ -4335,7 +4395,7 @@
  "In {n15} seats the names removed equal more than 15% of the votes polled in 2025, and in {n20} more than a fifth. {top} is highest, at {share}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "In {names} they exceed the total valid votes cast in 2023.": {
@@ -4377,13 +4437,13 @@
  "In {over} of {seats} constituencies, including {ndaOver} of the NDA's {nda} wins and {tookOver} of the {took} seats the NDA took from INDIA.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "In {over} of {seats} seats the names removed outnumber the 2025 winning margin, in {five} of them by five times or more. The NDA won {nda} of those seats.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "In {over} of {seats} seats the revision removed more names than the 2025 winning margin. <a href=\"../results/\">Elections</a>.": {
@@ -4401,13 +4461,13 @@
  "In {seats} the removals exceed the runner-up's entire vote.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "In {tookOver} of the {took} seats INDIA held in 2020 and lost in 2025, more names were removed than the NDA won by. In the middle seat of that group the removals were {multiple} times the margin. The chart shows the fifteen seats where the multiple is largest.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Inside each constituency, the booths that voted NDA in 2024 lost more names than those that voted INDIA.": {
@@ -4437,7 +4497,7 @@
  "Interior": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/border/",
    "/bihar/districts/"
   ]
@@ -4445,7 +4505,7 @@
  "Interior ({n})": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Interquartile ranges: {list}.": {
@@ -4493,7 +4553,7 @@
  "It should publish the reason for each phase 2 removal, which the lists leave out, and the basis for each entry marked absent or already enrolled. It should also publish every claim and objection filed after the draft roll, booth by booth, with the outcome of each.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "It shows no relationship with {list}.": {
@@ -4565,7 +4625,7 @@
  "Lead, points": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Left off": {
@@ -4725,13 +4785,13 @@
  "Marked absent": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Marked already enrolled": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Marriage migration by district": {
@@ -4792,7 +4852,7 @@
  "Men": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/",
    "/hyderabad/explorer/",
    "/hyderabad/people/"
@@ -4801,13 +4861,13 @@
  "Men among the removed": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Men removed": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/india/"
   ]
  },
@@ -4820,9 +4880,9 @@
  "Method": {
   "kind": "markup",
   "pages": [
-   "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -4847,7 +4907,7 @@
  "Methods": {
   "kind": "markup",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
@@ -4884,7 +4944,7 @@
  "More questions and answers": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
@@ -4927,7 +4987,7 @@
  "Most women are listed as Devi, Kumari or Khatun, which says little about caste, so the surname of the father or husband is more telling. Both are shown.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Most women carry Devi, Kumari or Khatun in place of a surname, and none of the three says anything about caste. They are set aside, and caste is read first from the surname of the father or husband.": {
@@ -4945,8 +5005,8 @@
  "Muslim": {
   "kind": "script",
   "pages": [
-   "/",
    "/assets/faq/bihar.js",
+   "/bihar/",
    "/bihar/method/",
    "/bihar/people/"
   ]
@@ -4954,8 +5014,8 @@
  "Muslim names": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
+   "/bihar/explorer/",
    "/hyderabad/",
    "/hyderabad/people/"
   ]
@@ -4971,13 +5031,13 @@
  "Muslim names among the removed": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Muslim names among the removed, by name classification": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Muslim names are a smaller share of those struck off than of the roll in all five seats, by {lo} to {hi} points, so where Muslim electors lean to AIMIM, the removals take fewer of its voters than of its opponents'.": {
@@ -4989,25 +5049,25 @@
  "Muslim names, % of removals": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Muslim names, % of removals (low)": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Muslim names, counting unclassified": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Muslim names, high": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Muslim names, high %": {
@@ -5019,7 +5079,7 @@
  "Muslim names, low": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Muslim names, low %": {
@@ -5050,14 +5110,14 @@
  "Muslim share of population, 2011": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
  "Muslim share of population, carried forward to 2025": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -5112,7 +5172,7 @@
  "Muslim-name share of removals (range)": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -5137,7 +5197,7 @@
  "Muslim-name shares of removals are highest in seats won by neither alliance, most of them in Seemanchal.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "NDA minus INDIA": {
@@ -5149,7 +5209,7 @@
  "NDA wins: removals exceed margin": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "NDA-led minus INDIA-led booths, seat by seat": {
@@ -5191,7 +5251,7 @@
  "Names entered as absent alone exceed the 2025 margin in {a} of {m} seats, and names entered as already enrolled in {e}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Names left off each state's draft roll, as a share of the votes polled in that state in the 2024 Lok Sabha election.": {
@@ -5221,28 +5281,28 @@
  "Names or votes": {
   "kind": "script",
   "pages": [
-   "/",
-   "/bihar/"
+   "/bihar/",
+   "/bihar/explorer/"
   ]
  },
  "Names removed": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
+   "/bihar/explorer/",
    "/bihar/results/"
   ]
  },
  "Names removed against the margins": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Names removed as % of votes polled in 2025": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Names removed at the draft roll, by reason": {
@@ -5254,7 +5314,7 @@
  "Names removed in both phases, beside the winning margins in 2020 and 2025.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Names removed in each seat set against the margin by which the seat was won in 2025.": {
@@ -5266,38 +5326,38 @@
  "Names removed in the booth": {
   "kind": "script",
   "pages": [
-   "/",
-   "/bihar/"
+   "/bihar/",
+   "/bihar/explorer/"
   ]
  },
  "Names removed per booth": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Names removed ÷ 2025 margin (log scale)": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Names removed ÷ 2025 winning margin": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Names removed ÷ NDA's 2025 margin (log scale)": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Names removed ÷ winning margin": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Names removed, % of votes polled in 2024": {
@@ -5309,13 +5369,13 @@
  "Names removed, as a share of all votes polled in 2025": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Names removed, both phases": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Names removed, lakh": {
@@ -5327,7 +5387,7 @@
  "Names removed, phase 1": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Names struck off": {
@@ -5381,13 +5441,13 @@
  "Names the lists classify as Muslim are {lo} of removals, and {hi} if every unclassified name were Muslim, against 16.87% of the population in 2011 and 17.70% in the 2023 caste survey. In {districts} districts of south and central Bihar the classified Muslim share alone is more than a point above the census share.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Names unclassified": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "National Family Health Survey (NFHS-5), district fact sheets for Bihar, fielded in 2019-20: women aged 15 to 49 who are literate, and women aged 20 to 24 married before 18": {
@@ -5449,7 +5509,7 @@
  "No caste information": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "No caste information (Devi, Kumar…)": {
@@ -5467,7 +5527,7 @@
  "No clear relationship across the 38 districts (rank correlation {rho}).": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "No clear relationship.": {
@@ -5578,7 +5638,7 @@
  "Not in either list": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -5627,7 +5687,7 @@
  "Of all removals were in border seats": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Of the close seats, {list} fall outside the estimates for that reason, and both could have turned on a lean of just over half of the removed.": {
@@ -5651,7 +5711,7 @@
  "Of the removed are women": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Of the rolls struck off": {
@@ -5708,6 +5768,12 @@
    "/india/"
   ]
  },
+ "Only counts are published here. No name, EPIC number or address appears anywhere on this site.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Only counts are published. No name, EPIC number or address appears anywhere on this site.": {
   "kind": "script",
   "pages": [
@@ -5743,20 +5809,20 @@
  "Overview": {
   "kind": "markup",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
  "Own surname (B)": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "PDF": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
@@ -5771,7 +5837,7 @@
  "Part I covers Bihar as a whole and Part II gives each of the 38 districts a chapter. It ends with what the Election Commission should do.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Part I on the five constituencies together, Part II a chapter for each, and what the Election Commission should do.": {
@@ -5973,10 +6039,10 @@
  "Per 100": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/results/",
    "/india/"
   ]
@@ -5999,7 +6065,7 @@
  "Per booth": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/districts/",
    "/bihar/results/"
   ]
@@ -6007,7 +6073,7 @@
  "Per-capita district product, 2021-22 (₹)": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/districts/"
   ]
  },
@@ -6032,7 +6098,7 @@
  "Phase 1": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Phase 1 (Bihar)": {
@@ -6050,25 +6116,25 @@
  "Phase 1 removals": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Phase 1 removed {p1} names before the draft roll of 1 August 2025. Phase 2 removed {p2} more before the final roll, and it was uneven, ranging from {lo}% of the phase 1 count in {loSeat} to {hi}% in {hiSeat}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Phase 1, before the draft roll": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Phase 2": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Phase 2 ({n} states)": {
@@ -6092,26 +6158,26 @@
  "Phase 2 as % of phase 1": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/border/"
   ]
  },
  "Phase 2 as a share of phase 1": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Phase 2 as a share of phase 1 was highest in {region} seats.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Phase 2 removals": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Phase 2 removals as a share of phase 1. A higher share means more names came off after the draft roll.": {
@@ -6123,7 +6189,7 @@
  "Phase 2, before the final roll": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Phase 3 ({n} states)": {
@@ -6135,20 +6201,48 @@
  "Phases": {
   "kind": "markup",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Placed in a group": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
+  ]
+ },
+ "Places": {
+  "kind": "markup",
+  "pages": [
+   "/",
+   "/bihar/",
+   "/bihar/border/",
+   "/bihar/districts/",
+   "/bihar/explorer/",
+   "/bihar/faq/",
+   "/bihar/method/",
+   "/bihar/people/",
+   "/bihar/report/",
+   "/bihar/results/",
+   "/hyderabad/",
+   "/hyderabad/explorer/",
+   "/hyderabad/faq/",
+   "/hyderabad/hearings/",
+   "/hyderabad/method/",
+   "/hyderabad/parts/",
+   "/hyderabad/people/",
+   "/hyderabad/report/",
+   "/hyderabad/telangana/",
+   "/india/",
+   "/india/faq/",
+   "/india/method/",
+   "/india/report/"
   ]
  },
  "Points above share of the roll": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Points from median": {
@@ -6166,7 +6260,7 @@
  "Polling booths": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Polling parts": {
@@ -6218,7 +6312,7 @@
  "Possible share of all removals (B)": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Pre-revision roll, Absent-Shifted-Dead list, discrepancy and no-mapping lists": {
@@ -6266,10 +6360,10 @@
  "Questions about this page": {
   "kind": "markup",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/method/",
    "/bihar/people/",
    "/bihar/results/",
@@ -6287,7 +6381,7 @@
  "Questions and answers": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/",
    "/bihar/faq/",
    "/hyderabad/faq/",
@@ -6333,13 +6427,13 @@
  "Rank correlation between a seat's Muslim-name share of removals and its removal rate: {rho}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Rank correlation between a seat's removal rate and women's share of its removals: {rho}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Rank correlations across parts, within each constituency.": {
@@ -6375,20 +6469,20 @@
  "Read from the surname of the father or husband and set against the 2023 Bihar caste survey, {up} families are removed at or above their share of the population under both classifications, and {down} families below it.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Read online": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
  "Reason entered by the officer": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/results/"
   ]
  },
@@ -6401,7 +6495,7 @@
  "Reasons": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Reasons are read as entered": {
@@ -6426,7 +6520,7 @@
   "kind": "script",
   "pages": [
    "/hyderabad/",
-   "/",
+   "/bihar/",
    "/bihar/people/",
    "/hyderabad/method/",
    "/hyderabad/people/"
@@ -6444,10 +6538,16 @@
    "/assets/faq/bihar.js"
   ]
  },
+ "Religion and caste are guessed from names, so they are given as ranges.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Religion and surnames of the removed, counted by booth from the same lists. No individual record is kept.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Religion is guessed from each elector's name, because the roll does not record it. A second classification, made separately, agrees on 99% of names.": {
@@ -6465,7 +6565,7 @@
  "Religion is guessed from names, because the roll does not record it.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Religion is guessed from names. Age and sex come from the roll.": {
@@ -6489,7 +6589,7 @@
  "Religious composition": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removal rate against the share of residents born in another state": {
@@ -6525,19 +6625,19 @@
  "Removals against the 2025 margin": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Removals against the combined margins": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removals below margin": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removals by constituency, phase and sex": {
@@ -6549,7 +6649,7 @@
  "Removals by constituency, phase and sex: Chief Electoral Officer, Bihar.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removals by polling booth": {
@@ -6561,25 +6661,25 @@
  "Removals by polling booth come from the phase 1 deletion lists that the Chief Electoral Officer, Bihar published with the draft roll of 1 August 2025, for all 77,837 booths.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
- "Removals come from the Chief Electoral Officer's SIR deletion lists: phase 1 with the draft roll of 1 August 2025, and phase 2 before the final roll. Booth figures cover phase 1 only, because only phase 1 was listed by booth. Constituency figures include both phases. Removals per 100 electors are divided by the constituency's 2025 electorate, and margins are the declared 2025 Assembly results. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA is the RJD, INC, the Left parties, VIP and IIP. Only totals are published, never names or EPIC numbers. <a href=\"faq/\">FAQ</a> · <a href=\"method/\">Method</a>.": {
+ "Removals come from the Chief Electoral Officer's SIR deletion lists: phase 1 with the draft roll of 1 August 2025, and phase 2 before the final roll. Booth figures cover phase 1 only, because only phase 1 was listed by booth. Constituency figures include both phases. Removals per 100 electors are divided by the constituency's 2025 electorate, and margins are the declared 2025 Assembly results. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA is the RJD, INC, the Left parties, VIP and IIP. Only totals are published, never names or EPIC numbers. <a href=\"../faq/\">FAQ</a> · <a href=\"../method/\">Method</a>.": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Removals exceed margin": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removals per 100 electors in the seats each party won in 2025. Seats won by neither alliance, mostly in Seemanchal, lost the most.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removals per 100 electors in the seats each party won in 2025: {parties}.": {
@@ -6603,28 +6703,28 @@
  "Removals placed by classification A": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removals placed by strict classification B": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removals range from {lo} per 100 electors in {loSeat} to {hi} in {hiSeat}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removed": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/people/",
    "/bihar/results/",
    "/india/"
@@ -6639,7 +6739,7 @@
  "Removed = margin": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removed after": {
@@ -6670,27 +6770,27 @@
  "Removed electors with this guardian surname": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removed electors, guardian surname": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removed in phase 1 {p1}, removed in phase 2 {p2}, on the 2025 roll {roll}": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Removed per 100 electors": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/india/",
    "/india/method/"
   ]
@@ -6710,13 +6810,13 @@
  "Removed per 100, border seats": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removed per 100, interior": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Removed who would have voted": {
@@ -6728,8 +6828,8 @@
  "Removed ÷ margin": {
   "kind": "script",
   "pages": [
-   "/",
-   "/bihar/"
+   "/bihar/",
+   "/bihar/explorer/"
   ]
  },
  "Removed, % of votes polled in 2024": {
@@ -6741,21 +6841,31 @@
  "Research": {
   "kind": "markup",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
- "Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers.": {
+ "Research by <a href=\"https://pinpointventures.in/\">PinPoint Ventures</a>, a development research and evaluation practice. The tables behind the charts can be downloaded from the Downloads menu on each analysis.": {
   "kind": "markup",
   "pages": [
+   "/"
+  ]
+ },
+ "Research by <a href=\"https://pinpointventures.in/\">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.": {
+  "kind": "markup",
+  "pages": [
+   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
    "/bihar/report/",
    "/bihar/results/",
+   "/hyderabad/",
+   "/hyderabad/explorer/",
    "/hyderabad/faq/",
    "/hyderabad/hearings/",
    "/hyderabad/method/",
@@ -6767,18 +6877,6 @@
    "/india/faq/",
    "/india/method/",
    "/india/report/"
-  ]
- },
- "Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers. · <a href=\"bihar/\">Booth explorer</a> · <a href=\"bihar/faq/\">Questions and answers</a>": {
-  "kind": "markup",
-  "pages": [
-   "/"
-  ]
- },
- "Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers. · <a href=\"explorer/\">Part explorer</a> · <a href=\"faq/\">Questions and answers</a>": {
-  "kind": "markup",
-  "pages": [
-   "/hyderabad/"
   ]
  },
  "Research questions": {
@@ -6839,7 +6937,7 @@
  "SC seats lost {sc} per 100 electors, ST seats {st}, general seats {gen}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "SC share": {
@@ -6852,6 +6950,12 @@
   "kind": "script",
   "pages": [
    "/india/"
+  ]
+ },
+ "SIR analysis for India: who was taken off the electoral rolls": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "SIR deletions in Bihar's 38 districts against income, urbanisation, women's literacy, early marriage, density and booth size.": {
@@ -6887,13 +6991,13 @@
  "Search constituencies": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Search constituency or district": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Search part number or locality": {
@@ -6929,7 +7033,7 @@
  "Seats": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/districts/",
    "/bihar/results/"
   ]
@@ -6949,7 +7053,7 @@
  "Seats by 2025 winner": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats by alliance": {
@@ -6961,61 +7065,61 @@
  "Seats grouped by the alliance that won in 2020 and in 2025, split by whether the removals exceed the 2025 margin.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats heavy in phase 1 tended to be heavy in phase 2 as well (rank correlation {rho}).": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats heavy in phase 1 tended to be lighter in phase 2 (rank correlation {rho}).": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats taken from INDIA where removals exceed the NDA margin": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats taken from INDIA: removals exceed NDA margin": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats that changed alliance, 2020 to 2025": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats that lost many names in phase 1 were no more likely to lose many in phase 2 (rank correlation {rho}).": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats that lost more names also lost more per elector (rank correlation {rho}), so the large totals do not come from large constituencies alone.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats the NDA won in 2020 lost {nda} names per 100 electors, and seats INDIA won lost {india}. The order stays the same when seats are labelled by the 2024 or 2025 result. Inside the same seat, booths the NDA led in 2024 lost {gap} more names each.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats the NDA won in 2020 lost {nda} names per 100 electors, and seats INDIA won lost {india}. Who won a seat says nothing about how its removed electors voted, which is why the page leans on the comparison with margins.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats where deletions exceed the margin": {
@@ -7033,7 +7137,7 @@
  "Seats where removals exceed the 2025 margin": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats where the net fall exceeds the margin": {
@@ -7051,7 +7155,7 @@
  "Seats where these removals exceed the 2025 margin": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Seats where they exceed all valid votes cast": {
@@ -7075,7 +7179,7 @@
  "Seats: removals exceed 2025 margin": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Second": {
@@ -7093,7 +7197,7 @@
  "Seemanchal, on the Nepal and Bengal borders, carries the largest Muslim shares of removals, as it does of population.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Sex": {
@@ -7165,7 +7269,7 @@
  "Share of each region's booths that lost more than 200 names.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Share of each seat's roll left off the draft. The five Old City seats are in red.": {
@@ -7189,7 +7293,7 @@
  "Share of removals ÷ share of population": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Share of the fall made up": {
@@ -7225,14 +7329,14 @@
  "Shares of the removals each classification could place, beside the 2023 survey (Hindu castes; Muslims as one group).": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Shifted": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
+   "/bihar/explorer/",
    "/bihar/people/",
    "/bihar/results/"
   ]
@@ -7240,7 +7344,7 @@
  "Shifted or absent": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Shifted, absent or other": {
@@ -7262,12 +7366,14 @@
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
    "/bihar/report/",
    "/bihar/results/",
    "/hyderabad/",
+   "/hyderabad/explorer/",
    "/hyderabad/faq/",
    "/hyderabad/hearings/",
    "/hyderabad/method/",
@@ -7284,17 +7390,17 @@
  "Slides": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
  "Slides, PowerPoint": {
   "kind": "markup",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -7348,7 +7454,7 @@
  "Sorted by names removed as a multiple of the 2025 margin. Click a column heading to re-sort, and a constituency name to open its booths in the explorer.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Source": {
@@ -7396,7 +7502,7 @@
  "Spans groups": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -7577,7 +7683,7 @@
  "The 2024 Lok Sabha result by booth is from Form 20, and the 2020 and 2025 Assembly results are from the Election Commission of India.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The 2024 booth leaders come from Form 20, the booth-level count, and the top two parties in every Lok Sabha seat match the declared result. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, with the VIP in 2020. INDIA is the RJD, INC, the three Left parties, the VIP from 2024, and the IIP. Everything else is Other. <a href=\"../method/\">Method</a>.": {
@@ -7637,13 +7743,13 @@
  "The NDA's 202 wins": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The NDA's combined winning margin in its 202 wins, against {removed} names removed": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The Nepal and Bengal belts, and Seemanchal within them, also send the most migrants out of Bihar, seasonally and for good, and a migrant who has moved away is rightly marked \"shifted\". A higher rate on the border fits that explanation as well as any other. The data record that a name was removed, and nothing about why.": {
@@ -7655,7 +7761,7 @@
  "The Special Intensive Revision of India's electoral rolls, booth by booth. Bihar 2025: 69 lakh names removed across 243 constituencies, set against the margins by which each seat was won.": {
   "kind": "markup",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The adult figures are population projections, which count people where they live. A state that draws migrants counts them as residents while many are still registered to vote in their home states, so its roll looks short.": {
@@ -7746,7 +7852,7 @@
  "The census share lies inside the range in {inside} of {districts} districts. The open dots carry each district's share forward to 2025 at its growth rates from 2001 to 2011, and they lie inside it in {pin}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The chart library did not load, so use the table below, which has the same figures.": {
@@ -7758,7 +7864,7 @@
  "The classifications disagree on {split}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The commonest ground was that the elector could not be traced to the last intensive revision, {p} of flags. Names that did not match came next.": {
@@ -7776,14 +7882,14 @@
  "The criticisms put to this analysis, answered from the lists.": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
  "The dashboard data did not load ({error}). Please reload the page.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The dashboard data did not load ({msg}). Please reload the page.": {
@@ -7795,7 +7901,7 @@
  "The dashed line is where removals equal the winning margin. Seats above it lost more names than they were won by, and there are {over} of them out of {seats}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The data for this page did not load ({msg}). If you opened the file directly, serve the folder with <code>python3 -m http.server</code> and open it from there.": {
@@ -7927,7 +8033,7 @@
  "The full report": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
@@ -8038,7 +8144,7 @@
  "The lists record how many names were removed and where, the sex, age and name of each person removed, and the reason the officer gave for each phase 1 removal. That is enough to set the removals against the margins that decided each seat. The lists cannot say whether a removal was right or how anyone voted.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The lists show how many electors were struck off and from which parts, with each person's age and sex, a religion guessed from the name, and whether they link to the 2002 roll. They cannot show whether any single removal was right. <a href=\"../faq/\">Questions and answers</a>.": {
@@ -8107,6 +8213,12 @@
    "/india/"
   ]
  },
+ "The pages can be read in English, Hindi, Urdu and Telugu from the menu at the top. The translations are awaiting review, and where they differ the English page is correct.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "The party that led each booth": {
   "kind": "markup",
   "pages": [
@@ -8158,7 +8270,7 @@
  "The reason, sex and age of every phase 1 removal, counted by booth from the deletion list. No individual record is kept.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The reasons recorded for the names removed from the electoral rolls in the Special Intensive Revision, in every state and union territory that has published a draft roll: dead, shifted or absent, and enrolled twice.": {
@@ -8201,6 +8313,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "The revision decides who can vote. The lists behind it are public, but they are hard to read. They come as thousands of files, one for each polling part, often scanned, in the language of the state. The totals the Commission announces do not say who was removed, how old they were, or whether the removals in a seat were larger than the margin that decided it.": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "The revision removed {r} names across {s} states and union territories at the draft, {p} of every 100 electors.": {
@@ -8254,13 +8372,13 @@
  "The surname of the father or husband listed with each removed elector. {s1}, {s2} and {s3} are the commonest, and most surnames are shared by several castes. The Caste tab has more.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The ten districts that lost the most names account for {share} of all removals. The heaviest districts lost more than twice as many names per elector as the lightest.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The three reasons, by phase": {
@@ -8284,7 +8402,7 @@
  "The typical booth lost {median} names, and {booths} booths lost more than 200 each.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "The untraceable entries in particular record only that an officer did not find someone.": {
@@ -8335,6 +8453,12 @@
    "/assets/faq/bihar.js"
   ]
  },
+ "This site reads those lists and figures and turns them into counts. It shows where removals were heaviest, whether women were removed more than men, and what reason was written against the names. A reason on a list is what the officer wrote down, and nobody checked it. The counts can show where removals fell and on whom. They cannot show why any one name was removed, or whether that removal was right.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "This test asks one question, whether the removals moved votes between the alliances. It cannot say whether each name was rightly removed, and a voter wrongly removed has lost a vote whichever way it would have gone. A small lean either way, or harm spread evenly across parties, would not show here. Five years separate the two elections, in which LJP rejoined the NDA, VIP changed sides and Jan Suraaj entered. Both years come from the Election Commission's candidate-wise results. In both, NDA means BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA means RJD, Congress, the three Left parties, VIP and IIP.": {
   "kind": "script",
   "pages": [
@@ -8368,7 +8492,7 @@
  "Two phases": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Two reasons, set against the records": {
@@ -8380,20 +8504,20 @@
  "Unclassified": {
   "kind": "script",
   "pages": [
-   "/",
-   "/bihar/"
+   "/bihar/",
+   "/bihar/explorer/"
   ]
  },
  "Under B, each bar starts at the names placed in the group and ends where it would be if every unplaced name belonged to it.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Under both surname classifications, {up} families are removed at or above their share of the population and {down} below it.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Under seven Election Commission rules. The commonest were {r1} ({p1}), {r2} ({p2}) and {r3} ({p3}). A flag says the paperwork did not line up, and says nothing about whether the elector was entitled to vote.": {
@@ -8472,7 +8596,7 @@
  "Urban population, 2011 (%)": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/districts/"
   ]
  },
@@ -8613,19 +8737,19 @@
  "Were women a larger share in either phase?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Were women over-removed everywhere?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Were women over-removed in every district?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Were women removed more than men?": {
@@ -8637,7 +8761,7 @@
  "Were women removed out of proportion?": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/method/"
   ]
  },
@@ -8685,28 +8809,34 @@
    "/india/method/"
   ]
  },
+ "What is here": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "What is the caste breakdown?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "What is the gender split?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "What is the possible range for each group?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "What is the religious split?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "What moves with the deletion rate": {
@@ -8736,13 +8866,13 @@
  "What reasons were entered?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "What should the Election Commission publish?": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/"
   ]
  },
@@ -8755,13 +8885,13 @@
  "What the lists show": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "What this shows and what it does not": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/hyderabad/",
    "/bihar/method/",
    "/hyderabad/method/"
@@ -8770,7 +8900,7 @@
  "What was the overall scale?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Where a reason was given, {dead} were entered as dead, {sao} as moved, not found or other, and {dup} as enrolled more than once. States reported their reasons in different ways, and the method page sets out how each was counted.": {
@@ -8788,13 +8918,13 @@
  "Where are the heaviest booths concentrated?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Where are the heaviest booths?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Where are the heaviest parts?": {
@@ -8806,7 +8936,7 @@
  "Where did the NDA take seats by less than the removals?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Where do removals exceed the whole vote?": {
@@ -8830,7 +8960,7 @@
  "Where does the Muslim share run above the census?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Where each row comes from": {
@@ -8866,7 +8996,7 @@
  "Where was the second pass heaviest?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Which ages make up the removed?": {
@@ -8884,20 +9014,20 @@
  "Which caste groups carried the removals?": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/method/"
   ]
  },
  "Which districts have the highest shares?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Which districts have the most absent entries?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Which districts lost the most names?": {
@@ -8909,37 +9039,37 @@
  "Which districts lost the most per elector?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Which districts saw the heaviest second pass?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Which districts show the widest gap?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Which groups are over- and under-represented?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Which guardian surnames are commonest?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Which guardian surnames are most common?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Which names were struck off more?": {
@@ -8963,7 +9093,7 @@
  "Which regions lost more than their size?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Which rule sent electors to a hearing": {
@@ -8988,7 +9118,7 @@
  "Which seats were decided by the smallest margins against the removals?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Who Bihar's SIR removed, with women set against their share of the roll in every district, religion guessed from names as a range against the census, and caste read from surnames under two classifications.": {
@@ -9006,7 +9136,7 @@
  "Who is marked shifted, by age?": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Who is on the rolls?": {
@@ -9015,11 +9145,17 @@
    "/hyderabad/"
   ]
  },
+ "Who made it": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Who was removed": {
   "kind": "markup",
   "pages": [
-   "/bihar/",
-   "/bihar/border/"
+   "/bihar/border/",
+   "/bihar/explorer/"
   ]
  },
  "Who was struck off, by age?": {
@@ -9046,6 +9182,12 @@
    "/hyderabad/method/"
   ]
  },
+ "Who was taken off India's electoral rolls": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Whole constituency": {
   "kind": "script",
   "pages": [
@@ -9055,7 +9197,7 @@
  "Whole state": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Why a name was struck": {
@@ -9137,6 +9279,12 @@
    "/assets/faq/hyd.js"
   ]
  },
+ "Why this site exists": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Why were the names removed?": {
   "kind": "script",
   "pages": [
@@ -9194,8 +9342,8 @@
  "Women": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
+   "/bihar/explorer/",
    "/hyderabad/",
    "/hyderabad/explorer/",
    "/hyderabad/people/"
@@ -9204,16 +9352,16 @@
  "Women %": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
    "/bihar/border/",
+   "/bihar/explorer/",
    "/bihar/people/"
   ]
  },
  "Women aged 15 to 49 who are literate, 2019-20 (%)": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/districts/"
   ]
  },
@@ -9226,7 +9374,7 @@
  "Women among the removed": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/india/",
    "/india/method/"
   ]
@@ -9246,7 +9394,7 @@
  "Women among those marked shifted": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Women and men": {
@@ -9264,19 +9412,19 @@
  "Women are the majority of the removed in every region.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Women are the majority of those removed in every region.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Women are {fem} of those removed and {roll} of the roll they were removed from. Their share of the removed is above their share of the roll in {over} of {districts} districts. The roll records sex, so this needs no guessing.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Women are {share} of those removed and {roll} of the roll they were removed from, and their share of the removed is higher than their share of the roll in {over} of {districts} districts. The roll records sex, so this needs no guessing. Phase 1 removed {xs} more women than men, and {xs_shifted} of that difference were marked shifted. Among those marked shifted at ages 18 to 29, {young} are women. Marriage could account for that number but not for the districts where it falls. The lists do not show whether any of these women were enrolled again where they now live, and any who were not have lost the vote.": {
@@ -9306,7 +9454,7 @@
  "Women are {y} of those aged 18 to 29 marked shifted, and about half of those aged 50 and over.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Women deleted %": {
@@ -9330,7 +9478,7 @@
  "Women removed": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/india/"
   ]
  },
@@ -9373,7 +9521,7 @@
  "Women were {f1} of phase 1 removals and {f2} of phase 2.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Women who moved on marriage in the ten years to 2011, % of women": {
@@ -9427,7 +9575,7 @@
  "Women's share of removals by the alliance that won the seat in 2025: {list}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Women's share of removals in each group of seats.": {
@@ -9439,7 +9587,7 @@
  "Women's share of removals minus share of population (points)": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Women's share of removals, and the range for the Muslim-name share. The low end leaves out unclassified names and the high end counts all of them as Muslim.": {
@@ -9481,13 +9629,13 @@
  "Women, % of population (2011)": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Women, % of removals": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -9513,7 +9661,7 @@
  "Women, % of those marked shifted": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Women, % of those struck off": {
@@ -9531,15 +9679,15 @@
  "Women, and the religion the booth lists assign to each name. A name left unclassified could belong to either group.": {
   "kind": "markup",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "Women, religion, caste": {
   "kind": "markup",
   "pages": [
-   "/bihar/",
    "/bihar/border/",
    "/bihar/districts/",
+   "/bihar/explorer/",
    "/bihar/faq/",
    "/bihar/method/",
    "/bihar/people/",
@@ -9580,7 +9728,7 @@
  "Yes. Women are {fem} of the removed against {roll} of the roll, over-represented in {over} of {districts} districts.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "Yes. Women are {share} of those removed and {roll} of the roll they were removed from. Their share of the removed is higher than their share of the roll in {over} of {districts} districts. Sex is recorded on the roll. <a href=\"../people/\">Women, religion, caste</a>.": {
@@ -9628,7 +9776,7 @@
  "constituencies lost more names in the revision than the margin by which they were won in 2025. That includes {a} of the {b} seats the NDA won.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "constituencies on a border": {
@@ -9652,7 +9800,7 @@
  "e.g. Gopalganj": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "e.g. {place}": {
@@ -9761,19 +9909,19 @@
  "names per booth, and {n} booths lost over 200": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "names removed from Bihar's roll: {p1} before the draft roll of 1 August 2025 and {p2} more before the final roll. That is {rate} for every 100 electors on the 2025 roll, and as many as {max} in a single constituency.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "names removed, both phases": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "no 2002 linkage in this file": {
@@ -9785,7 +9933,7 @@
  "no caste information": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -9805,7 +9953,7 @@
  "not listed": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -9854,7 +10002,7 @@
  "of the removed are women": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "of those entered as dead were women": {
@@ -9872,7 +10020,7 @@
  "of those removed were women, against 47.86% of Bihar's population. Women's share of the removed exceeds their share of the population in {a} of {b} districts, by up to {gap} points.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "part {part}": {
@@ -9884,19 +10032,19 @@
  "per 100 electors on the 2025 roll": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "polling booths": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "polling booths lost more than 200 names each, and {n} lost 400 or more.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "population density": {
@@ -9932,13 +10080,13 @@
  "seats lost more names than their 2025 margin": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA's winning margin. In the median such seat, the removals were {x} times the margin.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "seats where INDIA-led booths lost more": {
@@ -9974,7 +10122,7 @@
  "spans groups": {
   "kind": "script",
   "pages": [
-   "/",
+   "/bihar/",
    "/bihar/people/"
   ]
  },
@@ -9987,7 +10135,7 @@
  "the 2025 winning margin": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "the share living in towns": {
@@ -9999,8 +10147,8 @@
  "under 1×": {
   "kind": "script",
   "pages": [
-   "/",
-   "/bihar/"
+   "/bihar/",
+   "/bihar/explorer/"
   ]
  },
  "under 20%": {
@@ -10061,7 +10209,7 @@
  "{ac} {name}, {rate} per 100": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "{ac}, all {n} parts": {
@@ -10079,7 +10227,7 @@
  "{alliance} won (2025)": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{al} (2025)": {
@@ -10116,8 +10264,8 @@
  "{a} of {b}": {
   "kind": "script",
   "pages": [
-   "/",
    "/bihar/",
+   "/bihar/explorer/",
    "/bihar/people/",
    "/bihar/results/",
    "/hyderabad/"
@@ -10144,7 +10292,7 @@
  "{a} to {b}×": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "{a}, {b} and {c} lost the most, {ar}, {br} and {cr} names per 100 electors. {y} and {z} lost the fewest, {yr} and {zr}. The table on this page gives all {n} districts.": {
@@ -10153,7 +10301,7 @@
    "/assets/faq/bihar.js"
   ]
  },
- "{b200} booths lost more than 200 names and {b400} lost 400 or more. Each constituency's booths can be sorted in the <a href=\"../\">explorer</a>.": {
+ "{b200} booths lost more than 200 names and {b400} lost 400 or more. Each constituency's booths can be sorted in the <a href=\"../explorer/\">explorer</a>.": {
   "kind": "script",
   "pages": [
    "/bihar/method/"
@@ -10216,31 +10364,31 @@
  "{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes; {times} times as many names were removed.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner}.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "{district}: {rate} per 100": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{district}: {removed}% of removals, {population}% of population": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{d} ({lo} at least, against {pop})": {
@@ -10249,10 +10397,16 @@
    "/bihar/people/"
   ]
  },
- "{exshift} of the {excess} more women than men removed were marked shifted. For dead, absent and already enrolled, women and men are close to even.": {
+ "{d} of {e} electors struck off in {k} constituencies, counted elector by elector.": {
   "kind": "script",
   "pages": [
    "/"
+  ]
+ },
+ "{exshift} of the {excess} more women than men removed were marked shifted. For dead, absent and already enrolled, women and men are close to even.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/"
   ]
  },
  "{f} (rank correlation {r})": {
@@ -10270,13 +10424,13 @@
  "{gap} more women than men were removed.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{group} {a} and {b}": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{g} ({a} and {b})": {
@@ -10312,37 +10466,37 @@
  "{list} carry the largest shares of the state's removals.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{list} have the highest share entered as absent. An absent entry records only that the elector was not found.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{list} hold the most booths that lost more than 200 names.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{list} lead the state. Figures are removals per 100 electors on the 2025 roll.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{list} lost many times more names than their winning margins.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{list} lost the most names per booth.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{list} of each roll.": {
@@ -10360,19 +10514,19 @@
  "{list} show the widest gap between women's share of the removed and of the roll.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{list}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{list}: the lowest estimate exceeds the 2011 share by more than a point.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{loc}: {rate} deleted": {
@@ -10384,13 +10538,13 @@
  "{lo} to {hi}": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "{lo} to {hi} of removals, against 16.87% of the population in 2011. The share is more than a point above the census share in {districts} districts.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{lo}% to {hi}%": {
@@ -10460,10 +10614,16 @@
    "/hyderabad/parts/"
   ]
  },
- "{n} names removed in phase 1, each with the reason the officer entered. The {p2} removed in phase 2 carry no reason in the lists.": {
+ "{n} names removed across {acs} constituencies and {booths} booths, set against the 2025 election result.": {
   "kind": "script",
   "pages": [
    "/"
+  ]
+ },
+ "{n} names removed in phase 1, each with the reason the officer entered. The {p2} removed in phase 2 carry no reason in the lists.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/"
   ]
  },
  "{n} names, of which {dead} dead, {shifted} shifted and {absent} absent (combined here as {sao}), and {dup} already enrolled.": {
@@ -10524,7 +10684,7 @@
  "{p1} names came off before the draft roll of 1 August 2025 and {p2} more before the final roll. Women were {fem} of all removals.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{party} {rate} ({seats} seats)": {
@@ -10560,13 +10720,19 @@
  "{region} seats lost the most per elector.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{r} across {s} states and union territories at the draft, {p} of every 100 electors. Removals after the draft add {a} more in the {k} states that have reported them.": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
+  ]
+ },
+ "{r} names left off the draft rolls in {s} states and union territories, and the reasons each one recorded.": {
+  "kind": "script",
+  "pages": [
+   "/"
   ]
  },
  "{seat} ({w} over {r} by {m})": {
@@ -10578,7 +10744,7 @@
  "{seat} lost {share} of its phase 1 count again in phase 2.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{seat} to {party}": {
@@ -10596,31 +10762,31 @@
  "{seat}: {names} names, {rate} per 100": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{seat}: {p1} then {p2}": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{seat}: {removed} removed, margin {margin}": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{seat}: {share}% Muslim names, {rate} per 100": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{seat}: {share}% women": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
  "{share} in {name}": {
@@ -10680,10 +10846,10 @@
  "{total} across both phases, or {rate} for every 100 electors on the 2025 roll. Seats range from {lo} per 100 in {loSeat} to {hi} in {hiSeat}.": {
   "kind": "script",
   "pages": [
-   "/"
+   "/bihar/"
   ]
  },
- "{total} across both phases, {p1} in phase 1 and {p2} in phase 2, or {rate} for every 100 electors on the 2025 roll. The rate runs from {low} per 100 in {low_seat} to {high} in {high_seat}. The highest seats are {top}. <a href=\"../\">Explorer</a>.": {
+ "{total} across both phases, {p1} in phase 1 and {p2} in phase 2, or {rate} for every 100 electors on the 2025 roll. The rate runs from {low} per 100 in {low_seat} to {high} in {high_seat}. The highest seats are {top}. <a href=\"../explorer/\">Explorer</a>.": {
   "kind": "script",
   "pages": [
    "/bihar/method/"
@@ -10704,12 +10870,13 @@
  "{total} names removed across both phases, set beside the {electors} electors on the 2025 roll.": {
   "kind": "script",
   "pages": [
-   "/bihar/"
+   "/bihar/explorer/"
   ]
  },
  "{x} crore": {
   "kind": "script",
   "pages": [
+   "/",
    "/assets/faq/india.js",
    "/india/",
    "/india/method/"

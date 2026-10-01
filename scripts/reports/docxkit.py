@@ -86,14 +86,14 @@ class Report:
             h.font.color.rgb = accent if lvl < 3 else INK
             h.paragraph_format.space_before = Pt(14 if lvl == 1 else 10)
             h.paragraph_format.space_after = Pt(4)
-        self.doc.core_properties.author = 'Varna Sri Raman'
-        self.doc.core_properties.last_modified_by = 'Varna Sri Raman'
+        self.doc.core_properties.author = 'PinPoint Ventures'
+        self.doc.core_properties.last_modified_by = 'PinPoint Ventures'
         self._footer()
 
     def _footer(self):
         p = self.doc.sections[0].footer.paragraphs[0]
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        r = p.add_run('Varna Sri Raman · Totals only, never names or EPIC numbers · Page ')
+        r = p.add_run('PinPoint Ventures · Totals only, never names or EPIC numbers · Page ')
         r.font.size = Pt(8)
         r.font.color.rgb = MUTED
         for code in ('begin', None, 'end'):
@@ -112,7 +112,7 @@ class Report:
     # ------------------------------------------------------------ text
     def cover(self, kicker, title, subtitle, lines):
         self.title = title
-        self.html.append('<section class="cover"><p class="kicker">%s</p><h1 class="title">%s</h1><p class="subtitle">%s</p><dl>%s</dl><p class="by">Varna Sri Raman · %s</p></section>' % (
+        self.html.append('<section class="cover"><p class="kicker">%s</p><h1 class="title">%s</h1><p class="subtitle">%s</p><dl>%s</dl><p class="by">PinPoint Ventures · %s</p></section>' % (
             H.escape(kicker), H.escape(title), H.escape(subtitle), ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % (H.escape(v), H.escape(l)) for l, v in lines), date.today().strftime('%-d %B %Y')))
         d = self.doc
         for _ in range(5):
@@ -134,7 +134,7 @@ class Report:
             r = p.add_run(label)
             r.font.size = Pt(11)
         d.add_paragraph()
-        p = d.add_paragraph('Varna Sri Raman · ' + date.today().strftime('%-d %B %Y'))
+        p = d.add_paragraph('PinPoint Ventures · ' + date.today().strftime('%-d %B %Y'))
         p.runs[0].font.color.rgb = MUTED
         self.page_break()
 

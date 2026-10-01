@@ -10,8 +10,10 @@ a translated page shows a one-line note saying so above it.
 
     python3 scripts/reports/web.py bihar hyderabad
 """
+import json
 import os
 import re
+import subprocess
 import sys
 
 ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
@@ -40,25 +42,24 @@ def build(site):
     frag = frag.replace('<h3 id="toc-h">Contents</h3>', '<h2 id="toc-h">Contents</h2>')
     # Print sizes (7.5pt tables) are for the PDF; the page sizes its own.
     frag = re.sub(r'<table style="[^"]*"', '<table', frag)
-    tpl = open(os.path.join(ROOT, site, 'method', 'index.html'), encoding='utf-8').read()
-    head = tpl[:tpl.index('<main id="main">')]
     title, desc, pdf = META[site]
-    head = re.sub(r'<title>.*?</title>', '<title>%s</title>' % title, head, count=1)
-    head = re.sub(r'<meta name="description" content="[^"]*">', '<meta name="description" content="%s">' % desc, head, count=1)
-    head = head.replace(' aria-current="page"', '')
-    head = head.replace('href="../../%s/report/">' % site, 'href="../../%s/report/" aria-current="page">' % site)
-    foot = tpl[tpl.index('<footer>'):tpl.index('</footer>') + len('</footer>')]
-    page = (head +
-            '<main id="main" class="report-page">\n'
-            '<p class="report-lang">The full report is published in English. The same text is in the PDF.</p>\n'
-            '<p class="report-actions" data-i18n-each><a class="btn" href="../../reports/' + pdf + '" download>Download the PDF</a></p>\n'
-            '<article class="report" lang="en" dir="ltr" data-no-i18n>' + frag + '</article>\n'
-            '</main>\n' + foot + '\n<script src="../../assets/sir.js"></script>\n</body>\n</html>\n')
-    open(os.path.join(folder, 'index.html'), 'w', encoding='utf-8').write(page)
+    place = {'india': 'india', 'bihar': 'bihar', 'hyderabad': 'hyd'}[site]
+    meta = {'title': title, 'description': desc, 'place': place, 'report': True}
+    content = ('<main id="main" class="report-page">\n'
+               '<p class="report-lang">The full report is published in English. The same text is in the PDF.</p>\n'
+               '<p class="report-actions" data-i18n-each><a class="btn" href="../../reports/' + pdf + '" download>Download the PDF</a></p>\n'
+               '<article class="report" lang="en" dir="ltr" data-no-i18n>' + frag + '</article>\n'
+               '</main>')
+    # The page's own content goes to site/pages; scripts/build_site.py puts
+    # the shared shell round it.
+    src = os.path.join(ROOT, 'site', 'pages', site, 'report', 'index.html')
+    with open(src, 'w', encoding='utf-8') as fh:
+        fh.write('<!--page ' + json.dumps(meta, ensure_ascii=False) + ' -->\n' + content + '\n<!--scripts-->\n<script src="../../assets/sir.js"></script>\n')
     os.remove(frag_path)
-    print('wrote', os.path.relpath(os.path.join(folder, 'index.html'), ROOT))
+    print('wrote', os.path.relpath(src, ROOT))
 
 
 if __name__ == '__main__':
     for s in sys.argv[1:] or ['india', 'bihar', 'hyderabad']:
         build(s)
+    subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_site.py')], check=True)
