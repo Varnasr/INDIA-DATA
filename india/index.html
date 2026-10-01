@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../assets/i18n.js?v=368b4ca2"></script>
+<script src="../assets/i18n.js?v=de6c06d2"></script>
 <title>All India SIR: reasons for removal, state by state</title>
 <meta name="description" content="The reasons recorded for the names removed from the electoral rolls in the Special Intensive Revision, in every state and union territory that has published a draft roll: dead, shifted or absent, and enrolled twice.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
-<link rel="stylesheet" href="../assets/sir.css?v=1649d9b5">
+<link rel="stylesheet" href="../assets/sir.css?v=9f632019">
 </head>
 <body class="india" data-place="india" data-root="../">
 <a class="skip" href="#main">Skip to content</a>
@@ -52,15 +52,15 @@
 
   <h2>The three reasons, by phase</h2>
   <div class="grid">
-    <div class="panel">
-      <h3>Names removed at the draft roll, by reason</h3>
-      <p>Phase 1 is Bihar (2025), phase 2 the twelve states and union territories revised from November 2025, and phase 3 the eighteen revised in 2026. "Not split" counts names in states that have not published a split by reason.</p>
-      <div class="chart"><canvas id="cPhase" aria-label="Names removed at the draft roll, by reason and phase, in lakh"></canvas></div>
+    <div class="panel wide">
+      <h3>Where the removed names went, by phase and reason</h3>
+      <p>Each band is the names one phase removed for one reason, drawn to scale. Phase 1 is Bihar (2025), phase 2 the twelve states and union territories revised from November 2025, and phase 3 the eighteen revised in 2026. "Not split" counts names in states that have not published a split by reason.</p>
+      <div class="vizbox" id="vSankey"></div>
     </div>
-    <div class="panel">
-      <h3>Removed per 100 electors, by state</h3>
-      <p>Names left off the draft roll for every 100 electors on the roll before the revision began.</p>
-      <div class="chart xtall"><canvas id="cRate" aria-label="Names removed per 100 electors, by state"></canvas></div>
+    <div class="panel wide">
+      <h3>Removed per 100 electors, every state by phase</h3>
+      <p>Each dot is a state or union territory. Hover or tap a dot for its name and rate.</p>
+      <div class="vizbox" id="vStrip"></div>
     </div>
   </div>
   <p class="finding" id="fPhase"></p>
@@ -101,11 +101,20 @@
   <p class="sub">Each state's final roll compared with its draft. The grey bar is the names left off the draft roll for every 100 electors on the roll before the revision. The blue bar is the fall that remains once the final roll is out, after the names added and removed on claims and objections. A state appears once its final roll is published.</p>
   <div class="grid">
     <div class="panel wide">
-      <div class="chart xtall"><canvas id="cFinal" aria-label="Names removed per 100 electors at the draft and the net fall at the final roll, by state"></canvas></div>
+      <div class="vizbox" id="vFinal"></div>
     </div>
   </div>
   <p class="finding" id="fFinal"></p>
   <div class="twrap" tabindex="0" role="region" aria-label="Draft and final rolls by state"><table id="tFinal"></table></div>
+
+  <h2>One state's roll, step by step</h2>
+  <p class="sub">Each bar is one step from the roll before the revision to the final roll. The first steps are the reasons for removal at the draft, and the last are the names added and removed on claims and objections. The bars start above zero so that the changes can be seen, and the figure on each bar is the count. Where a state published only its draft and final rolls, the change after the draft is one step.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <label class="pick">State <select id="sWater"></select></label>
+      <div class="vizbox" id="vWater"></div>
+    </div>
+  </div>
 
   <h2>Every state and union territory</h2>
   <p class="sub">Figures at the draft roll. <b>Rounded</b> means the state published its figures in lakh or crore, <b>Short</b> that the reasons published leave some names unexplained, and <b>None</b> that no split by reason was found. The source for each row is on the <a href="method/">method page</a>.</p>
@@ -119,7 +128,8 @@
 </main>
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../">About this site</a></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="../assets/sir.js?v=45c195b6"></script>
+<script src="../assets/sir.js?v=aff9f6ea"></script>
+<script src="../assets/viz.js?v=bacf0f91"></script>
 <script>
 SIR.json('data/india/states.json').then(function (d) {
   var T = d.total, S = d.states, R = d.reasons, P = d.by_phase;
@@ -181,11 +191,22 @@ SIR.json('data/india/states.json').then(function (d) {
   document.getElementById('fVote').innerHTML = L('<b>In {k} states the names left off the draft roll equal a fifth or more of the votes polled in 2024</b>, led by {top}. Bihar\'s draft-stage removals were {b} of its 2024 vote.', {
     k: over20.length, top: vS.slice(0, 3).map(function (x) { return L('{s} ({v})', { s: x.state, v: SIR.pct(x.removed_pct_votes24) }); }).join(', '), b: SIR.pct(byName['Bihar'].removed_pct_votes24) });
   var ph = ['1', '2', '3'], PN = { '1': L('Phase 1 (Bihar)'), '2': L('Phase 2 ({n} states)', { n: P['2'].states }), '3': L('Phase 3 ({n} states)', { n: P['3'].states }) };
-  SIR.chart('cPhase', { type: 'bar', data: { labels: ph.map(function (p) { return PN[p]; }), datasets: R.map(function (k) { return { label: RN[k], data: ph.map(function (p) { return +(P[p][k] / 1e5).toFixed(1); }), $token: RC[k] }; }).concat([{ label: L('Not split'), data: ph.map(function (p) { return +(P[p].unsplit / 1e5).toFixed(1); }), $token: '--fill-other' }]) },
-    options: { scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, title: { display: true, text: L('Names removed, lakh') } } } } });
+  // where the removed names went: phases on the left, reasons on the right
+  var RK = R.concat(['unsplit']), RNx = Object.assign({ unsplit: L('Not split') }, RN), RCx = Object.assign({ unsplit: '--fill-other' }, RC);
+  var links = [];
+  ph.forEach(function (p, a) { RK.forEach(function (k, b) { if (P[p][k] > 0) links.push({ s: a, t: b, v: P[p][k] }); }); });
+  VIZ.sankey('vSankey', { label: L('Names removed at the draft roll, from each phase to each reason'),
+    sources: ph.map(function (p) { return { name: PN[p], tok: '--fill-navy' }; }),
+    targets: RK.map(function (k) { return { name: RNx[k], tok: RCx[k] }; }), links: links });
   var byRate = has.filter(function (s) { return s.per_100 != null; }).sort(function (a, b) { return b.per_100 - a.per_100; });
-  SIR.chart('cRate', { type: 'bar', data: { labels: byRate.map(function (s) { return s.state; }), datasets: [{ label: L('Per 100 electors'), data: byRate.map(function (s) { return s.per_100; }), $tokens: byRate.map(function (s) { return s.state === 'Bihar' ? '--fill-red' : '--fill-navy'; }) }] },
-    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Removed per 100 electors') } } } } });
+  VIZ.strip('vStrip', { label: L('Names removed per 100 electors, each state by phase'), axis: L('Removed per 100 electors'),
+    rows: ph.map(function (p) {
+      var pts = byRate.filter(function (x) { return x.phase === p; });
+      var hi = pts.slice().sort(function (a, b) { return b.per_100 - a.per_100; })[0];
+      return { name: PN[p], tok: p === '1' ? '--fill-red' : '--fill-navy',
+        points: pts.map(function (x) { return { v: x.per_100, label: L('{s}: {v} per 100', { s: x.state, v: SIR.d(x.per_100, 1) }) }; }),
+        mark: hi ? [{ v: hi.per_100, label: hi.state }] : [] };
+    }) });
   document.getElementById('fPhase').innerHTML = L('<b>The share entered as dead fell from {d1} in Bihar to {d2} in phase 2 and {d3} in phase 3</b>, while the share entered as shifted, absent or other rose from {s1} to {s2} and {s3}. Removals per 100 electors rose with each phase, from {r1} to {r2} and {r3}. {top} removed the most for every 100 electors, {topr}.', {
     d1: SIR.pct(P['1'].shares.dead), d2: SIR.pct(P['2'].shares.dead), d3: SIR.pct(P['3'].shares.dead),
     s1: SIR.pct(P['1'].shares.shifted_absent_other), s2: SIR.pct(P['2'].shares.shifted_absent_other), s3: SIR.pct(P['3'].shares.shifted_absent_other),
@@ -263,10 +284,9 @@ SIR.json('data/india/states.json').then(function (d) {
   ], S, { sort: 'removed' });
   // ---- the final rolls
   var F = d.final, fS = S.filter(function (x) { return x.electors_final != null && x.net_fall_per_100 != null; }).sort(function (a, b) { return b.net_fall_per_100 - a.net_fall_per_100; });
-  SIR.chart('cFinal', { type: 'bar', data: { labels: fS.map(function (x) { return x.state; }), datasets: [
-      { label: L('Removed at the draft, per 100'), data: fS.map(function (x) { return x.per_100; }), $token: '--fill-grey' },
-      { label: L('Net fall at the final roll, per 100'), data: fS.map(function (x) { return x.net_fall_per_100; }), $token: '--fill-navy' }] },
-    options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Per 100 electors on the roll before the revision') } } } } });
+  VIZ.dumbbell('vFinal', { label: L('Names removed per 100 electors at the draft and the net fall at the final roll, by state'),
+    aName: L('Removed at the draft, per 100'), aTok: '--fill-grey', bName: L('Net fall at the final roll, per 100'), bTok: '--fill-navy',
+    rows: fS.map(function (x) { return { name: x.state, a: x.per_100, b: x.net_fall_per_100 }; }) });
   var wb = S.filter(function (x) { return x.withheld; })[0], big = function (x) { return x >= 1e7 ? cr(x) : SIR.lakh(x); };
   var rel = Math.abs(F.rho_made_up) < 0.2
     ? L('How many names a state removed at the draft has no relationship with how much of that its final roll made up (rank correlation {rho}).', { rho: SIR.d(F.rho_made_up, 2) })
@@ -275,6 +295,26 @@ SIR.json('data/india/states.json').then(function (d) {
     n: F.states, r: big(F.removed), a: big(F.net_after_draft), m: SIR.pct(F.made_up_pct), wb: wb ? wb.state : '', w: SIR.lakh(F.withheld),
     a2: big(F.net_after_draft + F.withheld), m2: SIR.pct(F.made_up_pct_ex_withheld), np: SIR.d(F.net_per_100, 1), p: SIR.d(F.per_100, 1),
     k: F.shrank.length, shrank: F.shrank.join(', '), rel: rel, wait: F.waiting.join(', ') });
+
+  // one state's roll, step by step
+  var wS = S.filter(function (x) { return x.electors_final != null && x.electors_before; }).sort(function (a, b) { return a.state < b.state ? -1 : 1; });
+  var sel = document.getElementById('sWater');
+  sel.innerHTML = wS.map(function (x) { return '<option>' + SIR.esc(x.state) + '</option>'; }).join('');
+  sel.value = 'Tamil Nadu';
+  var water = function () {
+    var x = wS.filter(function (y) { return y.state === sel.value; })[0], st = [{ name: L('Roll before the revision'), v: x.electors_before, kind: 'total' }];
+    [['dead', L('Dead')], ['shifted_absent_other', L('Shifted, absent or other')], ['duplicate', L('Enrolled more than once')], ['unsplit', L('Not split')]].forEach(function (k) { if (x[k[0]] > 0) st.push({ name: k[1], v: x[k[0]], kind: 'down' }); });
+    st.push({ name: L('Draft roll'), v: x.electors_before - x.removed, kind: 'total' });
+    if (x.added_after_draft != null) {
+      st.push({ name: L('Added after the draft'), v: x.added_after_draft, kind: 'up' });
+      if (x.removed_after_draft) st.push({ name: L('Removed after the draft'), v: x.removed_after_draft, kind: 'down' });
+      if (x.withheld) st.push({ name: L('Withheld for adjudication'), v: x.withheld, kind: 'down' });
+    } else st.push({ name: L('Net change after the draft'), v: Math.abs(x.net_after_draft), kind: x.net_after_draft >= 0 ? 'up' : 'down' });
+    st.push({ name: L('Final roll'), v: x.electors_final, kind: 'total' });
+    var lo = Math.min(x.electors_final, x.electors_before - x.removed);
+    VIZ.waterfall('vWater', { label: L('{s}: the roll from before the revision to the final roll', { s: x.state }), steps: st, from: Math.floor(lo * 0.8 / 1e5) * 1e5 });
+  };
+  sel.addEventListener('change', water); water();
   var RCN = { exact: L('Adds up'), rounded: L('Rounded'), 'net only': L('Net only'), no: L('Does not add up') };
   var sn = function (v) { return v == null ? '–' : (v < 0 ? '−' + SIR.n(-v) : SIR.n(v)); };
   SIR.table(document.getElementById('tFinal'), [

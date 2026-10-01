@@ -208,6 +208,7 @@
   // Wrap titles and category labels, keep labels level where they fit, and
   // thin the value ticks. A chart's own tick callback is left alone.
   var SHORT = { 'Dadra and Nagar Haveli and Daman and Diu': 'DNH and Daman and Diu', 'Andaman and Nicobar Islands': 'Andaman and Nicobar' };
+  SIR.short = function (x) { return SHORT[x] || x; };
   SIR.fitPhone = function (cfg) {
     if (window.innerWidth >= 600 || !/^(bar|line|scatter|bubble)$/.test(cfg.type)) return cfg;
     var o = cfg.options = cfg.options || {}, sc = o.scales = o.scales || {};
