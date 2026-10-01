@@ -26,8 +26,6 @@
 <nav class="nav-tabs" aria-label="All India pages"><a class="nav-tab" href="../india/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> All India</a><a class="nav-tab" href="../india/method/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Sources and method</a><a class="nav-tab" href="../india/faq/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> FAQ</a><a class="nav-tab" href="../india/report/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a></nav>
 <main id="main">
 <div class="page-head"><h1>All India: why names were removed</h1><ol class="summary" id="short"></ol></div>
-  <div class="kpis" id="kIndia"></div>
-  <p id="fIndia"></p>
 
   <h2>Removals per 100 electors, state by state</h2>
   <p class="sub">One tile for each state and union territory, placed roughly where it lies. The tiles are all the same size, so the map shows neither borders nor area. Grey tiles have no rate. Jammu and Kashmir, Ladakh, Himachal Pradesh and Assam were not part of the revision, Tripura has no draft roll yet, and Chandigarh did not publish an exact roll from before the revision.</p>
@@ -146,16 +144,6 @@ SIR.json('data/india/states.json').then(function (d) {
     document.getElementById('short').innerHTML = pts.map(function (t) { return '<li>' + t + '</li>'; }).join('');
     var sn = document.getElementById('shortNote'); sn.innerHTML = L('The adult figures count people where they live, so states that draw migrants look short of electors who are registered in their home states. The figures show what happened and cannot show why.'); sn.hidden = false;
   })();
-  document.getElementById('kIndia').innerHTML = [
-    [cr(T.removed), L('names left off the draft rolls, {n} states and union territories', { n: T.states })],
-    [SIR.pct(T.shares.dead), L('of those split by reason were entered as dead')],
-    [SIR.pct(T.shares.shifted_absent_other), L('as shifted, absent or other')],
-    [SIR.pct(T.shares.duplicate), L('as enrolled more than once')],
-    [SIR.d(T.per_100, 1), L('removed for every 100 electors on the rolls before the revision')],
-    [SIR.lakh(T.unsplit), L('names in states that have not published a full split')]
-  ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
-  document.getElementById('fIndia').innerHTML = L('<b>Of the {total} names left off the draft rolls, {sao} were entered as shifted, absent or other, {dead} as dead and {dup} as enrolled more than once.</b> About one in five was a death. The other four in five rest on an officer writing down that the elector was not where the roll said, or was on the roll twice.', { total: cr(T.removed), sao: cr(T.shifted_absent_other), dead: cr(T.dead), dup: T.duplicate >= 1e7 ? cr(T.duplicate) : SIR.lakh(T.duplicate) });
-
 
   // ---- tile map
   var TILES = d.tiles.map(function (t) { return [t.state, t.code, t.row, t.col]; });
@@ -175,10 +163,13 @@ SIR.json('data/india/states.json').then(function (d) {
 
   // ---- rolls against adults, removals against the 2024 vote
   var AD = d.adults, adS = S.filter(function (x) { return x.roll_adult_pct != null; }).sort(function (a, b) { return b.roll_adult_pct - a.roll_adult_pct; });
+  if (innerWidth < 600) document.getElementById('cAdult').parentNode.style.height = (adS.length * 30 + 90) + 'px';
   SIR.chart('cAdult', { type: 'bar', data: { labels: adS.map(function (x) { return x.state; }), datasets: [
       { label: L('Roll before the revision, % of adults'), data: adS.map(function (x) { return x.roll_adult_pct; }), $token: '--fill-grey' },
       { label: L('Draft roll, % of adults'), data: adS.map(function (x) { return x.draft_adult_pct; }), $token: '--fill-navy' }] },
-    options: { scales: { x: { ticks: { autoSkip: false, maxRotation: 60, minRotation: 45 } }, y: { min: 50, title: { display: true, text: L('% of projected population aged 18 and over') } } } } });
+    // 19 states side by side do not fit a phone: lay the bars on their side there.
+    options: innerWidth < 600 ? { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { min: 50, title: { display: true, text: L('% of projected population aged 18 and over') } } } } :
+      { scales: { x: { ticks: { autoSkip: false, maxRotation: 60, minRotation: 45 } }, y: { min: 50, title: { display: true, text: L('% of projected population aged 18 and over') } } } } });
   var dl = adS.slice().sort(function (a, b) { return a.draft_adult_pct - b.draft_adult_pct; });
   document.getElementById('fAdult').innerHTML = L('<b>Across these {n} states the rolls before the revision held {pre} of the projected adult population, and the draft rolls hold {post}.</b> Only {k} states had more names on the roll than adults, namely {over}. How far a roll exceeded the adult population has no relationship with how many names the state removed (rank correlation {rho}). The draft rolls are lowest against the adult population in {low}. The projections count residents, so a state that draws many migrants counts adults who may still be registered at home, which lowers its ratio.', {
     n: AD.states, pre: SIR.pct(100 * AD.roll_total / AD.adults_total), post: SIR.pct(100 * AD.draft_total / AD.adults_total), k: AD.over_100.length, over: AD.over_100.join(', '), rho: SIR.d(AD.rho_rate, 2),

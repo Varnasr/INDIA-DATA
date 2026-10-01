@@ -291,6 +291,12 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 - Colour tokens live in `assets/sir.css`, with the dark block written twice
   (`prefers-color-scheme` and `[data-theme="dark"]`). `check_contrast.py`
   measures 72 pairs, including the tab bar, the banners and the tags, and fails if the two dark blocks differ.
+- **Charts on a phone go through `SIR.fitPhone`** (both `SIR.chart` and the
+  dashboards' `draw`): below 600px it wraps axis titles and category labels,
+  keeps labels level only where they fit, thins value ticks and writes big
+  counts in lakh. A chart's own tick callback is left alone. A bar chart with
+  more than about ten categories should be laid on its side on a phone, as
+  `cAdult` on the All India page is.
 - `SIR.chart` resolves `$token` colours before Chart.js sees them and disables
   the colours plugin; `SIR.recolour` sets option fields in place on a theme
   change. Replacing an options object wholesale breaks Chart.js's proxies
