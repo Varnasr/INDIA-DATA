@@ -411,7 +411,7 @@ header and kept in the address (`?lang=hi`) and in the reader's browser.
 - **A row of links** (the switch, the Downloads menu) carries `data-i18n-each`,
   so each link is its own key; without it the whole row, addresses and all,
   becomes one key that differs on every page.
-- `scripts/i18n_collect.mjs` walks `india/`, `bihar/` and `hyderabad/` for pages,
+- `scripts/i18n_collect.mjs` walks the folder of every place in `site/places.json` for pages,
   and reads `assets/faq/*.js`, rather than keeping a list, so a new page is
   collected without anyone remembering.
 - **Fixed text in the markup** is translated by `L.apply()`, which `sir.js`
