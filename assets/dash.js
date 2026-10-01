@@ -60,7 +60,7 @@
     var cfg = (function clone(v) { if (Array.isArray(v)) return v.map(clone); if (v && typeof v === 'object') { var o = {}; Object.keys(v).forEach(function (k) { o[k] = clone(v[k]); }); return o; } return v; })(specs[id]);
     cfg.options = cfg.options || {};
     if (cfg.options.indexAxis === 'y') { cfg.options.scales = cfg.options.scales || {}; cfg.options.scales.y = cfg.options.scales.y || {}; cfg.options.scales.y.ticks = Object.assign({ autoSkip: false }, cfg.options.scales.y.ticks || {}); }
-    if (window.innerWidth < 600) { cfg.options.plugins = cfg.options.plugins || {}; cfg.options.plugins.legend = Object.assign({}, cfg.options.plugins.legend || {}); cfg.options.plugins.legend.labels = { boxWidth: 10, boxHeight: 10, padding: 6 }; }
+    if (window.innerWidth < 600) { cfg.options.plugins = cfg.options.plugins || {}; cfg.options.plugins.legend = Object.assign({}, cfg.options.plugins.legend || {}); cfg.options.plugins.legend.labels = { boxWidth: 10, boxHeight: 10, padding: 6 }; if (window.SIR && SIR.fitPhone) SIR.fitPhone(cfg); }
     charts[id] = new Chart(el, cfg);
   }
 

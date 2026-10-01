@@ -189,6 +189,48 @@
   });
 
   // --------------------------------------------------------------- charts
+  // A long string as lines of at most n characters, broken at spaces.
+  SIR.wrap = function (s, n) {
+    if (typeof s !== 'string' || s.length <= n) return s;
+    var out = [], cur = '';
+    s.split(' ').forEach(function (w) {
+      if (cur && (cur + ' ' + w).length > n) { out.push(cur); cur = w; } else cur = cur ? cur + ' ' + w : w;
+    });
+    if (cur) out.push(cur);
+    return out;
+  };
+  // On a phone a chart is about 320px wide. Chart.js squeezes a long axis
+  // title into that width rather than wrapping it, cuts long category labels
+  // at the edge, tilts short ones and lets big tick numbers run together.
+  // Wrap titles and category labels, keep labels level where they fit, and
+  // thin the value ticks. A chart's own tick callback is left alone.
+  var SHORT = { 'Dadra and Nagar Haveli and Daman and Diu': 'DNH and Daman and Diu', 'Andaman and Nicobar Islands': 'Andaman and Nicobar' };
+  SIR.fitPhone = function (cfg) {
+    if (window.innerWidth >= 600 || !/^(bar|line|scatter|bubble)$/.test(cfg.type)) return cfg;
+    var o = cfg.options = cfg.options || {}, sc = o.scales = o.scales || {};
+    var horiz = o.indexAxis === 'y', catAxis = cfg.type === 'bar' || cfg.type === 'line' ? (horiz ? 'y' : 'x') : null;
+    var nLabels = ((cfg.data || {}).labels || []).length;
+    ['x', 'y'].forEach(function (k) { sc[k] = sc[k] || {}; });
+    Object.keys(sc).forEach(function (k) {
+      var a = sc[k], t = a.ticks = a.ticks || {}, isX = k === 'x' || a.axis === 'x';
+      if (a.title && typeof a.title.text === 'string') a.title.text = SIR.wrap(a.title.text, isX ? 34 : 40);
+      if (k === catAxis) {
+        var lab = function (x) { return SIR.wrap(SHORT[x] || x, horiz ? 20 : 12); };
+        if (!t.callback) t.callback = function (v) { return lab(this.getLabelForValue(v)); };
+        // Level only if the longest line fits its slot (about 6.5px a character).
+        var widest = Math.max.apply(null, cfg.data.labels.map(function (x) { return [].concat(lab(String(x))).reduce(function (m, l) { return Math.max(m, l.length); }, 0); }).concat([0]));
+        if (!horiz && nLabels && widest * 6.5 <= 300 / nLabels - 4 && t.maxRotation == null) { t.maxRotation = 0; t.autoSkip = false; }
+      } else if (a.type !== 'logarithmic' && a.type !== 'time' && a.type !== 'category') {
+        if (t.maxTicksLimit == null) t.maxTicksLimit = isX ? 5 : 7;
+        // 8,000,000 takes a third of a phone's width; 80 lakh does not.
+        if (!t.callback) t.callback = function (v, i, ts) {
+          return Math.abs(v) >= 1e5 ? L('{x} lakh', { x: String(+(v / 1e5).toFixed(1)) }) : Chart.Ticks.formatters.numeric.call(this, v, i, ts);
+        };
+        if (isX && t.maxRotation == null) { t.maxRotation = 0; t.autoSkipPadding = 14; }
+      } else if (isX && t.maxRotation == null && a.type === 'logarithmic') { t.maxRotation = 0; t.autoSkipPadding = 8; }
+    });
+    return cfg;
+  };
   SIR.charts = [];
   SIR.chart = function (id, cfg) {
     if (typeof Chart === 'undefined') {
@@ -220,6 +262,7 @@
       cfg.options.plugins = cfg.options.plugins || {};
       var lg = cfg.options.plugins.legend = cfg.options.plugins.legend || {};
       lg.labels = lg.labels || {}; lg.labels.boxWidth = 10; lg.labels.boxHeight = 10; lg.labels.padding = 6;
+      SIR.fitPhone(cfg);
     }
     var c = new Chart(document.getElementById(id), cfg);
     c.$tokens = cfg.$tokens || null;
