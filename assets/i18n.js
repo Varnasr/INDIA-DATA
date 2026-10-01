@@ -22,10 +22,10 @@
 (function () {
   'use strict';
   var LANGS = {
-    en: { name: 'English', dir: 'ltr' },
-    hi: { name: 'हिन्दी', dir: 'ltr', font: 'Noto+Sans+Devanagari:wght@400;600;700' },
-    ur: { name: 'اردو', dir: 'rtl', font: 'Noto+Nastaliq+Urdu:wght@400;700' },
-    te: { name: 'తెలుగు', dir: 'ltr', font: 'Noto+Sans+Telugu:wght@400;600;700' }
+    en: { name: 'English', short: 'EN', dir: 'ltr' },
+    hi: { name: 'हिन्दी', short: 'हिं', dir: 'ltr', font: 'Noto+Sans+Devanagari:wght@400;600;700' },
+    ur: { name: 'اردو', short: 'اردو', dir: 'rtl', font: 'Noto+Nastaliq+Urdu:wght@400;700' },
+    te: { name: 'తెలుగు', short: 'తె', dir: 'ltr', font: 'Noto+Sans+Telugu:wght@400;600;700' }
   };
   // The menu is in every page's header. Set this to false to hide it, and a
   // language is then reached only by a link carrying ?lang=.
@@ -118,7 +118,10 @@
     // side by side on the second line of the header.
     var ctl = document.querySelector('header.top .controls'), sw = document.querySelector('header.top .switch');
     if (ctl && (MENU || lang !== 'en') && !document.getElementById('lang')) {
-      var opts = Object.keys(LANGS).map(function (k) { return '<option value="' + k + '"' + (k === lang ? ' selected' : '') + ' lang="' + k + '">' + LANGS[k].name + '</option>'; }).join('');
+      // On a phone the menu shares a row with the three-way switch, so it
+      // shows a short name; the list itself is still one language per line.
+      var narrow = window.matchMedia && matchMedia('(max-width: 700px)').matches;
+      var opts = Object.keys(LANGS).map(function (k) { return '<option value="' + k + '"' + (k === lang ? ' selected' : '') + ' lang="' + k + '" title="' + LANGS[k].name + '">' + (narrow ? LANGS[k].short : LANGS[k].name) + '</option>'; }).join('');
       var sel = '<select id="lang" aria-label="' + L('Language') + '" data-no-i18n>' + opts + '</select>';
       if (sw) sw.insertAdjacentHTML('afterend', sel); else ctl.insertAdjacentHTML('afterbegin', sel);
       document.getElementById('lang').addEventListener('change', function () {
