@@ -1,0 +1,44 @@
+<!--page {"title": "SIR analysis for India: who was taken off the electoral rolls", "description": "In 2025 and 2026 the Election Commission revised the electoral rolls of most of India, and crores of names were left off. This site counts who was removed, where, and on what recorded reason, from the published lists and figures.", "place": "home"} -->
+<script>
+// Links to the Bihar dashboard used to live at this address. Send them on.
+(function () { var t = location.hash.slice(1); if (/^(overview|deletions|reasons|phases|gender|caste|religion|electoral|geographic|economic|research|methodology)$/.test(t)) location.replace('bihar/#' + t); })();
+</script>
+<main id="main" class="home">
+<div class="page-head"><h1>Who was taken off India's electoral rolls</h1>
+<p class="lead" id="lead">In 2025 and 2026 the Election Commission revised the electoral rolls of most of India house by house, in what it called a Special Intensive Revision. Every elector had to fill in a fresh form, and names were left off the new rolls. This site counts those names from the lists and figures the Commission and the states have published, and sets out who was removed, where, and on what recorded reason.</p>
+</div>
+
+<h2>What is here</h2>
+<div class="hubs" data-i18n-each>
+  <a class="hub" href="india/"><b>All India</b><span id="hIndia">Every state and union territory in the revision, with the reasons each one recorded.</span></a>
+  <a class="hub" href="bihar/"><b>Bihar 2025</b><span id="hBihar">Every constituency and every booth, set against the 2025 election result.</span></a>
+  <a class="hub" href="hyderabad/"><b>Hyderabad Old City 2026</b><span id="hHyd">Five constituencies, elector by elector, from the lists of who was struck off and who was summoned.</span></a>
+</div>
+
+<h2>Why this site exists</h2>
+<p>The revision decides who can vote. The lists behind it are public, but they are hard to read. They come as thousands of files, one for each polling part, often scanned, in the language of the state. The totals the Commission announces do not say who was removed, how old they were, or whether the removals in a seat were larger than the margin that decided it.</p>
+<p>This site reads those lists and figures and turns them into counts. It shows where removals were heaviest, whether women were removed more than men, and what reason was written against the names. A reason on a list is what the officer wrote down, and nobody checked it. The counts can show where removals fell and on whom. They cannot show why any one name was removed, or whether that removal was right.</p>
+
+<h2>How to read it</h2>
+<ul class="plain">
+  <li>Only counts are published here. No name, EPIC number or address appears anywhere on this site.</li>
+  <li>Religion and caste are guessed from names, so they are given as ranges.</li>
+  <li>Every page opens with what the data shows and ends with its limits and its own questions. The method pages give every source.</li>
+  <li>The pages can be read in English, Hindi, Urdu and Telugu from the menu at the top. The translations are awaiting review, and where they differ the English page is correct.</li>
+</ul>
+
+<h2>Who made it</h2>
+<p>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>, a development research and evaluation practice. The tables behind the charts can be downloaded from the Downloads menu on each analysis.</p>
+</main>
+<!--scripts-->
+<script src="assets/sir.js"></script>
+<script>
+Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.json'), SIR.json('data/hyderabad/summary.json')]).then(function (r) {
+  var T = r[0].total, B = r[1].totals, H = r[2].totals;
+  var cr = function (x) { return L('{x} crore', { x: (x / 1e7).toFixed(2) }); };
+  document.getElementById('lead').innerHTML = L('In 2025 and 2026 the Election Commission revised the electoral rolls of {s} states and union territories house by house, in what it called a Special Intensive Revision. Every elector had to fill in a fresh form, and {r} names were left off the draft rolls. This site counts those names from the lists and figures the Commission and the states have published, and sets out who was removed, where, and on what recorded reason.', { s: T.states, r: cr(T.removed) });
+  document.getElementById('hIndia').innerHTML = L('{r} names left off the draft rolls in {s} states and union territories, and the reasons each one recorded.', { r: cr(T.removed), s: T.states });
+  document.getElementById('hBihar').innerHTML = L('{n} names removed across {acs} constituencies and {booths} booths, set against the 2025 election result.', { n: SIR.lakh(B.total), acs: B.acs, booths: SIR.n(B.booths) });
+  document.getElementById('hHyd').innerHTML = L('{d} of {e} electors struck off in {k} constituencies, counted elector by elector.', { d: SIR.n(H.deleted), e: SIR.n(H.electors), k: r[2].acs.length });
+}).catch(SIR.fail);
+</script>

@@ -17,6 +17,7 @@ python3 scripts/build_bihar.py          # rebuild data/bihar from data/bihar/raw
 python3 scripts/build_hyderabad.py      # rebuild data/hyderabad from the explorer
 python3 scripts/check_data.py           # 20 checks, run by CI; rebuilds both with --check
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
+python3 scripts/build_site.py          # every page, from site/places.json and site/pages; --check in CI
 python3 scripts/stamp.py               # cache busting; Netlify and Pages run it on every deploy
 python3 -m http.server 8000
 ```
@@ -201,10 +202,11 @@ of; the swing changes sign with the comparison. Say exactly that.
 
 ## Hyderabad
 
-`hyderabad/explorer/index.html` carries the part-level counts inline as
+`site/pages/hyderabad/explorer/index.html` carries the part-level counts inline as
 `const D={...}`. `build_hyderabad.py` reads that object and derives
 `data/hyderabad/summary.json` and `parts.json`, so the explorer and the analysis
-pages cannot disagree. Edit the counts in the explorer, then rebuild.
+pages cannot disagree. Edit the counts in that source, then run
+`build_hyderabad.py` and `build_site.py`.
 
 **Why five seats.** The elector-by-elector lists were compiled for these five
 only. The Chief Electoral Officer, Telangana publishes the ASDD and notice
@@ -238,23 +240,47 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 
 ## Front end
 
+- **Never edit a page's `index.html` directly.** Every page is written by
+  `scripts/build_site.py` from two things. `site/places.json` lists the
+  places (the front page, All India, Bihar, Hyderabad) with each one's
+  subtitle, folk-art band, tab row and Downloads menu. `site/pages/<path>/index.html`
+  holds a page's own content: a first line `<!--page {json} -->` with its
+  title, description and place (plus `own_tabs` for a dashboard, `head` for
+  extra head markup), the content, then `<!--scripts-->` and its scripts.
+  The build puts the shared shell round it (head, band, header, places menu,
+  tab row, footer) and writes the section bar's lists into `assets/sir.js`
+  between `/*sites*/` markers. CI runs `--check`. **A new state or city is an
+  entry in `places.json` and a folder in `site/pages`**; nothing is copied
+  from another page. `scripts/reports/web.py` writes the report pages'
+  sources and runs the build; `build_hyderabad.py` reads the part counts from
+  the explorer's source.
+- **Addresses.** `/` is the front page: what the site is, why it exists, how
+  to read it, who made it. `/bihar/` is the Bihar dashboard and
+  `/bihar/explorer/` the booth explorer, matching `/hyderabad/` and
+  `/hyderabad/explorer/`. Old links forward in the page scripts: a Bihar tab
+  hash on `/` goes to `/bihar/#tab`, and `/bihar/#acNNN` to the explorer.
+- **The header carries a places menu**, not a switch: a pin button naming
+  the current place, opening the list of analyses. It scales to any number
+  of places, and on a phone the whole header is one row (title, language,
+  places, downloads, theme; print is hidden there). Credit is to PinPoint
+  Ventures, in the footer and on the front page.
+
 - **One look on every page: the Bihar dashboard's.** A folk-art band across
   the top (`.band.madhubani` for Bihar, `.band.ikat` for Hyderabad, a
   Pochampally ikat tile drawn as an SVG data URI), a card header with the
   controls, a tab bar, summary cards, key-finding banners and chart cards.
   All of it is in `assets/sir.css`; no page carries its own palette.
-- **Two dashboards, many pages.** `index.html` (Bihar) and
+- **Two dashboards, many pages.** `bihar/index.html` and
   `hyderabad/index.html` are tabbed dashboards built by `assets/dash.js`:
   cards, banners, charts drawn when a tab first opens, PNG export and
   printing. Every other page carries the same header and a tab bar of links,
   written into its markup so it works without JavaScript. Sentences
   are computed from the JSON, including the verdict words: a rank
   correlation under 0.2 is reported as no relationship.
-- **The site is "SIR analysis for India"; Bihar and Hyderabad are two
-  analyses inside it.** Every page carries the same header: that title, a
-  subtitle naming the analysis, a two-way switch (Bihar 2025 / Hyderabad 2026),
-  and a Downloads menu with the report online, the PDF and the slides. The
-  header is identical markup on all 15 pages; change it everywhere at once.
+- **The site is "SIR analysis for India"; each place is an analysis inside
+  it.** Every page carries the same header: that title, a subtitle naming the
+  place, the places menu, and a Downloads menu with the report online, the
+  PDF and the slides. It is written once, in `scripts/build_site.py`.
 - **The tab bar is sticky.** On a wide screen the header sticks and the bar
   sticks beneath it (`sir.js` writes the header's height to `--hh`); on a phone
   the header scrolls away and the bar sticks at the top. The bar fades at
@@ -266,8 +292,8 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   for the previous and next section (disabled at either end, never wrapping),
   and a menu behind a tap with two headings: the dashboard's tabs and the
   analysis's other pages. The arrows and count run over the list the reader
-  is in. The tabs and pages, with icons, are one map in `sir.js` (`SITES`);
-  add a page there as well as to the tab row. It follows a
+  is in. The tabs and pages, with icons, are one map in `sir.js` (`SITES`),
+  written from `site/places.json` by the build; add a page there only. It follows a
   dashboard's tab changes through a MutationObserver on `aria-selected`.
   Without JavaScript the scrolling row stays, so nothing depends on it.
 - **Every page but the full reports opens with 3 to 6 numbered findings and

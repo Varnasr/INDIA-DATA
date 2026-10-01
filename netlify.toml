@@ -1,6 +1,8 @@
-# The site has no build step except cache busting: scripts/stamp.py gives
-# every script, stylesheet, data file and download a ?v=<content hash>
-# address, so a deploy can never pair a fresh page with a stale file.
+# Two steps on every deploy. scripts/build_site.py writes every page from
+# site/places.json and site/pages (a no-op when the committed pages are
+# current), and scripts/stamp.py gives every script, stylesheet, data file
+# and download a ?v=<content hash> address, so a deploy can never pair a
+# fresh page with a stale file.
 [build]
   publish = "."
-  command = "python3 scripts/stamp.py"
+  command = "python3 scripts/build_site.py && python3 scripts/stamp.py"

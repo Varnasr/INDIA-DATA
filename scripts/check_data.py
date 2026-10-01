@@ -163,7 +163,8 @@ def _short_and_faq():
     pages = ['index.html'] + sorted(glob.glob(os.path.join(ROOT, '*', '**', 'index.html'), recursive=True))
     for p in pages:
         rel = os.path.relpath(os.path.join(ROOT, p), ROOT)
-        if rel.split(os.sep)[0] not in ('india', 'bihar', 'hyderabad') and rel != 'index.html':
+        # the front page says what the site is; it carries no findings box
+        if rel.split(os.sep)[0] not in ('india', 'bihar', 'hyderabad'):
             continue
         if os.sep + 'report' + os.sep in rel:
             continue

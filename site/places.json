@@ -1,0 +1,94 @@
+{
+  "title": "SIR analysis for India",
+  "credit": "PinPoint Ventures",
+  "credit_url": "https://pinpointventures.in/",
+  "places": [
+    {
+      "id": "home",
+      "label": "About this site",
+      "subtitle": "Names taken off the electoral rolls, counted from the published lists",
+      "band": "motifs",
+      "color": "1f4e79",
+      "pages": []
+    },
+    {
+      "id": "india",
+      "label": "All India",
+      "subtitle": "All India · reasons for removal, state by state",
+      "band": "motifs",
+      "color": "1f4e79",
+      "class": "india",
+      "nav_label": "All India pages",
+      "pages": [
+        ["india/", "All India", "i0"],
+        ["india/method/", "Sources and method", "i10"],
+        ["india/faq/", "FAQ", "i12"],
+        ["india/report/", "Full report", "i13"]
+      ],
+      "downloads": [
+        ["india/report/", "Full report, online", false],
+        ["reports/sir-india-report.pdf", "Full report, PDF", true],
+        ["reports/sir-india-deck.pptx", "Slides, PowerPoint", true],
+        ["data/india/states.csv", "State table, CSV", true]
+      ]
+    },
+    {
+      "id": "bihar",
+      "label": "Bihar 2025",
+      "subtitle": "Bihar 2025 · every booth, every constituency",
+      "band": "madhubani",
+      "color": "1f4e79",
+      "class": "bihar",
+      "nav_label": "Bihar pages",
+      "dash": "bihar/",
+      "tabs": [["overview", "Overview", "i0"], ["deletions", "Deletions", "i1"], ["reasons", "Reasons", "i16"], ["phases", "Phases", "i2"], ["gender", "Gender", "i3"], ["caste", "Caste", "i4"], ["religion", "Religion", "i5"], ["electoral", "Electoral", "i6"], ["geographic", "Geographic", "i7"], ["economic", "Economic", "i8"], ["research", "Research", "i9"], ["methodology", "Methods", "i10"]],
+      "pages": [
+        ["bihar/", "Dashboard", "i0"],
+        ["bihar/explorer/", "Booth explorer", "i9"],
+        ["bihar/results/", "Elections", "i6"],
+        ["bihar/people/", "Women, religion, caste", "i3"],
+        ["bihar/border/", "Border", "i7"],
+        ["bihar/districts/", "Districts", "i11"],
+        ["bihar/faq/", "FAQ", "i12"],
+        ["bihar/method/", "Method", "i10"],
+        ["bihar/report/", "Full report", "i13"]
+      ],
+      "downloads": [
+        ["bihar/report/", "Full report, online", false],
+        ["reports/bihar-sir-2025-report.pdf", "Full report, PDF", true],
+        ["reports/bihar-sir-2025-deck.pptx", "Slides, PowerPoint", true],
+        ["data/bihar/constituencies.csv", "Constituency table, CSV", true],
+        ["data/bihar/districts.csv", "District table, CSV", true]
+      ]
+    },
+    {
+      "id": "hyd",
+      "label": "Hyderabad 2026",
+      "subtitle": "Hyderabad Old City 2026 · five constituencies, every polling part",
+      "band": "ikat",
+      "color": "b13b38",
+      "class": "hyd",
+      "nav_label": "Hyderabad pages",
+      "dash": "hyderabad/",
+      "tabs": [["overview", "Overview", "i0"], ["deletions", "Deletions", "i1"], ["age", "Age and sex", "i3"], ["religion", "Religion", "i5"], ["link", "2002 link", "i14"], ["hearings", "Hearings", "i15"], ["parts", "Polling parts", "i11"], ["electoral", "Electoral", "i6"], ["research", "Research", "i9"], ["methodology", "Methods", "i10"]],
+      "pages": [
+        ["hyderabad/", "Dashboard", "i0"],
+        ["hyderabad/explorer/", "Part explorer", "i9"],
+        ["hyderabad/people/", "Age, sex, religion, 2002", "i3"],
+        ["hyderabad/parts/", "Polling parts", "i11"],
+        ["hyderabad/hearings/", "Hearings", "i15"],
+        ["hyderabad/telangana/", "Hyderabad and Telangana", "i7"],
+        ["hyderabad/faq/", "FAQ", "i12"],
+        ["hyderabad/method/", "Method", "i10"],
+        ["hyderabad/report/", "Full report", "i13"]
+      ],
+      "downloads": [
+        ["hyderabad/report/", "Full report, online", false],
+        ["reports/hyderabad-old-city-sir-2026-report.pdf", "Full report, PDF", true],
+        ["reports/hyderabad-old-city-sir-2026-deck.pptx", "Slides, PowerPoint", true],
+        ["data/hyderabad/constituencies.csv", "Constituency table, CSV", true],
+        ["data/hyderabad/parts.csv", "Polling-part table, CSV", true]
+      ]
+    }
+  ]
+}
