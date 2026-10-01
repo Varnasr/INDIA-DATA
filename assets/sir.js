@@ -17,7 +17,8 @@
     lakh: function (x) { return L('{x} lakh', { x: (x / 1e5).toFixed(1) }); },
     esc: function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); },
     json: function (path) {
-      return fetch(root + path).then(function (r) {
+      var v = (window.SIR_V || {})[path];
+      return fetch(root + path + (v ? '?v=' + v : '')).then(function (r) {
         if (!r.ok) throw new Error(path + ' answered ' + r.status);
         return r.json();
       });

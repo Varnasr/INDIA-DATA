@@ -36,6 +36,10 @@ jobs:
       # The pages and the aggregate data they read, and nothing else: source
       # files, scripts, notes and the archive are not published (Netlify
       # answers 404 for the same paths through _redirects).
+      # Cache busting, as on Netlify: every file a page loads gets an address
+      # that changes with its content.
+      - name: Stamp file addresses
+        run: python3 scripts/stamp.py
       - name: Stage the pages and their data
         run: |
           mkdir -p "$RUNNER_TEMP/site"

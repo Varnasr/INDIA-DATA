@@ -15,6 +15,7 @@ python3 scripts/build_bihar.py          # rebuild data/bihar from data/bihar/raw
 python3 scripts/build_hyderabad.py      # rebuild data/hyderabad from the explorer
 python3 scripts/check_data.py           # 20 checks, run by CI; rebuilds both with --check
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
+python3 scripts/stamp.py               # cache busting; Netlify and Pages run it on every deploy
 python3 -m http.server 8000
 ```
 
@@ -287,6 +288,14 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   links as seen from `<site>/faq/`. The All India landing page builds its own
   list in its page script. `check_data.py` fails if a page loses either block.
 - **The part explorer takes a link to a part**: `hyderabad/explorer/#Yakutpura-297`.
+- **Every file a page loads carries `?v=<content hash>`**, written by
+  `scripts/stamp.py`, which is Netlify's build command and a step in
+  `static.yml`. Page references are stamped in the HTML; files fetched by
+  script (`SIR.json`, the dictionaries) get theirs from `window.SIR_V`, which
+  the script writes into `assets/i18n.js` between `/*stamp*/` markers. A new
+  fetch must go through `SIR.json` or read `SIR_V` itself, or it escapes the
+  stamp. Pages are served with `max-age=0, must-revalidate`, so a reload
+  always picks up the newest addresses.
 - No page states the site's own address.
 - Colour tokens live in `assets/sir.css`, with the dark block written twice
   (`prefers-color-scheme` and `[data-theme="dark"]`). `check_contrast.py`
@@ -336,11 +345,12 @@ in the address (`?lang=hi`) and in the reader's browser.
 - Figures stay in Western digits with Indian grouping. Names that arrive from
   the data (constituencies, localities, parties, the Commission's reason and
   rule codes) stay as the data spells them.
-- **The menu is off until the translations are signed off.** `MENU` in
-  `assets/i18n.js` is `false`, so a language is reached only by a link with
-  `?lang=hi|ur|te`, and a translated page carries a notice that the English
-  page governs. `scripts/i18n_workbook.py` writes the review workbook; fold the
-  reviewer's corrections into `assets/i18n/<lang>.js`, then set `MENU = true`.
+- **The menu is on** (`MENU` in `assets/i18n.js`), in every page's header,
+  and a reader's choice is remembered. No native reader has signed off the
+  translations yet, so every translated page carries a notice that the
+  English page governs. `scripts/i18n_workbook.py` writes the review
+  workbook; fold the reviewer's corrections into `assets/i18n/<lang>.js`, and
+  only then take the notice out.
 
 ## Reports
 
