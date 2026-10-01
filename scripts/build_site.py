@@ -80,6 +80,10 @@ def shell(out, meta, content, scripts):
         links = ''.join('<a href="%s%s"%s>%s</a>' % (root, h, ' download' if d else '', html.escape(t)) for h, t, d in place['downloads'])
         dl = ('<details class="dl"><summary class="btn">%s <span class="lbl">Downloads</span></summary>'
               '<div class="menu" data-i18n-each>%s</div></details>' % (DOWN, links))
+    # Print belongs on an analysis, where it prints the charts; the front page
+    # is an introduction and carries no print button.
+    prn = ('' if place['id'] == 'home' else
+           '<button type="button" class="btn-primary print">%s <span class="lbl">Export PDF</span></button>' % PRINT)
     # A dashboard's only heading is the site title in its header.
     tag = 'h1' if meta.get('own_tabs') else 'span'
     header = (
@@ -90,9 +94,9 @@ def shell(out, meta, content, scripts):
         '<span class="subtitle">%s</span></%s></a>\n'
         '    <div class="controls">\n      %s\n      %s\n'
         '      <button type="button" class="theme" aria-pressed="false">%s <span class="lbl">Dark</span></button>\n'
-        '      <button type="button" class="btn-primary print">%s <span class="lbl">Export PDF</span></button>\n'
+        '      %s\n'
         '    </div>\n  </div>\n</header>\n'
-    ) % (place['band'], root or './', LOGO, tag, html.escape(CFG['title']), html.escape(place['subtitle']), tag, places, dl, MOON, PRINT)
+    ) % (place['band'], root or './', LOGO, tag, html.escape(CFG['title']), html.escape(place['subtitle']), tag, places, dl, MOON, prn)
     nav = ''
     if place['pages'] and not meta.get('own_tabs'):
         tabs = []
