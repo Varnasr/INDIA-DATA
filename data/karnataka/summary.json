@@ -1,0 +1,88 @@
+{
+ "before": 55432314,
+ "removed": 10796339,
+ "draft": 44635975,
+ "sep": 44844080,
+ "per_100": 19.48,
+ "reasons": {
+  "absent": 1517042,
+  "shifted": 6545679,
+  "dead": 1639864,
+  "duplicate": 709870,
+  "other": 383884
+ },
+ "shares": {
+  "absent": 14.05,
+  "shifted": 60.63,
+  "dead": 15.19,
+  "duplicate": 6.58,
+  "other": 3.56
+ },
+ "added_sep": 208105,
+ "made_up_pct": 1.93,
+ "net_fall": 10588234,
+ "net_per_100": 19.1,
+ "women_draft_pct": 50.35,
+ "women_sep_pct": 50.37,
+ "districts": 34,
+ "top": [
+  {
+   "district": "B.B.M.P (South)",
+   "per_100": 49.33
+  },
+  {
+   "district": "B.B.M.P (Central)",
+   "per_100": 45.54
+  },
+  {
+   "district": "B.B.M.P (North)",
+   "per_100": 45.12
+  },
+  {
+   "district": "Bangalore Urban",
+   "per_100": 42.71
+  },
+  {
+   "district": "Gulbarga",
+   "per_100": 22.01
+  }
+ ],
+ "low": [
+  {
+   "district": "Uttara Kannada",
+   "per_100": 8.7
+  },
+  {
+   "district": "Haveri",
+   "per_100": 8.62
+  },
+  {
+   "district": "Udupi",
+   "per_100": 5.95
+  }
+ ],
+ "bengaluru": {
+  "districts": 4,
+  "before": 10388363,
+  "removed": 4688703,
+  "per_100": 45.13,
+  "share_of_roll": 18.74,
+  "share_of_removed": 43.43,
+  "shifted_absent_share": 85.35,
+  "dead_share": 6.81,
+  "net_per_100": 45.11,
+  "added_sep": 2340,
+  "made_up_pct": 0.05
+ },
+ "rest": {
+  "per_100": 13.56,
+  "shifted_absent_share": 66.49,
+  "dead_share": 21.62,
+  "made_up_pct": 3.37
+ },
+ "rho_rate_shifted": 0.815,
+ "dead_max": {
+  "district": "Uttara Kannada",
+  "share": 41.16
+ }
+}

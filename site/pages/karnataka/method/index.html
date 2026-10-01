@@ -1,0 +1,33 @@
+<!--page {"title": "Karnataka SIR 2026: sources and method", "description": "Where the Karnataka figures come from, how they are checked, and what they cannot show.", "place": "ka"} -->
+<main id="main">
+<div class="page-head"><h1>Sources and method</h1><ol class="summary" id="short"></ol></div>
+
+  <h2>What is counted</h2>
+  <div class="qa"><h3>Names left off the draft roll</h3><p>The Chief Electoral Officer, Karnataka, published the draft roll on 24 August 2026 with a table of the names left off it, by election district and under five reasons: absent, permanently shifted, dead, already enrolled and other. The 34 district rows add up to the state row, <span id="mRem"></span> names out of <span id="mBefore"></span>, and in every district the names removed and the forms digitised add up to the roll of 16 June 2026.</p></div>
+  <div class="qa"><h3>Why districts and not constituencies</h3><p>The Chief Electoral Officer published every table of the revision by its 34 election districts and for the state, and none by assembly constituency. Bengaluru appears as four of those districts: Bangalore Urban and the North, Central and South districts of the city corporation, B.B.M.P. A count by constituency could be made only by tallying the named lists, which this site does not do in Karnataka.</p></div>
+  <div class="qa"><h3>The roll after the draft</h3><p>The final roll is due on 27 October 2026. Until then the latest figures are the roll of 25 September 2026, by district and sex, published after claims and objections had closed and while notices were still being heard. The rise from the draft to that roll is the names added less those removed since, so it counts new voters as well as names put back, and it is the most that could have been restored.</p></div>
+  <div class="qa"><h3>Women and men</h3><p>The draft roll and the roll of 25 September are published by sex. The roll of 16 June is published as a total only, and the names removed are not split by sex, so the share of women among those removed cannot be counted from the Chief Electoral Officer's tables.</p></div>
+
+  <h2>What these tables cannot show</h2>
+  <ul class="plain">
+    <li>Which constituencies lost the most names, or how the removals compare with the margins of the 2023 election.</li>
+    <li>Whether women, the old or the young were removed more often.</li>
+    <li>Whether each removal was right. A reason on the list is what the officer wrote down, and nobody checked it.</li>
+  </ul>
+
+  <h2>Downloads</h2>
+  <p>The district table behind every chart is in the Downloads menu at the top of the page.</p>
+
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/karnataka.js"></script>
+<script>
+SIR.json('data/karnataka/summary.json').then(function (s) {
+  document.getElementById('mRem').textContent = SIR.n(s.removed);
+  document.getElementById('mBefore').textContent = SIR.n(s.before);
+  SIR.showFaq('ka', 'method');
+}).catch(SIR.fail);
+</script>

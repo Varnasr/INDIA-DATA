@@ -1,0 +1,166 @@
+"""Karnataka: the names left off the draft roll of 24 August 2026, by
+election district and reason, with the draft roll and the roll during claims
+and objections (25 September 2026) by sex.
+
+Reads data/karnataka/raw (see SOURCES.md there) and writes
+data/karnataka/summary.json, districts.json and districts.csv.
+
+    python3 scripts/build_karnataka.py           # write
+    python3 scripts/build_karnataka.py --check   # fail if the output is stale
+
+The CEO published the revision by its 34 election districts only, so there is
+no constituency table. Bengaluru is four of the 34: Bangalore Urban and the
+three B.B.M.P districts. The final roll is due on 27 October 2026; until then
+the latest roll is the one of 25 September, published while claims and
+objections were being heard.
+"""
+import csv
+import io
+import json
+import os
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RAW = os.path.join(ROOT, 'data', 'karnataka', 'raw')
+OUT = os.path.join(ROOT, 'data', 'karnataka')
+CHECK = '--check' in sys.argv
+
+REASONS = ('absent', 'shifted', 'dead', 'duplicate', 'other')
+# The CEO's state row, press note DPAR 163 of 24.08.2026
+STATE = {'before': 55432314, 'absent': 1517042, 'shifted': 6545679, 'dead': 1639864,
+         'duplicate': 709870, 'other': 383884, 'removed': 10796339, 'draft': 44635975}
+SEP_TOTAL = 44844080
+BENGALURU = ('BANGALORE URBAN', 'B.B.M.P(NORTH)', 'B.B.M.P(CENTRAL)', 'B.B.M.P(SOUTH)')
+NAMES = {'B.B.M.P(NORTH)': 'B.B.M.P (North)', 'B.B.M.P(CENTRAL)': 'B.B.M.P (Central)',
+         'B.B.M.P(SOUTH)': 'B.B.M.P (South)'}
+
+
+def rows(name):
+    with open(os.path.join(RAW, name), encoding='utf-8') as fh:
+        return {r['district']: r for r in csv.DictReader(fh)}
+
+
+def spearman(x, y):
+    def rank(v):
+        order = sorted(range(len(v)), key=lambda i: v[i])
+        r = [0.0] * len(v)
+        i = 0
+        while i < len(v):
+            j = i
+            while j + 1 < len(v) and v[order[j + 1]] == v[order[i]]:
+                j += 1
+            for k in range(i, j + 1):
+                r[order[k]] = (i + j) / 2
+            i = j + 1
+        return r
+    rx, ry = rank(x), rank(y)
+    mx, my = sum(rx) / len(rx), sum(ry) / len(ry)
+    cov = sum((a - mx) * (b - my) for a, b in zip(rx, ry))
+    return cov / (sum((a - mx) ** 2 for a in rx) * sum((b - my) ** 2 for b in ry)) ** 0.5
+
+
+def build():
+    asd, draft, sep = rows('asd_district.csv'), rows('draft_roll_district.csv'), rows('roll_20260925_district.csv')
+    assert len(asd) == 34 and set(asd) == set(draft) == set(sep), 'the same 34 districts in all three tables'
+    dist = []
+    for code, a in asd.items():
+        d, s = draft[code], sep[code]
+        g = {k: int(a[k]) for k in REASONS}
+        before, removed = int(a['electors_before']), int(a['total'])
+        assert sum(g.values()) == removed, code
+        dw, dtot = int(d['women']), int(d['general_total'])
+        assert dtot == int(a['digitised']) == before - removed, code
+        sw, stot = int(s['women']), int(s['total'])
+        assert int(s['men']) + sw + int(s['third']) == stot, code
+        row = {'district': NAMES.get(code, code.title()), 'bengaluru': code in BENGALURU,
+               'before': before, 'removed': removed}
+        row.update(g)
+        row.update({
+            'per_100': round(100 * removed / before, 2),
+            'shares': {k: round(100 * g[k] / removed, 2) for k in REASONS},
+            'draft': dtot, 'draft_women_pct': round(100 * dw / dtot, 2),
+            'sep': stot, 'sep_women_pct': round(100 * sw / stot, 2),
+            'added_sep': stot - dtot,
+            'net_per_100': round(100 * (before - stot) / before, 2),
+        })
+        dist.append(row)
+    dist.sort(key=lambda r: -r['per_100'])
+
+    T = lambda k: sum(r[k] for r in dist)
+    for k in ('before', 'removed', 'draft') + REASONS:
+        assert T(k) == STATE[k], k
+    assert T('sep') == SEP_TOTAL
+
+    blr = [r for r in dist if r['bengaluru']]
+    rest = [r for r in dist if not r['bengaluru']]
+    B = lambda L, k: sum(r[k] for r in L)
+    before, removed, sep_t = T('before'), T('removed'), T('sep')
+    summary = {
+        'before': before, 'removed': removed, 'draft': T('draft'), 'sep': sep_t,
+        'per_100': round(100 * removed / before, 2),
+        'reasons': {k: T(k) for k in REASONS},
+        'shares': {k: round(100 * T(k) / removed, 2) for k in REASONS},
+        'added_sep': sep_t - T('draft'),
+        'made_up_pct': round(100 * (sep_t - T('draft')) / removed, 2),
+        'net_fall': before - sep_t,
+        'net_per_100': round(100 * (before - sep_t) / before, 2),
+        'women_draft_pct': round(100 * sum(int(r['women']) for r in draft.values()) / T('draft'), 2),
+        'women_sep_pct': round(100 * sum(int(r['women']) for r in sep.values()) / sep_t, 2),
+        'districts': len(dist),
+        'top': [{'district': r['district'], 'per_100': r['per_100']} for r in dist[:5]],
+        'low': [{'district': r['district'], 'per_100': r['per_100']} for r in dist[-3:]],
+        'bengaluru': {
+            'districts': len(blr), 'before': B(blr, 'before'), 'removed': B(blr, 'removed'),
+            'per_100': round(100 * B(blr, 'removed') / B(blr, 'before'), 2),
+            'share_of_roll': round(100 * B(blr, 'before') / before, 2),
+            'share_of_removed': round(100 * B(blr, 'removed') / removed, 2),
+            'shifted_absent_share': round(100 * (B(blr, 'shifted') + B(blr, 'absent')) / B(blr, 'removed'), 2),
+            'dead_share': round(100 * B(blr, 'dead') / B(blr, 'removed'), 2),
+            'net_per_100': round(100 * (B(blr, 'before') - B(blr, 'sep')) / B(blr, 'before'), 2),
+            'added_sep': B(blr, 'sep') - B(blr, 'draft'),
+            'made_up_pct': round(100 * (B(blr, 'sep') - B(blr, 'draft')) / B(blr, 'removed'), 2),
+        },
+        'rest': {
+            'per_100': round(100 * B(rest, 'removed') / B(rest, 'before'), 2),
+            'shifted_absent_share': round(100 * (B(rest, 'shifted') + B(rest, 'absent')) / B(rest, 'removed'), 2),
+            'dead_share': round(100 * B(rest, 'dead') / B(rest, 'removed'), 2),
+            'made_up_pct': round(100 * (B(rest, 'sep') - B(rest, 'draft')) / B(rest, 'removed'), 2),
+        },
+        'rho_rate_shifted': round(spearman([r['per_100'] for r in dist],
+                                           [r['shares']['shifted'] + r['shares']['absent'] for r in dist]), 3),
+    }
+    by_dead = max(dist, key=lambda r: r['shares']['dead'])
+    summary['dead_max'] = {'district': by_dead['district'], 'share': by_dead['shares']['dead']}
+
+    out = {}
+    out['summary.json'] = json.dumps(summary, ensure_ascii=False, indent=1) + '\n'
+    out['districts.json'] = json.dumps(dist, ensure_ascii=False, separators=(',', ':')) + '\n'
+    cols = ['district', 'before', 'removed', 'per_100'] + list(REASONS) + ['draft', 'sep', 'net_per_100']
+    buf = io.StringIO()
+    w = csv.writer(buf, lineterminator='\n')
+    w.writerow(['district', 'roll_before', 'removed', 'removed_per_100', 'absent', 'shifted', 'dead',
+                'already_enrolled', 'other', 'draft_roll', 'roll_25_sep_2026', 'net_fall_per_100'])
+    for r in dist:
+        w.writerow([r[c] for c in cols])
+    out['districts.csv'] = buf.getvalue()
+
+    stale = []
+    for name, text in out.items():
+        path = os.path.join(OUT, name)
+        old = open(path, encoding='utf-8').read() if os.path.exists(path) else None
+        if old != text:
+            stale.append(name)
+            if not CHECK:
+                open(path, 'w', encoding='utf-8').write(text)
+    return summary, stale
+
+
+if __name__ == '__main__':
+    s, stale = build()
+    if CHECK:
+        if stale:
+            sys.exit('STALE, run python3 scripts/build_karnataka.py: ' + ', '.join(stale))
+        print('OK: data/karnataka matches its raw tables')
+    else:
+        print('%d removed of %d (%.2f per 100); Bengaluru %.2f per 100, %.1f%% of removals'
+              % (s['removed'], s['before'], s['per_100'], s['bengaluru']['per_100'], s['bengaluru']['share_of_removed']))

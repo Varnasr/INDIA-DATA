@@ -2,7 +2,7 @@
 
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
-Hyderabad (2026) and Tamil Nadu (2026). Static HTML, Chart.js from cdnjs, one
+Hyderabad (2026), Tamil Nadu (2026) and Karnataka (2026). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
@@ -259,6 +259,28 @@ unless each adds up to the published totals (9,737,831 removed; draft
   totals equal the declared result. The page says "the Election Commission's
   statistical report, through a published compilation of it" and does not
   name the compiler.
+
+## Karnataka
+
+`scripts/build_karnataka.py` reads `data/karnataka/raw` (sources and checks in
+`SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
+`districts.json` and `districts.csv`; `check_data.py` runs it with `--check`.
+The build fails unless the 34 districts add up to the CEO's state row
+(10,796,339 removed of 55,432,314) and the roll of 25 September to 44,844,080.
+
+- **Districts only.** The CEO published the revision by its 34 election
+  districts and none of it by assembly constituency, so there is no seat page
+  and no comparison with the 2023 margins. `results_2023*.csv` in `raw` is
+  TCPD's compilation, not primary, and no page uses it.
+- **Bengaluru is four districts**: Bangalore Urban and B.B.M.P North, Central
+  and South. Bangalore Rural is not part of it.
+- **The latest roll is 25 September 2026**, published while notices were being
+  heard; the final roll is due 27 October. The rise from the draft counts new
+  voters too, so call it the most that could have been restored. Rebuild from
+  the final roll when it is out, by district and sex.
+- **No split of the removals by sex.** The roll of 16 June is published as a
+  total only. The All India gender row for Karnataka comes from a newspaper;
+  do not move it onto the Karnataka pages as a finding.
 
 ## West Bengal (not yet built)
 
