@@ -22,11 +22,11 @@
   D.C = { red: '#C0392B', orange: '#E67E22', green: '#27AE60', dblue: '#1F618D', purple: '#8E44AD', yellow: '#D4AC0D', teal: '#17A589', grey: '#95A5A6', pink: '#AF3B6E', nda: '#E67E22', india: '#1E8449', other: '#8E7CC3', maroon: '#8B1E3F', gold: '#E0A526', ikat: '#0E5E6F' };
   D.AL = { NDA: D.C.nda, INDIA: D.C.india, Other: D.C.other };
   var ICON = D.ICON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v10"/><circle cx="12" cy="17" r="4"/></svg>';
-  var BAR = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>';
 
   // ---------------------------------------------------------------- markup
   D.kpis = function (list) { var cls = ['', 'y', 'b', 'g', 'o', 'p']; return '<div class="summary-grid">' + list.map(function (k, i) { return '<div class="summary-card ' + cls[i % 6] + '"><div class="summary-value">' + k[0] + '</div><div class="summary-label">' + k[1] + '</div></div>'; }).join('') + '</div>'; };
-  D.banner = function (title, text) { return '<div class="takeaway" role="note">' + BAR + '<div><div class="takeaway-title">' + title + '</div>' + text + '</div></div>'; };
+  // Each tab opens with one plain paragraph; the tab name is its heading.
+  D.banner = function (title, text) { return '<p class="tab-lead">' + text + '</p>'; };
   D.card = function (num, id, title, insight, opts) {
     opts = opts || {};
     return '<div class="card' + (opts.wide ? ' wide' : '') + '"><div class="card-title"><span>' + num + '. ' + title + '</span><div class="card-actions"><button type="button" data-png="' + id + '" aria-label="' + L('Download this chart as PNG') + '">PNG</button></div></div>' +

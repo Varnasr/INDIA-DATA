@@ -198,10 +198,10 @@ R.p('On the state\'s draft-roll figures, the five Old City seats lost %s of thei
 
 R.h2('Key insights')
 R.bullets([
-    '**Not an Old City outlier**: the five seats lost %s of their roll on the state\'s figures, Hyderabad\'s other ten %s, the rest of Telangana %s.' % (pct(TG['old_city']['rate']), pct(TG['other_hyderabad']['rate']), pct(TG['rest_of_state']['rate'])),
     '**%s electors struck off**, %s of the five pre-revision rolls, and %s more summoned to a hearing.' % (indian(t['deleted']), pct(t['rate']), indian(t['hearing'])),
     '**More names struck off than the 2023 margin in all %d constituencies**, and more than all the valid votes cast in %s.' % (len(A), andj([a['name'] for a in overV])),
     '**Yakutpura was won by %s votes** and lost %s names, %.0f times the margin.' % (indian(yak['e2023']['margin']), indian(yak['deleted']), yak['e2023']['deleted_over_margin']),
+    '**The whole city was cut this hard.** On the state\'s figures the five Old City seats lost %s of their roll, Hyderabad\'s other ten %s, and the rest of Telangana %s.' % (pct(TG['old_city']['rate']), pct(TG['other_hyderabad']['rate']), pct(TG['rest_of_state']['rate'])),
     '**%s of electors aged 80 and over struck off**, against %s of those aged 18 to 24.' % (pct(age[-1]), pct(age[0])),
     '**No link to the 2002 roll roughly doubled the chance of being struck off**: %s against %s.' % (pct(ul), pct(lk)),
     '**%s of removals entered as "untraceable or absent"**, ranging from %s to %s between constituencies.' % (pct(rsh['Untraceable/Absent']), pct(min(ut)), pct(max(ut))),
@@ -210,7 +210,7 @@ R.bullets([
 ])
 
 R.h2('What this shows and what it does not')
-R.p('The lists show how many electors were struck off, from which parts, and who they were by age, sex, religion estimated from name, and 2002 linkage. They do not show whether any individual removal was right. '
+R.p('The lists show how many electors were struck off, from which parts, and who they were by age, sex, religion guessed from names, and the link to the 2002 roll. They do not show whether any individual removal was right. '
     'The reason code records what the officer wrote down, which may or may not be true. A household that moved out of the Old City is rightly marked "shifted", and the files cannot tell it apart from an elector who was at home when the officer missed them. '
     'Religion and age are counted separately, so a gap by religion may partly be a gap by age. The Malakpet list used here is incomplete. These are the September lists. On 7 September the Commission extended the calendar, with hearings to 5 November and the final roll on 9 November, so names put back after hearings are not in these counts.')
 

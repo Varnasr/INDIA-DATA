@@ -26,6 +26,7 @@ FB = J('final.json')
 TS = J('tests.json')
 IM = J('impact.json')
 SW = J('swing.json')['summary']
+RB = J('robust.json')
 TD, TM = TS['deaths'], TS['marriage']
 FT, FM = FB['totals'], FB['margin']
 t = S['totals']
@@ -163,12 +164,12 @@ R.h2('Could the removals have changed who won?')
 R.p('A name removed is not a vote lost to one side. Some of the removed had died, many would not have voted, and those who would have voted would have split between the parties. '
     'Each seat\'s count here is the names still off the final roll, less those entered as dead, at the seat\'s 2025 turnout: %s electors across Bihar. That count is low, because the names added after the draft include new electors, so every estimate is also run on all the names removed, with nothing added back (%s).'
     % (indian(IM['voters_lower']), indian(IM['voters_upper'])))
-R.p('The one figure that needs no assumption about how anyone votes is the share of the removed, of those who would have voted, that the runner-up needed to win. '
-    'In %d of %d seats the runner-up could not have won even if every one of them had voted for the runner-up. In %d more the runner-up needed over 55%%. Only in %d seats, %s, would a lean of under 55%% have been enough.'
-    % (IB['over_100'], IM['seats_total'], IB['55_to_65'] + IB['65_to_100'], IB['under_55'], andj([x['name'] for x in IM['close']])))
+R.p('In %d of %d seats the removed electors who would have voted were enough to change the result had they backed the runner-up. In %d of them a lean of under 55%% would have done it (%s). In the other %d seats the margin was larger than every removed vote put together. '
+    'This is the one figure that needs no assumption about how anyone votes.'
+    % (IM['seats_total'] - IB['over_100'], IM['seats_total'], IB['under_55'], andj([x['name'] for x in IM['close']]), IB['over_100']))
 c = IM['comp_booth_all']
-R.p('Had the removed voted the way their own polling booths voted in 2024, the NDA would have lost more of them than INDIA. In the %d seats the two alliances fought each other, those who would have voted lean %s NDA, %s INDIA and %s other parties. '
-    'On the low count %d seats would have changed hands (%s), and on the high count %d (%s).'
+R.p('The lists do not say how the removed would have voted. Going by how their own polling booths voted in 2024, in the %d seats the two alliances fought each other, those who would have voted lean %s NDA, %s INDIA and %s other parties. '
+    'On that reading %d seats would have changed hands counting only the names still off the final roll (%s), and %d counting every name removed (%s).'
     % (IM['seats_nda_vs_india'], pct(c['NDA']), pct(c['INDIA']), pct(c['Other']), IS['booth_lower']['flips'], seatlist('booth_lower'), IS['booth_upper']['flips'], seatlist('booth_upper')))
 R.p('Weighting instead by how Muslims and others, or women and men, voted in the %s, %d and %d seats change hands on the high count (%s; %s). On every estimate the NDA keeps between %d and %d of the 243 seats.'
     % (IM['poll_source'], IS['religion_upper']['flips'], IS['sex_upper']['flips'], seatlist('religion_upper'), seatlist('sex_upper'), min(kept), max(kept)))
@@ -374,15 +375,34 @@ R.bullets([
     '**%d of the %d seats the NDA took from INDIA** lost more names than the NDA won by.' % (len(tookO), len(took)),
     '**Women are %s of the removed**, over-represented in %d of %d districts.' % (pct(fem), len(fOver), len(DI)),
     '**Muslim names are %s to %s of removals**, against 16.87%% of the population in 2011, and more than a point above the census share in %d districts.' % (pct(mlo), pct(mhi), len(above)),
+    '**In %d seats the removed who would have voted were enough to change the result**, and in %d a lean of just over half among them would have done it.' % (IM['seats_total'] - IM['breakeven_bands']['lower']['over_100'], IM['breakeven_bands']['lower']['under_55']),
+    '**Women are %s of the names entered as dead**, against %s of adult deaths in Bihar.' % (pct(TD['women_share_dead']), pct(TD['women_share_expected'])),
     '**%s booths lost 200 names or more each.**' % indian(b200),
     '**Reasons entered in phase 1**: shifted %s, dead %s, absent %s, already enrolled %s. %s of the %s more women than men removed were marked shifted.' % (pct(rsh('shifted')), pct(rsh('dead')), pct(rsh('absent')), pct(rsh('already_enrolled')), indian(xsS), indian(xsF)),
     '**Names marked absent alone exceed the margin in %d seats**, names marked already enrolled in %d.' % (rOver('r_absent'), rOver('r_enrolled')),
     '**The final roll made up %s of the draft removals**, and the fall that remained still exceeded the margin in %d of %d seats. Women were %s of those added after the draft.' % (pct(FT['made_up_pct']), FM['net'], FM['seats'], pct(FT['women_share_added'])),
 ])
 
+R.h2('How sure are we?')
+iv = lambda x: '%s%.2f (%.2f to %.2f)' % ('+' if x['est'] > 0 else '', x['est'], x['lo'], x['hi'])
+M_, W_, G_, S_ = RB['margins'], RB['women'], RB['ground'], RB['swing']
+R.p('A pattern seen across all seats can weaken or turn round once seats are compared only with seats like them. Each finding was measured again within each district, within each seat, and with Seemanchal left out.')
+R.table(['Finding', 'How it was checked', 'Result'], [
+    ['More names removed than the winning margin', 'Draft removals: %d of %d seats. Net fall to the final roll: %d of %d.' % (M_['draft'], M_['seats'], M_['net'], M_['seats']), 'Holds on both counts'],
+    ['Women removed out of proportion to the roll', 'Districts: %d of %d. Constituencies: %d of %d.' % (W_['districts_over'], W_['districts'], W_['seats_over'], W_['seats']),
+     'Holds in every district' if W_['districts_over'] == W_['districts'] else 'Holds in most districts'],
+    ['More names removed on NDA ground', 'All seats: %.2f per 100 electors where the NDA won in 2020, %.2f where INDIA won. Seats in the same district: %s per 100. Booths in the same seat: NDA-led booths lost %.1f more names each, and more in %d of %d seats.'
+     % (G_['pooled']['nda'], G_['pooled']['india'], iv(G_['within_district']), G_['within_seat']['diff'], G_['within_seat']['nda_higher'], G_['within_seat']['seats']),
+     'Holds at every level' if G_['within_district']['lo'] > 0 else 'Holds inside seats. Between seats in the same district the gap is too small to be sure of'],
+    ['Seats with more removals swung further to the NDA', 'All seats: %s. Within districts: %s. Within districts, allowing for the 2020 result: %s. Seats the NDA held: %s. Seats INDIA held: %s. Leaving out Seemanchal: %s. Positive in %d of %d districts.'
+     % (iv(S_['pooled']), iv(S_['within_district']), iv(S_['within_district_2020']), iv(S_['held_nda_2020']), iv(S_['held_india_2020']), iv(S_['ex_seemanchal']), S_['districts_positive'], S_['districts_compared']),
+     'Cannot tell. The answer changes with the comparison']],
+    widths=[3.6, 9.0, 3.4], size=8)
+R.p('Two findings survive every check. In most constituencies more names were removed than the margin that decided the seat, on the draft count and on the final roll, and women were removed out of proportion in all %d districts and %d of %d constituencies.' % (W_['districts'], W_['seats_over'], W_['seats']))
+
 R.h2('What this shows and what it does not')
 R.p('The lists show how many names were removed, where, who the removed were by sex, age and name, and the reason the officer entered against each phase 1 removal, and they allow the removals to be set against the margins and votes that decided each seat. '
-    'They do not show whether that reason was true of the person, whether the removal was right, or how the elector voted. Religion and caste are read from names and are estimates, given as ranges or under two classifications. '
+    'They do not show whether that reason was true of the person, whether the removal was right, or how the elector voted. Religion and caste are guessed from names, so they are given as ranges or under two classifications. '
     'Votes polled are the turnout on the 2025 roll, within about 1% of a second calculation from each winner\'s vote and share.')
 
 # ============================================================ PART II

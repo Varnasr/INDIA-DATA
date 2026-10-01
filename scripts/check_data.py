@@ -151,6 +151,11 @@ def _swing():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
+def _robust():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_robust.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
+
 def _short_and_faq():
     # Every page but the full reports opens with an "In short" box and carries
     # questions and answers: its own (#pageFaq) or, on an FAQ tab, all (#qas).
@@ -193,6 +198,7 @@ for name, fn in [
     ('Bihar deaths and marriage tests current, and the census districts add up', _bihar_tests),
     ('Impact estimates for Bihar and Hyderabad current', _impact),
     ('2020 to 2025 swing current, 2025 votes match the declared result', _swing),
+    ('robustness checks current', _robust),
     ('every page opens with In short and carries questions', _short_and_faq),
     ('findings pages link to the method page', _pages_link_method),
 ]:

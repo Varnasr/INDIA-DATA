@@ -4,7 +4,7 @@
 (function () {
   var P;
   SIR.faq('bihar', 'bihar/faq/', function () {
-    return P || (P = Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/reasons.json'), SIR.json('data/bihar/final.json'), SIR.json('data/bihar/tests.json'), SIR.json('data/bihar/impact.json'), SIR.json('data/bihar/swing.json'), SIR.json('data/bihar/districts.json')]).then(function (r) {
+    return P || (P = Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/reasons.json'), SIR.json('data/bihar/final.json'), SIR.json('data/bihar/tests.json'), SIR.json('data/bihar/impact.json'), SIR.json('data/bihar/swing.json'), SIR.json('data/bihar/districts.json'), SIR.json('data/bihar/robust.json')]).then(function (r) {
   var IM = r[6], IS = IM.summary, IB = IM.breakeven_bands.lower, SW = r[7].summary, swn = SW.thirds.map(function (t) { return t.d_lead_adj; });
   var FN = r[4], FT = FN.totals, TD = r[5].deaths, TM = r[5].marriage;
   var RS = r[3], RT = RS.totals, rp = function (k) { return SIR.pct(100 * RT[k] / RS.total); };
@@ -29,10 +29,10 @@
     [L('Did the removals exceed the margins by which seats were won?'),
      L('Yes, in {over} of {seats} constituencies. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {took_over} lost more names than the NDA\'s winning margin. That does not mean those results would have gone the other way. It means the roll changed by more than the vote that decided the seat, and nobody outside the Commission can say whose names they were.', { over: over.length, seats: withM.length, took: took.length, took_over: tookOver.length })],
     [L('Could the removals have changed who won?'),
-     L('In a handful of seats, and in both directions.') + ' ' + L('In {n} of {seats} seats the runner-up could not have won even if every removed elector who would have voted had backed them. Had the removed voted the way their own booths voted in 2024, the NDA would have lost more of them than INDIA, and {k1} to {k2} seats would have changed hands, {i1} to INDIA and {n2} to the NDA on the fuller count. The NDA\'s majority holds on every estimate. <a href="../results/">Elections</a>.', {
-       n: IB.over_100, seats: IM.seats_total, k1: IS.booth_lower.flips, k2: IS.booth_upper.flips, i1: IS.booth_upper.to_india, n2: IS.booth_upper.to_nda })],
+     L('In many seats they could have. In {n} of {seats} seats the removed electors who would have voted were enough to change the result had they backed the runner-up, and in {k} a lean of just over half among them would have done it. The lists do not say how they would have voted. Going by how their own booths voted in 2024, {k1} to {k2} seats would have changed hands, some each way. <a href="../results/">Elections</a>.', {
+       n: IM.seats_total - IB.over_100, seats: IM.seats_total, k: IB.under_55, k1: IS.booth_lower.flips, k2: IS.booth_upper.flips })],
     [L('So was the revision clean?'),
-     L('The election results cannot say, and they cannot settle whether the removals moved votes between the alliances either. Once each seat\'s 2020 result is allowed for, the NDA\'s lead grew by between {lo} and {hi} points whether a seat lost few names or many, but the test is too blunt to rule out a sizeable lean against the NDA among those removed. Whether each name was rightly removed is a separate question, and on that the lists raise problems the vote cannot settle. Women are over-represented among the removed in every district, and more women were entered as dead than the death rates would give. A voter wrongly removed has lost a vote whichever way it would have gone. <a href="../results/#swing">Elections</a>.', { lo: SIR.d(Math.min.apply(null, swn), 1), hi: SIR.d(Math.max.apply(null, swn), 1) })],
+     L('The lists give every reason to doubt it. {total} names came off the roll, women were removed out of proportion in every district, more women were entered as dead than the death rates would give, and the final roll put back at most {m} of those removed at the draft. A voter wrongly removed has lost a vote whichever way it would have gone. What the election results cannot show is whether the removals moved votes between the alliances. <a href="../results/#swing">Elections</a>.', { total: SIR.lakh(t.total), m: SIR.pct(FT.made_up_pct) })],
     [L('Are the names entered as dead plausible?'),
      L('In number, yes. They equal about {y} years of Bihar\'s adult deaths at 2024 death rates, and their ages are close to those of registered deaths. By sex, no. Women are {wd} of those entered as dead but {we} of adult deaths. Either women\'s deaths, which are registered less often, stayed on the roll longer, or women still alive were entered as dead. <a href="../people/">Women, religion and caste</a>.', { y: SIR.d(TD.years_of_deaths, 1), wd: SIR.pct(TD.women_share_dead), we: SIR.pct(TD.women_share_expected) })],
     [L('Is marriage why so many young women were marked shifted?'),
@@ -95,6 +95,11 @@
   QA.push([L('Can I look up my own name here?'),
     L('No. Only counts are published on this site. To check your own entry, use the Election Commission\'s voter search.'), ['explorer', 'dash']]);
 
+  var RB = r[9];
+  QA.push([L('How sure are these findings?'),
+    L('Each was measured again within each district, within each seat and with Seemanchal left out. Two survive every check. More names were removed than the winning margin in {a} of {n} seats on the draft count and {b} on the final roll, and women were removed out of proportion in all {d} districts and {s} of {n} constituencies. That more names were removed on NDA ground holds inside seats, where NDA-led booths lost more in {h} of {c} seats. Whether seats with more removals swung further to the NDA changes with the comparison. <a href="../results/#sure">Elections</a>.', {
+      a: RB.margins.draft, b: RB.margins.net, n: RB.margins.seats, d: RB.women.districts, s: RB.women.seats_over, h: RB.ground.within_seat.nda_higher, c: RB.ground.within_seat.seats }), ['results', 'method', 'dash']]);
+
   // ---- "In short" for each page, every figure from the data.
   var cls2 = t.hindu + t.muslim + t.unknown, avgB = t.p1 / t.booths;
   var fem = fOver === D.length ? L('Women were more likely to be removed. They are {w} of the names removed and {roll} of the roll they were removed from, and their share of the removed is higher in all {n} districts.', { w: SIR.pct(fs), roll: SIR.pct(t.female_share_roll), n: D.length })
@@ -102,10 +107,10 @@
   var NOTE_NAMES = L('Religion and caste are guessed from names and given as ranges.');
   var NOTE_REASON = L('A reason on the list is what the officer wrote down, and nobody checked it.');
   var head = [
-    L('The revision took {total} names off Bihar\'s roll in two phases, {r} of every 100 electors on the 2025 roll.', { total: SIR.lakh(t.total), r: SIR.d(100 * t.total / t.electorate_2025, 2) }),
+    L('The revision took {total} names off Bihar\'s roll, {r} of every 100 electors and as many as {share} of all the votes cast in the election that followed.', { total: SIR.lakh(t.total), r: SIR.d(100 * t.total / t.electorate_2025, 2), share: SIR.pct(100 * t.total / SIR.sum(acs, 'votes2025')) }),
     fem,
     L('In {over} of {seats} constituencies more names came off the roll than the 2025 winning margin. Once claims were heard, the final roll made up at most {m} of the names removed at the draft.', { over: over.length, seats: withM.length, m: SIR.pct(FT.made_up_pct) }),
-    L('Inside the same constituency, booths that voted NDA in 2024 lost more names than booths that voted INDIA.')
+    L('In {n} constituencies the removed electors who would have voted were enough to change the result had they backed the runner-up.', { n: IM.seats_total - IB.over_100 })
   ];
   var SHORT = {
     dash: [head, NOTE_NAMES], faq: [head, NOTE_NAMES],
@@ -117,8 +122,8 @@
     results: [[
       L('In {over} of {seats} constituencies more names were removed than the 2025 winning margin. That includes {took_over} of the {took} seats the NDA took from INDIA.', { over: over.length, seats: withM.length, took_over: tookOver.length, took: took.length }),
       L('After claims and objections the final roll was still smaller than the old roll in every seat, and in {net} seats the fall that remained was larger than the margin.', { net: FN.margin.net }),
-      L('Seats the NDA won in 2020 lost more names than seats INDIA won, {nda} against {india} per 100 electors, and inside each seat the booths that voted NDA lost more.', { nda: SIR.d(AL['2020'].NDA.per_100, 2), india: SIR.d(AL['2020'].INDIA.per_100, 2) }),
-      L('If the removed had voted the way their own booths voted in 2024, {k1} to {k2} seats would have changed hands, in both directions, and the NDA would still have held its majority.', { k1: IS.booth_lower.flips, k2: IS.booth_upper.flips })],
+      L('In {n} of {seats} seats the removed electors who would have voted were enough to change the result had they backed the runner-up, and in {k} a lean of just over half among them would have done it.', { n: IM.seats_total - IB.over_100, seats: IM.seats_total, k: IB.under_55 }),
+      L('Inside each constituency, the booths that voted NDA in 2024 lost more names than those that voted INDIA.')],
       L('The lists show where the removals fell. They cannot show whose votes the removed names were, and the election results cannot show whether the removals moved votes between the alliances.')],
     people: [[
       fOver === D.length ? L('Women are {w} of the names removed and {roll} of the roll they were removed from. Their share of the removed is higher in all {n} districts.', { w: SIR.pct(fs), roll: SIR.pct(t.female_share_roll), n: D.length })
