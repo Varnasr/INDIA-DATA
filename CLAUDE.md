@@ -257,19 +257,25 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   add a page there as well as to the tab row. It follows a
   dashboard's tab changes through a MutationObserver on `aria-selected`.
   Without JavaScript the scrolling row stays, so nothing depends on it.
-- **Every page but the full reports opens with an "In short" box and ends
-  with its own questions and answers.** Both come from one file per analysis,
-  `assets/faq/bihar.js`, `hyd.js` and `india.js`: it loads the data once and
-  returns `{qa, short}`, where each question carries the page keys it belongs
-  to (`dash`, `explorer`, `results`, `people`, `border`, `districts`, `parts`,
-  `hearings`, `telangana`, `method`, `main`) and `short` maps a page key to its
-  box. A page calls `SIR.showFaq(site, key)`; the FAQ tab calls
-  `SIR.showFaq(site)` and shows every question. Answers are written for the
-  FAQ tab, and their relative links are resolved against it wherever they
-  appear, so write links as seen from `<site>/faq/`. The All India landing
-  page keeps its own six-point box in its page script. `check_data.py` fails
-  if a page loses either block. When a finding changes, change it in the
-  module and every page that shows it moves together.
+- **Every page but the full reports opens with 3 to 6 numbered findings and
+  ends with its own questions.** The findings are a plain list (`ol.summary`)
+  straight under the heading, with no banner and no caveats: they say what the
+  data shows. Each page's limits go in one line at the foot (`#shortNote`,
+  `.note.limits`), before its questions, and in full on the method page. Do
+  not put a second intro paragraph or banner above the content. Inside a
+  page, a run of `.finding` banners shows only the first as a banner and the
+  rest as plain text, and `.caveat` is a quiet note; `sir.css` does both, so
+  write the markup as before. The findings, the limits line and the questions
+  come from one file per analysis, `assets/faq/bihar.js`, `hyd.js` and
+  `india.js`: it loads the data once and returns `{qa, short}`, where each
+  question carries the page keys it belongs to (`dash`, `explorer`, `results`,
+  `people`, `border`, `districts`, `parts`, `hearings`, `telangana`, `method`,
+  `main`) and `short` maps a page key to `[findings, limits line]`. A page
+  calls `SIR.showFaq(site, key)`; the FAQ tab calls `SIR.showFaq(site)` and
+  shows every question. Answers are written for the FAQ tab, and their
+  relative links are resolved against it wherever they appear, so write
+  links as seen from `<site>/faq/`. The All India landing page builds its own
+  list in its page script. `check_data.py` fails if a page loses either block.
 - **The part explorer takes a link to a part**: `hyderabad/explorer/#Yakutpura-297`.
 - No page states the site's own address.
 - Colour tokens live in `assets/sir.css`, with the dark block written twice

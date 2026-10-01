@@ -42,14 +42,12 @@
         faq: [[
           L('The revision removed {r} names across {s} states and union territories at the draft, {p} of every 100 electors.', { r: cr(T.removed), s: T.states, p: SIR.d(T.per_100, 1) }),
           L('Where a reason was given, {sao} were entered as moved, not found or other, and {dead} as dead.', { sao: SIR.pct(T.shares.shifted_absent_other), dead: SIR.pct(T.shares.dead) }),
-          fem, back,
-          L('A reason on the list is what the officer wrote down, and nobody checked it.')]],
+          fem, back], L('A reason on the list is what the officer wrote down, and nobody checked it.')],
         method: [[
           L('The Election Commission has published no national table of removals, so each row is the state\'s own announcement.'),
           L('Rows are flagged where the figures were rounded or where the reasons do not add up to the total.'),
-          L('For Bihar the figures are counted from the deletion lists on this site.'),
-          L('A reason on the list is what the officer wrote down, and nobody checked it.'),
-          L('Population projections count people where they live, so states that draw migrants look short of electors who are registered in their home states.')]]
+          L('For Bihar the figures are counted from the deletion lists on this site.')],
+          L('Population projections count people where they live, so states that draw migrants look short of electors who are registered in their home states.')]
       };
       return { qa: QA, short: SHORT };
     }));
