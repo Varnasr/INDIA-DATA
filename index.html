@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="assets/i18n.js?v=3d2c72f4"></script>
+<script src="assets/i18n.js?v=368b4ca2"></script>
 <title>SIR analysis for India: who was taken off the electoral rolls</title>
 <meta name="description" content="In 2025 and 2026 the Election Commission revised the electoral rolls of most of India, and crores of names were left off. This site counts who was removed, where, and on what recorded reason, from the published lists and figures.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
@@ -16,7 +16,7 @@
   <div class="header-content">
     <a class="logo" href="./"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span class="titles"><span class="h-title">SIR analysis for India</span><span class="subtitle">Names taken off the electoral rolls, counted from the published lists</span></span></a>
     <div class="controls">
-      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Places</span></summary><div class="menu" data-i18n-each><a href="./" aria-current="true">About this site</a><a href="india/">All India</a><a href="bihar/">Bihar 2025</a><a href="hyderabad/">Hyderabad 2026</a></div></details>
+      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Places</span></summary><div class="menu" data-i18n-each><a href="./" aria-current="true">About this site</a><a href="india/">All India</a><a href="bihar/">Bihar 2025</a><a href="hyderabad/">Hyderabad 2026</a><a href="tamilnadu/">Tamil Nadu 2026</a></div></details>
       
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span class="lbl">Export PDF</span></button>
@@ -37,6 +37,7 @@
   <a class="hub" href="india/"><b>All India</b><span id="hIndia">Every state and union territory in the revision, with the reasons each one recorded.</span></a>
   <a class="hub" href="bihar/"><b>Bihar 2025</b><span id="hBihar">Every constituency and every booth, set against the 2025 election result.</span></a>
   <a class="hub" href="hyderabad/"><b>Hyderabad Old City 2026</b><span id="hHyd">Five constituencies, elector by elector, from the lists of who was struck off and who was summoned.</span></a>
+  <a class="hub" href="tamilnadu/"><b>Tamil Nadu 2026</b><span id="hTn">Every constituency and district, with the reason recorded, set against the 2026 election result.</span></a>
 </div>
 
 <h2>Why this site exists</h2>
@@ -55,15 +56,16 @@
 <p>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>, a development research and evaluation practice. The tables behind the charts can be downloaded from the Downloads menu on each analysis.</p>
 </main>
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="./">About this site</a></footer>
-<script src="assets/sir.js?v=68f82dc0"></script>
+<script src="assets/sir.js?v=45c195b6"></script>
 <script>
-Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.json'), SIR.json('data/hyderabad/summary.json')]).then(function (r) {
+Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.json'), SIR.json('data/hyderabad/summary.json'), SIR.json('data/tamilnadu/summary.json')]).then(function (r) {
   var T = r[0].total, B = r[1].totals, H = r[2].totals;
   var cr = function (x) { return L('{x} crore', { x: (x / 1e7).toFixed(2) }); };
   document.getElementById('lead').innerHTML = L('In 2025 and 2026 the Election Commission revised the electoral rolls of {s} states and union territories house by house, in what it called a Special Intensive Revision. Every elector had to fill in a fresh form, and {r} names were left off the draft rolls. This site counts those names from the lists and figures the Commission and the states have published, and sets out who was removed, where, and on what recorded reason.', { s: T.states, r: cr(T.removed) });
   document.getElementById('hIndia').innerHTML = L('{r} names left off the draft rolls in {s} states and union territories, and the reasons each one recorded.', { r: cr(T.removed), s: T.states });
   document.getElementById('hBihar').innerHTML = L('{n} names removed across {acs} constituencies and {booths} booths, set against the 2025 election result.', { n: SIR.lakh(B.total), acs: B.acs, booths: SIR.n(B.booths) });
   document.getElementById('hHyd').innerHTML = L('{d} of {e} electors struck off in {k} constituencies, counted elector by elector.', { d: SIR.n(H.deleted), e: SIR.n(H.electors), k: r[2].acs.length });
+  document.getElementById('hTn').innerHTML = L('{n} names left off the draft roll in {acs} constituencies, {p} of every 100 electors, set against the 2026 election result.', { n: SIR.lakh(r[3].removed), acs: r[3].acs, p: SIR.d(r[3].per_100, 1) });
 }).catch(SIR.fail);
 </script>
 </body>

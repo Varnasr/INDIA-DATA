@@ -25,7 +25,10 @@ const { chromium } = await import(PW);
 // added later is collected without anyone remembering to list it here.
 const walk = (d) => fs.readdirSync(path.join(ROOT, d), { withFileTypes: true }).flatMap((e) =>
   e.isDirectory() ? walk(path.join(d, e.name)) : e.name === 'index.html' ? [d ? d + '/' : ''] : []);
-const PAGES = ['', ...walk('india'), ...walk('bihar'), ...walk('hyderabad')].sort();
+// The analyses are the first folder of every page each place lists.
+const SECTIONS = [...new Set(JSON.parse(fs.readFileSync(path.join(ROOT, 'site/places.json'), 'utf8')).places
+  .flatMap((p) => p.pages.map((x) => x[0].split('/')[0])))];
+const PAGES = ['', ...SECTIONS.flatMap((d) => walk(d))].sort();
 const SOURCES = ['index.html', 'assets/sir.js', 'assets/dash.js', 'assets/i18n.js', ...fs.readdirSync(path.join(ROOT, 'assets/faq')).filter(f => f.endsWith('.js')).sort().map(f => 'assets/faq/' + f), ...PAGES.filter(Boolean).map(p => p + 'index.html')];
 
 const cat = {};

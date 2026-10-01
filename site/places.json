@@ -89,6 +89,25 @@
         ["data/hyderabad/constituencies.csv", "Constituency table, CSV", true],
         ["data/hyderabad/parts.csv", "Polling-part table, CSV", true]
       ]
+    },
+    {
+      "id": "tn",
+      "label": "Tamil Nadu 2026",
+      "subtitle": "Tamil Nadu 2026 · every constituency, every district",
+      "band": "kolam",
+      "color": "8a2a1b",
+      "class": "tn",
+      "nav_label": "Tamil Nadu pages",
+      "pages": [
+        ["tamilnadu/", "Overview", "i0"],
+        ["tamilnadu/elections/", "Elections", "i6"],
+        ["tamilnadu/faq/", "FAQ", "i12"],
+        ["tamilnadu/method/", "Method", "i10"]
+      ],
+      "downloads": [
+        ["data/tamilnadu/constituencies.csv", "Constituency table, CSV", true],
+        ["data/tamilnadu/districts.csv", "District table, CSV", true]
+      ]
     }
   ]
 }

@@ -1,0 +1,93 @@
+<!--page {"title": "Tamil Nadu SIR 2026: names removed, by district and constituency", "description": "The names left off Tamil Nadu's draft electoral roll in the Special Intensive Revision, by district and constituency, with the reason recorded and what the final roll put back.", "place": "tn"} -->
+<main id="main">
+<div class="page-head"><h1>Tamil Nadu: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
+
+  <h2>Removals per 100 electors, by district</h2>
+  <p class="sub">Names left off the draft roll of 19 December 2025, for every 100 electors on the roll before the revision began. Chennai is marked in red.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart rows"><canvas id="cDist" aria-label="Names removed per 100 electors, by district"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fDist"></p>
+
+  <h2>The reasons, district by district</h2>
+  <p class="sub">Each district's removals split by the reason entered against the name: dead, shifted or absent, and enrolled in more than one place. Districts are in the same order as above.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart rows"><canvas id="cMix" aria-label="Share of each district's removals by reason"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fMix"></p>
+
+  <h2>Chennai</h2>
+  <p class="sub">The city's sixteen constituencies, by names removed per 100 electors and by reason.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart tall"><canvas id="cChennai" aria-label="Names removed per 100 electors in Chennai's constituencies, by reason"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fChennai"></p>
+
+  <h2>After the final roll</h2>
+  <p class="sub">The grey bar is the names left off the draft roll for every 100 electors on the roll before the revision. The blue bar is the fall that remains on the final roll of 23 February 2026, after the names added and removed on claims and objections.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart rows"><canvas id="cFinal" aria-label="Names removed per 100 electors at the draft and the net fall at the final roll, by district"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fFinal"></p>
+
+  <h2>Every constituency</h2>
+  <p class="sub">Click a column heading to sort. The table scrolls.</p>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="Every constituency"><table id="tAc"></table></div>
+
+  <p class="note">Every figure on this page is computed from the published data when the page loads. <a href="method/">Sources and method</a>.</p>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="../assets/sir.js"></script>
+<script src="../assets/faq/tamilnadu.js"></script>
+<script>
+Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/districts.json'), SIR.json('data/tamilnadu/constituencies.json')]).then(function (r) {
+  var S = r[0], D = r[1], A = r[2];
+  var RS = [['dead', L('Dead'), '--fill-grey'], ['shifted_absent', L('Shifted or absent'), '--fill-navy'], ['multiple', L('Enrolled in more than one place'), '--fill-amber']];
+  var labels = D.map(function (d) { return d.district; });
+  SIR.chart('cDist', { type: 'bar', data: { labels: labels, datasets: [{ label: L('Per 100 electors'), data: D.map(function (d) { return d.per_100; }), $tokens: D.map(function (d) { return d.district === 'Chennai' ? '--fill-red' : '--fill-navy'; }) }] },
+    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Removed per 100 electors') } } } } });
+  var low = D[D.length - 1];
+  document.getElementById('fDist').innerHTML = L('<b>Chennai lost {c} of every 100 electors, against {s} for the state.</b> The next four are {next}. {lo} lost the fewest, {lov}.', {
+    c: SIR.d(D[0].per_100, 1), s: SIR.d(S.per_100, 1), lo: low.district, lov: SIR.d(low.per_100, 1),
+    next: D.slice(1, 5).map(function (d) { return L('{s} ({v})', { s: d.district, v: SIR.d(d.per_100, 1) }); }).join(', ') });
+
+  SIR.chart('cMix', { type: 'bar', data: { labels: labels, datasets: RS.map(function (k) { return { label: k[1], data: D.map(function (d) { return +(100 * d[k[0]] / d.removed).toFixed(1); }), $token: k[2] }; }) },
+    options: { indexAxis: 'y', scales: { y: { stacked: true, ticks: { autoSkip: false } }, x: { stacked: true, max: 100, title: { display: true, text: L('% of the district\'s removals') } } } } });
+  var byDead = D.slice().sort(function (a, b) { return b.dead_share - a.dead_share; });
+  document.getElementById('fMix').innerHTML = L('<b>Across the state, {sh} of the names were entered as shifted or absent and {dead} as dead.</b> In Chennai the share entered as shifted or absent is {csh}. Where fewer names were removed, more of them were entered as dead, up to {dmax} in {dmaxn}. A reason on the list is what the officer wrote down, and nobody checked it.', {
+    sh: SIR.pct(S.shares.shifted_absent), dead: SIR.pct(S.shares.dead), csh: SIR.pct(S.chennai.shifted_share), dmax: SIR.pct(byDead[0].dead_share), dmaxn: byDead[0].district });
+
+  var C = A.filter(function (a) { return a.district === 'Chennai'; }).sort(function (a, b) { return b.per_100 - a.per_100; });
+  SIR.chart('cChennai', { type: 'bar', data: { labels: C.map(function (a) { return a.name; }), datasets: RS.map(function (k) { return { label: k[1], data: C.map(function (a) { return +(100 * a[k[0]] / a.before).toFixed(1); }), $token: k[2] }; }) },
+    options: { indexAxis: 'y', scales: { y: { stacked: true, ticks: { autoSkip: false } }, x: { stacked: true, beginAtZero: true, title: { display: true, text: L('Removed per 100 electors') } } } } });
+  document.getElementById('fChennai').innerHTML = L('<b>Every one of Chennai\'s {n} constituencies lost more than {min} of every 100 electors.</b> {hi} lost {hiv}, the most of any seat in the state. Chennai holds {roll} of the state\'s roll and {rem} of the names removed.', {
+    n: C.length, min: Math.floor(C[C.length - 1].per_100), hi: C[0].name, hiv: SIR.d(C[0].per_100, 1), roll: SIR.pct(S.chennai_share_of_roll), rem: SIR.pct(S.chennai_share_of_removed) });
+
+  SIR.chart('cFinal', { type: 'bar', data: { labels: labels, datasets: [
+      { label: L('Left off the draft, per 100'), data: D.map(function (d) { return d.per_100; }), $token: '--fill-grey' },
+      { label: L('Net fall at the final roll, per 100'), data: D.map(function (d) { return d.net_per_100; }), $token: '--fill-navy' }] },
+    options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Per 100 electors on the roll before the revision') } } } } });
+  document.getElementById('fFinal').innerHTML = L('<b>The final roll is {a} larger than the draft, and still {f} smaller than the roll before the revision.</b> That is a fall of {p} of every 100 electors. The rise from the draft is at most {m} of the names removed, and it includes new voters. Chennai\'s roll is {c} per 100 smaller than before.', {
+    a: SIR.lakh(S.added_net), f: SIR.lakh(S.net_fall), p: SIR.d(S.net_per_100, 1), m: SIR.pct(S.made_up_pct), c: SIR.d(S.chennai.net_per_100, 1) });
+
+  SIR.table(document.getElementById('tAc'), [
+    { k: 'ac', label: L('No.') }, { k: 'name', label: L('Constituency'), left: true }, { k: 'district', label: L('District'), left: true },
+    { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Removed'), fmt: SIR.n },
+    { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'shifted_absent', label: L('Shifted or absent'), fmt: SIR.n }, { k: 'dead', label: L('Dead'), fmt: SIR.n },
+    { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
+  ], A, { sort: 'per_100' });
+  SIR.showFaq('tn', 'main');
+}).catch(SIR.fail);
+</script>

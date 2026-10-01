@@ -1,0 +1,78 @@
+<!--page {"title": "Tamil Nadu SIR 2026: removals against the 2026 result", "description": "The names left off Tamil Nadu's draft roll, constituency by constituency, against the margins of the 2026 assembly election.", "place": "tn"} -->
+<main id="main">
+<div class="page-head"><h1>Removals and the 2026 election</h1><ol class="summary" id="short"></ol></div>
+
+  <h2>Names removed against the winning margin</h2>
+  <p class="sub">Each dot is a constituency. Across, the names left off the draft roll; up, the 2026 winning margin in votes. Dots below the line are seats where more names were removed than the winner won by. Colour shows the party that won.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart tall"><canvas id="cScatter" aria-label="Names removed against the 2026 winning margin, by constituency"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fScatter"></p>
+
+  <h2>How many seats, on each count</h2>
+  <p class="sub">Three ways of setting the removals against the margin, from the widest to the narrowest. The first counts every name left off the draft. The second counts the fall that remains on the final roll. The third leaves out the names marked dead and counts the rest at the seat's own 2026 turnout.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="chart"><canvas id="cCounts" aria-label="Seats where the removals exceed the winning margin, on three counts"></canvas></div>
+    </div>
+  </div>
+  <p class="finding" id="fCounts"></p>
+
+  <h2>Removals by the party that won</h2>
+  <p class="sub">Names removed per 100 electors in the seats each party won in 2026. The last column sets each seat against the rate of its own district and averages the difference, so that a party is not credited with the city simply for winning there. A minus means fewer removals than the district as a whole.</p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Removals by the party that won"><table id="tWin"></table></div>
+  <p class="finding" id="fWin"></p>
+
+  <h2>Every constituency</h2>
+  <p class="sub">Click a column heading to sort. The table scrolls.</p>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="Every constituency, with the 2026 result"><table id="tAc"></table></div>
+
+  <p class="note">Every figure on this page is computed from the published data when the page loads. <a href="../method/">Sources and method</a>.</p>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/tamilnadu.js"></script>
+<script>
+Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/constituencies.json')]).then(function (r) {
+  var S = r[0], A = r[1];
+  var G = [['TVK', '--fill-amber'], ['DMK', '--fill-red'], ['AIADMK', '--fill-navy']];
+  var groups = G.map(function (g) { return { label: g[0], test: function (a) { return a.winner === g[0]; }, tok: g[1] }; })
+    .concat([{ label: L('Other parties'), test: function (a) { return ['TVK', 'DMK', 'AIADMK'].indexOf(a.winner) < 0; }, tok: '--fill-grey' }]);
+  var maxX = Math.max.apply(null, A.map(function (a) { return a.removed; }));
+  SIR.chart('cScatter', { type: 'scatter', data: { datasets: groups.map(function (g) {
+      return { label: g.label, data: A.filter(g.test).map(function (a) { return { x: a.removed, y: a.margin, n: a.name, w: a.winner }; }), $token: g.tok, pointRadius: 3.5 };
+    }).concat([{ type: 'line', label: L('Margin equals names removed'), data: [{ x: 0, y: 0 }, { x: maxX, y: maxX }], $token: '--fill-other', pointRadius: 0, borderDash: [5, 4], borderWidth: 1.5 }]) },
+    options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n ? L('{n} ({w}): {x} removed, margin {y}', { n: c.raw.n, w: c.raw.w, x: SIR.n(c.raw.x), y: SIR.n(c.raw.y) }) : ''; } } } },
+      scales: { x: { beginAtZero: true, title: { display: true, text: L('Names left off the draft roll') } }, y: { beginAtZero: true, title: { display: true, text: L('2026 winning margin, votes') } } } } });
+  document.getElementById('fScatter').innerHTML = L('<b>In {k} of the {n} constituencies, more names were left off the draft roll than the 2026 winning margin.</b> The removals and the margins rise together a little (rank correlation between the removal rate and the margin as a share of votes, {rho}), so the seats that lost the most names were not the closest contests.', { k: S.over_margin, n: S.acs, rho: SIR.d(S.rho_rate_margin, 2) });
+
+  var counts = [[L('Left off the draft'), S.over_margin], [L('Net fall at the final roll'), S.net_over_margin], [L('Living removed, at turnout'), S.could_change]];
+  SIR.chart('cCounts', { type: 'bar', data: { labels: counts.map(function (c) { return c[0]; }), datasets: [{ label: L('Seats where the count exceeds the margin'), data: counts.map(function (c) { return c[1]; }), $token: '--fill-navy' }] },
+    options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, max: S.acs, title: { display: true, text: L('Seats, of {n}', { n: S.acs }) } } } } });
+  document.getElementById('fCounts').innerHTML = L('<b>Even on the narrowest count, the removed voters outnumber the margin in {k} of the {n} seats.</b> In the other {o}, the runner-up could not have won even if every living person removed had voted, at the seat\'s turnout, for the runner-up. The lists cannot show how anyone removed would have voted.', { k: S.could_change, n: S.acs, o: S.acs - S.could_change });
+
+  var sg = function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 1); };
+  SIR.table(document.getElementById('tWin'), [
+    { k: 'party', label: L('Party that won'), left: true }, { k: 'seats', label: L('Seats') },
+    { k: 'per_100', label: L('Removed per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'vs_district', label: L('Against own district'), fmt: sg }
+  ], S.winners, { sort: 'seats' });
+  var W = {}; S.winners.forEach(function (w) { W[w.party] = w; });
+  document.getElementById('fWin').innerHTML = L('<b>Seats won by TVK lost {t} of every 100 electors, against {d} in DMK seats and {a} in AIADMK seats.</b> Most of the gap is about where the seats are. Against their own districts, TVK seats come out at {tv}, DMK seats at {dv} and AIADMK seats at {av}. {c} of the {n} seats changed hands from 2021.', {
+    t: SIR.d(W.TVK.per_100, 1), d: SIR.d(W.DMK.per_100, 1), a: SIR.d(W.AIADMK.per_100, 1), tv: sg(W.TVK.vs_district), dv: sg(W.DMK.vs_district), av: sg(W.AIADMK.vs_district), c: S.changed_hands, n: S.acs });
+
+  SIR.table(document.getElementById('tAc'), [
+    { k: 'ac', label: L('No.') }, { k: 'name', label: L('Constituency'), left: true }, { k: 'district', label: L('District'), left: true },
+    { k: 'removed', label: L('Removed'), fmt: SIR.n }, { k: 'net_fall', label: L('Net fall'), fmt: SIR.n },
+    { k: 'winner', label: L('Won 2026'), left: true }, { k: 'runner_up', label: L('Second'), left: true },
+    { k: 'margin', label: L('Margin'), fmt: SIR.n }, { k: 'turnout', label: L('Turnout %'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'winner_2021', label: L('Won 2021'), left: true }
+  ], A, { sort: 'removed' });
+  SIR.showFaq('tn', 'elections');
+}).catch(SIR.fail);
+</script>

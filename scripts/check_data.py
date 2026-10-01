@@ -43,6 +43,11 @@ def _fresh():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-600:]
 
 
+def _tamilnadu_fresh():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_tamilnadu.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr
+
+
 def _hyderabad_fresh():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_hyderabad.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-600:]
@@ -160,11 +165,13 @@ def _short_and_faq():
     # Every page but the full reports opens with an "In short" box and carries
     # questions and answers: its own (#pageFaq) or, on an FAQ tab, all (#qas).
     import glob
+    with open(os.path.join(ROOT, 'site', 'places.json'), encoding='utf-8') as fh:
+        SECTIONS = {x[0].split('/')[0] for p in json.load(fh)['places'] for x in p['pages']}
     pages = ['index.html'] + sorted(glob.glob(os.path.join(ROOT, '*', '**', 'index.html'), recursive=True))
     for p in pages:
         rel = os.path.relpath(os.path.join(ROOT, p), ROOT)
         # the front page says what the site is; it carries no findings box
-        if rel.split(os.sep)[0] not in ('india', 'bihar', 'hyderabad'):
+        if rel.split(os.sep)[0] not in SECTIONS:
             continue
         if os.sep + 'report' + os.sep in rel:
             continue
@@ -176,7 +183,8 @@ def _short_and_faq():
 
 def _pages_link_method():
     for p in ['bihar/index.html', 'bihar/results/index.html', 'bihar/people/index.html',
-              'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html']:
+              'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html',
+              'tamilnadu/index.html', 'tamilnadu/elections/index.html']:
         with open(os.path.join(ROOT, p), encoding='utf-8') as fh:
             assert 'method/' in fh.read(), '%s no longer links to the method page' % p
 
@@ -184,6 +192,7 @@ def _pages_link_method():
 for name, fn in [
     ('generated data matches its sources', _fresh),
     ('Hyderabad data matches the explorer', _hyderabad_fresh),
+    ('Tamil Nadu data matches its raw tables', _tamilnadu_fresh),
     ('Hyderabad totals, parts and Malakpet linkage', _hyderabad_totals),
     ('booth deletions counted once per booth', _one_row_per_booth),
     ('phases and sexes add to the total', _phases),
