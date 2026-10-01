@@ -352,8 +352,15 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 
 ## Languages
 
-English, Hindi, Urdu and Telugu, chosen from the menu in the header and kept
-in the address (`?lang=hi`) and in the reader's browser.
+English, Hindi, Urdu, Telugu, Tamil and Bengali, chosen from the menu in the
+header and kept in the address (`?lang=hi`) and in the reader's browser.
+
+- **A new language** is an entry in `LANGS` in `assets/i18n.js` (name, short
+  label, direction, Noto font), a font rule in `sir.css`, the code in
+  `LANGS` in `scripts/check_i18n.py` and `NAMES` in `scripts/i18n_workbook.py`,
+  and a dictionary covering every key in `i18n/catalogue.json`. Translators
+  working in parallel need a folder each: two sharing one scratch folder
+  overwrote each other's batches when Tamil was added.
 
 - `assets/i18n.js` loads first, in `<head>`: it sets `lang` and `dir` (Urdu is
   right to left), loads the Noto font for the script and the dictionary

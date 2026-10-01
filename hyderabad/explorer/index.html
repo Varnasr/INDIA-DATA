@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../../assets/i18n.js?v=daafbee9"></script>
+<script src="../../assets/i18n.js?v=3d2c72f4"></script>
 <title>Hyderabad Old City SIR 2026: part explorer</title>
 <meta name="description" content="Every elector on the rolls of Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura before the 2026 Special Intensive Revision, sorted into deleted, called to a hearing or untouched, down to the polling part. Only totals are shown, never names.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23b13b38'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
@@ -103,7 +103,7 @@ function render(){
   chart('cGroup',{type:'bar',data:{labels:gl,datasets:[{data:gv,backgroundColor:['#c0504d','#1f4e79','#c0504d','#1f4e79','#1f4e79','#c0504d']}]},options:{...base,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>L('{pct} of {n}',{pct:p1(c.raw),n:f(gn[c.dataIndex])})}}},scales:{x:{grid:{display:false}},y:{grid:{color:'#eef1f4'},max:100,ticks:{callback:v=>v+'%'}}}}});
   const hs=whole?D.acs[ac].daily:o.slots.map(([d,s,n])=>[d.slice(5)+' '+s,n]);
   document.getElementById('hearP').textContent=whole?L('Hearings scheduled per day across the constituency.'):L('Cases scheduled for this part, per date and slot.');
-  chart('cHear',{type:'bar',data:{labels:hs.map(x=>x[0]),datasets:[{data:hs.map(x=>x[1]),backgroundColor:'#d9a400'}]},options:{...base,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>whole?L('{n} cases',{n:f(c.raw)}):L('{n} cases = {min} min each',{n:f(c.raw),min:(180/c.raw).toFixed(1)})}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'#eef1f4'}}}}});
+  chart('cHear',{type:'bar',data:{labels:hs.map(x=>x[0]),datasets:[{data:hs.map(x=>x[1]),backgroundColor:'#d9a400'}]},options:{...base,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>L('{n} cases',{n:f(c.raw)})}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'#eef1f4'}}}}});
   chart('cRules',{type:'bar',data:{labels:D.rules,datasets:[{data:o.rules,backgroundColor:'#1f4e79'}]},options:{...base,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>L('{n} ({pct} of hearings)',{n:f(c.raw),pct:p1(pct(c.raw,o.hear))})}}},scales:{x:{grid:{color:'#eef1f4'}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
   document.querySelectorAll('#strip button,#partlist button').forEach(b=>b.classList.toggle('sel',+b.dataset.p===sel));
   if(!whole)document.getElementById('tablePanel').scrollIntoView({block:'nearest'});
