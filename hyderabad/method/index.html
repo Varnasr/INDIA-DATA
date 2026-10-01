@@ -38,8 +38,8 @@
   <p class="sub" style="margin-top:12px">Every rate, within-part comparison and correlation on these pages is computed from the part-level counts shown in the explorer. No name, EPIC number or address is published.</p>
 
   <h2>Definitions</h2>
-  <div class="qa"><h3>Deletion rate</h3><p>Electors on the Absent-Shifted-Dead list divided by electors on the roll before the revision, for the group in question. The files cover every elector, so this is a true rate for each group. The Bihar files cover only the removed, so the Bihar pages give shares of removals and rates per 100 electors on the 2025 roll.</p></div>
-  <div class="qa"><h3>Within-part difference</h3><p>For two groups, the rate of one minus the rate of the other inside each polling part, pooled across parts and weighted by the smaller group in each part. Parts with fewer than 20 of either group are left out. This holds the neighbourhood, the booth-level officer and the housing constant, and it is the Hyderabad counterpart of the within-seat comparison in Bihar.</p></div>
+  <div class="qa"><h3>Deletion rate</h3><p>Electors on the Absent-Shifted-Dead list divided by electors on the roll before the revision, for the group in question. The files cover every elector, so this is a true rate for each group.</p></div>
+  <div class="qa"><h3>Within-part difference</h3><p>For two groups, the rate of one minus the rate of the other inside each polling part, pooled across parts and weighted by the smaller group in each part. Parts with fewer than 20 of either group are left out. This holds the neighbourhood, the booth-level officer and the housing constant.</p></div>
   <div class="qa"><h3>Part correlations</h3><p>Spearman rank correlations across parts with at least 100 electors, within each constituency. The untraceable share uses parts with at least 20 deletions.</p></div>
   <div class="qa"><h3>Summoned</h3><p>Kept on the draft roll but listed for a hearing, from the ECI discrepancy list and the no-mapping list together. One elector can be flagged under more than one rule, so the rule counts add up to more than the number of people summoned.</p></div>
 
@@ -48,7 +48,7 @@
   <p style="max-width:80ch">The lists show how many electors were struck off and from which parts, with each person's age and sex, a religion guessed from the name, and whether they link to the 2002 roll. They cannot show whether any single removal was right. <a href="../faq/">Questions and answers</a>.</p>
 
   <h2>The research questions</h2>
-  <p class="sub">The same questions the Bihar pages answer, asked of the Old City, each computed from the published data when this page loads.</p>
+  <p class="sub">Each answer is computed from the published data when this page loads.</p>
   <div id="qas"></div>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
@@ -56,8 +56,8 @@
 <footer>Research by Varna Sri Raman. Only totals are published, never names or EPIC numbers.</footer>
 <script src="../../assets/sir.js"></script>
 <script>
-Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/parts.json'), SIR.json('data/bihar/summary.json')]).then(function (r) {
-  var s = r[0], P = r[1], b = r[2].totals, A = s.acs, t = s.totals;
+Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/parts.json')]).then(function (r) {
+  var s = r[0], P = r[1], A = s.acs, t = s.totals;
   var by = function (k, desc) { return A.slice().sort(function (x, y) { return desc ? y[k] - x[k] : x[k] - y[k]; }); };
   var c = function (k) { return SIR.sum(A, function (a) { return a.counts[k]; }); };
   var list = function (arr, fn) { return arr.map(fn).join(', '); };
@@ -92,7 +92,7 @@ Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/p
     [L('Does deletion rise with age?'),
      L('Yes, though not smoothly.') + ' ' + list(s.bands, function (bd, i) { return bd + ': ' + SIR.pct(age[i]); }) + '. ' + L('Death accounts for {deaths} deletions, a large part of the removals over age 70. The rate doubles between ages 18 to 24 and 30 to 39, when almost nobody dies, so death does not explain it all.', { deaths: SIR.n(reasonTot('Death')) })],
     [L('Were women struck off more often than men?'),
-     L('Women {women}, men {men}.', { women: SIR.pct(100 * c('f_asd') / c('f_all')), men: SIR.pct(100 * c('m_asd') / c('m_all')) }) + ' ' + L('Within parts the gap is {gap_min} to {gap_max} points and changes sign between constituencies.', { gap_min: SIR.d(Math.min.apply(null, FM.map(function (w) { return w.diff_pp; })), 1), gap_max: SIR.d(Math.max.apply(null, FM.map(function (w) { return w.diff_pp; })), 1) }) + ' ' + L('In Bihar women were {share} of the removed and over-represented in every district. The Old City shows no such pattern.', { share: SIR.pct(100 * b.female / b.total) })],
+     L('Women {women}, men {men}.', { women: SIR.pct(100 * c('f_asd') / c('f_all')), men: SIR.pct(100 * c('m_asd') / c('m_all')) }) + ' ' + L('Within parts the gap is {gap_min} to {gap_max} points and changes sign between constituencies.', { gap_min: SIR.d(Math.min.apply(null, FM.map(function (w) { return w.diff_pp; })), 1), gap_max: SIR.d(Math.max.apply(null, FM.map(function (w) { return w.diff_pp; })), 1) })],
     [L('Were Muslim-name electors struck off more often?'),
      L('No, less often.') + ' ' + L('Hindu-name electors {hindu}, Muslim-name electors {muslim}.', { hindu: SIR.pct(100 * c('hin_asd') / c('hin_all')), muslim: SIR.pct(100 * c('mus_asd') / c('mus_all')) }) + ' ' + L('Inside the same part Hindu-name electors were struck off {gap_min} to {gap_max} points more, in {higher} of {parts} comparable parts.', { gap_min: SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 1), gap_max: SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 1), higher: SIR.sum(W, 'a_higher'), parts: SIR.sum(W, 'parts') }) + ' ' + L('The files cannot rule out that this is age or genuine out-migration (see limits above).')],
     [L('How much did the 2002 link matter?'),
@@ -110,9 +110,7 @@ Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/p
     [L('How do deletions compare with the 2023 result?'),
      L('In every seat the names struck off exceed the 2023 winning margin: {list}.', { list: list(marg, function (a) { return L('{name} {times} times', { name: a.name, times: SIR.d(a.e2023.deleted_over_margin, 1) }); }) }) + ' ' + L('In {names} they exceed the total valid votes cast in 2023.', { names: over.map(function (a) { return a.name; }).join(L(' and ')) }) + ' ' + L('Yakutpura was decided by {margin} votes.', { margin: SIR.n(A.filter(function (a) { return a.name === 'Yakutpura'; })[0].e2023.margin) }) + ' ' + L('None of this says whom the removed would have voted for, because the roll records nothing of the kind.')],
     [L('Are the files internally consistent?'),
-     L('Part counts sum exactly to the constituency totals for all five (the build script asserts it).') + ' ' + L('Electors in none of the three fates: {list}.', { list: list(A, function (a) { return L('{n} in {name}', { n: SIR.n(a.unaccounted), name: a.name }); }) }) + ' ' + L('Malakpet\'s {n} is the one to resolve before its figures are cited alone.', { n: SIR.n(mal.unaccounted) })],
-    [L('How does Hyderabad compare with Bihar?'),
-     L('Different scale and different denominators.') + ' ' + L('Bihar removed {removed} names, {per100} per 100 electors on the 2025 roll. The Old City struck off {rate} of its roll before the revision.', { removed: SIR.n(b.total), per100: SIR.d(100 * b.total / b.electorate_2025, 2), rate: SIR.pct(t.rate) }) + ' ' + L('The denominators differ, but no choice of denominator brings the two within a factor of three. Bihar\'s files hold only the removed, so group comparisons there are shares set against the roll, the census or the caste survey. Hyderabad\'s files hold every elector, so they give true rates within parts. The firmest Bihar finding is that women were over-represented, and the firmest Hyderabad finding is the 2002 link.')]
+     L('Part counts sum exactly to the constituency totals for all five (the build script asserts it).') + ' ' + L('Electors in none of the three fates: {list}.', { list: list(A, function (a) { return L('{n} in {name}', { n: SIR.n(a.unaccounted), name: a.name }); }) }) + ' ' + L('Malakpet\'s {n} is the one to resolve before its figures are cited alone.', { n: SIR.n(mal.unaccounted) })]
   ];
   document.getElementById('qas').innerHTML = QA.map(function (q, i) {
     return '<div class="qa"><h3>' + L('Q{n}. {question}', { n: i + 1, question: q[0] }) + '</h3><p>' + q[1] + '</p></div>';
