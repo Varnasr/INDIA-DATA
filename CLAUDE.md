@@ -13,7 +13,7 @@ publishes it to GitHub Pages.
 pip install pandas==3.0.6 openpyxl==3.1.5
 python3 scripts/build_bihar.py          # rebuild data/bihar from data/bihar/raw
 python3 scripts/build_hyderabad.py      # rebuild data/hyderabad from the explorer
-python3 scripts/check_data.py           # 19 checks, run by CI; rebuilds both with --check
+python3 scripts/check_data.py           # 20 checks, run by CI; rebuilds both with --check
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
 python3 -m http.server 8000
 ```
@@ -185,6 +185,16 @@ it as the revision being clean, and never lead with the model that omits 2020.
 2020 margins come from `data/bihar/raw/ae2020_results.csv`, taken from the
 same ECI report: the booth file's differ in eight seats (Gaighat 22,927
 against 7,566) and its percentages are rounded to whole points.
+
+`scripts/build_robust.py` puts each headline Bihar finding through the
+checks that could undo it (Simpson's paradox included) and writes
+`data/bihar/robust.json`, shown as "How sure are we?" on the Elections page,
+in the report and in the deck. Results: removals exceed the margin on the
+draft count (174) and on the final roll (124); women are over-represented in
+38 of 38 districts and 242 of 243 seats; more removals on NDA ground holds
+inside seats (NDA-led booths higher in 150 of 237) but between seats in the
+same district the gap (+0.46 per 100, -0.17 to +1.10) is too small to be sure
+of; the swing changes sign with the comparison. Say exactly that.
 
 ## Hyderabad
 
@@ -380,6 +390,13 @@ per slot, not the slot's length.
   prefer "guessed from names" to "estimated", "typical" or "middle" to
   "median" in prose. When rewriting an English key, carry its translations to
   the new key only if the meaning is unchanged; retranslate otherwise.
+- **Lead with what was lost.** Summaries, key insights and deck titles open
+  with the scale of the removals, the seats where the removed could have
+  changed the result, and who was removed. Facts that cut the other way (the
+  Old City lost no more than the rest of Hyderabad, Hindu-name electors were
+  struck off more often inside a part, the NDA keeps its majority on every
+  estimate) stay in the body and the FAQ, written as plain facts and never as
+  reassurance or as a page's headline.
 - **Framing**: this is an analysis, not a petition site. The pages lead with
   the scale of the removals, the removals against winning margins, women's
   over-representation and, in Hyderabad, the process (the 2002 link, hearing

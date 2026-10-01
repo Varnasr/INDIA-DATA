@@ -111,6 +111,10 @@
   <p class="finding" id="fFlow"></p>
 
   <p class="note">The 2024 booth leaders come from Form 20, the booth-level count, and the top two parties in every Lok Sabha seat match the declared result. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, with the VIP in 2020. INDIA is the RJD, INC, the three Left parties, the VIP from 2024, and the IIP. Everything else is Other. <a href="../method/">Method</a>.</p>
+    <h2 id="sure">How sure are we?</h2>
+  <p class="sub">A pattern seen across all seats can weaken or turn round once seats are compared only with seats like them. Each finding here was measured again within each district, within each seat, and with Seemanchal left out.</p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Each finding and the checks put to it"><table id="tRobust"></table></div>
+  <p class="finding" id="fRobust"></p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 </main>
@@ -269,18 +273,42 @@ SIR.json('data/bihar/swing.json').then(function (W) {
   document.getElementById('cSwing').innerHTML = L('This test asks one question, whether the removals moved votes between the alliances. It cannot say whether each name was rightly removed, and a voter wrongly removed has lost a vote whichever way it would have gone. A small lean either way, or harm spread evenly across parties, would not show here. Five years separate the two elections, in which LJP rejoined the NDA, VIP changed sides and Jan Suraaj entered. Both years come from the Election Commission\'s candidate-wise results. In both, NDA means BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA means RJD, Congress, the three Left parties, VIP and IIP.');
 }).catch(SIR.fail);
 
+SIR.json('data/bihar/robust.json').then(function (R) {
+  var iv = function (x) { return (x.est > 0 ? '+' : '') + SIR.d(x.est, 2) + ' (' + SIR.d(x.lo, 2) + L(' to ') + SIR.d(x.hi, 2) + ')'; };
+  var M = R.margins, Wm = R.women, G = R.ground, S = R.swing;
+  var groundBetween = G.within_district.lo > 0;
+  var rows = [
+    { k: 0, f: L('More names removed than the winning margin'),
+      c: L('Draft removals: {a} of {n} seats. Net fall to the final roll: {b} of {n}.', { a: M.draft, b: M.net, n: M.seats }),
+      v: L('Holds on both counts') },
+    { k: 1, f: L('Women removed out of proportion to the roll'),
+      c: L('Districts: {a} of {n}. Constituencies: {b} of {m}.', { a: Wm.districts_over, n: Wm.districts, b: Wm.seats_over, m: Wm.seats }),
+      v: Wm.districts_over === Wm.districts ? L('Holds in every district') : L('Holds in most districts') },
+    { k: 2, f: L('More names removed on NDA ground'),
+      c: L('All seats: {nda} per 100 electors where the NDA won in 2020, {india} where INDIA won. Seats in the same district: {wd} per 100. Booths in the same seat: NDA-led booths lost {ws} more names each, and more in {h} of {s} seats.', { nda: SIR.d(G.pooled.nda, 2), india: SIR.d(G.pooled.india, 2), wd: iv(G.within_district), ws: SIR.d(G.within_seat.diff, 1), h: G.within_seat.nda_higher, s: G.within_seat.seats }),
+      v: groundBetween ? L('Holds at every level') : L('Holds inside seats. Between seats in the same district the gap is too small to be sure of') },
+    { k: 3, f: L('Seats with more removals swung further to the NDA'),
+      c: L('All seats: {p}. Within districts: {w}. Within districts, allowing for the 2020 result: {a}. Seats the NDA held: {n}. Seats INDIA held: {i}. Leaving out Seemanchal: {x}. The slope is positive in {dp} of {dc} districts.', { p: iv(S.pooled), w: iv(S.within_district), a: iv(S.within_district_2020), n: iv(S.held_nda_2020), i: iv(S.held_india_2020), x: iv(S.ex_seemanchal), dp: S.districts_positive, dc: S.districts_compared }),
+      v: L('Cannot tell. The answer changes with the comparison') }
+  ];
+  SIR.table(document.getElementById('tRobust'), [
+    { k: 'f', label: L('Finding'), left: true }, { k: 'c', label: L('How it was checked'), left: true }, { k: 'v', label: L('Result'), left: true }
+  ], rows, { sort: 'k', dir: 1 });
+  document.getElementById('fRobust').innerHTML = L('<b>Two findings survive every check.</b> In most constituencies more names were removed than the margin that decided the seat, on the draft count and on the final roll, and women were removed out of proportion in all {d} districts and {s} of {n} constituencies.', { d: Wm.districts, s: Wm.seats_over, n: Wm.seats });
+}).catch(SIR.fail);
+
 SIR.json('data/bihar/impact.json').then(function (I) {
   var B = I.breakeven_bands.lower, S = I.summary;
   var name = function (x) { return L('{seat} to {party}', { seat: x.name, party: x.runner_up }); };
   var list = function (k) { return S[k].seats.length ? S[k].seats.map(name).join(', ') : L('none'); };
   var close = I.close.map(function (x) { return x.name; });
-  document.getElementById('fBreak').innerHTML = L('<b>In {n} of {seats} seats the runner-up could not have won even if every removed elector who would have voted had voted for them.</b> In {mid} more the runner-up needed more than 55% of those votes. Only in {k} seats, {list}, would a lean of under 55% have been enough.', {
-    n: B.over_100, seats: I.seats_total, mid: B['55_to_65'] + B['65_to_100'], k: B.under_55, list: close.join(', ') });
+  document.getElementById('fBreak').innerHTML = L('<b>In {k} of {seats} seats the removed electors who would have voted were enough to change the result had they backed the runner-up.</b> In {u} of them a lean of under 55% would have done it ({list}). In the other {n} seats the margin was larger than every removed vote put together.', {
+    k: I.seats_total - B.over_100, seats: I.seats_total, u: B.under_55, list: close.join(', '), n: B.over_100 });
   var models = ['booth_lower', 'booth_upper', 'religion_lower', 'religion_upper', 'sex_lower', 'sex_upper'];
   var won = I.seats.filter(function (x) { return x.alliance_w === 'NDA'; }).length;
   var nda = models.map(function (k) { return won - S[k].to_india + S[k].to_nda; });
   var c = I.comp_booth_all;
-  document.getElementById('fImpact').innerHTML = L('<b>Had the removed voted the way their own polling booths voted in 2024, the NDA would have lost more of them than INDIA.</b> In the {n} seats the two alliances fought each other, those who would have voted lean {nda} NDA, {india} INDIA and {oth} other parties. Counting only the names still off the final roll, {k1} seats would have changed hands ({l1}). Counting every name removed, {k2} would have ({l2}).', {
+  document.getElementById('fImpact').innerHTML = L('The lists do not say how the removed would have voted. Going by how their own polling booths voted in 2024, in the {n} seats the two alliances fought each other, those who would have voted lean {nda} NDA, {india} INDIA and {oth} other parties. On that reading {k1} seats would have changed hands counting only the names still off the final roll ({l1}), and {k2} counting every name removed ({l2}).', {
     n: I.seats_nda_vs_india, nda: SIR.pct(c.NDA), india: SIR.pct(c.INDIA), oth: SIR.pct(c.Other), k1: S.booth_lower.flips, l1: list('booth_lower'), k2: S.booth_upper.flips, l2: list('booth_upper') });
   document.getElementById('fGroups').innerHTML = L('Weighting instead by how Muslims and others voted in the exit poll, {r1} seats change hands on the low count and {r2} on the high count ({rl}). Weighting by how women and men voted, {s1} and {s2} do ({sl}). On every estimate the NDA keeps between {min} and {max} of the 243 seats.', {
     r1: S.religion_lower.flips, r2: S.religion_upper.flips, rl: list('religion_upper'), s1: S.sex_lower.flips, s2: S.sex_upper.flips, sl: list('sex_upper'),

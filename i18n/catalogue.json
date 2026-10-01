@@ -12,6 +12,12 @@
    "/india/"
   ]
  },
+ " to ": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "\"Already enrolled\", % of names struck off": {
   "kind": "script",
   "pages": [
@@ -486,10 +492,10 @@
    "/bihar/people/"
   ]
  },
- "<b>Had the removed voted the way their own polling booths voted in 2024, the NDA would have lost more of them than INDIA.</b> In the {n} seats the two alliances fought each other, those who would have voted lean {nda} NDA, {india} INDIA and {oth} other parties. Counting only the names still off the final roll, {k1} seats would have changed hands ({l1}). Counting every name removed, {k2} would have ({l2}).": {
+ "<b>Four in ten Old City electors were struck off, {oc} of the roll, and Hyderabad's other ten seats lost even more, {oh}.</b> Every seat in Hyderabad district lost between {lo} and {hi}, and {n} seats outside the Old City lost more than any Old City seat. The draft left off {h} across Hyderabad district and {r} in the rest of Telangana.": {
   "kind": "script",
   "pages": [
-   "/bihar/results/"
+   "/hyderabad/telangana/"
   ]
  },
  "<b>In every constituency, the older the elector, the likelier the removal.</b> Between {hi_min} and {hi_max} of electors aged 80 and over were struck off, and {lo_min} to {lo_max} of those aged 18 to 24. Death explains part of the removals at the oldest ages. The recorded reasons are on the <a href=\"../\">overview</a>.": {
@@ -504,16 +510,16 @@
    "/india/"
   ]
  },
+ "<b>In {k} of {seats} seats the removed electors who would have voted were enough to change the result had they backed the runner-up.</b> In {u} of them a lean of under 55% would have done it ({list}). In the other {n} seats the margin was larger than every removed vote put together.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "<b>In {k} states the names left off the draft roll equal a fifth or more of the votes polled in 2024</b>, led by {top}. Bihar's draft-stage removals were {b} of its 2024 vote.": {
   "kind": "script",
   "pages": [
    "/india/"
-  ]
- },
- "<b>In {n} of {seats} seats the runner-up could not have won even if every removed elector who would have voted had voted for them.</b> In {mid} more the runner-up needed more than 55% of those votes. Only in {k} seats, {list}, would a lean of under 55% have been enough.": {
-  "kind": "script",
-  "pages": [
-   "/bihar/results/"
   ]
  },
  "<b>In {over} of the {n} states with a split by sex, women are a larger share of the names removed than of the roll</b>, by up to {max} points in {maxs}. {even} are within a point of even, and in {under} it runs the other way, by {u} points. Most phase 3 states have published no split by sex, so this covers {n} of {all} states and does not describe the country as a whole.": {
@@ -600,12 +606,6 @@
    "/bihar/results/"
   ]
  },
- "<b>The five Old City seats lost {oc} of their roll, and Hyderabad's other ten seats lost {oh}.</b> The Old City lost no more than the rest of the city. Every seat in Hyderabad district lost between {lo} and {hi}, and {n} seats outside the Old City lost more than any Old City seat. The draft left off {h} across Hyderabad district and {r} in the rest of Telangana.": {
-  "kind": "script",
-  "pages": [
-   "/hyderabad/telangana/"
-  ]
- },
  "<b>The names marked absent alone exceed the 2025 margin in {absent} of {seats} seats</b>, and the names marked already enrolled elsewhere in {enrolled}. These two reasons rest on the least. An absent entry records only that the officer did not find the elector, and a duplicate is a fair removal only if the other entry is the same person. The names marked shifted exceed the margin in {shifted} seats, and the dead in {dead}.": {
   "kind": "script",
   "pages": [
@@ -640,6 +640,12 @@
   "kind": "script",
   "pages": [
    "/bihar/people/"
+  ]
+ },
+ "<b>Two findings survive every check.</b> In most constituencies more names were removed than the margin that decided the seat, on the draft count and on the final roll, and women were removed out of proportion in all {d} districts and {s} of {n} constituencies.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "<b>Under both classifications, {up} families are removed at or above their share of Bihar's population, and {down} families below it.</b>": {
@@ -781,6 +787,12 @@
    "/assets/faq/bihar.js"
   ]
  },
+ "A pattern seen across all seats can weaken or turn round once seats are compared only with seats like them. Each finding here was measured again within each district, within each seat, and with Seemanchal left out.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "A point above the dashed line is a district where women's share of the removed exceeds their share of the roll, and there are {over} such districts out of {districts}.": {
   "kind": "script",
   "pages": [
@@ -859,6 +871,30 @@
    "/"
   ]
  },
+ "Across Hyderabad district the revision struck off {h} of the roll, against {r} in the rest of Telangana.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
+  ]
+ },
+ "Across Hyderabad district the revision struck off {h} of the roll, more than twice the rate of the rest of Telangana, {r}.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
+  ]
+ },
+ "Across Hyderabad the revision struck off people at more than twice the rate of the rest of Telangana, {h} of the roll against {r}.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
+  ]
+ },
+ "Across Hyderabad the revision struck off {h} of the roll, against {r} in the rest of Telangana.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
+  ]
+ },
  "Across all states the removal rate rises with income per head (rank correlation {all}), but only among the states revised in 2026 ({p3}). Among those revised from November 2025 it is {p2}, which is no relationship. The figures show where removals were heavy, and cannot show why.": {
   "kind": "script",
   "pages": [
@@ -889,7 +925,7 @@
    "/hyderabad/method/"
   ]
  },
- "Across the five constituencies {hindu} of Hindu-name electors were struck off, and {muslim} of Muslim-name electors. Inside the same polling part the gap is {lo} to {hi} points in the same direction. Religion is estimated from names; the roll records none, and the lists give religion and age separately, so part of the gap may be an age gap.": {
+ "Across the five constituencies {hindu} of Hindu-name electors were struck off, and {muslim} of Muslim-name electors. Inside the same polling part the gap is {lo} to {hi} points in the same direction. Religion is guessed from names, and the lists give religion and age separately, so part of the gap may come from age.": {
   "kind": "script",
   "pages": [
    "/hyderabad/"
@@ -1145,6 +1181,18 @@
   "kind": "script",
   "pages": [
    "/assets/sir.js"
+  ]
+ },
+ "All seats: {nda} per 100 electors where the NDA won in 2020, {india} where INDIA won. Seats in the same district: {wd} per 100. Booths in the same seat: NDA-led booths lost {ws} more names each, and more in {h} of {s} seats.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "All seats: {p}. Within districts: {w}. Within districts, allowing for the 2020 result: {a}. Seats the NDA held: {n}. Seats INDIA held: {i}. Leaving out Seemanchal: {x}. The slope is positive in {dp} of {dc} districts.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "All {count} parts": {
@@ -1682,6 +1730,12 @@
    "/assets/faq/india.js"
   ]
  },
+ "Cannot tell. The answer changes with the comparison": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "Cases in the heaviest single slot": {
   "kind": "script",
   "pages": [
@@ -2182,7 +2236,7 @@
    "/hyderabad/people/"
   ]
  },
- "Deletion rate by name-estimated religion": {
+ "Deletion rate by religion guessed from names": {
   "kind": "markup",
   "pages": [
    "/hyderabad/people/"
@@ -2427,6 +2481,12 @@
    "/"
   ]
  },
+ "Districts: {a} of {n}. Constituencies: {b} of {m}.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "Do border constituencies differ from the interior?": {
   "kind": "script",
   "pages": [
@@ -2664,6 +2724,12 @@
    "/india/"
   ]
  },
+ "Draft removals: {a} of {n} seats. Net fall to the final roll: {b} of {n}.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "Draft roll": {
   "kind": "script",
   "pages": [
@@ -2739,6 +2805,12 @@
  },
  "Each estimate assumes something the lists cannot show. People marked shifted may be voting where they now live, people who moved may vote less than their neighbours, and an exit poll is a survey with its own error. The exit poll is the {src}. It found 6% of Muslims voting NDA and 79% Mahagathbandhan, women 45% and 40%, and men 41% and 42%. Seats where the winner or runner-up is outside the two alliances ({k} of them) get the break-even figure only, because both sources count every other party together.": {
   "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "Each finding and the checks put to it": {
+  "kind": "markup",
   "pages": [
    "/bihar/results/"
   ]
@@ -2825,6 +2897,12 @@
   "kind": "markup",
   "pages": [
    "/india/"
+  ]
+ },
+ "Each was measured again within each district, within each seat and with Seemanchal left out. Two survive every check. More names were removed than the winning margin in {a} of {n} seats on the draft count and {b} on the final roll, and women were removed out of proportion in all {d} districts and {s} of {n} constituencies. That more names were removed on NDA ground holds inside seats, where NDA-led booths lost more in {h} of {c} seats. Whether seats with more removals swung further to the NDA changes with the comparison. <a href=\"../results/#sure\">Elections</a>.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/bihar.js"
   ]
  },
  "Earlier roll": {
@@ -3032,6 +3110,12 @@
    "/"
   ]
  },
+ "Every constituency lost more names than its 2023 winning margin, and in {list} the names struck off outnumber every valid vote cast in 2023. The next election will be held on the revised roll.": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/"
+  ]
+ },
  "Every district": {
   "kind": "markup",
   "pages": [
@@ -3069,7 +3153,13 @@
    "/bihar/"
   ]
  },
- "Every phase 1 removal has a reason written against it. {shifted} were marked shifted, {dead} dead, {absent} absent and {enrolled} already enrolled elsewhere. Of the {excess} more women than men removed, {exshift} ({exshare}) were marked shifted, and {young} of those marked shifted at ages 18 to 29 are women. Marriage could produce a number that size, though the district pattern does not match it (see the people page).": {
+ "Every one of the five lost more names than its 2023 winning margin. {seat}, won by {margin} votes, lost {lost}.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
+  ]
+ },
+ "Every phase 1 removal has a reason written against it. {shifted} were marked shifted, {dead} dead, {absent} absent and {enrolled} already enrolled elsewhere. Of the {excess} more women than men removed, {exshift} ({exshare}) were marked shifted, and {young} of those marked shifted at ages 18 to 29 are women. Marriage could explain the number but not the places, since districts where more women moved on marriage do not have more young women marked shifted.": {
   "kind": "script",
   "pages": [
    "/"
@@ -3226,6 +3316,12 @@
    "/hyderabad/"
   ]
  },
+ "Finding": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "First": {
   "kind": "script",
   "pages": [
@@ -3296,6 +3392,12 @@
   "kind": "markup",
   "pages": [
    "/bihar/method/"
+  ]
+ },
+ "Four in ten electors in five Old City constituencies were struck off the roll, {del} people, {rate} of the {el} on it.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
   ]
  },
  "Four in ten electors struck off in five constituencies.": {
@@ -3671,6 +3773,36 @@
    "/hyderabad/people/"
   ]
  },
+ "Holds at every level": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "Holds in every district": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "Holds in most districts": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "Holds inside seats. Between seats in the same district the gap is too small to be sure of": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "Holds on both counts": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "How Hyderabad Old City SIR deletions spread across 1,158 polling parts, which parts stand out, and what moves with the part deletion rate.": {
   "kind": "markup",
   "pages": [
@@ -3809,6 +3941,12 @@
   "pages": [
    "/",
    "/bihar/method/"
+  ]
+ },
+ "How it was checked": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "How large were the removals against the vote?": {
@@ -3957,6 +4095,18 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "How sure are these findings?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/bihar.js"
+  ]
+ },
+ "How sure are we?": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "How the 243 constituencies are spread, from the lightest to the heaviest removals.": {
@@ -4109,12 +4259,6 @@
    "/hyderabad/telangana/"
   ]
  },
- "Hyderabad district lost {h} of its roll and the rest of Telangana {r}. The removals are heaviest across the capital region.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/hyd.js"
-  ]
- },
  "Hyderabad district's seats": {
   "kind": "markup",
   "pages": [
@@ -4140,22 +4284,10 @@
    "/bihar/results/"
   ]
  },
- "If the removed had voted the way their own booths voted in 2024, {k1} to {k2} seats would have changed hands, in both directions, and the NDA would still have held its majority.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/bihar.js"
-  ]
- },
  "In Bihar women were {share} of the removed and over-represented in every district. The Old City shows no such pattern.": {
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
-  ]
- },
- "In a handful of seats, and in both directions.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/bihar.js"
   ]
  },
  "In all {count} constituencies. {seat} lost {times} times its 2023 margin; in {list} the names struck off outnumber every valid vote cast in 2023.": {
@@ -4170,7 +4302,7 @@
    "/hyderabad/"
   ]
  },
- "In every constituency, parts with more Muslim names on the roll had lower removal rates.": {
+ "In every constituency, parts with more Muslim names on the roll lost a smaller share.": {
   "kind": "script",
   "pages": [
    "/assets/faq/hyd.js"
@@ -4200,7 +4332,13 @@
    "/hyderabad/"
   ]
  },
- "In most seats more names were removed than the winner's margin. In {tookOver} of the {took} seats the NDA took from INDIA, the removals were larger than the NDA's margin. Nobody can tell from the lists how the removed would have voted.": {
+ "In many seats they could have. In {n} of {seats} seats the removed electors who would have voted were enough to change the result had they backed the runner-up, and in {k} a lean of just over half among them would have done it. The lists do not say how they would have voted. Going by how their own booths voted in 2024, {k1} to {k2} seats would have changed hands, some each way. <a href=\"../results/\">Elections</a>.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/bihar.js"
+  ]
+ },
+ "In most seats more names were removed than the margin that decided the seat. In {tookOver} of the {took} seats the NDA took from INDIA, more names were removed than the NDA won by.": {
   "kind": "script",
   "pages": [
    "/"
@@ -4248,7 +4386,13 @@
    "/hyderabad/method/"
   ]
  },
- "In {n} of {seats} seats the runner-up could not have won even if every removed elector who would have voted had backed them. Had the removed voted the way their own booths voted in 2024, the NDA would have lost more of them than INDIA, and {k1} to {k2} seats would have changed hands, {i1} to INDIA and {n2} to the NDA on the fuller count. The NDA's majority holds on every estimate. <a href=\"../results/\">Elections</a>.": {
+ "In {n} constituencies the removed electors who would have voted were enough to change the result had they backed the runner-up.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/bihar.js"
+  ]
+ },
+ "In {n} of {seats} seats the removed electors who would have voted were enough to change the result had they backed the runner-up, and in {k} a lean of just over half among them would have done it.": {
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
@@ -4290,6 +4434,12 @@
    "/bihar/method/"
   ]
  },
+ "In {over} parts more than 60% of the roll was struck off.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
+  ]
+ },
  "In {seats} the removals exceed the runner-up's entire vote.": {
   "kind": "script",
   "pages": [
@@ -4302,28 +4452,22 @@
    "/"
   ]
  },
+ "Inside each constituency, the booths that voted NDA in 2024 lost more names than those that voted INDIA.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/bihar.js"
+  ]
+ },
  "Inside each seat, the booths show the removals falling more on NDA ground. <a href=\"#within\">Booths within the same seat</a>.": {
   "kind": "script",
   "pages": [
    "/bihar/results/"
   ]
  },
- "Inside the same constituency, booths that voted NDA in 2024 lost more names than booths that voted INDIA.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/bihar.js"
-  ]
- },
  "Inside the same part Hindu-name electors were struck off {gap_min} to {gap_max} points more, in {higher} of {parts} comparable parts.": {
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
-  ]
- },
- "Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors, by {a} to {b} points.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/hyd.js"
   ]
  },
  "Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors, by {gap_min} to {gap_max} points.": {
@@ -4439,13 +4583,6 @@
  "Kept, untouched": {
   "kind": "script",
   "pages": [
-   "/hyderabad/"
-  ]
- },
- "Key finding": {
-  "kind": "script",
-  "pages": [
-   "/",
    "/hyderabad/"
   ]
  },
@@ -4766,6 +4903,18 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "More names removed on NDA ground": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "More names removed than the winning margin": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "More pages": {
@@ -5381,12 +5530,6 @@
    "/assets/faq/hyd.js"
   ]
  },
- "No election has been held on the revised roll. What can be said is the scale: every constituency lost more names than its 2023 winning margin, and in {list} the names struck off outnumber every valid vote cast in 2023. The roll records no one's vote, so none of this says whom the removed would have chosen.": {
-  "kind": "script",
-  "pages": [
-   "/hyderabad/"
-  ]
- },
  "No link to the 2002 roll": {
   "kind": "script",
   "pages": [
@@ -5577,7 +5720,7 @@
    "/hyderabad/explorer/"
   ]
  },
- "On the state's own figures, the five Old City seats lost {oc} of their roll and Hyderabad's other ten seats {oh}.": {
+ "On the state's own figures, four in ten Old City electors were struck off, {oc}, and Hyderabad's other ten seats lost even more, {oh}.": {
   "kind": "script",
   "pages": [
    "/assets/faq/hyd.js"
@@ -6698,6 +6841,12 @@
    "/india/"
   ]
  },
+ "Result": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "Roll before the revision, % of adults": {
   "kind": "script",
   "pages": [
@@ -6899,12 +7048,6 @@
    "/"
   ]
  },
- "Seats the NDA won in 2020 lost more names than seats INDIA won, {nda} against {india} per 100 electors, and inside each seat the booths that voted NDA lost more.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/bihar.js"
-  ]
- },
  "Seats the NDA won in 2020 lost {nda} names per 100 electors, and seats INDIA won lost {india}. The order stays the same when seats are labelled by the 2024 or 2025 result. Inside the same seat, booths the NDA led in 2024 lost {gap} more names each.": {
   "kind": "script",
   "pages": [
@@ -6957,6 +7100,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Seats with more removals swung further to the NDA": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "Seats won in 2025": {
@@ -7545,12 +7694,6 @@
    "/bihar/border/"
   ]
  },
- "The Old City lost no more than the rest of Hyderabad, {oc} of its roll against {oh}, and Telangana outside Hyderabad lost {r}.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/hyd.js"
-  ]
- },
  "The Special Intensive Revision of India's electoral rolls, booth by booth. Bihar 2025: 69 lakh names removed across 243 constituencies, set against the margins by which each seat was won. Hyderabad Old City 2026: four in ten electors struck off in five constituencies.": {
   "kind": "markup",
   "pages": [
@@ -7707,12 +7850,6 @@
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
-  ]
- },
- "The election results cannot say, and they cannot settle whether the removals moved votes between the alliances either. Once each seat's 2020 result is allowed for, the NDA's lead grew by between {lo} and {hi} points whether a seat lost few names or many, but the test is too blunt to rule out a sizeable lean against the NDA among those removed. Whether each name was rightly removed is a separate question, and on that the lists raise problems the vote cannot settle. Women are over-represented among the removed in every district, and more women were entered as dead than the death rates would give. A voter wrongly removed has lost a vote whichever way it would have gone. <a href=\"../results/#swing\">Elections</a>.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/bihar.js"
   ]
  },
  "The elector-by-elector lists were compiled for these five seats only, so they are a chosen group and not a sample of Hyderabad. The district's other ten seats appear only as the state's totals, on the Hyderabad and Telangana page.": {
@@ -7904,6 +8041,12 @@
    "/assets/faq/hyd.js"
   ]
  },
+ "The lists do not say how the removed would have voted. Going by how their own polling booths voted in 2024, in the {n} seats the two alliances fought each other, those who would have voted lean {nda} NDA, {india} INDIA and {oth} other parties. On that reading {k1} seats would have changed hands counting only the names still off the final roll ({l1}), and {k2} counting every name removed ({l2}).": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "The lists do not show that.": {
   "kind": "script",
   "pages": [
@@ -7920,6 +8063,12 @@
   "kind": "markup",
   "pages": [
    "/bihar/people/"
+  ]
+ },
+ "The lists give every reason to doubt it. {total} names came off the roll, women were removed out of proportion in every district, more women were entered as dead than the death rates would give, and the final roll put back at most {m} of those removed at the draft. A voter wrongly removed has lost a vote whichever way it would have gone. What the election results cannot show is whether the removals moved votes between the alliances. <a href=\"../results/#swing\">Elections</a>.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/bihar.js"
   ]
  },
  "The lists give religion and age separately and never together, so part of a gap by religion may be a gap by age. Religion is guessed from names.": {
@@ -8072,6 +8221,12 @@
    "/india/"
   ]
  },
+ "The removals hit every community. Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors, by {a} to {b} points.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
+  ]
+ },
  "The research questions": {
   "kind": "markup",
   "pages": [
@@ -8102,31 +8257,13 @@
    "/assets/faq/india.js"
   ]
  },
- "The revision removed {total} names from Bihar's roll, equal to {share} of the votes polled in the election that followed. That was more than the winning margin in {over} of {seats} constituencies, including {tookOver} of the {took} seats the NDA took from INDIA in 2025.": {
-  "kind": "script",
-  "pages": [
-   "/"
-  ]
- },
  "The revision still took off {total} names in {s} states, {r} of every 100 electors, and the draft rolls now hold {post} of adults.": {
   "kind": "script",
   "pages": [
    "/india/"
   ]
  },
- "The revision struck {deleted} names off the rolls of five Old City constituencies, {rate} of all electors, and summoned {hearing} more to hearings. Every constituency lost more names than its 2023 winning margin. {seat}, won by {margin} votes, lost {lost}.": {
-  "kind": "script",
-  "pages": [
-   "/hyderabad/"
-  ]
- },
- "The revision struck {del} names off the roll in five Old City constituencies, {rate} of the {el} electors on it.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/hyd.js"
-  ]
- },
- "The revision took {total} names off Bihar's roll in two phases, {r} of every 100 electors on the 2025 roll.": {
+ "The revision took {total} names off Bihar's roll, {r} of every 100 electors and as many as {share} of all the votes cast in the election that followed.": {
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
@@ -9249,6 +9386,12 @@
   "pages": [
    "/",
    "/india/"
+  ]
+ },
+ "Women removed out of proportion to the roll": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
   ]
  },
  "Women struck off": {
@@ -10466,12 +10609,6 @@
   "pages": [
    "/assets/faq/hyd.js",
    "/hyderabad/"
-  ]
- },
- "{over} parts lost more than 60% of their roll.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/hyd.js"
   ]
  },
  "{p1} names came off before the draft roll of 1 August 2025 and {p2} more before the final roll. Women were {fem} of all removals.": {

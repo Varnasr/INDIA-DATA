@@ -67,7 +67,7 @@
   // ---- "In short" for each page.
   var FR = 100 * sum(function (a) { return a.counts.f_asd; }) / sum(function (a) { return a.counts.f_all; }), MR = 100 * sum(function (a) { return a.counts.m_asd; }) / sum(function (a) { return a.counts.m_all; });
   var wmin = Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), wmax = Math.max.apply(null, W.map(function (w) { return w.diff_pp; }));
-  var within = wmin > 0 ? L('Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors, by {a} to {b} points.', { a: SIR.d(wmin, 1), b: SIR.d(wmax, 1) }) : null;
+  var within = wmin > 0 ? L('The removals hit every community. Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors, by {a} to {b} points.', { a: SIR.d(wmin, 1), b: SIR.d(wmax, 1) }) : null;
   var link = ul.length ? L('Electors the lists could not link to the 2002 roll were struck off {a} to {b} points more often than those they could.', { a: SIR.d(Math.min.apply(null, ul), 1), b: SIR.d(Math.max.apply(null, ul), 1) }) : null;
   var oldy = L('Electors aged 80 and over were struck off most often, {old} of them against {young} of those aged 18 to 24.', { old: SIR.pct(age[7]), young: SIR.pct(age[0]) });
   var OC = TG.old_city, OH = TG.other_hyderabad, TR = TG.rest_of_state, TS = TG.seats;
@@ -75,10 +75,11 @@
   var NOTE_REASON = L('A reason on the list is what the officer wrote down, and nobody checked it.');
   var NOTE_NAMES = L('Religion is guessed from names. Age and sex come from the roll.');
   var head = [
-    L('The revision struck {del} names off the roll in five Old City constituencies, {rate} of the {el} electors on it.', { del: SIR.lakh(t.deleted), rate: SIR.pct(t.rate), el: SIR.lakh(t.electors) }),
+    L('Four in ten electors in five Old City constituencies were struck off the roll, {del} people, {rate} of the {el} on it.', { del: SIR.lakh(t.deleted), rate: SIR.pct(t.rate), el: SIR.lakh(t.electors) }),
     L('Another {h} electors who stayed on the draft roll were summoned to a hearing to prove they were entitled to vote.', { h: SIR.lakh(t.hearing) }),
-    L('The Old City lost no more than the rest of Hyderabad, {oc} of its roll against {oh}, and Telangana outside Hyderabad lost {r}.', { oc: SIR.pct(OC.rate), oh: SIR.pct(OH.rate), r: SIR.pct(TR.rate) }),
-    within
+    L('Every one of the five lost more names than its 2023 winning margin. {seat}, won by {margin} votes, lost {lost}.', { seat: yak.name, margin: SIR.n(yak.e2023.margin), lost: SIR.n(yak.deleted) }),
+    TG.hyderabad.rate > 2 * TR.rate ? L('Across Hyderabad the revision struck off people at more than twice the rate of the rest of Telangana, {h} of the roll against {r}.', { h: SIR.pct(TG.hyderabad.rate), r: SIR.pct(TR.rate) })
+      : L('Across Hyderabad the revision struck off {h} of the roll, against {r} in the rest of Telangana.', { h: SIR.pct(TG.hyderabad.rate), r: SIR.pct(TR.rate) })
   ];
   var SHORT = {
     dash: [head, NOTE_REASON], faq: [head, NOTE_REASON],
@@ -88,23 +89,23 @@
       L('Choose a constituency and then a part to see its own figures. Each part has its own link, which can be shared.')],
       L('Malakpet\'s list has no part numbers, so its figures are grouped by polling station instead.')],
     people: [[
-      oldy,
+      oldy, link, within,
       Math.abs(FR - MR) < 2 ? L('Women and men were struck off at close to the same rate, {f} against {m}.', { f: SIR.pct(FR), m: SIR.pct(MR) })
-        : L('Women were struck off at {f} and men at {m}.', { f: SIR.pct(FR), m: SIR.pct(MR) }),
-      within, link], NOTE_NAMES],
+        : L('Women were struck off at {f} and men at {m}.', { f: SIR.pct(FR), m: SIR.pct(MR) })], NOTE_NAMES],
     parts: [[
       L('The five constituencies have {n} polling parts, and the share struck off runs from {lo}% in one to {hi}% in another.', { n: SIR.n(t.parts), lo: SIR.d(plo, 1), hi: SIR.d(phi, 1) }),
-      L('{over} parts lost more than 60% of their roll.', { over: over60 }),
-      Math.max.apply(null, MS) < 0 ? L('In every constituency, parts with more Muslim names on the roll had lower removal rates.') : null], NOTE_NAMES],
+      L('In {over} parts more than 60% of the roll was struck off.', { over: over60 }),
+      Math.max.apply(null, MS) < 0 ? L('In every constituency, parts with more Muslim names on the roll lost a smaller share.') : null], NOTE_NAMES],
     hearings: [[
       L('{h} electors who stayed on the draft roll were summoned to a hearing.', { h: SIR.lakh(t.hearing) }),
       L('The commonest ground was that the elector could not be traced to the last intensive revision, {p} of flags. Names that did not match came next.', { p: SIR.pct(100 * rules[0][1] / rAll) }),
       L('The busiest sitting listed {max} cases, in {name}, and a typical one listed {med}.', { max: SIR.n(heavy.max_slot), name: heavy.name, med: SIR.n(medSlot) })],
       L('The lists record how many cases each sitting listed, and nothing about how long it lasted.')],
     telangana: [[
-      L('On the state\'s own figures, the five Old City seats lost {oc} of their roll and Hyderabad\'s other ten seats {oh}.', { oc: SIR.pct(OC.rate), oh: SIR.pct(OH.rate) }),
+      L('On the state\'s own figures, four in ten Old City electors were struck off, {oc}, and Hyderabad\'s other ten seats lost even more, {oh}.', { oc: SIR.pct(OC.rate), oh: SIR.pct(OH.rate) }),
       L('{n} seats outside the Old City lost more than any Old City seat.', { n: TS.filter(function (x) { return !x.old_city && x.rate > ocMax; }).length }),
-      L('Hyderabad district lost {h} of its roll and the rest of Telangana {r}. The removals are heaviest across the capital region.', { h: SIR.pct(TG.hyderabad.rate), r: SIR.pct(TR.rate) })],
+      TG.hyderabad.rate > 2 * TR.rate ? L('Across Hyderabad district the revision struck off {h} of the roll, more than twice the rate of the rest of Telangana, {r}.', { h: SIR.pct(TG.hyderabad.rate), r: SIR.pct(TR.rate) })
+        : L('Across Hyderabad district the revision struck off {h} of the roll, against {r} in the rest of Telangana.', { h: SIR.pct(TG.hyderabad.rate), r: SIR.pct(TR.rate) })],
       L('These are totals only. The state has not published who was removed, or why, seat by seat.')],
     method: [[
       L('The figures come from the lists of names struck off and of electors summoned to hearings in the five constituencies, and from the state\'s draft-roll totals.'),
