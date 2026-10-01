@@ -99,49 +99,48 @@
   var cls2 = t.hindu + t.muslim + t.unknown, avgB = t.p1 / t.booths;
   var fem = fOver === D.length ? L('Women were more likely to be removed. They are {w} of the names removed and {roll} of the roll they were removed from, and their share of the removed is higher in all {n} districts.', { w: SIR.pct(fs), roll: SIR.pct(t.female_share_roll), n: D.length })
     : L('Women were more likely to be removed. They are {w} of the names removed and {roll} of the roll they were removed from, and their share of the removed is higher in {k} of {n} districts.', { w: SIR.pct(fs), roll: SIR.pct(t.female_share_roll), k: fOver, n: D.length });
+  var NOTE_NAMES = L('Religion and caste are guessed from names and given as ranges.');
+  var NOTE_REASON = L('A reason on the list is what the officer wrote down, and nobody checked it.');
   var head = [
     L('The revision took {total} names off Bihar\'s roll in two phases, {r} of every 100 electors on the 2025 roll.', { total: SIR.lakh(t.total), r: SIR.d(100 * t.total / t.electorate_2025, 2) }),
-    L('The lists give a reason for each name removed in the first phase. {shifted} were marked as moved away, {dead} as dead, {absent} as not found and {enrolled} as already on the roll somewhere else.', { shifted: rp('shifted'), dead: rp('dead'), absent: rp('absent'), enrolled: rp('already_enrolled') }),
     fem,
     L('In {over} of {seats} constituencies more names came off the roll than the 2025 winning margin. Once claims were heard, the final roll made up at most {m} of the names removed at the draft.', { over: over.length, seats: withM.length, m: SIR.pct(FT.made_up_pct) }),
-    L('Inside the same constituency, booths that voted NDA in 2024 lost more names than booths that voted INDIA. The election results cannot show whether the removals moved votes between the alliances.')
+    L('Inside the same constituency, booths that voted NDA in 2024 lost more names than booths that voted INDIA.')
   ];
   var SHORT = {
-    dash: [head], faq: [head],
+    dash: [head, NOTE_NAMES], faq: [head, NOTE_NAMES],
     explorer: [[
       L('The first phase removed names from every one of Bihar\'s {booths} polling booths, {avg} per booth on average.', { booths: SIR.n(t.booths), avg: SIR.d(avgB, 0) }),
       L('Most booths lost fewer than 100 names, but {n} lost 200 or more.', { n: SIR.n(b200) }),
       L('The heavier the removals in a booth, the more likely it was to have voted NDA in 2024, {lo} of the lightest booths against {hi} of the heaviest.', { lo: SIR.pct(BI[0].nda_pct), hi: SIR.pct(BI[BI.length - 1].nda_pct) }),
-      L('Choose a district and then a constituency to see its own figures, set against the margin by which the seat was won.')]],
+      L('Choose a district and then a constituency to see its own figures, set against the margin by which the seat was won.')], NOTE_NAMES],
     results: [[
       L('In {over} of {seats} constituencies more names were removed than the 2025 winning margin. That includes {took_over} of the {took} seats the NDA took from INDIA.', { over: over.length, seats: withM.length, took_over: tookOver.length, took: took.length }),
       L('After claims and objections the final roll was still smaller than the old roll in every seat, and in {net} seats the fall that remained was larger than the margin.', { net: FN.margin.net }),
       L('Seats the NDA won in 2020 lost more names than seats INDIA won, {nda} against {india} per 100 electors, and inside each seat the booths that voted NDA lost more.', { nda: SIR.d(AL['2020'].NDA.per_100, 2), india: SIR.d(AL['2020'].INDIA.per_100, 2) }),
-      L('If the removed had voted the way their own booths voted in 2024, {k1} to {k2} seats would have changed hands, in both directions, and the NDA would still have held its majority.', { k1: IS.booth_lower.flips, k2: IS.booth_upper.flips }),
-      L('Comparing the 2020 and 2025 results, the NDA gained about as much where few names were removed as where many were. The test is too blunt to say whether the removals moved votes between the alliances.')]],
+      L('If the removed had voted the way their own booths voted in 2024, {k1} to {k2} seats would have changed hands, in both directions, and the NDA would still have held its majority.', { k1: IS.booth_lower.flips, k2: IS.booth_upper.flips })],
+      L('The lists show where the removals fell. They cannot show whose votes the removed names were, and the election results cannot show whether the removals moved votes between the alliances.')],
     people: [[
       fOver === D.length ? L('Women are {w} of the names removed and {roll} of the roll they were removed from. Their share of the removed is higher in all {n} districts.', { w: SIR.pct(fs), roll: SIR.pct(t.female_share_roll), n: D.length })
         : L('Women are {w} of the names removed and {roll} of the roll they were removed from. Their share of the removed is higher in {k} of {n} districts.', { w: SIR.pct(fs), roll: SIR.pct(t.female_share_roll), k: fOver, n: D.length }),
       L('Women are {wd} of the names entered as dead but only {we} of adult deaths in Bihar, so either women\'s deaths stayed on the roll longer or living women were entered as dead.', { wd: SIR.pct(TD.women_share_dead), we: SIR.pct(TD.women_share_expected) }),
-      L('Religion and caste are not recorded on the roll. They are guessed from names, so each is given as a range.'),
       L('Names classified as Muslim are {low} to {high} of the removed, against 17.70% of the population in the 2023 caste survey.', { low: SIR.pct(100 * t.muslim / cls2), high: SIR.pct(100 * (t.muslim + t.unknown) / cls2) }),
-      up.length ? L('By the surname of the father or husband, {up} families are removed at or above their share in the caste survey under both classifications.', { up: AND(up.map(GN)) }) : null]],
+      up.length ? L('By the surname of the father or husband, {up} families are removed at or above their share in the caste survey under both classifications.', { up: AND(up.map(GN)) }) : null], NOTE_NAMES],
     border: [[
-      L('{n} of Bihar\'s {all} constituencies lie on a border with Nepal, another state or both.', { n: bor.length, all: acs.length }),
       L('Border seats lost {b} names per 100 electors, and interior seats {i}. The heaviest were the seats bordering {top}, at {topr}.', { b: SIR.d(rt(bor), 2), i: SIR.d(rt(inn), 2), top: beltName(belts[0]), topr: SIR.d(rt(BG[belts[0]]), 2) }),
       L('Border seats hold {el} of Bihar\'s electors and account for {sh} of the removals.', { el: SIR.pct(100 * SIR.sum(bor, 'electorate_2025') / SIR.sum(acs, 'electorate_2025')), sh: SIR.pct(100 * SIR.sum(bor, 'total') / SIR.sum(acs, 'total')) }),
-      L('None of the reasons on the lists is a finding that a person was not entitled to vote.')]],
+      L('Names classified as Muslim are {lo} to {hi} of removals in border seats and {ilo} to {ihi} in the interior.', { lo: SIR.pct(ms(bor, false)), hi: SIR.pct(ms(bor, true)), ilo: SIR.pct(ms(inn, false)), ihi: SIR.pct(ms(inn, true)) })],
+      L('None of the reasons on the lists is a finding that a person was not entitled to vote.')],
     districts: [[
       L('{a} lost the most names, {ar} per 100 electors, and {z} the fewest, {zr}.', { a: DD[0].district, ar: SIR.d(DD[0].per_100, 1), z: DD[DD.length - 1].district, zr: SIR.d(DD[DD.length - 1].per_100, 1) }),
       linked.length ? L('Across districts the removal rate moves with {list}.', { list: AND(linked.map(function (x) { return x[0]; })) }) : null,
-      unl.length ? L('It shows no relationship with {list}.', { list: AND(unl.map(function (x) { return x[0]; })) }) : null,
-      L('With only {n} districts every one of these links is rough, and none of them says why any one name was removed.', { n: DD.length })]],
+      unl.length ? L('It shows no relationship with {list}.', { list: AND(unl.map(function (x) { return x[0]; })) }) : null],
+      L('With only {n} districts every one of these links is rough, and none of them says why any one name was removed.', { n: DD.length })],
     method: [[
       L('The figures come from the Chief Electoral Officer\'s lists of removed names for both phases, the return for the final roll, and the Election Commission\'s results.'),
       L('The booth lists cover all {booths} polling booths and add up to the official totals in every constituency.', { booths: SIR.n(t.booths) }),
       L('Sex is recorded on the roll. Religion and caste are guessed from names and given as ranges.'),
-      L('A reason on the list is what the officer wrote down, and nobody checked it.'),
-      L('Only counts are published. No name, EPIC number or address appears anywhere on this site.')]]
+      L('Only counts are published. No name, EPIC number or address appears anywhere on this site.')], NOTE_REASON]
   };
   return { qa: QA, short: SHORT };
   }));

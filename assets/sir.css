@@ -127,7 +127,17 @@ main h2:first-child{margin-top:0}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .takeaway,:root:not([data-theme="light"]) .finding,:root:not([data-theme="light"]) .caveat{background:linear-gradient(135deg,rgba(244,208,63,.18),rgba(169,223,191,.18));color:var(--ink)}:root:not([data-theme="light"]) .takeaway a,:root:not([data-theme="light"]) .finding a,:root:not([data-theme="light"]) .caveat a{color:var(--navy)}}
 .takeaway-title{font-weight:700}
 .takeaway ol.short{margin:.4rem 0 .5rem;padding-inline-start:1.2rem}.takeaway ol.short li{margin:.3rem 0;line-height:1.45}.takeaway .short-note{margin:.4rem 0 0;font-size:.88rem}
-.page-short .takeaway{margin-top:0}.page-faq{margin-top:2.5rem}.page-faq .note{margin-top:.5rem}
+.page-faq{margin-top:2.5rem}.page-faq .note{margin-top:.5rem}
+/* The opening findings: a plain numbered list under the heading, no banner. */
+ol.summary{margin:.6rem 0 1.5rem;padding-inline-start:1.3rem;max-width:95ch;font-size:1.02rem}ol.summary li{margin:.35rem 0;line-height:1.5}ol.summary:empty{display:none}
+.page-head ol.summary{margin-bottom:.5rem}
+/* One line on the page's limits, at the foot, before its questions. */
+.note.limits{margin-top:2rem;padding-top:.75rem;border-top:1px solid var(--line)}
+/* At most one highlighted finding in a run: the next ones read as plain text,
+   and caveats sit as a quiet note. Same specificity as the dark-theme rules
+   above and later in the file, so these win in every theme. */
+:root .finding+.finding,:root:root .caveat{background:none;color:var(--ink);border-inline-start:0;padding:0;margin:.25rem 0 1rem;border-radius:0}
+:root:root .caveat{color:var(--muted);font-size:.92rem;border-inline-start:2px solid var(--line);padding-inline-start:.75rem}
 .finding b{font-weight:700}
 
 /* chart cards: .card on the dashboards, .panel elsewhere */
