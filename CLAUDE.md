@@ -259,6 +259,12 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   `/bihar/explorer/` the booth explorer, matching `/hyderabad/` and
   `/hyderabad/explorer/`. Old links forward in the page scripts: a Bihar tab
   hash on `/` goes to `/bihar/#tab`, and `/bihar/#acNNN` to the explorer.
+- **One centred column per page.** `--page` in `sir.css` is 1160px for reading
+  pages and 1480px (`body.wide`, set by the build for dashboards and
+  explorers); the header, the tab row's links and the content share its
+  edges. Do not set a wider `max-width` on a block inside `main`: text capped
+  at a reading measure beside a full-width chart is what left wide screens
+  half empty.
 - **The header carries a places menu**, not a switch: a pin button naming
   the current place, opening the list of analyses. It scales to any number
   of places, and on a phone the whole header is one row (title, language,
