@@ -330,9 +330,10 @@ html:not([data-lang="en"]) .report-lang{display:block}
   .controls .btn,.controls button,.controls summary{width:40px;height:40px;padding:0;justify-content:center;border-radius:10px}
   .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .switch{grid-column:1/-1;order:3;padding:2px;border-radius:9px}
-  .switch a{flex:1;padding:.4rem .5rem;font-size:.84rem}
+  .switch{min-width:0}
+  .switch a{flex:1 1 auto;padding:.4rem .4rem;font-size:.82rem}
   .header-content:has(#lang) .switch{grid-column:1}
-  #lang{order:4;padding:.3rem .5rem;font-size:.84rem;max-width:7.5rem}
+  #lang{order:4;padding:.3rem .35rem;font-size:.84rem;width:auto;max-width:4.5rem}
   .nav-tabs{padding:.35rem .5rem;gap:.3rem;border-bottom-width:1px;box-shadow:0 2px 8px var(--shadow)}
   .nav-tab{padding:.45rem .75rem;font-size:.84rem;border-radius:999px;min-height:36px}
   .nav-tab .icon{width:15px;height:15px}
