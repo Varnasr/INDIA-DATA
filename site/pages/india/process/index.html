@@ -33,6 +33,7 @@
   <ol class="ptl forms" id="forms"></ol>
   <h3>Claims and objections after the draft, state by state</h3>
   <p class="sub">Names removed when the draft roll was published, set against names added and removed between the draft and the final roll. Additions include people enrolling for the first time, so they are the most that could have been put back, and fewer than that in fact.</p>
+  <div class="grid"><div class="panel wide"><div class="vizbox" id="vClaims"></div></div></div>
   <div class="twrap" tabindex="0" role="region" aria-label="Claims and objections after the draft"><table id="tClaims"></table></div>
   <p class="note" id="nClaims"></p>
 
@@ -159,10 +160,13 @@ SIR.json('data/india/process.json').then(function (P) {
     var rows = S.states.filter(function (r) { return r.removed && r.added_after_draft != null; })
       .map(function (r) { return { s: r.state, rm: r.removed, ad: r.added_after_draft, ra: r.removed_after_draft, per: 100 * r.added_after_draft / r.removed }; })
       .sort(function (a, b) { return a.per - b.per; });
-    document.getElementById('tClaims').innerHTML = '<thead><tr><th scope="col" class="l">State or union territory</th><th scope="col">Removed at the draft</th><th scope="col">Added after the draft</th><th scope="col">Removed after the draft</th><th scope="col">Added for every 100 removed at the draft</th></tr></thead><tbody>' +
-      rows.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.s) + '</th><td>' + N(r.rm) + '</td><td>' + N(r.ad) + '</td><td>' + N(r.ra) + '</td><td>' + r.per.toFixed(1) + '</td></tr>'; }).join('') + '</tbody>';
+    VIZ.lollipop('vClaims', { label: 'Names added after the draft for every 100 removed at it, by state', axis: 'Added after the draft, per 100 removed at it',
+      rows: rows.map(function (r) { return { name: r.s, v: r.per, text: r.per.toFixed(1), tok: r.per < 10 ? '--fill-red' : '--fill-navy', hi: r.per < 10 }; }) });
+    document.getElementById('tClaims').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Added per 100 removed</th><th scope="col">Removed at draft</th><th scope="col">Added after</th><th scope="col">Removed after</th></tr></thead><tbody>' +
+      rows.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.s) + '</th><td>' + r.per.toFixed(1) + '</td><td>' + N(r.rm) + '</td><td>' + N(r.ad) + '</td><td>' + N(r.ra) + '</td></tr>'; }).join('') + '</tbody>';
     var low = rows.filter(function (r) { return r.per < 10; }).length;
     document.getElementById('nClaims').innerHTML = 'In ' + low + ' of these ' + rows.length + ' states and union territories, fewer than 10 names were added after the draft for every 100 removed at it. ' + E(P.claims_note) + ' The other states published only the net change from draft to final, or no final roll yet, and are on the <a href="../">All India page</a>.' + srcs(P.claims_src);
+    SIR.tools();
   }).catch(function () {});
 
   // the schedules

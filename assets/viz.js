@@ -26,6 +26,25 @@
     var step = (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * mag;
     return { step: step, lo: Math.floor(lo / step) * step, hi: Math.ceil(hi / step) * step };
   }
+  // A step wide enough that the tick labels do not run into each other: on a
+  // phone a lakh-sized axis at the caller's step wrote "020,0040,000...".
+  // Steps go 1, 2, 5, 10 and so on, and the axis is extended to a whole step.
+  function roomy(step, lo, hi, px, label) {
+    var gap = function (st) { return px * st / Math.max(hi - lo, 1e-9); };
+    var need = function (st) { return Math.max(phone() ? 44 : 52, (label ? String(tickText(Math.max(Math.abs(hi), Math.abs(lo)), st)).length : 4) * 7 + 10); };
+    var seq = [1, 2, 5], k = 0;
+    while (gap(step) < need(step) && (hi - lo) / step > 1) {
+      var mag = Math.pow(10, Math.floor(Math.log10(step) + 1e-9)), f = step / mag;
+      step = (f < 2 ? 2 : f < 5 ? 5 : 10) * mag;
+      if (++k > 20) break;
+    }
+    return { step: step, hi: Math.ceil(hi / step - 1e-9) * step };
+  }
+  // the same for an axis from nice(): widen its step until the labels fit px
+  function fitT(t, px) {
+    var r = roomy(t.step, t.lo, t.hi, px, true);
+    return { step: r.step, lo: Math.floor(t.lo / r.step + 1e-9) * r.step, hi: Math.ceil(t.hi / r.step - 1e-9) * r.step };
+  }
   function tickText(v, step) { return Math.abs(v) >= 1e5 ? SIR.lakh(v).replace(/\.0 /, ' ') : step < 1 ? (+v.toFixed(2)).toString() : SIR.n(v); }
   // a token ('--fill-navy') or a literal colour
   function paint(c) { return /^--/.test(c) ? 'fill:var(' + c + ')' : 'fill:' + c; }
@@ -143,7 +162,9 @@
     measure(box);
     var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = phone() ? 0 : 150, top = (phone() ? 8 : 16) + (o.key ? 22 : 0), R = o.r || 5, D = R * 2 + 0.5;
     var all = [].concat.apply([], o.rows.map(function (r) { return r.points.map(function (p) { return p.v; }); }));
-    var step = o.step || 5, max = Math.ceil(Math.max.apply(null, all) / step) * step, x = function (v) { return lw + 14 + (W - lw - 28) * v / max; };
+    var step = o.step || 5, max = Math.ceil(Math.max.apply(null, all) / step) * step;
+    var rm = roomy(step, 0, max, W - lw - 28, true); step = rm.step; max = rm.hi;
+    var x = function (v) { return lw + 14 + (W - lw - 28) * v / max; };
     // lay each row out first: a swarm, each dot as close to the axis line as
     // it can go without touching another, so a row is as tall as it needs
     var rows = o.rows.map(function (r) {
@@ -159,9 +180,9 @@
     var lab = phone() ? 18 : 0, H = top + rows.reduce(function (a, q) { return a + q.half * 2 + lab + (r_mark(q) ? 14 : 0); }, 0) + 34;
     function r_mark(q) { return (q.r.mark || []).length; }
     var s = svgIn(box, W, H, o.label);
-    for (var t = 0; t <= max; t += step) {
+    for (var t = 0; t <= max + 1e-9; t += step) {
       el('line', { x1: x(t), x2: x(t), y1: top - 6, y2: H - 28, class: 'vgrid' }, s);
-      el('text', { x: x(t), y: H - 12, 'text-anchor': 'middle', class: 'vval' }, s, t);
+      el('text', { x: x(t), y: H - 12, 'text-anchor': 'middle', class: 'vval' }, s, tickText(t, step));
     }
     var y0 = top;
     rows.forEach(function (q) {
@@ -194,10 +215,11 @@
     var leg = phone() ? 44 : 24, H = leg + 16 + n * rh + 30;
     var s = svgIn(box, W, H, o.label);
     var st = o.step || 5, mn = o.min || 0, max = Math.ceil(Math.max.apply(null, o.rows.map(function (r) { return Math.max(r.a, r.b); }).concat([o.ref || 0])) / st) * st;
+    var rm = roomy(st, mn, max, W - lw - 30, true); st = rm.step; max = rm.hi;
     var x = function (v) { return lw + 10 + (W - lw - 30) * Math.max(v - mn, 0) / (max - mn); };
-    for (var t = mn; t <= max; t += st) {
+    for (var t = mn; t <= max + 1e-9; t += st) {
       el('line', { x1: x(t), x2: x(t), y1: leg + 6, y2: H - 26, class: 'vgrid' }, s);
-      el('text', { x: x(t), y: H - 10, 'text-anchor': 'middle', class: 'vval' }, s, t);
+      el('text', { x: x(t), y: H - 10, 'text-anchor': 'middle', class: 'vval' }, s, tickText(t, st));
     }
     [[o.aName, o.aTok], [o.bName, o.bTok]].forEach(function (k, i) {
       // the key: side by side on a wide screen, one line each on a phone
@@ -309,10 +331,11 @@
     var H = top + n * rh + 40, s = svgIn(box, W, H, o.label);
     var max = o.max || Math.max.apply(null, o.rows.map(function (r) { return r.v; }));
     var step = o.step || (max > 60 ? 20 : max > 25 ? 10 : 5); max = Math.ceil(max / step) * step;
+    var rm = roomy(step, 0, max, W - lw - 60, true); step = rm.step; max = rm.hi;
     var x = function (v) { return lw + 8 + (W - lw - 60) * Math.max(v, 0) / max; };
-    for (var t = 0; t <= max; t += step) {
+    for (var t = 0; t <= max + 1e-9; t += step) {
       el('line', { x1: x(t), x2: x(t), y1: top, y2: top + n * rh, class: 'vgrid' }, s);
-      el('text', { x: x(t), y: top + n * rh + 16, 'text-anchor': 'middle', class: 'vval' }, s, t);
+      el('text', { x: x(t), y: top + n * rh + 16, 'text-anchor': 'middle', class: 'vval' }, s, tickText(t, step));
     }
     if (o.ref != null) el('line', { x1: x(o.ref), x2: x(o.ref), y1: top, y2: top + n * rh, class: 'vzero' }, s);
     o.rows.forEach(function (r, i) {
@@ -357,6 +380,7 @@
     var n = o.rows.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = phone() ? 118 : 230, rh = phone() ? 28 : 24, top = 10;
     var H = top + n * rh + (o.axis ? 46 : 26), s = svgIn(box, W, H, o.label);
     var vs = o.rows.map(function (r) { return r.v; }), t = nice(Math.min(0, Math.min.apply(null, vs)), Math.max(0, Math.max.apply(null, vs)));
+    t = fitT(t, W - lw - 70);
     var x = function (v) { return lw + 8 + (W - lw - 70) * (v - t.lo) / (t.hi - t.lo); };
     for (var g = t.lo; g <= t.hi + t.step / 2; g += t.step) {
       el('line', { x1: x(g), x2: x(g), y1: top, y2: top + n * rh, class: Math.abs(g) < t.step / 1e6 ? 'vzero' : 'vgrid' }, s);
@@ -387,6 +411,7 @@
     // from it, fit the axis to the values so the differences can be seen
     var mn = Math.min.apply(null, all), mx = Math.max.apply(null, all), pad = (mx - mn) * 0.15 || 1;
     var t = (mn > 0 && mx - mn < mx * 0.6) ? nice(Math.max(0, mn - pad), mx + pad) : nice(Math.min(0, mn), mx);
+    t = fitT(t, W - lw - 30);
     var x = function (v) { return lw + 10 + (W - lw - 30) * (v - t.lo) / (t.hi - t.lo); }, y0 = leg + 10;
     for (var g = t.lo; g <= t.hi + t.step / 2; g += t.step) {
       el('line', { x1: x(g), x2: x(g), y1: y0 - 4, y2: y0 + n * rh, class: 'vgrid' }, s);
@@ -490,6 +515,7 @@
     var s = svgIn(box, W, H, o.label);
     var xs = o.points.map(function (p) { return p.x; }), ys = o.points.map(function (p) { return p.y; });
     var tx = nice(o.xMin != null ? o.xMin : Math.min.apply(null, xs), Math.max.apply(null, xs)), ty = nice(o.yMin != null ? o.yMin : Math.min.apply(null, ys), Math.max.apply(null, ys));
+    tx = fitT(tx, W - l - rgt);
     var x = function (v) { return l + (W - l - rgt) * (v - tx.lo) / (tx.hi - tx.lo); }, y = function (v) { return top + (H - top - b) * (ty.hi - v) / (ty.hi - ty.lo); };
     var g;
     for (g = tx.lo; g <= tx.hi + tx.step / 2; g += tx.step) { el('line', { x1: x(g), x2: x(g), y1: top, y2: H - b, class: 'vgrid' }, s); el('text', { x: x(g), y: H - b + 16, 'text-anchor': 'middle', class: 'vval' }, s, tickText(g, tx.step)); }
