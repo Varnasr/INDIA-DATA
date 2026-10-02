@@ -325,6 +325,20 @@ called names restored; five northern districts end above their January roll.
 Party comparisons are by party (INC, CPI(M), IUML, others), not by front,
 because the independents' fronts are not in the data.
 
+## One order on the four 2026 state pages
+
+Tamil Nadu, Karnataka, West Bengal and Kerala follow one order, with the same
+headings: find a constituency or district (with the map); the roll, step by
+step; West Bengal's adjudication; per 100 electors, by district; the reasons
+(where published); the city (Chennai, Bengaluru); women; after the draft;
+every district; every constituency. A section a state cannot have says why
+rather than being left out silently: Tamil Nadu and Karnataka have no split
+of the removals by sex, so their women sections show what can be counted
+(Tamil Nadu, women's share of the net rise after the draft; Karnataka, the
+share of each roll) and say the rest cannot be. Method pages carry, for each
+state, the map, the checks the build makes, and, where the elections page
+uses it, the comparison against the district.
+
 ## Charts
 
 `assets/viz.js` draws every non-Chart.js chart: sankey, waterfall, strip
@@ -334,12 +348,14 @@ for the state pages, `multiples` (small multiples of a path, one shared scale),
 `scatter` (SVG, optional y = x line over the shared range). Vary the form
 within a page; a page of one chart type reads as a table.
 
-`map` draws a constituency choropleth from `data/geo/<state>.json` (DataMeet's
-assembly map, CC BY 2.5 India; see `SOURCES.md` there): five quantile bins of
-one red, a `<title>` per seat, a click handed to `o.pick`, and an optional
-enlarged city panel (`o.inset`, Chennai and Kolkata). Every page that draws
-one credits DataMeet under it. Karnataka has none: its revision is by
-district only.
+`map` draws a choropleth from `data/geo/<state>.json` (DataMeet's assembly
+map, CC BY 2.5 India; see `SOURCES.md` there): five quantile bins of one red,
+a `<title>` per shape, a click handed to `o.pick`, `__select` taking one id or
+several, and an optional enlarged city panel (`o.inset`: Chennai, Kolkata,
+Bengaluru city). Every page that draws one credits DataMeet under it.
+Karnataka's map is by election district: its constituencies are dissolved by
+the Election Commission's own constituency-to-district list
+(`data/karnataka/raw/ac_district.csv`).
 
 Every viz chart keeps its rows on `box.__csv`. `SIR.tools()`, called from
 `SIR.showFaq`, puts a row under every chart panel with an id: PNG, CSV, a
@@ -347,14 +363,32 @@ WhatsApp link carrying the panel's finding sentence and the page address with
 the chart's `#id`, and Copy link. Chart.js charts get the same row, read from
 their own data.
 
-`SIR.finder` is the "Find a constituency" box on the Bihar results, Tamil
-Nadu, West Bengal, Kerala and Karnataka (district) pages. Picking a seat
+`SIR.finder` is the "Find a constituency or district" box on the Bihar
+results, Tamil Nadu, West Bengal, Kerala and Karnataka (district only) pages.
+`o.more` adds the district set: a district card sums or reads the district
+row, lists its constituencies as buttons (`SIR.goList`), outlines all its
+seats on the map, and opens from `#d-<slug>` (`SIR.slug`). Picking a seat
 writes a card of its figures, puts `#ac-<n>` (`#d-<slug>` in Karnataka) in the
 address so the link opens on that seat, highlights it on the map, and offers
 WhatsApp, Copy link and Copy text. The share text is one `L()` template per
 page, written as plain sentences that say where the counts come from and, for
 West Bengal and Kerala, that the fall in the roll is a different count from the names
 struck off. Keep that sentence in it.
+
+**Search.** The header's Search button, Ctrl or Command and K, or "/" opens
+one box for the whole site (the end of `sir.js`). It reads
+`data/search.json`, which `build_site.py` writes on every build: every page
+in `places.json`, every constituency and district a finder opens, and the
+five Hyderabad seats in the part explorer. A result on the current page sets
+the hash and the finder follows it; anything else navigates, keeping
+`?lang=`. Add a place's finder and its rows join the search with one line in
+`search_index()`.
+
+**Dyslexia-friendly font.** `assets/dyslexia-font.js` is the same drop-in
+script the other sites use (OpenDyslexic, OFL, in `fonts/`), loaded on every
+page by the shell, its button placed before the theme toggle through
+`data-dyslexia-slot` on `.controls`. OpenDyslexic has Latin glyphs only, so
+`sir.css` keeps each Indian script in its own Noto face when it is on.
 
 **Link previews.** `build_site.py` writes Open Graph and Twitter tags into
 every page head, with `og:image` pointing at `assets/og/<place>.png`. The head
@@ -567,6 +601,11 @@ per slot, not the slot's length.
 
 ## Watch out for
 
+- **The Sabar Institute link.** Every method page ends with "Analysis of the
+  named lists", pointing readers who want named-voter analysis to
+  sabarinstitute.org, at the owner's request (October 2026). It is a pointer
+  for further reading and nothing more: no page says who compiled any list
+  this site counts, and the Hyderabad pages still do not name a compiler.
 - **Publishing**: the site serves only pages and aggregate JSON. `_redirects`
   answers 404 for raw files, scripts, notes and `archive/`; `static.yml` stages
   the same set for Pages. Do not link source files from a page, and describe

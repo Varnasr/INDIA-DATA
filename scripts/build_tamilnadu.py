@@ -148,7 +148,8 @@ def build():
     for w, L in sorted(by_winner.items(), key=lambda kv: -len(kv[1])):
         rem, bef = sum(a['removed'] for a in L), sum(a['before'] for a in L)
         winners.append({'party': w, 'seats': len(L), 'per_100': round(100 * rem / bef, 2),
-                        'vs_district': round(sum(a['vs_district'] for a in L) / len(L), 2)})
+                        'vs_district': round(sum(a['vs_district'] for a in L) / len(L), 2),
+                        'over_margin': sum(a['over_margin'] for a in L)})
 
     before, rem, fin = T('before'), T('removed'), T('final')
     chennai = dist['Chennai']

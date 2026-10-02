@@ -535,10 +535,12 @@
       el('rect', { x: 10 + i * kw, y: 20, width: kw - 4, height: 10, rx: 2, style: fill(tok) + ';fill-opacity:' + a }, s);
       el('text', { x: 10 + i * kw, y: 42, class: 'vval small' }, s, fv(edges[i]) + '–' + fv(edges[i + 1]));
     });
+    // one seat, or several (a district's seats) outlined together
     box.__select = function (ac) {
+      var on = [].concat(ac).map(Number);
       [paths, extra].forEach(function (set) {
-        Object.keys(set).forEach(function (k) { set[k].classList.toggle('on', +k === ac); });
-        if (set[ac]) set[ac].parentNode.appendChild(set[ac]);
+        Object.keys(set).forEach(function (k) { set[k].classList.toggle('on', on.indexOf(+k) >= 0); });
+        on.forEach(function (a) { if (set[a]) set[a].parentNode.appendChild(set[a]); });
       });
     };
   }

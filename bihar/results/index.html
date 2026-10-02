@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../../assets/i18n.js?v=4e5cc616"></script>
+<script src="../../assets/i18n.js?v=008c2720"></script>
 <title>Bihar SIR 2025: removals and election results</title>
 <meta name="description" content="Bihar&#x27;s SIR removals set against the 2020, 2024 and 2025 results, by the alliance that held each seat, by booth within the same seat, by party and reserved seat, and against winning margins.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
-<link rel="stylesheet" href="../../assets/sir.css?v=b41324c9">
+<link rel="stylesheet" href="../../assets/sir.css?v=86ca9e9d">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="Bihar SIR 2025: removals and election results">
@@ -25,7 +25,8 @@
 <header class="top">
   <div class="header-content">
     <a class="logo" href="../../"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span class="titles"><span class="h-title">SIR analysis for India</span><span class="subtitle">Bihar 2025 · every booth, every constituency</span></span></a>
-    <div class="controls">
+    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">
+      <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
       <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Bihar 2025</span></summary><div class="menu" data-i18n-each><a href="../../">About this site</a><a href="../../india/">All India</a><a href="../../bihar/" aria-current="true">Bihar 2025</a><a href="../../hyderabad/">Hyderabad 2026</a><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a></div></details>
       <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../bihar/report/">Full report, online</a><a href="../../reports/bihar-sir-2025-report.pdf?v=0994de4e" download>Full report, PDF</a><a href="../../reports/bihar-sir-2025-deck.pptx?v=ff411e0a" download>Slides, PowerPoint</a><a href="../../data/bihar/constituencies.csv?v=024da361" download>Constituency table, CSV</a><a href="../../data/bihar/districts.csv?v=f1e23b21" download>District table, CSV</a></div></details>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
@@ -37,7 +38,7 @@
 <main id="main">
 <div class="page-head"><h1>Deletions and results</h1><ol class="summary" id="short"></ol></div>
 
-  <h2>Find a constituency</h2>
+  <h2>Find a constituency or district</h2>
   <p class="sub">Each constituency is shaded by the names removed for every 100 electors. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
@@ -148,8 +149,8 @@
 </main>
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../">About this site</a></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="../../assets/sir.js?v=b66003a5"></script>
-<script src="../../assets/viz.js?v=d6c6e806"></script>
+<script src="../../assets/sir.js?v=e52d7744"></script>
+<script src="../../assets/viz.js?v=d458242d"></script>
 <script>
 function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' : ''; }
 function rate(rows) { return 100 * SIR.sum(rows, 'total') / SIR.sum(rows, 'electorate_2025'); }
@@ -368,10 +369,20 @@ SIR.json('data/bihar/impact.json').then(function (I) {
 </script>
 <script src="../../assets/faq/bihar.js?v=4f42640e"></script>
 <script>
-SIR.json('data/bihar/constituencies.json').then(function (A) {
+Promise.all([SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/districts.json')]).then(function (r0) {
+  var A = r0[0], D = r0[1];
   SIR.json('data/geo/bihar.json').then(function (geo) {
     var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });
-    var F = SIR.finder('finder', { rows: A, key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+    var seatsOf = function (d) { return A.filter(function (a) { return a.district === d.district; }); };
+    var sum = function (d, k) { return seatsOf(d).reduce(function (t, a) { return t + a[k]; }, 0); };
+    var DSET = { rows: D, key: function (d) { return SIR.slug(d.district); }, label: function (d) { return L('{d} district', { d: d.district }); },
+      card: function (d) { return SIR.facts([
+        [L('Names removed'), SIR.n(sum(d, 'total'))], [L('Per 100 electors'), SIR.d(d.per_100, 1)], [L('Women among them'), SIR.pct(100 * sum(d, 't_f') / sum(d, 'total'))],
+        [L('Entered as dead'), SIR.n(sum(d, 'r_dead'))], [L('Shifted'), SIR.n(sum(d, 'r_shifted'))], [L('Absent'), SIR.n(sum(d, 'r_absent'))], [L('Already enrolled'), SIR.n(sum(d, 'r_enrolled'))],
+        [L('Seats where more were removed than the margin'), L('{k} of {n}', { k: seatsOf(d).filter(function (a) { return a.total > a.margin2025; }).length, n: d.acs })]]) + '<p class="note">' + L('Its constituencies') + '</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
+      share: function (d) { return L('{d} district, Bihar. {r} names were removed from the roll here in the revision, {p} of every 100 electors, across {n} constituencies, and women were {w} of them. These are counts from the Election Commission\'s published lists. A reason on the list is what the officer wrote down, and nobody checked it.', { d: d.district, r: SIR.n(sum(d, 'total')), p: SIR.d(d.per_100, 1), n: d.acs, w: SIR.pct(100 * sum(d, 't_f') / sum(d, 'total')) }); },
+      pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); } };
+    var F = SIR.finder('finder', { rows: A, more: [DSET], prompt: L('Find a constituency or district'), placeholder: L('Type a name, a number or a district'), key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
       card: function (a) { return SIR.facts([
         [L('Names removed'), SIR.n(a.total)], [L('Per 100 electors'), SIR.d(a.per_100, 1)], [L('Women among them'), SIR.pct(100 * a.t_f / a.total)],
         [L('Entered as dead'), SIR.n(a.r_dead)], [L('Shifted'), SIR.n(a.r_shifted)], [L('Absent'), SIR.n(a.r_absent)], [L('Already enrolled'), SIR.n(a.r_enrolled)],
@@ -381,11 +392,12 @@ SIR.json('data/bihar/constituencies.json').then(function (A) {
     VIZ.map('vMap', { geo: geo, label: L('Map of names removed per 100 electors, by constituency'), title: L('Removed per 100 electors'), 
       v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
       pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
-    var h = location.hash.slice(1); if (F.byKey[h]) document.getElementById('vMap').__select(F.byKey[h].ac);
+    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
     SIR.tools();
   });
 }).catch(SIR.fail);
 </script>
 <script>SIR.showFaq('bihar', 'results');</script>
+<script src="../../assets/dyslexia-font.js?v=ee566817" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

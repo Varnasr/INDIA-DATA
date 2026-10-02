@@ -2,7 +2,7 @@
 <main id="main">
 <div class="page-head"><h1>Tamil Nadu: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
 
-  <h2>Find a constituency</h2>
+  <h2>Find a constituency or district</h2>
   <p class="sub">Each constituency is shaded by the names left off the draft roll for every 100 electors on the roll before the revision. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
@@ -13,7 +13,13 @@
   </div>
 
 
-  <h2>Removals per 100 electors, by district</h2>
+  <h2>The roll, step by step</h2>
+  <p class="sub">The state's roll, step by step, from before the revision to the final roll of 23 February 2026. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
+  </div>
+
+  <h2>Per 100 electors, by district</h2>
   <p class="sub">Names left off the draft roll of 19 December 2025, for every 100 electors on the roll before the revision began. Chennai is marked in red.</p>
   <div class="grid">
     <div class="panel wide">
@@ -40,16 +46,23 @@
   </div>
   <p class="finding" id="fChennai"></p>
 
-  <h2>After the final roll</h2>
-  <p class="sub">The state's roll, step by step, from before the revision to the final roll of 23 February 2026. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.</p>
+  <h2>Women</h2>
+  <p class="sub">The Chief Electoral Officer has published no split of the names left off by sex, and no roll by sex from before the revision, so women's share of the removals cannot be counted. What can be counted is the change after the draft. For each district, the grey dot is women's share of the draft roll and the red dot their share of the net rise from the draft to the final roll.</p>
   <div class="grid">
-    <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
+    <div class="panel wide"><div class="vizbox" id="vWomen"></div></div>
   </div>
+  <p class="finding" id="fWomen"></p>
+
+  <h2>After the draft</h2>
   <p class="sub">Each line is a district. On the left, the names left off the draft roll for every 100 electors on the roll before the revision; on the right, the fall that remains on the final roll, after the names added and removed on claims and objections. The flatter the line, the less was made up. Chennai is in red. Hover or tap a line for its district.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vFinal"></div></div>
   </div>
   <p class="finding" id="fFinal"></p>
+
+  <h2>Every district</h2>
+  <p class="sub">Click a column heading to sort. The table scrolls.</p>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="Every district"><table id="tDist"></table></div>
 
   <h2>Every constituency</h2>
   <p class="sub">Click a column heading to sort. The table scrolls.</p>
@@ -106,9 +119,36 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
     { k: 'shifted_absent', label: L('Shifted or absent'), fmt: SIR.n }, { k: 'dead', label: L('Dead'), fmt: SIR.n },
     { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
   ], A, { sort: 'per_100' });
+
+  // women after the draft, summed from the constituency rolls
+  var WD = {}; A.forEach(function (a) { var w = WD[a.district] || (WD[a.district] = { name: a.district, dw: 0, fw: 0, d: 0, f: 0 }); w.dw += a.draft_women; w.fw += a.final_women; w.d += a.draft; w.f += a.final; });
+  var WR = Object.keys(WD).map(function (k) { var w = WD[k]; return { name: w.name, a: 100 * w.dw / w.d, b: 100 * (w.fw - w.dw) / (w.f - w.d) }; }).sort(function (x, y) { return (y.b - y.a) - (x.b - x.a); });
+  VIZ.dumbbell('vWomen', { label: L('Women\'s share of the draft roll and of the net rise to the final roll, by district'), min: 48, step: 2, ref: 50,
+    aName: L('Women\'s share of the draft roll, %'), aTok: '--fill-grey', bName: L('Women\'s share of the net rise to the final roll, %'), bTok: '--fill-red', rows: WR });
+  var tw = A.reduce(function (t, a) { t.dw += a.draft_women; t.fw += a.final_women; t.d += a.draft; t.f += a.final; return t; }, { dw: 0, fw: 0, d: 0, f: 0 });
+  var kw = WR.filter(function (w) { return w.b > w.a; }).length, wv = { d: SIR.pct(100 * tw.dw / tw.d), r: SIR.pct(100 * (tw.fw - tw.dw) / (tw.f - tw.d)), k: kw, n: WR.length };
+  document.getElementById('fWomen').innerHTML = (kw === WR.length
+    ? L('<b>Women were {d} of the draft roll and {r} of the net rise to the final roll.</b> Their share of the rise was higher than their share of the draft in all {n} districts. The rise counts new voters as well as names put back, so it does not say how many women\'s names were restored.', wv)
+    : L('<b>Women were {d} of the draft roll and {r} of the net rise to the final roll.</b> Their share of the rise was higher than their share of the draft in {k} of the {n} districts. The rise counts new voters as well as names put back, so it does not say how many women\'s names were restored.', wv));
+
+  SIR.table(document.getElementById('tDist'), [
+    { k: 'district', label: L('District'), left: true }, { k: 'acs', label: L('Seats') },
+    { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Removed'), fmt: SIR.n },
+    { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'shifted_absent', label: L('Shifted or absent'), fmt: SIR.n }, { k: 'multiple', label: L('Enrolled in more than one place'), fmt: SIR.n },
+    { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
+  ], D, { sort: 'per_100' });
   SIR.json('data/geo/tamilnadu.json').then(function (geo) {
     var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });
-    var F = SIR.finder('finder', { rows: A, key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+    var seatsOf = function (d) { return A.filter(function (a) { return a.district === d.district; }); };
+    var DSET = { rows: D, key: function (d) { return SIR.slug(d.district); }, label: function (d) { return L('{d} district', { d: d.district }); },
+      card: function (d) { return SIR.facts([
+        [L('Names left off the draft'), SIR.n(d.removed)], [L('Per 100 electors'), SIR.d(d.per_100, 1)],
+        [L('Entered as dead'), SIR.n(d.dead)], [L('Shifted or absent'), SIR.n(d.shifted_absent)], [L('Enrolled in more than one place'), SIR.n(d.multiple)],
+        [L('Fall at the final roll, per 100'), SIR.d(d.net_per_100, 1)], [L('Constituencies'), SIR.n(d.acs)]]) + '<p class="note">' + L('Its constituencies') + '</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
+      share: function (d) { return L('{d} district, Tamil Nadu. {r} names were left off the draft roll here, {p} of every 100 electors, across {n} constituencies. These are counts from the Chief Electoral Officer\'s published tables. A reason on the list is what the officer wrote down, and nobody checked it.', { d: d.district, r: SIR.n(d.removed), p: SIR.d(d.per_100, 1), n: d.acs }); },
+      pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); } };
+    var F = SIR.finder('finder', { rows: A, more: [DSET], prompt: L('Find a constituency or district'), placeholder: L('Type a name, a number or a district'), key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
       card: function (a) { return SIR.facts([
         [L('Names left off the draft'), SIR.n(a.removed)], [L('Per 100 electors'), SIR.d(a.per_100, 1)],
         [L('Entered as dead'), SIR.n(a.dead)], [L('Not entered as dead'), SIR.n(a.removed - a.dead)],
@@ -121,7 +161,7 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
       v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
       inset: { name: L('Chennai'), acs: A.filter(function (a) { return a.district === 'Chennai'; }).map(function (a) { return a.ac; }), left: true },
       pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
-    var h = location.hash.slice(1); if (F.byKey[h]) document.getElementById('vMap').__select(F.byKey[h].ac);
+    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
     SIR.tools();
   });
   SIR.showFaq('tn', 'main');

@@ -7,11 +7,19 @@
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
+      <div class="vizbox" id="vMap"></div>
+      <p class="note">District boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified, with each constituency placed in its election district as the Election Commission lists it.</p>
     </div>
   </div>
 
 
-  <h2>Removals per 100 electors, by district</h2>
+  <h2>The roll, step by step</h2>
+  <p class="sub">The state's roll, step by step, from 16 June to 25 September 2026, when claims and objections had closed and the notices were still being heard. The bars start above zero so that the changes can be seen, and the figure on each bar is the count. The final roll is due on 27 October 2026.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
+  </div>
+
+  <h2>Per 100 electors, by district</h2>
   <p class="sub">Names left off the draft roll of 24 August 2026, for every 100 electors on the roll of 16 June 2026, in each of the Chief Electoral Officer's 34 election districts. Bengaluru's four districts are marked in red.</p>
   <div class="grid">
     <div class="panel wide">
@@ -19,15 +27,6 @@
     </div>
   </div>
   <p class="finding" id="fDist"></p>
-
-  <h2>Bengaluru</h2>
-  <p class="sub">Bangalore Urban and the three B.B.M.P districts, set against the rest of the state.</p>
-  <div class="grid">
-    <div class="panel wide">
-      <div class="bigs" id="cBlr"></div>
-    </div>
-  </div>
-  <p class="finding" id="fBlr"></p>
 
   <h2>The reasons, district by district</h2>
   <p class="sub">Each district's removals split by the reason entered against the name. Districts are in the same order as above.</p>
@@ -38,11 +37,20 @@
   </div>
   <p class="finding" id="fMix"></p>
 
-  <h2>What has been put back so far</h2>
-  <p class="sub">The state's roll, step by step, from 16 June to 25 September 2026, when claims and objections had closed and the notices were still being heard. The bars start above zero so that the changes can be seen, and the figure on each bar is the count. The final roll is due on 27 October 2026.</p>
+  <h2>Bengaluru</h2>
+  <p class="sub">Bangalore Urban and the three B.B.M.P districts, set against the rest of the state.</p>
   <div class="grid">
-    <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
+    <div class="panel wide">
+      <div class="bigs" id="cBlr"></div>
+    </div>
   </div>
+  <p class="finding" id="fBlr"></p>
+
+  <h2>Women</h2>
+  <p class="sub">The roll of 16 June is published as a total only and the names left off are not split by sex, so women's share of the removals cannot be counted from the Chief Electoral Officer's tables.</p>
+  <p class="finding" id="fWomen"></p>
+
+  <h2>After the draft</h2>
   <p class="sub">Each small chart follows one district's roll from 16 June to the draft and to 25 September, with 16 June set at 100. The dashed line is the June level. Bengaluru's four districts are in red. A rise after the draft counts new voters as well as names put back, so it is the most that could have been restored.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vBack"></div></div>
@@ -99,6 +107,8 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
   document.getElementById('fBack').innerHTML = L('<b>By 25 September the roll had risen by {a} since the draft, {m} of the {r} names removed.</b> In Bengaluru it rose by {ba}, against {bn} names removed. Elsewhere the rise came to {rm} of the names removed. The final roll may change this, and the rise includes new voters.', {
     a: SIR.n(S.added_sep), m: SIR.pct(S.made_up_pct), r: SIR.lakh(S.removed), ba: SIR.n(B.added_sep), bn: SIR.lakh(B.removed), rm: SIR.pct(R.made_up_pct) });
 
+  document.getElementById('fWomen').innerHTML = L('<b>Women were {d} of the draft roll and {s} of the roll of 25 September.</b> The roll before the revision gives no count by sex, so these two figures cannot show whether women were left off more often than men.', { d: SIR.pct(S.women_draft_pct), s: SIR.pct(S.women_sep_pct) });
+
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: L('District'), left: true },
     { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Removed'), fmt: SIR.n },
@@ -107,13 +117,25 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
     { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'duplicate', label: L('Already enrolled'), fmt: SIR.n },
     { k: 'sep', label: L('Roll of 25 Sept'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
   ], D, { sort: 'per_100' });
-  var slugD = function (d) { return 'd-' + d.district.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, ''); };
-  SIR.finder('finder', { rows: D, key: slugD, label: function (d) { return d.district; }, prompt: L('Find a district'), placeholder: L('Type a district name'),
+  var slugD = function (d) { return SIR.slug(d.district); };
+  var byName = {}, idOf = {}; D.forEach(function (d) { byName[d.district] = d; });
+  var F = SIR.finder('finder', { rows: D, key: slugD, label: function (d) { return d.district; }, prompt: L('Find a district'), placeholder: L('Type a district name'),
+    pick: function (d) { var b = document.getElementById('vMap'); if (b.__select && idOf[d.district]) b.__select(idOf[d.district]); },
     card: function (d) { return SIR.facts([
       [L('Roll of 16 June'), SIR.n(d.before)], [L('Names left off the draft'), SIR.n(d.removed)], [L('Per 100 electors'), SIR.d(d.per_100, 1)],
       [L('Shifted'), SIR.n(d.shifted)], [L('Absent'), SIR.n(d.absent)], [L('Dead'), SIR.n(d.dead)], [L('Already enrolled'), SIR.n(d.duplicate)],
       [L('Roll of 25 September'), SIR.n(d.sep)], [L('Change since the draft'), (d.added_sep >= 0 ? '+' : '') + SIR.n(d.added_sep)]]); },
     share: function (d) { return L('{n}, Karnataka. {r} names were left off the draft roll in this district, {p} of every 100 electors. {s} were entered as shifted and {dd} as dead. By 25 September the roll had changed by {a} since the draft. These are counts from the Chief Electoral Officer\'s press notes. A reason on the list is what the officer wrote down, and nobody checked it.', { n: d.district, r: SIR.n(d.removed), p: SIR.d(d.per_100, 1), s: SIR.n(d.shifted), dd: SIR.n(d.dead), a: (d.added_sep >= 0 ? '+' : '') + SIR.n(d.added_sep) }); } });
+  SIR.json('data/geo/karnataka.json').then(function (geo) {
+    var byId = {};
+    geo.features.forEach(function (f) { var d = byName[f.properties.name]; if (d) { byId[f.properties.ac] = d; idOf[d.district] = f.properties.ac; } });
+    VIZ.map('vMap', { geo: geo, label: L('Map of names left off the draft per 100 electors, by district'), title: L('Left off per 100 electors'),
+      v: function (id) { return byId[id] ? byId[id].per_100 : null; }, name: function (id) { return byId[id] ? byId[id].district : ''; },
+      inset: { name: L('Bengaluru city'), acs: geo.features.filter(function (f) { return /^B\.B\.M\.P/.test(f.properties.name); }).map(function (f) { return f.properties.ac; }), left: true },
+      pick: function (id) { if (byId[id]) F.select(byId[id]); } });
+    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
+    SIR.tools();
+  });
   SIR.showFaq('ka', 'main');
 }).catch(SIR.fail);
 </script>

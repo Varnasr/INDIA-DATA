@@ -42,6 +42,7 @@ def svg(paths, cls='icon'):
 LOGO = svg('<rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/>')
 PIN = svg('<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>')
 DOWN = svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>')
+LENS = svg('<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>')
 MOON = svg('<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>')
 PRINT = svg('<polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>')
 
@@ -80,6 +81,9 @@ def shell(out, meta, content, scripts):
         links = ''.join('<a href="%s%s"%s>%s</a>' % (root, h, ' download' if d else '', html.escape(t)) for h, t, d in place['downloads'])
         dl = ('<details class="dl"><summary class="btn">%s <span class="lbl">Downloads</span></summary>'
               '<div class="menu" data-i18n-each>%s</div></details>' % (DOWN, links))
+    # the sitewide search (sir.js): a button, and Ctrl or Command and K
+    find = ('<button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">%s '
+            '<span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>' % LENS)
     # Print belongs on an analysis, where it prints the charts; the front page
     # is an introduction and carries no print button.
     prn = ('' if place['id'] == 'home' else
@@ -92,11 +96,11 @@ def shell(out, meta, content, scripts):
         '<header class="top">\n  <div class="header-content">\n'
         '    <a class="logo" href="%s"><span class="logo-icon">%s</span><%s class="titles"><span class="h-title">%s</span>'
         '<span class="subtitle">%s</span></%s></a>\n'
-        '    <div class="controls">\n      %s\n      %s\n'
+        '    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">\n      %s\n      %s\n      %s\n'
         '      <button type="button" class="theme" aria-pressed="false">%s <span class="lbl">Dark</span></button>\n'
         '      %s\n'
         '    </div>\n  </div>\n</header>\n'
-    ) % (place['band'], root or './', LOGO, tag, html.escape(CFG['title']), html.escape(place['subtitle']), tag, places, dl, MOON, prn)
+    ) % (place['band'], root or './', LOGO, tag, html.escape(CFG['title']), html.escape(place['subtitle']), tag, find, places, dl, MOON, prn)
     nav = ''
     if place['pages'] and not meta.get('own_tabs'):
         tabs = []
@@ -134,9 +138,10 @@ def shell(out, meta, content, scripts):
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
         '<script src="%sassets/i18n.js"></script>\n<title>%s</title>\n<meta name="description" content="%s">\n'
         '<link rel="icon" href="%s">\n<link rel="stylesheet" href="%sassets/sir.css">%s\n</head>\n'
-        '<body class="%s" data-place="%s" data-root="%s">\n%s%s%s\n%s\n%s\n</body>\n</html>\n'
+        '<body class="%s" data-place="%s" data-root="%s">\n%s%s%s\n%s\n%s\n'
+        '<script src="%sassets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>\n</body>\n</html>\n'
     ) % (root, html.escape(meta['title'], quote=False), html.escape(meta['description']), favicon(place['color']), root, head_extra,
-         cls, place['id'], root, header, nav, content, footer, scripts)
+         cls, place['id'], root, header, nav, content, footer, scripts, root)
 
 
 def put(path, text, compare_unstamped=True):
@@ -172,6 +177,34 @@ def build():
     if '/*sites*/' not in js:
         sys.exit('assets/sir.js has no /*sites*/ marker')
     put(SIRJS, js2, compare_unstamped=False)
+    put(os.path.join(ROOT, 'data', 'search.json'), search_index(), compare_unstamped=False)
+
+
+def search_index():
+    """What the sitewide search looks through: every page, every
+    constituency and district a finder can open, and the five Hyderabad
+    seats in the part explorer. Names stay as the data spells them."""
+    J = lambda p: json.load(open(os.path.join(ROOT, 'data', p), encoding='utf-8'))
+    slug = lambda s: 'd-' + re.sub(r'^-|-$', '', re.sub(r'[^a-z0-9]+', '-', s.lower()))
+    pages = []
+    for p in CFG['places']:
+        for h, label, _ in p['pages']:
+            pages.append([p['id'], label, h])
+    rows = []
+    for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
+                              ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/')):
+        for a in J(folder + '/constituencies.json'):
+            rows.append([pid, 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], page + '#ac-%d' % a['ac']])
+        for d in J(folder + '/districts.json'):
+            rows.append([pid, 'd', d['district'], '', page + '#' + slug(d['district'])])
+    for d in J('karnataka/districts.json'):
+        # Bengaluru is four election districts; a reader types the city
+        city = 'Bengaluru Bangalore' if d['bengaluru'] else ''
+        rows.append(['ka', 'd', d['district'], '', 'karnataka/#' + slug(d['district'])] + ([city] if city else []))
+    for a in J('hyderabad/summary.json')['acs']:
+        rows.append(['hyd', 'ac', a['name'], '', 'hyderabad/explorer/#' + a['name']])
+    places = {p['id']: p['label'] for p in CFG['places']}
+    return json.dumps({'places': places, 'pages': pages, 'rows': rows}, ensure_ascii=False, separators=(',', ':')) + '\n'
 
 
 if __name__ == '__main__':

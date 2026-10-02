@@ -462,41 +462,53 @@
   // ---- the finder: type a constituency, get its card, share it. A card has
   // its own address (#ac-12), so a shared link opens on that seat.
   // o: {rows, key(r) -> 'ac-12', label(r), card(r) -> html, share(r) -> text, pick(r)}
+  // o is a set of rows (constituencies); o.more adds further sets (districts)
+  // with their own key, label, card, share and pick. Every set's labels go
+  // in the one list, and a link to any row opens on it.
   SIR.finder = function (el, o) {
     el = typeof el === 'string' ? document.getElementById(el) : el;
-    var uid = el.id || 'finder', list = uid + '-list';
+    var uid = el.id || 'finder', list = uid + '-list', sets = [o].concat(o.more || []), items = [];
+    sets.forEach(function (st) { st.rows.forEach(function (r) { items.push({ s: st, r: r, l: st.label(r), k: st.key(r) }); }); });
     el.innerHTML = '<label for="' + uid + '-q">' + (o.prompt || L('Find a constituency')) + '</label>' +
       '<input id="' + uid + '-q" type="search" list="' + list + '" autocomplete="off" placeholder="' + (o.placeholder || L('Type a name or number')) + '">' +
-      '<datalist id="' + list + '">' + o.rows.map(function (r) { return '<option value="' + SIR.esc(o.label(r)) + '">'; }).join('') + '</datalist>' +
+      '<datalist id="' + list + '">' + items.map(function (it) { return '<option value="' + SIR.esc(it.l) + '">'; }).join('') + '</datalist>' +
       '<div class="fcard" aria-live="polite"></div>';
     var input = el.querySelector('input'), out = el.querySelector('.fcard');
-    var byLabel = {}, byKey = {};
-    o.rows.forEach(function (r) { byLabel[o.label(r).toLowerCase()] = r; byKey[o.key(r)] = r; });
+    var byLabel = {}, byKey = {}, item = {};
+    items.forEach(function (it) { byLabel[it.l.toLowerCase()] = it; item[it.k] = it; if (it.s === o) byKey[it.k] = it.r; });
     function find(v) {
       v = v.trim().toLowerCase(); if (!v) return null;
       if (byLabel[v]) return byLabel[v];
-      var hit = o.rows.filter(function (r) { var l = o.label(r).toLowerCase(); return l.indexOf(v) === 0 || l.indexOf(' ' + v) >= 0 || String(r.ac) === v; });
+      var hit = items.filter(function (it) { var l = it.l.toLowerCase(); return l.indexOf(v) === 0 || l.indexOf(' ' + v) >= 0 || String(it.r.ac) === v; });
       return hit.length === 1 ? hit[0] : null;
     }
-    function select(r, scroll) {
-      if (!r) return;
-      var k = o.key(r);
-      input.value = o.label(r);
-      out.innerHTML = '<h3>' + SIR.esc(o.title ? o.title(r) : o.label(r)) + '</h3>' + o.card(r) +
-        '<div class="tools"><a class="btn" target="_blank" rel="noopener" href="' + SIR.wa(o.share(r), k) + '">' + L('Share on WhatsApp') + '</a>' +
+    function select(it, scroll) {
+      if (!it) return;
+      var st = it.s, r = it.r, k = it.k;
+      input.value = it.l;
+      out.innerHTML = '<h3>' + SIR.esc(st.title ? st.title(r) : it.l) + '</h3>' + st.card(r) +
+        '<div class="tools"><a class="btn" target="_blank" rel="noopener" href="' + SIR.wa(st.share(r), k) + '">' + L('Share on WhatsApp') + '</a>' +
         '<button type="button" data-t="link">' + L('Copy link') + '</button><button type="button" data-t="text">' + L('Copy text') + '</button></div>';
       out.querySelector('[data-t=link]').onclick = function () { copy(SIR.pageUrl(k), this); };
-      out.querySelector('[data-t=text]').onclick = function () { copy(o.share(r) + '\n' + SIR.pageUrl(k), this); };
+      out.querySelector('[data-t=text]').onclick = function () { copy(st.share(r) + '\n' + SIR.pageUrl(k), this); };
+      // a card can carry buttons that open another row (a district's seats)
+      out.querySelectorAll('[data-go]').forEach(function (b) { b.onclick = function () { select(item[b.getAttribute('data-go')], false); }; });
       if (history.replaceState) history.replaceState(null, '', '#' + k);
-      if (o.pick) o.pick(r);
+      if (st.pick) st.pick(r);
       if (scroll) el.scrollIntoView({ block: 'start' });
     }
     input.addEventListener('change', function () { select(find(input.value)); });
     input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); select(find(input.value)); } });
-    var h = decodeURIComponent(location.hash.slice(1));
-    if (byKey[h]) select(byKey[h], true);
-    return { select: function (r) { select(r, false); }, byKey: byKey };
+    function fromHash(scroll) { var h = decodeURIComponent(location.hash.slice(1)); if (item[h]) select(item[h], scroll); }
+    fromHash(true);
+    window.addEventListener('hashchange', function () { fromHash(true); });
+    return { select: function (r) { var it = items.filter(function (x) { return x.r === r; })[0]; select(it, false); }, byKey: byKey, item: item };
   };
+  // buttons for a list of rows, each opening that row's card
+  SIR.goList = function (rows, key, label) {
+    return '<p class="golist">' + rows.map(function (r) { return '<button type="button" class="chip" data-go="' + SIR.esc(key(r)) + '">' + SIR.esc(label(r)) + '</button>'; }).join(' ') + '</p>';
+  };
+  SIR.slug = function (s) { return 'd-' + String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
   SIR.esc = function (x) { return String(x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   // a card's figures as label and value pairs
   SIR.facts = function (pairs) {
@@ -530,4 +542,93 @@
       }
     }).catch(SIR.fail);
   };
+})();
+
+// ---------------------------------------------------------------- search
+// One box for the whole site, opened by the header button, Ctrl or Command
+// and K, or "/". It looks through data/search.json, which build_site.py
+// writes: every page, and every constituency and district a finder opens.
+(function () {
+  var btn = document.querySelector('.find');
+  if (!btn) return;
+  var kbd = btn.querySelector('.kbd');
+  if (kbd && /Mac|iPhone|iPad/.test(navigator.platform || '')) kbd.textContent = '⌘ K';
+  var tr = function (k) { return (L.lang !== 'en' && window.SIR_DICT && window.SIR_DICT[k]) || k; };
+  var root = document.body.getAttribute('data-root') || '';
+  var dlg, input, list, status, data, items = [], hits = [], cur = -1;
+  function norm(x) { return String(x).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim(); }
+  function load() {
+    if (data) return Promise.resolve(data);
+    return SIR.json('data/search.json').then(function (d) {
+      data = d;
+      var place = function (id) { return tr(d.places[id] || ''); };
+      d.pages.forEach(function (p) { items.push({ l: tr(p[1]), m: L('Page') + ' · ' + place(p[0]), u: p[2], k: 0, h: norm(tr(p[1]) + ' ' + p[1] + ' ' + place(p[0]) + ' ' + d.places[p[0]]) }); });
+      d.rows.forEach(function (r) {
+        var dist = r[1] === 'd', l = dist ? L('{d} district', { d: r[2] }) : r[2];
+        var m = (dist ? L('District') : L('Constituency')) + ' · ' + (r[3] ? r[3] + ' · ' : '') + place(r[0]);
+        items.push({ l: l, m: m, u: r[4], k: dist ? 1 : 2, h: norm(l + ' ' + r[2] + ' ' + r[3] + ' ' + place(r[0]) + ' ' + d.places[r[0]] + ' ' + (r[5] || '')) + ' ' + norm(r[2]).replace(/ /g, '') });
+      });
+      return d;
+    });
+  }
+  function build() {
+    dlg = document.createElement('dialog');
+    dlg.className = 'search';
+    dlg.setAttribute('aria-label', L('Search'));
+    dlg.innerHTML = '<div class="search-in"><label for="sq" class="sr">' + L('Search') + '</label>' +
+      '<input id="sq" type="search" role="combobox" aria-expanded="false" aria-controls="sres" aria-autocomplete="list" autocomplete="off" placeholder="' + SIR.esc(L('Search places, pages, constituencies and districts')) + '">' +
+      '<button type="button" class="sclose">' + L('Close') + '</button></div>' +
+      '<ul id="sres" role="listbox" aria-label="' + SIR.esc(L('Results')) + '"></ul><p class="sstatus" aria-live="polite"></p>';
+    document.body.appendChild(dlg);
+    input = dlg.querySelector('input'); list = dlg.querySelector('ul'); status = dlg.querySelector('.sstatus');
+    dlg.querySelector('.sclose').onclick = function () { dlg.close(); };
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    input.addEventListener('input', run);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); move(e.key === 'ArrowDown' ? 1 : -1); }
+      else if (e.key === 'Enter') { e.preventDefault(); go(hits[cur < 0 ? 0 : cur]); }
+    });
+    list.addEventListener('click', function (e) { var li = e.target.closest('li'); if (li) go(hits[+li.getAttribute('data-i')]); });
+  }
+  function run() {
+    var q = norm(input.value), toks = q ? q.split(' ') : [];
+    cur = -1;
+    if (!toks.length) { hits = []; list.innerHTML = ''; status.textContent = ''; input.setAttribute('aria-expanded', 'false'); return; }
+    hits = items.filter(function (it) { return toks.every(function (t) { return it.h.indexOf(t) >= 0; }); });
+    var score = function (it) { var l = norm(it.l); return (l.indexOf(q) === 0 ? 0 : (' ' + l).indexOf(' ' + toks[0]) >= 0 ? 1 : 2) * 10 + it.k; };
+    hits.sort(function (a, b) { return score(a) - score(b) || a.l.localeCompare(b.l); });
+    var n = hits.length; hits = hits.slice(0, 20);
+    list.innerHTML = hits.map(function (it, i) {
+      return '<li role="option" id="so' + i + '" data-i="' + i + '" aria-selected="false"><span class="sl">' + SIR.esc(it.l) + '</span><span class="sm">' + SIR.esc(it.m) + '</span></li>';
+    }).join('');
+    input.setAttribute('aria-expanded', n ? 'true' : 'false');
+    status.textContent = n ? (n > 20 ? L('{n} matches, the first 20 shown', { n: n }) : n === 1 ? L('One match') : L('{n} matches', { n: n })) : L('No match');
+    if (n) move(1);
+  }
+  function move(d) {
+    if (!hits.length) return;
+    cur = (cur + d + hits.length) % hits.length;
+    list.querySelectorAll('li').forEach(function (li, i) { li.setAttribute('aria-selected', i === cur ? 'true' : 'false'); });
+    input.setAttribute('aria-activedescendant', 'so' + cur);
+    var li = list.children[cur]; if (li && li.scrollIntoView) li.scrollIntoView({ block: 'nearest' });
+  }
+  function go(it) {
+    if (!it) return;
+    var u = new URL(root + it.u, location.href), lang = new URLSearchParams(location.search).get('lang');
+    if (lang) u.searchParams.set('lang', lang);
+    dlg.close();
+    if (u.pathname === location.pathname && u.hash) { location.hash = u.hash; } else { location.href = u.href; }
+  }
+  function open() {
+    if (!dlg) build();
+    if (!dlg.open) dlg.showModal();
+    input.select();
+    load().then(run).catch(function () { status.textContent = L('The search could not load. Reload the page and try again.'); });
+  }
+  btn.addEventListener('click', open);
+  document.addEventListener('keydown', function (e) {
+    var t = e.target, typing = t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName));
+    if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) { e.preventDefault(); open(); }
+    else if (e.key === '/' && !typing && !e.metaKey && !e.ctrlKey && !e.altKey) { e.preventDefault(); open(); }
+  });
 })();
