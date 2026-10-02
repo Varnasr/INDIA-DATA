@@ -1,6 +1,6 @@
 # Kerala raw tables: sources
 
-All files fetched 2026-10-01. One row per assembly constituency (AC 1 to 140)
+Files fetched 2026-10-01 unless stated. One row per assembly constituency (AC 1 to 140)
 unless stated. Aggregates only: no list of individual electors was opened or
 stored. `check.py` in this folder re-runs every assertion below
 (`python3 data/kerala/raw/check.py`).
@@ -73,10 +73,92 @@ Electors by sex on the final SIR roll, same layout.
 - Spellings: the district is printed "KOLLM" (Kollam) in both PDFs and AC 124
   "KOLLM"; AC 8 is "TALIPARAMBA" on the draft and "TALIPARMBA" on the final.
   Not corrected. Otherwise names and districts agree between the two tables.
-- Not fetched: the roll the election was held on. The 2026 election page links
-  https://www.ceo.kerala.gov.in/ceokerala/pdf/govt_orders/legislative-assembly-2026/electorate-published-as-on-23-march-2026.pdf
-  and statistical report table 11, "AC Wise Number Of Electors"
-  (.../statistical-report/11_-_AC_Wise_Number_Of_Electors_1778164525.pdf).
+- The roll the election was held on is election_roll_ac.csv, below.
+  Statistical report table 11, "AC Wise Number Of Electors"
+  (.../statistical-report/11_-_AC_Wise_Number_Of_Electors_1778164525.pdf),
+  was not read.
+
+## roll_before_ac.csv
+
+How the numbers were taken, for both files: the CEO host refuses this sandbox and
+no scraper key reaches scripts, so the scraper's text of each AC table was
+copied verbatim into a scratch file and the numbers were parsed from that file
+by script. A copying slip would break a row sum, a district total or the state
+total, and every one of them agrees with the printed figure.
+
+Electors by sex on the final roll of the Special Summary Revision 2025
+(qualifying date 1.1.2025), published 06.01.2025: the last roll published by
+AC before the revision. General plus overseas. Fetched 2026-10-02.
+
+- Source: https://www.ceo.kerala.gov.in/ceokerala/pdf/ssr-2025-final-electorate.pdf
+  ("FINAL ELECTORATE PUBLISHED ON 06.01.2025", 9 pages), linked as item 8 from
+  https://www.ceo.kerala.gov.in/content/ssr2025. Read through Firecrawl's PDF
+  parser (the CEO host resets plain connections from the sandbox); the parser's
+  text of the AC table was saved to a scratch file and parsed by script, and
+  the PDF is not stored.
+- Date confirmed by the press note linked as item 9,
+  https://www.ceo.kerala.gov.in/ceokerala/pdf/ssr2025-pressnote.pdf (Malayalam,
+  dated 06/01/2025), which gives the same state figures: 2,78,10,942 electors,
+  1,43,69,092 women, 1,34,41,490 men, 360 third gender, 90,124 overseas;
+  Malappuram largest (34,01,577), Wayanad smallest (6,42,200). All agree with
+  the table.
+- Columns: ac, ac_name, district, men, women, third, total. AC names as the PDF
+  spells them. District copied from draft_roll_ac.csv; the PDF's own district
+  labels agree except that it prints "8-ERANAKULAM".
+- Assertions passed: 140 rows, ACs 1 to 140 once each; total = men + women +
+  third in every row; all 14 DISTRICT TOTAL rows equal the sum of their ACs;
+  column sums equal the state table on page 1, 13,441,490 men, 14,369,092
+  women, 360 third gender, 27,810,942 total. AC names equal the draft's except
+  8 TALIPARMBA (draft TALIPARAMBA) and 42 VALIKKUNNU (draft VALLIKKUNNU).
+  Larger than the draft in all 140 ACs, by 2,368,590 statewide (2.5% to 26.1%
+  of the AC's roll).
+- Odd: the AC table has no STATE TOTAL row, so the state check is against the
+  summary on page 1 and the press note. The last column of the AC table is
+  headed "DISTRICT TOTAL" though it holds AC totals. The third-gender district
+  table in the same PDF is headed "Final Roll 2024". Overseas electors were
+  90,124 here against 64,394 on the draft.
+- This is not the roll frozen for the revision. The press gives that roll
+  (27.10.2025) as 2,78,50,855; this one is 39,913 smaller, as gender.csv in
+  data/india/raw says. So roll_before minus draft (2,368,590) is not the
+  number of names left off the draft, which the press puts at 24,08,503; the
+  difference is the 39,913 net change between January and October 2025, and
+  the AC split of that change is not known.
+- Searched and not found: an AC-wise table of the roll as on 27.10.2025.
+  Searches on ceo.kerala.gov.in and eci.gov.in found only the state total
+  (press reports and the CEO's draft-roll press note of 23.12.2025, seen as a
+  copy on getapi.indiatvnews.com and not used). The SIR page and the
+  electoral-roll page carry no such table. The 2024 Lok Sabha electors by
+  assembly segment were not sought, since a later primary roll was found.
+
+## election_roll_ac.csv
+
+How the numbers were taken, for both files: the CEO host refuses this sandbox and
+no scraper key reaches scripts, so the scraper's text of each AC table was
+copied verbatim into a scratch file and the numbers were parsed from that file
+by script. A copying slip would break a row sum, a district total or the state
+total, and every one of them agrees with the printed figure.
+
+Electors by sex on the roll the 2026 assembly election was held on,
+"ELECTORATE PUBLISHED AS ON 23 MARCH 2026", general plus overseas. Fetched
+2026-10-02.
+
+- Source: https://www.ceo.kerala.gov.in/ceokerala/pdf/govt_orders/legislative-assembly-2026/electorate-published-as-on-23-march-2026.pdf
+  (11 pages), linked from
+  https://www.ceo.kerala.gov.in/elections/legislative-assembly-2026. Via
+  Firecrawl as above; the parser's text of the AC table parsed by script.
+- Same columns. District copied from draft_roll_ac.csv; the PDF prints
+  "8-ERANAKULAM" and "13-KOLLAM" where the draft has ERNAKULAM and KOLLM.
+- Assertions passed: 140 rows; row sums; all 14 DISTRICT TOTAL rows; column
+  sums equal the printed STATE TOTAL row and the state table on page 1,
+  13,220,811 men, 13,921,868 women, 273 third gender, 27,142,952 total. AC
+  names equal the draft's except 61 CHELACKARA (draft CHELAKKARA) and 83
+  THRIPKAKARA (draft THRIKKAKARA); AC 124 is printed "KOLLM" here too.
+  Larger than the final SIR roll in all 140 ACs (by 339 at least), by 189,308
+  statewide. Total votes in results_2026.csv are 79.6% of it.
+- Overseas electors 242,093 (204,218 men), against 223,558 on the final SIR
+  roll. Service voters (53,984) are printed separately and are not in the AC
+  figures, as in the other tables. The PDF also has age, PwD and polling
+  station tables; not taken.
 
 ## results_2026.csv and results_2026_candidates.csv
 

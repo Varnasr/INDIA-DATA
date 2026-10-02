@@ -1,0 +1,87 @@
+<!--page {"title": "Kerala SIR 2026: the roll, by district and constituency", "description": "How much smaller each district and constituency's electoral roll was at Kerala's SIR draft than in January 2025, who was missing, and how much of it came back before the 2026 election.", "place": "kl"} -->
+<main id="main">
+<div class="page-head"><h1>Kerala: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
+
+  <h2>From January 2025 to the roll the election was held on</h2>
+  <p class="sub">The state's roll, step by step, from the final roll of the 2025 summary revision to the roll of 23 March 2026. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
+  </div>
+  <p class="finding" id="fWater"></p>
+
+  <h2>How much smaller each district's roll was at the draft</h2>
+  <p class="sub">The Chief Electoral Officer has published no count of the names left off the draft, by district or constituency. Every roll is published by constituency, so this is the fall from the roll of January 2025 to the draft of 23 December 2025, for every 100 electors on the January roll. It takes in the ordinary changes of 2025 as well as the revision, though for the state as a whole the two are within half a lakh of each other.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="cDist"></div></div>
+  </div>
+  <p class="finding" id="fDist"></p>
+
+  <h2>At the draft and at the election</h2>
+  <p class="sub">For each district, the grey dot is the fall from January 2025 to the draft, and the blue dot the fall to the roll the election was held on, both for every 100 electors on the January roll. A blue dot below zero means the roll was larger at the election than in January 2025. The rise after the draft counts new voters as well as names put back.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vBack"></div></div>
+  </div>
+  <p class="finding" id="fBack"></p>
+
+  <h2>Women</h2>
+  <p class="sub">For each district, the grey dot is women's share of the January 2025 roll and the red dot women's share of the fall to the draft. Where the red dot is to the right, more women left the roll than their share of it.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vWomen"></div></div>
+  </div>
+  <p class="finding" id="fWomen"></p>
+
+  <h2>Every constituency</h2>
+  <p class="sub">Click a column heading to sort. The table scrolls.</p>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="Every constituency"><table id="tAc"></table></div>
+
+  <p class="note">Every figure on this page is computed from the published data when the page loads. <a href="method/">Sources and method</a>.</p>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../assets/sir.js"></script>
+<script src="../assets/viz.js"></script>
+<script src="../assets/faq/kerala.js"></script>
+<script>
+Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/districts.json'), SIR.json('data/kerala/constituencies.json')]).then(function (r) {
+  var S = r[0], D = r[1], A = r[2];
+  var tvm = function (d) { return d.district === 'Thiruvananthapuram'; };
+  VIZ.waterfall('vWater', { label: L('Kerala: the roll from January 2025 to March 2026'), from: Math.floor(S.draft * 0.85 / 1e6) * 1e6, steps: [
+    { name: L('Roll of January 2025'), v: S.roll_2025, kind: 'total' }, { name: L('Fall to the draft'), v: S.fall_draft, kind: 'down' },
+    { name: L('Draft roll'), v: S.draft, kind: 'total' }, { name: L('Net change to the final roll'), v: S.added_final, kind: 'up' },
+    { name: L('Final roll'), v: S.final, kind: 'total' }, { name: L('Net change to March 2026'), v: S.added_election, kind: 'up' },
+    { name: L('Roll of 23 March 2026'), v: S.election, kind: 'total' }] });
+  document.getElementById('fWater').innerHTML = L('<b>The draft roll was {f} smaller than the roll of January 2025, {p} of every 100 electors.</b> The final roll and the additions before the election brought back {b}, so the roll the election was held on was {e} smaller than in January 2025. The rise after the draft counts new voters as well as names put back.', {
+    f: SIR.lakh(S.fall_draft), p: SIR.d(S.draft_per_100, 1), b: SIR.lakh(S.election - S.draft), e: SIR.lakh(S.fall) });
+
+  VIZ.lollipop('cDist', { label: L('Fall in the roll from January 2025 to the draft, per 100 electors, by district'), axis: L('Fall per 100 electors on the January 2025 roll'),
+    rows: D.map(function (d) { return { name: d.district, v: d.draft_per_100, text: SIR.d(d.draft_per_100, 1), tok: tvm(d) ? '--fill-red' : '--fill-navy', hi: tvm(d) }; }) });
+  var lo = D[D.length - 1];
+  document.getElementById('fDist').innerHTML = L('<b>{a}\'s roll was {t} per 100 smaller at the draft, against {s} for the state.</b> {b} and {c} come next. {lo} fell the least, {lov}. Across the 140 constituencies the fall runs from {min} per 100 in {minn} to {max} in {maxn}.', {
+    a: D[0].district, t: SIR.d(D[0].draft_per_100, 1), s: SIR.d(S.draft_per_100, 1), b: D[1].district, c: D[2].district, lo: lo.district, lov: SIR.d(lo.draft_per_100, 1), min: SIR.d(S.rate_min_v, 1), minn: S.rate_min, max: SIR.d(S.rate_max_v, 1), maxn: S.rate_max });
+
+  VIZ.dumbbell('vBack', { label: L('Fall in the roll from January 2025 to the draft and to the 2026 election roll, per 100 electors, by district'), min: -10, ref: 0,
+    aName: L('To the draft, per 100'), aTok: '--fill-grey', bName: L('To the 2026 election roll, per 100'), bTok: '--fill-navy',
+    rows: D.map(function (d) { return { name: d.district, a: d.draft_per_100, b: d.per_100 }; }) });
+  var grew = D.filter(function (d) { return d.per_100 < 0; });
+  document.getElementById('fBack').innerHTML = L('<b>In {a} and {b} the roll was still about {t} per 100 smaller at the election than in January 2025.</b> In {k} districts it had grown past its January size by the election, {g} among them. The rise after the draft counts new voters as well as names put back, so it cannot show how many of those left off were restored.', {
+    a: D[0].district, b: D[1].district, t: SIR.d((D[0].per_100 + D[1].per_100) / 2, 0), k: grew.length, g: grew.map(function (d) { return d.district; }).join(', ') });
+
+  var DW = D.slice().sort(function (a, b) { return (b.women_fall_pct - b.women_2025_pct) - (a.women_fall_pct - a.women_2025_pct); });
+  VIZ.dumbbell('vWomen', { label: L('Women\'s share of the January 2025 roll and of the fall to the draft, by district'), min: 40, step: 5, ref: 50,
+    aName: L('Women\'s share of the January 2025 roll, %'), aTok: '--fill-grey', bName: L('Women\'s share of the fall, %'), bTok: '--fill-red',
+    rows: DW.map(function (d) { return { name: d.district, a: d.women_2025_pct, b: d.women_fall_pct }; }) });
+  document.getElementById('fWomen').innerHTML = L('<b>Women were {wf} of the fall to the draft, against {w} of the roll before it.</b> They were more than their share in all {n} districts and in {k} of the {acs} constituencies. Of the rise after the draft, women were {wa}.', {
+    wf: SIR.pct(S.women_fall_pct), w: SIR.pct(S.women_2025_pct), n: S.districts, k: S.acs_women_over, acs: S.acs, wa: SIR.pct(S.women_added_pct) });
+
+  SIR.table(document.getElementById('tAc'), [
+    { k: 'ac', label: L('No.') }, { k: 'name', label: L('Constituency'), left: true }, { k: 'district', label: L('District'), left: true },
+    { k: 'roll_2025', label: L('Roll Jan 2025'), fmt: SIR.n }, { k: 'draft', label: L('Draft roll'), fmt: SIR.n },
+    { k: 'draft_per_100', label: L('Fall to draft per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'election', label: L('Roll Mar 2026'), fmt: SIR.n },
+    { k: 'per_100', label: L('Fall to 2026 per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'women_fall_pct', label: L('Women % of fall'), fmt: function (v) { return SIR.d(v, 1); } }
+  ], A, { sort: 'draft_per_100' });
+  SIR.showFaq('kl', 'main');
+}).catch(SIR.fail);
+</script>

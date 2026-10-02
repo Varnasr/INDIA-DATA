@@ -53,6 +53,16 @@ def _karnataka_fresh():
     assert r.returncode == 0, r.stdout + r.stderr
 
 
+def _westbengal_fresh():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_westbengal.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr
+
+
+def _kerala_fresh():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_kerala.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr
+
+
 def _hyderabad_fresh():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_hyderabad.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-600:]
@@ -189,7 +199,9 @@ def _short_and_faq():
 def _pages_link_method():
     for p in ['bihar/index.html', 'bihar/results/index.html', 'bihar/people/index.html',
               'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html',
-              'tamilnadu/index.html', 'tamilnadu/elections/index.html', 'karnataka/index.html']:
+              'tamilnadu/index.html', 'tamilnadu/elections/index.html', 'karnataka/index.html',
+              'westbengal/index.html', 'westbengal/elections/index.html',
+              'kerala/index.html', 'kerala/elections/index.html']:
         with open(os.path.join(ROOT, p), encoding='utf-8') as fh:
             assert 'method/' in fh.read(), '%s no longer links to the method page' % p
 
@@ -199,6 +211,8 @@ for name, fn in [
     ('Hyderabad data matches the explorer', _hyderabad_fresh),
     ('Tamil Nadu data matches its raw tables', _tamilnadu_fresh),
     ('Karnataka data matches its raw tables', _karnataka_fresh),
+    ('West Bengal data matches its raw tables', _westbengal_fresh),
+    ('Kerala data matches its raw tables', _kerala_fresh),
     ('Hyderabad totals, parts and Malakpet linkage', _hyderabad_totals),
     ('booth deletions counted once per booth', _one_row_per_booth),
     ('phases and sexes add to the total', _phases),

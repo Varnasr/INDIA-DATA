@@ -1,0 +1,34 @@
+<!--page {"title": "Kerala SIR 2026: sources and method", "description": "Where the Kerala figures come from, what the fall in the roll measures, and what it cannot show.", "place": "kl"} -->
+<main id="main">
+<div class="page-head"><h1>Sources and method</h1><ol class="summary" id="short"></ol></div>
+
+  <h2>What is counted</h2>
+  <div class="qa"><h3>Four rolls, constituency by constituency</h3><p>The Chief Electoral Officer, Kerala, publishes every roll by assembly constituency and sex: the final roll of the 2025 summary revision (6 January 2025), the draft roll of the Special Intensive Revision (23 December 2025), its final roll (21 February 2026) and the roll of 23 March 2026, on which the election was held. Each adds up to its own district and state totals.</p></div>
+  <div class="qa"><h3>Why the fall in the roll and not the removals</h3><p>No table of the names left off the draft has been published by the Chief Electoral Officer, by constituency or for the state. The pages measure how much smaller each roll was at the draft than in January 2025. That fall, <span id="mFall"></span> in all, takes in the ordinary changes of 2025 as well as the revision. The roll frozen for the revision in October 2025 was <span id="mFrozen"></span>, a little larger than the January roll, and the count of names left off reported with the draft was <span id="mPress"></span>, so for the state the fall and the removals are close. For a single constituency they may differ more.</p></div>
+  <div class="qa"><h3>After the draft</h3><p>The rise from the draft to the final roll and to the roll of March 2026 is the names added less those removed. It counts new voters, including those who turned eighteen and those registered abroad, as well as names put back, so it cannot show how many of those left off were restored.</p></div>
+  <div class="qa"><h3>The 2026 result</h3><p>Winner, runner-up and margin for every seat are from the Election Commission's constituency result pages, checked against its state-wise pages. Turnout is votes over the roll of 23 March 2026.</p></div>
+
+  <h2>What these tables cannot show</h2>
+  <ul class="plain">
+    <li>How many names were removed in each district or constituency, or on what recorded reason.</li>
+    <li>How many of those left off were put back.</li>
+    <li>Whether each removal was right, or how anyone missing from the roll would have voted.</li>
+  </ul>
+
+  <h2>Downloads</h2>
+  <p>The constituency and district tables behind every chart are in the Downloads menu at the top of the page.</p>
+
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/kerala.js"></script>
+<script>
+SIR.json('data/kerala/summary.json').then(function (s) {
+  document.getElementById('mFall').textContent = SIR.n(s.fall_draft);
+  document.getElementById('mFrozen').textContent = SIR.n(s.frozen);
+  document.getElementById('mPress').textContent = SIR.n(s.press_removed);
+  SIR.showFaq('kl', 'method');
+}).catch(SIR.fail);
+</script>

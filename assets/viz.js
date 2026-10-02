@@ -113,23 +113,27 @@
     var tok = { total: '--fill-navy', down: '--fill-red', up: '--fill-teal' };
     if (phone()) {
       // horizontal on a phone: one row per step
-      var lw = 104, rw = 66, x = function (v) { return lw + (W - lw - rw) * (v - min) / (max - min); };
+      var lw = 136, rw = 66, x = function (v) { return lw + (W - lw - rw) * (v - min) / (max - min); };
       bars.forEach(function (b, i) {
         var y = 20 + i * 38;
-        label(s, lw - 6, y + 12, b.st.name, 16, 'end');
+        label(s, lw - 6, y + 12, b.st.name, 17, 'end');
         el('rect', { x: x(Math.max(b.a, min)), y: y, width: Math.max(x(b.b) - x(Math.max(b.a, min)), 1.5), height: 24, style: fill(tok[b.st.kind]) }, s);
         el('text', { x: W - rw + 6, y: y + 12, class: 'vval' }, s, (b.st.kind === 'down' ? '−' : b.st.kind === 'up' ? '+' : '') + fmt(b.st.v));
       });
       return;
     }
-    var bw = (W - 60) / n, y = function (v) { return 30 + (H - 110) * (1 - (v - min) / (max - min)); };
+    var bw = (W - 60) / n, tight = bw < 100, wrapAt = Math.max(8, Math.floor(bw / (tight ? 7.2 : 8.2)));
+    var names = bars.map(function (b) { return [].concat(SIR.wrap(b.st.name, Math.min(14, wrapAt))); });
+    var lines = Math.max.apply(null, names.map(function (l) { return l.length; })), foot = 26 + lines * 15;
+    s.setAttribute('viewBox', '0 0 ' + W + ' ' + (H + Math.max(0, foot - 80)));
+    var y = function (v) { return 30 + (H - 110) * (1 - (v - min) / (max - min)); };
     bars.forEach(function (b, i) {
       var x0 = 40 + i * bw + bw * 0.15, w = bw * 0.7;
       el('rect', { x: x0, y: y(b.b), width: w, height: Math.max(y(Math.max(b.a, min)) - y(b.b), 1.5), style: fill(tok[b.st.kind]) }, s);
       if (i < n - 1) el('line', { x1: x0 + w, x2: x0 + bw, y1: y(b.st.kind === 'down' ? b.a : b.b), y2: y(b.st.kind === 'down' ? b.a : b.b), class: 'vlink' }, s);
       el('text', { x: x0 + w / 2, y: y(b.b) - 6, 'text-anchor': 'middle', class: 'vval' }, s, (b.st.kind === 'down' ? '−' : b.st.kind === 'up' ? '+' : '') + fmt(b.st.v));
-      var t = el('text', { x: x0 + w / 2, y: H - 62, 'text-anchor': 'middle', class: 'vname' }, s);
-      [].concat(SIR.wrap(b.st.name, 14)).forEach(function (line, j) { el('tspan', { x: x0 + w / 2, dy: j ? '1.15em' : 0 }, t, line); });
+      var t = el('text', { x: x0 + w / 2, y: H - 62, 'text-anchor': 'middle', class: tight ? 'vname small' : 'vname' }, s);
+      names[i].forEach(function (line, j) { el('tspan', { x: x0 + w / 2, dy: j ? '1.15em' : 0 }, t, line); });
     });
   }
 

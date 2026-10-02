@@ -125,6 +125,44 @@
       "downloads": [
         ["data/karnataka/districts.csv", "District table, CSV", true]
       ]
+    },
+    {
+      "id": "wb",
+      "label": "West Bengal 2026",
+      "subtitle": "West Bengal 2026 · every constituency, the roll from 2024 to the election",
+      "band": "alpana",
+      "color": "7a1f1f",
+      "class": "wb",
+      "nav_label": "West Bengal pages",
+      "pages": [
+        ["westbengal/", "Overview", "i0"],
+        ["westbengal/elections/", "Elections", "i6"],
+        ["westbengal/faq/", "FAQ", "i12"],
+        ["westbengal/method/", "Method", "i10"]
+      ],
+      "downloads": [
+        ["data/westbengal/constituencies.csv", "Constituency table, CSV", true],
+        ["data/westbengal/districts.csv", "District table, CSV", true]
+      ]
+    },
+    {
+      "id": "kl",
+      "label": "Kerala 2026",
+      "subtitle": "Kerala 2026 · every constituency, the roll from January 2025 to the election",
+      "band": "kasavu",
+      "color": "8a5a12",
+      "class": "kl",
+      "nav_label": "Kerala pages",
+      "pages": [
+        ["kerala/", "Overview", "i0"],
+        ["kerala/elections/", "Elections", "i6"],
+        ["kerala/faq/", "FAQ", "i12"],
+        ["kerala/method/", "Method", "i10"]
+      ],
+      "downloads": [
+        ["data/kerala/constituencies.csv", "Constituency table, CSV", true],
+        ["data/kerala/districts.csv", "District table, CSV", true]
+      ]
     }
   ]
 }

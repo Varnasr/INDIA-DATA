@@ -72,6 +72,20 @@ in a primary source. It is NOT the roll of 27 October 2025 (state total
 - Odd: the PDF's "Total for Phase 4" line (1,943 / 18,57,022) is in fact the
   Birbhum PC total; the next unlabelled line is the phase 4 total. AC 246
   Raghunathpur's number and name share one cell. Neither affects the rows.
+- Corrected 2026-10-02: **three rows inside the Jhargram PC block were
+  rotated** when the merged cells were read. The PDF prints the seven Jhargram
+  PC segments under one merged PC cell, and the block's total (2,018 polling
+  stations, 17,79,794 electors) holds whichever segment each row is given to,
+  so the sums could not catch it. The polling stations did. The state's count
+  barely moved between the 2024 roll and the draft (80,530 against 80,681),
+  and as first read Salboni had 287 stations against 314 on the draft, with a
+  roll 18.6% smaller than its draft, the only one of 294 seats to grow.
+  Rotated, every count lines up: Gopiballavpur 287 (draft 287), Jhargram
+  265 (263), Salboni 314 (314), and each draft is about 96% of its 2024 roll,
+  like the seats around it. The rows now read 221 Gopiballavpur 2,35,453,
+  222 Jhargram 2,42,596, 234 Salboni 2,89,187. `scripts/build_westbengal.py`
+  asserts that no seat's polling stations differ from the draft's by more
+  than 50 and that no draft exceeds its 2024 roll by more than 2%.
 - 2024 minus draft: 51,93,376 across the state, -43,686 to +73,936 by AC
   (one AC grew). The gap mixes 18 months of ordinary roll changes with the
   SIR removals, so it is at best an upper-level proxy, not the removals.

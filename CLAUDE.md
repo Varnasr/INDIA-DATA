@@ -2,7 +2,7 @@
 
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
-Hyderabad (2026), Tamil Nadu (2026) and Karnataka (2026). Static HTML, Chart.js from cdnjs, one
+Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal and Kerala (2026). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
@@ -282,13 +282,41 @@ The build fails unless the 34 districts add up to the CEO's state row
   total only. The All India gender row for Karnataka comes from a newspaper;
   do not move it onto the Karnataka pages as a finding.
 
-## West Bengal (not yet built)
+## West Bengal
 
-`data/westbengal/raw` holds the draft roll, the roll at nomination and the
-2024 roll by constituency, and both results, but no primary table of removals
-by constituency. Those counts exist only inside the named lists. Compilations
-by others exist and are recorded in `SOURCES.md` as not used. The state row
-in the All India tables is the CEO's press note PN-05-2026, to the elector.
+`scripts/build_westbengal.py` reads `data/westbengal/raw` and writes
+`summary.json`, `constituencies.json`, `districts.json` and the two CSVs.
+
+- **No removals below the state.** The CEO's press note PN-05-2026 gives the
+  removals by reason, the claims and objections and the 60,06,675 held for
+  adjudication, all for the state; the build asserts they add up step by step.
+  Below that the pages measure **the fall in the roll** from the 2024 Lok Sabha
+  roll to the draft and to the roll at the 2026 nominations, by AC and sex.
+  It takes in 18 months of ordinary changes, so never call it the removals.
+  The 2024 roll is 6.3 lakh smaller than the October 2025 roll, so the fall
+  understates the fall from the roll the revision started from.
+- **The 2024 table is read from merged cells.** Three Jhargram PC rows were
+  once read against the wrong segment (see `SOURCES.md`). The build fails if
+  an AC's polling stations differ from the draft's by more than 50 or its
+  draft exceeds its 2024 roll by more than 2%.
+- The gap between the draft fall and the election-roll fall is where the
+  adjudication cuts show, largest in Murshidabad, Malda and the Dinajpurs;
+  say it is the nearest the tables come, not a count.
+- `results_2021.csv` is secondary and no page uses it. Compilations of AC
+  removals by others are recorded in `SOURCES.md` and not used.
+
+## Kerala
+
+`scripts/build_kerala.py` reads four rolls by AC and sex from
+`data/kerala/raw` (January 2025 summary-revision final roll, SIR draft of
+23.12.2025, SIR final of 21.02.2026, roll of 23.03.2026) and the 2026 result.
+No table of the names left off has been published, even for the state; the
+pages measure the fall from January 2025, which statewide is 23.69 lakh
+against the 24.09 lakh reported with the draft. The rise after the draft counts
+new voters (and overseas electors, which nearly tripled), so it is never
+called names restored; five northern districts end above their January roll.
+Party comparisons are by party (INC, CPI(M), IUML, others), not by front,
+because the independents' fronts are not in the data.
 
 ## Privacy
 
