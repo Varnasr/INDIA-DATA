@@ -69,7 +69,8 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/c
   SIR.table(document.getElementById('tWin'), [
     { k: 'party', label: L('Party that won'), left: true }, { k: 'seats', label: L('Seats') },
     { k: 'per_100', label: L('Removed per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'vs_district', label: L('Against own district'), fmt: sg }
+    { k: 'vs_district', label: L('Against own district'), fmt: sg },
+    { k: 'over_margin', label: L('Removed over margin') }
   ], S.winners, { sort: 'seats' });
   var W = {}; S.winners.forEach(function (w) { W[w.party] = w; });
   var big = ['TVK', 'DMK', 'AIADMK'];

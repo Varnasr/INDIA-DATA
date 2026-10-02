@@ -185,3 +185,27 @@ The general election to the Karnataka Legislative Assembly, May 2023.
 - The CEO press notes of 29.06.2026 and 30.06.2026 (the roll by sex at the start
   of enumeration) and the ECI statistical report were not read.
 - Nothing in the repository outside data/karnataka/raw/ was changed.
+
+## ac_district.csv
+
+Which of the 34 election districts each of the 224 assembly constituencies
+belongs to, used only to draw the district map (`data/geo/karnataka.json`).
+
+- Source: the Election Commission's voter portal lookup, retrieved 2 October
+  2026: `https://gateway-voters.eci.gov.in/api/v1/common/districts/S10` lists
+  the 34 districts (names identical to `asd_district.csv`) and
+  `.../common/acs/<district code>` lists each district's constituencies. Across
+  the 34 it returns all 224 constituencies, each once.
+- The `source` column carries the ECI address for the 38 constituencies whose
+  district differs from the older 30-district list: the 28 Bengaluru seats
+  (Bangalore Urban and B.B.M.P North, Central and South, seven each), the nine
+  seats of the old Bellary district (Ballari 91 to 95; Vijayanagara 88, 89, 90,
+  96 and 104) and Harapanahalli (104), which the older list puts in Davangere.
+  The other 186 say `results_2023.csv`, whose district agrees with ECI's for
+  every one of them.
+- Cross-checked: bengaluruurban.nic.in lists the same seven Bangalore Urban
+  seats; vijayanagara.nic.in gives the District Election Officer's jurisdiction
+  as 88, 89, 90, 96 and 104; the Karnataka Legislative Assembly members list of
+  February 2024 agrees for Ballari and Vijayanagara.
+- B.B.M.P (Central) includes Rajarajeshwarinagar (154), away from the city
+  core, so it is drawn in two pieces.
