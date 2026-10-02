@@ -558,6 +558,11 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   until the reader scrolls. Renaming a heading changes its address; keep an
   old one alive with an explicit `id=` on the new heading. Dashboard tabs keep
   their own hashes, and the report pages their `s0`... ids.
+- **On a wide screen the header is one row**: theme and print show icons only
+  (their labels stay for screen readers) and the Ctrl K hint is hidden, because
+  seven labelled controls came to 917px and wrapped under the title, leaving
+  the right of the header empty. Adding a control means checking the header
+  still fits one row at 1280px.
 - **Header menus on a phone hang from the whole controls row**
   (`.controls{position:relative}`, `.dl{position:static}`), because a menu
   anchored to its own button opened off the left of the screen.
