@@ -451,6 +451,22 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   of places, and on a phone the whole header is one row (title, language,
   places, downloads, theme; print is hidden there). Credit is to PinPoint
   Ventures, in the footer and on the front page.
+- **Footer, terms and privacy.** Every page's footer carries the credit, About
+  this site, Terms and privacy (`terms/`, its own page in `site/pages`, on the
+  front page's place) and the contact address (`email` in `places.json`).
+  `terms/` says who publishes, what the figures are, how to ask for a
+  correction (acknowledged in 24 hours, answered in 15 days), the licences
+  (analysis CC BY 4.0, code MIT, DataMeet's and the fonts' own), and exactly
+  what the site records. Keep it true: if the site starts loading anything
+  new from another service, or counting anything new, the privacy section
+  changes in the same commit.
+- **Anonymous counts.** The end of `sir.js` adds one to a daily tally per
+  page view, share, download, install and search destination, through
+  `offtheroll_track()` in the Democracy by Design Supabase project (Mumbai);
+  `supabase/migrations` holds the SQL. Nothing else is sent, nothing is
+  counted on localhost or deploy previews, and Do Not Track or Global Privacy
+  Control turns it off. The table is closed to the public key; read it in the
+  Supabase SQL editor.
 
 - **One look on every page: the Bihar dashboard's.** A folk-art band across
   the top (`.band.madhubani` for Bihar, `.band.ikat` for Hyderabad, a

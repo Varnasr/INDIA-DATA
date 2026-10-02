@@ -616,6 +616,7 @@
     if (!it) return;
     var u = new URL(root + it.u, location.href), lang = new URLSearchParams(location.search).get('lang');
     if (lang) u.searchParams.set('lang', lang);
+    if (SIR.count) SIR.count('search', ('/' + it.u).replace(/[^a-zA-Z0-9\/_.#-]/g, '').slice(0, 120));
     dlg.close();
     if (u.pathname === location.pathname && u.hash) { location.hash = u.hash; } else { location.href = u.href; }
   }
@@ -652,4 +653,41 @@
     ask.userChoice.then(function () { ask = null; btn.hidden = true; });
   });
   window.addEventListener('appinstalled', function () { ask = null; btn.hidden = true; });
+})();
+
+// ---------------------------------------------------------------- counts
+// Anonymous daily tallies, the same design as Democracy by Design's: one row
+// per day, kind and page path, added to through one function. No cookie, no
+// IP address, no device id and no search words are sent. Nothing is counted
+// on a local server or a deploy preview, or when the browser asks not to be
+// tracked (Do Not Track, Global Privacy Control). The table and function are
+// in supabase/migrations; the key is the public anon key, which can only call
+// offtheroll_track().
+(function () {
+  var URL_ = 'https://bivccpsnzzolxuqdvhfu.supabase.co/rest/v1/rpc/offtheroll_track';
+  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpdmNjcHNuenpvbHh1cWR2aGZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5OTA0NDYsImV4cCI6MjEwMDU2NjQ0Nn0.-LpzZ4KUHLHNPndPwOKz6lz0TDDrW7niRmwOKz-afRo';
+  var h = location.hostname;
+  if (!h || /^(localhost|127\.|0\.0\.0\.0)/.test(h) || /^deploy-preview-/.test(h)) return;
+  if (navigator.globalPrivacyControl || navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+  var root = document.body.getAttribute('data-root') || '';
+  var base = new URL(root || './', location.href).pathname;
+  var clean = function (p) { return ('/' + p).replace(/\/+/g, '/').replace(/[^a-zA-Z0-9\/_.#-]/g, '').slice(0, 120); };
+  var here = function () { return clean(location.pathname.slice(base.length)); };
+  function count(kind, item) {
+    try {
+      fetch(URL_, { method: 'POST', keepalive: true, headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_kind: kind, p_item: item }) }).catch(function () {});
+    } catch (e) { /* a count must never break the page */ }
+  }
+  SIR.count = count;
+  count('view', here());
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a,button');
+    if (!a) return;
+    var href = a.getAttribute('href') || '', t = a.getAttribute('data-t');
+    if (t === 'png' || t === 'csv') count('download', here());
+    else if (t === 'wa' || t === 'link' || t === 'text' || /^https:\/\/wa\.me\//.test(href)) count('share', here());
+    else if (a.hasAttribute('download')) count('download', clean(href.replace(/^(\.\.\/)+/, '').split('?')[0]));
+  }, true);
+  window.addEventListener('appinstalled', function () { count('install', '/'); });
 })();

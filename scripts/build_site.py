@@ -113,7 +113,8 @@ def shell(out, meta, content, scripts):
     # data-i18n-each: the credit and the link are translated apart, so the
     # key does not change with the page's depth.
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s">About this site</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './'))
+              ' · <a href="%s">About this site</a> · <a href="%sterms/">Terms and privacy</a>'
+              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, CFG['email'], CFG['email']))
     # every page that loads sir.js gets viz.js after it: SIR.chart and the
     # dashboards hand ranked lists and side-by-side measures to it
     if 'assets/sir.js' in scripts and 'assets/viz.js' not in scripts:

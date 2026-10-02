@@ -43,7 +43,7 @@ jobs:
       - name: Stage the pages and their data
         run: |
           mkdir -p "$RUNNER_TEMP/site"
-          rsync -a --exclude '.git' --exclude '.github' --exclude 'archive' --exclude 'scripts' --exclude 'site' \
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'archive' --exclude 'scripts' --exclude 'site' --exclude 'supabase' \
             --exclude 'data/*/raw' --exclude 'data/*.csv' --exclude '*.md' --exclude 'CITATION.cff' \
             ./ "$RUNNER_TEMP/site/"
       - name: Upload artifact

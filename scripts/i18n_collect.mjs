@@ -28,7 +28,10 @@ const walk = (d) => fs.readdirSync(path.join(ROOT, d), { withFileTypes: true }).
 // The analyses are the first folder of every page each place lists.
 const SECTIONS = [...new Set(JSON.parse(fs.readFileSync(path.join(ROOT, 'site/places.json'), 'utf8')).places
   .flatMap((p) => p.pages.map((x) => x[0].split('/')[0])))];
-const PAGES = ['', ...SECTIONS.flatMap((d) => walk(d))].sort();
+// plus any top-level page of the front page's own (terms/), from site/pages
+const OWN = fs.readdirSync(path.join(ROOT, 'site/pages'), { withFileTypes: true })
+  .filter((e) => e.isDirectory() && !SECTIONS.includes(e.name)).map((e) => e.name);
+const PAGES = ['', ...SECTIONS.flatMap((d) => walk(d)), ...OWN.flatMap((d) => walk(d))].sort();
 const SOURCES = ['index.html', 'assets/sir.js', 'assets/dash.js', 'assets/i18n.js', ...fs.readdirSync(path.join(ROOT, 'assets/faq')).filter(f => f.endsWith('.js')).sort().map(f => 'assets/faq/' + f), ...PAGES.filter(Boolean).map(p => p + 'index.html')];
 
 const cat = {};
