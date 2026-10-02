@@ -334,6 +334,36 @@ for the state pages, `multiples` (small multiples of a path, one shared scale),
 `scatter` (SVG, optional y = x line over the shared range). Vary the form
 within a page; a page of one chart type reads as a table.
 
+`map` draws a constituency choropleth from `data/geo/<state>.json` (DataMeet's
+assembly map, CC BY 2.5 India; see `SOURCES.md` there): five quantile bins of
+one red, a `<title>` per seat, a click handed to `o.pick`, and an optional
+enlarged city panel (`o.inset`, Chennai and Kolkata). Every page that draws
+one credits DataMeet under it. Karnataka has none: its revision is by
+district only.
+
+Every viz chart keeps its rows on `box.__csv`. `SIR.tools()`, called from
+`SIR.showFaq`, puts a row under every chart panel with an id: PNG, CSV, a
+WhatsApp link carrying the panel's finding sentence and the page address with
+the chart's `#id`, and Copy link. Chart.js charts get the same row, read from
+their own data.
+
+`SIR.finder` is the "Find a constituency" box on the Bihar results, Tamil
+Nadu, West Bengal, Kerala and Karnataka (district) pages. Picking a seat
+writes a card of its figures, puts `#ac-<n>` (`#d-<slug>` in Karnataka) in the
+address so the link opens on that seat, highlights it on the map, and offers
+WhatsApp, Copy link and Copy text. The share text is one `L()` template per
+page, written as plain sentences that say where the counts come from and, for
+West Bengal and Kerala, that the fall in the roll is a different count from the names
+struck off. Keep that sentence in it.
+
+**Link previews.** `build_site.py` writes Open Graph and Twitter tags into
+every page head, with `og:image` pointing at `assets/og/<place>.png`. The head
+is the one place the site's own address appears (`url` in `places.json`),
+because previews need absolute addresses. The cards carry each place's
+headline figure and are written by `scripts/og_cards.mjs` from the published
+JSON (same `PLAYWRIGHT_CORE` and `CHROME` as `i18n_collect.mjs`). **Re-run it
+after any data change**; nothing checks that a card is current.
+
 ## Privacy
 
 Aggregates only. A row-level sample of the Bihar lists exists in the project's

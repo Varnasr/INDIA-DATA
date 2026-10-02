@@ -2,6 +2,15 @@
 <main id="main">
 <div class="page-head"><h1>Karnataka: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
 
+  <h2>Find a district</h2>
+  <p class="sub">The revision was published by district only. Type a district's name, and its figures appear below with a link you can send.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="finder" id="finder"></div>
+    </div>
+  </div>
+
+
   <h2>Removals per 100 electors, by district</h2>
   <p class="sub">Names left off the draft roll of 24 August 2026, for every 100 electors on the roll of 16 June 2026, in each of the Chief Electoral Officer's 34 election districts. Bengaluru's four districts are marked in red.</p>
   <div class="grid">
@@ -98,6 +107,13 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
     { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'duplicate', label: L('Already enrolled'), fmt: SIR.n },
     { k: 'sep', label: L('Roll of 25 Sept'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
   ], D, { sort: 'per_100' });
+  var slugD = function (d) { return 'd-' + d.district.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, ''); };
+  SIR.finder('finder', { rows: D, key: slugD, label: function (d) { return d.district; }, prompt: L('Find a district'), placeholder: L('Type a district name'),
+    card: function (d) { return SIR.facts([
+      [L('Roll of 16 June'), SIR.n(d.before)], [L('Names left off the draft'), SIR.n(d.removed)], [L('Per 100 electors'), SIR.d(d.per_100, 1)],
+      [L('Shifted'), SIR.n(d.shifted)], [L('Absent'), SIR.n(d.absent)], [L('Dead'), SIR.n(d.dead)], [L('Already enrolled'), SIR.n(d.duplicate)],
+      [L('Roll of 25 September'), SIR.n(d.sep)], [L('Change since the draft'), (d.added_sep >= 0 ? '+' : '') + SIR.n(d.added_sep)]]); },
+    share: function (d) { return L('{n}, Karnataka. {r} names were left off the draft roll in this district, {p} of every 100 electors. {s} were entered as shifted and {dd} as dead. By 25 September the roll had changed by {a} since the draft. These are counts from the Chief Electoral Officer\'s press notes. A reason on the list is what the officer wrote down, and nobody checked it.', { n: d.district, r: SIR.n(d.removed), p: SIR.d(d.per_100, 1), s: SIR.n(d.shifted), dd: SIR.n(d.dead), a: (d.added_sep >= 0 ? '+' : '') + SIR.n(d.added_sep) }); } });
   SIR.showFaq('ka', 'main');
 }).catch(SIR.fail);
 </script>

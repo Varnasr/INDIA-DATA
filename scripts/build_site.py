@@ -113,6 +113,18 @@ def shell(out, meta, content, scripts):
     if 'assets/sir.js' in scripts and 'assets/viz.js' not in scripts:
         scripts = re.sub(r'(<script src="[^"]*assets/sir\.js"></script>)', lambda m: m.group(1) + '\n' + m.group(1).replace('sir.js', 'viz.js'), scripts, count=1)
     head_extra = ('\n' + meta['head']) if meta.get('head') else ''
+    # link previews: a shared page shows its title, description and its
+    # place's card (assets/og, written by scripts/og_cards.mjs). Previews
+    # need absolute addresses, so this is the one place the head carries
+    # the site's own; no visible text does.
+    og = CFG['url'] + 'assets/og/%s.png' % place['id']
+    t, d = html.escape(meta['title']), html.escape(meta['description'])
+    head_extra = ('\n<meta property="og:type" content="website">\n<meta property="og:site_name" content="%s">\n'
+                  '<meta property="og:title" content="%s">\n<meta property="og:description" content="%s">\n'
+                  '<meta property="og:url" content="%s%s">\n<meta property="og:image" content="%s">\n'
+                  '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
+                  '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="%s">'
+                  % (html.escape(CFG['title']), t, d, CFG['url'], out, og, og)) + head_extra
     cls = place.get('class', place['id'])
     # dashboards and explorers get the wider column (sir.css, body.wide)
     if meta.get('own_tabs') or out.endswith('explorer/'):

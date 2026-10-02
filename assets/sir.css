@@ -433,6 +433,9 @@ html[data-lang="ur"] .nav-tab,html[data-lang="ur"] button,html[data-lang="ur"] .
 .viz .vcell.on{fill:#fff}
 .viz .vnone{fill:var(--line);opacity:.4}
 .viz .vval.small{font-size:10.5px}
+.viz .vmap path{stroke:var(--card);stroke-width:.6;cursor:pointer}
+.viz .vmap path:hover{stroke:var(--ink);stroke-width:1.2}
+.viz .vmap path.on{stroke:var(--ink);stroke-width:2.4}
 .viz .vpanel{fill:var(--soft);stroke:none}
 .viz .vline{fill:none;stroke-width:2.5;stroke-linejoin:round}
 .viz .vslope line{stroke-width:1.6;opacity:.5}
@@ -447,3 +450,17 @@ html[data-lang="ur"] .nav-tab,html[data-lang="ur"] button,html[data-lang="ur"] .
 @media (max-width:600px){.bigs{grid-template-columns:1fr}}
 .has-viz{height:auto!important}
 .chart-container.has-viz,.panel .chart.has-viz{height:auto}
+
+/* chart tools, the finder and its card */
+.panel .tools,.fcard .tools{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem;justify-content:flex-end}
+.panel .tools button,.panel .tools .btn,.fcard .tools button,.fcard .tools .btn{font-size:.78rem;padding:.3rem .7rem;border-radius:6px}
+.finder{display:grid;gap:.5rem;max-width:760px}
+.finder label{font-weight:600}
+.finder input{font:inherit;font-size:1rem;padding:.6rem .8rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);width:100%}
+.fcard:empty{display:none}
+.fcard{border:1px solid var(--line);border-radius:10px;padding:1rem;background:var(--card)}
+.fcard h3{margin:0 0 .6rem}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.6rem 1rem;margin:0}
+.facts div{border-left:3px solid var(--line);padding-left:.6rem}
+.facts dt{font-size:.8rem;color:var(--muted)}
+.facts dd{margin:0;font-weight:600;font-size:1.02rem}

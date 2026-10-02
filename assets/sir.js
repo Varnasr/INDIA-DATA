@@ -402,12 +402,114 @@
 
   // ---- Questions and answers. Each analysis registers one loader
   // (assets/faq/<site>.js) returning [[question, answer, [page keys]], ...].
+  // ---- sharing. WhatsApp opens with the text already written; on a phone
+  // that is the app, on a computer WhatsApp Web.
+  SIR.pageUrl = function (hash) { return location.origin + location.pathname + (hash ? '#' + hash : ''); };
+  SIR.wa = function (text, hash) { return 'https://wa.me/?text=' + encodeURIComponent(text + '\n' + SIR.pageUrl(hash)); };
+  function copy(text, btn) {
+    var done = function () { var t = btn.textContent; btn.textContent = L('Copied'); setTimeout(function () { btn.textContent = t; }, 1500); };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () {}); else { prompt('', text); }
+  }
+  function csvText(rows) {
+    return '﻿' + rows.map(function (r) { return r.map(function (c) { c = c == null ? '' : String(c); return /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c; }).join(','); }).join('\n');
+  }
+  function save(href, name) { var a = document.createElement('a'); a.href = href; a.download = name; document.body.appendChild(a); a.click(); a.remove(); }
+  var slug = function () { return (location.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'sir'); };
+
+  // A row of buttons under every chart on a page: the picture, the numbers
+  // behind it, and the finding written beside it, to send on.
+  SIR.tools = function () {
+    document.querySelectorAll('main .panel').forEach(function (panel) {
+      if (panel.querySelector('.tools') || panel.closest('.card')) return;
+      var box = panel.querySelector('.vizbox, canvas');
+      if (!box || !box.id || !(box.querySelector && box.querySelector('svg') || box.tagName === 'CANVAS')) return;
+      var id = box.id, name = slug() + '-' + id;
+      // the finding is the first .finding after this chart, before the next heading
+      var n = panel.closest('.grid') || panel, fin = null;
+      while ((n = n.nextElementSibling)) { if (/^H[23]$/.test(n.tagName)) break; if (n.classList.contains('finding')) { fin = n; break; } }
+      var bar = document.createElement('div'); bar.className = 'tools';
+      bar.innerHTML = '<button type="button" data-t="png">' + L('PNG') + '</button><button type="button" data-t="csv">' + L('CSV') + '</button>' +
+        '<a class="btn" data-t="wa" target="_blank" rel="noopener">' + L('WhatsApp') + '</a><button type="button" data-t="link">' + L('Copy link') + '</button>';
+      var wa = bar.querySelector('[data-t=wa]');
+      var text = function () { return (fin ? fin.innerText : (box.getAttribute('aria-label') || document.title)).replace(/\s+/g, ' ').trim(); };
+      wa.href = SIR.wa(text(), id); wa.setAttribute('aria-label', L('Share this chart on WhatsApp'));
+      wa.addEventListener('mouseenter', function () { wa.href = SIR.wa(text(), id); });
+      bar.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-t]'); if (!b) return;
+        var t = b.getAttribute('data-t');
+        if (t === 'png') {
+          if (box.tagName === 'CANVAS') {
+            var ch = window.Chart && Chart.getChart(box); if (!ch) return;
+            var c = document.createElement('canvas'); c.width = box.width; c.height = box.height;
+            var g = c.getContext('2d'); g.fillStyle = getComputedStyle(document.body).getPropertyValue('--card').trim() || '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(box, 0, 0);
+            save(c.toDataURL('image/png'), name + '.png');
+          } else VIZ.png(box, name);
+        } else if (t === 'csv') {
+          var rows = box.__csv;
+          if (!rows && box.tagName === 'CANVAS' && window.Chart && Chart.getChart(box)) {
+            var d = Chart.getChart(box).data;
+            rows = d.labels ? [['label'].concat(d.datasets.map(function (z) { return z.label || ''; }))].concat(d.labels.map(function (l, i) { return [Array.isArray(l) ? l.join(' ') : l].concat(d.datasets.map(function (z) { var v = z.data[i]; return v && typeof v === 'object' ? JSON.stringify(v) : v; })); }))
+              : [['series', 'x', 'y', 'name']].concat([].concat.apply([], d.datasets.map(function (z) { return z.data.map(function (p) { return [z.label, p.x, p.y, p.n || '']; }); })));
+          }
+          if (rows) save(URL.createObjectURL(new Blob([csvText(rows)], { type: 'text/csv' })), name + '.csv');
+        } else if (t === 'link') copy(SIR.pageUrl(id), b);
+        else if (t === 'wa') wa.href = SIR.wa(text(), id);
+      });
+      panel.appendChild(bar);
+    });
+  };
+
+  // ---- the finder: type a constituency, get its card, share it. A card has
+  // its own address (#ac-12), so a shared link opens on that seat.
+  // o: {rows, key(r) -> 'ac-12', label(r), card(r) -> html, share(r) -> text, pick(r)}
+  SIR.finder = function (el, o) {
+    el = typeof el === 'string' ? document.getElementById(el) : el;
+    var uid = el.id || 'finder', list = uid + '-list';
+    el.innerHTML = '<label for="' + uid + '-q">' + (o.prompt || L('Find a constituency')) + '</label>' +
+      '<input id="' + uid + '-q" type="search" list="' + list + '" autocomplete="off" placeholder="' + (o.placeholder || L('Type a name or number')) + '">' +
+      '<datalist id="' + list + '">' + o.rows.map(function (r) { return '<option value="' + SIR.esc(o.label(r)) + '">'; }).join('') + '</datalist>' +
+      '<div class="fcard" aria-live="polite"></div>';
+    var input = el.querySelector('input'), out = el.querySelector('.fcard');
+    var byLabel = {}, byKey = {};
+    o.rows.forEach(function (r) { byLabel[o.label(r).toLowerCase()] = r; byKey[o.key(r)] = r; });
+    function find(v) {
+      v = v.trim().toLowerCase(); if (!v) return null;
+      if (byLabel[v]) return byLabel[v];
+      var hit = o.rows.filter(function (r) { var l = o.label(r).toLowerCase(); return l.indexOf(v) === 0 || l.indexOf(' ' + v) >= 0 || String(r.ac) === v; });
+      return hit.length === 1 ? hit[0] : null;
+    }
+    function select(r, scroll) {
+      if (!r) return;
+      var k = o.key(r);
+      input.value = o.label(r);
+      out.innerHTML = '<h3>' + SIR.esc(o.title ? o.title(r) : o.label(r)) + '</h3>' + o.card(r) +
+        '<div class="tools"><a class="btn" target="_blank" rel="noopener" href="' + SIR.wa(o.share(r), k) + '">' + L('Share on WhatsApp') + '</a>' +
+        '<button type="button" data-t="link">' + L('Copy link') + '</button><button type="button" data-t="text">' + L('Copy text') + '</button></div>';
+      out.querySelector('[data-t=link]').onclick = function () { copy(SIR.pageUrl(k), this); };
+      out.querySelector('[data-t=text]').onclick = function () { copy(o.share(r) + '\n' + SIR.pageUrl(k), this); };
+      if (history.replaceState) history.replaceState(null, '', '#' + k);
+      if (o.pick) o.pick(r);
+      if (scroll) el.scrollIntoView({ block: 'start' });
+    }
+    input.addEventListener('change', function () { select(find(input.value)); });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); select(find(input.value)); } });
+    var h = decodeURIComponent(location.hash.slice(1));
+    if (byKey[h]) select(byKey[h], true);
+    return { select: function (r) { select(r, false); }, byKey: byKey };
+  };
+  SIR.esc = function (x) { return String(x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  // a card's figures as label and value pairs
+  SIR.facts = function (pairs) {
+    return '<dl class="facts">' + pairs.filter(Boolean).map(function (p) { return '<div><dt>' + p[0] + '</dt><dd>' + p[1] + '</dd></div>'; }).join('') + '</dl>';
+  };
+
   // The FAQ tab shows every question; a page shows the ones tagged with its
   // key. Answers are written for the FAQ tab, so their relative links are
   // resolved against it wherever they appear.
   var FAQ = {};
   SIR.faq = function (site, base, loader) { FAQ[site] = { base: base, load: loader }; };
   SIR.showFaq = function (site, page) {
+    try { SIR.tools(); } catch (e) {}
     var f = FAQ[site], el = document.getElementById(page ? 'pageFaq' : 'qas');
     if (!f) return Promise.resolve();
     return f.load().then(function (out) {
