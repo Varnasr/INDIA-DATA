@@ -573,3 +573,14 @@ main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
 @media (max-width:520px){
   .sec-crumb{display:none}
 }
+/* wide screens: the header is one row, title on the left and the controls on
+   the right. With seven controls their labels came to 917px, so beside the
+   title they wrapped under it and left the right of the header empty. Theme
+   and print show their icons only (the label stays for screen readers) and
+   the Ctrl K hint goes. */
+@media (min-width:701px){
+  .controls .kbd{display:none}
+  .controls .theme .lbl,.controls .print .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .controls .theme,.controls .print{padding-inline:.7rem}
+  .controls{margin-inline-start:auto;justify-content:flex-end}
+}
