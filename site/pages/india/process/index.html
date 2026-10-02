@@ -1,0 +1,112 @@
+<!--page {"title": "How the SIR was run: every rule change and every state's dates", "description": "Every rule the Election Commission and the Supreme Court set for the Special Intensive Revision, in date order, and each state's schedule as it was set and moved, each linked to the document it comes from.", "place": "india"} -->
+<main id="main">
+<div class="page-head"><h1>How the revision was run</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only, because its legal detail is not machine translated. Every entry links to the document it comes from.</p>
+
+<article class="process" lang="en" dir="ltr" data-no-i18n>
+  <div class="kpis" id="kpis"></div>
+
+  <h2>The rules, as they changed</h2>
+  <p class="sub">Every order, letter and judgment that changed how the revision worked, in date order. Choose who issued it, or which part of the revision, to narrow the list.</p>
+  <div class="pfilter" role="group" aria-label="Show entries from">
+    <button type="button" class="chip" data-who="" aria-pressed="true">Everyone</button>
+    <button type="button" class="chip" data-who="eci" aria-pressed="false"><i class="pdot eci"></i> Election Commission</button>
+    <button type="button" class="chip" data-who="sc" aria-pressed="false"><i class="pdot sc"></i> Supreme Court</button>
+    <button type="button" class="chip" data-who="ceo" aria-pressed="false"><i class="pdot ceo"></i> State election officers</button>
+  </div>
+  <div class="pfilter" role="group" aria-label="Show entries about">
+    <button type="button" class="chip" data-ph="" aria-pressed="true">Every part</button>
+    <button type="button" class="chip" data-ph="Bihar" aria-pressed="false">Bihar</button>
+    <button type="button" class="chip" data-ph="Phase II" aria-pressed="false">Phase II</button>
+    <button type="button" class="chip" data-ph="West Bengal" aria-pressed="false">West Bengal</button>
+    <button type="button" class="chip" data-ph="Assam" aria-pressed="false">Assam</button>
+    <button type="button" class="chip" data-ph="Phase III" aria-pressed="false">Phase III</button>
+  </div>
+  <ol class="ptl" id="timeline" aria-live="polite"></ol>
+
+  <h2>Each state's dates, as set and as moved</h2>
+  <p class="sub">One row for each state or union territory. The top line in a row is the first schedule the Election Commission set, and each line below it is a later change, with the last one drawn darkest. Hover over or tap a line for its dates and the document that set them.</p>
+  <h3 class="ph">Bihar, the first phase</h3>
+  <div class="grid"><div class="panel wide" id="pG1"><div class="vizbox" id="vG1"></div></div></div>
+  <h3 class="ph">Phase II, twelve states and union territories</h3>
+  <div class="grid"><div class="panel wide" id="pG2"><div class="vizbox" id="vG2"></div></div></div>
+  <p class="note" id="nG2"></p>
+  <h3 class="ph">Phase III, the rest of the country</h3>
+  <div class="grid"><div class="panel wide" id="pG3"><div class="vizbox" id="vG3"></div></div></div>
+  <p class="note" id="nG3"></p>
+
+  <h2>What we could not verify</h2>
+  <p class="sub">Nothing on this page rests on a press report. These documents could not be found or opened, so what they say is left out.</p>
+  <ul class="plain" id="gaps"></ul>
+  <p class="note">Checked against the documents on <span id="asof"></span>. If you have one of these documents, write to <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a>.</p>
+</article>
+
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script>
+SIR.json('data/india/process.json').then(function (P) {
+  var T = P.timeline, E = SIR.esc;
+  var WHO = { eci: 'Election Commission', sc: 'Supreme Court', ceo: 'State election officer' };
+  // In short: every count below is taken from the data
+  // a state's schedule changes are its orders after the first; a line drawn
+  // from what the state actually published is not a change
+  var moves = function (r) { return r.steps.filter(function (st) { return st.kind !== 'published'; }).length - 1; };
+  var p2 = P.schedules.filter(function (r) { return r.phase === 'II'; });
+  var p2twice = p2.filter(function (r) { return moves(r) > 1; }).length;
+  var p3 = P.schedules.filter(function (r) { return r.phase === 'III'; });
+  var p3moved = p3.filter(function (r) { return moves(r) > 0; }).length;
+  var bySC = T.filter(function (t) { return t.who === 'sc'; }).length;
+  SIR.inShort([
+    'The revision began in Bihar on 24 June 2025 and by 14 May 2026 had been ordered everywhere except Himachal Pradesh, Jammu and Kashmir and Ladakh. Assam was given a different kind of revision.',
+    'In Phase II, all ' + p2.length + ' states and union territories had their dates moved a week, and the Commission named ' + p2twice + ' of them for a second move. In Phase III, the dates of ' + p3moved + ' of ' + p3.length + ' states and union territories moved by orders and notes we could read.',
+    'What an elector had to show changed as it went. Eleven documents in June 2025, Aadhaar added for identity on the Supreme Court\'s order in September, no documents while forms were filled in Phase II, and documents collected at home from those sent notices from 26 September 2026.',
+    bySC + ' of the ' + T.length + ' entries below are orders or the judgment of the Supreme Court. In West Bengal it had judges decide the claims, and 60,06,675 names were marked under adjudication on the final roll.'
+  ], 'Only documents issued by the Election Commission, the Supreme Court and the states\' election officers are used. Some orders could not be found, and they are listed at the foot of the page.');
+
+  document.getElementById('kpis').innerHTML = [
+    [T.length, 'rule and schedule changes, each with its document'],
+    [P.schedules.length, 'states and union territories with dates drawn'],
+    [P.schedules.reduce(function (n, r) { return n + moves(r); }, 0), 'times a state\'s dates were changed, in the orders and notes we read'],
+    [P.gaps.length, 'documents or questions we could not settle']
+  ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+
+  // the timeline
+  var tl = document.getElementById('timeline'), fw = '', fp = '';
+  function draw() {
+    var lastY = '';
+    tl.innerHTML = T.filter(function (t) { return (!fw || t.who === fw) && (!fp || t.phase === fp); }).map(function (t) {
+      var y = t.date.slice(0, 4), head = y !== lastY ? '<li class="pyear" aria-hidden="true">' + y + '</li>' : '';
+      lastY = y;
+      return head + '<li class="pitem ' + t.who + '"><div class="pdate"><time datetime="' + t.date + '">' + SIR.date(t.date) + '</time><span class="pwho">' + WHO[t.who] + ' · ' + E(t.phase) + '</span></div>' +
+        '<div class="pbody"><h3>' + E(t.title) + '</h3><p>' + E(t.text) + '</p><p class="psrc">' + t.src.map(function (s) { return '<a href="' + E(s.url) + '" rel="noopener" target="_blank">' + E(s.name) + '</a>'; }).join(' · ') + '</p></div></li>';
+    }).join('') || '<li class="pitem"><div class="pbody"><p>Nothing matches both choices.</p></div></li>';
+  }
+  document.querySelectorAll('.pfilter .chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var grp = b.hasAttribute('data-who') ? 'data-who' : 'data-ph';
+      document.querySelectorAll('.pfilter .chip[' + grp + ']').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      if (grp === 'data-who') fw = b.getAttribute('data-who'); else fp = b.getAttribute('data-ph');
+      draw();
+    });
+  });
+  draw();
+
+  // the schedules
+  var G = function (id, rows, label) {
+    VIZ.gantt(id, { label: label, rows: rows.map(function (r) { return { name: r.state, steps: r.steps }; }) });
+  };
+  G('vG1', P.schedules.filter(function (r) { return r.phase === 'I'; }), 'Bihar\'s schedule, from the order of 24 June 2025');
+  G('vG2', p2, 'Phase II schedules, as set on 27 October 2025 and as moved');
+  G('vG3', p3, 'Phase III schedules, as set on 14 May 2026 and as moved');
+  document.getElementById('nG2').textContent = 'The release of 11 December 2025 names Gujarat both among the states moved to a draft on 19 December and among those keeping 16 December, and does not name Puducherry. ' + P.notes.p2final;
+  document.getElementById('nG3').textContent = P.notes.p3later + ' ' + P.notes.tripura + ' ' + P.notes.uttarakhand;
+  document.getElementById('gaps').innerHTML = P.gaps.map(function (g) { return '<li>' + E(g) + '</li>'; }).join('');
+  document.getElementById('asof').textContent = SIR.date(P.as_of);
+  SIR.tools();
+}).catch(SIR.fail);
+</script>
+<script src="../../assets/faq/india.js"></script>
+<script>SIR.showFaq('india', 'process');</script>
