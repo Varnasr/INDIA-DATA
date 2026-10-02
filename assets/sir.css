@@ -84,6 +84,7 @@ body.wide{--page:1480px}
 .dl{position:relative}
 .dl summary{list-style:none}
 .places summary{gap:.4rem}
+.places .menu a.sub{padding-inline-start:1.6rem;font-size:.85rem}
 .places .menu a[aria-current]{font-weight:700;background:var(--soft)}
 .dl summary::-webkit-details-marker{display:none}
 .dl .menu{position:absolute;inset-inline-end:0;top:calc(100% + 6px);z-index:120;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px var(--shadow);padding:.35rem;min-width:13rem;display:flex;flex-direction:column}
@@ -497,8 +498,15 @@ html.dyslexic-font[data-lang="ur"] *{font-family:"OpenDyslexic","Noto Nastaliq U
   .header-content{grid-template-columns:minmax(0,1fr)}
   .controls{grid-column:1/-1;justify-content:space-between;align-items:center;flex-wrap:nowrap;width:100%}
   .controls #dys-font-btn{min-width:40px;min-height:40px;width:40px;height:40px;padding:0}
+  /* a menu hangs from the whole row, so it never opens past the screen edge */
+  .controls{position:relative}
+  .controls .dl{position:static}
+  .controls .dl .menu{inset-inline:0;min-width:0;max-height:calc(100vh - 160px);overflow-y:auto}
+  .controls .dl .menu a{white-space:normal}
 }
 .viz .vband{fill:var(--soft)}
+.process .panel{scroll-margin-top:calc(var(--hh,0px) + 70px)}
+.viz .vmark{fill:none;stroke:var(--fill-red);stroke-width:2}
 /* india/process: the timeline of rule changes */
 .process .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.8rem;margin:1rem 0}
 .process .kpis>div{display:flex;flex-direction:column;gap:.2rem}
@@ -523,3 +531,9 @@ html.dyslexic-font[data-lang="ur"] *{font-family:"OpenDyslexic","Noto Nastaliq U
 .ptl .psrc a{text-decoration:underline}
 .process h3.ph{margin:1.3rem 0 .2rem;font-size:1rem}
 @media (max-width:700px){.ptl .pitem{grid-template-columns:minmax(0,1fr)}.process .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* a link to each section, beside its heading */
+main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
+.anchor{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-inline-start:.4rem;width:28px;height:28px;padding:0;border:0;border-radius:6px;background:none;color:var(--muted);cursor:pointer;position:relative}
+.anchor:hover{background:var(--soft);color:var(--ink)}
+.anchor[data-msg]::after{content:attr(data-msg);position:absolute;inset-inline-start:100%;margin-inline-start:.3rem;font-size:.75rem;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.1rem .4rem;white-space:nowrap}
+@media print{.anchor{display:none}}

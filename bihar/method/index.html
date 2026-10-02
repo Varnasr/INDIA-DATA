@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../../assets/i18n.js?v=00086111"></script>
+<script src="../../assets/i18n.js"></script>
 <title>Bihar SIR 2025: method</title>
 <meta name="description" content="How the Bihar SIR figures are built, where they come from, how the lists were prepared, and the questions the analysis answers.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="manifest" href="../../manifest.webmanifest">
 <meta name="theme-color" content="#1f4e79">
-<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png?v=44207c69">
-<link rel="stylesheet" href="../../assets/sir.css?v=5a1ee28c">
+<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/sir.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="Bihar SIR 2025: method">
@@ -31,8 +31,8 @@
     <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">
       <button type="button" class="btn install" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/></svg> <span class="lbl">Install app</span></button>
       <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
-      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Bihar 2025</span></summary><div class="menu" data-i18n-each><a href="../../">About this site</a><a href="../../india/">All India</a><a href="../../bihar/" aria-current="true">Bihar 2025</a><a href="../../hyderabad/">Hyderabad 2026</a><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a></div></details>
-      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../bihar/report/">Full report, online</a><a href="../../reports/bihar-sir-2025-report.pdf?v=0994de4e" download>Full report, PDF</a><a href="../../reports/bihar-sir-2025-deck.pptx?v=ff411e0a" download>Slides, PowerPoint</a><a href="../../data/bihar/constituencies.csv?v=024da361" download>Constituency table, CSV</a><a href="../../data/bihar/districts.csv?v=f1e23b21" download>District table, CSV</a></div></details>
+      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Bihar 2025</span></summary><div class="menu" data-i18n-each><a href="../../">About this site</a><a href="../../india/">All India</a><a class="sub" href="../../india/process/">How the revision was run</a><a href="../../bihar/" aria-current="true">Bihar 2025</a><a href="../../hyderabad/">Hyderabad 2026</a><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a></div></details>
+      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../bihar/report/">Full report, online</a><a href="../../reports/bihar-sir-2025-report.pdf" download>Full report, PDF</a><a href="../../reports/bihar-sir-2025-deck.pptx" download>Slides, PowerPoint</a><a href="../../data/bihar/constituencies.csv" download>Constituency table, CSV</a><a href="../../data/bihar/districts.csv" download>District table, CSV</a></div></details>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span class="lbl">Export PDF</span></button>
     </div>
@@ -41,7 +41,7 @@
 <nav class="nav-tabs" aria-label="Bihar pages"><a class="nav-tab" href="../../bihar/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> Dashboard</a><a class="nav-tab" href="../../bihar/explorer/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Booth explorer</a><a class="nav-tab" href="../../bihar/results/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> Elections</a><a class="nav-tab" href="../../bihar/people/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Women, religion, caste</a><a class="nav-tab" href="../../bihar/border/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16"/><path d="M16 6v16"/></svg> Border</a><a class="nav-tab" href="../../bihar/districts/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Districts</a><a class="nav-tab" href="../../bihar/faq/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> FAQ</a><a class="nav-tab" href="../../bihar/method/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Method</a><a class="nav-tab" href="../../bihar/report/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a></nav>
 <main id="main">
 <div class="page-head"><h1>Method</h1><ol class="summary" id="short"></ol></div>
-  <h2>Sources</h2>
+  <h2 id="sources">Sources</h2>
   <div class="twrap" tabindex="0" role="region" aria-label="Sources"><table>
     <thead><tr><th scope="col" class="l">What</th><th scope="col" class="l">Source</th><th scope="col" class="l">Used for</th></tr></thead>
     <tbody>
@@ -60,37 +60,38 @@
       <tr><td class="l">Urban share and density by district</td><td class="l">Census of India 2011, the last count at district level</td><td class="l">District characteristics</td></tr>
       <tr><td class="l">Caste composition</td><td class="l">Bihar caste-based survey, released 2 October 2023</td><td class="l">Baseline for caste</td></tr>
     </tbody></table></div>
+  <p class="note">Bihar's dates, as they were set by the order of 24 June 2025, are drawn beside every other state's on <a href="../../india/process/#s-bihar">How the revision was run</a>.</p>
   <p class="note" style="margin-top:12px">All figures are aggregates. No name, EPIC number or address appears anywhere on these pages.</p>
 
-  <h2>How the lists were prepared</h2>
-  <div class="qa"><h3>One count per booth</h3><p>The booth list repeats each booth once for each of its three leading parties in 2024, with the same removal count on every row. Counting each booth once gives 77,837 booths and 65,59,626 phase 1 removals, the Chief Electoral Officer's total.</p></div>
-  <div class="qa"><h3>Party names matched to the declared result</h3><p>Votes added up from the booths match the declared 2024 result in every Lok Sabha seat. In nine seats a column of votes carried a party name that differed from the declared result. Those columns were matched to the declared result, and the evidence for each is below. After matching, the first and second parties in all 40 seats are the declared winner and runner-up.</p>
+  <h2 id="how-the-lists-were-prepared">How the lists were prepared</h2>
+  <div class="qa"><h3 id="one-count-per-booth">One count per booth</h3><p>The booth list repeats each booth once for each of its three leading parties in 2024, with the same removal count on every row. Counting each booth once gives 77,837 booths and 65,59,626 phase 1 removals, the Chief Electoral Officer's total.</p></div>
+  <div class="qa"><h3 id="party-names-matched-to-the-declared-result">Party names matched to the declared result</h3><p>Votes added up from the booths match the declared 2024 result in every Lok Sabha seat. In nine seats a column of votes carried a party name that differed from the declared result. Those columns were matched to the declared result, and the evidence for each is below. After matching, the first and second parties in all 40 seats are the declared winner and runner-up.</p>
     <div class="twrap" tabindex="0" role="region" aria-label="Party names matched"><table id="tFix"></table></div></div>
-  <div class="qa"><h3>Titles are not surnames</h3><p>Most women carry Devi, Kumari or Khatun in place of a surname, and none of the three says anything about caste. They are set aside, and caste is read first from the surname of the father or husband.</p></div>
-  <div class="qa"><h3>Reasons are read as entered</h3><p>Each name on the phase 1 lists has the reason the officer gave for removing it. The four reasons are counted as written and none is regrouped. The counts agree with the booth list in all 77,837 booths, and the counts of women and men agree with the Chief Electoral Officer's phase 1 figures in every constituency. The phase 2 lists give no reasons.</p></div>
-  <div class="qa"><h3>Constituencies are joined by number</h3><p>Bihar has two seats called Kalyanpur (16 and 131) and two called Pipra (17 and 42), so every match between tables uses the constituency number. Minapur (90) belongs to the Vaishali Lok Sabha seat.</p></div>
-  <div class="qa"><h3>Border constituencies</h3><p>A constituency counts as a border constituency when its district touches Nepal, West Bengal, Jharkhand or Uttar Pradesh.</p></div>
+  <div class="qa"><h3 id="titles-are-not-surnames">Titles are not surnames</h3><p>Most women carry Devi, Kumari or Khatun in place of a surname, and none of the three says anything about caste. They are set aside, and caste is read first from the surname of the father or husband.</p></div>
+  <div class="qa"><h3 id="reasons-are-read-as-entered">Reasons are read as entered</h3><p>Each name on the phase 1 lists has the reason the officer gave for removing it. The four reasons are counted as written and none is regrouped. The counts agree with the booth list in all 77,837 booths, and the counts of women and men agree with the Chief Electoral Officer's phase 1 figures in every constituency. The phase 2 lists give no reasons.</p></div>
+  <div class="qa"><h3 id="constituencies-are-joined-by-number">Constituencies are joined by number</h3><p>Bihar has two seats called Kalyanpur (16 and 131) and two called Pipra (17 and 42), so every match between tables uses the constituency number. Minapur (90) belongs to the Vaishali Lok Sabha seat.</p></div>
+  <div class="qa"><h3 id="border-constituencies">Border constituencies</h3><p>A constituency counts as a border constituency when its district touches Nepal, West Bengal, Jharkhand or Uttar Pradesh.</p></div>
 
-  <h2>The 2024 result, seat by seat</h2>
+  <h2 id="the-2024-result-seat-by-seat">The 2024 result, seat by seat</h2>
   <p class="sub">Vote shares summed from the booths, beside the declared figures.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="2024 result by seat"><table id="tRec"></table></div>
 
-  <h2>Research questions</h2>
+  <h2 id="research-questions">Research questions</h2>
   <div id="qas"></div>
 
-  <h2>What this shows and what it does not</h2>
+  <h2 id="what-this-shows-and-what-it-does-not">What this shows and what it does not</h2>
   <p>The lists show how many names were removed and from which booths, and the sex and name of each person removed, which is enough to set the removals against the margins that decided each seat. They also record the reason the officer gave for each phase 1 removal. They cannot show whether that reason was true, whether the removal was right, or how the elector voted. Religion and caste are guessed from names. <a href="../faq/">Questions and answers</a>.</p>
 
   <p class="note"><b>Removed</b> means named on the SIR deletion lists. <b>Per 100 electors</b> is removals across both phases divided by the constituency's 2025 electorate. The <b>booth leader</b> is the party with the most votes in the booth in 2024, and the <b>segment leader</b> the party with the most votes in the assembly segment in 2024.</p>
-  <h2>Analysis of the named lists</h2>
+  <h2 id="analysis-of-the-named-lists">Analysis of the named lists</h2>
   <p>This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href="https://sabarinstitute.org/">Sabar Institute</a>.</p>
 
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 </main>
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../">About this site</a> · <a href="../../terms/">Terms and privacy</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
-<script src="../../assets/sir.js?v=86a6b236"></script>
-<script src="../../assets/viz.js?v=5f8f41e5"></script>
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/viz.js"></script>
 <script>
 Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/districts.json'), SIR.json('data/bihar/identity.json')]).then(function (r) {
   var s = r[0], acs = r[1], ds = r[2], id = r[3], t = s.totals;
@@ -146,8 +147,8 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   }).join('');
 }).catch(SIR.fail);
 </script>
-<script src="../../assets/faq/bihar.js?v=4f42640e"></script>
+<script src="../../assets/faq/bihar.js"></script>
 <script>SIR.showFaq('bihar', 'method');</script>
-<script src="../../assets/dyslexia-font.js?v=ee566817" data-accent="var(--fill-red)" data-radius="10px" defer></script>
+<script src="../../assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

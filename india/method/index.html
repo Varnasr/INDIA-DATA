@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../../assets/i18n.js?v=00086111"></script>
+<script src="../../assets/i18n.js"></script>
 <title>All India SIR: sources and method</title>
 <meta name="description" content="Where each state&#x27;s figures come from, how the reasons are grouped, and what the figures cannot show.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="manifest" href="../../manifest.webmanifest">
 <meta name="theme-color" content="#1f4e79">
-<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png?v=44207c69">
-<link rel="stylesheet" href="../../assets/sir.css?v=5a1ee28c">
+<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/sir.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="All India SIR: sources and method">
@@ -31,8 +31,8 @@
     <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">
       <button type="button" class="btn install" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/></svg> <span class="lbl">Install app</span></button>
       <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
-      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">All India</span></summary><div class="menu" data-i18n-each><a href="../../">About this site</a><a href="../../india/" aria-current="true">All India</a><a href="../../bihar/">Bihar 2025</a><a href="../../hyderabad/">Hyderabad 2026</a><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a></div></details>
-      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../india/report/">Full report, online</a><a href="../../reports/sir-india-report.pdf?v=b9b32816" download>Full report, PDF</a><a href="../../reports/sir-india-deck.pptx?v=bce7b451" download>Slides, PowerPoint</a><a href="../../data/india/states.csv?v=9bfec386" download>State table, CSV</a></div></details>
+      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">All India</span></summary><div class="menu" data-i18n-each><a href="../../">About this site</a><a href="../../india/" aria-current="true">All India</a><a class="sub" href="../../india/process/">How the revision was run</a><a href="../../bihar/">Bihar 2025</a><a href="../../hyderabad/">Hyderabad 2026</a><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a></div></details>
+      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../india/report/">Full report, online</a><a href="../../reports/sir-india-report.pdf" download>Full report, PDF</a><a href="../../reports/sir-india-deck.pptx" download>Slides, PowerPoint</a><a href="../../data/india/states.csv" download>State table, CSV</a></div></details>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span class="lbl">Export PDF</span></button>
     </div>
@@ -42,47 +42,47 @@
 <main id="main">
 <div class="page-head"><h1>Sources and method</h1><ol class="summary" id="short"></ol></div>
 
-  <h2>What is counted</h2>
-  <div class="qa"><h3>Names left off the draft roll</h3><p>Each state's figure is the number of electors on the roll before the revision who were not carried onto the draft roll when enumeration ended, with the reason the booth officer gave for each. Every state published a split by reason at that stage. Names removed later, at hearings and on objections before the final roll, are counted separately, because no state has said why they were removed.</p></div>
-  <div class="qa"><h3>Three groups of reasons</h3><p>The enumeration form had five reasons, namely dead, permanently shifted, absent or untraceable, already enrolled elsewhere, and others, which included refusals. States reported them differently. Bihar's phase 1 used three categories, with shifted and absent together. Several states in phases 2 and 3 counted others as absent, and Nagaland gave absent, shifted and others as one figure. So the table uses the three groups every state reported, <b>dead</b>, <b>shifted, absent or other</b>, and <b>enrolled more than once</b>.</p></div>
-  <div class="qa"><h3>Bihar</h3><p>Bihar's row is counted on this site from the phase 1 deletion lists: <span id="bihar"></span></p></div>
-  <div class="qa"><h3>Removed per 100 electors</h3><p>Names left off the draft roll, divided by the electors on the roll before the revision began. Where that roll was published only in lakh or crore, the rate is rounded too. Chandigarh did not publish an exact roll from before the revision, so it has no rate.</p></div>
+  <h2 id="what-is-counted">What is counted</h2>
+  <div class="qa"><h3 id="names-left-off-the-draft-roll">Names left off the draft roll</h3><p>Each state's figure is the number of electors on the roll before the revision who were not carried onto the draft roll when enumeration ended, with the reason the booth officer gave for each. Every state published a split by reason at that stage. Names removed later, at hearings and on objections before the final roll, are counted separately, because no state has said why they were removed.</p></div>
+  <div class="qa"><h3 id="three-groups-of-reasons">Three groups of reasons</h3><p>The enumeration form had five reasons, namely dead, permanently shifted, absent or untraceable, already enrolled elsewhere, and others, which included refusals. States reported them differently. Bihar's phase 1 used three categories, with shifted and absent together. Several states in phases 2 and 3 counted others as absent, and Nagaland gave absent, shifted and others as one figure. So the table uses the three groups every state reported, <b>dead</b>, <b>shifted, absent or other</b>, and <b>enrolled more than once</b>.</p></div>
+  <div class="qa"><h3 id="bihar-2">Bihar</h3><p>Bihar's row is counted on this site from the phase 1 deletion lists: <span id="bihar"></span></p></div>
+  <div class="qa"><h3 id="removed-per-100-electors">Removed per 100 electors</h3><p>Names left off the draft roll, divided by the electors on the roll before the revision began. Where that roll was published only in lakh or crore, the rate is rounded too. Chandigarh did not publish an exact roll from before the revision, so it has no rate.</p></div>
 
-  <h2>How the table compares with the national totals reported</h2>
+  <h2 id="how-the-table-compares-with-the-national-totals-reported">How the table compares with the national totals reported</h2>
   <p id="recon"></p>
 
-  <h2>Where each row comes from</h2>
+  <h2 id="where-each-row-comes-from">Where each row comes from</h2>
   <p class="sub">A <b>press note</b> is the Chief Electoral Officer's own document. A <b>press report</b> gives the Chief Electoral Officer's figures as a newspaper or agency reported them, with a link. <b>Lists</b> means counted on this site.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Sources for each state"><table id="tSrc"></table></div>
 
-  <h2>The final rolls</h2>
+  <h2 id="the-final-rolls">The final rolls</h2>
   <p>For each state whose final roll is out, this gives the draft and final rolls and the names added on claims and removed on objections in between, from one source per state. <b>Adds up</b> means the draft plus additions less removals equals the final roll. <b>Net only</b> means the state published the draft and final rolls but not the additions and removals behind the difference, and the figure reported as additions was in fact the net rise. <b>Does not add up</b> means the published figures do not match, as the note explains. The fall at the final roll is the names removed at the draft less the rise from draft to final. New electors are part of that rise, and no state has said how many of those added had been removed at the draft.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Sources for the final rolls"><table id="tFsrc"></table></div>
 
-  <h2>Women among the removed</h2>
+  <h2 id="women-among-the-removed">Women among the removed</h2>
   <p>Ten states have a split by sex: removals by sex where a state published them, or the roll by sex before the revision and on the draft, from which women removed is the difference. <b>Exact</b>: whole numbers from the Chief Electoral Officer or a count of the list. <b>Rounded</b>: published in lakh or crore. <b>Earlier roll</b>: the roll before the revision is an older one than the roll frozen for it. <b>Unverified</b>: from a press analysis that cites no primary source. Bihar's roll before the revision by sex is its draft roll by sex plus the names removed at the draft by sex.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Sources for the split by sex"><table id="tGsrc"></table></div>
 
-  <h2>The adult population and the 2024 vote</h2>
+  <h2 id="the-adult-population-and-the-2024-vote">The adult population and the 2024 vote</h2>
   <p>The projected population aged 18 and over on 1 March 2026 is from the Technical Group on Population Projections (National Commission on Population, 2020), which prints it for 18 states; Delhi's is computed from the same report's age tables. The report projects the seven North-Eastern states by age only as a group, and Goa and the smaller union territories by total population only, so those states have no adult figure. The projections start from the 2011 census and count residents. Electors and votes polled in the 2024 Lok Sabha election are from the Election Commission's statistical report of state-wise turnout; Gujarat's exclude Surat, returned unopposed. Rolls before the revision date from June 2025 in Bihar, October 2025 in phase 2 and mid-2026 in phase 3, so the 2026 projection is up to nine months later than some rolls.</p>
 
-  <h2>State characteristics</h2>
+  <h2 id="state-characteristics">State characteristics</h2>
   <p>Literacy for everyone and for women, aged 7 and over, is from the Periodic Labour Force Survey 2023-24 (annual report, appendix table 7). Spending per head, rural and urban, is from the Household Consumption Expenditure Survey 2023-24 (fact sheet, statement 7), the series without the value of free items. The urban share is the Technical Group's projection for 1 March 2026 (table 10). Dadra and Nagar Haveli and Daman and Diu are projected as two territories, so the merged union territory has no figure. The Muslim, SC and ST shares and the sex ratio are from the National Family Health Survey 2019-21. The shares are of households, by the religion and caste of the household head (India report, table 2.10), and run a little below shares of people because Muslim households are larger than average. The sex ratio is of the whole population. The two migration measures are from the 2011 census place-of-birth tables, because the migration survey of 2020-21 was published for India as a whole and not by state. Telangana and Andhra Pradesh have no migration figure, because the 2011 tables count a move between them as a move within one state. Income per head is net state domestic product per head at current prices for 2023-24, from the Reserve Bank's handbook of state statistics. International borders are from the Ministry of Home Affairs.</p>
   <p id="robust"></p>
   <p>Correlations are rank correlations across states, so a single very large or very small state moves them less than it would a linear correlation. They are still based on a few dozen states at most, and a state-level relationship says nothing about which people within a state were removed.</p>
 
-  <h2>What the figures cannot show</h2>
+  <h2 id="what-the-figures-cannot-show">What the figures cannot show</h2>
   <p>A reason is what an officer wrote down after a visit, or after failing to find the elector. Nobody has checked whether the elector was in fact dead, had moved or was enrolled twice, and the figures cannot say how many entries were wrong. Outside Bihar they are totals the states published, so they cannot be split by sex, age, booth or constituency, or checked name by name. Several states published rounded figures, some reports of the same state disagree, and in three states the reasons leave some names unexplained. Each of these is noted against its row. The downloadable table gives every figure with its source.</p>
   <p class="note">Collected from the published figures up to 30 September 2026. <a href="../">All India</a>.</p>
-  <h2>Analysis of the named lists</h2>
+  <h2 id="analysis-of-the-named-lists">Analysis of the named lists</h2>
   <p>This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href="https://sabarinstitute.org/">Sabar Institute</a>.</p>
 
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 </main>
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../">About this site</a> · <a href="../../terms/">Terms and privacy</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
-<script src="../../assets/sir.js?v=86a6b236"></script>
-<script src="../../assets/viz.js?v=5f8f41e5"></script>
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/viz.js"></script>
 <script>
 Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/reasons.json')]).then(function (r) {
   var d = r[0], RS = r[1], T = d.total, b = d.states.filter(function (s) { return s.state === 'Bihar'; })[0];
@@ -115,8 +115,8 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/reasons.js
   ], d.gender, { sort: 'state', dir: 1 });
 }).catch(SIR.fail);
 </script>
-<script src="../../assets/faq/india.js?v=e9297fa0"></script>
+<script src="../../assets/faq/india.js"></script>
 <script>SIR.showFaq('india', 'method');</script>
-<script src="../../assets/dyslexia-font.js?v=ee566817" data-accent="var(--fill-red)" data-radius="10px" defer></script>
+<script src="../../assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

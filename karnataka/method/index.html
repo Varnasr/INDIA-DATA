@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../../assets/i18n.js?v=00086111"></script>
+<script src="../../assets/i18n.js"></script>
 <title>Karnataka SIR 2026: sources and method</title>
 <meta name="description" content="Where the Karnataka figures come from, how they are checked, and what they cannot show.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f5c3a'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="manifest" href="../../manifest.webmanifest">
 <meta name="theme-color" content="#1f4e79">
-<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png?v=44207c69">
-<link rel="stylesheet" href="../../assets/sir.css?v=5a1ee28c">
+<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/sir.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="Karnataka SIR 2026: sources and method">
@@ -31,8 +31,8 @@
     <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">
       <button type="button" class="btn install" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/></svg> <span class="lbl">Install app</span></button>
       <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
-      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Karnataka 2026</span></summary><div class="menu" data-i18n-each><a href="../../">About this site</a><a href="../../india/">All India</a><a href="../../bihar/">Bihar 2025</a><a href="../../hyderabad/">Hyderabad 2026</a><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/" aria-current="true">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a></div></details>
-      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../data/karnataka/districts.csv?v=5c2e51a3" download>District table, CSV</a></div></details>
+      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Karnataka 2026</span></summary><div class="menu" data-i18n-each><a href="../../">About this site</a><a href="../../india/">All India</a><a class="sub" href="../../india/process/">How the revision was run</a><a href="../../bihar/">Bihar 2025</a><a href="../../hyderabad/">Hyderabad 2026</a><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/" aria-current="true">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a></div></details>
+      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../data/karnataka/districts.csv" download>District table, CSV</a></div></details>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span class="lbl">Export PDF</span></button>
     </div>
@@ -42,34 +42,34 @@
 <main id="main">
 <div class="page-head"><h1>Sources and method</h1><ol class="summary" id="short"></ol></div>
 
-  <h2>What is counted</h2>
-  <div class="qa"><h3>Names left off the draft roll</h3><p>The Chief Electoral Officer, Karnataka, published the draft roll on 24 August 2026 with a table of the names left off it, by election district and under five reasons: absent, permanently shifted, dead, already enrolled and other. The 34 district rows add up to the state row, <span id="mRem"></span> names out of <span id="mBefore"></span>, and in every district the names removed and the forms digitised add up to the roll of 16 June 2026.</p></div>
-  <div class="qa"><h3>Why districts and not constituencies</h3><p>The Chief Electoral Officer published every table of the revision by its 34 election districts and for the state, and none by assembly constituency. Bengaluru appears as four of those districts: Bangalore Urban and the North, Central and South districts of the city corporation, B.B.M.P. A count by constituency could be made only by tallying the named lists, which this site does not do in Karnataka.</p></div>
-  <div class="qa"><h3>The roll after the draft</h3><p>The final roll is due on 27 October 2026. Until then the latest figures are the roll of 25 September 2026, by district and sex, published after claims and objections had closed and while notices were still being heard. The rise from the draft to that roll is the names added less those removed since, so it counts new voters as well as names put back, and it is the most that could have been restored.</p></div>
-  <div class="qa"><h3>Women and men</h3><p>The draft roll and the roll of 25 September are published by sex. The roll of 16 June is published as a total only, and the names removed are not split by sex, so the share of women among those removed cannot be counted from the Chief Electoral Officer's tables.</p></div>
+  <h2 id="what-is-counted">What is counted</h2>
+  <div class="qa"><h3 id="names-left-off-the-draft-roll">Names left off the draft roll</h3><p>The Chief Electoral Officer, Karnataka, published the draft roll on 24 August 2026 with a table of the names left off it, by election district and under five reasons: absent, permanently shifted, dead, already enrolled and other. The 34 district rows add up to the state row, <span id="mRem"></span> names out of <span id="mBefore"></span>, and in every district the names removed and the forms digitised add up to the roll of 16 June 2026.</p></div>
+  <div class="qa"><h3 id="why-districts-and-not-constituencies">Why districts and not constituencies</h3><p>The Chief Electoral Officer published every table of the revision by its 34 election districts and for the state, and none by assembly constituency. Bengaluru appears as four of those districts: Bangalore Urban and the North, Central and South districts of the city corporation, B.B.M.P. A count by constituency could be made only by tallying the named lists, which this site does not do in Karnataka.</p></div>
+  <div class="qa"><h3 id="the-roll-after-the-draft">The roll after the draft</h3><p>The final roll is due on 27 October 2026. Until then the latest figures are the roll of 25 September 2026, by district and sex, published after claims and objections had closed and while notices were still being heard. The rise from the draft to that roll is the names added less those removed since, so it counts new voters as well as names put back, and it is the most that could have been restored.</p></div>
+  <div class="qa"><h3 id="women-and-men">Women and men</h3><p>The draft roll and the roll of 25 September are published by sex. The roll of 16 June is published as a total only, and the names removed are not split by sex, so the share of women among those removed cannot be counted from the Chief Electoral Officer's tables.</p></div>
 
-  <div class="qa"><h3>The map</h3><p>The Chief Electoral Officer's 34 election districts are not the state's revenue districts, so no district map draws them. The map joins the constituency boundaries of DataMeet's assembly constituency map (CC BY 2.5 India) by the district each constituency belongs to in the Election Commission's own list of constituencies by district. Bengaluru's three B.B.M.P districts are drawn that way, and Harapanahalli sits in Vijayanagara.</p></div>
-  <div class="qa"><h3>Checks</h3><p>The build fails unless all three tables have the same 34 districts, each district's reasons add up to its removals, each district's draft roll equals its roll before less its removals, men, women and third gender add up, and the state totals equal the figures in the Chief Electoral Officer's press notes.</p></div>
-  <h2>What these tables cannot show</h2>
+  <div class="qa"><h3 id="the-map">The map</h3><p>The Chief Electoral Officer's 34 election districts are not the state's revenue districts, so no district map draws them. The map joins the constituency boundaries of DataMeet's assembly constituency map (CC BY 2.5 India) by the district each constituency belongs to in the Election Commission's own list of constituencies by district. Bengaluru's three B.B.M.P districts are drawn that way, and Harapanahalli sits in Vijayanagara.</p></div>
+  <div class="qa"><h3 id="checks">Checks</h3><p>The build fails unless all three tables have the same 34 districts, each district's reasons add up to its removals, each district's draft roll equals its roll before less its removals, men, women and third gender add up, and the state totals equal the figures in the Chief Electoral Officer's press notes.</p></div>
+  <h2 id="what-these-tables-cannot-show">What these tables cannot show</h2>
   <ul class="plain">
     <li>Which constituencies lost the most names, or how the removals compare with the margins of the 2023 election.</li>
     <li>Whether women, the old or the young were removed more often.</li>
     <li>Whether each removal was right. A reason on the list is what the officer wrote down, and nobody checked it.</li>
   </ul>
 
-  <h2>Downloads</h2>
+  <h2 id="downloads">Downloads</h2>
   <p>The district table behind every chart is in the Downloads menu at the top of the page.</p>
 
-  <h2>Analysis of the named lists</h2>
+  <h2 id="analysis-of-the-named-lists">Analysis of the named lists</h2>
   <p>This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href="https://sabarinstitute.org/">Sabar Institute</a>.</p>
 
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 </main>
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../">About this site</a> · <a href="../../terms/">Terms and privacy</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
-<script src="../../assets/sir.js?v=86a6b236"></script>
-<script src="../../assets/viz.js?v=5f8f41e5"></script>
-<script src="../../assets/faq/karnataka.js?v=16a9cb44"></script>
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/viz.js"></script>
+<script src="../../assets/faq/karnataka.js"></script>
 <script>
 SIR.json('data/karnataka/summary.json').then(function (s) {
   document.getElementById('mRem').textContent = SIR.n(s.removed);
@@ -77,6 +77,6 @@ SIR.json('data/karnataka/summary.json').then(function (s) {
   SIR.showFaq('ka', 'method');
 }).catch(SIR.fail);
 </script>
-<script src="../../assets/dyslexia-font.js?v=ee566817" data-accent="var(--fill-red)" data-radius="10px" defer></script>
+<script src="../../assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

@@ -143,6 +143,11 @@ with its document read, never from a press report. The page and the chart are
 English only, like the full reports, because the legal detail is not machine
 translated. A line drawn from what a state actually published carries
 `kind: "published"` and is not counted as a schedule change.
+It is reached from the front page (its own section), the places menu (a
+`menu` entry under All India in `places.json`), and a line on every state
+page and on the Bihar and Hyderabad method pages. `#s-<state>` (lower case,
+hyphens: `#s-tamil-nadu`) outlines that state's row and scrolls to its chart;
+`#t-<date>` opens on a timeline entry.
 
 `data/bihar/raw/final_roll_format4b.csv` is the Commission's Format 4B return
 for Bihar's final roll, seat by seat and by sex; `scripts/build_bihar_final.py`
@@ -535,6 +540,17 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   relative links are resolved against it wherever they appear, so write
   links as seen from `<site>/faq/`. The All India landing page builds its own
   list in its page script. `check_data.py` fails if a page loses either block.
+- **Every section has its own address.** `build_site.py` gives every `h2`
+  and `h3` in a page's source an id made from its English text
+  (`heading_ids`), so `#women` opens on the same section in every language,
+  and `SIR.anchors` puts a copy-link button beside each. `SIR.jump` scrolls
+  to the hash again whenever charts or the findings list are added above it,
+  until the reader scrolls. Renaming a heading changes its address; keep an
+  old one alive with an explicit `id=` on the new heading. Dashboard tabs keep
+  their own hashes, and the report pages their `s0`... ids.
+- **Header menus on a phone hang from the whole controls row**
+  (`.controls{position:relative}`, `.dl{position:static}`), because a menu
+  anchored to its own button opened off the left of the screen.
 - **The part explorer takes a link to a part**: `hyderabad/explorer/#Yakutpura-297`.
 - **Every file a page loads carries `?v=<content hash>`**, written by
   `scripts/stamp.py`, which is Netlify's build command and a step in

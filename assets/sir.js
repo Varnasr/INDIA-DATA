@@ -417,6 +417,37 @@
   function save(href, name) { var a = document.createElement('a'); a.href = href; a.download = name; document.body.appendChild(a); a.click(); a.remove(); }
   var slug = function () { return (location.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'sir'); };
 
+  // A link button on every section heading with an id (build_site.py gives
+  // each h2 and h3 one): it copies the page's address with #section, so a
+  // shared link opens on that section, in whatever language the reader uses.
+  var LINKICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>';
+  SIR.anchors = function (root) {
+    (root || document).querySelectorAll('main h2[id], main h3[id]').forEach(function (h) {
+      if (h.id === 'faqH' || h.querySelector('.anchor') || h.closest('.card, .qa, .tab-content, nav')) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'anchor'; b.setAttribute('data-no-i18n', '');
+      b.setAttribute('aria-label', L('Copy a link to this section')); b.innerHTML = LINKICON;
+      b.addEventListener('click', function () {
+        var url = SIR.pageUrl(h.id);
+        try { history.replaceState(null, '', '#' + h.id); } catch (e) {}
+        var ok = function () { b.setAttribute('data-msg', L('Copied')); setTimeout(function () { b.removeAttribute('data-msg'); }, 1500); };
+        if (navigator.clipboard) navigator.clipboard.writeText(url).then(ok, function () { prompt('', url); }); else prompt('', url);
+      });
+      h.appendChild(b);
+    });
+  };
+  // A link to a section opens on it. Charts draw after the page loads and move
+  // what is below them, so the jump is made again each time charts are added,
+  // until the reader scrolls for themselves.
+  var moved = false;
+  ['wheel', 'touchstart', 'keydown'].forEach(function (ev) { addEventListener(ev, function () { moved = true; }, { once: true, passive: true }); });
+  SIR.jump = function () {
+    if (moved || !location.hash) return;
+    var t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (t && t.closest('main')) t.scrollIntoView({ block: 'start' });
+  };
+  setTimeout(function () { SIR.anchors(); SIR.jump(); }, 0);
+
   // A row of buttons under every chart on a page: the picture, the numbers
   // behind it, and the finding written beside it, to send on.
   SIR.tools = function () {
@@ -458,6 +489,7 @@
       });
       panel.appendChild(bar);
     });
+    SIR.anchors(); SIR.jump();
   };
 
   // ---- the finder: type a constituency, get its card, share it. A card has
@@ -530,6 +562,7 @@
       // points ([points, note]); the FAQ tab itself uses the key 'faq'.
       var QA = out.qa || out, sh = out.short && out.short[page || 'faq'];
       if (sh) SIR.inShort(sh[0], sh[1]);
+      setTimeout(SIR.jump, 0);
       if (!el) return;
       var rows = QA.filter(function (q) { return !page || (q[2] || []).indexOf(page) >= 0; });
       el.innerHTML = rows.map(function (q) { return '<div class="qa"><h3>' + q[0] + '</h3><p>' + q[1] + '</p></div>'; }).join('') +
