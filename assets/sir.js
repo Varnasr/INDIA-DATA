@@ -632,3 +632,24 @@
     else if (e.key === '/' && !typing && !e.metaKey && !e.ctrlKey && !e.altKey) { e.preventDefault(); open(); }
   });
 })();
+
+// ---------------------------------------------------------------- install
+// The site installs as an app (manifest.webmanifest, sw.js). The Install
+// button stays hidden until the browser says it can install, which on an
+// Android phone is Chrome, Edge or Samsung Internet; elsewhere the browser's
+// own menu still offers "Add to Home screen".
+(function () {
+  var root = document.body.getAttribute('data-root') || '';
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', function () { navigator.serviceWorker.register(root + 'sw.js').catch(function () {}); });
+  }
+  var btn = document.querySelector('.install'), ask = null;
+  if (!btn) return;
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); ask = e; btn.hidden = false; });
+  btn.addEventListener('click', function () {
+    if (!ask) return;
+    ask.prompt();
+    ask.userChoice.then(function () { ask = null; btn.hidden = true; });
+  });
+  window.addEventListener('appinstalled', function () { ask = null; btn.hidden = true; });
+})();
