@@ -478,6 +478,101 @@
     return false;
   }
 
+  // ---- map: a choropleth of constituencies from a GeoJSON of polygons with
+  // an `ac` property. v(ac) gives the value (null for none), name(ac) the
+  // label; five bins of one colour, the lightest still visible on the card.
+  // pick(ac) is called on a click, and select(ac) outlines a seat.
+  function map(box, o) {
+    measure(box);
+    box = typeof box === 'string' ? document.getElementById(box) : box;
+    var feats = o.geo.features, xs = [], ys = [];
+    feats.forEach(function (f) { eachPt(f.geometry, function (p) { xs.push(p[0]); ys.push(p[1]); }); });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+    var kx = Math.cos((y0 + y1) / 2 * Math.PI / 180), gw = (x1 - x0) * kx, gh = y1 - y0;
+    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : Math.min(WIDE(), 900), leg = 46;
+    var H = Math.min(Math.round(W * gh / gw), phone() ? 640 : 760) + leg, sc = Math.min((W - 16) / gw, (H - leg - 16) / gh);
+    var ox = (W - gw * sc) / 2, oy = leg + 8;
+    var P = function (p) { return (ox + (p[0] - x0) * kx * sc).toFixed(1) + ',' + (oy + (y1 - p[1]) * sc).toFixed(1); };
+    var s = svgIn(box, W, H, o.label);
+    var vals = feats.map(function (f) { return o.v(f.properties.ac); }).filter(function (v) { return v != null && isFinite(v); }).sort(function (a, b) { return a - b; });
+    var q = [0.2, 0.4, 0.6, 0.8].map(function (t) { return vals[Math.floor(t * (vals.length - 1))]; });
+    if (o.breaks) q = o.breaks;
+    var bin = function (v) { var i = 0; while (i < q.length && v > q[i]) i++; return i; };
+    var op = [0.14, 0.3, 0.48, 0.68, 0.9], tok = o.tok || '--fill-red', fv = o.fmt || function (v) { return SIR.d(v, 1); };
+    var g = el('g', { class: 'vmap' }, s), paths = {};
+    feats.forEach(function (f) {
+      var ac = f.properties.ac, v = o.v(ac), d = geomPath(f.geometry, P);
+      var pth = el('path', { d: d, 'data-ac': ac, style: v == null ? 'fill:var(--line)' : fill(tok) + ';fill-opacity:' + op[bin(v)] }, g);
+      el('title', {}, pth, o.name(ac) + ': ' + (v == null ? L('no figure') : fv(v)));
+      paths[ac] = pth;
+    });
+    // an inset: a city's seats drawn again, enlarged, in a corner where the
+    // state's outline leaves room, so seats too small to tap can be reached
+    var extra = {};
+    if (o.inset) {
+      var inF = feats.filter(function (f) { return o.inset.acs.indexOf(f.properties.ac) >= 0; }), ix = [], iy = [];
+      inF.forEach(function (f) { eachPt(f.geometry, function (p) { ix.push(p[0]); iy.push(p[1]); }); });
+      var a0 = Math.min.apply(null, ix), a1 = Math.max.apply(null, ix), b0 = Math.min.apply(null, iy), b1 = Math.max.apply(null, iy);
+      var bw = Math.min(phone() ? 150 : 230, W * 0.36), iw = (a1 - a0) * kx, ih = b1 - b0, k2 = Math.min((bw - 12) / iw, (bw - 12) / ih);
+      var bh = ih * k2 + 30, bx = o.inset.left ? 8 : W - bw - 8, by = o.inset.bottom ? H - bh - 8 : leg + 4;
+      var ig = el('g', { class: 'vmap vinset' }, s);
+      el('rect', { x: bx, y: by, width: bw, height: bh, rx: 8, class: 'vpanel' }, ig);
+      el('text', { x: bx + 8, y: by + 15, class: 'vval' }, ig, o.inset.name);
+      var P2 = function (p) { return (bx + 6 + (bw - 12 - iw * k2) / 2 + (p[0] - a0) * kx * k2).toFixed(1) + ',' + (by + 24 + (b1 - p[1]) * k2).toFixed(1); };
+      inF.forEach(function (f) {
+        var ac = f.properties.ac, v = o.v(ac);
+        var pth = el('path', { d: geomPath(f.geometry, P2), 'data-ac': ac, style: v == null ? 'fill:var(--line)' : fill(tok) + ';fill-opacity:' + op[bin(v)] }, ig);
+        el('title', {}, pth, o.name(ac) + ': ' + (v == null ? L('no figure') : fv(v)));
+        extra[ac] = pth;
+      });
+      if (o.pick) ig.addEventListener('click', function (e) { var t = e.target.closest('path'); if (t) o.pick(+t.getAttribute('data-ac')); });
+    }
+    if (o.pick) g.addEventListener('click', function (e) { var t = e.target.closest('path'); if (t) o.pick(+t.getAttribute('data-ac')); });
+    // the key: five swatches with the range each covers
+    var lo = vals[0], hi = vals[vals.length - 1], edges = [lo].concat(q, [hi]), kw = Math.min(110, (W - 20) / 5);
+    if (o.title) el('text', { x: 10, y: 12, class: 'vval' }, s, o.title);
+    op.forEach(function (a, i) {
+      el('rect', { x: 10 + i * kw, y: 20, width: kw - 4, height: 10, rx: 2, style: fill(tok) + ';fill-opacity:' + a }, s);
+      el('text', { x: 10 + i * kw, y: 42, class: 'vval small' }, s, fv(edges[i]) + '–' + fv(edges[i + 1]));
+    });
+    box.__select = function (ac) {
+      [paths, extra].forEach(function (set) {
+        Object.keys(set).forEach(function (k) { set[k].classList.toggle('on', +k === ac); });
+        if (set[ac]) set[ac].parentNode.appendChild(set[ac]);
+      });
+    };
+  }
+  function eachPt(gm, f) { (gm.type === 'Polygon' ? [gm.coordinates] : gm.coordinates).forEach(function (poly) { poly.forEach(function (ring) { ring.forEach(f); }); }); }
+  function geomPath(gm, P) { return (gm.type === 'Polygon' ? [gm.coordinates] : gm.coordinates).map(function (poly) { return poly.map(function (ring) { return 'M' + ring.map(P).join('L') + 'Z'; }).join(''); }).join(''); }
+
+  // ---- what each chart's CSV holds: the numbers it was drawn from
+  var CSV = {
+    sankey: function (o) { return [['from', 'to', 'count']].concat(o.links.map(function (l) { return [o.sources[l.s].name, o.targets[l.t].name, l.v]; })); },
+    waterfall: function (o) { return [['step', 'count', 'kind']].concat(o.steps.map(function (s) { return [s.name, s.v, s.kind]; })); },
+    strip: function (o) { return [['group', 'point', 'value']].concat([].concat.apply([], o.rows.map(function (r) { return r.points.map(function (p) { return [r.name, p.label, p.v]; }); }))); },
+    dumbbell: function (o) { return [['name', o.aName, o.bName]].concat(o.rows.map(function (r) { return [r.name, r.a, r.b]; })); },
+    slope: function (o) { return [['name', o.aName, o.bName]].concat(o.rows.map(function (r) { return [r.name, r.a, r.b]; })); },
+    forest: function (o) { return [['estimate', 'value', 'low', 'high']].concat(o.rows.map(function (r) { return [r.name, r.est, r.lo, r.hi]; })); },
+    lollipop: function (o) { return [['name', o.axis || 'value']].concat(o.rows.map(function (r) { return [r.name, r.v]; })); },
+    rank: function (o) { return [['name', o.axis || 'value']].concat(o.rows.map(function (r) { return [r.name, r.v]; })); },
+    heat: function (o) { return [['name'].concat(o.cols)].concat(o.rows.map(function (r) { return [r.name].concat(r.v); })); },
+    dots: function (o) { return [['category'].concat(o.series.map(function (z) { return z.name; }))].concat(o.cats.map(function (c, i) { return [c].concat(o.series.map(function (z) { return z.vals[i]; })); })); },
+    multiples: function (o) { return [['name'].concat(o.steps)].concat(o.panels.map(function (p) { return [p.name].concat(p.v); })); },
+    scatter: function (o) { return [['point', o.xAxis, o.yAxis]].concat(o.points.map(function (p) { return [p.label, p.x, p.y]; })); },
+    map: function (o) { return [['ac', 'name', o.title || 'value']].concat(o.geo.features.map(function (f) { var a = f.properties.ac; return [a, o.name(a), o.v(a)]; })); }
+  };
+  function keep(name, f) {
+    return function (box, o) {
+      var r = f.apply(this, arguments);
+      try { var b = typeof box === 'string' ? document.getElementById(box) : box; if (b) b.__csv = name === 'fromChart' ? chartCsv(o) : CSV[name](o); } catch (e) {}
+      return r;
+    };
+  }
+  function chartCsv(cfg) {
+    var ds = cfg.data.datasets, labels = cfg.data.labels;
+    return [['label'].concat(ds.map(function (d) { return d.label || ''; }))].concat(labels.map(function (l, i) { return [Array.isArray(l) ? l.join(' ') : l].concat(ds.map(function (d) { return d.data[i]; })); }));
+  }
+
   // ---- png: an SVG chart as a PNG, with the theme's colours written in
   function png(box, name) {
     var svg = box.querySelector('svg'); if (!svg) return;
@@ -491,5 +586,10 @@
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(c));
   }
 
-  window.VIZ = { multiples: multiples, slope: slope, scatter: scatter, sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, heat: heat, rank: rank, dots: dots, fromChart: fromChart, png: png };
+  var K = {};
+  var F = { multiples: multiples, slope: slope, scatter: scatter, sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, heat: heat, rank: rank, dots: dots, map: map };
+  Object.keys(F).forEach(function (k) { K[k] = keep(k, F[k]); });
+  K.fromChart = function (box, cfg, label) { var ok = fromChart(box, cfg, label); if (ok) try { (typeof box === 'string' ? document.getElementById(box) : box).__csv = chartCsv(cfg); } catch (e) {} return ok; };
+  K.png = png;
+  window.VIZ = K;
 })();

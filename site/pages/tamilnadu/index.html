@@ -2,6 +2,17 @@
 <main id="main">
 <div class="page-head"><h1>Tamil Nadu: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
 
+  <h2>Find a constituency</h2>
+  <p class="sub">Each constituency is shaded by the names left off the draft roll for every 100 electors on the roll before the revision. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="finder" id="finder"></div>
+      <div class="vizbox" id="vMap"></div>
+      <p class="note">Constituency boundaries from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.</p>
+    </div>
+  </div>
+
+
   <h2>Removals per 100 electors, by district</h2>
   <p class="sub">Names left off the draft roll of 19 December 2025, for every 100 electors on the roll before the revision began. Chennai is marked in red.</p>
   <div class="grid">
@@ -95,6 +106,24 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
     { k: 'shifted_absent', label: L('Shifted or absent'), fmt: SIR.n }, { k: 'dead', label: L('Dead'), fmt: SIR.n },
     { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
   ], A, { sort: 'per_100' });
+  SIR.json('data/geo/tamilnadu.json').then(function (geo) {
+    var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });
+    var F = SIR.finder('finder', { rows: A, key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+      card: function (a) { return SIR.facts([
+        [L('Names left off the draft'), SIR.n(a.removed)], [L('Per 100 electors'), SIR.d(a.per_100, 1)],
+        [L('Entered as dead'), SIR.n(a.dead)], [L('Not entered as dead'), SIR.n(a.removed - a.dead)],
+        [L('Shifted or absent'), SIR.n(a.shifted_absent)], [L('Enrolled in more than one place'), SIR.n(a.multiple)],
+        [L('Fall at the final roll, per 100'), SIR.d(a.net_per_100, 1)], [L('Won in 2026'), a.winner + ' · ' + L('margin {m}', { m: SIR.n(a.margin) })],
+        [L('Removed more than the margin'), a.over_margin ? L('Yes') : L('No')]]); },
+      share: function (a) { return L('{n}, Tamil Nadu. {r} names were left off the draft roll here, {p} of every 100 electors. {nd} of them were not entered as dead. The seat was won in 2026 by {m} votes. These are counts from the Chief Electoral Officer\'s published tables. A reason on the list is what the officer wrote down, and nobody checked it.', { n: a.name, r: SIR.n(a.removed), p: SIR.d(a.per_100, 1), nd: SIR.n(a.removed - a.dead), m: SIR.n(a.margin) }); },
+      pick: function (a) { var b = document.getElementById('vMap'); if (b.__select) b.__select(a.ac); } });
+    VIZ.map('vMap', { geo: geo, label: L('Map of names removed per 100 electors, by constituency'), title: L('Removed per 100 electors'),
+      v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
+      inset: { name: L('Chennai'), acs: A.filter(function (a) { return a.district === 'Chennai'; }).map(function (a) { return a.ac; }), left: true },
+      pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
+    var h = location.hash.slice(1); if (F.byKey[h]) document.getElementById('vMap').__select(F.byKey[h].ac);
+    SIR.tools();
+  });
   SIR.showFaq('tn', 'main');
 }).catch(SIR.fail);
 </script>

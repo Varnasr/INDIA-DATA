@@ -2130,6 +2130,12 @@
    "/hyderabad/method/"
   ]
  },
+ "CSV": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
+  ]
+ },
  "Can I look up my own name here?": {
   "kind": "script",
   "pages": [
@@ -2259,6 +2265,12 @@
    "/bihar/results/"
   ]
  },
+ "Change since the draft": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "Characteristic": {
   "kind": "script",
   "pages": [
@@ -2275,8 +2287,8 @@
  "Chennai": {
   "kind": "script",
   "pages": [
-   "/tamilnadu/elections/",
-   "/tamilnadu/"
+   "/tamilnadu/",
+   "/tamilnadu/elections/"
   ]
  },
  "Chennai and the districts around it removed far more names than the rest of the state, and the parties did not win evenly across districts. So each seat's rate is also set against the rate of its own district, and those differences are averaged for each party's seats.": {
@@ -2457,6 +2469,15 @@
    "/hyderabad/explorer/"
   ]
  },
+ "Constituency boundaries from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/results/",
+   "/kerala/",
+   "/tamilnadu/",
+   "/westbengal/"
+  ]
+ },
  "Constituency table, CSV": {
   "kind": "markup",
   "pages": [
@@ -2490,6 +2511,24 @@
    "/westbengal/elections/",
    "/westbengal/faq/",
    "/westbengal/method/"
+  ]
+ },
+ "Copied": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
+  ]
+ },
+ "Copy link": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
+  ]
+ },
+ "Copy text": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
   ]
  },
  "Correlation summary": {
@@ -3368,6 +3407,30 @@
    "/bihar/"
   ]
  },
+ "Each constituency is shaded by how much smaller its roll was at the 2026 election than in 2024, for every 100 electors. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.": {
+  "kind": "markup",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
+ "Each constituency is shaded by how much smaller its roll was at the draft than in January 2025, for every 100 electors. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.": {
+  "kind": "markup",
+  "pages": [
+   "/kerala/"
+  ]
+ },
+ "Each constituency is shaded by the names left off the draft roll for every 100 electors on the roll before the revision. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.": {
+  "kind": "markup",
+  "pages": [
+   "/tamilnadu/"
+  ]
+ },
+ "Each constituency is shaded by the names removed for every 100 electors. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "Each constituency name opens it in the part explorer.": {
   "kind": "script",
   "pages": [
@@ -3800,6 +3863,13 @@
    "/india/"
   ]
  },
+ "Entered as dead": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/",
+   "/tamilnadu/"
+  ]
+ },
  "Equal share": {
   "kind": "script",
   "pages": [
@@ -4068,6 +4138,18 @@
    "/westbengal/elections/"
   ]
  },
+ "Fall at the final roll, per 100": {
+  "kind": "script",
+  "pages": [
+   "/tamilnadu/"
+  ]
+ },
+ "Fall by March 2026, per 100": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
+  ]
+ },
  "Fall in the roll at the draft per 100 electors in every constituency, by the party that won it in 2026": {
   "kind": "script",
   "pages": [
@@ -4110,6 +4192,12 @@
    "/kerala/elections/"
   ]
  },
+ "Fall larger than the margin": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
  "Fall over margin": {
   "kind": "script",
   "pages": [
@@ -4125,6 +4213,13 @@
    "/westbengal/elections/"
   ]
  },
+ "Fall per 100 electors": {
+  "kind": "script",
+  "pages": [
+   "/kerala/",
+   "/westbengal/"
+  ]
+ },
  "Fall per 100 electors on the 2024 roll": {
   "kind": "script",
   "pages": [
@@ -4137,6 +4232,12 @@
   "pages": [
    "/kerala/",
    "/kerala/elections/"
+  ]
+ },
+ "Fall since 2024": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
   ]
  },
  "Fall to 2026": {
@@ -4251,10 +4352,26 @@
    "/westbengal/"
   ]
  },
+ "Find a constituency": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js",
+   "/bihar/results/",
+   "/kerala/",
+   "/tamilnadu/",
+   "/westbengal/"
+  ]
+ },
  "Find a constituency or district": {
   "kind": "script",
   "pages": [
    "/bihar/"
+  ]
+ },
+ "Find a district": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
   ]
  },
  "Find a part or locality": {
@@ -5910,6 +6027,7 @@
  "Kolkata": {
   "kind": "script",
   "pages": [
+   "/westbengal/",
    "/westbengal/elections/"
   ]
  },
@@ -6095,6 +6213,25 @@
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
+  ]
+ },
+ "Map of names removed per 100 electors, by constituency": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/",
+   "/tamilnadu/"
+  ]
+ },
+ "Map of the fall in the roll per 100 electors, 2024 to the 2026 election, by constituency": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
+ "Map of the fall in the roll per 100 electors, January 2025 to the draft, by constituency": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
   ]
  },
  "March 2026": {
@@ -6618,6 +6755,13 @@
    "/india/"
   ]
  },
+ "Names left off the draft": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/",
+   "/tamilnadu/"
+  ]
+ },
  "Names left off the draft roll": {
   "kind": "script",
   "pages": [
@@ -6944,6 +7088,14 @@
    "/assets/sir.js"
   ]
  },
+ "No": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/",
+   "/tamilnadu/",
+   "/westbengal/"
+  ]
+ },
  "No 2002 link": {
   "kind": "script",
   "pages": [
@@ -7161,6 +7313,12 @@
   "kind": "script",
   "pages": [
    "/westbengal/"
+  ]
+ },
+ "Not entered as dead": {
+  "kind": "script",
+  "pages": [
+   "/tamilnadu/"
   ]
  },
  "Not in either list": {
@@ -7414,6 +7572,12 @@
    "/hyderabad/"
   ]
  },
+ "PNG": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
+  ]
+ },
  "Part": {
   "kind": "script",
   "pages": [
@@ -7650,7 +7814,11 @@
   "pages": [
    "/bihar/border/",
    "/bihar/districts/",
-   "/bihar/results/"
+   "/bihar/results/",
+   "/karnataka/",
+   "/kerala/",
+   "/tamilnadu/",
+   "/westbengal/"
   ]
  },
  "Per booth": {
@@ -8458,6 +8626,13 @@
    "/bihar/explorer/"
   ]
  },
+ "Removed more than the margin": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/",
+   "/tamilnadu/"
+  ]
+ },
  "Removed on objections": {
   "kind": "script",
   "pages": [
@@ -8476,6 +8651,7 @@
    "/bihar/",
    "/bihar/districts/",
    "/bihar/explorer/",
+   "/bihar/results/",
    "/india/",
    "/karnataka/",
    "/tamilnadu/",
@@ -8632,6 +8808,12 @@
    "/kerala/"
   ]
  },
+ "Roll at the 2026 election": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
  "Roll at the 2026 nominations": {
   "kind": "script",
   "pages": [
@@ -8662,6 +8844,12 @@
   "kind": "script",
   "pages": [
    "/india/"
+  ]
+ },
+ "Roll in 2024": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
   ]
  },
  "Roll of 16 June": {
@@ -8695,6 +8883,12 @@
   ]
  },
  "Roll of January 2025": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
+  ]
+ },
+ "Roll of March 2026": {
   "kind": "script",
   "pages": [
    "/kerala/"
@@ -9148,10 +9342,22 @@
    "/hyderabad/people/"
   ]
  },
+ "Share on WhatsApp": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
+  ]
+ },
  "Share the runner-up needed": {
   "kind": "script",
   "pages": [
    "/bihar/results/"
+  ]
+ },
+ "Share this chart on WhatsApp": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
   ]
  },
  "Share won by the NDA": {
@@ -10633,6 +10839,12 @@
    "/assets/faq/bihar.js"
   ]
  },
+ "The revision was published by district only. Type a district's name, and its figures appear below with a link you can send.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "The rise after the draft counts new voters too, and the lists cannot show how anyone missing from the roll would have voted.": {
   "kind": "script",
   "pages": [
@@ -10982,6 +11194,18 @@
   "kind": "markup",
   "pages": [
    "/bihar/people/"
+  ]
+ },
+ "Type a district name": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
+ "Type a name or number": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
   ]
  },
  "Unclassified": {
@@ -11526,6 +11750,12 @@
   "kind": "script",
   "pages": [
    "/bihar/"
+  ]
+ },
+ "WhatsApp": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
   ]
  },
  "Where a reason was given, {dead} were entered as dead, {sao} as moved, not found or other, and {dup} as enrolled more than once. States reported their reasons in different ways, and the method page sets out how each was counted.": {
@@ -12215,6 +12445,12 @@
    "/india/"
   ]
  },
+ "Women among them": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "Women among those marked shifted": {
   "kind": "script",
   "pages": [
@@ -12298,6 +12534,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/people/"
+  ]
+ },
+ "Women on the roll, 2024 and 2026": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
   ]
  },
  "Women removed": {
@@ -12463,6 +12705,12 @@
    "/kerala/"
   ]
  },
+ "Women's share of the fall": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
+  ]
+ },
  "Women's share of the fall, %": {
   "kind": "script",
   "pages": [
@@ -12583,6 +12831,20 @@
    "/bihar/results/"
   ]
  },
+ "Won in 2025": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "Won in 2026": {
+  "kind": "script",
+  "pages": [
+   "/kerala/",
+   "/tamilnadu/",
+   "/westbengal/"
+  ]
+ },
  "Yakutpura was decided by {margin} votes.": {
   "kind": "script",
   "pages": [
@@ -12593,6 +12855,14 @@
   "kind": "script",
   "pages": [
    "/assets/faq/hyd.js"
+  ]
+ },
+ "Yes": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/",
+   "/tamilnadu/",
+   "/westbengal/"
   ]
  },
  "Yes, in {over} of {seats} constituencies. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {took_over} lost more names than the NDA's winning margin. That does not mean those results would have gone the other way. It means the roll changed by more than the vote that decided the seat, and nobody outside the Commission can say whose names they were.": {
@@ -12768,6 +13038,15 @@
   "kind": "script",
   "pages": [
    "/india/"
+  ]
+ },
+ "margin {m}": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/",
+   "/kerala/",
+   "/tamilnadu/",
+   "/westbengal/"
   ]
  },
  "median hearing cases per part per slot": {
@@ -13668,6 +13947,36 @@
   "kind": "script",
   "pages": [
    "/bihar/results/"
+  ]
+ },
+ "{n}, Bihar. {r} names were removed from the roll here in the revision, {p} of every 100 electors, and women were {w} of them. The seat was won in 2025 by {m} votes. These are counts from the Election Commission's published lists. A reason on the list is what the officer wrote down, and nobody checked it.": {
+  "kind": "script",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
+ "{n}, Karnataka. {r} names were left off the draft roll in this district, {p} of every 100 electors. {s} were entered as shifted and {dd} as dead. By 25 September the roll had changed by {a} since the draft. These are counts from the Chief Electoral Officer's press notes. A reason on the list is what the officer wrote down, and nobody checked it.": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
+ "{n}, Kerala. The draft roll was {f} names smaller than the January 2025 roll, {p} of every 100 electors, and women were {w} of that fall. The seat was won in 2026 by {m} votes. The fall also counts people who died or moved, so it is not the same as the names struck off. These are counts from the Chief Electoral Officer's published rolls.": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
+  ]
+ },
+ "{n}, Tamil Nadu. {r} names were left off the draft roll here, {p} of every 100 electors. {nd} of them were not entered as dead. The seat was won in 2026 by {m} votes. These are counts from the Chief Electoral Officer's published tables. A reason on the list is what the officer wrote down, and nobody checked it.": {
+  "kind": "script",
+  "pages": [
+   "/tamilnadu/"
+  ]
+ },
+ "{n}, West Bengal. The roll the 2026 election was held on was {f} names smaller than the 2024 roll, {p} of every 100 electors. The seat was won by {m} votes. The fall also counts people who died or moved, so it is not the same as the names struck off. These are counts from the Chief Electoral Officer's published rolls.": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
   ]
  },
  "{n}: {x}, {y} per 100": {
