@@ -215,6 +215,64 @@
     });
   }
 
+  // ---- gantt: one row per state, one thin line per schedule that applied to
+  // it (the first order at the top, each later change below it). On each line
+  // a bar for enumeration, a bar for claims and objections, a dot for the
+  // draft and a diamond for the final roll. o.rows [{name, steps:[{label,
+  // enum:[a,b], draft, claims:[a,b], claims_end, final}], note}], dates ISO.
+  // English only, like the page it serves (india/process/), whose legal
+  // detail is not machine translated.
+  function gantt(box, o) {
+    measure(box);
+    box = typeof box === 'string' ? document.getElementById(box) : box;
+    var D = function (iso) { return iso ? Date.parse(iso + 'T00:00:00Z') : null; };
+    var all = [];
+    o.rows.forEach(function (r) { r.steps.forEach(function (st) { [st.draft, st.final, st.claims_end].concat(st.enum || [], st.claims || []).forEach(function (d) { if (d) all.push(D(d)); }); }); });
+    var t0 = Math.min.apply(null, all), t1 = Math.max.apply(null, all);
+    var m0 = new Date(t0); m0 = Date.UTC(m0.getUTCFullYear(), m0.getUTCMonth(), 1);
+    var m1 = new Date(t1); m1 = Date.UTC(m1.getUTCFullYear(), m1.getUTCMonth() + 1, 1);
+    var ph = phone(), W = ph ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = ph ? 104 : 230, lh = 9, gap = ph ? 10 : 8, leg = ph ? 62 : 34;
+    var heights = o.rows.map(function (r) { return Math.max(1, r.steps.length) * lh + gap * 2; });
+    var H = leg + heights.reduce(function (a, b) { return a + b; }, 0) + 30;
+    var s = svgIn(box, W, H, o.label);
+    var x = function (t) { return lw + 8 + (W - lw - 20) * (t - m0) / (m1 - m0); };
+    var mon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var span = (m1 - m0) / 864e5, every = span > 400 ? 3 : span > 200 ? 2 : 1;
+    for (var m = new Date(m0), i = 0; m.getTime() <= m1; m = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 1)), i++) {
+      el('line', { x1: x(m.getTime()), x2: x(m.getTime()), y1: leg, y2: H - 24, class: 'vgrid' }, s);
+      if (i % every === 0 && m.getTime() < m1) el('text', { x: x(m.getTime()) + 2, y: H - 8, class: 'vval' }, s, mon[m.getUTCMonth()] + (m.getUTCMonth() === 0 || i === 0 ? ' ' + m.getUTCFullYear() : ''));
+    }
+    // the key
+    var keys = [['bar', '--fill-navy', 'Enumeration'], ['bar', '--fill-amber', 'Claims and objections'], ['dot', '--fill-navy', 'Draft roll'], ['dia', '--fill-red', 'Final roll']];
+    keys.forEach(function (k, j) {
+      var kx = ph ? 10 + (j % 2) * 150 : lw + 8 + j * 170, ky = ph ? 12 + Math.floor(j / 2) * 20 : 14;
+      if (k[0] === 'bar') el('rect', { x: kx - 6, y: ky - 3, width: 14, height: 6, rx: 2, style: fill(k[1]) }, s);
+      if (k[0] === 'dot') el('circle', { cx: kx, cy: ky, r: 4.5, style: fill(k[1]) }, s);
+      if (k[0] === 'dia') el('path', { d: 'M' + kx + ' ' + (ky - 5) + 'l5 5-5 5-5-5z', style: fill(k[1]) }, s);
+      el('text', { x: kx + 12, y: ky, 'dominant-baseline': 'middle', class: 'vval' }, s, k[2]);
+    });
+    if (!ph) el('text', { x: W - 10, y: 14, 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval' }, s, 'Faint lines are schedules later replaced');
+    var y = leg;
+    o.rows.forEach(function (r, ri) {
+      var h = heights[ri];
+      if (ri % 2) el('rect', { x: 0, y: y, width: W, height: h, class: 'vband' }, s);
+      label(s, lw - 6, y + h / 2, ph ? SIR.short(r.name) : r.name, ph ? 15 : 24, 'end');
+      r.steps.forEach(function (st, k) {
+        var yy = y + gap + k * lh + lh / 2, last = k === r.steps.length - 1, g = el('g', { opacity: last ? 1 : 0.38 }, s);
+        var tip = r.name + ', ' + st.label + ': ' + [st.enum && st.enum[0] ? 'enumeration ' + SIR.date(st.enum[0]) + ' to ' + SIR.date(st.enum[1]) : st.enum ? 'enumeration to ' + SIR.date(st.enum[1]) : '',
+          st.draft ? 'draft ' + SIR.date(st.draft) : '', st.claims ? 'claims ' + SIR.date(st.claims[0]) + ' to ' + SIR.date(st.claims[1]) : st.claims_end ? 'claims to ' + SIR.date(st.claims_end) : '',
+          st.final ? 'final roll ' + SIR.date(st.final) : ''].filter(Boolean).join(', ');
+        el('title', {}, g, tip);
+        if (st.enum && st.enum[0]) el('rect', { x: x(D(st.enum[0])), y: yy - 3, width: Math.max(2, x(D(st.enum[1])) - x(D(st.enum[0]))), height: 6, rx: 2, style: fill('--fill-navy') + ';fill-opacity:.45' }, g);
+        if (st.claims) el('rect', { x: x(D(st.claims[0])), y: yy - 3, width: Math.max(2, x(D(st.claims[1])) - x(D(st.claims[0]))), height: 6, rx: 2, style: fill('--fill-amber') }, g);
+        if (st.claims_end) el('path', { d: 'M' + x(D(st.claims_end)) + ' ' + (yy - 4) + 'v8', class: 'vlink thick', style: 'stroke:var(--fill-amber)' }, g);
+        if (st.draft) el('circle', { cx: x(D(st.draft)), cy: yy, r: 4, style: fill('--fill-navy') }, g);
+        if (st.final) { var fx = x(D(st.final)); el('path', { d: 'M' + fx + ' ' + (yy - 5) + 'l5 5-5 5-5-5z', style: fill('--fill-red') }, g); }
+      });
+      y += h;
+    });
+  }
+
   // ---- forest: rows [{name, est, lo, hi, main}], one estimate and its
   // interval per row, with the line at zero (no effect)
   function forest(box, o) {
@@ -561,6 +619,7 @@
     dots: function (o) { return [['category'].concat(o.series.map(function (z) { return z.name; }))].concat(o.cats.map(function (c, i) { return [c].concat(o.series.map(function (z) { return z.vals[i]; })); })); },
     multiples: function (o) { return [['name'].concat(o.steps)].concat(o.panels.map(function (p) { return [p.name].concat(p.v); })); },
     scatter: function (o) { return [['point', o.xAxis, o.yAxis]].concat(o.points.map(function (p) { return [p.label, p.x, p.y]; })); },
+    gantt: function (o) { var out = [['state', 'schedule', 'enumeration from', 'enumeration to', 'draft', 'claims from', 'claims to', 'final']]; o.rows.forEach(function (r) { r.steps.forEach(function (st) { out.push([r.name, st.label, st.enum ? st.enum[0] || '' : '', st.enum ? st.enum[1] : '', st.draft || '', st.claims ? st.claims[0] : '', st.claims ? st.claims[1] : st.claims_end || '', st.final || '']); }); }); return out; },
     map: function (o) { return [['ac', 'name', o.title || 'value']].concat(o.geo.features.map(function (f) { var a = f.properties.ac; return [a, o.name(a), o.v(a)]; })); }
   };
   function keep(name, f) {
@@ -589,7 +648,7 @@
   }
 
   var K = {};
-  var F = { multiples: multiples, slope: slope, scatter: scatter, sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, heat: heat, rank: rank, dots: dots, map: map };
+  var F = { gantt: gantt, multiples: multiples, slope: slope, scatter: scatter, sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, heat: heat, rank: rank, dots: dots, map: map };
   Object.keys(F).forEach(function (k) { K[k] = keep(k, F[k]); });
   K.fromChart = function (box, cfg, label) { var ok = fromChart(box, cfg, label); if (ok) try { (typeof box === 'string' ? document.getElementById(box) : box).__csv = chartCsv(cfg); } catch (e) {} return ok; };
   K.png = png;

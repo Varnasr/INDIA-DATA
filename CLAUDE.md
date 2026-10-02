@@ -129,6 +129,21 @@ their gross columns blank and mark them `net only`. The share "made up" is the
 net rise over the draft removals; it counts new electors too, so it is an upper
 bound on names put back, and every page says so.
 
+**How the SIR was run** (`india/process/`) is the rules and dates of the
+revision, from `data/india/process.json`: a timeline of every order, letter,
+Supreme Court order and judgment that changed the process, and each state's
+schedule drawn as set and as moved (`VIZ.gantt`). Every entry links to the
+document it comes from, and **only primary documents are used**: Election
+Commission orders and releases, Chief Electoral Officers' notes, Supreme Court
+orders and judgments. The research and an independent check of every row,
+with the quoted evidence, are in `data/india/raw/process_research/`
+(`process.json`, `verified.json`); a row the check could not confirm is left
+off the page and named under "What we could not verify". Add an entry only
+with its document read, never from a press report. The page and the chart are
+English only, like the full reports, because the legal detail is not machine
+translated. A line drawn from what a state actually published carries
+`kind: "published"` and is not counted as a schedule change.
+
 `data/bihar/raw/final_roll_format4b.csv` is the Commission's Format 4B return
 for Bihar's final roll, seat by seat and by sex; `scripts/build_bihar_final.py`
 writes `data/bihar/final.json` and fails unless every seat adds up and the

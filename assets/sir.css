@@ -498,3 +498,28 @@ html.dyslexic-font[data-lang="ur"] *{font-family:"OpenDyslexic","Noto Nastaliq U
   .controls{grid-column:1/-1;justify-content:space-between;align-items:center;flex-wrap:nowrap;width:100%}
   .controls #dys-font-btn{min-width:40px;min-height:40px;width:40px;height:40px;padding:0}
 }
+.viz .vband{fill:var(--soft)}
+/* india/process: the timeline of rule changes */
+.process .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.8rem;margin:1rem 0}
+.process .kpis>div{display:flex;flex-direction:column;gap:.2rem}
+.process .kpis b{font-size:1.6rem;color:var(--red)}
+.process .kpis span{font-size:.85rem;color:var(--muted)}
+.pfilter{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
+.pfilter .chip{font:inherit;font-size:.85rem;padding:.3rem .7rem;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:.35rem}
+.pfilter .chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pdot{display:inline-block;width:.7rem;height:.7rem;border-radius:50%}
+.pdot.eci,.pitem.eci::before{background:var(--fill-navy)}
+.pdot.sc,.pitem.sc::before{background:var(--fill-red)}
+.pdot.ceo,.pitem.ceo::before{background:var(--fill-teal)}
+.ptl{list-style:none;margin:1rem 0 0;padding:0 0 0 1.4rem;border-inline-start:3px solid var(--line);position:relative}
+.ptl .pyear{font-weight:800;font-size:1.3rem;margin:1.2rem 0 .4rem -1.4rem;padding-inline-start:.2rem;color:var(--muted)}
+.ptl .pitem{position:relative;margin:0 0 1rem;padding:.9rem 1rem;background:var(--card);border:1px solid var(--line);border-radius:12px;display:grid;grid-template-columns:150px minmax(0,1fr);gap:.4rem 1rem}
+.ptl .pitem::before{content:'';position:absolute;inset-inline-start:calc(-1.4rem - 8px);top:1.15rem;width:13px;height:13px;border-radius:50%;border:3px solid var(--bg)}
+.ptl .pdate time{font-weight:700;display:block}
+.ptl .pwho{font-size:.8rem;color:var(--muted)}
+.ptl .pbody h3{margin:0 0 .3rem;font-size:1rem}
+.ptl .pbody p{margin:0 0 .4rem}
+.ptl .psrc{font-size:.82rem}
+.ptl .psrc a{text-decoration:underline}
+.process h3.ph{margin:1.3rem 0 .2rem;font-size:1rem}
+@media (max-width:700px){.ptl .pitem{grid-template-columns:minmax(0,1fr)}.process .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
