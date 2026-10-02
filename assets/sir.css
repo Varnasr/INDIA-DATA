@@ -537,3 +537,16 @@ main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
 .anchor:hover{background:var(--soft);color:var(--ink)}
 .anchor[data-msg]::after{content:attr(data-msg);position:absolute;inset-inline-start:100%;margin-inline-start:.3rem;font-size:.75rem;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.1rem .4rem;white-space:nowrap}
 @media print{.anchor{display:none}}
+/* india/process: burdens, the forms thread and the reported list */
+.process .burdens{list-style:none;counter-reset:b;padding:0;margin:0 0 1.5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.8rem}
+.process .burdens li{counter-increment:b;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem}
+.process .burdens h3{font-size:1rem;margin:0 0 .35rem}
+.process .burdens h3::before{content:counter(b) ". ";color:var(--red)}
+.process .burdens p{margin:.3rem 0}
+.process ul.reported{list-style:none;padding:0;margin:0 0 1rem;display:grid;gap:.7rem}
+.process ul.reported li{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:.8rem 1rem}
+.process .rmeta{margin:0 0 .3rem;color:var(--muted);font-size:.88rem}
+.process .rmeta b{color:var(--ink)}
+.process .rresp{font-size:.92rem;color:var(--muted)}
+.process .rresp span{font-weight:700;color:var(--ink)}
+.process .rresp span::after{content:"."}

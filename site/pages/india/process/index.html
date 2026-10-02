@@ -6,6 +6,10 @@
 <article class="process" lang="en" dir="ltr" data-no-i18n>
   <div class="kpis" id="kpis"></div>
 
+  <h2>What made it harder to stay on the roll</h2>
+  <p class="sub">What an elector had to do, or get past, to stay on the roll or get back on it. Each point is taken from an order, a court record or an official figure, and links to it.</p>
+  <ol class="burdens" id="burdens"></ol>
+
   <h2>The rules, as they changed</h2>
   <p class="sub">Every order, letter and judgment that changed how the revision worked, in date order. Choose who issued it, or which part of the revision, to narrow the list.</p>
   <div class="pfilter" role="group" aria-label="Show entries from">
@@ -24,6 +28,14 @@
   </div>
   <ol class="ptl" id="timeline" aria-live="polite"></ol>
 
+  <h2>Form 6, Form 7 and the declaration</h2>
+  <p class="sub">Form 6 is how a new elector, or anyone left off, asks to be put on the roll. Form 7 is how anyone objects to a name already on it. During the revision the Commission added a declaration to Form 6 and changed it twice. This is what each version asked for, and what the orders and the Supreme Court said about the forms.</p>
+  <ol class="ptl forms" id="forms"></ol>
+  <h3>Claims and objections after the draft, state by state</h3>
+  <p class="sub">Names removed when the draft roll was published, set against names added and removed between the draft and the final roll. Additions include people enrolling for the first time, so they are the most that could have been put back, and fewer than that in fact.</p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Claims and objections after the draft"><table id="tClaims"></table></div>
+  <p class="note" id="nClaims"></p>
+
   <h2>Each state's dates, as set and as moved</h2>
   <p class="sub">One row for each state or union territory. The top line in a row is the first schedule the Election Commission set, and each line below it is a later change, with the last one drawn darkest. Hover over or tap a line for its dates and the document that set them.</p>
   <h3 class="ph">Bihar, the first phase</h3>
@@ -35,8 +47,13 @@
   <div class="grid"><div class="panel wide" id="pG3"><div class="vizbox" id="vG3"></div></div></div>
   <p class="note" id="nG3"></p>
 
+  <h2>Reported, not confirmed by a document</h2>
+  <p class="sub">What news organisations reported about the revision that no order or official figure on this page confirms. Each entry says who reported it and when, gives the Commission's response where the report carried one, and links to the report. These are reports, and the site does not vouch for them.</p>
+  <div class="pfilter" role="group" aria-label="Show reports about" id="rFilter"></div>
+  <div id="reported" aria-live="polite"></div>
+
   <h2>What we could not verify</h2>
-  <p class="sub">Nothing on this page rests on a press report. These documents could not be found or opened, so what they say is left out.</p>
+  <p class="sub">These documents could not be found or opened, so what they say is left out of the sections that rest on documents.</p>
   <ul class="plain" id="gaps"></ul>
   <p class="note">Checked against the documents on <span id="asof"></span>. If you have one of these documents, write to <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a>.</p>
 </article>
@@ -64,7 +81,7 @@ SIR.json('data/india/process.json').then(function (P) {
     'In Phase II, all ' + p2.length + ' states and union territories had their dates moved a week, and the Commission named ' + p2twice + ' of them for a second move. In Phase III, the dates of ' + p3moved + ' of ' + p3.length + ' states and union territories moved by orders and notes we could read.',
     'What an elector had to show changed as it went. Eleven documents in June 2025, Aadhaar added for identity on the Supreme Court\'s order in September, no documents while forms were filled in Phase II, and documents collected at home from those sent notices from 26 September 2026.',
     bySC + ' of the ' + T.length + ' entries below are orders or the judgment of the Supreme Court. In West Bengal it had judges decide the claims, and 60,06,675 names were marked under adjudication on the final roll.'
-  ], 'Only documents issued by the Election Commission, the Supreme Court and the states\' election officers are used. Some orders could not be found, and they are listed at the foot of the page.');
+  ], 'Every section rests on documents issued by the Election Commission, the Supreme Court and the states\' election officers, except the list of press reports, which is marked as such. Some orders could not be found, and they are listed at the foot of the page.');
 
   document.getElementById('kpis').innerHTML = [
     [T.length, 'rule and schedule changes, each with its document'],
@@ -97,6 +114,56 @@ SIR.json('data/india/process.json').then(function (P) {
     });
   });
   draw();
+
+  // what made it harder to stay on the roll
+  var srcs = function (a) { return '<p class="psrc">' + (a || []).map(function (x) { return '<a href="' + E(x.url) + '"' + (x.url.charAt(0) === '#' ? '' : ' rel="noopener" target="_blank"') + '>' + E(x.name) + '</a>'; }).join(' · ') + '</p>'; };
+  document.getElementById('burdens').innerHTML = P.burdens.map(function (b) {
+    return '<li><h3>' + E(b.title) + '</h3><p>' + E(b.text) + '</p>' + srcs(b.src) + '</li>';
+  }).join('');
+
+  // Form 6, Form 7 and the declaration
+  var fl = document.getElementById('forms'), lastFY = '';
+  fl.innerHTML = P.forms.map(function (t, i) {
+    var y = t.date.slice(0, 4), head = y !== lastFY ? '<li class="pyear" aria-hidden="true">' + y + '</li>' : '';
+    lastFY = y;
+    return head + '<li class="pitem ' + t.who + '"><div class="pdate"><time datetime="' + t.date + '">' + SIR.date(t.date) + '</time><span class="pwho">' + WHO[t.who] + '</span></div>' +
+      '<div class="pbody"><h3 id="f-' + t.date + '-' + (i + 1) + '">' + E(t.title) + '</h3><p>' + E(t.text) + '</p>' + srcs(t.src) + '</div></li>';
+  }).join('');
+  SIR.anchors(fl);
+
+  // the reported list, by topic
+  var R = P.reported, rt = '', rbox = document.getElementById('reported');
+  var topics = []; R.forEach(function (r) { if (topics.indexOf(r.topic) < 0) topics.push(r.topic); });
+  document.getElementById('rFilter').innerHTML = '<button type="button" class="chip" data-t="" aria-pressed="true">Everything</button>' +
+    topics.map(function (t) { return '<button type="button" class="chip" data-t="' + E(t) + '" aria-pressed="false">' + E(t) + '</button>'; }).join('');
+  function drawR() {
+    rbox.innerHTML = topics.filter(function (t) { return !rt || t === rt; }).map(function (t) {
+      return '<h3 class="ph">' + E(t) + '</h3><ul class="reported">' + R.filter(function (r) { return r.topic === t; }).map(function (r) {
+        return '<li><p class="rmeta"><b>' + E(r.outlet) + '</b>, <time datetime="' + r.date + '">' + SIR.date(r.date) + '</time></p><p>' + E(r.text) + '</p>' +
+          (r.response ? '<p class="rresp"><span>The response reported</span> ' + E(r.response) + '</p>' : '') +
+          '<p class="psrc"><a href="' + E(r.url) + '" rel="noopener" target="_blank">' + E(r.headline) + '</a></p></li>';
+      }).join('') + '</ul>';
+    }).join('');
+  }
+  document.getElementById('rFilter').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    rt = b.getAttribute('data-t');
+    document.querySelectorAll('#rFilter .chip').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    drawR();
+  });
+  drawR();
+
+  // claims and objections after the draft, from the All India figures
+  SIR.json('data/india/states.json').then(function (S) {
+    var N = function (v) { return v == null ? '' : SIR.n(v); };
+    var rows = S.states.filter(function (r) { return r.removed && r.added_after_draft != null; })
+      .map(function (r) { return { s: r.state, rm: r.removed, ad: r.added_after_draft, ra: r.removed_after_draft, per: 100 * r.added_after_draft / r.removed }; })
+      .sort(function (a, b) { return a.per - b.per; });
+    document.getElementById('tClaims').innerHTML = '<thead><tr><th scope="col" class="l">State or union territory</th><th scope="col">Removed at the draft</th><th scope="col">Added after the draft</th><th scope="col">Removed after the draft</th><th scope="col">Added for every 100 removed at the draft</th></tr></thead><tbody>' +
+      rows.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.s) + '</th><td>' + N(r.rm) + '</td><td>' + N(r.ad) + '</td><td>' + N(r.ra) + '</td><td>' + r.per.toFixed(1) + '</td></tr>'; }).join('') + '</tbody>';
+    var low = rows.filter(function (r) { return r.per < 10; }).length;
+    document.getElementById('nClaims').innerHTML = 'In ' + low + ' of these ' + rows.length + ' states and union territories, fewer than 10 names were added after the draft for every 100 removed at it. ' + E(P.claims_note) + ' The other states published only the net change from draft to final, or no final roll yet, and are on the <a href="../">All India page</a>.' + srcs(P.claims_src);
+  }).catch(function () {});
 
   // the schedules
   // #s-<state> (a link from a state's page) outlines that state's row

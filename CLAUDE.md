@@ -133,13 +133,23 @@ bound on names put back, and every page says so.
 revision, from `data/india/process.json`: a timeline of every order, letter,
 Supreme Court order and judgment that changed the process, and each state's
 schedule drawn as set and as moved (`VIZ.gantt`). Every entry links to the
-document it comes from, and **only primary documents are used**: Election
-Commission orders and releases, Chief Electoral Officers' notes, Supreme Court
-orders and judgments. The research and an independent check of every row,
+document it comes from, and **every section but one rests on primary
+documents**: Election Commission orders and releases, Chief Electoral
+Officers' notes, Supreme Court orders and judgments. Beside the timeline the
+page carries "What made it harder to stay on the roll" (`burdens`, each point
+with its document), "Form 6, Form 7 and the declaration" (`forms`, and a table
+of claims and objections after the draft read from `states.json`), and the
+one section that is not primary, "Reported, not confirmed by a document"
+(`reported`): press reports from named outlets, each reopened and checked,
+attributed to the outlet, with the response it reported. Nothing moves from
+that list into the other sections without its document, and no section calls
+the revision suppression or claims intent. The research and an independent check of every row,
 with the quoted evidence, are in `data/india/raw/process_research/`
-(`process.json`, `verified.json`); a row the check could not confirm is left
+(`process.json`, `verified.json`, and for the forms and the reports
+`forms_primary.json`, `forms_primary_verified.json`, `reported.json`,
+`reported_verified.json`); a row the check could not confirm is left
 off the page and named under "What we could not verify". Add an entry only
-with its document read, never from a press report. The page and the chart are
+with its document read, and a press report only to the reported list. The page and the chart are
 English only, like the full reports, because the legal detail is not machine
 translated. A line drawn from what a state actually published carries
 `kind: "published"` and is not counted as a schedule change.
