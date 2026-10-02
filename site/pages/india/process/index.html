@@ -81,7 +81,7 @@ SIR.json('data/india/process.json').then(function (P) {
     'In Phase II, all ' + p2.length + ' states and union territories had their dates moved a week, and the Commission named ' + p2twice + ' of them for a second move. In Phase III, the dates of ' + p3moved + ' of ' + p3.length + ' states and union territories moved by orders and notes we could read.',
     'What an elector had to show changed as it went. Eleven documents in June 2025, Aadhaar added for identity on the Supreme Court\'s order in September, no documents while forms were filled in Phase II, and documents collected at home from those sent notices from 26 September 2026.',
     bySC + ' of the ' + T.length + ' entries below are orders or the judgment of the Supreme Court. In West Bengal it had judges decide the claims, and 60,06,675 names were marked under adjudication on the final roll.'
-  ], 'Only documents issued by the Election Commission, the Supreme Court and the states\' election officers are used. Some orders could not be found, and they are listed at the foot of the page.');
+  ], 'Every section rests on documents issued by the Election Commission, the Supreme Court and the states\' election officers, except the list of press reports, which is marked as such. Some orders could not be found, and they are listed at the foot of the page.');
 
   document.getElementById('kpis').innerHTML = [
     [T.length, 'rule and schedule changes, each with its document'],
@@ -116,7 +116,7 @@ SIR.json('data/india/process.json').then(function (P) {
   draw();
 
   // what made it harder to stay on the roll
-  var srcs = function (a) { return '<p class="psrc">' + a.map(function (x) { return '<a href="' + E(x.url) + '" rel="noopener" target="_blank">' + E(x.name) + '</a>'; }).join(' · ') + '</p>'; };
+  var srcs = function (a) { return '<p class="psrc">' + (a || []).map(function (x) { return '<a href="' + E(x.url) + '"' + (x.url.charAt(0) === '#' ? '' : ' rel="noopener" target="_blank"') + '>' + E(x.name) + '</a>'; }).join(' · ') + '</p>'; };
   document.getElementById('burdens').innerHTML = P.burdens.map(function (b) {
     return '<li><h3>' + E(b.title) + '</h3><p>' + E(b.text) + '</p>' + srcs(b.src) + '</li>';
   }).join('');
@@ -162,7 +162,7 @@ SIR.json('data/india/process.json').then(function (P) {
     document.getElementById('tClaims').innerHTML = '<thead><tr><th scope="col" class="l">State or union territory</th><th scope="col">Removed at the draft</th><th scope="col">Added after the draft</th><th scope="col">Removed after the draft</th><th scope="col">Added for every 100 removed at the draft</th></tr></thead><tbody>' +
       rows.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.s) + '</th><td>' + N(r.rm) + '</td><td>' + N(r.ad) + '</td><td>' + N(r.ra) + '</td><td>' + r.per.toFixed(1) + '</td></tr>'; }).join('') + '</tbody>';
     var low = rows.filter(function (r) { return r.per < 10; }).length;
-    document.getElementById('nClaims').textContent = 'In ' + low + ' of these ' + rows.length + ' states and union territories, fewer than 10 names were added after the draft for every 100 removed at it. ' + P.claims_note + ' The other states published only the net change from draft to final, or no final roll yet, and are on the All India page.';
+    document.getElementById('nClaims').innerHTML = 'In ' + low + ' of these ' + rows.length + ' states and union territories, fewer than 10 names were added after the draft for every 100 removed at it. ' + E(P.claims_note) + ' The other states published only the net change from draft to final, or no final roll yet, and are on the <a href="../">All India page</a>.' + srcs(P.claims_src);
   }).catch(function () {});
 
   // the schedules
