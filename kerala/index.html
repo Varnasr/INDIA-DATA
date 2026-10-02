@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../assets/i18n.js?v=c306527f"></script>
+<script src="../assets/i18n.js?v=0ba5f131"></script>
 <title>Kerala SIR 2026: the roll, by district and constituency</title>
 <meta name="description" content="How much smaller each district and constituency&#x27;s electoral roll was at Kerala&#x27;s SIR draft than in January 2025, who was missing, and how much of it came back before the 2026 election.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%238a5a12'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
-<link rel="stylesheet" href="../assets/sir.css?v=77c99fbd">
+<link rel="stylesheet" href="../assets/sir.css?v=aaaac0b2">
 </head>
 <body class="kl" data-place="kl" data-root="../">
 <a class="skip" href="#main">Skip to content</a>
@@ -34,22 +34,22 @@
   </div>
   <p class="finding" id="fWater"></p>
 
-  <h2>How much smaller each district's roll was at the draft</h2>
-  <p class="sub">The Chief Electoral Officer has published no count of the names left off the draft, by district or constituency. Every roll is published by constituency, so this is the fall from the roll of January 2025 to the draft of 23 December 2025, for every 100 electors on the January roll. It takes in the ordinary changes of 2025 as well as the revision, though for the state as a whole the two are within half a lakh of each other.</p>
+  <h2>How much smaller each constituency's roll was at the draft</h2>
+  <p class="sub">The Chief Electoral Officer has published no count of the names left off the draft, by district or constituency. Every roll is published by constituency, so each dot here is one constituency's fall from the roll of January 2025 to the draft of 23 December 2025, for every 100 electors on the January roll, grouped by district. It takes in the ordinary changes of 2025 as well as the revision, though for the state as a whole the two are within half a lakh of each other. Hover or tap a dot for its name.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="cDist"></div></div>
   </div>
   <p class="finding" id="fDist"></p>
 
-  <h2>At the draft and at the election</h2>
-  <p class="sub">For each district, the grey dot is the fall from January 2025 to the draft, and the blue dot the fall to the roll the election was held on, both for every 100 electors on the January roll. A blue dot below zero means the roll was larger at the election than in January 2025. The rise after the draft counts new voters as well as names put back.</p>
+  <h2>Four rolls, district by district</h2>
+  <p class="sub">Each small chart follows one district's roll through the four published rolls, January 2025, the draft, the final roll and March 2026, with January 2025 set at 100. The dashed line is the January level. Thiruvananthapuram is in red. The rise after the draft counts new voters as well as names put back.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vBack"></div></div>
   </div>
   <p class="finding" id="fBack"></p>
 
   <h2>Women</h2>
-  <p class="sub">For each district, the grey dot is women's share of the January 2025 roll and the red dot women's share of the fall to the draft. Where the red dot is to the right, more women left the roll than their share of it.</p>
+  <p class="sub">Each dot is a constituency. Across, women's share of its January 2025 roll; up, women's share of the fall in its roll at the draft. Dots above the dashed line are seats where more women left the roll than their share of it. Hover or tap a dot for its name.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWomen"></div></div>
   </div>
@@ -65,7 +65,7 @@
 </main>
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../">About this site</a></footer>
 <script src="../assets/sir.js?v=b4b56b29"></script>
-<script src="../assets/viz.js?v=0095908e"></script>
+<script src="../assets/viz.js?v=b56b0ee2"></script>
 <script src="../assets/faq/kerala.js?v=fcf51198"></script>
 <script>
 Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/districts.json'), SIR.json('data/kerala/constituencies.json')]).then(function (r) {
@@ -79,23 +79,26 @@ Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/distric
   document.getElementById('fWater').innerHTML = L('<b>The draft roll was {f} smaller than the roll of January 2025, {p} of every 100 electors.</b> The final roll and the additions before the election brought back {b}, so the roll the election was held on was {e} smaller than in January 2025. The rise after the draft counts new voters as well as names put back.', {
     f: SIR.lakh(S.fall_draft), p: SIR.d(S.draft_per_100, 1), b: SIR.lakh(S.election - S.draft), e: SIR.lakh(S.fall) });
 
-  VIZ.lollipop('cDist', { label: L('Fall in the roll from January 2025 to the draft, per 100 electors, by district'), axis: L('Fall per 100 electors on the January 2025 roll'),
-    rows: D.map(function (d) { return { name: d.district, v: d.draft_per_100, text: SIR.d(d.draft_per_100, 1), tok: tvm(d) ? '--fill-red' : '--fill-navy', hi: tvm(d) }; }) });
+  VIZ.strip('cDist', { label: L('Fall in the roll from January 2025 to the draft, per 100 electors, every constituency by district'), axis: L('Fall per 100 electors on the January 2025 roll'), r: 4.5,
+    key: [[L('Thiruvananthapuram district'), '--fill-red'], [L('Other districts'), '--fill-navy']],
+    rows: D.map(function (d) { return { name: d.district, tok: tvm(d) ? '--fill-red' : '--fill-navy',
+      points: A.filter(function (a) { return a.district === d.district; }).map(function (a) { return { v: Math.max(a.draft_per_100, 0), label: L('{n} ({d}): {v} per 100', { n: a.name, d: a.district, v: SIR.d(a.draft_per_100, 1) }) }; }) }; }) });
   var lo = D[D.length - 1];
   document.getElementById('fDist').innerHTML = L('<b>{a}\'s roll was {t} per 100 smaller at the draft, against {s} for the state.</b> {b} and {c} come next. {lo} fell the least, {lov}. Across the 140 constituencies the fall runs from {min} per 100 in {minn} to {max} in {maxn}.', {
     a: D[0].district, t: SIR.d(D[0].draft_per_100, 1), s: SIR.d(S.draft_per_100, 1), b: D[1].district, c: D[2].district, lo: lo.district, lov: SIR.d(lo.draft_per_100, 1), min: SIR.d(S.rate_min_v, 1), minn: S.rate_min, max: SIR.d(S.rate_max_v, 1), maxn: S.rate_max });
 
-  VIZ.dumbbell('vBack', { label: L('Fall in the roll from January 2025 to the draft and to the 2026 election roll, per 100 electors, by district'), min: -10, ref: 0,
-    aName: L('To the draft, per 100'), aTok: '--fill-grey', bName: L('To the 2026 election roll, per 100'), bTok: '--fill-navy',
-    rows: D.map(function (d) { return { name: d.district, a: d.draft_per_100, b: d.per_100 }; }) });
+  VIZ.multiples('vBack', { label: L('Each district\'s roll at the four published rolls, January 2025 = 100'), ref: 100,
+    steps: [L('January 2025'), L('Draft'), L('Final roll'), L('March 2026')],
+    panels: D.map(function (d) { return { name: d.district, hi: tvm(d), v: [d.roll_2025, d.draft, d.final, d.election].map(function (v) { return 100 * v / d.roll_2025; }) }; }) });
   var grew = D.filter(function (d) { return d.per_100 < 0; });
   document.getElementById('fBack').innerHTML = L('<b>In {a} and {b} the roll was still about {t} per 100 smaller at the election than in January 2025.</b> In {k} districts it had grown past its January size by the election, {g} among them. The rise after the draft counts new voters as well as names put back, so it cannot show how many of those left off were restored.', {
     a: D[0].district, b: D[1].district, t: SIR.d((D[0].per_100 + D[1].per_100) / 2, 0), k: grew.length, g: grew.map(function (d) { return d.district; }).join(', ') });
 
-  var DW = D.slice().sort(function (a, b) { return (b.women_fall_pct - b.women_2025_pct) - (a.women_fall_pct - a.women_2025_pct); });
-  VIZ.dumbbell('vWomen', { label: L('Women\'s share of the January 2025 roll and of the fall to the draft, by district'), min: 40, step: 5, ref: 50,
-    aName: L('Women\'s share of the January 2025 roll, %'), aTok: '--fill-grey', bName: L('Women\'s share of the fall, %'), bTok: '--fill-red',
-    rows: DW.map(function (d) { return { name: d.district, a: d.women_2025_pct, b: d.women_fall_pct }; }) });
+  VIZ.scatter('vWomen', { label: L('Women\'s share of the January 2025 roll and of the fall in the roll at the draft, every constituency'), diag: true,
+    xAxis: L('Women\'s share of the January 2025 roll, %'), yAxis: L('Women\'s share of the fall, %'), diagLabel: L('Same share'),
+    key: [[L('Thiruvananthapuram district'), '--fill-red'], [L('Other districts'), '--fill-navy']],
+    points: A.map(function (a) { return { x: a.women_2025_pct, y: a.women_fall_pct, tok: a.district === 'Thiruvananthapuram' ? '--fill-red' : '--fill-navy',
+      label: L('{n} ({d}): women {w} of the roll, {f} of the fall', { n: a.name, d: a.district, w: SIR.pct(a.women_2025_pct), f: SIR.pct(a.women_fall_pct) }) }; }) });
   document.getElementById('fWomen').innerHTML = L('<b>Women were {wf} of the fall to the draft, against {w} of the roll before it.</b> They were more than their share in all {n} districts and in {k} of the {acs} constituencies. Of the rise after the draft, women were {wa}.', {
     wf: SIR.pct(S.women_fall_pct), w: SIR.pct(S.women_2025_pct), n: S.districts, k: S.acs_women_over, acs: S.acs, wa: SIR.pct(S.women_added_pct) });
 

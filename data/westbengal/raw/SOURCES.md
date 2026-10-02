@@ -287,3 +287,26 @@ adjudication_district.csv was written.
    offers only per-part lists of named electors, which were not opened.
 
 Not opened, again: no list of individual electors was downloaded.
+
+## adjudication_state.csv (added 2026-10-02)
+
+measure, value, date, source_type, source_url, note. The adjudication of the
+60,06,675 names marked "under adjudication" on the final roll, and the appeals
+that followed, for the state as a whole.
+
+- `under_adjudication` is primary (PN-05-2026). Every other row is the
+  Election Commission's own figure **as reported**: the split into found
+  eligible and not eligible from the Commission's data release of 7 April
+  2026 as The Indian Express reproduced it, and the appeals from the
+  Commission's affidavit to the Supreme Court of 16 September 2026 as reported.
+  The documents themselves were not reached (ECI's site refuses the sandbox).
+  `source_type` says which is which, and the page says "as reported".
+- The 1,607 restored before polling (139 and 1,468 in the two phases) rests on
+  press reports alone.
+- Checks, in `scripts/build_westbengal.py`: the two kinds of appeal add to the
+  total, and decided plus pending equals the total. Found eligible plus found
+  not eligible is 59,84,512, which is **22,163 short of the 60,06,675** under
+  adjudication; the reports do not say where those cases went, and the page
+  shows them as not accounted for rather than assigning them.
+- The adjudication is not published by district or constituency anywhere
+  reached, so these figures stay at the state level.

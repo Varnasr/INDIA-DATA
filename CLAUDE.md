@@ -302,6 +302,13 @@ The build fails unless the 34 districts add up to the CEO's state row
 - The gap between the draft fall and the election-roll fall is where the
   adjudication cuts show, largest in Murshidabad, Malda and the Dinajpurs;
   say it is the nearest the tables come, not a count.
+- **Adjudication outcomes are state totals, as reported.**
+  `raw/adjudication_state.csv` holds the Commission's split (32,68,119 found
+  eligible, 27,16,393 not) and its 16 September affidavit's appeals (22,21,118
+  by the excluded, 16,10,311 against inclusion, 37,05,235 pending) as the press
+  reported them, flagged `reported`; 22,163 cases are not accounted for and are
+  shown as such. Say "as reported" wherever they appear. Religion splits of the
+  adjudicated from press analyses are not used.
 - `results_2021.csv` is secondary and no page uses it. Compilations of AC
   removals by others are recorded in `SOURCES.md` and not used.
 
@@ -317,6 +324,15 @@ new voters (and overseas electors, which nearly tripled), so it is never
 called names restored; five northern districts end above their January roll.
 Party comparisons are by party (INC, CPI(M), IUML, others), not by front,
 because the independents' fronts are not in the data.
+
+## Charts
+
+`assets/viz.js` draws every non-Chart.js chart: sankey, waterfall, strip
+(beeswarm), dumbbell, forest, lollipop, rank, dots, heat, and the three added
+for the state pages, `multiples` (small multiples of a path, one shared scale),
+`slope` (two columns, highlighted rows named on the right, nudged apart) and
+`scatter` (SVG, optional y = x line over the shared range). Vary the form
+within a page; a page of one chart type reads as a table.
 
 ## Privacy
 

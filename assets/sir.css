@@ -432,6 +432,12 @@ html[data-lang="ur"] .nav-tab,html[data-lang="ur"] button,html[data-lang="ur"] .
 .viz .vcell{fill:var(--ink);font-size:12px;font-weight:600}
 .viz .vcell.on{fill:#fff}
 .viz .vnone{fill:var(--line);opacity:.4}
+.viz .vval.small{font-size:10.5px}
+.viz .vpanel{fill:var(--soft);stroke:none}
+.viz .vline{fill:none;stroke-width:2.5;stroke-linejoin:round}
+.viz .vslope line{stroke-width:1.6;opacity:.5}
+.viz .vslope.hi line{stroke-width:2.6;opacity:.95}
+.viz .vslope:hover line{opacity:1;stroke-width:3}
 .bigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
 .big{display:flex;flex-direction:column;gap:.25rem}
 .big b{font-size:clamp(2.2rem,6vw,3.4rem);line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}

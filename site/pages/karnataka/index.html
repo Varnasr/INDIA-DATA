@@ -34,7 +34,7 @@
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
-  <p class="sub">For each district, the rise in the roll from the draft to 25 September, for every 100 names left off the draft. The rise counts new voters as well as names put back, so it is the most that could have been restored.</p>
+  <p class="sub">Each small chart follows one district's roll from 16 June to the draft and to 25 September, with 16 June set at 100. The dashed line is the June level. Bengaluru's four districts are in red. A rise after the draft counts new voters as well as names put back, so it is the most that could have been restored.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vBack"></div></div>
   </div>
@@ -84,9 +84,9 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
     { name: L('Already enrolled'), v: S.reasons.duplicate, kind: 'down' }, { name: L('Other'), v: S.reasons.other, kind: 'down' },
     { name: L('Draft roll'), v: S.draft, kind: 'total' }, { name: L('Net change after the draft'), v: S.added_sep, kind: 'up' },
     { name: L('Roll of 25 September'), v: S.sep, kind: 'total' }] });
-  var BK = D.slice().sort(function (a, b) { return b.added_sep / b.removed - a.added_sep / a.removed; });
-  VIZ.lollipop('vBack', { label: L('Rise in the roll from the draft to 25 September, per 100 names removed, by district'), axis: L('Rise per 100 names removed'),
-    rows: BK.map(function (d) { var v = 100 * d.added_sep / d.removed; return { name: d.district, v: v, text: SIR.d(Math.abs(v) < 0.05 ? 0 : v, 1), tok: tok(d), hi: d.bengaluru }; }) });
+  VIZ.multiples('vBack', { label: L('Each district\'s roll on 16 June, at the draft and on 25 September, 16 June = 100'), ref: 100,
+    steps: [L('16 June'), L('Draft'), L('25 September')],
+    panels: D.map(function (d) { return { name: d.district, hi: d.bengaluru, v: [100, 100 * d.draft / d.before, 100 * d.sep / d.before] }; }) });
   document.getElementById('fBack').innerHTML = L('<b>By 25 September the roll had risen by {a} since the draft, {m} of the {r} names removed.</b> In Bengaluru it rose by {ba}, against {bn} names removed. Elsewhere the rise came to {rm} of the names removed. The final roll may change this, and the rise includes new voters.', {
     a: SIR.n(S.added_sep), m: SIR.pct(S.made_up_pct), r: SIR.lakh(S.removed), ba: SIR.n(B.added_sep), bn: SIR.lakh(B.removed), rm: SIR.pct(R.made_up_pct) });
 

@@ -238,6 +238,12 @@
    "/bihar/results/"
   ]
  },
+ "16 June": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "2. Seats, grouped by who held them": {
   "kind": "markup",
   "pages": [
@@ -378,6 +384,12 @@
   "kind": "script",
   "pages": [
    "/bihar/explorer/"
+  ]
+ },
+ "25 September": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
   ]
  },
  "3. Booths within the same seat": {
@@ -654,6 +666,12 @@
   "kind": "script",
   "pages": [
    "/bihar/results/"
+  ]
+ },
+ "<b>Of the {u} names held back, {e} were found eligible and {n} were found not eligible, {p} of the cases.</b> {a} of those found not eligible appealed, and {r} were restored in time to vote. Another {i} appeals asked the tribunals to remove names the judicial officers had kept. On 16 September {pp} of all {t} appeals were still undecided. These are the Election Commission's figures as reported, and they are not published by district.": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
   ]
  },
  "<b>Once each seat's 2020 result is allowed for, the NDA's lead over INDIA grew by about the same amount whether a seat lost few names or many, between {lo} and {hi} points in each third.</b> Before that allowance INDIA seemed to lose most where the fewest names were removed ({i0} points against {i2}). Part of that is seats giving back in 2025 what they had gained in 2020, which happens whatever the removals. Votes cast grew by {v0}%, {v1}% and {v2}%, so they did not grow less where more names came off the roll.": {
@@ -1670,10 +1688,23 @@
    "/bihar/"
   ]
  },
- "At the draft and at the election": {
-  "kind": "markup",
+ "At the draft": {
+  "kind": "script",
   "pages": [
-   "/kerala/"
+   "/tamilnadu/",
+   "/westbengal/"
+  ]
+ },
+ "At the election": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
+ "At the final roll": {
+  "kind": "script",
+  "pages": [
+   "/tamilnadu/"
   ]
  },
  "B: strict": {
@@ -3258,6 +3289,13 @@
    "/westbengal/method/"
   ]
  },
+ "Draft": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/",
+   "/kerala/"
+  ]
+ },
  "Draft and final rolls by state": {
   "kind": "markup",
   "pages": [
@@ -3348,6 +3386,18 @@
    "/tamilnadu/"
   ]
  },
+ "Each district's roll at the four published rolls, January 2025 = 100": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
+  ]
+ },
+ "Each district's roll on 16 June, at the draft and on 25 September, 16 June = 100": {
+  "kind": "script",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
  "Each district's share of women among those removed, against women's share of its roll before the revision. A point above the line is a district where women were removed out of proportion.": {
   "kind": "markup",
   "pages": [
@@ -3394,6 +3444,12 @@
   "kind": "markup",
   "pages": [
    "/tamilnadu/elections/"
+  ]
+ },
+ "Each dot is a constituency. Across, women's share of its January 2025 roll; up, women's share of the fall in its roll at the draft. Dots above the dashed line are seats where more women left the roll than their share of it. Hover or tap a dot for its name.": {
+  "kind": "markup",
+  "pages": [
+   "/kerala/"
   ]
  },
  "Each dot is a district: the women's share of those aged 18 to 29 marked shifted, against the share of its women who had moved on marriage in the ten years before the 2011 census.": {
@@ -3456,6 +3512,18 @@
    "/assets/faq/hyd.js"
   ]
  },
+ "Each line is a district. On the left, how much smaller its roll was at the draft of December 2025 than in 2024; on the right, how much smaller at the roll the election was held on, both for every 100 electors on the 2024 roll. The steeper the climb, the more of the fall came after the draft, mostly the names held back for adjudication. The four districts where it climbed most are named in red. Hover or tap a line for its district.": {
+  "kind": "markup",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
+ "Each line is a district. On the left, the names left off the draft roll for every 100 electors on the roll before the revision; on the right, the fall that remains on the final roll, after the names added and removed on claims and objections. The flatter the line, the less was made up. Chennai is in red. Hover or tap a line for its district.": {
+  "kind": "markup",
+  "pages": [
+   "/tamilnadu/"
+  ]
+ },
  "Each name on the phase 1 lists has the reason the officer gave for removing it. The four reasons are counted as written and none is regrouped. The counts agree with the booth list in all 77,837 booths, and the counts of women and men agree with the Chief Electoral Officer's phase 1 figures in every constituency. The phase 2 lists give no reasons.": {
   "kind": "markup",
   "pages": [
@@ -3490,6 +3558,18 @@
   "kind": "markup",
   "pages": [
    "/bihar/results/"
+  ]
+ },
+ "Each small chart follows one district's roll from 16 June to the draft and to 25 September, with 16 June set at 100. The dashed line is the June level. Bengaluru's four districts are in red. A rise after the draft counts new voters as well as names put back, so it is the most that could have been restored.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/"
+  ]
+ },
+ "Each small chart follows one district's roll through the four published rolls, January 2025, the draft, the final roll and March 2026, with January 2025 set at 100. The dashed line is the January level. Thiruvananthapuram is in red. The rise after the draft counts new voters as well as names put back.": {
+  "kind": "markup",
+  "pages": [
+   "/kerala/"
   ]
  },
  "Each state's figure is the number of electors on the roll before the revision who were not carried onto the draft roll when enumeration ended, with the reason the booth officer gave for each. Every state published a split by reason at that stage. Names removed later, at hearings and on objections before the final roll, are counted separately, because no state has said why they were removed.": {
@@ -4000,19 +4080,7 @@
    "/westbengal/"
   ]
  },
- "Fall in the roll from 2024 to the draft and to the 2026 election, per 100 electors, by district": {
-  "kind": "script",
-  "pages": [
-   "/westbengal/"
-  ]
- },
- "Fall in the roll from January 2025 to the draft and to the 2026 election roll, per 100 electors, by district": {
-  "kind": "script",
-  "pages": [
-   "/kerala/"
-  ]
- },
- "Fall in the roll from January 2025 to the draft, per 100 electors, by district": {
+ "Fall in the roll from January 2025 to the draft, per 100 electors, every constituency by district": {
   "kind": "script",
   "pages": [
    "/kerala/"
@@ -4022,6 +4090,12 @@
   "kind": "script",
   "pages": [
    "/westbengal/elections/"
+  ]
+ },
+ "Fall in the roll per 100 electors on the 2024 roll, at the draft and at the 2026 election roll, by district": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
   ]
  },
  "Fall in the roll, 2024 to 2026": {
@@ -4237,40 +4311,10 @@
    "/assets/faq/hyd.js"
   ]
  },
- "For each district, the grey dot is the fall from January 2025 to the draft, and the blue dot the fall to the roll the election was held on, both for every 100 electors on the January roll. A blue dot below zero means the roll was larger at the election than in January 2025. The rise after the draft counts new voters as well as names put back.": {
-  "kind": "markup",
-  "pages": [
-   "/kerala/"
-  ]
- },
- "For each district, the grey dot is the fall from the 2024 roll to the draft roll of December 2025, and the blue dot the fall to the roll the election was held on, both for every 100 electors on the 2024 roll. The gap between them is what happened after the draft, mostly the names held back for adjudication.": {
-  "kind": "markup",
-  "pages": [
-   "/westbengal/"
-  ]
- },
- "For each district, the grey dot is the names left off the draft roll for every 100 electors on the roll before the revision. The blue dot is the fall that remains on the final roll, after the names added and removed on claims and objections.": {
-  "kind": "markup",
-  "pages": [
-   "/tamilnadu/"
-  ]
- },
  "For each district, the grey dot is women's share of the 2024 roll and the red dot women's share of the fall in the roll. Where the red dot is to the right, more women left the roll than their share of it.": {
   "kind": "markup",
   "pages": [
    "/westbengal/"
-  ]
- },
- "For each district, the grey dot is women's share of the January 2025 roll and the red dot women's share of the fall to the draft. Where the red dot is to the right, more women left the roll than their share of it.": {
-  "kind": "markup",
-  "pages": [
-   "/kerala/"
-  ]
- },
- "For each district, the rise in the roll from the draft to 25 September, for every 100 names left off the draft. The rise counts new voters as well as names put back, so it is the most that could have been restored.": {
-  "kind": "markup",
-  "pages": [
-   "/karnataka/"
   ]
  },
  "For each state whose final roll is out, this gives the draft and final rolls and the names added on claims and removed on objections in between, from one source per state. <b>Adds up</b> means the draft plus additions less removals equals the final roll. <b>Net only</b> means the state published the draft and final rolls but not the additions and removals behind the difference, and the figure reported as additions was in fact the net rise. <b>Does not add up</b> means the published figures do not match, as the note explains. The fall at the final roll is the names removed at the draft less the rise from draft to final. New electors are part of that rise, and no state has said how many of those added had been removed at the draft.": {
@@ -4303,6 +4347,12 @@
    "/bihar/method/"
   ]
  },
+ "Found eligible": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
  "Four in ten electors in five Old City constituencies were struck off the roll, {del} people, {rate} of the {el} on it.": {
   "kind": "script",
   "pages": [
@@ -4313,6 +4363,12 @@
   "kind": "markup",
   "pages": [
    "/kerala/method/"
+  ]
+ },
+ "Four rolls, district by district": {
+  "kind": "markup",
+  "pages": [
+   "/kerala/"
   ]
  },
  "From 2024 to the election, women were {wf} of the fall in the roll and {w24} of the 2024 roll, and more than their share in {k} of the {n} districts.": {
@@ -5068,6 +5124,12 @@
    "/westbengal/elections/"
   ]
  },
+ "How much smaller each constituency's roll was at the draft": {
+  "kind": "markup",
+  "pages": [
+   "/kerala/"
+  ]
+ },
  "How much smaller each district and constituency's electoral roll was at Kerala's SIR draft than in January 2025, who was missing, and how much of it came back before the 2026 election.": {
   "kind": "markup",
   "pages": [
@@ -5078,12 +5140,6 @@
   "kind": "markup",
   "pages": [
    "/westbengal/"
-  ]
- },
- "How much smaller each district's roll was at the draft": {
-  "kind": "markup",
-  "pages": [
-   "/kerala/"
   ]
  },
  "How much smaller was Kerala's roll after the revision?": {
@@ -5622,6 +5678,18 @@
    "/assets/faq/hyd.js"
   ]
  },
+ "January 2025": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
+  ]
+ },
+ "Judicial officers appointed on the Supreme Court's direction found {e} of the {u} eligible and {n} not eligible. {a} of those found not eligible appealed to the tribunals, and {r} were restored in time to vote. Another {i} appeals asked the tribunals to remove names the judicial officers had kept, and on 16 September {pp} of all appeals were still undecided. These are the Election Commission's figures as reported.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/westbengal.js"
+  ]
+ },
  "Karnataka 2026": {
   "kind": "markup",
   "pages": [
@@ -5881,12 +5949,6 @@
    "/tamilnadu/elections/"
   ]
  },
- "Left off the draft, per 100": {
-  "kind": "script",
-  "pages": [
-   "/tamilnadu/"
-  ]
- },
  "Light": {
   "kind": "script",
   "pages": [
@@ -6033,6 +6095,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
+  ]
+ },
+ "March 2026": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
   ]
  },
  "Margin": {
@@ -6852,8 +6920,7 @@
  "Net fall at the final roll, per 100": {
   "kind": "script",
   "pages": [
-   "/india/",
-   "/tamilnadu/"
+   "/india/"
   ]
  },
  "Net fall per 100": {
@@ -7078,6 +7145,24 @@
    "/hyderabad/method/"
   ]
  },
+ "Not accounted for": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
+ "Not eligible, appealed": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
+ "Not eligible, no appeal": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
  "Not in either list": {
   "kind": "script",
   "pages": [
@@ -7266,6 +7351,12 @@
    "/bihar/people/",
    "/bihar/results/",
    "/karnataka/"
+  ]
+ },
+ "Other districts": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
   ]
  },
  "Other parties": {
@@ -8517,18 +8608,6 @@
    "/bihar/results/"
   ]
  },
- "Rise in the roll from the draft to 25 September, per 100 names removed, by district": {
-  "kind": "script",
-  "pages": [
-   "/karnataka/"
-  ]
- },
- "Rise per 100 names removed": {
-  "kind": "script",
-  "pages": [
-   "/karnataka/"
-  ]
- },
  "Roll 2024": {
   "kind": "script",
   "pages": [
@@ -8692,6 +8771,12 @@
   "kind": "script",
   "pages": [
    "/india/"
+  ]
+ },
+ "Same share": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
   ]
  },
  "Sample Registration System, Statistical Report 2024, for death rates by age and sex (Table 8) and the population by age (Table 1). Civil Registration System 2024, for the mid-year population and registered deaths by age and sex": {
@@ -9613,6 +9698,12 @@
    "/bihar/people/"
   ]
  },
+ "The 60 lakh names marked \"under adjudication\" on the final roll were decided by judicial officers appointed on the Supreme Court's direction, and their orders could be appealed to tribunals. The split and the appeals are the Election Commission's figures as they were reported, for the state as a whole. Hover or tap a flow for its count.": {
+  "kind": "markup",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
  "The All India report on the Special Intensive Revision. It covers the reasons recorded for removals in each state and union territory, women among the removed, what goes with the removal rate, and what the Election Commission should do.": {
   "kind": "markup",
   "pages": [
@@ -9631,7 +9722,7 @@
    "/assets/faq/tamilnadu.js"
   ]
  },
- "The Chief Electoral Officer has published no count of the names left off the draft, by district or constituency. Every roll is published by constituency, so this is the fall from the roll of January 2025 to the draft of 23 December 2025, for every 100 electors on the January roll. It takes in the ordinary changes of 2025 as well as the revision, though for the state as a whole the two are within half a lakh of each other.": {
+ "The Chief Electoral Officer has published no count of the names left off the draft, by district or constituency. Every roll is published by constituency, so each dot here is one constituency's fall from the roll of January 2025 to the draft of 23 December 2025, for every 100 electors on the January roll, grouped by district. It takes in the ordinary changes of 2025 as well as the revision, though for the state as a whole the two are within half a lakh of each other. Hover or tap a dot for its name.": {
   "kind": "markup",
   "pages": [
    "/kerala/"
@@ -10307,6 +10398,12 @@
    "/bihar/people/"
   ]
  },
+ "The names held back for adjudication": {
+  "kind": "markup",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
  "The names left off Karnataka's draft electoral roll in the Special Intensive Revision, by election district and recorded reason, with the roll during claims and objections.": {
   "kind": "markup",
   "pages": [
@@ -10795,6 +10892,12 @@
    "/kerala/elections/"
   ]
  },
+ "Thiruvananthapuram district": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
+  ]
+ },
  "This cannot be counted from the Chief Electoral Officer's tables. The roll before the revision is published as a total only, and the names removed are not split by sex. Women were {d} of the draft roll and {f} of the roll of 25 September.": {
   "kind": "script",
   "pages": [
@@ -10855,20 +10958,6 @@
    "/bihar/method/"
   ]
  },
- "To the 2026 election roll, per 100": {
-  "kind": "script",
-  "pages": [
-   "/kerala/",
-   "/westbengal/"
-  ]
- },
- "To the draft, per 100": {
-  "kind": "script",
-  "pages": [
-   "/kerala/",
-   "/westbengal/"
-  ]
- },
  "Totals, phase 2, women and men": {
   "kind": "markup",
   "pages": [
@@ -10906,6 +10995,12 @@
   "kind": "script",
   "pages": [
    "/bihar/"
+  ]
+ },
+ "Under adjudication": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
   ]
  },
  "Under both surname classifications, {up} families are removed at or above their share of the population and {down} below it.": {
@@ -11300,6 +11395,18 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "What happened to the names held back for adjudication": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
+ "What happened to the names held back for adjudication?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/westbengal.js"
   ]
  },
  "What has been put back so far": {
@@ -12344,7 +12451,7 @@
    "/westbengal/"
   ]
  },
- "Women's share of the January 2025 roll and of the fall to the draft, by district": {
+ "Women's share of the January 2025 roll and of the fall in the roll at the draft, every constituency": {
   "kind": "script",
   "pages": [
    "/kerala/"
@@ -12542,6 +12649,18 @@
    "/bihar/method/"
   ]
  },
+ "appeals against names the judicial officers had kept": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
+ "appeals by those found not eligible": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
  "booth size": {
   "kind": "script",
   "pages": [
@@ -12711,6 +12830,12 @@
    "/bihar/explorer/"
   ]
  },
+ "names restored by the tribunals in time to vote": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
+  ]
+ },
  "no 2002 linkage in this file": {
   "kind": "script",
   "pages": [
@@ -12742,6 +12867,12 @@
   "pages": [
    "/bihar/",
    "/bihar/people/"
+  ]
+ },
+ "of all appeals still undecided on 16 September 2026": {
+  "kind": "script",
+  "pages": [
+   "/westbengal/"
   ]
  },
  "of all removals were in border seats": {
@@ -13432,9 +13563,16 @@
    "/bihar/people/"
   ]
  },
+ "{n} ({d}): women {w} of the roll, {f} of the fall": {
+  "kind": "script",
+  "pages": [
+   "/kerala/"
+  ]
+ },
  "{n} ({d}): {v} per 100": {
   "kind": "script",
   "pages": [
+   "/kerala/",
    "/kerala/elections/",
    "/tamilnadu/elections/",
    "/westbengal/elections/"

@@ -53,7 +53,7 @@
   function sankey(box, o) {
     measure(box);
     var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), H = o.height || (phone() ? 440 : 400);
-    var lw = phone() ? 92 : 200, nw = 12, gap = 10, top = 14, minH = phone() ? 34 : 30;
+    var lw = o.lw || (phone() ? 92 : 200), nw = 12, gap = 10, top = 14, minH = o.minH || (phone() ? 34 : 30);
     var s = svgIn(box, W, H, o.label);
     var total = o.links.reduce(function (a, l) { return a + l.v; }, 0);
     function lay(nodes, key) {
@@ -358,6 +358,96 @@
   //   two or three series side by side, unstacked, becomes a dot plot.
   // Histograms, stacked bars, floating bars, lines and scatters are left to
   // Chart.js, where bars are the right form.
+  // ---- small multiples: one little line chart per panel, all on one scale,
+  // so a reader can compare the shape of each path at a glance.
+  // panels [{name, v: [..], hi}], steps: labels for the points, ref: a level
+  // drawn in every panel (100 for an index), fmtv: label for a value
+  function multiples(box, o) {
+    measure(box);
+    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), cols = phone() ? 2 : Math.max(3, Math.min(5, Math.floor(W / 220)));
+    var n = o.panels.length, rows = Math.ceil(n / cols), pw = W / cols, ph = phone() ? 112 : 124, foot = 34;
+    var H = rows * ph + foot, s = svgIn(box, W, H, o.label);
+    var all = [].concat.apply([], o.panels.map(function (p) { return p.v; })).concat(o.ref != null ? [o.ref] : []);
+    var mn = Math.min.apply(null, all), mx = Math.max.apply(null, all), pad = (mx - mn) * 0.08;
+    mn -= pad; mx += pad;
+    var k = o.steps.length, fv = o.fmtv || function (v) { return SIR.d(v, 1); };
+    o.panels.forEach(function (p, i) {
+      var c = i % cols, r = Math.floor(i / cols), x0 = c * pw + 10, y0 = r * ph, iw = pw - 56, top = y0 + 26, bot = y0 + ph - 12;
+      var x = function (j) { return x0 + 4 + iw * j / (k - 1); }, y = function (v) { return top + (bot - top) * (mx - v) / (mx - mn); };
+      el('text', { x: x0, y: y0 + 13, class: p.hi ? 'vname' : 'vname light' }, s, SIR.short(p.name));
+      el('rect', { x: x0, y: top - 4, width: iw + 8, height: bot - top + 8, rx: 6, class: 'vpanel' }, s);
+      if (o.ref != null) el('line', { x1: x0, x2: x0 + iw + 8, y1: y(o.ref), y2: y(o.ref), class: 'vlink' }, s);
+      var col = p.hi ? '--fill-red' : (o.tok || '--fill-navy');
+      el('path', { d: p.v.map(function (v, j) { return (j ? 'L' : 'M') + x(j) + ',' + y(v); }).join(' '), class: 'vline', style: stroke(col) }, s);
+      p.v.forEach(function (v, j) {
+        var d = el('circle', { cx: x(j), cy: y(v), r: j === k - 1 || j === 0 ? 3.5 : 2.5, style: paint(col) }, s);
+        el('title', {}, d, p.name + ', ' + o.steps[j] + ': ' + fv(v));
+      });
+      el('text', { x: x(k - 1) + 7, y: y(p.v[k - 1]), 'dominant-baseline': 'middle', class: 'vval' }, s, fv(p.v[k - 1]));
+      // the lowest point named where it sits, so the dip can be read off
+      var lowJ = p.v.indexOf(Math.min.apply(null, p.v));
+      if (lowJ > 0 && lowJ < k - 1) el('text', { x: x(lowJ), y: y(p.v[lowJ]) + 14, 'text-anchor': 'middle', class: 'vval small' }, s, fv(p.v[lowJ]));
+    });
+    // the steps, once, under the grid
+    var t = el('text', { x: 10, y: H - 10, class: 'vval' }, s);
+    t.textContent = o.steps.join('  ›  ');
+  }
+
+  // ---- slope: each row a line from its value on the left to its value on
+  // the right. rows [{name, a, b, tok, hi}]; only highlighted rows are named
+  // on the chart, every line names itself on hover
+  function slope(box, o) {
+    measure(box);
+    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : Math.min(WIDE(), 820), H = phone() ? 420 : 460, top = 40, bot = H - 22;
+    var s = svgIn(box, W, H, o.label);
+    var all = [].concat.apply([], o.rows.map(function (r) { return [r.a, r.b]; })), t = nice(Math.min(0, Math.min.apply(null, all)), Math.max.apply(null, all));
+    var xa = phone() ? 40 : 200, xb = W - (phone() ? 150 : 220), y = function (v) { return top + (bot - top) * (t.hi - v) / (t.hi - t.lo); };
+    for (var g = t.lo; g <= t.hi + t.step / 2; g += t.step) {
+      el('line', { x1: xa, x2: xb, y1: y(g), y2: y(g), class: Math.abs(g) < 1e-9 ? 'vzero' : 'vgrid' }, s);
+      el('text', { x: xa - 10, y: y(g), 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval' }, s, tickText(g, t.step));
+    }
+    [[xa, o.aName], [xb, o.bName]].forEach(function (c, i) { label(s, phone() && !i ? c[0] + 20 : c[0], 14, c[1], phone() ? 14 : 30, 'middle', 'vname'); });
+    var rows = o.rows.slice().sort(function (p, q) { return (p.hi ? 1 : 0) - (q.hi ? 1 : 0); });
+    rows.forEach(function (r) {
+      var col = r.tok || (r.hi ? '--fill-red' : '--fill-grey');
+      var g = el('g', { class: r.hi ? 'vslope hi' : 'vslope' }, s);
+      el('line', { x1: xa, x2: xb, y1: y(r.a), y2: y(r.b), style: stroke(col) }, g);
+      el('circle', { cx: xa, cy: y(r.a), r: 4, style: paint(col) }, g);
+      el('circle', { cx: xb, cy: y(r.b), r: 4, style: paint(col) }, g);
+      el('title', {}, g, r.name + ': ' + SIR.d(r.a, 1) + ' → ' + SIR.d(r.b, 1));
+    });
+    // names for the highlighted rows on the right, nudged apart so none touch
+    var lab = o.rows.filter(function (r) { return r.hi || r.lab; }).map(function (r) { return { r: r, y: y(r.b) }; }).sort(function (p, q) { return p.y - q.y; });
+    for (var i = 1; i < lab.length; i++) if (lab[i].y - lab[i - 1].y < 15) lab[i].y = lab[i - 1].y + 15;
+    lab.forEach(function (q) { el('text', { x: xb + 10, y: q.y, 'dominant-baseline': 'middle', class: q.r.hi ? 'vname' : 'vname light' }, s, SIR.short(q.r.name) + ' ' + SIR.d(q.r.b, 1)); });
+  }
+
+  // ---- scatter: points [{x, y, tok, label, r}], with an optional diagonal
+  // (y = x) and reference lines, and a key of colours
+  function scatter(box, o) {
+    measure(box);
+    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : Math.min(WIDE(), 900), H = phone() ? 360 : 440, l = phone() ? 46 : 60, b = 52, top = o.key ? 30 : 12, rgt = 16;
+    var s = svgIn(box, W, H, o.label);
+    var xs = o.points.map(function (p) { return p.x; }), ys = o.points.map(function (p) { return p.y; });
+    var tx = nice(o.xMin != null ? o.xMin : Math.min.apply(null, xs), Math.max.apply(null, xs)), ty = nice(o.yMin != null ? o.yMin : Math.min.apply(null, ys), Math.max.apply(null, ys));
+    var x = function (v) { return l + (W - l - rgt) * (v - tx.lo) / (tx.hi - tx.lo); }, y = function (v) { return top + (H - top - b) * (ty.hi - v) / (ty.hi - ty.lo); };
+    var g;
+    for (g = tx.lo; g <= tx.hi + tx.step / 2; g += tx.step) { el('line', { x1: x(g), x2: x(g), y1: top, y2: H - b, class: 'vgrid' }, s); el('text', { x: x(g), y: H - b + 16, 'text-anchor': 'middle', class: 'vval' }, s, tickText(g, tx.step)); }
+    for (g = ty.lo; g <= ty.hi + ty.step / 2; g += ty.step) { el('line', { x1: l, x2: W - rgt, y1: y(g), y2: y(g), class: 'vgrid' }, s); el('text', { x: l - 6, y: y(g), 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval' }, s, tickText(g, ty.step)); }
+    // y = x, drawn only over the range both axes share
+    var d0 = Math.max(tx.lo, ty.lo), d1 = Math.min(tx.hi, ty.hi);
+    if (o.diag && d1 > d0) el('line', { x1: x(d0), y1: y(d0), x2: x(d1), y2: y(d1), class: 'vlink' }, s);
+    if (o.refY != null) el('line', { x1: l, x2: W - rgt, y1: y(o.refY), y2: y(o.refY), class: 'vzero' }, s);
+    if (o.diag && o.diagLabel && d1 > d0) el('text', { x: x(d1) + 4, y: y(d1) - 6, 'text-anchor': x(d1) > W - 90 ? 'end' : 'start', class: 'vval' }, s, o.diagLabel);
+    o.points.forEach(function (p) {
+      var c = el('circle', { cx: x(p.x), cy: y(p.y), r: p.r || (phone() ? 3.5 : 4.5), style: paint(p.tok || '--fill-navy') + ';opacity:.85', class: 'vdot' }, s);
+      el('title', {}, c, p.label);
+    });
+    label(s, l + (W - l) / 2, H - 10, o.xAxis, phone() ? 44 : 90, 'middle', 'vval');
+    var ya = el('text', { x: 12, y: top + (H - top - b) / 2, 'text-anchor': 'middle', class: 'vval', transform: 'rotate(-90 12 ' + (top + (H - top - b) / 2) + ')' }, s, o.yAxis);
+    if (o.key) { var kx = l; o.key.forEach(function (k) { el('circle', { cx: kx + 5, cy: 10, r: 5, style: paint(k[1]) }, s); el('text', { x: kx + 14, y: 10, 'dominant-baseline': 'middle', class: 'vval' }, s, k[0]); kx += 30 + k[0].length * 7; }); }
+  }
+
   function colOf(ds, i) {
     if (ds.$tokens) return ds.$tokens[i]; if (ds.$token) return ds.$token;
     var b = ds.backgroundColor; return Array.isArray(b) ? b[i % b.length] : (b || '--fill-navy');
@@ -401,5 +491,5 @@
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(c));
   }
 
-  window.VIZ = { sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, heat: heat, rank: rank, dots: dots, fromChart: fromChart, png: png };
+  window.VIZ = { multiples: multiples, slope: slope, scatter: scatter, sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, heat: heat, rank: rank, dots: dots, fromChart: fromChart, png: png };
 })();
