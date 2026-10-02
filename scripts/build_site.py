@@ -42,6 +42,7 @@ def svg(paths, cls='icon'):
 LOGO = svg('<rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/>')
 PIN = svg('<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>')
 DOWN = svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>')
+APP = svg('<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/>')
 LENS = svg('<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>')
 MOON = svg('<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>')
 PRINT = svg('<polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>')
@@ -82,7 +83,8 @@ def shell(out, meta, content, scripts):
         dl = ('<details class="dl"><summary class="btn">%s <span class="lbl">Downloads</span></summary>'
               '<div class="menu" data-i18n-each>%s</div></details>' % (DOWN, links))
     # the sitewide search (sir.js): a button, and Ctrl or Command and K
-    find = ('<button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">%s '
+    # installing the site as an app: hidden until the browser offers it (sir.js)
+    find = ('<button type="button" class="btn install" hidden>%s <span class="lbl">Install app</span></button>\n      ' % APP) + ('<button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">%s '
             '<span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>' % LENS)
     # Print belongs on an analysis, where it prints the charts; the front page
     # is an introduction and carries no print button.
@@ -137,10 +139,11 @@ def shell(out, meta, content, scripts):
         '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
         '<script src="%sassets/i18n.js"></script>\n<title>%s</title>\n<meta name="description" content="%s">\n'
-        '<link rel="icon" href="%s">\n<link rel="stylesheet" href="%sassets/sir.css">%s\n</head>\n'
+        '<link rel="icon" href="%s">\n<link rel="manifest" href="%smanifest.webmanifest">\n<meta name="theme-color" content="#1f4e79">\n'
+        '<link rel="apple-touch-icon" href="%sassets/app/apple-touch-icon.png">\n<link rel="stylesheet" href="%sassets/sir.css">%s\n</head>\n'
         '<body class="%s" data-place="%s" data-root="%s">\n%s%s%s\n%s\n%s\n'
         '<script src="%sassets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>\n</body>\n</html>\n'
-    ) % (root, html.escape(meta['title'], quote=False), html.escape(meta['description']), favicon(place['color']), root, head_extra,
+    ) % (root, html.escape(meta['title'], quote=False), html.escape(meta['description']), favicon(place['color']), root, root, root, head_extra,
          cls, place['id'], root, header, nav, content, footer, scripts, root)
 
 

@@ -353,7 +353,11 @@ map, CC BY 2.5 India; see `SOURCES.md` there): five quantile bins of one red,
 a `<title>` per shape, a click handed to `o.pick`, `__select` taking one id or
 several, and an optional enlarged city panel (`o.inset`: Chennai, Kolkata,
 Bengaluru city). Every page that draws one credits DataMeet under it.
-Karnataka's map is by election district: its constituencies are dissolved by
+The front page carries an all-India state map from `data/geo/india.json`
+(DataMeet, CC BY 4.0, India's official outline), shaded from
+`data/india/states.json`; a state with its own analysis opens it on a tap.
+Keep the official outline on any map of India here. Karnataka's map is by
+election district: its constituencies are dissolved by
 the Election Commission's own constituency-to-district list
 (`data/karnataka/raw/ac_district.csv`).
 
@@ -389,6 +393,16 @@ script the other sites use (OpenDyslexic, OFL, in `fonts/`), loaded on every
 page by the shell, its button placed before the theme toggle through
 `data-dyslexia-slot` on `.controls`. OpenDyslexic has Latin glyphs only, so
 `sir.css` keeps each Indian script in its own Noto face when it is on.
+
+**Installs as an app.** `manifest.webmanifest`, the icons in `assets/app`
+(written by `scripts/app_icons.mjs` from the favicon's mark) and `sw.js` at
+the root. The service worker goes to the network first for every same-origin
+GET and keeps a copy for offline, so a reader online never sees a stale page;
+PDF, slides and CSV are not kept, and Chart.js from cdnjs is not either, so
+Chart.js charts do not draw offline. Bump `CACHE` in `sw.js` only to throw
+the stored copies away. The header's Install app button stays hidden until
+the browser fires `beforeinstallprompt` (Android Chrome, Edge, Samsung
+Internet). Keep `sw.js` out of `stamp.py`: its address must not change.
 
 **Link previews.** `build_site.py` writes Open Graph and Twitter tags into
 every page head, with `og:image` pointing at `assets/og/<place>.png`. The head

@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="assets/i18n.js?v=008c2720"></script>
+<script src="assets/i18n.js?v=a4427b58"></script>
 <title>SIR analysis for India: who was taken off the electoral rolls</title>
 <meta name="description" content="In 2025 and 2026 the Election Commission revised the electoral rolls of most of India, and crores of names were left off. This site counts who was removed, where, and on what recorded reason, from the published lists and figures.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
-<link rel="stylesheet" href="assets/sir.css?v=86ca9e9d">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1f4e79">
+<link rel="apple-touch-icon" href="assets/app/apple-touch-icon.png?v=44207c69">
+<link rel="stylesheet" href="assets/sir.css?v=b24ec82a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="SIR analysis for India: who was taken off the electoral rolls">
@@ -26,6 +29,7 @@
   <div class="header-content">
     <a class="logo" href="./"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span class="titles"><span class="h-title">SIR analysis for India</span><span class="subtitle">Names taken off the electoral rolls, counted from the published lists</span></span></a>
     <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">
+      <button type="button" class="btn install" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/></svg> <span class="lbl">Install app</span></button>
       <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
       <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Places</span></summary><div class="menu" data-i18n-each><a href="./" aria-current="true">About this site</a><a href="india/">All India</a><a href="bihar/">Bihar 2025</a><a href="hyderabad/">Hyderabad 2026</a><a href="tamilnadu/">Tamil Nadu 2026</a><a href="karnataka/">Karnataka 2026</a><a href="westbengal/">West Bengal 2026</a><a href="kerala/">Kerala 2026</a></div></details>
       
@@ -42,6 +46,16 @@
 <div class="page-head"><h1>Who was taken off India's electoral rolls</h1>
 <p class="lead" id="lead">In 2025 and 2026 the Election Commission revised the electoral rolls of most of India house by house, in what it called a Special Intensive Revision. Every elector had to fill in a fresh form, and names were left off the new rolls. This site counts those names from the lists and figures the Commission and the states have published, and sets out who was removed, where, and on what recorded reason.</p>
 </div>
+
+<h2>Names left off the draft rolls, state by state</h2>
+<p class="sub">Each state and union territory is shaded by the names left off its draft roll for every 100 electors on the roll before the revision, as its Chief Electoral Officer published them. Grey means the state was not in the revision or has published no figure. Hover over a state to see its figure, and tap it to open its own analysis, or the All India page where it has none.</p>
+<div class="grid">
+  <div class="panel wide">
+    <div class="vizbox" id="vIndia"></div>
+    <p class="note">State boundaries from DataMeet's map of India's states (CC BY 4.0), simplified.</p>
+  </div>
+</div>
+<p class="finding" id="fIndia"></p>
 
 <h2>What is here</h2>
 <div class="hubs" data-i18n-each>
@@ -70,8 +84,27 @@
 <p>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>, a development research and evaluation practice. The tables behind the charts can be downloaded from the Downloads menu on each analysis.</p>
 </main>
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="./">About this site</a></footer>
-<script src="assets/sir.js?v=e52d7744"></script>
+<script src="assets/sir.js?v=8a74529d"></script>
 <script src="assets/viz.js?v=d458242d"></script>
+<script>
+// The all-India map: names left off per 100 electors, from data/india/states.json
+Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')]).then(function (r) {
+  var I = r[0], geo = r[1], byName = {}, byId = {};
+  var ALIAS = { 'Andaman & Nicobar': 'Andaman and Nicobar Islands', 'Jammu & Kashmir': 'Jammu and Kashmir' };
+  var PAGE = { 'Bihar': 'bihar/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Telangana': 'hyderabad/telangana/' };
+  I.states.forEach(function (st) { byName[st.state] = st; });
+  geo.features.forEach(function (f) { var n = ALIAS[f.properties.name] || f.properties.name; byId[f.properties.ac] = { name: n, st: byName[n] }; });
+  var v = function (id) { var x = byId[id]; return x && x.st && x.st.per_100 != null ? x.st.per_100 : null; };
+  VIZ.map('vIndia', { geo: geo, label: L('Map of names left off the draft rolls per 100 electors, by state'), title: L('Left off per 100 electors'),
+    v: v, name: function (id) { return byId[id] ? byId[id].name : ''; },
+    pick: function (id) { var x = byId[id]; if (!x) return; location.href = PAGE[x.name] || 'india/'; } });
+  var have = I.states.filter(function (st) { return st.per_100 != null; }).sort(function (a, b) { return b.per_100 - a.per_100; });
+  var hi = have[0], lo = have[have.length - 1];
+  document.getElementById('fIndia').innerHTML = L('<b>{r} names were left off the draft rolls of {n} states and union territories, {p} of every 100 electors.</b> The share runs from {lov} per 100 in {lon} to {hiv} in {hin}.', {
+    r: SIR.n(I.total.removed), n: I.total.states, p: SIR.d(I.total.per_100, 1), lov: SIR.d(lo.per_100, 1), lon: lo.state, hiv: SIR.d(hi.per_100, 1), hin: hi.state });
+  SIR.tools();
+}).catch(SIR.fail);
+</script>
 <script>
 Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.json'), SIR.json('data/hyderabad/summary.json'), SIR.json('data/tamilnadu/summary.json'), SIR.json('data/karnataka/summary.json'), SIR.json('data/westbengal/summary.json'), SIR.json('data/kerala/summary.json')]).then(function (r) {
   var T = r[0].total, B = r[1].totals, H = r[2].totals;
