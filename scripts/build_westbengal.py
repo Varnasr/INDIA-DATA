@@ -81,6 +81,19 @@ def build():
     assert p['before'] - p['removed'] == p['draft']
     assert p['draft'] + p['added'] - p['form7'] - p['adjudication'] == p['final']
 
+    with open(os.path.join(RAW, 'adjudication_state.csv'), encoding='utf-8') as fh:
+        AD = {r['measure']: int(r['value']) for r in csv.DictReader(fh)}
+    assert AD['under_adjudication'] == p['adjudication']
+    assert AD['appeals_by_excluded'] + AD['appeals_against_inclusion'] == AD['appeals_total']
+    assert AD['appeals_decided'] + AD['appeals_pending'] == AD['appeals_total']
+    AD['not_accounted'] = AD['under_adjudication'] - AD['found_eligible'] - AD['found_not_eligible']
+    assert 0 <= AD['not_accounted'] < 50000
+    AD['not_eligible_no_appeal'] = AD['found_not_eligible'] - AD['appeals_by_excluded']
+    assert AD['not_eligible_no_appeal'] > 0
+    AD['not_eligible_pct'] = round(100 * AD['found_not_eligible'] / AD['under_adjudication'], 2)
+    AD['inclusion_appeal_pct'] = round(100 * AD['appeals_against_inclusion'] / AD['found_eligible'], 2)
+    AD['pending_pct'] = round(100 * AD['appeals_pending'] / AD['appeals_total'], 2)
+
     r24, dr, el, res = rows('roll_2024_ls_ac.csv'), rows('draft_roll_ac.csv'), rows('electors_nomination_2026_ac.csv'), rows('results_2026.csv')
     for t in (r24, dr, el, res):
         assert sorted(t) == list(range(1, 295)), 'every table has ACs 1 to 294 once'
@@ -162,6 +175,7 @@ def build():
                      women_before_pct=round(100 * p['before_women'] / p['before'], 2),
                      women_removed_pct=round(100 * (p['before_women'] - DRAFT_W) / p['removed'], 2),
                      shares={k: round(100 * p[k] / p['removed'], 2) for k in ('dead', 'absent', 'shifted', 'duplicate', 'other')}),
+        'adj': AD,
         'roll_2024': R24, 'draft': DRAFT, 'election': ELEC,
         'after_final': ELEC - p['final'],
         'fall_draft': R24 - DRAFT, 'fall': fall,

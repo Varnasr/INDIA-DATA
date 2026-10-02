@@ -34,7 +34,7 @@
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
-  <p class="sub">For each district, the grey dot is the names left off the draft roll for every 100 electors on the roll before the revision. The blue dot is the fall that remains on the final roll, after the names added and removed on claims and objections.</p>
+  <p class="sub">Each line is a district. On the left, the names left off the draft roll for every 100 electors on the roll before the revision; on the right, the fall that remains on the final roll, after the names added and removed on claims and objections. The flatter the line, the less was made up. Chennai is in red. Hover or tap a line for its district.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vFinal"></div></div>
   </div>
@@ -82,9 +82,9 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
     { name: L('Shifted or absent'), v: S.shifted_absent, kind: 'down' }, { name: L('Enrolled in more than one place'), v: S.multiple, kind: 'down' },
     { name: L('Draft roll'), v: S.draft, kind: 'total' }, { name: L('Net change after the draft'), v: S.added_net, kind: 'up' },
     { name: L('Final roll'), v: S.final, kind: 'total' }] });
-  VIZ.dumbbell('vFinal', { label: L('Names removed per 100 electors at the draft and the net fall at the final roll, by district'),
-    aName: L('Left off the draft, per 100'), aTok: '--fill-grey', bName: L('Net fall at the final roll, per 100'), bTok: '--fill-navy',
-    rows: D.map(function (d) { return { name: d.district, a: d.per_100, b: d.net_per_100 }; }) });
+  VIZ.slope('vFinal', { label: L('Names removed per 100 electors at the draft and the net fall at the final roll, by district'),
+    aName: L('At the draft'), bName: L('At the final roll'),
+    rows: D.map(function (d, i) { return { name: d.district, a: d.per_100, b: d.net_per_100, hi: d.district === 'Chennai', lab: i > 0 && i < 4 }; }) });
   document.getElementById('fFinal').innerHTML = L('<b>The final roll is {a} larger than the draft, and still {f} smaller than the roll before the revision.</b> That is a fall of {p} of every 100 electors. The rise from the draft is at most {m} of the names removed, and it includes new voters. Chennai\'s roll is {c} per 100 smaller than before.', {
     a: SIR.lakh(S.added_net), f: SIR.lakh(S.net_fall), p: SIR.d(S.net_per_100, 1), m: SIR.pct(S.made_up_pct), c: SIR.d(S.chennai.net_per_100, 1) });
 
