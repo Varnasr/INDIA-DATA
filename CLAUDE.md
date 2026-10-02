@@ -448,8 +448,10 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   half empty.
 - **The header carries a places menu**, not a switch: a pin button naming
   the current place, opening the list of analyses. It scales to any number
-  of places, and on a phone the whole header is one row (title, language,
-  places, downloads, theme; print is hidden there). Credit is to PinPoint
+  of places. On a phone the title takes one row and the controls a row
+  beneath it (language, install, search, places, downloads, reading font,
+  theme; print is hidden there): beside the title, seven controls squeezed
+  it to a single word. Credit is to PinPoint
   Ventures, in the footer and on the front page.
 - **Footer, terms and privacy.** Every page's footer carries the credit, About
   this site, Terms and privacy (`terms/`, its own page in `site/pages`, on the
