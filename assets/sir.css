@@ -550,3 +550,12 @@ main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
 .process .rresp{font-size:.92rem;color:var(--muted)}
 .process .rresp span{font-weight:700;color:var(--ink)}
 .process .rresp span::after{content:"."}
+/* tables on a phone: smaller type and padding, and the first column stays in
+   view while the rest scrolls sideways */
+@media (max-width:600px){
+  table{font-size:.8rem}
+  th,td{padding:.4rem .45rem}
+  thead th{font-size:.74rem;line-height:1.25;vertical-align:bottom}
+  .twrap tbody th:first-child,.twrap tbody td:first-child{position:sticky;inset-inline-start:0;background:var(--card);z-index:1}
+  .twrap thead th:first-child{position:sticky;inset-inline-start:0;z-index:2}
+}
