@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="assets/i18n.js?v=00086111"></script>
+<script src="assets/i18n.js"></script>
 <title>SIR analysis for India: who was taken off the electoral rolls</title>
 <meta name="description" content="In 2025 and 2026 the Election Commission revised the electoral rolls of most of India, and crores of names were left off. This site counts who was removed, where, and on what recorded reason, from the published lists and figures.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1f4e79">
-<link rel="apple-touch-icon" href="assets/app/apple-touch-icon.png?v=44207c69">
-<link rel="stylesheet" href="assets/sir.css?v=5a1ee28c">
+<link rel="apple-touch-icon" href="assets/app/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/sir.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="SIR analysis for India: who was taken off the electoral rolls">
@@ -31,7 +31,7 @@
     <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">
       <button type="button" class="btn install" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/></svg> <span class="lbl">Install app</span></button>
       <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
-      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Places</span></summary><div class="menu" data-i18n-each><a href="./" aria-current="true">About this site</a><a href="india/">All India</a><a href="bihar/">Bihar 2025</a><a href="hyderabad/">Hyderabad 2026</a><a href="tamilnadu/">Tamil Nadu 2026</a><a href="karnataka/">Karnataka 2026</a><a href="westbengal/">West Bengal 2026</a><a href="kerala/">Kerala 2026</a></div></details>
+      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Places</span></summary><div class="menu" data-i18n-each><a href="./" aria-current="true">About this site</a><a href="india/">All India</a><a class="sub" href="india/process/">How the revision was run</a><a href="bihar/">Bihar 2025</a><a href="hyderabad/">Hyderabad 2026</a><a href="tamilnadu/">Tamil Nadu 2026</a><a href="karnataka/">Karnataka 2026</a><a href="westbengal/">West Bengal 2026</a><a href="kerala/">Kerala 2026</a></div></details>
       
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
       
@@ -47,7 +47,7 @@
 <p class="lead" id="lead">In 2025 and 2026 the Election Commission revised the electoral rolls of most of India house by house, in what it called a Special Intensive Revision. Every elector had to fill in a fresh form, and names were left off the new rolls. This site counts those names from the lists and figures the Commission and the states have published, and sets out who was removed, where, and on what recorded reason.</p>
 </div>
 
-<h2>Names left off the draft rolls, state by state</h2>
+<h2 id="names-left-off-the-draft-rolls-state-by-state">Names left off the draft rolls, state by state</h2>
 <p class="sub">Each state and union territory is shaded by the names left off its draft roll for every 100 electors on the roll before the revision, as its Chief Electoral Officer published them. Grey means the state was not in the revision or has published no figure. Hover over a state to see its figure, and tap it to open its own analysis, or the All India page where it has none.</p>
 <div class="grid">
   <div class="panel wide">
@@ -57,7 +57,7 @@
 </div>
 <p class="finding" id="fIndia"></p>
 
-<h2>What is here</h2>
+<h2 id="what-is-here">What is here</h2>
 <div class="hubs" data-i18n-each>
   <a class="hub" href="india/"><b>All India</b><span id="hIndia">Every state and union territory in the revision, with the reasons each one recorded.</span></a>
   <a class="hub" href="bihar/"><b>Bihar 2025</b><span id="hBihar">Every constituency and every booth, set against the 2025 election result.</span></a>
@@ -68,11 +68,14 @@
   <a class="hub" href="kerala/"><b>Kerala 2026</b><span id="hKl">Every constituency, the roll from January 2025 to the draft and the election, and who was missing.</span></a>
 </div>
 
-<h2>Why this site exists</h2>
+<h2 id="how-the-revision-was-run">How the revision was run</h2>
+<p>The rules changed while the revision was under way. The Commission issued fresh orders, the Supreme Court made Aadhaar one of the documents an elector could show and, in West Bengal, gave disputed claims to judicial officers, and many states had their dates moved after they were announced. <a href="india/process/">How the revision was run</a> sets out every order and judgment in date order, each linked to its document, and draws every state's schedule as it was set and as it was moved.</p>
+
+<h2 id="why-this-site-exists">Why this site exists</h2>
 <p>The revision decides who can vote. The lists behind it are public, but they are hard to read. They come as thousands of files, one for each polling part, often scanned, in the language of the state. The totals the Commission announces do not say who was removed, how old they were, or whether the removals in a seat were larger than the margin that decided it.</p>
 <p>This site reads those lists and figures and turns them into counts. It shows where removals were heaviest, whether women were removed more than men, and what reason was written against the names. A reason on a list is what the officer wrote down, and nobody checked it. The counts can show where removals fell and on whom. They cannot show why any one name was removed, or whether that removal was right.</p>
 
-<h2>How to read it</h2>
+<h2 id="how-to-read-it">How to read it</h2>
 <ul class="plain">
   <li>Only counts are published here. No name, EPIC number or address appears anywhere on this site.</li>
   <li>Religion and caste are guessed from names, so they are given as ranges.</li>
@@ -80,12 +83,12 @@
   <li>The pages can be read in English, Hindi, Urdu, Telugu, Tamil and Bengali from the menu at the top. The translations are awaiting review, and where they differ the English page is correct.</li>
 </ul>
 
-<h2>Who made it</h2>
+<h2 id="who-made-it">Who made it</h2>
 <p>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>, a development research and evaluation practice. The tables behind the charts can be downloaded from the Downloads menu on each analysis.</p>
 </main>
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="./">About this site</a> · <a href="terms/">Terms and privacy</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
-<script src="assets/sir.js?v=86a6b236"></script>
-<script src="assets/viz.js?v=5f8f41e5"></script>
+<script src="assets/sir.js"></script>
+<script src="assets/viz.js"></script>
 <script>
 // The all-India map: names left off per 100 electors, from data/india/states.json
 Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')]).then(function (r) {
@@ -119,6 +122,6 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.js
   document.getElementById('hKl').innerHTML = L('The draft roll was {f} smaller than in January 2025, {p} of every 100 electors, and women were {w} of the fall.', { f: SIR.lakh(r[6].fall_draft), p: SIR.d(r[6].draft_per_100, 1), w: SIR.pct(r[6].women_fall_pct) });
 }).catch(SIR.fail);
 </script>
-<script src="assets/dyslexia-font.js?v=ee566817" data-accent="var(--fill-red)" data-radius="10px" defer></script>
+<script src="assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

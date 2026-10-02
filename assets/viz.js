@@ -256,6 +256,8 @@
     o.rows.forEach(function (r, ri) {
       var h = heights[ri];
       if (ri % 2) el('rect', { x: 0, y: y, width: W, height: h, class: 'vband' }, s);
+      // o.mark: one state picked out (a link from that state's page)
+      if (o.mark && r.name === o.mark) el('rect', { x: 1, y: y + 1, width: W - 2, height: h - 2, rx: 4, class: 'vmark' }, s);
       label(s, lw - 6, y + h / 2, ph ? SIR.short(r.name) : r.name, ph ? 15 : 24, 'end');
       r.steps.forEach(function (st, k) {
         var yy = y + gap + k * lh + lh / 2, last = k === r.steps.length - 1, g = el('g', { opacity: last ? 1 : 0.38 }, s);

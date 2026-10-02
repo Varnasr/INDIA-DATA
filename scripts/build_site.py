@@ -62,6 +62,27 @@ def read_source(path):
     return meta, content.rstrip('\n'), scripts.rstrip('\n')
 
 
+def heading_ids(content):
+    """Give every h2 and h3 of a page an id from its English text, so a link
+    can open on that section in any language (sir.js adds the copy button).
+    Ids are made here, from the source, because the text is translated in the
+    browser and an id made there would differ from language to language."""
+    taken = set(re.findall(r'\sid="([^"]+)"', content))
+
+    def one(m):
+        tag, attrs, inner = m.group(1), m.group(2) or '', m.group(3)
+        if re.search(r'\sid=', attrs):
+            return m.group(0)
+        text = html.unescape(re.sub(r'<[^>]+>', '', inner)).lower()
+        base = re.sub(r'[^a-z0-9]+', '-', text).strip('-')[:60].rstrip('-') or tag
+        key, n = base, 2
+        while key in taken:
+            key, n = '%s-%d' % (base, n), n + 1
+        taken.add(key)
+        return '<%s%s id="%s">%s</%s>' % (tag, attrs, key, inner, tag)
+    return re.sub(r'<(h[23])(\s[^>]*)?>(.*?)</\1>', one, content, flags=re.S)
+
+
 def shell(out, meta, content, scripts):
     """The whole page for site path `out` (e.g. 'bihar/results/')."""
     depth = out.count('/')
@@ -74,6 +95,10 @@ def shell(out, meta, content, scripts):
         href = root + (p['pages'][0][0] if p['pages'] else '')
         cur = ' aria-current="true"' if p['id'] == place['id'] else ''
         items.append('<a href="%s"%s>%s</a>' % (href or './', cur, html.escape(p['label'])))
+        # a page worth reaching from anywhere sits under its place
+        for h, t in p.get('menu', []):
+            sub = ' aria-current="page"' if h == here else ''
+            items.append('<a class="sub" href="%s%s"%s>%s</a>' % (root, h, sub, html.escape(t)))
     current = place['label'] if place['id'] != 'home' else 'Places'
     places = ('<details class="dl places"><summary class="btn" aria-label="Places">%s <span class="lbl-place">%s</span></summary>'
               '<div class="menu" data-i18n-each>%s</div></details>' % (PIN, html.escape(current), ''.join(items)))
@@ -168,7 +193,7 @@ def build():
             rel = os.path.relpath(src, SRC).replace(os.sep, '/')
             out = rel[:-len('index.html')]
             meta, content, scripts = read_source(src)
-            put(os.path.join(ROOT, rel), shell(out, meta, content, scripts))
+            put(os.path.join(ROOT, rel), shell(out, meta, heading_ids(content), scripts))
     # the phone section bar's lists, from the same config
     sites = {}
     for p in CFG['places']:

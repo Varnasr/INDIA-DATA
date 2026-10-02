@@ -74,6 +74,9 @@ SIR.json('data/india/process.json').then(function (P) {
   ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
 
   // the timeline
+  // each entry has its own address, #t-<date>, so a link opens on it
+  var seen = {};
+  T.forEach(function (t) { var k = 't-' + t.date; seen[k] = (seen[k] || 0) + 1; t.id = k + (seen[k] > 1 ? '-' + seen[k] : ''); });
   var tl = document.getElementById('timeline'), fw = '', fp = '';
   function draw() {
     var lastY = '';
@@ -81,8 +84,9 @@ SIR.json('data/india/process.json').then(function (P) {
       var y = t.date.slice(0, 4), head = y !== lastY ? '<li class="pyear" aria-hidden="true">' + y + '</li>' : '';
       lastY = y;
       return head + '<li class="pitem ' + t.who + '"><div class="pdate"><time datetime="' + t.date + '">' + SIR.date(t.date) + '</time><span class="pwho">' + WHO[t.who] + ' · ' + E(t.phase) + '</span></div>' +
-        '<div class="pbody"><h3>' + E(t.title) + '</h3><p>' + E(t.text) + '</p><p class="psrc">' + t.src.map(function (s) { return '<a href="' + E(s.url) + '" rel="noopener" target="_blank">' + E(s.name) + '</a>'; }).join(' · ') + '</p></div></li>';
+        '<div class="pbody"><h3 id="' + t.id + '">' + E(t.title) + '</h3><p>' + E(t.text) + '</p><p class="psrc">' + t.src.map(function (s) { return '<a href="' + E(s.url) + '" rel="noopener" target="_blank">' + E(s.name) + '</a>'; }).join(' · ') + '</p></div></li>';
     }).join('') || '<li class="pitem"><div class="pbody"><p>Nothing matches both choices.</p></div></li>';
+    SIR.anchors(tl);
   }
   document.querySelectorAll('.pfilter .chip').forEach(function (b) {
     b.addEventListener('click', function () {
@@ -95,12 +99,22 @@ SIR.json('data/india/process.json').then(function (P) {
   draw();
 
   // the schedules
-  var G = function (id, rows, label) {
-    VIZ.gantt(id, { label: label, rows: rows.map(function (r) { return { name: r.state, steps: r.steps }; }) });
+  // #s-<state> (a link from a state's page) outlines that state's row
+  var key = function (n) { return 's-' + n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
+  var G = function (id, rows, label, mark) {
+    VIZ.gantt(id, { label: label, mark: mark, rows: rows.map(function (r) { return { name: r.state, steps: r.steps }; }) });
   };
-  G('vG1', P.schedules.filter(function (r) { return r.phase === 'I'; }), 'Bihar\'s schedule, from the order of 24 June 2025');
-  G('vG2', p2, 'Phase II schedules, as set on 27 October 2025 and as moved');
-  G('vG3', p3, 'Phase III schedules, as set on 14 May 2026 and as moved');
+  var drawG = function () {
+    var h = decodeURIComponent(location.hash.slice(1)), hit = null;
+    P.schedules.forEach(function (r) { if (key(r.state) === h) hit = r; });
+    var m = hit && hit.state;
+    G('vG1', P.schedules.filter(function (r) { return r.phase === 'I'; }), 'Bihar\'s schedule, from the order of 24 June 2025', m);
+    G('vG2', p2, 'Phase II schedules, as set on 27 October 2025 and as moved', m);
+    G('vG3', p3, 'Phase III schedules, as set on 14 May 2026 and as moved', m);
+    if (hit) { var pn = document.getElementById({ I: 'pG1', II: 'pG2', III: 'pG3' }[hit.phase]); if (pn) pn.scrollIntoView({ block: 'start' }); }
+  };
+  drawG();
+  window.addEventListener('hashchange', drawG);
   document.getElementById('nG2').textContent = 'The release of 11 December 2025 names Gujarat both among the states moved to a draft on 19 December and among those keeping 16 December, and does not name Puducherry. ' + P.notes.p2final;
   document.getElementById('nG3').textContent = P.notes.p3later + ' ' + P.notes.tripura + ' ' + P.notes.uttarakhand;
   document.getElementById('gaps').innerHTML = P.gaps.map(function (g) { return '<li>' + E(g) + '</li>'; }).join('');
