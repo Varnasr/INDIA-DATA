@@ -14,7 +14,7 @@
       var back = L('In the {n} states with a final roll, the rolls grew back by at most {m} of what the drafts removed, and that rise includes new voters.', { n: F.states, m: SIR.pct(F.made_up_pct) });
       var QA = [
         [L('How many names did the revision remove across India?'),
-         L('{r} across {s} states and union territories at the draft, {p} of every 100 electors. Removals after the draft add {a} more in the {k} states that have reported them.', { r: cr(T.removed), s: T.states, p: SIR.d(T.per_100, 1), a: SIR.lakh(AD.removed), k: AD.states }), ['main', 'faq']],
+         L('{r} across {s} states and union territories at the draft, {p} of every 100 electors. Removals after the draft add {a} more in the {k} states that have reported them.', { r: cr(T.removed), s: T.states, p: SIR.d(T.per_100, 1), a: SIR.lakh(AD.removed), k: AD.states }), ['numbers', 'main', 'faq']],
         [L('Why were the names removed?'),
          L('Where a reason was given, {dead} were entered as dead, {sao} as moved, not found or other, and {dup} as enrolled more than once. States reported their reasons in different ways, and the method page sets out how each was counted.', { dead: SIR.pct(T.shares.dead), sao: SIR.pct(T.shares.shifted_absent_other), dup: SIR.pct(T.shares.duplicate) }), ['main']],
         [L('Why did some states remove far more names than others?'),
@@ -23,14 +23,14 @@
            L('Across all states the removal rate rises with income per head (rank correlation {all}), but only among the states revised in 2026 ({p3}). Among those revised from November 2025 it is {p2}, which is no relationship. The figures show where removals were heavy, and cannot show why.', { all: SIR.d(inc.per_100_all, 2), p3: SIR.d(inc.per_100_phase3, 2), p2: SIR.d(inc.per_100_phase2, 2) }) :
            L('The figures show where removals were heavy, and cannot show why.')), ['main']],
         [L('Were women removed more than men?'), fem, ['main', 'faq']],
-        [L('Were the names put back on the final roll?'), L('Few of them.') + ' ' + back, ['main', 'faq']],
+        [L('Were the names put back on the final roll?'), L('Few of them.') + ' ' + back, ['numbers', 'main', 'faq']],
         [L('Were the rolls over-full before the revision?'),
          L('Mostly not. Across the {n} states with population projections, the rolls held {pre} of adults before the revision, and only {k} had more names on the roll than adults.', { n: A.states, pre: SIR.pct(100 * A.roll_total / A.adults_total), k: A.over_100.length }) + ' ' +
          (Math.abs(A.rho_rate) < 0.2 ? L('States with the fullest rolls did not remove more.') : ''), ['main']],
         [L('Where do these figures come from?'),
-         L('From each state\'s Chief Electoral Officer, as announced with the draft and final rolls. The Election Commission has published no national table. For Bihar they are counted from the deletion lists themselves.'), ['method', 'faq']],
+         L('From each state\'s Chief Electoral Officer, as announced with the draft and final rolls. The Election Commission has published no national table. For Bihar they are counted from the deletion lists themselves.'), ['numbers', 'method', 'faq']],
         [L('Why are some rows marked as rounded or short?'),
-         L('Some states announced figures rounded to the nearest thousand or lakh, and some gave reasons that do not add up to their own total. Those rows are kept as the state published them and flagged, so a reader can see how far each one can be trusted.'), ['method', 'faq']],
+         L('Some states announced figures rounded to the nearest thousand or lakh, and some gave reasons that do not add up to their own total. Those rows are kept as the state published them and flagged, so a reader can see how far each one can be trusted.'), ['numbers', 'method', 'faq']],
         [L('Why do some states look short of electors?'),
          L('The adult figures are population projections, which count people where they live. A state that draws migrants counts them as residents while many are still registered to vote in their home states, so its roll looks short.'), ['method']],
         [L('Does this show that the removals were intended to change results?'),
