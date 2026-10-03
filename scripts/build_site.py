@@ -226,6 +226,8 @@ def search_index():
             rows.append([pid, 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], page + '#ac-%d' % a['ac']])
         for d in J(folder + '/districts.json'):
             rows.append([pid, 'd', d['district'], '', page + '#' + slug(d['district'])])
+    for d in J('uttarpradesh/districts.json'):
+        rows.append(['up', 'd', d['district'], '', 'uttarpradesh/#' + slug(d['district'])])
     for d in J('karnataka/districts.json'):
         # Bengaluru is four election districts; a reader types the city
         city = 'Bengaluru Bangalore' if d['bengaluru'] else ''

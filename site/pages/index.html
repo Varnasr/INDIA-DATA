@@ -29,6 +29,7 @@
   <a class="hub" href="westbengal/"><b>West Bengal 2026</b><span id="hWb">Every constituency, the roll from 2024 to the election it was used for, set against the 2026 result.</span></a>
   <a class="hub" href="kerala/"><b>Kerala 2026</b><span id="hKl">Every constituency, the roll from January 2025 to the draft and the election, and who was missing.</span></a>
   <a class="hub" href="rajasthan/"><b>Rajasthan 2026</b><span>The state's removals and reasons, and every constituency's roll from the 2023 election to the final roll.</span></a>
+  <a class="hub" href="uttarpradesh/"><b>Uttar Pradesh 2026</b><span>The names left off the draft roll in each of the 75 districts, and the reason entered against them.</span></a>
 </div>
 
 <h2>How the revision was run</h2>
@@ -56,7 +57,7 @@
 Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')]).then(function (r) {
   var I = r[0], geo = r[1], byName = {}, byId = {};
   var ALIAS = { 'Andaman & Nicobar': 'Andaman and Nicobar Islands', 'Jammu & Kashmir': 'Jammu and Kashmir' };
-  var PAGE = { 'Bihar': 'bihar/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Rajasthan': 'rajasthan/', 'Telangana': 'hyderabad/telangana/' };
+  var PAGE = { 'Bihar': 'bihar/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Rajasthan': 'rajasthan/', 'Uttar Pradesh': 'uttarpradesh/', 'Telangana': 'hyderabad/telangana/' };
   I.states.forEach(function (st) { byName[st.state] = st; });
   geo.features.forEach(function (f) { var n = ALIAS[f.properties.name] || f.properties.name; byId[f.properties.ac] = { name: n, st: byName[n] }; });
   var v = function (id) { var x = byId[id]; return x && x.st && x.st.per_100 != null ? x.st.per_100 : null; };

@@ -2,7 +2,7 @@
 
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
-Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal and Kerala (2026). Static HTML, Chart.js from cdnjs, one
+Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan and Uttar Pradesh (2026). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
@@ -425,6 +425,31 @@ because the independents' fronts are not in the data.
   card are translated. The FAQ in `assets/faq/rajasthan.js` uses plain
   strings for the same reason. Translate before taking the note out.
 - No map: DataMeet's assembly map for Rajasthan is not in `data/geo` yet.
+
+## Uttar Pradesh
+
+`scripts/build_uttarpradesh.py` reads `data/uttarpradesh/raw` (sources in
+`SOURCES.md` there) and writes `summary.json`, `districts.json` and
+`districts.csv`; `check_data.py` runs it with `--check`.
+
+- **Districts only, from a photograph.** The CEO's site cannot be reached from
+  outside India. The district table of 6 January 2026 (roll before, draft, and
+  the names left off under five reasons) is read from the photograph India TV
+  published, transcribed by eye. Every row must satisfy two identities (roll
+  before less draft equals the total, and the five reasons sum to it), and every
+  column must sum to the printed State row, so a misread digit fails the build.
+  Say on every page that the table is the CEO's, as published in the press.
+- No table by assembly constituency was found, so there is no constituency
+  page, no map and no comparison with margins. Do not count ACs from the
+  district ASD lists: they carry names.
+- No split by sex of the names left off, at any level. The draft and final by
+  sex come from the CEO's own post; the Form 6 and Form 7 counts and the
+  8,15,996 removed after the draft are from the press and are said to be.
+- The All India row is these exact figures; "shifted, absent or other" there is
+  untraceable or absent plus permanently shifted plus others.
+- `data/uttarpradesh/raw/check.py` is a research script and is not in CI: its
+  `results_2022.csv` check fails in 32 ACs, and no page uses 2022 results.
+- English only, like Rajasthan, with the same translated note.
 
 ## One order on the four 2026 state pages
 
