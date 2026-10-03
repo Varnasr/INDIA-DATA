@@ -769,6 +769,14 @@ correlation and lists those under 0.2 as unrelated). The decks state no site
 address, and the speaker notes carry the caveats. `build.sh` rebuilds them
 with the reports.
 
+The four 2026 states (Tamil Nadu, Karnataka, West Bengal, Kerala) each have a
+PDF report and a deck in their Downloads menu, written by
+`scripts/reports/state_report.py <state>` and `scripts/reports/state_decks.js`
+from the same JSON as their pages, with the same sections. They have no web
+page. A section a state cannot have (Kerala's reasons, the split by sex in Tamil
+Nadu and Karnataka) says so rather than being dropped. `build.sh` rebuilds them
+with the others.
+
 **Say only what the lists record.** No page, report or deck may say how long a
 hearing slot lasted or how many minutes an elector had: the lists record cases
 per slot, not the slot's length.
