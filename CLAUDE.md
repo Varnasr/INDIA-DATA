@@ -161,7 +161,9 @@ hyphens: `#s-tamil-nadu`) outlines that state's row and scrolls to its chart;
 
 **The SIR in numbers** (`india/numbers/`) is the one-page summary: the roll
 before, the names left off, by phase and in the ten largest states, each with
-its source. Every figure and sentence on it is computed from
+its source, with three charts (the roll before against the draft, every
+state per 100 electors coloured by phase, and the ten largest against the
+rest). Every figure, sentence and chart on it is computed from
 `data/india/states.json` when the page loads, so it moves with the state
 table. It is English only, like the process page.
 

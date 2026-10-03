@@ -45,17 +45,39 @@
 
 <article class="numbers" lang="en" dir="ltr" data-no-i18n>
   <div class="kpis" id="kpis"></div>
-
-  <h2 id="the-totals">The totals</h2>
-  <div class="twrap" tabindex="0" role="region" aria-label="The totals"><table id="tTotal"></table></div>
   <p class="note" id="nTotal"></p>
+
+  <h2 id="from-the-old-roll-to-the-draft">From the old roll to the draft</h2>
+  <div class="grid">
+    <div class="panel wide">
+      <h3 id="electors-on-the-rolls-before-the-revision-and-on-the-draft">Electors on the rolls, before the revision and on the draft</h3>
+      <div class="vizbox" id="vWater"></div>
+      <p id="pWater"></p>
+    </div>
+  </div>
+
+  <h2 id="every-state-per-100-electors">Every state, per 100 electors</h2>
+  <div class="grid">
+    <div class="panel wide">
+      <h3 id="names-left-off-the-draft-roll-for-every-100-electors-on-the">Names left off the draft roll for every 100 electors on the roll before</h3>
+      <div class="legend" id="kRate"></div>
+      <div class="vizbox" id="vRate"></div>
+      <p id="pRate"></p>
+    </div>
+  </div>
 
   <h2 id="by-phase">By phase</h2>
   <p id="pPhase"></p>
   <div class="twrap" tabindex="0" role="region" aria-label="Names left off, by phase"><table id="tPhase"></table></div>
 
   <h2 id="the-ten-largest">The ten largest</h2>
-  <p id="pTop"></p>
+  <div class="grid">
+    <div class="panel wide">
+      <h3 id="names-left-off-the-draft-rolls-the-ten-largest-states-and-th">Names left off the draft rolls, the ten largest states and the rest</h3>
+      <div class="vizbox" id="vTop"></div>
+      <p id="pTop"></p>
+    </div>
+  </div>
   <div class="twrap" tabindex="0" role="region" aria-label="The ten states with the most names left off"><table id="tTop"></table></div>
   <p class="note" id="nTop"></p>
 
@@ -114,15 +136,33 @@ SIR.json('data/india/states.json').then(function (d) {
     [T.states, 'states and union territories']
   ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
 
-  document.getElementById('tTotal').innerHTML = '<tbody>' + [
-    ['Electors on the rolls before the revision', n(before) + ' (about ' + Math.round(before / 1e7) + ' crore)'],
-    ['Names left off the draft rolls', n(T.removed) + ' (' + cr(T.removed) + ')'],
-    ['Left off per 100 electors', p1(T.per_100)],
-    ['States and union territories counted', T.states]
-  ].map(function (r) { return '<tr><th scope="row" class="l">' + r[0] + '</th><td>' + r[1] + '</td></tr>'; }).join('') + '</tbody>';
   document.getElementById('nTotal').textContent = 'Each state\'s "before" figure is its roll on the day its revision began, so the total adds up rolls taken between June 2025 and mid-2026. ' +
     (noBefore.length ? noBefore.map(function (s) { return s.state; }).join(' and ') + ' published no roll before the revision, so ' + (noBefore.length > 1 ? 'their ' : 'its ') + n(noBefore.reduce(function (a, s) { return a + s.removed; }, 0)) + ' names count in the total and not in the rate. ' : '') +
     'We found no single all-India figure from the Election Commission.';
+
+
+  // the roll before, the names left off, the draft: states with both figures
+  var base = Math.floor(before * 0.6 / 1e8) * 1e8, leftRated = rated.reduce(function (a, s) { return a + s.removed; }, 0);
+  VIZ.waterfall('vWater', { label: 'Electors on the rolls before the revision, the names left off and the draft rolls, ' + rated.length + ' states and union territories',
+    from: base,
+    steps: [{ name: 'Rolls before the revision', v: before, kind: 'total' }, { name: 'Left off the draft', v: leftRated, kind: 'down' }, { name: 'Draft rolls', v: before - leftRated, kind: 'total' }] });
+  document.getElementById('pWater').textContent = 'The bars start at ' + Math.round(base / 1e7) + ' crore, not at zero, so the fall can be seen. These are the ' + rated.length + ' states and union territories that published a roll from before the revision.';
+
+  // every state's rate, coloured by phase, the ten largest named in bold
+  var PT = { '1': '--fill-red', '2': '--fill-navy', '3': '--fill-teal' };
+  var topNames = top.map(function (s) { return s.state; });
+  var byRate = rated.slice().sort(function (a, b) { return b.removed / b.electors_before - a.removed / a.electors_before; });
+  VIZ.lollipop('vRate', { label: 'Names left off per 100 electors, every state and union territory, coloured by phase', axis: 'Left off per 100 electors on the roll before the revision', ref: T.per_100,
+    rows: byRate.map(function (s) { var v = 100 * s.removed / s.electors_before; return { name: s.state, v: v, text: p1(v), tok: PT[s.phase], hi: topNames.indexOf(s.state) >= 0 }; }) });
+  document.getElementById('kRate').innerHTML = phases.map(function (k) { return '<span><i style="background:var(' + PT[k] + ')"></i>Phase ' + ROMAN[k] + (k === '1' ? ' (Bihar)' : '') + '</span>'; }).join('') + '<span><i style="background:var(--ink);width:2px;height:14px;border-radius:0"></i>All India, ' + p1(T.per_100) + '</span>';
+  var above = byRate.filter(function (s) { return 100 * s.removed / s.electors_before > T.per_100; });
+  document.getElementById('pRate').textContent = above.length + ' of the ' + byRate.length + ' are above the all-India rate. The ten largest states are named in bold. ' + byRate[0].state + ' is highest at ' + p1(100 * byRate[0].removed / byRate[0].electors_before) + ' and ' + byRate[byRate.length - 1].state + ' lowest at ' + p1(100 * byRate[byRate.length - 1].removed / byRate[byRate.length - 1].electors_before) + '.';
+
+  // the ten largest and everyone else, in crore
+  var restN = S.filter(function (s) { return s.removed; }).length - top.length;
+  VIZ.rank('vTop', { label: 'Names left off the draft rolls in the ten largest states and in the other ' + restN + ' together, in crore',
+    fmt: function (v) { return v.toFixed(2) + ' crore'; }, axis: 'Names left off, crore',
+    rows: top.map(function (s) { return { name: s.state, v: s.removed / 1e7, col: PT[s.phase] }; }).concat([{ name: 'The other ' + restN + ' together', v: (T.removed - topSum) / 1e7, col: '--fill-grey' }]) });
 
   document.getElementById('pPhase').textContent = 'The revision ran in three phases.' + (rising ? ' Each later phase removed a larger share of its rolls.' : '');
   document.getElementById('tPhase').innerHTML = '<thead><tr><th scope="col" class="l">Phase</th><th scope="col" class="l">Began</th><th scope="col">States</th><th scope="col">Left off</th><th scope="col">Per 100</th></tr></thead><tbody>' +
@@ -143,8 +183,7 @@ SIR.json('data/india/states.json').then(function (d) {
     return s.source_url ? '<a href="' + E(s.source_url) + '" rel="noopener" target="_blank">' + name + '</a>' : name;
   };
   var hiState = high.state;
-  document.getElementById('pTop').textContent = 'These ten account for ' + cr(topSum) + ' of the ' + cr(T.removed) + '.' +
-    (top.some(function (s) { return s.state === hiState; }) ? ' ' + hiState + ' lost the largest share of its roll, about one name in ' + share(high.per_100) + '.' : '');
+  document.getElementById('pTop').textContent = 'The ten are ' + Math.round(100 * topSum / T.removed) + ' in every 100 names left off across India. Each bar is coloured by the state\'s phase, as in the chart above.';
   document.getElementById('tTop').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Left off</th><th scope="col">Per 100</th><th scope="col" class="l">Source</th></tr></thead><tbody>' +
     top.map(function (s) {
       return '<tr><td class="l">' + E(s.state) + '</td><td>' + n(s.removed) + (s.figures === 'rounded' && s.removed % 1000 === 0 ? ' (rounded)' : '') + '</td><td>' + (s.electors_before ? p1(100 * s.removed / s.electors_before) : '') + '</td><td class="l">' + who(s) + '</td></tr>';
