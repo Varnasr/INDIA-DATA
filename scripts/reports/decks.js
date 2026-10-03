@@ -794,6 +794,56 @@ function india() {
   K.body(s, 'Removals after the draft, at hearings and on objections, carry no reason outside Bihar, and no state has said how many of those added at the final roll had been removed at the draft. The Election Commission has published no state table of its own.', M, TOP + 2.0, W - 2 * M, 2.2, 16);
 
   // ---- The Election Commission
+  {
+    // against the winning margins: the names removed set against the votes that decide a seat
+    const MG = J('india/margins.json'), IMB = J('bihar/impact.json'), BFm = J('bihar/final.json').margin;
+    const fl = ['booth_lower', 'booth_upper'].map((k) => IMB.summary[k].flips);
+    const ndaR = Object.values(IMB.summary).map((v) => BFm.won_by_alliance.NDA + v.to_nda - v.to_india);
+    s = K.slide('Against the margins', 'In Bihar and Tamil Nadu, more names were removed than the winning margin in ' + MG.removed.assembly_over + ' of ' + MG.removed.assembly_seats + ' assembly seats', 'Assembly seats where the count is larger than the winning margin, %. West Bengal and Kerala count the fall in the roll');
+    s.addChart(pres.charts.BAR, [{ name: 'Seats where the count is larger than the margin', labels: MG.assembly.map((a) => a.state + (a.kind === 'fall' ? ' (roll fall)' : '')), values: MG.assembly.map((a) => +(100 * a.over_margin / a.seats).toFixed(1)) }],
+      K.chart(Object.assign({}, K.left, { barDir: 'bar', chartColors: MG.assembly.map((a) => a.kind === 'fall' ? GREY : 'C0392B'), showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0', valAxisMaxVal: 100, valAxisHidden: true })));
+    K.right(s, [
+      'Bihar ' + MG.assembly[0].over_margin + ' of ' + MG.assembly[0].seats + ' and Tamil Nadu ' + MG.assembly[1].over_margin + ' of ' + MG.assembly[1].seats + ', on the names removed.',
+      'West Bengal ' + MG.assembly[2].over_margin + ' of ' + MG.assembly[2].seats + ' and Kerala ' + MG.assembly[3].over_margin + ' of ' + MG.assembly[3].seats + ', on the fall in the roll, which also takes in ordinary deaths and moves.',
+      'Larger than the margin means the removals were enough to decide a seat. In Bihar, the one state whose lists show who was removed, ' + Math.min(...fl) + ' to ' + Math.max(...fl) + ' seats change hands on the estimates, in both directions, and the NDA keeps ' + Math.min(...ndaR) + ' to ' + Math.max(...ndaR) + ' of ' + BFm.seats + '.',
+    ], 13);
+    s.addNotes('The two kinds of count are never added together. Assembly margins come from each state\'s election pages on the site.');
+    const tn = MG.even_test.find((t) => t.state === 'Tamil Nadu'), bt = MG.even_test.find((t) => t.state === 'Bihar');
+    s = K.slide('Against the margins', 'In the 2024 Lok Sabha seats of the four states, the count was larger than the margin in ' + (MG.removed.ls_over + MG.fall.ls_over) + ' of ' + (MG.removed.ls_seats + MG.fall.ls_seats), 'Each seat\'s count added up from its assembly segments and set against its 2024 margin');
+    K.table(s, ['Comparison', 'Seats', 'Count larger than the margin'], [
+      ['Bihar and Tamil Nadu, names removed', MG.removed.ls_seats, MG.removed.ls_over],
+      ['West Bengal and Kerala, fall in the roll', MG.fall.ls_seats, MG.fall.ls_over],
+      ['Every state, removals spread evenly (an assumption)', MG.even_total.pcs, MG.even_total.over_margin],
+    ], M, TOP, 7.6, [4.6, 1.2, 1.8], 13);
+    K.right(s, [
+      'The revision came after the 2024 election, so this measures how large the removals are against the votes that decide a seat. It does not say what happened in 2024.',
+      'No state has published removals by Lok Sabha seat. The even spread is tested where seats can be counted: Bihar ' + bt.even + ' against ' + bt.actual + ', Tamil Nadu ' + tn.even + ' against ' + tn.actual + '. It can run high.',
+      'In 2024, ' + MG.ls_close.under_50000 + ' of ' + MG.ls_close.contested + ' contested seats were won by fewer than 50,000 votes.',
+    ], 13);
+    s.addNotes('2024 margins are the winner\'s votes less the runner-up candidate\'s, from the ECI results and statistical report 34, through a published compilation, checked against the published margin in every seat. NOTA is never a runner-up. Surat was unopposed.');
+
+    const LSE = J('india/lok_sabha_electors.json').rows, L24 = LSE[LSE.length - 1], g10 = L24.electors - LSE.find((r) => r.election === '2014').electors;
+    const ov = LSE.filter((r) => r.electors_per_100 > 100);
+    s = K.slide('Against the margins', 'The ' + crore(T.removed) + ' left off are ' + Math.round(100 * T.removed / g10) + ' in every 100 of what the whole roll gained from 2014 to 2024', 'Electors in every Lok Sabha election, and the population of voting age, in crore');
+    s.addChart(pres.charts.LINE, [
+      { name: 'Electors on the roll', labels: LSE.map((r) => r.election), values: LSE.map((r) => +(r.electors / 1e7).toFixed(2)) },
+      { name: 'Population of voting age', labels: LSE.map((r) => r.election), values: LSE.map((r) => +(r.pop_voting_age / 1e7).toFixed(2)) },
+    ], K.chart(Object.assign({}, K.left, { chartColors: [Pal.dark, '17A589'], lineSize: 2, lineDataSymbolSize: 6, showLegend: true, valAxisMinVal: 0, valAxisMaxVal: 110, catAxisLabelFontSize: 9 })));
+    K.right(s, [
+      'The roll grew from ' + crore(LSE[0].electors) + ' in ' + LSE[0].election + ' to ' + crore(L24.electors) + ' in 2024.',
+      'To ' + ov[ov.length - 1].election + ' it held more names than people of voting age. If the estimate is right, it carried the names of people who had died or moved.',
+      'Since then it has held fewer, ' + Math.round(L24.electors_per_100) + ' for every 100 in 2024. The population counts people who are not citizens.',
+      'The revision covered ' + T.states + ' states and the Lok Sabha figure is all India, so the two counts are not strictly alike.',
+    ], 12.5);
+    s.addNotes('Electors from the ECI Atlas 2024, Graph 6.1 (the Atlas misprints 1991-92). Population from the UN World Population Prospects 2024, 21 and over in 1984-85 and 18 and over from 1989.');
+
+    const PR = J('india/process.json');
+    const moves = (r) => r.steps.filter((st) => st.kind !== 'published').length - 1;
+    s = K.slide('How it was run', 'The rules changed ' + PR.timeline.length + ' times while the revision was under way, and dates moved ' + PR.schedules.reduce((n, r) => n + moves(r), 0) + ' times', 'What made it harder to stay on the roll, each point resting on an order or a judgment');
+    K.bullets(s, PR.burdens.map((b) => b.title + '. ' + b.text.split('. ')[0] + '.'), M, TOP - 0.2, W - 2 * M, CH, 13);
+    s.addNotes(PR.timeline.filter((t) => t.who === 'sc').length + ' of the ' + PR.timeline.length + ' entries are Supreme Court orders or its judgment. The site also lists ' + PR.reported.length + ' press reports of problems, each attributed and kept apart because no document confirms them.');
+  }
+
   s = K.slide('What the Election Commission should do', 'Publish its own table, and the lists behind it');
   K.numbered(s, [
     'Publish a state-by-state table of its own, with the reason for every removal at the draft and after it, exact rather than rounded.',
