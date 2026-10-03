@@ -187,6 +187,22 @@ asserts that. The roll exceeds that population in every election to 1999
 moved names, and never call the shortfall missing voters: the population
 counts residents who are not citizens.
 
+**Against the winning margins** opens the same page. `scripts/build_margins.py`
+writes `data/india/margins.json` and `margins_ls2024.csv` from the four states'
+seat files and the 2024 Lok Sabha results (`data/india/raw/ls2024_pc_results.csv`
+and `ls2024_ac_pc.csv`, written by hand-run `scripts/fetch_ls2024.py` from a
+published compilation of the ECI results and statistical report 34). It makes
+three comparisons and keeps them apart: assembly seats in Bihar and Tamil Nadu
+(names removed, 385 of 477 over the margin) and in West Bengal and Kerala (fall
+in the roll, 177 of 434), never added together; the 141 Lok Sabha seats of those
+four states, each summed from its segments; and every state with its removals
+spread evenly over its Lok Sabha seats, which is an assumption and is tested on
+the page (Tamil Nadu 27 on the even spread against 19 counted). The build fails
+if a 2024 margin differs from the published one or from Bihar's Wikipedia table.
+NOTA is never a runner-up (Indore); Surat was unopposed. Over the margin means the
+removals were large enough to decide a seat, never that they did: say so, and
+carry Bihar's estimate (4 to 6 seats change hands, both ways) beside it.
+
 `data/bihar/raw/final_roll_format4b.csv` is the Commission's Format 4B return
 for Bihar's final roll, seat by seat and by sex; `scripts/build_bihar_final.py`
 writes `data/bihar/final.json` and fails unless every seat adds up and the
