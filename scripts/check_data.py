@@ -161,6 +161,11 @@ def _rajasthan():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
+def _uttarpradesh():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_uttarpradesh.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
+
 def _telangana():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_telangana.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -240,6 +245,7 @@ for name, fn in [
     ('downloadable tables current', _downloads),
     ('Lok Sabha electors current and within range', _electors),
     ('Rajasthan data matches its raw tables', _rajasthan),
+    ('Uttar Pradesh data matches its raw tables', _uttarpradesh),
     ('removals against winning margins current, 2024 margins match the published ones', _margins),
     ('Hyderabad against Telangana current, and two seats equal to the lists', _telangana),
     ('Bihar final roll current, and equal to the press note', _bihar_final),

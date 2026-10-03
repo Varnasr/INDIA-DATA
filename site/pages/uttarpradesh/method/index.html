@@ -1,0 +1,42 @@
+<!--page {"title": "Uttar Pradesh SIR 2026: sources and method", "description": "Where the Uttar Pradesh figures come from, how the district table was checked, and what it cannot show.", "place": "up"} -->
+<main id="main">
+<div class="page-head"><h1>Sources and method</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only for now. Every figure on it is the Election Commission's or the Chief Electoral Officer's own.</p>
+
+<article class="state" lang="en" dir="ltr" data-no-i18n>
+  <h2>What is counted</h2>
+  <div class="qa"><h3>The district table</h3><p>The names left off the draft roll, district by district and by the reason entered, are from the Chief Electoral Officer's table "Status of Electors in Draft Roll as on 06-01-2026". It gives each of the 75 districts' roll of 27 October 2025, its draft roll and the names left off under five reasons: death, untraceable or absent, permanently shifted, already enrolled and others. The Chief Electoral Officer's site cannot be reached from outside India, so the table is read from the photograph of it that <a href="https://www.indiatvnews.com/uttar-pradesh/up-sir-draft-voter-list-top-three-districts-where-maximum-number-of-voters-have-been-removed-2026-01-06-1024693">India TV published</a> on the same day. Its state row matches the Chief Electoral Officer's press note of 6 January 2026.</p></div>
+  <div class="qa"><h3>How the table was checked</h3><p>Every row has to add up two ways. The roll before less the draft equals the names left off, and the five reasons add up to the same number. A misread digit anywhere in a row breaks at least one of the two. Every column also adds up to the table's own state row: <span id="mBefore"></span> on the roll before, <span id="mDraft"></span> on the draft and <span id="mLeft"></span> left off.</p></div>
+  <div class="qa"><h3>The rolls by sex and the final roll</h3><p>The draft and the final roll of 10 April 2026, by sex, are from the Chief Electoral Officer's own <a href="https://www.instagram.com/p/DXEa2dkEuo7/">post of 13 April 2026</a>. The roll before the revision has not been published by sex, so the names left off cannot be split by sex.</p></div>
+  <div class="qa"><h3>What is from the press</h3><p>The <span id="mAfter"></span> removed after the draft are from <a href="https://www.newindianexpress.com/india/2026/Apr/11/up-final-voter-list-at-1339-crore-after-revision-over-2-crore-names-deleted">The New Indian Express</a>, quoting the Chief Electoral Officer. The Form 6 and Form 7 counts are from <a href="https://www.thehindu.com/news/national/uttar-pradesh/uttar-pradesh-sir-forms-including-names-deletion-in-claims-objections-period/article70715531.ece">The Hindu</a>, quoting the Chief Electoral Officer's press conference of 7 March 2026. For Form 7 the split by sex is of the electors whose deletion was sought.</p></div>
+  <div class="qa"><h3>Shifted, absent or other</h3><p>The press note puts 2.17 crore under shifted and absent. That is untraceable or absent, permanently shifted and others together. The All India pages fold the reasons the same way, into dead, shifted, absent or other, and enrolled more than once.</p></div>
+
+  <h2>What these tables cannot show</h2>
+  <ul class="plain">
+    <li>How many names were left off in each assembly constituency. No such table could be found.</li>
+    <li>The names left off by sex or by age, at any level.</li>
+    <li>How many of those left off were put back, or the final roll by district.</li>
+    <li>Whether each removal was right, or how anyone missing from the roll would have voted.</li>
+  </ul>
+
+  <h2>Downloads</h2>
+  <p>The district table behind every chart is in the Downloads menu at the top of the page.</p>
+
+  <h2>Analysis of the named lists</h2>
+  <p>This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href="https://sabarinstitute.org/">Sabar Institute</a>.</p>
+</article>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/uttarpradesh.js"></script>
+<script>
+SIR.json('data/uttarpradesh/summary.json').then(function (s) {
+  document.getElementById('mBefore').textContent = SIR.n(s.roll_before);
+  document.getElementById('mDraft').textContent = SIR.n(s.draft);
+  document.getElementById('mLeft').textContent = SIR.n(s.left_off);
+  document.getElementById('mAfter').textContent = SIR.n(s.removed_after);
+  SIR.showFaq('up', 'method');
+}).catch(SIR.fail);
+</script>
