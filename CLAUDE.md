@@ -2,7 +2,7 @@
 
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
-Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan and Uttar Pradesh (2026). Static HTML, Chart.js from cdnjs, one
+Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh and Delhi (2026). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
@@ -424,7 +424,8 @@ because the independents' fronts are not in the data.
   with a translated note saying so; only the shell, titles and the front-page
   card are translated. The FAQ in `assets/faq/rajasthan.js` uses plain
   strings for the same reason. Translate before taking the note out.
-- No map: DataMeet's assembly map for Rajasthan is not in `data/geo` yet.
+- The map is by constituency (`data/geo/rajasthan.json`), shaded by the change
+  in the roll; a constituency whose roll grew falls in the lightest bin.
 
 ## Uttar Pradesh
 
@@ -440,7 +441,8 @@ because the independents' fronts are not in the data.
   column must sum to the printed State row, so a misread digit fails the build.
   Say on every page that the table is the CEO's, as published in the press.
 - No table by assembly constituency was found, so there is no constituency
-  page, no map and no comparison with margins. Do not count ACs from the
+  page and no comparison with margins. The map is by district
+  (`data/geo/uttarpradesh.json`, see `data/geo/SOURCES.md`). Do not count ACs from the
   district ASD lists: they carry names.
 - No split by sex of the names left off, at any level. The draft and final by
   sex come from the CEO's own post; the Form 6 and Form 7 counts and the
@@ -450,6 +452,52 @@ because the independents' fronts are not in the data.
 - `data/uttarpradesh/raw/check.py` is a research script and is not in CI: its
   `results_2022.csv` check fails in 32 ACs, and no page uses 2022 results.
 - English only, like Rajasthan, with the same translated note.
+
+## Delhi
+
+`scripts/build_delhi.py` reads `data/delhi/raw` (sources and checks in
+`SOURCES.md` there; `check_raw.py` rebuilds the raw CSVs from `sources/` and
+needs pypdf) and writes `summary.json`, `constituencies.json`,
+`districts.json` and the two CSVs; `check_data.py` runs it with `--check`.
+
+- **Constituencies from the CEO's draft table, by way of a newspaper's map
+  data.** ceodelhi.gov.in cannot be reached from outside India. The draft and
+  the forms not collected for all 70 ACs come from the data behind Business
+  Standard's map, which links the CEO's PDF; the build fails unless they add
+  up exactly to the CEO's state figures (1,45,10,299 before, 97,53,577 draft,
+  47,56,722 left off). Say so on the method page.
+- **Reasons and sex are state figures only.** `secondary_reasons_ac.csv` is a
+  consultancy's count of the named ASDD lists by AC. It is kept as a record
+  and **not used**, like West Bengal's compilations; do not move it onto a
+  page. Men were left off more often than women (35.3 against 29.9 per 100).
+- Districts are the 11 of the 2025 roll; Delhi has 13 now and the new list
+  was not found. Pages say "the districts of the 2025 roll".
+- Margins are from the votes (New Delhi 4,089, Patparganj 28,072, against the
+  4,199 and 28,702 two compilations print). The left-off count exceeds the
+  2025 margin in 68 of 70 seats (66 at turnout); say it could have decided
+  a seat, never that it did.
+- No final roll until after 30 October 2026. Rebuild when it is out.
+- English only, like Rajasthan and Uttar Pradesh.
+
+## Notices
+
+`data/india/raw/notices/notices.csv` holds every count found of electors kept
+on a draft roll but sent a notice, state by state, split where published into
+the no-mapping list and the logical discrepancy list, with hearings held and
+names deleted after a notice, each with its source, date, quote and whether
+it is primary or press (see `SOURCES.md` there). `scripts/build_notices.py`
+picks one total per state by written rules (a published total, never a sum,
+except where only the two lists were given; one matching its own lists, then
+primary, then the latest), and writes `data/india/notices.json` and the
+download. It is drawn on the process page, "Notices: the no-mapping list and
+the discrepancy list". The two lists overlap, so they can add up to more than
+the total (Uttar Pradesh, 1.4 + 2.02 crore against 3.26). Madhya Pradesh's 2.35
+crore is an early software flag and is excluded. Most phase 3 figures are
+running counts; update the rows, not the rules.
+
+In Hyderabad, `discrepancy_only` in `summary.json` is the summoned less the
+no-mapping list (the no-mapping list sits inside the summoned count in every
+part, and a check holds that), shown on the hearings page.
 
 ## One order on the four 2026 state pages
 
@@ -471,7 +519,11 @@ uses it, the comparison against the district.
 (beeswarm), dumbbell, forest, lollipop, rank, dots, heat, and the three added
 for the state pages, `multiples` (small multiples of a path, one shared scale),
 `slope` (two columns, highlighted rows named on the right, nudged apart) and
-`scatter` (SVG, optional y = x line over the shared range). Vary the form
+`scatter` (SVG, optional y = x line over the shared range). On a phone: axis
+titles go through `foot()`, which wraps them and grows the chart rather than
+clipping; keys go through `keyRow()`, which wraps; label columns are sized by
+`fitLw()` to the longest single word; a strip with more than eight rows puts
+its names beside the dots, cut to fit. Vary the form
 within a page; a page of one chart type reads as a table.
 
 `map` draws a choropleth from `data/geo/<state>.json` (DataMeet's assembly

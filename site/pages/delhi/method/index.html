@@ -1,0 +1,39 @@
+<!--page {"title": "Delhi SIR 2026: sources and method", "description": "Where the Delhi figures come from, how they were checked, and what they cannot show.", "place": "dl"} -->
+<main id="main">
+<div class="page-head"><h1>Sources and method</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only for now. Every figure on it is the Election Commission's or the Chief Electoral Officer's own.</p>
+
+<article class="state" lang="en" dir="ltr" data-no-i18n>
+  <h2>What is counted</h2>
+  <div class="qa"><h3>The state figures</h3><p>The roll before the revision (<span id="mBefore"></span>, the roll of 20 June 2026), the draft roll of 31 August 2026 (<span id="mDraft"></span>), the names left off and their three reasons, and both rolls by sex, are from the Chief Electoral Officer's press note of 31 August 2026, quoted to the elector by <a href="https://www.hindustantimes.com/cities/delhi-news/delhi-sir-narrows-gender-gap-as-voter-roll-shrinks-328-101788200888661.html">Hindustan Times</a> and <a href="https://www.business-standard.com/india-news/delhi-sir-2026-draft-13-constituencies-see-over-40-electors-left-out-126090100563_1.html">Business Standard</a>. The two agree on every figure. The Chief Electoral Officer's site cannot be reached from outside India. The roll before by sex adds up to one fewer than the total, and is used as published.</p></div>
+  <div class="qa"><h3>The constituency figures</h3><p>The Chief Electoral Officer published a table of the draft by district and constituency, giving the draft roll and the enumeration forms not collected. The names left off are those forms. The table itself could not be opened from here, so the figures are taken from the data behind Business Standard's map of it. The build fails unless the 70 constituencies add up exactly to the state's roll before, draft and names left off, and they do. Ten constituency figures quoted elsewhere from the same table agree.</p></div>
+  <div class="qa"><h3>Districts</h3><p>The districts are the 11 of the 2025 roll. Delhi has been divided into 13 districts since, and the new list of which constituency falls in which district was not found, so the pages keep the old set and say so.</p></div>
+  <div class="qa"><h3>The 2025 result</h3><p>Winner, runner-up and margin for every seat come from the Election Commission's results of the February 2025 election, and the electors at that poll from the Chief Electoral Officer's turnout table. Margins are computed from the votes. Two published compilations print New Delhi's margin as 4,199 and Patparganj's as 28,702, and the votes give 4,089 and 28,072.</p></div>
+  <div class="qa"><h3>After the draft</h3><p>The Form 6 and Form 7 counts and the notices are as reported in the press, quoting the Chief Electoral Officer. Claims and objections run to 30 October 2026.</p></div>
+
+  <h2>What these tables cannot show</h2>
+  <ul class="plain">
+    <li>The reasons, or the split by sex, in each constituency or district. These were published for Delhi as a whole only. A count of the reasons by constituency exists, made by others from the lists of named electors, and it is not used here.</li>
+    <li>How many of those left off will be put back. There is no final roll yet.</li>
+    <li>Whether each removal was right, or how anyone left off would have voted.</li>
+  </ul>
+
+  <h2>Downloads</h2>
+  <p>The constituency and district tables behind every chart are in the Downloads menu at the top of the page.</p>
+
+  <h2>Analysis of the named lists</h2>
+  <p>This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href="https://sabarinstitute.org/">Sabar Institute</a>.</p>
+</article>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/delhi.js"></script>
+<script>
+SIR.json('data/delhi/summary.json').then(function (s) {
+  document.getElementById('mBefore').textContent = SIR.n(s.roll_before);
+  document.getElementById('mDraft').textContent = SIR.n(s.draft);
+  SIR.showFaq('dl', 'method');
+}).catch(SIR.fail);
+</script>

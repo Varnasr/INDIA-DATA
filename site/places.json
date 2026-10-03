@@ -32,7 +32,7 @@
         ["india/report/", "Full report, online", false],
         ["reports/sir-india-report.pdf", "Full report, PDF", true],
         ["reports/sir-india-deck.pptx", "Slides, PowerPoint", true],
-        ["data/india/states.csv", "State table, CSV", true], ["data/india/lok_sabha_electors.csv", "Lok Sabha electors since 1984, CSV", true], ["data/india/margins_ls2024.csv", "Removals against 2024 Lok Sabha margins, CSV", true], ["data/india/final_rolls.csv", "Final rolls by state, CSV", true], ["data/india/women_removed.csv", "Women among the removed, CSV", true], ["data/india/process_timeline.csv", "Rule changes, dated, CSV", true], ["data/india/process_schedules.csv", "Each state's dates, CSV", true]
+        ["data/india/states.csv", "State table, CSV", true], ["data/india/lok_sabha_electors.csv", "Lok Sabha electors since 1984, CSV", true], ["data/india/margins_ls2024.csv", "Removals against 2024 Lok Sabha margins, CSV", true], ["data/india/final_rolls.csv", "Final rolls by state, CSV", true], ["data/india/women_removed.csv", "Women among the removed, CSV", true], ["data/india/process_timeline.csv", "Rule changes, dated, CSV", true], ["data/india/process_schedules.csv", "Each state's dates, CSV", true], ["data/india/notices.csv", "Notices by state, CSV", true]
       ]
     },
     {
@@ -208,6 +208,24 @@
       ],
       "downloads": [
         ["data/uttarpradesh/districts.csv", "District table, CSV", true]
+      ]
+    },
+    {
+      "id": "dl",
+      "label": "Delhi 2026",
+      "subtitle": "Delhi 2026 · the names left off, constituency by constituency",
+      "band": "jaali",
+      "color": "8a4b2a",
+      "class": "dl",
+      "nav_label": "Delhi pages",
+      "pages": [
+        ["delhi/", "Overview", "i0"],
+        ["delhi/faq/", "FAQ", "i12"],
+        ["delhi/method/", "Method", "i10"]
+      ],
+      "downloads": [
+        ["data/delhi/constituencies.csv", "Constituency table, CSV", true],
+        ["data/delhi/districts.csv", "District table, CSV", true]
       ]
     }
   ]

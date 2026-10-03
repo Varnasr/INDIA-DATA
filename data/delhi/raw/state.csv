@@ -1,0 +1,17 @@
+measure,value,figures,source
+roll_before,14510299,exact,CEO Delhi press note 31.08.2026 as quoted by Business Standard and Hindustan Times
+draft,9753577,exact,same
+left_off,4756722,exact,same
+shifted_absent_other,4332775,exact,same
+dead,282412,exact,same
+duplicate,141535,exact,same
+roll_before_men,7711132,exact,CEO Delhi statement 31.08.2026 as quoted by Hindustan Times
+roll_before_women,6798142,exact,same
+roll_before_third_gender,1024,exact,same (men + women + third gender = 14510298; one short of roll_before)
+draft_men,4988993,exact,same
+draft_women,4764137,exact,same
+draft_third_gender,447,exact,same
+left_off_men,2722139,derived,roll_before_men - draft_men
+left_off_women,2034005,derived,roll_before_women - draft_women
+left_off_third_gender,577,derived,roll_before_third_gender - draft_third_gender
+notices_issued,3312919,reported,Commission's figure as quoted by a secondary compilation (macinsights.in); Alt News gives 33.13 lakh

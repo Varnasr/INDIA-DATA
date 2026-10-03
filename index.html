@@ -31,7 +31,7 @@
     <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">
       <button type="button" class="btn install" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/></svg> <span class="lbl">Install app</span></button>
       <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
-      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Places</span></summary><div class="menu" data-i18n-each><a href="./" aria-current="true">About this site</a><a href="india/">All India</a><a class="sub" href="india/numbers/">The SIR in numbers</a><a class="sub" href="india/process/">How the revision was run</a><a href="bihar/">Bihar 2025</a><a href="hyderabad/">Hyderabad 2026</a><a href="tamilnadu/">Tamil Nadu 2026</a><a href="karnataka/">Karnataka 2026</a><a href="westbengal/">West Bengal 2026</a><a href="kerala/">Kerala 2026</a><a href="rajasthan/">Rajasthan 2026</a><a href="uttarpradesh/">Uttar Pradesh 2026</a></div></details>
+      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Places</span></summary><div class="menu" data-i18n-each><a href="./" aria-current="true">About this site</a><a href="india/">All India</a><a class="sub" href="india/numbers/">The SIR in numbers</a><a class="sub" href="india/process/">How the revision was run</a><a href="bihar/">Bihar 2025</a><a href="hyderabad/">Hyderabad 2026</a><a href="tamilnadu/">Tamil Nadu 2026</a><a href="karnataka/">Karnataka 2026</a><a href="westbengal/">West Bengal 2026</a><a href="kerala/">Kerala 2026</a><a href="rajasthan/">Rajasthan 2026</a><a href="uttarpradesh/">Uttar Pradesh 2026</a><a href="delhi/">Delhi 2026</a></div></details>
       
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
       
@@ -69,6 +69,7 @@
   <a class="hub" href="kerala/"><b>Kerala 2026</b><span id="hKl">Every constituency, the roll from January 2025 to the draft and the election, and who was missing.</span></a>
   <a class="hub" href="rajasthan/"><b>Rajasthan 2026</b><span>The state's removals and reasons, and every constituency's roll from the 2023 election to the final roll.</span></a>
   <a class="hub" href="uttarpradesh/"><b>Uttar Pradesh 2026</b><span>The names left off the draft roll in each of the 75 districts, and the reason entered against them.</span></a>
+  <a class="hub" href="delhi/"><b>Delhi 2026</b><span>The names left off the draft roll in each of the 70 constituencies, against the 2025 winning margins.</span></a>
 </div>
 
 <h2 id="how-the-revision-was-run">How the revision was run</h2>
@@ -97,7 +98,7 @@
 Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')]).then(function (r) {
   var I = r[0], geo = r[1], byName = {}, byId = {};
   var ALIAS = { 'Andaman & Nicobar': 'Andaman and Nicobar Islands', 'Jammu & Kashmir': 'Jammu and Kashmir' };
-  var PAGE = { 'Bihar': 'bihar/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Rajasthan': 'rajasthan/', 'Uttar Pradesh': 'uttarpradesh/', 'Telangana': 'hyderabad/telangana/' };
+  var PAGE = { 'Bihar': 'bihar/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Rajasthan': 'rajasthan/', 'Uttar Pradesh': 'uttarpradesh/', 'Delhi': 'delhi/', 'Telangana': 'hyderabad/telangana/' };
   I.states.forEach(function (st) { byName[st.state] = st; });
   geo.features.forEach(function (f) { var n = ALIAS[f.properties.name] || f.properties.name; byId[f.properties.ac] = { name: n, st: byName[n] }; });
   var v = function (id) { var x = byId[id]; return x && x.st && x.st.per_100 != null ? x.st.per_100 : null; };

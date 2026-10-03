@@ -90,6 +90,9 @@ def build():
     for name, A in D['acs'].items():
         T, P = A['total'], A['parts']
         assert sum(p['asd'] for p in P) == T['asd'] and sum(p['total'] for p in P) == T['total'], name
+        # the no-mapping list is inside the summoned count in every part, so the
+        # discrepancy-only count below cannot go negative
+        assert all(p['nomap'] <= p['hear'] for p in P) and T['nomap'] <= T['hear'], name
         link = bool(T.get('haslink'))
         rates = [100 * p['asd'] / p['total'] for p in P if p['total'] >= 100]
         rates.sort()
@@ -102,6 +105,10 @@ def build():
         acs.append({
             'name': name, 'partlabel': A['partlabel'], 'parts': len(P), 'electors': T['total'], 'deleted': T['asd'],
             'hearing': T['hear'], 'nomap': T['nomap'], 'unaccounted': T['unacc'],
+            # summoned from the discrepancy list and not on the no-mapping list;
+            # an elector on both is counted once, under no mapping
+            'discrepancy_only': T['hear'] - T['nomap'],
+            'nomap_rate': rate(T['nomap'], T['total']), 'discrepancy_rate': rate(T['hear'] - T['nomap'], T['total']),
             'rate': rate(T['asd'], T['total']), 'hearing_rate': rate(T['hear'], T['total']),
             'reasons': dict(zip(D['reasons'], T['reasons'])),
             'age_rate': [rate(a, b) for a, b in zip(T['age_asd'], T['age_all'])],

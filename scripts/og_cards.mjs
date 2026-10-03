@@ -27,6 +27,9 @@ const tn = J('tamilnadu/summary.json');
 const ka = J('karnataka/summary.json');
 const wb = J('westbengal/summary.json');
 const kl = J('kerala/summary.json');
+const rj = J('rajasthan/summary.json');
+const up = J('uttarpradesh/summary.json');
+const dl = J('delhi/summary.json');
 
 // [place id, place name, big figure, the line under it, a second line]
 const CARDS = [
@@ -46,6 +49,12 @@ const CARDS = [
     `Larger than the winning margin in ${wb.over_margin} of ${wb.acs} constituencies`],
   ['kl', 'Kerala 2026', n(kl.fall_draft), `fewer names on Kerala's draft roll than in January 2025`,
     `${p(kl.draft_per_100)} of every 100 electors on the January 2025 roll`],
+  ['rj', 'Rajasthan 2026', n(rj.left_off), `names left off Rajasthan's draft roll`,
+    `${p(rj.left_per_100)} of every 100 electors on the roll before the revision`],
+  ['up', 'Uttar Pradesh 2026', n(up.left_off), `names left off Uttar Pradesh's draft roll`,
+    `${p(up.per_100)} of every 100 electors, in ${up.districts} districts`],
+  ['dl', 'Delhi 2026', n(dl.left_off), `names left off Delhi's draft roll`,
+    `More than the 2025 winning margin in ${dl.over_margin} of ${dl.acs} constituencies`],
 ];
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');

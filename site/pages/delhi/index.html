@@ -1,0 +1,135 @@
+<!--page {"title": "Delhi SIR 2026: the names left off, by constituency", "description": "How many names Delhi's SIR draft roll left off in each of its 70 assembly constituencies, set against the 2025 winning margins.", "place": "dl"} -->
+<main id="main">
+<div class="page-head"><h1>Delhi: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only for now. Every figure on it is the Election Commission's or the Chief Electoral Officer's own.</p>
+
+<article class="state" lang="en" dir="ltr" data-no-i18n>
+  <h2>Find a constituency or district</h2>
+  <p class="sub">Type a constituency's name or number, or a district, and its figures appear below with a link you can send.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="finder" id="finder"></div>
+      <div class="vizbox" id="vMap"></div>
+      <p class="note">Each constituency is shaded by the names left off its draft roll per 100 electors on its roll before the revision. Tap a constituency for its figures. Boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.</p>
+    </div>
+  </div>
+
+  <h2>The roll, step by step</h2>
+  <p class="sub">Delhi's roll before the revision, the names left off, and the draft roll of 31 August 2026. Claims and objections run to 30 October 2026, so there is no final roll yet. The bars start above zero so that the changes can be seen.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
+  </div>
+  <p class="finding" id="fWater"></p>
+  <p class="note">Delhi's dates, as they were set and as they were moved, are drawn beside every other state's on <a href="../india/process/#s-delhi">How the revision was run</a>.</p>
+
+  <h2>The reasons</h2>
+  <p class="sub">The reasons were published for Delhi as a whole. A reason is what the officer wrote down, and nobody checked it.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vReason"></div></div>
+  </div>
+  <p class="finding" id="fReason"></p>
+
+  <h2>Per 100 electors, by district</h2>
+  <p class="sub">Each dot is one constituency's names left off, for every 100 electors on its roll before the revision, grouped by the districts of the 2025 roll. Hover or tap a dot for its name.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vDist"></div></div>
+  </div>
+  <p class="finding" id="fDist"></p>
+
+  <h2>Women</h2>
+  <p class="sub">Names left off for every 100 men and every 100 women on the roll before the revision. The split by sex was published for Delhi as a whole only.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vSex"></div></div>
+  </div>
+  <p class="finding" id="fSex"></p>
+
+  <h2>Against the 2025 margins</h2>
+  <p class="sub">Each dot is a constituency. Across, the margin its 2025 winner won by; up, the names left off its draft roll. Above the dashed line, more names were left off than the margin. The election came before the revision, so this measures how large the removals are against the votes that decide a seat, and nobody can know how anyone left off would have voted.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vMargin"></div></div>
+  </div>
+  <p class="finding" id="fMargin"></p>
+
+  <h2>After the draft</h2>
+  <p class="finding" id="fAfter"></p>
+
+  <h2>Every district</h2>
+  <p class="sub">Click a column heading to sort. The table scrolls.</p>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="Every district"><table id="tDist"></table></div>
+
+  <h2>Every constituency</h2>
+  <p class="sub">Click a column heading to sort. The table scrolls.</p>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="Every constituency"><table id="tAc"></table></div>
+
+  <p class="note">Every figure on this page is computed from the published data when the page loads. <a href="method/">Sources and method</a>.</p>
+</article>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../assets/sir.js"></script>
+<script src="../assets/viz.js"></script>
+<script src="../assets/faq/delhi.js"></script>
+<script>
+Promise.all([SIR.json('data/delhi/summary.json'), SIR.json('data/delhi/districts.json'), SIR.json('data/delhi/constituencies.json'), SIR.json('data/india/notices.json')]).then(function (r) {
+  var S = r[0], D = r[1], A = r[2], NT = r[3].states.filter(function (x) { return x.state === 'Delhi'; })[0], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
+  var lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; };
+  VIZ.waterfall('vWater', { label: 'Delhi: the roll before the revision and the draft roll of 31 August 2026', from: Math.floor(S.draft * 0.8 / 1e6) * 1e6, steps: [
+    { name: 'Roll before the revision', v: S.roll_before, kind: 'total' }, { name: 'Left off the draft', v: S.left_off, kind: 'down' }, { name: 'Draft roll', v: S.draft, kind: 'total' }] });
+  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + lk(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors.</b> In ' + S.acs_over_40 + ' of the 70 constituencies it left off 40 or more of every 100. It ranges from ' + d1(S.rate_min_v) + ' per 100 in ' + S.rate_min + ' to ' + d1(S.rate_max_v) + ' in ' + S.rate_max + '.';
+
+  VIZ.lollipop('vReason', { label: 'Names left off the draft, by the reason entered', axis: 'Lakh',
+    rows: [['Shifted, absent or other', S.reasons.shifted_absent_other], ['Dead', S.reasons.dead], ['Enrolled at more than one place', S.reasons.duplicate]].map(function (x) { return { name: x[0], v: x[1] / 1e5, text: lk(x[1]), tok: '--fill-navy', hi: true }; }) });
+  document.getElementById('fReason').innerHTML = '<b>' + SIR.pct(S.shares.shifted_absent_other) + ' were entered as shifted, absent or other, ' + SIR.pct(S.shares.dead) + ' as dead and ' + SIR.pct(S.shares.duplicate) + ' as enrolled at more than one place.</b> The Chief Electoral Officer did not separate shifted from absent.';
+
+  var top = D[0].district;
+  VIZ.strip('vDist', { label: 'Names left off per 100 electors, every constituency, by district', axis: 'Left off per 100 electors on the roll before the revision', r: 4.5,
+    key: [[top + ' district', '--fill-red'], ['Other districts', '--fill-navy']],
+    rows: D.map(function (d) { return { name: d.district, tok: d.district === top ? '--fill-red' : '--fill-navy',
+      points: A.filter(function (a) { return a.district === d.district; }).map(function (a) { return { v: a.per_100, label: a.name + ': ' + d1(a.per_100) + ' per 100' }; }) }; }) });
+  document.getElementById('fDist').innerHTML = '<b>' + top + ' district left off ' + d1(D[0].per_100) + ' of every 100 electors, the most of the 11.</b> ' + D[1].district + ' and ' + D[2].district + ' come next, at ' + d1(D[1].per_100) + ' and ' + d1(D[2].per_100) + '. ' + D[D.length - 1].district + ' left off the fewest, ' + d1(D[D.length - 1].per_100) + '.';
+
+  VIZ.lollipop('vSex', { label: 'Names left off per 100 men and per 100 women on the roll before the revision', axis: 'Left off per 100 on the roll before the revision',
+    rows: [['Men', S.men_left_per_100, '--fill-navy'], ['Women', S.women_left_per_100, '--fill-pink']].map(function (x) { return { name: x[0], v: x[1], text: d1(x[1]), tok: x[2], hi: true }; }) });
+  document.getElementById('fSex').innerHTML = '<b>Men were left off more often than women, ' + d1(S.men_left_per_100) + ' of every 100 men against ' + d1(S.women_left_per_100) + ' of every 100 women.</b> Women were ' + SIR.pct(S.women_before_pct) + ' of the roll before the revision and ' + SIR.pct(S.women_left_off_pct) + ' of the names left off, so their share of the draft roll rose to ' + SIR.pct(S.women_draft_pct) + '. These are state figures. The split by constituency was not published.';
+
+  VIZ.scatter('vMargin', { label: 'Names left off each constituency\'s draft roll against its 2025 winning margin', diag: true, xMin: 0, yMin: 0,
+    xAxis: '2025 winning margin', yAxis: 'Names left off the draft', diagLabel: 'left off = margin',
+    key: [['BJP won', '--fill-nda'], ['AAP won', '--fill-india']],
+    points: A.map(function (a) { return { x: a.margin, y: a.left_off, tok: a.winner === 'BJP' ? '--fill-nda' : '--fill-india', label: a.name + ' (' + a.winner + '): ' + n(a.left_off) + ' left off, margin ' + n(a.margin) }; }) });
+  var P = {}; S.parties.forEach(function (p) { P[p.party] = p; });
+  var under = A.filter(function (a) { return !a.over_margin; });
+  document.getElementById('fMargin').innerHTML = '<b>In ' + S.over_margin + ' of the 70 constituencies, more names were left off the draft than the 2025 winning margin.</b> Counted at each seat\'s 2025 turnout, it is ' + S.at_turnout_over_margin + '. ' + (under.length ? 'The exceptions are ' + under.map(function (a) { return a.name; }).join(' and ') + '. ' : '') + 'The BJP\'s ' + P.BJP.seats + ' seats lost ' + d1(P.BJP.per_100) + ' per 100 and the AAP\'s ' + P.AAP.seats + ' lost ' + d1(P.AAP.per_100) + '. Against their own districts the two are ' + SIR.d(P.BJP.vs_district, 1) + ' and ' + SIR.d(P.AAP.vs_district, 1) + ' points, so the difference is mostly about where the seats are. Larger than the margin means large enough to decide a seat, and says nothing about whether it would have.';
+
+  document.getElementById('fAfter').innerHTML = (NT && NT.notices ? 'Of the electors left on the draft roll, ' + lk(NT.notices) + ' were sent a notice to prove their entry, ' + d1(NT.per_100) + ' of every 100. ' : '') + (NT && NT.no_mapping ? 'Of them, ' + lk(NT.no_mapping) + ' could not be linked to the roll of the last intensive revision and ' + lk(NT.discrepancy) + ' were on the discrepancy list, as reported in the press. ' : '') +
+    'By 29 September, as reported, ' + lk(S.form6_to_0929) + ' Form 6 claims to be added and ' + lk(S.form7_to_0929) + ' Form 7 objections had been filed, counting those filed before the draft. Claims and objections close on 30 October 2026 and the final roll is due after that.';
+
+  SIR.table(document.getElementById('tDist'), [
+    { k: 'district', label: 'District (2025 roll)', left: true }, { k: 'acs', label: 'Seats' }, { k: 'roll_before', label: 'Roll before', fmt: n },
+    { k: 'draft', label: 'Draft roll', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 }], D, { sort: 'per_100' });
+  SIR.table(document.getElementById('tAc'), [
+    { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', left: true }, { k: 'district', label: 'District', left: true },
+    { k: 'roll_before', label: 'Roll before', fmt: n }, { k: 'draft', label: 'Draft roll', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n },
+    { k: 'per_100', label: 'Per 100', fmt: d1 }, { k: 'winner', label: 'Won 2025', left: true }, { k: 'margin', label: 'Margin 2025', fmt: n }], A, { sort: 'per_100' });
+
+  var seatsOf = function (d) { return A.filter(function (a) { return a.district === d.district; }); };
+  var DSET = { rows: D, key: function (d) { return SIR.slug(d.district); }, label: function (d) { return d.district + ' district'; },
+    card: function (d) { return SIR.facts([['Roll before the revision', n(d.roll_before)], ['Draft roll', n(d.draft)], ['Left off', n(d.left_off)], ['Per 100 electors', d1(d.per_100)], ['Constituencies', n(d.acs)]]) + '<p class="note">Its constituencies</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
+    pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); },
+    share: function (d) { return d.district + ' district, Delhi (districts of the 2025 roll). The SIR draft roll left off ' + n(d.left_off) + ' names, ' + d1(d.per_100) + ' of every 100 electors. These are counts from the Chief Electoral Officer\'s table of the draft.'; } };
+  var F = SIR.finder('finder', { rows: A, more: [DSET], prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district', key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+    pick: function (a) { var b = document.getElementById('vMap'); if (b.__select) b.__select(a.ac); },
+    card: function (a) { return SIR.facts([['Roll before the revision', n(a.roll_before)], ['Draft roll', n(a.draft)], ['Left off', n(a.left_off)], ['Per 100 electors', d1(a.per_100)],
+      ['Won in 2025', a.winner + ' · margin ' + n(a.margin)], ['Left off larger than the margin', a.over_margin ? 'Yes' : 'No']]); },
+    share: function (a) { return a.name + ', Delhi. The SIR draft roll left off ' + n(a.left_off) + ' names, ' + d1(a.per_100) + ' of every 100 electors. The seat was won in 2025 by ' + n(a.margin) + ' votes. These are counts from the Chief Electoral Officer\'s table of the draft.'; } });
+  SIR.json('data/geo/delhi.json').then(function (geo) {
+    var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });
+    VIZ.map('vMap', { geo: geo, label: 'Map of names left off the draft per 100 electors, by constituency', title: 'Left off per 100 electors',
+      v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
+      pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
+    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
+    SIR.tools();
+  });
+  SIR.showFaq('dl', 'main');
+}).catch(SIR.fail);
+</script>

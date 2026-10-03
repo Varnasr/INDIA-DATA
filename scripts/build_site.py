@@ -221,7 +221,7 @@ def search_index():
             pages.append([p['id'], label, h])
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
-                              ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/')):
+                              ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/')):
         for a in J(folder + '/constituencies.json'):
             rows.append([pid, 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], page + '#ac-%d' % a['ac']])
         for d in J(folder + '/districts.json'):
