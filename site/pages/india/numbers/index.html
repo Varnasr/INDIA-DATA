@@ -19,8 +19,9 @@
   <h2>The roll over forty years</h2>
   <div class="grid">
     <div class="panel wide">
-      <h3>Electors in every Lok Sabha general election, 1984-85 to 2024, in crore</h3>
-      <div class="chart"><canvas id="cLs" aria-label="Electors in every Lok Sabha general election from 1984-85 to 2024, in crore"></canvas></div>
+      <h3>Electors and the population of voting age in every Lok Sabha general election, 1984-85 to 2024, in crore</h3>
+      <div class="legend" id="kLs"></div>
+      <div class="chart"><canvas id="cLs" aria-label="Electors and the population of voting age in every Lok Sabha general election from 1984-85 to 2024, in crore"></canvas></div>
       <p id="pLs"></p>
     </div>
   </div>
@@ -128,15 +129,25 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   var narrow = window.innerWidth < 600, KEEP = ['1984-85', '1996', '2004', '2014', '2024'];
   var byYear = {}; LR.forEach(function (r) { byYear[r.year] = r.election; });
   SIR.chart('cLs', { type: 'scatter',
-    data: { datasets: [{ label: 'Electors, crore', data: LR.map(function (r) { return { x: r.year, y: r.electors / 1e7, n: r.election }; }), showLine: true, $token: '--fill-navy', borderWidth: 2.5, pointRadius: 4, tension: 0, pointBackgroundColor: '#fff' }] },
-    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { return c.raw.n + ': ' + c.raw.y.toFixed(2) + ' crore'; } } } },
+    data: { datasets: [
+      { label: 'Electors on the roll', data: LR.map(function (r) { return { x: r.year, y: r.electors / 1e7, n: r.election }; }), showLine: true, $token: '--fill-navy', borderWidth: 2.5, pointRadius: 4, tension: 0, pointBackgroundColor: '#fff' },
+      { label: 'Population of voting age', data: LR.map(function (r) { return { x: r.year, y: r.pop_voting_age / 1e7, n: r.election, a: r.voting_age }; }), showLine: true, $token: '--fill-teal', borderWidth: 2.5, borderDash: [6, 4], pointRadius: 4, tension: 0, pointBackgroundColor: '#fff' }] },
+    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { return c.raw.a ? c.raw.n + ', population ' + c.raw.a + ' and over: ' + c.raw.y.toFixed(2) + ' crore' : c.raw.n + ', electors: ' + c.raw.y.toFixed(2) + ' crore'; } } } },
       scales: { x: { type: 'linear', min: 1983, max: 2026, afterBuildTicks: function (ax) { ax.ticks = LR.map(function (r) { return { value: r.year }; }); },
           ticks: { autoSkip: false, maxRotation: 0, callback: function (v) { var e = byYear[v] || ''; return (narrow ? KEEP.indexOf(e) >= 0 : e !== '1998') ? e : ''; } }, title: { display: true, text: narrow ? 'Lok Sabha election, years to scale' : 'Lok Sabha general election, years spaced to scale (1998 and 1999 sit side by side)' } },
-        y: { beginAtZero: true, max: 100, title: { display: true, text: 'Electors, crore' } } } } });
+        y: { beginAtZero: true, max: 120, ticks: { stepSize: 20 }, title: { display: true, text: 'Crore' } } } } });
   var i14 = LR.filter(function (r) { return r.election === '2014'; })[0];
   var gain = last.electors - i14.electors;
-  document.getElementById('pLs').textContent = 'The roll grew from ' + cr(first.electors) + ' in ' + first.election + ' to ' + cr(last.electors) + ' in ' + last.election + ', ' + (last.electors / first.electors).toFixed(2) + ' times over. In the ten years from 2014 to 2024 it gained ' + cr(gain) + '. The ' + cr(T.removed) + ' names left off the draft rolls are ' + Math.round(100 * T.removed / gain) + ' in every 100 of that gain. The two counts are not strictly alike, because the revision covered ' + T.states + ' states and union territories and the Lok Sabha figure is all India.';
-  document.getElementById('nLs').innerHTML = 'Source: <a href="' + E(LS.url) + '" rel="noopener" target="_blank">' + E(LS.source) + '</a>. ' + LR.filter(function (r) { return r.note; }).map(function (r) { return r.election + ': ' + E(r.note) + '.'; }).join(' ') + ' The figures can be downloaded as <a href="../../data/india/lok_sabha_electors.csv">lok_sabha_electors.csv</a>.';
+  // the roll against the population old enough to vote: above 100 before 2004, below it since
+  var over = LR.filter(function (r) { return r.electors_per_100 > 100; }), under = LR.filter(function (r) { return r.electors_per_100 <= 100; });
+  var top1 = over.slice().sort(function (a, b) { return b.electors_per_100 - a.electors_per_100; })[0];
+  var lo = under.slice().sort(function (a, b) { return a.electors_per_100 - b.electors_per_100; })[0];
+  document.getElementById('kLs').innerHTML = '<span><i style="background:var(--fill-navy)"></i>Electors on the roll</span><span><i style="background:repeating-linear-gradient(90deg,var(--fill-teal) 0 5px,transparent 5px 8px)"></i>Population of voting age (21 and over in 1984-85, 18 and over from 1989)</span>';
+  document.getElementById('pLs').textContent = 'The roll grew from ' + cr(first.electors) + ' in ' + first.election + ' to ' + cr(last.electors) + ' in ' + last.election + ', ' + (last.electors / first.electors).toFixed(2) + ' times over. ' +
+    (over.length ? 'In ' + over.length + ' elections, from ' + over[0].election + ' to ' + over[over.length - 1].election + ', the roll held more names than there were people of voting age, up to ' + p1(top1.electors_per_100) + ' for every 100 in ' + top1.election + '. If the population estimate is right, a roll that large carried the names of people who had died or moved away, or counted some people twice. ' : '') +
+    'Since then it has held fewer, ' + Math.round(lo.electors_per_100) + ' to ' + Math.round(Math.max.apply(null, under.map(function (r) { return r.electors_per_100; }))) + ' for every 100, and ' + Math.round(last.electors_per_100) + ' in ' + last.election + ', when the roll was ' + cr(last.pop_voting_age - last.electors) + ' short of the population of voting age. Some of that gap is people who are not citizens, whom the population counts and the roll cannot. ' +
+    'In the ten years from 2014 to 2024 the roll gained ' + cr(gain) + '. The ' + cr(T.removed) + ' names left off the draft rolls are ' + Math.round(100 * T.removed / gain) + ' in every 100 of that gain. The two counts are not strictly alike, because the revision covered ' + T.states + ' states and union territories and the Lok Sabha figure is all India.';
+  document.getElementById('nLs').innerHTML = 'Electors from the <a href="' + E(LS.url) + '" rel="noopener" target="_blank">' + E(LS.source) + '</a>. Population from the <a href="' + E(LS.pop_url) + '" rel="noopener" target="_blank">' + E(LS.pop_source) + '</a>. The population is a modelled estimate that counts everyone living in India, citizens or not, and the 1991-92 roll has no Jammu and Kashmir, which did not vote then, while the population includes it. The voting age was 21 until the 61st Amendment came into force in 1989. ' + LR.filter(function (r) { return r.note; }).map(function (r) { return r.election + ': ' + E(r.note) + '.'; }).join(' ') + ' The figures can be downloaded as <a href="../../data/india/lok_sabha_electors.csv">lok_sabha_electors.csv</a>.';
 
   // every state's rate, coloured by phase, the ten largest named in bold
   var PT = { '1': '--fill-red', '2': '--fill-navy', '3': '--fill-teal' };
