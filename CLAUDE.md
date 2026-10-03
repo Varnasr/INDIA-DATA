@@ -399,6 +399,33 @@ called names restored; five northern districts end above their January roll.
 Party comparisons are by party (INC, CPI(M), IUML, others), not by front,
 because the independents' fronts are not in the data.
 
+## Rajasthan
+
+`scripts/build_rajasthan.py` reads `data/rajasthan/raw` (sources and checks in
+`SOURCES.md` there) and writes `summary.json`, `constituencies.json`,
+`districts.json` and the two CSVs; `check_data.py` runs it with `--check`.
+
+- **The removals are a state total only.** The CEO's press note of 16 December
+  2025 and fact sheet of 21 February 2026 give the roll before (5,46,56,215),
+  the draft (5,04,71,324), so 41,84,891 left off, the three reasons in lakh,
+  rounded, and the additions, deletions and final roll by sex, all for the 199
+  ACs revised together. Anta (193) was revised later and is outside them. The
+  only AC-level source is the lists of individual electors, never opened.
+- **Below the state the pages measure the change in the roll**, general
+  electors only, from the roll of the 2023 election (ECI statistical report
+  11, `electors_2023_ac.csv`) to the final SIR roll of 12 March 2026. It spans
+  more than two years of new voters, deaths and moves, so it is never called
+  the removals; for the state it is 10.6 lakh against 41.8 lakh left off, and
+  49 seats grew. Service voters are left out of both, because they cluster in
+  districts like Jhunjhunu and would distort the change there.
+- The 2026 table counts 565 third-gender electors among women, so the 2023
+  third-gender electors are added to women before comparing.
+- The pages are English only for now (the article carries `data-no-i18n`),
+  with a translated note saying so; only the shell, titles and the front-page
+  card are translated. The FAQ in `assets/faq/rajasthan.js` uses plain
+  strings for the same reason. Translate before taking the note out.
+- No map: DataMeet's assembly map for Rajasthan is not in `data/geo` yet.
+
 ## One order on the four 2026 state pages
 
 Tamil Nadu, Karnataka, West Bengal and Kerala follow one order, with the same
