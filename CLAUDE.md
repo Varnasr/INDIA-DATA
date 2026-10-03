@@ -159,6 +159,12 @@ page and on the Bihar and Hyderabad method pages. `#s-<state>` (lower case,
 hyphens: `#s-tamil-nadu`) outlines that state's row and scrolls to its chart;
 `#t-<date>` opens on a timeline entry.
 
+**The SIR in numbers** (`india/numbers/`) is the one-page summary: the roll
+before, the names left off, by phase and in the ten largest states, each with
+its source. Every figure and sentence on it is computed from
+`data/india/states.json` when the page loads, so it moves with the state
+table. It is English only, like the process page.
+
 `data/bihar/raw/final_roll_format4b.csv` is the Commission's Format 4B return
 for Bihar's final roll, seat by seat and by sex; `scripts/build_bihar_final.py`
 writes `data/bihar/final.json` and fails unless every seat adds up and the

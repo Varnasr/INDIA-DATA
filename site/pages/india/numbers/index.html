@@ -1,0 +1,129 @@
+<!--page {"title": "The SIR in numbers: India's electoral rolls before and after", "description": "How many people were on the electoral rolls before the Special Intensive Revision, how many the draft rolls left off, by phase and in the ten largest states, with a source for every figure.", "place": "india"} -->
+<main id="main">
+<div class="page-head" data-no-i18n><h1>The SIR in numbers</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only. Every figure on it comes from the state table on the All India page, which links each state to its source.</p>
+
+<article class="numbers" lang="en" dir="ltr" data-no-i18n>
+  <div class="kpis" id="kpis"></div>
+
+  <h2>The totals</h2>
+  <div class="twrap" tabindex="0" role="region" aria-label="The totals"><table id="tTotal"></table></div>
+  <p class="note" id="nTotal"></p>
+
+  <h2>By phase</h2>
+  <p id="pPhase"></p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Names left off, by phase"><table id="tPhase"></table></div>
+
+  <h2>The ten largest</h2>
+  <p id="pTop"></p>
+  <div class="twrap" tabindex="0" role="region" aria-label="The ten states with the most names left off"><table id="tTop"></table></div>
+  <p class="note" id="nTop"></p>
+
+  <h2>How to read these numbers</h2>
+  <ol id="read"></ol>
+
+  <h2>Sources</h2>
+  <ul class="plain">
+    <li><a href="../#every-state-and-union-territory">Every state and union territory</a>, with each state's figure and the link to its source. The same table can be downloaded as <a href="../../data/india/states.csv">states.csv</a>.</li>
+    <li><a href="../#after-the-final-rolls">After the final rolls</a>, the draft and final roll of each state that has published one.</li>
+    <li><a href="../process/">How the revision was run</a>, the orders and dates of the revision with a link to each document.</li>
+    <li><a href="../method/">Sources and method</a>, how each state's figures were read and counted.</li>
+  </ul>
+  <p class="note">Figures as of <span id="asof"></span>.</p>
+</article>
+
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/india.js"></script>
+<script>
+SIR.json('data/india/states.json').then(function (d) {
+  var T = d.total, S = d.states, F = d.final, AD = d.after_draft, E = SIR.esc;
+  // Indian grouping, whole numbers
+  var n = function (x) { return Math.round(x).toLocaleString('en-IN'); };
+  var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; };
+  var lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; };
+  var p1 = function (x) { return (Math.round(x * 10 + 1e-9) / 10).toFixed(1); };
+  var rated = S.filter(function (s) { return s.removed && s.electors_before; });
+  var before = rated.reduce(function (a, s) { return a + s.electors_before; }, 0);
+  var noBefore = S.filter(function (s) { return s.removed && !s.electors_before; });
+  var top = S.filter(function (s) { return s.removed; }).sort(function (a, b) { return b.removed - a.removed; }).slice(0, 10);
+  var topSum = top.reduce(function (a, s) { return a + s.removed; }, 0);
+  var high = rated.slice().sort(function (a, b) { return b.per_100 - a.per_100; })[0];
+  var ROMAN = { '1': 'I', '2': 'II', '3': 'III' };
+  var MONTH = { '1': 'June 2025', '2': 'October 2025', '3': 'May 2026' };
+  var phases = Object.keys(d.by_phase).sort();
+  var rising = phases.every(function (k, i) { return i === 0 || d.by_phase[k].per_100 > d.by_phase[phases[i - 1]].per_100; });
+  // 'one name in three': a small whole number reads better as a word
+  var WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+  var share = function (x) { var k = Math.round(100 / x); return WORDS[k] || k; };
+
+  SIR.inShort([
+    'Before the Special Intensive Revision, about ' + Math.round(before / 1e7) + ' crore people were on the electoral rolls of the ' + T.states + ' states and union territories that have published figures. The draft rolls left off ' + cr(T.removed) + ' of them, or ' + Math.round(T.per_100) + ' in every 100.',
+    rising ? 'Each phase of the revision removed a larger share of its rolls than the one before, from ' + p1(d.by_phase[phases[0]].per_100) + ' per 100 in Bihar to ' + p1(d.by_phase[phases[phases.length - 1]].per_100) + ' in the last phase.' : '',
+    'Ten states account for ' + cr(topSum) + ' of the ' + cr(T.removed) + '. ' + high.state + ' lost the largest share of its roll, about one name in ' + share(high.per_100) + '.'
+  ], 'The total adds up each state\'s own figures. The Election Commission has published no all-India table.');
+
+  document.getElementById('kpis').innerHTML = [
+    ['about ' + Math.round(before / 1e7) + ' crore', 'on the rolls before the revision'],
+    [cr(T.removed), 'left off the draft rolls'],
+    [p1(T.per_100), 'per 100 electors'],
+    [T.states, 'states and union territories']
+  ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+
+  document.getElementById('tTotal').innerHTML = '<tbody>' + [
+    ['Electors on the rolls before the revision', n(before) + ' (about ' + Math.round(before / 1e7) + ' crore)'],
+    ['Names left off the draft rolls', n(T.removed) + ' (' + cr(T.removed) + ')'],
+    ['Left off per 100 electors', p1(T.per_100)],
+    ['States and union territories counted', T.states]
+  ].map(function (r) { return '<tr><th scope="row" class="l">' + r[0] + '</th><td>' + r[1] + '</td></tr>'; }).join('') + '</tbody>';
+  document.getElementById('nTotal').textContent = 'Each state\'s "before" figure is its roll on the day its revision began, so the total adds up rolls taken between June 2025 and mid-2026. ' +
+    (noBefore.length ? noBefore.map(function (s) { return s.state; }).join(' and ') + ' published no roll before the revision, so ' + (noBefore.length > 1 ? 'their ' : 'its ') + n(noBefore.reduce(function (a, s) { return a + s.removed; }, 0)) + ' names count in the total and not in the rate. ' : '') +
+    'We found no single all-India figure from the Election Commission.';
+
+  document.getElementById('pPhase').textContent = 'The revision ran in three phases.' + (rising ? ' Each later phase removed a larger share of its rolls.' : '');
+  document.getElementById('tPhase').innerHTML = '<thead><tr><th scope="col" class="l">Phase</th><th scope="col" class="l">Began</th><th scope="col">States</th><th scope="col">Left off</th><th scope="col">Per 100</th></tr></thead><tbody>' +
+    phases.map(function (k) {
+      var P = d.by_phase[k];
+      return '<tr><td class="l">' + ROMAN[k] + (k === '1' ? ' (Bihar)' : '') + '</td><td class="l">' + MONTH[k] + '</td><td>' + P.states + '</td><td>' + n(P.removed) + '</td><td>' + p1(P.per_100) + '</td></tr>';
+    }).join('') +
+    '<tr class="tot"><td class="l"><b>All</b></td><td></td><td><b>' + T.states + '</b></td><td><b>' + n(T.removed) + '</b></td><td><b>' + p1(T.per_100) + '</b></td></tr></tbody>';
+
+  // who published each figure, read from the source address
+  var HOSTS = [['timesofindia', 'Times of India'], ['indianexpress', 'Indian Express'], ['hindustantimes', 'Hindustan Times'], ['thehindu', 'The Hindu'],
+    ['deccanherald', 'Deccan Herald'], ['ceo.karnataka', 'CEO Karnataka'], ['elections.tn', 'CEO Tamil Nadu'], ['ceowestbengal', 'CEO West Bengal'],
+    ['eci.gov', 'Election Commission'], ['ndtv', 'NDTV'], ['scroll.in', 'Scroll'], ['thewire', 'The Wire'], ['newindianexpress', 'New Indian Express'], ['livemint', 'Mint'], ['tribuneindia', 'The Tribune']];
+  var who = function (s) {
+    if (s.source === 'lists') return '<a href="../../bihar/">CEO Bihar deletion lists, counted</a>';
+    var h = HOSTS.filter(function (x) { return (s.source_url || '').indexOf(x[0]) >= 0; })[0];
+    var name = h ? h[1] : (s.source === 'primary' ? 'Election office' : 'Press report');
+    return s.source_url ? '<a href="' + E(s.source_url) + '" rel="noopener" target="_blank">' + name + '</a>' : name;
+  };
+  var hiState = high.state;
+  document.getElementById('pTop').textContent = 'These ten account for ' + cr(topSum) + ' of the ' + cr(T.removed) + '.' +
+    (top.some(function (s) { return s.state === hiState; }) ? ' ' + hiState + ' lost the largest share of its roll, about one name in ' + share(high.per_100) + '.' : '');
+  document.getElementById('tTop').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Left off</th><th scope="col">Per 100</th><th scope="col" class="l">Source</th></tr></thead><tbody>' +
+    top.map(function (s) {
+      return '<tr><td class="l">' + E(s.state) + '</td><td>' + n(s.removed) + (s.figures === 'rounded' && s.removed % 1000 === 0 ? ' (rounded)' : '') + '</td><td>' + (s.electors_before ? p1(100 * s.removed / s.electors_before) : '') + '</td><td class="l">' + who(s) + '</td></tr>';
+    }).join('') + '</tbody>';
+  var rounded = top.filter(function (s) { return s.figures === 'rounded'; });
+  document.getElementById('nTop').innerHTML = (rounded.length ? (rounded.length === 1 ? 'One of these states' : (rounded.length < 10 ? ['', '', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'][rounded.length] : rounded.length) + ' of these states') + ' published ' + (rounded.length === 1 ? 'its' : 'their') + ' figures rounded (' + rounded.map(function (s) { return E(s.state); }).join(', ') + '), so ' + (rounded.length === 1 ? 'its rate is' : 'their rates are') + ' approximate. ' : '') +
+    'The other ' + (S.filter(function (s) { return s.removed; }).length - top.length) + ' are in the <a href="../#every-state-and-union-territory">state table</a>.';
+
+  var primary = S.filter(function (s) { return s.source === 'primary'; });
+  var press = S.filter(function (s) { return s.source === 'press'; });
+  var pressSum = press.reduce(function (a, s) { return a + s.removed; }, 0);
+  var outside = ['Himachal Pradesh', 'Jammu and Kashmir', 'Ladakh'];
+  document.getElementById('read').innerHTML = [
+    'The draft roll kept only those electors whose forms came back. For every name left off, the officer wrote down a reason (dead, moved, not found, or enrolled twice). Nobody checked those reasons before the draft was published.',
+    'Some names came back later. In the ' + F.states + ' states with a final roll, people could file claims after the draft. The final rolls are ' + cr(F.net_after_draft) + ' larger than the drafts. That rise includes first-time voters, so it is the most that could have been put back.',
+    'Some names went later too. In ' + AD.states + ' states, another ' + lk(AD.removed) + ' were removed between the draft and the final roll' + (F.withheld ? ', and West Bengal held ' + n(F.withheld) + ' names off its final roll while their cases are decided' : '') + '. None of these is in the total above.',
+    'Not every state is in the total. ' + (d.pending.length ? d.pending.join(' and ') + '\'s revision is still running. ' : '') + 'Assam had a different kind of revision. ' + outside.join(', ').replace(/, ([^,]*)$/, ' and $1') + ' were left out of it.',
+    'The sources are of two kinds. The figures of ' + primary.length + ' states come from the Chief Electoral Officer\'s or the Commission\'s own notes, and Bihar\'s are counted from its deletion lists. The other ' + press.length + ' come from press reports of the officers\' announcements, and they cover ' + cr(pressSum) + ' of the total. Each is linked from the state table.'
+  ].map(function (t) { return '<li>' + t + '</li>'; }).join('');
+  document.getElementById('asof').textContent = SIR.date(d.as_of);
+  SIR.showFaq('india', 'numbers');
+}).catch(SIR.fail);
+</script>
