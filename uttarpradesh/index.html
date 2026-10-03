@@ -31,7 +31,7 @@
     <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">
       <button type="button" class="btn install" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/></svg> <span class="lbl">Install app</span></button>
       <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
-      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Uttar Pradesh 2026</span></summary><div class="menu" data-i18n-each><a href="../">About this site</a><a href="../india/">All India</a><a class="sub" href="../india/numbers/">The SIR in numbers</a><a class="sub" href="../india/process/">How the revision was run</a><a href="../bihar/">Bihar 2025</a><a href="../hyderabad/">Hyderabad 2026</a><a href="../tamilnadu/">Tamil Nadu 2026</a><a href="../karnataka/">Karnataka 2026</a><a href="../westbengal/">West Bengal 2026</a><a href="../kerala/">Kerala 2026</a><a href="../rajasthan/">Rajasthan 2026</a><a href="../uttarpradesh/" aria-current="true">Uttar Pradesh 2026</a></div></details>
+      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Uttar Pradesh 2026</span></summary><div class="menu" data-i18n-each><a href="../">About this site</a><a href="../india/">All India</a><a class="sub" href="../india/numbers/">The SIR in numbers</a><a class="sub" href="../india/process/">How the revision was run</a><a href="../bihar/">Bihar 2025</a><a href="../hyderabad/">Hyderabad 2026</a><a href="../tamilnadu/">Tamil Nadu 2026</a><a href="../karnataka/">Karnataka 2026</a><a href="../westbengal/">West Bengal 2026</a><a href="../kerala/">Kerala 2026</a><a href="../rajasthan/">Rajasthan 2026</a><a href="../uttarpradesh/" aria-current="true">Uttar Pradesh 2026</a><a href="../delhi/">Delhi 2026</a></div></details>
       <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../data/uttarpradesh/districts.csv" download>District table, CSV</a></div></details>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span class="lbl">Export PDF</span></button>
@@ -47,7 +47,11 @@
   <h2 id="find-a-district">Find a district</h2>
   <p class="sub">Type a district's name and its figures appear below with a link you can send. The revision's figures were published by district only, so there is no constituency to find.</p>
   <div class="grid">
-    <div class="panel wide"><div class="finder" id="finder"></div></div>
+    <div class="panel wide">
+      <div class="finder" id="finder"></div>
+      <div class="vizbox" id="vMap"></div>
+      <p class="note">Each district is shaded by the names left off its draft roll per 100 electors on its roll of 27 October 2025. Tap a district for its figures. District boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified, with each constituency placed in its district as the 2022 election results list it.</p>
+    </div>
   </div>
 
   <h2 id="the-roll-step-by-step">The roll, step by step</h2>
@@ -66,7 +70,11 @@
   <p class="finding" id="fDist"></p>
 
   <h2 id="the-reasons">The reasons</h2>
-  <p class="sub">The reason entered against each name left off, as a share of each district's names left off. A reason is what the officer wrote down, and nobody checked it.</p>
+  <p class="sub">The reason entered against each name left off, from the five reasons on the left to the five districts that left off the most names, and every other district together, on the right. A reason is what the officer wrote down, and nobody checked it.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vFlow"></div></div>
+  </div>
+  <p class="sub">The same reasons district by district. Each dot is one district's share of its names left off under that reason. The five districts with the highest rates are in red. Hover or tap a dot for its name.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vReason"></div></div>
   </div>
@@ -103,8 +111,21 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
     rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: d1(d.per_100), tok: d.per_100 >= 20 ? '--fill-red' : '--fill-navy', hi: d.per_100 >= 20 }; }) });
   document.getElementById('fDist').innerHTML = '<b>' + D[0].district + ' left off ' + d1(D[0].per_100) + ' of every 100 electors, ' + lk(D[0].total) + ' names, the most of any district.</b> ' + D[1].district + ', ' + D[2].district + ', ' + D[3].district + ' and ' + D[4].district + ' come next. ' + S.over_20 + ' of the 75 districts left off 20 or more per 100, against ' + d1(S.per_100) + ' for the state. ' + D[D.length - 1].district + ' left off the fewest, ' + d1(D[D.length - 1].per_100) + '. The upright line on the chart marks the state rate.';
 
-  VIZ.heat('vReason', { label: 'Share of each district\'s names left off, by the reason entered', cols: RK.map(function (k) { return RN[k]; }), tok: ['--fill-navy', '--fill-purple', '--fill-grey', '--fill-amber', '--fill-other'], unit: '%',
-    rows: D.map(function (d) { return { name: d.district, v: RK.map(function (k) { return d[k + '_pct']; }) }; }) });
+  var top5 = D.slice().sort(function (a, b) { return b.total - a.total; }).slice(0, 5), tops = top5.map(function (d) { return d.district; });
+  var RT = { shifted: '--fill-navy', untraceable_absent: '--fill-purple', dead: '--fill-grey', multiple: '--fill-amber', others: '--fill-other' };
+  var tg = top5.map(function (d) { return { name: d.district, tok: '--fill-red' }; }).concat([{ name: 'Other ' + (D.length - 5) + ' districts', tok: '--fill-navy' }]);
+  var links = [];
+  RK.forEach(function (k, i) {
+    top5.forEach(function (d, j) { links.push({ s: i, t: j, v: d[k] }); });
+    links.push({ s: i, t: 5, v: S.reasons[k] - top5.reduce(function (a, d) { return a + d[k]; }, 0) });
+  });
+  VIZ.sankey('vFlow', { label: 'Names left off the draft roll, from the reason entered to the district', height: innerWidth < 600 ? 520 : 420, minH: innerWidth < 600 ? 44 : 34, lw: innerWidth < 600 ? 100 : 200,
+    sources: RK.map(function (k) { return { name: RN[k], tok: RT[k] }; }), targets: tg, links: links });
+  var hi5 = D.slice(0, 5).map(function (d) { return d.district; });
+  VIZ.strip('vReason', { label: 'Share of each district\'s names left off, by the reason entered, every district', axis: 'Share of the district\'s names left off, %', r: 3.5, step: 10,
+    key: [['Five highest rates', '--fill-red'], ['Other districts', '--fill-navy']],
+    rows: RK.map(function (k) { return { name: RN[k], tok: '--fill-navy',
+      points: D.map(function (d) { return { v: d[k + '_pct'], tok: hi5.indexOf(d.district) >= 0 ? '--fill-red' : '--fill-navy', label: d.district + ': ' + SIR.pct(d[k + '_pct']) + ' ' + RN[k].toLowerCase() }; }) }; }) });
   var hiAbs = D.slice().sort(function (a, b) { return b.untraceable_absent_pct - a.untraceable_absent_pct; })[0], hiDead = D.slice().sort(function (a, b) { return b.dead_pct - a.dead_pct; })[0];
   document.getElementById('fReason').innerHTML = '<b>Across the state, ' + SIR.pct(S.shares.shifted) + ' of the names left off were entered as permanently shifted, ' + SIR.pct(S.shares.untraceable_absent) + ' as untraceable or absent and ' + SIR.pct(S.shares.dead) + ' as dead.</b> ' + SIR.pct(S.shares.multiple) + ' were entered as already enrolled elsewhere. The share entered as untraceable or absent is highest in ' + hiAbs.district + ', ' + SIR.pct(hiAbs.untraceable_absent_pct) + ', and the share entered as dead in ' + hiDead.district + ', ' + SIR.pct(hiDead.dead_pct) + '.';
 
@@ -116,10 +137,20 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
     { k: 'shifted_pct', label: 'Shifted %', fmt: d1 }, { k: 'untraceable_absent_pct', label: 'Untraceable or absent %', fmt: d1 }, { k: 'dead_pct', label: 'Dead %', fmt: d1 }, { k: 'multiple_pct', label: 'Already enrolled %', fmt: d1 }
   ], D, { sort: 'per_100' });
 
-  SIR.finder('finder', { rows: D, prompt: 'Find a district', placeholder: 'Type a district\'s name', key: function (d) { return SIR.slug(d.district); }, label: function (d) { return d.district + ' district'; },
+  var F = SIR.finder('finder', { rows: D, pick: function (d) { var b = document.getElementById('vMap'); if (b.__select && idOf[d.district]) b.__select(idOf[d.district]); }, prompt: 'Find a district', placeholder: 'Type a district\'s name', key: function (d) { return SIR.slug(d.district); }, label: function (d) { return d.district + ' district'; },
     card: function (d) { return SIR.facts([['Roll of 27 October 2025', n(d.roll_before)], ['Draft roll', n(d.draft)], ['Left off', n(d.total)], ['Per 100 electors', d1(d.per_100)],
       ['Entered as dead', n(d.dead)], ['Untraceable or absent', n(d.untraceable_absent)], ['Permanently shifted', n(d.shifted)], ['Already enrolled', n(d.multiple)], ['Other', n(d.others)]]); },
     share: function (d) { return d.district + ' district, Uttar Pradesh. The SIR draft roll left off ' + n(d.total) + ' names, ' + d1(d.per_100) + ' of every 100 electors. ' + n(d.dead) + ' were entered as dead, ' + n(d.untraceable_absent) + ' as untraceable or absent and ' + n(d.shifted) + ' as permanently shifted. A reason is what the officer wrote down, and nobody checked it. These are the Chief Electoral Officer\'s counts.'; } });
+  var byName = {}, idOf = {}; D.forEach(function (d) { byName[d.district] = d; });
+  SIR.json('data/geo/uttarpradesh.json').then(function (geo) {
+    var byId = {};
+    geo.features.forEach(function (f) { var d = byName[f.properties.name]; if (d) { byId[f.properties.ac] = d; idOf[d.district] = f.properties.ac; } });
+    VIZ.map('vMap', { geo: geo, label: 'Map of names left off the draft per 100 electors, by district', title: 'Left off per 100 electors',
+      v: function (id) { return byId[id] ? byId[id].per_100 : null; }, name: function (id) { return byId[id] ? byId[id].district : ''; },
+      pick: function (id) { if (byId[id]) F.select(byId[id]); } });
+    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
+    SIR.tools();
+  });
   SIR.showFaq('up', 'main');
 }).catch(SIR.fail);
 </script>

@@ -42,3 +42,17 @@ on this file: on these boundaries it undoes the simplification and the file
 returns to 1.5 MB. The front page joins it to `data/india/states.json` by
 name, with `Andaman & Nicobar` and `Jammu & Kashmir` mapped to the names
 there.
+
+# Rajasthan, Uttar Pradesh and Delhi
+
+`rajasthan.json` (200 constituencies) and `delhi.json` (70) are cut from the
+same DataMeet shapefile the same way, and every shape's number was checked
+against the constituency's name in the state's data. `uttarpradesh.json` is by
+district, because the revision was published by district only: the 403
+constituencies are joined to their 75 districts from
+`data/uttarpradesh/raw/ac_district.csv` (the district each constituency is
+listed under in the 2022 election results, Kheri for Lakhimpur Kheri) and
+dissolved, with `ac` holding the district's position in `districts.json` and
+`name` its name. The new districts formed from parts of old ones (Sambhal,
+Amethi, Ayodhya) take their constituencies from the results list, not from
+the shapefile's older district field.

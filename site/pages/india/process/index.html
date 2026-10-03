@@ -37,6 +37,13 @@
   <div class="twrap" tabindex="0" role="region" aria-label="Claims and objections after the draft"><table id="tClaims"></table></div>
   <p class="note" id="nClaims"></p>
 
+  <h2>Notices: the no-mapping list and the discrepancy list</h2>
+  <p class="sub">Electors who stayed on the draft roll could still be sent a notice to prove their entry. Two lists produced the notices. No mapping means the elector could not be linked to the roll of the last intensive revision, 2002 to 2005 depending on the state. The logical discrepancy list is the Commission's list of mismatches in names, ages and family links, such as a parent fewer than 15 years older than the child. An elector can be on both lists. The chart sets each state's notices against its draft roll. Dark dots rest on a Chief Electoral Officer's or a court's document, light ones on a press report quoting the Chief Electoral Officer.</p>
+  <div class="grid"><div class="panel wide"><div class="vizbox" id="vNotices"></div></div></div>
+  <p class="finding" id="fNotices"></p>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="Notices by state"><table id="tNotices"></table></div>
+  <p class="note" id="nNotices"></p>
+
   <h2>Each state's dates, as set and as moved</h2>
   <p class="sub">One row for each state or union territory. The top line in a row is the first schedule the Election Commission set, and each line below it is a later change, with the last one drawn darkest. Hover over or tap a line for its dates and the document that set them.</p>
   <h3 class="ph">Bihar, the first phase</h3>
@@ -167,6 +174,21 @@ SIR.json('data/india/process.json').then(function (P) {
       rows.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.s) + '</th><td>' + r.per.toFixed(1) + '</td><td>' + N(r.rm) + '</td><td>' + N(r.ad) + '</td><td>' + N(r.ra) + '</td></tr>'; }).join('') + '</tbody>';
     var low = rows.filter(function (r) { return r.per < 10; }).length;
     document.getElementById('nClaims').innerHTML = 'In ' + low + ' of these ' + rows.length + ' states and union territories, fewer than 10 names were added after the draft for every 100 removed at it. ' + E(P.claims_note) + ' The other states published only the net change from draft to final, or no final roll yet, and are on the <a href="../">All India page</a>.' + srcs(P.claims_src);
+    SIR.tools();
+  }).catch(function () {});
+
+  // notices: electors kept on the draft but sent a notice
+  SIR.json('data/india/notices.json').then(function (T) {
+    var N = function (v) { return v == null ? '' : SIR.n(v); }, lk = function (v) { return v >= 1e7 ? (v / 1e7).toFixed(2) + ' crore' : (v / 1e5).toFixed(1) + ' lakh'; };
+    var R = T.states.filter(function (r) { return r.per_100 != null; });
+    VIZ.lollipop('vNotices', { label: 'Electors sent a notice for every 100 on the draft roll, by state', axis: 'Notices per 100 electors on the draft roll',
+      rows: R.map(function (r) { return { name: r.state, v: r.per_100, text: r.per_100.toFixed(1) + (r.rounded ? '*' : ''), tok: r.kind === 'primary' ? '--fill-navy' : '--fill-amber', hi: r.kind === 'primary' }; }) });
+    var both = R.filter(function (r) { return r.no_mapping != null && r.discrepancy != null; }), moreD = both.filter(function (r) { return r.discrepancy > r.no_mapping; });
+    document.getElementById('fNotices').innerHTML = '<b>Across the ' + T.with_total + ' states with a published total, ' + lk(T.notices_total) + ' electors on the draft rolls were sent a notice, ' + T.per_100.toFixed(1) + ' of every 100.</b> ' + R[0].state + ' sent the most for its size, ' + R[0].per_100.toFixed(1) + ' per 100, and ' + R[R.length - 1].state + ' the fewest, ' + R[R.length - 1].per_100.toFixed(1) + '. Of the ' + both.length + ' states that gave the two lists, the discrepancy list was the larger in ' + moreD.length + '. Only ' + T.primary + ' of the totals come from a Chief Electoral Officer\'s or a court\'s own document.';
+    var how = function (r) { return r.how === 'sum' ? 'sum of the two lists' : r.how ? 'published total' : ''; };
+    document.getElementById('tNotices').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Notices</th><th scope="col">Per 100 on the draft</th><th scope="col">No mapping</th><th scope="col">Discrepancy list</th><th scope="col">Deleted after a notice</th><th scope="col" class="l">Total is</th><th scope="col" class="l">Source</th></tr></thead><tbody>' +
+      T.states.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.state) + '</th><td>' + N(r.notices) + (r.rounded ? '*' : '') + '</td><td>' + (r.per_100 == null ? '' : r.per_100.toFixed(1)) + '</td><td>' + N(r.no_mapping) + '</td><td>' + N(r.discrepancy) + '</td><td>' + N(r.deleted_after_notice) + '</td><td class="l">' + how(r) + '</td><td class="l">' + (r.source_url ? '<a href="' + E(r.source_url) + '">' + (r.kind === 'primary' ? 'document' : 'press') + '</a>' : (r.lists_source ? '<a href="' + E(r.lists_source) + '">press</a>' : '')) + '</td></tr>'; }).join('') + '</tbody>';
+    document.getElementById('nNotices').innerHTML = 'An asterisk marks a figure published rounded, in lakh or crore. Most phase 3 figures are running counts, taken while notices were still being heard. Where a state gave the two lists and a total, the lists can add up to more than the total, because an elector can be on both. Uttar Pradesh is the plain case: 1.4 crore and 2.02 crore against 3.26 crore in the same report. West Bengal\'s total is the Supreme Court\'s reading of the record on 19 January 2026, and its two lists come from an earlier Commission breakdown. A state with only one list, or two reports that disagree, has no total here. Deleted after a notice counts names struck off for not answering or for failing the hearing, where a state reported it, and many of these are interim. In Hyderabad\'s Old City the two lists can be told apart polling part by polling part, on the <a href="../../hyderabad/hearings/">hearings page</a>. Every figure, its date and the sentence it was taken from are in the download.';
     SIR.tools();
   }).catch(function () {});
 

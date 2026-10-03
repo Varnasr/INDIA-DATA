@@ -7,7 +7,11 @@
   <h2>Find a constituency or district</h2>
   <p class="sub">Type a constituency's name or number, or a district, and its figures appear below with a link you can send.</p>
   <div class="grid">
-    <div class="panel wide"><div class="finder" id="finder"></div></div>
+    <div class="panel wide">
+      <div class="finder" id="finder"></div>
+      <div class="vizbox" id="vMap"></div>
+      <p class="note">Each constituency is shaded by the change in its roll of general electors from the 2023 election to the final roll of March 2026, per 100 electors on the 2023 roll. The darkest fell most and the lightest grew. Tap a constituency for its figures. Boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.</p>
+    </div>
   </div>
 
   <h2>The roll, step by step</h2>
@@ -38,6 +42,11 @@
     <div class="panel wide"><div class="vizbox" id="vWomen"></div></div>
   </div>
   <p class="finding" id="fWomen"></p>
+  <p class="sub">The same by district. Each line joins a district's share of women on the 2023 roll to its share on the final roll. The districts where it fell most are named and drawn in red.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vWomenD"></div></div>
+  </div>
+  <p class="finding" id="fWomenD"></p>
 
   <h2>Against the 2023 margins</h2>
   <p class="sub">Each dot is a constituency. Across, the margin its 2023 winner won by; up, the fall in its roll from 2023 to the final roll. Above the dashed line, the roll fell by more than the margin. Below zero, the roll grew.</p>
@@ -91,6 +100,14 @@ Promise.all([SIR.json('data/rajasthan/summary.json'), SIR.json('data/rajasthan/d
     points: A.map(function (a) { return { x: a.women_2023_pct, y: a.women_2026_pct, tok: '--fill-pink', label: a.name + ': ' + SIR.pct(a.women_2023_pct) + ' in 2023, ' + SIR.pct(a.women_2026_pct) + ' in 2026' }; }) });
   document.getElementById('fWomen').innerHTML = '<b>Women were ' + SIR.pct(S.women_2026_pct) + ' of the final roll, against ' + SIR.pct(S.women_2023_pct) + ' of the 2023 roll, and their share fell in ' + S.acs_women_fell + ' of the ' + S.acs + ' constituencies.</b> Of the names deleted after the draft, women were ' + SIR.pct(S.deleted_women_pct) + ', and of those added ' + SIR.pct(S.added_women_pct) + '. No split by sex of the names left off the draft has been published.';
 
+  var WD = D.map(function (d) { return { d: d, ch: d.women_2026_pct - d.women_2023_pct }; }).sort(function (p, q) { return p.ch - q.ch; });
+  var hiW = WD.slice(0, 5).map(function (x) { return x.d.district; });
+  VIZ.slope('vWomenD', { label: 'Women\'s share of the roll in 2023 and in the final roll of 2026, by district', aName: 'Women, 2023 roll (%)', bName: 'Women, 2026 final roll (%)',
+    min: Math.floor(Math.min.apply(null, D.map(function (d) { return Math.min(d.women_2023_pct, d.women_2026_pct); }))),
+    rows: D.map(function (d) { return { name: d.district, a: d.women_2023_pct, b: d.women_2026_pct, hi: hiW.indexOf(d.district) >= 0 }; }) });
+  var upW = WD.filter(function (x) { return x.ch > 0; });
+  document.getElementById('fWomenD').innerHTML = '<b>Women\'s share fell most in ' + WD[0].d.district + ', by ' + SIR.d(-WD[0].ch, 2) + ' points, from ' + SIR.pct(WD[0].d.women_2023_pct) + ' to ' + SIR.pct(WD[0].d.women_2026_pct) + '.</b> ' + WD[1].d.district + ', ' + WD[2].d.district + ', ' + WD[3].d.district + ' and ' + WD[4].d.district + ' come next. ' + (upW.length ? 'It rose in ' + upW.length + ' of the ' + D.length + ' districts.' : 'It fell in every one of the ' + D.length + ' districts.');
+
   VIZ.scatter('vMargin', { label: 'The fall in each constituency\'s roll from 2023 to 2026 against its 2023 winning margin', diag: true, xMin: 0,
     xAxis: '2023 winning margin', yAxis: 'Fall in the roll, 2023 to 2026', diagLabel: 'fall = margin',
     points: A.map(function (a) { return { x: a.margin, y: a.fall, tok: a.winner === 'BJP' ? '--fill-nda' : a.winner === 'INC' ? '--fill-india' : '--fill-other', label: a.name + ' (' + a.winner + '): fall ' + n(a.fall) + ', margin ' + n(a.margin) }; }) });
@@ -113,11 +130,20 @@ Promise.all([SIR.json('data/rajasthan/summary.json'), SIR.json('data/rajasthan/d
   var DSET = { rows: D, key: function (d) { return SIR.slug(d.district); }, label: function (d) { return d.district + ' district'; },
     card: function (d) { return SIR.facts([['Roll of 2023', n(d.roll_2023)], ['Final roll, March 2026', n(d.final)], ['Change', n(-d.fall)], ['Fall per 100', d1(d.per_100)],
       ['Women, 2023', SIR.pct(d.women_2023_pct)], ['Women, 2026', SIR.pct(d.women_2026_pct)], ['Constituencies', n(d.acs)]]) + '<p class="note">Its constituencies</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
+    pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); },
     share: function (d) { return d.district + ' district, Rajasthan. The roll of general electors went from ' + n(d.roll_2023) + ' at the 2023 election to ' + n(d.final) + ' on the final SIR roll of March 2026, ' + (d.fall >= 0 ? 'a fall of ' + d1(d.per_100) : 'a rise of ' + d1(-d.per_100)) + ' per 100. The change also counts new voters and people who died or moved, so it is not the same as the names struck off. These are counts from the Election Commission\'s and the Chief Electoral Officer\'s published rolls.'; } };
-  SIR.finder('finder', { rows: A, more: [DSET], prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district', key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+  var F = SIR.finder('finder', { rows: A, more: [DSET], pick: function (a) { var b = document.getElementById('vMap'); if (b.__select) b.__select(a.ac); }, prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district', key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
     card: function (a) { return SIR.facts([['Roll of 2023', n(a.roll_2023)], ['Final roll, March 2026', n(a.final)], ['Change', n(-a.fall)], ['Fall per 100', d1(a.per_100)],
       ['Women, 2023', SIR.pct(a.women_2023_pct)], ['Women, 2026', SIR.pct(a.women_2026_pct)], ['Won in 2023', a.winner + ' · margin ' + n(a.margin)]]) + (a.separate ? '<p class="note">Anta was revised separately, after its bye-election of November 2025.</p>' : ''); },
     share: function (a) { return a.name + ', Rajasthan. The roll of general electors went from ' + n(a.roll_2023) + ' at the 2023 election to ' + n(a.final) + ' on the final SIR roll of March 2026, ' + (a.fall >= 0 ? 'a fall of ' + d1(a.per_100) : 'a rise of ' + d1(-a.per_100)) + ' per 100. The seat was won in 2023 by ' + n(a.margin) + ' votes. The change also counts new voters and people who died or moved, so it is not the same as the names struck off. These are counts from the Election Commission\'s and the Chief Electoral Officer\'s published rolls.'; } });
+  SIR.json('data/geo/rajasthan.json').then(function (geo) {
+    var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });
+    VIZ.map('vMap', { geo: geo, label: 'Map of the change in the roll per 100 electors, 2023 election to the final roll of March 2026, by constituency', title: 'Fall per 100 electors',
+      v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
+      pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
+    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
+    SIR.tools();
+  });
   SIR.showFaq('rj', 'main');
 }).catch(SIR.fail);
 </script>
