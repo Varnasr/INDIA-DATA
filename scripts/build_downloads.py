@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The downloadable tables for Bihar and Hyderabad, written from the published JSON.
+"""The downloadable tables for Bihar, Hyderabad and All India, written from the published JSON.
 
     python3 scripts/build_downloads.py          # writes the CSVs
     python3 scripts/build_downloads.py --check  # fails if any is stale
@@ -57,7 +57,37 @@ def outputs():
                  ('margin_2023', lambda r: r['e2023']['margin'])])
     P = J('hyderabad', 'parts.json')
     parts = table([dict(zip(P['fields'], r)) for r in P['rows']], [(k, (lambda k: lambda r: r[k])(k)) for k in P['fields']])
+    # All India: the process timeline and schedules, women among the removed, the final rolls
+    PR = J('india', 'process.json')
+    src = lambda r: ' | '.join(x['url'] for x in r.get('src', []))
+    tl = table(PR['timeline'], [('date', lambda r: r['date']), ('who', lambda r: {'eci': 'Election Commission', 'sc': 'Supreme Court', 'ceo': 'State election officer'}.get(r['who'], r['who'])),
+                                ('phase', lambda r: r['phase']), ('title', lambda r: r['title']), ('what_changed', lambda r: r['text']),
+                                ('documents', lambda r: ' | '.join(x['name'] for x in r.get('src', []))), ('document_links', src)])
+    rng = lambda k, i: lambda r: (r.get(k) or [None, None])[i] if isinstance(r.get(k), list) else None
+    steps = [dict(st, state=S['state'], phase_=S['phase']) for S in PR['schedules'] for st in S['steps']]
+    sch = table(steps, [('state', lambda r: r['state']), ('phase', lambda r: r['phase_']), ('schedule', lambda r: r.get('label')),
+                        ('as_published', lambda r: 'yes' if r.get('kind') == 'published' else 'no'),
+                        ('enumeration_from', rng('enum', 0)), ('enumeration_to', rng('enum', 1)), ('draft_roll', lambda r: r.get('draft')),
+                        ('claims_from', rng('claims', 0)), ('claims_to', rng('claims', 1)), ('notices_from', rng('notice', 0)), ('notices_to', rng('notice', 1)),
+                        ('final_roll', lambda r: r.get('final')), ('document_link', lambda r: r.get('src'))])
+    IN = J('india', 'states.json')
+    gen = table(IN['gender'], [('state', lambda r: r['state']), ('phase', lambda r: r['phase']), ('women_removed', lambda r: r['women_removed']),
+                               ('men_removed', lambda r: r['men_removed']), ('women_pct_of_removed', lambda r: r['women_share_removed']),
+                               ('women_pct_of_roll', lambda r: r['women_share_roll']), ('gap_points', lambda r: r['gap']),
+                               ('quality', lambda r: r['quality']), ('note', lambda r: r['note']), ('source', lambda r: r['source_url'])])
+    FR = [r for r in IN['states'] if r.get('electors_final') or r.get('final_date')]
+    fin = table(FR, [('state', lambda r: r['state']), ('phase', lambda r: r['phase']), ('roll_before', lambda r: r['electors_before']),
+                     ('left_off_draft', lambda r: r['removed']), ('final_date', lambda r: r.get('final_date')),
+                     ('added_after_draft', lambda r: r.get('added_after_draft')), ('removed_after_draft', lambda r: r.get('removed_after_draft')),
+                     ('withheld', lambda r: r.get('withheld')), ('final_roll', lambda r: r.get('electors_final')),
+                     ('final_less_draft', lambda r: r.get('net_after_draft')), ('net_fall', lambda r: r.get('net_fall')),
+                     ('net_fall_per_100', lambda r: r.get('net_fall_per_100')), ('reconciles', lambda r: r.get('reconciles')),
+                     ('source', lambda r: (r.get('final_source') or {}).get('url'))])
     return {
+        os.path.join(ROOT, 'data', 'india', 'process_timeline.csv'): tl,
+        os.path.join(ROOT, 'data', 'india', 'process_schedules.csv'): sch,
+        os.path.join(ROOT, 'data', 'india', 'women_removed.csv'): gen,
+        os.path.join(ROOT, 'data', 'india', 'final_rolls.csv'): fin,
         os.path.join(ROOT, 'data', 'bihar', 'constituencies.csv'): ac,
         os.path.join(ROOT, 'data', 'bihar', 'districts.csv'): dist,
         os.path.join(ROOT, 'data', 'hyderabad', 'constituencies.csv'): hac,
