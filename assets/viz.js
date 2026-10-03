@@ -272,7 +272,7 @@
     if (o.ref != null) el('line', { x1: x(o.ref), x2: x(o.ref), y1: leg + 6, y2: H - 26, class: 'vzero' }, s);
     o.rows.forEach(function (r, i) {
       var y = leg + 16 + i * rh + rh / 2;
-      label(s, lw - 4, y, SIR.short(r.name), phone() ? 16 : 28, 'end');
+      label(s, lw - 4, y, SIR.short(r.name), phone() ? 12 : 28, 'end');
       el('line', { x1: x(r.a), x2: x(r.b), y1: y, y2: y, class: 'vlink thick' }, s);
       var ca = el('circle', { cx: x(r.a), cy: y, r: 6, style: fill(o.aTok) }, s); el('title', {}, ca, r.name + ': ' + r.a);
       var cb = el('circle', { cx: x(r.b), cy: y, r: 6, style: fill(o.bTok) }, s); el('title', {}, cb, r.name + ': ' + r.b);
@@ -302,6 +302,7 @@
     var x = function (t) { return lw + 8 + (W - lw - 20) * (t - m0) / (m1 - m0); };
     var mon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var span = (m1 - m0) / 864e5, every = span > 400 ? 3 : span > 200 ? 2 : 1;
+    if (ph) every = Math.max(every, span > 200 ? 3 : 2);
     for (var m = new Date(m0), i = 0; m.getTime() <= m1; m = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 1)), i++) {
       el('line', { x1: x(m.getTime()), x2: x(m.getTime()), y1: leg, y2: H - 24, class: 'vgrid' }, s);
       if (i % every === 0 && m.getTime() < m1) el('text', { x: x(m.getTime()) + 2, y: H - 8, class: 'vval' }, s, mon[m.getUTCMonth()] + (m.getUTCMonth() === 0 || i === 0 ? ' ' + m.getUTCFullYear() : ''));
@@ -398,7 +399,7 @@
     measure(box);
     var nr = o.rows.length, nc = o.cols.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 116 : 210), top = phone() ? 58 : 44, rh = phone() ? 26 : 24;
     var H = top + nr * rh + 6, s = svgIn(box, W, H, o.label), cw = (W - lw - 4) / nc;
-    o.cols.forEach(function (c, j) { label(s, lw + cw * j + cw / 2, top / 2, c, phone() ? 12 : 22, 'middle', 'vname'); });
+    o.cols.forEach(function (c, j) { label(s, lw + cw * j + cw / 2, top / 2, c, phone() ? Math.max(6, Math.floor(cw / 6.2)) : 22, 'middle', phone() ? 'vname small' : 'vname'); });
     var max = o.max || 100;
     o.rows.forEach(function (r, i) {
       var y = top + i * rh;
@@ -431,7 +432,7 @@
     }
     o.rows.forEach(function (r, i) {
       var y = top + i * rh + rh / 2, col = r.col || '--fill-navy';
-      label(s, lw - 4, y, SIR.short(String(r.name)), phone() ? 17 : 32, 'end', 'vname light');
+      label(s, lw - 4, y, SIR.short(String(r.name)), phone() ? 12 : 32, 'end', 'vname light');
       el('line', { x1: x(0), x2: x(r.v), y1: y, y2: y, class: 'vstem', style: stroke(col) }, s);
       var c = el('circle', { cx: x(r.v), cy: y, r: phone() ? 5 : 6, style: paint(col) }, s);
       var txt = o.fmt ? o.fmt(r.v) : tickText(r.v, Math.abs(r.v) < 10 ? 0.1 : 1);
@@ -469,7 +470,7 @@
     });
     o.cats.forEach(function (c, i) {
       var y = y0 + i * rh + rh / 2, vals = o.series.map(function (z) { return z.vals[i]; });
-      label(s, lw - 4, y, SIR.short(String(c)), phone() ? 17 : 32, 'end', 'vname light');
+      label(s, lw - 4, y, SIR.short(String(c)), phone() ? 12 : 32, 'end', 'vname light');
       el('line', { x1: x(Math.min.apply(null, vals)), x2: x(Math.max.apply(null, vals)), y1: y, y2: y, class: 'vlink thick' }, s);
       o.series.forEach(function (z, j) {
         var d = el('circle', { cx: x(z.vals[i]), cy: y, r: phone() ? 5 : 6, style: paint(z.col) }, s);
@@ -529,8 +530,8 @@
     var W = phone() ? Math.max(320, Math.min(CUR, 599)) : Math.min(WIDE(), 820), H = phone() ? 420 : 460, top = 40, bot = H - 22;
     var s = svgIn(box, W, H, o.label);
     var all = [].concat.apply([], o.rows.map(function (r) { return [r.a, r.b]; })), t = nice(o.min != null ? o.min : Math.min(0, Math.min.apply(null, all)), Math.max.apply(null, all));
-    var namew = 18 + 6.9 * Math.max.apply(null, o.rows.filter(function (r) { return r.hi || r.lab; }).map(function (r) { return (SIR.short(r.name) + ' ' + SIR.d(r.b, 1)).length; }).concat([8]));
-    var xa = phone() ? 40 : 200, xb = W - (phone() ? Math.max(110, Math.min(200, namew)) : 220), y = function (v) { return top + (bot - top) * (t.hi - v) / (t.hi - t.lo); };
+    var namew = 22 + 7.6 * Math.max.apply(null, o.rows.filter(function (r) { return r.hi || r.lab; }).map(function (r) { return (SIR.short(r.name) + ' ' + SIR.d(r.b, 1)).length; }).concat([8]));
+    var xa = phone() ? 40 : 200, xb = W - (phone() ? Math.max(110, Math.min(210, namew)) : 220), y = function (v) { return top + (bot - top) * (t.hi - v) / (t.hi - t.lo); };
     for (var g = t.lo; g <= t.hi + t.step / 2; g += t.step) {
       el('line', { x1: xa, x2: xb, y1: y(g), y2: y(g), class: Math.abs(g) < 1e-9 ? 'vzero' : 'vgrid' }, s);
       el('text', { x: xa - 10, y: y(g), 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval' }, s, tickText(g, t.step));
