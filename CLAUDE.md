@@ -167,6 +167,15 @@ rest). Every figure, sentence and chart on it is computed from
 `data/india/states.json` when the page loads, so it moves with the state
 table. It is English only, like the process page.
 
+The same page carries the electors in every Lok Sabha election since 1984-85,
+from the Election Commission's Atlas 2024, Graph 6.1. The figures are curated in
+`data/india/raw/lok_sabha_electors.csv`; `scripts/build_electors.py` writes
+`data/india/lok_sabha_electors.json` and the downloadable CSV, and
+`check_data.py` runs it with `--check`. The Atlas misprints 1991-92 as
+5115333598; the row reads 511533598 and says so. The comparison of the names
+left off with the 2014 to 2024 gain always says the two counts differ in
+coverage (31 states against all India).
+
 `data/bihar/raw/final_roll_format4b.csv` is the Commission's Format 4B return
 for Bihar's final roll, seat by seat and by sex; `scripts/build_bihar_final.py`
 writes `data/bihar/final.json` and fails unless every seat adds up and the

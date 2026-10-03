@@ -32,7 +32,7 @@
       <button type="button" class="btn install" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/></svg> <span class="lbl">Install app</span></button>
       <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
       <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">All India</span></summary><div class="menu" data-i18n-each><a href="../../">About this site</a><a href="../../india/" aria-current="true">All India</a><a class="sub" href="../../india/numbers/" aria-current="page">The SIR in numbers</a><a class="sub" href="../../india/process/">How the revision was run</a><a href="../../bihar/">Bihar 2025</a><a href="../../hyderabad/">Hyderabad 2026</a><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a></div></details>
-      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../india/report/">Full report, online</a><a href="../../reports/sir-india-report.pdf" download>Full report, PDF</a><a href="../../reports/sir-india-deck.pptx" download>Slides, PowerPoint</a><a href="../../data/india/states.csv" download>State table, CSV</a></div></details>
+      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../india/report/">Full report, online</a><a href="../../reports/sir-india-report.pdf" download>Full report, PDF</a><a href="../../reports/sir-india-deck.pptx" download>Slides, PowerPoint</a><a href="../../data/india/states.csv" download>State table, CSV</a><a href="../../data/india/lok_sabha_electors.csv" download>Lok Sabha electors since 1984, CSV</a></div></details>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span class="lbl">Export PDF</span></button>
     </div>
@@ -55,6 +55,16 @@
       <p id="pWater"></p>
     </div>
   </div>
+
+  <h2 id="the-roll-over-forty-years">The roll over forty years</h2>
+  <div class="grid">
+    <div class="panel wide">
+      <h3 id="electors-in-every-lok-sabha-general-election-1984-85-to-2024">Electors in every Lok Sabha general election, 1984-85 to 2024, in crore</h3>
+      <div class="chart"><canvas id="cLs" aria-label="Electors in every Lok Sabha general election from 1984-85 to 2024, in crore"></canvas></div>
+      <p id="pLs"></p>
+    </div>
+  </div>
+  <p class="note" id="nLs"></p>
 
   <h2 id="every-state-per-100-electors">Every state, per 100 electors</h2>
   <div class="grid">
@@ -100,9 +110,11 @@
 <footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../">About this site</a> · <a href="../../terms/">Terms and privacy</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
 <script src="../../assets/sir.js"></script>
 <script src="../../assets/viz.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../../assets/faq/india.js"></script>
 <script>
-SIR.json('data/india/states.json').then(function (d) {
+Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_electors.json')]).then(function (res) {
+  var d = res[0], LS = res[1];
   var T = d.total, S = d.states, F = d.final, AD = d.after_draft, E = SIR.esc;
   // Indian grouping, whole numbers
   var n = function (x) { return Math.round(x).toLocaleString('en-IN'); };
@@ -123,9 +135,11 @@ SIR.json('data/india/states.json').then(function (d) {
   var WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
   var share = function (x) { var k = Math.round(100 / x); return WORDS[k] || k; };
 
+  var LS14 = LS.rows.filter(function (r) { return r.election === '2014'; })[0], LS24 = LS.rows[LS.rows.length - 1], gain10 = LS24.electors - LS14.electors;
   SIR.inShort([
     'Before the Special Intensive Revision, about ' + Math.round(before / 1e7) + ' crore people were on the electoral rolls of the ' + T.states + ' states and union territories that have published figures. The draft rolls left off ' + cr(T.removed) + ' of them, or ' + Math.round(T.per_100) + ' in every 100.',
     rising ? 'Each phase of the revision removed a larger share of its rolls than the one before, from ' + p1(d.by_phase[phases[0]].per_100) + ' per 100 in Bihar to ' + p1(d.by_phase[phases[phases.length - 1]].per_100) + ' in the last phase.' : '',
+    'The ' + cr(T.removed) + ' left off are nearly as many as the whole roll gained in the ten years from 2014 to 2024, ' + cr(gain10) + '.',
     'Ten states account for ' + cr(topSum) + ' of the ' + cr(T.removed) + '. ' + high.state + ' lost the largest share of its roll, about one name in ' + share(high.per_100) + '.'
   ], 'The total adds up each state\'s own figures. The Election Commission has published no all-India table.');
 
@@ -147,6 +161,22 @@ SIR.json('data/india/states.json').then(function (d) {
     from: base,
     steps: [{ name: 'Rolls before the revision', v: before, kind: 'total' }, { name: 'Left off the draft', v: leftRated, kind: 'down' }, { name: 'Draft rolls', v: before - leftRated, kind: 'total' }] });
   document.getElementById('pWater').textContent = 'The bars start at ' + Math.round(base / 1e7) + ' crore, not at zero, so the fall can be seen. These are the ' + rated.length + ' states and union territories that published a roll from before the revision.';
+
+  // the roll in every Lok Sabha election since 1984-85, years spaced to scale
+  var LR = LS.rows, first = LR[0], last = LR[LR.length - 1];
+  // on a phone only every other decade is labelled, and 1998 sits too close to 1999
+  var narrow = window.innerWidth < 600, KEEP = ['1984-85', '1996', '2004', '2014', '2024'];
+  var byYear = {}; LR.forEach(function (r) { byYear[r.year] = r.election; });
+  SIR.chart('cLs', { type: 'scatter',
+    data: { datasets: [{ label: 'Electors, crore', data: LR.map(function (r) { return { x: r.year, y: r.electors / 1e7, n: r.election }; }), showLine: true, $token: '--fill-navy', borderWidth: 2.5, pointRadius: 4, tension: 0, pointBackgroundColor: '#fff' }] },
+    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { return c.raw.n + ': ' + c.raw.y.toFixed(2) + ' crore'; } } } },
+      scales: { x: { type: 'linear', min: 1983, max: 2026, afterBuildTicks: function (ax) { ax.ticks = LR.map(function (r) { return { value: r.year }; }); },
+          ticks: { autoSkip: false, maxRotation: 0, callback: function (v) { var e = byYear[v] || ''; return (narrow ? KEEP.indexOf(e) >= 0 : e !== '1998') ? e : ''; } }, title: { display: true, text: narrow ? 'Lok Sabha election, years to scale' : 'Lok Sabha general election, years spaced to scale (1998 and 1999 sit side by side)' } },
+        y: { beginAtZero: true, max: 100, title: { display: true, text: 'Electors, crore' } } } } });
+  var i14 = LR.filter(function (r) { return r.election === '2014'; })[0];
+  var gain = last.electors - i14.electors;
+  document.getElementById('pLs').textContent = 'The roll grew from ' + cr(first.electors) + ' in ' + first.election + ' to ' + cr(last.electors) + ' in ' + last.election + ', ' + (last.electors / first.electors).toFixed(2) + ' times over. In the ten years from 2014 to 2024 it gained ' + cr(gain) + '. The ' + cr(T.removed) + ' names left off the draft rolls are ' + Math.round(100 * T.removed / gain) + ' in every 100 of that gain. The two counts are not strictly alike, because the revision covered ' + T.states + ' states and union territories and the Lok Sabha figure is all India.';
+  document.getElementById('nLs').innerHTML = 'Source: <a href="' + E(LS.url) + '" rel="noopener" target="_blank">' + E(LS.source) + '</a>. ' + LR.filter(function (r) { return r.note; }).map(function (r) { return r.election + ': ' + E(r.note) + '.'; }).join(' ') + ' The figures can be downloaded as <a href="../../data/india/lok_sabha_electors.csv">lok_sabha_electors.csv</a>.';
 
   // every state's rate, coloured by phase, the ten largest named in bold
   var PT = { '1': '--fill-red', '2': '--fill-navy', '3': '--fill-teal' };
