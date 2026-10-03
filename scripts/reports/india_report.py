@@ -60,6 +60,8 @@ R.numbered([
     'The revision still took off %s names in %d states, %.1f of every 100 electors, and the draft rolls now hold %s of adults. %s'
     % (crore(T['removed']), T['states'], T['per_100'], pct(100 * ADU0['draft_total'] / ADU0['adults_total']),
        'States whose rolls were most over-full did not cut more.' if abs(rho0) < 0.2 else ('States whose rolls were most over-full did cut more.' if rho0 > 0 else 'States whose rolls were most over-full cut less.')),
+    'The names removed were enough to decide most seats where they can be counted. In Bihar and Tamil Nadu they were more than the winning margin in %d of %d assembly seats, and in West Bengal and Kerala the fall in the roll was more than the margin in %d of %d.'
+    % (J('india', 'margins.json')['removed']['assembly_over'], J('india', 'margins.json')['removed']['assembly_seats'], J('india', 'margins.json')['fall']['assembly_over'], J('india', 'margins.json')['fall']['assembly_seats']),
     'Of the names removed with a reason given, only %s were entered as dead. The rest are names an officer marked as moved, not found or on the roll twice, and nobody has checked those entries.' % pct(T['shares']['dead']),
     'The same rules gave very different results. %s removed %.1f of every 100 electors and %s %.1f. Among the big states, the share marked moved or not found runs from %s in %s to %s in %s.'
     % (rated[0]['state'], rated[0]['per_100'], rated[-1]['state'], rated[-1]['per_100'], pct(bigS[0]['shares']['shifted_absent_other']), bigS[0]['state'],
@@ -265,15 +267,88 @@ R.p('Under Figures, adds up means the draft plus additions less removals equals 
     'Removals after the draft carry no reason in any state except Bihar, so they are outside every figure by reason in this report. %s have not yet published a final roll.'
     % (andj([s['state'] for s in S if s['reconciles'] == 'no']), andj(FN['waiting'])))
 
+# ------------------------------------------------------------ against the winning margins
+M = J('india', 'margins.json')
+IMB, BF = J('bihar', 'impact.json'), J('bihar', 'final.json')
+R.h2('Against the winning margins')
+R.p('A seat is decided by the votes between its winner and its runner-up. Where more names left a seat\'s roll than that margin, the names removed were enough to decide the seat. '
+    'Whether they did depends on how those people would have voted, and that can be estimated only where the lists say who they were.')
+R.table(['State', 'Election', 'Seats', 'Count larger than the margin', 'What is counted'],
+        [[a['state'], a['election'], str(a['seats']), '%d (%s)' % (a['over_margin'], pct(100 * a['over_margin'] / a['seats'])), a['label']] for a in M['assembly']],
+        widths=[3.2, 1.8, 1.4, 3.6, 6.0], right={2, 3}, size=8)
+fl = [IMB['summary'][k]['flips'] for k in ('booth_lower', 'booth_upper')]
+nda0 = BF['margin']['won_by_alliance']['NDA']
+ndaR = [nda0 + v['to_nda'] - v['to_india'] for v in IMB['summary'].values()]
+R.p('In Bihar and Tamil Nadu, where the names removed are counted seat by seat, they were more than the winning margin in %d of %d assembly seats. '
+    'West Bengal and Kerala publish no removals by seat, so their count is the fall in the roll, which also takes in ordinary deaths and moves, and it was more than the margin in %d of %d. '
+    'The two are kept apart because they count different things.' % (M['removed']['assembly_over'], M['removed']['assembly_seats'], M['fall']['assembly_over'], M['fall']['assembly_seats']))
+R.p('Bihar is the one state whose lists show who was removed. Estimating how they would have voted from their own booths in 2024, %d to %d seats would have changed hands, in both directions, and on every estimate the NDA keeps a majority, with %d to %d of %d seats.'
+    % (min(fl), max(fl), min(ndaR), max(ndaR), BF['margin']['seats']))
+LTc = {'Bihar': '#C0392B', 'Tamil Nadu': '#D4AC0D', 'West Bengal': '#1F618D', 'Kerala': '#17A589'}
+fig, ax = plt.subplots(figsize=(7.5, 5.2))
+for st, col in LTc.items():
+    xs = [x for x in M['ls_seat'] if x['state'] == st]
+    ax.scatter([x['margin'] / 1e5 for x in xs], [x['count'] / 1e5 for x in xs], s=18, color=col, alpha=.85, label=st)
+mx = max(max(x['margin'], x['count']) for x in M['ls_seat']) / 1e5
+ax.plot([0, mx], [0, mx], ls='--', lw=0.8, color='#555')
+ax.set_xlabel('2024 winning margin, lakh', fontsize=8)
+ax.set_ylabel('Count in the seat, lakh', fontsize=8)
+ax.legend(fontsize=7, frameon=False)
+style_axes(ax, '2024 Lok Sabha seats: the count in each seat against its margin')
+R.figure(fig, 'Figure 7. Each dot is a 2024 Lok Sabha seat in the four states, its count added up from its assembly segments. Above the dashed line, the count is larger than the margin. Below zero are Kerala seats whose roll grew.', width=14)
+tn = [t for t in M['even_test'] if t['state'] == 'Tamil Nadu'][0]
+bt = [t for t in M['even_test'] if t['state'] == 'Bihar'][0]
+R.p('Set against the 2024 Lok Sabha results, the count in each seat was larger than the margin in %d of %d seats in Bihar and Tamil Nadu and %d of %d in West Bengal and Kerala. '
+    'The revision came after the 2024 election, so this measures how large the removals are against the votes that decide a seat, and it does not say what happened in 2024.'
+    % (M['removed']['ls_over'], M['removed']['ls_seats'], M['fall']['ls_over'], M['fall']['ls_seats']))
+R.p('No state has published its removals by Lok Sabha seat. Spread evenly over each state\'s seats, the removals would be larger than the 2024 margin in %d of %d seats in %d states and union territories. '
+    'Where seat counts exist the even spread can be tested. In Bihar it gives %d seats against %d counted, and in Tamil Nadu %d against %d, because removals there were heaviest in the cities and most seats lost fewer names than the state average. '
+    'It is a rough guide that can run high. In 2024, %d of %d contested seats were won by fewer than 50,000 votes.'
+    % (M['even_total']['over_margin'], M['even_total']['pcs'], M['even_total']['states'], bt['even'], bt['actual'], tn['even'], tn['actual'], M['ls_close']['under_50000'], M['ls_close']['contested']))
+
+# ------------------------------------------------------------ the roll over forty years
+LSE = J('india', 'lok_sabha_electors.json')['rows']
+R.h2('The roll over forty years')
+fig, ax = plt.subplots(figsize=(7.5, 4.2))
+ax.plot([r['year'] for r in LSE], [r['electors'] / 1e7 for r in LSE], marker='o', color='#1F4E79', lw=2, label='Electors on the roll')
+ax.plot([r['year'] for r in LSE], [r['pop_voting_age'] / 1e7 for r in LSE], marker='o', color='#17A589', lw=2, ls='--', label='Population of voting age')
+ax.set_xticks([r['year'] for r in LSE if r['election'] != '1998'])
+ax.set_xticklabels([r['election'] for r in LSE if r['election'] != '1998'], fontsize=6.5, rotation=45, ha='right')
+ax.set_ylim(0, 110)
+ax.set_ylabel('Crore', fontsize=8)
+ax.legend(fontsize=7, frameon=False, loc='lower right')
+style_axes(ax, 'Electors and the population of voting age, every Lok Sabha election')
+R.figure(fig, 'Figure 8. Electors from the Election Commission\'s Atlas 2024 (Graph 6.1). Population of voting age, 21 and over in 1984-85 and 18 and over from 1989, from the UN World Population Prospects 2024, a modelled estimate that counts everyone living in India, citizens or not.', width=14)
+ov = [r for r in LSE if r['electors_per_100'] > 100]
+un = [r for r in LSE if r['electors_per_100'] <= 100]
+g10 = LSE[-1]['electors'] - [r for r in LSE if r['election'] == '2014'][0]['electors']
+R.p('The roll grew from %s in %s to %s in %s. In every election to %s it held more names than there were people of voting age, up to %.1f for every 100 in %s. If the population estimate is right, a roll that large carried the names of people who had died or moved, or counted some people twice. '
+    'From %s it has held fewer, %.0f for every 100 in %s. Some of that gap is people who are not citizens, whom the population counts and the roll cannot.'
+    % (crore(LSE[0]['electors']), LSE[0]['election'], crore(LSE[-1]['electors']), LSE[-1]['election'], ov[-1]['election'], max(r['electors_per_100'] for r in ov),
+       max(ov, key=lambda r: r['electors_per_100'])['election'], un[0]['election'], LSE[-1]['electors_per_100'], LSE[-1]['election']))
+R.p('In the ten years from 2014 to 2024 the roll gained %s. The %s names left off the draft rolls are %d in every 100 of that gain, though the two are not strictly alike, because the revision covered %d states and union territories and the Lok Sabha figure is all India.'
+    % (crore(g10), crore(T['removed']), round(100 * T['removed'] / g10), T['states']))
+
+# ------------------------------------------------------------ how the revision was run
+PR = J('india', 'process.json')
+R.h2('How the revision was run')
+moves = lambda r: len([st for st in r['steps'] if st.get('kind') != 'published']) - 1
+R.p('The rules changed while the revision was under way. The site\'s page on how the revision was run lists %d orders, letters and judgments in date order, %d of them from the Supreme Court, each linked to its document, '
+    'and draws every state\'s schedule as it was set and as it was moved. Across %d states and union territories, dates were changed %d times in the orders and notes that could be read.'
+    % (len(PR['timeline']), len([t for t in PR['timeline'] if t['who'] == 'sc']), len(PR['schedules']), sum(moves(r) for r in PR['schedules'])))
+R.p('What made it harder to stay on the roll, each point resting on an order or a judgment:')
+R.numbered(['%s. %s' % (b['title'], b['text']) for b in PR['burdens']])
+R.p('The page also lists %d press reports of problems in the field, each attributed to its outlet and kept apart from the points above because no document confirms them.' % len(PR['reported']), italic=True)
+
 # ============================================================ CONCLUSION
 R.h1('What the Election Commission should do')
 R.p('%s names came off the draft rolls, about four in five of them on an entry that the elector had moved, could not be found, or was on the roll twice. The Election Commission should:' % crore(T['removed']))
 R.numbered([
-    '**Publish a state-by-state table of its own**, with the reason for every removal at the draft and after it, exact rather than rounded.',
-    '**Publish the deletion lists with the reason against each name for every state**, as it did for Bihar, so that removals can be counted by booth, sex and age.',
-    '**Publish the basis for entries marked absent and enrolled more than once.**',
-    '**Publish the outcome of every claim and objection, and say how many of those added at the final roll had been removed at the draft**, so that restorations can be set against removals.',
-    '**Explain why the mix of reasons differs so widely between states** under one set of instructions.',
+    'Publish a state-by-state table of its own, with the reason for every removal at the draft and after it, exact rather than rounded.',
+    'Publish the deletion lists with the reason against each name for every state, as it did for Bihar, so that removals can be counted by booth, sex and age.',
+    'Publish the basis for entries marked absent and enrolled more than once.',
+    'Publish the outcome of every claim and objection, and say how many of those added at the final roll had been removed at the draft, so that restorations can be set against removals.',
+    'Explain why the mix of reasons differs so widely between states under one set of instructions.',
 ])
 
 R.h1('Method and sources')
