@@ -16,6 +16,16 @@
     </div>
   </div>
 
+  <h2>The roll over forty years</h2>
+  <div class="grid">
+    <div class="panel wide">
+      <h3>Electors in every Lok Sabha general election, 1984-85 to 2024, in crore</h3>
+      <div class="chart"><canvas id="cLs" aria-label="Electors in every Lok Sabha general election from 1984-85 to 2024, in crore"></canvas></div>
+      <p id="pLs"></p>
+    </div>
+  </div>
+  <p class="note" id="nLs"></p>
+
   <h2>Every state, per 100 electors</h2>
   <div class="grid">
     <div class="panel wide">
@@ -60,9 +70,11 @@
 <!--scripts-->
 <script src="../../assets/sir.js"></script>
 <script src="../../assets/viz.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="../../assets/faq/india.js"></script>
 <script>
-SIR.json('data/india/states.json').then(function (d) {
+Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_electors.json')]).then(function (res) {
+  var d = res[0], LS = res[1];
   var T = d.total, S = d.states, F = d.final, AD = d.after_draft, E = SIR.esc;
   // Indian grouping, whole numbers
   var n = function (x) { return Math.round(x).toLocaleString('en-IN'); };
@@ -83,9 +95,11 @@ SIR.json('data/india/states.json').then(function (d) {
   var WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
   var share = function (x) { var k = Math.round(100 / x); return WORDS[k] || k; };
 
+  var LS14 = LS.rows.filter(function (r) { return r.election === '2014'; })[0], LS24 = LS.rows[LS.rows.length - 1], gain10 = LS24.electors - LS14.electors;
   SIR.inShort([
     'Before the Special Intensive Revision, about ' + Math.round(before / 1e7) + ' crore people were on the electoral rolls of the ' + T.states + ' states and union territories that have published figures. The draft rolls left off ' + cr(T.removed) + ' of them, or ' + Math.round(T.per_100) + ' in every 100.',
     rising ? 'Each phase of the revision removed a larger share of its rolls than the one before, from ' + p1(d.by_phase[phases[0]].per_100) + ' per 100 in Bihar to ' + p1(d.by_phase[phases[phases.length - 1]].per_100) + ' in the last phase.' : '',
+    'The ' + cr(T.removed) + ' left off are nearly as many as the whole roll gained in the ten years from 2014 to 2024, ' + cr(gain10) + '.',
     'Ten states account for ' + cr(topSum) + ' of the ' + cr(T.removed) + '. ' + high.state + ' lost the largest share of its roll, about one name in ' + share(high.per_100) + '.'
   ], 'The total adds up each state\'s own figures. The Election Commission has published no all-India table.');
 
@@ -107,6 +121,22 @@ SIR.json('data/india/states.json').then(function (d) {
     from: base,
     steps: [{ name: 'Rolls before the revision', v: before, kind: 'total' }, { name: 'Left off the draft', v: leftRated, kind: 'down' }, { name: 'Draft rolls', v: before - leftRated, kind: 'total' }] });
   document.getElementById('pWater').textContent = 'The bars start at ' + Math.round(base / 1e7) + ' crore, not at zero, so the fall can be seen. These are the ' + rated.length + ' states and union territories that published a roll from before the revision.';
+
+  // the roll in every Lok Sabha election since 1984-85, years spaced to scale
+  var LR = LS.rows, first = LR[0], last = LR[LR.length - 1];
+  // on a phone only every other decade is labelled, and 1998 sits too close to 1999
+  var narrow = window.innerWidth < 600, KEEP = ['1984-85', '1996', '2004', '2014', '2024'];
+  var byYear = {}; LR.forEach(function (r) { byYear[r.year] = r.election; });
+  SIR.chart('cLs', { type: 'scatter',
+    data: { datasets: [{ label: 'Electors, crore', data: LR.map(function (r) { return { x: r.year, y: r.electors / 1e7, n: r.election }; }), showLine: true, $token: '--fill-navy', borderWidth: 2.5, pointRadius: 4, tension: 0, pointBackgroundColor: '#fff' }] },
+    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { return c.raw.n + ': ' + c.raw.y.toFixed(2) + ' crore'; } } } },
+      scales: { x: { type: 'linear', min: 1983, max: 2026, afterBuildTicks: function (ax) { ax.ticks = LR.map(function (r) { return { value: r.year }; }); },
+          ticks: { autoSkip: false, maxRotation: 0, callback: function (v) { var e = byYear[v] || ''; return (narrow ? KEEP.indexOf(e) >= 0 : e !== '1998') ? e : ''; } }, title: { display: true, text: narrow ? 'Lok Sabha election, years to scale' : 'Lok Sabha general election, years spaced to scale (1998 and 1999 sit side by side)' } },
+        y: { beginAtZero: true, max: 100, title: { display: true, text: 'Electors, crore' } } } } });
+  var i14 = LR.filter(function (r) { return r.election === '2014'; })[0];
+  var gain = last.electors - i14.electors;
+  document.getElementById('pLs').textContent = 'The roll grew from ' + cr(first.electors) + ' in ' + first.election + ' to ' + cr(last.electors) + ' in ' + last.election + ', ' + (last.electors / first.electors).toFixed(2) + ' times over. In the ten years from 2014 to 2024 it gained ' + cr(gain) + '. The ' + cr(T.removed) + ' names left off the draft rolls are ' + Math.round(100 * T.removed / gain) + ' in every 100 of that gain. The two counts are not strictly alike, because the revision covered ' + T.states + ' states and union territories and the Lok Sabha figure is all India.';
+  document.getElementById('nLs').innerHTML = 'Source: <a href="' + E(LS.url) + '" rel="noopener" target="_blank">' + E(LS.source) + '</a>. ' + LR.filter(function (r) { return r.note; }).map(function (r) { return r.election + ': ' + E(r.note) + '.'; }).join(' ') + ' The figures can be downloaded as <a href="../../data/india/lok_sabha_electors.csv">lok_sabha_electors.csv</a>.';
 
   // every state's rate, coloured by phase, the ten largest named in bold
   var PT = { '1': '--fill-red', '2': '--fill-navy', '3': '--fill-teal' };
