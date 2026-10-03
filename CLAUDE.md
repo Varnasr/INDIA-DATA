@@ -176,6 +176,17 @@ from the Election Commission's Atlas 2024, Graph 6.1. The figures are curated in
 left off with the 2014 to 2024 gain always says the two counts differ in
 coverage (31 states against all India).
 
+Beside the electors the chart draws the population of voting age, from the UN
+World Population Prospects 2024 (medium variant, single-year ages, 1 July of
+the election year), extracted by `scripts/fetch_wpp_voting_age.py` into
+`data/india/raw/wpp2024_voting_age.csv`. It is 21 and over for 1984-85, because
+the voting age fell to 18 only with the 61st Amendment in 1989, and the build
+asserts that. The roll exceeds that population in every election to 1999
+(109.5 per 100 in 1984-85) and falls short of it from 2004 (96 in 2024). Say
+"if the population estimate is right" before reading the excess as dead or
+moved names, and never call the shortfall missing voters: the population
+counts residents who are not citizens.
+
 `data/bihar/raw/final_roll_format4b.csv` is the Commission's Format 4B return
 for Bihar's final roll, seat by seat and by sex; `scripts/build_bihar_final.py`
 writes `data/bihar/final.json` and fails unless every seat adds up and the
