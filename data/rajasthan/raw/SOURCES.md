@@ -195,3 +195,20 @@ Assembly election of 25 November 2023 (results 3 December 2023), with
 
 - Nothing in the repository outside data/rajasthan/raw/ was changed.
 - No individual-elector list was opened, including the CEO's ASD lists.
+
+## electors_2023_ac.csv
+
+Electors by AC on the roll of the 2023 assembly election, from ECI's
+statistical report 11, "AC Wise Number Of Electors"
+(https://www.eci.gov.in/eci-backend/public/all_files/full-statistical-reports/rajasthan/2023_Including/AC_Wise_Number_Of_Electors.xlsx,
+fetched 2026-10-03; the server answered 406 to a first request and the file to
+a second with browser headers). Columns: ac, ac_name, men, women, third
+(general electors, including NRIs), general, service, all_electors.
+
+- Assertions passed when written: 200 rows, ACs 1 to 200 once each; men +
+  women + third = general and the service split adds up in every row;
+  general sums to 5,27,88,931 and service to 1,42,221, the report's Total row;
+  all_electors equals the electors in results_2023.csv in all 200 ACs.
+- Used by scripts/build_rajasthan.py, against final_roll_ac.csv, which is
+  general electors only and counts the 565 third-gender electors among
+  women; the 2023 third-gender electors are added to women to match.

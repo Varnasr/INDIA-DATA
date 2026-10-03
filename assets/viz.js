@@ -160,11 +160,12 @@
   // rows: [{name, tok, points: [{v, label}]}]
   function strip(box, o) {
     measure(box);
-    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = phone() ? 0 : 150, top = (phone() ? 8 : 16) + (o.key ? 22 : 0), R = o.r || 5, D = R * 2 + 0.5;
+    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = phone() ? 0 : Math.max(150, 12 + 7.4 * Math.max.apply(null, o.rows.map(function (r) { return String(r.name).length; }))), top = (phone() ? 8 : 16) + (o.key ? 22 : 0), R = o.r || 5, D = R * 2 + 0.5;
     var all = [].concat.apply([], o.rows.map(function (r) { return r.points.map(function (p) { return p.v; }); }));
-    var step = o.step || 5, max = Math.ceil(Math.max.apply(null, all) / step) * step;
-    var rm = roomy(step, 0, max, W - lw - 28, true); step = rm.step; max = rm.hi;
-    var x = function (v) { return lw + 14 + (W - lw - 28) * v / max; };
+    // the axis starts at zero unless a value falls below it (a roll that grew)
+    var step = o.step || 5, max = Math.ceil(Math.max.apply(null, all) / step) * step, min = Math.min(0, Math.min.apply(null, all));
+    var rm = roomy(step, min, max, W - lw - 28, true); step = rm.step; max = rm.hi; min = Math.floor(min / step + 1e-9) * step;
+    var x = function (v) { return lw + 14 + (W - lw - 28) * (v - min) / (max - min); };
     // lay each row out first: a swarm, each dot as close to the axis line as
     // it can go without touching another, so a row is as tall as it needs
     var rows = o.rows.map(function (r) {
@@ -180,8 +181,8 @@
     var lab = phone() ? 18 : 0, H = top + rows.reduce(function (a, q) { return a + q.half * 2 + lab + (r_mark(q) ? 14 : 0); }, 0) + 34;
     function r_mark(q) { return (q.r.mark || []).length; }
     var s = svgIn(box, W, H, o.label);
-    for (var t = 0; t <= max + 1e-9; t += step) {
-      el('line', { x1: x(t), x2: x(t), y1: top - 6, y2: H - 28, class: 'vgrid' }, s);
+    for (var t = min; t <= max + 1e-9; t += step) {
+      el('line', { x1: x(t), x2: x(t), y1: top - 6, y2: H - 28, class: Math.abs(t) < 1e-9 && min < 0 ? 'vzero' : 'vgrid' }, s);
       el('text', { x: x(t), y: H - 12, 'text-anchor': 'middle', class: 'vval' }, s, tickText(t, step));
     }
     var y0 = top;
