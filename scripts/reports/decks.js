@@ -403,11 +403,11 @@ function bihar() {
 
   // ---- Questions
   const fq = [
-    ['Were most of the removed not simply dead, or moved away?',
-      'Most were not. Of the ' + indian(RS.total) + ' phase 1 removals, ' + pct(rsh('shifted')) + ' were entered as shifted, ' + pct(rsh('dead')) + ' dead, ' + pct(rsh('absent')) + ' absent and ' + pct(rsh('already_enrolled')) + ' already enrolled. Each is what the officer wrote down, and nobody checked it. The ' + indian(RT.absent) + ' marked absent rest on the least, because the entry records only that the officer did not find the elector.'],
+    ['Were most of the removed dead, or moved away?',
+      'That is what the entries say for most of them, and nobody checked the entries. Of the ' + indian(RS.total) + ' phase 1 removals, ' + pct(rsh('shifted')) + ' were entered as shifted, ' + pct(rsh('dead')) + ' dead, ' + pct(rsh('absent')) + ' absent and ' + pct(rsh('already_enrolled')) + ' already enrolled. Each is what the officer wrote down, and nobody checked it. The ' + indian(RT.absent) + ' marked absent rest on the least, because the entry records only that the officer did not find the elector.'],
     ['Did the removals exceed the margins?',
       'Yes, in ' + over.length + ' of ' + withM.length + ' constituencies, and in ' + tookO.length + ' of the ' + took.length + ' seats the NDA took from INDIA. That does not mean those results would have gone the other way. It means the roll changed by more than the vote that decided the seat.'],
-    ['Did NDA seats not lose more names than INDIA seats?',
+    ['Did NDA seats lose more names than INDIA seats?',
       'They did. ' + LB['2020'].NDA.per_100.toFixed(2) + ' per 100 electors against ' + LB['2020'].INDIA.per_100.toFixed(2) + ' by the 2020 winner, and NDA-led booths lost ' + Wt.pooled_nda_minus_india.toFixed(1) + ' more names each than INDIA-led booths in the same seat. A booth\'s leading party says nothing about how the removed electors voted.'],
     ['Why are women over-represented?',
       'Women are ' + pct(fem) + ' of those removed and ' + pct(t.female_share_roll) + ' of the roll, over-represented in ' + fOver.length + ' of ' + DI.length + ' districts. ' + indian(xsS) + ' of the ' + indian(xsF) + ' more women than men removed in phase 1 were entered as shifted, and ' + pct(100 * yW / yS) + ' of those marked shifted aged 18 to 29 are women.'],
@@ -615,7 +615,7 @@ function hyderabad() {
 
   // ---- Questions
   K.qa(K.slide('Questions put to this analysis', 'What the lists say about moves, religion, the 2002 roll and age'), [
-    ['Were most of those struck off not people who had moved away?',
+    ['Were most of those struck off people who had moved away?',
       'The largest recorded reason is "permanently shifted", ' + pct(rsh('Permanently Shifted')) + ' of removals, and the Old City has a large moving population. But ' + pct(rsh('Untraceable/Absent')) + ' were entered as untraceable or absent, ' + pct(rsh('Death')) + ' as dead and ' + pct(rsh('Already enrolled')) + ' as enrolled elsewhere. Each is what the officer wrote down, and nobody checked it.'],
     ['Was the revision aimed at Muslim electors?',
       'The lists do not show that. Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors. The lists do show who bore the removals, the old and those who could not be traced to the 2002 roll.'],

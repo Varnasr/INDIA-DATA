@@ -98,7 +98,7 @@ R.stats([(indian(t['total']), 'names removed, both phases'), (pct(100 * t['total
 R.p('The Special Intensive Revision, a fresh check of every name on the electoral roll, removed %s names from Bihar\'s roll in 2025. '
     '%s came off before the draft roll of 1 August, the first published version of the revised roll, and this report calls that phase 1. '
     '%s more came off before the final roll of 30 September, published after the hearing of claims and objections, and this report calls that phase 2. '
-    'That is %s names for every 100 electors on the final roll, across %s polling booths in %d constituencies. '
+    'The total comes to %s names for every 100 electors on the final roll, across %s polling booths in %d constituencies. '
     'In the Assembly election that followed in November, %s votes were polled. The names removed equal %s of them, one for every %.1f votes cast.'
     % (indian(t['total']), indian(t['p1']), indian(t['p2']), '%.2f' % per100, indian(t['booths']), len(A), indian(polled),
        pct(100 * t['total'] / polled), polled / t['total']))

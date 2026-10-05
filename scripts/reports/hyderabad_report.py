@@ -203,7 +203,7 @@ R.bullets([
     '%s electors were struck off, %s of the five pre-revision rolls, and %s more were summoned to a hearing.' % (indian(t['deleted']), pct(t['rate']), indian(t['hearing'])),
     'More names were struck off than the 2023 margin in all %d constituencies, and more than all the valid votes cast in %s.' % (len(A), andj([a['name'] for a in overV])),
     'Yakutpura was won by %s votes and lost %s names, %.0f times the margin.' % (indian(yak['e2023']['margin']), indian(yak['deleted']), yak['e2023']['deleted_over_margin']),
-    'The removals were as heavy across the city. On the state\'s figures the five Old City seats lost %s of their roll, Hyderabad\'s other ten %s, and the rest of Telangana %s.' % (pct(TG['old_city']['rate']), pct(TG['other_hyderabad']['rate']), pct(TG['rest_of_state']['rate'])),
+    'The rest of the city lost as large a share. On the state\'s figures the five Old City seats lost %s of their roll, Hyderabad\'s other ten %s, and the rest of Telangana %s.' % (pct(TG['old_city']['rate']), pct(TG['other_hyderabad']['rate']), pct(TG['rest_of_state']['rate'])),
     '%s of electors aged 80 and over were struck off, against %s of those aged 18 to 24.' % (pct(age[-1]), pct(age[0])),
     'Electors with no link to the 2002 roll were about twice as likely to be struck off, %s against %s.' % (pct(ul), pct(lk)),
     '%s of removals were entered as "untraceable or absent", ranging from %s to %s between constituencies.' % (pct(rsh['Untraceable/Absent']), pct(min(ut)), pct(max(ut))),
