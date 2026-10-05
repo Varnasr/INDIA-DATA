@@ -165,7 +165,7 @@ nda_won = sum(1 for x in IM['seats'] if x['alliance_w'] == 'NDA')
 kept = [nda_won - IS[k]['to_india'] + IS[k]['to_nda'] for k in IS]
 R.h2('Could the removals have changed who won?')
 R.p('A name removed is not a vote lost to one side. Some of the removed had died, many would not have voted, and those who would have voted would have split between the parties. '
-    'Each seat\'s count here is the names still off the final roll, less those entered as dead, at the seat\'s 2025 turnout: %s electors across Bihar. That count is low, because the names added after the draft include new electors, so every estimate is also run on all the names removed, with nothing added back (%s).'
+    'Each seat\'s count here is the names still off the final roll, less those entered as dead, at the seat\'s 2025 turnout. That comes to %s electors across Bihar. That count is low, because the names added after the draft include new electors, so every estimate is also run on all the names removed, with nothing added back (%s).'
     % (indian(IM['voters_lower']), indian(IM['voters_upper'])))
 R.p('In %d of %d seats the removed electors who would have voted were enough to change the result had they backed the runner-up. In %d of them a lean of under 55%% would have done it (%s). That share, the part of the removed voters the runner-up would have needed, is called the break-even figure below. In the other %d seats the margin was larger than every removed vote put together. '
     'This is the one figure that needs no assumption about how anyone votes.'
@@ -178,7 +178,7 @@ R.p('Weighting instead by how Muslims and others, or women and men, voted in the
     % (IM['poll_source'], IS['religion_upper']['flips'], IS['sex_upper']['flips'], seatlist('religion_upper'), seatlist('sex_upper'), min(kept), max(kept)))
 out = [x for x in IM['seats'] if not x['modelled'] and x['breakeven_lower'] < 55]
 if out:
-    R.p('Seats where the winner or runner-up is outside the two alliances get the break-even figure only, because the booth results and the poll both count every other party together. Two of those were close: %s.'
+    R.p('Seats where the winner or runner-up is outside the two alliances get the break-even figure only, because the booth results and the poll both count every other party together. Two of those were close. They were %s.'
         % andj(['%s (%s over %s by %s)' % (x['name'], x['winner'], x['runner_up'], indian(x['margin'])) for x in out]))
 rows = sorted([x for x in IM['seats'] if x['breakeven_lower'] < 65], key=lambda x: x['breakeven_lower'])
 R.table(['Constituency', 'Winner / runner-up', 'Margin', 'Removed who would have voted', 'Share the runner-up needed', 'Booth estimate, net to runner-up'],
@@ -210,7 +210,7 @@ R.p('Once each seat\'s 2020 result is allowed for, the NDA\'s lead over INDIA gr
 R.p('This asks only whether the removals moved votes between the alliances. It cannot say whether each name was rightly removed, and a voter wrongly removed has lost a vote whichever way it would have gone. A small lean either way would not show, and five years separate the two elections, in which LJP rejoined the NDA, VIP changed sides and Jan Suraaj entered.', italic=True, size=8.5)
 
 R.h2('After the final roll')
-R.p('The final roll of 30 September 2025 was published after the claims and objections on the draft were heard. A claim asks for a name to be added or put back, and an objection asks for one to be removed. The Election Commission\'s Format 4B return, its standard return for a final roll, for it gives, seat by seat and by sex, the names added and removed after the draft and the final roll, and agrees with the Chief Electoral Officer\'s press note. '
+R.p('The final roll of 30 September 2025 was published after the claims and objections on the draft were heard. A claim asks for a name to be added or put back, and an objection asks for one to be removed. Format 4B, the Election Commission\'s standard return for a final roll, gives seat by seat and by sex the names added and removed after the draft and the final roll itself. It agrees with the press note of the Chief Electoral Officer, the Commission\'s officer in charge of the state\'s rolls. '
     'The roll of June 2025 is published only as a state total, so a seat\'s roll before the revision is taken here as its draft roll plus the names on its phase 1 list.')
 R.stats([(lakh(FT['added']), 'added after the draft'), (lakh(FT['removed_after']), 'removed after the draft'), (pct(FT['made_up_pct']), 'of the draft removals made up'),
          ('%d of %d' % (FM['net'], FM['seats']), 'seats where the net fall exceeds the margin')])
@@ -228,7 +228,7 @@ style_axes(ax, 'Seats where the removals exceed the 2025 margin, at the draft an
 R.figure(fig, 'Figure 4. By the alliance that won the seat in 2025.')
 R.p('After the draft, %s names were added on claims and %s removed on objections, so the final roll rose by %s over the draft. That rise equals %s of the %s names removed at the draft. '
     'That rise counts new electors as well as names put back, and the Commission has not said how many of those added had been removed at the draft, so it is the most that can have been put back. '
-    'The final roll was %s names smaller than the roll before the revision, and smaller in every one of the %d seats.'
+    'The final roll was %s names smaller than the roll before the revision. This report calls that difference the net fall, and the roll fell in every one of the %d seats.'
     % (indian(FT['added']), indian(FT['removed_after']), indian(FT['net_after']), pct(FT['made_up_pct']), indian(FT['p1']), indian(FT['net_fall_press']), len(FB['seats'])))
 R.p('In %d of %d seats the fall that remained at the final roll was still larger than the 2025 winning margin, against %d when the draft removals are counted alone. Of those %d, the NDA won %d, INDIA %d and others %d.'
     % (FM['net'], FM['seats'], FM['total'], FM['net'], FM['net_by_alliance'].get('NDA', 0), FM['net_by_alliance'].get('INDIA', 0), FM['net_by_alliance'].get('Other', 0)))
@@ -257,7 +257,7 @@ R.p('Phase 1 removed %s more women than men, and %s of that difference (%s) were
 
 R.h2('Reasons for removal')
 R.p('The phase 1 lists record, against every one of the %s names, the reason the officer entered for removing it. Counted as they were entered, %s were marked permanently shifted (%s), %s dead (%s), %s absent (%s) and %s already enrolled elsewhere (%s). '
-    'The counts agree with the booth list in every booth, and the counts of women and men agree with the phase 1 figures of the Chief Electoral Officer, the Election Commission\'s officer in charge of the state\'s rolls, in every constituency. The %s names removed in phase 2 carry no reason in the lists.'
+    'The counts agree with the booth list in every booth, and the counts of women and men agree with the Chief Electoral Officer\'s phase 1 figures in every constituency. The %s names removed in phase 2 carry no reason in the lists.'
     % (indian(rtot), indian(RT['shifted']), pct(rsh('shifted')), indian(RT['dead']), pct(rsh('dead')), indian(RT['absent']), pct(rsh('absent')),
        indian(RT['already_enrolled']), pct(rsh('already_enrolled')), indian(t['p2'])))
 R.p('A reason is what the officer wrote down after a visit, or after failing to find the elector, and nobody checked it. Someone marked shifted may have been away for work when the officer called, and someone marked absent may have been at home. '
