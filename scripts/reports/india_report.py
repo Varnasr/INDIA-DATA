@@ -57,27 +57,27 @@ R.h2('In short')
 R.numbered([
     'Before the revision, the rolls already held %s of adults in the %d states with population projections. Only %d of those states had more names on the roll than adults.'
     % (pct(100 * ADU0['roll_total'] / ADU0['adults_total']), ADU0['states'], len(ADU0['over_100'])),
-    'The revision still took off %s names in %d states, %.1f of every 100 electors, and the draft rolls now hold %s of adults. %s'
+    'The revision still left %s names off the draft rolls, the first published versions of the revised rolls, in %d states. That is %.1f of every 100 electors, and the draft rolls now hold %s of adults. %s'
     % (crore(T['removed']), T['states'], T['per_100'], pct(100 * ADU0['draft_total'] / ADU0['adults_total']),
        'States whose rolls were most over-full did not cut more.' if abs(rho0) < 0.2 else ('States whose rolls were most over-full did cut more.' if rho0 > 0 else 'States whose rolls were most over-full cut less.')),
-    'The names removed were enough to decide most seats where they can be counted. In Bihar and Tamil Nadu they were more than the winning margin in %d of %d assembly seats, and in West Bengal and Kerala the fall in the roll was more than the margin in %d of %d.'
+    'The names removed were enough to decide most seats where they can be counted, because they outnumber the winning margin, the votes by which the winner beat the runner-up. In Bihar and Tamil Nadu they were more than the winning margin in %d of %d assembly seats, and in West Bengal and Kerala the fall in the roll was more than the margin in %d of %d.'
     % (J('india', 'margins.json')['removed']['assembly_over'], J('india', 'margins.json')['removed']['assembly_seats'], J('india', 'margins.json')['fall']['assembly_over'], J('india', 'margins.json')['fall']['assembly_seats']),
-    'Of the names removed with a reason given, only %s were entered as dead. The rest are names an officer marked as moved, not found or on the roll twice, and nobody has checked those entries.' % pct(T['shares']['dead']),
+    'Of the names removed with a reason given, only %s were entered as dead. The rest are names an officer marked as moved, missing or on the roll twice.' % pct(T['shares']['dead']),
     'The same rules gave very different results. %s removed %.1f of every 100 electors and %s %.1f. Among the big states, the share marked moved or not found runs from %s in %s to %s in %s.'
     % (rated[0]['state'], rated[0]['per_100'], rated[-1]['state'], rated[-1]['per_100'], pct(bigS[0]['shares']['shifted_absent_other']), bigS[0]['state'],
        pct(bigS[-1]['shares']['shifted_absent_other']), bigS[-1]['state']),
     'Women were more likely to be removed. In %d of the %d states that report by sex, women are a bigger share of the names removed than of the roll.'
     % (len([g for g in GG0 if g['gap'] > 1]), len(GG0)),
-    'Little has come back. In the %d states with a final roll, the rolls grew back by at most %s of what was cut, and that rise includes new voters.' % (FN0['states'], pct(FN0['made_up_pct'])),
+    'Little has come back. In the %d states with a final roll, the roll published after claims and objections are heard, the rolls grew back by at most %s of what was cut, and that rise includes new voters.' % (FN0['states'], pct(FN0['made_up_pct'])),
 ])
 R.p('Two limits. The adult figures count people where they live, so states that draw migrants look short of electors who are registered in their home states. '
-    'And these figures show what happened, not why, so they cannot show anyone meant it to happen.', italic=True)
+    'And these figures show what happened. They cannot show why it happened, or that anyone meant it to.', italic=True)
 
 R.h2('At a glance')
 R.stats([(crore(T['removed']), 'left off the draft rolls'), (pct(T['shares']['shifted_absent_other']), 'shifted, absent or other'),
          (pct(T['shares']['dead']), 'dead'), ('%.1f' % T['per_100'], 'removed per 100 electors')])
-R.p('The Special Intensive Revision has been carried out in three phases: Bihar in 2025, twelve states and union territories from November 2025, and eighteen more in 2026. '
-    'In the %d that have published a draft roll, %s electors on the rolls before the revision were not carried onto it: %.1f for every 100. Tripura, the last, publishes its draft in December.'
+R.p('The Special Intensive Revision is a fresh check of every name on the electoral rolls, and it has been carried out in three phases. Bihar came first, in 2025, then twelve states and union territories from November 2025, and eighteen more in 2026. '
+    'In the %d that have published a draft roll, %s electors on the rolls before the revision were not carried onto it. That is %.1f for every 100. Tripura, the last, publishes its draft in December.'
     % (T['states'], indian(T['removed']), T['per_100']))
 R.p('Every state gave a reason for most of its removals. Of the %s names it split by reason, %s (%s) were entered as dead, %s (%s) as shifted, absent or other, and %s (%s) as enrolled more than once. '
     'Deaths are about one in five. The other four in five rest on an officer\'s entry that the elector was not where the roll placed them, or was on it twice.'
@@ -126,7 +126,8 @@ style_axes(ax, 'Rolls as a share of the projected adult population')
 R.figure(fig, 'Figure 2. Nineteen states with projections by age. The dashed line is a roll equal to the adult population.', width=15)
 dl = sorted(adS, key=lambda x: x['draft_adult_pct'])
 R.p('A roll larger than the adult population is what a roll swollen by the dead and the departed would look like, and it is the case the revision was meant to answer. Across the %d states with projections by age, the rolls before the revision held %s of the projected population aged 18 and over, and the draft rolls hold %s. '
-    'Only %d had a roll larger than their adult population: %s. How far a roll exceeded its adult population has no relationship with how many names the state removed (rank correlation %.2f). The lowest draft rolls against the adult population are in %s. '
+    'Only %d had a roll larger than their adult population (%s). How far a roll exceeded its adult population has no relationship with how many names the state removed (rank correlation %.2f). '
+    'A rank correlation runs from -1 to 1 and shows whether states that rank high on one measure also rank high on the other. The lowest draft rolls against the adult population are in %s. '
     'The projections count residents, so a state that receives many migrants counts adults who may be registered in their home state, which lowers its ratio.'
     % (ADU['states'], pct(100 * ADU['roll_total'] / ADU['adults_total']), pct(100 * ADU['draft_total'] / ADU['adults_total']), len(ADU['over_100']), andj(ADU['over_100']), ADU['rho_rate'],
        andj(['%s (%s)' % (x['state'], pct(x['draft_adult_pct'])) for x in dl[:3]])))
@@ -147,7 +148,7 @@ ax.legend(fontsize=7, ncol=4, loc='upper center', bbox_to_anchor=(0.5, -0.16), f
 style_axes(ax, 'Names left off the draft rolls, by reason')
 R.figure(fig, 'Figure 3. Names left off the draft rolls in each phase, by the reason entered, in lakh.', width=14)
 R.p('The share entered as dead fell from %s in Bihar to %s in phase 2 and %s in phase 3, while the share entered as shifted, absent or other rose from %s to %s and %s. '
-    'Removals per 100 electors rose with each phase: %.1f, %.1f and %.1f.'
+    'Removals per 100 electors rose with each phase, from %.1f to %.1f and then %.1f.'
     % (pct(P['1']['shares']['dead']), pct(P['2']['shares']['dead']), pct(P['3']['shares']['dead']),
        pct(P['1']['shares']['shifted_absent_other']), pct(P['2']['shares']['shifted_absent_other']), pct(P['3']['shares']['shifted_absent_other']),
        P['1']['per_100'], P['2']['per_100'], P['3']['per_100']))
@@ -218,7 +219,7 @@ p3 = [CL[c['key']] for c in CR if c['per_100_phase3'] is not None and abs(c['per
 mus = next(c for c in CR if c['key'] == 'muslim_pct')
 dupTop = max(CR, key=lambda c: abs(c['duplicate_big']))
 B = N['border']
-R.p('Each state\'s removals per 100 electors, and the shares of its removals entered as dead or as enrolled more than once, are set against its characteristics as rank correlations across states: 1 means the two rise together, 0 no relationship, and anything under 0.2 either way is read as none. The number of states in each is in brackets.')
+R.p('Each state\'s removals per 100 electors, and the shares of its removals entered as dead or as enrolled more than once, are set against its characteristics as rank correlations across states. A value of 1 means the two rise together, 0 means no relationship, and anything under 0.2 either way is read as none. The number of states in each is in brackets.')
 R.table(['Characteristic', 'Rate, all states', 'Rate, phase 2', 'Rate, phase 3', 'Share dead', 'Share twice, larger states'],
         [[CL[c['key']][0].upper() + CL[c['key']][1:] + ' (' + CS[c['key']] + ')', fmtr(c, 'per_100_all'), fmtr(c, 'per_100_phase2'), fmtr(c, 'per_100_phase3'), fmtr(c, 'dead_all'), fmtr(c, 'duplicate_big')]
          for c in sorted(CR, key=lambda c: -c['per_100_all'])],
@@ -247,13 +248,13 @@ ax.legend(fontsize=7, ncol=2, loc='upper center', bbox_to_anchor=(0.5, -0.08), f
 style_axes(ax, 'Removed at the draft, and the fall that remains at the final roll')
 R.figure(fig, 'Figure 6. States whose final roll is out and whose roll before the revision was published exactly enough to set against it.', width=15)
 wb = next(s for s in S if s['withheld'])
-R.p('In the %d states and union territories with a final roll, %s names were left off the drafts, and the final rolls came out %s larger than the drafts: %s of the fall. '
+R.p('In the %d states and union territories with a final roll, %s names were left off the drafts, and the final rolls came out %s larger than the drafts, which is %s of the fall. '
     '%s kept %s names off its final roll while they are decided, and without them the final rolls were %s larger, %s of the fall. '
-    'Against the rolls before the revision, the fall is %.1f per 100 electors at the final roll, from %.1f at the draft.'
+    'The net fall is the roll before the revision less the final roll. It comes to %.1f per 100 electors, against %.1f left off at the draft.'
     % (FN['states'], crore(FN['removed']), crore(FN['net_after_draft']), pct(FN['made_up_pct']), wb['state'], lakh(FN['withheld']),
        crore(FN['net_after_draft'] + FN['withheld']), pct(FN['made_up_pct_ex_withheld']), FN['net_per_100'], FN['per_100']))
 R.p('The rise from draft to final counts new electors as well as names put back, and no state has said how many of those added had been removed at the draft, so it is the most that can have been put back. '
-    'The final roll is smaller than the draft in %d states: %s. %s'
+    'The final roll is smaller than the draft in %d states (%s). %s'
     % (len(FN['shrank']), andj(FN['shrank']), ('How many names a state removed at the draft has no relationship with how much of that its final roll made up (rank correlation %.2f).' if abs(FN['rho_made_up']) < 0.2
                              else 'States that removed more at the draft made up a different share of it at the final roll (rank correlation %.2f).') % FN['rho_made_up']))
 RCN = {'exact': 'Adds up', 'rounded': 'Rounded', 'net only': 'Net only', 'no': 'Does not add up'}
@@ -344,7 +345,7 @@ R.p('The page also lists %d press reports of problems in the field, each attribu
 R.h1('What the Election Commission should do')
 R.p('%s names came off the draft rolls, about four in five of them on an entry that the elector had moved, could not be found, or was on the roll twice. The Election Commission should:' % crore(T['removed']))
 R.numbered([
-    'Publish a state-by-state table of its own, with the reason for every removal at the draft and after it, exact rather than rounded.',
+    'Publish a state-by-state table of its own, in exact figures, with the reason for every removal at the draft and after it.',
     'Publish the deletion lists with the reason against each name for every state, as it did for Bihar, so that removals can be counted by booth, sex and age.',
     'Publish the basis for entries marked absent and enrolled more than once.',
     'Publish the outcome of every claim and objection, and say how many of those added at the final roll had been removed at the draft, so that restorations can be set against removals.',
@@ -352,7 +353,7 @@ R.numbered([
 ])
 
 R.h1('Method and sources')
-R.p('The All India figures are the Chief Electoral Officers\' own, published when each draft roll came out. They are taken from the press notes where those could be read (%s) and from press reports otherwise. Bihar\'s row is counted from the deletion lists. '
+R.p('Each state\'s Chief Electoral Officer, the Election Commission\'s officer in charge of its rolls, published figures when the draft roll came out, and the All India figures are those officers\' own. They are taken from the press notes where those could be read (%s) and from press reports otherwise. Bihar\'s row is counted from the deletion lists. '
     'The reasons are grouped into the three every state reported. The state rows add up to %s removed, against the %s reported nationally on 30 September 2026, and the difference is rounding. Each row\'s source is listed on the method page of the site and in the downloadable table.'
     % (andj([s['state'] for s in S if s['source'] == 'primary']), crore(T['removed']), 'about 13.3 crore'))
 R.p('No name, EPIC number or address is published.')
