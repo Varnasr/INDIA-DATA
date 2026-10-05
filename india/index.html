@@ -43,12 +43,12 @@
 <div class="page-head"><h1>All India: why names were removed</h1><ol class="summary" id="short"></ol></div>
 
   <h2 id="removals-per-100-electors-state-by-state">Removals per 100 electors, state by state</h2>
-  <p class="sub">One tile for each state and union territory, placed roughly where it lies. The tiles are all the same size, so the map shows neither borders nor area. Grey tiles have no rate. Jammu and Kashmir, Ladakh, Himachal Pradesh and Assam were not part of the revision, Tripura has no draft roll yet, and Chandigarh did not publish an exact roll from before the revision.</p>
+  <p class="sub">One tile for each state and union territory, placed roughly where it lies. The tiles are all the same size, so the map shows neither borders nor area. A state's rate is the names left off its draft roll for every 100 electors on its roll before the revision. Grey tiles have no rate. Jammu and Kashmir, Ladakh, Himachal Pradesh and Assam were not part of the revision, Tripura has no draft roll yet, and Chandigarh did not publish an exact roll from before the revision.</p>
   <div class="tilemap" id="tiles" role="list" aria-label="Removals per 100 electors, by state"></div>
   <div class="tilekey" id="tilekey" aria-hidden="true"></div>
 
   <h2 id="the-rolls-against-the-adult-population">The rolls against the adult population</h2>
-  <p class="sub">Each state's roll before the revision, and its draft roll, as a share of its projected population aged 18 and over on 1 March 2026. A roll above 100% holds more names than there are adults, which is what a roll still carrying the dead and those who have left would look like. Projections by age exist for 19 states.</p>
+  <p class="sub">Each state's roll before the revision, and its draft roll, as a share of its projected population aged 18 and over on 1 March 2026. A roll above 100% holds more names than there are adults. That is what a roll would look like if it still carried people who had died or moved away. Projections by age exist for 19 states.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="vizbox" id="cAdult"></div>
@@ -81,7 +81,7 @@
   <p class="finding" id="fPhase"></p>
 
   <h2 id="the-reasons-state-by-state">The reasons, state by state</h2>
-  <p class="sub">Each state's removals split by the reason entered, as a share of the removals it has split. States are ordered by the share entered as shifted, absent or other.</p>
+  <p class="sub">Each state's removals split by the reason entered, as a share of the removals it has split. The three reasons are the ones every state reports: dead, shifted, absent or other, and enrolled more than once. States are ordered by the share entered as shifted, absent or other.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="vizbox" id="cMix"></div>
@@ -113,7 +113,7 @@
   <p class="finding" id="fBorder"></p>
 
   <h2 id="after-the-final-rolls">After the final rolls</h2>
-  <p class="sub">Each state's final roll compared with its draft. The grey bar is the names left off the draft roll for every 100 electors on the roll before the revision. The blue bar is the fall that remains once the final roll is out, after the names added and removed on claims and objections. A state appears once its final roll is published.</p>
+  <p class="sub">Each state's final roll compared with its draft. The draft roll was published first. People could then file claims to be put on it and objections to names on it, and the final roll came after those were decided. The grey bar is the names left off the draft roll for every 100 electors on the roll before the revision. The blue bar is the fall that remains once the final roll is out, after the names added and removed on claims and objections. A state appears once its final roll is published.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="vizbox" id="vFinal"></div>
@@ -161,8 +161,8 @@ SIR.json('data/india/states.json').then(function (d) {
     var pts = [
       L('Before the revision, the rolls already held {pre} of adults in the {n} states with population projections. Only {k} of those states had more names on the roll than adults.', { pre: SIR.pct(100 * A.roll_total / A.adults_total), n: A.states, k: A.over_100.length }),
       L('The revision still took off {total} names in {s} states, {r} of every 100 electors, and the draft rolls now hold {post} of adults.', { total: cr(T.removed), s: T.states, r: SIR.d(T.per_100, 1), post: SIR.pct(100 * A.draft_total / A.adults_total) }) + ' ' + (Math.abs(A.rho_rate) < 0.2 ? L('States whose rolls were most over-full did not cut more.') : A.rho_rate > 0 ? L('States whose rolls were most over-full did cut more.') : L('States whose rolls were most over-full cut less.')),
-      L('Of the names removed with a reason given, only {dead} were entered as dead. The rest were marked as moved, not found or on the roll twice.', { dead: SIR.pct(T.shares.dead) }),
-      L('The same rules gave very different results. {hi} removed {hir} of every 100 electors and {lo} {lor}. Among the big states, the share marked moved or not found runs from {smin} in {sminn} to {smax} in {smaxn}.', { hi: rated[0].state, hir: SIR.d(rated[0].per_100, 1), lo: rated[rated.length - 1].state, lor: SIR.d(rated[rated.length - 1].per_100, 1), smin: SIR.pct(bigS[0].shares.shifted_absent_other), sminn: bigS[0].state, smax: SIR.pct(bigS[bigS.length - 1].shares.shifted_absent_other), smaxn: bigS[bigS.length - 1].state }),
+      L('Of the names removed with a reason given, only {dead} were entered as dead. The rest were entered as shifted, absent or other, or as enrolled more than once.', { dead: SIR.pct(T.shares.dead) }),
+      L('The same rules gave very different results. {hi} removed {hir} of every 100 electors and {lo} {lor}. Among the big states, the share entered as shifted, absent or other runs from {smin} in {sminn} to {smax} in {smaxn}.', { hi: rated[0].state, hir: SIR.d(rated[0].per_100, 1), lo: rated[rated.length - 1].state, lor: SIR.d(rated[rated.length - 1].per_100, 1), smin: SIR.pct(bigS[0].shares.shifted_absent_other), sminn: bigS[0].state, smax: SIR.pct(bigS[bigS.length - 1].shares.shifted_absent_other), smaxn: bigS[bigS.length - 1].state }),
       L('Women were more likely to be removed. In {over} of the {n} states that report by sex, women are a bigger share of the names removed than of the roll.', { over: wOver, n: GG.length }),
       L('Little has come back. In the {n} states with a final roll, the rolls grew back by at most {m} of what was cut, and that rise includes new voters.', { n: F.states, m: SIR.pct(F.made_up_pct) })
     ];
@@ -281,7 +281,7 @@ SIR.json('data/india/states.json').then(function (d) {
     top: CL[top.key], r: SIR.d(top.per_100_all, 2), r2: SIR.d(top.per_100_phase2, 2), r3: SIR.d(top.per_100_phase3, 2), p3: p3.join(', '), n3: top.n_per_100_phase3, both: bothTxt,
     m1: SIR.d(mus.per_100_all, 2), m2: SIR.d(mus.per_100_phase2, 2), m3: SIR.d(mus.per_100_phase3, 2), dup: CL[dupTop.key], rd: SIR.d(dupTop.duplicate_big, 2) });
   var B = d.border;
-  document.getElementById('fBorder').innerHTML = L('<b>States on an international border removed fewer names than interior states.</b> The typical border state removed {y} per 100 electors across {ny} states, and the typical interior state {n} across {nn}. The median share entered as dead is {dy} in border states and {dn} in the interior, and the share entered as enrolled more than once is {py} and {pn}.', {
+  document.getElementById('fBorder').innerHTML = L('<b>States on an international border removed fewer names than interior states.</b> The typical border state removed {y} per 100 electors across {ny} states, and the typical interior state {n} across {nn}. The typical share entered as dead is {dy} in border states and {dn} in the interior, and the share entered as enrolled more than once is {py} and {pn}.', {
     y: SIR.d(B.per_100_yes, 1), ny: B.n_per_100_yes, n: SIR.d(B.per_100_no, 1), nn: B.n_per_100_no, dy: SIR.pct(B.dead_yes), dn: SIR.pct(B.dead_no), py: SIR.pct(B.duplicate_yes), pn: SIR.pct(B.duplicate_no) });
   var SPN = { complete: L('Full'), 'short': L('Short'), none: L('None'), pending: L('No draft yet') }, FN = { exact: L('Exact'), rounded: L('Rounded') };
   var num = function (v) { return v == null ? '–' : SIR.n(v); };

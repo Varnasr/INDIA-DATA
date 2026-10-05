@@ -10,7 +10,7 @@
       var sg = function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 1); };
       var cr = function (x) { return L('{x} crore', { x: (x / 1e7).toFixed(2) }); };
       var scale = L('The revision left {r} names off Tamil Nadu\'s draft roll, {p} of every 100 electors on the roll before it began.', { r: SIR.lakh(s.removed), p: SIR.d(s.per_100, 1) });
-      var chen = L('Chennai lost {p} of every 100 electors, more than twice the state\'s rate. Its {k} constituencies hold {roll} of the state\'s roll and {rem} of the names removed.', { p: SIR.d(C.per_100, 1), k: C.acs, roll: SIR.pct(s.chennai_share_of_roll), rem: SIR.pct(s.chennai_share_of_removed) });
+      var chen = L('Chennai lost {p} of every 100 electors, {x} times the state\'s rate of {sp}. Its {k} constituencies hold {roll} of the state\'s roll and {rem} of the names removed.', { p: SIR.d(C.per_100, 1), x: SIR.d(C.per_100 / s.per_100, 1), sp: SIR.d(s.per_100, 1), k: C.acs, roll: SIR.pct(s.chennai_share_of_roll), rem: SIR.pct(s.chennai_share_of_removed) });
       var why = L('{sh} were entered as shifted or absent, {dead} as dead and {mult} as enrolled in more than one place.', { sh: SIR.pct(s.shares.shifted_absent), dead: SIR.pct(s.shares.dead), mult: SIR.pct(s.shares.multiple) });
       var margin = L('In {k} of the {n} constituencies, more names were left off the draft roll than the 2026 winning margin.', { k: s.over_margin, n: s.acs });
       var back = L('The final roll of 23 February 2026 was {a} larger than the draft. That rise is at most {m} of the names removed, and it includes new voters.', { a: SIR.lakh(s.added_net), m: SIR.pct(s.made_up_pct) });
@@ -24,7 +24,7 @@
         [L('Do seats with more removals record more of them as shifted or absent?'),
          L('Yes. Across the {n} constituencies the removal rate and the share entered as shifted or absent rise together (rank correlation {rho}). Where many names were removed, most were marked as people who had moved or could not be found.', { n: s.acs, rho: SIR.d(s.rho_rate_shifted, 2) }), ['main']],
         [L('Were the names put back on the final roll?'),
-         L('Few of them.') + ' ' + back + ' ' + L('Once the final roll is counted, the roll is still {f} smaller than before the revision, {p} of every 100 electors.', { f: SIR.lakh(s.net_fall), p: SIR.d(s.net_per_100, 1) }), ['main', 'elections', 'faq']],
+         back + ' ' + L('Once the final roll is counted, the roll is still {f} smaller than before the revision, {p} of every 100 electors.', { f: SIR.lakh(s.net_fall), p: SIR.d(s.net_per_100, 1) }), ['main', 'elections', 'faq']],
         [L('Were women removed more than men?'),
          L('The Chief Electoral Officer has not published the removals by sex, or the roll by sex before the revision, so this cannot be counted. Women were {d} of the draft roll and {f} of the final roll.', { d: SIR.pct(s.women_draft_pct), f: SIR.pct(s.women_final_pct) }), ['main', 'method', 'faq']],
         [L('Could the removals have changed the 2026 result?'),

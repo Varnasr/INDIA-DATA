@@ -45,17 +45,17 @@
 
 <article class="state" lang="en" dir="ltr" data-no-i18n>
   <h2 id="find-a-constituency-or-district">Find a constituency or district</h2>
-  <p class="sub">Type a constituency's name or number, or a district, and its figures appear below with a link you can send.</p>
+  <p class="sub">An assembly constituency is the area that elects one member of the state assembly. Rajasthan has 200 of them. Type a constituency's name or number, or a district, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
       <div class="vizbox" id="vMap"></div>
-      <p class="note">Each constituency is shaded by the change in its roll of general electors from the 2023 election to the final roll of March 2026, per 100 electors on the 2023 roll. The darkest fell most and the lightest grew. Tap a constituency for its figures. Boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.</p>
+      <p class="note">Each constituency is shaded by the change in its roll of general electors, which is the roll without service voters, from the 2023 election to the final roll of March 2026. The change is counted for every 100 electors on the 2023 roll. The darkest fell most, and the lightest fell least or grew. Tap a constituency for its figures. Boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.</p>
     </div>
   </div>
 
   <h2 id="the-roll-step-by-step">The roll, step by step</h2>
-  <p class="sub">The state's roll from before the revision to the final roll, as the Chief Electoral Officer published it for the 199 constituencies revised together. Anta, revised later after its bye-election, is outside these state figures. The bars start above zero so that the changes can be seen.</p>
+  <p class="sub">The roll before the revision is the list of electors when the revision began. The draft roll is the list published after the enumeration forms came back, and a name whose form did not come back was left off it. Names were then added and deleted on claims and objections, and the result is the final roll. These are the figures the Chief Electoral Officer (CEO), who keeps the state's rolls for the Election Commission, published for the 199 constituencies revised together. Anta was revised later, after its bye-election, and is outside them. The bars start above zero so that the changes can be seen.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
@@ -63,21 +63,21 @@
   <p class="note">Rajasthan's dates, as they were set and as they were moved, are drawn beside every other state's on <a href="../india/process/#s-rajasthan">How the revision was run</a>.</p>
 
   <h2 id="the-reasons">The reasons</h2>
-  <p class="sub">The reasons were published for the state only, in lakh. A reason is what the officer wrote down, and nobody checked it.</p>
+  <p class="sub">Each name left off the draft carries one of three reasons. The reasons were published for the state only, in lakh (one lakh is 100,000) and rounded. A reason is what the officer wrote down, and nobody checked it.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vReason"></div></div>
   </div>
   <p class="finding" id="fReason"></p>
 
   <h2 id="per-100-electors-by-district">Per 100 electors, by district</h2>
-  <p class="sub">No count of the names left off has been published below the state. Every roll is published by constituency, so each dot here is one constituency's change in its roll of general electors, from the roll the 2023 election was held on to the final roll of 12 March 2026, for every 100 electors on the 2023 roll, grouped by district. It takes in more than two years of ordinary changes, new voters among them, as well as the revision, so it is a different count from the names left off. Below zero, the roll grew. Hover or tap a dot for its name.</p>
+  <p class="sub">No count of the names left off has been published below the state. The rolls themselves are published by constituency, so this chart compares two of them. Each dot is one constituency's change in its roll of general electors, from the roll the 2023 election was held on to the final roll of 12 March 2026, grouped by district. Counting per 100 electors on the 2023 roll puts large and small constituencies on one scale. A fall of 5 per 100 means the roll is a twentieth smaller. The change takes in more than two years of new voters, deaths and moves as well as the revision, so it is a different count from the names left off. Below zero, the roll grew. Hover or tap a dot for its name.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="cDist"></div></div>
   </div>
   <p class="finding" id="fDist"></p>
 
   <h2 id="women">Women</h2>
-  <p class="sub">Each dot is a constituency. Across, women's share of its 2023 roll; up, women's share of its final roll in 2026. Below the dashed line, women are a smaller share of the roll than they were. Hover or tap a dot for its name.</p>
+  <p class="sub">Each dot is a constituency. Its place across is women's share of its 2023 roll, and its height is women's share of its final roll in 2026. A dot below the dashed line is a constituency where women are now a smaller share of the roll than they were. Hover or tap a dot for its name.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWomen"></div></div>
   </div>
@@ -89,7 +89,7 @@
   <p class="finding" id="fWomenD"></p>
 
   <h2 id="against-the-2023-margins">Against the 2023 margins</h2>
-  <p class="sub">Each dot is a constituency. Across, the margin its 2023 winner won by; up, the fall in its roll from 2023 to the final roll. Above the dashed line, the roll fell by more than the margin. Below zero, the roll grew.</p>
+  <p class="sub">The winning margin is the winner's votes less the runner-up's. Each dot is a constituency. Its place across is the margin its 2023 winner won by, and its height is the fall in its roll from 2023 to the final roll. Above the dashed line, the roll fell by more than the margin. That means the change was large enough to decide the seat, and it says nothing about whether it would have. Below zero, the roll grew.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vMargin"></div></div>
   </div>
@@ -122,18 +122,18 @@ Promise.all([SIR.json('data/rajasthan/summary.json'), SIR.json('data/rajasthan/d
     { name: 'Roll before the revision', v: S.before, kind: 'total' }, { name: 'Left off the draft', v: S.left_off, kind: 'down' },
     { name: 'Draft roll', v: S.draft, kind: 'total' }, { name: 'Added after the draft', v: S.added, kind: 'up' },
     { name: 'Deleted after the draft', v: S.deleted_after, kind: 'down' }, { name: 'Final roll', v: S.final, kind: 'total' }] });
-  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + lk(S.left_off) + ' names, ' + d1(S.left_per_100) + ' of every 100 electors.</b> After the draft, ' + lk(S.added) + ' were added and ' + lk(S.deleted_after) + ' more deleted, so ' + lk(S.removed_by_final) + ' had been removed by the final roll. The final roll was ' + lk(S.final - S.draft) + ' larger than the draft, ' + SIR.pct(S.made_up_pct) + ' of what the draft left off. That rise counts new voters too, so it is the most that can have been put back.';
+  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + lk(S.left_off) + ' names, ' + d1(S.left_per_100) + ' of every 100 electors.</b> After the draft, ' + lk(S.added) + ' were added and ' + lk(S.deleted_after) + ' more deleted, so ' + lk(S.removed_by_final) + ' had been removed by the time of the final roll. The final roll was ' + lk(S.final - S.draft) + ' larger than the draft, ' + SIR.pct(S.made_up_pct) + ' of what the draft left off. That rise counts new voters too, so it is the most that can have been put back.';
 
   VIZ.lollipop('vReason', { label: 'Names left off the draft, by the reason entered, in lakh', axis: 'Lakh',
     rows: [['Shifted or absent', S.reasons_lakh.shifted_absent], ['Dead', S.reasons_lakh.dead], ['Enrolled at more than one place', S.reasons_lakh.multiple]].map(function (x) { return { name: x[0], v: x[1], text: x[1].toFixed(2) + ' lakh', tok: '--fill-navy', hi: true }; }) });
-  document.getElementById('fReason').innerHTML = '<b>' + SIR.pct(100 * S.reasons_lakh.shifted_absent / S.reasons_lakh_sum) + ' were entered as shifted or absent, and ' + SIR.pct(100 * S.reasons_lakh.dead / S.reasons_lakh_sum) + ' as dead.</b> The three reasons add up to ' + S.reasons_lakh_sum.toFixed(2) + ' lakh, against ' + lk(S.left_off) + ' left off, because each was published rounded.';
+  document.getElementById('fReason').innerHTML = '<b>' + SIR.pct(100 * S.reasons_lakh.shifted_absent / S.reasons_lakh_sum) + ' were entered as shifted or absent, and ' + SIR.pct(100 * S.reasons_lakh.dead / S.reasons_lakh_sum) + ' as dead.</b> The three reasons add up to ' + S.reasons_lakh_sum.toFixed(2) + ' lakh, against ' + lk(S.left_off) + ' left off. They differ because each reason was published rounded.';
 
   VIZ.strip('cDist', { label: 'Change in the roll from the 2023 election to the final roll of March 2026, per 100 electors, every constituency by district', axis: 'Fall per 100 electors on the 2023 roll (below zero, the roll grew)', r: 4,
     key: [[D[0].district + ' district', '--fill-red'], ['Other districts', '--fill-navy']],
     rows: D.map(function (d) { return { name: d.district, tok: jd(d) ? '--fill-red' : '--fill-navy',
       points: A.filter(function (a) { return a.district === d.district; }).map(function (a) { return { v: a.per_100, label: a.name + ' (' + a.district + '): ' + d1(a.per_100) + ' per 100' }; }) }; }) });
   var grewD = D.filter(function (d) { return d.per_100 < 0; });
-  document.getElementById('fDist').innerHTML = '<b>From the 2023 election to the final roll, the roll of general electors fell by ' + lk(S.fall) + ', ' + d1(S.per_100) + ' per 100.</b> It fell most in ' + D[0].district + ' (' + d1(D[0].per_100) + ' per 100), ' + D[1].district + ' and ' + D[2].district + ', and grew in ' + grewD.length + ' districts, ' + grewD.map(function (d) { return d.district; }).join(', ') + '. Across the 200 constituencies it runs from a rise of ' + d1(-S.rate_min_v) + ' per 100 in ' + S.rate_min + ' to a fall of ' + d1(S.rate_max_v) + ' in ' + S.rate_max + ', and ' + S.acs_grew + ' constituencies grew. The change takes in more than two years of new voters as well as the revision.';
+  document.getElementById('fDist').innerHTML = '<b>From the 2023 election to the final roll, the roll of general electors fell by ' + lk(S.fall) + ', ' + d1(S.per_100) + ' per 100.</b> It fell most in ' + D[0].district + ' (' + d1(D[0].per_100) + ' per 100), ' + D[1].district + ' and ' + D[2].district + ', and grew in ' + grewD.length + ' districts, ' + grewD.map(function (d) { return d.district; }).join(', ') + '. Across the 200 constituencies it runs from a rise of ' + d1(-S.rate_min_v) + ' per 100 in ' + S.rate_min + ' to a fall of ' + d1(S.rate_max_v) + ' in ' + S.rate_max + ', and ' + S.acs_grew + ' constituencies grew. The change takes in more than two years of new voters, deaths and moves as well as the revision.';
 
   VIZ.scatter('vWomen', { label: 'Women\'s share of the roll in 2023 and in the final roll of 2026, every constituency', diag: true,
     xAxis: 'Women\'s share of the 2023 roll, %', yAxis: 'Women\'s share of the 2026 final roll, %', diagLabel: 'Same share',
@@ -152,7 +152,7 @@ Promise.all([SIR.json('data/rajasthan/summary.json'), SIR.json('data/rajasthan/d
     xAxis: '2023 winning margin', yAxis: 'Fall in the roll, 2023 to 2026', diagLabel: 'fall = margin',
     points: A.map(function (a) { return { x: a.margin, y: a.fall, tok: a.winner === 'BJP' ? '--fill-nda' : a.winner === 'INC' ? '--fill-india' : '--fill-other', label: a.name + ' (' + a.winner + '): fall ' + n(a.fall) + ', margin ' + n(a.margin) }; }) });
   var W = {}; S.winners.forEach(function (w) { W[w.party] = w; });
-  document.getElementById('fMargin').innerHTML = '<b>In ' + S.over_margin + ' of the 200 constituencies the roll fell by more than the 2023 winning margin.</b> Counted at each seat\'s 2023 turnout, it is ' + S.could_change + '. The roll fell by ' + d1(W.BJP.per_100) + ' per 100 in the BJP\'s ' + W.BJP.seats + ' seats and ' + d1(W.INC.per_100) + ' in the Congress\'s ' + W.INC.seats + '. Against their own districts the two are within half a point of zero (' + d1(W.BJP.vs_district) + ' and ' + d1(W.INC.vs_district) + '), so most of the difference is about where the seats are. Orange dots are BJP seats, green Congress and purple the rest.';
+  document.getElementById('fMargin').innerHTML = '<b>In ' + S.over_margin + ' of the 200 constituencies the roll fell by more than the 2023 winning margin.</b> Not everyone on a roll votes, so scaled down by each seat\'s 2023 turnout it is ' + S.could_change + '. The roll fell by ' + d1(W.BJP.per_100) + ' per 100 in the BJP\'s ' + W.BJP.seats + ' seats and ' + d1(W.INC.per_100) + ' in the Congress\'s ' + W.INC.seats + '. Against their own districts the two are within half a point of zero (' + d1(W.BJP.vs_district) + ' and ' + d1(W.INC.vs_district) + '). So most of the difference comes from where each party\'s seats are. Orange dots are BJP seats, green Congress and purple the rest.';
 
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', left: true }, { k: 'district', label: 'District', left: true },

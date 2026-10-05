@@ -41,21 +41,21 @@
 <nav class="nav-tabs" aria-label="Uttar Pradesh pages"><a class="nav-tab" href="../uttarpradesh/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> Overview</a><a class="nav-tab" href="../uttarpradesh/faq/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> FAQ</a><a class="nav-tab" href="../uttarpradesh/method/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Method</a></nav>
 <main id="main">
 <div class="page-head"><h1>Uttar Pradesh: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
-<p class="report-lang">This page is in English only for now. Every figure on it is the Election Commission's or the Chief Electoral Officer's own.</p>
+<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
 
 <article class="state" lang="en" dir="ltr" data-no-i18n>
   <h2 id="find-a-district">Find a district</h2>
-  <p class="sub">Type a district's name and its figures appear below with a link you can send. The revision's figures were published by district only, so there is no constituency to find.</p>
+  <p class="sub">Type a district's name and its figures appear below with a link you can send. The revision's figures were published by district only, so this page has no assembly constituencies to find.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
       <div class="vizbox" id="vMap"></div>
-      <p class="note">Each district is shaded by the names left off its draft roll per 100 electors on its roll of 27 October 2025. Tap a district for its figures. District boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified, with each constituency placed in its district as the 2022 election results list it.</p>
+      <p class="note">Each district is shaded by the names left off its draft roll for every 100 electors on its roll of 27 October 2025, the roll the revision started from. Tap a district for its figures. District boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified, with each constituency placed in its district as the 2022 election results list it.</p>
     </div>
   </div>
 
   <h2 id="the-roll-step-by-step">The roll, step by step</h2>
-  <p class="sub">The state's roll from 27 October 2025 to the final roll of 10 April 2026. The bars start above zero so that the changes can be seen.</p>
+  <p class="sub">The revision started from the roll of 27 October 2025. The draft roll is the list published once the enumeration forms were collected, and a name whose form did not come back was left off it. Names were then added and deleted on claims and objections, and the result is the final roll of 10 April 2026. The chart follows the state's roll through those steps. The bars start above zero so that the changes can be seen.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
@@ -63,18 +63,18 @@
   <p class="note">Uttar Pradesh's dates, as they were set and as they were moved, are drawn beside every other state's on <a href="../india/process/#s-uttar-pradesh">How the revision was run</a>.</p>
 
   <h2 id="per-100-electors-by-district">Per 100 electors, by district</h2>
-  <p class="sub">The names left off each district's draft roll, for every 100 electors on its roll of 27 October 2025.</p>
+  <p class="sub">The names left off each district's draft roll, for every 100 electors on its roll of 27 October 2025. Counting per 100 electors puts large and small districts on one scale. A rate of 20 per 100 means one elector in five was left off. The district figures are from the table of the Chief Electoral Officer (CEO), who keeps the state's rolls for the Election Commission, as published in the press.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vDist"></div></div>
   </div>
   <p class="finding" id="fDist"></p>
 
   <h2 id="the-reasons">The reasons</h2>
-  <p class="sub">The reason entered against each name left off, from the five reasons on the left to the five districts that left off the most names, and every other district together, on the right. A reason is what the officer wrote down, and nobody checked it.</p>
+  <p class="sub">Every name left off the draft has one of five reasons entered against it. The chart runs from the five reasons on the left to the districts on the right, with the five districts that left off the most names shown on their own and every other district together. A reason is what the officer wrote down, and nobody checked it.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vFlow"></div></div>
   </div>
-  <p class="sub">The same reasons district by district. Each dot is one district's share of its names left off under that reason. The five districts with the highest rates are in red. Hover or tap a dot for its name.</p>
+  <p class="sub">The same reasons district by district. Each dot is one district, placed at the share of its names left off that were entered under that reason. The five districts that left off the most per 100 electors are in red. Hover or tap a dot for its name.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vReason"></div></div>
   </div>
@@ -109,7 +109,7 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
 
   VIZ.lollipop('vDist', { label: 'Names left off the draft roll per 100 electors, every district', axis: 'Left off per 100 electors on the roll of 27 October 2025', ref: S.per_100,
     rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: d1(d.per_100), tok: d.per_100 >= 20 ? '--fill-red' : '--fill-navy', hi: d.per_100 >= 20 }; }) });
-  document.getElementById('fDist').innerHTML = '<b>' + D[0].district + ' left off ' + d1(D[0].per_100) + ' of every 100 electors, ' + lk(D[0].total) + ' names, the most of any district.</b> ' + D[1].district + ', ' + D[2].district + ', ' + D[3].district + ' and ' + D[4].district + ' come next. ' + S.over_20 + ' of the 75 districts left off 20 or more per 100, against ' + d1(S.per_100) + ' for the state. ' + D[D.length - 1].district + ' left off the fewest, ' + d1(D[D.length - 1].per_100) + '. The upright line on the chart marks the state rate.';
+  document.getElementById('fDist').innerHTML = '<b>' + D[0].district + ' left off ' + d1(D[0].per_100) + ' of every 100 electors, ' + lk(D[0].total) + ' names, the most of any district.</b> ' + D[1].district + ', ' + D[2].district + ', ' + D[3].district + ' and ' + D[4].district + ' come next. ' + S.over_20 + ' of the 75 districts left off 20 or more per 100, against ' + d1(S.per_100) + ' for the state. ' + D[D.length - 1].district + ' left off the fewest, ' + d1(D[D.length - 1].per_100) + '. The upright line on the chart marks the rate for the state as a whole.';
 
   var top5 = D.slice().sort(function (a, b) { return b.total - a.total; }).slice(0, 5), tops = top5.map(function (d) { return d.district; });
   var RT = { shifted: '--fill-navy', untraceable_absent: '--fill-purple', dead: '--fill-grey', multiple: '--fill-amber', others: '--fill-other' };
@@ -129,7 +129,7 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
   var hiAbs = D.slice().sort(function (a, b) { return b.untraceable_absent_pct - a.untraceable_absent_pct; })[0], hiDead = D.slice().sort(function (a, b) { return b.dead_pct - a.dead_pct; })[0];
   document.getElementById('fReason').innerHTML = '<b>Across the state, ' + SIR.pct(S.shares.shifted) + ' of the names left off were entered as permanently shifted, ' + SIR.pct(S.shares.untraceable_absent) + ' as untraceable or absent and ' + SIR.pct(S.shares.dead) + ' as dead.</b> ' + SIR.pct(S.shares.multiple) + ' were entered as already enrolled elsewhere. The share entered as untraceable or absent is highest in ' + hiAbs.district + ', ' + SIR.pct(hiAbs.untraceable_absent_pct) + ', and the share entered as dead in ' + hiDead.district + ', ' + SIR.pct(hiDead.dead_pct) + '.';
 
-  document.getElementById('fWomen').innerHTML = 'No split by sex of the names left off has been published, and no roll from before the revision by sex, so who was removed cannot be counted by sex. Women were ' + SIR.pct(S.draft_women_pct) + ' of the draft roll and ' + SIR.pct(S.final_women_pct) + ' of the final roll, and ' + SIR.pct(S.rise_women_pct) + ' of the rise between them. As reported in the press, women were ' + SIR.pct(S.form6_women_pct) + ' of the ' + lk(S.form6) + ' Form 6 claims to be added after the draft, and ' + SIR.pct(S.form7_women_pct) + ' of the electors whose deletion was sought in the ' + lk(S.form7) + ' Form 7 objections.';
+  document.getElementById('fWomen').innerHTML = 'No split by sex of the names left off has been published, and the roll from before the revision has not been published by sex either. So the names left off cannot be counted by sex. Women were ' + SIR.pct(S.draft_women_pct) + ' of the draft roll and ' + SIR.pct(S.final_women_pct) + ' of the final roll, and ' + SIR.pct(S.rise_women_pct) + ' of the rise between them. After the draft, an elector asks to be added with Form 6, and an objection to a name already on the roll is made with Form 7. According to the press, women were ' + SIR.pct(S.form6_women_pct) + ' of the ' + lk(S.form6) + ' Form 6 claims, and ' + SIR.pct(S.form7_women_pct) + ' of the electors whose deletion was sought in the ' + lk(S.form7) + ' Form 7 objections.';
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: 'District', left: true }, { k: 'roll_before', label: 'Roll Oct 2025', fmt: n }, { k: 'draft', label: 'Draft roll', fmt: n },

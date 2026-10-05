@@ -51,7 +51,7 @@
   var rules = s.rules.map(function (k) { return [k, SIR.sum(A, function (a) { return a.rules[k]; })]; }), rAll = SIR.sum(rules, function (x) { return x[1]; });
   var medSlot = SIR.median(A.map(function (a) { return a.median_slot; }));
   QA.push([L('How much do polling parts differ?'),
-    L('A great deal. Part rates run from {lo}% to {hi}%, and {over} parts lost more than 60% of their roll. The table on this page sets each part against the typical part in its own constituency.', { lo: SIR.d(plo, 1), hi: SIR.d(phi, 1), over: over60 }), ['parts', 'explorer']]);
+    L('A great deal. Part rates run from {lo}% to {hi}%, and {over} parts lost more than 60% of their roll. The <a href="../parts/">polling parts page</a> sets each part against the typical part in its own constituency.', { lo: SIR.d(plo, 1), hi: SIR.d(phi, 1), over: over60 }), ['parts', 'explorer']]);
   if (Math.max.apply(null, MS) < 0) QA.push([L('Were parts with more Muslim electors hit harder?'),
     L('No. In every constituency, parts with a larger share of Muslim names on the roll had lower removal rates (rank correlations {a} to {b}).', { a: SIR.d(Math.min.apply(null, MS), 2), b: SIR.d(Math.max.apply(null, MS), 2) }), ['parts']]);
   QA.push([L('On what grounds were electors summoned to a hearing?'),

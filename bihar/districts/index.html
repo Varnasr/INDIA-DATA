@@ -44,16 +44,16 @@
   <div class="grid">
     <div class="panel wide">
       <h3 id="deletions-per-100-electors-by-district">Deletions per 100 electors, by district</h3>
-      <p>Bar colour marks the border the district lies on; grey is the interior.</p>
+      <p>Names removed for every 100 electors on the 2025 roll. The colour of a bar marks the border the district lies on, and grey marks the interior.</p>
       <div class="chart rows"><canvas id="cRank" aria-label="Districts ranked by deletions per 100 electors"></canvas></div>
     </div>
   </div>
   <h2 id="what-moves-with-the-deletion-rate">What moves with the deletion rate</h2>
-  <p class="sub">Each panel sets the district deletion rate against one characteristic. r is the linear correlation and ρ the rank correlation, and both run from −1 to 1.</p>
+  <p class="sub">Each panel sets the district deletion rate against one characteristic. Two measures of the link are given, and both run from −1 to 1. The linear correlation, r, measures how close the districts lie to a straight line. The rank correlation, ρ, compares only the order of the districts, so one extreme district cannot drive it. A ρ under 0.2 either way is read as no relationship.</p>
   <div class="grid" id="scatters"></div>
   <h2 id="all-factors-together">All factors together</h2>
   <div class="twrap" tabindex="0" role="region" aria-label="Correlation summary"><table id="tCorr"></table></div>
-  <p class="caveat">With only 38 districts these factors cannot be told apart. The poorest districts are also the least urban and least literate, and in the north-east they send the most migrants out. Read each panel as a description of the districts, not as a cause.</p>
+  <p class="caveat">With only 38 districts these factors cannot be told apart. The poorest districts are also the least urban and least literate, and in the north-east they send the most migrants out. Each panel describes the districts. None of them shows a cause.</p>
   <h2 id="every-district">Every district</h2>
   <div class="twrap" tabindex="0" role="region" aria-label="Districts"><table id="tbl"></table></div>
   <p class="note">Density and urban share: Census 2011, the last count at district level. Women's literacy and marriage before 18: National Family Health Survey (NFHS-5), district fact sheets, fielded in Bihar in 2019-20. Per-capita district domestic product: Bihar Economic Survey, 2021-22 at constant prices. Electors per booth: the 2025 electorate over the number of booths with SIR lists.</p>

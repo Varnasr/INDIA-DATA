@@ -41,21 +41,21 @@
 <nav class="nav-tabs" aria-label="Delhi pages"><a class="nav-tab" href="../delhi/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> Overview</a><a class="nav-tab" href="../delhi/faq/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> FAQ</a><a class="nav-tab" href="../delhi/method/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Method</a></nav>
 <main id="main">
 <div class="page-head"><h1>Delhi: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
-<p class="report-lang">This page is in English only for now. Every figure on it is the Election Commission's or the Chief Electoral Officer's own.</p>
+<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
 
 <article class="state" lang="en" dir="ltr" data-no-i18n>
   <h2 id="find-a-constituency-or-district">Find a constituency or district</h2>
-  <p class="sub">Type a constituency's name or number, or a district, and its figures appear below with a link you can send.</p>
+  <p class="sub">An assembly constituency is the area that elects one member of the Delhi assembly, and Delhi has 70. Type a constituency's name or number, or a district, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
       <div class="vizbox" id="vMap"></div>
-      <p class="note">Each constituency is shaded by the names left off its draft roll per 100 electors on its roll before the revision. Tap a constituency for its figures. Boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.</p>
+      <p class="note">Each constituency is shaded by the names left off its draft roll for every 100 electors on its roll before the revision. Tap a constituency for its figures. Boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.</p>
     </div>
   </div>
 
   <h2 id="the-roll-step-by-step">The roll, step by step</h2>
-  <p class="sub">Delhi's roll before the revision, the names left off, and the draft roll of 31 August 2026. Claims and objections run to 30 October 2026, so there is no final roll yet. The bars start above zero so that the changes can be seen.</p>
+  <p class="sub">The roll before the revision is the list of electors when the revision began, here the roll of 20 June 2026. The draft roll of 31 August 2026 is the list published once the enumeration forms were collected, and a name whose form did not come back was left off it. Electors can now ask to be added, or object to names, until 30 October 2026, and only then comes the final roll. The bars start above zero so that the changes can be seen.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
@@ -63,14 +63,14 @@
   <p class="note">Delhi's dates, as they were set and as they were moved, are drawn beside every other state's on <a href="../india/process/#s-delhi">How the revision was run</a>.</p>
 
   <h2 id="the-reasons">The reasons</h2>
-  <p class="sub">The reasons were published for Delhi as a whole. A reason is what the officer wrote down, and nobody checked it.</p>
+  <p class="sub">Each name left off the draft carries one of three reasons. The reasons were published for Delhi as a whole, and the chart counts them in lakh (one lakh is 100,000). A reason is what the officer wrote down, and nobody checked it.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vReason"></div></div>
   </div>
   <p class="finding" id="fReason"></p>
 
   <h2 id="per-100-electors-by-district">Per 100 electors, by district</h2>
-  <p class="sub">Each dot is one constituency's names left off, for every 100 electors on its roll before the revision, grouped by the districts of the 2025 roll. Hover or tap a dot for its name.</p>
+  <p class="sub">Each dot is one constituency's names left off, for every 100 electors on its roll before the revision. Counting per 100 electors puts large and small constituencies on one scale, so a rate of 40 means two electors in five were left off. The constituencies are grouped by the 11 districts of the 2025 roll, because the list for Delhi's 13 districts of today was not found. The figures are from the table of the Chief Electoral Officer (CEO), who keeps Delhi's rolls for the Election Commission, taken from the data behind a newspaper's map of it. Hover or tap a dot for its name.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vDist"></div></div>
   </div>
@@ -84,7 +84,7 @@
   <p class="finding" id="fSex"></p>
 
   <h2 id="against-the-2025-margins">Against the 2025 margins</h2>
-  <p class="sub">Each dot is a constituency. Across, the margin its 2025 winner won by; up, the names left off its draft roll. Above the dashed line, more names were left off than the margin. The election came before the revision, so this measures how large the removals are against the votes that decide a seat, and nobody can know how anyone left off would have voted.</p>
+  <p class="sub">The winning margin is the winner's votes less the runner-up's. Each dot is a constituency. Its place across is the margin its 2025 winner won by, and its height is the names left off its draft roll. Above the dashed line, more names were left off than the margin. The election came before the revision, so this measures how large the removals are against the votes that decide a seat. Nobody can know how anyone left off would have voted.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vMargin"></div></div>
   </div>
@@ -139,10 +139,10 @@ Promise.all([SIR.json('data/delhi/summary.json'), SIR.json('data/delhi/districts
     points: A.map(function (a) { return { x: a.margin, y: a.left_off, tok: a.winner === 'BJP' ? '--fill-nda' : '--fill-india', label: a.name + ' (' + a.winner + '): ' + n(a.left_off) + ' left off, margin ' + n(a.margin) }; }) });
   var P = {}; S.parties.forEach(function (p) { P[p.party] = p; });
   var under = A.filter(function (a) { return !a.over_margin; });
-  document.getElementById('fMargin').innerHTML = '<b>In ' + S.over_margin + ' of the 70 constituencies, more names were left off the draft than the 2025 winning margin.</b> Counted at each seat\'s 2025 turnout, it is ' + S.at_turnout_over_margin + '. ' + (under.length ? 'The exceptions are ' + under.map(function (a) { return a.name; }).join(' and ') + '. ' : '') + 'The BJP\'s ' + P.BJP.seats + ' seats lost ' + d1(P.BJP.per_100) + ' per 100 and the AAP\'s ' + P.AAP.seats + ' lost ' + d1(P.AAP.per_100) + '. Against their own districts the two are ' + SIR.d(P.BJP.vs_district, 1) + ' and ' + SIR.d(P.AAP.vs_district, 1) + ' points, so the difference is mostly about where the seats are. Larger than the margin means large enough to decide a seat, and says nothing about whether it would have.';
+  document.getElementById('fMargin').innerHTML = '<b>In ' + S.over_margin + ' of the 70 constituencies, more names were left off the draft than the 2025 winning margin.</b> Not everyone on a roll votes, so scaled down by each seat\'s 2025 turnout it is ' + S.at_turnout_over_margin + '. ' + (under.length ? 'The exceptions are ' + under.map(function (a) { return a.name; }).join(' and ') + '. ' : '') + 'The BJP\'s ' + P.BJP.seats + ' seats lost ' + d1(P.BJP.per_100) + ' per 100 and the AAP\'s ' + P.AAP.seats + ' lost ' + d1(P.AAP.per_100) + '. Against their own districts the two are ' + SIR.d(P.BJP.vs_district, 1) + ' and ' + SIR.d(P.AAP.vs_district, 1) + ' points. So the difference comes mostly from where each party\'s seats are. Larger than the margin means large enough to decide a seat, and it says nothing about whether it would have.';
 
-  document.getElementById('fAfter').innerHTML = (NT && NT.notices ? 'Of the electors left on the draft roll, ' + lk(NT.notices) + ' were sent a notice to prove their entry, ' + d1(NT.per_100) + ' of every 100. ' : '') + (NT && NT.no_mapping ? 'Of them, ' + lk(NT.no_mapping) + ' could not be linked to the roll of the last intensive revision and ' + lk(NT.discrepancy) + ' were on the discrepancy list, as reported in the press. ' : '') +
-    'By 29 September, as reported, ' + lk(S.form6_to_0929) + ' Form 6 claims to be added and ' + lk(S.form7_to_0929) + ' Form 7 objections had been filed, counting those filed before the draft. Claims and objections close on 30 October 2026 and the final roll is due after that.';
+  document.getElementById('fAfter').innerHTML = (NT && NT.notices ? 'Of the electors left on the draft roll, ' + lk(NT.notices) + ' were sent a notice to prove their entry, ' + d1(NT.per_100) + ' of every 100. ' : '') + (NT && NT.no_mapping ? 'According to the press, ' + lk(NT.no_mapping) + ' of them were on the no-mapping list, of electors who could not be linked to the roll of the last intensive revision, and ' + lk(NT.discrepancy) + ' were on the logical discrepancy list, of entries whose details were flagged as not agreeing. ' : '') +
+    'An elector asks to be added with Form 6, and an objection to a name already on the roll is made with Form 7. By 29 September, according to the press, ' + lk(S.form6_to_0929) + ' Form 6 claims and ' + lk(S.form7_to_0929) + ' Form 7 objections had been filed, counting those filed before the draft. Claims and objections close on 30 October 2026, and the final roll is due after that.';
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: 'District (2025 roll)', left: true }, { k: 'acs', label: 'Seats' }, { k: 'roll_before', label: 'Roll before', fmt: n },

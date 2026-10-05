@@ -397,7 +397,7 @@ function bihar() {
   const cor = FAC.map(([n, k]) => { const x = DS.map((d) => d[k]); return { n, r: pearson(x, y), rho: spearman(x, y) }; });
   const word = (c) => Math.abs(c.rho) < 0.2 ? 'no clear relationship' : c.rho < 0 ? 'fewer removals where higher' : 'more removals where higher';
   const flat = cor.filter((c) => Math.abs(c.rho) < 0.2).map((c) => c.n.toLowerCase()), strong = cor.slice().sort((a, b) => Math.abs(b.rho) - Math.abs(a.rho))[0];
-  s = K.slide('Districts', 'District removal rates move most with ' + strong.n.toLowerCase() + ', and not with ' + orj(flat), 'Each district\'s removal rate against one characteristic. r is the straight-line correlation, ρ the rank correlation, which compares orderings only');
+  s = K.slide('Districts', 'District removal rates move most with ' + strong.n.toLowerCase() + ', and not with ' + orj(flat), 'Each district\'s removal rate against one characteristic. r is the straight-line correlation and ρ the rank correlation.');
   K.table(s, ['Characteristic', 'r', 'ρ', 'Reading'], cor.map((c) => [c.n, c.r.toFixed(2), c.rho.toFixed(2), word(c)]), M, TOP, 7.6, [2.3, 0.9, 0.9, 3.5], 14, [0, 3]);
   K.right(s, ['A rank correlation under 0.2 either way is read as no relationship.', 'Thirty-eight districts cannot separate these factors. The poorest districts are also the least urban and least literate, and in the north-east the most exposed to migration.', 'Urban share and density from Census 2011, women\'s literacy and marriage before 18 from NFHS-5 (2019-20), income per head from the Bihar Economic Survey 2021-22.'], 13);
 

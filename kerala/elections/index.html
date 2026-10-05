@@ -43,7 +43,7 @@
 <div class="page-head"><h1>The roll and the 2026 election</h1><ol class="summary" id="short"></ol></div>
 
   <h2 id="the-fall-at-the-draft-against-the-winning-margin">The fall at the draft against the winning margin</h2>
-  <p class="sub">Each dot is a constituency. Across, how much smaller its roll was at the draft of December 2025 than in January 2025; up, the 2026 winning margin in votes. Dots below the line are seats where the roll fell by more than the winner won by. Colour shows the party that won.</p>
+  <p class="sub">Each dot is a constituency. It sits across by how much smaller its roll was at the draft of December 2025 than in January 2025, and up by the 2026 winning margin, the winner's votes less the runner-up's. The fall in the roll is a different count from the names removed. Dots below the line are seats where the roll fell by more than the winner won by. Colour shows the party that won.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="chart tall"><canvas id="cScatter" aria-label="Fall in the roll at the draft against the 2026 winning margin, by constituency"></canvas></div>
@@ -52,7 +52,7 @@
   <p class="finding" id="fScatter"></p>
 
   <h2 id="how-many-seats-on-each-count">How many seats, on each count</h2>
-  <p class="sub">Three ways of setting the fall in the roll against the margin. The first stops at the draft roll. The second runs to the roll the election was held on, after the names added on claims and before the poll. The third counts the second at the seat's own 2026 turnout.</p>
+  <p class="sub">Three ways of setting the fall in the roll against the margin. The first stops at the draft roll. The second runs to the roll the election was held on, after the names added on claims and before the poll. The third counts the second at the seat's own 2026 turnout, the share of its electors who voted.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="bigs" id="cCounts"></div>
@@ -68,7 +68,7 @@
       <div class="vizbox" id="vSwarm"></div>
     </div>
   </div>
-  <p class="sub">The fall at the draft per 100 electors in the seats each party won in 2026. The last column sets each seat against its own district and averages the difference, so that a party is not credited with a district simply for winning there.</p>
+  <p class="sub">The fall at the draft per 100 electors in the seats each party won in 2026. The last column sets each seat against its own district and averages the difference, so that a party's figure is not just a measure of where its seats are.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="The fall in the roll by the party that won"><table id="tWin"></table></div>
   <p class="finding" id="fWin"></p>
 
@@ -96,7 +96,7 @@ Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/constit
     }).concat([{ type: 'line', label: L('Margin equals the fall in the roll'), data: [{ x: 0, y: 0 }, { x: maxX, y: maxX }], $token: '--fill-other', pointRadius: 0, borderDash: [5, 4], borderWidth: 1.5 }]) },
     options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n ? L('{n} ({w}): roll fell by {x}, margin {y}', { n: c.raw.n, w: c.raw.w, x: SIR.n(c.raw.x), y: SIR.n(c.raw.y) }) : ''; } } } },
       scales: { x: { beginAtZero: true, title: { display: true, text: L('Fall in the roll, January 2025 to the draft') } }, y: { beginAtZero: true, title: { display: true, text: L('2026 winning margin, votes') } } } } });
-  document.getElementById('fScatter').innerHTML = L('<b>In {k} of the {n} constituencies, the roll fell by more at the draft than the 2026 winning margin.</b> The fall and the margin as a share of votes are close to unrelated (rank correlation {rho}).', { k: S.draft_over_margin, n: S.acs, rho: SIR.d(S.rho_rate_margin, 2) });
+  document.getElementById('fScatter').innerHTML = L('<b>In {k} of the {n} constituencies, the roll fell by more at the draft than the 2026 winning margin.</b> The fall and the margin as a share of votes are close to unrelated (rank correlation {rho}, where 0 means the two are unrelated and 1 means they rise in step).', { k: S.draft_over_margin, n: S.acs, rho: SIR.d(S.rho_rate_margin, 2) });
 
   var counts = [[L('Fall to the draft roll'), S.draft_over_margin], [L('Fall to the election roll'), S.over_margin], [L('Fall to the election roll, at turnout'), S.could_change]];
   document.getElementById('cCounts').innerHTML = counts.map(function (c) {

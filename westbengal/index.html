@@ -43,7 +43,7 @@
 <div class="page-head"><h1>West Bengal: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
 
   <h2 id="find-a-constituency-or-district">Find a constituency or district</h2>
-  <p class="sub">Each constituency is shaded by how much smaller its roll was at the 2026 election than in 2024, for every 100 electors. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
+  <p class="sub">Each constituency, the area that elects one member of the state assembly, is shaded by how much smaller its roll was at the 2026 election than in 2024, for every 100 electors on the 2024 roll. This fall in the roll is a different count from the names removed, as the district section below explains. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
@@ -54,7 +54,7 @@
 
 
   <h2 id="the-roll-step-by-step">The roll, step by step</h2>
-  <p class="sub">The state's roll, step by step, as the Chief Electoral Officer reported it. The names left off the draft by reason, the claims and objections, the names held back for adjudication, and the change between the final roll and the roll at the 2026 nominations. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.</p>
+  <p class="sub">The state's roll, step by step, as the Chief Electoral Officer, the official in charge of the state's electoral roll, reported it. The draft roll is the roll the revision published once names had been taken off. After it, people could file claims to be added and objections to names on it, and the final roll is the draft once those were decided. The chart shows the names left off the draft by reason, the claims and objections, the names held back for adjudication, and the change between the final roll and the roll at the 2026 nominations. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
@@ -72,21 +72,21 @@
   <p class="finding" id="fAdj"></p>
 
   <h2 id="per-100-electors-by-district">Per 100 electors, by district</h2>
-  <p class="sub">The Chief Electoral Officer has published no count of the names removed by district or constituency. What is published for every constituency is the roll at the 2024 Lok Sabha nominations and the roll at the 2026 Assembly nominations. This is the fall between the two, for every 100 electors on the 2024 roll. It takes in eighteen months of ordinary additions and deletions as well as the revision. Kolkata's two districts are marked in red.</p>
+  <p class="sub">The Chief Electoral Officer has published no count of the names removed by district or constituency. What is published for every constituency is the roll at the nominations for the 2024 Lok Sabha, the national parliament, and the roll at the 2026 Assembly nominations. This is the fall between the two, for every 100 electors on the 2024 roll. It takes in eighteen months of ordinary additions and deletions as well as the revision. Kolkata's two districts are marked in red.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="cDist"></div></div>
   </div>
   <p class="finding" id="fDist"></p>
 
   <h2 id="women">Women</h2>
-  <p class="sub">For each district, the grey dot is women's share of the 2024 roll and the red dot women's share of the fall in the roll. Where the red dot is to the right, more women left the roll than their share of it.</p>
+  <p class="sub">For each district, the grey dot is women's share of the 2024 roll and the red dot women's share of the fall in the roll. Where the red dot is to the right, women were a larger share of the fall than of the roll.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWomen"></div></div>
   </div>
   <p class="finding" id="fWomen"></p>
 
   <h2 id="after-the-draft">After the draft</h2>
-  <p class="sub">Each line is a district. On the left, how much smaller its roll was at the draft of December 2025 than in 2024; on the right, how much smaller at the roll the election was held on, both for every 100 electors on the 2024 roll. The steeper the climb, the more of the fall came after the draft, mostly the names held back for adjudication. The four districts where it climbed most are named in red. Hover or tap a line for its district.</p>
+  <p class="sub">Each line is a district. Its left end is how much smaller its roll was at the draft of December 2025 than in 2024. Its right end is how much smaller it was at the roll the election was held on. Both are for every 100 electors on the 2024 roll. The steeper the climb, the more of the fall came after the draft, mostly the names held back for adjudication. The four districts where it climbed most are named in red. Hover or tap a line for its district.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vSlope"></div></div>
   </div>
@@ -120,7 +120,7 @@ Promise.all([SIR.json('data/westbengal/summary.json'), SIR.json('data/westbengal
     { name: L('Removed on objections'), v: P.form7, kind: 'down' }, { name: L('Held back for adjudication'), v: P.adjudication, kind: 'down' },
     { name: L('Final roll'), v: P.final, kind: 'total' }, { name: L('Net change after the final roll'), v: S.after_final, kind: 'up' },
     { name: L('Roll at the 2026 nominations'), v: S.election, kind: 'total' }] });
-  document.getElementById('fWater').innerHTML = L('<b>{r} names were left off the draft roll, {p} of every 100 electors, and another {adj} were held back from the final roll for adjudication.</b> {dead} of those left off were entered as dead, {sh} as shifted and {ab} as absent. By the 2026 nominations the roll had regained {back}, and it was still {f} smaller than in October 2025. A reason on the list is what the officer wrote down, and nobody checked it.', {
+  document.getElementById('fWater').innerHTML = L('<b>{r} names were left off the draft roll, {p} of every 100 electors, and another {adj} were held back from the final roll for adjudication.</b> {dead} of those left off were entered as dead, {sh} as shifted and {ab} as absent. By the 2026 nominations the roll had grown by {back} since the final roll, and it was still {f} smaller than in October 2025. A reason on the list is what the officer wrote down, and nobody checked it.', {
     r: SIR.lakh(P.removed), p: SIR.d(P.removed_per_100, 1), adj: SIR.lakh(P.adjudication), dead: SIR.pct(P.shares.dead), sh: SIR.pct(P.shares.shifted), ab: SIR.pct(P.shares.absent), back: SIR.lakh(S.after_final), f: SIR.lakh(S.fall_from_oct2025) });
 
   var AD = S.adj;

@@ -74,14 +74,14 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var nda = withM.filter(function (a) { return a.al2025 === 'NDA'; }), ndaOver = nda.filter(function (a) { return a.total > a.margin2025; });
   var took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; }), tookOver = took.filter(function (a) { return a.total > a.margin2025; });
   var tookMed = SIR.median(took.map(function (a) { return a.total / a.margin2025; }));
-  var dz = idn.districts, fOver = dz.filter(function (d) { return d.female_share_deleted > d.female_share_population_2011; });
-  var gap = dz.map(function (d) { return d.female_share_deleted - d.female_share_population_2011; });
+  var dz = idn.districts, fOver = dz.filter(function (d) { return d.female_share_deleted > d.female_share_roll; });
+  var gap = dz.map(function (d) { return d.female_share_deleted - d.female_share_roll; });
   var b200 = SIR.sum(acs, 'booths_200'), I = s.intensity, b400 = I.bins[I.bins.length - 1].booths;
   var claims = [
     [SIR.lakh(t.total), L('names removed from Bihar\'s roll: {p1} before the draft roll of 1 August 2025 and {p2} more before the final roll. That is {rate} for every 100 electors on the 2025 roll, and as many as {max} in a single constituency.', { p1: SIR.n(t.p1), p2: SIR.n(t.p2), rate: SIR.d(100 * t.total / t.electorate_2025, 2), max: SIR.d(Math.max.apply(null, acs.map(function (a) { return a.per_100; })), 1) })],
     [L('{a} of {b}', { a: overAll.length, b: withM.length }), L('constituencies lost more names in the revision than the margin by which they were won in 2025. That includes {a} of the {b} seats the NDA won.', { a: ndaOver.length, b: nda.length })],
     [L('{a} of {b}', { a: tookOver.length, b: took.length }), L('seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA\'s winning margin. In the middle seat of that group, the removals were {x} times the margin.', { x: SIR.d(tookMed, 1) })],
-    [SIR.pct(100 * t.female / (t.female + t.male)), L('of those removed were women, against 47.86% of Bihar\'s population. Women\'s share of the removed exceeds their share of the population in {a} of {b} districts, by up to {gap} points.', { a: fOver.length, b: dz.length, gap: SIR.d(Math.max.apply(null, gap), 1) })],
+    [SIR.pct(100 * t.female / (t.female + t.male)), L('of those removed were women, against {roll}% of the roll before the revision. Women\'s share of the removed exceeds their share of the roll in {a} of {b} districts, by up to {gap} points.', { roll: SIR.d(t.female_share_roll, 2), a: fOver.length, b: dz.length, gap: SIR.d(Math.max.apply(null, gap), 1) })],
     [SIR.n(b200), L('polling booths lost more than 200 names each, and {n} lost 400 or more.', { n: SIR.n(b400) })]
   ];
   document.getElementById('claims').innerHTML = claims.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join('');

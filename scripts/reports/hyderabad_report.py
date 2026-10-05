@@ -192,7 +192,7 @@ ax.barh([x['name'] for x in seats][::-1], [x['rate'] for x in seats][::-1], colo
 ax.set_xlabel('% of the roll left off the draft of 17 August 2026', fontsize=8)
 ax.tick_params(axis='y', labelsize=7)
 style_axes(ax, 'The fifteen seats of Hyderabad district, with the Old City in maroon')
-R.figure(fig, 'Figure. The state\'s own draft-roll figures, which give totals only.', width=13)
+R.figure(fig, 'Figure 4. The state\'s own draft-roll figures, which give totals only.', width=13)
 R.p('On the state\'s draft-roll figures, the five Old City seats lost %s of their roll and Hyderabad\'s other ten seats %s. Every seat in the district lost between %s and %s, and %d seats outside the Old City lost more than any Old City seat. '
     'Across Hyderabad district the draft left off %s, and in the rest of Telangana %s. The removals are heavy across the whole capital region.'
     % (pct(TG['old_city']['rate']), pct(TG['other_hyderabad']['rate']), pct(seats[-1]['rate']), pct(seats[0]['rate']), sum(1 for x in seats if not x['old_city'] and x['rate'] > ocmax),
@@ -249,9 +249,9 @@ for i, a in enumerate(A):
 # ============================================================ CONCLUSION
 R.page_break()
 R.h1('Conclusion and what the Election Commission should do')
-R.p('In five constituencies the revision struck off %s of the electors on the rolls, more names than the margin that decided every one of the five seats in 2023, and in two of them more than every valid vote cast. '
+R.p('In five constituencies the revision struck off %s of the electors on the rolls, more names than the margin that decided every one of the five seats in 2023, and in %s of them more than every valid vote cast. '
     'The burden fell on the old, and on those the process could not trace to a roll prepared 24 years earlier. The final roll has not yet been published, and the hearings are still being held.'
-    % pct(t['rate']))
+    % (pct(t['rate']), ['none', 'one', 'two', 'three', 'four', 'all five'][len(overV)]))
 R.p('What the Election Commission should do before the final roll:')
 R.numbered([
     'Record and publish the basis for every removal entered as "untraceable or absent", %s names in all, including the visits made and the notice given.' % indian(s(lambda a: a['reasons']['Untraceable/Absent'])),
