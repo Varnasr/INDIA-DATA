@@ -6,3 +6,31 @@
 [build]
   publish = "."
   command = "python3 scripts/build_site.py && python3 scripts/stamp.py"
+
+# Security headers on every response. The policy allows only what the pages
+# load: their own files, Chart.js from cdnjs, the Indian-language fonts from
+# Google Fonts and the anonymous tally at Supabase. Inline scripts are allowed
+# because every page carries its own; data: and blob: images are the charts'
+# PNG exports. If a page starts loading anything new from another service,
+# add it here and to the privacy section of terms/ in the same commit.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://bivccpsnzzolxuqdvhfu.supabase.co; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+
+# Stylesheets, scripts, data and the dictionaries are fetched under a
+# ?v=<content hash> address that changes whenever the file does, so a copy can
+# be kept for an hour and reused while it is refreshed. Pages themselves keep
+# Netlify's default, revalidated on every load.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"

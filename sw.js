@@ -14,11 +14,23 @@ self.addEventListener('fetch', function (e) {
   var req = e.request, url = new URL(req.url);
   if (req.method !== 'GET' || url.origin !== location.origin || /\.(pdf|pptx|csv)$/i.test(url.pathname)) return;
   e.respondWith(fetch(req).then(function (res) {
-    if (res.ok && res.type === 'basic') { var copy = res.clone(); caches.open(CACHE).then(function (c) { c.put(req, copy); }); }
+    if (res.ok && res.type === 'basic') {
+      var copy = res.clone();
+      // a file is kept once: storing a new ?v= address drops the copies kept
+      // under older ones, so the cache does not grow with every deploy
+      caches.open(CACHE).then(function (c) {
+        return c.keys().then(function (keys) {
+          return Promise.all(keys.filter(function (k) { var u = new URL(k.url); return u.pathname === url.pathname && u.search !== url.search; })
+            .map(function (k) { return c.delete(k); }));
+        }).then(function () { return c.put(req, copy); });
+      });
+    }
     return res;
   }).catch(function () {
     return caches.match(req).then(function (hit) {
-      return hit || (req.mode === 'navigate' ? caches.match(new URL('./', self.registration.scope).href) : undefined) || Response.error();
-    });
+      if (hit) return hit;
+      // an offline page that was never read falls back to the front page
+      return req.mode === 'navigate' ? caches.match(new URL('./', self.registration.scope).href) : undefined;
+    }).then(function (r) { return r || Response.error(); });
   }));
 });

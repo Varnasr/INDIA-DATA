@@ -17,12 +17,19 @@
     date: function (iso) { if (!iso) return ''; var p = iso.split('-'); return +p[2] + ' ' + ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+p[1] - 1] + ' ' + p[0]; },
     lakh: function (x) { return L('{x} lakh', { x: (x / 1e5).toFixed(1) }); },
     esc: function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); },
+    // one request per file per page: several scripts on a page read the
+    // same file, so the text is kept (and dropped again if the request
+    // fails), and each caller gets its own parsed copy, which it may sort
     json: function (path) {
-      var v = (window.SIR_V || {})[path];
-      return fetch(root + path + (v ? '?v=' + v : '')).then(function (r) {
-        if (!r.ok) throw new Error(path + ' answered ' + r.status);
-        return r.json();
-      });
+      var J = SIR._json || (SIR._json = {});
+      if (!J[path]) {
+        var v = (window.SIR_V || {})[path];
+        J[path] = fetch(root + path + (v ? '?v=' + v : '')).then(function (r) {
+          if (!r.ok) throw new Error(path + ' answered ' + r.status);
+          return r.text();
+        }).catch(function (e) { delete J[path]; throw e; });
+      }
+      return J[path].then(JSON.parse);
     },
     css: function (name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); },
     alliance: { NDA: '--fill-nda', INDIA: '--fill-india', Other: '--fill-other' },

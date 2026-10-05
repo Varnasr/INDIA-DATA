@@ -80,5 +80,4 @@ Aggregates only. No names, EPIC numbers or addresses are published or committed.
 MIT for the code. Election Commission and Census data keep their original terms.
 
 The live site serves the pages and the aggregate JSON they read. Source files,
-scripts, notes and `archive/` are not published (`_redirects`, and the staging
-step in `static.yml`).
+scripts, notes and `archive/` are not published (`_redirects`).

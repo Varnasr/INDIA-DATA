@@ -18,7 +18,8 @@ order:
 - the total is a published total of notices, never a sum this build makes,
   except where a source gives the two lists and no total (marked `sum`);
 - a total that equals the two lists from the same source is preferred, then a
-  primary source, then the latest report;
+  primary source, then the latest report, then an exact figure over a
+  rounded one;
 - the two lists are taken from one source, the total's own where it has them;
 - a state with one list only gets no total and stays out of the chart.
 
@@ -61,7 +62,7 @@ def main():
 
         def score(t):
             same = any(a['count'] + b['count'] == t['count'] and a['source_url'] == t['source_url'] for a, b in pairs)
-            return (same, t['kind'] == 'primary', t['date'])
+            return (same, t['kind'] == 'primary', t['date'], t['rounded'] == 'no')
         total = max(tot, key=score) if tot else None
         how = 'published' if total else None
         pair = None
