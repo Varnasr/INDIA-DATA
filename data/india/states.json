@@ -987,17 +987,17 @@
   "Tripura"
  ],
  "after_draft": {
-  "states": 16,
-  "removed": 2669836
+  "states": 17,
+  "removed": 2774544
  },
  "final": {
-  "states": 20,
-  "removed": 74854704,
-  "net_after_draft": 10644782,
+  "states": 21,
+  "removed": 75681681,
+  "net_after_draft": 10669946,
   "withheld": 6006675,
-  "gross": 13,
-  "per_100": 11.93,
-  "net_per_100": 10.24,
+  "gross": 14,
+  "per_100": 11.91,
+  "net_per_100": 10.23,
   "shrank": [
    "West Bengal",
    "Goa",
@@ -1014,14 +1014,13 @@
    "Jharkhand",
    "Haryana",
    "Punjab",
-   "Uttarakhand",
    "Meghalaya",
    "Nagaland"
   ],
-  "made_up_pct": 14.2,
-  "made_up_pct_ex_withheld": 22.2,
-  "net_per_100_ex_withheld": 9.28,
-  "rho_made_up": -0.12
+  "made_up_pct": 14.1,
+  "made_up_pct_ex_withheld": 22.0,
+  "net_per_100_ex_withheld": 9.29,
+  "rho_made_up": -0.14
  },
  "states": [
   {
@@ -2433,9 +2432,9 @@
    "duplicate": null,
    "split": "none",
    "figures": "exact",
-   "source": "press",
-   "source_url": "https://www.newindianexpress.com/india/2026/Aug/06/2027-lakh-voter-notices-trigger-political-row-in-uttarakhand-amid-electoral-roll-revision",
-   "note": "No split by reason found for the draft figure.",
+   "source": "primary",
+   "source_url": "https://cdnbbsr.s3waas.gov.in/s3cbf8710b43df3f2c1553e649403426df/uploads/2026/10/202610031173939115.pdf",
+   "note": "CEO Uttarakhand press note PN 63/2026 of 03.10.2026: 79,60,762 on 08.06.2026 and 71,33,785 on the draft of 14.07.2026. No split by reason found.",
    "unsplit": 826977,
    "shares": null,
    "per_100": 10.39,
@@ -2467,17 +2466,21 @@
    "roll_adult_pct": 90.2,
    "draft_adult_pct": 80.9,
    "removed_pct_votes24": 17.0,
-   "removed_after_draft": null,
-   "added_after_draft": null,
+   "removed_after_draft": 104708,
+   "added_after_draft": 129872,
    "withheld": null,
-   "electors_final": null,
-   "final_date": null,
-   "reconciles": null,
-   "net_after_draft": null,
-   "net_fall": null,
-   "net_fall_per_100": null,
-   "made_up_pct": null,
-   "final_source": null
+   "electors_final": 7158949,
+   "final_date": "2026-10-03",
+   "reconciles": "exact",
+   "net_after_draft": 25164,
+   "net_fall": 801813,
+   "net_fall_per_100": 10.07,
+   "made_up_pct": 3.0,
+   "final_source": {
+    "source": "primary",
+    "url": "https://cdnbbsr.s3waas.gov.in/s3cbf8710b43df3f2c1553e649403426df/uploads/2026/10/202610031173939115.pdf",
+    "note": "CEO Uttarakhand press note PN 63/2026 of 03.10.2026. Added: eligible electors added on claims; removed: ineligible electors deleted on objections. Final roll 37,37,701 men, 34,21,036 women, 212 third gender."
+   }
   },
   {
    "state": "Meghalaya",

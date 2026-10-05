@@ -43,7 +43,7 @@ jobs:
       - name: Colour tokens clear AA in both themes
         run: python3 scripts/check_contrast.py
 
-      # Hindi, Urdu and Telugu: every string on every page has a translation,
+      # Hindi, Urdu, Telugu, Tamil and Bengali: every string on every page has a translation,
       # and no translation drops a figure, a placeholder or a link.
       - name: Every string is translated, placeholders and links intact
         run: python3 scripts/check_i18n.py

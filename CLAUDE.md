@@ -6,8 +6,9 @@ Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar P
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
-and forindia.netlify.app redirects to it); `static.yml` also publishes it to
-GitHub Pages.
+and forindia.netlify.app redirects to it). There is no GitHub Pages copy:
+the workflow that made one failed on every push from March 2026, because Pages
+is not enabled on the repository, and was removed in October.
 
 ## Commands
 
@@ -716,13 +717,21 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   anchored to its own button opened off the left of the screen.
 - **The part explorer takes a link to a part**: `hyderabad/explorer/#Yakutpura-297`.
 - **Every file a page loads carries `?v=<content hash>`**, written by
-  `scripts/stamp.py`, which is Netlify's build command and a step in
-  `static.yml`. Page references are stamped in the HTML; files fetched by
+  `scripts/stamp.py`, which is Netlify's build command. Page references are stamped in the HTML; files fetched by
   script (`SIR.json`, the dictionaries) get theirs from `window.SIR_V`, which
   the script writes into `assets/i18n.js` between `/*stamp*/` markers. A new
   fetch must go through `SIR.json` or read `SIR_V` itself, or it escapes the
   stamp. Pages are served with `max-age=0, must-revalidate`, so a reload
-  always picks up the newest addresses.
+  always picks up the newest addresses; `/assets/*` and `/data/*` may be kept
+  an hour (`netlify.toml`), which is safe only because their addresses are
+  stamped. `SIR.json` fetches each file once per page and hands every caller
+  its own parsed copy.
+- **Security headers** are in `netlify.toml`: a Content-Security-Policy
+  allowing the site itself, cdnjs, Google Fonts and the Supabase tally, plus
+  nosniff, a referrer policy, no framing and a permissions policy. Chart.js is
+  4.5.1 from cdnjs with an `integrity` hash on every page; a version change
+  needs the new hash from cdnjs's API. A new outside origin goes into the
+  policy and into the privacy section of `terms/` in the same commit.
 - No page states the site's own address.
 - Colour tokens live in `assets/sir.css`, with the dark block written twice
   (`prefers-color-scheme` and `[data-theme="dark"]`). `check_contrast.py`
@@ -841,8 +850,7 @@ per slot, not the slot's length.
   for further reading and nothing more: no page says who compiled any list
   this site counts, and the Hyderabad pages still do not name a compiler.
 - **Publishing**: the site serves only pages and aggregate JSON. `_redirects`
-  answers 404 for raw files, scripts, notes and `archive/`; `static.yml` stages
-  the same set for Pages. Do not link source files from a page, and describe
+  answers 404 for raw files, scripts, notes and `archive/`. Do not link source files from a page, and describe
   sources without naming the people or organisations who compiled them.
 - **Writing**: plain explanatory prose. Never refer to earlier versions of the
   analysis or to corrections on a public page. The owner's rules, applied to
