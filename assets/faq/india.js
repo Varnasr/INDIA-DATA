@@ -14,9 +14,9 @@
       var back = L('In the {n} states with a final roll, the rolls grew back by at most {m} of what the drafts removed, and that rise includes new voters.', { n: F.states, m: SIR.pct(F.made_up_pct) });
       var QA = [
         [L('How many names did the revision remove across India?'),
-         L('{r} across {s} states and union territories at the draft, {p} of every 100 electors. Removals after the draft add {a} more in the {k} states that have reported them.', { r: cr(T.removed), s: T.states, p: SIR.d(T.per_100, 1), a: SIR.lakh(AD.removed), k: AD.states }), ['numbers', 'main', 'faq']],
+         L('{r} across {s} states and union territories when the draft rolls were published, {p} of every 100 electors on the rolls before the revision. Removals after the draft add {a} more in the {k} states that have reported them.', { r: cr(T.removed), s: T.states, p: SIR.d(T.per_100, 1), a: SIR.lakh(AD.removed), k: AD.states }), ['numbers', 'main', 'faq']],
         [L('Why were the names removed?'),
-         L('Where a reason was given, {dead} were entered as dead, {sao} as moved, not found or other, and {dup} as enrolled more than once. States reported their reasons in different ways, and the method page sets out how each was counted.', { dead: SIR.pct(T.shares.dead), sao: SIR.pct(T.shares.shifted_absent_other), dup: SIR.pct(T.shares.duplicate) }), ['main']],
+         L('Where a reason was given, {dead} were entered as dead, {sao} as shifted, absent or other, and {dup} as enrolled more than once. States reported their reasons in different ways, and the method page sets out how each was counted.', { dead: SIR.pct(T.shares.dead), sao: SIR.pct(T.shares.shifted_absent_other), dup: SIR.pct(T.shares.duplicate) }), ['main']],
         [L('Why did some states remove far more names than others?'),
          L('{hi} removed {hir} of every 100 electors and {lo} {lor}, under the same rules.', { hi: rated[0].state, hir: SIR.d(rated[0].per_100, 1), lo: rated[rated.length - 1].state, lor: SIR.d(rated[rated.length - 1].per_100, 1) }) + ' ' +
          (inc && Math.abs(inc.per_100_phase2) < 0.2 && Math.abs(inc.per_100_phase3) >= 0.2 ?
@@ -41,7 +41,7 @@
       var SHORT = {
         faq: [[
           L('The revision removed {r} names across {s} states and union territories at the draft, {p} of every 100 electors.', { r: cr(T.removed), s: T.states, p: SIR.d(T.per_100, 1) }),
-          L('Where a reason was given, {sao} were entered as moved, not found or other, and {dead} as dead.', { sao: SIR.pct(T.shares.shifted_absent_other), dead: SIR.pct(T.shares.dead) }),
+          L('Where a reason was given, {sao} were entered as shifted, absent or other, and {dead} as dead.', { sao: SIR.pct(T.shares.shifted_absent_other), dead: SIR.pct(T.shares.dead) }),
           fem, back], L('A reason on the list is what the officer wrote down, and nobody checked it.')],
         method: [[
           L('The Election Commission has published no national table of removals, so each row is the state\'s own announcement.'),

@@ -144,7 +144,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   VIZ.waterfall('vWater', { label: 'Electors on the rolls before the revision, the names left off and the draft rolls, ' + rated.length + ' states and union territories',
     from: base,
     steps: [{ name: 'Rolls before the revision', v: before, kind: 'total' }, { name: 'Left off the draft', v: leftRated, kind: 'down' }, { name: 'Draft rolls', v: before - leftRated, kind: 'total' }] });
-  document.getElementById('pWater').textContent = 'The bars start at ' + Math.round(base / 1e7) + ' crore, not at zero, so the fall can be seen. These are the ' + rated.length + ' states and union territories that published a roll from before the revision.';
+  document.getElementById('pWater').textContent = 'The bars start at ' + Math.round(base / 1e7) + ' crore so that the fall can be seen. These are the ' + rated.length + ' states and union territories that published a roll from before the revision.';
 
   // against the winning margins: three comparisons, each on its own count
   var KT = { removed: '--fill-red', fall: '--fill-grey' };
@@ -247,7 +247,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   var pressSum = press.reduce(function (a, s) { return a + s.removed; }, 0);
   var outside = ['Himachal Pradesh', 'Jammu and Kashmir', 'Ladakh'];
   document.getElementById('read').innerHTML = [
-    'The draft roll kept only those electors whose forms came back. For every name left off, the officer wrote down a reason (dead, moved, not found, or enrolled twice). Nobody checked those reasons before the draft was published.',
+    'The draft roll kept only those electors whose forms came back. For every name left off, the officer wrote down a reason (dead, shifted, absent, or enrolled twice). Nobody checked those reasons before the draft was published.',
     'Some names came back later. In the ' + F.states + ' states with a final roll, people could file claims after the draft. The final rolls are ' + cr(F.net_after_draft) + ' larger than the drafts. That rise includes first-time voters, so it is the most that could have been put back.',
     'Some names went later too. In ' + AD.states + ' states, another ' + lk(AD.removed) + ' were removed between the draft and the final roll' + (F.withheld ? ', and West Bengal held ' + n(F.withheld) + ' names off its final roll while their cases are decided' : '') + '. None of these is in the total above.',
     'Not every state is in the total. ' + (d.pending.length ? d.pending.join(' and ') + '\'s revision is still running. ' : '') + 'Assam had a different kind of revision. ' + outside.join(', ').replace(/, ([^,]*)$/, ' and $1') + ' were left out of it.',

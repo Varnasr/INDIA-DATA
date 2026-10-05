@@ -3,7 +3,7 @@
 <div class="page-head"><h1>Removals and the 2026 election</h1><ol class="summary" id="short"></ol></div>
 
   <h2>Names removed against the winning margin</h2>
-  <p class="sub">Each dot is a constituency. Across, the names left off the draft roll; up, the 2026 winning margin in votes. Dots below the line are seats where more names were removed than the winner won by. Colour shows the party that won. Both axes are on a log scale, so that the many seats with small margins can be told apart.</p>
+  <p class="sub">Each dot is a constituency. It sits across by the names left off the draft roll and up by the 2026 winning margin, the winner's votes less the runner-up's. Dots below the line are seats where more names were removed than the winner won by. Colour shows the party that won. Both axes are on a log scale, so that the many seats with small margins can be told apart.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="chart tall"><canvas id="cScatter" aria-label="Names removed against the 2026 winning margin, by constituency"></canvas></div>
@@ -12,7 +12,7 @@
   <p class="finding" id="fScatter"></p>
 
   <h2>How many seats, on each count</h2>
-  <p class="sub">Three ways of setting the removals against the margin, from the widest to the narrowest. The first counts every name left off the draft. The second counts the fall that remains on the final roll. The third leaves out the names marked dead and counts the rest at the seat's own 2026 turnout.</p>
+  <p class="sub">Three ways of setting the removals against the margin, from the widest to the narrowest. The first counts every name left off the draft. The second counts the fall that remains on the final roll. The third leaves out the names marked dead and counts the rest at the seat's own 2026 turnout, the share of its electors who voted.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="bigs" id="cCounts"></div>
@@ -28,7 +28,7 @@
       <div class="vizbox" id="vSwarm"></div>
     </div>
   </div>
-  <p class="sub">Names removed per 100 electors in the seats each party won in 2026. The last column sets each seat against the rate of its own district and averages the difference, so that a party is not credited with the city simply for winning there. A minus means fewer removals than the district as a whole.</p>
+  <p class="sub">Names removed per 100 electors in the seats each party won in 2026. The last column sets each seat against the rate of its own district and averages the difference, so that a party's figure is not just a measure of where its seats are. A minus means fewer removals than the district as a whole.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Removals by the party that won"><table id="tWin"></table></div>
   <p class="finding" id="fWin"></p>
 
@@ -57,7 +57,7 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/c
     }).concat([{ type: 'line', label: L('Margin equals names removed'), data: [{ x: minX, y: minX }, { x: maxX, y: maxX }], $token: '--fill-other', pointRadius: 0, borderDash: [5, 4], borderWidth: 1.5 }]) },
     options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n ? L('{n} ({w}): {x} removed, margin {y}', { n: c.raw.n, w: c.raw.w, x: SIR.n(c.raw.x), y: SIR.n(c.raw.y) }) : ''; } } } },
       scales: { x: { type: 'logarithmic', title: { display: true, text: L('Names left off the draft roll (log scale)') } }, y: { type: 'logarithmic', title: { display: true, text: L('2026 winning margin, votes (log scale)') } } } } });
-  document.getElementById('fScatter').innerHTML = L('<b>In {k} of the {n} constituencies, more names were left off the draft roll than the 2026 winning margin.</b> The removals and the margins rise together a little (rank correlation between the removal rate and the margin as a share of votes, {rho}), so the seats that lost the most names were not the closest contests.', { k: S.over_margin, n: S.acs, rho: SIR.d(S.rho_rate_margin, 2) });
+  document.getElementById('fScatter').innerHTML = L('<b>In {k} of the {n} constituencies, more names were left off the draft roll than the 2026 winning margin.</b> The removals and the margins rise together a little (rank correlation between the removal rate and the margin as a share of votes, {rho}, where 0 means the two are unrelated and 1 means they rise in step), so the seats that lost the most names were not the closest contests.', { k: S.over_margin, n: S.acs, rho: SIR.d(S.rho_rate_margin, 2) });
 
   var counts = [[L('Left off the draft'), S.over_margin], [L('Net fall at the final roll'), S.net_over_margin], [L('Living removed, at turnout'), S.could_change]];
   document.getElementById('cCounts').innerHTML = counts.map(function (c) {

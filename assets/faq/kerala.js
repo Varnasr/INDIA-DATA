@@ -21,7 +21,7 @@
         [L('Where did the roll fall most?'),
          where + ' ' + L('{b} and {c} come next.', { b: D[1].district, c: D[2].district }), ['main', 'faq']],
         [L('Were women removed more than men?'),
-         women + ' ' + L('They were more than their share in {k} of the {acs} constituencies. Of the rise after the draft, women were {wa}.', { k: s.acs_women_over, acs: s.acs, wa: SIR.pct(s.women_added_pct) }), ['main', 'faq']],
+         L('No count of the names left off has been published by sex, so the answer comes from the fall in the roll.') + ' ' + women + ' ' + L('They were more than their share in {k} of the {acs} constituencies. Of the rise after the draft, women were {wa}.', { k: s.acs_women_over, acs: s.acs, wa: SIR.pct(s.women_added_pct) }), ['main', 'faq']],
         [L('Were the names put back?'),
          back + ' ' + L('In {k} districts the roll was larger at the election than in January 2025. The rise counts new voters as well as names put back, so it cannot show who among those left off returned.', { k: D.filter(function (d) { return d.per_100 < 0; }).length }), ['main', 'faq']],
         [L('Could the fall in the roll have changed the 2026 result?'),
