@@ -201,7 +201,7 @@ SIR.json('data/india/process.json').then(function (P) {
       '<div class="pbody"><h3 id="i-' + (i + 1) + '">' + E(e.title) + '</h3><p>' + E(e.text) + '</p><p class="psrc">' + (e.url ? '<a href="' + E(e.url) + '" rel="noopener" target="_blank">' + E(e.outlet) + ', ' + E(e.headline) + '</a>' : E(e.headline)) + '</p></div></li>';
   }).join('');
   SIR.anchors(document.getElementById('inside'));
-  document.getElementById('nInside').textContent = I.issue + ' The Commission did not answer the questions the paper sent on 21 September. What it said in public is in entries ' + (I.events.map(function (e, i) { return e.lane === 'commission' && e.date >= '2026-09-23' ? i + 1 : 0; }).filter(Boolean).join(', ').replace(/, (\d+)$/, ' and $1')) + '. The press reports further down carry the same account by topic, with the responses each report gave.';
+  document.getElementById('nInside').innerHTML = E(I.issue) + ' <a href="../../' + E(I.pdf.url) + '">' + E(I.pdf.label) + '</a>. ' + E(I.pdf.rights) + ' The Commission did not answer the questions the paper sent on 21 September. What it said in public is in entries ' + (I.events.map(function (e, i) { return e.lane === 'commission' && e.date >= '2026-09-23' ? i + 1 : 0; }).filter(Boolean).join(', ').replace(/, (\d+)$/, ' and $1')) + '. The press reports further down carry the same account by topic, with the responses each report gave.';
 
   // the reported list, by topic
   var R = P.reported, rt = '', rbox = document.getElementById('reported');
