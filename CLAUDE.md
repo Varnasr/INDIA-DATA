@@ -799,6 +799,15 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   button (`.more`, made in `sir.js`) that opens the other controls. It
   changes no colour token. A new text block that should sit in the column
   needs its class in the column selector there.
+  Every page opens on a tinted band the width of the screen (`.page-head`:
+  the title, the lead or findings, and on the front page three headline
+  numbers). A long reading page (four or more h2s; `build_site.py` adds
+  `has-toc` to the body) gets "On this page" in the left margin of a screen
+  1240px or wider, built by `SIR.toc` in `sir.js`, and the stylesheet widens
+  `main` on the left so no chart runs under it. The front page opens on the
+  numbers and the India map, with the explanation of the revision below the
+  cards. The dashboards carry their own h1 above the findings, so the
+  header title is a span on every page.
 - **One look on every page: the Bihar dashboard's.** A folk-art band across
   the top (`.band.madhubani` for Bihar, `.band.ikat` for Hyderabad, a
   Pochampally ikat tile drawn as an SVG data URI), a card header with the

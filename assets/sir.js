@@ -472,6 +472,36 @@
   };
   setTimeout(function () { SIR.anchors(); SIR.jump(); }, 0);
 
+  // "On this page": on a long reading page (build_site.py marks it
+  // has-toc), the sections listed in the left margin of a wide screen, the
+  // one being read marked. It appears once the opening band has scrolled
+  // away, and sir.css keeps the margin for it so no chart runs under it.
+  SIR.toc = function () {
+    if (!document.body.classList.contains('has-toc') || document.querySelector('nav.toc')) return;
+    var hs = [].slice.call(document.querySelectorAll('main h2[id]')).filter(function (h) {
+      return h.id !== 'faqH' && !h.closest('.card, .qa, .panel, .methodology, nav, .page-faq');
+    });
+    if (!hs.length) return;
+    var nav = document.createElement('nav');
+    nav.className = 'toc'; nav.setAttribute('aria-label', L('On this page'));
+    nav.innerHTML = '<p class="toc-h">' + SIR.esc(L('On this page')) + '</p><ol>' + hs.map(function (h) {
+      var c = h.cloneNode(true);
+      c.querySelectorAll('.anchor').forEach(function (b) { b.remove(); });
+      return '<li><a href="#' + h.id + '">' + SIR.esc(c.textContent.trim()) + '</a></li>';
+    }).join('') + '</ol>';
+    document.body.appendChild(nav);
+    var links = nav.querySelectorAll('a'), head = document.querySelector('.page-head');
+    var mark = function () {
+      var cur = -1;
+      hs.forEach(function (h, i) { if (h.getBoundingClientRect().top < 160) cur = i; });
+      links.forEach(function (a, i) { if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+      nav.classList.toggle('on', !head || head.getBoundingClientRect().bottom < 120);
+    };
+    addEventListener('scroll', mark, { passive: true });
+    mark();
+  };
+  setTimeout(SIR.toc, 0);
+
   // A row of buttons under every chart on a page: the picture, the numbers
   // behind it, and the finding written beside it, to send on.
   SIR.tools = function () {
