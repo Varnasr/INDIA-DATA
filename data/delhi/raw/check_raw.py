@@ -104,6 +104,39 @@ quoted = [(2, 'left_off', 167885, 'HT'), (54, 'left_off', 163829, 'HT'), (53, 'l
           (40, 'draft', 52368, 'Alt News')]
 check(all(A[a][k] == v for a, k, v, _ in quoted), 'draft by AC: agrees with the 10 AC figures quoted by HT, BS and Alt News')
 
+# ---------------------------------------------------------------- the CEO's own table
+# Distt/AC Wise Electors and Uncollectable Enumeration Forms, draft of 31.08.2026,
+# read from the CEO's PDF text (sources/ceo_ac_draft_uncollectable_20260831.md).
+# It is on the 13 districts Delhi has now; the newspaper data above is the same
+# table, and every row must agree with it.
+ceo, dsum, gt2, d_now = {}, {}, None, None
+for l in open(os.path.join(SRC, 'ceo_ac_draft_uncollectable_20260831.md'), encoding='utf-8'):
+    if not l.startswith('|'):
+        continue
+    f = [x.strip() for x in l.strip().strip('|').split('|')]
+    if f[0] == 'Grand Total':
+        gt2 = [int(x) for x in f[4:9]]
+    elif f[1].endswith(' Sum'):
+        dsum[f[1][:-4]] = [int(x) for x in f[4:9]]
+    else:
+        if f[1]:
+            d_now = f[1]
+        ceo[int(f[2])] = dict(district=d_now, name=f[3], v=[int(x) for x in f[4:9]])
+check(sorted(ceo) == list(range(1, 71)), 'CEO table: 70 ACs, numbered 1 to 70')
+check(all(c['v'][0] + c['v'][1] + c['v'][2] == c['v'][3] for c in ceo.values()), 'CEO table: men + women + third gender = draft in every AC')
+by13 = collections.defaultdict(lambda: [0] * 5)
+for c in ceo.values():
+    for i in range(5):
+        by13[c['district']][i] += c['v'][i]
+check(len(dsum) == 13 and all(by13[d] == dsum[d] for d in dsum), 'CEO table: ACs sum to each of the 13 printed district sums')
+check([sum(c['v'][i] for c in ceo.values()) for i in range(5)] == gt2 == [STATE['draft_men'], STATE['draft_women'], STATE['draft_tg'], STATE['draft'], STATE['left_off']],
+      'CEO table: ACs sum to the printed grand total, equal to the state draft by sex and the 47,56,722 left off')
+check(all(norm(ceo[x['ac']]['name']) == norm(x['ac_name']) and ceo[x['ac']]['v'][3] == x['draft'] and ceo[x['ac']]['v'][4] == x['left_off'] for x in ac),
+      'CEO table: draft and uncollectable equal the newspaper data in all 70 ACs')
+for x in ac:
+    c = ceo[x['ac']]
+    x.update(district=c['district'], draft_men=c['v'][0], draft_women=c['v'][1], draft_tg=c['v'][2])
+
 # ---------------------------------------------------------------- state figures by sex and reason
 check(STATE['roll_before'] - STATE['draft'] == STATE['left_off'], 'state: roll before - draft = left off (exact)')
 check(STATE['shifted_absent_other'] + STATE['dead'] + STATE['duplicate'] == STATE['left_off'], 'state: three reasons sum to left off (exact)')
@@ -176,7 +209,7 @@ check(sum(diff.values()) == 17 and all(v > 0 for v in diff.values()),
 
 # ---------------------------------------------------------------- write / compare
 OUT = {
-    'ac.csv': (['ac', 'ac_name', 'name_as_published', 'district_2025', 'roll_before', 'draft', 'left_off'], ac),
+    'ac.csv': (['ac', 'ac_name', 'name_as_published', 'district', 'district_2025', 'roll_before', 'draft', 'left_off', 'draft_men', 'draft_women', 'draft_tg'], ac),
     'roll_20250106_ac.csv': (['ac', 'ac_name', 'district_2025', 'men', 'women', 'third_gender', 'total'], jan),
     'results_2025.csv': (['ac', 'ac_name', 'district_2025', 'winner', 'winner_party', 'winner_votes', 'runner_up',
                           'runner_up_party', 'runner_up_votes', 'margin', 'votes_total', 'postal_total', 'electors',

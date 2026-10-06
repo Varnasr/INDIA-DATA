@@ -8,17 +8,16 @@ constituencies.json, districts.json and the two CSVs.
     python3 scripts/build_delhi.py           # write
     python3 scripts/build_delhi.py --check   # fail if the output is stale
 
-- The constituency figures are the Chief Electoral Officer's table of the
-  draft (draft roll and uncollectable forms by AC), as published in the data
-  behind Business Standard's map. The CEO's site cannot be reached from here.
-  The roll before the revision is the draft plus the forms not collected, and
-  the build fails unless all three add up to the CEO's state figures.
+- The constituency figures are the Chief Electoral Officer's own table of the
+  draft (draft roll by sex and uncollectable forms, by district and AC), read
+  from the CEO's PDF; check_raw.py also holds it equal, row by row, to the data
+  behind Business Standard's map of the same table. The roll before the
+  revision is the draft plus the forms not collected, and the build fails
+  unless all three add up to the CEO's state figures.
 - The reasons and the split by sex are for the state only, from the CEO's
   press note of 31 August 2026. A split by AC exists only as a third party's
   count of the named lists (secondary_reasons_ac.csv), and it is not used.
-- Districts are the 11 of the 2025 roll. Delhi has 13 now, and the new
-  constituency-to-district list was not found, so the pages say "the districts
-  of the 2025 roll".
+- Districts are the 13 the CEO's table uses, the districts Delhi has now.
 """
 import csv
 import io
@@ -50,9 +49,10 @@ def main():
         n = int(a['ac']); e = res[n]
         rb, dr, lo = int(a['roll_before']), int(a['draft']), int(a['left_off'])
         assert rb == dr + lo, n
+        assert int(a['draft_men']) + int(a['draft_women']) + int(a['draft_tg']) == dr, n
         margin, votes, el = int(e['margin']), int(e['votes_total']), int(e['electors'])
         assert margin > 0 and int(e['winner_votes']) - int(e['runner_up_votes']) == margin, n
-        rows.append({'ac': n, 'name': a['name_as_published'], 'district': a['district_2025'],
+        rows.append({'ac': n, 'name': a['name_as_published'], 'district': a['district'],
                      'roll_before': rb, 'draft': dr, 'left_off': lo, 'per_100': r1(100 * lo / rb),
                      'electors_2025': el, 'winner': e['winner_party'], 'runner_up': e['runner_up_party'], 'margin': margin,
                      'turnout_2025': r1(100 * votes / el),

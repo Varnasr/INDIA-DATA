@@ -73,7 +73,12 @@ the CEO or the CEO's office; the note on each row says when they do not.
   discrepancies. Those two add to 3.42 crore, not 3.26; the article does not
   explain it. The same article says 3.60 crore notices (93.8%) were served,
   which cannot be right against 3.26 crore and is treated as a misprint.
-  Hearings around 2.80 crore by 7 March. Deleted for not responding to notices:
+  Hearings around 2.80 crore by 7 March. The Times of India of 19 February
+  2026, also reporting the CEO, gives the same 3.26 crore as 1.04 crore for no
+  mapping and 2.22 crore for logical discrepancies, which adds up exactly, and
+  ThePrint of 10 April 2026 repeats those two figures. The build prefers a
+  total whose own report gives lists that add up to it, so the Times of India
+  split is the one used. Deleted for not responding to notices:
   3,50,026 (New Indian Express, 11 April 2026).
 - **West Bengal**: ECI breakdown of 91.46 lakh logical discrepancy cases and 30
   lakh unmapped (National Herald, 3 January 2026) against the Supreme Court's
