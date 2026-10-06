@@ -18,6 +18,8 @@ import io
 import os
 import sys
 
+import re
+
 import openpyxl
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,7 +35,8 @@ def read():
     for r in ws.iter_rows(min_row=5, values_only=True):
         if not r or r[3] not in ('STATE', 'DISTRICT'):
             continue
-        name = str(r[4]).strip()
+        # footnote markers (^, ###, @&, $) concern area only; runs of spaces collapse
+        name = re.sub(r'\s+', ' ', re.sub(r'\s*[#@$^*]+[&]?\s*$', '', str(r[4]))).strip()
         if r[3] == 'STATE':
             states[r[0]] = name.replace(' (', '(').split('(')[0].strip().title()
             continue
