@@ -1,0 +1,4323 @@
+{
+ "summary": {
+  "states": 9,
+  "units": 275,
+  "districts": 325,
+  "with_both": 8,
+  "urban_higher": 7,
+  "rho_positive": 8,
+  "rho_02": 7,
+  "mixed_higher": 7,
+  "rho_no_urban_02": 5,
+  "no_urban": [
+   "Bihar"
+  ],
+  "no_rural": []
+ },
+ "bands": [
+  {
+   "band": "rural",
+   "lo": 0,
+   "hi": 20
+  },
+  {
+   "band": "mixed",
+   "lo": 20,
+   "hi": 50
+  },
+  {
+   "band": "urban",
+   "lo": 50,
+   "hi": 100
+  }
+ ],
+ "states": [
+  {
+   "state": "Uttar Pradesh",
+   "measure": "left_off",
+   "units": 71,
+   "districts": 75,
+   "per_100": 18.7,
+   "rho": 0.23,
+   "rho_no_urban": 0.05,
+   "bands": [
+    {
+     "band": "rural",
+     "units": 43,
+     "before": 87434942,
+     "removed": 15202757,
+     "per_100": 17.39,
+     "times_state": 0.93,
+     "share_of_roll": 56.6,
+     "share_of_removed": 52.7
+    },
+    {
+     "band": "mixed",
+     "units": 23,
+     "before": 50902171,
+     "removed": 9379876,
+     "per_100": 18.43,
+     "times_state": 0.99,
+     "share_of_roll": 33.0,
+     "share_of_removed": 32.5
+    },
+    {
+     "band": "urban",
+     "units": 5,
+     "before": 16092979,
+     "removed": 4291434,
+     "per_100": 26.67,
+     "times_state": 1.43,
+     "share_of_roll": 10.4,
+     "share_of_removed": 14.9
+    }
+   ],
+   "urban_over_rural": 1.53,
+   "mixed_over_rural": 1.06
+  },
+  {
+   "state": "Maharashtra",
+   "measure": "left_off",
+   "units": 35,
+   "districts": 36,
+   "per_100": 21.14,
+   "rho": 0.81,
+   "rho_no_urban": 0.7,
+   "bands": [
+    {
+     "band": "rural",
+     "units": 12,
+     "before": 16259792,
+     "removed": 2014027,
+     "per_100": 12.39,
+     "times_state": 0.59,
+     "share_of_roll": 16.6,
+     "share_of_removed": 9.7
+    },
+    {
+     "band": "mixed",
+     "units": 18,
+     "before": 47663417,
+     "removed": 7227704,
+     "per_100": 15.16,
+     "times_state": 0.72,
+     "share_of_roll": 48.7,
+     "share_of_removed": 34.9
+    },
+    {
+     "band": "urban",
+     "units": 5,
+     "before": 33930840,
+     "removed": 11446756,
+     "per_100": 33.74,
+     "times_state": 1.6,
+     "share_of_roll": 34.7,
+     "share_of_removed": 55.3
+    }
+   ],
+   "urban_over_rural": 2.72,
+   "mixed_over_rural": 1.22
+  },
+  {
+   "state": "Tamil Nadu",
+   "measure": "left_off",
+   "units": 32,
+   "districts": 38,
+   "per_100": 15.19,
+   "rho": 0.62,
+   "rho_no_urban": 0.7,
+   "bands": [
+    {
+     "band": "rural",
+     "units": 5,
+     "before": 6689021,
+     "removed": 562212,
+     "per_100": 8.4,
+     "times_state": 0.55,
+     "share_of_roll": 10.4,
+     "share_of_removed": 5.8
+    },
+    {
+     "band": "mixed",
+     "units": 14,
+     "before": 25782090,
+     "removed": 3184278,
+     "per_100": 12.35,
+     "times_state": 0.81,
+     "share_of_roll": 40.2,
+     "share_of_removed": 32.7
+    },
+    {
+     "band": "urban",
+     "units": 13,
+     "before": 31643476,
+     "removed": 5991341,
+     "per_100": 18.93,
+     "times_state": 1.25,
+     "share_of_roll": 49.4,
+     "share_of_removed": 61.5
+    }
+   ],
+   "urban_over_rural": 2.25,
+   "mixed_over_rural": 1.47
+  },
+  {
+   "state": "Gujarat",
+   "measure": "left_off",
+   "units": 26,
+   "districts": 33,
+   "per_100": 14.5,
+   "rho": 0.86,
+   "rho_no_urban": 0.84,
+   "bands": [
+    {
+     "band": "rural",
+     "units": 7,
+     "before": 9722703,
+     "removed": 854236,
+     "per_100": 8.79,
+     "times_state": 0.61,
+     "share_of_roll": 19.1,
+     "share_of_removed": 11.6
+    },
+    {
+     "band": "mixed",
+     "units": 16,
+     "before": 26746432,
+     "removed": 3412120,
+     "per_100": 12.76,
+     "times_state": 0.88,
+     "share_of_roll": 52.6,
+     "share_of_removed": 46.3
+    },
+    {
+     "band": "urban",
+     "units": 3,
+     "before": 14374301,
+     "removed": 3106971,
+     "per_100": 21.61,
+     "times_state": 1.49,
+     "share_of_roll": 28.3,
+     "share_of_removed": 42.1
+    }
+   ],
+   "urban_over_rural": 2.46,
+   "mixed_over_rural": 1.45
+  },
+  {
+   "state": "Karnataka",
+   "measure": "left_off",
+   "units": 30,
+   "districts": 34,
+   "per_100": 19.48,
+   "rho": 0.39,
+   "rho_no_urban": 0.28,
+   "bands": [
+    {
+     "band": "rural",
+     "units": 6,
+     "before": 6608714,
+     "removed": 799416,
+     "per_100": 12.1,
+     "times_state": 0.62,
+     "share_of_roll": 11.9,
+     "share_of_removed": 7.4
+    },
+    {
+     "band": "mixed",
+     "units": 22,
+     "before": 36813276,
+     "removed": 5040205,
+     "per_100": 13.69,
+     "times_state": 0.7,
+     "share_of_roll": 66.4,
+     "share_of_removed": 46.7
+    },
+    {
+     "band": "urban",
+     "units": 2,
+     "before": 12010324,
+     "removed": 4956718,
+     "per_100": 41.27,
+     "times_state": 2.12,
+     "share_of_roll": 21.7,
+     "share_of_removed": 45.9
+    }
+   ],
+   "urban_over_rural": 3.41,
+   "mixed_over_rural": 1.13
+  },
+  {
+   "state": "Telangana",
+   "measure": "left_off",
+   "units": 10,
+   "districts": 33,
+   "per_100": 21.7,
+   "rho": 0.52,
+   "rho_no_urban": 0.05,
+   "bands": [
+    {
+     "band": "rural",
+     "units": 2,
+     "before": 5723571,
+     "removed": 676038,
+     "per_100": 11.81,
+     "times_state": 0.54,
+     "share_of_roll": 16.9,
+     "share_of_removed": 9.2
+    },
+    {
+     "band": "mixed",
+     "units": 6,
+     "before": 15669664,
+     "removed": 2152799,
+     "per_100": 13.74,
+     "times_state": 0.63,
+     "share_of_roll": 46.3,
+     "share_of_removed": 29.3
+    },
+    {
+     "band": "urban",
+     "units": 2,
+     "before": 12433213,
+     "removed": 4510398,
+     "per_100": 36.28,
+     "times_state": 1.67,
+     "share_of_roll": 36.8,
+     "share_of_removed": 61.5
+    }
+   ],
+   "urban_over_rural": 3.07,
+   "mixed_over_rural": 1.16
+  },
+  {
+   "state": "Bihar",
+   "measure": "roll_2025",
+   "units": 38,
+   "districts": 38,
+   "per_100": 9.25,
+   "rho": -0.25,
+   "rho_no_urban": -0.25,
+   "bands": [
+    {
+     "band": "rural",
+     "units": 36,
+     "before": 68852844,
+     "removed": 6412794,
+     "per_100": 9.31,
+     "times_state": 1.01,
+     "share_of_roll": 92.2,
+     "share_of_removed": 92.8
+    },
+    {
+     "band": "mixed",
+     "units": 2,
+     "before": 5847070,
+     "removed": 497765,
+     "per_100": 8.51,
+     "times_state": 0.92,
+     "share_of_roll": 7.8,
+     "share_of_removed": 7.2
+    },
+    {
+     "band": "urban",
+     "units": 0,
+     "per_100": null,
+     "times_state": null,
+     "share_of_roll": 0,
+     "share_of_removed": 0
+    }
+   ],
+   "urban_over_rural": null,
+   "mixed_over_rural": 0.91
+  },
+  {
+   "state": "West Bengal",
+   "measure": "fall",
+   "units": 19,
+   "districts": 24,
+   "per_100": 6.83,
+   "rho": 0.8,
+   "rho_no_urban": 0.66,
+   "bands": [
+    {
+     "band": "rural",
+     "units": 10,
+     "before": 32415521,
+     "removed": 1393856,
+     "per_100": 4.3,
+     "times_state": 0.63,
+     "share_of_roll": 42.6,
+     "share_of_removed": 26.8
+    },
+    {
+     "band": "mixed",
+     "units": 6,
+     "before": 28828782,
+     "removed": 2043191,
+     "per_100": 7.09,
+     "times_state": 1.04,
+     "share_of_roll": 37.9,
+     "share_of_removed": 39.3
+    },
+    {
+     "band": "urban",
+     "units": 3,
+     "before": 14765703,
+     "removed": 1756329,
+     "per_100": 11.89,
+     "times_state": 1.74,
+     "share_of_roll": 19.4,
+     "share_of_removed": 33.8
+    }
+   ],
+   "urban_over_rural": 2.77,
+   "mixed_over_rural": 1.65
+  },
+  {
+   "state": "Kerala",
+   "measure": "fall",
+   "units": 14,
+   "districts": 14,
+   "per_100": 8.52,
+   "rho": 0.06,
+   "rho_no_urban": -0.5,
+   "bands": [
+    {
+     "band": "rural",
+     "units": 3,
+     "before": 2588780,
+     "removed": 258280,
+     "per_100": 9.98,
+     "times_state": 1.17,
+     "share_of_roll": 9.3,
+     "share_of_removed": 10.9
+    },
+    {
+     "band": "mixed",
+     "units": 5,
+     "before": 10546694,
+     "removed": 711996,
+     "per_100": 6.75,
+     "times_state": 0.79,
+     "share_of_roll": 37.9,
+     "share_of_removed": 30.1
+    },
+    {
+     "band": "urban",
+     "units": 6,
+     "before": 14675468,
+     "removed": 1398314,
+     "per_100": 9.53,
+     "times_state": 1.12,
+     "share_of_roll": 52.8,
+     "share_of_removed": 59.0
+    }
+   ],
+   "urban_over_rural": 0.95,
+   "mixed_over_rural": 0.68
+  }
+ ],
+ "units": [
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Shrawasti",
+   "census_code": "09181",
+   "districts": [
+    "Shrawasti"
+   ],
+   "urban_pct": 3.46,
+   "before": 817848,
+   "removed": 134992,
+   "band": "rural",
+   "per_100": 16.51,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Kushinagar",
+   "census_code": "09189",
+   "districts": [
+    "Kushinagar"
+   ],
+   "urban_pct": 4.72,
+   "before": 2695030,
+   "removed": 502640,
+   "band": "rural",
+   "per_100": 18.65,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Mahrajganj",
+   "census_code": "09187",
+   "districts": [
+    "Maharajganj"
+   ],
+   "urban_pct": 5.02,
+   "before": 1992459,
+   "removed": 301022,
+   "band": "rural",
+   "per_100": 15.11,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Sultanpur",
+   "census_code": "09179",
+   "districts": [
+    "Amethi",
+    "Sultanpur"
+   ],
+   "urban_pct": 5.26,
+   "before": 3280317,
+   "removed": 584188,
+   "band": "rural",
+   "per_100": 17.81,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Pratapgarh",
+   "census_code": "09173",
+   "districts": [
+    "Pratapgarh"
+   ],
+   "urban_pct": 5.46,
+   "before": 2525130,
+   "removed": 500109,
+   "band": "rural",
+   "per_100": 19.81,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Basti",
+   "census_code": "09185",
+   "districts": [
+    "Basti"
+   ],
+   "urban_pct": 5.6,
+   "before": 1900430,
+   "removed": 298287,
+   "band": "rural",
+   "per_100": 15.7,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Siddharthnagar",
+   "census_code": "09184",
+   "districts": [
+    "Siddharthnagar"
+   ],
+   "urban_pct": 6.28,
+   "before": 1961872,
+   "removed": 398900,
+   "band": "rural",
+   "per_100": 20.33,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Gonda",
+   "census_code": "09183",
+   "districts": [
+    "Gonda"
+   ],
+   "urban_pct": 6.55,
+   "before": 2552007,
+   "removed": 469637,
+   "band": "rural",
+   "per_100": 18.4,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Sant Kabir Nagar",
+   "census_code": "09186",
+   "districts": [
+    "Sant Kabir Nagar"
+   ],
+   "urban_pct": 7.49,
+   "before": 1337186,
+   "removed": 266870,
+   "band": "rural",
+   "per_100": 19.96,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Ghazipur",
+   "census_code": "09195",
+   "districts": [
+    "Ghazipur"
+   ],
+   "urban_pct": 7.58,
+   "before": 2951478,
+   "removed": 408689,
+   "band": "rural",
+   "per_100": 13.85,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Jaunpur",
+   "census_code": "09194",
+   "districts": [
+    "Jaunpur"
+   ],
+   "urban_pct": 7.71,
+   "before": 3570851,
+   "removed": 589543,
+   "band": "rural",
+   "per_100": 16.51,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Balrampur",
+   "census_code": "09182",
+   "districts": [
+    "Balrampur"
+   ],
+   "urban_pct": 7.74,
+   "before": 1583027,
+   "removed": 411200,
+   "band": "rural",
+   "per_100": 25.98,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Kaushambi",
+   "census_code": "09174",
+   "districts": [
+    "Kaushambi"
+   ],
+   "urban_pct": 7.78,
+   "before": 1220792,
+   "removed": 219698,
+   "band": "rural",
+   "per_100": 18.0,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Bahraich",
+   "census_code": "09180",
+   "districts": [
+    "Bahraich"
+   ],
+   "urban_pct": 8.14,
+   "before": 2648344,
+   "removed": 541328,
+   "band": "rural",
+   "per_100": 20.44,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Azamgarh",
+   "census_code": "09191",
+   "districts": [
+    "Azamgarh"
+   ],
+   "urban_pct": 8.53,
+   "before": 3714258,
+   "removed": 566606,
+   "band": "rural",
+   "per_100": 15.25,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Rae Bareli",
+   "census_code": "09158",
+   "districts": [
+    "Raebareli"
+   ],
+   "urban_pct": 9.04,
+   "before": 2134049,
+   "removed": 348862,
+   "band": "rural",
+   "per_100": 16.35,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Ballia",
+   "census_code": "09193",
+   "districts": [
+    "Ballia"
+   ],
+   "urban_pct": 9.39,
+   "before": 2510596,
+   "removed": 455976,
+   "band": "rural",
+   "per_100": 18.16,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Kanpur Dehat",
+   "census_code": "09163",
+   "districts": [
+    "Kanpur Dehat"
+   ],
+   "urban_pct": 9.66,
+   "before": 1336177,
+   "removed": 203957,
+   "band": "rural",
+   "per_100": 15.26,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Chitrakoot",
+   "census_code": "09171",
+   "districts": [
+    "Chitrakoot"
+   ],
+   "urban_pct": 9.71,
+   "before": 738948,
+   "removed": 100992,
+   "band": "rural",
+   "per_100": 13.67,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Bara Banki",
+   "census_code": "09176",
+   "districts": [
+    "Barabanki"
+   ],
+   "urban_pct": 10.15,
+   "before": 2331649,
+   "removed": 373154,
+   "band": "rural",
+   "per_100": 16.0,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Deoria",
+   "census_code": "09190",
+   "districts": [
+    "Deoria"
+   ],
+   "urban_pct": 10.22,
+   "before": 2409009,
+   "removed": 414799,
+   "band": "rural",
+   "per_100": 17.22,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Kheri",
+   "census_code": "09153",
+   "districts": [
+    "Kheri"
+   ],
+   "urban_pct": 11.46,
+   "before": 2889872,
+   "removed": 505802,
+   "band": "rural",
+   "per_100": 17.5,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Ambedkar Nagar",
+   "census_code": "09178",
+   "districts": [
+    "Ambedkar Nagar"
+   ],
+   "urban_pct": 11.71,
+   "before": 1870776,
+   "removed": 258547,
+   "band": "rural",
+   "per_100": 13.82,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Sitapur",
+   "census_code": "09154",
+   "districts": [
+    "Sitapur"
+   ],
+   "urban_pct": 11.84,
+   "before": 3190806,
+   "removed": 623772,
+   "band": "rural",
+   "per_100": 19.55,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Fatehpur",
+   "census_code": "09172",
+   "districts": [
+    "Fatehpur"
+   ],
+   "urban_pct": 12.23,
+   "before": 1932441,
+   "removed": 315468,
+   "band": "rural",
+   "per_100": 16.32,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Chandauli",
+   "census_code": "09196",
+   "districts": [
+    "Chandauli"
+   ],
+   "urban_pct": 12.42,
+   "before": 1488821,
+   "removed": 230086,
+   "band": "rural",
+   "per_100": 15.45,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Hardoi",
+   "census_code": "09155",
+   "districts": [
+    "Hardoi"
+   ],
+   "urban_pct": 13.24,
+   "before": 3019415,
+   "removed": 544682,
+   "band": "rural",
+   "per_100": 18.04,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Faizabad",
+   "census_code": "09177",
+   "districts": [
+    "Ayodhya"
+   ],
+   "urban_pct": 13.77,
+   "before": 1907800,
+   "removed": 337542,
+   "band": "rural",
+   "per_100": 17.69,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Mirzapur",
+   "census_code": "09199",
+   "districts": [
+    "Mirzapur"
+   ],
+   "urban_pct": 13.92,
+   "before": 1910300,
+   "removed": 342761,
+   "band": "rural",
+   "per_100": 17.94,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Lalitpur",
+   "census_code": "09167",
+   "districts": [
+    "Lalitpur"
+   ],
+   "urban_pct": 14.36,
+   "before": 958795,
+   "removed": 95447,
+   "band": "rural",
+   "per_100": 9.95,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Sant Ravidas Nagar (Bhadohi)",
+   "census_code": "09198",
+   "districts": [
+    "Bhadohi"
+   ],
+   "urban_pct": 14.53,
+   "before": 1233324,
+   "removed": 206320,
+   "band": "rural",
+   "per_100": 16.73,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Etah",
+   "census_code": "09201",
+   "districts": [
+    "Etah"
+   ],
+   "urban_pct": 15.11,
+   "before": 1311967,
+   "removed": 220426,
+   "band": "rural",
+   "per_100": 16.8,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Banda",
+   "census_code": "09170",
+   "districts": [
+    "Banda"
+   ],
+   "urban_pct": 15.32,
+   "before": 1349521,
+   "removed": 175421,
+   "band": "rural",
+   "per_100": 13.0,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Mainpuri",
+   "census_code": "09148",
+   "districts": [
+    "Mainpuri"
+   ],
+   "urban_pct": 15.44,
+   "before": 1403413,
+   "removed": 226875,
+   "band": "rural",
+   "per_100": 16.17,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Sonbhadra",
+   "census_code": "09200",
+   "districts": [
+    "Sonbhadra"
+   ],
+   "urban_pct": 16.88,
+   "before": 1405078,
+   "removed": 251964,
+   "band": "rural",
+   "per_100": 17.93,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Kannauj",
+   "census_code": "09160",
+   "districts": [
+    "Kannauj"
+   ],
+   "urban_pct": 16.95,
+   "before": 1289220,
+   "removed": 278095,
+   "band": "rural",
+   "per_100": 21.57,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Auraiya",
+   "census_code": "09162",
+   "districts": [
+    "Auraiya"
+   ],
+   "urban_pct": 16.98,
+   "before": 1028685,
+   "removed": 158055,
+   "band": "rural",
+   "per_100": 15.36,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Unnao",
+   "census_code": "09156",
+   "districts": [
+    "Unnao"
+   ],
+   "urban_pct": 17.1,
+   "before": 2325053,
+   "removed": 407171,
+   "band": "rural",
+   "per_100": 17.51,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Pilibhit",
+   "census_code": "09151",
+   "districts": [
+    "Pilibhit"
+   ],
+   "urban_pct": 17.3,
+   "before": 1467988,
+   "removed": 199772,
+   "band": "rural",
+   "per_100": 13.61,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Budaun",
+   "census_code": "09149",
+   "districts": [
+    "Budaun"
+   ],
+   "urban_pct": 17.51,
+   "before": 2418408,
+   "removed": 492995,
+   "band": "rural",
+   "per_100": 20.39,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Gorakhpur",
+   "census_code": "09188",
+   "districts": [
+    "Gorakhpur"
+   ],
+   "urban_pct": 18.83,
+   "before": 3666533,
+   "removed": 645625,
+   "band": "rural",
+   "per_100": 17.61,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Hamirpur",
+   "census_code": "09168",
+   "districts": [
+    "Hamirpur"
+   ],
+   "urban_pct": 19.0,
+   "before": 839731,
+   "removed": 90560,
+   "band": "rural",
+   "per_100": 10.78,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Shahjahanpur",
+   "census_code": "09152",
+   "districts": [
+    "Shahjahanpur"
+   ],
+   "urban_pct": 19.76,
+   "before": 2315538,
+   "removed": 503922,
+   "band": "rural",
+   "per_100": 21.76,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Kanshiram Nagar",
+   "census_code": "09202",
+   "districts": [
+    "Kasganj"
+   ],
+   "urban_pct": 20.06,
+   "before": 1057916,
+   "removed": 172238,
+   "band": "mixed",
+   "per_100": 16.28,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Baghpat",
+   "census_code": "09139",
+   "districts": [
+    "Baghpat"
+   ],
+   "urban_pct": 21.11,
+   "before": 976798,
+   "removed": 177299,
+   "band": "mixed",
+   "per_100": 18.15,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Mahoba",
+   "census_code": "09169",
+   "districts": [
+    "Mahoba"
+   ],
+   "urban_pct": 21.16,
+   "before": 686959,
+   "removed": 85352,
+   "band": "mixed",
+   "per_100": 12.42,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Mahamaya Nagar",
+   "census_code": "09144",
+   "districts": [
+    "Hathras"
+   ],
+   "urban_pct": 21.26,
+   "before": 1163525,
+   "removed": 189616,
+   "band": "mixed",
+   "per_100": 16.3,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Farrukhabad",
+   "census_code": "09159",
+   "districts": [
+    "Farrukhabad"
+   ],
+   "urban_pct": 22.08,
+   "before": 1398009,
+   "removed": 290824,
+   "band": "mixed",
+   "per_100": 20.8,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Mau",
+   "census_code": "09192",
+   "districts": [
+    "Mau"
+   ],
+   "urban_pct": 22.63,
+   "before": 1713350,
+   "removed": 300223,
+   "band": "mixed",
+   "per_100": 17.52,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Etawah",
+   "census_code": "09161",
+   "districts": [
+    "Etawah"
+   ],
+   "urban_pct": 23.16,
+   "before": 1229631,
+   "removed": 233018,
+   "band": "mixed",
+   "per_100": 18.95,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Allahabad",
+   "census_code": "09175",
+   "districts": [
+    "Prayagraj"
+   ],
+   "urban_pct": 24.74,
+   "before": 4692860,
+   "removed": 1156305,
+   "band": "mixed",
+   "per_100": 24.64,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Jalaun",
+   "census_code": "09165",
+   "districts": [
+    "Jalaun"
+   ],
+   "urban_pct": 24.79,
+   "before": 1297560,
+   "removed": 212059,
+   "band": "mixed",
+   "per_100": 16.34,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Bulandshahr",
+   "census_code": "09142",
+   "districts": [
+    "Bulandshahr"
+   ],
+   "urban_pct": 24.79,
+   "before": 2663718,
+   "removed": 403369,
+   "band": "mixed",
+   "per_100": 15.14,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Jyotiba Phule Nagar",
+   "census_code": "09137",
+   "districts": [
+    "Amroha"
+   ],
+   "urban_pct": 24.93,
+   "before": 1370374,
+   "removed": 181177,
+   "band": "mixed",
+   "per_100": 13.22,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Bijnor",
+   "census_code": "09134",
+   "districts": [
+    "Bijnor"
+   ],
+   "urban_pct": 25.13,
+   "before": 2750319,
+   "removed": 427159,
+   "band": "mixed",
+   "per_100": 15.53,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Rampur",
+   "census_code": "09136",
+   "districts": [
+    "Rampur"
+   ],
+   "urban_pct": 25.2,
+   "before": 1757741,
+   "removed": 321571,
+   "band": "mixed",
+   "per_100": 18.29,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Muzaffarnagar",
+   "census_code": "09133",
+   "districts": [
+    "Shamli",
+    "Muzaffarnagar"
+   ],
+   "urban_pct": 28.75,
+   "before": 3088283,
+   "removed": 507675,
+   "band": "mixed",
+   "per_100": 16.44,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Mathura",
+   "census_code": "09145",
+   "districts": [
+    "Mathura"
+   ],
+   "urban_pct": 29.68,
+   "before": 1947368,
+   "removed": 373793,
+   "band": "mixed",
+   "per_100": 19.19,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Saharanpur",
+   "census_code": "09132",
+   "districts": [
+    "Saharanpur"
+   ],
+   "urban_pct": 30.77,
+   "before": 2642675,
+   "removed": 432534,
+   "band": "mixed",
+   "per_100": 16.37,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Moradabad",
+   "census_code": "09135",
+   "districts": [
+    "Sambhal",
+    "Moradabad"
+   ],
+   "urban_pct": 32.98,
+   "before": 4029761,
+   "removed": 706212,
+   "band": "mixed",
+   "per_100": 17.52,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Aligarh",
+   "census_code": "09143",
+   "districts": [
+    "Aligarh"
+   ],
+   "urban_pct": 33.13,
+   "before": 2796379,
+   "removed": 520189,
+   "band": "mixed",
+   "per_100": 18.6,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Firozabad",
+   "census_code": "09147",
+   "districts": [
+    "Firozabad"
+   ],
+   "urban_pct": 33.35,
+   "before": 1902012,
+   "removed": 344752,
+   "band": "mixed",
+   "per_100": 18.13,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Bareilly",
+   "census_code": "09150",
+   "districts": [
+    "Bareilly"
+   ],
+   "urban_pct": 35.26,
+   "before": 3405820,
+   "removed": 714753,
+   "band": "mixed",
+   "per_100": 20.99,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Jhansi",
+   "census_code": "09166",
+   "districts": [
+    "Jhansi"
+   ],
+   "urban_pct": 41.7,
+   "before": 1577337,
+   "removed": 219612,
+   "band": "mixed",
+   "per_100": 13.92,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Varanasi",
+   "census_code": "09197",
+   "districts": [
+    "Varanasi"
+   ],
+   "urban_pct": 43.44,
+   "before": 3153705,
+   "removed": 573203,
+   "band": "mixed",
+   "per_100": 18.18,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Agra",
+   "census_code": "09146",
+   "districts": [
+    "Agra"
+   ],
+   "urban_pct": 45.81,
+   "before": 3600071,
+   "removed": 836943,
+   "band": "mixed",
+   "per_100": 23.25,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Meerut",
+   "census_code": "09138",
+   "districts": [
+    "Meerut"
+   ],
+   "urban_pct": 51.08,
+   "before": 2699820,
+   "removed": 665635,
+   "band": "urban",
+   "per_100": 24.65,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Gautam Buddha Nagar",
+   "census_code": "09141",
+   "districts": [
+    "Gautam Buddha Nagar"
+   ],
+   "urban_pct": 59.12,
+   "before": 1865673,
+   "removed": 447471,
+   "band": "urban",
+   "per_100": 23.98,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Kanpur Nagar",
+   "census_code": "09164",
+   "districts": [
+    "Kanpur Nagar"
+   ],
+   "urban_pct": 65.83,
+   "before": 3538261,
+   "removed": 902148,
+   "band": "urban",
+   "per_100": 25.5,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Lucknow",
+   "census_code": "09157",
+   "districts": [
+    "Lucknow"
+   ],
+   "urban_pct": 66.21,
+   "before": 3994535,
+   "removed": 1200138,
+   "band": "urban",
+   "per_100": 30.04,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttar Pradesh",
+   "unit": "Ghaziabad",
+   "census_code": "09140",
+   "districts": [
+    "Ghaziabad",
+    "Hapur"
+   ],
+   "urban_pct": 67.55,
+   "before": 3994690,
+   "removed": 1076042,
+   "band": "urban",
+   "per_100": 26.94,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Gadchiroli",
+   "census_code": "27508",
+   "districts": [
+    "Gadchiroli"
+   ],
+   "urban_pct": 11.0,
+   "before": 828904,
+   "removed": 90603,
+   "band": "rural",
+   "per_100": 10.93,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Sindhudurg",
+   "census_code": "27529",
+   "districts": [
+    "Sindhudurg"
+   ],
+   "urban_pct": 12.59,
+   "before": 688014,
+   "removed": 82513,
+   "band": "rural",
+   "per_100": 11.99,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Hingoli",
+   "census_code": "27512",
+   "districts": [
+    "Hingoli"
+   ],
+   "urban_pct": 15.18,
+   "before": 969385,
+   "removed": 85309,
+   "band": "rural",
+   "per_100": 8.8,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Ratnagiri",
+   "census_code": "27528",
+   "districts": [
+    "Ratnagiri"
+   ],
+   "urban_pct": 16.33,
+   "before": 1329042,
+   "removed": 131569,
+   "band": "rural",
+   "per_100": 9.9,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Nandurbar",
+   "census_code": "27497",
+   "districts": [
+    "Nandurbar"
+   ],
+   "urban_pct": 16.71,
+   "before": 1348574,
+   "removed": 188729,
+   "band": "rural",
+   "per_100": 13.99,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Osmanabad",
+   "census_code": "27525",
+   "districts": [
+    "Osmanabad"
+   ],
+   "urban_pct": 16.96,
+   "before": 1413864,
+   "removed": 181545,
+   "band": "rural",
+   "per_100": 12.84,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Gondiya",
+   "census_code": "27507",
+   "districts": [
+    "Gondia"
+   ],
+   "urban_pct": 17.08,
+   "before": 1123805,
+   "removed": 160643,
+   "band": "rural",
+   "per_100": 14.29,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Washim",
+   "census_code": "27502",
+   "districts": [
+    "Washim"
+   ],
+   "urban_pct": 17.66,
+   "before": 1019519,
+   "removed": 134250,
+   "band": "rural",
+   "per_100": 13.17,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Satara",
+   "census_code": "27527",
+   "districts": [
+    "Satara"
+   ],
+   "urban_pct": 18.99,
+   "before": 2651347,
+   "removed": 341905,
+   "band": "rural",
+   "per_100": 12.9,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Jalna",
+   "census_code": "27514",
+   "districts": [
+    "Jalna"
+   ],
+   "urban_pct": 19.27,
+   "before": 1682723,
+   "removed": 243183,
+   "band": "rural",
+   "per_100": 14.45,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Bhandara",
+   "census_code": "27506",
+   "districts": [
+    "Bhandara"
+   ],
+   "urban_pct": 19.48,
+   "before": 1010788,
+   "removed": 133371,
+   "band": "rural",
+   "per_100": 13.19,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Bid",
+   "census_code": "27523",
+   "districts": [
+    "Beed"
+   ],
+   "urban_pct": 19.9,
+   "before": 2193827,
+   "removed": 240407,
+   "band": "rural",
+   "per_100": 10.96,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Ahmadnagar",
+   "census_code": "27522",
+   "districts": [
+    "Ahmednagar"
+   ],
+   "urban_pct": 20.09,
+   "before": 3810102,
+   "removed": 426915,
+   "band": "mixed",
+   "per_100": 11.2,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Buldana",
+   "census_code": "27500",
+   "districts": [
+    "Buldhana"
+   ],
+   "urban_pct": 21.22,
+   "before": 2089965,
+   "removed": 190937,
+   "band": "mixed",
+   "per_100": 9.14,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Yavatmal",
+   "census_code": "27510",
+   "districts": [
+    "Yavatmal"
+   ],
+   "urban_pct": 21.58,
+   "before": 2253236,
+   "removed": 264948,
+   "band": "mixed",
+   "per_100": 11.76,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Latur",
+   "census_code": "27524",
+   "districts": [
+    "Latur"
+   ],
+   "urban_pct": 25.47,
+   "before": 2004450,
+   "removed": 214442,
+   "band": "mixed",
+   "per_100": 10.7,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Sangli",
+   "census_code": "27531",
+   "districts": [
+    "Sangli"
+   ],
+   "urban_pct": 25.49,
+   "before": 2573339,
+   "removed": 382269,
+   "band": "mixed",
+   "per_100": 14.85,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Nanded",
+   "census_code": "27511",
+   "districts": [
+    "Nanded"
+   ],
+   "urban_pct": 27.19,
+   "before": 2777073,
+   "removed": 388352,
+   "band": "mixed",
+   "per_100": 13.98,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Dhule",
+   "census_code": "27498",
+   "districts": [
+    "Dhule"
+   ],
+   "urban_pct": 27.84,
+   "before": 1835125,
+   "removed": 294857,
+   "band": "mixed",
+   "per_100": 16.07,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Parbhani",
+   "census_code": "27513",
+   "districts": [
+    "Parbhani"
+   ],
+   "urban_pct": 31.03,
+   "before": 1541007,
+   "removed": 180231,
+   "band": "mixed",
+   "per_100": 11.7,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Kolhapur",
+   "census_code": "27530",
+   "districts": [
+    "Kolhapur"
+   ],
+   "urban_pct": 31.73,
+   "before": 3355244,
+   "removed": 449213,
+   "band": "mixed",
+   "per_100": 13.39,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Jalgaon",
+   "census_code": "27499",
+   "districts": [
+    "Jalgaon"
+   ],
+   "urban_pct": 31.74,
+   "before": 3552199,
+   "removed": 514743,
+   "band": "mixed",
+   "per_100": 14.49,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Solapur",
+   "census_code": "27526",
+   "districts": [
+    "Solapur"
+   ],
+   "urban_pct": 32.4,
+   "before": 3941095,
+   "removed": 622671,
+   "band": "mixed",
+   "per_100": 15.8,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Wardha",
+   "census_code": "27504",
+   "districts": [
+    "Wardha"
+   ],
+   "urban_pct": 32.54,
+   "before": 1137242,
+   "removed": 178178,
+   "band": "mixed",
+   "per_100": 15.67,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Chandrapur",
+   "census_code": "27509",
+   "districts": [
+    "Chandrapur"
+   ],
+   "urban_pct": 35.18,
+   "before": 1797655,
+   "removed": 270104,
+   "band": "mixed",
+   "per_100": 15.03,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Amravati",
+   "census_code": "27503",
+   "districts": [
+    "Amaravati"
+   ],
+   "urban_pct": 35.91,
+   "before": 2545677,
+   "removed": 353282,
+   "band": "mixed",
+   "per_100": 13.88,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Raigarh",
+   "census_code": "27520",
+   "districts": [
+    "Raigad"
+   ],
+   "urban_pct": 36.83,
+   "before": 2533739,
+   "removed": 584118,
+   "band": "mixed",
+   "per_100": 23.05,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Akola",
+   "census_code": "27501",
+   "districts": [
+    "Akola"
+   ],
+   "urban_pct": 39.68,
+   "before": 1595644,
+   "removed": 276992,
+   "band": "mixed",
+   "per_100": 17.36,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Nashik",
+   "census_code": "27516",
+   "districts": [
+    "Nashik"
+   ],
+   "urban_pct": 42.53,
+   "before": 5104458,
+   "removed": 1027792,
+   "band": "mixed",
+   "per_100": 20.14,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Aurangabad",
+   "census_code": "27515",
+   "districts": [
+    "Aurangabad"
+   ],
+   "urban_pct": 43.77,
+   "before": 3216167,
+   "removed": 607660,
+   "band": "mixed",
+   "per_100": 18.89,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Pune",
+   "census_code": "27521",
+   "districts": [
+    "Pune"
+   ],
+   "urban_pct": 60.99,
+   "before": 9080173,
+   "removed": 2866481,
+   "band": "urban",
+   "per_100": 31.57,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Nagpur",
+   "census_code": "27505",
+   "districts": [
+    "Nagpur"
+   ],
+   "urban_pct": 68.31,
+   "before": 4638589,
+   "removed": 1443267,
+   "band": "urban",
+   "per_100": 31.11,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Thane",
+   "census_code": "27517",
+   "districts": [
+    "Thane",
+    "Palghar"
+   ],
+   "urban_pct": 76.99,
+   "before": 9826568,
+   "removed": 3528086,
+   "band": "urban",
+   "per_100": 35.9,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Mumbai",
+   "census_code": "27519",
+   "districts": [
+    "Mumbai City"
+   ],
+   "urban_pct": 100.0,
+   "before": 2555499,
+   "removed": 950720,
+   "band": "urban",
+   "per_100": 37.2,
+   "measure": "left_off"
+  },
+  {
+   "state": "Maharashtra",
+   "unit": "Mumbai Suburban",
+   "census_code": "27518",
+   "districts": [
+    "Mumbai Suburban"
+   ],
+   "urban_pct": 100.0,
+   "before": 7830011,
+   "removed": 2658202,
+   "band": "urban",
+   "per_100": 33.95,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Ariyalur",
+   "census_code": "33616",
+   "districts": [
+    "Ariyalur"
+   ],
+   "urban_pct": 11.1,
+   "before": 530890,
+   "removed": 24368,
+   "band": "rural",
+   "per_100": 4.59,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Viluppuram",
+   "census_code": "33607",
+   "districts": [
+    "Viluppuram",
+    "Kallakurichi"
+   ],
+   "urban_pct": 15.01,
+   "before": 2888097,
+   "removed": 267194,
+   "band": "rural",
+   "per_100": 9.25,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Perambalur",
+   "census_code": "33615",
+   "districts": [
+    "Perambalur"
+   ],
+   "urban_pct": 17.19,
+   "before": 590490,
+   "removed": 49548,
+   "band": "rural",
+   "per_100": 8.39,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Dharmapuri",
+   "census_code": "33630",
+   "districts": [
+    "Dharmapuri"
+   ],
+   "urban_pct": 17.32,
+   "before": 1285432,
+   "removed": 81515,
+   "band": "rural",
+   "per_100": 6.34,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Pudukkottai",
+   "census_code": "33621",
+   "districts": [
+    "Pudukkottai"
+   ],
+   "urban_pct": 19.55,
+   "before": 1394112,
+   "removed": 139587,
+   "band": "rural",
+   "per_100": 10.01,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Tiruvannamalai",
+   "census_code": "33606",
+   "districts": [
+    "Tiruvannamalai"
+   ],
+   "urban_pct": 20.08,
+   "before": 2121902,
+   "removed": 252162,
+   "band": "mixed",
+   "per_100": 11.88,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Thiruvarur",
+   "census_code": "33619",
+   "districts": [
+    "Thiruvarur"
+   ],
+   "urban_pct": 20.39,
+   "before": 1075577,
+   "removed": 129480,
+   "band": "mixed",
+   "per_100": 12.04,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Nagapattinam",
+   "census_code": "33618",
+   "districts": [
+    "Nagapattinam",
+    "Mayiladuthurai"
+   ],
+   "urban_pct": 22.56,
+   "before": 1351230,
+   "removed": 132716,
+   "band": "mixed",
+   "per_100": 9.82,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Krishnagiri",
+   "census_code": "33631",
+   "districts": [
+    "Krishnagiri"
+   ],
+   "urban_pct": 22.79,
+   "before": 1680626,
+   "removed": 174549,
+   "band": "mixed",
+   "per_100": 10.39,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Ramanathapuram",
+   "census_code": "33626",
+   "districts": [
+    "Ramanathapuram"
+   ],
+   "urban_pct": 30.34,
+   "before": 1208690,
+   "removed": 117364,
+   "band": "mixed",
+   "per_100": 9.71,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Sivaganga",
+   "census_code": "33622",
+   "districts": [
+    "Sivaganga"
+   ],
+   "urban_pct": 30.83,
+   "before": 1229933,
+   "removed": 150828,
+   "band": "mixed",
+   "per_100": 12.26,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Cuddalore",
+   "census_code": "33617",
+   "districts": [
+    "Cuddalore"
+   ],
+   "urban_pct": 33.97,
+   "before": 2193577,
+   "removed": 246818,
+   "band": "mixed",
+   "per_100": 11.25,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Thanjavur",
+   "census_code": "33620",
+   "districts": [
+    "Thanjavur"
+   ],
+   "urban_pct": 35.39,
+   "before": 2098561,
+   "removed": 206503,
+   "band": "mixed",
+   "per_100": 9.84,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Dindigul",
+   "census_code": "33612",
+   "districts": [
+    "Dindigul"
+   ],
+   "urban_pct": 37.41,
+   "before": 1934447,
+   "removed": 324894,
+   "band": "mixed",
+   "per_100": 16.8,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Namakkal",
+   "census_code": "33609",
+   "districts": [
+    "Namakkal"
+   ],
+   "urban_pct": 40.32,
+   "before": 1466660,
+   "removed": 193706,
+   "band": "mixed",
+   "per_100": 13.21,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Karur",
+   "census_code": "33613",
+   "districts": [
+    "Karur"
+   ],
+   "urban_pct": 40.82,
+   "before": 898362,
+   "removed": 79690,
+   "band": "mixed",
+   "per_100": 8.87,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Vellore",
+   "census_code": "33605",
+   "districts": [
+    "Vellore",
+    "Ranipet",
+    "Tirupathur"
+   ],
+   "urban_pct": 43.24,
+   "before": 3360141,
+   "removed": 476921,
+   "band": "mixed",
+   "per_100": 14.19,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Tiruchirappalli",
+   "census_code": "33614",
+   "districts": [
+    "Tiruchirappalli"
+   ],
+   "urban_pct": 49.15,
+   "before": 2368968,
+   "removed": 331788,
+   "band": "mixed",
+   "per_100": 14.01,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Tirunelveli",
+   "census_code": "33628",
+   "districts": [
+    "Tirunelveli",
+    "Tenkasi"
+   ],
+   "urban_pct": 49.4,
+   "before": 2793416,
+   "removed": 366859,
+   "band": "mixed",
+   "per_100": 13.13,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Thoothukkudi",
+   "census_code": "33627",
+   "districts": [
+    "Thoothukudi"
+   ],
+   "urban_pct": 50.1,
+   "before": 1490685,
+   "removed": 162527,
+   "band": "urban",
+   "per_100": 10.9,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Virudhunagar",
+   "census_code": "33625",
+   "districts": [
+    "Virudhunagar"
+   ],
+   "urban_pct": 50.47,
+   "before": 1626485,
+   "removed": 189964,
+   "band": "urban",
+   "per_100": 11.68,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Salem",
+   "census_code": "33608",
+   "districts": [
+    "Salem"
+   ],
+   "urban_pct": 50.95,
+   "before": 3030537,
+   "removed": 362429,
+   "band": "urban",
+   "per_100": 11.96,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Erode",
+   "census_code": "33610",
+   "districts": [
+    "Erode"
+   ],
+   "urban_pct": 51.43,
+   "before": 1997189,
+   "removed": 325429,
+   "band": "urban",
+   "per_100": 16.29,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Theni",
+   "census_code": "33624",
+   "districts": [
+    "Theni"
+   ],
+   "urban_pct": 53.82,
+   "before": 1130303,
+   "removed": 125739,
+   "band": "urban",
+   "per_100": 11.12,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "The Nilgiris",
+   "census_code": "33611",
+   "districts": [
+    "The Nilgiris"
+   ],
+   "urban_pct": 59.24,
+   "before": 589167,
+   "removed": 56091,
+   "band": "urban",
+   "per_100": 9.52,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Madurai",
+   "census_code": "33623",
+   "districts": [
+    "Madurai"
+   ],
+   "urban_pct": 60.78,
+   "before": 2740631,
+   "removed": 380474,
+   "band": "urban",
+   "per_100": 13.88,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Tiruppur",
+   "census_code": "33633",
+   "districts": [
+    "Tiruppur"
+   ],
+   "urban_pct": 61.36,
+   "before": 2444929,
+   "removed": 563785,
+   "band": "urban",
+   "per_100": 23.06,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Kancheepuram",
+   "census_code": "33604",
+   "districts": [
+    "Chengalpattu",
+    "Kancheepuram"
+   ],
+   "urban_pct": 63.49,
+   "before": 4188560,
+   "removed": 976145,
+   "band": "urban",
+   "per_100": 23.31,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Thiruvallur",
+   "census_code": "33602",
+   "districts": [
+    "Thiruvallur"
+   ],
+   "urban_pct": 65.14,
+   "before": 3582226,
+   "removed": 619777,
+   "band": "urban",
+   "per_100": 17.3,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Coimbatore",
+   "census_code": "33632",
+   "districts": [
+    "Coimbatore"
+   ],
+   "urban_pct": 75.73,
+   "before": 3225198,
+   "removed": 650590,
+   "band": "urban",
+   "per_100": 20.17,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Kanniyakumari",
+   "census_code": "33629",
+   "districts": [
+    "Kanniyakumari"
+   ],
+   "urban_pct": 82.33,
+   "before": 1592872,
+   "removed": 153373,
+   "band": "urban",
+   "per_100": 9.63,
+   "measure": "left_off"
+  },
+  {
+   "state": "Tamil Nadu",
+   "unit": "Chennai",
+   "census_code": "33603",
+   "districts": [
+    "Chennai"
+   ],
+   "urban_pct": 100.0,
+   "before": 4004694,
+   "removed": 1425018,
+   "band": "urban",
+   "per_100": 35.58,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Dohad",
+   "census_code": "24485",
+   "districts": [
+    "Dahod"
+   ],
+   "urban_pct": 9.01,
+   "before": 1693002,
+   "removed": 180235,
+   "band": "rural",
+   "per_100": 10.65,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Tapi",
+   "census_code": "24493",
+   "districts": [
+    "Tapi"
+   ],
+   "urban_pct": 9.85,
+   "before": 515396,
+   "removed": 40926,
+   "band": "rural",
+   "per_100": 7.94,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Narmada",
+   "census_code": "24487",
+   "districts": [
+    "Narmada"
+   ],
+   "urban_pct": 10.48,
+   "before": 469487,
+   "removed": 34934,
+   "band": "rural",
+   "per_100": 7.44,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "The Dangs",
+   "census_code": "24489",
+   "districts": [
+    "Dangs"
+   ],
+   "urban_pct": 10.81,
+   "before": 201682,
+   "removed": 11121,
+   "band": "rural",
+   "per_100": 5.51,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Banas Kantha",
+   "census_code": "24469",
+   "districts": [
+    "Banaskantha"
+   ],
+   "urban_pct": 13.3,
+   "before": 2624952,
+   "removed": 219627,
+   "band": "rural",
+   "per_100": 8.37,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Panch Mahals",
+   "census_code": "24484",
+   "districts": [
+    "Panchmahal",
+    "Mahisagar"
+   ],
+   "urban_pct": 14.0,
+   "before": 2198303,
+   "removed": 194747,
+   "band": "rural",
+   "per_100": 8.86,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Sabar Kantha",
+   "census_code": "24472",
+   "districts": [
+    "Sabarkantha",
+    "Arvalli"
+   ],
+   "urban_pct": 14.98,
+   "before": 2019881,
+   "removed": 172646,
+   "band": "rural",
+   "per_100": 8.55,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Patan",
+   "census_code": "24470",
+   "districts": [
+    "Patan"
+   ],
+   "urban_pct": 20.92,
+   "before": 1219104,
+   "removed": 107366,
+   "band": "mixed",
+   "per_100": 8.81,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Kheda",
+   "census_code": "24483",
+   "districts": [
+    "Kheda"
+   ],
+   "urban_pct": 22.77,
+   "before": 1655062,
+   "removed": 192702,
+   "band": "mixed",
+   "per_100": 11.64,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Mahesana",
+   "census_code": "24471",
+   "districts": [
+    "Mahesana"
+   ],
+   "urban_pct": 25.27,
+   "before": 1791905,
+   "removed": 194109,
+   "band": "mixed",
+   "per_100": 10.83,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Amreli",
+   "census_code": "24480",
+   "districts": [
+    "Amreli"
+   ],
+   "urban_pct": 25.53,
+   "before": 1271375,
+   "removed": 138559,
+   "band": "mixed",
+   "per_100": 10.9,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Surendranagar",
+   "census_code": "24475",
+   "districts": [
+    "Surendranagar"
+   ],
+   "urban_pct": 28.29,
+   "before": 1481991,
+   "removed": 137032,
+   "band": "mixed",
+   "per_100": 9.25,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Anand",
+   "census_code": "24482",
+   "districts": [
+    "Anand"
+   ],
+   "urban_pct": 30.34,
+   "before": 1812327,
+   "removed": 231780,
+   "band": "mixed",
+   "per_100": 12.79,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Navsari",
+   "census_code": "24490",
+   "districts": [
+    "Navsari"
+   ],
+   "urban_pct": 30.77,
+   "before": 1095900,
+   "removed": 136563,
+   "band": "mixed",
+   "per_100": 12.46,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Junagadh",
+   "census_code": "24479",
+   "districts": [
+    "Junagadh",
+    "Gir Somnath"
+   ],
+   "urban_pct": 33.04,
+   "before": 2324129,
+   "removed": 232417,
+   "band": "mixed",
+   "per_100": 10.0,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Bharuch",
+   "census_code": "24488",
+   "districts": [
+    "Bharuch"
+   ],
+   "urban_pct": 33.85,
+   "before": 1310600,
+   "removed": 215180,
+   "band": "mixed",
+   "per_100": 16.42,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Kachchh",
+   "census_code": "24468",
+   "districts": [
+    "Kachchh"
+   ],
+   "urban_pct": 34.82,
+   "before": 1690584,
+   "removed": 214175,
+   "band": "mixed",
+   "per_100": 12.67,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Valsad",
+   "census_code": "24491",
+   "districts": [
+    "Valsad"
+   ],
+   "urban_pct": 37.26,
+   "before": 1385507,
+   "removed": 226397,
+   "band": "mixed",
+   "per_100": 16.34,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Bhavnagar",
+   "census_code": "24481",
+   "districts": [
+    "Bhavnagar",
+    "Botad"
+   ],
+   "urban_pct": 41.05,
+   "before": 2429445,
+   "removed": 279623,
+   "band": "mixed",
+   "per_100": 11.51,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Gandhinagar",
+   "census_code": "24473",
+   "districts": [
+    "Gandhinagar"
+   ],
+   "urban_pct": 43.16,
+   "before": 1389712,
+   "removed": 215786,
+   "band": "mixed",
+   "per_100": 15.53,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Jamnagar",
+   "census_code": "24477",
+   "districts": [
+    "Jamnagar",
+    "Devbhumi Dwarka"
+   ],
+   "urban_pct": 44.95,
+   "before": 1855651,
+   "removed": 254384,
+   "band": "mixed",
+   "per_100": 13.71,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Porbandar",
+   "census_code": "24478",
+   "districts": [
+    "Porbandar"
+   ],
+   "urban_pct": 48.8,
+   "before": 501743,
+   "removed": 66800,
+   "band": "mixed",
+   "per_100": 13.31,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Vadodara",
+   "census_code": "24486",
+   "districts": [
+    "Vadodara",
+    "Chhota Udepur"
+   ],
+   "urban_pct": 49.59,
+   "before": 3531397,
+   "removed": 569247,
+   "band": "mixed",
+   "per_100": 16.12,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Rajkot",
+   "census_code": "24476",
+   "districts": [
+    "Rajkot",
+    "Morbi"
+   ],
+   "urban_pct": 58.19,
+   "before": 3241169,
+   "removed": 403948,
+   "band": "urban",
+   "per_100": 12.46,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Surat",
+   "census_code": "24492",
+   "districts": [
+    "Surat"
+   ],
+   "urban_pct": 79.74,
+   "before": 4873512,
+   "removed": 1250319,
+   "band": "urban",
+   "per_100": 25.66,
+   "measure": "left_off"
+  },
+  {
+   "state": "Gujarat",
+   "unit": "Ahmadabad",
+   "census_code": "24474",
+   "districts": [
+    "Ahmedabad"
+   ],
+   "urban_pct": 84.04,
+   "before": 6259620,
+   "removed": 1452704,
+   "band": "urban",
+   "per_100": 23.21,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Kodagu",
+   "census_code": "29576",
+   "districts": [
+    "Kodagu"
+   ],
+   "urban_pct": 14.61,
+   "before": 468657,
+   "removed": 62854,
+   "band": "rural",
+   "per_100": 13.41,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Koppal",
+   "census_code": "29560",
+   "districts": [
+    "Koppal"
+   ],
+   "urban_pct": 16.81,
+   "before": 1190214,
+   "removed": 148826,
+   "band": "rural",
+   "per_100": 12.5,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Mandya",
+   "census_code": "29573",
+   "districts": [
+    "Mandya"
+   ],
+   "urban_pct": 17.08,
+   "before": 1575849,
+   "removed": 167485,
+   "band": "rural",
+   "per_100": 10.63,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Chamarajanagar",
+   "census_code": "29578",
+   "districts": [
+    "Chamarajnagar"
+   ],
+   "urban_pct": 17.14,
+   "before": 880224,
+   "removed": 88275,
+   "band": "rural",
+   "per_100": 10.03,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Yadgir",
+   "census_code": "29580",
+   "districts": [
+    "Yadgir"
+   ],
+   "urban_pct": 18.79,
+   "before": 1053236,
+   "removed": 189231,
+   "band": "rural",
+   "per_100": 17.97,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Chitradurga",
+   "census_code": "29566",
+   "districts": [
+    "Chitradurga"
+   ],
+   "urban_pct": 19.86,
+   "before": 1440534,
+   "removed": 142745,
+   "band": "rural",
+   "per_100": 9.91,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Chikmagalur",
+   "census_code": "29570",
+   "districts": [
+    "Chikkmagalur"
+   ],
+   "urban_pct": 21.05,
+   "before": 960231,
+   "removed": 96715,
+   "band": "mixed",
+   "per_100": 10.07,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Hassan",
+   "census_code": "29574",
+   "districts": [
+    "Hassan"
+   ],
+   "urban_pct": 21.21,
+   "before": 1542802,
+   "removed": 167285,
+   "band": "mixed",
+   "per_100": 10.84,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Haveri",
+   "census_code": "29564",
+   "districts": [
+    "Haveri"
+   ],
+   "urban_pct": 22.25,
+   "before": 1335342,
+   "removed": 115061,
+   "band": "mixed",
+   "per_100": 8.62,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Tumkur",
+   "census_code": "29571",
+   "districts": [
+    "Tumkur"
+   ],
+   "urban_pct": 22.36,
+   "before": 2298879,
+   "removed": 237093,
+   "band": "mixed",
+   "per_100": 10.31,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Chikkaballapura",
+   "census_code": "29582",
+   "districts": [
+    "Chikkaballapur"
+   ],
+   "urban_pct": 22.4,
+   "before": 1069504,
+   "removed": 124881,
+   "band": "mixed",
+   "per_100": 11.68,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Bijapur",
+   "census_code": "29557",
+   "districts": [
+    "Bijapur"
+   ],
+   "urban_pct": 23.05,
+   "before": 1982114,
+   "removed": 297146,
+   "band": "mixed",
+   "per_100": 14.99,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Ramanagara",
+   "census_code": "29584",
+   "districts": [
+    "Ramanagaram"
+   ],
+   "urban_pct": 24.73,
+   "before": 938586,
+   "removed": 110549,
+   "band": "mixed",
+   "per_100": 11.78,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Bidar",
+   "census_code": "29558",
+   "districts": [
+    "Bidar"
+   ],
+   "urban_pct": 25.01,
+   "before": 1461959,
+   "removed": 241043,
+   "band": "mixed",
+   "per_100": 16.49,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Belgaum",
+   "census_code": "29555",
+   "districts": [
+    "Belgaum"
+   ],
+   "urban_pct": 25.34,
+   "before": 4107000,
+   "removed": 513439,
+   "band": "mixed",
+   "per_100": 12.5,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Raichur",
+   "census_code": "29559",
+   "districts": [
+    "Raichur"
+   ],
+   "urban_pct": 25.42,
+   "before": 1714559,
+   "removed": 321396,
+   "band": "mixed",
+   "per_100": 18.75,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Bangalore Rural",
+   "census_code": "29583",
+   "districts": [
+    "Bangalore Rural"
+   ],
+   "urban_pct": 27.12,
+   "before": 912913,
+   "removed": 116775,
+   "band": "mixed",
+   "per_100": 12.79,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Udupi",
+   "census_code": "29569",
+   "districts": [
+    "Udupi"
+   ],
+   "urban_pct": 28.37,
+   "before": 1063876,
+   "removed": 63331,
+   "band": "mixed",
+   "per_100": 5.95,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Uttara Kannada",
+   "census_code": "29563",
+   "districts": [
+    "Uttara Kannada"
+   ],
+   "urban_pct": 29.15,
+   "before": 1230037,
+   "removed": 107015,
+   "band": "mixed",
+   "per_100": 8.7,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Kolar",
+   "census_code": "29581",
+   "districts": [
+    "Kolar"
+   ],
+   "urban_pct": 31.25,
+   "before": 1295265,
+   "removed": 171034,
+   "band": "mixed",
+   "per_100": 13.2,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Bagalkot",
+   "census_code": "29556",
+   "districts": [
+    "Bagalkot"
+   ],
+   "urban_pct": 31.64,
+   "before": 1631202,
+   "removed": 238679,
+   "band": "mixed",
+   "per_100": 14.63,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Davanagere",
+   "census_code": "29567",
+   "districts": [
+    "Davangere"
+   ],
+   "urban_pct": 32.33,
+   "before": 1499282,
+   "removed": 201063,
+   "band": "mixed",
+   "per_100": 13.41,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Gulbarga",
+   "census_code": "29579",
+   "districts": [
+    "Gulbarga"
+   ],
+   "urban_pct": 32.56,
+   "before": 2371542,
+   "removed": 521957,
+   "band": "mixed",
+   "per_100": 22.01,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Shimoga",
+   "census_code": "29568",
+   "districts": [
+    "Shimoga"
+   ],
+   "urban_pct": 35.59,
+   "before": 1519459,
+   "removed": 188554,
+   "band": "mixed",
+   "per_100": 12.41,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Gadag",
+   "census_code": "29561",
+   "districts": [
+    "Gadag"
+   ],
+   "urban_pct": 35.63,
+   "before": 902947,
+   "removed": 120715,
+   "band": "mixed",
+   "per_100": 13.37,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Bellary",
+   "census_code": "29565",
+   "districts": [
+    "Bellary",
+    "Vijayanagara"
+   ],
+   "urban_pct": 37.52,
+   "before": 2372318,
+   "removed": 371854,
+   "band": "mixed",
+   "per_100": 15.67,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Mysore",
+   "census_code": "29577",
+   "districts": [
+    "Mysore"
+   ],
+   "urban_pct": 41.5,
+   "before": 2799693,
+   "removed": 557241,
+   "band": "mixed",
+   "per_100": 19.9,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Dakshina Kannada",
+   "census_code": "29575",
+   "districts": [
+    "Dakshina Kannada"
+   ],
+   "urban_pct": 47.67,
+   "before": 1803766,
+   "removed": 157379,
+   "band": "mixed",
+   "per_100": 8.73,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Dharwad",
+   "census_code": "29562",
+   "districts": [
+    "Dharwad"
+   ],
+   "urban_pct": 56.82,
+   "before": 1621961,
+   "removed": 268015,
+   "band": "urban",
+   "per_100": 16.52,
+   "measure": "left_off"
+  },
+  {
+   "state": "Karnataka",
+   "unit": "Bangalore",
+   "census_code": "29572",
+   "districts": [
+    "B.B.M.P (South)",
+    "B.B.M.P (Central)",
+    "B.B.M.P (North)",
+    "Bangalore Urban"
+   ],
+   "urban_pct": 90.94,
+   "before": 10388363,
+   "removed": 4688703,
+   "band": "urban",
+   "per_100": 45.13,
+   "measure": "left_off"
+  },
+  {
+   "state": "Telangana",
+   "unit": "Mahbubnagar",
+   "census_code": "28538",
+   "districts": [
+    "Mahabubnagar",
+    "Nagarkurnool",
+    "Wanaparthy",
+    "Jogulamba Gadwal",
+    "Narayanpet"
+   ],
+   "urban_pct": 14.99,
+   "before": 2739123,
+   "removed": 394975,
+   "band": "rural",
+   "per_100": 14.42,
+   "measure": "left_off"
+  },
+  {
+   "state": "Telangana",
+   "unit": "Nalgonda",
+   "census_code": "28539",
+   "districts": [
+    "Nalgonda",
+    "Suryapet",
+    "Yadadri Bhongiri"
+   ],
+   "urban_pct": 18.99,
+   "before": 2984448,
+   "removed": 281063,
+   "band": "rural",
+   "per_100": 9.42,
+   "measure": "left_off"
+  },
+  {
+   "state": "Telangana",
+   "unit": "Nizamabad",
+   "census_code": "28533",
+   "districts": [
+    "Nizamabad",
+    "Kamareddy"
+   ],
+   "urban_pct": 23.06,
+   "before": 2135740,
+   "removed": 295938,
+   "band": "mixed",
+   "per_100": 13.86,
+   "measure": "left_off"
+  },
+  {
+   "state": "Telangana",
+   "unit": "Khammam",
+   "census_code": "28541",
+   "districts": [
+    "Bhadradri",
+    "Khammam"
+   ],
+   "urban_pct": 23.45,
+   "before": 2239979,
+   "removed": 290639,
+   "band": "mixed",
+   "per_100": 12.98,
+   "measure": "left_off"
+  },
+  {
+   "state": "Telangana",
+   "unit": "Medak",
+   "census_code": "28535",
+   "districts": [
+    "Sangareddy",
+    "Medak",
+    "Siddipet"
+   ],
+   "urban_pct": 24.0,
+   "before": 2903543,
+   "removed": 460000,
+   "band": "mixed",
+   "per_100": 15.84,
+   "measure": "left_off"
+  },
+  {
+   "state": "Telangana",
+   "unit": "Karimnagar",
+   "census_code": "28534",
+   "districts": [
+    "Jagtial",
+    "Peddapalli",
+    "Karimnagar",
+    "Rajanna Sircilla"
+   ],
+   "urban_pct": 25.19,
+   "before": 2997973,
+   "removed": 391546,
+   "band": "mixed",
+   "per_100": 13.06,
+   "measure": "left_off"
+  },
+  {
+   "state": "Telangana",
+   "unit": "Adilabad",
+   "census_code": "28532",
+   "districts": [
+    "Kumaram Bheem Asifabad",
+    "Mancherial",
+    "Adilabad",
+    "Nirmal"
+   ],
+   "urban_pct": 27.73,
+   "before": 2339191,
+   "removed": 338936,
+   "band": "mixed",
+   "per_100": 14.49,
+   "measure": "left_off"
+  },
+  {
+   "state": "Telangana",
+   "unit": "Warangal",
+   "census_code": "28540",
+   "districts": [
+    "Jangaon",
+    "Mahabubabad",
+    "Warangal",
+    "Hanumakonda",
+    "Jayashankar Bhupalpalle",
+    "Mulugu"
+   ],
+   "urban_pct": 28.25,
+   "before": 3053238,
+   "removed": 375740,
+   "band": "mixed",
+   "per_100": 12.31,
+   "measure": "left_off"
+  },
+  {
+   "state": "Telangana",
+   "unit": "Rangareddy",
+   "census_code": "28537",
+   "districts": [
+    "Rangareddy",
+    "Vikarabad",
+    "Medchal Malkajgiri"
+   ],
+   "urban_pct": 70.22,
+   "before": 7696544,
+   "removed": 2568954,
+   "band": "urban",
+   "per_100": 33.38,
+   "measure": "left_off"
+  },
+  {
+   "state": "Telangana",
+   "unit": "Hyderabad",
+   "census_code": "28536",
+   "districts": [
+    "Hyderabad"
+   ],
+   "urban_pct": 100.0,
+   "before": 4736669,
+   "removed": 1941444,
+   "band": "urban",
+   "per_100": 40.99,
+   "measure": "left_off"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Samastipur",
+   "census_code": "10221",
+   "districts": [
+    "Samastipur"
+   ],
+   "urban_pct": 3.47,
+   "before": 2943765,
+   "removed": 293199,
+   "band": "rural",
+   "per_100": 9.96,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Banka",
+   "census_code": "10225",
+   "districts": [
+    "Banka"
+   ],
+   "urban_pct": 3.5,
+   "before": 1456486,
+   "removed": 121034,
+   "band": "rural",
+   "per_100": 8.31,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Madhubani",
+   "census_code": "10207",
+   "districts": [
+    "Madhubani"
+   ],
+   "urban_pct": 3.6,
+   "before": 3126528,
+   "removed": 361114,
+   "band": "rural",
+   "per_100": 11.55,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Kaimur (Bhabua)",
+   "census_code": "10233",
+   "districts": [
+    "Kaimur"
+   ],
+   "urban_pct": 4.03,
+   "before": 1174054,
+   "removed": 78779,
+   "band": "rural",
+   "per_100": 6.71,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Sheohar",
+   "census_code": "10205",
+   "districts": [
+    "Sheohar"
+   ],
+   "urban_pct": 4.28,
+   "before": 304835,
+   "removed": 28685,
+   "band": "rural",
+   "per_100": 9.41,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Madhepura",
+   "census_code": "10213",
+   "districts": [
+    "Madhepura"
+   ],
+   "urban_pct": 4.42,
+   "before": 1363451,
+   "removed": 104304,
+   "band": "rural",
+   "per_100": 7.65,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Supaul",
+   "census_code": "10208",
+   "districts": [
+    "Supaul"
+   ],
+   "urban_pct": 4.74,
+   "before": 1540952,
+   "removed": 137607,
+   "band": "rural",
+   "per_100": 8.93,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Khagaria",
+   "census_code": "10223",
+   "districts": [
+    "Khagaria"
+   ],
+   "urban_pct": 5.23,
+   "before": 1170191,
+   "removed": 85658,
+   "band": "rural",
+   "per_100": 7.32,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Siwan",
+   "census_code": "10218",
+   "districts": [
+    "Siwan"
+   ],
+   "urban_pct": 5.49,
+   "before": 2458351,
+   "removed": 228135,
+   "band": "rural",
+   "per_100": 9.28,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Sitamarhi",
+   "census_code": "10206",
+   "districts": [
+    "Sitamarhi"
+   ],
+   "urban_pct": 5.56,
+   "before": 2463532,
+   "removed": 252512,
+   "band": "rural",
+   "per_100": 10.25,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Araria",
+   "census_code": "10209",
+   "districts": [
+    "Araria"
+   ],
+   "urban_pct": 6.0,
+   "before": 1980622,
+   "removed": 175087,
+   "band": "rural",
+   "per_100": 8.84,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Gopalganj",
+   "census_code": "10217",
+   "districts": [
+    "Gopalganj"
+   ],
+   "urban_pct": 6.35,
+   "before": 1818908,
+   "removed": 314853,
+   "band": "rural",
+   "per_100": 17.31,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Vaishali",
+   "census_code": "10220",
+   "districts": [
+    "Vaishali"
+   ],
+   "urban_pct": 6.67,
+   "before": 2542352,
+   "removed": 235676,
+   "band": "rural",
+   "per_100": 9.27,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Arwal",
+   "census_code": "10240",
+   "districts": [
+    "Arwal"
+   ],
+   "urban_pct": 7.4,
+   "before": 527640,
+   "removed": 32872,
+   "band": "rural",
+   "per_100": 6.23,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Purba Champaran",
+   "census_code": "10204",
+   "districts": [
+    "East Champaran"
+   ],
+   "urban_pct": 7.87,
+   "before": 3446617,
+   "removed": 323982,
+   "band": "rural",
+   "per_100": 9.4,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Saharsa",
+   "census_code": "10214",
+   "districts": [
+    "Saharsa"
+   ],
+   "urban_pct": 8.24,
+   "before": 1298048,
+   "removed": 139670,
+   "band": "rural",
+   "per_100": 10.76,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Jamui",
+   "census_code": "10238",
+   "districts": [
+    "Jamui"
+   ],
+   "urban_pct": 8.26,
+   "before": 1274937,
+   "removed": 100975,
+   "band": "rural",
+   "per_100": 7.92,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Katihar",
+   "census_code": "10212",
+   "districts": [
+    "Katihar"
+   ],
+   "urban_pct": 8.92,
+   "before": 2080775,
+   "removed": 206621,
+   "band": "rural",
+   "per_100": 9.93,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Saran",
+   "census_code": "10219",
+   "districts": [
+    "Saran"
+   ],
+   "urban_pct": 8.94,
+   "before": 2920192,
+   "removed": 288515,
+   "band": "rural",
+   "per_100": 9.88,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Aurangabad",
+   "census_code": "10235",
+   "districts": [
+    "Aurangabad"
+   ],
+   "urban_pct": 9.32,
+   "before": 1835894,
+   "removed": 163211,
+   "band": "rural",
+   "per_100": 8.89,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Kishanganj",
+   "census_code": "10210",
+   "districts": [
+    "Kishanganj"
+   ],
+   "urban_pct": 9.53,
+   "before": 1127532,
+   "removed": 156727,
+   "band": "rural",
+   "per_100": 13.9,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Buxar",
+   "census_code": "10232",
+   "districts": [
+    "Buxar"
+   ],
+   "urban_pct": 9.64,
+   "before": 1295132,
+   "removed": 93120,
+   "band": "rural",
+   "per_100": 7.19,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Nawada",
+   "census_code": "10237",
+   "districts": [
+    "Nawada"
+   ],
+   "urban_pct": 9.71,
+   "before": 1725338,
+   "removed": 130263,
+   "band": "rural",
+   "per_100": 7.55,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Darbhanga",
+   "census_code": "10215",
+   "districts": [
+    "Darbhanga"
+   ],
+   "urban_pct": 9.74,
+   "before": 2902355,
+   "removed": 210711,
+   "band": "rural",
+   "per_100": 7.26,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Muzaffarpur",
+   "census_code": "10216",
+   "districts": [
+    "Muzaffarpur"
+   ],
+   "urban_pct": 9.86,
+   "before": 3310911,
+   "removed": 294340,
+   "band": "rural",
+   "per_100": 8.89,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Pashchim Champaran",
+   "census_code": "10203",
+   "districts": [
+    "West Champaran"
+   ],
+   "urban_pct": 9.99,
+   "before": 2630751,
+   "removed": 217300,
+   "band": "rural",
+   "per_100": 8.26,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Purnia",
+   "census_code": "10211",
+   "districts": [
+    "Purnia"
+   ],
+   "urban_pct": 10.51,
+   "before": 2094070,
+   "removed": 299452,
+   "band": "rural",
+   "per_100": 14.3,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Jehanabad",
+   "census_code": "10239",
+   "districts": [
+    "Jehanabad"
+   ],
+   "urban_pct": 12.01,
+   "before": 812680,
+   "removed": 57619,
+   "band": "rural",
+   "per_100": 7.09,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Gaya",
+   "census_code": "10236",
+   "districts": [
+    "Gaya"
+   ],
+   "urban_pct": 13.24,
+   "before": 2998282,
+   "removed": 253055,
+   "band": "rural",
+   "per_100": 8.44,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Bhojpur",
+   "census_code": "10231",
+   "districts": [
+    "Bhojpur"
+   ],
+   "urban_pct": 14.29,
+   "before": 2116909,
+   "removed": 197931,
+   "band": "rural",
+   "per_100": 9.35,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Lakhisarai",
+   "census_code": "10227",
+   "districts": [
+    "Lakhisarai"
+   ],
+   "urban_pct": 14.29,
+   "before": 750116,
+   "removed": 51608,
+   "band": "rural",
+   "per_100": 6.88,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Rohtas",
+   "census_code": "10234",
+   "districts": [
+    "Rohtas"
+   ],
+   "urban_pct": 14.45,
+   "before": 2237096,
+   "removed": 157939,
+   "band": "rural",
+   "per_100": 7.06,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Nalanda",
+   "census_code": "10229",
+   "districts": [
+    "Nalanda"
+   ],
+   "urban_pct": 15.91,
+   "before": 2249348,
+   "removed": 148457,
+   "band": "rural",
+   "per_100": 6.6,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Sheikhpura",
+   "census_code": "10228",
+   "districts": [
+    "Sheikhpura"
+   ],
+   "urban_pct": 17.13,
+   "before": 496307,
+   "removed": 27148,
+   "band": "rural",
+   "per_100": 5.47,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Begusarai",
+   "census_code": "10222",
+   "districts": [
+    "Begusarai"
+   ],
+   "urban_pct": 19.18,
+   "before": 2141605,
+   "removed": 190817,
+   "band": "rural",
+   "per_100": 8.91,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Bhagalpur",
+   "census_code": "10224",
+   "districts": [
+    "Bhagalpur"
+   ],
+   "urban_pct": 19.83,
+   "before": 2236282,
+   "removed": 253818,
+   "band": "rural",
+   "per_100": 11.35,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Munger",
+   "census_code": "10226",
+   "districts": [
+    "Munger"
+   ],
+   "urban_pct": 27.79,
+   "before": 1003480,
+   "removed": 82185,
+   "band": "mixed",
+   "per_100": 8.19,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "Bihar",
+   "unit": "Patna",
+   "census_code": "10230",
+   "districts": [
+    "Patna"
+   ],
+   "urban_pct": 43.07,
+   "before": 4843590,
+   "removed": 415580,
+   "band": "mixed",
+   "per_100": 8.58,
+   "measure": "roll_2025"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Bankura",
+   "census_code": "19339",
+   "districts": [
+    "Bankura"
+   ],
+   "urban_pct": 8.33,
+   "before": 3012177,
+   "removed": 111168,
+   "band": "rural",
+   "per_100": 3.69,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Koch Bihar",
+   "census_code": "19329",
+   "districts": [
+    "Coochbehar"
+   ],
+   "urban_pct": 10.27,
+   "before": 2449635,
+   "removed": 72216,
+   "band": "rural",
+   "per_100": 2.95,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Purba Medinipur",
+   "census_code": "19345",
+   "districts": [
+    "Purbo Medinipur"
+   ],
+   "urban_pct": 11.63,
+   "before": 4229519,
+   "removed": 88107,
+   "band": "rural",
+   "per_100": 2.08,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Uttar Dinajpur",
+   "census_code": "19330",
+   "districts": [
+    "Uttar Dinajpur"
+   ],
+   "urban_pct": 12.05,
+   "before": 2294595,
+   "removed": 145262,
+   "band": "rural",
+   "per_100": 6.33,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Paschim Medinipur",
+   "census_code": "19344",
+   "districts": [
+    "Paschim Medinipur",
+    "Jhargram"
+   ],
+   "urban_pct": 12.22,
+   "before": 4938865,
+   "removed": 224295,
+   "band": "rural",
+   "per_100": 4.54,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Puruliya",
+   "census_code": "19340",
+   "districts": [
+    "Purulia"
+   ],
+   "urban_pct": 12.74,
+   "before": 2393431,
+   "removed": 155405,
+   "band": "rural",
+   "per_100": 6.49,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Birbhum",
+   "census_code": "19334",
+   "districts": [
+    "Birbhum"
+   ],
+   "urban_pct": 12.83,
+   "before": 2914814,
+   "removed": 148390,
+   "band": "rural",
+   "per_100": 5.09,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Maldah",
+   "census_code": "19332",
+   "districts": [
+    "Malda"
+   ],
+   "urban_pct": 13.58,
+   "before": 3159130,
+   "removed": 161470,
+   "band": "rural",
+   "per_100": 5.11,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Dakshin Dinajpur",
+   "census_code": "19331",
+   "districts": [
+    "Dakshin Dinajpur"
+   ],
+   "urban_pct": 14.1,
+   "before": 1321134,
+   "removed": 70570,
+   "band": "rural",
+   "per_100": 5.34,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Murshidabad",
+   "census_code": "19333",
+   "districts": [
+    "Murshidabad"
+   ],
+   "urban_pct": 19.72,
+   "before": 5702221,
+   "removed": 216973,
+   "band": "rural",
+   "per_100": 3.81,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "South Twenty Four Parganas",
+   "census_code": "19343",
+   "districts": [
+    "South 24 Parganas"
+   ],
+   "urban_pct": 25.58,
+   "before": 8525620,
+   "removed": 749344,
+   "band": "mixed",
+   "per_100": 8.79,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Jalpaiguri",
+   "census_code": "19328",
+   "districts": [
+    "Alipurduar",
+    "Jalpaiguri"
+   ],
+   "urban_pct": 27.38,
+   "before": 3176473,
+   "removed": 191358,
+   "band": "mixed",
+   "per_100": 6.02,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Nadia",
+   "census_code": "19336",
+   "districts": [
+    "Nadia"
+   ],
+   "urban_pct": 27.84,
+   "before": 4400177,
+   "removed": 197962,
+   "band": "mixed",
+   "per_100": 4.5,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Hugli",
+   "census_code": "19338",
+   "districts": [
+    "Hooghly"
+   ],
+   "urban_pct": 38.57,
+   "before": 4769386,
+   "removed": 313161,
+   "band": "mixed",
+   "per_100": 6.57,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Darjiling",
+   "census_code": "19327",
+   "districts": [
+    "Darjeeling",
+    "Kalimpong"
+   ],
+   "urban_pct": 39.42,
+   "before": 1502226,
+   "removed": 128052,
+   "band": "mixed",
+   "per_100": 8.52,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Barddhaman",
+   "census_code": "19335",
+   "districts": [
+    "Paschim Bardhaman",
+    "Purba Bardhaman"
+   ],
+   "urban_pct": 39.89,
+   "before": 6454900,
+   "removed": 463314,
+   "band": "mixed",
+   "per_100": 7.18,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "North Twenty Four Parganas",
+   "census_code": "19337",
+   "districts": [
+    "North 24 Parganas"
+   ],
+   "urban_pct": 57.27,
+   "before": 8240909,
+   "removed": 732361,
+   "band": "urban",
+   "per_100": 8.89,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Haora",
+   "census_code": "19341",
+   "districts": [
+    "Howrah"
+   ],
+   "urban_pct": 63.38,
+   "before": 4119386,
+   "removed": 425815,
+   "band": "urban",
+   "per_100": 10.34,
+   "measure": "fall"
+  },
+  {
+   "state": "West Bengal",
+   "unit": "Kolkata",
+   "census_code": "19342",
+   "districts": [
+    "Kolkata North",
+    "Kolkata South"
+   ],
+   "urban_pct": 100.0,
+   "before": 2405408,
+   "removed": 598153,
+   "band": "urban",
+   "per_100": 24.87,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Wayanad",
+   "census_code": "32590",
+   "districts": [
+    "Wayanad"
+   ],
+   "urban_pct": 3.86,
+   "before": 642200,
+   "removed": 37713,
+   "band": "rural",
+   "per_100": 5.87,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Idukki",
+   "census_code": "32596",
+   "districts": [
+    "Idukki"
+   ],
+   "urban_pct": 4.69,
+   "before": 894112,
+   "removed": 117731,
+   "band": "rural",
+   "per_100": 13.17,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Pathanamthitta",
+   "census_code": "32599",
+   "districts": [
+    "Pathanamthitta"
+   ],
+   "urban_pct": 10.99,
+   "before": 1052468,
+   "removed": 102836,
+   "band": "rural",
+   "per_100": 9.77,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Palakkad",
+   "census_code": "32593",
+   "districts": [
+    "Palakkad"
+   ],
+   "urban_pct": 24.09,
+   "before": 2322579,
+   "removed": 181303,
+   "band": "mixed",
+   "per_100": 7.81,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Kottayam",
+   "census_code": "32597",
+   "districts": [
+    "Kottayam"
+   ],
+   "urban_pct": 28.63,
+   "before": 1605528,
+   "removed": 155788,
+   "band": "mixed",
+   "per_100": 9.7,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Kasaragod",
+   "census_code": "32588",
+   "districts": [
+    "Kasaragod"
+   ],
+   "urban_pct": 38.94,
+   "before": 1076634,
+   "removed": 55289,
+   "band": "mixed",
+   "per_100": 5.14,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Malappuram",
+   "census_code": "32592",
+   "districts": [
+    "Malappuram"
+   ],
+   "urban_pct": 44.18,
+   "before": 3401577,
+   "removed": 163125,
+   "band": "mixed",
+   "per_100": 4.8,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Kollam",
+   "census_code": "32600",
+   "districts": [
+    "Kollam"
+   ],
+   "urban_pct": 45.05,
+   "before": 2140376,
+   "removed": 156491,
+   "band": "mixed",
+   "per_100": 7.31,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Thiruvananthapuram",
+   "census_code": "32601",
+   "districts": [
+    "Thiruvananthapuram"
+   ],
+   "urban_pct": 53.66,
+   "before": 2837653,
+   "removed": 397411,
+   "band": "urban",
+   "per_100": 14.0,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Alappuzha",
+   "census_code": "32598",
+   "districts": [
+    "Alappuzha"
+   ],
+   "urban_pct": 53.96,
+   "before": 1754164,
+   "removed": 137603,
+   "band": "urban",
+   "per_100": 7.84,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Kannur",
+   "census_code": "32589",
+   "districts": [
+    "Kannur"
+   ],
+   "urban_pct": 65.04,
+   "before": 2113359,
+   "removed": 98751,
+   "band": "urban",
+   "per_100": 4.67,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Kozhikode",
+   "census_code": "32591",
+   "districts": [
+    "Kozhikode"
+   ],
+   "urban_pct": 67.15,
+   "before": 2657561,
+   "removed": 184893,
+   "band": "urban",
+   "per_100": 6.96,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Thrissur",
+   "census_code": "32594",
+   "districts": [
+    "Thrissur"
+   ],
+   "urban_pct": 67.17,
+   "before": 2674625,
+   "removed": 272193,
+   "band": "urban",
+   "per_100": 10.18,
+   "measure": "fall"
+  },
+  {
+   "state": "Kerala",
+   "unit": "Ernakulam",
+   "census_code": "32595",
+   "districts": [
+    "Ernakulam"
+   ],
+   "urban_pct": 68.07,
+   "before": 2638106,
+   "removed": 307463,
+   "band": "urban",
+   "per_100": 11.65,
+   "measure": "fall"
+  }
+ ]
+}

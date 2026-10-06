@@ -214,6 +214,23 @@ deaths and marriage tests. Findings: women were the larger share in 8 of 11
 states and 85 of 89 districts; Delhi is the exception (35.3 men against 29.9
 women per 100). The page says the lists cannot say why.
 
+**Urban** (`india/urban/`) sets rural, mixed and urban districts against
+each other inside each state. `scripts/build_urban.py` reads the district rows
+through `build_cities.rows()` (so it cannot disagree with the cities page),
+the 2011 urban share from `data/india/raw/census2011_a01_districts.csv`
+(written by `scripts/census_a01.py` from the Registrar General's table A-01),
+and `data/india/raw/district_2011_parent.csv`, which names the 2011 district
+each of today's was made from, with its source (`URBAN_SOURCES.md` beside it).
+Each district is counted under its first-listed parent, the one it was mostly
+made from, so Telangana's 33 districts become its ten of 2011; adding every
+parent would chain them into five. Bands: rural under 20% urban, mixed 20 to
+50, urban above 50. Nine states, each in its own measure; Delhi, Rajasthan and
+Uttarakhand are left out and the page says why. Findings: urban above rural in
+7 of 8 states (Kerala the exception; Bihar has no urban district), mixed above
+rural in 7 of 9, and the order holds without the urban districts (rank
+correlation 0.2 or more) in five states. Never claim the share has grown since
+2011 without a source.
+
 **Charts first, tables folded.** The cities, women and comparisons pages
 lead each section with a chart and put the full figures in a
 `details.figs` fold. Tables there are drawn by `SIR.table(id, cols, rows)` in

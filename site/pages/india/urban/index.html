@@ -1,0 +1,121 @@
+<!--page {"title": "Urban, All India", "description": "How many names rural, mixed and urban districts lost, state by state, with each district's urban share taken from the 2011 Census.", "place": "india"} -->
+<main id="main">
+<div class="page-head" data-no-i18n><h1>Urban</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only. Every figure on it comes from the state pages, which link each figure to its source, and from the 2011 Census.</p>
+
+<article class="urban" lang="en" dir="ltr" data-no-i18n>
+  <div class="kpis" id="kpis"></div>
+
+  <h2>Rural, mixed and urban districts</h2>
+  <p class="sub">Each district is placed by the share of its people who lived in towns at the 2011 Census, the last count by district. A district is rural when fewer than 20 in every 100 lived in towns, mixed from 20 to 50, and urban above 50. Mixed districts are the ones with large towns and suburbs beside villages. The chart shows each kind of district's rate as a multiple of its own state's rate, so a dot at 1 means the same rate as the state and a dot at 2 means twice it.</p>
+  <div class="grid">
+    <div class="panel wide" id="pBand">
+      <h3>Each kind of district's rate as a multiple of its state's rate</h3>
+      <div class="vizbox" id="vBand"></div>
+      <p id="nBand"></p>
+    </div>
+  </div>
+  <p class="finding" id="fBand"></p>
+
+  <h2>District by district</h2>
+  <p class="sub">The same comparison for every district, set against the share of its people in towns. A dot above the line at 1 is a district that lost more names than its state as a whole.</p>
+  <div class="grid">
+    <div class="panel wide" id="pUnits">
+      <h3>Each district's rate as a multiple of its state's, against its urban share in 2011</h3>
+      <div class="vizbox" id="vUnits"></div>
+      <p id="nUnits"></p>
+    </div>
+  </div>
+
+  <h2>Without the cities</h2>
+  <p class="sub">The large cities lost the most names in most states, as the cities page shows. The question here is whether the order holds below them, from village districts to districts of small towns. The chart sets the rank correlation between urban share and the rate across every district against the same correlation with the urban districts left out. A value near zero means no relationship.</p>
+  <div class="grid">
+    <div class="panel wide" id="pRho">
+      <h3>Rank correlation between urban share and the rate, with and without urban districts</h3>
+      <div class="vizbox" id="vRho"></div>
+      <p id="nRho"></p>
+    </div>
+  </div>
+
+  <details class="figs"><summary>The figures, state by state</summary>
+    <div class="twrap fit"><table id="tBands"></table></div>
+  </details>
+
+  <h2>How the districts were placed</h2>
+  <p>Many of today's districts did not exist in 2011. Each one is counted under the 2011 district it was mostly made from, and districts made from the same 2011 district are added together, so the units here are the districts of 2011. Palghar, for example, is counted with Thane, and Telangana's 33 districts under the ten it had in 2011. The source for each one, a district website, a government order or the Census's own lists of tehsils, is in the file of parents linked below. The urban share is for the district as it was in 2011, and it will have changed since.</p>
+  <p>Each state is read in its own measure. In Uttar Pradesh, Maharashtra, Tamil Nadu, Gujarat, Karnataka and Telangana it is the names left off the draft per 100 on the roll before. Telangana's district figures are the state's as reported in the press. In Bihar it is both phases per 100 on the 2025 roll. West Bengal and Kerala published no removals below the state, so there it is the fall in the roll, which takes in ordinary deaths and moves too. Delhi is left out because it is a single, almost wholly urban unit. Rajasthan is left out because its district figure is a change over two years across a split of districts, and Uttarakhand because it counted below the state only after the draft.</p>
+  <p class="note">The tables behind this page download as <a href="../../data/india/urban.csv" download>CSV</a>. The 2011 parent of every district, with its source, is <a href="../../data/india/district_2011_parent.csv" download>here</a>.</p>
+
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</article>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/india.js"></script>
+<script>
+SIR.json('data/india/urban.json').then(function (d) {
+  var S = d.states, X = d.summary, p1 = function (x) { return SIR.d(x, 1); }, p2 = function (x) { return SIR.d(x, 2); };
+  var list = function (a) { return a.join(', ').replace(/, ([^,]*)$/, ' and $1'); };
+  var B = function (s, b) { return s.bands.filter(function (x) { return x.band === b; })[0]; };
+  var both = S.filter(function (s) { return s.urban_over_rural != null; });
+  var up = both.filter(function (s) { return s.urban_over_rural > 1; }), down = both.filter(function (s) { return s.urban_over_rural <= 1; });
+  var top = both.slice().sort(function (a, b) { return b.urban_over_rural - a.urban_over_rural; })[0];
+  var mixUp = S.filter(function (s) { return s.mixed_over_rural > 1; }), mixDown = S.filter(function (s) { return s.mixed_over_rural != null && s.mixed_over_rural <= 1; });
+  var keep = S.filter(function (s) { return s.rho_no_urban >= 0.2; });
+  var MEAS = { left_off: 'names left off per 100 on the roll before', roll_2025: 'names removed per 100 on the 2025 roll', fall: 'fall in the roll per 100' };
+
+  SIR.inShort([
+    'In ' + up.length + ' of the ' + both.length + ' states with both kinds of district, urban districts lost more names for their size than rural ones. In ' + top.state + ' the urban districts\' rate was ' + p1(top.urban_over_rural) + ' times the rural districts\'.',
+    'Mixed districts, with large towns and suburbs beside villages, lost more than rural districts in ' + mixUp.length + ' of ' + S.length + ' states.',
+    'With the urban districts left out, the more urban districts still lost more in ' + list(keep.map(function (s) { return s.state; })) + '. In the other states the order is set mostly by the cities.',
+    down.map(function (s) { return 'In ' + s.state + ' rural districts lost more for their size than urban ones.'; }).concat(mixDown.filter(function (s) { return down.indexOf(s) < 0; }).map(function (s) { return 'In ' + s.state + ' mixed districts lost fewer than rural ones' + (X.no_urban.indexOf(s.state) >= 0 ? ', and no district counts as urban.' : '.'); })).join(' ')
+  ], 'Urban share is from the 2011 Census, the last count by district, and it will have changed since. Each state is read in its own measure, and West Bengal and Kerala count the fall in the roll.');
+
+  document.getElementById('kpis').innerHTML = [
+    [up.length + ' of ' + both.length, 'states where urban districts lost more names for their size than rural ones'],
+    [mixUp.length + ' of ' + S.length, 'states where mixed districts lost more than rural ones'],
+    [p1(top.urban_over_rural) + ' times', 'the urban rate against the rural, in ' + top.state],
+    [X.units, 'districts of 2011, holding ' + X.districts + ' of today\'s']
+  ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+
+  var NAMES = { rural: 'Rural districts', mixed: 'Mixed districts', urban: 'Urban districts' }, TOK = { rural: '--fill-grey', mixed: '--fill-amber', urban: '--fill-red' };
+  VIZ.dots('vBand', { label: "Each kind of district's rate as a multiple of its own state's rate", axis: "Multiple of the state's rate",
+    cats: S.map(function (s) { return s.state; }),
+    series: ['rural', 'mixed', 'urban'].map(function (b) { return { name: NAMES[b], col: TOK[b], vals: S.map(function (s) { return B(s, b).times_state; }) }; }) });
+  document.getElementById('nBand').textContent = 'West Bengal and Kerala are measured by the fall in the roll and Bihar by both phases on the 2025 roll. The multiple compares each kind of district with its own state, so the states can be read side by side without setting their levels against each other.';
+  document.getElementById('fBand').innerHTML = '<b>In ' + up.length + ' of ' + both.length + ' states, urban districts lost more names for their size than rural ones.</b> ' +
+    'The gap was widest in ' + top.state + ', where urban districts lost ' + p1(B(top, 'urban').per_100) + ' per 100 and rural ones ' + p1(B(top, 'rural').per_100) + '. The table below gives every state. ' +
+    down.map(function (s) { return 'In ' + s.state + ' urban districts lost ' + p1(B(s, 'urban').per_100) + ' per 100 and rural ones ' + p1(B(s, 'rural').per_100) + '.'; }).join(' ');
+
+  var pts = [];
+  d.units.forEach(function (u) {
+    var s = S.filter(function (x) { return x.state === u.state; })[0];
+    pts.push({ x: u.urban_pct, y: Math.round(100 * u.per_100 / s.per_100) / 100, tok: TOK[u.band],
+      label: u.unit + ', ' + u.state + (u.districts.length > 1 || u.districts[0] !== u.unit ? ' (today ' + u.districts.join(', ') + ')' : '') + ': ' + p1(u.urban_pct) + '% urban in 2011, ' + p2(u.per_100) + ' per 100, ' + p2(u.per_100 / s.per_100) + ' times the state' });
+  });
+  VIZ.scatter('vUnits', { label: "Each 2011 district's rate as a multiple of its state's, against the share of its people in towns in 2011", xMin: 0, yMin: 0, refY: 1,
+    xAxis: 'Share of people living in towns, 2011, per cent', yAxis: "Multiple of the state's rate",
+    key: [['Rural', TOK.rural], ['Mixed', TOK.mixed], ['Urban', TOK.urban]], points: pts });
+  var hi = d.units.filter(function (u) { return u.band === 'rural'; }).map(function (u) { var s = S.filter(function (x) { return x.state === u.state; })[0]; return { u: u, r: u.per_100 / s.per_100 }; }).sort(function (a, b) { return b.r - a.r; });
+  var below = function (b) { var us = d.units.filter(function (u) { return u.band === b; }); return [us.filter(function (u) { return u.per_100 < S.filter(function (x) { return x.state === u.state; })[0].per_100; }).length, us.length]; };
+  var bR = below('rural'), bM = below('mixed'), bU = below('urban');
+  document.getElementById('nUnits').textContent = 'Hover over or tap a dot for its district. ' + bR[0] + ' of ' + bR[1] + ' rural districts and ' + bM[0] + ' of ' + bM[1] + ' mixed ones lost fewer names than their state as a whole, and ' + (bU[1] - bU[0]) + ' of ' + bU[1] + ' urban ones lost more. The rural district furthest above it is ' + hi[0].u.unit + ' in ' + hi[0].u.state + ', at ' + p1(hi[0].r) + ' times its state\'s rate.';
+
+  VIZ.dots('vRho', { label: 'Rank correlation between urban share and the rate, with and without urban districts', axis: 'Rank correlation',
+    cats: S.map(function (s) { return s.state; }),
+    series: [{ name: 'Every district', col: '--fill-navy', vals: S.map(function (s) { return s.rho; }) }, { name: 'Rural and mixed districts only', col: '--fill-amber', vals: S.map(function (s) { return s.rho_no_urban; }) }] });
+  var lose = S.filter(function (s) { return s.rho >= 0.2 && s.rho_no_urban < 0.2; });
+  document.getElementById('nRho').textContent = 'In ' + list(keep.map(function (s) { return s.state; })) + ' the more urban districts lost more names even among rural and mixed districts. ' +
+    (lose.length ? 'In ' + list(lose.map(function (s) { return s.state; })) + ' the relationship rests on the urban districts and falls under 0.2 without them. ' : '') +
+    'A rank correlation under 0.2 is treated here as no relationship.';
+
+  SIR.table('tBands', [{ h: 'State' }, { h: 'Kind of district' }, { h: 'Districts of 2011', num: true }, { h: 'Rate per 100', num: true }, { h: 'Times the state', num: true }, { h: 'Share of the roll', num: true }, { h: 'Share of the count', num: true }, { h: 'Measure' }],
+    [].concat.apply([], S.map(function (s) {
+      return s.bands.filter(function (b) { return b.units; }).map(function (b) {
+        return [SIR.esc(s.state), b.band.charAt(0).toUpperCase() + b.band.slice(1), b.units, p2(b.per_100), p2(b.times_state), p1(b.share_of_roll) + '%', p1(b.share_of_removed) + '%', MEAS[s.measure]];
+      });
+    })));
+  SIR.showFaq('india', 'urban');
+}).catch(SIR.fail);
+</script>
