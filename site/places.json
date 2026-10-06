@@ -20,16 +20,16 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "india",
-      "nav_label": "All India pages", "menu": [["india/numbers/", "In numbers"], ["india/cities/", "Cities"], ["india/women/", "Women"], ["india/compare/", "Comparisons"], ["india/process/", "Rules and dates"], ["india/progress/", "Progress"]],
+      "nav_label": "All India pages", "menu": [["india/numbers/", "Numbers"], ["india/cities/", "Cities"], ["india/women/", "Women"], ["india/compare/", "Comparisons"], ["india/process/", "Rules"], ["india/progress/", "Progress"]],
       "pages": [
         ["india/", "Overview", "i0"],
-        ["india/numbers/", "In numbers", "i11"],
+        ["india/numbers/", "Numbers", "i11"],
         ["india/cities/", "Cities", "i7"],
         ["india/women/", "Women", "i3"],
         ["india/compare/", "Comparisons", "i5"],
-        ["india/process/", "Rules and dates", "i15"], ["india/progress/", "Progress", "i15"], ["india/method/", "Sources and method", "i10"],
-        ["india/faq/", "FAQ", "i12"],
-        ["india/report/", "Full report", "i13"]
+        ["india/process/", "Rules", "i15"], ["india/progress/", "Progress", "i15"], ["india/method/", "Method", "i10"],
+        ["india/faq/", "Questions", "i12"],
+        ["india/report/", "Report", "i13"]
       ],
       "downloads": [
         ["india/report/", "Full report, online", false],
@@ -48,17 +48,17 @@
       "class": "bihar",
       "nav_label": "Bihar pages",
       "dash": "bihar/",
-      "tabs": [["overview", "Overview", "i0"], ["deletions", "Deletions", "i1"], ["reasons", "Reasons", "i16"], ["phases", "Phases", "i2"], ["gender", "Gender", "i3"], ["caste", "Caste", "i4"], ["religion", "Religion", "i5"], ["electoral", "Electoral", "i6"], ["geographic", "Geographic", "i7"], ["economic", "Economic", "i8"], ["research", "Research", "i9"], ["methodology", "Methods", "i10"]],
+      "tabs": [["overview", "Overview", "i0"], ["deletions", "Deletions", "i1"], ["reasons", "Reasons", "i16"], ["phases", "Phases", "i2"], ["gender", "Women", "i3"], ["caste", "Caste", "i4"], ["religion", "Religion", "i5"], ["electoral", "Elections", "i6"], ["geographic", "Geography", "i7"], ["economic", "Economy", "i8"], ["research", "Research", "i9"], ["methodology", "Method", "i10"]],
       "pages": [
-        ["bihar/", "Dashboard", "i0"],
-        ["bihar/explorer/", "Booth explorer", "i9"],
+        ["bihar/", "Overview", "i0"],
+        ["bihar/explorer/", "Explorer", "i9"],
         ["bihar/results/", "Elections", "i6"],
-        ["bihar/people/", "Women, religion, caste", "i3"],
+        ["bihar/people/", "People", "i3"],
         ["bihar/border/", "Border", "i7"],
         ["bihar/districts/", "Districts", "i11"],
-        ["bihar/faq/", "FAQ", "i12"],
+        ["bihar/faq/", "Questions", "i12"],
         ["bihar/method/", "Method", "i10"],
-        ["bihar/report/", "Full report", "i13"]
+        ["bihar/report/", "Report", "i13"]
       ],
       "downloads": [
         ["bihar/report/", "Full report, online", false],
@@ -77,17 +77,17 @@
       "class": "hyd",
       "nav_label": "Hyderabad pages",
       "dash": "hyderabad/",
-      "tabs": [["overview", "Overview", "i0"], ["deletions", "Deletions", "i1"], ["age", "Age and sex", "i3"], ["religion", "Religion", "i5"], ["link", "2002 link", "i14"], ["hearings", "Hearings", "i15"], ["parts", "Polling parts", "i11"], ["electoral", "Electoral", "i6"], ["research", "Research", "i9"], ["methodology", "Methods", "i10"]],
+      "tabs": [["overview", "Overview", "i0"], ["deletions", "Deletions", "i1"], ["age", "Age", "i3"], ["religion", "Religion", "i5"], ["link", "Linkage", "i14"], ["hearings", "Hearings", "i15"], ["parts", "Parts", "i11"], ["electoral", "Elections", "i6"], ["research", "Research", "i9"], ["methodology", "Method", "i10"]],
       "pages": [
-        ["hyderabad/", "Dashboard", "i0"],
-        ["hyderabad/explorer/", "Part explorer", "i9"],
-        ["hyderabad/people/", "Age, sex, religion, 2002", "i3"],
-        ["hyderabad/parts/", "Polling parts", "i11"],
+        ["hyderabad/", "Overview", "i0"],
+        ["hyderabad/explorer/", "Explorer", "i9"],
+        ["hyderabad/people/", "People", "i3"],
+        ["hyderabad/parts/", "Parts", "i11"],
         ["hyderabad/hearings/", "Hearings", "i15"],
-        ["hyderabad/telangana/", "Hyderabad and Telangana", "i7"],
-        ["hyderabad/faq/", "FAQ", "i12"],
+        ["hyderabad/telangana/", "Statewide", "i7"],
+        ["hyderabad/faq/", "Questions", "i12"],
         ["hyderabad/method/", "Method", "i10"],
-        ["hyderabad/report/", "Full report", "i13"]
+        ["hyderabad/report/", "Report", "i13"]
       ],
       "downloads": [
         ["hyderabad/report/", "Full report, online", false],
@@ -108,7 +108,7 @@
       "pages": [
         ["tamilnadu/", "Overview", "i0"],
         ["tamilnadu/elections/", "Elections", "i6"],
-        ["tamilnadu/faq/", "FAQ", "i12"],
+        ["tamilnadu/faq/", "Questions", "i12"],
         ["tamilnadu/method/", "Method", "i10"]
       ],
       "downloads": [
@@ -128,7 +128,7 @@
       "nav_label": "Karnataka pages",
       "pages": [
         ["karnataka/", "Overview", "i0"],
-        ["karnataka/faq/", "FAQ", "i12"],
+        ["karnataka/faq/", "Questions", "i12"],
         ["karnataka/method/", "Method", "i10"]
       ],
       "downloads": [
@@ -148,7 +148,7 @@
       "pages": [
         ["westbengal/", "Overview", "i0"],
         ["westbengal/elections/", "Elections", "i6"],
-        ["westbengal/faq/", "FAQ", "i12"],
+        ["westbengal/faq/", "Questions", "i12"],
         ["westbengal/method/", "Method", "i10"]
       ],
       "downloads": [
@@ -169,7 +169,7 @@
       "pages": [
         ["kerala/", "Overview", "i0"],
         ["kerala/elections/", "Elections", "i6"],
-        ["kerala/faq/", "FAQ", "i12"],
+        ["kerala/faq/", "Questions", "i12"],
         ["kerala/method/", "Method", "i10"]
       ],
       "downloads": [
@@ -189,7 +189,7 @@
       "nav_label": "Rajasthan pages",
       "pages": [
         ["rajasthan/", "Overview", "i0"],
-        ["rajasthan/faq/", "FAQ", "i12"],
+        ["rajasthan/faq/", "Questions", "i12"],
         ["rajasthan/method/", "Method", "i10"]
       ],
       "downloads": [
@@ -207,7 +207,7 @@
       "nav_label": "Uttar Pradesh pages",
       "pages": [
         ["uttarpradesh/", "Overview", "i0"],
-        ["uttarpradesh/faq/", "FAQ", "i12"],
+        ["uttarpradesh/faq/", "Questions", "i12"],
         ["uttarpradesh/method/", "Method", "i10"]
       ],
       "downloads": [
@@ -224,7 +224,7 @@
       "nav_label": "Delhi pages",
       "pages": [
         ["delhi/", "Overview", "i0"],
-        ["delhi/faq/", "FAQ", "i12"],
+        ["delhi/faq/", "Questions", "i12"],
         ["delhi/method/", "Method", "i10"]
       ],
       "downloads": [
@@ -242,7 +242,7 @@
       "nav_label": "Maharashtra pages",
       "pages": [
         ["maharashtra/", "Overview", "i0"],
-        ["maharashtra/faq/", "FAQ", "i12"],
+        ["maharashtra/faq/", "Questions", "i12"],
         ["maharashtra/method/", "Method", "i10"]
       ],
       "downloads": [
@@ -260,7 +260,7 @@
       "pages": [
         ["gujarat/", "Overview", "i0"],
         ["gujarat/elections/", "Elections", "i6"],
-        ["gujarat/faq/", "FAQ", "i12"],
+        ["gujarat/faq/", "Questions", "i12"],
         ["gujarat/method/", "Method", "i10"]
       ],
       "downloads": [
@@ -278,7 +278,7 @@
       "nav_label": "Uttarakhand pages",
       "pages": [
         ["uttarakhand/", "Overview", "i0"],
-        ["uttarakhand/faq/", "FAQ", "i12"],
+        ["uttarakhand/faq/", "Questions", "i12"],
         ["uttarakhand/method/", "Method", "i10"]
       ],
       "downloads": [
