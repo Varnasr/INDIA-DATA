@@ -588,3 +588,9 @@ main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
   .controls .theme,.controls .print{padding-inline:.7rem}
   .controls{margin-inline-start:auto;justify-content:flex-end}
 }
+/* stage chips on india/progress/ */
+.stage{display:inline-block;font-size:.8rem;font-weight:600;padding:1px 8px;border-radius:4px;line-height:1.5}
+.stage.done{background:var(--fill-navy);color:#fff}
+.stage.late{background:var(--fill-red);color:#fff}
+.stage.now{background:#f5b041;color:#1c2833}
+.stage.wait{background:transparent;color:var(--ink);border:1px solid var(--muted)}

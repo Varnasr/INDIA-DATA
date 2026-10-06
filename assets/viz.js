@@ -292,6 +292,7 @@
     var D = function (iso) { return iso ? Date.parse(iso + 'T00:00:00Z') : null; };
     var all = [];
     o.rows.forEach(function (r) { r.steps.forEach(function (st) { [st.draft, st.final, st.claims_end].concat(st.enum || [], st.claims || []).forEach(function (d) { if (d) all.push(D(d)); }); }); });
+    if (o.today) all.push(D(o.today));
     var t0 = Math.min.apply(null, all), t1 = Math.max.apply(null, all);
     var m0 = new Date(t0); m0 = Date.UTC(m0.getUTCFullYear(), m0.getUTCMonth(), 1);
     var m1 = new Date(t1); m1 = Date.UTC(m1.getUTCFullYear(), m1.getUTCMonth() + 1, 1);
@@ -316,7 +317,14 @@
       if (k[0] === 'dia') el('path', { d: 'M' + kx + ' ' + (ky - 5) + 'l5 5-5 5-5-5z', style: fill(k[1]) }, s);
       el('text', { x: kx + 12, y: ky, 'dominant-baseline': 'middle', class: 'vval' }, s, k[2]);
     });
-    if (!ph) el('text', { x: W - 10, y: 14, 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval' }, s, 'Faint lines are schedules later replaced');
+    if (!ph && !o.single) el('text', { x: W - 10, y: 14, 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval' }, s, 'Faint lines are schedules later replaced');
+    // o.today: a dated line down the whole chart (the date the page's data
+    // were last checked), drawn under the rows
+    if (o.today) {
+      var tx = x(D(o.today));
+      el('line', { x1: tx, x2: tx, y1: leg - 4, y2: H - 24, class: 'vzero' }, s);
+      el('text', { x: tx - 4, y: leg - 8, 'text-anchor': 'end', class: 'vval' }, s, o.todayLabel || SIR.date(o.today));
+    }
     var y = leg;
     o.rows.forEach(function (r, ri) {
       var h = heights[ri];

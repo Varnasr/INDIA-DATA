@@ -1,0 +1,92 @@
+<!--page {"title": "Where the SIR stands: every state's progress", "description": "Where the Special Intensive Revision has reached in each of the 32 states and union territories: the draft roll, the claims and hearings, and the final roll, as set and as published.", "place": "india"} -->
+<main id="main">
+<div class="page-head"><h1>Where the revision stands</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
+
+<article class="process" lang="en" dir="ltr" data-no-i18n>
+  <div class="kpis" id="kpis"></div>
+
+  <h2>How a revision moves</h2>
+  <p>Each state goes through the same five steps. Booth level officers first visit every household and collect an enumeration form for each elector, the stage called enumeration. The names of electors whose forms came back make up the draft roll, and the names that did not are left off it. Anyone can then claim to be added (Form 6) or object to a name (Form 7) during the claims and objections period, while electors the Commission could not link to an older roll are sent notices and heard. The final roll closes the revision. A state's stage below is worked out from the latest schedule we hold and from the rolls each Chief Electoral Officer has actually published, as of <span class="asof"></span>.</p>
+
+  <h2>Every state on one calendar</h2>
+  <p class="sub">One row for each state or union territory, on its latest schedule. The navy bar is the house-to-house visits, the dot the draft roll, the amber bar the claims and objections period and the red diamond the final roll. Where a final roll has been published, the diamond is drawn on the day it came out. The vertical line marks the date this page was last checked against the documents. Hover over or tap a row for its dates.</p>
+  <div class="grid"><div class="panel wide" id="pCal"><div class="vizbox" id="vCal"></div></div></div>
+  <p class="note" id="nCal"></p>
+
+  <h2>State by state</h2>
+  <p class="sub">States with an analysis of their own on this site are linked to it. The others are linked to their dates on the page about how the revision was run.</p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Where each state stands"><table id="tStage"></table></div>
+  <p class="note" id="nOut"></p>
+  <p class="note">The dates come from the Election Commission's orders and the states' press notes, and the final rolls from <a href="../../data/india/final_rolls.csv">final_rolls.csv</a>. Every date and its document are on <a href="../process/">how the revision was run</a>, and can be downloaded as <a href="../../data/india/process_schedules.csv">process_schedules.csv</a>.</p>
+</article>
+
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/viz.js"></script>
+<script>
+Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.json')]).then(function (r) {
+  var P = r[0], S = {}, E = SIR.esc, asof = P.as_of;
+  r[1].states.forEach(function (s) { S[s.state] = s; });
+  var PAGE = { 'Bihar': 'bihar/', 'Telangana': 'hyderabad/telangana/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Rajasthan': 'rajasthan/', 'Uttar Pradesh': 'uttarpradesh/', 'Delhi': 'delhi/' };
+  var key = function (s) { return 's-' + s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
+  var within = function (a, b) { return a && b && a <= asof && asof <= b; };
+  // one schedule per state: each date taken from the latest step that gives it,
+  // then the draft and final rolls as the state actually published them
+  var rows = P.schedules.map(function (sc) {
+    var m = { enum: null, draft: null, claims: null, claims_end: null, notice: null, final: null };
+    sc.steps.forEach(function (st) { Object.keys(m).forEach(function (k) { if (st[k]) m[k] = st[k]; }); });
+    var s = S[sc.state] || {};
+    if (s.draft_date) m.draft = s.draft_date;
+    // a final roll counts as published when its figures are held, even where
+    // the day it came out was not found (Chandigarh)
+    var pub = s.electors_final != null, pubDate = s.final_date || null;
+    if (pubDate) m.final = pubDate;
+    var claimsTo = m.claims ? m.claims[1] : m.claims_end;
+    var st, cls;
+    if (pub) { st = 'Final roll published'; cls = 'done'; }
+    else if (m.final && m.final < asof) { st = 'Final roll was due ' + SIR.date(m.final) + ', not yet found'; cls = 'late'; }
+    else if (!s.removed && m.draft && m.draft < asof) { st = 'Draft roll was due ' + SIR.date(m.draft) + ', not yet found'; cls = 'late'; }
+    else if (!s.removed) { st = m.enum && m.enum[0] && m.enum[0] <= asof ? 'House-to-house visits' : 'Not yet begun'; cls = 'wait'; }
+    else if (within(m.claims && m.claims[0], claimsTo)) { st = 'Claims and objections'; cls = 'now'; }
+    else if (m.notice && within(m.notice[0], m.notice[1])) { st = 'Notices and hearings'; cls = 'now'; }
+    else { st = 'Draft published, final roll due ' + (m.final ? SIR.date(m.final) : 'on a date not yet set'); cls = 'now'; }
+    return { state: sc.state, phase: sc.phase, m: m, pub: pub, pubDate: pubDate, stage: st, cls: cls };
+  });
+  var ord = { I: 1, II: 2, III: 3 };
+  rows.sort(function (a, b) { return ord[a.phase] - ord[b.phase] || (a.m.final || '9').localeCompare(b.m.final || '9') || a.state.localeCompare(b.state); });
+  var n = function (c) { return rows.filter(function (x) { return x.cls === c; }).length; };
+  var done = n('done'), late = rows.filter(function (x) { return x.cls === 'late' && /^Final/.test(x.stage); }), now = n('now'), wait = n('wait') + rows.filter(function (x) { return x.cls === 'late' && /^Draft/.test(x.stage); }).length;
+
+  SIR.inShort([
+    done + ' of the ' + rows.length + ' states and union territories in the revision had published a final roll by ' + SIR.date(asof) + '.',
+    late.length ? late.length + ' had passed the date their latest schedule set for the final roll without one that we could find: ' + late.map(function (x) { return x.state; }).join(', ') + '.' : '',
+    now ? now + ' had published a draft roll and were still taking claims, hearing notices or waiting for the final roll on a later date.' : '',
+    wait ? wait + ' had not yet published a draft roll.' : '',
+    'Assam had a different kind of revision, and Himachal Pradesh, Jammu and Kashmir and Ladakh have no schedule yet.'
+  ], 'A stage is worked out from the latest schedule we could read and the rolls we could find. A state may have published a roll that has not reached us, so a late stage means the roll was not found, and says nothing about why.');
+
+  document.getElementById('kpis').innerHTML = [
+    [done, 'final rolls published'], [late.length, 'final rolls past their latest date'], [now, 'drafts out, final roll still to come'], [wait, 'no draft roll yet']
+  ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+  [].forEach.call(document.querySelectorAll('.asof'), function (e) { e.textContent = SIR.date(asof); });
+
+  VIZ.gantt('vCal', { label: 'Every state on its latest schedule, with the date this page was checked', single: true, today: asof, todayLabel: 'Checked ' + SIR.date(asof),
+    rows: rows.map(function (x) { return { name: x.state, steps: [{ label: x.pub ? (x.pubDate ? 'Final roll published ' + SIR.date(x.pubDate) : 'Final roll published, day not found') : 'Latest schedule', enum: x.m.enum, draft: x.m.draft, claims: x.m.claims, claims_end: x.m.claims_end, final: x.m.final }] }; }) });
+  document.getElementById('nCal').textContent = P.notes.p3later;
+
+  var link = function (s) { return '<a href="../../' + (PAGE[s] || 'india/process/#' + key(s)) + '">' + E(s) + '</a>'; };
+  document.getElementById('tStage').innerHTML = '<thead><tr><th class="l">State or union territory</th><th>Phase</th><th>Draft roll</th><th>Final roll</th><th class="l">Stage</th></tr></thead><tbody>' +
+    rows.map(function (x) {
+      return '<tr><td class="l">' + link(x.state) + '</td><td>' + x.phase + '</td><td>' + (S[x.state] && S[x.state].removed ? SIR.date(x.m.draft) : 'not yet') + '</td><td>' +
+        (x.pub ? (x.pubDate ? SIR.date(x.pubDate) : 'published, day not found') : x.m.final ? 'due ' + SIR.date(x.m.final) : '') + '</td><td class="l"><span class="stage ' + x.cls + '">' + E(x.stage) + '</span></td></tr>';
+    }).join('') + '</tbody>';
+  document.getElementById('nOut').textContent = 'Not in the table: Assam, which was given a special revision in place of an intensive one, and Himachal Pradesh, Jammu and Kashmir and Ladakh, whose dates the Commission said it would announce later.';
+  SIR.tools();
+}).catch(SIR.fail);
+</script>
+<script src="../../assets/faq/india.js"></script>
+<script>SIR.showFaq('india', 'progress');</script>

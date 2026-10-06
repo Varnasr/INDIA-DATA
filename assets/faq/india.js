@@ -35,6 +35,12 @@
          L('The adult figures are population projections, which count people where they live. A state that draws migrants counts them as residents while many are still registered to vote in their home states, so its roll looks short.'), ['method']],
         [L('Does this show that the removals were intended to change results?'),
          L('No list of removals can show intent. The lists show where the removals fell, who was removed and how the numbers compare with the margins. They cannot show whose votes these were or whether each removal was right.'), ['main', 'method']],
+        [L('What does "not yet found" mean for a final roll?'),
+         L('That the latest schedule we could read set a date for the final roll, the date has passed, and we have not found the roll published. The Commission may have moved the date in an order we have not read, or the state may have published the roll where we have not looked. It says nothing about why a roll is late.'), ['progress', 'faq']],
+        [L('Which states are not in the revision?'),
+         L('Assam was given a special revision in place of an intensive one. Himachal Pradesh, Jammu and Kashmir and Ladakh were left out of the order, which said their dates would be announced later. Every other state and union territory is in it.'), ['progress', 'faq']],
+        [L('Where do the dates come from?'),
+         L('From the Election Commission\'s orders and the states\' own press notes, each listed with its document on the page about <a href="../process/">how the revision was run</a>. Where a state has published its final roll, the date it came out replaces the date it was due.'), ['progress', 'faq']],
         [L('Can I look up my own name here?'),
          L('No. Only counts are published on this site. To check your own entry, use the Election Commission\'s voter search.'), ['main']]
       ];
