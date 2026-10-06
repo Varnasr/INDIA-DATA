@@ -168,8 +168,10 @@ every event linked to the paper's article. It is press, so it says on the
 page that the paper has seen the notes and the site has not, and nothing in
 it moves into the timeline above without its document. The quote and page in
 the Express Plus special issue (October 2026) behind every event are in
-`data/india/raw/process_research/inside.json`. The issue itself is not on the
-site. The paper's own counts (14 objections, Goa's eight messages and 97
+`data/india/raw/process_research/inside.json`. The issue itself, which the
+paper released free, is `reports/indian-express-plus-election-commission-2026-10.pdf`,
+linked under the list with a line that it is the paper's and outside the site's
+licence; `terms/` says the same. The paper's own counts (14 objections, Goa's eight messages and 97
 electors) are in `inside.goa` and the prose, never counted from the markers,
 which show only the dated ones.
 
