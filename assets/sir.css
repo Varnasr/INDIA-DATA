@@ -803,7 +803,7 @@ html[data-lang]:not([data-lang="en"]) :is(main h1,main h2,main h3,.summary-value
    so the display sizes come down, nothing is set in italics or capitals,
    and lines get more room. */
 html.dyslexic-font body{line-height:1.8;word-spacing:.08em}
-html.dyslexic-font :is(.kicker,.toc-h,th){text-transform:none;letter-spacing:.02em}
+html.dyslexic-font :is(.kicker,.toc-h,th,details.figs>summary){text-transform:none;letter-spacing:.02em}
 html.dyslexic-font .page-head h1,html.dyslexic-font .hero h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.2;letter-spacing:0}
 html.dyslexic-font main h2{font-size:1.5rem;line-height:1.3;letter-spacing:0}
 html.dyslexic-font :is(.summary-value,.kpis b,.hub .n){font-size:1.6rem;letter-spacing:0}
@@ -817,3 +817,42 @@ html[data-lang]:not([data-lang="en"]) ol.summary li::before{font-family:inherit}
 /* the report cover's figures: long Indian-grouped numbers stay inside their box */
 .report .cover dt{font-family:var(--serif);font-size:clamp(1.15rem,4.2vw,1.6rem);line-height:1.15;overflow-wrap:anywhere}
 @media (max-width:520px){.report .cover dl{grid-template-columns:minmax(0,1fr)}}
+
+/* SIR.table: a table of figures at a readable width on a desktop, numbers in
+   aligned columns, and one card per row on a phone with each figure named */
+.twrap.fit{max-width:min(100%,52rem);margin:1.2rem auto}
+table.stack{width:100%}
+table.stack th,table.stack td{padding:.55rem .7rem;vertical-align:top}
+table.stack th:not(.num),table.stack td:not(.num){text-align:start}
+table.stack .num{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.stack td:first-child{font-weight:600}
+table.stack td small{display:block;font-weight:400;color:var(--muted);font-size:.8rem;margin-top:.1rem}
+details.figs{max-width:min(100%,52rem);margin:.4rem auto 1.4rem}
+details.figs>summary{cursor:pointer;font-family:var(--mono);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:.4rem 0}
+details.figs>summary:hover{color:var(--ink)}
+@media (max-width:600px){
+  .twrap.fit{overflow:visible}
+  table.stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  table.stack,table.stack tbody,table.stack tr,table.stack td{display:block;width:auto}
+  table.stack tr{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.5rem .8rem;margin:0 0 .6rem}
+  table.stack td,table.stack .num{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.3rem 0;border:0;text-align:end;white-space:normal;position:static;background:none}
+  table.stack td::before{content:attr(data-label);flex:1 1 auto;text-align:start;color:var(--muted);font-size:.8rem;font-weight:400}
+  table.stack td:first-child{display:block;text-align:start;font-size:1rem;padding:.1rem 0 .45rem;margin-bottom:.25rem;border-bottom:1px solid var(--line)}
+  table.stack td:first-child::before{content:none}
+  table.stack td:first-child small{display:inline;margin-inline-start:.3rem}
+  html.dyslexic-font table.stack td::before{font-size:.85rem}
+}
+
+/* the places menu folds: a place's own pages and the 2026 states each sit
+   under a heading that opens on a tap, and opens by itself on its own pages */
+.places .menu>div{display:flex;flex-direction:column}
+.places .menu details.grp>summary{list-style:none;cursor:pointer;padding:.6rem .75rem;border-radius:7px;font-size:.9rem;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.places .menu details.grp>summary::-webkit-details-marker{display:none}
+.places .menu details.grp>summary::after{content:"";width:.45rem;height:.45rem;border-inline-end:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-top:-.2rem;transition:transform .15s}
+.places .menu details.grp[open]>summary::after{transform:rotate(225deg);margin-top:.2rem}
+.places .menu details.grp>summary:hover,.places .menu details.grp>summary:focus-visible{background:var(--soft)}
+.places .menu details.grp .sub{display:flex;flex-direction:column;border-inline-start:2px solid var(--line);margin:0 0 .3rem .9rem}
+.places .menu details.grp .sub a{font-size:.85rem;padding:.45rem .75rem}
+/* the phone header turns every summary into a 40px icon button; the menu's
+   group headings are rows of text and keep their own size */
+.controls .places .menu details.grp>summary{width:auto;height:auto;padding:.6rem .75rem;justify-content:space-between;border-radius:7px;font-size:.9rem;border:0;background:transparent}

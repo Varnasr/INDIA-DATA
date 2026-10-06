@@ -1,0 +1,602 @@
+{
+ "summary": {
+  "states": 11,
+  "over": 8,
+  "over_1": 7,
+  "top": "Bihar",
+  "top_gap": 7.6,
+  "delhi_w": 29.9,
+  "delhi_m": 35.3,
+  "district_over": 85,
+  "district_n": 89,
+  "uk_acs_over": 63,
+  "kl_acs_over": 131
+ },
+ "states": [
+  {
+   "state": "Bihar",
+   "quality": "lists",
+   "phase": "1",
+   "source_url": "",
+   "note": "Counted from the phase 1 deletion lists. The roll before the revision by sex is the draft roll by sex (Format 4B) plus the names removed at the draft by sex.",
+   "share_roll": 47.86,
+   "share_removed": 55.49,
+   "gap": 7.6,
+   "women_per_100": 9.6,
+   "men_per_100": 7.1,
+   "ratio": 1.36
+  },
+  {
+   "state": "Odisha",
+   "quality": "exact",
+   "phase": "3",
+   "source_url": "https://www.etvbharat.com/en/state/over-20-lakh-voter-names-deleted-after-completion-of-sir-in-odisha-enn26092107667",
+   "note": "Before and draft rolls by sex, from the Chief Electoral Officer; removals add to the total exactly.",
+   "share_roll": 49.44,
+   "share_removed": 56.96,
+   "gap": 7.5,
+   "women_per_100": 6.9,
+   "men_per_100": 5.1,
+   "ratio": 1.35
+  },
+  {
+   "state": "Uttar Pradesh",
+   "quality": "rounded",
+   "phase": "2",
+   "source_url": "https://www.hindustantimes.com/cities/lucknow-news/155-million-vs-13-4-million-names-of-more-women-than-men-deleted-in-uttar-pradesh-draft-electoral-rolls-101768679003877.html",
+   "note": "Chief Electoral Officer's figures in crore: 1.55 crore women and 1.34 crore men removed.",
+   "share_roll": 46.76,
+   "share_removed": 53.63,
+   "gap": 6.9,
+   "women_per_100": 21.5,
+   "men_per_100": 16.3,
+   "ratio": 1.32
+  },
+  {
+   "state": "Madhya Pradesh",
+   "quality": "exact",
+   "phase": "2",
+   "source_url": "https://www.thequint.com/news/politics/madhya-pradesh-special-intensive-revision-sir-male-female-voter-deletion-pattern-sc-st-rural-urban-seats",
+   "note": "Removals by sex as reported; another report gives 19.19 lakh men. The roll share is from the reported sex ratio of 945.",
+   "share_roll": 48.59,
+   "share_removed": 55.33,
+   "gap": 6.7,
+   "women_per_100": 8.5,
+   "men_per_100": 6.5,
+   "ratio": 1.31
+  },
+  {
+   "state": "West Bengal",
+   "quality": "exact",
+   "phase": "2",
+   "source_url": "https://ceowestbengal.wb.gov.in/Downloads/News/Final%20Press%20Note%20CEO-PN-05-2026.pdf",
+   "note": "The roll of 27 October 2025 by sex (press note PN-05-2026) less the draft roll by sex (the Chief Electoral Officer's AC-wise draft table). Another 375 third-gender electors were removed.",
+   "share_roll": 49.23,
+   "share_removed": 53.53,
+   "gap": 4.3,
+   "women_per_100": 8.3,
+   "men_per_100": 7.0,
+   "ratio": 1.19
+  },
+  {
+   "state": "Kerala",
+   "quality": "proxy",
+   "phase": "2",
+   "source_url": "https://www.thehindu.com/news/national/kerala/sir-2408-lakh-voters-out-of-the-draft-roll-in-the-state/article70430490.ece",
+   "note": "The roll before is the January 2025 roll, 39,913 smaller than the roll frozen for the revision.",
+   "share_roll": 51.67,
+   "share_removed": 55.32,
+   "gap": 3.6,
+   "women_per_100": 9.1,
+   "men_per_100": 7.9,
+   "ratio": 1.16
+  },
+  {
+   "state": "Gujarat",
+   "quality": "rounded",
+   "phase": "2",
+   "source_url": "https://timesofindia.indiatimes.com/city/ahmedabad/sir-gujarat-voter-count-drops-by-73-73l-from-5-08cr-to-4-34cr/articleshow/126083258.cms",
+   "note": "Roll before and draft by sex in lakh, from official data as reported.",
+   "share_roll": 48.82,
+   "share_removed": 51.42,
+   "gap": 2.6,
+   "women_per_100": 15.3,
+   "men_per_100": 13.8,
+   "ratio": 1.11
+  },
+  {
+   "state": "Tamil Nadu",
+   "quality": "unverified",
+   "phase": "2",
+   "source_url": "https://m.thewire.in/article/government/70-lakh-names-deleted-sir-concludes-in-tamil-nadu",
+   "note": "Removals by sex from a press analysis that cites no primary source; the draft roll by sex is the Chief Electoral Officer's.",
+   "share_roll": 51.02,
+   "share_removed": 51.34,
+   "gap": 0.3,
+   "women_per_100": 15.3,
+   "men_per_100": 15.1,
+   "ratio": 1.01
+  },
+  {
+   "state": "Karnataka",
+   "quality": "exact",
+   "phase": "3",
+   "source_url": "https://www.newindianexpress.com/states/karnataka/2026/Aug/24/karnataka-sir-draft-electoral-rolls-released-women-outnumber-men",
+   "note": "Frozen roll and draft roll by sex (general electors); removals add to the total exactly.",
+   "share_roll": 50.22,
+   "share_removed": 49.69,
+   "gap": -0.5,
+   "women_per_100": 19.3,
+   "men_per_100": 19.7,
+   "ratio": 0.98
+  },
+  {
+   "state": "Chandigarh",
+   "quality": "exact",
+   "phase": "3",
+   "source_url": "https://theprint.in/india/over-4-60-lakh-electors-registered-as-final-electoral-roll-for-chandigarh-published-after-sir/3050349/",
+   "note": "Roll before (15 July 2026) and draft by sex from the official statement reported by PTI; removals by sex are the difference.",
+   "share_roll": 48.93,
+   "share_removed": 48.34,
+   "gap": -0.6,
+   "women_per_100": 12.7,
+   "men_per_100": 13.0,
+   "ratio": 0.98
+  },
+  {
+   "state": "Delhi",
+   "quality": "exact",
+   "phase": "3",
+   "source_url": "https://www.hindustantimes.com/cities/delhi-news/delhi-sir-narrows-gender-gap-as-voter-roll-shrinks-328-101788200888661.html",
+   "note": "Chief Electoral Officer's statement of the roll before and the draft by sex.",
+   "share_roll": 46.85,
+   "share_removed": 42.77,
+   "gap": -4.1,
+   "women_per_100": 29.9,
+   "men_per_100": 35.3,
+   "ratio": 0.85
+  }
+ ],
+ "districts": [
+  {
+   "state": "Bihar",
+   "measure": "names removed at the draft",
+   "districts": 38,
+   "over": 38,
+   "min_gap": 2.8,
+   "max_gap": 13.7,
+   "rows": [
+    {
+     "district": "Kaimur",
+     "gap": 13.7
+    },
+    {
+     "district": "Kishanganj",
+     "gap": 13.1
+    },
+    {
+     "district": "Buxar",
+     "gap": 12.1
+    },
+    {
+     "district": "Arwal",
+     "gap": 11.2
+    },
+    {
+     "district": "Gopalganj",
+     "gap": 11.0
+    },
+    {
+     "district": "Saran",
+     "gap": 10.1
+    },
+    {
+     "district": "Supaul",
+     "gap": 10.0
+    },
+    {
+     "district": "Siwan",
+     "gap": 9.9
+    },
+    {
+     "district": "Rohtas",
+     "gap": 9.5
+    },
+    {
+     "district": "Sheohar",
+     "gap": 9.4
+    },
+    {
+     "district": "Aurangabad",
+     "gap": 9.1
+    },
+    {
+     "district": "Darbhanga",
+     "gap": 8.8
+    },
+    {
+     "district": "Sheikhpura",
+     "gap": 8.8
+    },
+    {
+     "district": "Bhagalpur",
+     "gap": 8.6
+    },
+    {
+     "district": "Jamui",
+     "gap": 8.5
+    },
+    {
+     "district": "Katihar",
+     "gap": 8.3
+    },
+    {
+     "district": "Samastipur",
+     "gap": 8.2
+    },
+    {
+     "district": "East Champaran",
+     "gap": 7.9
+    },
+    {
+     "district": "Bhojpur",
+     "gap": 7.6
+    },
+    {
+     "district": "Madhepura",
+     "gap": 7.6
+    },
+    {
+     "district": "Saharsa",
+     "gap": 7.5
+    },
+    {
+     "district": "Gaya",
+     "gap": 7.2
+    },
+    {
+     "district": "Purnia",
+     "gap": 7.2
+    },
+    {
+     "district": "West Champaran",
+     "gap": 6.9
+    },
+    {
+     "district": "Khagaria",
+     "gap": 6.8
+    },
+    {
+     "district": "Madhubani",
+     "gap": 6.8
+    },
+    {
+     "district": "Lakhisarai",
+     "gap": 6.7
+    },
+    {
+     "district": "Begusarai",
+     "gap": 6.6
+    },
+    {
+     "district": "Jehanabad",
+     "gap": 6.6
+    },
+    {
+     "district": "Muzaffarpur",
+     "gap": 6.2
+    },
+    {
+     "district": "Araria",
+     "gap": 6.1
+    },
+    {
+     "district": "Sitamarhi",
+     "gap": 5.7
+    },
+    {
+     "district": "Banka",
+     "gap": 5.2
+    },
+    {
+     "district": "Nalanda",
+     "gap": 4.5
+    },
+    {
+     "district": "Vaishali",
+     "gap": 4.5
+    },
+    {
+     "district": "Nawada",
+     "gap": 3.9
+    },
+    {
+     "district": "Patna",
+     "gap": 3.1
+    },
+    {
+     "district": "Munger",
+     "gap": 2.8
+    }
+   ]
+  },
+  {
+   "state": "West Bengal",
+   "measure": "fall in the roll, 2024 roll to the draft",
+   "districts": 24,
+   "over": 21,
+   "min_gap": -7.6,
+   "max_gap": 18.9,
+   "rows": [
+    {
+     "district": "Purbo Medinipur",
+     "gap": 18.9
+    },
+    {
+     "district": "Purulia",
+     "gap": 12.7
+    },
+    {
+     "district": "Bankura",
+     "gap": 11.3
+    },
+    {
+     "district": "Jhargram",
+     "gap": 10.7
+    },
+    {
+     "district": "Paschim Medinipur",
+     "gap": 8.9
+    },
+    {
+     "district": "Kalimpong",
+     "gap": 8.2
+    },
+    {
+     "district": "Uttar Dinajpur",
+     "gap": 7.0
+    },
+    {
+     "district": "Malda",
+     "gap": 6.6
+    },
+    {
+     "district": "South 24 Parganas",
+     "gap": 5.8
+    },
+    {
+     "district": "Birbhum",
+     "gap": 5.7
+    },
+    {
+     "district": "Murshidabad",
+     "gap": 5.5
+    },
+    {
+     "district": "Nadia",
+     "gap": 5.3
+    },
+    {
+     "district": "Alipurduar",
+     "gap": 4.5
+    },
+    {
+     "district": "Coochbehar",
+     "gap": 4.2
+    },
+    {
+     "district": "Dakshin Dinajpur",
+     "gap": 3.7
+    },
+    {
+     "district": "North 24 Parganas",
+     "gap": 2.6
+    },
+    {
+     "district": "Jalpaiguri",
+     "gap": 2.6
+    },
+    {
+     "district": "Purba Bardhaman",
+     "gap": 2.6
+    },
+    {
+     "district": "Hooghly",
+     "gap": 1.8
+    },
+    {
+     "district": "Howrah",
+     "gap": 1.5
+    },
+    {
+     "district": "Paschim Bardhaman",
+     "gap": 1.3
+    },
+    {
+     "district": "Darjeeling",
+     "gap": -0.0
+    },
+    {
+     "district": "Kolkata North",
+     "gap": -7.2
+    },
+    {
+     "district": "Kolkata South",
+     "gap": -7.6
+    }
+   ]
+  },
+  {
+   "state": "Kerala",
+   "measure": "fall in the roll, January 2025 roll to the draft",
+   "districts": 14,
+   "over": 14,
+   "min_gap": 0.8,
+   "max_gap": 9.9,
+   "rows": [
+    {
+     "district": "Malappuram",
+     "gap": 9.9
+    },
+    {
+     "district": "Kasaragod",
+     "gap": 7.3
+    },
+    {
+     "district": "Thrissur",
+     "gap": 5.4
+    },
+    {
+     "district": "Kozhikode",
+     "gap": 4.8
+    },
+    {
+     "district": "Alappuzha",
+     "gap": 4.5
+    },
+    {
+     "district": "Palakkad",
+     "gap": 4.5
+    },
+    {
+     "district": "Pathanamthitta",
+     "gap": 4.1
+    },
+    {
+     "district": "Kottayam",
+     "gap": 2.8
+    },
+    {
+     "district": "Idukki",
+     "gap": 2.7
+    },
+    {
+     "district": "Wayanad",
+     "gap": 2.1
+    },
+    {
+     "district": "Kollam",
+     "gap": 1.9
+    },
+    {
+     "district": "Ernakulam",
+     "gap": 1.8
+    },
+    {
+     "district": "Kannur",
+     "gap": 1.7
+    },
+    {
+     "district": "Thiruvananthapuram",
+     "gap": 0.8
+    }
+   ]
+  },
+  {
+   "state": "Uttarakhand",
+   "measure": "names removed after the draft",
+   "districts": 13,
+   "over": 12,
+   "min_gap": -2.4,
+   "max_gap": 21.2,
+   "rows": [
+    {
+     "district": "Pithoragarh",
+     "gap": 21.2
+    },
+    {
+     "district": "Champawat",
+     "gap": 19.1
+    },
+    {
+     "district": "Haridwar",
+     "gap": 8.7
+    },
+    {
+     "district": "Almora",
+     "gap": 8.3
+    },
+    {
+     "district": "Pauri Garhwal",
+     "gap": 5.6
+    },
+    {
+     "district": "Tehri Garhwal",
+     "gap": 5.6
+    },
+    {
+     "district": "Udham Singh Nagar",
+     "gap": 4.1
+    },
+    {
+     "district": "Chamoli",
+     "gap": 3.6
+    },
+    {
+     "district": "Dehradun",
+     "gap": 3.4
+    },
+    {
+     "district": "Uttarkashi",
+     "gap": 2.0
+    },
+    {
+     "district": "Bageshwar",
+     "gap": 1.1
+    },
+    {
+     "district": "Nainital",
+     "gap": 0.6
+    },
+    {
+     "district": "Rudraprayag",
+     "gap": -2.4
+    }
+   ]
+  }
+ ],
+ "after": [
+  {
+   "state": "Bihar",
+   "draft": 47.17,
+   "added": 47.86,
+   "removed": 53.92
+  },
+  {
+   "state": "Uttarakhand",
+   "draft": 47.8,
+   "added": 51.3,
+   "removed": 53.0
+  },
+  {
+   "state": "Rajasthan",
+   "draft": 47.62,
+   "added": 51.34,
+   "removed": 55.42
+  }
+ ],
+ "after_added_only": [
+  {
+   "state": "Kerala",
+   "added": 50.75
+  },
+  {
+   "state": "Uttar Pradesh",
+   "added": 49.84,
+   "draft": 45.17
+  }
+ ],
+ "bihar": {
+  "dead_share": 52.0,
+  "dead_expected": 43.4,
+  "years_of_deaths": 3.4,
+  "marriage_excess": 286188,
+  "marriage_years": 0.53,
+  "marriage_rho": -0.51,
+  "removed_draft": 55.49,
+  "roll_before": 47.86,
+  "removed_after": 53.92,
+  "added": 47.86,
+  "draft": 47.17
+ }
+}

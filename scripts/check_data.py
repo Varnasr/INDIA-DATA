@@ -203,6 +203,10 @@ def _border():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_border.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
+def _women():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_women.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
 def _reserved():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_reserved.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -294,6 +298,7 @@ for name, fn in [
     ('the cities table is current and every city adds up from its state', _cities),
     ('the reserved-seat table is current and every state has its Delimitation Order seats', _reserved),
     ('the border table is current, every listed district is found and Bihar matches its own pages', _border),
+    ('the women table is current and every rate lies between 0 and 100', _women),
     ('Notices table matches its raw table', _notices),
     ('Delhi data matches its raw tables', _delhi),
     ('removals against winning margins current, 2024 margins match the published ones', _margins),

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="../../assets/i18n.js"></script>
-<title>Comparisons: reserved seats, the names that came back, and the borders</title>
+<title>Reserved seats, the names that came back, and the border districts</title>
 <meta name="description" content="Seats reserved for Scheduled Castes and Scheduled Tribes against general seats, how much of each state&#x27;s draft cut the final roll made up, and the Government of India&#x27;s border districts against the rest of their state.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="manifest" href="../../manifest.webmanifest">
@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="../../assets/sir.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
-<meta property="og:title" content="Comparisons: reserved seats, the names that came back, and the borders">
+<meta property="og:title" content="Reserved seats, the names that came back, and the border districts">
 <meta property="og:description" content="Seats reserved for Scheduled Castes and Scheduled Tribes against general seats, how much of each state&#x27;s draft cut the final roll made up, and the Government of India&#x27;s border districts against the rest of their state.">
 <meta property="og:url" content="https://offtheroll.in/india/compare/">
 <meta property="og:image" content="https://offtheroll.in/assets/og/india.png">
@@ -31,37 +31,69 @@
     <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">
       <button type="button" class="btn install" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/></svg> <span class="lbl">Install app</span></button>
       <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
-      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">All India</span></summary><div class="menu" data-i18n-each><a href="../../">About this site</a><a href="../../india/" aria-current="true">All India</a><a class="sub" href="../../india/numbers/">The SIR in numbers</a><a class="sub" href="../../india/cities/">The cities</a><a class="sub" href="../../india/compare/" aria-current="page">Comparisons</a><a class="sub" href="../../india/process/">How the revision was run</a><a class="sub" href="../../india/progress/">Where the revision stands</a><a href="../../bihar/">Bihar 2025</a><a href="../../hyderabad/">Telangana 2026</a><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a><a href="../../rajasthan/">Rajasthan 2026</a><a href="../../uttarpradesh/">Uttar Pradesh 2026</a><a href="../../delhi/">Delhi 2026</a><a href="../../maharashtra/">Maharashtra 2026</a><a href="../../gujarat/">Gujarat 2026</a><a href="../../uttarakhand/">Uttarakhand 2026</a></div></details>
-      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../india/report/">Full report, online</a><a href="../../reports/sir-india-report.pdf" download>Full report, PDF</a><a href="../../reports/sir-india-deck.pptx" download>Slides, PowerPoint</a><a href="../../reports/indian-express-plus-election-commission-2026-10.pdf">The Indian Express special issue on the Commission, PDF</a><a href="../../data/india/states.csv" download>State table, CSV</a><a href="../../data/india/lok_sabha_electors.csv" download>Lok Sabha electors since 1984, CSV</a><a href="../../data/india/margins_ls2024.csv" download>Removals against 2024 Lok Sabha margins, CSV</a><a href="../../data/india/final_rolls.csv" download>Final rolls by state, CSV</a><a href="../../data/india/women_removed.csv" download>Women among the removed, CSV</a><a href="../../data/india/process_timeline.csv" download>Rule changes, dated, CSV</a><a href="../../data/india/process_schedules.csv" download>Each state&#x27;s dates, CSV</a><a href="../../data/india/notices.csv" download>Notices by state, CSV</a><a href="../../data/india/cities.csv" download>Cities against their states, CSV</a><a href="../../data/india/reserved.csv" download>Reserved and general seats, CSV</a><a href="../../data/india/border.csv" download>Border districts against the rest, CSV</a></div></details>
+      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">All India</span></summary><div class="menu"><div data-i18n-each><a href="../../">About this site</a><a href="../../india/" aria-current="true">All India</a><details class="grp" open><summary>All India pages</summary><div class="sub" data-i18n-each><a href="../../india/numbers/">The SIR in numbers</a><a href="../../india/cities/">The cities</a><a href="../../india/women/">Women</a><a href="../../india/compare/" aria-current="page">Comparisons</a><a href="../../india/process/">How the revision was run</a><a href="../../india/progress/">Where the revision stands</a></div></details><a href="../../bihar/">Bihar 2025</a><a href="../../hyderabad/">Telangana 2026</a><details class="grp"><summary>More states, 2026</summary><div class="sub" data-i18n-each><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a><a href="../../rajasthan/">Rajasthan 2026</a><a href="../../uttarpradesh/">Uttar Pradesh 2026</a><a href="../../delhi/">Delhi 2026</a><a href="../../maharashtra/">Maharashtra 2026</a><a href="../../gujarat/">Gujarat 2026</a><a href="../../uttarakhand/">Uttarakhand 2026</a></div></details></div></div></details>
+      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../india/report/">Full report, online</a><a href="../../reports/sir-india-report.pdf" download>Full report, PDF</a><a href="../../reports/sir-india-deck.pptx" download>Slides, PowerPoint</a><a href="../../reports/indian-express-plus-election-commission-2026-10.pdf">The Indian Express special issue on the Commission, PDF</a><a href="../../data/india/states.csv" download>State table, CSV</a><a href="../../data/india/lok_sabha_electors.csv" download>Lok Sabha electors since 1984, CSV</a><a href="../../data/india/margins_ls2024.csv" download>Removals against 2024 Lok Sabha margins, CSV</a><a href="../../data/india/final_rolls.csv" download>Final rolls by state, CSV</a><a href="../../data/india/women_removed.csv" download>Women among the removed, CSV</a><a href="../../data/india/process_timeline.csv" download>Rule changes, dated, CSV</a><a href="../../data/india/process_schedules.csv" download>Each state&#x27;s dates, CSV</a><a href="../../data/india/notices.csv" download>Notices by state, CSV</a><a href="../../data/india/cities.csv" download>Cities against their states, CSV</a><a href="../../data/india/reserved.csv" download>Reserved and general seats, CSV</a><a href="../../data/india/border.csv" download>Border districts against the rest, CSV</a><a href="../../data/india/women.csv" download>Women, state by state and district by district, CSV</a></div></details>
       <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
       <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span class="lbl">Export PDF</span></button>
     </div>
   </div>
 </header>
-<nav class="nav-tabs" aria-label="All India pages"><a class="nav-tab" href="../../india/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> All India</a><a class="nav-tab" href="../../india/numbers/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> In numbers</a><a class="nav-tab" href="../../india/cities/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16"/><path d="M16 6v16"/></svg> Cities</a><a class="nav-tab" href="../../india/compare/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 8v2h20V8L12 2z"/><path d="M4 10v10h16V10"/><path d="M10 20v-6h4v6"/></svg> Comparisons</a><a class="nav-tab" href="../../india/process/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 13l-7.5 7.5a2.1 2.1 0 0 1-3-3L11 10"/><path d="M16 16l6-6"/><path d="M8 8l6-6"/><path d="M9 7l8 8"/></svg> How it was run</a><a class="nav-tab" href="../../india/progress/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 13l-7.5 7.5a2.1 2.1 0 0 1-3-3L11 10"/><path d="M16 16l6-6"/><path d="M8 8l6-6"/><path d="M9 7l8 8"/></svg> Where it stands</a><a class="nav-tab" href="../../india/method/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Sources and method</a><a class="nav-tab" href="../../india/faq/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> FAQ</a><a class="nav-tab" href="../../india/report/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a></nav>
+<nav class="nav-tabs" aria-label="All India pages"><a class="nav-tab" href="../../india/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> All India</a><a class="nav-tab" href="../../india/numbers/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> In numbers</a><a class="nav-tab" href="../../india/cities/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16"/><path d="M16 6v16"/></svg> Cities</a><a class="nav-tab" href="../../india/women/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Women</a><a class="nav-tab" href="../../india/compare/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 8v2h20V8L12 2z"/><path d="M4 10v10h16V10"/><path d="M10 20v-6h4v6"/></svg> Comparisons</a><a class="nav-tab" href="../../india/process/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 13l-7.5 7.5a2.1 2.1 0 0 1-3-3L11 10"/><path d="M16 16l6-6"/><path d="M8 8l6-6"/><path d="M9 7l8 8"/></svg> How it was run</a><a class="nav-tab" href="../../india/progress/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 13l-7.5 7.5a2.1 2.1 0 0 1-3-3L11 10"/><path d="M16 16l6-6"/><path d="M8 8l6-6"/><path d="M9 7l8 8"/></svg> Where it stands</a><a class="nav-tab" href="../../india/method/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Sources and method</a><a class="nav-tab" href="../../india/faq/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> FAQ</a><a class="nav-tab" href="../../india/report/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Full report</a></nav>
 <main id="main">
 <div class="page-head" data-no-i18n><p class="kicker">All India</p><h1>Comparisons</h1><ol class="summary" id="short"></ol></div>
 <p class="report-lang">This page is in English only. Every figure on it comes from the state pages and the All India table, which link each figure to its source.</p>
 
 <article class="compare" lang="en" dir="ltr" data-no-i18n>
   <h2 id="seats-reserved-for-scheduled-castes-and-scheduled-tribes">Seats reserved for Scheduled Castes and Scheduled Tribes</h2>
-  <p class="sub">Every assembly seat is either general or reserved for a Scheduled Caste or Scheduled Tribe candidate, under the Delimitation Order of 2008. This compares the two kinds of seat in the six states that published their figures by constituency. A reserved seat is chosen because more of its people belong to that group, but most of its electors usually do not. So this says how hard the revision fell on the places, and nothing about which electors in them were removed.</p>
-  <div class="twrap" tabindex="0" role="region" aria-label="Reserved and general seats"><table id="tRes"></table></div>
+  <p class="sub">Every assembly seat is either general or reserved for a Scheduled Caste or Scheduled Tribe candidate, under the Delimitation Order of 2008. This section compares the two kinds of seat in the six states that published their figures by constituency. A seat is reserved because more of its people belong to that group than elsewhere in the state, but most of its electors usually do not belong to it. So the comparison says how hard the revision fell on the places, and nothing about which electors in them were removed.</p>
+  <div class="grid">
+    <div class="panel wide" id="pRes">
+      <h3 id="general-sc-and-st-seats-names-lost-per-100-electors-in-each">General, SC and ST seats, names lost per 100 electors in each state's own measure</h3>
+      <div class="vizbox" id="vRes"></div>
+      <p id="nRes"></p>
+    </div>
+    <div class="panel wide" id="pResGap">
+      <h3 id="each-reserved-seat-against-the-general-seats-of-its-own-dist">Each reserved seat against the general seats of its own district, difference in names per 100</h3>
+      <div class="vizbox" id="vResGap"></div>
+      <p id="nResGap"></p>
+    </div>
+  </div>
   <p class="finding" id="fRes"></p>
-  <p class="note" id="nRes"></p>
+  <details class="figs"><summary>The figures, state by state</summary><div class="twrap fit"><table id="tRes"></table></div></details>
 
   <h2 id="how-much-the-final-roll-made-up">How much the final roll made up</h2>
-  <p class="sub">For each state with a final roll, the rise from the draft to the final roll as a share of the names the draft left off. The rise counts new voters as well as names put back, so it is the most that could have come back, and the true share is lower. A negative figure means the roll shrank again after the draft.</p>
-  <div class="rank"><div class="twrap" tabindex="0" role="region" aria-label="How much the final roll made up"><table id="tBack"></table></div></div>
+  <p class="sub">For each state with a final roll, the rise from the draft to the final roll as a share of the names the draft left off. The rise counts new voters as well as names put back, so it is the most that could have come back, and the true share is lower. A figure below zero means the roll shrank again after the draft.</p>
+  <div class="grid">
+    <div class="panel wide" id="pBack">
+      <h3 id="the-rise-from-the-draft-to-the-final-roll-as-a-share-of-the">The rise from the draft to the final roll, as a share of the names the draft left off, per cent</h3>
+      <div class="vizbox" id="vBack"></div>
+      <p id="nBack"></p>
+    </div>
+  </div>
   <p class="finding" id="fBack"></p>
+  <details class="figs"><summary>The figures, state by state</summary><div class="twrap fit"><table id="tBack"></table></div></details>
 
   <h2 id="border-districts">Border districts</h2>
-  <p class="sub">The border districts are the Government of India's own list of Border Guarding Districts, as printed in the Staff Selection Commission's notice of 1 December 2025 for constables in the Home Ministry's armed police forces. No district is chosen by this site. Each state is set against itself in its own measure, and states are never ranked against each other. A border district's rate, high or low, says nothing about any elector's citizenship.</p>
-  <div class="twrap" tabindex="0" role="region" aria-label="Border districts against the rest of their state"><table id="tBorder"></table></div>
+  <p class="sub">The border districts are the Government of India's own list of Border Guarding Districts, as printed in the Staff Selection Commission's notice of 1 December 2025 for constables in the Home Ministry's armed police forces. No district on it was chosen by this site. Each state is set against itself in its own measure, and states are never ranked against each other. A border district's rate, high or low, says nothing about any elector's citizenship.</p>
+  <div class="grid">
+    <div class="panel wide" id="pBorder">
+      <h3 id="the-border-districts-rate-against-the-rest-of-the-state-per">The border districts' rate against the rest of the state, per cent higher or lower</h3>
+      <div class="vizbox" id="vBorder"></div>
+      <p id="nBorder"></p>
+    </div>
+    <div class="panel wide" id="pBorderD">
+      <h3 id="each-border-district-against-the-rest-of-its-state-per-cent">Each border district against the rest of its state, per cent higher or lower</h3>
+      <div class="vizbox" id="vBorderD"></div>
+      <p id="nBorderD"></p>
+    </div>
+    <div class="panel wide" id="pBorderWhy">
+      <h3 id="names-entered-as-enrolled-elsewhere-as-a-share-of-the-names">Names entered as enrolled elsewhere, as a share of the names left off, per cent</h3>
+      <div class="vizbox" id="vBorderWhy"></div>
+      <p id="nBorderWhy"></p>
+    </div>
+  </div>
   <p class="finding" id="fBorder"></p>
-  <p id="nBorder"></p>
-  <div class="twrap" tabindex="0" role="region" aria-label="Reasons entered, border districts and the rest"><table id="tBorderWhy"></table></div>
-  <p id="nBorderWhy"></p>
+  <details class="figs"><summary>The figures, state by state</summary><div class="twrap fit"><table id="tBorder"></table></div></details>
 
   <p class="note">The tables behind this page download as CSV: <a href="../../data/india/reserved.csv" download>reserved seats</a>, <a href="../../data/india/border.csv" download>border districts</a> and <a href="../../data/india/final_rolls.csv" download>final rolls by state</a>.</p>
   <p class="note limits" id="shortNote" hidden></p>
@@ -75,65 +107,81 @@
 <script>
 Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.json'), SIR.json('data/india/border.json')]).then(function (r) {
   var R = r[0].states, S = r[1].states, F = r[1].final, B = r[2];
-  var p1 = function (x) { return x == null ? '–' : SIR.d(x, 1); };
-  var head = function (cells) { return '<thead><tr>' + cells.map(function (c, i) { return '<th' + (i === 0 ? ' class="l"' : '') + '>' + c + '</th>'; }).join('') + '</tr></thead>'; };
-  var row = function (cells, cls) { return '<tr' + (cls ? ' class="' + cls + '"' : '') + '>' + cells.map(function (c, i) { return '<td' + (i === 0 ? ' class="l"' : '') + '>' + c + '</td>'; }).join('') + '</tr>'; };
+  var p1 = function (x) { return x == null ? null : SIR.d(x, 1); };
+  var sign = function (x) { return x == null ? '–' : (x > 0 ? '+' : '') + SIR.d(x, 1); };
+  var list = function (a) { return a.join(', ').replace(/, ([^,]*)$/, ' and $1'); };
+  var MEAS = { left_off: 'names left off', fall: 'fall in the roll' };
 
   // reserved seats
-  var sign = function (x) { return x == null ? '–' : (x > 0 ? '+' : '') + SIR.d(x, 1); };
-  document.getElementById('tRes').innerHTML = head(['State', 'Measure', 'General seats', 'SC seats', 'ST seats', 'SC seats against general seats in the same district', 'ST seats against general seats in the same district']) + '<tbody>' +
-    R.map(function (s) {
-      return row([s.state, s.unit, p1(s.GEN.rate), s.SC ? p1(s.SC.rate) + ' (' + s.SC.seats + ')' : '–', s.ST ? p1(s.ST.rate) + ' (' + s.ST.seats + ')' : '–',
-        s.SC && s.SC.compared ? sign(s.SC.gap_vs_district) + ', higher in ' + s.SC.above_district + ' of ' + s.SC.compared : '–',
-        s.ST && s.ST.compared ? sign(s.ST.gap_vs_district) + ', higher in ' + s.ST.above_district + ' of ' + s.ST.compared : '–']);
-    }).join('') + '</tbody>';
+  VIZ.dots('vRes', { label: 'General, SC and ST seats, names lost per 100 electors in each state\'s own measure', axis: 'Per 100 electors, in each state\'s own measure',
+    cats: R.map(function (s) { return s.state; }),
+    series: [{ name: 'General seats', col: '--fill-grey', vals: R.map(function (s) { return s.GEN.rate; }) },
+             { name: 'SC seats', col: '--fill-red', vals: R.map(function (s) { return s.SC ? s.SC.rate : null; }) },
+             { name: 'ST seats', col: '--fill-navy', vals: R.map(function (s) { return s.ST ? s.ST.rate : null; }) }] });
+  document.getElementById('nRes').textContent = 'Bihar, Tamil Nadu, Gujarat and Delhi are measured by the names left off the draft. West Bengal and Kerala published no names left off below the state, so they are measured by the fall in the roll to the draft. Read each state as its own row. Delhi has no ST seats.';
+  VIZ.strip('vResGap', { label: 'Each reserved seat against the general seats of its own district', axis: 'Names per 100 above or below the general seats of the same district', step: 2, r: 4.5,
+    key: [['SC seat', '--fill-red'], ['ST seat', '--fill-navy']],
+    rows: R.map(function (s) {
+      var pts = [];
+      ['SC', 'ST'].forEach(function (c) { if (s[c]) s[c].each.forEach(function (e) { pts.push({ v: e.gap, tok: c === 'SC' ? '--fill-red' : '--fill-navy', label: e.name + ' (' + c + '), ' + e.district + ': ' + sign(e.gap) + ' per 100' }); }); });
+      return { name: s.state, points: pts };
+    }) });
   var lower = function (c) { return R.filter(function (s) { return s[c] && s[c].rate < s.GEN.rate; }).length; };
   var withC = function (c) { return R.filter(function (s) { return s[c]; }).length; };
   var dist = function (c) { return R.filter(function (s) { return s[c] && s[c].gap_vs_district != null && s[c].gap_vs_district < 0; }).length; };
   var distN = function (c) { return R.filter(function (s) { return s[c] && s[c].gap_vs_district != null; }).length; };
-  document.getElementById('fRes').innerHTML = '<b>Seats reserved for Scheduled Castes lost a smaller share of their roll than general seats in ' + lower('SC') + ' of ' + withC('SC') + ' states, and seats reserved for Scheduled Tribes in ' + lower('ST') + ' of ' + withC('ST') + '.</b> ' +
-    'Part of that can be where reserved seats are. Set against the general seats of their own district, SC seats were still lower on average in ' + dist('SC') + ' of ' + distN('SC') + ' states, but the gap is smaller, and within a district a reserved seat was higher than the general seats in some cases in every state.';
-  document.getElementById('nRes').textContent = 'The figures in brackets are the number of reserved seats. The district columns give the average difference, in names per 100, between each reserved seat and the general seats of its district, and how many reserved seats were higher. Tamil Nadu, West Bengal and Kerala\'s reserved seats are taken from public lists of each assembly\'s seats and checked against the Delimitation Order\'s totals. Rajasthan and Uttarakhand are left out because their constituency figures cover a different stretch of time.';
+  var above = R.reduce(function (a, s) { return a + ['SC', 'ST'].reduce(function (b, c) { return b + (s[c] ? s[c].above_district : 0); }, 0); }, 0);
+  var compared = R.reduce(function (a, s) { return a + ['SC', 'ST'].reduce(function (b, c) { return b + (s[c] ? s[c].compared : 0); }, 0); }, 0);
+  document.getElementById('nResGap').textContent = 'Each dot is one reserved seat. A dot to the right of zero lost more names than the general seats of its own district. ' + above + ' of the ' + compared + ' reserved seats did.';
+  document.getElementById('fRes').innerHTML = '<b>Seats reserved for Scheduled Castes lost a smaller share of their roll than general seats in ' + lower('SC') + ' of ' + withC('SC') + ' states, and seats reserved for Scheduled Tribes in ' + lower('ST') + ' of ' + withC('ST') + '.</b> Part of that comes from where reserved seats are. Set against the general seats of their own district, SC seats were still lower on average in ' + dist('SC') + ' of ' + distN('SC') + ' states, by a smaller margin, and in every state some reserved seats lost more than the general seats around them.';
+  SIR.table('tRes', [{ h: 'State' }, { h: 'General seats', num: true }, { h: 'SC seats', num: true }, { h: 'ST seats', num: true }, { h: 'SC seats higher than their district', num: true }, { h: 'ST seats higher than their district', num: true }],
+    R.map(function (s) {
+      return [s.state + '<small>' + s.unit + '</small>', p1(s.GEN.rate) + ' <small>' + s.GEN.seats + ' seats</small>',
+        s.SC ? p1(s.SC.rate) + ' <small>' + s.SC.seats + ' seats</small>' : null, s.ST ? p1(s.ST.rate) + ' <small>' + s.ST.seats + ' seats</small>' : null,
+        s.SC && s.SC.compared ? s.SC.above_district + ' of ' + s.SC.compared : null, s.ST && s.ST.compared ? s.ST.above_district + ' of ' + s.ST.compared : null];
+    }));
 
   // how much came back
   var fin = S.filter(function (s) { return s.made_up_pct != null; }).sort(function (a, b) { return b.made_up_pct - a.made_up_pct; });
-  var mx = Math.max.apply(null, fin.map(function (s) { return Math.abs(s.made_up_pct); }));
-  var flag = function (s) { return s.reconciles === 'net only' ? ' (net figure only)' : s.reconciles === 'no' ? ' (figures do not add up)' : s.reconciles === 'rounded' ? ' (rounded)' : ''; };
-  document.getElementById('tBack').innerHTML = head(['State', 'Share made up', '']) + '<tbody>' +
-    fin.map(function (s) {
-      var w = (100 * Math.abs(s.made_up_pct) / mx).toFixed(1);
-      return row([SIR.esc(s.state) + '<span class="pill">' + flag(s) + '</span>', SIR.pct(s.made_up_pct), '<div class="bar" style="width:' + w + '%' + (s.made_up_pct < 0 ? ';background:var(--muted)' : '') + '"></div>']);
-    }).join('') + '</tbody>';
+  var flag = function (s) { return s.reconciles === 'net only' ? 'net figure only' : s.reconciles === 'no' ? 'figures do not add up' : s.reconciles === 'rounded' ? 'rounded' : ''; };
+  VIZ.rank('vBack', { label: 'The rise from the draft to the final roll as a share of the names the draft left off', axis: 'Per cent of the names left off at the draft', fmt: function (v) { return SIR.d(v, 1) + '%'; },
+    rows: fin.map(function (s) { return { name: s.state, v: s.made_up_pct, col: s.made_up_pct < 0 ? '--fill-grey' : '--fill-red' }; }) });
+  var flagged = fin.filter(function (s) { return flag(s); });
+  document.getElementById('nBack').textContent = 'Grey stems are states whose roll shrank again after the draft. Some figures carry a caution. ' + flagged.map(function (s) { return s.state + ' (' + flag(s) + ')'; }).join(', ') + '.';
   var neg = fin.filter(function (s) { return s.made_up_pct < 0; });
   var under25 = fin.filter(function (s) { return s.made_up_pct >= 0 && s.made_up_pct < 25; }).length;
-  document.getElementById('fBack').innerHTML = '<b>Across the ' + F.states + ' states with a final roll, the final rolls made up at most ' + SIR.pct(F.made_up_pct) + ' of what the drafts cut.</b> ' +
-    'In ' + under25 + ' of them it was under a quarter, and in ' + neg.length + ' (' + neg.map(function (s) { return s.state; }).join(', ') + ') the roll shrank again after the draft. West Bengal\'s fall after the draft is the 60 lakh names held back for adjudication.';
+  document.getElementById('fBack').innerHTML = '<b>Across the ' + F.states + ' states with a final roll, the final rolls made up at most ' + SIR.pct(F.made_up_pct) + ' of what the drafts cut.</b> In ' + under25 + ' of them it was under a quarter, and in ' + neg.length + ' (' + list(neg.map(function (s) { return s.state; })) + ') the roll shrank again after the draft. West Bengal\'s further fall is mostly the 60 lakh names held back for adjudication.';
+  SIR.table('tBack', [{ h: 'State' }, { h: 'Share made up', num: true }, { h: 'Caution' }],
+    fin.map(function (s) { return [SIR.esc(s.state), SIR.pct(s.made_up_pct), flag(s) || null]; }));
 
   // borders
-  var bs = B.states, hi = bs.filter(function (s) { return s.border.rate > s.interior.rate; });
-  var lo = bs.filter(function (s) { return s.border.rate <= s.interior.rate; });
+  var bs = B.states, pct = function (a, b) { return 100 * (a / b - 1); };
   var near = function (s) { return Math.abs(s.ratio - 1) < 0.02; };
-  var list = function (a) { return a.map(function (s) { return s.state; }).join(', ').replace(/, ([^,]*)$/, ' and $1'); };
-  document.getElementById('tBorder').innerHTML = head(['State', 'Measure', 'Border districts', 'Rest of the state', 'Rest of the state without its city', 'Border districts higher than the rest']) + '<tbody>' +
+  var up = bs.filter(function (s) { return s.ratio >= 1.02; }), even = bs.filter(near), down = bs.filter(function (s) { return s.ratio <= 0.98; });
+  VIZ.rank('vBorder', { label: 'The border districts\' rate against the rest of the state', axis: 'Per cent higher or lower than the rest of the state', fmt: function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 1) + '%'; },
+    rows: bs.slice().sort(function (a, b) { return b.ratio - a.ratio; }).map(function (s) { return { name: s.state, v: pct(s.border.rate, s.interior.rate), col: s.ratio > 1 ? '--fill-red' : '--fill-grey' }; }) });
+  var wb = bs.filter(function (s) { return s.state === 'West Bengal'; })[0];
+  document.getElementById('nBorder').innerHTML = 'Each state is measured as its own page measures it. Uttar Pradesh and Gujarat by the names left off, Bihar by the names removed in both phases, West Bengal by the fall in the roll, and Uttarakhand by the names removed after the draft. The large cities lost the most names and none of them is on the border. Leave Kolkata out and West Bengal\'s border districts fell by ' + p1(wb.border.rate) + ' per 100, against ' + p1(wb.interior_without_city.rate) + ' in the rest of the state.';
+  VIZ.strip('vBorderD', { label: 'Each border district against the rest of its state', axis: 'Per cent higher or lower than the rest of the state', step: 20,
+    rows: bs.map(function (s) { return { name: s.state, points: s.districts.map(function (x) { var v = pct(x.rate, s.interior.rate); return { v: v, tok: v > 0 ? '--fill-red' : '--fill-grey', label: x.district + ', ' + s.state + ': ' + (v > 0 ? '+' : '') + SIR.d(v, 0) + '%' }; }) }; }) });
+  document.getElementById('nBorderD').textContent = 'Each dot is one border district. The number that lost more than the rest of their state was ' + list(bs.map(function (s) { return s.above + ' of ' + s.districts.length + ' in ' + s.state; })) + '.';
+  var why = bs.filter(function (s) { return s.border.elsewhere_share != null; });
+  VIZ.dots('vBorderWhy', { label: 'Names entered as enrolled elsewhere, border districts and the rest', axis: 'Per cent of the names left off',
+    cats: why.map(function (s) { return s.state; }),
+    series: [{ name: 'Rest of the state', col: '--fill-grey', vals: why.map(function (s) { return s.interior.elsewhere_share; }) }, { name: 'Border districts', col: '--fill-red', vals: why.map(function (s) { return s.border.elsewhere_share; }) }] });
+  document.getElementById('nBorderWhy').textContent = 'Uttar Pradesh and Gujarat are the two states that published reasons by district. In both, a larger share of the border districts\' names were entered as enrolled somewhere else. A reason is what the officer wrote down, and nobody checked it. Enrolled elsewhere means on another roll in India, and it says nothing about anyone\'s citizenship.';
+  document.getElementById('fBorder').innerHTML = '<b>The border districts show no single pattern.</b> They lost more than the rest of their state in ' + list(up.map(function (s) { return s.state; })) + ', about the same in ' + list(even.map(function (s) { return s.state; })) + ', and fewer in ' + list(down.map(function (s) { return s.state; })) + '. Bihar\'s seven border districts are the same seven Nepal-border districts the <a href="../../bihar/border/">Bihar border page</a> studies in more detail. Rajasthan is left out, because its district figure is the change in the roll over more than two years, and Barmer, one of its four border districts, was split in 2023.';
+  SIR.table('tBorder', [{ h: 'State' }, { h: 'Border districts', num: true }, { h: 'Rest of the state', num: true }, { h: 'Rest, without the city', num: true }, { h: 'Border districts higher', num: true }],
     bs.map(function (s) {
-      return row(['<a href="../../' + s.page + '">' + SIR.esc(s.state) + '</a>', s.unit, p1(s.border.rate) + ' (' + s.border.districts + ')', p1(s.interior.rate),
-        s.interior_without_city ? p1(s.interior_without_city.rate) + ' (without ' + s.city_districts.join(', ') + ')' : '–', s.above + ' of ' + s.districts.length]);
-    }).join('') + '</tbody>';
-  var even = bs.filter(near), up = hi.filter(function (s) { return !near(s); }), down = lo.filter(function (s) { return !near(s); });
-  document.getElementById('fBorder').innerHTML = '<b>The border districts show no single pattern.</b> They lost more than the rest of their state in ' + list(up) + ', about the same in ' + list(even) + ', and fewer in ' + list(down) + '.';
-  var wb = bs.filter(function (s) { return s.state === 'West Bengal'; })[0], bh = bs.filter(function (s) { return s.state === 'Bihar'; })[0];
-  document.getElementById('nBorder').innerHTML = 'The large cities lost the most names and none of them is on the border, so the fifth column leaves the city out. In West Bengal that turns the comparison round. The border districts\' roll fell by ' + p1(wb.border.rate) + ' per 100, below the ' + p1(wb.interior.rate) + ' of the rest of the state but above its ' + p1(wb.interior_without_city.rate) + ' once Kolkata is left out. Bihar\'s seven border districts are the same seven Nepal-border districts the <a href="../../bihar/border/">Bihar border page</a> uses, which sets them against the rest in more detail. Rajasthan is left out, because its district figure is the change in the roll over more than two years and Barmer, one of its four border districts, was split in 2023.';
-  var why = bs.filter(function (s) { return s.border.dead_share != null; });
-  document.getElementById('tBorderWhy').innerHTML = head(['State', 'Entered as enrolled elsewhere, border', 'Rest of the state', 'Entered as shifted or absent, border', 'Rest of the state', 'Entered as dead, border', 'Rest of the state']) + '<tbody>' +
-    why.map(function (s) { return row([SIR.esc(s.state), p1(s.border.elsewhere_share) + '%', p1(s.interior.elsewhere_share) + '%', p1(s.border.shifted_absent_share) + '%', p1(s.interior.shifted_absent_share) + '%', p1(s.border.dead_share) + '%', p1(s.interior.dead_share) + '%']); }).join('') + '</tbody>';
-  document.getElementById('nBorderWhy').textContent = 'Where the reasons were published by district, the share of the names left off that were entered as enrolled somewhere else was higher in the border districts than in the rest of the state, in ' + list(why.filter(function (s) { return s.border.elsewhere_share > s.interior.elsewhere_share; })) + '. A reason is what the officer wrote down, and nobody checked it. "Enrolled elsewhere" means on another roll in India, and says nothing about anyone\'s citizenship.';
+      return ['<a href="../../' + s.page + '">' + SIR.esc(s.state) + '</a><small>' + s.unit + '</small>', p1(s.border.rate) + ' <small>' + s.border.districts + ' districts</small>', p1(s.interior.rate),
+        s.interior_without_city ? p1(s.interior_without_city.rate) + ' <small>without ' + list(s.city_districts) + '</small>' : null, s.above + ' of ' + s.districts.length];
+    }));
 
-  var sc = R.filter(function (s) { return s.SC; });
   SIR.inShort([
     'Seats reserved for Scheduled Castes lost a smaller share of their roll than general seats in ' + lower('SC') + ' of ' + withC('SC') + ' states, and seats reserved for Scheduled Tribes in ' + lower('ST') + ' of ' + withC('ST') + '.',
-    'Part of the gap is where the seats are. Against the general seats of their own district, SC seats were lower on average in ' + dist('SC') + ' of ' + distN('SC') + ' states, by less.',
+    'Part of the gap comes from where the seats are. Against the general seats of their own district, SC seats were lower on average in ' + dist('SC') + ' of ' + distN('SC') + ' states, by a smaller margin.',
     'Across the ' + F.states + ' states with a final roll, the final rolls made up at most ' + SIR.pct(F.made_up_pct) + ' of the names the drafts left off, and in ' + neg.length + ' the roll shrank again.',
-    'On the Government of India\'s own list of border districts, the border lost more names than the rest of its state in ' + list(up) + ', about the same in ' + list(even) + ' and fewer in ' + list(down) + '.'
+    'On the Government of India\'s own list of border districts, the border lost more names than the rest of its state in ' + list(up.map(function (s) { return s.state; })) + ', about the same in ' + list(even.map(function (s) { return s.state; })) + ' and fewer in ' + list(down.map(function (s) { return s.state; })) + '.'
   ], 'A reserved seat describes a place, and says nothing about which electors were removed from it. The rise to the final roll includes new voters, so the share made up is a ceiling. A border district\'s rate says nothing about any elector\'s citizenship.');
   SIR.showFaq('india', 'compare');
 }).catch(SIR.fail);

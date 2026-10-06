@@ -89,19 +89,31 @@ def shell(out, meta, content, scripts):
     root = '../' * depth
     place = PLACES[meta['place']]
     here = out
-    # the places menu: every analysis, the current one marked
-    items = []
-    for p in CFG['places']:
+    # the places menu: every analysis, the current one marked. A place's own
+    # pages and the run of 2026 states each fold under a heading, opened when
+    # the reader is inside it, so the menu stays short as places are added.
+    def link(p):
         href = root + (p['pages'][0][0] if p['pages'] else '')
         cur = ' aria-current="true"' if p['id'] == place['id'] else ''
-        items.append('<a href="%s"%s>%s</a>' % (href or './', cur, html.escape(p['label'])))
-        # a page worth reaching from anywhere sits under its place
-        for h, t in p.get('menu', []):
-            sub = ' aria-current="page"' if h == here else ''
-            items.append('<a class="sub" href="%s%s"%s>%s</a>' % (root, h, sub, html.escape(t)))
+        return '<a href="%s"%s>%s</a>' % (href or './', cur, html.escape(p['label']))
+
+    def fold(title, links, opened):
+        return ('<details class="grp"%s><summary>%s</summary><div class="sub" data-i18n-each>%s</div></details>'
+                % (' open' if opened else '', html.escape(title), ''.join(links)))
+    items, group = [], []
+    for p in CFG['places']:
+        if p.get('group') == 'states':
+            group.append(link(p))
+            continue
+        items.append(link(p))
+        if p.get('menu'):
+            subs = ['<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in p['menu']]
+            items.append(fold(p.get('nav_label', p['label']), subs, p['id'] == place['id']))
+    if group:
+        items.append(fold('More states, 2026', group, place.get('group') == 'states'))
     current = place['label'] if place['id'] != 'home' else 'Places'
     places = ('<details class="dl places"><summary class="btn" aria-label="Places">%s <span class="lbl-place">%s</span></summary>'
-              '<div class="menu" data-i18n-each>%s</div></details>' % (PIN, html.escape(current), ''.join(items)))
+              '<div class="menu"><div data-i18n-each>%s</div></div></details>' % (PIN, html.escape(current), ''.join(items)))
     dl = ''
     if place.get('downloads'):
         links = ''.join('<a href="%s%s"%s>%s</a>' % (root, h, ' download' if d else '', html.escape(t)) for h, t, d in place['downloads'])
