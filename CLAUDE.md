@@ -855,7 +855,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 - **The header carries a places menu**, not a switch: a pin button naming
   the current place, opening the list of analyses. It folds (`details.grp`):
   a place's own `menu` pages sit under its `nav_label`, and every place with
-  `"group": "states"` in `places.json` sits under "More states, 2026". A fold
+  `"group": "states"` in `places.json` sits under "Other states 2026". A place with `menu` pages is itself one fold, its overview first. A fold
   opens by itself when the reader is inside it. A new state takes the group
   field; each fold's list carries `data-i18n-each`. On a phone the title takes one row and the controls a row
   beneath it (language, install, search, places, downloads, reading font,
