@@ -5,28 +5,28 @@
    cards. Every ink is measured against every surface it is painted on, in
    both themes, by scripts/check_contrast.py. */
 :root{
-  --ink:#1c2833;--muted:#4d5b69;--navy:#1f618d;--red:#b03a2e;--amber:#8a6100;
-  --line:#e1e5e8;--bg:#ffffff;--soft:#f4f6f7;--card:#ffffff;
+  --ink:#16130f;--muted:#5e574b;--navy:#1d5a8a;--red:#b3261e;--amber:#8a6100;
+  --line:#d9d1c2;--bg:#f6f2ea;--soft:#efe8da;--card:#fffdf8;
   --nda:#b85a10;--india:#1e7a45;--other:#6b5b95;--female:#8e3b6d;--male:#1f618d;
-  --tab:#4f5f6e;--tab-on:#b03a2e;--grad-a:#b03a2e;--grad-b:#b85a10;
-  --shadow:rgba(0,0,0,.08);
+  --tab:#5e574b;--tab-on:#b3261e;--grad-a:#b3261e;--grad-b:#a24d10;
+  --shadow:rgba(40,30,10,.08);
   --fill-nda:#e67e22;--fill-india:#1e8449;--fill-other:#8e7cc3;--fill-red:#c0392b;--fill-navy:#1f618d;--fill-amber:#d4ac0d;--fill-grey:#95a5a6;--fill-teal:#17a589;--fill-pink:#af3b6e;--fill-purple:#8e44ad;
   --on-fill:#ffffff;
   --s-yellow:#f4d03f;--s-mint:#a9dfbf;--s-orange:#e67e22;--s-green:#27ae60;--s-purple:#8e44ad;--s-blue:#85c1e9;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --ink:#eaecee;--muted:#b7c0c9;--navy:#8ec1e6;--red:#f5a79e;--amber:#e7c35a;
-  --line:#2e3b55;--bg:#111827;--soft:#172033;--card:#1b2740;
+  --ink:#f1ece2;--muted:#bdb4a4;--navy:#9cc7ea;--red:#f2a49b;--amber:#e7c35a;
+  --line:#3b352c;--bg:#15120e;--soft:#1e1a15;--card:#221e18;
   --nda:#f4a45c;--india:#6fcf97;--other:#b7a8e0;--female:#e59bc8;--male:#8ec1e6;
-  --tab:#a9b4c0;--tab-on:#f5a79e;--grad-a:#f5a79e;--grad-b:#f8c471;
-  --shadow:rgba(0,0,0,.35);
+  --tab:#bdb4a4;--tab-on:#f2a49b;--grad-a:#f2a49b;--grad-b:#f8c471;
+  --shadow:rgba(0,0,0,.4);
 }}
 :root[data-theme="dark"]{
-  --ink:#eaecee;--muted:#b7c0c9;--navy:#8ec1e6;--red:#f5a79e;--amber:#e7c35a;
-  --line:#2e3b55;--bg:#111827;--soft:#172033;--card:#1b2740;
+  --ink:#f1ece2;--muted:#bdb4a4;--navy:#9cc7ea;--red:#f2a49b;--amber:#e7c35a;
+  --line:#3b352c;--bg:#15120e;--soft:#1e1a15;--card:#221e18;
   --nda:#f4a45c;--india:#6fcf97;--other:#b7a8e0;--female:#e59bc8;--male:#8ec1e6;
-  --tab:#a9b4c0;--tab-on:#f5a79e;--grad-a:#f5a79e;--grad-b:#f8c471;
-  --shadow:rgba(0,0,0,.35);
+  --tab:#bdb4a4;--tab-on:#f2a49b;--grad-a:#f2a49b;--grad-b:#f8c471;
+  --shadow:rgba(0,0,0,.4);
 }
 *{box-sizing:border-box}
 html{overflow-x:clip}
@@ -609,152 +609,208 @@ main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
 .stage.wait{background:transparent;color:var(--ink);border:1px solid var(--muted)}
 
 /* =================================================================
-   The newsroom layout (October 2026). Everything above sets the
-   components; this layer sets the frame round them. A slim header on
-   one line, the folk-art strip kept but quiet, serif headlines (Source
-   Serif 4, OFL, in fonts/), and a reading column of about 44rem centred
-   on the page, with maps, charts and tables breaking out to the full
-   width beside it. No colour token changes here, so check_contrast.py
-   still measures every ink. */
-@font-face{font-family:"Source Serif 4";src:url(../fonts/sourceserif4-latin.woff2) format("woff2");font-weight:200 900;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+20B9,U+2122,U+2212}
-:root{--serif:"Source Serif 4",Georgia,"Noto Serif",serif;--measure:44rem}
-body{font-size:16px;line-height:1.65}
+   Off the Roll (October 2026): the frame round every page. Paper and ink,
+   one red, Fraunces for display (OFL, self-hosted in fonts/, Latin only, so
+   Indian scripts keep their Noto faces), a mono for small labels. Text sits
+   in a reading column of about 44rem; maps, charts, tables and number rows
+   run the full width. The palette is the token blocks at the top of this
+   file, measured by check_contrast.py in both themes. */
+@font-face{font-family:"Fraunces";src:url(../fonts/fraunces-latin.woff2) format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+20B9,U+2122,U+2212}
+:root{--serif:"Fraunces",Georgia,"Noto Serif",serif;--mono:ui-monospace,"SFMono-Regular","Cascadia Mono",Menlo,Consolas,monospace;--measure:44rem;--on-ink:#f6f2ea;--red-on-ink:#efb3ac}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--on-ink:#15120e;--red-on-ink:#9e2019}}
+:root[data-theme="dark"]{--on-ink:#15120e;--red-on-ink:#9e2019}
+body{font-size:16px;line-height:1.6}
+.band{height:4px;background-size:auto 4px!important;animation:none!important}
 
-/* the strip: a thin edge of the place's cloth, still */
-.band{height:5px!important;background-size:auto 5px!important;animation:none!important}
-
-/* the header: title left, controls right, one hairline under it */
-header.top{box-shadow:none;border-bottom:1px solid var(--line);background:var(--bg);padding:.6rem 1.25rem}
-.logo{gap:.7rem}
-.logo-icon{width:32px;height:32px;border-radius:7px;animation:none!important;box-shadow:none!important}
-.logo-icon svg{width:18px;height:18px}
-.h-title{font-family:var(--serif);font-size:1.18rem;font-weight:700;letter-spacing:-.01em;line-height:1.2}
-header.top .subtitle{font-size:.78rem;line-height:1.35}
+/* ------------------------------------------------------- the masthead */
+header.top{background:var(--bg);border-bottom:1px solid var(--line);box-shadow:none;padding:.7rem 1.25rem}
+.logo-icon{display:none}
+header.top .h-title,header.top .subtitle{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wm{font-family:var(--serif);font-weight:700;font-size:1.6rem;line-height:1;letter-spacing:-.01em;color:var(--ink)}
+.wm s{color:var(--red);text-decoration-thickness:3px}
 .controls{gap:.2rem}
-.controls .btn,.controls button,.controls summary.btn,.controls #lang,.controls #dys-font-btn{background:transparent;border:1px solid transparent;border-radius:7px;padding:.42rem .6rem;font-size:.86rem;color:var(--ink);font-weight:500;box-shadow:none}
-.controls .btn:hover,.controls button:hover,.controls summary.btn:hover{background:var(--soft);color:var(--ink);transform:none}
+.controls .btn,.controls button,.controls summary.btn,.controls #lang,.controls #dys-font-btn{background:transparent;border:1px solid transparent;border-radius:6px;padding:.45rem .6rem;font-size:.88rem;color:var(--ink);font-weight:500;box-shadow:none}
+.controls .btn:hover,.controls button:hover,.controls summary.btn:hover{background:var(--soft);color:var(--ink)}
 .controls .places summary.btn,.controls #lang{border-color:var(--line)}
 .controls .print{background:transparent}
 .controls .more{display:none}
-@media (min-width:701px){
-  .controls .find .lbl,.controls .dl:not(.places) .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-}
 button:hover,.btn:hover{transform:none}
+@media (min-width:701px){
+  .controls .find{border-color:var(--line);background:var(--card);color:var(--muted);min-width:12rem;justify-content:flex-start}
+  .controls .find .kbd{display:inline;margin-inline-start:auto}
+  .controls .dl:not(.places) .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
 
-/* the section tabs: plain words on the page's edge, the current one underlined */
+/* ----------------------------------------------------- the section tabs */
 .nav-tabs{background:var(--bg);border-bottom:1px solid var(--line);box-shadow:none}
 .nav-tab{background:none!important;border-radius:0;color:var(--muted);font-weight:600}
 .nav-tab:hover{color:var(--ink)}
 .nav-tab[aria-current="page"],.nav-tab[aria-selected="true"]{color:var(--ink)}
-.nav-tab::after{background:var(--ink);height:2px;bottom:-1px}
+.nav-tab::after{background:var(--red);height:2px;bottom:-1px}
 @media (min-width:901px){
-  .nav-tabs{justify-content:flex-start;padding-inline:max(1.25rem,calc((100% - var(--page))/2 + 1.25rem));column-gap:1.5rem}
-  .nav-tab{padding:.75rem 0;font-size:.85rem}
+  .nav-tabs{justify-content:flex-start;padding-inline:max(1.25rem,calc((100% - var(--page))/2 + 1.25rem));column-gap:1.6rem}
+  .nav-tab{padding:.8rem 0;font-size:.86rem}
   .nav-tab .icon{display:none}
 }
 
-/* the page: headlines in serif, text in the reading column */
-main{padding:2.5rem 1.25rem 3.5rem}
-body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq){max-width:var(--measure);margin-inline:auto}
+/* -------------------------------------------- the page and its columns */
+main{padding:0 1.25rem 3.5rem}
+main>:first-child:not(.page-head),main>article>:first-child:not(.page-head){margin-top:2.5rem}
+body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:auto}
 .xp main>*{max-width:none!important;margin-inline:0!important}
-main h1,.page-head h1{font-family:var(--serif);font-size:clamp(2rem,3.8vw,2.9rem);line-height:1.1;letter-spacing:-.018em;font-weight:700;margin-top:0;margin-bottom:1rem}
-main h2{font-family:var(--serif);font-size:1.65rem;line-height:1.2;letter-spacing:-.012em;font-weight:700;border:0;padding:0;margin-top:3.25rem;margin-bottom:.6rem}
-main h2::before{content:"";display:block;width:2.5rem;height:3px;background:var(--fill-red);margin-bottom:.9rem}
+main h1{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;line-height:1.02}
+main h2{font-family:var(--serif);font-size:1.9rem;line-height:1.15;font-weight:700;letter-spacing:-.01em;border:0;padding:0;margin-top:3.5rem;margin-bottom:.5rem}
 main h2:first-child{margin-top:0}
-.methodology h2::before,.xp main h2::before,.report h2::before{display:none}
-body :where(main,main>article,main>section,.tab-content)>h3{font-family:var(--serif);font-size:1.22rem;margin-top:2rem;margin-bottom:.4rem}
-.lead{font-size:1.15rem;line-height:1.55}
+.methodology h2,.xp main h2{font-family:inherit}
+body :where(main,main>article,main>section,.tab-content)>h3{font-family:var(--serif);font-size:1.3rem;margin-top:2rem;margin-bottom:.4rem}
 .sub,.tab-lead{color:var(--muted)}
+.lead{font-size:1.18rem;line-height:1.55}
 
-/* the opening findings: the lede, numbered in the margin */
-ol.summary{list-style:none;counter-reset:f;padding:0;margin-top:1.25rem;margin-bottom:2.25rem;font-family:var(--serif);font-size:1.22rem;line-height:1.45}
-ol.summary li{counter-increment:f;position:relative;margin:0;padding:.8rem 0;padding-inline-start:2.4rem;border-top:1px solid var(--line)}
-ol.summary li:last-child{border-bottom:1px solid var(--line)}
-ol.summary li::before{content:counter(f);position:absolute;inset-inline-start:0;top:.72rem;font-weight:700;font-size:1.45rem;line-height:1.2;color:var(--red);font-variant-numeric:tabular-nums}
+/* the opening of a page: a mono label, the title, the findings */
+.kicker{font-family:var(--mono);font-size:.76rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-top:0;margin-bottom:.9rem}
+.page-head{padding:3rem 0 2.5rem;margin-bottom:2.75rem;border-bottom:1px solid var(--line);box-shadow:0 1px 0 0 var(--line)}
+.page-head h1{font-size:clamp(2.4rem,5vw,4rem);margin-bottom:1.25rem}
+.page-head h1 em{font-style:normal;color:var(--red)}
+ol.summary{list-style:none;counter-reset:f;padding:0;margin-top:1.25rem;margin-bottom:0;font-size:1.12rem;line-height:1.5}
+ol.summary li{counter-increment:f;position:relative;margin:0;padding:.85rem 0;padding-inline-start:2.6rem;border-top:1px solid var(--line)}
+ol.summary li::before{content:counter(f);position:absolute;inset-inline-start:0;top:.62rem;font-family:var(--serif);font-weight:700;font-size:1.6rem;line-height:1.2;color:var(--red);font-variant-numeric:tabular-nums}
+main>ol.summary:first-child{margin-top:0}
 
-/* a finding set apart: a rule in the margin, no coloured box */
-.takeaway,.finding{background:none!important;color:var(--ink)!important;border:0;border-inline-start:3px solid var(--fill-red);border-radius:0;padding:.15rem 0;padding-inline-start:1rem;font-family:var(--serif);font-size:1.12rem;line-height:1.5}
+/* a finding set apart: a red rule in the margin */
+.takeaway,.finding{background:none!important;color:var(--ink)!important;border:0;border-inline-start:3px solid var(--red);border-radius:0;padding:.1rem 0;padding-inline-start:1rem;font-size:1.06rem;line-height:1.55}
 :root:root .caveat{background:none}
 
-/* numbers and charts: modules under a rule, no floating cards */
-.summary-card,.kpis>div{background:transparent;box-shadow:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:.75rem 0 0}
+/* numbers: a strip of figures between rules */
+.summary-card,.kpis>div{background:transparent;box-shadow:none;border:0;border-radius:0;border-inline-end:1px solid var(--line)!important;padding:1.4rem 1.25rem}
+.summary-card:last-child,.kpis>div:last-child{border-inline-end:0!important}
+.summary-grid,.kpis{gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .summary-card:hover,.kpis>div:hover{transform:none}
-.summary-value,.kpis b{background:none;-webkit-text-fill-color:currentColor;color:var(--red);font-family:var(--serif);font-size:2rem;letter-spacing:-.01em}
-.claims li{box-shadow:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:.75rem 0 0;background:transparent}
+.summary-value,.kpis b{background:none;-webkit-text-fill-color:currentColor;color:var(--ink);font-family:var(--serif);font-size:2.2rem;letter-spacing:-.01em;line-height:1.1}
+.summary-label,.kpis span{font-size:.84rem;color:var(--muted)}
+.claims li{box-shadow:none;border:1px solid var(--line);border-radius:10px;background:var(--card)}
 .claims b{font-family:var(--serif)}
-.card,.panel{background:transparent;box-shadow:none;border:0;border-top:2px solid var(--ink);border-radius:0;padding:.9rem 0 0}
-.card-title,.panel h3{font-size:1rem;font-weight:700;border-bottom:0;padding-bottom:0;margin-bottom:.75rem}
+
+/* charts sit on white cards with a hairline, as figures in a report */
+.card,.panel{background:var(--card);box-shadow:none;border:1px solid var(--line);border-radius:10px;padding:1.25rem}
+.card-title,.panel h3{font-family:var(--serif);font-size:1.12rem;font-weight:700;border-bottom:0;padding-bottom:0;margin-bottom:.75rem}
 .panel>p,.chart-takeaway{background:none;border:0;padding:0;color:var(--muted);font-size:.9rem;margin-top:.6rem}
-.charts-grid,.grid{gap:2.25rem 2rem;margin-bottom:2.5rem}
-.fcard,.drill,.hub,.cards .card,.docard,.research-section,.ptl .pitem,.process .burdens li,.process ul.reported li{box-shadow:none;border-radius:6px}
-.cards .card{border:1px solid var(--line);padding:1rem 1.1rem}
+.charts-grid,.grid{gap:1.5rem}
+.fcard,.drill,.docard,.research-section,.ptl .pitem,.process .burdens li,.process ul.reported li{box-shadow:none;border-radius:10px;background:var(--card)}
 .qa{background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:1.1rem 0}
 .research-a,.qa p{background:none;border:0;padding:0}
-.qa h3{font-family:var(--serif);font-size:1.1rem;color:var(--ink)}
-.methodology{border-radius:6px}
-.note{border-top:0;padding-top:0;margin-top:1.5rem}
+.qa h3{font-family:var(--serif);font-size:1.15rem;color:var(--ink)}
+.note{border-top:0;padding-top:0;margin-top:1.25rem}
 .note.limits{border-top:1px solid var(--line);padding-top:.9rem}
+th{background:var(--bg);font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--ink)}
 footer{background:var(--bg);margin-top:2rem}
 .report .cover,.report .toc,.report .twrap,.report .stats div{box-shadow:none;border:1px solid var(--line)}
 .report .title{font-family:var(--serif)}
 
-/* Indian scripts keep their own faces: the serif has Latin only */
-html[data-lang]:not([data-lang="en"]) :is(.h-title,main h1,main h2,main h3,ol.summary,.takeaway,.finding,.summary-value,.kpis b,.claims b,.qa h3,.report .title){font-family:inherit;letter-spacing:0}
+/* cards to each analysis, each led by its number */
+.hubs{gap:1.25rem}
+.hub{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.4rem;box-shadow:none;display:flex;flex-direction:column;gap:.45rem}
+.hub:hover{border-color:var(--ink)}
+.hub .n{font-family:var(--serif);font-style:normal;font-weight:700;font-size:2.1rem;line-height:1.05;color:var(--red);letter-spacing:-.01em}
+.hub b{font-family:var(--serif);font-size:1.2rem}
+.hub span{color:var(--muted);font-size:.9rem}
+.hub.big{grid-column:span 2;background:var(--ink);border-color:var(--ink)}
+.hub.big,.hub.big b,.hub.big span{color:var(--on-ink)}
+.hub.big .n{color:var(--red-on-ink);font-size:2.8rem}
+@media (max-width:700px){.hub.big{grid-column:auto}}
 
-/* a phone: the title, Search, and one button that opens the rest */
-@media (max-width:700px){
-  header.top{padding:.5rem .75rem}
-  .header-content{grid-template-columns:minmax(0,1fr) auto}
-  .h-title{font-size:1.02rem}
-  header.top .subtitle{font-size:.72rem}
-  .controls .more{display:inline-flex}
-  header.top:not(.open) .controls{grid-column:2;width:auto;justify-content:flex-end}
-  header.top:not(.open) .controls>:not(.find):not(.more){display:none!important}
-  header.top.open .controls{padding-top:.4rem;border-top:1px solid var(--line)}
-  .controls .btn,.controls button,.controls summary.btn{width:40px;height:40px}
-  .controls #lang{height:40px}
-  main{padding:1.5rem 1rem 2.5rem}
-  main h2{font-size:1.4rem;margin-top:2.5rem}
-  ol.summary{font-size:1.08rem}
-  ol.summary li{padding-inline-start:2rem}
-  ol.summary li::before{font-size:1.25rem}
-  .secbar{background:var(--bg);box-shadow:none}
-  .sec-now{box-shadow:inset 0 0 0 1px var(--line)}
-  .summary-value,.kpis b{font-size:1.5rem}
+/* ------------------------------------------------- the front page */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:3.5rem;align-items:center}
+.hero .kicker,.hero h1,.hero .lead{max-width:none;margin-inline:0}
+.hero h1{font-size:clamp(2.6rem,5.6vw,4.6rem);margin:0 0 1.2rem}
+.hero .lead{font-size:1.2rem;color:var(--ink);margin:0}
+.btns{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.6rem}
+.btn-ink,.btn-line{display:inline-flex;align-items:center;padding:.8rem 1.15rem;border-radius:6px;font-weight:600;font-size:.95rem;text-decoration:none;border:1px solid var(--ink)}
+.btn-ink{background:var(--ink);color:var(--on-ink)}
+.btn-line{color:var(--ink)}
+.btn-ink:hover,.btn-line:hover{background:var(--soft);color:var(--ink)}
+.dots-fig{margin:0}
+.dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:5px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--red)}
+.dots-fig figcaption{font-size:.85rem;color:var(--muted);margin-top:.9rem}
+.home .kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin:0 0 1rem}
+.mapwrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:1.5rem;align-items:start;margin-top:1.25rem}
+.rank .twrap{max-height:640px;overflow:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.rank table{margin:0}
+.rank td,.rank th{padding:.5rem .75rem}
+.rank .bar{height:8px;border-radius:2px;background:var(--red);min-width:2px}
+.rank tr.all td{font-weight:700}
+.rank tr.all .bar{background:var(--ink)}
+.rank a{color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem auto 0;max-width:var(--measure)}
+.chips a{border:1px solid var(--ink);border-radius:999px;padding:.45rem .9rem;text-decoration:none;color:var(--ink);font-weight:600;font-size:.92rem;background:var(--card)}
+.chips a:hover{background:var(--ink);color:var(--on-ink)}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;margin-top:1.25rem}
+.how h3{font-family:var(--serif);font-size:1.2rem;margin:0 0 .35rem}
+.how p{margin:0;color:var(--muted)}
+@media (max-width:900px){
+  .hero,.mapwrap{grid-template-columns:minmax(0,1fr);gap:2rem}
+  .how{grid-template-columns:minmax(0,1fr);gap:1.25rem}
+  .home .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .home .kpis>div:nth-child(2){border-inline-end:0!important}
+  .home .kpis>div:nth-child(-n+2){border-bottom:1px solid var(--line)}
 }
-@media print{.band{display:none}main h2::before{display:none}}
-main>ol.summary:first-child{margin-top:0}
-.summary-card,.kpis>div{border-top-color:var(--line)!important}
 
-/* -------------------------------------------- the opening band, the rail
-   Every page opens on a tinted band carrying its title and findings, the
-   width of the screen. A long reading page keeps a margin on the left of a
-   wide screen for "On this page" (nav.toc, built by sir.js). */
-main{padding-top:0}
-main>:first-child:not(.page-head),main>article>:first-child:not(.page-head){margin-top:2.5rem}
-.page-head{position:relative;z-index:0;padding:3rem 0 2.25rem;margin-bottom:2.75rem}
-.page-head{background:var(--soft);box-shadow:0 0 0 100vmax var(--soft);clip-path:inset(0 -100vmax)}
-.page-head h1{font-size:clamp(2.2rem,4.4vw,3.4rem);margin-bottom:1.1rem}
-.page-head .lead{font-size:1.2rem;line-height:1.55;color:var(--ink)}
-.page-head ol.summary{margin-bottom:0}
-.page-head ol.summary li:last-child{border-bottom:0}
-.page-head .kpis{max-width:var(--measure);margin:1.75rem auto 0;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
-.page-head .kpis>div{border-top:2px solid var(--ink)!important}
-.page-head .kpis b{font-size:clamp(2rem,4vw,2.8rem);line-height:1.05}
-.page-head .kpis span{font-size:.88rem;color:var(--muted)}
+/* "On this page": the sections in the left margin of a wide screen */
 nav.toc{display:none}
 @media (min-width:1240px){
   body.has-toc main{max-width:calc(var(--page) + 15rem);padding-inline-start:calc(15rem + 1.25rem)}
-  nav.toc{display:block;position:fixed;z-index:50;top:calc(var(--hh,0px) + 80px);inset-inline-start:max(1.25rem,calc((100vw - var(--page) - 15rem) / 2 + 1.25rem));width:13rem;max-height:calc(100vh - var(--hh,0px) - 110px);overflow:auto;font-size:.84rem;line-height:1.35;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+  nav.toc{display:block;position:fixed;z-index:50;top:calc(var(--hh,0px) + 84px);inset-inline-start:max(1.25rem,calc((100vw - var(--page) - 15rem) / 2 + 1.25rem));width:13rem;max-height:calc(100vh - var(--hh,0px) - 110px);overflow:auto;font-size:.84rem;line-height:1.35;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
   nav.toc.on{opacity:1;visibility:visible}
-  .toc-h{margin:0 0 .6rem;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .toc-h{margin:0 0 .6rem;font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
   nav.toc ol{list-style:none;margin:0;padding:0;border-inline-start:1px solid var(--line)}
   nav.toc a{display:block;padding:.35rem .8rem;margin-inline-start:-1px;border-inline-start:2px solid transparent;color:var(--muted);text-decoration:none}
   nav.toc a:hover{color:var(--ink)}
-  nav.toc a[aria-current]{color:var(--ink);font-weight:600;border-inline-start-color:var(--fill-red)}
+  nav.toc a[aria-current]{color:var(--ink);font-weight:600;border-inline-start-color:var(--red)}
 }
+
+/* ------------------------------------------------------------ phones */
 @media (max-width:700px){
-  .page-head{padding:2rem 0 1.5rem;margin-bottom:2rem}
-  .page-head .kpis{grid-template-columns:minmax(0,1fr);gap:1rem}
+  header.top{padding:.55rem .9rem}
+  .header-content{grid-template-columns:minmax(0,1fr) auto}
+  .wm{font-size:1.4rem}
+  .controls .more{display:inline-flex}
+  header.top:not(.open) .controls{grid-column:2;width:auto;justify-content:flex-end}
+  header.top:not(.open) .controls>:not(.find):not(.more){display:none!important}
+  header.top.open .controls{padding-top:.45rem;border-top:1px solid var(--line)}
+  .controls .btn,.controls button,.controls summary.btn{width:40px;height:40px}
+  .controls #lang{height:40px}
+  main{padding:0 1rem 2.5rem}
+  .page-head{padding:2rem 0 1.75rem;margin-bottom:2rem}
+  .page-head h1{font-size:2.35rem}
+  .hero h1{font-size:2.6rem}
+  main h2{font-size:1.55rem;margin-top:2.75rem}
+  ol.summary{font-size:1.02rem}
+  ol.summary li{padding-inline-start:2.1rem}
+  ol.summary li::before{font-size:1.35rem}
+  .secbar{background:var(--bg);box-shadow:none}
+  .sec-now{box-shadow:inset 0 0 0 1px var(--line)}
+  .summary-value,.kpis b{font-size:1.65rem}
+  .summary-card,.kpis>div{padding:1rem .75rem}
+  .summary-grid,.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dots{gap:3px}
 }
-@media print{.page-head{box-shadow:none;background:none}nav.toc{display:none}}
+
+/* Indian scripts keep their own faces: Fraunces has Latin only */
+html[data-lang]:not([data-lang="en"]) :is(main h1,main h2,main h3,.summary-value,.kpis b,.claims b,.qa h3,.hub b,.hub .n,.how h3,.card-title,.panel h3,.report .title){font-family:inherit;letter-spacing:0}
+
+/* The reading font: OpenDyslexic is wider and taller than any face above,
+   so the display sizes come down, nothing is set in italics or capitals,
+   and lines get more room. */
+html.dyslexic-font body{line-height:1.8;word-spacing:.08em}
+html.dyslexic-font :is(.kicker,.toc-h,th){text-transform:none;letter-spacing:.02em}
+html.dyslexic-font .page-head h1,html.dyslexic-font .hero h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.2;letter-spacing:0}
+html.dyslexic-font main h2{font-size:1.5rem;line-height:1.3;letter-spacing:0}
+html.dyslexic-font :is(.summary-value,.kpis b,.hub .n){font-size:1.6rem;letter-spacing:0}
+html.dyslexic-font .hub.big .n{font-size:2rem}
+html.dyslexic-font .wm{font-size:1.25rem;letter-spacing:0}
+html.dyslexic-font ol.summary{font-size:1rem;line-height:1.7}
+html.dyslexic-font em,html.dyslexic-font i{font-style:normal}
+@media (max-width:700px){html.dyslexic-font .page-head h1,html.dyslexic-font .hero h1{font-size:1.75rem}html.dyslexic-font .summary-value,html.dyslexic-font .kpis b{font-size:1.3rem}}
+html[data-lang]:not([data-lang="en"]) ol.summary li::before{font-family:inherit}
+@media print{.band,nav.toc{display:none}.page-head{box-shadow:none}}

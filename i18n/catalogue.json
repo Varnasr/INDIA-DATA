@@ -979,137 +979,6 @@
    "/"
   ]
  },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">All India · reasons for removal, state by state</span>": {
-  "kind": "markup",
-  "pages": [
-   "/india/",
-   "/india/faq/",
-   "/india/method/",
-   "/india/numbers/",
-   "/india/process/",
-   "/india/progress/",
-   "/india/report/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Bihar 2025 · every booth, every constituency</span>": {
-  "kind": "markup",
-  "pages": [
-   "/bihar/",
-   "/bihar/border/",
-   "/bihar/districts/",
-   "/bihar/explorer/",
-   "/bihar/faq/",
-   "/bihar/method/",
-   "/bihar/people/",
-   "/bihar/report/",
-   "/bihar/results/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Delhi 2026 · the names left off, constituency by constituency</span>": {
-  "kind": "markup",
-  "pages": [
-   "/delhi/",
-   "/delhi/faq/",
-   "/delhi/method/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Gujarat 2026 · the names left off, constituency by constituency</span>": {
-  "kind": "markup",
-  "pages": [
-   "/gujarat/",
-   "/gujarat/elections/",
-   "/gujarat/faq/",
-   "/gujarat/method/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Hyderabad Old City 2026 · five constituencies, every polling part</span>": {
-  "kind": "markup",
-  "pages": [
-   "/hyderabad/",
-   "/hyderabad/explorer/",
-   "/hyderabad/faq/",
-   "/hyderabad/hearings/",
-   "/hyderabad/method/",
-   "/hyderabad/parts/",
-   "/hyderabad/people/",
-   "/hyderabad/report/",
-   "/hyderabad/telangana/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Karnataka 2026 · every district, every recorded reason</span>": {
-  "kind": "markup",
-  "pages": [
-   "/karnataka/",
-   "/karnataka/faq/",
-   "/karnataka/method/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Kerala 2026 · every constituency, the roll from January 2025 to the election</span>": {
-  "kind": "markup",
-  "pages": [
-   "/kerala/",
-   "/kerala/elections/",
-   "/kerala/faq/",
-   "/kerala/method/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Maharashtra 2026 · the names left off, district by district</span>": {
-  "kind": "markup",
-  "pages": [
-   "/maharashtra/",
-   "/maharashtra/faq/",
-   "/maharashtra/method/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Names taken off the electoral rolls, counted from the published lists</span>": {
-  "kind": "markup",
-  "pages": [
-   "/",
-   "/terms/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Rajasthan 2026 · the state's removals, and every constituency's roll from 2023</span>": {
-  "kind": "markup",
-  "pages": [
-   "/rajasthan/",
-   "/rajasthan/faq/",
-   "/rajasthan/method/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Tamil Nadu 2026 · every constituency, every district</span>": {
-  "kind": "markup",
-  "pages": [
-   "/tamilnadu/",
-   "/tamilnadu/elections/",
-   "/tamilnadu/faq/",
-   "/tamilnadu/method/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Uttar Pradesh 2026 · the names left off, district by district</span>": {
-  "kind": "markup",
-  "pages": [
-   "/uttarpradesh/",
-   "/uttarpradesh/faq/",
-   "/uttarpradesh/method/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">Uttarakhand 2026 · the roll before and after the draft, constituency by constituency</span>": {
-  "kind": "markup",
-  "pages": [
-   "/uttarakhand/",
-   "/uttarakhand/faq/",
-   "/uttarakhand/method/"
-  ]
- },
- "<span class=\"h-title\">SIR analysis for India</span><span class=\"subtitle\">West Bengal 2026 · every constituency, the roll from 2024 to the election</span>": {
-  "kind": "markup",
-  "pages": [
-   "/westbengal/",
-   "/westbengal/elections/",
-   "/westbengal/faq/",
-   "/westbengal/method/"
-  ]
- },
  "<span><i style=\"background:var(--fill-red)\"></i>Deleted (on the absent, shifted and dead list)</span><span><i style=\"background:var(--fill-amber)\"></i>Kept, summoned to hearing</span><span><i style=\"background:var(--fill-navy)\"></i>Kept, untouched</span>": {
   "kind": "markup",
   "pages": [
@@ -1174,6 +1043,12 @@
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
+  ]
+ },
+ "A method page for every analysis": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "A pattern seen across all seats can weaken, or even reverse, once each seat is compared only with seats like it. So each finding here was measured again within each district, within each seat, and with Seemanchal left out.": {
@@ -1623,7 +1498,7 @@
   ]
  },
  "All India": {
-  "kind": "markup",
+  "kind": "script",
   "pages": [
    "/",
    "/bihar/",
@@ -1713,6 +1588,18 @@
   ]
  },
  "All India pages": {
+  "kind": "markup",
+  "pages": [
+   "/india/",
+   "/india/faq/",
+   "/india/method/",
+   "/india/numbers/",
+   "/india/process/",
+   "/india/progress/",
+   "/india/report/"
+  ]
+ },
+ "All India · reasons for removal, state by state": {
   "kind": "markup",
   "pages": [
    "/india/",
@@ -2100,6 +1987,20 @@
   "kind": "markup",
   "pages": [
    "/bihar/"
+  ]
+ },
+ "Bihar 2025 · every booth, every constituency": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/",
+   "/bihar/border/",
+   "/bihar/districts/",
+   "/bihar/explorer/",
+   "/bihar/faq/",
+   "/bihar/method/",
+   "/bihar/people/",
+   "/bihar/report/",
+   "/bihar/results/"
   ]
  },
  "Bihar SIR 2025: 69 lakh names struck off, booth by booth": {
@@ -3321,6 +3222,14 @@
    "/westbengal/method/"
   ]
  },
+ "Delhi 2026 · the names left off, constituency by constituency": {
+  "kind": "markup",
+  "pages": [
+   "/delhi/",
+   "/delhi/faq/",
+   "/delhi/method/"
+  ]
+ },
  "Delhi SIR 2026: questions and answers": {
   "kind": "markup",
   "pages": [
@@ -3907,6 +3816,12 @@
    "/hyderabad/method/"
   ]
  },
+ "Each analysis names its sources, the checks its figures pass and what they cannot show.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Each answer is computed from the published data when this page loads.": {
   "kind": "markup",
   "pages": [
@@ -4069,6 +3984,12 @@
    "/india/"
   ]
  },
+ "Each dot is one in every 100 electors on the rolls before the revision. The red dots are the names left off the draft rolls.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Each elector on a roll should end up struck off, summoned or untouched. These electors are in none of the three: {list}. {seat}'s list is incomplete and is read by polling-station name.": {
   "kind": "script",
   "pages": [
@@ -4184,6 +4105,12 @@
   ]
  },
  "Each state and union territory is shaded by the names left off its draft roll for every 100 electors on its roll before the revision, that is, the roll as it stood when the revision began. The figures are those its Chief Electoral Officer, the official in charge of elections in the state, published. Grey means the state was not in the revision or has published no figure. Hover over a state to see its figure. Tap it to open its own analysis, or the All India page where it has none.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "Each state with its own page has a finder. Pick yours to see the figures for your constituency or district, with a link you can send.": {
   "kind": "markup",
   "pages": [
    "/"
@@ -4506,6 +4433,12 @@
    "/kerala/elections/",
    "/tamilnadu/elections/",
    "/westbengal/elections/"
+  ]
+ },
+ "Every count comes from what the Election Commission and the states' Chief Electoral Officers published, or from the lists they released.": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "Every district": {
@@ -5046,6 +4979,12 @@
    "/hyderabad/"
   ]
  },
+ "Find your constituency": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Finding": {
   "kind": "script",
   "pages": [
@@ -5429,6 +5368,15 @@
    "/westbengal/elections/",
    "/westbengal/faq/",
    "/westbengal/method/"
+  ]
+ },
+ "Gujarat 2026 · the names left off, constituency by constituency": {
+  "kind": "markup",
+  "pages": [
+   "/gujarat/",
+   "/gujarat/elections/",
+   "/gujarat/faq/",
+   "/gujarat/method/"
   ]
  },
  "Gujarat SIR 2026: questions and answers": {
@@ -6176,6 +6124,18 @@
    "/"
   ]
  },
+ "How we counted": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "How we know": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Hyderabad 2026": {
   "kind": "markup",
   "pages": [
@@ -6246,6 +6206,20 @@
   "kind": "markup",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Hyderabad Old City 2026 · five constituencies, every polling part": {
+  "kind": "markup",
+  "pages": [
+   "/hyderabad/",
+   "/hyderabad/explorer/",
+   "/hyderabad/faq/",
+   "/hyderabad/hearings/",
+   "/hyderabad/method/",
+   "/hyderabad/parts/",
+   "/hyderabad/people/",
+   "/hyderabad/report/",
+   "/hyderabad/telangana/"
   ]
  },
  "Hyderabad Old City SIR 2026: against Hyderabad and Telangana": {
@@ -6341,20 +6315,8 @@
    "/bihar/results/"
   ]
  },
- "In 2025 and 2026 the Election Commission revised the electoral rolls of most of India house by house, in what it called a Special Intensive Revision, or SIR. Every elector had to fill in a fresh form, and names were left off the new rolls. This site counts those names from the lists and figures the Commission and the states have published. It shows who was removed, where, and what reason was written against each name.": {
-  "kind": "markup",
-  "pages": [
-   "/"
-  ]
- },
  "In 2025 and 2026 the Election Commission revised the electoral rolls of most of India, and crores of names were left off. This site counts who was removed, where, and on what recorded reason, from the published lists and figures.": {
   "kind": "markup",
-  "pages": [
-   "/"
-  ]
- },
- "In 2025 and 2026 the Election Commission revised the electoral rolls of {s} states and union territories house by house, in what it called a Special Intensive Revision, or SIR. Every elector had to fill in a fresh form, and {r} names were left off the draft rolls. This site counts those names from the lists and figures the Commission and the states have published. It shows who was removed, where, and what reason was written against each name.": {
-  "kind": "script",
   "pages": [
    "/"
   ]
@@ -6784,6 +6746,14 @@
    "/westbengal/method/"
   ]
  },
+ "Karnataka 2026 · every district, every recorded reason": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/"
+  ]
+ },
  "Karnataka SIR 2026: names removed, by district and reason": {
   "kind": "markup",
   "pages": [
@@ -6928,6 +6898,15 @@
    "/westbengal/elections/",
    "/westbengal/faq/",
    "/westbengal/method/"
+  ]
+ },
+ "Kerala 2026 · every constituency, the roll from January 2025 to the election": {
+  "kind": "markup",
+  "pages": [
+   "/kerala/",
+   "/kerala/elections/",
+   "/kerala/faq/",
+   "/kerala/method/"
   ]
  },
  "Kerala SIR 2026: questions and answers": {
@@ -7255,6 +7234,14 @@
    "/westbengal/elections/",
    "/westbengal/faq/",
    "/westbengal/method/"
+  ]
+ },
+ "Maharashtra 2026 · the names left off, district by district": {
+  "kind": "markup",
+  "pages": [
+   "/maharashtra/",
+   "/maharashtra/faq/",
+   "/maharashtra/method/"
   ]
  },
  "Maharashtra SIR 2026: questions and answers": {
@@ -7910,12 +7897,6 @@
    "/india/method/"
   ]
  },
- "Names left off the draft rolls, state by state": {
-  "kind": "markup",
-  "pages": [
-   "/"
-  ]
- },
  "Names or votes": {
   "kind": "script",
   "pages": [
@@ -8141,6 +8122,13 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Names taken off the electoral rolls, counted from the published lists": {
+  "kind": "markup",
+  "pages": [
+   "/",
+   "/terms/"
   ]
  },
  "Names the booth lists classify as Muslim are {low} of removals, and {high} if every unclassified name were Muslim, against 16.87% of the population in 2011 and 17.70% in the 2023 caste survey. The census share lies inside that range in {inside} of {districts} districts. In {above} districts the classified Muslim share alone is more than a point above the census share: {above_list}. <a href=\"../people/\">Women, religion, caste</a>.": {
@@ -9060,6 +9048,7 @@
  "Per 100 electors": {
   "kind": "script",
   "pages": [
+   "/",
    "/bihar/border/",
    "/bihar/districts/",
    "/bihar/results/",
@@ -9405,6 +9394,12 @@
    "/terms/"
   ]
  },
+ "Published figures only": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Q1": {
   "kind": "script",
   "pages": [
@@ -9621,6 +9616,14 @@
    "/westbengal/elections/",
    "/westbengal/faq/",
    "/westbengal/method/"
+  ]
+ },
+ "Rajasthan 2026 · the state's removals, and every constituency's roll from 2023": {
+  "kind": "markup",
+  "pages": [
+   "/rajasthan/",
+   "/rajasthan/faq/",
+   "/rajasthan/method/"
   ]
  },
  "Rajasthan SIR 2026: questions and answers": {
@@ -10461,6 +10464,72 @@
    "/india/"
   ]
  },
+ "SIR analysis for India": {
+  "kind": "markup",
+  "pages": [
+   "/",
+   "/bihar/",
+   "/bihar/border/",
+   "/bihar/districts/",
+   "/bihar/explorer/",
+   "/bihar/faq/",
+   "/bihar/method/",
+   "/bihar/people/",
+   "/bihar/report/",
+   "/bihar/results/",
+   "/delhi/",
+   "/delhi/faq/",
+   "/delhi/method/",
+   "/gujarat/",
+   "/gujarat/elections/",
+   "/gujarat/faq/",
+   "/gujarat/method/",
+   "/hyderabad/",
+   "/hyderabad/explorer/",
+   "/hyderabad/faq/",
+   "/hyderabad/hearings/",
+   "/hyderabad/method/",
+   "/hyderabad/parts/",
+   "/hyderabad/people/",
+   "/hyderabad/report/",
+   "/hyderabad/telangana/",
+   "/india/",
+   "/india/faq/",
+   "/india/method/",
+   "/india/numbers/",
+   "/india/process/",
+   "/india/progress/",
+   "/india/report/",
+   "/karnataka/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
+   "/kerala/",
+   "/kerala/elections/",
+   "/kerala/faq/",
+   "/kerala/method/",
+   "/maharashtra/",
+   "/maharashtra/faq/",
+   "/maharashtra/method/",
+   "/rajasthan/",
+   "/rajasthan/faq/",
+   "/rajasthan/method/",
+   "/tamilnadu/",
+   "/tamilnadu/elections/",
+   "/tamilnadu/faq/",
+   "/tamilnadu/method/",
+   "/terms/",
+   "/uttarakhand/",
+   "/uttarakhand/faq/",
+   "/uttarakhand/method/",
+   "/uttarpradesh/",
+   "/uttarpradesh/faq/",
+   "/uttarpradesh/method/",
+   "/westbengal/",
+   "/westbengal/elections/",
+   "/westbengal/faq/",
+   "/westbengal/method/"
+  ]
+ },
  "SIR analysis for India: who was taken off the electoral rolls": {
   "kind": "markup",
   "pages": [
@@ -11248,6 +11317,12 @@
    "/bihar/people/"
   ]
  },
+ "Special Intensive Revision, 2025 and 2026": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Split": {
   "kind": "script",
   "pages": [
@@ -11255,12 +11330,19 @@
   ]
  },
  "State": {
-  "kind": "markup",
+  "kind": "script",
   "pages": [
+   "/",
    "/india/"
   ]
  },
  "State boundaries from DataMeet's map of India's states (CC BY 4.0), simplified.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "State by state": {
   "kind": "markup",
   "pages": [
    "/"
@@ -11470,6 +11552,15 @@
    "/westbengal/elections/",
    "/westbengal/faq/",
    "/westbengal/method/"
+  ]
+ },
+ "Tamil Nadu 2026 · every constituency, every district": {
+  "kind": "markup",
+  "pages": [
+   "/tamilnadu/",
+   "/tamilnadu/elections/",
+   "/tamilnadu/faq/",
+   "/tamilnadu/method/"
   ]
  },
  "Tamil Nadu SIR 2026: names removed, by district and constituency": {
@@ -11814,6 +11905,18 @@
    "/assets/faq/india.js"
   ]
  },
+ "The Election Commission revised the electoral rolls of most of India house by house. This site counts who was removed, where, and the reason written against each name.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "The Election Commission revised the electoral rolls of {s} states and union territories house by house. This site counts who was removed, where, and the reason written against each name.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "The Hindu-name rate was higher in {a} of the {b} parts large enough to compare.": {
   "kind": "script",
   "pages": [
@@ -11880,7 +11983,7 @@
    "/bihar/border/"
   ]
  },
- "The OpenDyslexic, Source Serif and Noto typefaces are used under the SIL Open Font License.": {
+ "The OpenDyslexic, Fraunces and Noto typefaces are used under the SIL Open Font License.": {
   "kind": "markup",
   "pages": [
    "/terms/"
@@ -13098,6 +13201,18 @@
    "/bihar/results/"
   ]
  },
+ "The tables are yours": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "The tables behind every chart download as CSV, from under the chart or from the Downloads menu.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "The ten districts that lost the most names hold {share} of all removals. The heaviest districts lost more than twice as many names per elector as the lightest.": {
   "kind": "script",
   "pages": [
@@ -13635,6 +13750,14 @@
    "/westbengal/method/"
   ]
  },
+ "Uttar Pradesh 2026 · the names left off, district by district": {
+  "kind": "markup",
+  "pages": [
+   "/uttarpradesh/",
+   "/uttarpradesh/faq/",
+   "/uttarpradesh/method/"
+  ]
+ },
  "Uttar Pradesh SIR 2026: questions and answers": {
   "kind": "markup",
   "pages": [
@@ -13731,6 +13854,14 @@
    "/westbengal/elections/",
    "/westbengal/faq/",
    "/westbengal/method/"
+  ]
+ },
+ "Uttarakhand 2026 · the roll before and after the draft, constituency by constituency": {
+  "kind": "markup",
+  "pages": [
+   "/uttarakhand/",
+   "/uttarakhand/faq/",
+   "/uttarakhand/method/"
   ]
  },
  "Uttarakhand SIR 2026: questions and answers": {
@@ -13989,6 +14120,15 @@
    "/uttarpradesh/",
    "/uttarpradesh/faq/",
    "/uttarpradesh/method/",
+   "/westbengal/",
+   "/westbengal/elections/",
+   "/westbengal/faq/",
+   "/westbengal/method/"
+  ]
+ },
+ "West Bengal 2026 · every constituency, the roll from 2024 to the election": {
+  "kind": "markup",
+  "pages": [
    "/westbengal/",
    "/westbengal/elections/",
    "/westbengal/faq/",
@@ -15933,6 +16073,12 @@
    "/bihar/explorer/"
   ]
  },
+ "per 100 in {s}, the highest share": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "polling booths": {
   "kind": "script",
   "pages": [
@@ -16763,6 +16909,12 @@
    "/westbengal/elections/"
   ]
  },
+ "{p} of every 100 electors were left off the draft rolls.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "{rate} per 100": {
   "kind": "script",
   "pages": [
@@ -16782,6 +16934,12 @@
   ]
  },
  "{r} names left off the draft rolls in {s} states and union territories, and the reasons each one recorded.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "{r} names were <em>left off</em> India's draft rolls.": {
   "kind": "script",
   "pages": [
    "/"

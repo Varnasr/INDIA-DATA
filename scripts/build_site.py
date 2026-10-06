@@ -121,8 +121,8 @@ def shell(out, meta, content, scripts):
         '<a class="skip" href="#main">Skip to content</a>\n'
         '<div class="band %s" aria-hidden="true"></div>\n'
         '<header class="top">\n  <div class="header-content">\n'
-        '    <a class="logo" href="%s"><span class="logo-icon">%s</span><%s class="titles"><span class="h-title">%s</span>'
-        '<span class="subtitle">%s</span></%s></a>\n'
+        '    <a class="logo" href="%s"><span class="logo-icon">%s</span><%s class="titles"><span class="wm" aria-hidden="true" data-no-i18n>Off the <s>Roll</s></span>'
+        '<span class="h-title">%s</span><span class="subtitle">%s</span></%s></a>\n'
         '    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">\n      %s\n      %s\n      %s\n'
         '      <button type="button" class="theme" aria-pressed="false">%s <span class="lbl">Dark</span></button>\n'
         '      %s\n'
@@ -144,6 +144,8 @@ def shell(out, meta, content, scripts):
     # dashboards hand ranked lists and side-by-side measures to it
     if 'assets/sir.js' in scripts and 'assets/viz.js' not in scripts:
         scripts = re.sub(r'(<script src="[^"]*assets/sir\.js"></script>)', lambda m: m.group(1) + '\n' + m.group(1).replace('sir.js', 'viz.js'), scripts, count=1)
+    if place['id'] != 'home':
+        content = re.sub(r'(<div class="page-head"[^>]*>)', lambda m: m.group(1) + '<p class="kicker">%s</p>' % html.escape(place['label']), content, count=1)
     head_extra = ('\n' + meta['head']) if meta.get('head') else ''
     # link previews: a shared page shows its title, description and its
     # place's card (assets/og, written by scripts/og_cards.mjs). Previews
@@ -163,7 +165,7 @@ def shell(out, meta, content, scripts):
         cls += ' wide'
     # a long reading page gets the "On this page" rail in its left margin
     # (sir.js builds it from the h2s; sir.css keeps the margin for it)
-    elif len(re.findall(r'<h2[\s>]', content)) >= 4 and 'class="report' not in content:
+    elif len(re.findall(r'<h2[\s>]', content)) >= 4 and 'class="report' not in content and place['id'] != 'home':
         cls += ' has-toc'
     return (
         '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
