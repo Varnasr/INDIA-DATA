@@ -160,6 +160,19 @@ page and on the Bihar and Hyderabad method pages. `#s-<state>` (lower case,
 hyphens: `#s-tamil-nadu`) outlines that state's row and scrolls to its chart;
 `#t-<date>` opens on a timeline entry.
 
+**Inside the Commission** (`#inside-the-commission` on the process page) is
+The Indian Express's account of the objections two Election Commissioners put
+on file, November 2025 to October 2026, from `inside` in `process.json`: one
+lane per actor (`VIZ.lanes`, numbered markers matching the list under it),
+every event linked to the paper's article. It is press, so it says on the
+page that the paper has seen the notes and the site has not, and nothing in
+it moves into the timeline above without its document. The quote and page in
+the Express Plus special issue (October 2026) behind every event are in
+`data/india/raw/process_research/inside.json`. The issue itself is not on the
+site. The paper's own counts (14 objections, Goa's eight messages and 97
+electors) are in `inside.goa` and the prose, never counted from the markers,
+which show only the dated ones.
+
 **Where the revision stands** (`india/progress/`) is the progress board: for
 each of the 32 states and UTs, its stage as of `as_of` in `process.json`,
 worked out in the page script from the latest date each schedule step gives
