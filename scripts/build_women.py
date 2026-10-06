@@ -78,7 +78,7 @@ def build():
         rs = [d for d in dist if d['state'] == st]
         districts.append(dict(state=st, measure=m, districts=len(rs), over=sum(1 for d in rs if d['gap'] > 0),
                               min_gap=min(d['gap'] for d in rs), max_gap=max(d['gap'] for d in rs),
-                              rows=sorted([dict(district=d['district'], gap=d['gap']) for d in rs], key=lambda d: -d['gap'])))
+                              rows=sorted([dict(district=d['district'], share_roll=d['share_roll'], share=d['share'], gap=d['gap']) for d in rs], key=lambda d: -d['gap'])))
 
     # after the draft
     bf = load('bihar', 'final.json')['totals']
@@ -111,14 +111,14 @@ def build():
 def as_csv(d):
     buf = io.StringIO()
     w = csv.writer(buf, lineterminator='\n')
-    w.writerow(['state', 'women_share_of_roll', 'women_share_of_names_left_off', 'gap_points', 'women_left_off_per_100_women', 'men_left_off_per_100_men', 'quality', 'source_url'])
+    w.writerow(['level', 'state', 'district', 'measure', 'women_share_of_roll', 'women_share_of_count', 'gap_points',
+                'women_left_off_per_100_women', 'men_left_off_per_100_men', 'quality', 'source_url'])
     for s in d['states']:
-        w.writerow([s['state'], s['share_roll'], s['share_removed'], s['gap'], s['women_per_100'], s['men_per_100'], s['quality'], s['source_url']])
-    w.writerow([])
-    w.writerow(['state', 'measure', 'district', 'gap_points'])
+        w.writerow(['state', s['state'], '', 'names left off the draft', s['share_roll'], s['share_removed'], s['gap'],
+                    s['women_per_100'], s['men_per_100'], s['quality'], s['source_url']])
     for g in d['districts']:
         for r in g['rows']:
-            w.writerow([g['state'], g['measure'], r['district'], r['gap']])
+            w.writerow(['district', g['state'], r['district'], g['measure'], r['share_roll'], r['share'], r['gap'], '', '', '', ''])
     return buf.getvalue()
 
 
