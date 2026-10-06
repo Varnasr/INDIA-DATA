@@ -2,7 +2,7 @@
 
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
-Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi, Maharashtra and Gujarat (2026). Static HTML, Chart.js from cdnjs, one
+Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi, Maharashtra, Gujarat and Uttarakhand (2026). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
@@ -586,6 +586,38 @@ in `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
 - The map is by district (`data/geo/gujarat.json`), because DataMeet has no
   shapes for 20 city ACs; a constituency picked in the finder outlines its
   district. English only, like Uttar Pradesh, Delhi and Maharashtra.
+
+## Uttarakhand
+
+`scripts/build_uttarakhand.py` reads `data/uttarakhand/raw` (sources and checks
+in `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
+`constituencies.json`, `districts.json` and the two CSVs; `check_data.py` runs
+both with `--check`.
+
+- **The names left off are a state total only.** The CEO's PN 36/2026 gives the
+  roll on 8 June 2026 (79,60,762), the draft (71,33,785) and four reasons. No
+  table of the roll before by constituency or district was published, so
+  nothing below the state is measured against it, and every constituency
+  figure is about the change from the draft to the final roll.
+- **Constituencies from the CEO's own table**, pages 3 and 4 of PN 63/2026
+  (3 October 2026), transcribed by hand from a scan: draft, claims admitted,
+  objections admitted and final, by sex, for all 70. Every row satisfies draft
+  plus claims less objections equals final for each sex, and the rows add to
+  the printed district and state totals; the build fails otherwise.
+- **Rates after the draft are per 1,000 on the draft roll.** Claims and
+  objections are a few per cent of a roll.
+- **The plains are four districts** (Dehradun, Haridwar, Nainital, Udham Singh
+  Nagar, `PLAINS` in the build); Dehradun and Nainital also hold hill seats, so
+  the pages call it a split by district. 60.1% of the draft, 87.2% of the
+  names removed after it.
+- **Women were 53.0% of the names removed after the draft** against 47.8% of
+  the draft, more than their share in 63 of 70 seats (Dharchula 83%). The table
+  gives no reason, and the pages say it cannot say why.
+- **No comparison with the 2024 roll below the state.** The 2024 segment
+  electors include service voters, who cluster in the hill seats; the SIR rolls
+  are general electors.
+- The map is by constituency (`data/geo/uttarakhand.json`), shaded by names
+  removed after the draft per 1,000. English only, like the other 2026 pages.
 
 ## Notices
 
