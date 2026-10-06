@@ -3,7 +3,7 @@
 <div class="page-head"><h1>Deletions and results</h1><ol class="summary" id="short"></ol></div>
 
   <h2>Find a constituency or district</h2>
-  <p class="sub">Each constituency is shaded by the names removed for every 100 electors. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
+  <p class="sub">Each constituency is shaded by the names removed for every 100 electors on its 2025 roll, which lets large and small seats be compared. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
@@ -13,7 +13,7 @@
   </div>
 
   <h2>1. Removals against the 2025 margin</h2>
-  <p class="sub">Names removed in each seat set against the margin by which the seat was won in 2025.</p>
+  <p class="sub">Names removed in each seat, set against the margin by which the seat was won in 2025. The margin is the winner's votes less the runner-up's. Where more names were removed than that, the removals were large enough to have decided the seat. The lists cannot show whether they did.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="chart"><canvas id="cMargin" aria-label="2025 margin against names removed"></canvas></div>
@@ -22,7 +22,7 @@
   <p class="finding" id="fMargin"></p>
   <div class="twrap" tabindex="0" role="region" aria-label="Seats where deletions exceed the margin"><table id="tMargin"></table></div>
   <h3 style="margin-top:1.5rem">After the final roll</h3>
-  <p class="sub">The final roll of 30 September 2025, after the names added on claims and removed on objections, set against the roll before the revision. A seat's roll before is its draft roll plus the names on its phase 1 deletion list, because the roll of June 2025 is published only as a state total.</p>
+  <p class="sub">The draft roll of 1 August 2025 was open to claims, to add a name, and objections, to remove one. The final roll of 30 September 2025 is the result. Here it is set against the roll before the revision. A seat's roll before is its draft roll plus the names on its phase 1 deletion list, because the roll of June 2025 is published only as a state total. The net fall is the roll before less the final roll.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="chart"><canvas id="cNet" aria-label="Seats won in 2025, and seats where the removals exceed the margin at the draft and at the final roll, by alliance"></canvas></div>
@@ -32,7 +32,7 @@
   <p class="finding" id="fNetW"></p>
   <div class="twrap" tabindex="0" role="region" aria-label="Seats where the net fall exceeds the margin"><table id="tNet"></table></div>
   <h3 style="margin-top:1.5rem">Each reason for removal, on its own, against the margin</h3>
-  <p class="sub">The phase 1 list gives the officer's reason for every name. Each reason is taken on its own here, with the number of seats where the names removed for that reason alone exceed the 2025 margin, by the alliance that won.</p>
+  <p class="sub">The phase 1 list gives the officer's reason for every name. That reason is what the officer wrote down, and nobody checked it. Each reason is taken on its own here. The chart counts the seats where the names removed for that reason alone are more than the 2025 margin, by the alliance that won.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="chart"><canvas id="cMarginR" aria-label="Seats where the names removed for one reason exceed the 2025 margin, by reason and winning alliance"></canvas></div>
@@ -40,7 +40,7 @@
   </div>
   <p class="finding" id="fMarginR"></p>
   <h3 style="margin-top:1.5rem">Could the removals have changed who won?</h3>
-  <p class="sub">How the removed electors might have voted, estimated three ways, and one figure that needs no estimate at all. The count is each seat's names still off the final roll, less those entered as dead, at the seat's 2025 turnout. That count is low, because the names added after the draft include new electors, so every estimate is also run on all the names removed, with nothing added back.</p>
+  <p class="sub">How the removed electors might have voted, estimated three ways, and one figure that needs no estimate at all. Each estimate starts from the seat's names still off the final roll, less those entered as dead, and assumes they would have voted at the seat's 2025 turnout. That count is on the low side, because the names added after the draft include new electors. So every estimate is also run on all the names removed, with nothing added back.</p>
   <p class="finding" id="fBreak"></p>
   <p class="finding" id="fImpact"></p>
   <p class="finding" id="fGroups"></p>
@@ -48,14 +48,14 @@
   <p class="caveat" id="cImpact"></p>
 
   <h2>2. Seats, grouped by who held them</h2>
-  <p class="sub">Deletions per 100 electors, with each seat labelled by the 2020 Assembly winner, the 2024 Lok Sabha segment leader, and the 2025 Assembly winner.</p>
+  <p class="sub">Deletions per 100 electors, with each seat labelled three ways. These are the 2020 Assembly winner, the party that led the seat's segment of the 2024 Lok Sabha vote, and the 2025 Assembly winner.</p>
   <div class="grid">
     <div class="panel"><div class="chart"><canvas id="cLabels" aria-label="Deletions per 100 electors by alliance, three labellings"></canvas></div></div>
     <div class="panel"><div class="twrap" tabindex="0" role="region" aria-label="Seats by alliance"><table id="tLabels"></table></div></div>
   </div>
   <p class="finding" id="fLabels"></p>
   <h3 style="margin-top:1.5rem">Did seats with more removals swing to the NDA?</h3>
-  <p class="sub">If the removals had handed seats to the NDA, the seats INDIA held in 2020 that lost the most names should have gone to the NDA most often in 2025. Here those seats are split into thirds by names removed per 100 electors.</p>
+  <p class="sub">If the removals had handed seats to the NDA, then among the seats INDIA held in 2020, those that lost the most names should have gone to the NDA most often in 2025. Here those seats are split into thirds by names removed per 100 electors.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Seats INDIA held in 2020, by removals, and how many the NDA won in 2025"><table id="tFlip"></table></div>
   <p class="finding" id="fFlip"></p>
   <h3 style="margin-top:1.5rem" id="swing">Did the vote move where more names were removed?</h3>
@@ -66,12 +66,12 @@
   <p class="caveat" id="cSwing"></p>
 
   <h2 id="within">3. Booths within the same seat</h2>
-  <p class="sub">Comparing whole seats mixes politics with geography. Inside one constituency the registration officer, the villages and the pattern of migration are the same for every booth, so comparing booths there avoids that. Here the booths the NDA led in 2024 are compared with the booths INDIA led, seat by seat.</p>
+  <p class="sub">Comparing whole seats mixes politics with geography. Inside one constituency every booth has the same registration officer and much the same villages and migration, so comparing booths there takes most of the geography out. Here the booths the NDA led in 2024 are compared with the booths INDIA led, seat by seat.</p>
   <div class="kpis" id="kWithin"></div>
   <div class="grid">
     <div class="panel wide">
       <h3>NDA-led minus INDIA-led booths, seat by seat</h3>
-      <p>Mean names removed per booth, NDA-led booths minus INDIA-led booths, in each constituency with at least 20 of each. Above zero means NDA-led booths lost more.</p>
+      <p>The average names removed per NDA-led booth, less the average per INDIA-led booth, in each constituency with at least 20 of each. A bar above zero means NDA-led booths lost more.</p>
       <div class="chart"><canvas id="cWithin" aria-label="Within-seat difference by constituency"></canvas></div>
     </div>
   </div>
@@ -81,7 +81,7 @@
   <div class="grid">
     <div class="panel">
       <h3>By the party that won in 2025</h3>
-      <p>Deletions per 100 electors, seats grouped by the 2025 winner. Number of seats in brackets.</p>
+      <p>Deletions per 100 electors, with seats grouped by the party that won them in 2025. The number of seats is in brackets.</p>
       <div class="chart"><canvas id="cParty" aria-label="Deletions per 100 electors by 2025 winning party"></canvas></div>
     </div>
     <div class="panel">
@@ -92,18 +92,18 @@
   </div>
 
   <h2>5. Seats that changed hands</h2>
-  <p class="sub">Alliance that won each seat in 2020 against 2025, with the deletion rate in each cell.</p>
+  <p class="sub">The alliance that won each seat in 2020 against the one that won it in 2025, with the deletions per 100 electors in each cell.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Seat flows 2020 to 2025"><table id="tFlow"></table></div>
   <p class="finding" id="fFlow"></p>
 
   <p class="note">The 2024 booth leaders come from Form 20, the booth-level count, and the top two parties in every Lok Sabha seat match the declared result. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, with the VIP in 2020. INDIA is the RJD, INC, the three Left parties, the VIP from 2024, and the IIP. Everything else is Other. <a href="../method/">Method</a>.</p>
     <h2 id="sure">How sure are we?</h2>
-  <p class="sub">A pattern seen across all seats can weaken or turn round once seats are compared only with seats like them. Each finding here was measured again within each district, within each seat, and with Seemanchal left out.</p>
+  <p class="sub">A pattern seen across all seats can weaken, or even reverse, once each seat is compared only with seats like it. So each finding here was measured again within each district, within each seat, and with Seemanchal left out.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Each finding and the checks put to it"><table id="tRobust"></table></div>
   <div class="grid">
     <div class="panel wide">
       <h3>The swing, measured six ways</h3>
-      <p>Each row is one way of asking whether seats that lost more names moved further towards the NDA from 2020 to 2025. The square is the estimate, in points of NDA lead for each extra name removed per 100 electors, and the line is its 95% interval. A line that crosses zero cannot rule out no effect. The red row is the comparison that allows for each seat's 2020 lead, which the others leave out.</p>
+      <p>Each row is one way of asking whether seats that lost more names moved further towards the NDA from 2020 to 2025. The square is the estimate, in points of NDA lead for each extra name removed per 100 electors. The line is its 95% interval, the range the true value most likely lies in. A line that crosses zero cannot rule out no effect. The red row is the comparison that allows for each seat's 2020 lead, which the others leave out.</p>
       <div class="vizbox" id="vForest"></div>
     </div>
   </div>
@@ -124,7 +124,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var rOver = function (k, al) { return withM.filter(function (a) { return a[k] > a.margin2025 && (!al || a.al2025 === al); }).length; };
   SIR.chart('cMarginR', { type: 'bar', data: { labels: RK.map(function (k) { return RN[k]; }), datasets: ['NDA', 'INDIA', 'Other'].map(function (al) { return { label: al === 'Other' ? L('Other') : al, data: RK.map(function (k) { return rOver(k, al); }), $token: SIR.alliance[al] }; }) },
     options: { scales: { x: { stacked: true, title: { display: true, text: L('Reason entered by the officer') } }, y: { stacked: true, beginAtZero: true, title: { display: true, text: L('Seats') } } } } });
-  document.getElementById('fMarginR').innerHTML = L('<b>The names marked absent alone exceed the 2025 margin in {absent} of {seats} seats</b>, and the names marked already enrolled elsewhere in {enrolled}. These two reasons rest on the least. An absent entry records only that the officer did not find the elector, and a duplicate is a fair removal only if the other entry is the same person. The names marked shifted exceed the margin in {shifted} seats, and the dead in {dead}.', { absent: rOver('r_absent'), enrolled: rOver('r_enrolled'), shifted: rOver('r_shifted'), dead: rOver('r_dead'), seats: withM.length });
+  document.getElementById('fMarginR').innerHTML = L('<b>The names marked absent are, on their own, more than the 2025 margin in {absent} of {seats} seats</b>, and the names marked already enrolled elsewhere in {enrolled}. These two reasons rest on the least. An absent entry records only that the officer did not find the elector, and a duplicate is a fair removal only if the other entry is the same person. The names marked shifted are more than the margin in {shifted} seats, and the dead in {dead}.', { absent: rOver('r_absent'), enrolled: rOver('r_enrolled'), shifted: rOver('r_shifted'), dead: rOver('r_dead'), seats: withM.length });
   var LBL = s.by_alliance_label, years = ['2020', '2024', '2025'], name = { '2020': L('2020 Assembly'), '2024': L('2024 Lok Sabha'), '2025': L('2025 Assembly') };
 
   SIR.chart('cLabels', { type: 'bar', data: { labels: years.map(function (y) { return name[y]; }), datasets: ['NDA', 'INDIA', 'Other'].map(function (al) {
@@ -200,7 +200,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   }).join('');
   document.getElementById('tFlow').innerHTML = head + body + '</tbody>';
   var gained = acs.filter(function (a) { return a.al2020 !== 'NDA' && a.al2025 === 'NDA'; }), held = acs.filter(function (a) { return a.al2020 === 'NDA' && a.al2025 === 'NDA'; });
-  document.getElementById('fFlow').innerHTML = L('<b>{n} of 243 seats ({share}) changed alliance between 2020 and 2025.</b> Seats the NDA gained lost {gained} per 100 electors; seats it held lost {held}.', { n: flipped, share: SIR.pct(100 * flipped / 243), gained: SIR.d(rate(gained), 2), held: SIR.d(rate(held), 2) });
+  document.getElementById('fFlow').innerHTML = L('<b>{n} of 243 seats ({share}) changed alliance between 2020 and 2025.</b> Seats the NDA gained lost {gained} per 100 electors, and seats it held lost {held}.', { n: flipped, share: SIR.pct(100 * flipped / 243), gained: SIR.d(rate(gained), 2), held: SIR.d(rate(held), 2) });
 
   var withM = acs.filter(function (a) { return a.margin2025 != null; });
   SIR.chart('cMargin', { type: 'scatter', data: { datasets: als.map(function (al) {
@@ -211,7 +211,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var overBy = SIR.groupBy(over, 'al2025');
   document.getElementById('fMargin').innerHTML = (function () {
     var took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; }), tookOver = took.filter(function (a) { return a.total > a.margin2025; });
-    return L('<b>In {over} of {seats} seats the revision removed more names than the 2025 winning margin.</b> Of those, {list}. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {tookOver} lost more names than the NDA won by, and in the middle seat of that group the removals were {x} times the margin. The middle seat of all 243 lost {medRemoved} names, and the middle 2025 margin was {medMargin} votes.', { over: over.length, seats: withM.length, list: als.map(function (al) { return L('{n} went to {al}', { n: (overBy[al] || []).length, al: al }); }).join(', '), took: took.length, tookOver: tookOver.length, x: SIR.d(SIR.median(took.map(function (a) { return a.total / a.margin2025; })), 1), medRemoved: SIR.n(SIR.median(withM.map(function (a) { return a.total; }))), medMargin: SIR.n(SIR.median(withM.map(function (a) { return a.margin2025; }))) });
+    return L('<b>In {over} of {seats} seats the revision removed more names than the 2025 winning margin.</b> Of those, {list}. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {tookOver} lost more names than the NDA won by. In the middle seat of that group the removals were {x} times the margin. Across all 243, the typical seat lost {medRemoved} names, and the typical 2025 margin was {medMargin} votes.', { over: over.length, seats: withM.length, list: als.map(function (al) { return L('{n} went to {al}', { n: (overBy[al] || []).length, al: al }); }).join(', '), took: took.length, tookOver: tookOver.length, x: SIR.d(SIR.median(took.map(function (a) { return a.total / a.margin2025; })), 1), medRemoved: SIR.n(SIR.median(withM.map(function (a) { return a.total; }))), medMargin: SIR.n(SIR.median(withM.map(function (a) { return a.margin2025; }))) });
   })();
   SIR.table(document.getElementById('tMargin'), [
     { k: 'name', label: L('Constituency'), left: true, fmt: function (v, r) { return SIR.esc(r.ac + ' ' + v); } }, { k: 'win2025', label: L('2025 winner'), left: true, fmt: function (v, r) { return tag(r.al2025) + ' ' + SIR.esc(v); } },
@@ -225,7 +225,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
         { label: L('Removed at the draft exceed the margin'), data: als.map(function (al) { return (overBy[al] || []).length; }), $token: '--fill-amber' },
         { label: L('Net fall at the final roll exceeds the margin'), data: als.map(function (al) { return M.net_by_alliance[al] || 0; }), $token: '--fill-navy' }] },
       options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('Seats') } } } } });
-    document.getElementById('fNet').innerHTML = L('<b>The final roll was {nf} names smaller than the roll before the revision, and smaller in every one of the {n} seats.</b> After the draft, {a} names were added on claims and {r} removed on objections, a net rise of {na}, or {m} of the {p1} names removed at the draft. New electors are part of that rise, and the Commission has not said how many of those added had been removed at the draft. <b>In {net} of {seats} seats the fall that remained at the final roll was still larger than the 2025 winning margin</b>, compared with {tot} seats when only the draft removals are counted. Of those {net}, {list}.', {
+    document.getElementById('fNet').innerHTML = L('<b>The final roll was {nf} names smaller than the roll before the revision, and smaller in every one of the {n} seats.</b> After the draft, {a} names were added on claims and {r} removed on objections, a net rise of {na}, or {m} of the {p1} names removed at the draft. New electors are part of that rise, and the Election Commission has not said how many of those added had been removed at the draft. <b>In {net} of {seats} seats the fall that remained at the final roll was still larger than the 2025 winning margin</b>, compared with {tot} seats when only the draft removals are counted. Of those {net}, {list}.', {
       nf: SIR.lakh(T.net_fall_press), n: F.seats.length, a: SIR.lakh(T.added), r: SIR.lakh(T.removed_after), na: SIR.lakh(T.net_after), m: SIR.pct(T.made_up_pct), p1: SIR.lakh(T.p1),
       net: M.net, seats: M.seats, tot: M.total, list: als.map(function (al) { return L('{n} went to {al}', { n: (nob[al] || []).length, al: al }); }).join(', ') });
     document.getElementById('fNetW').innerHTML = L('<b>Women were {wp1} of the names removed at the draft and {wadd} of those added after it</b>, so their share of the roll fell from {wb} before the revision to {wf} on the final roll. Of the {ra} names removed after the draft, {rd} were entered as dead, {rs} as shifted and {rr} as repeated, and {ru} have no reason at all.', {
@@ -264,7 +264,7 @@ SIR.json('data/bihar/swing.json').then(function (W) {
      w.hi >= S.scenario_all_against ? L('<b>That range takes in no effect at all and both of these, so the vote cannot tell whether the removals cost INDIA its voters.</b>') :
      L('<b>That range takes in no effect at all and the second of these, so the vote cannot tell whether the removals cost INDIA its voters.</b>')) + ' ' +
     L('Without the allowance for 2020 the figure is {s} (between {lo} and {hi}). The two models disagree even on the direction, which is itself a reason to read little into either.', { s: sg2(w0.slope), lo: sg2(w0.lo), hi: sg2(w0.hi) });
-  document.getElementById('cSwing').innerHTML = L('This test asks one question, whether the removals moved votes between the alliances. It cannot say whether each name was rightly removed, and a voter wrongly removed has lost a vote whichever way it would have gone. A small lean either way, or harm spread evenly across parties, would not show here. Five years separate the two elections, in which LJP rejoined the NDA, VIP changed sides and Jan Suraaj entered. Both years come from the Election Commission\'s candidate-wise results. In both, NDA means BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA means RJD, Congress, the three Left parties, VIP and IIP.');
+  document.getElementById('cSwing').innerHTML = L('This test asks only whether the removals moved votes between the alliances. It cannot say whether each name was rightly removed, and a voter wrongly removed has lost a vote whichever way it would have gone. A small lean either way, or harm spread evenly across parties, would not show here. Five years separate the two elections, in which LJP rejoined the NDA, VIP changed sides and Jan Suraaj entered. Both years come from the Election Commission\'s candidate-wise results. In both, NDA means BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA means RJD, Congress, the three Left parties, VIP and IIP.');
 }).catch(SIR.fail);
 
 SIR.json('data/bihar/robust.json').then(function (R) {

@@ -43,7 +43,7 @@
 <div class="page-head"><h1>Kerala: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
 
   <h2 id="find-a-constituency-or-district">Find a constituency or district</h2>
-  <p class="sub">Each constituency is shaded by how much smaller its roll was at the draft than in January 2025, for every 100 electors. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
+  <p class="sub">Each constituency, the area that elects one member of the state assembly, is shaded by how much smaller its roll was at the draft than in January 2025, for every 100 electors on the January roll. The draft roll is the roll the revision published once names had been taken off. This fall in the roll is a different count from the names removed, as the district section below explains. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
@@ -54,7 +54,7 @@
 
 
   <h2 id="the-roll-step-by-step">The roll, step by step</h2>
-  <p class="sub">The state's roll, step by step, from the final roll of the 2025 summary revision to the roll of 23 March 2026. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.</p>
+  <p class="sub">The state's roll, step by step, from the final roll of the 2025 summary revision, the ordinary yearly update, to the roll of 23 March 2026. After the draft, people could file claims to be added and objections to names on it. The final roll is the draft once those were decided. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
@@ -62,14 +62,14 @@
   <p class="note">Kerala's dates, as they were set and as they were moved, are drawn beside every other state's on <a href="../india/process/#s-kerala">How the revision was run</a>.</p>
 
   <h2 id="per-100-electors-by-district">Per 100 electors, by district</h2>
-  <p class="sub">The Chief Electoral Officer has published no count of the names left off the draft, by district or constituency. Every roll is published by constituency, so each dot here is one constituency's fall from the roll of January 2025 to the draft of 23 December 2025, for every 100 electors on the January roll, grouped by district. It takes in the ordinary changes of 2025 as well as the revision, though for the state as a whole the two are within half a lakh of each other. Hover or tap a dot for its name.</p>
+  <p class="sub">The Chief Electoral Officer, the official in charge of the state's electoral roll, has published no count of the names left off the draft, by district or constituency. Every roll is published by constituency, so each dot here is one constituency's fall from the roll of January 2025 to the draft of 23 December 2025, for every 100 electors on the January roll, grouped by district. It takes in the ordinary changes of 2025 as well as the revision, though for the state as a whole the two are within half a lakh of each other. Hover or tap a dot for its name.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="cDist"></div></div>
   </div>
   <p class="finding" id="fDist"></p>
 
   <h2 id="women">Women</h2>
-  <p class="sub">Each dot is a constituency. Across, women's share of its January 2025 roll; up, women's share of the fall in its roll at the draft. Dots above the dashed line are seats where more women left the roll than their share of it. Hover or tap a dot for its name.</p>
+  <p class="sub">Each dot is a constituency. It sits across by women's share of its January 2025 roll and up by women's share of the fall in its roll at the draft. Dots above the dashed line are seats where women were a larger share of the fall than of the roll. Hover or tap a dot for its name.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWomen"></div></div>
   </div>
@@ -107,7 +107,7 @@ Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/distric
     { name: L('Draft roll'), v: S.draft, kind: 'total' }, { name: L('Net change to the final roll'), v: S.added_final, kind: 'up' },
     { name: L('Final roll'), v: S.final, kind: 'total' }, { name: L('Net change to March 2026'), v: S.added_election, kind: 'up' },
     { name: L('Roll of 23 March 2026'), v: S.election, kind: 'total' }] });
-  document.getElementById('fWater').innerHTML = L('<b>The draft roll was {f} smaller than the roll of January 2025, {p} of every 100 electors.</b> The final roll and the additions before the election brought back {b}, so the roll the election was held on was {e} smaller than in January 2025. The rise after the draft counts new voters as well as names put back.', {
+  document.getElementById('fWater').innerHTML = L('<b>The draft roll was {f} smaller than the roll of January 2025, {p} of every 100 electors.</b> The roll then grew by {b} to the final roll and the roll the election was held on, which was still {e} smaller than in January 2025. The rise after the draft counts new voters as well as names put back.', {
     f: SIR.lakh(S.fall_draft), p: SIR.d(S.draft_per_100, 1), b: SIR.lakh(S.election - S.draft), e: SIR.lakh(S.fall) });
 
   VIZ.strip('cDist', { label: L('Fall in the roll from January 2025 to the draft, per 100 electors, every constituency by district'), axis: L('Fall per 100 electors on the January 2025 roll'), r: 4.5,

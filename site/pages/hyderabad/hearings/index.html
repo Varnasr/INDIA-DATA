@@ -10,7 +10,7 @@
     </div>
     <div class="panel wide">
       <h3>The no-mapping list and the discrepancy list</h3>
-      <p>Electors summoned, per 100 on the pre-revision roll. No mapping means the elector could not be linked to the last intensive revision. The discrepancy list is the Commission's list of mismatches in names, ages and family links. An elector on both lists is counted once, under no mapping.</p>
+      <p>Electors summoned, per 100 on the roll before the revision. No mapping means the elector could not be linked to the last intensive revision. The discrepancy list is the Commission's list of mismatches in names, ages and family links. An elector on both lists is counted once, under no mapping.</p>
       <div class="chart short"><canvas id="cLists" aria-label="Summoned from the no-mapping list and from the discrepancy list only, per 100 electors"></canvas></div>
     </div>
     <div class="panel wide">
@@ -20,18 +20,18 @@
     </div>
     <div class="panel">
       <h3>Load per slot</h3>
-      <p>Hearing slots, the median cases per slot, and the heaviest single slot.</p>
+      <p>A slot is one sitting on the hearing schedule. The table gives the number of slots, the cases in the typical (median) slot, and the cases in the heaviest one.</p>
       <div class="twrap" tabindex="0" role="region" aria-label="Hearing load"><table id="tLoad"></table></div>
     </div>
     <div class="panel">
       <h3>Summoned, as a share of the roll</h3>
-      <p>Kept on the draft roll but called to a hearing.</p>
+      <p>Electors kept on the draft roll, the roll published after the removals, but called to a hearing.</p>
       <div class="chart short"><canvas id="cRate" aria-label="Share of roll summoned"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fHear"></p>
   <p class="finding" id="fLists"></p>
-  <p class="note">"At hearing" adds the ECI discrepancy list to the no-mapping list. On 7 September the Commission extended the calendar, with claims to 7 October, hearings to 5 November and the final roll on 9 November. The schedules shown are those in the September exports.</p>
+  <p class="note">"Summoned" counts the Election Commission's discrepancy list and the no-mapping list together. On 7 September the Commission extended the calendar, with claims to 7 October, hearings to 5 November and the final roll on 9 November. The schedules shown here are the ones in the September exports.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 </main>
@@ -61,7 +61,7 @@ SIR.json('data/hyderabad/summary.json').then(function (s) {
     options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: L('% of roll') } } } } });
   var un = SIR.sum(A, function (a) { return a.rules[s.rules[0]]; }), all = SIR.sum(A, function (a) { return SIR.sum(s.rules.map(function (r) { return a.rules[r]; }), function (x) { return x; }); });
   var heavy = A.slice().sort(function (a, b) { return b.max_slot - a.max_slot; })[0];
-  document.getElementById('fHear').innerHTML = L('<b>The commonest reason to be summoned was that the elector could not be traced to the last intensive revision</b>, at {share} of flags. Names of the elector or a parent that did not match came next. The busiest slot listed {max} cases, in {name}, and the typical slot listed {median}. The lists do not record how long a slot lasted.', { share: SIR.pct(100 * un / all), max: SIR.n(heavy.max_slot), name: heavy.name, median: SIR.d(heavy.median_slot, 0) });
+  document.getElementById('fHear').innerHTML = L('<b>The commonest reason to be summoned was that the elector could not be traced to the last intensive revision</b>, in 2002, at {share} of flags. One elector can carry more than one flag. Names of the elector or a parent that did not match came next. The busiest slot listed {max} cases, in {name}, and the typical slot listed {median}. The lists do not record how long a slot lasted.', { share: SIR.pct(100 * un / all), max: SIR.n(heavy.max_slot), name: heavy.name, median: SIR.d(heavy.median_slot, 0) });
 }).catch(SIR.fail);
 </script>
 <script src="../../assets/faq/hyd.js"></script>

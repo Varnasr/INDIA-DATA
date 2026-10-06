@@ -20,11 +20,11 @@
   <div class="grid">
     <div class="panel"><h3>How many names each booth lost</h3><p id="p1p"></p><div class="chart"><canvas id="c1" aria-label="Booths by the number of names they lost"></canvas></div></div>
     <div class="panel"><h3 id="p2t"></h3><p id="p2p"></p><div class="chart"><canvas id="c2" aria-label="Names removed against winning margins"></canvas></div></div>
-    <div class="panel"><h3>Who was removed</h3><p>Women, and the religion the booth lists assign to each name. A name left unclassified could belong to either group.</p><div class="chart"><canvas id="c3" aria-label="Share of removals by sex and name-classified religion"></canvas></div></div>
+    <div class="panel"><h3>Who was removed</h3><p>Women's share of the removed, and the religion the booth lists guess from each name. A name left unclassified could belong to either group.</p><div class="chart"><canvas id="c3" aria-label="Share of removals by sex and name-classified religion"></canvas></div></div>
     <div class="panel"><h3 id="p4t"></h3><p id="p4p"></p><div class="chart"><canvas id="c4" aria-label="Distribution of removals"></canvas></div></div>
     <div class="panel wide"><h3 id="tblTitle"></h3><p>Click a column to sort, a row to open it.</p><div class="twrap" tabindex="0" role="region" aria-labelledby="tblTitle"><table id="tbl"></table></div></div>
   </div>
-  <p class="note">Removals come from the Chief Electoral Officer's SIR deletion lists: phase 1 with the draft roll of 1 August 2025, and phase 2 before the final roll. Booth figures cover phase 1 only, because only phase 1 was listed by booth. Constituency figures include both phases. Removals per 100 electors are divided by the constituency's 2025 electorate, and margins are the declared 2025 Assembly results. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA is the RJD, INC, the Left parties, VIP and IIP. Only totals are published, never names or EPIC numbers. <a href="../faq/">FAQ</a> · <a href="../method/">Method</a>.</p>
+  <p class="note">Removals come from the deletion lists of the Special Intensive Revision (SIR), published by the Chief Electoral Officer, Bihar. Phase 1 was published with the draft roll of 1 August 2025, and phase 2 before the final roll. Booth figures cover phase 1 only, because only phase 1 was listed by booth. Constituency figures include both phases. Removals per 100 electors are the names removed divided by the constituency's electors on the 2025 roll. A winning margin is the winner's votes less the runner-up's, from the declared 2025 Assembly results. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA is the RJD, INC, the Left parties, VIP and IIP. Only totals are published, never names or EPIC numbers. <a href="../faq/">FAQ</a> · <a href="../method/">Method</a>.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 </main>
@@ -74,14 +74,14 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var nda = withM.filter(function (a) { return a.al2025 === 'NDA'; }), ndaOver = nda.filter(function (a) { return a.total > a.margin2025; });
   var took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; }), tookOver = took.filter(function (a) { return a.total > a.margin2025; });
   var tookMed = SIR.median(took.map(function (a) { return a.total / a.margin2025; }));
-  var dz = idn.districts, fOver = dz.filter(function (d) { return d.female_share_deleted > d.female_share_population_2011; });
-  var gap = dz.map(function (d) { return d.female_share_deleted - d.female_share_population_2011; });
+  var dz = idn.districts, fOver = dz.filter(function (d) { return d.female_share_deleted > d.female_share_roll; });
+  var gap = dz.map(function (d) { return d.female_share_deleted - d.female_share_roll; });
   var b200 = SIR.sum(acs, 'booths_200'), I = s.intensity, b400 = I.bins[I.bins.length - 1].booths;
   var claims = [
     [SIR.lakh(t.total), L('names removed from Bihar\'s roll: {p1} before the draft roll of 1 August 2025 and {p2} more before the final roll. That is {rate} for every 100 electors on the 2025 roll, and as many as {max} in a single constituency.', { p1: SIR.n(t.p1), p2: SIR.n(t.p2), rate: SIR.d(100 * t.total / t.electorate_2025, 2), max: SIR.d(Math.max.apply(null, acs.map(function (a) { return a.per_100; })), 1) })],
     [L('{a} of {b}', { a: overAll.length, b: withM.length }), L('constituencies lost more names in the revision than the margin by which they were won in 2025. That includes {a} of the {b} seats the NDA won.', { a: ndaOver.length, b: nda.length })],
-    [L('{a} of {b}', { a: tookOver.length, b: took.length }), L('seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA\'s winning margin. In the median such seat, the removals were {x} times the margin.', { x: SIR.d(tookMed, 1) })],
-    [SIR.pct(100 * t.female / (t.female + t.male)), L('of those removed were women, against 47.86% of Bihar\'s population. Women\'s share of the removed exceeds their share of the population in {a} of {b} districts, by up to {gap} points.', { a: fOver.length, b: dz.length, gap: SIR.d(Math.max.apply(null, gap), 1) })],
+    [L('{a} of {b}', { a: tookOver.length, b: took.length }), L('seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA\'s winning margin. In the middle seat of that group, the removals were {x} times the margin.', { x: SIR.d(tookMed, 1) })],
+    [SIR.pct(100 * t.female / (t.female + t.male)), L('of those removed were women, against {roll}% of the roll before the revision. Women\'s share of the removed exceeds their share of the roll in {a} of {b} districts, by up to {gap} points.', { roll: SIR.d(t.female_share_roll, 2), a: fOver.length, b: dz.length, gap: SIR.d(Math.max.apply(null, gap), 1) })],
     [SIR.n(b200), L('polling booths lost more than 200 names each, and {n} lost 400 or more.', { n: SIR.n(b400) })]
   ];
   document.getElementById('claims').innerHTML = claims.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join('');
@@ -98,7 +98,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
       [SIR.pct(100 * t.female / (t.female + t.male)), L('of the removed are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among the removed, by name classification')],
       [L('{a} of {b}', { a: overAll.length, b: withM.length }), L('seats lost more names than their 2025 margin')], [SIR.n(t.booths), L('polling booths')]]);
     var hk = Object.keys(s.booth_histogram);
-    document.getElementById('p1p').textContent = L('Booths by the number of names removed in phase 1. Most lost fewer than a hundred, and {n} lost more than 200.', { n: SIR.n(b200) });
+    document.getElementById('p1p').textContent = L('Booths by the number of names removed in phase 1. Most lost fewer than a hundred. {n} lost more than 200.', { n: SIR.n(b200) });
     SIR.redraw('c1', { type: 'bar', data: { labels: hk, datasets: [{ label: L('Booths'), data: hk.map(function (k) { return s.booth_histogram[k]; }), $token: '--fill-navy' }] },
       options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names removed in the booth') } }, y: { title: { display: true, text: L('Booths') } } } } });
     var cuts = [0, 1, 2, 5, 10, 20, Infinity], lab = [L('under 1×'), L('{a} to {b}×', { a: 1, b: 2 }), L('{a} to {b}×', { a: 2, b: 5 }), L('{a} to {b}×', { a: 5, b: 10 }), L('{a} to {b}×', { a: 10, b: 20 }), L('20× or more')];
@@ -110,7 +110,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     who(100 * t.female / (t.female + t.male), rel);
     var rc = [4, 6, 8, 10, 12, 14, 16, 25], rl = ['4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16+'];
     document.getElementById('p4t').textContent = L('Constituencies by removals per 100 electors');
-    document.getElementById('p4p').textContent = L('How the 243 constituencies are spread, from the lightest to the heaviest removals.');
+    document.getElementById('p4p').textContent = L('How many of the 243 constituencies fall at each level of removals, from the lightest to the heaviest.');
     SIR.redraw('c4', { type: 'bar', data: { labels: rl, datasets: [{ label: L('Constituencies'), data: rl.map(function (l, i) { return acs.filter(function (a) { return a.per_100 >= rc[i] && a.per_100 < rc[i + 1]; }).length; }), $token: '--fill-red' }] },
       options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Removed per 100 electors') } }, y: { beginAtZero: true, title: { display: true, text: L('Constituencies') } } } } });
     document.getElementById('tblTitle').textContent = L('All 243 constituencies');
@@ -133,7 +133,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     document.getElementById('title').textContent = a.ac + ' ' + a.name + (a.reserved !== 'GEN' ? ' (' + a.reserved + ')' : '');
     var sv = { district: SIR.esc(a.district), pc: SIR.esc(a.pc), booths: SIR.n(a.booths), total: SIR.n(a.total), rate: SIR.d(a.per_100, 2), winner: SIR.esc(a.win2025) + ' ' + tag(a.al2025), margin: a.margin2025 != null ? SIR.n(a.margin2025) : '', times: a.margin2025 != null ? SIR.d(a.total / a.margin2025, 1) : '' };
     document.getElementById('sub').innerHTML = a.margin2025 == null ? L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner}.', sv)
-      : a.total > a.margin2025 ? L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes; {times} times as many names were removed.', sv)
+      : a.total > a.margin2025 ? L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes, and {times} times as many names were removed.', sv)
       : L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes.', sv);
     fate(a.p1, a.p2, a.electorate_2025);
     var rel = relShare(a.hindu, a.muslim, a.unknown);

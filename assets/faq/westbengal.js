@@ -15,7 +15,7 @@
       var margin = L('In {k} of the {n} constituencies, the roll fell by more than the 2026 winning margin.', { k: s.over_margin, n: s.acs });
       var QA = [
         [L('How many names did the revision remove in West Bengal?'),
-         scale + ' ' + L('The roll of 27 October 2025 held {b}, the draft {d} and the final roll of 28 February 2026 {f}. By the 2026 nominations the roll had regained {back}, to {e}.', { b: cr(p.before), d: cr(p.draft), f: cr(p.final), back: SIR.lakh(s.after_final), e: cr(s.election) }), ['main', 'faq']],
+         scale + ' ' + L('The roll of 27 October 2025 held {b}, the draft {d} and the final roll of 28 February 2026 {f}. By the 2026 nominations the roll had grown by {back}, to {e}.', { b: cr(p.before), d: cr(p.draft), f: cr(p.final), back: SIR.lakh(s.after_final), e: cr(s.election) }), ['main', 'faq']],
         [L('Why were the names removed?'),
          why + ' ' + L('A reason on the list is what the officer wrote down, and nobody checked it.'), ['main', 'faq']],
         [L('Why do these pages compare the roll with 2024?'),

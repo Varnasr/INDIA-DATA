@@ -95,19 +95,22 @@ R.h1('Part I: Bihar as a whole')
 R.h2('At a glance')
 R.stats([(indian(t['total']), 'names removed, both phases'), (pct(100 * t['total'] / polled), 'of all votes polled in 2025'),
          ('%d of %d' % (len(over), len(withM)), 'seats where removals exceed the margin'), (pct(fem), 'of the removed are women')])
-R.p('The Special Intensive Revision removed %s names from Bihar\'s electoral roll in 2025: %s before the draft roll of 1 August and %s more before the final roll. '
-    'That is %s names for every 100 electors on the final roll, across %s polling booths in %d constituencies. '
+R.p('The Special Intensive Revision, a fresh check of every name on the electoral roll, removed %s names from Bihar\'s roll in 2025. '
+    '%s came off before the draft roll of 1 August, the first published version of the revised roll, and this report calls that phase 1. '
+    '%s more came off before the final roll of 30 September, published after the hearing of claims and objections, and this report calls that phase 2. '
+    'The total comes to %s names for every 100 electors on the final roll, across %s polling booths in %d constituencies. '
     'In the Assembly election that followed in November, %s votes were polled. The names removed equal %s of them, one for every %.1f votes cast.'
     % (indian(t['total']), indian(t['p1']), indian(t['p2']), '%.2f' % per100, indian(t['booths']), len(A), indian(polled),
        pct(100 * t['total'] / polled), polled / t['total']))
-R.p('Set against the results, the removals are larger than the margin of victory in %d of %d constituencies. They exceed the combined winning margin of all %d seats, %s, by a factor of %.2f, '
+R.p('A seat\'s winning margin is the number of votes by which its winner beat the runner-up. The removals are larger than the winning margin in %d of %d constituencies. They exceed the combined winning margin of all %d seats, %s, by a factor of %.2f, '
     'and they exceed the combined winning margin of the NDA across the %d seats it won, %s. In %d of the %d seats the NDA took from INDIA, more names were removed than the NDA won by.'
     % (len(over), len(withM), len(withM), lakh(mAll), t['total'] / mAll, len(nda), lakh(mNDA), len(tookO), len(took)))
 R.p('Women are %s of those removed and %s of the roll they were removed from, and their share of the removed is higher than their share of the roll in %d of %d districts. '
-    'Sex is recorded on the roll, so this figure rests on no estimate.' % (pct(fem), pct(t['female_share_roll']), len(fOver), len(DI)))
+    'The roll records each elector\'s sex, so this figure is a count and involves no guessing.' % (pct(fem), pct(t['female_share_roll']), len(fOver), len(DI)))
 
 R.h2('Deletions and coverage')
-R.p('The booth lists account for every one of Bihar\'s %s polling booths. The table gives each district\'s removals, removals per 100 electors on the 2025 roll, and its share of the state total.' % indian(t['booths']))
+R.p('The booth lists cover every one of Bihar\'s %s polling booths. The table gives each district\'s removals, its removals per 100 electors on the 2025 roll, and its share of the state total. '
+    'Counting per 100 electors puts a large district and a small one on the same scale.' % indian(t['booths']))
 R.table(['District', 'Seats', 'Names removed', 'Per 100 electors', 'Per booth', 'Share of state'],
         [[d['district'], d['acs'], indian(d['deleted']), '%.2f' % d['per_100'], '%.1f' % d['per_booth'], pct(100 * d['deleted'] / t['total'])] for d in rankD],
         widths=[4.2, 1.5, 3, 2.6, 2.2, 2.6], right={1, 2, 3, 4, 5})
@@ -162,9 +165,9 @@ nda_won = sum(1 for x in IM['seats'] if x['alliance_w'] == 'NDA')
 kept = [nda_won - IS[k]['to_india'] + IS[k]['to_nda'] for k in IS]
 R.h2('Could the removals have changed who won?')
 R.p('A name removed is not a vote lost to one side. Some of the removed had died, many would not have voted, and those who would have voted would have split between the parties. '
-    'Each seat\'s count here is the names still off the final roll, less those entered as dead, at the seat\'s 2025 turnout: %s electors across Bihar. That count is low, because the names added after the draft include new electors, so every estimate is also run on all the names removed, with nothing added back (%s).'
+    'Each seat\'s count here is the names still off the final roll, less those entered as dead, at the seat\'s 2025 turnout. That comes to %s electors across Bihar. That count is low, because the names added after the draft include new electors, so every estimate is also run on all the names removed, with nothing added back (%s).'
     % (indian(IM['voters_lower']), indian(IM['voters_upper'])))
-R.p('In %d of %d seats the removed electors who would have voted were enough to change the result had they backed the runner-up. In %d of them a lean of under 55%% would have done it (%s). In the other %d seats the margin was larger than every removed vote put together. '
+R.p('In %d of %d seats the removed electors who would have voted were enough to change the result had they backed the runner-up. In %d of them a lean of under 55%% would have done it (%s). That share, the part of the removed voters the runner-up would have needed, is called the break-even figure below. In the other %d seats the margin was larger than every removed vote put together. '
     'This is the one figure that needs no assumption about how anyone votes.'
     % (IM['seats_total'] - IB['over_100'], IM['seats_total'], IB['under_55'], andj([x['name'] for x in IM['close']]), IB['over_100']))
 c = IM['comp_booth_all']
@@ -175,7 +178,7 @@ R.p('Weighting instead by how Muslims and others, or women and men, voted in the
     % (IM['poll_source'], IS['religion_upper']['flips'], IS['sex_upper']['flips'], seatlist('religion_upper'), seatlist('sex_upper'), min(kept), max(kept)))
 out = [x for x in IM['seats'] if not x['modelled'] and x['breakeven_lower'] < 55]
 if out:
-    R.p('Seats where the winner or runner-up is outside the two alliances get the break-even figure only, because the booth results and the poll both count every other party together. Two of those were close: %s.'
+    R.p('Seats where the winner or runner-up is outside the two alliances get the break-even figure only, because the booth results and the poll both count every other party together. Two of those were close. They were %s.'
         % andj(['%s (%s over %s by %s)' % (x['name'], x['winner'], x['runner_up'], indian(x['margin'])) for x in out]))
 rows = sorted([x for x in IM['seats'] if x['breakeven_lower'] < 65], key=lambda x: x['breakeven_lower'])
 R.table(['Constituency', 'Winner / runner-up', 'Margin', 'Removed who would have voted', 'Share the runner-up needed', 'Booth estimate, net to runner-up'],
@@ -207,7 +210,7 @@ R.p('Once each seat\'s 2020 result is allowed for, the NDA\'s lead over INDIA gr
 R.p('This asks only whether the removals moved votes between the alliances. It cannot say whether each name was rightly removed, and a voter wrongly removed has lost a vote whichever way it would have gone. A small lean either way would not show, and five years separate the two elections, in which LJP rejoined the NDA, VIP changed sides and Jan Suraaj entered.', italic=True, size=8.5)
 
 R.h2('After the final roll')
-R.p('The final roll of 30 September 2025 was published after the claims and objections on the draft. The Election Commission\'s Format 4B return for it gives, seat by seat and by sex, the names added and removed after the draft and the final roll, and agrees with the Chief Electoral Officer\'s press note. '
+R.p('The final roll of 30 September 2025 was published after the claims and objections on the draft were heard. A claim asks for a name to be added or put back, and an objection asks for one to be removed. Format 4B, the Election Commission\'s standard return for a final roll, gives seat by seat and by sex the names added and removed after the draft and the final roll itself. It agrees with the press note of the Chief Electoral Officer, the Commission\'s officer in charge of the state\'s rolls. '
     'The roll of June 2025 is published only as a state total, so a seat\'s roll before the revision is taken here as its draft roll plus the names on its phase 1 list.')
 R.stats([(lakh(FT['added']), 'added after the draft'), (lakh(FT['removed_after']), 'removed after the draft'), (pct(FT['made_up_pct']), 'of the draft removals made up'),
          ('%d of %d' % (FM['net'], FM['seats']), 'seats where the net fall exceeds the margin')])
@@ -223,9 +226,9 @@ ax.set_ylabel('Seats', fontsize=8)
 ax.legend(fontsize=7, frameon=False)
 style_axes(ax, 'Seats where the removals exceed the 2025 margin, at the draft and at the final roll')
 R.figure(fig, 'Figure 4. By the alliance that won the seat in 2025.')
-R.p('After the draft, %s names were added on claims and %s removed on objections, so the final roll rose by %s over the draft: %s of the %s names removed at the draft. '
+R.p('After the draft, %s names were added on claims and %s removed on objections, so the final roll rose by %s over the draft. That rise equals %s of the %s names removed at the draft. '
     'That rise counts new electors as well as names put back, and the Commission has not said how many of those added had been removed at the draft, so it is the most that can have been put back. '
-    'The final roll was %s names smaller than the roll before the revision, and smaller in every one of the %d seats.'
+    'The final roll was %s names smaller than the roll before the revision. This report calls that difference the net fall, and the roll fell in every one of the %d seats.'
     % (indian(FT['added']), indian(FT['removed_after']), indian(FT['net_after']), pct(FT['made_up_pct']), indian(FT['p1']), indian(FT['net_fall_press']), len(FB['seats'])))
 R.p('In %d of %d seats the fall that remained at the final roll was still larger than the 2025 winning margin, against %d when the draft removals are counted alone. Of those %d, the NDA won %d, INDIA %d and others %d.'
     % (FM['net'], FM['seats'], FM['total'], FM['net'], FM['net_by_alliance'].get('NDA', 0), FM['net_by_alliance'].get('INDIA', 0), FM['net_by_alliance'].get('Other', 0)))
@@ -235,7 +238,7 @@ R.p('Women were %s of the names removed at the draft and %s of those added after
        indian(FT['removed_after']), indian(FT['r_expired']), indian(FT['r_shifted']), indian(FT['r_repeated']), indian(FT['r_unstated'])))
 
 R.h2('Women and the deletions')
-R.p('The roll records each elector\'s sex, so women\'s share of the removed needs no estimate. Women are %s of all removals: %s women and %s men, %s more women than men. '
+R.p('The roll records each elector\'s sex, so women\'s share of the removed needs no estimate. Women are %s of all removals. That is %s women against %s men, %s more women than men. '
     'Their share of the removed exceeds their share of the roll before the revision in %d of %d districts, by up to %.1f points in %s. The roll before the revision is the draft roll by sex plus the names removed at the draft by sex.'
     % (pct(fem), indian(t['female']), indian(t['male']), indian(t['female'] - t['male']), len(fOver), len(DI),
        max(d['female_share_deleted'] - d['female_share_roll'] for d in DI),
@@ -253,7 +256,7 @@ R.p('Phase 1 removed %s more women than men, and %s of that difference (%s) were
     % (indian(xsF), indian(xsS), pct(100 * xsS / xsF), pct(100 * yW / yS)))
 
 R.h2('Reasons for removal')
-R.p('The phase 1 lists record, against every one of the %s names, the reason the officer entered for removing it. Counted as entered: %s were marked permanently shifted (%s), %s dead (%s), %s absent (%s) and %s already enrolled elsewhere (%s). '
+R.p('The phase 1 lists record, against every one of the %s names, the reason the officer entered for removing it. Counted as they were entered, %s were marked permanently shifted (%s), %s dead (%s), %s absent (%s) and %s already enrolled elsewhere (%s). '
     'The counts agree with the booth list in every booth, and the counts of women and men agree with the Chief Electoral Officer\'s phase 1 figures in every constituency. The %s names removed in phase 2 carry no reason in the lists.'
     % (indian(rtot), indian(RT['shifted']), pct(rsh('shifted')), indian(RT['dead']), pct(rsh('dead')), indian(RT['absent']), pct(rsh('absent')),
        indian(RT['already_enrolled']), pct(rsh('already_enrolled')), indian(t['p2'])))
@@ -296,15 +299,15 @@ ax.set_ylabel('Women, % of those aged 18-29 marked shifted', fontsize=8)
 style_axes(ax, 'Young women marked shifted, against marriage movement, by district')
 R.figure(fig, 'Figure 7. Each dot is a district. Marriage movement from the 2011 census migration table D-3, counted where women arrived.')
 R.p('Among those aged 18 to 29 marked shifted, %s were women and %s men, so women outnumber men by %s. Marriage alone could account for a number that size. In the ten years before the 2011 census, %s women in Bihar moved on marriage, about %s a year, so the excess is about %.2f of one year\'s marriage moves. '
-    'The districts do not fit. Where more women had moved on marriage, women were %s share of the young marked shifted (rank correlation %.2f). Marriage can explain how many young women were marked shifted, but it cannot explain where they were. The census counts women in the district they moved to, and its figures are fifteen years old.'
+    'The districts do not fit. Where more women had moved on marriage, women were %s share of the young marked shifted (rank correlation %.2f). A rank correlation runs from -1 to 1 and shows whether districts that rank high on one measure also rank high on the other. Marriage can explain how many young women were marked shifted, but it cannot explain where they were. The census counts women in the district they moved to, and its figures are fifteen years old.'
     % (indian(TM['young_shifted_f']), indian(TM['young_shifted_m']), indian(TM['excess']), lakh(TM['recent_marriage']), lakh(TM['recent_marriage_per_year']), TM['excess_years'],
        'a smaller' if TM['rho_share'] <= -0.2 else ('a larger' if TM['rho_share'] >= 0.2 else 'neither a larger nor a smaller'), TM['rho_share']))
 
 R.h2('Religion')
-R.p('The roll records no religion. The booth lists classify removed names as Hindu or Muslim where the name allows it, and leave %s of names unclassified. '
-    'The Muslim share of removals is therefore a range: %s counting only names classified Muslim, and %s if every unclassified name were Muslim. '
+R.p('The roll records no religion, so religion here is guessed from names. The booth lists classify removed names as Hindu or Muslim where the name allows it, and leave %s of names unclassified. '
+    'The Muslim share of removals is therefore given as a range. It is %s counting only names classified Muslim, and %s if every unclassified name were Muslim. '
     'Bihar\'s Muslim population was 16.87%% in the 2011 census and 17.70%% in the 2023 caste survey. The census share lies inside the range in %d of %d districts. '
-    'In %d districts the classified Muslim share alone runs more than a point above the census share: %s.'
+    'In %d districts (%s) the classified Muslim share alone runs more than a point above the census share.'
     % (pct(100 * t['unknown'] / cls), pct(mlo), pct(mhi), len(inside), len(DI), len(above), andj([d['district'] for d in above])))
 pin = [d for d in DI if d['muslim_share_deleted_low'] <= d['muslim_share_projected_2025'] <= d['muslim_share_deleted_high']]
 pab = [d for d in DI if d['muslim_share_deleted_low'] > d['muslim_share_projected_2025'] + 1]
@@ -327,7 +330,7 @@ R.figure(fig, 'Figure 8. The bar runs from names classified Muslim to all names 
 
 R.h2('Caste')
 R.p('Caste is not recorded either. It can be read, in part, from the surname of the father or husband listed with each removed elector, and two classifications are used because surnames cross caste lines. '
-    'Classification A places %s of removals in a group; the stricter classification B, which sets aside surnames carried by more than one group, places %s. Only what holds under both is reported here.'
+    'Classification A places %s of removals in a group. The stricter classification B sets aside surnames carried by more than one group and places %s. Only what holds under both is reported here.'
     % (pct(cg['A']['coverage_pct']), pct(cg['B']['coverage_pct'])))
 R.table(['Group', 'Survey share 2023', 'Share under A', 'Ratio A', 'Share under B', 'Ratio B'],
         [[g, pct(cg['A']['groups'][g]['survey_share'], 2), pct(cg['A']['groups'][g]['share_of_classified']), '%.2f' % cg['A']['groups'][g]['ratio_to_survey'],
@@ -344,7 +347,7 @@ ax.set_xlabel('Names removed in the booth', fontsize=8)
 ax.set_ylabel('Booths', fontsize=8)
 style_axes(ax, 'How many names each booth lost')
 R.figure(fig, 'Figure 9. Booths by the number of names removed.')
-R.p('The median booth lost %d names. %s booths lost 200 or more each, and %d lost 400 or more. A booth serves on average about %d electors, so 200 removals is a fifth of a booth\'s roll.'
+R.p('The typical booth lost %d names. %s booths lost 200 or more each, and %d lost 400 or more. A booth serves on average about %d electors, so 200 removals is a fifth of a booth\'s roll.'
     % (st.median(a['booth_median'] for a in A), indian(b200), S['booth_histogram']['400+'], round(t['electorate_2025'] / t['booths'])))
 
 R.h2('Border districts')
@@ -368,19 +371,19 @@ R.p('Seats the NDA won in 2020 lost %.2f names per 100 electors, and seats INDIA
 
 R.h2('Key insights')
 R.bullets([
-    '**%s names removed**, %s per 100 electors on the final roll, across %s booths.' % (indian(t['total']), '%.2f' % per100, indian(t['booths'])),
-    '**Equal to %s of the votes polled** in the November 2025 election, or one name for every %.1f votes cast.' % (pct(100 * t['total'] / polled), polled / t['total']),
-    '**Larger than the margin in %d of %d seats**, five times the margin or more in %d, ten times or more in %d.' % (len(over), len(withM), sum(ratio(a) >= 5 for a in withM), sum(ratio(a) >= 10 for a in withM)),
-    '**Larger than the NDA\'s combined winning margin** in its %d wins (%s against %s).' % (len(nda), lakh(t['total']), lakh(mNDA)),
-    '**%d of the %d seats the NDA took from INDIA** lost more names than the NDA won by.' % (len(tookO), len(took)),
-    '**Women are %s of the removed**, over-represented in %d of %d districts.' % (pct(fem), len(fOver), len(DI)),
-    '**Muslim names are %s to %s of removals**, against 16.87%% of the population in 2011, and more than a point above the census share in %d districts.' % (pct(mlo), pct(mhi), len(above)),
-    '**In %d seats the removed who would have voted were enough to change the result**, and in %d a lean of just over half among them would have done it.' % (IM['seats_total'] - IM['breakeven_bands']['lower']['over_100'], IM['breakeven_bands']['lower']['under_55']),
-    '**Women are %s of the names entered as dead**, against %s of adult deaths in Bihar.' % (pct(TD['women_share_dead']), pct(TD['women_share_expected'])),
-    '**%s booths lost 200 names or more each.**' % indian(b200),
-    '**Reasons entered in phase 1**: shifted %s, dead %s, absent %s, already enrolled %s. %s of the %s more women than men removed were marked shifted.' % (pct(rsh('shifted')), pct(rsh('dead')), pct(rsh('absent')), pct(rsh('already_enrolled')), indian(xsS), indian(xsF)),
-    '**Names marked absent alone exceed the margin in %d seats**, names marked already enrolled in %d.' % (rOver('r_absent'), rOver('r_enrolled')),
-    '**The final roll made up %s of the draft removals**, and the fall that remained still exceeded the margin in %d of %d seats. Women were %s of those added after the draft.' % (pct(FT['made_up_pct']), FM['net'], FM['seats'], pct(FT['women_share_added'])),
+    '%s names were removed, %s per 100 electors on the final roll, across %s booths.' % (indian(t['total']), '%.2f' % per100, indian(t['booths'])),
+    'The names removed equal %s of the votes polled in the November 2025 election, one for every %.1f votes cast.' % (pct(100 * t['total'] / polled), polled / t['total']),
+    'The removals were larger than the winning margin in %d of %d seats, five times the margin or more in %d, and ten times or more in %d.' % (len(over), len(withM), sum(ratio(a) >= 5 for a in withM), sum(ratio(a) >= 10 for a in withM)),
+    'They were larger than the NDA\'s combined winning margin in its %d wins (%s against %s).' % (len(nda), lakh(t['total']), lakh(mNDA)),
+    'In %d of the %d seats the NDA took from INDIA, more names were removed than the NDA won by.' % (len(tookO), len(took)),
+    'Women are %s of the removed, and over-represented in %d of %d districts.' % (pct(fem), len(fOver), len(DI)),
+    'Muslim names, guessed from names, are %s to %s of removals, against 16.87%% of the population in 2011, and more than a point above the census share in %d districts.' % (pct(mlo), pct(mhi), len(above)),
+    'In %d seats the removed who would have voted were enough to change the result, and in %d a lean of just over half among them would have done it.' % (IM['seats_total'] - IM['breakeven_bands']['lower']['over_100'], IM['breakeven_bands']['lower']['under_55']),
+    'Women are %s of the names entered as dead, against %s of adult deaths in Bihar.' % (pct(TD['women_share_dead']), pct(TD['women_share_expected'])),
+    '%s booths lost 200 names or more each.' % indian(b200),
+    'In phase 1, %s of removals were entered as shifted, %s as dead, %s as absent and %s as already enrolled. %s of the %s more women than men removed were marked shifted.' % (pct(rsh('shifted')), pct(rsh('dead')), pct(rsh('absent')), pct(rsh('already_enrolled')), indian(xsS), indian(xsF)),
+    'The names marked absent, taken alone, exceed the margin in %d seats, and the names marked already enrolled in %d.' % (rOver('r_absent'), rOver('r_enrolled')),
+    'The final roll made up %s of the draft removals, and the fall that remained still exceeded the margin in %d of %d seats. Women were %s of those added after the draft.' % (pct(FT['made_up_pct']), FM['net'], FM['seats'], pct(FT['women_share_added'])),
 ])
 
 R.h2('How sure are we?')
@@ -424,7 +427,7 @@ for d in rankD:
         wins[a['al2025']] += 1
     R.p('%s lost %s names across %d constituencies, %.2f for every 100 electors. Women are %s of those removed, against %s of the district\'s roll. '
         'Names classified Muslim are %s to %s of removals, against a 2011 census share of %s. '
-        'The heaviest constituency is %s, at %.2f per 100 electors, and the largest multiple of the margin is in %s, where %s names were removed against a margin of %s. '
+        'The constituency with the most removals for its size is %s, at %.2f per 100 electors, and the largest multiple of the margin is in %s, where %s names were removed against a margin of %s. '
         'In 2025 the NDA won %d of the district\'s seats and INDIA %d%s.'
         % (d['district'], indian(d['deleted']), len(rows), d['per_100'], pct(di['female_share_deleted']), pct(di['female_share_roll']),
            pct(di['muslim_share_deleted_low']), pct(di['muslim_share_deleted_high']), pct(di['muslim_share_population_2011']),
@@ -446,13 +449,13 @@ R.p('The revision removed %s names from Bihar\'s roll in the months before an As
     'The names removed exceed the margin in %d of %d seats and equal %s of all votes polled. Whatever reason was written against each name, in most of the state the roll changed by more than the vote that decided the seat.'
     % (len(over), len(withM), pct(100 * t['total'] / polled)))
 R.p('Women carried a larger share of the removals than their share of the roll in every district, and the lists cannot show whether those women were enrolled again where they now live. '
-    'The reasons, dead, shifted, absent or enrolled twice, are what officers wrote down, and nobody checked them. %s names were removed as absent, the reason that rests on the least, and those alone exceed the margin in %d seats.' % (indian(RT['absent']), rOver('r_absent')))
+    'Of the four reasons entered, absent rests on the least. %s names were removed as absent, and those alone exceed the margin in %d seats.' % (indian(RT['absent']), rOver('r_absent')))
 R.p('What the Election Commission should do:')
 R.numbered([
-    '**Publish the reason for each of the %s phase 2 removals, name by name.** The lists give none, and the Format 4B return gives reasons only by constituency, with %s names left without any.' % (indian(t['p2']), indian(FT['r_unstated'])),
-    '**Publish the basis for each entry marked absent or already enrolled**: %s marked absent and %s marked already enrolled in phase 1.' % (indian(RT['absent']), indian(RT['already_enrolled'])),
-    '**Publish every claim and objection filed after the draft roll, booth by booth, with its outcome, and say how many of the %s added had been removed at the draft**, so that restorations can be counted against removals.' % lakh(FT['added']),
-    '**Publish new enrolments by constituency after the revision**, so that women removed as shifted can be matched against enrolments where they now live.',
+    'Publish the reason for each of the %s phase 2 removals, name by name. The lists give none, and the Format 4B return gives reasons only by constituency, with %s names left without any.' % (indian(t['p2']), indian(FT['r_unstated'])),
+    'Publish the basis for each entry marked absent or already enrolled, the %s marked absent and the %s marked already enrolled in phase 1.' % (indian(RT['absent']), indian(RT['already_enrolled'])),
+    'Publish every claim and objection filed after the draft roll, booth by booth, with its outcome, and say how many of the %s added had been removed at the draft, so that restorations can be counted against removals.' % lakh(FT['added']),
+    'Publish new enrolments by constituency after the revision, so that women removed as shifted can be matched against enrolments where they now live.',
 ])
 
 R.h1('Method and sources')

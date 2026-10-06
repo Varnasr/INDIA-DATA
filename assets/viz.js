@@ -2,7 +2,7 @@
    dumbbell. Plain SVG, sized by viewBox so it scales with its box, coloured
    with the site's CSS tokens (fill: var(--fill-navy)) so a theme change needs
    no redraw. Every chart is role="img" with a <title> naming what it shows;
-   the page carries the finding in prose beside it. Text goes through L()
+   the page carries the finding in prose beside it. Text is translated
    before it arrives here. */
 (function () {
   var NS = 'http://www.w3.org/2000/svg';

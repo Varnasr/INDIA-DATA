@@ -3,7 +3,7 @@
 <div class="page-head"><h1>Karnataka: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
 
   <h2>Find a district</h2>
-  <p class="sub">The revision was published by district only. Type a district's name, and its figures appear below with a link you can send.</p>
+  <p class="sub">The revision was published by district only, so each district is shaded by the names left off the draft roll for every 100 electors on the roll of 16 June. The draft roll is the roll the revision published once those names had been taken off, and counting per 100 electors lets a small district be set beside a large one. Type a district's name, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
@@ -14,14 +14,14 @@
 
 
   <h2>The roll, step by step</h2>
-  <p class="sub">The state's roll, step by step, from 16 June to 25 September 2026, when claims and objections had closed and the notices were still being heard. The bars start above zero so that the changes can be seen, and the figure on each bar is the count. The final roll is due on 27 October 2026.</p>
+  <p class="sub">The state's roll, step by step, from 16 June to 25 September 2026. After the draft, people could file claims to be added and objections to names on it. By 25 September these had closed, and the notices sent to electors were still being heard. The bars start above zero so that the changes can be seen, and the figure on each bar is the count. The final roll is due on 27 October 2026.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
   <p class="note">Karnataka's dates, as they were set and as they were moved, are drawn beside every other state's on <a href="../india/process/#s-karnataka">How the revision was run</a>.</p>
 
   <h2>Per 100 electors, by district</h2>
-  <p class="sub">Names left off the draft roll of 24 August 2026, for every 100 electors on the roll of 16 June 2026, in each of the Chief Electoral Officer's 34 election districts. Bengaluru's four districts are marked in red.</p>
+  <p class="sub">Names left off the draft roll of 24 August 2026, for every 100 electors on the roll of 16 June 2026, in each of the 34 election districts of the Chief Electoral Officer, the official in charge of the state's electoral roll. Bengaluru's four districts are marked in red.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="vizbox" id="cDist"></div>
@@ -93,7 +93,7 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
 
   VIZ.heat('cMix', { label: L('Share of each district\'s removals by reason'), cols: RS.map(function (k) { return k[1]; }), tok: ['--fill-amber', '--fill-navy', '--fill-purple', '--fill-red', '--fill-grey'], unit: '%',
     rows: D.map(function (d) { return { name: d.district, v: RS.map(function (k) { return d.shares[k[0]]; }) }; }) });
-  document.getElementById('fMix').innerHTML = L('<b>Across the state, {sh} of the names were entered as shifted and {ab} as absent, {dead} as dead and {dup} as already enrolled elsewhere.</b> The more names a district removed, the larger the share marked shifted or absent (rank correlation {rho}). Where fewer were removed, more were entered as dead, up to {dm} in {dmn}. A reason on the list is what the officer wrote down, and nobody checked it.', {
+  document.getElementById('fMix').innerHTML = L('<b>Across the state, {sh} of the names were entered as shifted and {ab} as absent, {dead} as dead and {dup} as already enrolled elsewhere.</b> The more names a district removed, the larger the share marked shifted or absent (rank correlation {rho}, where 0 means the two are unrelated and 1 means they rise in step). Where fewer were removed, more were entered as dead, up to {dm} in {dmn}. A reason on the list is what the officer wrote down, and nobody checked it.', {
     sh: SIR.pct(S.shares.shifted), ab: SIR.pct(S.shares.absent), dead: SIR.pct(S.shares.dead), dup: SIR.pct(S.shares.duplicate), rho: SIR.d(S.rho_rate_shifted, 2), dm: SIR.pct(S.dead_max.share), dmn: S.dead_max.district });
 
   VIZ.waterfall('vWater', { label: L('Karnataka: the roll from 16 June to 25 September 2026'), from: Math.floor(S.draft * 0.8 / 1e6) * 1e6, steps: [

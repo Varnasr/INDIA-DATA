@@ -187,18 +187,19 @@ function tamilnadu() {
   cover(pres, K, P, 'Special Intensive Revision · Tamil Nadu 2026', 'The revision left ' + lakh(S.removed) + ' names off Tamil Nadu\'s draft roll',
     'Where the names were removed, on what recorded reason, what the final roll put back, and how the removals compare with the 2026 result',
     [[indian(S.removed), 'names left off the draft roll of 19 December 2025'], [d1(S.per_100), 'of every 100 electors on the roll before'], [S.over_margin + ' of ' + S.acs, 'seats where more names were left off than the 2026 margin'], [d1(C.per_100), 'removed per 100 electors in Chennai']])
-    .addNotes('Every figure in this deck is computed from the Chief Electoral Officer\'s tables and the 2026 results, the same data the website and the full report use. No name or EPIC number is published.');
+    .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll, the list of people entitled to vote. The draft roll is the roll published after that check, and the final roll the one published once claims and objections are decided. Every figure in this deck is computed from the Chief Electoral Officer\'s tables and the 2026 results, the same data the website and the full report use. No name or EPIC number is published.');
   const toc = contentsSlide(pres, K, P);
 
   let s = K.slide('In short', 'The revision removed ' + d1(S.per_100) + ' of every 100 electors, and more than the winning margin in ' + S.over_margin + ' of ' + S.acs + ' seats', 'Five findings, each computed from the published tables');
   K.numbered(s, [
     lakh(S.removed) + ' names were left off Tamil Nadu\'s draft roll, ' + d1(S.per_100) + ' of every 100 electors on the roll before the revision.',
-    'In ' + S.over_margin + ' of the ' + S.acs + ' constituencies, more names were left off than the 2026 winning margin, large enough to decide the seat. Counting only the living removed at each seat\'s turnout, ' + S.could_change + '.',
+    'In ' + S.over_margin + ' of the ' + S.acs + ' constituencies, more names were left off than the 2026 winning margin, large enough to decide the seat. Counting only the removed not entered as dead, at each seat\'s turnout, the number is ' + S.could_change + '.',
     pct(S.shares.shifted_absent) + ' were entered as shifted or absent, ' + pct(S.shares.dead) + ' as dead and ' + pct(S.shares.multiple) + ' as enrolled in more than one place.',
     'Chennai lost ' + d1(C.per_100) + ' of every 100 electors. It holds ' + pct(S.chennai_share_of_roll) + ' of the roll and ' + pct(S.chennai_share_of_removed) + ' of the names removed.',
     'The final roll was ' + lakh(S.added_net) + ' larger than the draft, at most ' + pct(S.made_up_pct) + ' of the names removed, and it includes new voters.',
   ], M, TOP - 0.2, W - 2 * M, CH - 0.6, 16);
   K.body(s, 'No split of the removals by sex or age has been published. ' + REASON, M, TOP + CH - 0.5, W - 2 * M, 0.5, 12, MUTED);
+  s.addNotes('Per 100 electors is the number removed for every 100 people on the roll before the revision, which lets places of different size be compared. The winning margin is the winner\'s votes less the runner-up\'s.');
 
   s = K.slide('The roll', 'The roll fell from ' + crore(S.before) + ' to ' + crore(S.draft) + ' at the draft, and the final roll held ' + crore(S.final), 'The state\'s roll, step by step, to the final roll of 23 February 2026');
   waterfall(pres, s, [['Roll before the revision', S.before, 'total'], ['Dead', S.dead, 'down'], ['Shifted or absent', S.shifted_absent, 'down'], ['Enrolled in more than one place', S.multiple, 'down'], ['Draft roll', S.draft, 'total'], ['Net change after the draft', S.added_net, 'up'], ['Final roll', S.final, 'total']],
@@ -214,6 +215,7 @@ function tamilnadu() {
   s = K.slide('The reasons', pct(S.shares.shifted_absent, 0) + ' of the names were entered as shifted or absent and ' + pct(S.shares.dead, 0) + ' as dead', 'Share of each district\'s removals by the reason entered, the twelve districts with the highest rates');
   s.addChart(pres.charts.BAR, [['dead', 'Dead'], ['shifted_absent', 'Shifted or absent'], ['multiple', 'In more than one place']].map(([k, n]) => ({ name: n, labels: top12.map((d) => d.district), values: top12.map((d) => +(100 * d[k] / d.removed).toFixed(1)) })),
     K.chart(Object.assign({}, K.left, { barDir: 'bar', barGrouping: 'percentStacked', chartColors: [GREY, '1F618D', 'D4AC0D'], showLegend: true, valAxisHidden: true, catAxisOrientation: 'maxMin', catAxisLabelFontSize: 10 })));
+  s.addNotes('A rank correlation runs from -1 to 1 and measures how far two orderings agree.');
   K.right(s, ['Where more names were removed, more were marked shifted or absent (rank correlation ' + S.rho_rate_shifted.toFixed(2) + ' across constituencies).', 'In Chennai ' + pct(C.shifted_share) + ' were entered as shifted or absent.', 'The share entered as dead is highest in ' + byDead.district + ', ' + pct(byDead.dead_share) + '.', REASON], 13);
 
   s = K.slide('Chennai', 'Every one of Chennai\'s ' + CHN.length + ' constituencies lost more than ' + Math.floor(CHN[CHN.length - 1].per_100) + ' of every 100 electors', 'Removed per 100 electors, by reason');
@@ -284,7 +286,7 @@ function karnataka() {
   cover(pres, K, P, 'Special Intensive Revision · Karnataka 2026', 'The revision left ' + crore(S.removed) + ' names off Karnataka\'s draft roll',
     'District by district, on what recorded reason, and how the roll stood while notices were still being heard',
     [[indian(S.removed), 'names left off the draft roll of 24 August 2026'], [d1(S.per_100), 'of every 100 electors on the roll of 16 June'], [pct(B.share_of_removed), 'of the names removed were in Bengaluru'], [pct(S.made_up_pct), 'of the names removed back by 25 September']])
-    .addNotes('Every figure is computed from the Chief Electoral Officer\'s district tables. Nothing has been published by assembly constituency, so there is no comparison with election margins. The final roll is due on 27 October 2026.');
+    .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll, the list of people entitled to vote. Every figure is computed from the Chief Electoral Officer\'s district tables. Nothing has been published by assembly constituency, so there is no comparison with election margins. The final roll is due on 27 October 2026.');
   const toc = contentsSlide(pres, K, P);
 
   let s = K.slide('In short', 'The revision removed ' + d1(S.per_100) + ' of every 100 electors, and ' + d1(B.per_100) + ' in Bengaluru', 'Four findings, each computed from the published tables');
@@ -295,6 +297,7 @@ function karnataka() {
     'By 25 September the roll had risen by ' + indian(S.added_sep) + ' since the draft, ' + pct(S.made_up_pct) + ' of the names removed. In Bengaluru it rose by ' + indian(B.added_sep) + '.',
   ], M, TOP - 0.2, W - 2 * M, CH - 0.6, 17);
   K.body(s, 'Published by district only, with no split by sex. ' + REASON, M, TOP + CH - 0.5, W - 2 * M, 0.5, 12, MUTED);
+  s.addNotes('The draft roll is the roll published after the house-to-house check. Per 100 electors is the number left off for every 100 people on the roll of 16 June, which lets districts of different size be compared. Electors kept on the draft can still be sent a notice to appear at a hearing, and those hearings were under way on 25 September.');
 
   s = K.slide('The roll', 'The roll fell from ' + crore(S.before) + ' on 16 June to ' + crore(S.draft) + ' at the draft', 'The state\'s roll, step by step, to 25 September 2026, while notices were still being heard');
   waterfall(pres, s, [['Roll of 16 June', S.before, 'total'], ['Shifted', S.reasons.shifted, 'down'], ['Dead', S.reasons.dead, 'down'], ['Absent', S.reasons.absent, 'down'], ['Already enrolled', S.reasons.duplicate, 'down'], ['Other', S.reasons.other, 'down'], ['Draft roll', S.draft, 'total'], ['Net change after the draft', S.added_sep, 'up'], ['Roll of 25 September', S.sep, 'total']],
@@ -310,6 +313,7 @@ function karnataka() {
   s = K.slide('The reasons', pct(S.shares.shifted, 0) + ' of the names were entered as shifted and ' + pct(S.shares.absent, 0) + ' as absent', 'Share of each district\'s removals by the reason entered, the twelve districts with the highest rates');
   s.addChart(pres.charts.BAR, RK.map(([k, n]) => ({ name: n, labels: t12.map((d) => d.district), values: t12.map((d) => d.shares[k]) })),
     K.chart(Object.assign({}, K.left, { barDir: 'bar', barGrouping: 'percentStacked', chartColors: RK.map((r) => r[2]), showLegend: true, valAxisHidden: true, catAxisOrientation: 'maxMin', catAxisLabelFontSize: 10 })));
+  s.addNotes('A rank correlation runs from -1 to 1 and measures how far two orderings agree.');
   K.right(s, [pct(S.shares.dead) + ' were entered as dead and ' + pct(S.shares.duplicate) + ' as already enrolled.', 'The more names a district removed, the larger the share marked shifted or absent (rank correlation ' + S.rho_rate_shifted.toFixed(2) + ').', 'The share entered as dead is highest in ' + S.dead_max.district + ', ' + pct(S.dead_max.share) + '.', REASON], 13);
 
   s = K.slide('Bengaluru', 'Bengaluru holds ' + pct(B.share_of_roll) + ' of Karnataka\'s roll and ' + pct(B.share_of_removed) + ' of the names removed', 'Bangalore Urban and the North, Central and South districts of the city corporation');
@@ -362,24 +366,25 @@ function westbengal() {
   cover(pres, K, P, 'Special Intensive Revision · West Bengal 2026', 'The revision left ' + lakh(Pn.removed) + ' names off West Bengal\'s draft roll and held back ' + lakh(Pn.adjudication) + ' more',
     'The names left off by reason, the names held back for adjudication, and how much smaller each roll was at the 2026 election than in 2024',
     [[indian(Pn.removed), 'names left off the draft roll'], [indian(Pn.adjudication), 'held back for adjudication'], [S.over_margin + ' of ' + S.acs, 'seats where the roll fell by more than the 2026 margin'], [pct(Pn.women_removed_pct), 'of the names left off were women']])
-    .addNotes('The removals and their reasons are published for the state only. Below the state the deck measures the fall in the roll from 2024, which takes in ordinary changes as well as the revision and is a different count from the names struck off.');
+    .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll, the list of people entitled to vote. Adjudication means the names were kept off the final roll while judicial officers decided whether each elector was eligible. The removals and their reasons are published for the state only. Below the state the deck measures the fall in the roll from 2024, which takes in ordinary changes as well as the revision and is a different count from the names struck off.');
   const toc = contentsSlide(pres, K, P);
 
   let s = K.slide('In short', 'The revision left ' + d1(Pn.removed_per_100) + ' of every 100 electors off the draft, and held back ' + lakh(Pn.adjudication) + ' more', 'Six findings, each computed from the published tables');
   K.numbered(s, [
     lakh(Pn.removed) + ' names were left off the draft roll, ' + d1(Pn.removed_per_100) + ' of every 100 electors, and another ' + lakh(Pn.adjudication) + ' were held back from the final roll for adjudication.',
-    'In ' + S.over_margin + ' of the ' + S.acs + ' constituencies, the roll fell by more than the 2026 winning margin, large enough to decide the seat. At each seat\'s turnout, ' + S.could_change + '.',
+    'In ' + S.over_margin + ' of the ' + S.acs + ' constituencies, the roll fell by more than the 2026 winning margin, large enough to decide the seat. At each seat\'s turnout the number is ' + S.could_change + '.',
     'Women were ' + pct(Pn.women_removed_pct) + ' of the names left off the draft, against ' + pct(Pn.women_before_pct) + ' of the roll before it.',
     'Of the names held back, ' + lakh(AD.found_not_eligible) + ' were found not eligible, as reported, and ' + indian(AD.restored_before_poll) + ' were restored by appeal in time to vote.',
     'The roll the election was held on was ' + lakh(S.fall) + ' smaller than in 2024. Kolkata North\'s fell by ' + d1(D[0].per_100) + ' per 100.',
     pct(Pn.shares.dead) + ' of the names left off were entered as dead, ' + pct(Pn.shares.shifted) + ' as shifted and ' + pct(Pn.shares.absent) + ' as absent.',
   ], M, TOP - 0.25, W - 2 * M, CH - 0.5, 15);
   K.body(s, 'The fall in the roll from 2024 includes ordinary changes as well as the revision. ' + REASON, M, TOP + CH - 0.45, W - 2 * M, 0.45, 12, MUTED);
+  s.addNotes('Per 100 electors is the number for every 100 people on the earlier roll, which lets places of different size be compared. The fall in the roll is the earlier roll less the later one, so it counts names removed less names added, ordinary deaths and moves included. The winning margin is the winner\'s votes less the runner-up\'s.');
 
   s = K.slide('The roll', 'The roll fell from ' + crore(Pn.before) + ' to ' + crore(Pn.final) + ' at the final roll, and stood at ' + crore(S.election) + ' for the election', 'The state\'s roll, step by step, as the Chief Electoral Officer reported it');
   waterfall(pres, s, [['Roll of Oct 2025', Pn.before, 'total'], ['Dead', Pn.dead, 'down'], ['Shifted', Pn.shifted, 'down'], ['Absent', Pn.absent, 'down'], ['Enrolled elsewhere and other', Pn.duplicate + Pn.other, 'down'], ['Draft roll', Pn.draft, 'total'], ['Added on claims', Pn.added, 'up'], ['Removed on objections', Pn.form7, 'down'], ['Held back', Pn.adjudication, 'down'], ['Final roll', Pn.final, 'total'], ['Net change after', S.after_final, 'up'], ['Roll at the nominations', S.election, 'total']],
     Math.floor(Pn.final * 0.85 / 1e6) * 1e6, { x: M, y: TOP, w: W - 2 * M, h: CH });
-  s.addNotes('From press note PN-05-2026 and the roll at the 2026 nominations. The bars start above zero so that the changes can be seen. ' + REASON);
+  s.addNotes('A claim asks for a name to be added to the draft, and an objection asks for one to be removed. From press note PN-05-2026 and the roll at the 2026 nominations. The bars start above zero so that the changes can be seen. ' + REASON);
 
   s = K.slide('Adjudication', 'Of the ' + lakh(AD.under_adjudication) + ' names held back, ' + lakh(AD.found_not_eligible) + ' were found not eligible, as reported', 'The Election Commission\'s figures as reported, for the state as a whole');
   s.addChart(pres.charts.BAR, [{ name: 'Names', labels: ['Found eligible', 'Not eligible, appealed', 'Not eligible, no appeal', 'Not accounted for'], values: [AD.found_eligible, AD.appeals_by_excluded, AD.not_eligible_no_appeal, AD.not_accounted] }],
@@ -412,7 +417,7 @@ function westbengal() {
 
   const [s1] = marginSlide(pres, K, P, A, (a) => a.fall, 'In ' + S.over_margin + ' of ' + S.acs + ' constituencies, the roll fell by more than the 2026 winning margin', 'Seats by the fall in the roll from 2024 to the election as a multiple of the 2026 margin', 'Fall in the roll');
   K.right(s1, ['In those seats the fall was large enough to decide the result.', 'The fall and the margin as a share of votes are close to unrelated (rank correlation ' + S.rho_rate_margin.toFixed(2) + ').', 'The fall counts the dead and ordinary changes too.'], 13.5);
-  s1.addNotes('Over the margin means large enough to decide a seat, and says nothing about whether the fall did. Nobody can know how anyone missing from the roll would have voted.');
+  s1.addNotes('Over the margin means large enough to decide a seat, and says nothing about whether the fall did. Nobody can know how anyone missing from the roll would have voted. A rank correlation runs from -1 to 1 and measures how far two orderings agree.');
 
   s = K.slide('The 2026 election', 'Counted at each seat\'s own turnout, the fall still exceeds the margin in ' + S.could_change + ' seats', 'Three ways of setting the fall in the roll against the margin');
   K.stats(s, [[S.draft_over_margin + ' of ' + S.acs, 'fall to the draft roll'], [S.over_margin + ' of ' + S.acs, 'fall to the roll the election was held on'], [S.could_change + ' of ' + S.acs, 'the same, at the seat\'s 2026 turnout']], TOP, 1.9);
@@ -420,6 +425,7 @@ function westbengal() {
 
   s = K.slide('The 2026 election', 'The roll fell by ' + d1(WN.BJP.per_100) + ' per 100 in BJP seats and ' + d1(WN.AITC.per_100) + ' in AITC seats, and against their own districts they differ by ' + Math.abs(WN.BJP.vs_district - WN.AITC.vs_district).toFixed(1) + ' points', 'Fall per 100 in the seats each party won, and against the fall of each seat\'s own district');
   partyTable(K, s, S.winners, 'per_100', 'Fall per 100');
+  s.addNotes('Against own district is each seat\'s figure less its district\'s, averaged over the party\'s seats. A minus means a smaller fall than the district as a whole.');
   K.right(s, ['The BJP won ' + WN.BJP.seats + ' seats and the AITC ' + WN.AITC.seats + '.', 'Against their own districts the two come out at ' + sg(WN.BJP.vs_district) + ' and ' + sg(WN.AITC.vs_district) + ', so the difference is about where the seats are.', 'The fall exceeded the margin in ' + WN.BJP.over_margin + ' BJP seats and ' + WN.AITC.over_margin + ' AITC seats.'], 13);
 
   s = K.slide('Limits', 'What the tables show, and what they cannot show');
@@ -460,7 +466,7 @@ function kerala() {
   cover(pres, K, P, 'Special Intensive Revision · Kerala 2026', 'Kerala\'s draft roll was ' + lakh(S.fall_draft) + ' smaller than in January 2025',
     'How much smaller each roll was at the draft, who was missing, how much came back before the 2026 election, and how that compares with the result',
     [[indian(S.fall_draft), 'fewer electors on the draft roll'], [d1(S.draft_per_100), 'of every 100 electors on the January 2025 roll'], [pct(S.women_fall_pct), 'of the fall were women, against ' + pct(S.women_2025_pct) + ' of the roll'], [S.draft_over_margin + ' of ' + S.acs, 'seats where the fall exceeded the 2026 margin']])
-    .addNotes('No table of the names left off has been published. The deck measures the fall in the roll from January 2025, which takes in ordinary changes as well as the revision and is a different count from the names struck off.');
+    .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll, the list of people entitled to vote. No table of the names left off has been published. The deck measures the fall in the roll from January 2025, which takes in ordinary changes as well as the revision and is a different count from the names struck off.');
   const toc = contentsSlide(pres, K, P);
 
   let s = K.slide('In short', 'The draft roll was ' + d1(S.draft_per_100) + ' per 100 smaller, and women were ' + pct(S.women_fall_pct) + ' of the fall', 'Five findings, each computed from the published rolls');
@@ -472,6 +478,7 @@ function kerala() {
     'By the election the roll had risen ' + lakh(S.election - S.draft) + ' from the draft, counting new voters too, and it was ' + lakh(S.fall) + ' smaller than in January 2025.',
   ], M, TOP - 0.2, W - 2 * M, CH - 0.6, 16);
   K.body(s, 'No count of the names removed has been published, so these are falls in the roll, which take in ordinary changes too.', M, TOP + CH - 0.5, W - 2 * M, 0.5, 12, MUTED);
+  s.addNotes('The fall in the roll is the January 2025 roll less a later one, so it counts names removed less names added, ordinary deaths and moves included. Per 100 electors is that fall for every 100 people on the January 2025 roll. The winning margin is the winner\'s votes less the runner-up\'s.');
 
   s = K.slide('The roll', 'The roll fell from ' + crore(S.roll_2025) + ' to ' + crore(S.draft) + ' at the draft, and stood at ' + crore(S.election) + ' for the election', 'The state\'s roll from January 2025 to the roll of 23 March 2026');
   waterfall(pres, s, [['Roll of January 2025', S.roll_2025, 'total'], ['Fall to the draft', S.fall_draft, 'down'], ['Draft roll', S.draft, 'total'], ['Net change to the final roll', S.added_final, 'up'], ['Final roll', S.final, 'total'], ['Net change to March 2026', S.added_election, 'up'], ['Roll of 23 March 2026', S.election, 'total']],
@@ -495,7 +502,7 @@ function kerala() {
 
   const [s1] = marginSlide(pres, K, P, A, (a) => a.fall_draft, 'In ' + S.draft_over_margin + ' of ' + S.acs + ' constituencies, the roll fell by more at the draft than the 2026 winning margin', 'Seats by the fall in the roll at the draft as a multiple of the 2026 margin', 'Fall at the draft');
   K.right(s1, ['The fall and the margin as a share of votes are close to unrelated (rank correlation ' + S.rho_rate_margin.toFixed(2) + ').', 'By the election most of the fall had been made up, so the count on the roll the election was held on is smaller.'], 13.5);
-  s1.addNotes('Over the margin means large enough to decide a seat, and says nothing about whether the fall did. Nobody can know how anyone missing from the roll would have voted.');
+  s1.addNotes('Over the margin means large enough to decide a seat, and says nothing about whether the fall did. Nobody can know how anyone missing from the roll would have voted. A rank correlation runs from -1 to 1 and measures how far two orderings agree.');
 
   s = K.slide('The 2026 election', 'On the roll the election was held on, the fall still exceeded the margin in ' + S.over_margin + ' seats', 'Three ways of setting the fall in the roll against the margin');
   K.stats(s, [[S.draft_over_margin + ' of ' + S.acs, 'fall to the draft roll'], [S.over_margin + ' of ' + S.acs, 'fall to the roll the election was held on'], [S.could_change + ' of ' + S.acs, 'the same, at the seat\'s 2026 turnout']], TOP, 1.9);
@@ -503,6 +510,7 @@ function kerala() {
 
   s = K.slide('The 2026 election', 'INC seats lost ' + d1(WN.INC.draft_per_100) + ' per 100 at the draft and CPI(M) seats ' + d1(WN['CPI(M)'].draft_per_100) + ', and against their own districts they differ by ' + Math.abs(WN.INC.vs_district - WN['CPI(M)'].vs_district).toFixed(1) + ' points', 'Fall at the draft per 100 in the seats each party won, and against the fall of each seat\'s own district');
   partyTable(K, s, S.winners, 'draft_per_100', 'Fall per 100 at the draft');
+  s.addNotes('Against own district is each seat\'s figure less its district\'s, averaged over the party\'s seats. A minus means a smaller fall than the district as a whole.');
   K.right(s, ['The INC won ' + WN.INC.seats + ' seats, the CPI(M) ' + WN['CPI(M)'].seats + ' and the IUML ' + WN.IUML.seats + '.', 'Against their own districts they come out at ' + sg(WN.INC.vs_district) + ', ' + sg(WN['CPI(M)'].vs_district) + ' and ' + sg(WN.IUML.vs_district) + ', so most of the difference is about where the seats are.', 'Comparisons are by party, because the fronts of the independents are not in the data.'], 13);
 
   s = K.slide('Limits', 'What the rolls show, and what they cannot show');

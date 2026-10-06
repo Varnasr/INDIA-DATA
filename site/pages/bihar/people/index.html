@@ -6,7 +6,7 @@
   <div class="grid">
     <div class="panel">
       <h3>Women among the removed, by district</h3>
-      <p>Each district's share of women among those removed, against women's share of its roll before the revision. A point above the line is a district where women were removed out of proportion.</p>
+      <p>Each district's share of women among those removed, against women's share of its roll before the revision. The roll before is the draft roll plus the names removed in phase 1. A point above the line is a district where women were removed out of proportion.</p>
       <div class="chart"><canvas id="cGender" aria-label="Women's share of removals against population share, by district"></canvas></div>
     </div>
     <div class="panel">
@@ -16,32 +16,32 @@
     </div>
     <div class="panel wide">
       <h3>Women's share of each reason, by age</h3>
-      <p>Every phase 1 removal has one of four reasons against it. For each reason and age group, this shows the share of those removed who were women. Half would be parity.</p>
+      <p>Every phase 1 removal has one of four reasons against it, which is what the officer wrote down, and nobody checked it. For each reason and age group, the chart shows the share of those removed who were women. At 50% women and men would be removed equally.</p>
       <div class="chart"><canvas id="cGenderReason" aria-label="Women's share of removals for each reason, by age group"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fGender"></p>
 
   <h2>Two reasons, set against the records</h2>
-  <p class="sub">The names entered as dead are compared with the number of adults who die in Bihar in a year, from the Sample Registration System for 2024. The excess of young women marked shifted is compared with the women who moved on marriage, from the 2011 census.</p>
+  <p class="sub">Two of the reasons can be checked against other records. The names entered as dead are compared with the number of adults who die in Bihar in a year, from the Sample Registration System for 2024. The excess of young women marked shifted is compared with the women who moved on marriage, from the 2011 census.</p>
   <div class="kpis" id="kTests"></div>
   <p class="finding" id="fDeaths"></p>
   <div class="grid">
     <div class="panel wide">
       <h3>Young women marked shifted, against marriage movement, by district</h3>
-      <p>Each dot is a district: the women's share of those aged 18 to 29 marked shifted, against the share of its women who had moved on marriage in the ten years before the 2011 census.</p>
+      <p>Each dot is a district. It sets women's share of those aged 18 to 29 marked shifted against the share of the district's women who had moved on marriage in the ten years before the 2011 census. The rank correlation below compares the order of the districts on the two measures. It runs from −1 to 1, and near 0 means no link.</p>
       <div class="chart"><canvas id="cMarr" aria-label="Women's share of the young marked shifted against recent marriage migration, by district"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fMarr"></p>
 
   <h2>Religion</h2>
-  <p class="sub">The booth files classify each removed elector's name as Hindu, Muslim or unclassified. An unclassified name could be either, so the Muslim share is given as a range, from counting none of them as Muslim to counting all of them.</p>
+  <p class="sub">The roll does not record religion, so it is guessed from names. The booth files classify each removed elector's name as Hindu, Muslim or unclassified. An unclassified name could be either, so the Muslim share is given as a range, from counting none of them as Muslim to counting all of them.</p>
   <div class="kpis" id="kRel"></div>
   <div class="grid">
     <div class="panel wide">
       <h3>Muslim share of removals against the 2011 census, by district</h3>
-      <p>The bar is the range from name classification. The dark dot is the district's Muslim share of the population in 2011, and the open dot is that share carried forward to 2025. Where a dot sits inside the bar, the removals match the population.</p>
+      <p>The bar is the range guessed from names. The dark dot is the district's Muslim share of the population in 2011, and the open dot is that share carried forward to 2025. Where a dot sits inside the bar, the removals are in line with the population.</p>
       <div class="chart rows"><canvas id="cRel" aria-label="Muslim share of removals, range, against census share by district"></canvas></div>
     </div>
   </div>
@@ -50,12 +50,12 @@
   <p class="note" style="margin-top:0;border:0;padding-top:0">The 2011 census is the most recent count of religion by district. The 2025 figures carry each district's 2011 share forward at the growth rates of its Muslim and total populations between the 2001 and 2011 censuses. Jehanabad and Arwal were one district in 2001, so both take their joint rate.</p>
 
   <h2>Caste</h2>
-  <p class="sub">The lists give a surname for each removed elector and for the father or husband named beside them. The father's or husband's surname tells more, because most women are listed as Devi, Kumari or Khatun, which say nothing about caste. Surnames are classified in two ways. Classification A uses the project's mapping of surnames to castes. Classification B is strict and counts only surnames that belong almost entirely to one group, setting aside names such as Singh, Prasad, Ray, Mahato, Mandal, Sharma, Thakur, Chaudhary and Manjhi, which several groups carry. Only findings that hold under both are reported.</p>
+  <p class="sub">The roll does not record caste. The lists give a surname for each removed elector and for the father or husband named beside them. The father's or husband's surname tells more, because most women are listed as Devi, Kumari or Khatun, which say nothing about caste. Surnames are classified in two ways. Classification A uses the project's mapping of surnames to castes. Classification B is strict and counts only surnames that belong almost entirely to one group, setting aside names such as Singh, Prasad, Ray, Mahato, Mandal, Sharma, Thakur, Chaudhary and Manjhi, which several groups carry. Only findings that hold under both are reported.</p>
   <div class="controls"><span class="pill">Surname of</span><div class="seg" role="group" aria-label="Surname of"><button type="button" data-who="guardian" aria-pressed="true">Guardian</button><button type="button" data-who="own" aria-pressed="false">Elector</button></div></div>
   <div class="grid">
     <div class="panel">
       <h3>How many removals each classification can place</h3>
-      <p>Share of all removals each classification could place, and why the rest could not be placed.</p>
+      <p>The share of all removals each classification could place, and why the rest could not be placed.</p>
       <div class="chart"><canvas id="cCover" aria-label="Classification coverage"></canvas></div>
     </div>
     <div class="panel">
@@ -72,7 +72,7 @@
   <p class="finding" id="fCaste"></p>
   <h3 style="margin-top:18px">The 25 commonest surnames among the removed</h3>
   <div class="twrap" tabindex="0" role="region" aria-label="Commonest surnames"><table id="tSur"></table></div>
-  <p class="note" style="margin-top:12px">Counting the same surnames on the whole draft roll would turn each surname's share of the removed into a removal rate. Surname counts from the draft roll, even for a sample of booths, would give each caste group its own removal rate, as age and religion have in the <a href="../../hyderabad/people/">Hyderabad analysis</a>.</p>
+  <p class="note" style="margin-top:12px">These are shares of the removed. To turn them into removal rates, the same surnames would have to be counted on the draft roll. Even a sample of booths would give each caste group its own removal rate, the share of its electors who were struck off.</p>
   <p class="note">The caste baseline is the Bihar caste-based survey released on 2 October 2023. It counted 13,07,25,310 people, of whom 36.01% were EBC, 27.12% BC, 19.65% SC, 1.68% ST and 15.52% unreserved, with Muslims at 17.70%. Muslim castes listed under EBC (10.29 points), BC (2.09) and unreserved (4.80) are moved to the Muslim group here, which leaves the Hindu castes at EBC 25.72, BC 25.03 and General 10.72. The strict classification gives a surname to a group only if almost everyone carrying it belongs to that group.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
@@ -104,7 +104,7 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
   var xsF = SIR.sum(RK, function (k) { return RS.by_sex[k].F - RS.by_sex[k].M; }), xsS = RS.by_sex.shifted.F - RS.by_sex.shifted.M;
   var yS = RS.by_age.shifted[0] + RS.by_age.shifted[1], yW = RS.by_age_women.shifted[0] + RS.by_age_women.shifted[1];
   var gaps = D.map(function (d) { return d.female_share_deleted - d.female_share_roll; });
-  document.getElementById('fGender').innerHTML = L('<b>Women were removed out of proportion in {a} of {b} districts</b>, by {lo} to {hi} points above their share of the roll they were removed from. The roll records sex, so this needs no guessing from names. Phase 1 removed {xs} more women than men, and {xs_shifted} of that difference were marked shifted. Among those marked shifted at ages 18 to 29, {young} are women. Marriage could account for that number, but not for where it falls (see below). The lists do not show whether any of these women were enrolled again where they now live.', { xs: SIR.n(xsF), xs_shifted: SIR.n(xsS), young: SIR.pct(100 * yW / yS), a: above, b: D.length, lo: SIR.d(Math.min.apply(null, gaps), 1), hi: SIR.d(Math.max.apply(null, gaps), 1) });
+  document.getElementById('fGender').innerHTML = L('<b>Women were removed out of proportion in {a} of {b} districts</b>, by {lo} to {hi} points above their share of the roll they were removed from. The roll records sex, so this needs no guessing from names. Phase 1 removed {xs} more women than men, and {xs_shifted} of that difference were marked shifted. Among those marked shifted at ages 18 to 29, {young} are women. Marriage could account for that number. It does not account for where it falls, as the next section shows. The lists do not show whether any of these women were enrolled again where they now live.', { xs: SIR.n(xsF), xs_shifted: SIR.n(xsS), young: SIR.pct(100 * yW / yS), a: above, b: D.length, lo: SIR.d(Math.min.apply(null, gaps), 1), hi: SIR.d(Math.max.apply(null, gaps), 1) });
 
   // ---- religion
   var cls = t.hindu + t.muslim + t.unknown, lo = 100 * t.muslim / cls, hi = 100 * (t.muslim + t.unknown) / cls;
@@ -124,7 +124,7 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
   var over = D.filter(function (d) { return d.muslim_share_deleted_low > d.muslim_share_population_2011; });
   var clear = over.filter(function (d) { return d.muslim_share_deleted_low - d.muslim_share_population_2011 > 1; }).sort(function (a, b) { return (b.muslim_share_deleted_low / b.muslim_share_population_2011) - (a.muslim_share_deleted_low / a.muslim_share_population_2011); });
   var rr = clear.map(function (d) { return d.muslim_share_deleted_low / d.muslim_share_population_2011; });
-  document.getElementById('fRel').innerHTML = L('<b>For the state as a whole the range, {lo} to {hi}, includes the 2011 share of 16.87%. District by district it often does not.</b> The census share falls inside the range in {inside} of {n} districts. In the other {over}, more Muslim-name electors were removed than the 2011 share would predict, even if none of the unclassified names is counted. Most of those gaps are smaller than the {growth}-point rise in the state\'s Muslim share since 2011. <b>In {clear} districts the gap is larger:</b> {list}. All {clear} are in south and central Bihar, where Muslims are a small minority, and there even the lowest estimate is {rmin} to {rmax}% above the population share. Muslims in Bihar are younger than average, so their share of <em>electors</em> is smaller than their share of the population, and that would make these gaps wider. Migration into Patna and mistakes in name classification could make them narrower.', { lo: SIR.pct(lo), hi: SIR.pct(hi), inside: inside.length, n: D.length, over: over.length, growth: SIR.d(growth, 2), clear: clear.length, list: clear.map(function (d) { return L('{d} ({lo} at least, against {pop})', { d: d.district, lo: SIR.pct(d.muslim_share_deleted_low), pop: SIR.pct(d.muslim_share_population_2011) }); }).join(', '), rmin: Math.round(100 * (Math.min.apply(null, rr) - 1)), rmax: Math.round(100 * (Math.max.apply(null, rr) - 1)) });
+  document.getElementById('fRel').innerHTML = L('<b>For the state as a whole the range, {lo} to {hi}, includes the 2011 share of 16.87%. District by district it often does not.</b> The census share falls inside the range in {inside} of {n} districts. In the other {over}, more Muslim-name electors were removed than the 2011 share would predict, even if none of the unclassified names is counted. Most of those gaps are smaller than the {growth}-point rise in the state\'s Muslim share since 2011. <b>In {clear} districts the gap is larger:</b> {list}. All {clear} are in south and central Bihar, where Muslims are a small minority, and there even the low end of the range is {rmin} to {rmax}% above the population share. Muslims in Bihar are younger than average, so their share of <em>electors</em> is smaller than their share of the population, and that would make these gaps wider. Migration into Patna and mistakes in name classification could make them narrower.', { lo: SIR.pct(lo), hi: SIR.pct(hi), inside: inside.length, n: D.length, over: over.length, growth: SIR.d(growth, 2), clear: clear.length, list: clear.map(function (d) { return L('{d} ({lo} at least, against {pop})', { d: d.district, lo: SIR.pct(d.muslim_share_deleted_low), pop: SIR.pct(d.muslim_share_population_2011) }); }).join(', '), rmin: Math.round(100 * (Math.min.apply(null, rr) - 1)), rmax: Math.round(100 * (Math.max.apply(null, rr) - 1)) });
 
   // ---- caste
   var C = id.caste, who = 'guardian', GR = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'], charts = {};
@@ -182,7 +182,7 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
       : (Ma.rho_share < 0
         ? L('District by district, the relationship runs the other way: where more women had moved on marriage, women were a smaller share of the young marked shifted (rank correlation {r}).', { r: SIR.d(Ma.rho_share, 2) })
         : L('District by district, where more women had moved on marriage, women were a larger share of the young marked shifted (rank correlation {r}).', { r: SIR.d(Ma.rho_share, 2) }));
-    document.getElementById('fMarr').innerHTML = L('<b>Among those aged 18 to 29 marked shifted, {f} were women and {m} men, so women outnumber men by {x}.</b> Marriage alone could account for a number that size. In the ten years before the 2011 census, {mr} women in Bihar moved on marriage, about {py} a year, so the excess is about {yrs} of one year\'s marriage moves. {rel} Women were the largest share in {top}. The census counts women in the district they moved to, so this measures marriage movement in general and not removals from the home roll. The figures are also fifteen years old.', {
+    document.getElementById('fMarr').innerHTML = L('<b>Among those aged 18 to 29 marked shifted, {f} were women and {m} men, so women outnumber men by {x}.</b> Marriage alone could account for a number that size. In the ten years before the 2011 census, {mr} women in Bihar moved on marriage, about {py} a year, so the excess is about {yrs} of one year\'s marriage moves. {rel} Women were the largest share in {top}. The census counts women in the district they moved to. So it measures marriage movement in general, and cannot show who left the roll at home. The figures are also fifteen years old.', {
       f: SIR.n(Ma.young_shifted_f), m: SIR.n(Ma.young_shifted_m), x: SIR.n(Ma.excess), mr: SIR.lakh(Ma.recent_marriage), py: SIR.lakh(Ma.recent_marriage_per_year), yrs: SIR.d(Ma.excess_years, 2), rel: rel, top: Ma.top.join(', ') });
   });
 }).catch(SIR.fail);

@@ -46,12 +46,12 @@
   <div class="grid">
     <div class="panel">
       <h3 id="the-fifteen-seats-of-hyderabad-district">The fifteen seats of Hyderabad district</h3>
-      <p>Share of each seat's roll left off the draft. The five Old City seats are in red.</p>
+      <p>Share of each seat's roll left off the draft roll, the roll published after the removals. The five Old City seats are in red.</p>
       <div class="chart tall"><canvas id="cSeats" aria-label="Share of the roll left off the draft, Hyderabad district's fifteen seats"></canvas></div>
     </div>
     <div class="panel">
       <h3 id="telangana-s-districts">Telangana's districts</h3>
-      <p>Share of each district's roll left off the draft. Hyderabad is in red; the two other districts of the capital region are in amber.</p>
+      <p>Share of each district's roll left off the draft. Hyderabad is in red, and the two other districts of the capital region are in amber.</p>
       <div class="chart xtall"><canvas id="cDist" aria-label="Share of the roll left off the draft, by district"></canvas></div>
     </div>
   </div>
@@ -86,7 +86,7 @@ SIR.json('data/hyderabad/telangana.json').then(function (d) {
     { k: 'electors_pre', label: L('Electors before'), fmt: SIR.n }, { k: 'electors_draft', label: L('Draft roll'), fmt: SIR.n },
     { k: 'removed', label: L('Left off'), fmt: SIR.n }, { k: 'rate', label: L('% of roll'), fmt: function (v) { return SIR.d(v, 1); } }
   ], d.seats, { sort: 'rate' });
-  document.getElementById('nT').innerHTML = L('The source is the Chief Electoral Officer, Telangana\'s draft roll of 17 August 2026, by district and for Hyderabad district\'s seats, <a href="{u}">as tabulated in the press</a>. The state gives no split by reason below the district, and no seat figures outside Hyderabad district. Malakpet\'s figures here are the state\'s own, because the part-level list used on the other pages holds only part of Malakpet.', { u: d.source });
+  document.getElementById('nT').innerHTML = L('The source is the Chief Electoral Officer, Telangana\'s draft roll of 17 August 2026, by district and for Hyderabad district\'s seats, <a href="{u}">as tabulated in the press</a>. The state gives no split by reason below the district, and no seat figures outside Hyderabad district. The part-level lists used on the other pages were compiled for the five Old City seats only, so the district\'s other ten seats appear here as the state\'s totals. Malakpet\'s figures here are the state\'s own, because the part-level list used on the other pages holds only part of Malakpet.', { u: d.source });
 }).catch(SIR.fail);
 </script>
 <script src="../../assets/faq/hyd.js"></script>
