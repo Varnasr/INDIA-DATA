@@ -105,12 +105,15 @@ def shell(out, meta, content, scripts):
         if p.get('group') == 'states':
             group.append(link(p))
             continue
-        items.append(link(p))
         if p.get('menu'):
-            subs = ['<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in p['menu']]
-            items.append(fold(p.get('nav_label', p['label']), subs, p['id'] == place['id']))
+            # a place with its own pages is one fold: its overview, then each page
+            home = p['pages'][0][0]
+            subs = ['<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in [[home, 'Overview']] + p['menu']]
+            items.append(fold(p['label'], subs, p['id'] == place['id']))
+        else:
+            items.append(link(p))
     if group:
-        items.append(fold('More states, 2026', group, place.get('group') == 'states'))
+        items.append(fold('Other states 2026', group, place.get('group') == 'states'))
     current = place['label'] if place['id'] != 'home' else 'Places'
     places = ('<details class="dl places"><summary class="btn" aria-label="Places">%s <span class="lbl-place">%s</span></summary>'
               '<div class="menu"><div data-i18n-each>%s</div></div></details>' % (PIN, html.escape(current), ''.join(items)))
