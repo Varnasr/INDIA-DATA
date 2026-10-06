@@ -31,6 +31,7 @@ const rj = J('rajasthan/summary.json');
 const up = J('uttarpradesh/summary.json');
 const dl = J('delhi/summary.json');
 const mh = J('maharashtra/summary.json');
+const gj = J('gujarat/summary.json');
 
 // [place id, place name, big figure, the line under it, a second line]
 const CARDS = [
@@ -58,6 +59,8 @@ const CARDS = [
     `More than the 2025 winning margin in ${dl.over_margin} of ${dl.acs} constituencies`],
   ['mh', 'Maharashtra 2026', n(mh.left_off), `names left off Maharashtra's draft roll`,
     `${p(mh.per_100)} of every 100 electors, in ${mh.districts} districts`],
+  ['gj', 'Gujarat 2026', n(gj.removed), `names left off Gujarat's draft roll`,
+    `More than the 2022 winning margin in ${gj.over_margin} of ${gj.acs} constituencies`],
 ];
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');

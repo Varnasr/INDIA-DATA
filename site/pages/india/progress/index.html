@@ -35,7 +35,7 @@
 Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.json')]).then(function (r) {
   var P = r[0], S = {}, E = SIR.esc, asof = P.as_of;
   r[1].states.forEach(function (s) { S[s.state] = s; });
-  var PAGE = { 'Bihar': 'bihar/', 'Telangana': 'hyderabad/telangana/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Rajasthan': 'rajasthan/', 'Uttar Pradesh': 'uttarpradesh/', 'Delhi': 'delhi/', 'Maharashtra': 'maharashtra/' };
+  var PAGE = { 'Bihar': 'bihar/', 'Telangana': 'hyderabad/telangana/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Rajasthan': 'rajasthan/', 'Uttar Pradesh': 'uttarpradesh/', 'Delhi': 'delhi/', 'Maharashtra': 'maharashtra/', 'Gujarat': 'gujarat/' };
   var key = function (s) { return 's-' + s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
   var within = function (a, b) { return a && b && a <= asof && asof <= b; };
   // one schedule per state: each date taken from the latest step that gives it,

@@ -2,7 +2,7 @@
 
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
-Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi and Maharashtra (2026). Static HTML, Chart.js from cdnjs, one
+Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi, Maharashtra and Gujarat (2026). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
@@ -532,6 +532,45 @@ in `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
   `data/india/notices.json` and labelled press.
 - English only, like Rajasthan, Uttar Pradesh and Delhi, with the same
   translated note.
+
+## Gujarat
+
+`scripts/build_gujarat.py` reads `data/gujarat/raw` (sources and checks in
+`SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
+`constituencies.json`, `districts.json`, `final.json` and the two CSVs;
+`check_data.py` runs it with `--check`, and `check_raw.py` too.
+
+- **Constituencies with reasons, from images in the press.** The CEO's
+  district and AC tables of the draft of 19 December 2025 (roll w.r.t.
+  1 October 2025, five reasons, draft) are known only as images of the CEO
+  office's printouts carried by DeshGujarat, apparently posted by the CEO on
+  X; the CEO's site has nothing on the SIR. Every page says the tables are
+  the CEO's as published in the press. The build fails unless each AC's
+  reasons add up and before less left off equals the draft, every district
+  equals its printed total, and the state equals 73,73,327 left off of
+  5,08,43,436.
+- **No split by sex or age anywhere.** The women section says so plainly
+  and shows nothing.
+- **The final roll is by district only**, 34 districts with Vav-Tharad
+  printed apart. The build adds Vav-Tharad back into Banaskantha so the
+  final table lines up with the 33 draft districts; its ACs (7, 8, 14) are
+  only inferred from its draft total and nothing relies on them. The printed
+  final is 50 more than draft plus net in seven districts; both are kept as
+  printed and the method page computes the list from `final.json`.
+- **2022 results are a compilation**, checked seat by seat against a second
+  one (margins and parties agree in all 182). Pages say "a published
+  compilation of the Election Commission's results" and do not name the
+  compiler. Its electors and votes do not reconcile with the ECI's state
+  totals, so no turnout is used: the three counts against the margin are all
+  names left off, those not entered as dead, and those also not enrolled
+  elsewhere.
+- **The city is two districts**, Ahmedabad and Surat (`CITY` in the build),
+  21.9% of the roll and 36.7% of the names left off. The party comparison
+  carries `vs_district` beside the raw rate, because the BJP won almost every
+  city seat.
+- The map is by district (`data/geo/gujarat.json`), because DataMeet has no
+  shapes for 20 city ACs; a constituency picked in the finder outlines its
+  district. English only, like Uttar Pradesh, Delhi and Maharashtra.
 
 ## Notices
 
