@@ -808,6 +808,16 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   numbers and the India map, with the explanation of the revision below the
   cards. The dashboards carry their own h1 above the findings, so the
   header title is a span on every page.
+  The masthead, the tabs and the opening band are one dark block in both
+  themes: `header.top, .nav-tabs, .secbar, .page-head` redefine the dark
+  theme's tokens on a darker ground (`#0c111b`), so every ink there is one
+  `check_contrast.py` already measures for dark. The masthead shows the
+  wordmark `off the roll` (aria-hidden; the translated site title stays in
+  the markup for screen readers). `build_site.py` puts the place's label
+  above each page title as a kicker. The front page hero sets the title,
+  three numbers and the finding beside the India map, which sits on a light
+  inset carrying the light theme's tokens so its lightest states stay
+  visible.
 - **One look on every page: the Bihar dashboard's.** A folk-art band across
   the top (`.band.madhubani` for Bihar, `.band.ikat` for Hyderabad, a
   Pochampally ikat tile drawn as an SVG data URI), a card header with the

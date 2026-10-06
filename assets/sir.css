@@ -758,3 +758,66 @@ nav.toc{display:none}
   .page-head .kpis{grid-template-columns:minmax(0,1fr);gap:1rem}
 }
 @media print{.page-head{box-shadow:none;background:none}nav.toc{display:none}}
+
+/* ------------------------------------------------- the dark masthead
+   The masthead, the section tabs and the opening band are one dark block
+   at the top of every page, in both themes. Inside it the dark theme's
+   tokens apply (the ones check_contrast.py measures for dark), on a
+   ground a shade darker than the dark theme's own, so every ink there is
+   at least as legible as it is in dark mode. */
+header.top,.nav-tabs,.secbar,.page-head{
+  --ink:#eaecee;--muted:#b7c0c9;--navy:#8ec1e6;--red:#f5a79e;--amber:#e7c35a;
+  --line:#2a3550;--bg:#0c111b;--soft:#151d2c;--card:#162033;
+  --nda:#f4a45c;--india:#6fcf97;--other:#b7a8e0;--female:#e59bc8;--male:#8ec1e6;
+  --tab:#a9b4c0;--tab-on:#f5a79e;--shadow:rgba(0,0,0,.4);
+  color:var(--ink)}
+header.top{background:var(--bg);border-bottom:0}
+.nav-tabs{background:var(--bg);border-bottom:1px solid var(--line)}
+.secbar{background:var(--bg)!important;border-bottom:1px solid var(--line)}
+.page-head{background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);border-bottom:0}
+.band{height:6px!important;background-size:auto 6px!important}
+
+/* the wordmark: the site's address, set as a name */
+.logo-icon{display:none}
+.wm{font-family:var(--serif);font-weight:700;font-size:1.6rem;letter-spacing:-.02em;line-height:1;color:var(--ink)}
+.wm i{font-style:italic;font-weight:400;color:var(--red);margin:0 .06em}
+header.top .h-title,header.top .subtitle{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.controls .btn,.controls button,.controls summary.btn,.controls #lang,.controls #dys-font-btn{color:var(--ink)}
+.controls .places summary.btn,.controls #lang{border-color:var(--line);background:transparent}
+.controls #lang option{background:var(--bg);color:var(--ink)}
+
+/* the opening band: a label naming the place, the title, the findings */
+.kicker{margin:0 auto .7rem;max-width:var(--measure);font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--red)}
+.page-head{padding:2.75rem 0 3rem;margin-bottom:3rem}
+.page-head h1{color:var(--ink)}
+.page-head ol.summary li{border-color:var(--line)}
+
+/* the front page: title and numbers beside the map */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:2.5rem;align-items:center}
+.hero .hero-text h1{max-width:none;margin:0 0 1.5rem;font-size:clamp(2.4rem,4.6vw,3.7rem)}
+.hero .kpis{max-width:none;margin:0;grid-template-columns:repeat(3,minmax(0,1fr))}
+.hero-finding{margin:1.4rem 0 0;color:var(--muted);font-size:.95rem;line-height:1.5}
+.hero-finding b{color:var(--ink);font-weight:600}
+.hero-map{margin:0;min-width:0}
+.hero-map .note{margin:.4rem 0 0;font-size:.75rem;color:var(--muted);border:0;padding:0}
+.home main>.lead{margin-top:0;font-size:1.2rem}
+@media (max-width:900px){
+  .hero{grid-template-columns:minmax(0,1fr);gap:1.5rem}
+}
+@media (max-width:700px){
+  .wm{font-size:1.35rem}
+  .page-head{padding:2rem 0 2.25rem;margin-bottom:2.25rem}
+  .hero .hero-text h1{font-size:2.3rem;margin-bottom:1.25rem}
+  .hero .kpis,.page-head .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem 1rem}
+  .hero .kpis>div:first-child{grid-column:1/-1}
+  .hero .kpis>div:first-child b{font-size:3.2rem}
+  .page-head ol.summary{font-size:1.04rem}
+}
+@media print{header.top,.nav-tabs,.page-head{--ink:#1c2833;--muted:#4d5b69;--red:#b03a2e;--bg:#fff;--line:#e1e5e8}}
+header.top{box-shadow:0 2px 0 var(--bg)}
+.hero .kpis{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr)}
+.hero .kpis>div:first-child b{white-space:nowrap}
+/* the hero map is a light inset on the dark band, so its lightest states
+   stay visible; inside it the light theme's measured tokens apply */
+.hero-map{--ink:#1c2833;--muted:#4d5b69;--line:#e1e5e8;--card:#ffffff;--bg:#ffffff;--soft:#f4f6f7;--red:#b03a2e;background:var(--card);color:var(--ink);border-radius:10px;padding:1rem 1rem .7rem}
+.hero .kpis{gap:1.5rem 2rem}.hero .kpis b{font-size:clamp(2.2rem,3.6vw,2.9rem)}
