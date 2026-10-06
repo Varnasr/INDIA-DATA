@@ -430,6 +430,14 @@ def district_economy(a):
             'gddp_prosperity_rank']
     d = d[keep].copy()
     d['key'] = d.district_name.map(norm)
+    # urban share and density come from the Registrar General's own table A-01
+    # (scripts/census_a01.py), not the compiled file, whose figures differ
+    c = pd.read_csv(os.path.join(ROOT, 'data', 'india', 'raw', 'census2011_a01_districts.csv'))
+    c = c[c.state == 'Bihar'].copy()
+    c['key'] = c.district.map(norm)
+    assert set(d.key) <= set(c.key), 'districts not in census A-01: %s' % sorted(set(d.key) - set(c.key))
+    d = d.drop(columns=['census_2011_urban_pct', 'census_2011_density_per_sqkm']).merge(
+        c[['key', 'urban_pct', 'density']].rename(columns={'urban_pct': 'census_2011_urban_pct', 'density': 'census_2011_density_per_sqkm'}), on='key', how='left')
     bd = pd.read_csv(os.path.join(ROOT, 'data', 'district_border_classification.csv'))
     alias = {'jahanabad': 'jehanabad', 'paschimchamparan': 'pashchimchamparan', 'purvichamparan': 'purbachamparan'}
     bd['key'] = bd.district_name.map(norm).map(lambda k: alias.get(k, k))

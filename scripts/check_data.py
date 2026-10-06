@@ -207,6 +207,10 @@ def _women():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_women.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
+def _census_a01():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'census_a01.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
 def _reserved():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_reserved.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -299,6 +303,7 @@ for name, fn in [
     ('the reserved-seat table is current and every state has its Delimitation Order seats', _reserved),
     ('the border table is current, every listed district is found and Bihar matches its own pages', _border),
     ('the women table is current and every rate lies between 0 and 100', _women),
+    ('Census 2011 A-01 districts are current and add to the India totals', _census_a01),
     ('Notices table matches its raw table', _notices),
     ('Delhi data matches its raw tables', _delhi),
     ('removals against winning margins current, 2024 margins match the published ones', _margins),
