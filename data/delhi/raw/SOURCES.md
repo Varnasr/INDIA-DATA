@@ -6,7 +6,41 @@ four generated CSVs from `sources/` and asserts every check listed below
 (36 checks, all passing): `python3 data/delhi/raw/check_raw.py`, or `--write`
 to regenerate. It needs `pypdf` to read the two CEO PDFs.
 
-## The CEO's site could not be reached
+## Update, 6 October 2026: the CEO's own table
+
+ceodelhi.gov.in is now readable through Firecrawl (plain curl from the sandbox
+is still reset). The CEO's "Distt/AC Wise Electors and Uncollectable
+Enumeration Forms-SIR 2026 Draft Publication"
+(https://ceodelhi.gov.in/PDFFolders/2026/Uncollectable_Enumeration_FormsSIR31Aug2026.pdf)
+was read from its text layer and is transcribed in
+`sources/ceo_ac_draft_uncollectable_20260831.md`. It gives, for each of the 13
+current districts and 70 ACs, the draft roll by sex and the forms not
+collected. It does **not** give the roll before by AC or any split of the
+uncollectable forms by reason or by sex.
+
+`check_raw.py` asserts that its ACs sum to its 13 printed district sums and to
+its grand total (49,88,993 men, 47,64,137 women, 447 third gender, 97,53,577
+draft, 47,56,722 uncollectable), and that its draft and uncollectable columns
+equal the Business Standard data below in all 70 ACs. `ac.csv` now carries the
+CEO's `district` (13) beside `district_2025` (11, kept for the record) and the
+draft by sex.
+
+The CEO's press note of 31.08.2026
+(https://ceodelhi.gov.in/PDFFolders/2026/Draft_PublicationSIR31Aug2026.pdf)
+confirms the state figures and says the booth officers visited "each elector
+whose name was in the electoral rolls as on 16.06.2026". The roll before is
+therefore the roll of **16 June 2026**, not 20 June as reported below. The
+roll before by sex is not in the note and stays as Hindustan Times quoted it.
+
+The schedule was revised by the CEO's letter of 27.09.2026
+(https://ceodelhi.gov.in/PDFFolders/2026/Revised_Schedule_of_SIR27Sept2026.pdf),
+from the Commission's letter of 26.09.2026: claims and objections to
+30.10.2026, notices and disposal to 30.11.2026, final roll on 04.12.2026.
+
+The sections below record the state of things on 3 October, when the site
+could not be reached.
+
+## The CEO's site could not be reached (3 October 2026)
 
 ceodelhi.gov.in refuses this sandbox: curl through the proxy is reset
 (`ws_closed_mid_exchange`), `http://` answers 503, and Firecrawl fails with

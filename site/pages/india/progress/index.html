@@ -14,6 +14,10 @@
   <div class="grid"><div class="panel wide" id="pCal"><div class="vizbox" id="vCal"></div></div></div>
   <p class="note" id="nCal"></p>
 
+  <h2>How long each revision runs</h2>
+  <p class="sub">Days from the first house visit to the final roll, longest first, for every state that has published a draft roll. A navy dot is a final roll already published, counted to the day it came out. An amber dot is a final roll still to come, counted to the date now set for it, and a red one is a final roll whose date has passed without one that we could find.</p>
+  <div class="grid"><div class="panel wide" id="pDur"><div class="vizbox" id="vDur"></div><p id="fDur"></p></div></div>
+
   <h2>State by state</h2>
   <p class="sub">States with an analysis of their own on this site are linked to it. The others are linked to their dates on the page about how the revision was run.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Where each state stands"><table id="tStage"></table></div>
@@ -50,7 +54,9 @@ Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.js
     if (pub) { st = 'Final roll published'; cls = 'done'; }
     else if (m.final && m.final < asof) { st = 'Final roll was due ' + SIR.date(m.final) + ', not yet found'; cls = 'late'; }
     else if (!s.removed && m.draft && m.draft < asof) { st = 'Draft roll was due ' + SIR.date(m.draft) + ', not yet found'; cls = 'late'; }
-    else if (!s.removed) { st = m.enum && m.enum[0] && m.enum[0] <= asof ? 'House-to-house visits' : 'Not yet begun'; cls = 'wait'; }
+    // no draft yet: the order's own dates for such a state (Tripura) were not
+    // kept, so no stage is read from them
+    else if (!s.removed) { st = 'No draft roll yet'; cls = 'wait'; }
     else if (within(m.claims && m.claims[0], claimsTo)) { st = 'Claims and objections'; cls = 'now'; }
     else if (m.notice && within(m.notice[0], m.notice[1])) { st = 'Notices and hearings'; cls = 'now'; }
     else { st = 'Draft published, final roll due ' + (m.final ? SIR.date(m.final) : 'on a date not yet set'); cls = 'now'; }
@@ -77,6 +83,17 @@ Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.js
   VIZ.gantt('vCal', { label: 'Every state on its latest schedule, with the date this page was checked', single: true, today: asof, todayLabel: 'Checked ' + SIR.date(asof),
     rows: rows.map(function (x) { return { name: x.state, steps: [{ label: x.pub ? (x.pubDate ? 'Final roll published ' + SIR.date(x.pubDate) : 'Final roll published, day not found') : 'Latest schedule', enum: x.m.enum, draft: x.m.draft, claims: x.m.claims, claims_end: x.m.claims_end, final: x.m.final }] }; }) });
   document.getElementById('nCal').textContent = P.notes.p3later;
+  // days from the first house visit to the final roll, published or due
+  var days = function (a, b) { return Math.round((Date.parse(b) - Date.parse(a)) / 864e5); };
+  var dur = rows.filter(function (x) { return S[x.state] && S[x.state].removed && x.m.enum && x.m.enum[0] && x.m.final; }).map(function (x) {
+    return { name: x.state, v: days(x.m.enum[0], x.m.final), cls: x.cls, pub: x.pub };
+  }).sort(function (a, b) { return b.v - a.v; });
+  VIZ.lollipop('vDur', { label: 'Days from the first house visit to the final roll, every state', axis: 'Days from the first house visit to the final roll',
+    rows: dur.map(function (d) { return { name: d.name, v: d.v, text: d.v + (d.pub ? ' days' : ' days, if on time'), tok: d.pub ? '--fill-navy' : d.cls === 'late' ? '--fill-red' : '--fill-amber', hi: !d.pub }; }) });
+  var pubD = dur.filter(function (d) { return d.pub; }), med = function (a) { a = a.slice().sort(function (x, y) { return x - y; }); return a.length % 2 ? a[(a.length - 1) / 2] : Math.round((a[a.length / 2 - 1] + a[a.length / 2]) / 2); };
+  var longest = dur[0];
+  document.getElementById('fDur').innerHTML = '<b>The ' + pubD.length + ' revisions that have finished took ' + med(pubD.map(function (d) { return d.v; })) + ' days in the typical state, from ' + Math.min.apply(null, pubD.map(function (d) { return d.v; })) + ' to ' + Math.max.apply(null, pubD.map(function (d) { return d.v; })) + '.</b> ' +
+    (longest.pub ? '' : longest.name + '\'s, if its final roll comes out on the date now set, will have taken ' + longest.v + ' days, the longest of all.');
 
   var link = function (s) { return '<a href="../../' + (PAGE[s] || 'india/process/#' + key(s)) + '">' + E(s) + '</a>'; };
   document.getElementById('tStage').innerHTML = '<thead><tr><th class="l">State or union territory</th><th>Phase</th><th>Draft roll</th><th>Final roll</th><th class="l">Stage</th></tr></thead><tbody>' +

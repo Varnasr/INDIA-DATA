@@ -461,23 +461,28 @@ because the independents' fronts are not in the data.
 needs pypdf) and writes `summary.json`, `constituencies.json`,
 `districts.json` and the two CSVs; `check_data.py` runs it with `--check`.
 
-- **Constituencies from the CEO's draft table, by way of a newspaper's map
-  data.** ceodelhi.gov.in cannot be reached from outside India. The draft and
-  the forms not collected for all 70 ACs come from the data behind Business
-  Standard's map, which links the CEO's PDF; the build fails unless they add
-  up exactly to the CEO's state figures (1,45,10,299 before, 97,53,577 draft,
-  47,56,722 left off). Say so on the method page.
+- **Constituencies from the CEO's own table.** ceodelhi.gov.in is reachable
+  through Firecrawl (not by plain curl from the sandbox). The CEO's
+  "Distt/AC Wise Electors and Uncollectable Enumeration Forms" of 31.08.2026
+  is transcribed in `sources/ceo_ac_draft_uncollectable_20260831.md`: draft by
+  sex and forms not collected for all 70 ACs on the 13 current districts.
+  `check_raw.py` holds it equal, row by row, to the data behind Business
+  Standard's map of the same table, and to its own district sums and grand
+  total; the build fails unless the ACs add up to the CEO's state figures
+  (1,45,10,299 before, 97,53,577 draft, 47,56,722 left off). The roll before
+  is the roll of 16 June 2026 (CEO press note), not 20 June.
 - **Reasons and sex are state figures only.** `secondary_reasons_ac.csv` is a
   consultancy's count of the named ASDD lists by AC. It is kept as a record
   and **not used**, like West Bengal's compilations; do not move it onto a
   page. Men were left off more often than women (35.3 against 29.9 per 100).
-- Districts are the 11 of the 2025 roll; Delhi has 13 now and the new list
-  was not found. Pages say "the districts of the 2025 roll".
+- Districts are the 13 of the CEO's table. `district_2025` (the 11 of the
+  2025 roll) is kept in `ac.csv` for the record only.
 - Margins are from the votes (New Delhi 4,089, Patparganj 28,072, against the
   4,199 and 28,702 two compilations print). The left-off count exceeds the
   2025 margin in 68 of 70 seats (66 at turnout); say it could have decided
   a seat, never that it did.
-- No final roll until after 30 October 2026. Rebuild when it is out.
+- The final roll is due 4 December 2026 (CEO letter of 27.09.2026, from the
+  Commission's letter of 26.09.2026). Rebuild when it is out.
 - English only, like Rajasthan and Uttar Pradesh.
 
 ## Notices
