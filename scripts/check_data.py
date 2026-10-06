@@ -199,6 +199,14 @@ def _cities():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_cities.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
+def _border():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_border.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
+def _reserved():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_reserved.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
 def _telangana():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_telangana.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -284,6 +292,8 @@ for name, fn in [
     ('Gujarat data matches its raw tables, and the raw tables add up', _gujarat),
     ('Uttarakhand data matches its raw tables, and the raw tables add up', _uttarakhand),
     ('the cities table is current and every city adds up from its state', _cities),
+    ('the reserved-seat table is current and every state has its Delimitation Order seats', _reserved),
+    ('the border table is current, every listed district is found and Bihar matches its own pages', _border),
     ('Notices table matches its raw table', _notices),
     ('Delhi data matches its raw tables', _delhi),
     ('removals against winning margins current, 2024 margins match the published ones', _margins),

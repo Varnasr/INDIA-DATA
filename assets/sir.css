@@ -814,3 +814,6 @@ html.dyslexic-font em,html.dyslexic-font i{font-style:normal}
 @media (max-width:700px){html.dyslexic-font .page-head h1,html.dyslexic-font .hero h1{font-size:1.75rem}html.dyslexic-font .summary-value,html.dyslexic-font .kpis b{font-size:1.3rem}}
 html[data-lang]:not([data-lang="en"]) ol.summary li::before{font-family:inherit}
 @media print{.band,nav.toc{display:none}.page-head{box-shadow:none}}
+/* the report cover's figures: long Indian-grouped numbers stay inside their box */
+.report .cover dt{font-family:var(--serif);font-size:clamp(1.15rem,4.2vw,1.6rem);line-height:1.15;overflow-wrap:anywhere}
+@media (max-width:520px){.report .cover dl{grid-template-columns:minmax(0,1fr)}}

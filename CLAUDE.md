@@ -199,6 +199,44 @@ and say so. The page says the "shifted or absent" share cannot tell moved and
 doubly registered people from residents who were out, and never claims either.
 English only, like the other All India sub-pages.
 
+**Comparisons** (`india/compare/`) carries three. Each state is set against
+itself in its own measure, and states are never ranked against each other.
+
+- **Reserved seats.** `scripts/build_reserved.py` writes
+  `data/india/reserved.json` and the CSV. Reservation comes from Bihar's own
+  file, from "(SC)"/"(ST)" in Gujarat's and Delhi's seat names, and for Tamil
+  Nadu, West Bengal and Kerala from `data/india/raw/reserved_ac.csv` (Wikipedia
+  lists). The build fails unless every state's SC and ST counts equal the
+  Delimitation Order's (`ORDER`). Each reserved seat is also set against the
+  general seats of its own district. Finding: reserved seats lost fewer names
+  in every state, which cuts the other way and is stated plainly. A reserved
+  seat describes a place, and the page never reads it as the caste of the
+  electors removed. Rajasthan and Uttarakhand are left out, because their
+  constituency figures cover a different stretch of time.
+- **How much came back** reads `made_up_pct` from `states.json`. It is always
+  called a ceiling, because the rise counts new voters.
+- **Border districts.** `scripts/build_border.py` writes
+  `data/india/border.json` and the CSV from `data/india/raw/border_districts.csv`.
+  That file holds all 119 rows of the Government of India's List of Border
+  Guarding Districts, as printed in Annexure XI (pages 69 to 71) of the Staff
+  Selection Commission's notice of 1 December 2025 for constables in the
+  Home Ministry's armed police forces. The 2005 and 2015 BADP guidelines and
+  the Lok Sabha answers list no districts, and mha.gov.in refuses the sandbox.
+  Never use a district list of the site's own. The build fails if a listed
+  district is missing, and if Bihar's seven stop matching the Bihar pages'
+  Nepal-border districts. They match today.
+  - Covered: Uttar Pradesh, Gujarat, Bihar, West Bengal (the fall in the roll)
+    and Uttarakhand (after the draft only).
+  - Rajasthan is left out. Its figure is a change over two years, and Barmer
+    was split to make Balotara.
+  - Finding: there is no single pattern. Border districts lost more in Bihar
+    and Uttarakhand, about the same in Uttar Pradesh, and fewer in Gujarat and
+    West Bengal. West Bengal's border is above the interior once Kolkata is
+    left out.
+  - Where reasons exist, "enrolled elsewhere" is a larger share in border
+    districts (Uttar Pradesh and Gujarat).
+  - Every border sentence says the rate says nothing about citizenship.
+
 **Where the revision stands** (`india/progress/`) is the progress board: for
 each of the 32 states and UTs, its stage as of `as_of` in `process.json`,
 worked out in the page script from the latest date each schedule step gives
