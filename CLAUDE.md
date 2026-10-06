@@ -914,7 +914,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   margin of a screen 1240px or wider (`SIR.toc`, body class `has-toc`).
   On a phone the header is the wordmark, Search and one menu button.
   The front page follows the mockup: the headline states the count, a grid
-  of 100 dots shows the share, a four-number strip, the map beside a ranked
+  of 100 dots shows the share, a four-number strip (the count left off stays first; the other three come in turn from a list of ten computed from the All India files, three a day by `SIR.day()`), the map beside a ranked
   list of states (so a phone does not depend on hover), cards to each
   analysis led by their number, one state featured in the large card each
   day and the other states following in turn (`SIR.day()`; West Bengal without JavaScript), a finder that links
