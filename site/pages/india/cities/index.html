@@ -1,0 +1,111 @@
+<!--page {"title": "The cities: how many names India's large cities lost in the SIR", "description": "Each large city's names left off the draft roll against its own state, its suburbs and the rest of the state, from the district and constituency tables the states published.", "place": "india"} -->
+<main id="main">
+<div class="page-head" data-no-i18n><h1>The cities</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only. Every figure on it comes from the state pages, which link each table to its source.</p>
+
+<article class="cities" lang="en" dir="ltr" data-no-i18n>
+  <div class="kpis" id="kpis"></div>
+
+  <h2>Each city against its state</h2>
+  <p class="sub">Names left off the draft roll for every 100 electors on the roll before the revision, in the city and in its state as a whole. A city here is the districts named in the last section, because no state published its figures by city boundary.</p>
+  <div class="grid">
+    <div class="panel wide" id="pCity">
+      <h3>The city and its state, per 100 electors</h3>
+      <div class="vizbox" id="vCity"></div>
+      <p id="nCity"></p>
+    </div>
+  </div>
+
+  <h2>The core, the suburbs and the rest of the state</h2>
+  <p class="sub">The core is the city's own districts. The suburbs are the neighbouring districts its growth has spread into. The rest of the state is everything else. Delhi's suburbs on this page are Ghaziabad and Gautam Buddha Nagar, measured on Uttar Pradesh's revision. Gurugram and Faridabad are in Haryana, which this site has no district figures for.</p>
+  <div class="twrap"><table id="tRing"></table></div>
+  <p class="finding" id="fRing"></p>
+
+  <h2>What was written against the names</h2>
+  <p class="sub">Where a state published the reasons by district, the share of the city's names left off that were entered as shifted or absent, and the share entered as dead. A reason is what the officer wrote down, and nobody checked it.</p>
+  <div class="twrap"><table id="tWhy"></table></div>
+  <p id="nWhy"></p>
+  <p>The lists cannot say which of two very different things a high "shifted or absent" share means. It can mean people who had moved and were also registered somewhere else, such as a home village, and were rightly taken off one roll. It can equally mean people who still live in the city and were not at home when the officer called. The count is the same either way, so this page does not say which it is.</p>
+
+  <h2>Kolkata and Kochi</h2>
+  <p class="sub">West Bengal and Kerala published no names left off below the state. What they published by district is the roll itself, so for these two cities the measure is the fall in the roll: West Bengal's from the 2024 Lok Sabha roll to the draft, Kerala's from the roll of January 2025 to the draft. That fall takes in ordinary deaths and moves over more than a year as well as the revision, so it is a different count from the others on this page and is never ranked with them.</p>
+  <div class="twrap"><table id="tFall"></table></div>
+  <p id="nFall"></p>
+
+  <h2>Patna</h2>
+  <p id="nPatna"></p>
+
+  <h2>How each city is drawn</h2>
+  <div class="twrap"><table id="tDraw"></table></div>
+  <p class="note">Hyderabad's district figures are the state's as reported in the press, on the Telangana page. Uttar Pradesh's are the Chief Electoral Officer's table as published in the press, and Gujarat's the Chief Electoral Officer's printouts as published in the press. The table behind this page downloads as <a href="../../data/india/cities.csv" download>CSV</a>.</p>
+
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</article>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/india.js"></script>
+<script>
+SIR.json('data/india/cities.json').then(function (d) {
+  var C = d.cities, S = d.summary;
+  var p1 = function (x) { return SIR.d(x, 1); };
+  var by = {}; C.forEach(function (c) { by[c.city] = c; });
+  var ranked = C.filter(function (c) { return c.measure === 'left_off' && !c.roll_2025; }).sort(function (a, b) { return b.core.per_100 - a.core.per_100; });
+  var vsState = ranked.filter(function (c) { return c.state !== 'Delhi'; });
+  var rings = ranked.filter(function (c) { return c.ring; });
+  var ringUp = rings.filter(function (c) { return c.ring.per_100 >= c.core.per_100; });
+  var why = ranked.filter(function (c) { return c.core.shifted_absent_share != null; });
+  var shMin = Math.min.apply(null, why.map(function (c) { return c.core.shifted_absent_share; })), shMax = Math.max.apply(null, why.map(function (c) { return c.core.shifted_absent_share; }));
+  var top = ranked[0], pat = by.Patna, kol = by.Kolkata, koc = by.Kochi;
+  var name = function (c) { return c.city + (c.reported ? ' (as reported)' : ''); };
+
+  SIR.inShort([
+    (S.above_state === S.compared ? 'In all ' + S.compared + ' large cities measured by the names left off, the city lost a larger share of its roll than its state did, between ' : 'In ' + S.above_state + ' of ' + S.compared + ' large cities measured by the names left off, the city lost a larger share of its roll than its state did. The city\'s rate ran from ') + p1(S.times_min) + (S.above_state === S.compared ? ' and ' : ' to ') + p1(S.times_max) + ' times the state\'s rate.',
+    top.city + ' lost ' + p1(top.core.per_100) + ' of every 100 electors, the most of any city, against ' + p1(top.state_per_100) + ' in ' + top.state + '. Its districts held ' + p1(top.share_of_roll) + '% of the state\'s roll and ' + p1(top.share_of_removed) + '% of the names left off.',
+    'The suburbs lost fewer names than the city itself in ' + (rings.length - ringUp.length) + ' of ' + rings.length + ' cities. ' + (ringUp.length ? ringUp.map(function (c) { return c.city; }).join(' and ') + (ringUp.length > 1 ? ' are' : ' is') + ' the exception. ' + ringUp.map(function (c) { return c.ring.districts.join(' and ') + ' lost ' + p1(c.ring.per_100) + ' per 100, against ' + p1(c.core.per_100) + ' in ' + c.city + ' itself.'; }).join(' ') : ''),
+    'Where the reasons were published, ' + Math.round(shMin) + ' to ' + Math.round(shMax) + ' of every 100 names left off in a city were entered as shifted or absent.',
+    'Patna lost ' + p1(pat.core.per_100) + ' per 100 against ' + p1(pat.state_per_100) + ' for Bihar, the one city that lost fewer names than its state.'
+  ], 'A city here is its districts, drawn differently from city to city, and Kolkata and Kochi are measured by the fall in the roll. A reason is what the officer wrote down, and nobody checked it.');
+
+  document.getElementById('kpis').innerHTML = [
+    [vsState.filter(function (c) { return c.core.per_100 > c.state_per_100; }).length + ' of ' + vsState.length, 'cities that lost more than their state'],
+    [p1(S.times_min) + ' to ' + p1(S.times_max), 'times the state\'s rate'],
+    [p1(top.core.per_100), 'per 100 in ' + top.city + ', the most'],
+    [(rings.length - ringUp.length) + ' of ' + rings.length, 'suburbs that lost less than the city']
+  ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+
+  // the city against its state
+  VIZ.dumbbell('vCity', { label: 'Names left off per 100 electors in each city and in its state', min: 0, step: 10,
+    aName: 'The state, per 100', aTok: '--fill-grey', bName: 'The city, per 100', bTok: '--fill-red',
+    rows: ranked.map(function (c) { return { name: name(c) + (c.state === 'Delhi' ? '' : ', ' + c.state), a: c.state_per_100, b: c.core.per_100 }; }) });
+  document.getElementById('nCity').textContent = 'Delhi is a city and a state at once, so its grey dot and its red dot are the same figure.';
+
+  var row = function (cells, cls) { return '<tr' + (cls ? ' class="' + cls + '"' : '') + '>' + cells.map(function (c, i) { return '<td' + (i === 0 ? ' class="l"' : '') + '>' + c + '</td>'; }).join('') + '</tr>'; };
+  var head = function (cells) { return '<thead><tr>' + cells.map(function (c, i) { return '<th' + (i === 0 ? ' class="l"' : '') + '>' + c + '</th>'; }).join('') + '</tr></thead>'; };
+  var link = function (c) { return '<a href="../../' + c.page + '">' + name(c) + '</a>'; };
+
+  document.getElementById('tRing').innerHTML = head(['City', 'City, per 100', 'Suburbs, per 100', 'Rest of state, per 100', 'State, per 100', 'Times the state', 'Share of the state\'s roll', 'Share of the names left off']) + '<tbody>' +
+    ranked.map(function (c) {
+      return row([link(c), p1(c.core.per_100), c.ring ? p1(c.ring.per_100) + (c.ring.state !== c.state ? ' (' + c.ring.state + ')' : '') : '–', c.rest ? p1(c.rest.per_100) : '–', p1(c.state_per_100),
+        c.state === 'Delhi' ? '–' : p1(c.times_state), c.share_of_roll != null ? p1(c.share_of_roll) + '%' : '–', c.share_of_removed != null ? p1(c.share_of_removed) + '%' : '–']);
+    }).join('') + '</tbody>';
+  document.getElementById('fRing').innerHTML = '<b>In ' + (rings.length - ringUp.length) + ' of ' + rings.length + ' cities with suburbs, the rate falls from the city to its suburbs and again to the rest of the state.</b> ' +
+    (ringUp.length ? ringUp.map(function (c) { return 'In ' + c.city + ' it does not, because ' + c.ring.districts.join(' and ') + ' lost ' + p1(c.ring.per_100) + ' per 100, more than the ' + p1(c.core.per_100) + ' in the city\'s own districts.'; }).join(' ') : '');
+
+  document.getElementById('tWhy').innerHTML = head(['City', 'Entered as shifted or absent', 'Entered as dead']) + '<tbody>' +
+    why.map(function (c) { return row([link(c), p1(c.core.shifted_absent_share) + '%', p1(c.core.dead_share) + '%']); }).join('') + '</tbody>';
+  var noWhy = ranked.filter(function (c) { return c.core.shifted_absent_share == null; }).map(function (c) { return c.city; });
+  document.getElementById('nWhy').textContent = noWhy.length ? noWhy.join(', ').replace(/, ([^,]*)$/, ' and $1') + ' are left out because ' + (noWhy.length > 1 ? 'their states' : 'its state') + ' published no reasons by district.' : '';
+
+  document.getElementById('tFall').innerHTML = head(['City', 'Fall in the roll, per 100', 'Suburbs, per 100', 'Rest of state, per 100', 'State, per 100']) + '<tbody>' +
+    [kol, koc].map(function (c) { return row([link(c), p1(c.core.per_100), c.ring ? p1(c.ring.per_100) : '–', c.rest ? p1(c.rest.per_100) : '–', p1(c.state_per_100)]); }).join('') + '</tbody>';
+  document.getElementById('nFall').textContent = 'Kolkata\'s roll fell by ' + p1(kol.core.per_100) + ' of every 100 electors to the draft, ' + p1(kol.times_state) + ' times West Bengal\'s ' + p1(kol.state_per_100) + '. Kochi\'s fell by ' + p1(koc.core.per_100) + ', against ' + p1(koc.state_per_100) + ' for Kerala. Both follow the same pattern as the other cities, on a different count.';
+
+  document.getElementById('nPatna').textContent = 'Bihar published its roll before the revision for the state only, so its pages count the names removed in both phases against the 2025 roll, and so does this one. On that count Patna lost ' + p1(pat.core.per_100) + ' of every 100 electors, against ' + p1(pat.state_per_100) + ' for Bihar as a whole. It is the one city here that lost fewer names than its state. Its denominator differs from the other cities\', so it is not ranked with them.';
+
+  document.getElementById('tDraw').innerHTML = head(['City', 'Its districts', 'Its suburbs']) + '<tbody>' +
+    C.map(function (c) { return row([link(c), c.core.districts.join(', '), c.ring ? c.ring.districts.join(', ') + (c.ring.state !== c.state ? ' (' + c.ring.state + ')' : '') : 'None drawn']); }).join('') + '</tbody>';
+  SIR.showFaq('india', 'cities');
+}).catch(SIR.fail);
+</script>

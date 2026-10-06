@@ -24,6 +24,12 @@
            L('The figures show where removals were heavy, and cannot show why.')), ['main']],
         [L('Were women removed more than men?'), fem, ['main', 'faq']],
         [L('Were the names put back on the final roll?'), L('Few of them.') + ' ' + back, ['numbers', 'main', 'faq']],
+        [L('Why did the cities lose more names than their states?'),
+         L('The lists do not say. In the cities most of the names left off were entered as shifted or absent. That fits people who had moved and were registered somewhere else, and it fits people who still live there and were out when the officer called. The count is the same either way.'), ['cities', 'faq']],
+        [L('What counts as a city on the cities page?'),
+         L('Its districts, because no state published its figures by city boundary. Each city\'s districts and its suburbs are listed at the foot of the page. Kolkata and Kochi are measured by the fall in the roll, because their states published no names left off below the state.'), ['cities', 'faq']],
+        [L('Why is Patna not ranked with the other cities?'),
+         L('Bihar published its roll before the revision for the state only, so its rate is counted against the 2025 roll, a different base from the other cities\'. On that count Patna lost fewer names than Bihar as a whole.'), ['cities', 'faq']],
         [L('Were the rolls over-full before the revision?'),
          L('Mostly not. Across the {n} states with population projections, the rolls held {pre} of adults before the revision, and only {k} had more names on the roll than adults.', { n: A.states, pre: SIR.pct(100 * A.roll_total / A.adults_total), k: A.over_100.length }) + ' ' +
          (Math.abs(A.rho_rate) < 0.2 ? L('States with the fullest rolls did not remove more.') : ''), ['main']],
