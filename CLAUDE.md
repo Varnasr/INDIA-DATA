@@ -62,7 +62,9 @@ Things the build depends on, each asserted by `check_data.py`:
   17.70% in the 2023 caste survey; the same eight districts stay more than a
   point above either way. District literacy and early marriage come from NFHS-5
   (`data/bihar/raw/nfhs5_districts.csv`, fact-sheet definitions, Bihar fielded
-  2019-20); only density and urban share are still Census 2011.
+  2019-20); only density and urban share are still Census 2011, read from the
+  Registrar General's table A-01 by `scripts/census_a01.py`
+  (`data/india/raw/census2011_a01_districts.csv`, all 640 districts).
 - **Caste is not identified.** Two surname classifications give different
   compositions and wide bounds. The pages say so. Do not collapse them into
   one number, and do not reintroduce "Devi" or any title as a caste marker.
