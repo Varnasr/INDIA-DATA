@@ -207,6 +207,10 @@ def _women():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_women.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
+def _assam():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_assam.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
 def _urban():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_urban.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -309,6 +313,7 @@ for name, fn in [
     ('the women table is current and every rate lies between 0 and 100', _women),
     ('Census 2011 A-01 districts are current and add to the India totals', _census_a01),
     ('the rural and urban table is current and every district has a 2011 parent', _urban),
+    ('the Assam figures add up and are current', _assam),
     ('Notices table matches its raw table', _notices),
     ('Delhi data matches its raw tables', _delhi),
     ('removals against winning margins current, 2024 margins match the published ones', _margins),
