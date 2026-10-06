@@ -82,6 +82,23 @@
   var pr = document.querySelector('.print');
   if (pr) pr.addEventListener('click', function () { if (SIR.beforePrint) SIR.beforePrint(); setTimeout(function () { window.print(); }, 300); });
 
+  // On a phone the header is one row: the title, Search, and this button,
+  // which opens the other controls on a row beneath (sir.css hides them
+  // until then). On a wide screen the stylesheet hides the button.
+  var ctl = document.querySelector('header.top .controls');
+  if (ctl && !ctl.querySelector('.more')) {
+    var more = document.createElement('button');
+    more.type = 'button'; more.className = 'more';
+    more.setAttribute('aria-expanded', 'false');
+    more.setAttribute('aria-label', L('More options'));
+    more.innerHTML = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+    ctl.appendChild(more);
+    more.addEventListener('click', function () {
+      var open = document.querySelector('header.top').classList.toggle('open');
+      more.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
   // ----------------------------------------------------- header and tabs
   // On a wide screen the header is sticky and the tab bar sticks beneath it,
   // so the bar needs the header's height; on a phone the header scrolls away

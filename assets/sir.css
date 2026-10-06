@@ -607,3 +607,121 @@ main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
 .stage.late{background:var(--fill-red);color:#fff}
 .stage.now{background:#f5b041;color:#1c2833}
 .stage.wait{background:transparent;color:var(--ink);border:1px solid var(--muted)}
+
+/* =================================================================
+   The newsroom layout (October 2026). Everything above sets the
+   components; this layer sets the frame round them. A slim header on
+   one line, the folk-art strip kept but quiet, serif headlines (Source
+   Serif 4, OFL, in fonts/), and a reading column of about 44rem centred
+   on the page, with maps, charts and tables breaking out to the full
+   width beside it. No colour token changes here, so check_contrast.py
+   still measures every ink. */
+@font-face{font-family:"Source Serif 4";src:url(../fonts/sourceserif4-latin.woff2) format("woff2");font-weight:200 900;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+20B9,U+2122,U+2212}
+:root{--serif:"Source Serif 4",Georgia,"Noto Serif",serif;--measure:44rem}
+body{font-size:16px;line-height:1.65}
+
+/* the strip: a thin edge of the place's cloth, still */
+.band{height:5px!important;background-size:auto 5px!important;animation:none!important}
+
+/* the header: title left, controls right, one hairline under it */
+header.top{box-shadow:none;border-bottom:1px solid var(--line);background:var(--bg);padding:.6rem 1.25rem}
+.logo{gap:.7rem}
+.logo-icon{width:32px;height:32px;border-radius:7px;animation:none!important;box-shadow:none!important}
+.logo-icon svg{width:18px;height:18px}
+.h-title{font-family:var(--serif);font-size:1.18rem;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+header.top .subtitle{font-size:.78rem;line-height:1.35}
+.controls{gap:.2rem}
+.controls .btn,.controls button,.controls summary.btn,.controls #lang,.controls #dys-font-btn{background:transparent;border:1px solid transparent;border-radius:7px;padding:.42rem .6rem;font-size:.86rem;color:var(--ink);font-weight:500;box-shadow:none}
+.controls .btn:hover,.controls button:hover,.controls summary.btn:hover{background:var(--soft);color:var(--ink);transform:none}
+.controls .places summary.btn,.controls #lang{border-color:var(--line)}
+.controls .print{background:transparent}
+.controls .more{display:none}
+@media (min-width:701px){
+  .controls .find .lbl,.controls .dl:not(.places) .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+button:hover,.btn:hover{transform:none}
+
+/* the section tabs: plain words on the page's edge, the current one underlined */
+.nav-tabs{background:var(--bg);border-bottom:1px solid var(--line);box-shadow:none}
+.nav-tab{background:none!important;border-radius:0;color:var(--muted);font-weight:600}
+.nav-tab:hover{color:var(--ink)}
+.nav-tab[aria-current="page"],.nav-tab[aria-selected="true"]{color:var(--ink)}
+.nav-tab::after{background:var(--ink);height:2px;bottom:-1px}
+@media (min-width:901px){
+  .nav-tabs{justify-content:flex-start;padding-inline:max(1.25rem,calc((100% - var(--page))/2 + 1.25rem));column-gap:1.5rem}
+  .nav-tab{padding:.75rem 0;font-size:.85rem}
+  .nav-tab .icon{display:none}
+}
+
+/* the page: headlines in serif, text in the reading column */
+main{padding:2.5rem 1.25rem 3.5rem}
+body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq){max-width:var(--measure);margin-inline:auto}
+.xp main>*{max-width:none!important;margin-inline:0!important}
+main h1,.page-head h1{font-family:var(--serif);font-size:clamp(2rem,3.8vw,2.9rem);line-height:1.1;letter-spacing:-.018em;font-weight:700;margin-top:0;margin-bottom:1rem}
+main h2{font-family:var(--serif);font-size:1.65rem;line-height:1.2;letter-spacing:-.012em;font-weight:700;border:0;padding:0;margin-top:3.25rem;margin-bottom:.6rem}
+main h2::before{content:"";display:block;width:2.5rem;height:3px;background:var(--fill-red);margin-bottom:.9rem}
+main h2:first-child{margin-top:0}
+.methodology h2::before,.xp main h2::before,.report h2::before{display:none}
+body :where(main,main>article,main>section,.tab-content)>h3{font-family:var(--serif);font-size:1.22rem;margin-top:2rem;margin-bottom:.4rem}
+.lead{font-size:1.15rem;line-height:1.55}
+.sub,.tab-lead{color:var(--muted)}
+
+/* the opening findings: the lede, numbered in the margin */
+ol.summary{list-style:none;counter-reset:f;padding:0;margin-top:1.25rem;margin-bottom:2.25rem;font-family:var(--serif);font-size:1.22rem;line-height:1.45}
+ol.summary li{counter-increment:f;position:relative;margin:0;padding:.8rem 0;padding-inline-start:2.4rem;border-top:1px solid var(--line)}
+ol.summary li:last-child{border-bottom:1px solid var(--line)}
+ol.summary li::before{content:counter(f);position:absolute;inset-inline-start:0;top:.72rem;font-weight:700;font-size:1.45rem;line-height:1.2;color:var(--red);font-variant-numeric:tabular-nums}
+
+/* a finding set apart: a rule in the margin, no coloured box */
+.takeaway,.finding{background:none!important;color:var(--ink)!important;border:0;border-inline-start:3px solid var(--fill-red);border-radius:0;padding:.15rem 0;padding-inline-start:1rem;font-family:var(--serif);font-size:1.12rem;line-height:1.5}
+:root:root .caveat{background:none}
+
+/* numbers and charts: modules under a rule, no floating cards */
+.summary-card,.kpis>div{background:transparent;box-shadow:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:.75rem 0 0}
+.summary-card:hover,.kpis>div:hover{transform:none}
+.summary-value,.kpis b{background:none;-webkit-text-fill-color:currentColor;color:var(--red);font-family:var(--serif);font-size:2rem;letter-spacing:-.01em}
+.claims li{box-shadow:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:.75rem 0 0;background:transparent}
+.claims b{font-family:var(--serif)}
+.card,.panel{background:transparent;box-shadow:none;border:0;border-top:2px solid var(--ink);border-radius:0;padding:.9rem 0 0}
+.card-title,.panel h3{font-size:1rem;font-weight:700;border-bottom:0;padding-bottom:0;margin-bottom:.75rem}
+.panel>p,.chart-takeaway{background:none;border:0;padding:0;color:var(--muted);font-size:.9rem;margin-top:.6rem}
+.charts-grid,.grid{gap:2.25rem 2rem;margin-bottom:2.5rem}
+.fcard,.drill,.hub,.cards .card,.docard,.research-section,.ptl .pitem,.process .burdens li,.process ul.reported li{box-shadow:none;border-radius:6px}
+.cards .card{border:1px solid var(--line);padding:1rem 1.1rem}
+.qa{background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:1.1rem 0}
+.research-a,.qa p{background:none;border:0;padding:0}
+.qa h3{font-family:var(--serif);font-size:1.1rem;color:var(--ink)}
+.methodology{border-radius:6px}
+.note{border-top:0;padding-top:0;margin-top:1.5rem}
+.note.limits{border-top:1px solid var(--line);padding-top:.9rem}
+footer{background:var(--bg);margin-top:2rem}
+.report .cover,.report .toc,.report .twrap,.report .stats div{box-shadow:none;border:1px solid var(--line)}
+.report .title{font-family:var(--serif)}
+
+/* Indian scripts keep their own faces: the serif has Latin only */
+html[data-lang]:not([data-lang="en"]) :is(.h-title,main h1,main h2,main h3,ol.summary,.takeaway,.finding,.summary-value,.kpis b,.claims b,.qa h3,.report .title){font-family:inherit;letter-spacing:0}
+
+/* a phone: the title, Search, and one button that opens the rest */
+@media (max-width:700px){
+  header.top{padding:.5rem .75rem}
+  .header-content{grid-template-columns:minmax(0,1fr) auto}
+  .h-title{font-size:1.02rem}
+  header.top .subtitle{font-size:.72rem}
+  .controls .more{display:inline-flex}
+  header.top:not(.open) .controls{grid-column:2;width:auto;justify-content:flex-end}
+  header.top:not(.open) .controls>:not(.find):not(.more){display:none!important}
+  header.top.open .controls{padding-top:.4rem;border-top:1px solid var(--line)}
+  .controls .btn,.controls button,.controls summary.btn{width:40px;height:40px}
+  .controls #lang{height:40px}
+  main{padding:1.5rem 1rem 2.5rem}
+  main h2{font-size:1.4rem;margin-top:2.5rem}
+  ol.summary{font-size:1.08rem}
+  ol.summary li{padding-inline-start:2rem}
+  ol.summary li::before{font-size:1.25rem}
+  .secbar{background:var(--bg);box-shadow:none}
+  .sec-now{box-shadow:inset 0 0 0 1px var(--line)}
+  .summary-value,.kpis b{font-size:1.5rem}
+}
+@media print{.band{display:none}main h2::before{display:none}}
+main>ol.summary:first-child{margin-top:0}
+.summary-card,.kpis>div{border-top-color:var(--line)!important}
