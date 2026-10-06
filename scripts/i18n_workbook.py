@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Writes the review workbook: every string on the site with its Hindi, Urdu
-and Telugu translation side by side, for a native reader to check.
+"""Writes the review workbook: every string on the site with its Hindi, Urdu,
+Telugu, Tamil and Bengali translations side by side, for a native reader to check.
 
     python3 scripts/i18n_workbook.py out.xlsx
 
@@ -51,7 +51,7 @@ def main(out):
         ws.freeze_panes = 'D2'
 
     ws = wb.active
-    ws.title = 'All three'
+    ws.title = 'All languages'
     sheet(ws, ['No.', 'Pages', 'Kind', 'English', 'Hindi', 'Urdu', 'Telugu'],
           [[i + 1, ', '.join(cat[k]['pages']), cat[k]['kind'], k] + [dicts[l].get(k, '') for l in NAMES] for i, k in enumerate(keys)],
           rtl_cols=('Urdu',))
