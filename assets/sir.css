@@ -725,3 +725,36 @@ html[data-lang]:not([data-lang="en"]) :is(.h-title,main h1,main h2,main h3,ol.su
 @media print{.band{display:none}main h2::before{display:none}}
 main>ol.summary:first-child{margin-top:0}
 .summary-card,.kpis>div{border-top-color:var(--line)!important}
+
+/* -------------------------------------------- the opening band, the rail
+   Every page opens on a tinted band carrying its title and findings, the
+   width of the screen. A long reading page keeps a margin on the left of a
+   wide screen for "On this page" (nav.toc, built by sir.js). */
+main{padding-top:0}
+main>:first-child:not(.page-head),main>article>:first-child:not(.page-head){margin-top:2.5rem}
+.page-head{position:relative;z-index:0;padding:3rem 0 2.25rem;margin-bottom:2.75rem}
+.page-head{background:var(--soft);box-shadow:0 0 0 100vmax var(--soft);clip-path:inset(0 -100vmax)}
+.page-head h1{font-size:clamp(2.2rem,4.4vw,3.4rem);margin-bottom:1.1rem}
+.page-head .lead{font-size:1.2rem;line-height:1.55;color:var(--ink)}
+.page-head ol.summary{margin-bottom:0}
+.page-head ol.summary li:last-child{border-bottom:0}
+.page-head .kpis{max-width:var(--measure);margin:1.75rem auto 0;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+.page-head .kpis>div{border-top:2px solid var(--ink)!important}
+.page-head .kpis b{font-size:clamp(2rem,4vw,2.8rem);line-height:1.05}
+.page-head .kpis span{font-size:.88rem;color:var(--muted)}
+nav.toc{display:none}
+@media (min-width:1240px){
+  body.has-toc main{max-width:calc(var(--page) + 15rem);padding-inline-start:calc(15rem + 1.25rem)}
+  nav.toc{display:block;position:fixed;z-index:50;top:calc(var(--hh,0px) + 80px);inset-inline-start:max(1.25rem,calc((100vw - var(--page) - 15rem) / 2 + 1.25rem));width:13rem;max-height:calc(100vh - var(--hh,0px) - 110px);overflow:auto;font-size:.84rem;line-height:1.35;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+  nav.toc.on{opacity:1;visibility:visible}
+  .toc-h{margin:0 0 .6rem;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  nav.toc ol{list-style:none;margin:0;padding:0;border-inline-start:1px solid var(--line)}
+  nav.toc a{display:block;padding:.35rem .8rem;margin-inline-start:-1px;border-inline-start:2px solid transparent;color:var(--muted);text-decoration:none}
+  nav.toc a:hover{color:var(--ink)}
+  nav.toc a[aria-current]{color:var(--ink);font-weight:600;border-inline-start-color:var(--fill-red)}
+}
+@media (max-width:700px){
+  .page-head{padding:2rem 0 1.5rem;margin-bottom:2rem}
+  .page-head .kpis{grid-template-columns:minmax(0,1fr);gap:1rem}
+}
+@media print{.page-head{box-shadow:none;background:none}nav.toc{display:none}}

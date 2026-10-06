@@ -116,7 +116,7 @@ def shell(out, meta, content, scripts):
     prn = ('' if place['id'] == 'home' else
            '<button type="button" class="btn-primary print">%s <span class="lbl">Export PDF</span></button>' % PRINT)
     # A dashboard's only heading is the site title in its header.
-    tag = 'h1' if meta.get('own_tabs') else 'span'
+    tag = 'h1' if meta.get('own_tabs') and '<h1' not in content else 'span'
     header = (
         '<a class="skip" href="#main">Skip to content</a>\n'
         '<div class="band %s" aria-hidden="true"></div>\n'
@@ -161,6 +161,10 @@ def shell(out, meta, content, scripts):
     # dashboards and explorers get the wider column (sir.css, body.wide)
     if meta.get('own_tabs') or out.endswith('explorer/'):
         cls += ' wide'
+    # a long reading page gets the "On this page" rail in its left margin
+    # (sir.js builds it from the h2s; sir.css keeps the margin for it)
+    elif len(re.findall(r'<h2[\s>]', content)) >= 4 and 'class="report' not in content:
+        cls += ' has-toc'
     return (
         '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
