@@ -121,7 +121,7 @@ def shell(out, meta, content, scripts):
         '<a class="skip" href="#main">Skip to content</a>\n'
         '<div class="band %s" aria-hidden="true"></div>\n'
         '<header class="top">\n  <div class="header-content">\n'
-        '    <a class="logo" href="%s"><span class="logo-icon">%s</span><%s class="titles"><span class="wm" aria-hidden="true" data-no-i18n>off<i>the</i>roll</span>'
+        '    <a class="logo" href="%s"><span class="logo-icon">%s</span><%s class="titles"><span class="wm" aria-hidden="true" data-no-i18n>Off the <s>Roll</s></span>'
         '<span class="h-title">%s</span><span class="subtitle">%s</span></%s></a>\n'
         '    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">\n      %s\n      %s\n      %s\n'
         '      <button type="button" class="theme" aria-pressed="false">%s <span class="lbl">Dark</span></button>\n'

@@ -1045,6 +1045,12 @@
    "/assets/faq/bihar.js"
   ]
  },
+ "A method page for every analysis": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "A pattern seen across all seats can weaken, or even reverse, once each seat is compared only with seats like it. So each finding here was measured again within each district, within each seat, and with Seemanchal left out.": {
   "kind": "markup",
   "pages": [
@@ -1492,7 +1498,7 @@
   ]
  },
  "All India": {
-  "kind": "markup",
+  "kind": "script",
   "pages": [
    "/",
    "/bihar/",
@@ -3810,6 +3816,12 @@
    "/hyderabad/method/"
   ]
  },
+ "Each analysis names its sources, the checks its figures pass and what they cannot show.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Each answer is computed from the published data when this page loads.": {
   "kind": "markup",
   "pages": [
@@ -3972,6 +3984,12 @@
    "/india/"
   ]
  },
+ "Each dot is one in every 100 electors on the rolls before the revision. The red dots are the names left off the draft rolls.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Each elector on a roll should end up struck off, summoned or untouched. These electors are in none of the three: {list}. {seat}'s list is incomplete and is read by polling-station name.": {
   "kind": "script",
   "pages": [
@@ -4087,6 +4105,12 @@
   ]
  },
  "Each state and union territory is shaded by the names left off its draft roll for every 100 electors on its roll before the revision, that is, the roll as it stood when the revision began. The figures are those its Chief Electoral Officer, the official in charge of elections in the state, published. Grey means the state was not in the revision or has published no figure. Hover over a state to see its figure. Tap it to open its own analysis, or the All India page where it has none.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "Each state with its own page has a finder. Pick yours to see the figures for your constituency or district, with a link you can send.": {
   "kind": "markup",
   "pages": [
    "/"
@@ -4409,6 +4433,12 @@
    "/kerala/elections/",
    "/tamilnadu/elections/",
    "/westbengal/elections/"
+  ]
+ },
+ "Every count comes from what the Election Commission and the states' Chief Electoral Officers published, or from the lists they released.": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "Every district": {
@@ -4947,6 +4977,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Find your constituency": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "Finding": {
@@ -6088,6 +6124,18 @@
    "/"
   ]
  },
+ "How we counted": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "How we know": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Hyderabad 2026": {
   "kind": "markup",
   "pages": [
@@ -6267,20 +6315,8 @@
    "/bihar/results/"
   ]
  },
- "In 2025 and 2026 the Election Commission revised the electoral rolls of most of India house by house, in what it called a Special Intensive Revision, or SIR. Every elector had to fill in a fresh form, and names were left off the new rolls. This site counts those names from the lists and figures the Commission and the states have published. It shows who was removed, where, and what reason was written against each name.": {
-  "kind": "markup",
-  "pages": [
-   "/"
-  ]
- },
  "In 2025 and 2026 the Election Commission revised the electoral rolls of most of India, and crores of names were left off. This site counts who was removed, where, and on what recorded reason, from the published lists and figures.": {
   "kind": "markup",
-  "pages": [
-   "/"
-  ]
- },
- "In 2025 and 2026 the Election Commission revised the electoral rolls of {s} states and union territories house by house, in what it called a Special Intensive Revision, or SIR. Every elector had to fill in a fresh form, and {r} names were left off the draft rolls. This site counts those names from the lists and figures the Commission and the states have published. It shows who was removed, where, and what reason was written against each name.": {
-  "kind": "script",
   "pages": [
    "/"
   ]
@@ -9012,6 +9048,7 @@
  "Per 100 electors": {
   "kind": "script",
   "pages": [
+   "/",
    "/bihar/border/",
    "/bihar/districts/",
    "/bihar/results/",
@@ -9355,6 +9392,12 @@
   "kind": "markup",
   "pages": [
    "/terms/"
+  ]
+ },
+ "Published figures only": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "Q1": {
@@ -11274,6 +11317,12 @@
    "/bihar/people/"
   ]
  },
+ "Special Intensive Revision, 2025 and 2026": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "Split": {
   "kind": "script",
   "pages": [
@@ -11281,12 +11330,19 @@
   ]
  },
  "State": {
-  "kind": "markup",
+  "kind": "script",
   "pages": [
+   "/",
    "/india/"
   ]
  },
  "State boundaries from DataMeet's map of India's states (CC BY 4.0), simplified.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "State by state": {
   "kind": "markup",
   "pages": [
    "/"
@@ -11849,6 +11905,18 @@
    "/assets/faq/india.js"
   ]
  },
+ "The Election Commission revised the electoral rolls of most of India house by house. This site counts who was removed, where, and the reason written against each name.": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "The Election Commission revised the electoral rolls of {s} states and union territories house by house. This site counts who was removed, where, and the reason written against each name.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "The Hindu-name rate was higher in {a} of the {b} parts large enough to compare.": {
   "kind": "script",
   "pages": [
@@ -11915,7 +11983,7 @@
    "/bihar/border/"
   ]
  },
- "The OpenDyslexic, Source Serif and Noto typefaces are used under the SIL Open Font License.": {
+ "The OpenDyslexic, Fraunces and Noto typefaces are used under the SIL Open Font License.": {
   "kind": "markup",
   "pages": [
    "/terms/"
@@ -13131,6 +13199,18 @@
   "kind": "markup",
   "pages": [
    "/bihar/results/"
+  ]
+ },
+ "The tables are yours": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
+ "The tables behind every chart download as CSV, from under the chart or from the Downloads menu.": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "The ten districts that lost the most names hold {share} of all removals. The heaviest districts lost more than twice as many names per elector as the lightest.": {
@@ -15993,6 +16073,12 @@
    "/bihar/explorer/"
   ]
  },
+ "per 100 in {s}, the highest share": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "polling booths": {
   "kind": "script",
   "pages": [
@@ -16823,6 +16909,12 @@
    "/westbengal/elections/"
   ]
  },
+ "{p} of every 100 electors were left off the draft rolls.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "{rate} per 100": {
   "kind": "script",
   "pages": [
@@ -16842,6 +16934,12 @@
   ]
  },
  "{r} names left off the draft rolls in {s} states and union territories, and the reasons each one recorded.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "{r} names were <em>left off</em> India's draft rolls.": {
   "kind": "script",
   "pages": [
    "/"

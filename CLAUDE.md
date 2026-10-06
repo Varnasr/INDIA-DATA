@@ -788,36 +788,30 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   Control turns it off. The table is closed to the public key; read it in the
   Supabase SQL editor.
 
-- **The frame is a newsroom layout** (the last block of `assets/sir.css`):
-  a one-line header with a hairline under it, the place's cloth as a 5px
-  strip, serif headlines (Source Serif 4, OFL, self-hosted in `fonts/`,
-  Latin only, so Indian scripts keep their Noto faces), and text held to a
-  44rem reading column centred on the page while maps, charts, tables and
-  number rows break out to the full width. The opening findings are the
-  lede, numbered in the margin. Charts sit under a rule rather than in
-  floating cards. On a phone the header is the title, Search and one menu
-  button (`.more`, made in `sir.js`) that opens the other controls. It
-  changes no colour token. A new text block that should sit in the column
-  needs its class in the column selector there.
-  Every page opens on a tinted band the width of the screen (`.page-head`:
-  the title, the lead or findings, and on the front page three headline
-  numbers). A long reading page (four or more h2s; `build_site.py` adds
-  `has-toc` to the body) gets "On this page" in the left margin of a screen
-  1240px or wider, built by `SIR.toc` in `sir.js`, and the stylesheet widens
-  `main` on the left so no chart runs under it. The front page opens on the
-  numbers and the India map, with the explanation of the revision below the
-  cards. The dashboards carry their own h1 above the findings, so the
-  header title is a span on every page.
-  The masthead, the tabs and the opening band are one dark block in both
-  themes: `header.top, .nav-tabs, .secbar, .page-head` redefine the dark
-  theme's tokens on a darker ground (`#0c111b`), so every ink there is one
-  `check_contrast.py` already measures for dark. The masthead shows the
-  wordmark `off the roll` (aria-hidden; the translated site title stays in
-  the markup for screen readers). `build_site.py` puts the place's label
-  above each page title as a kicker. The front page hero sets the title,
-  three numbers and the finding beside the India map, which sits on a light
-  inset carrying the light theme's tokens so its lightest states stay
-  visible.
+- **The design is "Off the Roll"** (October 2026, from a mockup the owner
+  chose; the last block of `assets/sir.css`). Warm paper `#f6f2ea` and ink
+  `#16130f` with one red `#b3261e`; dark mode is the same design in warm
+  black, from the two dark token blocks, which `check_contrast.py` measures
+  with the light one. Fraunces (OFL, self-hosted in `fonts/`, Latin only) for
+  display, the system sans for text, a system mono for small labels. The
+  masthead is the wordmark "Off the ~~Roll~~" (aria-hidden; the translated
+  site title stays in the markup for screen readers). Every page opens with a
+  mono kicker naming the place (put in by `build_site.py`), a large serif
+  title and the numbered findings. Text keeps to a 44rem column; maps,
+  charts, tables and number strips run full width. Numbers sit in a strip
+  between rules; charts on white cards with a hairline. A long reading page
+  (four or more h2s, not the front page) gets "On this page" in the left
+  margin of a screen 1240px or wider (`SIR.toc`, body class `has-toc`).
+  On a phone the header is the wordmark, Search and one menu button.
+  The front page follows the mockup: the headline states the count, a grid
+  of 100 dots shows the share, a four-number strip, the map beside a ranked
+  list of states (so a phone does not depend on hover), cards to each
+  analysis led by their number (West Bengal featured), a finder that links
+  to each state's own, and "How we know". Nothing on it may claim a feature
+  the site does not have. With the dyslexia font on, the display sizes come
+  down and nothing is set in italics or capitals (`html.dyslexic-font`
+  rules). A new text block that should sit in the column needs its class in
+  the column selector.
 - **One look on every page: the Bihar dashboard's.** A folk-art band across
   the top (`.band.madhubani` for Bihar, `.band.ikat` for Hyderabad, a
   Pochampally ikat tile drawn as an SVG data URI), a card header with the
