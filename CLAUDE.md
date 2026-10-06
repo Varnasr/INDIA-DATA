@@ -492,7 +492,7 @@ except where only the two lists were given; one matching its own lists, then
 primary, then the latest), and writes `data/india/notices.json` and the
 download. It is drawn on the process page, "Notices: the no-mapping list and
 the discrepancy list". The two lists overlap, so they can add up to more than
-the total (Uttar Pradesh, 1.4 + 2.02 crore against 3.26). Madhya Pradesh's 2.35
+the total. Uttar Pradesh has two press splits of its 3.26 crore (1.4 + 2.02 in The Hindu, 1.04 + 2.22 in The Times of India); the second adds up and is used. Madhya Pradesh's 2.35
 crore is an early software flag and is excluded. Most phase 3 figures are
 running counts; update the rows, not the rules.
 
