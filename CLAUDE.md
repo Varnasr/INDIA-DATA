@@ -2,7 +2,7 @@
 
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
-Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh and Delhi (2026). Static HTML, Chart.js from cdnjs, one
+Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi and Maharashtra (2026). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
@@ -497,6 +497,41 @@ needs pypdf) and writes `summary.json`, `constituencies.json`,
 - The final roll is due 4 December 2026 (CEO letter of 27.09.2026, from the
   Commission's letter of 26.09.2026). Rebuild when it is out.
 - English only, like Rajasthan and Uttar Pradesh.
+
+## Maharashtra
+
+`scripts/build_maharashtra.py` reads `data/maharashtra/raw` (sources and checks
+in `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
+`districts.json` and `districts.csv`; `check_data.py` runs it with `--check`.
+
+- **Districts only, from the CEO's press note of 31 August 2026.** Annexure-1
+  is the draft by district and sex, Annexure-2 the enumeration forms not
+  collected (the names left off). The roll before is published for the state
+  only, so a district's roll before is its draft plus its names left off; the
+  build fails unless the districts add up to 9,78,54,049 before, 7,71,65,562
+  draft (and by sex) and 2,06,88,487 left off.
+- **No reasons, no sex of the names left off, nothing by AC.** The note names
+  five reasons without a count. The state reasons on the All India row are
+  press figures in lakh (The Indian Express), rounded and 10,513 over the
+  total; the pages show them as press figures, never mixed into the CEO's
+  counts. The women section shows women's share of each district's draft and
+  says the rest cannot be counted.
+- **The city is five districts**: Mumbai City, Mumbai Suburban, Thane, Palghar
+  and Pune (`CITY` in the build), 29.9% of the roll and 48.4% of the names
+  left off. Keep the comparison computed.
+- The note keeps three old district names (Aurangabad, Ahmednagar,
+  Osmanabad); `now` in `districts.json` carries the new ones for the finder
+  and the search.
+- The dates are read from `process.json`: the Commission's letter of
+  26.09.2026 moved claims to 12 October and the final roll to 16 November
+  2026, later than the note's own dates. Rebuild from the final roll, by
+  district and sex, when it is out.
+- The map is by district (`data/geo/maharashtra.json`, see
+  `data/geo/SOURCES.md`), with a Mumbai inset on wide screens only (on a
+  phone it would cover the south-east). Notices are read from
+  `data/india/notices.json` and labelled press.
+- English only, like Rajasthan, Uttar Pradesh and Delhi, with the same
+  translated note.
 
 ## Notices
 

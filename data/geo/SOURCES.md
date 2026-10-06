@@ -56,3 +56,21 @@ dissolved, with `ac` holding the district's position in `districts.json` and
 `name` its name. The new districts formed from parts of old ones (Sambhal,
 Amethi, Ayodhya) take their constituencies from the results list, not from
 the shapefile's older district field.
+
+# Maharashtra
+
+`maharashtra.json` is by district, because the revision was published by
+district only. The 288 constituencies are cut from the same DataMeet
+shapefile, joined to their district from `data/maharashtra/raw/ac_district.csv`
+(the Election Commission's own list of constituencies by district) and
+dissolved into the 36 districts of the Chief Electoral Officer's press note of
+31 August 2026, with `ac` holding the district's serial number in that note
+and `name` its name as the note spells it (Aurangabad, Ahmednagar and
+Osmanabad keep their old names). The Commission's list is followed where
+DataMeet's district field disagrees: ACs 128 to 133 (Dahanu, Vikramgad,
+Palghar, Boisar, Nalasopara, Vasai) go to Palghar, the district formed from
+Thane in 2014, and AC 75 Warora goes to Chandrapur, where its tehsils are.
+The shapefile also holds 14 Maharashtra polygons with no constituency number
+(`AC_NO` 0), creeks and islands; each is assigned by its DataMeet district
+(THANE to Thane, MUMBAI (SUBURBAN) to Mumbai Suburban, MUMBAI to Mumbai City,
+RAIGARH to Raigad).

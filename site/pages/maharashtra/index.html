@@ -89,7 +89,7 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
   document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + cr(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors.</b> The roll before the revision held ' + cr(S.before) + ' names and the draft holds ' + cr(S.draft) + '. One crore is ten million.';
 
   VIZ.lollipop('vDist', { label: 'Names left off the draft roll per 100 electors, every district', axis: 'Left off per 100 electors on the roll before the revision', ref: S.per_100,
-    rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: d1(d.per_100), tok: tok(d), hi: d.city || d.per_100 > S.per_100 }; }) });
+    rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: d1(d.per_100), tok: tok(d), hi: (d.city || d.per_100 > S.per_100) && innerWidth >= 600 }; }) });
   var notCity = D.filter(function (d) { return !d.city; }), last = D[D.length - 1];
   document.getElementById('fDist').innerHTML = '<b>' + D[0].district + ' left off ' + d1(D[0].per_100) + ' of every 100 electors, ' + lk(D[0].left_off) + ' names, the most of any district.</b> ' + list(D.slice(1, 5).map(function (d) { return d.district; })) + ' come next. ' +
     'Outside the five city districts the highest is ' + notCity[0].district + ', at ' + d1(notCity[0].per_100) + '. ' + S.above_state + ' of the ' + S.districts + ' districts left off more than the state\'s ' + d1(S.per_100) + ', and ' + S.under_15 + ' left off fewer than 15. ' + last.district + ' left off the fewest, ' + d1(last.per_100) + '.';
@@ -140,7 +140,7 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
 
   var byName = {}, idOf = {}; D.forEach(function (d) { byName[d.district] = d; });
   var F = SIR.finder('finder', { rows: D, prompt: 'Find a district', placeholder: 'Type a district\'s name', key: function (d) { return SIR.slug(d.district); },
-    label: function (d) { return d.district + (d.now ? ', now ' + d.now : '') + ' district'; },
+    label: function (d) { return d.district + ' district' + (d.now ? ', now ' + d.now : ''); },
     pick: function (d) { var b = document.getElementById('vMap'); if (b.__select && idOf[d.district]) b.__select(idOf[d.district]); },
     card: function (d) { return SIR.facts([['Roll before the revision', n(d.before)], ['Draft roll', n(d.draft)], ['Left off', n(d.left_off)], ['Per 100 electors', d1(d.per_100)],
       ['Share of the state\'s names left off', SIR.pct(100 * d.left_off / S.left_off)], ['Women in the draft roll', n(d.women) + ' (' + SIR.pct(d.women_draft_pct) + ')'], ['Men in the draft roll', n(d.men)]]); },
@@ -150,7 +150,9 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
     geo.features.forEach(function (f) { var d = byName[f.properties.name]; if (d) { byId[f.properties.ac] = d; idOf[d.district] = f.properties.ac; } });
     VIZ.map('vMap', { geo: geo, label: 'Map of names left off the draft per 100 electors, by district', title: 'Left off per 100 electors',
       v: function (id) { return byId[id] ? byId[id].per_100 : null; }, name: function (id) { return byId[id] ? byId[id].district : ''; },
-      inset: { name: 'Mumbai', acs: geo.features.filter(function (f) { return /^Mumbai/.test(f.properties.name); }).map(function (f) { return f.properties.ac; }), bottom: true },
+      // on a phone the state fills the frame and an inset would cover the
+      // south-east districts, so Mumbai is enlarged on wider screens only
+      inset: innerWidth < 600 ? null : { name: 'Mumbai', acs: geo.features.filter(function (f) { return /^Mumbai/.test(f.properties.name); }).map(function (f) { return f.properties.ac; }), bottom: true },
       pick: function (id) { if (byId[id]) F.select(byId[id]); } });
     var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
     SIR.tools();
