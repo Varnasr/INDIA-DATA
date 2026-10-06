@@ -175,6 +175,30 @@ licence; `terms/` says the same. The paper's own counts (14 objections, Goa's ei
 electors) are in `inside.goa` and the prose, never counted from the markers,
 which show only the dated ones.
 
+**The cities** (`india/cities/`) sets each large city against its state, its
+suburbs and the rest of the state. `scripts/build_cities.py` reads the state
+pages' own district tables (no new source) and writes `data/india/cities.json`
+and the CSV; `check_data.py` runs it with `--check`, and the build fails if a
+named district is missing or a city's core, suburbs and rest do not add up to
+its state. A city is its districts (`CITIES` in the build), drawn differently
+from city to city and listed on the page. The suburbs are the neighbouring
+districts: Bangalore Rural and Ramanagaram; Rangareddy, Medchal Malkajgiri and
+Sangareddy; Chengalpattu, Kancheepuram and Thiruvallur; Thane and Palghar;
+Ghaziabad and Gautam Buddha Nagar for Delhi, measured on Uttar Pradesh's
+revision (Haryana's suburbs have no figure); Barabanki and Unnao; Gandhinagar;
+Howrah and North 24 Parganas. Findings: all eight cities measured by the names
+left off lost more than their state, 1.5 to 2.3 times its rate, and the
+suburbs lost less than the city in six of seven (Mumbai is the exception:
+Thane and Palghar lost more). **Kolkata and Kochi are measured by the fall in
+the roll** and kept apart, never ranked. **Patna is per 100 on Bihar's 2025
+roll**, the Bihar pages' rate, so it is compared with Bihar and not ranked;
+it is the one city below its state. **Bihar and Hyderabad may appear side by
+side on this page only** (owner's decision, October 2026); the rule below
+still holds everywhere else. Hyderabad's district figures are press figures
+and say so. The page says the "shifted or absent" share cannot tell moved and
+doubly registered people from residents who were out, and never claims either.
+English only, like the other All India sub-pages.
+
 **Where the revision stands** (`india/progress/`) is the progress board: for
 each of the 32 states and UTs, its stage as of `as_of` in `process.json`,
 worked out in the page script from the latest date each schedule step gives
@@ -304,6 +328,10 @@ same district the gap (+0.46 per 100, -0.17 to +1.10) is too small to be sure
 of; the swing changes sign with the comparison. Say exactly that.
 
 ## Hyderabad
+
+The place is labelled **Telangana 2026** in the places menu (October
+2026): it holds the state page (`hyderabad/telangana/`) and the Old City
+analysis. The addresses stay under `/hyderabad/` so old links keep working.
 
 `site/pages/hyderabad/explorer/index.html` carries the part-level counts inline as
 `const D={...}`. `build_hyderabad.py` reads that object and derives
@@ -1025,7 +1053,9 @@ per slot, not the slot's length.
   "median" in prose. When rewriting an English key, carry its translations to
   the new key only if the meaning is unchanged; retranslate otherwise.
 - **Bihar and Hyderabad are never compared** with each other, on a page,
-  in a report or in a deck. Each analysis stands on its own.
+  in a report or in a deck, except as rows of the cities page
+  (`india/cities/`), which the owner allowed in October 2026. Each analysis
+  stands on its own.
 - **Lead with what was lost.** Summaries, key insights and deck titles open
   with the scale of the removals, the seats where the removed could have
   changed the result, and who was removed. Facts that cut the other way (the
