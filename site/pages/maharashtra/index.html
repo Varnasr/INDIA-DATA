@@ -1,0 +1,162 @@
+<!--page {"title": "Maharashtra SIR 2026: the names left off, by district", "description": "How many names Maharashtra's SIR draft roll left off in each of its 36 districts, how Mumbai and Pune compare with the rest of the state, and what has not been published.", "place": "mh"} -->
+<main id="main">
+<div class="page-head"><h1>Maharashtra: who was taken off the roll</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
+
+<article class="state" lang="en" dir="ltr" data-no-i18n>
+  <h2>Find a district</h2>
+  <p class="sub">Type a district's name and its figures appear below with a link you can send. The revision's figures were published by district only, so this page has no assembly constituencies to find.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="finder" id="finder"></div>
+      <div class="vizbox" id="vMap"></div>
+      <p class="note">Each district is shaded by the names left off its draft roll for every 100 electors on its roll before the revision. Tap a district for its figures. District boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified, with each constituency placed in its district as the Election Commission lists it.</p>
+    </div>
+  </div>
+
+  <h2>The roll, step by step</h2>
+  <p class="sub">Before the draft, every elector on the roll was given an enumeration form, a short form to fill in and hand back to the official for the polling station. The draft roll is the list published once the forms were collected, and a name whose form did not come back was left off it. Maharashtra's draft came out on 31 August 2026. Electors can now ask to be added or object to names on it, and only after that comes the final roll. The bars start above zero so that the changes can be seen.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
+  </div>
+  <p class="finding" id="fWater"></p>
+  <p class="note">Maharashtra's dates, as they were set and as they were moved, are drawn beside every other state's on <a href="../india/process/#s-maharashtra">How the revision was run</a>.</p>
+
+  <h2>Per 100 electors, by district</h2>
+  <p class="sub">The names left off each district's draft roll, for every 100 electors on its roll before the revision. Counting per 100 electors puts large and small districts on one scale, so a rate of 20 means one elector in five was left off. The figures are from the Chief Electoral Officer (CEO), who keeps the state's rolls for the Election Commission. Mumbai City, Mumbai Suburban, Thane, Palghar and Pune are in red, and the upright line marks the rate for the state as a whole.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vDist"></div></div>
+  </div>
+  <p class="finding" id="fDist"></p>
+
+  <h2>The reasons</h2>
+  <p class="sub">The CEO's press note lists five reasons a form was not collected. The elector was absent or could not be found, had shifted, had died, was enrolled at another place, or the form was not collected for some other reason, including a refusal to fill it in. The note gives no count for any of them, for the state or for a district. The counts below were reported in the press, rounded to the nearest thousand, and are given in lakh (one lakh is 100,000). A reason is what the officer wrote down, and nobody checked it.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vReason"></div></div>
+  </div>
+  <p class="finding" id="fReason"></p>
+
+  <h2>Mumbai and Pune</h2>
+  <p class="sub">Mumbai City, Mumbai Suburban, Thane, Palghar and Pune are the five districts that hold the cities of Mumbai and Pune and the towns that have grown round them. Here they are set against the other 31 districts.</p>
+  <div class="grid">
+    <div class="panel wide">
+      <div class="bigs" id="cCity"></div>
+    </div>
+  </div>
+  <p class="sub">Each of the five districts' share of the state's roll before the revision, and its share of the names left off. Where the second dot sits to the right of the first, the district lost more than its share.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vCity"></div></div>
+  </div>
+  <p class="finding" id="fCity"></p>
+
+  <h2>Women</h2>
+  <p class="sub">The CEO published the draft roll by sex and nothing else by sex. The roll before the revision and the names left off are given as totals only, so the names left off cannot be counted by sex. What can be shown is women's share of each district's draft roll. Each dot is one district, placed by how far its share sits above or below the state's. Hover or tap a dot for its name.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vWomen"></div></div>
+  </div>
+  <p class="finding" id="fWomen"></p>
+
+  <h2>Notices</h2>
+  <p class="sub">An elector who stays on the draft roll can still be sent a notice to prove the entry, with documents, at a hearing. The CEO's press note says notices go to electors who could not be linked to the rolls of the last intensive revision, in 2002 to 2004, and to entries whose details do not agree, and gives no number for either.</p>
+  <p class="finding" id="fNotice"></p>
+
+  <h2>After the draft</h2>
+  <p class="finding" id="fAfter"></p>
+
+  <h2>Every district</h2>
+  <p class="sub">Click a column heading to sort. The table scrolls.</p>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="Every district"><table id="tDist"></table></div>
+
+  <p class="note">Every figure on this page is computed from the published data when the page loads. <a href="method/">Sources and method</a>.</p>
+</article>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../assets/sir.js"></script>
+<script src="../assets/viz.js"></script>
+<script src="../assets/faq/maharashtra.js"></script>
+<script>
+Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharashtra/districts.json'), SIR.json('data/india/notices.json')]).then(function (r) {
+  var S = r[0], D = r[1], NT = r[2].states.filter(function (x) { return x.state === 'Maharashtra'; })[0], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
+  var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; };
+  var C = S.city, R = S.rest, nRest = S.districts - S.city_names.length;
+  var tok = function (d) { return d.city ? '--fill-red' : '--fill-navy'; };
+  var list = function (a) { return a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; };
+
+  VIZ.waterfall('vWater', { label: 'Maharashtra: the roll before the revision and the draft roll of 31 August 2026', from: Math.floor(S.draft * 0.8 / 1e7) * 1e7, steps: [
+    { name: 'Roll before the revision', v: S.before, kind: 'total' }, { name: 'Left off the draft', v: S.left_off, kind: 'down' }, { name: 'Draft roll', v: S.draft, kind: 'total' }] });
+  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + cr(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors.</b> The roll before the revision held ' + cr(S.before) + ' names and the draft holds ' + cr(S.draft) + '. One crore is ten million.';
+
+  VIZ.lollipop('vDist', { label: 'Names left off the draft roll per 100 electors, every district', axis: 'Left off per 100 electors on the roll before the revision', ref: S.per_100,
+    rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: d1(d.per_100), tok: tok(d), hi: (d.city || d.per_100 > S.per_100) && innerWidth >= 600 }; }) });
+  var notCity = D.filter(function (d) { return !d.city; }), last = D[D.length - 1];
+  document.getElementById('fDist').innerHTML = '<b>' + D[0].district + ' left off ' + d1(D[0].per_100) + ' of every 100 electors, ' + lk(D[0].left_off) + ' names, the most of any district.</b> ' + list(D.slice(1, 5).map(function (d) { return d.district; })) + ' come next. ' +
+    'Outside the five city districts the highest is ' + notCity[0].district + ', at ' + d1(notCity[0].per_100) + '. ' + S.above_state + ' of the ' + S.districts + ' districts left off more than the state\'s ' + d1(S.per_100) + ', and ' + S.under_15 + ' left off fewer than 15. ' + last.district + ' left off the fewest, ' + d1(last.per_100) + '.';
+
+  var RS = [['shifted_absent_other', 'Shifted, absent or other'], ['dead', 'Dead'], ['duplicate', 'Enrolled at more than one place']];
+  VIZ.rank('vReason', { label: 'Names left off the draft, by the reason entered, as reported in the press', axis: 'Lakh, as reported in the press', fmt: function (v) { return v.toFixed(1) + ' lakh'; },
+    rows: RS.map(function (k) { return { name: k[1], v: S.press_reasons[k[0]] / 1e5, col: '--fill-navy' }; }) });
+  document.getElementById('fReason').innerHTML = '<b>According to the press, ' + SIR.pct(S.press_shares.shifted_absent_other) + ' of the names left off were entered as shifted, absent or other, ' + SIR.pct(S.press_shares.dead) + ' as dead and ' + SIR.pct(S.press_shares.duplicate) + ' as enrolled at more than one place.</b> ' +
+    'The three press figures add up to ' + n(S.press_reasons_sum) + ', which is ' + n(S.press_reasons_sum - S.left_off) + ' more than the CEO\'s total, because each was rounded. They are for the state as a whole, and no count by reason has been published for any district. <a href="' + S.press_source + '">The Indian Express</a> carried them.';
+
+  var tiles = [[SIR.pct(C.share_of_roll), 'of the state\'s roll before the revision', C.share_of_roll],
+    [SIR.pct(C.share_of_left_off), 'of the names left off', C.share_of_left_off],
+    [d1(C.per_100), 'left off per 100 electors, against ' + d1(R.per_100) + ' in the other ' + nRest + ' districts', C.per_100]];
+  document.getElementById('cCity').innerHTML = tiles.map(function (t) {
+    return '<div class="big"><b>' + t[0] + '</b><i style="--w:' + t[2].toFixed(1) + '%"></i><span>' + t[1] + '</span></div>';
+  }).join('');
+  var city = D.filter(function (d) { return d.city; }).sort(function (a, b) { return b.left_off - a.left_off; });
+  VIZ.dots('vCity', { label: 'Each city district\'s share of the state\'s roll before the revision and of the names left off', axis: 'Share of the state, %', cats: city.map(function (d) { return d.district; }),
+    series: [{ name: 'Share of the roll before', col: '--fill-navy', vals: city.map(function (d) { return 100 * d.before / S.before; }) },
+      { name: 'Share of the names left off', col: '--fill-red', vals: city.map(function (d) { return 100 * d.left_off / S.left_off; }) }] });
+  var lt = city.filter(function (d) { return d.left_off / S.left_off > d.before / S.before; });
+  document.getElementById('fCity').innerHTML = '<b>The five districts hold ' + SIR.pct(C.share_of_roll) + ' of Maharashtra\'s roll and ' + SIR.pct(C.share_of_left_off) + ' of the names left off, ' + cr(C.left_off) + ' names in all.</b> They lost ' + d1(C.per_100) + ' of every 100 electors, against ' + d1(R.per_100) + ' in the other ' + nRest + ' districts. ' +
+    (lt.length === city.length ? 'Each of the five lost a larger share of the names than its share of the roll. ' : lt.length + ' of the five lost a larger share of the names than its share of the roll. ') +
+    city[0].district + ' and ' + city[1].district + ' together account for ' + SIR.pct(100 * (city[0].left_off + city[1].left_off) / S.left_off) + ' of every name left off in the state.';
+
+  var dev = function (d) { return +(d.women_draft_pct - S.women_draft_pct).toFixed(2); };
+  VIZ.strip('vWomen', { label: 'Women\'s share of each district\'s draft roll, above or below the state\'s share', axis: 'Points above or below the state\'s ' + SIR.pct(S.women_draft_pct), r: 4.5, step: 1,
+    key: [['Five city districts', '--fill-red'], ['Other districts', '--fill-navy']],
+    rows: [[true, 'Five city districts', '--fill-red'], [false, 'Other ' + nRest + ' districts', '--fill-navy']].map(function (g) {
+      return { name: g[1], tok: g[2], points: D.filter(function (d) { return d.city === g[0]; }).map(function (d) { return { v: dev(d), label: d.district + ': women ' + SIR.pct(d.women_draft_pct) + ' of the draft' }; }) }; }) });
+  document.getElementById('fWomen').innerHTML = '<b>Women are ' + SIR.pct(S.women_draft_pct) + ' of Maharashtra\'s draft roll, ' + n(S.draft_women) + ' women against ' + n(S.draft_men) + ' men and ' + n(S.draft_third) + ' third-gender electors.</b> ' +
+    'Their share runs from ' + SIR.pct(S.women_low.pct) + ' in ' + S.women_low.district + ' to ' + SIR.pct(S.women_high.pct) + ' in ' + S.women_high.district + '. In the five city districts it is ' + SIR.pct(C.women_draft_pct) + ' and in the rest ' + SIR.pct(R.women_draft_pct) + '. ' +
+    'Without the roll before the revision by sex, these shares cannot show whether women were left off more often than men.';
+
+  document.getElementById('fNotice').innerHTML = NT && NT.notices ? '<b>' + cr(NT.notices) + ' electors still on the draft roll were sent a notice, ' + d1(NT.per_100) + ' of every 100, according to the press.</b> ' +
+    (NT.no_mapping ? lk(NT.no_mapping) + ' of them were on the no-mapping list, of electors who could not be linked to the rolls of the last intensive revision, and ' + lk(NT.discrepancy) + ' were on the logical discrepancy list, of entries whose details were flagged as not agreeing. ' : '') +
+    'The figures are from <a href="' + NT.source_url + '">The Times of India</a> of ' + SIR.date(NT.date) + ', which quoted the CEO. How many names have been struck off after a hearing has not been published.' : 'No count of the notices has been found.';
+
+  document.getElementById('fAfter').innerHTML = '<b>The final roll is due on ' + SIR.date(S.final_due) + ' and is not out yet.</b> ' +
+    'After the draft, an elector asks to be added with Form 6, and an objection to a name already on the roll is made with Form 7. The press note set ' + SIR.date(S.claims_to_note) + ' as the last day for claims and objections and ' + SIR.date(S.final_due_note) + ' for the final roll. The Commission moved them, in its letter of 26 September 2026, to ' + SIR.date(S.claims_to) + ' and ' + SIR.date(S.final_due) + ', with notices heard until ' + SIR.date(S.notices_to) + '. ' +
+    'Until the final roll is out, nobody can say how many of the names left off will be put back.';
+
+  SIR.table(document.getElementById('tDist'), [
+    { k: 'district', label: 'District', bottom: true }, { k: 'before', label: 'Roll before', fmt: n }, { k: 'draft', label: 'Draft roll', fmt: n },
+    { k: 'left_off', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 },
+    { k: 'women_draft_pct', label: 'Women % of draft', fmt: d1 }
+  ], D, { sort: 'per_100' });
+
+  var byName = {}, idOf = {}; D.forEach(function (d) { byName[d.district] = d; });
+  var F = SIR.finder('finder', { rows: D, prompt: 'Find a district', placeholder: 'Type a district\'s name', key: function (d) { return SIR.slug(d.district); },
+    label: function (d) { return d.district + ' district' + (d.now ? ', now ' + d.now : ''); },
+    pick: function (d) { var b = document.getElementById('vMap'); if (b.__select && idOf[d.district]) b.__select(idOf[d.district]); },
+    card: function (d) { return SIR.facts([['Roll before the revision', n(d.before)], ['Draft roll', n(d.draft)], ['Left off', n(d.left_off)], ['Per 100 electors', d1(d.per_100)],
+      ['Share of the state\'s names left off', SIR.pct(100 * d.left_off / S.left_off)], ['Women in the draft roll', n(d.women) + ' (' + SIR.pct(d.women_draft_pct) + ')'], ['Men in the draft roll', n(d.men)]]); },
+    share: function (d) { return d.district + ' district, Maharashtra. The SIR draft roll of 31 August 2026 left off ' + n(d.left_off) + ' names, ' + d1(d.per_100) + ' of every 100 electors on the roll before the revision. These are the Chief Electoral Officer\'s counts. No count by reason was published for the district.'; } });
+  SIR.json('data/geo/maharashtra.json').then(function (geo) {
+    var byId = {};
+    geo.features.forEach(function (f) { var d = byName[f.properties.name]; if (d) { byId[f.properties.ac] = d; idOf[d.district] = f.properties.ac; } });
+    VIZ.map('vMap', { geo: geo, label: 'Map of names left off the draft per 100 electors, by district', title: 'Left off per 100 electors',
+      v: function (id) { return byId[id] ? byId[id].per_100 : null; }, name: function (id) { return byId[id] ? byId[id].district : ''; },
+      // on a phone the state fills the frame and an inset would cover the
+      // south-east districts, so Mumbai is enlarged on wider screens only
+      inset: innerWidth < 600 ? null : { name: 'Mumbai', acs: geo.features.filter(function (f) { return /^Mumbai/.test(f.properties.name); }).map(function (f) { return f.properties.ac; }), bottom: true },
+      pick: function (id) { if (byId[id]) F.select(byId[id]); } });
+    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
+    SIR.tools();
+  });
+  SIR.showFaq('mh', 'main');
+}).catch(SIR.fail);
+</script>

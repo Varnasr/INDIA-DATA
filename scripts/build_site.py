@@ -221,13 +221,19 @@ def search_index():
             pages.append([p['id'], label, h])
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
-                              ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/')):
+                              ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),
+                              ('gj', 'gujarat', 'gujarat/')):
         for a in J(folder + '/constituencies.json'):
             rows.append([pid, 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], page + '#ac-%d' % a['ac']])
         for d in J(folder + '/districts.json'):
             rows.append([pid, 'd', d['district'], '', page + '#' + slug(d['district'])])
     for d in J('uttarpradesh/districts.json'):
         rows.append(['up', 'd', d['district'], '', 'uttarpradesh/#' + slug(d['district'])])
+    for d in J('maharashtra/districts.json'):
+        # the press note keeps three old names; a reader may type the new one,
+        # and Bombay for Mumbai
+        alias = ' '.join(x for x in (d['now'], 'Bombay' if d['district'].startswith('Mumbai') else '') if x)
+        rows.append(['mh', 'd', d['district'], '', 'maharashtra/#' + slug(d['district'])] + ([alias] if alias else []))
     for d in J('karnataka/districts.json'):
         # Bengaluru is four election districts; a reader types the city
         city = 'Bengaluru Bangalore' if d['bengaluru'] else ''

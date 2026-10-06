@@ -56,3 +56,38 @@ dissolved, with `ac` holding the district's position in `districts.json` and
 `name` its name. The new districts formed from parts of old ones (Sambhal,
 Amethi, Ayodhya) take their constituencies from the results list, not from
 the shapefile's older district field.
+
+# Maharashtra
+
+`maharashtra.json` is by district, because the revision was published by
+district only. The 288 constituencies are cut from the same DataMeet
+shapefile, joined to their district from `data/maharashtra/raw/ac_district.csv`
+(the Election Commission's own list of constituencies by district) and
+dissolved into the 36 districts of the Chief Electoral Officer's press note of
+31 August 2026, with `ac` holding the district's serial number in that note
+and `name` its name as the note spells it (Aurangabad, Ahmednagar and
+Osmanabad keep their old names). The Commission's list is followed where
+DataMeet's district field disagrees: ACs 128 to 133 (Dahanu, Vikramgad,
+Palghar, Boisar, Nalasopara, Vasai) go to Palghar, the district formed from
+Thane in 2014, and AC 75 Warora goes to Chandrapur, where its tehsils are.
+The shapefile also holds 14 Maharashtra polygons with no constituency number
+(`AC_NO` 0), creeks and islands; each is assigned by its DataMeet district
+(THANE to Thane, MUMBAI (SUBURBAN) to Mumbai Suburban, MUMBAI to Mumbai City,
+RAIGARH to Raigad).
+
+# Gujarat
+
+`gujarat.json` is by district, although the revision was published by
+assembly constituency, because DataMeet's assembly constituency map has no
+shapes of its own for 20 city seats: ACs 45 to 56 (Naranpura to Asarwa,
+Ahmedabad city) and 160 to 167 (Surat North to Surat West, Surat city) are
+merged into one unnumbered polygon in each city. A map by constituency would
+leave both cities blank. The 162 numbered Gujarat constituencies are cut from
+the same DataMeet shapefile, joined to their district as the Chief Electoral
+Officer's table of the draft lists them (`data/gujarat/raw/ac.csv`) and
+dissolved into its 33 districts, with `ac` holding the district's position
+in `data/gujarat/raw/district.csv` and `name` its name as the table spells it.
+The 10 polygons with no constituency number (`AC_NO` 0), the city blocks of
+Ahmedabad and Surat and pieces of creek and coast, are each assigned to their DataMeet district
+(Kachchh, Jamnagar, Ahmedabad, Bharuch, Bhavnagar, Surat). Vav-Tharad, which
+the final roll's table prints apart from Banaskantha, is not drawn separately.

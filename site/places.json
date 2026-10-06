@@ -227,6 +227,42 @@
         ["data/delhi/constituencies.csv", "Constituency table, CSV", true],
         ["data/delhi/districts.csv", "District table, CSV", true]
       ]
+    },
+    {
+      "id": "mh",
+      "label": "Maharashtra 2026",
+      "subtitle": "Maharashtra 2026 · the names left off, district by district",
+      "band": "paithani",
+      "color": "6a1b4d",
+      "class": "mh",
+      "nav_label": "Maharashtra pages",
+      "pages": [
+        ["maharashtra/", "Overview", "i0"],
+        ["maharashtra/faq/", "FAQ", "i12"],
+        ["maharashtra/method/", "Method", "i10"]
+      ],
+      "downloads": [
+        ["data/maharashtra/districts.csv", "District table, CSV", true]
+      ]
+    },
+    {
+      "id": "gj",
+      "label": "Gujarat 2026",
+      "subtitle": "Gujarat 2026 · the names left off, constituency by constituency",
+      "band": "patola",
+      "color": "8e1b2c",
+      "class": "gj",
+      "nav_label": "Gujarat pages",
+      "pages": [
+        ["gujarat/", "Overview", "i0"],
+        ["gujarat/elections/", "Elections", "i6"],
+        ["gujarat/faq/", "FAQ", "i12"],
+        ["gujarat/method/", "Method", "i10"]
+      ],
+      "downloads": [
+        ["data/gujarat/constituencies.csv", "Constituency table, CSV", true],
+        ["data/gujarat/districts.csv", "District table, CSV", true]
+      ]
     }
   ]
 }

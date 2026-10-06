@@ -1,0 +1,153 @@
+{
+ "before_date": "2025-10-01",
+ "draft_date": "2025-12-19",
+ "final_date": "2026-02-17",
+ "before": 50843436,
+ "removed": 7373327,
+ "draft": 43470109,
+ "per_100": 14.5,
+ "reasons": {
+  "dead": 1807278,
+  "absent": 969662,
+  "shifted": 4025553,
+  "enrolled_elsewhere": 381470,
+  "other": 189364
+ },
+ "shares": {
+  "dead": 24.51,
+  "absent": 13.15,
+  "shifted": 54.6,
+  "enrolled_elsewhere": 5.17,
+  "other": 2.57
+ },
+ "acs": 182,
+ "districts": 33,
+ "rate_max": "Karanj",
+ "rate_max_v": 38.44,
+ "rate_max_district": "Surat",
+ "rate_min": "Tharad",
+ "rate_min_v": 4.07,
+ "rate_min_district": "Banaskantha",
+ "acs_over_25": 24,
+ "acs_under_10": 70,
+ "over_margin": 98,
+ "alive_over_margin": 64,
+ "narrow_over_margin": 60,
+ "closest": [
+  {
+   "name": "Rapar",
+   "margin": 577,
+   "removed": 31274,
+   "winner_party": "BJP"
+  },
+  {
+   "name": "Somnath",
+   "margin": 922,
+   "removed": 22765,
+   "winner_party": "INC"
+  },
+  {
+   "name": "Chanasma",
+   "margin": 1404,
+   "removed": 19832,
+   "winner_party": "INC"
+  }
+ ],
+ "closest20_over": 20,
+ "margin_median": 32970,
+ "seats_2022": {
+  "BJP": 156,
+  "INC": 17,
+  "IND": 3,
+  "AAP": 5,
+  "SP": 1
+ },
+ "winners": [
+  {
+   "party": "BJP",
+   "seats": 156,
+   "per_100": 15.19,
+   "vs_district": 0.05,
+   "over_margin": 77
+  },
+  {
+   "party": "INC",
+   "seats": 17,
+   "per_100": 10.52,
+   "vs_district": -0.76,
+   "over_margin": 15
+  },
+  {
+   "party": "AAP",
+   "seats": 5,
+   "per_100": 9.31,
+   "vs_district": -1.67,
+   "over_margin": 4
+  },
+  {
+   "party": "IND",
+   "seats": 3,
+   "per_100": 9.41,
+   "vs_district": -2.38,
+   "over_margin": 2
+  },
+  {
+   "party": "SP",
+   "seats": 1,
+   "per_100": 11.13,
+   "vs_district": -2.18,
+   "over_margin": 0
+  }
+ ],
+ "city_names": [
+  "Ahmedabad",
+  "Surat"
+ ],
+ "city": {
+  "acs": 37,
+  "before": 11133132,
+  "removed": 2703023,
+  "per_100": 24.28,
+  "share_of_roll": 21.9,
+  "share_of_removed": 36.66,
+  "shifted_share": 63.77,
+  "dead_share": 14.83,
+  "over_margin": 23,
+  "net_per_100": 23.19
+ },
+ "rest": {
+  "acs": 145,
+  "before": 39710304,
+  "removed": 4670304,
+  "per_100": 11.76,
+  "share_of_roll": 78.1,
+  "share_of_removed": 63.34,
+  "shifted_share": 49.29,
+  "dead_share": 30.11,
+  "over_margin": 75,
+  "net_per_100": 10.66
+ },
+ "final": 44030725,
+ "added": 956121,
+ "deleted": 395555,
+ "net": 560566,
+ "final_gap": 50,
+ "final_gap_districts": 7,
+ "net_fall": 6812711,
+ "net_per_100": 13.4,
+ "made_up_pct": 7.6,
+ "net_negative": [
+  "Surendranagar"
+ ],
+ "vav_tharad": {
+  "draft": 802018,
+  "added": 14226,
+  "deleted": 5157,
+  "net": 9069,
+  "final": 811087
+ },
+ "final_districts_printed": 34,
+ "rho_rate_shifted": 0.29,
+ "rho_rate_dead": -0.73,
+ "rho_rate_margin": 0.444
+}
