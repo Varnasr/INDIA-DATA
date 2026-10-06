@@ -2,7 +2,7 @@
  "as_of": "2026-09-30",
  "adults": {
   "states": 19,
-  "rho_rate": 0.04,
+  "rho_rate": 0.05,
   "over_100": [
    "Telangana",
    "Karnataka",
@@ -11,8 +11,8 @@
    "Andhra Pradesh",
    "Kerala"
   ],
-  "roll_total": 939101309,
-  "draft_total": 806411435,
+  "roll_total": 939144745,
+  "draft_total": 806454871,
   "adults_total": 955092000.0
  },
  "tiles": [
@@ -949,7 +949,7 @@
    "shifted_absent_other": 71.48,
    "duplicate": 7.59
   },
-  "per_100": 14.09
+  "per_100": 14.08
  },
  "by_phase": {
   "1": {
@@ -978,7 +978,7 @@
     "shifted_absent_other": 71.04,
     "duplicate": 6.71
    },
-   "per_100": 12.89
+   "per_100": 12.88
   },
   "3": {
    "states": 18,
@@ -999,8 +999,8 @@
   "Tripura"
  ],
  "after_draft": {
-  "states": 17,
-  "removed": 2774544
+  "states": 18,
+  "removed": 3170099
  },
  "final": {
   "states": 21,
@@ -1234,23 +1234,23 @@
    "state": "Gujarat",
    "phase": "2",
    "draft_date": "2025-12-19",
-   "electors_before": 50800000,
+   "electors_before": 50843436,
    "removed": 7373327,
    "dead": 1807278,
    "shifted_absent_other": 5184579,
    "duplicate": 381470,
    "split": "complete",
-   "figures": "rounded",
+   "figures": "exact",
    "source": "press",
-   "source_url": "https://www.hindustantimes.com/india-news/gujarat-releases-first-draft-list-after-sir-73-7-lakh-voters-deleted-101766150928767.html",
-   "note": "Electors before the revision reported rounded (5.08 crore). Shifted 40,25,553 and absent 9,69,662 reported separately; 1,89,364 other.",
+   "source_url": "https://deshgujarat.com/2025/12/20/gujarat-electoral-roll-revision-assembly-wise-data-on-voter-deletions-and-total-electors/",
+   "note": "The Chief Electoral Officer's district and constituency tables of the draft, as published by DeshGujarat on 20 December 2025: 5,08,43,436 before; 18,07,278 death, 9,69,662 untraceable or absent, 40,25,553 permanently shifted, 3,81,470 already enrolled and 1,89,364 other. Shifted, absent or other is absent plus shifted plus other.",
    "unsplit": 0,
    "shares": {
     "dead": 24.51,
     "shifted_absent_other": 70.32,
     "duplicate": 5.17
    },
-   "per_100": 14.51,
+   "per_100": 14.5,
    "char": {
     "income_pc": 299861.0,
     "urban_pct": 50.2,
@@ -1276,23 +1276,23 @@
     "mpce_urban": 7175.0
    },
    "adults_2026": 53301000.0,
-   "roll_adult_pct": 95.3,
-   "draft_adult_pct": 81.5,
+   "roll_adult_pct": 95.4,
+   "draft_adult_pct": 81.6,
    "removed_pct_votes24": 25.3,
-   "removed_after_draft": null,
-   "added_after_draft": null,
+   "removed_after_draft": 395555,
+   "added_after_draft": 956121,
    "withheld": null,
    "electors_final": 44030725,
    "final_date": "2026-02-17",
-   "reconciles": "net only",
+   "reconciles": "no",
    "net_after_draft": 560616,
    "net_fall": 6812711,
-   "net_fall_per_100": 13.41,
+   "net_fall_per_100": 13.4,
    "made_up_pct": 7.6,
    "final_source": {
     "source": "press",
     "url": "https://deshgujarat.com/2026/02/17/final-electoral-roll-for-gujarat-published-with-4-40-crore-voters-district-wise-data-here/",
-    "note": "The 5.60 lakh reported as added is the net rise from draft to final. Additions and removals after the draft were not published."
+    "note": "The Chief Electoral Officer's district table of the final roll, as published by DeshGujarat on 17 February 2026: 9,56,121 added and 3,95,555 deleted after the draft. As printed, the final roll is 50 higher than the draft plus additions less deletions, from seven districts; the figures are kept as printed."
    }
   },
   {
