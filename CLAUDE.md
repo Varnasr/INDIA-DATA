@@ -788,6 +788,17 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   Control turns it off. The table is closed to the public key; read it in the
   Supabase SQL editor.
 
+- **The frame is a newsroom layout** (the last block of `assets/sir.css`):
+  a one-line header with a hairline under it, the place's cloth as a 5px
+  strip, serif headlines (Source Serif 4, OFL, self-hosted in `fonts/`,
+  Latin only, so Indian scripts keep their Noto faces), and text held to a
+  44rem reading column centred on the page while maps, charts, tables and
+  number rows break out to the full width. The opening findings are the
+  lede, numbered in the margin. Charts sit under a rule rather than in
+  floating cards. On a phone the header is the title, Search and one menu
+  button (`.more`, made in `sir.js`) that opens the other controls. It
+  changes no colour token. A new text block that should sit in the column
+  needs its class in the column selector there.
 - **One look on every page: the Bihar dashboard's.** A folk-art band across
   the top (`.band.madhubani` for Bihar, `.band.ikat` for Hyderabad, a
   Pochampally ikat tile drawn as an SVG data URI), a card header with the
