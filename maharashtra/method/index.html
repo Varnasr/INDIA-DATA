@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="../../assets/i18n.js"></script>
+<title>Maharashtra SIR 2026: sources and method</title>
+<meta name="description" content="Where the Maharashtra figures come from, how the district tables were checked, and what they cannot show.">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%236a1b4d'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#1f4e79">
+<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/sir.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SIR analysis for India">
+<meta property="og:title" content="Maharashtra SIR 2026: sources and method">
+<meta property="og:description" content="Where the Maharashtra figures come from, how the district tables were checked, and what they cannot show.">
+<meta property="og:url" content="https://offtheroll.in/maharashtra/method/">
+<meta property="og:image" content="https://offtheroll.in/assets/og/mh.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://offtheroll.in/assets/og/mh.png">
+</head>
+<body class="mh" data-place="mh" data-root="../../">
+<a class="skip" href="#main">Skip to content</a>
+<div class="band paithani" aria-hidden="true"></div>
+<header class="top">
+  <div class="header-content">
+    <a class="logo" href="../../"><span class="logo-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/></svg></span><span class="titles"><span class="h-title">SIR analysis for India</span><span class="subtitle">Maharashtra 2026 · the names left off, district by district</span></span></a>
+    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">
+      <button type="button" class="btn install" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/></svg> <span class="lbl">Install app</span></button>
+      <button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> <span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>
+      <details class="dl places"><summary class="btn" aria-label="Places"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span class="lbl-place">Maharashtra 2026</span></summary><div class="menu" data-i18n-each><a href="../../">About this site</a><a href="../../india/">All India</a><a class="sub" href="../../india/numbers/">The SIR in numbers</a><a class="sub" href="../../india/process/">How the revision was run</a><a class="sub" href="../../india/progress/">Where the revision stands</a><a href="../../bihar/">Bihar 2025</a><a href="../../hyderabad/">Hyderabad 2026</a><a href="../../tamilnadu/">Tamil Nadu 2026</a><a href="../../karnataka/">Karnataka 2026</a><a href="../../westbengal/">West Bengal 2026</a><a href="../../kerala/">Kerala 2026</a><a href="../../rajasthan/">Rajasthan 2026</a><a href="../../uttarpradesh/">Uttar Pradesh 2026</a><a href="../../delhi/">Delhi 2026</a><a href="../../maharashtra/" aria-current="true">Maharashtra 2026</a></div></details>
+      <details class="dl"><summary class="btn"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="lbl">Downloads</span></summary><div class="menu" data-i18n-each><a href="../../data/maharashtra/districts.csv" download>District table, CSV</a></div></details>
+      <button type="button" class="theme" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="lbl">Dark</span></button>
+      <button type="button" class="btn-primary print"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> <span class="lbl">Export PDF</span></button>
+    </div>
+  </div>
+</header>
+<nav class="nav-tabs" aria-label="Maharashtra pages"><a class="nav-tab" href="../../maharashtra/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> Overview</a><a class="nav-tab" href="../../maharashtra/faq/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> FAQ</a><a class="nav-tab" href="../../maharashtra/method/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Method</a></nav>
+<main id="main">
+<div class="page-head"><h1>Sources and method</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
+
+<article class="state" lang="en" dir="ltr" data-no-i18n>
+  <h2 id="what-is-counted">What is counted</h2>
+  <div class="qa"><h3 id="the-press-note">The press note</h3><p>Every district figure on these pages is from one document, the <a href="https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Press%20Note%20English_31.08.2026%20Draft%20Roll.pdf">press note on the draft roll</a> of the Chief Electoral Officer (CEO), Maharashtra, dated 31 August 2026. The CEO keeps the state's rolls for the Election Commission. The note's first annexure gives the draft roll of each of the 36 districts by sex. The second gives, for each district, the enumeration forms that were not collected. Every elector on the roll before the revision was given an enumeration form to fill in and return, and an elector whose form was not collected is left off the draft. So the forms not collected are the names left off. Both annexures were read from the note's text and checked against the printed pages row by row.</p></div>
+  <div class="qa"><h3 id="the-roll-before-the-revision">The roll before the revision</h3><p>The note gives the roll before the revision for the state only, <span id="mBefore"></span> names. A district's roll before is therefore taken as its draft plus its names left off. Added up over the 36 districts, that comes to the state's figure exactly, so no name is unaccounted for.</p></div>
+  <div class="qa"><h3 id="how-the-tables-were-checked">How the tables were checked</h3><p>The site is not built unless every check holds. The two annexures must list the same 36 districts in the same order. In every district, men, women and third-gender electors must add up to the draft. The districts must add up to the note's state figures, which are <span id="mDraft"></span> on the draft, <span id="mLeft"></span> left off and <span id="mBefore2"></span> before. The percentages printed in the note must follow from the counts.</p></div>
+  <div class="qa"><h3 id="the-reasons">The reasons</h3><p>The note names five reasons a form was not collected, without a count for any of them. The state figures by reason on these pages are from <a id="mPress" href="#">The Indian Express</a>, reported in lakh and rounded, and folded into the three groups the All India pages use for every state: dead, shifted, absent or other, and enrolled at more than one place. They add up to a little more than the CEO's total, because each was rounded.</p></div>
+  <div class="qa"><h3 id="notices-and-dates">Notices and dates</h3><p>The count of notices is from the press, as the All India table of notices records it. The dates are from the note, and the later ones from the <a href="https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Maharashtra-Extension-26-09-2026.pdf">Commission's letter of 26 September 2026</a>, which moved the last day for claims and objections to <span id="mClaims"></span> and the final roll to <span id="mFinal"></span>.</p></div>
+  <div class="qa"><h3 id="district-names">District names</h3><p>The pages keep the note's spellings. Three districts have since been renamed. Aurangabad is now Chhatrapati Sambhajinagar, Ahmednagar is Ahilyanagar and Osmanabad is Dharashiv, and the finder takes either name.</p></div>
+  <div class="qa"><h3 id="the-map">The map</h3><p>The map joins the constituency boundaries of DataMeet's assembly constituency map (CC BY 2.5 India) by the district each of the 288 constituencies belongs to in the Election Commission's own list, and draws each district as the union of its constituencies. DataMeet's map is older than Palghar district, so it puts Dahanu, Vikramgad, Palghar, Boisar, Nalasopara and Vasai in Thane. The Commission's list places them in Palghar, and so does the map. It also places Warora in Chandrapur, where its two tehsils are. DataMeet's map also carries 14 small shapes with no constituency number, creeks and islands round Mumbai, Thane and Raigad, and each is given to the district DataMeet names for it.</p></div>
+
+  <h2 id="what-these-tables-cannot-show">What these tables cannot show</h2>
+  <ul class="plain">
+    <li>How many names were left off in each assembly constituency, the area that elects one member of the state assembly, or how the removals compare with the margins of an election. Nothing was published by constituency.</li>
+    <li>Why the names in any district were left off. No count by reason was published for a district.</li>
+    <li>Whether women, the old or the young were left off more often. The names left off are not split by sex or age at any level.</li>
+    <li>How many of those left off will be put back. The final roll is not out.</li>
+    <li>Whether each removal was right. A reason is what the officer wrote down, and nobody checked it.</li>
+  </ul>
+
+  <h2 id="downloads">Downloads</h2>
+  <p>The district table behind every chart is in the Downloads menu at the top of the page.</p>
+
+  <h2 id="analysis-of-the-named-lists">Analysis of the named lists</h2>
+  <p>This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href="https://sabarinstitute.org/">Sabar Institute</a>.</p>
+</article>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../">About this site</a> · <a href="../../terms/">Terms and privacy</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/viz.js"></script>
+<script src="../../assets/faq/maharashtra.js"></script>
+<script>
+SIR.json('data/maharashtra/summary.json').then(function (s) {
+  document.getElementById('mBefore').textContent = SIR.n(s.before);
+  document.getElementById('mBefore2').textContent = SIR.n(s.before);
+  document.getElementById('mDraft').textContent = SIR.n(s.draft);
+  document.getElementById('mLeft').textContent = SIR.n(s.left_off);
+  document.getElementById('mClaims').textContent = SIR.date(s.claims_to);
+  document.getElementById('mFinal').textContent = SIR.date(s.final_due);
+  document.getElementById('mPress').href = s.press_source;
+  SIR.showFaq('mh', 'method');
+}).catch(SIR.fail);
+</script>
+<script src="../../assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
+</body>
+</html>

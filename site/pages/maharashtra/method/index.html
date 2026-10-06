@@ -1,0 +1,48 @@
+<!--page {"title": "Maharashtra SIR 2026: sources and method", "description": "Where the Maharashtra figures come from, how the district tables were checked, and what they cannot show.", "place": "mh"} -->
+<main id="main">
+<div class="page-head"><h1>Sources and method</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
+
+<article class="state" lang="en" dir="ltr" data-no-i18n>
+  <h2>What is counted</h2>
+  <div class="qa"><h3>The press note</h3><p>Every district figure on these pages is from one document, the <a href="https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Press%20Note%20English_31.08.2026%20Draft%20Roll.pdf">press note on the draft roll</a> of the Chief Electoral Officer (CEO), Maharashtra, dated 31 August 2026. The CEO keeps the state's rolls for the Election Commission. The note's first annexure gives the draft roll of each of the 36 districts by sex. The second gives, for each district, the enumeration forms that were not collected. Every elector on the roll before the revision was given an enumeration form to fill in and return, and an elector whose form was not collected is left off the draft. So the forms not collected are the names left off. Both annexures were read from the note's text and checked against the printed pages row by row.</p></div>
+  <div class="qa"><h3>The roll before the revision</h3><p>The note gives the roll before the revision for the state only, <span id="mBefore"></span> names. A district's roll before is therefore taken as its draft plus its names left off. Added up over the 36 districts, that comes to the state's figure exactly, so no name is unaccounted for.</p></div>
+  <div class="qa"><h3>How the tables were checked</h3><p>The site is not built unless every check holds. The two annexures must list the same 36 districts in the same order. In every district, men, women and third-gender electors must add up to the draft. The districts must add up to the note's state figures, which are <span id="mDraft"></span> on the draft, <span id="mLeft"></span> left off and <span id="mBefore2"></span> before. The percentages printed in the note must follow from the counts.</p></div>
+  <div class="qa"><h3>The reasons</h3><p>The note names five reasons a form was not collected, without a count for any of them. The state figures by reason on these pages are from <a id="mPress" href="#">The Indian Express</a>, reported in lakh and rounded, and folded into the three groups the All India pages use for every state: dead, shifted, absent or other, and enrolled at more than one place. They add up to a little more than the CEO's total, because each was rounded.</p></div>
+  <div class="qa"><h3>Notices and dates</h3><p>The count of notices is from the press, as the All India table of notices records it. The dates are from the note, and the later ones from the <a href="https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Maharashtra-Extension-26-09-2026.pdf">Commission's letter of 26 September 2026</a>, which moved the last day for claims and objections to <span id="mClaims"></span> and the final roll to <span id="mFinal"></span>.</p></div>
+  <div class="qa"><h3>District names</h3><p>The pages keep the note's spellings. Three districts have since been renamed. Aurangabad is now Chhatrapati Sambhajinagar, Ahmednagar is Ahilyanagar and Osmanabad is Dharashiv, and the finder takes either name.</p></div>
+  <div class="qa"><h3>The map</h3><p>The map joins the constituency boundaries of DataMeet's assembly constituency map (CC BY 2.5 India) by the district each of the 288 constituencies belongs to in the Election Commission's own list, and draws each district as the union of its constituencies. DataMeet's map is older than Palghar district, so it puts Dahanu, Vikramgad, Palghar, Boisar, Nalasopara and Vasai in Thane. The Commission's list places them in Palghar, and so does the map. It also places Warora in Chandrapur, where its two tehsils are. DataMeet's map also carries 14 small shapes with no constituency number, creeks and islands round Mumbai, Thane and Raigad, and each is given to the district DataMeet names for it.</p></div>
+
+  <h2>What these tables cannot show</h2>
+  <ul class="plain">
+    <li>How many names were left off in each assembly constituency, the area that elects one member of the state assembly, or how the removals compare with the margins of an election. Nothing was published by constituency.</li>
+    <li>Why the names in any district were left off. No count by reason was published for a district.</li>
+    <li>Whether women, the old or the young were left off more often. The names left off are not split by sex or age at any level.</li>
+    <li>How many of those left off will be put back. The final roll is not out.</li>
+    <li>Whether each removal was right. A reason is what the officer wrote down, and nobody checked it.</li>
+  </ul>
+
+  <h2>Downloads</h2>
+  <p>The district table behind every chart is in the Downloads menu at the top of the page.</p>
+
+  <h2>Analysis of the named lists</h2>
+  <p>This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href="https://sabarinstitute.org/">Sabar Institute</a>.</p>
+</article>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/maharashtra.js"></script>
+<script>
+SIR.json('data/maharashtra/summary.json').then(function (s) {
+  document.getElementById('mBefore').textContent = SIR.n(s.before);
+  document.getElementById('mBefore2').textContent = SIR.n(s.before);
+  document.getElementById('mDraft').textContent = SIR.n(s.draft);
+  document.getElementById('mLeft').textContent = SIR.n(s.left_off);
+  document.getElementById('mClaims').textContent = SIR.date(s.claims_to);
+  document.getElementById('mFinal').textContent = SIR.date(s.final_due);
+  document.getElementById('mPress').href = s.press_source;
+  SIR.showFaq('mh', 'method');
+}).catch(SIR.fail);
+</script>

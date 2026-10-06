@@ -176,6 +176,11 @@ def _uttarpradesh():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
+def _maharashtra():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_maharashtra.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
+
 def _telangana():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_telangana.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -231,7 +236,7 @@ def _pages_link_method():
               'hyderabad/index.html', 'hyderabad/people/index.html', 'hyderabad/parts/index.html', 'hyderabad/hearings/index.html',
               'tamilnadu/index.html', 'tamilnadu/elections/index.html', 'karnataka/index.html',
               'westbengal/index.html', 'westbengal/elections/index.html',
-              'kerala/index.html', 'kerala/elections/index.html']:
+              'kerala/index.html', 'kerala/elections/index.html', 'maharashtra/index.html']:
         with open(os.path.join(ROOT, p), encoding='utf-8') as fh:
             assert 'method/' in fh.read(), '%s no longer links to the method page' % p
 
@@ -256,6 +261,7 @@ for name, fn in [
     ('Lok Sabha electors current and within range', _electors),
     ('Rajasthan data matches its raw tables', _rajasthan),
     ('Uttar Pradesh data matches its raw tables', _uttarpradesh),
+    ('Maharashtra data matches its raw tables', _maharashtra),
     ('Notices table matches its raw table', _notices),
     ('Delhi data matches its raw tables', _delhi),
     ('removals against winning margins current, 2024 margins match the published ones', _margins),

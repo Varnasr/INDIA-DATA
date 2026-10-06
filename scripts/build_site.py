@@ -228,6 +228,11 @@ def search_index():
             rows.append([pid, 'd', d['district'], '', page + '#' + slug(d['district'])])
     for d in J('uttarpradesh/districts.json'):
         rows.append(['up', 'd', d['district'], '', 'uttarpradesh/#' + slug(d['district'])])
+    for d in J('maharashtra/districts.json'):
+        # the press note keeps three old names; a reader may type the new one,
+        # and Bombay for Mumbai
+        alias = ' '.join(x for x in (d['now'], 'Bombay' if d['district'].startswith('Mumbai') else '') if x)
+        rows.append(['mh', 'd', d['district'], '', 'maharashtra/#' + slug(d['district'])] + ([alias] if alias else []))
     for d in J('karnataka/districts.json'):
         # Bengaluru is four election districts; a reader types the city
         city = 'Bengaluru Bangalore' if d['bengaluru'] else ''
