@@ -92,14 +92,17 @@ def shell(out, meta, content, scripts):
     # the places menu: every analysis, the current one marked. A place's own
     # pages and the run of 2026 states each fold under a heading, opened when
     # the reader is inside it, so the menu stays short as places are added.
+    # every state's link carries class "st": sir.js puts two of them at the
+    # top each day and folds the rest, so the featured states rotate
     def link(p):
         href = root + (p['pages'][0][0] if p['pages'] else '')
         cur = ' aria-current="true"' if p['id'] == place['id'] else ''
-        return '<a href="%s"%s>%s</a>' % (href or './', cur, html.escape(p['label']))
+        st = ' class="st"' if p['id'] not in ('home', 'india') else ''
+        return '<a href="%s"%s%s>%s</a>' % (href or './', st, cur, html.escape(p['label']))
 
-    def fold(title, links, opened):
-        return ('<details class="grp"%s><summary>%s</summary><div class="sub" data-i18n-each>%s</div></details>'
-                % (' open' if opened else '', html.escape(title), ''.join(links)))
+    def fold(title, links, opened, cls=''):
+        return ('<details class="grp%s"%s><summary>%s</summary><div class="sub" data-i18n-each>%s</div></details>'
+                % (cls, ' open' if opened else '', html.escape(title), ''.join(links)))
     items, group = [], []
     for p in CFG['places']:
         if p.get('group') == 'states':
@@ -113,7 +116,7 @@ def shell(out, meta, content, scripts):
         else:
             items.append(link(p))
     if group:
-        items.append(fold('Other states 2026', group, place.get('group') == 'states'))
+        items.append(fold('Other states', group, place.get('group') == 'states', ' states'))
     current = place['label'] if place['id'] != 'home' else 'Places'
     places = ('<details class="dl places"><summary class="btn" aria-label="Places">%s <span class="lbl-place">%s</span></summary>'
               '<div class="menu"><div data-i18n-each>%s</div></div></details>' % (PIN, html.escape(current), ''.join(items)))
