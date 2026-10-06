@@ -95,6 +95,13 @@
   <div class="grid"><div class="panel wide" id="pG3"><div class="vizbox" id="vG3"></div></div></div>
   <p class="note" id="nG3"></p>
 
+  <h2 id="inside-the-commission">Inside the Commission, as The Indian Express reported it</h2>
+  <p class="sub" id="iSub"></p>
+  <div class="grid"><div class="panel wide" id="pInside"><div class="vizbox" id="vInside"></div></div></div>
+  <p class="finding" id="fInside"></p>
+  <ol class="ptl inside" id="inside"></ol>
+  <p class="note" id="nInside"></p>
+
   <h2 id="reported-not-confirmed-by-a-document">Reported in the press, with no document to confirm it</h2>
   <p class="sub">What news organisations reported about the revision that no order or official figure on this page confirms. Each entry says who reported it and when, gives the Commission's response where the report carried one, and links to the report. These are reports, and the site does not vouch for them.</p>
   <div class="pfilter" role="group" aria-label="Show reports about" id="rFilter"></div>
@@ -130,7 +137,8 @@ SIR.json('data/india/process.json').then(function (P) {
     'The revision began in Bihar on 24 June 2025 and by 14 May 2026 had been ordered everywhere except Himachal Pradesh, Jammu and Kashmir and Ladakh. Assam was given a different kind of revision.',
     'In Phase II, all ' + p2.length + ' states and union territories had their dates moved a week, and the Commission named ' + p2twice + ' of them for a second move. In Phase III, the dates of ' + p3moved + ' of ' + p3.length + ' states and union territories moved by orders and notes we could read.',
     'What an elector had to show changed as the revision went on. In June 2025 it was one of eleven documents, and Aadhaar was added for identity on the Supreme Court\'s order in September. In Phase II no documents were asked for while forms were filled in. From 26 September 2026, documents were collected at home from those sent notices.',
-    bySC + ' of the ' + T.length + ' entries below are orders or the judgment of the Supreme Court. In West Bengal it had judges decide the claims, and 60,06,675 names were marked under adjudication on the final roll.'
+    bySC + ' of the ' + T.length + ' entries below are orders or the judgment of the Supreme Court. In West Bengal it had judges decide the claims, and 60,06,675 names were marked under adjudication on the final roll.',
+    'The Indian Express reported that two of the three Election Commissioners objected on record at least 14 times in 10 months to decisions taken in the Commission\'s name without them, on Form 6, on who controls the roll software, and on appeals in West Bengal. Three days after calling the notes part of its decision-making, the Commission announced nine decisions that met several of them. <a href="#inside-the-commission">Inside the Commission</a> sets the account out by date.'
   ], 'Every section rests on documents issued by the Election Commission, the Supreme Court and the states\' election officers, except the list of press reports, which is marked as such. Some orders could not be found, and they are listed at the foot of the page.');
 
   document.getElementById('kpis').innerHTML = [
@@ -180,6 +188,20 @@ SIR.json('data/india/process.json').then(function (P) {
       '<div class="pbody"><h3 id="f-' + t.date + '-' + (i + 1) + '">' + E(t.title) + '</h3><p>' + E(t.text) + '</p>' + srcs(t.src) + '</div></li>';
   }).join('');
   SIR.anchors(fl);
+
+  // inside the Commission: The Indian Express's account, by date
+  var I = P.inside, LT = { ecs: '--fill-red', officers: '--fill-purple', commission: '--fill-navy', goa: '--fill-amber', court: '--fill-teal', press: '--fill-grey' };
+  var IL = I.lanes.map(function (l) { return [l[0], l[1], LT[l[0]]]; }), lname = {}; I.lanes.forEach(function (l) { lname[l[0]] = l[1]; });
+  var nE = I.events.filter(function (e) { return e.lane === 'ecs'; }).length, G = I.goa, W = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+  document.getElementById('iSub').textContent = 'Two of the three Election Commissioners, Sukhbir Singh Sandhu and Vivek Joshi, put objections on file that the Chief Election Commissioner was copied on. ' + I.note + ' The chart puts each dated note, letter and reply in its own lane, and the numbers match the list under it.';
+  VIZ.lanes('vInside', { label: 'The Indian Express\'s account of the objections inside the Election Commission, November 2025 to October 2026', lanes: IL, dark: ['--fill-amber', '--fill-teal', '--fill-grey'], events: I.events });
+  document.getElementById('fInside').innerHTML = '<b>The paper dated ' + nE + ' of the two Commissioners\' notes and letters. It says there were at least 14.</b> They asked for Form 6 to stay as the law sets it, for the officers who keep each constituency\'s roll to keep control of it in the software, and for an outside audit of that software. In Goa, ' + W[G.messages] + ' messages in ' + W[G.days] + ' days asked for a way to put back ' + G.eligible + ' electors the state\'s officers had heard and found eligible, and the final roll went out without them. By 26 September, the Commission said, ' + G.filled_form6 + ' of them had applied again on Form 6.';
+  document.getElementById('inside').innerHTML = I.events.map(function (e, i) {
+    return '<li class="pitem ilane ' + e.lane + '"><div class="pdate"><b class="inum">' + (i + 1) + '</b> <time datetime="' + e.date + '">' + SIR.date(e.date) + '</time><span class="pwho">' + E(lname[e.lane]) + '</span></div>' +
+      '<div class="pbody"><h3 id="i-' + (i + 1) + '">' + E(e.title) + '</h3><p>' + E(e.text) + '</p><p class="psrc">' + (e.url ? '<a href="' + E(e.url) + '" rel="noopener" target="_blank">' + E(e.outlet) + ', ' + E(e.headline) + '</a>' : E(e.headline)) + '</p></div></li>';
+  }).join('');
+  SIR.anchors(document.getElementById('inside'));
+  document.getElementById('nInside').textContent = I.issue + ' The Commission did not answer the questions the paper sent on 21 September. What it said in public is in entries ' + (I.events.map(function (e, i) { return e.lane === 'commission' && e.date >= '2026-09-23' ? i + 1 : 0; }).filter(Boolean).join(', ').replace(/, (\d+)$/, ' and $1')) + '. The press reports further down carry the same account by topic, with the responses each report gave.';
 
   // the reported list, by topic
   var R = P.reported, rt = '', rbox = document.getElementById('reported');

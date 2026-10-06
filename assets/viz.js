@@ -348,6 +348,52 @@
     });
   }
 
+  // ---- lanes: a dated timeline with one lane per actor. o.lanes [[key,
+  // name, token]], o.events [{date, lane, title}] in date order; each event is
+  // a numbered marker, the number matching the list the page prints under the
+  // chart. Markers that would touch are stacked within their lane.
+  function lanes(box, o) {
+    measure(box);
+    box = typeof box === 'string' ? document.getElementById(box) : box;
+    var D = function (iso) { return Date.parse(iso + 'T00:00:00Z'); };
+    var ts = o.events.map(function (e) { return D(e.date); });
+    var a = new Date(Math.min.apply(null, ts)), b = new Date(Math.max.apply(null, ts));
+    var m0 = Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), 1), m1 = Date.UTC(b.getUTCFullYear(), b.getUTCMonth() + 1, 1);
+    var ph = phone(), W = ph ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = ph ? fitLw(o.lanes.map(function (l) { return l[1]; }), 96) : 220;
+    var R = ph ? 7.5 : 9, pad = 8;
+    var x = function (t) { return lw + 8 + R + (W - lw - 20 - 2 * R) * (t - m0) / (m1 - m0); };
+    // stack: the lowest row in its lane where the marker clears the last one
+    var rows = {}, nrow = {};
+    o.lanes.forEach(function (l) { rows[l[0]] = []; nrow[l[0]] = 1; });
+    var pos = o.events.map(function (e, i) {
+      var px = x(ts[i]), rr = rows[e.lane], k = 0;
+      while (rr[k] != null && px - rr[k] < 2 * R + 1.5) k++;
+      rr[k] = px; nrow[e.lane] = Math.max(nrow[e.lane], k + 1);
+      return { x: px, k: k };
+    });
+    var top = 6, ys = {}, y = top;
+    o.lanes.forEach(function (l) { var h = nrow[l[0]] * (2 * R + 3) + 2 * pad; ys[l[0]] = [y, h]; y += h; });
+    var H = y + 26, s = svgIn(box, W, H, o.label);
+    o.lanes.forEach(function (l, i) {
+      var yy = ys[l[0]];
+      if (i % 2) el('rect', { x: 0, y: yy[0], width: W, height: yy[1], class: 'vband' }, s);
+      label(s, lw - 6, yy[0] + yy[1] / 2, l[1], ph ? 13 : 20, 'end');
+    });
+    var mon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    for (var m = new Date(m0), i = 0; m.getTime() <= m1; m = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 1)), i++) {
+      el('line', { x1: x(m.getTime()), x2: x(m.getTime()), y1: top, y2: y, class: 'vgrid' }, s);
+      if ((!ph || i % 3 === 0) && m.getTime() < m1) el('text', { x: x(m.getTime()) + 2, y: H - 8, class: 'vval' }, s, mon[m.getUTCMonth()] + (m.getUTCMonth() === 0 || i === 0 ? (ph ? ' \u2019' + String(m.getUTCFullYear()).slice(2) : ' ' + m.getUTCFullYear()) : ''));
+    }
+    var tok = {}; o.lanes.forEach(function (l) { tok[l[0]] = l[2]; });
+    o.events.forEach(function (e, i) {
+      var p = pos[i], yy = ys[e.lane], cy = yy[0] + pad + R + 1 + p.k * (2 * R + 3);
+      var g = el('g', { class: 'vlane' }, s);
+      el('title', {}, g, (i + 1) + '. ' + SIR.date(e.date) + ': ' + e.title);
+      el('circle', { cx: p.x, cy: cy, r: R, style: fill(tok[e.lane]), class: 'vdot' }, g);
+      el('text', { x: p.x, y: cy, 'text-anchor': 'middle', 'dominant-baseline': 'central', class: 'vnum ' + (o.dark && o.dark.indexOf(tok[e.lane]) >= 0 ? 'on-light' : 'on-dark') }, g, i + 1);
+    });
+  }
+
   // ---- forest: rows [{name, est, lo, hi, main}], one estimate and its
   // interval per row, with the line at zero (no effect)
   function forest(box, o) {
@@ -704,6 +750,7 @@
     dots: function (o) { return [['category'].concat(o.series.map(function (z) { return z.name; }))].concat(o.cats.map(function (c, i) { return [c].concat(o.series.map(function (z) { return z.vals[i]; })); })); },
     multiples: function (o) { return [['name'].concat(o.steps)].concat(o.panels.map(function (p) { return [p.name].concat(p.v); })); },
     scatter: function (o) { return [['point', o.xAxis, o.yAxis]].concat(o.points.map(function (p) { return [p.label, p.x, p.y]; })); },
+    lanes: function (o) { return [['number', 'date', 'lane', 'event']].concat(o.events.map(function (e, i) { var n = ''; o.lanes.forEach(function (l) { if (l[0] === e.lane) n = l[1]; }); return [i + 1, e.date, n, e.title]; })); },
     gantt: function (o) { var out = [['state', 'schedule', 'enumeration from', 'enumeration to', 'draft', 'claims from', 'claims to', 'final']]; o.rows.forEach(function (r) { r.steps.forEach(function (st) { out.push([r.name, st.label, st.enum ? st.enum[0] || '' : '', st.enum ? st.enum[1] : '', st.draft || '', st.claims ? st.claims[0] : '', st.claims ? st.claims[1] : st.claims_end || '', st.final || '']); }); }); return out; },
     map: function (o) { return [['ac', 'name', o.title || 'value']].concat(o.geo.features.map(function (f) { var a = f.properties.ac; return [a, o.name(a), o.v(a)]; })); }
   };
@@ -733,7 +780,7 @@
   }
 
   var K = {};
-  var F = { gantt: gantt, multiples: multiples, slope: slope, scatter: scatter, sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, heat: heat, rank: rank, dots: dots, map: map };
+  var F = { gantt: gantt, lanes: lanes, multiples: multiples, slope: slope, scatter: scatter, sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, heat: heat, rank: rank, dots: dots, map: map };
   Object.keys(F).forEach(function (k) { K[k] = keep(k, F[k]); });
   K.fromChart = function (box, cfg, label) { var ok = fromChart(box, cfg, label); if (ok) try { (typeof box === 'string' ? document.getElementById(box) : box).__csv = chartCsv(cfg); } catch (e) {} return ok; };
   K.png = png;

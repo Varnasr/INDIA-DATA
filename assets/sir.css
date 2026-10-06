@@ -516,6 +516,8 @@ html.dyslexic-font[data-lang="ur"] *{font-family:"OpenDyslexic","Noto Nastaliq U
 }
 .viz .vband{fill:var(--soft)}
 .process .panel{scroll-margin-top:calc(var(--hh,0px) + 70px)}
+.viz .vnum{font-size:10px;font-weight:700;pointer-events:none}.viz .vnum.on-dark{fill:#fff}.viz .vnum.on-light{fill:#111}.viz .vlane .vdot{stroke:var(--card);stroke-width:1.5}
+@media (max-width:600px){.viz .vnum{font-size:8.5px}}
 .viz .vmark{fill:none;stroke:var(--fill-red);stroke-width:2}
 /* india/process: the timeline of rule changes */
 .process .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.8rem;margin:1rem 0}
@@ -553,6 +555,8 @@ main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
 .process .burdens h3{font-size:1rem;margin:0 0 .35rem}
 .process .burdens h3::before{content:counter(b) ". ";color:var(--red)}
 .process .burdens p{margin:.3rem 0}
+.pitem.ilane::before{background:var(--fill-grey)}.pitem.ilane.ecs::before{background:var(--fill-red)}.pitem.ilane.officers::before{background:var(--fill-purple)}.pitem.ilane.commission::before{background:var(--fill-navy)}.pitem.ilane.goa::before{background:var(--fill-amber)}.pitem.ilane.court::before{background:var(--fill-teal)}
+.process .inum{display:inline-block;min-width:1.6em;text-align:center;font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:0 .3em;margin-inline-end:.2rem}
 .process ul.reported{list-style:none;padding:0;margin:0 0 1rem;display:grid;gap:.7rem}
 .process ul.reported li{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:.8rem 1rem}
 .process .rmeta{margin:0 0 .3rem;color:var(--muted);font-size:.88rem}
