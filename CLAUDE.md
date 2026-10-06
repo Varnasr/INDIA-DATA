@@ -2,7 +2,7 @@
 
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
-Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi, Maharashtra, Gujarat and Uttarakhand (2026). Static HTML, Chart.js from cdnjs, one
+Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi, Maharashtra, Gujarat and Uttarakhand (2026), and Assam's Special Revision (2025-26). Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
@@ -725,6 +725,36 @@ both with `--check`.
   are general electors.
 - The map is by constituency (`data/geo/uttarakhand.json`), shaded by names
   removed after the draft per 1,000. English only, like the other 2026 pages.
+
+## Assam
+
+`scripts/build_assam.py` reads `data/assam/raw` (sources and checks in
+`SOURCES.md` there) and writes `summary.json` and `assam.csv`; `check_data.py`
+runs it with `--check`.
+
+- **A Special Revision, not an SIR.** The Commission's order of 17 November
+  2025 (read in full from a Scribd copy, the Commission's own answered 406)
+  asks existing electors for no form and no document, links to no earlier
+  roll and does not mention the NRC. D-voters were kept out of the check and
+  carried onto the draft unchanged. `rules.csv` sets each rule beside the SIR's.
+  Assam is not in `states.csv` or any All India total.
+- **Flagged, never removed.** The 10,56,291 (dead, shifted, multiple) were
+  reported as identified for deletion; no CEO figure says they were off the
+  draft, and the draft is 2,76,490 above the January 2025 roll. Every page
+  says flagged.
+- **Every roll figure is the CEO's as quoted by the press**: ceoassam.nic.in
+  refused the sandbox, so no district or constituency table was read. The AC
+  draft and final tables exist (`SOURCES.md` lists their addresses); fetch
+  them from an Indian network and add a constituency section.
+- **The two drafts differ by 1,151** (27 December against the figure given with
+  the final roll); both kept as printed.
+- **Context**: D-voters, Foreigners Tribunals, detention centres and the NRC
+  are Ministry of Home Affairs Lok Sabha answers of 2019 to 2021 (primary,
+  PDFs in `raw/sources/`), and the July 2026 Assembly reply as The Assam
+  Tribune and The Wire reported it (press, flagged). Detention figures are
+  from 2019 and 2020 and the page says they are the latest primary ones found.
+  Nothing on the pages says anything about any person's citizenship.
+- English only, with the translated note, like the other 2026 state pages.
 
 ## Notices
 

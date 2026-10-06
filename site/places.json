@@ -286,6 +286,23 @@
         ["data/uttarakhand/constituencies.csv", "Constituency table, CSV", true],
         ["data/uttarakhand/districts.csv", "District table, CSV", true]
       ]
+    },
+    {
+      "id": "as", "group": "states",
+      "label": "Assam 2026",
+      "subtitle": "Assam 2026 · a special revision of the roll, and the record on D-voters, tribunals and detention",
+      "band": "gamosa",
+      "color": "9b1c1c",
+      "class": "as",
+      "nav_label": "Assam pages",
+      "pages": [
+        ["assam/", "Overview", "i0"],
+        ["assam/faq/", "Questions", "i12"],
+        ["assam/method/", "Method", "i10"]
+      ],
+      "downloads": [
+        ["data/assam/assam.csv", "Every Assam figure with its source, CSV", true]
+      ]
     }
   ]
 }

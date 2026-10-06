@@ -37,6 +37,7 @@
   <a class="hub st" href="rajasthan/"><b>Rajasthan 2026</b><span>The state's removals and reasons, and every constituency's roll from the 2023 election to the final roll.</span></a>
   <a class="hub st" href="uttarpradesh/"><b>Uttar Pradesh 2026</b><span>The names left off the draft roll in each of the 75 districts, and the reason entered against them.</span></a>
   <a class="hub st" href="delhi/"><b>Delhi 2026</b><span>The names left off the draft roll in each of the 70 constituencies, against the 2025 winning margins.</span></a>
+  <a class="hub st" href="assam/"><b>Assam 2026</b><span>A special revision of the roll with no forms or documents asked of electors, and the record on D-voters, tribunals and detention.</span></a>
   <a class="hub st" href="maharashtra/"><b>Maharashtra 2026</b><span>The names left off the draft roll in each of the 36 districts, and how Mumbai and Pune compare with the rest of the state.</span></a>
   <a class="hub st" href="gujarat/"><b>Gujarat 2026</b><span>Every constituency and district, with the reason recorded, set against the 2022 election result.</span></a>
   <a class="hub st" href="uttarakhand/"><b>Uttarakhand 2026</b><span>Every constituency from the draft to the final roll, by sex, and where names were removed after the draft.</span></a>
@@ -96,7 +97,7 @@
 Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json'), SIR.json('data/india/women.json'), SIR.json('data/india/cities.json'), SIR.json('data/india/margins.json')]).then(function (r) {
   var I = r[0], geo = r[1], W = r[2].summary, C = r[3].summary, M = r[4], byName = {}, byId = {};
   var ALIAS = { 'Andaman & Nicobar': 'Andaman and Nicobar Islands', 'Jammu & Kashmir': 'Jammu and Kashmir' };
-  var PAGE = { 'Bihar': 'bihar/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Rajasthan': 'rajasthan/', 'Uttar Pradesh': 'uttarpradesh/', 'Delhi': 'delhi/', 'Maharashtra': 'maharashtra/', 'Gujarat': 'gujarat/', 'Uttarakhand': 'uttarakhand/', 'Telangana': 'hyderabad/telangana/' };
+  var PAGE = { 'Bihar': 'bihar/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Rajasthan': 'rajasthan/', 'Uttar Pradesh': 'uttarpradesh/', 'Delhi': 'delhi/', 'Maharashtra': 'maharashtra/', 'Gujarat': 'gujarat/', 'Uttarakhand': 'uttarakhand/', 'Telangana': 'hyderabad/telangana/', 'Assam': 'assam/' };
   I.states.forEach(function (st) { byName[st.state] = st; });
   geo.features.forEach(function (f) { var n = ALIAS[f.properties.name] || f.properties.name; byId[f.properties.ac] = { name: n, st: byName[n] }; });
   var v = function (id) { var x = byId[id]; return x && x.st && x.st.per_100 != null ? x.st.per_100 : null; };
