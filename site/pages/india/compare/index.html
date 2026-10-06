@@ -1,0 +1,99 @@
+<!--page {"title": "Comparisons: reserved seats, the names that came back, and the borders", "description": "Seats reserved for Scheduled Castes and Scheduled Tribes against general seats, how much of each state's draft cut the final roll made up, and the Government of India's border districts against the rest of their state.", "place": "india"} -->
+<main id="main">
+<div class="page-head" data-no-i18n><h1>Comparisons</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only. Every figure on it comes from the state pages and the All India table, which link each figure to its source.</p>
+
+<article class="compare" lang="en" dir="ltr" data-no-i18n>
+  <h2>Seats reserved for Scheduled Castes and Scheduled Tribes</h2>
+  <p class="sub">Every assembly seat is either general or reserved for a Scheduled Caste or Scheduled Tribe candidate, under the Delimitation Order of 2008. This compares the two kinds of seat in the six states that published their figures by constituency. A reserved seat is chosen because more of its people belong to that group, but most of its electors usually do not. So this says how hard the revision fell on the places, and nothing about which electors in them were removed.</p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Reserved and general seats"><table id="tRes"></table></div>
+  <p class="finding" id="fRes"></p>
+  <p class="note" id="nRes"></p>
+
+  <h2>How much the final roll made up</h2>
+  <p class="sub">For each state with a final roll, the rise from the draft to the final roll as a share of the names the draft left off. The rise counts new voters as well as names put back, so it is the most that could have come back, and the true share is lower. A negative figure means the roll shrank again after the draft.</p>
+  <div class="rank"><div class="twrap" tabindex="0" role="region" aria-label="How much the final roll made up"><table id="tBack"></table></div></div>
+  <p class="finding" id="fBack"></p>
+
+  <h2>Border districts</h2>
+  <p class="sub">The border districts are the Government of India's own list of Border Guarding Districts, as printed in the Staff Selection Commission's notice of 1 December 2025 for constables in the Home Ministry's armed police forces. No district is chosen by this site. Each state is set against itself in its own measure, and states are never ranked against each other. A border district's rate, high or low, says nothing about any elector's citizenship.</p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Border districts against the rest of their state"><table id="tBorder"></table></div>
+  <p class="finding" id="fBorder"></p>
+  <p id="nBorder"></p>
+  <div class="twrap" tabindex="0" role="region" aria-label="Reasons entered, border districts and the rest"><table id="tBorderWhy"></table></div>
+  <p id="nBorderWhy"></p>
+
+  <p class="note">The tables behind this page download as CSV: <a href="../../data/india/reserved.csv" download>reserved seats</a>, <a href="../../data/india/border.csv" download>border districts</a> and <a href="../../data/india/final_rolls.csv" download>final rolls by state</a>.</p>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</article>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/india.js"></script>
+<script>
+Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.json'), SIR.json('data/india/border.json')]).then(function (r) {
+  var R = r[0].states, S = r[1].states, F = r[1].final, B = r[2];
+  var p1 = function (x) { return x == null ? '–' : SIR.d(x, 1); };
+  var head = function (cells) { return '<thead><tr>' + cells.map(function (c, i) { return '<th' + (i === 0 ? ' class="l"' : '') + '>' + c + '</th>'; }).join('') + '</tr></thead>'; };
+  var row = function (cells, cls) { return '<tr' + (cls ? ' class="' + cls + '"' : '') + '>' + cells.map(function (c, i) { return '<td' + (i === 0 ? ' class="l"' : '') + '>' + c + '</td>'; }).join('') + '</tr>'; };
+
+  // reserved seats
+  var sign = function (x) { return x == null ? '–' : (x > 0 ? '+' : '') + SIR.d(x, 1); };
+  document.getElementById('tRes').innerHTML = head(['State', 'Measure', 'General seats', 'SC seats', 'ST seats', 'SC seats against general seats in the same district', 'ST seats against general seats in the same district']) + '<tbody>' +
+    R.map(function (s) {
+      return row([s.state, s.unit, p1(s.GEN.rate), s.SC ? p1(s.SC.rate) + ' (' + s.SC.seats + ')' : '–', s.ST ? p1(s.ST.rate) + ' (' + s.ST.seats + ')' : '–',
+        s.SC && s.SC.compared ? sign(s.SC.gap_vs_district) + ', higher in ' + s.SC.above_district + ' of ' + s.SC.compared : '–',
+        s.ST && s.ST.compared ? sign(s.ST.gap_vs_district) + ', higher in ' + s.ST.above_district + ' of ' + s.ST.compared : '–']);
+    }).join('') + '</tbody>';
+  var lower = function (c) { return R.filter(function (s) { return s[c] && s[c].rate < s.GEN.rate; }).length; };
+  var withC = function (c) { return R.filter(function (s) { return s[c]; }).length; };
+  var dist = function (c) { return R.filter(function (s) { return s[c] && s[c].gap_vs_district != null && s[c].gap_vs_district < 0; }).length; };
+  var distN = function (c) { return R.filter(function (s) { return s[c] && s[c].gap_vs_district != null; }).length; };
+  document.getElementById('fRes').innerHTML = '<b>Seats reserved for Scheduled Castes lost a smaller share of their roll than general seats in ' + lower('SC') + ' of ' + withC('SC') + ' states, and seats reserved for Scheduled Tribes in ' + lower('ST') + ' of ' + withC('ST') + '.</b> ' +
+    'Part of that can be where reserved seats are. Set against the general seats of their own district, SC seats were still lower on average in ' + dist('SC') + ' of ' + distN('SC') + ' states, but the gap is smaller, and within a district a reserved seat was higher than the general seats in some cases in every state.';
+  document.getElementById('nRes').textContent = 'The figures in brackets are the number of reserved seats. The district columns give the average difference, in names per 100, between each reserved seat and the general seats of its district, and how many reserved seats were higher. Tamil Nadu, West Bengal and Kerala\'s reserved seats are taken from public lists of each assembly\'s seats and checked against the Delimitation Order\'s totals. Rajasthan and Uttarakhand are left out because their constituency figures cover a different stretch of time.';
+
+  // how much came back
+  var fin = S.filter(function (s) { return s.made_up_pct != null; }).sort(function (a, b) { return b.made_up_pct - a.made_up_pct; });
+  var mx = Math.max.apply(null, fin.map(function (s) { return Math.abs(s.made_up_pct); }));
+  var flag = function (s) { return s.reconciles === 'net only' ? ' (net figure only)' : s.reconciles === 'no' ? ' (figures do not add up)' : s.reconciles === 'rounded' ? ' (rounded)' : ''; };
+  document.getElementById('tBack').innerHTML = head(['State', 'Share made up', '']) + '<tbody>' +
+    fin.map(function (s) {
+      var w = (100 * Math.abs(s.made_up_pct) / mx).toFixed(1);
+      return row([SIR.esc(s.state) + '<span class="pill">' + flag(s) + '</span>', SIR.pct(s.made_up_pct), '<div class="bar" style="width:' + w + '%' + (s.made_up_pct < 0 ? ';background:var(--muted)' : '') + '"></div>']);
+    }).join('') + '</tbody>';
+  var neg = fin.filter(function (s) { return s.made_up_pct < 0; });
+  var under25 = fin.filter(function (s) { return s.made_up_pct >= 0 && s.made_up_pct < 25; }).length;
+  document.getElementById('fBack').innerHTML = '<b>Across the ' + F.states + ' states with a final roll, the final rolls made up at most ' + SIR.pct(F.made_up_pct) + ' of what the drafts cut.</b> ' +
+    'In ' + under25 + ' of them it was under a quarter, and in ' + neg.length + ' (' + neg.map(function (s) { return s.state; }).join(', ') + ') the roll shrank again after the draft. West Bengal\'s fall after the draft is the 60 lakh names held back for adjudication.';
+
+  // borders
+  var bs = B.states, hi = bs.filter(function (s) { return s.border.rate > s.interior.rate; });
+  var lo = bs.filter(function (s) { return s.border.rate <= s.interior.rate; });
+  var near = function (s) { return Math.abs(s.ratio - 1) < 0.02; };
+  var list = function (a) { return a.map(function (s) { return s.state; }).join(', ').replace(/, ([^,]*)$/, ' and $1'); };
+  document.getElementById('tBorder').innerHTML = head(['State', 'Measure', 'Border districts', 'Rest of the state', 'Rest of the state without its city', 'Border districts higher than the rest']) + '<tbody>' +
+    bs.map(function (s) {
+      return row(['<a href="../../' + s.page + '">' + SIR.esc(s.state) + '</a>', s.unit, p1(s.border.rate) + ' (' + s.border.districts + ')', p1(s.interior.rate),
+        s.interior_without_city ? p1(s.interior_without_city.rate) + ' (without ' + s.city_districts.join(', ') + ')' : '–', s.above + ' of ' + s.districts.length]);
+    }).join('') + '</tbody>';
+  var even = bs.filter(near), up = hi.filter(function (s) { return !near(s); }), down = lo.filter(function (s) { return !near(s); });
+  document.getElementById('fBorder').innerHTML = '<b>The border districts show no single pattern.</b> They lost more than the rest of their state in ' + list(up) + ', about the same in ' + list(even) + ', and fewer in ' + list(down) + '.';
+  var wb = bs.filter(function (s) { return s.state === 'West Bengal'; })[0], bh = bs.filter(function (s) { return s.state === 'Bihar'; })[0];
+  document.getElementById('nBorder').innerHTML = 'The large cities lost the most names and none of them is on the border, so the fifth column leaves the city out. In West Bengal that turns the comparison round. The border districts\' roll fell by ' + p1(wb.border.rate) + ' per 100, below the ' + p1(wb.interior.rate) + ' of the rest of the state but above its ' + p1(wb.interior_without_city.rate) + ' once Kolkata is left out. Bihar\'s seven border districts are the same seven Nepal-border districts the <a href="../../bihar/border/">Bihar border page</a> uses, which sets them against the rest in more detail. Rajasthan is left out, because its district figure is the change in the roll over more than two years and Barmer, one of its four border districts, was split in 2023.';
+  var why = bs.filter(function (s) { return s.border.dead_share != null; });
+  document.getElementById('tBorderWhy').innerHTML = head(['State', 'Entered as enrolled elsewhere, border', 'Rest of the state', 'Entered as shifted or absent, border', 'Rest of the state', 'Entered as dead, border', 'Rest of the state']) + '<tbody>' +
+    why.map(function (s) { return row([SIR.esc(s.state), p1(s.border.elsewhere_share) + '%', p1(s.interior.elsewhere_share) + '%', p1(s.border.shifted_absent_share) + '%', p1(s.interior.shifted_absent_share) + '%', p1(s.border.dead_share) + '%', p1(s.interior.dead_share) + '%']); }).join('') + '</tbody>';
+  document.getElementById('nBorderWhy').textContent = 'Where the reasons were published by district, the share of the names left off that were entered as enrolled somewhere else was higher in the border districts than in the rest of the state, in ' + list(why.filter(function (s) { return s.border.elsewhere_share > s.interior.elsewhere_share; })) + '. A reason is what the officer wrote down, and nobody checked it. "Enrolled elsewhere" means on another roll in India, and says nothing about anyone\'s citizenship.';
+
+  var sc = R.filter(function (s) { return s.SC; });
+  SIR.inShort([
+    'Seats reserved for Scheduled Castes lost a smaller share of their roll than general seats in ' + lower('SC') + ' of ' + withC('SC') + ' states, and seats reserved for Scheduled Tribes in ' + lower('ST') + ' of ' + withC('ST') + '.',
+    'Part of the gap is where the seats are. Against the general seats of their own district, SC seats were lower on average in ' + dist('SC') + ' of ' + distN('SC') + ' states, by less.',
+    'Across the ' + F.states + ' states with a final roll, the final rolls made up at most ' + SIR.pct(F.made_up_pct) + ' of the names the drafts left off, and in ' + neg.length + ' the roll shrank again.',
+    'On the Government of India\'s own list of border districts, the border lost more names than the rest of its state in ' + list(up) + ', about the same in ' + list(even) + ' and fewer in ' + list(down) + '.'
+  ], 'A reserved seat describes a place, and says nothing about which electors were removed from it. The rise to the final roll includes new voters, so the share made up is a ceiling. A border district\'s rate says nothing about any elector\'s citizenship.');
+  SIR.showFaq('india', 'compare');
+}).catch(SIR.fail);
+</script>

@@ -30,6 +30,12 @@
          L('Its districts, because no state published its figures by city boundary. Each city\'s districts and its suburbs are listed at the foot of the page. Kolkata and Kochi are measured by the fall in the roll, because their states published no names left off below the state.'), ['cities', 'faq']],
         [L('Why is Patna not ranked with the other cities?'),
          L('Bihar published its roll before the revision for the state only, so its rate is counted against the 2025 roll, a different base from the other cities\'. On that count Patna lost fewer names than Bihar as a whole.'), ['cities', 'faq']],
+        [L('Did seats reserved for Scheduled Castes and Tribes lose more names?'),
+         L('No. In the states with figures by constituency, reserved seats lost a smaller share of their roll than general seats, and mostly still did when set against the general seats of their own district. A reserved seat describes a place, though, and most of its electors usually do not belong to the group it is reserved for, so this says nothing about which electors were removed.'), ['compare', 'faq']],
+        [L('Did border districts lose more names?'),
+         L('Not in any one way. On the Government of India\'s own list of border districts, they lost more than the rest of their state in Bihar and Uttarakhand, about the same in Uttar Pradesh, and fewer in Gujarat and West Bengal. A border district\'s rate says nothing about any elector\'s citizenship.'), ['compare', 'faq']],
+        [L('Where does the list of border districts come from?'),
+         L('It is the Government of India\'s list of Border Guarding Districts, printed in the Staff Selection Commission\'s notice of 1 December 2025 for constables in the Home Ministry\'s armed police forces. No district on it was picked by this site. Its seven Bihar districts are the seven Nepal-border districts the Bihar pages use.'), ['compare', 'faq']],
         [L('Were the rolls over-full before the revision?'),
          L('Mostly not. Across the {n} states with population projections, the rolls held {pre} of adults before the revision, and only {k} had more names on the roll than adults.', { n: A.states, pre: SIR.pct(100 * A.roll_total / A.adults_total), k: A.over_100.length }) + ' ' +
          (Math.abs(A.rho_rate) < 0.2 ? L('States with the fullest rolls did not remove more.') : ''), ['main']],
