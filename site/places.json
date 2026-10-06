@@ -32,6 +32,7 @@
         ["india/report/", "Full report, online", false],
         ["reports/sir-india-report.pdf", "Full report, PDF", true],
         ["reports/sir-india-deck.pptx", "Slides, PowerPoint", true],
+        ["reports/indian-express-plus-election-commission-2026-10.pdf", "The Indian Express special issue on the Commission, PDF", false],
         ["data/india/states.csv", "State table, CSV", true], ["data/india/lok_sabha_electors.csv", "Lok Sabha electors since 1984, CSV", true], ["data/india/margins_ls2024.csv", "Removals against 2024 Lok Sabha margins, CSV", true], ["data/india/final_rolls.csv", "Final rolls by state, CSV", true], ["data/india/women_removed.csv", "Women among the removed, CSV", true], ["data/india/process_timeline.csv", "Rule changes, dated, CSV", true], ["data/india/process_schedules.csv", "Each state's dates, CSV", true], ["data/india/notices.csv", "Notices by state, CSV", true]
       ]
     },
@@ -262,6 +263,24 @@
       "downloads": [
         ["data/gujarat/constituencies.csv", "Constituency table, CSV", true],
         ["data/gujarat/districts.csv", "District table, CSV", true]
+      ]
+    },
+    {
+      "id": "uk",
+      "label": "Uttarakhand 2026",
+      "subtitle": "Uttarakhand 2026 · the roll before and after the draft, constituency by constituency",
+      "band": "aipan",
+      "color": "8a2c1d",
+      "class": "uk",
+      "nav_label": "Uttarakhand pages",
+      "pages": [
+        ["uttarakhand/", "Overview", "i0"],
+        ["uttarakhand/faq/", "FAQ", "i12"],
+        ["uttarakhand/method/", "Method", "i10"]
+      ],
+      "downloads": [
+        ["data/uttarakhand/constituencies.csv", "Constituency table, CSV", true],
+        ["data/uttarakhand/districts.csv", "District table, CSV", true]
       ]
     }
   ]

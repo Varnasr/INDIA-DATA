@@ -91,3 +91,10 @@ The 10 polygons with no constituency number (`AC_NO` 0), the city blocks of
 Ahmedabad and Surat and pieces of creek and coast, are each assigned to their DataMeet district
 (Kachchh, Jamnagar, Ahmedabad, Bharuch, Bhavnagar, Surat). Vav-Tharad, which
 the final roll's table prints apart from Banaskantha, is not drawn separately.
+
+# Uttarakhand
+
+`uttarakhand.json` (70 constituencies) is cut from the same DataMeet
+shapefile, where the state is spelled `UTTARKHAND`, with the same mapshaper
+command. Every shape's number was checked against the constituency's name in
+`data/uttarakhand/raw/ac.csv`.

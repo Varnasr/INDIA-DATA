@@ -1,0 +1,41 @@
+<!--page {"title": "Uttarakhand SIR 2026: sources and method", "description": "Where the Uttarakhand figures come from, how they were checked, and what they cannot show.", "place": "uk"} -->
+<main id="main">
+<div class="page-head"><h1>Sources and method</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
+
+<article class="state" lang="en" dir="ltr" data-no-i18n>
+  <h2>What is counted</h2>
+  <div class="qa"><h3>The state figures</h3><p>The Chief Electoral Officer (CEO) keeps Uttarakhand's electoral rolls for the Election Commission. The <a href="https://cdnbbsr.s3waas.gov.in/s3cbf8710b43df3f2c1553e649403426df/uploads/2026/07/20260801442066944.pdf">CEO's press note 36/2026 of 14 July 2026</a> gives the roll on 8 June 2026, when the revision began (<span id="mBefore"></span>), the draft roll (<span id="mDraft"></span>) by sex, and a chart of the names left off under four reasons. The <a href="https://cdnbbsr.s3waas.gov.in/s3cbf8710b43df3f2c1553e649403426df/uploads/2026/10/202610031173939115.pdf">press note 63/2026 of 3 October 2026</a> gives the final roll (<span id="mFinal"></span>) by sex, the claims and objections admitted, and the table below.</p></div>
+  <div class="qa"><h3>The constituency table</h3><p>Pages 3 and 4 of press note 63/2026 are a scanned table of all 70 assembly constituencies, grouped by the 13 districts. For each it gives the draft roll, the claims admitted (Form 6 and 6A, and Form 8 for an elector moving in), the objections admitted (Form 7, and Form 8 for an elector moving out) and the final roll, each for men, women and third gender. The site transcribed it by hand and is not built unless every row checks. In each constituency, for men, women and third gender separately, the draft plus the claims less the objections must equal the final roll. The claims and objections must add to their printed totals, the constituencies to the printed total of their district, and the districts to the state total and to both press notes. All of them hold. Constituency names are written in the Election Commission's spelling. The table prints constituency 35 as Haridwar, where the Commission's name is Haridwar Rural, and leaves off the SC mark of Bhagwanpur, Gangolihat, Bageshwar and Someshwar.</p></div>
+  <div class="qa"><h3>Per 1,000 on the draft</h3><p>Names added and removed after the draft are counted for every 1,000 electors on a constituency's draft roll. They are a few per cent of a roll, and per 1,000 keeps the figures whole enough to read.</p></div>
+  <div class="qa"><h3>The plains and the hills</h3><p>The plains districts are Dehradun, Haridwar, Nainital and Udham Singh Nagar, and the other nine are the hill districts. Dehradun and Nainital also take in hill constituencies, such as Chakrata, Mussoorie, Bhimtal and Nainital itself, so the split is by district and says so wherever it is used.</p></div>
+  <div class="qa"><h3>Notices</h3><p>The counts of notices are from the press, quoting the CEO, and are marked as such. They are shown with every other state's on <a href="../../india/process/#notices-the-no-mapping-list-and-the-discrepancy-list">How the revision was run</a>.</p></div>
+
+  <h2>What these tables cannot show</h2>
+  <ul class="plain">
+    <li>How many names were left off the draft in each constituency or district, or by sex. The roll before the revision and the reasons were published for the state only, so every constituency figure is about the change from the draft to the final roll.</li>
+    <li>Why an elector was removed after the draft. The table counts objections admitted, with no reason. More women than their share were removed in most constituencies, and the table cannot say why.</li>
+    <li>How many of the names added were people left off the draft and how many were enrolling for the first time. So the net rise after the draft is the most that could have been put back.</li>
+    <li>Whether each removal was right.</li>
+  </ul>
+
+  <h2>Downloads</h2>
+  <p>The constituency and district tables behind every chart are in the Downloads menu at the top of the page.</p>
+
+  <h2>Analysis of the named lists</h2>
+  <p>This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href="https://sabarinstitute.org/">Sabar Institute</a>.</p>
+</article>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/uttarakhand.js"></script>
+<script>
+SIR.json('data/uttarakhand/summary.json').then(function (s) {
+  document.getElementById('mBefore').textContent = SIR.n(s.roll_before);
+  document.getElementById('mDraft').textContent = SIR.n(s.draft);
+  document.getElementById('mFinal').textContent = SIR.n(s.final);
+  SIR.showFaq('uk', 'method');
+}).catch(SIR.fail);
+</script>

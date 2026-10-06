@@ -32,6 +32,7 @@ const up = J('uttarpradesh/summary.json');
 const dl = J('delhi/summary.json');
 const mh = J('maharashtra/summary.json');
 const gj = J('gujarat/summary.json');
+const uk = J('uttarakhand/summary.json');
 
 // [place id, place name, big figure, the line under it, a second line]
 const CARDS = [
@@ -61,6 +62,8 @@ const CARDS = [
     `${p(mh.per_100)} of every 100 electors, in ${mh.districts} districts`],
   ['gj', 'Gujarat 2026', n(gj.removed), `names left off Gujarat's draft roll`,
     `More than the 2022 winning margin in ${gj.over_margin} of ${gj.acs} constituencies`],
+  ['uk', 'Uttarakhand 2026', n(uk.left_off), `names left off Uttarakhand's draft roll`,
+    `Women were ${p(uk.women_objections_pct)}% of those removed after it`],
 ];
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
