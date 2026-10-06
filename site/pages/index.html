@@ -93,8 +93,8 @@
     order.slice(1).forEach(function (a) { box.appendChild(a); });
   })();
 // The all-India map: names left off per 100 electors, from data/india/states.json
-Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')]).then(function (r) {
-  var I = r[0], geo = r[1], byName = {}, byId = {};
+Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json'), SIR.json('data/india/women.json'), SIR.json('data/india/cities.json'), SIR.json('data/india/margins.json')]).then(function (r) {
+  var I = r[0], geo = r[1], W = r[2].summary, C = r[3].summary, M = r[4], byName = {}, byId = {};
   var ALIAS = { 'Andaman & Nicobar': 'Andaman and Nicobar Islands', 'Jammu & Kashmir': 'Jammu and Kashmir' };
   var PAGE = { 'Bihar': 'bihar/', 'Tamil Nadu': 'tamilnadu/', 'Karnataka': 'karnataka/', 'West Bengal': 'westbengal/', 'Kerala': 'kerala/', 'Rajasthan': 'rajasthan/', 'Uttar Pradesh': 'uttarpradesh/', 'Delhi': 'delhi/', 'Maharashtra': 'maharashtra/', 'Gujarat': 'gujarat/', 'Uttarakhand': 'uttarakhand/', 'Telangana': 'hyderabad/telangana/' };
   I.states.forEach(function (st) { byName[st.state] = st; });
@@ -112,7 +112,23 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')
   dots.setAttribute('aria-label', L('{p} of every 100 electors were left off the draft rolls.', { p: SIR.d(I.total.per_100, 1) }));
   dots.innerHTML = Array.from({ length: 100 }, function (x, i) { return '<i' + (i < red ? ' class="on"' : '') + '></i>'; }).join('');
   var cr = function (x) { return L('{x} crore', { x: (x / 1e7).toFixed(2) }); };
-  document.getElementById('kpis').innerHTML = [[cr(I.total.removed), L('names left off the draft rolls')], [SIR.d(I.total.per_100, 1), L('of every 100 electors')], [I.total.states, L('states and union territories in the revision')], [SIR.d(hi.per_100, 1), L('per 100 in {s}, the highest share', { s: hi.state })]]
+  // the first figure stays; the other three come from this list, three a day
+  // in turn (SIR.day(), counted in India, so every visitor sees the same three)
+  var X = I.total, ab = M.assembly.filter(function (a) { return a.kind === 'removed'; });
+  var pool = [
+    [SIR.d(X.per_100, 1), L('of every 100 electors')],
+    [X.states, L('states and union territories in the revision')],
+    [SIR.d(hi.per_100, 1), L('per 100 in {s}, the highest share', { s: hi.state })],
+    [SIR.d(lo.per_100, 1), L('per 100 in {s}, the lowest share', { s: lo.state })],
+    [SIR.d(X.shares.dead, 1) + '%', L('of the names left off were entered as dead')],
+    [SIR.d(X.shares.shifted_absent_other, 1) + '%', L('of the names left off were entered as shifted, absent or for another reason')],
+    [cr(X.duplicate), L('names were entered as enrolled more than once')],
+    [L('{a} of {b}', { a: W.over, b: W.states }), L('states where women were a larger share of the names left off than of the roll')],
+    [L('{a} of {b}', { a: C.above_state, b: C.compared }), L('large cities that lost more names than their state')],
+    [L('{a} of {b}', { a: ab.reduce(function (t, a) { return t + a.over_margin; }, 0), b: ab.reduce(function (t, a) { return t + a.seats; }, 0) }), L('assembly seats in {s} where more names were removed than the winning margin', { s: ab.map(function (a) { return a.state; }).reduce(function (x, y) { return L('{a} and {b}', { a: x, b: y }); }) })]
+  ];
+  var k0 = (SIR.day() * 3) % pool.length, picks = [0, 1, 2].map(function (i) { return pool[(k0 + i) % pool.length]; });
+  document.getElementById('kpis').innerHTML = [[cr(I.total.removed), L('names left off the draft rolls')]].concat(picks)
     .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   // the same figures as a ranked list, so a phone does not depend on the map
   var max = hi.per_100, rows = have.slice(), at = rows.findIndex(function (st) { return st.per_100 < I.total.per_100; });
