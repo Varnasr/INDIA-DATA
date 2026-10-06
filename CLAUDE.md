@@ -160,6 +160,19 @@ page and on the Bihar and Hyderabad method pages. `#s-<state>` (lower case,
 hyphens: `#s-tamil-nadu`) outlines that state's row and scrolls to its chart;
 `#t-<date>` opens on a timeline entry.
 
+**Where the revision stands** (`india/progress/`) is the progress board: for
+each of the 32 states and UTs, its stage as of `as_of` in `process.json`,
+worked out in the page script from the latest date each schedule step gives
+and from `states.json` (a draft is published when `removed` is held, a final
+roll when `electors_final` is held, dated by `final_date` when known). A final
+roll past its latest scheduled date and not held is "not yet found", never
+"late" or "delayed", and the page says that says nothing about why. A state
+with no draft yet takes no stage from its order's dates (Tripura's were not
+kept). It draws one calendar (`VIZ.gantt` with `single` and `today`) and a
+lollipop of days from the first house visit to the final roll, and is English
+only like the process page. Update `process.json` and `final.csv`; the page
+follows.
+
 **The SIR in numbers** (`india/numbers/`) is the one-page summary: the roll
 before, the names left off, by phase and in the ten largest states, each with
 its source, with three charts (the roll before against the draft, every
