@@ -20,11 +20,12 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "india",
-      "nav_label": "All India pages", "menu": [["india/numbers/", "The SIR in numbers"], ["india/cities/", "The cities"], ["india/compare/", "Comparisons"], ["india/process/", "How the revision was run"], ["india/progress/", "Where the revision stands"]],
+      "nav_label": "All India pages", "menu": [["india/numbers/", "The SIR in numbers"], ["india/cities/", "The cities"], ["india/women/", "Women"], ["india/compare/", "Comparisons"], ["india/process/", "How the revision was run"], ["india/progress/", "Where the revision stands"]],
       "pages": [
         ["india/", "All India", "i0"],
         ["india/numbers/", "In numbers", "i11"],
         ["india/cities/", "Cities", "i7"],
+        ["india/women/", "Women", "i3"],
         ["india/compare/", "Comparisons", "i5"],
         ["india/process/", "How it was run", "i15"], ["india/progress/", "Where it stands", "i15"], ["india/method/", "Sources and method", "i10"],
         ["india/faq/", "FAQ", "i12"],
@@ -35,7 +36,7 @@
         ["reports/sir-india-report.pdf", "Full report, PDF", true],
         ["reports/sir-india-deck.pptx", "Slides, PowerPoint", true],
         ["reports/indian-express-plus-election-commission-2026-10.pdf", "The Indian Express special issue on the Commission, PDF", false],
-        ["data/india/states.csv", "State table, CSV", true], ["data/india/lok_sabha_electors.csv", "Lok Sabha electors since 1984, CSV", true], ["data/india/margins_ls2024.csv", "Removals against 2024 Lok Sabha margins, CSV", true], ["data/india/final_rolls.csv", "Final rolls by state, CSV", true], ["data/india/women_removed.csv", "Women among the removed, CSV", true], ["data/india/process_timeline.csv", "Rule changes, dated, CSV", true], ["data/india/process_schedules.csv", "Each state's dates, CSV", true], ["data/india/notices.csv", "Notices by state, CSV", true], ["data/india/cities.csv", "Cities against their states, CSV", true], ["data/india/reserved.csv", "Reserved and general seats, CSV", true], ["data/india/border.csv", "Border districts against the rest, CSV", true]
+        ["data/india/states.csv", "State table, CSV", true], ["data/india/lok_sabha_electors.csv", "Lok Sabha electors since 1984, CSV", true], ["data/india/margins_ls2024.csv", "Removals against 2024 Lok Sabha margins, CSV", true], ["data/india/final_rolls.csv", "Final rolls by state, CSV", true], ["data/india/women_removed.csv", "Women among the removed, CSV", true], ["data/india/process_timeline.csv", "Rule changes, dated, CSV", true], ["data/india/process_schedules.csv", "Each state's dates, CSV", true], ["data/india/notices.csv", "Notices by state, CSV", true], ["data/india/cities.csv", "Cities against their states, CSV", true], ["data/india/reserved.csv", "Reserved and general seats, CSV", true], ["data/india/border.csv", "Border districts against the rest, CSV", true], ["data/india/women.csv", "Women, state by state and district by district, CSV", true]
       ]
     },
     {
@@ -97,7 +98,7 @@
       ]
     },
     {
-      "id": "tn",
+      "id": "tn", "group": "states",
       "label": "Tamil Nadu 2026",
       "subtitle": "Tamil Nadu 2026 · every constituency, every district",
       "band": "kolam",
@@ -118,7 +119,7 @@
       ]
     },
     {
-      "id": "ka",
+      "id": "ka", "group": "states",
       "label": "Karnataka 2026",
       "subtitle": "Karnataka 2026 · every district, every recorded reason",
       "band": "kasuti",
@@ -137,7 +138,7 @@
       ]
     },
     {
-      "id": "wb",
+      "id": "wb", "group": "states",
       "label": "West Bengal 2026",
       "subtitle": "West Bengal 2026 · every constituency, the roll from 2024 to the election",
       "band": "alpana",
@@ -158,7 +159,7 @@
       ]
     },
     {
-      "id": "kl",
+      "id": "kl", "group": "states",
       "label": "Kerala 2026",
       "subtitle": "Kerala 2026 · every constituency, the roll from January 2025 to the election",
       "band": "kasavu",
@@ -179,7 +180,7 @@
       ]
     },
     {
-      "id": "rj",
+      "id": "rj", "group": "states",
       "label": "Rajasthan 2026",
       "subtitle": "Rajasthan 2026 · the state's removals, and every constituency's roll from 2023",
       "band": "bandhani",
@@ -197,7 +198,7 @@
       ]
     },
     {
-      "id": "up",
+      "id": "up", "group": "states",
       "label": "Uttar Pradesh 2026",
       "subtitle": "Uttar Pradesh 2026 · the names left off, district by district",
       "band": "chikan",
@@ -214,7 +215,7 @@
       ]
     },
     {
-      "id": "dl",
+      "id": "dl", "group": "states",
       "label": "Delhi 2026",
       "subtitle": "Delhi 2026 · the names left off, constituency by constituency",
       "band": "jaali",
@@ -232,7 +233,7 @@
       ]
     },
     {
-      "id": "mh",
+      "id": "mh", "group": "states",
       "label": "Maharashtra 2026",
       "subtitle": "Maharashtra 2026 · the names left off, district by district",
       "band": "paithani",
@@ -249,7 +250,7 @@
       ]
     },
     {
-      "id": "gj",
+      "id": "gj", "group": "states",
       "label": "Gujarat 2026",
       "subtitle": "Gujarat 2026 · the names left off, constituency by constituency",
       "band": "patola",
@@ -268,7 +269,7 @@
       ]
     },
     {
-      "id": "uk",
+      "id": "uk", "group": "states",
       "label": "Uttarakhand 2026",
       "subtitle": "Uttarakhand 2026 · the roll before and after the draft, constituency by constituency",
       "band": "aipan",

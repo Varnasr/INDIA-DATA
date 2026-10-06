@@ -218,12 +218,12 @@
       var half = Math.max.apply(null, placed.map(function (q) { return Math.abs(q.y); }).concat([0])) + R + 4;
       return { r: r, placed: placed, half: Math.max(half, side ? 11 : 22) };
     });
-    var lab = phone() && !side ? 18 : 0, H = top + rows.reduce(function (a, q) { return a + q.half * 2 + lab + (r_mark(q) ? 14 : 0); }, 0) + 34;
+    var lab = phone() && !side ? 18 : 0, axh = o.axis && !phone() ? 16 : 0, H = top + rows.reduce(function (a, q) { return a + q.half * 2 + lab + (r_mark(q) ? 14 : 0); }, 0) + 34 + axh;
     function r_mark(q) { return (q.r.mark || []).length; }
     var s = svgIn(box, W, H, o.label);
     for (var t = min; t <= max + 1e-9; t += step) {
-      el('line', { x1: x(t), x2: x(t), y1: top - 6, y2: H - 28, class: Math.abs(t) < 1e-9 && min < 0 ? 'vzero' : 'vgrid' }, s);
-      el('text', { x: x(t), y: H - 12, 'text-anchor': 'middle', class: 'vval' }, s, tickText(t, step));
+      el('line', { x1: x(t), x2: x(t), y1: top - 6, y2: H - 28 - axh, class: Math.abs(t) < 1e-9 && min < 0 ? 'vzero' : 'vgrid' }, s);
+      el('text', { x: x(t), y: H - 12 - axh, 'text-anchor': 'middle', class: 'vval' }, s, tickText(t, step));
     }
     var y0 = top;
     rows.forEach(function (q) {
@@ -241,7 +241,7 @@
       });
       y0 += q.half * 2;
     });
-    if (o.axis) { if (phone()) foot(s, W / 2, H - 4, o.axis, 52); else el('text', { x: lw + (W - lw) / 2, y: H, 'text-anchor': 'middle', class: 'vval' }, s, o.axis); }
+    if (o.axis) { if (phone()) foot(s, W / 2, H - 4, o.axis, 52); else el('text', { x: lw + (W - lw) / 2, y: H - 4, 'text-anchor': 'middle', class: 'vval' }, s, o.axis); }
     if (o.key) {
       // a key below the axis title, one entry per colour
       var kx = lw + 14;
@@ -492,7 +492,10 @@
       var txt = o.fmt ? o.fmt(r.v) : tickText(r.v, Math.abs(r.v) < 10 ? 0.1 : 1);
       el('title', {}, c, r.name + ': ' + txt);
       // a negative value's figure sits above its stem, clear of the names
-      if (r.v < 0) el('text', { x: x(r.v) + 9, y: y - 8, 'text-anchor': 'start', class: 'vval' }, s, txt);
+      // a negative value's figure sits left of its dot where there is room,
+      // and above its stem where the dot is close to the names
+      if (r.v < 0 && x(r.v) - lw > 12 + 7 * txt.length) el('text', { x: x(r.v) - 10, y: y, 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval' }, s, txt);
+      else if (r.v < 0) el('text', { x: x(r.v) + 9, y: y - 8, 'text-anchor': 'start', class: 'vval' }, s, txt);
       else el('text', { x: x(r.v) + 10, y: y, 'dominant-baseline': 'middle', class: 'vval' }, s, txt);
     });
     if (o.axis) foot(s, lw + (W - lw) / 2, H - 8, o.axis, phone() ? 40 : 90);
@@ -504,7 +507,7 @@
     measure(box);
     var n = o.cats.length, k = o.series.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = phone() ? 118 : 230, rh = phone() ? 30 : 26;
     var leg = phone() ? 10 + k * 20 : 26, H = leg + 10 + n * rh + (o.axis ? 46 : 26), s = svgIn(box, W, H, o.label);
-    var all = [].concat.apply([], o.series.map(function (z) { return z.vals; }));
+    var all = [].concat.apply([], o.series.map(function (z) { return z.vals; })).filter(function (v) { return v != null; });
     // a dot plot need not start at zero: where every value sits well away
     // from it, fit the axis to the values so the differences can be seen
     var mn = Math.min.apply(null, all), mx = Math.max.apply(null, all), pad = (mx - mn) * 0.15 || 1;
@@ -523,10 +526,12 @@
       if (!phone()) lx += 34 + String(z.name).length * 6.6;
     });
     o.cats.forEach(function (c, i) {
-      var y = y0 + i * rh + rh / 2, vals = o.series.map(function (z) { return z.vals[i]; });
+      // a missing value (null) draws no dot and stays out of the joining line
+      var y = y0 + i * rh + rh / 2, vals = o.series.map(function (z) { return z.vals[i]; }).filter(function (v) { return v != null; });
       label(s, lw - 4, y, SIR.short(String(c)), phone() ? 12 : 32, 'end', 'vname light');
       el('line', { x1: x(Math.min.apply(null, vals)), x2: x(Math.max.apply(null, vals)), y1: y, y2: y, class: 'vlink thick' }, s);
       o.series.forEach(function (z, j) {
+        if (z.vals[i] == null) return;
         var d = el('circle', { cx: x(z.vals[i]), cy: y, r: phone() ? 5 : 6, style: paint(z.col) }, s);
         el('title', {}, d, c + ', ' + z.name + ': ' + tickText(z.vals[i], Math.abs(z.vals[i]) < 10 ? 0.1 : 1));
       });

@@ -92,7 +92,7 @@ def build():
             if c == 'GEN' or not rs:
                 continue
             # each reserved seat against the general seats of its own district
-            gaps, above = [], 0
+            gaps, above, each = [], 0, []
             for r in rs:
                 g = [x for x in S if x['district'] == r['district'] and x['cat'] == 'GEN']
                 if not g:
@@ -100,7 +100,8 @@ def build():
                 gap = 100 * r['count'] / r['base'] - rate(g)
                 gaps.append(gap)
                 above += gap > 0
-            row[c].update(compared=len(gaps), above_district=above, gap_vs_district=round(sum(gaps) / len(gaps), 2) if gaps else None)
+                each.append(dict(ac=r['ac'], name=r['name'], district=r['district'], gap=round(gap, 2)))
+            row[c].update(compared=len(gaps), above_district=above, gap_vs_district=round(sum(gaps) / len(gaps), 2) if gaps else None, each=each)
         out.append(row)
     return dict(states=out)
 

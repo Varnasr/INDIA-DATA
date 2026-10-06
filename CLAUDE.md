@@ -199,6 +199,28 @@ and say so. The page says the "shifted or absent" share cannot tell moved and
 doubly registered people from residents who were out, and never claims either.
 English only, like the other All India sub-pages.
 
+**Women** (`india/women/`) gathers every count by sex the site holds.
+`scripts/build_women.py` reads only files other builds write (`states.json`'s
+`gender` rows, the state summaries and district files, Bihar's final roll and
+tests) and writes `data/india/women.json` and the CSV; `check_data.py` runs it
+with `--check`. Sections: women's share of the names left off against their
+share of the roll (eleven states, each with its quality flag); per 100 women
+and per 100 men (the roll by sex is the roll before times women's share);
+district by district in Bihar, West Bengal, Kerala and Uttarakhand, each in
+its own measure; after the draft (Bihar, Uttarakhand, Rajasthan); and Bihar's
+deaths and marriage tests. Findings: women were the larger share in 8 of 11
+states and 85 of 89 districts; Delhi is the exception (35.3 men against 29.9
+women per 100). The page says the lists cannot say why.
+
+**Charts first, tables folded.** The cities, women and comparisons pages
+lead each section with a chart and put the full figures in a
+`details.figs` fold. Tables there are drawn by `SIR.table(id, cols, rows)` in
+`sir.js`, which gives each cell its column heading as `data-label`; below
+600px `table.stack` turns every row into a card with each figure named, and
+on a desktop the table keeps to 52rem. Use it for any new table of figures.
+`VIZ.dots` skips a null value, so a city or state missing one series still
+draws.
+
 **Comparisons** (`india/compare/`) carries three. Each state is set against
 itself in its own measure, and states are never ranked against each other.
 
@@ -831,8 +853,11 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   at a reading measure beside a full-width chart is what left wide screens
   half empty.
 - **The header carries a places menu**, not a switch: a pin button naming
-  the current place, opening the list of analyses. It scales to any number
-  of places. On a phone the title takes one row and the controls a row
+  the current place, opening the list of analyses. It folds (`details.grp`):
+  a place's own `menu` pages sit under its `nav_label`, and every place with
+  `"group": "states"` in `places.json` sits under "More states, 2026". A fold
+  opens by itself when the reader is inside it. A new state takes the group
+  field; each fold's list carries `data-i18n-each`. On a phone the title takes one row and the controls a row
   beneath it (language, install, search, places, downloads, reading font,
   theme; print is hidden there): beside the title, seven controls squeezed
   it to a single word. Credit is to PinPoint
