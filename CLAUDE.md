@@ -985,8 +985,11 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   The front page follows the mockup: the headline states the count, a grid
   of 100 dots shows the share, a four-number strip (the count left off stays first; the other three come in turn from a list of ten computed from the All India files, three a day by `SIR.day()`), the map beside a ranked
   list of states (so a phone does not depend on hover), cards to each
-  analysis led by their number, one state featured in the large card each
-  day and the other states following in turn (`SIR.day()`; West Bengal without JavaScript), a finder that links
+  analysis led by their number, every state and territory among them (the 20 on
+  the shared page take their figure from `states.json`), one featured in the
+  large card and the rest in an order shuffled afresh each day from a seed of
+  `SIR.day()`, so every visitor sees the same order on the same day (West
+  Bengal first without JavaScript), a finder that links
   to each state's own, and "How we know". Nothing on it may claim a feature
   the site does not have. With the dyslexia font on, the display sizes come
   down and nothing is set in italics or capitals (`html.dyslexic-font`
@@ -1089,6 +1092,11 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   the colours plugin; `SIR.recolour` sets option fields in place on a theme
   change. Replacing an options object wholesale breaks Chart.js's proxies
   (`this._fn is not a function`).
+- **Lakh and crore.** `SIR.lakh` writes a count of a crore or more in crore
+  (2.89 crore, never 288.7 lakh), and `SIR.lk(x, k)` does the same in plain
+  English for the English-only pages; chart ticks and labels follow the same
+  rule. A count under a lakh is written in full. Use these rather than a
+  page's own `/ 1e5`.
 - Every finding sentence on a page is computed from the JSON when the page
   loads. Do not hardcode a figure in prose.
 - Audited with axe at 1280 and 390, both schemes, all 15 pages: 0 serious or

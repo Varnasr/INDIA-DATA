@@ -15,7 +15,10 @@
     d: function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k); },
     pct: function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k) + '%'; },
     date: function (iso) { if (!iso) return ''; var p = iso.split('-'); return +p[2] + ' ' + ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+p[1] - 1] + ' ' + p[0]; },
-    lakh: function (x) { return L('{x} lakh', { x: (x / 1e5).toFixed(1) }); },
+    // a count of a crore or more is written in crore, anything smaller in lakh
+    lakh: function (x) { return Math.abs(x) >= 1e7 ? L('{x} crore', { x: (x / 1e7).toFixed(2) }) : L('{x} lakh', { x: (x / 1e5).toFixed(1) }); },
+    // the same in plain English, for pages that are English only
+    lk: function (x, k) { return Math.abs(x) >= 1e7 ? (x / 1e7).toFixed(2) + ' crore' : (x / 1e5).toFixed(k == null ? 1 : k) + ' lakh'; },
     esc: function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); },
     // one request per file per page: several scripts on a page read the
     // same file, so the text is kept (and dropped again if the request
@@ -253,7 +256,7 @@
         if (t.maxTicksLimit == null) t.maxTicksLimit = isX ? 5 : 7;
         // 8,000,000 takes a third of a phone's width; 80 lakh does not.
         if (!t.callback) t.callback = function (v, i, ts) {
-          return Math.abs(v) >= 1e5 ? L('{x} lakh', { x: String(+(v / 1e5).toFixed(1)) }) : Chart.Ticks.formatters.numeric.call(this, v, i, ts);
+          return Math.abs(v) >= 1e7 ? L('{x} crore', { x: String(+(v / 1e7).toFixed(2)) }) : Math.abs(v) >= 1e5 ? L('{x} lakh', { x: String(+(v / 1e5).toFixed(1)) }) : Chart.Ticks.formatters.numeric.call(this, v, i, ts);
         };
         if (isX && t.maxRotation == null) { t.maxRotation = 0; t.autoSkipPadding = 14; }
       } else if (isX && t.maxRotation == null && a.type === 'logarithmic') { t.maxRotation = 0; t.autoSkipPadding = 8; }

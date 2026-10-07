@@ -64,7 +64,7 @@
 <script src="../assets/faq/assam.js"></script>
 <script>
 SIR.json('data/assam/summary.json').then(function (d) {
-  var S = d.state, T = d.tribunals, X = d.detention, N = d.nrc, n = SIR.n, lk = function (x) { return (x / 1e5).toFixed(2) + ' lakh'; }, d1 = function (v) { return SIR.d(v, 1); };
+  var S = d.state, T = d.tribunals, X = d.detention, N = d.nrc, n = SIR.n, lk = function (x) { return SIR.lk(x, 2); }, d1 = function (v) { return SIR.d(v, 1); };
   var A = T.assembly_2026;
   // the research notes are written in clauses; the page shows them as sentences
   var cap = function (t) { return t.charAt(0).toUpperCase() + t.slice(1); };

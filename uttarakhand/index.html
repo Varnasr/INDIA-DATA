@@ -121,7 +121,7 @@
 <script>
 Promise.all([SIR.json('data/uttarakhand/summary.json'), SIR.json('data/uttarakhand/districts.json'), SIR.json('data/uttarakhand/constituencies.json'), SIR.json('data/india/notices.json')]).then(function (r) {
   var S = r[0], D = r[1], A = r[2], NT = r[3].states.filter(function (x) { return x.state === 'Uttarakhand'; })[0], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
-  var lk = function (x) { return (x / 1e5).toFixed(2) + ' lakh'; };
+  var lk = function (x) { return SIR.lk(x, 2); };
   var PL = function (x) { return x.plains ? '--fill-red' : '--fill-navy'; };
 
   VIZ.waterfall('vWater', { label: 'Uttarakhand: the roll before the revision, the draft of 14 July and the final roll of 3 October 2026', from: Math.floor(S.draft * 0.85 / 1e6) * 1e6, steps: [

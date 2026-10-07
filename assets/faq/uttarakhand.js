@@ -5,7 +5,7 @@
   var P;
   SIR.faq('uk', 'uttarakhand/faq/', function () {
     return P || (P = Promise.all([SIR.json('data/uttarakhand/summary.json'), SIR.json('data/uttarakhand/districts.json')]).then(function (r) {
-      var s = r[0], D = r[1], lk = function (x) { return (x / 1e5).toFixed(2) + ' lakh'; }, d1 = function (v) { return SIR.d(v, 1); };
+      var s = r[0], D = r[1], lk = function (x) { return SIR.lk(x, 2); }, d1 = function (v) { return SIR.d(v, 1); };
       var scale = 'Uttarakhand\'s draft roll left off ' + lk(s.left_off) + ' names, ' + d1(s.per_100) + ' of every 100 electors on the roll before the revision.';
       var after = 'After the draft, ' + lk(s.claims) + ' names were added and ' + lk(s.objections) + ' removed, so the final roll of 3 October 2026 holds ' + SIR.n(s.net) + ' more than the draft. That is ' + d1(s.made_up_pct) + ' for every 100 left off.';
       var plains = 'The four plains districts hold ' + SIR.pct(s.plains.draft_pct) + ' of the draft roll and account for ' + SIR.pct(s.plains.objections_pct) + ' of the names removed after it.';

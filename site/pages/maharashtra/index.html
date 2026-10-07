@@ -79,7 +79,7 @@
 <script>
 Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharashtra/districts.json'), SIR.json('data/india/notices.json')]).then(function (r) {
   var S = r[0], D = r[1], NT = r[2].states.filter(function (x) { return x.state === 'Maharashtra'; })[0], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
-  var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; };
+  var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return SIR.lk(x, 1); };
   var C = S.city, R = S.rest, nRest = S.districts - S.city_names.length;
   var tok = function (d) { return d.city ? '--fill-red' : '--fill-navy'; };
   var list = function (a) { return a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; };
@@ -95,7 +95,7 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
     'Outside the five city districts the highest is ' + notCity[0].district + ', at ' + d1(notCity[0].per_100) + '. ' + S.above_state + ' of the ' + S.districts + ' districts left off more than the state\'s ' + d1(S.per_100) + ', and ' + S.under_15 + ' left off fewer than 15. ' + last.district + ' left off the fewest, ' + d1(last.per_100) + '.';
 
   var RS = [['shifted_absent_other', 'Shifted, absent or other'], ['dead', 'Dead'], ['duplicate', 'Enrolled at more than one place']];
-  VIZ.rank('vReason', { label: 'Names left off the draft, by the reason entered, as reported in the press', axis: 'Lakh, as reported in the press', fmt: function (v) { return v.toFixed(1) + ' lakh'; },
+  VIZ.rank('vReason', { label: 'Names left off the draft, by the reason entered, as reported in the press', axis: 'Lakh, as reported in the press', fmt: function (v) { return SIR.lk(v * 1e5); },
     rows: RS.map(function (k) { return { name: k[1], v: S.press_reasons[k[0]] / 1e5, col: '--fill-navy' }; }) });
   document.getElementById('fReason').innerHTML = '<b>According to the press, ' + SIR.pct(S.press_shares.shifted_absent_other) + ' of the names left off were entered as shifted, absent or other, ' + SIR.pct(S.press_shares.dead) + ' as dead and ' + SIR.pct(S.press_shares.duplicate) + ' as enrolled at more than one place.</b> ' +
     'The three press figures add up to ' + n(S.press_reasons_sum) + ', which is ' + n(S.press_reasons_sum - S.left_off) + ' more than the CEO\'s total, because each was rounded. They are for the state as a whole, and no count by reason has been published for any district. <a href="' + S.press_source + '">The Indian Express</a> carried them.';

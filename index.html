@@ -80,6 +80,26 @@
   <a class="hub st" href="maharashtra/"><b>Maharashtra 2026</b><span>The names left off the draft roll in each of the 36 districts, and how Mumbai and Pune compare with the rest of the state.</span></a>
   <a class="hub st" href="gujarat/"><b>Gujarat 2026</b><span>Every constituency and district, with the reason recorded, set against the 2022 election result.</span></a>
   <a class="hub st" href="uttarakhand/"><b>Uttarakhand 2026</b><span>Every constituency from the draft to the final roll, by sex, and where names were removed after the draft.</span></a>
+  <a class="hub st" href="chhattisgarh/" data-st="Chhattisgarh"><b>Chhattisgarh 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="madhyapradesh/" data-st="Madhya Pradesh"><b>Madhya Pradesh 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="andhrapradesh/" data-st="Andhra Pradesh"><b>Andhra Pradesh 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="odisha/" data-st="Odisha"><b>Odisha 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="jharkhand/" data-st="Jharkhand"><b>Jharkhand 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="haryana/" data-st="Haryana"><b>Haryana 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="punjab/" data-st="Punjab"><b>Punjab 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="goa/" data-st="Goa"><b>Goa 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="manipur/" data-st="Manipur"><b>Manipur 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="meghalaya/" data-st="Meghalaya"><b>Meghalaya 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="mizoram/" data-st="Mizoram"><b>Mizoram 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="nagaland/" data-st="Nagaland"><b>Nagaland 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="sikkim/" data-st="Sikkim"><b>Sikkim 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="arunachal/" data-st="Arunachal Pradesh"><b>Arunachal Pradesh 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="tripura/" data-st="Tripura"><b>Tripura 2026</b><span>The revision is under way, and no draft roll has been published yet.</span></a>
+  <a class="hub st" href="puducherry/" data-st="Puducherry"><b>Puducherry 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="chandigarh/" data-st="Chandigarh"><b>Chandigarh 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="lakshadweep/" data-st="Lakshadweep"><b>Lakshadweep 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="andaman/" data-st="Andaman and Nicobar Islands"><b>Andaman and Nicobar Islands 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
+  <a class="hub st" href="dnhdd/" data-st="Dadra and Nagar Haveli and Daman and Diu"><b>Dadra and Nagar Haveli and Daman and Diu 2026</b><span>The names left off the draft roll, the reasons entered and what changed by the final roll.</span></a>
 </div>
 
 <h2 id="find-your-constituency">Find your constituency</h2>
@@ -124,10 +144,14 @@
 <script src="assets/viz.js"></script>
 <script>
   // one state is featured each day, in the large card, and the other states
-  // follow in turn after the All India cards
+  // follow after the All India cards in an order that changes every day
   (function () {
     var box = document.querySelector('.hubs'), st = [].slice.call(box.querySelectorAll('a.hub.st'));
-    var k = SIR.day() % st.length, order = st.slice(k).concat(st.slice(0, k));
+    // a fresh order every day: a shuffle seeded by the day, so every visitor
+    // sees the same order on the same day
+    var seed = SIR.day() >>> 0, rnd = function () { seed = (seed + 0x6D2B79F5) >>> 0; var t = seed; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+    var order = st.slice();
+    for (var i = order.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), t = order[i]; order[i] = order[j]; order[j] = t; }
     st.forEach(function (a) { a.classList.remove('big'); });
     order[0].classList.add('big');
     box.insertBefore(order[0], box.firstChild);
@@ -199,6 +223,15 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.js
   var N = { 'india/': cr(T.removed), 'bihar/': SIR.lakh(B.total), 'hyderabad/': SIR.pct(100 * H.deleted / H.electors), 'tamilnadu/': SIR.lakh(r[3].removed),
     'karnataka/': SIR.lakh(r[4].removed), 'westbengal/': r[5].over_margin + ' / ' + r[5].acs, 'kerala/': SIR.pct(r[6].women_fall_pct), 'rajasthan/': SIR.lakh(r[7].left_off),
     'uttarpradesh/': SIR.lakh(r[8].left_off), 'delhi/': SIR.lakh(r[9].left_off), 'maharashtra/': SIR.lakh(r[10].left_off), 'gujarat/': SIR.lakh(r[11].removed), 'uttarakhand/': SIR.lakh(r[12].left_off) };
+  // the states on the shared page take their figures from the All India table
+  var byState = {}; r[0].states.forEach(function (x) { byState[x.state] = x; });
+  document.querySelectorAll('.hubs a.hub[data-st]').forEach(function (a) {
+    var x = byState[a.getAttribute('data-st')];
+    if (!x || !x.removed) return;
+    var n = x.removed >= 1e5 ? SIR.lakh(x.removed) : SIR.n(x.removed);
+    N[a.getAttribute('href')] = n;
+    a.querySelector('span').innerHTML = L('{n} names left off the draft roll, {p} of every 100 electors on the roll before the revision.', { n: n, p: SIR.d(x.per_100, 1) });
+  });
   N['india/cities/'] = SIR.d(r[13].summary.times_max, 1) + '×';
   document.getElementById('hCities').innerHTML = L('In {a} of {n} large cities the city lost a larger share of its roll than its state, up to {x} times the state\'s rate.', { a: r[13].summary.above_state, n: r[13].summary.compared, x: SIR.d(r[13].summary.times_max, 1) });
   document.querySelectorAll('.hubs a.hub').forEach(function (a) { var k = a.getAttribute('href'); if (N[k]) a.insertAdjacentHTML('afterbegin', '<em class="n">' + N[k] + '</em>'); });

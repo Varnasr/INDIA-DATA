@@ -102,7 +102,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   // Indian grouping, whole numbers
   var n = function (x) { return Math.round(x).toLocaleString('en-IN'); };
   var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; };
-  var lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; };
+  var lk = function (x) { return SIR.lk(x, 1); };
   var p1 = function (x) { return (Math.round(x * 10 + 1e-9) / 10).toFixed(1); };
   var rated = S.filter(function (s) { return s.removed && s.electors_before; });
   var before = rated.reduce(function (a, s) { return a + s.electors_before; }, 0);

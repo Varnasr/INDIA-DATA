@@ -9,7 +9,7 @@
   D.n = function (x) { return x == null || isNaN(x) ? '–' : nf.format(Math.round(x)); };
   D.d = function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k); };
   D.pct = function (x, k) { return D.d(x, k) + '%'; };
-  D.lakh = function (x) { return L('{x} lakh', { x: (x / 1e5).toFixed(1) }); };
+  D.lakh = function (x) { return SIR.lakh(x); };
   D.esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   D.sum = function (a, f) { return a.reduce(function (s, x) { return s + (typeof f === 'function' ? f(x) : x[f]); }, 0); };
   D.mean = function (a) { return a.length ? D.sum(a, function (x) { return x; }) / a.length : NaN; };

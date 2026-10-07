@@ -115,7 +115,7 @@
 <script>
 Promise.all([SIR.json('data/rajasthan/summary.json'), SIR.json('data/rajasthan/districts.json'), SIR.json('data/rajasthan/constituencies.json')]).then(function (r) {
   var S = r[0], D = r[1], A = r[2], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
-  var lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; };
+  var lk = function (x) { return SIR.lk(x, 1); };
   // the district whose roll fell most is drawn in red
   var jd = function (d) { return d.district === D[0].district; };
   VIZ.waterfall('vWater', { label: 'Rajasthan: the roll from before the revision to the final roll, 199 constituencies', from: Math.floor(S.draft * 0.85 / 1e6) * 1e6, steps: [

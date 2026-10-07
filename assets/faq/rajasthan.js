@@ -7,7 +7,7 @@
     return P || (P = Promise.all([SIR.json('data/rajasthan/summary.json'), SIR.json('data/rajasthan/districts.json')]).then(function (r) {
       var s = r[0], D = r[1], W = {};
       s.winners.forEach(function (w) { W[w.party] = w; });
-      var lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; }, d1 = function (v) { return SIR.d(v, 1); };
+      var lk = function (x) { return SIR.lk(x, 1); }, d1 = function (v) { return SIR.d(v, 1); };
       var grew = D.filter(function (d) { return d.per_100 < 0; });
       var scale = 'Rajasthan\'s draft roll left off ' + lk(s.left_off) + ' names, ' + d1(s.left_per_100) + ' of every 100 electors on the roll before the revision.';
       var after = 'After the draft ' + lk(s.added) + ' were added and ' + lk(s.deleted_after) + ' more deleted, so ' + lk(s.removed_by_final) + ' had been removed by the time of the final roll. The final roll was ' + lk(s.final - s.draft) + ' larger than the draft, which is at most ' + SIR.pct(s.made_up_pct) + ' of what was left off.';

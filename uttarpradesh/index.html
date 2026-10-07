@@ -99,7 +99,7 @@
 <script>
 Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpradesh/districts.json')]).then(function (r) {
   var S = r[0], D = r[1], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
-  var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; };
+  var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return SIR.lk(x, 1); };
   var RN = { dead: 'Dead', untraceable_absent: 'Untraceable or absent', shifted: 'Permanently shifted', multiple: 'Already enrolled', others: 'Other' };
   var RK = ['shifted', 'untraceable_absent', 'dead', 'multiple', 'others'];
   VIZ.waterfall('vWater', { label: 'Uttar Pradesh: the roll from 27 October 2025 to the final roll of 10 April 2026', from: Math.floor(S.draft * 0.85 / 1e7) * 1e7, steps: [
