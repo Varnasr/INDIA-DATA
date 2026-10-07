@@ -133,10 +133,12 @@ def shell(out, meta, content, scripts):
     places = ('<details class="dl places"><summary class="btn" aria-label="Places">%s <span class="lbl-place">%s</span></summary>'
               '<div class="menu"><div data-i18n-each>%s</div></div></details>' % (PIN, html.escape(current), ''.join(items)))
     dl = ''
-    if place.get('downloads'):
-        links = ''.join('<a href="%s%s"%s>%s</a>' % (root, h, ' download' if d else '', html.escape(t)) for h, t, d in place['downloads'])
-        dl = ('<details class="dl"><summary class="btn">%s <span class="lbl">Downloads</span></summary>'
-              '<div class="menu" data-i18n-each>%s</div></details>' % (DOWN, links))
+    # every place's menu ends with the downloads page, which lists every file
+    # the site publishes with what it holds
+    items_dl = list(place.get('downloads') or []) + [['downloads/', 'All downloads, explained', False]]
+    links = ''.join('<a href="%s%s"%s>%s</a>' % (root, h, ' download' if d else '', html.escape(t)) for h, t, d in items_dl)
+    dl = ('<details class="dl"><summary class="btn">%s <span class="lbl">Downloads</span></summary>'
+          '<div class="menu" data-i18n-each>%s</div></details>' % (DOWN, links))
     # the sitewide search (sir.js): a button, and Ctrl or Command and K
     # installing the site as an app: hidden until the browser offers it (sir.js)
     find = ('<button type="button" class="btn install" hidden>%s <span class="lbl">Install app</span></button>\n      ' % APP) + ('<button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">%s '
@@ -168,8 +170,8 @@ def shell(out, meta, content, scripts):
     # data-i18n-each: the credit and the link are translated apart, so the
     # key does not change with the page's depth.
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s">About this site</a> · <a href="%sterms/">Terms and privacy</a>'
-              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, CFG['email'], CFG['email']))
+              ' · <a href="%s">About this site</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sterms/">Terms and privacy</a>'
+              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, CFG['email'], CFG['email']))
     # every page that loads sir.js gets viz.js after it: SIR.chart and the
     # dashboards hand ranked lists and side-by-side measures to it
     if 'assets/sir.js' in scripts and 'assets/viz.js' not in scripts:

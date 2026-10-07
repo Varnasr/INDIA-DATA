@@ -807,6 +807,24 @@ added across states, and only Uttarakhand has gross additions and deletions by
 constituency. Everywhere else the change from the draft is net, counts new
 voters too, and is never called names restored. English only.
 
+**Downloads** (`downloads/`, on the front page's place, linked from every
+Downloads menu and the footer) lists every file the site publishes.
+`scripts/build_repository.py` writes one Excel workbook per place into
+`downloads/` (the place's published CSVs, the Chief Electoral Officer's own
+tables from its `raw/` folder as listed in `EXTRA`, an About sheet saying what
+each sheet is and cannot show, and a Columns sheet), `downloads/other-states.xlsx`
+for the twenty on the shared page, `downloads/all-tables.zip` (every CSV,
+source tables under `sources/`, a README and `columns.csv`), and
+`data/downloads.json`, which the page reads. Column meanings come from
+`data/india/raw/columns.json` for the published CSVs and `COMMON` in the
+script for the raw ones; `check_data.py` runs it with `--check`, which fails
+on a stale manifest or any column with no description. Sizes are left out of
+that comparison because openpyxl's output is not byte-stable. Re-run it after
+any data change. Raw files are still 404 on their own; they reach readers only
+inside a workbook or the zip, so a raw file goes into `EXTRA` only if it is
+the CEO's or the Election Commission's own table, counts only. Secondary
+compilations a `SOURCES.md` marks as unused stay out.
+
 **The NRC** (`india/nrc/`) explains the National Register of Citizens from
 primary documents only: what the Citizenship Act and the 2003 Rules provide,
 Assam's NRC and its figures, the National Population Register, every answer
