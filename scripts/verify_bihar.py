@@ -136,7 +136,9 @@ print('Alliances')
 ae = pd.read_csv(os.path.join(RAW, 'wikipedia_ae2025_ac_results.csv'))
 ae['ac'] = ae['Constituency_No.']
 ae = ae.set_index('ac')
-el = dict(zip(amap.ac, amap.electorate))
+# electors from the Election Commission's Detailed Results, not the seat list
+_pv = pd.read_csv(os.path.join(RAW, 'ae_party_votes_2020_2025.csv'))
+el = dict(_pv[(_pv.party == '_electors') & (_pv.year == 2025)][['ac', 'votes']].values)
 tot = x.tot
 seg = per.dropna(subset=['lead']).groupby('ac').apply(lambda d: None)  # placeholder, segments come from summed votes
 segv = b.dropna(subset=['votes']).drop_duplicates(['uid', 'party']).groupby(['ac', 'p']).votes.sum().reset_index()

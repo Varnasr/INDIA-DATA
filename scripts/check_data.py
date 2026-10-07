@@ -8,6 +8,7 @@ that they could not be forgotten. Those defects are now corrected, and the
 checks below pin the corrections instead, so that none of them can come back
 quietly. Each names the failure it guards against.
 """
+import csv
 import json
 import os
 import subprocess
@@ -270,6 +271,28 @@ def _repository():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
 
 
+def _migration():
+    # The two migration measures in covariates.csv are Census 2011 D-01 counts
+    # over the state's own enumerated population, both of them. Held to the
+    # extract so the denominator cannot drift unnoticed.
+    norm = lambda x: x.upper().replace('&', 'AND').replace('NCT OF ', '').replace('  ', ' ').strip()
+    with open(os.path.join(ROOT, 'data', 'india', 'raw', 'census2011_d01_states.csv'), encoding='utf-8') as fh:
+        d01 = {norm(r['state_2011']): r for r in csv.DictReader(fh)}
+    with open(os.path.join(ROOT, 'data', 'india', 'raw', 'covariates.csv'), encoding='utf-8') as fh:
+        cov = list(csv.DictReader(fh))
+    n = 0
+    for c in cov:
+        r = d01.get(norm(c['state']))
+        if not r or not c['out_migration']:
+            continue
+        pop = int(r['population_2011'])
+        for col, num in (('out_migration', 'born_here_living_in_other_state'), ('in_migration', 'living_here_born_in_other_state')):
+            want = round(100 * int(r[num]) / pop, 2)
+            assert abs(float(c[col]) - want) < 0.006, '%s %s is %s, D-01 gives %s' % (c['state'], col, c[col], want)
+        n += 1
+    assert n >= 29, 'only %d states matched D-01' % n
+
+
 def _short_and_faq():
     # Every page but the full reports opens with an "In short" box and carries
     # questions and answers: its own (#pageFaq) or, on an FAQ tab, all (#qas).
@@ -333,6 +356,7 @@ for name, fn in [
     ('the NRC page carries only checked facts and is current', _nrc),
     ('the four-state constituency table is current and adds up', _ac_change),
     ('the downloads manifest is current and every column is described', _repository),
+    ('migration shares equal Census D-01 over each state\'s population', _migration),
     ('the Assam figures add up and are current', _assam),
     ('every shared state page\'s figures add up and are current', _states),
     ('Notices table matches its raw table', _notices),
