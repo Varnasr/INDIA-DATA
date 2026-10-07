@@ -45,7 +45,7 @@
   <p class="finding" id="fDet"></p>
 
   <h2>The 2019 NRC</h2>
-  <p class="sub">The National Register of Citizens for Assam was published on 31 August 2019 under the Supreme Court's supervision. It is a separate exercise from the electoral roll, and the order for the 2025-26 revision does not mention it.</p>
+  <p class="sub">Two lists of Assam's National Register of Citizens, the supplementary list of inclusions and the list of exclusions, were published on 31 August 2019 under the Supreme Court's supervision. The Ministry of Home Affairs told the Lok Sabha in 2021 that the final register had not been issued. The register is kept apart from the electoral roll, and the order for the 2025-26 revision does not mention it. <a href="../india/nrc/">The NRC page</a> sets out the law behind it, the record since 2019 and how the SIR differs.</p>
   <div class="grid">
     <div class="panel wide" id="pNrc"><div class="vizbox" id="vNrc"></div><p id="nNrc"></p></div>
   </div>
@@ -115,7 +115,7 @@ SIR.json('data/assam/summary.json').then(function (d) {
   document.getElementById('nDet').textContent = 'The six centres held ' + n(X.men) + ' men and ' + n(X.women) + ' women on 28 November 2019, in space for ' + n(X.capacity) + '. Men and women are kept apart, and Kokrajhar held ' + kk.women + ' of the women. A seventh centre at Matia in Goalpara, for ' + n(X.matia_capacity) + ' people, was under construction in March 2020.';
   document.getElementById('fDet').innerHTML = '<b>' + X.died + ' people held in Assam\'s detention centres died in hospital between 1 March 2019 and 29 February 2020.</b> At the end of 2019, ' + X.over_3_years_declared + ' declared foreigners and ' + X.over_3_years_convicted + ' convicted foreigners had been held for more than three years, and ' + X.released_after_3_years + ' had been released after three years under the Supreme Court\'s order of 10 May 2019. ' + X.detained_2019 + ' declared foreigners were detained in 2019. Every figure here is from the Ministry of Home Affairs\' answers to the Lok Sabha, which put them on the information of the Assam government.';
 
-  VIZ.lollipop('vNrc', { label: 'The final NRC for Assam, 31 August 2019', axis: 'Lakh',
+  VIZ.lollipop('vNrc', { label: 'Assam\'s NRC, the lists of 31 August 2019', axis: 'Lakh',
     rows: [['Found eligible', N.included], ['Left out', N.left_out]].map(function (x, i) { return { name: x[0], v: x[1] / 1e5, text: lk(x[1]), tok: i ? '--fill-red' : '--fill-grey', hi: true }; }) });
   document.getElementById('nNrc').textContent = n(N.left_out) + ' of the ' + n(N.applied) + ' people who applied were left out of the NRC, ' + SIR.pct(N.left_out_pct, 1) + '. The decision on D-voters and their descendants was kept on hold on the Supreme Court\'s direction. The Ministry told the Lok Sabha in March and December 2021 that no rejection orders had yet been issued, so no one left out had yet appealed to a tribunal. The count of applicants is the State Coordinator\'s, as reported in the press, and equals those found eligible and those left out added together.';
 

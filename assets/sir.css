@@ -657,7 +657,7 @@ button:hover,.btn:hover{transform:none}
 /* -------------------------------------------- the page and its columns */
 main{padding:0 1.25rem 3.5rem}
 main>:first-child:not(.page-head),main>article>:first-child:not(.page-head){margin-top:2.5rem}
-body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:auto}
+body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:auto}
 .xp main>*{max-width:none!important;margin-inline:0!important}
 main h1{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;line-height:1.02}
 main h2{font-family:var(--serif);font-size:1.9rem;line-height:1.15;font-weight:700;letter-spacing:-.01em;border:0;padding:0;margin-top:3.5rem;margin-bottom:.5rem}
@@ -857,3 +857,13 @@ details.figs>summary:hover{color:var(--ink)}
 /* the phone header turns every summary into a 40px icon button; the menu's
    group headings are rows of text and keep their own size */
 .controls .places .menu details.grp>summary{width:auto;height:auto;padding:.6rem .75rem;justify-content:space-between;border-radius:7px;font-size:.9rem;border:0;background:transparent}
+
+/* The NRC page: numbered statements, each with its document and its words */
+.nfacts{padding-left:1.8rem}
+.nfacts>li{margin:0 0 1.1rem;scroll-margin-top:calc(var(--hh,0px) + 4rem)}
+.nfacts>li>p{margin:.15rem 0}
+.nfacts .nsrc{font-size:.85rem;color:var(--muted)}
+.nfacts details{font-size:.85rem;margin-top:.2rem}
+.nfacts blockquote{margin:.4rem 0 0;padding-left:.8rem;border-left:2px solid var(--line)}
+.nfacts>li:target{outline:2px solid var(--fill-red);outline-offset:.35rem;border-radius:2px}
+.nref{font-size:.8em;white-space:nowrap}

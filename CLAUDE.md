@@ -795,6 +795,42 @@ rate, the reason shares, the net change after the draft and women's share
 where both rolls were published by sex. Jammu and Kashmir and Ladakh were not
 in the order and the page says so. It is English only.
 
+**The NRC** (`india/nrc/`) explains the National Register of Citizens from
+primary documents only: what the Citizenship Act and the 2003 Rules provide,
+Assam's NRC and its figures, the National Population Register, every answer
+in Parliament on a nationwide NRC, how the SIR differs (a side-by-side table
+whose cells cite the numbered statements under it), and Assam's 2025-26
+Special Revision. `data/india/raw/nrc_research/` holds the research
+(`nrc.json`: each fact with its verbatim quote, document, page and URL; the
+documents in `sources/`) and an independent second reading of every fact
+(`verified.json`). `scripts/build_nrc.py` keeps only facts that check
+confirmed or corrected, applies its corrections, and writes
+`data/india/nrc.json`; `check_data.py` runs it with `--check`. `PLAIN`
+rewords a claim into the site's writing rules without changing it, and
+`CITE` carries a document or paragraph the check corrected. Things the
+documents settle, and the page keeps to:
+
+- **31 August 2019 is when two lists were published**, the supplementary list
+  of inclusions and the list of exclusions (3,11,21,004 found eligible,
+  19,06,657 left out). Never call it the publication of the final NRC: the
+  Ministry told the Lok Sabha in March 2021 that the final NRC had not been
+  issued, and no document found says the Registrar General has notified it.
+- **The applicants total (3,30,27,661) is press only**, the State
+  Coordinator's figure as reported; the Supreme Court's orders say 3.29 crore.
+- **The 2018 draft's exclusions are given in two parts** (37,59,630 rejected,
+  2,48,077 on hold). The Court's order of 31 July 2018 prints a total,
+  40,70,707, that is not their sum; no total is shown.
+- **The nationwide answer** is the same sentence from 4 February 2020 to
+  21 March 2023, the latest found. Add a later answer only with its document.
+- The Supreme Court's judgment of 27 May 2026 (2026 INSC 564) held that
+  declining to enrol someone does not declare that person not to be a
+  citizen, and that deciding citizenship belongs to the authority under the
+  Citizenship Act. Quote it in its own words.
+
+Nothing on the page says whether any person or group is a citizen, and it
+names no individual. English only, like the process page. The Assam page links
+to it.
+
 ## Notices
 
 `data/india/raw/notices/notices.csv` holds every count found of electors kept
