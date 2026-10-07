@@ -14,7 +14,7 @@ final roll and tests.
 - Per 100 women and per 100 men. The roll before by sex is the state's roll
   before the revision times women's share of it, both from states.json.
 - District by district, four states, each in its own measure and never set
-  against each other: Bihar (the names removed at the draft), West Bengal and
+  against each other: Bihar (the names removed in both phases), West Bengal and
   Kerala (the fall in the roll), Uttarakhand (the names removed after the
   draft). The gap is women's share of that count less their share of the roll
   it is taken from.
@@ -71,7 +71,7 @@ def build():
         dist.append(dict(state='Uttarakhand', district=r['district'], share_roll=r['women_draft_pct'], share=r['women_objections_pct']))
     for d in dist:
         d['gap'] = r1(d['share'] - d['share_roll'])
-    MEASURE = {'Bihar': 'names removed at the draft', 'West Bengal': 'fall in the roll, 2024 roll to the draft',
+    MEASURE = {'Bihar': 'names removed in both phases', 'West Bengal': 'fall in the roll, 2024 roll to the 2026 election roll',
                'Kerala': 'fall in the roll, January 2025 roll to the draft', 'Uttarakhand': 'names removed after the draft'}
     districts = []
     for st, m in MEASURE.items():

@@ -158,7 +158,11 @@ def build():
 def as_csv(d):
     buf = io.StringIO()
     w = csv.writer(buf, lineterminator='\n')
-    w.writerow(['city', 'state', 'measure', 'part', 'districts', 'roll_before', 'names_left_off_or_fall', 'per_100', 'state_per_100', 'note'])
+    # The base is the roll before the revision except for three cities, whose
+    # state published no removals below the state or reports them per 100 on
+    # a later roll. The column says which roll it is.
+    BASE = {'West Bengal': '2024 Lok Sabha roll', 'Kerala': 'January 2025 roll', 'Bihar': '2025 election roll'}
+    w.writerow(['city', 'state', 'measure', 'part', 'districts', 'base_roll', 'base_roll_is', 'names_left_off_or_fall', 'per_100', 'state_per_100', 'note'])
     for x in d['cities']:
         note = 'figures as reported in the press' if x['reported'] else 'per 100 on the 2025 roll' if x['roll_2025'] else ''
         for part in ('core', 'ring', 'rest'):
@@ -166,7 +170,8 @@ def as_csv(d):
             if not p:
                 continue
             ds = '; '.join(p.get('districts', [])) if part != 'rest' else 'rest of state'
-            w.writerow([x['city'], (p.get('state') if part == 'ring' else None) or x['state'], x['measure'], part, ds, p['before'], p['removed'], p['per_100'], x['state_per_100'], note])
+            st = (p.get('state') if part == 'ring' else None) or x['state']
+            w.writerow([x['city'], st, x['measure'], part, ds, p['before'], BASE.get(x['state'], 'roll before the revision'), p['removed'], p['per_100'], x['state_per_100'], note])
     return buf.getvalue()
 
 
