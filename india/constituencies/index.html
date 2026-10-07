@@ -44,17 +44,43 @@
 <p class="report-lang">This page is in English only for now. Every figure on it is the Chief Electoral Officer's own, constituency by constituency, and each state's page says where it comes from.</p>
 
 <article class="acchange" lang="en" dir="ltr" data-no-i18n>
+  <div class="kpis" id="kpis"></div>
+
+  <h2 id="every-constituency-against-the-roll-it-started-from">Every constituency, against the roll it started from</h2>
+  <p class="sub">Each dot is one constituency, set against an earlier roll the state published by constituency. A dot left of the line ended the revision with fewer electors than that roll. The earlier roll is a different one in each state, so read each row on its own and do not set one state against another.</p>
+  <div class="grid">
+    <div class="panel wide" id="pEarly"><div class="vizbox" id="vEarly"></div><p id="nEarly"></p></div>
+  </div>
+
+  <h2 id="after-the-draft">After the draft</h2>
+  <p class="sub">The change from the draft to the later roll, for every 100 electors on the draft. In Tamil Nadu, Kerala and West Bengal it is a net figure, which counts new voters as well as names put back and subtracts names removed after the draft. It is the most that could have come back, and it cannot say who did.</p>
+  <div class="grid">
+    <div class="panel wide" id="pAfter"><div class="vizbox" id="vAfter"></div><p id="nAfter"></p></div>
+  </div>
+
+  <h2 id="uttarakhand-names-added-and-removed">Uttarakhand, names added and removed</h2>
+  <p class="sub">Uttarakhand is the one state that published, for each constituency, how many names were added after the draft and how many were removed. A dot above the line is a constituency that removed more than it added.</p>
+  <div class="grid">
+    <div class="panel wide" id="pUk"><div class="vizbox" id="vUk"></div><p id="nUk"></p></div>
+  </div>
+
   <h2 id="what-each-state-published">What each state published</h2>
-  <p class="sub">Four states published their rolls constituency by constituency, and each published different rolls. The table names the rolls behind each column. Only Uttarakhand published, for each constituency, how many names were added and how many removed after the draft. Everywhere else the change from the draft to the later roll is a net figure. It counts new voters as well as names put back, and it subtracts names removed after the draft, so it is the most that could have come back and says nothing about who.</p>
+  <p class="sub">Each state published different rolls. The table names the roll behind each figure on this page.</p>
   <div class="twrap fit" tabindex="0" role="region" aria-label="What each state published"><table id="tStates"></table></div>
   <p class="note"><a href="../../data/india/ac_change.csv" download>Download every constituency in one file, CSV</a>. Read its columns with the table above, which names the roll behind each one.</p>
 
   <h2 id="every-constituency">Every constituency</h2>
-  <p class="sub">Choose a state, or type part of a constituency's or district's name.</p>
-  <div class="pfilter" role="group" aria-label="Show constituencies in" id="pick"></div>
-  <p><label for="q">Constituency or district</label> <input id="q" type="search" autocomplete="off"></p>
+  <p class="sub">Choose a state, sort, or type part of a constituency's or district's name. On a phone the table shows the two changes, and a wider screen adds every roll.</p>
+  <div class="acctl">
+    <div class="pfilter" role="group" aria-label="Show constituencies in" id="pick"></div>
+    <div class="acctl-row">
+      <label>Constituency or district <input id="q" type="search" autocomplete="off"></label>
+      <label>Sort by <select id="sort"><option value="ac">Number</option><option value="fall">Largest fall from the earlier roll</option><option value="after">Largest change after the draft</option></select></label>
+    </div>
+  </div>
   <p class="note" id="nRows" aria-live="polite"></p>
-  <div class="twrap fit" tabindex="0" role="region" aria-label="Every constituency in the chosen state"><table id="tAcs"></table></div>
+  <div class="twrap acwrap" tabindex="0" role="region" aria-label="Every constituency in the chosen state"><table id="tAcs" class="actab"></table></div>
+  <p class="acmore"><button type="button" class="chip" id="more" hidden>Show every constituency</button></p>
 
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
@@ -66,15 +92,46 @@
 <script src="../../assets/faq/india.js"></script>
 <script>
 SIR.json('data/india/ac_change.json').then(function (D) {
-  var S = D.states, n = SIR.n, lk = function (x) { return SIR.lk(x, 1); }, esc = SIR.esc;
+  var S = D.states, n = SIR.n, lk = function (x) { return SIR.lk(x, 1); }, esc = SIR.esc, d1 = function (v) { return SIR.d(v, 1); };
   var PAGE = { 'Tamil Nadu': 'tamilnadu/', 'Kerala': 'kerala/', 'West Bengal': 'westbengal/', 'Uttarakhand': 'uttarakhand/' };
+  var C = D.cols, ix = function (k) { return C.indexOf(k); }, I = { ac: ix('ac'), nm: ix('constituency'), dist: ix('district'), early: ix('earlier_roll'), left: ix('left_off_draft'), draft: ix('draft'), add: ix('added_after_draft'), rem: ix('removed_after_draft'), later: ix('later_roll'), ch: ix('change_draft_to_later'), ce: ix('change_earlier_to_later'), cep: ix('change_earlier_to_later_per_100') };
+  var rowsOf = function (s) { return D.rows.filter(function (r) { return r[0] === s; }); };
   var tn = S['Tamil Nadu'], kl = S['Kerala'], wb = S['West Bengal'], uk = S['Uttarakhand'];
+  var later = { 'Tamil Nadu': 'final roll', 'Kerala': 'final roll', 'West Bengal': 'roll at the 2026 nominations', 'Uttarakhand': 'final roll' };
+  var early = { 'Tamil Nadu': 'roll before the revision', 'Kerala': 'January 2025 roll', 'West Bengal': '2024 Lok Sabha roll' };
+
   SIR.inShort([
-    'Tamil Nadu left ' + lk(tn.left_off) + ' names off its draft roll. Its final roll was larger than the draft in all ' + tn.acs + ' constituencies, and still smaller than the roll before the revision in all ' + tn.below_earlier + '.',
-    'Kerala\'s final roll was larger than its draft in all ' + kl.acs + ' constituencies, and smaller than the January 2025 roll in ' + kl.below_earlier + ' of them.',
+    'Tamil Nadu left ' + lk(tn.left_off) + ' names off its draft roll. Its final roll grew from the draft in all ' + tn.acs + ' constituencies, and stayed below the roll before the revision in all ' + tn.below_earlier + '.',
+    'Kerala\'s final roll grew from the draft in all ' + kl.acs + ' constituencies, and stayed below the January 2025 roll in ' + kl.below_earlier + ' of them.',
     'West Bengal\'s roll at the 2026 nominations was smaller than its draft in ' + wb.fell + ' of ' + wb.acs + ' constituencies, and smaller than the 2024 Lok Sabha roll in all ' + wb.below_earlier + '.',
     'Uttarakhand is the one state with names added and removed after the draft, constituency by constituency. It added ' + n(uk.added) + ' and removed ' + n(uk.removed) + ', and its final roll was smaller than the draft in ' + uk.fell + ' of ' + uk.acs + ' constituencies.'
   ], 'The change from the draft to a later roll is a net figure everywhere but Uttarakhand. It counts new voters as well as names put back, so it cannot say how many of those left off came back.');
+
+  document.getElementById('kpis').innerHTML = [
+    [n(tn.acs + kl.acs + wb.acs + uk.acs), 'constituencies in four states'],
+    [lk(tn.left_off), 'names left off Tamil Nadu\'s draft'],
+    [wb.fell + ' of ' + wb.acs, 'West Bengal constituencies smaller at the nominations than at the draft'],
+    [n(uk.removed), 'names removed after the draft in Uttarakhand']
+  ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+
+  // per 100 on the earlier roll, every constituency
+  var tok = function (v) { return v < 0 ? '--fill-red' : '--fill-navy'; };
+  VIZ.strip('vEarly', { label: 'Change from the earlier roll to the later roll, per 100 electors on the earlier roll, every constituency', axis: 'Change per 100 electors on the earlier roll', r: 3.2, step: 5,
+    rows: ['Tamil Nadu', 'Kerala', 'West Bengal'].map(function (s) { return { name: s, points: rowsOf(s).map(function (r) { return { v: r[I.cep], tok: tok(r[I.cep]), label: r[I.nm] + ', ' + r[I.dist] + ': ' + (r[I.cep] > 0 ? '+' : '') + SIR.d(r[I.cep], 2) + ' per 100, ' + n(r[I.early]) + ' to ' + n(r[I.later]) }; }) }; }) });
+  var worst = function (s) { return rowsOf(s).sort(function (a, b) { return a[I.cep] - b[I.cep]; })[0]; };
+  document.getElementById('nEarly').textContent = ['Tamil Nadu', 'Kerala', 'West Bengal'].map(function (s) { var w = worst(s); return 'In ' + s + ', set against the ' + early[s] + ', ' + w[2] + ' fell furthest, ' + SIR.d(-w[I.cep], 1) + ' in every 100.'; }).join(' ');
+
+  var per100 = function (r) { return 100 * r[I.ch] / r[I.draft]; };
+  VIZ.strip('vAfter', { label: 'Change from the draft to the later roll, per 100 electors on the draft, every constituency', axis: 'Change per 100 electors on the draft', r: 2.6, step: 5,
+    rows: Object.keys(S).map(function (s) { return { name: s, points: rowsOf(s).map(function (r) { var v = per100(r); return { v: v, tok: tok(v), label: r[I.nm] + ': ' + (v > 0 ? '+' : '') + SIR.d(v, 2) + ' per 100, draft ' + n(r[I.draft]) + ', ' + later[s] + ' ' + n(r[I.later]) }; }) }; }) });
+  document.getElementById('nAfter').textContent = 'Red dots are constituencies whose later roll was smaller than the draft. In West Bengal that is ' + wb.fell + ' of ' + wb.acs + ', because the names held back for adjudication came off after the draft. In Tamil Nadu and Kerala the roll grew everywhere, by new voters and names put back together.';
+
+  var U = rowsOf('Uttarakhand');
+  VIZ.scatter('vUk', { label: 'Uttarakhand, names added and removed after the draft per 1,000 on the draft roll, every constituency', diag: true, diagLabel: 'added equals removed', xMin: 0, yMin: 0,
+    xAxis: 'Added after the draft, per 1,000 on the draft', yAxis: 'Removed, per 1,000',
+    points: U.map(function (r) { var a = 1000 * r[I.add] / r[I.draft], b = 1000 * r[I.rem] / r[I.draft]; return { x: a, y: b, tok: b > a ? '--fill-red' : '--fill-navy', label: r[I.nm] + ', ' + r[I.dist] + ': ' + n(r[I.add]) + ' added, ' + n(r[I.rem]) + ' removed' }; }) });
+  var more = U.filter(function (r) { return r[I.rem] > r[I.add]; });
+  document.getElementById('nUk').textContent = 'In ' + more.length + ' of ' + U.length + ' constituencies more names were removed after the draft than were added. Across the state ' + n(uk.added) + ' were added and ' + n(uk.removed) + ' removed. The table gives no reason for a removal.';
 
   var lab = function (s, k) { return S[s].labels[k]; };
   SIR.table('tStates', [{ h: 'State' }, { h: 'Constituencies', num: true }, { h: 'Earlier roll' }, { h: 'Names left off the draft' }, { h: 'Draft' }, { h: 'Later roll' }, { h: 'Added and removed after the draft' }],
@@ -88,39 +145,49 @@ SIR.json('data/india/ac_change.json').then(function (D) {
         x.added != null ? n(x.added) + ' added, ' + n(x.removed) + ' removed' : esc(lab(s, 'gross'))];
     }));
 
-  var cur = 'Tamil Nadu', box = document.getElementById('pick');
+  // the table: a few columns on a phone, all of them on a wide screen, and
+  // the first 25 rows until the reader asks for the rest
+  var cur = 'Tamil Nadu', all = false, box = document.getElementById('pick');
   box.innerHTML = Object.keys(S).map(function (s) { return '<button type="button" class="chip" data-s="' + s + '" aria-pressed="' + (s === cur) + '">' + s + '</button>'; }).join('');
-  var C = D.cols, ix = function (k) { return C.indexOf(k); };
-  var sign = function (v) { return v == null ? '–' : (v > 0 ? '+' : '') + n(v); };
+  var sign = function (v) { return v == null ? '–' : (v > 0 ? '+' : v < 0 ? '−' : '') + n(Math.abs(v)); };
   function draw() {
-    var q = document.getElementById('q').value.trim().toLowerCase();
-    var rs = D.rows.filter(function (r) { return r[0] === cur && (!q || (r[2] + ' ' + r[3]).toLowerCase().indexOf(q) >= 0); });
-    var x = S[cur], cols = [{ h: 'No.', num: true }, { h: 'Constituency' }, { h: 'District' }];
-    if (x.earlier) cols.push({ h: 'Earlier roll', num: true });
-    if (x.left_off) cols.push({ h: 'Left off the draft', num: true });
-    cols.push({ h: 'Draft', num: true });
-    if (x.added != null) cols.push({ h: 'Added after', num: true }, { h: 'Removed after', num: true });
-    cols.push({ h: cur === 'West Bengal' ? 'Roll at the nominations' : 'Final roll', num: true }, { h: 'Change from the draft', num: true });
-    if (x.earlier) cols.push({ h: 'Change from the earlier roll', num: true }, { h: 'Per 100 on the earlier roll', num: true });
-    SIR.table('tAcs', cols, rs.map(function (r) {
-      var o = [r[1], esc(r[2]), esc(r[3])];
-      if (x.earlier) o.push(n(r[ix('earlier_roll')]));
-      if (x.left_off) o.push(n(r[ix('left_off_draft')]));
-      o.push(n(r[ix('draft')]));
-      if (x.added != null) o.push(n(r[ix('added_after_draft')]), n(r[ix('removed_after_draft')]));
-      o.push(n(r[ix('later_roll')]), sign(r[ix('change_draft_to_later')]));
-      if (x.earlier) o.push(sign(r[ix('change_earlier_to_later')]), SIR.d(r[ix('change_earlier_to_later_per_100')], 2));
-      return o;
-    }));
-    document.getElementById('nRows').textContent = rs.length + ' of ' + x.acs + ' constituencies in ' + cur + '.';
+    var q = document.getElementById('q').value.trim().toLowerCase(), so = document.getElementById('sort').value, x = S[cur];
+    var sel = document.getElementById('sort'); sel.options[1].disabled = !x.earlier; if (so === 'fall' && !x.earlier) so = sel.value = 'ac';
+    var rs = rowsOf(cur).filter(function (r) { return !q || (r[I.nm] + ' ' + r[I.dist]).toLowerCase().indexOf(q) >= 0; });
+    if (so === 'fall') rs.sort(function (a, b) { return a[I.cep] - b[I.cep]; });
+    if (so === 'after') rs.sort(function (a, b) { return per100(a) - per100(b); });
+    var shown = all || q ? rs : rs.slice(0, 25);
+    var cols = [['Constituency', '', 1]];
+    if (x.earlier) cols.push(['Earlier roll', 'num', 0]);
+    if (x.left_off) cols.push(['Left off the draft', 'num', 0]);
+    cols.push(['Draft', 'num', 0]);
+    if (x.added != null) cols.push(['Added after', 'num', 0], ['Removed after', 'num', 0]);
+    cols.push([cur === 'West Bengal' ? 'At the nominations' : 'Final roll', 'num', 0], ['Change from the draft', 'num', 1]);
+    if (x.earlier) cols.push(['Per 100 against the earlier roll', 'num', 1]);
+    var t = document.getElementById('tAcs');
+    t.innerHTML = '<thead><tr>' + cols.map(function (c) { return '<th scope="col" class="' + c[1] + (c[2] ? '' : ' wide') + '">' + c[0] + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      shown.map(function (r) {
+        var o = ['<th scope="row"><span class="acno">' + r[I.ac] + '</span> ' + esc(r[I.nm]) + '<small>' + esc(r[I.dist]) + '</small></th>'];
+        if (x.earlier) o.push('<td class="num wide">' + n(r[I.early]) + '</td>');
+        if (x.left_off) o.push('<td class="num wide">' + n(r[I.left]) + '</td>');
+        o.push('<td class="num wide">' + n(r[I.draft]) + '</td>');
+        if (x.added != null) o.push('<td class="num wide">' + n(r[I.add]) + '</td>', '<td class="num wide">' + n(r[I.rem]) + '</td>');
+        o.push('<td class="num wide">' + n(r[I.later]) + '</td>', '<td class="num ' + (r[I.ch] < 0 ? 'neg' : '') + '">' + sign(r[I.ch]) + '</td>');
+        if (x.earlier) o.push('<td class="num ' + (r[I.cep] < 0 ? 'neg' : '') + '">' + (r[I.cep] > 0 ? '+' : r[I.cep] < 0 ? '−' : '') + SIR.d(Math.abs(r[I.cep]), 1) + '</td>');
+        return '<tr>' + o.join('') + '</tr>';
+      }).join('') + '</tbody>';
+    document.getElementById('nRows').textContent = (shown.length < rs.length ? 'The first ' + shown.length + ' of ' : '') + rs.length + ' constituencies in ' + cur + (shown.length < rs.length ? '.' : ', all shown.');
+    var m = document.getElementById('more'); m.hidden = shown.length >= rs.length; m.textContent = 'Show all ' + rs.length + ' constituencies';
   }
   box.addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return;
-    cur = b.getAttribute('data-s');
+    cur = b.getAttribute('data-s'); all = false;
     box.querySelectorAll('button').forEach(function (y) { y.setAttribute('aria-pressed', y === b); });
     draw();
   });
   document.getElementById('q').addEventListener('input', draw);
+  document.getElementById('sort').addEventListener('change', draw);
+  document.getElementById('more').addEventListener('click', function () { all = true; draw(); });
   draw();
   SIR.showFaq('india', 'constituencies');
 }).catch(SIR.fail);
