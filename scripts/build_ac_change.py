@@ -90,10 +90,6 @@ def main():
     w.writerow(COLS)
     for r in R:
         w.writerow(['' if v is None else v for v in r])
-    buf.write('\n# Each state measures a different thing. Read the columns with these labels.\n')
-    for s, lab in STATES.items():
-        for k, v in lab.items():
-            buf.write('# %s, %s: %s\n' % (s, k, v))
     files = {os.path.join(ROOT, 'data', 'india', 'ac_change.csv'): buf.getvalue(),
              os.path.join(ROOT, 'data', 'india', 'ac_change.json'): json.dumps({'cols': COLS, 'rows': R, 'states': summ}, ensure_ascii=False) + '\n'}
     stale = [p for p, t in files.items() if not os.path.exists(p) or open(p, encoding='utf-8').read() != t]
