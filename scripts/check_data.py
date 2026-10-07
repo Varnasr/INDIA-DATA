@@ -207,6 +207,10 @@ def _women():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_women.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
+def _states():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_states.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
 def _assam():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_assam.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -270,7 +274,7 @@ def _short_and_faq():
         html = open(os.path.join(ROOT, rel), encoding='utf-8').read()
         assert 'id="short"' in html, '%s has no In short box' % rel
         assert 'id="pageFaq"' in html or 'id="qas"' in html, '%s has no questions and answers' % rel
-        assert 'SIR.showFaq(' in html or rel == os.path.join('india', 'index.html'), '%s never fills its box' % rel
+        assert 'SIR.showFaq(' in html or 'SIR.statePage(' in html or rel == os.path.join('india', 'index.html'), '%s never fills its box' % rel
 
 
 def _pages_link_method():
@@ -314,6 +318,7 @@ for name, fn in [
     ('Census 2011 A-01 districts are current and add to the India totals', _census_a01),
     ('the rural and urban table is current and every district has a 2011 parent', _urban),
     ('the Assam figures add up and are current', _assam),
+    ('every shared state page\'s figures add up and are current', _states),
     ('Notices table matches its raw table', _notices),
     ('Delhi data matches its raw tables', _delhi),
     ('removals against winning margins current, 2024 margins match the published ones', _margins),

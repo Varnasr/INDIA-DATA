@@ -97,16 +97,19 @@ def shell(out, meta, content, scripts):
     def link(p):
         href = root + (p['pages'][0][0] if p['pages'] else '')
         cur = ' aria-current="true"' if p['id'] == place['id'] else ''
-        st = ' class="st"' if p['id'] not in ('home', 'india') else ''
+        st = ' class="st"' if p['id'] not in ('home', 'india') and p.get('group') != 'uts' else ''
         return '<a href="%s"%s%s>%s</a>' % (href or './', st, cur, html.escape(p['label']))
 
     def fold(title, links, opened, cls=''):
         return ('<details class="grp%s"%s><summary>%s</summary><div class="sub" data-i18n-each>%s</div></details>'
                 % (cls, ' open' if opened else '', html.escape(title), ''.join(links)))
-    items, group = [], []
+    items, group, uts = [], [], []
     for p in CFG['places']:
         if p.get('group') == 'states':
             group.append(link(p))
+            continue
+        if p.get('group') == 'uts':
+            uts.append(link(p))
             continue
         if p.get('menu'):
             # a place with its own pages is one fold: its overview, then each page
@@ -117,6 +120,8 @@ def shell(out, meta, content, scripts):
             items.append(link(p))
     if group:
         items.append(fold('Other states', group, place.get('group') == 'states', ' states'))
+    if uts:
+        items.append(fold('Union territories', uts, place.get('group') == 'uts', ' uts'))
     current = place['label'] if place['id'] != 'home' else 'Places'
     places = ('<details class="dl places"><summary class="btn" aria-label="Places">%s <span class="lbl-place">%s</span></summary>'
               '<div class="menu"><div data-i18n-each>%s</div></div></details>' % (PIN, html.escape(current), ''.join(items)))

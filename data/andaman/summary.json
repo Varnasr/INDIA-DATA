@@ -1,0 +1,244 @@
+{
+ "state": "Andaman and Nicobar Islands",
+ "slug": "andaman",
+ "ut": true,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2025-10-27",
+  "draft": "2025-12-23",
+  "final": "2026-02-21"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 310404,
+   "src": "s1",
+   "press": true
+  },
+  "draft": {
+   "v": 246390,
+   "src": "s1",
+   "press": true
+  },
+  "removed": {
+   "v": 64014,
+   "src": "s1",
+   "press": true
+  },
+  "dead": {
+   "v": 9191,
+   "src": "s2",
+   "press": true
+  },
+  "shifted_absent_other": {
+   "v": 51906,
+   "src": "s2",
+   "press": true
+  },
+  "duplicate": {
+   "v": 2917,
+   "src": "s2",
+   "press": true
+  },
+  "added_after": {
+   "v": 16919,
+   "src": "s1",
+   "press": true
+  },
+  "removed_after": {
+   "v": 5269,
+   "src": "s1",
+   "press": true
+  },
+  "net_after": {
+   "v": 11650,
+   "src": "s1",
+   "press": true
+  },
+  "final": {
+   "v": 258040,
+   "src": "s1",
+   "press": true
+  },
+  "men_draft": {
+   "v": 124911,
+   "src": "s1",
+   "press": true
+  },
+  "women_draft": {
+   "v": 121476,
+   "src": "s1",
+   "press": true
+  },
+  "third_draft": {
+   "v": 3,
+   "src": "s1",
+   "press": true
+  },
+  "men_final": {
+   "v": 130415,
+   "src": "s1",
+   "press": true
+  },
+  "women_final": {
+   "v": 127622,
+   "src": "s1",
+   "press": true
+  },
+  "third_final": {
+   "v": 3,
+   "src": "s1",
+   "press": true
+  }
+ },
+ "reasons_complete": true,
+ "tables": [
+  {
+   "id": "districts",
+   "title": "Names left off the draft in each district",
+   "level": "district",
+   "kind": "left_off",
+   "src": "s2",
+   "partial": false,
+   "press": true,
+   "rows": [
+    {
+     "name": "North and Middle Andaman",
+     "removed": 8717
+    },
+    {
+     "name": "South Andaman",
+     "removed": 51801
+    },
+    {
+     "name": "Nicobar",
+     "removed": 3496
+    }
+   ]
+  },
+  {
+   "id": "tehsils",
+   "title": "Every tehsil, the final roll by sex",
+   "level": "tehsil",
+   "kind": "final",
+   "src": "s1",
+   "partial": false,
+   "press": true,
+   "rows": [
+    {
+     "name": "Diglipur",
+     "men": 17085,
+     "women": 15352,
+     "third": 0,
+     "final": 32437,
+     "women_pct": 47.33
+    },
+    {
+     "name": "Mayabunder",
+     "men": 9557,
+     "women": 8954,
+     "third": 0,
+     "final": 18511,
+     "women_pct": 48.37
+    },
+    {
+     "name": "Rangat",
+     "men": 11994,
+     "women": 11533,
+     "third": 0,
+     "final": 23527,
+     "women_pct": 49.02
+    },
+    {
+     "name": "Sri Vijaya Puram",
+     "men": 52070,
+     "women": 52452,
+     "third": 1,
+     "final": 104523,
+     "women_pct": 50.18
+    },
+    {
+     "name": "Ferrargunj",
+     "men": 22023,
+     "women": 22148,
+     "third": 2,
+     "final": 44173,
+     "women_pct": 50.14
+    },
+    {
+     "name": "Little Andaman",
+     "men": 6326,
+     "women": 5966,
+     "third": 0,
+     "final": 12292,
+     "women_pct": 48.54
+    },
+    {
+     "name": "Car Nicobar",
+     "men": 5768,
+     "women": 5952,
+     "third": 0,
+     "final": 11720,
+     "women_pct": 50.78
+    },
+    {
+     "name": "Nancowrie",
+     "men": 3144,
+     "women": 3033,
+     "third": 0,
+     "final": 6177,
+     "women_pct": 49.1
+    },
+    {
+     "name": "Campbell Bay",
+     "men": 2448,
+     "women": 2232,
+     "third": 0,
+     "final": 4680,
+     "women_pct": 47.69
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Chief Electoral Officer, Andaman and Nicobar Islands, statement on the final roll of 21 February 2026, as reproduced on the front page of The Daily Telegrams of 22 February 2026",
+   "url": "https://x.com/Andaman_Admin/status/2025442063752511792",
+   "date": "2026-02-22",
+   "primary": false
+  },
+  {
+   "id": "s2",
+   "title": "Hindustan Times, report of 23 December 2025 on the draft roll in Andaman and Nicobar, from the Chief Electoral Officer's figures",
+   "url": "https://www.hindustantimes.com/india-news/nearly-21-voters-may-get-deleted-after-sir-in-andaman-nicobar-101766517677944.html",
+   "date": "2025-12-23",
+   "primary": false
+  }
+ ],
+ "notes": [
+  "The Chief Electoral Officer's own documents could not be reached, so every figure here reached us through a newspaper. The roll before, the draft, the changes after it and the final roll come from the officer's statement as printed by The Daily Telegrams, the Administration's daily, and the reasons and the district counts from a national newspaper's report of the officer's figures.",
+  "The three reasons add exactly to the 64,014 names left off, and the three districts add to it too.",
+  "The 16,919 names added after the draft are 14,427 admitted on Form 6 or 6A, 2,474 moving within the islands on Form 8 and 18 moving in from other states. The 5,269 removed after it are 72 admitted on Form 7 and 5,197 deleted for shifting or on verification during the revision.",
+  "The tehsil table adds up to each district and to the final roll of 2,58,040 for men, women and third gender alike.",
+  "At the draft the Chief Electoral Officer was reported to count 25,407 electors whose names could not be matched to the earlier roll. That count came only through the press and is kept with the notices on the All India pages."
+ ],
+ "cannot_show": [
+  "The roll before or the draft for each district or tehsil. Only the names left off were reported by district, and only the final roll was published by tehsil.",
+  "The reasons for the names left off in any district or tehsil.",
+  "Women's share of the names left off. The roll before was not published by sex.",
+  "How many electors were removed after a notice. The final statement counts them together with those removed for shifting."
+ ],
+ "id": "an",
+ "rates": {
+  "per_100": 20.62,
+  "shares": {
+   "dead": 14.4,
+   "shifted_absent_other": 81.1,
+   "duplicate": 4.6
+  },
+  "made_up_pct": 18.2,
+  "final_vs_before": -52364,
+  "women_draft_pct": 49.3,
+  "women_final_pct": 49.46
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "state": "Haryana",
+ "slug": "haryana",
+ "ut": false,
+ "revision": "sir",
+ "dates": {
+  "draft": "2026-07-31"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 20655929,
+   "src": "s2"
+  },
+  "removed": {
+   "v": 3384568,
+   "src": "s1",
+   "press": true
+  },
+  "dead": {
+   "v": 766205,
+   "src": "s1",
+   "press": true
+  },
+  "shifted_absent_other": {
+   "v": 2413447,
+   "src": "s1",
+   "press": true
+  },
+  "duplicate": {
+   "v": 204916,
+   "src": "s1",
+   "press": true
+  },
+  "notices": {
+   "v": 4491691,
+   "src": "s3"
+  }
+ },
+ "reasons_complete": true,
+ "tables": [
+  {
+   "id": "districts_provisional",
+   "title": "Forms not collected in five districts on 15 July 2026, provisional, before the draft, in thousands",
+   "level": "district",
+   "kind": "left_off",
+   "src": "s5",
+   "partial": true,
+   "press": true,
+   "note": "Printed in lakh in the middle of enumeration and rounded here to thousands. These are not the names left off the draft.",
+   "rows": [
+    {
+     "name": "Faridabad",
+     "removed": 509000
+    },
+    {
+     "name": "Gurugram",
+     "removed": 401000
+    },
+    {
+     "name": "Sonipat",
+     "removed": 244000
+    },
+    {
+     "name": "Karnal",
+     "removed": 212000
+    },
+    {
+     "name": "Panipat",
+     "removed": 189000
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Hindustan Times, report of the Chief Electoral Officer's news conference at the end of enumeration",
+   "url": "https://www.hindustantimes.com/cities/chandigarh-news/16-voters-found-absent-shifted-or-dead-during-sir-haryana-ceo-101785002164991.html",
+   "date": "2026-07-25",
+   "primary": false
+  },
+  {
+   "id": "s2",
+   "title": "Government of Haryana press release 2951, quoting the Chief Electoral Officer",
+   "url": "https://prms.prharyana.gov.in/press-release/2951",
+   "date": "2026-06-18",
+   "primary": false
+  },
+  {
+   "id": "s3",
+   "title": "Government of Haryana press release 8134, quoting the Additional Chief Electoral Officer",
+   "url": "https://prms.prharyana.gov.in/press-release/8134",
+   "date": "2026-10-01",
+   "primary": false
+  },
+  {
+   "id": "s4",
+   "title": "Election Commission letter and notification No.23/2025-ERS (Vol.II), revised schedule for Haryana",
+   "url": "https://ceoharyana.gov.in/Website/DynamicUploadContent/CONTENTFILES/84af5635-da56-4ed1-8b9f-0670d822291d.pdf",
+   "date": "2026-08-29",
+   "primary": true
+  },
+  {
+   "id": "s5",
+   "title": "Dainik Jagran, provisional enumeration figures quoting the Chief Electoral Officer",
+   "url": "https://www.jagran.com/haryana/panchkula-haryana-sir-names-of-over-33-lakh-voters-will-be-deleted-political-landscape-will-change-submit-forms-by-july-24-40307718.html",
+   "date": "2026-07-16",
+   "primary": false
+  }
+ ],
+ "notes": [
+  "The roll before the revision comes from a state government press release quoting the Chief Electoral Officer. The names left off and their reasons are the Chief Electoral Officer's figures as a newspaper reported them at the end of enumeration.",
+  "The names left off are the forms that could not be collected when enumeration ended. A count published elsewhere in the press for the draft itself is 1,266 lower, and the two have not been reconciled.",
+  "Absent, shifted and other reasons are counted together as shifted, absent or other. The five reasons the Chief Electoral Officer gave add exactly to the names left off.",
+  "By 1 October 2026 notices had gone to 44,91,691 electors kept on the draft, and hearings were complete for 40,56,716 of them.",
+  "Claims and objections closed on 30 September 2026. Notices are to be decided by 28 October and the final roll is due on 6 November 2026, under the Election Commission's revised schedule.",
+  "The state government's press releases are issued by its public relations department and are counted here as secondary, although they quote the Chief Electoral Officer's office."
+ ],
+ "cannot_show": [
+  "The exact number of electors on the draft roll was not found, so the draft is left out.",
+  "No table by district or constituency of the roll before, the draft or the names left off has been published. The district figures shown are provisional counts from the middle of enumeration.",
+  "The state government's release of 1 October names only the districts with the most and fewest claims, so claims by district are not shown.",
+  "No split by sex of the roll before, the draft or the names left off has been published.",
+  "The final roll has not been published yet."
+ ]
+}

@@ -2,7 +2,7 @@
 
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
-Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi, Maharashtra, Gujarat and Uttarakhand (2026), and Assam's Special Revision (2025-26). Static HTML, Chart.js from cdnjs, one
+Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi, Maharashtra, Gujarat and Uttarakhand (2026), Assam's Special Revision (2025-26), and every other state and union territory in the revision on one shared page.  Static HTML, Chart.js from cdnjs, one
 stylesheet (`assets/sir.css`) and one helper script (`assets/sir.js`) shared by
 every page. Netlify deploys the repository root from `main` to offtheroll.in
 (Netlify DNS; the domain is registered at Porkbun with Netlify's nameservers,
@@ -756,6 +756,45 @@ runs it with `--check`.
   Nothing on the pages says anything about any person's citizenship.
 - English only, with the translated note, like the other 2026 state pages.
 
+## Every other state, on one shared page
+
+Twenty places have no page of their own: Chhattisgarh, Madhya Pradesh, Andhra
+Pradesh, Odisha, Jharkhand, Haryana, Punjab, Goa, Manipur, Meghalaya,
+Mizoram, Nagaland, Sikkim, Arunachal Pradesh, Tripura, Puducherry,
+Chandigarh, Lakshadweep, Andaman and Nicobar, and Dadra and Nagar Haveli and
+Daman and Diu. Each is one file, `data/<slug>/raw/normal.json`, in the shape
+set out in `scripts/state_schema.md`.
+
+- `scripts/build_states.py` (`STATES` lists them) checks every identity the
+  schema names and writes `summary.json` and `tables.csv`; `check_data.py`
+  runs it with `--check`. A figure that came through the press carries
+  `press`, a figure printed in lakh carries `rounded`, and a table that is a
+  press extract carries `partial`, so it is checked row by row only.
+- `assets/statepage.js` draws all three pages (overview, questions, method)
+  from the summary, findings and questions included. The page sources hold no
+  figures; `scripts/make_state_pages.py` writes them and the places entry, and
+  is run once when a state is added. The pages are English only, with the
+  translated note.
+- `revision: "no_draft"` (Tripura today) draws "Where the revision stands" in
+  place of the figures. When its draft is out, fill in the figures and change
+  the field.
+- Add a state by writing its `normal.json` with every source read, adding it
+  to `STATES`, and running `build_states.py`, `make_state_pages.py`,
+  `build_site.py` and `og_cards.mjs`. Keep its row in
+  `data/india/raw/states.csv` equal to its figures.
+
+**Madhya Pradesh** was corrected from the Jagran report of the draft: the
+three reasons are exact (8,46,184 dead, 31,50,997 shifted, absent or other,
+2,76,961 duplicate), women were 55.3% of the names left off against 48.8% of
+the roll, and the notices figure is the 8,65,832 whose forms were incomplete.
+8,46,184 is the count of the dead and is never used as the no-mapping count.
+
+**Territories** (`india/uts/`) sets the six union territories in the revision
+side by side from `states.json`: names left off per 100 against the All India
+rate, the reason shares, the net change after the draft and women's share
+where both rolls were published by sex. Jammu and Kashmir and Ladakh were not
+in the order and the page says so. It is English only.
+
 ## Notices
 
 `data/india/raw/notices/notices.csv` holds every count found of electors kept
@@ -904,7 +943,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 - **The header carries a places menu**, not a switch: a pin button naming
   the current place, opening the list of analyses. It folds (`details.grp`):
   a place's own `menu` pages sit under its `nav_label`, and every place with
-  `"group": "states"` in `places.json` sits under "Other states". Two states sit above the fold each day and the rest fold under it (`SIR.day()`, the day counted in India, so every visitor sees the same two on the same day); every state link carries class `st`, and without JavaScript the built order stays. A place with `menu` pages is itself one fold, its overview first. A fold
+  `"group": "states"` in `places.json` sits under "Other states", and every place with `"group": "uts"` under "Union territories" (Delhi and the five territories on the shared page; their links carry no `st` class, so they do not rotate). Two states sit above the fold each day and the rest fold under it (`SIR.day()`, the day counted in India, so every visitor sees the same two on the same day); every state link carries class `st`, and without JavaScript the built order stays. A place with `menu` pages is itself one fold, its overview first. A fold
   opens by itself when the reader is inside it. A new state takes the group
   field; each fold's list carries `data-i18n-each`. On a phone the title takes one row and the controls a row
   beneath it (language, install, search, places, downloads, reading font,

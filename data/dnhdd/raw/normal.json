@@ -1,0 +1,105 @@
+{
+ "state": "Dadra and Nagar Haveli and Daman and Diu",
+ "slug": "dnhdd",
+ "ut": true,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2026-06-04",
+  "draft": "2026-07-10",
+  "final": "2026-09-11"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 428036,
+   "src": "s2",
+   "press": true
+  },
+  "draft": {
+   "v": 301142,
+   "src": "s2",
+   "press": true
+  },
+  "removed": {
+   "v": 126894,
+   "src": "s2",
+   "press": true
+  },
+  "final": {
+   "v": 295833,
+   "src": "s2",
+   "press": true
+  },
+  "men_final": {
+   "v": 145809,
+   "src": "s2",
+   "press": true
+  },
+  "women_final": {
+   "v": 150024,
+   "src": "s2",
+   "press": true
+  },
+  "third_final": {
+   "v": 0,
+   "src": "s2",
+   "press": true
+  }
+ },
+ "reasons_complete": false,
+ "tables": [
+  {
+   "id": "pcs",
+   "title": "Reasons for the names left off in 2-Dadra and Nagar Haveli, out of 2,91,672 electors on the roll of 4 June 2026",
+   "level": "pc",
+   "kind": "left_off",
+   "src": "s1",
+   "partial": true,
+   "rows": [
+    {
+     "name": "Dadra and Nagar Haveli",
+     "dead": 5581,
+     "shifted_absent_other": 77591,
+     "duplicate": 2084
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Electoral Registration Officer, 2-Dadra and Nagar Haveli, press note No. ADM/Election/SIR-2026/2026/215 of 10 July 2026",
+   "url": "https://cdn.s3waas.gov.in/s35878a7ab84fb43402106c575658472fa/uploads/2026/07/17839213888692.pdf",
+   "date": "2026-07-10",
+   "primary": true
+  },
+  {
+   "id": "s2",
+   "title": "Deccan Herald, report on the final rolls of September 2026",
+   "url": "https://www.deccanherald.com/india/sir-dadra-nagar-haveli-and-daman-diu-sees-3088-voter-drop-highest-among-4-final-rolls-no-transgender-voter-named-in-list-4147035",
+   "date": "2026-09-11",
+   "primary": false
+  },
+  {
+   "id": "s3",
+   "title": "Times of India, report of 11 July 2026 on the draft roll, quoting the Chief Electoral Officer's statement",
+   "url": "https://timesofindia.indiatimes.com/india/30-deletions-in-daman-diu-sir-draft-roll/articleshow/132323298.cms",
+   "date": "2026-07-11",
+   "primary": false
+  }
+ ],
+ "notes": [
+  "The territory's roll before, draft and final roll come from a national newspaper's table of the final rolls. The reasons for Dadra and Nagar Haveli come from the Electoral Registration Officer's own press note on the draft.",
+  "The names left off are the roll before less the draft, 1,26,894, or 29.6 per 100 electors. A second newspaper reported the Chief Electoral Officer's statement as 29.7 per cent.",
+  "That statement was reported only as shares of the roll. They were 22.5 per cent absent or untraceable, 4.6 per cent shifted, 1.7 per cent dead, 0.6 per cent enrolled more than once and 0.2 per cent other. No counts were found, so the reasons for the territory are left out.",
+  "In Dadra and Nagar Haveli the registration officer counted 5,581 dead, 13,118 permanently shifted, 64,473 untraceable or absent and 2,084 enrolled more than once, out of 2,91,672 electors on the roll of 4 June 2026. The middle reason in the table puts the shifted and the absent together.",
+  "The same note says that over 2,05,998 electors had returned their forms by 3 July 2026. That is a count of forms with a floor on it, so it is not used as the draft for the constituency, and the names left off there are not computed.",
+  "The final roll is 5,309 below the draft. No count of the names added or removed after the draft was found."
+ ],
+ "cannot_show": [
+  "Any figure for 1-Daman and Diu on its own. No document of its registration officer was found.",
+  "The roll, the draft or the final roll for each of the three districts.",
+  "Counts of the reasons for the territory as a whole. They were reported only as shares.",
+  "How many names were added and how many removed after the draft, or how many electors were sent a notice.",
+  "Women's share of the names left off. The roll before and the draft were not found by sex."
+ ]
+}
