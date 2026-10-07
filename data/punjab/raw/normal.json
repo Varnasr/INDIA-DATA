@@ -1,0 +1,124 @@
+{
+ "state": "Punjab",
+ "slug": "punjab",
+ "ut": false,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2026-06-09",
+  "draft": "2026-08-13"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 21461043,
+   "src": "s1",
+   "press": true
+  },
+  "removed": {
+   "v": 2066635,
+   "src": "s1",
+   "press": true
+  },
+  "dead": {
+   "v": 574568,
+   "src": "s1",
+   "press": true
+  },
+  "shifted_absent_other": {
+   "v": 1356846,
+   "src": "s1",
+   "press": true
+  },
+  "duplicate": {
+   "v": 119145,
+   "src": "s1",
+   "press": true
+  }
+ },
+ "reasons_complete": false,
+ "tables": [
+  {
+   "id": "districts_press",
+   "title": "The five districts with the most names left off, in thousands",
+   "level": "district",
+   "kind": "left_off",
+   "src": "s3",
+   "partial": true,
+   "press": true,
+   "note": "Printed in lakh and rounded here to thousands.",
+   "rows": [
+    {
+     "name": "Ludhiana",
+     "removed": 416000
+    },
+    {
+     "name": "Amritsar",
+     "removed": 242000
+    },
+    {
+     "name": "Jalandhar",
+     "removed": 184000
+    },
+    {
+     "name": "SAS Nagar (Mohali)",
+     "removed": 153000
+    },
+    {
+     "name": "Patiala",
+     "removed": 138000
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "New Indian Express, the Chief Electoral Officer's figures at the end of enumeration",
+   "url": "https://www.newindianexpress.com/india/2026/Aug/04/2066-lakh-punjab-voters-dropped-from-draft-rolls-in-first-phase-of-sir",
+   "date": "2026-08-04",
+   "primary": false
+  },
+  {
+   "id": "s2",
+   "title": "Times of India, the same figures at the end of enumeration",
+   "url": "https://timesofindia.indiatimes.com/city/chandigarh/punjab-sir-identifies-over-20-lakh-ineligible-voters/articleshow/132869355.cms",
+   "date": "2026-08-04",
+   "primary": false
+  },
+  {
+   "id": "s3",
+   "title": "The Tribune, the draft roll by district",
+   "url": "https://www.tribuneindia.com/news/punjab/20-66-lakh-voters-struck-in-draft-electoral-rolls-parties-flag-concern/",
+   "date": "2026-08-13",
+   "primary": false
+  },
+  {
+   "id": "s4",
+   "title": "Hindustan Times, the draft roll and the schedule",
+   "url": "https://www.hindustantimes.com/cities/chandigarh-news/sir-2026-punjab-rolls-out-draft-electoral-list-file-objections-by-sept-12-101786648206720.html",
+   "date": "2026-08-13",
+   "primary": false
+  },
+  {
+   "id": "s5",
+   "title": "Hindustan Times, logical discrepancy cases before the final roll",
+   "url": "https://www.hindustantimes.com/cities/chandigarh-news/sir-punjab-clears-99-of-logical-discrepancy-cases-for-final-roll-101790103659947.html",
+   "date": "2026-09-23",
+   "primary": false
+  }
+ ],
+ "notes": [
+  "Every figure is the Chief Electoral Officer's as the press reported it. The Chief Electoral Officer's own site could not be reached.",
+  "The roll before is the roll of 9 June 2026. The names left off are the forms that could not be accounted for when enumeration ended on 3 August.",
+  "Shifted and absent are counted together as shifted, absent or other. The four reasons published add to 16,076 fewer than the names left off, and no source names the rest.",
+  "Claims and objections ran to 12 September 2026 and the final roll was due on 12 October 2026.",
+  "About 22.69 lakh electors were flagged for logical discrepancies, and about 22.41 lakh cases had been cleared by 22 September, as the press reported."
+ ],
+ "cannot_show": [
+  "The exact number of electors on the draft roll was not published in anything found. The press gives about 1.93 or 1.94 crore, so the draft is left out.",
+  "No table by district or constituency was found from the Chief Electoral Officer. The district figures shown are the five largest, rounded, as the press printed them.",
+  "Exact counts for two of those districts were seen only in an excerpt of a social media post and are not used.",
+  "No split by sex of the roll or of the names left off was found.",
+  "No count of claims and objections, and no exact count of notices, was found.",
+  "The final roll had not been found when these figures were gathered."
+ ]
+}

@@ -69,6 +69,23 @@ const CARDS = [
     `${n(as.d_voters_draft)} D-voters carried onto the draft unchanged`],
 ];
 
+// The states and territories drawn by assets/statepage.js, each read from its
+// own summary (scripts/build_states.py). Their places carry the CSV download.
+const MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const day = (iso) => { const [y, m, d] = iso.split('-').map(Number); return `${d} ${MON[m - 1]} ${y}`; };
+for (const pl of CFG.places) {
+  const csv = (pl.downloads || []).map((d) => d[0]).find((f) => /^data\/[a-z]+\/tables\.csv$/.test(f));
+  if (!csv) continue;
+  const d = J(csv.slice(5).replace('tables.csv', 'summary.json')), F = d.figures, R = d.rates, st = d.state;
+  if (d.revision === 'no_draft') {
+    CARDS.push([pl.id, pl.label, 'No draft yet', `${st}'s draft roll had not been published when these pages were built`,
+      d.dates.draft ? `The draft is due on ${day(d.dates.draft)}` : 'No date has been set for the draft']);
+  } else {
+    CARDS.push([pl.id, pl.label, n(F.removed.v), st.length > 30 ? 'names left off the draft roll' : `names left off ${st}'s draft roll`,
+      `${p(R.per_100)} of every 100 electors on the roll before the revision`]);
+  }
+}
+
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const html = (c) => `<!DOCTYPE html><html><head><meta charset="utf-8">
 <link rel="stylesheet" href="/assets/sir.css"><style>
@@ -82,7 +99,7 @@ body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"
 .l1{font-size:38px;line-height:1.25;margin-top:16px;max-width:1040px}
 .l2{font-size:30px;color:var(--muted);margin-top:18px}
 </style></head><body data-theme="light"><div class="band ${place[c[0]].band}"></div><div class="c">
-<div class="k">SIR analysis for India</div><div class="pl">${esc(c[1])}</div>
+<div class="k">SIR analysis for India</div><div class="pl"${c[1].length > 30 ? ' style="font-size:44px;margin-bottom:26px"' : ''}>${esc(c[1])}</div>
 <div class="big">${esc(c[2])}</div><div class="l1">${esc(c[3])}</div><div class="l2">${esc(c[4])}</div></div></body></html>`;
 
 const port = 8700 + Math.floor(Math.random() * 200);

@@ -1,0 +1,153 @@
+{
+ "state": "Chandigarh",
+ "slug": "chandigarh",
+ "ut": true,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2026-07-15",
+  "draft": "2026-07-21",
+  "final": "2026-09-22"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 516427,
+   "src": "s1"
+  },
+  "draft": {
+   "v": 450282,
+   "src": "s1"
+  },
+  "removed": {
+   "v": 66145,
+   "src": "s2",
+   "press": true
+  },
+  "dead": {
+   "v": 3535,
+   "src": "s2",
+   "press": true
+  },
+  "shifted_absent_other": {
+   "v": 60020,
+   "src": "s2",
+   "press": true
+  },
+  "duplicate": {
+   "v": 2590,
+   "src": "s2",
+   "press": true
+  },
+  "added_after": {
+   "v": 15117,
+   "src": "s2",
+   "press": true
+  },
+  "removed_after": {
+   "v": 5190,
+   "src": "s2",
+   "press": true
+  },
+  "net_after": {
+   "v": 9927,
+   "src": "s2",
+   "press": true
+  },
+  "final": {
+   "v": 460209,
+   "src": "s2",
+   "press": true
+  },
+  "men_before": {
+   "v": 263724,
+   "src": "s2",
+   "press": true
+  },
+  "women_before": {
+   "v": 252677,
+   "src": "s2",
+   "press": true
+  },
+  "third_before": {
+   "v": 26,
+   "src": "s2",
+   "press": true
+  },
+  "men_final": {
+   "v": 234516,
+   "src": "s2",
+   "press": true
+  },
+  "women_final": {
+   "v": 225671,
+   "src": "s2",
+   "press": true
+  },
+  "third_final": {
+   "v": 22,
+   "src": "s2",
+   "press": true
+  },
+  "notices": {
+   "v": 137814,
+   "src": "s3",
+   "press": true
+  }
+ },
+ "reasons_complete": true,
+ "tables": [],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Chief Electoral Officer, Chandigarh, post of 5 August 2026 on the draft roll",
+   "url": "https://x.com/ceochandigarh/status/2085033322586226809",
+   "date": "2026-08-05",
+   "primary": true
+  },
+  {
+   "id": "s2",
+   "title": "Hindustan Times, 23 September 2026, reporting the union territory's statement on the final roll",
+   "url": "https://www.hindustantimes.com/cities/chandigarh-news/chandigarh-just-2-rise-in-voters-after-clearing-discrepancies-in-sir-101790106180996.html",
+   "date": "2026-09-23",
+   "primary": false
+  },
+  {
+   "id": "s3",
+   "title": "The Tribune, 28 July 2026, on the notices proposed at a review meeting",
+   "date": "2026-07-28",
+   "primary": false
+  },
+  {
+   "id": "s4",
+   "title": "Release of the union territory of 22 September 2026 on the final roll, as reproduced by indianewscalling.com",
+   "url": "https://www.indianewscalling.com/news/190303-final-electoral-roll-for-chandigarh-parliamentary-constituency-published.aspx",
+   "date": "2026-09-22",
+   "primary": false
+  }
+ ],
+ "notes": [
+  "The roll before and the draft come from the Chief Electoral Officer's own post of 5 August 2026. Everything else comes from the union territory's statement on the final roll as a newspaper reported it, and the final roll of 4,60,209 is also in the statement as another site reproduced it.",
+  "Chandigarh has no assembly constituencies. Its roll is one parliamentary constituency.",
+  "Shifted, absent and other are counted together here. The statement gives 43,725 shifted, 12,567 absent and 3,728 for other reasons.",
+  "Of the 5,190 names removed after the draft, 4,644 were marked ineligible at hearings. The statement does not say how the other 546 were removed.",
+  "The notices are the count proposed at a review meeting a week after the draft, 69,461 for electors who could not be linked to an earlier roll and 68,353 for details that did not agree. The final statement gives the notices served in rounded figures, about 1,38,000."
+ ],
+ "cannot_show": [
+  "How many names were left off in any ward or sector. The Chief Electoral Officer's site could not be reached and no table below the union territory was found.",
+  "A ward table that newspapers reported from a chart shared by the member of parliament. It compares the roll of the 2024 Lok Sabha election with a later roll, two years apart, and gives a percentage for most wards and a count for only six, for 17 of the 35 wards. The chart's own date is reported as 2 August 2026 and the chart itself was not found, so it is left out.",
+  "The draft by sex and the names left off by sex. They were reported in one news agency story that could not be read, so they are left out.",
+  "How many of the 15,117 names added after the draft were people left off it."
+ ],
+ "id": "ch",
+ "rates": {
+  "per_100": 12.81,
+  "shares": {
+   "dead": 5.3,
+   "shifted_absent_other": 90.7,
+   "duplicate": 3.9
+  },
+  "made_up_pct": 15.0,
+  "final_vs_before": -56218,
+  "women_before_pct": 48.93,
+  "women_final_pct": 49.04
+ }
+}

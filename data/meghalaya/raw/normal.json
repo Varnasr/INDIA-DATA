@@ -1,0 +1,782 @@
+{
+ "state": "Meghalaya",
+ "slug": "meghalaya",
+ "ut": false,
+ "revision": "sir",
+ "dates": {
+  "draft": "2026-08-05"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 2349645,
+   "src": "s1"
+  },
+  "draft": {
+   "v": 2169243,
+   "src": "s1"
+  },
+  "removed": {
+   "v": 180402,
+   "src": "s1"
+  },
+  "dead": {
+   "v": 81490,
+   "src": "s1"
+  },
+  "shifted_absent_other": {
+   "v": 92211,
+   "src": "s1"
+  },
+  "duplicate": {
+   "v": 6701,
+   "src": "s1"
+  },
+  "men_before": {
+   "v": 1158740,
+   "src": "s1"
+  },
+  "women_before": {
+   "v": 1190898,
+   "src": "s1"
+  },
+  "third_before": {
+   "v": 7,
+   "src": "s1"
+  },
+  "men_draft": {
+   "v": 1053039,
+   "src": "s1"
+  },
+  "women_draft": {
+   "v": 1116199,
+   "src": "s1"
+  },
+  "third_draft": {
+   "v": 5,
+   "src": "s1"
+  },
+  "men_removed": {
+   "v": 105701,
+   "src": "s1"
+  },
+  "women_removed": {
+   "v": 74699,
+   "src": "s1"
+  },
+  "third_removed": {
+   "v": 2,
+   "src": "s1"
+  },
+  "notices": {
+   "v": 651735,
+   "src": "s3"
+  }
+ },
+ "reasons_complete": true,
+ "tables": [
+  {
+   "id": "districts",
+   "title": "Every district, the names left off the draft and why",
+   "level": "district",
+   "kind": "left_off",
+   "src": "s1",
+   "partial": false,
+   "rows": [
+    {
+     "name": "West Jaintia Hills",
+     "before": 220478,
+     "removed": 10570,
+     "dead": 7097,
+     "shifted_absent_other": 3151,
+     "duplicate": 322,
+     "draft": 209908
+    },
+    {
+     "name": "Ri-Bhoi",
+     "before": 205735,
+     "removed": 15669,
+     "dead": 6096,
+     "shifted_absent_other": 9040,
+     "duplicate": 533,
+     "draft": 190066
+    },
+    {
+     "name": "East Khasi Hills",
+     "before": 632146,
+     "removed": 69986,
+     "dead": 27319,
+     "shifted_absent_other": 40940,
+     "duplicate": 1727,
+     "draft": 562160
+    },
+    {
+     "name": "West Khasi Hills",
+     "before": 137727,
+     "removed": 7907,
+     "dead": 4455,
+     "shifted_absent_other": 3013,
+     "duplicate": 439,
+     "draft": 129820
+    },
+    {
+     "name": "East Garo Hills",
+     "before": 114767,
+     "removed": 9255,
+     "dead": 2905,
+     "shifted_absent_other": 5761,
+     "duplicate": 589,
+     "draft": 105512
+    },
+    {
+     "name": "West Garo Hills",
+     "before": 396914,
+     "removed": 29532,
+     "dead": 15613,
+     "shifted_absent_other": 12874,
+     "duplicate": 1045,
+     "draft": 367382
+    },
+    {
+     "name": "South Garo Hills",
+     "before": 110488,
+     "removed": 7839,
+     "dead": 3583,
+     "shifted_absent_other": 3782,
+     "duplicate": 474,
+     "draft": 102649
+    },
+    {
+     "name": "East Jaintia Hills",
+     "before": 104417,
+     "removed": 7626,
+     "dead": 3598,
+     "shifted_absent_other": 3448,
+     "duplicate": 580,
+     "draft": 96791
+    },
+    {
+     "name": "South West Khasi Hills",
+     "before": 80592,
+     "removed": 3468,
+     "dead": 2305,
+     "shifted_absent_other": 1017,
+     "duplicate": 146,
+     "draft": 77124
+    },
+    {
+     "name": "North Garo Hills",
+     "before": 143748,
+     "removed": 11735,
+     "dead": 4578,
+     "shifted_absent_other": 6769,
+     "duplicate": 388,
+     "draft": 132013
+    },
+    {
+     "name": "South West Garo Hills",
+     "before": 108883,
+     "removed": 4212,
+     "dead": 2478,
+     "shifted_absent_other": 1428,
+     "duplicate": 306,
+     "draft": 104671
+    },
+    {
+     "name": "Eastern West Khasi Hills",
+     "before": 93750,
+     "removed": 2603,
+     "dead": 1463,
+     "shifted_absent_other": 988,
+     "duplicate": 152,
+     "draft": 91147
+    }
+   ]
+  },
+  {
+   "id": "constituencies",
+   "title": "Every constituency, the names left off the draft and why",
+   "level": "ac",
+   "kind": "left_off",
+   "src": "s1",
+   "partial": false,
+   "rows": [
+    {
+     "name": "1 Nartiang",
+     "before": 48718,
+     "removed": 2614,
+     "dead": 1807,
+     "shifted_absent_other": 722,
+     "duplicate": 85,
+     "draft": 46104
+    },
+    {
+     "name": "2 Jowai",
+     "before": 43838,
+     "removed": 2317,
+     "dead": 1437,
+     "shifted_absent_other": 795,
+     "duplicate": 85,
+     "draft": 41521
+    },
+    {
+     "name": "3 Raliang",
+     "before": 42961,
+     "removed": 2034,
+     "dead": 1635,
+     "shifted_absent_other": 361,
+     "duplicate": 38,
+     "draft": 40927
+    },
+    {
+     "name": "4 Mowkaiaw",
+     "before": 42837,
+     "removed": 2131,
+     "dead": 1260,
+     "shifted_absent_other": 774,
+     "duplicate": 97,
+     "draft": 40706
+    },
+    {
+     "name": "5 Sutnga Saipung",
+     "before": 51956,
+     "removed": 3325,
+     "dead": 1614,
+     "shifted_absent_other": 1390,
+     "duplicate": 321,
+     "draft": 48631
+    },
+    {
+     "name": "6 Khliehriat",
+     "before": 52461,
+     "removed": 4301,
+     "dead": 1984,
+     "shifted_absent_other": 2058,
+     "duplicate": 259,
+     "draft": 48160
+    },
+    {
+     "name": "7 Amlarem",
+     "before": 42124,
+     "removed": 1474,
+     "dead": 958,
+     "shifted_absent_other": 499,
+     "duplicate": 17,
+     "draft": 40650
+    },
+    {
+     "name": "8 Mawhati",
+     "before": 42861,
+     "removed": 1901,
+     "dead": 1027,
+     "shifted_absent_other": 793,
+     "duplicate": 81,
+     "draft": 40960
+    },
+    {
+     "name": "9 Nongpoh",
+     "before": 40943,
+     "removed": 2415,
+     "dead": 1104,
+     "shifted_absent_other": 1207,
+     "duplicate": 104,
+     "draft": 38528
+    },
+    {
+     "name": "10 Jirang",
+     "before": 44173,
+     "removed": 5439,
+     "dead": 1306,
+     "shifted_absent_other": 4038,
+     "duplicate": 95,
+     "draft": 38734
+    },
+    {
+     "name": "11 Umsning",
+     "before": 42386,
+     "removed": 3281,
+     "dead": 1459,
+     "shifted_absent_other": 1667,
+     "duplicate": 155,
+     "draft": 39105
+    },
+    {
+     "name": "12 Umroi",
+     "before": 35372,
+     "removed": 2633,
+     "dead": 1200,
+     "shifted_absent_other": 1335,
+     "duplicate": 98,
+     "draft": 32739
+    },
+    {
+     "name": "13 Mawryngkneng",
+     "before": 43706,
+     "removed": 3202,
+     "dead": 1976,
+     "shifted_absent_other": 1073,
+     "duplicate": 153,
+     "draft": 40504
+    },
+    {
+     "name": "14 Pynthorumkhrah",
+     "before": 36571,
+     "removed": 6787,
+     "dead": 1903,
+     "shifted_absent_other": 4758,
+     "duplicate": 126,
+     "draft": 29784
+    },
+    {
+     "name": "15 Mawlai",
+     "before": 52893,
+     "removed": 5570,
+     "dead": 1775,
+     "shifted_absent_other": 3672,
+     "duplicate": 123,
+     "draft": 47323
+    },
+    {
+     "name": "16 East Shillong",
+     "before": 25300,
+     "removed": 5608,
+     "dead": 1419,
+     "shifted_absent_other": 4134,
+     "duplicate": 55,
+     "draft": 19692
+    },
+    {
+     "name": "17 North Shillong",
+     "before": 28072,
+     "removed": 6563,
+     "dead": 2011,
+     "shifted_absent_other": 4423,
+     "duplicate": 129,
+     "draft": 21509
+    },
+    {
+     "name": "18 West Shillong",
+     "before": 27331,
+     "removed": 6149,
+     "dead": 1820,
+     "shifted_absent_other": 4269,
+     "duplicate": 60,
+     "draft": 21182
+    },
+    {
+     "name": "19 South Shillong",
+     "before": 34077,
+     "removed": 7755,
+     "dead": 1809,
+     "shifted_absent_other": 5901,
+     "duplicate": 45,
+     "draft": 26322
+    },
+    {
+     "name": "20 Mylliem",
+     "before": 38922,
+     "removed": 2633,
+     "dead": 1260,
+     "shifted_absent_other": 1282,
+     "duplicate": 91,
+     "draft": 36289
+    },
+    {
+     "name": "21 Nongthymmai",
+     "before": 36850,
+     "removed": 7413,
+     "dead": 2068,
+     "shifted_absent_other": 5213,
+     "duplicate": 132,
+     "draft": 29437
+    },
+    {
+     "name": "22 Nongkrem",
+     "before": 40276,
+     "removed": 3030,
+     "dead": 1341,
+     "shifted_absent_other": 1622,
+     "duplicate": 67,
+     "draft": 37246
+    },
+    {
+     "name": "23 Sohiong",
+     "before": 37496,
+     "removed": 2273,
+     "dead": 1212,
+     "shifted_absent_other": 968,
+     "duplicate": 93,
+     "draft": 35223
+    },
+    {
+     "name": "24 Mawphlang",
+     "before": 38518,
+     "removed": 2350,
+     "dead": 1507,
+     "shifted_absent_other": 675,
+     "duplicate": 168,
+     "draft": 36168
+    },
+    {
+     "name": "25 Mawsynram",
+     "before": 39984,
+     "removed": 2358,
+     "dead": 1483,
+     "shifted_absent_other": 739,
+     "duplicate": 136,
+     "draft": 37626
+    },
+    {
+     "name": "26 Shella",
+     "before": 37925,
+     "removed": 2718,
+     "dead": 1558,
+     "shifted_absent_other": 1072,
+     "duplicate": 88,
+     "draft": 35207
+    },
+    {
+     "name": "27 Pynursla",
+     "before": 41748,
+     "removed": 2434,
+     "dead": 1941,
+     "shifted_absent_other": 390,
+     "duplicate": 103,
+     "draft": 39314
+    },
+    {
+     "name": "28 Sohra",
+     "before": 32220,
+     "removed": 1688,
+     "dead": 1329,
+     "shifted_absent_other": 313,
+     "duplicate": 46,
+     "draft": 30532
+    },
+    {
+     "name": "29 Mawkynrew",
+     "before": 40257,
+     "removed": 1455,
+     "dead": 907,
+     "shifted_absent_other": 436,
+     "duplicate": 112,
+     "draft": 38802
+    },
+    {
+     "name": "30 Mairang",
+     "before": 46252,
+     "removed": 1438,
+     "dead": 828,
+     "shifted_absent_other": 520,
+     "duplicate": 90,
+     "draft": 44814
+    },
+    {
+     "name": "31 Mawthadraishan",
+     "before": 47498,
+     "removed": 1165,
+     "dead": 635,
+     "shifted_absent_other": 468,
+     "duplicate": 62,
+     "draft": 46333
+    },
+    {
+     "name": "32 Nongstoin",
+     "before": 48244,
+     "removed": 1595,
+     "dead": 1075,
+     "shifted_absent_other": 432,
+     "duplicate": 88,
+     "draft": 46649
+    },
+    {
+     "name": "33 Rambrai Jyrngam",
+     "before": 43962,
+     "removed": 3059,
+     "dead": 1519,
+     "shifted_absent_other": 1310,
+     "duplicate": 230,
+     "draft": 40903
+    },
+    {
+     "name": "34 Mawshynrut",
+     "before": 45521,
+     "removed": 3253,
+     "dead": 1861,
+     "shifted_absent_other": 1271,
+     "duplicate": 121,
+     "draft": 42268
+    },
+    {
+     "name": "35 Ranikor",
+     "before": 39247,
+     "removed": 1993,
+     "dead": 1216,
+     "shifted_absent_other": 705,
+     "duplicate": 72,
+     "draft": 37254
+    },
+    {
+     "name": "36 Mawkyrwat",
+     "before": 41345,
+     "removed": 1475,
+     "dead": 1089,
+     "shifted_absent_other": 312,
+     "duplicate": 74,
+     "draft": 39870
+    },
+    {
+     "name": "37 Kharkutta",
+     "before": 44866,
+     "removed": 4082,
+     "dead": 1050,
+     "shifted_absent_other": 2910,
+     "duplicate": 122,
+     "draft": 40784
+    },
+    {
+     "name": "38 Mendipathar",
+     "before": 31082,
+     "removed": 2898,
+     "dead": 1282,
+     "shifted_absent_other": 1524,
+     "duplicate": 92,
+     "draft": 28184
+    },
+    {
+     "name": "39 Resubelpara",
+     "before": 32138,
+     "removed": 2304,
+     "dead": 919,
+     "shifted_absent_other": 1315,
+     "duplicate": 70,
+     "draft": 29834
+    },
+    {
+     "name": "40 Bajengdoba",
+     "before": 35662,
+     "removed": 2451,
+     "dead": 1327,
+     "shifted_absent_other": 1020,
+     "duplicate": 104,
+     "draft": 33211
+    },
+    {
+     "name": "41 Songsak",
+     "before": 35518,
+     "removed": 2214,
+     "dead": 1069,
+     "shifted_absent_other": 1029,
+     "duplicate": 116,
+     "draft": 33304
+    },
+    {
+     "name": "42 Rongjeng",
+     "before": 39099,
+     "removed": 2655,
+     "dead": 1055,
+     "shifted_absent_other": 1361,
+     "duplicate": 239,
+     "draft": 36444
+    },
+    {
+     "name": "43 William Nagar",
+     "before": 40150,
+     "removed": 4386,
+     "dead": 781,
+     "shifted_absent_other": 3371,
+     "duplicate": 234,
+     "draft": 35764
+    },
+    {
+     "name": "44 Raksamgre",
+     "before": 33456,
+     "removed": 2743,
+     "dead": 1768,
+     "shifted_absent_other": 878,
+     "duplicate": 97,
+     "draft": 30713
+    },
+    {
+     "name": "45 Tikrikilla",
+     "before": 38102,
+     "removed": 2488,
+     "dead": 1611,
+     "shifted_absent_other": 813,
+     "duplicate": 64,
+     "draft": 35614
+    },
+    {
+     "name": "46 Phulbari",
+     "before": 35902,
+     "removed": 1961,
+     "dead": 1256,
+     "shifted_absent_other": 653,
+     "duplicate": 52,
+     "draft": 33941
+    },
+    {
+     "name": "47 Rajabala",
+     "before": 38778,
+     "removed": 1686,
+     "dead": 926,
+     "shifted_absent_other": 659,
+     "duplicate": 101,
+     "draft": 37092
+    },
+    {
+     "name": "48 Selsella",
+     "before": 39293,
+     "removed": 1999,
+     "dead": 1200,
+     "shifted_absent_other": 726,
+     "duplicate": 73,
+     "draft": 37294
+    },
+    {
+     "name": "49 Dadenggre",
+     "before": 39880,
+     "removed": 2807,
+     "dead": 1870,
+     "shifted_absent_other": 851,
+     "duplicate": 86,
+     "draft": 37073
+    },
+    {
+     "name": "50 North Tura",
+     "before": 36631,
+     "removed": 4216,
+     "dead": 1526,
+     "shifted_absent_other": 2579,
+     "duplicate": 111,
+     "draft": 32415
+    },
+    {
+     "name": "51 South Tura",
+     "before": 35796,
+     "removed": 5012,
+     "dead": 1938,
+     "shifted_absent_other": 3009,
+     "duplicate": 65,
+     "draft": 30784
+    },
+    {
+     "name": "52 Rangsakona",
+     "before": 40914,
+     "removed": 3172,
+     "dead": 1747,
+     "shifted_absent_other": 1327,
+     "duplicate": 98,
+     "draft": 37742
+    },
+    {
+     "name": "53 Ampati",
+     "before": 35573,
+     "removed": 1247,
+     "dead": 755,
+     "shifted_absent_other": 406,
+     "duplicate": 86,
+     "draft": 34326
+    },
+    {
+     "name": "54 Mahendraganj",
+     "before": 39339,
+     "removed": 1452,
+     "dead": 812,
+     "shifted_absent_other": 582,
+     "duplicate": 58,
+     "draft": 37887
+    },
+    {
+     "name": "55 Salmanpara",
+     "before": 33971,
+     "removed": 1513,
+     "dead": 911,
+     "shifted_absent_other": 440,
+     "duplicate": 162,
+     "draft": 32458
+    },
+    {
+     "name": "56 Gambegre",
+     "before": 34857,
+     "removed": 1785,
+     "dead": 899,
+     "shifted_absent_other": 716,
+     "duplicate": 170,
+     "draft": 33072
+    },
+    {
+     "name": "57 Dalu",
+     "before": 23305,
+     "removed": 1663,
+     "dead": 872,
+     "shifted_absent_other": 663,
+     "duplicate": 128,
+     "draft": 21642
+    },
+    {
+     "name": "58 Rongara Siju",
+     "before": 38179,
+     "removed": 3297,
+     "dead": 1261,
+     "shifted_absent_other": 1798,
+     "duplicate": 238,
+     "draft": 34882
+    },
+    {
+     "name": "59 Chokpot",
+     "before": 35921,
+     "removed": 2521,
+     "dead": 1270,
+     "shifted_absent_other": 1151,
+     "duplicate": 100,
+     "draft": 33400
+    },
+    {
+     "name": "60 Baghmara",
+     "before": 36388,
+     "removed": 2021,
+     "dead": 1052,
+     "shifted_absent_other": 833,
+     "duplicate": 136,
+     "draft": 34367
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Election Department, Government of Meghalaya (Chief Electoral Officer), press note No. EL.63/2026/29 of 5 August 2026 with the SIR status report by constituency",
+   "url": "https://meghalaya.gov.in/meghalaya/sites/default/files/press_release/EL_63_2026_29.pdf",
+   "date": "2026-08-05",
+   "primary": true
+  },
+  {
+   "id": "s2",
+   "title": "Press Information Bureau, release of 5 August 2026 on the Meghalaya draft roll",
+   "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2295108",
+   "date": "2026-08-05",
+   "primary": true
+  },
+  {
+   "id": "s3",
+   "title": "Election Department, Government of Meghalaya (Chief Electoral Officer), press note No. EL.63/2026/87 of 1 October 2026",
+   "url": "https://meghalaya.gov.in/meghalaya/sites/default/files/press_release/EL_63_2026_87.pdf",
+   "date": "2026-10-01",
+   "primary": true
+  }
+ ],
+ "notes": [
+  "Every figure here is from the Chief Electoral Officer's press notes, chiefly the note of 5 August 2026 with its table of all 60 constituencies, and the note of 1 October 2026 for the notices.",
+  "The table of the names left off gives five reasons. Untraceable or absent (45,011), shifted (42,532) and refused to fill a form (4,668) are counted together here, beside 81,490 dead and 6,701 enrolled more than once.",
+  "The note of 5 August prints the roll before the revision and the draft by sex. The split by sex of the names left off is worked out from the two.",
+  "The constituency rows add up to the printed district totals and to the state in every column. The district names are written out in full from the abbreviations in the table.",
+  "The notices count 2,22,786 electors who could not be linked to the earlier roll and 4,28,949 sent a notice over a discrepancy, as on 1 October 2026. By then 1,194 had been found ineligible, which is an interim count.",
+  "The final roll was due on 7 October 2026 and was moved to 26 October 2026."
+ ],
+ "cannot_show": [
+  "Women's share of the names left off in any district or constituency. The roll by sex was published for the state only.",
+  "Where the notices and hearings fell. They were published as state totals only.",
+  "The final roll, which was not out when these figures were read."
+ ]
+}

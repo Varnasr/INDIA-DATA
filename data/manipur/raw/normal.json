@@ -1,0 +1,771 @@
+{
+ "state": "Manipur",
+ "slug": "manipur",
+ "ut": false,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2026-05-18",
+  "draft": "2026-07-05",
+  "final": "2026-09-06"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 2093076,
+   "src": "s1"
+  },
+  "draft": {
+   "v": 1934399,
+   "src": "s1"
+  },
+  "removed": {
+   "v": 158677,
+   "src": "s1"
+  },
+  "dead": {
+   "v": 43000,
+   "src": "s1"
+  },
+  "shifted_absent_other": {
+   "v": 108283,
+   "src": "s1"
+  },
+  "duplicate": {
+   "v": 7394,
+   "src": "s1"
+  },
+  "added_after": {
+   "v": 56871,
+   "src": "s1"
+  },
+  "removed_after": {
+   "v": 30650,
+   "src": "s1"
+  },
+  "net_after": {
+   "v": 26221,
+   "src": "s1"
+  },
+  "final": {
+   "v": 1960620,
+   "src": "s1"
+  },
+  "men_before": {
+   "v": 1010317,
+   "src": "s1"
+  },
+  "women_before": {
+   "v": 1082459,
+   "src": "s1"
+  },
+  "third_before": {
+   "v": 300,
+   "src": "s1"
+  },
+  "men_draft": {
+   "v": 940446,
+   "src": "s1"
+  },
+  "women_draft": {
+   "v": 993660,
+   "src": "s1"
+  },
+  "third_draft": {
+   "v": 293,
+   "src": "s1"
+  },
+  "men_removed": {
+   "v": 69871,
+   "src": "s1"
+  },
+  "women_removed": {
+   "v": 88799,
+   "src": "s1"
+  },
+  "third_removed": {
+   "v": 7,
+   "src": "s1"
+  },
+  "men_final": {
+   "v": 953350,
+   "src": "s1"
+  },
+  "women_final": {
+   "v": 1006962,
+   "src": "s1"
+  },
+  "third_final": {
+   "v": 308,
+   "src": "s1"
+  },
+  "notices": {
+   "v": 1221833,
+   "src": "s1"
+  }
+ },
+ "reasons_complete": true,
+ "tables": [
+  {
+   "id": "districts",
+   "title": "Every district, the final roll by sex",
+   "level": "district",
+   "kind": "final",
+   "src": "s5",
+   "partial": false,
+   "rows": [
+    {
+     "name": "Imphal West",
+     "final": 378583,
+     "men": 180028,
+     "women": 198451,
+     "third": 104
+    },
+    {
+     "name": "Imphal East",
+     "final": 319389,
+     "men": 152479,
+     "women": 166814,
+     "third": 96
+    },
+    {
+     "name": "Bishnupur",
+     "final": 185181,
+     "men": 90493,
+     "women": 94636,
+     "third": 52
+    },
+    {
+     "name": "Thoubal",
+     "final": 206859,
+     "men": 101434,
+     "women": 105407,
+     "third": 18
+    },
+    {
+     "name": "Chandel",
+     "final": 39125,
+     "men": 18848,
+     "women": 20277,
+     "third": 0
+    },
+    {
+     "name": "Ukhrul",
+     "final": 88414,
+     "men": 43421,
+     "women": 44993,
+     "third": 0
+    },
+    {
+     "name": "Senapati",
+     "final": 137628,
+     "men": 69032,
+     "women": 68595,
+     "third": 1
+    },
+    {
+     "name": "Tamenglong",
+     "final": 69973,
+     "men": 34645,
+     "women": 35327,
+     "third": 1
+    },
+    {
+     "name": "Churachandpur",
+     "final": 157921,
+     "men": 75613,
+     "women": 82300,
+     "third": 8
+    },
+    {
+     "name": "Jiribam",
+     "final": 28337,
+     "men": 14428,
+     "women": 13908,
+     "third": 1
+    },
+    {
+     "name": "Kangpokpi",
+     "final": 103263,
+     "men": 51033,
+     "women": 52229,
+     "third": 1
+    },
+    {
+     "name": "Kakching",
+     "final": 118642,
+     "men": 58382,
+     "women": 60236,
+     "third": 24
+    },
+    {
+     "name": "Tengnoupal",
+     "final": 40060,
+     "men": 19656,
+     "women": 20402,
+     "third": 2
+    },
+    {
+     "name": "Kamjong",
+     "final": 32579,
+     "men": 16319,
+     "women": 16260,
+     "third": 0
+    },
+    {
+     "name": "Noney",
+     "final": 25654,
+     "men": 12947,
+     "women": 12707,
+     "third": 0
+    },
+    {
+     "name": "Pherzawl",
+     "final": 29012,
+     "men": 14592,
+     "women": 14420,
+     "third": 0
+    }
+   ]
+  },
+  {
+   "id": "constituencies",
+   "title": "Every constituency, from the roll before the revision to the final roll of 6 September 2026",
+   "level": "ac",
+   "kind": "fall",
+   "src": "s4",
+   "partial": false,
+   "rows": [
+    {
+     "name": "1 Khundrakpam",
+     "before": 27591,
+     "final": 26264,
+     "men": 13099,
+     "women": 13154,
+     "third": 11
+    },
+    {
+     "name": "2 Heingang",
+     "before": 35215,
+     "final": 33887,
+     "men": 15816,
+     "women": 18063,
+     "third": 8
+    },
+    {
+     "name": "3 Khurai",
+     "before": 37023,
+     "final": 35863,
+     "men": 16782,
+     "women": 19054,
+     "third": 27
+    },
+    {
+     "name": "4 Khetrigao",
+     "before": 37930,
+     "final": 36860,
+     "men": 17408,
+     "women": 19442,
+     "third": 10
+    },
+    {
+     "name": "5 Thongju",
+     "before": 32840,
+     "final": 32402,
+     "men": 15348,
+     "women": 17047,
+     "third": 7
+    },
+    {
+     "name": "6 Keirao",
+     "before": 30388,
+     "final": 29172,
+     "men": 14203,
+     "women": 14964,
+     "third": 5
+    },
+    {
+     "name": "7 Andro",
+     "before": 37106,
+     "final": 36424,
+     "men": 17815,
+     "women": 18599,
+     "third": 10
+    },
+    {
+     "name": "8 Lamlai",
+     "before": 30863,
+     "final": 29861,
+     "men": 14590,
+     "women": 15264,
+     "third": 7
+    },
+    {
+     "name": "9 Thangmeiband",
+     "before": 27946,
+     "final": 26613,
+     "men": 12468,
+     "women": 14141,
+     "third": 4
+    },
+    {
+     "name": "10 Uripok",
+     "before": 25543,
+     "final": 24152,
+     "men": 11135,
+     "women": 13011,
+     "third": 6
+    },
+    {
+     "name": "11 Sagolband",
+     "before": 23798,
+     "final": 22281,
+     "men": 10262,
+     "women": 12012,
+     "third": 7
+    },
+    {
+     "name": "12 Keisamthong",
+     "before": 27412,
+     "final": 26683,
+     "men": 12308,
+     "women": 14370,
+     "third": 5
+    },
+    {
+     "name": "13 Singjamei",
+     "before": 20840,
+     "final": 20298,
+     "men": 9143,
+     "women": 11146,
+     "third": 9
+    },
+    {
+     "name": "14 Yaiskul",
+     "before": 26542,
+     "final": 25881,
+     "men": 11939,
+     "women": 13939,
+     "third": 3
+    },
+    {
+     "name": "15 Wangkhei",
+     "before": 36104,
+     "final": 32775,
+     "men": 15479,
+     "women": 17288,
+     "third": 8
+    },
+    {
+     "name": "16 Sekmai",
+     "before": 31714,
+     "final": 30218,
+     "men": 14895,
+     "women": 15318,
+     "third": 5
+    },
+    {
+     "name": "17 Lamsang",
+     "before": 34756,
+     "final": 34417,
+     "men": 16683,
+     "women": 17717,
+     "third": 17
+    },
+    {
+     "name": "18 Konthoujam",
+     "before": 30854,
+     "final": 30009,
+     "men": 14601,
+     "women": 15400,
+     "third": 8
+    },
+    {
+     "name": "19 Patsoi",
+     "before": 38325,
+     "final": 37516,
+     "men": 17606,
+     "women": 19892,
+     "third": 18
+    },
+    {
+     "name": "20 Langthabal",
+     "before": 28457,
+     "final": 27886,
+     "men": 13268,
+     "women": 14612,
+     "third": 6
+    },
+    {
+     "name": "21 Naoria Pakhanglakpa",
+     "before": 35928,
+     "final": 35175,
+     "men": 16843,
+     "women": 18321,
+     "third": 11
+    },
+    {
+     "name": "22 Wangoi",
+     "before": 31108,
+     "final": 30898,
+     "men": 15010,
+     "women": 15881,
+     "third": 7
+    },
+    {
+     "name": "23 Mayang Imphal",
+     "before": 33515,
+     "final": 32437,
+     "men": 15806,
+     "women": 16630,
+     "third": 1
+    },
+    {
+     "name": "24 Nambol",
+     "before": 34071,
+     "final": 32863,
+     "men": 15959,
+     "women": 16897,
+     "third": 7
+    },
+    {
+     "name": "25 Oinam",
+     "before": 28853,
+     "final": 27878,
+     "men": 13539,
+     "women": 14329,
+     "third": 10
+    },
+    {
+     "name": "26 Bishenpur",
+     "before": 32251,
+     "final": 32524,
+     "men": 15696,
+     "women": 16808,
+     "third": 20
+    },
+    {
+     "name": "27 Moirang",
+     "before": 40763,
+     "final": 40629,
+     "men": 19813,
+     "women": 20806,
+     "third": 10
+    },
+    {
+     "name": "28 Thanga",
+     "before": 22829,
+     "final": 22046,
+     "men": 10890,
+     "women": 11156,
+     "third": 0
+    },
+    {
+     "name": "29 Kumbi",
+     "before": 29287,
+     "final": 29241,
+     "men": 14596,
+     "women": 14640,
+     "third": 5
+    },
+    {
+     "name": "30 Lilong",
+     "before": 36870,
+     "final": 36906,
+     "men": 18394,
+     "women": 18510,
+     "third": 2
+    },
+    {
+     "name": "31 Thoubal",
+     "before": 33074,
+     "final": 32925,
+     "men": 15973,
+     "women": 16949,
+     "third": 3
+    },
+    {
+     "name": "32 Wangkhem",
+     "before": 34310,
+     "final": 34061,
+     "men": 16775,
+     "women": 17281,
+     "third": 5
+    },
+    {
+     "name": "33 Heirok",
+     "before": 33412,
+     "final": 32433,
+     "men": 15891,
+     "women": 16538,
+     "third": 4
+    },
+    {
+     "name": "34 Wangjing Tentha",
+     "before": 33928,
+     "final": 32393,
+     "men": 15693,
+     "women": 16699,
+     "third": 1
+    },
+    {
+     "name": "35 Khangabok",
+     "before": 38034,
+     "final": 38141,
+     "men": 18708,
+     "women": 19430,
+     "third": 3
+    },
+    {
+     "name": "36 Wabgai",
+     "before": 32133,
+     "final": 31038,
+     "men": 15328,
+     "women": 15703,
+     "third": 7
+    },
+    {
+     "name": "37 Kakching",
+     "before": 30844,
+     "final": 30344,
+     "men": 14590,
+     "women": 15745,
+     "third": 9
+    },
+    {
+     "name": "38 Hiyanglam",
+     "before": 28172,
+     "final": 28330,
+     "men": 13990,
+     "women": 14340,
+     "third": 0
+    },
+    {
+     "name": "39 Sugnoo",
+     "before": 28111,
+     "final": 28930,
+     "men": 14474,
+     "women": 14448,
+     "third": 8
+    },
+    {
+     "name": "40 Jiribam",
+     "before": 32171,
+     "final": 28337,
+     "men": 14428,
+     "women": 13908,
+     "third": 1
+    },
+    {
+     "name": "41 Chandel",
+     "before": 44745,
+     "final": 39125,
+     "men": 18848,
+     "women": 20277,
+     "third": 0
+    },
+    {
+     "name": "42 Tengnoupal",
+     "before": 45139,
+     "final": 40060,
+     "men": 19656,
+     "women": 20402,
+     "third": 2
+    },
+    {
+     "name": "43 Phungyar",
+     "before": 36207,
+     "final": 32579,
+     "men": 16319,
+     "women": 16260,
+     "third": 0
+    },
+    {
+     "name": "44 Ukhrul",
+     "before": 48061,
+     "final": 41406,
+     "men": 20511,
+     "women": 20895,
+     "third": 0
+    },
+    {
+     "name": "45 Chingai",
+     "before": 49510,
+     "final": 47008,
+     "men": 22910,
+     "women": 24098,
+     "third": 0
+    },
+    {
+     "name": "46 Saikul",
+     "before": 31422,
+     "final": 30762,
+     "men": 15202,
+     "women": 15560,
+     "third": 0
+    },
+    {
+     "name": "47 Karong",
+     "before": 50135,
+     "final": 44970,
+     "men": 22702,
+     "women": 22268,
+     "third": 0
+    },
+    {
+     "name": "48 Mao",
+     "before": 50001,
+     "final": 47374,
+     "men": 23474,
+     "women": 23899,
+     "third": 1
+    },
+    {
+     "name": "49 Tadubi",
+     "before": 49961,
+     "final": 45284,
+     "men": 22856,
+     "women": 22428,
+     "third": 0
+    },
+    {
+     "name": "50 Kangpokpi",
+     "before": 30306,
+     "final": 27983,
+     "men": 14000,
+     "women": 13983,
+     "third": 0
+    },
+    {
+     "name": "51 Saitu",
+     "before": 48562,
+     "final": 44518,
+     "men": 21831,
+     "women": 22686,
+     "third": 1
+    },
+    {
+     "name": "52 Tamei",
+     "before": 43022,
+     "final": 39858,
+     "men": 19565,
+     "women": 20292,
+     "third": 1
+    },
+    {
+     "name": "53 Tamenglong",
+     "before": 36174,
+     "final": 30115,
+     "men": 15080,
+     "women": 15035,
+     "third": 0
+    },
+    {
+     "name": "54 Nungba",
+     "before": 30166,
+     "final": 25654,
+     "men": 12947,
+     "women": 12707,
+     "third": 0
+    },
+    {
+     "name": "55 Tipaimukh",
+     "before": 18045,
+     "final": 16346,
+     "men": 8226,
+     "women": 8120,
+     "third": 0
+    },
+    {
+     "name": "56 Thanlon",
+     "before": 17291,
+     "final": 12666,
+     "men": 6366,
+     "women": 6300,
+     "third": 0
+    },
+    {
+     "name": "57 Henglep",
+     "before": 31439,
+     "final": 23585,
+     "men": 11625,
+     "women": 11959,
+     "third": 1
+    },
+    {
+     "name": "58 Churachandpur",
+     "before": 68731,
+     "final": 61149,
+     "men": 28524,
+     "women": 32623,
+     "third": 2
+    },
+    {
+     "name": "59 Saikot",
+     "before": 66664,
+     "final": 53307,
+     "men": 25652,
+     "women": 27652,
+     "third": 3
+    },
+    {
+     "name": "60 Singhat",
+     "before": 26584,
+     "final": 19880,
+     "men": 9812,
+     "women": 10066,
+     "third": 2
+    }
+   ],
+   "note": "The roll before is the table of electors to be enumerated on the Chief Electoral Officer's SIR page. The change it shows takes in the names left off the draft and the additions and deletions after it together."
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Chief Electoral Officer, Manipur, press note No. e-Roll-101/6/2025-ELEC-ED of 6 September 2026 on the final roll",
+   "url": "https://ceomanipur.nic.in/Documents/PressNote/2026-2027/PRESS%20NOTE%20SIR%20FINAL%20EROLL%202026.pdf",
+   "date": "2026-09-06",
+   "primary": true
+  },
+  {
+   "id": "s2",
+   "title": "Chief Electoral Officer, Manipur, press release of 5 July 2026 on the draft roll",
+   "url": "https://ceomanipur.nic.in/Documents/PressNote/2026-2027/SIR%20Draft%20Publication%20Press%20Release%202026.pdf",
+   "date": "2026-07-05",
+   "primary": true
+  },
+  {
+   "id": "s3",
+   "title": "Chief Electoral Officer, Manipur, SIR page, table of electors to be enumerated by district and constituency",
+   "url": "https://ceomanipur.nic.in/sir.aspx",
+   "primary": true
+  },
+  {
+   "id": "s4",
+   "title": "Chief Electoral Officer, Manipur, AC Wise Elector Count, Final Publication 2026",
+   "url": "https://ceomanipur.nic.in/Documents/SIR/AC%20Wise%20Elector%20Count%20Final%20Publication%202026.pdf",
+   "date": "2026-09-06",
+   "primary": true
+  },
+  {
+   "id": "s5",
+   "title": "Chief Electoral Officer, Manipur, District Wise Elector Count, Final Publication 2026",
+   "url": "https://ceomanipur.nic.in/Documents/SIR/District%20Wise%20Elector%20Count%20Final%20Publication%202026.pdf",
+   "date": "2026-09-06",
+   "primary": true
+  }
+ ],
+ "notes": [
+  "Every figure here is the Chief Electoral Officer, Manipur's own, from the press note of 6 September 2026 and the constituency and district tables on the office's website.",
+  "The roll before the revision is the roll as on 18 May 2026. The constituency table of that roll carries no date, and it adds up to the same 20,93,076.",
+  "The press note gives five reasons. Absent (34,740), shifted (72,473) and others (1,070) are counted together here, beside 43,000 dead and 7,394 enrolled more than once.",
+  "The split by sex of the names left off is worked out by taking the draft by sex from the roll before by sex. The press note prints both rolls by sex and not the difference.",
+  "The notices count 91,178 electors who could not be linked to the 2003 roll and 11,30,655 sent a notice over a discrepancy. The press note says 26,362 were marked ineligible after a hearing.",
+  "The figures leave out service electors, who are counted separately. There were 20,819 on the final roll.",
+  "Five constituencies end with more electors than they had before the revision. They are Bishenpur, Lilong, Khangabok, Hiyanglam and Sugnoo. Constituency 39 is spelled Sugnu in the table of the roll before and Sugnoo in the final table."
+ ],
+ "cannot_show": [
+  "How many names were left off the draft in each district or constituency. The 1,58,677 and its reasons were published for the state only.",
+  "The draft roll by district or constituency. No such table was published, so the constituency table runs from the roll before to the final roll and mixes the names left off with the changes after the draft.",
+  "Where the notices, the hearings and the names added and deleted after the draft fell. They were published as state totals only."
+ ]
+}

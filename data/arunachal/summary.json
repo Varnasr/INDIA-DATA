@@ -1,0 +1,213 @@
+{
+ "state": "Arunachal Pradesh",
+ "slug": "arunachal",
+ "ut": false,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2026-06-02",
+  "draft": "2026-07-21",
+  "final": "2026-09-22"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 887505,
+   "src": "s1"
+  },
+  "draft": {
+   "v": 718046,
+   "src": "s1"
+  },
+  "removed": {
+   "v": 169459,
+   "src": "s1"
+  },
+  "dead": {
+   "v": 25573,
+   "src": "s1"
+  },
+  "shifted_absent_other": {
+   "v": 138939,
+   "src": "s1"
+  },
+  "duplicate": {
+   "v": 4947,
+   "src": "s1"
+  },
+  "added_after": {
+   "v": 8803,
+   "src": "s1"
+  },
+  "removed_after": {
+   "v": 30823,
+   "src": "s1"
+  },
+  "net_after": {
+   "v": -22020,
+   "src": "s1"
+  },
+  "final": {
+   "v": 696026,
+   "src": "s1"
+  },
+  "men_before": {
+   "v": 435414,
+   "src": "s1"
+  },
+  "women_before": {
+   "v": 452089,
+   "src": "s1"
+  },
+  "third_before": {
+   "v": 2,
+   "src": "s1"
+  },
+  "men_draft": {
+   "v": 353965,
+   "src": "s1"
+  },
+  "women_draft": {
+   "v": 364079,
+   "src": "s1"
+  },
+  "third_draft": {
+   "v": 2,
+   "src": "s1"
+  },
+  "men_final": {
+   "v": 343709,
+   "src": "s1"
+  },
+  "women_final": {
+   "v": 352315,
+   "src": "s1"
+  },
+  "third_final": {
+   "v": 2,
+   "src": "s1"
+  },
+  "notices": {
+   "v": 218588,
+   "src": "s1"
+  }
+ },
+ "reasons_complete": true,
+ "tables": [
+  {
+   "id": "papum_pare_acs",
+   "title": "The three constituencies of Papum Pare district, from the roll before to the draft",
+   "level": "ac",
+   "kind": "left_off",
+   "src": "s2",
+   "partial": true,
+   "rows": [
+    {
+     "name": "13 Itanagar",
+     "before": 63046,
+     "draft": 21471,
+     "removed": 41575,
+     "men": 9451,
+     "women": 12020,
+     "per_100": 65.94
+    },
+    {
+     "name": "14 Doimukh",
+     "before": 25077,
+     "draft": 19038,
+     "removed": 6039,
+     "men": 8914,
+     "women": 10124,
+     "per_100": 24.08
+    },
+    {
+     "name": "15 Sagalee",
+     "before": 14687,
+     "draft": 12873,
+     "removed": 1814,
+     "men": 6352,
+     "women": 6521,
+     "per_100": 12.35
+    }
+   ]
+  },
+  {
+   "id": "districts_press",
+   "title": "Two districts, as their District Election Officers gave them on draft day",
+   "level": "district",
+   "kind": "left_off",
+   "src": "s3",
+   "partial": true,
+   "press": true,
+   "rows": [
+    {
+     "name": "Tawang",
+     "draft": 25512,
+     "removed": 3023,
+     "men": 12227,
+     "women": 13285,
+     "before": 28535,
+     "per_100": 10.59
+    },
+    {
+     "name": "Tirap",
+     "before": 40041,
+     "removed": 5864,
+     "draft": 34177,
+     "per_100": 14.64
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Chief Electoral Officer, Arunachal Pradesh, press note EN/OP/SIR-01/2026 of 22 September 2026",
+   "url": "https://ceoarunachal.nic.in/componenthelper/getcomponentfile/68",
+   "date": "2026-09-22",
+   "primary": true
+  },
+  {
+   "id": "s2",
+   "title": "Department of Information and Public Relations, Arunachal Pradesh, release of 22 July 2026 on the draft roll in Papum Pare",
+   "url": "https://arunachalipr.gov.in/post/draft-electoral-roll-2026-published-in-papum-pare-political-parties-assure-full-cooperation",
+   "date": "2026-07-22",
+   "primary": false
+  },
+  {
+   "id": "s3",
+   "title": "Echo of Arunachal, 21 July 2026, on the draft rolls across the districts",
+   "url": "http://echoofarunachal.in/news_details.php?nid=38296",
+   "date": "2026-07-21",
+   "primary": false
+  }
+ ],
+ "notes": [
+  "The state figures come from the Chief Electoral Officer's press note of 22 September 2026. The district and constituency figures are what District Election Officers and an Electoral Registration Officer told meetings on draft day, as relayed by the state information department and the press.",
+  "Shifted, absent and other are counted together here. The note gives 78,980 shifted, 54,678 absent and 5,281 for other reasons.",
+  "Of the 30,823 names removed after the draft, 28,899 were found ineligible at hearings and 1,924 were deleted on claims and objections.",
+  "Notices went to 85,175 electors who could not be linked to an earlier roll and to 1,33,413 linked electors whose details did not agree.",
+  "The three constituencies of Papum Pare make up the whole district, which went from 1,02,810 electors to 53,382 on the draft. Itanagar alone lost 41,575 names, two in every three on its roll.",
+  "For Tirap the press report gives the forms collected and the electors whose forms were not, so the draft shown is the roll before less the 5,864 left off. For Tawang it gives the draft and the 3,023 left off, so the roll before shown is their sum.",
+  "The press note is numbered as five pages and the published file holds four, so a fifth page may exist that was not published."
+ ],
+ "cannot_show": [
+  "How many names were left off in most districts. Figures were found for 3 of the 26 election districts, and none of them came from a table of the Chief Electoral Officer.",
+  "West Siang. Its report gives 42,546 electors and 36,254 forms digitised, a gap of 6,292, but its five reasons add to 6,492, so the district is left out.",
+  "Tezu constituency in Lohit. Its report gives the draft of 16,828 general electors and 254 service voters but no roll before, so it is left out of the constituency table.",
+  "Women's share of the names left off, for the state or any district. No count by sex of the names left off was published.",
+  "How many of the 8,803 names added after the draft were people left off it."
+ ],
+ "id": "ar",
+ "rates": {
+  "per_100": 19.09,
+  "shares": {
+   "dead": 15.1,
+   "shifted_absent_other": 82.0,
+   "duplicate": 2.9
+  },
+  "made_up_pct": -13.0,
+  "final_vs_before": -191479,
+  "women_before_pct": 50.94,
+  "women_draft_pct": 50.7,
+  "women_final_pct": 50.62
+ }
+}

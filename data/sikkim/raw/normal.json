@@ -1,0 +1,125 @@
+{
+ "state": "Sikkim",
+ "slug": "sikkim",
+ "ut": false,
+ "revision": "sir",
+ "dates": {
+  "draft": "2026-07-05",
+  "final": "2026-09-06"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 471018,
+   "src": "s1"
+  },
+  "draft": {
+   "v": 433294,
+   "src": "s1"
+  },
+  "removed": {
+   "v": 37724,
+   "src": "s1"
+  },
+  "dead": {
+   "v": 10837,
+   "src": "s1"
+  },
+  "shifted_absent_other": {
+   "v": 24504,
+   "src": "s1"
+  },
+  "duplicate": {
+   "v": 2396,
+   "src": "s1"
+  },
+  "added_after": {
+   "v": 1982,
+   "src": "s1"
+  },
+  "removed_after": {
+   "v": 16809,
+   "src": "s1"
+  },
+  "net_after": {
+   "v": -14827,
+   "src": "s1"
+  },
+  "final": {
+   "v": 418467,
+   "src": "s1"
+  },
+  "men_before": {
+   "v": 235572,
+   "src": "s1"
+  },
+  "women_before": {
+   "v": 235444,
+   "src": "s1"
+  },
+  "third_before": {
+   "v": 2,
+   "src": "s1"
+  },
+  "men_draft": {
+   "v": 218507,
+   "src": "s1"
+  },
+  "women_draft": {
+   "v": 214785,
+   "src": "s1"
+  },
+  "third_draft": {
+   "v": 2,
+   "src": "s1"
+  },
+  "men_final": {
+   "v": 212534,
+   "src": "s1"
+  },
+  "women_final": {
+   "v": 205931,
+   "src": "s1"
+  },
+  "third_final": {
+   "v": 2,
+   "src": "s1"
+  },
+  "notices": {
+   "v": 124519,
+   "src": "s1"
+  }
+ },
+ "reasons_complete": false,
+ "tables": [],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Chief Electoral Officer, Sikkim, press note on the final roll of 6 September 2026",
+   "url": "https://ceo.sikkim.gov.in/UploadedFiles/NewsTender/PRESS%20NOTE.pdf",
+   "date": "2026-09-05",
+   "primary": true
+  },
+  {
+   "id": "s2",
+   "title": "Government of Sikkim, news release of 7 September 2026 on the final roll",
+   "url": "https://www.sikkim.gov.in/media/news-announcement/news-info?name=Final+Electoral+Roll+under+SIR+2026+Published+in+Sikkim",
+   "date": "2026-09-07",
+   "primary": false
+  }
+ ],
+ "notes": [
+  "Every figure comes from the Chief Electoral Officer's press note on the final roll of 6 September 2026. The state government's news release of the next day repeats the same figures.",
+  "The note gives the names left off the draft as 37,737 on its first page and as 37,724 on its second. The roll before less the draft is 37,724, so that is the figure used here.",
+  "The five reasons in the note add to 37,737. They are shown as published, and they come to 13 more than the names left off.",
+  "The note puts the forms received at 4,33,242, which is 52 fewer than the draft of 4,33,294. It prints that count as 91.99 per cent of the roll, which is the draft's share, so the forms count is probably the misprint.",
+  "Shifted, absent and other are counted together here. The note gives 14,603 shifted, 8,648 absent or untraceable and 1,253 for other reasons.",
+  "Of the 16,809 names removed after the draft, 16,485 were found ineligible after a notice and a hearing, and 324 were removed on Form 7 for death or shifting.",
+  "Notices went to 72,135 electors who could not be linked to an earlier roll and to 52,384 linked electors whose details did not agree.",
+  "The note also counts appeals by district at the District Election Officer and 42 second appeals at the Chief Electoral Officer, of which 36 were pending on 6 September 2026. The district rows of offline appeals add to 297 received while the printed total says 103, so the appeals are not shown as a table."
+ ],
+ "cannot_show": [
+  "How many names were left off the draft in each district or constituency. The Chief Electoral Officer has published no table below the state.",
+  "Women's share of the names left off. The note gives the roll before and the draft by sex but not the names left off by sex.",
+  "How many of the 1,982 names added after the draft were people left off it."
+ ]
+}

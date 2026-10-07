@@ -1,0 +1,209 @@
+{
+ "state": "Lakshadweep",
+ "slug": "lakshadweep",
+ "ut": true,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2025-10-27",
+  "draft": "2025-12-16",
+  "final": "2026-02-14"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 57813,
+   "src": "s1"
+  },
+  "draft": {
+   "v": 56384,
+   "src": "s1"
+  },
+  "removed": {
+   "v": 1429,
+   "src": "s1"
+  },
+  "dead": {
+   "v": 705,
+   "src": "s1"
+  },
+  "shifted_absent_other": {
+   "v": 252,
+   "src": "s1"
+  },
+  "duplicate": {
+   "v": 472,
+   "src": "s1"
+  },
+  "added_after": {
+   "v": 1270,
+   "src": "s2"
+  },
+  "removed_after": {
+   "v": 47,
+   "src": "s2"
+  },
+  "net_after": {
+   "v": 1223,
+   "src": "s2"
+  },
+  "final": {
+   "v": 57607,
+   "src": "s2"
+  },
+  "men_draft": {
+   "v": 28574,
+   "src": "s2"
+  },
+  "women_draft": {
+   "v": 27810,
+   "src": "s2"
+  },
+  "third_draft": {
+   "v": 0,
+   "src": "s2"
+  },
+  "men_final": {
+   "v": 29222,
+   "src": "s2"
+  },
+  "women_final": {
+   "v": 28385,
+   "src": "s2"
+  },
+  "third_final": {
+   "v": 0,
+   "src": "s2"
+  }
+ },
+ "reasons_complete": true,
+ "tables": [
+  {
+   "id": "islands",
+   "title": "Every island, from the roll before the revision to the draft",
+   "level": "island",
+   "kind": "left_off",
+   "src": "s1",
+   "partial": false,
+   "rows": [
+    {
+     "name": "Bitra",
+     "before": 227,
+     "draft": 225,
+     "removed": 2,
+     "dead": 1,
+     "shifted_absent_other": 1,
+     "duplicate": 0
+    },
+    {
+     "name": "Chetlat",
+     "before": 2051,
+     "draft": 2001,
+     "removed": 50,
+     "dead": 29,
+     "shifted_absent_other": 8,
+     "duplicate": 13
+    },
+    {
+     "name": "Kiltan",
+     "before": 3774,
+     "draft": 3686,
+     "removed": 88,
+     "dead": 47,
+     "shifted_absent_other": 17,
+     "duplicate": 24
+    },
+    {
+     "name": "Kadmat",
+     "before": 4805,
+     "draft": 4743,
+     "removed": 62,
+     "dead": 22,
+     "shifted_absent_other": 7,
+     "duplicate": 33
+    },
+    {
+     "name": "Amini",
+     "before": 7153,
+     "draft": 6913,
+     "removed": 240,
+     "dead": 127,
+     "shifted_absent_other": 26,
+     "duplicate": 87
+    },
+    {
+     "name": "Andrott",
+     "before": 10655,
+     "draft": 10375,
+     "removed": 280,
+     "dead": 136,
+     "shifted_absent_other": 81,
+     "duplicate": 63
+    },
+    {
+     "name": "Kalpeni",
+     "before": 4016,
+     "draft": 3929,
+     "removed": 87,
+     "dead": 46,
+     "shifted_absent_other": 25,
+     "duplicate": 16
+    },
+    {
+     "name": "Minicoy",
+     "before": 8567,
+     "draft": 8378,
+     "removed": 189,
+     "dead": 127,
+     "shifted_absent_other": 28,
+     "duplicate": 34
+    },
+    {
+     "name": "Kavaratti",
+     "before": 9628,
+     "draft": 9347,
+     "removed": 281,
+     "dead": 89,
+     "shifted_absent_other": 45,
+     "duplicate": 147
+    },
+    {
+     "name": "Agatti",
+     "before": 6937,
+     "draft": 6787,
+     "removed": 150,
+     "dead": 81,
+     "shifted_absent_other": 14,
+     "duplicate": 55
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Chief Electoral Officer, Lakshadweep, press note of 16 December 2025 on the publication of the draft roll",
+   "url": "https://ceolakshadweep.gov.in/Users/download_pdf_draft_roll_2024/UHJlc3MgTm90ZS0gUHVibGljYXRpb24gb2YgRHJhZnQgRWxlY3RvcmFsIFJvbGwgKDEpLnBkZg==",
+   "date": "2025-12-16",
+   "primary": true
+  },
+  {
+   "id": "s2",
+   "title": "Chief Electoral Officer, Lakshadweep, press note of 14 February 2026 on the final roll",
+   "url": "https://ceolakshadweep.gov.in/Users/download_pdf_draft_roll_2024/UHJlc3MgTm90ZSAtIFNJUiAyMDI2IEZpbmFsIFJvbGwgUHVibGljYXRpb24gYW5kIGRpc3RyaWJ1dGlvbi5wZGY=",
+   "date": "2026-02-14",
+   "primary": true
+  }
+ ],
+ "notes": [
+  "Every figure here is the Chief Electoral Officer's own, from the press note on the draft roll of 16 December 2025 and the press note on the final roll of 14 February 2026.",
+  "The draft note gives the roll before, the reasons and the draft for each of the ten inhabited islands, and every row and column adds up.",
+  "The middle reason puts together 210 electors permanently shifted, 41 untraceable or absent and one who refused to sign.",
+  "The draft note also counts 267 electors kept on the draft whose names could not be matched to the earlier roll. They are a separate column and are not among the 1,429 left off.",
+  "The 1,270 names added after the draft are 1,269 admitted on Form 6 or 6A and one admitted on Form 8 for a move between states. The 47 removed after it were admitted on Form 7."
+ ],
+ "cannot_show": [
+  "Women's share of the names left off. The draft note gives no split by sex, and the roll before was not published by sex.",
+  "How many of the 267 electors without a match to the earlier roll were sent a notice, and what came of their hearings.",
+  "The final roll island by island. The final note gives the territory as a whole only.",
+  "How many of the names added after the draft were people left off it and how many were enrolling for the first time."
+ ]
+}

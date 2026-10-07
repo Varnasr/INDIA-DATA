@@ -40,6 +40,8 @@
          L('In most states with figures by district, the more of a district\'s people lived in towns, the more names it lost for its size. Much of that comes from the cities, and in some states it holds among village and small-town districts too. The urban page sets out each state in its own measure.'), ['urban', 'faq']],
         [L('How is a district called rural, mixed or urban?'),
          L('By the share of its people living in towns at the 2011 Census, the last count by district. Under 20 in every 100 is rural, 20 to 50 is mixed and above 50 is urban. A district made after 2011 is counted under the district it was mostly made from.'), ['urban', 'faq']],
+        [L('Which union territories were in the revision?'),
+         L('Six of the eight. Delhi, Chandigarh, Puducherry, Lakshadweep, Andaman and Nicobar, and Dadra and Nagar Haveli and Daman and Diu were revised. Jammu and Kashmir and Ladakh were left out of the order, which said their dates would be announced later. Each territory has its own page.'), ['uts', 'faq']],
         [L('Did seats reserved for Scheduled Castes and Tribes lose more names?'),
          L('No. In the states with figures by constituency, reserved seats lost a smaller share of their roll than general seats, and mostly still did when set against the general seats of their own district. A reserved seat describes a place, though, and most of its electors usually do not belong to the group it is reserved for, so this says nothing about which electors were removed.'), ['compare', 'faq']],
         [L('Did border districts lose more names?'),

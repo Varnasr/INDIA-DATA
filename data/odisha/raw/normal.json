@@ -1,0 +1,236 @@
+{
+ "state": "Odisha",
+ "slug": "odisha",
+ "ut": false,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2026-05-17",
+  "draft": "2026-07-05",
+  "final": "2026-09-21"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 33399591,
+   "src": "s1",
+   "press": true
+  },
+  "men_before": {
+   "v": 16885283,
+   "src": "s1",
+   "press": true
+  },
+  "women_before": {
+   "v": 16511223,
+   "src": "s1",
+   "press": true
+  },
+  "third_before": {
+   "v": 3085,
+   "src": "s1",
+   "press": true
+  },
+  "draft": {
+   "v": 31387034,
+   "src": "s1",
+   "press": true
+  },
+  "removed": {
+   "v": 2012557,
+   "src": "s1",
+   "press": true
+  },
+  "dead": {
+   "v": 832544,
+   "src": "s1",
+   "press": true
+  },
+  "shifted_absent_other": {
+   "v": 1021895,
+   "src": "s1",
+   "press": true
+  },
+  "duplicate": {
+   "v": 158118,
+   "src": "s1",
+   "press": true
+  },
+  "added_after": {
+   "v": 290497,
+   "src": "s1",
+   "press": true
+  },
+  "removed_after": {
+   "v": 44777,
+   "src": "s1",
+   "press": true
+  },
+  "net_after": {
+   "v": 245720,
+   "src": "s1",
+   "press": true
+  },
+  "final": {
+   "v": 31632754,
+   "src": "s1",
+   "press": true
+  },
+  "men_final": {
+   "v": 16130319,
+   "src": "s1",
+   "press": true
+  },
+  "women_final": {
+   "v": 15499661,
+   "src": "s1",
+   "press": true
+  },
+  "third_final": {
+   "v": 2774,
+   "src": "s1",
+   "press": true
+  },
+  "notices": {
+   "v": 5836326,
+   "src": "s1",
+   "press": true
+  }
+ },
+ "reasons_complete": true,
+ "tables": [
+  {
+   "id": "districts",
+   "title": "Eleven districts, the names left off at the draft",
+   "level": "district",
+   "kind": "left_off",
+   "src": "s3",
+   "partial": true,
+   "press": true,
+   "note": "Only these eleven of the 30 districts were printed. Malkangiri's figure is from the Times of India of 6 July 2026.",
+   "rows": [
+    {
+     "name": "Ganjam",
+     "removed": 207624
+    },
+    {
+     "name": "Cuttack",
+     "removed": 155166
+    },
+    {
+     "name": "Mayurbhanj",
+     "removed": 111267
+    },
+    {
+     "name": "Jajpur",
+     "removed": 105014
+    },
+    {
+     "name": "Balangir",
+     "removed": 99258
+    },
+    {
+     "name": "Malkangiri",
+     "removed": 47355
+    },
+    {
+     "name": "Jharsuguda",
+     "removed": 28542
+    },
+    {
+     "name": "Subarnapur",
+     "removed": 19224
+    },
+    {
+     "name": "Nuapada",
+     "removed": 16829
+    },
+    {
+     "name": "Boudh",
+     "removed": 13944
+    },
+    {
+     "name": "Deogarh",
+     "removed": 11004
+    }
+   ]
+  },
+  {
+   "id": "acs",
+   "title": "Six constituencies, the names left off at the draft",
+   "level": "ac",
+   "kind": "left_off",
+   "src": "s3",
+   "partial": true,
+   "press": true,
+   "note": "Only these six of the 147 constituencies were printed, the three with the most names left off and the three with the fewest.",
+   "rows": [
+    {
+     "name": "Malkangiri",
+     "removed": 27653
+    },
+    {
+     "name": "Sanakhemundi",
+     "removed": 24622
+    },
+    {
+     "name": "Choudwar",
+     "removed": 23828
+    },
+    {
+     "name": "Sonepur",
+     "removed": 6188
+    },
+    {
+     "name": "Udala",
+     "removed": 5314
+    },
+    {
+     "name": "Bhubaneswar North",
+     "removed": 4077
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "ETV Bharat, 21 September 2026, reporting the Chief Electoral Officer's press conference on the final roll",
+   "url": "https://www.etvbharat.com/en/state/over-20-lakh-voter-names-deleted-after-completion-of-sir-in-odisha-enn26092107667",
+   "date": "2026-09-21",
+   "primary": false
+  },
+  {
+   "id": "s2",
+   "title": "The Hindu, 21 September 2026, on the final roll",
+   "url": "https://www.thehindu.com/news/national/odisha/odishas-final-electoral-roll-has-316-crore-voters-1766-lakh-names-struck-off/article71491775.ece",
+   "date": "2026-09-21",
+   "primary": false
+  },
+  {
+   "id": "s3",
+   "title": "Hindustan Times, 7 July 2026, on the districts with the most names left off the draft",
+   "url": "https://www.hindustantimes.com/india-news/ganjam-cuttack-among-districts-with-most-odisha-sir-deletions-101783387962814.html",
+   "date": "2026-07-07",
+   "primary": false
+  },
+  {
+   "id": "s4",
+   "title": "Times of India, 6 July 2026, on the draft roll",
+   "url": "https://timesofindia.indiatimes.com/city/bhubaneswar/draft-electoral-roll-ganjam-tops-deletions-malkangiri-sees-sharpest-decline-at-10-25/articleshow/132217485.cms",
+   "date": "2026-07-06",
+   "primary": false
+  }
+ ],
+ "notes": [
+  "Every figure here is the Chief Electoral Officer's as reported in the press. The state figures come from ETV Bharat's account of the press conference on the final roll on 21 September 2026, checked against The Hindu, and the district and constituency figures from the Hindustan Times and the Times of India in July 2026.",
+  "The Chief Electoral Officer's website, which carries a constituency analysis of the draft roll, could not be reached, so no full table below the state was read.",
+  "The roll before is the roll of 17 May 2026. The five reasons add exactly to the 20,12,557 names left off. Shifted, absent or other is 1,99,249 absent, 8,08,205 shifted and 14,441 other.",
+  "The 44,777 names removed after the draft are 24,070 found ineligible at a hearing and 20,707 removed on Form 7 objections. ETV Bharat prints 20,708 for the second, one more than the other reports.",
+  "The notices figure is ETV Bharat's, 12,98,779 unmapped electors and 45,37,547 with a logical discrepancy. The New Indian Express gives 45,37,613 for the second and 58,36,392 in all, 66 more.",
+  "The Hindustan Times gives district percentages on the roll of 1 January 2025, which is not the roll the revision started from, so only its counts are used."
+ ],
+ "cannot_show": [
+  "The names left off in every district and every constituency. Only eleven districts and six constituencies were printed.",
+  "The draft roll and the names left off by sex. The sources read give the roll before and the final roll by sex, and no source read gives the draft by sex.",
+  "How many of the names added after the draft were people left off it and how many were enrolling for the first time."
+ ]
+}

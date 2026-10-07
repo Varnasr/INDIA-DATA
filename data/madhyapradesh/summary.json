@@ -1,0 +1,250 @@
+{
+ "state": "Madhya Pradesh",
+ "slug": "madhyapradesh",
+ "ut": false,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2025-10-25",
+  "draft": "2025-12-23",
+  "final": "2026-02-21"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 57406143,
+   "src": "s1",
+   "press": true
+  },
+  "draft": {
+   "v": 53131983,
+   "src": "s1",
+   "press": true
+  },
+  "removed": {
+   "v": 4274160,
+   "src": "s1",
+   "press": true
+  },
+  "men_before": {
+   "v": 29391548,
+   "src": "s1",
+   "press": true
+  },
+  "women_before": {
+   "v": 28013362,
+   "src": "s1",
+   "press": true
+  },
+  "third_before": {
+   "v": 1233,
+   "src": "s1",
+   "press": true
+  },
+  "men_draft": {
+   "v": 27482233,
+   "src": "s1",
+   "press": true
+  },
+  "women_draft": {
+   "v": 25648831,
+   "src": "s1",
+   "press": true
+  },
+  "third_draft": {
+   "v": 919,
+   "src": "s1",
+   "press": true
+  },
+  "men_removed": {
+   "v": 1909315,
+   "src": "s1",
+   "press": true
+  },
+  "women_removed": {
+   "v": 2364531,
+   "src": "s1",
+   "press": true
+  },
+  "third_removed": {
+   "v": 314,
+   "src": "s1",
+   "press": true
+  },
+  "dead": {
+   "v": 846184,
+   "src": "s1",
+   "press": true
+  },
+  "shifted_absent_other": {
+   "v": 3150997,
+   "src": "s1",
+   "press": true
+  },
+  "duplicate": {
+   "v": 276961,
+   "src": "s1",
+   "press": true
+  },
+  "net_after": {
+   "v": 849082,
+   "src": "s2",
+   "press": true
+  },
+  "final": {
+   "v": 53981065,
+   "src": "s2",
+   "press": true
+  },
+  "third_final": {
+   "v": 904,
+   "src": "s3",
+   "press": true
+  },
+  "notices": {
+   "v": 865832,
+   "src": "s1",
+   "press": true
+  }
+ },
+ "reasons_complete": false,
+ "tables": [
+  {
+   "id": "districts",
+   "title": "Four districts, the names left off at the draft by reason",
+   "level": "district",
+   "kind": "left_off",
+   "src": "s1",
+   "partial": true,
+   "press": true,
+   "note": "Only these four districts were printed. The shifted, absent or other column holds the absent and the shifted only, because no district figure for the other reasons was printed. Duplicates were not given for Jabalpur or Gwalior.",
+   "rows": [
+    {
+     "name": "Bhopal",
+     "dead": 33791,
+     "shifted_absent_other": 388164,
+     "duplicate": 14171
+    },
+    {
+     "name": "Indore",
+     "dead": 43741,
+     "shifted_absent_other": 373322,
+     "duplicate": 22808
+    },
+    {
+     "name": "Jabalpur",
+     "dead": 51357,
+     "shifted_absent_other": 182115,
+     "duplicate": null
+    },
+    {
+     "name": "Gwalior",
+     "dead": 27852,
+     "shifted_absent_other": 209793,
+     "duplicate": null
+    }
+   ]
+  },
+  {
+   "id": "acs",
+   "title": "Nine constituencies, the names left off at the draft",
+   "level": "ac",
+   "kind": "left_off",
+   "src": "s2",
+   "partial": true,
+   "press": true,
+   "note": "These are the constituencies the article named, including the highest and the lowest in the state.",
+   "rows": [
+    {
+     "name": "Govindpura",
+     "removed": 97052
+    },
+    {
+     "name": "Indore-5",
+     "removed": 87591
+    },
+    {
+     "name": "Narela",
+     "removed": 81235
+    },
+    {
+     "name": "Jabalpur Purba",
+     "removed": 49215
+    },
+    {
+     "name": "Ujjain Dakshin",
+     "removed": 37728
+    },
+    {
+     "name": "Ater",
+     "removed": 17505
+    },
+    {
+     "name": "Gandhwani",
+     "removed": 14712
+    },
+    {
+     "name": "Dimani",
+     "removed": 13920
+    },
+    {
+     "name": "Sohagpur",
+     "removed": 6034
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Dainik Jagran, 23 December 2025, printing the Chief Electoral Officer's figures at the draft publication",
+   "url": "https://www.jagran.com/madhya-pradesh/bhopal-mp-voter-list-draft-released-4274-lakh-names-removed-40082485.html",
+   "date": "2025-12-23",
+   "primary": false
+  },
+  {
+   "id": "s2",
+   "title": "Dainik Bhaskar, 21 February 2026, on the final roll",
+   "url": "https://www.bhaskar.com/g/local/mp/bhopal/news/mp-voter-list-publication-sir-name-add-remove-complete-137256721.html",
+   "date": "2026-02-21",
+   "primary": false
+  },
+  {
+   "id": "s3",
+   "title": "ETV Bharat, 21 February 2026, on the final roll",
+   "url": "https://www.etvbharat.com/hi/state/final-voter-list-released-in-mp-34-dot-25-lakh-names-deleted-womens-share-drops-by-3-dot-39-percent-madhya-pradesh-news-mps26022105529",
+   "date": "2026-02-21",
+   "primary": false
+  }
+ ],
+ "notes": [
+  "Every figure here is the Chief Electoral Officer's as printed in the press. The draft figures come from Dainik Jagran on 23 December 2025 and the final roll from Dainik Bhaskar and ETV Bharat on 21 February 2026.",
+  "The Chief Electoral Officer's own press notes on the draft and the final roll are listed on the office's website, but on 6 October 2026 all three returned an error and no archived copy was found.",
+  "The five reasons as printed add to 42,74,142, which is 18 fewer than the 42,74,160 names left off. They are shown as printed.",
+  "Shifted, absent or other is 8,42,677 absent, 22,78,393 permanently shifted and 29,927 other.",
+  "The notices figure is the 8,65,832 electors kept on the draft whose enumeration forms were incomplete and who were to be served notices. One report gave 8,46,184 as the unmapped count, but that is the number of dead electors and is not used.",
+  "The roll before is the roll frozen on 25 October 2025 for the revision. The roll on 6 January 2025 was 5,70,92,367.",
+  "The final roll was 8,49,082 more than the draft. Gross additions and deletions after the draft were not reported. The press reported 9,89,991 applications to add names after the draft, which is not the number admitted.",
+  "The final roll by sex was reported only as shares, 51.69 per cent men and 48.30 per cent women, with 904 third gender electors.",
+  "The press article names the elected member rather than the seat for two more constituencies with large removals. Those two figures are left out because the seat had to be inferred."
+ ],
+ "cannot_show": [
+  "The names left off in every district and every constituency. Only four districts and nine constituencies were printed.",
+  "How many of the names added after the draft were people left off it and how many were enrolling for the first time.",
+  "The final roll by sex in numbers, because only percentages were reported."
+ ],
+ "id": "mp",
+ "rates": {
+  "per_100": 7.45,
+  "shares": {
+   "dead": 19.8,
+   "shifted_absent_other": 73.7,
+   "duplicate": 6.5
+  },
+  "made_up_pct": 19.9,
+  "final_vs_before": -3425078,
+  "women_before_pct": 48.8,
+  "women_draft_pct": 48.27,
+  "women_removed_pct": 55.32,
+  "women_per_100": 8.4,
+  "men_per_100": 6.5
+ }
+}

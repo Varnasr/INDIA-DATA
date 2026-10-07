@@ -1,0 +1,160 @@
+{
+ "state": "Goa",
+ "slug": "goa",
+ "ut": false,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2025-10-27",
+  "draft": "2025-12-16",
+  "final": "2026-02-21"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 1185034,
+   "src": "s1"
+  },
+  "draft": {
+   "v": 1084992,
+   "src": "s1"
+  },
+  "removed": {
+   "v": 100042,
+   "src": "s1"
+  },
+  "dead": {
+   "v": 25574,
+   "src": "s1"
+  },
+  "shifted_absent_other": {
+   "v": 72471,
+   "src": "s1"
+  },
+  "duplicate": {
+   "v": 1997,
+   "src": "s1"
+  },
+  "added_after": {
+   "v": 12166,
+   "src": "s1"
+  },
+  "removed_after": {
+   "v": 39592,
+   "src": "s1"
+  },
+  "net_after": {
+   "v": -27426,
+   "src": "s1"
+  },
+  "final": {
+   "v": 1057566,
+   "src": "s1"
+  },
+  "men_before": {
+   "v": 573853,
+   "src": "s1"
+  },
+  "women_before": {
+   "v": 611168,
+   "src": "s1"
+  },
+  "third_before": {
+   "v": 13,
+   "src": "s1"
+  },
+  "men_draft": {
+   "v": 523304,
+   "src": "s1"
+  },
+  "women_draft": {
+   "v": 561679,
+   "src": "s1"
+  },
+  "third_draft": {
+   "v": 9,
+   "src": "s1"
+  },
+  "men_removed": {
+   "v": 50549,
+   "src": "s1"
+  },
+  "women_removed": {
+   "v": 49489,
+   "src": "s1"
+  },
+  "third_removed": {
+   "v": 4,
+   "src": "s1"
+  },
+  "men_final": {
+   "v": 511436,
+   "src": "s1"
+  },
+  "women_final": {
+   "v": 546121,
+   "src": "s1"
+  },
+  "third_final": {
+   "v": 9,
+   "src": "s1"
+  }
+ },
+ "reasons_complete": true,
+ "tables": [
+  {
+   "id": "districts_press",
+   "title": "Names left off the draft in North Goa and South Goa",
+   "level": "district",
+   "kind": "left_off",
+   "src": "s3",
+   "partial": false,
+   "press": true,
+   "note": "From the Chief Electoral Officer's data as a newspaper reported it, on the two districts Goa had at the draft.",
+   "rows": [
+    {
+     "name": "North Goa",
+     "removed": 44639
+    },
+    {
+     "name": "South Goa",
+     "removed": 55403
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "CEO Goa, press note on the final publication of the electoral roll",
+   "url": "https://ceogoa.nic.in/PDF/SIR2026/press-note-Final-publication.pdf",
+   "date": "2026-02-21",
+   "primary": true
+  },
+  {
+   "id": "s2",
+   "title": "CEO Goa, press note on the key findings of the enumeration phase",
+   "url": "https://ceogoa.nic.in/PDF/SIR2026/SIR_PNN14.pdf",
+   "date": "2025-12-16",
+   "primary": true
+  },
+  {
+   "id": "s3",
+   "title": "Indian Express, names removed from the draft rolls in five states and union territories",
+   "url": "https://indianexpress.com/article/india/1-02-crore-names-removed-draft-electoral-rolls-in-5-states-uts-shrink-by-7-6-10424098/",
+   "date": "2025-12-17",
+   "primary": false
+  }
+ ],
+ "notes": [
+  "The state figures come from the Chief Electoral Officer's press notes of 16 December 2025 and 21 February 2026. The split between the two districts is the Chief Electoral Officer's data as the press reported it.",
+  "The names left off by sex are the roll before less the draft, for men, women and third gender, from the same press note.",
+  "Absent, permanently shifted and other reasons are counted together as shifted, absent or other. The five reasons add exactly to the names left off.",
+  "After the draft, 12,166 names were added. 3,812 were deleted on forms and 35,780 were found ineligible after notices to unmapped electors and those with logical discrepancies.",
+  "Of the electors on the draft, 1,82,403 could not be mapped to an earlier roll and 58,923 had logical discrepancies."
+ ],
+ "cannot_show": [
+  "No table by constituency of the roll before, the draft, the names left off or the final roll was found on the Chief Electoral Officer's site.",
+  "The Chief Electoral Officer's site prints electors by constituency only for the roll of 1 July 2026, which includes later additions, so it is not shown against the revision.",
+  "The reasons and the changes after the draft were published for the state only.",
+  "No count of notices issued was published, only the number of electors in each category that could receive one."
+ ]
+}

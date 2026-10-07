@@ -1,0 +1,288 @@
+{
+ "state": "Mizoram",
+ "slug": "mizoram",
+ "ut": false,
+ "revision": "sir",
+ "dates": {
+  "roll_before": "2026-05-30",
+  "draft": "2026-07-04",
+  "final": "2026-09-07"
+ },
+ "figures": {
+  "roll_before": {
+   "v": 875068,
+   "src": "s1"
+  },
+  "draft": {
+   "v": 828906,
+   "src": "s1"
+  },
+  "removed": {
+   "v": 46162,
+   "src": "s3"
+  },
+  "dead": {
+   "v": 21295,
+   "src": "s1"
+  },
+  "shifted_absent_other": {
+   "v": 22620,
+   "src": "s1"
+  },
+  "duplicate": {
+   "v": 2248,
+   "src": "s1"
+  },
+  "added_after": {
+   "v": 39243,
+   "src": "s3"
+  },
+  "removed_after": {
+   "v": 32280,
+   "src": "s3"
+  },
+  "net_after": {
+   "v": 6963,
+   "src": "s3"
+  },
+  "final": {
+   "v": 835869,
+   "src": "s3"
+  },
+  "men_draft": {
+   "v": 399025,
+   "src": "s1"
+  },
+  "women_draft": {
+   "v": 429881,
+   "src": "s1"
+  },
+  "men_final": {
+   "v": 403179,
+   "src": "s3"
+  },
+  "women_final": {
+   "v": 432689,
+   "src": "s3"
+  },
+  "third_final": {
+   "v": 1,
+   "src": "s3"
+  }
+ },
+ "reasons_complete": false,
+ "tables": [
+  {
+   "id": "districts_draft",
+   "title": "Every district, the draft roll of 4 July 2026 by sex",
+   "level": "district",
+   "kind": "draft",
+   "src": "s1",
+   "partial": false,
+   "rows": [
+    {
+     "name": "Mamit",
+     "draft": 64317,
+     "men": 32310,
+     "women": 32007
+    },
+    {
+     "name": "Kolasib",
+     "draft": 61340,
+     "men": 29335,
+     "women": 32005
+    },
+    {
+     "name": "Aizawl",
+     "draft": 272366,
+     "men": 125669,
+     "women": 146697
+    },
+    {
+     "name": "Champhai",
+     "draft": 56412,
+     "men": 27409,
+     "women": 29003
+    },
+    {
+     "name": "Serchhip",
+     "draft": 54180,
+     "men": 26090,
+     "women": 28090
+    },
+    {
+     "name": "Lunglei",
+     "draft": 98808,
+     "men": 48918,
+     "women": 49890
+    },
+    {
+     "name": "Lawngtlai",
+     "draft": 90699,
+     "men": 45311,
+     "women": 45388
+    },
+    {
+     "name": "Siaha",
+     "draft": 43801,
+     "men": 21164,
+     "women": 22637
+    },
+    {
+     "name": "Saitual",
+     "draft": 53993,
+     "men": 26573,
+     "women": 27420
+    },
+    {
+     "name": "Khawzawl",
+     "draft": 17547,
+     "men": 8678,
+     "women": 8869
+    },
+    {
+     "name": "Hnahthial",
+     "draft": 15443,
+     "men": 7568,
+     "women": 7875
+    }
+   ]
+  },
+  {
+   "id": "districts",
+   "title": "Every district, from the draft to the final roll",
+   "level": "district",
+   "kind": "final",
+   "src": "s3",
+   "partial": false,
+   "rows": [
+    {
+     "name": "Mamit",
+     "draft": 64317,
+     "final": 65276,
+     "men": 32775,
+     "women": 32501,
+     "third": 0
+    },
+    {
+     "name": "Kolasib",
+     "draft": 61340,
+     "final": 59943,
+     "men": 28804,
+     "women": 31139,
+     "third": 0
+    },
+    {
+     "name": "Aizawl",
+     "draft": 272366,
+     "final": 278114,
+     "men": 128539,
+     "women": 149575,
+     "third": 0
+    },
+    {
+     "name": "Champhai",
+     "draft": 56412,
+     "final": 56498,
+     "men": 27578,
+     "women": 28920,
+     "third": 0
+    },
+    {
+     "name": "Serchhip",
+     "draft": 54180,
+     "final": 54916,
+     "men": 26496,
+     "women": 28420,
+     "third": 0
+    },
+    {
+     "name": "Lunglei",
+     "draft": 98808,
+     "final": 97172,
+     "men": 48206,
+     "women": 48966,
+     "third": 0
+    },
+    {
+     "name": "Lawngtlai",
+     "draft": 90699,
+     "final": 90715,
+     "men": 45440,
+     "women": 45275,
+     "third": 0
+    },
+    {
+     "name": "Siaha",
+     "draft": 43801,
+     "final": 45175,
+     "men": 21881,
+     "women": 23293,
+     "third": 1
+    },
+    {
+     "name": "Saitual",
+     "draft": 53993,
+     "final": 55011,
+     "men": 27148,
+     "women": 27863,
+     "third": 0
+    },
+    {
+     "name": "Khawzawl",
+     "draft": 17547,
+     "final": 17527,
+     "men": 8688,
+     "women": 8839,
+     "third": 0
+    },
+    {
+     "name": "Hnahthial",
+     "draft": 15443,
+     "final": 15522,
+     "men": 7624,
+     "women": 7898,
+     "third": 0
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "s1",
+   "title": "Chief Electoral Officer, Mizoram, press note No. H.11018/2/2024-CEO of 4 July 2026 on the draft roll (Mizo)",
+   "url": "https://ceo.mizoram.gov.in/storage/press-releases/July_2026/01KWPBBZRST6PJEWCKV628GVGK.pdf",
+   "date": "2026-07-04",
+   "primary": true
+  },
+  {
+   "id": "s2",
+   "title": "Chief Electoral Officer, Mizoram, press note of 4 July 2026 on the draft roll (English)",
+   "url": "https://ceo.mizoram.gov.in/storage/press-releases/July_2026/01KWPBE4VP2HKAZT95503YKFK2.pdf",
+   "date": "2026-07-04",
+   "primary": true
+  },
+  {
+   "id": "s3",
+   "title": "Chief Electoral Officer, Mizoram, press note No. H.11011/06/2026-CEO of 7 September 2026 on the final roll",
+   "url": "https://ceo.mizoram.gov.in/storage/press-releases/September_2026/01M1XFVV4G2XCZA15M3W40KESR.pdf",
+   "date": "2026-09-07",
+   "primary": true
+  }
+ ],
+ "notes": [
+  "Every figure here is from the Chief Electoral Officer, Mizoram's press notes of 4 July 2026 on the draft and 7 September 2026 on the final roll. The district table of the draft and the reasons are in the Mizo version of the July note only.",
+  "The roll before the revision is the 8,75,068 electors given enumeration forms, the roll as on 30 May 2026.",
+  "The five reasons in the July note add to 46,163, one more than the roll before less the draft. The September note gives 46,162, which is the figure used here, and the reasons are kept as printed.",
+  "Untraceable (8,333), shifted (13,978) and others (309) are counted together here, beside 21,295 dead and 2,248 already enrolled elsewhere.",
+  "The figures leave out service electors, who are counted separately. There were 4,185 on the draft and 4,103 on the final roll.",
+  "The constituency with the most forms not collected was 19 Aizawl South II, with 2,351, or 8.23 per cent of its roll.",
+  "Kolasib, Lunglei and Khawzawl ended with fewer electors on the final roll than on the draft."
+ ],
+ "cannot_show": [
+  "How many names were left off the draft in each district or constituency. The 46,162 and its reasons were published for the state only.",
+  "Women's share of the names left off. The roll before the revision was not published by sex.",
+  "The names added and deleted after the draft in each district. The district table gives only the draft and the final roll.",
+  "How many electors were sent a notice. No count was found in any of the notes."
+ ]
+}
