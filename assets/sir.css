@@ -657,7 +657,7 @@ button:hover,.btn:hover{transform:none}
 /* -------------------------------------------- the page and its columns */
 main{padding:0 1.25rem 3.5rem}
 main>:first-child:not(.page-head),main>article>:first-child:not(.page-head){margin-top:2.5rem}
-body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:auto}
+body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.nothere,.colq,.dlall,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:auto}
 .xp main>*{max-width:none!important;margin-inline:0!important}
 main h1{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;line-height:1.02}
 main h2{font-family:var(--serif);font-size:1.9rem;line-height:1.15;font-weight:700;letter-spacing:-.01em;border:0;padding:0;margin-top:3.5rem;margin-bottom:.5rem}
@@ -893,3 +893,23 @@ table.actab .neg{color:var(--red);font-weight:600}
   .acctl-row input,.acctl-row select{min-width:0;width:100%}
   .acctl-row label{flex:1 1 100%}
 }
+
+/* -------------------------------------------- the downloads page */
+.dls .book{max-width:min(100%,52rem);margin:0 auto 1.1rem;border-top:1px solid var(--line);padding-top:.9rem}
+.dls .bh{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem 1rem}
+.dls .bh h3{margin:0;flex:1 1 16rem;font-family:var(--serif);font-size:1.3rem}
+.dls .bh .meta{margin:0;font-size:.85rem;color:var(--muted)}
+.dls .book details.figs{margin:.3rem 0 0;max-width:none}
+.dls .sheets{padding-left:1.6rem;margin:.4rem 0}
+.dls .sheets>li{margin:0 0 .9rem}
+.dls .sheets p{margin:.1rem 0}
+.dls .sheets .sh{display:flex;flex-wrap:wrap;align-items:baseline;gap:.15rem .55rem}
+.dls .sheets .meta{font-size:.82rem;color:var(--muted)}
+.dls .sheets .cannot{font-size:.88rem;color:var(--muted)}
+.dls .tag{font-family:var(--mono);font-weight:600;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);color:var(--muted);background:transparent}
+.dls .tag.source{color:var(--red);border-color:currentColor}
+.dls .colq{display:flex;flex-wrap:wrap;gap:.4rem .8rem;align-items:center}
+.dls .colq input{flex:1 1 14rem;font:inherit;padding:.45rem .6rem;border:1px solid var(--line);border-radius:4px;background:var(--card);color:var(--ink)}
+.dls .dlall .btn{display:inline-block}
+.dls table code{font-family:var(--mono);font-size:.82rem;overflow-wrap:anywhere}
+html.dyslexic-font .dls .tag{text-transform:none}

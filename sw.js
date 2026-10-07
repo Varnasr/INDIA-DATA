@@ -12,7 +12,7 @@ self.addEventListener('activate', function (e) {
 });
 self.addEventListener('fetch', function (e) {
   var req = e.request, url = new URL(req.url);
-  if (req.method !== 'GET' || url.origin !== location.origin || /\.(pdf|pptx|csv)$/i.test(url.pathname)) return;
+  if (req.method !== 'GET' || url.origin !== location.origin || /\.(pdf|pptx|csv|xlsx|zip)$/i.test(url.pathname)) return;
   e.respondWith(fetch(req).then(function (res) {
     if (res.ok && res.type === 'basic') {
       var copy = res.clone();

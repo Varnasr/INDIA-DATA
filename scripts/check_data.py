@@ -265,6 +265,11 @@ def _robust():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
+def _repository():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_repository.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+
+
 def _short_and_faq():
     # Every page but the full reports opens with an "In short" box and carries
     # questions and answers: its own (#pageFaq) or, on an FAQ tab, all (#qas).
@@ -327,6 +332,7 @@ for name, fn in [
     ('the rural and urban table is current and every district has a 2011 parent', _urban),
     ('the NRC page carries only checked facts and is current', _nrc),
     ('the four-state constituency table is current and adds up', _ac_change),
+    ('the downloads manifest is current and every column is described', _repository),
     ('the Assam figures add up and are current', _assam),
     ('every shared state page\'s figures add up and are current', _states),
     ('Notices table matches its raw table', _notices),
