@@ -27,6 +27,13 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'site', 'pages')
 CHECK = '--check' in sys.argv
 CFG = json.load(open(os.path.join(ROOT, 'site', 'places.json'), encoding='utf-8'))
+# a page listed twice in one menu or tab row shows up twice in the header
+for _pl in CFG['places']:
+    for _key in ('menu', 'pages'):
+        _seen = [x[0] for x in _pl.get(_key, [])]
+        _dup = sorted({x for x in _seen if _seen.count(x) > 1})
+        if _dup:
+            raise SystemExit('FAIL - %s lists %s twice in %s' % (_pl['id'], ', '.join(_dup), _key))
 PLACES = {p['id']: p for p in CFG['places']}
 SIRJS = os.path.join(ROOT, 'assets', 'sir.js')
 ICONS = json.loads(re.search(r'var ICONS = (\{.*?\});', open(SIRJS, encoding='utf-8').read()).group(1))
