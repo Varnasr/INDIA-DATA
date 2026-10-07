@@ -40,6 +40,8 @@
          L('In most states with figures by district, the more of a district\'s people lived in towns, the more names it lost for its size. Much of that comes from the cities, and in some states it holds among village and small-town districts too. The urban page sets out each state in its own measure.'), ['urban', 'faq']],
         [L('How is a district called rural, mixed or urban?'),
          L('By the share of its people living in towns at the 2011 Census, the last count by district. Under 20 in every 100 is rural, 20 to 50 is mixed and above 50 is urban. A district made after 2011 is counted under the district it was mostly made from.'), ['urban', 'faq']],
+        [L('Where can I find how many names were added and removed in each constituency after the draft?'),
+         L('Only Uttarakhand published that, constituency by constituency. Tamil Nadu, Kerala and West Bengal published their draft and a later roll by constituency, so the change between them is a net figure, which counts new voters as well as names put back. <a href="../constituencies/">The constituencies page</a> puts all four states in one table and one download.'), ['constituencies', 'faq']],
         [L('Is the SIR the same as the NRC?'),
          L('No. The NRC is a register of citizens under the Citizenship Act, and the SIR was a revision of the electoral rolls under the law on elections. The Supreme Court held on 27 May 2026 that declining to enrol someone does not declare that person not to be a citizen, and that deciding citizenship belongs to the authority under the Citizenship Act. <a href="../nrc/">The NRC page</a> sets the two side by side.'), ['nrc', 'faq']],
         [L('Has an NRC been prepared for the whole country?'),

@@ -795,6 +795,18 @@ rate, the reason shares, the net change after the draft and women's share
 where both rolls were published by sex. Jammu and Kashmir and Ladakh were not
 in the order and the page says so. It is English only.
 
+**Constituencies** (`india/constituencies/`) puts every constituency of the
+four states that published their rolls by constituency (Tamil Nadu, Kerala,
+West Bengal, Uttarakhand) in one table and one download,
+`data/india/ac_change.csv`. `scripts/build_ac_change.py` reads only those
+states' own `constituencies.json` and fails unless Uttarakhand's draft plus
+claims less objections is its final roll and Tamil Nadu's roll before less the
+names left off is its draft; `check_data.py` runs it with `--check`. Each state
+measures a different thing (`STATES` in the build names every roll), nothing is
+added across states, and only Uttarakhand has gross additions and deletions by
+constituency. Everywhere else the change from the draft is net, counts new
+voters too, and is never called names restored. English only.
+
 **The NRC** (`india/nrc/`) explains the National Register of Citizens from
 primary documents only: what the Citizenship Act and the 2003 Rules provide,
 Assam's NRC and its figures, the National Population Register, every answer
