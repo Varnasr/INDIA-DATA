@@ -76,7 +76,7 @@
     var r = roomy(t.step, t.lo, t.hi, px, true);
     return { step: r.step, lo: Math.floor(t.lo / r.step + 1e-9) * r.step, hi: Math.ceil(t.hi / r.step - 1e-9) * r.step };
   }
-  function tickText(v, step) { return Math.abs(v) >= 1e5 ? SIR.lakh(v).replace(/\.0 /, ' ') : step < 1 ? (+v.toFixed(2)).toString() : SIR.n(v); }
+  function tickText(v, step) { return Math.abs(v) >= 1e5 ? SIR.lakh(v).replace(/(\.\d*?)0+ /, '$1 ').replace(/\. /, ' ') : step < 1 ? (+v.toFixed(2)).toString() : SIR.n(v); }
   // a token ('--fill-navy') or a literal colour
   function paint(c) { return /^--/.test(c) ? 'fill:var(' + c + ')' : 'fill:' + c; }
   function stroke(c) { return /^--/.test(c) ? 'stroke:var(' + c + ')' : 'stroke:' + c; }
@@ -95,8 +95,8 @@
   function measure(box) { box = typeof box === 'string' ? document.getElementById(box) : box; CUR = (box && box.clientWidth) || innerWidth; }
   var phone = function () { return CUR < 600; };
   var WIDE = function () { return Math.max(600, Math.min(CUR, 1200)); };
-  // counts in crore from a crore up, otherwise in lakh, as the pages write them
-  var fmt = function (v) { return v >= 1e7 ? L('{x} crore', { x: (v / 1e7).toFixed(2) }) : SIR.lakh(v); };
+  // counts of a lakh or more as the pages write them (crore from a crore up), smaller ones in full
+  var fmt = function (v) { return Math.abs(v) >= 1e5 ? SIR.lakh(v) : SIR.n(v); };
 
   // ---- sankey: sources on the left, targets on the right, one flow per pair.
   // links: [{s: sourceIndex, t: targetIndex, v: value}]

@@ -89,7 +89,7 @@
 <script>
 Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/districts.json'), SIR.json('data/gujarat/constituencies.json'), SIR.json('data/india/notices.json')]).then(function (r) {
   var S = r[0], D = r[1], A = r[2], NT = r[3].states.filter(function (x) { return x.state === 'Gujarat'; })[0], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
-  var lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; }, cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; };
+  var lk = function (x) { return SIR.lk(x, 1); }, cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; };
   var C = S.city, R = S.rest, isCity = function (d) { return S.city_names.indexOf(d) >= 0; };
   var RS = [['dead', 'Dead'], ['absent', 'Untraceable or absent'], ['shifted', 'Shifted for good'], ['enrolled_elsewhere', 'Already enrolled elsewhere'], ['other', 'Other']];
 
@@ -108,7 +108,7 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/distr
     D[2].district + ' comes next, at ' + d1(D[2].per_100) + ', and ' + last.district + ' left off the fewest, ' + d1(last.per_100) + '. ' +
     'Of the ' + S.acs + ' constituencies, ' + S.acs_over_25 + ' left off 25 or more of every 100 and ' + S.acs_under_10 + ' fewer than 10. ' + S.rate_max + ' in ' + S.rate_max_district + ' left off the most, ' + d1(S.rate_max_v) + ', and ' + S.rate_min + ' in ' + S.rate_min_district + ' the fewest, ' + d1(S.rate_min_v) + '.';
 
-  VIZ.rank('vReason', { label: 'Names left off the draft in Gujarat, by the reason entered', axis: 'Lakh', fmt: function (v) { return v.toFixed(1) + ' lakh'; },
+  VIZ.rank('vReason', { label: 'Names left off the draft in Gujarat, by the reason entered', axis: 'Lakh', fmt: function (v) { return SIR.lk(v * 1e5); },
     rows: RS.map(function (k) { return { name: k[1], v: S.reasons[k[0]] / 1e5, col: '--fill-navy' }; }).sort(function (a, b) { return b.v - a.v; }) });
   VIZ.heat('vMix', { label: 'Share of each district\'s names left off, by reason', cols: RS.map(function (k) { return k[1]; }), tok: ['--fill-purple', '--fill-teal', '--fill-navy', '--fill-amber', '--fill-grey'], unit: '%',
     rows: D.map(function (d) { return { name: d.district, v: RS.map(function (k) { return d[k[0] + '_share']; }) }; }) });

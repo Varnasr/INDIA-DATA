@@ -74,7 +74,7 @@
 <script>
 Promise.all([SIR.json('data/delhi/summary.json'), SIR.json('data/delhi/districts.json'), SIR.json('data/delhi/constituencies.json'), SIR.json('data/india/notices.json')]).then(function (r) {
   var S = r[0], D = r[1], A = r[2], NT = r[3].states.filter(function (x) { return x.state === 'Delhi'; })[0], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
-  var lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; };
+  var lk = function (x) { return SIR.lk(x, 1); };
   VIZ.waterfall('vWater', { label: 'Delhi: the roll before the revision and the draft roll of 31 August 2026', from: Math.floor(S.draft * 0.8 / 1e6) * 1e6, steps: [
     { name: 'Roll before the revision', v: S.roll_before, kind: 'total' }, { name: 'Left off the draft', v: S.left_off, kind: 'down' }, { name: 'Draft roll', v: S.draft, kind: 'total' }] });
   document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + lk(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors.</b> In ' + S.acs_over_40 + ' of the 70 constituencies it left off 40 or more of every 100. It ranges from ' + d1(S.rate_min_v) + ' per 100 in ' + S.rate_min + ' to ' + d1(S.rate_max_v) + ' in ' + S.rate_max + '.';

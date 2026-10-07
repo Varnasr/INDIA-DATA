@@ -6,7 +6,7 @@
   SIR.faq('up', 'uttarpradesh/faq/', function () {
     return P || (P = Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpradesh/districts.json')]).then(function (r) {
       var s = r[0], D = r[1];
-      var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; }, d1 = function (v) { return SIR.d(v, 1); };
+      var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return SIR.lk(x, 1); }, d1 = function (v) { return SIR.d(v, 1); };
       var last = D[D.length - 1];
       var scale = 'Uttar Pradesh\'s draft roll left off ' + cr(s.left_off) + ' names, ' + d1(s.per_100) + ' of every 100 electors on the roll of 27 October 2025.';
       var reasons = SIR.pct(s.shares.shifted) + ' were entered as permanently shifted, ' + SIR.pct(s.shares.untraceable_absent) + ' as untraceable or absent, ' + SIR.pct(s.shares.dead) + ' as dead and ' + SIR.pct(s.shares.multiple) + ' as already enrolled elsewhere.';

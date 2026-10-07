@@ -6,7 +6,7 @@
   SIR.faq('gj', 'gujarat/faq/', function () {
     return P || (P = Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/districts.json'), SIR.json('data/india/notices.json')]).then(function (r) {
       var s = r[0], D = r[1], NT = r[2].states.filter(function (x) { return x.state === 'Gujarat'; })[0];
-      var lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; }, cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, d1 = function (v) { return SIR.d(v, 1); };
+      var lk = function (x) { return SIR.lk(x, 1); }, cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, d1 = function (v) { return SIR.d(v, 1); };
       var sg = function (v) { return (v > 0 ? '+' : '') + d1(v); };
       var C = s.city, R = s.rest, W = {}, last = D[D.length - 1];
       s.winners.forEach(function (w) { W[w.party] = w; });

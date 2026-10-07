@@ -6,7 +6,7 @@
   SIR.faq('mh', 'maharashtra/faq/', function () {
     return P || (P = Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharashtra/districts.json'), SIR.json('data/india/notices.json')]).then(function (r) {
       var s = r[0], D = r[1], NT = r[2].states.filter(function (x) { return x.state === 'Maharashtra'; })[0];
-      var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; }, d1 = function (v) { return SIR.d(v, 1); };
+      var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return SIR.lk(x, 1); }, d1 = function (v) { return SIR.d(v, 1); };
       var C = s.city, R = s.rest, last = D[D.length - 1], most = D.filter(function (d) { return d.district === s.most_names; })[0];
       var list = function (a) { return a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; };
       var scale = 'Maharashtra\'s draft roll of ' + SIR.date(s.draft_date) + ' left off ' + cr(s.left_off) + ' names, ' + d1(s.per_100) + ' of every 100 electors on the roll before the revision.';

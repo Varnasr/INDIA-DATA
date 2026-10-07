@@ -5,7 +5,7 @@
   var P;
   SIR.faq('as', 'assam/faq/', function () {
     return P || (P = SIR.json('data/assam/summary.json').then(function (d) {
-      var S = d.state, T = d.tribunals, X = d.detention, N = d.nrc, A = T.assembly_2026, n = SIR.n, lk = function (x) { return (x / 1e5).toFixed(2) + ' lakh'; };
+      var S = d.state, T = d.tribunals, X = d.detention, N = d.nrc, A = T.assembly_2026, n = SIR.n, lk = function (x) { return SIR.lk(x, 2); };
       var kind = 'Assam had a Special Revision of its roll in 2025-26, ordered by the Election Commission on 17 November 2025, and was left out of the Special Intensive Revision. No existing elector filled an enumeration form or showed a document to stay on the roll.';
       var flag = lk(S.flagged) + ' names were flagged for deletion with the draft roll of 27 December 2025, as dead, shifted, or entered more than once. The draft still held ' + n(S.draft_vs_jan) + ' more names than the roll of January 2025.';
       var fin = 'The final roll of 10 February 2026 holds ' + n(S.final) + ' electors, ' + n(S.draft - S.final) + ' fewer than the draft and ' + n(S.final_vs_jan) + ' more than the roll of January 2025.';

@@ -5,7 +5,7 @@
   var P;
   SIR.faq('dl', 'delhi/faq/', function () {
     return P || (P = Promise.all([SIR.json('data/delhi/summary.json'), SIR.json('data/delhi/districts.json')]).then(function (r) {
-      var s = r[0], D = r[1], lk = function (x) { return (x / 1e5).toFixed(1) + ' lakh'; }, d1 = function (v) { return SIR.d(v, 1); };
+      var s = r[0], D = r[1], lk = function (x) { return SIR.lk(x, 1); }, d1 = function (v) { return SIR.d(v, 1); };
       var Pa = {}; s.parties.forEach(function (p) { Pa[p.party] = p; });
       var scale = 'Delhi\'s draft roll left off ' + lk(s.left_off) + ' names, ' + d1(s.per_100) + ' of every 100 electors on the roll before the revision.';
       var margin = 'In ' + s.over_margin + ' of the 70 constituencies, more names were left off than the 2025 winning margin.';
