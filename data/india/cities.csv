@@ -1,32 +1,32 @@
-city,state,measure,part,districts,roll_before,names_left_off_or_fall,per_100,state_per_100,note
-Bengaluru,Karnataka,left_off,core,B.B.M.P (South); B.B.M.P (Central); B.B.M.P (North); Bangalore Urban,10388363,4688703,45.13,19.48,
-Bengaluru,Karnataka,left_off,ring,Bangalore Rural; Ramanagaram,1851499,227324,12.28,19.48,
-Bengaluru,Karnataka,left_off,rest,rest of state,43192452,5880312,13.61,19.48,
-Hyderabad,Telangana,left_off,core,Hyderabad,4736669,1941444,40.99,21.7,figures as reported in the press
-Hyderabad,Telangana,left_off,ring,Rangareddy; Medchal Malkajgiri; Sangareddy,8136309,2656935,32.66,21.7,figures as reported in the press
-Hyderabad,Telangana,left_off,rest,rest of state,20953470,2740856,13.08,21.7,figures as reported in the press
-Chennai,Tamil Nadu,left_off,core,Chennai,4004694,1425018,35.58,15.19,
-Chennai,Tamil Nadu,left_off,ring,Chengalpattu; Kancheepuram; Thiruvallur,7770786,1595922,20.54,15.19,
-Chennai,Tamil Nadu,left_off,rest,rest of state,52339107,6716891,12.83,15.19,
-Mumbai,Maharashtra,left_off,core,Mumbai City; Mumbai Suburban,10385510,3608922,34.75,21.14,
-Mumbai,Maharashtra,left_off,ring,Thane; Palghar,9826568,3528086,35.9,21.14,
-Mumbai,Maharashtra,left_off,rest,rest of state,77641971,13551479,17.45,21.14,
-Pune,Maharashtra,left_off,core,Pune,9080173,2866481,31.57,21.14,
-Pune,Maharashtra,left_off,rest,rest of state,88773876,17822006,20.08,21.14,
-Delhi,Delhi,left_off,core,Delhi,14510299,4756722,32.78,32.78,
-Delhi,Uttar Pradesh,left_off,ring,Ghaziabad; Gautam Buddha Nagar,4703664,1265610,26.91,32.78,
-Lucknow,Uttar Pradesh,left_off,core,Lucknow,3994535,1200138,30.04,18.7,
-Lucknow,Uttar Pradesh,left_off,ring,Barabanki; Unnao,4656702,780325,16.76,18.7,
-Lucknow,Uttar Pradesh,left_off,rest,rest of state,145778855,26893604,18.45,18.7,
-Ahmedabad,Gujarat,left_off,core,Ahmedabad,6259620,1452704,23.21,14.5,
-Ahmedabad,Gujarat,left_off,ring,Gandhinagar,1389712,215786,15.53,14.5,
-Ahmedabad,Gujarat,left_off,rest,rest of state,43194104,5704837,13.21,14.5,
-Surat,Gujarat,left_off,core,Surat,4873512,1250319,25.66,14.5,
-Surat,Gujarat,left_off,rest,rest of state,45969924,6123008,13.32,14.5,
-Patna,Bihar,left_off,core,Patna,4843590,415580,8.58,9.25,per 100 on the 2025 roll
-Patna,Bihar,left_off,rest,rest of state,69856324,6494979,9.3,9.25,per 100 on the 2025 roll
-Kolkata,West Bengal,fall,core,Kolkata North; Kolkata South,2405408,598153,24.87,6.83,
-Kolkata,West Bengal,fall,ring,Howrah; North 24 Parganas,12360295,1158176,9.37,6.83,
-Kolkata,West Bengal,fall,rest,rest of state,61244303,3437047,5.61,6.83,
-Kochi,Kerala,fall,core,Ernakulam,2638106,307463,11.65,8.52,
-Kochi,Kerala,fall,rest,rest of state,25172836,2061127,8.19,8.52,
+city,state,measure,part,districts,base_roll,base_roll_is,names_left_off_or_fall,per_100,state_per_100,note
+Bengaluru,Karnataka,left_off,core,B.B.M.P (South); B.B.M.P (Central); B.B.M.P (North); Bangalore Urban,10388363,roll before the revision,4688703,45.13,19.48,
+Bengaluru,Karnataka,left_off,ring,Bangalore Rural; Ramanagaram,1851499,roll before the revision,227324,12.28,19.48,
+Bengaluru,Karnataka,left_off,rest,rest of state,43192452,roll before the revision,5880312,13.61,19.48,
+Hyderabad,Telangana,left_off,core,Hyderabad,4736669,roll before the revision,1941444,40.99,21.7,figures as reported in the press
+Hyderabad,Telangana,left_off,ring,Rangareddy; Medchal Malkajgiri; Sangareddy,8136309,roll before the revision,2656935,32.66,21.7,figures as reported in the press
+Hyderabad,Telangana,left_off,rest,rest of state,20953470,roll before the revision,2740856,13.08,21.7,figures as reported in the press
+Chennai,Tamil Nadu,left_off,core,Chennai,4004694,roll before the revision,1425018,35.58,15.19,
+Chennai,Tamil Nadu,left_off,ring,Chengalpattu; Kancheepuram; Thiruvallur,7770786,roll before the revision,1595922,20.54,15.19,
+Chennai,Tamil Nadu,left_off,rest,rest of state,52339107,roll before the revision,6716891,12.83,15.19,
+Mumbai,Maharashtra,left_off,core,Mumbai City; Mumbai Suburban,10385510,roll before the revision,3608922,34.75,21.14,
+Mumbai,Maharashtra,left_off,ring,Thane; Palghar,9826568,roll before the revision,3528086,35.9,21.14,
+Mumbai,Maharashtra,left_off,rest,rest of state,77641971,roll before the revision,13551479,17.45,21.14,
+Pune,Maharashtra,left_off,core,Pune,9080173,roll before the revision,2866481,31.57,21.14,
+Pune,Maharashtra,left_off,rest,rest of state,88773876,roll before the revision,17822006,20.08,21.14,
+Delhi,Delhi,left_off,core,Delhi,14510299,roll before the revision,4756722,32.78,32.78,
+Delhi,Uttar Pradesh,left_off,ring,Ghaziabad; Gautam Buddha Nagar,4703664,roll before the revision,1265610,26.91,32.78,
+Lucknow,Uttar Pradesh,left_off,core,Lucknow,3994535,roll before the revision,1200138,30.04,18.7,
+Lucknow,Uttar Pradesh,left_off,ring,Barabanki; Unnao,4656702,roll before the revision,780325,16.76,18.7,
+Lucknow,Uttar Pradesh,left_off,rest,rest of state,145778855,roll before the revision,26893604,18.45,18.7,
+Ahmedabad,Gujarat,left_off,core,Ahmedabad,6259620,roll before the revision,1452704,23.21,14.5,
+Ahmedabad,Gujarat,left_off,ring,Gandhinagar,1389712,roll before the revision,215786,15.53,14.5,
+Ahmedabad,Gujarat,left_off,rest,rest of state,43194104,roll before the revision,5704837,13.21,14.5,
+Surat,Gujarat,left_off,core,Surat,4873512,roll before the revision,1250319,25.66,14.5,
+Surat,Gujarat,left_off,rest,rest of state,45969924,roll before the revision,6123008,13.32,14.5,
+Patna,Bihar,left_off,core,Patna,4843590,2025 election roll,415580,8.58,9.25,per 100 on the 2025 roll
+Patna,Bihar,left_off,rest,rest of state,69856324,2025 election roll,6494979,9.3,9.25,per 100 on the 2025 roll
+Kolkata,West Bengal,fall,core,Kolkata North; Kolkata South,2405408,2024 Lok Sabha roll,598153,24.87,6.83,
+Kolkata,West Bengal,fall,ring,Howrah; North 24 Parganas,12360295,2024 Lok Sabha roll,1158176,9.37,6.83,
+Kolkata,West Bengal,fall,rest,rest of state,61244303,2024 Lok Sabha roll,3437047,5.61,6.83,
+Kochi,Kerala,fall,core,Ernakulam,2638106,January 2025 roll,307463,11.65,8.52,
+Kochi,Kerala,fall,rest,rest of state,25172836,January 2025 roll,2061127,8.19,8.52,
