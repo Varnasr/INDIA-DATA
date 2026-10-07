@@ -219,6 +219,10 @@ def _urban():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_urban.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
+def _ac_change():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_ac_change.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
 def _nrc():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_nrc.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -322,6 +326,7 @@ for name, fn in [
     ('Census 2011 A-01 districts are current and add to the India totals', _census_a01),
     ('the rural and urban table is current and every district has a 2011 parent', _urban),
     ('the NRC page carries only checked facts and is current', _nrc),
+    ('the four-state constituency table is current and adds up', _ac_change),
     ('the Assam figures add up and are current', _assam),
     ('every shared state page\'s figures add up and are current', _states),
     ('Notices table matches its raw table', _notices),
