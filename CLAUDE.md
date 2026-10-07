@@ -42,6 +42,14 @@ Things the build depends on, each asserted by `check_data.py`:
   runner-up votes in six more. The margin is winner minus runner-up in every
   row; votes polled are turnout on the 2025 roll. `verify_bihar.py` recomputes
   both.
+- **Electors in 2025 come from the Commission's Detailed Results** (the
+  `_electors` rows of `ae_party_votes_2020_2025.csv`, 7,46,91,135), not the
+  Wikipedia seat list, which has slips in five seats (Bahadurpur by 9,000,
+  Bahadurganj by 1,100). Every rate per 100 electors divides by it.
+- **Phase 2 (3,51,150) is below Format 4B's removals after the draft
+  (3,66,742) in every seat**, by 4 to 586, and tracks it seat by seat: an
+  earlier count of the same removals, though neither table is dated. Keep the
+  two apart and say which one a figure uses.
 - **`LABEL_FIXES` in `build_bihar.py`.** Each carries its evidence and a status,
   verified or probable. After the fixes, all 40 seats' top two match the
   declared result within 1 point. A new fix needs evidence, not a plausible
@@ -106,7 +114,10 @@ replacements (`PICK` in `build_india.py`): literacy from PLFS 2023-24, spending
 from HCES 2023-24, the urban share projected to 1 March 2026, and Muslim, SC, ST
 shares and the sex ratio from NFHS-5. NFHS shares are of households, a little
 below shares of people. Migration has no state figure after 2011 and stays on
-the census. `robustness_2011` reruns the correlations on the 2011 values and
+the census: both migration shares are Census 2011 D-01 counts over the state's own
+enumerated population (out: born here, counted in another state; in: counted
+here, born in another Indian state), held to `data/india/raw/census2011_d01_states.csv`
+by `check_data.py`. `robustness_2011` reruns the correlations on the 2011 values and
 the method page reports which readings change; `build_india.py` computes
 rank correlations with the removal rate and the reason shares, for all states,
 by phase and for states of 50 lakh or more. **Report the phase split with
@@ -387,7 +398,7 @@ whatever their removals (coefficient about -0.9). Leaving that out is how the
 first version went wrong: without it the slope is -0.83 (-1.86 to +0.20) and
 looked like evidence against an anti-NDA effect; with it the slope is +0.31
 (-0.27 to +0.89), which takes in both no effect and the +0.33 to +0.66 an
-anti-NDA pattern would give. Allowing for 2020, the NDA's lead grew 4.0 to 5.2
+anti-NDA pattern would give. Allowing for 2020, the NDA's lead grew 4.5 to 4.7
 points in every third of seats by removals. **Say what this is**: the vote
 cannot tell whether the removals moved votes between the alliances, and that
 question is separate from whether the removals were accurate. Never present

@@ -255,6 +255,15 @@ def build():
     a['al2020'] = a.win2020.map(lambda p: alliance(p, 2020))
     a['al2024'] = a.seg2024.map(lambda p: alliance(p, 2024))
     a['al2025'] = a.win2025.map(lambda p: alliance(p, 2025))
+    # Electors in 2025 from the Election Commission's Detailed Results (the
+    # _electors rows of ae_party_votes_2020_2025.csv), the roll the election
+    # was held on. The published seat list the map comes from agrees in 238
+    # seats and has slips in five: Bahadurpur (85) by 9,000 and Bahadurganj
+    # (52) by 1,100 are transcription errors.
+    pv = pd.read_csv(os.path.join(RAW, 'ae_party_votes_2020_2025.csv'))
+    e25 = pv[(pv.party == '_electors') & (pv.year == 2025)].set_index('ac').votes
+    assert len(e25) == 243 and e25.index.is_unique, 'ECI electors for every seat'
+    a['electorate_2025'] = a.ac.map(e25).astype(int)
     a['per_booth'] = a.deleted / a.booths
     a['per_100_electors'] = 100 * a.total / a.electorate_2025
     # Votes polled: turnout on the 2025 roll. Within about 1% of the winner's
