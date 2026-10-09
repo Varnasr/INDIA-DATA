@@ -119,6 +119,10 @@ def asof(place):
         return {'k': 'final', 'd': r['final_date'], 'c': today}
     sched = next((x for x in P['schedules'] if x['state'] == name), None)
     due = sched['steps'][-1].get('final') if sched else None
+    # a date moved since the last order, as reported, replaces the order's
+    moved = sorted((x for x in P.get('reported_dates', []) if x['state'] == name and x.get('final')), key=lambda x: x['date'])
+    if moved:
+        due = moved[-1]['final']
     if not r.get('draft_date'):
         slug = place.get('slug')
         summ = None
