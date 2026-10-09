@@ -45,7 +45,7 @@
         [L('Where do the protests and disputes on this site come from?'),
          L('From the courts\' own orders, the Assemblies\' records, the Commission\'s own documents and named press reports. Each item links to its source and quotes it, and a second reader matched every one to that source. A report that could not be matched is left off and named at the foot of <a href="../disputes/">the disputes page</a>.'), ['disputes', 'faq']],
         [L('How many RTI applications have been filed about the SIR?'),
-         L('No published figure says. No authority publishes the number of applications under the Right to Information Act by subject, in any state or district. The Central Information Commission\'s yearly returns give each public authority\'s total with no split by subject. <a href="../rti/">The RTI page</a> lists the applications whose replies were published or reported.'), ['rti', 'faq']],
+         L('No published figure answers that. No authority publishes the number of applications under the Right to Information Act by subject, in any state or district. The Central Information Commission\'s yearly returns give each public authority\'s total with no split by subject. <a href="../rti/">The RTI page</a> lists the applications whose replies were published or reported.'), ['rti', 'faq']],
         [L('Can I send you an RTI reply I received?'),
          L('Yes. Send it through <a href="../../share/">the form for sharing a list</a>, with the date you filed the application. We publish what was asked and what came back, and we name you only if you ask us to.'), ['rti', 'faq']],
         [L('What is a bulk Form 7 objection?'),
