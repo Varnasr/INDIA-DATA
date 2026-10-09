@@ -10,7 +10,7 @@
       var scale = L('The revision left {r} names off Karnataka\'s draft roll, {p} of every 100 electors on the roll before it began.', { r: SIR.lakh(s.removed), p: SIR.d(s.per_100, 1) });
       var blr = L('Bengaluru\'s four districts lost {p} of every 100 electors. They hold {roll} of the state\'s roll and {rem} of the names removed.', { p: SIR.d(B.per_100, 1), roll: SIR.pct(B.share_of_roll), rem: SIR.pct(B.share_of_removed) });
       var why = L('{sh} were entered as shifted, {ab} as absent, {dead} as dead and {dup} as already enrolled elsewhere.', { sh: SIR.pct(s.shares.shifted), ab: SIR.pct(s.shares.absent), dead: SIR.pct(s.shares.dead), dup: SIR.pct(s.shares.duplicate) });
-      var back = L('By 25 September the roll had risen by {a} since the draft, {m} of the names removed. In Bengaluru it rose by {ba}.', { a: SIR.n(s.added_sep), m: SIR.pct(s.made_up_pct), ba: SIR.n(B.added_sep) });
+      var back = L('By 9 October the roll had risen by {a} since the draft, {m} of the names removed. In Bengaluru it rose by {ba}.', { a: SIR.n(s.added_sep), m: SIR.pct(s.made_up_pct), ba: SIR.n(B.added_sep) });
       var QA = [
         [L('How many names did the revision remove in Karnataka?'),
          scale + ' ' + L('The roll of 16 June 2026 held {b} names and the draft roll of 24 August {d}.', { b: cr(s.before), d: cr(s.draft) }), ['main', 'faq']],
@@ -23,11 +23,11 @@
         [L('Have the names been put back?'),
          back + ' ' + L('That rise counts new voters too, so it is the most that could have been restored. The final roll is due on 27 October 2026.'), ['main', 'faq']],
         [L('Were women removed more than men?'),
-         L('This cannot be counted from the Chief Electoral Officer\'s tables. The roll before the revision is published as a total only, and the names removed are not split by sex. Women were {d} of the draft roll and {f} of the roll of 25 September.', { d: SIR.pct(s.women_draft_pct), f: SIR.pct(s.women_sep_pct) }), ['main', 'method', 'faq']],
+         L('This cannot be counted from the Chief Electoral Officer\'s tables. The roll before the revision is published as a total only, and the names removed are not split by sex. Women were {d} of the draft roll and {f} of the roll of 9 October.', { d: SIR.pct(s.women_draft_pct), f: SIR.pct(s.women_sep_pct) }), ['main', 'method', 'faq']],
         [L('Why is there no table by constituency?'),
          L('The Chief Electoral Officer published the revision by its 34 election districts and for the state, and no table by assembly constituency. So the removals cannot be set against the margins of the 2023 election.'), ['method', 'faq']],
         [L('Where do these figures come from?'),
-         L('The removals by district and reason, and the draft roll by district and sex, are from the Chief Electoral Officer\'s press note of 24 August 2026. The roll of 25 September is from the press note of that date. The <a href="../method/">method page</a> gives each source.'), ['method', 'faq']],
+         L('The removals by district and reason, and the draft roll by district and sex, are from the Chief Electoral Officer\'s press note of 24 August 2026. The roll of 9 October is from the press note of that date. The <a href="../method/">method page</a> gives each source.'), ['method', 'faq']],
         [L('Can I look up my own name here?'),
          L('No. Only counts are published on this site. To check your own entry, use the Election Commission\'s voter search.'), ['main']]
       ];

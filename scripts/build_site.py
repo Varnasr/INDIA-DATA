@@ -99,7 +99,7 @@ def heading_ids(content):
 # "today" is process.json's as_of, the day the schedules were last checked,
 # so the build stays the same from one run to the next. The English sentence
 # is in the markup, and sir.js swaps in its translation through L().
-ASOF_LATER = {'Karnataka': '2026-09-25'}   # a roll published after the draft and before the final
+ASOF_LATER = {'Karnataka': '2026-10-09'}   # a roll published after the draft and before the final
 ASOF_EXTRA = {'Assam': '2026-02-10'}       # the Special Revision's final roll; Assam is not in states.json
 
 
@@ -119,6 +119,10 @@ def asof(place):
         return {'k': 'final', 'd': r['final_date'], 'c': today}
     sched = next((x for x in P['schedules'] if x['state'] == name), None)
     due = sched['steps'][-1].get('final') if sched else None
+    # a date moved since the last order, as reported, replaces the order's
+    moved = sorted((x for x in P.get('reported_dates', []) if x['state'] == name and x.get('final')), key=lambda x: x['date'])
+    if moved:
+        due = moved[-1]['final']
     if not r.get('draft_date'):
         slug = place.get('slug')
         summ = None

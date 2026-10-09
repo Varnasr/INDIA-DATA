@@ -1,6 +1,6 @@
 """Karnataka: the names left off the draft roll of 24 August 2026, by
 election district and reason, with the draft roll and the roll during claims
-and objections (25 September 2026) by sex.
+and objections (9 October 2026) by sex.
 
 Reads data/karnataka/raw (see SOURCES.md there) and writes
 data/karnataka/summary.json, districts.json and districts.csv.
@@ -11,8 +11,9 @@ data/karnataka/summary.json, districts.json and districts.csv.
 The CEO published the revision by its 34 election districts only, so there is
 no constituency table. Bengaluru is four of the 34: Bangalore Urban and the
 three B.B.M.P districts. The final roll is due on 27 October 2026; until then
-the latest roll is the one of 25 September, published while claims and
-objections were being heard.
+the latest roll is the one of 9 October, published while notices were
+being heard. The field is still called `sep`, after the roll of 25 September
+it first held.
 """
 import csv
 import io
@@ -29,7 +30,7 @@ REASONS = ('absent', 'shifted', 'dead', 'duplicate', 'other')
 # The CEO's state row, press note DPAR 163 of 24.08.2026
 STATE = {'before': 55432314, 'absent': 1517042, 'shifted': 6545679, 'dead': 1639864,
          'duplicate': 709870, 'other': 383884, 'removed': 10796339, 'draft': 44635975}
-SEP_TOTAL = 44844080
+SEP_TOTAL = 45161393   # the roll of 9 October 2026; 44,844,080 on 25 September
 BENGALURU = ('BANGALORE URBAN', 'B.B.M.P(NORTH)', 'B.B.M.P(CENTRAL)', 'B.B.M.P(SOUTH)')
 NAMES = {'B.B.M.P(NORTH)': 'B.B.M.P (North)', 'B.B.M.P(CENTRAL)': 'B.B.M.P (Central)',
          'B.B.M.P(SOUTH)': 'B.B.M.P (South)'}
@@ -60,7 +61,7 @@ def spearman(x, y):
 
 
 def build():
-    asd, draft, sep = rows('asd_district.csv'), rows('draft_roll_district.csv'), rows('roll_20260925_district.csv')
+    asd, draft, sep = rows('asd_district.csv'), rows('draft_roll_district.csv'), rows('roll_20261009_district.csv')
     assert len(asd) == 34 and set(asd) == set(draft) == set(sep), 'the same 34 districts in all three tables'
     dist = []
     for code, a in asd.items():
@@ -139,7 +140,7 @@ def build():
     buf = io.StringIO()
     w = csv.writer(buf, lineterminator='\n')
     w.writerow(['district', 'roll_before', 'removed', 'removed_per_100', 'absent', 'shifted', 'dead',
-                'already_enrolled', 'other', 'draft_roll', 'roll_25_sep_2026', 'net_fall_per_100'])
+                'already_enrolled', 'other', 'draft_roll', 'roll_9_oct_2026', 'net_fall_per_100'])
     for r in dist:
         w.writerow([r[c] for c in cols])
     out['districts.csv'] = buf.getvalue()

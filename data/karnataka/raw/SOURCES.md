@@ -209,3 +209,34 @@ belongs to, used only to draw the district map (`data/geo/karnataka.json`).
   February 2024 agrees for Ballari and Vijayanagara.
 - B.B.M.P (Central) includes Rajarajeshwarinagar (154), away from the city
   core, so it is drawn in two pieces.
+
+## roll_20261009_district.csv, notices_20261009_district.csv, forms_20260616_20261008_district.csv
+
+The press note of 9 October 2026, the latest roll before the final one.
+
+- Source: CEO Karnataka press note No. DPAR 172 ChuMaPa 2026 of 09.10.2026,
+  https://ceo.karnataka.gov.in/uploads/Press%20Note%20-%2009_1791527846.pdf
+  (linked from the CEO's Facebook post of 9 October; not yet on the press
+  releases page on that day), read through Firecrawl's PDF parser. Eight
+  pages: the note (pages 1 and 2), Annexure 1 electors by district and sex,
+  Annexure 2 notices by district, Annexure 3 Forms 6, 6A, 7 and 8 received
+  16.06.2026 to 08.10.2026 by district, Annexures 4 and 5 letters.
+- Electors as on 09.10.2026: 22,403,422 men, 22,755,113 women, 2,858 third
+  gender, 45,161,393. Like the note of 25 September it does not say whether
+  service electors are included.
+- Notices: 43,82,315 generated, 43,73,745 delivered, 8,570 not delivered,
+  40,88,099 hearings held, 2,85,646 pending. Last hearing 12.10.2026, disposal
+  by 22.10.2026, final roll 27.10.2026, unchanged.
+- The note counts hearings held and gives no outcome, and gives no count of
+  claims and objections admitted, so no removal after the draft is recorded.
+- Annexure 3 prints "DUPI" for Udupi and "BANGALORE Rural"; the files use the
+  names of the other tables.
+- check_raw.py asserts every row identity and that each column sums to the
+  printed state row.
+- Checked on 9 October 2026: a second reader could not open the PDF (the
+  site answered 503 and Firecrawl timed out), so the district rows rest on the
+  first reading through Firecrawl's PDF parser. The state row (45,161,393;
+  22,403,422 men; 22,755,113 women; 2,858 third gender), the 40,88,099
+  hearings, the 1,10,654 Form 7s and the final roll of 27 October were
+  matched to India Today and a PTI report of the same day. Read the district
+  rows against the PDF when it opens.

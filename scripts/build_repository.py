@@ -147,7 +147,10 @@ EXTRA = {
            ('data/maharashtra/raw/state.csv', 'State figures', 'The state figures with their source.')],
     'ka': [('data/karnataka/raw/asd_district.csv', 'Names left off by district', 'The Chief Electoral Officer\'s table by election district and reason.'),
            ('data/karnataka/raw/draft_roll_district.csv', 'Draft roll by district and sex', 'The draft roll of 24 August 2026, general and service electors.'),
-           ('data/karnataka/raw/roll_20260925_district.csv', 'Roll of 25 September 2026', 'The roll of 25 September 2026, by district and sex.')],
+           ('data/karnataka/raw/roll_20260925_district.csv', 'Roll of 25 September 2026', 'The roll of 25 September 2026, by district and sex.'),
+           ('data/karnataka/raw/roll_20261009_district.csv', 'Roll of 9 October 2026', 'The roll of 9 October 2026, by district and sex.'),
+           ('data/karnataka/raw/notices_20261009_district.csv', 'Notices to 9 October 2026', 'Notices generated, delivered and heard by 9 October 2026, by district.'),
+           ('data/karnataka/raw/forms_20260616_20261008_district.csv', 'Forms 6, 6A, 7 and 8 to 8 October 2026', 'Forms received from 16 June to 8 October 2026, by district.')],
     'as': [('data/assam/raw/state.csv', 'State figures', 'Every roll figure, as quoted by the press.'),
            ('data/assam/raw/rules.csv', 'Rules beside the SIR\'s', 'Each rule of the Special Revision set against the SIR\'s.'),
            ('data/assam/raw/schedule.csv', 'Schedule', 'The order\'s schedule.'),
@@ -204,6 +207,10 @@ COMMON = {
     'removed_expired': 'Removed after the draft as dead.', 'removed_shifted': 'Removed after the draft as shifted.',
     'removed_repeated': 'Removed after the draft as enrolled more than once.', 'removed_reason_unstated': 'Removed after the draft, reason not given.',
     'draft_third_gender': 'Draft roll, third gender.',
+    'notices_generated': 'Notices generated.', 'notices_delivered': 'Notices delivered.', 'notices_undelivered': 'Notices not delivered.',
+    'hearings_held': 'Hearings held.', 'hearings_pending': 'Hearings pending.', 'form6': 'Form 6 received (to add a name).',
+    'form6a': 'Form 6A received (overseas electors).', 'form7': 'Form 7 received (objection to a name).',
+    'form8': 'Form 8 received (correction or shift).', 'all_forms': 'All four forms received.',
 }
 for p in ('claims', 'objections'):
     for s, w in (('men', 'men'), ('women', 'women'), ('tg', 'third gender'), ('total', 'all')):

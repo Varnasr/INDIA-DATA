@@ -487,7 +487,7 @@ unless each adds up to the published totals (9,737,831 removed; draft
 `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
 `districts.json` and `districts.csv`; `check_data.py` runs it with `--check`.
 The build fails unless the 34 districts add up to the CEO's state row
-(10,796,339 removed of 55,432,314) and the roll of 25 September to 44,844,080.
+(10,796,339 removed of 55,432,314) and the roll of 9 October to 45,161,393.
 
 - **Districts only.** The CEO published the revision by its 34 election
   districts and none of it by assembly constituency, so there is no seat page
@@ -495,8 +495,10 @@ The build fails unless the 34 districts add up to the CEO's state row
   TCPD's compilation, not primary, and no page uses it.
 - **Bengaluru is four districts**: Bangalore Urban and B.B.M.P North, Central
   and South. Bangalore Rural is not part of it.
-- **The latest roll is 25 September 2026**, published while notices were being
-  heard; the final roll is due 27 October. The rise from the draft counts new
+- **The latest roll is 9 October 2026** (press note of that date, with notices
+  and forms by district in `raw/`), published while notices were being
+  heard; the final roll is due 27 October. The roll of 25 September stays in
+  `raw/` as a record. The summary's `sep` field holds the latest roll. The rise from the draft counts new
   voters too, so call it the most that could have been restored. Rebuild from
   the final roll when it is out, by district and sex.
 - **No split of the removals by sex.** The roll of 16 June is published as a
@@ -1244,10 +1246,11 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   under the kicker (`p.asof`, written by `asof()` in `build_site.py`): the
   final roll's date when `states.json` holds its electors, otherwise the
   draft's date and the final roll's due date from the last schedule step in
-  `process.json` (a due date before `process.json`'s `as_of` reads "was due
+  `process.json`, or from its `reported_dates` where a later date was
+  reported (a due date before `process.json`'s `as_of` reads "was due
   on ... and we have not found it published"). `ASOF_LATER` holds a roll
-  published between draft and final that a state's pages use (Karnataka, 25
-  September), `ASOF_EXTRA` Assam's final roll. The sentence is in the markup
+  published between draft and final that a state's pages use (Karnataka, 9
+  October), `ASOF_EXTRA` Assam's final roll. The sentence is in the markup
   in English and `sir.js` swaps in its `L()` translation. Update
   `states.json`, `process.json` or those two maps and the line follows.
 - **Header tooltips and the tour** (the end of `sir.js`). Each header

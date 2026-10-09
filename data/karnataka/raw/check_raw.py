@@ -93,6 +93,28 @@ check(True, "roll_20260925_district: columns sum to the published state row (44,
 check({r["district"] for r in r25} == {r["district"] for r in asd} == {r["district"] for r in dr},
       "all three SIR tables name the same 34 districts")
 
+# ---- the press note of 09.10.2026, Annexures 1 to 3 ----
+r09 = load("roll_20261009_district.csv")
+check(len(r09) == 34 and all(sum(ints(r, "men", "women", "third")) == int(r["total"]) for r in r09),
+      "roll_20261009_district: 34 rows, men+women+third = total in every row")
+for col, val in {"men": 22403422, "women": 22755113, "third": 2858, "total": 45161393}.items():
+    assert colsum(r09, col) == val, (col, colsum(r09, col), val)
+check({r["district"] for r in r09} == {r["district"] for r in r25},
+      "roll_20261009_district: columns sum to the published state row (45,161,393), same 34 districts")
+nt = load("notices_20261009_district.csv")
+check(all(int(r["notices_delivered"]) + int(r["notices_undelivered"]) == int(r["notices_generated"])
+          and int(r["hearings_held"]) + int(r["hearings_pending"]) == int(r["notices_delivered"]) for r in nt),
+      "notices_20261009_district: delivered + undelivered = generated, held + pending = delivered, every row")
+for col, val in {"notices_generated": 4382315, "notices_delivered": 4373745, "notices_undelivered": 8570,
+                 "hearings_held": 4088099, "hearings_pending": 285646, "polling_stations": 60923}.items():
+    assert colsum(nt, col) == val, (col, colsum(nt, col), val)
+fm = load("forms_20260616_20261008_district.csv")
+check(all(sum(ints(r, "form6", "form6a", "form7", "form8")) == int(r["all_forms"]) for r in fm),
+      "forms_20260616_20261008_district: the four forms add to the row total")
+for col, val in {"form6": 952497, "form6a": 4712, "form7": 110654, "form8": 1234352, "all_forms": 2302215}.items():
+    assert colsum(fm, col) == val, (col, colsum(fm, col), val)
+check(True, "notices and forms: columns sum to the published state rows")
+
 # ---- results_2023.csv and results_2023_candidates.csv ----
 res = load("results_2023.csv")
 cand = load("results_2023_candidates.csv")
