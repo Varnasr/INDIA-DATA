@@ -225,7 +225,7 @@ def shell(out, meta, content, scripts):
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="ql" data-i18n-each>%s</div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('india/brief/', 'The SIR in brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'If your name was left off'), ('india/disputes/', 'Protests and disputes'), ('india/rti/', 'RTI replies'), ('india/reading/', 'Further reading and viewing'),
+        (('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'If your name was left off'), ('india/disputes/', 'Protests and disputes'), ('india/rti/', 'RTI replies'), ('india/reading/', 'Further reading and viewing'),
          ('india/women/', 'Women'), ('india/numbers/', 'The SIR in numbers')))
     # "Start here" is its own menu beside Places, so Places holds only places
     about = ''.join(i for i in items if i.startswith('<div class="about"'))
@@ -369,6 +369,11 @@ def search_index():
     for p in CFG['places']:
         for h, label, _ in p['pages']:
             pages.append([p['id'], label, h])
+        # pages reached only from the places menu, such as the reading page
+        seen = {x[2] for x in pages}
+        for h, label in p.get('menu', []):
+            if h not in seen:
+                pages.append([p['id'], label, h])
     # the front page's own pages, which no tab row lists
     pages += [['home', 'If your name was left off', 'help/'], ['home', 'All downloads, explained', 'downloads/'], ['home', 'Share a list with us', 'share/'], ['home', 'Terms and privacy', 'terms/']]
     rows = []
@@ -392,6 +397,9 @@ def search_index():
         rows.append(['ka', 'd', d['district'], '', 'karnataka/#' + slug(d['district'])] + ([city] if city else []))
     for a in J('hyderabad/summary.json')['acs']:
         rows.append(['hyd', 'ac', a['name'], '', 'hyderabad/explorer/#' + a['name']])
+    # the reading page: every piece, by title, outlet and author
+    for it in J('india/reads.json')['items']:
+        rows.append(['india', 'x', it['title'], '%s, %s' % (it['outlet'], it['date']), 'india/reading/', ' '.join(x for x in (it.get('authors') or '', it['shows']) if x)])
     # the disputes page: every item, and every court, party or body, place and
     # issue, which opens the page filtered to it
     D = J('india/disputes.json')

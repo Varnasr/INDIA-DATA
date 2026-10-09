@@ -1,0 +1,640 @@
+{
+ "generated": "2026-10-09",
+ "for": "offtheroll.in reading page, pull-out panels",
+ "kinds": [
+  "count from official data",
+  "inference about effect on results",
+  "inference about intent",
+  "projection or survey",
+  "fact about process (documentary)",
+  "concession",
+  "framing"
+ ],
+ "method": "Each piece was opened (videos through oEmbed and YouTube auto-captions scraped by Firecrawl; articles fetched and read from their JSON-LD body; Debraj Ray's PDF read in full; the Express from its own special-issue PDF). Quotes are verbatim from those texts. Hindi quotes are from auto-captions, which garble some words; translations are ours. 'site_counts' gives the site's own figures from data/ in the INDIA-DATA repository as of 2026-10-09.",
+ "excluded": [
+  "Political parties and party office-holders. Clips of the Leader of the Opposition and a Karnataka minister inside Ravish Kumar's episodes are not attributed to him."
+ ],
+ "entries": [
+  {
+   "id": "ravish-kumar",
+   "name": "Ravish Kumar",
+   "role": "Journalist and broadcaster; former senior executive editor at NDTV India; now publishes daily Hindi commentary on his own YouTube channel, Ravish Kumar Official (@ravishkumar.official).",
+   "role_note": "NDTV past role is general knowledge, not re-checked in this run; the channel name and handle are from YouTube oEmbed.",
+   "pieces": [
+    {
+     "id": "rk-express",
+     "title": "खुल गई पोल, सामने आ गया खेल, एक्सप्रेस की रिपोर्ट से मचा तहलका",
+     "title_en": "The truth is out, the game exposed: the Express report causes an uproar",
+     "outlet": "Ravish Kumar Official (YouTube)",
+     "date": "2026-09-23",
+     "url": "https://www.youtube.com/watch?v=JakHsdNweGo",
+     "length": "26:31",
+     "how_read": "oEmbed for title and channel; Firecrawl scrape of the watch page for date, length and YouTube's Hindi auto-captions (untimed). Watched as text only; on-screen graphics not seen."
+    },
+    {
+     "id": "rk-form7",
+     "title": "मुस्लिम वोटर का नाम कौन कटवा रहा है, FORM-7 के पीछे गिरोह?  FORM-6 पर राहुल के सवाल पर EC चुप क्यों?",
+     "title_en": "Who is getting Muslim voters' names struck off, a gang behind Form 7? Why is the EC silent on Rahul's question about Form 6?",
+     "outlet": "Ravish Kumar Official (YouTube)",
+     "date": "2026-10-01",
+     "url": "https://www.youtube.com/watch?v=nHRIMAM0DDs",
+     "length": "30:08",
+     "how_read": "As above."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "rk-express",
+     "quote": "10 महीने में 14 बार दो-दो चुनाव आयुक्तों ने मुख्य चुनाव आयुक्त से असहमति जाहिर की है।",
+     "translation": "In 10 months, two Election Commissioners have expressed disagreement with the Chief Election Commissioner 14 times.",
+     "timestamp": "~1:15",
+     "timestamp_note": "approximate: estimated from the quote's position in YouTube's untimed auto-caption text (via a Firecrawl scrape) times the runtime; treat as +/- 1 to 2 minutes",
+     "relies_on": "The Indian Express investigation of 23 Sep 2026 (Ritika Chopra; he also names Damini Nath).",
+     "kind": "fact about process (documentary)",
+     "check": "The count of 14 matches the Express. The framing differs slightly: the Express says the objections were to 'decisions taken and orders issued, they say, without their knowledge', copied to the CEC, not disagreements with the CEC as such.",
+     "site_counts": "The process page's 'Inside the Commission' section lists the dated objections from the Express special issue and keeps the paper's own count (14) in prose; it is press, not a document the site has seen.",
+     "site_stops": "The site has not seen the notes; it can only say what the Express reports."
+    },
+    {
+     "piece": "rk-express",
+     "quote": "नमस्कार, मैं रवश कुमार। वोट चोरी का सिस्टम पकड़ा गया है। यह सिस्टम कहीं और नहीं चुनाव आयोग के भीतर पकड़ा गया है।",
+     "translation": "The system of vote theft has been caught. It has been caught nowhere else but inside the Election Commission.",
+     "timestamp": "~0:05",
+     "timestamp_note": "approximate: estimated from the quote's position in YouTube's untimed auto-caption text (via a Firecrawl scrape) times the runtime; treat as +/- 1 to 2 minutes",
+     "relies_on": "The Express report, read together with Rahul Gandhi's 2025 press conferences, which the episode plays at length.",
+     "kind": "inference about intent",
+     "check": "The Express reports objections about process, access to the roll software, Form 6 and appeals, and says of West Bengal: 'There was no evidence of its role in the election outcome.' It does not report vote theft.",
+     "site_counts": "Nothing on the site measures intent; its rule is that the lists cannot show intent.",
+     "site_stops": "The site does not and cannot say whether anything was stolen."
+    },
+    {
+     "piece": "rk-express",
+     "quote": "97 लोगों ने साबित कर दिया कि वोटर लिस्ट में उनका नाम होना चाहिए ... जिस अधिकारी के सामने दावा किया वो मान भी गया लेकिन दिल्ली से कंट्रोल हो रहा सॉफ्टवेयर उनका नाम वोटर लिस्ट में नहीं जोड़ता है।",
+     "translation": "97 people proved they should be on the roll ... the officer accepted their claim, but the software controlled from Delhi did not add them.",
+     "timestamp": "~15:00",
+     "timestamp_note": "approximate: estimated from the quote's position in YouTube's untimed auto-caption text (via a Firecrawl scrape) times the runtime; treat as +/- 1 to 2 minutes",
+     "relies_on": "The Express Goa report (Goa CEO's office wrote eight times, 11-17 Feb 2026).",
+     "kind": "fact about process (documentary)",
+     "check": "Matches the Express account.",
+     "site_counts": "The process page carries the Goa sequence (11 to 21 Feb 2026) from the Express special issue, labelled press. Goa's own figures (1,00,042 left off the draft, 8.44 per 100) are in the All India table.",
+     "site_stops": "The 97 are the paper's count; the site has no list of them."
+    },
+    {
+     "piece": "rk-express",
+     "quote": "मीडिया ने भी 13 करोड़ लोगों का चेहरा गायब कर दिया।",
+     "translation": "The media too made the faces of 13 crore people disappear.",
+     "timestamp": "~26:00",
+     "timestamp_note": "approximate: estimated from the quote's position in YouTube's untimed auto-caption text (via a Firecrawl scrape) times the runtime; treat as +/- 1 to 2 minutes",
+     "relies_on": "The 13 crore draft-stage total (Express, 1 Sep 2026).",
+     "kind": "count from official data",
+     "check": "The figure is right as a sum of draft-stage removals; the site's own sum across 32 states and UTs is 13,39,03,307. It counts names left off draft rolls, which includes the dead and duplicates and is before any restoration, so it is not 13 crore people disenfranchised.",
+     "site_counts": "All India: 13.39 crore names left off the drafts, about a fifth (20.8%) entered as dead in the states whose split by reason is complete; final rolls are above the draft in several states.",
+     "site_stops": "The site cannot say how many of the 13 crore were eligible electors."
+    },
+    {
+     "piece": "rk-form7",
+     "quote": "पश्चिम बंगाल में 27 लाख वोटरों को चुनाव में वोट देने का मौका नहीं मिला।",
+     "translation": "In West Bengal, 27 lakh voters did not get the chance to vote in the election.",
+     "timestamp": "~21:30",
+     "timestamp_note": "approximate: estimated from the quote's position in YouTube's untimed auto-caption text (via a Firecrawl scrape) times the runtime; treat as +/- 1 to 2 minutes",
+     "relies_on": "The Commission's adjudication outcome in West Bengal (as reported).",
+     "kind": "count from official data",
+     "check": "Matches the reported adjudication split: 27,16,393 found not eligible of 60,06,675 held for adjudication.",
+     "site_counts": "West Bengal page: 27,16,393 found not eligible, 32,68,119 found eligible, 37,05,235 appeals pending as reported (22,21,118 by the excluded, 16,10,311 against inclusion). Only 1,607 were restored before the poll.",
+     "site_stops": "These are state totals as reported; the site cannot say how many of the 27 lakh were eligible, because 96.7% of appeals were still pending."
+    },
+    {
+     "piece": "rk-form7",
+     "quote": "20 अगस्त से 24 सितंबर के बीच 29,000 से ज्यादा फॉर्म सेवन भरे गए हैं। इनमें से 93% आम लोगों ने भरे हैं।",
+     "translation": "Between 20 August and 24 September more than 29,000 Form 7s were filed [in Karnataka], 93% of them by ordinary people.",
+     "timestamp": "~12:00",
+     "timestamp_note": "approximate: estimated from the quote's position in YouTube's untimed auto-caption text (via a Firecrawl scrape) times the runtime; treat as +/- 1 to 2 minutes",
+     "relies_on": "A Karnataka minister's letter to the state CEO (he names Arshad Rizwan); the Belagavi account is from The Hindu.",
+     "kind": "count from official data",
+     "check": "Not verified: the figure is the minister's, relayed; the CEO's own count was not found. The minister is a party office-holder.",
+     "site_counts": "The Disputes page lists bulk Form 7 objections with their sources; Karnataka's own pages carry district figures from the CEO only.",
+     "site_stops": "The site holds no CEO count of Form 7s by who filed them."
+    },
+    {
+     "piece": "rk-form7",
+     "quote": "नए वोटर और बहुत से पुराने वोटर के लिए इसका प्रमाण देना मुश्किल होने लगा और उनका नाम वोटर लिस्ट से कटने लगा।",
+     "translation": "For new voters and many old ones, proving this became difficult and their names began to be struck off the roll.",
+     "timestamp": "~2:00",
+     "timestamp_note": "approximate: estimated from the quote's position in YouTube's untimed auto-caption text (via a Firecrawl scrape) times the runtime; treat as +/- 1 to 2 minutes",
+     "relies_on": "His reading of the Form 6 declaration change.",
+     "kind": "inference about effect on results",
+     "check": "Form 6 is the application for new enrolment; the declaration could delay or block an application, but no source found shows it removing existing names. The Express says applicants could not submit without answering it.",
+     "site_counts": "The process page's Form 6 section sets out the declaration and the Commissioners' objections from documents and the Express.",
+     "site_stops": "No count exists of Form 6 applications refused because of the declaration."
+    }
+   ],
+   "strongest_points": [
+    "He follows and relays the Express documents closely (14 objections, Goa's 97, ERO access to ERONet), and the West Bengal adjudication figure he uses (27 lakh) is the reported official one.",
+    "He relays a Bombay High Court bench's remarks on Goa (Form 8 rejected because the software could not restore an EPIC), which are about process and are checkable."
+   ],
+   "overreach": [
+    "Moves from the Express's process findings to 'vote theft' and 'democracy looted', which the Express itself does not claim.",
+    "Mixes in long clips of the Leader of the Opposition, so the episode's claims are not always his own; claims made only in those clips are excluded here.",
+    "Treats the 13 crore draft-stage total as people erased."
+   ],
+   "not_verified": [
+    "The Karnataka Form 7 figures (29,000; 93%; 4,700 in three days) are a minister's, not checked against the CEO.",
+    "No written piece by him on the SIR in 2025-26 was located; only these two videos were opened. Earlier Bihar-era episodes were not reachable from the channel page (it lists only the latest 30)."
+   ]
+  },
+  {
+   "id": "yogendra-yadav",
+   "name": "Yogendra Yadav",
+   "role": "Psephologist and political activist; a petitioner in the Supreme Court challenge to the Bihar SIR (ADR v. Election Commission of India, W.P.(C) 640/2025), where he argued in person. Formerly with CSDS (Lokniti). Founding national president of Swaraj India, a registered political party, and national convener of Bharat Jodo Abhiyan.",
+   "role_note": "Petitioner role from LiveLaw (12 Aug 2025) and The Wire (10 Oct 2025). The Swaraj India and Bharat Jodo Abhiyan roles are from Wikipedia and older reports via search; whether he still holds them in 2026 was not confirmed.",
+   "pieces": [
+    {
+     "id": "yy-sc-aug",
+     "title": "'Bihar SIR Is Intensive Deletion Exercise' : Yogendra Yadav Appears In Supreme Court With Two Persons Deleted As Dead By ECI",
+     "outlet": "LiveLaw (Debby Jain), report of his oral submissions",
+     "date": "2025-08-12",
+     "url": "https://www.livelaw.in/top-stories/bihar-sir-is-intensive-deletion-exercise-yogendra-yadav-appears-in-supreme-court-with-two-persons-deleted-as-dead-by-eci-from-draft-300679",
+     "how_read": "Fetched; full text in the page's JSON-LD and body."
+    },
+    {
+     "id": "yy-wire-ep",
+     "title": "Bihar SIR: 20 Lakh First-Time Voters Are Missing From Bihar's Draft Electoral Roll",
+     "outlet": "The Wire (Pavan Korada; Yadav's calculation as told to The Wire)",
+     "date": "2025-08-05",
+     "url": "https://thewire.in/rights/bihar-sir-20-lakh-first-time-voters-are-missing-from-bihars-electoral-roll",
+     "how_read": "Fetched; body from JSON-LD."
+    },
+    {
+     "id": "yy-sc-oct",
+     "title": "Bihar SIR Key Takeaways: 'Missing Voters' Triple, Gender Skew Worse, 5 Lakh Voters With Gibberish Values",
+     "outlet": "The Wire Staff, report of his presentation to the Supreme Court on 9 Oct 2025",
+     "date": "2025-10-10",
+     "url": "https://thewire.in/politics/bihar-sir-supreme-court-yogendra-yadav-missing-voters",
+     "how_read": "Fetched; body from JSON-LD."
+    },
+    {
+     "id": "yy-kolkata",
+     "title": "BJP Using SIR To Cut Electorate In Opposition-Ruled States, Claims Yogendra Yadav",
+     "outlet": "ETV Bharat (also carried by The Week as PTI copy)",
+     "date": "2025-11-23",
+     "url": "https://www.etvbharat.com/en/state/bjp-using-sir-to-cut-electorate-in-opposition-ruled-states-claims-yogendra-yadav-enn25112304925",
+     "how_read": "Fetched."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "yy-sc-aug",
+     "quote": "a good electoral roll of Bihar should have 8 crore 18 lakh people, but it had 7.9 crores. So there was deficit of 29 lakhs to begin with",
+     "timestamp": null,
+     "relies_on": "Census-based projection of Bihar's adult population (Report of the Technical Group on Population Projections) against the January 2025 roll.",
+     "kind": "projection or survey",
+     "check": "Quoted as reported by LiveLaw.",
+     "site_counts": "The site uses the same projection family: about 8.30 crore adults projected for 1 March 2026 against a roll of 7.90 crore before the revision (the Commission's June 2025 total, 7,89,69,844) and 7.24 crore on the draft. Across 19 states, rolls held 98.3% of projected adults before and 84.4% after the drafts.",
+     "site_stops": "Projections count residents, so a state that sends migrants out counts adults who may be registered at home; the site says so beside the figure."
+    },
+    {
+     "piece": "yy-wire-ep",
+     "quote": "Total eligible adults: The government report projects Bihar's 18+ population in July 2025 at 8.18 crore ... New registered voters: The ECI's press release states that the new draft roll contains only 7.24 crore voters. The shortfall: 8.18 crore – 7.24 crore = 94 lakh.",
+     "speaker_note": "The Wire's text, presenting Yadav's calculation.",
+     "timestamp": null,
+     "relies_on": "Technical Group population projection; ECI draft-roll press note.",
+     "kind": "projection or survey",
+     "check": "Arithmetic checks. Elector-population ratio 97% before and 88% after, as stated.",
+     "site_counts": "Same direction on the site's numbers: draft 7,24,05,756; phase 1 removals 65,59,409 in the booth file (65,59,626 in the lists).",
+     "site_stops": "The site does not call the gap 'disenfranchised': part of it is new 18-year-olds not yet enrolled and part is the projection's own error."
+    },
+    {
+     "piece": "yy-sc-aug",
+     "quote": "25 lakh men and 31 lakh women have been deleted",
+     "timestamp": null,
+     "relies_on": "ECI draft-stage deletion data by sex (as he presented it).",
+     "kind": "count from official data",
+     "check": "Close to the site's own count; the reasoning attached (more men migrate and die) is his inference.",
+     "site_counts": "Bihar phase 1: women 55.5% of names removed against 47.9% of the roll; over-represented in all 38 districts (by 2.8 to 13.7 points) and 242 of 243 seats. Entered as dead: 52.0% women against 43.4% of expected adult deaths (SRS).",
+     "site_stops": "The lists cannot say why; marriage moves explain about half a year's worth of the excess and the district pattern runs the other way."
+    },
+    {
+     "piece": "yy-sc-aug",
+     "quote": "Never in the history of this country has any revision ever asked all people to submit a form or to submit a document. NEVER",
+     "timestamp": null,
+     "relies_on": "His reading of the 2003 intensive revision.",
+     "kind": "fact about process (documentary)",
+     "check": "Not verified here against the 2003 order, which he said was not public.",
+     "site_counts": "The process page sets out the 2025 order's form and document requirement from the documents.",
+     "site_stops": "The site has not compared the 2003 instructions."
+    },
+    {
+     "piece": "yy-sc-aug",
+     "quote": "We are witnessing perhaps the largest exercise of disenfranchisement, not in India, in the history of the world. Entire figure will cross 1 crore, if they are serious about what they are doing.",
+     "timestamp": null,
+     "relies_on": "Projection from draft-stage removals plus BLO 'not recommended' rates (10.6% and 12.6% in two districts).",
+     "kind": "projection or survey",
+     "check": "A forecast. On the Commission's final roll it did not happen as projected: 3,66,742 more were removed after the draft and 21,53,343 added, so the final roll (7,41,92,357) was 47.7 lakh below the roll before.",
+     "site_counts": "Bihar final roll: net fall 47,72,808; the rise after the draft made up at most 27.2% of the draft removals (a ceiling, since it counts new voters).",
+     "site_stops": "'Disenfranchisement' needs to know who was eligible; the lists record an officer's reason, not eligibility."
+    },
+    {
+     "piece": "yy-sc-oct",
+     "quote": "From 27 lakh after the January 2025 special summary revision, the number of adults who are not registered as voters has gone up to 81 lakh in the SIR.",
+     "speaker_note": "The Wire's paraphrase of his presentation.",
+     "timestamp": null,
+     "relies_on": "Adult population projection against the final roll.",
+     "kind": "projection or survey",
+     "check": "Consistent with 8.22 crore adults (his October base) less the final roll of 7.42 crore.",
+     "site_counts": "Same method on the site's projection gives about 88 lakh adults off the final roll against 8.30 crore projected for March 2026.",
+     "site_stops": "As above: residents, not citizens or electors."
+    },
+    {
+     "piece": "yy-kolkata",
+     "quote": "From the outset, I have said SIR is targeted at Bengal. As Bihar elections were only a few months away, the EC used the state as the testing ground to implement SIR. Now the BJP wants to go the whole hog in Bengal",
+     "timestamp": null,
+     "relies_on": "None stated.",
+     "kind": "inference about intent",
+     "check": "An assertion of purpose made at a public meeting.",
+     "site_counts": "None.",
+     "site_stops": "The site makes no claim about purpose."
+    }
+   ],
+   "strongest_points": [
+    "Measures the roll against the projected adult population rather than counting deletions alone, which catches unregistered young voters that a deletion count cannot see.",
+    "Pointed out early that women were removed more than men in Bihar, which the site's own count of the lists confirms in every district.",
+    "Raised data-quality findings on the final Bihar roll (5,17,216 entries with junk values, apparent duplicates) that are checkable against the roll."
+   ],
+   "overreach": [
+    "'Largest disenfranchisement in the history of the world' and 'will cross 1 crore' are forecasts and rhetoric, not counts; the final roll fell by about 48 lakh.",
+    "Attributes purpose to the BJP and the EC without evidence beyond the pattern of states chosen."
+   ],
+   "not_verified": [
+    "His 2.5 crore figure for Bihar electors on the 2003 roll (against the ECI's 4.6 crore).",
+    "The 5,17,216 junk entries, 5,24,210 within-AC duplicates and 63,09,777 cross-AC duplicates (reported by The Wire, not recomputed).",
+    "His May 2026 interview with The Wire ('SIR Created a Model of Voter List Curation') is a video whose content could not be read; not used.",
+    "No 2025-26 column of his in The Indian Express or ThePrint on the SIR was found."
+   ]
+  },
+  {
+   "id": "indian-express",
+   "name": "The Indian Express (Ritika Chopra)",
+   "role": "National daily. Ritika Chopra is Resident Editor (Mumbai) and wrote the investigation; the special issue is the paper's magazine edition, released free.",
+   "pieces": [
+    {
+     "id": "ie-main",
+     "title": "14 times in 10 months, two Election Commissioners objected on record to poll panel steps",
+     "outlet": "The Indian Express",
+     "date": "2026-09-23",
+     "url": "https://indianexpress.com/article/express-exclusive/election-commission-sir-14-objections-gyanesh-kumar-sukhbir-singh-sandhu-vivek-joshi-10889737/",
+     "how_read": "Read in the Express Plus special issue PDF (pages 4 to 17) held by the site; online article dated 23 Sep 2026."
+    },
+    {
+     "id": "ie-rift",
+     "title": "What Election Commission rift reveals",
+     "outlet": "The Indian Express",
+     "date": "2026-09-23",
+     "url": null,
+     "how_read": "Special issue, pages 18 to 22 (online URL not checked)."
+    },
+    {
+     "id": "ie-reply",
+     "title": "'Differing views' part of 'decision-making', says EC, does not address concerns two ECs red-flagged",
+     "outlet": "The Indian Express",
+     "date": "2026-09-23",
+     "url": "https://indianexpress.com/article/india/decisions-unanimous-election-commission-response-sir-vote-express-investigation-gyanesh-kumar-10890491/",
+     "how_read": "Special issue, pages 39 to 44."
+    },
+    {
+     "id": "ie-issue",
+     "title": "Election Commission of India: lapses and challenges (Express Plus special issue)",
+     "outlet": "The Indian Express",
+     "date": "2026-10-05",
+     "url": null,
+     "how_read": "PDF, 80 pages, at reports/indian-express-plus-election-commission-2026-10.pdf in the site repository."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "ie-main",
+     "quote": "Sandhu and Joshi have formally objected, on record, at least 14 times over the last 10 months – four times on a single day – to decisions taken and orders issued, they say, without their knowledge.",
+     "timestamp": null,
+     "relies_on": "The Commissioners' notes on file, which the paper says it has seen ('The Indian Express has seen each of these exchanges').",
+     "kind": "fact about process (documentary)",
+     "check": "Fact as reported from documents the paper holds and the site has not seen. The Commission's reply acknowledged 'written notes' and 'differing views' without disputing that they exist.",
+     "site_counts": "Process page, 'Inside the Commission': each dated event with the special issue's page number; the count of 14 stays in prose.",
+     "site_stops": "The site has not seen the notes."
+    },
+    {
+     "piece": "ie-main",
+     "quote": "On May 16, Election Commissioner Vivek Joshi recorded on file that the form 'cannot be altered without making amendments in the Registration of Electors Rules, 1960' ... Sandhu concurred on May 19. In July, the SIR declaration appeared on the online form anyway.",
+     "timestamp": null,
+     "relies_on": "File notes; the online Form 6.",
+     "kind": "fact about process (documentary)",
+     "check": "The Form 6 declaration itself is publicly visible and was reported by the paper on 12 July 2026; the file notes are the paper's.",
+     "site_counts": "Process page, Form 6 section.",
+     "site_stops": "No count of applications affected."
+    },
+    {
+     "piece": "ie-main",
+     "quote": "Of the 294 seats that went to polls, in 49, the SIR deletions exceeded the victory margin. But in these, the spoils were almost evenly shared — 26 were won by BJP and 21 by TMC.",
+     "timestamp": null,
+     "relies_on": "Adjudication deletions by constituency (same measure as Newslaundry's Test 3) against 2026 margins.",
+     "kind": "inference about effect on results",
+     "check": "Matches Newslaundry's Test 3 (49 seats; BJP 26, TMC 21, Congress 2). The paper's own words: 'There was no evidence of its role in the election outcome.'",
+     "site_counts": "West Bengal elections page measures the fall in the roll from 2024 instead (the CEO published no removals below the state): over the margin in 139 seats; AITC-won seats lost more per 100 (12.38) than BJP-won (9.41), and against their own district the gap is small (0.23 against 0.03).",
+     "site_stops": "Over the margin means large enough to decide a seat, not that it did."
+    },
+    {
+     "piece": "ie-main",
+     "quote": "the Supreme Court, in February 2026, [took] the last leg of the SIR out of the Commission's hands and get judicial officers to decide on the plight of 60 lakh voters flagged for 'logical discrepancies.' Of these, 27 lakh electors were subsequently deleted by the Commission.",
+     "timestamp": null,
+     "relies_on": "Court orders; the Commission's figures; its affidavit (38 lakh appeals pending: 22.21 lakh by deleted voters, 16.10 lakh against inclusion).",
+     "kind": "count from official data",
+     "check": "Matches the reported official totals.",
+     "site_counts": "West Bengal: 60,06,675 under adjudication; 27,16,393 not eligible; 16,10,311 appeals against inclusion, 49.3% of appeals.",
+     "site_stops": "Who filed the 16 lakh appeals against inclusion is not public; Sandhu's note asked the same question."
+    },
+    {
+     "piece": "ie-main",
+     "quote": "Goa's EROs heard these cases. On the documents produced, they found 97 voters eligible for the final roll. The software had no way to record that decision.",
+     "timestamp": null,
+     "relies_on": "Eight emails and letters from the Goa CEO's office, 11 to 17 Feb 2026; the final roll of 21 Feb, which the paper checked name by name.",
+     "kind": "fact about process (documentary)",
+     "check": "Documentary, as reported.",
+     "site_counts": "Process page, Goa lane.",
+     "site_stops": "The site has not seen the emails."
+    }
+   ],
+   "fact_vs_inference": "The facts are the dated notes, letters and the Commission's replies. The inferences, labelled as analysis in 'What Election Commission rift reveals', are that centralising the roll software weakens the safeguard of decentralised EROs and that the Commission has not acted 'as far as possible, unanimously'. The paper does not claim the SIR changed the West Bengal result and says there was no evidence that it did.",
+   "strongest_points": [
+    "Built on documents, dated, with the Commission given a questionnaire (no response) and its later press note reported in full.",
+    "Separates the process failures from the electoral outcome explicitly."
+   ],
+   "overreach": [
+    "Little. 'Disquiet ... unprecedented in scale and significance' is the paper's judgement."
+   ],
+   "not_verified": [
+    "The notes themselves; the site and this research have only the paper's account."
+   ]
+  },
+  {
+   "id": "prannoy-roy",
+   "name": "Prannoy Roy",
+   "role": "Psephologist and journalist; co-founder of NDTV; presents DeKoder (@DeKoderAI).",
+   "role_note": "Co-founder of NDTV is general knowledge, not re-checked in this run.",
+   "pieces": [
+    {
+     "id": "pr-dekoder",
+     "title": "More SIR Deletions, Bigger BJP Swing? Prannoy Roy DeKodes the Data | DeKoder",
+     "outlet": "DeKoder (YouTube)",
+     "date": "2026-10-08",
+     "url": "https://www.youtube.com/watch?v=K5qUfsPBSvQ",
+     "length": "7:38",
+     "how_read": "Summary in scratchpad/reads/video.md, from oEmbed and a Firecrawl scrape of auto-captions; not re-fetched."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "pr-dekoder",
+     "quote": "In the 25 constituencies with the highest SIR deletion rates, the TMC had a swing against it of nearly 10.5% ... in the 25 constituency with the lowest SIR deletions, the swing against the TMC was down to only 5.3% ... [SIR] deletions almost doubled the swing against the TMC.",
+     "timestamp": "~3:58 to ~4:10",
+     "timestamp_note": "approximate: estimated from word position in untimed auto-captions times the 7:37 runtime; +/- 15 seconds (see reads/video.md)",
+     "relies_on": "Unnamed; he lists ECI data and research by named outlets but no dataset for these figures.",
+     "kind": "inference about effect on results",
+     "check": "Not reproduced. A top-25 versus bottom-25 comparison with no controls; 'deletion rate' undefined.",
+     "site_counts": "West Bengal per 100 in the fall of the roll is highest in Kolkata North (27.98) and South (24.54), lowest in Purbo Medinipur (1.64): the top and bottom seats differ by region, not only by deletions. Bihar's seat-swing model shows how much this matters: without each seat's previous lead the slope is -0.83, with it +0.31, an interval that takes in no effect.",
+     "site_stops": "The vote cannot tell whether removals moved votes; the site has not run a West Bengal swing model."
+    },
+    {
+     "piece": "pr-dekoder",
+     "quote": "women deletions accounted for 62% of all deleted names compared with only 38% of men voters deleted.",
+     "timestamp": "~5:07",
+     "timestamp_note": "approximate: estimated from word position in untimed auto-captions times the 7:37 runtime; +/- 15 seconds (see reads/video.md)",
+     "relies_on": "Unnamed; matches the Sabar Institute and BehanBox figure (61.8%), which covers names deleted or held under adjudication.",
+     "kind": "count from official data",
+     "check": "Base differs from deletions alone.",
+     "site_counts": "Official counts give smaller shares: women 53.5% of the 58.2 lakh left off the draft (roll 49.2%), and 52.6% of the fall from the 2024 roll to the election roll; over-represented in 21 of 24 districts.",
+     "site_stops": "The CEO has published no split by sex of the adjudication outcomes."
+    },
+    {
+     "piece": "pr-dekoder",
+     "quote": "In other words, the SIR deletion process clearly targeted Muslim voters ... Muslim voter deletions were at a 52% higher deletion rate than non-Muslims.",
+     "timestamp": "~5:51 to ~6:30",
+     "timestamp_note": "approximate: estimated from word position in untimed auto-captions times the 7:37 runtime; +/- 15 seconds (see reads/video.md)",
+     "relies_on": "Unstated; religion of deleted electors can only be guessed from names (as Sabar did, about 31 lakh).",
+     "kind": "inference about intent",
+     "check": "The rate comparison is internally consistent (30 / 19.8 lakh). 'Targeted' is a claim about purpose drawn from a correlation.",
+     "site_counts": "The site does not classify West Bengal's removals by religion. In Bihar, where it does from names, religion is a range, and the census share sits inside it in 18 of 38 districts and below the low bound in 20.",
+     "site_stops": "Names are a guess; the lists cannot show intent."
+    },
+    {
+     "piece": "pr-dekoder",
+     "quote": "there's no doubt and there never has been any doubt that election [rolls] need to be constantly updated and cleaned up",
+     "timestamp": "~7:10",
+     "timestamp_note": "approximate: estimated from word position in untimed auto-captions times the 7:37 runtime; +/- 15 seconds (see reads/video.md)",
+     "relies_on": "-",
+     "kind": "concession",
+     "check": "-",
+     "site_counts": "-",
+     "site_stops": "-"
+    }
+   ],
+   "strongest_points": [
+    "Draft-stage removal rates he cites (Delhi about 33%, Maharashtra about 21%, Karnataka 20%) are right as reported.",
+    "Asks the Commission to explain imbalances by sex and religion, which is a request for data the site also lacks."
+   ],
+   "overreach": [
+    "'Almost doubled the swing' is causal from a raw comparison.",
+    "'Clearly targeted' asserts intent.",
+    "'These millions will now not be able to vote' ignores restoration through Form 6 and appeals."
+   ],
+   "not_verified": [
+    "Source of the 10.5% and 5.3% swing figures; the 30 lakh Muslim deletions; the survey premises (13-point gender gap for TMC; 7-8% against 75% Muslim support); his own deletion; his dates for the Express piece (he says 21 Sep; it is 23 Sep) and Nariman's remarks (6 Oct)."
+   ]
+  },
+  {
+   "id": "lokniti-csds",
+   "name": "Lokniti-CSDS (reported by The Wire, Pavan Korada)",
+   "role": "Lokniti is the survey programme of the Centre for the Study of Developing Societies, Delhi. The Wire's Pavan Korada wrote the report of the survey.",
+   "pieces": [
+    {
+     "id": "lok",
+     "title": "'SIR Risks Disenfranchising Millions of Legitimate Citizens Over Lack of Documents': Lokniti-CSDS Survey",
+     "outlet": "The Wire",
+     "date": "2025-08-16",
+     "url": "https://thewire.in/rights/sir-risks-disenfranchising-millions-of-legitimate-citizens-over-lack-of-documents-lokniti-csds-survey",
+     "how_read": "Fetched; body from JSON-LD. The Lokniti report itself was not opened."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "lok",
+     "quote": "A majority of respondents, 52%, do not have a birth certificate. Furthermore, 41% lack a domicile certificate and 42% do not possess a caste certificate.",
+     "timestamp": null,
+     "relies_on": "3,054 face-to-face interviews in Assam, Kerala, Madhya Pradesh, Uttar Pradesh, West Bengal and Delhi.",
+     "kind": "projection or survey",
+     "check": "Survey figures as reported.",
+     "site_counts": "The site has no survey of documents.",
+     "site_stops": "Holding a document is not the same as being removed: in the SIR's later phases most electors were mapped to the 2002-05 roll and were not asked for documents, and Aadhaar was admitted after 14 Aug 2025 (Supreme Court)."
+    },
+    {
+     "piece": "lok",
+     "quote": "three-quarters of the citizens who have none of the required documents belong to the lower half of the economic order.",
+     "timestamp": null,
+     "relies_on": "Same survey.",
+     "kind": "projection or survey",
+     "check": "As reported.",
+     "site_counts": "Not measured.",
+     "site_stops": "The site's All India correlations use state income per head, not household income."
+    },
+    {
+     "piece": "lok",
+     "quote": "the current requirements could pose a 'serious challenge for many of those who have a legitimate right to be part of the voters' list.'",
+     "timestamp": null,
+     "relies_on": "Survey authors' conclusion.",
+     "kind": "projection or survey",
+     "check": "A risk statement, hedged.",
+     "site_counts": "-",
+     "site_stops": "-"
+    }
+   ],
+   "strongest_points": [
+    "The only independent survey data on who holds the documents the order listed; hedged in its own conclusion."
+   ],
+   "overreach": [
+    "The Wire's headline ('risks disenfranchising millions') is stronger than the survey's wording."
+   ],
+   "not_verified": [
+    "The Lokniti report's own text, sample design and weighting; Sanjay Kumar's personal commentary was not located."
+   ]
+  },
+  {
+   "id": "debraj-ray",
+   "name": "Debraj Ray",
+   "role": "Economist; Julius Silver Professor at New York University (general knowledge, not re-checked). Writes here as an individual in a research note on his own site.",
+   "pieces": [
+    {
+     "id": "ray",
+     "title": "SIR and the BJP's Bengal Majority",
+     "outlet": "Research note, debrajray.com",
+     "date": "2026-05-10",
+     "url": "https://debrajray.com/wp-content/uploads/2026/05/SIR2026.pdf",
+     "how_read": "PDF fetched and read in full (16 pages)."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "ray",
+     "quote": "If we restrict ourselves to the adjudicated SIR deletions, and even if we make the incredibly heroic assumption that every deleted voter would have obediently turned out, and that every such voter would have voted for the runner-up ... that flips a maximum of 26 ACs away from the BJP. The resulting number, 207-26 =181, leaves the BJP comfortably above the 148-seat majority threshold",
+     "timestamp": null,
+     "relies_on": "ECI 2026 results; CEO West Bengal PN-05/2026 (28 Feb 2026); AC-wise adjudication tally; Sabar Institute's AC-level digitisation, which he checks against the press note within 0.1%.",
+     "kind": "inference about effect on results",
+     "check": "Bound computed under stated assumptions; agrees with Newslaundry and The Wire's Aparna Bhattacharya (25).",
+     "site_counts": "Same press note totals as the site (76,637,529 before; 5,820,899 left off the draft; 6,006,675 held; 2,716,393 not eligible).",
+     "site_stops": "The site has no adjudication outcome by constituency from the CEO, so it does not run this bound."
+    },
+    {
+     "piece": "ray",
+     "quote": "Under any neutral calibration, the BJP retains majority by more than thirty seats. The deletions hypothesis only reverses this result at extreme calibrations that the data refuse to support",
+     "timestamp": null,
+     "relies_on": "A two-parameter counterfactual (turnout and partisanship of restored voters) anchored by a cross-seat regression.",
+     "kind": "inference about effect on results",
+     "check": "His full-heroism 'contestable' bound (adjudicated plus shifted and absent) flips 69 seats and leaves the BJP ten short; he argues that assumption is implausible (at 92% turnout, 95% would need to vote against the BJP).",
+     "site_counts": "Bihar's impact estimate uses the same logic: in 187 of 243 seats the runner-up could not have won with every removed voter; 4 to 6 seats change hands both ways.",
+     "site_stops": "No one knows how removed electors would have voted; the site carries a break-even figure where it cannot assume one."
+    },
+    {
+     "piece": "ray",
+     "quote": "BJP MLAs were associated with more adjudicated deletions in their own seats, about 15 more per thousand voters ... It is consistent with the strategic-targeting story for the adjudication channel ... But the offsetting movement in non-adjudicated deletions along the same dimensions means that the overall contestable rate ... shows no partisan-targeting signal.",
+     "timestamp": null,
+     "relies_on": "OLS across 294 seats, HC1 errors; he says it is a correlation exercise, not causal identification.",
+     "kind": "inference about effect on results",
+     "check": "His strongest evidence for targeting, stated with its limit.",
+     "site_counts": "West Bengal per 100 by 2026 winner, against the district: BJP-won 0.03, AITC-won 0.23 above their districts (the fall in the roll, not adjudication).",
+     "site_stops": "Different measure; the site has no adjudication by seat."
+    },
+    {
+     "piece": "ray",
+     "quote": "This is not an argument that the SIR did not matter. It clearly mattered in particular constituencies ... Why individuals had to be put through this ordeal in this particular election, with many plausibly denied their constitutional rights, is a question that should hold our attention.",
+     "timestamp": null,
+     "relies_on": "-",
+     "kind": "concession",
+     "check": "-",
+     "site_counts": "-",
+     "site_stops": "-"
+    }
+   ],
+   "strongest_points": [
+    "States every assumption and shows how the answer moves with it; separates the adjudication channel (where a partisan pattern appears) from the BLO channel (where it does not)."
+   ],
+   "overreach": [
+    "Treats the 24.2 lakh entered as dead as 'defensible' removals and drops them; the site's Bihar test found deaths entered at about 3.4 years' worth, with women over-represented, so 'dead' is itself an officer's entry."
+   ],
+   "not_verified": [
+    "His Table 4 estimates were not recomputed."
+   ]
+  },
+  {
+   "id": "newslaundry",
+   "name": "Newslaundry (Samarth Grover)",
+   "role": "Independent subscriber-funded news site; Samarth Grover is a reporter there.",
+   "pieces": [
+    {
+     "id": "nl",
+     "title": "4 tests, 1 question: Did SIR shape Bengal outcome?",
+     "outlet": "Newslaundry",
+     "date": "2026-05-07",
+     "url": "https://www.newslaundry.com/2026/05/07/4-tests-1-question-did-sir-shape-bengal-outcome",
+     "how_read": "Fetched; full text."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "nl",
+     "quote": "If we compare the 2026 winning margins to the net deletions in each constituency, we get 82 BJP-won constituencies where deletions exceeded the party's victory margin. Of these, 70 were seats that flipped from TMC to BJP.",
+     "timestamp": null,
+     "relies_on": "Sabar Institute deletion data; ECI results. Net deletions 66,62,010 (gross 90,82,099 less 24,20,089 dead).",
+     "kind": "inference about effect on results",
+     "check": "Threshold count; author calls it where the data 'starts to raise questions'.",
+     "site_counts": "Site, on the fall in the roll from 2024: over the margin in 139 seats of 294 (all parties).",
+     "site_stops": "Over the margin is a size test, not an effect."
+    },
+    {
+     "piece": "nl",
+     "quote": "An even stricter test, comparing UA deletions to the electoral swing from 2021, shows that in 14 seats, the deletions were higher than the overall change in margin. Of these 14, the BJP won only one – Pandabeswar – and the TMC won the rest in 2026.",
+     "timestamp": null,
+     "relies_on": "Same.",
+     "kind": "inference about effect on results",
+     "check": "As published.",
+     "site_counts": "Not run on the site.",
+     "site_stops": "-"
+    },
+    {
+     "piece": "nl",
+     "quote": "The assumption most commonly made – that the deleted voters were TMC's – deserves particular scepticism ... Both things can be true simultaneously: a revision can be administratively legitimate and electorally consequential",
+     "timestamp": null,
+     "relies_on": "-",
+     "kind": "framing",
+     "check": "-",
+     "site_counts": "-",
+     "site_stops": "-"
+    },
+    {
+     "piece": "nl",
+     "quote": "Whether that overlap reflects correction, disenfranchisement, or some combination of both may remain unresolved. That is a question of public interest that warrants a full and transparent answer, something which the Election Commission refuses to provide.",
+     "timestamp": null,
+     "relies_on": "-",
+     "kind": "framing",
+     "check": "-",
+     "site_counts": "-",
+     "site_stops": "The site's limit is the same."
+    }
+   ],
+   "strongest_points": [
+    "Four tests of increasing strictness, each stated, with the answer shrinking from 82 seats to one; explicitly declines a causal claim."
+   ],
+   "overreach": [
+    "Little; calls the under-adjudication measure 'more targeted', which is a word about the measure, not intent."
+   ],
+   "not_verified": [
+    "Seat lists not recomputed."
+   ]
+  }
+ ]
+}

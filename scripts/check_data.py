@@ -317,6 +317,13 @@ def _brief():
     assert "SIR.showFaq('india', 'brief')" in page and 'id="short"' in page and 'not legal advice' in page, 'the brief page lost its findings, its questions or its notice'
 
 
+def _panels():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_panels.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+    page = open(os.path.join(ROOT, 'site', 'pages', 'india', 'reading', 'index.html'), encoding='utf-8').read()
+    assert 'data/india/panels.json' in page and 'id="panels"' in page, 'the reading page lost its panels'
+
+
 def _reads():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_reads.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
@@ -420,6 +427,7 @@ for name, fn in [
     ('the disputes page carries only checked items and is current', _disputes),
     ('the RTI page carries only checked applications and is current', _rti),
     ('the reading page carries only items read twice and is current', _reads),
+    ('the reading page panels quote only what was read twice, and their figures are current', _panels),
     ('the brief page carries only rights read twice and says it is not legal advice', _brief),
     ('migration shares equal Census D-01 over each state\'s population', _migration),
     ('the Assam figures add up and are current', _assam),
