@@ -59,6 +59,8 @@ PUBLISHED = {
                                  'Each state measures a different thing, named in the state\'s rows. Nothing is added across states. Only Uttarakhand has gross additions and deletions.'),
     'data/india/disputes.csv': ('Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source', 'item',
                                 'Press items are what the outlet reported. Allegations are the party\'s. Nothing here says what anyone intended.'),
+    'data/india/rti.csv': ('Every application under the Right to Information Act about the revision whose reply was published or reported, with what was asked and what came back', 'application',
+                           'A list of the applications that were reported. No authority publishes how many were filed. Each answer is what the outlet reported.'),
     'data/bihar/constituencies.csv': ('Every Bihar constituency, with names removed by phase, reason and sex, and the 2020 to 2025 results', 'constituency',
                                       'Religion is guessed from names and given as a range. Reasons are what the officers wrote down.'),
     'data/bihar/districts.csv': ('Every Bihar district, with names removed by reason, women\'s share and the range for Muslim names', 'district', ''),

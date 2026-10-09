@@ -28,6 +28,7 @@
   <a class="hub st big" href="westbengal/"><b>West Bengal 2026</b><span id="hWb">Every constituency, the roll from 2024 to the election it was used for, set against the 2026 result.</span></a>
   <a class="hub pin" href="help/"><b>If your name was left off</b><span>What the law and the Commission's orders let an elector do, from Form 6 to the appeals, and where to get help.</span></a>
   <a class="hub pin" href="india/disputes/"><b>Protests and disputes</b><span id="hDisp">Court cases, Assembly resolutions, protests, bulk Form 7 objections and changes to the Commission's software, each with its source.</span></a>
+  <a class="hub pin" href="india/rti/"><b>RTI replies</b><span>Applications under the Right to Information Act about the revision, what was asked and what the Commission or the Chief Electoral Officer answered.</span></a>
   <a class="hub pin" href="india/constituencies/"><b>Every constituency</b><span id="hAcs">Every constituency with a figure on this site, in each state's own measure, with a link to its page.</span></a>
   <a class="hub" href="india/"><b>All India</b><span id="hIndia">Every state and union territory in the revision, with the reasons each one recorded.</span></a>
   <a class="hub pin" href="india/women/"><b>Women</b><span id="hWomen">Every count by sex the site holds, state by state and district by district.</span></a>
@@ -188,7 +189,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')
 }).catch(SIR.fail);
 </script>
 <script>
-Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.json'), SIR.json('data/hyderabad/summary.json'), SIR.json('data/tamilnadu/summary.json'), SIR.json('data/karnataka/summary.json'), SIR.json('data/westbengal/summary.json'), SIR.json('data/kerala/summary.json'), SIR.json('data/rajasthan/summary.json'), SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/delhi/summary.json'), SIR.json('data/maharashtra/summary.json'), SIR.json('data/gujarat/summary.json'), SIR.json('data/uttarakhand/summary.json'), SIR.json('data/india/cities.json'), SIR.json('data/india/disputes.json'), SIR.json('data/india/ac_finder.json'), SIR.json('data/india/women.json')]).then(function (r) {
+Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.json'), SIR.json('data/hyderabad/summary.json'), SIR.json('data/tamilnadu/summary.json'), SIR.json('data/karnataka/summary.json'), SIR.json('data/westbengal/summary.json'), SIR.json('data/kerala/summary.json'), SIR.json('data/rajasthan/summary.json'), SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/delhi/summary.json'), SIR.json('data/maharashtra/summary.json'), SIR.json('data/gujarat/summary.json'), SIR.json('data/uttarakhand/summary.json'), SIR.json('data/india/cities.json'), SIR.json('data/india/disputes.json'), SIR.json('data/india/ac_finder.json'), SIR.json('data/india/women.json'), SIR.json('data/india/rti.json')]).then(function (r) {
   var T = r[0].total, B = r[1].totals, H = r[2].totals;
   var cr = function (x) { return L('{x} crore', { x: (x / 1e7).toFixed(2) }); };
   document.getElementById('headline').innerHTML = L('{r} names were <em>left off</em> India\'s draft rolls.', { r: cr(T.removed) });
@@ -225,6 +226,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.js
   N['india/cities/'] = [SIR.d(r[13].summary.times_max, 1) + '×'];
   N['india/women/'] = [r[16].summary.over + ' / ' + r[16].summary.states];
   N['india/disputes/'] = [SIR.n(r[14].counts.items)];
+  N['india/rti/'] = [SIR.n(r[17].counts.items)];
   N['india/constituencies/'] = [SIR.n(r[15].rows.length)];
   document.getElementById('hWomen').innerHTML = L('Women were the larger share of the names left off in {o} of {n} states with a count by sex, and in {d} of {dn} districts.', { o: r[16].summary.over, n: r[16].summary.states, d: r[16].summary.district_over, dn: r[16].summary.district_n });
   document.getElementById('hDisp').innerHTML = L('{n} court orders, resolutions, protests and reports from {s} states and union territories, each with its source and the Commission\'s reply where one was reported.', { n: SIR.n(r[14].counts.items), s: r[14].counts.states });

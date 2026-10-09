@@ -892,6 +892,22 @@ live in the address (`?court=Supreme%20Court&q=form%207`), so a filtered list
 can be sent as a link, and the sitewide search carries every item and every
 court, party, place and issue as a link into the filtered page.
 
+**RTI replies** (`india/rti/`, pinned on the front page, in the All India
+menu and tab row) lists applications under the Right to Information Act about
+the revision whose reply, refusal or appeal was published or reported. **It is
+a list and never a count**: no authority publishes the number of applications
+by subject, state or district (the CIC's returns give each authority's yearly
+total only), and the page says so. `data/india/raw/rti_research/rti.json` holds
+each application (authority, applicant as an organisation or a role, what was
+asked, the outcome from the fixed list `OUTCOMES` in the build, the answer, a
+verbatim quote, outlet and address) and `verified.json` an independent second
+reading; `scripts/build_rti.py` keeps only items it confirmed or corrected,
+applies each `fix`, computes the days to reply (the Act allows 30, section
+7(1)) and writes `data/india/rti.json` and the CSV; `check_data.py` runs it
+with `--check`. Same rules as the disputes page: no private person named,
+nothing on what anyone intended. Replies sent through the share form join the
+research file with their filing date. English only.
+
 **If your name was left off** (`help/`, on the front page's place, pinned on
 the front page, first under Start here and in every footer) sets out what the
 law and the Commission's orders let an elector do: Form 6, the inquiry before a
