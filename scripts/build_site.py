@@ -130,6 +130,12 @@ def shell(out, meta, content, scripts):
         items.append(fold('Other states', group, place.get('group') == 'states', ' states'))
     if uts:
         items.append(fold('Union territories', uts, place.get('group') == 'uts', ' uts'))
+    # the pages most readers come for, at the top of the menu whatever the place
+    quick = '<div class="quick"><span class="qh">Start here</span><div class="ql" data-i18n-each>%s</div></div>' % ''.join(
+        '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
+        (('india/constituencies/', 'Find a constituency'), ('india/disputes/', 'Protests and disputes'), ('india/women/', 'Women'),
+         ('india/cities/', 'The cities'), ('india/numbers/', 'The SIR in numbers')))
+    items.insert(0, quick)
     current = place['label'] if place['id'] != 'home' else 'Places'
     places = ('<details class="dl places"><summary class="btn" aria-label="Places">%s <span class="lbl-place">%s</span></summary>'
               '<div class="menu"><div data-i18n-each>%s</div></div></details>' % (PIN, html.escape(current), ''.join(items)))

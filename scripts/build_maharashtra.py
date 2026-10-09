@@ -114,6 +114,20 @@ def build():
         'draft_date': st['draft_published'], 'claims_to_note': st['claims_objections_to'], 'final_due_note': st['final_roll_due'],
         'claims_to': last['claims'][1], 'notices_to': last['notice'][1], 'final_due': last['final'], 'final_due_source': last['label'],
     }
+    # The CEO's own list of 38 constituencies with a high share of forms not
+    # collected. It is a selection the CEO made, and its title says how: it
+    # leaves out the seats a newspaper had called Muslim-heavy. It is shown as
+    # printed, never mapped, ranked against other seats or added to anything.
+    top = read('ac_top38.csv')
+    summary['top38'] = {
+        'title': 'Top 38 ACs with High Percentage of Uncollectable EF Electors (excluding Muslim-heavy ACs as claimed by Indian Express report)',
+        'url': 'https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Top%20ACs%20with%20high%20percentage%20of%20%20Uncollectable%20EF%20excluding%20%20Muslim%20heavy%20seats.pdf',
+        'file_date': '2026-09-30',
+        'acs': len(top), 'electors': sum(int(r['total_electors']) for r in top), 'uncollected': sum(int(r['uncollected']) for r in top),
+        'rows': [{'ac': int(r['ac']), 'name': r['ac_name'], 'district': r['district'], 'electors': int(r['total_electors']),
+                  'uncollected': int(r['uncollected']), 'pct': float(r['uncollected_pct_printed'])} for r in top],
+    }
+    summary['top38']['pct'] = round(100 * summary['top38']['uncollected'] / summary['top38']['electors'], 1)
     assert summary['claims_to'] >= summary['claims_to_note'] and summary['final_due'] >= summary['final_due_note']
 
     out = {'summary.json': json.dumps(summary, ensure_ascii=False, indent=1) + '\n',
@@ -125,6 +139,12 @@ def build():
     for r in D:
         w.writerow([r[k] for k in ('district', 'before', 'draft', 'left_off', 'per_100', 'men', 'women', 'third', 'women_draft_pct')])
     out['districts.csv'] = buf.getvalue()
+    buf = io.StringIO()
+    w = csv.writer(buf, lineterminator='\n')
+    w.writerow(['ac', 'constituency', 'district', 'total_electors', 'forms_not_collected', 'not_collected_pct'])
+    for r in summary['top38']['rows']:
+        w.writerow([r['ac'], r['name'], r['district'], r['electors'], r['uncollected'], r['pct']])
+    out['top38.csv'] = buf.getvalue()
 
     stale = []
     for name, text in out.items():

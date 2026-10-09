@@ -941,3 +941,24 @@ html.dyslexic-font .disp .tag{text-transform:none}
 .dcount{font-weight:600}
 .disp .dtags{display:flex;flex-wrap:wrap;gap:.3rem;margin:.3rem 0 0}
 .disp .dtags span{font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.05rem .5rem}
+
+/* the places menu opens with the pages most readers come for */
+.places .menu .quick{border-bottom:1px solid var(--line);padding:.2rem 0 .45rem;margin-bottom:.35rem}
+.places .menu .quick .qh{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:.45rem .75rem .2rem}
+.places .menu .quick .ql{display:flex;flex-direction:column}
+html.dyslexic-font .places .menu .quick .qh{text-transform:none}
+
+/* header tooltips and the tour (sir.js) */
+.htip{position:fixed;z-index:60;max-width:18rem;background:var(--ink);color:var(--on-ink);font-size:.8rem;line-height:1.35;padding:.45rem .6rem;border-radius:6px;pointer-events:none;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.htip[hidden]{display:none}
+.tour{position:fixed;z-index:70;inset-inline-end:1rem;bottom:1rem;max-width:22rem;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.tour .tour-n{margin:0 0 .25rem;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.tour .tour-t{margin:0 0 .7rem;font-size:.95rem}
+.tour .tour-b{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.tour button{font:inherit;font-size:.85rem;padding:.45rem .8rem;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.tour button.btn-ink{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.tour button:disabled{opacity:.45;cursor:default}
+.tour .tour-x{margin-inline-start:auto;border-color:transparent;text-decoration:underline}
+.tour-on{outline:3px solid var(--red)!important;outline-offset:3px;border-radius:6px}
+@media (max-width:600px){.tour{inset-inline:.75rem;bottom:.75rem;max-width:none}}
+@media print{.tour,.htip{display:none}}

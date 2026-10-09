@@ -220,6 +220,15 @@ def _urban():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_urban.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
+def _tables():
+    # sir.js defines SIR.table twice, sortable (element, [{k, label}]) and
+    # simple (id, [{h}]). The second once overwrote the first, and every
+    # sortable table on 25 pages rendered empty for three days with no error.
+    js = open(os.path.join(ROOT, 'assets', 'sir.js'), encoding='utf-8').read()
+    if 'var sortable = SIR.table;' not in js or 'return sortable.apply(this, arguments)' not in js:
+        return 'the simple SIR.table no longer hands the sortable form to the first definition'
+
+
 def _ac_change():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_ac_change.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -360,6 +369,7 @@ for name, fn in [
     ('the rural and urban table is current and every district has a 2011 parent', _urban),
     ('the NRC page carries only checked facts and is current', _nrc),
     ('the four-state constituency table is current and adds up', _ac_change),
+    ('both forms of SIR.table work', _tables),
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
     ('migration shares equal Census D-01 over each state\'s population', _migration),

@@ -103,6 +103,25 @@ check(set(per) == set(names) and min(per.values()) >= 1,
 check(per["Palghar"] == 6 and per["Thane"] == 18,
       "ac_district: Palghar 6 ACs (128-133) and Thane 18, as ECI lists them")
 
+# ---- ac_top38.csv: the CEO's list of 38 constituencies, a selection ----
+top = load("ac_top38.csv")
+check(len(top) == 38 and [int(r["sr"]) for r in top] == list(range(1, 39)),
+      "ac_top38: 38 rows, numbered 1 to 38")
+check(colsum(top, "total_electors") == 16201018 and colsum(top, "uncollected") == 6576327,
+      "ac_top38: the rows sum to the printed totals, 1,62,01,018 electors and 65,76,327 uncollected")
+amap = {r["ac"]: r for r in acs}
+check(all(amap[r["ac"]]["district"] == r["district"] and
+          amap[r["ac"]]["ac_name"].lower().replace(" ", "") == r["ac_name"].lower().replace(" ", "") for r in top),
+      "ac_top38: every constituency's number, name and district agree with ac_district")
+check(all(abs(100 * int(r["uncollected"]) / int(r["total_electors"]) - float(r["uncollected_pct_printed"])) < 0.051 for r in top),
+      "ac_top38: every printed percentage is uncollected over total electors, to the decimal printed")
+undist = {r["district"]: int(r["uncollectable"]) for r in unc}
+sel = Counter()
+for r in top:
+    sel[r["district"]] += int(r["uncollected"])
+check(all(v <= undist[d] for d, v in sel.items()),
+      "ac_top38: no district's listed constituencies hold more uncollected forms than the district's own total")
+
 fails = 0
 for ok, msg in results:
     print("ok  " if ok else "FAIL", msg)
