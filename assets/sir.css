@@ -657,7 +657,7 @@ button:hover,.btn:hover{transform:none}
 /* -------------------------------------------- the page and its columns */
 main{padding:0 1.25rem 3.5rem}
 main>:first-child:not(.page-head),main>article>:first-child:not(.page-head){margin-top:2.5rem}
-body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.nothere,.colq,.dlall,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:auto}
+body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,.asof,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.nothere,.colq,.dlall,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:auto}
 .xp main>*{max-width:none!important;margin-inline:0!important}
 main h1{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;line-height:1.02}
 main h2{font-family:var(--serif);font-size:1.9rem;line-height:1.15;font-weight:700;letter-spacing:-.01em;border:0;padding:0;margin-top:3.5rem;margin-bottom:.5rem}
@@ -1026,3 +1026,7 @@ footer{padding-bottom:4rem}
 /* a card's count, and that count as a share of the roll beneath it */
 .hub .n small{display:block;font-family:var(--mono);font-size:.72rem;font-weight:400;letter-spacing:.02em;color:var(--muted);margin-top:.3rem}
 html.dyslexic-font .hub .n small{font-family:inherit;font-size:.8rem}
+
+/* which roll a state's figures come from, under the kicker */
+.asof{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-top:-.5rem;margin-bottom:1rem}
+html.dyslexic-font .asof,html:not([lang="en"]) .asof{font-family:inherit}

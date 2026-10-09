@@ -6,6 +6,19 @@
   // No i18n.js on the page: every string stays as written.
   if (!window.L) { window.L = function (k, v) { return v ? k.replace(/\{(\w+)\}/g, function (m, x) { return v[x] != null ? v[x] : m; }) : k; }; window.L.apply = function () {}; window.L.lang = 'en'; }
   L.apply(document.body);
+  // the line under the kicker saying which roll a state's figures come from;
+  // build_site.py writes it in English and the stage and dates as data
+  [].forEach.call(document.querySelectorAll('p.asof[data-k]'), function (p) {
+    var f = function (iso) { if (!iso) return ''; var q = iso.split('-'); return +q[2] + ' ' + ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+q[1] - 1] + ' ' + q[0]; };
+    var v = { d: f(p.getAttribute('data-d')), n: f(p.getAttribute('data-n')) }, t = {
+      'final': L('Figures as of {d}, when the final roll was published.', v),
+      'draft-due': L('Figures as of {d}, when the draft roll was published. The final roll is due on {n}.', v),
+      'draft-past': L('Figures as of {d}, when the draft roll was published. The final roll was due on {n}, and we have not found it published.', v),
+      'latest-due': L('Figures as of {d}, a roll published while claims and notices were being heard. The final roll is due on {n}.', v),
+      'nodraft': L('No draft roll has been published yet. It is due on {n}.', v)
+    }[p.getAttribute('data-k')];
+    if (t) p.textContent = t;
+  });
   var root = document.body.getAttribute('data-root') || '';
   var nf = new Intl.NumberFormat('en-IN');
 
