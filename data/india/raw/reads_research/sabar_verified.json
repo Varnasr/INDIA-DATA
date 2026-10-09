@@ -1,0 +1,41 @@
+[
+  {
+    "url": "https://sabarinstitute.org/research-and-publications/west-bengal-factsheet",
+    "status": "confirmed",
+    "note": "Page returns 200 (a bogus slug returns 404); CMS record (admin.sabarinstitute.org/api/research-and-publications, slug west-bengal-factsheet) published 2026-08-27, no bylined authors. The site renders the title with broken spacing ('FACTSHEETON VOTERDELETION PATTERNSINTHE WESTBENGAL...'); the factsheet PDF (Drive 1boHSaP-...) cover reads 'Fact Sheet on Voter Deletion Patterns in the West Bengal Special Intensive Revision (SIR), 2025-26', which the entry uses. PDF: 'Converted 91 lakh elector records'; 'Women account for 53.6% of the 58 lakh ASDD deletions' (58 lakh labelled 'Names deleted (ASDD, Dec 2025)'); 'In Nandigram, Muslims constitute approximately 25% of the population but accounted for 95% of deletions across the supplementary lists analysed.' Its own table gives 94.5% against 23.0% for the same seat, so 'about a quarter' and '95%' follow the key-findings wording."
+  },
+  {
+    "url": "https://www.deccanherald.com/opinion/sir-redraws-bengals-margins-of-power-3995060",
+    "status": "confirmed",
+    "note": "Opened (200). Headline 'SIR redraws Bengal's margins of power', Deccan Herald opinion, bylines Sabir Ahamed, Ashin Chakraborty, Souptik Halder in that order. JSON-LD datePublished 2026-05-08T01:48:09+05:30 (8 May IST; a scrape rendered in a US timezone shows '07 May 2026, 16:18', which is the same instant). Text: 'in 161 of the 293 seats (54.8%), the number of voters deleted during the three SIR phases ... exceeded the respective victory margin ... In 124 seats (42.2%), non-death deletions exceeded the winning margin.' 'Shows' is accurate; the deletions counted are all three phases (ASDD, final list of 28 February, supplementary lists)."
+  },
+  {
+    "url": "https://sabarinstitute.org/research-and-publications/sir-delhi-2026",
+    "status": "confirmed",
+    "note": "Page 200; CMS title 'SIR Delhi 2026: The Excluded Roll and the 2025 Verdict', published 2026-09-04. CMS has no author field filled, but the report PDF (Drive 1X3YnmYH...) cover prints 'AUTHORS Sabir Ahamed · Souptik Halder · Ashin Chakraborty'. PDF: 'All 14,947 polling parts ... were published and read', 4,756,722 uncollectable forms, 32.8% of the electorate the revision began with (base 14,510,299), 'In 68 of 70 constituencies the number of uncollectable ... exceeds' the 2025 margin. Matches."
+  },
+  {
+    "url": "https://sabarinstitute.org/research-and-publications/compr",
+    "status": "confirmed",
+    "note": "Page 200; CMS title exactly as entry, published 2026-08-22, CMS authors Sabir Ahamed, Souptik Halder, Ashin Chakraborty (also on the PDF cover). Site text and PDF: 807,410 ASD electors, a lower bound (12,128 of 12,543 parts), 52.0% female, Permanently Shifted 57.7%, deletions exceed the 2022 winning margin in 45 of 70. 'At least' correctly carries the lower bound."
+  },
+  {
+    "url": "https://sabarinstitute.org/research-and-publications/sir-manipur-2026-preliminary-report-on-electoral-roll-deletions",
+    "status": "confirmed",
+    "note": "Page 200; CMS title 'SIR Manipur 2026: Preliminary Report on Electoral Roll Deletions', published 2026-09-27; report PDF (admin.sabarinstitute.org/api/media/file/PrelimReport_Manipur_Full_compressed.pdf) cover dated 27 September 2026 with authors Sabir Ahamed, Souptik Halder, Ashin Chakraborty. 158,677 removed; 20 hill seats 66.4% (site) / '66 out of every 100' (PDF); women 88,799, 55.96%; 'Women were the larger group in all 60 seats, without exception.' Matches. The PDF notes it gives no removal rate or winning-margin comparison, and the entry claims none."
+  },
+  {
+    "url": "https://sabarinstitute.org/research-and-publications/meghalaya-prelim-sir-report",
+    "status": "corrected",
+    "fix": {
+      "authors": ["Sabir Ahamed", "Souptik Halder", "Ashin Chakraborty"],
+      "shows": "It finds 1,80,402 names on Meghalaya's ASDD lists, 8.32% of the draft roll, with death the largest recorded reason at 45.2% and the count above the 2023 winning margin in 32 of 60 seats."
+    },
+    "note": "Page 200; CMS title matches the entry exactly, published 2026-08-28 (data as of 26 August 2026). The CMS has no author field filled, but the report PDF (admin.sabarinstitute.org/api/media/file/PrelimReport_Meghalaya%20(4).pdf) cover prints 'AUTHORS Sabir Ahamed · Souptik Halder · Ashin Chakraborty', so the byline is the three people, consistent with how the Delhi and Manipur entries are treated. The 8.32% is 180,402 over 2,169,243 'DRAFT ELECTORS / SIR draft roll', not over the roll before the revision; 'of the roll' would overstate what base it is, so 'of the draft roll'. 45.2% death and 32 of 60 confirmed."
+  },
+  {
+    "url": "https://sabarinstitute.org/research-and-publications/citizens-handbook-for-filing-sir-voter-deletion-appeals",
+    "status": "confirmed",
+    "note": "Page 200; CMS title 'Citizen's Handbook for Filing SIR Voter Deletion Appeals', published 2026-06-29; CMS authors Prof. Dr. Sarfaraz Ahmed Khan, Tarique Quasimuddin, Prof. Darshana Mitra, Sabir Ahamed (same order as entry; the PDF foreword is signed by the same four, Mitra first). The PDF itself is headed 'SIR Appeal SOP & Sample Appeals'. It describes 19 tribunals constituted by ECI Notification 39/WB/2026(SIR) of 20 March 2026 (CMS text: after Mostari Banu v. Union of India) and nine sample appeal categories. Matches."
+  }
+]

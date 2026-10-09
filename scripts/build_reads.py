@@ -29,8 +29,13 @@ TYPE = {
 }
 # an item whose type does not say where it belongs, by address
 BY_URL = {
+    'https://www.deccanherald.com/opinion/sir-redraws-bengals-margins-of-power-3995060': 'Data and analysis',
+    'https://sabarinstitute.org/research-and-publications/citizens-handbook-for-filing-sir-voter-deletion-appeals': 'Law and the courts',
     'https://indianexpress.com/article/india/decisions-unanimous-election-commission-response-sir-vote-express-investigation-gyanesh-kumar-10890491/': "The Commission's account",
 }
+# the Hyderabad lists' compiler is never named or pointed to (CLAUDE.md), so
+# a report on Hyderabad that names its co-author stays off the page
+EXCLUDE = {'https://sabarinstitute.org/research-and-publications/hyderabad-sir-'}
 OUTLET = {
     'Personal research note (debrajray.com)': 'Debraj Ray, research note',
     'Election Commission of India (copy hosted by the Government of Meghalaya)': 'Election Commission of India',
@@ -57,13 +62,18 @@ EXTRA = [{
 def build():
     items = json.loads((RAW / 'reads.json').read_text(encoding='utf-8'))
     ver = {v['url']: v for v in json.loads((RAW / 'verified.json').read_text(encoding='utf-8'))}
+    # the Sabar Institute's pieces, found and read twice in a second round
+    sabar = [x for x in json.loads((RAW / 'sabar.json').read_text(encoding='utf-8')) if x['url'] not in EXCLUDE]
+    ver.update({v['url']: v for v in json.loads((RAW / 'sabar_verified.json').read_text(encoding='utf-8'))})
     out, dropped = [], []
-    for i, it in enumerate(items + EXTRA):
+    for i, it in enumerate(items + EXTRA + sabar):
         v = ver.get(it['url'])
         if not v or v['status'] not in ('confirmed', 'corrected'):
             dropped.append({'title': it['title'], 'outlet': it['outlet'], 'why': (v or {}).get('note', 'not read a second time')})
             continue
         it = dict(it, **(v.get('fix') or {}))
+        if isinstance(it.get('authors'), list):
+            it['authors'] = ', '.join(it['authors'])
         if i in PLAIN:
             it['shows'] = PLAIN[i]
         g = BY_URL.get(it['url']) or TYPE.get(it['type'])

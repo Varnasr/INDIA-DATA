@@ -48,13 +48,13 @@
   // its names (a word cannot wrap), never more than 150px
   function fitLw(names, base) {
     var w = Math.max.apply(null, names.map(function (n) { return Math.max.apply(null, String(SIR.short ? SIR.short(n) : n).split(/\s+|(?<=-)/).map(function (x) { return x.length; })); }).concat([0]));
-    if (!phone()) return Math.max(base, Math.min(280, 16 + 8.2 * w));
+    if (!phone()) return Math.max(base, Math.min(280, 16 + 9 * w));
     return Math.max(base, Math.min(160, 14 + 8.2 * w));
   }
   // how many characters of a label fit in px, and how many lines the
   // longest of a set of labels takes at that width, so a row can be made
   // tall enough for its label instead of the label spilling into the next
-  function chars(px) { return Math.max(6, Math.floor(px / (phone() ? 7.2 : 7.9))); }
+  function chars(px) { return Math.max(6, Math.floor(px / (phone() ? 7.2 : 8.6))); }
   function linesOf(names, n) { return Math.max.apply(null, names.map(function (nm) { return [].concat(SIR.wrap(String(nm), n)).length; }).concat([1])); }
   function rowH(names, n, base) { return Math.max(base, 13 * linesOf(names, n) + 8); }
   // about five round ticks between lo and hi
@@ -188,7 +188,7 @@
     var names = bars.map(function (b) { return [].concat(SIR.wrap(b.st.name, Math.min(14, wrapAt))); });
     var lines = Math.max.apply(null, names.map(function (l) { return l.length; })), foot = 26 + lines * 15;
     s.setAttribute('viewBox', '0 0 ' + W + ' ' + (H + Math.max(0, foot - 80)));
-    var y = function (v) { return 30 + (H - 110) * (1 - (v - min) / (max - min)); };
+    var top0 = tight ? 46 : 30, y = function (v) { return top0 + (H - 80 - top0) * (1 - (v - min) / (max - min)); };
     bars.forEach(function (b, i) {
       var x0 = 40 + i * bw + bw * 0.15, w = bw * 0.7;
       el('rect', { x: x0, y: y(b.b), width: w, height: Math.max(y(Math.max(b.a, min)) - y(b.b), 1.5), style: fill(tok[b.st.kind]) }, s);
@@ -206,7 +206,7 @@
     // on a phone a few rows take their names above the dots, and many rows
     // (a district each) take them beside, cut to fit, so the chart stays short
     var side = phone() && o.rows.length > 8, nmax = Math.max.apply(null, o.rows.map(function (r) { return String(r.name).length; }));
-    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = side ? Math.min(104, 10 + 6.3 * nmax) : phone() ? 0 : Math.max(150, 16 + 8.2 * nmax), top = (phone() ? 8 : 16) + (o.key ? 22 : 0), R = o.r || 5, D = R * 2 + 0.5;
+    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = side ? Math.min(104, 10 + 6.3 * nmax) : phone() ? 0 : Math.max(150, 16 + 8.6 * nmax), top = (phone() ? 8 : 16) + (o.key ? 22 : 0), R = o.r || 5, D = R * 2 + 0.5;
     var all = [].concat.apply([], o.rows.map(function (r) { return r.points.map(function (p) { return p.v; }); }));
     // the axis starts at zero unless a value falls below it (a roll that grew)
     var step = o.step || 5, max = Math.ceil(Math.max.apply(null, all) / step) * step, min = Math.min(0, Math.min.apply(null, all));
@@ -477,9 +477,21 @@
   function heat(box, o) {
     measure(box);
     var nr = o.rows.length, nc = o.cols.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 116 : 210), lc = chars(lw - 8), rh = rowH(o.rows.map(function (r) { return SIR.short(r.name); }), lc, phone() ? 26 : 24);
-    var cw = (W - lw - 4) / nc, hc = chars(cw - 6), top = Math.max(phone() ? 58 : 44, 13 * linesOf(o.cols, hc) + 16);
+    var cw = (W - lw - 4) / nc, hc = chars(cw - 6);
+    var longWord = Math.max.apply(null, o.cols.map(function (c) { return Math.max.apply(null, String(c).split(/\s+/).map(function (w) { return w.length; })); }));
+    var slant = longWord > hc, maxLen = Math.min(26, Math.max.apply(null, o.cols.map(function (c) { return String(c).length; }))), reach = 0.71 * maxLen * 6.4;
+    // a slanted header reaches up and to the right, so the cells give up
+    // enough width on the right for the last one to stay on the card
+    if (slant) cw = (W - lw - 4 - Math.max(0, reach - cw / 2)) / nc;
+    var top = slant ? 18 + reach : Math.max(phone() ? 58 : 44, 13 * linesOf(o.cols, hc) + 16);
     var H = top + nr * rh + 6, s = svgIn(box, W, H, o.label);
-    o.cols.forEach(function (c, j) { label(s, lw + cw * j + cw / 2, top / 2, c, hc, 'middle', phone() ? 'vname small' : 'vname'); });
+    o.cols.forEach(function (c, j) {
+      var cx = lw + cw * j + cw / 2;
+      if (slant) {
+        var tt = el('text', { x: cx, y: top - 6, 'text-anchor': 'start', class: 'vname small', transform: 'rotate(-45 ' + cx + ' ' + (top - 6) + ')' }, s, String(c).length > 26 ? String(c).slice(0, 25) + '…' : c);
+        el('title', {}, tt, c);
+      } else label(s, cx, top / 2, c, hc, 'middle', phone() ? 'vname small' : 'vname');
+    });
     var max = o.max || 100;
     o.rows.forEach(function (r, i) {
       var y = top + i * rh;
