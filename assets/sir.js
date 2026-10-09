@@ -615,22 +615,9 @@
         return '<tr>' + r.map(function (v, i) { var c = cols[i] || {}; return '<td' + (c.num ? ' class="num"' : '') + ' data-label="' + SIR.esc(String(c.h).replace(/<[^>]+>/g, '')) + '">' + (v == null ? '–' : v) + '</td>'; }).join('') + '</tr>';
       }).join('') + '</tbody>';
   };
-  // the day, counted in India, so the featured states change at midnight IST
-  // and every visitor sees the same ones on the same day
+  // the day, counted in India, so the front page's daily order changes at
+  // midnight IST and every visitor sees the same one on the same day
   SIR.day = function () { return Math.floor((Date.now() + 5.5 * 36e5) / 864e5); };
-  // the places menu: two states at the top each day, the rest in the fold in
-  // their usual order. Without JavaScript the order the build wrote stays.
-  (function () {
-    var menu = document.querySelector('header.top .places .menu > div');
-    var grp = menu && menu.querySelector('details.grp.states'), fold = grp && grp.querySelector('.sub');
-    if (!fold) return;
-    var all = [].slice.call(menu.querySelectorAll('a.st'));
-    if (all.length < 4) return;
-    var d = SIR.day(), pick = [all[(2 * d) % all.length], all[(2 * d + 1) % all.length]];
-    pick.forEach(function (a) { menu.insertBefore(a, grp); });
-    all.forEach(function (a) { if (pick.indexOf(a) < 0) fold.appendChild(a); });
-    grp.open = !!fold.querySelector('[aria-current]');
-  })();
   SIR.esc = function (x) { return String(x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   // a card's figures as label and value pairs
   SIR.facts = function (pairs) {
