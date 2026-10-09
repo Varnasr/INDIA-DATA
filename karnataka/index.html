@@ -41,7 +41,7 @@
 </header>
 <nav class="nav-tabs" aria-label="Karnataka pages"><a class="nav-tab" href="../karnataka/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21H3.8a.8.8 0 0 1-.8-.8V3m3 11 4-4 4 4 7-7"/></svg> Overview</a><a class="nav-tab" href="../karnataka/faq/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M11.83 14v-.621a2.33 2.33 0 0 1 1.164-2.02c1.126-.66 1.514-2.057.854-3.183s-2.057-1.514-3.183-.854C9.965 7.75 9.5 8.487 9.5 9.341M12 17h-.008M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12s4.477 10 10 10 10-4.477 10-10"/></svg> Questions</a><a class="nav-tab" href="../karnataka/method/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M12 7.333C12 5.5 10.5 4 8.667 4H2v12h6.708C12 16 12 19.334 12 19.334m0-12C12 5.5 13.5 4 15.333 4H22v12h-6.667C12 16 12 19.334 12 19.334m0-12v12m1.875 1.124A2.58 2.58 0 0 1 16.167 19H21m-10.875 1.458A2.54 2.54 0 0 0 7.833 19H3"/></svg> Method</a></nav>
 <main id="main">
-<div class="page-head"><p class="kicker">Karnataka 2026</p><p class="asof" data-no-i18n data-k="latest-due" data-d="2026-09-25" data-n="2026-10-27">Figures as of 25 Sep 2026, a roll published while claims and notices were being heard. The final roll is due on 27 Oct 2026.</p><h1>Overview</h1><ol class="summary" id="short"></ol></div>
+<div class="page-head"><p class="kicker">Karnataka 2026</p><p class="asof" data-no-i18n data-k="latest-due" data-d="2026-10-09" data-n="2026-10-27">Figures as of 9 Oct 2026, a roll published while claims and notices were being heard. The final roll is due on 27 Oct 2026.</p><h1>Overview</h1><ol class="summary" id="short"></ol></div>
 
   <h2 id="find-a-district">Find a district</h2>
   <p class="sub">The revision was published by district only, so each district is shaded by the names left off the draft roll for every 100 electors on the roll of 16 June. The draft roll is the roll the revision published once those names had been taken off, and counting per 100 electors lets a small district be set beside a large one. Type a district's name, and its figures appear below with a link you can send.</p>
@@ -55,7 +55,7 @@
 
 
   <h2 id="the-roll-step-by-step">The roll, step by step</h2>
-  <p class="sub">The state's roll, step by step, from 16 June to 25 September 2026. After the draft, people could file claims to be added and objections to names on it. By 25 September these had closed, and the notices sent to electors were still being heard. The bars start above zero so that the changes can be seen, and the figure on each bar is the count. The final roll is due on 27 October 2026.</p>
+  <p class="sub">The state's roll, step by step, from 16 June to 9 October 2026. After the draft, people could file claims to be added and objections to names on it. By 9 October these had closed, and the notices sent to electors were still being heard. The bars start above zero so that the changes can be seen, and the figure on each bar is the count. The final roll is due on 27 October 2026.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
@@ -93,7 +93,7 @@
   <p class="finding" id="fWomen"></p>
 
   <h2 id="after-the-draft">After the draft</h2>
-  <p class="sub">Each small chart follows one district's roll from 16 June to the draft and to 25 September, with 16 June set at 100. The dashed line is the June level. Bengaluru's four districts are in red. A rise after the draft counts new voters as well as names put back, so it is the most that could have been restored.</p>
+  <p class="sub">Each small chart follows one district's roll from 16 June to the draft and to 9 October, with 16 June set at 100. The dashed line is the June level. Bengaluru's four districts are in red. A rise after the draft counts new voters as well as names put back, so it is the most that could have been restored.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vBack"></div></div>
   </div>
@@ -138,19 +138,19 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
   document.getElementById('fMix').innerHTML = L('<b>Across the state, {sh} of the names were entered as shifted and {ab} as absent, {dead} as dead and {dup} as already enrolled elsewhere.</b> The more names a district removed, the larger the share marked shifted or absent (rank correlation {rho}, where 0 means the two are unrelated and 1 means they rise in step). Where fewer were removed, more were entered as dead, up to {dm} in {dmn}. A reason on the list is what the officer wrote down, and nobody checked it.', {
     sh: SIR.pct(S.shares.shifted), ab: SIR.pct(S.shares.absent), dead: SIR.pct(S.shares.dead), dup: SIR.pct(S.shares.duplicate), rho: SIR.d(S.rho_rate_shifted, 2), dm: SIR.pct(S.dead_max.share), dmn: S.dead_max.district });
 
-  VIZ.waterfall('vWater', { label: L('Karnataka: the roll from 16 June to 25 September 2026'), from: Math.floor(S.draft * 0.8 / 1e6) * 1e6, steps: [
+  VIZ.waterfall('vWater', { label: L('Karnataka: the roll from 16 June to 9 October 2026'), from: Math.floor(S.draft * 0.8 / 1e6) * 1e6, steps: [
     { name: L('Roll of 16 June'), v: S.before, kind: 'total' }, { name: L('Shifted'), v: S.reasons.shifted, kind: 'down' },
     { name: L('Dead'), v: S.reasons.dead, kind: 'down' }, { name: L('Absent'), v: S.reasons.absent, kind: 'down' },
     { name: L('Already enrolled'), v: S.reasons.duplicate, kind: 'down' }, { name: L('Other'), v: S.reasons.other, kind: 'down' },
     { name: L('Draft roll'), v: S.draft, kind: 'total' }, { name: L('Net change after the draft'), v: S.added_sep, kind: 'up' },
-    { name: L('Roll of 25 September'), v: S.sep, kind: 'total' }] });
-  VIZ.multiples('vBack', { label: L('Each district\'s roll on 16 June, at the draft and on 25 September, 16 June = 100'), ref: 100,
-    steps: [L('16 June'), L('Draft'), L('25 September')],
+    { name: L('Roll of 9 October'), v: S.sep, kind: 'total' }] });
+  VIZ.multiples('vBack', { label: L('Each district\'s roll on 16 June, at the draft and on 9 October, 16 June = 100'), ref: 100,
+    steps: [L('16 June'), L('Draft'), L('9 October')],
     panels: D.map(function (d) { return { name: d.district, hi: d.bengaluru, v: [100, 100 * d.draft / d.before, 100 * d.sep / d.before] }; }) });
-  document.getElementById('fBack').innerHTML = L('<b>By 25 September the roll had risen by {a} since the draft, {m} of the {r} names removed.</b> In Bengaluru it rose by {ba}, against {bn} names removed. Elsewhere the rise came to {rm} of the names removed. The final roll may change this, and the rise includes new voters.', {
+  document.getElementById('fBack').innerHTML = L('<b>By 9 October the roll had risen by {a} since the draft, {m} of the {r} names removed.</b> In Bengaluru it rose by {ba}, against {bn} names removed. Elsewhere the rise came to {rm} of the names removed. The final roll may change this, and the rise includes new voters.', {
     a: SIR.n(S.added_sep), m: SIR.pct(S.made_up_pct), r: SIR.lakh(S.removed), ba: SIR.n(B.added_sep), bn: SIR.lakh(B.removed), rm: SIR.pct(R.made_up_pct) });
 
-  document.getElementById('fWomen').innerHTML = L('<b>Women were {d} of the draft roll and {s} of the roll of 25 September.</b> The roll before the revision gives no count by sex, so these two figures cannot show whether women were left off more often than men.', { d: SIR.pct(S.women_draft_pct), s: SIR.pct(S.women_sep_pct) });
+  document.getElementById('fWomen').innerHTML = L('<b>Women were {d} of the draft roll and {s} of the roll of 9 October.</b> The roll before the revision gives no count by sex, so these two figures cannot show whether women were left off more often than men.', { d: SIR.pct(S.women_draft_pct), s: SIR.pct(S.women_sep_pct) });
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: L('District'), left: true },
@@ -158,7 +158,7 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
     { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
     { k: 'shifted', label: L('Shifted'), fmt: SIR.n }, { k: 'absent', label: L('Absent'), fmt: SIR.n },
     { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'duplicate', label: L('Already enrolled'), fmt: SIR.n },
-    { k: 'sep', label: L('Roll of 25 Sept'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
+    { k: 'sep', label: L('Roll of 9 Oct'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
   ], D, { sort: 'per_100' });
   var slugD = function (d) { return SIR.slug(d.district); };
   var byName = {}, idOf = {}; D.forEach(function (d) { byName[d.district] = d; });
@@ -167,8 +167,8 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
     card: function (d) { return SIR.facts([
       [L('Roll of 16 June'), SIR.n(d.before)], [L('Names left off the draft'), SIR.n(d.removed)], [L('Per 100 electors'), SIR.d(d.per_100, 1)],
       [L('Shifted'), SIR.n(d.shifted)], [L('Absent'), SIR.n(d.absent)], [L('Dead'), SIR.n(d.dead)], [L('Already enrolled'), SIR.n(d.duplicate)],
-      [L('Roll of 25 September'), SIR.n(d.sep)], [L('Change since the draft'), (d.added_sep >= 0 ? '+' : '') + SIR.n(d.added_sep)]]); },
-    share: function (d) { return L('{n}, Karnataka. {r} names were left off the draft roll in this district, {p} of every 100 electors. {s} were entered as shifted and {dd} as dead. By 25 September the roll had changed by {a} since the draft. These are counts from the Chief Electoral Officer\'s press notes. A reason on the list is what the officer wrote down, and nobody checked it.', { n: d.district, r: SIR.n(d.removed), p: SIR.d(d.per_100, 1), s: SIR.n(d.shifted), dd: SIR.n(d.dead), a: (d.added_sep >= 0 ? '+' : '') + SIR.n(d.added_sep) }); } });
+      [L('Roll of 9 October'), SIR.n(d.sep)], [L('Change since the draft'), (d.added_sep >= 0 ? '+' : '') + SIR.n(d.added_sep)]]); },
+    share: function (d) { return L('{n}, Karnataka. {r} names were left off the draft roll in this district, {p} of every 100 electors. {s} were entered as shifted and {dd} as dead. By 9 October the roll had changed by {a} since the draft. These are counts from the Chief Electoral Officer\'s press notes. A reason on the list is what the officer wrote down, and nobody checked it.', { n: d.district, r: SIR.n(d.removed), p: SIR.d(d.per_100, 1), s: SIR.n(d.shifted), dd: SIR.n(d.dead), a: (d.added_sep >= 0 ? '+' : '') + SIR.n(d.added_sep) }); } });
   SIR.json('data/geo/karnataka.json').then(function (geo) {
     var byId = {};
     geo.features.forEach(function (f) { var d = byName[f.properties.name]; if (d) { byId[f.properties.ac] = d; idOf[d.district] = f.properties.ac; } });
