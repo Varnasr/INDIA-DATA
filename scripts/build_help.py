@@ -16,6 +16,7 @@ listed, and no private person is named.
 """
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -69,7 +70,26 @@ def build():
             orgs.append({k: o.get(k, '') for k in ('id', 'name', 'state', 'what', 'how_to_reach', 'source_url', 'source_outlet', 'source_date', 'active_as_of', 'confidence', 'quote', 'second_url')})
     orgs.sort(key=lambda o: (o['state'] == 'India', o['state'], o['name']))
     states = sorted({o['state'] for o in orgs if o['state'] != 'India'})
-    return {'remedies': rem, 'orgs': orgs, 'org_states': states,
+    # Hindi and Bengali: every sentence on the page, every step and every
+    # organisation's description, keyed by the English. strings_en.json holds
+    # the page's own sentences; the rest come from the data above, so a new
+    # step or organisation cannot reach the page untranslated.
+    want = set(json.load(open(os.path.join(RES, 'strings_en.json'), encoding='utf-8')))
+    for r in rem:
+        want |= {r['title'], r['plain']} | set(r['steps'])
+    want |= {o['what'] for o in orgs} | set(states)
+    tr = {}
+    for lg in ('hi', 'bn'):
+        d = load('i18n_' + lg) or {}
+        miss = sorted(k for k in want if not d.get(k))
+        if miss:
+            raise SystemExit('FAIL - %d strings have no %s translation, first: %r' % (len(miss), lg, miss[0][:80]))
+        for k in want:
+            ph = lambda x: sorted(re.findall(r'\{\w+\}', x))
+            if ph(k) != ph(d[k]) or any(n not in d[k] for n in re.findall(r'\b(?:1950|15100)\b', k)) or dash(d[k]):
+                raise SystemExit('FAIL - the %s translation of %r changes a placeholder or number, or carries a dash' % (lg, k[:60]))
+        tr[lg] = {k: d[k] for k in sorted(want)}
+    return {'remedies': rem, 'orgs': orgs, 'org_states': states, 'tr': tr,
             'counts': {'remedies': len(rem), 'orgs': len(orgs), 'states': len(states), 'dropped': len(dropped)}}
 
 
