@@ -830,6 +830,20 @@ added across states, and only Uttarakhand has gross additions and deletions by
 constituency. Everywhere else the change from the draft is net, counts new
 voters too, and is never called names restored. English only.
 
+**Share a list with us** (`share/`, on the front page's place, in every
+footer, in the search and in a short section on the front page) is the one
+form on the site: a Netlify form named `share-data` (honeypot
+`company_website`, file uploads up to 8 MB) asking what a list or table
+shows, its source (required), the place, the file, and optionally a name,
+an organisation and an email, with a box the sender ticks to say they are
+free to share it. It posts to `share/thanks/`, so it works without
+JavaScript. The page says every submission is read, a table is used only
+when it can be checked against its source, only counts are ever published,
+and the sender is not named unless they ask. `terms/` says the form exists
+and where what is sent goes. Submissions are in the Netlify dashboard under
+Forms. Anything that arrives carrying names or EPIC numbers is treated like
+the Bihar lists: counted, never committed.
+
 **Downloads** (`downloads/`, on the front page's place, linked from every
 Downloads menu and the footer) lists every file the site publishes.
 `scripts/build_repository.py` writes one Excel workbook per place into
@@ -1087,8 +1101,18 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   half empty.
 - **The header carries a places menu**, not a switch: a pin button naming
   the current place, opening the list of analyses. It folds (`details.grp`):
-  a place's own `menu` pages sit under its `nav_label`, and every place with
-  `"group": "states"` in `places.json` sits under "Other states", and every place with `"group": "uts"` under "Union territories" (Delhi and the five territories on the shared page; their links carry no `st` class, so they do not rotate). Two states sit above the fold each day and the rest fold under it (`SIR.day()`, the day counted in India, so every visitor sees the same two on the same day); every state link carries class `st`, and without JavaScript the built order stays. A place with `menu` pages is itself one fold, its overview first. A fold
+  a place's own `menu` pages sit under its `nav_label`, and every state and
+  union territory sits in one fold, "All states and union territories",
+  under its zone (`zone` in `places.json`: the Ministry of Home Affairs'
+  zonal councils, Northern, Central, Eastern, Western and Southern, with the
+  North-East for the eight states of the North Eastern Council; Andaman and
+  Nicobar and Lakshadweep are special invitees of the Southern council and
+  sit there), A to Z inside each. Nothing moves from day to day, because a
+  reader looks for a place where they found it last time. The 13 places with
+  a full analysis of their own (`FULL` in `build_site.py`) are in bold, and a
+  line at the top of the fold says what bold means. Telangana carries "Old
+  City of Hyderabad" beneath it. A new state takes a `zone`; the build fails
+  on a place with a `group` and no zone, or on a zone outside the six. A place with `menu` pages is itself one fold, its overview first. A fold
   opens by itself when the reader is inside it. A new state takes the group
   field; each fold's list carries `data-i18n-each`. On a phone the title takes one row and the controls a row
   beneath it (language, install, search, places, downloads, reading font,

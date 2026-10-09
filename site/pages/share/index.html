@@ -1,0 +1,30 @@
+<!--page {"title": "Share a list or table with us: SIR analysis for India", "description": "Send a list or table about the revision that this site does not have yet, with its source, and it will be checked and counted.", "place": "home"} -->
+<main id="main" class="share">
+<div class="page-head"><h1>Share a list or table with us</h1></div>
+<p class="lead">If you hold a list or a table about the revision that this site does not have, send it here with its source. It could be a Chief Electoral Officer's table by constituency or district, a press note, a court filing, the list of names removed from a polling part, or a count kept by an organisation that helped electors.</p>
+
+<h2>What happens to what you send</h2>
+<ul class="plain">
+  <li>Every submission is read. A table is used only when it can be checked against its source, and the page that uses it says where every figure came from.</li>
+  <li>Only counts are published. If a list carries names, EPIC numbers or addresses, the totals are counted from it and the list itself never goes on the site.</li>
+  <li>The person who sent it is not named unless they ask to be.</li>
+  <li>Send only what you are free to share.</li>
+</ul>
+
+<form class="shareform" name="share-data" method="POST" action="/share/thanks/" data-netlify="true" netlify-honeypot="company_website" enctype="multipart/form-data">
+  <input type="hidden" name="form-name" value="share-data">
+  <p class="hp" hidden data-no-i18n><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p>
+  <p><label for="sfWhat">What the list or table shows, and for which places and dates</label><textarea id="sfWhat" name="what" rows="4" required></textarea></p>
+  <p><label for="sfSource">Where it comes from, as a link or as the office, document and date</label><input id="sfSource" name="source" required></p>
+  <p><label for="sfPlace">State or union territory</label><input id="sfPlace" name="place"></p>
+  <p><label for="sfFile">The file, if you have one (up to 8 MB)</label><input id="sfFile" name="file" type="file" accept=".csv,.xls,.xlsx,.ods,.pdf,.jpg,.jpeg,.png,.zip"></p>
+  <p><label for="sfName">Your name (optional)</label><input id="sfName" name="name" autocomplete="name"></p>
+  <p><label for="sfOrg">Organisation, if any (optional)</label><input id="sfOrg" name="organisation" autocomplete="organization"></p>
+  <p><label for="sfEmail">Email, so we can write back (optional)</label><input id="sfEmail" name="email" type="email" autocomplete="email"></p>
+  <p class="ck"><input id="sfOk" name="free_to_share" type="checkbox" value="yes" required><label for="sfOk">I am free to share this, and I understand that only counts from it will be published.</label></p>
+  <p><button type="submit" class="btn send">Send</button></p>
+</form>
+<p class="note">What you type and any file you attach go to Netlify, which hosts this site and keeps them for us. They are used only to read and answer your submission. The <a href="../terms/">terms and privacy</a> page says more.</p>
+</main>
+<!--scripts-->
+<script src="../assets/sir.js"></script>

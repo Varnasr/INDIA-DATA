@@ -11,6 +11,7 @@ quietly. Each names the failure it guards against.
 import csv
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -234,6 +235,23 @@ def _help():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
+def _share():
+    # the one form: Netlify must see it in the built page, the honeypot must be
+    # there, the source must be required, and the terms page must say it exists
+    page = open(os.path.join(ROOT, 'share', 'index.html'), encoding='utf-8').read()
+    form = re.search(r'<form[^>]*name="share-data"[^>]*>', page)
+    assert form, 'share/ has no share-data form'
+    f = form.group(0)
+    for a in ('data-netlify="true"', 'netlify-honeypot="company_website"', 'method="POST"', 'enctype="multipart/form-data"', 'action="/share/thanks/"'):
+        assert a in f, 'share form lacks %s' % a
+    assert '<input type="hidden" name="form-name" value="share-data">' in page, 'share form lacks its form-name field'
+    assert re.search(r'<input[^>]*name="company_website"', page), 'share form lacks its honeypot field'
+    assert re.search(r'<input[^>]*name="source"[^>]*required', page), 'the source field is not required'
+    assert os.path.exists(os.path.join(ROOT, 'share', 'thanks', 'index.html')), 'share/thanks/ is missing'
+    terms = open(os.path.join(ROOT, 'terms', 'index.html'), encoding='utf-8').read()
+    assert 'share/' in terms and 'Netlify' in terms and 'no forms' not in terms, 'terms/ does not describe the form'
+
+
 def _ac_change():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_ac_change.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -376,6 +394,7 @@ for name, fn in [
     ('the four-state constituency table is current and adds up', _ac_change),
     ('both forms of SIR.table work', _tables),
     ('the help page is current, every remedy and organisation read twice', _help),
+    ('the share form is wired for Netlify and the terms page describes it', _share),
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
     ('migration shares equal Census D-01 over each state\'s population', _migration),

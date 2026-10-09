@@ -100,25 +100,32 @@ def shell(out, meta, content, scripts):
     # the places menu: every analysis, the current one marked. A place's own
     # pages and the run of 2026 states each fold under a heading, opened when
     # the reader is inside it, so the menu stays short as places are added.
-    # every state's link carries class "st": sir.js puts two of them at the
-    # top each day and folds the rest, so the featured states rotate
-    def link(p):
-        href = root + (p['pages'][0][0] if p['pages'] else '')
-        cur = ' aria-current="true"' if p['id'] == place['id'] else ''
-        st = ' class="st"' if p['id'] not in ('home', 'india') and p.get('group') != 'uts' else ''
-        return '<a href="%s"%s%s>%s</a>' % (href or './', st, cur, html.escape(p['label']))
+    # every state and territory sits in one fold, grouped by the Ministry of
+    # Home Affairs' zonal councils (`zone` in places.json) and A to Z inside
+    # each, so a place is always where the reader found it last time. The 13
+    # with a full analysis of their own are in bold; the 20 on the shared page
+    # are not. Telangana carries the Old City study beneath it.
+    FULL = {'bihar', 'hyd', 'tn', 'ka', 'wb', 'kl', 'rj', 'up', 'dl', 'mh', 'gj', 'uk', 'as'}
+    ZONES = ['Northern', 'Central', 'Eastern', 'Western', 'Southern', 'North-East']
+
+    def link(p, href=None, label=None, cls=''):
+        href = root + (href if href is not None else (p['pages'][0][0] if p['pages'] else ''))
+        cur = ' aria-current="true"' if p['id'] == place['id'] and not cls else ''
+        c = ' '.join(x for x in (cls, 'full' if p['id'] in FULL and not cls else '') if x)
+        return '<a href="%s"%s%s>%s</a>' % (href or './', ' class="%s"' % c if c else '', cur, html.escape(label or p['label']))
 
     def fold(title, links, opened, cls=''):
         return ('<details class="grp%s"%s><summary>%s</summary><div class="sub" data-i18n-each>%s</div></details>'
                 % (cls, ' open' if opened else '', html.escape(title), ''.join(links)))
-    items, group, uts = [], [], []
+    items, zoned = [], {z: [] for z in ZONES}
     for p in CFG['places']:
-        if p.get('group') == 'states':
-            group.append(link(p))
+        if p.get('zone'):
+            if p['zone'] not in zoned:
+                raise SystemExit('unknown zone %r for %s' % (p['zone'], p['id']))
+            zoned[p['zone']].append(p)
             continue
-        if p.get('group') == 'uts':
-            uts.append(link(p))
-            continue
+        if p.get('group'):
+            raise SystemExit('%s has a group but no zone' % p['id'])
         if p.get('menu'):
             # a place with its own pages is one fold: its overview, then each page
             home = p['pages'][0][0]
@@ -126,10 +133,16 @@ def shell(out, meta, content, scripts):
             items.append(fold(p['label'], subs, p['id'] == place['id']))
         else:
             items.append(link(p))
-    if group:
-        items.append(fold('Other states', group, place.get('group') == 'states', ' states'))
-    if uts:
-        items.append(fold('Union territories', uts, place.get('group') == 'uts', ' uts'))
+    subs = ['<p class="lg">Names in bold have a full analysis of their own. The others share one summary page.</p>']
+    for z in ZONES:
+        subs.append('<span class="rg">%s</span>' % z)
+        for p in sorted(zoned[z], key=lambda q: q['label']):
+            if p['id'] == 'hyd':
+                subs.append(link(p, 'hyderabad/telangana/'))
+                subs.append(link(p, 'hyderabad/', 'Old City of Hyderabad', 'in'))
+            else:
+                subs.append(link(p))
+    items.append(fold('All states and union territories', subs, bool(place.get('zone')), ' states'))
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="quick"><span class="qh">Start here</span><div class="ql" data-i18n-each>%s</div></div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
@@ -181,8 +194,8 @@ def shell(out, meta, content, scripts):
     # data-i18n-each: the credit and the link are translated apart, so the
     # key does not change with the page's depth.
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s">About this site</a> · <a href="%shelp/">If your name was left off</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sterms/">Terms and privacy</a>'
-              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, root, CFG['email'], CFG['email']))
+              ' · <a href="%s">About this site</a> · <a href="%shelp/">If your name was left off</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sshare/">Share a list with us</a> · <a href="%sterms/">Terms and privacy</a>'
+              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, root, root, CFG['email'], CFG['email']))
     # every page that loads sir.js gets viz.js after it: SIR.chart and the
     # dashboards hand ranked lists and side-by-side measures to it
     if 'assets/sir.js' in scripts and 'assets/viz.js' not in scripts:
@@ -269,7 +282,7 @@ def search_index():
         for h, label, _ in p['pages']:
             pages.append([p['id'], label, h])
     # the front page's own pages, which no tab row lists
-    pages += [['home', 'If your name was left off', 'help/'], ['home', 'All downloads, explained', 'downloads/'], ['home', 'Terms and privacy', 'terms/']]
+    pages += [['home', 'If your name was left off', 'help/'], ['home', 'All downloads, explained', 'downloads/'], ['home', 'Share a list with us', 'share/'], ['home', 'Terms and privacy', 'terms/']]
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),
