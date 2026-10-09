@@ -225,7 +225,7 @@ def shell(out, meta, content, scripts):
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="ql" data-i18n-each>%s</div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'If your name was left off'), ('india/disputes/', 'Protests and disputes'), ('india/rti/', 'RTI replies'), ('india/reading/', 'Further reading and viewing'),
+        (('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'If your name was left off'), ('india/disputes/', 'Protests and disputes'), ('india/rti/', 'RTI replies'), ('india/reading/', 'Further Reading and Viewing'),
          ('india/women/', 'Women'), ('india/numbers/', 'The SIR in numbers')))
     # "Start here" is its own menu beside Places, so Places holds only places
     about = ''.join(i for i in items if i.startswith('<div class="about"'))
