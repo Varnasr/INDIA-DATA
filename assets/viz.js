@@ -161,7 +161,7 @@
   // ---- waterfall: steps [{name, v, kind: 'total'|'down'|'up'}]
   function waterfall(box, o) {
     measure(box);
-    var n = o.steps.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), H = phone() ? 60 + n * 38 : 360;
+    var n = o.steps.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), rows = phone() || (W - 60) / n < 100, H = rows ? 60 + n * 38 : 360;
     var s = svgIn(box, W, H, o.label);
     var run = 0, bars = o.steps.map(function (st) {
       var a, b;
@@ -173,12 +173,13 @@
     var max = Math.max.apply(null, bars.map(function (x) { return x.b; }));
     var min = o.from != null ? o.from : 0;
     var tok = { total: '--fill-navy', down: '--fill-red', up: '--fill-teal' };
-    if (phone()) {
-      // horizontal on a phone: one row per step
-      var lw = 136, rw = Math.max(66, 12 + 6.6 * Math.max.apply(null, bars.map(function (b) { return fmt(b.st.v).length + 1; }))), x = function (v) { return lw + (W - lw - rw) * (v - min) / (max - min); };
+    if (rows) {
+      // one row per step, on a phone and wherever the columns would be too
+      // narrow for their names and figures
+      var lw = phone() ? 136 : 180, rw = Math.max(66, 12 + 6.6 * Math.max.apply(null, bars.map(function (b) { return fmt(b.st.v).length + 1; }))), x = function (v) { return lw + (W - lw - rw) * (v - min) / (max - min); };
       bars.forEach(function (b, i) {
         var y = 20 + i * 38;
-        label(s, lw - 6, y + 12, b.st.name, 17, 'end');
+        label(s, lw - 6, y + 12, b.st.name, chars(lw - 10), 'end');
         el('rect', { x: x(Math.max(b.a, min)), y: y, width: Math.max(x(b.b) - x(Math.max(b.a, min)), 1.5), height: 24, style: fill(tok[b.st.kind]) }, s);
         el('text', { x: W - rw + 6, y: y + 12, class: 'vval' }, s, (b.st.kind === 'down' ? '−' : b.st.kind === 'up' ? '+' : '') + fmt(b.st.v));
       });
@@ -310,7 +311,8 @@
     var x = function (t) { return lw + 8 + (W - lw - 20) * (t - m0) / (m1 - m0); };
     var mon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var span = (m1 - m0) / 864e5, every = span > 400 ? 3 : span > 200 ? 2 : 1;
-    if (ph) every = Math.max(every, span > 200 ? 3 : 2);
+    if (ph) every = Math.max(every, span > 400 ? 4 : span > 200 ? 3 : 2);
+    var mpx0 = (W - lw - 20) * 30.4 * 864e5 / (m1 - m0); every = Math.max(every, Math.ceil(62 / Math.max(mpx0, 1)));
     for (var m = new Date(m0), i = 0; m.getTime() <= m1; m = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 1)), i++) {
       el('line', { x1: x(m.getTime()), x2: x(m.getTime()), y1: leg, y2: H - 24, class: 'vgrid' }, s);
       if (i % every === 0 && m.getTime() < m1) el('text', { x: x(m.getTime()) + 2, y: H - 8, class: 'vval' }, s, mon[m.getUTCMonth()] + (m.getUTCMonth() === 0 || i === 0 ? ' ' + m.getUTCFullYear() : ''));
@@ -326,7 +328,7 @@
       if (k[0] === 'dia') el('path', { d: 'M' + kx + ' ' + (ky - 5) + 'l5 5-5 5-5-5z', style: fill(k[1]) }, s);
       el('text', { x: kx + 12, y: ky, 'dominant-baseline': 'middle', class: 'vval' }, s, k[2]);
     });
-    if (!ph && !o.single) el('text', { x: W - 10, y: 14, 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval' }, s, 'Faint lines are schedules later replaced');
+    if (!ph && !o.single) el('text', { x: 10, y: 33, 'dominant-baseline': 'middle', class: 'vval' }, s, 'Faint lines are schedules later replaced');
     // o.today: a dated line down the whole chart (the date the page's data
     // were last checked), drawn under the rows
     if (o.today) {
@@ -405,9 +407,11 @@
       label(s, lw - 6, yy[0] + yy[1] / 2, l[1], ph ? 13 : 20, 'end');
     });
     var mon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    // a month's name every so many months, so the names never touch
+    var mpx = x(new Date(m0).getTime() + 30.4 * 864e5) - x(new Date(m0).getTime()), every = ph ? 3 : Math.max(1, Math.ceil(64 / Math.max(mpx, 1)));
     for (var m = new Date(m0), i = 0; m.getTime() <= m1; m = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 1)), i++) {
       el('line', { x1: x(m.getTime()), x2: x(m.getTime()), y1: top, y2: y, class: 'vgrid' }, s);
-      if ((!ph || i % 3 === 0) && m.getTime() < m1) el('text', { x: x(m.getTime()) + 2, y: H - 8, class: 'vval' }, s, mon[m.getUTCMonth()] + (m.getUTCMonth() === 0 || i === 0 ? (ph ? ' \u2019' + String(m.getUTCFullYear()).slice(2) : ' ' + m.getUTCFullYear()) : ''));
+      if (i % every === 0 && m.getTime() < m1) el('text', { x: x(m.getTime()) + 2, y: H - 8, class: 'vval' }, s, mon[m.getUTCMonth()] + (m.getUTCMonth() === 0 || i === 0 ? (ph ? ' \u2019' + String(m.getUTCFullYear()).slice(2) : ' ' + m.getUTCFullYear()) : ''));
     }
     var tok = {}; o.lanes.forEach(function (l) { tok[l[0]] = l[2]; });
     o.events.forEach(function (e, i) {
@@ -477,18 +481,25 @@
   function heat(box, o) {
     measure(box);
     var nr = o.rows.length, nc = o.cols.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 116 : 210), lc = chars(lw - 8), rh = rowH(o.rows.map(function (r) { return SIR.short(r.name); }), lc, phone() ? 26 : 24);
+    // every cell keeps room for its figure ("100%"); the name column gives
+    // way first, and its names wrap onto more lines instead
+    var minCw = phone() ? 36 : 44;
+    if (W - lw - 4 < nc * minCw) {
+      lw = Math.max(72, W - 4 - nc * minCw); lc = chars(lw - 8);
+      rh = rowH(o.rows.map(function (r) { return SIR.short(r.name); }), lc, phone() ? 26 : 24);
+    }
     var cw = (W - lw - 4) / nc, hc = chars(cw - 6);
     var longWord = Math.max.apply(null, o.cols.map(function (c) { return Math.max.apply(null, String(c).split(/\s+/).map(function (w) { return w.length; })); }));
-    var slant = longWord > hc, maxLen = Math.min(26, Math.max.apply(null, o.cols.map(function (c) { return String(c).length; }))), reach = 0.71 * maxLen * 6.4;
-    // a slanted header reaches up and to the right, so the cells give up
-    // enough width on the right for the last one to stay on the card
-    if (slant) cw = (W - lw - 4 - Math.max(0, reach - cw / 2)) / nc;
+    // a slanted header runs down to its own column from the upper left, over
+    // the empty space above the names, so the cells give up no width for it
+    var slant = longWord > hc, cap = Math.max(8, Math.min(26, Math.floor((lw + cw / 2 - 6) / (0.71 * 7.4))));
+    var maxLen = Math.min(cap, Math.max.apply(null, o.cols.map(function (c) { return String(c).length; }))), reach = 0.71 * maxLen * 7.4;
     var top = slant ? 18 + reach : Math.max(phone() ? 58 : 44, 13 * linesOf(o.cols, hc) + 16);
     var H = top + nr * rh + 6, s = svgIn(box, W, H, o.label);
     o.cols.forEach(function (c, j) {
       var cx = lw + cw * j + cw / 2;
       if (slant) {
-        var tt = el('text', { x: cx, y: top - 6, 'text-anchor': 'start', class: 'vname small', transform: 'rotate(-45 ' + cx + ' ' + (top - 6) + ')' }, s, String(c).length > 26 ? String(c).slice(0, 25) + '…' : c);
+        var tt = el('text', { x: cx, y: top - 6, 'text-anchor': 'end', class: 'vname small', transform: 'rotate(45 ' + cx + ' ' + (top - 6) + ')' }, s, String(c).length > maxLen ? String(c).slice(0, maxLen - 1) + '…' : c);
         el('title', {}, tt, c);
       } else label(s, cx, top / 2, c, hc, 'middle', phone() ? 'vname small' : 'vname');
     });
@@ -671,7 +682,7 @@
     var d0 = Math.max(tx.lo, ty.lo), d1 = Math.min(tx.hi, ty.hi);
     if (o.diag && d1 > d0) el('line', { x1: x(d0), y1: y(d0), x2: x(d1), y2: y(d1), class: 'vlink' }, s);
     if (o.refY != null) el('line', { x1: l, x2: W - rgt, y1: y(o.refY), y2: y(o.refY), class: 'vzero' }, s);
-    if (o.diag && o.diagLabel && d1 > d0) el('text', { x: x(d1) > W - 90 ? Math.min(x(d1) - 4, W - rgt) : x(d1) + 4, y: Math.max(y(d1) - 6, top + 10), 'text-anchor': x(d1) > W - 90 ? 'end' : 'start', class: 'vval' }, s, o.diagLabel);
+    if (o.diag && o.diagLabel && d1 > d0) { var dl = 10 + 6.6 * String(o.diagLabel).length, de = x(d1) + dl > W - rgt; el('text', { x: de ? Math.min(x(d1) - 4, W - rgt) : x(d1) + 4, y: Math.max(y(d1) - 6, top + 12), 'text-anchor': de ? 'end' : 'start', class: 'vval' }, s, o.diagLabel); }
     o.points.forEach(function (p) {
       var c = el('circle', { cx: x(p.x), cy: y(p.y), r: p.r || (phone() ? 3.5 : 4.5), style: paint(p.tok || '--fill-navy') + ';opacity:.85', class: 'vdot' }, s);
       el('title', {}, c, p.label);
