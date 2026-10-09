@@ -31,7 +31,7 @@
     opts = opts || {};
     return '<div class="card' + (opts.wide ? ' wide' : '') + '"><div class="card-title"><span>' + num + '. ' + title + '</span><div class="card-actions"><button type="button" data-png="' + id + '" aria-label="' + L('Download this chart as PNG') + '">PNG</button></div></div>' +
       '<div class="chart-container ' + (opts.size || '') + '"><canvas id="' + id + '" role="img" aria-label="' + D.esc(title) + '"></canvas></div>' +
-      '<div class="chart-takeaway">' + ICON + ' <strong>' + L('Key insight:') + '</strong> ' + insight + '</div></div>';
+      '<div class="chart-takeaway">' + ICON + ' <strong>' + L('What this shows:') + '</strong> ' + insight + '</div></div>';
   };
   D.section = function (id, html) { return '<section class="tab-content" id="tab-' + id + '" role="tabpanel" aria-labelledby="tabbtn-' + id + '">' + html + '</section>'; };
   D.grid = function (html) { return '<div class="charts-grid">' + html + '</div>'; };

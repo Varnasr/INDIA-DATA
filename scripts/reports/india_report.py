@@ -63,7 +63,7 @@ R.numbered([
     'Where the names removed can be counted seat by seat, in Bihar and Tamil Nadu, they were more than the winning margin, the votes by which the winner beat the runner-up, in %d of %d assembly seats. That makes them large enough to have decided those seats, though the lists cannot show that they did. In West Bengal and Kerala only the fall in the roll can be counted, and it was more than the margin in %d of %d.'
     % (J('india', 'margins.json')['removed']['assembly_over'], J('india', 'margins.json')['removed']['assembly_seats'], J('india', 'margins.json')['fall']['assembly_over'], J('india', 'margins.json')['fall']['assembly_seats']),
     'Of the names removed with a reason given, only %s were entered as dead. The rest are names an officer marked as moved, missing or on the roll twice.' % pct(T['shares']['dead']),
-    'The same rules gave very different results. %s removed %.1f of every 100 electors and %s %.1f. Among the big states, the share marked moved or not found runs from %s in %s to %s in %s.'
+    'The same rules applied in every state. %s removed %.1f of every 100 electors and %s %.1f. Among the big states, the share marked moved or not found runs from %s in %s to %s in %s.'
     % (rated[0]['state'], rated[0]['per_100'], rated[-1]['state'], rated[-1]['per_100'], pct(bigS[0]['shares']['shifted_absent_other']), bigS[0]['state'],
        pct(bigS[-1]['shares']['shifted_absent_other']), bigS[-1]['state']),
     'Women were more likely to be removed. In %d of the %d states that report by sex, women are a bigger share of the names removed than of the roll.'
@@ -73,7 +73,7 @@ R.numbered([
 R.p('Two limits. The adult figures count people where they live, so states that draw migrants look short of electors who are registered in their home states. '
     'And these figures show what happened. They cannot show why it happened, or that anyone meant it to.', italic=True)
 
-R.h2('At a glance')
+R.h2('In short')
 R.stats([(crore(T['removed']), 'left off the draft rolls'), (pct(T['shares']['shifted_absent_other']), 'shifted, absent or other'),
          (pct(T['shares']['dead']), 'dead'), ('%.1f' % T['per_100'], 'removed per 100 electors')])
 R.p('The Special Intensive Revision is a fresh check of every name on the electoral rolls, and it has been carried out in three phases. Bihar came first, in 2025, then twelve states and union territories from November 2025, and eighteen more in 2026. '
