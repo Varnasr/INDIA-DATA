@@ -1189,7 +1189,9 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   between rules; charts on white cards with a hairline. A long reading page
   (four or more h2s, not the front page) gets "On this page" in the left
   margin of a screen 1240px or wider (`SIR.toc`, body class `has-toc`).
-  On a phone the header is the wordmark, Search and one menu button.
+  On a phone the header is the wordmark, Search and one menu button; opened,
+  the controls sit in a grid of equal tiles, four to a row, because one row of
+  eight ran past a 360px screen and cut off the menu button itself.
   The front page follows the mockup: the headline states the count, a grid
   of 100 dots shows the share, a four-number strip (the count left off stays first; the other three come in turn from a list of ten computed from the All India files, three a day by `SIR.day()`), the map beside a ranked
   list of states (so a phone does not depend on hover), cards to each
