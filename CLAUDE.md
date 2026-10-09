@@ -1174,7 +1174,15 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   the same left edge**: the column is left-aligned (`margin-inline:0`), never
   centred. Centred, a 704px text column sat 208px in from the 1120px maps and
   cards, so the left edge jumped in and out all the way down every page. Give
-  any new measure-width block `margin-inline:0`, not `auto`. Numbers sit in a strip
+  any new measure-width block `margin-inline:0`, not `auto`. **A reading
+  page is one column** (`body:not(.wide):not(.home)` sets `--page` and
+  `--measure` to the same 48rem), so text, charts, maps and tables share one
+  width and one left edge; the header keeps 1160px (`--head`). The front page
+  keeps the wide page: below the cards each section is its heading on the
+  left and its text on the right (`section.fs`), across the full width.
+  Dashboards and explorers (`body.wide`) keep 1480px. A sortable table
+  (`SIR.table(el, cols, rows)`) stacks into cards on a phone like the others,
+  with its headings kept above as sort buttons. Numbers sit in a strip
   between rules; charts on white cards with a hairline. A long reading page
   (four or more h2s, not the front page) gets "On this page" in the left
   margin of a screen 1240px or wider (`SIR.toc`, body class `has-toc`).

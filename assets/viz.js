@@ -48,7 +48,7 @@
   // its names (a word cannot wrap), never more than 150px
   function fitLw(names, base) {
     if (!phone()) return base;
-    var w = Math.max.apply(null, names.map(function (n) { return Math.max.apply(null, String(SIR.short ? SIR.short(n) : n).split(/\s+/).map(function (x) { return x.length; })); }).concat([0]));
+    var w = Math.max.apply(null, names.map(function (n) { return Math.max.apply(null, String(SIR.short ? SIR.short(n) : n).split(/\s+|(?<=-)/).map(function (x) { return x.length; })); }).concat([0]));
     return Math.max(base, Math.min(150, 12 + 7.9 * w));
   }
   // about five round ticks between lo and hi
