@@ -1231,15 +1231,21 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   the hero runs it again. On a phone the tour opens the header's menu row for
   the steps that sit in it. A control added to the header gets a line in
   `TIPS`, and a step in `STEPS` if a new reader needs it.
-- **The constituency finder floats on a phone.** On a wide screen it is the
+- **Floating buttons** (`.fabs`, written by `build_site.py`). "Share a list"
+  (`a.fab-share`, icon `i24`) floats at the bottom right on every screen except
+  the share pages. On a wide screen the constituency finder is the
   Constituencies button in the header (icon `i23`, a map pin with a
   magnifier). At 700px and below it leaves the header row, which was too
-  crowded, and every page but the constituencies page carries `a.fab` at the
-  foot of the screen, labelled "Find your constituency". The tour points at
-  whichever is showing and its box sits above the button on a phone. On a page
-  with its own "Find your constituency" button (the front page's hero) the
-  floating one stays hidden until the reader has scrolled past that button,
-  so the two never sit on top of each other.
+  crowded, and floats beneath "Share a list" as "Find your constituency", on
+  every page but the constituencies page. On a page with its own row of
+  buttons (the front page's hero) both stay hidden until that whole row has
+  scrolled off. The tour points at whichever finder is showing, and its box
+  sits above the buttons.
+- **Usage on the front page.** "How much the site has been used", under Who
+  made it, reads `offtheroll_public_stats()` (sums only, never a page or a
+  day; `supabase/migrations`) and shows page views, shares, downloads and
+  searches, leaving out any that are zero, with the date counting began and a
+  line saying visits with Do Not Track are not counted.
 - **The places menu opens with "Start here"** (`quick` in `build_site.py`):
   Find a constituency, Protests and disputes, Women, the cities and the SIR in
   numbers. The All India tab row leads with the same pages.

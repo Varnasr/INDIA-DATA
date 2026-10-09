@@ -197,6 +197,11 @@ def shell(out, meta, content, scripts):
     # floats at the bottom of the screen, with its label, on every page but its own
     fab = '' if here == 'india/constituencies/' else (
         '<a class="fab" href="%sindia/constituencies/#find-a-constituency">%s<span>Find your constituency</span></a>' % (root, svg(ICONS['i23'])))
+    # and a second, quieter one asking for lists the site does not have,
+    # on every screen, except on the share pages themselves
+    if not here.startswith('share/'):
+        fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
+    fab = '<div class="fabs">%s</div>' % fab if fab else ''
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
               ' · <a href="%s">About this site</a> · <a href="%shelp/">If your name was left off</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sshare/">Share a list with us</a> · <a href="%sterms/">Terms and privacy</a>'
               ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, root, root, CFG['email'], CFG['email']))
