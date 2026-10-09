@@ -225,7 +225,7 @@ def shell(out, meta, content, scripts):
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="ql" data-i18n-each>%s</div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'If your name was left off'), ('india/disputes/', 'Protests and disputes'), ('india/rti/', 'RTI replies'), ('india/reading/', 'Further Reading and Viewing'),
+        (('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'Removed from the Roll? What to Do'), ('india/disputes/', 'Protests and disputes'), ('india/rti/', 'RTI replies'), ('india/reading/', 'Further Reading and Viewing'),
          ('india/women/', 'Women'), ('india/numbers/', 'The SIR in numbers')))
     # "Start here" is its own menu beside Places, so Places holds only places
     about = ''.join(i for i in items if i.startswith('<div class="about"'))
@@ -281,7 +281,7 @@ def shell(out, meta, content, scripts):
         fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
     fab = '<div class="fabs">%s</div>' % fab if fab else ''
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s#why-this-site-exists">About this site</a> · <a href="%shelp/">If your name was left off</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sshare/">Share a list with us</a> · <a href="%sterms/">Terms and privacy</a>'
+              ' · <a href="%s#why-this-site-exists">About this site</a> · <a href="%shelp/">Removed from the Roll? What to Do</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sshare/">Share a list with us</a> · <a href="%sterms/">Terms and privacy</a>'
               ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, root, root, CFG['email'], CFG['email']))
     footer += ('\n' + fab) if fab else ''
     # every page that loads sir.js gets viz.js after it: SIR.chart and the
@@ -375,7 +375,7 @@ def search_index():
             if h not in seen:
                 pages.append([p['id'], label, h])
     # the front page's own pages, which no tab row lists
-    pages += [['home', 'If your name was left off', 'help/'], ['home', 'All downloads, explained', 'downloads/'], ['home', 'Share a list with us', 'share/'], ['home', 'Terms and privacy', 'terms/']]
+    pages += [['home', 'Removed from the Roll? What to Do', 'help/'], ['home', 'All downloads, explained', 'downloads/'], ['home', 'Share a list with us', 'share/'], ['home', 'Terms and privacy', 'terms/']]
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),
