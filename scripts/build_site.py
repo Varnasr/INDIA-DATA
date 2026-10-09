@@ -327,6 +327,10 @@ def search_index():
                     facets[(k, v)] = facets.get((k, v), 0) + 1
     for (k, v), n in sorted(facets.items()):
         rows.append(['india', 'f', v, n, 'india/disputes/?%s=%s' % (k, quote(v))])
+    # the RTI page: every application, by what was asked
+    for it in J('india/rti.json')['items']:
+        rows.append(['india', 'x', it['asked'][:100], '%s, %s' % (it['outlet'], it['published']),
+                     'india/rti/#r-' + it['id'], ' '.join(['RTI', it['authority'], it['state'], it['answer']])])
     places = {p['id']: p['label'] for p in CFG['places']}
     return json.dumps({'places': places, 'pages': pages, 'rows': rows}, ensure_ascii=False, separators=(',', ':')) + '\n'
 

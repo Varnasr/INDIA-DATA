@@ -1,0 +1,98 @@
+<!--page {"title": "RTI replies, All India", "description": "Applications under the Right to Information Act about the Special Intensive Revision whose reply, refusal or appeal was published or reported: what was asked, what the Commission or the Chief Electoral Officer answered, and how long it took.", "place": "india"} -->
+<main id="main">
+<div class="page-head" data-no-i18n><h1>RTI replies</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only. Every item quotes the report it comes from and links to it.</p>
+
+<article class="disp rti" lang="en" dir="ltr" data-no-i18n>
+  <div class="kpis" id="kpis"></div>
+
+  <h2>Why this is a list of reported applications</h2>
+  <p>No authority publishes how many applications under the Right to Information Act have been filed about the revision, in any state or district. The Central Information Commission's yearly returns give each public authority's total number of applications with no split by subject, and the Chief Electoral Officers publish nothing on it. So this page lists the applications whose reply, refusal or appeal someone published or a newspaper reported. Others have been filed and not made public, and the page will grow as their replies are published.</p>
+
+  <h2>What the applications got back</h2>
+  <p class="sub">Each application on this page, by what the Commission, the Chief Electoral Officer or the ministry did with it.</p>
+  <div class="grid"><div class="panel wide" id="pOut"><div class="vizbox" id="vOut"></div></div></div>
+
+  <h2>How long the replies took</h2>
+  <p class="sub">Days from the application to the reply, for the applications where both dates were reported. Section 7(1) of the Act gives the public information officer 30 days.</p>
+  <div class="grid"><div class="panel wide" id="pDays"><div class="vizbox" id="vDays"></div></div></div>
+
+  <h2>Every application</h2>
+  <p class="sub">What was asked, what came back, and the report it comes from. An applicant is named only where an organisation filed it. Otherwise the page gives the applicant's role.</p>
+  <span id="secEnd" hidden></span>
+
+  <h2>Send us an RTI reply</h2>
+  <p>If you filed an application about the revision and have the reply, or the refusal, please <a href="../../share/">send it to us</a> with the date you filed it. We publish what was asked and what came back, never the applicant's name unless they ask us to.</p>
+
+  <h2>What we could not confirm</h2>
+  <p class="sub">Reports a second reading could not match to their source. They are left off the page above.</p>
+  <ul id="unconfirmed"></ul>
+
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</article>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/viz.js"></script>
+<script src="../../assets/faq/india.js"></script>
+<script>
+SIR.json('data/india/rti.json').then(function (D) {
+  var n = SIR.n, esc = SIR.esc, C = D.counts, O = D.by_outcome;
+  var NAME = {
+    'no record held': 'Said it held no record', 'refused': 'Refused', 'transferred': 'Passed to another office',
+    'partly supplied': 'Answered in part', 'supplied': 'Answered', 'appeal': 'Decided on appeal or in court',
+    'no reply in time': 'No reply within 30 days', 'pending': 'Still waiting for a reply'
+  };
+  var none = O['no record held'] || 0, sent = O['transferred'] || 0, ref = O['refused'] || 0, full = O['supplied'] || 0;
+  var dated = D.items.filter(function (i) { return i.days != null; }), late = dated.filter(function (i) { return i.days > 30; });
+  SIR.inShort([
+    n(C.items) + ' applications about the revision whose reply, refusal or appeal was reported between ' + SIR.date(C.first) + ' and ' + SIR.date(C.last) + '.',
+    none ? 'In ' + n(none) + ' of them the authority said it held no record of what was asked.' : '',
+    sent || ref ? (sent ? n(sent) + ' were passed to another office' : '') + (sent && ref ? ' and ' : '') + (ref ? n(ref) + ' refused' : '') + '.' : '',
+    'In ' + n(full) + ' of the ' + n(C.items) + ' the authority supplied what was asked in full.',
+    dated.length ? n(late.length) + ' of the ' + n(dated.length) + ' replies with both dates reported came after the 30 days the Act allows.' : ''
+  ], 'These are the applications that were reported. No authority publishes how many were filed. Each item is what the outlet reported about the reply. Nothing here says what anyone intended.');
+
+  document.getElementById('kpis').innerHTML = [
+    [n(C.items), 'applications reported'], [n(none), 'answered that no record was held'],
+    [n(sent + ref), 'refused or passed on'], [n(full), 'answered in full']
+  ].map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('');
+
+  VIZ.lollipop('vOut', { label: 'Applications by what became of them', axis: 'Applications',
+    rows: Object.keys(O).map(function (o) { return { name: NAME[o], v: O[o], text: n(O[o]), tok: o === 'supplied' ? '--fill-navy' : '--fill-red', hi: true }; }) });
+  if (dated.length) {
+    VIZ.lollipop('vDays', { label: 'Days from application to reply', axis: 'Days',
+      rows: dated.slice().sort(function (a, b) { return b.days - a.days; }).map(function (i) {
+        return { name: i.authority.replace('Election Commission of India', 'Commission') + ', ' + SIR.date(i.replied), v: i.days, text: n(i.days) + ' days', tok: i.days > 30 ? '--fill-red' : '--fill-grey', hi: i.days > 30 };
+      }) });
+  } else document.getElementById('pDays').hidden = true;
+
+  var li = function (i) {
+    var when = [i.filed ? 'filed ' + SIR.date(i.filed) : '', i.replied ? 'answered ' + SIR.date(i.replied) : ''].filter(Boolean).join(', ');
+    var src = '<a href="' + esc(i.url) + '" rel="noopener">' + esc(i.outlet) + '</a>, ' + SIR.date(i.published) + '.' +
+      (i.doc_url ? ' <a href="' + esc(i.doc_url) + '" rel="noopener">The reply</a>.' : '') +
+      (i.kind === 'primary' ? ' <span class="tag primary">document</span>' : ' <span class="tag press">report</span>');
+    return '<li id="r-' + esc(i.id) + '"><p><b>' + esc(i.authority) + '</b>, ' + esc(i.state) + '. Asked by ' + esc(i.applicant) + (when ? ', ' + when : '') + '.</p>' +
+      '<p>' + esc(i.asked) + '</p><p class="nresp">' + esc(i.answer) + (i.section ? ' The refusal cited ' + esc(i.section) + '.' : '') + '</p>' +
+      '<p class="nsrc">' + src + '</p>' +
+      (i.quote ? '<details><summary>The words of the source</summary><blockquote>' + esc(i.quote) + '</blockquote></details>' : '') + '</li>';
+  };
+  var html = '', k = 0;
+  Object.keys(O).forEach(function (o) {
+    var its = D.items.filter(function (i) { return i.outcome === o; });
+    html += '<h3 class="dsec">' + NAME[o] + '</h3><ol class="nfacts dsec" start="' + (k + 1) + '">' + its.map(li).join('') + '</ol>';
+    k += its.length;
+  });
+  document.getElementById('secEnd').insertAdjacentHTML('beforebegin', html);
+
+  document.getElementById('unconfirmed').innerHTML = D.unconfirmed.length ? D.unconfirmed.map(function (u) {
+    return '<li>' + esc(u.outlet || '') + (u.date ? ', ' + SIR.date(u.date) : '') + ', "' + esc(u.headline || '') + '". ' + esc(u.reason) + '</li>';
+  }).join('') : '<li>Every report we found was matched to its source.</li>';
+
+  SIR.anchors && SIR.anchors();
+  SIR.toc && SIR.toc();
+  SIR.showFaq('india', 'rti');
+  SIR.jump && SIR.jump();
+}).catch(SIR.fail);
+</script>

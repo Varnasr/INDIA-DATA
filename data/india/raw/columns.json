@@ -1009,5 +1009,21 @@
   "total_electors": "Total electors, as the CEO's table prints them.",
   "forms_not_collected": "Enumeration forms not collected, the names left off the draft.",
   "not_collected_pct": "Forms not collected per 100 total electors, as printed."
+ },
+ "data/india/rti.csv": {
+  "state": "The state the application concerns, or All India for one about the revision as a whole.",
+  "authority": "The public authority the application went to, such as the Election Commission or a state's Chief Electoral Officer.",
+  "applicant": "The organisation that filed it, or the applicant's role. No private person is named.",
+  "filed": "The date the application was filed, where it was reported.",
+  "replied": "The date of the reply, where it was reported.",
+  "days": "Days from the application to the reply, where both dates were reported. The Act allows 30.",
+  "asked": "What the application asked for.",
+  "outcome": "What became of it: no record held, refused, transferred, partly supplied, supplied, appeal, no reply in time or pending.",
+  "answer": "What the authority said or did, as reported.",
+  "rti_section": "The section of the Act cited for a refusal, if any.",
+  "kind": "primary if the reply itself was read, press if the item rests on a report.",
+  "source": "The outlet that published the reply or reported it.",
+  "published": "The date of that publication.",
+  "url": "The address of the source."
  }
 }
