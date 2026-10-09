@@ -225,8 +225,13 @@ def _tables():
     # simple (id, [{h}]). The second once overwrote the first, and every
     # sortable table on 25 pages rendered empty for three days with no error.
     js = open(os.path.join(ROOT, 'assets', 'sir.js'), encoding='utf-8').read()
-    if 'var sortable = SIR.table;' not in js or 'return sortable.apply(this, arguments)' not in js:
-        return 'the simple SIR.table no longer hands the sortable form to the first definition'
+    assert 'var sortable = SIR.table;' in js and 'return sortable.apply(this, arguments)' in js, \
+        'the simple SIR.table no longer hands the sortable form to the first definition'
+
+
+def _help():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_help.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
 def _ac_change():
@@ -370,6 +375,7 @@ for name, fn in [
     ('the NRC page carries only checked facts and is current', _nrc),
     ('the four-state constituency table is current and adds up', _ac_change),
     ('both forms of SIR.table work', _tables),
+    ('the help page is current, every remedy and organisation read twice', _help),
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
     ('migration shares equal Census D-01 over each state\'s population', _migration),
