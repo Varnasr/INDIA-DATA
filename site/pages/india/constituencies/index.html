@@ -1,10 +1,20 @@
-<!--page {"title": "Constituencies, All India", "description": "Every constituency's electoral roll through the revision in Tamil Nadu, Kerala, West Bengal and Uttarakhand, the four states that published their rolls constituency by constituency, in one table and one download.", "place": "india"} -->
+<!--page {"title": "Constituencies, All India", "description": "Find any constituency with a figure on this site, in nine places, each in its own state's measure. Then every constituency's roll through the revision in Tamil Nadu, Kerala, West Bengal and Uttarakhand, in one table and one download.", "place": "india"} -->
 <main id="main">
 <div class="page-head"><h1>Constituencies</h1><ol class="summary" id="short"></ol></div>
 <p class="report-lang">This page is in English only for now. Every figure on it is the Chief Electoral Officer's own, constituency by constituency, and each state's page says where it comes from.</p>
 
 <article class="acchange" lang="en" dir="ltr" data-no-i18n>
   <div class="kpis" id="kpis"></div>
+
+  <h2>Find a constituency</h2>
+  <p class="sub">Type the name of a constituency or a district. Every constituency with a figure anywhere on this site is here. Each figure is the count its own state's page leads with, in that state's measure, so a figure in one state cannot be set beside a figure in another. The link opens the constituency on its state's page.</p>
+  <div class="acctl"><div class="acctl-row"><label for="fq">Constituency or district</label><input id="fq" type="search" autocomplete="off" placeholder="Kolathur, Patna Sahib, Darjeeling"></div></div>
+  <p class="note" id="fN" aria-live="polite"></p>
+  <ol class="acfind" id="fRes"></ol>
+
+  <h2>What each place counts</h2>
+  <p class="sub">The count behind every constituency in the finder, place by place. A state missing here published nothing by constituency, and its page works by district.</p>
+  <div class="twrap fit" tabindex="0" role="region" aria-label="What each place counts"><table id="tPlaces"></table></div>
 
   <h2>Every constituency, against the roll it started from</h2>
   <p class="sub">Each dot is one constituency, set against an earlier roll the state published by constituency. A dot left of the line ended the revision with fewer electors than that roll. The earlier roll is a different one in each state, so read each row on its own and do not set one state against another.</p>
@@ -50,7 +60,8 @@
 <script src="../../assets/sir.js"></script>
 <script src="../../assets/faq/india.js"></script>
 <script>
-SIR.json('data/india/ac_change.json').then(function (D) {
+Promise.all([SIR.json('data/india/ac_change.json'), SIR.json('data/india/ac_finder.json')]).then(function (R2) {
+  var D = R2[0], F = R2[1];
   var S = D.states, n = SIR.n, lk = function (x) { return SIR.lk(x, 1); }, esc = SIR.esc, d1 = function (v) { return SIR.d(v, 1); };
   var PAGE = { 'Tamil Nadu': 'tamilnadu/', 'Kerala': 'kerala/', 'West Bengal': 'westbengal/', 'Uttarakhand': 'uttarakhand/' };
   var C = D.cols, ix = function (k) { return C.indexOf(k); }, I = { ac: ix('ac'), nm: ix('constituency'), dist: ix('district'), early: ix('earlier_roll'), left: ix('left_off_draft'), draft: ix('draft'), add: ix('added_after_draft'), rem: ix('removed_after_draft'), later: ix('later_roll'), ch: ix('change_draft_to_later'), ce: ix('change_earlier_to_later'), cep: ix('change_earlier_to_later_per_100') };
@@ -72,6 +83,30 @@ SIR.json('data/india/ac_change.json').then(function (D) {
     [wb.fell + ' of ' + wb.acs, 'West Bengal constituencies smaller at the nominations than at the draft'],
     [n(uk.removed), 'names removed after the draft in Uttarakhand']
   ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+
+  // the finder: every constituency on the site, each in its own state's measure
+  var FP = {}; F.places.forEach(function (p) { FP[p.id] = p; });
+  var one = function (v) { return SIR.d(v, 1); };
+  var figure = function (r) {
+    var p = FP[r[0]], per = p.per === 1000 ? '1,000' : '100';
+    if (r[4] < 0) return 'The roll grew by ' + n(-r[4]) + ' against ' + p.of + ', ' + one(-r[5]) + ' per ' + per + ' (' + p.what + ').';
+    return n(r[4]) + ' ' + p.what + ', ' + one(r[5]) + ' per ' + per + ' on ' + p.of + '.';
+  };
+  SIR.table('tPlaces', [{ h: 'Place' }, { h: 'Constituencies', num: true }, { h: 'What the figure counts' }, { h: 'Rate on' }],
+    F.places.map(function (p) { return ['<a href="../../' + esc(p.page) + '">' + esc(p.state) + '</a>', n(p.acs), esc(p.what), 'per ' + (p.per === 1000 ? '1,000' : '100') + ' on ' + esc(p.of)]; }));
+  var fq = document.getElementById('fq');
+  function find() {
+    var t = fq.value.trim().toLowerCase(), out = document.getElementById('fN');
+    if (t.length < 2) { document.getElementById('fRes').innerHTML = ''; out.textContent = n(F.rows.length) + ' constituencies in ' + F.places.length + ' places. Type two letters or more.'; return; }
+    var hit = F.rows.filter(function (r) { return (r[2] + ' ' + r[3]).toLowerCase().indexOf(t) >= 0; });
+    hit.sort(function (a, b) { var x = a[2].toLowerCase().indexOf(t) === 0, y = b[2].toLowerCase().indexOf(t) === 0; return x === y ? 0 : x ? -1 : 1; });
+    out.textContent = hit.length ? n(hit.length) + (hit.length === 1 ? ' constituency found.' : ' constituencies found.') + (hit.length > 40 ? ' The first 40 are shown.' : '') : 'No constituency matches. A state that published nothing by constituency is not here, and its page works by district.';
+    document.getElementById('fRes').innerHTML = hit.slice(0, 40).map(function (r) {
+      return '<li><a href="../../' + esc(r[6]) + '"><b>' + (r[1] != null ? '<span class="acno">' + r[1] + '</span> ' : '') + esc(r[2]) + '</b><span>' + esc(r[3]) + ', ' + esc(FP[r[0]].state) + '</span></a><p>' + figure(r) + '</p></li>';
+    }).join('');
+  }
+  fq.addEventListener('input', find);
+  find();
 
   // per 100 on the earlier roll, every constituency
   var tok = function (v) { return v < 0 ? '--fill-red' : '--fill-navy'; };

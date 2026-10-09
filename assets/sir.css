@@ -718,6 +718,8 @@ footer{background:var(--bg);margin-top:2rem}
 .hub.big,.hub.big b,.hub.big span{color:var(--on-ink)}
 .hub.big .n{color:var(--red-on-ink);font-size:2.8rem}
 @media (max-width:700px){.hub.big{grid-column:auto}}
+/* pinned cards: always beside the featured state, marked by a red rule */
+.hub.pin{border:2px solid var(--red)}
 
 /* ------------------------------------------------- the front page */
 .hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:3.5rem;align-items:center}
@@ -919,3 +921,23 @@ html.dyslexic-font .dls .tag{text-transform:none}
 .disp .tag{font-family:var(--mono);font-weight:600;font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);color:var(--muted);background:transparent;vertical-align:1px}
 .disp .tag.primary{color:var(--navy);border-color:currentColor}
 html.dyslexic-font .disp .tag{text-transform:none}
+
+/* the constituency finder on india/constituencies/: one card per match */
+.acfind{list-style:none;padding:0;margin:0 auto 1.5rem;max-width:var(--measure);display:grid;gap:.6rem}
+.acfind li{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:.7rem .9rem}
+.acfind a{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .6rem;text-decoration:none;color:var(--ink)}
+.acfind a b{font-family:var(--serif);font-size:1.05rem}
+.acfind a span{color:var(--muted);font-size:.85rem}
+.acfind a:hover b{text-decoration:underline}
+.acfind p{margin:.25rem 0 0;font-size:.9rem}
+.acfind .acno{font-family:var(--mono);font-size:.75rem;color:var(--muted);font-weight:400}
+
+/* the disputes page: search and filters, and each item's issues */
+.dfilter{max-width:var(--measure);margin:0 auto .6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.6rem .9rem;align-items:end}
+.dfilter label{display:flex;flex-direction:column;gap:.25rem;font-size:.85rem;color:var(--muted)}
+.dfilter .dq{grid-column:1/-1}
+.dfilter input,.dfilter select{font:inherit;font-size:.92rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.45rem .55rem;min-width:0;width:100%}
+.dfilter .chip{justify-self:start}
+.dcount{font-weight:600}
+.disp .dtags{display:flex;flex-wrap:wrap;gap:.3rem;margin:.3rem 0 0}
+.disp .dtags span{font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.05rem .5rem}

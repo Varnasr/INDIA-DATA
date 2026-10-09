@@ -6,6 +6,8 @@
 
 Reads the research in data/india/raw/disputes_research/ (courts.json,
 protests.json, form7.json, software.json) and the second reading of each,
+tags.json (court, parties and bodies, places and issues for every item, which
+the page's filters use),
 verified_<name>.json. An item reaches the page only if that reading confirmed it or
 corrected it, and a correction replaces the original claim, quote, date or
 address. Anything else is listed by outlet and headline under "What we could
@@ -49,6 +51,13 @@ FROM_PROCESS = {
     'Booth officers\' deaths and workload': 'deaths', 'Deaths families linked to hearings': 'deaths',
 }
 KEEP = ('id', 'section', 'state', 'place', 'date', 'kind', 'outlet', 'case', 'headline', 'url', 'claim', 'quote', 'response')
+# the page's filters read these, from tags.json: the court, the parties and
+# bodies that act, the constituencies or districts named, and the issues
+TAGS = ('court', 'actors', 'places', 'issues')
+ISSUES = {'Form 6', 'Form 7', 'Form 8', 'Pre-printed forms', 'Notices and hearings', 'Documents and declaration',
+          'Software (ECINET/ERONET)', 'Deletions', 'Living electors marked dead', 'Duplicates and errors', 'BLO workload',
+          'Deaths', 'Adjudication and appeals', 'Women', 'Migrants', 'Minorities', "Commission's independence",
+          'Transparency of lists', 'Schedule and deadlines', 'Police and FIRs', 'Assembly resolution', 'Protest and march'}
 ALIAS = {'Hyderabad': 'Telangana', 'NCT of Delhi': 'Delhi', 'Orissa': 'Odisha'}
 
 
@@ -100,6 +109,15 @@ def build():
         items.append({'id': 'process-%02d' % n, 'section': sec, 'state': r['state'], 'place': '', 'date': r['date'],
                       'kind': 'press', 'outlet': r['outlet'], 'case': '', 'headline': r.get('headline', ''), 'url': r['url'],
                       'claim': r['text'], 'quote': '', 'response': r.get('response', '')})
+    T = (load('tags') or {}).get('items', {})
+    for it in items:
+        t = T.get(it['id'])
+        if t is None:
+            raise SystemExit('FAIL - %s has no entry in tags.json' % it['id'])
+        if not set(t.get('issues', [])) <= ISSUES or not t.get('issues'):
+            raise SystemExit('FAIL - %s has an issue outside the list, or none' % it['id'])
+        for k in TAGS:
+            it[k] = t.get(k, '' if k == 'court' else [])
     known = {s for s, _ in SECTIONS}
     for it in items:
         if it['section'] not in known:
@@ -133,10 +151,11 @@ def build():
 def as_csv(d):
     b = io.StringIO()
     w = csv.writer(b, lineterminator='\n')
-    w.writerow(['section', 'date', 'state', 'kind', 'source', 'what_happened', 'commission_reply', 'url'])
+    w.writerow(['section', 'date', 'state', 'places', 'court', 'parties_and_bodies', 'issues', 'kind', 'source', 'what_happened', 'commission_reply', 'url'])
     for s in d['sections']:
         for i in s['items']:
-            w.writerow([s['title'], i['date'], i['state'], i['kind'], i['outlet'], i['claim'], i['response'], i['url']])
+            w.writerow([s['title'], i['date'], i['state'], '; '.join(i['places']), i['court'], '; '.join(i['actors']), '; '.join(i['issues']),
+                        i['kind'], i['outlet'], i['claim'], i['response'], i['url']])
     return b.getvalue()
 
 

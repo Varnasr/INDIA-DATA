@@ -26,10 +26,12 @@
 <h2>What is here</h2>
 <div class="hubs" data-i18n-each>
   <a class="hub st big" href="westbengal/"><b>West Bengal 2026</b><span id="hWb">Every constituency, the roll from 2024 to the election it was used for, set against the 2026 result.</span></a>
+  <a class="hub pin" href="india/disputes/"><b>Protests and disputes</b><span id="hDisp">Court cases, Assembly resolutions, protests, bulk Form 7 objections and changes to the Commission's software, each with its source.</span></a>
+  <a class="hub pin" href="india/constituencies/"><b>Every constituency</b><span id="hAcs">Every constituency with a figure on this site, in each state's own measure, with a link to its page.</span></a>
   <a class="hub" href="india/"><b>All India</b><span id="hIndia">Every state and union territory in the revision, with the reasons each one recorded.</span></a>
-  <a class="hub" href="india/cities/"><b>The cities</b><span id="hCities">Each large city against its state, its suburbs and the rest of the state.</span></a>
-  <a class="hub" href="india/numbers/"><b>The SIR in numbers</b><span>The whole revision on one page: the rolls before it, the names left off, by phase and by state, with a source for every figure.</span></a>
-  <a class="hub" href="india/disputes/"><b>Protests and disputes</b><span>Court cases, Assembly resolutions, protests, bulk Form 7 objections and changes to the Commission's software, each with its source.</span></a>
+  <a class="hub pin" href="india/women/"><b>Women</b><span id="hWomen">Every count by sex the site holds, state by state and district by district.</span></a>
+  <a class="hub pin" href="india/cities/"><b>The cities</b><span id="hCities">Each large city against its state, its suburbs and the rest of the state.</span></a>
+  <a class="hub pin" href="india/numbers/"><b>The SIR in numbers</b><span>The whole revision on one page: the rolls before it, the names left off, by phase and by state, with a source for every figure.</span></a>
   <a class="hub st" href="bihar/"><b>Bihar 2025</b><span id="hBihar">Every constituency and every booth, set against the 2025 election result.</span></a>
   <a class="hub st" href="hyderabad/"><b>Hyderabad Old City 2026</b><span id="hHyd">Five constituencies, elector by elector, from the lists of who was struck off and who was summoned.</span></a>
   <a class="hub st" href="tamilnadu/"><b>Tamil Nadu 2026</b><span id="hTn">Every constituency and district, with the reason recorded, set against the 2026 election result.</span></a>
@@ -65,7 +67,7 @@
 </div>
 
 <h2 id="find-your-constituency">Find your constituency</h2>
-<p class="sub">Each state with its own page has a finder. Pick yours to see the figures for your constituency or district, with a link you can send.</p>
+<p class="sub">Search every constituency at once on the <a href="india/constituencies/#find-a-constituency">constituencies page</a>. Each state with its own page also has a finder. Pick yours to see the figures for your constituency or district, with a link you can send.</p>
 <div class="chips" data-i18n-each><a href="bihar/results/#find-a-constituency-or-district">Bihar 2025</a><a href="hyderabad/explorer/">Hyderabad 2026</a><a href="tamilnadu/#find-a-constituency-or-district">Tamil Nadu 2026</a><a href="karnataka/#find-a-district">Karnataka 2026</a><a href="westbengal/#find-a-constituency-or-district">West Bengal 2026</a><a href="kerala/#find-a-constituency-or-district">Kerala 2026</a><a href="rajasthan/#find-a-constituency-or-district">Rajasthan 2026</a><a href="uttarpradesh/#find-a-district">Uttar Pradesh 2026</a><a href="delhi/#find-a-constituency-or-district">Delhi 2026</a><a href="maharashtra/#find-a-district">Maharashtra 2026</a><a href="gujarat/#find-a-constituency-or-district">Gujarat 2026</a><a href="uttarakhand/#find-a-constituency-or-district">Uttarakhand 2026</a></div>
 
 <h2>How we know</h2>
@@ -117,6 +119,8 @@
     order[0].classList.add('big');
     box.insertBefore(order[0], box.firstChild);
     order.slice(1).forEach(function (a) { box.appendChild(a); });
+    // the pinned cards stay beside the featured state, whatever the day
+    [].slice.call(box.querySelectorAll('a.hub.pin')).reverse().forEach(function (a) { box.insertBefore(a, order[0].nextSibling); });
   })();
 // The all-India map: names left off per 100 electors, from data/india/states.json
 Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json'), SIR.json('data/india/women.json'), SIR.json('data/india/cities.json'), SIR.json('data/india/margins.json')]).then(function (r) {
@@ -168,7 +172,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')
 }).catch(SIR.fail);
 </script>
 <script>
-Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.json'), SIR.json('data/hyderabad/summary.json'), SIR.json('data/tamilnadu/summary.json'), SIR.json('data/karnataka/summary.json'), SIR.json('data/westbengal/summary.json'), SIR.json('data/kerala/summary.json'), SIR.json('data/rajasthan/summary.json'), SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/delhi/summary.json'), SIR.json('data/maharashtra/summary.json'), SIR.json('data/gujarat/summary.json'), SIR.json('data/uttarakhand/summary.json'), SIR.json('data/india/cities.json')]).then(function (r) {
+Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.json'), SIR.json('data/hyderabad/summary.json'), SIR.json('data/tamilnadu/summary.json'), SIR.json('data/karnataka/summary.json'), SIR.json('data/westbengal/summary.json'), SIR.json('data/kerala/summary.json'), SIR.json('data/rajasthan/summary.json'), SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/delhi/summary.json'), SIR.json('data/maharashtra/summary.json'), SIR.json('data/gujarat/summary.json'), SIR.json('data/uttarakhand/summary.json'), SIR.json('data/india/cities.json'), SIR.json('data/india/disputes.json'), SIR.json('data/india/ac_finder.json'), SIR.json('data/india/women.json')]).then(function (r) {
   var T = r[0].total, B = r[1].totals, H = r[2].totals;
   var cr = function (x) { return L('{x} crore', { x: (x / 1e7).toFixed(2) }); };
   document.getElementById('headline').innerHTML = L('{r} names were <em>left off</em> India\'s draft rolls.', { r: cr(T.removed) });
@@ -194,6 +198,12 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.js
     a.querySelector('span').innerHTML = L('{n} names left off the draft roll, {p} of every 100 electors on the roll before the revision.', { n: n, p: SIR.d(x.per_100, 1) });
   });
   N['india/cities/'] = SIR.d(r[13].summary.times_max, 1) + '×';
+  N['india/women/'] = r[16].summary.over + ' / ' + r[16].summary.states;
+  document.getElementById('hWomen').innerHTML = L('Women were the larger share of the names left off in {o} of {n} states with a count by sex, and in {d} of {dn} districts.', { o: r[16].summary.over, n: r[16].summary.states, d: r[16].summary.district_over, dn: r[16].summary.district_n });
+  N['india/disputes/'] = SIR.n(r[14].counts.items);
+  document.getElementById('hDisp').innerHTML = L('{n} court orders, resolutions, protests and reports from {s} states and union territories, each with its source and the Commission\'s reply where one was reported.', { n: SIR.n(r[14].counts.items), s: r[14].counts.states });
+  N['india/constituencies/'] = SIR.n(r[15].rows.length);
+  document.getElementById('hAcs').innerHTML = L('{n} constituencies in {p} places, each with its count in its own state\'s measure and a link to its page.', { n: SIR.n(r[15].rows.length), p: r[15].places.length });
   document.getElementById('hCities').innerHTML = L('In {a} of {n} large cities the city lost a larger share of its roll than its state, up to {x} times the state\'s rate.', { a: r[13].summary.above_state, n: r[13].summary.compared, x: SIR.d(r[13].summary.times_max, 1) });
   document.querySelectorAll('.hubs a.hub').forEach(function (a) { var k = a.getAttribute('href'); if (N[k]) a.insertAdjacentHTML('afterbegin', '<em class="n">' + N[k] + '</em>'); });
 }).catch(SIR.fail);

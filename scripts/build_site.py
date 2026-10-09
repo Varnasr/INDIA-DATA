@@ -22,6 +22,7 @@ import json
 import os
 import re
 import sys
+from urllib.parse import quote
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'site', 'pages')
@@ -143,6 +144,10 @@ def shell(out, meta, content, scripts):
     # installing the site as an app: hidden until the browser offers it (sir.js)
     find = ('<button type="button" class="btn install" hidden>%s <span class="lbl">Install app</span></button>\n      ' % APP) + ('<button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">%s '
             '<span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>' % LENS)
+    # the constituency finder, in every header: a seat is what most readers
+    # come looking for
+    seats = ('<a class="btn seats" href="%sindia/constituencies/#find-a-constituency"%s>%s <span class="lbl">Constituencies</span></a>'
+             % (root, ' aria-current="page"' if here == 'india/constituencies/' else '', svg(ICONS['i19'])))
     # Print belongs on an analysis, where it prints the charts; the front page
     # is an introduction and carries no print button.
     prn = ('' if place['id'] == 'home' else
@@ -155,11 +160,11 @@ def shell(out, meta, content, scripts):
         '<header class="top">\n  <div class="header-content">\n'
         '    <a class="logo" href="%s"><span class="logo-icon">%s</span><%s class="titles"><span class="wm" aria-hidden="true" data-no-i18n>Off the <s>Roll</s></span>'
         '<span class="h-title">%s</span><span class="subtitle">%s</span></%s></a>\n'
-        '    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">\n      %s\n      %s\n      %s\n'
+        '    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">\n      %s\n      %s\n      %s\n      %s\n'
         '      <button type="button" class="theme" aria-pressed="false">%s <span class="lbl">Dark</span></button>\n'
         '      %s\n'
         '    </div>\n  </div>\n</header>\n'
-    ) % (place['band'], root or './', LOGO, tag, html.escape(CFG['title']), html.escape(place['subtitle']), tag, find, places, dl, MOON, prn)
+    ) % (place['band'], root or './', LOGO, tag, html.escape(CFG['title']), html.escape(place['subtitle']), tag, find, seats, places, dl, MOON, prn)
     nav = ''
     if place['pages'] and not meta.get('own_tabs'):
         tabs = []
@@ -278,6 +283,19 @@ def search_index():
         rows.append(['ka', 'd', d['district'], '', 'karnataka/#' + slug(d['district'])] + ([city] if city else []))
     for a in J('hyderabad/summary.json')['acs']:
         rows.append(['hyd', 'ac', a['name'], '', 'hyderabad/explorer/#' + a['name']])
+    # the disputes page: every item, and every court, party or body, place and
+    # issue, which opens the page filtered to it
+    D = J('india/disputes.json')
+    facets = {}
+    for sec in D['sections']:
+        for it in sec['items']:
+            rows.append(['india', 'x', it['headline'] or it['claim'][:100], '%s, %s' % (it['outlet'], it['date']),
+                         'india/disputes/#d-' + it['id'], ' '.join([it['claim'], it['state'], it['court']] + it['places'] + it['actors'] + it['issues'])])
+            for k, vals in (('court', [it['court']] if it['court'] else []), ('actor', it['actors']), ('place', it['places']), ('issue', it['issues'])):
+                for v in vals:
+                    facets[(k, v)] = facets.get((k, v), 0) + 1
+    for (k, v), n in sorted(facets.items()):
+        rows.append(['india', 'f', v, n, 'india/disputes/?%s=%s' % (k, quote(v))])
     places = {p['id']: p['label'] for p in CFG['places']}
     return json.dumps({'places': places, 'pages': pages, 'rows': rows}, ensure_ascii=False, separators=(',', ':')) + '\n'
 
