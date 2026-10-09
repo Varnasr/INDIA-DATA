@@ -47,10 +47,16 @@
   // on a phone, a label column wide enough for the longest single word in
   // its names (a word cannot wrap), never more than 150px
   function fitLw(names, base) {
-    if (!phone()) return base;
     var w = Math.max.apply(null, names.map(function (n) { return Math.max.apply(null, String(SIR.short ? SIR.short(n) : n).split(/\s+|(?<=-)/).map(function (x) { return x.length; })); }).concat([0]));
+    if (!phone()) return Math.max(base, Math.min(280, 14 + 7.6 * w));
     return Math.max(base, Math.min(150, 12 + 7.9 * w));
   }
+  // how many characters of a label fit in px, and how many lines the
+  // longest of a set of labels takes at that width, so a row can be made
+  // tall enough for its label instead of the label spilling into the next
+  function chars(px) { return Math.max(6, Math.floor(px / (phone() ? 6.4 : 7.2))); }
+  function linesOf(names, n) { return Math.max.apply(null, names.map(function (nm) { return [].concat(SIR.wrap(String(nm), n)).length; }).concat([1])); }
+  function rowH(names, n, base) { return Math.max(base, 13 * linesOf(names, n) + 8); }
   // about five round ticks between lo and hi
   function nice(lo, hi) {
     var span = Math.max(hi - lo, 1e-9), raw = span / 5, mag = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / mag;
@@ -218,7 +224,7 @@
       var half = Math.max.apply(null, placed.map(function (q) { return Math.abs(q.y); }).concat([0])) + R + 4;
       return { r: r, placed: placed, half: Math.max(half, side ? 11 : 22) };
     });
-    var lab = phone() && !side ? 18 : 0, axh = o.axis && !phone() ? 16 : 0, H = top + rows.reduce(function (a, q) { return a + q.half * 2 + lab + (r_mark(q) ? 14 : 0); }, 0) + 34 + axh;
+    var lab = phone() && !side ? 18 : 0, axh = o.axis ? (phone() ? 20 : 16) : 0, H = top + rows.reduce(function (a, q) { return a + q.half * 2 + lab + (r_mark(q) ? 14 : 0); }, 0) + 34 + axh;
     function r_mark(q) { return (q.r.mark || []).length; }
     var s = svgIn(box, W, H, o.label);
     for (var t = min; t <= max + 1e-9; t += step) {
@@ -253,7 +259,7 @@
   // ---- dumbbell: rows [{name, a, b}], a and b on one axis
   function dumbbell(box, o) {
     measure(box);
-    var n = o.rows.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 112 : 210), rh = phone() ? 30 : 24;
+    var n = o.rows.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 112 : 210), lc = chars(lw - 8), rh = rowH(o.rows.map(function (r) { return SIR.short(r.name); }), lc, phone() ? 30 : 24);
     var leg = phone() ? 44 : 24, H = leg + 16 + n * rh + 30;
     var s = svgIn(box, W, H, o.label);
     var st = o.step || 5, mn = o.min || 0, max = Math.ceil(Math.max.apply(null, o.rows.map(function (r) { return Math.max(r.a, r.b); }).concat([o.ref || 0])) / st) * st;
@@ -272,7 +278,7 @@
     if (o.ref != null) el('line', { x1: x(o.ref), x2: x(o.ref), y1: leg + 6, y2: H - 26, class: 'vzero' }, s);
     o.rows.forEach(function (r, i) {
       var y = leg + 16 + i * rh + rh / 2;
-      label(s, lw - 4, y, SIR.short(r.name), phone() ? 12 : 28, 'end');
+      label(s, lw - 4, y, SIR.short(r.name), lc, 'end');
       el('line', { x1: x(r.a), x2: x(r.b), y1: y, y2: y, class: 'vlink thick' }, s);
       var ca = el('circle', { cx: x(r.a), cy: y, r: 6, style: fill(o.aTok) }, s); el('title', {}, ca, r.name + ': ' + r.a);
       var cb = el('circle', { cx: x(r.b), cy: y, r: 6, style: fill(o.bTok) }, s); el('title', {}, cb, r.name + ': ' + r.b);
@@ -296,7 +302,7 @@
     var t0 = Math.min.apply(null, all), t1 = Math.max.apply(null, all);
     var m0 = new Date(t0); m0 = Date.UTC(m0.getUTCFullYear(), m0.getUTCMonth(), 1);
     var m1 = new Date(t1); m1 = Date.UTC(m1.getUTCFullYear(), m1.getUTCMonth() + 1, 1);
-    var ph = phone(), W = ph ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = ph ? fitLw(o.rows.map(function (r) { return r.name; }), 104) : 230, lh = 9, gap = ph ? 10 : 8, leg = ph ? 62 : 34;
+    var ph = phone(), W = ph ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = ph ? fitLw(o.rows.map(function (r) { return r.name; }), 104) : 230, lh = 9, gap = ph ? 10 : 8, leg = ph ? 66 : 52;
     var heights = o.rows.map(function (r) { return Math.max(1, r.steps.length) * lh + gap * 2; });
     var H = leg + heights.reduce(function (a, b) { return a + b; }, 0) + 30;
     var s = svgIn(box, W, H, o.label);
@@ -311,7 +317,9 @@
     // the key
     var keys = [['bar', '--fill-navy', 'Enumeration'], ['bar', '--fill-amber', 'Claims and objections'], ['dot', '--fill-navy', 'Draft roll'], ['dia', '--fill-red', 'Final roll']];
     keys.forEach(function (k, j) {
-      var kx = ph ? 10 + (j % 2) * 150 : lw + 8 + j * 170, ky = ph ? 12 + Math.floor(j / 2) * 20 : 14;
+      // the key starts at the left edge, so four entries fit across a
+      // reading column without running off the card
+      var kx = ph ? 10 + (j % 2) * 150 : 10 + j * Math.min(170, (W - 20) / 4), ky = ph ? 12 + Math.floor(j / 2) * 20 : 14;
       if (k[0] === 'bar') el('rect', { x: kx - 6, y: ky - 3, width: 14, height: 6, rx: 2, style: fill(k[1]) }, s);
       if (k[0] === 'dot') el('circle', { cx: kx, cy: ky, r: 4.5, style: fill(k[1]) }, s);
       if (k[0] === 'dia') el('path', { d: 'M' + kx + ' ' + (ky - 5) + 'l5 5-5 5-5-5z', style: fill(k[1]) }, s);
@@ -325,10 +333,18 @@
       el('line', { x1: tx, x2: tx, y1: leg - 4, y2: H - 24, class: 'vzero' }, s);
       el('text', { x: tx - 4, y: leg - 8, 'text-anchor': 'end', class: 'vval' }, s, o.todayLabel || SIR.date(o.today));
     }
-    var y = leg;
+    // every row answers a hover, a tap or the keyboard: its dates are
+    // written in the line under the chart, which a screen reader hears too
+    s.setAttribute('role', 'group');
+    var read = document.createElement('p');
+    read.className = 'vread'; read.setAttribute('aria-live', 'polite');
+    read.textContent = 'Hover over, tap or tab to a row for its dates.';
+    box.appendChild(read);
+    var hits = [], y = leg;
     o.rows.forEach(function (r, ri) {
       var h = heights[ri];
       if (ri % 2) el('rect', { x: 0, y: y, width: W, height: h, class: 'vband' }, s);
+      var tips = [];
       // o.mark: one state picked out (a link from that state's page)
       if (o.mark && r.name === o.mark) el('rect', { x: 1, y: y + 1, width: W - 2, height: h - 2, rx: 4, class: 'vmark' }, s);
       label(s, lw - 6, y + h / 2, ph ? SIR.short(r.name) : r.name, ph ? 11 : 24, 'end');
@@ -343,8 +359,16 @@
         if (st.claims_end) el('path', { d: 'M' + x(D(st.claims_end)) + ' ' + (yy - 4) + 'v8', class: 'vlink thick', style: 'stroke:var(--fill-amber)' }, g);
         if (st.draft) el('circle', { cx: x(D(st.draft)), cy: yy, r: 4, style: fill('--fill-navy') }, g);
         if (st.final) { var fx = x(D(st.final)); el('path', { d: 'M' + fx + ' ' + (yy - 5) + 'l5 5-5 5-5-5z', style: fill('--fill-red') }, g); }
+        tips.push(tip);
       });
+      var tt = tips.join('. ') || r.name;
+      hits.push([el('rect', { x: 0, y: y, width: W, height: h, class: 'vhit', tabindex: 0, role: 'button', 'aria-label': tt }, s), tt]);
       y += h;
+    });
+    hits.forEach(function (hp) {
+      var show = function () { hits.forEach(function (o2) { o2[0].classList.toggle('on', o2 === hp); }); read.textContent = hp[1] + '.'; };
+      ['mouseenter', 'focus', 'click'].forEach(function (ev) { hp[0].addEventListener(ev, show); });
+      hp[0].addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(); } });
     });
   }
 
@@ -412,7 +436,7 @@
     }
     o.rows.forEach(function (r, i) {
       var y = top + i * rh + rh / 2;
-      label(s, lw - 6, y, r.name, phone() ? 16 : 34, 'end', r.main ? 'vname' : 'vname light');
+      label(s, lw - 6, y, r.name, chars(lw - 10), 'end', r.main ? 'vname' : 'vname light');
       if (r.lo != null) el('line', { x1: x(r.lo), x2: x(r.hi), y1: y, y2: y, class: 'vci' + (r.main ? ' main' : '') }, s);
       var d = el('rect', { x: x(r.est) - (r.main ? 7 : 5), y: y - (r.main ? 7 : 5), width: r.main ? 14 : 10, height: r.main ? 14 : 10, style: fill(r.main ? '--fill-red' : '--fill-navy') }, s);
       el('title', {}, d, r.name + ': ' + r.text);
@@ -424,7 +448,7 @@
   // ---- lollipop: ranked rows [{name, v, tok, text}], a stem and a dot each
   function lollipop(box, o) {
     measure(box);
-    var n = o.rows.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 112 : 210), rh = phone() ? 26 : 22, top = 6;
+    var n = o.rows.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 112 : 210), lc = chars(lw - 8), rh = rowH(o.rows.map(function (r) { return SIR.short(r.name); }), lc, phone() ? 26 : 22), top = 6;
     var rr = Math.max(60, 18 + 6.8 * Math.max.apply(null, o.rows.map(function (r) { return String(r.text != null ? r.text : r.v).length; })));
     var H = top + n * rh + 40, s = svgIn(box, W, H, o.label);
     var max = o.max || Math.max.apply(null, o.rows.map(function (r) { return r.v; }));
@@ -438,7 +462,7 @@
     if (o.ref != null) el('line', { x1: x(o.ref), x2: x(o.ref), y1: top, y2: top + n * rh, class: 'vzero' }, s);
     o.rows.forEach(function (r, i) {
       var y = top + i * rh + rh / 2;
-      label(s, lw - 4, y, SIR.short(r.name), phone() ? 16 : 30, 'end', r.hi ? 'vname' : 'vname light');
+      label(s, lw - 4, y, SIR.short(r.name), lc, 'end', r.hi ? 'vname' : 'vname light');
       el('line', { x1: x(0), x2: x(r.v), y1: y, y2: y, class: 'vstem', style: 'stroke:var(' + (r.tok || o.tok || '--fill-navy') + ')' }, s);
       var c = el('circle', { cx: x(r.v), cy: y, r: phone() ? 5 : 6, style: fill(r.tok || o.tok || '--fill-navy') }, s);
       el('title', {}, c, r.name + ': ' + (r.text || r.v));
@@ -451,13 +475,14 @@
   // written in an ink that clears contrast on its own shade
   function heat(box, o) {
     measure(box);
-    var nr = o.rows.length, nc = o.cols.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 116 : 210), top = phone() ? 58 : 44, rh = phone() ? 26 : 24;
-    var H = top + nr * rh + 6, s = svgIn(box, W, H, o.label), cw = (W - lw - 4) / nc;
-    o.cols.forEach(function (c, j) { label(s, lw + cw * j + cw / 2, top / 2, c, phone() ? Math.max(6, Math.floor(cw / 6.2)) : 22, 'middle', phone() ? 'vname small' : 'vname'); });
+    var nr = o.rows.length, nc = o.cols.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 116 : 210), lc = chars(lw - 8), rh = rowH(o.rows.map(function (r) { return SIR.short(r.name); }), lc, phone() ? 26 : 24);
+    var cw = (W - lw - 4) / nc, hc = chars(cw - 6), top = Math.max(phone() ? 58 : 44, 13 * linesOf(o.cols, hc) + 16);
+    var H = top + nr * rh + 6, s = svgIn(box, W, H, o.label);
+    o.cols.forEach(function (c, j) { label(s, lw + cw * j + cw / 2, top / 2, c, hc, 'middle', phone() ? 'vname small' : 'vname'); });
     var max = o.max || 100;
     o.rows.forEach(function (r, i) {
       var y = top + i * rh;
-      label(s, lw - 6, y + rh / 2, SIR.short(r.name), phone() ? 14 : 30, 'end', 'vname light');
+      label(s, lw - 6, y + rh / 2, SIR.short(r.name), lc, 'end', 'vname light');
       r.v.forEach(function (v, j) {
         if (v == null) { el('rect', { x: lw + cw * j + 1, y: y + 1, width: cw - 2, height: rh - 2, class: 'vnone' }, s); return; }
         // a tint from 6% to 45% of the colour: dark enough to read as a
@@ -475,7 +500,7 @@
   // rows [{name, v, col}], col a token or a literal colour
   function rank(box, o) {
     measure(box);
-    var n = o.rows.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = phone() ? 118 : 230, rh = phone() ? 28 : 24, top = 10;
+    var n = o.rows.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 118 : 230), lc = chars(lw - 8), rh = rowH(o.rows.map(function (r) { return SIR.short(String(r.name)); }), lc, phone() ? 28 : 24), top = 10;
     var H = top + n * rh + (o.axis ? 46 : 26), s = svgIn(box, W, H, o.label);
     var vs = o.rows.map(function (r) { return r.v; }), t = nice(Math.min(0, Math.min.apply(null, vs)), Math.max(0, Math.max.apply(null, vs)));
     t = fitT(t, W - lw - 70);
@@ -486,7 +511,7 @@
     }
     o.rows.forEach(function (r, i) {
       var y = top + i * rh + rh / 2, col = r.col || '--fill-navy';
-      label(s, lw - 4, y, SIR.short(String(r.name)), phone() ? 12 : 32, 'end', 'vname light');
+      label(s, lw - 4, y, SIR.short(String(r.name)), lc, 'end', 'vname light');
       el('line', { x1: x(0), x2: x(r.v), y1: y, y2: y, class: 'vstem', style: stroke(col) }, s);
       var c = el('circle', { cx: x(r.v), cy: y, r: phone() ? 5 : 6, style: paint(col) }, s);
       var txt = o.fmt ? o.fmt(r.v) : tickText(r.v, Math.abs(r.v) < 10 ? 0.1 : 1);
@@ -505,8 +530,9 @@
   // from the lowest to the highest. series [{name, col, vals}]
   function dots(box, o) {
     measure(box);
-    var n = o.cats.length, k = o.series.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = phone() ? 118 : 230, rh = phone() ? 30 : 26;
-    var leg = phone() ? 10 + k * 20 : 26, H = leg + 10 + n * rh + (o.axis ? 46 : 26), s = svgIn(box, W, H, o.label);
+    var n = o.cats.length, k = o.series.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.cats.map(String), phone() ? 118 : 230), lc = chars(lw - 8), rh = rowH(o.cats.map(function (c) { return SIR.short(String(c)); }), lc, phone() ? 30 : 26);
+    var keyW = o.series.reduce(function (a, z) { return a + 34 + String(z.name).length * 6.6; }, 0), stack = phone() || lw + 10 + keyW > W - 10;
+    var leg = stack ? 10 + k * 20 : 26, H = leg + 10 + n * rh + (o.axis ? 46 : 26), s = svgIn(box, W, H, o.label);
     var all = [].concat.apply([], o.series.map(function (z) { return z.vals; })).filter(function (v) { return v != null; });
     // a dot plot need not start at zero: where every value sits well away
     // from it, fit the axis to the values so the differences can be seen
@@ -518,17 +544,17 @@
       el('line', { x1: x(g), x2: x(g), y1: y0 - 4, y2: y0 + n * rh, class: 'vgrid' }, s);
       el('text', { x: x(g), y: y0 + n * rh + 16, 'text-anchor': 'middle', class: 'vval' }, s, tickText(g, t.step));
     }
-    var lx = phone() ? 10 : lw + 10;
+    var lx = stack ? 10 : lw + 10;
     o.series.forEach(function (z, j) {
-      var ly = phone() ? 10 + j * 20 : 12;
+      var ly = stack ? 10 + j * 20 : 12;
       el('circle', { cx: lx, cy: ly, r: 5, style: paint(z.col) }, s);
       var tt = el('text', { x: lx + 10, y: ly, 'dominant-baseline': 'middle', class: 'vval' }, s, z.name);
-      if (!phone()) lx += 34 + String(z.name).length * 6.6;
+      if (!stack) lx += 34 + String(z.name).length * 6.6;
     });
     o.cats.forEach(function (c, i) {
       // a missing value (null) draws no dot and stays out of the joining line
       var y = y0 + i * rh + rh / 2, vals = o.series.map(function (z) { return z.vals[i]; }).filter(function (v) { return v != null; });
-      label(s, lw - 4, y, SIR.short(String(c)), phone() ? 12 : 32, 'end', 'vname light');
+      label(s, lw - 4, y, SIR.short(String(c)), lc, 'end', 'vname light');
       el('line', { x1: x(Math.min.apply(null, vals)), x2: x(Math.max.apply(null, vals)), y1: y, y2: y, class: 'vlink thick' }, s);
       o.series.forEach(function (z, j) {
         if (z.vals[i] == null) return;

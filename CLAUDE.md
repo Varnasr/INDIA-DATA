@@ -1175,9 +1175,12 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   centred. Centred, a 704px text column sat 208px in from the 1120px maps and
   cards, so the left edge jumped in and out all the way down every page. Give
   any new measure-width block `margin-inline:0`, not `auto`. **A reading
-  page is one column** (`body:not(.wide):not(.home)` sets `--page` and
-  `--measure` to the same 48rem), so text, charts, maps and tables share one
-  width and one left edge; the header keeps 1160px (`--head`). The front page
+  page is one column** (`body:not(.wide):not(.home)` sets `--measure` to
+  48rem and caps every child of `main` at it), so text, charts, maps and tables share one
+  width and one left edge, and every reading page starts it at the header's
+  left edge. "On this page" sits to the right of the column, so a page with
+  it and a page without it line up. Panels stack one to a row inside the
+  column. The front page
   keeps the wide page: below the cards each section is its heading on the
   left and its text on the right (`section.fs`), across the full width.
   Dashboards and explorers (`body.wide`) keep 1480px. A sortable table
@@ -1301,9 +1304,23 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   day; `supabase/migrations`) and shows page views, shares, downloads and
   searches, leaving out any that are zero, with the date counting began and a
   line saying visits with Do Not Track are not counted.
-- **The places menu opens with "Start here"** (`quick` in `build_site.py`):
-  Find a constituency, If your name was left off, Protests and disputes, RTI
-  replies, Women and the SIR in numbers. The All India tab row leads with the same pages.
+- **"Start here" is its own header menu**, beside Places (`start` and
+  `quick` in `build_site.py`, a compass icon): Find a constituency, If your
+  name was left off, Protests and disputes, RTI replies, Further reading and
+  viewing, Women and the SIR in numbers, then About this site under a rule.
+  Places lists places only: All India's pages and every state and territory,
+  both opened side by side on a wide screen. The All India tab row leads with
+  the same pages.
+- **Further reading and viewing** (`india/reading/`, English only) lists
+  investigations, data analyses, research, court reporting, the Commission's
+  own account and videos. `data/india/raw/reads_research/` holds `reads.json`
+  (each item opened by one researcher) and `verified.json` (a second reader
+  who opened every item again); `scripts/build_reads.py` keeps only confirmed
+  or corrected items, applies the corrections, rewords summaries into the
+  site's rules (`PLAIN`) and writes `data/india/reads.json`; `check_data.py`
+  runs it with `--check`. A listed piece is vouched for its title, outlet,
+  date and one line, never its argument, and the page sets the West Bengal
+  pieces, which disagree, side by side.
 - **On a wide screen the header is one row**: theme and print show icons only
   (their labels stay for screen readers) and the Ctrl K hint is hidden, because
   seven labelled controls came to 917px and wrapped under the title, leaving

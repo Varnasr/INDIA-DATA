@@ -1,0 +1,56 @@
+<!--page {"title": "Further reading and viewing, All India", "description": "Investigations, data analyses, research, court reporting, the Election Commission's own account and videos about the Special Intensive Revision, each opened and read twice, with one line on what it shows.", "place": "india"} -->
+<main id="main">
+<div class="page-head" data-no-i18n><h1>Further reading and viewing</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only. Each piece is in the language its outlet published it in.</p>
+<article class="disp reads" lang="en" dir="ltr" data-no-i18n>
+  <h2>How this list was made</h2>
+  <p>Every piece below was opened and read by one researcher and then by a second, who checked its title, its outlet, its date and the one line that says what it shows. Where the second reading found an error, the corrected version is the one shown. A piece is listed because it adds evidence or argument about the revision. Listing it does not mean the site agrees with it, and the pieces disagree with each other in places.</p>
+
+  <h2>The Indian Express special issue</h2>
+  <p><a href="../../reports/indian-express-plus-election-commission-2026-10.pdf">Election Commission of India: lapses and challenges</a>, The Indian Express, October 2026. The paper's investigation in full, which it released free. PDF, 80 pages. It is the paper's work and outside this site's licence. <a href="../process/#inside-the-commission">Inside the Commission</a> sets out its account by date.</p>
+
+  <h2>Did the deletions change West Bengal's result?</h2>
+  <p>Five pieces below ask this question, and they reach different answers because they test different things. One sets deletions against each seat's margin, one against the swing between elections, one assumes how the removed would have voted, and one recomputes the result with no revision at all. A count of deletions larger than a margin shows that the deletions could have decided a seat. It cannot show that they did. Read them side by side.</p>
+  <ul id="wb"></ul>
+  <span id="secEnd" hidden></span>
+
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</article>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/india.js"></script>
+<script>
+SIR.json('data/india/reads.json').then(function (D) {
+  var n = SIR.n, esc = SIR.esc, C = D.counts;
+  var by = function (g) { return D.items.filter(function (i) { return i.group === g; }); };
+  SIR.inShort([
+    n(C.items) + ' pieces from ' + n(C.outlets) + ' outlets and authors, ' + n(C.videos) + ' of them videos, each opened and read twice.',
+    'Investigations of how the revision was run, data analyses of who was removed, research on the effect on results, court reporting, and the Election Commission\'s own account.',
+    'On whether the deletions changed West Bengal\'s result, the pieces disagree, and the page sets them side by side.'
+  ], 'A listed piece is checked for its title, outlet, date and what it shows. Its arguments are its own, and the site does not endorse them.');
+
+  var li = function (i) {
+    return '<li><p><a href="' + esc(i.url) + '" rel="noopener"><b>' + esc(i.title) + '</b></a></p>' +
+      '<p class="nsrc">' + esc(i.outlet) + (i.authors && i.outlet.indexOf(i.authors) < 0 ? ', ' + esc(i.authors) : '') + ', ' + SIR.date(i.date) +
+      (i.video ? ' <span class="tag press">video' + (i.duration ? ', ' + esc(i.duration) : '') + '</span>' : '') + '</p>' +
+      '<p>' + esc(i.shows) + '</p></li>';
+  };
+  var WB = ['newslaundry.com', 'caravanmagazine.in', 'debrajray', 'theindiaforum.in', 'K5qUfsPBSvQ'];
+  document.getElementById('wb').innerHTML = D.items.filter(function (i) { return WB.some(function (w) { return i.url.indexOf(w) >= 0; }) && /Bengal|Bigger BJP/.test(i.title); })
+    .map(function (i) { return '<li><a href="' + esc(i.url) + '" rel="noopener">' + esc(i.outlet) + '</a>, ' + SIR.date(i.date) + '. ' + esc(i.shows) + '</li>'; }).join('');
+
+  var html = '';
+  D.groups.forEach(function (g) {
+    var its = by(g); if (!its.length) return;
+    html += '<h2>' + esc(g) + '</h2><ol class="nfacts reads">' + its.map(li).join('') + '</ol>';
+  });
+  document.getElementById('secEnd').insertAdjacentHTML('beforebegin', html);
+
+  SIR.anchors && SIR.anchors();
+  SIR.toc && SIR.toc();
+  SIR.showFaq('india', 'reading');
+  SIR.jump && SIR.jump();
+}).catch(SIR.fail);
+</script>

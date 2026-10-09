@@ -228,8 +228,7 @@
   // menu is; on a phone it stays a fold.
   var placesMenu = document.querySelector('header.top details.places');
   if (placesMenu) placesMenu.addEventListener('toggle', function () {
-    var st = placesMenu.querySelector('details.grp.states');
-    if (placesMenu.open && st && window.matchMedia('(min-width:1000px)').matches) st.open = true;
+    if (placesMenu.open && window.matchMedia('(min-width:1000px)').matches) placesMenu.querySelectorAll('details.grp').forEach(function (g) { g.open = true; });
   });
   // The header menus close on a click elsewhere and on Escape.
   document.addEventListener('click', function (e) {
@@ -860,7 +859,8 @@
   var TIPS = [
     ['.controls .find', L('Search every page, constituency, district and dispute. Ctrl or Command and K opens it from anywhere.')],
     ['.fab:not(.fab-share)', L('Find any constituency with a figure on this site.')],
-    ['.controls .places > summary', L('Every analysis, from All India to each state, with the pages most readers start with.')],
+    ['.controls .start > summary', L('The pages most readers come for, from finding a constituency to what to do if a name was left off.')],
+    ['.controls .places > summary', L('Every analysis, from All India to each state and union territory.')],
     ['.controls .dlink', L('The tables, reports and slides behind this page, and every download explained.')],
     ['.controls #lang', L('Read the site in English, Hindi, Urdu, Telugu, Tamil or Bengali.')],
     ['.controls #dys-font-btn', L('Switch to a font some readers with dyslexia find easier.')],
@@ -912,7 +912,8 @@
   var STEPS = [
     ['.controls .find', L('Search finds any page, constituency, district or dispute. Press Ctrl or Command and K from anywhere on the site.')],
     ['main .btn-ink[href*="constituencies"]', L('Constituencies opens a finder over every constituency with a figure on this site, each in its own state\'s measure.')],
-    ['.controls .places > summary', L('Places lists every analysis, from All India to each state. The pages most readers come for are at the top.')],
+    ['.controls .start > summary', L('Start here lists the pages most readers come for, from finding a constituency to what to do if a name was left off.')],
+    ['.controls .places > summary', L('Places lists every analysis, from All India to each state and union territory.')],
     ['#vIndia', L('The map shows the names left off per 100 electors in each state. Tap a state to open its own page.')],
     ['.hubs .hub.pin', L('The pinned cards lead to the pages most readers look for, among them the disputes, every constituency and women.')],
     ['.controls .dlink', L('Every table behind the site can be downloaded, with what each column means.')],
