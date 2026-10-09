@@ -54,6 +54,8 @@
          L('No. Every piece there was opened and read twice, to check its title, its outlet, its date and the one line that says what it shows. That is all the listing vouches for. The pieces disagree with each other in places, most of all on whether the deletions changed the result in West Bengal, and the page says so.'), ['reading', 'faq']],
         [L('Can I suggest a piece to read or watch?'),
          L('Yes. Send it through <a href="../../share/">the form for sharing a list</a>. A piece is added once it has been read and its summary checked against it.'), ['reading', 'faq']],
+        [L('Why do some commentators say more than this site does?'),
+         L('Some use data the site does not hold, such as the outcomes of West Bengal\'s adjudication seat by seat. Some compare groups of seats without allowing for the other ways those seats differ. Some read a purpose into a pattern in the figures, which the lists cannot show. The panels on <a href="../reading/#what-others-say">the reading page</a> set each claim beside the site\'s own figures and say where those figures stop.'), ['reading', 'faq']],
         [L('Can I send you an RTI reply I received?'),
          L('Yes. Send it through <a href="../../share/">the form for sharing a list</a>, with the date you filed the application. We publish what was asked and what came back, and we name you only if you ask us to.'), ['rti', 'faq']],
         [L('What is a bulk Form 7 objection?'),

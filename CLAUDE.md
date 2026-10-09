@@ -1321,6 +1321,27 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   runs it with `--check`. A listed piece is vouched for its title, outlet,
   date and one line, never its argument, and the page sets the West Bengal
   pieces, which disagree, side by side.
+
+  The same page carries **panels on what commentators say** (Prannoy Roy,
+  The Indian Express, Ravish Kumar, Yogendra Yadav, Debraj Ray, Newslaundry,
+  Lokniti-CSDS), each quotation set beside the site's own figures and where
+  they stop. `data/india/raw/panels_research/` holds `claims.json` (the
+  quotations, verbatim, with the first reader's notes), `verified.json` (a
+  second reading of every quotation) and `plain.json` (the site's own words
+  around each one, its role line, introduction, strongest points and
+  overreach). `scripts/build_panels.py` keeps only confirmed or corrected
+  quotations, applies the corrections, drops what `plain.json` drops with a
+  reason, fails on the site's own text if it breaks the writing rules, and
+  fails if a figure listed under `uses` is no longer in the published file;
+  `check_data.py` runs it with `--check`. Party office-holders are never
+  quoted, including in clips inside someone else's episode (Ravish Kumar's
+  Karnataka Form 7 line is dropped for that reason). Keep the panels
+  respectful: a panel says where an argument goes further than the figures,
+  never that the person is wrong. When a site figure a panel quotes changes,
+  rewrite the sentence in `plain.json` and its `uses` entry together.
+
+  Search (`search_index()` in `build_site.py`) covers every tab page, every
+  page in a place's `menu`, and every piece on the reading page.
 - **On a wide screen the header is one row**: theme and print show icons only
   (their labels stay for screen readers) and the Ctrl K hint is hidden, because
   seven labelled controls came to 917px and wrapped under the title, leaving

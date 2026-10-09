@@ -12,6 +12,12 @@
   <h2>Did the deletions change West Bengal's result?</h2>
   <p>Five pieces below ask this question, and they reach different answers because they test different things. One sets deletions against each seat's margin, one against the swing between elections, one assumes how the removed would have voted, and one recomputes the result with no revision at all. A count of deletions larger than a margin shows that the deletions could have decided a seat. It cannot show that they did. Read them side by side.</p>
   <ul id="wb"></ul>
+
+  <h2 id="what-others-say">What others say, set beside this site's figures</h2>
+  <p>This site counts what the Election Commission and the Chief Electoral Officers published, and it says no more than those counts allow. Several of the people below go further. Some use data the site does not hold, such as the outcomes of West Bengal's adjudication seat by seat, which the Sabar Institute compiled from the named lists. Some compare groups of seats without allowing for the other ways those seats differ. Some draw a conclusion about purpose from a pattern in the figures, which the lists cannot show.</p>
+  <p>Each panel quotes the person's own words and says what the quotation rests on. It then sets the site's own figures beside it and says where those figures stop. A second reader checked every quotation against its source. Where a person reaches further than the site, the site's figures cannot settle the question either way, and the panel says so.</p>
+  <p class="sub" id="pNav"></p>
+  <div id="panels"></div>
   <span id="secEnd" hidden></span>
 
   <p class="note limits" id="shortNote" hidden></p>
@@ -22,13 +28,15 @@
 <script src="../../assets/sir.js"></script>
 <script src="../../assets/faq/india.js"></script>
 <script>
-SIR.json('data/india/reads.json').then(function (D) {
+Promise.all([SIR.json('data/india/reads.json'), SIR.json('data/india/panels.json')]).then(function (r) {
+  var D = r[0], PN = r[1];
   var n = SIR.n, esc = SIR.esc, C = D.counts;
   var by = function (g) { return D.items.filter(function (i) { return i.group === g; }); };
   SIR.inShort([
     n(C.items) + ' pieces from ' + n(C.outlets) + ' outlets and authors, ' + n(C.videos) + ' of them videos, each opened and read twice.',
     'Investigations of how the revision was run, data analyses of who was removed, research on the effect on results, court reporting, and the Election Commission\'s own account.',
-    'On whether the deletions changed West Bengal\'s result, the pieces disagree, and the page sets them side by side.'
+    'On whether the deletions changed West Bengal\'s result, the pieces disagree, and the page sets them side by side.',
+    n(PN.counts.people) + ' panels set ' + n(PN.counts.quotes) + ' quotations from commentators beside the site\'s own figures, and say where those figures stop.'
   ], 'A listed piece is checked for its title, outlet, date and what it shows. Its arguments are its own, and the site does not endorse them.');
 
   var li = function (i) {
@@ -40,6 +48,30 @@ SIR.json('data/india/reads.json').then(function (D) {
   var WB = ['newslaundry.com', 'caravanmagazine.in', 'debrajray', 'theindiaforum.in', 'K5qUfsPBSvQ'];
   document.getElementById('wb').innerHTML = D.items.filter(function (i) { return WB.some(function (w) { return i.url.indexOf(w) >= 0; }) && /Bengal|Bigger BJP/.test(i.title); })
     .map(function (i) { return '<li><a href="' + esc(i.url) + '" rel="noopener">' + esc(i.outlet) + '</a>, ' + SIR.date(i.date) + '. ' + esc(i.shows) + '</li>'; }).join('');
+
+  // the panels: one per person, each quotation with what it rests on, the
+  // site's figures and where they stop
+  var pieceOf = function (p, id) { return p.pieces.filter(function (x) { return x.id === id; })[0]; };
+  var row = function (k, v) { return v ? '<dt>' + k + '</dt><dd>' + esc(v) + '</dd>' : ''; };
+  document.getElementById('pNav').innerHTML = 'There are panels on ' + PN.people.map(function (p) { return '<a href="#p-' + p.id + '">' + esc(p.name) + '</a>'; }).join(', ') + '.';
+  document.getElementById('panels').innerHTML = PN.people.map(function (p) {
+    return '<section class="pull" id="p-' + p.id + '" aria-labelledby="ph-' + p.id + '"><h3 id="ph-' + p.id + '">' + esc(p.name) + '</h3>' +
+      '<p class="role">' + esc(p.role) + '</p><p>' + esc(p.intro) + '</p>' +
+      '<ul class="srcs">' + p.pieces.map(function (x) {
+        return '<li><a href="' + esc(x.url) + '" rel="noopener"' + (/[\u0900-\u097f]/.test(x.title) ? ' lang="hi"' : '') + '>' + esc(x.title) + '</a>' +
+          (x.title_en ? ' (' + esc(x.title_en) + ')' : '') + '. ' + esc(x.outlet) + ', ' + SIR.date(x.date) + (x.length ? ', ' + esc(x.length) : '') + '.</li>';
+      }).join('') + '</ul>' +
+      '<ol class="pq">' + p.claims.map(function (c) {
+        var pc = pieceOf(p, c.piece);
+        return '<li><blockquote lang="' + c.lang + '">' + esc(c.quote) + '</blockquote>' +
+          (c.translation ? '<p class="tr">' + esc(c.translation) + '</p>' : '') +
+          '<p class="meta">' + esc(c.kind) + '. ' + esc(c.outlet || pc.outlet) + ', ' + SIR.date(pc.date) + (c.when ? ', at about ' + esc(c.when.replace(/~/g, '')) : '') + '.</p>' +
+          (c.rests || c.site || c.stops ? '<dl>' + row('What it rests on', c.rests) + row("This site's figures", c.site) + row('Where the figures stop', c.stops) + '</dl>' : '') + '</li>';
+      }).join('') + '</ol>' +
+      '<div class="sides"><div><h4>Where the argument is strongest</h4><ul>' + p.strongest.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>' +
+      '<div><h4>Where it goes further than the figures</h4><ul>' + p.further.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div></div>' +
+      (p.note ? '<p class="pnote">' + esc(p.note) + '</p>' : '') + '</section>';
+  }).join('');
 
   var html = '';
   D.groups.forEach(function (g) {

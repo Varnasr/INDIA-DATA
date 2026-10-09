@@ -657,7 +657,7 @@ button:hover,.btn:hover{transform:none}
 /* -------------------------------------------- the page and its columns */
 main{padding:0 1.25rem 3.5rem}
 main>:first-child:not(.page-head),main>article>:first-child:not(.page-head){margin-top:2.5rem}
-body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,.asof,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.nothere,.colq,.dlall,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:0}
+body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,.asof,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.nothere,.colq,.dlall,.qa,.research-section,.methodology,.docard,.pull,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:0}
 .xp main>*{max-width:none!important;margin-inline:0!important}
 main h1{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;line-height:1.02}
 main h2{font-family:var(--serif);font-size:1.9rem;line-height:1.15;font-weight:700;letter-spacing:-.01em;border:0;padding:0;margin-top:3.5rem;margin-bottom:.5rem}
@@ -1126,3 +1126,24 @@ body:not(.wide):not(.home) main :is(p,.sub,.note){max-width:min(100%,var(--measu
 .viz .vhit:hover,.viz .vhit:focus-visible,.viz .vhit.on{fill:var(--ink);fill-opacity:.07}
 .viz .vhit:focus-visible{stroke:var(--red);stroke-width:2}
 .vread{font-size:.9rem;color:var(--ink);margin:.6rem 0 0;min-height:1.5em}
+
+/* reading page: a pull-out panel per commentator, the quotation set beside
+   the site's own figures */
+.pull{background:var(--card);border:1px solid var(--line);border-inline-start:4px solid var(--fill-red);border-radius:12px;padding:1rem 1.2rem .6rem;margin:1rem 0 1.4rem;scroll-margin-top:calc(var(--hh,0px) + 4rem)}
+.pull>h3{margin:0 0 .2rem}
+.pull .role{font-size:.9rem;color:var(--muted);margin:0 0 .6rem}
+.pull .srcs{font-size:.88rem;margin:.3rem 0 .8rem;padding-inline-start:1.1rem}
+.pull .pq{list-style:none;padding:0;margin:0}
+.pull .pq>li{border-top:1px solid var(--line);padding:.8rem 0 .4rem}
+.pull .pq blockquote{color:inherit;font-size:1.02rem;margin:.1rem 0 .3rem}
+.pull .pq .tr{margin:0 0 .3rem;font-style:italic}
+.pull .pq .meta{font-size:.82rem;color:var(--muted);margin:0 0 .4rem}
+.pull dl{display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.35rem .9rem;margin:.3rem 0 .4rem;font-size:.93rem}
+.pull dt{font-weight:600}
+.pull dd{margin:0}
+.pull .sides{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1.4rem;border-top:1px solid var(--line);padding-top:.6rem;margin-top:.2rem}
+.pull .sides h4{margin:.2rem 0 .3rem;font-size:.95rem}
+.pull .sides ul{margin:0 0 .6rem;padding-inline-start:1.1rem;font-size:.93rem}
+.pull .pnote{font-size:.85rem;color:var(--muted)}
+@media (max-width:700px){.pull{padding:.9rem .9rem .5rem}.pull dl{grid-template-columns:1fr;gap:.1rem}.pull dd{margin-bottom:.4rem}.pull .sides{grid-template-columns:1fr}}
+html.dyslexic-font .pull .pq .tr{font-style:normal}
