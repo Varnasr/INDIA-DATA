@@ -51,6 +51,7 @@ def svg(paths, cls='icon'):
 LOGO = svg('<rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/>')
 PIN = svg('<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>')
 DOWN = svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>')
+DL_BOOK = {'india': 'india', 'bihar': 'bihar', 'hyd': 'hyd', 'tn': 'tn', 'wb': 'wb', 'kl': 'kl', 'ka': 'ka', 'rj': 'rj', 'up': 'up', 'dl': 'dl', 'mh': 'mh', 'gj': 'gj', 'uk': 'uk', 'as': 'as'}
 APP = svg('<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/>')
 LENS = svg('<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>')
 MOON = svg('<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>')
@@ -203,15 +204,21 @@ def shell(out, meta, content, scripts):
         else:
             items.append(link(p))
     subs = ['<p class="lg">Names in bold have a full analysis of their own. The others share one summary page.</p>']
+    # each zone is its own block, so a wide screen can set the zones in columns
     for z in ZONES:
-        subs.append('<span class="rg">%s</span>' % z)
+        zl = ['<span class="rg">%s</span>' % z]
         for p in sorted(zoned[z], key=lambda q: q['label']):
             if p['id'] == 'hyd':
-                subs.append(link(p, 'hyderabad/telangana/'))
-                subs.append(link(p, 'hyderabad/', 'Old City of Hyderabad', 'in'))
+                zl.append(link(p, 'hyderabad/telangana/'))
+                zl.append(link(p, 'hyderabad/', 'Old City of Hyderabad', 'in'))
             else:
-                subs.append(link(p))
-    items.append(fold('All states and union territories', subs, bool(place.get('zone')), ' states'))
+                zl.append(link(p))
+        subs.append('<div class="zn" data-i18n-each>%s</div>' % ''.join(zl))
+    items.append(fold('All States and Union Territories', subs, bool(place.get('zone')), ' states'))
+    # the front page closes the menu, under a rule, rather than sitting
+    # between the pages most readers come for and the places
+    about = [i for i in items if i.startswith('<a ')]
+    items = [i for i in items if not i.startswith('<a ')] + ['<div class="about" data-i18n-each>%s</div>' % ''.join(about)]
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="quick"><span class="qh">Start here</span><div class="ql" data-i18n-each>%s</div></div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
@@ -221,21 +228,16 @@ def shell(out, meta, content, scripts):
     current = place['label'] if place['id'] != 'home' else 'Places'
     places = ('<details class="dl places"><summary class="btn" aria-label="Places">%s <span class="lbl-place">%s</span></summary>'
               '<div class="menu"><div data-i18n-each>%s</div></div></details>' % (PIN, html.escape(current), ''.join(items)))
-    dl = ''
-    # every place's menu ends with the downloads page, which lists every file
-    # the site publishes with what it holds
-    items_dl = list(place.get('downloads') or []) + [['downloads/', 'All downloads, explained', False]]
-    links = ''.join('<a href="%s%s"%s>%s</a>' % (root, h, ' download' if d else '', html.escape(t)) for h, t, d in items_dl)
-    dl = ('<details class="dl"><summary class="btn">%s <span class="lbl">Downloads</span></summary>'
-          '<div class="menu" data-i18n-each>%s</div></details>' % (DOWN, links))
+    # Downloads is one button to the downloads page, opened at this place's
+    # own workbook, which lists its tables, report and slides with what each
+    # holds. A menu of every file grew to twenty links on All India.
+    book = DL_BOOK.get(place['id'], 'other' if place.get('zone') else '')
+    dl = ('<a class="btn dlink" href="%sdownloads/%s"%s>%s <span class="lbl">Downloads</span></a>'
+          % (root, '#w-' + book if book else '', ' aria-current="page"' if here == 'downloads/' else '', DOWN))
     # the sitewide search (sir.js): a button, and Ctrl or Command and K
     # installing the site as an app: hidden until the browser offers it (sir.js)
     find = ('<button type="button" class="btn install" hidden>%s <span class="lbl">Install app</span></button>\n      ' % APP) + ('<button type="button" class="btn find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">%s '
             '<span class="lbl">Search</span> <kbd class="kbd" aria-hidden="true">Ctrl K</kbd></button>' % LENS)
-    # the constituency finder, in every header: a seat is what most readers
-    # come looking for
-    seats = ('<a class="btn seats" href="%sindia/constituencies/#find-a-constituency"%s>%s <span class="lbl">Constituencies</span></a>'
-             % (root, ' aria-current="page"' if here == 'india/constituencies/' else '', svg(ICONS['i23'])))
     # Print belongs on an analysis, where it prints the charts; the front page
     # is an introduction and carries no print button.
     prn = ('' if place['id'] == 'home' else
@@ -248,11 +250,11 @@ def shell(out, meta, content, scripts):
         '<header class="top">\n  <div class="header-content">\n'
         '    <a class="logo" href="%s"><span class="logo-icon">%s</span><%s class="titles"><span class="wm" aria-hidden="true" data-no-i18n>Off the <s>Roll</s></span>'
         '<span class="h-title">%s</span><span class="subtitle">%s</span></%s></a>\n'
-        '    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">\n      %s\n      %s\n      %s\n      %s\n'
+        '    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">\n      %s\n      %s\n      %s\n'
         '      <button type="button" class="theme" aria-pressed="false">%s <span class="lbl">Dark</span></button>\n'
         '      %s\n'
         '    </div>\n  </div>\n</header>\n'
-    ) % (place['band'], root or './', LOGO, tag, html.escape(CFG['title']), html.escape(place['subtitle']), tag, find, seats, places, dl, MOON, prn)
+    ) % (place['band'], root or './', LOGO, tag, html.escape(CFG['title']), html.escape(place['subtitle']), tag, find, places, dl, MOON, prn)
     nav = ''
     if place['pages'] and not meta.get('own_tabs'):
         tabs = []
@@ -262,8 +264,8 @@ def shell(out, meta, content, scripts):
         nav = '<nav class="nav-tabs" aria-label="%s">%s</nav>\n' % (place['nav_label'], ''.join(tabs))
     # data-i18n-each: the credit and the link are translated apart, so the
     # key does not change with the page's depth.
-    # on a phone the constituency finder leaves the crowded header row and
-    # floats at the bottom of the screen, with its label, on every page but its own
+    # the constituency finder floats at the bottom of the screen, with its
+    # label, on every page but its own: a seat is what most readers come for
     fab = '' if here == 'india/constituencies/' else (
         '<a class="fab" href="%sindia/constituencies/#find-a-constituency">%s<span>Find your constituency</span></a>' % (root, svg(ICONS['i23'])))
     # and a second, quieter one asking for lists the site does not have,

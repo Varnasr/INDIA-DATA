@@ -56,6 +56,9 @@ SIR.json('data/downloads.json').then(function (M) {
 
   document.getElementById('zip').innerHTML = '<a class="btn" href="../' + esc(M.zip.file) + '" download>Download every table, CSV in a zip (' + size(M.zip.bytes) + ')</a>';
 
+  // the Downloads button on every page opens this page at its own place's
+  // workbook (#w-<id>); that one is opened, the first one otherwise
+  var want = /^#w-/.test(location.hash) ? location.hash.slice(3) : '', open = Math.max(0, books.map(function (b) { return b.id; }).indexOf(want));
   var box = document.getElementById('books');
   box.innerHTML = books.map(function (b, i) {
     var rows = b.sheets.reduce(function (a, s) { return a + s.rows; }, 0);
@@ -67,8 +70,9 @@ SIR.json('data/downloads.json').then(function (M) {
     }).join('');
     return '<section class="book" id="w-' + esc(b.id) + '"><div class="bh"><h3>' + esc(b.title) + '</h3>' +
       '<p class="meta">' + b.sheets.length + (b.sheets.length === 1 ? ' table, ' : ' tables, ') + n(rows) + ' rows</p>' +
-      '<a class="btn" href="../' + esc(b.file) + '" download>Excel workbook (' + size(b.bytes) + ')</a></div>' +
-      '<details class="figs"' + (i === 0 ? ' open' : '') + '><summary>What is in it</summary><ol class="sheets">' + body + '</ol></details></section>';
+      '<a class="btn" href="../' + esc(b.file) + '" download>Excel workbook (' + size(b.bytes) + ')</a>' +
+      M.documents.filter(function (d) { return d.book === b.id; }).map(function (d) { return '<a class="btn" href="../' + esc(d.file) + '" download>' + esc(d.label) + ' (' + size(d.bytes) + ')</a>'; }).join('') + '</div>' +
+      '<details class="figs"' + (i === open ? ' open' : '') + '><summary>What is in it</summary><ol class="sheets">' + body + '</ol></details></section>';
   }).join('');
 
   SIR.table('tDocs', [{ h: 'Place' }, { h: 'File' }, { h: 'Size', num: true }], M.documents.map(function (d) {
@@ -88,5 +92,7 @@ SIR.json('data/downloads.json').then(function (M) {
   q.addEventListener('input', find);
   find();
   SIR.jump && SIR.jump();
+  var at = want && document.getElementById('w-' + want);
+  if (at) { at.classList.add('here'); at.scrollIntoView(); }
 }).catch(SIR.fail);
 </script>

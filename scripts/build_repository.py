@@ -428,7 +428,7 @@ def other_files():
     for pid in ['india', 'bihar', 'hyd', 'tn', 'wb', 'kl', 'ka']:
         for h, t, _ in PL[pid].get('downloads', []):
             if h.endswith('.pdf') or h.endswith('.pptx'):
-                out.append({'place': PL[pid]['label'], 'file': h, 'label': t})
+                out.append({'place': PL[pid]['label'], 'book': pid, 'file': h, 'label': t})
     return out
 
 
