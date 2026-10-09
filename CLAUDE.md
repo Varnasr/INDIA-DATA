@@ -643,7 +643,12 @@ in `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
   only, so a district's roll before is its draft plus its names left off; the
   build fails unless the districts add up to 9,78,54,049 before, 7,71,65,562
   draft (and by sex) and 2,06,88,487 left off.
-- **No reasons, no sex of the names left off, nothing by AC.** The note names
+- **The CEO's list of 38 constituencies** (`raw/ac_top38.csv`, `top38.csv`,
+  `summary.json` `top38`) is the only table by AC. Its own title says the CEO
+  chose the seats leaving out those a newspaper had called Muslim-heavy. The
+  page quotes the title in full and shows the table as printed, in a fold; it
+  is never mapped, ranked against other seats or added to anything.
+- **No reasons, no sex of the names left off, nothing else by AC.** The note names
   five reasons without a count. The state reasons on the All India row are
   press figures in lakh (The Indian Express), rounded and 10,513 over the
   total; the pages show them as press figures, never mixed into the CEO's
@@ -1169,6 +1174,16 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   until the reader scrolls. Renaming a heading changes its address; keep an
   old one alive with an explicit `id=` on the new heading. Dashboard tabs keep
   their own hashes, and the report pages their `s0`... ids.
+- **Header tooltips and the tour** (the end of `sir.js`). Each header
+  control shows one plain line on hover or keyboard focus (never on touch);
+  Escape hides it. The front page offers a seven-step tour once per browser
+  (`otr-tour` in localStorage, wrapped in try/catch), and "Take the tour" in
+  the hero runs it again. On a phone the tour opens the header's menu row for
+  the steps that sit in it. A control added to the header gets a line in
+  `TIPS`, and a step in `STEPS` if a new reader needs it.
+- **The places menu opens with "Start here"** (`quick` in `build_site.py`):
+  Find a constituency, Protests and disputes, Women, the cities and the SIR in
+  numbers. The All India tab row leads with the same pages.
 - **On a wide screen the header is one row**: theme and print show icons only
   (their labels stay for screen readers) and the Ctrl K hint is hidden, because
   seven labelled controls came to 917px and wrapped under the title, leaving

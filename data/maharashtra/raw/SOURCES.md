@@ -37,7 +37,26 @@ Thane to Pune and from Sindhudurg to Kolhapur. These files do not come from it.)
 - **No roll before the revision by district or by sex.** The note gives the
   roll before as a state total only (9,78,54,049). By district it is derived as
   draft plus uncollectable, which sums exactly to the state total.
-- **No AC-level table.** Both annexures are by district.
+- **No AC-level table in the note.** Both annexures are by district.
+
+## The CEO's list of 38 constituencies (`ac_top38.csv`)
+
+CEO Maharashtra, "Top 38 ACs with High Percentage of Uncollectable EF Electors
+(excluding Muslim-heavy ACs as claimed by Indian Express report)", one page:
+https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Top%20ACs%20with%20high%20percentage%20of%20%20Uncollectable%20EF%20excluding%20%20Muslim%20heavy%20seats.pdf
+(fetched 2026-10-09, 445,850 bytes, sha256 9ef7fe08378ac2f2..., made with
+Microsoft Word 2013 on 30 September 2026, as the file records). Read the same
+way as the note, through the same verified chain. The text layer was extracted
+with pypdf, and every row agrees with the printed totals (1,62,01,018 electors,
+65,76,327 not collected, 40.6%). `check_raw.py` asserts the sums, the
+percentages, and each seat's number, name and district against
+`ac_district.csv`.
+
+It is a selection the CEO made in answer to a newspaper report, and its title
+says how the seats were chosen. It is 38 of 288 seats. Show it as printed,
+quote its title in full, and never map it, rank it against other seats or add
+it to anything. "Total electors" is printed without saying which roll, and the page
+calls it only what the table calls it.
 - **No count of BLOs** and no count of notices issued. The note says notices go
   to electors unmapped with the 2002-2004 rolls and to those with logical
   discrepancies, without numbers.

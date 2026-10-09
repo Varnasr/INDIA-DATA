@@ -63,6 +63,12 @@
   <h2>After the draft</h2>
   <p class="finding" id="fAfter"></p>
 
+  <h2>The 38 constituencies the CEO listed</h2>
+  <p class="sub" id="t38sub"></p>
+  <p class="finding" id="f38"></p>
+  <details class="figs"><summary>The 38 constituencies, as printed</summary>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="The 38 constituencies the CEO listed"><table id="t38"></table></div></details>
+
   <h2>Every district</h2>
   <p class="sub">Click a column heading to sort. The table scrolls.</p>
   <div class="twrap scroll" tabindex="0" role="region" aria-label="Every district"><table id="tDist"></table></div>
@@ -131,6 +137,18 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
   document.getElementById('fAfter').innerHTML = '<b>The final roll is due on ' + SIR.date(S.final_due) + ' and is not out yet.</b> ' +
     'After the draft, an elector asks to be added with Form 6, and an objection to a name already on the roll is made with Form 7. The press note set ' + SIR.date(S.claims_to_note) + ' as the last day for claims and objections and ' + SIR.date(S.final_due_note) + ' for the final roll. The Commission moved them, in its letter of 26 September 2026, to ' + SIR.date(S.claims_to) + ' and ' + SIR.date(S.final_due) + ', with notices heard until ' + SIR.date(S.notices_to) + '. ' +
     'Until the final roll is out, nobody can say how many of the names left off will be put back.';
+
+  // the CEO's own selection of 38 seats, shown as printed and never ranked against the rest
+  var T38 = S.top38, first = T38.rows[0];
+  document.getElementById('t38sub').innerHTML = 'The Chief Electoral Officer has published one table by constituency, and it covers 38 seats. Its title reads, in full, "' + SIR.esc(T38.title) + '". The CEO chose the seats, in answer to a newspaper\'s report, so the table is 38 of the state\'s ' + S.acs + ' constituencies and says nothing about the other ' + (S.acs - T38.acs) + '. It is shown as the CEO printed it, and this page neither maps it nor sets it against any other seat. <a href="' + T38.url + '">The CEO\'s table</a>, a file dated ' + SIR.date(T38.file_date) + '.';
+  var ds = {}; T38.rows.forEach(function (r) { ds[r.district] = (ds[r.district] || 0) + 1; });
+  var dl = Object.keys(ds).sort(function (a, b) { return ds[b] - ds[a]; });
+  document.getElementById('f38').innerHTML = '<b>In the 38 seats the CEO listed, the forms of ' + lk(T38.uncollected) + ' of ' + lk(T38.electors) + ' electors were not collected, ' + d1(T38.pct) + ' in every 100.</b> ' +
+    first.name + ' in ' + first.district + ' is first on the list at ' + d1(first.pct) + '. All 38 are in ' + dl.length + ' districts, ' + dl.map(function (d) { return d + ' ' + ds[d]; }).join(', ').replace(/, ([^,]*)$/, ' and $1') + '.';
+  SIR.table(document.getElementById('t38'), [
+    { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', bottom: true }, { k: 'district', label: 'District' },
+    { k: 'electors', label: 'Total electors', fmt: n }, { k: 'uncollected', label: 'Forms not collected', fmt: n }, { k: 'pct', label: 'Per 100', fmt: d1 }
+  ], T38.rows, { sort: 'pct' });
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: 'District', bottom: true }, { k: 'before', label: 'Roll before', fmt: n }, { k: 'draft', label: 'Draft roll', fmt: n },

@@ -20,17 +20,18 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "india",
-      "nav_label": "All India pages", "menu": [["india/numbers/", "Numbers"], ["india/cities/", "Cities"], ["india/women/", "Women"], ["india/urban/", "Urban"], ["india/uts/", "Territories"], ["india/constituencies/", "Constituencies"], ["india/compare/", "Comparisons"], ["india/process/", "Rules"], ["india/disputes/", "Disputes"], ["india/nrc/", "The NRC"],
-        ["india/progress/", "Progress"]],
+      "nav_label": "All India pages", "menu": [["india/constituencies/", "Constituencies"], ["india/disputes/", "Disputes"], ["india/women/", "Women"], ["india/cities/", "Cities"], ["india/numbers/", "Numbers"], ["india/compare/", "Comparisons"], ["india/urban/", "Urban"], ["india/uts/", "Territories"], ["india/process/", "Rules"],
+        ["india/progress/", "Progress"], ["india/nrc/", "The NRC"]],
       "pages": [
         ["india/", "Overview", "i0"],
-        ["india/numbers/", "Numbers", "i11"],
-        ["india/cities/", "Cities", "i17"],
+        ["india/constituencies/", "Constituencies", "i19"], ["india/disputes/", "Disputes", "i15"],
         ["india/women/", "Women", "i3"],
-        ["india/urban/", "Urban", "i7"],
-        ["india/uts/", "Territories", "i21"], ["india/constituencies/", "Constituencies", "i19"],
+        ["india/cities/", "Cities", "i17"],
+        ["india/numbers/", "Numbers", "i11"],
         ["india/compare/", "Comparisons", "i22"],
-        ["india/process/", "Rules", "i15"], ["india/disputes/", "Disputes", "i15"], ["india/nrc/", "The NRC", "i16"], ["india/progress/", "Progress", "i18"], ["india/method/", "Method", "i10"],
+        ["india/urban/", "Urban", "i7"],
+        ["india/uts/", "Territories", "i21"],
+        ["india/process/", "Rules", "i15"], ["india/progress/", "Progress", "i18"], ["india/nrc/", "The NRC", "i16"], ["india/method/", "Method", "i10"],
         ["india/faq/", "Questions", "i12"],
         ["india/report/", "Report", "i13"]
       ],
@@ -250,7 +251,7 @@
         ["maharashtra/method/", "Method", "i10"]
       ],
       "downloads": [
-        ["data/maharashtra/districts.csv", "District table, CSV", true]
+        ["data/maharashtra/districts.csv", "District table, CSV", true], ["data/maharashtra/top38.csv", "38 constituencies the CEO listed, CSV", true]
       ]
     },
     {
