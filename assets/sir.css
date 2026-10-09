@@ -639,7 +639,7 @@ button:hover,.btn:hover{transform:none}
 @media (min-width:701px){
   .controls .find{border-color:var(--line);background:var(--card);color:var(--muted);min-width:12rem;justify-content:flex-start}
   .controls .find .kbd{display:inline;margin-inline-start:auto}
-  .controls .dl:not(.places) .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .controls .dlink .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
 
 /* ----------------------------------------------------- the section tabs */
@@ -657,7 +657,7 @@ button:hover,.btn:hover{transform:none}
 /* -------------------------------------------- the page and its columns */
 main{padding:0 1.25rem 3.5rem}
 main>:first-child:not(.page-head),main>article>:first-child:not(.page-head){margin-top:2.5rem}
-body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,.asof,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.nothere,.colq,.dlall,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:auto}
+body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,.asof,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.nothere,.colq,.dlall,.qa,.research-section,.methodology,.docard,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:0}
 .xp main>*{max-width:none!important;margin-inline:0!important}
 main h1{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;line-height:1.02}
 main h2{font-family:var(--serif);font-size:1.9rem;line-height:1.15;font-weight:700;letter-spacing:-.01em;border:0;padding:0;margin-top:3.5rem;margin-bottom:.5rem}
@@ -745,7 +745,7 @@ footer{background:var(--bg);margin-top:2rem}
 .rank tr.all td{font-weight:700}
 .rank tr.all .bar{background:var(--ink)}
 .rank a{color:var(--ink)}
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem auto 0;max-width:var(--measure)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 0;max-width:var(--measure)}
 .chips a{border:1px solid var(--ink);border-radius:999px;padding:.45rem .9rem;text-decoration:none;color:var(--ink);font-weight:600;font-size:.92rem;background:var(--card)}
 .chips a:hover{background:var(--ink);color:var(--on-ink)}
 .how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;margin-top:1.25rem}
@@ -823,14 +823,14 @@ html[data-lang]:not([data-lang="en"]) ol.summary li::before{font-family:inherit}
 
 /* SIR.table: a table of figures at a readable width on a desktop, numbers in
    aligned columns, and one card per row on a phone with each figure named */
-.twrap.fit{max-width:min(100%,52rem);margin:1.2rem auto}
+.twrap.fit{max-width:min(100%,52rem);margin:1.2rem 0}
 table.stack{width:100%}
 table.stack th,table.stack td{padding:.55rem .7rem;vertical-align:top}
 table.stack th:not(.num),table.stack td:not(.num){text-align:start}
 table.stack .num{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}
 table.stack td:first-child{font-weight:600}
 table.stack td small{display:block;font-weight:400;color:var(--muted);font-size:.8rem;margin-top:.1rem}
-details.figs{max-width:min(100%,52rem);margin:.4rem auto 1.4rem}
+details.figs{max-width:min(100%,52rem);margin:.4rem 0 1.4rem}
 details.figs>summary{cursor:pointer;font-family:var(--mono);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:.4rem 0}
 details.figs>summary:hover{color:var(--ink)}
 @media (max-width:600px){
@@ -872,12 +872,12 @@ details.figs>summary:hover{color:var(--ink)}
 
 /* The constituencies page: the controls in the reading column, and a table
    that keeps its columns on a phone (fewer of them) instead of stacking */
-.acctl{max-width:var(--measure);margin:0 auto 1rem}
+.acctl{max-width:var(--measure);margin:0 0 1rem}
 .acctl .pfilter{margin-bottom:.6rem}
 .acctl-row{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;font-size:.9rem}
 .acctl-row label{display:flex;flex-direction:column;gap:.25rem;color:var(--muted)}
 .acctl-row input,.acctl-row select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.4rem .55rem;min-width:14rem}
-.acwrap{max-width:min(100%,64rem);margin:.6rem auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.acwrap{max-width:min(100%,64rem);margin:.6rem 0;border:1px solid var(--line);border-radius:10px;background:var(--card)}
 table.actab{width:100%;border-collapse:collapse;font-size:.9rem}
 table.actab th,table.actab td{padding:.5rem .65rem;border-bottom:1px solid var(--line);vertical-align:top}
 table.actab thead th{font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:start;position:sticky;top:0;background:var(--card)}
@@ -897,7 +897,7 @@ table.actab .neg{color:var(--red);font-weight:600}
 }
 
 /* -------------------------------------------- the downloads page */
-.dls .book{max-width:min(100%,52rem);margin:0 auto 1.1rem;border-top:1px solid var(--line);padding-top:.9rem}
+.dls .book{max-width:min(100%,52rem);margin:0 0 1.1rem;border-top:1px solid var(--line);padding-top:.9rem}
 .dls .bh{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem 1rem}
 .dls .bh h3{margin:0;flex:1 1 16rem;font-family:var(--serif);font-size:1.3rem}
 .dls .bh .meta{margin:0;font-size:.85rem;color:var(--muted)}
@@ -923,7 +923,7 @@ html.dyslexic-font .dls .tag{text-transform:none}
 html.dyslexic-font .disp .tag{text-transform:none}
 
 /* the constituency finder on india/constituencies/: one card per match */
-.acfind{list-style:none;padding:0;margin:0 auto 1.5rem;max-width:var(--measure);display:grid;gap:.6rem}
+.acfind{list-style:none;padding:0;margin:0 0 1.5rem;max-width:var(--measure);display:grid;gap:.6rem}
 .acfind li{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:.7rem .9rem}
 .acfind a{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .6rem;text-decoration:none;color:var(--ink)}
 .acfind a b{font-family:var(--serif);font-size:1.05rem}
@@ -933,7 +933,7 @@ html.dyslexic-font .disp .tag{text-transform:none}
 .acfind .acno{font-family:var(--mono);font-size:.75rem;color:var(--muted);font-weight:400}
 
 /* the disputes page: search and filters, and each item's issues */
-.dfilter{max-width:var(--measure);margin:0 auto .6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.6rem .9rem;align-items:end}
+.dfilter{max-width:var(--measure);margin:0 0 .6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.6rem .9rem;align-items:end}
 .dfilter label{display:flex;flex-direction:column;gap:.25rem;font-size:.85rem;color:var(--muted)}
 .dfilter .dq{grid-column:1/-1}
 .dfilter input,.dfilter select{font:inherit;font-size:.92rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.45rem .55rem;min-width:0;width:100%}
@@ -964,7 +964,7 @@ html.dyslexic-font .places .menu .quick .qh{text-transform:none}
 @media print{.tour,.htip{display:none}}
 
 /* help/: the steps, their sources, and the organisations */
-.helpart .hsteps,.helpart .hsrc,.helpart .orgs,.helpart .dfilter{max-width:var(--measure);margin-inline:auto}
+.helpart .hsteps,.helpart .hsrc,.helpart .orgs,.helpart .dfilter{max-width:var(--measure);margin-inline:0}
 .helpart .hsteps{padding-inline-start:1.4rem;margin-block:.4rem 1rem}
 .helpart .hsteps li{margin:.3rem 0}
 .helpart .hsrc{margin-block:0 1.6rem}
@@ -980,7 +980,7 @@ html.dyslexic-font .places .menu .quick .qh{text-transform:none}
 .helpart .nsrc{font-size:.85rem;color:var(--muted)}
 .helpart .tag{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;border:1px solid var(--line);color:var(--muted);padding:0 .3rem;border-radius:4px}
 html.dyslexic-font .helpart :is(.hsrc>summary,.tag){text-transform:none}
-.who{max-width:var(--measure);margin:0 auto 1.2rem;padding:0;list-style:none;display:grid;gap:.55rem}
+.who{max-width:var(--measure);margin:0 0 1.2rem;padding:0;list-style:none;display:grid;gap:.55rem}
 .who li{padding-inline-start:.9rem;border-inline-start:3px solid var(--red)}
 /* the states fold: zonal headings, a line on what bold means, the full analyses in bold */
 .places .menu details.grp .sub .rg{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:.6rem .75rem .15rem}
@@ -989,7 +989,7 @@ html.dyslexic-font .helpart :is(.hsrc>summary,.tag){text-transform:none}
 .places .menu details.grp .sub a.in{padding-inline-start:1.6rem;font-size:.8rem}
 html.dyslexic-font .places .menu details.grp .sub .rg{text-transform:none}
 /* the share form: one column of labelled fields in the reading measure */
-.shareform{max-width:var(--measure);margin:1.2rem auto 1rem;display:grid;gap:.2rem}
+.shareform{max-width:var(--measure);margin:1.2rem 0 1rem;display:grid;gap:.2rem}
 .shareform p{margin:0 0 .7rem}
 .shareform label{display:block;font-size:.92rem;font-weight:600;margin-bottom:.3rem}
 .shareform input:not([type=checkbox]),.shareform textarea{width:100%;box-sizing:border-box;font:inherit;padding:.6rem .7rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
@@ -1000,28 +1000,26 @@ html.dyslexic-font .places .menu details.grp .sub .rg{text-transform:none}
 .shareform .send{font:inherit;font-weight:700;padding:.65rem 1.4rem;border-radius:8px;background:var(--ink);color:var(--bg);border:0;cursor:pointer}
 .shareform .send:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .share .hp{display:none}
-/* the floating buttons: "Share a list" on every screen, and on a phone the
-   constituency finder above it, out of the crowded header row. The tour box
-   sits above them. */
+/* the floating buttons, on every screen: the constituency finder and, above
+   it, "Share a list". The tour box sits above them. */
 .fabs{position:fixed;z-index:55;inset-inline-end:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:flex-end;gap:.55rem;pointer-events:none}
 .fabs .fab{pointer-events:auto;display:inline-flex;align-items:center;gap:.45rem;border-radius:999px;font-weight:600;line-height:1;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.22)}
 .fabs .fab .icon{width:20px;height:20px;flex:none}
 .fabs .fab:focus-visible{outline:3px solid var(--red);outline-offset:3px}
-.fab:not(.fab-share){display:none!important;background:var(--ink);color:var(--bg);padding:.7rem 1.05rem;font-size:.9rem}
+.fab:not(.fab-share){display:inline-flex;background:var(--ink);color:var(--bg);padding:.7rem 1.05rem;font-size:.9rem}
 .fab-share{background:var(--card);color:var(--ink);border:1px solid var(--line);padding:.55rem .9rem;font-size:.85rem}
 .fab-share .icon{width:18px;height:18px}
 .fabs.fabs-off{display:none}
 footer{padding-bottom:4rem}
-.tour{bottom:calc(4.25rem + env(safe-area-inset-bottom,0px))}
+.tour{bottom:calc(8rem + env(safe-area-inset-bottom,0px))}
+footer{padding-bottom:7.5rem}
 @media (max-width:700px){
-  .controls .seats{display:none!important}
-  .fab:not(.fab-share){display:inline-flex!important}
   footer{padding-bottom:7.5rem}
   .tour{bottom:calc(8rem + env(safe-area-inset-bottom,0px))}
 }
 @media print{.fabs{display:none!important}}
 /* the front page's usage figures */
-.tally{max-width:var(--measure);margin:1.5rem auto 0}
+.tally{max-width:var(--measure);margin:1.5rem 0 0}
 .tally .kpis{margin:.6rem 0}
 /* a card's count, and that count as a share of the roll beneath it */
 .hub .n small{display:block;font-family:var(--mono);font-size:.72rem;font-weight:400;letter-spacing:.02em;color:var(--muted);margin-top:.3rem}
@@ -1030,3 +1028,48 @@ html.dyslexic-font .hub .n small{font-family:inherit;font-size:.8rem}
 /* which roll a state's figures come from, under the kicker */
 .asof{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-top:-.5rem;margin-bottom:1rem}
 html.dyslexic-font .asof,html:not([lang="en"]) :is(.asof,.kicker){font-family:inherit;letter-spacing:normal}
+
+/* the front page's cards: the pages across India in a row of their own,
+   each marked with a pin, then every state and union territory */
+main>h3.hubh{font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:1.6rem 0 .7rem;display:flex;align-items:center;gap:.45rem}
+html.dyslexic-font main>h3.hubh,html:not([lang="en"]) main>h3.hubh{font-family:inherit;text-transform:none;letter-spacing:normal;font-size:.95rem}
+@media (min-width:1000px){.hubs.pins{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.hubs.pins{padding-bottom:1.6rem;border-bottom:1px solid var(--line);margin-bottom:.4rem}
+.hub.pin{position:relative;padding-inline-end:2.6rem}
+.hub.pin::before{content:"";position:absolute;top:1rem;inset-inline-end:1rem;width:18px;height:18px;background:var(--red);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 17v5'/%3E%3Cpath d='M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 17v5'/%3E%3Cpath d='M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z'/%3E%3C/svg%3E") center/contain no-repeat}
+/* the map and the ranked list beside it end at the same line: the list
+   scrolls inside the map's height rather than stopping short of it */
+@media (min-width:901px){
+  .mapwrap{align-items:stretch}
+  .mapwrap .rank{position:relative;min-height:20rem}
+  .mapwrap .rank .twrap{position:absolute;inset:0;max-height:none}
+}
+/* Downloads is a button to the downloads page; the place it was pressed on
+   is opened and marked there */
+.controls a.dlink{display:inline-flex;align-items:center;gap:.4rem;text-decoration:none}
+.controls a.dlink[aria-current]{background:var(--soft)}
+.dls .book.here{border-top:2px solid var(--red)}
+/* the places menu on a wide screen: one panel, the pages most readers come
+   for and All India on the left, every state and territory on the right in
+   columns by zone, so nothing scrolls */
+.places .menu .about{border-top:1px solid var(--line);margin-top:.35rem;padding-top:.35rem;display:flex;flex-direction:column}
+.places .menu .zn{display:flex;flex-direction:column}
+@media (min-width:1000px){
+  .controls .places .menu{position:fixed;top:calc(var(--hh,72px) + 4px);inset-inline-end:max(1rem,calc((100vw - var(--page))/2 + 1.25rem));width:min(56rem,calc(100vw - 2rem));max-height:calc(100vh - var(--hh,72px) - 1.5rem);overflow-y:auto}
+  .places .menu>div{display:grid!important;grid-template-columns:15rem minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:1rem;align-items:start}
+  .places .menu>div>.quick{grid-column:1;grid-row:1}
+  .places .menu>div>details.grp:not(.states){grid-column:1;grid-row:2}
+  .places .menu>div>.about{grid-column:1;grid-row:3;align-self:start}
+  .places .menu>div>details.grp.states{grid-column:2;grid-row:1/4;border-inline-start:1px solid var(--line);padding-inline-start:.6rem}
+  .places .menu details.grp.states>summary{pointer-events:none;font-family:var(--mono);font-size:.7rem!important;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)!important;padding:.45rem .75rem .2rem!important}
+  .places .menu details.grp.states>summary::after{display:none}
+  .places .menu details.grp.states .sub{display:block;columns:3;column-gap:.6rem;border:0;margin:0}
+  .places .menu details.grp.states .sub .lg{column-span:all;margin-bottom:.3rem}
+  .places .menu details.grp.states .zn{break-inside:avoid;margin-bottom:.4rem}
+  .places .menu details.grp.states .sub a{padding:.32rem .75rem;white-space:normal;line-height:1.3}
+  html.dyslexic-font .places .menu details.grp.states>summary,html:not([lang="en"]) .places .menu details.grp.states>summary{font-family:inherit;text-transform:none;letter-spacing:normal;font-size:.85rem!important}
+}
+.hub.big .n small{color:var(--on-ink)}
+.dls .book{scroll-margin-top:calc(var(--hh,72px) + 1rem)}

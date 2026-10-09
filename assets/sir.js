@@ -223,7 +223,15 @@
     paint();
   })();
 
-  // The downloads menu closes on a click elsewhere and on Escape.
+  // On a wide screen the places menu sets every state and territory out in
+  // columns beside the rest (sir.css), so that list is open whenever the
+  // menu is; on a phone it stays a fold.
+  var placesMenu = document.querySelector('header.top details.places');
+  if (placesMenu) placesMenu.addEventListener('toggle', function () {
+    var st = placesMenu.querySelector('details.grp.states');
+    if (placesMenu.open && st && window.matchMedia('(min-width:1000px)').matches) st.open = true;
+  });
+  // The header menus close on a click elsewhere and on Escape.
   document.addEventListener('click', function (e) {
     document.querySelectorAll('details.dl[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });
   });
@@ -844,9 +852,9 @@
 (function () {
   var TIPS = [
     ['.controls .find', L('Search every page, constituency, district and dispute. Ctrl or Command and K opens it from anywhere.')],
-    ['.controls .seats', L('Find any constituency with a figure on this site.')],
+    ['.fab:not(.fab-share)', L('Find any constituency with a figure on this site.')],
     ['.controls .places > summary', L('Every analysis, from All India to each state, with the pages most readers start with.')],
-    ['.controls .dl:not(.places) > summary', L('The tables, reports and slides behind this page, and every download explained.')],
+    ['.controls .dlink', L('The tables, reports and slides behind this page, and every download explained.')],
     ['.controls #lang', L('Read the site in English, Hindi, Urdu, Telugu, Tamil or Bengali.')],
     ['.controls #dys-font-btn', L('Switch to a font some readers with dyslexia find easier.')],
     ['.controls .theme', L('Switch between light and dark.')],
@@ -896,11 +904,11 @@
   // the tour, on the front page
   var STEPS = [
     ['.controls .find', L('Search finds any page, constituency, district or dispute. Press Ctrl or Command and K from anywhere on the site.')],
-    [(matchMedia('(max-width:700px)').matches ? '.fab:not(.fab-share)' : '.controls .seats'), L('Constituencies opens a finder over every constituency with a figure on this site, each in its own state\'s measure.')],
+    ['main .btn-ink[href*="constituencies"]', L('Constituencies opens a finder over every constituency with a figure on this site, each in its own state\'s measure.')],
     ['.controls .places > summary', L('Places lists every analysis, from All India to each state. The pages most readers come for are at the top.')],
     ['#vIndia', L('The map shows the names left off per 100 electors in each state. Tap a state to open its own page.')],
     ['.hubs .hub.pin', L('The pinned cards lead to the pages most readers look for, among them the disputes, every constituency and women.')],
-    ['.controls .dl:not(.places) > summary', L('Every table behind the site can be downloaded, with what each column means.')],
+    ['.controls .dlink', L('Every table behind the site can be downloaded, with what each column means.')],
     ['.controls #lang', L('The site reads in English, Hindi, Urdu, Telugu, Tamil and Bengali.')]
   ];
   var KEY = 'otr-tour', box = null, on = null, i = 0, head = document.querySelector('header.top');

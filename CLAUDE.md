@@ -815,7 +815,7 @@ in the order and the page says so. It is English only.
 
 **Constituencies** (`india/constituencies/`) opens with a finder over every
 constituency with a figure anywhere on the site, in nine places, linked from
-the header of every page (the Constituencies button beside Search).
+every page by the floating "Find your constituency" button.
 `build_ac_change.py` writes `data/india/ac_finder.json` from `FINDER`: each
 place's lead count and its own measure (names removed, names left off, fall
 in the roll, or removed after the draft per 1,000), named beside every figure.
@@ -847,7 +847,7 @@ Forms. Anything that arrives carrying names or EPIC numbers is treated like
 the Bihar lists: counted, never committed.
 
 **Downloads** (`downloads/`, on the front page's place, linked from every
-Downloads menu and the footer) lists every file the site publishes.
+Downloads button and the footer) lists every file the site publishes.
 `scripts/build_repository.py` writes one Excel workbook per place into
 `downloads/` (the place's published CSVs, the Chief Electoral Officer's own
 tables from its `raw/` folder as listed in `EXTRA`, an About sheet saying what
@@ -1095,7 +1095,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 - **Never edit a page's `index.html` directly.** Every page is written by
   `scripts/build_site.py` from two things. `site/places.json` lists the
   places (the front page, All India, Bihar, Hyderabad) with each one's
-  subtitle, folk-art band, tab row and Downloads menu. `site/pages/<path>/index.html`
+  subtitle, folk-art band, tab row and Downloads button. `site/pages/<path>/index.html`
   holds a page's own content: a first line `<!--page {json} -->` with its
   title, description and place (plus `own_tabs` for a dashboard, `head` for
   extra head markup), the content, then `<!--scripts-->` and its scripts.
@@ -1120,7 +1120,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 - **The header carries a places menu**, not a switch: a pin button naming
   the current place, opening the list of analyses. It folds (`details.grp`):
   a place's own `menu` pages sit under its `nav_label`, and every state and
-  union territory sits in one fold, "All states and union territories",
+  union territory sits in one fold, "All States and Union Territories",
   under its zone (`zone` in `places.json`: the Ministry of Home Affairs'
   zonal councils, Northern, Central, Eastern, Western and Southern, with the
   North-East for the eight states of the North Eastern Council; Andaman and
@@ -1132,7 +1132,13 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   City of Hyderabad" beneath it. A new state takes a `zone`; the build fails
   on a place with a `group` and no zone, or on a zone outside the six. A place with `menu` pages is itself one fold, its overview first. A fold
   opens by itself when the reader is inside it. A new state takes the group
-  field; each fold's list carries `data-i18n-each`. On a phone the title takes one row and the controls a row
+  field; each fold's list carries `data-i18n-each`. At 1000px and wider the
+  menu is one panel pinned under the header (`position:fixed`): Start here,
+  All India and About this site on the left, and every state and territory on
+  the right in three columns, one block per zone (`div.zn`), opened by
+  `sir.js` whenever the menu opens. Before this it was a single column that
+  ran to 1,888px on a state page. "About this site" closes the menu under a
+  rule. On a phone the title takes one row and the controls a row
   beneath it (language, install, search, places, downloads, reading font,
   theme; print is hidden there): beside the title, seven controls squeezed
   it to a single word. Credit is to PinPoint
@@ -1164,7 +1170,11 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   site title stays in the markup for screen readers). Every page opens with a
   mono kicker naming the place (put in by `build_site.py`), a large serif
   title and the numbered findings. Text keeps to a 44rem column; maps,
-  charts, tables and number strips run full width. Numbers sit in a strip
+  charts, tables and number strips run full width. **Every block starts at
+  the same left edge**: the column is left-aligned (`margin-inline:0`), never
+  centred. Centred, a 704px text column sat 208px in from the 1120px maps and
+  cards, so the left edge jumped in and out all the way down every page. Give
+  any new measure-width block `margin-inline:0`, not `auto`. Numbers sit in a strip
   between rules; charts on white cards with a hairline. A long reading page
   (four or more h2s, not the front page) gets "On this page" in the left
   margin of a screen 1240px or wider (`SIR.toc`, body class `has-toc`).
@@ -1175,11 +1185,17 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   analysis led by a count of names with its share of the roll beneath it (each pair from one source; Kerala, which published no count of names left off, shows the fall in the roll and says so; the pinned cards keep their own figure), every state and territory among them (the 20 on
   the shared page take their figure from `states.json`), one featured in the
   large card and the rest in an order shuffled afresh each day from a seed of
-  `SIR.day()`, so every visitor sees the same order on the same day (West
-  Bengal first without JavaScript), a finder that links
-  to each state's own, and "How we know". Pinned cards (`hub pin`, a red border)
-  sit beside the featured state whatever the day: Protests and disputes,
-  Every constituency, Women, the cities and the SIR in numbers. Nothing on it may claim a feature
+  `SIR.day()`, so every visitor sees the same order on the same day. Only a
+  state with an analysis of its own (no `data-st`) is featured, so the large
+  card always carries a figure; Tripura, with no draft, once took it. A
+  finder that links to each state's own, and "How we know". The cards come
+  in two grids: "Across India" (`.hubs.pins`), eight pinned cards (`hub pin`,
+  a red border and a pin icon drawn by CSS) in rows of four on a wide screen,
+  above a rule: If your name was left off, Protests and disputes, RTI
+  replies, Every constituency, All India, Women, the cities and the SIR in
+  numbers. Then "Every State and Union Territory" (`.hubs.states`).
+  The map and the ranked list beside it end at the same line: the list
+  scrolls inside the map's height. Nothing on it may claim a feature
   the site does not have. With the dyslexia font on, the display sizes come
   down and nothing is set in italics or capitals (`html.dyslexic-font`
   rules). A new text block that should sit in the column needs its class in
@@ -1198,8 +1214,12 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   correlation under 0.2 is reported as no relationship.
 - **The site is "SIR analysis for India"; each place is an analysis inside
   it.** Every page carries the same header: that title, a subtitle naming the
-  place, the places menu, and a Downloads menu with the report online, the
-  PDF and the slides. It is written once, in `scripts/build_site.py`.
+  place, the places menu, and a Downloads button. **Downloads is a link, not a
+  menu**: it opens `downloads/#w-<workbook>` (`DL_BOOK` in `build_site.py`;
+  the twenty on the shared page go to `#w-other`), where that place's
+  workbook is opened, marked with a red rule and carries its report and
+  slides beside the workbook (`book` in `downloads.json`). The menu it
+  replaced ran to twenty links on All India. It is written once, in `scripts/build_site.py`.
 - **The tab bar is sticky.** On a wide screen the header sticks and the bar
   sticks beneath it (`sir.js` writes the header's height to `--hh`); on a phone
   the header scrolls away and the bar sticks at the top. The bar fades at
@@ -1262,13 +1282,11 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   `TIPS`, and a step in `STEPS` if a new reader needs it.
 - **Floating buttons** (`.fabs`, written by `build_site.py`). "Share a list"
   (`a.fab-share`, icon `i24`) floats at the bottom right on every screen except
-  the share pages. On a wide screen the constituency finder is the
-  Constituencies button in the header (icon `i23`, a map pin with a
-  magnifier). At 700px and below it leaves the header row, which was too
-  crowded, and floats beneath "Share a list" as "Find your constituency", on
-  every page but the constituencies page. On a page with its own row of
+  the share pages, and "Find your constituency" (icon `i23`, a map pin with a
+  magnifier) floats beneath it on every screen, on every page but the
+  constituencies page. There is no Constituencies button in the header. On a page with its own row of
   buttons (the front page's hero) both stay hidden until that whole row has
-  scrolled off. The tour points at whichever finder is showing, and its box
+  scrolled off. The tour points at the hero's own "Find your constituency" button, and its box
   sits above the buttons.
 - **Usage on the front page.** "How much the site has been used", under Who
   made it, reads `offtheroll_public_stats()` (sums only, never a page or a
