@@ -9,6 +9,12 @@ Reads only the states' own checked constituency files (data/<state>/
 constituencies.json) and writes data/india/ac_change.csv and .json. Each
 state measures something different, and every column says which roll it is.
 Nothing is added up across states.
+
+It also writes data/india/ac_finder.json, which the page's finder reads: every
+constituency with a figure anywhere on the site, in nine places, each with the
+one count its own state page leads with and that count's own measure. The
+measures differ from state to state, so the finder names the measure beside
+every figure and never ranks one state's seats against another's.
 """
 import csv
 import io
@@ -69,6 +75,45 @@ def rows():
     return full
 
 
+# The finder: each place's lead count, in its own words, and where its seats open
+FINDER = [
+    # place id, state, page, file, count field, base field, per, what the count is, what the base is
+    ('bihar', 'Bihar', 'bihar/results/', 'bihar/constituencies.json', 'total', 'electorate_2025', 100,
+     'names removed in both phases', 'the 2025 roll'),
+    ('tn', 'Tamil Nadu', 'tamilnadu/', 'tamilnadu/constituencies.json', 'removed', 'before', 100,
+     'names left off the draft', 'the roll before the revision'),
+    ('wb', 'West Bengal', 'westbengal/', 'westbengal/constituencies.json', 'fall_draft', 'roll_2024', 100,
+     'fall in the roll from the 2024 Lok Sabha roll to the draft', 'the 2024 roll'),
+    ('kl', 'Kerala', 'kerala/', 'kerala/constituencies.json', 'fall_draft', 'roll_2025', 100,
+     'fall in the roll from the January 2025 roll to the draft', 'the January 2025 roll'),
+    ('rj', 'Rajasthan', 'rajasthan/', 'rajasthan/constituencies.json', 'fall', 'roll_2023', 100,
+     'change in the roll from the 2023 election to the final roll, more than two years', 'the 2023 roll'),
+    ('dl', 'Delhi', 'delhi/', 'delhi/constituencies.json', 'left_off', 'roll_before', 100,
+     'names left off the draft (forms not collected)', 'the roll before the revision'),
+    ('gj', 'Gujarat', 'gujarat/', 'gujarat/constituencies.json', 'removed', 'before', 100,
+     'names left off the draft', 'the roll before the revision'),
+    ('uk', 'Uttarakhand', 'uttarakhand/', 'uttarakhand/constituencies.json', 'objections', 'draft', 1000,
+     'names removed after the draft', 'the draft roll'),
+]
+
+
+def finder():
+    rows, places = [], []
+    for pid, state, page, f, cnt, base, per, what, of in FINDER:
+        rs = J(f)
+        places.append({'id': pid, 'state': state, 'page': page, 'what': what, 'of': of, 'per': per, 'acs': len(rs)})
+        for r in rs:
+            if not r[base]:
+                raise SystemExit('FAIL - %s %s has no %s' % (state, r['name'], base))
+            rows.append([pid, r['ac'], r['name'], r['district'], r[cnt], round(per * r[cnt] / r[base], 2), page + '#ac-%d' % r['ac']])
+    h = J('hyderabad/summary.json')['acs']
+    places.append({'id': 'hyd', 'state': 'Telangana (Hyderabad Old City)', 'page': 'hyderabad/explorer/', 'what': 'names removed from the lists',
+                   'of': 'the roll before the revision', 'per': 100, 'acs': len(h)})
+    for a in h:
+        rows.append(['hyd', None, a['name'], 'Hyderabad', a['deleted'], round(100 * a['deleted'] / a['electors'], 2), 'hyderabad/explorer/#' + a['name']])
+    return {'cols': ['place', 'ac', 'constituency', 'district', 'count', 'rate', 'href'], 'places': places, 'rows': rows}
+
+
 def main():
     R = rows()
     summ = {}
@@ -91,7 +136,8 @@ def main():
     for r in R:
         w.writerow(['' if v is None else v for v in r])
     files = {os.path.join(ROOT, 'data', 'india', 'ac_change.csv'): buf.getvalue(),
-             os.path.join(ROOT, 'data', 'india', 'ac_change.json'): json.dumps({'cols': COLS, 'rows': R, 'states': summ}, ensure_ascii=False) + '\n'}
+             os.path.join(ROOT, 'data', 'india', 'ac_change.json'): json.dumps({'cols': COLS, 'rows': R, 'states': summ}, ensure_ascii=False) + '\n',
+             os.path.join(ROOT, 'data', 'india', 'ac_finder.json'): json.dumps(finder(), ensure_ascii=False, separators=(',', ':')) + '\n'}
     stale = [p for p, t in files.items() if not os.path.exists(p) or open(p, encoding='utf-8').read() != t]
     if CHECK:
         if stale:

@@ -613,6 +613,12 @@
    "/tamilnadu/elections/"
   ]
  },
+ "<b>Every constituency</b><span id=\"hAcs\">Every constituency with a figure on this site, in each state's own measure, with a link to its page.</span>": {
+  "kind": "markup",
+  "pages": [
+   "/"
+  ]
+ },
  "<b>Every one of Chennai's {n} constituencies lost more than {min} of every 100 electors.</b> {hi} lost {hiv}, the most of any seat in the state. Chennai holds {roll} of the state's roll and {rem} of the names removed.": {
   "kind": "script",
   "pages": [
@@ -817,7 +823,7 @@
    "/hyderabad/parts/"
   ]
  },
- "<b>Protests and disputes</b><span>Court cases, Assembly resolutions, protests, bulk Form 7 objections and changes to the Commission's software, each with its source.</span>": {
+ "<b>Protests and disputes</b><span id=\"hDisp\">Court cases, Assembly resolutions, protests, bulk Form 7 objections and changes to the Commission's software, each with its source.</span>": {
   "kind": "markup",
   "pages": [
    "/"
@@ -1073,6 +1079,12 @@
   "kind": "script",
   "pages": [
    "/westbengal/"
+  ]
+ },
+ "<b>Women</b><span id=\"hWomen\">Every count by sex the site holds, state by state and district by district.</span>": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "<b>no</b>": {
@@ -6478,12 +6490,6 @@
    "/"
   ]
  },
- "Each state with its own page has a finder. Pick yours to see the figures for your constituency or district, with a link you can send.": {
-  "kind": "markup",
-  "pages": [
-   "/"
-  ]
- },
  "Each state's dates, CSV": {
   "kind": "markup",
   "pages": [
@@ -7014,12 +7020,6 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
-  ]
- },
- "Every constituency's electoral roll through the revision in Tamil Nadu, Kerala, West Bengal and Uttarakhand, the four states that published their rolls constituency by constituency, in one table and one download.": {
-  "kind": "markup",
-  "pages": [
-   "/india/constituencies/"
   ]
  },
  "Every constituency, with the 2026 result": {
@@ -7629,6 +7629,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "Find any constituency with a figure on this site, in nine places, each in its own state's measure. Then every constituency's roll through the revision in Tamil Nadu, Kerala, West Bengal and Uttarakhand, in one table and one download.": {
+  "kind": "markup",
+  "pages": [
+   "/india/constituencies/"
   ]
  },
  "Find your constituency": {
@@ -13525,6 +13531,12 @@
    "/hyderabad/"
   ]
  },
+ "One item": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
+  ]
+ },
  "One match": {
   "kind": "script",
   "pages": [
@@ -14742,8 +14754,9 @@
   ]
  },
  "Protests and disputes": {
-  "kind": "markup",
+  "kind": "script",
   "pages": [
+   "/assets/sir.js",
    "/india/disputes/"
   ]
  },
@@ -17299,6 +17312,12 @@
   "kind": "markup",
   "pages": [
    "/bihar/explorer/"
+  ]
+ },
+ "Search every constituency at once on the <a href=\"india/constituencies/#find-a-constituency\">constituencies page</a>. Each state with its own page also has a finder. Pick yours to see the figures for your constituency or district, with a link you can send.": {
+  "kind": "markup",
+  "pages": [
+   "/"
   ]
  },
  "Search part number or locality": {
@@ -23641,6 +23660,12 @@
    "/assets/faq/hyd.js"
   ]
  },
+ "Women were the larger share of the names left off in {o} of {n} states with a count by sex, and in {d} of {dn} districts.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "Women were {f1} of phase 1 removals and {f2} of phase 2.": {
   "kind": "script",
   "pages": [
@@ -25204,11 +25229,29 @@
    "/hyderabad/explorer/"
   ]
  },
+ "{n} constituencies in {p} places, each with its count in its own state's measure and a link to its page.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
+ "{n} court orders, resolutions, protests and reports from {s} states and union territories, each with its source and the Commission's reply where one was reported.": {
+  "kind": "script",
+  "pages": [
+   "/"
+  ]
+ },
  "{n} in {name}": {
   "kind": "script",
   "pages": [
    "/hyderabad/method/",
    "/hyderabad/parts/"
+  ]
+ },
+ "{n} items": {
+  "kind": "script",
+  "pages": [
+   "/assets/sir.js"
   ]
  },
  "{n} matches": {

@@ -806,7 +806,14 @@ rate, the reason shares, the net change after the draft and women's share
 where both rolls were published by sex. Jammu and Kashmir and Ladakh were not
 in the order and the page says so. It is English only.
 
-**Constituencies** (`india/constituencies/`) puts every constituency of the
+**Constituencies** (`india/constituencies/`) opens with a finder over every
+constituency with a figure anywhere on the site, in nine places, linked from
+the header of every page (the Constituencies button beside Search).
+`build_ac_change.py` writes `data/india/ac_finder.json` from `FINDER`: each
+place's lead count and its own measure (names removed, names left off, fall
+in the roll, or removed after the draft per 1,000), named beside every figure.
+The finder never ranks one state's seats against another's. Below it, the page
+puts every constituency of the
 four states that published their rolls by constituency (Tamil Nadu, Kerala,
 West Bengal, Uttarakhand) in one table and one download,
 `data/india/ac_change.csv`. `scripts/build_ac_change.py` reads only those
@@ -855,6 +862,16 @@ Commission's reply sits beside it where reported; no private person is named,
 in a claim or a quote (a researcher, voter, objector, booth agent or BLO is
 named by role); nothing says what anyone intended or whether anyone is a
 citizen. English only.
+
+The page can be searched and filtered by state, issue, court, party or body,
+and place. `tags.json` beside the research gives every item its `court`,
+`actors` (parties, offices and organisations, never a private person),
+`places` (constituencies, districts or cities) and one to three `issues` from
+the fixed list `ISSUES` in the build, which fails on an item with no tags or
+an issue outside the list. Tag every new item when it is added. The filters
+live in the address (`?court=Supreme%20Court&q=form%207`), so a filtered list
+can be sent as a link, and the sitewide search carries every item and every
+court, party, place and issue as a link into the filtered page.
 
 **The NRC** (`india/nrc/`) explains the National Register of Citizens from
 primary documents only: what the Citizenship Act and the 2003 Rules provide,
@@ -1087,7 +1104,9 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   large card and the rest in an order shuffled afresh each day from a seed of
   `SIR.day()`, so every visitor sees the same order on the same day (West
   Bengal first without JavaScript), a finder that links
-  to each state's own, and "How we know". Nothing on it may claim a feature
+  to each state's own, and "How we know". Pinned cards (`hub pin`, a red border)
+  sit beside the featured state whatever the day: Protests and disputes,
+  Every constituency, Women, the cities and the SIR in numbers. Nothing on it may claim a feature
   the site does not have. With the dyslexia font on, the display sizes come
   down and nothing is set in italics or capitals (`html.dyslexic-font`
   rules). A new text block that should sit in the column needs its class in

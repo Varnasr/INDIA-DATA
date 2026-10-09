@@ -683,6 +683,9 @@
       var place = function (id) { return tr(d.places[id] || ''); };
       d.pages.forEach(function (p) { items.push({ l: tr(p[1]), m: L('Page') + ' · ' + place(p[0]), u: p[2], k: 0, h: norm(tr(p[1]) + ' ' + p[1] + ' ' + place(p[0]) + ' ' + d.places[p[0]]) }); });
       d.rows.forEach(function (r) {
+        // the disputes page: an item, or a filter on it (a court, a party, a place or an issue)
+        if (r[1] === 'x') { items.push({ l: r[2], m: L('Protests and disputes') + ' · ' + r[3], u: r[4], k: 4, h: norm(r[2] + ' ' + r[3] + ' ' + (r[5] || '')) }); return; }
+        if (r[1] === 'f') { items.push({ l: r[2], m: L('Protests and disputes') + ' · ' + (r[3] === 1 ? L('One item') : L('{n} items', { n: r[3] })), u: r[4], k: 3, h: norm(r[2]) }); return; }
         var dist = r[1] === 'd', l = dist ? L('{d} district', { d: r[2] }) : r[2];
         var m = (dist ? L('District') : L('Constituency')) + ' · ' + (r[3] ? r[3] + ' · ' : '') + place(r[0]);
         items.push({ l: l, m: m, u: r[4], k: dist ? 1 : 2, h: norm(l + ' ' + r[2] + ' ' + r[3] + ' ' + place(r[0]) + ' ' + d.places[r[0]] + ' ' + (r[5] || '')) + ' ' + norm(r[2]).replace(/ /g, '') });

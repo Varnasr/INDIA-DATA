@@ -17,7 +17,19 @@
   <p class="sub">Items by the month of the order or report, in five groups.</p>
   <div class="grid"><div class="panel wide" id="pMonths"><div class="vizbox" id="vMonths"></div></div></div>
 
-  <div id="sections"></div>
+  <h2>Search and filter</h2>
+  <p class="sub">Type a word, a name or a number, or narrow the list by state, issue, court, party or body, and place. Every item below follows the choice, and the address keeps it, so a filtered list can be sent as a link.</p>
+  <div class="dfilter" id="dfilter">
+    <label class="dq"><span>Search</span><input id="dq" type="search" autocomplete="off" placeholder="Form 7, Musheerabad, High Court"></label>
+    <label><span>State</span><select id="fState"></select></label>
+    <label><span>Issue</span><select id="fIssue"></select></label>
+    <label><span>Court</span><select id="fCourt"></select></label>
+    <label><span>Party or body</span><select id="fActor"></select></label>
+    <label><span>Place</span><select id="fPlace"></select></label>
+    <button type="button" class="chip" id="fClear">Clear</button>
+  </div>
+  <p class="note dcount" id="dCount" aria-live="polite"></p>
+  <span id="secEnd" hidden></span>
 
   <h2>What we could not confirm</h2>
   <p class="sub">Reports a second reading could not match to their source. They are left off the page above.</p>
@@ -84,20 +96,63 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
         v: [0, 1, 2, 3, 4].map(function (g) { var t = Object.keys(D.by_month[m]).reduce(function (a, s) { return a + (GROUP[s] === g ? D.by_month[m][s] : 0); }, 0); return t || null; }) };
     }) });
 
-  document.getElementById('sections').outerHTML = D.sections.map(function (s) {
-    var start = k + 1;
-    var li = s.items.map(function (it) {
-      k++;
-      var where = it.place ? esc(it.place) : esc(it.state);
-      var src = '<a href="' + esc(it.url) + '" rel="noopener">' + esc(it.outlet) + '</a>, ' + SIR.date(it.date) + ', ' + where + (it.case ? ', ' + esc(it.case) : '') + '.' +
-        (it.kind === 'primary' ? ' <span class="tag primary">document</span>' : ' <span class="tag press">report</span>');
-      return '<li id="d-' + esc(it.id) + '"><p>' + esc(it.claim) + '</p>' +
-        (it.response ? '<p class="nresp">' + esc(it.response) + '</p>' : '') +
-        '<p class="nsrc">' + src + '</p>' +
-        (it.quote ? '<details><summary>The words of the source</summary><blockquote>' + esc(it.quote) + '</blockquote></details>' : '') + '</li>';
-    }).join('');
-    return '<h2 id="' + s.id + '">' + esc(s.title) + '</h2><p class="sub">' + INTRO[s.id] + '</p><ol class="nfacts" start="' + start + '">' + li + '</ol>';
-  }).join('');
+  // every item in one list, so the filters can run over all of them
+  var ALL = [];
+  D.sections.forEach(function (sec) { sec.items.forEach(function (it) { ALL.push({ sec: sec, it: it, h: (it.claim + ' ' + it.response + ' ' + it.quote + ' ' + it.outlet + ' ' + it.case + ' ' + it.state + ' ' + it.court + ' ' + it.places.join(' ') + ' ' + it.actors.join(' ') + ' ' + it.issues.join(' ')).toLowerCase() }); }); });
+  var F = { state: 'fState', issue: 'fIssue', court: 'fCourt', actor: 'fActor', place: 'fPlace' };
+  var valsOf = { state: function (it) { return it.states; }, issue: function (it) { return it.issues; }, court: function (it) { return it.court ? [it.court] : []; }, actor: function (it) { return it.actors; }, place: function (it) { return it.places; } };
+  var ANY = { state: 'Every state', issue: 'Every issue', court: 'Every court', actor: 'Every party or body', place: 'Every place' };
+  Object.keys(F).forEach(function (k) {
+    var c = {};
+    ALL.forEach(function (a) { valsOf[k](a.it).forEach(function (v) { c[v] = (c[v] || 0) + 1; }); });
+    var keys = Object.keys(c).sort(function (a, b) { return k === 'state' || k === 'place' || k === 'court' ? a.localeCompare(b) : c[b] - c[a] || a.localeCompare(b); });
+    document.getElementById(F[k]).innerHTML = '<option value="">' + ANY[k] + '</option>' + keys.map(function (v) { return '<option value="' + esc(v) + '">' + esc(v) + ' (' + c[v] + ')</option>'; }).join('');
+  });
+  var li = function (it) {
+    var where = it.place ? esc(it.place) : esc(it.state);
+    var src = '<a href="' + esc(it.url) + '" rel="noopener">' + esc(it.outlet) + '</a>, ' + SIR.date(it.date) + ', ' + where + (it.case ? ', ' + esc(it.case) : '') + '.' +
+      (it.kind === 'primary' ? ' <span class="tag primary">document</span>' : ' <span class="tag press">report</span>');
+    return '<li id="d-' + esc(it.id) + '"><p>' + esc(it.claim) + '</p>' +
+      (it.response ? '<p class="nresp">' + esc(it.response) + '</p>' : '') +
+      '<p class="nsrc">' + src + '</p>' +
+      (it.issues.length ? '<p class="dtags">' + it.issues.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</p>' : '') +
+      (it.quote ? '<details><summary>The words of the source</summary><blockquote>' + esc(it.quote) + '</blockquote></details>' : '') + '</li>';
+  };
+  // the sections go straight into the article, so they keep the reading column
+  var end = document.getElementById('secEnd');
+  function render() {
+    var q = document.getElementById('dq').value.trim().toLowerCase(), want = {};
+    Object.keys(F).forEach(function (k) { want[k] = document.getElementById(F[k]).value; });
+    var toks = q ? q.split(/\s+/) : [];
+    var keep = ALL.filter(function (a) {
+      return toks.every(function (t) { return a.h.indexOf(t) >= 0; }) && Object.keys(F).every(function (k) { return !want[k] || valsOf[k](a.it).indexOf(want[k]) >= 0; });
+    });
+    document.querySelectorAll('.dsec').forEach(function (x) { x.remove(); });
+    var k = 0, html = '';
+    D.sections.forEach(function (sec) {
+      var its = keep.filter(function (a) { return a.sec === sec; });
+      if (!its.length) return;
+      var start = k + 1; k += its.length;
+      html += '<h2 class="dsec" id="' + sec.id + '">' + esc(sec.title) + '</h2><p class="sub dsec">' + INTRO[sec.id] + '</p><ol class="nfacts dsec" start="' + start + '">' + its.map(function (a) { return li(a.it); }).join('') + '</ol>';
+    });
+    end.insertAdjacentHTML('beforebegin', html);
+    var on = toks.length || Object.keys(F).some(function (x) { return want[x]; });
+    document.getElementById('dCount').textContent = on ? (keep.length ? n(keep.length) + ' of ' + n(ALL.length) + ' items match.' : 'No item matches. Clear a filter or change the search.') : n(ALL.length) + ' items in all.';
+    // the address keeps the filters, so the list can be sent as a link
+    var u = new URLSearchParams(location.search);
+    Object.keys(F).forEach(function (x) { if (want[x]) u.set(x, want[x]); else u.delete(x); });
+    if (q) u.set('q', q); else u.delete('q');
+    var qs = u.toString();
+    history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+    SIR.anchors && SIR.anchors();
+  }
+  var init = new URLSearchParams(location.search);
+  Object.keys(F).forEach(function (x) { var v = init.get(x), sel = document.getElementById(F[x]); if (v && [].some.call(sel.options, function (o) { return o.value === v; })) sel.value = v; });
+  if (init.get('q')) document.getElementById('dq').value = init.get('q');
+  document.getElementById('dfilter').addEventListener('input', render);
+  document.getElementById('dfilter').addEventListener('change', render);
+  document.getElementById('fClear').addEventListener('click', function () { document.getElementById('dq').value = ''; Object.keys(F).forEach(function (x) { document.getElementById(F[x]).value = ''; }); render(); });
+  render();
   document.getElementById('unconfirmed').innerHTML = D.unconfirmed.length ? D.unconfirmed.map(function (u) {
     return '<li>' + esc(u.outlet || '') + (u.date ? ', ' + SIR.date(u.date) : '') + ', "' + esc(u.headline || '') + '". ' + esc(u.reason) + '</li>';
   }).join('') : '<li>Every report we found was matched to its source.</li>';
