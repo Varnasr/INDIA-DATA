@@ -1263,8 +1263,8 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   searches, leaving out any that are zero, with the date counting began and a
   line saying visits with Do Not Track are not counted.
 - **The places menu opens with "Start here"** (`quick` in `build_site.py`):
-  Find a constituency, Protests and disputes, Women, the cities and the SIR in
-  numbers. The All India tab row leads with the same pages.
+  Find a constituency, If your name was left off, Protests and disputes, RTI
+  replies, Women and the SIR in numbers. The All India tab row leads with the same pages.
 - **On a wide screen the header is one row**: theme and print show icons only
   (their labels stay for screen readers) and the Ctrl K hint is hidden, because
   seven labelled controls came to 917px and wrapped under the title, leaving
