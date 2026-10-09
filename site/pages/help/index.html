@@ -1,20 +1,20 @@
 <!--page {"title": "If your name was left off: SIR analysis for India", "description": "What an elector whose name was left off the roll in the revision can do, from Form 6 to the appeals, the helpline and free legal help, each step with the law or order it rests on, and organisations that have helped electors.", "place": "home"} -->
 <main id="main" class="help">
 <div class="page-head"><h1>If your name was left off</h1><ol class="summary" id="short"></ol></div>
-<p class="report-lang">This page is in English only for now, because the steps follow the wording of the law and the orders. Every step links to the document it rests on.</p>
+<p class="report-lang" id="hlang">This page is in English only for now, because the steps follow the wording of the law and the orders. Every step links to the document it rests on.</p>
 
-<article class="helpart" lang="en" dir="ltr" data-no-i18n>
-  <p class="lead">This page sets out what the law and the Election Commission's own orders give an elector whose name was left off the draft or the final roll, and where to get help. It is general information drawn from those documents, and it is not legal advice on any one case. The state's Chief Electoral Officer, the registration officer and the District Legal Services Authority can say how a step works in a particular state.</p>
+<article class="helpart" id="helpart" lang="en" dir="ltr" data-no-i18n>
+  <p class="lead" id="hlead"></p>
   <div class="kpis" id="kpis"></div>
 
   <div id="steps"></div>
 
-  <h2>Organisations that have helped electors</h2>
+  <h2 id="organisations-that-have-helped-electors"><span id="hOrgH">Organisations that have helped electors</span></h2>
   <p class="sub" id="orgSub"></p>
-  <div class="dfilter"><label><span>State</span><select id="orgState"></select></label></div>
+  <div class="dfilter"><label><span id="hStateL">State</span><select id="orgState"></select></label></div>
   <p class="note dcount" id="orgCount" aria-live="polite"></p>
   <span id="orgEnd" hidden></span>
-  <p class="note">Listing an organisation here is not an endorsement, and leaving one out says nothing about it. If you know of an organisation that helped electors, or a listing is out of date, write to the address at the foot of the page with a link that shows it.</p>
+  <p class="note" id="hEndorse"></p>
 
   <p class="note limits" id="shortNote" hidden></p>
 </article>
@@ -22,44 +22,58 @@
 <!--scripts-->
 <script src="../assets/sir.js"></script>
 <script>
+// The page reads in English, Hindi and Bengali. The translations live in
+// help.json (tr.hi, tr.bn), keyed by the English sentence, and build_help.py
+// fails if one is missing. Quotations from the sources stay in their own words.
 SIR.json('data/india/help.json').then(function (H) {
   var esc = SIR.esc, n = SIR.n, C = H.counts;
+  var lg = (L.lang === 'hi' || L.lang === 'bn') ? L.lang : 'en', TR = (H.tr || {})[lg] || {};
+  var t = function (s, v) { var o = TR[s] || s; if (v) Object.keys(v).forEach(function (k) { o = o.split('{' + k + '}').join(v[k]); }); return o; };
+  var art = document.getElementById('helpart');
+  if (lg !== 'en') {
+    art.setAttribute('lang', lg);
+    document.getElementById('hlang').textContent = t('This translation has not yet been checked by a native reader, and the English page governs. Every step links to the document it rests on, and the quotations from those documents are in their own words.');
+  }
+  document.getElementById('hlead').textContent = t("This page sets out what the law and the Election Commission's own orders give an elector whose name was left off the draft or the final roll, and where to get help. It is general information drawn from those documents, and it is not legal advice on any one case. The state's Chief Electoral Officer, the registration officer and the District Legal Services Authority can say how a step works in a particular state.");
+  document.getElementById('hEndorse').textContent = t('Listing an organisation here is not an endorsement, and leaving one out says nothing about it. If you know of an organisation that helped electors, or a listing is out of date, write to the address at the foot of the page with a link that shows it.');
+  document.getElementById('hOrgH').textContent = t('Organisations that have helped electors');
+  document.getElementById('hStateL').textContent = t('State');
   SIR.inShort([
-    'A name left off can be put back. Form 6 asks for it, during the revision and at any time after it, until ten days before the last date for nominations in an election.',
-    'In the revision, no name could be struck off the draft roll without an inquiry and a fair chance to be heard, followed by a written order with reasons.',
-    'A decision can be appealed twice, first to the District Magistrate and then to the State\'s Chief Electoral Officer.',
-    'The voter helpline is 1950, and the free legal aid helpline is 15100.',
-    n(C.orgs) + ' organisations in ' + n(C.states) + ' states are listed with the help they gave, each with a report that shows it.'
-  ], 'This page gives general information from the law and the Commission\'s orders. It is not legal advice on any one case, and the list of organisations is not complete.');
+    t('A name left off can be put back. Form 6 asks for it, during the revision and at any time after it, until ten days before the last date for nominations in an election.'),
+    t('In the revision, no name could be struck off the draft roll without an inquiry and a fair chance to be heard, followed by a written order with reasons.'),
+    t("A decision can be appealed twice, first to the District Magistrate and then to the state's Chief Electoral Officer."),
+    t('The voter helpline is 1950, and the free legal aid helpline is 15100.'),
+    t('{o} organisations in {s} states are listed with the help they gave, each with a report that shows it.', { o: n(C.orgs), s: n(C.states) })
+  ], t("This page gives general information from the law and the Commission's orders. It is not legal advice on any one case, and the list of organisations is not complete."));
 
-  document.getElementById('kpis').innerHTML = [['Form 6', 'to be added back'], ['2 appeals', 'District Magistrate, then the CEO'], ['1950', 'voter helpline'], ['15100', 'free legal aid helpline']]
-    .map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('');
+  document.getElementById('kpis').innerHTML = [['Form 6', t('to be added back')], [t('2 appeals'), t('District Magistrate, then the CEO')], ['1950', t('voter helpline')], ['15100', t('free legal aid helpline')]]
+    .map(function (x) { return '<div><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('');
 
   // each remedy straight into the article, so it keeps the reading column
   document.getElementById('steps').outerHTML = H.remedies.map(function (r) {
-    return '<h2 id="' + esc(r.id) + '">' + esc(r.title) + '</h2><p>' + esc(r.plain) + '</p>' +
-      (r.steps.length ? '<ol class="hsteps">' + r.steps.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol>' : '') +
-      '<details class="hsrc"><summary>Where this comes from</summary><ul>' + r.sources.map(function (s) {
-        return '<li><a href="' + esc(s.url) + '" rel="noopener">' + esc(s.doc) + '</a>' + (s.status === 'press' ? ' <span class="tag press">report</span>' : '') +
+    return '<h2 id="' + esc(r.id) + '">' + esc(t(r.title)) + '</h2><p>' + esc(t(r.plain)) + '</p>' +
+      (r.steps.length ? '<ol class="hsteps">' + r.steps.map(function (s) { return '<li>' + esc(t(s)) + '</li>'; }).join('') + '</ol>' : '') +
+      '<details class="hsrc"><summary>' + esc(t('Where this comes from')) + '</summary><ul lang="en">' + r.sources.map(function (s) {
+        return '<li><a href="' + esc(s.url) + '" rel="noopener">' + esc(s.doc) + '</a>' + (s.status === 'press' ? ' <span class="tag press">' + esc(t('report')) + '</span>' : '') +
           (s.quote ? '<blockquote>' + esc(s.quote) + '</blockquote>' : '') + '</li>';
       }).join('') + '</ul></details>';
   }).join('');
 
-  document.getElementById('orgSub').textContent = 'Groups that ran help desks, camps, helplines or legal help during the revision, ' + n(C.orgs) + ' of them in ' + C.states + ' states, each with the report that shows the help it gave and when it was last reported active. The list leaves out political parties and anything led by a party office-holder. It is incomplete, and nothing was found that could be checked for the other states.';
-  var sel = document.getElementById('orgState');
-  sel.innerHTML = '<option value="">Every state</option>' + H.org_states.concat(['India']).map(function (s) {
-    var k = H.orgs.filter(function (o) { return o.state === s; }).length; return '<option value="' + esc(s) + '">' + esc(s === 'India' ? 'Across India' : s) + ' (' + k + ')</option>'; }).join('');
+  document.getElementById('orgSub').textContent = t('Groups that ran help desks, camps, helplines or legal help during the revision, {o} of them in {s} states, each with the report that shows the help it gave and when it was last reported active. The list leaves out political parties and anything led by a party office-holder. It is incomplete, and nothing was found that could be checked for the other states.', { o: n(C.orgs), s: n(C.states) });
+  var sel = document.getElementById('orgState'), place = function (s) { return s === 'India' ? t('Across India') : t(s); };
+  sel.innerHTML = '<option value="">' + esc(t('Every state')) + '</option>' + H.org_states.concat(['India']).map(function (s) {
+    var k = H.orgs.filter(function (o) { return o.state === s; }).length; return '<option value="' + esc(s) + '">' + esc(place(s)) + ' (' + k + ')</option>'; }).join('');
   var end = document.getElementById('orgEnd');
   function draw() {
     var st = sel.value, rows = H.orgs.filter(function (o) { return !st || o.state === st; });
     document.querySelectorAll('.orgs').forEach(function (x) { x.remove(); });
     end.insertAdjacentHTML('beforebegin', '<ul class="orgs">' + rows.map(function (o) {
-      return '<li><p class="on"><b>' + esc(o.name) + '</b><span>' + esc(o.state === 'India' ? 'Across India' : o.state) + '</span></p><p>' + esc(o.what) + '</p>' +
-        '<p class="nsrc">' + (o.how_to_reach ? '<a href="' + esc(o.how_to_reach) + '" rel="noopener">Website</a> · ' : '') +
-        'Shown by <a href="' + esc(o.source_url) + '" rel="noopener">' + esc(o.source_outlet) + '</a>, ' + SIR.date(o.source_date) +
-        (o.active_as_of && o.active_as_of !== o.source_date ? '. Last reported active ' + SIR.date(o.active_as_of) : '') + '.</p></li>';
+      var since = o.active_as_of && o.active_as_of !== o.source_date ? ' ' + t('Last reported active {d}.', { d: SIR.date(o.active_as_of) }) : '';
+      return '<li><p class="on"><b lang="en">' + esc(o.name) + '</b><span>' + esc(place(o.state)) + '</span></p><p>' + esc(t(o.what)) + '</p>' +
+        '<p class="nsrc">' + (o.how_to_reach ? '<a href="' + esc(o.how_to_reach) + '" rel="noopener">' + esc(t('Website')) + '</a> · ' : '') +
+        esc(t('Shown by')) + ' <a href="' + esc(o.source_url) + '" rel="noopener">' + esc(o.source_outlet) + '</a>, ' + SIR.date(o.source_date) + '.' + esc(since) + '</p></li>';
     }).join('') + '</ul>');
-    document.getElementById('orgCount').textContent = st ? n(rows.length) + (rows.length === 1 ? ' organisation in ' : ' organisations in ') + (st === 'India' ? 'more than one state' : st) + '.' : n(rows.length) + ' organisations in all.';
+    document.getElementById('orgCount').textContent = st ? t(rows.length === 1 ? 'One organisation in {p}.' : '{k} organisations in {p}.', { k: n(rows.length), p: st === 'India' ? t('more than one state') : place(st) }) : t('{k} organisations in all.', { k: n(rows.length) });
   }
   sel.addEventListener('change', draw);
   draw();

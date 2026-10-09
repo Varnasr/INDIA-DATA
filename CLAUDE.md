@@ -893,8 +893,16 @@ with `--check`. The owner's rule for the list (October 2026): no political
 party and nothing led by a sitting party office-holder, only organisations a
 source shows actually helping, no private person named, and the page says the
 list is incomplete and no endorsement. Each left-out entry keeps `why_not`.
-The page is general information, says it is not legal advice, and is English
-only like the other legal pages.
+The page is general information and says it is not legal advice. It reads in
+English, Hindi and Bengali: `i18n_hi.json` and `i18n_bn.json` beside the
+research map every English sentence to its translation, each read a second
+time by a separate reader (`i18n_*_review.md`), and the build fails if a step,
+an organisation or a page sentence (`strings_en.json`) has no translation or a
+translation changes a placeholder or the helpline numbers. Quotations from the
+sources stay in their own words. The page says no native reader has checked
+the translation yet and the English governs. Other languages see English with
+the translated note. A new sentence on the page goes into `strings_en.json`
+and both dictionaries.
 
 **The NRC** (`india/nrc/`) explains the National Register of Citizens from
 primary documents only: what the Citizenship Act and the 2003 Rules provide,
