@@ -1029,4 +1029,4 @@ html.dyslexic-font .hub .n small{font-family:inherit;font-size:.8rem}
 
 /* which roll a state's figures come from, under the kicker */
 .asof{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-top:-.5rem;margin-bottom:1rem}
-html.dyslexic-font .asof,html:not([lang="en"]) .asof{font-family:inherit}
+html.dyslexic-font .asof,html:not([lang="en"]) :is(.asof,.kicker){font-family:inherit;letter-spacing:normal}
