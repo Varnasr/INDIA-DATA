@@ -1147,3 +1147,13 @@ body:not(.wide):not(.home) main :is(p,.sub,.note){max-width:min(100%,var(--measu
 .pull .pnote{font-size:.85rem;color:var(--muted)}
 @media (max-width:700px){.pull{padding:.9rem .9rem .5rem}.pull dl{grid-template-columns:1fr;gap:.1rem}.pull dd{margin-bottom:.4rem}.pull .sides{grid-template-columns:1fr}}
 html.dyslexic-font .pull .pq .tr{font-style:normal}
+
+/* the phone header's open row is a grid of equal tiles, four to a row, so
+   eight controls never run past the edge of a narrow screen (they did at
+   360px, where the menu button itself was cut off) */
+@media (max-width:700px){
+  header.top.open .controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.4rem;justify-items:stretch}
+  header.top.open .controls>*{min-width:0;width:100%}
+  header.top.open .controls>.btn,header.top.open .controls>button,header.top.open .controls>.dl>summary.btn,header.top.open .controls #lang,header.top.open .controls #dys-font-btn{width:100%!important;height:44px;justify-content:center;border:1px solid var(--line);border-radius:8px}
+  header.top.open .controls #lang{padding-inline:.5rem}
+}
