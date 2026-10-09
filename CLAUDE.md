@@ -878,6 +878,24 @@ live in the address (`?court=Supreme%20Court&q=form%207`), so a filtered list
 can be sent as a link, and the sitewide search carries every item and every
 court, party, place and issue as a link into the filtered page.
 
+**If your name was left off** (`help/`, on the front page's place, pinned on
+the front page, first under Start here and in every footer) sets out what the
+law and the Commission's orders let an elector do: Form 6, the inquiry before a
+deletion, the two appeals, the helpline and the drive after the revision, free
+legal aid, the Supreme Court's orders and going to court, each step with the
+document it rests on. Below them it lists organisations that helped electors,
+filterable by state. `data/india/raw/help_research/` holds `remedies.json`,
+`orgs.json` and `orgs2.json` and an independent second reading of all of them
+(`verified.json`); `scripts/build_help.py` writes `data/india/help.json`, fails
+on a remedy the reading has not confirmed, and lists only organisations marked
+`publish` that the reading confirmed or corrected; `check_data.py` runs it
+with `--check`. The owner's rule for the list (October 2026): no political
+party and nothing led by a sitting party office-holder, only organisations a
+source shows actually helping, no private person named, and the page says the
+list is incomplete and no endorsement. Each left-out entry keeps `why_not`.
+The page is general information, says it is not legal advice, and is English
+only like the other legal pages.
+
 **The NRC** (`india/nrc/`) explains the National Register of Citizens from
 primary documents only: what the Citizenship Act and the 2003 Rules provide,
 Assam's NRC and its figures, the National Population Register, every answer

@@ -133,7 +133,7 @@ def shell(out, meta, content, scripts):
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="quick"><span class="qh">Start here</span><div class="ql" data-i18n-each>%s</div></div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('india/constituencies/', 'Find a constituency'), ('india/disputes/', 'Protests and disputes'), ('india/women/', 'Women'),
+        (('india/constituencies/', 'Find a constituency'), ('help/', 'If your name was left off'), ('india/disputes/', 'Protests and disputes'), ('india/women/', 'Women'),
          ('india/cities/', 'The cities'), ('india/numbers/', 'The SIR in numbers')))
     items.insert(0, quick)
     current = place['label'] if place['id'] != 'home' else 'Places'
@@ -181,8 +181,8 @@ def shell(out, meta, content, scripts):
     # data-i18n-each: the credit and the link are translated apart, so the
     # key does not change with the page's depth.
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s">About this site</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sterms/">Terms and privacy</a>'
-              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, CFG['email'], CFG['email']))
+              ' · <a href="%s">About this site</a> · <a href="%shelp/">If your name was left off</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sterms/">Terms and privacy</a>'
+              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, root, CFG['email'], CFG['email']))
     # every page that loads sir.js gets viz.js after it: SIR.chart and the
     # dashboards hand ranked lists and side-by-side measures to it
     if 'assets/sir.js' in scripts and 'assets/viz.js' not in scripts:
@@ -268,6 +268,8 @@ def search_index():
     for p in CFG['places']:
         for h, label, _ in p['pages']:
             pages.append([p['id'], label, h])
+    # the front page's own pages, which no tab row lists
+    pages += [['home', 'If your name was left off', 'help/'], ['home', 'All downloads, explained', 'downloads/'], ['home', 'Terms and privacy', 'terms/']]
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),

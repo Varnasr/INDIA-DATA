@@ -1,0 +1,215 @@
+{
+ "meta": {
+  "checked": "2026-10-09",
+  "by": "independent second reading",
+  "method": "Every source URL fetched with curl and the text extracted (pypdf for PDFs, tags stripped for HTML, JSON-LD articleBody where the page renders by script). Quotes compared after removing all non-alphanumeric characters, so broken words, page headers and footnote markers in PDF text layers do not count as differences; '...' joins checked segment by segment. Context around every quote read for what the source supports.",
+  "unreachable": [
+   "https://www.ceo.kerala.gov.in/ceokerala/pdf/SIR/sir-12-states.pdf (connection reset; read from the project's stored copy data/india/raw/nrc_research/sources/eci_sir_orders_ceokerala.pdf, scanned pages read by eye)",
+   "https://ceo.karnataka.gov.in/uploads/PRESS%20NOTE%2024th%20Aug.pdf (connection reset; not re-read)"
+  ],
+  "files": [
+   "remedies.json",
+   "orgs.json (20 entries with publish true)",
+   "orgs2.json (8 entries)"
+  ]
+ },
+ "remedies": {
+  "form6": {
+   "status": "corrected",
+   "note": "All quotes matched in the fetched text except two. The Kerala guideline 4(c) quote matched by eye in the stored copy (The CEO Kerala URL reset the connection from the sandbox on 2026-10-09 (www and bare host, HTTP/1.1 and 2). Read instead from the project's stored copy of the same file, data/india/raw/nrc_research/sources/eci_sir_orders_ceokerala.pdf, whose 24.06.2025 pages are scans with no text layer; read by eye at printed pages 5 to 6 (order paras 13 to 15) and 10 to 11 (guidelines 4, 5, 6).) The CEO Karnataka note (24.08.2026) reset the connection again and could not be re-read here; it supports only the ECINet and Form 6A/7/8 details, which the Form 6 PDF on voters.eci.gov.in and rule 8B also support. The plain text is accurate: PN/120 decision iii and para 2, the 01.10.2026 letter para 3, s.23(3) of the 1950 Act (no inclusion after the last date for nominations and before the completion of that election) and the PIB note all say what is claimed. Step 5 was narrower than the sources: Form 8 also covers shifting from another state (guideline 5(e) and order para 15 pair Form 8 with the declaration for shifts from outside the state). Step 5 corrected.",
+   "steps": [
+    "Get Form 6 from your booth level officer (BLO), the registration officer's office, voters.eci.gov.in or the ECINet app.",
+    "During the revision, attach the declaration that goes with Form 6 for the revision.",
+    "Hand it to the BLO or the registration officer, or file it online, and keep the reference number.",
+    "Apply well before an election is called. No name can be added after the last date for nominations until that election is over.",
+    "Use Form 8 if you moved house, within the state or from another state, or if your entry has a mistake. Use Form 6A if you live abroad on an Indian passport."
+   ]
+  },
+  "form7": {
+   "status": "corrected",
+   "note": "Quotes confirmed. Rules 19(1)(b)(ii), 20(2), 21A proviso, s.22 proviso, Form 7 title and judgment para 141 matched in the fetched text; the order para 14 and guideline 5(b) quotes matched by eye in the stored copy (The CEO Kerala URL reset the connection from the sandbox on 2026-10-09 (www and bare host, HTTP/1.1 and 2). Read instead from the project's stored copy of the same file, data/india/raw/nrc_research/sources/eci_sir_orders_ceokerala.pdf, whose 24.06.2025 pages are scans with no text layer; read by eye at printed pages 5 to 6 (order paras 13 to 15) and 10 to 11 (guidelines 4, 5, 6).) One overstatement. The plain text said a hearing is required before a name is struck off 'for being dead'. Section 22's proviso and the proviso to rule 21A both cover only the grounds of having ceased to be ordinarily resident or being otherwise not entitled; deletion of a dead person on the officer's own motion carries no individual hearing under either. A Form 7 objection on any ground does bring a notice in Form 14 and a hearing under rules 19 and 20, and in the SIR para 14 barred any deletion from the draft without an inquiry. The 'speaking order' in guideline 5(b) is for cases where the officer doubts eligibility; judgment para 141 speaks of a reasoned determination at the claims and objections stage generally, so that sentence stands.",
+   "plain": "Form 7 is the form for objecting to a name on the roll, or to a name proposed to be added. When someone objects to your name, the registration officer has to send you a notice and hear you before deciding. Before striking off a name on the ground that the person has moved away or is not entitled to be on the roll, the officer has to give that person a reasonable chance to be heard. In the revision no entry could be deleted from the draft without an inquiry and a fair chance to be heard, followed by a written order with reasons. If you get a notice, go to the hearing or send the documents asked for, and ask for the order in writing."
+  },
+  "appeal": {
+   "status": "corrected",
+   "note": "Quotes confirmed: s.24 (footnote markers aside), CEO Goa, PIB, judgment para 138 and rule 27(1)(a)-(b) in the fetched text; order para 14 by eye in the stored copy (The CEO Kerala URL reset the connection from the sandbox on 2026-10-09 (www and bare host, HTTP/1.1 and 2). Read instead from the project's stored copy of the same file, data/india/raw/nrc_research/sources/eci_sir_orders_ceokerala.pdf, whose 24.06.2025 pages are scans with no text layer; read by eye at printed pages 5 to 6 (order paras 13 to 15) and 10 to 11 (guidelines 4, 5, 6).) The plain text said 'Chief Electoral Officers' notes on final rolls give 15 days', in the plural, but only CEO Goa's note is cited and read. Corrected to name it. The 15-day limit for the first appeal therefore rests on one CEO's note, as the gaps list already says; step 2 now ties the 15 days to the decision date.",
+   "plain": "If the registration officer's decision goes against you, you can appeal to the District Magistrate under section 24 of the Representation of the People Act, 1950. If the District Magistrate's order also goes against you, a second appeal lies to the state's Chief Electoral Officer. The Commission's revision order kept both appeals and gave 30 days from the District Magistrate's order for the second. The Chief Electoral Officer of Goa, in the note on its final roll, gave 15 days from the registration officer's decision for the first.",
+   "steps": [
+    "Get a copy of the registration officer's order.",
+    "Write a short appeal to the District Magistrate, signed by you, with the order attached, within 15 days of the registration officer's decision.",
+    "If it is turned down, appeal to the Chief Electoral Officer within 30 days of the District Magistrate's order.",
+    "Keep copies and receipts of everything you hand in."
+   ]
+  },
+  "supreme_court": {
+   "status": "confirmed",
+   "note": "All eight quotes matched in the fetched orders and judgment (para 186(h) runs across pages 123 and 124). The 14.08.2025 order also directs display at Panchayat Bhavans and Block Development Officers' offices; the 08.09.2025 order says Aadhaar is not proof of citizenship; the 19.01.2026 order covers the logical discrepancy category, authorised representatives and an additional 10 days; the 10.03.2026 order provides for Appellate Tribunals of former Chief Justices and Judges; the 13.04.2026 order holds that a pending appeal gives no right to vote. 'Upheld the revision' fairly states para 186(b) to (e)."
+  },
+  "helpline_drive": {
+   "status": "corrected",
+   "note": "All quotes matched (PIB 29.10.2025, PN/120, letter of 01.10.2026). The PIB release also names the Voter Helpline Number 1950. One overstatement: the letter says Booth Level Camps 'shall be organised' but special camps for night shelters, labour colonies and the homeless 'may also be organised'. PN/120 says DEOs will hold help desks or special camps 'as per requirement'. The plain text's last sentence made the special camps mandatory. Corrected.",
+   "plain": "You can call the voter helpline on 1950, or the national toll-free number 1800-11-1950 from 8 am to 8 pm, and every complaint is logged on the National Grievance Service Portal. The ECINet app has a Book-a-Call with BLO feature, and complaints can also be emailed to complaints@eci.gov.in. After the revision, the Commission ordered BLOs to compare the roll from before the revision with the present one, visit those missing, and help anyone still eligible fill in Form 6. The lists are to be shared with the parties' booth agents, and booth level camps are to be held. Special camps may also be held for people in night shelters and labour colonies and for the homeless."
+  },
+  "legal_aid": {
+   "status": "confirmed",
+   "note": "NALSA quotes matched on nalsa.gov.in/legal-aid/ and the home page (15100). The section 12 list on that page includes women and children, SC/ST members, disabled persons, industrial workmen, victims of mass disaster and others, and persons under a state-set income ceiling; the plain text's list is a fair subset. Section 2(c) covers proceedings before 'any court or other authority or tribunal', which supports applying it to a claim, hearing or appeal. Judgment para 10.12 (spanning pages 13 and 14) and para 100 matched. The Verdictum item is press only and is correctly marked so; it is not used in plain or steps."
+  },
+  "writ": {
+   "status": "corrected",
+   "note": "Quotes confirmed (para 175, para 186(h), and the office report reproducing the 11.11.2025 order in W.P.(C) 1074/2025). The last sentence is not supported. The judgment of 27 May 2026 (2026 INSC 564) lists in its cause title W.P.(C) 640 of 2025 with W.P.(C) 634, 644, 645, 646, 637, 636, 638, 630, 631, 642, 686, 700, 701, 708, 676, 674, 719 and 855 of 2025, all Bihar petitions, and 'these writ petitions' are what para 186(i) disposes of. W.P.(C) 1074 of 2025, in which the request to the High Courts was made, and W.P.(C) 737 of 2025 are not in that list, and the West Bengal matter (diary 64235/2025) carried on with orders to April 2026. Nothing read shows the request withdrawn or the remaining validity cases decided. The source note saying 'the matters were disposed of by the judgment' is corrected for the same reason. The sentence 'That request covered cases on whether the revision was valid' also repeated the one before it. Article 226 is not quoted from a primary text, as gaps says; the statement is ordinary constitutional law and is left in.",
+   "plain": "An elector can ask the High Court, under Article 226 of the Constitution, to review a decision on the roll. The Supreme Court's judgment of 27 May 2026 says the Commission's enquiry into eligibility remains open to judicial review, and that people in Bihar wrongly deleted as absent, dead, shifted or duplicate may challenge the decision that way. On 11 November 2025, while it was hearing the challenges to the revision, the Supreme Court asked the High Courts to hold back cases on whether the revision was valid. That request did not cover an elector's own case about his or her own entry. The judgment of 27 May 2026 decided the petitions about Bihar, and the petition in which the request was made is not among the cases it lists.",
+   "sources": [
+    {
+     "doc": "Supreme Court judgment, ADR v. ECI, 2026 INSC 564, para 175",
+     "url": "https://api.sci.gov.in/supremecourt/2025/35785/35785_2025_1_1501_71617_Judgement_27-May-2026.pdf",
+     "quote": "Importantly, the entirety of this exercise remains amenable to judicial review, thereby ensuring that the enquiry is conducted in accordance with law and within the bounds of procedural fairness.",
+     "date": "2026-05-27",
+     "status": "primary",
+     "checked": "URL loaded 2026-10-09 (HTTP 200); quote matched in the text of the same document downloaded earlier in this project"
+    },
+    {
+     "doc": "Supreme Court judgment, ADR v. ECI, 2026 INSC 564, para 186(h)",
+     "url": "https://api.sci.gov.in/supremecourt/2025/35785/35785_2025_1_1501_71617_Judgement_27-May-2026.pdf",
+     "quote": "may assail the decision of the Commission by way of judicial review.",
+     "date": "2026-05-27",
+     "status": "primary",
+     "checked": "URL loaded 2026-10-09 (HTTP 200); quote matched in the text of the same document downloaded earlier in this project"
+    },
+    {
+     "doc": "Supreme Court order of 11.11.2025 in W.P.(C) No. 1074/2025, as reproduced in the Supreme Court registry office report for 26.11.2025",
+     "url": "https://api.sci.gov.in/officereport/2025/36293/36293_2025_2025-11-26.pdf",
+     "quote": "Since this Court is seized of the matter pertaining to validity of Special Intensive Revision (SIR) of Electoral Rolls in various States, including Bihar, West Bengal, Tamil Nadu, Pondicherry etc., we request the jurisdictional High Courts to keep in abeyance/defer the writ proceedings, if any, filed in those High Courts touching the validity of the SIR of electoral rolls in their respective States.",
+     "date": "2025-11-11",
+     "status": "primary",
+     "note": "The order PDF itself was not found; the quote is from the registry office report, which reproduces it from W.P.(C) No. 1074 of 2025. The judgment of 27.05.2026 disposed of W.P.(C) No. 640 of 2025 and the eighteen Bihar petitions listed in its cause title; W.P.(C) Nos. 737 and 1074 of 2025 are not among them.",
+     "checked": "URL loaded and quote matched in the document text, 2026-10-09"
+    }
+   ]
+  }
+ },
+ "orgs": {
+  "wb-united-medicos": {
+   "status": "corrected",
+   "note": "Quote found verbatim (Maktoob opinion piece, 28 Apr 2026, matches active_as_of). The quoted sentence names the Sabar Institute, so it is trimmed to a verbatim fragment. The helpline and legal aid camps are described in the piece as 'part of the Sabar Institute's initiative', with United Medicos collaborating; what the source attributes to the joint team is drafting appeals and uploading them through the official portal, and handling offline submissions. 'what' reworded to that, without naming the partner. The piece also names advocates and other individuals; none is carried. Single source written from the partner's side, as notes say.",
+   "quote": "United Medicos have mobilised a dedicated team on the ground.",
+   "what": "Worked with a partner organisation on a team that drafted appeals for electors removed from the roll and filed them online, or on paper for those who could not use the portal."
+  },
+  "wb-abmyf": {
+   "status": "corrected",
+   "note": "Quote found verbatim (Awaz The Voice, 10 Nov 2025). The 500 camps a day is the general secretary's statement in both reports (Dynamite News says 'over 500 camps daily'), so 'what' now says it is the organisation's own count. No party office is shown for the organisation or its general secretary. The same Awaz report says Jamiat Ulema-e-Hind's Bengal unit is led by a state minister of the TMC; that organisation is rightly not listed.",
+   "what": "Held camps in Muslim-majority areas during enumeration to explain the forms and documents, about 500 a day by its own count."
+  },
+  "wb-nakhoda-masjid": {
+   "status": "corrected",
+   "note": "Quote found verbatim in Awaz The Voice (10 Nov 2025); the full sentence ends with an attribution to the mosque's imam, as notes say. The second source, Dynamite News, does not mention Nakhoda Masjid at all (checked), so it does not support this entry and confidence should be single. second_url cleared.",
+   "second_url": ""
+  },
+  "wb-varta-trust": {
+   "status": "confirmed",
+   "note": "Quote found verbatim (BehanBox, 14 Apr 2026). The team was set up and the organisation reports people did reach out, if not many, so help was offered and used on a small scale. The managing trustee is named in the source but not in the entry. Not a party."
+  },
+  "wb-dinajpur-notun-alo": {
+   "status": "corrected",
+   "note": "Quote found verbatim (BehanBox, 14 Apr 2026), spoken by the organisation's founder; it names nobody. The source shows the founder describing exclusions in her community and saying the organisation had been focused on the SIR and supporting its community. It does not show support given to those placed under adjudication or removed. 'what' reduced to what the source says. Weak entry, as notes say; the help is to its own community and had slowed.",
+   "what": "A community organisation of trans people in Uttar Dinajpur that said it had been focused on the SIR and on supporting its community through it, though that work had slowed by April 2026."
+  },
+  "wb-amra-padatik": {
+   "status": "corrected",
+   "note": "The page HTML carries the article body only in its JSON-LD; the quote is verbatim there (PTI via Deccan Herald, 10 Dec 2025). The source calls Amra Padatik 'the NGO', with an office-bearer watching the turnout at the Chetla camp and saying 'We have requested the Election Commission to find alternatives' for women without documents. It does not describe Amra Padatik as an NGO of sex workers, and does not say what help it gave at the camp. 'what' reduced. Weak on help delivered.",
+   "what": "An NGO present at an SIR assistance camp for sex workers in Chetla, Kolkata, held with election officials, which asked the Election Commission to accept other documents from women who lack the usual ones."
+  },
+  "wb-shdsa": {
+   "status": "corrected",
+   "note": "Quote verbatim in the article body (JSON-LD). The source has the society 'working for the sex workers alongside two other NGOs', having urged the CEO's office for a month to reach these communities, and hoping the Commission would again accept documents of the Usha Multipurpose Cooperative Society. The camps were held by election officials. 'what' kept close to that. Its representative is named in the source and not in the entry.",
+   "what": "Worked for sex workers in Kolkata alongside two other NGOs during the revision. It had urged the Chief Electoral Officer's office to reach these women, welcomed the assistance camps held in red-light areas, and asked the Commission to accept documents issued by their cooperative society."
+  },
+  "mh-cjp": {
+   "status": "confirmed",
+   "note": "Quote verbatim (CJP, 12 May 2026). The page lists sessions on 21 March, 16 April and 30 April in Mumbai with community groups and says the trainings covered notices, documents, legacy rolls, hearings and appeals. Not a party. how_to_reach is CJP's own site."
+  },
+  "mh-vfd": {
+   "status": "confirmed",
+   "note": "Quote verbatim on the CJP page; the second URL is the training manual, whose cover says it was prepared by CJP and VFD. VFD's own site (how_to_reach) describes it as a Maharashtra citizens' platform; its founders listed there hold no party office as far as the page shows."
+  },
+  "as-cjp": {
+   "status": "confirmed",
+   "note": "Quote verbatim in the manual's text layer, printed page 35. The same section describes the memorandum with a list of 26 electors and the intervention with ration dealers, as 'what' says. The figure is the organisation's own claim. The manual's Assam section also prints a table of named electors; nothing from it is carried."
+  },
+  "in-cjp": {
+   "status": "corrected",
+   "note": "Quote verbatim (CJP, 20 Mar 2026; the guide itself is a PDF embed). The manual at second_url is dated April 2026 (file name 260406). active_as_of was 2026-05-12, the date of the Maharashtra page, which this entry does not cite; corrected to the latest cited source.",
+   "active_as_of": "2026-04-06"
+  },
+  "rj-pucl": {
+   "status": "confirmed",
+   "note": "Quote verbatim (PUCL, 25 Nov 2025). The Rajasthan section, by PUCL office-bearers, describes camps held with BLOs in Jaipur and an informal network of groups on SIR in Rajasthan with a team of 10 to respond to problems. PUCL is a civil liberties organisation and a litigant, as flagged. how_to_reach is PUCL's own site."
+  },
+  "cg-ssmbm": {
+   "status": "confirmed",
+   "note": "Quote verbatim. The same section says the CEO ordered all forms of the concerned BLO and supervisor to be redone after the forum showed wrongly filled forms, and issued an order on photographs. Account written by PUCL Chhattisgarh, which convened the forum."
+  },
+  "up-sauhard-manch": {
+   "status": "corrected",
+   "note": "Quote verbatim (manual, printed page 52). The passage says the Manch 'appealed to deploy our associates at all polling stations' and that the appeal 'had a positive impact'; the help desks are in the passive voice, with forms filled 'through ward councillors and public representatives'. 'what' had the Manch placing members and setting up the desks itself. Reduced to what the passage says. The state doubt in notes stands (the passage sits under the Bihar chapter but names Bahadurganj, Ghazipur, in Uttar Pradesh).",
+   "what": "Asked for its members to be placed at every polling station in Bahadurganj Nagar Panchayat (Ghazipur) to help the public and the BLOs, and reports that help desks were set up where people were helped to fill their forms, through ward councillors and other local representatives."
+  },
+  "ka-mvmr": {
+   "status": "confirmed",
+   "note": "Quote verbatim (BehanBox, 17 Aug 2026, a volunteer's first-person account; the volunteer is the byline and is not carried). The help desks in Bengaluru are confirmed by the account and by The News Minute (9 Apr 2026), which also reports the campaign's complaints to the CEO. Both describe it as a coalition or campaign of civil society groups; neither shows it led by a party office-holder. The doubt in notes about the launch meeting stands."
+  },
+  "ka-sym": {
+   "status": "confirmed",
+   "note": "Quote verbatim fragment (The News Minute, 9 Apr 2026); the full sentence names the unit president, a private person, not carried. WhatsApp group and workshops confirmed. The 6,000 is the organisation's own claim."
+  },
+  "dl-vam": {
+   "status": "confirmed",
+   "note": "Quote verbatim (The Wire, 1 Sep 2026, written by the collective). The piece describes its helpline and representations to the ECI and CEO Delhi of 26 July and 18 August; Maktoob (9 Sep 2026, second_url) reports its helplines and physical helpdesks across working-class localities, which supports active_as_of."
+  },
+  "tg-archdiocese": {
+   "status": "confirmed",
+   "note": "Quote verbatim (Deccan Chronicle, 21 Jul 2026). The article names the three among the organisations running help desks, with about 50 trained coordinators, and quotes a Telangana Council of Churches representative saying the desks were providing assistance. Individuals quoted are not carried."
+  },
+  "tg-aipm": {
+   "status": "confirmed",
+   "note": "Quote verbatim (Deccan Chronicle, 21 Jul 2026). The article names the three among the organisations running help desks, with about 50 trained coordinators, and quotes a Telangana Council of Churches representative saying the desks were providing assistance. Individuals quoted are not carried."
+  },
+  "tg-tcc": {
+   "status": "confirmed",
+   "note": "Quote verbatim (Deccan Chronicle, 21 Jul 2026). The article names the three among the organisations running help desks, with about 50 trained coordinators, and quotes a Telangana Council of Churches representative saying the desks were providing assistance. Individuals quoted are not carried."
+  },
+  "tn-tntj-tiruchy": {
+   "status": "confirmed",
+   "note": "Quote verbatim (The New Indian Express, 24 Nov 2025). Madurai training of office-bearers across 36 units also confirmed. The draft-roll checking is stated as a plan only and is not in 'what'. Party camps in the same report (MMK, MJK, IUML) correctly excluded."
+  },
+  "tn-jih-coimbatore": {
+   "status": "confirmed",
+   "note": "Quote verbatim, including 'is conducts'. Party office-holder: the source quotes only 'M. Abdul Hakkim, district secretary', in context the organisation's district secretary, and gives him and the unit no party role. Nothing in the source shows the unit led by a sitting party office-holder. The Welfare Party link in notes is not in this source."
+  },
+  "kl-vallakkadavu-mosque": {
+   "status": "confirmed",
+   "note": "Quote verbatim (The New Indian Express, 19 Nov 2025). The report says the mosque 'was the first to take the initiative' and quotes its secretary on hundreds of users and on filling forms after finding names in the 2002 list, which supports 'what'. The secretary is not named in the entry."
+  },
+  "kl-mosque-committees": {
+   "status": "confirmed",
+   "note": "Quote verbatim, with the source's spacing. Same report; no figures for these four."
+  },
+  "kl-edappally-mahallu": {
+   "status": "corrected",
+   "note": "Quote verbatim fragment (The Hindu, 4 Mar 2026); the full sentence names a committee member. The source says 'one of the earliest during the SIR', with no mention of Kochi, so 'in Kochi' is removed and the claim marked as the committee's own. The diocese's representative cites the Mahallu committees' help desks in general as the model, which 'what' states correctly.",
+   "what": "Ran an SIR help desk during the revision, one of the earliest by the committee's own account. The Cochin Diocese later cited the Mahallu committees' help desks as the model for its own drive."
+  },
+  "kl-cochin-diocese": {
+   "status": "corrected",
+   "note": "Quote verbatim (The Hindu, 4 Mar 2026). Help delivered: the door-to-door visits had begun the previous Sunday in one parish of 875 families, and church leaders said at least 3,000 people had been identified. The help desks are future tense ('the diocese will also set up help desks'), so they are dropped from 'what', and so is Form 6 help, which belongs to the desks. The 40,750 families are the diocese's whole membership that the drive is meant to cover. The people quoted hold church and youth-movement roles, no party office. how_to_reach is the diocese's own site (loaded; no SIR page checked).",
+   "what": "After the SIR, began a door-to-door drive by trained youth volunteers to find people left off the roll or never enrolled among the diocese's 40,750 families in four Assembly constituencies, starting in one parish. Church leaders said at least 3,000 such people had been identified."
+  },
+  "ga-cag-parish-councils": {
+   "status": "confirmed",
+   "note": "Quote verbatim (The Wire, 17 Dec 2025), given by a CAG office-bearer; the 35-40 houses line also verbatim. The draft-roll watch is stated as the PPC's intention and 'what' words it as such. No party role shown for the association or the speaker."
+  },
+  "tg-masjid-e-teenposh": {
+   "status": "confirmed",
+   "note": "Quote verbatim (Telangana Today, 13 Jul 2026). Volunteers uploading SIR applications free, against Rs 100 to 200 charged elsewhere, confirmed. Volunteers and the khateeb are named in the source and not in the entry."
+  }
+ }
+}

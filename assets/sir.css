@@ -962,3 +962,24 @@ html.dyslexic-font .places .menu .quick .qh{text-transform:none}
 .tour-on{outline:3px solid var(--red)!important;outline-offset:3px;border-radius:6px}
 @media (max-width:600px){.tour{inset-inline:.75rem;bottom:.75rem;max-width:none}}
 @media print{.tour,.htip{display:none}}
+
+/* help/: the steps, their sources, and the organisations */
+.helpart .hsteps,.helpart .hsrc,.helpart .orgs,.helpart .dfilter{max-width:var(--measure);margin-inline:auto}
+.helpart .hsteps{padding-inline-start:1.4rem;margin-block:.4rem 1rem}
+.helpart .hsteps li{margin:.3rem 0}
+.helpart .hsrc{margin-block:0 1.6rem}
+.helpart .hsrc>summary{cursor:pointer;font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.helpart .hsrc ul{padding-inline-start:1.1rem;font-size:.88rem}
+.helpart .hsrc blockquote{margin:.3rem 0 .7rem;padding-inline-start:.7rem;border-inline-start:2px solid var(--line);color:var(--muted)}
+.helpart .orgs{list-style:none;padding:0;display:grid;gap:.7rem;margin-block:.5rem 1.2rem}
+.helpart .orgs li{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:.8rem 1rem}
+.helpart .orgs p{margin:.2rem 0}
+.helpart .orgs .on{display:flex;flex-wrap:wrap;gap:.2rem .6rem;align-items:baseline}
+.helpart .orgs .on b{font-family:var(--serif);font-size:1.05rem}
+.helpart .orgs .on span{color:var(--muted);font-size:.85rem}
+.helpart .nsrc{font-size:.85rem;color:var(--muted)}
+.helpart .tag{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;border:1px solid var(--line);color:var(--muted);padding:0 .3rem;border-radius:4px}
+html.dyslexic-font .helpart :is(.hsrc>summary,.tag){text-transform:none}
+.who{max-width:var(--measure);margin:0 auto 1.2rem;padding:0;list-style:none;display:grid;gap:.55rem}
+.who li{padding-inline-start:.9rem;border-inline-start:3px solid var(--red)}
+.who b{display:block}
