@@ -1311,7 +1311,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   Places lists places only: All India's pages and every state and territory,
   both opened side by side on a wide screen. The All India tab row leads with
   the same pages.
-- **Further reading and viewing** (`india/reading/`, English only) lists
+- **Further Reading and Viewing** (`india/reading/`, English only) lists
   investigations, data analyses, research, court reporting, the Commission's
   own account and videos. `data/india/raw/reads_research/` holds `reads.json`
   (each item opened by one researcher) and `verified.json` (a second reader
@@ -1342,6 +1342,23 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 
   Search (`search_index()` in `build_site.py`) covers every tab page, every
   page in a place's `menu`, and every piece on the reading page.
+- **The SIR in brief** (`india/brief/`, English only, "In Brief" in the All
+  India menu and first under Start here) gathers what the site holds for
+  anyone who wants to speak or protest, from the published JSON, and adds
+  "Your rights at a protest". Those points are in
+  `data/india/raw/brief_research/`: `rights.json` and `verified.json` (the
+  first round, 27 points) and `rights2.json` and `verified2.json` (the
+  second, 10 points drawn from a checked legal note for protesters: written
+  grounds of arrest, silence and its limit under BNSS s.180(2), detention
+  under s.172, minimal force, the s.215 complaint bar, BNS ss.221, 195 and
+  132, children under JJ Act s.10, and complaints under ss.173(4) and 175).
+  Each point quotes the act or judgment and was read twice;
+  `scripts/build_brief.py` keeps only confirmed or corrected points, applies
+  the corrections and orders them by `GROUPS`. Two things the second round
+  settled: s.221 BNS is obstructing a public servant (disobeying an order is
+  s.223), and s.173(4) names the Superintendent of Police, not Delhi's DCP,
+  so do not add an officer the text does not name. The section is general
+  information and says it is not legal advice.
 - **On a wide screen the header is one row**: theme and print show icons only
   (their labels stay for screen readers) and the Ctrl K hint is hidden, because
   seven labelled controls came to 917px and wrapped under the title, leaving
