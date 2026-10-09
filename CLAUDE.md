@@ -1200,11 +1200,13 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   state with an analysis of its own (no `data-st`) is featured, so the large
   card always carries a figure; Tripura, with no draft, once took it. A
   finder that links to each state's own, and "How we know". The cards come
-  in two grids: "Across India" (`.hubs.pins`), eight pinned cards (`hub pin`,
-  a red border and a pin icon drawn by CSS) in rows of four on a wide screen,
-  above a rule: Removed from the Roll? What to Do, Protests and disputes, RTI
-  replies, Every constituency, All India, Women, the cities and the SIR in
-  numbers. Then "Every State and Union Territory" (`.hubs.states`).
+  in two grids: "Across India" (`.hubs.pins`), nine pinned cards (`hub pin`,
+  a red border and a pin icon drawn by CSS) in rows of three on a wide screen,
+  above a rule: Removed from the Roll? What to Do, Your Rights at a Protest
+  (the rights section of the brief page), Protests and Disputes, RTI Replies,
+  Every Constituency, All India, Women, The Cities and The SIR in Numbers.
+  Card titles and every menu, tab and footer label are in title case;
+  headings and prose keep sentence case. Then "Every State and Union Territory" (`.hubs.states`).
   The map and the ranked list beside it end at the same line: the list
   scrolls inside the map's height. Nothing on it may claim a feature
   the site does not have. With the dyslexia font on, the display sizes come
