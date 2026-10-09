@@ -1,4 +1,4 @@
-<!--page {"title": "RTI replies, All India", "description": "Applications under the Right to Information Act about the Special Intensive Revision whose reply, refusal or appeal was published or reported: what was asked, what the Commission or the Chief Electoral Officer answered, and how long it took.", "place": "india"} -->
+<!--page {"title": "RTI replies, All India", "description": "Applications under the Right to Information Act about the Special Intensive Revision whose reply, refusal or appeal was published or reported, with what was asked, what the Commission or the Chief Electoral Officer answered, and how long it took.", "place": "india"} -->
 <main id="main">
 <div class="page-head" data-no-i18n><h1>RTI replies</h1><ol class="summary" id="short"></ol></div>
 <p class="report-lang">This page is in English only. Every item quotes the report it comes from and links to it.</p>
@@ -40,7 +40,7 @@
 SIR.json('data/india/rti.json').then(function (D) {
   var n = SIR.n, esc = SIR.esc, C = D.counts, O = D.by_outcome;
   var NAME = {
-    'no record held': 'Said it held no record', 'refused': 'Refused', 'transferred': 'Passed to another office',
+    'no record held': 'Said it held no record', 'not supplied': 'Sent something other than what was asked', 'refused': 'Refused', 'transferred': 'Passed to another office',
     'partly supplied': 'Answered in part', 'supplied': 'Answered', 'appeal': 'Decided on appeal or in court',
     'no reply in time': 'No reply within 30 days', 'pending': 'Still waiting for a reply'
   };
@@ -49,7 +49,8 @@ SIR.json('data/india/rti.json').then(function (D) {
   SIR.inShort([
     n(C.items) + ' applications about the revision whose reply, refusal or appeal was reported between ' + SIR.date(C.first) + ' and ' + SIR.date(C.last) + '.',
     none ? 'In ' + n(none) + ' of them the authority said it held no record of what was asked.' : '',
-    sent || ref ? (sent ? n(sent) + ' were passed to another office' : '') + (sent && ref ? ' and ' : '') + (ref ? n(ref) + ' refused' : '') + '.' : '',
+    O['not supplied'] ? 'In ' + n(O['not supplied']) + ' it sent something other than what was asked, such as a link to a different document.' : '',
+    sent || ref ? (sent ? n(sent) + ' were passed to another office' : '') + (sent && ref ? ' and ' : '') + (ref ? n(ref) + (ref === 1 ? ' was' : ' were') + ' refused' : '') + '.' : '',
     'In ' + n(full) + ' of the ' + n(C.items) + ' the authority supplied what was asked in full.',
     dated.length ? n(late.length) + ' of the ' + n(dated.length) + ' replies with both dates reported came after the 30 days the Act allows.' : ''
   ], 'These are the applications that were reported. No authority publishes how many were filed. Each item is what the outlet reported about the reply. Nothing here says what anyone intended.');

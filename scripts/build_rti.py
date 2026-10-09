@@ -31,7 +31,7 @@ RES = os.path.join(ROOT, 'data', 'india', 'raw', 'rti_research')
 OUT = os.path.join(ROOT, 'data', 'india')
 
 # what became of each application, in the order the page shows them
-OUTCOMES = ['no record held', 'refused', 'transferred', 'partly supplied', 'supplied', 'appeal', 'no reply in time', 'pending']
+OUTCOMES = ['no record held', 'not supplied', 'refused', 'transferred', 'partly supplied', 'supplied', 'appeal', 'no reply in time', 'pending']
 KEEP = ('id', 'state', 'authority', 'filed', 'replied', 'applicant', 'asked', 'outcome', 'answer', 'quote', 'section',
         'kind', 'outlet', 'headline', 'url', 'published', 'doc_url', 'also')
 
