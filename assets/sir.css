@@ -913,3 +913,9 @@ table.actab .neg{color:var(--red);font-weight:600}
 .dls .dlall .btn{display:inline-block}
 .dls table code{font-family:var(--mono);font-size:.82rem;overflow-wrap:anywhere}
 html.dyslexic-font .dls .tag{text-transform:none}
+
+/* -------------------------------------------- the protests and disputes page */
+.disp .nfacts .nresp{margin:.2rem 0;padding-left:.7rem;border-left:2px solid var(--line);color:var(--muted);font-size:.92rem}
+.disp .tag{font-family:var(--mono);font-weight:600;font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);color:var(--muted);background:transparent;vertical-align:1px}
+.disp .tag.primary{color:var(--navy);border-color:currentColor}
+html.dyslexic-font .disp .tag{text-transform:none}
