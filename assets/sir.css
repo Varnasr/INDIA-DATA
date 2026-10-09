@@ -1000,3 +1000,15 @@ html.dyslexic-font .places .menu details.grp .sub .rg{text-transform:none}
 .shareform .send{font:inherit;font-weight:700;padding:.65rem 1.4rem;border-radius:8px;background:var(--ink);color:var(--bg);border:0;cursor:pointer}
 .shareform .send:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .share .hp{display:none}
+/* the constituency finder on a phone: out of the header row, floating at the
+   foot of the screen with its label; the tour box sits above it */
+.fab{display:none}
+@media (max-width:700px){
+  .controls .seats{display:none!important}
+  .fab{display:inline-flex;align-items:center;gap:.45rem;position:fixed;z-index:55;inset-inline-end:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));padding:.7rem 1.05rem;border-radius:999px;background:var(--ink);color:var(--bg);font-size:.9rem;font-weight:600;line-height:1;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .fab .icon{width:20px;height:20px;flex:none}
+  .fab:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+  footer{padding-bottom:4.5rem}
+  .tour{bottom:calc(4.75rem + env(safe-area-inset-bottom,0px))}
+}
+@media print{.fab{display:none!important}}

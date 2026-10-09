@@ -166,7 +166,7 @@ def shell(out, meta, content, scripts):
     # the constituency finder, in every header: a seat is what most readers
     # come looking for
     seats = ('<a class="btn seats" href="%sindia/constituencies/#find-a-constituency"%s>%s <span class="lbl">Constituencies</span></a>'
-             % (root, ' aria-current="page"' if here == 'india/constituencies/' else '', svg(ICONS['i19'])))
+             % (root, ' aria-current="page"' if here == 'india/constituencies/' else '', svg(ICONS['i23'])))
     # Print belongs on an analysis, where it prints the charts; the front page
     # is an introduction and carries no print button.
     prn = ('' if place['id'] == 'home' else
@@ -193,9 +193,14 @@ def shell(out, meta, content, scripts):
         nav = '<nav class="nav-tabs" aria-label="%s">%s</nav>\n' % (place['nav_label'], ''.join(tabs))
     # data-i18n-each: the credit and the link are translated apart, so the
     # key does not change with the page's depth.
+    # on a phone the constituency finder leaves the crowded header row and
+    # floats at the bottom of the screen, with its label, on every page but its own
+    fab = '' if here == 'india/constituencies/' else (
+        '<a class="fab" href="%sindia/constituencies/#find-a-constituency">%s<span>Find your constituency</span></a>' % (root, svg(ICONS['i23'])))
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
               ' · <a href="%s">About this site</a> · <a href="%shelp/">If your name was left off</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sshare/">Share a list with us</a> · <a href="%sterms/">Terms and privacy</a>'
               ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, root, root, CFG['email'], CFG['email']))
+    footer += ('\n' + fab) if fab else ''
     # every page that loads sir.js gets viz.js after it: SIR.chart and the
     # dashboards hand ranked lists and side-by-side measures to it
     if 'assets/sir.js' in scripts and 'assets/viz.js' not in scripts:

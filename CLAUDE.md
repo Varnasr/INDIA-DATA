@@ -1231,6 +1231,12 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   the hero runs it again. On a phone the tour opens the header's menu row for
   the steps that sit in it. A control added to the header gets a line in
   `TIPS`, and a step in `STEPS` if a new reader needs it.
+- **The constituency finder floats on a phone.** On a wide screen it is the
+  Constituencies button in the header (icon `i23`, a map pin with a
+  magnifier). At 700px and below it leaves the header row, which was too
+  crowded, and every page but the constituencies page carries `a.fab` at the
+  foot of the screen, labelled "Find your constituency". The tour points at
+  whichever is showing and its box sits above the button on a phone.
 - **The places menu opens with "Start here"** (`quick` in `build_site.py`):
   Find a constituency, Protests and disputes, Women, the cities and the SIR in
   numbers. The All India tab row leads with the same pages.
