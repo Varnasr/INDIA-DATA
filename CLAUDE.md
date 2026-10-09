@@ -1236,7 +1236,10 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   magnifier). At 700px and below it leaves the header row, which was too
   crowded, and every page but the constituencies page carries `a.fab` at the
   foot of the screen, labelled "Find your constituency". The tour points at
-  whichever is showing and its box sits above the button on a phone.
+  whichever is showing and its box sits above the button on a phone. On a page
+  with its own "Find your constituency" button (the front page's hero) the
+  floating one stays hidden until the reader has scrolled past that button,
+  so the two never sit on top of each other.
 - **The places menu opens with "Start here"** (`quick` in `build_site.py`):
   Find a constituency, Protests and disputes, Women, the cities and the SIR in
   numbers. The All India tab row leads with the same pages.
