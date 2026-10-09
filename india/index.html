@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="../assets/i18n.js"></script>
 <title>All India</title>
-<meta name="description" content="The reasons recorded for the names removed from the electoral rolls in the Special Intensive Revision, in every state and union territory that has published a draft roll: dead, shifted or absent, and enrolled twice.">
+<meta name="description" content="The reasons recorded for the names removed from the electoral rolls in the Special Intensive Revision, in every state and union territory that has published a draft roll, under the reasons dead, shifted or absent, and enrolled twice.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="manifest" href="../manifest.webmanifest">
 <meta name="theme-color" content="#1f4e79">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="All India">
-<meta property="og:description" content="The reasons recorded for the names removed from the electoral rolls in the Special Intensive Revision, in every state and union territory that has published a draft roll: dead, shifted or absent, and enrolled twice.">
+<meta property="og:description" content="The reasons recorded for the names removed from the electoral rolls in the Special Intensive Revision, in every state and union territory that has published a draft roll, under the reasons dead, shifted or absent, and enrolled twice.">
 <meta property="og:url" content="https://offtheroll.in/india/">
 <meta property="og:image" content="https://offtheroll.in/assets/og/india.png">
 <meta property="og:image:width" content="1200">
@@ -82,7 +82,7 @@
   <p class="finding" id="fPhase"></p>
 
   <h2 id="the-reasons-state-by-state">The reasons, state by state</h2>
-  <p class="sub">Each state's removals split by the reason entered, as a share of the removals it has split. The three reasons are the ones every state reports: dead, shifted, absent or other, and enrolled more than once. States are ordered by the share entered as shifted, absent or other.</p>
+  <p class="sub">Each state's removals split by the reason entered, as a share of the removals it has split. Every state reports the same three reasons. They are dead, shifted, absent or other, and enrolled more than once. States are ordered by the share entered as shifted, absent or other.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="vizbox" id="cMix"></div>
@@ -163,7 +163,7 @@ SIR.json('data/india/states.json').then(function (d) {
       L('Before the revision, the rolls already held {pre} of adults in the {n} states with population projections. Only {k} of those states had more names on the roll than adults.', { pre: SIR.pct(100 * A.roll_total / A.adults_total), n: A.states, k: A.over_100.length }),
       L('The revision still took off {total} names in {s} states, {r} of every 100 electors, and the draft rolls now hold {post} of adults.', { total: cr(T.removed), s: T.states, r: SIR.d(T.per_100, 1), post: SIR.pct(100 * A.draft_total / A.adults_total) }) + ' ' + (Math.abs(A.rho_rate) < 0.2 ? L('States whose rolls were most over-full did not cut more.') : A.rho_rate > 0 ? L('States whose rolls were most over-full did cut more.') : L('States whose rolls were most over-full cut less.')),
       L('Of the names removed with a reason given, only {dead} were entered as dead. The rest were entered as shifted, absent or other, or as enrolled more than once.', { dead: SIR.pct(T.shares.dead) }),
-      L('The same rules gave very different results. {hi} removed {hir} of every 100 electors and {lo} {lor}. Among the big states, the share entered as shifted, absent or other runs from {smin} in {sminn} to {smax} in {smaxn}.', { hi: rated[0].state, hir: SIR.d(rated[0].per_100, 1), lo: rated[rated.length - 1].state, lor: SIR.d(rated[rated.length - 1].per_100, 1), smin: SIR.pct(bigS[0].shares.shifted_absent_other), sminn: bigS[0].state, smax: SIR.pct(bigS[bigS.length - 1].shares.shifted_absent_other), smaxn: bigS[bigS.length - 1].state }),
+      L('The same rules applied in every state. {hi} removed {hir} of every 100 electors and {lo} {lor}. Among the big states, the share entered as shifted, absent or other runs from {smin} in {sminn} to {smax} in {smaxn}.', { hi: rated[0].state, hir: SIR.d(rated[0].per_100, 1), lo: rated[rated.length - 1].state, lor: SIR.d(rated[rated.length - 1].per_100, 1), smin: SIR.pct(bigS[0].shares.shifted_absent_other), sminn: bigS[0].state, smax: SIR.pct(bigS[bigS.length - 1].shares.shifted_absent_other), smaxn: bigS[bigS.length - 1].state }),
       L('Women were more likely to be removed. In {over} of the {n} states that report by sex, women are a bigger share of the names removed than of the roll.', { over: wOver, n: GG.length }),
       L('Little has come back. In the {n} states with a final roll, the rolls grew back by at most {m} of what was cut, and that rise includes new voters.', { n: F.states, m: SIR.pct(F.made_up_pct) })
     ];

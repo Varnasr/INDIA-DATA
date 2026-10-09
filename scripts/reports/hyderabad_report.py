@@ -67,7 +67,7 @@ R.toc()
 
 # ============================================================ PART I
 R.h1('Part I: The five constituencies')
-R.h2('At a glance')
+R.h2('In short')
 R.stats([(indian(t['deleted']), 'electors struck off'), (pct(t['rate']), 'of the pre-revision rolls'),
          ('%d of %d' % (len(overM), len(A)), 'seats where the names struck off exceed the 2023 margin'), (indian(t['hearing']), 'kept but summoned to a hearing')])
 R.p('The Special Intensive Revision, a fresh check of every name on the electoral roll, reached Hyderabad in 2026. The pre-revision rolls of five Old City constituencies, the rolls as they stood before the revision began, held %s electors. '
@@ -198,7 +198,7 @@ R.p('On the state\'s draft-roll figures, the five Old City seats lost %s of thei
     % (pct(TG['old_city']['rate']), pct(TG['other_hyderabad']['rate']), pct(seats[-1]['rate']), pct(seats[0]['rate']), sum(1 for x in seats if not x['old_city'] and x['rate'] > ocmax),
        pct(TG['hyderabad']['rate']), pct(TG['rest_of_state']['rate'])))
 
-R.h2('Key insights')
+R.h2('Main findings')
 R.bullets([
     '%s electors were struck off, %s of the five pre-revision rolls, and %s more were summoned to a hearing.' % (indian(t['deleted']), pct(t['rate']), indian(t['hearing'])),
     'More names were struck off than the 2023 margin in all %d constituencies, and more than all the valid votes cast in %s.' % (len(A), andj([a['name'] for a in overV])),

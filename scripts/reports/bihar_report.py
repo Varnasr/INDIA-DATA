@@ -92,7 +92,7 @@ R.toc()
 
 # ============================================================ PART I
 R.h1('Part I: Bihar as a whole')
-R.h2('At a glance')
+R.h2('In short')
 R.stats([(indian(t['total']), 'names removed, both phases'), (pct(100 * t['total'] / polled), 'of all votes polled in 2025'),
          ('%d of %d' % (len(over), len(withM)), 'seats where removals exceed the margin'), (pct(fem), 'of the removed are women')])
 R.p('The Special Intensive Revision, a fresh check of every name on the electoral roll, removed %s names from Bihar\'s roll in 2025. '
@@ -369,7 +369,7 @@ R.p('Seats the NDA won in 2020 lost %.2f names per 100 electors, and seats INDIA
     'The lists do establish the scale of the removals against the margins, set out above.'
     % (L['2020']['NDA']['per_100'], L['2020']['INDIA']['per_100'], W['pooled_nda_minus_india']))
 
-R.h2('Key insights')
+R.h2('Main findings')
 R.bullets([
     '%s names were removed, %s per 100 electors on the final roll, across %s booths.' % (indian(t['total']), '%.2f' % per100, indian(t['booths'])),
     'The names removed equal %s of the votes polled in the November 2025 election, one for every %.1f votes cast.' % (pct(100 * t['total'] / polled), polled / t['total']),
