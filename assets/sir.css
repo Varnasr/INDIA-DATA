@@ -1023,3 +1023,6 @@ footer{padding-bottom:4rem}
 /* the front page's usage figures */
 .tally{max-width:var(--measure);margin:1.5rem auto 0}
 .tally .kpis{margin:.6rem 0}
+/* a card's count, and that count as a share of the roll beneath it */
+.hub .n small{display:block;font-family:var(--mono);font-size:.72rem;font-weight:400;letter-spacing:.02em;color:var(--muted);margin-top:.3rem}
+html.dyslexic-font .hub .n small{font-family:inherit;font-size:.8rem}

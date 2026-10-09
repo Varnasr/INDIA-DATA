@@ -1154,7 +1154,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   The front page follows the mockup: the headline states the count, a grid
   of 100 dots shows the share, a four-number strip (the count left off stays first; the other three come in turn from a list of ten computed from the All India files, three a day by `SIR.day()`), the map beside a ranked
   list of states (so a phone does not depend on hover), cards to each
-  analysis led by their number, every state and territory among them (the 20 on
+  analysis led by a count of names with its share of the roll beneath it (each pair from one source; Kerala, which published no count of names left off, shows the fall in the roll and says so; the pinned cards keep their own figure), every state and territory among them (the 20 on
   the shared page take their figure from `states.json`), one featured in the
   large card and the rest in an order shuffled afresh each day from a seed of
   `SIR.day()`, so every visitor sees the same order on the same day (West

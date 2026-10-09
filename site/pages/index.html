@@ -198,28 +198,40 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.js
   document.getElementById('hTn').innerHTML = L('{n} names left off the draft roll in {acs} constituencies, {p} of every 100 electors, set against the 2026 election result.', { n: SIR.lakh(r[3].removed), acs: r[3].acs, p: SIR.d(r[3].per_100, 1) });
   document.getElementById('hKa').innerHTML = L('{n} names left off the draft roll in {d} districts, {p} of every 100 electors, and {b} in Bengaluru alone.', { n: SIR.lakh(r[4].removed), d: r[4].districts, p: SIR.d(r[4].per_100, 1), b: SIR.lakh(r[4].bengaluru.removed) });
   document.getElementById('hWb').innerHTML = L('{n} names left off the draft roll and {a} held back for adjudication, and in {k} of {acs} constituencies the roll fell by more than the 2026 margin.', { n: SIR.lakh(r[5].pn05.removed), a: SIR.lakh(r[5].pn05.adjudication), k: r[5].over_margin, acs: r[5].acs });
-  document.getElementById('hKl').innerHTML = L('The draft roll was {f} smaller than in January 2025, {p} of every 100 electors, and women were {w} of the fall.', { f: SIR.lakh(r[6].fall_draft), p: SIR.d(r[6].draft_per_100, 1), w: SIR.pct(r[6].women_fall_pct) });
-  // every card leads with its number
-  var N = { 'india/': cr(T.removed), 'bihar/': SIR.lakh(B.total), 'hyderabad/': SIR.pct(100 * H.deleted / H.electors), 'tamilnadu/': SIR.lakh(r[3].removed),
-    'karnataka/': SIR.lakh(r[4].removed), 'westbengal/': r[5].over_margin + ' / ' + r[5].acs, 'kerala/': SIR.pct(r[6].women_fall_pct), 'rajasthan/': SIR.lakh(r[7].left_off),
-    'uttarpradesh/': SIR.lakh(r[8].left_off), 'delhi/': SIR.lakh(r[9].left_off), 'maharashtra/': SIR.lakh(r[10].left_off), 'gujarat/': SIR.lakh(r[11].removed), 'uttarakhand/': SIR.lakh(r[12].left_off) };
-  // the states on the shared page take their figures from the All India table
+  document.getElementById('hKl').innerHTML = L('Kerala published no count of the names left off. The draft roll was {f} smaller than in January 2025, and women were {w} of that fall.', { f: SIR.lakh(r[6].fall_draft), w: SIR.pct(r[6].women_fall_pct) });
+  // every card leads with a count of names, and beneath it that count as a
+  // share of the roll it came off. Each pair comes from one source, so the
+  // two always describe the same thing. Kerala published no count of names
+  // left off, so its card carries the fall in the roll and says so.
   var byState = {}; r[0].states.forEach(function (x) { byState[x.state] = x; });
+  var cnt = function (v) { return v >= 1e5 ? SIR.lakh(v) : SIR.n(v); };
+  var N = {}, from = function (href, st) { var x = byState[st]; if (x && x.removed) N[href] = [cnt(x.removed), x.per_100]; };
+  N['india/'] = [cr(T.removed), T.per_100];
+  N['bihar/'] = [SIR.lakh(B.total), 100 * B.total / B.electorate_2025];
+  N['hyderabad/'] = [SIR.lakh(H.deleted), 100 * H.deleted / H.electors];
+  N['kerala/'] = [SIR.lakh(r[6].fall_draft), r[6].draft_per_100];
+  [['tamilnadu/', 'Tamil Nadu'], ['karnataka/', 'Karnataka'], ['westbengal/', 'West Bengal'], ['rajasthan/', 'Rajasthan'], ['uttarpradesh/', 'Uttar Pradesh'],
+    ['delhi/', 'Delhi'], ['maharashtra/', 'Maharashtra'], ['gujarat/', 'Gujarat'], ['uttarakhand/', 'Uttarakhand']].forEach(function (p) { from(p[0], p[1]); });
+  // the states on the shared page take their figures from the All India table
   document.querySelectorAll('.hubs a.hub[data-st]').forEach(function (a) {
     var x = byState[a.getAttribute('data-st')];
     if (!x || !x.removed) return;
-    var n = x.removed >= 1e5 ? SIR.lakh(x.removed) : SIR.n(x.removed);
-    N[a.getAttribute('href')] = n;
+    from(a.getAttribute('href'), a.getAttribute('data-st'));
+    var n = cnt(x.removed);
     a.querySelector('span').innerHTML = L('{n} names left off the draft roll, {p} of every 100 electors on the roll before the revision.', { n: n, p: SIR.d(x.per_100, 1) });
   });
-  N['india/cities/'] = SIR.d(r[13].summary.times_max, 1) + '×';
-  N['india/women/'] = r[16].summary.over + ' / ' + r[16].summary.states;
+  // the pinned cards lead with their own number, which is not a share of a roll
+  N['india/cities/'] = [SIR.d(r[13].summary.times_max, 1) + '×'];
+  N['india/women/'] = [r[16].summary.over + ' / ' + r[16].summary.states];
+  N['india/disputes/'] = [SIR.n(r[14].counts.items)];
+  N['india/constituencies/'] = [SIR.n(r[15].rows.length)];
   document.getElementById('hWomen').innerHTML = L('Women were the larger share of the names left off in {o} of {n} states with a count by sex, and in {d} of {dn} districts.', { o: r[16].summary.over, n: r[16].summary.states, d: r[16].summary.district_over, dn: r[16].summary.district_n });
-  N['india/disputes/'] = SIR.n(r[14].counts.items);
   document.getElementById('hDisp').innerHTML = L('{n} court orders, resolutions, protests and reports from {s} states and union territories, each with its source and the Commission\'s reply where one was reported.', { n: SIR.n(r[14].counts.items), s: r[14].counts.states });
-  N['india/constituencies/'] = SIR.n(r[15].rows.length);
   document.getElementById('hAcs').innerHTML = L('{n} constituencies in {p} places, each with its count in its own state\'s measure and a link to its page.', { n: SIR.n(r[15].rows.length), p: r[15].places.length });
   document.getElementById('hCities').innerHTML = L('In {a} of {n} large cities the city lost a larger share of its roll than its state, up to {x} times the state\'s rate.', { a: r[13].summary.above_state, n: r[13].summary.compared, x: SIR.d(r[13].summary.times_max, 1) });
-  document.querySelectorAll('.hubs a.hub').forEach(function (a) { var k = a.getAttribute('href'); if (N[k]) a.insertAdjacentHTML('afterbegin', '<em class="n">' + N[k] + '</em>'); });
+  document.querySelectorAll('.hubs a.hub').forEach(function (a) {
+    var v = N[a.getAttribute('href')]; if (!v) return;
+    a.insertAdjacentHTML('afterbegin', '<em class="n">' + v[0] + (v[1] != null ? '<small>' + L('{p} of the roll', { p: SIR.pct(v[1]) }) + '</small>' : '') + '</em>');
+  });
 }).catch(SIR.fail);
 </script>
