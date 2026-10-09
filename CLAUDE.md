@@ -1240,6 +1240,16 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   until the reader scrolls. Renaming a heading changes its address; keep an
   old one alive with an explicit `id=` on the new heading. Dashboard tabs keep
   their own hashes, and the report pages their `s0`... ids.
+- **Every state page says which roll its figures come from**, in a line
+  under the kicker (`p.asof`, written by `asof()` in `build_site.py`): the
+  final roll's date when `states.json` holds its electors, otherwise the
+  draft's date and the final roll's due date from the last schedule step in
+  `process.json` (a due date before `process.json`'s `as_of` reads "was due
+  on ... and we have not found it published"). `ASOF_LATER` holds a roll
+  published between draft and final that a state's pages use (Karnataka, 25
+  September), `ASOF_EXTRA` Assam's final roll. The sentence is in the markup
+  in English and `sir.js` swaps in its `L()` translation. Update
+  `states.json`, `process.json` or those two maps and the line follows.
 - **Header tooltips and the tour** (the end of `sir.js`). Each header
   control shows one plain line on hover or keyboard focus (never on touch);
   Escape hides it. The front page offers a seven-step tour once per browser

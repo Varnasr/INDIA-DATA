@@ -17,6 +17,7 @@ header either.
 scripts/stamp.py runs after this and adds ?v= to every reference, so the
 pages here are written without stamps and the check ignores them.
 """
+import glob
 import html
 import json
 import os
@@ -89,6 +90,70 @@ def heading_ids(content):
         taken.add(key)
         return '<%s%s id="%s">%s</%s>' % (tag, attrs, key, inner, tag)
     return re.sub(r'<(h[23])(\s[^>]*)?>(.*?)</\1>', one, content, flags=re.S)
+
+
+# Which roll a state's figures come from, and when the next one is due, for
+# the line under the kicker on every page of that state. The roll is read
+# from data/india/states.json (a final roll only when its electors are held),
+# the next date from the latest schedule step in data/india/process.json, and
+# "today" is process.json's as_of, the day the schedules were last checked,
+# so the build stays the same from one run to the next. The English sentence
+# is in the markup, and sir.js swaps in its translation through L().
+ASOF_LATER = {'Karnataka': '2026-09-25'}   # a roll published after the draft and before the final
+ASOF_EXTRA = {'Assam': '2026-02-10'}       # the Special Revision's final roll; Assam is not in states.json
+
+
+def asof(place):
+    if place['id'] in ('home', 'india'):
+        return None
+    name = 'Telangana' if place['id'] == 'hyd' else re.sub(r' 20\d\d$', '', place['label'])
+    S = {r['state']: r for r in json.load(open(os.path.join(ROOT, 'data', 'india', 'states.json'), encoding='utf-8'))['states']}
+    P = json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))
+    today = P['as_of']
+    if name in ASOF_EXTRA:
+        return {'k': 'final', 'd': ASOF_EXTRA[name], 'c': today}
+    r = S.get(name)
+    if r is None:
+        raise SystemExit('FAIL - no row in states.json for %s, so its pages cannot say which roll they use' % name)
+    if r.get('electors_final') and r.get('final_date'):
+        return {'k': 'final', 'd': r['final_date'], 'c': today}
+    sched = next((x for x in P['schedules'] if x['state'] == name), None)
+    due = sched['steps'][-1].get('final') if sched else None
+    if not r.get('draft_date'):
+        slug = place.get('slug')
+        summ = None
+        for d in glob.glob(os.path.join(ROOT, 'data', '*', 'summary.json')):
+            j = json.load(open(d, encoding='utf-8'))
+            if isinstance(j, dict) and j.get('state') == name:
+                summ = j
+        n = (summ or {}).get('dates', {}).get('draft') or (sched['steps'][-1].get('draft') if sched else None)
+        return {'k': 'nodraft', 'n': n, 'c': today}
+    d, k = r['draft_date'], 'draft'
+    if name in ASOF_LATER:
+        d, k = ASOF_LATER[name], 'latest'
+    if not due:
+        return {'k': k, 'd': d, 'c': today}
+    return {'k': k + ('-past' if due < today else '-due'), 'd': d, 'n': due, 'c': today}
+
+
+ASOF_EN = {
+    'final': 'Figures as of {d}, when the final roll was published.',
+    'draft-due': 'Figures as of {d}, when the draft roll was published. The final roll is due on {n}.',
+    'draft-past': 'Figures as of {d}, when the draft roll was published. The final roll was due on {n}, and we have not found it published.',
+    'latest-due': 'Figures as of {d}, a roll published while claims and notices were being heard. The final roll is due on {n}.',
+    'nodraft': 'No draft roll has been published yet. It is due on {n}.',
+}
+
+
+def asof_html(a):
+    if not a:
+        return ''
+    fmt = lambda iso: '%d %s %s' % (int(iso[8:]), 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split()[int(iso[5:7]) - 1], iso[:4]) if iso else ''
+    if a['k'] not in ASOF_EN:
+        raise SystemExit('FAIL - no sentence for the roll stage %r' % a['k'])
+    text = ASOF_EN[a['k']].format(d=fmt(a.get('d')), n=fmt(a.get('n')))
+    attrs = ''.join(' data-%s="%s"' % (x, a[x]) for x in ('k', 'd', 'n') if a.get(x))
+    return '<p class="asof" data-no-i18n%s>%s</p>' % (attrs, html.escape(text))
 
 
 def shell(out, meta, content, scripts):
@@ -211,7 +276,7 @@ def shell(out, meta, content, scripts):
     if 'assets/sir.js' in scripts and 'assets/viz.js' not in scripts:
         scripts = re.sub(r'(<script src="[^"]*assets/sir\.js"></script>)', lambda m: m.group(1) + '\n' + m.group(1).replace('sir.js', 'viz.js'), scripts, count=1)
     if place['id'] != 'home':
-        content = re.sub(r'(<div class="page-head"[^>]*>)', lambda m: m.group(1) + '<p class="kicker">%s</p>' % html.escape(place['label']), content, count=1)
+        content = re.sub(r'(<div class="page-head"[^>]*>)', lambda m: m.group(1) + '<p class="kicker">%s</p>' % html.escape(place['label']) + asof_html(asof(place)), content, count=1)
     head_extra = ('\n' + meta['head']) if meta.get('head') else ''
     # link previews: a shared page shows its title, description and its
     # place's card (assets/og, written by scripts/og_cards.mjs). Previews
