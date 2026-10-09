@@ -94,7 +94,7 @@
         '<details class="figs"><summary>Every ' + lv[0] + ', in figures</summary><div class="twrap fit"><table id="tT' + i + '"></table></div></details>');
     });
     if (s.notices) h.push('<h2 id="notices">Notices</h2><p>' + s.notices + ' The counts for every state are on <a href="../india/process/#notices-the-no-mapping-list-and-the-discrepancy-list">How the revision was run</a>.</p>');
-    h.push('<p class="note">' + SIR.esc(d.state) + '\'s dates are drawn beside every other state\'s on <a href="../india/process/#s-' + hyph(d.state) + '">How the revision was run</a>. Every figure on this page is in the CSV in the Downloads menu, and the <a href="method/">method page</a> lists each source.</p>');
+    h.push('<p class="note">' + SIR.esc(d.state) + '\'s dates are drawn beside every other state\'s on <a href="../india/process/#s-' + hyph(d.state) + '">How the revision was run</a>. Every figure on this page is in the CSV on the Downloads page, and the <a href="method/">method page</a> lists each source.</p>');
     box.innerHTML = h.join('');
 
     if (steps.length) {

@@ -244,9 +244,13 @@
   // A long string as lines of at most n characters, broken at spaces.
   SIR.wrap = function (s, n) {
     if (typeof s !== 'string' || s.length <= n) return s;
-    var out = [], cur = '';
-    s.split(' ').forEach(function (w) {
-      if (cur && (cur + ' ' + w).length > n) { out.push(cur); cur = w; } else cur = cur ? cur + ' ' + w : w;
+    // a long hyphenated name (Manendragarh-Chirmiri-Bharatpur) may break
+    // after a hyphen, which keeps it inside a phone's label column
+    var out = [], cur = '', words = [];
+    s.split(' ').forEach(function (w) { if (w.length > n && w.indexOf('-') > 0) words = words.concat(w.split(/(?<=-)/)); else words.push(w); });
+    words.forEach(function (w) {
+      var sep = !cur || /-$/.test(cur) ? '' : ' ';
+      if (cur && (cur + sep + w).length > n) { out.push(cur); cur = w; } else cur = cur + sep + w;
     });
     if (cur) out.push(cur);
     return out;
@@ -420,10 +424,13 @@
         return '<tr' + (opts.onRow ? ' class="link"' : '') + '>' + cols.map(function (c, i) {
           var v = c.fmt ? c.fmt(r[c.k], r) : SIR.esc(r[c.k]);
           if (i === 0 && opts.onRow) v = '<button type="button" class="open" data-id="' + SIR.esc(r[opts.id || c.k]) + '">' + v + '</button>';
-          return '<td class="' + (c.left ? 'l' : '') + '">' + v + '</td>';
+          return '<td class="' + (c.left ? 'l' : '') + '" data-label="' + SIR.esc(String(c.label).replace(/<[^>]+>/g, '')) + '">' + v + '</td>';
         }).join('') + '</tr>';
       }).join('') + '</tbody>';
       el.innerHTML = h;
+      // on a phone each row becomes a card with every figure named, and the
+      // header stays as a row of sort buttons (sir.css)
+      el.classList.add('stack', 'sortable');
       el.querySelectorAll('th button').forEach(function (b) {
         b.addEventListener('click', function () { var k = b.getAttribute('data-k'); dir = k === key ? -dir : -1; key = k; render(); });
       });
@@ -864,7 +871,7 @@
   function hide() { if (tip) tip.hidden = true; if (cur) cur.removeAttribute('aria-describedby'); cur = null; }
   function show(el, text) {
     if (window.matchMedia && !window.matchMedia('(hover: hover)').matches && !el.matches(':focus-visible')) return;
-    if (el.closest('details[open]')) return;
+    if (el.closest('details[open]') || el.hasAttribute('aria-current')) return;
     if (!tip) { tip = document.createElement('div'); tip.className = 'htip'; tip.id = 'htip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true; document.body.appendChild(tip); }
     tip.textContent = text; tip.hidden = false; cur = el; el.setAttribute('aria-describedby', 'htip');
     var r = el.getBoundingClientRect(), w = tip.offsetWidth;
