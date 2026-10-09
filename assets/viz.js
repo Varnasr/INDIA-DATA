@@ -48,13 +48,13 @@
   // its names (a word cannot wrap), never more than 150px
   function fitLw(names, base) {
     var w = Math.max.apply(null, names.map(function (n) { return Math.max.apply(null, String(SIR.short ? SIR.short(n) : n).split(/\s+|(?<=-)/).map(function (x) { return x.length; })); }).concat([0]));
-    if (!phone()) return Math.max(base, Math.min(280, 14 + 7.6 * w));
-    return Math.max(base, Math.min(150, 12 + 7.9 * w));
+    if (!phone()) return Math.max(base, Math.min(280, 16 + 8.2 * w));
+    return Math.max(base, Math.min(160, 14 + 8.2 * w));
   }
   // how many characters of a label fit in px, and how many lines the
   // longest of a set of labels takes at that width, so a row can be made
   // tall enough for its label instead of the label spilling into the next
-  function chars(px) { return Math.max(6, Math.floor(px / (phone() ? 6.4 : 7.2))); }
+  function chars(px) { return Math.max(6, Math.floor(px / (phone() ? 7.2 : 7.9))); }
   function linesOf(names, n) { return Math.max.apply(null, names.map(function (nm) { return [].concat(SIR.wrap(String(nm), n)).length; }).concat([1])); }
   function rowH(names, n, base) { return Math.max(base, 13 * linesOf(names, n) + 8); }
   // about five round ticks between lo and hi
@@ -193,7 +193,7 @@
       var x0 = 40 + i * bw + bw * 0.15, w = bw * 0.7;
       el('rect', { x: x0, y: y(b.b), width: w, height: Math.max(y(Math.max(b.a, min)) - y(b.b), 1.5), style: fill(tok[b.st.kind]) }, s);
       if (i < n - 1) el('line', { x1: x0 + w, x2: x0 + bw, y1: y(b.st.kind === 'down' ? b.a : b.b), y2: y(b.st.kind === 'down' ? b.a : b.b), class: 'vlink' }, s);
-      el('text', { x: x0 + w / 2, y: y(b.b) - 6, 'text-anchor': 'middle', class: 'vval' }, s, (b.st.kind === 'down' ? '−' : b.st.kind === 'up' ? '+' : '') + fmt(b.st.v));
+      el('text', { x: x0 + w / 2, y: y(b.b) - 6 - (tight && i % 2 ? 16 : 0), 'text-anchor': 'middle', class: 'vval' }, s, (b.st.kind === 'down' ? '−' : b.st.kind === 'up' ? '+' : '') + fmt(b.st.v));
       var t = el('text', { x: x0 + w / 2, y: H - 62, 'text-anchor': 'middle', class: tight ? 'vname small' : 'vname' }, s);
       names[i].forEach(function (line, j) { el('tspan', { x: x0 + w / 2, dy: j ? '1.15em' : 0 }, t, line); });
     });
@@ -206,7 +206,7 @@
     // on a phone a few rows take their names above the dots, and many rows
     // (a district each) take them beside, cut to fit, so the chart stays short
     var side = phone() && o.rows.length > 8, nmax = Math.max.apply(null, o.rows.map(function (r) { return String(r.name).length; }));
-    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = side ? Math.min(104, 10 + 6.3 * nmax) : phone() ? 0 : Math.max(150, 12 + 7.4 * nmax), top = (phone() ? 8 : 16) + (o.key ? 22 : 0), R = o.r || 5, D = R * 2 + 0.5;
+    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = side ? Math.min(104, 10 + 6.3 * nmax) : phone() ? 0 : Math.max(150, 16 + 8.2 * nmax), top = (phone() ? 8 : 16) + (o.key ? 22 : 0), R = o.r || 5, D = R * 2 + 0.5;
     var all = [].concat.apply([], o.rows.map(function (r) { return r.points.map(function (p) { return p.v; }); }));
     // the axis starts at zero unless a value falls below it (a roll that grew)
     var step = o.step || 5, max = Math.ceil(Math.max.apply(null, all) / step) * step, min = Math.min(0, Math.min.apply(null, all));
@@ -260,7 +260,8 @@
   function dumbbell(box, o) {
     measure(box);
     var n = o.rows.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 112 : 210), lc = chars(lw - 8), rh = rowH(o.rows.map(function (r) { return SIR.short(r.name); }), lc, phone() ? 30 : 24);
-    var leg = phone() ? 44 : 24, H = leg + 16 + n * rh + 30;
+    var keyStack = phone() || lw + 10 + 300 + 30 + 7.2 * String(o.bName).length > W;
+    var leg = keyStack ? 44 : 24, H = leg + 16 + n * rh + 30;
     var s = svgIn(box, W, H, o.label);
     var st = o.step || 5, mn = o.min || 0, max = Math.ceil(Math.max.apply(null, o.rows.map(function (r) { return Math.max(r.a, r.b); }).concat([o.ref || 0])) / st) * st;
     var rm = roomy(st, mn, max, W - lw - 30, true); st = rm.step; max = rm.hi;
@@ -271,7 +272,7 @@
     }
     [[o.aName, o.aTok], [o.bName, o.bTok]].forEach(function (k, i) {
       // the key: side by side on a wide screen, one line each on a phone
-      var lx = phone() ? 10 : lw + 10 + i * 300, ly = phone() ? 10 + i * 20 : 12;
+      var lx = keyStack ? 10 : lw + 10 + i * 300, ly = keyStack ? 10 + i * 20 : 12;
       el('circle', { cx: lx, cy: ly, r: 5, style: fill(k[1]) }, s);
       el('text', { x: lx + 10, y: ly, 'dominant-baseline': 'middle', class: 'vval' }, s, k[0]);
     });
@@ -653,7 +654,7 @@
     var x = function (v) { return l + (W - l - rgt) * (v - tx.lo) / (tx.hi - tx.lo); }, y = function (v) { return top + (H - top - b) * (ty.hi - v) / (ty.hi - ty.lo); };
     var g;
     for (g = tx.lo; g <= tx.hi + tx.step / 2; g += tx.step) { el('line', { x1: x(g), x2: x(g), y1: top, y2: H - b, class: 'vgrid' }, s); el('text', { x: x(g), y: H - b + 16, 'text-anchor': 'middle', class: 'vval' }, s, tickText(g, tx.step)); }
-    for (g = ty.lo; g <= ty.hi + ty.step / 2; g += ty.step) { el('line', { x1: l, x2: W - rgt, y1: y(g), y2: y(g), class: 'vgrid' }, s); el('text', { x: l - 6, y: y(g), 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval' }, s, tickText(g, ty.step)); }
+    for (g = ty.lo; g <= ty.hi + ty.step / 2; g += ty.step) { el('line', { x1: l, x2: W - rgt, y1: y(g), y2: y(g), class: 'vgrid' }, s); if (g === ty.lo && H - b + 16 - y(g) < 22) continue; el('text', { x: l - 6, y: y(g), 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval' }, s, tickText(g, ty.step)); }
     // y = x, drawn only over the range both axes share
     var d0 = Math.max(tx.lo, ty.lo), d1 = Math.min(tx.hi, ty.hi);
     if (o.diag && d1 > d0) el('line', { x1: x(d0), y1: y(d0), x2: x(d1), y2: y(d1), class: 'vlink' }, s);
