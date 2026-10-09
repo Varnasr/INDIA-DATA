@@ -1029,7 +1029,7 @@ html.dyslexic-font .asof,html:not([lang="en"]) :is(.asof,.kicker){font-family:in
    each marked with a pin, then every state and union territory */
 main>h3.hubh{font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:1.6rem 0 .7rem;display:flex;align-items:center;gap:.45rem}
 html.dyslexic-font main>h3.hubh,html:not([lang="en"]) main>h3.hubh{font-family:inherit;text-transform:none;letter-spacing:normal;font-size:.95rem}
-@media (min-width:1000px){.hubs.pins{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:1000px){.hubs.pins{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .hubs.pins{padding-bottom:1.6rem;border-bottom:1px solid var(--line);margin-bottom:.4rem}
 .hub.pin{position:relative;padding-inline-end:2.6rem}
 .hub.pin::before{content:"";position:absolute;top:1rem;inset-inline-end:1rem;width:18px;height:18px;background:var(--red);
