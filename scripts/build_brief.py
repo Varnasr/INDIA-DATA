@@ -22,8 +22,10 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / 'data' / 'india' / 'raw' / 'brief_research'
 OUT = ROOT / 'data' / 'india' / 'brief.json'
 
+# the order the groups appear in on the page
 GROUPS = {'1': 'The right to protest', '2': 'Prohibitory orders', '3': 'Unlawful assembly and dispersal',
-          '4': 'Where a protest may be held', '5': 'If you are arrested', '6': 'Women', '7': 'Free legal aid'}
+          '4': 'Where a protest may be held', '5': 'If you are arrested', '8': 'Offences often charged at protests',
+          '6': 'Women', '9': 'Children', '10': 'Complaining about force used by police', '7': 'Free legal aid'}
 # the second reading's own words where a point still needed plainer wording
 PLAIN = {
     10: 'An Executive Magistrate, the officer in charge of the police station or, in his absence, a police officer of at least sub-inspector rank can order an unlawful assembly, or a gathering of five or more likely to disturb the peace, to disperse. Its members then have a duty to leave, and if they do not, force may be used.',
@@ -38,8 +40,14 @@ PLAIN = {
 def build():
     R = json.loads((RAW / 'rights.json').read_text(encoding='utf-8'))
     V = {v['id']: v for v in json.loads((RAW / 'verified.json').read_text(encoding='utf-8'))}
+    # the second round (October 2026), from the checked points of a legal note
+    # for protesters, read twice in the same way; its ids follow the first's
+    R2 = json.loads((RAW / 'rights2.json').read_text(encoding='utf-8'))
+    n1 = len(R['items'])
+    for v in json.loads((RAW / 'verified2.json').read_text(encoding='utf-8')):
+        V[n1 + v['id']] = v
     items, dropped = [], []
-    for i, it in enumerate(R['items']):
+    for i, it in enumerate(R['items'] + R2['items']):
         v = V.get(i)
         if not v or v['status'] not in ('confirmed', 'corrected'):
             dropped.append(it['topic'])
@@ -53,13 +61,15 @@ def build():
         for f in ('point', 'law', 'quote', 'url'):
             if not it.get(f):
                 sys.exit('FAIL - item %d has no %s' % (i, f))
-        if '—' in it['point']:
-            sys.exit('FAIL - em dash in point %d' % i)
+        if re.search('[\u2013\u2014;]', it['point']) or re.search(r'[a-z]: ', it['point']):
+            sys.exit('FAIL - point %d breaks the writing rules' % i)
         items.append({'group': GROUPS[m.group(1)], 'title': m.group(2), 'point': it['point'], 'law': it['law'],
                       'quote': it['quote'], 'url': it['url'], 'checked': it.get('checked_on', R['as_of'])})
     if not any('15100' in x['point'] for x in items):
         sys.exit('FAIL - the legal aid helpline is missing')
-    return {'as_of': R['as_of'], 'groups': list(GROUPS.values()), 'rights': items, 'dropped': dropped}
+    order = list(GROUPS.values())
+    items.sort(key=lambda x: order.index(x['group']))
+    return {'as_of': R['as_of'], 'groups': order, 'rights': items, 'dropped': dropped}
 
 
 def main():
