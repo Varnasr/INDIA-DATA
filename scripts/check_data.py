@@ -310,6 +310,20 @@ def _rti():
     assert "SIR.showFaq('india', 'rti')" in page and 'id="short"' in page, 'the RTI page lost its findings or its questions'
 
 
+def _brief():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_brief.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+    page = open(os.path.join(ROOT, 'site', 'pages', 'india', 'brief', 'index.html'), encoding='utf-8').read()
+    assert "SIR.showFaq('india', 'brief')" in page and 'id="short"' in page and 'not legal advice' in page, 'the brief page lost its findings, its questions or its notice'
+
+
+def _reads():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_reads.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+    page = open(os.path.join(ROOT, 'site', 'pages', 'india', 'reading', 'index.html'), encoding='utf-8').read()
+    assert "SIR.showFaq('india', 'reading')" in page and 'id="short"' in page, 'the reading page lost its findings or its questions'
+
+
 def _disputes():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_disputes.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -405,6 +419,8 @@ for name, fn in [
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
     ('the RTI page carries only checked applications and is current', _rti),
+    ('the reading page carries only items read twice and is current', _reads),
+    ('the brief page carries only rights read twice and says it is not legal advice', _brief),
     ('migration shares equal Census D-01 over each state\'s population', _migration),
     ('the Assam figures add up and are current', _assam),
     ('every shared state page\'s figures add up and are current', _states),

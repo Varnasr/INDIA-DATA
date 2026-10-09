@@ -50,6 +50,7 @@ def svg(paths, cls='icon'):
 
 LOGO = svg('<rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10l2 2 4-4"/>')
 PIN = svg('<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>')
+STAR = svg('<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>')
 DOWN = svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>')
 DL_BOOK = {'india': 'india', 'bihar': 'bihar', 'hyd': 'hyd', 'tn': 'tn', 'wb': 'wb', 'kl': 'kl', 'ka': 'ka', 'rj': 'rj', 'up': 'up', 'dl': 'dl', 'mh': 'mh', 'gj': 'gj', 'uk': 'uk', 'as': 'as'}
 APP = svg('<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 6v8m-3-3 3 3 3-3"/>')
@@ -202,7 +203,9 @@ def shell(out, meta, content, scripts):
             subs = ['<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in [[home, 'Overview']] + p['menu']]
             items.append(fold(p['label'], subs, p['id'] == place['id']))
         else:
-            items.append(link(p))
+            # the front page's place is About this site, which opens on why the
+            # site exists rather than reloading the page a reader is on
+            items.append(link(p, '#why-this-site-exists' if p['id'] == 'home' else None))
     subs = ['<p class="lg">Names in bold have a full analysis of their own. The others share one summary page.</p>']
     # each zone is its own block, so a wide screen can set the zones in columns
     for z in ZONES:
@@ -220,11 +223,15 @@ def shell(out, meta, content, scripts):
     about = [i for i in items if i.startswith('<a ')]
     items = [i for i in items if not i.startswith('<a ')] + ['<div class="about" data-i18n-each>%s</div>' % ''.join(about)]
     # the pages most readers come for, at the top of the menu whatever the place
-    quick = '<div class="quick"><span class="qh">Start here</span><div class="ql" data-i18n-each>%s</div></div>' % ''.join(
+    quick = '<div class="ql" data-i18n-each>%s</div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('india/constituencies/', 'Find a constituency'), ('help/', 'If your name was left off'), ('india/disputes/', 'Protests and disputes'), ('india/rti/', 'RTI replies'),
+        (('india/brief/', 'The SIR in brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'If your name was left off'), ('india/disputes/', 'Protests and disputes'), ('india/rti/', 'RTI replies'), ('india/reading/', 'Further reading and viewing'),
          ('india/women/', 'Women'), ('india/numbers/', 'The SIR in numbers')))
-    items.insert(0, quick)
+    # "Start here" is its own menu beside Places, so Places holds only places
+    about = ''.join(i for i in items if i.startswith('<div class="about"'))
+    items = [i for i in items if not i.startswith('<div class="about"')]
+    start = ('<details class="dl start"><summary class="btn" aria-label="Start here">%s <span class="lbl">Start here</span></summary>'
+             '<div class="menu"><div data-i18n-each>%s%s</div></div></details>' % (STAR, quick, about))
     current = place['label'] if place['id'] != 'home' else 'Places'
     places = ('<details class="dl places"><summary class="btn" aria-label="Places">%s <span class="lbl-place">%s</span></summary>'
               '<div class="menu"><div data-i18n-each>%s</div></div></details>' % (PIN, html.escape(current), ''.join(items)))
@@ -250,11 +257,11 @@ def shell(out, meta, content, scripts):
         '<header class="top">\n  <div class="header-content">\n'
         '    <a class="logo" href="%s"><span class="logo-icon">%s</span><%s class="titles"><span class="wm" aria-hidden="true" data-no-i18n>Off the <s>Roll</s></span>'
         '<span class="h-title">%s</span><span class="subtitle">%s</span></%s></a>\n'
-        '    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">\n      %s\n      %s\n      %s\n'
+        '    <div class="controls" data-dyslexia-slot data-dyslexia-before=".theme">\n      %s\n      %s\n      %s\n      %s\n'
         '      <button type="button" class="theme" aria-pressed="false">%s <span class="lbl">Dark</span></button>\n'
         '      %s\n'
         '    </div>\n  </div>\n</header>\n'
-    ) % (place['band'], root or './', LOGO, tag, html.escape(CFG['title']), html.escape(place['subtitle']), tag, find, places, dl, MOON, prn)
+    ) % (place['band'], root or './', LOGO, tag, html.escape(CFG['title']), html.escape(place['subtitle']), tag, find, start, places, dl, MOON, prn)
     nav = ''
     if place['pages'] and not meta.get('own_tabs'):
         tabs = []
@@ -274,7 +281,7 @@ def shell(out, meta, content, scripts):
         fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
     fab = '<div class="fabs">%s</div>' % fab if fab else ''
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s">About this site</a> · <a href="%shelp/">If your name was left off</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sshare/">Share a list with us</a> · <a href="%sterms/">Terms and privacy</a>'
+              ' · <a href="%s#why-this-site-exists">About this site</a> · <a href="%shelp/">If your name was left off</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sshare/">Share a list with us</a> · <a href="%sterms/">Terms and privacy</a>'
               ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, root, root, CFG['email'], CFG['email']))
     footer += ('\n' + fab) if fab else ''
     # every page that loads sir.js gets viz.js after it: SIR.chart and the
