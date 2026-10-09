@@ -910,7 +910,7 @@ with `--check`. Same rules as the disputes page: no private person named,
 nothing on what anyone intended. Replies sent through the share form join the
 research file with their filing date. English only.
 
-**If your name was left off** (`help/`, on the front page's place, pinned on
+**Removed from the Roll? What to Do** (`help/`, on the front page's place, pinned on
 the front page, first under Start here and in every footer) sets out what the
 law and the Commission's orders let an elector do: Form 6, the inquiry before a
 deletion, the two appeals, the helpline and the drive after the revision, free
@@ -1202,7 +1202,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   finder that links to each state's own, and "How we know". The cards come
   in two grids: "Across India" (`.hubs.pins`), eight pinned cards (`hub pin`,
   a red border and a pin icon drawn by CSS) in rows of four on a wide screen,
-  above a rule: If your name was left off, Protests and disputes, RTI
+  above a rule: Removed from the Roll? What to Do, Protests and disputes, RTI
   replies, Every constituency, All India, Women, the cities and the SIR in
   numbers. Then "Every State and Union Territory" (`.hubs.states`).
   The map and the ranked list beside it end at the same line: the list
