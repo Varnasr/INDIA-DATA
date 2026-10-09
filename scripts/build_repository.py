@@ -57,6 +57,8 @@ PUBLISHED = {
                                           'The population counts residents who are not citizens.'),
     'data/india/ac_change.csv': ('Every constituency of Tamil Nadu, Kerala, West Bengal and Uttarakhand in one table', 'constituency',
                                  'Each state measures a different thing, named in the state\'s rows. Nothing is added across states. Only Uttarakhand has gross additions and deletions.'),
+    'data/india/disputes.csv': ('Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source', 'item',
+                                'Press items are what the outlet reported. Allegations are the party\'s. Nothing here says what anyone intended.'),
     'data/bihar/constituencies.csv': ('Every Bihar constituency, with names removed by phase, reason and sex, and the 2020 to 2025 results', 'constituency',
                                       'Religion is guessed from names and given as a range. Reasons are what the officers wrote down.'),
     'data/bihar/districts.csv': ('Every Bihar district, with names removed by reason, women\'s share and the range for Muslim names', 'district', ''),

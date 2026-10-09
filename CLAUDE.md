@@ -836,6 +836,26 @@ inside a workbook or the zip, so a raw file goes into `EXTRA` only if it is
 the CEO's or the Election Commission's own table, counts only. Secondary
 compilations a `SOURCES.md` marks as unused stay out.
 
+**Protests and disputes** (`india/disputes/`, in the All India menu as
+Disputes) lists the court cases, Assembly resolutions, protests and boycotts,
+bulk Form 7 objections (with Hyderabad in full), changes to ECINET and ERONET,
+instructions given without a written order, errors reported on the rolls and
+deaths reported during the revision. `data/india/raw/disputes_research/` holds
+four research files (`courts.json`, `protests.json`, `form7.json`,
+`software.json`: each item a plain claim, a verbatim quote, outlet, date and
+address) and an independent second reading of each (`verified_<name>.json`).
+`scripts/build_disputes.py` keeps only items that reading confirmed or
+corrected, applies its corrections, adds the process page's own checked press
+reports by topic (`FROM_PROCESS`), and writes `data/india/disputes.json` and
+the CSV; `check_data.py` runs it with `--check`. Everything else is named
+under "What we could not confirm". "Prefilled" in the reporting means Form 7s
+with the elector's details already printed and the objector's part
+handwritten or blank. Rules: an allegation is the party's, by name; the
+Commission's reply sits beside it where reported; no private person is named,
+in a claim or a quote (a researcher, voter, objector, booth agent or BLO is
+named by role); nothing says what anyone intended or whether anyone is a
+citizen. English only.
+
 **The NRC** (`india/nrc/`) explains the National Register of Citizens from
 primary documents only: what the Citizenship Act and the 2003 Rules provide,
 Assam's NRC and its figures, the National Population Register, every answer

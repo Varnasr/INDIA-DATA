@@ -70,7 +70,9 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
   geo.features.forEach(function (f) { byId[f.properties.ac] = ALIAS[f.properties.name] || f.properties.name; });
   var cnt = function (name) { for (var s in D.by_state) if ((ALIAS[s] || s) === name) return D.by_state[s]; return null; };
   VIZ.map('vMap', { geo: geo, label: 'Map of the number of items on this page by state', title: 'Items on this page',
-    v: function (id) { return cnt(byId[id]); }, name: function (id) { return byId[id] || ''; }, fmt: function (v) { return n(v); } });
+    v: function (id) { return cnt(byId[id]); }, name: function (id) { return byId[id] || ''; }, fmt: function (v) { return n(v); },
+    // whole-number bins, so a legend never reads 1 to 1
+    breaks: (function () { var mx = Math.max.apply(null, Object.keys(D.by_state).map(function (s) { return D.by_state[s]; })); var st = Math.max(1, Math.ceil(mx / 5)); return [st, 2 * st, 3 * st, 4 * st]; })() });
   VIZ.lollipop('vStates', { label: 'Items on this page by state', axis: 'Items',
     rows: Object.keys(D.by_state).map(function (s) { return { name: s, v: D.by_state[s], text: n(D.by_state[s]), tok: '--fill-red', hi: true }; }) });
 
@@ -82,7 +84,7 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
         v: [0, 1, 2, 3, 4].map(function (g) { var t = Object.keys(D.by_month[m]).reduce(function (a, s) { return a + (GROUP[s] === g ? D.by_month[m][s] : 0); }, 0); return t || null; }) };
     }) });
 
-  document.getElementById('sections').innerHTML = D.sections.map(function (s) {
+  document.getElementById('sections').outerHTML = D.sections.map(function (s) {
     var start = k + 1;
     var li = s.items.map(function (it) {
       k++;

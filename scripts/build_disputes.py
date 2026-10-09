@@ -88,7 +88,7 @@ def build():
                                     'reason': v.get('note') or 'not yet checked against its source'})
                 continue
             it = dict(it)
-            for k in ('claim', 'quote', 'date', 'url', 'outlet', 'kind', 'section', 'state', 'response'):
+            for k in ('claim', 'quote', 'date', 'url', 'outlet', 'kind', 'section', 'state', 'response', 'case', 'headline'):
                 if v.get(k):
                     it[k] = v[k]
             items.append({k: it.get(k, '') for k in KEEP})

@@ -271,6 +271,11 @@ def _repository():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
 
 
+def _disputes():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_disputes.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
+
 def _migration():
     # The two migration measures in covariates.csv are Census 2011 D-01 counts
     # over the state's own enumerated population, both of them. Held to the
@@ -356,6 +361,7 @@ for name, fn in [
     ('the NRC page carries only checked facts and is current', _nrc),
     ('the four-state constituency table is current and adds up', _ac_change),
     ('the downloads manifest is current and every column is described', _repository),
+    ('the disputes page carries only checked items and is current', _disputes),
     ('migration shares equal Census D-01 over each state\'s population', _migration),
     ('the Assam figures add up and are current', _assam),
     ('every shared state page\'s figures add up and are current', _states),
