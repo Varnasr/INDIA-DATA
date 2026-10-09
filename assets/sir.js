@@ -851,6 +851,18 @@
   // the language menu and the reading-font button are added by other scripts
   wire(); setTimeout(wire, 600); window.addEventListener('load', wire);
 
+  // the floating constituency button stays out of the way while a page's own
+  // "Find your constituency" button is on the screen or still below it (the
+  // front page's hero), and comes in once the reader has scrolled past it
+  (function () {
+    var fab = document.querySelector('.fab'), dup = document.querySelector('main .btn-ink[href*="constituencies"]');
+    if (!fab || !dup || !('IntersectionObserver' in window)) return;
+    fab.classList.add('fab-off');
+    new IntersectionObserver(function (e) {
+      fab.classList.toggle('fab-off', e[0].isIntersecting || e[0].boundingClientRect.top > 0);
+    }).observe(dup);
+  })();
+
   // the tour, on the front page
   var STEPS = [
     ['.controls .find', L('Search finds any page, constituency, district or dispute. Press Ctrl or Command and K from anywhere on the site.')],
