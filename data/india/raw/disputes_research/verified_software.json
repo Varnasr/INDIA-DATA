@@ -133,6 +133,17 @@
   "soft-29": {
    "status": "confirmed",
    "note": "The Pioneer page fetched; dated 2 Oct 2026, '(with inputs from PTI)', headline matches. Quote verbatim. 88 of 97 filed Form 6 and accepted, released Thursday (1 October) with a post on X, the February 2026 final roll, and the Indian Express report that the software did not allow verified electors to be added are all in the report. The Wire (court-32's source) also dates the CEO's X statement to Thursday 1 October."
+  },
+  "soft-30": {
+   "status": "corrected",
+   "quote": "Instead, the inquiry into Yatnal's complaint was opened under the Registration of Births and Deaths Act, Anandh said.",
+   "claim": "The Week reported that Vijayapura City MLA Basanagouda R Patil Yatnal wrote to officials on 31 August seeking the deletion of 1,054 voters, eight of whom were shown as dead on death certificates, and that three living women among them came forward on 7 October. District Electoral Officer Anandh K said no Form 7 had been filed and the certificates were found to belong to namesakes, so the inquiry was opened under the Registration of Births and Deaths Act.",
+   "note": "The page refused curl (HTTP 403) and was read in full through Firecrawl (The Week, 7 Oct 2026 7:43 pm IST). The quote continues 'Act, Anandh said.' on the page. The deletion list was a letter of 31 August on the MLA's letterhead and no Form 7 was filed, so this is a wrong-entries item about a letter and not a Form 7 case."
+  },
+  "soft-31": {
+   "status": "corrected",
+   "claim": "The security researcher who reported the ECINET flaws told The Wire that CERT-In and the Commission did not reply to him until a Hindustan Times reporter contacted them. CERT-In then said one issue had been resolved, which he said was the most minor. He said the flaws affected at least eight parts of the Commission's systems, including the Suvidha portal and ECORE.",
+   "note": "The Wire (9 Oct 2026 20:25 IST) opened in full. Quote verbatim. The page says the details of officials were exposed and, separately, that at least eight segments of the Commission's systems were affected, so the claim is rewritten to keep them apart. The 6 October CERT-In reply is already in soft-23's response, so the new matter is his account that nobody answered before HT asked and that the fixed issue was the least of them."
   }
  }
 }

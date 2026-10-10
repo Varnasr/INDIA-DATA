@@ -204,3 +204,22 @@ out of it: the Deccan Herald Karnataka hearings story is dated 25 September
 ### Could not confirm
 
 None dropped.
+
+## Update of 2026-10-10
+
+Six rows added from reports of 6 to 9 October 2026, each opened on 2026-10-10
+and checked by a second reader. All are press.
+
+- **Haryana**: 44,91,923 notices with 3,15,173 hearings pending on 7 October,
+  after about 28,000 hearings at special camps that day (UNI, 16:50). UNI's
+  morning report gave the same total and 3,43,127 pending. No count of
+  hearings held is printed, so none is entered. The primary row of 1 October
+  stays the chosen total.
+- **Meghalaya**: hearings complete in 6,13,512 of the 6,51,735 cases and 1,510
+  found ineligible on 6 October (Northeast Now, 7 October, CEO BDR Tiwari).
+- **Telangana**: 92,88,187 notices, 82,11,205 heard, 74,62,851 found eligible
+  and 12,969 ineligible by 8 October (Siasat, 9 October). Siasat and Oneindia
+  print the cases still undecided as 18,12,237. That is a digit slip. Notices
+  less the eligible and the ineligible come to 18,12,367, which Telangana
+  Today prints, and they are 10,76,982 not yet heard plus 7,35,385 heard and
+  not decided.
