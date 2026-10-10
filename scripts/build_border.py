@@ -69,7 +69,7 @@ STATES = [('Uttar Pradesh', 'names left off per 100 on the roll before', 100, 'u
 def agg(rs, per):
     b = sum(r['base'] for r in rs)
     c = sum(r['count'] for r in rs)
-    out = dict(districts=len(rs), base=b, count=c, rate=round(per * c / b, 2))
+    out = dict(districts=len(rs), base=b, count=c, rate=round(per * c / b, 4))
     if rs and all('dead' in r for r in rs):
         for k in ('dead', 'shifted_absent', 'elsewhere'):
             out[k + '_share'] = round(100 * sum(r[k] for r in rs) / c, 1)
@@ -107,9 +107,9 @@ def build():
                    interior_without_city=agg(i_nc, per) if city else None,
                    share_of_roll=round(100 * sum(r['base'] for r in b) / whole['base'], 1),
                    share_of_count=round(100 * sum(r['count'] for r in b) / whole['count'], 1),
-                   districts=sorted([dict(district=r['district'], rate=round(per * r['count'] / r['base'], 2),
+                   districts=sorted([dict(district=r['district'], rate=round(per * r['count'] / r['base'], 4),
                                           above_interior=per * r['count'] / r['base'] > agg(i, per)['rate']) for r in b], key=lambda x: -x['rate']))
-        row['ratio'] = round(row['border']['rate'] / row['interior']['rate'], 2)
+        row['ratio'] = round(row['border']['rate'] / row['interior']['rate'], 4)
         row['above'] = sum(1 for x in row['districts'] if x['above_interior'])
         out.append(row)
     return dict(source=dict(title='List of Border Guarding Districts, Annexure XI, Staff Selection Commission notice of 1 December 2025',

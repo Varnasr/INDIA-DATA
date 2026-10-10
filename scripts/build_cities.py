@@ -100,7 +100,7 @@ STATE_PAGE = {'Karnataka': 'karnataka/', 'Telangana': 'hyderabad/telangana/', 'T
 def agg(rs):
     b = sum(r['before'] for r in rs)
     m = sum(r['removed'] for r in rs)
-    out = dict(before=b, removed=m, per_100=round(100 * m / b, 2))
+    out = dict(before=b, removed=m, per_100=round(100 * m / b, 4))
     if rs and all(r.get('shifted_absent') is not None for r in rs):
         out['shifted_absent_share'] = round(100 * sum(r['shifted_absent'] for r in rs) / m, 1)
         out['dead_share'] = round(100 * sum(r['dead'] for r in rs) / m, 1)
@@ -130,7 +130,7 @@ def build():
         rest_rows = [x for x in rs if x['district'] not in core and (ring_state or x['district'] not in ring)]
         rest = agg(rest_rows) if rest_rows else None
         row = dict(city=city, state=state, measure=measure, page=STATE_PAGE[state], core=dict(districts=core, **c), ring=r, rest=rest,
-                   state_per_100=st['per_100'], times_state=round(c['per_100'] / st['per_100'], 2),
+                   state_per_100=st['per_100'], times_state=round(c['per_100'] / st['per_100'], 4),
                    share_of_roll=round(100 * c['before'] / st['before'], 1) if state != 'Delhi' else None,
                    share_of_removed=round(100 * c['removed'] / st['removed'], 1) if state != 'Delhi' else None,
                    reported=state == 'Telangana', roll_2025=state == 'Bihar')

@@ -28,14 +28,14 @@ def rows(name):
         for k in ('electors_pre', 'electors_draft', 'removed'):
             x[k] = int(x[k])
         assert x['electors_pre'] - x['electors_draft'] == x['removed'], x
-        x['rate'] = round(100 * x['removed'] / x['electors_pre'], 2)
+        x['rate'] = round(100 * x['removed'] / x['electors_pre'], 4)
         out.append(x)
     return out
 
 
 def group(xs):
     pre, rem = sum(x['electors_pre'] for x in xs), sum(x['removed'] for x in xs)
-    return {'seats': len(xs), 'electors_pre': pre, 'removed': rem, 'rate': round(100 * rem / pre, 2)}
+    return {'seats': len(xs), 'electors_pre': pre, 'removed': rem, 'rate': round(100 * rem / pre, 4)}
 
 
 def build():

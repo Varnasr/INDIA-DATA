@@ -52,7 +52,7 @@ def build():
              'p1': a['p1'], 'before': r['electors_draft'] + a['p1'], 'net_after': net_after, 'net_fall': a['p1'] - net_after,
              'made_up_pct': round(100 * net_after / a['p1'], 1),
              'margin2025': a['margin2025'], 'al2025': a['al2025'], 'win2025': a['win2025'], 'total': a['total']}
-        s['net_fall_pct'] = round(100 * s['net_fall'] / s['before'], 2)
+        s['net_fall_pct'] = round(100 * s['net_fall'] / s['before'], 4)
         seats.append(s)
     t = {k: sum(s[k] for s in seats) for k in ('draft', 'added', 'added_f', 'added_m', 'removed_after', 'removed_after_f', 'removed_after_m',
                                               'r_expired', 'r_shifted', 'r_repeated', 'r_unstated', 'final', 'final_f', 'final_m', 'p1', 'before', 'net_after', 'net_fall')}
@@ -65,13 +65,13 @@ def build():
     t['made_up_pct'] = round(100 * t['net_after'] / t['p1'], 1)
     p1f = sum(a['p1_f'] for a in acs.values())
     p1m = sum(a['p1_m'] for a in acs.values())
-    t['women_share_p1'] = round(100 * p1f / (p1f + p1m), 2)
-    t['women_share_added'] = round(100 * t['added_f'] / (t['added_f'] + t['added_m']), 2)
-    t['women_share_removed_after'] = round(100 * t['removed_after_f'] / (t['removed_after_f'] + t['removed_after_m']), 2)
-    t['women_share_final'] = round(100 * t['final_f'] / t['final'], 2)
+    t['women_share_p1'] = round(100 * p1f / (p1f + p1m), 4)
+    t['women_share_added'] = round(100 * t['added_f'] / (t['added_f'] + t['added_m']), 4)
+    t['women_share_removed_after'] = round(100 * t['removed_after_f'] / (t['removed_after_f'] + t['removed_after_m']), 4)
+    t['women_share_final'] = round(100 * t['final_f'] / t['final'], 4)
     draft_f = sum(r['draft_women'] for r in raw)
-    t['women_share_draft'] = round(100 * draft_f / t['draft'], 2)
-    t['women_share_before'] = round(100 * (draft_f + p1f) / t['before'], 2)
+    t['women_share_draft'] = round(100 * draft_f / t['draft'], 4)
+    t['women_share_before'] = round(100 * (draft_f + p1f) / t['before'], 4)
     m = [s for s in seats if s['margin2025']]
     als = sorted({s['al2025'] for s in m})
     over = {'seats': len(m),

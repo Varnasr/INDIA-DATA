@@ -45,7 +45,7 @@ NDA = {'BJP', 'JD(U)', 'LJP(RV)', 'LJP', 'HAM(S)', 'RLM', 'RLSP'}
 INDIA = {'RJD', 'INC', 'CPI(ML)L', 'CPI', 'CPI(M)', 'VIP', 'IIP'}
 
 
-def r(x, n=2):
+def r(x, n=4):
     return round(float(x), n)
 
 

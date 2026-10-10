@@ -61,11 +61,11 @@ def build():
                  draft_gap=draft - draft_f, flagged=flagged, flagged_dead=S['flagged_for_deletion_dead'],
                  flagged_shifted=S['flagged_for_deletion_shifted'], flagged_multiple=S['flagged_for_deletion_multiple_or_similar_entries'],
                  net_fall=S['net_fall_draft_to_final'], final=final, final_men=S['electors_final_men'], final_women=S['electors_final_women'],
-                 final_third=S['electors_final_third_gender'], women_final_pct=round(100 * S['electors_final_women'] / final, 2),
+                 final_third=S['electors_final_third_gender'], women_final_pct=round(100 * S['electors_final_women'] / final, 4),
                  households=S['households_visited'], unenrolled_found=S['unenrolled_eligible_identified_18plus'],
                  prospective_found=S['prospective_electors_identified_17plus'], polling_stations=S['polling_stations_after_rationalisation_draft'],
                  blos=S['blos'], draft_vs_jan=draft - jan, final_vs_jan=final - jan,
-                 flagged_per_100_draft=round(100 * flagged / draft, 2))
+                 flagged_per_100_draft=round(100 * flagged / draft, 4))
 
     # the context: D-voters over time, the tribunals, detention, the NRC
     dvot = [dict(as_of=r['as_of'], value=int(r['d_voters']), women=int(r['d_voters_women']) if r['d_voters_women'] else None,
@@ -111,7 +111,7 @@ def build():
     N = {r['item']: num(r['value']) for r in rows('nrc_2019')}
     need(N['persons_found_eligible_for_inclusion_final_nrc_31082019'] + N['persons_left_out_31082019'] == N['persons_applied'], 'NRC included plus left out is not the applicants')
     nrc = dict(included=N['persons_found_eligible_for_inclusion_final_nrc_31082019'], left_out=N['persons_left_out_31082019'], applied=N['persons_applied'],
-               left_out_pct=round(100 * N['persons_left_out_31082019'] / N['persons_applied'], 2), cost_crore=N['approved_cost_rs_crore'])
+               left_out_pct=round(100 * N['persons_left_out_31082019'] / N['persons_applied'], 4), cost_crore=N['approved_cost_rs_crore'])
 
     rules = [dict(aspect=r['aspect'], assam=r['assam_special_revision'], para=r['assam_para'], quote=r['assam_quote'], sir=r['sir_phase2']) for r in rows('rules')]
     schedule = [dict(step=int(r['step']), activity=r['activity'], start=r['from'] or None, end=r['to'] or None) for r in rows('schedule')]

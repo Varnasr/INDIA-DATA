@@ -154,7 +154,7 @@ def verify_labels(rows):
         want = [SPELLING.get(r['Winner_Party.1'], r['Winner_Party.1']),
                 SPELLING.get(r['Runner Up_Party.1'], r['Runner Up_Party.1'])]
         got = list(s.index[:2])
-        shares = [round(100 * v / tot, 2) for v in s.values[:2]]
+        shares = [round(100 * v / tot, 4) for v in s.values[:2]]
         pub = [float(r['Winner_%']), float(r['Runner Up_%'])]
         ok = got == want and all(abs(a - b) < 1.0 for a, b in zip(shares, pub))
         report.append({'pc': pc, 'first': got[0], 'first_share': shares[0], 'published_first_share': pub[0],
@@ -349,8 +349,8 @@ def caste_estimates():
                     # bounds over all deletions: none of the unresolved belong / all do
                     'share_low': round(100 * t.get(g, 0) / total, 1),
                     'share_high': round(100 * (t.get(g, 0) + unresolved) / total, 1),
-                    'survey_share': round(SURVEY[g], 2),
-                    'ratio_to_survey': round((100 * t.get(g, 0) / classified) / SURVEY[g], 2),
+                    'survey_share': round(SURVEY[g], 4),
+                    'ratio_to_survey': round((100 * t.get(g, 0) / classified) / SURVEY[g], 4),
                 } for g in GROUPS},
             }
         top = d.sort_values('n', ascending=False).head(25)
@@ -368,7 +368,7 @@ def women_roll_share(a):
     """Women's share of the roll before the revision: the draft roll by sex
     from Format 4B plus the phase 1 removals by sex."""
     fr = pd.read_csv(os.path.join(RAW, 'final_roll_format4b.csv'))
-    return round(100 * (fr.draft_women.sum() + a.p1_f.sum()) / (fr.electors_draft.sum() + a.p1.sum()), 2)
+    return round(100 * (fr.draft_women.sum() + a.p1_f.sum()) / (fr.electors_draft.sum() + a.p1.sum()), 4)
 
 
 def religion_projection():
@@ -388,7 +388,7 @@ def religion_projection():
     st = u.loc['BIHAR (state)']
     state = 100 * st[('muslim_persons', 2011)] / st[('total_persons', 2011)] * ratio['BIHAR (state)']
     assert abs(state - 17.34) < 0.01, 'projected state share moved'
-    return out, round(state, 2)
+    return out, round(state, 4)
 
 
 def district_identity(a):
@@ -417,7 +417,7 @@ def district_identity(a):
     for x in g.itertuples():
         cls = x.hindu + x.muslim + x.unknown
         out.append({
-            'district': x.district, 'acs': int(x.acs), 'deleted': int(x.total), 'per_100': round(100 * x.total / x.electorate, 2),
+            'district': x.district, 'acs': int(x.acs), 'deleted': int(x.total), 'per_100': round(100 * x.total / x.electorate, 4),
             'female_share_deleted': round(100 * x.t_f / (x.t_f + x.t_m), 1),
             'female_share_roll': round(100 * (x.draft_f + x.p1_f) / (x.draft + x.p1), 1),
             'muslim_share_deleted_low': round(100 * x.muslim / cls, 1),
@@ -468,7 +468,7 @@ def district_economy(a):
     m = m.merge(n, left_on='key', right_index=True, how='left')
     assert m.women_literate.notna().all(), 'a district has no NFHS-5 figures' 
     return [{'district': x.district, 'acs': int(x.acs), 'deleted': int(x.total),
-             'per_100': round(100 * x.total / x.electorate, 2), 'per_booth': round(x.deleted / x.booths, 1),
+             'per_100': round(100 * x.total / x.electorate, 4), 'per_booth': round(x.deleted / x.booths, 1),
              'electors_per_booth': round(x.electorate / x.booths, 0),
              'density': int(x.census_2011_density_per_sqkm), 'urban_pct': float(x.census_2011_urban_pct),
              'women_literate': float(x.women_literate), 'girls_schooled': float(x.girls_schooled),
@@ -499,7 +499,7 @@ def within_seat(booth):
     # Count the direction on the unrounded difference: rounding first turns a
     # small real gap into 0.0 and drops the seat from both counts.
     diffs = [x.pop('_d') for x in seats]
-    return {'pooled_nda_minus_india': round(float(pooled['NDA'] - pooled['INDIA']), 2),
+    return {'pooled_nda_minus_india': round(float(pooled['NDA'] - pooled['INDIA']), 4),
             'booths': int(len(b)), 'seats_compared': len(seats),
             'seats_nda_higher': int(sum(d > 0 for d in diffs)), 'seats_india_higher': int(sum(d < 0 for d in diffs)),
             'median_seat_diff': round(float(pd.Series(diffs).median()), 1), 'seats': seats}
@@ -537,7 +537,7 @@ def intensity(booth):
 
 
 # ------------------------------------------------------------------- outputs
-def r(x, n=2):
+def r(x, n=4):
     return None if pd.isna(x) else round(float(x), n)
 
 
@@ -593,7 +593,7 @@ def outputs(booth, a, report):
             'electorate_2025': int(x.electorate_2025), 'booths': int(x.booths),
             'p1': int(x.p1), 'p2': int(x.p2), 'total': int(x.total),
             'p1_f': int(x.p1_f), 'p1_m': int(x.p1_m), 't_f': int(x.t_f), 't_m': int(x.t_m),
-            'per_booth': r(x.per_booth, 1), 'per_100': r(x.per_100_electors, 2),
+            'per_booth': r(x.per_booth, 1), 'per_100': r(x.per_100_electors, 4),
             'booth_median': r(x.booth_median, 0), 'booth_p90': r(x.booth_p90, 0), 'booths_200': int(x.booths_200),
             'hindu': int(x.hindu), 'muslim': int(x.muslim), 'unknown': int(x.unknown),
             'win2020': x.win2020, 'al2020': x.al2020, 'margin2020': int(x.margin2020), 'margin2020_pct': r(100 * x.margin2020_pct, 1),
@@ -601,7 +601,7 @@ def outputs(booth, a, report):
             'booths_nda': int(x.booths_nda), 'booths_india': int(x.booths_india), 'booths_other': int(x.booths_other),
             'del_nda': int(x.del_nda), 'del_india': int(x.del_india), 'del_other': int(x.del_other),
             'win2025': x.win2025, 'ru2025': x.ru2025, 'al2025': x.al2025,
-            'margin2025': None if pd.isna(x.margin2025) else int(x.margin2025), 'margin2025_pct': r(x.margin2025_pct, 2),
+            'margin2025': None if pd.isna(x.margin2025) else int(x.margin2025), 'margin2025_pct': r(x.margin2025_pct, 4),
             'votes2025': int(x.votes2025), 'turnout2025': r(x.turnout2025, 1),
             'winner_votes2025': int(x.winner_votes2025), 'runner_up_votes2025': int(x.runner_up_votes2025),
             'r_dead': int(x.r_dead), 'r_shifted': int(x.r_shifted), 'r_absent': int(x.r_absent), 'r_enrolled': int(x.r_already_enrolled),
@@ -625,7 +625,7 @@ def outputs(booth, a, report):
     lab = {}
     for year, col in [(2020, 'al2020'), (2024, 'al2024'), (2025, 'al2025')]:
         grp = a.groupby(col).agg(acs=('ac', 'size'), deleted=('total', 'sum'), electorate=('electorate_2025', 'sum'), booths=('booths', 'sum'))
-        lab[str(year)] = {k: {'acs': int(v.acs), 'deleted': int(v.deleted), 'per_100': r(100 * v.deleted / v.electorate, 2),
+        lab[str(year)] = {k: {'acs': int(v.acs), 'deleted': int(v.deleted), 'per_100': r(100 * v.deleted / v.electorate, 4),
                               'per_booth': r(v.deleted / v.booths, 1)} for k, v in grp.iterrows()}
     bl = booth.dropna(subset=['lead24_alliance']).groupby('lead24_alliance').deleted.agg(['size', 'sum', 'mean', 'median'])
     summary = {

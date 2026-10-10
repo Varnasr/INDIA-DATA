@@ -88,17 +88,17 @@ def main():
     def party(p):
         S = [r for r in rows if r['winner'] == p]
         return {'party': p, 'seats': len(S), 'per_100': r1(100 * sum(r['left_off'] for r in S) / sum(r['roll_before'] for r in S)),
-                'vs_district': round(sum(r['vs_district'] for r in S) / len(S), 2), 'over_margin': sum(r['over_margin'] for r in S)}
+                'vs_district': round(sum(r['vs_district'] for r in S) / len(S), 4), 'over_margin': sum(r['over_margin'] for r in S)}
 
     women_before = st['roll_before_women']
     summ = {
         'roll_before': st['roll_before'], 'draft': st['draft'], 'left_off': st['left_off'],
         'per_100': r1(100 * st['left_off'] / st['roll_before']),
         'reasons': {'shifted_absent_other': st['shifted_absent_other'], 'dead': st['dead'], 'duplicate': st['duplicate']},
-        'shares': {k: round(100 * st[k] / st['left_off'], 2) for k in ('shifted_absent_other', 'dead', 'duplicate')},
-        'women_before_pct': round(100 * women_before / (st['roll_before_men'] + women_before + st['roll_before_third_gender']), 2),
-        'women_draft_pct': round(100 * st['draft_women'] / st['draft'], 2),
-        'women_left_off_pct': round(100 * st['left_off_women'] / (st['left_off_men'] + st['left_off_women'] + st['left_off_third_gender']), 2),
+        'shares': {k: round(100 * st[k] / st['left_off'], 4) for k in ('shifted_absent_other', 'dead', 'duplicate')},
+        'women_before_pct': round(100 * women_before / (st['roll_before_men'] + women_before + st['roll_before_third_gender']), 4),
+        'women_draft_pct': round(100 * st['draft_women'] / st['draft'], 4),
+        'women_left_off_pct': round(100 * st['left_off_women'] / (st['left_off_men'] + st['left_off_women'] + st['left_off_third_gender']), 4),
         'women_left_per_100': r1(100 * st['left_off_women'] / women_before),
         'men_left_per_100': r1(100 * st['left_off_men'] / st['roll_before_men']),
         'electors_2025': sum(r['electors_2025'] for r in rows),

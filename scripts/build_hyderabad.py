@@ -39,7 +39,7 @@ def load():
     return D
 
 
-def rate(a, b, k=2):
+def rate(a, b, k=4):
     return None if not b else round(100 * a / b, k)
 
 
@@ -60,7 +60,7 @@ def within(parts, a_num, a_den, b_num, b_den, min_n=20):
         n += 1
         up += d > 0
         down += d < 0
-    return {'diff_pp': round(num / den, 2) if den else None, 'parts': n, 'a_higher': up, 'b_higher': down}
+    return {'diff_pp': round(num / den, 4) if den else None, 'parts': n, 'a_higher': up, 'b_higher': down}
 
 
 def spearman(x, y):

@@ -42,6 +42,18 @@ def rules(text, where):
         sys.exit('FAIL - an "X, not Y" turn in %s' % where)
 
 
+def held(val, txt):
+    """A figure the file stores to more places than the panel quotes still
+    counts when it rounds to the quoted value (27.9776 is 27.98)."""
+    if not re.fullmatch(r'-?[0-9]+\.[0-9]+', val):
+        return False
+    k = len(val.split('.')[1])
+    for m in re.finditer(r'(?<![0-9.])-?[0-9]+\.[0-9]{%d,}(?![0-9])' % (k + 1), txt):
+        if abs(round(float(m.group()) + 1e-9, k) - float(val)) < 1e-9:
+            return True
+    return False
+
+
 def build():
     C = json.loads((RAW / 'claims.json').read_text(encoding='utf-8'))
     V = json.loads((RAW / 'verified.json').read_text(encoding='utf-8'))
@@ -79,7 +91,7 @@ def build():
                     rules(w[f], '%s claim %d %s' % (pid, i, f))
             for fn, val in w.get('uses', []):
                 txt = (ROOT / fn).read_text(encoding='utf-8')
-                if not re.search(r'(?<![0-9.])' + re.escape(val) + r'(?![0-9])', txt):
+                if not re.search(r'(?<![0-9.])' + re.escape(val) + r'(?![0-9])', txt) and not held(val, txt):
                     sys.exit('FAIL - %s claim %d quotes %s, which %s no longer carries' % (pid, i, val, fn))
             pc = pieces[c['piece']]
             used.append(pc['id'])

@@ -53,7 +53,7 @@ def build():
         m100 = 100 * g['men_removed'] / m_roll
         states.append(dict(state=g['state'], quality=g['quality'], phase=g['phase'], source_url=g['source_url'], note=g['note'],
                            share_roll=g['women_share_roll'], share_removed=g['women_share_removed'], gap=r1(g['women_share_removed'] - g['women_share_roll']),
-                           women_per_100=r1(w100), men_per_100=r1(m100), ratio=round(w100 / m100, 2)))
+                           women_per_100=r1(w100), men_per_100=r1(m100), ratio=round(w100 / m100, 4)))
     states.sort(key=lambda s: -s['gap'])
     for s in states:
         if not (0 < s['women_per_100'] < 100 and 0 < s['men_per_100'] < 100):

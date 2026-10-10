@@ -398,7 +398,7 @@ whatever their removals (coefficient about -0.9). Leaving that out is how the
 first version went wrong: without it the slope is -0.83 (-1.86 to +0.20) and
 looked like evidence against an anti-NDA effect; with it the slope is +0.31
 (-0.27 to +0.89), which takes in both no effect and the +0.33 to +0.66 an
-anti-NDA pattern would give. Allowing for 2020, the NDA's lead grew 4.5 to 4.7
+anti-NDA pattern would give. Allowing for 2020, the NDA's lead grew 4.0 to 5.2
 points in every third of seats by removals. **Say what this is**: the vote
 cannot tell whether the removals moved votes between the alliances, and that
 question is separate from whether the removals were accurate. Never present

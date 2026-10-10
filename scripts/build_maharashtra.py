@@ -64,9 +64,9 @@ def build():
         before = draft + left
         D.append({'sr': int(a['sr']), 'district': a['district'], 'now': NOW.get(a['district'], ''), 'city': a['district'] in CITY,
                   'before': before, 'draft': draft, 'left_off': left,
-                  'per_100': round(100 * left / before, 2),
+                  'per_100': round(100 * left / before, 4),
                   'men': men, 'women': women, 'third': third,
-                  'women_draft_pct': round(100 * women / draft, 2)})
+                  'women_draft_pct': round(100 * women / draft, 4)})
 
     T = lambda L, k: sum(r[k] for r in L)
     assert T(D, 'draft') == S['draft'], 'districts add up to the state draft'
@@ -93,16 +93,16 @@ def build():
     city, rest = [r for r in D if r['city']], [r for r in D if not r['city']]
     grp = lambda L: {
         'before': T(L, 'before'), 'left_off': T(L, 'left_off'), 'draft': T(L, 'draft'),
-        'per_100': round(100 * T(L, 'left_off') / T(L, 'before'), 2),
-        'share_of_roll': round(100 * T(L, 'before') / S['before'], 2),
-        'share_of_left_off': round(100 * T(L, 'left_off') / S['left_off'], 2),
-        'women_draft_pct': round(100 * T(L, 'women') / T(L, 'draft'), 2)}
+        'per_100': round(100 * T(L, 'left_off') / T(L, 'before'), 4),
+        'share_of_roll': round(100 * T(L, 'before') / S['before'], 4),
+        'share_of_left_off': round(100 * T(L, 'left_off') / S['left_off'], 4),
+        'women_draft_pct': round(100 * T(L, 'women') / T(L, 'draft'), 4)}
     wsort = sorted(D, key=lambda r: r['women_draft_pct'])
     summary = {
         'before': S['before'], 'draft': S['draft'], 'left_off': S['left_off'],
-        'per_100': round(100 * S['left_off'] / S['before'], 2),
+        'per_100': round(100 * S['left_off'] / S['before'], 4),
         'draft_men': S['draft_men'], 'draft_women': S['draft_women'], 'draft_third': S['draft_third_gender'],
-        'women_draft_pct': round(100 * S['draft_women'] / S['draft'], 2),
+        'women_draft_pct': round(100 * S['draft_women'] / S['draft'], 4),
         'districts': len(D), 'acs': int(st['acs']),
         'top': [{'district': r['district'], 'per_100': r['per_100'], 'left_off': r['left_off']} for r in D[:5]],
         'low': [{'district': r['district'], 'per_100': r['per_100']} for r in D[-3:]],
@@ -114,7 +114,7 @@ def build():
         'women_low': {'district': wsort[0]['district'], 'pct': wsort[0]['women_draft_pct']},
         'women_high': {'district': wsort[-1]['district'], 'pct': wsort[-1]['women_draft_pct']},
         'press_reasons': press, 'press_reasons_sum': sum(press.values()),
-        'press_shares': {k: round(100 * v / sum(press.values()), 2) for k, v in press.items()},
+        'press_shares': {k: round(100 * v / sum(press.values()), 4) for k, v in press.items()},
         'press_source': PRESS_REASONS,
         'draft_date': st['draft_published'], 'claims_to_note': st['claims_objections_to'], 'final_due_note': st['final_roll_due'],
         'claims_to': last['claims'][1], 'notices_to': last['notice'][1], 'final_due': last['final'], 'final_due_source': last['label'],

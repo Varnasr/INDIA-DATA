@@ -71,7 +71,7 @@ def spearman(a, b):
     ma, mb = sum(ra) / len(ra), sum(rb) / len(rb)
     num = sum((x - ma) * (y - mb) for x, y in zip(ra, rb))
     den = (sum((x - ma) ** 2 for x in ra) * sum((y - mb) ** 2 for y in rb)) ** 0.5
-    return round(num / den, 2)
+    return round(num / den, 4)
 
 
 def build():
@@ -106,7 +106,7 @@ def build():
             raise SystemExit('FAIL - %s: units do not add up to the state' % state)
         for u in us:
             u['band'] = band(u['urban_pct'])
-            u['per_100'] = round(100 * u['removed'] / u['before'], 2)
+            u['per_100'] = round(100 * u['removed'] / u['before'], 4)
             u['measure'] = measure
         st_100 = 100 * tm / tb
         bands = []
@@ -116,18 +116,18 @@ def build():
                 bands.append(dict(band=b, units=0, per_100=None, times_state=None, share_of_roll=0, share_of_removed=0))
                 continue
             bb, bm = sum(u['before'] for u in g), sum(u['removed'] for u in g)
-            bands.append(dict(band=b, units=len(g), before=bb, removed=bm, per_100=round(100 * bm / bb, 2),
-                              times_state=round(100 * bm / bb / st_100, 2),
+            bands.append(dict(band=b, units=len(g), before=bb, removed=bm, per_100=round(100 * bm / bb, 4),
+                              times_state=round(100 * bm / bb / st_100, 4),
                               share_of_roll=round(100 * bb / tb, 1), share_of_removed=round(100 * bm / tm, 1)))
         by = {b['band']: b for b in bands}
         r_, m_, u_ = by['rural']['per_100'], by['mixed']['per_100'], by['urban']['per_100']
         # the same order without the cities: only the units under 50 per cent urban
         low = [u for u in us if u['band'] != 'urban']
-        states.append(dict(state=state, measure=measure, units=len(us), districts=len(st_rows), per_100=round(st_100, 2),
+        states.append(dict(state=state, measure=measure, units=len(us), districts=len(st_rows), per_100=round(st_100, 4),
                            rho=spearman([u['urban_pct'] for u in us], [u['per_100'] for u in us]),
                            rho_no_urban=spearman([u['urban_pct'] for u in low], [u['per_100'] for u in low]), bands=bands,
-                           urban_over_rural=round(u_ / r_, 2) if r_ and u_ else None,
-                           mixed_over_rural=round(m_ / r_, 2) if r_ and m_ else None))
+                           urban_over_rural=round(u_ / r_, 4) if r_ and u_ else None,
+                           mixed_over_rural=round(m_ / r_, 4) if r_ and m_ else None))
         units_out.extend(us)
 
     for u in units_out:
