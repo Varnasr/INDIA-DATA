@@ -19,6 +19,11 @@ data/assam/summary.json and data/assam/assam.csv.
   the CEO's own site could not be reached. The context figures are Lok Sabha
   answers of the Ministry of Home Affairs (primary) and, for 2026, the Assam
   Assembly's replies as reported by the press, each row flagged.
+- The constituency tables are the Chief Electoral Officer's own (ac_rolls.csv,
+  read from the three PDFs in raw/sources by raw/read_ac_tables.py): the final
+  roll of 8 February 2024, the draft of 27 December 2025 and the final roll of
+  10 February 2026, every seat by sex. They add up to the state totals the
+  press quoted, which the build asserts.
 - The build fails unless every identity in SOURCES.md holds.
 """
 import csv
@@ -113,9 +118,35 @@ def build():
     nrc = dict(included=N['persons_found_eligible_for_inclusion_final_nrc_31082019'], left_out=N['persons_left_out_31082019'], applied=N['persons_applied'],
                left_out_pct=round(100 * N['persons_left_out_31082019'] / N['persons_applied'], 4), cost_crore=N['approved_cost_rs_crore'])
 
+    # the Chief Electoral Officer's constituency tables
+    acs = []
+    for r in rows('ac_rolls'):
+        a = {k: (int(v) if k not in ('ac_name', 'reserved', 'district') else v) for k, v in r.items()}
+        for t in ('2024', 'draft', 'final'):
+            need(a['men_' + t] + a['women_' + t] + a['third_' + t] == a['total_' + t], 'AC %s: %s roll by sex does not add up' % (a['ac'], t))
+        acs.append(dict(ac=a['ac'], name=a['ac_name'], reserved=a['reserved'], district=a['district'], polling_stations=a['polling_stations'],
+                        roll_2024=a['total_2024'], draft=a['total_draft'], final=a['total_final'],
+                        draft_women=a['women_draft'], final_women=a['women_final'], draft_men=a['men_draft'], final_men=a['men_final'],
+                        draft_vs_2024_per_1000=round(1000 * (a['total_draft'] - a['total_2024']) / a['total_2024'], 4),
+                        fall_per_1000=round(1000 * (a['total_draft'] - a['total_final']) / a['total_draft'], 4)))
+    need([a['ac'] for a in acs] == list(range(1, 127)), 'the constituency table does not hold ACs 1 to 126 once each')
+    tot = lambda k: sum(a[k] for a in acs)
+    need(tot('draft') == draft_f, 'the seats do not add to the draft of 2,52,01,624')
+    need(tot('final') == final and tot('final_women') == S['electors_final_women'] and tot('final_men') == S['electors_final_men'],
+         'the seats do not add to the final roll the press quoted, by sex')
+    need(tot('polling_stations') == S['polling_stations_after_rationalisation_draft'], 'polling stations do not add to 31,486')
+    fall, fw = tot('draft') - tot('final'), tot('draft_women') - tot('final_women')
+    seats = dict(roll_2024=tot('roll_2024'), draft=tot('draft'), final=tot('final'),
+                 draft_above_2024=sum(1 for a in acs if a['draft'] > a['roll_2024']), fell=sum(1 for a in acs if a['final'] < a['draft']),
+                 rose=sum(1 for a in acs if a['final'] > a['draft']), fall=fall, fall_women=fw,
+                 women_fall_pct=round(100 * fw / fall, 4), women_draft_pct=round(100 * tot('draft_women') / tot('draft'), 4),
+                 women_over_in=sum(1 for a in acs if a['final'] < a['draft'] and (a['draft_women'] - a['final_women']) / (a['draft'] - a['final']) > a['draft_women'] / a['draft']),
+                 districts=len({a['district'] for a in acs}))
+    state['final_primary'] = True
+
     rules = [dict(aspect=r['aspect'], assam=r['assam_special_revision'], para=r['assam_para'], quote=r['assam_quote'], sir=r['sir_phase2']) for r in rows('rules')]
     schedule = [dict(step=int(r['step']), activity=r['activity'], start=r['from'] or None, end=r['to'] or None) for r in rows('schedule')]
-    return dict(state=state, d_voters=dvot, tribunals=tribunals, detention=detention, nrc=nrc, rules=rules, schedule=schedule)
+    return dict(state=state, seats=seats, acs=acs, d_voters=dvot, tribunals=tribunals, detention=detention, nrc=nrc, rules=rules, schedule=schedule)
 
 
 def as_csv(d):
@@ -137,10 +168,22 @@ def as_csv(d):
     return buf.getvalue()
 
 
+def ac_csv(d):
+    buf = io.StringIO()
+    w = csv.writer(buf, lineterminator='\n')
+    cols = ['ac', 'name', 'reserved', 'district', 'polling_stations', 'roll_2024', 'draft', 'final', 'draft_men', 'draft_women',
+            'final_men', 'final_women', 'draft_vs_2024_per_1000', 'fall_per_1000']
+    w.writerow(cols)
+    for a in d['acs']:
+        w.writerow([a[c] for c in cols])
+    return buf.getvalue()
+
+
 def main():
     d = build()
     files = {os.path.join(OUT, 'summary.json'): json.dumps(d, ensure_ascii=False, indent=1) + '\n',
-             os.path.join(OUT, 'assam.csv'): as_csv(d)}
+             os.path.join(OUT, 'assam.csv'): as_csv(d),
+             os.path.join(OUT, 'constituencies.csv'): ac_csv(d)}
     stale = [p for p, t in files.items() if not os.path.exists(p) or open(p, encoding='utf-8').read() != t]
     if CHECK:
         if stale:

@@ -783,10 +783,14 @@ runs it with `--check`.
   reported as identified for deletion; no CEO figure says they were off the
   draft, and the draft is 2,76,490 above the January 2025 roll. Every page
   says flagged.
-- **Every roll figure is the CEO's as quoted by the press**: ceoassam.nic.in
-  refused the sandbox, so no district or constituency table was read. The AC
-  draft and final tables exist (`SOURCES.md` lists their addresses); fetch
-  them from an Indian network and add a constituency section.
+- **The constituency tables are the CEO's own** (`raw/ac_rolls.csv`, read by
+  `raw/read_ac_tables.py` from the three PDFs in `raw/sources`, which the
+  owner downloaded): the final roll of 8 February 2024, the draft and the final
+  roll, every seat by sex. The build asserts they add to the press's state
+  totals by sex and to 31,486 polling stations. A seat's change is net, names
+  added less names removed; never call it the names removed. Women were 62.9%
+  of the net fall from draft to final against 50.1% of the draft. The flagged
+  count and its reasons are still press only.
 - **The two drafts differ by 1,151** (27 December against the figure given with
   the final roll); both kept as printed.
 - **Context**: D-voters, Foreigners Tribunals, detention centres and the NRC

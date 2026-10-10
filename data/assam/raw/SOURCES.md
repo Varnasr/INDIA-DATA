@@ -8,8 +8,18 @@ refused the sandbox: plain curl was reset or answered 503, and Firecrawl failed
 with a tunnel error on every attempt, including Indian and stealth proxies.
 web.archive.org is blocked by the egress policy. eci.gov.in answered 406 to
 curl and to Firecrawl for the order PDF. nrcassam.nic.in and
-assamassembly.gov.in could not be reached. So **no district or constituency
-table was obtained.** Search results show that the CEO published them:
+assamassembly.gov.in could not be reached. The three constituency tables below
+were downloaded by the site's owner on 10 October 2026 and are in `sources/`
+(`ceo_final_electors_20240208.pdf`, `ceo_draft_electors_20251227.pdf`,
+`ceo_final_electors_20260210.pdf`). `read_ac_tables.py` reads them into
+`ac_rolls.csv` (needs pypdf; `--check` compares) and asserts that every row's
+men, women and third gender add to its total, that ACs 1 to 126 appear once in
+each table, and that each table adds to its printed state total: 2,43,01,960
+(February 2024), 2,52,01,624 (draft) and 2,49,58,139 (final). The draft and
+final also add to the press figures by sex and to 31,486 polling stations,
+which `build_assam.py` asserts. West Karbi Anglong wraps over two lines in the
+PDFs and is joined. The tables give each roll's total only, so a seat's change
+is net, names added less names removed. The addresses:
 
 - https://ceoassam.nic.in/summary/2026/Draft_Electors_27-12-2025.pdf,
   "Assembly Constituency wise Draft Electors and Polling Stations"
@@ -21,8 +31,7 @@ table was obtained.** Search results show that the CEO published them:
 - https://ceoassam.nic.in/summary/2024/Final%20Elector_08-02-2024.pdf, the
   2024 final roll by district and AC and sex
 
-Fetch these from an Indian network to build AC and district tables. The draft
-and final AC tables are aggregates; the part-wise roll PDFs on the same site
+The draft and final AC tables are aggregates; the part-wise roll PDFs on the same site
 and on voters.eci.gov.in are named lists and were not opened.
 
 ## The order (part A)
