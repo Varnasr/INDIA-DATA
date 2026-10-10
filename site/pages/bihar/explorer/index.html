@@ -37,7 +37,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var s = r[0], acs = r[1], idn = r[2], t = s.totals, byAc = {}, cache = {};
   acs.forEach(function (a) { byAc[a.ac] = a; });
   function col(v) { return v < 7 ? '#c9d6e3' : v < 10 ? '#7fa1c0' : v < 13 ? '#c0504d' : '#7a1f1c'; }
-  function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' : '–'; }
+  function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' : ''; }
   function relShare(h, m, u) { var n = h + m + u; return { lo: 100 * m / n, hi: 100 * (m + u) / n, hin: 100 * h / n, unk: 100 * u / n }; }
 
   // ------------------------------------------------------------ rail
@@ -81,8 +81,8 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     [SIR.lakh(t.total), L('names removed from Bihar\'s roll: {p1} before the draft roll of 1 August 2025 and {p2} more before the final roll. That is {rate} for every 100 electors on the 2025 roll, and as many as {max} in a single constituency.', { p1: SIR.n(t.p1), p2: SIR.n(t.p2), rate: SIR.d(100 * t.total / t.electorate_2025, 2), max: SIR.d(Math.max.apply(null, acs.map(function (a) { return a.per_100; })), 1) })],
     [L('{a} of {b}', { a: overAll.length, b: withM.length }), L('constituencies lost more names in the revision than the margin by which they were won in 2025. That includes {a} of the {b} seats the NDA won.', { a: ndaOver.length, b: nda.length })],
     [L('{a} of {b}', { a: tookOver.length, b: took.length }), L('seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA\'s winning margin. In the middle seat of that group, the removals were {x} times the margin.', { x: SIR.d(tookMed, 1) })],
-    [SIR.pct(100 * t.female / (t.female + t.male)), L('of those removed were women, against {roll}% of the roll before the revision. Women\'s share of the removed exceeds their share of the roll in {a} of {b} districts, by up to {gap} points.', { roll: SIR.d(t.female_share_roll, 2), a: fOver.length, b: dz.length, gap: SIR.d(Math.max.apply(null, gap), 1) })],
-    [SIR.n(b200), L('polling booths lost more than 200 names each, and {n} lost 400 or more.', { n: SIR.n(b400) })]
+    [SIR.pct(100 * t.female / (t.female + t.male)), L('of those removed were women, against {roll}% of the roll before the revision. Women\'s share of the removed exceeds their share of the roll in {a} of {b} districts, by up to {gap} points.', { roll: SIR.d(t.female_share_roll, 1), a: fOver.length, b: dz.length, gap: SIR.d(Math.max.apply(null, gap), 1) })],
+    [SIR.n(b200), L('polling booths lost 200 or more names each, and {n} lost 400 or more.', { n: SIR.n(b400) })]
   ];
   document.getElementById('claims').innerHTML = claims.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join('');
 
@@ -98,7 +98,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
       [SIR.pct(100 * t.female / (t.female + t.male)), L('of the removed are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among the removed, by name classification')],
       [L('{a} of {b}', { a: overAll.length, b: withM.length }), L('seats lost more names than their 2025 margin')], [SIR.n(t.booths), L('polling booths')]]);
     var hk = Object.keys(s.booth_histogram);
-    document.getElementById('p1p').textContent = L('Booths by the number of names removed in phase 1. Most lost fewer than a hundred. {n} lost more than 200.', { n: SIR.n(b200) });
+    document.getElementById('p1p').textContent = L('Booths by the number of names removed in phase 1. Most lost fewer than a hundred. {n} lost 200 or more.', { n: SIR.n(b200) });
     SIR.redraw('c1', { type: 'bar', data: { labels: hk, datasets: [{ label: L('Booths'), data: hk.map(function (k) { return s.booth_histogram[k]; }), $token: '--fill-navy' }] },
       options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names removed in the booth') } }, y: { title: { display: true, text: L('Booths') } } } } });
     var cuts = [0, 1, 2, 5, 10, 20, Infinity], lab = [L('under 1×'), L('{a} to {b}×', { a: 1, b: 2 }), L('{a} to {b}×', { a: 2, b: 5 }), L('{a} to {b}×', { a: 5, b: 10 }), L('{a} to {b}×', { a: 10, b: 20 }), L('20× or more')];
@@ -139,8 +139,8 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     var rel = relShare(a.hindu, a.muslim, a.unknown);
     kpis([[SIR.n(a.total), L('names removed, both phases')], [SIR.d(a.per_100, 2), L('per 100 electors on the 2025 roll')],
       [SIR.pct(100 * a.t_f / (a.t_f + a.t_m)), L('of the removed are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among the removed')],
-      [SIR.d(a.per_booth, 1), L('names per booth, and {n} booths lost over 200', { n: a.booths_200 })],
-      [a.margin2025 ? SIR.d(a.total / a.margin2025, 1) + '×' : '–', L('the 2025 winning margin')]]);
+      [SIR.d(a.per_booth, 1), L('names per booth, and {n} booths lost 200 or more', { n: a.booths_200 })],
+      [a.margin2025 ? SIR.times(a.total / a.margin2025) : '', L('the 2025 winning margin')]]);
     var edges = [0, 50, 100, 150, 200, 250, 300, 400, Infinity], lab = ['0-49', '50-99', '100-149', '150-199', '200-249', '250-299', '300-399', '400+'];
     document.getElementById('p1p').textContent = L('Booths in {name} by the number of names removed in phase 1.', { name: a.name });
     SIR.redraw('c1', { type: 'bar', data: { labels: lab, datasets: [{ label: L('Booths'), data: lab.map(function (l, i) { return rows.filter(function (b) { return b.deleted >= edges[i] && b.deleted < edges[i + 1]; }).length; }), $token: '--fill-navy' }] },
@@ -159,7 +159,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     SIR.table(document.getElementById('tbl'), [
       { k: 'booth', label: L('Booth'), left: true }, { k: 'deleted', label: L('Removed'), fmt: SIR.n }, { k: 'female', label: L('Women'), fmt: SIR.n },
       { k: 'muslim', label: L('Muslim names'), fmt: SIR.n }, { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'shifted', label: L('Shifted'), fmt: SIR.n }, { k: 'absent', label: L('Absent'), fmt: SIR.n }, { k: 'already_enrolled', label: L('Already enrolled'), fmt: SIR.n },
-      { k: 'lead2024', label: L('2024 leader'), left: true, fmt: function (v) { return v ? SIR.esc(v) : '–'; } },
+      { k: 'lead2024', label: L('2024 leader'), left: true, fmt: function (v) { return v ? SIR.esc(v) : ''; } },
       { k: 'lead_margin_pp', label: L('Lead, points'), fmt: function (v) { return SIR.d(v, 1); } }], rows, { sort: 'deleted' });
     document.getElementById('main').scrollIntoView({ block: 'start' });
   }

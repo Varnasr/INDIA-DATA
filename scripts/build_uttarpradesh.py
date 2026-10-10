@@ -37,9 +37,9 @@ def build():
     for r in rows:
         v = {k: int(r[k]) for k in ('roll_before', 'draft', 'total') + R}
         assert v['roll_before'] - v['draft'] == v['total'] == sum(v[k] for k in R), r['district']
-        d = {'district': r['district'].strip(), **v, 'per_100': round(100 * v['total'] / v['roll_before'], 2)}
+        d = {'district': r['district'].strip(), **v, 'per_100': round(100 * v['total'] / v['roll_before'], 4)}
         for k in R:
-            d[k + '_pct'] = round(100 * v[k] / v['total'], 2)
+            d[k + '_pct'] = round(100 * v[k] / v['total'], 4)
         D.append(d)
     for k, t in STATE.items():
         assert sum(d[k] for d in D) == t, 'column %s does not add up to the State row' % k
@@ -53,14 +53,14 @@ def build():
     T = STATE['total']
     D.sort(key=lambda d: -d['per_100'])
     summary = {
-        'roll_before': STATE['roll_before'], 'draft': STATE['draft'], 'left_off': T, 'per_100': round(100 * T / STATE['roll_before'], 2),
-        'reasons': {k: STATE[k] for k in R}, 'shares': {k: round(100 * STATE[k] / T, 2) for k in R},
-        'final': int(fn['total']), 'final_date': '2026-04-10', 'net_rise': int(nr['total']), 'made_up_pct': round(100 * int(nr['total']) / T, 2),
+        'roll_before': STATE['roll_before'], 'draft': STATE['draft'], 'left_off': T, 'per_100': round(100 * T / STATE['roll_before'], 4),
+        'reasons': {k: STATE[k] for k in R}, 'shares': {k: round(100 * STATE[k] / T, 4) for k in R},
+        'final': int(fn['total']), 'final_date': '2026-04-10', 'net_rise': int(nr['total']), 'made_up_pct': round(100 * int(nr['total']) / T, 4),
         'removed_after': int(ra['total']), 'removed_after_kind': ra['kind'],
-        'draft_women_pct': round(100 * int(dr['women']) / STATE['draft'], 2), 'final_women_pct': round(100 * int(fn['women']) / int(fn['total']), 2),
-        'rise_women_pct': round(100 * int(nr['women']) / int(nr['total']), 2),
-        'form6': int(f6['total']), 'form6_women_pct': round(100 * int(f6['women']) / int(f6['total']), 2),
-        'form7': int(f7['total']), 'form7_women_pct': round(100 * int(f7['women']) / int(f7['total']), 2), 'forms_kind': f6['kind'],
+        'draft_women_pct': round(100 * int(dr['women']) / STATE['draft'], 4), 'final_women_pct': round(100 * int(fn['women']) / int(fn['total']), 4),
+        'rise_women_pct': round(100 * int(nr['women']) / int(nr['total']), 4),
+        'form6': int(f6['total']), 'form6_women_pct': round(100 * int(f6['women']) / int(f6['total']), 4),
+        'form7': int(f7['total']), 'form7_women_pct': round(100 * int(f7['women']) / int(f7['total']), 4), 'forms_kind': f6['kind'],
         'districts': len(D), 'top': [{'district': d['district'], 'per_100': d['per_100'], 'total': d['total']} for d in D[:5]],
         'low': [{'district': d['district'], 'per_100': d['per_100']} for d in D[-3:]],
         'most_names': max(D, key=lambda d: d['total'])['district'],

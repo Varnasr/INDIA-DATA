@@ -75,7 +75,7 @@ STATES = [('Bihar', 'left_off', 'per 100 on the 2025 roll'), ('Tamil Nadu', 'lef
 
 def rate(rs):
     b = sum(r['base'] for r in rs)
-    return round(100 * sum(r['count'] for r in rs) / b, 2) if b else None
+    return round(100 * sum(r['count'] for r in rs) / b, 4) if b else None
 
 
 def build():
@@ -100,8 +100,8 @@ def build():
                 gap = 100 * r['count'] / r['base'] - rate(g)
                 gaps.append(gap)
                 above += gap > 0
-                each.append(dict(ac=r['ac'], name=r['name'], district=r['district'], gap=round(gap, 2)))
-            row[c].update(compared=len(gaps), above_district=above, gap_vs_district=round(sum(gaps) / len(gaps), 2) if gaps else None, each=each)
+                each.append(dict(ac=r['ac'], name=r['name'], district=r['district'], gap=round(gap, 4)))
+            row[c].update(compared=len(gaps), above_district=above, gap_vs_district=round(sum(gaps) / len(gaps), 4) if gaps else None, each=each)
         out.append(row)
     return dict(states=out)
 

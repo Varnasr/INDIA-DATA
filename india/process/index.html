@@ -79,7 +79,7 @@
   <p class="note" id="nClaims"></p>
 
   <h2 id="notices-the-no-mapping-list-and-the-discrepancy-list">Notices: the no-mapping list and the discrepancy list</h2>
-  <p class="sub">Electors who stayed on the draft roll could still be sent a notice to prove their entry. Two lists produced the notices. No mapping means the elector could not be linked to the roll of the last intensive revision, 2002 to 2005 depending on the state. The logical discrepancy list is the Commission's list of mismatches in names, ages and family links, such as a parent fewer than 15 years older than the child. An elector can be on both lists. The chart sets each state's notices against its draft roll. Dark dots rest on a Chief Electoral Officer's or a court's document, light ones on a press report quoting the Chief Electoral Officer.</p>
+  <p class="sub">Electors who stayed on the draft roll could still be sent a notice to prove their entry. Two lists produced the notices. No mapping means the elector could not be linked to the roll of the last intensive revision, 2002 to 2006 depending on the state. The logical discrepancy list is the Commission's list of mismatches in names, ages and family links, such as a parent fewer than 15 years older than the child. An elector can be on both lists. The chart sets each state's notices against its draft roll. Dark dots rest on a Chief Electoral Officer's or a court's document, light ones on a press report quoting the Chief Electoral Officer.</p>
   <div class="grid"><div class="panel wide"><div class="vizbox" id="vNotices"></div></div></div>
   <p class="finding" id="fNotices"></p>
   <div class="twrap scroll" tabindex="0" role="region" aria-label="Notices by state"><table id="tNotices"></table></div>
@@ -179,9 +179,15 @@ SIR.json('data/india/process.json').then(function (P) {
 
   // what made it harder to stay on the roll
   var srcs = function (a) { return '<p class="psrc">' + (a || []).map(function (x) { return '<a href="' + E(x.url) + '"' + (x.url.charAt(0) === '#' ? '' : ' rel="noopener" target="_blank"') + '>' + E(x.name) + '</a>'; }).join(' · ') + '</p>'; };
-  document.getElementById('burdens').innerHTML = P.burdens.map(function (b) {
-    return '<li><h3>' + E(b.title) + '</h3><p>' + E(b.text) + '</p>' + srcs(b.src) + '</li>';
-  }).join('');
+  // the burdens carry {placeholders} for counts taken from the schedules and,
+  // once the state table is in, from the claims and objections after the draft
+  var fill = { p2_states: p2.length, p2_again: p2twice, p3_states: p3.length, p3_moved: p3moved };
+  var drawBurdens = function () {
+    document.getElementById('burdens').innerHTML = P.burdens.filter(function (b) { return !/\{claims_/.test(b.text) || fill.claims_states != null; }).map(function (b) {
+      return '<li><h3>' + E(b.title) + '</h3><p>' + E(b.text.replace(/\{(\w+)\}/g, function (m, k) { return fill[k]; })) + '</p>' + srcs(b.src) + '</li>';
+    }).join('');
+  };
+  drawBurdens();
 
   // Form 6, Form 7 and the declaration
   var fl = document.getElementById('forms'), lastFY = '';
@@ -240,6 +246,9 @@ SIR.json('data/india/process.json').then(function (P) {
     document.getElementById('tClaims').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Added per 100 removed</th><th scope="col">Removed at draft</th><th scope="col">Added after</th><th scope="col">Removed after</th></tr></thead><tbody>' +
       rows.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.s) + '</th><td>' + r.per.toFixed(1) + '</td><td>' + N(r.rm) + '</td><td>' + N(r.ad) + '</td><td>' + N(r.ra) + '</td></tr>'; }).join('') + '</tbody>';
     var low = rows.filter(function (r) { return r.per < 10; }).length;
+    fill.claims_states = rows.length; fill.claims_fewer = rows.filter(function (r) { return r.per < 100; }).length; fill.claims_under10 = low;
+    fill.claims_lead = fill.claims_fewer === fill.claims_states ? 'All ' + fill.claims_states + ' states that published both counts' : fill.claims_fewer + ' of the ' + fill.claims_states + ' states that published both counts';
+    drawBurdens();
     document.getElementById('nClaims').innerHTML = 'In ' + low + ' of these ' + rows.length + ' states and union territories, fewer than 10 names were added after the draft for every 100 removed at it. ' + E(P.claims_note) + ' The other states published only the net change from draft to final, or no final roll yet, and are on the <a href="../">All India page</a>.' + srcs(P.claims_src);
     SIR.tools();
   }).catch(function () {});
@@ -254,8 +263,8 @@ SIR.json('data/india/process.json').then(function (P) {
     document.getElementById('fNotices').innerHTML = '<b>Across the ' + T.with_total + ' states with a published total, ' + lk(T.notices_total) + ' electors on the draft rolls were sent a notice, ' + T.per_100.toFixed(1) + ' of every 100.</b> ' + R[0].state + ' sent the most for its size, ' + R[0].per_100.toFixed(1) + ' per 100, and ' + R[R.length - 1].state + ' the fewest, ' + R[R.length - 1].per_100.toFixed(1) + '. Of the ' + both.length + ' states that gave the two lists, the discrepancy list was the larger in ' + moreD.length + '. Only ' + T.primary + ' of the totals come from a Chief Electoral Officer\'s or a court\'s own document.';
     var how = function (r) { return r.how === 'sum' ? 'sum of the two lists' : r.how ? 'published total' : ''; };
     document.getElementById('tNotices').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Notices</th><th scope="col">Per 100 on the draft</th><th scope="col">No mapping</th><th scope="col">Discrepancy list</th><th scope="col">Deleted after a notice</th><th scope="col" class="l">Total is</th><th scope="col" class="l">Source</th></tr></thead><tbody>' +
-      T.states.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.state) + '</th><td>' + N(r.notices) + (r.rounded ? '*' : '') + '</td><td>' + (r.per_100 == null ? '' : r.per_100.toFixed(1)) + '</td><td>' + N(r.no_mapping) + '</td><td>' + N(r.discrepancy) + '</td><td>' + N(r.deleted_after_notice) + '</td><td class="l">' + how(r) + '</td><td class="l">' + (r.source_url ? '<a href="' + E(r.source_url) + '">' + (r.kind === 'primary' ? 'document' : 'press') + '</a>' : (r.lists_source ? '<a href="' + E(r.lists_source) + '">press</a>' : '')) + '</td></tr>'; }).join('') + '</tbody>';
-    document.getElementById('nNotices').innerHTML = 'An asterisk marks a figure published rounded, in lakh or crore. Most phase 3 figures are running counts, taken while notices were still being heard. An elector can be on both lists, so the two need not add up to the total. In Uttar Pradesh two press reports split the same 3.26 crore differently, and the split used here, from The Times of India, is the one that adds up. West Bengal\'s total is the Supreme Court\'s reading of the record on 19 January 2026, and its two lists come from an earlier Commission breakdown. A state with only one list, or two reports that disagree, has no total here. Deleted after a notice counts names struck off for not answering or for failing the hearing, where a state reported it, and many of these are interim. In Hyderabad\'s Old City the two lists can be told apart polling part by polling part, on the <a href="../../hyderabad/hearings/">hearings page</a>. Every figure, its date and the sentence it was taken from are in the download.';
+      T.states.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.state) + '</th><td>' + N(r.notices) + (r.rounded ? '*' : '') + '</td><td>' + (r.per_100 == null ? '' : r.per_100.toFixed(1)) + '</td><td>' + N(r.no_mapping) + '</td><td>' + N(r.discrepancy) + '</td><td>' + N(r.deleted_after_notice) + (r.deleted_kind === 'press' && r.kind === 'primary' ? '†' : '') + '</td><td class="l">' + how(r) + '</td><td class="l">' + (r.source_url ? '<a href="' + E(r.source_url) + '">' + (r.kind === 'primary' ? 'document' : 'press') + '</a>' : (r.lists_source ? '<a href="' + E(r.lists_source) + '">press</a>' : '')) + '</td></tr>'; }).join('') + '</tbody>';
+    document.getElementById('nNotices').innerHTML = 'An asterisk marks a figure published rounded, in lakh or crore. Most phase 3 figures are running counts, taken while notices were still being heard. An elector can be on both lists, so the two need not add up to the total. In Uttar Pradesh two press reports split the same 3.26 crore differently, and the split used here, from The Times of India, is the one that adds up. West Bengal\'s total is the Supreme Court\'s reading of the record on 19 January 2026. The court\'s order gives only the discrepancy list, and the two lists are always taken from one source, so West Bengal\'s come from an earlier Commission breakdown reported by the press. A dagger marks a figure in a row whose total rests on a document but which came through the press. West Bengal\'s deletions are the adjudication outcome as The Indian Express reported it on 7 April 2026. A state with only one list, or two reports that disagree, has no total here. Deleted after a notice counts names struck off for not answering or for failing the hearing, where a state reported it, and many of these are interim. In Hyderabad\'s Old City the two lists can be told apart polling part by polling part, on the <a href="../../hyderabad/hearings/">hearings page</a>. Every figure, its date and the sentence it was taken from are in the download.';
     SIR.tools();
   }).catch(function () {});
 

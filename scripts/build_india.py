@@ -83,7 +83,7 @@ def spearman(pts):
     mx, my = sum(x) / n, sum(y) / n
     num = sum((x[i] - mx) * (y[i] - my) for i in range(n))
     den = (sum((v - mx) ** 2 for v in x) * sum((v - my) ** 2 for v in y)) ** 0.5
-    return round(num / den, 2)
+    return round(num / den, 4)
 
 
 def median(v):
@@ -121,23 +121,27 @@ def build():
             else:
                 assert gap > 0, x['state']
             x['unsplit'] = max(gap, 0)
-            x['shares'] = {k: round(100 * x[k] / s, 2) for k in R}
+            x['shares'] = {k: round(100 * x[k] / s, 4) for k in R}
         else:
             assert all(c is None for c in cats), x['state']
             x['unsplit'] = x['removed']
             x['shares'] = None
-        x['per_100'] = round(100 * x['removed'] / x['electors_before'], 2) if x['removed'] and x['electors_before'] else None
+        x['per_100'] = round(100 * x['removed'] / x['electors_before'], 4) if x['removed'] and x['electors_before'] else None
     has = [x for x in rows if x['removed'] is not None]
 
     def total(xs):
         t = {'states': len(xs), 'removed': sum(x['removed'] for x in xs)}
         for k in R:
             t[k] = sum(x[k] or 0 for x in xs)
-        t['unsplit'] = t['removed'] - sum(t[k] for k in R)
+        # names the published reasons leave unexplained; a state whose reasons
+        # add up to more than its total contributes nothing here, and the
+        # excess is kept apart so it does not cancel another state's shortfall
+        t['unsplit'] = sum(x['unsplit'] for x in xs)
+        t['over_split'] = sum(t[k] for k in R) + t['unsplit'] - t['removed']
         split = sum(t[k] for k in R)
-        t['shares'] = {k: round(100 * t[k] / split, 2) for k in R}
+        t['shares'] = {k: round(100 * t[k] / split, 4) for k in R}
         wb = [x for x in xs if x['electors_before']]
-        t['per_100'] = round(100 * sum(x['removed'] for x in wb) / sum(x['electors_before'] for x in wb), 2)
+        t['per_100'] = round(100 * sum(x['removed'] for x in wb) / sum(x['electors_before'] for x in wb), 4)
         return t
 
     # ---- characteristics
@@ -189,7 +193,7 @@ def build():
     for yk, yf in outcomes:
         for side in ('yes', 'no'):
             v = [yf(x) for x in has if yf(x) is not None and x['char']['intl_border'] == (side == 'yes')]
-            border[yk + '_' + side] = round(median(v), 2)
+            border[yk + '_' + side] = round(median(v), 4)
             border['n_' + yk + '_' + side] = len(v)
 
     # ---- the rolls against the projected adult population, and the 2024 vote
@@ -239,26 +243,26 @@ def build():
             x['net_fall'] = x['removed'] - x['net_after_draft']
             x['made_up_pct'] = round(100 * x['net_after_draft'] / x['removed'], 1)
             if x['electors_before']:
-                x['net_fall_per_100'] = round(100 * x['net_fall'] / x['electors_before'], 2)
+                x['net_fall_per_100'] = round(100 * x['net_fall'] / x['electors_before'], 4)
     fr = [x for x in rows if x['electors_final'] is not None]
     fb = [x for x in fr if x['electors_before']]
     final = {'states': len(fr), 'removed': sum(x['removed'] for x in fr), 'net_after_draft': sum(x['net_after_draft'] for x in fr),
              'withheld': sum(x['withheld'] or 0 for x in fr),
              'gross': sum(1 for x in fr if x['reconciles'] in ('exact', 'rounded')),
-             'per_100': round(100 * sum(x['removed'] for x in fb) / sum(x['electors_before'] for x in fb), 2),
-             'net_per_100': round(100 * sum(x['net_fall'] for x in fb) / sum(x['electors_before'] for x in fb), 2),
+             'per_100': round(100 * sum(x['removed'] for x in fb) / sum(x['electors_before'] for x in fb), 4),
+             'net_per_100': round(100 * sum(x['net_fall'] for x in fb) / sum(x['electors_before'] for x in fb), 4),
              'shrank': [x['state'] for x in fr if x['net_after_draft'] < 0],
              'waiting': [x['state'] for x in rows if x['removed'] is not None and x['electors_final'] is None]}
     final['made_up_pct'] = round(100 * final['net_after_draft'] / final['removed'], 1)
     final['made_up_pct_ex_withheld'] = round(100 * (final['net_after_draft'] + final['withheld']) / final['removed'], 1)
-    final['net_per_100_ex_withheld'] = round(100 * (sum(x['net_fall'] for x in fb) - final['withheld']) / sum(x['electors_before'] for x in fb), 2)
+    final['net_per_100_ex_withheld'] = round(100 * (sum(x['net_fall'] for x in fb) - final['withheld']) / sum(x['electors_before'] for x in fb), 4)
     final['rho_made_up'] = spearman([(x['per_100'], x['made_up_pct']) for x in fb])
 
     # ---- women among the removed
     rs = json.load(open(BIHAR_REASONS, encoding='utf-8'))
     bf = sum(rs['by_sex'][k]['F'] for k in rs['by_sex'])
     bm = sum(rs['by_sex'][k]['M'] for k in rs['by_sex'])
-    gender = [{'state': 'Bihar', 'women_removed': bf, 'men_removed': bm, 'women_share_removed': round(100 * bf / (bf + bm), 2),
+    gender = [{'state': 'Bihar', 'women_removed': bf, 'men_removed': bm, 'women_share_removed': round(100 * bf / (bf + bm), 4),
                'women_share_roll': json.load(open(os.path.join(ROOT, 'data', 'bihar', 'summary.json'), encoding='utf-8'))['totals']['female_share_roll'],
                'quality': 'lists', 'source_url': '',
                'note': 'Counted from the phase 1 deletion lists. The roll before the revision by sex is the draft roll by sex (Format 4B) plus the names removed at the draft by sex.'}]
@@ -272,11 +276,15 @@ def build():
         assert abs(100 * g['women_removed'] / (g['women_removed'] + g['men_removed']) - g['women_share_removed']) < 0.01, x['state']
         gender.append(g)
     for g in gender:
-        g['gap'] = round(g['women_share_removed'] - g['women_share_roll'], 2)
+        g['gap'] = round(g['women_share_removed'] - g['women_share_roll'], 4)
         g['phase'] = next(x['phase'] for x in rows if x['state'] == g['state'])
 
     out = {
-        'as_of': '2026-09-30',
+        # The latest date the figures carry: a draft or final roll, or the day
+        # the schedules and figures were last checked against their sources
+        # (process.json's as_of), which covers figures reported after a roll.
+        'as_of': max([x['draft_date'] for x in rows if x['draft_date']] + [x['final_date'] for x in rows if x['final_date']]
+                     + [json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))['as_of']]),
         'adults': adults,
         'tiles': [{'state': a, 'code': c, 'row': r, 'col': k} for a, c, r, k in TILES],
         'characteristics': [{'key': k, 'label': l, 'source': SOURCE_OF[k]} for k, l in CHAR],

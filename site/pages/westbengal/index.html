@@ -92,12 +92,12 @@ Promise.all([SIR.json('data/westbengal/summary.json'), SIR.json('data/westbengal
     links: [{ s: 0, t: 0, v: AD.found_eligible }, { s: 0, t: 1, v: AD.appeals_by_excluded }, { s: 0, t: 2, v: AD.not_eligible_no_appeal }, { s: 0, t: 3, v: AD.not_accounted }] });
   var tiles = [[SIR.lakh(AD.appeals_by_excluded), L('appeals by those found not eligible'), 100 * AD.appeals_by_excluded / AD.appeals_total],
     [SIR.lakh(AD.appeals_against_inclusion), L('appeals against names the judicial officers had kept'), 100 * AD.appeals_against_inclusion / AD.appeals_total],
-    [SIR.n(AD.restored_before_poll), L('names restored by the tribunals in time to vote'), 100 * AD.restored_before_poll / AD.appeals_by_excluded],
+    [SIR.n(AD.restored_before_poll), L('names restored by the tribunals in time to vote, by press reports'), 100 * AD.restored_before_poll / AD.appeals_by_excluded],
     [SIR.pct(AD.pending_pct), L('of all appeals still undecided on 16 September 2026'), AD.pending_pct]];
   document.getElementById('cAppeal').innerHTML = tiles.map(function (t) {
     return '<div class="big"><b>' + t[0] + '</b><i style="--w:' + Math.max(t[2], 0.6).toFixed(1) + '%"></i><span>' + t[1] + '</span></div>';
   }).join('');
-  document.getElementById('fAdj').innerHTML = L('<b>Of the {u} names held back, {e} were found eligible and {n} were found not eligible, {p} of the cases.</b> {a} of those found not eligible appealed, and {r} were restored in time to vote. Another {i} appeals asked the tribunals to remove names the judicial officers had kept. On 16 September {pp} of all {t} appeals were still undecided. These are the Election Commission\'s figures as reported, and they are not published by district.', {
+  document.getElementById('fAdj').innerHTML = L('<b>Of the {u} names held back, {e} were found eligible and {n} were found not eligible, {p} of the cases.</b> {a} of those found not eligible appealed. Another {i} appeals asked the tribunals to remove names the judicial officers had kept. On 16 September {pp} of all {t} appeals were still undecided. These are the Election Commission\'s figures as reported. Press reports alone say that {r} were restored by the tribunals in time to vote. No table of these figures by district from the Commission itself has been found.', {
     u: SIR.lakh(AD.under_adjudication), e: SIR.lakh(AD.found_eligible), n: SIR.lakh(AD.found_not_eligible), p: SIR.pct(AD.not_eligible_pct), a: SIR.lakh(AD.appeals_by_excluded), r: SIR.n(AD.restored_before_poll), i: SIR.lakh(AD.appeals_against_inclusion), pp: SIR.pct(AD.pending_pct), t: SIR.lakh(AD.appeals_total) });
 
   VIZ.lollipop('cDist', { label: L('Fall in the roll from 2024 to the 2026 election, per 100 electors, by district'), axis: L('Fall per 100 electors on the 2024 roll'),

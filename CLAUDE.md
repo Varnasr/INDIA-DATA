@@ -73,8 +73,18 @@ Things the build depends on, each asserted by `check_data.py`:
   2019-20); only density and urban share are still Census 2011, read from the
   Registrar General's table A-01 by `scripts/census_a01.py`
   (`data/india/raw/census2011_a01_districts.csv`, all 640 districts).
+- **Rates are stored to four decimals.** Every builder rounds a rate or
+  share to 4 places and the pages show 1 through `SIR.d`, which rounds a half
+  up. Stored at 2 places, 10.645 became 10.65 and then 10.7, and ties at the
+  rounded value put seats in the wrong third. Do not round a stored figure to
+  the precision it is shown at.
 - **Caste is not identified.** Two surname classifications give different
-  compositions and wide bounds. The pages say so. Do not collapse them into
+  compositions and wide bounds. The pages say so. Surnames in classification A were
+  checked against the official SC, ST and OBC lists for Bihar compiled by
+  Jolad, Kalyani and Baharadia (Harvard Dataverse, doi:10.7910/DVN/WT5VIY,
+  CC0): Turi, Dom and Bhuiyan are SC, Dhobi is SC for Hindus and OBC for
+  Muslims and so spans groups. No district income figure is used: the
+  uploaded per-capita product column held placeholder values and was dropped. Do not collapse them into
   one number, and do not reintroduce "Devi" or any title as a caste marker.
 - **Religion is a range**, low bound classified names only, high bound adding
   every unclassified name. The census share is inside it in 18 of 38 districts
@@ -398,7 +408,7 @@ whatever their removals (coefficient about -0.9). Leaving that out is how the
 first version went wrong: without it the slope is -0.83 (-1.86 to +0.20) and
 looked like evidence against an anti-NDA effect; with it the slope is +0.31
 (-0.27 to +0.89), which takes in both no effect and the +0.33 to +0.66 an
-anti-NDA pattern would give. Allowing for 2020, the NDA's lead grew 4.5 to 4.7
+anti-NDA pattern would give. Allowing for 2020, the NDA's lead grew 4.0 to 5.2
 points in every third of seats by removals. **Say what this is**: the vote
 cannot tell whether the removals moved votes between the alliances, and that
 question is separate from whether the removals were accurate. Never present

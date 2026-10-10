@@ -10,12 +10,13 @@
       var sg = function (v) { return (v > 0 ? '+' : '') + d1(v); };
       var C = s.city, R = s.rest, W = {}, last = D[D.length - 1];
       s.winners.forEach(function (w) { W[w.party] = w; });
-      var scale = 'Gujarat\'s draft roll of ' + SIR.date(s.draft_date) + ' left off ' + lk(s.removed) + ' names, ' + d1(s.per_100) + ' of every 100 electors on the roll before the revision.';
+      var DL = function (iso) { var p = iso.split('-'); return +p[2] + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][+p[1] - 1] + ' ' + p[0]; };
+      var scale = 'Gujarat\'s draft roll of ' + DL(s.draft_date) + ' left off ' + lk(s.removed) + ' names, ' + d1(s.per_100) + ' of every 100 electors on the roll before the revision.';
       var margin = 'In ' + s.over_margin + ' of the ' + s.acs + ' constituencies, more names were left off than the 2022 winning margin, and in ' + s.narrow_over_margin + ' even leaving out the names entered as dead or as enrolled elsewhere.';
       var city = 'Ahmedabad and Surat districts hold ' + SIR.pct(C.share_of_roll) + ' of the state\'s roll and ' + SIR.pct(C.share_of_removed) + ' of the names left off. They lost ' + d1(C.per_100) + ' of every 100 electors, against ' + d1(R.per_100) + ' in the other 31 districts.';
       var where = D[0].district + ' left off the most, ' + d1(D[0].per_100) + ' per 100, and ' + s.rate_max + ' the most of any constituency, ' + d1(s.rate_max_v) + '. ' + last.district + ' left off the fewest of the districts, ' + d1(last.per_100) + '.';
       var reasons = SIR.pct(s.shares.shifted) + ' of the names left off were entered as shifted for good, ' + SIR.pct(s.shares.dead) + ' as dead and ' + SIR.pct(s.shares.absent) + ' as untraceable or absent.';
-      var final = 'The final roll of ' + SIR.date(s.final_date) + ' is ' + lk(s.net) + ' larger than the draft, at most ' + SIR.pct(s.made_up_pct) + ' of the names left off, and still ' + lk(s.net_fall) + ' smaller than the roll before the revision.';
+      var final = 'The final roll of ' + DL(s.final_date) + ' is ' + lk(s.net) + ' larger than the draft, at most ' + SIR.pct(s.made_up_pct) + ' of the names left off, and still ' + lk(s.net_fall) + ' smaller than the roll before the revision.';
       var sex = 'No table published for Gujarat splits anything by sex, so whether women were left off more often than men cannot be counted.';
       var party = 'Seats the BJP won in 2022 lost ' + d1(W.BJP.per_100) + ' per 100 and the Congress\'s ' + d1(W.INC.per_100) + '. Set against their own districts the two are ' + sg(W.BJP.vs_district) + ' and ' + sg(W.INC.vs_district) + ' points, so the difference comes mostly from where each party\'s seats are.';
       var press = 'The figures are the tables of the Chief Electoral Officer (CEO), who keeps the state\'s rolls for the Election Commission, as published in the press. The CEO\'s own website carries none of them.';

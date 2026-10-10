@@ -28,14 +28,14 @@ def rows(name):
         for k in ('electors_pre', 'electors_draft', 'removed'):
             x[k] = int(x[k])
         assert x['electors_pre'] - x['electors_draft'] == x['removed'], x
-        x['rate'] = round(100 * x['removed'] / x['electors_pre'], 2)
+        x['rate'] = round(100 * x['removed'] / x['electors_pre'], 4)
         out.append(x)
     return out
 
 
 def group(xs):
     pre, rem = sum(x['electors_pre'] for x in xs), sum(x['removed'] for x in xs)
-    return {'seats': len(xs), 'electors_pre': pre, 'removed': rem, 'rate': round(100 * rem / pre, 2)}
+    return {'seats': len(xs), 'electors_pre': pre, 'removed': rem, 'rate': round(100 * rem / pre, 4)}
 
 
 def build():
@@ -64,7 +64,34 @@ def build():
         'districts': [{k: x[k] for k in ('district', 'electors_pre', 'electors_draft', 'removed', 'rate')} for x in D],
         'seats': [{k: x[k] for k in ('ac', 'name', 'electors_pre', 'electors_draft', 'removed', 'rate', 'old_city')} for x in A],
         'source': A[0]['source_url'],
+        'hearings_press': hearings_press(),
     }
+
+
+def indian(n):
+    s = str(n)
+    if len(s) <= 3:
+        return s
+    head, tail = s[:-3], s[-3:]
+    groups = []
+    while len(head) > 2:
+        groups.insert(0, head[-2:])
+        head = head[:-2]
+    if head:
+        groups.insert(0, head)
+    return ','.join(groups) + ',' + tail
+
+
+def hearings_press():
+    """Statewide hearing progress as Telangana Today reported it on 9 October
+    2026 from the Chief Electoral Officer's information. Press, and the pages
+    say so. The counts are a running tally and need not add up to one another,
+    so only their order and the quote they come from are checked."""
+    h = json.load(open(os.path.join(RAW, 'hearings_press.json'), encoding='utf-8'))
+    assert h['eligible'] + h['ineligible'] <= h['heard'] <= h['notices_served'] <= h['notices_generated'], 'hearing counts out of order'
+    for k in ('heard', 'eligible', 'ineligible', 'no_response'):
+        assert indian(h[k]) in h['quote'], (k, indian(h[k]))
+    return h
 
 
 def main():

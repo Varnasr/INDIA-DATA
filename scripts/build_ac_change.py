@@ -71,7 +71,7 @@ def rows():
             raise SystemExit('FAIL - %s %s: the earlier roll less the names left off is not the draft' % (s, nm))
         ch = later - draft
         ce = later - early if early is not None else None
-        full.append([s, ac, nm, dist, early, left, draft, add, rem, later, ch, ce, round(100 * ce / early, 2) if ce is not None else None])
+        full.append([s, ac, nm, dist, early, left, draft, add, rem, later, ch, ce, round(100 * ce / early, 4) if ce is not None else None])
     return full
 
 
@@ -105,12 +105,12 @@ def finder():
         for r in rs:
             if not r[base]:
                 raise SystemExit('FAIL - %s %s has no %s' % (state, r['name'], base))
-            rows.append([pid, r['ac'], r['name'], r['district'], r[cnt], round(per * r[cnt] / r[base], 2), page + '#ac-%d' % r['ac']])
+            rows.append([pid, r['ac'], r['name'], r['district'], r[cnt], round(per * r[cnt] / r[base], 4), page + '#ac-%d' % r['ac']])
     h = J('hyderabad/summary.json')['acs']
     places.append({'id': 'hyd', 'state': 'Telangana (Hyderabad Old City)', 'page': 'hyderabad/explorer/', 'what': 'names removed from the lists',
                    'of': 'the roll before the revision', 'per': 100, 'acs': len(h)})
     for a in h:
-        rows.append(['hyd', None, a['name'], 'Hyderabad', a['deleted'], round(100 * a['deleted'] / a['electors'], 2), 'hyderabad/explorer/#' + a['name']])
+        rows.append(['hyd', None, a['name'], 'Hyderabad', a['deleted'], round(100 * a['deleted'] / a['electors'], 4), 'hyderabad/explorer/#' + a['name']])
     return {'cols': ['place', 'ac', 'constituency', 'district', 'count', 'rate', 'href'], 'places': places, 'rows': rows}
 
 

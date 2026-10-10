@@ -41,7 +41,7 @@
 </header>
 <nav class="nav-tabs" aria-label="Gujarat Pages"><a class="nav-tab" href="../gujarat/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21H3.8a.8.8 0 0 1-.8-.8V3m3 11 4-4 4 4 7-7"/></svg> Overview</a><a class="nav-tab" href="../gujarat/elections/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M12 15h5m-5-6h5M5.4 3h13.2A2.4 2.4 0 0 1 21 5.4v13.2a2.4 2.4 0 0 1-2.4 2.4H5.4A2.4 2.4 0 0 1 3 18.6V5.4A2.4 2.4 0 0 1 5.4 3M9 15a1 1 0 1 1-2 0 1 1 0 0 1 2 0m0-6a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg> Elections</a><a class="nav-tab" href="../gujarat/faq/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M11.83 14v-.621a2.33 2.33 0 0 1 1.164-2.02c1.126-.66 1.514-2.057.854-3.183s-2.057-1.514-3.183-.854C9.965 7.75 9.5 8.487 9.5 9.341M12 17h-.008M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12s4.477 10 10 10 10-4.477 10-10"/></svg> Questions</a><a class="nav-tab" href="../gujarat/method/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M12 7.333C12 5.5 10.5 4 8.667 4H2v12h6.708C12 16 12 19.334 12 19.334m0-12C12 5.5 13.5 4 15.333 4H22v12h-6.667C12 16 12 19.334 12 19.334m0-12v12m1.875 1.124A2.58 2.58 0 0 1 16.167 19H21m-10.875 1.458A2.54 2.54 0 0 0 7.833 19H3"/></svg> Method</a></nav>
 <main id="main">
-<div class="page-head"><p class="kicker">Gujarat 2026</p><p class="asof" data-no-i18n data-k="final" data-d="2026-02-17">Figures as of 17 Feb 2026, when the final roll was published.</p><h1>Overview</h1><ol class="summary" id="short"></ol></div>
+<div class="page-head"><p class="kicker">Gujarat 2026</p><p class="asof" data-no-i18n data-k="final" data-d="2026-02-17">Figures as of 17 February 2026, when the final roll was published.</p><h1>Overview</h1><ol class="summary" id="short"></ol></div>
 <p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
 
 <article class="state" lang="en" dir="ltr" data-no-i18n>
@@ -133,13 +133,14 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/distr
   var S = r[0], D = r[1], A = r[2], NT = r[3].states.filter(function (x) { return x.state === 'Gujarat'; })[0], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
   var lk = function (x) { return SIR.lk(x, 1); }, cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; };
   var C = S.city, R = S.rest, isCity = function (d) { return S.city_names.indexOf(d) >= 0; };
+  var DL = function (iso) { var p = iso.split('-'); return +p[2] + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][+p[1] - 1] + ' ' + p[0]; };
   var RS = [['dead', 'Dead'], ['absent', 'Untraceable or absent'], ['shifted', 'Shifted for good'], ['enrolled_elsewhere', 'Already enrolled elsewhere'], ['other', 'Other']];
 
   VIZ.waterfall('vWater', { label: 'Gujarat: the roll from before the revision to the final roll', from: Math.floor(S.draft * 0.8 / 1e7) * 1e7, steps: [
     { name: 'Roll before the revision', v: S.before, kind: 'total' }].concat(RS.map(function (k) { return { name: k[1], v: S.reasons[k[0]], kind: 'down' }; }), [
     { name: 'Draft roll', v: S.draft, kind: 'total' }, { name: 'Net change after the draft', v: S.net, kind: 'up' }, { name: 'Final roll', v: S.final, kind: 'total' }]) });
   document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + lk(S.removed) + ' names, ' + d1(S.per_100) + ' of every 100 electors on the roll before the revision.</b> The roll fell from ' + cr(S.before) + ' names to ' + cr(S.draft) + ' (one crore is ten million). ' +
-    'The final roll of ' + SIR.date(S.final_date) + ' holds ' + cr(S.final) + '. It is ' + lk(S.net) + ' larger than the draft and still ' + lk(S.net_fall) + ' smaller than the roll before the revision.';
+    'The final roll of ' + DL(S.final_date) + ' holds ' + cr(S.final) + '. It is ' + lk(S.net) + ' larger than the draft and still ' + lk(S.net_fall) + ' smaller than the roll before the revision.';
 
   VIZ.strip('vDist', { label: 'Names left off per 100 electors, every constituency, by district', axis: 'Left off per 100 electors on the roll before the revision', r: 4.5,
     key: [['Ahmedabad and Surat', '--fill-red'], ['Other districts', '--fill-navy']],
@@ -190,7 +191,7 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/distr
     (S.net_negative.length ? S.net_negative.join(' and ') + ' deleted more names than it added. ' : '') +
     'Ahmedabad\'s roll is ' + d1(D.filter(function (d) { return d.district === 'Ahmedabad'; })[0].net_per_100) + ' per 100 and Surat\'s ' + d1(sur.net_per_100) + ' per 100 smaller than before the revision.';
 
-  document.getElementById('fNotice').innerHTML = (NT && NT.notices ? 'Of the electors kept on the draft roll, about ' + lk(NT.notices) + ' were to be sent a notice to prove their entry at a hearing, ' + d1(NT.per_100) + ' of every 100, according to <a href="' + NT.source_url + '">The Times of India</a> of ' + SIR.date(NT.date) + '. ' : '') +
+  document.getElementById('fNotice').innerHTML = (NT && NT.notices ? 'Of the electors kept on the draft roll, about ' + lk(NT.notices) + ' were to be sent a notice to prove their entry at a hearing, ' + d1(NT.per_100) + ' of every 100, according to <a href="' + NT.source_url + '">The Times of India</a> of ' + DL(NT.date) + '. ' : '') +
     'How many names were deleted after a hearing has not been published separately. The deletions above count every name taken off between the draft and the final roll.';
 
   SIR.table(document.getElementById('tDist'), [

@@ -17,6 +17,8 @@
   </div>
   <p class="finding" id="fD"></p>
   <div class="twrap" tabindex="0" role="region" aria-label="Hyderabad district's seats"><table id="tSeats"></table></div>
+  <h2>Hearings across the state, as reported</h2>
+  <p id="fHP"></p>
   <p class="note" id="nT"></p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
@@ -32,10 +34,10 @@ SIR.json('data/hyderabad/telangana.json').then(function (d) {
   var seats = d.seats.slice().sort(function (a, b) { return b.rate - a.rate; }), above = seats.filter(function (x) { return !x.old_city && x.rate > Math.max.apply(null, seats.filter(function (y) { return y.old_city; }).map(function (y) { return y.rate; })); });
   document.getElementById('fT').innerHTML = L('<b>Four in ten Old City electors were struck off, {oc} of the roll, and Hyderabad\'s other ten seats lost even more, {oh}.</b> Every seat in Hyderabad district lost between {lo} and {hi}, and {n} seats outside the Old City lost more than any Old City seat. The draft left off {h} across Hyderabad district and {r} in the rest of Telangana.', {
     oc: SIR.pct(OC.rate), oh: SIR.pct(OH.rate), lo: SIR.pct(seats[seats.length - 1].rate), hi: SIR.pct(seats[0].rate), n: above.length, h: SIR.pct(H.rate), r: SIR.pct(R.rate) });
-  SIR.chart('cSeats', { type: 'bar', data: { labels: seats.map(function (x) { return x.name; }), datasets: [{ label: L('% of the roll left off the draft'), data: seats.map(function (x) { return x.rate; }), $tokens: seats.map(function (x) { return x.old_city ? '--fill-red' : '--fill-navy'; }) }] },
+  SIR.chart('cSeats', { type: 'bar', data: { labels: seats.map(function (x) { return x.name; }), datasets: [{ label: L('% of the roll left off the draft'), data: seats.map(function (x) { return +x.rate.toFixed(1); }), $tokens: seats.map(function (x) { return x.old_city ? '--fill-red' : '--fill-navy'; }) }] },
     options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('% of the roll left off the draft') } } } } });
   var METRO = ['Rangareddy', 'Medchal Malkajgiri'], ds = d.districts.slice().sort(function (a, b) { return b.rate - a.rate; });
-  SIR.chart('cDist', { type: 'bar', data: { labels: ds.map(function (x) { return x.district; }), datasets: [{ label: L('% of the roll left off the draft'), data: ds.map(function (x) { return x.rate; }), $tokens: ds.map(function (x) { return x.district === 'Hyderabad' ? '--fill-red' : METRO.indexOf(x.district) >= 0 ? '--fill-amber' : '--fill-navy'; }) }] },
+  SIR.chart('cDist', { type: 'bar', data: { labels: ds.map(function (x) { return x.district; }), datasets: [{ label: L('% of the roll left off the draft'), data: ds.map(function (x) { return +x.rate.toFixed(1); }), $tokens: ds.map(function (x) { return x.district === 'Hyderabad' ? '--fill-red' : METRO.indexOf(x.district) >= 0 ? '--fill-amber' : '--fill-navy'; }) }] },
     options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('% of the roll left off the draft') } } } } });
   var m = ds.filter(function (x) { return METRO.indexOf(x.district) >= 0; }), next = ds.filter(function (x) { return x.district !== 'Hyderabad' && METRO.indexOf(x.district) < 0; })[0];
   document.getElementById('fD').innerHTML = L('<b>The three districts of the capital region lost far more than the rest of the state.</b> Hyderabad lost {h}, {m1} {v1} and {m2} {v2}, and no other district lost more than {nx} ({nd}). The removals are heavy across the whole capital region.', {
@@ -45,6 +47,8 @@ SIR.json('data/hyderabad/telangana.json').then(function (d) {
     { k: 'electors_pre', label: L('Electors before'), fmt: SIR.n }, { k: 'electors_draft', label: L('Draft roll'), fmt: SIR.n },
     { k: 'removed', label: L('Left off'), fmt: SIR.n }, { k: 'rate', label: L('% of roll'), fmt: function (v) { return SIR.d(v, 1); } }
   ], d.seats, { sort: 'rate' });
+  var HP = d.hearings_press;
+  if (HP) document.getElementById('fHP').innerHTML = L('<a href="{u}">{outlet} reported on 9 October</a>, from the Chief Electoral Officer\'s information, that hearings of {heard} electors across Telangana had been completed. Of these, {eligible} were found eligible and {ineligible} ineligible, and {none} electors served a notice had not responded. The paper also reported that the Election Commission had done away with in-person hearings and house visits to collect documents, and that hearings would be held preferably online. These are press figures, and no table from the Chief Electoral Officer has been found to check them against.', { u: HP.url, outlet: SIR.esc(HP.outlet), heard: SIR.lakh(HP.heard), eligible: SIR.lakh(HP.eligible), ineligible: SIR.n(HP.ineligible), none: SIR.lakh(HP.no_response) });
   document.getElementById('nT').innerHTML = L('The source is the Chief Electoral Officer, Telangana\'s draft roll of 17 August 2026, by district and for Hyderabad district\'s seats, <a href="{u}">as tabulated in the press</a>. The state gives no split by reason below the district, and no seat figures outside Hyderabad district. The part-level lists used on the other pages were compiled for the five Old City seats only, so the district\'s other ten seats appear here as the state\'s totals. Malakpet\'s figures here are the state\'s own, because the part-level list used on the other pages holds only part of Malakpet.', { u: d.source });
 }).catch(SIR.fail);
 </script>

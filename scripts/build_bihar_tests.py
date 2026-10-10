@@ -62,7 +62,7 @@ def deaths(rs):
     d = rs['by_age']['dead']
     assert rs['bands'][6:] == ['70-79', '80+']
     return {
-        'year': 2024, 'population': pop, 'adult_deaths_per_1000': round(1000 * rate, 2), 'adult_deaths': adult,
+        'year': 2024, 'population': pop, 'adult_deaths_per_1000': round(1000 * rate, 4), 'adult_deaths': adult,
         'dead_removed': dead, 'years_of_deaths': round(dead / adult, 1),
         'women_share_expected': round(100 * dF / (dF + dM), 1), 'women_share_dead': round(100 * dead_f / (dead_f + dead_m), 1),
         'women_expected': round(dead * dF / (dF + dM)), 'women_dead': dead_f,
@@ -93,14 +93,14 @@ def marriage(rs):
         sf = sum(c[('shifted', 'F', a)] for a in YOUNG)
         sm = sum(c[('shifted', 'M', a)] for a in YOUNG)
         ds.append({'district': d, 'young_shifted_f': sf, 'young_shifted_m': sm, 'women_share': round(100 * sf / (sf + sm), 1),
-                   'excess_per_1000_women': round(1000 * (sf - sm) / fp, 2), 'recent_marriage_pct': round(100 * int(M[recent]) / fp, 2)})
+                   'excess_per_1000_women': round(1000 * (sf - sm) / fp, 4), 'recent_marriage_pct': round(100 * int(M[recent]) / fp, 4)})
     sf, sm = sum(x['young_shifted_f'] for x in ds), sum(x['young_shifted_m'] for x in ds)
     assert sf == sum(rs['by_age_women']['shifted'][:2])
     recent_n = int(st[recent])
     out9 = sum(int(st[k]) for k in ('female_marriage_OUTmigrants_to_other_states_dur_lt1', 'female_marriage_OUTmigrants_to_other_states_dur_1_4', 'female_marriage_OUTmigrants_to_other_states_dur_5_9'))
     return {
         'young_shifted_f': sf, 'young_shifted_m': sm, 'excess': sf - sm, 'women_share': round(100 * sf / (sf + sm), 1),
-        'recent_marriage': recent_n, 'recent_marriage_per_year': round(recent_n / 10), 'excess_years': round((sf - sm) / (recent_n / 10), 2),
+        'recent_marriage': recent_n, 'recent_marriage_per_year': round(recent_n / 10), 'excess_years': round((sf - sm) / (recent_n / 10), 4),
         'out_of_state_recent': out9,
         'rho_share': spearman([(x['recent_marriage_pct'], x['women_share']) for x in ds]),
         'rho_excess': spearman([(x['recent_marriage_pct'], x['excess_per_1000_women']) for x in ds]),

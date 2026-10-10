@@ -29,7 +29,7 @@ STATES = [
     ('py', 'puducherry'), ('ch', 'chandigarh'), ('ld', 'lakshadweep'), ('an', 'andaman'), ('dd', 'dnhdd'),
 ]
 
-TOP = {'state', 'slug', 'ut', 'revision', 'dates', 'figures', 'reasons_complete', 'tables', 'sources', 'notes', 'cannot_show'}
+TOP = {'state', 'slug', 'ut', 'article', 'revision', 'dates', 'figures', 'reasons_complete', 'tables', 'sources', 'notes', 'cannot_show'}
 FIG = {'roll_before', 'draft', 'removed', 'dead', 'shifted_absent_other', 'duplicate',
        'added_after', 'removed_after', 'net_after', 'final', 'notices'} | \
       {'%s_%s' % (s, w) for s in ('men', 'women', 'third') for w in ('before', 'draft', 'removed', 'final')}
@@ -42,8 +42,8 @@ KINDS = {
     'final': {'final': 'final', 'draft': 'draft', 'men': 'men_final', 'women': 'women_final', 'third': 'third_final'},
     'fall': {},
 }
-LEVELS = {'district', 'ac', 'pc', 'island', 'tehsil', 'ward'}
-TABKEYS = {'id', 'title', 'level', 'kind', 'src', 'partial', 'press', 'rows', 'note'}
+LEVELS = {'district', 'region', 'ac', 'pc', 'island', 'tehsil', 'ward'}
+TABKEYS = {'id', 'title', 'level', 'kind', 'src', 'partial', 'press', 'rows', 'note', 'removed_label'}
 
 
 def fail(slug, msg):
@@ -58,6 +58,10 @@ def build_one(pid, slug):
     extra = set(d) - TOP
     if extra:
         fail(slug, 'unknown fields %s' % sorted(extra))
+    if d.get('article') not in (None, 'the'):
+        fail(slug, 'article must be "the" or left out')
+    if set(d.get('dates', {})) - {'roll_before', 'draft', 'final', 'notices'}:
+        fail(slug, 'unknown dates %s' % sorted(set(d['dates']) - {'roll_before', 'draft', 'final', 'notices'}))
     if d.get('revision') not in ('sir', 'no_draft'):
         fail(slug, 'revision must be sir or no_draft')
     src = {s['id'] for s in d.get('sources', [])}
@@ -128,7 +132,7 @@ def build_one(pid, slug):
         # rates the page draws
         for r in rows:
             if t['kind'] == 'left_off' and r.get('before') and r.get('removed') is not None:
-                r['per_100'] = round(100 * r['removed'] / r['before'], 2)
+                r['per_100'] = round(100 * r['removed'] / r['before'], 4)
             if t['kind'] == 'after' and r.get('draft'):
                 if r.get('added') is not None:
                     r['added_1000'] = round(1000 * r['added'] / r['draft'], 1)
@@ -137,15 +141,15 @@ def build_one(pid, slug):
             if t['kind'] == 'fall' and r.get('before'):
                 end = r.get('final', r.get('draft'))
                 if end is not None:
-                    r['fall_100'] = round(100 * (r['before'] - end) / r['before'], 2)
+                    r['fall_100'] = round(100 * (r['before'] - end) / r['before'], 4)
             if t['kind'] in ('draft', 'final') and r.get('women') is not None and r.get('men') is not None:
                 tot = r.get(t['kind']) or (r['men'] + r['women'] + (r.get('third') or 0))
-                r['women_pct'] = round(100 * r['women'] / tot, 2)
+                r['women_pct'] = round(100 * r['women'] / tot, 4)
         tables.append(t)
 
     rates = {}
     if 'removed' in v and 'roll_before' in v:
-        rates['per_100'] = round(100 * v['removed'] / v['roll_before'], 2)
+        rates['per_100'] = round(100 * v['removed'] / v['roll_before'], 4)
     if 'removed' in v and all(k in v for k in ('dead', 'shifted_absent_other', 'duplicate')):
         tot = v['dead'] + v['shifted_absent_other'] + v['duplicate']
         rates['shares'] = {k: round(100 * v[k] / tot, 1) for k in ('dead', 'shifted_absent_other', 'duplicate')}
@@ -155,7 +159,7 @@ def build_one(pid, slug):
         rates['final_vs_before'] = v['final'] - v['roll_before']
     for w, tot in (('before', 'roll_before'), ('draft', 'draft'), ('removed', 'removed'), ('final', 'final')):
         if 'women_' + w in v and tot in v:
-            rates['women_%s_pct' % w] = round(100 * v['women_' + w] / v[tot], 2)
+            rates['women_%s_pct' % w] = round(100 * v['women_' + w] / v[tot], 4)
     if 'women_removed' in v and 'women_before' in v and 'men_removed' in v and 'men_before' in v:
         rates['women_per_100'] = round(100 * v['women_removed'] / v['women_before'], 1)
         rates['men_per_100'] = round(100 * v['men_removed'] / v['men_before'], 1)

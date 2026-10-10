@@ -20,6 +20,8 @@
   var inside = D.filter(function (d) { return d.muslim_share_population_2011 >= d.muslim_share_deleted_low && d.muslim_share_population_2011 <= d.muslim_share_deleted_high; }).length;
   var above = D.filter(function (d) { return d.muslim_share_deleted_low > d.muslim_share_population_2011 + 1; }).map(function (d) { return d.district; });
   var cg = id.caste.guardian, G = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'];
+  var AND0 = function (a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + L(' and ') + a[a.length - 1]; };
+  var CAP = function (x) { return x.charAt(0).toUpperCase() + x.slice(1); };
   // Group names shown in prose: two are English words, the rest acronyms.
   var GW = { General: L('General'), Muslim: L('Muslim') }, GN = function (g) { return GW[g] || g; };
   var up = G.filter(function (g) { return cg.A.groups[g].ratio_to_survey >= 1 && cg.B.groups[g].ratio_to_survey >= 1; }), down = G.filter(function (g) { return cg.A.groups[g].ratio_to_survey < 1 && cg.B.groups[g].ratio_to_survey < 1; });
@@ -32,7 +34,7 @@
      L('In many seats they could have. In {n} of {seats} seats the removed electors who would have voted were enough to change the result had they backed the runner-up, and in {k} a lean of just over half among them would have done it. The lists do not say how they would have voted. Going by how their own booths voted in 2024, {k1} to {k2} seats would have changed hands, some each way. <a href="../results/">Elections</a>.', {
        n: IM.seats_total - IB.over_100, seats: IM.seats_total, k: IB.under_55, k1: IS.booth_lower.flips, k2: IS.booth_upper.flips })],
     [L('So was the revision clean?'),
-     L('The lists give every reason to doubt it. {total} names came off the roll, women were removed out of proportion in every district, more women were entered as dead than the death rates would give, and the final roll put back at most {m} of those removed at the draft. A voter wrongly removed has lost a vote whichever way it would have gone. What the election results cannot show is whether the removals moved votes between the alliances. <a href="../results/#swing">Elections</a>.', { total: SIR.lakh(t.total), m: SIR.pct(FT.made_up_pct) })],
+     L('The lists give every reason to doubt it. {total} names came off the roll, women were removed out of proportion in every district, women were a larger share of those entered as dead than of the state\'s adult deaths, and the final roll put back at most {m} of those removed at the draft. A voter wrongly removed has lost a vote whichever way it would have gone. What the election results cannot show is whether the removals moved votes between the alliances. <a href="../results/#swing">Elections</a>.', { total: SIR.lakh(t.total), m: SIR.pct(FT.made_up_pct) })],
     [L('Are the names entered as dead plausible?'),
      L('In number, yes. They equal about {y} years of Bihar\'s adult deaths at 2024 death rates, and their ages are close to those of registered deaths. By sex, no. Women are {wd} of those entered as dead but {we} of adult deaths. Either women\'s deaths, which are registered less often, stayed on the roll longer, or women still alive were entered as dead. <a href="../people/">Women, religion and caste</a>.', { y: SIR.d(TD.years_of_deaths, 1), wd: SIR.pct(TD.women_share_dead), we: SIR.pct(TD.women_share_expected) })],
     [L('Is marriage why so many young women were marked shifted?'),
@@ -44,11 +46,11 @@
     [L('Why are women over-represented?'),
      L('Women are {share} of those removed and {roll} of the roll they were removed from, and their share of the removed is higher than their share of the roll in {over} of {districts} districts. The roll records sex, so this needs no guessing. Phase 1 removed {xs} more women than men, and {xs_shifted} of that difference were marked shifted. Among those marked shifted at ages 18 to 29, {young} are women. Marriage could account for that number but not for the districts where it falls. The lists do not show whether any of these women were enrolled again where they now live, and any who were not have lost the vote.', { share: SIR.pct(fs), roll: SIR.pct(t.female_share_roll), over: fOver, districts: D.length, xs: SIR.n(xsF), xs_shifted: SIR.n(xsS), young: SIR.pct(100 * yW / yS) })],
     [L('Were Muslims removed out of proportion?'),
-     L('Names the booth lists classify as Muslim are {low} of removals, and {high} if every unclassified name were Muslim, against 16.87% of the population in 2011 and 17.70% in the 2023 caste survey. The census share lies inside that range in {inside} of {districts} districts. In {above} districts the classified Muslim share alone is more than a point above the census share: {above_list}. <a href="../people/">Women, religion, caste</a>.', { low: SIR.pct(100 * t.muslim / cls), high: SIR.pct(100 * (t.muslim + t.unknown) / cls), inside: inside, districts: D.length, above: above.length, above_list: above.join(', ') })],
+     L('Names the booth lists classify as Muslim are {low} of removals, and {high} if every unclassified name were Muslim, against 16.87% of the population in 2011 and 17.70% in the 2023 caste survey. The census share lies inside that range in {inside} of {districts} districts. In {above} districts the classified Muslim share alone is more than a point above the census share. They are {above_list}. <a href="../people/">Women, religion and caste</a>.', { low: SIR.pct(100 * t.muslim / cls), high: SIR.pct(100 * (t.muslim + t.unknown) / cls), inside: inside, districts: D.length, above: above.length, above_list: AND0(above) })],
     [L('How can caste be read from surnames?'),
-     L('Only partly. That is why two classifications are used and only results that hold under both are reported. Going by the surname of the father or husband, {up} families are removed at or above their share in the 2023 caste survey under both, and {down} families below it.', { up: up.map(GN).join(L(' and ')), down: down.map(GN).join(L(' and ')) })],
+     L('Only partly. That is why two classifications are used and only results that hold under both are reported. Going by the surname of the father or husband, {up} families are removed at or above their share in the 2023 caste survey under both, and {down} families below it.', { up: AND0(up.map(GN)), down: AND0(down.map(GN)) })],
     [L('How reliable are the lists?'),
-     L('The booth list covers every one of Bihar\'s {booths} polling booths and adds up to {p1} phase 1 removals, and the constituency totals for both phases match the Chief Electoral Officer\'s table. Votes added up from the booths give the declared winner and runner-up in all 40 Lok Sabha seats. A second program, written separately, recomputes every headline figure from the lists before anything is published.', { booths: SIR.n(t.booths), p1: SIR.n(t.p1) })],
+     L('The booth list covers every one of Bihar\'s {booths} polling booths and adds up to {p1b} phase 1 removals, {p1} women and men and {tg} third-gender electors. The constituency totals for both phases match the Chief Electoral Officer\'s table. Votes added up from the booths give the declared winner and runner-up in all 40 Lok Sabha seats. A second program, written separately, recomputes every headline figure from the lists before anything is published.', { booths: SIR.n(t.booths), p1b: SIR.n(t.p1_booths), p1: SIR.n(t.p1), tg: SIR.n(t.p1_booths - t.p1) })],
     [L('Does this show that the removals were intended to change results?'),
      L('No list of removals can show intent. The lists show where the removals fell, who was removed and how the numbers compare with the margins. They cannot show whose votes these were or whether each removal was right.')],
     [L('Why are no names published?'),
@@ -70,21 +72,22 @@
       n: bor.length, b: SIR.d(rt(bor), 2), i: inn.length, in: SIR.d(rt(inn), 2), el: SIR.pct(100 * SIR.sum(bor, 'electorate_2025') / SIR.sum(acs, 'electorate_2025')),
       sh: SIR.pct(100 * SIR.sum(bor, 'total') / SIR.sum(acs, 'total')), top: beltName(belts[0]), topr: SIR.d(rt(BG[belts[0]]), 2) }), ['border']]);
   QA.push([L('Were more Muslim names removed near the border?'),
-    L('A larger share, yes. Names the lists classify as Muslim are {lo} to {hi} of removals in border seats and {ilo} to {ihi} in the interior. Several border belts, Seemanchal above all, have large Muslim populations, so some of that difference follows from who lives there. The religion pages compare each district with its own population.', {
+    L('A larger share, yes. Names the lists classify as Muslim are {lo} to {hi} of removals in border seats and {ilo} to {ihi} in the interior. Several border belts, Seemanchal above all, have large Muslim populations, so some of that difference follows from who lives there. The page on women, religion and caste compares each district with its own population.', {
       lo: SIR.pct(ms(bor, false)), hi: SIR.pct(ms(bor, true)), ilo: SIR.pct(ms(inn, false)), ihi: SIR.pct(ms(inn, true)) }), ['border']]);
   QA.push([L('Does this show that people not entitled to vote were removed near the border?'),
     L('No. The lists give one of four reasons for each name, dead, shifted, absent or already enrolled elsewhere. None of them is a finding that a person was not entitled to vote, and the lists have no category for it.'), ['border', 'method']]);
   var DD = r[8].slice().sort(function (x, y) { return y.per_100 - x.per_100; });
-  var FAC = [['gddp_pc', L('income per head')], ['urban_pct', L('the share living in towns')], ['women_literate', L('women\'s literacy')], ['child_marriage', L('early marriage')], ['density', L('population density')], ['electors_per_booth', L('booth size')]];
+  var FAC = [['urban_pct', L('the share living in towns')], ['women_literate', L('women\'s literacy')], ['child_marriage', L('early marriage')], ['density', L('population density')], ['electors_per_booth', L('booth size')]];
   var rho = FAC.map(function (f) { var ok = DD.filter(function (d) { return d[f[0]] != null; }); return [f[1], SIR.spearman(ok.map(function (d) { return d[f[0]]; }), ok.map(function (d) { return d.per_100; }))]; });
   var linked = rho.filter(function (x) { return Math.abs(x[1]) >= 0.2; }), unl = rho.filter(function (x) { return Math.abs(x[1]) < 0.2; });
   QA.push([L('Which districts lost the most names?'),
-    L('{a}, {b} and {c} lost the most, {ar}, {br} and {cr} names per 100 electors. {y} and {z} lost the fewest, {yr} and {zr}. The table on this page gives all {n} districts.', {
+    L('{a}, {b} and {c} lost the most for their size, {ar}, {br} and {cr} names per 100 electors. {y} and {z} lost the fewest, {yr} and {zr}. The <a href="../districts/">Districts</a> page gives all {n} districts.', {
       a: DD[0].district, b: DD[1].district, c: DD[2].district, ar: SIR.d(DD[0].per_100, 1), br: SIR.d(DD[1].per_100, 1), cr: SIR.d(DD[2].per_100, 1),
       y: DD[DD.length - 2].district, z: DD[DD.length - 1].district, yr: SIR.d(DD[DD.length - 2].per_100, 1), zr: SIR.d(DD[DD.length - 1].per_100, 1), n: DD.length }), ['districts']]);
-  QA.push([L('Do poorer or less schooled districts lose more names?'),
-    (linked.length ? L('Of the six things compared, these move with the removal rate: {list}.', { list: AND(linked.map(function (x) { return L('{f} (rank correlation {r})', { f: x[0], r: SIR.d(x[1], 2) }); })) }) + ' ' : '') +
-    (unl.length ? L('These show no relationship: {list}.', { list: AND(unl.map(function (x) { return x[0]; })) }) + ' ' : '') +
+  var FL = linked.length > 1 ? function (o) { return L('Of the {n} things compared, {k} move with the removal rate, {list}.', o); } : function (o) { return L('Of the {n} things compared, one moves with the removal rate, {list}.', o); };
+  QA.push([L('Do less urban or less schooled districts lose more names?'),
+    (linked.length ? FL({ n: FAC.length, k: linked.length, list: AND(linked.map(function (x, i) { return i ? L('{f} ({r})', { f: x[0], r: SIR.d(x[1], 2) }) : L('{f} (rank correlation {r})', { f: x[0], r: SIR.d(x[1], 2) }); })) }) + ' ' : '') +
+    (unl.length ? (unl.length > 1 ? L('{list} show no relationship.', { list: CAP(AND(unl.map(function (x) { return x[0]; }))) }) : L('{list} shows no relationship.', { list: CAP(unl[0][0]) })) + ' ' : '') +
     L('A relationship across districts says nothing about why any one name was removed.'), ['districts']]);
   QA.push([L('Why is every relationship here called rough?'),
     L('There are only {n} districts, and a few large ones can pull a line one way. Each is shown with two measures. One of them uses ranks, so that a single extreme district cannot drive it, and a rank correlation under 0.2 either way is read as no relationship.', { n: DD.length }), ['districts', 'method']]);
@@ -123,7 +126,7 @@
       L('In {over} of {seats} constituencies more names were removed than the 2025 winning margin. That includes {took_over} of the {took} seats the NDA took from INDIA.', { over: over.length, seats: withM.length, took_over: tookOver.length, took: took.length }),
       L('After claims and objections the final roll was still smaller than the roll before the revision in every seat, and in {net} seats the fall that remained was larger than the margin.', { net: FN.margin.net }),
       L('In {n} of {seats} seats the removed electors who would have voted were enough to change the result had they backed the runner-up, and in {k} a lean of just over half among them would have done it.', { n: IM.seats_total - IB.over_100, seats: IM.seats_total, k: IB.under_55 }),
-      L('Inside each constituency, the booths that voted NDA in 2024 lost more names than those that voted INDIA.')],
+      L('Inside the same constituency, booths that voted NDA in 2024 lost {gap} more names each than those that voted INDIA, and more in {h} of {c} seats.', { gap: SIR.d(W.pooled_nda_minus_india, 1), h: W.seats_nda_higher, c: W.seats_compared })],
       L('The lists show where the removals fell. They cannot show whose votes the removed names were, and the election results cannot show whether the removals moved votes between the alliances.')],
     people: [[
       fOver === D.length ? L('Women are {w} of the names removed and {roll} of the roll they were removed from. Their share of the removed is higher in all {n} districts.', { w: SIR.pct(fs), roll: SIR.pct(t.female_share_roll), n: D.length })
@@ -137,7 +140,7 @@
       L('Names classified as Muslim are {lo} to {hi} of removals in border seats and {ilo} to {ihi} in the interior.', { lo: SIR.pct(ms(bor, false)), hi: SIR.pct(ms(bor, true)), ilo: SIR.pct(ms(inn, false)), ihi: SIR.pct(ms(inn, true)) })],
       L('None of the reasons on the lists is a finding that a person was not entitled to vote.')],
     districts: [[
-      L('{a} lost the most names, {ar} per 100 electors, and {z} the fewest, {zr}.', { a: DD[0].district, ar: SIR.d(DD[0].per_100, 1), z: DD[DD.length - 1].district, zr: SIR.d(DD[DD.length - 1].per_100, 1) }),
+      L('{a} lost the most names for its size, {ar} per 100 electors, and {z} the fewest, {zr}.', { a: DD[0].district, ar: SIR.d(DD[0].per_100, 1), z: DD[DD.length - 1].district, zr: SIR.d(DD[DD.length - 1].per_100, 1) }),
       linked.length ? L('Across districts the removal rate moves with {list}.', { list: AND(linked.map(function (x) { return x[0]; })) }) : null,
       unl.length ? L('It shows no relationship with {list}.', { list: AND(unl.map(function (x) { return x[0]; })) }) : null],
       L('With only {n} districts every one of these links is rough, and none of them says why any one name was removed.', { n: DD.length })],

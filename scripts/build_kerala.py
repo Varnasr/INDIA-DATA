@@ -101,13 +101,13 @@ def build():
             'ac': n, 'name': d['ac_name'].title(), 'district': DISTRICT.get(d['district'], d['district'].title()),
             'roll_2025': v['before'], 'draft': v['draft'], 'final': v['final'], 'election': v['election'],
             'fall_draft': fall_draft, 'fall': fall,
-            'draft_per_100': round(100 * fall_draft / v['before'], 2),
-            'per_100': round(100 * fall / v['before'], 2),
-            'restored_pct': round(100 * (v['election'] - v['draft']) / fall_draft, 2),
-            'women_2025_pct': round(100 * v['before_w'] / v['before'], 2),
-            'women_fall_pct': round(100 * (v['before_w'] - v['draft_w']) / fall_draft, 2),
+            'draft_per_100': round(100 * fall_draft / v['before'], 4),
+            'per_100': round(100 * fall / v['before'], 4),
+            'restored_pct': round(100 * (v['election'] - v['draft']) / fall_draft, 4),
+            'women_2025_pct': round(100 * v['before_w'] / v['before'], 4),
+            'women_fall_pct': round(100 * (v['before_w'] - v['draft_w']) / fall_draft, 4),
             'winner': PARTY[x['winner_party']], 'runner_up': PARTY[x['runner_up_party']],
-            'margin': margin, 'votes': votes, 'turnout': round(100 * votes / v['election'], 2),
+            'margin': margin, 'votes': votes, 'turnout': round(100 * votes / v['election'], 4),
             'fall_voters': round(max(fall, 0) * votes / v['election']),
             '_w': {k: v[k + '_w'] for k in T},
         })
@@ -127,15 +127,15 @@ def build():
         g['women_draft'] += a['_w']['draft']
     for g in dist.values():
         fd = g['roll_2025'] - g['draft']
-        g['draft_per_100'] = round(100 * fd / g['roll_2025'], 2)
-        g['per_100'] = round(100 * (g['roll_2025'] - g['election']) / g['roll_2025'], 2)
-        g['restored_pct'] = round(100 * (g['election'] - g['draft']) / fd, 2)
-        g['women_2025_pct'] = round(100 * g['women_2025'] / g['roll_2025'], 2)
-        g['women_fall_pct'] = round(100 * (g['women_2025'] - g['women_draft']) / fd, 2)
+        g['draft_per_100'] = round(100 * fd / g['roll_2025'], 4)
+        g['per_100'] = round(100 * (g['roll_2025'] - g['election']) / g['roll_2025'], 4)
+        g['restored_pct'] = round(100 * (g['election'] - g['draft']) / fd, 4)
+        g['women_2025_pct'] = round(100 * g['women_2025'] / g['roll_2025'], 4)
+        g['women_fall_pct'] = round(100 * (g['women_2025'] - g['women_draft']) / fd, 4)
     districts = sorted(dist.values(), key=lambda g: -g['draft_per_100'])
     assert len(districts) == 14
     for a in acs:
-        a['vs_district'] = round(a['draft_per_100'] - dist[a['district']]['draft_per_100'], 2)
+        a['vs_district'] = round(a['draft_per_100'] - dist[a['district']]['draft_per_100'], 4)
         del a['_w']
 
     by_winner = {}
@@ -144,8 +144,8 @@ def build():
     winners = []
     for w, L in sorted(by_winner.items(), key=lambda kv: (-len(kv[1]), kv[0])):
         winners.append({'party': w, 'seats': len(L),
-                        'draft_per_100': round(100 * sum(a['fall_draft'] for a in L) / sum(a['roll_2025'] for a in L), 2),
-                        'vs_district': round(sum(a['vs_district'] for a in L) / len(L), 2),
+                        'draft_per_100': round(100 * sum(a['fall_draft'] for a in L) / sum(a['roll_2025'] for a in L), 4),
+                        'vs_district': round(sum(a['vs_district'] for a in L) / len(L), 4),
                         'over_margin': sum(a['over_margin'] for a in L)})
 
     B, D, F, E = (TOTALS[k] for k in ('before', 'draft', 'final', 'election'))
@@ -153,13 +153,13 @@ def build():
     summary = {
         'roll_2025': B, 'frozen': FROZEN, 'press_removed': PRESS_REMOVED,
         'draft': D, 'final': F, 'election': E,
-        'fall_draft': B - D, 'draft_per_100': round(100 * (B - D) / B, 2),
+        'fall_draft': B - D, 'draft_per_100': round(100 * (B - D) / B, 4),
         'added_final': F - D, 'added_election': E - F,
-        'restored_pct': round(100 * (E - D) / (B - D), 2),
-        'fall': B - E, 'per_100': round(100 * (B - E) / B, 2),
-        'women_2025_pct': round(100 * WOMEN['before'] / B, 2),
-        'women_fall_pct': round(100 * (WOMEN['before'] - WOMEN['draft']) / (B - D), 2),
-        'women_added_pct': round(100 * (WOMEN['election'] - WOMEN['draft']) / (E - D), 2),
+        'restored_pct': round(100 * (E - D) / (B - D), 4),
+        'fall': B - E, 'per_100': round(100 * (B - E) / B, 4),
+        'women_2025_pct': round(100 * WOMEN['before'] / B, 4),
+        'women_fall_pct': round(100 * (WOMEN['before'] - WOMEN['draft']) / (B - D), 4),
+        'women_added_pct': round(100 * (WOMEN['election'] - WOMEN['draft']) / (E - D), 4),
         'districts_women_over': sum(g['women_fall_pct'] > g['women_2025_pct'] for g in districts),
         'acs_women_over': sum(a['women_fall_pct'] > a['women_2025_pct'] for a in acs),
         'acs': len(acs), 'districts': len(districts),
@@ -167,7 +167,7 @@ def build():
         'draft_over_margin': sum(a['draft_over_margin'] for a in acs),
         'over_margin': sum(a['over_margin'] for a in acs),
         'could_change': sum(a['could_change'] for a in acs),
-        'votes': sum(a['votes'] for a in acs), 'turnout': round(100 * sum(a['votes'] for a in acs) / E, 2),
+        'votes': sum(a['votes'] for a in acs), 'turnout': round(100 * sum(a['votes'] for a in acs) / E, 4),
         'seats_2026': {w['party']: w['seats'] for w in winners},
         'winners': winners,
         'rho_rate_margin': round(spearman([a['draft_per_100'] for a in acs], [a['margin'] / a['votes'] for a in acs]), 3),

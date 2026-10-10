@@ -14,10 +14,13 @@
     return e;
   }
   // a label of one or more lines, centred on y
+  // the space a wrapped line gave up, kept at its end so the text read out or
+  // copied from the chart is 'the 2020 result' and not 'the2020 result'
+  function gap(lines, j) { return j < lines.length - 1 && !/-$/.test(lines[j]) ? ' ' : ''; }
   function label(parent, x, y, text, width, anchor, cls) {
     var lines = [].concat(SIR.wrap(text, width));
     var t = el('text', { x: x, y: y, 'text-anchor': anchor, 'dominant-baseline': 'middle', class: cls || 'vname' }, parent);
-    lines.forEach(function (ln, j) { el('tspan', { x: x, dy: j ? '1.1em' : (-0.55 * (lines.length - 1)) + 'em' }, t, ln); });
+    lines.forEach(function (ln, j) { el('tspan', { x: x, dy: j ? '1.1em' : (-0.55 * (lines.length - 1)) + 'em' }, t, ln + gap(lines, j)); });
     return t;
   }
   // an axis title under a chart: wrapped, drawn downward from y, and the
@@ -27,7 +30,7 @@
     var hw = 3.4 * Math.max.apply(null, lines.map(function (l) { return l.length; }));
     x = Math.min(Math.max(x, hw + 4), vw - hw - 4);
     var t = el('text', { x: x, y: y, 'text-anchor': 'middle', 'dominant-baseline': 'middle', class: 'vval' }, svg);
-    lines.forEach(function (ln, j) { el('tspan', { x: x, dy: j ? '1.15em' : 0 }, t, ln); });
+    lines.forEach(function (ln, j) { el('tspan', { x: x, dy: j ? '1.15em' : 0 }, t, ln + gap(lines, j)); });
     var vb = svg.getAttribute('viewBox').split(' ').map(Number), need = y + (lines.length - 1) * 15 + 10;
     if (need > vb[3]) svg.setAttribute('viewBox', vb[0] + ' ' + vb[1] + ' ' + vb[2] + ' ' + need);
     return t;
@@ -772,12 +775,16 @@
       if (o.pick) ig.addEventListener('click', function (e) { var t = e.target.closest('path'); if (t) o.pick(+t.getAttribute('data-ac')); });
     }
     if (o.pick) g.addEventListener('click', function (e) { var t = e.target.closest('path'); if (t) o.pick(+t.getAttribute('data-ac')); });
-    // the key: five swatches with the range each covers
+    // the key: five swatches, with the value at each boundary written under
+    // it, so six short numbers fit a phone where five ranges overlapped
     var lo = vals[0], hi = vals[vals.length - 1], edges = [lo].concat(q, [hi]), kw = Math.min(110, (W - 20) / 5);
     if (o.title) el('text', { x: 10, y: 12, class: 'vval' }, s, o.title);
     op.forEach(function (a, i) {
       el('rect', { x: 10 + i * kw, y: 20, width: kw - 4, height: 10, rx: 2, style: fill(tok) + ';fill-opacity:' + a }, s);
-      el('text', { x: 10 + i * kw, y: 42, class: 'vval small' }, s, (edges[i] < 0 || edges[i + 1] < 0 ? fv(edges[i]) + ' to ' + fv(edges[i + 1]) : fv(edges[i]) + '–' + fv(edges[i + 1])));
+    });
+    edges.forEach(function (e, i) {
+      var x = i === 0 ? 10 : i === edges.length - 1 ? 10 + i * kw - 4 : 10 + i * kw - 2;
+      el('text', { x: x, y: 42, class: 'vval small', 'text-anchor': i === 0 ? 'start' : i === edges.length - 1 ? 'end' : 'middle' }, s, fv(e));
     });
     // one seat, or several (a district's seats) outlined together
     box.__select = function (ac) {

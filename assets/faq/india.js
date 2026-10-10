@@ -8,7 +8,7 @@
       var T = d.total, S = d.states, A = d.adults, F = d.final, GG = d.gender, AD = d.after_draft;
       var cr = function (x) { return L('{x} crore', { x: (x / 1e7).toFixed(2) }); };
       var rated = S.filter(function (s) { return s.per_100 != null; }).sort(function (a, b) { return b.per_100 - a.per_100; });
-      var wOver = GG.filter(function (g) { return g.gap > 1; }).length;
+      var wOver = GG.filter(function (g) { return g.women_share_removed > g.women_share_roll; }).length;
       var inc = d.correlations.filter(function (c) { return c.key === 'income_pc'; })[0];
       var fem = L('In {over} of the {n} states that report removals by sex, women are a bigger share of the names removed than of the roll.', { over: wOver, n: GG.length });
       var back = L('In the {n} states with a final roll, the rolls grew back by at most {m} of what the drafts removed, and that rise includes new voters.', { n: F.states, m: SIR.pct(F.made_up_pct) });
@@ -20,7 +20,7 @@
         [L('Why did some states remove far more names than others?'),
          L('{hi} removed {hir} of every 100 electors and {lo} {lor}, under the same rules.', { hi: rated[0].state, hir: SIR.d(rated[0].per_100, 1), lo: rated[rated.length - 1].state, lor: SIR.d(rated[rated.length - 1].per_100, 1) }) + ' ' +
          (inc && Math.abs(inc.per_100_phase2) < 0.2 && Math.abs(inc.per_100_phase3) >= 0.2 ?
-           L('Across all states the removal rate rises with income per head (rank correlation {all}), but only among the states revised in 2026 ({p3}). Among those revised from November 2025 it is {p2}, which is no relationship. The figures show where removals were heavy, and cannot show why.', { all: SIR.d(inc.per_100_all, 2), p3: SIR.d(inc.per_100_phase3, 2), p2: SIR.d(inc.per_100_phase2, 2) }) :
+           L('Across all states the removal rate rises with income per head (rank correlation {all}), but only among the states revised in 2026 ({p3}). Among those ordered in October 2025, with house visits from November, it is {p2}, which is no relationship. The figures show where removals were heavy, and cannot show why.', { all: SIR.d(inc.per_100_all, 2), p3: SIR.d(inc.per_100_phase3, 2), p2: SIR.d(inc.per_100_phase2, 2) }) :
            L('The figures show where removals were heavy, and cannot show why.')), ['main']],
         [L('Were women removed more than men?'), fem, ['main', 'faq']],
         [L('Were the names put back on the final roll?'), L('Few of them.') + ' ' + back, ['numbers', 'main', 'faq']],
@@ -31,7 +31,7 @@
         [L('Why is Patna not ranked with the other cities?'),
          L('Bihar published its roll before the revision for the state only, so its rate is counted against the 2025 roll, a different base from the other cities\'. On that count Patna lost fewer names than Bihar as a whole.'), ['cities', 'faq']],
         [L('Why were more women removed than men?'),
-         L('The lists do not say. They record what happened to each entry and nothing about why. In Bihar, the one state whose lists were counted name by name, more women were entered as dead than the death rates for women would predict, and marriage does not explain where young women were marked as shifted.'), ['women', 'faq']],
+         L('The lists do not say. They record what happened to each entry and nothing about why. In Bihar, the one state whose lists were counted name by name, women were a larger share of those entered as dead than of the state\'s adult deaths, and marriage does not explain where young women were marked as shifted.'), ['women', 'faq']],
         [L('Which states published the removals by sex?'),
          L('{n} states and union territories, listed at the foot of the women page with a note on how good each figure is. The others published totals only, so nothing can be said about women there.', { n: GG.length }), ['women', 'faq']],
         [L('Why is Delhi different?'),

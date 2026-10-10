@@ -37,7 +37,7 @@ def J(f):
     return json.load(open(os.path.join(BIHAR, f), encoding='utf-8'))
 
 
-def r(x, n=2):
+def r(x, n=4):
     return round(float(x), n)
 
 

@@ -17,45 +17,74 @@
     var M = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], p = s.split('-');
     return (+p[2]) + ' ' + M[+p[1] - 1] + ' ' + p[0];
   };
-  var LEVEL = { district: ['district', 'districts'], ac: ['constituency', 'constituencies'], pc: ['parliamentary constituency', 'parliamentary constituencies'], island: ['island', 'islands'], tehsil: ['tehsil', 'tehsils'], ward: ['ward', 'wards'] };
+  var LEVEL = { district: ['district', 'districts'], region: ['region', 'regions'], ac: ['constituency', 'constituencies'], pc: ['parliamentary constituency', 'parliamentary constituencies'], island: ['island', 'islands'], tehsil: ['tehsil', 'tehsils'], ward: ['ward', 'wards'] };
   var hyph = function (s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
 
   function load() {
     return P || (P = SIR.json('data/' + S.slug + '/summary.json').then(function (d) { d.v = {}; Object.keys(d.figures).forEach(function (k) { d.v[k] = d.figures[k].v; }); return d; }));
   }
   function press(d, k) { var f = d.figures[k]; return f && f.press; }
+  // the name in a sentence: 'the Andaman and Nicobar Islands', and its possessive
+  function nm(d, cap) { return d.article ? (cap ? 'The ' : 'the ') + d.state : d.state; }
+  function poss(d, cap) { return nm(d, cap) + (/s$/.test(d.state) ? '\'' : '\'s'); }
+  // who reported a press figure: the press, a state government, or both
+  function via(d, keys) {
+    var src = {}, by = {};
+    d.sources.forEach(function (x) { src[x.id] = x; });
+    keys.forEach(function (k) { var f = d.figures[k]; if (f && f.press) by[/^Government of/.test((src[f.src] || {}).title || '') ? 'gov' : 'press'] = 1; });
+    return by.gov && by.press ? ', as the press and the state government reported' : by.gov ? ', as the state government reported' : by.press ? ', as reported in the press' : '';
+  }
+  // how the published reasons stand against the names left off
+  function reasonGap(d) {
+    var v = d.v, ks = ['dead', 'shifted_absent_other', 'duplicate'].filter(function (k) { return v[k] != null; });
+    if (!ks.length || v.removed == null) return null;
+    var sum = ks.reduce(function (a, k) { return a + v[k]; }, 0), gap = v.removed - sum;
+    var rounded = ks.some(function (k) { return d.figures[k].rounded; }), unit = 1;
+    if (rounded) while (unit < 1e5 && ks.every(function (k) { return v[k] % (unit * 10) === 0; })) unit *= 10;
+    if (rounded && Math.abs(gap) <= unit / 2 * ks.length) return { kind: 'rounded', gap: gap };
+    return { kind: gap > 0 ? 'short' : gap < 0 ? 'over' : 'exact', gap: gap };
+  }
+  function gapNote(d) {
+    var g = reasonGap(d);
+    if (!g) return '';
+    if (g.kind === 'rounded') return 'The reasons were published only in lakh, so they add to the names left off at that rounding.';
+    if (g.kind === 'short') return g.gap === 1 ? 'The published reasons leave one name without a reason.' : 'The published reasons leave ' + lk(g.gap) + ' names without a reason.';
+    if (g.kind === 'over') return 'The published reasons add to ' + (g.gap === -1 ? 'one' : lk(-g.gap)) + ' more than the names left off.';
+    return '';
+  }
   function anyPress(d) { return Object.keys(d.figures).some(function (k) { return d.figures[k].press; }); }
 
   // the findings, the questions and the limits line, all from the figures
   function sentences(d) {
     var v = d.v, R = d.rates, st = d.state, out = {};
     if (d.revision === 'no_draft') {
-      out.scale = st + ' has not yet published a draft roll, so no count of names left off exists for it.';
+      out.scale = nm(d, 1) + ' has not yet published a draft roll, so no count of names left off exists for it.';
       return out;
     }
     if (v.removed != null) {
-      out.scale = st + '\'s draft roll' + (d.dates.draft ? ' of ' + DATE(d.dates.draft) : '') + ' left off ' + lk(v.removed) + ' names' +
-        (R.per_100 != null ? ', ' + d1(R.per_100) + ' of every 100 electors on the roll before the revision.' : '.');
+      out.scale = poss(d, 1) + ' draft roll' + (d.dates.draft ? ' of ' + DATE(d.dates.draft) : '') + ' left off ' + lk(v.removed) + ' names' +
+        (R.per_100 != null ? ', ' + d1(R.per_100) + ' of every 100 electors on the roll before the revision' : '') + via(d, ['removed', 'roll_before']) + '.';
     } else if (v.draft != null) {
-      out.scale = st + '\'s draft roll' + (d.dates.draft ? ' of ' + DATE(d.dates.draft) : '') + ' holds ' + lk(v.draft) + ' electors. No count of the names left off was found.';
+      out.scale = poss(d, 1) + ' draft roll' + (d.dates.draft ? ' of ' + DATE(d.dates.draft) : '') + ' holds ' + lk(v.draft) + ' electors. No count of the names left off was found.';
     }
-    if (R.shares) out.reasons = pc(R.shares.shifted_absent_other) + ' of the names left off were entered as shifted, absent or for another reason, ' + pc(R.shares.dead) + ' as dead and ' + pc(R.shares.duplicate) + ' as enrolled more than once' + (d.reasons_complete ? '.' : ', as far as the published reasons go.');
+    if (R.shares) out.reasons = pc(R.shares.shifted_absent_other) + ' of the names left off were entered as shifted, absent or for another reason, ' + pc(R.shares.dead) + ' as dead and ' + pc(R.shares.duplicate) + ' as enrolled more than once' + ((reasonGap(d) || {}).kind === 'short' ? ', as far as the published reasons go.' : '.');
     if (v.final != null) {
       out.final = 'The final roll' + (d.dates.final ? ' of ' + DATE(d.dates.final) : '') + ' holds ' + lk(v.final) + ' electors' +
         (v.added_after != null && v.removed_after != null ? '. After the draft ' + lk(v.added_after) + ' names were added and ' + lk(v.removed_after) + ' removed' : '') +
-        (R.made_up_pct != null ? ', and the net rise is ' + d1(R.made_up_pct) + ' for every 100 left off. It counts people enrolling for the first time, so fewer than that were put back.' : '.');
+        (v.net_after != null && v.net_after < 0 ? (v.added_after != null && v.removed_after != null ? ', so the roll fell by a further ' : '. The roll fell by a further ') + lk(-v.net_after) + ' after the draft.' :
+         R.made_up_pct != null ? ', and the net rise is ' + d1(R.made_up_pct) + ' for every 100 left off. It counts people enrolling for the first time, so fewer than that were put back.' : '.');
     }
     if (R.women_removed_pct != null && R.women_before_pct != null)
       out.women = 'Women were ' + pc(R.women_removed_pct) + ' of the names left off and ' + pc(R.women_before_pct) + ' of the roll before the revision' +
         (R.women_per_100 != null ? ', ' + d1(R.women_per_100) + ' of every 100 women against ' + d1(R.men_per_100) + ' of every 100 men.' : '.');
     else if (R.women_final_pct != null) out.women = 'Women are ' + pc(R.women_final_pct) + ' of the final roll. No split of the names left off by sex was found.';
-    if (v.notices != null) out.notices = lk(v.notices) + ' electors kept on the draft were to be sent a notice' + (press(d, 'notices') ? ', as reported in the press.' : '.');
+    if (v.notices != null) out.notices = (d.dates.notices ? 'By ' + DATE(d.dates.notices) + ', ' + lk(v.notices) + ' electors kept on the draft had been sent a notice' : lk(v.notices) + ' electors kept on the draft were to be sent a notice') + via(d, ['notices']) + '.';
     return out;
   }
 
   function limits(d) {
     var parts = [];
-    if (anyPress(d)) parts.push('Figures marked as press reached us through newspapers or broadcasters and were not read from an official document.');
+    if (anyPress(d)) parts.push('Figures marked as press reached us through newspapers, broadcasters or state government releases and were not read from a document of the Election Commission or the Chief Electoral Officer.');
     if (d.v.dead != null) parts.push('A reason is what the officer wrote down, and nobody checked it.');
     return parts.join(' ');
   }
@@ -69,6 +98,7 @@
     if (v.final != null) kp.push([lk(v.final), 'electors on the final roll' + (press(d, 'final') ? ' (press)' : '')]);
     else if (v.draft != null) kp.push([lk(v.draft), 'electors on the draft roll' + (press(d, 'draft') ? ' (press)' : '')]);
     if (R.women_removed_pct != null) kp.push([pc(R.women_removed_pct), 'women among the names left off']);
+    else if (v.net_after != null && v.net_after < 0) kp.push([lk(-v.net_after), 'fewer electors on the final roll than on the draft']);
     else if (R.made_up_pct != null) kp.push([d1(R.made_up_pct), 'per 100 left off, the net rise after the draft']);
     if (kp.length) h.push('<div class="kpis">' + kp.map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('') + '</div>');
 
@@ -91,10 +121,10 @@
       var lv = LEVEL[t.level], tag = (t.press ? ' The figures reached us through the press.' : '') + (t.partial ? ' Only some ' + lv[1] + ' were published, so the rows do not add up to the state.' : '');
       h.push('<h2 id="' + hyph(t.title) + '">' + SIR.esc(t.title) + '</h2>' + (t.note ? '<p class="sub">' + SIR.esc(t.note) + tag + '</p>' : tag ? '<p class="sub">' + tag.trim() + '</p>' : '') +
         '<div class="grid"><div class="panel wide" id="pT' + i + '"><div class="vizbox" id="vT' + i + '"></div><p id="nT' + i + '"></p></div></div>' +
-        '<details class="figs"><summary>Every ' + lv[0] + ', in figures</summary><div class="twrap fit"><table id="tT' + i + '"></table></div></details>');
+        '<details class="figs"><summary>Every ' + lv[0] + ', in figures</summary><div class="twrap fit" tabindex="0" role="region" aria-label="Every ' + lv[0] + ', in figures"><table id="tT' + i + '"></table></div></details>');
     });
     if (s.notices) h.push('<h2 id="notices">Notices</h2><p>' + s.notices + ' The counts for every state are on <a href="../india/process/#notices-the-no-mapping-list-and-the-discrepancy-list">How the revision was run</a>.</p>');
-    h.push('<p class="note">' + SIR.esc(d.state) + '\'s dates are drawn beside every other state\'s on <a href="../india/process/#s-' + hyph(d.state) + '">How the revision was run</a>. Every figure on this page is in the CSV on the Downloads page, and the <a href="method/">method page</a> lists each source.</p>');
+    h.push('<p class="note">' + SIR.esc(poss(d, 1)) + ' dates are drawn beside every other state\'s on <a href="../india/process/#s-' + hyph(d.state) + '">How the revision was run</a>.' + (d.revision === 'no_draft' ? ' The <a href="method/">method page</a> lists each source.' : ' Every figure on this page is in the CSV on the Downloads page, and the <a href="method/">method page</a> lists each source.') + '</p>');
     box.innerHTML = h.join('');
 
     if (steps.length) {
@@ -106,7 +136,7 @@
       var rr = [['Shifted, absent or other', v.shifted_absent_other], ['Dead', v.dead], ['Enrolled more than once', v.duplicate]].filter(function (x) { return x[1] != null; });
       var big = Math.max.apply(null, rr.map(function (x) { return x[1]; })) >= 1e5;
       VIZ.lollipop('vReason', { label: 'Names left off the draft, by the reason entered', axis: big ? 'Lakh' : 'Names', rows: rr.map(function (x) { return { name: x[0], v: big ? x[1] / 1e5 : x[1], text: lk(x[1]), tok: '--fill-navy', hi: true }; }) });
-      document.getElementById('nReason').textContent = (s.reasons || '') + (d.reasons_complete ? '' : ' The published reasons do not account for every name left off.');
+      document.getElementById('nReason').textContent = ((s.reasons || '') + ' ' + gapNote(d)).trim();
     }
     if (R.women_removed_pct != null) {
       VIZ.dumbbell('vWomen', { label: 'Women\'s share of the roll before the revision and of the names left off', min: Math.floor(Math.min(R.women_before_pct, R.women_removed_pct) / 5) * 5 - 5, step: 5,
@@ -120,15 +150,19 @@
     var lv = LEVEL[t.level], rows = t.rows.slice(), note = document.getElementById('nT' + i), cols, data;
     if (t.kind === 'left_off' && !rows.some(function (r) { return r.per_100 != null; })) {
       document.getElementById('pT' + i).hidden = true;
-      cols = [{ h: lv[0].charAt(0).toUpperCase() + lv[0].slice(1) }, { h: 'Left off', num: true }, { h: 'Dead', num: true }, { h: 'Shifted, absent or other', num: true }, { h: 'Enrolled more than once', num: true }];
+      cols = [{ h: lv[0].charAt(0).toUpperCase() + lv[0].slice(1) }, { h: t.removed_label || 'Left off', num: true }, { h: 'Dead', num: true }, { h: 'Shifted, absent or other', num: true }, { h: 'Enrolled more than once', num: true }];
       data = rows.map(function (r) { var o = function (x) { return x == null ? '–' : n(x); }; return [SIR.esc(r.name), o(r.removed), o(r.dead), o(r.shifted_absent_other), o(r.duplicate)]; });
       document.getElementById('tT' + i).closest('details').open = true;
     } else if (t.kind === 'left_off') {
       rows = rows.filter(function (r) { return r.per_100 != null; });
       rows.sort(function (a, b) { return b.per_100 - a.per_100; });
       VIZ.lollipop('vT' + i, { label: 'Names left off per 100 electors, by ' + lv[0], axis: 'Per 100 electors on the roll before', rows: rows.map(function (r) { return { name: r.name, v: r.per_100, text: d1(r.per_100), tok: '--fill-red', hi: true }; }) });
-      note.textContent = rows[0].name + ' lost the most for its size, ' + d1(rows[0].per_100) + ' of every 100 electors, and ' + rows[rows.length - 1].name + ' the least, ' + d1(rows[rows.length - 1].per_100) + '.';
-      cols = [{ h: lv[0].charAt(0).toUpperCase() + lv[0].slice(1) }, { h: 'Roll before', num: true }, { h: 'Draft', num: true }, { h: 'Left off', num: true }, { h: 'Per 100', num: true }];
+      var last = rows[rows.length - 1];
+      // a short partial table is a few named rows, so it ranks them among themselves only
+      if (rows.length === 1) note.textContent = rows[0].name + ' left off ' + d1(rows[0].per_100) + ' of every 100 electors.';
+      else if (t.partial && rows.length === 2) note.textContent = 'Of the two, ' + rows[0].name + ' lost more for its size, ' + d1(rows[0].per_100) + ' of every 100 electors, against ' + d1(last.per_100) + ' in ' + last.name + '.';
+      else note.textContent = (t.partial && rows.length === 3 ? 'Of the three, ' + rows[0].name : rows[0].name) + ' lost the most for its size, ' + d1(rows[0].per_100) + ' of every 100 electors, and ' + last.name + ' the least, ' + d1(last.per_100) + '.';
+      cols = [{ h: lv[0].charAt(0).toUpperCase() + lv[0].slice(1) }, { h: 'Roll before', num: true }, { h: 'Draft', num: true }, { h: t.removed_label || 'Left off', num: true }, { h: 'Per 100', num: true }];
       data = rows.map(function (r) { return [SIR.esc(r.name), n(r.before), n(r.draft), n(r.removed), d1(r.per_100)]; });
     } else if (t.kind === 'after') {
       rows.sort(function (a, b) { return (b.removed_1000 || 0) - (a.removed_1000 || 0); });
@@ -153,8 +187,9 @@
       VIZ.lollipop('vT' + i, { label: 'Electors on the ' + (key === 'draft' ? 'draft' : 'final') + ' roll, by ' + lv[0], axis: big ? 'Lakh' : 'Electors', rows: rows.map(function (r) { return { name: r.name, v: big ? r[key] / 1e5 : r[key], text: lk(r[key]), tok: '--fill-navy', hi: true }; }) });
       var w = rows.filter(function (r) { return r.women_pct != null; });
       note.textContent = w.length ? 'Women are ' + pc(Math.min.apply(null, w.map(function (r) { return r.women_pct; }))) + ' to ' + pc(Math.max.apply(null, w.map(function (r) { return r.women_pct; }))) + ' of each ' + lv[0] + '\'s ' + key + ' roll.' : 'Only the ' + key + ' roll was published by ' + lv[0] + ', so these figures show its size and nothing about the names left off.';
-      cols = [{ h: lv[0].charAt(0).toUpperCase() + lv[0].slice(1) }, { h: key === 'draft' ? 'Draft' : 'Final', num: true }, { h: 'Women', num: true }, { h: 'Women, per cent', num: true }];
-      data = rows.map(function (r) { return [SIR.esc(r.name), n(r[key]), r.women == null ? '–' : n(r.women), r.women_pct == null ? '–' : pc(r.women_pct)]; });
+      var withDraft = key === 'final' && rows.some(function (r) { return r.draft != null; });
+      cols = [{ h: lv[0].charAt(0).toUpperCase() + lv[0].slice(1) }].concat(withDraft ? [{ h: 'Draft', num: true }] : [], [{ h: key === 'draft' ? 'Draft' : 'Final', num: true }, { h: 'Women', num: true }, { h: 'Women, per cent', num: true }]);
+      data = rows.map(function (r) { return [SIR.esc(r.name)].concat(withDraft ? [r.draft == null ? '–' : n(r.draft)] : [], [n(r[key]), r.women == null ? '–' : n(r.women), r.women_pct == null ? '–' : pc(r.women_pct)]); });
     }
     SIR.table('tT' + i, cols, data);
   }
@@ -172,14 +207,24 @@
     SIR.showFaq(S.id, 'method');
   }
 
+  // why there is no table below the state, in whole sentences: the reason
+  // given in cannot_show, without the item's opening phrase
+  function below(d) {
+    var where = d.ut ? 'union territory' : 'state';
+    if (d.revision === 'no_draft') return 'No draft roll has been published, so there are no figures for ' + nm(d) + ' yet, for the ' + where + ' or below it.';
+    var item = (d.cannot_show || []).filter(function (t) { return /district|constituenc|ward|sector|below the/i.test(t); })[0] || '';
+    var rest = item.replace(/^[^.]*\.\s*/, '');
+    return rest && !/^No table below the (state|union territory) was found\.?$/.test(rest) ? rest : 'No table below the ' + where + ' was found for ' + nm(d) + '.';
+  }
+
   SIR.faq(S.id, S.slug + '/faq/', function () {
     return load().then(function (d) {
       var s = sentences(d), v = d.v, QA = [], lim = limits(d);
-      if (s.scale) QA.push(['How many names were left off in ' + d.state + '?', s.scale + (s.reasons ? ' ' + s.reasons + ' A reason is what the officer wrote down, and nobody checked it.' : ''), ['main', 'faq']]);
+      if (s.scale) QA.push(['How many names were left off in ' + nm(d) + '?', s.scale + (s.reasons ? ' ' + s.reasons + ' ' + (gapNote(d) ? gapNote(d) + ' ' : '') + 'A reason is what the officer wrote down, and nobody checked it.' : ''), ['main', 'faq']]);
       if (s.final) QA.push(['How many came back before the final roll?', s.final, ['main', 'faq']]);
       if (s.women) QA.push(['Were women left off more than men?', s.women, ['main', 'faq']]);
       if (d.tables.length) QA.push(['Is there a figure for each district or constituency?', d.tables.map(function (t) { return t.title + (t.partial ? ', for some ' + LEVEL[t.level][1] + ' only' : '') + (t.press ? ', from the press' : '') + '.'; }).join(' '), ['main', 'faq']]);
-      else QA.push(['Is there a figure for each district or constituency?', 'No table below the state was found for ' + d.state + '. ' + ((d.cannot_show || [])[0] || ''), ['main', 'faq']]);
+      else QA.push(['Is there a figure for each district or constituency?', below(d), ['main', 'faq']]);
       QA.push(['Where do the figures come from?', 'From ' + d.sources.length + (d.sources.length === 1 ? ' document' : ' documents') + ', ' + d.sources.filter(function (x) { return x.primary; }).length + ' of them the Election Commission\'s or the Chief Electoral Officer\'s own. The method page names each one.', ['method', 'faq']]);
       var pts = [s.scale, s.reasons, s.final, s.women].filter(Boolean);
       return { qa: QA, short: { main: [pts, lim], method: [[s.scale, 'Every figure on these pages is checked against the others wherever they can be compared.'].filter(Boolean), ''], faq: [pts.slice(0, 3), ''] } };

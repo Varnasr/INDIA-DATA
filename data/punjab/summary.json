@@ -38,13 +38,13 @@
  "tables": [
   {
    "id": "districts_press",
-   "title": "The five districts with the most names left off, in thousands",
+   "title": "The five districts with the most names left off",
    "level": "district",
    "kind": "left_off",
    "src": "s3",
    "partial": true,
    "press": true,
-   "note": "Printed in lakh and rounded here to thousands.",
+   "note": "Printed in lakh and rounded here to the nearest thousand.",
    "rows": [
     {
      "name": "Ludhiana",
@@ -110,7 +110,7 @@
   "Every figure is the Chief Electoral Officer's as the press reported it. The Chief Electoral Officer's own site could not be reached.",
   "The roll before is the roll of 9 June 2026. The names left off are the forms that could not be accounted for when enumeration ended on 3 August.",
   "Shifted and absent are counted together as shifted, absent or other. The four reasons published add to 16,076 fewer than the names left off, and no source names the rest.",
-  "Claims and objections ran to 12 September 2026 and the final roll was due on 12 October 2026.",
+  "Claims and objections ran to 12 September 2026 and the final roll is due on 12 October 2026.",
   "About 22.69 lakh electors were flagged for logical discrepancies, and about 22.41 lakh cases had been cleared by 22 September, as the press reported."
  ],
  "cannot_show": [
@@ -123,7 +123,7 @@
  ],
  "id": "pb",
  "rates": {
-  "per_100": 9.63,
+  "per_100": 9.6297,
   "shares": {
    "dead": 28.0,
    "shifted_absent_other": 66.2,

@@ -149,13 +149,13 @@ for year, lab in [('2025', {ac: al(NAMES.get(ae.loc[ac, 'Winner_Party.1'], ae.lo
                   ('2020', {ac: al(NAMES.get(w20[ac], w20[ac]), 2020) for ac in x.index})]:
     for side in ['NDA', 'INDIA']:
         acs = [ac for ac in x.index if lab.get(ac) == side]
-        v = round(100 * sum(tot[a] for a in acs) / sum(el[a] for a in acs), 2)
+        v = round(100 * sum(tot[a] for a in acs) / sum(el[a] for a in acs), 4)
         same('per 100 electors, %s seats, %s labels' % (side, year), v, S['by_alliance_label'][year][side]['per_100'])
 
 print('Within the same seat')
 d = per[per.al.isin(['NDA', 'INDIA'])].copy()
 d['dm'] = d.deleted - d.groupby('ac').deleted.transform('mean')
-pooled = round(float(d[d.al == 'NDA'].dm.mean() - d[d.al == 'INDIA'].dm.mean()), 2)
+pooled = round(float(d[d.al == 'NDA'].dm.mean() - d[d.al == 'INDIA'].dm.mean()), 4)
 same('NDA-led minus INDIA-led booths, pooled within seat', pooled, S['within_seat_2024']['pooled_nda_minus_india'])
 hi = lo = n = 0
 for ac, q in d.groupby('ac'):
@@ -181,8 +181,8 @@ over = sum(1 for ac in x.index if tot[ac] > mg[ac])
 same('seats where removals exceed the 2025 margin', over, sum(1 for a in C.values() if a['margin2025'] is not None and a['total'] > a['margin2025']))
 polled = {ac: round(res.turnout_pct[ac] / 100 * el[ac]) for ac in x.index}
 same('votes polled, turnout on the 2025 roll', int(sum(polled.values())), sum(a['votes2025'] for a in C.values()))
-share = round(100 * sum(tot[ac] for ac in x.index) / sum(polled.values()), 2)
-same('removals as a share of all votes polled', share, round(100 * sum(a['total'] for a in C.values()) / sum(a['votes2025'] for a in C.values()), 2))
+share = round(100 * sum(tot[ac] for ac in x.index) / sum(polled.values()), 4)
+same('removals as a share of all votes polled', share, round(100 * sum(a['total'] for a in C.values()) / sum(a['votes2025'] for a in C.values()), 4))
 # The second table's own arithmetic: winner's votes over winner's share.
 alt = ae['Winner_Votes'] / (ae['Winner_%'] / 100)
 dev = max(abs(polled[ac] / alt[ac] - 1) for ac in x.index)

@@ -48,7 +48,7 @@
   var AND = function (a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + L(' and ') + a[a.length - 1]; };
   var PQ = A.map(function (a) { return a.part_rate_quartiles; }), plo = Math.min.apply(null, PQ.map(function (q) { return q[0]; })), phi = Math.max.apply(null, PQ.map(function (q) { return q[4]; }));
   var over60 = SIR.sum(A, 'parts_over_60'), MS = A.map(function (a) { return a.part_correlations.muslim_share_vs_rate; });
-  var rules = s.rules.map(function (k) { return [k, SIR.sum(A, function (a) { return a.rules[k]; })]; }), rAll = SIR.sum(rules, function (x) { return x[1]; });
+  var rules = s.rules.map(function (k) { return [k, SIR.sum(A, function (a) { return a.rules[k]; })]; }).sort(function (x, y) { return y[1] - x[1]; }), rAll = SIR.sum(rules, function (x) { return x[1]; });
   var medSlot = SIR.median(A.map(function (a) { return a.median_slot; }));
   QA.push([L('How much do polling parts differ?'),
     L('A great deal. Part rates run from {lo}% to {hi}%, and {over} parts lost more than 60% of their roll. The <a href="../parts/">polling parts page</a> sets each part against the typical part in its own constituency.', { lo: SIR.d(plo, 1), hi: SIR.d(phi, 1), over: over60 }), ['parts', 'explorer']]);

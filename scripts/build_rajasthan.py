@@ -75,6 +75,9 @@ def build():
     assert sum(int(r['general']) for r in e23.values()) == 52788931
     assert sum(int(r['total']) for r in f26.values()) == int(g('final_roll_general', '200 ACs'))
 
+    # The CEO's final-roll table misspells one name. The 2023 report and the
+    # results spell it Marwar Junction, so the page does too.
+    NAME_FIX = {119: ('Marwar Junciton', 'Marwar Junction')}
     acs = []
     for n in range(1, 201):
         a, b, x = e23[n], f26[n], res[n]
@@ -84,12 +87,12 @@ def build():
         assert int(x['winner_votes']) - int(x['runner_up_votes']) == margin > 0, n
         fall = r23 - r26
         acs.append({
-            'ac': n, 'name': b['ac_name'], 'district': b['district'],
-            'roll_2023': r23, 'final': r26, 'fall': fall, 'per_100': round(100 * fall / r23, 2),
-            'women_2023_pct': round(100 * w23 / r23, 2), 'women_2026_pct': round(100 * w26 / r26, 2),
-            'women_change': round(100 * w26 / r26 - 100 * w23 / r23, 2),
+            'ac': n, 'name': NAME_FIX[n][1] if n in NAME_FIX and b['ac_name'] == NAME_FIX[n][0] else b['ac_name'], 'district': b['district'],
+            'roll_2023': r23, 'final': r26, 'fall': fall, 'per_100': round(100 * fall / r23, 4),
+            'women_2023_pct': round(100 * w23 / r23, 4), 'women_2026_pct': round(100 * w26 / r26, 4),
+            'women_change': round(100 * w26 / r26 - 100 * w23 / r23, 4),
             'winner': x['winner_party'], 'runner_up': x['runner_up_party'], 'margin': margin, 'votes': votes,
-            'turnout': round(100 * votes / int(x['electors']), 2),
+            'turnout': round(100 * votes / int(x['electors']), 4),
             'fall_voters': round(max(fall, 0) * votes / int(x['electors'])),
             'separate': n == ANTA,
         })
@@ -107,20 +110,20 @@ def build():
         d['w26'] += a['women_2026_pct'] * a['final'] / 100
     for d in dist.values():
         d['fall'] = d['roll_2023'] - d['final']
-        d['per_100'] = round(100 * d['fall'] / d['roll_2023'], 2)
-        d['women_2023_pct'] = round(100 * d.pop('w23') / d['roll_2023'], 2)
-        d['women_2026_pct'] = round(100 * d.pop('w26') / d['final'], 2)
-        d['women_change'] = round(d['women_2026_pct'] - d['women_2023_pct'], 2)
+        d['per_100'] = round(100 * d['fall'] / d['roll_2023'], 4)
+        d['women_2023_pct'] = round(100 * d.pop('w23') / d['roll_2023'], 4)
+        d['women_2026_pct'] = round(100 * d.pop('w26') / d['final'], 4)
+        d['women_change'] = round(d['women_2026_pct'] - d['women_2023_pct'], 4)
     districts = sorted(dist.values(), key=lambda d: -d['per_100'])
     assert len(districts) == 41
     for a in acs:
-        a['vs_district'] = round(a['per_100'] - dist[a['district']]['per_100'], 2)
+        a['vs_district'] = round(a['per_100'] - dist[a['district']]['per_100'], 4)
 
     by_w = {}
     for a in acs:
         by_w.setdefault(a['winner'], []).append(a)
-    winners = [{'party': p, 'seats': len(L), 'per_100': round(100 * sum(a['fall'] for a in L) / sum(a['roll_2023'] for a in L), 2),
-                'vs_district': round(sum(a['vs_district'] for a in L) / len(L), 2), 'over_margin': sum(a['over_margin'] for a in L)}
+    winners = [{'party': p, 'seats': len(L), 'per_100': round(100 * sum(a['fall'] for a in L) / sum(a['roll_2023'] for a in L), 4),
+                'vs_district': round(sum(a['vs_district'] for a in L) / len(L), 4), 'over_margin': sum(a['over_margin'] for a in L)}
                for p, L in sorted(by_w.items(), key=lambda kv: (-len(kv[1]), kv[0]))]
 
     R23, R26 = sum(a['roll_2023'] for a in acs), sum(a['final'] for a in acs)
@@ -131,17 +134,17 @@ def build():
     summary = {
         'scope_state': s199,
         'before': before, 'forms': int(g('enumeration_forms_collected')), 'draft': draft, 'left_off': left,
-        'left_per_100': round(100 * left / before, 2), 'reasons_lakh': reasons, 'reasons_lakh_sum': round(sum(reasons.values()), 2),
-        'added': added, 'deleted_after': deleted, 'final': final, 'made_up_pct': round(100 * (final - draft) / left, 2),
+        'left_per_100': round(100 * left / before, 4), 'reasons_lakh': reasons, 'reasons_lakh_sum': round(sum(reasons.values()), 4),
+        'added': added, 'deleted_after': deleted, 'final': final, 'made_up_pct': round(100 * (final - draft) / left, 4),
         'removed_by_final': left + deleted,
-        'draft_women_pct': round(100 * int(g('draft_roll', col='women')) / draft, 2),
-        'final_women_pct': round(100 * int(g('final_roll_general', col='women')) / final, 2),
-        'added_women_pct': round(100 * int(g('draft_roll_additions_to_final', col='women')) / added, 2),
-        'deleted_women_pct': round(100 * int(g('draft_roll_deletions_to_final', col='women')) / deleted, 2),
+        'draft_women_pct': round(100 * int(g('draft_roll', col='women')) / draft, 4),
+        'final_women_pct': round(100 * int(g('final_roll_general', col='women')) / final, 4),
+        'added_women_pct': round(100 * int(g('draft_roll_additions_to_final', col='women')) / added, 4),
+        'deleted_women_pct': round(100 * int(g('draft_roll_deletions_to_final', col='women')) / deleted, 4),
         'service_final': int(g('final_roll_service')),
         'anta_draft': int(g('draft_roll', '200 ACs')) - draft,
-        'roll_2023': R23, 'final_200': R26, 'fall': R23 - R26, 'per_100': round(100 * (R23 - R26) / R23, 2),
-        'women_2023_pct': round(100 * W23 / R23, 2), 'women_2026_pct': round(100 * W26 / R26, 2),
+        'roll_2023': R23, 'final_200': R26, 'fall': R23 - R26, 'per_100': round(100 * (R23 - R26) / R23, 4),
+        'women_2023_pct': round(100 * W23 / R23, 4), 'women_2026_pct': round(100 * W26 / R26, 4),
         'acs': len(acs), 'districts': len(districts), 'acs_grew': len(grew),
         'acs_women_fell': sum(a['women_change'] < 0 for a in acs),
         'rate_min': lo['name'], 'rate_min_v': lo['per_100'], 'rate_max': hi['name'], 'rate_max_v': hi['per_100'],

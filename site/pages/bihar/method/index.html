@@ -28,6 +28,7 @@
   <div class="qa"><h3>Party names matched to the declared result</h3><p>Votes added up from the booths match the declared 2024 result in every Lok Sabha seat. In nine seats, though, a column of votes carried a party name that differed from the declared result. Those columns were matched to the declared result, and the evidence for each is below. After matching, the first and second parties in all 40 seats are the declared winner and runner-up.</p>
     <div class="twrap" tabindex="0" role="region" aria-label="Party names matched"><table id="tFix"></table></div></div>
   <div class="qa"><h3>Titles are not surnames</h3><p>Most women carry Devi, Kumari or Khatun in place of a surname, and none of the three says anything about caste. They are set aside, and caste is read first from the surname of the father or husband.</p></div>
+  <div class="qa"><h3>Two classifications of surnames</h3><p>Caste is read from surnames in two ways, set out on the <a href="../people/#caste">People</a> page. The dataset of official caste lists by Jolad, Kalyani and Baharadia of FLAME University, published on Harvard Dataverse (<a href="https://doi.org/10.7910/DVN/WT5VIY">doi:10.7910/DVN/WT5VIY</a>) under a CC0 licence, was used to check and correct the classification of a few surnames against the Bihar lists of Scheduled Castes, Scheduled Tribes and Other Backward Classes.</p></div>
   <div class="qa"><h3>Reasons are read as entered</h3><p>Each name on the phase 1 lists has the reason the officer gave for removing it. That reason is what the officer wrote down, and nobody checked it. The four reasons are counted as written and none is regrouped. The counts agree with the booth list in all 77,837 booths, and the counts of women and men agree with the Chief Electoral Officer's phase 1 figures in every constituency. The phase 2 lists give no reasons.</p></div>
   <div class="qa"><h3>Constituencies are joined by number</h3><p>Bihar has two seats called Kalyanpur (16 and 131) and two called Pipra (17 and 42), so every match between tables uses the constituency number. Minapur (90) belongs to the Vaishali Lok Sabha seat.</p></div>
   <div class="qa"><h3>Border constituencies</h3><p>A constituency counts as a border constituency when its district touches Nepal, West Bengal, Jharkhand or Uttar Pradesh.</p></div>
@@ -65,12 +66,13 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var AL = s.by_alliance_label, w = s.within_seat_2024, I = s.intensity, fs = 100 * t.female / (t.female + t.male);
   var cls = t.hindu + t.muslim + t.unknown, byR = SIR.groupBy(acs, 'reserved'), by25 = SIR.groupBy(acs, 'win2025');
   var border = acs.filter(function (a) { return a.border && a.border !== 'Interior'; }), interior = acs.filter(function (a) { return !a.border || a.border === 'Interior'; });
-  var gd = ds.map(function (d) { return d.gddp_pc; }), dr = ds.map(function (d) { return d.per_100; }), eb = ds.map(function (d) { return d.electors_per_booth; });
+  var dr = ds.map(function (d) { return d.per_100; }), eb = ds.map(function (d) { return d.electors_per_booth; });
   var ranked = acs.slice().sort(function (a, b) { return b.per_100 - a.per_100; });
   var D = id.districts, fOver = D.filter(function (d) { return d.female_share_deleted > d.female_share_roll; }).length;
   var inside = D.filter(function (d) { return d.muslim_share_population_2011 >= d.muslim_share_deleted_low && d.muslim_share_population_2011 <= d.muslim_share_deleted_high; }).length;
   var cg = id.caste.guardian, both = function (g) { return cg.A.groups[g].ratio_to_survey >= 1 && cg.B.groups[g].ratio_to_survey >= 1; }, neither = function (g) { return cg.A.groups[g].ratio_to_survey < 1 && cg.B.groups[g].ratio_to_survey < 1; };
   var G = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'];
+  var andList = function (a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + L(' and ') + a[a.length - 1]; };
   // Group names shown in prose: two are English words, the rest acronyms.
   var GW = { General: L('General'), Muslim: L('Muslim') }, GN = function (g) { return GW[g] || g; };
   var withM = acs.filter(function (a) { return a.margin2025; }), overM = withM.filter(function (a) { return a.total > a.margin2025; });
@@ -81,15 +83,13 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     [L('Did NDA and INDIA ground lose names at the same rate?'),
      L('No. Seats the NDA won in 2025 lost {nda25} names per 100 electors and seats INDIA won lost {india25}. By the 2024 Lok Sabha leader the figures are {nda24} and {india24}, and by the 2020 winner {nda20} and {india20}. Inside the same constituency, NDA-led booths lost {gap} more names each than INDIA-led booths, in {seats_higher} of {seats_compared} seats. Of the booths that lost 400 names or more, {nda_pct}% were NDA-led. <a href="../results/">Elections</a>.', { nda25: SIR.d(AL['2025'].NDA.per_100, 2), india25: SIR.d(AL['2025'].INDIA.per_100, 2), nda24: SIR.d(AL['2024'].NDA.per_100, 2), india24: SIR.d(AL['2024'].INDIA.per_100, 2), nda20: SIR.d(AL['2020'].NDA.per_100, 2), india20: SIR.d(AL['2020'].INDIA.per_100, 2), gap: SIR.d(w.pooled_nda_minus_india, 1), seats_higher: w.seats_nda_higher, seats_compared: w.seats_compared, nda_pct: SIR.d(last.nda_pct, 0) })],
     [L('Were women removed out of proportion?'),
-     L('Yes. Women are {share} of those removed and {roll} of the roll they were removed from. Their share of the removed is higher than their share of the roll in {over} of {districts} districts. Sex is recorded on the roll. <a href="../people/">Women, religion, caste</a>.', { share: SIR.pct(fs), roll: SIR.pct(t.female_share_roll), over: fOver, districts: D.length })],
+     L('Yes. Women are {share} of those removed and {roll} of the roll they were removed from. Their share of the removed is higher than their share of the roll in {over} of {districts} districts. Sex is recorded on the roll. <a href="../people/">Women, religion and caste</a>.', { share: SIR.pct(fs), roll: SIR.pct(t.female_share_roll), over: fOver, districts: D.length })],
     [L('Which caste groups carried the removals?'),
-     L('Going by the surname of the father or husband and comparing with the 2023 caste survey, {both} families are removed at or above their share of the population under both classifications, and {neither} families below it. The two classifications disagree on {disagree}. <a href="../people/">Women, religion, caste</a>.', { both: G.filter(both).map(GN).join(L(' and ')), neither: G.filter(neither).map(GN).join(L(' and ')), disagree: G.filter(function (g) { return !both(g) && !neither(g); }).map(GN).join(L(' and ')) })],
+     L('Going by the surname of the father or husband and comparing with the 2023 caste survey, {both} families are removed at or above their share of the population under both classifications, and {neither} families below it. The two classifications disagree on {disagree}. <a href="../people/">Women, religion and caste</a>.', { both: andList(G.filter(both).map(GN)), neither: andList(G.filter(neither).map(GN)), disagree: andList(G.filter(function (g) { return !both(g) && !neither(g); }).map(GN)) })],
     [L('How does the Muslim share of removals compare with the population?'),
-     L('Names classified Muslim are {low} of removals, and {high} if every unclassified name is counted, against 16.87% of the population in 2011 and 17.70% in the 2023 survey. The census share lies inside that range in {inside} of {districts} districts. <a href="../people/">Women, religion, caste</a>.', { low: SIR.pct(100 * t.muslim / cls), high: SIR.pct(100 * (t.muslim + t.unknown) / cls), inside: inside, districts: D.length })],
+     L('Names classified Muslim are {low} of removals, and {high} if every unclassified name is counted, against 16.87% of the population in 2011 and 17.70% in the 2023 survey. The census share lies inside that range in {inside} of {districts} districts. <a href="../people/">Women, religion and caste</a>.', { low: SIR.pct(100 * t.muslim / cls), high: SIR.pct(100 * (t.muslim + t.unknown) / cls), inside: inside, districts: D.length })],
     [L('Do border constituencies differ from the interior?'),
      L('Border constituencies lost {border} per 100 electors, the interior {interior}. <a href="../border/">Border</a>.', { border: SIR.d(rate(border), 2), interior: SIR.d(rate(interior), 2) })],
-    [L('Is district prosperity related to removals?'),
-     L('Across 38 districts, the rank correlation between per-capita district product and removals per 100 electors is {rho}. <a href="../districts/">Districts</a>.', { rho: SIR.d(SIR.spearman(gd, dr), 2) })],
     [L('Do reserved seats differ?'),
      L('The {sc_seats} seats reserved for Scheduled Castes lost {sc_rate} names per 100 electors, the {st_seats} reserved for Scheduled Tribes lost {st_rate}, and the general seats lost {gen_rate}.', { sc_seats: byR.SC.length, sc_rate: SIR.d(rate(byR.SC), 2), st_seats: byR.ST.length, st_rate: SIR.d(rate(byR.ST), 2), gen_rate: SIR.d(rate(byR.GEN), 2) })],
     [L('Do removals exceed winning margins?'),
@@ -99,7 +99,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     [L('Does booth size relate to removal intensity?'),
      L('Across districts, electors per booth and removals per 100 electors have a rank correlation of {rho}.', { rho: SIR.d(SIR.spearman(eb, dr), 2) })],
     [L('Which booths stand out?'),
-     L('{b200} booths lost more than 200 names and {b400} lost 400 or more. Each constituency\'s booths can be sorted in the <a href="../explorer/">explorer</a>.', { b200: SIR.n(b200), b400: SIR.n(last.booths) })]
+     L('{b200} booths lost 200 or more names and {b400} lost 400 or more. Each constituency\'s booths can be sorted in the <a href="../explorer/">explorer</a>.', { b200: SIR.n(b200), b400: SIR.n(last.booths) })]
   ];
   document.getElementById('qas').innerHTML = QA.map(function (q, i) {
     return '<div class="qa"><h3>' + (i + 1) + '. ' + q[0] + '</h3><p>' + q[1] + '</p></div>';

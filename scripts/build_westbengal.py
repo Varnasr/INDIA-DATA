@@ -90,9 +90,9 @@ def build():
     assert 0 <= AD['not_accounted'] < 50000
     AD['not_eligible_no_appeal'] = AD['found_not_eligible'] - AD['appeals_by_excluded']
     assert AD['not_eligible_no_appeal'] > 0
-    AD['not_eligible_pct'] = round(100 * AD['found_not_eligible'] / AD['under_adjudication'], 2)
-    AD['inclusion_appeal_pct'] = round(100 * AD['appeals_against_inclusion'] / AD['found_eligible'], 2)
-    AD['pending_pct'] = round(100 * AD['appeals_pending'] / AD['appeals_total'], 2)
+    AD['not_eligible_pct'] = round(100 * AD['found_not_eligible'] / AD['under_adjudication'], 4)
+    AD['inclusion_appeal_pct'] = round(100 * AD['appeals_against_inclusion'] / AD['found_eligible'], 4)
+    AD['pending_pct'] = round(100 * AD['appeals_pending'] / AD['appeals_total'], 4)
 
     r24, dr, el, res = rows('roll_2024_ls_ac.csv'), rows('draft_roll_ac.csv'), rows('electors_nomination_2026_ac.csv'), rows('results_2026.csv')
     for t in (r24, dr, el, res):
@@ -115,14 +115,14 @@ def build():
             'ac': n, 'name': d['ac_name'], 'district': d['district'],
             'roll_2024': atot, 'draft': dtot, 'election': etot,
             'fall_draft': atot - dtot, 'fall': fall,
-            'draft_per_100': round(100 * (atot - dtot) / atot, 2),
-            'per_100': round(100 * fall / atot, 2),
+            'draft_per_100': round(100 * (atot - dtot) / atot, 4),
+            'per_100': round(100 * fall / atot, 4),
             'after_draft': etot - dtot,
-            'women_2024_pct': round(100 * aw / atot, 2),
-            'women_election_pct': round(100 * ew / etot, 2),
+            'women_2024_pct': round(100 * aw / atot, 4),
+            'women_election_pct': round(100 * ew / etot, 4),
             'women_fall': aw - ew,
             'winner': PARTY[x['winner_party']], 'runner_up': PARTY[x['runner_up_party']],
-            'margin': margin, 'votes': votes, 'turnout': round(100 * votes / etot, 2),
+            'margin': margin, 'votes': votes, 'turnout': round(100 * votes / etot, 4),
             'fall_voters': round(max(fall, 0) * votes / etot),
         })
     T = lambda k: sum(a[k] for a in acs)
@@ -148,14 +148,14 @@ def build():
         g['seats_bjp'] += a['winner'] == 'BJP'
         g['seats_aitc'] += a['winner'] == 'AITC'
     for g in dist.values():
-        g['draft_per_100'] = round(100 * (g['roll_2024'] - g['draft']) / g['roll_2024'], 2)
-        g['per_100'] = round(100 * (g['roll_2024'] - g['election']) / g['roll_2024'], 2)
-        g['women_2024_pct'] = round(100 * g['women_2024'] / g['roll_2024'], 2)
-        g['women_fall_pct'] = round(100 * (g['women_2024'] - g['women_election']) / (g['roll_2024'] - g['election']), 2)
+        g['draft_per_100'] = round(100 * (g['roll_2024'] - g['draft']) / g['roll_2024'], 4)
+        g['per_100'] = round(100 * (g['roll_2024'] - g['election']) / g['roll_2024'], 4)
+        g['women_2024_pct'] = round(100 * g['women_2024'] / g['roll_2024'], 4)
+        g['women_fall_pct'] = round(100 * (g['women_2024'] - g['women_election']) / (g['roll_2024'] - g['election']), 4)
     districts = sorted(dist.values(), key=lambda g: -g['per_100'])
     assert len(districts) == 24
     for a in acs:
-        a['vs_district'] = round(a['per_100'] - dist[a['district']]['per_100'], 2)
+        a['vs_district'] = round(a['per_100'] - dist[a['district']]['per_100'], 4)
 
     by_winner = {}
     for a in acs:
@@ -163,29 +163,29 @@ def build():
     winners = []
     for w, L in sorted(by_winner.items(), key=lambda kv: -len(kv[1])):
         winners.append({'party': w, 'seats': len(L),
-                        'per_100': round(100 * sum(a['fall'] for a in L) / sum(a['roll_2024'] for a in L), 2),
-                        'vs_district': round(sum(a['vs_district'] for a in L) / len(L), 2),
+                        'per_100': round(100 * sum(a['fall'] for a in L) / sum(a['roll_2024'] for a in L), 4),
+                        'vs_district': round(sum(a['vs_district'] for a in L) / len(L), 4),
                         'over_margin': sum(a['over_margin'] for a in L)})
 
     fall = R24 - ELEC
     women_fall = R24_W - ELEC_W
     lo, hi = min(acs, key=lambda a: a['per_100']), max(acs, key=lambda a: a['per_100'])
     summary = {
-        'pn05': dict(p, removed_per_100=round(100 * p['removed'] / p['before'], 2),
-                     women_before_pct=round(100 * p['before_women'] / p['before'], 2),
-                     women_removed_pct=round(100 * (p['before_women'] - DRAFT_W) / p['removed'], 2),
-                     shares={k: round(100 * p[k] / p['removed'], 2) for k in ('dead', 'absent', 'shifted', 'duplicate', 'other')}),
+        'pn05': dict(p, removed_per_100=round(100 * p['removed'] / p['before'], 4),
+                     women_before_pct=round(100 * p['before_women'] / p['before'], 4),
+                     women_removed_pct=round(100 * (p['before_women'] - DRAFT_W) / p['removed'], 4),
+                     shares={k: round(100 * p[k] / p['removed'], 4) for k in ('dead', 'absent', 'shifted', 'duplicate', 'other')}),
         'adj': AD,
         'roll_2024': R24, 'draft': DRAFT, 'election': ELEC,
         'after_final': ELEC - p['final'],
         'fall_draft': R24 - DRAFT, 'fall': fall,
-        'draft_per_100': round(100 * (R24 - DRAFT) / R24, 2),
-        'per_100': round(100 * fall / R24, 2),
+        'draft_per_100': round(100 * (R24 - DRAFT) / R24, 4),
+        'per_100': round(100 * fall / R24, 4),
         'growth_2024_to_oct2025': p['before'] - R24,
         'fall_from_oct2025': p['before'] - ELEC,
-        'women_2024_pct': round(100 * R24_W / R24, 2),
-        'women_election_pct': round(100 * ELEC_W / ELEC, 2),
-        'women_fall_pct': round(100 * women_fall / fall, 2),
+        'women_2024_pct': round(100 * R24_W / R24, 4),
+        'women_election_pct': round(100 * ELEC_W / ELEC, 4),
+        'women_fall_pct': round(100 * women_fall / fall, 4),
         'districts_women_over': sum(g['women_fall_pct'] > g['women_2024_pct'] for g in districts),
         'acs': len(acs), 'districts': len(districts),
         'grew': sum(a['fall'] < 0 for a in acs),
@@ -193,7 +193,7 @@ def build():
         'draft_over_margin': sum(a['draft_over_margin'] for a in acs),
         'over_margin': sum(a['over_margin'] for a in acs),
         'could_change': sum(a['could_change'] for a in acs),
-        'votes': T('votes'), 'turnout': round(100 * T('votes') / ELEC, 2),
+        'votes': T('votes'), 'turnout': round(100 * T('votes') / ELEC, 4),
         'seats_2026': {w['party']: w['seats'] for w in winners},
         'winners': winners,
         'rho_rate_margin': round(spearman([a['per_100'] for a in acs], [a['margin'] / a['votes'] for a in acs]), 3),

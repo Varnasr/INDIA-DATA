@@ -8,7 +8,7 @@ downloadable data/india/notices.csv.
     python3 scripts/build_notices.py --check   # fail if the output is stale
 
 Two lists produced the notices. "No mapping" is an elector who could not be
-linked to the roll of the last intensive revision (2002 to 2005). The "logical
+linked to the roll of the last intensive revision (2002 to 2006). The "logical
 discrepancy" list is the Commission's list of mismatches in names, ages and
 family links. Most states published one total and some the two lists; a few
 published one list only. The raw file keeps every figure found, with its
@@ -86,6 +86,7 @@ def main():
                'lists_same_source': bool(pair and total and pair[0]['source_url'] == total['source_url']),
                'lists_source': pair[0]['source_url'] if pair else ((nm or dc)[0]['source_url'] if len(nm) + len(dc) == 1 else None),
                'deleted_after_notice': max(by('deleted_after_notice'), key=lambda r: r['date'])['count'] if by('deleted_after_notice') else None,
+               'deleted_kind': max(by('deleted_after_notice'), key=lambda r: r['date'])['kind'] if by('deleted_after_notice') else None,
                'other_figures': len(R) - (1 if total and how == 'published' else 0) - (2 if pair else 0)}
         # the two lists can overlap, so together they may exceed the total,
         # but a total far above the two lists would mean a mismatched pair

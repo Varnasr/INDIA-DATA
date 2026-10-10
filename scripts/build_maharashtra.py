@@ -24,6 +24,10 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# the CEO's press note of 31 August 2026, which the All India row cites for its totals
+NOTE_URL = 'https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Press%20Note%20English_31.08.2026%20Draft%20Roll.pdf'
+# the press report of the reasons in lakh, which the note does not give
+PRESS_REASONS = 'https://indianexpress.com/article/cities/mumbai/maharashtra-draft-electoral-rolls-sir-2-crore-voters-excluded-claims-objections-portal-10857667/'
 RAW = os.path.join(ROOT, 'data', 'maharashtra', 'raw')
 OUT = os.path.join(ROOT, 'data', 'maharashtra')
 CHECK = '--check' in sys.argv
@@ -60,9 +64,9 @@ def build():
         before = draft + left
         D.append({'sr': int(a['sr']), 'district': a['district'], 'now': NOW.get(a['district'], ''), 'city': a['district'] in CITY,
                   'before': before, 'draft': draft, 'left_off': left,
-                  'per_100': round(100 * left / before, 2),
+                  'per_100': round(100 * left / before, 4),
                   'men': men, 'women': women, 'third': third,
-                  'women_draft_pct': round(100 * women / draft, 2)})
+                  'women_draft_pct': round(100 * women / draft, 4)})
 
     T = lambda L, k: sum(r[k] for r in L)
     assert T(D, 'draft') == S['draft'], 'districts add up to the state draft'
@@ -76,7 +80,8 @@ def build():
     with open(os.path.join(ROOT, 'data', 'india', 'states.json'), encoding='utf-8') as fh:
         ind = [x for x in json.load(fh)['states'] if x['state'] == 'Maharashtra'][0]
     assert ind['electors_before'] == S['before'] and ind['removed'] == S['left_off'], 'All India row equals the press note'
-    assert ind['source'] == 'press' and ind['figures'] == 'rounded', 'the reasons for Maharashtra are rounded press figures'
+    # the row cites the CEO's note for its totals; the reasons in it are the press's, in lakh
+    assert ind['source'] == 'primary' and ind['source_url'] == NOTE_URL and ind['figures'] == 'rounded', 'the All India row cites the note, and its reasons are rounded press figures'
     press = {k: ind[k] for k in ('dead', 'shifted_absent_other', 'duplicate')}
 
     # the dates as last moved: the Commission's latest schedule for the state
@@ -88,16 +93,16 @@ def build():
     city, rest = [r for r in D if r['city']], [r for r in D if not r['city']]
     grp = lambda L: {
         'before': T(L, 'before'), 'left_off': T(L, 'left_off'), 'draft': T(L, 'draft'),
-        'per_100': round(100 * T(L, 'left_off') / T(L, 'before'), 2),
-        'share_of_roll': round(100 * T(L, 'before') / S['before'], 2),
-        'share_of_left_off': round(100 * T(L, 'left_off') / S['left_off'], 2),
-        'women_draft_pct': round(100 * T(L, 'women') / T(L, 'draft'), 2)}
+        'per_100': round(100 * T(L, 'left_off') / T(L, 'before'), 4),
+        'share_of_roll': round(100 * T(L, 'before') / S['before'], 4),
+        'share_of_left_off': round(100 * T(L, 'left_off') / S['left_off'], 4),
+        'women_draft_pct': round(100 * T(L, 'women') / T(L, 'draft'), 4)}
     wsort = sorted(D, key=lambda r: r['women_draft_pct'])
     summary = {
         'before': S['before'], 'draft': S['draft'], 'left_off': S['left_off'],
-        'per_100': round(100 * S['left_off'] / S['before'], 2),
+        'per_100': round(100 * S['left_off'] / S['before'], 4),
         'draft_men': S['draft_men'], 'draft_women': S['draft_women'], 'draft_third': S['draft_third_gender'],
-        'women_draft_pct': round(100 * S['draft_women'] / S['draft'], 2),
+        'women_draft_pct': round(100 * S['draft_women'] / S['draft'], 4),
         'districts': len(D), 'acs': int(st['acs']),
         'top': [{'district': r['district'], 'per_100': r['per_100'], 'left_off': r['left_off']} for r in D[:5]],
         'low': [{'district': r['district'], 'per_100': r['per_100']} for r in D[-3:]],
@@ -109,8 +114,8 @@ def build():
         'women_low': {'district': wsort[0]['district'], 'pct': wsort[0]['women_draft_pct']},
         'women_high': {'district': wsort[-1]['district'], 'pct': wsort[-1]['women_draft_pct']},
         'press_reasons': press, 'press_reasons_sum': sum(press.values()),
-        'press_shares': {k: round(100 * v / sum(press.values()), 2) for k, v in press.items()},
-        'press_source': ind['source_url'],
+        'press_shares': {k: round(100 * v / sum(press.values()), 4) for k, v in press.items()},
+        'press_source': PRESS_REASONS,
         'draft_date': st['draft_published'], 'claims_to_note': st['claims_objections_to'], 'final_due_note': st['final_roll_due'],
         'claims_to': last['claims'][1], 'notices_to': last['notice'][1], 'final_due': last['final'], 'final_due_source': last['label'],
     }
@@ -123,11 +128,10 @@ def build():
         'title': 'Top 38 ACs with High Percentage of Uncollectable EF Electors (excluding Muslim-heavy ACs as claimed by Indian Express report)',
         'url': 'https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Top%20ACs%20with%20high%20percentage%20of%20%20Uncollectable%20EF%20excluding%20%20Muslim%20heavy%20seats.pdf',
         'file_date': '2026-09-30',
-        'acs': len(top), 'electors': sum(int(r['total_electors']) for r in top), 'uncollected': sum(int(r['uncollected']) for r in top),
+        'acs': len(top),
         'rows': [{'ac': int(r['ac']), 'name': r['ac_name'], 'district': r['district'], 'electors': int(r['total_electors']),
                   'uncollected': int(r['uncollected']), 'pct': float(r['uncollected_pct_printed'])} for r in top],
     }
-    summary['top38']['pct'] = round(100 * summary['top38']['uncollected'] / summary['top38']['electors'], 1)
     assert summary['claims_to'] >= summary['claims_to_note'] and summary['final_due'] >= summary['final_due_note']
 
     out = {'summary.json': json.dumps(summary, ensure_ascii=False, indent=1) + '\n',

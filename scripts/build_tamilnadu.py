@@ -100,12 +100,12 @@ def build():
         acs.append({
             'ac': n, 'name': d['ac_name'], 'district': d['district'],
             'before': before, 'removed': rem, 'dead': dead, 'shifted_absent': sh, 'multiple': mult,
-            'per_100': round(100 * rem / before, 2),
+            'per_100': round(100 * rem / before, 4),
             'draft': dtot, 'draft_women': dw, 'final': ftot, 'final_women': fw,
             'added_net': ftot - dtot, 'net_fall': before - ftot,
-            'net_per_100': round(100 * (before - ftot) / before, 2),
+            'net_per_100': round(100 * (before - ftot) / before, 4),
             'winner': party(e['winner_party']), 'runner_up': party(e['runner_up_party']),
-            'margin': margin, 'votes': votes, 'turnout': round(100 * turnout, 2),
+            'margin': margin, 'votes': votes, 'turnout': round(100 * turnout, 4),
             # living removed names, voting at the seat's own turnout
             'removed_voters': round((rem - dead) * turnout),
             'winner_2021': party(p['winner_party']), 'margin_2021': m21, 'electors_2021': int(p['electors']),
@@ -129,10 +129,10 @@ def build():
         for k in ('before', 'removed', 'dead', 'shifted_absent', 'multiple', 'final'):
             g[k] += a[k]
     for g in dist.values():
-        g['per_100'] = round(100 * g['removed'] / g['before'], 2)
-        g['net_per_100'] = round(100 * (g['before'] - g['final']) / g['before'], 2)
-        g['shifted_share'] = round(100 * g['shifted_absent'] / g['removed'], 2)
-        g['dead_share'] = round(100 * g['dead'] / g['removed'], 2)
+        g['per_100'] = round(100 * g['removed'] / g['before'], 4)
+        g['net_per_100'] = round(100 * (g['before'] - g['final']) / g['before'], 4)
+        g['shifted_share'] = round(100 * g['shifted_absent'] / g['removed'], 4)
+        g['dead_share'] = round(100 * g['dead'] / g['removed'], 4)
     districts = sorted(dist.values(), key=lambda g: -g['per_100'])
     assert len(districts) == 38
 
@@ -140,29 +140,29 @@ def build():
     # every comparison between parties
     for a in acs:
         g = dist[a['district']]
-        a['vs_district'] = round(a['per_100'] - g['per_100'], 2)
+        a['vs_district'] = round(a['per_100'] - g['per_100'], 4)
     by_winner = {}
     for a in acs:
         by_winner.setdefault(a['winner'], []).append(a)
     winners = []
     for w, L in sorted(by_winner.items(), key=lambda kv: -len(kv[1])):
         rem, bef = sum(a['removed'] for a in L), sum(a['before'] for a in L)
-        winners.append({'party': w, 'seats': len(L), 'per_100': round(100 * rem / bef, 2),
-                        'vs_district': round(sum(a['vs_district'] for a in L) / len(L), 2),
+        winners.append({'party': w, 'seats': len(L), 'per_100': round(100 * rem / bef, 4),
+                        'vs_district': round(sum(a['vs_district'] for a in L) / len(L), 4),
                         'over_margin': sum(a['over_margin'] for a in L)})
 
     before, rem, fin = T('before'), T('removed'), T('final')
     chennai = dist['Chennai']
     summary = {
         'before': before, 'removed': rem, 'draft': T('draft'), 'final': fin,
-        'per_100': round(100 * rem / before, 2),
+        'per_100': round(100 * rem / before, 4),
         'dead': T('dead'), 'shifted_absent': T('shifted_absent'), 'multiple': T('multiple'),
-        'shares': {k: round(100 * T(k) / rem, 2) for k in ('dead', 'shifted_absent', 'multiple')},
+        'shares': {k: round(100 * T(k) / rem, 4) for k in ('dead', 'shifted_absent', 'multiple')},
         'added_net': fin - T('draft'), 'net_fall': before - fin,
-        'net_per_100': round(100 * (before - fin) / before, 2),
-        'made_up_pct': round(100 * (fin - T('draft')) / rem, 2),
-        'women_draft_pct': round(100 * T('draft_women') / T('draft'), 2),
-        'women_final_pct': round(100 * T('final_women') / fin, 2),
+        'net_per_100': round(100 * (before - fin) / before, 4),
+        'made_up_pct': round(100 * (fin - T('draft')) / rem, 4),
+        'women_draft_pct': round(100 * T('draft_women') / T('draft'), 4),
+        'women_final_pct': round(100 * T('final_women') / fin, 4),
         'acs': len(acs), 'districts': len(districts),
         'rate_min': min(acs, key=lambda a: a['per_100'])['name'], 'rate_min_v': min(a['per_100'] for a in acs),
         'rate_max': max(acs, key=lambda a: a['per_100'])['name'], 'rate_max_v': max(a['per_100'] for a in acs),
@@ -170,7 +170,7 @@ def build():
         'net_over_margin': sum(a['net_over_margin'] for a in acs),
         'could_change': sum(a['could_change'] for a in acs),
         'changed_hands': sum(a['changed_hands'] for a in acs),
-        'votes': T('votes'), 'turnout': round(100 * T('votes') / fin, 2),
+        'votes': T('votes'), 'turnout': round(100 * T('votes') / fin, 4),
         'electors_2021': T('electors_2021'),
         'seats_2026': {w['party']: w['seats'] for w in winners},
         'winners': winners,
@@ -180,8 +180,8 @@ def build():
                                           [a['margin'] / a['votes'] for a in acs]), 3),
         'chennai': {k: chennai[k] for k in ('acs', 'before', 'removed', 'per_100', 'net_per_100',
                                             'shifted_share', 'dead_share')},
-        'chennai_share_of_removed': round(100 * chennai['removed'] / rem, 2),
-        'chennai_share_of_roll': round(100 * chennai['before'] / before, 2),
+        'chennai_share_of_removed': round(100 * chennai['removed'] / rem, 4),
+        'chennai_share_of_roll': round(100 * chennai['before'] / before, 4),
         'top_districts': [g['district'] for g in districts[:5]],
     }
     summary['chennai']['over_margin'] = sum(a['over_margin'] for a in acs if a['district'] == 'Chennai')

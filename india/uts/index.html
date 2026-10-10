@@ -107,7 +107,12 @@ SIR.json('data/india/states.json').then(function (I) {
         odd.map(function (s) { return ' In ' + s.state + ' the largest share, ' + SIR.pct(s.shares[top(s)]) + ', was entered as ' + (top(s) === 'dead' ? 'dead' : 'enrolled more than once') + '.'; }).join('');
     })(),
     G.length ? 'Women were a smaller share of the names left off than of the roll in ' + list(G.filter(function (g) { return g.gap < 0; }).map(function (g) { return g.state; })) + ', the territories that published the split by sex.' : ''
-  ], 'Jammu and Kashmir and Ladakh were not in the revision. The Dadra and Nagar Haveli and Daman and Diu figures reached us only through the press, and no count of its reasons was published.');
+  ], (function () {
+    // which territories' figures came through the press, and which published no reasons, from the state table
+    var press = U.filter(function (s) { return s.source === 'press'; }).map(function (s) { return s.state; }), none = U.filter(function (s) { return !s.shares; }).map(function (s) { return s.state; });
+    return 'Jammu and Kashmir and Ladakh were not in the revision.' + (press.length ? ' The figures for ' + list(press) + ' reached us through press reports of the official figures.' : '') +
+      (none.length ? ' ' + list(none) + ' published no count of the reasons.' : '');
+  })());
 
   document.getElementById('kpis').innerHTML = [
     [SIR.lakh(tot), 'names left off in the six territories'],

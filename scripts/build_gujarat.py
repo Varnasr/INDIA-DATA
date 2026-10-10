@@ -54,7 +54,7 @@ def read(name):
 
 
 def r2(x):
-    return round(x, 2)
+    return round(x, 4)
 
 
 def spearman(x, y):
