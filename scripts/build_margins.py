@@ -56,13 +56,13 @@ ASM = [
     ('Andhra Pradesh', '2024', 'andhrapradesh_2024.csv', 'c'), ('Arunachal Pradesh', '2024', 'arunachal_2024.csv', 'c'),
     ('Chhattisgarh', '2023', 'chhattisgarh_2023.csv', 'e'), ('Goa', '2022', 'goa_2022.csv', 'c'),
     ('Haryana', '2024', 'haryana_2024.csv', 'c'), ('Jharkhand', '2024', 'jharkhand_2024.csv', 'c'),
-    ('Karnataka', '2023', 'karnataka_2023.csv', 'c'), ('Madhya Pradesh', '2023', 'madhyapradesh_2023.csv', 'e'),
+    ('Karnataka', '2023', 'karnataka_2023.csv', 'e'), ('Madhya Pradesh', '2023', 'madhyapradesh_2023.csv', 'e'),
     ('Maharashtra', '2024', 'maharashtra_2024.csv', 'c'), ('Odisha', '2024', 'odisha_2024.csv', 'c'),
-    ('Puducherry', '2026', 'puducherry_2026.csv', 'c'), ('Punjab', '2022', 'punjab_2022.csv', 'c'),
+    ('Puducherry', '2026', 'puducherry_2026.csv', 'e'), ('Punjab', '2022', 'punjab_2022.csv', 'c'),
     ('Sikkim', '2024', 'sikkim_2024.csv', 'c'), ('Telangana', '2023', 'telangana_2023.csv', 'e'),
     ('Uttarakhand', '2022', 'uttarakhand_2022.csv', 'c'),
     ('Manipur', '2022', 'manipur_2022.csv', 'f'), ('Meghalaya', '2023', 'meghalaya_2023.csv', 'f'),
-    ('Nagaland', '2023', 'nagaland_2023.csv', 'c'), ('Mizoram', '2023', 'mizoram_2023.csv', 'e'),
+    ('Nagaland', '2023', 'nagaland_2023.csv', 'e'), ('Mizoram', '2023', 'mizoram_2023.csv', 'e'),
     ('Uttar Pradesh', '2022', 'uttarpradesh_2022.csv', 'e'),
 ]
 SRC = {'e': "the Election Commission's statistical report", 'f': "the Chief Electoral Officer's Form 20", 'c': "a published compilation of the Election Commission's results, checked seat by seat against a second"}
