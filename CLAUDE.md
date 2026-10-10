@@ -356,7 +356,7 @@ A fourth comparison spreads every state's names left off over its Assembly
 seats by electors and sets them against the margin at its latest Assembly
 election (`ASM` and `OWN` in the build; results in `data/india/raw/assembly/`,
 one file per state with `SOURCES.md`). The idea of reading the Assembly
-results beside the Lok Sabha came from Mamomay Ghoshal's Odisha workbook.
+results beside the Lok Sabha came from Manomay Ghoshal's Odisha workbook.
 The Commission's result pages could not be read from the sandbox for most of
 these elections, so most files are a published compilation checked seat by
 seat against a second; Madhya Pradesh, Chhattisgarh, Telangana, Mizoram and
