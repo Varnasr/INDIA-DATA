@@ -121,7 +121,7 @@
       var lv = LEVEL[t.level], tag = (t.press ? ' The figures reached us through the press.' : '') + (t.partial ? ' Only some ' + lv[1] + ' were published, so the rows do not add up to the state.' : '');
       h.push('<h2 id="' + hyph(t.title) + '">' + SIR.esc(t.title) + '</h2>' + (t.note ? '<p class="sub">' + SIR.esc(t.note) + tag + '</p>' : tag ? '<p class="sub">' + tag.trim() + '</p>' : '') +
         '<div class="grid"><div class="panel wide" id="pT' + i + '"><div class="vizbox" id="vT' + i + '"></div><p id="nT' + i + '"></p></div></div>' +
-        '<details class="figs"><summary>Every ' + lv[0] + ', in figures</summary><div class="twrap fit"><table id="tT' + i + '"></table></div></details>');
+        '<details class="figs"><summary>Every ' + lv[0] + ', in figures</summary><div class="twrap fit" tabindex="0" role="region" aria-label="Every ' + lv[0] + ', in figures"><table id="tT' + i + '"></table></div></details>');
     });
     if (s.notices) h.push('<h2 id="notices">Notices</h2><p>' + s.notices + ' The counts for every state are on <a href="../india/process/#notices-the-no-mapping-list-and-the-discrepancy-list">How the revision was run</a>.</p>');
     h.push('<p class="note">' + SIR.esc(poss(d, 1)) + ' dates are drawn beside every other state\'s on <a href="../india/process/#s-' + hyph(d.state) + '">How the revision was run</a>.' + (d.revision === 'no_draft' ? ' The <a href="method/">method page</a> lists each source.' : ' Every figure on this page is in the CSV on the Downloads page, and the <a href="method/">method page</a> lists each source.') + '</p>');
