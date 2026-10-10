@@ -84,8 +84,9 @@
     L('{a}, {b} and {c} lost the most for their size, {ar}, {br} and {cr} names per 100 electors. {y} and {z} lost the fewest, {yr} and {zr}. The <a href="../districts/">Districts</a> page gives all {n} districts.', {
       a: DD[0].district, b: DD[1].district, c: DD[2].district, ar: SIR.d(DD[0].per_100, 1), br: SIR.d(DD[1].per_100, 1), cr: SIR.d(DD[2].per_100, 1),
       y: DD[DD.length - 2].district, z: DD[DD.length - 1].district, yr: SIR.d(DD[DD.length - 2].per_100, 1), zr: SIR.d(DD[DD.length - 1].per_100, 1), n: DD.length }), ['districts']]);
+  var FL = linked.length > 1 ? function (o) { return L('Of the {n} things compared, {k} move with the removal rate, {list}.', o); } : function (o) { return L('Of the {n} things compared, one moves with the removal rate, {list}.', o); };
   QA.push([L('Do less urban or less schooled districts lose more names?'),
-    (linked.length ? L(linked.length > 1 ? 'Of the {n} things compared, {k} move with the removal rate, {list}.' : 'Of the {n} things compared, one moves with the removal rate, {list}.', { n: FAC.length, k: linked.length, list: AND(linked.map(function (x, i) { return i ? L('{f} ({r})', { f: x[0], r: SIR.d(x[1], 2) }) : L('{f} (rank correlation {r})', { f: x[0], r: SIR.d(x[1], 2) }); })) }) + ' ' : '') +
+    (linked.length ? FL({ n: FAC.length, k: linked.length, list: AND(linked.map(function (x, i) { return i ? L('{f} ({r})', { f: x[0], r: SIR.d(x[1], 2) }) : L('{f} (rank correlation {r})', { f: x[0], r: SIR.d(x[1], 2) }); })) }) + ' ' : '') +
     (unl.length ? (unl.length > 1 ? L('{list} show no relationship.', { list: CAP(AND(unl.map(function (x) { return x[0]; }))) }) : L('{list} shows no relationship.', { list: CAP(unl[0][0]) })) + ' ' : '') +
     L('A relationship across districts says nothing about why any one name was removed.'), ['districts']]);
   QA.push([L('Why is every relationship here called rough?'),
