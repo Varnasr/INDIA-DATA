@@ -434,7 +434,11 @@ def district_economy(a):
     Only its census columns are used: its deletion columns were computed from
     the duplicated join. Its district income column is not used either: it
     carries no source, and several of its values are patterned digits
-    (23,456, 34,567, 25,678) that no published series matches."""
+    (23,456, 34,567, 25,678) that no published series matches. Income per
+    head comes instead from the Bihar Economic Survey 2024-25, Table A 1.7
+    (per capita GDDP at constant 2011-12 prices, Directorate of Economics and
+    Statistics), transcribed in raw/gddp_per_capita_2011_12_prices.csv; each
+    year's printed ranks must run 1 to 38 and follow the values."""
     d = pd.read_csv(os.path.join(ROOT, 'data', 'district_demography_summary.csv'))
     keep = ['district_name', 'census_2011_total_pop', 'census_2011_density_per_sqkm', 'census_2011_literacy_rate',
             'census_2011_female_literacy', 'census_2011_urban_pct']
@@ -467,12 +471,21 @@ def district_economy(a):
     n = n.assign(key=n.district.map(norm)).pivot(index='key', columns='k', values='value')
     m = m.merge(n, left_on='key', right_index=True, how='left')
     assert m.women_literate.notna().all(), 'a district has no NFHS-5 figures' 
+    g = pd.read_csv(os.path.join(RAW, 'gddp_per_capita_2011_12_prices.csv'))
+    g = g[g.district != 'Bihar'].copy()
+    for y in ('2018_19', '2019_20', '2020_21', '2021_22', '2022_23'):
+        assert sorted(g['r' + y].astype(int)) == list(range(1, 39)), 'GDDP ranks for %s do not run 1 to 38' % y
+        assert (g.sort_values('y' + y, ascending=False)['r' + y].astype(int).tolist() == list(range(1, 39))), 'GDDP ranks for %s do not follow the values' % y
+    galias = {'westchamparan': 'pashchimchamparan', 'eastchamparan': 'purbachamparan', 'purnea': 'purnia'}
+    g['key'] = g.district.map(norm).map(lambda k: galias.get(k, k))
+    m = m.merge(g[['key', 'y2022_23']], on='key', how='left')
+    assert m.y2022_23.notna().all(), 'districts with no GDDP figure: %s' % m[m.y2022_23.isna()].district.tolist()
     return [{'district': x.district, 'acs': int(x.acs), 'deleted': int(x.total),
              'per_100': round(100 * x.total / x.electorate, 4), 'per_booth': round(x.deleted / x.booths, 1),
              'electors_per_booth': round(x.electorate / x.booths, 0),
              'density': int(x.census_2011_density_per_sqkm), 'urban_pct': float(x.census_2011_urban_pct),
              'women_literate': float(x.women_literate), 'girls_schooled': float(x.girls_schooled),
-             'child_marriage': float(x.child_marriage),
+             'child_marriage': float(x.child_marriage), 'gddp_pc': int(x.y2022_23),
              'border': x.border_group} for x in m.sort_values('district').itertuples()]
 
 

@@ -3188,6 +3188,12 @@
    "/bihar/results/"
   ]
  },
+ "Bihar Economic Survey 2024-25, Table A 1.7: per capita gross district domestic product at constant 2011-12 prices, 2018-19 to 2022-23, from the Directorate of Economics and Statistics, Bihar. The pages use 2022-23": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
+  ]
+ },
  "Bihar Pages": {
   "kind": "markup",
   "pages": [
@@ -3556,7 +3562,7 @@
    "/bihar/method/"
   ]
  },
- "Census of India 2011, the National Family Health Survey (NFHS-5) district fact sheets, and the Bihar caste-based survey of 2 October 2023.": {
+ "Census of India 2011, the National Family Health Survey (NFHS-5) district fact sheets, the Bihar Economic Survey 2024-25 for income per head, and the Bihar caste-based survey of 2 October 2023.": {
   "kind": "script",
   "pages": [
    "/bihar/"
@@ -5781,7 +5787,7 @@
    "/delhi/method/"
   ]
  },
- "Density and urban share come from Census 2011, the last count at district level. Women's literacy and marriage before 18 come from the National Family Health Survey (NFHS-5) district fact sheets, fielded in Bihar in 2019-20. Electors per booth: the 2025 electorate over the number of booths with SIR lists.": {
+ "Density and urban share come from Census 2011, the last count at district level. Women's literacy and marriage before 18 come from the National Family Health Survey (NFHS-5) district fact sheets, fielded in Bihar in 2019-20. Income per head is per capita gross district domestic product for 2022-23 at constant 2011-12 prices, from Table A 1.7 of the Bihar Economic Survey 2024-25, whose source is the Directorate of Economics and Statistics, Bihar. Electors per booth: the 2025 electorate over the number of booths with SIR lists.": {
   "kind": "markup",
   "pages": [
    "/bihar/districts/"
@@ -6275,6 +6281,18 @@
   ]
  },
  "Does early marriage relate to removals?": {
+  "kind": "script",
+  "pages": [
+   "/bihar/"
+  ]
+ },
+ "Does income relate to deletions?": {
+  "kind": "script",
+  "pages": [
+   "/bihar/districts/"
+  ]
+ },
+ "Does income relate to removals?": {
   "kind": "script",
   "pages": [
    "/bihar/"
@@ -6812,7 +6830,7 @@
    "/bihar/method/"
   ]
  },
- "Each of Bihar's 38 districts, with its removals per 100 electors set against its urban share, women's literacy, early marriage, density and booth size. Each chart gives a rank correlation, and one under 0.2 either way is read as no relationship.": {
+ "Each of Bihar's 38 districts, with its removals per 100 electors set against its income per head, urban share, women's literacy, early marriage, density and booth size. Each chart gives a rank correlation, and one under 0.2 either way is read as no relationship.": {
   "kind": "script",
   "pages": [
    "/bihar/"
@@ -10330,6 +10348,25 @@
   "kind": "script",
   "pages": [
    "/bihar/"
+  ]
+ },
+ "Income per head (₹)": {
+  "kind": "script",
+  "pages": [
+   "/bihar/districts/"
+  ]
+ },
+ "Income per head by district": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
+  ]
+ },
+ "Income per head, 2022-23 (₹ at 2011-12 prices)": {
+  "kind": "script",
+  "pages": [
+   "/bihar/",
+   "/bihar/districts/"
   ]
  },
  "Inside the same constituency, booths that voted NDA in 2024 lost {gap} more names each than those that voted INDIA, and more in {h} of {c} seats.": {
@@ -18969,7 +19006,7 @@
    "/"
   ]
  },
- "SIR deletions in Bihar's 38 districts against urbanisation, women's literacy, early marriage, density and booth size.": {
+ "SIR deletions in Bihar's 38 districts against income per head, urbanisation, women's literacy, early marriage, density and booth size.": {
   "kind": "markup",
   "pages": [
    "/bihar/districts/"
@@ -26214,7 +26251,7 @@
    "/kerala/method/"
   ]
  },
- "With only 38 districts these factors cannot be told apart. The less urban districts also tend to be the less literate, and in the north-east they send the most migrants out. Each panel describes the districts. None of them shows a cause.": {
+ "With only 38 districts these factors cannot be told apart. The less urban districts also tend to be the poorer and the less literate, and in the north-east they send the most migrants out. Each panel describes the districts. None of them shows a cause.": {
   "kind": "markup",
   "pages": [
    "/bihar/districts/"
@@ -27131,6 +27168,7 @@
  "income per head": {
   "kind": "script",
   "pages": [
+   "/assets/faq/bihar.js",
    "/india/"
   ]
  },

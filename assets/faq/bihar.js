@@ -77,7 +77,7 @@
   QA.push([L('Does this show that people not entitled to vote were removed near the border?'),
     L('No. The lists give one of four reasons for each name, dead, shifted, absent or already enrolled elsewhere. None of them is a finding that a person was not entitled to vote, and the lists have no category for it.'), ['border', 'method']]);
   var DD = r[8].slice().sort(function (x, y) { return y.per_100 - x.per_100; });
-  var FAC = [['urban_pct', L('the share living in towns')], ['women_literate', L('women\'s literacy')], ['child_marriage', L('early marriage')], ['density', L('population density')], ['electors_per_booth', L('booth size')]];
+  var FAC = [['gddp_pc', L('income per head')], ['urban_pct', L('the share living in towns')], ['women_literate', L('women\'s literacy')], ['child_marriage', L('early marriage')], ['density', L('population density')], ['electors_per_booth', L('booth size')]];
   var rho = FAC.map(function (f) { var ok = DD.filter(function (d) { return d[f[0]] != null; }); return [f[1], SIR.spearman(ok.map(function (d) { return d[f[0]]; }), ok.map(function (d) { return d.per_100; }))]; });
   var linked = rho.filter(function (x) { return Math.abs(x[1]) >= 0.2; }), unl = rho.filter(function (x) { return Math.abs(x[1]) < 0.2; });
   QA.push([L('Which districts lost the most names?'),

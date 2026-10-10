@@ -1,4 +1,4 @@
-<!--page {"title": "Districts, Bihar 2025", "description": "SIR deletions in Bihar's 38 districts against urbanisation, women's literacy, early marriage, density and booth size.", "place": "bihar"} -->
+<!--page {"title": "Districts, Bihar 2025", "description": "SIR deletions in Bihar's 38 districts against income per head, urbanisation, women's literacy, early marriage, density and booth size.", "place": "bihar"} -->
 <main id="main">
 <div class="page-head"><h1>Districts</h1><ol class="summary" id="short"></ol></div>
   <div class="grid">
@@ -13,10 +13,10 @@
   <div class="grid" id="scatters"></div>
   <h2>All factors together</h2>
   <div class="twrap" tabindex="0" role="region" aria-label="Correlation summary"><table id="tCorr"></table></div>
-  <p class="caveat">With only 38 districts these factors cannot be told apart. The less urban districts also tend to be the less literate, and in the north-east they send the most migrants out. Each panel describes the districts. None of them shows a cause.</p>
+  <p class="caveat">With only 38 districts these factors cannot be told apart. The less urban districts also tend to be the poorer and the less literate, and in the north-east they send the most migrants out. Each panel describes the districts. None of them shows a cause.</p>
   <h2>Every district</h2>
   <div class="twrap" tabindex="0" role="region" aria-label="Districts"><table id="tbl"></table></div>
-  <p class="note">Density and urban share come from Census 2011, the last count at district level. Women's literacy and marriage before 18 come from the National Family Health Survey (NFHS-5) district fact sheets, fielded in Bihar in 2019-20. Electors per booth: the 2025 electorate over the number of booths with SIR lists.</p>
+  <p class="note">Density and urban share come from Census 2011, the last count at district level. Women's literacy and marriage before 18 come from the National Family Health Survey (NFHS-5) district fact sheets, fielded in Bihar in 2019-20. Income per head is per capita gross district domestic product for 2022-23 at constant 2011-12 prices, from Table A 1.7 of the Bihar Economic Survey 2024-25, whose source is the Directorate of Economics and Statistics, Bihar. Electors per booth: the 2025 electorate over the number of booths with SIR lists.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 </main>
@@ -31,6 +31,7 @@ SIR.json('data/bihar/districts.json').then(function (ds) {
     options: { indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: function (c) { var bd = ranked[c.dataIndex].border; return L('Border: {b}', { b: bd === 'Interior' ? L('Interior') : bd.replace(/;/g, ', ') }); } } } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Removed per 100 electors') } } } } });
 
   var F = [
+    ['gddp_pc', L('Income per head, 2022-23 (₹ at 2011-12 prices)'), L('Does income relate to deletions?')],
     ['urban_pct', L('Urban population, 2011 (%)'), L('Does urbanisation matter?')],
     ['women_literate', L('Women aged 15 to 49 who are literate, 2019-20 (%)'), L('Does women\'s literacy relate to deletions?')],
     ['child_marriage', L('Women aged 20 to 24 married before 18, 2019-20 (%)'), L('Does early marriage relate to deletions?')],
@@ -51,7 +52,7 @@ SIR.json('data/bihar/districts.json').then(function (ds) {
   SIR.table(document.getElementById('tbl'), [
     { k: 'district', label: L('District'), left: true }, { k: 'acs', label: L('Seats') }, { k: 'deleted', label: L('Removed'), fmt: SIR.n },
     { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 2); } }, { k: 'per_booth', label: L('Per booth'), fmt: function (v) { return SIR.d(v); } },
-    { k: 'urban_pct', label: L('Urban %'), fmt: function (v) { return SIR.d(v); } },
+    { k: 'gddp_pc', label: L('Income per head (₹)'), fmt: SIR.n }, { k: 'urban_pct', label: L('Urban %'), fmt: function (v) { return SIR.d(v); } },
     { k: 'women_literate', label: L('Women literate %'), fmt: function (v) { return SIR.d(v); } }, { k: 'border', label: L('Border'), left: true, fmt: function (v) { return v === 'Interior' ? L('Interior') : SIR.esc(v.replace(/;/g, ', ')); } }
   ], ds, { sort: 'per_100' });
 }).catch(SIR.fail);

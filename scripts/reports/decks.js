@@ -392,7 +392,7 @@ function bihar() {
     K.chart(Object.assign({}, K.left, { barDir: 'bar', chartColors: td.map((d) => d.border && d.border !== 'Interior' ? P.accent : GREY), showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', valAxisHidden: true })));
   K.right(s, [rankD[rankD.length - 1].district + ' lost the fewest, ' + rankD[rankD.length - 1].per_100.toFixed(1) + ' per 100.', 'Red bars are border districts, grey the interior.', 'The full report has a chapter for each of the 38 districts.']);
 
-  const FAC = [['Urban share', 'urban_pct'], ['Women\'s literacy', 'women_literate'], ['Marriage before 18', 'child_marriage'], ['Density', 'density'], ['Electors per booth', 'electors_per_booth']];
+  const FAC = [['Income per head', 'gddp_pc'], ['Urban share', 'urban_pct'], ['Women\'s literacy', 'women_literate'], ['Marriage before 18', 'child_marriage'], ['Density', 'density'], ['Electors per booth', 'electors_per_booth']];
   const y = DS.map((d) => d.per_100);
   const cor = FAC.map(([n, k]) => { const x = DS.map((d) => d[k]); return { n, r: pearson(x, y), rho: spearman(x, y) }; });
   const word = (c) => Math.abs(c.rho) < 0.2 ? 'no clear relationship' : c.rho < 0 ? 'fewer removals where higher' : 'more removals where higher';
