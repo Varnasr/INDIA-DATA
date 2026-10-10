@@ -83,8 +83,12 @@ Things the build depends on, each asserted by `check_data.py`:
   checked against the official SC, ST and OBC lists for Bihar compiled by
   Jolad, Kalyani and Baharadia (Harvard Dataverse, doi:10.7910/DVN/WT5VIY,
   CC0): Turi, Dom and Bhuiyan are SC, Dhobi is SC for Hindus and OBC for
-  Muslims and so spans groups. No district income figure is used: the
-  uploaded per-capita product column held placeholder values and was dropped. Do not collapse them into
+  Muslims and so spans groups. District income per head is per capita GDDP
+  for 2022-23 at constant 2011-12 prices from the Bihar Economic Survey
+  2024-25, Table A 1.7 (`raw/gddp_per_capita_2011_12_prices.csv`, read from the
+  scanned PDF the owner supplied; the build asserts each year's printed ranks
+  run 1 to 38 and follow the values). The old dashboard's income column held
+  placeholder values and is never used. Do not collapse them into
   one number, and do not reintroduce "Devi" or any title as a caste marker.
 - **Religion is a range**, low bound classified names only, high bound adding
   every unclassified name. The census share is inside it in 18 of 38 districts
