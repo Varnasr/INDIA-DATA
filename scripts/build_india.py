@@ -133,7 +133,11 @@ def build():
         t = {'states': len(xs), 'removed': sum(x['removed'] for x in xs)}
         for k in R:
             t[k] = sum(x[k] or 0 for x in xs)
-        t['unsplit'] = t['removed'] - sum(t[k] for k in R)
+        # names the published reasons leave unexplained; a state whose reasons
+        # add up to more than its total contributes nothing here, and the
+        # excess is kept apart so it does not cancel another state's shortfall
+        t['unsplit'] = sum(x['unsplit'] for x in xs)
+        t['over_split'] = sum(t[k] for k in R) + t['unsplit'] - t['removed']
         split = sum(t[k] for k in R)
         t['shares'] = {k: round(100 * t[k] / split, 2) for k in R}
         wb = [x for x in xs if x['electors_before']]
@@ -276,7 +280,11 @@ def build():
         g['phase'] = next(x['phase'] for x in rows if x['state'] == g['state'])
 
     out = {
-        'as_of': '2026-09-30',
+        # The latest date the figures carry: a draft or final roll, or the day
+        # the schedules and figures were last checked against their sources
+        # (process.json's as_of), which covers figures reported after a roll.
+        'as_of': max([x['draft_date'] for x in rows if x['draft_date']] + [x['final_date'] for x in rows if x['final_date']]
+                     + [json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))['as_of']]),
         'adults': adults,
         'tiles': [{'state': a, 'code': c, 'row': r, 'col': k} for a, c, r, k in TILES],
         'characteristics': [{'key': k, 'label': l, 'source': SOURCE_OF[k]} for k, l in CHAR],

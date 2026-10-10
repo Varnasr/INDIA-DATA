@@ -693,14 +693,14 @@ function india() {
       'The revision still took off ' + crore(T.removed) + ' names in ' + T.states + ' states, ' + T.per_100.toFixed(1) + ' of every 100 electors, and the draft rolls now hold ' + pct(100 * A0.draft_total / A0.adults_total) + ' of adults. ' + (Math.abs(r0) < 0.2 ? 'States whose rolls were most over-full did not cut more.' : r0 > 0 ? 'States whose rolls were most over-full did cut more.' : 'States whose rolls were most over-full cut less.'),
       'Of the names removed with a reason given, only ' + pct(T.shares.dead) + ' were entered as dead. The rest were marked as moved, absent or on the roll twice, and nobody has checked those entries.',
       'The same rules applied in every state. ' + rated[0].state + ' removed ' + rated[0].per_100.toFixed(1) + ' of every 100 electors and ' + rated[rated.length - 1].state + ' ' + rated[rated.length - 1].per_100.toFixed(1) + '. Among big states, the share marked moved or not found runs from ' + pct(bigS[0].shares.shifted_absent_other) + ' in ' + bigS[0].state + ' to ' + pct(bigS[bigS.length - 1].shares.shifted_absent_other) + ' in ' + bigS[bigS.length - 1].state + '.',
-      'Women were more likely to be removed. In ' + G0.filter((g) => g.gap > 1).length + ' of the ' + G0.length + ' states that report by sex, women are a bigger share of the names removed than of the roll.',
+      'Women were more likely to be removed. In ' + G0.filter((g) => g.women_share_removed > g.women_share_roll).length + ' of the ' + G0.length + ' states that report by sex, women are a bigger share of the names removed than of the roll.',
       'Little has come back. In the ' + F0.states + ' states with a final roll, the rolls grew back by at most ' + pct(F0.made_up_pct) + ' of what was cut, and that rise includes new voters.'];
     const s0 = K.slide('All India', 'The rolls held ' + pct(100 * A0.roll_total / A0.adults_total) + ' of adults before the revision, and it removed ' + T.per_100.toFixed(1) + ' of every 100 electors', 'Six findings in short, each computed from the state figures');
     s0.addText(pts.map((t, i, a) => ({ text: t, options: { bullet: { type: 'number' }, breakLine: i < a.length - 1 } })), { x: M, y: TOP, w: W - 2 * M, h: CH - 0.7, fontFace: BODY, fontSize: 15, color: INK, margin: 0, isTextBox: true, valign: 'top', paraSpaceAfter: 9, fit: 'shrink' });
     K.body(s0, 'Two limits. The adult figures count people where they live, so states that draw migrants look short of electors registered at home. The figures show what happened. They cannot show why.', M, TOP + CH - 0.6, W - 2 * M, 0.6, 12);
     s0.addNotes('The draft roll is the roll published after the house-to-house check, and the final roll the one published after claims and objections are decided. Per 100 electors is the number removed for every 100 people on the roll before the revision. Point 1 covers the 19 states with projections by age, from the Technical Group on Population Projections. Point 6 is an upper bound on names put back, because the rise from draft to final includes new electors.');
   }
-  let s = K.slide('All India', crore(T.removed) + ' names left off the draft rolls, ' + T.per_100.toFixed(1) + ' for every 100 electors', 'All ' + T.states + ' states and union territories that have published a draft roll. Tripura publishes in December');
+  let s = K.slide('All India', crore(T.removed) + ' names left off the draft rolls, ' + T.per_100.toFixed(1) + ' for every 100 electors', 'All ' + T.states + ' states and union territories that have published a draft roll. Tripura is reported to publish in December');
   K.stats(s, [[crore(T.removed), 'names left off the draft rolls'], [crore(T.shifted_absent_other), 'entered as shifted, absent or other'], [crore(T.dead), 'entered as dead'], [crore(T.duplicate), 'entered as enrolled more than once']], TOP, 1.7);
   K.body(s, 'A reason is what an officer wrote down, and nobody has checked it. About one in five of the removals split by reason was a death. The other four in five rest on an officer writing down that the elector was not where the roll said, or was on it twice. ' + (T.unsplit / 1e5).toFixed(1) + ' lakh names are in states that have not published a full split.', M, TOP + 2.1, W - 2 * M, 2.4, 17);
 
@@ -763,7 +763,7 @@ function india() {
   s = K.slide('All India', 'Every state and union territory, the remaining sixteen', 'Rounded means published in lakh or crore, Short that the reasons leave some names unexplained, and No split that none was found');
   K.table(s, TH, rows.slice(16).map(trow), M, TOP - 0.3, 12.8, TW, 11, [0, 7]);
 
-  const G = N.gender.slice().sort((a, b) => b.gap - a.gap), gOver = G.filter((g) => g.gap > 1), gUnder = G.filter((g) => g.gap < -1);
+  const G = N.gender.slice().sort((a, b) => b.gap - a.gap), gOver = G.filter((g) => g.women_share_removed > g.women_share_roll), gUnder = G.filter((g) => g.gap < -1);
   s = K.slide('All India', 'In ' + gOver.length + ' of the ' + G.length + ' states with a split by sex, women are a larger share of the removed than of the roll', 'Women\'s share of names removed and of the roll. Most phase 3 states published no split by sex');
   const gv = G.slice().reverse();
   s.addChart(pres.charts.BAR, [
@@ -783,7 +783,7 @@ function india() {
   s = K.slide('All India', 'The removal rate goes most with ' + CL[ctop.key].toLowerCase().replace(' (2011)', '') + ' (' + fr(ctop.per_100_all) + '), and that comes from phase 3. In phase 2 it is ' + fr(ctop.per_100_phase2), 'Rank correlations across states with each state\'s removals per 100 electors. Under 0.2 either way is read as none');
   K.table(s, ['Characteristic', 'All states', 'Phase 2', 'Phase 3', 'Share enrolled twice, larger states'], CR.slice().sort((a, b) => b.per_100_all - a.per_100_all).map((c) => [CL[c.key], fr(c.per_100_all), fr(c.per_100_phase2), fr(c.per_100_phase3), fr(c.duplicate_big)]), M, TOP - 0.3, 7.9, [2.9, 1.1, 1.1, 1.1, 1.7], 10.5);
   K.right(s, [
-    'In phase 3 income, migration and the Muslim share rise together, because the big states that draw migrants were revised with the North-East. ' + ctop.n_per_100_phase3 + ' states cannot tell them apart.',
+    'In phase 3 income, migration and the Muslim share rise together, because the big states that draw migrants were revised with the North-East. ' + (() => { const ns = N.correlations.filter((c) => c.per_100_phase3 != null && Math.abs(c.per_100_phase3) >= 0.4).map((c) => c.n_per_100_phase3); const a = Math.min(...ns), b = Math.max(...ns); return a === b ? a : a + ' to ' + b; })() + ' states cannot tell them apart.',
     both.length ? 'The same way in both phases: ' + both.map((c) => CL[c.key].toLowerCase() + ' (' + fr(c.per_100_phase2) + ', ' + fr(c.per_100_phase3) + ')').join(' and ') + '.' : 'Nothing goes with the rate the same way in both phases.',
     'Muslim share of households: ' + fr(cm.per_100_all) + ' across all states, ' + fr(cm.per_100_phase2) + ' in phase 2, ' + fr(cm.per_100_phase3) + ' in phase 3. No consistent relationship.',
     'Border states removed fewer, typically ' + N.border.per_100_yes.toFixed(1) + ' per 100 against ' + N.border.per_100_no.toFixed(1) + ' in the interior.',
@@ -799,7 +799,7 @@ function india() {
   const wbS = S.find((x) => x.withheld);
   K.right(s, [
     'The final rolls came out ' + crore(FN.net_after_draft) + ' larger than the drafts, against ' + crore(FN.removed) + ' left off them.',
-    wbS.state + ' kept ' + lakh(FN.withheld) + ' names off its final roll while their cases are decided. Leaving those out, the rise is ' + pct(FN.made_up_pct_ex_withheld) + ' of the fall.',
+    wbS.state + ' kept ' + lakh(FN.withheld) + ' names off its final roll for adjudication. As reported, ' + lakh(J('westbengal/summary.json').adj.found_eligible) + ' were later found eligible and ' + lakh(J('westbengal/summary.json').adj.found_not_eligible) + ' not. Leaving those out, the rise is ' + pct(FN.made_up_pct_ex_withheld) + ' of the fall.',
     'The final roll is smaller than the draft in ' + FN.shrank.length + ' states. The fall is ' + FN.net_per_100.toFixed(1) + ' per 100 electors at the final roll, from ' + FN.per_100.toFixed(1) + ' at the draft.',
     'The rise counts new electors as well as names put back, so it is the most that can have been put back.',
   ], 12.5);
@@ -857,7 +857,11 @@ function india() {
     const PR = J('india/process.json');
     const moves = (r) => r.steps.filter((st) => st.kind !== 'published').length - 1;
     s = K.slide('How it was run', 'The rules changed ' + PR.timeline.length + ' times while the revision was under way, and dates moved ' + PR.schedules.reduce((n, r) => n + moves(r), 0) + ' times', 'What made it harder to stay on the roll, each point resting on an order or a judgment');
-    K.bullets(s, PR.burdens.map((b) => b.title + '. ' + b.text.split('. ')[0] + '.'), M, TOP - 0.2, W - 2 * M, CH, 13);
+    const phs = (p) => PR.schedules.filter((r) => r.phase === p);
+    const cl = S.filter((x) => x.removed && x.added_after_draft != null);
+    const fill = { p2_states: phs('II').length, p2_again: phs('II').filter((r) => moves(r) > 1).length, p3_states: phs('III').length, p3_moved: phs('III').filter((r) => moves(r) > 0).length,
+      claims_states: cl.length, claims_fewer: cl.filter((x) => x.added_after_draft < x.removed).length, claims_under10: cl.filter((x) => 100 * x.added_after_draft / x.removed < 10).length };
+    K.bullets(s, PR.burdens.map((b) => b.title + '. ' + b.text.replace(/\{(\w+)\}/g, (m, k) => fill[k]).split('. ')[0] + '.'), M, TOP - 0.2, W - 2 * M, CH, 13);
     s.addNotes(PR.timeline.filter((t) => t.who === 'sc').length + ' of the ' + PR.timeline.length + ' entries are Supreme Court orders or its judgment. The site also lists ' + PR.reported.length + ' press reports of problems, each attributed and kept apart because no document confirms them.');
   }
 

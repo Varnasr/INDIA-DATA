@@ -25,8 +25,9 @@
   var SIR = window.SIR = {
     root: root,
     n: function (x) { return x == null || isNaN(x) ? '–' : nf.format(Math.round(x)); },
-    d: function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k); },
-    pct: function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k) + '%'; },
+    // a half rounds away from zero, whatever its binary form (8.65 is 8.7 and 1.15 is 1.2)
+    d: function (x, k) { if (x == null || isNaN(x)) return '–'; k = k == null ? 1 : k; x = Number(x); return (x + (x < 0 ? -1e-9 : 1e-9)).toFixed(k); },
+    pct: function (x, k) { return x == null || isNaN(x) ? '–' : SIR.d(x, k) + '%'; },
     // a multiple such as removals over a margin: one decimal, except that just
     // under 1 is cut to two (0.99×), so a seat below its margin never reads 1.0×
     times: function (x) { return x == null || isNaN(x) ? '' : (x < 1 && x >= 0.95 ? (Math.floor(x * 100) / 100).toFixed(2) : Number(x).toFixed(1)) + '×'; },

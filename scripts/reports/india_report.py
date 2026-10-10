@@ -8,6 +8,7 @@ union territory, with the split by sex where states published one and the
 state-level correlations. Every figure is computed from data/india.
 """
 import json
+import re
 import os
 import sys
 
@@ -19,7 +20,21 @@ from docxkit import Report, indian, lakh, pct, style_axes
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 J = lambda *p: json.load(open(os.path.join(ROOT, 'data', *p)))
-N = J('india', 'states.json')
+
+
+def half_up(o):
+    """Nudge every stored decimal a hair away from zero, so that '%.1f' rounds
+    a half up, as the pages do (SIR.d), and not to the nearest even binary."""
+    if isinstance(o, float):
+        return o + (1e-9 if o >= 0 else -1e-9)
+    if isinstance(o, dict):
+        return {k: half_up(v) for k, v in o.items()}
+    if isinstance(o, list):
+        return [half_up(v) for v in o]
+    return o
+
+
+N = half_up(J('india', 'states.json'))
 T, S, P = N['total'], N['states'], N['by_phase']
 RK = ['dead', 'shifted_absent_other', 'duplicate']
 RN = {'dead': 'Dead', 'shifted_absent_other': 'Shifted, absent or other', 'duplicate': 'Enrolled more than once'}
@@ -67,21 +82,21 @@ R.numbered([
     % (rated[0]['state'], rated[0]['per_100'], rated[-1]['state'], rated[-1]['per_100'], pct(bigS[0]['shares']['shifted_absent_other']), bigS[0]['state'],
        pct(bigS[-1]['shares']['shifted_absent_other']), bigS[-1]['state']),
     'Women were more likely to be removed. In %d of the %d states that report by sex, women are a bigger share of the names removed than of the roll.'
-    % (len([g for g in GG0 if g['gap'] > 1]), len(GG0)),
+    % (len([g for g in GG0 if g['women_share_removed'] > g['women_share_roll']]), len(GG0)),
     'Little has come back. In the %d states with a final roll, the roll published after claims and objections are heard, the rolls grew back by at most %s of what was cut, and that rise includes new voters.' % (FN0['states'], pct(FN0['made_up_pct'])),
 ])
 R.p('Two limits. The adult figures count people where they live, so states that draw migrants look short of electors who are registered in their home states. '
     'And these figures show what happened. They cannot show why it happened, or that anyone meant it to.', italic=True)
 
-R.h2('In short')
+R.h2('In numbers')
 R.stats([(crore(T['removed']), 'left off the draft rolls'), (pct(T['shares']['shifted_absent_other']), 'shifted, absent or other'),
          (pct(T['shares']['dead']), 'dead'), ('%.1f' % T['per_100'], 'removed per 100 electors')])
-R.p('The Special Intensive Revision is a fresh check of every name on the electoral rolls, and it has been carried out in three phases. Bihar came first, in 2025, then twelve states and union territories from November 2025, and eighteen more in 2026. '
-    'In the %d that have published a draft roll, %s electors on the rolls before the revision were not carried onto it. That is %.1f for every 100. Tripura, the last, publishes its draft in December.'
+R.p('The Special Intensive Revision is a fresh check of every name on the electoral rolls, and it has been carried out in three phases. Bihar came first, in 2025, then twelve states and union territories ordered in October 2025, with house visits from November, and eighteen more in 2026. '
+    'In the %d that have published a draft roll, %s electors on the rolls before the revision were not carried onto it. That is %.1f for every 100. Tripura, the last, is reported to publish its draft in December.'
     % (T['states'], indian(T['removed']), T['per_100']))
-R.p('Every state gave a reason for most of its removals. Of the %s names it split by reason, %s (%s) were entered as dead, %s (%s) as shifted, absent or other, and %s (%s) as enrolled more than once. '
+R.p('Every state' + (' but %s' % andj(none) if none else '') + ' gave a reason for most of its removals. Of the %s names split by reason, %s (%s) were entered as dead, %s (%s) as shifted, absent or other, and %s (%s) as enrolled more than once. '
     'Deaths are about one in five. The other four in five rest on an officer\'s entry that the elector was not where the roll placed them, or was on it twice.'
-    % (crore(T['removed'] - T['unsplit']), crore(T['dead']), pct(T['shares']['dead']), crore(T['shifted_absent_other']), pct(T['shares']['shifted_absent_other']),
+    % (crore(T['dead'] + T['shifted_absent_other'] + T['duplicate']), crore(T['dead']), pct(T['shares']['dead']), crore(T['shifted_absent_other']), pct(T['shares']['shifted_absent_other']),
        crore(T['duplicate']), pct(T['shares']['duplicate'])))
 R.p('A reason is what an officer wrote down after a visit, or after failing to find the elector, and nobody has checked it. The figures cannot say how many entries were wrong.')
 
@@ -107,7 +122,7 @@ for i, (l, f) in enumerate(zip(labs, FILL)):
     ax.add_patch(plt.Rectangle((5.2, -5.2 - i * 0.42), 0.3, 0.3, facecolor=f))
     ax.text(5.6, -5.05 - i * 0.42, l, va='center', fontsize=7)
 ax.set_title('Removed per 100 electors', fontsize=9, fontweight='bold', loc='left')
-R.figure(fig, 'Figure 1. One tile per state or union territory, placed roughly where it lies, so the tiles show no borders. Grey tiles are states not in the revision (Jammu and Kashmir, Ladakh, Himachal Pradesh, Assam), with no draft roll yet (Tripura), or with no exact roll from before it (Chandigarh).', width=13)
+R.figure(fig, 'Figure 1. One tile per state or union territory, placed roughly where it lies, so the tiles show no borders. Grey tiles are states not in the revision (Jammu and Kashmir, Ladakh, Himachal Pradesh, Assam), or with no draft roll yet (Tripura).', width=13)
 
 R.h2('The rolls against the adult population')
 ADU = N['adults']
@@ -184,7 +199,7 @@ R.p('Under Split, Full means the reasons account for the total within rounding, 
 
 R.h2('Women among the removed')
 G = sorted(N['gender'], key=lambda g: -g['gap'])
-gOver = [g for g in G if g['gap'] > 1]
+gOver = [g for g in G if g['women_share_removed'] > g['women_share_roll']]
 gEven = [g for g in G if abs(g['gap']) <= 1]
 gUnder = [g for g in G if g['gap'] < -1]
 QN = {'exact': 'exact', 'rounded': 'rounded', 'proxy': 'earlier roll', 'unverified': 'unverified', 'lists': 'lists'}
@@ -198,9 +213,9 @@ ax.set_xlim(40, 60)
 ax.legend(fontsize=7, frameon=False, loc='lower right')
 style_axes(ax, 'Women\'s share of removals and of the roll')
 R.figure(fig, 'Figure 5. States that published a split by sex. Bihar\'s roll before the revision is its draft roll plus the names removed at the draft, by sex.', width=14)
-R.p('Only ten states have published their removals by sex, or their roll by sex before the revision and on the draft. In %d of the ten, women are a larger share of the names removed than of the roll, by up to %.1f points in %s. %s %s within a point of even, and %s runs the other way, by %.1f points. '
+R.p('Only %d states have published their removals by sex, or their roll by sex before the revision and on the draft. In %d of the %d, women are a larger share of the names removed than of the roll, by up to %.1f points in %s. %s %s within a point of even, and %s runs the other way, by %.1f points. '
     'Most phase 3 states have published no split by sex, so this is not the national picture.'
-    % (len(gOver), G[0]['gap'], G[0]['state'], andj([g['state'] for g in gEven]), 'is' if len(gEven) == 1 else 'are',
+    % (len(G), len(gOver), len(G), G[0]['gap'], G[0]['state'], andj([g['state'] for g in gEven]), 'is' if len(gEven) == 1 else 'are',
        andj([g['state'] for g in gUnder]), -gUnder[0]['gap'] if gUnder else 0))
 R.table(['State', 'Women removed', 'Men removed', 'Women, % removed', 'Women, % of roll', 'Difference', 'Figures'],
         [[g['state'], indian(g['women_removed']), indian(g['men_removed']), '%.1f' % g['women_share_removed'], '%.1f' % g['women_share_roll'], '%+.1f' % g['gap'], QN[g['quality']]] for g in G],
@@ -216,6 +231,7 @@ both = [c for c in CR if c['per_100_phase2'] is not None and c['per_100_phase3']
 fmtr = lambda c, k: '–' if c[k] is None else '%.2f (%d)' % (c[k], c['n_' + k])
 top = max(CR, key=lambda c: abs(c['per_100_all']))
 p3 = [CL[c['key']] for c in CR if c['per_100_phase3'] is not None and abs(c['per_100_phase3']) >= 0.4]
+n3 = [c['n_per_100_phase3'] for c in CR if c['per_100_phase3'] is not None and abs(c['per_100_phase3']) >= 0.4]
 mus = next(c for c in CR if c['key'] == 'muslim_pct')
 dupTop = max(CR, key=lambda c: abs(c['duplicate_big']))
 B = N['border']
@@ -224,10 +240,10 @@ R.table(['Characteristic', 'Rate, all states', 'Rate, phase 2', 'Rate, phase 3',
         [[CL[c['key']][0].upper() + CL[c['key']][1:] + ' (' + CS[c['key']] + ')', fmtr(c, 'per_100_all'), fmtr(c, 'per_100_phase2'), fmtr(c, 'per_100_phase3'), fmtr(c, 'dead_all'), fmtr(c, 'duplicate_big')]
          for c in sorted(CR, key=lambda c: -c['per_100_all'])],
         widths=[6.0, 2.2, 2.2, 2.2, 2.0, 2.4], right={1, 2, 3, 4, 5}, size=7.5)
-R.p('Across all states the removal rate goes most with the %s (%.2f), and that comes from phase 3 (%.2f). In phase 2 it is %.2f. In phase 3, %s all go with the removal rate, because the big states that draw migrants were revised in the same phase as the North-East, and they differ from it on all of these at once. With only %d states in the phase, there is no telling these apart. '
+R.p('Across all states the removal rate goes most with the %s (%.2f), and that comes from phase 3 (%.2f). In phase 2 it is %.2f. In phase 3, %s all go with the removal rate, because the big states that draw migrants were revised in the same phase as the North-East, and they differ from it on all of these at once. With only %s states in the phase, there is no telling these apart. '
     '%s The Muslim share of households has no consistent relationship, %.2f across all states, %.2f in phase 2 and %.2f in phase 3. Among the larger states, the share entered as enrolled more than once goes most with %s (%.2f). '
     'Migration is from the 2011 census because no newer figure is published by state, and every other characteristic is from 2019 to 2026. Run on the 2011 census values instead, the reading changes only for %s.'
-    % (CL[top['key']], top['per_100_all'], top['per_100_phase3'], top['per_100_phase2'], andj(p3), top['n_per_100_phase3'],
+    % (CL[top['key']], top['per_100_all'], top['per_100_phase3'], top['per_100_phase2'], andj(p3), ('%d' % min(n3) if min(n3) == max(n3) else '%d to %d' % (min(n3), max(n3))),
        ('The only characteristics that go with the removal rate the same way in both phases are %s.' % andj(['%s (%.2f in phase 2, %.2f in phase 3)' % (CL[c['key']], c['per_100_phase2'], c['per_100_phase3']) for c in both])) if both else 'No characteristic goes with the removal rate the same way in both phases.',
        mus['per_100_all'], mus['per_100_phase2'], mus['per_100_phase3'], CL[dupTop['key']], dupTop['duplicate_big'],
        andj([x['key'].replace('_pct', ' share').replace('_', ' ') for x in N['robustness_2011'] if x['rho_recent'] is not None and x['rho_2011'] is not None and ((abs(x['rho_recent']) >= 0.2) != (abs(x['rho_2011']) >= 0.2) or (abs(x['rho_recent']) >= 0.2 and (x['rho_recent'] > 0) != (x['rho_2011'] > 0)))]) or 'none of them'))
@@ -249,9 +265,10 @@ style_axes(ax, 'Removed at the draft, and the fall that remains at the final rol
 R.figure(fig, 'Figure 6. States whose final roll is out and whose roll before the revision was published exactly enough to set against it.', width=15)
 wb = next(s for s in S if s['withheld'])
 R.p('In the %d states and union territories with a final roll, %s names were left off the drafts, and the final rolls came out %s larger than the drafts, which is %s of the fall. '
-    '%s kept %s names off its final roll while they are decided, and without them the final rolls were %s larger, %s of the fall. '
+    '%s kept %s names off its final roll for adjudication. As reported, %s were later found eligible and %s not, and appeals continue. Without them the final rolls were %s larger, %s of the fall. '
     'The net fall is the roll before the revision less the final roll. It comes to %.1f per 100 electors, against %.1f left off at the draft.'
     % (FN['states'], crore(FN['removed']), crore(FN['net_after_draft']), pct(FN['made_up_pct']), wb['state'], lakh(FN['withheld']),
+       lakh(J('westbengal', 'summary.json')['adj']['found_eligible']), lakh(J('westbengal', 'summary.json')['adj']['found_not_eligible']),
        crore(FN['net_after_draft'] + FN['withheld']), pct(FN['made_up_pct_ex_withheld']), FN['net_per_100'], FN['per_100']))
 R.p('The rise from draft to final counts new electors as well as names put back, and no state has said how many of those added had been removed at the draft, so it is the most that can have been put back. '
     'The final roll is smaller than the draft in %d states (%s). %s'
@@ -260,7 +277,7 @@ R.p('The rise from draft to final counts new electors as well as names put back,
 RCN = {'exact': 'Adds up', 'rounded': 'Rounded', 'net only': 'Net only', 'no': 'Does not add up'}
 sn = lambda v: '–' if v is None else ('−' + indian(-v) if v < 0 else indian(v))
 R.table(['State or UT', 'Removed at draft', 'Added after', 'Removed after', 'Final less draft', 'Made up', 'Net fall per 100', 'Figures'],
-        [[s['state'], fmt(s['removed']), fmt(s['added_after_draft']), fmt(s['removed_after_draft']), sn(s['net_after_draft']), pct(s['made_up_pct']),
+        [[s['state'], fmt(s['removed']), fmt(s['added_after_draft']), fmt(s['removed_after_draft']), sn(s['net_after_draft']), ('−' + pct(-s['made_up_pct'])) if s['made_up_pct'] is not None and s['made_up_pct'] < 0 else pct(s['made_up_pct']),
           '%.1f' % s['net_fall_per_100'] if s['net_fall_per_100'] is not None else '–', RCN[s['reconciles']]]
          for s in sorted([s for s in S if s['electors_final'] is not None], key=lambda s: -s['removed'])],
         widths=[3.6, 2.2, 2.0, 2.0, 2.2, 1.5, 1.7, 2.0], right={1, 2, 3, 4, 5, 6}, size=7.5)
@@ -338,7 +355,14 @@ R.p('The rules changed while the revision was under way. The site\'s page on how
     'and draws every state\'s schedule as it was set and as it was moved. Across %d states and union territories, dates were changed %d times in the orders and notes that could be read.'
     % (len(PR['timeline']), len([t for t in PR['timeline'] if t['who'] == 'sc']), len(PR['schedules']), sum(moves(r) for r in PR['schedules'])))
 R.p('What made it harder to stay on the roll, each point resting on an order or a judgment:')
-R.numbered(['%s. %s' % (b['title'], b['text']) for b in PR['burdens']])
+# the burdens carry {placeholders} for counts taken from the schedules
+_ph = {ph: [r for r in PR['schedules'] if r['phase'] == ph] for ph in ('II', 'III')}
+_fill = {'p2_states': len(_ph['II']), 'p2_again': len([r for r in _ph['II'] if moves(r) > 1]),
+         'p3_states': len(_ph['III']), 'p3_moved': len([r for r in _ph['III'] if moves(r) > 0])}
+_cl = [s for s in S if s['removed'] and s['added_after_draft'] is not None]
+_fill.update({'claims_states': len(_cl), 'claims_fewer': len([s for s in _cl if s['added_after_draft'] < s['removed']]),
+              'claims_under10': len([s for s in _cl if 100 * s['added_after_draft'] / s['removed'] < 10])})
+R.numbered(['%s. %s' % (b['title'], re.sub(r'\{(\w+)\}', lambda m: str(_fill[m.group(1)]), b['text'])) for b in PR['burdens']])
 R.p('The page also lists %d press reports of problems in the field, each attributed to its outlet and kept apart from the points above because no document confirms them.' % len(PR['reported']), italic=True)
 
 # ============================================================ CONCLUSION

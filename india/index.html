@@ -44,7 +44,7 @@
 <div class="page-head"><p class="kicker">All India</p><h1>Overview</h1><ol class="summary" id="short"></ol></div>
 
   <h2 id="removals-per-100-electors-state-by-state">Removals per 100 electors, state by state</h2>
-  <p class="sub">One tile for each state and union territory, placed roughly where it lies. The tiles are all the same size, so the map shows neither borders nor area. A state's rate is the names left off its draft roll for every 100 electors on its roll before the revision. Grey tiles have no rate. Jammu and Kashmir, Ladakh, Himachal Pradesh and Assam were not part of the revision, Tripura has no draft roll yet, and Chandigarh did not publish an exact roll from before the revision.</p>
+  <p class="sub">One tile for each state and union territory, placed roughly where it lies. The tiles are all the same size, so the map shows neither borders nor area. A state's rate is the names left off its draft roll for every 100 electors on its roll before the revision. Grey tiles have no rate. Jammu and Kashmir, Ladakh, Himachal Pradesh and Assam were not part of the revision, and Tripura has no draft roll yet.</p>
   <div class="tilemap" id="tiles" role="list" aria-label="Removals per 100 electors, by state"></div>
   <div class="tilekey" id="tilekey" aria-hidden="true"></div>
 
@@ -70,7 +70,7 @@
   <div class="grid">
     <div class="panel wide">
       <h3 id="where-the-removed-names-went-by-phase-and-reason">Where the removed names went, by phase and reason</h3>
-      <p>Each band is the names one phase removed for one reason, drawn to scale. Phase 1 is Bihar (2025), phase 2 the twelve states and union territories revised from November 2025, and phase 3 the eighteen revised in 2026. "Not split" counts names in states that have not published a split by reason.</p>
+      <p>Each band is the names one phase removed for one reason, drawn to scale. Phase 1 is Bihar (2025), phase 2 the twelve states and union territories ordered in October 2025, with house visits from November, and phase 3 the eighteen revised in 2026. "Not split" counts the names that a state's published reasons leave unexplained. In a few states the reasons add up to slightly more than the total, so the bands come to a little more than the names removed.</p>
       <div class="vizbox" id="vSankey"></div>
     </div>
     <div class="panel wide">
@@ -159,7 +159,7 @@ SIR.json('data/india/states.json').then(function (d) {
     var A = d.adults, F = d.final, GG = d.gender;
     var rated = S.filter(function (s) { return s.per_100 != null; }).sort(function (a, b) { return b.per_100 - a.per_100; });
     var bigS = split.filter(function (s) { return s.removed >= 1e6; }).sort(function (a, b) { return a.shares.shifted_absent_other - b.shares.shifted_absent_other; });
-    var wOver = GG.filter(function (g) { return g.gap > 1; }).length;
+    var wOver = GG.filter(function (g) { return g.women_share_removed > g.women_share_roll; }).length;
     var pts = [
       L('Before the revision, the rolls already held {pre} of adults in the {n} states with population projections. Only {k} of those states had more names on the roll than adults.', { pre: SIR.pct(100 * A.roll_total / A.adults_total), n: A.states, k: A.over_100.length }),
       L('The revision still took off {total} names in {s} states, {r} of every 100 electors, and the draft rolls now hold {post} of adults.', { total: cr(T.removed), s: T.states, r: SIR.d(T.per_100, 1), post: SIR.pct(100 * A.draft_total / A.adults_total) }) + ' ' + (Math.abs(A.rho_rate) < 0.2 ? L('States whose rolls were most over-full did not cut more.') : A.rho_rate > 0 ? L('States whose rolls were most over-full did cut more.') : L('States whose rolls were most over-full cut less.')),
@@ -241,7 +241,7 @@ SIR.json('data/india/states.json').then(function (d) {
   VIZ.dumbbell('cGender', { label: L('Women\'s share of removals and of the roll, by state'), min: 40, step: 5, ref: 50,
     aName: L('Women, % of the roll'), aTok: '--fill-grey', bName: L('Women, % of names removed'), bTok: '--fill-pink',
     rows: G.map(function (g) { return { name: g.state, a: g.women_share_roll, b: g.women_share_removed }; }) });
-  var gOver = G.filter(function (g) { return g.gap > 1; }), gUnder = G.filter(function (g) { return g.gap < -1; }), gEven = G.filter(function (g) { return Math.abs(g.gap) <= 1; });
+  var gOver = G.filter(function (g) { return g.women_share_removed > g.women_share_roll; }), gUnder = G.filter(function (g) { return g.gap < -1; }), gEven = G.filter(function (g) { return Math.abs(g.gap) <= 1; });
   document.getElementById('fGender').innerHTML = L('<b>In {over} of the {n} states with a split by sex, women are a larger share of the names removed than of the roll</b>, by up to {max} points in {maxs}. {even} are within a point of even, and in {under} it runs the other way, by {u} points. Most phase 3 states have published no split by sex, so this covers {n} of {all} states and does not describe the country as a whole.', {
     over: gOver.length, n: G.length, max: SIR.d(G[0].gap, 1), maxs: G[0].state, even: gEven.map(function (g) { return g.state; }).join(L(' and ')),
     under: gUnder.map(function (g) { return g.state; }).join(L(' and ')), u: gUnder.length ? SIR.d(-gUnder[0].gap, 1) : '0', all: T.states });
@@ -274,13 +274,15 @@ SIR.json('data/india/states.json').then(function (d) {
     options: { plugins: { tooltip: { callbacks: { label: function (c) { return L('{n}: {y} per 100, {x}% born elsewhere', { n: c.raw.n, y: SIR.d(c.raw.y, 1), x: SIR.d(c.raw.x, 1) }); } } } },
       scales: { x: { type: 'logarithmic', title: { display: true, text: L('Residents born in another state, % (2011, log scale)') } }, y: { beginAtZero: true, title: { display: true, text: L('Removed per 100 electors') } } } } });
   var top = C.slice().sort(function (a, b) { return Math.abs(b.per_100_all) - Math.abs(a.per_100_all); })[0];
-  var p3 = C.filter(function (c) { return c.per_100_phase3 != null && Math.abs(c.per_100_phase3) >= 0.4; }).map(function (c) { return CL[c.key]; });
+  var p3c = C.filter(function (c) { return c.per_100_phase3 != null && Math.abs(c.per_100_phase3) >= 0.4; }), p3 = p3c.map(function (c) { return CL[c.key]; });
+  // how many states each of those correlations rests on, as a range
+  var n3s = p3c.map(function (c) { return c.n_per_100_phase3; }), n3a = Math.min.apply(null, n3s), n3b = Math.max.apply(null, n3s);
   var dupTop = C.slice().sort(function (a, b) { return Math.abs(b.duplicate_big) - Math.abs(a.duplicate_big); })[0];
   var mus = C.filter(function (c) { return c.key === 'muslim_pct'; })[0];
   var both = C.filter(function (c) { return c.per_100_phase2 != null && c.per_100_phase3 != null && Math.abs(c.per_100_phase2) >= 0.2 && Math.abs(c.per_100_phase3) >= 0.2 && (c.per_100_phase2 > 0) === (c.per_100_phase3 > 0); });
   var bothTxt = both.length ? L('The only characteristics that go with the removal rate the same way in both phases are {list}.', { list: both.map(function (c) { return L('{c} ({a} in phase 2, {b} in phase 3)', { c: CL[c.key], a: SIR.d(c.per_100_phase2, 2), b: SIR.d(c.per_100_phase3, 2) }); }).join(L(' and ')) }) : L('No characteristic goes with the removal rate the same way in both phases.');
   document.getElementById('fCorr').innerHTML = L('<b>Across all states the removal rate goes most with the {top} ({r}), and that comes from phase 3 ({r3}). In phase 2 it is {r2}.</b> In phase 3, {p3} all go with the removal rate, because the big states that draw migrants were revised in the same phase as the North-East, and they differ from it on all of these at once. With only {n3} states in the phase, there is no telling these apart. {both} The Muslim share of households has no consistent relationship, {m1} across all states, {m2} in phase 2 and {m3} in phase 3. Among the larger states, the share entered as enrolled more than once goes most with {dup} ({rd}). None of this says who was removed inside a state, because a pattern across states tells us nothing about individuals.', {
-    top: CL[top.key], r: SIR.d(top.per_100_all, 2), r2: SIR.d(top.per_100_phase2, 2), r3: SIR.d(top.per_100_phase3, 2), p3: p3.join(', '), n3: top.n_per_100_phase3, both: bothTxt,
+    top: CL[top.key], r: SIR.d(top.per_100_all, 2), r2: SIR.d(top.per_100_phase2, 2), r3: SIR.d(top.per_100_phase3, 2), p3: p3.length > 1 ? p3.slice(0, -1).join(', ') + L(' and ') + p3[p3.length - 1] : p3.join(''), n3: n3a === n3b ? n3a : L('{a} to {b}', { a: n3a, b: n3b }), both: bothTxt,
     m1: SIR.d(mus.per_100_all, 2), m2: SIR.d(mus.per_100_phase2, 2), m3: SIR.d(mus.per_100_phase3, 2), dup: CL[dupTop.key], rd: SIR.d(dupTop.duplicate_big, 2) });
   var B = d.border;
   document.getElementById('fBorder').innerHTML = L('<b>States on an international border removed fewer names than interior states.</b> The typical border state removed {y} per 100 electors across {ny} states, and the typical interior state {n} across {nn}. The typical share entered as dead is {dy} in border states and {dn} in the interior, and the share entered as enrolled more than once is {py} and {pn}.', {
@@ -303,10 +305,13 @@ SIR.json('data/india/states.json').then(function (d) {
   var rel = Math.abs(F.rho_made_up) < 0.2
     ? L('How many names a state removed at the draft has no relationship with how much of that its final roll made up (rank correlation {rho}).', { rho: SIR.d(F.rho_made_up, 2) })
     : L('States that removed more at the draft made up a different share of it at the final roll (rank correlation {rho}).', { rho: SIR.d(F.rho_made_up, 2) });
-  document.getElementById('fFinal').innerHTML = L('<b>In the {n} states and union territories with a final roll, {r} names were left off the drafts, and the final rolls came out {a} larger than the drafts, making up {m} of the fall.</b> {wb} kept {w} names off its final roll while their cases are decided. Leaving those out, the final rolls were {a2} larger, or {m2} of the fall. Measured against the rolls before the revision, the fall is {np} per 100 electors at the final roll, down from {p} at the draft. New electors are part of the rise from draft to final, and no state has said how many of those added had been removed at the draft, so this is the most that can have been put back. In {k} states the final roll is smaller than the draft ({shrank}). {rel} {wait} have not yet published a final roll.', {
+  // West Bengal's adjudication outcomes, as reported, from its own summary
+  SIR.json('data/westbengal/summary.json').then(function (WB) {
+  document.getElementById('fFinal').innerHTML = L('<b>In the {n} states and union territories with a final roll, {r} names were left off the drafts, and the final rolls came out {a} larger than the drafts, making up {m} of the fall.</b> {wb} kept {w} names off its final roll for adjudication. As reported, {e} were later found eligible and {ne} not, and appeals continue. Leaving those out, the final rolls were {a2} larger, or {m2} of the fall. Measured against the rolls before the revision, the fall is {np} per 100 electors at the final roll, down from {p} at the draft. New electors are part of the rise from draft to final, and no state has said how many of those added had been removed at the draft, so this is the most that can have been put back. In {k} states the final roll is smaller than the draft ({shrank}). {rel} {wait} have not yet published a final roll.', {
     n: F.states, r: big(F.removed), a: big(F.net_after_draft), m: SIR.pct(F.made_up_pct), wb: wb ? wb.state : '', w: SIR.lakh(F.withheld),
     a2: big(F.net_after_draft + F.withheld), m2: SIR.pct(F.made_up_pct_ex_withheld), np: SIR.d(F.net_per_100, 1), p: SIR.d(F.per_100, 1),
-    k: F.shrank.length, shrank: F.shrank.join(', '), rel: rel, wait: F.waiting.join(', ') });
+    k: F.shrank.length, shrank: F.shrank.join(', '), rel: rel, wait: F.waiting.join(', '), e: SIR.lakh(WB.adj.found_eligible), ne: SIR.lakh(WB.adj.found_not_eligible) });
+  }).catch(function () {});
 
   // one state's roll, step by step
   var wS = S.filter(function (x) { return x.electors_final != null && x.electors_before; }).sort(function (a, b) { return a.state < b.state ? -1 : 1; });
@@ -333,7 +338,7 @@ SIR.json('data/india/states.json').then(function (d) {
     { k: 'state', label: L('State or union territory'), left: true, fmt: function (v) { return SIR.esc(v); } },
     { k: 'removed', label: L('Removed at the draft'), fmt: num }, { k: 'added_after_draft', label: L('Added after'), fmt: num },
     { k: 'removed_after_draft', label: L('Removed after'), fmt: num }, { k: 'withheld', label: L('Kept off, undecided'), fmt: function (v) { return v ? SIR.n(v) : '–'; } },
-    { k: 'net_after_draft', label: L('Final less draft'), fmt: sn }, { k: 'made_up_pct', label: L('Share of the fall made up'), fmt: function (v) { return v == null ? '–' : SIR.pct(v); } },
+    { k: 'net_after_draft', label: L('Final less draft'), fmt: sn }, { k: 'made_up_pct', label: L('Share of the fall made up'), fmt: function (v) { return v == null ? '–' : (v < 0 ? '−' + SIR.pct(-v) : SIR.pct(v)); } },
     { k: 'net_fall_per_100', label: L('Net fall per 100'), fmt: function (v) { return v == null ? '–' : SIR.d(v, 1); } },
     { k: 'reconciles', label: L('Figures'), left: true, fmt: function (v) { return RCN[v] || '–'; } }
   ], S.filter(function (x) { return x.electors_final != null; }), { sort: 'removed' });

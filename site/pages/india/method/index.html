@@ -3,10 +3,10 @@
 <div class="page-head"><h1>Method</h1><ol class="summary" id="short"></ol></div>
 
   <h2>What is counted</h2>
-  <div class="qa"><h3>Names left off the draft roll</h3><p>Each state's figure is the number of electors on the roll before the revision who were not carried onto the draft roll when enumeration ended, with the reason the booth level officer gave for each. A booth level officer is the official responsible for the roll of one polling part. Every state published a split by reason at that stage. Names removed later, at hearings and on objections before the final roll, are counted separately, because no state has said why they were removed.</p></div>
-  <div class="qa"><h3>Three groups of reasons</h3><p>The enumeration form had five reasons, namely dead, permanently shifted, absent or untraceable, already enrolled elsewhere, and others, which included refusals. States reported them differently. Bihar's phase 1 used three categories, with shifted and absent together. Several states in phases 2 and 3 counted others as absent, and Nagaland gave absent, shifted and others as one figure. So the table uses the three groups every state reported, <b>dead</b>, <b>shifted, absent or other</b>, and <b>enrolled more than once</b>.</p></div>
+  <div class="qa"><h3>Names left off the draft roll</h3><p>Each state's figure is the number of electors on the roll before the revision who were not carried onto the draft roll when enumeration ended, with the reason the booth level officer gave for each. A booth level officer is the official responsible for the roll of one polling part. Every state but Dadra and Nagar Haveli and Daman and Diu published a split by reason at that stage. Names removed later, at hearings and on objections before the final roll, are counted separately, because no state has said why they were removed.</p></div>
+  <div class="qa"><h3>Three groups of reasons</h3><p>The enumeration form had five reasons, namely dead, permanently shifted, absent or untraceable, already enrolled elsewhere, and others, which included refusals. States reported them differently. Bihar's phase 1 lists used four, namely dead, shifted, absent and already enrolled, with no others. Several states in phases 2 and 3 counted others as absent, and Nagaland gave absent, shifted and others as one figure. So the table uses the three groups every state reported, <b>dead</b>, <b>shifted, absent or other</b>, and <b>enrolled more than once</b>.</p></div>
   <div class="qa"><h3>Bihar</h3><p>Bihar's row is counted on this site from the phase 1 deletion lists: <span id="bihar"></span></p></div>
-  <div class="qa"><h3>Removed per 100 electors</h3><p>Names left off the draft roll, divided by the electors on the roll before the revision began. Where that roll was published only in lakh or crore, the rate is rounded too. Chandigarh did not publish an exact roll from before the revision, so it has no rate.</p></div>
+  <div class="qa"><h3>Removed per 100 electors</h3><p>Names left off the draft roll, divided by the electors on the roll before the revision began. Where that roll was published only in lakh or crore, the rate is rounded too.</p></div>
 
   <h2>How the table compares with the national totals reported</h2>
   <p id="recon"></p>
@@ -20,7 +20,7 @@
   <div class="twrap" tabindex="0" role="region" aria-label="Sources for the final rolls"><table id="tFsrc"></table></div>
 
   <h2>Women among the removed</h2>
-  <p>Ten states have a split by sex. Some published the removals by sex. The others published the roll by sex before the revision and on the draft, and the number of women removed is the difference between the two. <b>Exact</b>: whole numbers from the Chief Electoral Officer or a count of the list. <b>Rounded</b>: published in lakh or crore. <b>Earlier roll</b>: the roll before the revision is an older one than the roll frozen for it. <b>Unverified</b>: from a press analysis that cites no primary source. Bihar's roll before the revision by sex is its draft roll by sex plus the names removed at the draft by sex.</p>
+  <p><span id="gN"></span> Some published the removals by sex. The others published the roll by sex before the revision and on the draft, and the number of women removed is the difference between the two. <b>Exact</b>: whole numbers from the Chief Electoral Officer or a count of the list. <b>Rounded</b>: published in lakh or crore. <b>Earlier roll</b>: the roll before the revision is an older one than the roll frozen for it. <b>Unverified</b>: from a press analysis that cites no primary source. Bihar's roll before the revision by sex is its draft roll by sex plus the names removed at the draft by sex.</p>
   <div class="twrap" tabindex="0" role="region" aria-label="Sources for the split by sex"><table id="tGsrc"></table></div>
 
   <h2>The adult population and the 2024 vote</h2>
@@ -32,8 +32,8 @@
   <p>Correlations are rank correlations across states. A rank correlation asks whether states that rank high on one measure also rank high on the other, so a single very large or very small state moves it less than it would move a linear correlation. They are still based on a few dozen states at most, and a state-level relationship says nothing about which people within a state were removed.</p>
 
   <h2>What the figures cannot show</h2>
-  <p>A reason is what an officer wrote down after a visit, or after failing to find the elector. Nobody has checked whether the elector was in fact dead, had moved or was enrolled twice, and the figures cannot say how many entries were wrong. Outside Bihar they are totals the states published, so they cannot be split by sex, age, booth or constituency, or checked name by name. Several states published rounded figures, some reports of the same state disagree, and in three states the reasons leave some names unexplained. Each of these is noted against its row. The downloadable table gives every figure with its source.</p>
-  <p class="note">Collected from the published figures up to 30 September 2026. <a href="../">All India</a>.</p>
+  <p>A reason is what an officer wrote down after a visit, or after failing to find the elector. Nobody has checked whether the elector was in fact dead, had moved or was enrolled twice, and the figures cannot say how many entries were wrong. Outside Bihar they are totals the states published, so they cannot be split by sex, age, booth or constituency, or checked name by name. Several states published rounded figures, and some reports of the same state disagree. <span id="splitN"></span> Each of these is noted against its row. The downloadable table gives every figure with its source.</p>
+  <p class="note">Collected from the published figures up to <span id="asof"></span>. <a href="../">All India</a>.</p>
   <h2>Analysis of the named lists</h2>
   <p>This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href="https://sabarinstitute.org/">Sabar Institute</a>.</p>
 
@@ -47,6 +47,12 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/reasons.js
   var d = r[0], RS = r[1], T = d.total, b = d.states.filter(function (s) { return s.state === 'Bihar'; })[0];
   document.getElementById('bihar').innerHTML = L('{n} names, of which {dead} dead, {shifted} shifted and {absent} absent (combined here as {sao}), and {dup} already enrolled.', { n: SIR.n(RS.total), dead: SIR.n(RS.totals.dead), shifted: SIR.n(RS.totals.shifted), absent: SIR.n(RS.totals.absent), sao: SIR.n(b.shifted_absent_other), dup: SIR.n(RS.totals.already_enrolled) });
   document.getElementById('recon').innerHTML = L('The national totals reported on 30 September 2026 were about 13.3 crore removed, 2.7 crore dead, 9.5 crore absent, shifted or other, and 1.01 crore enrolled more than once. The state rows here add up to {total}, {dead}, {sao} and {dup}. The small differences come from rounding in the national figures and in the states that published in lakh. The table is built up from the states. <a href="https://www.thehindu.com/news/national/of-those-deleted-in-sir-so-far-over-71-in-absent-shifted-or-others-category/article71524969.ece">Report of 30 September 2026</a>.', { total: L('{x} crore', { x: (T.removed / 1e7).toFixed(2) }), dead: L('{x} crore', { x: (T.dead / 1e7).toFixed(2) }), sao: L('{x} crore', { x: (T.shifted_absent_other / 1e7).toFixed(2) }), dup: L('{x} crore', { x: (T.duplicate / 1e7).toFixed(2) }) });
+  document.getElementById('gN').textContent = L('{n} states have a split by sex.', { n: d.gender.length });
+  // states whose reasons fall short of their total, add to more than it, or are missing
+  var withR = d.states.filter(function (s) { return s.removed != null; }), rsum = function (s) { return (s.dead || 0) + (s.shifted_absent_other || 0) + (s.duplicate || 0); };
+  document.getElementById('splitN').textContent = L('In {short} states the reasons leave some names unexplained, in {over} they add up to slightly more than the total, and in {none} no split by reason was published.', {
+    short: withR.filter(function (s) { return s.shares && rsum(s) < s.removed; }).length, over: withR.filter(function (s) { return s.shares && rsum(s) > s.removed; }).length, none: withR.filter(function (s) { return !s.shares; }).length });
+  document.getElementById('asof').textContent = SIR.date(d.as_of);
   var SK = { primary: L('Press note'), press: L('Press report'), lists: L('Lists') };
   SIR.table(document.getElementById('tSrc'), [
     { k: 'state', label: L('State or union territory'), left: true, fmt: function (v) { return SIR.esc(v); } },
@@ -56,8 +62,8 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/reasons.js
   ], d.states, { sort: 'state', dir: 1 });
   var RL = { urban_pct: L('Urban share'), literacy: L('Literacy'), female_literacy: L('Women\'s literacy'), muslim_pct: L('Muslim share'), sc_pct: L('SC share'), st_pct: L('ST share'), sex_ratio: L('Sex ratio') };
   var changed = d.robustness_2011.filter(function (x) { return x.rho_recent != null && x.rho_2011 != null && ((Math.abs(x.rho_recent) >= 0.2) !== (Math.abs(x.rho_2011) >= 0.2) || (Math.abs(x.rho_recent) >= 0.2 && (x.rho_recent > 0) !== (x.rho_2011 > 0))); });
-  document.getElementById('robust').innerHTML = L('Run on the 2011 census values instead, the rank correlations with the removal rate across all states come out as follows. {list}. The reading changes for {n} of them ({changed}).', {
-    list: d.robustness_2011.map(function (x) { return L('{c} {a} with the recent figure and {b} with 2011', { c: RL[x.key], a: SIR.d(x.rho_recent, 2), b: SIR.d(x.rho_2011, 2) }); }).join(', '),
+  document.getElementById('robust').innerHTML = L('Run on the 2011 census values instead, the rank correlations with the removal rate across all states come out as follows. {list} The reading changes for {n} of them ({changed}).', {
+    list: d.robustness_2011.map(function (x) { return L('{c} is {a} with the recent figure and {b} with 2011.', { c: RL[x.key], a: SIR.d(x.rho_recent, 2), b: SIR.d(x.rho_2011, 2) }); }).join(' '),
     n: changed.length, changed: changed.length ? changed.map(function (x) { return RL[x.key]; }).join(', ') : L('none') });
   var FQ = { exact: L('Adds up'), rounded: L('Rounded'), 'net only': L('Net only'), no: L('Does not add up') };
   SIR.table(document.getElementById('tFsrc'), [
