@@ -27,6 +27,9 @@
     n: function (x) { return x == null || isNaN(x) ? '–' : nf.format(Math.round(x)); },
     d: function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k); },
     pct: function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k) + '%'; },
+    // a multiple such as removals over a margin: one decimal, except that just
+    // under 1 is cut to two (0.99×), so a seat below its margin never reads 1.0×
+    times: function (x) { return x == null || isNaN(x) ? '' : (x < 1 && x >= 0.95 ? (Math.floor(x * 100) / 100).toFixed(2) : Number(x).toFixed(1)) + '×'; },
     date: function (iso) { if (!iso) return ''; var p = iso.split('-'); return +p[2] + ' ' + ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+p[1] - 1] + ' ' + p[0]; },
     // a count of a crore or more is written in crore, anything smaller in lakh
     lakh: function (x) { return Math.abs(x) >= 1e7 ? L('{x} crore', { x: (x / 1e7).toFixed(2) }) : L('{x} lakh', { x: (x / 1e5).toFixed(1) }); },

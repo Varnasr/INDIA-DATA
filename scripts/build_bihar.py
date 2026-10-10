@@ -430,13 +430,14 @@ def district_identity(a):
 
 
 def district_economy(a):
-    """Census 2011 and the state's district GDP series, from the file the old
-    dashboard already carried. Only its census and GDDP columns are used: its
-    deletion columns were computed from the duplicated join."""
+    """Census 2011 figures, from the file the old dashboard already carried.
+    Only its census columns are used: its deletion columns were computed from
+    the duplicated join. Its district income column is not used either: it
+    carries no source, and several of its values are patterned digits
+    (23,456, 34,567, 25,678) that no published series matches."""
     d = pd.read_csv(os.path.join(ROOT, 'data', 'district_demography_summary.csv'))
     keep = ['district_name', 'census_2011_total_pop', 'census_2011_density_per_sqkm', 'census_2011_literacy_rate',
-            'census_2011_female_literacy', 'census_2011_urban_pct', 'per_capita_gddp_2021_22_constant_inr',
-            'gddp_prosperity_rank']
+            'census_2011_female_literacy', 'census_2011_urban_pct']
     d = d[keep].copy()
     d['key'] = d.district_name.map(norm)
     # urban share and density come from the Registrar General's own table A-01
@@ -472,7 +473,6 @@ def district_economy(a):
              'density': int(x.census_2011_density_per_sqkm), 'urban_pct': float(x.census_2011_urban_pct),
              'women_literate': float(x.women_literate), 'girls_schooled': float(x.girls_schooled),
              'child_marriage': float(x.child_marriage),
-             'gddp_pc': int(x.per_capita_gddp_2021_22_constant_inr), 'gddp_rank': int(x.gddp_prosperity_rank),
              'border': x.border_group} for x in m.sort_values('district').itertuples()]
 
 
@@ -635,7 +635,13 @@ def outputs(booth, a, report):
                    'electorate_2025': int(a.electorate_2025.sum()),
                    'booths_with_2024_result': int(booth.lead24.notna().sum()),
                    'religion_classified': int((booth.hindu + booth.muslim + booth.unknown).sum()),
-                   'hindu': int(booth.hindu.sum()), 'muslim': int(booth.muslim.sum()), 'unknown': int(booth.unknown.sum())},
+                   'hindu': int(booth.hindu.sum()), 'muslim': int(booth.muslim.sum()), 'unknown': int(booth.unknown.sum()),
+                   # every booth's count, third-gender electors included; p1 and
+                   # total count women and men only
+                   'p1_booths': int(booth.deleted.sum()),
+                   # the middle booth of all of them, not the middle of the seats' medians
+                   'booth_median': r(booth.deleted.median(), 0),
+                   'booths_200': int((booth.deleted >= 200).sum()), 'booths_400': int((booth.deleted >= 400).sum())},
         'booth_histogram': {k: int(v) for k, v in hist.items()},
         'by_alliance_label': lab,
         'by_booth_leader_2024': {k: {'booths': int(v['size']), 'deleted': int(v['sum']), 'mean': r(v['mean'], 1), 'median': r(v['median'], 1)}

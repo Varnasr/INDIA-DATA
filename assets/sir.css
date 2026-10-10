@@ -703,6 +703,8 @@ main>ol.summary:first-child{margin-top:0}
 .note{border-top:0;padding-top:0;margin-top:1.25rem}
 .note.limits{border-top:1px solid var(--line);padding-top:.9rem}
 th{background:var(--bg);font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--ink)}
+/* a symbol in an upper-case heading keeps its own case: ρ would become Ρ, read as P */
+.sym{text-transform:none}
 footer{background:var(--bg);margin-top:2rem}
 .report .cover,.report .toc,.report .twrap,.report .stats div{box-shadow:none;border:1px solid var(--line)}
 .report .title{font-family:var(--serif)}

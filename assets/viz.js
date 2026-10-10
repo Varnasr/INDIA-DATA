@@ -14,10 +14,13 @@
     return e;
   }
   // a label of one or more lines, centred on y
+  // the space a wrapped line gave up, kept at its end so the text read out or
+  // copied from the chart is 'the 2020 result' and not 'the2020 result'
+  function gap(lines, j) { return j < lines.length - 1 && !/-$/.test(lines[j]) ? ' ' : ''; }
   function label(parent, x, y, text, width, anchor, cls) {
     var lines = [].concat(SIR.wrap(text, width));
     var t = el('text', { x: x, y: y, 'text-anchor': anchor, 'dominant-baseline': 'middle', class: cls || 'vname' }, parent);
-    lines.forEach(function (ln, j) { el('tspan', { x: x, dy: j ? '1.1em' : (-0.55 * (lines.length - 1)) + 'em' }, t, ln); });
+    lines.forEach(function (ln, j) { el('tspan', { x: x, dy: j ? '1.1em' : (-0.55 * (lines.length - 1)) + 'em' }, t, ln + gap(lines, j)); });
     return t;
   }
   // an axis title under a chart: wrapped, drawn downward from y, and the
@@ -27,7 +30,7 @@
     var hw = 3.4 * Math.max.apply(null, lines.map(function (l) { return l.length; }));
     x = Math.min(Math.max(x, hw + 4), vw - hw - 4);
     var t = el('text', { x: x, y: y, 'text-anchor': 'middle', 'dominant-baseline': 'middle', class: 'vval' }, svg);
-    lines.forEach(function (ln, j) { el('tspan', { x: x, dy: j ? '1.15em' : 0 }, t, ln); });
+    lines.forEach(function (ln, j) { el('tspan', { x: x, dy: j ? '1.15em' : 0 }, t, ln + gap(lines, j)); });
     var vb = svg.getAttribute('viewBox').split(' ').map(Number), need = y + (lines.length - 1) * 15 + 10;
     if (need > vb[3]) svg.setAttribute('viewBox', vb[0] + ' ' + vb[1] + ' ' + vb[2] + ' ' + need);
     return t;

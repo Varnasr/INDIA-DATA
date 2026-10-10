@@ -180,7 +180,7 @@ function bihar() {
   s = K.slide('The scale', 'Most booths lost fewer than 100 names, and ' + indian(b200) + ' lost 200 or more', 'Booths by the number of names removed in phase 1, the phase listed booth by booth');
   s.addChart(pres.charts.BAR, [{ name: 'Booths', labels: Object.keys(BH), values: Object.values(BH) }], K.chart(Object.assign({}, K.left, { barDir: 'col', chartColors: Object.keys(BH).map((k) => parseInt(k, 10) >= 200 ? P.accent : GREY), showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '#,##0', valAxisHidden: true, catAxisTitle: 'Names removed per booth', showCatAxisTitle: true })));
   K.right(s, [
-    'The typical booth lost ' + median(A.map((a) => a.booth_median)) + ' names.',
+    'The typical booth lost ' + t.booth_median + ' names.',
     indian(BH['400+']) + ' booths lost 400 or more.',
     'By constituency, removals ran from ' + rankA[rankA.length - 1].per_100.toFixed(1) + ' per 100 electors in ' + rankA[rankA.length - 1].name + ' to ' + rankA[0].per_100.toFixed(1) + ' in ' + rankA[0].name + '.',
   ]);
@@ -392,14 +392,14 @@ function bihar() {
     K.chart(Object.assign({}, K.left, { barDir: 'bar', chartColors: td.map((d) => d.border && d.border !== 'Interior' ? P.accent : GREY), showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', valAxisHidden: true })));
   K.right(s, [rankD[rankD.length - 1].district + ' lost the fewest, ' + rankD[rankD.length - 1].per_100.toFixed(1) + ' per 100.', 'Red bars are border districts, grey the interior.', 'The full report has a chapter for each of the 38 districts.']);
 
-  const FAC = [['Income per head', 'gddp_pc'], ['Urban share', 'urban_pct'], ['Women\'s literacy', 'women_literate'], ['Marriage before 18', 'child_marriage'], ['Density', 'density'], ['Electors per booth', 'electors_per_booth']];
+  const FAC = [['Urban share', 'urban_pct'], ['Women\'s literacy', 'women_literate'], ['Marriage before 18', 'child_marriage'], ['Density', 'density'], ['Electors per booth', 'electors_per_booth']];
   const y = DS.map((d) => d.per_100);
   const cor = FAC.map(([n, k]) => { const x = DS.map((d) => d[k]); return { n, r: pearson(x, y), rho: spearman(x, y) }; });
   const word = (c) => Math.abs(c.rho) < 0.2 ? 'no clear relationship' : c.rho < 0 ? 'fewer removals where higher' : 'more removals where higher';
   const flat = cor.filter((c) => Math.abs(c.rho) < 0.2).map((c) => c.n.toLowerCase()), strong = cor.slice().sort((a, b) => Math.abs(b.rho) - Math.abs(a.rho))[0];
   s = K.slide('Districts', 'District removal rates move most with ' + strong.n.toLowerCase() + ', and not with ' + orj(flat), 'Each district\'s removal rate against one characteristic. r is the straight-line correlation and ρ the rank correlation.');
   K.table(s, ['Characteristic', 'r', 'ρ', 'Reading'], cor.map((c) => [c.n, c.r.toFixed(2), c.rho.toFixed(2), word(c)]), M, TOP, 7.6, [2.3, 0.9, 0.9, 3.5], 14, [0, 3]);
-  K.right(s, ['A rank correlation under 0.2 either way is read as no relationship.', 'Thirty-eight districts cannot separate these factors. The poorest districts are also the least urban and least literate, and in the north-east the most exposed to migration.', 'Urban share and density from Census 2011, women\'s literacy and marriage before 18 from NFHS-5 (2019-20), income per head from the Bihar Economic Survey 2021-22.'], 13);
+  K.right(s, ['A rank correlation under 0.2 either way is read as no relationship.', 'Thirty-eight districts cannot separate these factors. The less urban districts also tend to be the less literate, and in the north-east the most exposed to migration.', 'Urban share and density from Census 2011, women\'s literacy and marriage before 18 from NFHS-5 (2019-20).'], 13);
 
   // ---- Questions
   const fq = [
