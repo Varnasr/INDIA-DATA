@@ -589,7 +589,7 @@ def westbengal(R):
         'The revision left %s names off West Bengal\'s draft roll, the list published on 16 December 2025 for electors to check and contest. That is %s of every 100 electors. Another %s were held back from the final roll for adjudication, which means their eligibility was left for judicial officers to decide.' % (lakh(P['removed']), d1(P['removed_per_100']), lakh(P['adjudication'])),
         'In %d of the %d assembly constituencies, the seats of the state legislature, the roll the 2026 election was held on was smaller than the 2024 roll by more than the winning margin, the votes by which the winner beat the runner-up. So the fall was large enough to decide those seats. Counted at each seat\'s own turnout, it still exceeds the margin in %d.' % (S['over_margin'], S['acs'], S['could_change']),
         'Women were %s of the names left off the draft roll, against %s of the roll before it.' % (pct(P['women_removed_pct']), pct(P['women_before_pct'])),
-        'Of the %s names held back, %s were found not eligible, as the Election Commission reported. %s of those appealed and %s were restored in time to vote.' % (lakh(AD['under_adjudication']), lakh(AD['found_not_eligible']), lakh(AD['appeals_by_excluded']), indian(AD['restored_before_poll'])),
+        'Of the %s names held back, %s were found not eligible, as the Election Commission reported. %s of those appealed, and by press reports %s were restored in time to vote.' % (lakh(AD['under_adjudication']), lakh(AD['found_not_eligible']), lakh(AD['appeals_by_excluded']), indian(AD['restored_before_poll'])),
         'The roll the 2026 election was held on was %s smaller than the 2024 roll, %s of every 100 electors. Kolkata North\'s fell by %s per 100.' % (lakh(S['fall']), d1(S['per_100']), d1(D[0]['per_100'])),
         '%s of the names left off the draft were entered as dead, %s as shifted and %s as absent. %s' % (pct(P['shares']['dead']), pct(P['shares']['shifted']), pct(P['shares']['absent']), REASON),
     ])
@@ -634,8 +634,8 @@ def westbengal(R):
     style_axes(ax, 'What happened to the names held back, as reported')
     F.add(fig, 'The Election Commission\'s figures as reported. They are not published by district.', width=14)
     R.stats([(lakh(AD['appeals_by_excluded']), 'appeals by those found not eligible'), (lakh(AD['appeals_against_inclusion']), 'appeals against names kept'),
-             (indian(AD['restored_before_poll']), 'restored in time to vote'), (pct(AD['pending_pct']), 'of appeals undecided on 16 September')])
-    R.p('As reported, of the %s names held back, %s were found eligible and %s were found not eligible, %s of the cases. %s of those found not eligible appealed, and %s were restored in time to vote. '
+             (indian(AD['restored_before_poll']), 'restored in time to vote, by press reports'), (pct(AD['pending_pct']), 'of appeals undecided on 16 September')])
+    R.p('As reported, of the %s names held back, %s were found eligible and %s were found not eligible, %s of the cases. %s of those found not eligible appealed, and by press reports alone %s were restored in time to vote. '
         'Another %s appeals asked the tribunals to remove names the judicial officers had kept. On 16 September %s of all %s appeals were still undecided. %s cases are not accounted for in the reported figures.'
         % (lakh(AD['under_adjudication']), lakh(AD['found_eligible']), lakh(AD['found_not_eligible']), pct(AD['not_eligible_pct']), lakh(AD['appeals_by_excluded']), indian(AD['restored_before_poll']),
            lakh(AD['appeals_against_inclusion']), pct(AD['pending_pct']), lakh(AD['appeals_total']), indian(AD['not_accounted'])))
@@ -770,7 +770,7 @@ def kerala(R):
     R.h1('In short')
     R.numbered([
         'Kerala\'s draft roll, the list published on 23 December 2025 for electors to check and contest, was %s smaller than its roll of January 2025. That is %s of every 100 electors.' % (lakh(S['fall_draft']), d1(S['draft_per_100'])),
-        'In %d of the %d assembly constituencies, the seats of the state legislature, the roll fell by more at the draft than the 2026 winning margin, the votes by which the winner beat the runner-up. By the election most of that fall had been made up. The roll was still smaller than in January 2025 by more than the margin in %d seats, large enough to decide them.' % (S['draft_over_margin'], S['acs'], S['over_margin']),
+        'In %d of the %d assembly constituencies, the seats of the state legislature, the roll fell by more at the draft than the 2026 winning margin, the votes by which the winner beat the runner-up. By the election the roll had grown back by %s since the draft, new voters included, and was still smaller than in January 2025 by more than the margin in %d seats, large enough to decide them.' % (S['draft_over_margin'], S['acs'], lakh(S['added_final'] + S['added_election']), S['over_margin']),
         'Women were %s of that fall, against %s of the roll, and more than their share in all %d districts.' % (pct(S['women_fall_pct']), pct(S['women_2025_pct']), S['districts']),
         '%s fell most, by %s per 100, and %s least, by %s.' % (D[0]['district'], d1(D[0]['draft_per_100']), low['district'], d1(low['draft_per_100'])),
         'By the 2026 election the roll had risen %s from the draft, which counts new voters as well as names put back, and it was %s smaller than in January 2025.' % (lakh(S['election'] - S['draft']), lakh(S['fall'])),
@@ -848,8 +848,8 @@ def kerala(R):
     R.stats([('%d of %d' % (S['draft_over_margin'], S['acs']), 'fall to the draft roll'), ('%d of %d' % (S['over_margin'], S['acs']), 'fall to the election roll'),
              ('%d of %d' % (S['could_change'], S['acs']), 'fall to the election roll, at turnout')])
     R.p('The first count stops at the draft roll. The second runs to the roll the election was held on, after the names added on claims and before the poll. The third counts the second at the seat\'s own 2026 turnout. '
-        'By the election most of the fall had been made up, and the roll was smaller than in January 2025 by more than the margin in %d seats, large enough to decide them. Counted at each seat\'s own turnout, that is %d seats. '
-        'The rise after the draft counts new voters too, and nobody can know how anyone missing from the roll would have voted.' % (S['over_margin'], S['could_change']))
+        'By the election the roll had grown back by %s since the draft, new voters included, and was still smaller than in January 2025 by more than the margin in %d seats, large enough to decide them. Counted at each seat\'s own turnout, that is %d seats. '
+        'Nobody can know how anyone missing from the roll would have voted.' % (lakh(S['added_final'] + S['added_election']), S['over_margin'], S['could_change']))
 
     R.h2('The fall by the party that won')
     winners_table(R, S['winners'], 'draft_per_100', 'Fall per 100 at draft', 'Draft fall over margin')
@@ -874,8 +874,8 @@ def kerala(R):
     R.h1('Method and sources')
     R.p('The Chief Electoral Officer, Kerala, publishes every roll by assembly constituency and sex. These figures use four of them, the final roll of the 2025 summary revision (6 January 2025), the draft roll of the Special Intensive Revision (23 December 2025), its final roll (21 February 2026) and the roll of 23 March 2026, on which the election was held. Each adds up to its own district and state totals.')
     R.p('No table of the names left off the draft has been published, by constituency or for the state. The figures measure how much smaller each roll was at the draft than in January 2025. That fall, %s in all, takes in the ordinary changes of 2025 as well as the revision. '
-        'The roll frozen for the revision in October 2025 held %s, a little more than the January roll, and the count of names left off reported with the draft was %s, so for the state the fall and the removals are close. For a single constituency they may differ more.'
-        % (indian(S['fall_draft']), indian(S['frozen']), indian(S['press_removed'])))
+        'The count of names left off reported with the draft was %s. The draft plus that count comes to %s, which matches the roll frozen for the revision in October 2025 as the press reported it, a little more than the January roll. So for the state the fall and the removals are close. For a single constituency they may differ more.'
+        % (indian(S['fall_draft']), indian(S['press_removed']), indian(S['frozen'])))
     R.p('The rise from the draft to the final roll and to the roll of March 2026 is the names added less those removed. It counts new voters, including those who turned eighteen and those registered abroad, as well as names put back.')
     R.p('The 2026 winner, runner-up and margin are from the Election Commission\'s constituency result pages, checked against its state-wise pages. Turnout is votes over the roll of 23 March 2026. Party comparisons are by party, because the fronts of the independents are not in the data. '
         'Each seat\'s fall per 100 is also set against the fall of its own district, and those differences are averaged for each party\'s seats. The map uses DataMeet\'s assembly constituency map, licensed CC BY 2.5 India. Only counts are published, never a name, EPIC number or address.')

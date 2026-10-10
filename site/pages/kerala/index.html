@@ -82,8 +82,8 @@ Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/distric
     steps: [L('January 2025'), L('Draft'), L('Final roll'), L('March 2026')],
     panels: D.map(function (d) { return { name: d.district, hi: tvm(d), v: [d.roll_2025, d.draft, d.final, d.election].map(function (v) { return 100 * v / d.roll_2025; }) }; }) });
   var grew = D.filter(function (d) { return d.per_100 < 0; });
-  document.getElementById('fBack').innerHTML = L('<b>In {a} and {b} the roll was still about {t} per 100 smaller at the election than in January 2025.</b> In {k} districts it had grown past its January size by the election, {g} among them. The rise after the draft counts new voters as well as names put back, so it cannot show how many of those left off were restored.', {
-    a: D[0].district, b: D[1].district, t: SIR.d((D[0].per_100 + D[1].per_100) / 2, 0), k: grew.length, g: grew.map(function (d) { return d.district; }).join(', ') });
+  document.getElementById('fBack').innerHTML = L('<b>In {a} and {b} the roll was still about {t} per 100 smaller at the election than in January 2025.</b> In {k} districts, {g}, it had grown past its January size by the election. The rise after the draft counts new voters as well as names put back, so it cannot show how many of those left off were restored.', {
+    a: D[0].district, b: D[1].district, t: SIR.d((D[0].per_100 + D[1].per_100) / 2, 0), k: grew.length, g: (function (n) { return n.length < 2 ? n.join('') : n.slice(0, -1).join(', ') + L(' and ') + n[n.length - 1]; })(grew.map(function (d) { return d.district; })) });
 
   VIZ.scatter('vWomen', { label: L('Women\'s share of the January 2025 roll and of the fall in the roll at the draft, every constituency'), diag: true,
     xAxis: L('Women\'s share of the January 2025 roll, %'), yAxis: L('Women\'s share of the fall, %'), diagLabel: L('Same share'),

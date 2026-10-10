@@ -174,7 +174,7 @@ def build():
         'pn05': dict(p, removed_per_100=round(100 * p['removed'] / p['before'], 2),
                      women_before_pct=round(100 * p['before_women'] / p['before'], 2),
                      women_removed_pct=round(100 * (p['before_women'] - DRAFT_W) / p['removed'], 2),
-                     shares={k: round(100 * p[k] / p['removed'], 2) for k in ('dead', 'absent', 'shifted', 'duplicate', 'other')}),
+                     shares={k: round(100 * p[k] / p['removed'], 4) for k in ('dead', 'absent', 'shifted', 'duplicate', 'other')}),
         'adj': AD,
         'roll_2024': R24, 'draft': DRAFT, 'election': ELEC,
         'after_final': ELEC - p['final'],

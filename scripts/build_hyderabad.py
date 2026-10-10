@@ -39,8 +39,8 @@ def load():
     return D
 
 
-def rate(a, b):
-    return None if not b else round(100 * a / b, 2)
+def rate(a, b, k=2):
+    return None if not b else round(100 * a / b, k)
 
 
 def within(parts, a_num, a_den, b_num, b_den, min_n=20):
@@ -145,10 +145,16 @@ def build():
         for p in P:
             if p['total'] < 100:
                 continue
-            parts_out.append([name, p['part'], p.get('loc') or '', p['total'], p['asd'], rate(p['asd'], p['total']),
-                              rate(p['mus_all'], p['total']), rate(p['mus_asd'], p['mus_all']) if p['mus_all'] >= 20 else None,
-                              rate(p['hin_asd'], p['hin_all']) if p['hin_all'] >= 20 else None,
-                              rate(p['reasons'][1], p['asd']) if p['asd'] else None, rate(p['hear'], p['total'])])
+            # Rates to four places, so a one-decimal reading rounds the same
+            # way in Python and JavaScript (80.25 reads 80.2 in one, 80.3 in
+            # the other). A locality the export left blank is empty.
+            loc = p.get('loc') or ''
+            if loc.strip().lower() in ('nan', 'none'):
+                loc = ''
+            parts_out.append([name, p['part'], loc, p['total'], p['asd'], rate(p['asd'], p['total'], 4),
+                              rate(p['mus_all'], p['total'], 4), rate(p['mus_asd'], p['mus_all'], 4) if p['mus_all'] >= 20 else None,
+                              rate(p['hin_asd'], p['hin_all'], 4) if p['hin_all'] >= 20 else None,
+                              rate(p['reasons'][1], p['asd'], 4) if p['asd'] else None, rate(p['hear'], p['total'], 4)])
     tot = lambda k: sum(a[k] for a in acs)
     summary = {
         'totals': {'electors': tot('electors'), 'deleted': tot('deleted'), 'hearing': tot('hearing'),

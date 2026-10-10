@@ -32,7 +32,7 @@
         [L('Did the removals fall more heavily on one party\'s seats?'),
          L('Seats won by TVK lost {t} of every 100 electors, against {d} in seats won by the DMK and {a} in seats won by the AIADMK. Most of that gap is about where the seats are. TVK won most of the city seats, and the city seats lost the most names. Set against the average of their own district, TVK seats come out at {tv} per 100, DMK seats at {dv} and AIADMK seats at {av}, where a minus means fewer removals than the district as a whole.', { t: SIR.d(W.TVK.per_100, 1), d: SIR.d(W.DMK.per_100, 1), a: SIR.d(W.AIADMK.per_100, 1), tv: sg(W.TVK.vs_district), dv: sg(W.DMK.vs_district), av: sg(W.AIADMK.vs_district) }), ['elections', 'faq']],
         [L('Where do these figures come from?'),
-         L('The removals by constituency and reason, and the draft and final rolls by constituency, are the Chief Electoral Officer\'s own tables. The 2026 result is from the Election Commission\'s result pages, and the 2021 result from the Commission\'s statistical report. The <a href="../method/">method page</a> gives each source.'), ['method', 'faq']],
+         L('The removals by constituency and reason, and the draft and final rolls by constituency, are the Chief Electoral Officer\'s own tables. The 2026 result is from the Election Commission\'s result pages, and the 2021 result from the Commission\'s statistical report, through a published compilation of it. The <a href="../method/">method page</a> gives each source.'), ['method', 'faq']],
         [L('Why is the roll before the revision the draft roll plus the names removed?'),
          L('The Chief Electoral Officer published the removals against the draft roll, constituency by constituency, but no constituency table of the roll the revision started from. The draft plus the removals is that roll, and it adds up to the state total announced with the draft.'), ['method']],
         [L('Does this show that the removals were intended to change results?'),
@@ -51,7 +51,7 @@
         method: [[
           L('The removals, both rolls and the 2026 result are published constituency by constituency, and every table adds up to its own totals.'),
           L('The Chief Electoral Officer has published no split of the removals by sex or age.'),
-          L('The 2021 result is from the Election Commission\'s statistical report.')],
+          L('The 2021 result is from the Election Commission\'s statistical report, through a published compilation of it.')],
           L('A reason on the list is what the officer wrote down, and nobody checked it.')],
         faq: [[scale, why, chen, margin], limits]
       };

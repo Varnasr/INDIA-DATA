@@ -104,7 +104,7 @@ Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/constit
   document.getElementById('cCounts').innerHTML = counts.map(function (c) {
     return '<div class="big"><b>' + c[1] + '</b><span class="of">' + L('of {n} seats', { n: S.acs }) + '</span><i style="--w:' + (100 * c[1] / S.acs).toFixed(1) + '%"></i><span>' + c[0] + '</span></div>';
   }).join('');
-  document.getElementById('fCounts').innerHTML = L('<b>By the election most of the fall had been made up, and the roll was smaller than in January 2025 by more than the margin in {k} seats.</b> Counted at each seat\'s own turnout, that is {t} seats. The rise after the draft counts new voters too, and nobody can know how anyone missing from the roll would have voted.', { k: S.over_margin, t: S.could_change });
+  document.getElementById('fCounts').innerHTML = L('<b>By the election the roll had grown back by {back} since the draft, new voters included, and was still smaller than in January 2025 by more than the margin in {k} seats.</b> Counted at each seat\'s own turnout, that is {t} seats. Nobody can know how anyone missing from the roll would have voted.', { back: SIR.lakh(S.added_final + S.added_election), k: S.over_margin, t: S.could_change });
 
   var sg = function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 1); };
   SIR.table(document.getElementById('tWin'), [
