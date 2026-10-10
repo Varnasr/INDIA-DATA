@@ -155,9 +155,9 @@
 <section class="fs"><h2 id="what-the-revision-was">What the revision was</h2>
 <div class="fs-b">
 <p>An electoral roll is the list of people who may vote in a constituency. Each polling station has its own part of the roll, and a person whose name is not on it cannot vote there.</p>
-<p>The revision checked every name on the roll at once. Officers went house by house, and every elector had to fill in an enumeration form, a fresh form with their details, and hand it back. Only those whose forms came back were put on the draft roll, the first new roll the revision published. A name that had been on the roll for years was left off the draft if its form did not come back in time. For each name left off, the officer recorded one of four reasons, which were dead, shifted, absent and enrolled more than once. Some electors also had to show documents, and some who stayed on the draft were later sent a notice to prove their entry.</p>
+<p>The revision checked every name on the roll at once. Officers went house by house, and every elector had to fill in an enumeration form, a fresh form with their details, and hand it back. Only those whose forms came back were put on the draft roll, the first new roll the revision published. A name that had been on the roll for years was left off the draft if its form did not come back in time. For each name left off, the officer recorded a reason, such as dead, shifted, absent or enrolled more than once. Some electors also had to show documents, and some who stayed on the draft were later sent a notice to prove their entry.</p>
 <p>After the draft came claims and objections. Anyone left off could ask to be put back with Form 6, the same form a new voter uses to enrol. Anyone could object to a name on the roll with Form 7. The final roll was published at the end, after the claims and objections.</p>
-<p>The revision ran in three phases. Bihar went first, from June 2025. Twelve states and union territories followed from October 2025, and the rest of the country from May 2026, except Himachal Pradesh, Jammu and Kashmir and Ladakh. Assam had a different kind of revision.</p>
+<p>The revision ran in three phases. Bihar went first, from June 2025. Twelve states and union territories followed on an order of October 2025, with house visits from November, and the rest of the country from May 2026, except Himachal Pradesh, Jammu and Kashmir and Ladakh. Assam had a different kind of revision.</p>
 </div></section>
 
 <section class="fs"><h2 id="why-this-site-exists">Why this site exists</h2>
@@ -237,7 +237,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')
     [SIR.d(X.shares.shifted_absent_other, 1) + '%', L('of the names left off were entered as shifted, absent or for another reason')],
     [cr(X.duplicate), L('names were entered as enrolled more than once')],
     [L('{a} of {b}', { a: W.over, b: W.states }), L('states where women were a larger share of the names left off than of the roll')],
-    [L('{a} of {b}', { a: C.above_state, b: C.compared }), L('large cities that lost more names than their state')],
+    [L('{a} of {b}', { a: C.above_state, b: C.compared }), L('large cities measured against their state that lost more names than it')],
     [L('{a} of {b}', { a: ab.reduce(function (t, a) { return t + a.over_margin; }, 0), b: ab.reduce(function (t, a) { return t + a.seats; }, 0) }), L('assembly seats in {s} where more names were removed than the winning margin', { s: ab.map(function (a) { return a.state; }).reduce(function (x, y) { return L('{a} and {b}', { a: x, b: y }); }) })]
   ];
   var k0 = (SIR.day() * 3) % pool.length, picks = [0, 1, 2].map(function (i) { return pool[(k0 + i) % pool.length]; });
@@ -266,16 +266,17 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.js
   document.getElementById('hTn').innerHTML = L('{n} names left off the draft roll in {acs} constituencies, {p} of every 100 electors, set against the 2026 election result.', { n: SIR.lakh(r[3].removed), acs: r[3].acs, p: SIR.d(r[3].per_100, 1) });
   document.getElementById('hKa').innerHTML = L('{n} names left off the draft roll in {d} districts, {p} of every 100 electors, and {b} in Bengaluru alone.', { n: SIR.lakh(r[4].removed), d: r[4].districts, p: SIR.d(r[4].per_100, 1), b: SIR.lakh(r[4].bengaluru.removed) });
   document.getElementById('hWb').innerHTML = L('{n} names left off the draft roll and {a} held back for adjudication, and in {k} of {acs} constituencies the roll fell by more than the 2026 margin.', { n: SIR.lakh(r[5].pn05.removed), a: SIR.lakh(r[5].pn05.adjudication), k: r[5].over_margin, acs: r[5].acs });
-  document.getElementById('hKl').innerHTML = L('Kerala published no count of the names left off. The draft roll was {f} smaller than in January 2025, and women were {w} of that fall.', { f: SIR.lakh(r[6].fall_draft), w: SIR.pct(r[6].women_fall_pct) });
+  document.getElementById('hKl').innerHTML = L('Kerala published no count of the names left off by constituency. The draft roll was {f} smaller than in January 2025, and women were {w} of that fall.', { f: SIR.lakh(r[6].fall_draft), w: SIR.pct(r[6].women_fall_pct) });
   // every card leads with a count of names, and beneath it that count as a
   // share of the roll it came off. Each pair comes from one source, so the
   // two always describe the same thing. Kerala published no count of names
-  // left off, so its card carries the fall in the roll and says so.
+  // left off by constituency, so its card carries the fall in the roll and
+  // says so. Bihar's card counts both phases, so its share says which roll.
   var byState = {}; r[0].states.forEach(function (x) { byState[x.state] = x; });
   var cnt = function (v) { return v >= 1e5 ? SIR.lakh(v) : SIR.n(v); };
   var N = {}, from = function (href, st) { var x = byState[st]; if (x && x.removed) N[href] = [cnt(x.removed), x.per_100]; };
   N['india/'] = [cr(T.removed), T.per_100];
-  N['bihar/'] = [SIR.lakh(B.total), 100 * B.total / B.electorate_2025];
+  N['bihar/'] = [SIR.lakh(B.total), 100 * B.total / B.electorate_2025, L('{p} of the 2025 roll, both phases', { p: SIR.pct(100 * B.total / B.electorate_2025) })];
   N['hyderabad/'] = [SIR.lakh(H.deleted), 100 * H.deleted / H.electors];
   N['kerala/'] = [SIR.lakh(r[6].fall_draft), r[6].draft_per_100];
   [['tamilnadu/', 'Tamil Nadu'], ['karnataka/', 'Karnataka'], ['westbengal/', 'West Bengal'], ['rajasthan/', 'Rajasthan'], ['uttarpradesh/', 'Uttar Pradesh'],
@@ -300,7 +301,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.js
   document.getElementById('hCities').innerHTML = L('In {a} of {n} large cities the city lost a larger share of its roll than its state, up to {x} times the state\'s rate.', { a: r[13].summary.above_state, n: r[13].summary.compared, x: SIR.d(r[13].summary.times_max, 1) });
   document.querySelectorAll('.hubs a.hub').forEach(function (a) {
     var v = N[a.getAttribute('href')]; if (!v) return;
-    a.insertAdjacentHTML('afterbegin', '<em class="n">' + v[0] + (v[1] != null ? '<small>' + L('{p} of the roll', { p: SIR.pct(v[1]) }) + '</small>' : '') + '</em>');
+    a.insertAdjacentHTML('afterbegin', '<em class="n">' + v[0] + (v[1] != null ? '<small>' + (v[2] || L('{p} of the roll', { p: SIR.pct(v[1]) })) + '</small>' : '') + '</em>');
   });
 }).catch(SIR.fail);
 </script>

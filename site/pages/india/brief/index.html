@@ -62,8 +62,17 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/process.js
     'In ' + M.removed.states.join(' and ') + ', more names were removed than the winning margin in ' + n(over) + ' of ' + n(seats) + ' assembly seats. <a href="../numbers/#against-the-winning-margins">Against the winning margins</a> sets out every comparison.'
   ].map(function (t) { return '<li>' + t + '</li>'; }).join('');
 
+  // the burdens carry {placeholders} for counts taken from the schedules
+  var moves = function (r) { return r.steps.filter(function (st) { return st.kind !== 'published'; }).length - 1; };
+  var ph = function (p) { return P.schedules.filter(function (r) { return r.phase === p; }); };
+  var fill = { p2_states: ph('II').length, p2_again: ph('II').filter(function (r) { return moves(r) > 1; }).length,
+    p3_states: ph('III').length, p3_moved: ph('III').filter(function (r) { return moves(r) > 0; }).length };
+  var claims = I.states.filter(function (s) { return s.removed && s.added_after_draft != null; });
+  fill.claims_states = claims.length;
+  fill.claims_fewer = claims.filter(function (s) { return s.added_after_draft < s.removed; }).length;
+  fill.claims_under10 = claims.filter(function (s) { return 100 * s.added_after_draft / s.removed < 10; }).length;
   var docs = P.burdens.map(function (b) {
-    return '<li><b>' + esc(b.title) + '.</b> ' + esc(b.text) + ' ' + b.src.map(function (s) { return '<a href="' + esc(s.url) + '" rel="noopener">' + esc(s.name) + '</a>'; }).join(', ') + '.</li>';
+    return '<li><b>' + esc(b.title) + '.</b> ' + esc(b.text.replace(/\{(\w+)\}/g, function (m, k) { return fill[k]; })) + ' ' + b.src.map(function (s) { return '<a href="' + esc(s.url) + '" rel="noopener">' + esc(s.name) + '</a>'; }).join(', ') + '.</li>';
   });
   docs.push('<li><b>In the courts.</b> ' + n(sec('courts')) + ' court orders and cases are listed on <a href="../disputes/">Protests and disputes</a>, each linked to the order or report.</li>');
   document.getElementById('documented').innerHTML = docs.join('');

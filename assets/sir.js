@@ -25,8 +25,9 @@
   var SIR = window.SIR = {
     root: root,
     n: function (x) { return x == null || isNaN(x) ? '–' : nf.format(Math.round(x)); },
-    d: function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k); },
-    pct: function (x, k) { return x == null || isNaN(x) ? '–' : Number(x).toFixed(k == null ? 1 : k) + '%'; },
+    // a half rounds away from zero, whatever its binary form (8.65 is 8.7 and 1.15 is 1.2)
+    d: function (x, k) { if (x == null || isNaN(x)) return '–'; k = k == null ? 1 : k; x = Number(x); return (x + (x < 0 ? -1e-9 : 1e-9)).toFixed(k); },
+    pct: function (x, k) { return x == null || isNaN(x) ? '–' : SIR.d(x, k) + '%'; },
     date: function (iso) { if (!iso) return ''; var p = iso.split('-'); return +p[2] + ' ' + ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+p[1] - 1] + ' ' + p[0]; },
     // a count of a crore or more is written in crore, anything smaller in lakh
     lakh: function (x) { return Math.abs(x) >= 1e7 ? L('{x} crore', { x: (x / 1e7).toFixed(2) }) : L('{x} lakh', { x: (x / 1e5).toFixed(1) }); },

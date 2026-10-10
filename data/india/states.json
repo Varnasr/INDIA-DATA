@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-30",
+ "as_of": "2026-10-09",
  "adults": {
   "states": 19,
   "rho_rate": 0.05,
@@ -903,7 +903,10 @@
    "women_share_roll": 46.85,
    "quality": "exact",
    "source_url": "https://www.hindustantimes.com/cities/delhi-news/delhi-sir-narrows-gender-gap-as-voter-roll-shrinks-328-101788200888661.html",
-   "note": "Chief Electoral Officer's statement of the roll before and the draft by sex.",
+   "note": "The roll before by sex as Hindustan Times quoted the Chief Electoral Officer",
+   "null": [
+    " which the press note of 31 August 2026 does not give. The draft by sex is the Chief Electoral Officer's table of the same date."
+   ],
    "gap": -4.08,
    "phase": "3"
   },
@@ -943,7 +946,8 @@
   "dead": 27968327,
   "shifted_absent_other": 95651169,
   "duplicate": 10144957,
-  "unsplit": 138854,
+  "unsplit": 149391,
+  "over_split": 10537,
   "shares": {
    "dead": 20.91,
    "shifted_absent_other": 71.51,
@@ -959,6 +963,7 @@
    "shifted_absent_other": 3625981,
    "duplicate": 701059,
    "unsplit": 0,
+   "over_split": 0,
    "shares": {
     "dead": 34.04,
     "shifted_absent_other": 55.28,
@@ -972,7 +977,8 @@
    "dead": 14612169,
    "shifted_absent_other": 46650653,
    "duplicate": 4408726,
-   "unsplit": 5899,
+   "unsplit": 5909,
+   "over_split": 10,
    "shares": {
     "dead": 22.25,
     "shifted_absent_other": 71.04,
@@ -986,7 +992,8 @@
    "dead": 11123572,
    "shifted_absent_other": 45374535,
    "duplicate": 5035172,
-   "unsplit": 132955,
+   "unsplit": 143482,
+   "over_split": 10527,
    "shares": {
     "dead": 18.08,
     "shifted_absent_other": 73.74,
@@ -1162,7 +1169,7 @@
    "final_source": {
     "source": "press",
     "url": "https://www.newindianexpress.com/india/2026/Apr/11/up-final-voter-list-at-1339-crore-after-revision-over-2-crore-names-deleted",
-    "note": "The state published the net rise from draft to final (84,28,767) and the removals after the draft (8,15,996), not the additions."
+    "note": "The state published the net rise from draft to final (84,28,767) and the removals after the draft (8,15,996). It did not publish the additions."
    }
   },
   {
@@ -1891,9 +1898,9 @@
    "duplicate": 1763000,
    "split": "complete",
    "figures": "rounded",
-   "source": "press",
-   "source_url": "https://indianexpress.com/article/cities/mumbai/maharashtra-draft-electoral-rolls-sir-2-crore-voters-excluded-claims-objections-portal-10857667/",
-   "note": "Electors before (9,78,54,049), the draft (7,71,65,562) and the names left off (2,06,88,487) are the Chief Electoral Officer's press note of 31 August 2026, which gives no numbers by reason. The reasons are as reported in lakh by the press and sum 10,513 more than the total. Includes 2.23 lakh \"others\".",
+   "source": "primary",
+   "source_url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Press%20Note%20English_31.08.2026%20Draft%20Roll.pdf",
+   "note": "Electors before (9,78,54,049), the draft (7,71,65,562) and the names left off (2,06,88,487) are the Chief Electoral Officer's press note of 31 August 2026, which gives no numbers by reason. The reasons are as The Indian Express reported them in lakh, and sum 10,513 more than the total. Includes 2.23 lakh \"others\".",
    "unsplit": 0,
    "shares": {
     "dead": 16.82,
@@ -2015,7 +2022,7 @@
    "figures": "exact",
    "source": "press",
    "source_url": "https://indianexpress.com/article/india/voters-dropped-telangana-sir-draft-rolls-10837552/",
-   "note": "Removals and reasons from The Indian Express. The roll before the revision, 3,38,26,448, is from Telangana Today of 9 October 2026, from the Chief Electoral Officer's information, with 2,64,87,213 enumeration forms submitted and 73,39,235 left off (https://telanganatoday.com/telangana-sir-18-12-lakh-voters-face-exclusion-from-final-electoral-list).",
+   "note": "Removals and reasons from The Indian Express. The roll before the revision, 3,38,26,448, is from Telangana Today of 9 October 2026, from the Chief Electoral Officer's information, with 2,64,87,213 enumeration forms submitted and 73,39,235 left off.",
    "unsplit": 0,
    "shares": {
     "dead": 12.57,
@@ -2074,9 +2081,9 @@
    "duplicate": 141535,
    "split": "complete",
    "figures": "exact",
-   "source": "press",
-   "source_url": "https://www.hindustantimes.com/cities/delhi-news/delhi-sir-narrows-gender-gap-as-voter-roll-shrinks-328-101788200888661.html",
-   "note": "The Chief Electoral Officer's press note of 31 August 2026, quoted to the elector by Hindustan Times and Business Standard. Claims and objections extended to 30 October 2026.",
+   "source": "primary",
+   "source_url": "https://ceodelhi.gov.in/PDFFolders/2026/Draft_PublicationSIR31Aug2026.pdf",
+   "note": "The Chief Electoral Officer's press note of 31 August 2026, which Hindustan Times and Business Standard also quoted to the elector. Claims and objections extended to 30 October 2026.",
    "unsplit": 0,
    "shares": {
     "dead": 5.94,

@@ -24,6 +24,10 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# the CEO's press note of 31 August 2026, which the All India row cites for its totals
+NOTE_URL = 'https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Press%20Note%20English_31.08.2026%20Draft%20Roll.pdf'
+# the press report of the reasons in lakh, which the note does not give
+PRESS_REASONS = 'https://indianexpress.com/article/cities/mumbai/maharashtra-draft-electoral-rolls-sir-2-crore-voters-excluded-claims-objections-portal-10857667/'
 RAW = os.path.join(ROOT, 'data', 'maharashtra', 'raw')
 OUT = os.path.join(ROOT, 'data', 'maharashtra')
 CHECK = '--check' in sys.argv
@@ -76,7 +80,8 @@ def build():
     with open(os.path.join(ROOT, 'data', 'india', 'states.json'), encoding='utf-8') as fh:
         ind = [x for x in json.load(fh)['states'] if x['state'] == 'Maharashtra'][0]
     assert ind['electors_before'] == S['before'] and ind['removed'] == S['left_off'], 'All India row equals the press note'
-    assert ind['source'] == 'press' and ind['figures'] == 'rounded', 'the reasons for Maharashtra are rounded press figures'
+    # the row cites the CEO's note for its totals; the reasons in it are the press's, in lakh
+    assert ind['source'] == 'primary' and ind['source_url'] == NOTE_URL and ind['figures'] == 'rounded', 'the All India row cites the note, and its reasons are rounded press figures'
     press = {k: ind[k] for k in ('dead', 'shifted_absent_other', 'duplicate')}
 
     # the dates as last moved: the Commission's latest schedule for the state
@@ -110,7 +115,7 @@ def build():
         'women_high': {'district': wsort[-1]['district'], 'pct': wsort[-1]['women_draft_pct']},
         'press_reasons': press, 'press_reasons_sum': sum(press.values()),
         'press_shares': {k: round(100 * v / sum(press.values()), 2) for k, v in press.items()},
-        'press_source': ind['source_url'],
+        'press_source': PRESS_REASONS,
         'draft_date': st['draft_published'], 'claims_to_note': st['claims_objections_to'], 'final_due_note': st['final_roll_due'],
         'claims_to': last['claims'][1], 'notices_to': last['notice'][1], 'final_due': last['final'], 'final_due_source': last['label'],
     }

@@ -96,8 +96,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js" integrity="sha512-WoViKhKD4qI2WruSZqv9+kvM4WfFhUMQCLN4QlDTt5aU56fLQy2gYoxWIqlEnXqJy/+Ac5q/hk1oWfqnMDhwMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../../assets/faq/india.js"></script>
 <script>
-Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_electors.json'), SIR.json('data/india/margins.json'), SIR.json('data/bihar/impact.json'), SIR.json('data/bihar/final.json')]).then(function (res) {
-  var d = res[0], LS = res[1], M = res[2], IM = res[3], BF = res[4];
+Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_electors.json'), SIR.json('data/india/margins.json'), SIR.json('data/bihar/impact.json'), SIR.json('data/bihar/final.json'), SIR.json('data/westbengal/summary.json')]).then(function (res) {
+  var d = res[0], LS = res[1], M = res[2], IM = res[3], BF = res[4], WA = res[5].adj;
   var T = d.total, S = d.states, F = d.final, AD = d.after_draft, E = SIR.esc;
   // Indian grouping, whole numbers
   var n = function (x) { return Math.round(x).toLocaleString('en-IN'); };
@@ -201,12 +201,13 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   // every state's rate, coloured by phase, the ten largest named in bold
   var PT = { '1': '--fill-red', '2': '--fill-navy', '3': '--fill-teal' };
   var topNames = top.map(function (s) { return s.state; });
-  var byRate = rated.slice().sort(function (a, b) { return b.removed / b.electors_before - a.removed / a.electors_before; });
+  // the stored rate, rounded the same way on every page
+  var byRate = rated.slice().sort(function (a, b) { return b.per_100 - a.per_100; });
   VIZ.lollipop('vRate', { label: 'Names left off per 100 electors, every state and union territory, coloured by phase', axis: 'Left off per 100 electors on the roll before the revision', ref: T.per_100,
-    rows: byRate.map(function (s) { var v = 100 * s.removed / s.electors_before; return { name: s.state, v: v, text: p1(v), tok: PT[s.phase], hi: topNames.indexOf(s.state) >= 0 }; }) });
+    rows: byRate.map(function (s) { var v = s.per_100; return { name: s.state, v: v, text: p1(v), tok: PT[s.phase], hi: topNames.indexOf(s.state) >= 0 }; }) });
   document.getElementById('kRate').innerHTML = phases.map(function (k) { return '<span><i style="background:var(' + PT[k] + ')"></i>Phase ' + ROMAN[k] + (k === '1' ? ' (Bihar)' : '') + '</span>'; }).join('') + '<span><i style="background:var(--ink);width:2px;height:14px;border-radius:0"></i>All India, ' + p1(T.per_100) + '</span>';
-  var above = byRate.filter(function (s) { return 100 * s.removed / s.electors_before > T.per_100; });
-  document.getElementById('pRate').textContent = above.length + ' of the ' + byRate.length + ' are above the all-India rate. The ten largest states are named in bold. ' + byRate[0].state + ' is highest at ' + p1(100 * byRate[0].removed / byRate[0].electors_before) + ' and ' + byRate[byRate.length - 1].state + ' lowest at ' + p1(100 * byRate[byRate.length - 1].removed / byRate[byRate.length - 1].electors_before) + '.';
+  var above = byRate.filter(function (s) { return s.per_100 > T.per_100; });
+  document.getElementById('pRate').textContent = above.length + ' of the ' + byRate.length + ' are above the all-India rate. The ten largest states are named in bold. ' + byRate[0].state + ' is highest at ' + p1(byRate[0].per_100) + ' and ' + byRate[byRate.length - 1].state + ' lowest at ' + p1(byRate[byRate.length - 1].per_100) + '.';
 
   // the ten largest and everyone else, in crore
   var restN = S.filter(function (s) { return s.removed; }).length - top.length;
@@ -215,7 +216,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
     rows: top.map(function (s) { return { name: s.state, v: s.removed / 1e7, col: PT[s.phase] }; }).concat([{ name: 'The other ' + restN + ' together', v: (T.removed - topSum) / 1e7, col: '--fill-grey' }]) });
 
   document.getElementById('pPhase').textContent = 'The revision ran in three phases.' + (rising ? ' Each later phase removed a larger share of its rolls.' : '');
-  document.getElementById('tPhase').innerHTML = '<thead><tr><th scope="col" class="l">Phase</th><th scope="col" class="l">Began</th><th scope="col">States</th><th scope="col">Left off</th><th scope="col">Per 100</th></tr></thead><tbody>' +
+  document.getElementById('tPhase').innerHTML = '<thead><tr><th scope="col" class="l">Phase</th><th scope="col" class="l">Ordered</th><th scope="col">States</th><th scope="col">Left off</th><th scope="col">Per 100</th></tr></thead><tbody>' +
     phases.map(function (k) {
       var P = d.by_phase[k];
       return '<tr><td class="l">' + ROMAN[k] + (k === '1' ? ' (Bihar)' : '') + '</td><td class="l">' + MONTH[k] + '</td><td>' + P.states + '</td><td>' + n(P.removed) + '</td><td>' + p1(P.per_100) + '</td></tr>';
@@ -225,7 +226,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   // who published each figure, read from the source address
   var HOSTS = [['timesofindia', 'Times of India'], ['indianexpress', 'Indian Express'], ['hindustantimes', 'Hindustan Times'], ['thehindu', 'The Hindu'],
     ['deccanherald', 'Deccan Herald'], ['ceo.karnataka', 'CEO Karnataka'], ['elections.tn', 'CEO Tamil Nadu'], ['ceowestbengal', 'CEO West Bengal'],
-    ['eci.gov', 'Election Commission'], ['ndtv', 'NDTV'], ['scroll.in', 'Scroll'], ['thewire', 'The Wire'], ['newindianexpress', 'New Indian Express'], ['livemint', 'Mint'], ['tribuneindia', 'The Tribune']];
+    ['eci.gov', 'Election Commission'], ['ceoelection.maharashtra', 'CEO Maharashtra'], ['ceodelhi', 'CEO Delhi'], ['ndtv', 'NDTV'], ['scroll.in', 'Scroll'], ['thewire', 'The Wire'], ['newindianexpress', 'New Indian Express'], ['livemint', 'Mint'], ['tribuneindia', 'The Tribune']];
   var who = function (s) {
     if (s.source === 'lists') return '<a href="../../bihar/">CEO Bihar deletion lists, counted</a>';
     var h = HOSTS.filter(function (x) { return (s.source_url || '').indexOf(x[0]) >= 0; })[0];
@@ -236,10 +237,16 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   document.getElementById('pTop').textContent = 'The ten are ' + Math.round(100 * topSum / T.removed) + ' in every 100 names left off across India. Each bar is coloured by the state\'s phase, as in the chart above.';
   document.getElementById('tTop').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Left off</th><th scope="col">Per 100</th><th scope="col" class="l">Source</th></tr></thead><tbody>' +
     top.map(function (s) {
-      return '<tr><td class="l">' + E(s.state) + '</td><td>' + n(s.removed) + (s.figures === 'rounded' && s.removed % 1000 === 0 ? ' (rounded)' : '') + '</td><td>' + (s.electors_before ? p1(100 * s.removed / s.electors_before) : '') + '</td><td class="l">' + who(s) + '</td></tr>';
+      return '<tr><td class="l">' + E(s.state) + '</td><td>' + n(s.removed) + (s.figures === 'rounded' && s.removed % 1000 === 0 ? ' (rounded)' : '') + '</td><td>' + (s.per_100 != null ? p1(s.per_100) : '') + '</td><td class="l">' + who(s) + '</td></tr>';
     }).join('') + '</tbody>';
+  // a state marked rounded may have rounded only its split by reason; a total
+  // that is not a round thousand was published exact
   var rounded = top.filter(function (s) { return s.figures === 'rounded'; });
-  document.getElementById('nTop').innerHTML = (rounded.length ? (rounded.length === 1 ? 'One of these states' : (rounded.length < 10 ? ['', '', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'][rounded.length] : rounded.length) + ' of these states') + ' published ' + (rounded.length === 1 ? 'its' : 'their') + ' figures rounded (' + rounded.map(function (s) { return E(s.state); }).join(', ') + '), so ' + (rounded.length === 1 ? 'its rate is' : 'their rates are') + ' approximate. ' : '') +
+  var rTot = rounded.filter(function (s) { return s.removed % 1000 === 0; }), rWhy = rounded.filter(function (s) { return s.removed % 1000 !== 0; });
+  var few = function (a, one, many) { return a.length === 1 ? one : (a.length < 10 ? ['', '', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'][a.length] : a.length) + many; };
+  var names = function (a) { return a.map(function (s) { return E(s.state); }).join(', ').replace(/, ([^,]*)$/, ' and $1'); };
+  document.getElementById('nTop').innerHTML = (rWhy.length ? 'For ' + few(rWhy, 'one of these states', ' of these states') + ' (' + names(rWhy) + ') the split by reason was published in lakh, so it is approximate. ' + (rWhy.length === 1 ? 'Its total is' : 'Their totals are') + ' exact. ' : '') +
+    (rTot.length ? names(rTot) + (rTot.length === 1 ? ' published its total' : ' published their totals') + ' rounded, so ' + (rTot.length === 1 ? 'its rate is' : 'their rates are') + ' approximate. ' : '') +
     'The other ' + (S.filter(function (s) { return s.removed; }).length - top.length) + ' are in the <a href="../#every-state-and-union-territory">state table</a>.';
 
   var primary = S.filter(function (s) { return s.source === 'primary'; });
@@ -249,7 +256,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   document.getElementById('read').innerHTML = [
     'The draft roll kept only those electors whose forms came back. For every name left off, the officer wrote down a reason (dead, shifted, absent, or enrolled twice). Nobody checked those reasons before the draft was published.',
     'Some names came back later. In the ' + F.states + ' states with a final roll, people could file claims after the draft. The final rolls are ' + cr(F.net_after_draft) + ' larger than the drafts. That rise includes first-time voters, so it is the most that could have been put back.',
-    'Some names went later too. In ' + AD.states + ' states, another ' + lk(AD.removed) + ' were removed between the draft and the final roll' + (F.withheld ? ', and West Bengal held ' + n(F.withheld) + ' names off its final roll while their cases are decided' : '') + '. None of these is in the total above.',
+    'Some names went later too. In ' + AD.states + ' states, another ' + lk(AD.removed) + ' were removed between the draft and the final roll' + (F.withheld ? '. West Bengal kept ' + lk(F.withheld) + ' names off its final roll for adjudication. As reported, ' + lk(WA.found_eligible) + ' were later found eligible and ' + lk(WA.found_not_eligible) + ' not, and appeals continue' : '') + '. None of these is in the total above.',
     'Not every state is in the total. ' + (d.pending.length ? d.pending.join(' and ') + '\'s revision is still running. ' : '') + 'Assam had a different kind of revision. ' + outside.join(', ').replace(/, ([^,]*)$/, ' and $1') + ' were left out of it.',
     'The sources are of two kinds. The figures of ' + primary.length + ' states come from the Chief Electoral Officer\'s or the Commission\'s own notes, and Bihar\'s are counted from its deletion lists. The other ' + press.length + ' come from press reports of the officers\' announcements, and they cover ' + cr(pressSum) + ' of the total. Each is linked from the state table.'
   ].map(function (t) { return '<li>' + t + '</li>'; }).join('');
