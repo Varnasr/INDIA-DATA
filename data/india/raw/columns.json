@@ -504,6 +504,22 @@
   "count": "Names left off, or the fall in the roll, summed over the districts, as a count.",
   "per_100": "count per 100 electors on roll_before."
  },
+ "data/india/factors.csv": {
+  "state": "The state.",
+  "measure": "What is counted, where left_off means names left off the draft per 100 on the roll before, roll_2025 means Bihar's names removed in both phases per 100 on the 2025 roll, and fall means the fall in the roll to the draft (West Bengal from the 2024 roll, Kerala from the January 2025 roll).",
+  "nfhs5_district": "The district as the National Family Health Survey 2019-21 published it, which is the unit each row adds up.",
+  "districts_today": "The present districts counted under it, separated by a semicolon character. A district made after the survey is counted under the one it was made from.",
+  "roll_before": "Electors on the roll the count is measured against, summed over the districts, as a count.",
+  "count": "Names left off, or the fall in the roll, summed over the districts, as a count.",
+  "per_100": "count per 100 electors on roll_before.",
+  "women_literate": "Women aged 15 to 49 who can read, as a percentage, NFHS-5 district fact sheet indicator 14.",
+  "women_10yr": "Women aged 15 to 49 with ten or more years of schooling, as a percentage, NFHS-5 indicator 15.",
+  "married_18": "Women aged 20 to 24 married before age 18, as a percentage, NFHS-5 indicator 16.",
+  "clean_fuel": "Households using clean fuel for cooking, as a percentage, NFHS-5 indicator 10.",
+  "sanitation": "Population living in households that use an improved sanitation facility, as a percentage, NFHS-5 indicator 9.",
+  "death_reg": "Deaths in the three years before the survey that were registered with the civil authority, as a percentage, NFHS-5 indicator 6.",
+  "sex_ratio": "Females per 1,000 males in the whole population, NFHS-5 indicator 3."
+ },
  "data/india/women.csv": {
   "level": "Whether the row is a whole state or one district.",
   "state": "The state.",

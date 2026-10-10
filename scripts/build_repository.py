@@ -47,6 +47,8 @@ PUBLISHED = {
                               'A city is a set of districts, drawn differently from city to city. Kolkata and Kochi are measured by the fall in the roll.'),
     'data/india/urban.csv': ('Rural, mixed and urban districts inside each state', 'district (2011)',
                              'Urban shares are from the 2011 census. Each state is measured in its own way.'),
+    'data/india/factors.csv': ('District circumstances from NFHS-5 beside the rate, inside each state', 'NFHS-5 district',
+                               'Survey figures are for 2019-21, from a published compilation of the district fact sheets. Each state is measured in its own way.'),
     'data/india/reserved.csv': ('Seats reserved for Scheduled Castes and Scheduled Tribes against general seats', 'state and category',
                                 'A reserved seat describes a place. It says nothing about the caste of the electors removed.'),
     'data/india/border.csv': ('Districts on the international border against the interior', 'state and part',
