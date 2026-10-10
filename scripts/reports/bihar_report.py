@@ -46,6 +46,9 @@ mAll = sum(a['margin2025'] for a in withM)
 mNDA = sum(a['margin2025'] for a in nda)
 share = lambda a: 100 * a['total'] / a['votes2025']
 ratio = lambda a: a['total'] / a['margin2025']
+# a multiple to one decimal, except just under 1, cut to two (0.99×), so a
+# seat below its margin never reads 1.0×
+times = lambda x: ('%.2f×' % (int(x * 100) / 100)) if 0.95 <= x < 1 else '%.1f×' % x
 fem = 100 * t['female'] / (t['female'] + t['male'])
 per100 = 100 * t['total'] / t['electorate_2025']
 cls = t['hindu'] + t['muslim'] + t['unknown']
@@ -98,9 +101,10 @@ R.stats([(indian(t['total']), 'names removed, both phases'), (pct(100 * t['total
 R.p('The Special Intensive Revision, a fresh check of every name on the electoral roll, removed %s names from Bihar\'s roll in 2025. '
     '%s came off before the draft roll of 1 August, the first published version of the revised roll, and this report calls that phase 1. '
     '%s more came off before the final roll of 30 September, published after the hearing of claims and objections, and this report calls that phase 2. '
-    'The total comes to %s names for every 100 electors on the final roll, across %s polling booths in %d constituencies. '
+    'The total comes to %s names for every 100 electors on the 2025 roll, across %s polling booths in %d constituencies. '
+    'These totals count women and men, and the phase 1 lists also remove %s third-gender electors. '
     'In the Assembly election that followed in November, %s votes were polled. The names removed equal %s of them, one for every %.1f votes cast.'
-    % (indian(t['total']), indian(t['p1']), indian(t['p2']), '%.2f' % per100, indian(t['booths']), len(A), indian(polled),
+    % (indian(t['total']), indian(t['p1']), indian(t['p2']), '%.2f' % per100, indian(t['booths']), len(A), indian(t['p1_booths'] - t['p1']), indian(polled),
        pct(100 * t['total'] / polled), polled / t['total']))
 R.p('A seat\'s winning margin is the number of votes by which its winner beat the runner-up. The removals are larger than the winning margin in %d of %d constituencies. They exceed the combined winning margin of all %d seats, %s, by a factor of %.2f, '
     'and they exceed the combined winning margin of the NDA across the %d seats it won, %s. In %d of the %d seats the NDA took from INDIA, more names were removed than the NDA won by.'
@@ -122,7 +126,7 @@ R.p('Each constituency\'s removals are compared with two figures from the Novemb
 R.stats([('%d of %d' % (len(over), len(withM)), 'seats where removals exceed the margin'), ('%d' % sum(ratio(a) >= 5 for a in withM), 'seats where removals are five times the margin or more'),
          ('%d' % sum(share(a) > 15 for a in A), 'seats where removals exceed 15% of votes polled'), (indian(min(a['margin2025'] for a in withM)), 'smallest margin (%s)' % min(withM, key=lambda a: a['margin2025'])['name'])])
 fig, ax = plt.subplots(figsize=(8, 3.2))
-cuts, labs = [0, 1, 2, 5, 10, 20, 1e9], ['under 1×', '1–2×', '2–5×', '5–10×', '10–20×', '20× or more']
+cuts, labs = [0, 1, 2, 5, 10, 20, 1e9], ['under 1×', '1-2×', '2-5×', '5-10×', '10-20×', '20× or more']
 vals = [sum(cuts[i] <= ratio(a) < cuts[i + 1] for a in withM) for i in range(6)]
 ax.bar(labs, vals, color=[C['grey']] + [C['red']] * 5)
 for i, v in enumerate(vals):
@@ -133,7 +137,7 @@ R.figure(fig, 'Figure 1. Constituencies by names removed ÷ 2025 winning margin.
 top = sorted(withM, key=lambda a: -ratio(a))[:25]
 R.table(['Constituency', 'District', 'Won by', 'Margin', 'Names removed', 'Removed − margin', '× margin', '% of votes polled'],
         [['%d %s' % (a['ac'], a['name']), a['district'], '%s (%s)' % (a['win2025'], a['al2025']), indian(a['margin2025']), indian(a['total']),
-          '+' + indian(a['total'] - a['margin2025']), '%.1f×' % ratio(a), pct(share(a))] for a in top],
+          '+' + indian(a['total'] - a['margin2025']), times(ratio(a)), pct(share(a))] for a in top],
         widths=[3.1, 2.4, 2.6, 1.6, 1.9, 2.1, 1.5, 1.8], right={3, 4, 5, 6, 7}, size=7.5)
 R.p('The 25 constituencies where the removals were largest against the margin. Sandesh was won by %s votes and lost %s names.' % (indian(top[0]['margin2025']), indian(top[0]['total'])), italic=True, size=8.5)
 fig, ax = plt.subplots(figsize=(8, 5.2))
@@ -174,7 +178,7 @@ c = IM['comp_booth_all']
 R.p('The lists do not say how the removed would have voted. Going by how their own polling booths voted in 2024, in the %d seats the two alliances fought each other, those who would have voted lean %s NDA, %s INDIA and %s other parties. '
     'On that reading %d seats would have changed hands counting only the names still off the final roll (%s), and %d counting every name removed (%s).'
     % (IM['seats_nda_vs_india'], pct(c['NDA']), pct(c['INDIA']), pct(c['Other']), IS['booth_lower']['flips'], seatlist('booth_lower'), IS['booth_upper']['flips'], seatlist('booth_upper')))
-R.p('Weighting instead by how Muslims and others, or women and men, voted in the %s, %d and %d seats change hands on the high count (%s; %s). On every estimate the NDA keeps between %d and %d of the 243 seats.'
+R.p('Weighting instead by how Muslims and others, or women and men, voted in the %s, %d and %d seats change hands on the high count (%s on religion, and %s on sex). On every estimate the NDA keeps between %d and %d of the 243 seats.'
     % (IM['poll_source'], IS['religion_upper']['flips'], IS['sex_upper']['flips'], seatlist('religion_upper'), seatlist('sex_upper'), min(kept), max(kept)))
 out = [x for x in IM['seats'] if not x['modelled'] and x['breakeven_lower'] < 55]
 if out:
@@ -183,7 +187,7 @@ if out:
 rows = sorted([x for x in IM['seats'] if x['breakeven_lower'] < 65], key=lambda x: x['breakeven_lower'])
 R.table(['Constituency', 'Winner / runner-up', 'Margin', 'Removed who would have voted', 'Share the runner-up needed', 'Booth estimate, net to runner-up'],
         [['%d %s' % (x['ac'], x['name']), '%s / %s' % (x['winner'], x['runner_up']), indian(x['margin']), indian(x['voters_lower']), pct(x['breakeven_lower']),
-          '–' if x['booth_lower'] is None else indian(x['booth_lower'])] for x in rows],
+          '' if x['booth_lower'] is None else indian(x['booth_lower'])] for x in rows],
         widths=[3.2, 3.0, 1.6, 2.6, 2.4, 2.6], right={2, 3, 4, 5}, size=7.5)
 R.p('Each estimate assumes something the lists cannot show. People marked shifted may vote where they now live, people who moved may vote less than their neighbours, and an exit poll carries its own error. None of it can say whether any removal was right.', italic=True, size=8.5)
 
@@ -192,7 +196,7 @@ R.h2('Did the vote move where more names were removed?')
 R.p('Between the 2020 and 2025 Assembly elections the NDA parties gained votes across Bihar. If the removals had taken away more of INDIA\'s voters than the NDA\'s, INDIA\'s share should have fallen most where the most names came off the roll. '
     'The candidate-wise results for both elections were counted with the parties grouped as they stood in 2025: BJP, JD(U), LJP(RV), HAM(S) and RLM for the NDA, and RJD, Congress, the three Left parties, VIP and IIP for INDIA.')
 R.table(['Seats', 'Number', 'Removed per 100, average', 'Change in NDA share, points', 'Change in INDIA share, points', 'Change in NDA lead, allowing for 2020', 'Growth in votes cast'],
-        [[n, str(x['n']), '%.1f (%.1f–%.1f)' % (x['per_100'], x['lo'], x['hi']), sg(x['d_nda']), sg(x['d_india']), sg(x['d_lead_adj']), sg(x['votes_growth']) + '%']
+        [[n, str(x['n']), '%.1f (%.1f to %.1f)' % (x['per_100'], x['lo'], x['hi']), sg(x['d_nda']), sg(x['d_india']), sg(x['d_lead_adj']), sg(x['votes_growth']) + '%']
          for n, x in zip(['Fewest removals', 'Middle', 'Most removals'], SW['thirds'])],
         widths=[2.6, 1.2, 2.8, 2.3, 2.3, 2.5, 2.1], right={1, 2, 3, 4, 5, 6}, size=8)
 T, w, w0 = SW['thirds'], SW['within']['lead_adj'], SW['within']['lead']
@@ -348,7 +352,7 @@ ax.set_ylabel('Booths', fontsize=8)
 style_axes(ax, 'How many names each booth lost')
 R.figure(fig, 'Figure 9. Booths by the number of names removed.')
 R.p('The typical booth lost %d names. %s booths lost 200 or more each, and %d lost 400 or more. A booth serves on average about %d electors, so 200 removals is a fifth of a booth\'s roll.'
-    % (st.median(a['booth_median'] for a in A), indian(b200), S['booth_histogram']['400+'], round(t['electorate_2025'] / t['booths'])))
+    % (t['booth_median'], indian(t['booths_200']), t['booths_400'], round(t['electorate_2025'] / t['booths'])))
 
 R.h2('Border districts')
 borders = defaultdict(list)
@@ -371,7 +375,7 @@ R.p('Seats the NDA won in 2020 lost %.2f names per 100 electors, and seats INDIA
 
 R.h2('Main findings')
 R.bullets([
-    '%s names were removed, %s per 100 electors on the final roll, across %s booths.' % (indian(t['total']), '%.2f' % per100, indian(t['booths'])),
+    '%s names were removed, %s per 100 electors on the 2025 roll, across %s booths.' % (indian(t['total']), '%.2f' % per100, indian(t['booths'])),
     'The names removed equal %s of the votes polled in the November 2025 election, one for every %.1f votes cast.' % (pct(100 * t['total'] / polled), polled / t['total']),
     'The removals were larger than the winning margin in %d of %d seats, five times the margin or more in %d, and ten times or more in %d.' % (len(over), len(withM), sum(ratio(a) >= 5 for a in withM), sum(ratio(a) >= 10 for a in withM)),
     'They were larger than the NDA\'s combined winning margin in its %d wins (%s against %s).' % (len(nda), lakh(t['total']), lakh(mNDA)),
@@ -438,7 +442,7 @@ for d in rankD:
         % (indian(dsum(rd)), pct(100 * rd['shifted'] / dsum(rd)), pct(100 * rd['dead'] / dsum(rd)), pct(100 * rd['absent'] / dsum(rd)), pct(100 * rd['already_enrolled'] / dsum(rd))))
     R.table(['Constituency', 'Removed', 'Per 100', 'Women %', 'Won by (2025)', 'Margin', '× margin', '% polled'],
             [['%d %s' % (a['ac'], a['name']), indian(a['total']), '%.2f' % a['per_100'], pct(100 * a['t_f'] / (a['t_f'] + a['t_m'])),
-              '%s (%s)' % (a['win2025'], a['al2025']), indian(a['margin2025']), '%.1f×' % ratio(a), pct(share(a))] for a in rows],
+              '%s (%s)' % (a['win2025'], a['al2025']), indian(a['margin2025']), times(ratio(a)), pct(share(a))] for a in rows],
             widths=[3.4, 1.8, 1.5, 1.6, 2.8, 1.7, 1.6, 1.6], right={1, 2, 3, 5, 6, 7}, size=7.5)
 
 # ============================================================ CONCLUSION

@@ -194,7 +194,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     SIR.table(document.getElementById('tFlip'), [
       { k: 'band', label: L('Seats INDIA held in 2020'), left: true },
       { k: 'seats', label: L('Seats') },
-      { k: 'per', label: L('Removed per 100, average'), fmt: function (v, r) { return SIR.d(v, 1) + ' (' + SIR.d(r.lo, 1) + '–' + SIR.d(r.hi, 1) + ')'; } },
+      { k: 'per', label: L('Removed per 100, average'), fmt: function (v, r) { return L('{v} ({lo} to {hi})', { v: SIR.d(v, 1), lo: SIR.d(r.lo, 1), hi: SIR.d(r.hi, 1) }); } },
       { k: 'nda', label: L('Won by the NDA in 2025') },
       { k: 'share', label: L('Share won by the NDA'), fmt: function (v) { return SIR.pct(v); } }
     ], rows, { sort: 'k', dir: 1 });
@@ -203,7 +203,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
       lo: SIR.pct(rows[0].share), hi: SIR.pct(rows[2].share), d: SIR.d(Math.abs(d), 0), k: Math.round(Math.abs(p3 - p1) * rows[2].seats) }) + ' ' +
       (Math.abs(d) < 2 * 100 * se ? L('Groups of this size differ by that much by chance often, so the table shows no clear link between removals and seats changing hands.') : L('That is more than groups of this size would usually differ by chance.')) + ' ' +
       (rows[0].share > 50 ? L('Even where removals were lowest, the NDA took most of the seats INDIA held, which shows how large the swing across the state was.') + ' ' : '') +
-      L('Inside each seat, the booths show the removals falling more on NDA ground. <a href="#within">Booths within the same seat</a>.');
+      L('Inside the same seat, booths that voted NDA in 2024 lost more names on average. <a href="#within">Booths within the same seat</a>.');
   })();
 
   var w = s.within_seat_2024;
@@ -237,7 +237,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     return '<tr><th scope="row" class="l">' + L('{al} in 2020', { al: tag(a0) }) + '</th>' + als.map(function (a1) {
       var cell = acs.filter(function (a) { return a.al2020 === a0 && a.al2025 === a1; });
       if (a0 !== a1) flipped += cell.length;
-      return '<td>' + (cell.length ? (cell.length === 1 ? L('{n} seat', { n: cell.length }) : L('{n} seats', { n: cell.length })) + '<br><span class="pill">' + L('{rate} per 100', { rate: SIR.d(rate(cell), 2) }) + '</span>' : '–') + '</td>';
+      return '<td>' + (cell.length ? (cell.length === 1 ? L('{n} seat', { n: cell.length }) : L('{n} seats', { n: cell.length })) + '<br><span class="pill">' + L('{rate} per 100', { rate: SIR.d(rate(cell), 2) }) + '</span>' : '') + '</td>';
     }).join('') + '</tr>';
   }).join('');
   document.getElementById('tFlow').innerHTML = head + body + '</tbody>';
@@ -253,11 +253,11 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var overBy = SIR.groupBy(over, 'al2025');
   document.getElementById('fMargin').innerHTML = (function () {
     var took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; }), tookOver = took.filter(function (a) { return a.total > a.margin2025; });
-    return L('<b>In {over} of {seats} seats the revision removed more names than the 2025 winning margin.</b> Of those, {list}. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {tookOver} lost more names than the NDA won by. In the middle seat of that group the removals were {x} times the margin. Across all 243, the typical seat lost {medRemoved} names, and the typical 2025 margin was {medMargin} votes.', { over: over.length, seats: withM.length, list: als.map(function (al) { return L('{n} went to {al}', { n: (overBy[al] || []).length, al: al }); }).join(', '), took: took.length, tookOver: tookOver.length, x: SIR.d(SIR.median(took.map(function (a) { return a.total / a.margin2025; })), 1), medRemoved: SIR.n(SIR.median(withM.map(function (a) { return a.total; }))), medMargin: SIR.n(SIR.median(withM.map(function (a) { return a.margin2025; }))) });
+    return L('<b>In {over} of {seats} seats the revision removed more names than the 2025 winning margin.</b> Of those, the NDA won {nda}, INDIA {india} and other parties {other}. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {tookOver} lost more names than the NDA won by. In the middle seat of that group the removals were {x} times the margin. Across all {seats}, the typical seat lost {medRemoved} names, and the typical 2025 margin was {medMargin} votes.', { over: over.length, seats: withM.length, nda: (overBy.NDA || []).length, india: (overBy.INDIA || []).length, other: (overBy.Other || []).length, took: took.length, tookOver: tookOver.length, x: SIR.d(SIR.median(took.map(function (a) { return a.total / a.margin2025; })), 1), medRemoved: SIR.n(SIR.median(withM.map(function (a) { return a.total; }))), medMargin: SIR.n(SIR.median(withM.map(function (a) { return a.margin2025; }))) });
   })();
   SIR.table(document.getElementById('tMargin'), [
     { k: 'name', label: L('Constituency'), left: true, fmt: function (v, r) { return SIR.esc(r.ac + ' ' + v); } }, { k: 'win2025', label: L('2025 winner'), left: true, fmt: function (v, r) { return tag(r.al2025) + ' ' + SIR.esc(v); } },
-    { k: 'margin2025', label: L('Margin'), fmt: SIR.n }, { k: 'total', label: L('Removed'), fmt: SIR.n }, { k: 'ratio', label: L('Removed / margin'), fmt: function (v) { return SIR.d(v, 1) + '×'; } }
+    { k: 'margin2025', label: L('Margin'), fmt: SIR.n }, { k: 'total', label: L('Removed'), fmt: SIR.n }, { k: 'ratio', label: L('Removed / margin'), fmt: SIR.times }
   ], over.map(function (a) { a.ratio = a.total / a.margin2025; return a; }), { sort: 'ratio', limit: 40 });
   return SIR.json('data/bihar/final.json').then(function (F) {
     var T = F.totals, M = F.margin, fs = F.seats.filter(function (a) { return a.margin2025; });
@@ -267,16 +267,16 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
         { label: L('Removed at the draft exceed the margin'), data: als.map(function (al) { return (overBy[al] || []).length; }), $token: '--fill-amber' },
         { label: L('Net fall at the final roll exceeds the margin'), data: als.map(function (al) { return M.net_by_alliance[al] || 0; }), $token: '--fill-navy' }] },
       options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('Seats') } } } } });
-    document.getElementById('fNet').innerHTML = L('<b>The final roll was {nf} names smaller than the roll before the revision, and smaller in every one of the {n} seats.</b> After the draft, {a} names were added on claims and {r} removed on objections, a net rise of {na}, or {m} of the {p1} names removed at the draft. New electors are part of that rise, and the Election Commission has not said how many of those added had been removed at the draft. <b>In {net} of {seats} seats the fall that remained at the final roll was still larger than the 2025 winning margin</b>, compared with {tot} seats when only the draft removals are counted. Of those {net}, {list}.', {
+    document.getElementById('fNet').innerHTML = L('<b>The final roll was {nf} names smaller than the roll before the revision, and smaller in every one of the {n} seats.</b> After the draft, {a} names were added on claims and {r} removed on objections, a net rise of {na}, or {m} of the {p1} names removed at the draft. New electors are part of that rise, and the Election Commission has not said how many of those added had been removed at the draft. <b>In {net} of {seats} seats the fall that remained at the final roll was still larger than the 2025 winning margin</b>, compared with {tot} seats when only the draft removals are counted. Of those {net}, the NDA won {nda}, INDIA {india} and other parties {other}.', {
       nf: SIR.lakh(T.net_fall_press), n: F.seats.length, a: SIR.lakh(T.added), r: SIR.lakh(T.removed_after), na: SIR.lakh(T.net_after), m: SIR.pct(T.made_up_pct), p1: SIR.lakh(T.p1),
-      net: M.net, seats: M.seats, tot: M.total, list: als.map(function (al) { return L('{n} went to {al}', { n: (nob[al] || []).length, al: al }); }).join(', ') });
+      net: M.net, seats: M.seats, tot: M.total, nda: (nob.NDA || []).length, india: (nob.INDIA || []).length, other: (nob.Other || []).length });
     document.getElementById('fNetW').innerHTML = L('<b>Women were {wp1} of the names removed at the draft and {wadd} of those added after it</b>, so their share of the roll fell from {wb} before the revision to {wf} on the final roll. Of the {ra} names removed after the draft, {rd} were entered as dead, {rs} as shifted and {rr} as repeated, and {ru} have no reason at all.', {
       wp1: SIR.pct(T.women_share_p1), wadd: SIR.pct(T.women_share_added), wb: SIR.pct(T.women_share_before), wf: SIR.pct(T.women_share_final),
       ra: SIR.n(T.removed_after), rd: SIR.n(T.r_expired), rs: SIR.n(T.r_shifted), rr: SIR.n(T.r_repeated), ru: SIR.n(T.r_unstated) });
     SIR.table(document.getElementById('tNet'), [
       { k: 'name', label: L('Constituency'), left: true, fmt: function (v, r) { return SIR.esc(r.ac + ' ' + v); } }, { k: 'win2025', label: L('2025 winner'), left: true, fmt: function (v, r) { return tag(r.al2025) + ' ' + SIR.esc(v); } },
       { k: 'margin2025', label: L('Margin'), fmt: SIR.n }, { k: 'p1', label: L('Removed at the draft'), fmt: SIR.n }, { k: 'net_after', label: L('Final less draft'), fmt: SIR.n },
-      { k: 'net_fall', label: L('Net fall'), fmt: SIR.n }, { k: 'ratio', label: L('Net fall / margin'), fmt: function (v) { return SIR.d(v, 1) + '×'; } }
+      { k: 'net_fall', label: L('Net fall'), fmt: SIR.n }, { k: 'ratio', label: L('Net fall / margin'), fmt: SIR.times }
     ], netOver.map(function (a) { a.ratio = a.net_fall / a.margin2025; return a; }), { sort: 'ratio', limit: 40 });
   });
 }).catch(SIR.fail);
@@ -289,7 +289,7 @@ SIR.json('data/bihar/swing.json').then(function (W) {
   SIR.table(document.getElementById('tSwing'), [
     { k: 'band', label: L('Seats'), left: true },
     { k: 'n', label: L('Number') },
-    { k: 'per_100', label: L('Removed per 100, average'), fmt: function (v, r) { return SIR.d(v, 1) + ' (' + SIR.d(r.lo, 1) + '–' + SIR.d(r.hi, 1) + ')'; } },
+    { k: 'per_100', label: L('Removed per 100, average'), fmt: function (v, r) { return L('{v} ({lo} to {hi})', { v: SIR.d(v, 1), lo: SIR.d(r.lo, 1), hi: SIR.d(r.hi, 1) }); } },
     { k: 'd_nda', label: L('Change in NDA share, points'), fmt: sg },
     { k: 'd_india', label: L('Change in INDIA share, points'), fmt: sg },
     { k: 'd_lead_adj', label: L('Change in NDA lead, allowing for 2020'), fmt: sg },
@@ -369,7 +369,7 @@ SIR.json('data/bihar/impact.json').then(function (I) {
     { k: 'margin', label: L('Margin'), fmt: SIR.n },
     { k: 'voters_lower', label: L('Removed who would have voted'), fmt: SIR.n },
     { k: 'breakeven_lower', label: L('Share the runner-up needed'), fmt: function (v) { return SIR.pct(v); } },
-    { k: 'booth_lower', label: L('Booth estimate, net to runner-up'), fmt: function (v) { return v == null ? '–' : SIR.n(v); } }
+    { k: 'booth_lower', label: L('Booth estimate, net to runner-up'), fmt: function (v) { return v == null ? '' : SIR.n(v); } }
   ], rows, { sort: 'breakeven_lower', dir: 1, limit: 40 });
 }).catch(SIR.fail);
 </script>
