@@ -204,6 +204,7 @@ SIR.json('data/india/process.json').then(function (P) {
       rows.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.s) + '</th><td>' + r.per.toFixed(1) + '</td><td>' + N(r.rm) + '</td><td>' + N(r.ad) + '</td><td>' + N(r.ra) + '</td></tr>'; }).join('') + '</tbody>';
     var low = rows.filter(function (r) { return r.per < 10; }).length;
     fill.claims_states = rows.length; fill.claims_fewer = rows.filter(function (r) { return r.per < 100; }).length; fill.claims_under10 = low;
+    fill.claims_lead = fill.claims_fewer === fill.claims_states ? 'All ' + fill.claims_states + ' states that published both counts' : fill.claims_fewer + ' of the ' + fill.claims_states + ' states that published both counts';
     drawBurdens();
     document.getElementById('nClaims').innerHTML = 'In ' + low + ' of these ' + rows.length + ' states and union territories, fewer than 10 names were added after the draft for every 100 removed at it. ' + E(P.claims_note) + ' The other states published only the net change from draft to final, or no final roll yet, and are on the <a href="../">All India page</a>.' + srcs(P.claims_src);
     SIR.tools();

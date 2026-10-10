@@ -113,6 +113,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/process.js
   var claims = I.states.filter(function (s) { return s.removed && s.added_after_draft != null; });
   fill.claims_states = claims.length;
   fill.claims_fewer = claims.filter(function (s) { return s.added_after_draft < s.removed; }).length;
+  fill.claims_lead = fill.claims_fewer === fill.claims_states ? 'All ' + fill.claims_states + ' states that published both counts' : fill.claims_fewer + ' of the ' + fill.claims_states + ' states that published both counts';
   fill.claims_under10 = claims.filter(function (s) { return 100 * s.added_after_draft / s.removed < 10; }).length;
   var docs = P.burdens.map(function (b) {
     return '<li><b>' + esc(b.title) + '.</b> ' + esc(b.text.replace(/\{(\w+)\}/g, function (m, k) { return fill[k]; })) + ' ' + b.src.map(function (s) { return '<a href="' + esc(s.url) + '" rel="noopener">' + esc(s.name) + '</a>'; }).join(', ') + '.</li>';

@@ -861,6 +861,7 @@ function india() {
     const cl = S.filter((x) => x.removed && x.added_after_draft != null);
     const fill = { p2_states: phs('II').length, p2_again: phs('II').filter((r) => moves(r) > 1).length, p3_states: phs('III').length, p3_moved: phs('III').filter((r) => moves(r) > 0).length,
       claims_states: cl.length, claims_fewer: cl.filter((x) => x.added_after_draft < x.removed).length, claims_under10: cl.filter((x) => 100 * x.added_after_draft / x.removed < 10).length };
+    fill.claims_lead = fill.claims_fewer === fill.claims_states ? 'All ' + fill.claims_states + ' states that published both counts' : fill.claims_fewer + ' of the ' + fill.claims_states + ' states that published both counts';
     K.bullets(s, PR.burdens.map((b) => b.title + '. ' + b.text.replace(/\{(\w+)\}/g, (m, k) => fill[k]).split('. ')[0] + '.'), M, TOP - 0.2, W - 2 * M, CH, 13);
     s.addNotes(PR.timeline.filter((t) => t.who === 'sc').length + ' of the ' + PR.timeline.length + ' entries are Supreme Court orders or its judgment. The site also lists ' + PR.reported.length + ' press reports of problems, each attributed and kept apart because no document confirms them.');
   }

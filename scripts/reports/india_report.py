@@ -362,6 +362,8 @@ _fill = {'p2_states': len(_ph['II']), 'p2_again': len([r for r in _ph['II'] if m
 _cl = [s for s in S if s['removed'] and s['added_after_draft'] is not None]
 _fill.update({'claims_states': len(_cl), 'claims_fewer': len([s for s in _cl if s['added_after_draft'] < s['removed']]),
               'claims_under10': len([s for s in _cl if 100 * s['added_after_draft'] / s['removed'] < 10])})
+_fill['claims_lead'] = ('All %d states that published both counts' % _fill['claims_states'] if _fill['claims_fewer'] == _fill['claims_states']
+                       else '%d of the %d states that published both counts' % (_fill['claims_fewer'], _fill['claims_states']))
 R.numbered(['%s. %s' % (b['title'], re.sub(r'\{(\w+)\}', lambda m: str(_fill[m.group(1)]), b['text'])) for b in PR['burdens']])
 R.p('The page also lists %d press reports of problems in the field, each attributed to its outlet and kept apart from the points above because no document confirms them.' % len(PR['reported']), italic=True)
 
