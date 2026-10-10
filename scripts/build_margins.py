@@ -61,11 +61,11 @@ ASM = [
     ('Puducherry', '2026', 'puducherry_2026.csv', 'c'), ('Punjab', '2022', 'punjab_2022.csv', 'c'),
     ('Sikkim', '2024', 'sikkim_2024.csv', 'c'), ('Telangana', '2023', 'telangana_2023.csv', 'e'),
     ('Uttarakhand', '2022', 'uttarakhand_2022.csv', 'c'),
-    ('Manipur', '2022', 'manipur_2022.csv', 'c'), ('Meghalaya', '2023', 'meghalaya_2023.csv', 'c'),
-    ('Nagaland', '2023', 'nagaland_2023.csv', 'c'), ('Mizoram', '2023', 'mizoram_2023.csv', 'c'),
-    ('Uttar Pradesh', '2022', 'uttarpradesh_2022.csv', 'c'),
+    ('Manipur', '2022', 'manipur_2022.csv', 'f'), ('Meghalaya', '2023', 'meghalaya_2023.csv', 'f'),
+    ('Nagaland', '2023', 'nagaland_2023.csv', 'c'), ('Mizoram', '2023', 'mizoram_2023.csv', 'e'),
+    ('Uttar Pradesh', '2022', 'uttarpradesh_2022.csv', 'e'),
 ]
-SRC = {'e': "the Election Commission's statistical report", 'c': "a published compilation of the Election Commission's results, checked seat by seat against a second"}
+SRC = {'e': "the Election Commission's statistical report", 'f': "the Chief Electoral Officer's Form 20", 'c': "a published compilation of the Election Commission's results, checked seat by seat against a second"}
 # states with constituency pages of their own: (state, election, file, weight, actual count or None)
 OWN = [
     ('Bihar', '2025', ('bihar', 'final.json'), 'before', 'total'), ('Tamil Nadu', '2026', ('tamilnadu', 'constituencies.json'), 'before', 'removed'),
