@@ -31,7 +31,7 @@
         [L('Why is Patna not ranked with the other cities?'),
          L('Bihar published its roll before the revision for the state only, so its rate is counted against the 2025 roll, a different base from the other cities\'. On that count Patna lost fewer names than Bihar as a whole.'), ['cities', 'faq']],
         [L('Why were more women removed than men?'),
-         L('The lists do not say. They record what happened to each entry and nothing about why. In Bihar, the one state whose lists were counted name by name, more women were entered as dead than the death rates for women would predict, and marriage does not explain where young women were marked as shifted.'), ['women', 'faq']],
+         L('The lists do not say. They record what happened to each entry and nothing about why. In Bihar, the one state whose lists were counted name by name, women were a larger share of those entered as dead than of the state\'s adult deaths, and marriage does not explain where young women were marked as shifted.'), ['women', 'faq']],
         [L('Which states published the removals by sex?'),
          L('{n} states and union territories, listed at the foot of the women page with a note on how good each figure is. The others published totals only, so nothing can be said about women there.', { n: GG.length }), ['women', 'faq']],
         [L('Why is Delhi different?'),

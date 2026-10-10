@@ -375,7 +375,7 @@ def tamilnadu(R):
     R.h2('After the draft')
     F.add(F.slope([(d['district'], d['per_100'], d['net_per_100'], d['district'] == 'Chennai', 0 < i < 4) for i, d in enumerate(D)],
                   'Removed at the draft and the fall that remains at the final roll', 'At the draft', 'At the final roll', 'Per 100 electors on the roll before the revision'),
-          'Each line is a district. The flatter the line, the less was made up. Chennai in red.', width=12)
+          'Each line is a district. The flatter the line, the less the roll grew back after the draft. Chennai in red.', width=12)
     R.p('The final roll is %s larger than the draft, and still %s smaller than the roll before the revision, a fall of %s of every 100 electors. The rise from the draft is at most %s of the names removed, and it includes new voters. '
         'Chennai\'s roll is %s per 100 smaller than before.' % (lakh(S['added_net']), lakh(S['net_fall']), d1(S['net_per_100']), pct(S['made_up_pct']), d1(C['net_per_100'])))
 

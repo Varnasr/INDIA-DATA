@@ -258,7 +258,7 @@ R.p('What the Election Commission should do before the final roll:')
 R.numbered([
     'Record and publish the basis for every removal entered as "untraceable or absent", %s names in all, including the visits made and the notice given.' % indian(s(lambda a: a['reasons']['Untraceable/Absent'])),
     'Publish how removals of electors with no link to the 2002 roll were decided, since the link is the revision\'s own test and the gap it produces is the largest in the files.',
-    'Schedule hearings so that each case can be heard. Some slots listed several hundred cases.',
+    'Give each elector served a notice enough time to be heard, online or in person. Some slots in the September lists carried several hundred cases.',
     'Explain the removals in the %d parts that lost more than 60%% of their roll.' % len(o60),
     'Publish restorations after hearings, part by part, so that the final count can be set against these lists.',
 ])

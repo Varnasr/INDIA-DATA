@@ -154,7 +154,7 @@ ASOF_EN = {
 def asof_html(a):
     if not a:
         return ''
-    fmt = lambda iso: '%d %s %s' % (int(iso[8:]), 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split()[int(iso[5:7]) - 1], iso[:4]) if iso else ''
+    fmt = lambda iso: '%d %s %s' % (int(iso[8:]), 'January February March April May June July August September October November December'.split()[int(iso[5:7]) - 1], iso[:4]) if iso else ''
     if a['k'] not in ASOF_EN:
         raise SystemExit('FAIL - no sentence for the roll stage %r' % a['k'])
     text = ASOF_EN[a['k']].format(d=fmt(a.get('d')), n=fmt(a.get('n')))
