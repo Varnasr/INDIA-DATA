@@ -75,6 +75,9 @@ FIGURES = {
 }
 
 
+MONTHS = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
+
+
 def main():
     raw = json.load(open(os.path.join(RAW, 'nrc.json'), encoding='utf-8'))
     ver = {x['id']: x for x in json.load(open(os.path.join(RAW, 'verified.json'), encoding='utf-8'))['verified']}
@@ -86,6 +89,8 @@ def main():
         if v['status'] not in ('confirmed', 'corrected'):
             continue
         claim = PLAIN.get(f['id']) or v.get('corrected_claim') or f['claim']
+        # an ISO date in a claim is written out, as in the rest of the site's prose
+        claim = re.sub(r'\b(\d{4})-(\d\d)-(\d\d)\b', lambda m: '%d %s %s' % (int(m.group(3)), MONTHS[int(m.group(2)) - 1], m.group(1)), claim)
         quote = v.get('corrected_quote') or f['quote']
         if re.search(r'\s[—–]\s|—', claim):
             raise SystemExit('FAIL - %s carries a dash' % f['id'])

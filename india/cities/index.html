@@ -131,7 +131,7 @@ SIR.json('data/india/cities.json').then(function (d) {
   var name = function (c) { return c.city + (c.reported ? ' (as reported)' : ''); };
 
   SIR.inShort([
-    (S.above_state === S.compared ? 'In all ' + S.compared + ' large cities measured by the names left off, the city lost a larger share of its roll than its state did, between ' : 'In ' + S.above_state + ' of ' + S.compared + ' large cities measured by the names left off, the city lost a larger share of its roll than its state did. The city\'s rate ran from ') + p1(S.times_min) + (S.above_state === S.compared ? ' and ' : ' to ') + p1(S.times_max) + ' times the state\'s rate.',
+    (S.above_state === S.compared ? 'In all ' + S.compared + ' large cities measured by the names left off that can be set against a state (Delhi is a city and a state at once), the city lost a larger share of its roll than its state did, between ' : 'In ' + S.above_state + ' of ' + S.compared + ' large cities measured by the names left off, the city lost a larger share of its roll than its state did. The city\'s rate ran from ') + p1(S.times_min) + (S.above_state === S.compared ? ' and ' : ' to ') + p1(S.times_max) + ' times the state\'s rate.',
     top.city + ' lost ' + p1(top.core.per_100) + ' of every 100 electors, the most of any city, against ' + p1(top.state_per_100) + ' in ' + top.state + '. Its districts held ' + p1(top.share_of_roll) + '% of the state\'s roll and ' + p1(top.share_of_removed) + '% of the names left off.',
     'The suburbs lost fewer names than the city itself in ' + (rings.length - ringUp.length) + ' of ' + rings.length + ' cities. ' + (ringUp.length ? ringUp.map(function (c) { return c.city; }).join(' and ') + (ringUp.length > 1 ? ' are' : ' is') + ' the exception. ' + ringUp.map(function (c) { return c.ring.districts.join(' and ') + ' lost ' + p1(c.ring.per_100) + ' per 100, against ' + p1(c.core.per_100) + ' in ' + c.city + ' itself.'; }).join(' ') : ''),
     'Where the reasons were published, ' + Math.round(shMin) + ' to ' + Math.round(shMax) + ' of every 100 names left off in a city were entered as shifted or absent.',
@@ -167,8 +167,16 @@ SIR.json('data/india/cities.json').then(function (d) {
              { name: 'Suburbs', col: '--fill-navy', vals: ranked.map(function (c) { return c.ring ? c.ring.per_100 : null; }) },
              { name: 'The city', col: '--fill-red', vals: ranked.map(function (c) { return c.core.per_100; }) }] });
   document.getElementById('nRing').textContent = 'Pune and Surat have no suburbs drawn, and Delhi has no rest of the state. Delhi\'s suburbs are measured on Uttar Pradesh\'s revision.';
-  document.getElementById('fRing').innerHTML = '<b>In ' + (rings.length - ringUp.length) + ' of ' + rings.length + ' cities with suburbs, the rate falls from the city to its suburbs and again to the rest of the state.</b> ' +
-    (ringUp.length ? ringUp.map(function (c) { return 'In ' + c.city + ' it does not, because ' + c.ring.districts.join(' and ') + ' lost ' + p1(c.ring.per_100) + ' per 100, more than the ' + p1(c.core.per_100) + ' in the city\'s own districts.'; }).join(' ') : '');
+  var and = function (a) { return a.join(', ').replace(/, ([^,]*)$/, ' and $1'); };
+  var withRest = rings.filter(function (c) { return c.rest; });
+  var noRest = rings.filter(function (c) { return !c.rest; });
+  var both = withRest.filter(function (c) { return c.ring.per_100 < c.core.per_100 && c.rest.per_100 < c.ring.per_100; });
+  var restUp = withRest.filter(function (c) { return c.ring.per_100 < c.core.per_100 && c.rest.per_100 >= c.ring.per_100; });
+  document.getElementById('fRing').innerHTML = '<b>In ' + (rings.length - ringUp.length) + ' of ' + rings.length + ' cities with suburbs, the suburbs lost fewer names than the city.</b> ' +
+    (ringUp.length ? ringUp.map(function (c) { return 'In ' + c.city + ' they lost more, because ' + c.ring.districts.join(' and ') + ' lost ' + p1(c.ring.per_100) + ' per 100, against ' + p1(c.core.per_100) + ' in the city\'s own districts.'; }).join(' ') + ' ' : '') +
+    'The rate falls at both steps, from the city to its suburbs and again to the rest of the state, in ' + both.length + ' of ' + withRest.length + ' cities, ' + and(both.map(function (c) { return c.city; })) + '.' +
+    (restUp.length ? ' In ' + and(restUp.map(function (c) { return c.city; })) + ' the rest of the state lost more than the suburbs.' : '') +
+    (noRest.length ? ' ' + and(noRest.map(function (c) { return c.city; })) + ' is left out of that count because it is a city and a state at once, so it has no rest of the state.' : '');
   SIR.table('tRing', [{ h: 'City' }, { h: 'City', num: true }, { h: 'Suburbs', num: true }, { h: 'Rest of the state', num: true }, { h: 'Times the state', num: true }, { h: 'Share of the roll', num: true }, { h: 'Share left off', num: true }],
     ranked.map(function (c) {
       return [link(c) + '<small>' + c.state + ', per 100</small>', p1(c.core.per_100), c.ring ? p1(c.ring.per_100) + (c.ring.state !== c.state ? ' <small>' + c.ring.state + '</small>' : '') : null, c.rest ? p1(c.rest.per_100) : null,

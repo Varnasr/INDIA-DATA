@@ -46,6 +46,9 @@ PLAIN = {
     2: "Reports the Election Commission's first response to the investigation. The Commission calls the 14 notes suggestions and says every decision was unanimous, and the paper sets out what the response does not address.",
     9: 'Checks booth-level results in high-deletion villages, the 28 close contests and late additions to the roll, and finds no anomaly that stands out. The NDA won exactly half the close contests.',
     11: "Runs four tests of West Bengal's deletions against the 2026 margins and swings. Net deletions exceeded the BJP's margin in 82 seats but exceeded the swing in margin in only 12 flipped seats, and the deletions under adjudication passed the two tests in 49 and 14 seats.",
+    14: "An economist's counterfactual. Even if every adjudicated deletion had voted for the runner-up, the BJP keeps a majority, and only under assumptions the data do not support do the wider deletions overturn it.",
+    15: 'An arithmetic test of sensitivity. Gross deletions exceeded the winning margin in 160 seats, and of two no-SIR scenarios one returns the TMC and the other leaves the BJP with a smaller majority. It does not model voter preference.',
+    18: 'Reports a Lokniti-CSDS survey across Delhi and five states. 52% of respondents had no birth certificate and 41% no domicile certificate, with sharp gaps between states.',
     20: 'Uses official records and interviews with election officials to argue that the West Bengal notices were produced in bulk by central software, and that registration officers did not review them one by one as the Commission told the Court.',
     25: "Draws on official deletion figures and an RTI reply on West Bengal appeals. Delhi's draft excluded 32.78% of electors, 91.13% of the decided West Bengal appeals restored the elector, and the public still cannot check the rolls.",
 }

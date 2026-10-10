@@ -13,7 +13,7 @@
   <p class="sub">Each of these rests on the Election Commission's own orders and letters, the Chief Electoral Officers' notes, or the Supreme Court's orders and judgments.</p>
   <ul class="plain" id="documented"></ul>
 
-  <h2>Reported, not established</h2>
+  <h2 id="reported-not-established">Reported in the press</h2>
   <p class="sub">These come from named press reports. The site has not seen the documents behind them, so they are the outlets' accounts, and the Commission's reply sits beside them where one was reported.</p>
   <ul class="plain" id="reported"></ul>
 
@@ -49,15 +49,15 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/process.js
 
   SIR.inShort([
     SIR.lk(T.removed) + ' names were left off the draft rolls of ' + T.states + ' states and union territories, ' + SIR.d(T.per_100, 1) + ' of every 100 electors.',
-    'Where final rolls are out, the rise after the draft makes up at most ' + SIR.d(F.made_up_pct, 1) + '% of the names left off, and that rise counts new voters too.',
+    'Taken together, the ' + F.states + ' final rolls made up at most ' + SIR.d(F.made_up_pct, 1) + '% of the names left off (' + SIR.d(F.made_up_pct_ex_withheld, 1) + '% without West Bengal\'s ' + SIR.lk(F.withheld, 0) + ' names held for adjudication), and that rise counts new voters too.',
     'Women were the larger share of the names left off in ' + W.over + ' of the ' + W.states + ' states that published a count by sex.',
     'In ' + M.removed.states.join(' and ') + ', more names were removed than the winning margin in ' + n(over) + ' of ' + n(seats) + ' assembly seats. That means the removals could have decided those seats. It does not show that they did.'
-  ], 'This page gathers what the rest of the site holds and adds the law on protest. It is general information, not legal advice, and nothing on it says what anyone intended.');
+  ], 'This page gathers what the rest of the site holds and adds the law on protest. It is general information and is not legal advice. Nothing on it says what anyone intended.');
 
   document.getElementById('happened').innerHTML = [
     'The Election Commission revised the electoral rolls of ' + T.states + ' states and union territories house by house, in three phases from June 2025. Every elector on the roll had to fill in and return a fresh form, and a name whose form did not come back was left off the draft roll.',
     SIR.lk(T.removed) + ' names were left off the drafts. The officers recorded ' + SIR.d(T.shares.shifted_absent_other, 1) + '% as shifted, absent or another reason, ' + SIR.d(T.shares.dead, 1) + '% as dead and ' + SIR.d(T.shares.duplicate, 1) + '% as enrolled more than once.',
-    'In the ' + F.states + ' states whose final rolls are out, the roll grew after the draft by at most ' + SIR.d(F.made_up_pct, 1) + '% of the names left off. That rise counts new electors as well as names put back, so the share put back is no larger and may be smaller.',
+    'Taken together, in the ' + F.states + ' states whose final rolls are out, the roll grew after the draft by at most ' + SIR.d(F.made_up_pct, 1) + '% of the names left off, or ' + SIR.d(F.made_up_pct_ex_withheld, 1) + '% without West Bengal\'s ' + SIR.lk(F.withheld, 0) + ' names held for adjudication. State by state the share ran much higher in some places, and <a href="../compare/#how-much-the-final-roll-made-up">Comparisons</a> gives each one. That rise counts new electors as well as names put back, so the share put back is no larger and may be smaller.',
     'Women were the larger share of the names left off in ' + W.over + ' of ' + W.states + ' states and ' + W.district_over + ' of ' + W.district_n + ' districts with a count by sex. <a href="../women/">Women</a> has every count.',
     'In ' + M.removed.states.join(' and ') + ', more names were removed than the winning margin in ' + n(over) + ' of ' + n(seats) + ' assembly seats. <a href="../numbers/#against-the-winning-margins">Against the winning margins</a> sets out every comparison.'
   ].map(function (t) { return '<li>' + t + '</li>'; }).join('');
@@ -70,7 +70,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/process.js
 
   document.getElementById('reported').innerHTML = [
     '<b>Inside the Commission.</b> The Indian Express reported that two of the three Election Commissioners objected on record, at least 14 times, to decisions taken in the Commission\'s name. The Commission called the notes suggestions and said every decision was unanimous. <a href="../process/#inside-the-commission">Inside the Commission</a> sets out the account by date.',
-    '<b>Form 7 objections in bulk.</b> ' + n(sec('form7')) + ' reports of objections filed by a few people at once, some on forms with the elector\'s details already printed. An objection does not remove a name by itself. <a href="../disputes/?issue=Form%207">The Form 7 items</a> list each one.',
+    '<b>Form 7 objections in bulk.</b> ' + n(sec('form7')) + ' reports of objections filed by a few people at once, some on forms with the elector\'s details already printed. An objection does not remove a name by itself. <a href="../disputes/#form7">The Form 7 section</a> lists each one.',
     '<b>Changes to the software.</b> ' + n(sec('software') + sec('instructions')) + ' reports of changes to the Commission\'s software and of instructions given without a written order. <a href="../disputes/">Protests and disputes</a> lists each with its source.',
     '<b>Requests under the RTI Act.</b> ' + n(R.counts.items) + ' applications whose replies were reported, and in ' + n((R.by_outcome['no record held'] || 0)) + ' of them the authority said it held no record of what was asked. <a href="../rti/">RTI replies</a> lists each one.',
     '<b>Other reports.</b> ' + n(P.reported.length) + ' press reports on how the revision was run, each reopened and attributed to its outlet, are on <a href="../process/#reported-not-confirmed-by-a-document">How the revision was run</a>.'

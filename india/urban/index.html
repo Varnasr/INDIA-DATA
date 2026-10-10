@@ -106,12 +106,16 @@ SIR.json('data/india/urban.json').then(function (d) {
   var top = both.slice().sort(function (a, b) { return b.urban_over_rural - a.urban_over_rural; })[0];
   var mixUp = S.filter(function (s) { return s.mixed_over_rural > 1; }), mixDown = S.filter(function (s) { return s.mixed_over_rural != null && s.mixed_over_rural <= 1; });
   var keep = S.filter(function (s) { return s.rho_no_urban >= 0.2; });
+  var lose = S.filter(function (s) { return s.rho >= 0.2 && s.rho_no_urban < 0.2; });
+  var none = S.filter(function (s) { return s.rho < 0.2; });
   var MEAS = { left_off: 'names left off per 100 on the roll before', roll_2025: 'names removed per 100 on the 2025 roll', fall: 'fall in the roll per 100' };
 
   SIR.inShort([
     'In ' + up.length + ' of the ' + both.length + ' states with both kinds of district, urban districts lost more names for their size than rural ones. In ' + top.state + ' the urban districts\' rate was ' + p1(top.urban_over_rural) + ' times the rural districts\'.',
     'Mixed districts, with large towns and suburbs beside villages, lost more than rural districts in ' + mixUp.length + ' of ' + S.length + ' states.',
-    'With the urban districts left out, the more urban districts still lost more in ' + list(keep.map(function (s) { return s.state; })) + '. In the other states the order is set mostly by the cities.',
+    'With the urban districts left out, the more urban districts still lost more in ' + list(keep.map(function (s) { return s.state; })) + '.' +
+      (lose.length ? ' In ' + list(lose.map(function (s) { return s.state; })) + ' the order rests on the urban districts.' : '') +
+      (none.length ? ' In ' + list(none.map(function (s) { return s.state; })) + ' the more urban districts did not lose more.' : ''),
     down.map(function (s) { return 'In ' + s.state + ' rural districts lost more for their size than urban ones.'; }).concat(mixDown.filter(function (s) { return down.indexOf(s) < 0; }).map(function (s) { return 'In ' + s.state + ' mixed districts lost fewer than rural ones' + (X.no_urban.indexOf(s.state) >= 0 ? ', and no district counts as urban.' : '.'); })).join(' ')
   ], 'Urban share is from the 2011 Census, the last count by district, and it will have changed since. Each state is read in its own measure, and West Bengal and Kerala count the fall in the roll.');
 
@@ -148,7 +152,6 @@ SIR.json('data/india/urban.json').then(function (d) {
   VIZ.dots('vRho', { label: 'Rank correlation between urban share and the rate, with and without urban districts', axis: 'Rank correlation',
     cats: S.map(function (s) { return s.state; }),
     series: [{ name: 'Every district', col: '--fill-navy', vals: S.map(function (s) { return s.rho; }) }, { name: 'Rural and mixed districts only', col: '--fill-amber', vals: S.map(function (s) { return s.rho_no_urban; }) }] });
-  var lose = S.filter(function (s) { return s.rho >= 0.2 && s.rho_no_urban < 0.2; });
   document.getElementById('nRho').textContent = 'In ' + list(keep.map(function (s) { return s.state; })) + ' the more urban districts lost more names even among rural and mixed districts. ' +
     (lose.length ? 'In ' + list(lose.map(function (s) { return s.state; })) + ' the relationship rests on the urban districts and falls under 0.2 without them. ' : '') +
     'A rank correlation under 0.2 is treated here as no relationship.';

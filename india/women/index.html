@@ -124,7 +124,7 @@ SIR.json('data/india/women.json').then(function (d) {
 
   SIR.inShort([
     'In ' + over.length + ' of the ' + S.length + ' states and union territories that published the names left off by sex, women were a larger share of the names left off than of the roll. In ' + big.length + ' of them the gap was a point or more.',
-    'The gap was widest in ' + top.state + ', where women were ' + p1(top.share_removed) + '% of the names left off and ' + p1(top.share_roll) + '% of the roll. That is ' + p1(top.women_per_100) + ' of every 100 women against ' + p1(top.men_per_100) + ' of every 100 men.',
+    'The gap was widest in ' + top.state + ', ' + p1(top.gap) + ' points, where women were ' + p1(top.share_removed) + '% of the names left off and ' + p1(top.share_roll) + '% of the roll.' + (S[1] && top.gap - S[1].gap < 0.5 ? ' ' + S[1].state + ' came just behind, at ' + p1(S[1].gap) + ' points.' : '') + ' In ' + top.state + ' that is ' + p1(top.women_per_100) + ' of every 100 women against ' + p1(top.men_per_100) + ' of every 100 men.',
     'Below the state the pattern holds almost everywhere it can be followed. In ' + X.district_over + ' of ' + X.district_n + ' districts across Bihar, West Bengal, Kerala and Uttarakhand, women were a larger share of those removed than of the roll.',
     'Delhi is the exception. ' + p1(dl.men_per_100) + ' of every 100 men were left off its draft roll, against ' + p1(dl.women_per_100) + ' of every 100 women.',
     'In Bihar women were ' + p1(d.bihar.dead_share) + '% of the names entered as dead. Their share of deaths in Bihar, from the death rates for women and men, would be about ' + p1(d.bihar.dead_expected) + '%.'
@@ -176,8 +176,8 @@ SIR.json('data/india/women.json').then(function (d) {
   document.getElementById('nBihar').textContent = 'The names entered as dead come to about ' + p1(B.years_of_deaths) + ' years of adult deaths in Bihar. Women were ' + p1(B.dead_share) + '% of them. Bihar\'s death rates for women and men give an expected share of ' + p1(B.dead_expected) + '%, because more men than women die each year at most adult ages. So more women were entered as dead than the death rates would lead anyone to expect.';
   document.getElementById('nMarriage').textContent = 'Marriage is the second explanation worth testing, because a woman in Bihar usually moves to her husband\'s village when she marries. Young women were marked as shifted far more often than young men. The excess comes to ' + SIR.lakh(B.marriage_excess) + ' names, equal to about ' + Math.round(B.marriage_years * 12) + ' months of moves on marriage at the rate the 2011 Census counted them. The districts where young women were marked shifted most often are not the districts where marriage moves are most common. The rank correlation between the two is ' + SIR.d(B.marriage_rho, 2) + ', so marriage does not account for the pattern district by district.';
 
-  SIR.table('tQual', [{ h: 'State' }, { h: 'Women, share of the roll', num: true }, { h: 'Women, share left off', num: true }, { h: 'Source' }],
-    S.map(function (s) { return [s.source_url ? '<a href="' + SIR.esc(s.source_url) + '" rel="noopener">' + SIR.esc(s.state) + '</a>' : SIR.esc(s.state), p1(s.share_roll) + '%', p1(s.share_removed) + '%', Q[s.quality] || s.quality]; }));
+  SIR.table('tQual', [{ h: 'State' }, { h: 'Women, share of the roll', num: true }, { h: 'Women, share left off', num: true }, { h: 'Gap, points', num: true }, { h: 'Source' }],
+    S.map(function (s) { return [s.source_url ? '<a href="' + SIR.esc(s.source_url) + '" rel="noopener">' + SIR.esc(s.state) + '</a>' : SIR.esc(s.state), p1(s.share_roll) + '%', p1(s.share_removed) + '%', p1(s.gap), Q[s.quality] || s.quality]; }));
   SIR.showFaq('india', 'women');
 }).catch(SIR.fail);
 </script>
