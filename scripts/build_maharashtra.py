@@ -123,11 +123,10 @@ def build():
         'title': 'Top 38 ACs with High Percentage of Uncollectable EF Electors (excluding Muslim-heavy ACs as claimed by Indian Express report)',
         'url': 'https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Top%20ACs%20with%20high%20percentage%20of%20%20Uncollectable%20EF%20excluding%20%20Muslim%20heavy%20seats.pdf',
         'file_date': '2026-09-30',
-        'acs': len(top), 'electors': sum(int(r['total_electors']) for r in top), 'uncollected': sum(int(r['uncollected']) for r in top),
+        'acs': len(top),
         'rows': [{'ac': int(r['ac']), 'name': r['ac_name'], 'district': r['district'], 'electors': int(r['total_electors']),
                   'uncollected': int(r['uncollected']), 'pct': float(r['uncollected_pct_printed'])} for r in top],
     }
-    summary['top38']['pct'] = round(100 * summary['top38']['uncollected'] / summary['top38']['electors'], 1)
     assert summary['claims_to'] >= summary['claims_to_note'] and summary['final_due'] >= summary['final_due_note']
 
     out = {'summary.json': json.dumps(summary, ensure_ascii=False, indent=1) + '\n',

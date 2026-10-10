@@ -89,6 +89,7 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
   var C = S.city, R = S.rest, nRest = S.districts - S.city_names.length;
   var tok = function (d) { return d.city ? '--fill-red' : '--fill-navy'; };
   var list = function (a) { return a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; };
+  var DL = function (iso) { var p = iso.split('-'); return +p[2] + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][+p[1] - 1] + ' ' + p[0]; };
 
   VIZ.waterfall('vWater', { label: 'Maharashtra: the roll before the revision and the draft roll of 31 August 2026', from: Math.floor(S.draft * 0.8 / 1e7) * 1e7, steps: [
     { name: 'Roll before the revision', v: S.before, kind: 'total' }, { name: 'Left off the draft', v: S.left_off, kind: 'down' }, { name: 'Draft roll', v: S.draft, kind: 'total' }] });
@@ -97,7 +98,7 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
   VIZ.lollipop('vDist', { label: 'Names left off the draft roll per 100 electors, every district', axis: 'Left off per 100 electors on the roll before the revision', ref: S.per_100,
     rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: d1(d.per_100), tok: tok(d), hi: (d.city || d.per_100 > S.per_100) && innerWidth >= 600 }; }) });
   var notCity = D.filter(function (d) { return !d.city; }), last = D[D.length - 1];
-  document.getElementById('fDist').innerHTML = '<b>' + D[0].district + ' left off ' + d1(D[0].per_100) + ' of every 100 electors, ' + lk(D[0].left_off) + ' names, the most of any district.</b> ' + list(D.slice(1, 5).map(function (d) { return d.district; })) + ' come next. ' +
+  document.getElementById('fDist').innerHTML = '<b>' + D[0].district + ' left off ' + d1(D[0].per_100) + ' of every 100 electors, the highest rate of any district, ' + lk(D[0].left_off) + ' names in all.</b> ' + list(D.slice(1, 5).map(function (d) { return d.district; })) + ' come next. ' +
     'Outside the five city districts the highest is ' + notCity[0].district + ', at ' + d1(notCity[0].per_100) + '. ' + S.above_state + ' of the ' + S.districts + ' districts left off more than the state\'s ' + d1(S.per_100) + ', and ' + S.under_15 + ' left off fewer than 15. ' + last.district + ' left off the fewest, ' + d1(last.per_100) + '.';
 
   var RS = [['shifted_absent_other', 'Shifted, absent or other'], ['dead', 'Dead'], ['duplicate', 'Enrolled at more than one place']];
@@ -132,19 +133,18 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
 
   document.getElementById('fNotice').innerHTML = NT && NT.notices ? '<b>' + cr(NT.notices) + ' electors still on the draft roll were sent a notice, ' + d1(NT.per_100) + ' of every 100, according to the press.</b> ' +
     (NT.no_mapping ? lk(NT.no_mapping) + ' of them were on the no-mapping list, of electors who could not be linked to the rolls of the last intensive revision, and ' + lk(NT.discrepancy) + ' were on the logical discrepancy list, of entries whose details were flagged as not agreeing. ' : '') +
-    'The figures are from <a href="' + NT.source_url + '">The Times of India</a> of ' + SIR.date(NT.date) + ', which quoted the CEO. How many names have been struck off after a hearing has not been published.' : 'No count of the notices has been found.';
+    'The figures are from <a href="' + NT.source_url + '">The Times of India</a> of ' + DL(NT.date) + ', which quoted the CEO. How many names have been struck off after a hearing has not been published.' : 'No count of the notices has been found.';
 
-  document.getElementById('fAfter').innerHTML = '<b>The final roll is due on ' + SIR.date(S.final_due) + ' and is not out yet.</b> ' +
-    'After the draft, an elector asks to be added with Form 6, and an objection to a name already on the roll is made with Form 7. The press note set ' + SIR.date(S.claims_to_note) + ' as the last day for claims and objections and ' + SIR.date(S.final_due_note) + ' for the final roll. The Commission moved them, in its letter of 26 September 2026, to ' + SIR.date(S.claims_to) + ' and ' + SIR.date(S.final_due) + ', with notices heard until ' + SIR.date(S.notices_to) + '. ' +
+  document.getElementById('fAfter').innerHTML = '<b>The final roll is due on ' + DL(S.final_due) + ' and is not out yet.</b> ' +
+    'After the draft, an elector asks to be added with Form 6, and an objection to a name already on the roll is made with Form 7. The press note set ' + DL(S.claims_to_note) + ' as the last day for claims and objections and ' + DL(S.final_due_note) + ' for the final roll. The Commission moved them, in its letter of 26 September 2026, to ' + DL(S.claims_to) + ' and ' + DL(S.final_due) + ', with notices heard until ' + DL(S.notices_to) + '. ' +
     'Until the final roll is out, nobody can say how many of the names left off will be put back.';
 
   // the CEO's own selection of 38 seats, shown as printed and never ranked against the rest
   var T38 = S.top38, first = T38.rows[0];
-  document.getElementById('t38sub').innerHTML = 'The Chief Electoral Officer has published one table by constituency, and it covers 38 seats. Its title reads, in full, "' + SIR.esc(T38.title) + '". The CEO chose the seats, in answer to a newspaper\'s report, so the table is 38 of the state\'s ' + S.acs + ' constituencies and says nothing about the other ' + (S.acs - T38.acs) + '. It is shown as the CEO printed it, and this page neither maps it nor sets it against any other seat. <a href="' + T38.url + '">The CEO\'s table</a>, a file dated ' + SIR.date(T38.file_date) + '.';
+  document.getElementById('t38sub').innerHTML = 'The Chief Electoral Officer has published one table by constituency, and it covers 38 seats. Its title reads, in full, "' + SIR.esc(T38.title) + '". The CEO chose the seats, in answer to a newspaper\'s report, so the table is 38 of the state\'s ' + S.acs + ' constituencies and says nothing about the other ' + (S.acs - T38.acs) + '. It is shown as the CEO printed it, and this page neither maps it nor sets it against any other seat. <a href="' + T38.url + '">The CEO\'s table</a> is a file dated ' + DL(T38.file_date) + '.';
   var ds = {}; T38.rows.forEach(function (r) { ds[r.district] = (ds[r.district] || 0) + 1; });
   var dl = Object.keys(ds).sort(function (a, b) { return ds[b] - ds[a]; });
-  document.getElementById('f38').innerHTML = '<b>In the 38 seats the CEO listed, the forms of ' + lk(T38.uncollected) + ' of ' + lk(T38.electors) + ' electors were not collected, ' + d1(T38.pct) + ' in every 100.</b> ' +
-    first.name + ' in ' + first.district + ' is first on the list at ' + d1(first.pct) + '. All 38 are in ' + dl.length + ' districts, ' + dl.map(function (d) { return d + ' ' + ds[d]; }).join(', ').replace(/, ([^,]*)$/, ' and $1') + '.';
+  document.getElementById('f38').innerHTML = '<b>' + first.name + ' in ' + first.district + ' is first on the CEO\'s list, with the forms of ' + d1(first.pct) + ' in every 100 electors not collected.</b> All 38 are in ' + dl.length + ' districts, ' + dl.map(function (d) { return d + ' ' + ds[d]; }).join(', ').replace(/, ([^,]*)$/, ' and $1') + '.';
   SIR.table(document.getElementById('t38'), [
     { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', bottom: true }, { k: 'district', label: 'District' },
     { k: 'electors', label: 'Total electors', fmt: n }, { k: 'uncollected', label: 'Forms not collected', fmt: n }, { k: 'pct', label: 'Per 100', fmt: d1 }

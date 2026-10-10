@@ -4,12 +4,14 @@
  "ut": false,
  "revision": "sir",
  "dates": {
-  "draft": "2026-07-31"
+  "draft": "2026-07-31",
+  "notices": "2026-10-01"
  },
  "figures": {
   "roll_before": {
    "v": 20655929,
-   "src": "s2"
+   "src": "s2",
+   "press": true
   },
   "removed": {
    "v": 3384568,
@@ -33,20 +35,21 @@
   },
   "notices": {
    "v": 4491691,
-   "src": "s3"
+   "src": "s3",
+   "press": true
   }
  },
  "reasons_complete": true,
  "tables": [
   {
    "id": "districts_provisional",
-   "title": "Forms not collected in five districts on 15 July 2026, provisional, before the draft, in thousands",
+   "title": "Forms not collected in five districts on 15 July 2026, provisional, before the draft",
    "level": "district",
    "kind": "left_off",
    "src": "s5",
    "partial": true,
    "press": true,
-   "note": "Printed in lakh in the middle of enumeration and rounded here to thousands. These are not the names left off the draft.",
+   "note": "Printed in lakh in the middle of enumeration and rounded here to the nearest thousand. These are not the names left off the draft.",
    "rows": [
     {
      "name": "Faridabad",
@@ -68,7 +71,8 @@
      "name": "Panipat",
      "removed": 189000
     }
-   ]
+   ],
+   "removed_label": "Forms not collected (provisional)"
   }
  ],
  "sources": [

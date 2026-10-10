@@ -11,7 +11,7 @@
       var grew = D.filter(function (d) { return d.per_100 < 0; });
       var scale = 'Rajasthan\'s draft roll left off ' + lk(s.left_off) + ' names, ' + d1(s.left_per_100) + ' of every 100 electors on the roll before the revision.';
       var after = 'After the draft ' + lk(s.added) + ' were added and ' + lk(s.deleted_after) + ' more deleted, so ' + lk(s.removed_by_final) + ' had been removed by the time of the final roll. The final roll was ' + lk(s.final - s.draft) + ' larger than the draft, which is at most ' + SIR.pct(s.made_up_pct) + ' of what was left off.';
-      var where = 'From the 2023 election to the final roll, the roll fell most in ' + D[0].district + ' (' + d1(D[0].per_100) + ' per 100) and grew in ' + grew.map(function (d) { return d.district; }).join(', ') + '.';
+      var where = 'From the 2023 election to the final roll, the roll fell most in ' + D[0].district + ' (' + d1(D[0].per_100) + ' per 100) and grew in ' + (function (a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; })(grew.map(function (d) { return d.district; })) + '.';
       var women = 'Women\'s share of the roll fell in ' + s.acs_women_fell + ' of ' + s.acs + ' constituencies, from ' + SIR.pct(s.women_2023_pct) + ' in 2023 to ' + SIR.pct(s.women_2026_pct) + ', and women were ' + SIR.pct(s.deleted_women_pct) + ' of the names deleted after the draft.';
       var margin = 'In ' + s.over_margin + ' of the 200 constituencies the roll fell by more than the 2023 winning margin.';
       var QA = [

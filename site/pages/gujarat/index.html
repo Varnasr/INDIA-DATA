@@ -91,13 +91,14 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/distr
   var S = r[0], D = r[1], A = r[2], NT = r[3].states.filter(function (x) { return x.state === 'Gujarat'; })[0], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
   var lk = function (x) { return SIR.lk(x, 1); }, cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; };
   var C = S.city, R = S.rest, isCity = function (d) { return S.city_names.indexOf(d) >= 0; };
+  var DL = function (iso) { var p = iso.split('-'); return +p[2] + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][+p[1] - 1] + ' ' + p[0]; };
   var RS = [['dead', 'Dead'], ['absent', 'Untraceable or absent'], ['shifted', 'Shifted for good'], ['enrolled_elsewhere', 'Already enrolled elsewhere'], ['other', 'Other']];
 
   VIZ.waterfall('vWater', { label: 'Gujarat: the roll from before the revision to the final roll', from: Math.floor(S.draft * 0.8 / 1e7) * 1e7, steps: [
     { name: 'Roll before the revision', v: S.before, kind: 'total' }].concat(RS.map(function (k) { return { name: k[1], v: S.reasons[k[0]], kind: 'down' }; }), [
     { name: 'Draft roll', v: S.draft, kind: 'total' }, { name: 'Net change after the draft', v: S.net, kind: 'up' }, { name: 'Final roll', v: S.final, kind: 'total' }]) });
   document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + lk(S.removed) + ' names, ' + d1(S.per_100) + ' of every 100 electors on the roll before the revision.</b> The roll fell from ' + cr(S.before) + ' names to ' + cr(S.draft) + ' (one crore is ten million). ' +
-    'The final roll of ' + SIR.date(S.final_date) + ' holds ' + cr(S.final) + '. It is ' + lk(S.net) + ' larger than the draft and still ' + lk(S.net_fall) + ' smaller than the roll before the revision.';
+    'The final roll of ' + DL(S.final_date) + ' holds ' + cr(S.final) + '. It is ' + lk(S.net) + ' larger than the draft and still ' + lk(S.net_fall) + ' smaller than the roll before the revision.';
 
   VIZ.strip('vDist', { label: 'Names left off per 100 electors, every constituency, by district', axis: 'Left off per 100 electors on the roll before the revision', r: 4.5,
     key: [['Ahmedabad and Surat', '--fill-red'], ['Other districts', '--fill-navy']],
@@ -148,7 +149,7 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/distr
     (S.net_negative.length ? S.net_negative.join(' and ') + ' deleted more names than it added. ' : '') +
     'Ahmedabad\'s roll is ' + d1(D.filter(function (d) { return d.district === 'Ahmedabad'; })[0].net_per_100) + ' per 100 and Surat\'s ' + d1(sur.net_per_100) + ' per 100 smaller than before the revision.';
 
-  document.getElementById('fNotice').innerHTML = (NT && NT.notices ? 'Of the electors kept on the draft roll, about ' + lk(NT.notices) + ' were to be sent a notice to prove their entry at a hearing, ' + d1(NT.per_100) + ' of every 100, according to <a href="' + NT.source_url + '">The Times of India</a> of ' + SIR.date(NT.date) + '. ' : '') +
+  document.getElementById('fNotice').innerHTML = (NT && NT.notices ? 'Of the electors kept on the draft roll, about ' + lk(NT.notices) + ' were to be sent a notice to prove their entry at a hearing, ' + d1(NT.per_100) + ' of every 100, according to <a href="' + NT.source_url + '">The Times of India</a> of ' + DL(NT.date) + '. ' : '') +
     'How many names were deleted after a hearing has not been published separately. The deletions above count every name taken off between the draft and the final roll.';
 
   SIR.table(document.getElementById('tDist'), [

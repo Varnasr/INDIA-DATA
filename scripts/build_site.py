@@ -146,7 +146,7 @@ ASOF_EN = {
     'final': 'Figures as of {d}, when the final roll was published.',
     'draft-due': 'Figures as of {d}, when the draft roll was published. The final roll is due on {n}.',
     'draft-past': 'Figures as of {d}, when the draft roll was published. The final roll was due on {n}, and we have not found it published.',
-    'latest-due': 'Figures as of {d}, a roll published while claims and notices were being heard. The final roll is due on {n}.',
+    'latest-due': 'Figures as of {d}, a roll published after claims had closed, while notices were being heard. The final roll is due on {n}.',
     'nodraft': 'No draft roll has been published yet. It is due on {n}.',
 }
 
