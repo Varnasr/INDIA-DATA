@@ -99,6 +99,8 @@ PUBLISHED = {
     'data/uttarakhand/districts.csv': ('Every Uttarakhand district', 'district', ''),
     'data/assam/assam.csv': ('Assam\'s Special Revision of 2025-26, every figure with its source', 'state',
                              'Names were flagged for deletion. No figure says they were taken off the draft.'),
+    'data/assam/constituencies.csv': ('Every Assam constituency, with the rolls of February 2024, the draft and the final roll', 'constituency',
+                                      'Each change is net, names added less names removed. The tables do not give the two apart.'),
 }
 
 # The Chief Electoral Officer's own tables, as transcribed. Raw files are not
@@ -151,7 +153,8 @@ EXTRA = {
            ('data/karnataka/raw/roll_20261009_district.csv', 'Roll of 9 October 2026', 'The roll of 9 October 2026, by district and sex.'),
            ('data/karnataka/raw/notices_20261009_district.csv', 'Notices to 9 October 2026', 'Notices generated, delivered and heard by 9 October 2026, by district.'),
            ('data/karnataka/raw/forms_20260616_20261008_district.csv', 'Forms 6, 6A, 7 and 8 to 8 October 2026', 'Forms received from 16 June to 8 October 2026, by district.')],
-    'as': [('data/assam/raw/state.csv', 'State figures', 'Every roll figure, as quoted by the press.'),
+    'as': [('data/assam/raw/ac_rolls.csv', 'Rolls by seat and sex', 'The Chief Electoral Officer\'s tables of the final roll of 8 February 2024, the draft and the final roll, every constituency by sex.'),
+           ('data/assam/raw/state.csv', 'State figures', 'Every roll figure, as quoted by the press.'),
            ('data/assam/raw/rules.csv', 'Rules beside the SIR\'s', 'Each rule of the Special Revision set against the SIR\'s.'),
            ('data/assam/raw/schedule.csv', 'Schedule', 'The order\'s schedule.'),
            ('data/assam/raw/nrc_2019.csv', 'NRC lists of 2019', 'The figures of the lists published on 31 August 2019.'),

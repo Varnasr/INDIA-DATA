@@ -1025,5 +1025,36 @@
   "source": "The outlet that published the reply or reported it.",
   "published": "The date of that publication.",
   "url": "The address of the source."
+ },
+ "data/assam/constituencies.csv": {
+  "ac": "The assembly constituency's number, 1 to 126, as the Chief Electoral Officer numbers it after the 2023 delimitation.",
+  "name": "The constituency's name as the Chief Electoral Officer's table prints it.",
+  "reserved": "SC or ST where the seat is reserved, and blank otherwise.",
+  "district": "The district the Chief Electoral Officer's table places the constituency in.",
+  "polling_stations": "Polling stations in the constituency on the draft and final rolls, which are the same in both tables.",
+  "roll_2024": "Electors on the final roll of 8 February 2024, from the Chief Electoral Officer's table.",
+  "draft": "Electors on the draft roll of 27 December 2025.",
+  "final": "Electors on the final roll of 10 February 2026.",
+  "draft_men": "Men on the draft roll.",
+  "draft_women": "Women on the draft roll.",
+  "final_men": "Men on the final roll.",
+  "final_women": "Women on the final roll.",
+  "draft_vs_2024_per_1000": "The draft less the roll of February 2024, per 1,000 on the February 2024 roll.",
+  "fall_per_1000": "The draft less the final roll, per 1,000 on the draft, negative where the roll rose. It is net, names removed less names added."
+ },
+ "data/assam/raw/ac_rolls.csv": {
+  "reserved": "SC or ST where the seat is reserved, and blank otherwise.",
+  "men_2024": "Men on the final roll of 8 February 2024.",
+  "women_2024": "Women on the final roll of 8 February 2024.",
+  "third_2024": "Third-gender electors on the final roll of 8 February 2024.",
+  "total_2024": "All electors on the final roll of 8 February 2024.",
+  "men_draft": "Men on the draft roll of 27 December 2025.",
+  "women_draft": "Women on the draft roll of 27 December 2025.",
+  "third_draft": "Third-gender electors on the draft roll of 27 December 2025.",
+  "total_draft": "All electors on the draft roll of 27 December 2025.",
+  "men_final": "Men on the final roll of 10 February 2026.",
+  "women_final": "Women on the final roll of 10 February 2026.",
+  "third_final": "Third-gender electors on the final roll of 10 February 2026.",
+  "total_final": "All electors on the final roll of 10 February 2026."
  }
 }
