@@ -359,8 +359,10 @@ one file per state with `SOURCES.md`). The idea of reading the Assembly
 results beside the Lok Sabha came from Mamomay Ghoshal's Odisha workbook.
 The Commission's result pages could not be read from the sandbox for most of
 these elections, so most files are a published compilation checked seat by
-seat against a second; Madhya Pradesh, Chhattisgarh and Telangana are the
-Commission's statistical report. The spread is tested on Bihar, Tamil Nadu,
+seat against a second; Madhya Pradesh, Chhattisgarh, Telangana, Mizoram and
+Uttar Pradesh are the Commission's statistical report, Manipur and Meghalaya
+the CEOs' Form 20. Nagaland is held back until its votes can be read from more
+than Wikipedia. The spread is tested on Bihar, Tamil Nadu,
 Gujarat and Delhi (the totals come within 15 seats, the seats themselves are
 often wrong) and on Odisha's six press seats, and the page says it gives how
 many seats, never which. NOTA is never a runner-up (Indore); Surat was unopposed. Over the margin means the
@@ -620,7 +622,9 @@ because the independents' fronts are not in the data.
 - The All India row is these exact figures; "shifted, absent or other" there is
   untraceable or absent plus permanently shifted plus others.
 - `data/uttarpradesh/raw/check.py` is a research script and is not in CI: its
-  `results_2022.csv` check fails in 32 ACs, and no page uses 2022 results.
+  `results_2022.csv` check fails in 32 ACs. That file is a copy of Wikipedia's
+  table and is wrong in 25 ACs' votes; the Commission's own 2022 results are
+  `data/india/raw/assembly/uttarpradesh_2022.csv`, which is the one to use.
 - English only, like Rajasthan, with the same translated note.
 
 ## Delhi
