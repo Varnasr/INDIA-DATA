@@ -79,7 +79,7 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/const
   var clParty = {}; CL.forEach(function (a) { clParty[a.winner_party] = (clParty[a.winner_party] || 0) + 1; });
   document.getElementById('fClose').innerHTML = '<b>In ' + (clOver === CL.length ? 'every one' : clOver) + ' of the ' + CL.length + ' closest seats, the names left off were more than the margin.</b> ' +
     c0.name + ' was won by ' + n(c0.margin) + ' votes and lost ' + n(c0.removed) + ' names, and ' + c1.name + ' was won by ' + n(c1.margin) + ' and lost ' + n(c1.removed) + '. ' +
-    'Of the twenty, ' + Object.keys(clParty).sort(function (a, b) { return clParty[b] - clParty[a]; }).map(function (p) { return clParty[p] + ' were won by the ' + (p === 'INC' ? 'Congress' : p === 'IND' ? 'independents' : p); }).join(', ') + '.';
+    'Of the twenty, ' + (function (a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; })(Object.keys(clParty).sort(function (a, b) { return clParty[b] - clParty[a]; }).map(function (p) { return clParty[p] + ' were won by the ' + (p === 'INC' ? 'Congress' : p === 'IND' ? 'independents' : p); })) + '.';
 
   var W = {}; S.winners.forEach(function (w) { W[w.party] = w; });
   var groups = [['BJP', 'BJP'], ['INC', 'Congress'], ['other', 'AAP, SP and independents']];

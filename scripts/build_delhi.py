@@ -52,7 +52,12 @@ def main():
         assert int(a['draft_men']) + int(a['draft_women']) + int(a['draft_tg']) == dr, n
         margin, votes, el = int(e['margin']), int(e['votes_total']), int(e['electors'])
         assert margin > 0 and int(e['winner_votes']) - int(e['runner_up_votes']) == margin, n
-        rows.append({'ac': n, 'name': a['name_as_published'], 'district': a['district'],
+        # one name is printed in capitals in the CEO's table; it is shown in the
+        # same case as the other 69
+        nm = a['name_as_published']
+        if nm.isupper():
+            nm = ' '.join(w if w.startswith('(') else w.capitalize() for w in nm.split())
+        rows.append({'ac': n, 'name': nm, 'district': a['district'],
                      'roll_before': rb, 'draft': dr, 'left_off': lo, 'per_100': r1(100 * lo / rb),
                      'electors_2025': el, 'winner': e['winner_party'], 'runner_up': e['runner_up_party'], 'margin': margin,
                      'turnout_2025': r1(100 * votes / el),

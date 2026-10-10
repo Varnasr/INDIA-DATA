@@ -777,7 +777,7 @@
     if (o.title) el('text', { x: 10, y: 12, class: 'vval' }, s, o.title);
     op.forEach(function (a, i) {
       el('rect', { x: 10 + i * kw, y: 20, width: kw - 4, height: 10, rx: 2, style: fill(tok) + ';fill-opacity:' + a }, s);
-      el('text', { x: 10 + i * kw, y: 42, class: 'vval small' }, s, (edges[i] < 0 || edges[i + 1] < 0 ? fv(edges[i]) + ' to ' + fv(edges[i + 1]) : fv(edges[i]) + '–' + fv(edges[i + 1])));
+      el('text', { x: 10 + i * kw, y: 42, class: 'vval small' }, s, fv(edges[i]) + ' to ' + fv(edges[i + 1]));
     });
     // one seat, or several (a district's seats) outlined together
     box.__select = function (ac) {

@@ -36,9 +36,13 @@ a source.
 
 ## Fields
 
+- `article`: `"the"` for a name read with the article ("the Andaman and
+  Nicobar Islands"). Leave it out otherwise.
 - `revision`: `"sir"`, or `"no_draft"` when no draft roll has been published.
 - `dates`: any of `roll_before` (the date the roll before the revision refers
-  to), `draft`, `final`, as `YYYY-MM-DD`. Leave out what is not known.
+  to), `draft`, `final`, as `YYYY-MM-DD`, and `notices`, the date by which
+  the `notices` count had been sent (leave it out when the count is of
+  notices still to be sent). Leave out what is not known.
 - `figures`: each `{"v": integer, "src": source id}`. Add `"press": true` when
   the figure reached us through a newspaper or broadcaster rather than an
   official document, and `"rounded": true` when it was printed in lakh. Keys,
@@ -53,7 +57,9 @@ a source.
 - `reasons_complete`: true when the three reasons were published as exact
   counts that add to `removed`.
 - `tables`: any district, constituency or other table that was published.
-  `level` is `district`, `ac`, `pc`, `island`, `tehsil` or `ward`. `kind` says
+  `level` is `district`, `region`, `ac`, `pc`, `island`, `tehsil` or `ward`.
+  `removed_label` heads the `removed` column of a `left_off` table when it
+  holds something other than the names left off the draft. `kind` says
   what the rows hold:
   - `left_off`: rows carry `before`, `draft` and `removed` (any two give the
     third), and optionally `dead`, `shifted_absent_other`, `duplicate`;

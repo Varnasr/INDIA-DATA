@@ -37,9 +37,9 @@ def build():
     for r in rows:
         v = {k: int(r[k]) for k in ('roll_before', 'draft', 'total') + R}
         assert v['roll_before'] - v['draft'] == v['total'] == sum(v[k] for k in R), r['district']
-        d = {'district': r['district'].strip(), **v, 'per_100': round(100 * v['total'] / v['roll_before'], 2)}
+        d = {'district': r['district'].strip(), **v, 'per_100': round(100 * v['total'] / v['roll_before'], 4)}
         for k in R:
-            d[k + '_pct'] = round(100 * v[k] / v['total'], 2)
+            d[k + '_pct'] = round(100 * v[k] / v['total'], 4)
         D.append(d)
     for k, t in STATE.items():
         assert sum(d[k] for d in D) == t, 'column %s does not add up to the State row' % k

@@ -29,7 +29,7 @@ STATES = [
     ('py', 'puducherry'), ('ch', 'chandigarh'), ('ld', 'lakshadweep'), ('an', 'andaman'), ('dd', 'dnhdd'),
 ]
 
-TOP = {'state', 'slug', 'ut', 'revision', 'dates', 'figures', 'reasons_complete', 'tables', 'sources', 'notes', 'cannot_show'}
+TOP = {'state', 'slug', 'ut', 'article', 'revision', 'dates', 'figures', 'reasons_complete', 'tables', 'sources', 'notes', 'cannot_show'}
 FIG = {'roll_before', 'draft', 'removed', 'dead', 'shifted_absent_other', 'duplicate',
        'added_after', 'removed_after', 'net_after', 'final', 'notices'} | \
       {'%s_%s' % (s, w) for s in ('men', 'women', 'third') for w in ('before', 'draft', 'removed', 'final')}
@@ -42,8 +42,8 @@ KINDS = {
     'final': {'final': 'final', 'draft': 'draft', 'men': 'men_final', 'women': 'women_final', 'third': 'third_final'},
     'fall': {},
 }
-LEVELS = {'district', 'ac', 'pc', 'island', 'tehsil', 'ward'}
-TABKEYS = {'id', 'title', 'level', 'kind', 'src', 'partial', 'press', 'rows', 'note'}
+LEVELS = {'district', 'region', 'ac', 'pc', 'island', 'tehsil', 'ward'}
+TABKEYS = {'id', 'title', 'level', 'kind', 'src', 'partial', 'press', 'rows', 'note', 'removed_label'}
 
 
 def fail(slug, msg):
@@ -58,6 +58,10 @@ def build_one(pid, slug):
     extra = set(d) - TOP
     if extra:
         fail(slug, 'unknown fields %s' % sorted(extra))
+    if d.get('article') not in (None, 'the'):
+        fail(slug, 'article must be "the" or left out')
+    if set(d.get('dates', {})) - {'roll_before', 'draft', 'final', 'notices'}:
+        fail(slug, 'unknown dates %s' % sorted(set(d['dates']) - {'roll_before', 'draft', 'final', 'notices'}))
     if d.get('revision') not in ('sir', 'no_draft'):
         fail(slug, 'revision must be sir or no_draft')
     src = {s['id'] for s in d.get('sources', [])}

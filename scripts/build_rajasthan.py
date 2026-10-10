@@ -75,6 +75,9 @@ def build():
     assert sum(int(r['general']) for r in e23.values()) == 52788931
     assert sum(int(r['total']) for r in f26.values()) == int(g('final_roll_general', '200 ACs'))
 
+    # The CEO's final-roll table misspells one name. The 2023 report and the
+    # results spell it Marwar Junction, so the page does too.
+    NAME_FIX = {119: ('Marwar Junciton', 'Marwar Junction')}
     acs = []
     for n in range(1, 201):
         a, b, x = e23[n], f26[n], res[n]
@@ -84,7 +87,7 @@ def build():
         assert int(x['winner_votes']) - int(x['runner_up_votes']) == margin > 0, n
         fall = r23 - r26
         acs.append({
-            'ac': n, 'name': b['ac_name'], 'district': b['district'],
+            'ac': n, 'name': NAME_FIX[n][1] if n in NAME_FIX and b['ac_name'] == NAME_FIX[n][0] else b['ac_name'], 'district': b['district'],
             'roll_2023': r23, 'final': r26, 'fall': fall, 'per_100': round(100 * fall / r23, 2),
             'women_2023_pct': round(100 * w23 / r23, 2), 'women_2026_pct': round(100 * w26 / r26, 2),
             'women_change': round(100 * w26 / r26 - 100 * w23 / r23, 2),
