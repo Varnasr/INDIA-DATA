@@ -68,8 +68,11 @@ def build():
     # the Sabar Institute's pieces, found and read twice in a second round
     sabar = [x for x in json.loads((RAW / 'sabar.json').read_text(encoding='utf-8')) if x['url'] not in EXCLUDE]
     ver.update({v['url']: v for v in json.loads((RAW / 'sabar_verified.json').read_text(encoding='utf-8'))})
+    # a third round, 15 September to 10 October 2026, found and read twice
+    third = json.loads((RAW / 'round3.json').read_text(encoding='utf-8'))
+    ver.update({v['url']: v for v in json.loads((RAW / 'round3_verified.json').read_text(encoding='utf-8'))})
     out, dropped = [], []
-    for i, it in enumerate(items + EXTRA + sabar):
+    for i, it in enumerate(items + EXTRA + sabar + third):
         v = ver.get(it['url'])
         if not v or v['status'] not in ('confirmed', 'corrected'):
             dropped.append({'title': it['title'], 'outlet': it['outlet'], 'why': (v or {}).get('note', 'not read a second time')})
