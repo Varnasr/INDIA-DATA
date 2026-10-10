@@ -357,13 +357,10 @@ seats by electors and sets them against the margin at its latest Assembly
 election (`ASM` and `OWN` in the build; results in `data/india/raw/assembly/`,
 one file per state with `SOURCES.md`). The idea of reading the Assembly
 results beside the Lok Sabha came from Manomay Ghoshal's Odisha workbook.
-The Commission's result pages could not be read from the sandbox for most of
-these elections, so most files are a published compilation checked seat by
-seat against a second; Karnataka, Madhya Pradesh, Chhattisgarh, Telangana,
-Mizoram, Nagaland, Puducherry and Uttar Pradesh are the Commission's
-statistical report (the owner downloaded Karnataka's, Nagaland's and
-Puducherry's tables 10 and 11 from an Indian connection), Manipur and
-Meghalaya the CEOs' Form 20. The spread is tested on Bihar, Tamil Nadu,
+Every file but Manipur's and Meghalaya's (the CEOs' Form 20) is the
+Commission's statistical report, tables 10 and 11, which the owner downloaded
+from an Indian connection; the sandbox cannot reach eci.gov.in. Arunachal's
+ten unopposed seats are in neither table and keep a compilation's electors. The spread is tested on Bihar, Tamil Nadu,
 Gujarat and Delhi (the totals come within 15 seats, the seats themselves are
 often wrong) and on Odisha's six press seats, and the page says it gives how
 many seats, never which. NOTA is never a runner-up (Indore); Surat was unopposed. Over the margin means the
