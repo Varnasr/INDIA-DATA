@@ -26,6 +26,13 @@
       <div class="vizbox" id="vMe"></div>
       <p id="pMe"></p>
     </div>
+    <div class="panel wide">
+      <h3>Every state's Assembly seats, if its names left off were spread by electors</h3>
+      <div class="vizbox" id="vMs"></div>
+      <p id="pMs"></p>
+      <p id="pMt"></p>
+      <details class="figs"><summary>Odisha's six seats with a count in the press</summary><div class="twrap fit"><table id="tMo"></table></div></details>
+    </div>
   </div>
   <p class="note" id="nM"></p>
 
@@ -170,6 +177,19 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
     rows: ev.map(function (e) { return { name: e.state, v: 100 * e.over_margin / e.pcs, text: e.over_margin + ' of ' + e.pcs, tok: '--fill-navy', hi: e.pcs >= 10 }; }) });
   var tn = M.even_test.filter(function (t) { return t.state === 'Tamil Nadu'; })[0], bh = M.even_test.filter(function (t) { return t.state === 'Bihar'; })[0];
   document.getElementById('pMe').textContent = 'No state has published its removals by Lok Sabha seat, so this spreads each state\'s removals evenly over its seats and counts the seats won in 2024 by fewer votes. On that assumption it is ' + M.even_total.over_margin + ' of ' + M.even_total.pcs + ' seats in ' + M.even_total.states + ' states and union territories. The assumption can be tested where seat counts exist. In Bihar it gives ' + bh.even + ' seats against ' + bh.actual + ' counted, and in Tamil Nadu ' + tn.even + ' against ' + tn.actual + '. Removals there were heaviest in the cities, so most seats lost fewer names than the state average. Spread evenly, ' + tn.even_only + ' seats are counted that in fact lost fewer names than their margin, and ' + tn.actual_only + ' are missed that lost more. Read it as a rough guide that can run high.';
+  // Assembly seats: each state's names left off spread over its seats by electors
+  var SP = M.spread;
+  VIZ.lollipop('vMs', { label: 'Share of each state\'s Assembly seats won at its latest election by fewer votes than its names left off, spread over the seats by electors', axis: 'Seats won by fewer votes than the spread, %', max: 100,
+    rows: SP.map(function (x) { return { name: x.state + ' ' + x.election, v: 100 * x.over_margin / x.contested, text: x.over_margin + ' of ' + x.contested, tok: '--fill-navy', hi: x.contested >= 60 }; }) });
+  var ST = M.spread_total;
+  document.getElementById('pMs').textContent = 'Only a few states published their names left off seat by seat, so here every state\'s count is spread, the same way for each, over its Assembly seats in proportion to their electors and set against the margin at its latest Assembly election. On that assumption the names left off were more than the margin in ' + n(ST.over_margin) + ' of ' + n(ST.seats) + ' seats in ' + ST.states + ' states and union territories. More than the margin means the names were enough to have decided a seat, never that they did.';
+  var tests = M.spread_test.map(function (t, i) { return (i ? 'in ' + t.state + ' ' : 'In ' + t.state + ' ') + t.actual + (i ? ' and ' : ' seats are over the margin on the counted names and ') + t.spread + (i ? '' : ' on the spread'); });
+  var gap = Math.max.apply(null, M.spread_test.map(function (t) { return Math.abs(t.spread - t.actual); }));
+  var miss = M.spread_test.map(function (t) { return t.spread_only + t.actual_only; });
+  var six = M.odisha_six, sixWrong = six.filter(function (x) { return x.press_over !== x.spread_over; }).length;
+  document.getElementById('pMt').textContent = 'The spread can be tested where the seats\' own counts exist. ' + tests.slice(0, -1).join(', ') + ', and ' + tests[tests.length - 1] + '. The totals come within ' + gap + ' seats of the counted ones, but the spread puts ' + Math.min.apply(null, miss) + ' to ' + Math.max.apply(null, miss) + ' seats on the wrong side of their margin in each state, so it says how many seats, never which ones. In Odisha the press printed counts for six seats, three that lost many names and three that lost far fewer. Against the 2024 Assembly margin the spread puts ' + sixWrong + ' of the 6 on the wrong side, which is what an even spread does to seats far from the state\'s average.';
+  SIR.table('tMo', [{ h: 'Seat' }, { h: 'Names left off, as reported', num: true }, { h: 'On the spread', num: true }, { h: '2024 Assembly margin', num: true }],
+    six.map(function (x) { return [x.name, n(x.press), n(x.spread), n(x.margin)]; }));
   document.getElementById('nM').innerHTML = 'Assembly margins are from each state\'s own election pages on this site. 2024 margins are the winner\'s votes less the runner-up candidate\'s, from the ' + E(M.source) + ', checked against the published margin in every seat and against a second table for Bihar\'s 40. NOTA is not counted as a runner-up. Surat was won unopposed and is left out. In 2024, ' + M.ls_close.under_50000 + ' of ' + M.ls_close.contested + ' contested seats were won by fewer than 50,000 votes and ' + M.ls_close.under_100000 + ' by fewer than 1,00,000. The seat-by-seat figures can be downloaded as <a href="../../data/india/margins_ls2024.csv">margins_ls2024.csv</a>.';
 
   // the roll in every Lok Sabha election since 1984-85, years spaced to scale

@@ -352,7 +352,18 @@ four states, each summed from its segments; and every state with its removals
 spread evenly over its Lok Sabha seats, which is an assumption and is tested on
 the page (Tamil Nadu 27 on the even spread against 19 counted). The build fails
 if a 2024 margin differs from the published one or from Bihar's Wikipedia table.
-NOTA is never a runner-up (Indore); Surat was unopposed. Over the margin means the
+A fourth comparison spreads every state's names left off over its Assembly
+seats by electors and sets them against the margin at its latest Assembly
+election (`ASM` and `OWN` in the build; results in `data/india/raw/assembly/`,
+one file per state with `SOURCES.md`). The idea of reading the Assembly
+results beside the Lok Sabha came from Mamomay Ghoshal's Odisha workbook.
+The Commission's result pages could not be read from the sandbox for most of
+these elections, so most files are a published compilation checked seat by
+seat against a second; Madhya Pradesh, Chhattisgarh and Telangana are the
+Commission's statistical report. The spread is tested on Bihar, Tamil Nadu,
+Gujarat and Delhi (the totals come within 15 seats, the seats themselves are
+often wrong) and on Odisha's six press seats, and the page says it gives how
+many seats, never which. NOTA is never a runner-up (Indore); Surat was unopposed. Over the margin means the
 removals were large enough to decide a seat, never that they did: say so, and
 carry Bihar's estimate (4 to 6 seats change hands, both ways) beside it.
 
