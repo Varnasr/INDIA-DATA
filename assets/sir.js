@@ -936,10 +936,15 @@
     i = n;
     var s = steps[n], el = document.querySelector(s[0]);
     // on a phone the header's controls sit behind the menu button
-    if (head && el.closest('header.top') && !head.classList.contains('open') && getComputedStyle(el).display === 'none') { head.classList.add('open'); head.__tourOpened = 1; }
+    // (a control can be hidden by its own box or by the menu around it, so
+    // the test is whether it has any box on screen at all)
+    if (head && el.closest('header.top') && !head.classList.contains('open') && !el.getClientRects().length) { head.classList.add('open'); head.__tourOpened = 1; }
     if (on) on.classList.remove('tour-on');
     on = el; el.classList.add('tour-on');
-    el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    // on a phone the tour's box sits at the foot of the screen, so a target
+    // further down the page is brought to the top, above the box
+    if (innerWidth < 700 && !el.closest('header.top')) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - 12, behavior: 'smooth' });
+    else el.scrollIntoView({ block: 'center', behavior: 'smooth' });
     box.querySelector('.tour-t').textContent = s[1];
     box.querySelector('.tour-n').textContent = L('{a} of {b}', { a: n + 1, b: steps.length });
     box.querySelector('.tour-back').disabled = n === 0;
