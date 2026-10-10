@@ -108,8 +108,9 @@ Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.j
   var flagged = fin.filter(function (s) { return flag(s); });
   document.getElementById('nBack').textContent = 'Grey stems are states whose roll shrank again after the draft. Some figures carry a caution. ' + flagged.map(function (s) { return s.state + ' (' + flag(s) + ')'; }).join(', ') + '.';
   var neg = fin.filter(function (s) { return s.made_up_pct < 0; });
-  var under25 = fin.filter(function (s) { return s.made_up_pct >= 0 && s.made_up_pct < 25; }).length;
-  document.getElementById('fBack').innerHTML = '<b>Across the ' + F.states + ' states with a final roll, the final rolls made up at most ' + SIR.pct(F.made_up_pct) + ' of what the drafts cut.</b> In ' + under25 + ' of them it was under a quarter, and in ' + neg.length + ' (' + list(neg.map(function (s) { return s.state; })) + ') the roll shrank again after the draft. West Bengal\'s further fall is mostly the 60 lakh names held back for adjudication.';
+  var under25 = fin.filter(function (s) { return s.made_up_pct < 25; }).length;
+  var pooled = 'Taken together, the ' + F.states + ' final rolls made up at most ' + SIR.pct(F.made_up_pct) + ' of the names the drafts left off, or ' + SIR.pct(F.made_up_pct_ex_withheld) + ' leaving out West Bengal\'s ' + SIR.lk(F.withheld, 0) + ' names held for adjudication.';
+  document.getElementById('fBack').innerHTML = '<b>' + pooled + '</b> By state the share runs from ' + SIR.pct(fin[0].made_up_pct) + ' in ' + fin[0].state + ' to below zero in ' + neg.length + ' (' + list(neg.map(function (s) { return s.state; })) + '), where the roll shrank again after the draft. In ' + under25 + ' of the ' + fin.length + ' it was under a quarter, those ' + neg.length + ' included. West Bengal\'s further fall is mostly the names held back for adjudication.';
   SIR.table('tBack', [{ h: 'State' }, { h: 'Share made up', num: true }, { h: 'Caution' }],
     fin.map(function (s) { return [SIR.esc(s.state), SIR.pct(s.made_up_pct), flag(s) || null]; }));
 
@@ -139,7 +140,7 @@ Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.j
   SIR.inShort([
     'Seats reserved for Scheduled Castes lost a smaller share of their roll than general seats in ' + lower('SC') + ' of ' + withC('SC') + ' states, and seats reserved for Scheduled Tribes in ' + lower('ST') + ' of ' + withC('ST') + '.',
     'Part of the gap comes from where the seats are. Against the general seats of their own district, SC seats were lower on average in ' + dist('SC') + ' of ' + distN('SC') + ' states, by a smaller margin.',
-    'Across the ' + F.states + ' states with a final roll, the final rolls made up at most ' + SIR.pct(F.made_up_pct) + ' of the names the drafts left off, and in ' + neg.length + ' the roll shrank again.',
+    pooled + ' By state the share runs from ' + SIR.pct(fin[0].made_up_pct) + ' in ' + fin[0].state + ' to below zero in ' + neg.length + ', where the roll shrank again.',
     'On the Government of India\'s own list of border districts, the border lost more names than the rest of its state in ' + list(up.map(function (s) { return s.state; })) + ', about the same in ' + list(even.map(function (s) { return s.state; })) + ' and fewer in ' + list(down.map(function (s) { return s.state; })) + '.'
   ], 'A reserved seat describes a place, and says nothing about which electors were removed from it. The rise to the final roll includes new voters, so the share made up is a ceiling. A border district\'s rate says nothing about any elector\'s citizenship.');
   SIR.showFaq('india', 'compare');

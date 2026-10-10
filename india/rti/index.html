@@ -117,7 +117,8 @@ SIR.json('data/india/rti.json').then(function (D) {
       (i.doc_url ? ' <a href="' + esc(i.doc_url) + '" rel="noopener">The reply</a>.' : '') +
       (i.kind === 'primary' ? ' <span class="tag primary">document</span>' : ' <span class="tag press">report</span>');
     return '<li id="r-' + esc(i.id) + '"><p><b>' + esc(i.authority) + '</b>, ' + esc(i.state) + '. Asked by ' + esc(i.applicant) + (when ? ', ' + when : '') + '.</p>' +
-      '<p>' + esc(i.asked) + '</p><p class="nresp">' + esc(i.answer) + (i.section ? ' The refusal cited ' + esc(i.section) + '.' : '') + '</p>' +
+      '<p>' + esc(i.asked) + '</p><p class="nresp">' + esc(i.answer) + (i.section ? ' The refusal cited ' + esc(i.section) + '.' : '') +
+      (i.days > 30 ? ' The reply came ' + n(i.days) + ' days after the application, ' + n(i.days - 30) + ' days past the 30 the Act allows.' : '') + '</p>' +
       '<p class="nsrc">' + src + '</p>' +
       (i.quote ? '<details><summary>The words of the source</summary><blockquote>' + esc(i.quote) + '</blockquote></details>' : '') + '</li>';
   };

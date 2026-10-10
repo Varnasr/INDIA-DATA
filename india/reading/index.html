@@ -102,7 +102,7 @@ Promise.all([SIR.json('data/india/reads.json'), SIR.json('data/india/panels.json
       '<p class="role">' + esc(p.role) + '</p><p>' + esc(p.intro) + '</p>' +
       '<ul class="srcs">' + p.pieces.map(function (x) {
         return '<li><a href="' + esc(x.url) + '" rel="noopener"' + (/[\u0900-\u097f]/.test(x.title) ? ' lang="hi"' : '') + '>' + esc(x.title) + '</a>' +
-          (x.title_en ? ' (' + esc(x.title_en) + ')' : '') + '. ' + esc(x.outlet) + ', ' + SIR.date(x.date) + (x.length ? ', ' + esc(x.length) : '') + '.</li>';
+          (x.title_en ? ' (' + esc(x.title_en) + ')' : '') + (!x.title_en && /[.?!]$/.test(x.title) ? ' ' : '. ') + esc(x.outlet) + ', ' + SIR.date(x.date) + (x.length ? ', ' + esc(x.length) : '') + '.</li>';
       }).join('') + '</ul>' +
       '<ol class="pq">' + p.claims.map(function (c) {
         var pc = pieceOf(p, c.piece);

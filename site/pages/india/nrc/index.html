@@ -89,7 +89,7 @@ SIR.json('data/india/nrc.json').then(function (D) {
     box.setAttribute('start', num[s.facts[0].id]);
     box.innerHTML = s.facts.map(function (f) {
       return '<li id="f-' + f.id + '"><p>' + esc(f.claim) + '</p><p class="nsrc"><a href="' + esc(f.url) + '" rel="noopener">' + esc(f.document) + '</a>, ' + esc(f.issuer) + ', ' + SIR.date(f.date) + (f.where ? ', ' + esc(f.where) : '') + '.</p>' +
-        '<details><summary>The words of the document</summary><blockquote>' + esc(f.quote) + '</blockquote></details></li>';
+        (f.quote ? '<details><summary>The words of the document</summary><blockquote>' + esc(f.quote) + '</blockquote></details>' : '') + '</li>';
     }).join('');
   });
 
