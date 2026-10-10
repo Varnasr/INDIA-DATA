@@ -1,0 +1,120 @@
+<!--page {"title": "District Factors, All India", "description": "How each district's removal rate moves with women's schooling, early marriage, cooking fuel, registered deaths, towns and crowding inside each state, from NFHS-5 and the 2011 Census.", "place": "india"} -->
+<main id="main">
+<div class="page-head" data-no-i18n><h1>District Factors</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only. The rates come from the state pages, which link each figure to its source. The district circumstances come from the National Family Health Survey 2019-21 and the 2011 Census.</p>
+
+<article class="factors" lang="en" dir="ltr" data-no-i18n>
+  <div class="kpis" id="kpis"></div>
+
+  <h2>Schooling, early marriage and cooking fuel</h2>
+  <p class="sub">Each dot is a rank correlation inside one state, between each district's rate and one thing about the district measured by the National Family Health Survey in 2019-21. A value above zero means the districts with more of that thing lost more names. A value near zero means no relationship. The note under the chart gives how large a correlation has to be in each state before chance becomes an unlikely explanation.</p>
+  <div class="grid">
+    <div class="panel wide" id="pSchool">
+      <h3>Rank correlation between the rate and three district circumstances, state by state</h3>
+      <div class="vizbox" id="vSchool"></div>
+      <p id="nSchool"></p>
+    </div>
+  </div>
+  <p class="finding" id="fSchool"></p>
+
+  <h2>Registered deaths</h2>
+  <p class="sub">The survey asked households about deaths in the three years before it and whether each was registered. A district where most deaths are registered has a paper trail an officer can check a name against.</p>
+  <div class="grid">
+    <div class="panel wide" id="pDeath">
+      <h3>Rank correlation between the rate and the share of deaths registered</h3>
+      <div class="vizbox" id="vDeath"></div>
+      <p id="nDeath"></p>
+    </div>
+  </div>
+
+  <h2>Towns and crowding</h2>
+  <p class="sub">The same correlation with the share of people living in towns and the number of people per square kilometre, both from the 2011 Census, the last count by district. These are read on the districts of 2011, as on the urban page, and cover the nine states that page covers.</p>
+  <div class="grid">
+    <div class="panel wide" id="pTown">
+      <h3>Rank correlation between the rate and urban share and density, 2011</h3>
+      <div class="vizbox" id="vTown"></div>
+      <p id="nTown"></p>
+    </div>
+  </div>
+
+  <h2>Why these cannot be pulled apart</h2>
+  <p id="tCol"></p>
+
+  <details class="figs"><summary>Every correlation, state by state</summary>
+    <div class="twrap fit"><table id="tAll"></table></div>
+  </details>
+
+  <h2>How the figures were put together</h2>
+  <p>The district circumstances are from the National Family Health Survey 2019-21, the fifth round, which published a fact sheet for every district. They are taken from a published compilation of those fact sheets, and every Bihar value in it was checked against the Bihar compendium the Ministry of Health published. <span id="mChecked"></span> The survey published its district fact sheets in two phases. The compilation holds the first, which covers Bihar, Gujarat, Karnataka, Kerala, Maharashtra, Telangana and West Bengal among the states with district figures here. Tamil Nadu, Rajasthan, Uttar Pradesh, Uttarakhand and Delhi were in the second phase and are not on this page yet.</p>
+  <p>The survey used the districts of 2019 and 2020. A district made after that is counted under the district it was made from, and the districts sharing one survey district are added together before the rate is worked out. Bengaluru's four districts are counted as the survey's Bangalore, Kolkata's two as Kolkata, Vijayanagara under Bellary, and Mulugu and Narayanpet under the districts they came from. Telangana's Warangal and Hanumakonda are matched to the survey's Warangal Rural and Warangal Urban, which they replaced with changed boundaries in 2021.</p>
+  <p>Each state is read in its own measure, as on the urban page. In Gujarat, Karnataka, Maharashtra and Telangana it is the names left off the draft per 100 on the roll before, and Telangana's district figures are the state's as reported in the press. In Bihar it is both phases per 100 on the 2025 roll. West Bengal and Kerala published no removals below the state, so there it is the fall in the roll, which takes in ordinary deaths and moves too. A rank correlation is the ordinary correlation worked out on the districts' ranks, so one very large district cannot drive it. The size it must reach before chance becomes an unlikely explanation is 1.96 divided by the square root of one less than the number of districts. Kerala has 14 districts, so there a correlation must pass 0.54.</p>
+  <p class="note">Every figure on this page is computed from the published tables when the page loads. The district table downloads as <a href="../../data/india/factors.csv" download>CSV</a>.</p>
+
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</article>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/india.js"></script>
+<script>
+SIR.json('data/india/factors.json').then(function (d) {
+  var S = d.states, C = d.census, X = d.summary, p2 = function (x) { return SIR.d(x, 2); };
+  var list = function (a) { return a.length ? a.join(', ').replace(/, ([^,]*)$/, ' and $1') : ''; };
+  var FL = {}; d.factors.forEach(function (f) { FL[f.key] = f.label; });
+  var clear = function (k, sign) { return S.filter(function (s) { var v = s.survey[k]; return v && v.clear && (sign > 0 ? v.rho > 0 : v.rho < 0); }).map(function (s) { return s.state; }); };
+  var cl = function (k, sign) { return C.filter(function (s) { var v = s.census[k]; return v && v.clear && (sign > 0 ? v.rho > 0 : v.rho < 0); }).map(function (s) { return s.state; }); };
+  var schUp = clear('women_10yr', 1), schDn = clear('women_10yr', -1), litDn = clear('women_literate', -1), marUp = clear('married_18', 1), marDn = clear('married_18', -1);
+  var fuelUp = clear('clean_fuel', 1), deathUp = clear('death_reg', 1), deathDn = clear('death_reg', -1);
+  var urbUp = cl('urban_pct', 1), denUp = cl('density', 1);
+  var none = S.filter(function (s) { return !Object.keys(s.survey).some(function (k) { return k !== 'sex_ratio' && s.survey[k] && s.survey[k].clear; }); }).map(function (s) { return s.state; });
+  var cols = S.map(function (s) { return s.school_fuel; }), lo = Math.min.apply(null, cols), hi = Math.max.apply(null, cols);
+  var MEAS = { left_off: 'names left off per 100 on the roll before', roll_2025: 'names removed per 100 on the 2025 roll', fall: 'fall in the roll per 100' };
+
+  SIR.inShort([
+    'In ' + list(urbUp) + ', the districts with more of their people in towns lost clearly more names for their size, out of the ' + C.length + ' states with district figures.',
+    'Where women had more years of school and more homes cooked with gas or electricity, more names were removed, clearly so in ' + list(schUp.concat(fuelUp.filter(function (s) { return schUp.indexOf(s) < 0; }))) + '. In most states these are also the more urban districts.',
+    litDn.length ? list(litDn) + ' ran the other way. There the districts with fewer women who can read' + (marUp.length ? ' and more early marriage' : '') + ' lost more names.' : '',
+    'In ' + list(deathUp) + ', districts that register more of their deaths lost more names.' + (deathDn.length ? ' In ' + list(deathDn) + ' they lost fewer.' : ' In no state did they clearly lose fewer.'),
+    none.length ? 'In ' + list(none) + ' no survey circumstance goes clearly with the rate.' : ''
+  ].filter(Boolean), 'Survey figures are for 2019-21 and census figures for 2011. A correlation inside a state says which districts lost more and nothing about why, and the circumstances move together, so no one of them can be singled out. Tamil Nadu and Uttar Pradesh have census figures only so far, and Rajasthan, Uttarakhand and Delhi have none.');
+
+  document.getElementById('kpis').innerHTML = [
+    [urbUp.length + ' of ' + C.length, 'states where more urban districts clearly lost more names'],
+    [schUp.length + ' of ' + S.length, 'states where districts with more schooled women clearly lost more'],
+    [deathUp.length + ' of ' + S.length, 'states where districts registering more deaths clearly lost more'],
+    [X.survey_units, 'survey districts in ' + X.survey_states + ' states']
+  ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+
+  var cats = S.map(function (s) { return s.state + ' (' + s.units + ')'; });
+  var rv = function (k) { return S.map(function (s) { return s.survey[k] ? s.survey[k].rho : null; }); };
+  VIZ.dots('vSchool', { label: 'Rank correlation between the rate and three district circumstances, state by state', axis: 'Rank correlation',
+    cats: cats, series: [{ name: FL.women_10yr, col: '--fill-navy', vals: rv('women_10yr') }, { name: FL.clean_fuel, col: '--fill-amber', vals: rv('clean_fuel') }, { name: FL.married_18, col: '--fill-red', vals: rv('married_18') }] });
+  document.getElementById('nSchool').textContent = 'The number after each state is its count of survey districts. ' + S.map(function (s) { return s.state + ' needs ' + p2(s.chance); }).join(', ').replace(/, ([^,]*)$/, ' and $1') + ' before a correlation is clear of chance.';
+  document.getElementById('fSchool').innerHTML = '<b>Districts where women had more years of school lost clearly more names in ' + list(schUp) + '.</b> ' +
+    (marDn.length ? 'Early marriage runs the other way there, and its correlation is clearly below zero in ' + list(marDn) + '. ' : '') +
+    (marUp.length ? 'In ' + list(marUp) + ' the districts with more early marriage lost more' + (litDn.length ? ', and the districts with fewer women who can read lost more too' : '') + '. ' : '') +
+    (none.length ? 'In ' + list(none) + ' none of the survey circumstances is clear of chance.' : '');
+
+  VIZ.dots('vDeath', { label: 'Rank correlation between the rate and the share of deaths registered', axis: 'Rank correlation',
+    cats: cats, series: [{ name: FL.death_reg, col: '--fill-purple', vals: rv('death_reg') }] });
+  var dr = S.map(function (s) { return s.state + ' ' + p2(s.survey.death_reg.rho); }).join(', ').replace(/, ([^,]*)$/, ' and $1');
+  document.getElementById('nDeath').textContent = 'The correlations are ' + dr + '. Clear of chance in ' + list(deathUp.concat(deathDn)) + '. The figures cannot say whether registered deaths made dead names easier to find, or whether the same districts differ in other ways. In West Bengal and Kerala the rate is the fall in the roll, which takes in ordinary deaths as well.';
+
+  VIZ.dots('vTown', { label: 'Rank correlation between the rate and urban share and density, 2011', axis: 'Rank correlation',
+    cats: C.map(function (s) { return s.state + ' (' + s.units + ')'; }),
+    series: [{ name: FL.urban_pct, col: '--fill-navy', vals: C.map(function (s) { return s.census.urban_pct.rho; }) }, { name: FL.density, col: '--fill-teal', vals: C.map(function (s) { return s.census.density.rho; }) }] });
+  var bi = C.filter(function (s) { return s.state === 'Bihar'; })[0];
+  document.getElementById('nTown').textContent = 'The number after each state is its count of 2011 districts. More urban districts lost clearly more names in ' + list(urbUp) + ', and more crowded ones in ' + list(denUp) + '. ' +
+    (bi.census.urban_pct.rho < 0 ? 'Bihar runs the other way on urban share, at ' + p2(bi.census.urban_pct.rho) + (bi.census.urban_pct.clear ? '' : ', short of the ' + p2(bi.chance) + ' needed to be clear of chance') + ', while its correlation with density is ' + p2(bi.census.density.rho) + '. Bihar has few towns, and its crowded districts are mostly villages.' : '');
+
+  document.getElementById('tCol').textContent = 'Across the districts of each state, women\'s schooling and clean cooking fuel have a rank correlation of ' + p2(lo) + ' to ' + p2(hi) + ' with each other, and both are highest in the towns. A district with more schooled women is, in most states, a district with more homes on gas and more people in towns, and a district figure cannot say which of these, if any, made the difference. Separating them would take a count of who was removed, household by household, which no state has published. So this page shows which kinds of districts lost more names, and it stops there.';
+
+  var keys = d.factors.filter(function (f) { return f.source === 'nfhs'; }).map(function (f) { return f.key; });
+  var fmt = function (v) { return v ? p2(v.rho) + (v.clear ? ' *' : '') : '–'; };
+  SIR.table('tAll', [{ h: 'State' }, { h: 'Districts', num: true }].concat(keys.map(function (k) { return { h: FL[k], num: true }; })).concat([{ h: 'Measure' }]),
+    S.map(function (s) { return [SIR.esc(s.state), s.units].concat(keys.map(function (k) { return fmt(s.survey[k]); })).concat([MEAS[s.measure]]); }));
+  document.getElementById('mChecked').textContent = 'All ' + X.bihar_checked + ' Bihar values that appear in both agree exactly. A star in the table marks a correlation clear of chance.';
+  SIR.showFaq('india', 'factors');
+}).catch(SIR.fail);
+</script>

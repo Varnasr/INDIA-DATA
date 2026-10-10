@@ -256,6 +256,24 @@ rural in 7 of 9, and the order holds without the urban districts (rank
 correlation 0.2 or more) in five states. Never claim the share has grown since
 2011 without a source.
 
+**District factors** (`india/factors/`) sets each district's rate against
+its circumstances inside each state, as rank correlations, never across
+states. `scripts/build_factors.py` writes `data/india/factors.json` and the
+CSV; `check_data.py` runs it with `--check`. Survey factors (women who can
+read, ten years of school, married before 18, clean cooking fuel, sanitation,
+deaths registered, sex ratio) are NFHS-5 2019-21 district fact sheets from
+a published compilation (`data/india/raw/nfhs5_districts_phase1.csv`, see
+`FACTORS_SOURCES.md`), labelled secondary; the build fails unless every
+Bihar value agrees with Bihar's own compendium. It covers the seven phase 1
+states with a district table (Bihar, Gujarat, Karnataka, Kerala,
+Maharashtra, Telangana, West Bengal); the phase 2 compendia (Tamil Nadu,
+Rajasthan, Uttar Pradesh, Uttarakhand, Delhi) are not read yet. The unit is
+the survey's district, with later districts added into the one they were
+made from (`ALIAS`). Urban share and density are 2011 Census on the urban
+page's units. A correlation is "clear of chance" at 1.96 / sqrt(n - 1).
+The page says the circumstances move together (schooling and clean fuel
+correlate 0.43 to 0.77) and never names one as the cause. English only.
+
 **Charts first, tables folded.** The cities, women and comparisons pages
 lead each section with a chart and put the full figures in a
 `details.figs` fold. Tables there are drawn by `SIR.table(id, cols, rows)` in

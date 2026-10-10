@@ -217,6 +217,11 @@ def _assam():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_assam.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
+def _factors():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_factors.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+
+
 def _urban():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_urban.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -418,6 +423,7 @@ for name, fn in [
     ('the women table is current and every rate lies between 0 and 100', _women),
     ('Census 2011 A-01 districts are current and add to the India totals', _census_a01),
     ('the rural and urban table is current and every district has a 2011 parent', _urban),
+    ('the district factors are current and Bihar\'s survey values match its compendium', _factors),
     ('the NRC page carries only checked facts and is current', _nrc),
     ('the four-state constituency table is current and adds up', _ac_change),
     ('both forms of SIR.table work', _tables),
