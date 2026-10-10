@@ -46,6 +46,99 @@ def seats(state):
     return [(r['ac'], r['name'], r[f[1]], r['margin']) for r in rows]
 
 
+# Assembly seats in every state with a constituency table of its latest
+# Assembly election. No state but the ones with pages of their own published
+# its names left off by constituency, so each state's count is spread over its
+# seats in proportion to their electors, an assumption tested below where the
+# seats' own counts exist. (state, election, file under data/india/raw/assembly,
+# where the figures come from)
+ASM = [
+    ('Andhra Pradesh', '2024', 'andhrapradesh_2024.csv', 'c'), ('Arunachal Pradesh', '2024', 'arunachal_2024.csv', 'c'),
+    ('Chhattisgarh', '2023', 'chhattisgarh_2023.csv', 'e'), ('Goa', '2022', 'goa_2022.csv', 'c'),
+    ('Haryana', '2024', 'haryana_2024.csv', 'c'), ('Jharkhand', '2024', 'jharkhand_2024.csv', 'c'),
+    ('Karnataka', '2023', 'karnataka_2023.csv', 'c'), ('Madhya Pradesh', '2023', 'madhyapradesh_2023.csv', 'e'),
+    ('Maharashtra', '2024', 'maharashtra_2024.csv', 'c'), ('Odisha', '2024', 'odisha_2024.csv', 'c'),
+    ('Puducherry', '2026', 'puducherry_2026.csv', 'c'), ('Punjab', '2022', 'punjab_2022.csv', 'c'),
+    ('Sikkim', '2024', 'sikkim_2024.csv', 'c'), ('Telangana', '2023', 'telangana_2023.csv', 'e'),
+    ('Uttarakhand', '2022', 'uttarakhand_2022.csv', 'c'),
+    ('Manipur', '2022', 'manipur_2022.csv', 'c'), ('Meghalaya', '2023', 'meghalaya_2023.csv', 'c'),
+    ('Nagaland', '2023', 'nagaland_2023.csv', 'c'), ('Mizoram', '2023', 'mizoram_2023.csv', 'c'),
+    ('Uttar Pradesh', '2022', 'uttarpradesh_2022.csv', 'c'),
+]
+SRC = {'e': "the Election Commission's statistical report", 'c': "a published compilation of the Election Commission's results, checked seat by seat against a second"}
+# states with constituency pages of their own: (state, election, file, weight, actual count or None)
+OWN = [
+    ('Bihar', '2025', ('bihar', 'final.json'), 'before', 'total'), ('Tamil Nadu', '2026', ('tamilnadu', 'constituencies.json'), 'before', 'removed'),
+    ('Gujarat', '2022', ('gujarat', 'constituencies.json'), 'before', 'removed'), ('Delhi', '2025', ('delhi', 'constituencies.json'), 'roll_before', 'left_off'),
+    ('West Bengal', '2026', ('westbengal', 'constituencies.json'), 'roll_2024', None), ('Kerala', '2026', ('kerala', 'constituencies.json'), 'roll_2025', None),
+    ('Rajasthan', '2023', ('rajasthan', 'constituencies.json'), 'roll_2023', None),
+]
+ODISHA_SIX = {'Malkangiri': 146, 'Sanakhemundi': 130, 'Choudwar': 91, 'Bhubaneswar North': 113, 'Udala': 31, 'Sonepur': 65}
+
+
+def asm_rows(fname):
+    """[(ac, name, electors, margin or None if unopposed)] from a results table."""
+    out = []
+    for r in csv.DictReader(open(D('india', 'raw', 'assembly', fname), encoding='utf-8')):
+        unop = (r.get('unopposed') or '').strip().lower() == 'yes'
+        m = None if unop else int(r['margin'])
+        if m is not None:
+            assert m == int(r['winner_votes']) - int(r['runner_up_votes']), '%s AC %s: margin is not winner less runner-up' % (fname, r['ac'])
+        out.append((int(r['ac']), r['ac_name'], int(r['electors']), m))
+    acs = [x[0] for x in out]
+    assert len(acs) == len(set(acs)) == max(acs), '%s: ACs are not numbered 1 to %d once each' % (fname, max(acs))
+    return out
+
+
+def spread_count(rows, total):
+    """Seats whose margin is below the state's count spread over seats by electors."""
+    W = sum(e for _, _, e, _ in rows)
+    est = {ac: total * e / W for ac, _, e, _ in rows}
+    return est, sum(1 for ac, _, _, m in rows if m is not None and m < est[ac])
+
+
+def spread_assembly(st_rows):
+    removed = {s['state']: s['removed'] for s in st_rows if s.get('removed')}
+    spread, test = [], []
+    for st, year, fname, src in ASM:
+        if not os.path.exists(D('india', 'raw', 'assembly', fname)):
+            continue
+        rows = asm_rows(fname)
+        est, over = spread_count(rows, removed[st])
+        spread.append({'state': st, 'election': year, 'seats': len(rows), 'contested': sum(1 for r in rows if r[3] is not None),
+                       'removed': removed[st], 'over_margin': over, 'own': False, 'source': SRC[src]})
+    for st, year, f, wk, ak in OWN:
+        data = json.load(open(D(*f)))
+        data = data['seats'] if isinstance(data, dict) else data
+        mk = 'margin2025' if st == 'Bihar' else 'margin'
+        rows = [(int(r['ac']), r['name'], r[wk], r[mk]) for r in data if r.get(wk) and r.get(mk) is not None]
+        est, over = spread_count(rows, removed[st])
+        spread.append({'state': st, 'election': year, 'seats': len(data), 'contested': len(rows), 'removed': removed[st],
+                       'over_margin': over, 'own': True, 'source': 'this site\'s own constituency figures'})
+        if ak:
+            # the spread tested against the seats' own counts, the same total spread
+            act = {int(r['ac']): r[ak] for r in data}
+            e2, o2 = spread_count(rows, sum(act[ac] for ac, _, _, _ in rows))
+            real = sum(1 for ac, _, _, m in rows if act[ac] > m)
+            test.append({'state': st, 'election': year, 'seats': len(rows), 'actual': real, 'spread': o2,
+                         'spread_only': sum(1 for ac, _, _, m in rows if m < e2[ac] and not act[ac] > m),
+                         'actual_only': sum(1 for ac, _, _, m in rows if act[ac] > m and not m < e2[ac])})
+    spread.sort(key=lambda x: -x['over_margin'] / x['contested'])
+    # Odisha's six seats with a count in the press, against the spread
+    six = []
+    if os.path.exists(D('india', 'raw', 'assembly', 'odisha_2024.csv')):
+        rows = asm_rows('odisha_2024.csv')
+        est, _ = spread_count(rows, removed['Odisha'])
+        press = {r['name']: int(r['left_off']) for r in csv.DictReader(open(D('odisha', 'raw', 'district_ac_press_partial.csv'), encoding='utf-8')) if r['level'] == 'ac'}
+        assert set(press) == set(ODISHA_SIX), 'Odisha press seats changed: %s' % sorted(press)
+        by = {r[0]: r for r in rows}
+        for name, ac in ODISHA_SIX.items():
+            m = by[ac][3]
+            six.append({'name': name, 'ac': ac, 'press': press[name], 'spread': round(est[ac]), 'margin': m,
+                        'press_over': press[name] > m, 'spread_over': est[ac] > m})
+    return spread, test, six
+
+
 def build():
     pcs = list(csv.DictReader(open(D('india', 'raw', 'ls2024_pc_results.csv'), encoding='utf-8')))
     acpc = list(csv.DictReader(open(D('india', 'raw', 'ls2024_ac_pc.csv'), encoding='utf-8')))
@@ -107,13 +200,16 @@ def build():
                      'even_only': sum(1 for x in L if x['margin'] < e['per_pc'] and not x['over_margin']),
                      'actual_only': sum(1 for x in L if x['over_margin'] and not x['margin'] < e['per_pc'])})
 
+    spread, spread_test, odisha_six = spread_assembly(st_rows)
+
     def totals(kind):
         A = [a for a in assembly if a['kind'] == kind]
         L = [x for x in ls_seat if x['kind'] == kind]
         return {'states': [a['state'] for a in A], 'assembly_seats': sum(a['seats'] for a in A), 'assembly_over': sum(a['over_margin'] for a in A),
                 'ls_seats': len(L), 'ls_over': sum(x['over_margin'] for x in L)}
     data = {'source': SOURCE, 'assembly': assembly, 'removed': totals('removed'), 'fall': totals('fall'), 'ls_seat': ls_seat,
-            'even': even, 'even_test': test, 'even_total': {'states': len(even), 'pcs': sum(e['pcs'] for e in even), 'over_margin': sum(e['over_margin'] for e in even)},
+            'even': even, 'even_test': test, 'spread': spread, 'spread_test': spread_test, 'odisha_six': odisha_six,
+            'spread_total': {'states': len(spread), 'seats': sum(x['contested'] for x in spread), 'over_margin': sum(x['over_margin'] for x in spread)}, 'even_total': {'states': len(even), 'pcs': sum(e['pcs'] for e in even), 'over_margin': sum(e['over_margin'] for e in even)},
             'ls_close': {'under_50000': sum(1 for p in pcs if p['margin'] and int(p['margin']) < 50000), 'under_100000': sum(1 for p in pcs if p['margin'] and int(p['margin']) < 100000), 'contested': sum(1 for p in pcs if p['margin'])}}
     j = json.dumps(data, ensure_ascii=False, indent=1) + '\n'
     buf = io.StringIO(); w = csv.writer(buf, lineterminator='\n')
