@@ -1524,7 +1524,11 @@ per slot, not the slot's length.
   answers 404 for raw files, scripts, notes and `archive/`. Do not link source files from a page, and describe
   sources without naming the people or organisations who compiled them.
 - **Writing**: plain explanatory prose. Never refer to earlier versions of the
-  analysis or to corrections on a public page. The owner's rules, applied to
+  analysis or to corrections on a public page, with one exception: the
+  corrections page (`corrections/`, linked in every footer and from `terms/`,
+  English only) lists every correction of substance by date, with what the
+  page said, what it says now and why. Add an entry there whenever a figure
+  or finding changes; a change of wording that keeps the meaning is not listed. The owner's rules, applied to
   every page, report and deck: no em dashes; no sentences hinged on a colon
   ("X: Y") or strung on semicolons; no "X, not Y" or "not X but Y" turns; say
   the caveat about reasons once per page in plain words ("what the officer wrote
