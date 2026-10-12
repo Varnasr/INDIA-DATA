@@ -8,13 +8,20 @@ Writes data/india/factors.json and data/india/factors.csv.
 
 - The rates are the district rows the state pages already use, read through
   build_cities.rows(), each state in its own measure (see build_urban.py).
-- Survey factors are from NFHS-5 (2019-21), district fact sheets, taken from
-  a published compilation of the fact sheets
-  (data/india/raw/nfhs5_districts_phase1.csv, sources in
-  data/india/raw/FACTORS_SOURCES.md). It holds the seven states whose fact
-  sheets came out in the survey's first phase and that have a district table
-  here. Bihar's values are checked against the state's own compendium in
-  data/bihar/raw/nfhs5_districts.csv and the build fails on any difference.
+- Survey factors are from NFHS-5 (2019-21), read from the district fact sheets
+  in each state's Compendium of Fact Sheets (IIPS and the Ministry of Health)
+  into data/india/raw/nfhs5_districts.csv, with the page each value is on
+  (sources in data/india/raw/FACTORS_SOURCES.md). Twelve states. Bihar's
+  values are checked against data/bihar/raw/nfhs5_districts.csv, read earlier
+  from the same compendium, and the build fails on any difference.
+- Rates come from build_cities.rows() for the states it covers, and for
+  Rajasthan (the fall in the roll from 2023 to the final roll of 2026),
+  Uttarakhand (names removed after the draft) and Delhi (names left off, on
+  the 11 districts of the 2025 roll, which are the survey's) from their own
+  files (ROWS).
+- Income per head is read from each state's own district table (INCOME), on
+  that table's districts, in its own year and prices. Only ranks inside a
+  state are used, so the year and prices do not matter to the result.
 - The unit for the survey factors is the survey's district. A district made
   after the survey is counted under the one it was made from (ALIAS), and
   districts sharing a survey district are added together.
@@ -29,6 +36,7 @@ import csv
 import io
 import json
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -41,7 +49,10 @@ OUT = os.path.join(ROOT, 'data', 'india')
 CHECK = '--check' in sys.argv
 
 SURVEY_STATES = [('Bihar', 'roll_2025'), ('Gujarat', 'left_off'), ('Karnataka', 'left_off'), ('Maharashtra', 'left_off'),
-                 ('Telangana', 'left_off'), ('West Bengal', 'fall'), ('Kerala', 'fall')]
+                 ('Telangana', 'left_off'), ('Tamil Nadu', 'left_off'), ('Uttar Pradesh', 'left_off'),
+                 ('Delhi', 'left_off'), ('West Bengal', 'fall'), ('Kerala', 'fall'), ('Rajasthan', 'change_2023'),
+                 ('Uttarakhand', 'after_draft')]
+NFHS_STATE = {'Delhi': 'NCT Delhi'}  # as the compendium names it
 # key, NFHS-5 indicator number, label, source
 FACTORS = [
     ('women_literate', '14.', 'Women who can read', 'nfhs'),
@@ -70,12 +81,136 @@ ALIAS = {
                   'Jangaon': 'Jangoan', 'Warangal': 'Warangal Rural', 'Hanumakonda': 'Warangal Urban',
                   'Jayashankar Bhupalpalle': 'Jayashankar Bhupalapally', 'Bhadradri': 'Bhadradri Kothagudem',
                   'Mulugu': 'Jayashankar Bhupalapally', 'Narayanpet': 'Mahabubnagar', 'Mahbubnagar': 'Mahabubnagar'},
+    'Tamil Nadu': {'Chengalpattu': 'Kancheepuram', 'Ranipet': 'Vellore', 'Tirupathur': 'Vellore',
+                   'Tenkasi': 'Tirunelveli', 'Thoothukudi': 'Thoothukkudi', 'Mayiladuthurai': 'Nagapattinam',
+                   'Kallakurichi': 'Viluppuram'},
+    'Uttar Pradesh': {'Sant Kabir Nagar': 'Sant Kabeer Nagar', 'Ayodhya': 'Faizabad',
+                      'Bhadohi': 'Sant Ravidas Nagar (Bhadohi)', 'Shrawasti': 'Shravasti', 'Raebareli': 'Rae Bareli',
+                      'Hathras': 'Mahamaya Nagar', 'Kasganj': 'Kanshiram Nagar', 'Amroha': 'Jyotiba Phule Nagar'},
+    'Rajasthan': {'Salumber': 'Udaipur', 'Chittorgarh': 'Chittaurgarh', 'Khairthal-Tijara': 'Alwar',
+                  'Jhunjhunu': 'Jhunjhunun', 'Deedwanna-Kuchaman': 'Nagaur', 'Beawar': 'Ajmer', 'Jalore': 'Jalor',
+                  'Kotputali-Behror': 'Jaipur', 'Balotara': 'Barmer', 'Deeg': 'Bharatpur', 'Dholpur': 'Dhaulpur',
+                  'Phalodi': 'Jodhpur'},
+    'Uttarakhand': {'Udham Singh Nagar': 'Udam Singh Nagar'},
+    'Delhi': {'North-east': 'North East', 'North-west': 'North West', 'South-East': 'South East', 'South-West': 'South West'},
     'West Bengal': {'Kolkata North': 'Kolkata', 'Kolkata South': 'Kolkata', 'Paschim Bardhaman': 'Paschim Barddhaman',
                     'Purba Bardhaman': 'Purba Barddhaman', 'North 24 Parganas': 'North Twenty Four Parganas',
                     'South 24 Parganas': 'South Twenty Four Parganas', 'Howrah': 'Haora', 'Malda': 'Maldah',
                     'Alipurduar': 'Jalpaiguri', 'Hooghly': 'Hugli', 'Kalimpong': 'Darjeeling', 'Coochbehar': 'Koch Bihar',
                     'Purulia': 'Puruliya', 'Jhargram': 'Paschim Medinipur', 'Purbo Medinipur': 'Purba Medinipur'},
 }
+
+
+# state: (file under raw/income, value column, year and prices as printed, rows district: income district)
+INCOME = {
+    'Bihar': ('../../../bihar/raw/gddp_per_capita_2011_12_prices.csv', 'y2022_23', '2022-23, constant 2011-12 prices',
+              {'Purnia': 'Purnea'}),
+    'Karnataka': ('karnataka_es2025_26_district_gddp_pci.csv', 'Per Capita Income (Rs.)', '2024-25, current prices',
+                  {'B.B.M.P (South)': 'Bangalore Urban', 'B.B.M.P (Central)': 'Bangalore Urban',
+                   'B.B.M.P (North)': 'Bangalore Urban', 'Gulbarga': 'Kalaburagi', 'Mysore': 'Mysuru', 'Bellary': 'Ballari',
+                   'Yadgir': 'Yadagiri', 'Bijapur': 'Vijayapura', 'Bagalkot': 'Bagalkote', 'Davangere': 'Davanagere',
+                   'Vijayanagara': 'Vijayanagar', 'Belgaum': 'Belagavi', 'Shimoga': 'Shivamogga',
+                   'Ramanagaram': 'Bangalore South', 'Tumkur': 'Tumakuru', 'Chikkmagalur': 'Chikkamagaluru',
+                   'Chamarajnagar': 'Chamarajanagar'}),
+    'Maharashtra': ('maharashtra_es2025_26_district_gddp_pci.csv', 'Per Capita Nominal NDDP 2024-25+',
+                    '2024-25, current prices, first revised',
+                    {'Mumbai City': 'Mumbai#', 'Mumbai Suburban': 'Mumbai#', 'Thane': 'Thane$', 'Palghar': 'Thane$',
+                     'Aurangabad': 'Chhatrapati Sambhajinagar', 'Amaravati': 'Amravati', 'Osmanabad': 'Dharashiv'}),
+    'Telangana': ('telangana_seo2024_district_gddp_pci_2022_23.csv', 'PCI (Rs.) Current Prices 2022-23',
+                  '2022-23, current prices',
+                  {'Kumaram Bheem Asifabad': 'Kumuram Bheem', 'Yadadri Bhongiri': 'Yadadri',
+                   'Jayashankar Bhupalpalle': 'Jayashankar'}),
+    'Tamil Nadu': ('tamilnadu_2023_24_district_gddp_pci_constant.csv', 'Per capita Income (in Rupees)',
+                   '2023-24, constant 2011-12 prices',
+                   {'Tiruppur': 'Thiruppur', 'Thiruvallur': 'Tiruvallur', 'Sivaganga': 'Sivagangai',
+                    'Thiruvarur': 'Tiruvarur', 'Tirupathur': 'Thirupathur', 'Viluppuram': 'Villupuram',
+                    'The Nilgiris': 'The Nilgris'}),
+}
+
+
+def state_rows(state):
+    """[{district, before, removed}] in the state's own measure."""
+    if state == 'Rajasthan':
+        return [dict(district=d['district'], before=d['roll_2023'], removed=d['fall'])
+                for d in json.load(open(os.path.join(ROOT, 'data', 'rajasthan', 'districts.json'), encoding='utf-8'))]
+    if state == 'Uttarakhand':
+        return [dict(district=d['district'], before=d['draft'], removed=d['objections'])
+                for d in json.load(open(os.path.join(ROOT, 'data', 'uttarakhand', 'districts.json'), encoding='utf-8'))]
+    if state == 'Delhi':
+        out = {}
+        for r in csv.DictReader(open(os.path.join(ROOT, 'data', 'delhi', 'raw', 'ac.csv'), encoding='utf-8')):
+            u = out.setdefault(r['district_2025'], dict(district=r['district_2025'], before=0, removed=0))
+            u['before'] += int(r['roll_before'])
+            u['removed'] += int(r['left_off'])
+        return list(out.values())
+    return rows(state)
+
+
+def num(x):
+    return float(str(x).replace(',', '').strip())
+
+
+def read_income(state):
+    """{income district: income per head}, after checking the table's own totals."""
+    f, col, _, _ = INCOME[state]
+    path = os.path.join(RAW, 'income', f)
+    if state == 'Tamil Nadu':
+        rr = list(csv.reader(open(path, encoding='utf-8-sig')))
+        head, body = [' '.join(h.split()) for h in rr[0]], [r for r in rr[2:] if r and r[1]]
+        ci, gi = head.index(col), head.index('Gross District Domestic Product')
+        vals = {r[1]: num(r[ci]) for r in body if r[1] != 'STATE'}
+        st = [r for r in body if r[1] == 'STATE'][0]
+        g = sum(num(r[gi]) for r in body if r[1] != 'STATE')
+        if abs(g - num(st[gi])) > 0.002 * num(st[gi]):
+            raise SystemExit('FAIL - Tamil Nadu income: districts add to %s, state %s' % (g, st[gi]))
+        return vals
+    rs = list(csv.DictReader(open(path, encoding='utf-8-sig')))
+    if state == 'Bihar':  # build_bihar.py checks this table's ranks against its printed ranks
+        return {r['district']: num(r[col]) for r in rs if r['district'] != 'Bihar'}
+    if state == 'Karnataka':
+        body = [r for r in rs if r['District'] != 'State']
+        tot = [r for r in rs if r['District'] == 'State'][0]
+        g = sum(num(r['NDDP Current Prices (Rs. Cr)']) for r in body)
+        if abs(g - num(tot['NDDP Current Prices (Rs. Cr)'])) > 0.002 * g:
+            raise SystemExit('FAIL - Karnataka income: districts add to %s, state %s' % (g, tot['NDDP Current Prices (Rs. Cr)']))
+        return {r['District']: num(r[col]) for r in body}
+    if state == 'Maharashtra':
+        body, divs, cur = [], [], []
+        for r in rs:
+            if r['Sr. No.'].strip().isdigit():
+                cur.append(r)
+                body.append(r)
+            elif r['District'].strip().endswith('DIV.'):
+                g = sum(num(x['Nominal GDDP 2024-25+']) for x in cur)
+                if abs(g - num(r['Nominal GDDP 2024-25+'])) > 2 + 0.001 * g:
+                    raise SystemExit('FAIL - Maharashtra income: %s districts add to %s' % (r['District'], g))
+                divs.append(r)
+                cur = []
+        if len(divs) != 6:
+            raise SystemExit('FAIL - Maharashtra income: expected six divisions')
+        return {r['District']: num(r[col]) for r in body}
+    return {r['District']: num(r[col]) for r in rs if r['District']}
+
+
+def income_units(state):
+    _, _, year, m = INCOME[state]
+    inc = read_income(state)
+    norm = {re.sub('[^a-z]', '', k.lower()): k for k in inc}
+    units = {}
+    for d in state_rows(state):
+        k = m.get(d['district']) or norm.get(re.sub('[^a-z]', '', d['district'].lower()), d['district'])
+        if k not in inc:
+            raise SystemExit('FAIL - %s income: no district %s (%s)' % (state, d['district'], k))
+        u = units.setdefault(k, dict(unit=k.rstrip('#$'), districts=[], before=0, removed=0, income_pc=inc[k]))
+        u['districts'].append(d['district'])
+        u['before'] += d['before']
+        u['removed'] += d['removed']
+    if set(units) != set(inc):
+        raise SystemExit('FAIL - %s income: districts with no rows: %s' % (state, sorted(set(inc) - set(units))))
+    us = sorted(units.values(), key=lambda u: u['unit'])
+    for u in us:
+        u['per_100'] = round(100 * u['removed'] / u['before'], 4)
+    return us, year
 
 
 def chance(n):
@@ -91,11 +226,11 @@ def pearson(a, b):
 
 def read_nfhs():
     nf = {}
-    for r in csv.DictReader(open(os.path.join(RAW, 'nfhs5_districts_phase1.csv'), encoding='utf-8')):
-        num = r['indicator'].split(' ')[0]
+    for r in csv.DictReader(open(os.path.join(RAW, 'nfhs5_districts.csv'), encoding='utf-8')):
         if r['nfhs5'] == '':
             continue
-        nf.setdefault((r['state'], r['district']), {})[num] = float(r['nfhs5'])
+        st = {v: k for k, v in NFHS_STATE.items()}.get(r['state'], r['state'])
+        nf.setdefault((st, r['district']), {})[r['indicator'] + '.'] = float(r['nfhs5'])
     # Bihar against the state's own compendium
     own = {}
     for r in csv.DictReader(open(os.path.join(ROOT, 'data', 'bihar', 'raw', 'nfhs5_districts.csv'), encoding='utf-8')):
@@ -110,7 +245,7 @@ def read_nfhs():
             if (name, num) in own:
                 seen += 1
                 if own[(name, num)] != x:
-                    raise SystemExit('FAIL - Bihar %s %s: compilation %s, compendium %s' % (d, num, x, own[(name, num)]))
+                    raise SystemExit('FAIL - Bihar %s %s: read %s, earlier reading %s' % (d, num, x, own[(name, num)]))
     if seen < 140:
         raise SystemExit('FAIL - only %d Bihar values checked against the compendium' % seen)
     return nf, seen
@@ -132,7 +267,7 @@ def build():
     for state, measure in SURVEY_STATES:
         al = ALIAS.get(state, {})
         units = {}
-        for d in rows(state):
+        for d in state_rows(state):
             name = al.get(d['district'], d['district'])
             v = nf.get((state, name))
             if v is None:
@@ -150,9 +285,9 @@ def build():
             u['per_100'] = round(100 * u['removed'] / u['before'], 4)
             u['measure'] = measure
         tb, tm = sum(u['before'] for u in us), sum(u['removed'] for u in us)
-        if tb != sum(r['before'] for r in rows(state)) or tm != sum(r['removed'] for r in rows(state)):
+        if tb != sum(r['before'] for r in state_rows(state)) or tm != sum(r['removed'] for r in state_rows(state)):
             raise SystemExit('FAIL - %s: units do not add up to the state' % state)
-        states.append(dict(state=state, measure=measure, units=len(us), districts=len(rows(state)),
+        states.append(dict(state=state, measure=measure, units=len(us), districts=len(state_rows(state)),
                            per_100=round(100 * tm / tb, 4), chance=chance(len(us)),
                            # how closely schooling and clean fuel move together across the districts
                            school_fuel=spearman([u['women_10yr'] for u in us], [u['clean_fuel'] for u in us]),
@@ -172,6 +307,12 @@ def build():
         if census[-1]['census']['urban_pct']['rho'] != s['rho'] and census[-1]['census']['urban_pct']['n'] == s['units']:
             raise SystemExit('FAIL - %s: urban share does not match the rural and urban page' % s['state'])
 
+    income = []
+    for st in INCOME:
+        us, year = income_units(st)
+        income.append(dict(state=st, year=year, units=len(us), chance=chance(len(us)), income=correl(us, 'income_pc'),
+                           rows=[dict(unit=u['unit'], districts=u['districts'], income_pc=u['income_pc'],
+                                      per_100=u['per_100']) for u in us]))
     sv = [k for k, num, _, src in FACTORS if src == 'nfhs']
     clear = {k: [s['state'] for s in states if s['survey'][k] and s['survey'][k]['clear']] for k in sv}
     summary = dict(survey_states=len(states), survey_units=len(units_out), census_states=len(census),
@@ -179,7 +320,7 @@ def build():
                    lit_negative=sum(1 for s in states if s['survey']['women_literate']['rho'] < 0),
                    lit_positive=sum(1 for s in states if s['survey']['women_literate']['rho'] > 0))
     return dict(summary=summary, factors=[dict(key=k, nfhs=num, label=l, source=src) for k, num, l, src in FACTORS],
-                states=states, census=census, units=units_out)
+                states=states, census=census, income=income, units=units_out)
 
 
 def as_csv(d):
@@ -209,6 +350,8 @@ def main():
     for s in d['states']:
         print('%-12s n=%2d chance %.2f  ' % (s['state'], s['units'], s['chance'])
               + '  '.join('%s %+.2f%s' % (k[:8], v['rho'], '*' if v['clear'] else '') for k, v in s['survey'].items() if v))
+    for s in d['income']:
+        print('income %-11s n=%2d rho %+.2f%s' % (s['state'], s['units'], s['income']['rho'], '*' if s['income']['clear'] else ''))
     for s in d['census']:
         print('%-13s n=%2d chance %.2f  ' % (s['state'], s['units'], s['chance'])
               + '  '.join('%s %+.2f%s' % (k, v['rho'], '*' if v['clear'] else '') for k, v in s['census'].items() if v))

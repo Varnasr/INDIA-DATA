@@ -506,8 +506,8 @@
  },
  "data/india/factors.csv": {
   "state": "The state.",
-  "measure": "What is counted, where left_off means names left off the draft per 100 on the roll before, roll_2025 means Bihar's names removed in both phases per 100 on the 2025 roll, and fall means the fall in the roll to the draft (West Bengal from the 2024 roll, Kerala from the January 2025 roll).",
-  "nfhs5_district": "The district as the National Family Health Survey 2019-21 published it, which is the unit each row adds up.",
+  "measure": "What is counted, where left_off means names left off the draft per 100 on the roll before, roll_2025 means Bihar's names removed in both phases per 100 on the 2025 roll, and fall means the fall in the roll to the draft (West Bengal from the 2024 roll, Kerala from the January 2025 roll), change_2023 means Rajasthan's fall in the roll from the 2023 election roll to the final roll of 2026 per 100, and after_draft means Uttarakhand's names removed after the draft per 100 on the draft.",
+  "nfhs5_district": "The district as the National Family Health Survey 2019-21 published it, which is the unit each row adds up. Delhi's are the 11 districts of its 2025 roll.",
   "districts_today": "The present districts counted under it, separated by a semicolon character. A district made after the survey is counted under the one it was made from.",
   "roll_before": "Electors on the roll the count is measured against, summed over the districts, as a count.",
   "count": "Names left off, or the fall in the roll, summed over the districts, as a count.",
