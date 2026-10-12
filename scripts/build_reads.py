@@ -31,6 +31,7 @@ TYPE = {
 BY_URL = {
     'https://www.deccanherald.com/opinion/sir-redraws-bengals-margins-of-power-3995060': 'Data and analysis',
     'https://sabarinstitute.org/research-and-publications/citizens-handbook-for-filing-sir-voter-deletion-appeals': 'Law and the courts',
+    'https://thewire.in/business/the-link-between-tcs-sirs-digital-stack-and-the-noel-tata-n-chandrasekaran-tussle': 'Data and analysis',
     'https://indianexpress.com/article/india/decisions-unanimous-election-commission-response-sir-vote-express-investigation-gyanesh-kumar-10890491/': "The Commission's account",
 }
 # the Hyderabad lists' compiler is never named or pointed to (CLAUDE.md), so
