@@ -1444,6 +1444,17 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   4.5.1 from cdnjs with an `integrity` hash on every page; a version change
   needs the new hash from cdnjs's API. A new outside origin goes into the
   policy and into the privacy section of `terms/` in the same commit.
+- **Search engines and sharing.** `build_site.py` writes, beside the Open
+  Graph tags, a canonical link, Twitter title and description, `og:locale`
+  and JSON-LD on every page (`ldjson()`: the WebSite on the front page, a
+  WebPage elsewhere, and a Dataset with its CSVs on each place's first page),
+  plus `sitemap.xml` and `robots.txt` at the root; `NOINDEX` keeps the share
+  form's thank-you page out. `SIR.inShort` puts a share row under every
+  page's findings: WhatsApp with the place, the page title and the first
+  finding written in, and Copy link. `SIR.pageUrl` keeps `?lang=` so a link
+  shared from a translated page opens in that language. No hreflang: the
+  translations are drawn in the browser, so every language's address serves
+  the same English HTML to a crawler.
 - No page states the site's own address.
 - Colour tokens live in `assets/sir.css`, with the dark block written twice
   (`prefers-color-scheme` and `[data-theme="dark"]`). `check_contrast.py`

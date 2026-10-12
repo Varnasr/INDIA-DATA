@@ -301,8 +301,11 @@ def shell(out, meta, content, scripts):
                   '<meta property="og:title" content="%s">\n<meta property="og:description" content="%s">\n'
                   '<meta property="og:url" content="%s%s">\n<meta property="og:image" content="%s">\n'
                   '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
-                  '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="%s">'
-                  % (html.escape(CFG['title']), t, d, CFG['url'], out, og, og)) + head_extra
+                  '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="%s">\n'
+                  '<meta name="twitter:title" content="%s">\n<meta name="twitter:description" content="%s">\n'
+                  '<meta property="og:locale" content="en_IN">\n<link rel="canonical" href="%s%s">\n%s%s'
+                  % (html.escape(CFG['title']), t, d, CFG['url'], out, og, og, t, d, CFG['url'], out, ldjson(out, meta, place),
+                     '\n<meta name="robots" content="noindex">' if out in NOINDEX else '')) + head_extra
     cls = place.get('class', place['id'])
     # dashboards and explorers get the wider column (sir.css, body.wide)
     if meta.get('own_tabs') or out.endswith('explorer/'):
@@ -334,7 +337,34 @@ def put(path, text, compare_unstamped=True):
         open(path, 'w', encoding='utf-8').write(text)
 
 
+# pages kept out of search: the form's thank-you page
+NOINDEX = {'share/thanks/'}
+
+
+def ldjson(out, meta, place):
+    """schema.org markup: the site on the front page, every other page as a
+    page of it, and each place's overview as a dataset with its CSVs."""
+    pub = {'@type': 'Organization', 'name': CFG['credit'], 'url': CFG['credit_url']}
+    site = {'@type': 'WebSite', 'name': CFG['title'], 'url': CFG['url'], 'inLanguage': 'en-IN', 'publisher': pub}
+    url = CFG['url'] + out
+    if out == '':
+        d = dict(site, **{'@context': 'https://schema.org', 'description': meta['description']})
+    else:
+        d = {'@context': 'https://schema.org', '@type': 'WebPage', 'name': meta['title'], 'description': meta['description'],
+             'url': url, 'inLanguage': 'en-IN', 'isPartOf': site, 'publisher': pub}
+        csvs = [x for x in place.get('downloads', []) if x[0].endswith('.csv')]
+        first = (place.get('pages') or [[None]])[0][0]
+        if csvs and out == first:
+            d = {'@context': 'https://schema.org', '@type': 'Dataset', 'name': meta['title'], 'description': meta['description'],
+                 'url': url, 'inLanguage': 'en-IN', 'isAccessibleForFree': True, 'creator': pub, 'publisher': pub,
+                 'license': 'https://creativecommons.org/licenses/by/4.0/', 'spatialCoverage': 'India',
+                 'distribution': [{'@type': 'DataDownload', 'encodingFormat': 'text/csv', 'name': x[1],
+                                   'contentUrl': CFG['url'] + x[0]} for x in csvs]}
+    return '<script type="application/ld+json">%s</script>' % json.dumps(d, ensure_ascii=False).replace('</', '<\\/')
+
+
 def build():
+    pages = []
     for d, _, files in os.walk(SRC):
         for f in files:
             if f != 'index.html':
@@ -344,6 +374,13 @@ def build():
             out = rel[:-len('index.html')]
             meta, content, scripts = read_source(src)
             put(os.path.join(ROOT, rel), shell(out, meta, heading_ids(content), scripts))
+            if out not in NOINDEX:
+                pages.append(out)
+    # every page for search engines, and where to find the list
+    put(os.path.join(ROOT, 'sitemap.xml'), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + ''.join('<url><loc>%s%s</loc></url>\n' % (CFG['url'], html.escape(o)) for o in sorted(pages)) + '</urlset>\n', compare_unstamped=False)
+    put(os.path.join(ROOT, 'robots.txt'), 'User-agent: *\nAllow: /\nDisallow: /data/india/raw/\nDisallow: /scripts/\n\nSitemap: %ssitemap.xml\n' % CFG['url'],
+        compare_unstamped=False)
     # the phone section bar's lists, from the same config
     sites = {}
     for p in CFG['places']:
