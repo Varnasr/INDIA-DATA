@@ -457,13 +457,29 @@
     if (ol) ol.innerHTML = points.filter(Boolean).map(function (t) { return '<li>' + t + '</li>'; }).join('');
     var n = document.getElementById('shortNote');
     if (n) { n.innerHTML = note || ''; n.hidden = !note; }
+    // the page's own share row, under its findings: WhatsApp opens with the
+    // page's title and its first finding already written
+    if (ol && ol.children.length && !document.querySelector('.pageshare')) {
+      var first = ol.children[0].innerText.replace(/\s+/g, ' ').trim(),
+        h = document.querySelector('main h1'), k = document.querySelector('main .kicker'),
+        title = (k ? k.textContent.trim() + ', ' : '') + (h ? h.textContent.trim() : document.title),
+        text = title + '. ' + first, bar = document.createElement('div');
+      bar.className = 'tools pageshare';
+      bar.innerHTML = '<a class="btn" target="_blank" rel="noopener" href="' + SIR.esc(SIR.wa(text)) + '">' + L('Share on WhatsApp') + '</a><button type="button">' + L('Copy link') + '</button>';
+      bar.querySelector('button').addEventListener('click', function (e) { copy(SIR.pageUrl(), e.target); });
+      ol.parentNode.insertBefore(bar, ol.nextSibling);
+    }
   };
 
   // ---- Questions and answers. Each analysis registers one loader
   // (assets/faq/<site>.js) returning [[question, answer, [page keys]], ...].
   // ---- sharing. WhatsApp opens with the text already written; on a phone
   // that is the app, on a computer WhatsApp Web.
-  SIR.pageUrl = function (hash) { return location.origin + location.pathname + (hash ? '#' + hash : ''); };
+  // a link shared from a translated page opens in the same language
+  SIR.pageUrl = function (hash) {
+    var m = /[?&]lang=([a-z]{2})/.exec(location.search);
+    return location.origin + location.pathname + (m && m[1] !== 'en' ? '?lang=' + m[1] : '') + (hash ? '#' + hash : '');
+  };
   SIR.wa = function (text, hash) { return 'https://wa.me/?text=' + encodeURIComponent(text + '\n' + SIR.pageUrl(hash)); };
   function copy(text, btn) {
     var done = function () { var t = btn.textContent; btn.textContent = L('Copied'); setTimeout(function () { btn.textContent = t; }, 1500); };

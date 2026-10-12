@@ -1159,3 +1159,7 @@ html.dyslexic-font .pull .pq .tr{font-style:normal}
   header.top.open .controls>.btn,header.top.open .controls>button,header.top.open .controls>.dl>summary.btn,header.top.open .controls #lang,header.top.open .controls #dys-font-btn{width:100%!important;height:44px;justify-content:center;border:1px solid var(--line);border-radius:8px}
   header.top.open .controls #lang{padding-inline:.5rem}
 }
+
+/* the page's share row under its findings */
+.pageshare{display:flex;gap:.5rem;flex-wrap:wrap;margin:.2rem 0 1.2rem}.pageshare .btn,.pageshare button{font-size:.8rem;padding:.3rem .8rem;border-radius:6px}
+@media print{.pageshare{display:none}}
