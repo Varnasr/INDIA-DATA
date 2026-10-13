@@ -114,7 +114,7 @@ function cover(pres, K, P, kicker, title, sub, stats) {
   s.addText(sub, { x: M, y: 2.6, w: W - 2 * M - 1, h: 0.8, fontFace: BODY, fontSize: 17, color: P.light, margin: 0, isTextBox: true, valign: 'top' });
   const cw = (W - 2 * M - 0.3 * (stats.length - 1)) / stats.length;
   stats.forEach((st, i) => K.stat(s, M + i * (cw + 0.3), 3.75, cw, 1.9, st[0], st[1], { fill: P.darker, color: 'FFFFFF', lcolor: P.light, size: 30, lsize: 12.5 }));
-  s.addText('PinPoint Ventures', { x: M, y: 6.3, w: 8, h: 0.4, fontFace: BODY, fontSize: 13, color: P.light, margin: 0, isTextBox: true });
+  s.addText('ImpactMojo', { x: M, y: 6.3, w: 8, h: 0.4, fontFace: BODY, fontSize: 13, color: P.light, margin: 0, isTextBox: true });
   K.band(s);
   return s;
 }
@@ -137,9 +137,9 @@ function closing(pres, K, P, head, lines) {
 function bihar() {
   const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json'), FB = J('bihar/final.json'), TS = J('bihar/tests.json'), IM = J('bihar/impact.json'), SW = J('bihar/swing.json').summary, RB = J('bihar/r' + 'obust.json'); // file name split so the prose check does not read it as a word
   const t = S.totals, DI = ID.districts;
-  const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · PinPoint Ventures · totals only, never names or EPIC numbers' };
+  const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · ImpactMojo · totals only, never names or EPIC numbers' };
   const AL = { NDA: 'E67E22', INDIA: '1E8449', Other: '8E7CC3' };
-  const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'PinPoint Ventures'; pres.title = 'Bihar SIR 2025';
+  const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'ImpactMojo'; pres.title = 'Bihar SIR 2025';
   const K = kit(pres, P);
   const withM = A.filter((a) => a.margin2025), over = withM.filter((a) => a.total > a.margin2025);
   const nda = withM.filter((a) => a.al2025 === 'NDA'), ndaO = nda.filter((a) => a.total > a.margin2025);
@@ -469,7 +469,7 @@ function bihar() {
     'A second program, written separately, recomputes every headline figure from the raw files before publication. Only counts are published, never a name, EPIC number or address.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
-  closing(pres, K, P, 'The full analysis', ['The dashboard, the booth explorer for every constituency and booth, and the full report with a chapter for each of the 38 districts, are published online alongside this deck.', 'PinPoint Ventures']);
+  closing(pres, K, P, 'The full analysis', ['The dashboard, the booth explorer for every constituency and booth, and the full report with a chapter for each of the 38 districts, are published online alongside this deck.', 'ImpactMojo']);
   K.contents(toc);
   return pres.writeFile({ fileName: path.join(OUT, 'bihar-sir-2025-deck.pptx') });
 }
@@ -479,8 +479,8 @@ function hyderabad() {
   const S = J('hyderabad/summary.json'), PJ = J('hyderabad/parts.json'), HI = J('hyderabad/impact.json').seats;
   const PR = PJ.rows.map((r) => Object.fromEntries(PJ.fields.map((f, i) => [f, r[i]])));
   const A = S.acs, t = S.totals, names = A.map((a) => a.name);
-  const P = { dark: '6E1832', darker: '52101F', accent: '8B1E3F', light: 'F2D9B8', soft: 'F7ECEF', band: ['8B1E3F', '0E5E6F', 'E0A526', '0E5E6F'], foot: 'Hyderabad Old City SIR 2026 · PinPoint Ventures · totals only, never names or EPIC numbers' };
-  const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'PinPoint Ventures'; pres.title = 'Hyderabad Old City SIR 2026';
+  const P = { dark: '6E1832', darker: '52101F', accent: '8B1E3F', light: 'F2D9B8', soft: 'F7ECEF', band: ['8B1E3F', '0E5E6F', 'E0A526', '0E5E6F'], foot: 'Hyderabad Old City SIR 2026 · ImpactMojo · totals only, never names or EPIC numbers' };
+  const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'ImpactMojo'; pres.title = 'Hyderabad Old City SIR 2026';
   const K = kit(pres, P);
   const s_ = (f) => sum(A, f);
   const LK = A.filter((a) => a.linked), yak = A.find((a) => a.name === 'Yakutpura'), mal = A.find((a) => a.name === 'Malakpet');
@@ -660,7 +660,7 @@ function hyderabad() {
     'The 2023 results are the declared Assembly results. Only counts are published, never a name, EPIC number or address.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
-  closing(pres, K, P, 'The full analysis', ['The dashboard, the part explorer for every polling part, and the full report with a chapter for each constituency, are published online alongside this deck.', 'PinPoint Ventures']);
+  closing(pres, K, P, 'The full analysis', ['The dashboard, the part explorer for every polling part, and the full report with a chapter for each constituency, are published online alongside this deck.', 'ImpactMojo']);
   K.contents(toc);
   return pres.writeFile({ fileName: path.join(OUT, 'hyderabad-old-city-sir-2026-deck.pptx') });
 }
@@ -668,8 +668,8 @@ function hyderabad() {
 // ============================================================ ALL INDIA
 function india() {
   const N = J('india/states.json'), T = N.total, S = N.states, P = N.by_phase;
-  const Pal = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'SIR 2025-26 · All India · PinPoint Ventures · totals only, never names or EPIC numbers' };
-  const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'PinPoint Ventures'; pres.title = 'SIR 2025-26: All India';
+  const Pal = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'SIR 2025-26 · All India · ImpactMojo · totals only, never names or EPIC numbers' };
+  const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'ImpactMojo'; pres.title = 'SIR 2025-26: All India';
   const K = kit(pres, Pal);
   const RK = ['dead', 'shifted_absent_other', 'duplicate'], RN = { dead: 'Dead', shifted_absent_other: 'Shifted, absent or other', duplicate: 'Enrolled more than once' };
   const RC = { dead: GREY, shifted_absent_other: '1F618D', duplicate: 'D4AC0D' };
@@ -884,7 +884,7 @@ function india() {
     'No name, EPIC number or address is published.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
-  closing(pres, K, Pal, 'The full analysis', ['The All India table with a source for every row, and the full report, are published online alongside this deck.', 'PinPoint Ventures']);
+  closing(pres, K, Pal, 'The full analysis', ['The All India table with a source for every row, and the full report, are published online alongside this deck.', 'ImpactMojo']);
   K.contents(toc);
   return pres.writeFile({ fileName: path.join(OUT, 'sir-india-deck.pptx') });
 }

@@ -115,7 +115,7 @@ function cover(pres, K, P, kicker, title, sub, stats) {
   s.addText(sub, { x: M, y: 2.6, w: W - 2 * M - 1, h: 0.8, fontFace: BODY, fontSize: 17, color: P.light, margin: 0, isTextBox: true, valign: 'top' });
   const cw = (W - 2 * M - 0.3 * (stats.length - 1)) / stats.length;
   stats.forEach((st, i) => K.stat(s, M + i * (cw + 0.3), 3.75, cw, 1.9, st[0], st[1], { fill: P.darker, color: 'FFFFFF', lcolor: P.light, size: 30, lsize: 12.5 }));
-  s.addText('PinPoint Ventures', { x: M, y: 6.3, w: 8, h: 0.4, fontFace: BODY, fontSize: 13, color: P.light, margin: 0, isTextBox: true });
+  s.addText('ImpactMojo', { x: M, y: 6.3, w: 8, h: 0.4, fontFace: BODY, fontSize: 13, color: P.light, margin: 0, isTextBox: true });
   K.band(s);
   return s;
 }
@@ -171,7 +171,7 @@ function partyTable(K, s, rows, key, head) {
 }
 
 function deck(title, P) {
-  const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'PinPoint Ventures'; pres.title = title;
+  const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'ImpactMojo'; pres.title = title;
   return [pres, kit(pres, P)];
 }
 const band = ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'];
@@ -180,7 +180,7 @@ const band = ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'];
 function tamilnadu() {
   const S = J('tamilnadu/summary.json'), D = J('tamilnadu/districts.json'), A = J('tamilnadu/constituencies.json');
   const C = S.chennai, WN = Object.fromEntries(S.winners.map((w) => [w.party, w])), low = D[D.length - 1];
-  const P = { dark: '6E3420', darker: '552818', accent: '8E442B', light: 'F2DCCB', soft: 'FBEFE8', band, foot: 'Tamil Nadu SIR 2026 · PinPoint Ventures · totals only, never names or EPIC numbers' };
+  const P = { dark: '6E3420', darker: '552818', accent: '8E442B', light: 'F2DCCB', soft: 'FBEFE8', band, foot: 'Tamil Nadu SIR 2026 · ImpactMojo · totals only, never names or EPIC numbers' };
   const [pres, K] = deck('Tamil Nadu SIR 2026', P);
   const CHN = A.filter((a) => a.district === 'Chennai').sort((a, b) => b.per_100 - a.per_100);
 
@@ -270,7 +270,7 @@ function tamilnadu() {
     'Only counts are published, never a name, EPIC number or address.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
-  closing(pres, K, P, 'The full analysis', ['The constituency map, every district and constituency, and the full report are published online alongside this deck.', 'PinPoint Ventures']);
+  closing(pres, K, P, 'The full analysis', ['The constituency map, every district and constituency, and the full report are published online alongside this deck.', 'ImpactMojo']);
   K.contents(toc);
   return pres.writeFile({ fileName: path.join(OUT, 'tamil-nadu-sir-2026-deck.pptx') });
 }
@@ -278,7 +278,7 @@ function tamilnadu() {
 // ============================================================ KARNATAKA
 function karnataka() {
   const S = J('karnataka/summary.json'), D = J('karnataka/districts.json'), B = S.bengaluru, R = S.rest;
-  const P = { dark: '17533F', darker: '103D2E', accent: '1E6B52', light: 'CFE8DE', soft: 'EAF5F0', band, foot: 'Karnataka SIR 2026 · PinPoint Ventures · totals only, never names or EPIC numbers' };
+  const P = { dark: '17533F', darker: '103D2E', accent: '1E6B52', light: 'CFE8DE', soft: 'EAF5F0', band, foot: 'Karnataka SIR 2026 · ImpactMojo · totals only, never names or EPIC numbers' };
   const [pres, K] = deck('Karnataka SIR 2026', P);
   const BL = D.filter((d) => d.bengaluru), nxt = D.filter((d) => !d.bengaluru), low = D[D.length - 1];
   const RK = [['shifted', 'Shifted', '1F618D'], ['absent', 'Absent', 'C0392B'], ['dead', 'Dead', GREY], ['duplicate', 'Already enrolled', 'D4AC0D'], ['other', 'Other', '8E7CC3']];
@@ -351,7 +351,7 @@ function karnataka() {
     'Only counts are published, never a name, EPIC number or address.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 16);
 
-  closing(pres, K, P, 'The full analysis', ['The district map, every district, and the full report are published online alongside this deck.', 'PinPoint Ventures']);
+  closing(pres, K, P, 'The full analysis', ['The district map, every district, and the full report are published online alongside this deck.', 'ImpactMojo']);
   K.contents(toc);
   return pres.writeFile({ fileName: path.join(OUT, 'karnataka-sir-2026-deck.pptx') });
 }
@@ -360,7 +360,7 @@ function karnataka() {
 function westbengal() {
   const S = J('westbengal/summary.json'), D = J('westbengal/districts.json'), A = J('westbengal/constituencies.json'), Pn = S.pn05, AD = S.adj;
   const WN = Object.fromEntries(S.winners.map((w) => [w.party, w])), kol = (n) => /^Kolkata/.test(n), low = D[D.length - 1];
-  const P = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band, foot: 'West Bengal SIR 2026 · PinPoint Ventures · totals only, never names or EPIC numbers' };
+  const P = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band, foot: 'West Bengal SIR 2026 · ImpactMojo · totals only, never names or EPIC numbers' };
   const [pres, K] = deck('West Bengal SIR 2026', P);
 
   cover(pres, K, P, 'Special Intensive Revision · West Bengal 2026', 'The revision left ' + lakh(Pn.removed) + ' names off West Bengal\'s draft roll and held back ' + lakh(Pn.adjudication) + ' more',
@@ -451,7 +451,7 @@ function westbengal() {
     'Only counts are published, never a name, EPIC number or address.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
-  closing(pres, K, P, 'The full analysis', ['The constituency map, every district and constituency, and the full report are published online alongside this deck.', 'PinPoint Ventures']);
+  closing(pres, K, P, 'The full analysis', ['The constituency map, every district and constituency, and the full report are published online alongside this deck.', 'ImpactMojo']);
   K.contents(toc);
   return pres.writeFile({ fileName: path.join(OUT, 'west-bengal-sir-2026-deck.pptx') });
 }
@@ -460,7 +460,7 @@ function westbengal() {
 function kerala() {
   const S = J('kerala/summary.json'), D = J('kerala/districts.json'), A = J('kerala/constituencies.json');
   const WN = Object.fromEntries(S.winners.map((w) => [w.party, w])), low = D[D.length - 1], grew = D.filter((d) => d.per_100 < 0).map((d) => d.district);
-  const P = { dark: '0B4A57', darker: '083843', accent: '0E5E6F', light: 'CDE6EB', soft: 'E8F3F5', band, foot: 'Kerala SIR 2026 · PinPoint Ventures · totals only, never names or EPIC numbers' };
+  const P = { dark: '0B4A57', darker: '083843', accent: '0E5E6F', light: 'CDE6EB', soft: 'E8F3F5', band, foot: 'Kerala SIR 2026 · ImpactMojo · totals only, never names or EPIC numbers' };
   const [pres, K] = deck('Kerala SIR 2026', P);
 
   cover(pres, K, P, 'Special Intensive Revision · Kerala 2026', 'Kerala\'s draft roll was ' + lakh(S.fall_draft) + ' smaller than in January 2025',
@@ -534,7 +534,7 @@ function kerala() {
     'Only counts are published, never a name, EPIC number or address.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 16);
 
-  closing(pres, K, P, 'The full analysis', ['The constituency map, every district and constituency, and the full report are published online alongside this deck.', 'PinPoint Ventures']);
+  closing(pres, K, P, 'The full analysis', ['The constituency map, every district and constituency, and the full report are published online alongside this deck.', 'ImpactMojo']);
   K.contents(toc);
   return pres.writeFile({ fileName: path.join(OUT, 'kerala-sir-2026-deck.pptx') });
 }

@@ -3,12 +3,12 @@
 Who was struck off India's electoral rolls in the 2025-26 Special Intensive
 Revision: across India, in Bihar, in five Old City constituencies of
 Hyderabad, in Tamil Nadu, Karnataka, West Bengal and Kerala. Static
-site at [offtheroll.in](https://offtheroll.in), by PinPoint Ventures. Every page is built
+site at [offtheroll.in](https://offtheroll.in), by ImpactMojo. Every page is built
 from `site/` by `scripts/build_site.py`.
 
 | Page | What it covers |
 |---|---|
-| [`/`](https://offtheroll.in/) | What the site is, why it exists, how to read it, and who made it (PinPoint Ventures) |
+| [`/`](https://offtheroll.in/) | What the site is, why it exists, how to read it, and who made it (ImpactMojo) |
 | [`/india/`](https://offtheroll.in/india/) | All India: the reasons recorded for 13.39 crore names left off the draft rolls, state by state, with a source for every row |
 | [`/bihar/`](https://offtheroll.in/bihar/) | The Bihar dashboard: twelve tabs of charts and the table of all 243 constituencies |
 | `/bihar/explorer/` | Explorer: 69,10,559 names removed across 243 constituencies and 77,837 booths, every seat and every booth |

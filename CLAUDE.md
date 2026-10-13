@@ -1345,8 +1345,9 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   theme; print is hidden there): beside the title, seven controls squeezed
   it to a single word. Credit is to ImpactMojo
   ("Research by ImpactMojo", linked to impactmojo.in), in the footer and on the
-  front page; the terms page still names PinPoint Ventures as publisher and
-  grievance contact.
+  front page. ImpactMojo is also the publisher and grievance contact on the
+  terms page (since 13 October 2026; PinPoint Ventures before), and
+  info@impactmojo.in (`email` in `places.json`) is the contact everywhere.
 - **Footer, terms and privacy.** Every page's footer carries the credit, About
   this site, Terms and privacy (`terms/`, its own page in `site/pages`, on the
   front page's place) and the contact address (`email` in `places.json`).
