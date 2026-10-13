@@ -18,7 +18,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATES = [('uttarpradesh', 'up', 'Uttar Pradesh 2026'), ('maharashtra', 'mh', 'Maharashtra 2026'), ('karnataka', 'ka', 'Karnataka 2026'),
           ('bihar', 'bihar', 'Bihar 2025'), ('tamilnadu', 'tn', 'Tamil Nadu 2026'), ('westbengal', 'wb', 'West Bengal 2026'),
           ('kerala', 'kl', 'Kerala 2026'), ('delhi', 'dl', 'Delhi 2026'), ('gujarat', 'gj', 'Gujarat 2026'),
-          ('rajasthan', 'rj', 'Rajasthan 2026'), ('uttarakhand', 'uk', 'Uttarakhand 2026'), ('assam', 'as', 'Assam 2026')]
+          ('rajasthan', 'rj', 'Rajasthan 2026'), ('uttarakhand', 'uk', 'Uttarakhand 2026'), ('assam', 'as', 'Assam 2026'), ('meghalaya', 'ml', 'Meghalaya 2026'), ('manipur', 'mn', 'Manipur 2026'), ('odisha', 'od', 'Odisha 2026')]
 
 
 def slug(s):

@@ -903,6 +903,14 @@ set out in `scripts/state_schema.md`.
 - `revision: "no_draft"` (Tripura today) draws "Where the revision stands" in
   place of the figures. When its draft is out, fill in the figures and change
   the field.
+- A state here whose constituency table is complete gets a page per
+  constituency and per district (`SEATS` in `build_states.py`, `SEATED` in
+  `statepage.js`, which adds a finder): Meghalaya, Manipur and Odisha since
+  13 October 2026. The tables name no district, so each carries
+  `raw/ac_district.csv`, and the build fails unless every district's
+  constituencies add up exactly to the state's own district table. Puducherry
+  has only its final roll by constituency, nothing to measure a change by,
+  so it has no constituency pages.
 - Add a state by writing its `normal.json` with every source read, adding it
   to `STATES`, and running `build_states.py`, `make_state_pages.py`,
   `build_site.py` and `og_cards.mjs`. Keep its row in
@@ -962,8 +970,8 @@ for its own winner, runner-up and margin field names, and `say`, `short` and
 `build_site.py`, and `seatPages` on its finder. Hyderabad's five seats are
 not included: the part explorer covers them.
 
-**A page for every district** (`<state>/district/<slug>/`, 359) in eleven
-states: Uttar Pradesh, Maharashtra and Karnataka (published by district only),
+**A page for every district** (`<state>/district/<slug>/`, 452) in fifteen
+states and territories, Assam, Meghalaya, Manipur and Odisha added the same day to: Uttar Pradesh, Maharashtra and Karnataka (published by district only),
 and Bihar, Tamil Nadu, West Bengal, Kerala, Delhi, Gujarat, Rajasthan and
 Uttarakhand (13 October 2026). Each is drawn in its state's own measure, set
 in `CFG` in `district.js`: names left off, names removed (Bihar, per 100 on

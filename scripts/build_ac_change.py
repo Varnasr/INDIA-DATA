@@ -98,6 +98,12 @@ FINDER = [
      'names left off the draft', 'the roll before the revision'),
     ('as', 'Assam', 'assam/', 'assam/constituencies.json', 'fall', 'draft', 1000,
      'fall in the roll from the draft to the final roll of the Special Revision, names removed less names added', 'the draft'),
+    ('ml', 'Meghalaya', 'meghalaya/', 'meghalaya/constituencies.json', 'removed', 'before', 100,
+     'names left off the draft', 'the roll before the revision'),
+    ('mn', 'Manipur', 'manipur/', 'manipur/constituencies.json', 'fall', 'before', 100,
+     'fall in the roll from the roll before the revision to the final roll', 'the roll before the revision'),
+    ('od', 'Odisha', 'odisha/', 'odisha/constituencies.json', 'removed', 'draft', 1000,
+     'names removed after the draft', 'the draft'),
 ]
 
 
@@ -110,7 +116,7 @@ def finder():
             if not r[base]:
                 raise SystemExit('FAIL - %s %s has no %s' % (state, r['name'], base))
             # a state with constituency pages (make_seat_pages.py) opens the seat's own page
-            href = f.split('/')[0] + '/seat/%d/' % r['ac'] if pid in ('tn', 'wb', 'kl', 'dl', 'uk', 'gj', 'rj', 'mh', 'bihar', 'as') else page + '#ac-%d' % r['ac']
+            href = f.split('/')[0] + '/seat/%d/' % r['ac'] if pid in ('tn', 'wb', 'kl', 'dl', 'uk', 'gj', 'rj', 'mh', 'bihar', 'as', 'ml', 'mn', 'od') else page + '#ac-%d' % r['ac']
             rows.append([pid, r['ac'], r['name'], r['district'], r[cnt], round(per * r[cnt] / r[base], 4), href])
     h = J('hyderabad/summary.json')['acs']
     places.append({'id': 'hyd', 'state': 'Telangana (Hyderabad Old City)', 'page': 'hyderabad/explorer/', 'what': 'names removed from the lists',

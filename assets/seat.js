@@ -57,6 +57,17 @@
     assam: { label: 'Assam', faq: 'as', lead: { count: 'fall', base: 'draft', per: 1000, what: 'fall in the roll from the draft to the final roll', of: 'the draft', to: 'the final roll' },
       women: { count: 'fall_women', of: 'fall', roll: 'draft_women_pct', what: 'the fall from the draft to the final roll' },
       limits: 'Assam held a Special Revision, which ran on different rules from the SIR. The Chief Electoral Officer published each constituency\'s draft and final roll by sex, so its change is names added less names removed, and the two cannot be told apart. The names flagged for deletion were published for the state only, through the press.' },
+    meghalaya: { label: 'Meghalaya', faq: 'ml', lead: { count: 'removed', base: 'before', per: 100, what: 'names left off the draft roll', of: 'the roll before the revision' },
+      reasons: [['shifted_absent_other', 'Shifted, absent or other'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once']],
+      election: { year: 2023, count: 'removed', turnout: 'turnout' },
+      limits: 'The Chief Electoral Officer published the names left off and their reasons for every constituency, and the split by sex for the state only. The table names no district, so each constituency\'s district is taken from the published list of constituencies and checked by adding the constituencies up to the Chief Electoral Officer\'s district table, which they match exactly.' },
+    manipur: { label: 'Manipur', faq: 'mn', lead: { count: 'fall', base: 'before', per: 100, what: 'fall in the roll from the roll before the revision to the final roll', of: 'the roll before the revision', to: 'the final roll' },
+      election: { year: 2022, count: 'fall', turnout: 'turnout' },
+      limits: 'The Chief Electoral Officer published the roll before the revision and the final roll for every constituency, so the change takes in the names left off and everything added or removed after the draft together. The reasons and the split by sex of the names left off were published for the state only.' },
+    odisha: { label: 'Odisha', faq: 'od', lead: { count: 'removed', base: 'draft', per: 1000, what: 'names removed after the draft', of: 'the draft', say: 'names were removed after the draft', short: 'names removed after the draft' },
+      map: { claims: 'added', objections: 'removed' }, claims: true,
+      election: { year: 2024, count: 'removed', turnout: 'turnout' },
+      limits: 'Odisha published its constituency figures from the draft to the final roll only. The names left off the draft, and their reasons, were published by district and for the state.' },
     bihar: { label: 'Bihar', faq: 'bihar', lead: { count: 'total', base: 'electorate_2025', per: 100, what: 'names removed in both phases', of: 'the 2025 election roll', say: 'names were removed in the two phases of the revision', short: 'names removed' },
       map: { winner: 'win2025', runner_up: 'ru2025', margin: 'margin2025' },
       reasons: [['r_shifted', 'Shifted'], ['r_dead', 'Dead'], ['r_absent', 'Absent'], ['r_enrolled', 'Already enrolled']], reasonsOf: 'p1', reasonsWhat: 'the first phase',
@@ -107,7 +118,7 @@
           : falls ? ' is smaller than that margin. The names removed may be more than the fall, because the fall nets out names added.'
             : ' are fewer than that margin, so the runner-up could not have won even if every one of them had voted for the runner-up.'));
       }
-      if (C.claims) pts.push('After the draft, ' + n(a.claims) + ' names were added and ' + n(a.objections) + ' removed, and women were ' + pct(a.women_objections_pct) + ' of those removed against ' + pct(a.women_draft_pct) + ' of the draft.');
+      if (C.claims) pts.push('After the draft, ' + n(a.claims) + ' names were added and ' + n(a.objections) + ' removed' + (a.women_objections_pct != null ? ', and women were ' + pct(a.women_objections_pct) + ' of those removed against ' + pct(a.women_draft_pct) + ' of the draft.' : '. The names added include people enrolling for the first time.'));
       var Pr = C.press && a.press;
       if (Pr) pts.splice(2, 0, 'By the District Election Officer\'s figures as ' + Pr.outlet + ' printed them, ' + n(Pr.left_off) + ' names were left off its draft' + (Pr.per_100 != null ? ', ' + d1(Pr.per_100) + ' of every 100 on the roll before the revision' : '') + '. ' + (Pr.left_off > a.margin ? 'That is more than the 2023 winning margin of ' + n(a.margin) + ', large enough to decide the seat, which says nothing about whether it would have.' : 'That is fewer than the 2023 winning margin of ' + n(a.margin) + '.'));
       SIR.inShort(pts, C.limits);
@@ -157,7 +168,7 @@
             rows: [['Women, share of ' + (W.of || 'the roll'), a[W.roll], '--fill-grey'], ['Women, share of the fall', ws, '--fill-red']].map(function (r) { return { name: r[0], v: r[1], text: pct(r[1]), tok: r[2], hi: true }; }) });
           document.getElementById('fWomen').innerHTML = '<b>Women were ' + pct(ws) + ' of ' + W.what + ' in ' + SIR.esc(a.name) + ', against ' + pct(a[W.roll]) + ' of the roll.</b> The fall counts ordinary changes too, so it is not the names removed, and it cannot say why anyone left the roll.';
         } else document.getElementById('sWomen').hidden = true;
-      } else if (C.claims) {
+      } else if (C.claims && a.women_objections_pct != null) {
         VIZ.lollipop('vWomen', { label: a.name + ': women\'s share of the draft and of the names removed after it', axis: 'Per cent', max: 100, step: 20, ref: 50,
           rows: [['Women, share of the draft', a.women_draft_pct, '--fill-grey'], ['Women, share of those removed after the draft', a.women_objections_pct, '--fill-red']].map(function (r) { return { name: r[0], v: r[1] || 0, text: r[1] == null ? 'none' : pct(r[1]), tok: r[2], hi: true }; }) });
         document.getElementById('fWomen').innerHTML = 'The Chief Electoral Officer\'s table of the final roll counts the names removed after the draft by sex, and gives no reason for any of them.';

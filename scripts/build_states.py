@@ -182,6 +182,69 @@ def as_csv(d):
     return buf.getvalue()
 
 
+# States on the shared page whose constituency table is complete get a page
+# per constituency and per district. The table names no district, so each
+# carries raw/ac_district.csv from a published list, and the map is accepted
+# only if every district's constituencies add up exactly to the state's own
+# district table in every column the two share.
+SEATS = {
+    'meghalaya': dict(acs='constituencies', districts='districts', results='meghalaya_2023',
+                      cols=('before', 'removed', 'dead', 'shifted_absent_other', 'duplicate', 'draft')),
+    # the roll before and the final roll by constituency; the change takes in
+    # the names left off and everything after the draft together
+    'manipur': dict(acs='constituencies', districts='districts', results='manipur_2022',
+                    cols=('before', 'final', 'men', 'women', 'third'), fall=('before', 'final')),
+    # the draft to the final roll by constituency, names added and removed
+    'odisha': dict(acs='acs_after', districts='districts_after', results='odisha_2024',
+                   cols=('draft', 'added', 'removed', 'final'), extra=('districts_fall', 'before')),
+}
+
+
+def seat_files(slug):
+    cfg = SEATS[slug]
+    N = json.load(open(os.path.join(ROOT, 'data', slug, 'raw', 'normal.json'), encoding='utf-8'))
+    T = {t['id']: t for t in N['tables']}
+    dist = {int(r['ac']): r['district'] for r in csv.DictReader(open(os.path.join(ROOT, 'data', slug, 'raw', 'ac_district.csv'), encoding='utf-8'))}
+    res = {int(r['ac']): r for r in csv.DictReader(open(os.path.join(ROOT, 'data', 'india', 'raw', 'assembly', cfg['results'] + '.csv'), encoding='utf-8'))}
+    seats = []
+    for i, r in enumerate(T[cfg['acs']]['rows']):
+        no, name = (int(r['name'].split()[0]), r['name'].split(' ', 1)[1]) if r['name'][0].isdigit() else (i + 1, r['name'])
+        if no not in dist:
+            fail(slug, 'constituency %d has no district in ac_district.csv' % no)
+        x = dict(ac=no, name=name, district=dist[no])
+        x.update({k: r[k] for k in cfg['cols']})
+        if cfg.get('fall'):
+            x['fall'] = r[cfg['fall'][0]] - r[cfg['fall'][1]]
+        e = res.get(no)
+        if e:
+            x.update(winner=e['winner_party'], runner_up=e['runner_up_party'], margin=int(e['margin']),
+                     turnout=round(100 * int(e['total_votes']) / int(e['electors']), 2) if e['total_votes'] and e['electors'] else None)
+        seats.append(x)
+    if sorted(s['ac'] for s in seats) != list(range(1, len(seats) + 1)):
+        fail(slug, 'constituency numbers are not 1 to %d' % len(seats))
+    out = []
+    for r in T[cfg['districts']]['rows']:
+        mine = [s for s in seats if s['district'] == r['name']]
+        if not mine:
+            fail(slug, 'district %s has no constituency in ac_district.csv' % r['name'])
+        for k in cfg['cols']:
+            if k in r and sum(s[k] for s in mine) != r[k]:
+                fail(slug, '%s: its constituencies add to %d %s, the district table says %d' % (r['name'], sum(s[k] for s in mine), k, r[k]))
+        y = dict(district=r['name'], acs=len(mine))
+        y.update({k: sum(s[k] for s in mine) for k in cfg['cols'] + (('fall',) if cfg.get('fall') else ())})
+        if cfg.get('extra'):
+            # a district-only figure, joined by name: the roll before the revision
+            hit = [e for e in T[cfg['extra'][0]]['rows'] if e['name'] == r['name']]
+            if len(hit) != 1 or hit[0].get('draft', y['draft']) != y['draft']:
+                fail(slug, '%s is not once in %s with the same draft' % (r['name'], cfg['extra'][0]))
+            y[cfg['extra'][1]] = hit[0][cfg['extra'][1]]
+        out.append(y)
+    if sum(y['acs'] for y in out) != len(seats):
+        fail(slug, 'some constituency sits in a district the district table does not list')
+    return {os.path.join(ROOT, 'data', slug, 'constituencies.json'): json.dumps(seats, ensure_ascii=False, indent=1) + '\n',
+            os.path.join(ROOT, 'data', slug, 'districts.json'): json.dumps(out, ensure_ascii=False, indent=1) + '\n'}
+
+
 def main():
     stale = []
     only = [a for a in sys.argv[1:] if not a.startswith('--')]
@@ -196,6 +259,8 @@ def main():
         d = build_one(pid, slug)
         files = {os.path.join(ROOT, 'data', slug, 'summary.json'): json.dumps(d, ensure_ascii=False, indent=1) + '\n',
                  os.path.join(ROOT, 'data', slug, 'tables.csv'): as_csv(d)}
+        if slug in SEATS:
+            files.update(seat_files(slug))
         for p, t in files.items():
             if not os.path.exists(p) or open(p, encoding='utf-8').read() != t:
                 stale.append(p)

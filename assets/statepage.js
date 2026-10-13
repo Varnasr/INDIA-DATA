@@ -18,6 +18,7 @@
     return (+p[2]) + ' ' + M[+p[1] - 1] + ' ' + p[0];
   };
   var LEVEL = { district: ['district', 'districts'], region: ['region', 'regions'], ac: ['constituency', 'constituencies'], pc: ['parliamentary constituency', 'parliamentary constituencies'], island: ['island', 'islands'], tehsil: ['tehsil', 'tehsils'], ward: ['ward', 'wards'] };
+  var SEATED = ['meghalaya', 'manipur', 'odisha'];
   var hyph = function (s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
 
   function load() {
@@ -102,6 +103,10 @@
     else if (R.made_up_pct != null) kp.push([d1(R.made_up_pct), 'per 100 left off, the net rise after the draft']);
     if (kp.length) h.push('<div class="kpis">' + kp.map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('') + '</div>');
 
+    // a state whose constituency table is complete has a page per seat and
+    // per district (build_states.py SEATS), reached from this finder
+    var seated = SEATED.indexOf(S.slug) >= 0;
+    if (seated) h.push('<h2 id="find-a-constituency-or-district">Find a constituency or district</h2><p class="sub">Every constituency and district has a page of its own, set against its district and the state.</p><div class="finder" id="finder"></div>');
     if (d.revision === 'no_draft') {
       h.push('<h2 id="where-the-revision-stands">Where the revision stands</h2><p>' + s.scale + '</p>');
       (d.notes || []).forEach(function (t) { h.push('<p>' + SIR.esc(t) + '</p>'); });
@@ -143,6 +148,29 @@
         aName: 'Share of the roll before', aTok: '--fill-grey', bName: 'Share of the names left off', bTok: '--fill-red', rows: [{ name: d.state, a: R.women_before_pct, b: R.women_removed_pct }] });
     }
     d.tables.forEach(function (t, i) { table(t, i, d); });
+    if (seated) Promise.all([SIR.json('data/' + S.slug + '/constituencies.json'), SIR.json('data/' + S.slug + '/districts.json')]).then(function (r) {
+      var A = r[0], D = r[1];
+      var facts = function (x) {
+        var f = [];
+        if (x.before != null) f.push(['Roll before the revision', n(x.before)]);
+        if (x.draft != null) f.push(['Draft roll', n(x.draft)]);
+        if (x.removed != null && x.before != null) f.push(['Left off the draft', n(x.removed) + ', ' + d1(100 * x.removed / x.before) + ' per 100']);
+        if (x.added != null) f.push(['Added after the draft', n(x.added)]);
+        if (x.removed != null && x.before == null) f.push(['Removed after the draft', n(x.removed)]);
+        if (x.removed_after != null) f.push(['Removed after the draft', n(x.removed_after)]);
+        if (x.final != null) f.push(['Final roll', n(x.final)]);
+        if (x.margin != null) f.push(['Winning margin', n(x.margin) + (x.winner ? ', ' + x.winner : '')]);
+        return SIR.facts(f);
+      };
+      var say = function (x, nm2) { return nm2 + ', ' + d.state + '. ' + (x.removed != null && x.before != null ? n(x.removed) + ' names were left off the draft roll, ' + d1(100 * x.removed / x.before) + ' of every 100 on the roll before the revision.' : x.final != null && x.draft != null ? 'From the draft to the final roll the roll ' + (x.final >= x.draft ? 'rose by ' + n(x.final - x.draft) : 'fell by ' + n(x.draft - x.final)) + '.' : '') + ' Counts from the Chief Electoral Officer\'s tables.'; };
+      var seatsOf = function (x) { return A.filter(function (a) { return a.district === x.district; }); };
+      var DSET = { rows: D, key: function (x) { return SIR.slug(x.district); }, label: function (x) { return x.district + ' district'; },
+        card: function (x) { return facts(x) + '<p class="note">Its constituencies</p>' + SIR.goList(seatsOf(x), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
+        share: function (x) { return say(x, x.district + ' district'); } };
+      SIR.finder('finder', { seatPages: true, districtPages: true, rows: A, more: [DSET], prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district',
+        key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+        card: facts, share: function (a) { return say(a, a.name); } });
+    });
     SIR.showFaq(S.id, 'main');
   }
 

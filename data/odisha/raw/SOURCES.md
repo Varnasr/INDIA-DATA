@@ -131,3 +131,13 @@ text layer through Firecrawl, since the site resets plain curl.
   so only totals are used. The three reasons add to 28,229 of the 44,777.
 - Not published: the 20,12,557 names left off at the draft, by AC or district.
   The draft Format 4B gives them only as a state footnote.
+
+## Constituency to district (`ac_district.csv`, 13 October 2026)
+
+The constituency table names no district. Each constituency's district is taken from
+Wikipedia's list of constituencies of the Odisha Legislative Assembly, with four district
+names spelt as the Chief Electoral Officer's table spells them (Jharsugud, Mayurbhanja,
+Subrnapur, Bolangir). Every district is a run of consecutive constituency numbers, and
+splitting the 147 constituencies into runs from the district totals alone gives the same 30
+runs. `build_states.py` checks that every district's constituencies add up exactly to the
+district table in the draft, names added, names removed and the final roll.
