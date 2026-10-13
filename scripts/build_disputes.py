@@ -4,7 +4,7 @@
     python3 scripts/build_disputes.py          # writes data/india/disputes.json and .csv
     python3 scripts/build_disputes.py --check  # fails if either is stale
 
-Reads the research in data/india/raw/disputes_research/ (courts.json,
+Reads the research in data/india/raw/disputes_research/ (up.json for Uttar Pradesh, courts.json,
 protests.json, form7.json, software.json) and the second reading of each,
 tags.json (court, parties and bodies, places and issues for every item, which
 the page's filters use),
@@ -40,7 +40,7 @@ SECTIONS = [
     ('errors', 'Wrong entries reported on the rolls'),
     ('deaths', 'Deaths reported during the revision'),
 ]
-FILES = ['courts', 'protests', 'form7', 'software']
+FILES = ['courts', 'protests', 'form7', 'software', 'up']
 # The process page's checked press reports, by its topic, into this page's sections.
 FROM_PROCESS = {
     'Bulk Form 7 objections': 'form7',

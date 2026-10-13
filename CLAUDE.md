@@ -653,6 +653,19 @@ because the independents' fronts are not in the data.
   table and is wrong in 25 ACs' votes; the Commission's own 2022 results are
   `data/india/raw/assembly/uttarpradesh_2022.csv`, which is the one to use.
 - English only, like Rajasthan, with the same translated note.
+- **The deep dive (October 2026)** is `analysis.json` and `seats.csv`, written by
+  the same build. `raw/press_ceo.csv` holds the CEO's figures as the Hindustan
+  Times printed them on 18.01.2026, each with its sentence: the names left off
+  by sex (rounded; the page used to say no split existed), urban and rural rolls
+  (the report's "1.27 crore" rural fall is a misprint for 1.72, and the build
+  uses the difference of the rolls), women at their father's address, the
+  notices (1.04 + 2.22 crore, which add to 3.26; The Hindu's 1.4 + 2.02 do not)
+  and the 8,751 AEROs. Each district's names left off are spread over its
+  constituencies by 2022 electors against the 2022 margin (377 of 403 over the
+  margin); say it gives how many seats, never which, and never that a result
+  changed. District circumstances are read from `factors.json` and
+  `urban.json`, never recomputed here. Notices per officer are averages and
+  never a hearing's length.
 
 ## Delhi
 
@@ -973,8 +986,11 @@ deletion, the two appeals, the helpline and the drive after the revision, free
 legal aid, the Supreme Court's orders and going to court, each step with the
 document it rests on. Below them it lists organisations that helped electors,
 filterable by state. `data/india/raw/help_research/` holds `remedies.json`,
-`orgs.json` and `orgs2.json` and an independent second reading of all of them
-(`verified.json`); `scripts/build_help.py` writes `data/india/help.json`, fails
+`orgs.json`, `orgs2.json` and `orgs3.json` (Uttar Pradesh, October 2026) and an
+independent second reading of all of them (`verified.json`, and
+`verified_orgs3.json` for the third); APCR is listed on the owner's decision
+over the second reading's rejection, and its entry says the UP help is as its
+own report gives it; `scripts/build_help.py` writes `data/india/help.json`, fails
 on a remedy the reading has not confirmed, and lists only organisations marked
 `publish` that the reading confirmed or corrected; `check_data.py` runs it
 with `--check`. The owner's rule for the list (October 2026): no political

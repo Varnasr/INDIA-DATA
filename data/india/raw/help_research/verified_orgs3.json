@@ -1,0 +1,34 @@
+{
+ "meta": {
+  "checked": "2026-10-13",
+  "by": "independent second reading",
+  "method": "Every source_url and second_url fetched again. The three Dainik Bhaskar pages (including the third report named in notes) and The Times of India page through Firecrawl, full article text read; the APCR report downloaded as the PDF and pages 57 to 60 and the back cover read with pypdf. Each quote compared character by character with the fetched text, and the text around it read for what it supports. Searched for any party office held by the Jamiat units' named office-bearers and for an independent report of APCR camps in Uttar Pradesh; none found for either. Two of the four excluded_parties pages were opened (Ghosi, Jani Khurd) and the other two judged from their headlines.",
+  "files": [
+   "orgs3.json (4 entries with publish true, 4 excluded_parties)"
+  ],
+  "excluded_parties": "All four correctly excluded. Ghosi (Mau): the page says the camp was organised by the team of the regional vice-president of the BJP Minority Morcha, Gorakhpur region. Jani Khurd (Meerut): the page says Samajwadi Party workers ran the camp and offered help at the SP office. Charthawal (Muzaffarnagar) and Sohawal (Ayodhya) were not opened; their headlines name an SP leader and a BJP mandal president, which is enough to keep them out under the owner's rule."
+ },
+ "orgs": {
+  "up-jamiat-muzaffarnagar": {
+   "status": "corrected",
+   "note": "Quote found verbatim (Dainik Bhaskar, 21 Nov 2025). The same report gives 22 camps, running four or five days by then, and 544 young people trained to fill forms. The Times of India (25 Nov 2025) quotes the unit's president that 35 camps were operational and that they were open to all, Hindu or Muslim; that is his statement, so 'what' now says so. The third Bhaskar report (24 Nov 2025) confirms 22 camps with more than 400 helpers and describes people getting forms filled at the camp in Madrasa Mahmudiya, Sadar tehsil; it does not itself say that camp is Jamiat's, but the 21 Nov report lists Madrasa Mahmudiya at Ayesha Masjid among the unit's camps, so the link holds. A BLO was posted at that camp, which 'what' now says. The extension demand is advocacy beside the help and is rightly left out of 'what'. No party office found for the unit's president or general secretary; the national general secretary quoted by TOI holds none either. Quote and 'what' name nobody.",
+   "what": "Ran SIR help camps at 22 places in Muzaffarnagar district during enumeration, where people were helped to fill their enumeration forms. One was at a madrasa in Sadar tehsil, where a BLO was also posted to take the forms. The unit said it had trained 544 young people to fill the forms. A few days later the unit's president put the number of camps at 35 and said they were open to everyone whatever their religion."
+  },
+  "up-jamiat-afzalgarh": {
+   "status": "corrected",
+   "note": "Quote found verbatim; it is the second half of the headline (Dainik Bhaskar, 26 Nov 2025). The report says the camp near the Jama Masjid was the fourth day of an eight-day drive (abhiyan), not that the camp itself ran for eight days, and that about 157 forms were handed to the BLO under the lead of named people and a youth team. 'what' reworded to that. The body names several private people; none is carried and none is described as holding a party office. Single local report, as notes say, but it shows forms filled and submitted, which is help delivered.",
+   "what": "Ran an eight-day drive in Afzalgarh town, Bijnor district, to fill and submit enumeration forms. On its fourth day, at a camp near the Jama Masjid, about 157 forms were handed to the BLO. The unit also ran an awareness drive for the town's residents."
+  },
+  "up-jamiat-aligarh": {
+   "status": "confirmed",
+   "note": "Quote found verbatim (The Times of India, 25 Nov 2025). The paragraph says the district president told the paper the unit had been assisting people for two weeks and had asked educated young people to volunteer, and that three help centres were operational in Aligarh city. 'what' says no more than that. Weak, as notes say: two sentences resting on the unit's own account, with no count of people helped and no second source. It does show help being given, so it meets the rule, narrowly. No party office found for the district president. The Agra unit is rightly left out, since the same report shows only awareness drives there."
+  },
+  "up-apcr": {
+   "status": "corrected",
+   "note": "Included on the owner's decision of 2026-10-13, overriding the second reading, which rejected it because its only source is APCR's own annual report, naming Uttar Pradesh in a list of four states with no place, date or count. The page says the help in Uttar Pradesh is as APCR reports it.",
+   "second_reading": "rejected",
+   "second_reading_note": "Quote found verbatim on printed page 58 of APCR's Annual Activity Report 2025, and the phone and email match the back cover. APCR is a civil rights organisation with no party link shown. The difficulty is the evidence for Uttar Pradesh. The only source is the organisation's own report. It names Uttar Pradesh once, in a list of four states where it 'organised awareness camps', with no district, town, date or count, and a photograph on page 59 is captioned 'Uttar Pradesh' and nothing more. The call centre (4 to 30 November) was run from Delhi for callers anywhere and the report gives no figure for Uttar Pradesh. The same page calls the SIR 'Special Identification and Registration', which is wrong. A search found no news report of an APCR camp in Uttar Pradesh. Entries accepted earlier from an organisation's own pages (CJP in Maharashtra and Assam) named places, dates or the people helped; this one does not. An unplaced line in a self-published report is not enough to show help actually delivered in Uttar Pradesh, so it should not be listed under Uttar Pradesh. If an independent report or APCR's own account with a place and date turns up, it can be reconsidered. Set publish to false and give why_not accordingly.",
+   "what": "Ran an SIR call centre with SPECT from 4 to 30 November 2025 that guided callers on forms, documents, missing names and corrections. Its own annual report says it also held camps in Uttar Pradesh, Madhya Pradesh, Gujarat and Uttarakhand where volunteers helped people fill forms and checked their documents. The report names no place or date in Uttar Pradesh."
+  }
+ }
+}
