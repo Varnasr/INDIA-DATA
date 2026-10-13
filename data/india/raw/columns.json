@@ -1122,5 +1122,23 @@
   "ac": "Assembly constituency number, blank on district and state rows.",
   "name": "Constituency or district name as the table prints it.",
   "district": "District, as the table prints it (U.S.Nagar for Udham Singh Nagar)."
+ },
+ "data/gujarat/raw/eci2022_ac.csv": {
+  "ac": "Assembly constituency number.",
+  "ac_name": "Constituency name, as the Election Commission's detailed results spell it.",
+  "winner_party": "Party of the winner in 2022.",
+  "winner_votes": "Votes for the winner.",
+  "runner_up_party": "Party of the runner-up.",
+  "runner_up_votes": "Votes for the runner-up.",
+  "margin": "winner_votes less runner_up_votes.",
+  "nota": "Votes for none of the above.",
+  "electors_male": "Men on the 2022 roll, service electors included.",
+  "electors_female": "Women on the 2022 roll, service electors included.",
+  "electors_tg": "Third-gender electors on the 2022 roll.",
+  "electors_total": "Electors on the 2022 roll, service electors included.",
+  "service_electors": "Service electors on the 2022 roll.",
+  "voted_total": "Votes polled, postal votes included.",
+  "valid_votes": "Valid votes, NOTA left out.",
+  "poll_pct": "voted_total over electors_total, as printed, in per cent."
  }
 }

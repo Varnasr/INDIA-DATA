@@ -37,6 +37,16 @@ for _pl in CFG['places']:
         if _dup:
             raise SystemExit('FAIL - %s lists %s twice in %s' % (_pl['id'], ', '.join(_dup), _key))
 PLACES = {p['id']: p for p in CFG['places']}
+# Every page's <body> carries its place's class. Delhi's was once "dl", which
+# is also the class of the header menus, so the print stylesheet's .dl{display:
+# none} hid the whole of every Delhi page on paper. A place class must not be a
+# class the stylesheet styles on its own.
+_STYLED = set(re.findall(r'(?:^|[\s,{}>+~(])\.([A-Za-z][\w-]*)', open(os.path.join(ROOT, 'assets', 'sir.css'), encoding='utf-8').read()))
+_ALLOWED = {'home', 'hyd', 'wide', 'has-toc'}  # styled on purpose, as the page's place
+for _p in CFG['places']:
+    _c = _p.get('class', _p['id'])
+    if _c in _STYLED and _c not in _ALLOWED:
+        raise SystemExit('FAIL - place class %r is also a class sir.css styles; give the place a "class" of its own' % _c)
 SIRJS = os.path.join(ROOT, 'assets', 'sir.js')
 ICONS = json.loads(re.search(r'var ICONS = (\{.*?\});', open(SIRJS, encoding='utf-8').read()).group(1))
 STAMP = re.compile(r'\?v=[0-9a-f]{8}')

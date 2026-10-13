@@ -69,6 +69,13 @@
   <p class="finding" id="fFinal"></p>
   <p class="finding" id="fNotice"></p>
 
+  <h2>Ahmedabad, seat by seat after the draft</h2>
+  <p class="sub">The final roll was published by district, and for Ahmedabad's 21 constituencies the names added and deleted after the draft were printed by Gujarat Samachar on 17 February 2026. They add up exactly to the CEO's Ahmedabad row. Each dot is a constituency. Its place across is the names left off its draft for every 100 on its roll before the revision, and its height the names deleted after the draft for every 100 on its draft.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vAhd"></div></div>
+  </div>
+  <p class="finding" id="fAhd"></p>
+
   <h2>Every district</h2>
   <p class="sub">Tap or click a column name to sort by it. On a phone each row is a card.</p>
   <div class="twrap scroll" tabindex="0" role="region" aria-label="Every district"><table id="tDist"></table></div>
@@ -139,6 +146,14 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/distr
   var FD = D.slice().sort(function (a, b) { return b.added_per_100 - a.added_per_100; });
   VIZ.dots('vAfter', { label: 'Names added and deleted after the draft, per 100 electors on the draft, by district', axis: 'Per 100 electors on the draft roll', cats: FD.map(function (d) { return d.district; }),
     series: [{ name: 'Added', col: '--fill-teal', vals: FD.map(function (d) { return d.added_per_100; }) }, { name: 'Deleted', col: '--fill-red', vals: FD.map(function (d) { return d.deleted_per_100; }) }] });
+  var AH = S.ahmedabad.slice().sort(function (a, b) { return b.deleted_per_100 - a.deleted_per_100; });
+  VIZ.scatter('vAhd', { label: 'Ahmedabad: names left off the draft and names deleted after it, by constituency', xMin: 0, yMin: 0,
+    xAxis: 'Left off the draft, per 100 on the roll before', yAxis: 'Deleted after the draft, per 100 on the draft',
+    key: [['BJP won in 2022', '--fill-nda'], ['Congress won in 2022', '--fill-india']],
+    points: AH.map(function (a) { return { x: a.removed_per_100, y: a.deleted_per_100, tok: a.winner_party === 'BJP' ? '--fill-nda' : '--fill-india', label: a.ac + '. ' + a.name + ': ' + n(a.deleted) + ' deleted, ' + n(a.added) + ' added after the draft' }; }) });
+  var addTop = AH.slice().sort(function (a, b) { return b.added - a.added; })[0];
+  document.getElementById('fAhd').innerHTML = '<b>' + AH[0].name + ' lost the most after the draft, ' + n(AH[0].deleted) + ' names, ' + SIR.d(AH[0].deleted_per_100, 1) + ' for every 100 on its draft' + (function () { var sh = AH.filter(function (a) { return a.final < a.draft; }); return sh.length === 1 && sh[0] === AH[0] ? ', and it is the only one of the 21 seats whose final roll is smaller than its draft.' : '. ' + sh.length + ' of the 21 seats end with a final roll smaller than the draft.'; })() + '</b> ' +
+    'Across the 21, the seats that lost more names at the draft also lost more after it (rank correlation ' + SIR.d(S.ahd_rho_removed_deleted, 2) + '). ' + addTop.name + ' added the most, ' + n(addTop.added) + '. The names added count people enrolling for the first time too, so they say little about names put back. These seat figures are from the press.';
   VIZ.slope('vFinal', { label: 'Names left off per 100 electors at the draft and the net fall at the final roll, by district',
     aName: 'At the draft', bName: 'At the final roll',
     rows: D.map(function (d, i) { return { name: d.district, a: d.per_100, b: d.net_per_100, hi: d.city, lab: !d.city && i < 4 }; }) });

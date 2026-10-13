@@ -763,13 +763,15 @@ in `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
   only inferred from its draft total and nothing relies on them. The printed
   final is 50 more than draft plus net in seven districts; both are kept as
   printed and the method page computes the list from `final.json`.
-- **2022 results are a compilation**, checked seat by seat against a second
-  one (margins and parties agree in all 182). Pages say "a published
-  compilation of the Election Commission's results" and do not name the
-  compiler. Its electors and votes do not reconcile with the ECI's state
-  totals, so no turnout is used: the three counts against the margin are all
-  names left off, those not entered as dead, and those also not enrolled
-  elsewhere.
+- **2022 results are the Election Commission's own statistical report**
+  (`raw/eci2022_ac.csv`, reports 10 and 12). The compilation used before
+  (`results_2022.csv`) is kept and checked against it: parties agree in all
+  182, margins in 180 (Viramgam and Wankaner one vote apart, asserted). With
+  the report's electors, turnout is used: the fourth count against the margin
+  is the names not entered as dead at each seat's 2022 turnout (40 seats).
+- **Ahmedabad's 21 seats after the draft** are press (Gujarat Samachar,
+  17 February 2026, `raw/ahmedabad_final_ac_press.csv`); they add to the CEO's
+  district row and the build asserts Danilimda carries the district's 25.
 - **The city is two districts**, Ahmedabad and Surat (`CITY` in the build),
   21.9% of the roll and 36.7% of the names left off. The party comparison
   carries `vs_district` beside the raw rate, because the BJP won almost every
@@ -1599,6 +1601,17 @@ polled; the districts slide names the factor with the largest rank
 correlation and lists those under 0.2 as unrelated). The decks state no site
 address, and the speaker notes carry the caveats. `build.sh` rebuilds them
 with the reports.
+
+Every other analysis (Rajasthan, Uttar Pradesh, Delhi, Maharashtra, Gujarat,
+Uttarakhand, Assam, and one for the twenty states on the shared page) has a
+PDF and a deck made by `scripts/reports/page_pack.mjs` from its own pages: the
+PDF is the pages printed with the site's print stylesheet (merged by
+`merge_pdf.py`), and the deck has a cover of the overview's findings and one
+slide per chart, titled with the section's computed finding. Serve the site
+and run it after any data change. The print stylesheet hides every control,
+and `build_site.py` fails if a place's body class is a class `sir.css`
+styles: Delhi's was `dl`, the header menus' class, so every Delhi page
+printed blank.
 
 The four 2026 states (Tamil Nadu, Karnataka, West Bengal, Kerala) each have a
 PDF report and a deck in their Downloads menu, written by

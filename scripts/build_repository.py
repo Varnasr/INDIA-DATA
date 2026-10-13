@@ -142,7 +142,8 @@ EXTRA = {
            ('data/delhi/raw/state.csv', 'State figures', 'The state figures with their source.')],
     'gj': [('data/gujarat/raw/ac.csv', 'Names left off by seat', 'The draft of 19 December 2025, by constituency and reason.'),
            ('data/gujarat/raw/district.csv', 'Names left off by district', 'The same table by district.'),
-           ('data/gujarat/raw/final_district.csv', 'Final roll by district', 'The final roll by district, with additions and deletions as printed.')],
+           ('data/gujarat/raw/final_district.csv', 'Final roll by district', 'The final roll by district, with additions and deletions as printed.'),
+           ('data/gujarat/raw/eci2022_ac.csv', '2022 result by seat', 'The Election Commission\'s statistical report for the 2022 assembly election: winner, runner-up, margin, electors by sex and votes polled.')],
     'rj': [('data/rajasthan/raw/electors_2023_ac.csv', '2023 roll by seat', 'Electors at the 2023 election, from the Election Commission\'s statistical report.'),
            ('data/rajasthan/raw/final_roll_ac.csv', 'Final roll by seat and sex', 'The final roll of 12 March 2026.'),
            ('data/rajasthan/raw/final_roll_district.csv', 'Final roll by district', 'The same roll by district.'),
@@ -433,10 +434,13 @@ def other_files():
     """Reports and decks, listed with the workbooks on the page."""
     PL = places()
     out = []
-    for pid in ['india', 'bihar', 'hyd', 'tn', 'wb', 'kl', 'ka']:
+    for pid in ['india', 'bihar', 'hyd', 'tn', 'wb', 'kl', 'ka', 'rj', 'up', 'dl', 'mh', 'gj', 'uk', 'as']:
         for h, t, _ in PL[pid].get('downloads', []):
             if h.endswith('.pdf') or h.endswith('.pptx'):
                 out.append({'place': PL[pid]['label'], 'book': pid, 'file': h, 'label': t})
+    # the twenty states on the shared page share one report and one deck
+    for f, t in (('reports/other-states-sir-2026-report.pdf', 'Full report, PDF'), ('reports/other-states-sir-2026-deck.pptx', 'Slides, PowerPoint')):
+        out.append({'place': 'Every other state and union territory', 'book': 'other', 'file': f, 'label': t})
     return out
 
 

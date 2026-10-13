@@ -21,10 +21,18 @@ districts.json, final.json, constituencies.csv and districts.csv.
   no assignment of constituencies to Vav-Tharad is used. As printed, the final
   roll is 50 electors more than the draft plus the net change, in seven
   districts; the printed final and the printed net are both kept.
-- The 2022 result is from a published compilation of the Election
-  Commission's results. Only the winner, the runner-up and the margin are
-  used; its electors and votes do not reconcile with the Commission's state
-  totals, so no turnout is computed from them.
+- The 2022 result is the Election Commission's own statistical report
+  (eci2022_ac.csv: report 10 for the candidates' votes, report 12 for the
+  electors and votes polled). The published compilation used before
+  (results_2022.csv) is kept as a record and checked against it: the parties
+  agree in all 182 seats and the margins in 180 (Viramgam and Wankaner are
+  one vote apart). Turnout is votes polled over the 2022 electors, and the
+  names left off are set against the margin at that turnout too.
+- Ahmedabad's 21 constituencies after the draft (added, deleted, final) are
+  from a graphic in Gujarat Samachar (17 February 2026), checked against the
+  CEO's draft by seat and final by district: the seats add to the district,
+  and draft plus added less deleted is the final in 20 seats; Danilimda is 25
+  over, the same 25 the CEO's district row carries.
 """
 import csv
 import io
@@ -78,7 +86,13 @@ def spearman(x, y):
 
 def build():
     ac = read('ac.csv')
-    res = {int(r['ac']): r for r in read('results_2022.csv')}
+    res = {int(r['ac']): r for r in read('eci2022_ac.csv')}
+    comp = {int(r['ac']): r for r in read('results_2022.csv')}
+    off = sorted(n for n in res if res[n]['margin'] != comp[n]['margin'])
+    assert all(res[n]['winner_party'] == comp[n]['winner_party'] and res[n]['runner_up_party'] == comp[n]['runner_up_party'] for n in res)
+    assert off == [39, 67] and all(abs(int(res[n]['margin']) - int(comp[n]['margin'])) == 1 for n in off), off
+    E = lambda k: sum(int(r[k]) for r in res.values())
+    assert (E('electors_total'), E('voted_total'), E('valid_votes'), E('nota')) == (49163277, 31879194, 31326370, 501202)
     assert [int(r['ac']) for r in ac] == list(range(1, 183)) and sorted(res) == list(range(1, 183)), 'ACs 1 to 182 once'
 
     A = []
@@ -88,7 +102,7 @@ def build():
         assert sum(v[k] for k in REASONS) == v['total'], n
         assert v['before'] - v['total'] == v['draft'], n
         e = res[n]
-        assert e['ac_name'] == r['ac_name'], n
+        assert e['ac_name'] == r['ac_name'] or n in (97, 177), n
         wv, rv, margin = int(e['winner_votes']), int(e['runner_up_votes']), int(e['margin'])
         assert wv - rv == margin > 0, n
         assert e['runner_up_party'] != 'NOTA', n
@@ -98,7 +112,9 @@ def build():
              'dead': v['death'], 'absent': v['untraceable_absent'], 'shifted': v['shifted'],
              'enrolled_elsewhere': v['already_enrolled'], 'other': v['other'],
              'per_100': r2(100 * rem / v['before']),
-             'winner_party': e['winner_party'], 'runner_up_party': e['runner_up_party'], 'margin': margin}
+             'winner_party': e['winner_party'], 'runner_up_party': e['runner_up_party'], 'margin': margin,
+             'electors_2022': int(e['electors_total']), 'turnout_2022': r2(100 * int(e['voted_total']) / int(e['electors_total'])),
+             'women_2022_pct': r2(100 * int(e['electors_female']) / int(e['electors_total']))}
         for k in ('dead', 'absent', 'shifted', 'enrolled_elsewhere', 'other'):
             a[k + '_share'] = r2(100 * a[k] / rem)
         # three counts against the margin, from the widest to the narrowest:
@@ -110,6 +126,9 @@ def build():
         a['over_margin'] = rem > margin
         a['alive_over_margin'] = a['alive'] > margin
         a['narrow_over_margin'] = a['not_elsewhere'] > margin
+        # the names not entered as dead, at the seat's 2022 turnout
+        a['at_turnout'] = round(a['alive'] * a['turnout_2022'] / 100)
+        a['turnout_over_margin'] = a['at_turnout'] > margin
         A.append(a)
 
     T = lambda k, L=A: sum(a[k] for a in L)
@@ -172,6 +191,24 @@ def build():
         g['made_up_pct'] = r2(100 * f['net'] / g['removed'])
     vt = [f for f in FP if f['district'] == 'Vav-Tharad'][0]
 
+    # Ahmedabad's 21 seats after the draft, from the press
+    ahd = []
+    for r in read('ahmedabad_final_ac_press.csv'):
+        n = int(r['ac']); a = A[n - 1]
+        assert a['district'] == 'Ahmedabad', n
+        x = {'ac': n, 'name': a['name'], 'draft': a['draft'], 'added': int(r['added']), 'deleted': int(r['deleted']), 'final': int(r['final'])}
+        x['gap'] = x['final'] - x['draft'] - x['added'] + x['deleted']
+        x['added_per_100'] = r2(100 * x['added'] / x['draft'])
+        x['deleted_per_100'] = r2(100 * x['deleted'] / x['draft'])
+        x['removed_per_100'] = a['per_100']
+        x['net_fall_per_100'] = r2(100 * (a['before'] - x['final']) / a['before'])
+        x['winner_party'] = a['winner_party']
+        a.update(final=x['final'], added=x['added'], deleted=x['deleted'])
+        ahd.append(x)
+    ga = byd['Ahmedabad']
+    assert len(ahd) == 21 and sum(x['added'] for x in ahd) == ga['added'] and sum(x['deleted'] for x in ahd) == ga['deleted'] and sum(x['final'] for x in ahd) == ga['final']
+    assert [x['ac'] for x in ahd if x['gap']] == [54] and ahd[[x['ac'] for x in ahd].index(54)]['gap'] == ga['final_gap'] == 25
+
     # by the party that won in 2022, raw and against the seat's own district
     winners = []
     for p in sorted(seats, key=lambda p: -seats[p]):
@@ -207,6 +244,9 @@ def build():
         'over_margin': sum(a['over_margin'] for a in A),
         'alive_over_margin': sum(a['alive_over_margin'] for a in A),
         'narrow_over_margin': sum(a['narrow_over_margin'] for a in A),
+        'turnout_over_margin': sum(a['turnout_over_margin'] for a in A),
+        'turnout_2022': r2(100 * E('voted_total') / E('electors_total')),
+        'margins_source': 'eci',
         'closest': [{'name': a['name'], 'margin': a['margin'], 'removed': a['removed'], 'winner_party': a['winner_party']} for a in close[:3]],
         'closest20_over': sum(a['over_margin'] for a in close[:20]),
         'margin_median': sorted(a['margin'] for a in A)[len(A) // 2 - 1: len(A) // 2 + 1],
@@ -220,6 +260,9 @@ def build():
         'made_up_pct': r2(100 * fs['net'] / rem),
         'net_negative': [g['district'] for g in D if g['net'] < 0],
         'vav_tharad': {k: vt[k] for k in ('draft', 'added', 'deleted', 'net', 'final')},
+        'ahmedabad': ahd,
+        'ahd_rho_removed_deleted': round(spearman([x['removed_per_100'] for x in ahd], [x['deleted_per_100'] for x in ahd]), 3),
+        'ahd_rho_removed_added': round(spearman([x['removed_per_100'] for x in ahd], [x['added_per_100'] for x in ahd]), 3),
         'final_districts_printed': len(FP),
         # across the 182 seats: where more names were left off, were more of
         # them entered as shifted, and fewer as dead?

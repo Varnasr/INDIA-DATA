@@ -1213,3 +1213,6 @@ html.dyslexic-font .pull .pq .tr{font-style:normal}
   footer[data-i18n-each]{line-height:1.7}
   footer a{display:inline-block;padding:.3rem .1rem}
 }
+/* printing a page (and the PDF reports made from the pages): no buttons,
+   no search box, no floating buttons, nothing a reader cannot press on paper */
+@media print{.tools,.finder,.fabs,.anchor,.tour,.toc,#tally{display:none!important}.vizbox,.panel{break-inside:avoid}}
