@@ -1619,8 +1619,17 @@ per slot, not the slot's length.
   sabarinstitute.org, at the owner's request (October 2026). It is a pointer
   for further reading and nothing more: no page says who compiled any list
   this site counts, and the Hyderabad pages still do not name a compiler.
-- **Publishing**: the site serves only pages and aggregate JSON. `_redirects`
-  answers 404 for raw files, scripts, notes and `archive/`. Do not link source files from a page, and describe
+- **Publishing**: Netlify publishes `_site` (gitignored), which
+  `scripts/stage_site.py` fills on every deploy from an allowlist: the page
+  folders, `assets`, `data`, `downloads`, `fonts`, `reports` and a few root
+  files, leaving out every `raw/` folder, `.md`/`.py`/`.mjs`/`.sh` files and
+  `DATA_PRIVATE`. Until October 2026 the repository root was published and
+  `_redirects` 404s guarded the private paths, but Netlify's file server
+  ignores case and the rules do not, so `/Scripts/`, `/Data/bihar/RAW/` and
+  `/claude.md` were served. CI runs `stage_site.py` with no argument and fails
+  on a top-level entry that is neither published nor kept back; name a new
+  folder in `PUBLIC_DIRS` or `PRIVATE`. The `_redirects` 404s stay as a second
+  line. Do not link source files from a page, and describe
   sources without naming the people or organisations who compiled them.
 - **Writing**: plain explanatory prose. Never refer to earlier versions of the
   analysis or to corrections on a public page, with one exception: the

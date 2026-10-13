@@ -1,11 +1,14 @@
-# Two steps on every deploy. scripts/build_site.py writes every page from
+# Three steps on every deploy. scripts/build_site.py writes every page from
 # site/places.json and site/pages (a no-op when the committed pages are
-# current), and scripts/stamp.py gives every script, stylesheet, data file
-# and download a ?v=<content hash> address, so a deploy can never pair a
-# fresh page with a stale file.
+# current), scripts/stamp.py gives every script, stylesheet, data file and
+# download a ?v=<content hash> address, so a deploy can never pair a fresh
+# page with a stale file, and scripts/stage_site.py copies only the public
+# files into _site. Only _site is published: the file server ignores case, so
+# a 404 rule for /scripts/ did not stop /Scripts/, and a file left out of the
+# copy cannot be reached by any spelling.
 [build]
-  publish = "."
-  command = "python3 scripts/build_site.py && python3 scripts/stamp.py"
+  publish = "_site"
+  command = "python3 scripts/build_site.py && python3 scripts/stamp.py && python3 scripts/stage_site.py _site"
 
 # Security headers on every response. The policy allows only what the pages
 # load: their own files, Chart.js from cdnjs, the Indian-language fonts from
