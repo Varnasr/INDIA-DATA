@@ -212,3 +212,51 @@ a second with browser headers). Columns: ac, ac_name, men, women, third
 - Used by scripts/build_rajasthan.py, against final_roll_ac.csv, which is
   general electors only and counts the 565 third-gender electors among
   women; the 2023 third-gender electors are added to women to match.
+
+## Press tables of the draft: draft_district_press.csv, draft_ac_press.csv, sirohi_sex_press.csv
+
+Read on 13 October 2026. On 16 December 2025, the day the draft was
+published, each District Election Officer briefed parties and reporters with
+the district's roll on 27 October 2025, the enumeration forms received (the
+draft), the forms not received (the names left off) and the five reasons (dead,
+permanently shifted, absent, enrolled at more than one place, other). Dainik
+Bhaskar's district editions printed them as tables, most with a row for each
+constituency; Amar Ujala printed Bundi's and Sirohi's. The officers' own sheets
+were not found, so every figure here is press. Each row carries its article's
+address in `source`. No list of individual electors was opened.
+
+Coverage: 22 of 41 districts (27,77,424 of 41,84,891 names left off), 110 of
+199 constituencies, 99 of them with a roll before, 64 with the five reasons.
+Not found in either paper: Bikaner, Hanumangarh, Churu, Karauli, Dholpur, Sawai
+Madhopur, Bhilwara, Jalore, Dungarpur, Pratapgarh, Baran, Jhalawar,
+Kotputli-Behror, Khairthal-Tijara, Deeg, Beawar, Didwana-Kuchaman, Balotara and
+Salumber.
+
+What `build_rajasthan.py` asserts, and the printed disagreements it holds
+fixed (`DIST_GAPS`, `SUM_GAPS`); a new one fails the build:
+
+- every district row satisfies roll before less left off equals draft, except
+  Kota, whose printed roll before and draft are each off from the sum of its
+  constituencies (15,32,550 and 13,72,762, which agree with each other);
+- the five reasons add to the names left off in every district that gave
+  them, except Alwar (-20), Ajmer (+54) and Jaisalmer (+30);
+- the constituency rows add to the printed district row in every column,
+  except Alwar (several columns), Ajmer (shifted -54, other +60), Pali (absent
+  -3,100, from Sumerpur), Jaisalmer (left off +30) and Kota (roll before +1,000,
+  draft -10);
+- Sirohi's roll before and draft by sex each add to the district's totals.
+
+Rows kept as printed and flagged in `note`: Ganganagar (2), whose table swaps
+the names left off and the draft (its text gives 32,293 left off); Surajgarh,
+Jhunjhunu, Mandawa and Khetri, each off by a round thousand that cancels
+across the district; Alwar Rural (duplicates printed 147, the row implies
+2,147), Alwar Urban, Ramgarh and Rajgarh Laxmangarh; Ajmer North (reasons 60
+over); Sumerpur (reasons 3,100 short); Kota South, whose printed roll before
+repeats Kota North's and is replaced by its draft plus its names left off.
+Jaipur's constituency draft is the roll before less the names left off; the
+paper did not print it per constituency. Banswara's roll before is the draft
+plus the names left off.
+
+Two press versions of an exact state split of the reasons exist (ETV Bharat,
+16 December 2025; Dainik Bhaskar, 22 December 2025). They disagree with each
+other and with the CEO's rounded lakh figures, so they are not used.

@@ -46,7 +46,8 @@
       limits: 'The tables are the Chief Electoral Officer\'s as published in the press. Nothing is split by sex or age, and the final roll is by district only.' },
     rajasthan: { label: 'Rajasthan', faq: 'rj', lead: { count: 'fall', base: 'roll_2023', per: 100, what: 'fall in the roll from the 2023 election roll to the final roll', of: 'the 2023 roll', to: 'the final roll' },
       election: { year: 2023, count: 'fall', voters: 'fall_voters', votersWhat: 'fall in the roll, at the seat\'s turnout', turnout: 'turnout' },
-      limits: 'Rajasthan published its names left off for the state only, so every constituency figure is the change in the roll over more than two years, which takes in ordinary deaths, moves and new voters. It is a different count from the names left off. A seat whose roll grew shows a negative fall.' },
+      press: true,
+      limits: 'The Chief Electoral Officer published the names left off for the state only, so the main constituency figure is the change in the roll over more than two years, which takes in ordinary deaths, moves and new voters. It is a different count from the names left off. A seat whose roll grew shows a negative fall. For 110 constituencies the District Election Officers\' counts of the names left off were printed by Dainik Bhaskar or Amar Ujala, and where they were, this page gives them as press figures.' },
     bihar: { label: 'Bihar', faq: 'bihar', lead: { count: 'total', base: 'electorate_2025', per: 100, what: 'names removed in both phases', of: 'the 2025 election roll', say: 'names were removed in the two phases of the revision', short: 'names removed' },
       map: { winner: 'win2025', runner_up: 'ru2025', margin: 'margin2025' },
       reasons: [['r_shifted', 'Shifted'], ['r_dead', 'Dead'], ['r_absent', 'Absent'], ['r_enrolled', 'Already enrolled']], reasonsOf: 'p1', reasonsWhat: 'the first phase',
@@ -97,7 +98,26 @@
             : ' are fewer than that margin, so the runner-up could not have won even if every one of them had voted for the runner-up.'));
       }
       if (C.claims) pts.push('After the draft, ' + n(a.claims) + ' names were added and ' + n(a.objections) + ' removed, and women were ' + pct(a.women_objections_pct) + ' of those removed against ' + pct(a.women_draft_pct) + ' of the draft.');
+      var Pr = C.press && a.press;
+      if (Pr) pts.splice(2, 0, 'By the District Election Officer\'s figures as ' + Pr.outlet + ' printed them, ' + n(Pr.left_off) + ' names were left off its draft' + (Pr.per_100 != null ? ', ' + d1(Pr.per_100) + ' of every 100 on the roll before the revision' : '') + '. ' + (Pr.left_off > a.margin ? 'That is more than the 2023 winning margin of ' + n(a.margin) + ', large enough to decide the seat, which says nothing about whether it would have.' : 'That is fewer than the 2023 winning margin of ' + n(a.margin) + '.'));
       SIR.inShort(pts, C.limits);
+      if (Pr) {
+        var PD = A.filter(function (r) { return r.district === a.district && r.press && r.press.per_100 != null; }), PS = A.filter(function (r) { return r.press && r.press.per_100 != null; });
+        var pRate = function (rows) { return 100 * sum(rows.map(function (r) { return r.press; }), 'left_off') / sum(rows.map(function (r) { return r.press; }), 'roll_before'); };
+        document.getElementById('sPress').hidden = false;
+        if (Pr.per_100 != null) {
+          var prow = [[a.name, Pr.per_100, '--fill-red']];
+          if (PD.length > 1) prow.push(['The ' + PD.length + ' seats of ' + a.district + ' printed', pRate(PD), '--fill-navy']);
+          prow.push(['All ' + PS.length + ' seats printed in ' + C.label, pRate(PS), '--fill-grey']);
+          VIZ.lollipop('vPress', { label: a.name + ': names left off the draft per 100 on the roll before, as the press printed them', axis: 'Per 100',
+            rows: prow.map(function (r) { return { name: r[0], v: r[1], text: d1(r[1]), tok: r[2], hi: true }; }) });
+        } else document.getElementById('vPress').parentNode.parentNode.hidden = true;
+        var PRS = [['dead', 'as dead'], ['shifted', 'as shifted for good'], ['absent', 'as absent'], ['duplicate', 'as enrolled at more than one place'], ['other', 'under another reason']];
+        document.getElementById('fPress').innerHTML = '<b>' + n(Pr.left_off) + ' names were left off ' + SIR.esc(a.name) + '\'s draft roll.</b> ' +
+          (Pr.dead != null ? 'Of these, ' + PRS.map(function (r, i) { return n(Pr[r[0]]) + (i ? ' ' : ' were entered ') + r[1]; }).join(', ').replace(/, ([^,]*)$/, ' and $1') + '. A reason is ' + OFFICER + '. ' : '') +
+          (Pr.after_per_100 != null ? 'From the draft to the final roll its roll ' + (Pr.after_per_100 >= 0 ? 'grew by ' + d1(Pr.after_per_100) : 'fell by ' + d1(-Pr.after_per_100)) + ' per 100, a net change that counts new voters too. ' : '') +
+          'These are the District Election Officer\'s figures as ' + Pr.outlet + ' printed them on 16 or 17 December 2025. The Chief Electoral Officer has published no such table.' + (Pr.clean ? '' : ' This row does not add up as printed. It is kept as printed, and the method page lists the slips in the printed tables.');
+      }
 
       // the seat against its district and state
       VIZ.lollipop('vCompare', { label: a.name + ': ' + L.what + ' per ' + L.per + ', against its district and the state', axis: 'Per ' + L.per,
