@@ -1173,3 +1173,9 @@ html.dyslexic-font .pull .pq .tr{font-style:normal}
 .dls .pick{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.4rem 0 1rem}
 .dls .pick select{max-width:100%}
 @media print{.dlstrip{display:none}}
+
+/* help page: an organisation's public contact, with where it is printed */
+.ncontact{font-size:.92rem;margin:.35rem 0 .2rem;line-height:1.5}
+.ncontact b{font-weight:600;margin-inline-end:.3rem}
+.ncontact a{overflow-wrap:anywhere}
+.ncontact .csrc{font-size:.8rem;color:var(--muted);margin-inline-start:.3rem;white-space:nowrap}

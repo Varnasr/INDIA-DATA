@@ -53,6 +53,11 @@ def build():
         if not src:
             raise SystemExit('FAIL - remedy %s has no source' % it['id'])
         rem.append({'id': it['id'], 'title': it['title'], 'plain': it['plain'], 'steps': it.get('steps', []), 'sources': src})
+    # public contacts (contacts.json): organisational lines only, each with the
+    # page it is printed on. Two were read only from a search index and are
+    # held back until their page is opened.
+    C = (load('contacts') or {}).get('contacts', {})
+    HOLD = {'dl-vam', 'wb-nakhoda-masjid'}
     orgs, dropped = [], []
     for f in ('orgs', 'orgs2', 'orgs3'):
         d = load(f)
@@ -69,7 +74,13 @@ def build():
             o = dict(o, **{k: v[k] for k in ('what', 'quote', 'source_url', 'active_as_of', 'how_to_reach') if v.get(k)})
             if dash(o['what']) or not (o.get('source_url') and o.get('quote')):
                 raise SystemExit('FAIL - organisation %s lacks a source or carries a dash' % o['id'])
-            orgs.append({k: o.get(k, '') for k in ('id', 'name', 'state', 'what', 'how_to_reach', 'source_url', 'source_outlet', 'source_date', 'active_as_of', 'confidence', 'quote', 'second_url')})
+            row = {k: o.get(k, '') for k in ('id', 'name', 'state', 'what', 'how_to_reach', 'source_url', 'source_outlet', 'source_date', 'active_as_of', 'confidence', 'quote', 'second_url')}
+            c = C.get(o['id'])
+            if c and c.get('level') in ('own', 'parent body') and o['id'] not in HOLD:
+                if dash(c['how_to_reach']):
+                    raise SystemExit('FAIL - contact for %s carries a dash' % o['id'])
+                row.update(contact=c['how_to_reach'], contact_level=c['level'], contact_src=c['source_url'], contact_checked=c.get('checked_on', ''))
+            orgs.append(row)
     orgs.sort(key=lambda o: (o['state'] == 'India', o['state'], o['name']))
     states = sorted({o['state'] for o in orgs if o['state'] != 'India'})
     # Hindi and Bengali: every sentence on the page, every step and every

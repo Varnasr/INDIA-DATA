@@ -53,9 +53,13 @@
   <h2>Against the 2022 winning margins</h2>
   <p class="sub">No figure by assembly constituency has been published. So each district's names left off are spread over its constituencies in proportion to their electors in the 2022 Assembly election, and set against each seat's 2022 winning margin. That shows how many seats the removals were large enough to decide. It cannot show which seats, because the real count in a constituency can sit well above or below its district's rate, and it cannot show that any result would have changed. Each dot is one constituency. A dot above the line had more names left off on this spread than its winning margin.</p>
   <div class="grid">
-    <div class="panel wide"><div class="vizbox" id="vMargin"></div></div>
+    <div class="panel wide"><div class="vizbox" id="vMult"></div></div>
   </div>
   <p class="finding" id="fMargin"></p>
+  <p class="sub">The same seats one by one. Each dot is a constituency, placed by its 2022 margin and by the names left off on the spread.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vMargin"></div></div>
+  </div>
   <div class="twrap fit" tabindex="0" role="region" aria-label="By the alliance that won in 2022"><table id="tAll"></table></div>
   <p class="note">The 2022 results are the Election Commission's statistical report. The NDA is the BJP, Apna Dal (Soneylal) and the NISHAD party; the SP's alliance is the SP, the RLD and the SBSP, as they contested in 2022. Every constituency's spread figure is in the download at the foot of this page.</p>
 
@@ -181,6 +185,10 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
 
   // ---- against the 2022 margins
   var M = A.margins;
+  var BINS = [['Less than the margin', 0, 1], ['1 to 2 times the margin', 1, 2], ['2 to 5 times', 2, 5], ['5 to 10 times', 5, 10], ['10 times or more', 10, Infinity]];
+  VIZ.lollipop('vMult', { label: 'Constituencies by how many times their 2022 margin the names left off came to', axis: 'Constituencies',
+    rows: BINS.map(function (b, i) { var k = M.seats.filter(function (a) { var m = a.est / a.margin; return m >= b[1] && m < b[2]; }).length;
+      return { name: b[0], v: k, text: n(k), tok: i === 0 ? '--fill-grey' : '--fill-red', hi: i === 4 }; }) });
   VIZ.scatter('vMargin', { label: 'Each constituency: its 2022 winning margin against the names left off, spread from its district', diag: true, xMin: 0, yMin: 0,
     xAxis: '2022 winning margin, votes', yAxis: 'Names left off, district spread by electors', diagLabel: 'left off = margin',
     key: [['Won by the NDA', '--fill-amber'], ['Won by the SP alliance', '--fill-red'], ['Won by another party', '--fill-grey']],
