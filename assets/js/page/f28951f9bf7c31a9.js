@@ -1,0 +1,58 @@
+Promise.all([SIR.json('data/india/cases.json'), SIR.json('data/uttarakhand/constituencies.json'), SIR.json('data/delhi/constituencies.json'),
+  SIR.json('data/gujarat/constituencies.json'), SIR.json('data/westbengal/districts.json')]).then(function (r) {
+  var C = r[0].cases, n = SIR.n, d1 = function (v) { return SIR.d(v, 1); }, esc = SIR.esc;
+  var sum = function (rows, k) { return rows.reduce(function (t, x) { return t + (x[k] || 0); }, 0); };
+  var cmp = function (v, ref) { return v > ref ? 'above' : 'below'; };
+  // one figure per place, each in its own state's measure
+  function seat(A, no, count, base, what) {
+    var a = A.filter(function (x) { return x.ac === no; })[0], D = A.filter(function (x) { return x.district === a.district; });
+    var rate = function (rows) { return 100 * sum(rows, count) / sum(rows, base); };
+    var ranked = A.slice().sort(function (x, y) { return y[count] / y[base] - x[count] / x[base]; });
+    return { a: a, v: 100 * a[count] / a[base], dist: rate(D), state: rate(A), rank: ranked.indexOf(a) + 1, of: A.length, what: what };
+  }
+  var F = {
+    kichha: seat(r[1], 67, 'left_off', 'roll_before', 'names left off the draft per 100 on the roll before the revision'),
+    tughlakabad: seat(r[2], 52, 'left_off', 'roll_before', 'names left off the draft per 100 on the roll before the revision'),
+    danilimda: seat(r[3], 54, 'removed', 'before', 'names left off the draft per 100 on the roll before the revision')
+  };
+  var W = r[4], WB = ['Murshidabad', 'Malda', 'Uttar Dinajpur', 'Dakshin Dinajpur'];
+  var wRate = function (rows) { return 100 * (sum(rows, 'roll_2024') - sum(rows, 'election')) / sum(rows, 'roll_2024'); };
+  var GJ = r[3].filter(function (x) { return x.district === 'Ahmedabad' && x.final != null; });
+  var shrank = GJ.filter(function (x) { return x.final < x.draft; });
+
+  var LINK = { kichha: '../../uttarakhand/seat/67/', tughlakabad: '../../delhi/seat/52/', danilimda: '../../gujarat/seat/54/', 'murshidabad-malda': '../../westbengal/#d-murshidabad' };
+  var HEAD = { records: 'What the official records show', reported: 'What was reported', said: 'What officials and parties said' };
+  var box = document.getElementById('cases'), short = [];
+  C.forEach(function (c) {
+    var h = '<h2 id="' + c.id + '">' + esc(c.title) + '</h2><p>' + esc(c.intro) + '</p><div class="grid"><div class="panel wide"><div class="vizbox" id="v-' + c.id + '"></div></div></div><p class="finding" id="f-' + c.id + '"></p>';
+    ['records', 'reported', 'said'].forEach(function (g) {
+      if (!c.items[g].length) return;
+      h += '<h3>' + HEAD[g] + '</h3><ul class="plain items">' + c.items[g].map(function (i) {
+        return '<li>' + esc(i.text) + ' <a href="' + esc(i.url) + '" rel="noopener">' + esc(i.outlet) + (i.date ? ', ' + SIR.date(i.date) : '') + '</a></li>'; }).join('') + '</ul>';
+    });
+    h += '<h3>What we looked for and could not find</h3><ul class="plain">' + c.not_found.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+    if (c.left_out.length) h += '<p class="note">' + n(c.left_out.length) + (c.left_out.length === 1 ? ' item' : ' items') + ' found in the reporting on this place could not be confirmed or fall outside what this site publishes, and are left out.</p>';
+    h += '<p><a class="btn" href="' + LINK[c.id] + '">' + (c.id === 'murshidabad-malda' ? 'West Bengal, with these districts on the map' : 'This constituency\'s own page') + '</a></p>';
+    box.insertAdjacentHTML('beforeend', h);
+    var s = F[c.id];
+    if (s) {
+      VIZ.lollipop('v-' + c.id, { label: s.a.name + ': ' + s.what + ', against its district and state', axis: 'Per 100',
+        rows: [[s.a.name, s.v, '--fill-red'], [s.a.district + ' district', s.dist, '--fill-navy'], [c.title.split(', ').pop(), s.state, '--fill-grey']].map(function (x) { return { name: x[0], v: x[1], text: d1(x[1]), tok: x[2], hi: true }; }) });
+      var t = '<b>' + esc(s.a.name) + ' lost ' + d1(s.v) + ' of every 100 names on its roll at the draft, ' + cmp(s.v, s.dist) + ' its district\'s ' + d1(s.dist) + ' and ' + cmp(s.v, s.state) + ' the state\'s ' + d1(s.state) + '.</b>' + (s.rank === 1 ? ' No other of the state\'s ' + s.of + ' constituencies lost as large a share.' : ' It ranks ' + s.rank + ' of the state\'s ' + s.of + ' constituencies, where 1 lost the most.');
+      if (c.id === 'danilimda') t += ' After the draft ' + n(s.a.added) + ' names were added and ' + n(s.a.deleted) + ' deleted, and its final roll of ' + n(s.a.final) + ' is smaller than its draft of ' + n(s.a.draft) + '. ' + (shrank.length === 1 ? 'It is the one seat of Ahmedabad\'s ' + GJ.length + ' whose final roll is smaller than its draft, by the press figures for after the draft.' : shrank.length + ' of Ahmedabad\'s ' + GJ.length + ' seats have a final roll smaller than their draft, by the press figures for after the draft.');
+      if (c.id === 'tughlakabad') t += ' The 2025 winning margin was ' + n(s.a.margin) + ' votes.';
+      document.getElementById('f-' + c.id).innerHTML = t;
+      short.push(esc(s.a.name) + ' lost ' + d1(s.v) + ' of every 100 names at the draft, ' + (s.rank === 1 ? 'the largest share of any of ' + c.title.split(', ').pop() + '\'s ' + s.of + ' constituencies' : 'against ' + d1(s.state) + ' in ' + c.title.split(', ').pop()) + '.');
+    } else {
+      var rows = WB.map(function (d) { return W.filter(function (x) { return x.district === d; })[0]; });
+      VIZ.lollipop('v-' + c.id, { label: 'Fall in the roll from the 2024 Lok Sabha roll to the roll of the 2026 election, per 100, four districts against West Bengal', axis: 'Per 100',
+        rows: rows.map(function (x) { return { name: x.district, v: x.per_100, text: d1(x.per_100), tok: '--fill-red', hi: true }; }).concat([{ name: 'West Bengal', v: wRate(W), text: d1(wRate(W)), tok: '--fill-grey', hi: true }]) });
+      var four = wRate(rows);
+      document.getElementById('f-' + c.id).innerHTML = '<b>Together the four districts\' roll fell by ' + d1(four) + ' of every 100 from the 2024 Lok Sabha roll to the roll the 2026 election was held on, against ' + d1(wRate(W)) + ' in the state.</b> West Bengal published no count of the names removed below the state, so this is the fall in the roll, which also takes in 18 months of ordinary changes. It is the measure the West Bengal pages use.';
+      short.push('The roll of Murshidabad, Malda and the two Dinajpurs fell by ' + d1(four) + ' of every 100 from the 2024 Lok Sabha roll to the 2026 election roll, against ' + d1(wRate(W)) + ' in the state.');
+    }
+  });
+  SIR.inShort(short, 'Each place is measured in its own state\'s terms, so the places are never compared with each other. A figure says how many names went, never why.');
+  SIR.showFaq('india', 'cases');
+  SIR.jump && SIR.jump();
+}).catch(SIR.fail);

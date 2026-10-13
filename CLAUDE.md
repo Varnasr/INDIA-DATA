@@ -1362,7 +1362,9 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   `supabase/migrations` holds the SQL. Nothing else is sent, nothing is
   counted on localhost or deploy previews, and Do Not Track or Global Privacy
   Control turns it off. The table is closed to the public key; read it in the
-  Supabase SQL editor.
+  Supabase SQL editor. The function caps a day at 3,000 rows and 500,000
+  counts and drops calls past either without an error, so a script calling
+  it in a loop cannot fill the database.
 
 - **The design is "Off the Roll"** (October 2026, from a mockup the owner
   chose; the last block of `assets/sir.css`). Warm paper `#f6f2ea` and ink
@@ -1596,6 +1598,14 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   4.5.1 from cdnjs with an `integrity` hash on every page; a version change
   needs the new hash from cdnjs's API. A new outside origin goes into the
   policy and into the privacy section of `terms/` in the same commit.
+  `script-src` carries no `'unsafe-inline'`. Every inline script a page
+  source holds is moved by `build_site.py` (`externalise()`) into
+  `assets/js/page/<hash>.js` and loaded from there; JSON blocks stay inline.
+  So write page scripts inline in `site/pages` as before, and never put an
+  `onclick=` or other inline handler in markup or in a string a script
+  writes: it will not run, and nothing on the page shows it. Bind with
+  `addEventListener`. A hash read from the address goes through
+  `SIR.hashId()`, which survives a malformed `%` escape.
 - **Search engines and sharing.** `build_site.py` writes, beside the Open
   Graph tags, a canonical link, Twitter title and description, `og:locale`
   and JSON-LD on every page (`ldjson()`: the WebSite on the front page, a

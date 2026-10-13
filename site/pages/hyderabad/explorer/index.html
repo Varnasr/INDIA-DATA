@@ -48,7 +48,8 @@ function chart(id,cfg){if(charts[id]){charts[id].destroy()}Chart.defaults.color=
 const base={responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'#eef1f4'}}}};
 function render(){
   const o=get(sel), whole=sel===0;
-  document.getElementById('crumb').innerHTML=whole?L('Whole constituency'):'<button onclick="go(0)">'+L('Whole constituency')+'</button> &rsaquo; '+L('Part {part}',{part:o.part});
+  document.getElementById('crumb').innerHTML=whole?L('Whole constituency'):'<button type="button">'+L('Whole constituency')+'</button> &rsaquo; '+L('Part {part}',{part:o.part});
+  var back=document.querySelector('#crumb button'); if(back) back.addEventListener('click',function(){go(0);});
   document.getElementById('title').textContent=whole?(D.acs[ac].partlabel==='part'?L('{ac}, all {n} parts',{ac:ac,n:P.length}):L('{ac}, all {n} polling-station names',{ac:ac,n:P.length})):(ac==='Malakpet'?o.loc:(o.loc?L('Part {part}: {loc}',{part:o.part,loc:o.loc}):L('Part {part}',{part:o.part})));
   const hr=o.hear, clean=o.total-o.asd-hr-o.unacc;
   const avg=pct(T.asd,T.total); document.getElementById('sub').textContent=whole?L('{total} electors on the pre-revision roll. {deleted} deleted, {hearing} kept but called to a hearing, {untouched} untouched.',{total:f(o.total),deleted:p1(pct(o.asd,o.total)),hearing:p1(pct(hr,o.total)),untouched:p1(pct(clean,o.total))}):L('{total} electors. {rate} deleted against a constituency average of {avg}. {hearing} more were summoned to a hearing.',{total:f(o.total),rate:p1(o.rate),avg:p1(avg),hearing:f(hr)});
@@ -85,7 +86,7 @@ function buildTable(){const rows=[...P].sort((a,b)=>{const x=a[sortK],y=b[sortK]
 document.querySelectorAll('#tbl th').forEach(h=>h.onclick=()=>{if(sortK===h.dataset.k)sortA=!sortA;else{sortK=h.dataset.k;sortA=h.dataset.k==='part'||h.dataset.k==='loc'}buildTable()});
 buildTabs();
 // A link of the form #Yakutpura-297 opens that constituency at that part.
-(function(){const m=decodeURIComponent(location.hash.slice(1)).match(/^([A-Za-z]+)(?:-(\d+))?$/);
+(function(){const m=SIR.hashId().match(/^([A-Za-z]+)(?:-(\d+))?$/);
   if(m&&ACS.includes(m[1])){loadAC(m[1]);if(m[2]&&P.some(p=>p.part===+m[2]))go(+m[2]);}else loadAC(ACS[0]);})();
 document.addEventListener('sir-theme',()=>render());
 </script>

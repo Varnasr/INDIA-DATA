@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../../assets/i18n.js?v=ada54cd7"></script>
+<script src="../../assets/i18n.js"></script>
 <title>People, Telangana 2026</title>
 <meta name="description" content="Deletion rates in Hyderabad&#x27;s Old City SIR by age, sex, religion guessed from names and the 2002 link, across constituencies and inside the same polling part.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23b13b38'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="manifest" href="../../manifest.webmanifest">
 <meta name="theme-color" content="#1f4e79">
-<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png?v=44207c69">
-<link rel="stylesheet" href="../../assets/sir.css?v=33a4cde7">
+<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/sir.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="People, Telangana 2026">
@@ -106,51 +106,16 @@
   <p class="note">Religion is guessed from names because the roll does not record it, and a separate classification agrees on 99% of names. Electors whose names were classified as neither Hindu nor Muslim are left out of both religion rates. An elector counts as linked when the export matches them to the 2002 intensive revision roll.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
-<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Telangana 2026</h2><p><a class="btn" href="../../downloads/telangana-hyderabad.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../../downloads/#w-hyd">What each sheet holds</a></p><p class="csvs">CSV: <a href="../../data/hyderabad/constituencies.csv?v=a42c5a24" download>constituencies.csv</a> <a href="../../data/hyderabad/parts.csv?v=0650eff3" download>parts.csv</a></p></section>
+<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Telangana 2026</h2><p><a class="btn" href="../../downloads/telangana-hyderabad.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../../downloads/#w-hyd">What each sheet holds</a></p><p class="csvs">CSV: <a href="../../data/hyderabad/constituencies.csv" download>constituencies.csv</a> <a href="../../data/hyderabad/parts.csv" download>parts.csv</a></p></section>
 </main>
 <footer data-i18n-each><span>Research by <a href="https://www.impactmojo.in/">ImpactMojo</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../#why-this-site-exists">About This Site</a> · <a href="../../help/">Removed from the Roll? What to Do</a> · <a href="../../downloads/#w-hyd">Downloads</a> · <a href="../../share/">Share a List with Us</a> · <a href="../../support/">Support Our Work</a> · <a href="../../terms/">Terms and Privacy</a> · <a href="../../updates/">What's New</a> · <a href="../../corrections/">Corrections</a> · <a href="../../feedback/?from=hyderabad%2Fpeople%2F">Feedback</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
 <div class="fabs"><a class="fab fab-share" href="../../share/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15V4m0 0-4 4m4-4 4 4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg><span>Share a list</span></a><a class="fab" href="../../india/constituencies/#find-a-constituency"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-2.6-2.3-6-6.1-6-10a6 6 0 0 1 12 0c0 .8-.1 1.6-.4 2.4M12 12.8a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6m7.4 6.6 1.8 1.8m-1.2-4.2a2.7 2.7 0 1 1-5.4 0 2.7 2.7 0 0 1 5.4 0"/></svg><span>Find your constituency</span></a></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js" integrity="sha512-WoViKhKD4qI2WruSZqv9+kvM4WfFhUMQCLN4QlDTt5aU56fLQy2gYoxWIqlEnXqJy/+Ac5q/hk1oWfqnMDhwMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../../assets/sir.js?v=31bc1808"></script>
-<script src="../../assets/viz.js?v=3ec8844b"></script>
-<script>
-SIR.json('data/hyderabad/summary.json').then(function (s) {
-  var A = s.acs, names = A.map(function (a) { return a.name; }), pal = ['--fill-red', '--fill-navy', '--fill-amber', '--fill-india', '--fill-other'];
-  SIR.chart('cAge', { type: 'line', data: { labels: s.bands, datasets: A.map(function (a, i) { return { label: a.name, data: a.age_rate, $token: pal[i], tension: 0.2, pointRadius: 3 }; }) },
-    options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% struck off') } }, x: { title: { display: true, text: L('Age band') } } } } });
-  var lo = A.map(function (a) { return a.age_rate[0]; }), hi = A.map(function (a) { return a.age_rate[7]; });
-  document.getElementById('fAge').innerHTML = L('<b>In every constituency, the older the elector, the likelier the removal.</b> Between {hi_min} and {hi_max} of electors aged 80 and over were struck off, and {lo_min} to {lo_max} of those aged 18 to 24. Death explains part of the removals at the oldest ages. The recorded reasons are on the <a href="../">overview</a>.', { hi_min: SIR.pct(Math.min.apply(null, hi)), hi_max: SIR.pct(Math.max.apply(null, hi)), lo_min: SIR.pct(Math.min.apply(null, lo)), lo_max: SIR.pct(Math.max.apply(null, lo)) });
-
-  SIR.chart('cRel', { type: 'bar', data: { labels: names, datasets: [
-      { label: L('Hindu names'), data: A.map(function (a) { return a.hindu_rate; }), $token: '--fill-amber' },
-      { label: L('Muslim names'), data: A.map(function (a) { return a.muslim_rate; }), $token: '--fill-india' }] },
-    options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% struck off') } } } } });
-  SIR.chart('cRelW', { type: 'bar', data: { labels: names, datasets: [{ label: L('Hindu minus Muslim, within parts'), data: A.map(function (a) { return a.within_part.hindu_minus_muslim.diff_pp; }), $token: '--fill-navy' }] },
-    options: { plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: function (c) { var w = A[c.dataIndex].within_part.hindu_minus_muslim; return L('{higher} of {parts} parts: Hindu-name rate higher', { higher: w.a_higher, parts: w.parts }); } } } }, scales: { y: { beginAtZero: true, title: { display: true, text: L('Percentage points') } } } } });
-  var W = A.map(function (a) { return a.within_part.hindu_minus_muslim; });
-  var c = function (k) { return 100 * SIR.sum(A, function (a) { return a.counts[k]; }); };
-  document.getElementById('fRel').innerHTML = L('<b>Across the five constituencies, {hindu} of Hindu-name electors were struck off and {muslim} of Muslim-name electors.</b> Inside the same polling part the gap is {gap_min} to {gap_max} points, and it runs the same way in {higher} of the {parts} parts large enough to compare.', { hindu: SIR.pct(c('hin_asd') / SIR.sum(A, function (a) { return a.counts.hin_all; })), muslim: SIR.pct(c('mus_asd') / SIR.sum(A, function (a) { return a.counts.mus_all; })), gap_min: SIR.d(Math.min.apply(null, W.map(function (w) { return w.diff_pp; })), 1), gap_max: SIR.d(Math.max.apply(null, W.map(function (w) { return w.diff_pp; })), 1), higher: SIR.sum(W, 'a_higher'), parts: SIR.sum(W, 'parts') });
-
-  var LK = A.filter(function (a) { return a.linked; });
-  SIR.chart('cLink', { type: 'bar', data: { labels: LK.map(function (a) { return a.name; }), datasets: [
-      { label: L('Linked to 2002'), data: LK.map(function (a) { return a.linked_rate; }), $token: '--fill-navy' },
-      { label: L('No 2002 link'), data: LK.map(function (a) { return a.unlinked_rate; }), $token: '--fill-red' }] },
-    options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% struck off') } } } } });
-  SIR.chart('cLinkShare', { type: 'bar', data: { labels: LK.map(function (a) { return a.name; }), datasets: [{ label: L('% of roll linked'), data: LK.map(function (a) { return a.linked_share_roll; }), $token: '--fill-navy' }] },
-    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: L('% of roll') } } } } });
-  document.getElementById('fLink').innerHTML = L('<b>Electors with no link to the 2002 roll were about twice as likely to be struck off.</b> Inside the same polling part, unlinked electors were struck off {gaps}. The 2002 link is the revision\'s own test, so the gap shows how much the process relied on it.', { gaps: LK.map(function (a) { return L('{points} points more often in {name}', { points: SIR.d(a.within_part.unlinked_minus_linked.diff_pp, 0), name: a.name }); }).join(', ') });
-
-  SIR.chart('cSex', { type: 'bar', data: { labels: names, datasets: [
-      { label: L('Women'), data: A.map(function (a) { return a.female_rate; }), $token: '--female' },
-      { label: L('Men'), data: A.map(function (a) { return a.male_rate; }), $token: '--male' }] },
-    options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% struck off') } } } } });
-  SIR.table(document.getElementById('tSex'), [{ k: 'name', label: L('Constituency'), left: true }, { k: 'd', label: L('Women minus men (points)'), fmt: function (v) { return SIR.d(v, 1); } }, { k: 'w', label: L('Parts: women higher') }, { k: 'm', label: L('Parts: men higher') }],
-    A.map(function (a) { var w = a.within_part.female_minus_male; return { name: a.name, d: w.diff_pp, w: w.a_higher, m: w.b_higher }; }), { sort: 'name', dir: 1 });
-  document.getElementById('fSex').innerHTML = L('<b>Women and men were struck off at similar rates.</b> Men were struck off slightly more often in Charminar, Yakutpura and Malakpet, and women in Chandrayangutta and Bahadurpura. Inside the same part the gaps are under two and a half points.');
-}).catch(SIR.fail);
-</script>
-<script src="../../assets/faq/hyd.js?v=b2fbfc82"></script>
-<script>SIR.showFaq('hyd', 'people');</script>
-<script src="../../assets/dyslexia-font.js?v=ee566817" data-accent="var(--fill-red)" data-radius="10px" defer></script>
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/viz.js"></script>
+<script src="../../assets/js/page/45d2bc3931e7c2ba.js"></script>
+<script src="../../assets/faq/hyd.js"></script>
+<script src="../../assets/js/page/3db3a4a1de12a6c5.js"></script>
+<script src="../../assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

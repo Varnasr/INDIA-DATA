@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../assets/i18n.js?v=ada54cd7"></script>
+<script src="../assets/i18n.js"></script>
 <title>Kerala 2026</title>
 <meta name="description" content="How much smaller each district and constituency&#x27;s electoral roll was at Kerala&#x27;s SIR draft than in January 2025, who was missing, and how much of it came back before the 2026 election.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%238a5a12'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="manifest" href="../manifest.webmanifest">
 <meta name="theme-color" content="#1f4e79">
-<link rel="apple-touch-icon" href="../assets/app/apple-touch-icon.png?v=44207c69">
-<link rel="stylesheet" href="../assets/sir.css?v=33a4cde7">
+<link rel="apple-touch-icon" href="../assets/app/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/sir.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="Kerala 2026">
@@ -99,91 +99,14 @@
   <p class="note">Every figure on this page is computed from the published data when the page loads. <a href="method/">Sources and method</a>.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
-<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Kerala 2026</h2><p><a class="btn" href="../downloads/kerala.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../downloads/#w-kl">What each sheet holds</a></p><p class="csvs">CSV: <a href="../data/kerala/constituencies.csv?v=10d280eb" download>constituencies.csv</a> <a href="../data/kerala/districts.csv?v=69554ea7" download>districts.csv</a></p></section>
+<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Kerala 2026</h2><p><a class="btn" href="../downloads/kerala.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../downloads/#w-kl">What each sheet holds</a></p><p class="csvs">CSV: <a href="../data/kerala/constituencies.csv" download>constituencies.csv</a> <a href="../data/kerala/districts.csv" download>districts.csv</a></p></section>
 </main>
 <footer data-i18n-each><span>Research by <a href="https://www.impactmojo.in/">ImpactMojo</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../#why-this-site-exists">About This Site</a> · <a href="../help/">Removed from the Roll? What to Do</a> · <a href="../downloads/#w-kl">Downloads</a> · <a href="../share/">Share a List with Us</a> · <a href="../support/">Support Our Work</a> · <a href="../terms/">Terms and Privacy</a> · <a href="../updates/">What's New</a> · <a href="../corrections/">Corrections</a> · <a href="../feedback/?from=kerala%2F">Feedback</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
 <div class="fabs"><a class="fab fab-share" href="../share/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15V4m0 0-4 4m4-4 4 4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg><span>Share a list</span></a><a class="fab" href="../india/constituencies/#find-a-constituency"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-2.6-2.3-6-6.1-6-10a6 6 0 0 1 12 0c0 .8-.1 1.6-.4 2.4M12 12.8a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6m7.4 6.6 1.8 1.8m-1.2-4.2a2.7 2.7 0 1 1-5.4 0 2.7 2.7 0 0 1 5.4 0"/></svg><span>Find your constituency</span></a></div>
-<script src="../assets/sir.js?v=31bc1808"></script>
-<script src="../assets/viz.js?v=3ec8844b"></script>
-<script src="../assets/faq/kerala.js?v=802d6762"></script>
-<script>
-Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/districts.json'), SIR.json('data/kerala/constituencies.json')]).then(function (r) {
-  var S = r[0], D = r[1], A = r[2];
-  var tvm = function (d) { return d.district === 'Thiruvananthapuram'; };
-  VIZ.waterfall('vWater', { label: L('Kerala: the roll from January 2025 to March 2026'), from: Math.floor(S.draft * 0.85 / 1e6) * 1e6, steps: [
-    { name: L('Roll of January 2025'), v: S.roll_2025, kind: 'total' }, { name: L('Fall to the draft'), v: S.fall_draft, kind: 'down' },
-    { name: L('Draft roll'), v: S.draft, kind: 'total' }, { name: L('Net change to the final roll'), v: S.added_final, kind: 'up' },
-    { name: L('Final roll'), v: S.final, kind: 'total' }, { name: L('Net change to March 2026'), v: S.added_election, kind: 'up' },
-    { name: L('Roll of 23 March 2026'), v: S.election, kind: 'total' }] });
-  document.getElementById('fWater').innerHTML = L('<b>The draft roll was {f} smaller than the roll of January 2025, {p} of every 100 electors.</b> The roll then grew by {b} to the final roll and the roll the election was held on, which was still {e} smaller than in January 2025. The rise after the draft counts new voters as well as names put back.', {
-    f: SIR.lakh(S.fall_draft), p: SIR.d(S.draft_per_100, 1), b: SIR.lakh(S.election - S.draft), e: SIR.lakh(S.fall) });
-
-  VIZ.strip('cDist', { label: L('Fall in the roll from January 2025 to the draft, per 100 electors, every constituency by district'), axis: L('Fall per 100 electors on the January 2025 roll'), r: 4.5,
-    key: [[L('Thiruvananthapuram district'), '--fill-red'], [L('Other districts'), '--fill-navy']],
-    rows: D.map(function (d) { return { name: d.district, tok: tvm(d) ? '--fill-red' : '--fill-navy',
-      points: A.filter(function (a) { return a.district === d.district; }).map(function (a) { return { v: Math.max(a.draft_per_100, 0), label: L('{n} ({d}): {v} per 100', { n: a.name, d: a.district, v: SIR.d(a.draft_per_100, 1) }) }; }) }; }) });
-  var lo = D[D.length - 1];
-  document.getElementById('fDist').innerHTML = L('<b>{a}\'s roll was {t} per 100 smaller at the draft, against {s} for the state.</b> {b} and {c} come next. {lo} fell the least, {lov}. Across the 140 constituencies the fall runs from {min} per 100 in {minn} to {max} in {maxn}.', {
-    a: D[0].district, t: SIR.d(D[0].draft_per_100, 1), s: SIR.d(S.draft_per_100, 1), b: D[1].district, c: D[2].district, lo: lo.district, lov: SIR.d(lo.draft_per_100, 1), min: SIR.d(S.rate_min_v, 1), minn: S.rate_min, max: SIR.d(S.rate_max_v, 1), maxn: S.rate_max });
-
-  VIZ.multiples('vBack', { label: L('Each district\'s roll at the four published rolls, January 2025 = 100'), ref: 100,
-    steps: [L('January 2025'), L('Draft'), L('Final roll'), L('March 2026')],
-    panels: D.map(function (d) { return { name: d.district, hi: tvm(d), v: [d.roll_2025, d.draft, d.final, d.election].map(function (v) { return 100 * v / d.roll_2025; }) }; }) });
-  var grew = D.filter(function (d) { return d.per_100 < 0; });
-  document.getElementById('fBack').innerHTML = L('<b>In {a} and {b} the roll was still about {t} per 100 smaller at the election than in January 2025.</b> In {k} districts, {g}, it had grown past its January size by the election. The rise after the draft counts new voters as well as names put back, so it cannot show how many of those left off were restored.', {
-    a: D[0].district, b: D[1].district, t: SIR.d((D[0].per_100 + D[1].per_100) / 2, 0), k: grew.length, g: (function (n) { return n.length < 2 ? n.join('') : n.slice(0, -1).join(', ') + L(' and ') + n[n.length - 1]; })(grew.map(function (d) { return d.district; })) });
-
-  VIZ.scatter('vWomen', { label: L('Women\'s share of the January 2025 roll and of the fall in the roll at the draft, every constituency'), diag: true,
-    xAxis: L('Women\'s share of the January 2025 roll, %'), yAxis: L('Women\'s share of the fall, %'), diagLabel: L('Same share'),
-    key: [[L('Thiruvananthapuram district'), '--fill-red'], [L('Other districts'), '--fill-navy']],
-    points: A.map(function (a) { return { x: a.women_2025_pct, y: a.women_fall_pct, tok: a.district === 'Thiruvananthapuram' ? '--fill-red' : '--fill-navy',
-      label: L('{n} ({d}): women {w} of the roll, {f} of the fall', { n: a.name, d: a.district, w: SIR.pct(a.women_2025_pct), f: SIR.pct(a.women_fall_pct) }) }; }) });
-  document.getElementById('fWomen').innerHTML = L('<b>Women were {wf} of the fall to the draft, against {w} of the roll before it.</b> They were more than their share in all {n} districts and in {k} of the {acs} constituencies. Of the rise after the draft, women were {wa}.', {
-    wf: SIR.pct(S.women_fall_pct), w: SIR.pct(S.women_2025_pct), n: S.districts, k: S.acs_women_over, acs: S.acs, wa: SIR.pct(S.women_added_pct) });
-
-  SIR.table(document.getElementById('tAc'), [
-    { k: 'ac', label: L('No.') }, { k: 'name', label: L('Constituency'), left: true }, { k: 'district', label: L('District'), left: true },
-    { k: 'roll_2025', label: L('Roll Jan 2025'), fmt: SIR.n }, { k: 'draft', label: L('Draft roll'), fmt: SIR.n },
-    { k: 'draft_per_100', label: L('Fall to draft per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'election', label: L('Roll Mar 2026'), fmt: SIR.n },
-    { k: 'per_100', label: L('Fall to 2026 per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'women_fall_pct', label: L('Women % of fall'), fmt: function (v) { return SIR.d(v, 1); } }
-  ], A, { sort: 'draft_per_100' });
-
-  SIR.table(document.getElementById('tDist'), [
-    { k: 'district', label: L('District'), left: true }, { k: 'acs', label: L('Seats') },
-    { k: 'roll_2025', label: L('Roll Jan 2025'), fmt: SIR.n }, { k: 'draft', label: L('Draft roll'), fmt: SIR.n }, { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'election', label: L('Roll March 2026'), fmt: SIR.n },
-    { k: 'draft_per_100', label: L('Fall to the draft, per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'per_100', label: L('Fall to 2026, per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'women_fall_pct', label: L('Women in the fall %'), fmt: function (v) { return SIR.d(v, 1); } }
-  ], D, { sort: 'draft_per_100' });
-  SIR.json('data/geo/kerala.json').then(function (geo) {
-    var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });
-    var seatsOf = function (d) { return A.filter(function (a) { return a.district === d.district; }); };
-    var DSET = { rows: D, key: function (d) { return SIR.slug(d.district); }, label: function (d) { return L('{d} district', { d: d.district }); },
-      card: function (d) { return SIR.facts([
-        [L('Roll of January 2025'), SIR.n(d.roll_2025)], [L('Draft roll'), SIR.n(d.draft)], [L('Fall to the draft'), SIR.n(d.roll_2025 - d.draft)],
-        [L('Per 100 electors'), SIR.d(d.draft_per_100, 1)], [L('Women\'s share of the fall'), SIR.pct(d.women_fall_pct)],
-        [L('Roll of March 2026'), SIR.n(d.election)], [L('Fall by March 2026, per 100'), SIR.d(d.per_100, 1)], [L('Constituencies'), SIR.n(d.acs)]]) + '<p class="note">' + L('Its constituencies') + '</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
-      share: function (d) { return L('{d} district, Kerala. The draft roll was {f} names smaller than the January 2025 roll, {p} of every 100 electors, across {n} constituencies. The fall also counts people who died or moved, so it is not the same as the names struck off. These are counts from the Chief Electoral Officer\'s published rolls.', { d: d.district, f: SIR.n(d.roll_2025 - d.draft), p: SIR.d(d.draft_per_100, 1), n: d.acs }); },
-      pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); } };
-    var F = SIR.finder('finder', { seatPages: true, rows: A, more: [DSET], prompt: L('Find a constituency or district'), placeholder: L('Type a name, a number or a district'), key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
-      card: function (a) { return SIR.facts([
-        [L('Roll of January 2025'), SIR.n(a.roll_2025)], [L('Draft roll'), SIR.n(a.draft)], [L('Fall to the draft'), SIR.n(a.fall_draft)],
-        [L('Per 100 electors'), SIR.d(a.draft_per_100, 1)], [L('Women\'s share of the fall'), SIR.pct(a.women_fall_pct)],
-        [L('Roll of March 2026'), SIR.n(a.election)], [L('Fall by March 2026, per 100'), SIR.d(a.per_100, 1)],
-        [L('Won in 2026'), a.winner + ' · ' + L('margin {m}', { m: SIR.n(a.margin) })]]); },
-      share: function (a) { return L('{n}, Kerala. The draft roll was {f} names smaller than the January 2025 roll, {p} of every 100 electors, and women were {w} of that fall. The seat was won in 2026 by {m} votes. The fall also counts people who died or moved, so it is not the same as the names struck off. These are counts from the Chief Electoral Officer\'s published rolls.', { n: a.name, f: SIR.n(a.fall_draft), p: SIR.d(a.draft_per_100, 1), w: SIR.pct(a.women_fall_pct), m: SIR.n(a.margin) }); },
-      pick: function (a) { var b = document.getElementById('vMap'); if (b.__select) b.__select(a.ac); } });
-    VIZ.map('vMap', { geo: geo, label: L('Map of the fall in the roll per 100 electors, January 2025 to the draft, by constituency'), title: L('Fall per 100 electors'), 
-      v: function (ac) { return byAc[ac] ? byAc[ac].draft_per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
-      pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
-    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
-    SIR.tools();
-  });
-  SIR.showFaq('kl', 'main');
-}).catch(SIR.fail);
-</script>
-<script src="../assets/dyslexia-font.js?v=ee566817" data-accent="var(--fill-red)" data-radius="10px" defer></script>
+<script src="../assets/sir.js"></script>
+<script src="../assets/viz.js"></script>
+<script src="../assets/faq/kerala.js"></script>
+<script src="../assets/js/page/7346951ae452c5a7.js"></script>
+<script src="../assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

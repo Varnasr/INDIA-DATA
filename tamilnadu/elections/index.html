@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../../assets/i18n.js?v=ada54cd7"></script>
+<script src="../../assets/i18n.js"></script>
 <title>Elections, Tamil Nadu 2026</title>
 <meta name="description" content="The names left off Tamil Nadu&#x27;s draft roll, constituency by constituency, against the margins of the 2026 assembly election.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%238a2a1b'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="manifest" href="../../manifest.webmanifest">
 <meta name="theme-color" content="#1f4e79">
-<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png?v=44207c69">
-<link rel="stylesheet" href="../../assets/sir.css?v=33a4cde7">
+<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/sir.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="Elections, Tamil Nadu 2026">
@@ -85,63 +85,15 @@
   <p class="note">Every figure on this page is computed from the published data when the page loads. <a href="../method/">Sources and method</a>.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
-<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Tamil Nadu 2026</h2><p><a class="btn" href="../../downloads/tamil-nadu.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../../downloads/#w-tn">What each sheet holds</a></p><p class="csvs">CSV: <a href="../../data/tamilnadu/constituencies.csv?v=4f61544b" download>constituencies.csv</a> <a href="../../data/tamilnadu/districts.csv?v=79b04ebd" download>districts.csv</a></p></section>
+<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Tamil Nadu 2026</h2><p><a class="btn" href="../../downloads/tamil-nadu.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../../downloads/#w-tn">What each sheet holds</a></p><p class="csvs">CSV: <a href="../../data/tamilnadu/constituencies.csv" download>constituencies.csv</a> <a href="../../data/tamilnadu/districts.csv" download>districts.csv</a></p></section>
 </main>
 <footer data-i18n-each><span>Research by <a href="https://www.impactmojo.in/">ImpactMojo</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../#why-this-site-exists">About This Site</a> · <a href="../../help/">Removed from the Roll? What to Do</a> · <a href="../../downloads/#w-tn">Downloads</a> · <a href="../../share/">Share a List with Us</a> · <a href="../../support/">Support Our Work</a> · <a href="../../terms/">Terms and Privacy</a> · <a href="../../updates/">What's New</a> · <a href="../../corrections/">Corrections</a> · <a href="../../feedback/?from=tamilnadu%2Felections%2F">Feedback</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
 <div class="fabs"><a class="fab fab-share" href="../../share/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15V4m0 0-4 4m4-4 4 4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg><span>Share a list</span></a><a class="fab" href="../../india/constituencies/#find-a-constituency"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-2.6-2.3-6-6.1-6-10a6 6 0 0 1 12 0c0 .8-.1 1.6-.4 2.4M12 12.8a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6m7.4 6.6 1.8 1.8m-1.2-4.2a2.7 2.7 0 1 1-5.4 0 2.7 2.7 0 0 1 5.4 0"/></svg><span>Find your constituency</span></a></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js" integrity="sha512-WoViKhKD4qI2WruSZqv9+kvM4WfFhUMQCLN4QlDTt5aU56fLQy2gYoxWIqlEnXqJy/+Ac5q/hk1oWfqnMDhwMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../../assets/sir.js?v=31bc1808"></script>
-<script src="../../assets/viz.js?v=3ec8844b"></script>
-<script src="../../assets/faq/tamilnadu.js?v=2ba29e21"></script>
-<script>
-Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/constituencies.json')]).then(function (r) {
-  var S = r[0], A = r[1];
-  var G = [['TVK', '--fill-amber'], ['DMK', '--fill-red'], ['AIADMK', '--fill-navy']];
-  var groups = G.map(function (g) { return { label: g[0], test: function (a) { return a.winner === g[0]; }, tok: g[1] }; })
-    .concat([{ label: L('Other parties'), test: function (a) { return ['TVK', 'DMK', 'AIADMK'].indexOf(a.winner) < 0; }, tok: '--fill-grey' }]);
-  var maxX = Math.max.apply(null, A.map(function (a) { return a.removed; })), minX = Math.min.apply(null, A.map(function (a) { return a.removed; }));
-  SIR.chart('cScatter', { type: 'scatter', data: { datasets: groups.map(function (g) {
-      return { label: g.label, data: A.filter(g.test).map(function (a) { return { x: a.removed, y: a.margin, n: a.name, w: a.winner }; }), $token: g.tok, pointRadius: 3.5 };
-    }).concat([{ type: 'line', label: L('Margin equals names removed'), data: [{ x: minX, y: minX }, { x: maxX, y: maxX }], $token: '--fill-other', pointRadius: 0, borderDash: [5, 4], borderWidth: 1.5 }]) },
-    options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n ? L('{n} ({w}): {x} removed, margin {y}', { n: c.raw.n, w: c.raw.w, x: SIR.n(c.raw.x), y: SIR.n(c.raw.y) }) : ''; } } } },
-      scales: { x: { type: 'logarithmic', title: { display: true, text: L('Names left off the draft roll (log scale)') } }, y: { type: 'logarithmic', title: { display: true, text: L('2026 winning margin, votes (log scale)') } } } } });
-  document.getElementById('fScatter').innerHTML = L('<b>In {k} of the {n} constituencies, more names were left off the draft roll than the 2026 winning margin.</b> The removals and the margins rise together a little (rank correlation between the removal rate and the margin as a share of votes, {rho}, where 0 means the two are unrelated and 1 means they rise in step), so the seats that lost the most names were not the closest contests.', { k: S.over_margin, n: S.acs, rho: SIR.d(S.rho_rate_margin, 2) });
-
-  var counts = [[L('Left off the draft'), S.over_margin], [L('Net fall at the final roll'), S.net_over_margin], [L('Living removed, at turnout'), S.could_change]];
-  document.getElementById('cCounts').innerHTML = counts.map(function (c) {
-    return '<div class="big"><b>' + c[1] + '</b><span class="of">' + L('of {n} seats', { n: S.acs }) + '</span><i style="--w:' + (100 * c[1] / S.acs).toFixed(1) + '%"></i><span>' + c[0] + '</span></div>';
-  }).join('');
-  document.getElementById('fCounts').innerHTML = L('<b>Even on the narrowest count, the removed voters outnumber the margin in {k} of the {n} seats.</b> In the other {o}, the runner-up could not have won even if every living person removed had voted, at the seat\'s turnout, for the runner-up. The lists cannot show how anyone removed would have voted.', { k: S.could_change, n: S.acs, o: S.acs - S.could_change });
-
-  var sg = function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 1); };
-  SIR.table(document.getElementById('tWin'), [
-    { k: 'party', label: L('Party that won'), left: true }, { k: 'seats', label: L('Seats') },
-    { k: 'per_100', label: L('Removed per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'vs_district', label: L('Against own district'), fmt: sg },
-    { k: 'over_margin', label: L('Removed over margin') }
-  ], S.winners, { sort: 'seats' });
-  var W = {}; S.winners.forEach(function (w) { W[w.party] = w; });
-  var big = ['TVK', 'DMK', 'AIADMK'];
-  VIZ.strip('vSwarm', { label: L('Names removed per 100 electors in every constituency, by the party that won it in 2026'), axis: L('Removed per 100 electors'), r: 4,
-    key: [[L('Chennai'), '--fill-red'], [L('Rest of the state'), '--fill-navy']],
-    rows: big.concat(['other']).map(function (w) {
-      var pts = A.filter(function (a) { return w === 'other' ? big.indexOf(a.winner) < 0 : a.winner === w; });
-      return { name: w === 'other' ? L('Other parties') : L('{p} ({n} seats)', { p: w, n: pts.length }), tok: '--fill-navy',
-        points: pts.map(function (a) { return { v: a.per_100, tok: a.district === 'Chennai' ? '--fill-red' : null, label: L('{n} ({d}): {v} per 100', { n: a.name, d: a.district, v: SIR.d(a.per_100, 1) }) }; }) };
-    }) });
-  document.getElementById('fWin').innerHTML = L('<b>Seats won by TVK lost {t} of every 100 electors, against {d} in DMK seats and {a} in AIADMK seats.</b> Most of the gap is about where the seats are. Against their own districts, TVK seats come out at {tv}, DMK seats at {dv} and AIADMK seats at {av}. {c} of the {n} seats changed hands from 2021.', {
-    t: SIR.d(W.TVK.per_100, 1), d: SIR.d(W.DMK.per_100, 1), a: SIR.d(W.AIADMK.per_100, 1), tv: sg(W.TVK.vs_district), dv: sg(W.DMK.vs_district), av: sg(W.AIADMK.vs_district), c: S.changed_hands, n: S.acs });
-
-  SIR.table(document.getElementById('tAc'), [
-    { k: 'ac', label: L('No.') }, { k: 'name', label: L('Constituency'), left: true }, { k: 'district', label: L('District'), left: true },
-    { k: 'removed', label: L('Removed'), fmt: SIR.n }, { k: 'net_fall', label: L('Net fall'), fmt: SIR.n },
-    { k: 'winner', label: L('Won 2026'), left: true }, { k: 'runner_up', label: L('Second'), left: true },
-    { k: 'margin', label: L('Margin'), fmt: SIR.n }, { k: 'turnout', label: L('Turnout %'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'winner_2021', label: L('Won 2021'), left: true }
-  ], A, { sort: 'removed' });
-  SIR.showFaq('tn', 'elections');
-}).catch(SIR.fail);
-</script>
-<script src="../../assets/dyslexia-font.js?v=ee566817" data-accent="var(--fill-red)" data-radius="10px" defer></script>
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/viz.js"></script>
+<script src="../../assets/faq/tamilnadu.js"></script>
+<script src="../../assets/js/page/bacf07a5dacfc374.js"></script>
+<script src="../../assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

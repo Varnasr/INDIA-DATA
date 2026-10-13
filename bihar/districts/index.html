@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../../assets/i18n.js?v=ada54cd7"></script>
+<script src="../../assets/i18n.js"></script>
 <title>Districts, Bihar 2025</title>
 <meta name="description" content="SIR deletions in Bihar&#x27;s 38 districts against income per head, urbanisation, women&#x27;s literacy, early marriage, density and booth size.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f4e79'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
 <link rel="manifest" href="../../manifest.webmanifest">
 <meta name="theme-color" content="#1f4e79">
-<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png?v=44207c69">
-<link rel="stylesheet" href="../../assets/sir.css?v=33a4cde7">
+<link rel="apple-touch-icon" href="../../assets/app/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/sir.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SIR analysis for India">
 <meta property="og:title" content="Districts, Bihar 2025">
@@ -65,49 +65,16 @@
   <p class="note">Density and urban share come from Census 2011, the last count at district level. Women's literacy and marriage before 18 come from the National Family Health Survey (NFHS-5) district fact sheets, fielded in Bihar in 2019-20. Income per head is per capita gross district domestic product for 2022-23 at constant 2011-12 prices, from Table A 1.7 of the Bihar Economic Survey 2024-25, whose source is the Directorate of Economics and Statistics, Bihar. Electors per booth: the 2025 electorate over the number of booths with SIR lists.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
-<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Bihar 2025</h2><p><a class="btn" href="../../downloads/bihar.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../../downloads/#w-bihar">What each sheet holds</a></p><p class="csvs">CSV: <a href="../../data/bihar/constituencies.csv?v=291c886d" download>constituencies.csv</a> <a href="../../data/bihar/districts.csv?v=69d4eec7" download>districts.csv</a></p></section>
+<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Bihar 2025</h2><p><a class="btn" href="../../downloads/bihar.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../../downloads/#w-bihar">What each sheet holds</a></p><p class="csvs">CSV: <a href="../../data/bihar/constituencies.csv" download>constituencies.csv</a> <a href="../../data/bihar/districts.csv" download>districts.csv</a></p></section>
 </main>
 <footer data-i18n-each><span>Research by <a href="https://www.impactmojo.in/">ImpactMojo</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../#why-this-site-exists">About This Site</a> · <a href="../../help/">Removed from the Roll? What to Do</a> · <a href="../../downloads/#w-bihar">Downloads</a> · <a href="../../share/">Share a List with Us</a> · <a href="../../support/">Support Our Work</a> · <a href="../../terms/">Terms and Privacy</a> · <a href="../../updates/">What's New</a> · <a href="../../corrections/">Corrections</a> · <a href="../../feedback/?from=bihar%2Fdistricts%2F">Feedback</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
 <div class="fabs"><a class="fab fab-share" href="../../share/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15V4m0 0-4 4m4-4 4 4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg><span>Share a list</span></a><a class="fab" href="../../india/constituencies/#find-a-constituency"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-2.6-2.3-6-6.1-6-10a6 6 0 0 1 12 0c0 .8-.1 1.6-.4 2.4M12 12.8a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6m7.4 6.6 1.8 1.8m-1.2-4.2a2.7 2.7 0 1 1-5.4 0 2.7 2.7 0 0 1 5.4 0"/></svg><span>Find your constituency</span></a></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js" integrity="sha512-WoViKhKD4qI2WruSZqv9+kvM4WfFhUMQCLN4QlDTt5aU56fLQy2gYoxWIqlEnXqJy/+Ac5q/hk1oWfqnMDhwMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../../assets/sir.js?v=31bc1808"></script>
-<script src="../../assets/viz.js?v=3ec8844b"></script>
-<script>
-SIR.json('data/bihar/districts.json').then(function (ds) {
-  var col = function (b) { return /Nepal/.test(b) ? '--fill-navy' : /Bengal/.test(b) ? '--fill-other' : /Jharkhand/.test(b) ? '--fill-amber' : /Uttar/.test(b) ? '--fill-india' : '--fill-grey'; };
-  var ranked = ds.slice().sort(function (a, b) { return b.per_100 - a.per_100; });
-  SIR.chart('cRank', { type: 'bar', data: { labels: ranked.map(function (d) { return d.district; }), datasets: [{ label: L('Per 100 electors'), data: ranked.map(function (d) { return d.per_100; }), $tokens: ranked.map(function (d) { return col(d.border); }) }] },
-    options: { indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: function (c) { var bd = ranked[c.dataIndex].border; return L('Border: {b}', { b: bd === 'Interior' ? L('Interior') : bd.replace(/;/g, ', ') }); } } } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('Removed per 100 electors') } } } } });
-
-  var F = [
-    ['gddp_pc', L('Income per head, 2022-23 (₹ at 2011-12 prices)'), L('Does income relate to deletions?')],
-    ['urban_pct', L('Urban population, 2011 (%)'), L('Does urbanisation matter?')],
-    ['women_literate', L('Women aged 15 to 49 who are literate, 2019-20 (%)'), L('Does women\'s literacy relate to deletions?')],
-    ['child_marriage', L('Women aged 20 to 24 married before 18, 2019-20 (%)'), L('Does early marriage relate to deletions?')],
-    ['density', L('Density, 2011 (per sq km)'), L('Does density matter?')],
-    ['electors_per_booth', L('Electors per booth, 2025'), L('Does booth size relate to deletions?')]
-  ];
-  var y = ds.map(function (d) { return d.per_100; }), rows = [];
-  document.getElementById('scatters').innerHTML = F.map(function (f, i) { return '<div class="panel"><h3>' + f[2] + '</h3><p id="p' + i + '"></p><div class="chart"><canvas id="s' + i + '" aria-label="' + L('{f} against deletions per 100 electors', { f: f[1] }) + '"></canvas></div></div>'; }).join('');
-  F.forEach(function (f, i) {
-    var x = ds.map(function (d) { return d[f[0]]; }), r = SIR.corr(x, y), rho = SIR.spearman(x, y);
-    rows.push({ f: f[1], r: r, rho: rho });
-    document.getElementById('p' + i).textContent = L('r = {r}, ρ = {rho}.', { r: SIR.d(r, 2), rho: SIR.d(rho, 2) }) + ' ' + (Math.abs(rho) < 0.2 ? L('No clear relationship.') : (rho > 0 ? L('Higher values go with more deletions.') : L('Higher values go with fewer deletions.')));
-    SIR.chart('s' + i, { type: 'scatter', data: { datasets: [{ label: L('District'), data: ds.map(function (d) { return { x: d[f[0]], y: d.per_100, n: d.district }; }), $token: '--fill-navy', pointRadius: 4 }] },
-      options: { plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { return L('{n}: {x}, {y} per 100', { n: c.raw.n, x: SIR.n(c.raw.x), y: c.raw.y }); } } } },
-        scales: { x: { title: { display: true, text: f[1] } }, y: { title: { display: true, text: L('Deleted per 100 electors') } } } } });
-  });
-  SIR.table(document.getElementById('tCorr'), [{ k: 'f', label: L('Characteristic'), left: true }, { k: 'r', label: L('Linear r').replace(/r$/, '<span class="sym">r</span>'), fmt: function (v) { return SIR.d(v, 2); } }, { k: 'rho', label: L('Rank ρ').replace('ρ', '<span class="sym">ρ</span>'), fmt: function (v) { return SIR.d(v, 2); } }], rows, { sort: 'rho' });
-  SIR.table(document.getElementById('tbl'), [
-    { k: 'district', label: L('District'), left: true }, { k: 'acs', label: L('Seats') }, { k: 'deleted', label: L('Removed'), fmt: SIR.n },
-    { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 2); } }, { k: 'per_booth', label: L('Per booth'), fmt: function (v) { return SIR.d(v); } },
-    { k: 'gddp_pc', label: L('Income per head (₹)'), fmt: SIR.n }, { k: 'urban_pct', label: L('Urban %'), fmt: function (v) { return SIR.d(v); } },
-    { k: 'women_literate', label: L('Women literate %'), fmt: function (v) { return SIR.d(v); } }, { k: 'border', label: L('Border'), left: true, fmt: function (v) { return v === 'Interior' ? L('Interior') : SIR.esc(v.replace(/;/g, ', ')); } }
-  ], ds, { sort: 'per_100' });
-}).catch(SIR.fail);
-</script>
-<script src="../../assets/faq/bihar.js?v=49ba18c1"></script>
-<script>SIR.showFaq('bihar', 'districts');</script>
-<script src="../../assets/dyslexia-font.js?v=ee566817" data-accent="var(--fill-red)" data-radius="10px" defer></script>
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/viz.js"></script>
+<script src="../../assets/js/page/c718883c412d2b84.js"></script>
+<script src="../../assets/faq/bihar.js"></script>
+<script src="../../assets/js/page/069ae50ebe1db2cd.js"></script>
+<script src="../../assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

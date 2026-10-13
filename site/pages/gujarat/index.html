@@ -204,7 +204,7 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/distr
     VIZ.map('vMap', { geo: geo, label: 'Map of names left off the draft per 100 electors, by district', title: 'Left off per 100 electors',
       v: function (id) { return byId[id] ? byId[id].per_100 : null; }, name: function (id) { return byId[id] ? byId[id].district : ''; },
       pick: function (id) { if (byId[id]) F.select(byId[id]); } });
-    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
+    var it = F.item[SIR.hashId()]; if (it && it.s.pick) it.s.pick(it.r);
     SIR.tools();
   });
   SIR.showFaq('gj', 'main');

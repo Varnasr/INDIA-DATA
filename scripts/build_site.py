@@ -18,6 +18,7 @@ scripts/stamp.py runs after this and adds ?v= to every reference, so the
 pages here are written without stamps and the check ignores them.
 """
 import glob
+import hashlib
 import html
 import urllib.parse
 import json
@@ -370,6 +371,30 @@ def shell(out, meta, content, scripts):
          header, nav, content, footer, scripts, root)
 
 
+# Every inline script on a page is written to a file of its own, named by a
+# hash of its contents, so the Content-Security-Policy in netlify.toml can
+# leave 'unsafe-inline' out of script-src: an injected <script> then does not
+# run. JSON-LD and other data blocks stay inline, because a browser never runs
+# them. The same script on 1,721 seat pages is one file.
+PAGE_JS = os.path.join(ROOT, 'assets', 'js', 'page')
+INLINE = re.compile(r'<script(?P<attrs>(?:(?!\bsrc=)[^>])*)>(?P<body>.*?)</script>', re.S)
+page_js = {}
+
+
+def externalise(text, rel):
+    root = '../' * rel.count('/')
+
+    def out(m):
+        attrs, body = m.group('attrs'), m.group('body')
+        t = re.search(r'\btype\s*=\s*["\']?([^"\'\s>]+)', attrs)
+        if t and t.group(1).lower() not in ('text/javascript', 'module') or not body.strip():
+            return m.group(0)
+        h = hashlib.sha256(body.encode('utf-8')).hexdigest()[:16]
+        page_js[h] = body
+        return '<script src="%sassets/js/page/%s.js"%s></script>' % (root, h, attrs)
+    return INLINE.sub(out, text)
+
+
 def put(path, text, compare_unstamped=True):
     old = open(path, encoding='utf-8').read() if os.path.exists(path) else None
     same = old is not None and (STAMP.sub('', old) == STAMP.sub('', text) if compare_unstamped else old == text)
@@ -417,7 +442,7 @@ def build():
             rel = os.path.relpath(src, SRC).replace(os.sep, '/')
             out = rel[:-len('index.html')]
             meta, content, scripts = read_source(src)
-            put(os.path.join(ROOT, rel), shell(out, meta, heading_ids(content), scripts))
+            put(os.path.join(ROOT, rel), externalise(shell(out, meta, heading_ids(content), scripts), rel))
             if out not in NOINDEX:
                 pages.append(out)
     # every page for search engines, and where to find the list
@@ -438,6 +463,14 @@ def build():
         sys.exit('assets/sir.js has no /*sites*/ marker')
     put(SIRJS, js2, compare_unstamped=False)
     put(os.path.join(ROOT, 'data', 'search.json'), search_index(), compare_unstamped=False)
+    for h, body in sorted(page_js.items()):
+        put(os.path.join(PAGE_JS, h + '.js'), body.strip('\n') + '\n', compare_unstamped=False)
+    # a script no page uses any more is removed, and --check reports it
+    for f in sorted(os.listdir(PAGE_JS)) if os.path.isdir(PAGE_JS) else []:
+        if f.endswith('.js') and f[:-3] not in page_js:
+            stale.append(os.path.relpath(os.path.join(PAGE_JS, f), ROOT))
+            if not CHECK:
+                os.remove(os.path.join(PAGE_JS, f))
 
 
 def search_index():

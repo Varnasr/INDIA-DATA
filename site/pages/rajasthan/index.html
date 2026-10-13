@@ -172,7 +172,7 @@ Promise.all([SIR.json('data/rajasthan/summary.json'), SIR.json('data/rajasthan/d
     VIZ.map('vMap', { geo: geo, label: 'Map of the change in the roll per 100 electors, 2023 election to the final roll of March 2026, by constituency', title: 'Fall per 100 electors',
       v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
       pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
-    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
+    var it = F.item[SIR.hashId()]; if (it && it.s.pick) it.s.pick(it.r);
     SIR.tools();
   });
   SIR.showFaq('rj', 'main');

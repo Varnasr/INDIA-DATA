@@ -1,0 +1,1 @@
+SIR.showFaq('bihar', 'dash');

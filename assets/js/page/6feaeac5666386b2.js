@@ -1,0 +1,24 @@
+SIR.json('data/hyderabad/summary.json').then(function (s) {
+  var A = s.acs, names = A.map(function (a) { return a.name; }), pal = ['--fill-red', '--fill-navy', '--fill-amber', '--fill-india', '--fill-other', '--fill-grey', '--fill-nda'];
+  document.getElementById('kpis').innerHTML = [[SIR.n(s.totals.hearing), L('kept but summoned')], [SIR.pct(100 * s.totals.hearing / s.totals.electors), L('of the pre-revision roll')],
+    [SIR.n(SIR.sum(A, 'slots')), L('hearing slots')], [SIR.n(Math.max.apply(null, A.map(function (a) { return a.max_slot; }))), L('cases in the heaviest single slot')]]
+    .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+  SIR.chart('cRules', { type: 'bar', data: { labels: names, datasets: s.rules.map(function (r, i) { return { label: r, data: A.map(function (a) { return a.rules[r]; }), $token: pal[i] }; }) },
+    options: { indexAxis: 'y', scales: { x: { stacked: true, title: { display: true, text: L('Electors summoned') } }, y: { stacked: true } } } });
+  SIR.chart('cLists', { type: 'bar', data: { labels: names, datasets: [
+      { label: L('No-mapping list'), data: A.map(function (a) { return a.nomap_rate; }), $token: '--fill-navy' },
+      { label: L('Discrepancy list only'), data: A.map(function (a) { return a.discrepancy_rate; }), $token: '--fill-amber' }] },
+    options: { indexAxis: 'y', scales: { x: { stacked: true, beginAtZero: true, title: { display: true, text: L('Summoned per 100 electors') } }, y: { stacked: true } } } });
+  var dis = SIR.sum(A, 'discrepancy_only'), nm = SIR.sum(A, 'nomap'), topD = A.slice().sort(function (a, b) { return b.discrepancy_rate - a.discrepancy_rate; })[0], topN = A.slice().sort(function (a, b) { return b.nomap_rate - a.nomap_rate; })[0];
+  document.getElementById('fLists').innerHTML = L('<b>{d} of the {h} electors summoned were on the discrepancy list alone, and {n} were on the no-mapping list.</b> The discrepancy list weighed most in {td}, {tdr} per 100 electors, and the no-mapping list in {tn}, {tnr} per 100.', { d: SIR.n(dis), h: SIR.n(dis + nm), n: SIR.n(nm), td: topD.name, tdr: SIR.d(topD.discrepancy_rate, 1), tn: topN.name, tnr: SIR.d(topN.nomap_rate, 1) }) + (topN.linked ? '' : ' ' + L('{tn}\'s no-mapping count is the hearing list\'s own flag. Its list of names struck off carries no 2002 link, so it is given no linked or unlinked rate.', { tn: topN.name }));
+  var days = []; A.forEach(function (a) { a.daily.forEach(function (d) { if (days.indexOf(d[0]) < 0) days.push(d[0]); }); });
+  var mon = { Aug: 8, Sep: 9, Oct: 10 }; days.sort(function (x, y) { var a = x.split(' '), b = y.split(' '); return (mon[a[1]] * 100 + +a[0]) - (mon[b[1]] * 100 + +b[0]); });
+  SIR.chart('cDaily', { type: 'bar', data: { labels: days, datasets: A.map(function (a, i) { var m = {}; a.daily.forEach(function (d) { m[d[0]] = d[1]; }); return { label: a.name, data: days.map(function (d) { return m[d] || 0; }), $token: pal[i] }; }) },
+    options: { scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: L('Cases listed') } } } } });
+  SIR.table(document.getElementById('tLoad'), [{ k: 'name', label: L('Constituency'), left: true }, { k: 'hearing', label: L('Summoned'), fmt: SIR.n }, { k: 'nomap', label: L('No mapping'), fmt: SIR.n }, { k: 'discrepancy_only', label: L('Discrepancy only'), fmt: SIR.n }, { k: 'slots', label: L('Slots'), fmt: SIR.n }, { k: 'median_slot', label: L('Median per slot'), fmt: function (v) { return SIR.d(v, 0); } }, { k: 'max_slot', label: L('Heaviest slot'), fmt: SIR.n }], A, { sort: 'hearing' });
+  SIR.chart('cRate', { type: 'bar', data: { labels: names, datasets: [{ label: L('% summoned'), data: A.map(function (a) { return a.hearing_rate; }), $token: '--fill-amber' }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: L('% of roll') } } } } });
+  var un = SIR.sum(A, function (a) { return a.rules[s.rules[0]]; }), all = SIR.sum(A, function (a) { return SIR.sum(s.rules.map(function (r) { return a.rules[r]; }), function (x) { return x; }); });
+  var heavy = A.slice().sort(function (a, b) { return b.max_slot - a.max_slot; })[0];
+  document.getElementById('fHear').innerHTML = L('<b>The commonest reason to be summoned was that the elector could not be traced to the last intensive revision</b>, in 2002, at {share} of flags. One elector can carry more than one flag. Names of the elector or a parent that did not match came next. The busiest slot listed {max} cases, in {name}, where the typical slot listed {median}. The lists do not record how long a slot lasted.', { share: SIR.pct(100 * un / all), max: SIR.n(heavy.max_slot), name: heavy.name, median: SIR.d(heavy.median_slot, 0) });
+}).catch(SIR.fail);

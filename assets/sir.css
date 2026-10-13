@@ -835,6 +835,9 @@ table.stack td small{display:block;font-weight:400;color:var(--muted);font-size:
 details.figs{max-width:min(100%,52rem);margin:.4rem 0 1.4rem}
 details.figs>summary{cursor:pointer;font-family:var(--mono);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:.4rem 0}
 details.figs>summary:hover{color:var(--ink)}
+details.upigate{margin:1rem 0}
+details.upigate>summary{cursor:pointer;display:inline-block;font-weight:600;border:1px solid var(--ink);padding:.5rem .9rem;color:var(--ink)}
+details.upigate[open]>summary{margin-bottom:.6rem}
 @media (max-width:600px){
   .twrap.fit{overflow:visible}
   table.stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}

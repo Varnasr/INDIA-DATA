@@ -232,7 +232,7 @@ SIR.json('data/india/process.json').then(function (P) {
     VIZ.gantt(id, { label: label, mark: mark, rows: rows.map(function (r) { return { name: r.state, steps: r.steps }; }) });
   };
   var drawG = function () {
-    var h = decodeURIComponent(location.hash.slice(1)), hit = null;
+    var h = SIR.hashId(), hit = null;
     P.schedules.forEach(function (r) { if (key(r.state) === h) hit = r; });
     var m = hit && hit.state;
     G('vG1', P.schedules.filter(function (r) { return r.phase === 'I'; }), 'Bihar\'s schedule, from the order of 24 June 2025', m);
