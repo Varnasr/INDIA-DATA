@@ -25,7 +25,7 @@
 <meta name="twitter:description" content="Your note has been received.">
 <meta property="og:locale" content="en_IN">
 <link rel="canonical" href="https://offtheroll.in/support/thanks/">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Thank you for your support: SIR analysis for India", "description": "Your note has been received.", "url": "https://offtheroll.in/support/thanks/", "inLanguage": "en-IN", "isPartOf": {"@type": "WebSite", "name": "SIR analysis for India", "url": "https://offtheroll.in/", "inLanguage": "en-IN", "publisher": {"@type": "Organization", "name": "PinPoint Ventures", "url": "https://pinpointventures.in/"}}, "publisher": {"@type": "Organization", "name": "PinPoint Ventures", "url": "https://pinpointventures.in/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Thank you for your support: SIR analysis for India", "description": "Your note has been received.", "url": "https://offtheroll.in/support/thanks/", "inLanguage": "en-IN", "isPartOf": {"@type": "WebSite", "name": "SIR analysis for India", "url": "https://offtheroll.in/", "inLanguage": "en-IN", "publisher": {"@type": "Organization", "name": "ImpactMojo", "url": "https://www.impactmojo.in/"}}, "publisher": {"@type": "Organization", "name": "ImpactMojo", "url": "https://www.impactmojo.in/"}}</script>
 <meta name="robots" content="noindex">
 </head>
 <body class="home" data-place="home" data-root="../../">
@@ -50,17 +50,29 @@
 <p class="report-lang">This page is in English only.</p>
 <article lang="en" dir="ltr" data-no-i18n>
 <p class="lead">Your note has been received, and we will write back to the email you gave.</p>
+<div id="upiBlock">
 <h2 id="contribute-by-upi">Contribute by UPI</h2>
-<p>If you would like to contribute now, scan this code with any UPI app, or on a phone tap the button below. You choose the amount in your app, and the app shows who the payment goes to before you pay.</p>
+<p>Contributions by UPI are accepted only from Indian citizens, and are received by ImpactMojo. If you would like to contribute now, scan this code with any UPI app, or on a phone tap the button below. You choose the amount in your app, and the app shows who the payment goes to before you pay.</p>
 <p class="upiqr"><img src="../../assets/upi-qr.svg" width="240" height="240" alt="UPI QR code for a contribution to Off the Roll"></p>
 <p><a class="btn-ink" href="upi://pay?pa=impactmojo@ibl&amp;cu=INR">Open my UPI app</a></p>
+</div>
+<div id="otherBlock" hidden>
+<h2 id="other-ways-to-help">Other ways to help</h2>
+<p>Contributions of money are accepted only from Indian citizens, so please do not send money. We will write back to the email you gave about other ways to help, such as data, research, translation and spreading the word.</p>
+</div>
 <p><a href="../../">Back to the front page</a></p>
 </article>
 </main>
-<footer data-i18n-each><span>Research by <a href="https://pinpointventures.in/">PinPoint Ventures</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../#why-this-site-exists">About This Site</a> · <a href="../../help/">Removed from the Roll? What to Do</a> · <a href="../../downloads/">Downloads</a> · <a href="../../share/">Share a List with Us</a> · <a href="../../support/">Support Our Work</a> · <a href="../../terms/">Terms and Privacy</a> · <a href="../../corrections/">Corrections</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
+<footer data-i18n-each><span>Research by <a href="https://www.impactmojo.in/">ImpactMojo</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../#why-this-site-exists">About This Site</a> · <a href="../../help/">Removed from the Roll? What to Do</a> · <a href="../../downloads/">Downloads</a> · <a href="../../share/">Share a List with Us</a> · <a href="../../support/">Support Our Work</a> · <a href="../../terms/">Terms and Privacy</a> · <a href="../../corrections/">Corrections</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
 <div class="fabs"><a class="fab" href="../../india/constituencies/#find-a-constituency"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-2.6-2.3-6-6.1-6-10a6 6 0 0 1 12 0c0 .8-.1 1.6-.4 2.4M12 12.8a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6m7.4 6.6 1.8 1.8m-1.2-4.2a2.7 2.7 0 1 1-5.4 0 2.7 2.7 0 0 1 5.4 0"/></svg><span>Find your constituency</span></a></div>
 <script src="../../assets/sir.js"></script>
 <script src="../../assets/viz.js"></script>
+<script>
+if (/[?&]other=1/.test(location.search)) {
+  document.getElementById('upiBlock').hidden = true;
+  document.getElementById('otherBlock').hidden = false;
+}
+</script>
 <script src="../../assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

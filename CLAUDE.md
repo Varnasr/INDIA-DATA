@@ -922,12 +922,13 @@ UPI QR code (`assets/upi-qr.svg`, made with segno and decoded back before it
 went in) and an "Open my UPI app" link, both `upi://pay?pa=impactmojo@ibl&cu=INR`
 with no payee name and no amount. The owner asked that the UPI ID not be
 written out on the page; the QR and the link still carry it, as any UPI
-code must. `netlify/functions/submission-created.mjs`
-writes back to the sender with the UPI ID and sends info@pinpointventures.in
-a copy, through Resend, only when `RESEND_API_KEY` and `SUPPORT_FROM` (an
-address on a domain verified with Resend) are set in Netlify; without them it
-does nothing and submissions wait in the dashboard. `_redirects` answers 404
-on `/netlify/*`, so the function's source is never served. The page says
+code must. Contributions are received by ImpactMojo and accepted only from
+Indian citizens (FCRA): the form asks, and a supporter who answers no is sent
+to `support/thanks/?other=1`, which hides the QR and says we will write about
+other ways to help. Keep both lines. Do not use a QR carrying a person's own
+name as payee. There is no automatic reply: the owner chose not to run an email service, so
+replies are written by hand from the Netlify dashboard (turn on the form's
+email notification there). `_redirects` answers 404 on `/netlify/*`. The page says
 support buys no influence over what is published; keep that sentence.
 
 **Downloads** (`downloads/`, on the front page's place, linked from every
@@ -1228,8 +1229,10 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   rule. On a phone the title takes one row and the controls a row
   beneath it (language, install, search, places, downloads, reading font,
   theme; print is hidden there): beside the title, seven controls squeezed
-  it to a single word. Credit is to PinPoint
-  Ventures, in the footer and on the front page.
+  it to a single word. Credit is to ImpactMojo
+  ("Research by ImpactMojo", linked to impactmojo.in), in the footer and on the
+  front page; the terms page still names PinPoint Ventures as publisher and
+  grievance contact.
 - **Footer, terms and privacy.** Every page's footer carries the credit, About
   this site, Terms and privacy (`terms/`, its own page in `site/pages`, on the
   front page's place) and the contact address (`email` in `places.json`).
