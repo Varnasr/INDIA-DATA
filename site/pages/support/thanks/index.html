@@ -1,0 +1,22 @@
+<!--page {"title": "Thank you for your support: SIR analysis for India", "description": "Your note has been received.", "place": "home"} -->
+<main id="main" class="share">
+<div class="page-head"><h1>Thank you</h1></div>
+<p class="report-lang">This page is in English only.</p>
+<article lang="en" dir="ltr" data-no-i18n>
+<p class="lead">Your note has been received, and we will write back to the email you gave.</p>
+<h2>Contribute by UPI</h2>
+<p>If you would like to contribute now, any UPI app can pay to this UPI ID.</p>
+<p class="upi"><b id="upiId">impactmojo@ibl</b> <button type="button" class="btn" id="upiCopy">Copy the UPI ID</button></p>
+<p><a class="btn-ink" id="upiPay" href="upi://pay?pa=impactmojo@ibl&amp;cu=INR">Open my UPI app</a></p>
+<p class="note">The button works on a phone with a UPI app. On a computer, copy the UPI ID into the app on your phone. You choose the amount in your app.</p>
+<p><a href="../../">Back to the front page</a></p>
+</article>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script>
+document.getElementById('upiCopy').addEventListener('click', function () {
+  var b = this, done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy the UPI ID'; }, 2000); };
+  if (navigator.clipboard) navigator.clipboard.writeText('impactmojo@ibl').then(done, function () {}); else done();
+});
+</script>

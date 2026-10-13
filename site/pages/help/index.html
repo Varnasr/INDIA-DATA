@@ -47,7 +47,17 @@ SIR.json('data/india/help.json').then(function (H) {
   ], t("This page gives general information from the law and the Commission's orders. It is not legal advice on any one case, and the list of organisations is not complete."));
 
   document.getElementById('kpis').innerHTML = [['Form 6', t('to be added back')], [t('2 appeals'), t('District Magistrate, then the CEO')], ['1950', t('voter helpline')], ['15100', t('free legal aid helpline')]]
-    .map(function (x) { return '<div><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('');
+    .map(function (x) { var tel = /^\d+$/.test(x[0]) ? '<a href="tel:' + x[0] + '">' + x[0] + '</a>' : esc(x[0]); return '<div><b>' + tel + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('');
+  // every helpline number on the page can be tapped to call
+  (function call(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), t, hits = [];
+    while ((t = w.nextNode())) if (/\b(1800-11-1950|1950|15100)\b/.test(t.nodeValue) && !t.parentNode.closest('a,script,style,.ncontact')) hits.push(t);
+    hits.forEach(function (t) { var sp = document.createElement('span');
+      // 1950 is also the year of the Representation of the People Act, which is no number to call
+      sp.innerHTML = esc(t.nodeValue).replace(/\b(1800-11-1950|1950|15100)\b/g, function (m, x, at, all) { return /Act,?\s*$/.test(all.slice(Math.max(0, at - 8), at)) ? m : '<a href="tel:' + m.replace(/-/g, '') + '">' + m + '</a>'; });
+      t.parentNode.replaceChild(sp, t); });
+    window.__helpCall = call;
+  })(document.querySelector('main'));
 
   // each remedy straight into the article, so it keeps the reading column
   document.getElementById('steps').outerHTML = H.remedies.map(function (r) {
@@ -91,6 +101,7 @@ SIR.json('data/india/help.json').then(function (H) {
     var u = new URLSearchParams(location.search); if (sel.value) u.set('state', sel.value); else u.delete('state');
     history.replaceState(null, '', location.pathname + (u.toString() ? '?' + u : '') + location.hash); draw(); });
   draw();
+  window.__helpCall(document.querySelector("main"));
   SIR.anchors && SIR.anchors();
   SIR.toc && SIR.toc();
   SIR.jump && SIR.jump();
