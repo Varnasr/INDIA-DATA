@@ -1202,9 +1202,8 @@ html.dyslexic-font .pull .pq .tr{font-style:normal}
 /* text for screen readers only */
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* support/thanks: the UPI ID, large enough to read off a screen */
-.upi{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
-.upi b{font-family:var(--mono);font-size:1.25rem;letter-spacing:.02em}
+/* support/thanks: the UPI QR code, always dark on white so it scans in either theme */
+.upiqr img{display:block;width:240px;max-width:70vw;height:auto;background:#fff;padding:8px;border:1px solid var(--line);border-radius:10px}
 
 /* touch targets on a phone: chart tools, heading links and footer links are
    at least 40px tall, so a thumb lands on the one it meant */
