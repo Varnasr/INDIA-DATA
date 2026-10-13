@@ -719,7 +719,8 @@
     return SIR.json('data/search.json').then(function (d) {
       data = d;
       var place = function (id) { return tr(d.places[id] || ''); };
-      d.pages.forEach(function (p) { items.push({ l: tr(p[1]), m: L('Page') + ' · ' + place(p[0]), u: p[2], k: 0, h: norm(tr(p[1]) + ' ' + p[1] + ' ' + place(p[0]) + ' ' + d.places[p[0]]) }); });
+      // a page's fourth field is words a reader might type for it ("check my name" for the help page)
+      d.pages.forEach(function (p) { items.push({ l: tr(p[1]), m: L('Page') + ' · ' + place(p[0]), u: p[2], k: 0, h: norm(tr(p[1]) + ' ' + p[1] + ' ' + place(p[0]) + ' ' + d.places[p[0]] + ' ' + (p[3] || '')) }); });
       d.rows.forEach(function (r) {
         // the disputes page: an item, or a filter on it (a court, a party, a place or an issue)
         if (r[1] === 'x') { items.push({ l: r[2], m: L('Protests and disputes') + ' · ' + r[3], u: r[4], k: 4, h: norm(r[2] + ' ' + r[3] + ' ' + (r[5] || '')) }); return; }
@@ -758,12 +759,14 @@
     var score = function (it) { var l = norm(it.l); return (l.indexOf(q) === 0 ? 0 : (' ' + l).indexOf(' ' + toks[0]) >= 0 ? 1 : 2) * 10 + it.k; };
     hits.sort(function (a, b) { return score(a) - score(b) || a.l.localeCompare(b.l); });
     var n = hits.length; hits = hits.slice(0, 20);
+    // nothing matched: offer the pages that answer most questions, never a bare dead end
+    if (!n) hits = ['help/', 'india/constituencies/', 'india/'].map(function (u) { return items.filter(function (it) { return it.u === u && it.k === 0; })[0]; }).filter(Boolean);
     list.innerHTML = hits.map(function (it, i) {
       return '<li role="option" id="so' + i + '" data-i="' + i + '" aria-selected="false"><span class="sl">' + SIR.esc(it.l) + '</span><span class="sm">' + SIR.esc(it.m) + '</span></li>';
     }).join('');
-    input.setAttribute('aria-expanded', n ? 'true' : 'false');
+    input.setAttribute('aria-expanded', hits.length ? 'true' : 'false');
     status.textContent = n ? (n > 20 ? L('{n} matches, the first 20 shown', { n: n }) : n === 1 ? L('One match') : L('{n} matches', { n: n })) : L('No match');
-    if (n) move(1);
+    if (hits.length) move(1);
   }
   function move(d) {
     if (!hits.length) return;
@@ -787,6 +790,9 @@
     load().then(run).catch(function () { status.textContent = L('The search could not load. Reload the page and try again.'); });
   }
   btn.addEventListener('click', open);
+  // Escape closes the search at once, even with text typed in the box (a
+  // search field's own Escape only clears it, so it took two presses)
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && dlg && dlg.open && e.target === input && input.value) { e.preventDefault(); dlg.close(); } }, true);
   document.addEventListener('keydown', function (e) {
     var t = e.target, typing = t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName));
     if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) { e.preventDefault(); open(); }
@@ -928,6 +934,32 @@
     }, { rootMargin: '0px 0px -96px 0px' }).observe(own);
   })();
 
+  // The floating buttons must never sit on what the reader is reading. On a
+  // phone they hide while the page scrolls down and come back on the way up,
+  // and they stay away while a finder or its result card is on the screen.
+  // A page with its own finder points "Find your constituency" at it, so the
+  // button no longer takes the reader away to the All India finder.
+  (function () {
+    var fabs = document.querySelector('.fabs'); if (!fabs) return;
+    var own = document.querySelector('main .finder, main #finder'), fab = fabs.querySelector('.fab:not(.fab-share)');
+    if (own && fab) {
+      if (!own.id) own.id = 'finder';
+      fab.setAttribute('href', '#' + own.id);
+      fab.addEventListener('click', function (e) { e.preventDefault(); own.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var inp = own.querySelector('input'); if (inp) setTimeout(function () { inp.focus({ preventScroll: true }); }, 400); });
+    }
+    var last = scrollY, busy = false, near = false;
+    if (own && 'IntersectionObserver' in window) new IntersectionObserver(function (e) { near = e[0].isIntersecting; fabs.classList.toggle('fabs-hide', near); }).observe(own);
+    addEventListener('scroll', function () {
+      if (busy) return; busy = true;
+      requestAnimationFrame(function () {
+        var y = scrollY, down = y > last + 4, up = y < last - 4;
+        if (innerWidth < 700 && !near) { if (down && y > 120) fabs.classList.add('fabs-hide'); else if (up) fabs.classList.remove('fabs-hide'); }
+        last = y; busy = false;
+      });
+    }, { passive: true });
+  })();
+
   // the tour, on the front page
   var STEPS = [
     ['.controls .find', L('Search finds any page, constituency, district or dispute. Press Ctrl or Command and K from anywhere on the site.')],
@@ -999,6 +1031,10 @@
       document.body.appendChild(ask);
       ask.querySelector('.tour-go').onclick = function () { ask.remove(); start(); };
       ask.querySelector('.tour-no').onclick = function () { ask.remove(); mark(); };
+      // the offer does not follow the reader down the page: the first real
+      // scroll takes it away, as a no thanks, and Take the tour stays in the hero
+      var y0 = scrollY, gone = function () { if (Math.abs(scrollY - y0) > 160 && ask.parentNode) { ask.remove(); mark(); removeEventListener('scroll', gone); } };
+      addEventListener('scroll', gone, { passive: true });
     }, 1500);
   }
 })();

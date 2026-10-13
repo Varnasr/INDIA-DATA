@@ -109,3 +109,25 @@ None in the state figures. The row's shifted, absent or other (10,21,895) is
 - Any split of the names left off by reason or by sex below the state.
 - The final roll by district or AC, and claims and objections by district.
 - Notices by district.
+
+## od_district_rolls.csv, od_ac_rolls.csv, od_ac_after_draft.csv (added 2026-10-13)
+
+The Chief Electoral Officer's own statutory formats for the draft roll of
+05.07.2026 and the final roll of 21.09.2026, from
+https://ceoodisha.nic.in/en/eroll-analysis/ (primary). Read from the PDFs'
+text layer through Firecrawl, since the site resets plain curl.
+
+- Format 1B (final): all 147 ACs and 30 districts, the 2024 roll, the
+  January 2025 roll, the draft and the final roll, each by sex. Every AC adds
+  to its district and every district to the grand total in every column, and
+  every printed sex ratio agrees. One slip was corrected: Loisingha women on
+  the 2025 roll read as 121,144; the sex ratio and the district total give
+  122,144.
+- Format 4B (final): draft to final for every AC, claims admitted and
+  deletions by sex, Form 6 and Form 7 lodged, deletions by reason. Draft plus
+  added less removed equals final in every row on totals, and the columns add
+  to 2,90,497 added and 44,777 removed. By sex the identity misses by small
+  amounts in both directions in 119 ACs (men +101, women -84 for the state),
+  so only totals are used. The three reasons add to 28,229 of the 44,777.
+- Not published: the 20,12,557 names left off at the draft, by AC or district.
+  The draft Format 4B gives them only as a state footnote.

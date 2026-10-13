@@ -246,7 +246,7 @@ def shell(out, meta, content, scripts):
     start = ('<details class="dl start"><summary class="btn" aria-label="Start Here">%s <span class="lbl">Start Here</span></summary>'
              '<div class="menu"><div data-i18n-each>%s%s</div></div></details>' % (STAR, quick, about))
     current = place['label'] if place['id'] != 'home' else 'Places'
-    places = ('<details class="dl places"><summary class="btn" aria-label="Places">%s <span class="lbl-place">%s</span></summary>'
+    places = ('<details class="dl places"><summary class="btn">%s <span class="vh">Places, </span><span class="lbl-place">%s</span></summary>'
               '<div class="menu"><div data-i18n-each>%s</div></div></details>' % (PIN, html.escape(current), ''.join(items)))
     # Downloads is one button to the downloads page, opened at this place's
     # own workbook, which lists its tables, report and slides with what each
@@ -290,12 +290,12 @@ def shell(out, meta, content, scripts):
         '<a class="fab" href="%sindia/constituencies/#find-a-constituency">%s<span>Find your constituency</span></a>' % (root, svg(ICONS['i23'])))
     # and a second, quieter one asking for lists the site does not have,
     # on every screen, except on the share pages themselves
-    if not here.startswith('share/'):
+    if not here.startswith(('share/', 'support/')):
         fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
     fab = '<div class="fabs">%s</div>' % fab if fab else ''
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Removed from the Roll? What to Do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%scorrections/">Corrections</a>'
-              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, CFG['email'], CFG['email']))
+              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Removed from the Roll? What to Do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%ssupport/">Support Our Work</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%scorrections/">Corrections</a>'
+              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, CFG['email'], CFG['email']))
     # On a phone the header's Downloads button is inside the menu, and the
     # footer link opened the downloads page at its top, where the first button
     # is the zip of every table. So every page of a place with a workbook
@@ -368,7 +368,7 @@ def put(path, text, compare_unstamped=True):
 
 
 # pages kept out of search: the form's thank-you page
-NOINDEX = {'share/thanks/'}
+NOINDEX = {'share/thanks/', 'support/thanks/'}
 
 
 def ldjson(out, meta, place):
@@ -442,7 +442,7 @@ def search_index():
             if h not in seen:
                 pages.append([p['id'], label, h])
     # the front page's own pages, which no tab row lists
-    pages += [['home', 'Removed from the Roll? What to Do', 'help/'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'Share a List with Us', 'share/'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/']]
+    pages += [['home', 'Removed from the Roll? What to Do', 'help/', 'check my name removed deleted left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'Share a List with Us', 'share/'], ['home', 'Support Our Work', 'support/', 'donate contribute upi support fund'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/']]
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),

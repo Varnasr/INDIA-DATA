@@ -1086,7 +1086,7 @@ html.dyslexic-font main>h3.hubh,html:not([lang="en"]) main>h3.hubh{font-family:i
    cover less of the page; its name stays for screen readers */
 @media (max-width:700px){
   .fab-share{padding:.6rem}
-  .fab-share span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .fab-share span{font-size:.8rem}
 }
 /* the front page below the cards: each section is its heading on the left
    and its text on the right, across the full width of the page, so the
@@ -1179,3 +1179,37 @@ html.dyslexic-font .pull .pq .tr{font-style:normal}
 .ncontact b{font-weight:600;margin-inline-end:.3rem}
 .ncontact a{overflow-wrap:anywhere}
 .ncontact .csrc{font-size:.8rem;color:var(--muted);margin-inline-start:.3rem;white-space:nowrap}
+
+/* the phone header's open menu: every tile names what it does under its
+   icon, because a tooltip never shows on a touch screen and the compass, the
+   pin and "Aa" mean nothing on their own */
+@media (max-width:700px){
+  header.top.open .controls>.btn,header.top.open .controls>button,header.top.open .controls>.dl>summary.btn,header.top.open .controls #dys-font-btn{flex-direction:column;gap:.2rem;height:auto!important;min-height:58px;padding:.35rem .2rem!important}
+  header.top.open .controls .lbl,header.top.open .controls .lbl-place{position:static;width:auto;height:auto;overflow:hidden;clip:auto;white-space:nowrap;text-overflow:ellipsis;max-width:100%;font-size:.68rem;line-height:1.15;font-weight:500}
+  header.top.open .controls .kbd{display:none}
+  header.top.open .controls #dys-font-btn::after{content:"Reading font";font-size:.68rem;line-height:1.15;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+
+/* floating buttons: hidden while the reader scrolls down on a phone, or while
+   a finder is on screen (sir.js), with room at the foot of the page */
+.fabs{transition:opacity .2s,transform .2s}
+.fabs.fabs-hide{opacity:0;transform:translateY(130%);pointer-events:none}
+.fabs.fabs-hide .fab{pointer-events:none}
+@media (prefers-reduced-motion:reduce){.fabs{transition:none}}
+
+/* a card hidden by script stays hidden: .panel sets its own display */
+.panel[hidden],.grid[hidden]{display:none!important}
+/* text for screen readers only */
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* support/thanks: the UPI QR code, always dark on white so it scans in either theme */
+.upiqr img{display:block;width:240px;max-width:70vw;height:auto;background:#fff;padding:8px;border:1px solid var(--line);border-radius:10px}
+
+/* touch targets on a phone: chart tools, heading links and footer links are
+   at least 40px tall, so a thumb lands on the one it meant */
+@media (max-width:700px){
+  .panel .tools button,.panel .tools .btn,.fcard .tools button,.fcard .tools .btn{min-height:40px;padding:.45rem .85rem;font-size:.82rem}
+  .anchor{width:40px;height:40px}
+  footer[data-i18n-each]{line-height:2.4}
+  footer a{display:inline-block;padding:.5rem .15rem;min-height:40px}
+}

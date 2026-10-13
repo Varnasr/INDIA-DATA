@@ -31,8 +31,7 @@
   },
   "draft": {
    "v": 31387034,
-   "src": "s1",
-   "press": true
+   "src": "s5"
   },
   "removed": {
    "v": 2012557,
@@ -56,23 +55,19 @@
   },
   "added_after": {
    "v": 290497,
-   "src": "s1",
-   "press": true
+   "src": "s5"
   },
   "removed_after": {
    "v": 44777,
-   "src": "s1",
-   "press": true
+   "src": "s5"
   },
   "net_after": {
    "v": 245720,
-   "src": "s1",
-   "press": true
+   "src": "s5"
   },
   "final": {
    "v": 31632754,
-   "src": "s1",
-   "press": true
+   "src": "s5"
   },
   "men_final": {
    "v": 16130319,
@@ -93,10 +88,1868 @@
    "v": 5836326,
    "src": "s1",
    "press": true
+  },
+  "men_draft": {
+   "v": 16019176,
+   "src": "s5"
+  },
+  "women_draft": {
+   "v": 15365083,
+   "src": "s5"
+  },
+  "third_draft": {
+   "v": 2775,
+   "src": "s5"
+  },
+  "men_removed": {
+   "v": 866107,
+   "src": "s1",
+   "press": true
+  },
+  "women_removed": {
+   "v": 1146140,
+   "src": "s1",
+   "press": true
+  },
+  "third_removed": {
+   "v": 310,
+   "src": "s1",
+   "press": true
   }
  },
  "reasons_complete": true,
  "tables": [
+  {
+   "id": "districts_after",
+   "title": "Every district, from the draft to the final roll",
+   "level": "district",
+   "kind": "after",
+   "src": "s5",
+   "rows": [
+    {
+     "name": "Bargarh",
+     "draft": 1106876,
+     "added": 5869,
+     "removed": 803,
+     "final": 1111942,
+     "added_1000": 5.3,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Jharsugud",
+     "draft": 409891,
+     "added": 3994,
+     "removed": 1896,
+     "final": 411989,
+     "added_1000": 9.7,
+     "removed_1000": 4.6
+    },
+    {
+     "name": "Sundargarh",
+     "draft": 1379855,
+     "added": 17502,
+     "removed": 1376,
+     "final": 1395981,
+     "added_1000": 12.7,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Sambalpur",
+     "draft": 788025,
+     "added": 10671,
+     "removed": 4430,
+     "final": 794266,
+     "added_1000": 13.5,
+     "removed_1000": 5.6
+    },
+    {
+     "name": "Deogarh",
+     "draft": 233471,
+     "added": 3066,
+     "removed": 65,
+     "final": 236472,
+     "added_1000": 13.1,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Keonjhar",
+     "draft": 1308276,
+     "added": 12422,
+     "removed": 1522,
+     "final": 1319176,
+     "added_1000": 9.5,
+     "removed_1000": 1.2
+    },
+    {
+     "name": "Mayurbhanja",
+     "draft": 1817680,
+     "added": 20479,
+     "removed": 1337,
+     "final": 1836822,
+     "added_1000": 11.3,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Balasore",
+     "draft": 1803628,
+     "added": 13203,
+     "removed": 5314,
+     "final": 1811517,
+     "added_1000": 7.3,
+     "removed_1000": 2.9
+    },
+    {
+     "name": "Bhadrak",
+     "draft": 1216281,
+     "added": 5586,
+     "removed": 3560,
+     "final": 1218307,
+     "added_1000": 4.6,
+     "removed_1000": 2.9
+    },
+    {
+     "name": "Jajpur",
+     "draft": 1432087,
+     "added": 13055,
+     "removed": 1497,
+     "final": 1443645,
+     "added_1000": 9.1,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Dhenkanal",
+     "draft": 904272,
+     "added": 6226,
+     "removed": 497,
+     "final": 910001,
+     "added_1000": 6.9,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Angul",
+     "draft": 908875,
+     "added": 11549,
+     "removed": 754,
+     "final": 919670,
+     "added_1000": 12.7,
+     "removed_1000": 0.8
+    },
+    {
+     "name": "Subrnapur",
+     "draft": 453787,
+     "added": 9219,
+     "removed": 622,
+     "final": 462384,
+     "added_1000": 20.3,
+     "removed_1000": 1.4
+    },
+    {
+     "name": "Bolangir",
+     "draft": 1244558,
+     "added": 15156,
+     "removed": 1504,
+     "final": 1258210,
+     "added_1000": 12.2,
+     "removed_1000": 1.2
+    },
+    {
+     "name": "Nuapada",
+     "draft": 488447,
+     "added": 2038,
+     "removed": 141,
+     "final": 490344,
+     "added_1000": 4.2,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Nabarangpur",
+     "draft": 812592,
+     "added": 3884,
+     "removed": 751,
+     "final": 815725,
+     "added_1000": 4.8,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Kalahandi",
+     "draft": 1134099,
+     "added": 6677,
+     "removed": 806,
+     "final": 1139970,
+     "added_1000": 5.9,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Kandhamal",
+     "draft": 531899,
+     "added": 2791,
+     "removed": 464,
+     "final": 534226,
+     "added_1000": 5.2,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Boudh",
+     "draft": 323394,
+     "added": 3061,
+     "removed": 569,
+     "final": 325886,
+     "added_1000": 9.5,
+     "removed_1000": 1.8
+    },
+    {
+     "name": "Cuttack",
+     "draft": 1930615,
+     "added": 25020,
+     "removed": 3005,
+     "final": 1952630,
+     "added_1000": 13.0,
+     "removed_1000": 1.6
+    },
+    {
+     "name": "Kendrapara",
+     "draft": 1190895,
+     "added": 11646,
+     "removed": 913,
+     "final": 1201628,
+     "added_1000": 9.8,
+     "removed_1000": 0.8
+    },
+    {
+     "name": "Jagatsinghpur",
+     "draft": 899345,
+     "added": 8305,
+     "removed": 782,
+     "final": 906868,
+     "added_1000": 9.2,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Puri",
+     "draft": 1302768,
+     "added": 9693,
+     "removed": 585,
+     "final": 1311876,
+     "added_1000": 7.4,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Khurda",
+     "draft": 1812258,
+     "added": 23372,
+     "removed": 4130,
+     "final": 1831500,
+     "added_1000": 12.9,
+     "removed_1000": 2.3
+    },
+    {
+     "name": "Nayagarh",
+     "draft": 740584,
+     "added": 11964,
+     "removed": 806,
+     "final": 751742,
+     "added_1000": 16.2,
+     "removed_1000": 1.1
+    },
+    {
+     "name": "Ganjam",
+     "draft": 2792158,
+     "added": 22079,
+     "removed": 3286,
+     "final": 2810951,
+     "added_1000": 7.9,
+     "removed_1000": 1.2
+    },
+    {
+     "name": "Gajapati",
+     "draft": 432261,
+     "added": 2243,
+     "removed": 552,
+     "final": 433952,
+     "added_1000": 5.2,
+     "removed_1000": 1.3
+    },
+    {
+     "name": "Rayagada",
+     "draft": 669207,
+     "added": 2537,
+     "removed": 366,
+     "final": 671378,
+     "added_1000": 3.8,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Koraput",
+     "draft": 904134,
+     "added": 5685,
+     "removed": 1255,
+     "final": 908564,
+     "added_1000": 6.3,
+     "removed_1000": 1.4
+    },
+    {
+     "name": "Malkangiri",
+     "draft": 414816,
+     "added": 1505,
+     "removed": 1189,
+     "final": 415132,
+     "added_1000": 3.6,
+     "removed_1000": 2.9
+    }
+   ]
+  },
+  {
+   "id": "acs_after",
+   "title": "Every constituency, from the draft to the final roll",
+   "level": "ac",
+   "kind": "after",
+   "src": "s5",
+   "rows": [
+    {
+     "name": "Padampur",
+     "draft": 249677,
+     "added": 1199,
+     "removed": 181,
+     "final": 250695,
+     "added_1000": 4.8,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Bijepur",
+     "draft": 224925,
+     "added": 1112,
+     "removed": 71,
+     "final": 225966,
+     "added_1000": 4.9,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Bargarh",
+     "draft": 203764,
+     "added": 1108,
+     "removed": 248,
+     "final": 204624,
+     "added_1000": 5.4,
+     "removed_1000": 1.2
+    },
+    {
+     "name": "Attabira (Sc)",
+     "draft": 206986,
+     "added": 1352,
+     "removed": 95,
+     "final": 208243,
+     "added_1000": 6.5,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Bhatli",
+     "draft": 221524,
+     "added": 1098,
+     "removed": 208,
+     "final": 222414,
+     "added_1000": 5.0,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Brajarajnagar",
+     "draft": 197478,
+     "added": 1769,
+     "removed": 480,
+     "final": 198767,
+     "added_1000": 9.0,
+     "removed_1000": 2.4
+    },
+    {
+     "name": "Jharsugud",
+     "draft": 212413,
+     "added": 2225,
+     "removed": 1416,
+     "final": 213222,
+     "added_1000": 10.5,
+     "removed_1000": 6.7
+    },
+    {
+     "name": "Talsara (St)",
+     "draft": 199593,
+     "added": 366,
+     "removed": 59,
+     "final": 199900,
+     "added_1000": 1.8,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Sundargarh (St)",
+     "draft": 210420,
+     "added": 1856,
+     "removed": 222,
+     "final": 212054,
+     "added_1000": 8.8,
+     "removed_1000": 1.1
+    },
+    {
+     "name": "Biramitrapur (St)",
+     "draft": 228549,
+     "added": 2190,
+     "removed": 148,
+     "final": 230591,
+     "added_1000": 9.6,
+     "removed_1000": 0.6
+    },
+    {
+     "name": "Raghunathpalli (Sc)",
+     "draft": 139851,
+     "added": 3826,
+     "removed": 329,
+     "final": 143348,
+     "added_1000": 27.4,
+     "removed_1000": 2.4
+    },
+    {
+     "name": "Rourkela",
+     "draft": 164638,
+     "added": 6673,
+     "removed": 290,
+     "final": 171021,
+     "added_1000": 40.5,
+     "removed_1000": 1.8
+    },
+    {
+     "name": "Rajgangapur (St)",
+     "draft": 219002,
+     "added": 1902,
+     "removed": 223,
+     "final": 220681,
+     "added_1000": 8.7,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Bonai (St)",
+     "draft": 217802,
+     "added": 689,
+     "removed": 105,
+     "final": 218386,
+     "added_1000": 3.2,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Kuchinda (St)",
+     "draft": 214087,
+     "added": 1003,
+     "removed": 498,
+     "final": 214592,
+     "added_1000": 4.7,
+     "removed_1000": 2.3
+    },
+    {
+     "name": "Rengali (Sc)",
+     "draft": 182886,
+     "added": 661,
+     "removed": 113,
+     "final": 183434,
+     "added_1000": 3.6,
+     "removed_1000": 0.6
+    },
+    {
+     "name": "Sambalpur",
+     "draft": 202436,
+     "added": 1844,
+     "removed": 390,
+     "final": 203890,
+     "added_1000": 9.1,
+     "removed_1000": 1.9
+    },
+    {
+     "name": "Rairakhol",
+     "draft": 188616,
+     "added": 7163,
+     "removed": 3429,
+     "final": 192350,
+     "added_1000": 38.0,
+     "removed_1000": 18.2
+    },
+    {
+     "name": "Deogarh",
+     "draft": 233471,
+     "added": 3066,
+     "removed": 65,
+     "final": 236472,
+     "added_1000": 13.1,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Telkoi (St)",
+     "draft": 226802,
+     "added": 1439,
+     "removed": 193,
+     "final": 228048,
+     "added_1000": 6.3,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Ghasipura",
+     "draft": 218657,
+     "added": 2145,
+     "removed": 187,
+     "final": 220615,
+     "added_1000": 9.8,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Anandapur (Sc)",
+     "draft": 222593,
+     "added": 2982,
+     "removed": 350,
+     "final": 225225,
+     "added_1000": 13.4,
+     "removed_1000": 1.6
+    },
+    {
+     "name": "Patna (St)",
+     "draft": 200838,
+     "added": 1857,
+     "removed": 186,
+     "final": 202509,
+     "added_1000": 9.2,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Keonjhar (St)",
+     "draft": 216269,
+     "added": 2773,
+     "removed": 205,
+     "final": 218837,
+     "added_1000": 12.8,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Champua",
+     "draft": 223117,
+     "added": 1226,
+     "removed": 401,
+     "final": 223942,
+     "added_1000": 5.5,
+     "removed_1000": 1.8
+    },
+    {
+     "name": "Jashipur (St)",
+     "draft": 206091,
+     "added": 5534,
+     "removed": 289,
+     "final": 211336,
+     "added_1000": 26.9,
+     "removed_1000": 1.4
+    },
+    {
+     "name": "Saraskana (St)",
+     "draft": 193837,
+     "added": 613,
+     "removed": 19,
+     "final": 194431,
+     "added_1000": 3.2,
+     "removed_1000": 0.1
+    },
+    {
+     "name": "Rairangpur (St)",
+     "draft": 209732,
+     "added": 1835,
+     "removed": 69,
+     "final": 211498,
+     "added_1000": 8.7,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Bangriposi (St)",
+     "draft": 209491,
+     "added": 2222,
+     "removed": 102,
+     "final": 211611,
+     "added_1000": 10.6,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Karanjia (St)",
+     "draft": 186027,
+     "added": 4131,
+     "removed": 174,
+     "final": 189984,
+     "added_1000": 22.2,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Udala (St)",
+     "draft": 195646,
+     "added": 948,
+     "removed": 157,
+     "final": 196437,
+     "added_1000": 4.8,
+     "removed_1000": 0.8
+    },
+    {
+     "name": "Badasahi (Sc)",
+     "draft": 186868,
+     "added": 1388,
+     "removed": 224,
+     "final": 188032,
+     "added_1000": 7.4,
+     "removed_1000": 1.2
+    },
+    {
+     "name": "Baripada (St)",
+     "draft": 208592,
+     "added": 2146,
+     "removed": 96,
+     "final": 210642,
+     "added_1000": 10.3,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Morada",
+     "draft": 221396,
+     "added": 1662,
+     "removed": 207,
+     "final": 222851,
+     "added_1000": 7.5,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Jaleswar",
+     "draft": 241324,
+     "added": 3151,
+     "removed": 811,
+     "final": 243664,
+     "added_1000": 13.1,
+     "removed_1000": 3.4
+    },
+    {
+     "name": "Bhograi",
+     "draft": 221475,
+     "added": 2234,
+     "removed": 30,
+     "final": 223679,
+     "added_1000": 10.1,
+     "removed_1000": 0.1
+    },
+    {
+     "name": "Basta",
+     "draft": 233270,
+     "added": 896,
+     "removed": 684,
+     "final": 233482,
+     "added_1000": 3.8,
+     "removed_1000": 2.9
+    },
+    {
+     "name": "Balasore",
+     "draft": 218206,
+     "added": 1428,
+     "removed": 1700,
+     "final": 217934,
+     "added_1000": 6.5,
+     "removed_1000": 7.8
+    },
+    {
+     "name": "Remuna (Sc)",
+     "draft": 219547,
+     "added": 1166,
+     "removed": 243,
+     "final": 220470,
+     "added_1000": 5.3,
+     "removed_1000": 1.1
+    },
+    {
+     "name": "Nilgiri",
+     "draft": 206718,
+     "added": 1883,
+     "removed": 151,
+     "final": 208450,
+     "added_1000": 9.1,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Soro (Sc)",
+     "draft": 214376,
+     "added": 971,
+     "removed": 629,
+     "final": 214718,
+     "added_1000": 4.5,
+     "removed_1000": 2.9
+    },
+    {
+     "name": "Simulia",
+     "draft": 248712,
+     "added": 1474,
+     "removed": 1066,
+     "final": 249120,
+     "added_1000": 5.9,
+     "removed_1000": 4.3
+    },
+    {
+     "name": "Bhadaripokhari",
+     "draft": 226963,
+     "added": 949,
+     "removed": 65,
+     "final": 227847,
+     "added_1000": 4.2,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Bhadrak",
+     "draft": 257014,
+     "added": 1818,
+     "removed": 1765,
+     "final": 257067,
+     "added_1000": 7.1,
+     "removed_1000": 6.9
+    },
+    {
+     "name": "Basudevpur",
+     "draft": 257728,
+     "added": 1142,
+     "removed": 562,
+     "final": 258308,
+     "added_1000": 4.4,
+     "removed_1000": 2.2
+    },
+    {
+     "name": "Dhamnagar (Sc)",
+     "draft": 231725,
+     "added": 763,
+     "removed": 812,
+     "final": 231676,
+     "added_1000": 3.3,
+     "removed_1000": 3.5
+    },
+    {
+     "name": "Chandabali",
+     "draft": 242851,
+     "added": 914,
+     "removed": 356,
+     "final": 243409,
+     "added_1000": 3.8,
+     "removed_1000": 1.5
+    },
+    {
+     "name": "Binjharpur (Sc)",
+     "draft": 212425,
+     "added": 2425,
+     "removed": 321,
+     "final": 214529,
+     "added_1000": 11.4,
+     "removed_1000": 1.5
+    },
+    {
+     "name": "Bari",
+     "draft": 212932,
+     "added": 1078,
+     "removed": 268,
+     "final": 213742,
+     "added_1000": 5.1,
+     "removed_1000": 1.3
+    },
+    {
+     "name": "Barachana",
+     "draft": 173650,
+     "added": 2723,
+     "removed": 83,
+     "final": 176290,
+     "added_1000": 15.7,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Dharmasala",
+     "draft": 217777,
+     "added": 2064,
+     "removed": 271,
+     "final": 219570,
+     "added_1000": 9.5,
+     "removed_1000": 1.2
+    },
+    {
+     "name": "Jajpur",
+     "draft": 228445,
+     "added": 1920,
+     "removed": 202,
+     "final": 230163,
+     "added_1000": 8.4,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Korei",
+     "draft": 193680,
+     "added": 1898,
+     "removed": 167,
+     "final": 195411,
+     "added_1000": 9.8,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Sukinda",
+     "draft": 193178,
+     "added": 947,
+     "removed": 185,
+     "final": 193940,
+     "added_1000": 4.9,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Dhenkanal",
+     "draft": 249040,
+     "added": 1925,
+     "removed": 179,
+     "final": 250786,
+     "added_1000": 7.7,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Hindol (Sc)",
+     "draft": 248249,
+     "added": 1117,
+     "removed": 54,
+     "final": 249312,
+     "added_1000": 4.5,
+     "removed_1000": 0.2
+    },
+    {
+     "name": "Kamakhyanagar",
+     "draft": 204965,
+     "added": 1800,
+     "removed": 160,
+     "final": 206605,
+     "added_1000": 8.8,
+     "removed_1000": 0.8
+    },
+    {
+     "name": "Parjanga",
+     "draft": 202018,
+     "added": 1384,
+     "removed": 104,
+     "final": 203298,
+     "added_1000": 6.9,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Pallahara",
+     "draft": 162832,
+     "added": 2294,
+     "removed": 68,
+     "final": 165058,
+     "added_1000": 14.1,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Talcher",
+     "draft": 154209,
+     "added": 2191,
+     "removed": 263,
+     "final": 156137,
+     "added_1000": 14.2,
+     "removed_1000": 1.7
+    },
+    {
+     "name": "Angul",
+     "draft": 192704,
+     "added": 3745,
+     "removed": 202,
+     "final": 196247,
+     "added_1000": 19.4,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Chhendipada (Sc)",
+     "draft": 197221,
+     "added": 2271,
+     "removed": 189,
+     "final": 199303,
+     "added_1000": 11.5,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Athamallik",
+     "draft": 201909,
+     "added": 1048,
+     "removed": 32,
+     "final": 202925,
+     "added_1000": 5.2,
+     "removed_1000": 0.2
+    },
+    {
+     "name": "Birmaharajpur (Sc)",
+     "draft": 206251,
+     "added": 5279,
+     "removed": 350,
+     "final": 211180,
+     "added_1000": 25.6,
+     "removed_1000": 1.7
+    },
+    {
+     "name": "Sonepur",
+     "draft": 247536,
+     "added": 3940,
+     "removed": 272,
+     "final": 251204,
+     "added_1000": 15.9,
+     "removed_1000": 1.1
+    },
+    {
+     "name": "Loisingha (Sc)",
+     "draft": 223441,
+     "added": 1532,
+     "removed": 89,
+     "final": 224884,
+     "added_1000": 6.9,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Patnagarh",
+     "draft": 288665,
+     "added": 3149,
+     "removed": 131,
+     "final": 291683,
+     "added_1000": 10.9,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Bolangir",
+     "draft": 230283,
+     "added": 1354,
+     "removed": 363,
+     "final": 231274,
+     "added_1000": 5.9,
+     "removed_1000": 1.6
+    },
+    {
+     "name": "Titlagarh",
+     "draft": 241718,
+     "added": 4501,
+     "removed": 549,
+     "final": 245670,
+     "added_1000": 18.6,
+     "removed_1000": 2.3
+    },
+    {
+     "name": "Kantabanji",
+     "draft": 260451,
+     "added": 4620,
+     "removed": 372,
+     "final": 264699,
+     "added_1000": 17.7,
+     "removed_1000": 1.4
+    },
+    {
+     "name": "Nuapada",
+     "draft": 242384,
+     "added": 660,
+     "removed": 89,
+     "final": 242955,
+     "added_1000": 2.7,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Khariar",
+     "draft": 246063,
+     "added": 1378,
+     "removed": 52,
+     "final": 247389,
+     "added_1000": 5.6,
+     "removed_1000": 0.2
+    },
+    {
+     "name": "Umerkote (St)",
+     "draft": 186131,
+     "added": 1146,
+     "removed": 364,
+     "final": 186913,
+     "added_1000": 6.2,
+     "removed_1000": 2.0
+    },
+    {
+     "name": "Jharigam (St)",
+     "draft": 208758,
+     "added": 770,
+     "removed": 152,
+     "final": 209376,
+     "added_1000": 3.7,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Nabarangpur (St)",
+     "draft": 223032,
+     "added": 1326,
+     "removed": 125,
+     "final": 224233,
+     "added_1000": 5.9,
+     "removed_1000": 0.6
+    },
+    {
+     "name": "Dabugam (St)",
+     "draft": 194671,
+     "added": 642,
+     "removed": 110,
+     "final": 195203,
+     "added_1000": 3.3,
+     "removed_1000": 0.6
+    },
+    {
+     "name": "Lanjigarh (St)",
+     "draft": 212999,
+     "added": 1098,
+     "removed": 92,
+     "final": 214005,
+     "added_1000": 5.2,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Junagarh",
+     "draft": 233622,
+     "added": 1411,
+     "removed": 149,
+     "final": 234884,
+     "added_1000": 6.0,
+     "removed_1000": 0.6
+    },
+    {
+     "name": "Dharmgarh",
+     "draft": 247467,
+     "added": 1992,
+     "removed": 194,
+     "final": 249265,
+     "added_1000": 8.0,
+     "removed_1000": 0.8
+    },
+    {
+     "name": "Bhawanipatna (Sc)",
+     "draft": 219898,
+     "added": 971,
+     "removed": 147,
+     "final": 220722,
+     "added_1000": 4.4,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Narla",
+     "draft": 220113,
+     "added": 1205,
+     "removed": 224,
+     "final": 221094,
+     "added_1000": 5.5,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Baliguda (St)",
+     "draft": 156274,
+     "added": 910,
+     "removed": 93,
+     "final": 157091,
+     "added_1000": 5.8,
+     "removed_1000": 0.6
+    },
+    {
+     "name": "G- Udayagiri (St)",
+     "draft": 192383,
+     "added": 1096,
+     "removed": 245,
+     "final": 193234,
+     "added_1000": 5.7,
+     "removed_1000": 1.3
+    },
+    {
+     "name": "Phulbani (St)",
+     "draft": 183242,
+     "added": 785,
+     "removed": 126,
+     "final": 183901,
+     "added_1000": 4.3,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Kantamal",
+     "draft": 164004,
+     "added": 1614,
+     "removed": 218,
+     "final": 165400,
+     "added_1000": 9.8,
+     "removed_1000": 1.3
+    },
+    {
+     "name": "Boudh",
+     "draft": 159390,
+     "added": 1447,
+     "removed": 351,
+     "final": 160486,
+     "added_1000": 9.1,
+     "removed_1000": 2.2
+    },
+    {
+     "name": "Baramba",
+     "draft": 231398,
+     "added": 2278,
+     "removed": 274,
+     "final": 233402,
+     "added_1000": 9.8,
+     "removed_1000": 1.2
+    },
+    {
+     "name": "Banki",
+     "draft": 205773,
+     "added": 1814,
+     "removed": 233,
+     "final": 207354,
+     "added_1000": 8.8,
+     "removed_1000": 1.1
+    },
+    {
+     "name": "Athagarh",
+     "draft": 199903,
+     "added": 1695,
+     "removed": 186,
+     "final": 201412,
+     "added_1000": 8.5,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Barabati-Cuttack",
+     "draft": 210000,
+     "added": 3823,
+     "removed": 560,
+     "final": 213263,
+     "added_1000": 18.2,
+     "removed_1000": 2.7
+    },
+    {
+     "name": "Choudwar-Cuttack",
+     "draft": 182128,
+     "added": 3939,
+     "removed": 317,
+     "final": 185750,
+     "added_1000": 21.6,
+     "removed_1000": 1.7
+    },
+    {
+     "name": "Niali (Sc)",
+     "draft": 222762,
+     "added": 2945,
+     "removed": 725,
+     "final": 224982,
+     "added_1000": 13.2,
+     "removed_1000": 3.3
+    },
+    {
+     "name": "Cuttack Sadar (Sc)",
+     "draft": 202316,
+     "added": 3154,
+     "removed": 206,
+     "final": 205264,
+     "added_1000": 15.6,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Salipur",
+     "draft": 226407,
+     "added": 1570,
+     "removed": 137,
+     "final": 227840,
+     "added_1000": 6.9,
+     "removed_1000": 0.6
+    },
+    {
+     "name": "Mahanga",
+     "draft": 249928,
+     "added": 3802,
+     "removed": 367,
+     "final": 253363,
+     "added_1000": 15.2,
+     "removed_1000": 1.5
+    },
+    {
+     "name": "Patkura",
+     "draft": 233951,
+     "added": 3847,
+     "removed": 105,
+     "final": 237693,
+     "added_1000": 16.4,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Kendrapara (Sc)",
+     "draft": 211705,
+     "added": 1482,
+     "removed": 131,
+     "final": 213056,
+     "added_1000": 7.0,
+     "removed_1000": 0.6
+    },
+    {
+     "name": "Aul",
+     "draft": 257251,
+     "added": 1779,
+     "removed": 74,
+     "final": 258956,
+     "added_1000": 6.9,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Rajanagar",
+     "draft": 247996,
+     "added": 2043,
+     "removed": 279,
+     "final": 249760,
+     "added_1000": 8.2,
+     "removed_1000": 1.1
+    },
+    {
+     "name": "Mahakalapada",
+     "draft": 239992,
+     "added": 2495,
+     "removed": 324,
+     "final": 242163,
+     "added_1000": 10.4,
+     "removed_1000": 1.4
+    },
+    {
+     "name": "Paradeep",
+     "draft": 200894,
+     "added": 2858,
+     "removed": 263,
+     "final": 203489,
+     "added_1000": 14.2,
+     "removed_1000": 1.3
+    },
+    {
+     "name": "Tirtol (Sc)",
+     "draft": 235570,
+     "added": 2213,
+     "removed": 128,
+     "final": 237655,
+     "added_1000": 9.4,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Balikuda-Erasama",
+     "draft": 253669,
+     "added": 1884,
+     "removed": 330,
+     "final": 255223,
+     "added_1000": 7.4,
+     "removed_1000": 1.3
+    },
+    {
+     "name": "Jagatsinghpur",
+     "draft": 209212,
+     "added": 1350,
+     "removed": 61,
+     "final": 210501,
+     "added_1000": 6.5,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Kakatpur (Sc)",
+     "draft": 224341,
+     "added": 2497,
+     "removed": 89,
+     "final": 226749,
+     "added_1000": 11.1,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Nimapara",
+     "draft": 225737,
+     "added": 1658,
+     "removed": 82,
+     "final": 227313,
+     "added_1000": 7.3,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Puri",
+     "draft": 224804,
+     "added": 1199,
+     "removed": 195,
+     "final": 225808,
+     "added_1000": 5.3,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Brahmagiri",
+     "draft": 212351,
+     "added": 969,
+     "removed": 66,
+     "final": 213254,
+     "added_1000": 4.6,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Satyabadi",
+     "draft": 193773,
+     "added": 1425,
+     "removed": 60,
+     "final": 195138,
+     "added_1000": 7.4,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Pipili",
+     "draft": 221762,
+     "added": 1945,
+     "removed": 93,
+     "final": 223614,
+     "added_1000": 8.8,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Jayadev (Sc)",
+     "draft": 173122,
+     "added": 1608,
+     "removed": 142,
+     "final": 174588,
+     "added_1000": 9.3,
+     "removed_1000": 0.8
+    },
+    {
+     "name": "Bhubaneswar Central (Madhya)",
+     "draft": 212532,
+     "added": 2542,
+     "removed": 603,
+     "final": 214471,
+     "added_1000": 12.0,
+     "removed_1000": 2.8
+    },
+    {
+     "name": "Bhubaneswar North (Uttar)",
+     "draft": 291290,
+     "added": 5614,
+     "removed": 1536,
+     "final": 295368,
+     "added_1000": 19.3,
+     "removed_1000": 5.3
+    },
+    {
+     "name": "Ekamra- Bhubaneswar",
+     "draft": 256845,
+     "added": 5677,
+     "removed": 998,
+     "final": 261524,
+     "added_1000": 22.1,
+     "removed_1000": 3.9
+    },
+    {
+     "name": "Jatani",
+     "draft": 224087,
+     "added": 2459,
+     "removed": 288,
+     "final": 226258,
+     "added_1000": 11.0,
+     "removed_1000": 1.3
+    },
+    {
+     "name": "Begunia",
+     "draft": 203249,
+     "added": 1487,
+     "removed": 294,
+     "final": 204442,
+     "added_1000": 7.3,
+     "removed_1000": 1.4
+    },
+    {
+     "name": "Khurda",
+     "draft": 231122,
+     "added": 2039,
+     "removed": 168,
+     "final": 232993,
+     "added_1000": 8.8,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Chilika",
+     "draft": 220011,
+     "added": 1946,
+     "removed": 101,
+     "final": 221856,
+     "added_1000": 8.8,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Ranpur",
+     "draft": 191857,
+     "added": 4429,
+     "removed": 400,
+     "final": 195886,
+     "added_1000": 23.1,
+     "removed_1000": 2.1
+    },
+    {
+     "name": "Khandapada",
+     "draft": 172183,
+     "added": 2663,
+     "removed": 111,
+     "final": 174735,
+     "added_1000": 15.5,
+     "removed_1000": 0.6
+    },
+    {
+     "name": "Daspalla (Sc)",
+     "draft": 175589,
+     "added": 1712,
+     "removed": 74,
+     "final": 177227,
+     "added_1000": 9.8,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Nayagarh",
+     "draft": 200955,
+     "added": 3160,
+     "removed": 221,
+     "final": 203894,
+     "added_1000": 15.7,
+     "removed_1000": 1.1
+    },
+    {
+     "name": "Bhanjanagar",
+     "draft": 224155,
+     "added": 1585,
+     "removed": 230,
+     "final": 225510,
+     "added_1000": 7.1,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Polasara",
+     "draft": 233671,
+     "added": 2250,
+     "removed": 338,
+     "final": 235583,
+     "added_1000": 9.6,
+     "removed_1000": 1.4
+    },
+    {
+     "name": "Kabisuryanagar",
+     "draft": 222590,
+     "added": 1177,
+     "removed": 160,
+     "final": 223607,
+     "added_1000": 5.3,
+     "removed_1000": 0.7
+    },
+    {
+     "name": "Khalikote (Sc)",
+     "draft": 215095,
+     "added": 1129,
+     "removed": 339,
+     "final": 215885,
+     "added_1000": 5.2,
+     "removed_1000": 1.6
+    },
+    {
+     "name": "Chhatrapur (Sc)",
+     "draft": 221241,
+     "added": 2725,
+     "removed": 263,
+     "final": 223703,
+     "added_1000": 12.3,
+     "removed_1000": 1.2
+    },
+    {
+     "name": "Aska",
+     "draft": 188268,
+     "added": 1136,
+     "removed": 103,
+     "final": 189301,
+     "added_1000": 6.0,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Surada",
+     "draft": 224219,
+     "added": 2439,
+     "removed": 241,
+     "final": 226417,
+     "added_1000": 10.9,
+     "removed_1000": 1.1
+    },
+    {
+     "name": "Sanakhemundi",
+     "draft": 210793,
+     "added": 1065,
+     "removed": 304,
+     "final": 211554,
+     "added_1000": 5.1,
+     "removed_1000": 1.4
+    },
+    {
+     "name": "Hinjili",
+     "draft": 216126,
+     "added": 1219,
+     "removed": 87,
+     "final": 217258,
+     "added_1000": 5.6,
+     "removed_1000": 0.4
+    },
+    {
+     "name": "Gopalpur",
+     "draft": 211623,
+     "added": 1635,
+     "removed": 271,
+     "final": 212987,
+     "added_1000": 7.7,
+     "removed_1000": 1.3
+    },
+    {
+     "name": "Berhampur",
+     "draft": 221017,
+     "added": 2280,
+     "removed": 563,
+     "final": 222734,
+     "added_1000": 10.3,
+     "removed_1000": 2.5
+    },
+    {
+     "name": "Digapahandi",
+     "draft": 205506,
+     "added": 2544,
+     "removed": 203,
+     "final": 207847,
+     "added_1000": 12.4,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Chikiti",
+     "draft": 197854,
+     "added": 895,
+     "removed": 184,
+     "final": 198565,
+     "added_1000": 4.5,
+     "removed_1000": 0.9
+    },
+    {
+     "name": "Mohana (St)",
+     "draft": 231770,
+     "added": 1332,
+     "removed": 440,
+     "final": 232662,
+     "added_1000": 5.7,
+     "removed_1000": 1.9
+    },
+    {
+     "name": "Paralakhemundi",
+     "draft": 200491,
+     "added": 911,
+     "removed": 112,
+     "final": 201290,
+     "added_1000": 4.5,
+     "removed_1000": 0.6
+    },
+    {
+     "name": "Gunupur (St)",
+     "draft": 206867,
+     "added": 1216,
+     "removed": 222,
+     "final": 207861,
+     "added_1000": 5.9,
+     "removed_1000": 1.1
+    },
+    {
+     "name": "Bissam Cuttack (St)",
+     "draft": 220352,
+     "added": 662,
+     "removed": 64,
+     "final": 220950,
+     "added_1000": 3.0,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Rayagada (St)",
+     "draft": 241988,
+     "added": 659,
+     "removed": 80,
+     "final": 242567,
+     "added_1000": 2.7,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Laxmipur (St)",
+     "draft": 164059,
+     "added": 474,
+     "removed": 56,
+     "final": 164477,
+     "added_1000": 2.9,
+     "removed_1000": 0.3
+    },
+    {
+     "name": "Kotpad (St)",
+     "draft": 197652,
+     "added": 658,
+     "removed": 95,
+     "final": 198215,
+     "added_1000": 3.3,
+     "removed_1000": 0.5
+    },
+    {
+     "name": "Jeypore",
+     "draft": 193290,
+     "added": 1754,
+     "removed": 188,
+     "final": 194856,
+     "added_1000": 9.1,
+     "removed_1000": 1.0
+    },
+    {
+     "name": "Koraput (Sc)",
+     "draft": 173053,
+     "added": 2281,
+     "removed": 884,
+     "final": 174450,
+     "added_1000": 13.2,
+     "removed_1000": 5.1
+    },
+    {
+     "name": "Pottangi (St)",
+     "draft": 176080,
+     "added": 518,
+     "removed": 32,
+     "final": 176566,
+     "added_1000": 2.9,
+     "removed_1000": 0.2
+    },
+    {
+     "name": "Malkangiri (St)",
+     "draft": 225038,
+     "added": 817,
+     "removed": 889,
+     "final": 224966,
+     "added_1000": 3.6,
+     "removed_1000": 4.0
+    },
+    {
+     "name": "Chitrakonda (St)",
+     "draft": 189778,
+     "added": 688,
+     "removed": 300,
+     "final": 190166,
+     "added_1000": 3.6,
+     "removed_1000": 1.6
+    }
+   ]
+  },
+  {
+   "id": "districts_fall",
+   "title": "Every district, from the final roll of January 2025 to the draft and the final roll of 2026",
+   "level": "district",
+   "kind": "fall",
+   "src": "s5",
+   "note": "The roll of January 2025 is the last ordinary roll before the revision, not the roll of 17 May 2026 it started from, so the fall here takes in more than a year of ordinary changes as well as the names left off.",
+   "rows": [
+    {
+     "name": "Bargarh",
+     "before": 1197754,
+     "draft": 1106876,
+     "final": 1111942,
+     "fall_100": 7.1644
+    },
+    {
+     "name": "Jharsugud",
+     "before": 450202,
+     "draft": 409891,
+     "final": 411989,
+     "fall_100": 8.488
+    },
+    {
+     "name": "Sundargarh",
+     "before": 1600716,
+     "draft": 1379855,
+     "final": 1395981,
+     "fall_100": 12.7902
+    },
+    {
+     "name": "Sambalpur",
+     "before": 842463,
+     "draft": 788025,
+     "final": 794266,
+     "fall_100": 5.721
+    },
+    {
+     "name": "Deogarh",
+     "before": 252077,
+     "draft": 233471,
+     "final": 236472,
+     "fall_100": 6.1906
+    },
+    {
+     "name": "Keonjhar",
+     "before": 1398579,
+     "draft": 1308276,
+     "final": 1319176,
+     "fall_100": 5.6774
+    },
+    {
+     "name": "Mayurbhanja",
+     "before": 1951038,
+     "draft": 1817680,
+     "final": 1836822,
+     "fall_100": 5.8541
+    },
+    {
+     "name": "Balasore",
+     "before": 1911549,
+     "draft": 1803628,
+     "final": 1811517,
+     "fall_100": 5.233
+    },
+    {
+     "name": "Bhadrak",
+     "before": 1304089,
+     "draft": 1216281,
+     "final": 1218307,
+     "fall_100": 6.5779
+    },
+    {
+     "name": "Jajpur",
+     "before": 1563392,
+     "draft": 1432087,
+     "final": 1443645,
+     "fall_100": 7.6594
+    },
+    {
+     "name": "Dhenkanal",
+     "before": 982174,
+     "draft": 904272,
+     "final": 910001,
+     "fall_100": 7.3483
+    },
+    {
+     "name": "Angul",
+     "before": 990760,
+     "draft": 908875,
+     "final": 919670,
+     "fall_100": 7.1753
+    },
+    {
+     "name": "Subrnapur",
+     "before": 478116,
+     "draft": 453787,
+     "final": 462384,
+     "fall_100": 3.2904
+    },
+    {
+     "name": "Bolangir",
+     "before": 1348257,
+     "draft": 1244558,
+     "final": 1258210,
+     "fall_100": 6.6788
+    },
+    {
+     "name": "Nuapada",
+     "before": 503730,
+     "draft": 488447,
+     "final": 490344,
+     "fall_100": 2.6574
+    },
+    {
+     "name": "Nabarangpur",
+     "before": 865567,
+     "draft": 812592,
+     "final": 815725,
+     "fall_100": 5.7583
+    },
+    {
+     "name": "Kalahandi",
+     "before": 1220304,
+     "draft": 1134099,
+     "final": 1139970,
+     "fall_100": 6.5831
+    },
+    {
+     "name": "Kandhamal",
+     "before": 580452,
+     "draft": 531899,
+     "final": 534226,
+     "fall_100": 7.9638
+    },
+    {
+     "name": "Boudh",
+     "before": 341026,
+     "draft": 323394,
+     "final": 325886,
+     "fall_100": 4.4395
+    },
+    {
+     "name": "Cuttack",
+     "before": 2185362,
+     "draft": 1930615,
+     "final": 1952630,
+     "fall_100": 10.6496
+    },
+    {
+     "name": "Kendrapara",
+     "before": 1286801,
+     "draft": 1190895,
+     "final": 1201628,
+     "fall_100": 6.619
+    },
+    {
+     "name": "Jagatsinghpur",
+     "before": 974435,
+     "draft": 899345,
+     "final": 906868,
+     "fall_100": 6.934
+    },
+    {
+     "name": "Puri",
+     "before": 1426256,
+     "draft": 1302768,
+     "final": 1311876,
+     "fall_100": 8.0196
+    },
+    {
+     "name": "Khurda",
+     "before": 1935210,
+     "draft": 1812258,
+     "final": 1831500,
+     "fall_100": 5.3591
+    },
+    {
+     "name": "Nayagarh",
+     "before": 814165,
+     "draft": 740584,
+     "final": 751742,
+     "fall_100": 7.6671
+    },
+    {
+     "name": "Ganjam",
+     "before": 3026220,
+     "draft": 2792158,
+     "final": 2810951,
+     "fall_100": 7.1135
+    },
+    {
+     "name": "Gajapati",
+     "before": 470283,
+     "draft": 432261,
+     "final": 433952,
+     "fall_100": 7.7253
+    },
+    {
+     "name": "Rayagada",
+     "before": 720041,
+     "draft": 669207,
+     "final": 671378,
+     "fall_100": 6.7584
+    },
+    {
+     "name": "Koraput",
+     "before": 989547,
+     "draft": 904134,
+     "final": 908564,
+     "fall_100": 8.1838
+    },
+    {
+     "name": "Malkangiri",
+     "before": 462179,
+     "draft": 414816,
+     "final": 415132,
+     "fall_100": 10.1794
+    }
+   ]
+  },
   {
    "id": "districts",
    "title": "Eleven districts, the names left off at the draft",
@@ -218,6 +2071,13 @@
    "url": "https://timesofindia.indiatimes.com/city/bhubaneswar/draft-electoral-roll-ganjam-tops-deletions-malkangiri-sees-sharpest-decline-at-10-25/articleshow/132217485.cms",
    "date": "2026-07-06",
    "primary": false
+  },
+  {
+   "id": "s5",
+   "title": "Chief Electoral Officer, Odisha, e-roll analysis: Formats 1B and 4B for the draft roll of 5 July 2026 and the final roll of 21 September 2026",
+   "url": "https://ceoodisha.nic.in/en/eroll-analysis/",
+   "date": "2026-09-21",
+   "primary": true
   }
  ],
  "notes": [
@@ -226,7 +2086,9 @@
   "The roll before is the roll of 17 May 2026. The five reasons add exactly to the 20,12,557 names left off. Shifted, absent or other is 1,99,249 absent, 8,08,205 shifted and 14,441 other.",
   "The 44,777 names removed after the draft are 24,070 found ineligible at a hearing and 20,707 removed on Form 7 objections. ETV Bharat prints 20,708 for the second, one more than the other reports.",
   "The notices figure is ETV Bharat's, 12,98,779 unmapped electors and 45,37,547 with a logical discrepancy. The New Indian Express gives 45,37,613 for the second and 58,36,392 in all, 66 more.",
-  "The Hindustan Times gives district percentages on the roll of 1 January 2025, which is not the roll the revision started from, so only its counts are used."
+  "The Hindustan Times gives district percentages on the roll of 1 January 2025, which is not the roll the revision started from, so only its counts are used.",
+  "The tables by district and constituency are the Chief Electoral Officer's own Formats 1B and 4B. Every constituency adds up to its district and every district to the state. The CEO has not published the names left off at the draft by district or constituency, so those tables run from the draft roll onward, and the fall from the January 2025 roll stands in for the rest.",
+  "In Format 4B the additions and deletions by sex do not quite reconcile with the rolls by sex in most constituencies, by small amounts in both directions, which a change of recorded sex would explain. The tables here use the totals, which reconcile in every row. The three reasons it gives for deletions after the draft (death, shifting, a repeated entry) cover 28,229 of the 44,777."
  ],
  "cannot_show": [
   "The names left off in every district and every constituency. Only eleven districts and six constituencies were printed.",
@@ -244,6 +2106,10 @@
   "made_up_pct": 12.2,
   "final_vs_before": -1766837,
   "women_before_pct": 49.4354,
-  "women_final_pct": 48.9988
+  "women_draft_pct": 48.9536,
+  "women_removed_pct": 56.9494,
+  "women_final_pct": 48.9988,
+  "women_per_100": 6.9,
+  "men_per_100": 5.1
  }
 }

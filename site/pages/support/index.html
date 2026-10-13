@@ -1,0 +1,29 @@
+<!--page {"title": "Support our work: SIR analysis for India", "description": "How to support Off the Roll: fill in the form and we will write back with a way to contribute.", "place": "home"} -->
+<main id="main" class="share">
+<div class="page-head"><h1>Support our work</h1></div>
+<p class="report-lang">This page is in English only.</p>
+<article lang="en" dir="ltr" data-no-i18n>
+<p class="lead">Off the Roll is researched, checked and kept up to date by a small team at PinPoint Ventures. Every figure is free to read and to download. If you would like to support the work, fill in this form and we will write back.</p>
+
+<h2>How it works</h2>
+<ul class="plain">
+  <li>Tell us who you are and how you would like to help. A contribution of money is one way. Data, research, translation and spreading the word are others.</li>
+  <li>The page that opens after you send the form has a UPI QR code for a contribution and a button that opens your UPI app. We also write back to the email you give.</li>
+  <li>Support does not buy influence over what the site publishes. Every figure still comes from a source, and the methods stay as they are.</li>
+</ul>
+
+<form class="shareform" name="support" method="POST" action="/support/thanks/" data-netlify="true" netlify-honeypot="company_website">
+  <input type="hidden" name="form-name" value="support">
+  <p class="hp" hidden><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p>
+  <p><label for="spName">Your name</label><input id="spName" name="name" autocomplete="name" required></p>
+  <p><label for="spEmail">Email, so we can write back</label><input id="spEmail" name="email" type="email" autocomplete="email" required></p>
+  <p><label for="spHow">How you would like to support the work</label><select id="spHow" name="how">
+    <option>A contribution by UPI</option><option>Data or research</option><option>Translation or reviewing a translation</option><option>Spreading the word</option><option>Something else</option></select></p>
+  <p><label for="spMsg">Anything you would like to tell us (optional)</label><textarea id="spMsg" name="message" rows="4"></textarea></p>
+  <p><button type="submit" class="btn send">Send</button></p>
+</form>
+<p class="note">What you type here goes to Netlify, which hosts this site and keeps it for us, and is used only to write back to you. It is never published and never shared. The <a href="../terms/">terms and privacy</a> page says more.</p>
+</article>
+</main>
+<!--scripts-->
+<script src="../assets/sir.js"></script>
