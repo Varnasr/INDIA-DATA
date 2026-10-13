@@ -363,6 +363,14 @@ def _migration():
     assert n >= 29, 'only %d states matched D-01' % n
 
 
+def _seat_pages():
+    # one page per constituency, from make_seat_pages.py; a seat added to or
+    # renamed in a state's table needs its page rewritten
+    import subprocess
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'make_seat_pages.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()
+
+
 def _short_and_faq():
     # Every page but the full reports opens with an "In short" box and carries
     # questions and answers: its own (#pageFaq) or, on an FAQ tab, all (#qas).
@@ -380,7 +388,7 @@ def _short_and_faq():
         html = open(os.path.join(ROOT, rel), encoding='utf-8').read()
         assert 'id="short"' in html, '%s has no In short box' % rel
         assert 'id="pageFaq"' in html or 'id="qas"' in html, '%s has no questions and answers' % rel
-        assert 'SIR.showFaq(' in html or 'SIR.statePage(' in html or rel == os.path.join('india', 'index.html'), '%s never fills its box' % rel
+        assert 'SIR.showFaq(' in html or 'SIR.statePage(' in html or 'SIR.seatPage(' in html or rel == os.path.join('india', 'index.html'), '%s never fills its box' % rel
 
 
 def _pages_link_method():
@@ -448,6 +456,7 @@ for name, fn in [
     ('2020 to 2025 swing current, 2025 votes match the declared result', _swing),
     ('robustness checks current', _robust),
     ('every page opens with In short and carries questions', _short_and_faq),
+    ('a page for every constituency of the five seat-table states', _seat_pages),
     ('findings pages link to the method page', _pages_link_method),
 ]:
     check(name, fn)

@@ -5,5 +5,6 @@ window.SIR_DICT = {" and ": " మరియు ", " to ": " నుంచి ", "\
 "The roll of January 2025": "జనవరి 2025 జాబితా",
 "Winner, runner-up and margin for every seat are from the Election Commission's constituency result pages, checked against its state-wise pages. Turnout is the votes polled over the roll of 6 April 2026, the roll the election was held on, which the Chief Electoral Officer published by constituency and sex. It is larger than the final roll in every constituency, because names were added after the final roll.": "ప్రతి స్థానం విజేత, రెండో స్థానం, తేడా ఎన్నికల సంఘం నియోజకవర్గ ఫలితాల పేజీల నుంచి, దాని రాష్ట్రాల వారీ పేజీలతో సరిచూశారు. పోలింగ్ శాతం 6 ఏప్రిల్ 2026 జాబితాపై పడిన ఓట్లు, ఎన్నిక జరిగిన జాబితా అదే, దాన్ని ముఖ్య ఎన్నికల అధికారి నియోజకవర్గం, లింగం వారీగా ప్రచురించారు. తుది జాబితా తర్వాత పేర్లు చేర్చినందున ఇది ప్రతి నియోజకవర్గంలో తుది జాబితా కంటే పెద్దది.",
 "Women's share of the January 2025 roll and of the fall from it to the draft, by district": "జనవరి 2025 జాబితాలో, దాని నుంచి ముసాయిదా వరకు తగ్గుదలలో మహిళల వాటా, జిల్లాల వారీగా",
-"Women's share of the fall to the draft, %": "ముసాయిదా వరకు తగ్గుదలలో మహిళల వాటా, %"
+"Women's share of the fall to the draft, %": "ముసాయిదా వరకు తగ్గుదలలో మహిళల వాటా, %",
+"Open this constituency's own page": "ఈ నియోజకవర్గం సొంత పేజీ తెరవండి"
 };

@@ -918,6 +918,24 @@ added across states, and only Uttarakhand has gross additions and deletions by
 constituency. Everywhere else the change from the draft is net, counts new
 voters too, and is never called names restored. English only.
 
+**A page for every constituency** (`<state>/seat/<n>/`, 808 of them) in the
+five states whose seat tables are the CEO's own: Tamil Nadu, West Bengal,
+Kerala, Delhi and Uttarakhand. `scripts/make_seat_pages.py` writes a
+three-line source per seat (its state and number in `data-seat-state` and
+`data-seat-ac` on `<body>`, which `build_site.py` carries from the page's
+`body` meta) and `assets/seat.js` draws everything from
+`data/<state>/constituencies.json` when the page loads: the seat against its
+district and state in that state's own measure (named in every sentence), its
+rank, the district's seats, and the reasons, women, after-the-draft and
+margin sections a state's tables can fill; the rest are hidden and the limits
+line says what is missing. `CFG` in `seat.js` holds each state's fields. A
+state's measure is never compared with another's. The pages are English only
+(`data-no-i18n`); `i18n_collect.mjs` skips them, because their shell is every
+page's shell. Search, the All India finder and each state's finder card
+(`seatPages: true`) link to them. `check_data.py` runs `make_seat_pages.py
+--check`. Next: Bihar, Gujarat, Rajasthan and Hyderabad, each needing a line in
+`STATES` and an entry in `CFG`.
+
 **Share a list with us** (`share/`, on the front page's place, in every
 footer, in the search and in a short section on the front page) is the one
 form on the site: a Netlify form named `share-data` (honeypot

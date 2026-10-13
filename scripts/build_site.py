@@ -37,6 +37,8 @@ for _pl in CFG['places']:
         if _dup:
             raise SystemExit('FAIL - %s lists %s twice in %s' % (_pl['id'], ', '.join(_dup), _key))
 PLACES = {p['id']: p for p in CFG['places']}
+# places with a page for every constituency (scripts/make_seat_pages.py)
+SEAT_PAGES = {'tn': 'tamilnadu', 'wb': 'westbengal', 'kl': 'kerala', 'dl': 'delhi', 'uk': 'uttarakhand'}
 # Every page's <body> carries its place's class. Delhi's was once "dl", which
 # is also the class of the header menus, so the print stylesheet's .dl{display:
 # none} hid the whole of every Delhi page on paper. A place class must not be a
@@ -360,10 +362,11 @@ def shell(out, meta, content, scripts):
         '<script src="%sassets/i18n.js"></script>\n<title>%s</title>\n<meta name="description" content="%s">\n'
         '<link rel="icon" href="%s">\n<link rel="manifest" href="%smanifest.webmanifest">\n<meta name="theme-color" content="#1f4e79">\n'
         '<link rel="apple-touch-icon" href="%sassets/app/apple-touch-icon.png">\n<link rel="stylesheet" href="%sassets/sir.css">%s\n</head>\n'
-        '<body class="%s" data-place="%s" data-root="%s">\n%s%s%s\n%s\n%s\n'
+        '<body class="%s" data-place="%s" data-root="%s"%s>\n%s%s%s\n%s\n%s\n'
         '<script src="%sassets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>\n</body>\n</html>\n'
     ) % (root, html.escape(meta['title'], quote=False), html.escape(meta['description']), favicon(place['color']), root, root, root, head_extra,
-         cls, place['id'], root, header, nav, content, footer, scripts, root)
+         cls, place['id'], root, ''.join(' %s="%s"' % (k, html.escape(v)) for k, v in sorted(meta.get('body', {}).items())),
+         header, nav, content, footer, scripts, root)
 
 
 def put(path, text, compare_unstamped=True):
@@ -458,7 +461,9 @@ def search_index():
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),
                               ('gj', 'gujarat', 'gujarat/'), ('uk', 'uttarakhand', 'uttarakhand/')):
         for a in J(folder + '/constituencies.json'):
-            rows.append([pid, 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], page + '#ac-%d' % a['ac']])
+            # a state with constituency pages (make_seat_pages.py) links to the seat's own page
+            href = '%s/seat/%d/' % (SEAT_PAGES[pid], a['ac']) if pid in SEAT_PAGES else page + '#ac-%d' % a['ac']
+            rows.append([pid, 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], href])
         for d in J(folder + '/districts.json'):
             rows.append([pid, 'd', d['district'], '', page + '#' + slug(d['district'])])
     for d in J('uttarpradesh/districts.json'):

@@ -209,7 +209,7 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
         [L('Fall at the final roll, per 100'), SIR.d(d.net_per_100, 1)], [L('Constituencies'), SIR.n(d.acs)]]) + '<p class="note">' + L('Its constituencies') + '</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
       share: function (d) { return L('{d} district, Tamil Nadu. {r} names were left off the draft roll here, {p} of every 100 electors, across {n} constituencies. These are counts from the Chief Electoral Officer\'s published tables. A reason on the list is what the officer wrote down, and nobody checked it.', { d: d.district, r: SIR.n(d.removed), p: SIR.d(d.per_100, 1), n: d.acs }); },
       pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); } };
-    var F = SIR.finder('finder', { rows: A, more: [DSET], prompt: L('Find a constituency or district'), placeholder: L('Type a name, a number or a district'), key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+    var F = SIR.finder('finder', { seatPages: true, rows: A, more: [DSET], prompt: L('Find a constituency or district'), placeholder: L('Type a name, a number or a district'), key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
       card: function (a) { return SIR.facts([
         [L('Names left off the draft'), SIR.n(a.removed)], [L('Per 100 electors'), SIR.d(a.per_100, 1)],
         [L('Entered as dead'), SIR.n(a.dead)], [L('Not entered as dead'), SIR.n(a.removed - a.dead)],

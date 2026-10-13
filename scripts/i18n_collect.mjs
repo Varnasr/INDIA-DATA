@@ -31,7 +31,11 @@ const SECTIONS = [...new Set(JSON.parse(fs.readFileSync(path.join(ROOT, 'site/pl
 // plus any top-level page of the front page's own (terms/), from site/pages
 const OWN = fs.readdirSync(path.join(ROOT, 'site/pages'), { withFileTypes: true })
   .filter((e) => e.isDirectory() && !SECTIONS.includes(e.name)).map((e) => e.name);
-const PAGES = ['', ...SECTIONS.flatMap((d) => walk(d)), ...OWN.flatMap((d) => walk(d))].sort();
+// The constituency pages (<state>/seat/<n>/) are English only: their own
+// text carries data-no-i18n, and their shell is the same as every other
+// page's, so none of them is walked. Their titles name a seat and stay English.
+const PAGES = ['', ...SECTIONS.flatMap((d) => walk(d)), ...OWN.flatMap((d) => walk(d))]
+  .filter((p) => !/\/seat\/\d+\/$/.test(p)).sort();
 const SOURCES = ['index.html', 'assets/sir.js', 'assets/dash.js', 'assets/i18n.js', ...fs.readdirSync(path.join(ROOT, 'assets/faq')).filter(f => f.endsWith('.js')).sort().map(f => 'assets/faq/' + f), ...PAGES.filter(Boolean).map(p => p + 'index.html')];
 
 const cat = {};
