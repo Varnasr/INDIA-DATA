@@ -14,8 +14,9 @@
       reasons: [['shifted', 'Shifted for good'], ['untraceable_absent', 'Untraceable or absent'], ['dead', 'Dead'], ['multiple', 'Enrolled more than once'], ['others', 'Other']],
       limits: 'The district table is the Chief Electoral Officer\'s, as published in the press. No split by sex of the names left off was published below the state, and no table by constituency.' },
     maharashtra: { label: 'Maharashtra', state: 'Maharashtra', count: 'left_off', base: 'before',
-      womenDraft: 'women_draft_pct',
-      limits: 'The Chief Electoral Officer published the names left off by district with no reasons and no split by sex. The final roll is still to come.' },
+      reasons: [['shifted', 'Shifted for good'], ['absent', 'Untraceable or absent'], ['dead', 'Dead'], ['duplicate', 'Enrolled at another place'], ['other', 'Other']],
+      womenDraft: 'women_draft_pct', seats: true,
+      limits: 'The Chief Electoral Officer published no split of the names left off by sex. The final roll is still to come.' },
     karnataka: { label: 'Karnataka', state: 'Karnataka', count: 'removed', base: 'before',
       reasons: [['shifted', 'Shifted'], ['absent', 'Absent'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once'], ['other', 'Other']],
       after: { draft: 'draft', later: 'sep', what: 'the roll of 9 October 2026' },
@@ -85,6 +86,11 @@
       document.getElementById('others').innerHTML = all.filter(function (x) { return x !== d; }).map(function (x) { return '<a class="chip" href="../' + slug(x.district) + '/">' + SIR.esc(x.district) + '</a>'; }).join(' ');
       document.getElementById('pageFaq').innerHTML = '<div class="qa"><h3>Where do these figures come from?</h3><p>From the same tables as the <a href="' + stPage + '">' + C.label + '</a> pages, which give every source on their method page, and from the National Family Health Survey 2019-21 for the circumstances. Every figure is worked out when the page loads.</p></div>' +
         '<div class="qa"><h3>Does a circumstance explain the removals?</h3><p>No. A district\'s schooling, fuel or sanitation figures sit beside its removals, and the correlations across districts say which districts lost more, never why.</p></div>';
+      if (C.seats) SIR.json('data/' + st + '/constituencies.json').then(function (A) {
+        var mine = A.filter(function (a) { return a.district === d.district; }).sort(function (a, b) { return a.ac - b.ac; });
+        document.getElementById('dLinks').insertAdjacentHTML('beforeend', '<p class="note">Its ' + mine.length + ' constituencies, each with its own page</p><p class="golist">' +
+          mine.map(function (a) { return '<a class="chip" href="' + root + st + '/seat/' + a.ac + '/">' + SIR.esc(a.ac + '. ' + a.name) + '</a>'; }).join(' ') + '</p>');
+      });
       SIR.tools();
     }).catch(SIR.fail);
   };

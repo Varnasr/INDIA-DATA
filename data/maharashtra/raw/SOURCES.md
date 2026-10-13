@@ -164,3 +164,45 @@ The district, among today's 36, of each of the 288 assembly constituencies
   were not looked for.
 - No list of individual electors, and no ASDDO list, was opened.
 - Nothing in the repository outside data/maharashtra/raw/ was changed.
+
+## Every constituency, the reasons and the notices (read 13 October 2026)
+
+All five tables are the CEO's own, read from the PDFs' text layers with pypdf
+(copies in `sources/`, fetched through the same verified chain as above).
+`build_maharashtra.py` asserts every check listed here.
+
+- `ac_roll.csv`: the "Assembly-wise detailed statement" enclosed with the CEO's
+  press note of 16 September 2026 (`sources/resp_ie_20260916.pdf`, sha256
+  58fef81aed2e0953e7926e5b9b1ad7293a5a69863d05d856f61ef968b6863b78),
+  https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/16.9.2026%20IE%20Report%20Response.pdf.
+  Table "SIR-2026- Uncollectable EF electors as on 31-08-2026": total electors
+  before the SIR, uncollected and the percentage, for all 288 ACs, sorted by
+  the percentage (the CEO's serial is kept in `sr`); `draft` is roll before
+  less left off. Checks: ACs 1 to 288 once; totals 9,78,54,049 and 2,06,88,487;
+  every printed percentage follows from the counts; ACs add up to both
+  annexures by district; the 38 rows of `ac_top38.csv` agree.
+- `ac_reasons.csv` and `district_reasons.csv`: "ASDDO Statistics", AC wise
+  (pages 11 to 21) and district wise (page 10) of the CEO's tables of 1
+  September 2026 (`sources/pn_20260901_mr.pdf`, sha256
+  d46d12d1211758303b53dc34ae4ebced689b8139e68d771960de53403d5176ff),
+  https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Pressnotemarathi01.09.2026.pdf.
+  Columns: already enrolled (duplicate), dead, permanently shifted,
+  untraceable or absent, others, total uncollectable. Checks: the five sum to
+  the total in every row; the ACs add up to the district table and to
+  `ac_roll.csv`; the districts to Annexure-2. State: dead 34,82,231, shifted
+  76,76,135, absent 75,41,229, duplicate 17,66,502, other 2,22,390. These
+  replace the Indian Express's rounded lakh figures on the All India row.
+- `ac_draft_sex.csv`: pages 2 to 9 of the same document, the draft by AC and
+  sex. Checks: men, women and third gender add up in every row; the ACs add up
+  to Annexure-1 by district and sex.
+- `district_notices.csv`: the CEO's release of 4 September 2026, "SIR - No
+  Mapped and Anomaly details as on 31-08-2026" (`sources/pn_20260904_en.pdf`,
+  sha256 206ab386deb9b743678c577a7b8de0893df1df5b9979a3e6f42e75fc4674a456).
+  Electors with anomalies and with no mapping, by district. Checks: the two
+  add up to the total in every row and to 62,48,281, 59,75,726 and
+  1,22,24,007. No count of notices by AC was found.
+
+The AC tables spell AC 129 "Vekramgrth (ST)"; the build prints the Election
+Commission's Vikramgad (ST). The 2024 results are
+`data/india/raw/assembly/maharashtra_2024.csv` (the Commission's statistical
+report). Nothing published splits the names left off by sex, at any level.
