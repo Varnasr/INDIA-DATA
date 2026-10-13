@@ -74,6 +74,9 @@ def rows(state):
         return [dict(district=r['district'], before=r['roll_2024'], removed=r['roll_2024'] - r['draft']) for r in load('westbengal', 'districts.json')]
     if state == 'Kerala':
         return [dict(district=r['district'], before=r['roll_2025'], removed=r['roll_2025'] - r['draft']) for r in load('kerala', 'districts.json')]
+    if state == 'Uttarakhand':
+        # the CEO's table of the draft: names left off by district
+        return [dict(district=r['district'], before=r['roll_before'], removed=r['left_off']) for r in load('uttarakhand', 'districts.json')]
     raise SystemExit('no rows for ' + state)
 
 

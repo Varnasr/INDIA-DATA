@@ -16,8 +16,8 @@ Writes data/india/border.json and data/india/border.csv.
   ranked against each other. Uttar Pradesh and Gujarat: names left off per
   100 on the roll before. Bihar: both phases per 100 on the 2025 roll. West
   Bengal: the fall in the roll from the 2024 Lok Sabha roll to the draft.
-  Uttarakhand: names removed after the draft per 1,000 on the draft, because
-  its earlier removals are a state total only.
+  Uttarakhand: names left off per 100 on the roll before, from the CEO's
+  table of the draft by constituency.
 - Rajasthan is left out. Its district figure is the change in the roll over
   more than two years, and Barmer, one of its four border districts, was split
   to make Balotara in 2023, so the list and the districts no longer line up.
@@ -55,7 +55,7 @@ def rows(state):
     if state == 'West Bengal':
         return [dict(district=r['district'], base=r['roll_2024'], count=r['roll_2024'] - r['draft']) for r in load('westbengal', 'districts.json')]
     if state == 'Uttarakhand':
-        return [dict(district=r['district'], base=r['draft'], count=r['objections']) for r in load('uttarakhand', 'districts.json')]
+        return [dict(district=r['district'], base=r['roll_before'], count=r['left_off']) for r in load('uttarakhand', 'districts.json')]
     raise SystemExit(state)
 
 
@@ -63,7 +63,7 @@ STATES = [('Uttar Pradesh', 'names left off per 100 on the roll before', 100, 'u
           ('Gujarat', 'names left off per 100 on the roll before', 100, 'gujarat/'),
           ('Bihar', 'names removed in both phases per 100 on the 2025 roll', 100, 'bihar/border/'),
           ('West Bengal', 'fall in the roll per 100, 2024 roll to the draft', 100, 'westbengal/'),
-          ('Uttarakhand', 'names removed after the draft per 1,000 on the draft', 1000, 'uttarakhand/')]
+          ('Uttarakhand', 'names left off per 100 on the roll before', 100, 'uttarakhand/')]
 
 
 def agg(rs, per):

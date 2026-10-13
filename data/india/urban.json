@@ -1,14 +1,14 @@
 {
  "summary": {
-  "states": 9,
-  "units": 275,
-  "districts": 325,
-  "with_both": 8,
-  "urban_higher": 7,
-  "rho_positive": 8,
-  "rho_02": 7,
-  "mixed_higher": 7,
-  "rho_no_urban_02": 5,
+  "states": 10,
+  "units": 288,
+  "districts": 338,
+  "with_both": 9,
+  "urban_higher": 8,
+  "rho_positive": 9,
+  "rho_02": 8,
+  "mixed_higher": 8,
+  "rho_no_urban_02": 6,
   "no_urban": [
    "Bihar"
   ],
@@ -416,6 +416,49 @@
    ],
    "urban_over_rural": 0.955,
    "mixed_over_rural": 0.6767
+  },
+  {
+   "state": "Uttarakhand",
+   "measure": "left_off",
+   "units": 13,
+   "districts": 13,
+   "per_100": 10.3882,
+   "rho": 0.7527,
+   "rho_no_urban": 0.6853,
+   "bands": [
+    {
+     "band": "rural",
+     "units": 9,
+     "before": 3109047,
+     "removed": 261283,
+     "per_100": 8.404,
+     "times_state": 0.809,
+     "share_of_roll": 39.1,
+     "share_of_removed": 31.6
+    },
+    {
+     "band": "mixed",
+     "units": 3,
+     "before": 3474902,
+     "removed": 379686,
+     "per_100": 10.9265,
+     "times_state": 1.0518,
+     "share_of_roll": 43.7,
+     "share_of_removed": 45.9
+    },
+    {
+     "band": "urban",
+     "units": 1,
+     "before": 1376813,
+     "removed": 186008,
+     "per_100": 13.51,
+     "times_state": 1.3005,
+     "share_of_roll": 17.3,
+     "share_of_removed": 22.5
+    }
+   ],
+   "urban_over_rural": 1.6076,
+   "mixed_over_rural": 1.3002
   }
  ],
  "units": [
@@ -4318,6 +4361,188 @@
    "band": "urban",
    "per_100": 11.6547,
    "measure": "fall"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Bageshwar",
+   "census_code": "05063",
+   "districts": [
+    "Bageshwar"
+   ],
+   "urban_pct": 3.49,
+   "before": 213929,
+   "removed": 13010,
+   "band": "rural",
+   "per_100": 6.0815,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Rudraprayag",
+   "census_code": "05058",
+   "districts": [
+    "Rudraprayag"
+   ],
+   "urban_pct": 4.1,
+   "before": 191595,
+   "removed": 10809,
+   "band": "rural",
+   "per_100": 5.6416,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Uttarkashi",
+   "census_code": "05056",
+   "districts": [
+    "Uttarkashi"
+   ],
+   "urban_pct": 7.36,
+   "before": 242822,
+   "removed": 18405,
+   "band": "rural",
+   "per_100": 7.5796,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Almora",
+   "census_code": "05064",
+   "districts": [
+    "Almora"
+   ],
+   "urban_pct": 10.01,
+   "before": 527423,
+   "removed": 55485,
+   "band": "rural",
+   "per_100": 10.52,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Tehri Garhwal",
+   "census_code": "05059",
+   "districts": [
+    "Tehri Garhwal"
+   ],
+   "urban_pct": 11.33,
+   "before": 507253,
+   "removed": 43625,
+   "band": "rural",
+   "per_100": 8.6002,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Pithoragarh",
+   "census_code": "05062",
+   "districts": [
+    "Pithoragarh"
+   ],
+   "urban_pct": 14.4,
+   "before": 368933,
+   "removed": 27436,
+   "band": "rural",
+   "per_100": 7.4366,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Champawat",
+   "census_code": "05065",
+   "districts": [
+    "Champawat"
+   ],
+   "urban_pct": 14.77,
+   "before": 206642,
+   "removed": 17718,
+   "band": "rural",
+   "per_100": 8.5742,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Chamoli",
+   "census_code": "05057",
+   "districts": [
+    "Chamoli"
+   ],
+   "urban_pct": 15.17,
+   "before": 295623,
+   "removed": 23436,
+   "band": "rural",
+   "per_100": 7.9277,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Garhwal",
+   "census_code": "05061",
+   "districts": [
+    "Pauri Garhwal"
+   ],
+   "urban_pct": 16.4,
+   "before": 554827,
+   "removed": 51359,
+   "band": "rural",
+   "per_100": 9.2568,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Udham Singh Nagar",
+   "census_code": "05067",
+   "districts": [
+    "Udham Singh Nagar"
+   ],
+   "urban_pct": 35.58,
+   "before": 1333345,
+   "removed": 177673,
+   "band": "mixed",
+   "per_100": 13.3254,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Hardwar",
+   "census_code": "05068",
+   "districts": [
+    "Haridwar"
+   ],
+   "urban_pct": 36.66,
+   "before": 1376422,
+   "removed": 130203,
+   "band": "mixed",
+   "per_100": 9.4595,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Nainital",
+   "census_code": "05066",
+   "districts": [
+    "Nainital"
+   ],
+   "urban_pct": 38.94,
+   "before": 765135,
+   "removed": 71810,
+   "band": "mixed",
+   "per_100": 9.3853,
+   "measure": "left_off"
+  },
+  {
+   "state": "Uttarakhand",
+   "unit": "Dehradun",
+   "census_code": "05060",
+   "districts": [
+    "Dehradun"
+   ],
+   "urban_pct": 55.52,
+   "before": 1376813,
+   "removed": 186008,
+   "band": "urban",
+   "per_100": 13.51,
+   "measure": "left_off"
   }
  ]
 }

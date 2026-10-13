@@ -54,10 +54,36 @@ def main():
         bad.append('the reasons do not add to the names left off')
     if S['draft'] + S['claims_admitted'] - S['objections_admitted'] != S['final']:
         bad.append('draft + claims - objections != final, for the state')
+
+    # The CEO's constituency table of the draft (14.07.2026): names marked
+    # ASDD and left off, and the notice categories, parsed from the PDF's
+    # text layer by parse_ac_draft_asdd.py.
+    X = list(csv.DictReader(open(os.path.join(RAW, 'ac_draft_asdd.csv'), encoding='utf-8')))
+    XA = [r for r in X if r['level'] == 'ac']
+    XD = {r['name']: r for r in X if r['level'] == 'district'}
+    XS = [r for r in X if r['level'] == 'state'][0]
+    N = ['ps', 'draft', 'anomalies', 'agegap_lt15', 'agegap_gt50', 'grandparent_lt40', 'progeny_gt6', 'progeny_agediff_lt9m',
+         'rel_name_var_progeny', 'self_name_var', 'rel_name_var_self', 'no_mapping', 'asdd_deleted', 'service_electors']
+    assert [int(r['ac']) for r in XA] == list(range(1, 71)), 'draft table: constituencies 1 to 70'
+    for a, x in zip(A, XA):
+        if int(a['draft_men']) + int(a['draft_women']) + int(a['draft_tg']) != int(x['draft']):
+            bad.append('%s: draft differs between the 14.07 table and PN 63' % a['ac'])
+    assert len(XD) == 13
+    for d, t in XD.items():
+        for k in N:
+            if sum(int(r[k]) for r in XA if r['district'] == d) != int(t[k]):
+                bad.append('draft table %s %s: constituencies do not add to the district' % (d, k))
+    for k in N:
+        if sum(int(t[k]) for t in XD.values()) != int(XS[k]):
+            bad.append('draft table state %s' % k)
+    if int(XS['draft']) != S['draft'] or int(XS['asdd_deleted']) != S['left_off'] or int(XS['ps']) != S['polling_stations']:
+        bad.append('draft table: state draft, ASDD or polling stations differ from the press notes')
+    if int(XS['anomalies']) + int(XS['no_mapping']) != S['notices']:
+        bad.append('draft table: anomalies plus no mapping is not the 24,30,608 notices')
     if bad:
         print('FAIL: ' + '; '.join(bad))
         sys.exit(1)
-    print('OK: 70 constituencies, 13 districts and the state agree, row by row and with the press notes')
+    print('OK: 70 constituencies, 13 districts and the state agree, row by row and with the press notes, in both CEO tables')
 
 
 if __name__ == '__main__':

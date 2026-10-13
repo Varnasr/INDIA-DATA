@@ -21,6 +21,15 @@ hosted on the state's S3WaaS site and downloaded with plain HTTPS on
   Form 8 transfers), objections admitted (Form 7 and Form 8 transfers) and the
   final roll, each for men, women and third gender.
 
+- **The CEO's table of the draft by constituency, 14 July 2026.** No press-note
+  number; linked from the ceo.uk.gov.in home page.
+  https://cdnbbsr.s3waas.gov.in/s3cbf8710b43df3f2c1553e649403426df/uploads/2026/07/202607152058741775.pdf
+  Two A3 pages (copy in `sources/ceo_ac_draft_asdd_20260714.pdf`). For each of
+  the 70 constituencies, with district and state totals: polling stations, the
+  draft, electors with anomalies and the nine anomaly categories (each with its
+  share), no mapping, "Electors Marked as ASDD during SIR (Deleted)" and service
+  electors. Downloaded 2026-10-13.
+
 ## Files
 
 - `ac.csv`: the table, one row per constituency, transcribed by hand from the
@@ -30,7 +39,12 @@ hosted on the state's S3WaaS site and downloaded with plain HTTPS on
   Gangolihat (45), Bageshwar (47) and Someshwar (51).
 - `district_printed.csv`: the 13 district totals and the state total as the
   table prints them.
-- `state.csv`: the state figures from both notes.
+- `state.csv`: the state figures from both notes, and the 24,30,608 notices.
+- `ac_draft_asdd.csv`: the table of the draft, read from the PDF's text layer by
+  `parse_ac_draft_asdd.py` (`python3 parse_ac_draft_asdd.py <pdf> <csv>`, needs
+  pdftotext), not typed. Rows for constituencies, districts and the state; the
+  district is printed as `U.S.Nagar` there, and constituency names keep the
+  table's spelling (the build joins on the number).
 - `sources/pn63_table_transcription.txt`: the transcription as first typed,
   kept for the record.
 
@@ -42,6 +56,13 @@ their printed totals; the constituencies add to the printed district totals,
 and the districts to the state total; the state totals equal both press notes;
 and the four reasons add to the names left off. A misread digit breaks at
 least one, and the transcription passed all of them.
+
+The table of the draft is checked too: the constituencies add to every
+printed district total and the districts to the state total in all 14
+columns; its draft equals PN 63's draft in all 70 constituencies; its ASDD
+total equals PN 36's names left off, so the draft plus the names left off is
+the roll of 8 June; and anomalies plus no mapping equal the 24,30,608 notices.
+The nine anomaly categories overlap and are never added.
 
 ## Not used
 
