@@ -48,6 +48,12 @@
       election: { year: 2023, count: 'fall', voters: 'fall_voters', votersWhat: 'fall in the roll, at the seat\'s turnout', turnout: 'turnout' },
       press: true,
       limits: 'The Chief Electoral Officer published the names left off for the state only, so the main constituency figure is the change in the roll over more than two years, which takes in ordinary deaths, moves and new voters. It is a different count from the names left off. A seat whose roll grew shows a negative fall. For 110 constituencies the District Election Officers\' counts of the names left off were printed by Dainik Bhaskar or Amar Ujala, and where they were, this page gives them as press figures.' },
+    maharashtra: { label: 'Maharashtra', faq: 'mh', lead: { count: 'left_off', base: 'before', per: 100, what: 'names left off the draft roll', of: 'the roll before the revision' },
+      map: { winner: 'winner_party', runner_up: 'runner_up_party' },
+      party: { SHS: 'Shiv Sena', SHSUBT: 'Shiv Sena (UBT)', INC: 'Congress', NCPSP: 'NCP (SP)', SP: 'Samajwadi Party' },
+      reasons: [['shifted', 'Shifted for good'], ['absent', 'Untraceable or absent'], ['dead', 'Dead'], ['duplicate', 'Enrolled at another place'], ['other', 'Other']],
+      election: { year: 2024, count: 'left_off', voters: 'at_turnout', votersWhat: 'names left off, at the seat\'s 2024 turnout', turnout: 'turnout_2024' },
+      limits: 'The Chief Electoral Officer published no split of the names left off by sex, at any level. The draft roll by sex is published, and the roll before the revision only as a total.' },
     bihar: { label: 'Bihar', faq: 'bihar', lead: { count: 'total', base: 'electorate_2025', per: 100, what: 'names removed in both phases', of: 'the 2025 election roll', say: 'names were removed in the two phases of the revision', short: 'names removed' },
       map: { winner: 'win2025', runner_up: 'ru2025', margin: 'margin2025' },
       reasons: [['r_shifted', 'Shifted'], ['r_dead', 'Dead'], ['r_absent', 'Absent'], ['r_enrolled', 'Already enrolled']], reasonsOf: 'p1', reasonsWhat: 'the first phase',
@@ -67,6 +73,7 @@
       if (!a || !C) throw new Error('no constituency ' + no + ' in ' + st);
       // a state's own field names for the winner, runner-up and margin
       if (C.map) A.forEach(function (r) { Object.keys(C.map).forEach(function (k) { r[k] = r[C.map[k]]; }); });
+      if (C.party) A.forEach(function (r) { ['winner', 'runner_up'].forEach(function (k) { r[k] = C.party[r[k]] || r[k]; }); });
       var L = C.lead, D = A.filter(function (r) { return r.district === a.district; });
       var seatR = L.per * a[L.count] / a[L.base], distR = rate(D, L), stR = rate(A, L);
       var ranked = A.slice().sort(function (x, y) { return y[L.count] / y[L.base] - x[L.count] / x[L.base]; });

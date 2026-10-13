@@ -87,18 +87,205 @@
   "district": "Ratnagiri",
   "pct": 50.9262
  },
- "press_reasons": {
-  "dead": 3481000,
-  "shifted_absent_other": 15455000,
-  "duplicate": 1763000
+ "reasons": {
+  "dead": 3482231,
+  "shifted": 7676135,
+  "absent": 7541229,
+  "duplicate": 1766502,
+  "other": 222390
  },
- "press_reasons_sum": 20699000,
- "press_shares": {
-  "dead": 16.8172,
-  "shifted_absent_other": 74.6654,
-  "duplicate": 8.5173
+ "reason_shares": {
+  "dead": 16.8317,
+  "shifted": 37.1034,
+  "absent": 36.4513,
+  "duplicate": 8.5386,
+  "other": 1.0749
  },
- "press_source": "https://indianexpress.com/article/cities/mumbai/maharashtra-draft-electoral-rolls-sir-2-crore-voters-excluded-claims-objections-portal-10857667/",
+ "reasons_url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Pressnotemarathi01.09.2026.pdf",
+ "ac_url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/16.9.2026%20IE%20Report%20Response.pdf",
+ "notices": 12224007,
+ "discrepancy": 6248281,
+ "no_mapping": 5975726,
+ "notices_per_100": 15.8413,
+ "acs_n": 288,
+ "ac_max": "Bhiwandi East",
+ "ac_max_v": 49.1022,
+ "ac_min": "Akole (ST)",
+ "ac_min_v": 6.1151,
+ "top_acs": [
+  {
+   "ac": 137,
+   "name": "Bhiwandi East",
+   "district": "Thane",
+   "per_100": 49.1022
+  },
+  {
+   "ac": 187,
+   "name": "Colaba",
+   "district": "Mumbai City",
+   "per_100": 46.9209
+  },
+  {
+   "ac": 211,
+   "name": "Khadakwasala",
+   "district": "Pune",
+   "per_100": 46.5323
+  },
+  {
+   "ac": 132,
+   "name": "Nalasopara",
+   "district": "Palghar",
+   "per_100": 46.3481
+  },
+  {
+   "ac": 210,
+   "name": "Kothrud",
+   "district": "Pune",
+   "per_100": 46.1687
+  },
+  {
+   "ac": 144,
+   "name": "Kalyan Rural",
+   "district": "Thane",
+   "per_100": 46.0515
+  },
+  {
+   "ac": 213,
+   "name": "Hadapsar",
+   "district": "Pune",
+   "per_100": 45.7996
+  },
+  {
+   "ac": 136,
+   "name": "Bhiwandi West",
+   "district": "Thane",
+   "per_100": 44.7211
+  },
+  {
+   "ac": 209,
+   "name": "Shivajinagar",
+   "district": "Pune",
+   "per_100": 44.2512
+  },
+  {
+   "ac": 140,
+   "name": "Ambarnath (SC)",
+   "district": "Thane",
+   "per_100": 44.1673
+  }
+ ],
+ "acs_over_30": 74,
+ "acs_under_10": 54,
+ "over_margin": 220,
+ "turnout_over_margin": 183,
+ "winners": [
+  {
+   "party": "BJP",
+   "seats": 132,
+   "per_100": 22.8952,
+   "vs_district": 0.7818,
+   "over_margin": 94
+  },
+  {
+   "party": "SHS",
+   "seats": 57,
+   "per_100": 20.8252,
+   "vs_district": -0.9492,
+   "over_margin": 43
+  },
+  {
+   "party": "NCP",
+   "seats": 41,
+   "per_100": 15.9698,
+   "vs_district": -3.5363,
+   "over_margin": 28
+  },
+  {
+   "party": "SHSUBT",
+   "seats": 20,
+   "per_100": 22.4833,
+   "vs_district": -1.7629,
+   "over_margin": 20
+  },
+  {
+   "party": "INC",
+   "seats": 16,
+   "per_100": 21.7989,
+   "vs_district": 0.2182,
+   "over_margin": 16
+  },
+  {
+   "party": "NCPSP",
+   "seats": 10,
+   "per_100": 20.4883,
+   "vs_district": -0.0251,
+   "over_margin": 10
+  },
+  {
+   "party": "IND",
+   "seats": 2,
+   "per_100": 11.4719,
+   "vs_district": -11.0081,
+   "over_margin": 2
+  },
+  {
+   "party": "JSS",
+   "seats": 2,
+   "per_100": 10.4057,
+   "vs_district": -3.0594,
+   "over_margin": 0
+  },
+  {
+   "party": "SP",
+   "seats": 2,
+   "per_100": 45.841,
+   "vs_district": 9.5418,
+   "over_margin": 2
+  },
+  {
+   "party": "AIMIM",
+   "seats": 1,
+   "per_100": 23.4598,
+   "vs_district": 3.3246,
+   "over_margin": 1
+  },
+  {
+   "party": "CPI(M)",
+   "seats": 1,
+   "per_100": 9.8399,
+   "vs_district": -18.3038,
+   "over_margin": 1
+  },
+  {
+   "party": "PWPI",
+   "seats": 1,
+   "per_100": 9.9579,
+   "vs_district": -5.8415,
+   "over_margin": 1
+  },
+  {
+   "party": "RSHYVSWBHM",
+   "seats": 1,
+   "per_100": 17.025,
+   "vs_district": 3.1473,
+   "over_margin": 0
+  },
+  {
+   "party": "RSPS",
+   "seats": 1,
+   "per_100": 9.0287,
+   "vs_district": -2.667,
+   "over_margin": 1
+  },
+  {
+   "party": "RSVA",
+   "seats": 1,
+   "per_100": 13.882,
+   "vs_district": 0.4936,
+   "over_margin": 1
+  }
+ ],
+ "rho_notices_left": 0.747,
  "draft_date": "2026-08-31",
  "claims_to_note": "2026-09-30",
  "final_due_note": "2026-11-04",

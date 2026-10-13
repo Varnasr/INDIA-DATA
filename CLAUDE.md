@@ -725,40 +725,45 @@ needs pypdf) and writes `summary.json`, `constituencies.json`,
 ## Maharashtra
 
 `scripts/build_maharashtra.py` reads `data/maharashtra/raw` (sources and checks
-in `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
-`districts.json` and `districts.csv`; `check_data.py` runs it with `--check`.
+in `SOURCES.md` there; `check_raw.py` asserts the press note's annexures) and
+writes `summary.json`, `districts.json`, `constituencies.json` and the CSVs;
+`check_data.py` runs it with `--check`.
 
-- **Districts only, from the CEO's press note of 31 August 2026.** Annexure-1
-  is the draft by district and sex, Annexure-2 the enumeration forms not
-  collected (the names left off). The roll before is published for the state
-  only, so a district's roll before is its draft plus its names left off; the
-  build fails unless the districts add up to 9,78,54,049 before, 7,71,65,562
-  draft (and by sex) and 2,06,88,487 left off.
-- **The CEO's list of 38 constituencies** (`raw/ac_top38.csv`, `top38.csv`,
-  `summary.json` `top38`) is the only table by AC. Its own title says the CEO
-  chose the seats leaving out those a newspaper had called Muslim-heavy. The
-  page quotes the title in full and shows the table as printed, in a fold; it
-  is never mapped, ranked against other seats or added to anything.
-- **No reasons, no sex of the names left off, nothing else by AC.** The note names
-  five reasons without a count. The state reasons on the All India row are
-  press figures in lakh (The Indian Express), rounded and 10,513 over the
-  total; the pages show them as press figures, never mixed into the CEO's
-  counts. The women section shows women's share of each district's draft and
-  says the rest cannot be counted.
+- **Every one of the 288 constituencies, from the CEO's own tables.** The
+  statement enclosed with the press note of 16 September 2026 (`ac_roll.csv`,
+  roll before and names left off) and the tables of 1 September 2026
+  (`ac_reasons.csv`, the five reasons; `ac_draft_sex.csv`, the draft by sex),
+  with the reasons and the notices by district beside them
+  (`district_reasons.csv`, `district_notices.csv`, the release of 4 September).
+  The build fails unless every constituency adds up within itself and to its
+  district in every column, and the districts to the press note of 31 August
+  (9,78,54,049 before, 7,71,65,562 draft, 2,06,88,487 left off). The 38 seats
+  of the CEO's list of 30 September agree with the full table.
+- **The state's reasons are exact**: 34,82,231 dead, 76,76,135 shifted,
+  75,41,229 absent, 17,66,502 enrolled elsewhere, 2,22,390 other, adding up
+  exactly; the All India row carries them and the build asserts it.
+- **No split by sex of the names left off, at any level.** The draft is by sex;
+  the roll before is a total.
 - **The city is five districts**: Mumbai City, Mumbai Suburban, Thane, Palghar
   and Pune (`CITY` in the build), 29.9% of the roll and 48.4% of the names
   left off. Keep the comparison computed.
+- **Against the 2024 margins** (`data/india/raw/assembly/maharashtra_2024.csv`):
+  more names left off than the margin in 220 of 288 seats, 183 at turnout.
+  The party comparison carries `vs_district` and is by party, never by
+  alliance; set against their districts the six main parties run from -3.5 to
+  +0.8, so say most of the difference is where each party's seats are.
 - The note keeps three old district names (Aurangabad, Ahmednagar,
-  Osmanabad); `now` in `districts.json` carries the new ones for the finder
-  and the search.
-- The dates are read from `process.json`: the Commission's letter of
-  26.09.2026 moved claims to 12 October and the final roll to 16 November, and the release of 12.10.2026 moved claims again to 26 October with notices to 10 November
-  2026, later than the note's own dates. Rebuild from the final roll, by
-  district and sex, when it is out.
-- The map is by district (`data/geo/maharashtra.json`, see
-  `data/geo/SOURCES.md`), with a Mumbai inset on wide screens only (on a
-  phone it would cover the south-east). Notices are read from
-  `data/india/notices.json` and labelled press.
+  Osmanabad); `now` in `districts.json` carries the new ones. AC 129 is
+  printed "Vekramgrth" and the build uses the Commission's Vikramgad.
+- The dates are read from `process.json` (the Commission's letters of 26
+  September and 12 October 2026): claims to 26 October, notices to 10
+  November, the final roll on 16 November. Rebuild from it when it is out.
+- The overview's map is by constituency (`data/geo/maharashtra_ac.json`, cut
+  from DataMeet's assembly map, every number checked against its name) with a
+  Mumbai inset on wide screens only; the district pages keep
+  `data/geo/maharashtra.json`. Every constituency has a page (`seat.js`
+  `CFG.maharashtra`, party codes spelt out in `party`), and the district pages
+  list their constituencies.
 - English only, like Rajasthan, Uttar Pradesh and Delhi, with the same
   translated note.
 
@@ -934,10 +939,10 @@ added across states, and only Uttarakhand has gross additions and deletions by
 constituency. Everywhere else the change from the draft is net, counts new
 voters too, and is never called names restored. English only.
 
-**A page for every constituency** (`<state>/seat/<n>/`, 1,433 of them) in
-the eight states with constituency tables: Tamil Nadu, West Bengal, Kerala,
+**A page for every constituency** (`<state>/seat/<n>/`, 1,721 of them) in
+the nine states with constituency tables: Tamil Nadu, West Bengal, Kerala,
 Delhi, Uttarakhand, Gujarat (press images of the CEO's tables), Rajasthan (the
-change in the roll since 2023) and Bihar (both phases, with a link to the
+change in the roll since 2023), Maharashtra and Bihar (both phases, with a link to the
 seat's booths in the explorer). `scripts/make_seat_pages.py` writes a
 three-line source per seat (its state and number in `data-seat-state` and
 `data-seat-ac` on `<body>`, which `build_site.py` carries from the page's

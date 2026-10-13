@@ -665,7 +665,16 @@
   "draft_men": "Men on the draft roll.",
   "draft_women": "Women on the draft roll.",
   "draft_third_gender": "Third-gender electors on the draft roll.",
-  "women_pct_of_draft": "Women as a percentage of the draft roll."
+  "women_pct_of_draft": "Women as a percentage of the draft roll.",
+  "dead": "Names left off entered as dead, from the CEO's tables of 1 September 2026. A reason is what the officer wrote down, and nobody checked it.",
+  "shifted": "Names left off entered as permanently shifted.",
+  "absent": "Names left off entered as untraceable or absent.",
+  "enrolled_elsewhere": "Names left off entered as already enrolled at another place.",
+  "other": "Names left off entered under another reason.",
+  "notices_discrepancy": "Electors on the draft with an anomaly in their entry, in line for a notice, from the CEO's release of 4 September 2026.",
+  "notices_no_mapping": "Electors on the draft with no mapping to the last intensive revision, in line for a notice.",
+  "notices": "The two lists together, the electors in line for a notice.",
+  "notices_per_100_draft": "Notices per 100 electors on the draft roll."
  },
  "data/manipur/tables.csv": {
   "table": "Which part of the file the row belongs to, where state marks one of Manipur's headline figures and every other value names a published table, here districts (Every district, the final roll by sex), constituencies (Every constituency, from the roll before the revision to the final roll of 6 September 2026).",
@@ -1184,5 +1193,29 @@
   "no_mapping": "Electors on the draft whose entry could not be matched to the 2002 roll of the last intensive revision, printed for Jaipur and Jodhpur only.",
   "newspaper": "The newspaper that printed the figures, Dainik Bhaskar or Amar Ujala.",
   "source": "The address of the article the figures were read from."
+ },
+ "data/maharashtra/constituencies.csv": {
+  "ac": "The assembly constituency number in Maharashtra, from 1 to 288.",
+  "constituency": "The constituency's name as the Chief Electoral Officer's tables print it, with Vikramgad spelt as the Commission does.",
+  "district": "The district the constituency lies in, as the Election Commission lists it.",
+  "roll_before": "Electors on the roll before the revision, from the CEO's statement of 16 September 2026.",
+  "draft_roll_31_aug_2026": "Electors on the draft roll of 31 August 2026.",
+  "left_off": "Electors whose enumeration form was not collected, so their names were left off the draft.",
+  "left_off_per_100": "Names left off per 100 on the roll before the revision.",
+  "dead": "Names left off entered as dead. A reason is what the officer wrote down, and nobody checked it.",
+  "shifted": "Names left off entered as permanently shifted.",
+  "absent": "Names left off entered as untraceable or absent.",
+  "enrolled_elsewhere": "Names left off entered as already enrolled at another place.",
+  "other": "Names left off entered under another reason.",
+  "draft_men": "Men on the draft roll.",
+  "draft_women": "Women on the draft roll.",
+  "women_pct_of_draft": "Women as a share of the draft roll.",
+  "winner_2024": "The party that won the seat at the Assembly election of November 2024, as the Election Commission codes it (SHS is Shiv Sena, SHSUBT Shiv Sena (UBT), NCPSP NCP (Sharadchandra Pawar)).",
+  "runner_up_2024": "The runner-up's party in 2024.",
+  "margin_2024": "The winner's votes less the runner-up's in 2024.",
+  "turnout_2024": "Votes polled as a share of electors in 2024.",
+  "left_off_over_margin": "True when more names were left off than the 2024 margin. That makes them large enough to decide the seat, never that they did.",
+  "left_off_at_turnout_over_margin": "True when the names left off, scaled down by the seat's 2024 turnout, exceed the margin.",
+  "per_100_less_district": "The constituency's names left off per 100 less its district's."
  }
 }
