@@ -952,6 +952,14 @@ correlation for each; a circumstance is never named as a cause. Finders
 (`districtPages: true`) and search link to them; `check_data.py` runs
 `--check`. English only, skipped by `i18n_collect.mjs` like the seat pages.
 
+**What's New** (`updates/`, in every footer, in the search and linked from
+the front page's "Who made it") lists what was added to the site, by date,
+from `data/updates.json`, which is curated by hand: add an entry when
+something a reader can use is published. **Additions only.** A changed figure
+or finding goes on `corrections/`, never here, so the rule that no public page
+refers to earlier versions still holds; the two pages link to each other.
+English only.
+
 **Share a list with us** (`share/`, on the front page's place, in every
 footer, in the search and in a short section on the front page) is the one
 form on the site: a Netlify form named `share-data` (honeypot

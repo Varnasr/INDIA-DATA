@@ -306,14 +306,14 @@ def shell(out, meta, content, scripts):
         fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
     fab = '<div class="fabs">%s</div>' % fab if fab else ''
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Removed from the Roll? What to Do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%ssupport/">Support Our Work</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%scorrections/">Corrections</a>'
-              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, CFG['email'], CFG['email']))
+              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Removed from the Roll? What to Do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%ssupport/">Support Our Work</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%supdates/">What\'s New</a> · <a href="%scorrections/">Corrections</a>'
+              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, root, CFG['email'], CFG['email']))
     # On a phone the header's Downloads button is inside the menu, and the
     # footer link opened the downloads page at its top, where the first button
     # is the zip of every table. So every page of a place with a workbook
     # carries its own files at the foot of the page: the workbook and the
     # CSVs the pages draw, each one tap away.
-    wb = dl_book(book) if book and not here.startswith(('downloads/', 'share/', 'terms/', 'corrections/', 'help/')) and place['id'] != 'home' else None
+    wb = dl_book(book) if book and not here.startswith(('downloads/', 'share/', 'terms/', 'corrections/', 'updates/', 'help/')) and place['id'] != 'home' else None
     if wb:
         # the shared workbook of the twenty smaller places: only this place's own table
         own = 'data/%s/' % out.split('/')[0]
@@ -455,7 +455,7 @@ def search_index():
             if h not in seen:
                 pages.append([p['id'], label, h])
     # the front page's own pages, which no tab row lists
-    pages += [['home', 'Removed from the Roll? What to Do', 'help/', 'check my name removed deleted left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'Share a List with Us', 'share/'], ['home', 'Support Our Work', 'support/', 'donate contribute upi support fund'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/']]
+    pages += [['home', 'Removed from the Roll? What to Do', 'help/', 'check my name removed deleted left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'Share a List with Us', 'share/'], ['home', 'Support Our Work', 'support/', 'donate contribute upi support fund'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/'], ['home', "What's New", 'updates/', 'new latest added changelog timeline updates']]
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),

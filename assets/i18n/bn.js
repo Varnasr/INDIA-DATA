@@ -7,5 +7,9 @@ window.SIR_DICT = {" and ": " ও ", " to ": " থেকে ", "\"Already enroll
 "Women's share of the January 2025 roll and of the fall from it to the draft, by district": "জানুয়ারি 2025-এর তালিকায় এবং তার থেকে খসড়া পর্যন্ত হ্রাসে নারীর অংশ, জেলাভিত্তিক",
 "Women's share of the fall to the draft, %": "খসড়া পর্যন্ত হ্রাসে নারীর অংশ, %",
 "Open this constituency's own page": "এই কেন্দ্রের নিজস্ব পাতা খুলুন",
-"Open this district's own page": "এই জেলার নিজস্ব পাতা খুলুন"
+"Open this district's own page": "এই জেলার নিজস্ব পাতা খুলুন",
+"What has been added to Off the Roll, by date: new states, constituency and district pages, sources and tables.": "Off the Roll-এ কী যোগ হয়েছে, তারিখ অনুযায়ী: নতুন রাজ্য, কেন্দ্র ও জেলার পাতা, উৎস ও সারণি।",
+"What has been added, and when, is on <a href=\"updates/\">What's New</a>. Every correction to a figure or finding is on <a href=\"corrections/\">Corrections</a>.": "কী এবং কবে যোগ হয়েছে, তা <a href=\"updates/\">নতুন কী</a> পাতায় আছে। কোনো সংখ্যা বা সিদ্ধান্তে প্রতিটি সংশোধন <a href=\"corrections/\">সংশোধন</a> পাতায় আছে।",
+"What's New": "নতুন কী",
+"What's New: SIR analysis for India": "নতুন কী: ভারতের জন্য SIR বিশ্লেষণ"
 };
