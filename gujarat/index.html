@@ -240,7 +240,7 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/distr
       '<p class="note">Its constituencies</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
     pick: function (d) { sel(d.id); },
     share: function (d) { return d.district + ' district, Gujarat. The SIR draft roll of 19 December 2025 left off ' + n(d.removed) + ' names here, ' + d1(d.per_100) + ' of every 100 electors on the roll before the revision. ' + n(d.dead) + ' were entered as dead. These are the Chief Electoral Officer\'s tables as published in the press. A reason is what the officer wrote down, and nobody checked it.'; } };
-  var F = SIR.finder('finder', { rows: A, more: [DSET], prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district', key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+  var F = SIR.finder('finder', { seatPages: true, rows: A, more: [DSET], prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district', key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
     pick: function (a) { sel(byName[a.district].id); },
     card: function (a) { return SIR.facts([['Roll before the revision', n(a.before)], ['Left off the draft', n(a.removed)], ['Per 100 electors', d1(a.per_100)],
       ['Against its district, per 100', (a.vs_district > 0 ? '+' : '') + d1(a.vs_district)],

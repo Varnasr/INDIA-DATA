@@ -17,7 +17,8 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # state folder, place id, label
 STATES = [('tamilnadu', 'tn', 'Tamil Nadu 2026'), ('westbengal', 'wb', 'West Bengal 2026'), ('kerala', 'kl', 'Kerala 2026'),
-          ('delhi', 'dl', 'Delhi 2026'), ('uttarakhand', 'uk', 'Uttarakhand 2026')]
+          ('delhi', 'dl', 'Delhi 2026'), ('uttarakhand', 'uk', 'Uttarakhand 2026'), ('gujarat', 'gj', 'Gujarat 2026'),
+          ('rajasthan', 'rj', 'Rajasthan 2026'), ('bihar', 'bihar', 'Bihar 2025')]
 
 PAGE = '''<!--page {meta} -->
 <main id="main">
@@ -70,7 +71,7 @@ def pages():
         A = json.load(open(os.path.join(ROOT, 'data', folder, 'constituencies.json'), encoding='utf-8'))
         for a in A:
             meta = {'title': '%s (%d), %s' % (a['name'], a['ac'], label),
-                    'description': 'The SIR in %s, assembly constituency %d of %s, in %s district: the names left off, set against its district and the state, from the Chief Electoral Officer\'s published tables.' % (a['name'], a['ac'], label.rsplit(' ', 1)[0], a['district']),
+                    'description': 'The SIR in %s, assembly constituency %d of %s, in %s district: how many names it lost, set against its district and the state, from the published tables.' % (a['name'], a['ac'], label.rsplit(' ', 1)[0], a['district']),
                     'place': pid, 'body': {'data-seat-state': folder, 'data-seat-ac': str(a['ac'])}}
             out[os.path.join('site', 'pages', folder, 'seat', str(a['ac']), 'index.html')] = PAGE.format(
                 meta=json.dumps(meta, ensure_ascii=False), name='%s (%d)' % (a['name'], a['ac']))

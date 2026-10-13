@@ -38,7 +38,21 @@
     uttarakhand: { label: 'Uttarakhand', faq: 'uk', lead: { count: 'left_off', base: 'roll_before', per: 100, what: 'names left off the draft roll', of: 'the roll before the revision' },
       notices: { count: 'notices', base: 'draft' },
       claims: { added: 'claims', removed: 'objections', draft: 'draft', final: 'final', womenRemoved: 'women_objections_pct', womenDraft: 'women_draft_pct' },
-      limits: 'The reasons for leaving a name off, and the split by sex of the names left off, were published for Uttarakhand as a whole only.' }
+      limits: 'The reasons for leaving a name off, and the split by sex of the names left off, were published for Uttarakhand as a whole only.' },
+    gujarat: { label: 'Gujarat', faq: 'gj', lead: { count: 'removed', base: 'before', per: 100, what: 'names left off the draft roll', of: 'the roll before the revision' },
+      map: { winner: 'winner_party', runner_up: 'runner_up_party' },
+      reasons: [['shifted', 'Shifted for good'], ['dead', 'Dead'], ['absent', 'Untraceable or absent'], ['enrolled_elsewhere', 'Already enrolled elsewhere'], ['other', 'Other']],
+      election: { year: 2022, count: 'removed', voters: 'at_turnout', votersWhat: 'names not entered as dead, at the seat\'s 2022 turnout', turnout: 'turnout_2022' },
+      limits: 'The tables are the Chief Electoral Officer\'s as published in the press. Nothing is split by sex or age, and the final roll is by district only.' },
+    rajasthan: { label: 'Rajasthan', faq: 'rj', lead: { count: 'fall', base: 'roll_2023', per: 100, what: 'fall in the roll from the 2023 election roll to the final roll', of: 'the 2023 roll', to: 'the final roll' },
+      election: { year: 2023, count: 'fall', voters: 'fall_voters', votersWhat: 'fall in the roll, at the seat\'s turnout', turnout: 'turnout' },
+      limits: 'Rajasthan published its names left off for the state only, so every constituency figure is the change in the roll over more than two years, which takes in ordinary deaths, moves and new voters. It is a different count from the names left off. A seat whose roll grew shows a negative fall.' },
+    bihar: { label: 'Bihar', faq: 'bihar', lead: { count: 'total', base: 'electorate_2025', per: 100, what: 'names removed in both phases', of: 'the 2025 election roll', say: 'names were removed in the two phases of the revision', short: 'names removed' },
+      map: { winner: 'win2025', runner_up: 'ru2025', margin: 'margin2025' },
+      reasons: [['r_shifted', 'Shifted'], ['r_dead', 'Dead'], ['r_absent', 'Absent'], ['r_enrolled', 'Already enrolled']], reasonsOf: 'p1', reasonsWhat: 'the first phase',
+      election: { year: 2025, count: 'total', turnout: 'turnout2025', prev: 'win2020', prevYear: 2020 },
+      booths: true,
+      limits: 'Reasons are counted for the first phase only, from the lists. Every rate is per 100 on the 2025 election roll.' }
   };
 
   function sum(rows, k) { return rows.reduce(function (t, r) { return t + (r[k] || 0); }, 0); }
@@ -50,6 +64,8 @@
     return SIR.json('data/' + st + '/constituencies.json').then(function (A) {
       var a = A.filter(function (r) { return r.ac === no; })[0];
       if (!a || !C) throw new Error('no constituency ' + no + ' in ' + st);
+      // a state's own field names for the winner, runner-up and margin
+      if (C.map) A.forEach(function (r) { Object.keys(C.map).forEach(function (k) { r[k] = r[C.map[k]]; }); });
       var L = C.lead, D = A.filter(function (r) { return r.district === a.district; });
       var seatR = L.per * a[L.count] / a[L.base], distR = rate(D, L), stR = rate(A, L);
       var ranked = A.slice().sort(function (x, y) { return y[L.count] / y[L.base] - x[L.count] / x[L.base]; });
@@ -64,16 +80,17 @@
       head.innerHTML = 'Assembly constituency ' + a.ac + ' of ' + A.length + ' in ' + C.label + ', in ' + SIR.esc(a.district) + ' district. Measured by the ' + L.what + ', per ' + L.per + ' on ' + L.of + '.';
 
       var pts = [];
-      pts.push('In ' + SIR.esc(a.name) + ' ' + (falls ? 'the roll fell by ' + n(a[L.count]) + ' from ' + L.of + ' to the draft' : n(a[L.count]) + ' names were left off the draft roll') + ', ' + d1(seatR) + ' of every ' + L.per + ' on ' + L.of + '.');
+      pts.push('In ' + SIR.esc(a.name) + ' ' + (falls ? 'the roll fell by ' + n(a[L.count]) + ' from ' + L.of + ' to ' + (L.to || 'the draft') : n(a[L.count]) + ' ' + (L.say || 'names were left off the draft roll')) + ', ' + d1(seatR) + ' of every ' + L.per + ' on ' + L.of + '.');
       pts.push('That is ' + cmp(seatR, distR) + ' ' + SIR.esc(a.district) + ' district (' + d1(distR) + ') and ' + cmp(seatR, stR) + ' ' + C.label + ' (' + d1(stR) + '). It ranks ' + rank + ' of ' + A.length + ' in the state, where 1 ' + (falls ? 'fell' : 'lost') + ' the most, and ' + drank + ' of ' + D.length + ' in its district.');
       if (C.reasons) {
         var top = C.reasons.slice().sort(function (x, y) { return a[y[0]] - a[x[0]]; })[0];
-        pts.push(pct(100 * a[top[0]] / a[L.count]) + ' of the names left off were entered as ' + top[1].toLowerCase() + '. A reason is ' + OFFICER + '.');
+        var RO = C.reasonsOf || L.count;
+        pts.push(pct(100 * a[top[0]] / a[RO]) + ' of the names ' + (C.reasonsWhat ? 'removed in ' + C.reasonsWhat : 'left off') + ' were entered as ' + top[1].toLowerCase() + '. A reason is ' + OFFICER + '.');
       }
       if (C.notices) pts.push(n(a.notices) + ' electors on its draft, ' + d1(100 * a.notices / a.draft) + ' of every 100, were in line for a notice to prove their entry, against ' + d1(100 * sum(A, 'notices') / sum(A, 'draft')) + ' in the state.');
       if (C.election) {
         var E = C.election;
-        var big = a[E.count] > a.margin, what = falls ? 'The fall in the roll' : 'The names left off';
+        var big = a[E.count] > a.margin, what = falls ? 'The fall in the roll' : 'The ' + (L.short || 'names left off');
         pts.push('The ' + E.year + ' winner was ' + SIR.esc(a.winner) + ', by ' + n(a.margin) + ' votes over ' + SIR.esc(a.runner_up) + '. ' + what + (big
           ? (falls ? ' is larger than that margin' : ' outnumber that margin') + ', large enough to decide the seat, which says nothing about whether it did.'
           : falls ? ' is smaller than that margin. The names removed may be more than the fall, because the fall nets out names added.'
@@ -98,8 +115,8 @@
       var more = [];
       if (C.reasons) {
         VIZ.lollipop('vReasons', { label: a.name + ': names left off by the reason entered', axis: 'Names',
-          rows: C.reasons.map(function (r) { return { name: r[1], v: a[r[0]], text: n(a[r[0]]) + ' (' + pct(100 * a[r[0]] / a[L.count]) + ')', tok: '--fill-navy', hi: true }; }) });
-        document.getElementById('fReasons').innerHTML = 'Each name left off carries one reason. A reason is ' + OFFICER + '. In the state as a whole the shares were ' + C.reasons.map(function (r) { return pct(100 * sum(A, r[0]) / sum(A, L.count)) + ' ' + r[1].toLowerCase(); }).join(', ').replace(/, ([^,]*)$/, ' and $1') + '.';
+          rows: C.reasons.map(function (r) { return { name: r[1], v: a[r[0]], text: n(a[r[0]]) + ' (' + pct(100 * a[r[0]] / a[C.reasonsOf || L.count]) + ')', tok: '--fill-navy', hi: true }; }) });
+        document.getElementById('fReasons').innerHTML = (C.reasonsWhat ? 'Reasons were recorded for ' + C.reasonsWhat + '. ' : '') + 'Each name carries one reason. A reason is ' + OFFICER + '. In the state as a whole the shares were ' + C.reasons.map(function (r) { return pct(100 * sum(A, r[0]) / sum(A, C.reasonsOf || L.count)) + ' ' + r[1].toLowerCase(); }).join(', ').replace(/, ([^,]*)$/, ' and $1') + '.';
       } else document.getElementById('sReasons').hidden = true;
 
       var W = C.women;
@@ -118,14 +135,14 @@
 
       var E2 = C.election;
       if (E2) {
-        var rows = [['Winning margin, ' + E2.year, a.margin, '--fill-navy'], [falls ? 'Fall in the roll' : 'Names left off', a[E2.count], '--fill-red']];
+        var rows = [['Winning margin, ' + E2.year, a.margin, '--fill-navy'], [falls ? 'Fall in the roll' : (L.short || 'names left off').replace(/^./, function (c) { return c.toUpperCase(); }), a[E2.count], '--fill-red']];
         if (E2.voters && a[E2.voters] != null) rows.push([E2.votersWhat.charAt(0).toUpperCase() + E2.votersWhat.slice(1), a[E2.voters], '--fill-red']);
-        VIZ.lollipop('vElection', { label: a.name + ': the ' + E2.year + ' winning margin against the ' + (falls ? 'fall in the roll' : 'names left off'), axis: 'Votes or names',
+        VIZ.lollipop('vElection', { label: a.name + ': the ' + E2.year + ' winning margin against the ' + (falls ? 'fall in the roll' : (L.short || 'names left off')), axis: 'Votes or names',
           rows: rows.map(function (r) { return { name: r[0], v: Math.max(r[1], 0), text: n(r[1]), tok: r[2], hi: true }; }) });
         var over = A.filter(function (r) { return r[E2.count] > r.margin; }).length;
         document.getElementById('fElection').innerHTML = '<b>' + SIR.esc(a.winner) + ' won ' + SIR.esc(a.name) + ' in ' + E2.year + ' by ' + n(a.margin) + ' votes' + (E2.turnout && a[E2.turnout] ? ', on a turnout of ' + d1(a[E2.turnout]) + ' per cent' : '') + '.</b> ' +
-          (E2.prev && a[E2.prev] ? 'In 2021 the seat was won by ' + SIR.esc(a[E2.prev]) + '. ' : '') +
-          'Across ' + C.label + ', the ' + (falls ? 'fall in the roll is larger than' : 'names left off outnumber') + ' the margin in ' + over + ' of ' + A.length + ' seats. Larger than the margin means large enough to decide a seat, never that it did, and the lists cannot show how anyone left off would have voted.';
+          (E2.prev && a[E2.prev] ? 'In ' + (E2.prevYear || 2021) + ' the seat was won by ' + SIR.esc(a[E2.prev]) + '. ' : '') +
+          'Across ' + C.label + ', the ' + (falls ? 'fall in the roll is larger than' : (L.short || 'names left off') + ' outnumber') + ' the margin in ' + over + ' of ' + A.length + ' seats. Larger than the margin means large enough to decide a seat, never that it did, and the lists cannot show how anyone left off would have voted.';
       } else document.getElementById('sElection').hidden = true;
 
       if (C.claims) {
@@ -138,7 +155,7 @@
         document.getElementById('fAfter').innerHTML = 'The final roll is ' + n(a.final - a.draft) + ' larger than the draft. That rise counts people enrolling for the first time as well as names put back, so it is the most that could have been put back.';
       } else document.getElementById('sAfter').hidden = true;
 
-      document.getElementById('seatLinks').innerHTML = '<a class="btn" href="' + stPage + '#ac-' + a.ac + '">' + C.label + ', with this constituency on the map</a> <a class="btn" href="' + stPage + 'method/">Sources and method</a> <a class="btn" href="' + root + 'india/constituencies/">Find another constituency</a>';
+      document.getElementById('seatLinks').innerHTML = (C.booths ? '<a class="btn" href="' + stPage + 'explorer/#ac' + ('00' + a.ac).slice(-3) + '">Its polling booths</a> ' : '') + '<a class="btn" href="' + stPage + (st === 'bihar' ? 'results/' : '') + '#ac-' + a.ac + '">' + C.label + ', with this constituency on the map</a> <a class="btn" href="' + stPage + 'method/">Sources and method</a> <a class="btn" href="' + root + 'india/constituencies/">Find another constituency</a>';
       document.getElementById('pageFaq').innerHTML = '<div class="qa"><h3>Where do these figures come from?</h3><p>From the same tables as the <a href="' + stPage + '">' + C.label + '</a> pages, which give every source on their method page. Every figure here is worked out from them when the page loads.</p></div>' +
         '<div class="qa"><h3>Can this page say who was left off, or why?</h3><p>No. The site publishes counts only, never a name. ' + (C.reasons ? 'A reason on the list is ' + OFFICER + '. ' : '') + 'Nothing here says whether any person should have been on the roll.</p></div>';
       SIR.tools();

@@ -38,7 +38,7 @@ for _pl in CFG['places']:
             raise SystemExit('FAIL - %s lists %s twice in %s' % (_pl['id'], ', '.join(_dup), _key))
 PLACES = {p['id']: p for p in CFG['places']}
 # places with a page for every constituency (scripts/make_seat_pages.py)
-SEAT_PAGES = {'tn': 'tamilnadu', 'wb': 'westbengal', 'kl': 'kerala', 'dl': 'delhi', 'uk': 'uttarakhand'}
+SEAT_PAGES = {'tn': 'tamilnadu', 'wb': 'westbengal', 'kl': 'kerala', 'dl': 'delhi', 'uk': 'uttarakhand', 'gj': 'gujarat', 'rj': 'rajasthan', 'bihar': 'bihar'}
 # Every page's <body> carries its place's class. Delhi's was once "dl", which
 # is also the class of the header menus, so the print stylesheet's .dl{display:
 # none} hid the whole of every Delhi page on paper. A place class must not be a

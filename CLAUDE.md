@@ -918,9 +918,11 @@ added across states, and only Uttarakhand has gross additions and deletions by
 constituency. Everywhere else the change from the draft is net, counts new
 voters too, and is never called names restored. English only.
 
-**A page for every constituency** (`<state>/seat/<n>/`, 808 of them) in the
-five states whose seat tables are the CEO's own: Tamil Nadu, West Bengal,
-Kerala, Delhi and Uttarakhand. `scripts/make_seat_pages.py` writes a
+**A page for every constituency** (`<state>/seat/<n>/`, 1,433 of them) in
+the eight states with constituency tables: Tamil Nadu, West Bengal, Kerala,
+Delhi, Uttarakhand, Gujarat (press images of the CEO's tables), Rajasthan (the
+change in the roll since 2023) and Bihar (both phases, with a link to the
+seat's booths in the explorer). `scripts/make_seat_pages.py` writes a
 three-line source per seat (its state and number in `data-seat-state` and
 `data-seat-ac` on `<body>`, which `build_site.py` carries from the page's
 `body` meta) and `assets/seat.js` draws everything from
@@ -933,8 +935,11 @@ state's measure is never compared with another's. The pages are English only
 (`data-no-i18n`); `i18n_collect.mjs` skips them, because their shell is every
 page's shell. Search, the All India finder and each state's finder card
 (`seatPages: true`) link to them. `check_data.py` runs `make_seat_pages.py
---check`. Next: Bihar, Gujarat, Rajasthan and Hyderabad, each needing a line in
-`STATES` and an entry in `CFG`.
+--check`. A new state needs a line in `STATES`, an entry in `CFG` (with `map`
+for its own winner, runner-up and margin field names, and `say`, `short` and
+`to` where its count is not the names left off the draft), `SEAT_PAGES` in
+`build_site.py`, and `seatPages` on its finder. Hyderabad's five seats are
+not included: the part explorer covers them.
 
 **Share a list with us** (`share/`, on the front page's place, in every
 footer, in the search and in a short section on the front page) is the one
