@@ -39,3 +39,7 @@ are consistent with the glossary.
   Commission's practice) is a question for the English page, not the translation.
 - `ইলেক্টোরাল রেজিস্ট্রেশন অফিসার` carries `(ERO)` in most strings and not in
   the 15-day appeal step. Same term either way, so not changed.
+
+## 2026-10-13: three Uttar Pradesh organisations
+
+The descriptions of the three Jamiat Ulama-i-Hind units in Uttar Pradesh (Muzaffarnagar, Afzalgarh, Aligarh) were translated in one pass and have not yet had a second reading. Organisation names, BLO and SIR are kept as in English.

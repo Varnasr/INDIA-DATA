@@ -157,13 +157,46 @@ by exact primary figures: 2,88,74,067; dead 46,23,796; shifted, absent or other
 25,47,207. The sum is exact, so the split is complete. Not changed here: that
 file is outside this folder.
 
+## press_ceo.csv
+
+The Chief Electoral Officer's figures as the press carried them, one row each,
+with the verbatim sentence they come from. Fetched 2026-10-13.
+
+- Hindustan Times, 18.01.2026 (CEO Navdeep Rinwa):
+  https://www.hindustantimes.com/cities/lucknow-news/155-million-vs-13-4-million-names-of-more-women-than-men-deleted-in-uttar-pradesh-draft-electoral-rolls-101768679003877.html
+  Names left off by sex, rounded (1.55 crore women, 1.34 crore men); women per
+  1,000 men on the roll (877 in 2025, 824 on the draft); women over 25 at their
+  father's address (71.18 lakh checked, 42.15 lakh left off, 29.4 lakh kept,
+  which add to 71.55 lakh, so the parts and the total disagree by 37,000);
+  urban and rural rolls before and at the draft (4.16 and 2.99 crore urban,
+  11.28 and 9.56 crore rural); notices 3.26 crore (1.04 crore not linked to
+  2003, 2.22 crore with discrepancies, which add up); 493 EROs and 8,751 AEROs
+  for the hearings.
+- **A misprint, kept out.** The report prints the rural fall as "1.27 crore".
+  Its own rolls give 1.72 crore, and 1.72 is 15.23% of 11.28, the percentage
+  it prints beside it, so 1.27 is a transposition. The build uses the
+  difference of the rolls.
+- The Hindu, 07.03.2026, hearings held for about 2.80 crore by that date.
+
+So "No split by sex of the names left off" below is no longer true for the
+state. Below the state there is still none.
+
+`scripts/build_uttarpradesh.py` reads these and writes `analysis.json`: the
+split by sex and area, the notices per officer (an average over the 66 days
+from 21.01 to 27.03.2026, never a hearing's length), the removals after the
+draft by reason (3,28,960 shifted is what the itemised figures leave of
+8,15,996), the district names left off spread over each constituency by its
+2022 electors (`data/india/raw/assembly/uttarpradesh_2022.csv`, the ECI's
+statistical report) against its 2022 margin, written to `seats.csv`, and the
+district circumstances read from the factors and urban pages' own files.
+
 ## Not found
 
 - Any table by assembly constituency (roll before, draft, ASD, final). See
   above.
 - The roll of 27.10.2025 by sex, at any level.
-- The names left off by sex or age, at any level. No figure was found even for
-  the state.
+- The names left off by sex below the state, or by age at any level. The
+  state split by sex is the CEO's rounded figure in the press (above).
 - The final roll by district or AC. The New Indian Express names only the five
   districts and five ACs with the largest rise after the draft (Prayagraj
   3,29,421; Sahibabad 82,898, and so on); not tabulated.

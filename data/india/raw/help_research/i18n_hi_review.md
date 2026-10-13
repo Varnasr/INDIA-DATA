@@ -17,3 +17,7 @@ Checked every pair for meaning, legal terms, placeholders, digits and dashes. Pl
 - "Shown by" is translated "स्रोत" (source). This is fine as a label beside a report link, but it is less exact than the English.
 - Some proper names stay in Latin script: Cochin Diocese, Mahallu, Vallakkadavu, the Coimbatore localities, PUCL Chhattisgarh, National Grievance Service Portal and Book-a-Call with BLO. This looks deliberate, since the names match the source and the app, but a native reader may prefer them in Devanagari.
 - "progeny mapping" is transliterated as "प्रोजेनी मैपिंग". It matches the SIR term, but a reader may not know it.
+
+## 2026-10-13: three Uttar Pradesh organisations
+
+The descriptions of the three Jamiat Ulama-i-Hind units in Uttar Pradesh (Muzaffarnagar, Afzalgarh, Aligarh) were translated in one pass and have not yet had a second reading. Organisation names, BLO and SIR are kept as in English.

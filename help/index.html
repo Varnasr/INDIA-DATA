@@ -122,7 +122,12 @@ SIR.json('data/india/help.json').then(function (H) {
     }).join('') + '</ul>');
     document.getElementById('orgCount').textContent = st ? t(rows.length === 1 ? 'One organisation in {p}.' : '{k} organisations in {p}.', { k: n(rows.length), p: st === 'India' ? t('more than one state') : place(st) }) : t('{k} organisations in all.', { k: n(rows.length) });
   }
-  sel.addEventListener('change', draw);
+  // ?state=<name> opens the list on one state, so a state page can link to its own
+  var want = new URLSearchParams(location.search).get('state');
+  if (want && [].some.call(sel.options, function (o) { return o.value === want; })) sel.value = want;
+  sel.addEventListener('change', function () {
+    var u = new URLSearchParams(location.search); if (sel.value) u.set('state', sel.value); else u.delete('state');
+    history.replaceState(null, '', location.pathname + (u.toString() ? '?' + u : '') + location.hash); draw(); });
   draw();
   SIR.anchors && SIR.anchors();
   SIR.toc && SIR.toc();

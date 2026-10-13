@@ -36,7 +36,9 @@ def dash(t):
 
 def build():
     V = load('verified') or {}
-    VR, VO = V.get('remedies', {}), V.get('orgs', {})
+    VR, VO = V.get('remedies', {}), dict(V.get('orgs', {}))
+    # the Uttar Pradesh search (orgs3.json) was read again on its own
+    VO.update((load('verified_orgs3') or {}).get('orgs', {}))
     R = load('remedies')
     rem = []
     for it in sorted(R['items'], key=lambda x: ORDER.index(x['id'])):
@@ -52,7 +54,7 @@ def build():
             raise SystemExit('FAIL - remedy %s has no source' % it['id'])
         rem.append({'id': it['id'], 'title': it['title'], 'plain': it['plain'], 'steps': it.get('steps', []), 'sources': src})
     orgs, dropped = [], []
-    for f in ('orgs', 'orgs2'):
+    for f in ('orgs', 'orgs2', 'orgs3'):
         d = load(f)
         if not d:
             continue

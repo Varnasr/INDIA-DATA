@@ -1077,8 +1077,8 @@ html.dyslexic-font main>h3.hubh,html:not([lang="en"]) main>h3.hubh{font-family:i
 @media (max-width:600px){
   table.stack.sortable thead{position:static;width:auto;height:auto;overflow:visible;clip:auto;display:block;margin-bottom:.6rem}
   table.stack.sortable thead tr{display:flex;flex-wrap:wrap;gap:.35rem;border:0;padding:0;background:none;margin:0}
-  table.stack.sortable thead th{display:block;padding:0;border:0;background:none;position:static}
-  table.stack.sortable thead th button{font:inherit;font-size:.78rem;padding:.3rem .6rem;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);text-transform:none;letter-spacing:normal}
+  table.stack.sortable thead th{display:flex;height:auto;padding:0;border:0;background:none;position:static}
+  table.stack.sortable thead th button{font:inherit;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:.8rem;line-height:1.3;display:flex;box-sizing:border-box;align-items:center;gap:.25rem;min-height:2rem;margin:0;padding:.3rem .7rem;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);text-transform:none;letter-spacing:normal}
   table.stack.sortable thead th[aria-sort="ascending"] button,table.stack.sortable thead th[aria-sort="descending"] button{border-color:var(--ink);font-weight:700}
   table.stack.sortable tr.link td:first-child button.open{font-weight:700}
 }

@@ -19,6 +19,7 @@ constituencies.json, districts.json and the two CSVs.
   count of the named lists (secondary_reasons_ac.csv), and it is not used.
 - Districts are the 13 the CEO's table uses, the districts Delhi has now.
 """
+import math
 import csv
 import io
 import json
@@ -88,7 +89,7 @@ def main():
     def party(p):
         S = [r for r in rows if r['winner'] == p]
         return {'party': p, 'seats': len(S), 'per_100': r1(100 * sum(r['left_off'] for r in S) / sum(r['roll_before'] for r in S)),
-                'vs_district': round(sum(r['vs_district'] for r in S) / len(S), 4), 'over_margin': sum(r['over_margin'] for r in S)}
+                'vs_district': round(math.fsum(r['vs_district'] for r in S) / len(S), 4), 'over_margin': sum(r['over_margin'] for r in S)}
 
     women_before = st['roll_before_women']
     summ = {
