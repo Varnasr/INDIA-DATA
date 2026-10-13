@@ -245,6 +245,35 @@ def seat_files(slug):
             os.path.join(ROOT, 'data', slug, 'districts.json'): json.dumps(out, ensure_ascii=False, indent=1) + '\n'}
 
 
+# States here with a complete district table and no constituency table get a
+# page per district. The rows are the table's own, with a second table joined
+# by district name where one adds the draft by sex.
+DISTRICTS = {
+    'andhrapradesh': dict(table='districts', cols=('before', 'draft', 'removed'), sex='districts_sex'),
+    'chhattisgarh': dict(table='districts', cols=('draft', 'added', 'removed', 'net', 'final')),
+    'mizoram': dict(table='districts', cols=('draft', 'final', 'men', 'women', 'third')),
+}
+
+
+def district_files(slug):
+    cfg = DISTRICTS[slug]
+    N = json.load(open(os.path.join(ROOT, 'data', slug, 'raw', 'normal.json'), encoding='utf-8'))
+    T = {t['id']: t for t in N['tables']}
+    if T[cfg['table']].get('partial'):
+        fail(slug, 'the district table is partial, so it cannot have a page per district')
+    out = []
+    for r in T[cfg['table']]['rows']:
+        y = dict(district=r['name'])
+        y.update({k: r[k] for k in cfg['cols']})
+        if cfg.get('sex'):
+            s = [x for x in T[cfg['sex']]['rows'] if x['name'] == r['name']]
+            if len(s) != 1 or s[0]['draft'] != r['draft']:
+                fail(slug, '%s is not once in %s with the same draft' % (r['name'], cfg['sex']))
+            y['draft_women_pct'] = round(100 * s[0]['women'] / s[0]['draft'], 4)
+        out.append(y)
+    return {os.path.join(ROOT, 'data', slug, 'districts.json'): json.dumps(out, ensure_ascii=False, indent=1) + '\n'}
+
+
 def main():
     stale = []
     only = [a for a in sys.argv[1:] if not a.startswith('--')]
@@ -261,6 +290,8 @@ def main():
                  os.path.join(ROOT, 'data', slug, 'tables.csv'): as_csv(d)}
         if slug in SEATS:
             files.update(seat_files(slug))
+        if slug in DISTRICTS:
+            files.update(district_files(slug))
         for p, t in files.items():
             if not os.path.exists(p) or open(p, encoding='utf-8').read() != t:
                 stale.append(p)

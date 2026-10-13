@@ -19,6 +19,8 @@
   };
   var LEVEL = { district: ['district', 'districts'], region: ['region', 'regions'], ac: ['constituency', 'constituencies'], pc: ['parliamentary constituency', 'parliamentary constituencies'], island: ['island', 'islands'], tehsil: ['tehsil', 'tehsils'], ward: ['ward', 'wards'] };
   var SEATED = ['meghalaya', 'manipur', 'odisha'];
+  // states with a page per district and none per constituency
+  var DISTRICTED = ['andhrapradesh', 'chhattisgarh', 'mizoram'];
   var hyph = function (s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
 
   function load() {
@@ -148,6 +150,12 @@
         aName: 'Share of the roll before', aTok: '--fill-grey', bName: 'Share of the names left off', bTok: '--fill-red', rows: [{ name: d.state, a: R.women_before_pct, b: R.women_removed_pct }] });
     }
     d.tables.forEach(function (t, i) { table(t, i, d); });
+    if (DISTRICTED.indexOf(S.slug) >= 0) SIR.json('data/' + S.slug + '/districts.json').then(function (D) {
+      var el = document.createElement('section');
+      el.innerHTML = '<h2 id="every-district-on-its-own-page">Every district on its own page</h2><p class="sub">Each district is set against every other district of ' + SIR.esc(d.state) + '.</p><p class="golist">' +
+        D.map(function (x) { return '<a class="chip" href="district/' + SIR.slug(x.district).slice(2) + '/">' + SIR.esc(x.district) + '</a>'; }).join(' ') + '</p>';
+      box.appendChild(el);
+    });
     if (seated) Promise.all([SIR.json('data/' + S.slug + '/constituencies.json'), SIR.json('data/' + S.slug + '/districts.json')]).then(function (r) {
       var A = r[0], D = r[1];
       var facts = function (x) {

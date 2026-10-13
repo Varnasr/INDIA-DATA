@@ -501,6 +501,11 @@ def search_index():
         for d in J(folder + '/districts.json'):
             # every district of these states has a page of its own (make_district_pages.py)
             rows.append([pid, 'd', d['district'], '', folder + '/district/' + slug(d['district'])[2:] + '/'])
+    for pid, folder in (('ap', 'andhrapradesh'), ('cg', 'chhattisgarh'), ('mz', 'mizoram')):
+        for d in J(folder + '/districts.json'):
+            rows.append([pid, 'd', d['district'], '', folder + '/district/' + slug(d['district'])[2:] + '/'])
+    for d in J('hyderabad/telangana.json')['districts']:
+        rows.append(['hyd', 'd', d['district'], '', 'hyderabad/telangana/district/' + slug(d['district'])[2:] + '/'])
     for d in J('uttarpradesh/districts.json'):
         rows.append(['up', 'd', d['district'], '', 'uttarpradesh/district/' + slug(d['district'])[2:] + '/'])
     for d in J('maharashtra/districts.json'):

@@ -69,6 +69,20 @@
       noun: 'fall in the roll', verb: 'is the fall in the roll from January 2025 to the draft', per: 'per 100 on the January 2025 roll',
       claims: function (d, nm) { return 'After the draft, ' + n(d.added) + ' names were added in ' + nm + ' and ' + n(d.removed) + ' removed, and the final roll is ' + n(d.final) + '. The additions count new voters too, so they are the most that could have been restored.'; },
       limits: 'The names left off the draft were published by district and for the state, and the reasons for the state only.' },
+    andhrapradesh: { label: 'Andhra Pradesh', state: 'Andhra Pradesh', count: 'removed', base: 'before', womenDraft: 'draft_women_pct',
+      limits: 'Andhra Pradesh published the names left off by district, with no reasons and no split by sex below the state.' },
+    chhattisgarh: { label: 'Chhattisgarh', state: 'Chhattisgarh', count: function (x) { return x.final - x.draft; }, base: 'draft', fall: true, rise: true, per: 'per 100 on the draft',
+      sub: 'Measured by the rise in the roll from the draft to the final roll, per 100 on the draft. It is names added less names removed, and a district whose roll shrank shows a fall. The names left off the draft were published for the state only.',
+      noun: 'rise in the roll', verb: 'is the rise in the roll from the draft to the final roll',
+      claims: function (d, nm) { return 'After the draft, ' + n(d.added) + ' names were added in ' + nm + ' and ' + n(d.removed) + ' removed, and the final roll is ' + n(d.final) + '. The additions count new voters too, so they are the most that could have been restored.'; },
+      limits: 'The names left off the draft, and their reasons, were published for the state only.' },
+    mizoram: { label: 'Mizoram', state: 'Mizoram', count: function (x) { return x.final - x.draft; }, base: 'draft', fall: true, rise: true, per: 'per 100 on the draft',
+      sub: 'Measured by the rise in the roll from the draft to the final roll, per 100 on the draft. It is names added less names removed, and a district whose roll shrank shows a fall. The names left off the draft were published for the state only.',
+      noun: 'rise in the roll', verb: 'is the rise in the roll from the draft to the final roll',
+      women: function (d, nm) { return 'Women are ' + pct(100 * d.women / d.final) + ' of ' + nm + '\'s final roll.'; },
+      limits: 'The names left off the draft, and their reasons, were published for the state only.' },
+    telangana: { label: 'Telangana', state: 'Telangana', file: 'hyderabad/telangana.json', rows: 'districts', count: 'removed', base: 'electors_pre', page: 'hyderabad/telangana/', anchor: false, method: 'hyderabad/method/',
+      limits: 'Telangana\'s draft-roll totals are published by district and for Hyderabad\'s fifteen constituencies. The reasons and the split by sex are not.' },
     uttarakhand: { label: 'Uttarakhand', state: 'Uttarakhand', count: 'left_off', base: 'roll_before', seats: true,
       women: function (d, nm) { return 'Women were ' + pct(d.women_draft_pct) + ' of ' + nm + '\'s draft roll, ' + pct(d.women_claims_pct) + ' of the claims admitted after it and ' + pct(d.women_objections_pct) + ' of the names removed after it.'; },
       claims: function (d, nm) { return 'After the draft, ' + nm + ' admitted ' + n(d.claims) + ' claims (' + d1(d.claims_per_1000) + ' per 1,000 on the draft) and ' + n(d.objections) + ' objections (' + d1(d.objections_per_1000) + ' per 1,000). ' + n(d.notices) + ' electors were sent a notice, ' + d1(d.notices_per_100) + ' per 100 on the draft.'; },
@@ -81,8 +95,8 @@
   SIR.districtPage = function () {
     var st = document.body.getAttribute('data-district-state'), key = document.body.getAttribute('data-district'), C = CFG[st];
     var root = document.body.getAttribute('data-root') || '';
-    return Promise.all([SIR.json('data/' + st + '/districts.json'), SIR.json('data/india/factors.json')]).then(function (r) {
-      var D = r[0], F = r[1], d = D.filter(function (x) { return slug(x.district) === key; })[0];
+    return Promise.all([SIR.json('data/' + (C.file || st + '/districts.json')), SIR.json('data/india/factors.json')]).then(function (r) {
+      var D = C.rows ? r[0][C.rows] : r[0], F = r[1], d = D.filter(function (x) { return slug(x.district) === key; })[0];
       if (!d) throw new Error('no district ' + key + ' in ' + st);
       var rate = function (x) { return 100 * val(x, C.count) / val(x, C.base); };
       var all = D.slice().sort(function (a, b) { return rate(b) - rate(a); });
@@ -94,11 +108,14 @@
       var stPage = root + (C.page || st + '/'), noun = C.noun || 'names left off', per = C.per || 'per 100 on the roll before the revision';
 
       var span = C.fall ? C.verb.replace(/^is the [^ ]+ in the roll /, '') : '';
-      var first = C.fall && val(d, C.count) < 0 ? 'In ' + SIR.esc(name) + ' the roll grew ' + span + ', by ' + n(-val(d, C.count)) + ', a rise of ' + d1(-rate(d)) + ' ' + per + '. Across ' + C.label + ' the roll fell by ' + d1(stR) + ' per 100.'
-        : C.fall ? 'In ' + SIR.esc(name) + ' the ' + noun + ' ' + span + ' was ' + n(val(d, C.count)) + ', ' + d1(rate(d)) + ' ' + per + ', against ' + d1(stR) + ' in ' + C.label + '.'
+      // a fall (or, with rise: true, a rise) can run the other way: say so in words
+      var up = C.rise ? 'rose' : 'fell', other = C.rise ? 'fell' : 'grew', otherN = C.rise ? 'fall' : 'rise';
+      var sv = function (v) { return v < 0 ? 'a ' + otherN + ' of ' + d1(-v) : d1(v); };
+      var first = C.fall && val(d, C.count) < 0 ? 'In ' + SIR.esc(name) + ' the roll ' + other + ' ' + span + ', by ' + n(-val(d, C.count)) + ', a ' + otherN + ' of ' + d1(-rate(d)) + ' ' + per + '. Across ' + C.label + ' the roll ' + (stR >= 0 ? up : other) + ' by ' + d1(Math.abs(stR)) + ' per 100.'
+        : C.fall ? 'In ' + SIR.esc(name) + ' the ' + noun + ' ' + span + ' was ' + n(val(d, C.count)) + ', ' + d1(rate(d)) + ' ' + per + ', against ' + sv(stR) + ' in ' + C.label + '.'
         : 'In ' + SIR.esc(name) + ' ' + n(val(d, C.count)) + ' names ' + (C.verb || 'were left off the draft roll') + ', ' + d1(rate(d)) + ' ' + per + ', against ' + d1(stR) + ' in ' + C.label + '.';
       var pts = [first,
-        'It ranks ' + rk + ' of ' + D.length + ' districts, where 1 is the highest. ' + C.label + '\'s districts run from ' + (rate(all[all.length - 1]) < 0 ? 'a rise of ' + d1(-rate(all[all.length - 1])) : d1(rate(all[all.length - 1]))) + ' in ' + SIR.esc(all[all.length - 1].district) + ' to ' + d1(rate(all[0])) + ' in ' + SIR.esc(all[0].district) + '.'];
+        'It ranks ' + rk + ' of ' + D.length + ' districts, where 1 is the highest. ' + C.label + '\'s districts run from ' + sv(rate(all[all.length - 1])) + ' in ' + SIR.esc(all[all.length - 1].district) + ' to ' + sv(rate(all[0])) + ' in ' + SIR.esc(all[0].district) + '.'];
       if (C.reasons) {
         var top = C.reasons.slice().sort(function (x, y) { return d[y[0]] - d[x[0]]; })[0];
         pts.push(pct(100 * d[top[0]] / val(d, C.count)) + ' were entered as ' + top[1].toLowerCase() + '. A reason is ' + OFFICER + '.');
@@ -107,7 +124,7 @@
 
       VIZ.lollipop('vCompare', { label: name + ': ' + noun + ' ' + per + ', against every district of ' + C.label, axis: per.charAt(0).toUpperCase() + per.slice(1),
         rows: all.map(function (x) { return { name: x.district, v: rate(x), text: d1(rate(x)), tok: x === d ? '--fill-red' : '--fill-navy', hi: x === d }; }) });
-      document.getElementById('fCompare').innerHTML = '<b>' + (C.fall ? 'The ' + noun + ' in ' + SIR.esc(name) + ' was ' + d1(rate(d)) + ' ' + per : SIR.esc(name) + ' lost ' + d1(rate(d)) + ' of every 100 names') + ', ' + (rate(d) > stR ? 'above' : 'below') + ' the state\'s ' + d1(stR) + '.</b> It is marked in red among all ' + D.length + ' districts.';
+      document.getElementById('fCompare').innerHTML = C.fall && rate(d) < 0 ? '<b>' + SIR.esc(name) + '\'s roll ' + other + ' by ' + d1(-rate(d)) + ' ' + per + ', while ' + C.label + '\'s roll ' + (stR >= 0 ? up : other) + ' by ' + d1(Math.abs(stR)) + '.</b> It is marked in red among all ' + D.length + ' districts.' : '<b>' + (C.fall ? 'The ' + noun + ' in ' + SIR.esc(name) + ' was ' + sv(rate(d)) + ' ' + per : SIR.esc(name) + ' lost ' + d1(rate(d)) + ' of every 100 names') + ', ' + (rate(d) > stR ? 'above' : 'below') + ' the state\'s ' + (C.fall ? sv(stR) : d1(stR)) + '.</b> It is marked in red among all ' + D.length + ' districts.';
 
       if (C.reasons) {
         VIZ.lollipop('vReasons', { label: name + ': names left off by the reason entered', axis: 'Names',
@@ -150,7 +167,7 @@
         document.getElementById('fAfter').innerHTML = 'From the draft to ' + C.after.what + ', ' + SIR.esc(name) + '\'s roll ' + (a1 >= a0 ? 'rose by ' + n(a1 - a0) : 'fell by ' + n(a0 - a1)) + '. The rise counts new voters too, so it is the most that could have been restored.';
       } else document.getElementById('sAfter').hidden = true;
 
-      document.getElementById('dLinks').innerHTML = '<a class="btn" href="' + stPage + (C.anchor === false ? '' : '#d-' + key) + '">' + C.label + (C.anchor === false ? ', every district' : ', with this district on the map') + '</a> <a class="btn" href="' + root + st + '/method/">Sources and method</a>';
+      document.getElementById('dLinks').innerHTML = '<a class="btn" href="' + stPage + (C.anchor === false ? '' : '#d-' + key) + '">' + C.label + (C.anchor === false ? ', every district' : ', with this district on the map') + '</a> <a class="btn" href="' + root + (C.method || st + '/method/') + '">Sources and method</a>';
       document.getElementById('others').innerHTML = all.filter(function (x) { return x !== d; }).map(function (x) { return '<a class="chip" href="../' + slug(x.district) + '/">' + SIR.esc(x.district) + '</a>'; }).join(' ');
       document.getElementById('pageFaq').innerHTML = '<div class="qa"><h3>Where do these figures come from?</h3><p>From the same tables as the <a href="' + stPage + '">' + C.label + '</a> pages, which give every source on their method page, and from the National Family Health Survey 2019-21 for the circumstances. Every figure is worked out when the page loads.</p></div>' +
         '<div class="qa"><h3>Does a circumstance explain the removals?</h3><p>No. A district\'s schooling, fuel or sanitation figures sit beside its removals, and the correlations across districts say which districts lost more, never why.</p></div>';

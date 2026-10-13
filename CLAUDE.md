@@ -970,14 +970,17 @@ for its own winner, runner-up and margin field names, and `say`, `short` and
 `build_site.py`, and `seatPages` on its finder. Hyderabad's five seats are
 not included: the part explorer covers them.
 
-**A page for every district** (`<state>/district/<slug>/`, 452) in fifteen
-states and territories, Assam, Meghalaya, Manipur and Odisha added the same day to: Uttar Pradesh, Maharashtra and Karnataka (published by district only),
+**A page for every district** (`<state>/district/<slug>/`, 557) in twenty
+states: Assam, Meghalaya, Manipur, Odisha, Andhra Pradesh, Chhattisgarh,
+Mizoram and Telangana (`hyderabad/telangana/district/`, read from
+`telangana.json` through `FILE` and `OUT` in the generator) added the same day to: Uttar Pradesh, Maharashtra and Karnataka (published by district only),
 and Bihar, Tamil Nadu, West Bengal, Kerala, Delhi, Gujarat, Rajasthan and
 Uttarakhand (13 October 2026). Each is drawn in its state's own measure, set
 in `CFG` in `district.js`: names left off, names removed (Bihar, per 100 on
 the 2025 roll), or the fall in the roll (West Bengal, Kerala, Rajasthan, with
 `fall: true`, which words every sentence as a fall and a negative fall as a
-rise). A state with district figures and no page is a gap the owner counts:
+rise; Chhattisgarh and Mizoram, where most districts grew after the draft,
+add `rise: true` and measure the rise). A state with district figures and no page is a gap the owner counts:
 every analysis gets district and constituency pages where its tables allow.
 `scripts/make_district_pages.py` writes the sources (the slug is `SIR.slug`'s,
 so `#d-<slug>` on the state page and these addresses agree) and
