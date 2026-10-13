@@ -105,7 +105,9 @@ def finder():
         for r in rs:
             if not r[base]:
                 raise SystemExit('FAIL - %s %s has no %s' % (state, r['name'], base))
-            rows.append([pid, r['ac'], r['name'], r['district'], r[cnt], round(per * r[cnt] / r[base], 4), page + '#ac-%d' % r['ac']])
+            # a state with constituency pages (make_seat_pages.py) opens the seat's own page
+            href = f.split('/')[0] + '/seat/%d/' % r['ac'] if pid in ('tn', 'wb', 'kl', 'dl', 'uk', 'gj', 'rj', 'bihar') else page + '#ac-%d' % r['ac']
+            rows.append([pid, r['ac'], r['name'], r['district'], r[cnt], round(per * r[cnt] / r[base], 4), href])
     h = J('hyderabad/summary.json')['acs']
     places.append({'id': 'hyd', 'state': 'Telangana (Hyderabad Old City)', 'page': 'hyderabad/explorer/', 'what': 'names removed from the lists',
                    'of': 'the roll before the revision', 'per': 100, 'acs': len(h)})

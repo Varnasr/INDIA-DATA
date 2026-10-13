@@ -1,0 +1,22 @@
+<!--page {"title": "What's New: SIR analysis for India", "description": "What has been added to Off the Roll, by date: new states, constituency and district pages, sources and tables.", "place": "home"} -->
+<main id="main" class="terms">
+<div class="page-head" data-no-i18n><h1>What's New</h1></div>
+<p class="report-lang">This page is in English only.</p>
+<article lang="en" dir="ltr" data-no-i18n>
+<p>What has been added to the site, by date, newest first. This page lists additions only. When a figure or a finding already on the site changes, the change is listed on <a href="../corrections/">Corrections</a>, with what the page said before and why.</p>
+<div id="updates"></div>
+</article>
+</main>
+<!--scripts-->
+<script src="../assets/sir.js"></script>
+<script>
+SIR.json('data/updates.json').then(function (U) {
+  var root = document.body.getAttribute('data-root') || '';
+  var fmt = function (d) { return new Date(d + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }); };
+  document.getElementById('updates').innerHTML = U.entries.map(function (e) {
+    return '<h2 id="d-' + e.date + '">' + fmt(e.date) + '</h2><ul>' + e.items.map(function (it) {
+      return '<li>' + (it[1] ? '<a href="' + root + SIR.esc(it[1]) + '">' + SIR.esc(it[0]) + '</a>' : SIR.esc(it[0])) + '</li>';
+    }).join('') + '</ul>';
+  }).join('');
+}).catch(SIR.fail);
+</script>

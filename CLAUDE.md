@@ -518,11 +518,18 @@ unless each adds up to the published totals (9,737,831 removed; draft
   equals the state total announced with the draft.
 - **There is no split of the removals by sex or age.** The CEO has not
   published one. The All India gender table carries a Tamil Nadu row from a
-  press analysis, flagged unverified; do not move it onto the Tamil Nadu pages
-  as a finding.
-- **Turnout is votes over the final roll of 23 February**, because the 2026
-  result pages carry no electors. The roll of 7 April 2026 is published and
-  not yet used.
+  press analysis (The Hindu Data Team's count of the named lists), flagged
+  unverified; do not move it onto the Tamil Nadu pages as a finding. The
+  women section uses the CEO's own final roll of 6 January 2025 by seat and
+  sex (`raw/roll_20250106_ac.csv`): the fall from it to the draft, by sex,
+  always called the fall and never the names removed (ten months of ordinary
+  changes, and that roll is 5,01,637 smaller than the roll of 27 October).
+  Women were 51.1% of that fall against 51.0% of the roll; Vedaranyam 60.4%.
+- **Turnout is votes over the roll of 6 April 2026**, the roll the election
+  was held on (`raw/election_roll_20260406_ac.csv`, the CEO's, larger than the
+  final roll in every seat). The claims and objections after the draft are the
+  CEO's exact counts as The Hindu printed them (27,53,796 added, 4,23,172
+  deleted), which add up to the final roll.
 - **Removals by the party that won are read against the district.** TVK won
   most of the city seats and the city seats lost the most names, so the raw
   comparison mostly measures Chennai. `vs_district` is each seat's rate less
@@ -763,13 +770,15 @@ in `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
   only inferred from its draft total and nothing relies on them. The printed
   final is 50 more than draft plus net in seven districts; both are kept as
   printed and the method page computes the list from `final.json`.
-- **2022 results are a compilation**, checked seat by seat against a second
-  one (margins and parties agree in all 182). Pages say "a published
-  compilation of the Election Commission's results" and do not name the
-  compiler. Its electors and votes do not reconcile with the ECI's state
-  totals, so no turnout is used: the three counts against the margin are all
-  names left off, those not entered as dead, and those also not enrolled
-  elsewhere.
+- **2022 results are the Election Commission's own statistical report**
+  (`raw/eci2022_ac.csv`, reports 10 and 12). The compilation used before
+  (`results_2022.csv`) is kept and checked against it: parties agree in all
+  182, margins in 180 (Viramgam and Wankaner one vote apart, asserted). With
+  the report's electors, turnout is used: the fourth count against the margin
+  is the names not entered as dead at each seat's 2022 turnout (40 seats).
+- **Ahmedabad's 21 seats after the draft** are press (Gujarat Samachar,
+  17 February 2026, `raw/ahmedabad_final_ac_press.csv`); they add to the CEO's
+  district row and the build asserts Danilimda carries the district's 25.
 - **The city is two districts**, Ahmedabad and Surat (`CITY` in the build),
   21.9% of the roll and 36.7% of the names left off. The party comparison
   carries `vs_district` beside the raw rate, because the BJP won almost every
@@ -908,6 +917,48 @@ measures a different thing (`STATES` in the build names every roll), nothing is
 added across states, and only Uttarakhand has gross additions and deletions by
 constituency. Everywhere else the change from the draft is net, counts new
 voters too, and is never called names restored. English only.
+
+**A page for every constituency** (`<state>/seat/<n>/`, 1,433 of them) in
+the eight states with constituency tables: Tamil Nadu, West Bengal, Kerala,
+Delhi, Uttarakhand, Gujarat (press images of the CEO's tables), Rajasthan (the
+change in the roll since 2023) and Bihar (both phases, with a link to the
+seat's booths in the explorer). `scripts/make_seat_pages.py` writes a
+three-line source per seat (its state and number in `data-seat-state` and
+`data-seat-ac` on `<body>`, which `build_site.py` carries from the page's
+`body` meta) and `assets/seat.js` draws everything from
+`data/<state>/constituencies.json` when the page loads: the seat against its
+district and state in that state's own measure (named in every sentence), its
+rank, the district's seats, and the reasons, women, after-the-draft and
+margin sections a state's tables can fill; the rest are hidden and the limits
+line says what is missing. `CFG` in `seat.js` holds each state's fields. A
+state's measure is never compared with another's. The pages are English only
+(`data-no-i18n`); `i18n_collect.mjs` skips them, because their shell is every
+page's shell. Search, the All India finder and each state's finder card
+(`seatPages: true`) link to them. `check_data.py` runs `make_seat_pages.py
+--check`. A new state needs a line in `STATES`, an entry in `CFG` (with `map`
+for its own winner, runner-up and margin field names, and `say`, `short` and
+`to` where its count is not the names left off the draft), `SEAT_PAGES` in
+`build_site.py`, and `seatPages` on its finder. Hyderabad's five seats are
+not included: the part explorer covers them.
+
+**A page for every district** (`<state>/district/<slug>/`, 145) in the three
+states published by district only: Uttar Pradesh, Maharashtra and Karnataka.
+`scripts/make_district_pages.py` writes the sources (the slug is `SIR.slug`'s,
+so `#d-<slug>` on the state page and these addresses agree) and
+`assets/district.js` draws the district against every district of its state,
+its reasons where published, and its NFHS-5 circumstances from
+`data/india/factors.json` beside the typical district, with the state's rank
+correlation for each; a circumstance is never named as a cause. Finders
+(`districtPages: true`) and search link to them; `check_data.py` runs
+`--check`. English only, skipped by `i18n_collect.mjs` like the seat pages.
+
+**What's New** (`updates/`, in every footer, in the search and linked from
+the front page's "Who made it") lists what was added to the site, by date,
+from `data/updates.json`, which is curated by hand: add an entry when
+something a reader can use is published. **Additions only.** A changed figure
+or finding goes on `corrections/`, never here, so the rule that no public page
+refers to earlier versions still holds; the two pages link to each other.
+English only.
 
 **Share a list with us** (`share/`, on the front page's place, in every
 footer, in the search and in a short section on the front page) is the one
@@ -1599,6 +1650,17 @@ polled; the districts slide names the factor with the largest rank
 correlation and lists those under 0.2 as unrelated). The decks state no site
 address, and the speaker notes carry the caveats. `build.sh` rebuilds them
 with the reports.
+
+Every other analysis (Rajasthan, Uttar Pradesh, Delhi, Maharashtra, Gujarat,
+Uttarakhand, Assam, and one for the twenty states on the shared page) has a
+PDF and a deck made by `scripts/reports/page_pack.mjs` from its own pages: the
+PDF is the pages printed with the site's print stylesheet (merged by
+`merge_pdf.py`), and the deck has a cover of the overview's findings and one
+slide per chart, titled with the section's computed finding. Serve the site
+and run it after any data change. The print stylesheet hides every control,
+and `build_site.py` fails if a place's body class is a class `sir.css`
+styles: Delhi's was `dl`, the header menus' class, so every Delhi page
+printed blank.
 
 The four 2026 states (Tamil Nadu, Karnataka, West Bengal, Kerala) each have a
 PDF report and a deck in their Downloads menu, written by

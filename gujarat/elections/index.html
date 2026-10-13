@@ -50,7 +50,7 @@
 <p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
 
 <article class="state" lang="en" dir="ltr" data-no-i18n>
-  <p class="note">The names left off are from the tables of the Chief Electoral Officer (CEO), who keeps Gujarat's rolls for the Election Commission, as they were published in the press. The 2022 result is from a published compilation of the Election Commission's results. <a href="../method/">Sources and method</a> says where each one comes from.</p>
+  <p class="note">The names left off are from the tables of the Chief Electoral Officer (CEO), who keeps Gujarat's rolls for the Election Commission, as they were published in the press. The 2022 result is from the Election Commission's own statistical report. <a href="../method/">Sources and method</a> says where each one comes from.</p>
 
   <h2 id="names-left-off-against-the-winning-margin">Names left off against the winning margin</h2>
   <p class="sub">The winning margin is the winner's votes less the runner-up's. Each dot is a constituency. Its place across is the margin its winner won by in December 2022, and its height is the names left off its draft roll in December 2025. Above the dashed line, more names were left off than the margin. The election came three years before the revision, so this measures how large the removals are against the votes that decide a seat. Nobody can know how anyone left off would have voted. Hover or tap a dot for its name.</p>
@@ -60,7 +60,7 @@
   <p class="finding" id="fScatter"></p>
 
   <h2 id="how-many-seats-on-each-count">How many seats, on each count</h2>
-  <p class="sub">Three ways of setting the names left off against the margin, from the widest to the narrowest. The first counts every name left off the draft. The second leaves out the names entered as dead. The third also leaves out the names entered as already enrolled at another place, because those electors can still vote where they are enrolled. No count here allows for turnout, the share of electors who vote, because the compilation's elector figures do not agree with the Election Commission's state totals.</p>
+  <p class="sub">Four ways of setting the names left off against the margin, from the widest to the narrowest. The first counts every name left off the draft. The second leaves out the names entered as dead. The third also leaves out the names entered as already enrolled at another place, because those electors can still vote where they are enrolled. The fourth takes the names not entered as dead and counts only the share that would have voted, at each seat's own 2022 turnout, the share of its electors who voted.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="bigs" id="cCounts"></div>
@@ -94,7 +94,7 @@
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 <section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Gujarat 2026</h2><p><a class="btn" href="../../downloads/gujarat.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../../downloads/#w-gj">What each sheet holds</a></p><p class="csvs">CSV: <a href="../../data/gujarat/constituencies.csv" download>constituencies.csv</a> <a href="../../data/gujarat/districts.csv" download>districts.csv</a></p></section>
 </main>
-<footer data-i18n-each><span>Research by <a href="https://www.impactmojo.in/">ImpactMojo</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../#why-this-site-exists">About This Site</a> · <a href="../../help/">Removed from the Roll? What to Do</a> · <a href="../../downloads/#w-gj">Downloads</a> · <a href="../../share/">Share a List with Us</a> · <a href="../../support/">Support Our Work</a> · <a href="../../terms/">Terms and Privacy</a> · <a href="../../corrections/">Corrections</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
+<footer data-i18n-each><span>Research by <a href="https://www.impactmojo.in/">ImpactMojo</a>. Only totals are published, never names or EPIC numbers.</span> · <a href="../../#why-this-site-exists">About This Site</a> · <a href="../../help/">Removed from the Roll? What to Do</a> · <a href="../../downloads/#w-gj">Downloads</a> · <a href="../../share/">Share a List with Us</a> · <a href="../../support/">Support Our Work</a> · <a href="../../terms/">Terms and Privacy</a> · <a href="../../updates/">What's New</a> · <a href="../../corrections/">Corrections</a> · <a href="mailto:info@pinpointventures.in">info@pinpointventures.in</a></footer>
 <div class="fabs"><a class="fab fab-share" href="../../share/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15V4m0 0-4 4m4-4 4 4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg><span>Share a list</span></a><a class="fab" href="../../india/constituencies/#find-a-constituency"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-2.6-2.3-6-6.1-6-10a6 6 0 0 1 12 0c0 .8-.1 1.6-.4 2.4M12 12.8a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6m7.4 6.6 1.8 1.8m-1.2-4.2a2.7 2.7 0 1 1-5.4 0 2.7 2.7 0 0 1 5.4 0"/></svg><span>Find your constituency</span></a></div>
 <script src="../../assets/sir.js"></script>
 <script src="../../assets/viz.js"></script>
@@ -113,12 +113,12 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/const
     'The seats that lost the most names were mostly not close contests. Across the ' + S.acs + ' seats the rank correlation between the rate left off and the margin is ' + SIR.d(S.rho_rate_margin, 2) + ', where 0 means the two are unrelated and 1 means they rise in step, because the city seats that lost the most were won by wide margins. ' +
     'Larger than the margin means large enough to decide a seat, and it says nothing about whether it would have.';
 
-  var counts = [['Every name left off', S.over_margin], ['Leaving out the dead', S.alive_over_margin], ['Leaving out the dead and those enrolled elsewhere', S.narrow_over_margin]];
+  var counts = [['Every name left off', S.over_margin], ['Leaving out the dead', S.alive_over_margin], ['Leaving out the dead and those enrolled elsewhere', S.narrow_over_margin], ['Leaving out the dead, at 2022 turnout', S.turnout_over_margin]];
   document.getElementById('cCounts').innerHTML = counts.map(function (c) {
     return '<div class="big"><b>' + c[1] + '</b><span class="of">of ' + S.acs + ' seats</span><i style="--w:' + (100 * c[1] / S.acs).toFixed(1) + '%"></i><span>' + c[0] + '</span></div>';
   }).join('');
-  document.getElementById('fCounts').innerHTML = '<b>Even on the narrowest count, the names left off outnumber the 2022 margin in ' + S.narrow_over_margin + ' of the ' + S.acs + ' seats.</b> ' +
-    'In the other ' + (S.acs - S.narrow_over_margin) + ', the runner-up could not have won even if every one of those electors had voted, and voted for the runner-up. Not everyone on a roll votes, so every count here is the most the names could weigh, and the lists cannot show how anyone left off would have voted.';
+  document.getElementById('fCounts').innerHTML = '<b>Leaving out the dead, the names left off outnumber the 2022 margin in ' + S.alive_over_margin + ' of the ' + S.acs + ' seats, and in ' + S.turnout_over_margin + ' at each seat\'s 2022 turnout.</b> Turnout across the state was ' + SIR.d(S.turnout_2022, 1) + ' per cent. ' +
+    'In ' + (S.acs - S.narrow_over_margin) + ' seats, even the names neither dead nor enrolled elsewhere fall short of the margin, so there the runner-up could not have won even if every one of those electors had voted, and voted for the runner-up. Not everyone on a roll votes, so every count here is the most the names could weigh, and the lists cannot show how anyone left off would have voted.';
 
   var CL = A.slice().sort(function (a, b) { return a.margin - b.margin; }).slice(0, 20);
   VIZ.dots('vClose', { label: 'The 20 closest seats of 2022: the winning margin and the names left off in 2025', axis: 'Votes or names', cats: CL.map(function (a) { return a.name + ' (' + a.winner_party + ')'; }),

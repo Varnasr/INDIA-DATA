@@ -37,6 +37,18 @@ for _pl in CFG['places']:
         if _dup:
             raise SystemExit('FAIL - %s lists %s twice in %s' % (_pl['id'], ', '.join(_dup), _key))
 PLACES = {p['id']: p for p in CFG['places']}
+# places with a page for every constituency (scripts/make_seat_pages.py)
+SEAT_PAGES = {'tn': 'tamilnadu', 'wb': 'westbengal', 'kl': 'kerala', 'dl': 'delhi', 'uk': 'uttarakhand', 'gj': 'gujarat', 'rj': 'rajasthan', 'bihar': 'bihar'}
+# Every page's <body> carries its place's class. Delhi's was once "dl", which
+# is also the class of the header menus, so the print stylesheet's .dl{display:
+# none} hid the whole of every Delhi page on paper. A place class must not be a
+# class the stylesheet styles on its own.
+_STYLED = set(re.findall(r'(?:^|[\s,{}>+~(])\.([A-Za-z][\w-]*)', open(os.path.join(ROOT, 'assets', 'sir.css'), encoding='utf-8').read()))
+_ALLOWED = {'home', 'hyd', 'wide', 'has-toc'}  # styled on purpose, as the page's place
+for _p in CFG['places']:
+    _c = _p.get('class', _p['id'])
+    if _c in _STYLED and _c not in _ALLOWED:
+        raise SystemExit('FAIL - place class %r is also a class sir.css styles; give the place a "class" of its own' % _c)
 SIRJS = os.path.join(ROOT, 'assets', 'sir.js')
 ICONS = json.loads(re.search(r'var ICONS = (\{.*?\});', open(SIRJS, encoding='utf-8').read()).group(1))
 STAMP = re.compile(r'\?v=[0-9a-f]{8}')
@@ -294,14 +306,14 @@ def shell(out, meta, content, scripts):
         fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
     fab = '<div class="fabs">%s</div>' % fab if fab else ''
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Removed from the Roll? What to Do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%ssupport/">Support Our Work</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%scorrections/">Corrections</a>'
-              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, CFG['email'], CFG['email']))
+              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Removed from the Roll? What to Do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%ssupport/">Support Our Work</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%supdates/">What\'s New</a> · <a href="%scorrections/">Corrections</a>'
+              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, root, CFG['email'], CFG['email']))
     # On a phone the header's Downloads button is inside the menu, and the
     # footer link opened the downloads page at its top, where the first button
     # is the zip of every table. So every page of a place with a workbook
     # carries its own files at the foot of the page: the workbook and the
     # CSVs the pages draw, each one tap away.
-    wb = dl_book(book) if book and not here.startswith(('downloads/', 'share/', 'terms/', 'corrections/', 'help/')) and place['id'] != 'home' else None
+    wb = dl_book(book) if book and not here.startswith(('downloads/', 'share/', 'terms/', 'corrections/', 'updates/', 'help/')) and place['id'] != 'home' else None
     if wb:
         # the shared workbook of the twenty smaller places: only this place's own table
         own = 'data/%s/' % out.split('/')[0]
@@ -350,10 +362,11 @@ def shell(out, meta, content, scripts):
         '<script src="%sassets/i18n.js"></script>\n<title>%s</title>\n<meta name="description" content="%s">\n'
         '<link rel="icon" href="%s">\n<link rel="manifest" href="%smanifest.webmanifest">\n<meta name="theme-color" content="#1f4e79">\n'
         '<link rel="apple-touch-icon" href="%sassets/app/apple-touch-icon.png">\n<link rel="stylesheet" href="%sassets/sir.css">%s\n</head>\n'
-        '<body class="%s" data-place="%s" data-root="%s">\n%s%s%s\n%s\n%s\n'
+        '<body class="%s" data-place="%s" data-root="%s"%s>\n%s%s%s\n%s\n%s\n'
         '<script src="%sassets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>\n</body>\n</html>\n'
     ) % (root, html.escape(meta['title'], quote=False), html.escape(meta['description']), favicon(place['color']), root, root, root, head_extra,
-         cls, place['id'], root, header, nav, content, footer, scripts, root)
+         cls, place['id'], root, ''.join(' %s="%s"' % (k, html.escape(v)) for k, v in sorted(meta.get('body', {}).items())),
+         header, nav, content, footer, scripts, root)
 
 
 def put(path, text, compare_unstamped=True):
@@ -442,26 +455,28 @@ def search_index():
             if h not in seen:
                 pages.append([p['id'], label, h])
     # the front page's own pages, which no tab row lists
-    pages += [['home', 'Removed from the Roll? What to Do', 'help/', 'check my name removed deleted left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'Share a List with Us', 'share/'], ['home', 'Support Our Work', 'support/', 'donate contribute upi support fund'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/']]
+    pages += [['home', 'Removed from the Roll? What to Do', 'help/', 'check my name removed deleted left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'Share a List with Us', 'share/'], ['home', 'Support Our Work', 'support/', 'donate contribute upi support fund'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/'], ['home', "What's New", 'updates/', 'new latest added changelog timeline updates']]
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),
                               ('gj', 'gujarat', 'gujarat/'), ('uk', 'uttarakhand', 'uttarakhand/')):
         for a in J(folder + '/constituencies.json'):
-            rows.append([pid, 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], page + '#ac-%d' % a['ac']])
+            # a state with constituency pages (make_seat_pages.py) links to the seat's own page
+            href = '%s/seat/%d/' % (SEAT_PAGES[pid], a['ac']) if pid in SEAT_PAGES else page + '#ac-%d' % a['ac']
+            rows.append([pid, 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], href])
         for d in J(folder + '/districts.json'):
             rows.append([pid, 'd', d['district'], '', page + '#' + slug(d['district'])])
     for d in J('uttarpradesh/districts.json'):
-        rows.append(['up', 'd', d['district'], '', 'uttarpradesh/#' + slug(d['district'])])
+        rows.append(['up', 'd', d['district'], '', 'uttarpradesh/district/' + slug(d['district'])[2:] + '/'])
     for d in J('maharashtra/districts.json'):
         # the press note keeps three old names; a reader may type the new one,
         # and Bombay for Mumbai
         alias = ' '.join(x for x in (d['now'], 'Bombay' if d['district'].startswith('Mumbai') else '') if x)
-        rows.append(['mh', 'd', d['district'], '', 'maharashtra/#' + slug(d['district'])] + ([alias] if alias else []))
+        rows.append(['mh', 'd', d['district'], '', 'maharashtra/district/' + slug(d['district'])[2:] + '/'] + ([alias] if alias else []))
     for d in J('karnataka/districts.json'):
         # Bengaluru is four election districts; a reader types the city
         city = 'Bengaluru Bangalore' if d['bengaluru'] else ''
-        rows.append(['ka', 'd', d['district'], '', 'karnataka/#' + slug(d['district'])] + ([city] if city else []))
+        rows.append(['ka', 'd', d['district'], '', 'karnataka/district/' + slug(d['district'])[2:] + '/'] + ([city] if city else []))
     for a in J('hyderabad/summary.json')['acs']:
         rows.append(['hyd', 'ac', a['name'], '', 'hyderabad/explorer/#' + a['name']])
     # the reading page: every piece, by title, outlet and author

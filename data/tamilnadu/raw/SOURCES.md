@@ -132,3 +132,24 @@ revision.
 
 - No district-level or age-cohort tables were taken.
 - Nothing in the repository outside data/tamilnadu/raw/ was changed.
+
+## Two more rolls by constituency and sex (added 2026-10-13)
+
+- `election_roll_20260406_ac.csv`: the roll of 06.04.2026, the roll the 2026
+  election was held on, from https://www.elections.tn.gov.in/ACwise_Gendercount_07042026.aspx
+  (CEO). 234 rows; men, women and third gender add to the total in every row;
+  the 38 district rows and the grand total agree; the grand total is
+  5,73,43,291, the figure of the CEO's Press Note 16. It leaves out service
+  electors. It is larger than the final roll of 23.02.2026 in every seat
+  (6,35,911 in all). Turnout on the pages is votes over this roll.
+- `roll_20250106_ac.csv`: the final roll of 06.01.2025 (Special Summary
+  Revision 2025), from https://www.elections.tn.gov.in/ACwise_Gendercount_06012025.aspx
+  (CEO). 234 rows with SC and ST seats marked (44 and 2); every row adds up;
+  the district rows and grand total agree (3,11,74,027 men, 3,24,29,803 women,
+  9,120 third gender, 6,36,12,950). It is 5,01,637 smaller than the roll of
+  27.10.2025, so the fall from it to the draft is never called the names
+  removed. The build asserts that no seat's men or women rose from it to the
+  draft.
+
+Both were fetched through Firecrawl from an Indian address on 2026-10-13 and
+parsed by a script that checks every identity above before writing.

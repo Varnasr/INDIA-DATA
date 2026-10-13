@@ -235,3 +235,27 @@ in the final table (three failed).
   `data/india/raw/final.csv` (Gujarat `net only`; gross 9,56,121 added and
   3,95,555 deleted are now known) can be updated from these tables.
 - No individual-elector list was opened.
+
+## The Election Commission's 2022 statistical report (`eci2022_ac.csv`)
+
+Gujarat General Legislative Election 2022, old.eci.gov.in file 14750: report
+10 (Detailed Results) for every candidate's votes and report 12 (AC-wise
+voters information) for electors by sex, service electors, votes polled and
+valid votes, read on 2026-10-13. Every seat's candidates add up to its valid
+votes plus NOTA; every column adds up to the printed state totals (electors
+4,91,63,277, voted 3,18,79,194, valid 3,13,26,370, NOTA 5,01,202); the seats by
+party are BJP 156, INC 17, AAP 5, IND 3, SP 1. Against `results_2022.csv`, the
+compilation used before, parties agree in all 182 seats and margins in 180;
+Viramgam (39) and Wankaner (67) differ by one vote, and the build asserts
+exactly that. Two names differ in spelling in report 12 (Savarkundia, Bansda)
+and keep report 10's.
+
+## Ahmedabad after the draft (`ahmedabad_final_ac_press.csv`)
+
+Gujarat Samachar, 17 February 2026, "SIR ની ફાઇનલ લિસ્ટનું સરવૈયું", a graphic
+of Ahmedabad's 21 constituencies with the names added, deleted and the total
+on the final roll, transcribed from Gujarati digits. Press. The 21 seats add
+up exactly to the CEO's Ahmedabad final row (1,53,234 added, 47,627 deleted,
+49,12,548 final); draft plus added less deleted equals the final in 20 seats,
+and Danilimda (54) is 25 over, the same 25 the CEO's district row carries. The
+build asserts all of it.

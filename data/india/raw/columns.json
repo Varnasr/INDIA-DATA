@@ -884,13 +884,18 @@
   "runner_up": "The party that came second in 2026.",
   "margin": "The 2026 winning margin in votes, the winner's votes less the runner-up's.",
   "votes": "Total votes polled in the constituency in 2026.",
-  "turnout": "votes as a percentage of the final roll of 23 February 2026.",
+  "turnout": "Votes polled over the roll of 6 April 2026, in per cent.",
   "removed_voters": "Names left off that were not entered as dead, times the seat's 2026 turnout, rounded, which is how many of them would have voted at that turnout.",
   "over_margin": "Whether removed is larger than the 2026 margin, True or False, which says it could have decided the seat and says nothing about whether it did.",
   "net_over_margin": "Whether net_fall is larger than the 2026 margin, True or False.",
   "could_change": "Whether removed_voters is larger than the 2026 margin, True or False.",
   "winner_2021": "The party that won the seat in 2021, from the Election Commission's statistical report through a published compilation of it.",
-  "margin_2021": "The 2021 winning margin in votes, the winner's votes less the runner-up's."
+  "margin_2021": "The 2021 winning margin in votes, the winner's votes less the runner-up's.",
+  "election_roll": "Electors on the roll of 6 April 2026, the roll the 2026 election was held on (the CEO's table).",
+  "jan2025": "Electors on the final roll of 6 January 2025, the last roll before the revision published by sex.",
+  "fall_jan": "jan2025 less the draft. It counts ten months of ordinary changes as well as the revision, so it is not the names removed.",
+  "fall_jan_women_pct": "Women as a percentage of fall_jan.",
+  "jan2025_women_pct": "Women as a percentage of the January 2025 roll."
  },
  "data/tamilnadu/districts.csv": {
   "district": "The district, one of 38.",
@@ -1122,5 +1127,30 @@
   "ac": "Assembly constituency number, blank on district and state rows.",
   "name": "Constituency or district name as the table prints it.",
   "district": "District, as the table prints it (U.S.Nagar for Udham Singh Nagar)."
+ },
+ "data/gujarat/raw/eci2022_ac.csv": {
+  "ac": "Assembly constituency number.",
+  "ac_name": "Constituency name, as the Election Commission's detailed results spell it.",
+  "winner_party": "Party of the winner in 2022.",
+  "winner_votes": "Votes for the winner.",
+  "runner_up_party": "Party of the runner-up.",
+  "runner_up_votes": "Votes for the runner-up.",
+  "margin": "winner_votes less runner_up_votes.",
+  "nota": "Votes for none of the above.",
+  "electors_male": "Men on the 2022 roll, service electors included.",
+  "electors_female": "Women on the 2022 roll, service electors included.",
+  "electors_tg": "Third-gender electors on the 2022 roll.",
+  "electors_total": "Electors on the 2022 roll, service electors included.",
+  "service_electors": "Service electors on the 2022 roll.",
+  "voted_total": "Votes polled, postal votes included.",
+  "valid_votes": "Valid votes, NOTA left out.",
+  "poll_pct": "voted_total over electors_total, as printed, in per cent."
+ },
+ "data/tamilnadu/raw/election_roll_20260406_ac.csv": {
+  "district_no": "The district's number in the CEO's table."
+ },
+ "data/tamilnadu/raw/roll_20250106_ac.csv": {
+  "district_no": "The district's number in the CEO's table.",
+  "reserved": "SC or ST where the seat is reserved, as the CEO's table marks it."
  }
 }
