@@ -6,5 +6,6 @@ window.SIR_DICT = {" and ": " மற்றும் ", " to ": " முதல்
 "Winner, runner-up and margin for every seat are from the Election Commission's constituency result pages, checked against its state-wise pages. Turnout is the votes polled over the roll of 6 April 2026, the roll the election was held on, which the Chief Electoral Officer published by constituency and sex. It is larger than the final roll in every constituency, because names were added after the final roll.": "ஒவ்வொரு தொகுதியின் வெற்றியாளர், இரண்டாமிடம், வித்தியாசம் தேர்தல் ஆணையத்தின் தொகுதி முடிவுப் பக்கங்களிலிருந்து, அதன் மாநில வாரியான பக்கங்களுடன் சரிபார்க்கப்பட்டவை. வாக்குப்பதிவு விகிதம் என்பது தேர்தல் நடந்த 6 ஏப்ரல் 2026 பட்டியலின் மீது பதிவான வாக்குகள்; அந்தப் பட்டியலைத் தலைமைத் தேர்தல் அதிகாரி தொகுதி, பாலின வாரியாக வெளியிட்டார். இறுதிப் பட்டியலுக்குப் பின் பெயர்கள் சேர்க்கப்பட்டதால், அது ஒவ்வொரு தொகுதியிலும் இறுதிப் பட்டியலைவிடப் பெரியது.",
 "Women's share of the January 2025 roll and of the fall from it to the draft, by district": "ஜனவரி 2025 பட்டியலிலும், அதிலிருந்து வரைவு வரையிலான குறைவிலும் பெண்களின் பங்கு, மாவட்ட வாரியாக",
 "Women's share of the fall to the draft, %": "வரைவு வரையிலான குறைவில் பெண்களின் பங்கு, %",
-"Open this constituency's own page": "இந்தத் தொகுதியின் தனிப் பக்கத்தைத் திறக்கவும்"
+"Open this constituency's own page": "இந்தத் தொகுதியின் தனிப் பக்கத்தைத் திறக்கவும்",
+"Open this district's own page": "இந்த மாவட்டத்தின் தனிப் பக்கத்தைத் திறக்கவும்"
 };

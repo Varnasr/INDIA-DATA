@@ -625,6 +625,7 @@
       input.value = it.l;
       out.innerHTML = '<h3>' + SIR.esc(st.title ? st.title(r) : it.l) + '</h3>' + st.card(r) +
         '<div class="tools">' + (o.seatPages && /^ac-\d+$/.test(k) ? '<a class="btn" href="' + (o.seatPages === true ? 'seat/' : o.seatPages) + k.slice(3) + '/">' + L('Open this constituency\'s own page') + '</a>' : '') +
+        (o.districtPages && /^d-/.test(k) ? '<a class="btn" href="district/' + k.slice(2) + '/">' + L('Open this district\'s own page') + '</a>' : '') +
         '<a class="btn" target="_blank" rel="noopener" href="' + SIR.wa(st.share(r), k) + '">' + L('Share on WhatsApp') + '</a>' +
         '<button type="button" data-t="link">' + L('Copy link') + '</button><button type="button" data-t="text">' + L('Copy text') + '</button></div>';
       out.querySelector('[data-t=link]').onclick = function () { copy(SIR.pageUrl(k), this); };

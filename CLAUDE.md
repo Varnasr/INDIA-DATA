@@ -941,6 +941,17 @@ for its own winner, runner-up and margin field names, and `say`, `short` and
 `build_site.py`, and `seatPages` on its finder. Hyderabad's five seats are
 not included: the part explorer covers them.
 
+**A page for every district** (`<state>/district/<slug>/`, 145) in the three
+states published by district only: Uttar Pradesh, Maharashtra and Karnataka.
+`scripts/make_district_pages.py` writes the sources (the slug is `SIR.slug`'s,
+so `#d-<slug>` on the state page and these addresses agree) and
+`assets/district.js` draws the district against every district of its state,
+its reasons where published, and its NFHS-5 circumstances from
+`data/india/factors.json` beside the typical district, with the state's rank
+correlation for each; a circumstance is never named as a cause. Finders
+(`districtPages: true`) and search link to them; `check_data.py` runs
+`--check`. English only, skipped by `i18n_collect.mjs` like the seat pages.
+
 **Share a list with us** (`share/`, on the front page's place, in every
 footer, in the search and in a short section on the front page) is the one
 form on the site: a Netlify form named `share-data` (honeypot

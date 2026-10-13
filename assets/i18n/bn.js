@@ -6,5 +6,6 @@ window.SIR_DICT = {" and ": " ও ", " to ": " থেকে ", "\"Already enroll
 "Winner, runner-up and margin for every seat are from the Election Commission's constituency result pages, checked against its state-wise pages. Turnout is the votes polled over the roll of 6 April 2026, the roll the election was held on, which the Chief Electoral Officer published by constituency and sex. It is larger than the final roll in every constituency, because names were added after the final roll.": "প্রতিটি আসনের বিজয়ী, দ্বিতীয় স্থানাধিকারী ও ব্যবধান নির্বাচন কমিশনের কেন্দ্রভিত্তিক ফলাফলের পাতা থেকে, তার রাজ্যভিত্তিক পাতার সঙ্গে মিলিয়ে দেখা। ভোটদানের হার হলো 6 এপ্রিল 2026-এর তালিকার ওপর পড়া ভোট, যে তালিকায় নির্বাচন হয়েছিল, যা মুখ্য নির্বাচনী আধিকারিক কেন্দ্র ও লিঙ্গ অনুযায়ী প্রকাশ করেছিলেন। চূড়ান্ত তালিকার পরে নাম যোগ হওয়ায় এটি প্রতিটি কেন্দ্রে চূড়ান্ত তালিকার চেয়ে বড়।",
 "Women's share of the January 2025 roll and of the fall from it to the draft, by district": "জানুয়ারি 2025-এর তালিকায় এবং তার থেকে খসড়া পর্যন্ত হ্রাসে নারীর অংশ, জেলাভিত্তিক",
 "Women's share of the fall to the draft, %": "খসড়া পর্যন্ত হ্রাসে নারীর অংশ, %",
-"Open this constituency's own page": "এই কেন্দ্রের নিজস্ব পাতা খুলুন"
+"Open this constituency's own page": "এই কেন্দ্রের নিজস্ব পাতা খুলুন",
+"Open this district's own page": "এই জেলার নিজস্ব পাতা খুলুন"
 };

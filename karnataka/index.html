@@ -168,7 +168,7 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
   ], D, { sort: 'per_100' });
   var slugD = function (d) { return SIR.slug(d.district); };
   var byName = {}, idOf = {}; D.forEach(function (d) { byName[d.district] = d; });
-  var F = SIR.finder('finder', { rows: D, key: slugD, label: function (d) { return d.district; }, prompt: L('Find a district'), placeholder: L('Type a district name'),
+  var F = SIR.finder('finder', { districtPages: true, rows: D, key: slugD, label: function (d) { return d.district; }, prompt: L('Find a district'), placeholder: L('Type a district name'),
     pick: function (d) { var b = document.getElementById('vMap'); if (b.__select && idOf[d.district]) b.__select(idOf[d.district]); },
     card: function (d) { return SIR.facts([
       [L('Roll of 16 June'), SIR.n(d.before)], [L('Names left off the draft'), SIR.n(d.removed)], [L('Per 100 electors'), SIR.d(d.per_100, 1)],

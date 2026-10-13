@@ -35,7 +35,7 @@ const OWN = fs.readdirSync(path.join(ROOT, 'site/pages'), { withFileTypes: true 
 // text carries data-no-i18n, and their shell is the same as every other
 // page's, so none of them is walked. Their titles name a seat and stay English.
 const PAGES = ['', ...SECTIONS.flatMap((d) => walk(d)), ...OWN.flatMap((d) => walk(d))]
-  .filter((p) => !/\/seat\/\d+\/$/.test(p)).sort();
+  .filter((p) => !/\/(seat\/\d+|district\/[a-z0-9-]+)\/$/.test(p)).sort();
 const SOURCES = ['index.html', 'assets/sir.js', 'assets/dash.js', 'assets/i18n.js', ...fs.readdirSync(path.join(ROOT, 'assets/faq')).filter(f => f.endsWith('.js')).sort().map(f => 'assets/faq/' + f), ...PAGES.filter(Boolean).map(p => p + 'index.html')];
 
 const cat = {};

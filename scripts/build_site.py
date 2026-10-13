@@ -467,16 +467,16 @@ def search_index():
         for d in J(folder + '/districts.json'):
             rows.append([pid, 'd', d['district'], '', page + '#' + slug(d['district'])])
     for d in J('uttarpradesh/districts.json'):
-        rows.append(['up', 'd', d['district'], '', 'uttarpradesh/#' + slug(d['district'])])
+        rows.append(['up', 'd', d['district'], '', 'uttarpradesh/district/' + slug(d['district'])[2:] + '/'])
     for d in J('maharashtra/districts.json'):
         # the press note keeps three old names; a reader may type the new one,
         # and Bombay for Mumbai
         alias = ' '.join(x for x in (d['now'], 'Bombay' if d['district'].startswith('Mumbai') else '') if x)
-        rows.append(['mh', 'd', d['district'], '', 'maharashtra/#' + slug(d['district'])] + ([alias] if alias else []))
+        rows.append(['mh', 'd', d['district'], '', 'maharashtra/district/' + slug(d['district'])[2:] + '/'] + ([alias] if alias else []))
     for d in J('karnataka/districts.json'):
         # Bengaluru is four election districts; a reader types the city
         city = 'Bengaluru Bangalore' if d['bengaluru'] else ''
-        rows.append(['ka', 'd', d['district'], '', 'karnataka/#' + slug(d['district'])] + ([city] if city else []))
+        rows.append(['ka', 'd', d['district'], '', 'karnataka/district/' + slug(d['district'])[2:] + '/'] + ([city] if city else []))
     for a in J('hyderabad/summary.json')['acs']:
         rows.append(['hyd', 'ac', a['name'], '', 'hyderabad/explorer/#' + a['name']])
     # the reading page: every piece, by title, outlet and author
