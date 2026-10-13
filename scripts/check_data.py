@@ -308,6 +308,11 @@ def _repository():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
 
 
+def _writing():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'check_writing.py')], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-600:]
+
+
 def _cases():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_cases.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
@@ -450,6 +455,7 @@ for name, fn in [
     ('the disputes page carries only checked items and is current', _disputes),
     ('the RTI page carries only checked applications and is current', _rti),
     ('the case studies carry only checked items and are current', _cases),
+    ('the site\'s own words keep the writing rules', _writing),
     ('the reading page carries only items read twice and is current', _reads),
     ('the reading page panels quote only what was read twice, and their figures are current', _panels),
     ('the brief page carries only rights read twice and says it is not legal advice', _brief),

@@ -78,7 +78,7 @@ def build():
         for t in c['not_found']:
             rules(t, c['id'] + ' not found')
         cases.append({'id': c['id'], 'title': c['title'], 'intro': c['intro'], 'items': items,
-                      'not_found': c['not_found'], 'left_out': left})
+                      'not_found': c['not_found'], 'left_out': [x['id'] for x in left]})
     text = json.dumps({'cases': cases}, ensure_ascii=False, indent=1) + '\n'
     old = open(OUT, encoding='utf-8').read() if os.path.exists(OUT) else None
     return text, old != text

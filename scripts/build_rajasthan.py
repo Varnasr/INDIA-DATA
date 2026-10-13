@@ -124,8 +124,6 @@ def build_press(acs, dist):
         m = byac[n]
         p['over_margin'] = v['left_off'] > m['margin']
         p['could_change'] = v['left_off'] * m['turnout'] / 100 > m['margin']
-        if a['note']:
-            p['note'] = a['note']
         pa[n] = p
     for d in D:
         L = seen.get(d['district'], [])

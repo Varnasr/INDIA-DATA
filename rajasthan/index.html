@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../assets/i18n.js?v=a1e06d15"></script>
+<script src="../assets/i18n.js?v=75a76999"></script>
 <title>Rajasthan 2026</title>
 <meta name="description" content="How many names Rajasthan&#x27;s SIR draft left off, how much came back by the final roll, and how each district and constituency&#x27;s roll changed from the 2023 election to the final roll of March 2026.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239b2d20'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
@@ -76,7 +76,7 @@
   <p class="finding" id="fReason"></p>
 
   <h2 id="names-left-off-district-by-district-as-the-press-printed-the">Names left off, district by district, as the press printed them</h2>
-  <p class="sub">On 16 December 2025 each District Election Officer gave parties and reporters the district's figures for the draft: the roll on 27 October 2025, the forms that came back, the names left off and the five reasons. The Chief Electoral Officer has published none of these tables. Dainik Bhaskar and Amar Ujala printed them for 22 of the 41 districts and 110 of the 199 constituencies, and those are the figures below. They are press figures and cover only part of the state, so they are kept apart from the Chief Electoral Officer's own counts on the rest of this page. Each row was checked against its own sums, and the few printed slips are listed on the <a href="method/#names-left-off-as-the-press-printed-them">method page</a>.</p>
+  <p class="sub">On 16 December 2025 each District Election Officer gave parties and reporters the district's figures for the draft. They were the roll on 27 October 2025, the forms that came back, the names left off and the five reasons. The Chief Electoral Officer has published none of these tables. Dainik Bhaskar and Amar Ujala printed them for 22 of the 41 districts and 110 of the 199 constituencies, and those are the figures below. They are press figures and cover only part of the state, so they are kept apart from the Chief Electoral Officer's own counts on the rest of this page. Each row was checked against its own sums, and the few printed slips are listed on the <a href="method/#names-left-off-as-the-press-printed-them">method page</a>.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vPressD"></div></div>
   </div>
@@ -177,7 +177,7 @@ Promise.all([SIR.json('data/rajasthan/summary.json'), SIR.json('data/rajasthan/d
   VIZ.scatter('vWomen', { label: 'Women\'s share of the roll in 2023 and in the final roll of 2026, every constituency', diag: true,
     xAxis: 'Women\'s share of the 2023 roll, %', yAxis: 'Women\'s share of the 2026 final roll, %', diagLabel: 'Same share',
     points: A.map(function (a) { return { x: a.women_2023_pct, y: a.women_2026_pct, tok: '--fill-pink', label: a.name + ': ' + SIR.pct(a.women_2023_pct) + ' in 2023, ' + SIR.pct(a.women_2026_pct) + ' in 2026' }; }) });
-  document.getElementById('fWomen').innerHTML = '<b>Women were ' + SIR.pct(S.women_2026_pct) + ' of the final roll, against ' + SIR.pct(S.women_2023_pct) + ' of the 2023 roll, and their share fell in ' + S.acs_women_fell + ' of the ' + S.acs + ' constituencies.</b> Of the names deleted after the draft, women were ' + SIR.pct(S.deleted_women_pct) + ', and of those added ' + SIR.pct(S.added_women_pct) + '. No split by sex of the names left off has been published for the state. One district gave one: in Sirohi, by the District Election Officer\'s figures as Amar Ujala printed them, women were ' + SIR.pct(S.press.sirohi.women_left_pct) + ' of the ' + n(S.press.sirohi.left_off) + ' names left off, against ' + SIR.pct(S.press.sirohi.women_before_pct) + ' of the roll before the revision.';
+  document.getElementById('fWomen').innerHTML = '<b>Women were ' + SIR.pct(S.women_2026_pct) + ' of the final roll, against ' + SIR.pct(S.women_2023_pct) + ' of the 2023 roll, and their share fell in ' + S.acs_women_fell + ' of the ' + S.acs + ' constituencies.</b> Of the names deleted after the draft, women were ' + SIR.pct(S.deleted_women_pct) + ', and of those added ' + SIR.pct(S.added_women_pct) + '. No split by sex of the names left off has been published for the state. One district gave one. In Sirohi, by the District Election Officer\'s figures as Amar Ujala printed them, women were ' + SIR.pct(S.press.sirohi.women_left_pct) + ' of the ' + n(S.press.sirohi.left_off) + ' names left off, against ' + SIR.pct(S.press.sirohi.women_before_pct) + ' of the roll before the revision.';
 
   var WD = D.map(function (d) { return { d: d, ch: d.women_2026_pct - d.women_2023_pct }; }).sort(function (p, q) { return p.ch - q.ch; });
   var hiW = WD.slice(0, 5).map(function (x) { return x.d.district; });

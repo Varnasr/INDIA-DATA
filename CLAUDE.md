@@ -1747,6 +1747,13 @@ per slot, not the slot's length.
   prefer "guessed from names" to "estimated", "typical" or "middle" to
   "median" in prose. When rewriting an English key, carry its translations to
   the new key only if the meaning is unchanged; retranslate otherwise.
+  `scripts/check_writing.py` (run by `check_data.py`) reads every page
+  source, every page and asset script's strings and the published JSON
+  (quotations, headlines, laws and contacts excepted, by key in `QUOTED`) and
+  fails on an em dash, an en dash between words, "rather than", "not only",
+  ", not a/an/the", a semicolon in a page's prose, or a word on the owner's
+  banned list. A term of art goes in `ALLOWED` with its reason. It cannot see a
+  colon-hinged sentence, a fragment or a flourish, so read what you write.
 - **Bihar and Hyderabad are never compared** with each other, on a page,
   in a report or in a deck, except as rows of the cities page
   (`india/cities/`), which the owner allowed in October 2026. Each analysis
