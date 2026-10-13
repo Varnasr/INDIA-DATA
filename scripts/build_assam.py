@@ -179,9 +179,43 @@ def ac_csv(d):
     return buf.getvalue()
 
 
+def seat_rows(d):
+    # what the constituency and district pages read: the net fall from the
+    # draft to the final roll, by sex. It is names removed less names added,
+    # so it is never called the names removed, and a seat whose roll grew
+    # carries a negative fall.
+    out = []
+    for a in d['acs']:
+        out.append(dict(ac=a['ac'], name=a['name'], reserved=a['reserved'], district=a['district'], roll_2024=a['roll_2024'],
+                        draft=a['draft'], final=a['final'], fall=a['draft'] - a['final'], fall_women=a['draft_women'] - a['final_women'],
+                        draft_women_pct=round(100 * a['draft_women'] / a['draft'], 4)))
+    return out
+
+
+def district_rows(seats):
+    by = {}
+    for a in seats:
+        x = by.setdefault(a['district'], dict(district=a['district'], acs=0, roll_2024=0, draft=0, final=0, fall=0, fall_women=0, draft_women=0))
+        x['acs'] += 1
+        for k in ('roll_2024', 'draft', 'final', 'fall', 'fall_women'):
+            x[k] += a[k]
+        x['draft_women'] += round(a['draft'] * a['draft_women_pct'] / 100)
+    out = []
+    for x in sorted(by.values(), key=lambda x: x['district']):
+        x['draft_women_pct'] = round(100 * x.pop('draft_women') / x['draft'], 4)
+        x['women_fall_pct'] = round(100 * x['fall_women'] / x['fall'], 4) if x['fall'] > 0 else None
+        out.append(x)
+    return out
+
+
 def main():
     d = build()
+    seats = seat_rows(d)
+    dists = district_rows(seats)
+    need(sum(x['fall'] for x in dists) == d['seats']['fall'], 'the districts do not add to the state\'s fall')
     files = {os.path.join(OUT, 'summary.json'): json.dumps(d, ensure_ascii=False, indent=1) + '\n',
+             os.path.join(OUT, 'constituencies.json'): json.dumps(seats, ensure_ascii=False, indent=1) + '\n',
+             os.path.join(OUT, 'districts.json'): json.dumps(dists, ensure_ascii=False, indent=1) + '\n',
              os.path.join(OUT, 'assam.csv'): as_csv(d),
              os.path.join(OUT, 'constituencies.csv'): ac_csv(d)}
     stale = [p for p, t in files.items() if not os.path.exists(p) or open(p, encoding='utf-8').read() != t]

@@ -18,7 +18,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # state folder, place id, label
 STATES = [('tamilnadu', 'tn', 'Tamil Nadu 2026'), ('westbengal', 'wb', 'West Bengal 2026'), ('kerala', 'kl', 'Kerala 2026'),
           ('delhi', 'dl', 'Delhi 2026'), ('uttarakhand', 'uk', 'Uttarakhand 2026'), ('gujarat', 'gj', 'Gujarat 2026'),
-          ('rajasthan', 'rj', 'Rajasthan 2026'), ('maharashtra', 'mh', 'Maharashtra 2026'), ('bihar', 'bihar', 'Bihar 2025')]
+          ('rajasthan', 'rj', 'Rajasthan 2026'), ('maharashtra', 'mh', 'Maharashtra 2026'), ('bihar', 'bihar', 'Bihar 2025'), ('assam', 'as', 'Assam 2026')]
 
 PAGE = '''<!--page {meta} -->
 <main id="main">

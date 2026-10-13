@@ -35,6 +35,21 @@ SIR.json('data/assam/summary.json').then(function (d) {
   SIR.table('tSeat', [{ h: 'No.' }, { h: 'Constituency' }, { h: 'District' }, { h: 'Roll, Feb 2024' }, { h: 'Draft' }, { h: 'Final' }, { h: 'Fall per 1,000 on the draft' }],
     AC.map(function (a) { return [a.ac, SIR.esc(a.name) + (a.reserved ? ' (' + a.reserved + ')' : ''), SIR.esc(a.district), n(a.roll_2024), n(a.draft), n(a.final), d1(a.fall_per_1000)]; }));
 
+  // the finder: every constituency and district, each with a page of its own
+  SIR.json('data/assam/districts.json').then(function (D) {
+    var per = function (x) { return 1000 * (x.draft - x.final) / x.draft; };
+    var move = function (x) { return x.final <= x.draft ? 'Fell by ' + n(x.draft - x.final) + ', ' + d1(per(x)) + ' per 1,000 on the draft' : 'Rose by ' + n(x.final - x.draft) + ', ' + d1(-per(x)) + ' per 1,000 on the draft'; };
+    var say = function (x, nm) { return nm + ', Assam. From the draft to the final roll of the Special Revision, the roll ' + (x.final <= x.draft ? 'fell by ' + n(x.draft - x.final) : 'rose by ' + n(x.final - x.draft)) + ', names added less names removed. These are counts from the Chief Electoral Officer\'s tables.'; };
+    var seatsOf = function (d) { return AC.filter(function (a) { return a.district === d.district; }); };
+    var DSET = { rows: D, key: function (d) { return SIR.slug(d.district); }, label: function (d) { return d.district + ' district'; },
+      card: function (d) { return SIR.facts([['Draft roll', n(d.draft)], ['Final roll', n(d.final)], ['Change from the draft', move(d)], ['Constituencies', n(d.acs)]]) + '<p class="note">Its constituencies</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
+      share: function (d) { return say(d, d.district + ' district'); } };
+    SIR.finder('finder', { seatPages: true, districtPages: true, rows: AC, more: [DSET], prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district',
+      key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+      card: function (a) { return SIR.facts([['Roll, February 2024', n(a.roll_2024)], ['Draft roll', n(a.draft)], ['Final roll', n(a.final)], ['Change from the draft', move(a)]]); },
+      share: function (a) { return say(a, a.name); } });
+  });
+
   VIZ.lollipop('vFlag', { label: 'Names flagged for deletion with the draft roll, by the reason entered', axis: 'Lakh',
     rows: [['Shifted', S.flagged_shifted], ['Dead', S.flagged_dead], ['Entered more than once, or entries alike', S.flagged_multiple]].map(function (x) { return { name: x[0], v: x[1] / 1e5, text: lk(x[1]), tok: '--fill-navy', hi: true }; }) });
   document.getElementById('nFlag').textContent = 'The Chief Electoral Officer gave ' + n(S.flagged) + ' names under these three reasons, ' + d1(S.flagged_per_100_draft) + ' for every 100 on the draft. Most reports called them names identified or flagged for deletion. No figure from the Chief Electoral Officer says how many of them were off the published draft, and the draft is larger than the roll of January 2025, so this page calls them flagged. The count reached us through the press, and no split by district, constituency or sex was found.';

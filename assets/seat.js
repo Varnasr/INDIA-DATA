@@ -54,6 +54,9 @@
       reasons: [['shifted', 'Shifted for good'], ['absent', 'Untraceable or absent'], ['dead', 'Dead'], ['duplicate', 'Enrolled at another place'], ['other', 'Other']],
       election: { year: 2024, count: 'left_off', voters: 'at_turnout', votersWhat: 'names left off, at the seat\'s 2024 turnout', turnout: 'turnout_2024' },
       limits: 'The Chief Electoral Officer published no split of the names left off by sex, at any level. The draft roll by sex is published, and the roll before the revision only as a total.' },
+    assam: { label: 'Assam', faq: 'as', lead: { count: 'fall', base: 'draft', per: 1000, what: 'fall in the roll from the draft to the final roll', of: 'the draft', to: 'the final roll' },
+      women: { count: 'fall_women', of: 'fall', roll: 'draft_women_pct', what: 'the fall from the draft to the final roll' },
+      limits: 'Assam held a Special Revision, which ran on different rules from the SIR. The Chief Electoral Officer published each constituency\'s draft and final roll by sex, so its change is names added less names removed, and the two cannot be told apart. The names flagged for deletion were published for the state only, through the press.' },
     bihar: { label: 'Bihar', faq: 'bihar', lead: { count: 'total', base: 'electorate_2025', per: 100, what: 'names removed in both phases', of: 'the 2025 election roll', say: 'names were removed in the two phases of the revision', short: 'names removed' },
       map: { winner: 'win2025', runner_up: 'ru2025', margin: 'margin2025' },
       reasons: [['r_shifted', 'Shifted'], ['r_dead', 'Dead'], ['r_absent', 'Absent'], ['r_enrolled', 'Already enrolled']], reasonsOf: 'p1', reasonsWhat: 'the first phase',
@@ -85,10 +88,10 @@
       document.querySelector('.page-head h1').textContent = a.name + ' (' + a.ac + ')';
       document.title = a.name + ' (' + a.ac + '), ' + C.label + ' | ' + document.title.split('|').pop().trim();
       var head = document.getElementById('seatSub');
-      head.innerHTML = 'Assembly constituency ' + a.ac + ' of ' + A.length + ' in ' + C.label + ', in ' + SIR.esc(a.district) + ' district. Measured by the ' + L.what + ', per ' + L.per + ' on ' + L.of + '.';
+      head.innerHTML = 'Assembly constituency ' + a.ac + ' of ' + A.length + ' in ' + C.label + ', in ' + SIR.esc(a.district) + ' district. Measured by the ' + L.what + ', per ' + n(L.per) + ' on ' + L.of + '.';
 
       var pts = [];
-      pts.push('In ' + SIR.esc(a.name) + ' ' + (falls ? 'the roll fell by ' + n(a[L.count]) + ' from ' + L.of + ' to ' + (L.to || 'the draft') : n(a[L.count]) + ' ' + (L.say || 'names were left off the draft roll')) + ', ' + d1(seatR) + ' of every ' + L.per + ' on ' + L.of + '.');
+      pts.push('In ' + SIR.esc(a.name) + ' ' + (falls ? 'the roll ' + (a[L.count] < 0 ? 'rose by ' + n(-a[L.count]) : 'fell by ' + n(a[L.count])) + ' from ' + L.of + ' to ' + (L.to || 'the draft') : n(a[L.count]) + ' ' + (L.say || 'names were left off the draft roll')) + ', ' + d1(seatR) + ' of every ' + n(L.per) + ' on ' + L.of + '.');
       pts.push('That is ' + cmp(seatR, distR) + ' ' + SIR.esc(a.district) + ' district (' + d1(distR) + ') and ' + cmp(seatR, stR) + ' ' + C.label + ' (' + d1(stR) + '). It ranks ' + rank + ' of ' + A.length + ' in the state, where 1 ' + (falls ? 'fell' : 'lost') + ' the most, and ' + drank + ' of ' + D.length + ' in its district.');
       if (C.reasons) {
         var top = C.reasons.slice().sort(function (x, y) { return a[y[0]] - a[x[0]]; })[0];
@@ -127,9 +130,9 @@
       }
 
       // the seat against its district and state
-      VIZ.lollipop('vCompare', { label: a.name + ': ' + L.what + ' per ' + L.per + ', against its district and the state', axis: 'Per ' + L.per,
+      VIZ.lollipop('vCompare', { label: a.name + ': ' + L.what + ' per ' + n(L.per) + ', against its district and the state', axis: 'Per ' + L.per,
         rows: [[a.name, seatR, '--fill-red'], [a.district + ' district', distR, '--fill-navy'], [C.label, stR, '--fill-grey']].map(function (r) { return { name: r[0], v: r[1], text: d1(r[1]), tok: r[2], hi: true }; }) });
-      document.getElementById('fCompare').innerHTML = '<b>' + SIR.esc(a.name) + ' ' + (falls ? 'fell by ' : 'lost ') + d1(seatR) + ' of every ' + L.per + ', against ' + d1(distR) + ' in its district and ' + d1(stR) + ' in the state.</b> ' + C.label + '\'s constituencies run from ' + d1(L.per * ranked[ranked.length - 1][L.count] / ranked[ranked.length - 1][L.base]) + ' in ' + SIR.esc(ranked[ranked.length - 1].name) + ' to ' + d1(L.per * ranked[0][L.count] / ranked[0][L.base]) + ' in ' + SIR.esc(ranked[0].name) + '.';
+      document.getElementById('fCompare').innerHTML = '<b>' + SIR.esc(a.name) + ' ' + (falls ? 'fell by ' : 'lost ') + d1(seatR) + ' of every ' + n(L.per) + ', against ' + d1(distR) + ' in its district and ' + d1(stR) + ' in the state.</b> ' + C.label + '\'s constituencies run from ' + (function (v) { return v < 0 ? 'a rise of ' + d1(-v) : d1(v); })(L.per * ranked[ranked.length - 1][L.count] / ranked[ranked.length - 1][L.base]) + ' in ' + SIR.esc(ranked[ranked.length - 1].name) + ' to ' + d1(L.per * ranked[0][L.count] / ranked[0][L.base]) + ' in ' + SIR.esc(ranked[0].name) + '.';
 
       // the district's seats
       var DS = D.slice().sort(function (x, y) { return y[L.count] / y[L.base] - x[L.count] / x[L.base]; });

@@ -40,7 +40,7 @@ for _pl in CFG['places']:
             raise SystemExit('FAIL - %s lists %s twice in %s' % (_pl['id'], ', '.join(_dup), _key))
 PLACES = {p['id']: p for p in CFG['places']}
 # places with a page for every constituency (scripts/make_seat_pages.py)
-SEAT_PAGES = {'tn': 'tamilnadu', 'wb': 'westbengal', 'kl': 'kerala', 'dl': 'delhi', 'uk': 'uttarakhand', 'gj': 'gujarat', 'rj': 'rajasthan', 'mh': 'maharashtra', 'bihar': 'bihar'}
+SEAT_PAGES = {'tn': 'tamilnadu', 'wb': 'westbengal', 'kl': 'kerala', 'dl': 'delhi', 'uk': 'uttarakhand', 'gj': 'gujarat', 'rj': 'rajasthan', 'mh': 'maharashtra', 'bihar': 'bihar', 'as': 'assam'}
 # Every page's <body> carries its place's class. Delhi's was once "dl", which
 # is also the class of the header menus, so the print stylesheet's .dl{display:
 # none} hid the whole of every Delhi page on paper. A place class must not be a
@@ -493,7 +493,7 @@ def search_index():
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),
-                              ('gj', 'gujarat', 'gujarat/'), ('uk', 'uttarakhand', 'uttarakhand/')):
+                              ('gj', 'gujarat', 'gujarat/'), ('uk', 'uttarakhand', 'uttarakhand/'), ('as', 'assam', 'assam/')):
         for a in J(folder + '/constituencies.json'):
             # a state with constituency pages (make_seat_pages.py) links to the seat's own page
             href = '%s/seat/%d/' % (SEAT_PAGES[pid], a['ac']) if pid in SEAT_PAGES else page + '#ac-%d' % a['ac']
