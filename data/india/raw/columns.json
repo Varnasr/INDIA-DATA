@@ -1152,5 +1152,37 @@
  "data/tamilnadu/raw/roll_20250106_ac.csv": {
   "district_no": "The district's number in the CEO's table.",
   "reserved": "SC or ST where the seat is reserved, as the CEO's table marks it."
+ },
+ "data/rajasthan/press_constituencies.csv": {
+  "ac": "The assembly constituency number in Rajasthan.",
+  "name": "The constituency's name as the final roll table prints it.",
+  "district": "The district the constituency lies in.",
+  "roll_before_27_oct_2025": "Electors on the roll of 27 October 2025, when the revision began, as the District Election Officer gave it.",
+  "left_off_draft": "Electors whose enumeration form did not come back, so their names were left off the draft roll.",
+  "left_off_per_100": "Names left off per 100 on the roll before the revision.",
+  "draft_16_dec_2025": "Electors on the draft roll of 16 December 2025.",
+  "dead": "Names left off entered as dead. A reason is what the officer wrote down, and nobody checked it.",
+  "shifted": "Names left off entered as shifted for good.",
+  "absent": "Names left off entered as absent.",
+  "enrolled_elsewhere": "Names left off entered as enrolled at more than one place.",
+  "other": "Names left off entered under another reason.",
+  "no_mapping": "Electors on the draft whose entry could not be matched to the 2002 roll of the last intensive revision, printed for Jaipur and Jodhpur only.",
+  "adds_up_as_printed": "True when the printed row adds up within itself. A row that does not is kept as printed.",
+  "newspaper": "The newspaper that printed the figures, Dainik Bhaskar or Amar Ujala."
+ },
+ "data/rajasthan/press_districts.csv": {
+  "district": "The district, one of the 22 printed.",
+  "roll_before_27_oct_2025": "Electors on the roll of 27 October 2025, when the revision began, as the District Election Officer gave it.",
+  "left_off_draft": "Electors whose enumeration form did not come back, so their names were left off the draft roll.",
+  "left_off_per_100": "Names left off per 100 on the roll before the revision.",
+  "draft_16_dec_2025": "Electors on the draft roll of 16 December 2025.",
+  "dead": "Names left off entered as dead. A reason is what the officer wrote down, and nobody checked it.",
+  "shifted": "Names left off entered as shifted for good.",
+  "absent": "Names left off entered as absent.",
+  "enrolled_elsewhere": "Names left off entered as enrolled at more than one place.",
+  "other": "Names left off entered under another reason.",
+  "no_mapping": "Electors on the draft whose entry could not be matched to the 2002 roll of the last intensive revision, printed for Jaipur and Jodhpur only.",
+  "newspaper": "The newspaper that printed the figures, Dainik Bhaskar or Amar Ujala.",
+  "source": "The address of the article the figures were read from."
  }
 }

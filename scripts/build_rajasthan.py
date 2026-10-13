@@ -56,6 +56,117 @@ def spearman(x, y):
     return cov / (sum((a - mx) ** 2 for a in rx) * sum((b - my) ** 2 for b in ry)) ** 0.5
 
 
+# The district election officers' figures for the draft, as Dainik Bhaskar and
+# Amar Ujala printed them on 16 and 17 December 2025 (draft_district_press.csv,
+# draft_ac_press.csv; sources in SOURCES.md). Press, partial: 22 of 41 districts
+# and 110 of 199 constituencies. Each printed table is held to its own
+# identities; the disagreements below are the printed tables' own, kept as
+# printed, and a new one fails the build.
+DIST_GAPS = {  # district: (roll before - left off - draft, reasons - left off)
+    'Kota': (-1010, 0), 'Alwar': (0, -20), 'Ajmer': (0, 54), 'Jaisalmer': (0, 30)}
+SUM_GAPS = {  # (district, column): AC rows summed less the printed district row
+    ('Alwar', 'roll_before'): 60, ('Alwar', 'left_off'): -50, ('Alwar', 'dead'): 49, ('Alwar', 'shifted'): 20,
+    ('Alwar', 'other'): -2, ('Ajmer', 'shifted'): -54, ('Ajmer', 'other'): 60, ('Pali', 'absent'): -3100,
+    ('Jaisalmer', 'left_off'): 30, ('Kota', 'roll_before'): 1000, ('Kota', 'draft'): -10}
+REASONS = ('dead', 'absent', 'shifted', 'duplicate', 'other')
+
+
+def outlet(url):
+    return 'Amar Ujala' if 'amarujala' in url else 'Dainik Bhaskar'
+
+
+def build_press(acs, dist):
+    I = lambda x: int(x) if x not in ('', None) else None
+    D = rd('draft_district_press.csv')
+    A = rd('draft_ac_press.csv')
+    byac = {a['ac']: a for a in acs}
+    rows = []
+    for d in D:
+        before, left, draft = I(d['roll_before']), I(d['left_off']), I(d['draft'])
+        rs = [I(d[k]) for k in ('dead', 'absent', 'shifted', 'multiple', 'other')]
+        gap = (before - left - draft, (sum(rs) - left) if None not in rs else 0)
+        assert gap == DIST_GAPS.get(d['district'], (0, 0)), (d['district'], gap)
+        assert d['district'] in dist, d['district']
+        r = {'district': d['district'], 'roll_before': before, 'left_off': left, 'draft': draft,
+             'per_100': round(100 * left / before, 4), 'outlet': outlet(d['source']), 'source': d['source'],
+             'fall_per_100': dist[d['district']]['per_100']}
+        if None not in rs:
+            for k, v in zip(REASONS, rs):
+                r[k] = v
+            r['shifted_absent_pct'] = round(100 * (rs[1] + rs[2]) / sum(rs), 4)
+            r['dead_pct'] = round(100 * rs[0] / sum(rs), 4)
+        if d['no_mapping']:
+            r['no_mapping'] = I(d['no_mapping'])
+        rows.append(r)
+    rows.sort(key=lambda r: -r['per_100'])
+    seen = {}
+    pa = {}
+    for a in A:
+        n = int(a['ac'])
+        assert a['district'] == byac[n]['district'], n
+        v = {k: I(a[k]) for k in ('roll_before', 'left_off', 'draft') + REASONS + ('no_mapping',)}
+        seen.setdefault(a['district'], []).append(v)
+        if n == 190:  # the printed roll before repeats Kota North's, so it is draft plus left off
+            v['roll_before'] = v['draft'] + v['left_off']
+        p = {'left_off': v['left_off'], 'clean': a['check'] in ('before-left=draft;reasons=left', 'before-left=draft', 'reasons=left'),
+             'outlet': outlet(a['source'])}
+        if v['roll_before']:
+            p['roll_before'] = v['roll_before']
+            p['per_100'] = round(100 * v['left_off'] / v['roll_before'], 4)
+        if v['draft']:
+            p['draft'] = v['draft']
+            p['after_per_100'] = round(100 * (byac[n]['final'] - v['draft']) / v['draft'], 4)
+        if None not in [v[k] for k in REASONS]:
+            for k in REASONS:
+                p[k] = v[k]
+        if v['no_mapping'] is not None:
+            p['no_mapping'] = v['no_mapping']
+        m = byac[n]
+        p['over_margin'] = v['left_off'] > m['margin']
+        p['could_change'] = v['left_off'] * m['turnout'] / 100 > m['margin']
+        if a['note']:
+            p['note'] = a['note']
+        pa[n] = p
+    for d in D:
+        L = seen.get(d['district'], [])
+        if not L:
+            continue
+        for k in ('roll_before', 'left_off', 'draft', 'dead', 'absent', 'shifted', 'other'):
+            vals = [x[k] for x in L]
+            if None in vals or not d[k]:
+                continue
+            got = sum(vals) - int(d[k])
+            assert got == SUM_GAPS.get((d['district'], k), 0), (d['district'], k, got)
+    covered = sum(r['left_off'] for r in rows)
+    withr = [r for r in rows if 'dead' in r]
+    tot = {k: sum(r[k] for r in withr) for k in REASONS}
+    rate = [p for p in pa.values() if 'per_100' in p]
+    fall = [byac[n]['per_100'] for n, p in pa.items() if 'per_100' in p]
+    sx = {r['stage']: r for r in rd('sirohi_sex_press.csv')}
+    sb, sd = sx['roll_before'], sx['draft_16_12_2025']
+    for r in (sb, sd):
+        assert int(r['men']) + int(r['women']) + int(r['other']) == int(r['total'])
+    assert int(sb['total']) == next(r for r in rows if r['district'] == 'Sirohi')['roll_before']
+    assert int(sd['total']) == next(r for r in rows if r['district'] == 'Sirohi')['draft']
+    sw = int(sb['women']) - int(sd['women'])
+    sl = int(sb['total']) - int(sd['total'])
+    hi, lo = max(rate, key=lambda p: p['per_100']), min(rate, key=lambda p: p['per_100'])
+    nm = lambda p: byac[next(n for n, q in pa.items() if q is p)]['name']
+    press = {
+        'districts': rows, 'districts_n': len(rows), 'left_off_covered': covered,
+        'covered_pct': round(100 * covered / 4184891, 4),
+        'reasons_districts': len(withr), 'reasons_total': tot, 'reasons_left_off': sum(r['left_off'] for r in withr),
+        'acs_n': len(pa), 'acs_rate_n': len(rate), 'acs_reasons_n': sum('dead' in p for p in pa.values()),
+        'acs_over_margin': sum(p['over_margin'] for p in pa.values()), 'acs_could_change': sum(p['could_change'] for p in pa.values()),
+        'ac_max': nm(hi), 'ac_max_v': hi['per_100'], 'ac_min': nm(lo), 'ac_min_v': lo['per_100'],
+        'rho_fall': round(spearman([p['per_100'] for p in rate], fall), 3),
+        'rho_fall_districts': round(spearman([r['per_100'] for r in rows], [r['fall_per_100'] for r in rows]), 3),
+        'sirohi': {'women_left_pct': round(100 * sw / sl, 4), 'women_before_pct': round(100 * int(sb['women']) / int(sb['total']), 4),
+                   'left_off': sl, 'women_left': sw},
+    }
+    return press, pa
+
+
 def build():
     S = {(r['item'], r['scope']): r for r in rd('sir_state_summary.csv')}
     s199 = '199 ACs (excl. 193 Anta)'
@@ -155,6 +266,12 @@ def build():
         'low_districts': [{'district': d['district'], 'per_100': d['per_100']} for d in districts[-3:]],
     }
 
+    press, press_acs = build_press(acs, dist)
+    summary['press'] = press
+    for a in acs:
+        if a['ac'] in press_acs:
+            a['press'] = press_acs[a['ac']]
+
     out = {'summary.json': json.dumps(summary, ensure_ascii=False, indent=1) + '\n',
            'constituencies.json': json.dumps(acs, ensure_ascii=False, separators=(',', ':')) + '\n',
            'districts.json': json.dumps(districts, ensure_ascii=False, separators=(',', ':')) + '\n'}
@@ -172,6 +289,24 @@ def build():
     for d in districts:
         w.writerow([d[c] for c in ('district', 'acs', 'roll_2023', 'final', 'fall', 'per_100', 'women_2023_pct', 'women_2026_pct', 'women_change')])
     out['districts.csv'] = buf.getvalue()
+
+    buf = io.StringIO(); w = csv.writer(buf, lineterminator='\n')
+    w.writerow(['ac', 'name', 'district', 'roll_before_27_oct_2025', 'left_off_draft', 'left_off_per_100', 'draft_16_dec_2025',
+                'dead', 'shifted', 'absent', 'enrolled_elsewhere', 'other', 'no_mapping', 'adds_up_as_printed', 'newspaper'])
+    for a in acs:
+        p = a.get('press')
+        if p:
+            w.writerow([a['ac'], a['name'], a['district'], p.get('roll_before', ''), p['left_off'], p.get('per_100', ''), p.get('draft', ''),
+                        p.get('dead', ''), p.get('shifted', ''), p.get('absent', ''), p.get('duplicate', ''), p.get('other', ''),
+                        p.get('no_mapping', ''), p['clean'], p['outlet']])
+    out['press_constituencies.csv'] = buf.getvalue()
+    buf = io.StringIO(); w = csv.writer(buf, lineterminator='\n')
+    w.writerow(['district', 'roll_before_27_oct_2025', 'left_off_draft', 'left_off_per_100', 'draft_16_dec_2025',
+                'dead', 'shifted', 'absent', 'enrolled_elsewhere', 'other', 'no_mapping', 'newspaper', 'source'])
+    for r in summary['press']['districts']:
+        w.writerow([r['district'], r['roll_before'], r['left_off'], r['per_100'], r['draft'], r.get('dead', ''), r.get('shifted', ''),
+                    r.get('absent', ''), r.get('duplicate', ''), r.get('other', ''), r.get('no_mapping', ''), r['outlet'], r['source']])
+    out['press_districts.csv'] = buf.getvalue()
 
     stale = []
     for name, text in out.items():

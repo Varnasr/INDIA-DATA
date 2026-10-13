@@ -633,6 +633,22 @@ because the independents' fronts are not in the data.
   strings for the same reason. Translate before taking the note out.
 - The map is by constituency (`data/geo/rajasthan.json`), shaded by the change
   in the roll; a constituency whose roll grew falls in the lightest bin.
+- **The District Election Officers' figures for the draft, from the press**
+  (October 2026). On 16 December 2025 each officer briefed the district's roll
+  before, draft, names left off and five reasons; Dainik Bhaskar and Amar Ujala
+  printed them for 22 of 41 districts and 110 of 199 constituencies
+  (`raw/draft_district_press.csv`, `draft_ac_press.csv`, Sirohi by sex in
+  `sirohi_sex_press.csv`; see `SOURCES.md`). `build_press()` holds every
+  printed table to its own sums, with the printed slips pinned in `DIST_GAPS`
+  and `SUM_GAPS`, and writes `summary.json` `press`, a `press` object on each
+  covered constituency, and `press_districts.csv` and `press_constituencies.csv`.
+  The overview's section, the FAQ and the seat pages (`press: true` in
+  `seat.js`) show them as press and partial, never added to the CEO's figures.
+  They rank places much as the change in the roll does (rank correlation 0.85
+  across constituencies, 0.88 across districts), which is the check that the
+  change in the roll is a fair stand-in elsewhere. Two press splits of the
+  state's reasons disagree with each other and the CEO, so the state reasons
+  stay the CEO's lakh figures.
 
 ## Uttar Pradesh
 
