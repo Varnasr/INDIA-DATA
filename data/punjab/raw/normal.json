@@ -87,30 +87,108 @@
    "title": "The five districts with the most names left off",
    "level": "district",
    "kind": "left_off",
-   "src": "s3",
+   "src": "s8",
    "partial": true,
    "press": true,
-   "note": "Printed in lakh and rounded here to the nearest thousand.",
    "rows": [
     {
      "name": "Ludhiana",
-     "removed": 416000
+     "removed": 416088
     },
     {
      "name": "Amritsar",
-     "removed": 242000
+     "removed": 242751
     },
     {
      "name": "Jalandhar",
-     "removed": 184000
+     "removed": 184997
     },
     {
      "name": "SAS Nagar (Mohali)",
-     "removed": 153000
+     "removed": 153714
     },
     {
      "name": "Patiala",
-     "removed": 138000
+     "removed": 138624
+    }
+   ],
+   "note": "Exact counts as ABP Live printed them. Amritsar's own constituency figures put it 9 lower, the same kind of small gap as the state's 27 between the names left off and the roll before less the draft."
+  },
+  {
+   "id": "amritsar_acs",
+   "title": "Amritsar district, every constituency, from the roll before to the final roll",
+   "level": "ac",
+   "kind": "left_off",
+   "src": "s9",
+   "partial": true,
+   "press": true,
+   "note": "The District Election Officer's figures, by sex, for the 11 constituencies of one district. Women were 52.8% of the names left off here against 47.9% of the roll before.",
+   "rows": [
+    {
+     "name": "Ajnala",
+     "before": 165959,
+     "draft": 149625,
+     "removed": 16334
+    },
+    {
+     "name": "Raja Sansi",
+     "before": 178440,
+     "draft": 158527,
+     "removed": 19913
+    },
+    {
+     "name": "Majitha",
+     "before": 168028,
+     "draft": 152298,
+     "removed": 15730
+    },
+    {
+     "name": "Jandiala (SC)",
+     "before": 179560,
+     "draft": 167446,
+     "removed": 12114
+    },
+    {
+     "name": "Amritsar North",
+     "before": 202533,
+     "draft": 165037,
+     "removed": 37496
+    },
+    {
+     "name": "Amritsar West (SC)",
+     "before": 218235,
+     "draft": 189061,
+     "removed": 29174
+    },
+    {
+     "name": "Amritsar Central",
+     "before": 140962,
+     "draft": 113573,
+     "removed": 27389
+    },
+    {
+     "name": "Amritsar East",
+     "before": 167480,
+     "draft": 140136,
+     "removed": 27344
+    },
+    {
+     "name": "Amritsar South",
+     "before": 166374,
+     "draft": 143626,
+     "removed": 22748
+    },
+    {
+     "name": "Attari (SC)",
+     "before": 190155,
+     "draft": 174485,
+     "removed": 15670
+    },
+    {
+     "name": "Baba Bakala (SC)",
+     "before": 195345,
+     "draft": 176515,
+     "removed": 18830
     }
    ]
   }
@@ -162,6 +240,20 @@
    "id": "s7",
    "title": "The Hindu, the Chief Electoral Officer's statement with the final roll",
    "url": "https://www.thehindu.com/news/national/punjab/1360-lakh-names-dropped-from-final-electoral-rolls-after-sir-in-punjab/article71575333.ece",
+   "date": "2026-10-12",
+   "primary": false
+  },
+  {
+   "id": "s8",
+   "title": "ABP Live, 13 October 2026, the names left off in the five districts with the most",
+   "url": "https://www.abplive.com/states/punjab/punjab-sir-final-voters-list-13-6-lakhs-name-deleted-effect-on-aap-congress-bjp-samikaran-3201337",
+   "date": "2026-10-13",
+   "primary": false
+  },
+  {
+   "id": "s9",
+   "title": "Punjab News Express, 12 October 2026, carrying the District Election Officer of Amritsar's release on the final roll",
+   "url": "https://punjabnewsexpress.com/punjab/news/final-electoral-roll-of-district-amritsar-published-following-special-intensive-revision-sir-2026-332039",
    "date": "2026-10-12",
    "primary": false
   }
