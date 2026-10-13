@@ -1219,3 +1219,4 @@ html.dyslexic-font .pull .pq .tr{font-style:normal}
 /* printing a page (and the PDF reports made from the pages): no buttons,
    no search box, no floating buttons, nothing a reader cannot press on paper */
 @media print{.tools,.finder,.fabs,.anchor,.tour,.toc,#tally{display:none!important}.vizbox,.panel{break-inside:avoid}}
+h1,h2{overflow-wrap:break-word;hyphens:auto}

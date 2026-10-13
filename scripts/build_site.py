@@ -499,7 +499,8 @@ def search_index():
             href = '%s/seat/%d/' % (SEAT_PAGES[pid], a['ac']) if pid in SEAT_PAGES else page + '#ac-%d' % a['ac']
             rows.append([pid, 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], href])
         for d in J(folder + '/districts.json'):
-            rows.append([pid, 'd', d['district'], '', page + '#' + slug(d['district'])])
+            # every district of these states has a page of its own (make_district_pages.py)
+            rows.append([pid, 'd', d['district'], '', folder + '/district/' + slug(d['district'])[2:] + '/'])
     for d in J('uttarpradesh/districts.json'):
         rows.append(['up', 'd', d['district'], '', 'uttarpradesh/district/' + slug(d['district'])[2:] + '/'])
     for d in J('maharashtra/districts.json'):

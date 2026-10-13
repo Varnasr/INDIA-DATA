@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""One page per district, for the states whose revision was published by
-district only: Uttar Pradesh, Maharashtra and Karnataka.
+"""One page per district, in every state whose figures were published by
+district, each in that state's own measure.
 
     python3 scripts/make_district_pages.py          # write site/pages/<state>/district/<slug>/
     python3 scripts/make_district_pages.py --check  # fail if a page is missing or stale
@@ -15,7 +15,10 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATES = [('uttarpradesh', 'up', 'Uttar Pradesh 2026'), ('maharashtra', 'mh', 'Maharashtra 2026'), ('karnataka', 'ka', 'Karnataka 2026')]
+STATES = [('uttarpradesh', 'up', 'Uttar Pradesh 2026'), ('maharashtra', 'mh', 'Maharashtra 2026'), ('karnataka', 'ka', 'Karnataka 2026'),
+          ('bihar', 'bihar', 'Bihar 2025'), ('tamilnadu', 'tn', 'Tamil Nadu 2026'), ('westbengal', 'wb', 'West Bengal 2026'),
+          ('kerala', 'kl', 'Kerala 2026'), ('delhi', 'dl', 'Delhi 2026'), ('gujarat', 'gj', 'Gujarat 2026'),
+          ('rajasthan', 'rj', 'Rajasthan 2026'), ('uttarakhand', 'uk', 'Uttarakhand 2026')]
 
 
 def slug(s):
@@ -70,7 +73,7 @@ def pages():
         for d in json.load(open(os.path.join(ROOT, 'data', folder, 'districts.json'), encoding='utf-8')):
             name = d['district'] + (' (now %s)' % d['now'] if d.get('now') else '')
             meta = {'title': '%s district, %s' % (name, label),
-                    'description': 'The SIR in %s district of %s: how many names it lost, the reasons where published, and its circumstances from the National Family Health Survey, set against the state\'s other districts.' % (name, label.rsplit(' ', 1)[0]),
+                    'description': 'The SIR in %s district of %s: its figures in the state\'s own measure, the reasons where published, and its circumstances from the National Family Health Survey, set against the state\'s other districts.' % (name, label.rsplit(' ', 1)[0]),
                     'place': pid, 'body': {'data-district-state': folder, 'data-district': slug(d['district'])}}
             out[os.path.join('site', 'pages', folder, 'district', slug(d['district']), 'index.html')] = PAGE.format(meta=json.dumps(meta, ensure_ascii=False), name=name)
     return out

@@ -962,8 +962,15 @@ for its own winner, runner-up and margin field names, and `say`, `short` and
 `build_site.py`, and `seatPages` on its finder. Hyderabad's five seats are
 not included: the part explorer covers them.
 
-**A page for every district** (`<state>/district/<slug>/`, 145) in the three
-states published by district only: Uttar Pradesh, Maharashtra and Karnataka.
+**A page for every district** (`<state>/district/<slug>/`, 359) in eleven
+states: Uttar Pradesh, Maharashtra and Karnataka (published by district only),
+and Bihar, Tamil Nadu, West Bengal, Kerala, Delhi, Gujarat, Rajasthan and
+Uttarakhand (13 October 2026). Each is drawn in its state's own measure, set
+in `CFG` in `district.js`: names left off, names removed (Bihar, per 100 on
+the 2025 roll), or the fall in the roll (West Bengal, Kerala, Rajasthan, with
+`fall: true`, which words every sentence as a fall and a negative fall as a
+rise). A state with district figures and no page is a gap the owner counts:
+every analysis gets district and constituency pages where its tables allow.
 `scripts/make_district_pages.py` writes the sources (the slug is `SIR.slug`'s,
 so `#d-<slug>` on the state page and these addresses agree) and
 `assets/district.js` draws the district against every district of its state,
@@ -1399,8 +1406,10 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   On a phone the header is the wordmark, Search and one menu button; opened,
   the controls sit in a grid of equal tiles, four to a row, because one row of
   eight ran past a 360px screen and cut off the menu button itself.
-  The front page follows the mockup: the headline states the count, a grid
-  of 100 dots shows the share, a four-number strip (the count left off stays first; the other three come in turn from a list of ten computed from the All India files, three a day by `SIR.day()`), the map beside a ranked
+  The front page follows the mockup: the headline states the count and the
+  share as "one in every k electors" (k = 100 / per 100, rounded; 7 on 13
+  October 2026), a grid
+  of 100 dots shows the share, a four-number strip (the count left off and "1 in k" stay first; the other two come in turn from a list of ten computed from the All India files, three a day by `SIR.day()`), the map beside a ranked
   list of states (so a phone does not depend on hover), cards to each
   analysis led by a count of names with its share of the roll beneath it (each pair from one source; Kerala, which published no count of names left off, shows the fall in the roll and says so; the pinned cards keep their own figure), every state and territory among them (the 20 on
   the shared page take their figure from `states.json`), one featured in the
