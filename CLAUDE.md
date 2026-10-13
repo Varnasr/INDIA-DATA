@@ -1032,6 +1032,19 @@ replies are written by hand from the Netlify dashboard (turn on the form's
 email notification there). `_redirects` answers 404 on `/netlify/*`. The page says
 support buys no influence over what is published; keep that sentence.
 
+**Feedback and corrections** (`feedback/`, in every footer as "Feedback", in
+the search, and linked from the front page's "Who made it" and the corrections
+page) is a Netlify form named `feedback` (honeypot `company_website`): what it
+is about (a figure that looks wrong, something unclear, a page that does not
+work, a suggestion, other), the page, the message, where the right figure is,
+and an optional name and email. The footer's link carries the page as
+`?from=<path>`, which the page script cleans and fills in. It posts to
+`feedback/thanks/` (no-indexed) and works without JavaScript. The page names
+no service, by the owner's rule; `terms/` names Netlify, because the privacy
+section must say where what is sent goes. A reported error is checked against
+its source and, if the site is wrong, listed on `corrections/`. Turn on the
+form's email notification in the Netlify dashboard.
+
 **Downloads** (`downloads/`, on the front page's place, linked from every
 Downloads button and the footer) lists every file the site publishes.
 `scripts/build_repository.py` writes one Excel workbook per place into
