@@ -36,6 +36,12 @@
     return t;
   }
   // a key of coloured dots that starts a new row when it would run off the edge
+  // how far a key wraps below its first row, so a chart can make room for it
+  function keyH(x0, W, keys) {
+    var kx = x0, h = 0, cw = phone() ? 6.4 : 7.2;
+    keys.forEach(function (k) { var w = 16 + k[0].length * cw; if (kx > x0 && kx + w > W - 4) { kx = x0; h += 18; } kx += w + 14; });
+    return h;
+  }
   function keyRow(svg, x0, y0, W, keys, R, paintFn) {
     var kx = x0, ky = y0, cw = phone() ? 6.4 : 7.2;
     keys.forEach(function (k) {
@@ -668,7 +674,9 @@
   // (y = x) and reference lines, and a key of colours
   function scatter(box, o) {
     measure(box);
-    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : Math.min(WIDE(), 900), H = phone() ? 360 : 440, l = phone() ? 46 : 60, b = 52, top = o.key ? 30 : 12, rgt = 16;
+    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : Math.min(WIDE(), 900), H = phone() ? 360 : 440, l = phone() ? 46 : 60, b = 52, rgt = 16;
+    // a key that wraps gets its rows above the plot, never over it
+    var kh = o.key ? keyH(4, W, o.key) : 0, top = o.key ? 30 + kh : 12; H += kh;
     var s = svgIn(box, W, H, o.label);
     var xs = o.points.map(function (p) { return p.x; }), ys = o.points.map(function (p) { return p.y; });
     var tx = nice(o.xMin != null ? o.xMin : Math.min.apply(null, xs), Math.max.apply(null, xs)), ty = nice(o.yMin != null ? o.yMin : Math.min.apply(null, ys), Math.max.apply(null, ys));
@@ -692,7 +700,7 @@
     });
     foot(s, l + (W - l) / 2, H - 14, o.xAxis, phone() ? 44 : 90);
     var ya = el('text', { x: 12, y: top + (H - top - b) / 2, 'text-anchor': 'middle', class: 'vval', transform: 'rotate(-90 12 ' + (top + (H - top - b) / 2) + ')' }, s, o.yAxis);
-    if (o.key) keyRow(s, l, 10, W, o.key, 5, paint);
+    if (o.key) keyRow(s, 4, 10, W, o.key, 5, paint);
   }
 
   function colOf(ds, i) {

@@ -5,7 +5,8 @@
  "revision": "sir",
  "dates": {
   "roll_before": "2026-06-09",
-  "draft": "2026-08-13"
+  "draft": "2026-08-13",
+  "final": "2026-10-12"
  },
  "figures": {
   "roll_before": {
@@ -31,6 +32,51 @@
   "duplicate": {
    "v": 119145,
    "src": "s1",
+   "press": true
+  },
+  "final": {
+   "v": 20100727,
+   "src": "s6",
+   "press": true
+  },
+  "men_final": {
+   "v": 10376026,
+   "src": "s6",
+   "press": true
+  },
+  "women_final": {
+   "v": 9724195,
+   "src": "s6",
+   "press": true
+  },
+  "third_final": {
+   "v": 506,
+   "src": "s6",
+   "press": true
+  },
+  "added_after": {
+   "v": 797263,
+   "src": "s6",
+   "press": true
+  },
+  "notices": {
+   "v": 3549036,
+   "src": "s7",
+   "press": true
+  },
+  "men_before": {
+   "v": 11176866,
+   "src": "s7",
+   "press": true
+  },
+  "women_before": {
+   "v": 10283478,
+   "src": "s7",
+   "press": true
+  },
+  "third_before": {
+   "v": 699,
+   "src": "s7",
    "press": true
   }
  },
@@ -104,14 +150,28 @@
    "url": "https://www.hindustantimes.com/cities/chandigarh-news/sir-punjab-clears-99-of-logical-discrepancy-cases-for-final-roll-101790103659947.html",
    "date": "2026-09-23",
    "primary": false
+  },
+  {
+   "id": "s6",
+   "title": "ANI, the Chief Electoral Officer's release with the final roll",
+   "url": "https://www.aninews.in/news/national/general-news/punjab-ceo-publishes-final-electoral-rolls-for-117-assembly-seats-over-797-lakh-new-voters-enrolled-in-sir-202620261012180206",
+   "date": "2026-10-12",
+   "primary": false
+  },
+  {
+   "id": "s7",
+   "title": "The Hindu, the Chief Electoral Officer's statement with the final roll",
+   "url": "https://www.thehindu.com/news/national/punjab/1360-lakh-names-dropped-from-final-electoral-rolls-after-sir-in-punjab/article71575333.ece",
+   "date": "2026-10-12",
+   "primary": false
   }
  ],
  "notes": [
   "Every figure is the Chief Electoral Officer's as the press reported it. The Chief Electoral Officer's own site could not be reached.",
   "The roll before is the roll of 9 June 2026. The names left off are the forms that could not be accounted for when enumeration ended on 3 August.",
   "Shifted and absent are counted together as shifted, absent or other. The four reasons published add to 16,076 fewer than the names left off, and no source names the rest.",
-  "Claims and objections ran to 12 September 2026 and the final roll is due on 12 October 2026.",
-  "About 22.69 lakh electors were flagged for logical discrepancies, and about 22.41 lakh cases had been cleared by 22 September, as the press reported."
+  "About 22.69 lakh electors were flagged for logical discrepancies, and about 22.41 lakh cases had been cleared by 22 September, as the press reported.",
+  "Claims and objections ran to 12 September 2026, and the final roll was published on 12 October 2026 with 2,01,00,727 electors. 7,97,263 new electors were added after the draft and 86,038 were marked ineligible after notice. The draft of 13 August held 1,93,94,435, so 4,933 removals after the draft are not accounted for in the release, and the draft is 27 below the roll before less the names left off counted at the end of enumeration."
  ],
  "cannot_show": [
   "The exact number of electors on the draft roll was not published in anything found. The press gives about 1.93 or 1.94 crore, so the draft is left out.",

@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-10",
+ "as_of": "2026-10-13",
  "adults": {
   "states": 19,
   "rho_rate": 0.0465,
@@ -1003,17 +1003,17 @@
   "Tripura"
  ],
  "after_draft": {
-  "states": 19,
-  "removed": 3278906
+  "states": 20,
+  "removed": 3364944
  },
  "final": {
-  "states": 21,
-  "removed": 75681668,
-  "net_after_draft": 10669946,
+  "states": 22,
+  "removed": 77748303,
+  "net_after_draft": 11376238,
   "withheld": 6006675,
   "gross": 16,
-  "per_100": 11.9132,
-  "net_per_100": 10.2336,
+  "per_100": 11.8386,
+  "net_per_100": 10.1063,
   "shrank": [
    "West Bengal",
    "Goa",
@@ -1029,14 +1029,13 @@
    "Andhra Pradesh",
    "Jharkhand",
    "Haryana",
-   "Punjab",
    "Meghalaya",
    "Nagaland"
   ],
-  "made_up_pct": 14.1,
-  "made_up_pct_ex_withheld": 22.0,
-  "net_per_100_ex_withheld": 9.2881,
-  "rho_made_up": -0.1519
+  "made_up_pct": 14.6,
+  "made_up_pct_ex_withheld": 22.4,
+  "net_per_100_ex_withheld": 9.1917,
+  "rho_made_up": -0.1462
  },
  "states": [
   {
@@ -2360,17 +2359,21 @@
    "roll_adult_pct": 88.9,
    "draft_adult_pct": 80.3,
    "removed_pct_votes24": 15.3,
-   "removed_after_draft": null,
-   "added_after_draft": null,
+   "removed_after_draft": 86038,
+   "added_after_draft": 797263,
    "withheld": null,
-   "electors_final": null,
-   "final_date": null,
-   "reconciles": null,
-   "net_after_draft": null,
-   "net_fall": null,
-   "net_fall_per_100": null,
-   "made_up_pct": null,
-   "final_source": null
+   "electors_final": 20100727,
+   "final_date": "2026-10-12",
+   "reconciles": "no",
+   "net_after_draft": 706292,
+   "net_fall": 1360343,
+   "net_fall_per_100": 6.3387,
+   "made_up_pct": 34.2,
+   "final_source": {
+    "source": "press",
+    "url": "https://www.aninews.in/news/national/general-news/punjab-ceo-publishes-final-electoral-rolls-for-117-assembly-seats-over-797-lakh-new-voters-enrolled-in-sir-202620261012180206",
+    "note": "The Chief Electoral Officer's release of 12 October 2026 as ANI and The Hindu carried it; the CEO's own press note was not found on ceopunjab.gov.in. Added means new electors enrolled after the draft (2,93,049 of them aged 18 or 19, The Times of India). Removed is the 86,038 marked ineligible by speaking orders after notice. Draft plus added less final gives 90,971, so 4,933 removals are not accounted for in the release. Final roll 1,03,76,026 men, 97,24,195 women, 506 third gender."
+   }
   },
   {
    "state": "Odisha",

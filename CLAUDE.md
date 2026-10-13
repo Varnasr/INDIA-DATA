@@ -728,7 +728,7 @@ in `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
   Osmanabad); `now` in `districts.json` carries the new ones for the finder
   and the search.
 - The dates are read from `process.json`: the Commission's letter of
-  26.09.2026 moved claims to 12 October and the final roll to 16 November
+  26.09.2026 moved claims to 12 October and the final roll to 16 November, and the release of 12.10.2026 moved claims again to 26 October with notices to 10 November
   2026, later than the note's own dates. Rebuild from the final roll, by
   district and sex, when it is out.
 - The map is by district (`data/geo/maharashtra.json`, see

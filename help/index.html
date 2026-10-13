@@ -111,14 +111,23 @@ SIR.json('data/india/help.json').then(function (H) {
   sel.innerHTML = '<option value="">' + esc(t('Every state')) + '</option>' + H.org_states.concat(['India']).map(function (s) {
     var k = H.orgs.filter(function (o) { return o.state === s; }).length; return '<option value="' + esc(s) + '">' + esc(place(s)) + ' (' + k + ')</option>'; }).join('');
   var end = document.getElementById('orgEnd');
+  // a contact line is plain text; its website, email and phone numbers become links
+  // a report dated by month only (an annual report) shows its month and year
+  function fdate(d) { return /^\d{4}-\d{2}$/.test(d || '') ? SIR.date(d + '-01').replace(/^\d+\s+/, '') : SIR.date(d); }
+  function linkify(x) {
+    return esc(x).replace(/\b([\w.+-]+@[\w-]+(\.[\w-]+)+)\b/g, '<a href="mailto:$1">$1</a>')
+      .replace(/(^|[\s(])((?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:org|in|net|com)(?:\.in)?(?:\/[\w\/.-]*)?)(?=[\s,.;)]|$)/gi, function (m, a, d) { return /@/.test(d) ? m : a + '<a href="https://' + d.replace(/\.$/, '') + '" rel="noopener">' + d + '</a>'; })
+      .replace(/(\+?\d[\d -]{8,}\d)/g, function (m) { return '<a href="tel:' + m.replace(/[^\d+]/g, '') + '">' + m + '</a>'; });
+  }
   function draw() {
     var st = sel.value, rows = H.orgs.filter(function (o) { return !st || o.state === st; });
     document.querySelectorAll('.orgs').forEach(function (x) { x.remove(); });
     end.insertAdjacentHTML('beforebegin', '<ul class="orgs">' + rows.map(function (o) {
       var since = o.active_as_of && o.active_as_of !== o.source_date ? ' ' + t('Last reported active {d}.', { d: SIR.date(o.active_as_of) }) : '';
       return '<li><p class="on"><b lang="en">' + esc(o.name) + '</b><span>' + esc(place(o.state)) + '</span></p><p>' + esc(t(o.what)) + '</p>' +
-        '<p class="nsrc">' + (o.how_to_reach ? '<a href="' + esc(o.how_to_reach) + '" rel="noopener">' + esc(t('Website')) + '</a> · ' : '') +
-        esc(t('Shown by')) + ' <a href="' + esc(o.source_url) + '" rel="noopener">' + esc(o.source_outlet) + '</a>, ' + SIR.date(o.source_date) + '.' + esc(since) + '</p></li>';
+        (o.contact ? '<p class="ncontact"><b>' + esc(t(o.contact_level === 'parent body' ? 'Contact, through the main office' : 'Contact')) + '</b> <span lang="en">' + linkify(o.contact) + '</span> <a class="csrc" href="' + esc(o.contact_src) + '" rel="noopener">' + esc(t('Where this is printed')) + '</a></p>' : '') +
+        '<p class="nsrc">' + (/^https?:/.test(o.how_to_reach || '') ? '<a href="' + esc(o.how_to_reach) + '" rel="noopener">' + esc(t('Website')) + '</a> · ' : '') +
+        esc(t('Shown by')) + ' <a href="' + esc(o.source_url) + '" rel="noopener">' + esc(o.source_outlet) + '</a>, ' + fdate(o.source_date) + '.' + esc(since) + '</p></li>';
     }).join('') + '</ul>');
     document.getElementById('orgCount').textContent = st ? t(rows.length === 1 ? 'One organisation in {p}.' : '{k} organisations in {p}.', { k: n(rows.length), p: st === 'India' ? t('more than one state') : place(st) }) : t('{k} organisations in all.', { k: n(rows.length) });
   }
