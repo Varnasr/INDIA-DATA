@@ -12,6 +12,16 @@ The roll before the revision is the draft roll plus the names left off it,
 because the CEO publishes the removals against the draft and no constituency
 table of the roll of 27 October 2025. The CEO publishes no split of the
 removals by sex or age, so there is none here.
+
+Two more CEO tables, both by constituency and sex:
+- the roll of 6 April 2026 (election_roll_20260406_ac.csv), the roll the 2026
+  election was held on. Turnout is votes over it, and the names left off are
+  weighed at that turnout. It is larger than the final roll in every seat.
+- the final roll of 6 January 2025 (roll_20250106_ac.csv), the last roll
+  before the revision that is published by sex. The fall from it to the draft,
+  by sex, is the nearest primary count of who left the roll; it also takes in
+  ten months of ordinary changes, and that roll is 5,01,637 smaller than the
+  roll of 27 October 2025, so it is never called the names removed.
 """
 import csv
 import io
@@ -39,6 +49,12 @@ PARTY = {
 # Expected totals, from the CEO's own Total rows.
 REMOVED = (2694672, 6644881, 398278, 9737831)
 DRAFT, FINAL = 54376756, 56707380
+# the roll of 6 April 2026 (the CEO's Press Note 16) and of 6 January 2025
+ELECTION, JAN2025 = 57343291, 63612950
+# after the draft, the CEO's whole-period counts at the final roll, as The
+# Hindu reported them on 23 February 2026; draft plus added less deleted is
+# the final roll exactly, and the build asserts it
+CLAIMS = {'form6_received': 2785195, 'added': 2753796, 'form7_received': 438425, 'deleted': 423172}
 
 
 def rows(name):
@@ -79,7 +95,9 @@ def build():
     final = {int(r['ac']): r for r in rows('final_roll_ac.csv')}
     r26 = {int(r['ac']): r for r in rows('results_2026.csv')}
     r21 = {int(r['ac']): r for r in rows('results_2021.csv')}
-    for t in (asd, draft, final, r26, r21):
+    elec = {int(r['ac']): r for r in rows('election_roll_20260406_ac.csv')}
+    jan = {int(r['ac']): r for r in rows('roll_20250106_ac.csv')}
+    for t in (asd, draft, final, r26, r21, elec, jan):
         assert sorted(t) == list(range(1, 235)), 'every table has ACs 1 to 234 once'
 
     acs = []
@@ -95,8 +113,14 @@ def build():
         assert wv - rv == margin > 0, n
         wv21, rv21, m21 = ints(p, 'winner_votes', 'runner_up_votes', 'margin')
         assert wv21 - rv21 == m21 > 0, n
+        em, ew, et, etot = ints(elec[n], 'men', 'women', 'third', 'total')
+        jm, jw, jt, jtot = ints(jan[n], 'men', 'women', 'third', 'total')
+        assert em + ew + et == etot and jm + jw + jt == jtot, n
+        assert elec[n]['district'] == f['district'] == jan[n]['district'], n
+        assert etot >= ftot and jm >= dm and jw >= dw, n
         before = dtot + rem
-        turnout = votes / ftot
+        # turnout on the roll the election was held on
+        turnout = votes / etot
         acs.append({
             'ac': n, 'name': d['ac_name'], 'district': d['district'],
             'before': before, 'removed': rem, 'dead': dead, 'shifted_absent': sh, 'multiple': mult,
@@ -109,10 +133,18 @@ def build():
             # living removed names, voting at the seat's own turnout
             'removed_voters': round((rem - dead) * turnout),
             'winner_2021': party(p['winner_party']), 'margin_2021': m21, 'electors_2021': int(p['electors']),
+            'election_roll': etot, 'after_final': etot - ftot,
+            'reserved': jan[n]['reserved'] or '',
+            'jan2025': jtot, 'jan2025_women_pct': round(100 * jw / jtot, 4),
+            'fall_jan': jtot - dtot, 'fall_jan_women': jw - dw, 'fall_jan_men': jm - dm,
+            'fall_jan_women_pct': round(100 * (jw - dw) / (jtot - dtot), 4),
         })
     T = lambda k: sum(a[k] for a in acs)
     assert (T('dead'), T('shifted_absent'), T('multiple'), T('removed')) == REMOVED
     assert T('draft') == DRAFT and T('final') == FINAL
+    assert T('election_roll') == ELECTION and T('jan2025') == JAN2025
+    for a in acs:
+        a['women_fall_gap'] = round(a['fall_jan_women_pct'] - a['jan2025_women_pct'], 4)
 
     for a in acs:
         a['over_margin'] = a['removed'] > a['margin']
@@ -152,6 +184,7 @@ def build():
                         'over_margin': sum(a['over_margin'] for a in L)})
 
     before, rem, fin = T('before'), T('removed'), T('final')
+    assert DRAFT + CLAIMS['added'] - CLAIMS['deleted'] == FINAL
     chennai = dist['Chennai']
     summary = {
         'before': before, 'removed': rem, 'draft': T('draft'), 'final': fin,
@@ -170,7 +203,19 @@ def build():
         'net_over_margin': sum(a['net_over_margin'] for a in acs),
         'could_change': sum(a['could_change'] for a in acs),
         'changed_hands': sum(a['changed_hands'] for a in acs),
-        'votes': T('votes'), 'turnout': round(100 * T('votes') / fin, 4),
+        'votes': T('votes'), 'turnout': round(100 * T('votes') / T('election_roll'), 4),
+        'turnout_on_final': round(100 * T('votes') / fin, 4),
+        'election_roll': T('election_roll'), 'after_final': T('election_roll') - fin,
+        'claims': CLAIMS,
+        'jan2025': T('jan2025'), 'jan2025_women_pct': round(100 * sum(int(jan[n]['women']) for n in jan) / T('jan2025'), 4),
+        'fall_jan': T('fall_jan'), 'fall_jan_women': T('fall_jan_women'), 'fall_jan_men': T('fall_jan_men'),
+        'fall_jan_women_pct': round(100 * T('fall_jan_women') / T('fall_jan'), 4),
+        'acs_women_fall_over': sum(a['women_fall_gap'] > 0 for a in acs),
+        'acs_women_fall_over_5': sum(a['women_fall_gap'] >= 5 for a in acs),
+        'women_fall_max': max(acs, key=lambda a: a['women_fall_gap'])['name'],
+        'women_fall_max_pct': max(acs, key=lambda a: a['women_fall_gap'])['fall_jan_women_pct'],
+        'fall_jan_per_100_women': round(100 * T('fall_jan_women') / sum(int(jan[n]['women']) for n in jan), 4),
+        'fall_jan_per_100_men': round(100 * T('fall_jan_men') / sum(int(jan[n]['men']) for n in jan), 4),
         'electors_2021': T('electors_2021'),
         'seats_2026': {w['party']: w['seats'] for w in winners},
         'winners': winners,
@@ -192,7 +237,8 @@ def build():
     out['districts.json'] = json.dumps(districts, ensure_ascii=False, separators=(',', ':')) + '\n'
     cols = ['ac', 'name', 'district', 'before', 'removed', 'dead', 'shifted_absent', 'multiple', 'per_100',
             'draft', 'final', 'net_fall', 'net_per_100', 'winner', 'runner_up', 'margin', 'votes', 'turnout',
-            'removed_voters', 'over_margin', 'net_over_margin', 'could_change', 'winner_2021', 'margin_2021']
+            'removed_voters', 'over_margin', 'net_over_margin', 'could_change', 'winner_2021', 'margin_2021',
+            'election_roll', 'jan2025', 'fall_jan', 'fall_jan_women_pct', 'jan2025_women_pct']
     buf = io.StringIO()
     w = csv.writer(buf, lineterminator='\n')
     w.writerow(cols)

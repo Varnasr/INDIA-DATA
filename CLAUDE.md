@@ -518,11 +518,18 @@ unless each adds up to the published totals (9,737,831 removed; draft
   equals the state total announced with the draft.
 - **There is no split of the removals by sex or age.** The CEO has not
   published one. The All India gender table carries a Tamil Nadu row from a
-  press analysis, flagged unverified; do not move it onto the Tamil Nadu pages
-  as a finding.
-- **Turnout is votes over the final roll of 23 February**, because the 2026
-  result pages carry no electors. The roll of 7 April 2026 is published and
-  not yet used.
+  press analysis (The Hindu Data Team's count of the named lists), flagged
+  unverified; do not move it onto the Tamil Nadu pages as a finding. The
+  women section uses the CEO's own final roll of 6 January 2025 by seat and
+  sex (`raw/roll_20250106_ac.csv`): the fall from it to the draft, by sex,
+  always called the fall and never the names removed (ten months of ordinary
+  changes, and that roll is 5,01,637 smaller than the roll of 27 October).
+  Women were 51.1% of that fall against 51.0% of the roll; Vedaranyam 60.4%.
+- **Turnout is votes over the roll of 6 April 2026**, the roll the election
+  was held on (`raw/election_roll_20260406_ac.csv`, the CEO's, larger than the
+  final roll in every seat). The claims and objections after the draft are the
+  CEO's exact counts as The Hindu printed them (27,53,796 added, 4,23,172
+  deleted), which add up to the final roll.
 - **Removals by the party that won are read against the district.** TVK won
   most of the city seats and the city seats lost the most names, so the raw
   comparison mostly measures Chennai. `vs_district` is each seat's rate less

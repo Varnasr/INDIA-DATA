@@ -48,7 +48,11 @@
   <p class="finding" id="fChennai"></p>
 
   <h2>Women</h2>
-  <p class="sub">The Chief Electoral Officer, the official in charge of the state's electoral roll, has published no split of the names left off by sex, and no roll by sex from before the revision, so women's share of the removals cannot be counted. What can be counted is the change after the draft. For each district, the grey dot is women's share of the draft roll and the red dot their share of the net rise from the draft to the final roll.</p>
+  <p class="sub">The Chief Electoral Officer has published no split of the names left off by sex. The nearest count is the fall from the final roll of 6 January 2025, which the Chief Electoral Officer published by sex for every constituency, to the draft. It also counts ten months of ordinary deaths, moves and new names, so it is not the names removed. In the first chart each district's grey dot is women's share of the January 2025 roll and the red dot their share of the fall. The second chart shows the change after the draft: women's share of the draft roll and of the net rise to the final roll.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vWomenJan"></div></div>
+  </div>
+  <p class="finding" id="fWomenJan"></p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWomen"></div></div>
   </div>
@@ -120,6 +124,14 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
     { k: 'shifted_absent', label: L('Shifted or absent'), fmt: SIR.n }, { k: 'dead', label: L('Dead'), fmt: SIR.n },
     { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
   ], A, { sort: 'per_100' });
+
+  // women: the fall from the January 2025 roll to the draft, by district
+  var WJ = {}; A.forEach(function (a) { var w = WJ[a.district] || (WJ[a.district] = { name: a.district, jw: 0, j: 0, fw: 0, f: 0 }); w.j += a.jan2025; w.jw += a.jan2025 * a.jan2025_women_pct / 100; w.f += a.fall_jan; w.fw += a.fall_jan * a.fall_jan_women_pct / 100; });
+  var WJR = Object.keys(WJ).map(function (k) { var w = WJ[k]; return { name: w.name, a: 100 * w.jw / w.j, b: 100 * w.fw / w.f }; }).sort(function (x, y) { return (y.b - y.a) - (x.b - x.a); });
+  VIZ.dumbbell('vWomenJan', { label: L('Women\'s share of the January 2025 roll and of the fall from it to the draft, by district'), min: 46, step: 2, ref: 50,
+    aName: L('Women\'s share of the January 2025 roll, %'), aTok: '--fill-grey', bName: L('Women\'s share of the fall to the draft, %'), bTok: '--fill-red', rows: WJR });
+  document.getElementById('fWomenJan').innerHTML = L('<b>From the final roll of January 2025 to the draft, the roll fell by {f}, and women were {w} of that fall against {r} of the January roll.</b> {pw} of every 100 women on that roll and {pm} of every 100 men were not on the draft. Women\'s share of the fall was above their share of the roll in {k} of the {n} constituencies, most of all in {x}, at {xw}. The fall also counts ten months of ordinary deaths, moves and new names, so it is not the names removed.',
+    { f: SIR.lakh(S.fall_jan), w: SIR.pct(S.fall_jan_women_pct), r: SIR.pct(S.jan2025_women_pct), pw: SIR.d(S.fall_jan_per_100_women, 1), pm: SIR.d(S.fall_jan_per_100_men, 1), k: S.acs_women_fall_over, n: S.acs, x: S.women_fall_max, xw: SIR.pct(S.women_fall_max_pct) });
 
   // women after the draft, summed from the constituency rolls
   var WD = {}; A.forEach(function (a) { var w = WD[a.district] || (WD[a.district] = { name: a.district, dw: 0, fw: 0, d: 0, f: 0 }); w.dw += a.draft_women; w.fw += a.final_women; w.d += a.draft; w.f += a.final; });
