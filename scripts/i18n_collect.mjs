@@ -43,8 +43,13 @@ const add = (k, page, kind) => { const e = cat[k] || (cat[k] = { kind, pages: []
 
 // Sentences built by scripts.
 const LIT = /(?<![\w.$])L\(\s*'((?:[^'\\]|\\.)*)'/g;
+// A page's own scripts are written by build_site.py into assets/js/page/,
+// so a page's text is its HTML plus every page script it loads.
+const PAGE_JS = /assets\/js\/page\/([0-9a-f]+\.js)/g;
+const withPageJs = (f, html) => html + [...html.matchAll(PAGE_JS)]
+  .map(m => fs.readFileSync(path.join(ROOT, 'assets/js/page', m[1]), 'utf8')).join('\n');
 for (const f of SOURCES) {
-  const text = fs.readFileSync(path.join(ROOT, f), 'utf8');
+  const text = withPageJs(f, fs.readFileSync(path.join(ROOT, f), 'utf8'));
   for (const m of text.matchAll(LIT)) add(m[1].replace(/\\(.)/g, (x, c) => ({ n: '\n', t: '\t' })[c] || c), '/' + f.replace(/index\.html$/, ''), 'script');
 }
 

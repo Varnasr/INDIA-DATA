@@ -346,7 +346,7 @@ Promise.all([SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/di
         [L('Seats where more were removed than the margin'), L('{k} of {n}', { k: seatsOf(d).filter(function (a) { return a.total > a.margin2025; }).length, n: d.acs })]]) + '<p class="note">' + L('Its constituencies') + '</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
       share: function (d) { return L('{d} district, Bihar. {r} names were removed from the roll here in the revision, {p} of every 100 electors, across {n} constituencies, and women were {w} of them. These are counts from the Election Commission\'s published lists. A reason on the list is what the officer wrote down, and nobody checked it.', { d: d.district, r: SIR.n(sum(d, 'total')), p: SIR.d(d.per_100, 1), n: d.acs, w: SIR.pct(100 * sum(d, 't_f') / sum(d, 'total')) }); },
       pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); } };
-    var F = SIR.finder('finder', { seatPages: '../seat/', rows: A, more: [DSET], prompt: L('Find a constituency or district'), placeholder: L('Type a name, a number or a district'), key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+    var F = SIR.finder('finder', { seatPages: '../seat/', districtPages: '../district/', rows: A, more: [DSET], prompt: L('Find a constituency or district'), placeholder: L('Type a name, a number or a district'), key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
       card: function (a) { return SIR.facts([
         [L('Names removed'), SIR.n(a.total)], [L('Per 100 electors'), SIR.d(a.per_100, 1)], [L('Women among them'), SIR.pct(100 * a.t_f / a.total)],
         [L('Entered as dead'), SIR.n(a.r_dead)], [L('Shifted'), SIR.n(a.r_shifted)], [L('Absent'), SIR.n(a.r_absent)], [L('Already enrolled'), SIR.n(a.r_enrolled)],
@@ -356,7 +356,7 @@ Promise.all([SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/di
     VIZ.map('vMap', { geo: geo, label: L('Map of names removed per 100 electors, by constituency'), title: L('Removed per 100 electors'), 
       v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
       pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
-    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
+    var it = F.item[SIR.hashId()]; if (it && it.s.pick) it.s.pick(it.r);
     SIR.tools();
   });
 }).catch(SIR.fail);

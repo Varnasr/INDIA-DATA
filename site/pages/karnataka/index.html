@@ -134,7 +134,7 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
       v: function (id) { return byId[id] ? byId[id].per_100 : null; }, name: function (id) { return byId[id] ? byId[id].district : ''; },
       inset: { name: L('Bengaluru city'), acs: geo.features.filter(function (f) { return /^B\.B\.M\.P/.test(f.properties.name); }).map(function (f) { return f.properties.ac; }), left: true },
       pick: function (id) { if (byId[id]) F.select(byId[id]); } });
-    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
+    var it = F.item[SIR.hashId()]; if (it && it.s.pick) it.s.pick(it.r);
     SIR.tools();
   });
   SIR.showFaq('ka', 'main');

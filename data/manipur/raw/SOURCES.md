@@ -87,3 +87,10 @@ The one name difference (39 Sugnu / Sugnoo) is kept as each table prints it; joi
 Five ACs end with more electors than they had before the revision (Bishenpur, Lilong,
 Khangabok, Hiyanglam, Sugnoo); the tables give no reason, and additions after the draft
 include new electors.
+
+## Constituency to district (`ac_district.csv`, 13 October 2026)
+
+The district of each constituency is the Chief Electoral Officer's own, from the table of the
+final publication 2026 (`ac_final.csv`), and it agrees with the table of electors to be
+enumerated in all 60. `build_states.py` checks that every district's constituencies add up
+exactly to the district table in the final roll, men, women and third gender.

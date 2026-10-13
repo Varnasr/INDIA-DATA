@@ -118,7 +118,7 @@ Promise.all([SIR.json('data/delhi/summary.json'), SIR.json('data/delhi/districts
     card: function (d) { return SIR.facts([['Roll before the revision', n(d.roll_before)], ['Draft roll', n(d.draft)], ['Left off', n(d.left_off)], ['Per 100 electors', d1(d.per_100)], ['Constituencies', n(d.acs)]]) + '<p class="note">Its constituencies</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
     pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); },
     share: function (d) { return d.district + ' district, Delhi. The SIR draft roll left off ' + n(d.left_off) + ' names, ' + d1(d.per_100) + ' of every 100 electors. These are counts from the Chief Electoral Officer\'s table of the draft.'; } };
-  var F = SIR.finder('finder', { seatPages: true, rows: A, more: [DSET], prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district', key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+  var F = SIR.finder('finder', { seatPages: true, districtPages: true, rows: A, more: [DSET], prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district', key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
     pick: function (a) { var b = document.getElementById('vMap'); if (b.__select) b.__select(a.ac); },
     card: function (a) { return SIR.facts([['Roll before the revision', n(a.roll_before)], ['Draft roll', n(a.draft)], ['Left off', n(a.left_off)], ['Per 100 electors', d1(a.per_100)],
       ['Won in 2025', a.winner + ' · margin ' + n(a.margin)], ['Left off larger than the margin', a.over_margin ? 'Yes' : 'No']]); },
@@ -128,7 +128,7 @@ Promise.all([SIR.json('data/delhi/summary.json'), SIR.json('data/delhi/districts
     VIZ.map('vMap', { geo: geo, label: 'Map of names left off the draft per 100 electors, by constituency', title: 'Left off per 100 electors',
       v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
       pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
-    var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
+    var it = F.item[SIR.hashId()]; if (it && it.s.pick) it.s.pick(it.r);
     SIR.tools();
   });
   SIR.showFaq('dl', 'main');

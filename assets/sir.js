@@ -513,11 +513,17 @@
   // A link to a section opens on it. Charts draw after the page loads and move
   // what is below them, so the jump is made again each time charts are added,
   // until the reader scrolls for themselves.
+  // The part of the address after #, decoded. A malformed one (a stray %)
+  // makes decodeURIComponent throw, which stopped the rest of a page's script;
+  // it now reads as no hash at all.
+  SIR.hashId = function () {
+    try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; }
+  };
   var moved = false;
   ['wheel', 'touchstart', 'keydown'].forEach(function (ev) { addEventListener(ev, function () { moved = true; }, { once: true, passive: true }); });
   SIR.jump = function () {
     if (moved || !location.hash) return;
-    var t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    var t = document.getElementById(SIR.hashId());
     if (t && t.closest('main')) t.scrollIntoView({ block: 'start' });
   };
   setTimeout(function () { SIR.anchors(); SIR.jump(); }, 0);
@@ -625,7 +631,7 @@
       input.value = it.l;
       out.innerHTML = '<h3>' + SIR.esc(st.title ? st.title(r) : it.l) + '</h3>' + st.card(r) +
         '<div class="tools">' + (o.seatPages && /^ac-\d+$/.test(k) ? '<a class="btn" href="' + (o.seatPages === true ? 'seat/' : o.seatPages) + k.slice(3) + '/">' + L('Open this constituency\'s own page') + '</a>' : '') +
-        (o.districtPages && /^d-/.test(k) ? '<a class="btn" href="district/' + k.slice(2) + '/">' + L('Open this district\'s own page') + '</a>' : '') +
+        (o.districtPages && /^d-/.test(k) ? '<a class="btn" href="' + (o.districtPages === true ? 'district/' : o.districtPages) + k.slice(2) + '/">' + L('Open this district\'s own page') + '</a>' : '') +
         '<a class="btn" target="_blank" rel="noopener" href="' + SIR.wa(st.share(r), k) + '">' + L('Share on WhatsApp') + '</a>' +
         '<button type="button" data-t="link">' + L('Copy link') + '</button><button type="button" data-t="text">' + L('Copy text') + '</button></div>';
       out.querySelector('[data-t=link]').onclick = function () { copy(SIR.pageUrl(k), this); };
@@ -638,7 +644,7 @@
     }
     input.addEventListener('change', function () { select(find(input.value)); });
     input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); select(find(input.value)); } });
-    function fromHash(scroll) { var h = decodeURIComponent(location.hash.slice(1)); if (item[h]) select(item[h], scroll); }
+    function fromHash(scroll) { var h = SIR.hashId(); if (item[h]) select(item[h], scroll); }
     fromHash(true);
     window.addEventListener('hashchange', function () { fromHash(true); });
     return { select: function (r) { var it = items.filter(function (x) { return x.r === r; })[0]; select(it, false); }, byKey: byKey, item: item };

@@ -1,0 +1,142 @@
+Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constituencies.json'), SIR.json('data/bihar/identity.json')]).then(function (r) {
+  var s = r[0], acs = r[1], idn = r[2], t = s.totals, byAc = {}, cache = {};
+  acs.forEach(function (a) { byAc[a.ac] = a; });
+  function col(v) { return v < 7 ? '#c9d6e3' : v < 10 ? '#7fa1c0' : v < 13 ? '#c0504d' : '#7a1f1c'; }
+  function tag(al) { return al ? '<span class="tag ' + al + '">' + al + '</span>' : ''; }
+  function relShare(h, m, u) { var n = h + m + u; return { lo: 100 * m / n, hi: 100 * (m + u) / n, hin: 100 * h / n, unk: 100 * u / n }; }
+
+  // ------------------------------------------------------------ rail
+  var strip = document.getElementById('strip'), list = document.getElementById('list');
+  strip.innerHTML = acs.map(function (a) { return '<button type="button" data-ac="' + a.ac + '" style="background:' + col(a.per_100) + '" aria-label="' + SIR.esc(L('{ac} {name}, {rate} per 100', { ac: a.ac, name: a.name, rate: SIR.d(a.per_100, 1) })) + '" title="' + SIR.esc(a.name) + '"></button>'; }).join('');
+  list.innerHTML = '<li><button type="button" data-ac="0"><span>' + L('All Bihar') + '</span><span class="rate">' + SIR.d(100 * t.total / t.electorate_2025, 2) + '</span></button></li>' +
+    acs.map(function (a) { return '<li data-q="' + SIR.esc((a.name + ' ' + a.district + ' ' + a.ac).toLowerCase()) + '"><button type="button" data-ac="' + a.ac + '"><span>' + a.ac + ' · ' + SIR.esc(a.name) + '</span><span class="rate">' + SIR.d(a.per_100, 2) + '</span></button></li>'; }).join('');
+  [strip, list].forEach(function (el) { el.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) go(+b.getAttribute('data-ac')); }); });
+  document.getElementById('q').addEventListener('input', function () {
+    var q = this.value.trim().toLowerCase();
+    list.querySelectorAll('li[data-q]').forEach(function (li) { li.hidden = q && li.getAttribute('data-q').indexOf(q) < 0; });
+    strip.querySelectorAll('button').forEach(function (b) { var a = byAc[b.getAttribute('data-ac')]; b.classList.toggle('dim', !!q && (a.name + ' ' + a.district + ' ' + a.ac).toLowerCase().indexOf(q) < 0); });
+  });
+
+  function fate(p1, p2, roll) {
+    var tot = p1 + p2 + roll, parts = [[p1, 'var(--fill-red)', '#ffffff', 'Phase 1'], [p2, '#7a1f1c', '#ffffff', 'Phase 2'], [roll, 'var(--fill-navy)', '#ffffff', 'On the roll']];
+    var el = document.getElementById('fate');
+    el.innerHTML = parts.map(function (p) { var w = 100 * p[0] / tot; return w > 0 ? '<div style="width:' + w + '%;background:' + p[1] + ';color:' + p[2] + '">' + (w > 14 ? SIR.n(p[0]) + ' (' + SIR.d(w, 1) + '%)' : w > 4 ? SIR.d(w, 1) + '%' : '') + '</div>' : ''; }).join('');
+    el.setAttribute('aria-label', L('Removed in phase 1 {p1}, removed in phase 2 {p2}, on the 2025 roll {roll}', { p1: SIR.n(p1), p2: SIR.n(p2), roll: SIR.n(roll) }));
+  }
+  function kpis(k) { document.getElementById('kpis').innerHTML = k.map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join(''); }
+  function select(ac) {
+    strip.querySelectorAll('button').forEach(function (b) { b.classList.toggle('sel', +b.getAttribute('data-ac') === ac); });
+    list.querySelectorAll('button').forEach(function (b) { b.classList.toggle('sel', +b.getAttribute('data-ac') === ac); });
+  }
+  function who(fem, rel) {
+    SIR.redraw('c3', { type: 'bar', data: { labels: [L('Women'), L('Hindu names'), L('Muslim names'), L('Unclassified')], datasets: [{ label: L('% of removed'), data: [fem, rel.hin, rel.lo, rel.unk], $tokens: ['--female', '--fill-amber', '--fill-india', '--fill-grey'] }] },
+      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, max: 100, title: { display: true, text: L('% of those removed') } } } } });
+  }
+
+  // ------------------------------------------------------- all Bihar
+  var withM = acs.filter(function (a) { return a.margin2025; });
+  var overAll = withM.filter(function (a) { return a.total > a.margin2025; });
+  var nda = withM.filter(function (a) { return a.al2025 === 'NDA'; }), ndaOver = nda.filter(function (a) { return a.total > a.margin2025; });
+  var took = withM.filter(function (a) { return a.al2020 === 'INDIA' && a.al2025 === 'NDA'; }), tookOver = took.filter(function (a) { return a.total > a.margin2025; });
+  var tookMed = SIR.median(took.map(function (a) { return a.total / a.margin2025; }));
+  var dz = idn.districts, fOver = dz.filter(function (d) { return d.female_share_deleted > d.female_share_roll; });
+  var gap = dz.map(function (d) { return d.female_share_deleted - d.female_share_roll; });
+  var b200 = SIR.sum(acs, 'booths_200'), I = s.intensity, b400 = I.bins[I.bins.length - 1].booths;
+  var claims = [
+    [SIR.lakh(t.total), L('names removed from Bihar\'s roll: {p1} before the draft roll of 1 August 2025 and {p2} more before the final roll. That is {rate} for every 100 electors on the 2025 roll, and as many as {max} in a single constituency.', { p1: SIR.n(t.p1), p2: SIR.n(t.p2), rate: SIR.d(100 * t.total / t.electorate_2025, 2), max: SIR.d(Math.max.apply(null, acs.map(function (a) { return a.per_100; })), 1) })],
+    [L('{a} of {b}', { a: overAll.length, b: withM.length }), L('constituencies lost more names in the revision than the margin by which they were won in 2025. That includes {a} of the {b} seats the NDA won.', { a: ndaOver.length, b: nda.length })],
+    [L('{a} of {b}', { a: tookOver.length, b: took.length }), L('seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA\'s winning margin. In the middle seat of that group, the removals were {x} times the margin.', { x: SIR.d(tookMed, 1) })],
+    [SIR.pct(100 * t.female / (t.female + t.male)), L('of those removed were women, against {roll}% of the roll before the revision. Women\'s share of the removed exceeds their share of the roll in {a} of {b} districts, by up to {gap} points.', { roll: SIR.d(t.female_share_roll, 1), a: fOver.length, b: dz.length, gap: SIR.d(Math.max.apply(null, gap), 1) })],
+    [SIR.n(b200), L('polling booths lost 200 or more names each, and {n} lost 400 or more.', { n: SIR.n(b400) })]
+  ];
+  document.getElementById('claims').innerHTML = claims.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join('');
+
+  function showAll() {
+    select(0);
+    document.getElementById('claimsWrap').hidden = false;
+    document.getElementById('crumb').textContent = L('Whole state');
+    document.getElementById('title').textContent = L('All Bihar, 243 constituencies');
+    document.getElementById('sub').textContent = L('{total} names removed across both phases, set beside the {electors} electors on the 2025 roll.', { total: SIR.n(t.total), electors: SIR.n(t.electorate_2025) });
+    fate(t.p1, t.p2, t.electorate_2025);
+    var rel = relShare(t.hindu, t.muslim, t.unknown);
+    kpis([[SIR.n(t.total), L('names removed, both phases')], [SIR.d(100 * t.total / t.electorate_2025, 2), L('per 100 electors on the 2025 roll')],
+      [SIR.pct(100 * t.female / (t.female + t.male)), L('of the removed are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among the removed, by name classification')],
+      [L('{a} of {b}', { a: overAll.length, b: withM.length }), L('seats lost more names than their 2025 margin')], [SIR.n(t.booths), L('polling booths')]]);
+    var hk = Object.keys(s.booth_histogram);
+    document.getElementById('p1p').textContent = L('Booths by the number of names removed in phase 1. Most lost fewer than a hundred. {n} lost 200 or more.', { n: SIR.n(b200) });
+    SIR.redraw('c1', { type: 'bar', data: { labels: hk, datasets: [{ label: L('Booths'), data: hk.map(function (k) { return s.booth_histogram[k]; }), $token: '--fill-navy' }] },
+      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names removed in the booth') } }, y: { title: { display: true, text: L('Booths') } } } } });
+    var cuts = [0, 1, 2, 5, 10, 20, Infinity], lab = [L('under 1×'), L('{a} to {b}×', { a: 1, b: 2 }), L('{a} to {b}×', { a: 2, b: 5 }), L('{a} to {b}×', { a: 5, b: 10 }), L('{a} to {b}×', { a: 10, b: 20 }), L('20× or more')];
+    var ratio = withM.map(function (a) { return a.total / a.margin2025; });
+    document.getElementById('p2t').textContent = L('Removals against the 2025 margin');
+    document.getElementById('p2p').textContent = L('Constituencies by names removed as a multiple of the 2025 winning margin.');
+    SIR.redraw('c2', { type: 'bar', data: { labels: lab, datasets: [{ label: L('Constituencies'), data: lab.map(function (l, i) { return ratio.filter(function (x) { return x >= cuts[i] && x < cuts[i + 1]; }).length; }), $tokens: lab.map(function (l, i) { return i === 0 ? '--fill-grey' : '--fill-red'; }) }] },
+      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names removed ÷ winning margin') } }, y: { beginAtZero: true, title: { display: true, text: L('Constituencies') } } } } });
+    who(100 * t.female / (t.female + t.male), rel);
+    var rc = [4, 6, 8, 10, 12, 14, 16, 25], rl = ['4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16+'];
+    document.getElementById('p4t').textContent = L('Constituencies by removals per 100 electors');
+    document.getElementById('p4p').textContent = L('How many of the 243 constituencies fall at each level of removals, from the lightest to the heaviest.');
+    SIR.redraw('c4', { type: 'bar', data: { labels: rl, datasets: [{ label: L('Constituencies'), data: rl.map(function (l, i) { return acs.filter(function (a) { return a.per_100 >= rc[i] && a.per_100 < rc[i + 1]; }).length; }), $token: '--fill-red' }] },
+      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Removed per 100 electors') } }, y: { beginAtZero: true, title: { display: true, text: L('Constituencies') } } } } });
+    document.getElementById('tblTitle').textContent = L('All 243 constituencies');
+    SIR.table(document.getElementById('tbl'), [
+      { k: 'name', label: L('Constituency'), left: true, fmt: function (v, a) { return SIR.esc(a.ac + ' ' + v); } }, { k: 'district', label: L('District'), left: true },
+      { k: 'total', label: L('Removed'), fmt: SIR.n }, { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 2); } },
+      { k: 'fem', label: L('Women %'), fmt: function (v) { return SIR.d(v, 1); } }, { k: 'win2025', label: L('2025 winner'), left: true, fmt: function (v, a) { return SIR.esc(v) + ' ' + tag(a.al2025); } },
+      { k: 'margin2025', label: L('2025 margin'), fmt: SIR.n }, { k: 'xm', label: L('Removed ÷ margin'), fmt: function (v) { return SIR.d(v, 1); } },
+      { k: 'r_absent', label: L('Marked absent'), fmt: SIR.n }, { k: 'r_enrolled', label: L('Marked already enrolled'), fmt: SIR.n }],
+      acs.map(function (a) { return Object.assign({}, a, { fem: 100 * a.t_f / (a.t_f + a.t_m), xm: a.margin2025 ? a.total / a.margin2025 : null }); }),
+      { sort: 'xm', id: 'ac', onRow: function (id) { go(+id); } });
+  }
+
+  // --------------------------------------------------------- one seat
+  function showSeat(a, rows) {
+    select(a.ac);
+    document.getElementById('claimsWrap').hidden = true;
+    document.getElementById('crumb').innerHTML = '<button type="button" id="back">' + L('All Bihar') + '</button> › ' + SIR.esc(a.district);
+    document.getElementById('back').addEventListener('click', function () { go(0); });
+    document.getElementById('title').textContent = a.ac + ' ' + a.name + (a.reserved !== 'GEN' ? ' (' + a.reserved + ')' : '');
+    var sv = { district: SIR.esc(a.district), pc: SIR.esc(a.pc), booths: SIR.n(a.booths), total: SIR.n(a.total), rate: SIR.d(a.per_100, 2), winner: SIR.esc(a.win2025) + ' ' + tag(a.al2025), margin: a.margin2025 != null ? SIR.n(a.margin2025) : '', times: a.margin2025 != null ? SIR.d(a.total / a.margin2025, 1) : '' };
+    document.getElementById('sub').innerHTML = a.margin2025 == null ? L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner}.', sv)
+      : a.total > a.margin2025 ? L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes, and {times} times as many names were removed.', sv)
+      : L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes.', sv);
+    fate(a.p1, a.p2, a.electorate_2025);
+    var rel = relShare(a.hindu, a.muslim, a.unknown);
+    kpis([[SIR.n(a.total), L('names removed, both phases')], [SIR.d(a.per_100, 2), L('per 100 electors on the 2025 roll')],
+      [SIR.pct(100 * a.t_f / (a.t_f + a.t_m)), L('of the removed are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among the removed')],
+      [SIR.d(a.per_booth, 1), L('names per booth, and {n} booths lost 200 or more', { n: a.booths_200 })],
+      [a.margin2025 ? SIR.times(a.total / a.margin2025) : '', L('the 2025 winning margin')]]);
+    var edges = [0, 50, 100, 150, 200, 250, 300, 400, Infinity], lab = ['0-49', '50-99', '100-149', '150-199', '200-249', '250-299', '300-399', '400+'];
+    document.getElementById('p1p').textContent = L('Booths in {name} by the number of names removed in phase 1.', { name: a.name });
+    SIR.redraw('c1', { type: 'bar', data: { labels: lab, datasets: [{ label: L('Booths'), data: lab.map(function (l, i) { return rows.filter(function (b) { return b.deleted >= edges[i] && b.deleted < edges[i + 1]; }).length; }), $token: '--fill-navy' }] },
+      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names removed in the booth') } }, y: { beginAtZero: true, title: { display: true, text: L('Booths') } } } } });
+    document.getElementById('p2t').textContent = L('Names removed against the margins');
+    document.getElementById('p2p').textContent = L('Names removed in both phases, beside the winning margins in 2020 and 2025.');
+    SIR.redraw('c2', { type: 'bar', data: { labels: [L('Names removed'), L('2025 margin'), L('2020 margin')], datasets: [{ label: L('Names or votes'), data: [a.total, a.margin2025, a.margin2020], $tokens: ['--fill-red', '--fill-navy', '--fill-grey'] }] },
+      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: L('Names or votes') } } } } });
+    who(100 * a.t_f / (a.t_f + a.t_m), rel);
+    var sorted = rows.slice().sort(function (x, y) { return y.deleted - x.deleted; });
+    document.getElementById('p4t').textContent = L('Every booth, from most to fewest names removed');
+    document.getElementById('p4p').textContent = L('Each bar is one booth in {name}. Open the table below for booth numbers.', { name: a.name });
+    SIR.redraw('c4', { type: 'bar', data: { labels: sorted.map(function (b) { return L('Booth {n}', { n: b.booth }); }), datasets: [{ label: L('Names removed'), data: sorted.map(function (b) { return b.deleted; }), $token: '--fill-red', barPercentage: 1, categoryPercentage: 1 }] },
+      options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { display: false }, grid: { display: false } }, y: { beginAtZero: true, title: { display: true, text: L('Names removed') } } } } });
+    document.getElementById('tblTitle').textContent = L('All {n} booths in {name}', { n: rows.length, name: a.name });
+    SIR.table(document.getElementById('tbl'), [
+      { k: 'booth', label: L('Booth'), left: true }, { k: 'deleted', label: L('Removed'), fmt: SIR.n }, { k: 'female', label: L('Women'), fmt: SIR.n },
+      { k: 'muslim', label: L('Muslim names'), fmt: SIR.n }, { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'shifted', label: L('Shifted'), fmt: SIR.n }, { k: 'absent', label: L('Absent'), fmt: SIR.n }, { k: 'already_enrolled', label: L('Already enrolled'), fmt: SIR.n },
+      { k: 'lead2024', label: L('2024 leader'), left: true, fmt: function (v) { return v ? SIR.esc(v) : ''; } },
+      { k: 'lead_margin_pp', label: L('Lead, points'), fmt: function (v) { return SIR.d(v, 1); } }], rows, { sort: 'deleted' });
+    document.getElementById('main').scrollIntoView({ block: 'start' });
+  }
+  function go(ac) {
+    if (!ac) { if (location.hash) history.replaceState(null, '', location.pathname); return showAll(); }
+    var a = byAc[ac]; if (!a) return showAll();
+    history.replaceState(null, '', '#ac' + ('00' + ac).slice(-3));
+    if (cache[ac]) return showSeat(a, cache[ac]);
+    SIR.json('data/bihar/booths/ac_' + ('00' + ac).slice(-3) + '.json').then(function (b) {
+      cache[ac] = b.rows.map(function (x) { var o = {}; b.fields.forEach(function (f, i) { o[f] = x[i]; }); return o; });
+      showSeat(a, cache[ac]);
+    }).catch(SIR.fail);
+  }
+  var m = /#ac(\d+)/.exec(location.hash); go(m ? +m[1] : 0);
+}).catch(SIR.fail);

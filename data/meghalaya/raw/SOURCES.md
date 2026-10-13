@@ -56,3 +56,11 @@ assignment was compared by eye with the CEO's "Information on Assembly Constitue
 - PASS: state: notices no mapping + discrepancy = total (1 Oct figures)
 - PASS: state: Form 6 + 7 + 8 shifting + 8 correction = 23,259
 - PASS: Note: 30 July note EL.63/2026/25 gave interim figures that differ slightly: ASDD 1,80,404, EF not returned 45,013, self 7,75,337, progeny 11,69,670, no mapping 2,24,234; the 5 August figures are kept
+
+## Constituency to district (`ac_district.csv`, 13 October 2026)
+
+The constituency table names no district. Each constituency's district is taken from
+Wikipedia's list of constituencies of the Meghalaya Legislative Assembly, which cites the
+Chief Electoral Officer's constituency map. `build_states.py` accepts the map only because
+every district's constituencies add up exactly to the district table here in the roll before,
+the names left off, each reason and the draft. Ri Bhoi is spelt Ri-Bhoi to match that table.

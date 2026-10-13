@@ -9,7 +9,7 @@
 <p class="kicker">Special Intensive Revision, 2025 and 2026</p>
 <h1 id="headline">Who was taken off India's electoral rolls</h1>
 <p class="lead" id="lede">The Election Commission revised the electoral rolls of most of India house by house. This site counts who was removed, where, and the reason written against each name.</p>
-<div class="btns" data-i18n-each><a class="btn-ink" href="india/constituencies/#find-a-constituency">Find your constituency</a><a class="btn-ink" href="help/">Removed from the Roll? What to Do</a><a class="btn-line" href="india/method/">How we counted</a><a class="btn-line take-tour" href="#">Take the tour</a></div>
+<div class="btns" data-i18n-each><a class="btn-ink" href="india/constituencies/#find-a-constituency">Find your constituency</a><a class="btn-ink" href="help/">Removed from the Roll? What to Do</a><a class="btn-line" href="india/method/">How we counted</a><a class="btn-line take-tour" href="#">Take the tour</a><a class="btn-line" href="guide/">How to Use This Site</a></div>
 </div>
 <figure class="dots-fig"><div class="dots" id="dots" role="img"></div><figcaption>Each dot is one in every 100 electors on the rolls before the revision. The red dots are the names left off the draft rolls.</figcaption></figure>
 </div>
@@ -191,7 +191,6 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')
   // in turn (SIR.day(), counted in India, so every visitor sees the same three)
   var X = I.total, ab = M.assembly.filter(function (a) { return a.kind === 'removed'; });
   var pool = [
-    [SIR.d(X.per_100, 1), L('of every 100 electors')],
     [X.states, L('states and union territories in the revision')],
     [SIR.d(hi.per_100, 1), L('per 100 in {s}, the highest share', { s: hi.state })],
     [SIR.d(lo.per_100, 1), L('per 100 in {s}, the lowest share', { s: lo.state })],
@@ -203,7 +202,9 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')
     [L('{a} of {b}', { a: ab.reduce(function (t, a) { return t + a.over_margin; }, 0), b: ab.reduce(function (t, a) { return t + a.seats; }, 0) }), L('assembly seats in {s} where more names were removed than the winning margin', { s: ab.map(function (a) { return a.state; }).reduce(function (x, y) { return L('{a} and {b}', { a: x, b: y }); }) })]
   ];
   var k0 = (SIR.day() * 3) % pool.length, picks = [0, 1, 2].map(function (i) { return pool[(k0 + i) % pool.length]; });
-  document.getElementById('kpis').innerHTML = [[cr(I.total.removed), L('names left off the draft rolls')]].concat(picks)
+  // the first two figures stay: the count, and that count as one in every k
+  // electors on the rolls before the revision
+  document.getElementById('kpis').innerHTML = [[cr(I.total.removed), L('names left off the draft rolls')], [L('1 in {k}', { k: Math.round(100 / I.total.per_100) }), L('electors was left off the draft rolls')]].concat(picks.slice(0, 2))
     .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   // the same figures as a ranked list, so a phone does not depend on the map
   var max = hi.per_100, rows = have.slice(), at = rows.findIndex(function (st) { return st.per_100 < I.total.per_100; });
@@ -220,7 +221,9 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')
 Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.json'), SIR.json('data/hyderabad/summary.json'), SIR.json('data/tamilnadu/summary.json'), SIR.json('data/karnataka/summary.json'), SIR.json('data/westbengal/summary.json'), SIR.json('data/kerala/summary.json'), SIR.json('data/rajasthan/summary.json'), SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/delhi/summary.json'), SIR.json('data/maharashtra/summary.json'), SIR.json('data/gujarat/summary.json'), SIR.json('data/uttarakhand/summary.json'), SIR.json('data/india/cities.json'), SIR.json('data/india/disputes.json'), SIR.json('data/india/ac_finder.json'), SIR.json('data/india/women.json'), SIR.json('data/india/rti.json')]).then(function (r) {
   var T = r[0].total, B = r[1].totals, H = r[2].totals;
   var cr = function (x) { return L('{x} crore', { x: (x / 1e7).toFixed(2) }); };
-  document.getElementById('headline').innerHTML = L('{r} names were <em>left off</em> India\'s draft rolls.', { r: cr(T.removed) });
+  // the share as "one in every k", rounded to the nearest whole elector, so
+  // the headline says how many of the roll that count was
+  document.getElementById('headline').innerHTML = L('{r} names were <em>left off</em> India\'s draft rolls, one in every {k} electors.', { r: cr(T.removed), k: Math.round(100 / T.per_100) });
   document.getElementById('lede').innerHTML = L('The Election Commission revised the electoral rolls of {s} states and union territories house by house. This site counts who was removed, where, and the reason written against each name.', { s: T.states });
   document.getElementById('hIndia').innerHTML = L('{r} names left off the draft rolls in {s} states and union territories, and the reasons each one recorded.', { r: cr(T.removed), s: T.states });
   document.getElementById('hBihar').innerHTML = L('{n} names removed across {acs} constituencies and {booths} booths, set against the 2025 election result.', { n: SIR.lakh(B.total), acs: B.acs, booths: SIR.n(B.booths) });

@@ -903,6 +903,14 @@ set out in `scripts/state_schema.md`.
 - `revision: "no_draft"` (Tripura today) draws "Where the revision stands" in
   place of the figures. When its draft is out, fill in the figures and change
   the field.
+- A state here whose constituency table is complete gets a page per
+  constituency and per district (`SEATS` in `build_states.py`, `SEATED` in
+  `statepage.js`, which adds a finder): Meghalaya, Manipur and Odisha since
+  13 October 2026. The tables name no district, so each carries
+  `raw/ac_district.csv`, and the build fails unless every district's
+  constituencies add up exactly to the state's own district table. Puducherry
+  has only its final roll by constituency, nothing to measure a change by,
+  so it has no constituency pages.
 - Add a state by writing its `normal.json` with every source read, adding it
   to `STATES`, and running `build_states.py`, `make_state_pages.py`,
   `build_site.py` and `og_cards.mjs`. Keep its row in
@@ -962,8 +970,18 @@ for its own winner, runner-up and margin field names, and `say`, `short` and
 `build_site.py`, and `seatPages` on its finder. Hyderabad's five seats are
 not included: the part explorer covers them.
 
-**A page for every district** (`<state>/district/<slug>/`, 145) in the three
-states published by district only: Uttar Pradesh, Maharashtra and Karnataka.
+**A page for every district** (`<state>/district/<slug>/`, 557) in twenty
+states: Assam, Meghalaya, Manipur, Odisha, Andhra Pradesh, Chhattisgarh,
+Mizoram and Telangana (`hyderabad/telangana/district/`, read from
+`telangana.json` through `FILE` and `OUT` in the generator) added the same day to: Uttar Pradesh, Maharashtra and Karnataka (published by district only),
+and Bihar, Tamil Nadu, West Bengal, Kerala, Delhi, Gujarat, Rajasthan and
+Uttarakhand (13 October 2026). Each is drawn in its state's own measure, set
+in `CFG` in `district.js`: names left off, names removed (Bihar, per 100 on
+the 2025 roll), or the fall in the roll (West Bengal, Kerala, Rajasthan, with
+`fall: true`, which words every sentence as a fall and a negative fall as a
+rise; Chhattisgarh and Mizoram, where most districts grew after the draft,
+add `rise: true` and measure the rise). A state with district figures and no page is a gap the owner counts:
+every analysis gets district and constituency pages where its tables allow.
 `scripts/make_district_pages.py` writes the sources (the slug is `SIR.slug`'s,
 so `#d-<slug>` on the state page and these addresses agree) and
 `assets/district.js` draws the district against every district of its state,
@@ -1345,8 +1363,9 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   theme; print is hidden there): beside the title, seven controls squeezed
   it to a single word. Credit is to ImpactMojo
   ("Research by ImpactMojo", linked to impactmojo.in), in the footer and on the
-  front page; the terms page still names PinPoint Ventures as publisher and
-  grievance contact.
+  front page. ImpactMojo is also the publisher and grievance contact on the
+  terms page (since 13 October 2026; PinPoint Ventures before), and
+  info@impactmojo.in (`email` in `places.json`) is the contact everywhere.
 - **Footer, terms and privacy.** Every page's footer carries the credit, About
   this site, Terms and privacy (`terms/`, its own page in `site/pages`, on the
   front page's place) and the contact address (`email` in `places.json`).
@@ -1362,7 +1381,9 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   `supabase/migrations` holds the SQL. Nothing else is sent, nothing is
   counted on localhost or deploy previews, and Do Not Track or Global Privacy
   Control turns it off. The table is closed to the public key; read it in the
-  Supabase SQL editor.
+  Supabase SQL editor. The function caps a day at 3,000 rows and 500,000
+  counts and drops calls past either without an error, so a script calling
+  it in a loop cannot fill the database.
 
 - **The design is "Off the Roll"** (October 2026, from a mockup the owner
   chose; the last block of `assets/sir.css`). Warm paper `#f6f2ea` and ink
@@ -1396,8 +1417,10 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   On a phone the header is the wordmark, Search and one menu button; opened,
   the controls sit in a grid of equal tiles, four to a row, because one row of
   eight ran past a 360px screen and cut off the menu button itself.
-  The front page follows the mockup: the headline states the count, a grid
-  of 100 dots shows the share, a four-number strip (the count left off stays first; the other three come in turn from a list of ten computed from the All India files, three a day by `SIR.day()`), the map beside a ranked
+  The front page follows the mockup: the headline states the count and the
+  share as "one in every k electors" (k = 100 / per 100, rounded; 7 on 13
+  October 2026), a grid
+  of 100 dots shows the share, a four-number strip (the count left off and "1 in k" stay first; the other two come in turn from a list of ten computed from the All India files, three a day by `SIR.day()`), the map beside a ranked
   list of states (so a phone does not depend on hover), cards to each
   analysis led by a count of names with its share of the roll beneath it (each pair from one source; Kerala, which published no count of names left off, shows the fall in the roll and says so; the pinned cards keep their own figure), every state and territory among them (the 20 on
   the shared page take their figure from `states.json`), one featured in the
@@ -1596,6 +1619,14 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   4.5.1 from cdnjs with an `integrity` hash on every page; a version change
   needs the new hash from cdnjs's API. A new outside origin goes into the
   policy and into the privacy section of `terms/` in the same commit.
+  `script-src` carries no `'unsafe-inline'`. Every inline script a page
+  source holds is moved by `build_site.py` (`externalise()`) into
+  `assets/js/page/<hash>.js` and loaded from there; JSON blocks stay inline.
+  So write page scripts inline in `site/pages` as before, and never put an
+  `onclick=` or other inline handler in markup or in a string a script
+  writes: it will not run, and nothing on the page shows it. Bind with
+  `addEventListener`. A hash read from the address goes through
+  `SIR.hashId()`, which survives a malformed `%` escape.
 - **Search engines and sharing.** `build_site.py` writes, beside the Open
   Graph tags, a canonical link, Twitter title and description, `og:locale`
   and JSON-LD on every page (`ldjson()`: the WebSite on the front page, a

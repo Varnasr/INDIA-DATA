@@ -385,6 +385,17 @@ def _seat_pages():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()
 
 
+def _page_with_scripts(path):
+    # A built page's own scripts live in assets/js/page/<hash>.js (build_site.py
+    # moves them out of the page for the Content-Security-Policy), so a check
+    # on what a page's script does reads those files with the page.
+    import re
+    html = open(path, encoding='utf-8').read()
+    for h in re.findall(r'assets/js/page/([0-9a-f]+)\.js', html):
+        html += open(os.path.join(ROOT, 'assets', 'js', 'page', h + '.js'), encoding='utf-8').read()
+    return html
+
+
 def _short_and_faq():
     # Every page but the full reports opens with an "In short" box and carries
     # questions and answers: its own (#pageFaq) or, on an FAQ tab, all (#qas).
@@ -399,7 +410,7 @@ def _short_and_faq():
             continue
         if os.sep + 'report' + os.sep in rel:
             continue
-        html = open(os.path.join(ROOT, rel), encoding='utf-8').read()
+        html = _page_with_scripts(os.path.join(ROOT, rel))
         assert 'id="short"' in html, '%s has no In short box' % rel
         assert 'id="pageFaq"' in html or 'id="qas"' in html, '%s has no questions and answers' % rel
         assert 'SIR.showFaq(' in html or 'SIR.statePage(' in html or 'SIR.seatPage(' in html or 'SIR.districtPage(' in html or rel == os.path.join('india', 'index.html'), '%s never fills its box' % rel
@@ -412,8 +423,7 @@ def _pages_link_method():
               'westbengal/index.html', 'westbengal/elections/index.html',
               'kerala/index.html', 'kerala/elections/index.html', 'maharashtra/index.html',
               'gujarat/index.html', 'gujarat/elections/index.html', 'uttarakhand/index.html']:
-        with open(os.path.join(ROOT, p), encoding='utf-8') as fh:
-            assert 'method/' in fh.read(), '%s no longer links to the method page' % p
+        assert 'method/' in _page_with_scripts(os.path.join(ROOT, p)), '%s no longer links to the method page' % p
 
 
 for name, fn in [
