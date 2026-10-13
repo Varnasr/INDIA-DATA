@@ -249,11 +249,11 @@ each of today's was made from, with its source (`URBAN_SOURCES.md` beside it).
 Each district is counted under its first-listed parent, the one it was mostly
 made from, so Telangana's 33 districts become its ten of 2011; adding every
 parent would chain them into five. Bands: rural under 20% urban, mixed 20 to
-50, urban above 50. Nine states, each in its own measure; Delhi, Rajasthan and
-Uttarakhand are left out and the page says why. Findings: urban above rural in
-7 of 8 states (Kerala the exception; Bihar has no urban district), mixed above
-rural in 7 of 9, and the order holds without the urban districts (rank
-correlation 0.2 or more) in five states. Never claim the share has grown since
+50, urban above 50. Ten states, each in its own measure; Delhi and Rajasthan are left out and
+the page says why. Findings: urban above rural in
+8 of 9 states (Kerala the exception; Bihar has no urban district), mixed above
+rural in 8 of 10, and the order holds without the urban districts (rank
+correlation 0.2 or more) in six states. Never claim the share has grown since
 2011 without a source.
 
 **District factors** (`india/factors/`) sets each district's rate against
@@ -269,8 +269,9 @@ states: Bihar, Gujarat, Karnataka, Kerala, Maharashtra, Telangana, West
 Bengal, Tamil Nadu, Uttar Pradesh, Rajasthan, Uttarakhand, Delhi. The build
 fails unless Bihar's values agree with Bihar's own reading of the same
 compendium. Rates come from `build_cities.rows()`, except Rajasthan (fall in
-the roll 2023 to 2026), Uttarakhand (removed after the draft) and Delhi (the
-11 districts of its 2025 roll, which are the survey's), in `state_rows()`.
+the roll 2023 to 2026), Uttarakhand (names left off, from the CEO's table of
+the draft) and Delhi (the 11 districts of its 2025 roll, which are the
+survey's), in `state_rows()`.
 The unit is the survey's district, with later districts added into the one
 they were made from (`ALIAS`). Urban share and density are 2011 Census on the
 urban page's units. Income per head (`INCOME`) is each state's own district
@@ -317,7 +318,7 @@ itself in its own measure, and states are never ranked against each other.
   district is missing, and if Bihar's seven stop matching the Bihar pages'
   Nepal-border districts. They match today.
   - Covered: Uttar Pradesh, Gujarat, Bihar, West Bengal (the fall in the roll)
-    and Uttarakhand (after the draft only).
+    and Uttarakhand (names left off).
   - Rajasthan is left out. Its figure is a change over two years, and Barmer
     was split to make Balotara.
   - Finding: there is no single pattern. Border districts lost more in Bihar
@@ -784,11 +785,17 @@ in `SOURCES.md` there; `check_raw.py` asserts them) and writes `summary.json`,
 `constituencies.json`, `districts.json` and the two CSVs; `check_data.py` runs
 both with `--check`.
 
-- **The names left off are a state total only.** The CEO's PN 36/2026 gives the
-  roll on 8 June 2026 (79,60,762), the draft (71,33,785) and four reasons. No
-  table of the roll before by constituency or district was published, so
-  nothing below the state is measured against it, and every constituency
-  figure is about the change from the draft to the final roll.
+- **The names left off are by constituency, the reasons for the state only.**
+  The CEO's PN 36/2026 gives the roll on 8 June 2026 (79,60,762), the draft
+  (71,33,785) and four reasons. The CEO's table of the draft of 14.07.2026
+  (`raw/ac_draft_asdd.csv`, read from the PDF's text by
+  `parse_ac_draft_asdd.py`) gives every constituency's names marked ASDD and
+  left off, the electors with an anomaly and with no mapping; a seat's roll
+  before is its draft plus its names left off, which adds to 79,60,762
+  exactly. Anomalies plus no mapping are the 24,30,608 notices; the nine
+  anomaly categories overlap and are never added. Kichha lost 18.2 per 100,
+  Didihat 4.2; notices and removals after the draft go together across seats
+  (rank correlation 0.81). No sex or reason below the state.
 - **Constituencies from the CEO's own table**, pages 3 and 4 of PN 63/2026
   (3 October 2026), transcribed by hand from a scan: draft, claims admitted,
   objections admitted and final, by sex, for all 70. Every row satisfies draft
@@ -807,7 +814,8 @@ both with `--check`.
   electors include service voters, who cluster in the hill seats; the SIR rolls
   are general electors.
 - The map is by constituency (`data/geo/uttarakhand.json`), shaded by names
-  removed after the draft per 1,000. English only, like the other 2026 pages.
+  left off per 100 on the roll before. The finder, the factors, border and
+  urban pages read Uttarakhand by the names left off. English only, like the other 2026 pages.
 
 ## Assam
 
@@ -1611,8 +1619,17 @@ per slot, not the slot's length.
   sabarinstitute.org, at the owner's request (October 2026). It is a pointer
   for further reading and nothing more: no page says who compiled any list
   this site counts, and the Hyderabad pages still do not name a compiler.
-- **Publishing**: the site serves only pages and aggregate JSON. `_redirects`
-  answers 404 for raw files, scripts, notes and `archive/`. Do not link source files from a page, and describe
+- **Publishing**: Netlify publishes `_site` (gitignored), which
+  `scripts/stage_site.py` fills on every deploy from an allowlist: the page
+  folders, `assets`, `data`, `downloads`, `fonts`, `reports` and a few root
+  files, leaving out every `raw/` folder, `.md`/`.py`/`.mjs`/`.sh` files and
+  `DATA_PRIVATE`. Until October 2026 the repository root was published and
+  `_redirects` 404s guarded the private paths, but Netlify's file server
+  ignores case and the rules do not, so `/Scripts/`, `/Data/bihar/RAW/` and
+  `/claude.md` were served. CI runs `stage_site.py` with no argument and fails
+  on a top-level entry that is neither published nor kept back; name a new
+  folder in `PUBLIC_DIRS` or `PRIVATE`. The `_redirects` 404s stay as a second
+  line. Do not link source files from a page, and describe
   sources without naming the people or organisations who compiled them.
 - **Writing**: plain explanatory prose. Never refer to earlier versions of the
   analysis or to corrections on a public page, with one exception: the

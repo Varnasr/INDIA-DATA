@@ -940,7 +940,11 @@
   "women_draft_pct": "Women as a percentage of the draft roll.",
   "women_claims_pct": "Women as a percentage of the claims admitted.",
   "women_objections_pct": "Women as a percentage of the objections admitted.",
-  "women_objections_gap": "women_objections_pct less women_draft_pct, in percentage points."
+  "women_objections_gap": "women_objections_pct less women_draft_pct, in percentage points.",
+  "left_off_per_100": "Names left off the draft per 100 electors on the roll before the revision.",
+  "notices": "Electors on the draft in line for a notice: those with an anomaly plus those with no mapping to the 2003 roll, from the Chief Electoral Officer's table of the draft of 14.07.2026.",
+  "notices_per_100": "Notices per 100 electors on the draft roll.",
+  "no_mapping": "Electors on the draft whose entry could not be linked to the 2003 roll (No Mapping), from the Chief Electoral Officer's table of the draft."
  },
  "data/uttarakhand/districts.csv": {
   "district": "The district.",
@@ -954,7 +958,11 @@
   "objections_per_1000": "Objections admitted per 1,000 electors on the draft roll.",
   "net_per_1000": "The net change per 1,000 electors on the draft roll.",
   "women_draft_pct": "Women as a percentage of the draft roll.",
-  "women_objections_pct": "Women as a percentage of the objections admitted."
+  "women_objections_pct": "Women as a percentage of the objections admitted.",
+  "left_off_per_100": "Names left off the draft per 100 electors on the roll before the revision.",
+  "notices": "Electors on the draft in line for a notice: those with an anomaly plus those with no mapping to the 2003 roll, from the Chief Electoral Officer's table of the draft of 14.07.2026.",
+  "notices_per_100": "Notices per 100 electors on the draft roll.",
+  "no_mapping": "Electors on the draft whose entry could not be linked to the 2003 roll (No Mapping), from the Chief Electoral Officer's table of the draft."
  },
  "data/uttarpradesh/districts.csv": {
   "district": "The district, one of 75, from the Chief Electoral Officer's table of 6 January 2026 as photographed and published by India TV.",
@@ -1084,5 +1092,35 @@
   "district_left_off_per_100": "Names left off the district's draft roll per 100 electors on its roll of 27 October 2025.",
   "left_off_spread_by_electors": "The district's names left off times the constituency's share of the district's 2022 electors. An estimate, not a count.",
   "spread_over_margin": "1 if the spread figure is larger than the 2022 margin, else 0. It says the removals were large enough to decide the seat, never that they did."
+ },
+ "data/uttarakhand/raw/ac_draft_asdd.csv": {
+  "level": "ac for a constituency, district for a district total, state for the grand total, as the table prints them.",
+  "ps": "Polling stations.",
+  "draft": "Electors on the draft roll of 14.07.2026.",
+  "anomalies": "Electors with Anomalies: entries on the draft with at least one of the eight anomalies below. One elector can carry several.",
+  "anomalies_pct": "Electors with anomalies as a percentage of the draft, as printed.",
+  "no_mapping": "No Mapping: electors on the draft whose entry could not be linked to the 2003 roll. Added to the anomalies, these are the 24,30,608 notices.",
+  "no_mapping_pct": "No mapping as a percentage of the anomalies, as printed.",
+  "asdd_deleted": "Electors Marked as ASDD during SIR (Deleted): marked absent, shifted, dead or duplicate and left off the draft. They add to the 8,26,977 of PN 36/2026.",
+  "service_electors": "Service electors on the draft of 14.07.2026.",
+  "agegap_lt15": "Electors on the draft whose entry showed an age gap of under 15 years with a parent. The categories overlap and are never added.",
+  "agegap_lt15_pct": "agegap_lt15 as a percentage of the electors with anomalies, as printed.",
+  "agegap_gt50": "Electors on the draft whose entry showed an age gap of over 50 years with a parent. The categories overlap and are never added.",
+  "agegap_gt50_pct": "agegap_gt50 as a percentage of the electors with anomalies, as printed.",
+  "grandparent_lt40": "Electors on the draft whose entry showed an age gap of under 40 years with a grandparent. The categories overlap and are never added.",
+  "grandparent_lt40_pct": "grandparent_lt40 as a percentage of the electors with anomalies, as printed.",
+  "progeny_gt6": "Electors on the draft whose entry showed more than six children linked to the same parent. The categories overlap and are never added.",
+  "progeny_gt6_pct": "progeny_gt6 as a percentage of the electors with anomalies, as printed.",
+  "progeny_agediff_lt9m": "Electors on the draft whose entry showed siblings born less than nine months apart. The categories overlap and are never added.",
+  "progeny_agediff_lt9m_pct": "progeny_agediff_lt9m as a percentage of the electors with anomalies, as printed.",
+  "rel_name_var_progeny": "Electors on the draft whose entry showed a relative's name spelt differently, where the entry was linked through a parent. The categories overlap and are never added.",
+  "rel_name_var_progeny_pct": "rel_name_var_progeny as a percentage of the electors with anomalies, as printed.",
+  "self_name_var": "Electors on the draft whose entry showed the elector's own name spelt differently from the 2003 roll. The categories overlap and are never added.",
+  "self_name_var_pct": "self_name_var as a percentage of the electors with anomalies, as printed.",
+  "rel_name_var_self": "Electors on the draft whose entry showed a relative's name spelt differently, where the entry was linked to the elector's own 2003 entry. The categories overlap and are never added.",
+  "rel_name_var_self_pct": "rel_name_var_self as a percentage of the electors with anomalies, as printed.",
+  "ac": "Assembly constituency number, blank on district and state rows.",
+  "name": "Constituency or district name as the table prints it.",
+  "district": "District, as the table prints it (U.S.Nagar for Udham Singh Nagar)."
  }
 }

@@ -56,7 +56,7 @@
     <div class="panel wide">
       <div class="finder" id="finder"></div>
       <div class="vizbox" id="vMap"></div>
-      <p class="note">Each constituency is shaded by the names removed from it after the draft, for every 1,000 electors on its draft roll. Tap a constituency for its figures. Boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.</p>
+      <p class="note">Each constituency is shaded by the names left off its draft roll, for every 100 electors on its roll before the revision. Tap a constituency for its figures. Boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.</p>
     </div>
   </div>
 
@@ -75,6 +75,13 @@
   </div>
   <p class="finding" id="fReason"></p>
 
+  <h2 id="names-left-off-constituency-by-constituency">Names left off, constituency by constituency</h2>
+  <p class="sub">The Chief Electoral Officer published a table of the draft giving, for every constituency, the electors marked absent, shifted, dead or duplicate and left off. A constituency's roll before the revision is its draft plus those names, and the 70 add up exactly to the state's roll of 8 June. Each dot is one constituency's names left off for every 100 on its roll before, grouped by district. Hover or tap a dot for its name.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vLeft"></div></div>
+  </div>
+  <p class="finding" id="fLeft"></p>
+
   <h2 id="after-the-draft-constituency-by-constituency">After the draft, constituency by constituency</h2>
   <p class="sub">After the draft, a name is added when a claim is admitted (Form 6, or Form 8 for someone moving in) and removed when an objection is admitted (Form 7, or Form 8 for someone moving out). Each dot is a constituency. Its place across is the names added for every 1,000 on its draft roll, and its height the names removed. Above the dashed line, more were removed than added, so the final roll is smaller than the draft.</p>
   <div class="grid">
@@ -83,7 +90,7 @@
   <p class="finding" id="fAfter"></p>
 
   <h2 id="the-plains-and-the-hills">The plains and the hills</h2>
-  <p class="sub">Four districts take in the plains of the state, Dehradun, Haridwar, Nainital and Udham Singh Nagar, and the other nine are in the hills. Dehradun and Nainital also take in hill constituencies, so this is a split by district. The chart shows the plains districts' share of the draft roll, of the names added after it and of the names removed after it.</p>
+  <p class="sub">Four districts take in the plains of the state, Dehradun, Haridwar, Nainital and Udham Singh Nagar, and the other nine are in the hills. Dehradun and Nainital also take in hill constituencies, so this is a split by district. The chart shows the plains districts' share of the roll before the revision and of each count that followed.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vPlains"></div></div>
   </div>
@@ -103,7 +110,14 @@
   </div>
   <p class="finding" id="fWomen"></p>
 
-  <h2 id="notices-and-what-comes-next">Notices and what comes next</h2>
+  <h2 id="notices">Notices</h2>
+  <p class="sub">An elector kept on the draft could still be sent a notice to prove their entry. The same table of the draft counts, for every constituency, the electors whose entry could not be linked to the 2003 roll (no mapping) and those whose entry had an anomaly, such as an age gap with a parent under 15 years or a name spelt differently from a relative's. The two add up to the 24.30 lakh notices the Chief Electoral Officer gave. Each dot is a constituency. Its place across is notices for every 100 on its draft, and its height the names removed from it after the draft, per 1,000.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vNotice"></div></div>
+  </div>
+  <p class="finding" id="fNotice"></p>
+
+  <h2 id="what-comes-next">What comes next</h2>
   <p class="finding" id="fNext"></p>
 
   <h2 id="every-district">Every district</h2>
@@ -141,6 +155,12 @@ Promise.all([SIR.json('data/uttarakhand/summary.json'), SIR.json('data/uttarakha
     rows: [['Absent or shifted', S.reasons.absent_or_shifted], ['Dead', S.reasons.dead], ['Enrolled at more than one place', S.reasons.duplicate], ['Other', S.reasons.other]].map(function (x) { return { name: x[0], v: x[1] / 1e5, text: lk(x[1]), tok: '--fill-navy', hi: true }; }) });
   document.getElementById('fReason').innerHTML = '<b>' + SIR.pct(S.shares.absent_or_shifted) + ' were entered as absent or shifted, ' + SIR.pct(S.shares.dead) + ' as dead and ' + SIR.pct(S.shares.duplicate) + ' as enrolled at more than one place.</b> The Chief Electoral Officer did not separate absent from shifted, and published no split of the reasons by district or by sex.';
 
+  VIZ.strip('vLeft', { label: 'Names left off the draft per 100 on the roll before, every constituency, by district', axis: 'Left off the draft, per 100 on the roll before', r: 4.5,
+    key: [['Plains districts', '--fill-red'], ['Hill districts', '--fill-navy']],
+    rows: D.slice().sort(function (a, b) { return b.left_off_per_100 - a.left_off_per_100; }).map(function (d) { return { name: d.district, tok: PL(d),
+      points: A.filter(function (a) { return a.district === d.district; }).map(function (a) { return { v: a.left_off_per_100, label: a.name + ': ' + n(a.left_off) + ' left off, ' + d1(a.left_off_per_100) + ' per 100' }; }) }; }) });
+  document.getElementById('fLeft').innerHTML = '<b>' + S.lo_max + ' lost ' + d1(S.lo_max_v) + ' of every 100 names on its roll before the revision, and ' + S.lo_max2 + ' ' + d1(S.lo_max2_v) + '. ' + S.lo_min + ' lost ' + d1(S.lo_min_v) + ', the fewest.</b> ' + S.acs_lo_over_state + ' of the 70 constituencies lost more than the state\'s ' + d1(S.per_100) + '. By district, ' + S.dist_lo_max + ' lost the most, ' + d1(S.dist_lo_max_v) + ' per 100, and ' + S.dist_lo_min + ' the fewest, ' + d1(S.dist_lo_min_v) + '. The plains districts lost ' + d1(S.plains.left_off_per_100) + ' per 100 and the hill districts ' + d1(S.hills.left_off_per_100) + '. The table gives no reason or sex below the state.';
+
   VIZ.scatter('vAfter', { label: 'Names added and removed after the draft, per 1,000 on each constituency\'s draft roll', diag: true, xMin: 0, yMin: 0,
     xAxis: 'Added after the draft, per 1,000 on the draft', yAxis: 'Removed after the draft, per 1,000', diagLabel: 'removed = added',
     key: [['Plains districts', '--fill-red'], ['Hill districts', '--fill-navy']],
@@ -148,9 +168,9 @@ Promise.all([SIR.json('data/uttarakhand/summary.json'), SIR.json('data/uttarakha
   var lost = A.filter(function (a) { return a.net < 0; }), lostPl = lost.filter(function (a) { return a.plains; }).length;
   document.getElementById('fAfter').innerHTML = '<b>In ' + S.acs_lost + ' of the 70 constituencies more names were removed after the draft than added, and ' + (lostPl === lost.length ? 'all of them are' : lostPl + ' of them are') + ' in the plains districts.</b> ' + S.obj_max + ' removed the most, ' + d1(S.obj_max_v) + ' for every 1,000 on its draft, and ' + S.obj_min + ' the fewest, ' + d1(S.obj_min_v) + '. Across the state, ' + d1(S.claims_per_1000) + ' were added and ' + d1(S.objections_per_1000) + ' removed for every 1,000 on the draft.';
 
-  VIZ.lollipop('vPlains', { label: 'The plains districts\' share of the draft roll and of the names added and removed after it', axis: 'Per cent', max: 100, step: 20, ref: S.plains.draft_pct,
-    rows: [['Draft roll', S.plains.draft_pct, '--fill-navy'], ['Added after the draft', S.plains.claims_pct, '--fill-teal'], ['Removed after the draft', S.plains.objections_pct, '--fill-red']].map(function (x) { return { name: x[0], v: x[1], text: SIR.pct(x[1]), tok: x[2], hi: true }; }) });
-  document.getElementById('fPlains').innerHTML = '<b>The plains districts hold ' + SIR.pct(S.plains.draft_pct) + ' of the draft roll and account for ' + SIR.pct(S.plains.objections_pct) + ' of the names removed after it.</b> They removed ' + d1(S.plains.objections_per_1000) + ' for every 1,000 on the draft and added ' + d1(S.plains.claims_per_1000) + ', so their rolls ' + (S.plains.net_per_1000 < 0 ? 'shrank' : 'grew') + ' by ' + d1(Math.abs(S.plains.net_per_1000)) + ' per 1,000. The hill districts removed ' + d1(S.hills.objections_per_1000) + ' and added ' + d1(S.hills.claims_per_1000) + ', and their rolls grew by ' + d1(S.hills.net_per_1000) + ' per 1,000.';
+  VIZ.lollipop('vPlains', { label: 'The plains districts\' share of the roll before, of the names left off, of the notices, of the draft roll and of the names added and removed after it', axis: 'Per cent', max: 100, step: 20, ref: S.plains.draft_pct,
+    rows: [['Roll before the revision', S.plains.roll_before_pct, '--fill-navy'], ['Left off the draft', S.plains.left_off_pct, '--fill-red'], ['Notices', S.plains.notices_pct, '--fill-red'], ['Draft roll', S.plains.draft_pct, '--fill-navy'], ['Added after the draft', S.plains.claims_pct, '--fill-teal'], ['Removed after the draft', S.plains.objections_pct, '--fill-red']].map(function (x) { return { name: x[0], v: x[1], text: SIR.pct(x[1]), tok: x[2], hi: true }; }) });
+  document.getElementById('fPlains').innerHTML = '<b>The plains districts held ' + SIR.pct(S.plains.roll_before_pct) + ' of the roll before the revision, and account for ' + SIR.pct(S.plains.left_off_pct) + ' of the names left off the draft, ' + SIR.pct(S.plains.notices_pct) + ' of the notices and ' + SIR.pct(S.plains.objections_pct) + ' of the names removed after it.</b> Their share grows at every step. They removed ' + d1(S.plains.objections_per_1000) + ' for every 1,000 on the draft and added ' + d1(S.plains.claims_per_1000) + ', so their rolls ' + (S.plains.net_per_1000 < 0 ? 'shrank' : 'grew') + ' by ' + d1(Math.abs(S.plains.net_per_1000)) + ' per 1,000. The hill districts removed ' + d1(S.hills.objections_per_1000) + ' and added ' + d1(S.hills.claims_per_1000) + ', and their rolls grew by ' + d1(S.hills.net_per_1000) + ' per 1,000.';
 
   VIZ.strip('vDist', { label: 'Names removed after the draft per 1,000 on the draft roll, every constituency, by district', axis: 'Removed after the draft, per 1,000 on the draft roll', r: 4.5,
     key: [['Plains districts', '--fill-red'], ['Hill districts', '--fill-navy']],
@@ -165,33 +185,39 @@ Promise.all([SIR.json('data/uttarakhand/summary.json'), SIR.json('data/uttarakha
   var big = A.filter(function (a) { return a.women_objections_gap >= 10; }).sort(function (a, b) { return b.women_objections_gap - a.women_objections_gap; });
   document.getElementById('fWomen').innerHTML = '<b>Women were ' + SIR.pct(S.women_draft_pct) + ' of the draft roll and ' + SIR.pct(S.women_objections_pct) + ' of the names removed after it, more than their share in ' + S.acs_women_over + ' of the 70 constituencies.</b> In ' + big.length + ' the gap is 10 points or more, among them ' + (function (a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; })(big.slice(0, 4).map(function (a) { return a.name + ' (' + SIR.pct(a.women_objections_pct) + ' of ' + n(a.objections) + ')'; })) + '. Women were also ' + SIR.pct(S.women_claims_pct) + ' of the names added, and ' + SIR.pct(S.women_final_pct) + ' of the final roll.';
 
-  document.getElementById('fNext').innerHTML = (NT && NT.notices ? 'According to the press, quoting the Chief Electoral Officer, about ' + (NT.notices / 1e5).toFixed(1) + ' lakh electors on the draft roll were to be sent a notice to prove their entry' + (NT.discrepancy ? ', ' + (NT.discrepancy / 1e5).toFixed(1) + ' lakh of them for a logical discrepancy, an entry whose details did not agree with the old roll' : '') + '. ' : '') +
-    'With the final roll, the Chief Electoral Officer told booth officers to compare it with the roll from before the revision, visit the people missing from it, help those still eligible fill in Form 6, and share the lists with the parties\' booth agents. The steps are on <a href="../india/process/#t-2026-10-03">How the revision was run</a>.';
+  VIZ.scatter('vNotice', { label: 'Notices per 100 on the draft and names removed after the draft per 1,000, by constituency', xMin: 0, yMin: 0,
+    xAxis: 'Notices, per 100 on the draft roll', yAxis: 'Removed after the draft, per 1,000',
+    key: [['Plains districts', '--fill-red'], ['Hill districts', '--fill-navy']],
+    points: A.map(function (a) { return { x: a.notices_per_100, y: a.objections_per_1000, tok: PL(a), label: a.name + ': ' + n(a.notices) + ' notices, ' + n(a.objections) + ' removed after the draft' }; }) });
+  document.getElementById('fNotice').innerHTML = '<b>' + lk(S.notices) + ' electors on the draft, ' + d1(S.notices_per_100) + ' of every 100, were in line for a notice: ' + lk(S.no_mapping) + ' with no mapping to the 2003 roll and ' + lk(S.anomalies) + ' with an anomaly.</b> The constituencies with more notices removed more names after the draft (rank correlation ' + SIR.d(S.rho_notices_objections, 2) + '), and the notices tie the two counts together more closely than the names left off do (' + SIR.d(S.rho_lo_objections, 2) + '). The plains districts had ' + d1(S.plains.notices_per_100) + ' notices per 100 on the draft and the hills ' + d1(S.hills.notices_per_100) + '. The table does not say how many notices were served or heard in each constituency. The Indian Express reported on 3 October, from the Chief Electoral Officer\'s presentation, that 97,186 of the 1,04,708 names removed after the draft were electors found ineligible after a notice, and that would explain the link. The site has not seen that presentation.';
+
+  document.getElementById('fNext').innerHTML = 'With the final roll, the Chief Electoral Officer told booth officers to compare it with the roll from before the revision, visit the people missing from it, help those still eligible fill in Form 6, and share the lists with the parties\' booth agents. The steps are on <a href="../india/process/#t-2026-10-03">How the revision was run</a>.';
 
   SIR.table(document.getElementById('tDist'), [
-    { k: 'district', label: 'District', left: true }, { k: 'acs', label: 'Seats' }, { k: 'draft', label: 'Draft roll', fmt: n },
+    { k: 'district', label: 'District', left: true }, { k: 'acs', label: 'Seats' }, { k: 'roll_before', label: 'Roll before', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'left_off_per_100', label: 'Left off per 100', fmt: d1 }, { k: 'notices_per_100', label: 'Notices per 100 on draft', fmt: d1 }, { k: 'draft', label: 'Draft roll', fmt: n },
     { k: 'claims', label: 'Added', fmt: n }, { k: 'objections', label: 'Removed', fmt: n }, { k: 'final', label: 'Final roll', fmt: n },
-    { k: 'objections_per_1000', label: 'Removed per 1,000', fmt: d1 }, { k: 'women_objections_pct', label: 'Women, % of removed', fmt: d1 }], D, { sort: 'objections_per_1000' });
+    { k: 'objections_per_1000', label: 'Removed per 1,000', fmt: d1 }, { k: 'women_objections_pct', label: 'Women, % of removed', fmt: d1 }], D, { sort: 'left_off_per_100' });
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', left: true }, { k: 'district', label: 'District', left: true },
+    { k: 'roll_before', label: 'Roll before', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'left_off_per_100', label: 'Left off per 100', fmt: d1 }, { k: 'notices_per_100', label: 'Notices per 100 on draft', fmt: d1 },
     { k: 'draft', label: 'Draft roll', fmt: n }, { k: 'claims', label: 'Added', fmt: n }, { k: 'objections', label: 'Removed', fmt: n }, { k: 'final', label: 'Final roll', fmt: n },
     { k: 'net_per_1000', label: 'Change per 1,000', fmt: d1 }, { k: 'objections_per_1000', label: 'Removed per 1,000', fmt: d1 },
-    { k: 'women_objections_pct', label: 'Women, % of removed', fmt: d1 }], A, { sort: 'objections_per_1000' });
+    { k: 'women_objections_pct', label: 'Women, % of removed', fmt: d1 }], A, { sort: 'left_off_per_100' });
 
   var seatsOf = function (d) { return A.filter(function (a) { return a.district === d.district; }); };
   var DSET = { rows: D, key: function (d) { return SIR.slug(d.district); }, label: function (d) { return d.district + ' district'; },
-    card: function (d) { return SIR.facts([['Draft roll', n(d.draft)], ['Added after the draft', n(d.claims)], ['Removed after the draft', n(d.objections)], ['Final roll', n(d.final)], ['Removed per 1,000 on the draft', d1(d.objections_per_1000)], ['Women, share of those removed', SIR.pct(d.women_objections_pct)], ['Constituencies', n(d.acs)]]) + '<p class="note">Its constituencies</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
+    card: function (d) { return SIR.facts([['Roll before the revision', n(d.roll_before)], ['Left off the draft', n(d.left_off)], ['Left off per 100', d1(d.left_off_per_100)], ['Notices', n(d.notices)], ['Draft roll', n(d.draft)], ['Added after the draft', n(d.claims)], ['Removed after the draft', n(d.objections)], ['Final roll', n(d.final)], ['Removed per 1,000 on the draft', d1(d.objections_per_1000)], ['Women, share of those removed', SIR.pct(d.women_objections_pct)], ['Constituencies', n(d.acs)]]) + '<p class="note">Its constituencies</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
     pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); },
-    share: function (d) { return d.district + ' district, Uttarakhand. After the SIR draft, ' + n(d.claims) + ' names were added and ' + n(d.objections) + ' removed, and the final roll holds ' + n(d.final) + '. These are counts from the Chief Electoral Officer\'s table of the final roll.'; } };
+    share: function (d) { return d.district + ' district, Uttarakhand. The SIR draft roll left off ' + n(d.left_off) + ' names, ' + d1(d.left_off_per_100) + ' of every 100 on the roll before. After the draft, ' + n(d.claims) + ' names were added and ' + n(d.objections) + ' removed, and the final roll holds ' + n(d.final) + '. These are counts from the Chief Electoral Officer\'s tables of the draft and the final roll.'; } };
   var F = SIR.finder('finder', { rows: A, more: [DSET], prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district', key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
     pick: function (a) { var b = document.getElementById('vMap'); if (b.__select) b.__select(a.ac); },
-    card: function (a) { return SIR.facts([['Draft roll', n(a.draft)], ['Added after the draft', n(a.claims)], ['Removed after the draft', n(a.objections)], ['Final roll', n(a.final)],
+    card: function (a) { return SIR.facts([['Roll before the revision', n(a.roll_before)], ['Left off the draft', n(a.left_off)], ['Left off per 100', d1(a.left_off_per_100)], ['Notices', n(a.notices)], ['Draft roll', n(a.draft)], ['Added after the draft', n(a.claims)], ['Removed after the draft', n(a.objections)], ['Final roll', n(a.final)],
       ['Removed per 1,000 on the draft', d1(a.objections_per_1000)], ['Women, share of the draft', SIR.pct(a.women_draft_pct)], ['Women, share of those removed', SIR.pct(a.women_objections_pct)]]); },
-    share: function (a) { return a.name + ', Uttarakhand. After the SIR draft, ' + n(a.claims) + ' names were added and ' + n(a.objections) + ' removed, and the final roll holds ' + n(a.final) + '. Women were ' + SIR.pct(a.women_objections_pct) + ' of those removed. These are counts from the Chief Electoral Officer\'s table of the final roll.'; } });
+    share: function (a) { return a.name + ', Uttarakhand. The SIR draft roll left off ' + n(a.left_off) + ' names, ' + d1(a.left_off_per_100) + ' of every 100 on the roll before. After the draft, ' + n(a.claims) + ' names were added and ' + n(a.objections) + ' removed, and the final roll holds ' + n(a.final) + '. Women were ' + SIR.pct(a.women_objections_pct) + ' of those removed. These are counts from the Chief Electoral Officer\'s tables of the draft and the final roll.'; } });
   SIR.json('data/geo/uttarakhand.json').then(function (geo) {
     var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });
-    VIZ.map('vMap', { geo: geo, label: 'Map of names removed after the draft per 1,000 on the draft roll, by constituency', title: 'Removed after the draft per 1,000',
-      v: function (ac) { return byAc[ac] ? byAc[ac].objections_per_1000 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
+    VIZ.map('vMap', { geo: geo, label: 'Map of names left off the draft per 100 on the roll before, by constituency', title: 'Left off per 100',
+      v: function (ac) { return byAc[ac] ? byAc[ac].left_off_per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
       pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
     var it = F.item[decodeURIComponent(location.hash.slice(1))]; if (it && it.s.pick) it.s.pick(it.r);
     SIR.tools();

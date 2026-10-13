@@ -92,8 +92,8 @@ FINDER = [
      'names left off the draft (forms not collected)', 'the roll before the revision'),
     ('gj', 'Gujarat', 'gujarat/', 'gujarat/constituencies.json', 'removed', 'before', 100,
      'names left off the draft', 'the roll before the revision'),
-    ('uk', 'Uttarakhand', 'uttarakhand/', 'uttarakhand/constituencies.json', 'objections', 'draft', 1000,
-     'names removed after the draft', 'the draft roll'),
+    ('uk', 'Uttarakhand', 'uttarakhand/', 'uttarakhand/constituencies.json', 'left_off', 'roll_before', 100,
+     'names left off the draft', 'the roll before the revision'),
 ]
 
 

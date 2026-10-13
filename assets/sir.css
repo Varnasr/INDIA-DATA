@@ -1010,9 +1010,9 @@ html.dyslexic-font .places .menu details.grp .sub .rg{text-transform:none}
 .fabs.fabs-off{display:none}
 footer{padding-bottom:4rem}
 .tour{bottom:calc(8rem + env(safe-area-inset-bottom,0px))}
-footer{padding-bottom:7.5rem}
+footer{padding-bottom:5rem}
 @media (max-width:700px){
-  footer{padding-bottom:7.5rem}
+  footer{padding-bottom:4.5rem}
   .tour{bottom:calc(8rem + env(safe-area-inset-bottom,0px))}
 }
 @media print{.fabs{display:none!important}}
@@ -1210,6 +1210,6 @@ html.dyslexic-font .pull .pq .tr{font-style:normal}
 @media (max-width:700px){
   .panel .tools button,.panel .tools .btn,.fcard .tools button,.fcard .tools .btn{min-height:40px;padding:.45rem .85rem;font-size:.82rem}
   .anchor{width:40px;height:40px}
-  footer[data-i18n-each]{line-height:2.4}
-  footer a{display:inline-block;padding:.5rem .15rem;min-height:40px}
+  footer[data-i18n-each]{line-height:1.7}
+  footer a{display:inline-block;padding:.3rem .1rem}
 }

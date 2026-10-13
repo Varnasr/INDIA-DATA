@@ -16,7 +16,7 @@ Writes data/india/factors.json and data/india/factors.csv.
   from the same compendium, and the build fails on any difference.
 - Rates come from build_cities.rows() for the states it covers, and for
   Rajasthan (the fall in the roll from 2023 to the final roll of 2026),
-  Uttarakhand (names removed after the draft) and Delhi (names left off, on
+  Uttarakhand (names left off, from the CEO's table of the draft) and Delhi (names left off, on
   the 11 districts of the 2025 roll, which are the survey's) from their own
   files (ROWS).
 - Income per head is read from each state's own district table (INCOME), on
@@ -51,7 +51,7 @@ CHECK = '--check' in sys.argv
 SURVEY_STATES = [('Bihar', 'roll_2025'), ('Gujarat', 'left_off'), ('Karnataka', 'left_off'), ('Maharashtra', 'left_off'),
                  ('Telangana', 'left_off'), ('Tamil Nadu', 'left_off'), ('Uttar Pradesh', 'left_off'),
                  ('Delhi', 'left_off'), ('West Bengal', 'fall'), ('Kerala', 'fall'), ('Rajasthan', 'change_2023'),
-                 ('Uttarakhand', 'after_draft')]
+                 ('Uttarakhand', 'left_off')]
 NFHS_STATE = {'Delhi': 'NCT Delhi'}  # as the compendium names it
 # key, NFHS-5 indicator number, label, source
 FACTORS = [
@@ -134,7 +134,7 @@ def state_rows(state):
         return [dict(district=d['district'], before=d['roll_2023'], removed=d['fall'])
                 for d in json.load(open(os.path.join(ROOT, 'data', 'rajasthan', 'districts.json'), encoding='utf-8'))]
     if state == 'Uttarakhand':
-        return [dict(district=d['district'], before=d['draft'], removed=d['objections'])
+        return [dict(district=d['district'], before=d['roll_before'], removed=d['left_off'])
                 for d in json.load(open(os.path.join(ROOT, 'data', 'uttarakhand', 'districts.json'), encoding='utf-8'))]
     if state == 'Delhi':
         out = {}

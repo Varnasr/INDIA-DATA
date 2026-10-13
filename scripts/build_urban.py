@@ -19,13 +19,12 @@ Writes data/india/urban.json and data/india/urban.csv.
   here is a 2011 district, and its urban share is that district's in 2011.
 - Each state is read in its own measure and never ranked against another:
   names left off the draft per 100 on the roll before (Karnataka, Maharashtra,
-  Tamil Nadu, Uttar Pradesh, Gujarat, Telangana), both phases per 100 on the
+  Tamil Nadu, Uttar Pradesh, Gujarat, Telangana, Uttarakhand), both phases per 100 on the
   2025 roll (Bihar), and the fall in the roll (West Bengal, Kerala). The rows
   come from build_cities.rows(), so this page and the cities page cannot
   disagree.
-- Left out, and the page says why: Delhi (one unit, almost wholly urban),
-  Rajasthan (a change over two years, across a split of districts) and
-  Uttarakhand (counts after the draft only).
+- Left out, and the page says why: Delhi (one unit, almost wholly urban) and
+  Rajasthan (a change over two years, across a split of districts).
 """
 import csv
 import io
@@ -43,7 +42,7 @@ CHECK = '--check' in sys.argv
 
 STATES = [('Uttar Pradesh', 'left_off'), ('Maharashtra', 'left_off'), ('Tamil Nadu', 'left_off'), ('Gujarat', 'left_off'),
           ('Karnataka', 'left_off'), ('Telangana', 'left_off'), ('Bihar', 'roll_2025'),
-          ('West Bengal', 'fall'), ('Kerala', 'fall')]
+          ('West Bengal', 'fall'), ('Kerala', 'fall'), ('Uttarakhand', 'left_off')]
 CENSUS_STATE = {'Telangana': 'Andhra Pradesh'}
 BANDS = [('rural', 0, 20), ('mixed', 20, 50), ('urban', 50, 101)]
 
