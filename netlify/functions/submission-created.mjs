@@ -16,12 +16,16 @@ export default async (req) => {
   const send = (body) => fetch('https://api.resend.com/emails', {
     method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   const out = [];
-  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  const citizen = d.indian_citizen === 'yes';
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && !citizen) {
     out.push(send({ from, to: email, reply_to: TEAM, subject: 'Thank you for supporting Off the Roll',
-      text: `Dear ${name || 'reader'},\n\nThank you for offering to support Off the Roll. If you would like to contribute, any UPI app can pay to this UPI ID:\n\n${UPI}\n\nYou choose the amount in your app. If you offered other help, we will write to you about it separately.\n\nSupport does not buy influence over what the site publishes. Every figure still comes from a source.\n\nOff the Roll, PinPoint Ventures\n${TEAM}\n` }));
+      text: `Dear ${name || 'reader'},\n\nThank you for offering to support Off the Roll. Contributions of money are accepted only from Indian citizens, so please do not send money. We will write to you separately about other ways to help, such as data, research, translation and spreading the word.\n\nOff the Roll\n${TEAM}\n` }));
+  } else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    out.push(send({ from, to: email, reply_to: TEAM, subject: 'Thank you for supporting Off the Roll',
+      text: `Dear ${name || 'reader'},\n\nThank you for offering to support Off the Roll. Contributions are accepted only from Indian citizens and are received by ImpactMojo. If you would like to contribute, any UPI app can pay to this UPI ID:\n\n${UPI}\n\nYou choose the amount in your app. If you offered other help, we will write to you about it separately.\n\nSupport does not buy influence over what the site publishes. Every figure still comes from a source.\n\nOff the Roll\n${TEAM}\n` }));
   }
   out.push(send({ from, to: TEAM, reply_to: /@/.test(email) ? email : undefined, subject: `Support form: ${name || 'no name'} (${d.how || 'not said'})`,
-    text: `Name: ${name}\nEmail: ${email}\nHow: ${d.how || ''}\nMessage:\n${d.message || ''}\n` }));
+    text: `Name: ${name}\nEmail: ${email}\nIndian citizen: ${d.indian_citizen || ''}\nHow: ${d.how || ''}\nMessage:\n${d.message || ''}\n` }));
   await Promise.allSettled(out);
   return new Response('ok');
 };

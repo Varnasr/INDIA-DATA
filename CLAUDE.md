@@ -922,7 +922,11 @@ UPI QR code (`assets/upi-qr.svg`, made with segno and decoded back before it
 went in) and an "Open my UPI app" link, both `upi://pay?pa=impactmojo@ibl&cu=INR`
 with no payee name and no amount. The owner asked that the UPI ID not be
 written out on the page; the QR and the link still carry it, as any UPI
-code must. `netlify/functions/submission-created.mjs`
+code must. Contributions are received by ImpactMojo and accepted only from
+Indian citizens (FCRA): the form asks, and a supporter who answers no is sent
+to `support/thanks/?other=1`, which hides the QR and says we will write about
+other ways to help. Keep both lines. Do not use a QR carrying a person's own
+name as payee. `netlify/functions/submission-created.mjs`
 writes back to the sender with the UPI ID and sends info@pinpointventures.in
 a copy, through Resend, only when `RESEND_API_KEY` and `SUPPORT_FROM` (an
 address on a domain verified with Resend) are set in Netlify; without them it
