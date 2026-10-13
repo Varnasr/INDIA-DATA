@@ -1735,6 +1735,17 @@ per slot, not the slot's length.
 
 ## Watch out for
 
+- **Every merge to `main` is a production deploy, and each costs 15 Netlify
+  credits.** On 13 October 2026 the Idealog Works team ran out of credits and
+  Netlify took all 35 of its sites offline, this one included. This site had
+  made 160 production deploys since 26 September, one for every merged PR.
+  Gather a day's work on the branch and merge it once, or twice at most.
+  Deploy previews cost nothing. Auto-publishing on this site is now locked: a
+  merge builds but does not go live, and `tools/publish-locked.py` in the
+  Democracy-by-Design repository publishes the newest build at 07:47 and
+  19:47 IST (its "Publish locked sites" workflow, run by hand with
+  `forindia`, publishes at once). A build that is never published costs
+  nothing.
 - **The Sabar Institute link.** Every method page ends with "Analysis of the
   named lists", pointing readers who want named-voter analysis to
   sabarinstitute.org, at the owner's request (October 2026). It is a pointer
