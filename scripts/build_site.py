@@ -59,6 +59,19 @@ MOON = svg('<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>')
 PRINT = svg('<polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>')
 
 
+_DL = None
+
+
+def dl_book(book):
+    """The downloads manifest's entry for one workbook (data/downloads.json,
+    written by scripts/build_repository.py), or None."""
+    global _DL
+    if _DL is None:
+        p = os.path.join(ROOT, 'data', 'downloads.json')
+        _DL = {b['id']: b for b in json.load(open(p, encoding='utf-8'))['workbooks']} if os.path.exists(p) else {}
+    return _DL.get(book)
+
+
 def favicon(color):
     return ("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'>"
             "<rect width='32' height='32' rx='6' fill='%23" + color + "'/>"
@@ -281,8 +294,25 @@ def shell(out, meta, content, scripts):
         fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
     fab = '<div class="fabs">%s</div>' % fab if fab else ''
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Removed from the Roll? What to Do</a> · <a href="%sdownloads/">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%scorrections/">Corrections</a>'
-              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, root, root, root, CFG['email'], CFG['email']))
+              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Removed from the Roll? What to Do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%scorrections/">Corrections</a>'
+              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, CFG['email'], CFG['email']))
+    # On a phone the header's Downloads button is inside the menu, and the
+    # footer link opened the downloads page at its top, where the first button
+    # is the zip of every table. So every page of a place with a workbook
+    # carries its own files at the foot of the page: the workbook and the
+    # CSVs the pages draw, each one tap away.
+    wb = dl_book(book) if book and not here.startswith(('downloads/', 'share/', 'terms/', 'corrections/', 'help/')) and place['id'] != 'home' else None
+    if wb:
+        # the shared workbook of the twenty smaller places: only this place's own table
+        own = 'data/%s/' % out.split('/')[0]
+        csvs = ''.join(' <a href="%s%s" download>%s</a>' % (root, s['path'], html.escape(s['path'].rsplit('/', 1)[-1])) for s in wb['sheets']
+                       if s['kind'] == 'published' and (book != 'other' or s['path'].startswith(own)))
+        strip = ('<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for %s</h2>'
+                 '<p><a class="btn" href="%s%s" download>%s</a> <a class="btn" href="%sdownloads/#w-%s">What each sheet holds</a></p>'
+                 '%s</section>' % (html.escape(place['label']), root, wb['file'],
+                                   'Excel workbook, this place and the other smaller states' if book == 'other' else 'Excel workbook, every table', root, book,
+                                   ('<p class="csvs">CSV:%s</p>' % csvs) if csvs else ''))
+        content = content.replace('</main>', strip + '\n</main>', 1) if '</main>' in content else content + strip
     footer += ('\n' + fab) if fab else ''
     # every page that loads sir.js gets viz.js after it: SIR.chart and the
     # dashboards hand ranked lists and side-by-side measures to it

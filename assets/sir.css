@@ -657,7 +657,7 @@ button:hover,.btn:hover{transform:none}
 /* -------------------------------------------- the page and its columns */
 main{padding:0 1.25rem 3.5rem}
 main>:first-child:not(.page-head),main>article>:first-child:not(.page-head){margin-top:2.5rem}
-body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,.asof,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.nothere,.colq,.dlall,.qa,.research-section,.methodology,.docard,.pull,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:0}
+body :where(main,main>article,main>section,.tab-content,.page-head,.page-faq,.report)>:is(h1,h2,h3,h4,p,.asof,blockquote,ol:not([class]),ul:not([class]),ol.summary,ul.plain,.nfacts,.nothere,.colq,.dlall,.dlstrip,.qa,.research-section,.methodology,.docard,.pull,.finder,.lead,.sub,.tab-lead,.finding,.caveat,.note,.report-lang,.report-actions,.page-faq,.kicker){max-width:var(--measure);margin-inline:0}
 .xp main>*{max-width:none!important;margin-inline:0!important}
 main h1{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;line-height:1.02}
 main h2{font-family:var(--serif);font-size:1.9rem;line-height:1.15;font-weight:700;letter-spacing:-.01em;border:0;padding:0;margin-top:3.5rem;margin-bottom:.5rem}
@@ -1163,3 +1163,13 @@ html.dyslexic-font .pull .pq .tr{font-style:normal}
 /* the page's share row under its findings */
 .pageshare{display:flex;gap:.5rem;flex-wrap:wrap;margin:.2rem 0 1.2rem}.pageshare .btn,.pageshare button{font-size:.8rem;padding:.3rem .8rem;border-radius:6px}
 @media print{.pageshare{display:none}}
+
+/* every page of a place with a workbook: its files at the foot of the page */
+.dlstrip{margin:2rem 0 1rem;padding:1rem 0 .4rem;border-top:2px solid var(--line)}
+.dlstrip .dlh{font-size:1.05rem;margin:0 0 .6rem}
+.dlstrip p{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.3rem 0}
+.dlstrip .csvs{font-size:.88rem;color:var(--muted)}
+.dlstrip .csvs a{color:var(--link,inherit)}
+.dls .pick{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.4rem 0 1rem}
+.dls .pick select{max-width:100%}
+@media print{.dlstrip{display:none}}

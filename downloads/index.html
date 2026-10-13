@@ -51,6 +51,10 @@
 <article lang="en" dir="ltr" data-no-i18n>
   <div class="kpis" id="kpis"></div>
 
+  <h2 id="pick-a-state">Pick a state</h2>
+  <p class="sub">Each state's own workbook holds its tables in Excel. Pick a place and its workbook and CSV files open below.</p>
+  <div class="pick"><label for="wpick">State or territory</label><select id="wpick"></select></div>
+
   <h2 id="everything-at-once">Everything at once</h2>
   <p class="sub">One zip file holds every table on this page as CSV, the published ones and the Chief Electoral Officers' own, with a list of the files and a sheet saying what every column holds.</p>
   <p class="dlall" id="zip"></p>
@@ -141,6 +145,14 @@ SIR.json('data/downloads.json').then(function (M) {
   SIR.jump && SIR.jump();
   var at = want && document.getElementById('w-' + want);
   if (at) { at.classList.add('here'); at.scrollIntoView(); }
+  var pk = document.getElementById('wpick');
+  pk.innerHTML = '<option value="">Choose a place</option>' + books.map(function (b) { return '<option value="' + esc(b.id) + '"' + (b.id === want ? ' selected' : '') + '>' + esc(b.title) + '</option>'; }).join('');
+  pk.addEventListener('change', function () {
+    var el = pk.value && document.getElementById('w-' + pk.value); if (!el) return;
+    document.querySelectorAll('.dls .book.here').forEach(function (x) { x.classList.remove('here'); });
+    el.classList.add('here'); var d = el.querySelector('details'); if (d) d.open = true;
+    history.replaceState(null, '', '#w-' + pk.value); el.scrollIntoView();
+  });
 }).catch(SIR.fail);
 </script>
 <script src="../assets/dyslexia-font.js" data-accent="var(--fill-red)" data-radius="10px" defer></script>
