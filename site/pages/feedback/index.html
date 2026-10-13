@@ -1,0 +1,41 @@
+<!--page {"title": "Feedback and corrections: SIR analysis for India", "description": "Tell us about a figure that looks wrong, something that is unclear, or a suggestion for the site.", "place": "home"} -->
+<main id="main" class="share">
+<div class="page-head"><h1>Feedback and corrections</h1></div>
+<p class="report-lang">This page is in English only. You can write to us in any language.</p>
+<article lang="en" dir="ltr" data-no-i18n>
+<p class="lead">Tell us about a figure that looks wrong, something that is hard to follow, a page that does not work, or anything you would like the site to show. Every message is read.</p>
+
+<h2>What happens next</h2>
+<ul class="plain">
+  <li>A report of a wrong figure is checked against the source the figure comes from. If the site is wrong, the page is corrected and the change is listed on the <a href="../corrections/">corrections page</a> with what the page said and what it says now.</li>
+  <li>If you give an email, we write back. A report about a figure is acknowledged within 24 hours and answered within 15 days, as the <a href="../terms/">terms</a> say.</li>
+  <li>A suggestion is weighed against what the published records can show. The site adds a figure only when it has a source that can be checked.</li>
+  <li>Your name and email are optional and are never published. Please do not send the name or voter ID number of anyone on a roll.</li>
+</ul>
+
+<form class="shareform" name="feedback" method="POST" action="/feedback/thanks/" data-netlify="true" netlify-honeypot="company_website">
+  <input type="hidden" name="form-name" value="feedback">
+  <p class="hp" hidden><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p>
+  <p><label for="fbKind">What is it about?</label><select id="fbKind" name="kind" required>
+    <option value="">Choose one</option><option>A figure looks wrong</option><option>Something is unclear</option><option>A page or chart does not work</option><option>A suggestion for the site</option><option>Something else</option></select></p>
+  <p><label for="fbPage">Which page? (filled in for you if you came from one)</label><input id="fbPage" name="page" placeholder="For example, the Tamil Nadu overview"></p>
+  <p><label for="fbMsg">Your message</label><textarea id="fbMsg" name="message" rows="6" required></textarea></p>
+  <p><label for="fbSrc">If a figure is wrong, where is the right one? A link or the name of a document helps (optional)</label><input id="fbSrc" name="source"></p>
+  <p><label for="fbName">Your name (optional)</label><input id="fbName" name="name" autocomplete="name"></p>
+  <p><label for="fbEmail">Email, if you would like a reply (optional)</label><input id="fbEmail" name="email" type="email" autocomplete="email"></p>
+  <p><button type="submit" class="btn send">Send</button></p>
+</form>
+<p class="note">What you type here is kept privately for us and is used only to answer you and to correct the site. It is never published and never shared. The <a href="../terms/">terms and privacy</a> page says more.</p>
+</article>
+</main>
+<!--scripts-->
+<script src="../assets/sir.js"></script>
+<script>
+// the footer's link carries the page the reader came from, so they need not type it
+(function () {
+  var m = /[?&]from=([^&]*)/.exec(location.search), f = document.getElementById('fbPage');
+  if (m && f && !f.value) {
+    try { f.value = decodeURIComponent(m[1]).replace(/[^\w\/\-\.]/g, '').slice(0, 200) || ''; } catch (e) { f.value = ''; }
+  }
+})();
+</script>
