@@ -968,6 +968,27 @@ correlation for each; a circumstance is never named as a cause. Finders
 (`districtPages: true`) and search link to them; `check_data.py` runs
 `--check`. English only, skipped by `i18n_collect.mjs` like the seat pages.
 
+**Case studies** (`india/cases/`, in the All India menu and tab row, Start
+Here and a front-page card) take four places whose figures stand out in their
+own state's measure: Kichha (Uttarakhand), Tughlakabad (Delhi), Danilimda
+(Gujarat) and Murshidabad, Malda and the two Dinajpurs (West Bengal). Each sets
+the place's figure from the state's own files (worked out when the page loads)
+against its district and state, then what the official records show, what was
+reported, what officials and parties said, and what could not be found.
+`data/india/raw/cases_research/` holds one research file per case, an
+independent second reading of every item (`verified_<case>.json`) and
+`plain.json`, the site's own sentence for each item and the list of what was
+not found. `scripts/build_cases.py` shows an item only if the reading confirmed
+or corrected it, it is not in that case's `drop` and it has a sentence, holds
+every sentence to the writing rules, and writes `data/india/cases.json`;
+`check_data.py` runs it with `--check`. Left out, by the second reading or by
+`drop`: anything naming or identifying a private person, resting on religion,
+caste or citizenship (a Samserganj detention petition among them), or on an
+analysis of the named lists (the Sabar Institute's, SPECT's, the Civic Research
+Group's, Newslaundry's Form 7 count), and items about another place (the
+Haldwani FIR is in Nainital). The places are never compared with each other.
+The three seats' own pages link to their case. English only.
+
 **What's New** (`updates/`, in every footer, in the search and linked from
 the front page's "Who made it") lists what was added to the site, by date,
 from `data/updates.json`, which is curated by hand: add an entry when
@@ -1367,11 +1388,15 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   state with an analysis of its own (no `data-st`) is featured, so the large
   card always carries a figure; Tripura, with no draft, once took it. A
   finder that links to each state's own, and "How we know". The cards come
-  in two grids: "Across India" (`.hubs.pins`), nine pinned cards (`hub pin`,
+  in two grids: "Across India" (`.hubs.pins`), twelve pinned cards (`hub pin`,
   a red border and a pin icon drawn by CSS) in rows of three on a wide screen,
   above a rule: Removed from the Roll? What to Do, Your Rights at a Protest
   (the rights section of the brief page), Protests and Disputes, RTI Replies,
-  Every Constituency, All India, Women, The Cities and The SIR in Numbers.
+  Every Constituency, All India, Women, The Cities, The SIR in Numbers, Case
+  Studies, Where the Revision Stands and What's New. Keep the count a multiple
+  of three. **A new page that goes live gets its menu entry, a Start Here entry
+  if a new reader needs it, and a card or line on the front page** (the
+  owner's rule, October 2026).
   Card titles and every menu, tab and footer label are in title case;
   headings and prose keep sentence case. Then "Every State and Union Territory" (`.hubs.states`).
   The map and the ranked list beside it end at the same line: the list

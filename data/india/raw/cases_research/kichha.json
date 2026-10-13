@@ -1,0 +1,177 @@
+{
+  "place": "Kichha (AC 67), Udham Singh Nagar district, Uttarakhand",
+  "context": "Site figure: 18.2 of every 100 names on the roll of 8 June 2026 left off the draft of 14 July (27,068 of 1,48,613), highest of 70 (state 10.4). Searched 13 October 2026.",
+  "items": [
+    {
+      "id": "kichha-01",
+      "claim": "The Chief Electoral Officer's draft-roll table of 14 July 2026 gives Kichha (AC 67) a draft of 1,21,545 electors and 27,068 electors marked ASDD (absent, shifted, dead or duplicate) and left off, which is 18.2 per 100 of the roll before the revision; the same row counts 36,937 draft electors with anomalies (30%) and 9,810 with no mapping.",
+      "quote": "67 - Kichha          173      121545        36937       30  ...  9810       27                  27068           290",
+      "outlet": "Chief Electoral Officer, Uttarakhand (constituency table of the draft roll)",
+      "date": "2026-07-14",
+      "url": "https://cdnbbsr.s3waas.gov.in/s3cbf8710b43df3f2c1553e649403426df/uploads/2026/07/202607152058741775.pdf",
+      "kind": "primary",
+      "note": "Quoted from the text layer of the copy already in the repo (data/uttarakhand/raw/sources/ceo_ac_draft_asdd_20260714.pdf); the middle columns are elided with '...'. 27,068 / (1,21,545 + 27,068) = 18.2%. Columns: AC, polling stations 173, draft 121545, electors with anomalies 36937 (30%), ..., no mapping 9810 (27%), ASDD deleted 27068, service electors 290. The table gives no split of the 27,068 by reason; no ERO or DEO breakdown of Kichha's ASDD by reason was found."
+    },
+    {
+      "id": "kichha-02",
+      "claim": "Amar Ujala reported that Udham Singh Nagar's draft roll held 11,55,672 electors and that the district's share of forms not collected, 13.33%, was the highest in the state against a state average of 10.39%.",
+      "quote": "जिले में कुल 11,55,672 मतदाता पंजीकृत पाए गए हैं। अपूर्ण विवरण वाले फॉर्मों के मामले में ऊधम सिंह नगर प्रदेश में सबसे ऊपर है। जिले का 13.33 प्रतिशत का आंकड़ा राज्य के औसत 10.39 प्रतिशत से भी अधिक है।",
+      "outlet": "Amar Ujala (Samvad News Agency, Udham Singh Nagar)",
+      "date": "2026-07-15",
+      "url": "https://www.amarujala.com/uttarakhand/udham-singh-nagar/draft-electoral-roll-released-1155672-voters-registered-in-the-district-rudrapur-news-c-242-1-rdp1022-144335-2026-07-15",
+      "kind": "press",
+      "note": "Figures attributed in the story to the Additional Chief Electoral Officer. 1.77 lakh forms not collected out of 13.33 lakh entries. The same story reports Kashipur's draft fell by 28,701 (ERO/SDM quoted). No Kichha-specific figure in this story."
+    },
+    {
+      "id": "kichha-03",
+      "claim": "The Indian Express, reading the CEO's presentation for the 3 October meeting with parties, reported that Udham Singh Nagar had 1,77,673 electors classified as uncollectable (ASDD), the second-highest district after Dehradun.",
+      "quote": "The CEO's presentation shows that 8,26,977 electors were classified as “uncollectable (ASDD)”, accounting for 10.39 per cent of the electorate before the draft roll. Dehradun recorded the highest number of such electors at 1,86,008, followed by Udham Singh Nagar at 1,77,673 and Haridwar at 1,30,203.",
+      "outlet": "The Indian Express",
+      "date": "2026-10-03",
+      "url": "https://indianexpress.com/article/india/uttarakhand-sir-final-roll-out-voter-enrolment-exercise-10905065/",
+      "kind": "press",
+      "note": "Agrees with the district row of the CEO's 14 July table (U.S.Nagar ASDD 177673). Same story: final roll 71,58,949; 1,04,708 deleted after the draft; 97,186 Form 7 cases 'ineligible for final'; ECI ordered a post-SIR drive in which BLOs compare pre-SIR and current rolls and visit missing electors."
+    },
+    {
+      "id": "kichha-04",
+      "claim": "Newslaundry reported that 4,857 Form 7 objections were filed in Kichha in the claims and objections round, 4,855 of them by one person whom Hindustan identified as a BJP booth-level agent, and that most cited the ground 'already enrolled'.",
+      "quote": "In the Kichha assembly constituency of Udham Singh Nagar district, 4,857 objections were filed, 4,855 of them from just one man [name withheld], whom a report in the Hindustan identifies as a BJP booth level agent. Most of [his] applications cite the same ground – “already enrolled”.",
+      "outlet": "Newslaundry",
+      "date": "2026-08-21",
+      "url": "https://www.newslaundry.com/2026/08/21/inside-the-bulk-objections-targeting-muslims-in-uttarakhands-sir",
+      "kind": "press",
+      "note": "Objector's name replaced with [name withheld]; describe him as a BJP booth-level agent. Timing matters: these objections were filed in the claims and objections period (14 July to 13 August), after the draft, so they cannot explain the 18.2 per 100 left off the draft. Newslaundry also says every name targeted by the five largest objectors in the state was Muslim; that is the outlet's finding from the lists, not an official figure. Do not open the objection lists (they name electors)."
+    },
+    {
+      "id": "kichha-05",
+      "claim": "Kichha's Electoral Registration Officer told Newslaundry that the portal had accepted the bulk submissions, that protocol requires cross-verification when one person files many, and that no name would be deleted without field verification, statutory notice and a hearing.",
+      "quote": "Initial verification had been done to establish the authenticity of the applicant’s filings, he said, and no deletion would occur without field verification, statutory notices and a hearing for those affected.",
+      "outlet": "Newslaundry",
+      "date": "2026-08-21",
+      "url": "https://www.newslaundry.com/2026/08/21/inside-the-bulk-objections-targeting-muslims-in-uttarakhands-sir",
+      "kind": "press",
+      "note": "Official's response as reported (paraphrased by the outlet, not a direct quotation from him). Name the official by office only: Kichha ERO. The same story reports the ERO declined to comment on the community of the voters objected to."
+    },
+    {
+      "id": "kichha-06",
+      "claim": "The Times of India reported nearly 9,300 objections in Kichha, of which 1,707 cited 'permanently shifted' and 7,589 alleged duplicate registration, with 6,412 duplicate-registration objections filed by one BJP booth-level agent.",
+      "quote": "The sharpest concerns have emerged from Kichha in Udham Singh Nagar, where nearly 9,300 objections have been filed. Of these, 1,707 voters have been marked as “permanently shifted”, while 7,589 objections relate to alleged duplicate registrations. BJP booth-level agent [name withheld] alone has filed 6,412 objections over duplicate registrations.",
+      "outlet": "The Times of India",
+      "date": "2026-08 (late August; the scraped page did not print a date, article id 133617040)",
+      "url": "https://timesofindia.indiatimes.com/city/dehradun/sir-concerns-persist-thousands-in-uttarakhand-face-objections-over-voter-roll-names-opp-claims-targeted-deletion/articleshow/133617040.cms",
+      "kind": "press",
+      "note": "Agent's name withheld. This count (9,300 / 6,412) is larger than Newslaundry's 4,857 / 4,855 a few days earlier; The Hindu's subhead gives the Congress figure of 6,410 from one man. The counts differ by date and source; no official Kichha Form 7 total was found. TOI also says 'Records provided to TOI show that most of the names challenged by him are Muslims' (the outlet's reading of the records)."
+    },
+    {
+      "id": "kichha-07",
+      "claim": "The Congress told the Election Commission in a memorandum of 20 August that one man had submitted 6,410 objections in Kichha and that 262 people had each filed more than ten Form 7s in Uttarakhand.",
+      "quote": "Congress tells ECI that, in Kichha Assembly constituency, one man has submitted 6,410 objections; 262 people have filed over ten Form 7s each",
+      "outlet": "The Hindu",
+      "date": "2026-08-22",
+      "url": "https://www.thehindu.com/news/national/uttarakhand/congress-says-bulk-applications-to-delete-voter-names-are-being-processed-in-uttarakhand/article71378211.ece",
+      "kind": "party",
+      "note": "Congress's allegation. Paywalled: only the headline, subhead and first two paragraphs were readable; the quote is the article's subhead. The readable text says a Congress delegation met the CEO in Dehradun on 21 August. No reply specific to Kichha from the CEO was found."
+    },
+    {
+      "id": "kichha-08",
+      "claim": "Kichha's Congress MLA alleged that Form 7 objections had been filed online in the names of residents without their knowledge, against about two thousand voters, with 90 to 95 objections in one name within three days, gave the data to the SDM and demanded an FIR.",
+      "quote": "उन्होंने बताया कि कई बुजुर्गों और आम नागरिकों के नाम से, उनकी जानकारी के बिना, ऑनलाइन फॉर्म-7 के माध्यम से आपत्तियां दर्ज कराई गई हैं। ... कई मामलों में एक ही व्यक्ति के नाम से मात्र तीन दिनों के भीतर 90 से 95 आपत्तियां दर्ज हुई हैं, जो जांच का विषय है। विधायक ने इस संबंध में पूरा डेटा उप जिलाधिकारी (एसडीएम) को सौंप दिया है।",
+      "outlet": "Dainik Bhaskar",
+      "date": "2026-08-05",
+      "url": "https://www.bhaskar.com/local/uttarakhand/udham-singh-nagar-rudrapur/news/kiccha-sir-voter-fraud-controversy-mla-tilak-raj-behad-fir-demand-138640670.html",
+      "kind": "party",
+      "note": "Allegation by the Congress MLA (attribute to 'Kichha's Congress MLA' or the Congress). The article is partly paywalled; the 'about two thousand voters' figure is in a truncated sentence ('अब तक लगभग दो हजार मतदाताओं'). Two elderly residents named in the story are private persons and are not named here. He said he would file a complaint at the kotwali; no FIR registered in Kichha or Rudrapur was found."
+    },
+    {
+      "id": "kichha-09",
+      "claim": "A BJP spokesperson who is a former Kichha MLA said an internal review by the party's booth-level agents found more than 8,000 voters on the Kichha roll also registered in Bareilly, Pilibhit and Rampur in Uttar Pradesh.",
+      "quote": "BJP spokesperson and former Kichha MLA [name withheld] said an internal review conducted by [the BJP booth-level agent] across booths found more than 8,000 duplicate voters in the Kichha roll who were also registered in neighbouring Uttar Pradesh districts Bareilly, Pilibhit and Rampur.",
+      "outlet": "The Times of India (also Hindustan, 17 August 2026)",
+      "date": "2026-08 (late August)",
+      "url": "https://timesofindia.indiatimes.com/city/dehradun/sir-concerns-persist-thousands-in-uttarakhand-face-objections-over-voter-roll-names-opp-claims-targeted-deletion/articleshow/133617040.cms",
+      "kind": "party",
+      "note": "BJP's claim. Hindustan's report of his press conference: https://www.livehindustan.com/national/story-rajesh-shukla-demands-investigation-of-duplicate-entries-in-voter-list-201786975916312.html (2026-08-17), which also quotes him saying the issue is not tied to any caste, religion or class. No official finding on cross-state duplicates in Kichha was found."
+    },
+    {
+      "id": "kichha-10",
+      "claim": "The same BJP former MLA said at a press conference that 19,000 Hindu votes had been cut in Kichha during the SIR and that objections had now been lodged against 8,000 Muslim voters.",
+      "quote": "पूर्व विधायक [नाम हटाया गया] ने कहा कि किच्छा विधानसभा क्षेत्र में जब 19 हजार हिंदू वोट काटे गए तो विधायक [नाम हटाया गया] को दर्द नहीं हुआ। अभी तो आठ हजार मुस्लिम मतदाताओं पर आपत्ति लगी है और वह छटपटाने लगे हैं।",
+      "outlet": "Dainik Jagran",
+      "date": "2026-08-23",
+      "url": "https://www.jagran.com/uttarakhand/udhamsingh-nagar-sir-in-uttarakhand-when-19000-hindu-votes-were-struck-off-the-electoral-roll-chaudhary-had-said-shukla-40349855.html",
+      "kind": "party",
+      "note": "BJP figure's claim; no official count of Kichha's removals by religion exists, and the site does not split removals by religion for Uttarakhand. Use only, if at all, as the party's statement. The rest of the story is an exchange of personal allegations between the two politicians about their own entries; omitted."
+    },
+    {
+      "id": "kichha-11",
+      "claim": "The Kumaon Commissioner said no name would be deleted without verification, statutory notice and an opportunity for the voter to present evidence.",
+      "quote": "Commissioner, Kumaon region, [name withheld], when asked about the issue, said no name would be deleted without verification, statutory notice and an opportunity for the affected voter to present evidence.",
+      "outlet": "The Times of India",
+      "date": "2026-08 (late August)",
+      "url": "https://timesofindia.indiatimes.com/city/dehradun/sir-concerns-persist-thousands-in-uttarakhand-face-objections-over-voter-roll-names-opp-claims-targeted-deletion/articleshow/133617040.cms",
+      "kind": "press",
+      "note": "Official response as reported, in the paragraph on Kichha. Name the official by office only."
+    },
+    {
+      "id": "kichha-12",
+      "claim": "The Indian Express reported that Udham Singh Nagar accounted for 43,878 of Uttarakhand's 1,30,382 Form 7 applications in the claims and objections period, the most of any district, with 34,903 still under process on 7 September.",
+      "quote": "Udham Singh Nagar accounts for 43,878 applications, followed by Haridwar with 29,369, Dehradun with 19,402 and Nainital with 18,301. ... Udham Singh Nagar has 34,903 applications under process, followed by Haridwar (17,554), Nainital (11,498) and Dehradun (11,262).",
+      "outlet": "The Indian Express",
+      "date": "2026-09-10",
+      "url": "https://indianexpress.com/article/india/uttarakhand-sir-form-7-voter-deletions-bjp-government-10870952/",
+      "kind": "press",
+      "note": "The same story carries the BJP's explanation (a minister: the plains are populous and mobile, with movement across the state's borders) and the Congress's (relatively large minority populations), and an EC official saying the numbers reflect only applications received. Attribute each."
+    },
+    {
+      "id": "kichha-13",
+      "claim": "The CEO said about 95,000 of roughly 1.73 lakh Form 7 applications in Uttarakhand were generated automatically when electors flagged for logical discrepancies were marked ineligible after failing or missing their hearings; a Congress leader raised large-scale Form 7 filings in five Udham Singh Nagar seats including Kichha.",
+      "quote": "“When such voters fail to provide the required documents during the hearing or they could not attend the hearing personally or through their family members, such cases, the concerned electoral registration officer (ERO) or assistant electoral registration officer (AERO) marks them as ‘ineligible’ through ECI-Net, following which Form 7 is automatically generated by the system and marked for deletion,” he said.",
+      "outlet": "Hindustan Times",
+      "date": "2026-09-25",
+      "url": "https://www.hindustantimes.com/india-news/uttarakhand-sir-latest-news-form-7-voter-list-101790300176819.html",
+      "kind": "press",
+      "note": "CEO quoted by office. Same story: the Congress said over 6,500 objections were filed by five individuals in Udham Singh Nagar (party claim); the CEO's office said the SIR was conducted 'in accordance with rules and in a transparent manner'. No Kichha-level count of logical-discrepancy notices or hearings was found beyond the CEO's draft table (36,937 with anomalies, 9,810 no mapping)."
+    },
+    {
+      "id": "kichha-14",
+      "claim": "The CEO's final-roll table (PN 63/2026) shows 1,503 claims and 4,439 objections admitted in Kichha after the draft, 36.5 removals per 1,000 on the draft roll against 14.7 for the state; women were 2,186 of the 4,439.",
+      "quote": "67|Kichha|Udham Singh Nagar|63988 57555 2|738 765 0 1503|2252 2186 1 4439|62474 56134 1",
+      "outlet": "Chief Electoral Officer, Uttarakhand, PN 63/2026 (scanned table, pages 3 and 4)",
+      "date": "2026-10-03",
+      "url": "https://cdnbbsr.s3waas.gov.in/s3cbf8710b43df3f2c1553e649403426df/uploads/2026/10/202610031173939115.pdf",
+      "kind": "primary",
+      "note": "The table is a scan; the quote is the repo's hand transcription (data/uttarakhand/raw/sources/pn63_table_transcription.txt, line 79), fields draft m/w/tg | claims m/w/tg/total | objections m/w/tg/total | final m/w/tg. Kichha is not the highest after the draft (Haridwar Rural 46.7, Mussoorie 45.5, Laksar 41.0, Gadarpur 39.4 per 1,000). Objections admitted (4,439) are fewer than the 4,857 to 9,300 objections reported filed, but the table does not say how many of the bulk objections were upheld."
+    },
+    {
+      "id": "kichha-15",
+      "claim": "Newslaundry, citing a constituency data site, put Muslim electors at about 28.4% of Kichha's electorate and reported that the Congress won the seat in 2022 by more than 10,000 votes.",
+      "quote": "Kichha has roughly 28.4 percent Muslim electors, more than double the community's share of the state’s population. In 2022, Congress’s [candidate] took the seat, defeating [the BJP candidate], a two-time MLA, with a margin of over 10,000 votes.",
+      "outlet": "Newslaundry (citing chanakyya.com)",
+      "date": "2026-08-21",
+      "url": "https://www.newslaundry.com/2026/08/21/inside-the-bulk-objections-targeting-muslims-in-uttarakhands-sir",
+      "kind": "press",
+      "note": "Secondary demographic estimate; the site's writing rules forbid using religion to read the removals and there is no official count of removals by religion. Included only as the press's description of the seat. The 2022 margin should be taken from the ECI result, not from this."
+    },
+    {
+      "id": "kichha-16",
+      "claim": "In Haldwani (Nainital district, not Udham Singh Nagar), a Judicial Magistrate First Class on 6 October ordered Banbhoolpura police under BNSS s.175(3) to register an FIR over Form 7s allegedly filed without a booth-level agent's consent to delete 28 voters.",
+      "quote": "न्यायिक मजिस्ट्रेट प्रथम, हल्द्वानी की अदालत ने भारतीय नागरिक सुरक्षा संहिता (बीएनएसएस) की धारा 175(3) के तहत प्रार्थना पत्र स्वीकार करते हुए बनभूलपुरा कोतवाली को एफआईआर दर्ज कर नियमानुसार विवेचना करने के आदेश दिए हैं।",
+      "outlet": "Amar Ujala (Nainital edition)",
+      "date": "2026-10-10",
+      "url": "https://www.amarujala.com/uttarakhand/nainital/sir-application-for-fraudulent-removal-of-name-instructions-issued-to-register-an-fir-nainital-news-c-337-1-ha11021-137650-2026-10-10",
+      "kind": "press",
+      "note": "The Haldwani FIR is in Nainital district, not Udham Singh Nagar; do not attach it to Kichha. Complainant is a private person (a BLA-2), not named. The SSP Nainital is quoted saying steps would follow legal examination of the order. Already in the site's research as form7-36 (Haldwani Express News)."
+    }
+  ],
+  "not_found": [
+    "Any statement by the Kichha ERO or the Udham Singh Nagar DEO explaining why Kichha's ASDD share (18.2 per 100) was the state's highest; no reason-wise split (dead / shifted / absent / duplicate) for Kichha or the district was found.",
+    "BLO coverage figures for Kichha (BLOs appointed, parts uncovered, forms distributed vs collected) beyond the CEO's 14 July table.",
+    "Kichha-specific counts of notices issued, hearings held or electors marked ineligible after logical-discrepancy hearings; only state totals (19.04 lakh flagged; about 95,000 to 97,186 marked ineligible) were found.",
+    "An official Form 7 total for Kichha. Press counts differ: 4,857 (Newslaundry, 21 Aug), about 9,300 (TOI, late Aug), 6,410 from one person (Congress, via The Hindu); PN 63 gives only objections admitted (4,439).",
+    "Any FIR registered in Udham Singh Nagar over forged Form 7s. The Congress MLA said on 5 August he would file one; no report of it being registered was found. The court-ordered FIR found is in Haldwani (Nainital district).",
+    "Any court petition or order specific to Kichha or Udham Singh Nagar's SIR.",
+    "A named source on Kichha's profile relevant to the draft rate (migrant industrial workers at SIDCUL Pantnagar, tenancy, evictions or demolitions). Searches found only the parties' explanations (BJP: border mobility and cross-state double registration; Congress: minority population) and the IE report of a BJP minister's view that the plains are populous and mobile.",
+    "The district election office notices page (usnagar.nic.in, 'चुनाव की सूचना') carries no SIR 2026 material; its ASD lists are from 2023 and name electors, so they were not opened.",
+    "The Facebook posts of local outlets on the Kichha MLA's sit-in over objections (todaynews9kichha, SADAA Times) could not be read; no news-site report of the sit-in was found."
+  ]
+}

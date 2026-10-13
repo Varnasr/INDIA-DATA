@@ -1,0 +1,136 @@
+{
+  "place": "Tughlakabad (AC 52), South East district, Delhi",
+  "context": "Site figure: 47.8 of every 100 on the roll of 16 June 2026 left off the draft of 31 August (92,033 of 1,92,419), highest of 70 (Delhi 32.8). Searched 13 October 2026.",
+  "items": [
+    {
+      "id": "tughlakabad-01",
+      "claim": "The Chief Electoral Officer's table of 31 August 2026 gives Tughlakabad (AC 52) a draft of 1,00,386 electors and 92,033 enumeration forms not collected, 47.8 per 100 of the 1,92,419 on the roll before the revision, the highest of Delhi's 70 seats.",
+      "quote": "|  |  | 52 | TUGHLAKABAD | 53043 | 47340 | 3 | 100386 | 92033 |",
+      "outlet": "Chief Electoral Officer, Delhi ('Distt/AC Wise Electors and Uncollectable Enumeration Forms')",
+      "date": "2026-08-31",
+      "url": "https://ceodelhi.gov.in/PDFFolders/2026/Uncollectable_Enumeration_FormsSIR31Aug2026.pdf",
+      "kind": "primary",
+      "note": "Quoted from the repo's transcription (data/delhi/raw/sources/ceo_ac_draft_uncollectable_20260831.md); columns: draft men, women, third gender, draft total, forms not collected. The CEO table gives no reason-wise split by AC; reasons are state totals only (43,32,775 shifted/absent/others, 2,82,412 dead, 1,41,535 multiple, per NDTV item 02)."
+    },
+    {
+      "id": "tughlakabad-02",
+      "claim": "NDTV, citing Election Commission data, reported that 92,033 of 1,92,419 enumeration forms in Tughlakabad were not collected, 47.83%, the highest proportion in Delhi, followed by Okhla at 45.16%.",
+      "quote": "In Tughlaqabad, 92,033 out of 1,92,419 enumeration forms were not collected. It was followed by Okhla, with 1,63,829 missing voters out of a starting electorate of 3,62,813, or 45.16 per cent.",
+      "outlet": "NDTV",
+      "date": "2026-09-02",
+      "url": "https://www.ndtv.com/india-news/delhi-voter-list-revision-tughlakabad-tops-missing-list-okhla-second-11989238",
+      "kind": "press",
+      "note": "Same story quotes the Delhi CEO's office: the 'absent, shifted and others' category includes electors who moved out of Delhi, could not be found, did not submit the form by the deadline, or were 'not willing to register as an elector for some reason or other'; and the EC's position that an uncollected form does not by itself establish ineligibility. Starting electorate 1,45,10,299 was 10,03,701 below the 2025 roll."
+    },
+    {
+      "id": "tughlakabad-03",
+      "claim": "The Times of India reported that nearly 48% of Tughlakabad's registered voters were missing from the draft, the highest of Delhi's 70 seats, and that South East district had the highest district rate at 43.6% (6,79,081 of 15,57,289).",
+      "quote": "NEW DELHI: The names of nearly 48% of registered voters in southeast Delhi’s Tughlakabad assembly constituency are missing from draft rolls — the highest rate of deletion among the city’s 70 seats.",
+      "outlet": "The Times of India",
+      "date": "2026-09-01",
+      "url": "https://timesofindia.indiatimes.com/city/delhi/at-48-deletion-rate-highest-in-tughlakabad/articleshow/133661296.cms",
+      "kind": "press",
+      "note": "Quote is the article's standfirst (the body did not render in the scrape); the South East figure is from the search excerpt of the same page: 'South East has the highest deletion rate at 43.6%, with 6,79,081 voters missing out of a total draft base of 15,57,289.' Treat the district line as snippet-level."
+    },
+    {
+      "id": "tughlakabad-04",
+      "claim": "At the close of enumeration on 17 August, CEO data showed only 52.14% of Tughlakabad's forms digitised, the lowest in Delhi, with South East the lowest district at 56.32%.",
+      "quote": "Tughlakabad had digitised 100,323 forms, out of 192,419 electors, or just 52.14%. That means nearly one in every two electors in Tughlakabad faces the risk of deletion from the electoral roll.",
+      "outlet": "Hindustan Times",
+      "date": "2026-08-18",
+      "url": "https://www.hindustantimes.com/india-news/delhi-sir-deadline-ends-nearly-1-in-2-tughlakabad-voters-face-deletion-risk-draft-roll-101787016644734.html",
+      "kind": "press",
+      "note": "Data shared by the Delhi CEO's office till 8pm on 17 August. The same story notes the authorities had twice revised Delhi's SIR schedule to give electors more time."
+    },
+    {
+      "id": "tughlakabad-05",
+      "claim": "NDTV India reported that Tughlakabad houses migrant workers employed along the Faridabad border and said unnamed experts attributed the low form submission in Tughlakabad and Okhla to this.",
+      "quote": "दिल्ली के ओखला और तुगलकाबाद जैसे इलाकों में बड़ी तादाद में छात्र, कामकाजी लोग और प्रवासी मजदूर रहते हैं. ओखला में बड़ी तादात में जामिया के छात्र किराए पर रहते हैं जबकि तुगलकाबाद में फरीदाबाद बॉर्डर पर काम करने वाले प्रवासी मजदूर है. जानकारों का कहना है कि इसी के चलते सबसे ज्यादा तुगलकाबाद और ओखला विधानसभा में वोटर्स अपने फॉर्म नहीं जमा पाए.",
+      "outlet": "NDTV India",
+      "date": "2026-08-18",
+      "url": "https://ndtv.in/india/delhi-sir-process-tughlakabad-okhla-assembly-constituencies-highest-number-voters-out-11924094",
+      "kind": "press",
+      "note": "The explanation is attributed to unnamed 'experts' (जानकार), not to an official. It is the only named-outlet statement found on the seat's profile. It does not establish why any elector was left off."
+    },
+    {
+      "id": "tughlakabad-06",
+      "claim": "An NDTV India ground report from Gola Kuan and Bengali Colony in Tughlakabad heard residents say migrant workers who commute to Faridabad, Noida and Gurgaon were marked shifted though they live there, and that tenants could not produce documents such as electricity bills.",
+      "quote": "यह जो मतदाता हैं, यह शिफ्ट हुआ करते हैं। यानी आज यहां है, कल को फरीदाबाद चले गए, फरीदाबाद से सटा हुआ है, हरियाणा चले गए। ... ड्यूटी करें फरीदाबाद में नोएडा में गुड़गांव में ड्यूटी कर रहे हैं। लेकिन उनको यहीं रहते हैं। ... बिजली बिल मकान मालिक देगा नहीं।",
+      "outlet": "NDTV India (YouTube ground report)",
+      "date": "2026-08-18",
+      "url": "https://www.youtube.com/watch?v=kdmpc7KKtNI",
+      "kind": "press",
+      "note": "Read from the video's transcript. The first sentence is the reporter's; the rest are residents (private persons, described by role: a local resident, a form-filling helper). A resident's '25%' figure is anecdotal and should not be used. Present as what residents told the channel."
+    },
+    {
+      "id": "tughlakabad-07",
+      "claim": "A preliminary report by SPECT Research Association, as reported by Maktoob, found that in nine sampled Tughlakabad polling parts 6,431 of 10,187 voters on the 2025 roll were absent from the draft (63.1%), including two parts covering Janta Jeevan Camp at 72.6% and 72.4%.",
+      "quote": "In nine polling parts examined in Tughlakabad, 6,431 of the 10,187 voters listed in 2025 are absent from the 2026 SIR draft. That is an exclusion rate of 63.1%, compared with 47.8% across the constituency.",
+      "outlet": "Maktoob (reporting a SPECT Research Association report, 'Who Gets Left Out? Exclusion and Vulnerability in Delhi's SIR Draft Electoral Roll')",
+      "date": "2026-09-22",
+      "url": "https://maktoobmedia.com/post?id=116505&slug=delhi-sirs-steepest-exclusions-cut-across-muslim-concentrated-sc-reserved-and-migrant-heavy-areas-report",
+      "kind": "press",
+      "note": "Secondary analysis; the report itself was not found online. Its parts compare the 2025 roll with the 2026 draft, so they include pre-SIR deletions (different base from the CEO's 47.8). Other parts named: G.B. Pant Polytechnic Staff Quarters, Okhla Phase III (80.2%); Pul Pehladpur (60.7% over three parts); Harkesh Nagar (29.3% to 64%). The report says the data alone cannot establish why any voter was excluded and describes Janta Jeevan Camp as a low-income settlement. Also covered by Clarion India, Radiance and The Hindustan Gazette."
+    },
+    {
+      "id": "tughlakabad-08",
+      "claim": "An analysis by the Sabar Institute and Voter Adhikar Manch, reported by CNBC-TV18, found nearly 6,500 deletions in Tughlakabad in April 2026 alone, before the SIR began, against net additions of 467 in the previous 11 months.",
+      "quote": "Tughlakabad saw nearly 6,500 deletions in April alone, as against net additions of 467 in 11 months.",
+      "outlet": "CNBC-TV18 (reporting an analysis by Sabar Institute and Voter Adhikar Manch)",
+      "date": "2026-09-08",
+      "url": "https://www.cnbctv18.com/india/malviya-nagar-tughlakabad-see-mass-voter-deletions-ahead-of-delhi-sir-activists-allege-19987007.htm",
+      "kind": "press",
+      "note": "Pre-SIR deletions, separate from the 92,033 left off the draft. Consistent in direction with the repo's figures: CEO roll of 6 January 2025 had 2,04,561 in Tughlakabad (data/delhi/raw/roll_20250106_ac.csv) against 1,92,419 at the start of the SIR. The Manch says no consolidated list of pre-SIR deletions exists. Activists quoted in the story are private persons and are not named. Sabar Institute is linked from the site's method pages; check the owner's rule on naming compilers before citing it on a page."
+    },
+    {
+      "id": "tughlakabad-09",
+      "claim": "The Wire reported, in a profile of a resident of Valmiki Mohalla in Tughlakabad Village whose name was left off while his mother and sister stayed on, that he had heard nothing from his BLO about next steps.",
+      "quote": "However, Tughlakabad has recorded the highest deletion rate in the city, where nearly one in two voters has not made it on to the draft list. ... Since the deletion, and at the time of reporting, he said that he had not received any information from his BLO on what his next steps are supposed to be.",
+      "outlet": "The Wire",
+      "date": "2026-10-09",
+      "url": "https://thewire.in/politics/across-class-and-circumstance-10-stories-of-delhi-voters-grappling-with-sir",
+      "kind": "press",
+      "note": "The resident is a private person and is not named. A second Valmiki Mohalla resident in the same story says her name was removed before the 2025 election (a pre-SIR deletion). Anecdotal; do not generalise."
+    },
+    {
+      "id": "tughlakabad-10",
+      "claim": "Before the enumeration began, the Delhi CEO said electors whose houses had been demolished would not be found at their address, that their forms could not be collected so they would not appear in the draft, and that such cases would be dealt with separately and raised with the Election Commission.",
+      "quote": "“Those whose houses have been demolished will not be at their given address. When the BLO goes there, they will find an empty ground. So how will he give an enumeration form? ... If a filled enumeration form is not collected, then their names will not appear in the draft electoral roll,”",
+      "outlet": "The Indian Express",
+      "date": "2026-06-30",
+      "url": "https://indianexpress.com/article/cities/delhi/delhi-electoral-roll-revision-sir-2026-demolition-displaced-voters-blo-10763733/",
+      "kind": "press",
+      "note": "Delhi-wide statement by the CEO (name by office only), not specific to Tughlakabad. Included because demolition-hit settlements are one documented route to uncollected forms; no source was found tying Tughlakabad's figure to a specific demolition."
+    },
+    {
+      "id": "tughlakabad-11",
+      "claim": "In the 2025 Assembly election the AAP won Tughlakabad by 14,711 votes, so the 92,033 forms not collected are more than six times the winning margin.",
+      "quote": "52,TUGHLAKABAD,South-East,SAHI RAM,AAP,62155,ROHTASH KUMAR,BJP,47444,14711,114938,178,204802,117965,86829,8,114760",
+      "outlet": "Election Commission of India, results 2025 (as held in data/delhi/raw/results_2025.csv)",
+      "date": "2025-02-08",
+      "url": "https://www.eci.gov.in/statistical-report/ae/2025/10",
+      "kind": "primary",
+      "note": "Repo data row (margin computed from votes, per CLAUDE.md). The site rule: say the left-off count could have decided a seat, never that it did. Note also from the same row: 1,17,965 men and 86,829 women electors in 2025, an unusually male electorate; no source was found that explains it, so do not interpret it on a page."
+    },
+    {
+      "id": "tughlakabad-12",
+      "claim": "The Delhi CEO's office posted that special camps for all electors were organised in AC-52 Tughlakabad during the revision.",
+      "quote": "Special camps for electors AC-52 Tughlakabad 2026 - Facebook",
+      "outlet": "Chief Electoral Officer, Delhi (Facebook)",
+      "date": "unknown",
+      "url": "https://www.facebook.com/ceodelhioffice/posts/special-camps-for-all-electors-organised-in-ac-52-tughlakabad-as-part-of-the-ong/1520699676760216/",
+      "kind": "primary",
+      "note": "Snippet only: Facebook could not be scraped; the quote is the search-result title. Do not use without opening the post."
+    }
+  ],
+  "not_found": [
+    "Any statement by the Tughlakabad ERO or the South East DEO explaining the seat's rate; no reason-wise split (shifted / absent / dead / duplicate) published by the CEO for Tughlakabad. The repo's secondary_reasons_ac.csv has a consultancy count by AC, which the site does not use.",
+    "BLO coverage figures for Tughlakabad (BLOs per part, visits, forms distributed).",
+    "Tughlakabad counts of notices, hearings, Form 6 or Form 7 after the draft. Delhi's final roll is due 4 December 2026.",
+    "Any court petition or order naming Tughlakabad. The Supreme Court is hearing a Delhi-wide petition on uncollected forms and logical-discrepancy notices (The Wire, 17 September; NDTV), which does not single out the seat in what was read.",
+    "A party complaint or protest specific to Tughlakabad. AAP and Congress protests were city-wide (e.g. AAP outside the CEO's office, 7 October). No statement by the seat's MLA was found.",
+    "A named source tying the seat's figure to a specific demolition or eviction. The Reporters' Collective's nine demolition-hit booths (87.87% deleted) were checked: the readable text names Wazirpur and Ashram, not Tughlakabad. The Wire's Bela Estate and Nehru Camp profiles are in other seats.",
+    "Article 14's report (draft roll, Tughlakabad 48%) did not render; only the search snippet was seen: 'After SIR, when the draft roll was published on 31 August, Tughlakabad recorded the highest rate of voter exclusion (48%) among Delhi's 70 constituencies.' Snippet only.",
+    "Caution: Maktoob's earlier piece cites a part named 'Tughlakabad Extension' (Part 12) that lies in the Sangam Vihar AC, not AC 52; do not attach it to Tughlakabad."
+  ]
+}

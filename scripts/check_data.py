@@ -308,6 +308,13 @@ def _repository():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
 
 
+def _cases():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_cases.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+    page = open(os.path.join(ROOT, 'site', 'pages', 'india', 'cases', 'index.html'), encoding='utf-8').read()
+    assert "SIR.showFaq('india', 'cases')" in page and 'id="short"' in page, 'the case studies lost their findings or their questions'
+
+
 def _rti():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_rti.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
@@ -442,6 +449,7 @@ for name, fn in [
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
     ('the RTI page carries only checked applications and is current', _rti),
+    ('the case studies carry only checked items and are current', _cases),
     ('the reading page carries only items read twice and is current', _reads),
     ('the reading page panels quote only what was read twice, and their figures are current', _panels),
     ('the brief page carries only rights read twice and says it is not legal advice', _brief),
