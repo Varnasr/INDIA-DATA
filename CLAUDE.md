@@ -1833,6 +1833,15 @@ per slot, not the slot's length.
   ", not a/an/the", a semicolon in a page's prose, or a word on the owner's
   banned list. A term of art goes in `ALLOWED` with its reason. It cannot see a
   colon-hinged sentence, a fragment or a flourish, so read what you write.
+- **The site talks about the revision, never about itself** (the owner's rule
+  for every website, 14 October 2026). No page, panel, FAQ answer or method note
+  tells a reader how the site was built or how its research was done: no "read
+  twice", "a second reader", "worked out when the page loads", "the build fails
+  unless", "from YouTube's captions" or "transcribed by hand". Say what a figure
+  is, whose it is, which document it comes from and what it cannot show. The
+  two-reader checks, builds and assertions stay; they are described here and in
+  the research files, never on a page. `check_writing.py` fails on the phrases a
+  regex can catch, so read what you write for the rest.
 - **Bihar and Hyderabad are never compared** with each other, on a page,
   in a report or in a deck, except as rows of the cities page
   (`india/cities/`), which the owner allowed in October 2026. Each analysis

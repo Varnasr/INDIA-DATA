@@ -24,7 +24,6 @@
   <p style="max-width:80ch">The lists show how many electors were struck off and from which parts, with each person's age and sex, a religion guessed from the name, and whether they link to the 2002 roll. They cannot show whether any single removal was right. <a href="../faq/">Questions and answers</a>.</p>
 
   <h2>The research questions</h2>
-  <p class="sub">Each answer is computed from the published data when this page loads.</p>
   <div id="qas"></div>
   <h2>Analysis of the named lists</h2>
   <p>This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href="https://sabarinstitute.org/">Sabar Institute</a>.</p>
@@ -89,7 +88,7 @@ Promise.all([SIR.json('data/hyderabad/summary.json'), SIR.json('data/hyderabad/p
     [L('How do deletions compare with the 2023 result?'),
      L('In every seat the names struck off exceed the 2023 winning margin, by {list}.', { list: list(marg, function (a) { return L('{times} times in {name}', { name: a.name, times: SIR.d(a.e2023.deleted_over_margin, 1) }); }) }) + ' ' + L('In {names} they exceed the total valid votes cast in 2023.', { names: over.map(function (a) { return a.name; }).join(L(' and ')) }) + ' ' + L('Yakutpura was decided by {margin} votes.', { margin: SIR.n(A.filter(function (a) { return a.name === 'Yakutpura'; })[0].e2023.margin) }) + ' ' + L('None of this says whom the removed would have voted for, because the roll records nothing of the kind.')],
     [L('Are the files internally consistent?'),
-     L('Part counts sum exactly to the constituency totals for all five (the build script asserts it).') + ' ' + L('Electors in none of the three fates number {list}.', { list: list(A, function (a) { return L('{n} in {name}', { n: SIR.n(a.unaccounted), name: a.name }); }) }) + ' ' + L('Malakpet\'s {n} is why its figures should be read beside the state\'s own count for the seat, on the <a href="../telangana/">Hyderabad and Telangana</a> page.', { n: SIR.n(mal.unaccounted) })]
+     L('Part counts sum exactly to the constituency totals for all five.') + ' ' + L('Electors in none of the three fates number {list}.', { list: list(A, function (a) { return L('{n} in {name}', { n: SIR.n(a.unaccounted), name: a.name }); }) }) + ' ' + L('Malakpet\'s {n} is why its figures should be read beside the state\'s own count for the seat, on the <a href="../telangana/">Hyderabad and Telangana</a> page.', { n: SIR.n(mal.unaccounted) })]
   ];
   document.getElementById('qas').innerHTML = QA.map(function (q, i) {
     return '<div class="qa"><h3>' + L('Q{n}. {question}', { n: i + 1, question: q[0] }) + '</h3><p>' + q[1] + '</p></div>';

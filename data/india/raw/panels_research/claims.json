@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-09",
+ "generated": "2026-10-14",
  "for": "offtheroll.in reading page, pull-out panels",
  "kinds": [
   "count from official data",
@@ -12,7 +12,7 @@
  ],
  "method": "Each piece was opened (videos through oEmbed and YouTube auto-captions scraped by Firecrawl; articles fetched and read from their JSON-LD body; Debraj Ray's PDF read in full; the Express from its own special-issue PDF). Quotes are verbatim from those texts. Hindi quotes are from auto-captions, which garble some words; translations are ours. 'site_counts' gives the site's own figures from data/ in the INDIA-DATA repository as of 2026-10-09.",
  "excluded": [
-  "Political parties and party office-holders. Clips of the Leader of the Opposition and a Karnataka minister inside Ravish Kumar's episodes are not attributed to him."
+  "Until 14 October 2026 party office-holders were left out. On the owner's rule of that date the reading page exists to check what politicians and the media say, so their claims are now panels of their own: Rahul Gandhi, Gyanesh Kumar and the Election Commission, Amit Shah, Yogi Adityanath and Mamata Banerjee."
  ],
  "entries": [
   {
@@ -634,6 +634,527 @@
    ],
    "not_verified": [
     "Seat lists not recomputed."
+   ]
+  },
+  {
+   "id": "rahul-gandhi",
+   "name": "Rahul Gandhi",
+   "role": "Leader of the Opposition in the Lok Sabha; Congress MP. Has led the party's 'vote chori' campaign, the Voter Adhikar Yatra in Bihar (August to September 2025) and the joint INDIA bloc petition against the SIR in the Supreme Court (October 2026).",
+   "role_note": "Office from the outlets' own descriptions (The Hindu, The Indian Express, NDTV). He is a party office-holder; the reading page may quote him under the owner's rule of 14 October 2026.",
+   "pieces": [
+    {
+     "id": "rg-yatra",
+     "title": "SIR is 'new weapon' of 'vote chori', will protect 'one person, one vote', says Rahul Gandhi",
+     "outlet": "The Hindu (PTI)",
+     "date": "2025-08-18",
+     "url": "https://www.thehindu.com/elections/bihar-assembly/sir-is-new-weapon-of-vote-chori-will-protect-one-person-one-vote-says-rahul-gandhi/article69946297.ece",
+     "how_read": "Fetched with Firecrawl; full text read. The quote is PTI's English translation of his Hindi post on his WhatsApp channel; the Hindi original was not found or opened."
+    },
+    {
+     "id": "rg-presser",
+     "title": "LoP Rahul Gandhi addresses Delhi press briefing amid ECI dissent row over SIR",
+     "outlet": "The Hindu (YouTube)",
+     "date": "2026-09-24",
+     "url": "https://www.youtube.com/watch?v=OobQ1mGM1B0",
+     "length": "54:52",
+     "how_read": "Firecrawl scrape of the watch page for title, channel, date, length and YouTube's English auto-captions (untimed). He spoke mostly in English; the Hindi passages are garbled in the captions and were not used. Read as text only; the videos and slides he showed were not seen."
+    },
+    {
+     "id": "rg-form6",
+     "title": "Gyanesh Kumar changed Form 6 'illegally' during SIR, says Rahul Gandhi",
+     "outlet": "The Hindu",
+     "date": "2026-10-05",
+     "url": "https://www.thehindu.com/news/national/rahul-gandhi-congress-form-6-election-commission-of-india-cec-gyanesh-kumar/article71547253.ece",
+     "how_read": "Fetched with Firecrawl; full text read. The quote is from his post on X as The Hindu reproduced it; the X post itself was not opened."
+    },
+    {
+     "id": "rg-petition",
+     "title": "Opposition to Supreme Court: Probe Election Commission decisions, audit of SIR voter deletions",
+     "outlet": "The Indian Express (Apurva Vishwanath)",
+     "date": "2026-10-13",
+     "url": "https://indianexpress.com/article/india/rahul-gandhi-india-bloc-supreme-court-election-commission-sir-petition-10918732/",
+     "how_read": "Fetched with Firecrawl (direct-quote extraction of the article text). The petition itself was not opened. It is a joint writ petition by Rahul Gandhi, Mallikarjun Kharge and other INDIA bloc leaders, so its words are the petitioners' jointly. NDTV's report of his separate representation to the Chief Justice (13 Oct 2026, https://www.ndtv.com/india-news/exclusive-punjab-evms-and-more-in-rahul-gandhis-letter-to-chief-justice-of-india-surya-kant-12178393) was also read; it paraphrases the same Punjab figure ('some 20 lakh names') without quoting him."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "rg-yatra",
+     "quote": "SIR is a new weapon of vote theft. Coincidentally, these people standing with me in this picture are 'living' proof of this theft. ... All of them had cast their vote in the 2024 Lok Sabha elections - but by the time Bihar assembly elections came, their identity, their existence was erased from the democracy of India",
+     "translation": "PTI's translation from his Hindi post; The Hindu adds, in reported speech, that he said the collusion of the BJP and the Commission 'is punishing them for being Bahujan and poor'.",
+     "timestamp": null,
+     "relies_on": "Six named people from Bihar he met at Sasaram on 17 August 2025, whom he describes by caste, religion and occupation.",
+     "kind": "inference about intent",
+     "check": "The six individual cases were not checked. The wider claim, that the removals fell on Bahujan and poor voters as a group, is not what the site's figures show, as far as they can show anything.",
+     "site_counts": "Bihar's phase 1 lists removed 65,59,626 names (data/india/states.json, Bihar row, removed). Caste is not recorded in the lists; data/bihar/identity.json (caste.guardian.A.groups) guesses it from surnames: SC 20.0% of classified removals against 19.65% in the 2023 caste survey, BC 14.8% against 25.03%, EBC 17.4% against 25.72%, Muslim 12.2% against 17.7%, General 34.4% against 10.72%. The bounds are wide (SC 14.2% to 43.3%). Women were 55.5% of those removed against 47.9% of the roll (data/bihar/final.json, totals.women_share_p1 and women_share_before).",
+     "site_stops": "Caste is guessed from names, and the site says it is not identified. The site has no measure of income or poverty for the people removed, and says nothing about intent."
+    },
+    {
+     "piece": "rg-presser",
+     "quote": "let me tell you there is already more than enough information to make this a 100% certainty not 99% a 100% certainty that Indian elections look sabha elections 2024 election vidhan sabha elections are all being rigged.",
+     "timestamp": "~5:30",
+     "timestamp_note": "approximate: estimated from the quote's position in YouTube's untimed English auto-caption text (via a Firecrawl scrape) times the 54:52 runtime; the livestream opens before he speaks and long Hindi passages are garbled in the captions, so treat as +/- 5 minutes",
+     "relies_on": "His earlier presentations (Maharashtra, Mahadevapura, Aland, Haryana) and information he says has leaked from inside the Commission; none of it is set out in the briefing.",
+     "kind": "inference about effect on results",
+     "check": "The briefing gives no figure behind the certainty. For the one SIR election the site has modelled, its figures do not show the result being decided by the removals.",
+     "site_counts": "Bihar 2025: more names removed at the draft than the winning margin in 174 of 243 seats, 124 on the net fall to the final roll (data/bihar/final.json, margin.total and margin.net). Estimating how the removed would have voted moves 4 to 6 seats, in both directions, and the NDA keeps a majority on every estimate (data/bihar/impact.json, summary.booth_lower.flips 4, booth_upper.flips 6). The swing model allowing for each seat's 2020 lead gives +0.31 (-0.27 to +0.89) (data/bihar/robust.json, swing.within_district_2020).",
+     "site_stops": "Over the margin means the removals were large enough to decide a seat, never that they did. The 2024 Lok Sabha election came before the SIR, and the site has no evidence on roll changes before it."
+    },
+    {
+     "piece": "rg-presser",
+     "quote": "Please understand what these two gentlemen are saying. They're saying that the vote does not exist in India anymore.",
+     "timestamp": "~14:00",
+     "timestamp_note": "approximate: estimated from the quote's position in YouTube's untimed English auto-caption text (via a Firecrawl scrape) times the 54:52 runtime; the livestream opens before he speaks and long Hindi passages are garbled in the captions, so treat as +/- 5 minutes",
+     "relies_on": "The Indian Express investigation of 23 September 2026 into the two Election Commissioners' notes.",
+     "kind": "framing",
+     "check": "The Express reports 14 recorded objections, about Form 6, deletions and restorations, the West Bengal appeals and centralised access to the roll software. It does not report either Commissioner saying anything like this.",
+     "site_counts": "The process page's 'Inside the Commission' section lists the dated objections as the Express reported them (data/india/process.json, inside.events), for example Joshi's note of 16 May 2026 that Form 6 cannot be changed without amending the 1960 Rules and Sandhu's of 13 August calling the change 'unauthorised/illegal'.",
+     "site_stops": "The site has not seen the notes and can say only what the Express reports."
+    },
+    {
+     "piece": "rg-presser",
+     "quote": "sir came once we started saying there's a problem with voter deletion and addition it was a response to our questions and the idea was let us broad brush this and clean this thing out because we're going to get into trouble.",
+     "timestamp": "~44:00",
+     "timestamp_note": "approximate: estimated from the quote's position in YouTube's untimed English auto-caption text (via a Firecrawl scrape) times the 54:52 runtime; the livestream opens before he speaks and long Hindi passages are garbled in the captions, so treat as +/- 5 minutes",
+     "relies_on": "His own account of the sequence of events; no document cited.",
+     "kind": "inference about intent",
+     "check": "The site holds no document on why the Commission ordered the SIR beyond the order itself.",
+     "site_counts": "The order of 24 June 2025 ordered a Special Intensive Revision 'in the entire country', starting with Bihar (data/india/process.json, timeline entry of 2025-06-24). The petition he later joined says no recorded decision of the full Commission authorising the nationwide SIR exists (rg-petition).",
+     "site_stops": "The site does not and cannot say why the revision was ordered."
+    },
+    {
+     "piece": "rg-form6",
+     "quote": "It is now established beyond doubt that Gyanesh Kumar changed Form 6 illegally and unilaterally. This is just one more proof of him abusing his position to help the BJP. He and everyone else involved in this criminal assault on our democracy will be held accountable",
+     "timestamp": null,
+     "relies_on": "The Commission's press note 120 of 26 September 2026 and the Supreme Court's remark of 5 October 2026 that it had not approved any modified Form 6.",
+     "kind": "fact about process (documentary)",
+     "check": "Two parts hold on the record the site keeps; one does not. The Form 6 declaration was added without amending the Rules over two Commissioners' written objections (as the Express reported), and the Supreme Court said on 5 October that it had not approved any modified Form 6. Whether it was illegal has not been decided by any court. That it was done 'to help the BJP' is his inference.",
+     "site_counts": "Disputes page: court-31 (LiveLaw, 5 Oct 2026, 'Any modified Form 6 has not been approved by us'); process-03 (Express, 12 Jul 2026, the change reported); process-04 (the Commissioners' objections); process-05 (Express, 30 Sep 2026, the declaration removed from the online form in states whose final roll is out). All in data/india/disputes.json. The Commission's reply is soft-28.",
+     "site_stops": "The site cannot say who made the change; the Commission has not said, and says all its decisions were unanimous."
+    },
+    {
+     "piece": "rg-petition",
+     "quote": "reportedly reflected a reduction of approximately 20.66 lakh names from the electorate of about 2.14 crore recorded in June 2026",
+     "timestamp": null,
+     "relies_on": "Press reports of Punjab's draft roll of 13 August 2026.",
+     "kind": "count from official data",
+     "check": "Matches the site's figure for names left off Punjab's draft. The roll then grew after the draft, so the net loss at the final roll is smaller.",
+     "site_counts": "Punjab: roll before 2,14,61,043, names left off the draft 20,66,635, or 9.6 per 100 (data/india/states.json, Punjab row, electors_before, removed, per_100). Final roll of 12 Oct 2026: 2,01,00,727, with 7,97,263 added and 86,038 removed after the draft, so a net fall of 13,60,343, 6.3 per 100 (electors_final, added_after_draft, removed_after_draft, net_fall, net_fall_per_100). Of those left off, 5,74,568 were entered as dead, 13,56,846 as shifted, absent or other, 1,19,145 as duplicate.",
+     "site_stops": "Punjab's figures came through the press (source_url and final_source in the same row); the CEO's own note was not found. The rise after the draft counts new voters too, so it is not names put back."
+    }
+   ],
+   "not_verified": [
+    "The six Bihar voters named in rg-yatra and whether each was wrongly removed.",
+    "The Hindi original of the WhatsApp post in rg-yatra.",
+    "Timestamps in rg-presser, which are estimates from untimed captions.",
+    "The petition's own text, read only through the Express."
+   ]
+  },
+  {
+   "id": "gyanesh-kumar",
+   "name": "Gyanesh Kumar, and the Election Commission of India",
+   "role": "Chief Election Commissioner of India since February 2025. This panel also carries statements the Commission issued in its own name while defending the SIR.",
+   "role_note": "Date of taking office from The Indian Express (17 Aug 2025: 'his first press conference since assuming office in February'). The Commission's press notes are attributed to the Commission, not to him.",
+   "pieces": [
+    {
+     "id": "gk-aug25",
+     "title": "Give affidavit in 7 days or apologise to nation: CEC to Rahul as his Bihar yatra hits the road",
+     "outlet": "The Indian Express (Damini Nath)",
+     "date": "2025-08-17",
+     "url": "https://indianexpress.com/article/india/cec-bihar-sir-rahul-gandhi-congress-10194679/",
+     "how_read": "Fetched with Firecrawl; full text read. His Hindi words are given by the Express in Roman script with its own translation."
+    },
+    {
+     "id": "gk-oct25",
+     "title": "On Bihar Election Trail, Shah Brings Up 'Illegal Immigrants' on Rolls, But EC Provided No Figures",
+     "outlet": "The Wire",
+     "date": "2025-10-30",
+     "url": "https://thewire.in/politics/on-bihar-election-trail-amit-shah-brings-up-illegal-immigrants-ec-no-figures",
+     "how_read": "Fetched with Firecrawl (direct-quote extraction of the article text). Carries his words at the Patna press conference of 5 Oct 2025 and at the press conference of 27 Oct 2025, in The Wire's English. The Wire's own report on the Patna conference would not render."
+    },
+    {
+     "id": "gk-jan26",
+     "title": "SIR rollout in remaining States soon: CEC Gyanesh Kumar",
+     "outlet": "The Hindu (PTI)",
+     "date": "2026-01-24",
+     "url": "https://www.thehindu.com/news/national/sir-rollout-in-remaining-states-soon-cec-gyanesh-kumar/article70547320.ece",
+     "how_read": "Fetched with Firecrawl; full text read. His National Voters' Day statement as PTI quoted it. NDTV of 27 Oct 2025 (https://www.ndtv.com/india-news/sir-phase-2-bengal-tamil-nadu-among-12-states-in-phase-2-of-voter-list-revision-9524552) quotes him saying the same thing then: 'Voters in Bihar participated enthusiastically. As a result, not a single appeal was filed.'"
+    },
+    {
+     "id": "eci-sep26",
+     "title": "Dissent row: Election Commission says highlighting certain internal notes gives only one side of the picture",
+     "outlet": "The Hindu (Sreeparna Chakrabarty)",
+     "date": "2026-09-23",
+     "url": "https://www.thehindu.com/news/national/differing-views-observations-are-normal-part-of-deliberation-in-any-institution-eci-on-reports-of-internal-friction/article71499104.ece",
+     "how_read": "Read through the full text Firecrawl returned in search results. The Commission's press note itself (signed by Deputy Director P Pawan, per The Indian Express of 24 Sep 2026) was not opened; The Indian Express's report of it was read and agrees."
+    },
+    {
+     "id": "eci-form6",
+     "title": "Election Commission \"Fact-Checks\" Rahul Gandhi's Form 6 Allegations",
+     "outlet": "NDTV",
+     "date": "2026-10-05",
+     "url": "https://www.ndtv.com/india-news/gyanesh-kumar-rahul-gandhi-eci-election-commission-factchecks-rahul-gandhis-form-6-allegations-12142478",
+     "how_read": "Read through the text Firecrawl returned in search results, which reproduces the Commission's post on X. The X post itself was not opened. The Hindu of 5 Oct 2026 reproduces the same press-note sentence."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "gk-aug25",
+     "quote": "Halafnama dena hoga ya desh se maafi maangni hogi, koi teesra vikalp nahi hai… Agar saath din mein halafnama nahi mila to iska arth, ki yeh saare aarop niradhar hai.",
+     "translation": "Either give an affidavit or apologise to the nation, there is no third option. If an affidavit is not received within seven days, it would mean that these allegations are baseless. (The Indian Express's translation.)",
+     "timestamp": null,
+     "relies_on": "Nothing beyond the absence of a sworn affidavit.",
+     "kind": "framing",
+     "check": "This is a test of whether someone signs an affidavit, not of whether the roll is right. The Express also reports that at the same conference he did not say how many of the 7.24 crore on the draft had submitted documents, or how many foreign nationals had been found, saying any such person would be removed.",
+     "site_counts": "Bihar's draft left off 65,59,626 names for four reasons as entered by officers: 22,32,586 dead, 26,55,900 shifted, 9,70,081 absent, 7,01,059 already enrolled (data/bihar/reasons.json, totals).",
+     "site_stops": "A reason is what the officer wrote down, and nobody checked it. The site cannot say whether any allegation about the rolls is true."
+    },
+    {
+     "piece": "gk-oct25",
+     "quote": "The names deleted from the electoral rolls include those who have died, those who are not Indian citizens, those who are registered in multiple places and those who have shifted permanently. The responsibility to create the electoral roll is of the ERO [electoral registration officer]. So every ERO and every district magistrate has this data",
+     "timestamp": null,
+     "relies_on": "Patna press conference of 5 Oct 2025, five days after Bihar's final roll.",
+     "kind": "fact about process (documentary)",
+     "check": "No published count shows anyone removed in Bihar as a non-citizen. None of the reasons in the published removal records is citizenship. The Supreme Court later directed the Commission to refer any cases it deleted as non-citizens to the competent authority, which shows such cases may exist, but no number has been published.",
+     "site_counts": "Phase 1 lists: four reasons, dead, shifted, absent, already enrolled, totalling 65,59,626 (data/bihar/reasons.json, totals). After the draft, Format 4B lists 3,66,742 removed: 62,441 expired, 2,12,999 shifted, 81,334 repeated, 9,968 with no reason stated (data/bihar/final.json, totals.r_expired, r_shifted, r_repeated, r_unstated). Supreme Court, 27 May 2026, para 186(h): cases deleted as non-citizens to be referred within four weeks to the authority under the Citizenship Act (data/india/disputes.json, court-23).",
+     "site_stops": "The site says nothing about whether any person is a citizen. The reason a name was removed is what an officer wrote down, and nobody checked it."
+    },
+    {
+     "piece": "gk-oct25",
+     "quote": "Many times, if any individual who is not an Indian citizen and who has got some papers made, you would have noticed, that in the enumeration phase we will match whether in 2002, 2003 or 2004, either you or your senior relatives were on the electoral rolls or not. If there is a match, then the matter ends there. Those who do not match, they will be issued a notice, after this they will have to show their papers and say where they were in 2003. Doing this is very necessary",
+     "translation": "The Wire's English; the original was likely Hindi and was not seen.",
+     "timestamp": null,
+     "relies_on": "Press conference of 27 Oct 2025 announcing phase 2.",
+     "kind": "fact about process (documentary)",
+     "check": "Describes the phase 2 procedure as the site records it. The notices that followed are counted in crores; a notice records that the elector could not be linked to the old roll or that the entry showed a discrepancy, not a finding about citizenship.",
+     "site_counts": "Phase 2 order of 27 Oct 2025: no documents at enumeration; notices after the draft only to those not linked to the last intensive revision (data/india/process.json, timeline 2025-10-27). Counts of electors kept on the draft but sent a notice, by state, with the no-mapping list and the discrepancy list (data/india/notices.json). Across the 21 states with a published total, 13,06,52,476 electors on the drafts were sent a notice, 21.1 per 100 (data/india/notices.json, notices_total, per_100).",
+     "site_stops": "A notice for not being mapped is not a finding about citizenship, and the site never treats it as one."
+    },
+    {
+     "piece": "gk-jan26",
+     "quote": "The most compelling testament to the success of the SIR in Bihar was that not a single appeal was filed against the final electoral roll, establishing its sanctity and credibility",
+     "timestamp": null,
+     "relies_on": "The Commission's own count of appeals, not published.",
+     "kind": "count from official data",
+     "check": "The site has no count of appeals in Bihar, so it cannot confirm or refute zero. It does show that a missing appeal is a weak test: the Supreme Court in May 2026 opened judicial review to people wrongly deleted as absent, dead, shifted or duplicate, and Amit Shah said on 29 Oct 2025 that three appeals had been filed after the SIR.",
+     "site_counts": "Bihar: 65,59,626 left off the draft; 21,53,343 added and 3,66,742 removed after it; final roll 7,41,92,357, a net fall of 47,72,808 from the roll before (data/bihar/final.json, totals.p1, added, removed_after, final, net_fall). In West Bengal, where adjudication was published, 22,21,118 appeals were filed by people excluded (data/westbengal/summary.json, adj.appeals_by_excluded).",
+     "site_stops": "An appeal needs a person who knows they were removed and can file one; its absence does not show the removals were right."
+    },
+    {
+     "piece": "eci-sep26",
+     "quote": "All decisions of the Election Commission of India, including SIR [the ongoing special intensive revision of electoral rolls], have been unanimous and with the approval of both the Election Commissioners and the Chief Election Commissioner",
+     "timestamp": null,
+     "relies_on": "The Commission's source-based clarification of 23 Sep 2026, followed by a written press note saying 'Differing views and observations are a normal part of deliberation in any institution.'",
+     "kind": "fact about process (documentary)",
+     "check": "The Commission does not dispute that the 14 notes exist. The Express reports that at least one, Sandhu's of 13 August 2026, called the Form 6 change 'unauthorised/illegal' and directed its removal, which sits uneasily with the change having been approved by both Commissioners. The Commission later removed the declaration from the online form.",
+     "site_counts": "data/india/process.json, inside.events: 2026-05-16 (Joshi: Form 6 cannot be changed without amending the Rules), 2026-05-19 (Sandhu concurs), 2026-08-13 (Sandhu calls the change illegal), 2026-09-26 (press note 120: the statutory Form 6 outside the revision). data/india/disputes.json, process-05: the declaration removed on 29 to 30 Sep 2026 where final rolls are out.",
+     "site_stops": "The notes are press, not documents the site has seen."
+    },
+    {
+     "piece": "eci-form6",
+     "quote": "The declaration attached to Form 6 for SIR has been upheld by the Hon'ble Supreme Court.",
+     "timestamp": null,
+     "relies_on": "The Supreme Court judgment of 27 May 2026 on the Bihar SIR; quoted from the Commission's press note 120 of 26 Sep 2026.",
+     "kind": "fact about process (documentary)",
+     "check": "Goes further than the record the site holds. The judgment upheld the Bihar revision, its legal basis and its document list; on 5 Oct 2026 the Chief Justice said in court that no modified Form 6 had been approved by the Court.",
+     "site_counts": "data/india/disputes.json: court-22 (27 May 2026, the revision upheld under section 21(3) read with Article 324), court-31 (5 Oct 2026, 'Any modified Form 6 has not been approved by us. Let's be clear.'). data/india/process.json, timeline 2026-05-27.",
+     "site_stops": "The site has not read the judgment for every reference to Form 6; it reports what the Court said in its order of 27 May as summarised on the process page and what LiveLaw reported on 5 October."
+    }
+   ],
+   "not_verified": [
+    "The Commission's press notes of 23 and 26 Sep 2026 in their own text; read through The Hindu, The Indian Express and NDTV.",
+    "The original language of the 27 Oct 2025 remark, carried in The Wire's English.",
+    "Any count of appeals in Bihar."
+   ]
+  },
+  {
+   "id": "amit-shah",
+   "name": "Amit Shah",
+   "role": "Union Home Minister and Minister of Cooperation; BJP leader. Spoke for the government in the Lok Sabha debate on electoral reforms on 10 Dec 2025 and campaigned in Bihar (2025) and West Bengal (2026).",
+   "role_note": "Office as given by PIB. He is a party office-holder; the reading page may quote him under the owner's rule of 14 October 2026.",
+   "pieces": [
+    {
+     "id": "as-x",
+     "title": "Post on X, 29 Oct 2025",
+     "outlet": "Amit Shah (@AmitShah), X",
+     "date": "2025-10-29",
+     "url": "https://x.com/AmitShah/status/1983588562634256543",
+     "how_read": "Fetched with Firecrawl; the post text read in full. The Wire (30 Oct 2025, https://thewire.in/politics/on-bihar-election-trail-amit-shah-brings-up-illegal-immigrants-ec-no-figures) links it as the clip of his News18 interview and gives a longer English version of what he said there."
+    },
+    {
+     "id": "as-ls",
+     "title": "Union Home Minister and Minister of Cooperation Shri Amit Shah participates in discussion on electoral reforms in Lok Sabha",
+     "outlet": "Press Information Bureau (Ministry of Home Affairs)",
+     "date": "2025-12-10",
+     "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2201968",
+     "how_read": "Fetched with Firecrawl; full text read. PIB's English account of the speech, mostly in reported speech; the speech was in Hindi. His own 91-minute video (https://www.youtube.com/watch?v=vvGPQ1L09hU) was found but its captions were too long to read through the tool."
+    },
+    {
+     "id": "as-wb",
+     "title": "EC removed infiltrators from roll, we'll remove them from Bengal's soil: Amit Shah",
+     "outlet": "The Indian Express (Tanusree Bose)",
+     "date": "2026-04-16",
+     "url": "https://indianexpress.com/article/cities/kolkata/ec-removed-infiltrators-from-roll-well-remove-them-from-bengals-soil-amit-shah-10638994/",
+     "how_read": "Fetched with Firecrawl (direct-quote extraction). Rally at Cooch Behar on Wednesday 15 April 2026. The Telegraph (https://www.telegraphindia.com/elections/west-bengal-assembly-election-2026/amit-shah-says-election-commission-removes-infiltrators-task-is-to-push-them-beyond-borders-calls-mamata-banerjee-step-motherly/cid/2156256) gives a different English rendering of the same sentence, so both are translations of a Hindi original not seen."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "as-x",
+     "quote": "बिहार में SIR के बाद केवल तीन ही अपील आए, जिसका मतलब है कि घुसपैठियों के नाम कटे हैं।",
+     "translation": "After the SIR in Bihar only three appeals came in, which means it is the names of infiltrators that were cut.",
+     "timestamp": null,
+     "relies_on": "A count of appeals he does not source. The Wire's English of the interview clip adds: 'These names were deleted because they could not prove they are Indian citizens.'",
+     "kind": "inference about intent",
+     "check": "The count of appeals cannot be checked by the site and differs from the CEC's 'not a single appeal'. The inference does not follow from the records: the reasons officers recorded in Bihar are death, shifting, absence and duplicate entry, and no published figure counts anyone removed as a foreigner.",
+     "site_counts": "Bihar phase 1: 22,32,586 entered as dead (34.0%), 26,55,900 shifted, 9,70,081 absent, 7,01,059 already enrolled, 65,59,626 in all (data/bihar/reasons.json, totals; data/india/states.json, Bihar row, shares). Set against outside records, the dead are about 3.4 years of adult deaths at the right ages (data/bihar/tests.json, deaths.years_of_deaths). After the draft, 3,66,742 removed: expired, shifted, repeated or unstated (data/bihar/final.json, totals).",
+     "site_stops": "The site says nothing about whether anyone is a citizen. Few appeals cannot show who was removed, and in Bihar no one was removed at the draft on grounds of citizenship according to the lists."
+    },
+    {
+     "piece": "as-ls",
+     "quote": "He explained that Special Intensive Revision (SIR) involves removing names due to death or duplicate entries (people registered in two places), adding names when a person turns 18, and selectively deleting those who are foreign citizens.",
+     "translation": "PIB's reported speech in English, not his words verbatim.",
+     "timestamp": null,
+     "relies_on": "His description of the SIR's purpose.",
+     "kind": "fact about process (documentary)",
+     "check": "The first part matches the records: deaths and duplicates are recorded reasons in every state. The last part has no count behind it anywhere the site has looked, and the largest group of removals in the records is neither dead nor duplicate.",
+     "site_counts": "Across 31 states, 13,39,03,307 names were left off the drafts: 2,79,69,558 dead (20.9%), 9,56,35,923 shifted, absent or other (71.5%), 1,01,48,459 duplicate (7.6%) (data/india/states.json, total.removed, dead, shifted_absent_other, duplicate, shares).",
+     "site_stops": "No published figure counts removals by citizenship, and the site does not estimate one."
+    },
+    {
+     "piece": "as-ls",
+     "quote": "He said that even if the opposition boycotts the House 200 times, we will not allow even a single illegal infiltrator to vote in the country. The Home Minister said that the government’s policy is to Detect, Delete, and Deport, and we will carry out this work through constitutional processes.",
+     "translation": "PIB's reported speech in English.",
+     "timestamp": null,
+     "relies_on": "Government policy statement.",
+     "kind": "framing",
+     "check": "A statement of intent, not a count. The Supreme Court held in May 2026 that the Commission's enquiry is into eligibility for enrolment, that declining to enrol someone does not declare them not to be a citizen, and that deciding citizenship belongs to the authority under the Citizenship Act.",
+     "site_counts": "data/india/nrc.json, sir_vs_nrc-10 and sir_vs_nrc-12 (2026 INSC 564, paras 176 and 186). data/india/disputes.json, soft-16: the Commission's instructions of 14 May 2026 tell registration officers to refer suspected foreign nationals to the competent authority.",
+     "site_stops": "The site says nothing about whether anyone is a citizen."
+    },
+    {
+     "piece": "as-ls",
+     "quote": "Union Home Minister said that the beginning of our democratic history was in 1952, and the first Special Intensive Revision took place in 1952. ... He said that after 2004, the next Special Intensive Revision is taking place only in 2025, and no political party has ever opposed this process till date",
+     "translation": "PIB's reported speech in English.",
+     "timestamp": null,
+     "relies_on": "The history of intensive revisions (he lists 1952, 1957, 1961, 1965, 1966, 1983-84, 1987-89, 1992-95, 2002-04).",
+     "kind": "fact about process (documentary)",
+     "check": "The site does not hold the earlier revisions and cannot check that list. It does show that the 2002-04 revision is the base every state is mapped to now, which agrees with his last date. 'No political party has ever opposed this process' is contradicted for the current revision by the record of court petitions and Assembly resolutions.",
+     "site_counts": "Mapping years by state: 2002 (West Bengal, Kerala, Rajasthan, Gujarat, Goa), 2003 (Uttar Pradesh, Madhya Pradesh, Chhattisgarh, Bihar), 2005 and 2006 elsewhere (data/india/process.json, timeline). Disputes page: 42 court items, 2 Assembly resolutions and 34 protests (data/india/disputes.json, sections courts, resolutions, protests).",
+     "site_stops": "The site has not researched revisions before 2002."
+    },
+    {
+     "piece": "as-wb",
+     "quote": "Till now, the EC has only removed the names of the infiltrators from the electoral rolls, but we will remove them from the soil of Bengal.",
+     "translation": "The Indian Express's English. The Telegraph renders the same sentence as 'While the Election Commission (EC) has only removed infiltrators from the electoral rolls of West Bengal, the larger task would be to drive them out of the country's borders.'",
+     "timestamp": null,
+     "relies_on": "West Bengal's SIR removals (the Express says he was referring to 'over 89 lakh' names; The Telegraph says 'nearly 91 lakh').",
+     "kind": "inference about intent",
+     "check": "The West Bengal records do not support reading the removals as infiltrators. The largest single reason entered at the draft is death; the adjudication found 27,16,393 not eligible without a published reason, and more than 22 lakh of them and others appealed.",
+     "site_counts": "West Bengal: 58,20,899 left off the draft, 24,16,852 entered as dead, 32,65,719 shifted, absent or other, 1,38,328 duplicate (data/india/states.json, West Bengal row). Under adjudication 60,06,675: 32,68,119 found eligible, 27,16,393 not eligible; 22,21,118 appeals by the excluded and 16,10,311 against inclusion, 37,05,235 pending (data/westbengal/summary.json, adj).",
+     "site_stops": "No published figure counts removals by citizenship. 'Not eligible' in adjudication is not a finding that a person is a foreigner, and the site says nothing about whether anyone is a citizen."
+    }
+   ],
+   "not_verified": [
+    "His Hindi words in the Lok Sabha and at Cooch Behar; PIB and the Express give English.",
+    "The count of three appeals in Bihar.",
+    "The list of revisions from 1952 to 2004."
+   ]
+  },
+  {
+   "id": "yogi-adityanath",
+   "name": "Yogi Adityanath",
+   "role": "Chief Minister of Uttar Pradesh (BJP).",
+   "role_note": "Office from the reports cited (Hindustan Times, The Indian Express, PTI via ThePrint, all calling him Chief Minister in December 2025 and October 2026). Party affiliation is general knowledge, not re-checked in this run.",
+   "pieces": [
+    {
+     "id": "ya-ht-dec14",
+     "title": "Yogi warns BJP workers against complacency during SIR",
+     "outlet": "Hindustan Times (HT Correspondent, Lucknow), report of his speech at the BJP state convention that announced Pankaj Chaudhary as state president",
+     "date": "2025-12-14",
+     "url": "https://www.hindustantimes.com/cities/lucknow-news/85-to-90-of-missing-voters-ours-yogi-warns-bjp-workers-against-complacency-101765732637306.html",
+     "how_read": "Fetched with Firecrawl; full article body read."
+    },
+    {
+     "id": "ya-nbt-dec14",
+     "title": "यूपी SIR के बाद 4 करोड़ वोटर घट गए... CM योगी ने नए BJP प्रदेश अध्यक्ष वाले कार्यक्रम में और क्या बताया?",
+     "title_en": "4 crore voters fell after the UP SIR... what else CM Yogi said at the new BJP state president's event",
+     "outlet": "Navbharat Times, Hindi report of the same speech",
+     "date": "2025-12-14",
+     "url": "https://navbharattimes.indiatimes.com/metro/lucknow/politics/four-crore-voters-decreased-after-up-sir-verification-cm-yogi-say-claim-in-new-bjp-state-president-program/articleshow/125962179.cms",
+     "how_read": "Fetched with Firecrawl; Hindi body read. Used for his words in Hindi; the English reports translate them."
+    },
+    {
+     "id": "ya-ie-dec15",
+     "title": "4 crore voters missing in SIR rolls, most vote for BJP: UP CM Yogi Adityanath",
+     "outlet": "The Indian Express (Maulshree Seth), report of the same speech",
+     "date": "2025-12-15",
+     "url": "https://indianexpress.com/article/cities/lucknow/4-crore-voters-missing-in-up-electoral-roll-most-vote-for-bjp-yogi-adityanath-10420559/",
+     "how_read": "Fetched with Firecrawl; body read. Used to compare the wording: the Express has him say '90 per cent', the Hindustan Times and Navbharat Times '85 to 90'."
+    },
+    {
+     "id": "ya-x-oct5",
+     "title": "Adityanath defends SIR: Identifying names 'illegally added' to voter lists essential for India's security",
+     "outlet": "ThePrint, carrying PTI's English rendering of his post on X",
+     "date": "2026-10-05",
+     "url": "https://theprint.in/india/sir-necessary-illegally-registered-ineligible-names-must-be-removed-adityanath/3061937/",
+     "how_read": "Fetched with Firecrawl; body read. The Hindi original is quoted in Amar Ujala and Bhaskar Hindi (search excerpts: 'मतदाता सूची में अवैध रूप से दर्ज अपात्र नामों की पहचान कर...'); the post itself on X was not opened. The quote below is PTI's translation."
+    },
+    {
+     "id": "ya-bs-video-dec14",
+     "title": "CM Yogi Speech : 'यूपी में चार करोड़ मतदाता मिसिंग', SIR की प्रक्रिया पर CM Yogi ने जताई चिंता",
+     "title_en": "CM Yogi's speech: 'Four crore voters missing in UP', CM Yogi raises concern about the SIR process",
+     "outlet": "Bharat Samachar (YouTube)",
+     "date": "2025-12-14",
+     "url": "https://www.youtube.com/watch?v=kQ50-8RMh8M",
+     "length": "33:55",
+     "how_read": "Full video of the speech; YouTube's Hindi auto-captions, read by the second reader, punctuation added."
+    },
+    {
+     "id": "ya-x-oct5-post",
+     "title": "Post on X",
+     "outlet": "Yogi Adityanath on X (@myogiadityanath)",
+     "date": "2026-10-05",
+     "url": "https://x.com/myogiadityanath/status/2106931616304230759",
+     "how_read": "The post itself, opened by the second reader."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "ya-nbt-dec14",
+     "quote": "कहा कि 18 वर्ष से ज्यादा उम्र के हर शख्स का नाम मतदाता सूची में होना चाहिए और इस तरह उत्तर प्रदेश में मतदाताओं की संख्या 16 करोड़ होनी चाहिए। सीएम योगी ने कहा कि हालांकि एसआईआर के बाद मतदाता सूची में जो नाम आए हैं, वे 12 करोड़ हैं। उन्होंने कहा कि यह चार करोड़ का अंतर है। जनवरी 2025 की मतदाता सूची में कुल 15 करोड़ 44 लाख नाम थे।",
+     "translation": "Every voter over 18 should be on the roll, so this number should be 16 crore. And how many names have come onto the roll after the SIR? 12 crore. This gap of 4 crore. The roll of January 2025 had 15 crore 44 lakh names.",
+     "relies_on": "His own arithmetic: a population of about 25 crore times 65 per cent adults, set against the count of enumeration forms collected by mid-December 2025.",
+     "kind": "count from official data",
+     "check": "Two of his three numbers hold. The roll before the revision was 15,44,30,092 (data/uttarpradesh/summary.json, roll_before), which is his 15 crore 44 lakh. The draft of 6 January 2026 held 12,55,56,025 (summary.json, draft), close to his 12 crore. His 16 crore of eligible adults is near the site's projection of 16,16,85,000 people aged 18 and over on 1 March 2026 (analysis.json, rolls.adults_2026). The 'gap of four crore' mixes two comparisons. Against the old roll the draft was 2,88,74,067 smaller (summary.json, left_off), 2.89 crore. Against projected adults it was 3.61 crore smaller. The roll before held 95.5 per 100 projected adults, the draft 77.7 and the final roll 82.9 (analysis.json, rolls.before_per_100_adults, draft_per_100_adults, final_per_100_adults).",
+     "site_counts": "Roll before 15,44,30,092; draft 12,55,56,025; names left off 2,88,74,067, 18.7 per 100; final roll 13,39,84,792 on 10 April 2026, a net rise of 84,28,767 from the draft (summary.json: roll_before, draft, left_off, per_100, final, net_rise). Projected adults 16,16,85,000 (analysis.json, rolls.adults_2026).",
+     "site_stops": "The projection counts residents, so it includes people registered in another state; 'should be 16 crore' is an upper bound on who could be on Uttar Pradesh's roll.",
+     "timestamp": null
+    },
+    {
+     "piece": "ya-nbt-dec14",
+     "quote": "उन्होंने कार्यकर्ताओं से कहा कि यह जो चार करोड़ का अंतर है। वह आपका विरोधी नहीं है, इसमें से 85 से 90 प्रतिशत आपका मतदाता है।",
+     "translation": "This gap of 4 crore is missing. It is not your opponent. 85 to 90 per cent of it is your voter.",
+     "relies_on": "No source given. The Hindustan Times quotes the same line in English: 'This is not your opponent's voters. Eighty-five to 90 per cent of these missing voters are ours.' The Indian Express has '90 per cent'.",
+     "kind": "inference about effect on results",
+     "check": "Nothing published records how any removed elector votes, so the share cannot be checked. What the site can set beside it is where the removals fell. They were heaviest in the cities: 28.1 per 100 on the urban roll against 15.3 on the rural one (analysis.json, urban.urban_per_100, rural_per_100, the Chief Electoral Officer's figures as the Hindustan Times printed them), and Lucknow lost the most names, 30.0 per 100 (summary.json, top). Spread over constituencies by district, seats the NDA won in 2022 lost about 19.1 per 100 and seats the SP alliance won about 17.7 (analysis.json, margins.alliances). That is a small difference in the places, and says nothing about the people removed.",
+     "site_counts": "Urban 28.12 and rural 15.25 per 100 left off (analysis.json, urban); NDA-held seats 19.14 and SP-alliance seats 17.69 per 100, district rates spread over seats (analysis.json, margins.alliances).",
+     "site_stops": "The site cannot say whom any removed elector would have voted for.",
+     "timestamp": null
+    },
+    {
+     "piece": "ya-nbt-dec14",
+     "quote": "सीएम योगी ने दावा किया कि हाल में जब वह एक जनपद के दौरे पर गए थे, जहां मतदाता सूची में विरोधियों द्वारा भरे गए एसआईआर फॉर्मों में कुछ बांग्लादेशी नागरिकों के नाम भी पाए गए। उन्होंने दावा किया, एक जगह तो यह भी मैंने देखा एक सज्जन का नाम था, उसकी उम्र 20 साल है, उसके पिता की उम्र 30 साल और उसके दादा की उम्र 40 साल थी",
+     "translation": "Look, I just went to a district. In the SIR forms filled in the roll there, many by opponents, there are names of some Bangladeshis too. Tell me, in one place I even saw a gentleman's name, his age 20, his father's age 30 and his grandfather's age 40.",
+     "relies_on": "His own visit to an unnamed district. No figure given.",
+     "kind": "framing",
+     "check": "No published figure counts removals by citizenship. The draft roll's reasons, as officers entered them, are dead, untraceable or absent, permanently shifted, enrolled more than once and others (summary.json, reasons). After the draft, 8,15,996 more names came off; the press reported 2,069 of them recorded as under age or not citizens (data/uttarpradesh/raw/sir_state_summary.csv, removed_after_draft_underage_or_noncitizen, from The New Indian Express of 11 April 2026). That is an officer's entry and nobody checked it. Age gaps between generations are the kind of mismatch the Commission's 'logical discrepancy' check flags; the press reported 2.22 crore such notices in Uttar Pradesh (data/india/notices.json, discrepancy, press).",
+     "site_counts": "Reasons at the draft: dead 46,23,796; untraceable or absent 79,52,190; shifted 1,29,77,472; multiple 25,47,207; others 7,73,402 (summary.json, reasons). Removed after the draft 8,15,996, of which 2,069 under age or not citizens, press (analysis.json, notices.removed_after).",
+     "site_stops": "The site says nothing about whether any person or group are citizens.",
+     "timestamp": null
+    },
+    {
+     "piece": "ya-x-oct5",
+     "quote": "Identifying ineligible names illegally included in the voter list and removing them as per rules is essential for India's security, unity and integrity",
+     "relies_on": "His post on X, as rendered by PTI. PTI adds that he 'said verification of entries relating to deceased persons, those who had permanently shifted and duplicate entries was necessary'.",
+     "kind": "framing",
+     "check": "The reasons officers wrote down at the draft are almost all about people who died, moved or are listed twice, and none is about illegal inclusion. Dead were 16.0 per cent of the names left off, untraceable or absent 27.5, shifted 44.9, enrolled more than once 8.8 and others 2.7 (summary.json, shares). The one reason near his word 'illegally', under age or not a citizen, covered 2,069 names after the draft, as reported. Most of those who came off after the draft were people sent a notice who did not answer: 3,50,026 of 8,15,996, press (analysis.json, notices.removed_after.no_response).",
+     "site_counts": "Shares of names left off by reason (summary.json, shares). Notices 3.26 crore, press (analysis.json, notices.all); removed after the draft 8,15,996, press.",
+     "site_stops": "A reason is what an officer wrote down, and nobody checked it. The site does not say whether anyone on or off the roll is a citizen.",
+     "timestamp": null,
+     "translation": "Every aware voter should keep in mind that identifying ineligible names illegally entered in the voter list and removing them according to the rules is essential for India's security, unity and integrity."
+    }
+   ]
+  },
+  {
+   "id": "mamata-banerjee",
+   "name": "Mamata Banerjee",
+   "role": "Chairperson of the All India Trinamool Congress. Chief Minister of West Bengal until the 2026 Assembly election, which the BJP won; the reports of September 2026 call her former Chief Minister.",
+   "role_note": "Chief Minister in the reports of November 2025 to February 2026 and 'former' in The Indian Express of 24 and 27 September 2026. The date she left office was not checked. The 2026 result (BJP 208, AITC 80) is the site's own (data/westbengal/summary.json, seats_2026).",
+   "pieces": [
+    {
+     "id": "mb-n18-nov4",
+     "title": "Mamata Banerjee on SIR: 'বিহারে কতজন রোহিঙ্গা চিহ্নিত, অসমে কেন এসআইআর নয়?' প্রশ্ন মমতার",
+     "title_en": "How many Rohingyas were identified in Bihar, why no SIR in Assam? Mamata asks",
+     "outlet": "News18 Bangla, report of her speech at the end of the anti-SIR march in Kolkata",
+     "date": "2025-11-04",
+     "url": "https://bengali.news18.com/news/kolkata/mamata-banerjee-questions-how-rohingyas-were-identified-in-bihar-sir-dmg-2409761.html",
+     "how_read": "Fetched with Firecrawl; Bengali body read."
+    },
+    {
+     "id": "mb-letter-nov20",
+     "title": "Mamata urges CEC to stop 'unplanned, dangerous' SIR, cites BLO deaths and voter distress",
+     "outlet": "The Telegraph (Our Bureau), quoting her letter of 20 November 2025 to the Chief Election Commissioner",
+     "date": "2025-11-20",
+     "url": "https://www.telegraphindia.com/west-bengal/bengal-chief-minister-urges-cec-to-stop-unplanned-dangerous-sir-cites-blo-deaths-and-voter-distress/cid/2133925",
+     "how_read": "Fetched with Firecrawl; body read. She posted the letter on X (https://x.com/MamataOfficial/status/1991711174526922987), but as an image that was not read; the quotes are the Telegraph's."
+    },
+    {
+     "id": "mb-hindu-jan23",
+     "title": "Three to four people dying in West Bengal every day due to SIR anxiety: Mamata",
+     "outlet": "The Hindu, carrying PTI's report of her speech at Red Road, Kolkata",
+     "date": "2026-01-23",
+     "url": "https://www.thehindu.com/news/national/west-bengal/three-to-four-people-dying-in-west-bengal-every-day-due-to-sir-anxiety-mamata/article70541605.ece",
+     "how_read": "Fetched with Firecrawl; body read. The page's description has 'taking their own lives' where the body has 'dying'; the body is quoted."
+    },
+    {
+     "id": "mb-ie-sep27",
+     "title": "'SIR was conducted to help BJP capture Bengal': Mamata mounts attack on EC",
+     "outlet": "The Indian Express (Express News Service, Kolkata)",
+     "date": "2026-09-27",
+     "url": "https://indianexpress.com/article/cities/kolkata/sir-conducted-to-help-bjp-capture-bengal-mamata-banerjee-10895562/",
+     "how_read": "Fetched with Firecrawl; body read."
+    },
+    {
+     "id": "mb-nie-nov20",
+     "title": "Bengal CM Mamata blames SIR pressure for BLO deaths; urges EC to halt drive in Bengal",
+     "outlet": "The New Indian Express",
+     "date": "2025-11-20",
+     "url": "https://www.newindianexpress.com/india/2025/Nov/20/bengal-cm-mamata-blames-sir-pressure-for-blo-deaths-urges-ec-to-halt-drive-in-bengal",
+     "how_read": "Article quoting her letter to the Chief Election Commissioner of 20 November 2025, opened by the second reader."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "mb-n18-nov4",
+     "quote": "আমার প্রথম প্রশ্ন, অসমে কেন করলেন না SIR? আসলে অসমে ভুয়ো ভোটে জেতেন। এসআইআর করলে অসমে হেরে যেতেন। আমার দ্বিতীয় প্রশ্ন, উত্তর পূর্ব ভারতের রাজ্যগুলোতে কেন এসআইআর করলেন না? ত্রিপুরা দিয়েও তো বাংলাদেশিরা ঢোকে।",
+     "translation": "My first question: why did you not do the SIR in Assam? In fact you win Assam on fake votes. If you did the SIR you would lose Assam. My second question: why did you not do the SIR in the states of the North-East? Bangladeshis come in through Tripura too.",
+     "relies_on": "The Commission's order of 27 October 2025, which named twelve states and union territories for the second phase and left out Assam and the North-East.",
+     "kind": "fact about process (documentary)",
+     "check": "The fact about the process held when she said it. Assam was given a 'Special Revision' with no forms and no link to an earlier roll, by the Commission's letter of 17 November 2025, and never had an SIR (data/india/process.json, timeline 'Assam gets a different revision'; data/assam/summary.json). The North-East was added later: the order of 14 May 2026 put Manipur, Meghalaya, Mizoram, Nagaland, Arunachal Pradesh, Sikkim and Tripura in the third phase (process.json, schedules). Tripura's enumeration ran 15 September to 14 October 2026 and its draft is due on 21 October. Her claims about fake votes in Assam and about who crosses through Tripura are not things the site's records can test.",
+     "site_counts": "Phase of each state (process.json, schedules). Assam: 10,56,291 names flagged as dead, shifted or multiple, never shown as removed from the draft (data/assam/summary.json, state.flagged).",
+     "site_stops": "The site does not say whether any person or group are citizens, and nothing it holds counts entries by nationality.",
+     "timestamp": null
+    },
+    {
+     "piece": "mb-letter-nov20",
+     "quote": "Several others have lost their lives since this process began… a revision that earlier took three years is now being forced into three months.",
+     "relies_on": "Her letter to the Chief Election Commissioner. The Telegraph's ellipsis is kept.",
+     "kind": "fact about process (documentary)",
+     "check": "The three months is about right for the schedule as first ordered. House-to-house enumeration in West Bengal ran from 4 November to 4 December 2025, later to 11 December, the draft came on 16 December, and the final roll was due on 7 February, then 14 February, and was published on 28 February 2026 (process.json, schedules, West Bengal). That is about four months from the first house visit to the final roll, and the 60,06,675 names put under adjudication were decided after it (data/westbengal/summary.json, pn05.adjudication). The site holds no record of how long earlier intensive revisions took, so 'three years' is not checked here.",
+     "site_counts": "West Bengal schedule (process.json). Two West Bengal deaths in the site's list of deaths reported during the revision, both reported after this letter (data/india/disputes.json, section deaths).",
+     "site_stops": "The site does not count deaths.",
+     "timestamp": null
+    },
+    {
+     "piece": "mb-hindu-jan23",
+     "quote": "More than 110 people have already died; every day, three to four people are dying out of SIR anxiety",
+     "relies_on": "No list given in the report. The figure rose over the weeks: The Hindu and NDTV reported her giving 39 deaths in December 2025, when the state announced compensation (search excerpts; those pages were not opened).",
+     "kind": "count from official data",
+     "check": "No official count of deaths linked to the revision has been published, so neither 110 nor three to four a day can be checked. The site's list of deaths reported during the revision has eight items across India, two of them in West Bengal: a 75-year-old man who died after falling ill in a hearing queue in Birbhum, and an 82-year-old man in Purulia whose son filed an FIR after he died, allegedly by suicide, hours before a hearing (data/india/disputes.json, section deaths, 11 and 21 January 2026). Each is a press report of what a family alleged.",
+     "site_counts": "Eight reported deaths in the list, two in West Bengal (disputes.json, deaths). The site does not keep a running count.",
+     "site_stops": "The site cannot say how many people died, or why.",
+     "timestamp": null
+    },
+    {
+     "piece": "mb-ie-sep27",
+     "quote": "SIR was conducted in Bengal to capture the state. Ninety-three lakh names were either deleted or put under adjudication.",
+     "relies_on": "No source given in the report.",
+     "kind": "inference about intent",
+     "check": "The 93 lakh is near the site's figures, depending on what is added up. The draft left off 58,20,899; 5,46,053 more came off on Form 7 after the draft; 60,06,675 were put under adjudication, and of those 27,16,393 were found not eligible, as reported (data/westbengal/summary.json, pn05.removed, pn05.form7, adj.under_adjudication, adj.found_not_eligible). Draft, Form 7 and not eligible add to 90,83,345, about 91 lakh. Adding all those put under adjudication, most of whom were kept, gives 1.24 crore. Below the state the site has only the fall in the roll: from the 2024 roll to the roll the 2026 election was held on, 77,58,998 (summary.json, fall). That fall was larger than the winning margin in 139 of 294 seats, and larger than the margin at the seat's turnout in 132 (summary.json, over_margin, could_change). Larger than the margin means the removals could have decided a seat, never that they did. Nothing in the records shows why the revision was run.",
+     "site_counts": "Removed at the draft 58,20,899; Form 7 after the draft 5,46,053; under adjudication 60,06,675, of which 32,68,119 found eligible and 27,16,393 not eligible, as reported (summary.json, pn05 and adj; data/westbengal/raw/adjudication_state.csv). Fall in the roll 2024 to election 77,58,998; over the margin in 139 seats (summary.json).",
+     "site_stops": "The site cannot show intent. The adjudication outcomes are state totals as reported, and below the state there is only the fall in the roll.",
+     "timestamp": null
+    }
    ]
   }
  ]

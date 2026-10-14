@@ -1,36 +1,481 @@
 [
- {"person":"Ravish Kumar","claim_index":0,"status":"confirmed","note":"Re-read via oEmbed (title, channel Ravish Kumar Official) and a fresh Firecrawl scrape of the watch page (uploaded 2026-09-23, 26:31, Hindi auto-captions). The line is verbatim and is his own narration, not a clip. Translation fair. The Express (online, 23 Sep 2026) says the objections were to decisions 'taken and orders issued, they say, without their knowledge', so the check's framing note is right. Timestamp is a caption-position estimate; mine puts it nearer ~1:30 to ~2:00, within the stated tolerance."},
- {"person":"Ravish Kumar","claim_index":1,"status":"corrected","fix":{"quote":"वोट चोरी का सिस्टम पकड़ा गया है। यह सिस्टम कहीं और नहीं चुनाव आयोग के भीतर पकड़ा गया है।"},"note":"Verbatim and his own narration (the opening lines). Trimmed the sign-on, which the auto-captions render as 'रवश कुमार', so the panel does not print a garbled version of his name inside a quote; the translation already omits it. 'Inference about intent' is fair for 'vote theft'. Confirmed the Express line 'There was no evidence of its role in the election outcome' in the online article of 23 Sep 2026."},
- {"person":"Ravish Kumar","claim_index":2,"status":"confirmed","note":"Verbatim (ellipsis covers 'क्योंकि वे सभी शर्तों को पूरा करते हैं'), his narration, introduced as 'जैसे गोवा में हुआ'. Matches the Express: EROs found 97 eligible, the software had no way to record it, Goa's CEO office wrote eight times between 11 and 17 Feb; the special issue adds that all 97 were missing from the 21 Feb final roll. Goa 1,00,042 left off, 8.44 per 100 confirmed in data/india/states.json."},
- {"person":"Ravish Kumar","claim_index":3,"status":"corrected","fix":{"relies_on":"Not named in this line. The figure matches the Express investigation of 23 Sep 2026, which the episode is about: the SIR 'has struck more than 13 crore names off the draft voter rolls in 30 States and Union Territories'.","check":"The figure is right as a sum of draft-stage removals; the site's own sum across 31 states and UTs (Tripura has no draft yet) is 13,39,03,307. It counts names left off draft rolls, which includes the dead and duplicates and is before any restoration, so it is not 13 crore people disenfranchised."},"note":"Quote verbatim, his closing narration. Two fixes: (1) the earlier 'Express, 1 Sep 2026' source could not be confirmed and he names no source here; the 23 Sep Express article carries the 13 crore figure. (2) states.json total is over 31 states and UTs, not 32 (32 rows, Tripura with no figure). 20.8% dead in the 29 states with a complete split confirmed (27,393,759 of 131,709,778); 20.9% across all 31."},
- {"person":"Ravish Kumar","claim_index":4,"status":"confirmed","note":"From the 1 Oct 2026 episode (oEmbed and fresh scrape: uploaded 2026-10-01, 30:08). Verbatim, his narration in the Bharat Ratna segment. westbengal/summary.json confirms 27,16,393 not eligible, 32,68,119 eligible, 60,06,675 under adjudication, 37,05,235 appeals pending (22,21,118 and 16,10,311), 1,607 restored before the poll, 96.71% pending."},
- {"person":"Ravish Kumar","claim_index":5,"status":"corrected","fix":{"relies_on":"He attributes the figures explicitly to Karnataka minister Rizwan Arshad (captions: 'अरशद रिजवान ने ... संगठित दुरुपयोग कहा है', then the numbers, then 'अरशद का सवाल है'). The Belagavi account in the same segment is attributed to The Hindu.","check":"The figures are relayed from a minister, not Ravish Kumar's own count and not official data; the CEO's own count was not found. The minister is a party office-holder."},"note":"Quote verbatim. But this is a relay of a party office-holder's figures, so 'count from official data' mischaracterises it and presenting it as his claim is unfair. None of the listed kinds fits a relayed figure. Given the panel's own rule that party office-holders are left out, recommend dropping this claim from his panel; if kept, label it as relayed from the minister."},
- {"person":"Ravish Kumar","claim_index":6,"status":"confirmed","note":"Verbatim, his narration, early in the 1 Oct episode (~2 min is plausible). He says the Form 6 question required 2003 mapping details and that forms could not be submitted without them, which matches the Express. The check is fair. The kind label 'effect on results' should read as effect on the rolls when shown on the panel; it is not about election results."},
- {"person":"Yogendra Yadav","claim_index":0,"status":"corrected","fix":{"role":"Psephologist and political activist; one of the petitioners in the Supreme Court challenge to the Bihar SIR (ADR v. Election Commission of India, W.P.(C) 640/2025 and connected cases), where he made submissions in person. Formerly with CSDS (Lokniti). Founding national president of Swaraj India, a registered political party, and national convener of Bharat Jodo Abhiyan."},"note":"Quote confirmed verbatim in LiveLaw (Debby Jain, 12 Aug 2025, 7:32 PM IST, headline as given) as his oral submission. Role fix only: LiveLaw gives the case title as 'ADR and Ors v. ECI, W.P.(C) 640/2025 (and connected cases)', and The Wire says he is 'one of the petitioners'; his own petition may be a connected case. Site figures confirmed: Bihar adults 1 Mar 2026 8,30,27,000; roll before 7,89,69,844; 98.3% and 84.4% across 19 states. Swaraj India and Bharat Jodo Abhiyan roles not re-checked for 2026."},
- {"person":"Yogendra Yadav","claim_index":1,"status":"confirmed","note":"Verbatim in The Wire (Pavan Korada, 5 Aug 2025), which presents it as his calculation ('Psephologist Yogendra Yadav, speaking to The Wire, applied this metric'). The words are The Wire's, as the note already says. EP ratio 97% to 88% as stated. Booth-file 65,59,409 and lists 65,59,626 confirmed; draft 7,24,05,756 confirmed."},
- {"person":"Yogendra Yadav","claim_index":2,"status":"corrected","fix":{"check":"The share matches the site's count (31 of 56 lakh is 55.4% women, against 55.5% in the lists), but the totals are lower: the phase 1 lists hold 36,39,976 women and 29,19,433 men (65.6 lakh). The reasoning attached (more men migrate and die) is his inference."},"note":"Quote verbatim in LiveLaw. 'Close to the site's own count' was not accurate for the absolute numbers. LiveLaw does not say where his figures came from. District range 2.8 to 13.7 points, 38 of 38 districts, 242 of 243 seats, and 52.0% vs 43.4% of expected adult deaths all confirmed in the data."},
- {"person":"Yogendra Yadav","claim_index":3,"status":"confirmed","note":"Verbatim in LiveLaw, said in reply to a query about 2003. LiveLaw also reports he asked the ECI to supply the 2003 order, 'saying it is not available in public domain', which supports the check."},
- {"person":"Yogendra Yadav","claim_index":4,"status":"confirmed","note":"Verbatim in LiveLaw. Final-roll figures confirmed in bihar/final.json: 3,66,742 removed after the draft, 21,53,343 added, final 7,41,92,357, net fall 47,72,808, made up at most 27.2%. LiveLaw confirms the 10.6% and 12.6% 'not recommended' figures for two districts."},
- {"person":"Yogendra Yadav","claim_index":5,"status":"corrected","fix":{"check":"The article does not state the adult base; 81 lakh plus the final roll of 7.42 crore implies about 8.23 crore. The site's projection (8.30 crore for March 2026) gives about 88 lakh."},"note":"Sentence verbatim in The Wire Staff report of 10 Oct 2025, which is The Wire's paraphrase of his 9 Oct presentation (as the note says). The '8.22 crore (his October base)' in the check is not in the source; replaced with what the arithmetic implies. 88 lakh confirmed (8,30,27,000 less 7,41,92,357)."},
- {"person":"Yogendra Yadav","claim_index":6,"status":"corrected","fix":{"piece_outlet":"PTI, as carried by ETV Bharat (byline PTI; also carried by The Week)"},"note":"Text confirmed in the ETV Bharat page (23 Nov 2025, 23:01 IST), whose author field is PTI. It is PTI's rendering of his speech at a meeting at Bharat Sabha Hall, Kolkata, printed as direct speech without quotation marks; the panel should say 'as reported by PTI'. 'Inference about intent' is fair."},
- {"person":"The Indian Express (Ritika Chopra)","claim_index":0,"status":"confirmed","note":"Verbatim in the online article (23 Sep 2026, 06:00 IST, byline Ritika Chopra; Damini Nath is not in the online byline). 'The Indian Express has seen each of these exchanges' confirmed. The Commission's press note (signed by Deputy Director P Pawan) refers to 'written notes, observations' and 'differing views'. Ritika Chopra signs the special issue as Resident Editor (Mumbai). 'Released free' and the issue title come from the site's own process.json, not re-checked; PDF metadata dates it 5 Oct 2026."},
- {"person":"The Indian Express (Ritika Chopra)","claim_index":1,"status":"corrected","fix":{"piece":"ie-reply"},"note":"The passage is verbatim but it is in the 'Differing views' article (23 Sep 2026, 14:13 IST; special issue pp. 41 to 42), not the main investigation. The July 12 report is mentioned in the same passage."},
- {"person":"The Indian Express (Ritika Chopra)","claim_index":2,"status":"corrected","fix":{"relies_on":"Not stated by the paper. The figures match Newslaundry's Test 3 (under-adjudication deletions from Sabar Institute data against 2026 margins, 49 seats: BJP 26, TMC 21, Congress 2)."},"note":"Quote verbatim in the main article, directly after 'There was no evidence of its role in the election outcome.' The earlier relies_on stated the paper's measure as fact; it is an inference. Site figures confirmed: 139 seats over the margin; AITC 12.38 and BJP 9.41 per 100; 0.23 and 0.03 against the district. Newslaundry's analysis covered 293 seats."},
- {"person":"The Indian Express (Ritika Chopra)","claim_index":3,"status":"corrected","fix":{"quote":"the manner in which names were struck off prompted the Supreme Court, in February 2026, to take the last leg of the SIR out of the Commission's hands and get judicial officers to decide on the plight of 60 lakh voters flagged for \"logical discrepancies.\" Of these, 27 lakh electors were subsequently deleted by the Commission."},"note":"The original reads 'prompted the Supreme Court ... to take the last leg'; the bracketed '[took]' broke the grammar ('[took] ... and get'). Replaced with the exact words. 38 lakh pending (22.21 and 16.10 lakh) confirmed in the article, which adds 'The Commission did not say who filed those.' Site: 49.27% of appeals against inclusion confirmed."},
- {"person":"The Indian Express (Ritika Chopra)","claim_index":4,"status":"confirmed","note":"Verbatim in the main article. Eight letters 11 to 17 Feb confirmed. The special issue says 'The Indian Express checked all 97 names against it' (the 21 Feb final roll), and all 97 were still missing on 20 Sep."},
- {"person":"Prannoy Roy","claim_index":0,"status":"corrected","fix":{"site_counts":"West Bengal per 100 in the fall of the roll is highest in the Kolkata North (27.98) and Kolkata South (24.54) districts and lowest in Purbo Medinipur district (1.64); by seat it runs from 39.74 (Chowrangee) to 0.34 (Patashpur). The highest-deletion and lowest-deletion seats therefore sit in different regions, not only at different deletion rates. Bihar's seat-swing model shows how much this matters: without each seat's previous lead the slope is -0.83, with it +0.31, an interval that takes in no effect."},"note":"Video re-read: oEmbed (title, channel DeKoder) and a fresh scrape (uploaded 2026-10-08, 7:38, English auto-captions). Quote verbatim ('SR deletions' in the captions, rendered [SIR]); his own words. Timestamps ~3:49 to ~4:08 by caption position. Fix: the earlier site_counts cited district figures as if they were seats. Swing slopes confirmed in bihar/robust.json and swing.json."},
- {"person":"Prannoy Roy","claim_index":1,"status":"confirmed","note":"Verbatim, ~5:05. BehanBox (13 Apr 2026) reports Sabar Institute data: 61.8% of voters 'deleted (or under adjudication)' are women, so the check is right. Site figures confirmed: 53.53% of 58,20,899 against 49.23% of the roll; 52.59% of the fall; 21 of 24 districts."},
- {"person":"Prannoy Roy","claim_index":2,"status":"confirmed","note":"Both parts verbatim (~5:50 and ~6:30); 30 / 19.8 lakh = 1.52. 'Inference about intent' is fair: he says 'clearly targeted'. Bihar religion range (census share inside in 18 of 38 districts, below the low bound in 20) confirmed in bihar/identity.json."},
- {"person":"Prannoy Roy","claim_index":3,"status":"confirmed","note":"Verbatim except the captions read 'election rules'; '[rolls]' is a fair correction. ~7:06. He also says the Express piece was 21 Sep (it was 23 Sep) and that his own name was deleted; both are in the transcript."},
- {"person":"Lokniti-CSDS (reported by The Wire, Pavan Korada)","claim_index":0,"status":"confirmed","note":"Verbatim in The Wire (Pavan Korada, 16 Aug 2025, dateline Vizag); 3,054 interviews in five states and Delhi confirmed. The Wire says the Supreme Court 'on August 14 directed the EC to include' Aadhaar. The Lokniti report itself was not opened by me either."},
- {"person":"Lokniti-CSDS (reported by The Wire, Pavan Korada)","claim_index":1,"status":"confirmed","note":"Verbatim in The Wire's report of the survey."},
- {"person":"Lokniti-CSDS (reported by The Wire, Pavan Korada)","claim_index":2,"status":"confirmed","note":"Verbatim; The Wire attributes the inner quotation to 'The report's authors'. The headline is The Wire's, printed as a quotation attributed to the survey, as the overreach note says."},
- {"person":"Debraj Ray","claim_index":0,"status":"confirmed","note":"PDF re-fetched from debrajray.com (16 pages, dated May 10, 2026). Verbatim. Footnote 3: 'We get 26 on the same exercise, a borderline arithmetical difference' from Bhattacharya (The Wire, 5 May 2026). PN-05 figures (76,637,529; 5,820,899; 6,006,675; 2,716,393) confirmed in the note and in westbengal/summary.json. Professorship not re-checked (not in the PDF)."},
- {"person":"Debraj Ray","claim_index":1,"status":"confirmed","note":"Verbatim. Check confirmed: contestable bound flips 69, 207-69 = 138, 10 below 148; overturning at h2 = 0 needs about 92% turnout and about 95% voting for the runner-up. 'Defensible' for the 2.42 million deceased is his word ('defensible as a valid removal'). Bihar 187 of 243 and 4 to 6 seats confirmed in bihar/impact.json and robust.json."},
- {"person":"Debraj Ray","claim_index":2,"status":"confirmed","note":"Verbatim (PDF ligatures split 'offsetting'; text matches). Coefficient +14.7 per thousand, HC1, N = 294, and his own 'correlation exercise, not causal identification' confirmed. The kind label is loose: this is about the pattern of deletions, not the result, and he frames it as a correlation."},
- {"person":"Debraj Ray","claim_index":3,"status":"confirmed","note":"Verbatim, with the ellipsis covering the Rajarhat New Town and Bhabanipur examples."},
- {"person":"Newslaundry (Samarth Grover)","claim_index":0,"status":"corrected","fix":{"role":"Independent subscriber-funded news site; the analysis is by Samarth Grover."},"note":"Article re-fetched: 7 May 2026, byline Samarth Grover, headline as given. Quote verbatim; 66,62,010 = 90,82,099 less 24,20,089 confirmed; 'starts to raise questions' present; data credited to Sabar Institute and ECI. Role fix: the page names him but gives no job title, so 'a reporter there' is unverified. The 'no ads' line supports 'subscriber-funded'. Site's 139 seats confirmed."},
- {"person":"Newslaundry (Samarth Grover)","claim_index":1,"status":"confirmed","note":"Verbatim; the article adds that the TMC had won all 14 in 2021."},
- {"person":"Newslaundry (Samarth Grover)","claim_index":2,"status":"confirmed","note":"Verbatim, with the ellipsis covering three sentences."},
- {"person":"Newslaundry (Samarth Grover)","claim_index":3,"status":"confirmed","note":"Verbatim, the article's closing paragraph."}
+ {
+  "person": "Ravish Kumar",
+  "claim_index": 0,
+  "status": "confirmed",
+  "note": "Re-read via oEmbed (title, channel Ravish Kumar Official) and a fresh Firecrawl scrape of the watch page (uploaded 2026-09-23, 26:31, Hindi auto-captions). The line is verbatim and is his own narration, not a clip. Translation fair. The Express (online, 23 Sep 2026) says the objections were to decisions 'taken and orders issued, they say, without their knowledge', so the check's framing note is right. Timestamp is a caption-position estimate; mine puts it nearer ~1:30 to ~2:00, within the stated tolerance."
+ },
+ {
+  "person": "Ravish Kumar",
+  "claim_index": 1,
+  "status": "corrected",
+  "fix": {
+   "quote": "वोट चोरी का सिस्टम पकड़ा गया है। यह सिस्टम कहीं और नहीं चुनाव आयोग के भीतर पकड़ा गया है।"
+  },
+  "note": "Verbatim and his own narration (the opening lines). Trimmed the sign-on, which the auto-captions render as 'रवश कुमार', so the panel does not print a garbled version of his name inside a quote; the translation already omits it. 'Inference about intent' is fair for 'vote theft'. Confirmed the Express line 'There was no evidence of its role in the election outcome' in the online article of 23 Sep 2026."
+ },
+ {
+  "person": "Ravish Kumar",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Verbatim (ellipsis covers 'क्योंकि वे सभी शर्तों को पूरा करते हैं'), his narration, introduced as 'जैसे गोवा में हुआ'. Matches the Express: EROs found 97 eligible, the software had no way to record it, Goa's CEO office wrote eight times between 11 and 17 Feb; the special issue adds that all 97 were missing from the 21 Feb final roll. Goa 1,00,042 left off, 8.44 per 100 confirmed in data/india/states.json."
+ },
+ {
+  "person": "Ravish Kumar",
+  "claim_index": 3,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "Not named in this line. The figure matches the Express investigation of 23 Sep 2026, which the episode is about: the SIR 'has struck more than 13 crore names off the draft voter rolls in 30 States and Union Territories'.",
+   "check": "The figure is right as a sum of draft-stage removals; the site's own sum across 31 states and UTs (Tripura has no draft yet) is 13,39,03,307. It counts names left off draft rolls, which includes the dead and duplicates and is before any restoration, so it is not 13 crore people disenfranchised."
+  },
+  "note": "Quote verbatim, his closing narration. Two fixes: (1) the earlier 'Express, 1 Sep 2026' source could not be confirmed and he names no source here; the 23 Sep Express article carries the 13 crore figure. (2) states.json total is over 31 states and UTs, not 32 (32 rows, Tripura with no figure). 20.8% dead in the 29 states with a complete split confirmed (27,393,759 of 131,709,778); 20.9% across all 31."
+ },
+ {
+  "person": "Ravish Kumar",
+  "claim_index": 4,
+  "status": "confirmed",
+  "note": "From the 1 Oct 2026 episode (oEmbed and fresh scrape: uploaded 2026-10-01, 30:08). Verbatim, his narration in the Bharat Ratna segment. westbengal/summary.json confirms 27,16,393 not eligible, 32,68,119 eligible, 60,06,675 under adjudication, 37,05,235 appeals pending (22,21,118 and 16,10,311), 1,607 restored before the poll, 96.71% pending."
+ },
+ {
+  "person": "Ravish Kumar",
+  "claim_index": 5,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "He attributes the figures explicitly to Karnataka minister Rizwan Arshad (captions: 'अरशद रिजवान ने ... संगठित दुरुपयोग कहा है', then the numbers, then 'अरशद का सवाल है'). The Belagavi account in the same segment is attributed to The Hindu.",
+   "check": "The figures are relayed from a minister, not Ravish Kumar's own count and not official data; the CEO's own count was not found. The minister is a party office-holder."
+  },
+  "note": "Quote verbatim. But this is a relay of a party office-holder's figures, so 'count from official data' mischaracterises it and presenting it as his claim is unfair. None of the listed kinds fits a relayed figure. Given the panel's own rule that party office-holders are left out, recommend dropping this claim from his panel; if kept, label it as relayed from the minister."
+ },
+ {
+  "person": "Ravish Kumar",
+  "claim_index": 6,
+  "status": "confirmed",
+  "note": "Verbatim, his narration, early in the 1 Oct episode (~2 min is plausible). He says the Form 6 question required 2003 mapping details and that forms could not be submitted without them, which matches the Express. The check is fair. The kind label 'effect on results' should read as effect on the rolls when shown on the panel; it is not about election results."
+ },
+ {
+  "person": "Yogendra Yadav",
+  "claim_index": 0,
+  "status": "corrected",
+  "fix": {
+   "role": "Psephologist and political activist; one of the petitioners in the Supreme Court challenge to the Bihar SIR (ADR v. Election Commission of India, W.P.(C) 640/2025 and connected cases), where he made submissions in person. Formerly with CSDS (Lokniti). Founding national president of Swaraj India, a registered political party, and national convener of Bharat Jodo Abhiyan."
+  },
+  "note": "Quote confirmed verbatim in LiveLaw (Debby Jain, 12 Aug 2025, 7:32 PM IST, headline as given) as his oral submission. Role fix only: LiveLaw gives the case title as 'ADR and Ors v. ECI, W.P.(C) 640/2025 (and connected cases)', and The Wire says he is 'one of the petitioners'; his own petition may be a connected case. Site figures confirmed: Bihar adults 1 Mar 2026 8,30,27,000; roll before 7,89,69,844; 98.3% and 84.4% across 19 states. Swaraj India and Bharat Jodo Abhiyan roles not re-checked for 2026."
+ },
+ {
+  "person": "Yogendra Yadav",
+  "claim_index": 1,
+  "status": "confirmed",
+  "note": "Verbatim in The Wire (Pavan Korada, 5 Aug 2025), which presents it as his calculation ('Psephologist Yogendra Yadav, speaking to The Wire, applied this metric'). The words are The Wire's, as the note already says. EP ratio 97% to 88% as stated. Booth-file 65,59,409 and lists 65,59,626 confirmed; draft 7,24,05,756 confirmed."
+ },
+ {
+  "person": "Yogendra Yadav",
+  "claim_index": 2,
+  "status": "corrected",
+  "fix": {
+   "check": "The share matches the site's count (31 of 56 lakh is 55.4% women, against 55.5% in the lists), but the totals are lower: the phase 1 lists hold 36,39,976 women and 29,19,433 men (65.6 lakh). The reasoning attached (more men migrate and die) is his inference."
+  },
+  "note": "Quote verbatim in LiveLaw. 'Close to the site's own count' was not accurate for the absolute numbers. LiveLaw does not say where his figures came from. District range 2.8 to 13.7 points, 38 of 38 districts, 242 of 243 seats, and 52.0% vs 43.4% of expected adult deaths all confirmed in the data."
+ },
+ {
+  "person": "Yogendra Yadav",
+  "claim_index": 3,
+  "status": "confirmed",
+  "note": "Verbatim in LiveLaw, said in reply to a query about 2003. LiveLaw also reports he asked the ECI to supply the 2003 order, 'saying it is not available in public domain', which supports the check."
+ },
+ {
+  "person": "Yogendra Yadav",
+  "claim_index": 4,
+  "status": "confirmed",
+  "note": "Verbatim in LiveLaw. Final-roll figures confirmed in bihar/final.json: 3,66,742 removed after the draft, 21,53,343 added, final 7,41,92,357, net fall 47,72,808, made up at most 27.2%. LiveLaw confirms the 10.6% and 12.6% 'not recommended' figures for two districts."
+ },
+ {
+  "person": "Yogendra Yadav",
+  "claim_index": 5,
+  "status": "corrected",
+  "fix": {
+   "check": "The article does not state the adult base; 81 lakh plus the final roll of 7.42 crore implies about 8.23 crore. The site's projection (8.30 crore for March 2026) gives about 88 lakh."
+  },
+  "note": "Sentence verbatim in The Wire Staff report of 10 Oct 2025, which is The Wire's paraphrase of his 9 Oct presentation (as the note says). The '8.22 crore (his October base)' in the check is not in the source; replaced with what the arithmetic implies. 88 lakh confirmed (8,30,27,000 less 7,41,92,357)."
+ },
+ {
+  "person": "Yogendra Yadav",
+  "claim_index": 6,
+  "status": "corrected",
+  "fix": {
+   "piece_outlet": "PTI, as carried by ETV Bharat (byline PTI; also carried by The Week)"
+  },
+  "note": "Text confirmed in the ETV Bharat page (23 Nov 2025, 23:01 IST), whose author field is PTI. It is PTI's rendering of his speech at a meeting at Bharat Sabha Hall, Kolkata, printed as direct speech without quotation marks; the panel should say 'as reported by PTI'. 'Inference about intent' is fair."
+ },
+ {
+  "person": "The Indian Express (Ritika Chopra)",
+  "claim_index": 0,
+  "status": "confirmed",
+  "note": "Verbatim in the online article (23 Sep 2026, 06:00 IST, byline Ritika Chopra; Damini Nath is not in the online byline). 'The Indian Express has seen each of these exchanges' confirmed. The Commission's press note (signed by Deputy Director P Pawan) refers to 'written notes, observations' and 'differing views'. Ritika Chopra signs the special issue as Resident Editor (Mumbai). 'Released free' and the issue title come from the site's own process.json, not re-checked; PDF metadata dates it 5 Oct 2026."
+ },
+ {
+  "person": "The Indian Express (Ritika Chopra)",
+  "claim_index": 1,
+  "status": "corrected",
+  "fix": {
+   "piece": "ie-reply"
+  },
+  "note": "The passage is verbatim but it is in the 'Differing views' article (23 Sep 2026, 14:13 IST; special issue pp. 41 to 42), not the main investigation. The July 12 report is mentioned in the same passage."
+ },
+ {
+  "person": "The Indian Express (Ritika Chopra)",
+  "claim_index": 2,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "Not stated by the paper. The figures match Newslaundry's Test 3 (under-adjudication deletions from Sabar Institute data against 2026 margins, 49 seats: BJP 26, TMC 21, Congress 2)."
+  },
+  "note": "Quote verbatim in the main article, directly after 'There was no evidence of its role in the election outcome.' The earlier relies_on stated the paper's measure as fact; it is an inference. Site figures confirmed: 139 seats over the margin; AITC 12.38 and BJP 9.41 per 100; 0.23 and 0.03 against the district. Newslaundry's analysis covered 293 seats."
+ },
+ {
+  "person": "The Indian Express (Ritika Chopra)",
+  "claim_index": 3,
+  "status": "corrected",
+  "fix": {
+   "quote": "the manner in which names were struck off prompted the Supreme Court, in February 2026, to take the last leg of the SIR out of the Commission's hands and get judicial officers to decide on the plight of 60 lakh voters flagged for \"logical discrepancies.\" Of these, 27 lakh electors were subsequently deleted by the Commission."
+  },
+  "note": "The original reads 'prompted the Supreme Court ... to take the last leg'; the bracketed '[took]' broke the grammar ('[took] ... and get'). Replaced with the exact words. 38 lakh pending (22.21 and 16.10 lakh) confirmed in the article, which adds 'The Commission did not say who filed those.' Site: 49.27% of appeals against inclusion confirmed."
+ },
+ {
+  "person": "The Indian Express (Ritika Chopra)",
+  "claim_index": 4,
+  "status": "confirmed",
+  "note": "Verbatim in the main article. Eight letters 11 to 17 Feb confirmed. The special issue says 'The Indian Express checked all 97 names against it' (the 21 Feb final roll), and all 97 were still missing on 20 Sep."
+ },
+ {
+  "person": "Prannoy Roy",
+  "claim_index": 0,
+  "status": "corrected",
+  "fix": {
+   "site_counts": "West Bengal per 100 in the fall of the roll is highest in the Kolkata North (27.98) and Kolkata South (24.54) districts and lowest in Purbo Medinipur district (1.64); by seat it runs from 39.74 (Chowrangee) to 0.34 (Patashpur). The highest-deletion and lowest-deletion seats therefore sit in different regions, not only at different deletion rates. Bihar's seat-swing model shows how much this matters: without each seat's previous lead the slope is -0.83, with it +0.31, an interval that takes in no effect."
+  },
+  "note": "Video re-read: oEmbed (title, channel DeKoder) and a fresh scrape (uploaded 2026-10-08, 7:38, English auto-captions). Quote verbatim ('SR deletions' in the captions, rendered [SIR]); his own words. Timestamps ~3:49 to ~4:08 by caption position. Fix: the earlier site_counts cited district figures as if they were seats. Swing slopes confirmed in bihar/robust.json and swing.json."
+ },
+ {
+  "person": "Prannoy Roy",
+  "claim_index": 1,
+  "status": "confirmed",
+  "note": "Verbatim, ~5:05. BehanBox (13 Apr 2026) reports Sabar Institute data: 61.8% of voters 'deleted (or under adjudication)' are women, so the check is right. Site figures confirmed: 53.53% of 58,20,899 against 49.23% of the roll; 52.59% of the fall; 21 of 24 districts."
+ },
+ {
+  "person": "Prannoy Roy",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Both parts verbatim (~5:50 and ~6:30); 30 / 19.8 lakh = 1.52. 'Inference about intent' is fair: he says 'clearly targeted'. Bihar religion range (census share inside in 18 of 38 districts, below the low bound in 20) confirmed in bihar/identity.json."
+ },
+ {
+  "person": "Prannoy Roy",
+  "claim_index": 3,
+  "status": "confirmed",
+  "note": "Verbatim except the captions read 'election rules'; '[rolls]' is a fair correction. ~7:06. He also says the Express piece was 21 Sep (it was 23 Sep) and that his own name was deleted; both are in the transcript."
+ },
+ {
+  "person": "Lokniti-CSDS (reported by The Wire, Pavan Korada)",
+  "claim_index": 0,
+  "status": "confirmed",
+  "note": "Verbatim in The Wire (Pavan Korada, 16 Aug 2025, dateline Vizag); 3,054 interviews in five states and Delhi confirmed. The Wire says the Supreme Court 'on August 14 directed the EC to include' Aadhaar. The Lokniti report itself was not opened by me either."
+ },
+ {
+  "person": "Lokniti-CSDS (reported by The Wire, Pavan Korada)",
+  "claim_index": 1,
+  "status": "confirmed",
+  "note": "Verbatim in The Wire's report of the survey."
+ },
+ {
+  "person": "Lokniti-CSDS (reported by The Wire, Pavan Korada)",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Verbatim; The Wire attributes the inner quotation to 'The report's authors'. The headline is The Wire's, printed as a quotation attributed to the survey, as the overreach note says."
+ },
+ {
+  "person": "Debraj Ray",
+  "claim_index": 0,
+  "status": "confirmed",
+  "note": "PDF re-fetched from debrajray.com (16 pages, dated May 10, 2026). Verbatim. Footnote 3: 'We get 26 on the same exercise, a borderline arithmetical difference' from Bhattacharya (The Wire, 5 May 2026). PN-05 figures (76,637,529; 5,820,899; 6,006,675; 2,716,393) confirmed in the note and in westbengal/summary.json. Professorship not re-checked (not in the PDF)."
+ },
+ {
+  "person": "Debraj Ray",
+  "claim_index": 1,
+  "status": "confirmed",
+  "note": "Verbatim. Check confirmed: contestable bound flips 69, 207-69 = 138, 10 below 148; overturning at h2 = 0 needs about 92% turnout and about 95% voting for the runner-up. 'Defensible' for the 2.42 million deceased is his word ('defensible as a valid removal'). Bihar 187 of 243 and 4 to 6 seats confirmed in bihar/impact.json and robust.json."
+ },
+ {
+  "person": "Debraj Ray",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Verbatim (PDF ligatures split 'offsetting'; text matches). Coefficient +14.7 per thousand, HC1, N = 294, and his own 'correlation exercise, not causal identification' confirmed. The kind label is loose: this is about the pattern of deletions, not the result, and he frames it as a correlation."
+ },
+ {
+  "person": "Debraj Ray",
+  "claim_index": 3,
+  "status": "confirmed",
+  "note": "Verbatim, with the ellipsis covering the Rajarhat New Town and Bhabanipur examples."
+ },
+ {
+  "person": "Newslaundry (Samarth Grover)",
+  "claim_index": 0,
+  "status": "corrected",
+  "fix": {
+   "role": "Independent subscriber-funded news site; the analysis is by Samarth Grover."
+  },
+  "note": "Article re-fetched: 7 May 2026, byline Samarth Grover, headline as given. Quote verbatim; 66,62,010 = 90,82,099 less 24,20,089 confirmed; 'starts to raise questions' present; data credited to Sabar Institute and ECI. Role fix: the page names him but gives no job title, so 'a reporter there' is unverified. The 'no ads' line supports 'subscriber-funded'. Site's 139 seats confirmed."
+ },
+ {
+  "person": "Newslaundry (Samarth Grover)",
+  "claim_index": 1,
+  "status": "confirmed",
+  "note": "Verbatim; the article adds that the TMC had won all 14 in 2021."
+ },
+ {
+  "person": "Newslaundry (Samarth Grover)",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Verbatim, with the ellipsis covering three sentences."
+ },
+ {
+  "person": "Newslaundry (Samarth Grover)",
+  "claim_index": 3,
+  "status": "confirmed",
+  "note": "Verbatim, the article's closing paragraph."
+ },
+ {
+  "person": "Rahul Gandhi",
+  "claim_index": 0,
+  "status": "corrected",
+  "fix": {
+   "check": "The six individual cases were not checked. The site cannot test the wider claim, that the removals fell on Bahujan and poor voters as a group. Caste is guessed from surnames by two classifications that point in different directions, and the site records nothing about income. One group the site can count was over-represented: women.",
+   "site_counts": "Bihar's phase 1 lists removed 65,59,626 names (data/india/states.json, Bihar row, removed). Caste is not recorded in the lists; data/bihar/identity.json guesses it from surnames two ways. Classification A (caste.guardian.A.groups): SC 20.0% of classified removals against 19.65% in the 2023 caste survey, BC 14.8% against 25.03%, EBC 17.4% against 25.72%, Muslim 12.2% against 17.7%, General 34.4% against 10.72%. Classification B (caste.guardian.B.groups): SC 30.0%, Muslim 29.0%, General 14.7%, BC 17.0%, EBC 7.8%. The bounds are wide in both (SC 14.2% to 43.3% in A, 10.5% to 75.5% in B). Women were 55.5% of those removed against 47.9% of the roll (data/bihar/final.json, totals.women_share_p1 and women_share_before)."
+  },
+  "note": "Re-read The Hindu (PTI), published 18 Aug 2025 11:36 IST, url opens. Both quoted sentences are verbatim in PTI's English and attributed to his post in Hindi on his WhatsApp channel; the 'Bahujan and poor' line is PTI's reported speech, as the translation note says. TV9 Bharatvarsh (18 Aug 2025) gives the Hindi only in its own reported speech, so the Hindi original was still not found. Site figures: classification A shares match data/bihar/identity.json exactly. But the same file's classification B gives SC 30.0% (survey 19.65%) and Muslim 29.0% (survey 17.7%), the opposite direction, and CLAUDE.md says the two must not be collapsed into one reading. The check as written ('is not what the site's figures show') therefore says more than the site can; corrected to say the site cannot tell. Women 55.49% of p1 against 47.86% of the roll checked in data/bihar/final.json."
+ },
+ {
+  "person": "Rahul Gandhi",
+  "claim_index": 1,
+  "status": "corrected",
+  "fix": {
+   "quote": "let me tell you there is already more than enough information to make this a 100% certainty, not 99%, a 100% certainty that Indian elections, Lok Sabha elections, 2024 election, Vidhan Sabha elections, are all being rigged."
+  },
+  "note": "Opened the watch page (The Hindu channel, streamed 24 Sep 2026, 54:52) and read YouTube's English auto-captions through Firecrawl's youtube reader. The passage is his own words in his opening statement, in English, after 'I am not speaking in the air. I have shown it with proof'. The quote reproduced caption errors ('look sabha'); corrected to the words he spoke with punctuation added, nothing else changed. Timestamp still an estimate from untimed captions; the passage falls early in the English statement, consistent with ~5:30 within +/- 5 minutes. Site figures checked: data/bihar/final.json margin.total 174, margin.net 124; data/bihar/impact.json summary.booth_lower.flips 4, booth_upper.flips 6 (to_nda 1 and 3, to_india 3 and 3, so both directions); data/bihar/robust.json swing.within_district_2020 est 0.3102, lo -0.2698, hi 0.8902."
+ },
+ {
+  "person": "Rahul Gandhi",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Verbatim in the English auto-captions, his own words, in the opening statement after the account of the Haryana presentation: 'Please understand what these two gentlemen are saying. They're saying that the vote does not exist in India anymore. That's what they're saying.' Opened the Express investigation of 23 Sep 2026: it lists the objections as new voter registration, deletion and restoration of voters, appeals against restoration orders (West Bengal) and custody of the roll, and reports no Commissioner saying anything like this, so the check is right. inside.events in data/india/process.json carries the 16 May, 19 May and 13 Aug 2026 Form 6 entries as cited."
+ },
+ {
+  "person": "Rahul Gandhi",
+  "claim_index": 3,
+  "status": "corrected",
+  "fix": {
+   "quote": "SIR came once we started saying there's a problem with voter deletion and addition it was a response to our questions and the idea was let us broad brush this and clean this thing out because we're going to get into trouble.",
+   "site_counts": "The order of 24 June 2025 ordered a Special Intensive Revision 'in the entire country', starting with Bihar (data/india/process.json, timeline entry of 2025-06-24). The joint petition he later signed alleges 'the absence of a recorded decision of the Commission authorising the nationwide SIR' (rg-petition). The Commission's press note 120 of 26 Sep 2026 says the order 'was issued with the unanimous approval of the Commission'."
+  },
+  "note": "Verbatim in the auto-captions, his own words, answering The Hindu's question in the Q&A near the end of the briefing (consistent with ~44:00). Captions render SIR as 'sir'; corrected to 'SIR', nothing else changed. site_counts said the petition 'says no recorded decision ... exists'; the Express quotes the petition alleging 'the absence of a recorded decision of the Commission authorising the nationwide SIR' and saying it 'does not seek to prejudge these competing positions', so it is an allegation; reworded. The Commission's press note 120 (opened on eci.gov.in) says the order of 24.6.2025 'was issued with the unanimous approval of the Commission', which is added. process.json timeline 2025-06-24 checked."
+ },
+ {
+  "person": "Rahul Gandhi",
+  "claim_index": 4,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "The Supreme Court's remark of 5 October 2026 that it had not approved any modified Form 6, and the Commissioners' recorded objections reported by The Indian Express, which his post of 1 October cites. The post itself cites no document.",
+   "check": "Two parts hold on the record the site keeps; one does not. The Express reports that the declaration was added to the online Form 6 without amending the Rules after two Commissioners objected in writing, and the Supreme Court said on 5 October that it had not approved any modified Form 6. No court has decided whether the change was illegal. That it was done 'to help the BJP' is his inference. The Commission's press note 120 of 26 September, which says it has the approval of the full Commission, kept the declaration for the revision period."
+  },
+  "note": "Opened the X post itself (x.com/RahulGandhi/status/2107056078102106282, 5 Oct 2026 10:31 UTC). The quote is verbatim, three paragraphs joined. The Hindu (published 5 Oct 2026 18:30 IST, updated 6 Oct) reproduces it. The post cites no source. It replies to his own post of 1 Oct 2026 ('The online Form 6 was changed illegally - as the EC's own Commissioners have recorded'), and The Times of India and National Herald report it as following the Supreme Court's remark of 5 Oct. It does not rely on press note 120; that note is what the Commission cited back in its reply. relies_on corrected. Also opened press note 120 on eci.gov.in: its point 1(iii) keeps the declaration 'for SIR' and the note says it 'has the approval of the full Commission', which the check should carry. Disputes items court-31, process-03, process-04, process-05 and soft-28 checked in data/india/disputes.json."
+ },
+ {
+  "person": "Rahul Gandhi",
+  "claim_index": 5,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "The joint writ petition filed on 12 October 2026 by Rahul Gandhi, Mallikarjun Kharge and other INDIA bloc leaders, as The Indian Express quotes it; the words are the petitioners' jointly. The petition itself cites press reports of Punjab's draft roll of 13 August 2026.",
+   "check": "Matches the site's figure for names left off in Punjab, which the press gave at the end of enumeration, before the draft. The roll then grew after the draft, so the net fall at the final roll is smaller. Punjab's final-roll figures do not add up exactly: 4,933 removals are not accounted for in the release."
+  },
+  "note": "Opened the Express (Apurva Vishwanath, 13 Oct 2026 05:55 IST); url opens. The words are verbatim, but they are from the joint writ petition of Rahul Gandhi, Mallikarjun Kharge and other INDIA bloc leaders, so they are not his alone; the petition says 'reportedly', so it rests on press reports. relies_on corrected to say so. A joint petition can stay on his panel only with that attribution on the page. Site figures checked in data/india/states.json, Punjab row: electors_before 2,14,61,043, removed 20,66,635, per_100 9.63, dead 5,74,568, shifted_absent_other 13,56,846, duplicate 1,19,145, electors_final 2,01,00,727, added 7,97,263, removed after 86,038, net_fall 13,60,343, 6.34 per 100. The row's note says the removal figures are from the end of enumeration, before the draft, and 'reconciles' is 'no' (4,933 removals not accounted for in the release); the check now says so."
+ },
+ {
+  "person": "Gyanesh Kumar, and the Election Commission of India",
+  "claim_index": 0,
+  "status": "confirmed",
+  "note": "Opened the Express (Damini Nath, first published 17 Aug 2025 17:01 IST, updated 18 Aug); url opens. The Roman-script Hindi and the Express's translation are verbatim. The Express also reports that he did not reply on how many of the 7.24 crore electors had submitted documents or how many Nepal, Bangladesh and Myanmar nationals had been found, saying any such person would be removed, so the check is right. data/bihar/reasons.json totals: dead 22,32,586, shifted 26,55,900, absent 9,70,081, already_enrolled 7,01,059, summing to 65,59,626."
+ },
+ {
+  "person": "Gyanesh Kumar, and the Election Commission of India",
+  "claim_index": 1,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "Patna press conference of 5 Oct 2025, five days after Bihar's final roll, in The Wire's English; the language he spoke in and his original words were not found."
+  },
+  "note": "Opened The Wire (30 Oct 2025); the quote is verbatim there, attributed to the Patna press conference of 5 Oct 2025. It is The Wire's English; a Hindi search found no original, and the claim carried no translation note. relies_on corrected to say so. Figures checked: data/bihar/reasons.json totals; data/bihar/final.json totals r_expired 62,441, r_shifted 2,12,999, r_repeated 81,334, r_unstated 9,968, removed_after 3,66,742; data/india/disputes.json court-23 quotes para 186(h) on cases deleted as non-citizens 'from the 2003 roll'. The check correctly says no count of such cases has been published."
+ },
+ {
+  "person": "Gyanesh Kumar, and the Election Commission of India",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Verbatim in The Wire (30 Oct 2025), which says he said it 'earlier this week' when the Commission announced the nationwide SIR, i.e. the press conference of 27 Oct 2025; translation note already says The Wire's English. process.json timeline 2025-10-27 and data/india/notices.json (with_total 21, notices_total 13,06,52,476, per_100 21.1) checked. The check does not treat a notice as a citizenship finding."
+ },
+ {
+  "person": "Gyanesh Kumar, and the Election Commission of India",
+  "claim_index": 3,
+  "status": "corrected",
+  "fix": {
+   "check": "The site has no count of appeals in Bihar, so it cannot confirm or refute zero. It does show that a missing appeal is a weak test: the Supreme Court in May 2026 opened judicial review to people wrongly deleted as absent, dead, shifted or duplicate. Amit Shah said on 29 Oct 2025 that three appeals had been made against the deletions; neither count has been published, and the two may not count the same thing.",
+   "site_counts": "Bihar, from the Commission's Format 4B return: 65,59,409 left off the draft; 21,53,343 added and 3,66,742 removed after it; final roll 7,41,92,357, a net fall of 47,72,808 from the roll before (data/bihar/final.json, totals.p1, added, removed_after, final, net_fall). The booth lists count 65,59,626 (data/india/states.json, Bihar row). In West Bengal, where adjudication outcomes were reported, 22,21,118 appeals were filed by people excluded, as reported (data/westbengal/summary.json, adj.appeals_by_excluded)."
+  },
+  "note": "Opened The Hindu (PTI, 24 Jan 2026 21:52 IST); the sentence is verbatim in quotation marks attributed to him. NDTV (27 Oct 2025) also opened: 'Voters in Bihar participated enthusiastically. As a result, not a single appeal was filed.' site_counts mixed two bases: 65,59,626 is the lists' count (states.json) while 47,72,808 is final.json's net fall, computed on Format 4B's p1 of 65,59,409; states.json's own net_fall is 47,73,025. Corrected to one basis. West Bengal appeals: data/westbengal/summary.json adj.appeals_by_excluded 22,21,118, but CLAUDE.md requires adjudication outcomes to be called 'as reported'; added. Shah's three appeals: his X post is 29 Oct 2025 (17:35 UTC); The Wire's English of the interview says the appeals were 'against the deletions', a different thing from appeals 'against the final electoral roll', so the check now says the two may count different things."
+ },
+ {
+  "person": "Gyanesh Kumar, and the Election Commission of India",
+  "claim_index": 4,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "The Commission's source-based clarification of 23 Sep 2026, as The Hindu printed it, followed the same day by a written statement which, in The Hindu's reported speech, said differing views and observations are a normal part of deliberation in any institution."
+  },
+  "note": "Opened The Hindu (Sreeparna Chakrabarty, 23 Sep 2026); the sentence is verbatim, from the Commission's 'source-based clarification', with the bracket as The Hindu's own insertion. relies_on presented 'Differing views and observations are a normal part of deliberation in any institution' as a quotation; The Hindu prints it only as reported speech ('The poll body said that differing views and observations are a normal part of deliberation...'), so it is reworded. Press note 119 was not found on eci.gov.in; press note 120 was opened there and repeats that the SIR order and schedules had the Commission's unanimous approval. inside.events dates 2026-05-16, 05-19, 08-13, 09-26 and disputes process-05 checked."
+ },
+ {
+  "person": "Gyanesh Kumar, and the Election Commission of India",
+  "claim_index": 5,
+  "status": "corrected",
+  "fix": {
+   "check": "Goes further than the record the site holds. The judgment upheld the Bihar order of 24 June 2025, which required a declaration in Annexure D with Form 6, and in our reading it makes no separate finding on the declaration. The declaration two Commissioners objected to in 2026 was added later to the online Form 6. On 5 Oct 2026 the Chief Justice said in court that no modified Form 6 had been approved by the Court.",
+   "site_stops": "The site has searched the judgment for Form 6 and the declaration but has not read all 124 pages line by line. It reports what LiveLaw reported of the hearing of 5 October."
+  },
+  "note": "Opened the Commission's own press note: ECI/PN/120/2026 of 26.09.2026 on eci.gov.in (document id 17536). Point 1(iii) reads exactly 'The declaration attached to Form 6 for SIR has been upheld by the Hon'ble Supreme Court.' and the note says it has the approval of the full Commission. NDTV (5 Oct 2026) reproduces the Commission's X fact-check quoting it; url opens. Read the judgment of 27 May 2026 on api.sci.gov.in through Firecrawl: it describes the order's requirement of Form 6 with a declaration in Annexure D, and the extraction found no separate holding on the declaration. The declaration the Commissioners objected to in 2026 is the one added to the online Form 6 (disputes process-03, process-04), which the Bihar judgment did not consider. Check and site_stops reworded accordingly."
+ },
+ {
+  "person": "Amit Shah",
+  "claim_index": 0,
+  "status": "corrected",
+  "fix": {
+   "check": "The count of appeals is not published and cannot be checked by the site. The Chief Election Commissioner said no appeal was filed against the final roll; Shah spoke of appeals against the deletions, so the two may not count the same thing. The inference does not follow from the records: the reasons officers recorded in Bihar are death, shifting, absence and duplicate entry, and no published figure counts anyone removed as a foreigner.",
+   "site_counts": "Bihar phase 1: 22,32,586 entered as dead (34.0%), 26,55,900 shifted, 9,70,081 absent, 7,01,059 already enrolled, 65,59,626 in all (data/bihar/reasons.json, totals; data/india/states.json, Bihar row, shares). Set against outside records, the dead are about 3.4 years of adult deaths at the right ages, but 52.0% of them are women against 43.4% of deaths (data/bihar/tests.json, deaths). After the draft, 3,66,742 removed: expired, shifted, repeated or unstated (data/bihar/final.json, totals)."
+  },
+  "note": "Opened the X post (x.com/AmitShah/status/1983588562634256543, 29 Oct 2025 17:35 UTC); the Hindi is verbatim and his own; translation fair. The Wire's longer English of the News18 clip checked verbatim. The check said the count 'differs from the CEC's not a single appeal'; the CEC spoke of appeals 'against the final electoral roll' and The Wire's English of Shah's interview speaks of appeals 'against the deletions', so the two may count different things; reworded. data/bihar/tests.json deaths: years_of_deaths 3.4, but women_share_dead 52.0 against women_share_expected 43.4, which CLAUDE.md requires to be carried beside the 3.4 years; added. reasons.json and final.json totals checked."
+ },
+ {
+  "person": "Amit Shah",
+  "claim_index": 1,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "PIB's reported speech, in English, of his Hindi speech in the Lok Sabha on 10 Dec 2025; his own words were not found. PIB's summary at the top of the same release renders the last part as 'selectively deleting infiltrators'."
+  },
+  "note": "Opened PIB release 2201968 (10 Dec 2025 22:15). The sentence is verbatim there, but it is PIB's reported speech in English of a Hindi speech, not his words. Searched for his own words (Lok Sabha debate text, Hindi press); found only press paraphrase. relies_on corrected to say it is reported speech. PIB's own highlight renders it 'selectively deleting infiltrators'. data/india/states.json total checked: removed 13,39,03,307, dead 2,79,69,558 (20.91%), shifted_absent_other 9,56,35,923 (71.50%), duplicate 1,01,48,459 (7.59%), 31 states."
+ },
+ {
+  "person": "Amit Shah",
+  "claim_index": 2,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "PIB's reported speech, in English, of his Hindi speech in the Lok Sabha on 10 Dec 2025; his own words were not found. PIB's body says 'the government's policy' and its highlight says 'Our party's policy'.",
+   "site_counts": "data/india/nrc.json, sir_vs_nrc-10 and sir_vs_nrc-12 (2026 INSC 564, paras 171 and 176). data/india/disputes.json, soft-16: the Commission's instructions of 14 May 2026 tell registration officers to refer suspected foreign nationals to the competent authority."
+  },
+  "note": "Verbatim in PIB release 2201968, as reported speech; his own Hindi was not found (Hindi outlets give paraphrase). relies_on corrected. site_counts cited the judgment at 'paras 176 and 186'; data/india/nrc.json gives sir_vs_nrc-10 as para 171 (determination of citizenship exclusive to the competent authority) and sir_vs_nrc-12 as para 176 (declining to enrol is not a declaration of non-citizenship); corrected. disputes soft-16 checked. PIB's body says 'the government's policy'; its own highlight says 'Our party's policy'."
+ },
+ {
+  "person": "Amit Shah",
+  "claim_index": 3,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "PIB's reported speech, in English, of his Hindi speech in the Lok Sabha on 10 Dec 2025; his own words were not found. He lists 1952, 1957, 1961, 1965, 1966, 1983-84, 1987-89, 1992-95 and 2002-04.",
+   "check": "The site does not hold the earlier revisions and cannot check that list. It does show that the 2002-04 revisions are the base most states are mapped to now, which agrees with his last date. 'No political party has ever opposed this process' was already contradicted when he spoke: parties had challenged the current revision in the Supreme Court from July 2025, and two Assemblies had passed resolutions against it.",
+   "site_counts": "Mapping years by state: 2002 (West Bengal, Kerala, Rajasthan, Gujarat, Goa), 2003 (Uttar Pradesh, Madhya Pradesh, Chhattisgarh, Bihar), 2005 and 2006 elsewhere (data/india/process.json, timeline 2025-10-27). Before 10 Dec 2025: a Trinamool Congress MP's petition (court-01, 6 Jul 2025), pleas by the DMK, CPI(M), Congress and Trinamool (court-09, 12 Nov 2025), the Samajwadi Party's (up-01, 9 Dec 2025), and resolutions in the Jharkhand and Kerala Assemblies (protest-01, protest-02) (data/india/disputes.json). By October 2026 the disputes page lists 42 court items, 2 Assembly resolutions and 34 protests."
+  },
+  "note": "Verbatim in PIB release 2201968 (the ellipsis spans his list of revisions; PIB gives '1992-93-95'), as reported speech; relies_on corrected. The check cited the disputes counts as they stand in Oct 2026 (42 courts, 2 resolutions, 34 protests, all confirmed in data/india/disputes.json), but he spoke on 10 Dec 2025. Items dated before then already contradict him: court-01 (a Trinamool Congress MP's petition, 6 Jul 2025), court-09 (DMK, CPI(M), Congress and Trinamool pleas, 12 Nov 2025), up-01 (Samajwadi Party, 9 Dec 2025), and the Jharkhand (26 Aug 2025) and Kerala (29 Sep 2025) Assembly resolutions. Check reworded to use those. Mapping years checked in process.json timeline 2025-10-27."
+ },
+ {
+  "person": "Amit Shah",
+  "claim_index": 4,
+  "status": "corrected",
+  "fix": {
+   "check": "The West Bengal records do not support reading the removals as infiltrators. The largest single reason entered at the draft is death. As reported, the adjudication found 27,16,393 not eligible without a published reason, and 22,21,118 appeals were filed by people excluded.",
+   "site_counts": "West Bengal: 58,20,899 left off the draft, 24,16,852 entered as dead, 32,65,719 shifted, absent or other, 1,38,328 duplicate (data/india/states.json, West Bengal row). Under adjudication 60,06,675; as reported, 32,68,119 found eligible and 27,16,393 not eligible, with 22,21,118 appeals by the excluded, 16,10,311 against inclusion and 37,05,235 pending (data/westbengal/summary.json, adj)."
+  },
+  "note": "Opened the Express (Tanusree Bose, 16 Apr 2026, Kolkata) and The Telegraph; both renderings verbatim as given, so the translation note is right; Express says 'over 89 lakh', Telegraph 'nearly 91 lakh'. West Bengal figures checked in data/india/states.json (removed 58,20,899, dead 24,16,852, shifted_absent_other 32,65,719 of which shifted 19,88,076, absent 12,20,039, other 57,604; duplicate 1,38,328; so death is the largest single reason) and data/westbengal/summary.json adj. CLAUDE.md requires adjudication outcomes to be called 'as reported', and the check's 'more than 22 lakh of them and others appealed' muddled the two appeal counts; reworded."
+ },
+ {
+  "person": "Yogi Adityanath",
+  "claim_index": 0,
+  "status": "corrected",
+  "fix": {
+   "piece": "ya-bs-video-dec14",
+   "quote": "18 वर्ष से ऊपर का मतदाता मतदाता सूची में नाम होना चाहिए। तो यह संख्या होनी चाहिए 16 करोड़। और मतदाता सूची में एसआईआर के बाद जो मतदाता सूची में नाम आए हैं वो कितने आए हैं? 12 करोड़। यह 4 करोड़ का जो गैप है 2025 की जो मतदाता सूची थी जनवरी 2025 की उसमें कुल नाम थे 15 करोड़ 44 लाख",
+   "relies_on": "His own speech at the BJP state convention in Lucknow on 14 December 2025, from the full video (Bharat Samachar, YouTube). His arithmetic: a population of about 25 crore times 64 to 65 per cent adults, set against the enumeration forms collected by mid-December 2025. The Navbharat Times text first proposed is PTI-Bhasha reported speech ('कहा कि ...'), not his words."
+  },
+  "note": "Opened the Navbharat Times page: it is PTI-Bhasha copy and the proposed quote is reported speech ('कहा कि', 'सीएम योगी ने कहा कि'), so it cannot stand as his words. Found and opened the full 33:55 video of the speech, uploaded 14 Dec 2025 by Bharat Samachar (https://www.youtube.com/watch?v=kQ50-8RMh8M, title \"CM Yogi Speech : 'यूपी में चार करोड़ मतदाता मिसिंग', SIR की प्रक्रिया पर CM Yogi ने जताई चिंता\"), with auto-captions; the new quote is his own words from the captions, punctuation added. Add a piece with id ya-bs-video-dec14 (that title, outlet Bharat Samachar on YouTube, full video of the speech, date 2025-12-14, that url). Replace the translation with: 'Every voter over 18 should be on the roll, so this number should be 16 crore. And how many names have come onto the roll after the SIR? 12 crore. This gap of 4 crore. The roll of January 2025 had 15 crore 44 lakh names.' In the video the gap is 16 crore less 12 crore, and he then says the roll fell from 15 crore 44 lakh to 12 crore, so the check's 'mixes two comparisons' is right. Checked every figure: roll_before 154430092, draft 125556025, left_off 28874067, per_100 18.70, final 133984792 (10 April 2026 in raw/sir_state_summary.csv), net_rise 8428767 in data/uttarpradesh/summary.json; adults_2026 161685000 and 95.51/77.65/82.87 per 100 adults in analysis.json rolls; 16,16,85,000 less the draft is 3.61 crore. All right. Note his 12 crore was forms collected by 14 December, three weeks before the draft; the check's 'close to his 12 crore' is fair as worded."
+ },
+ {
+  "person": "Yogi Adityanath",
+  "claim_index": 1,
+  "status": "corrected",
+  "fix": {
+   "piece": "ya-bs-video-dec14",
+   "quote": "यह जो 4 करोड़ का गैप है, यह मिसिंग है। यह आपका विरोधी नहीं है। इसमें से 85 से 90% आपका मतदाता है।",
+   "relies_on": "No source given. His own words in the video of the speech. The Hindustan Times quotes it in English as 'Eighty-five to 90 per cent of these missing voters are ours'; The Indian Express's '90 per cent' does not match the video."
+  },
+  "note": "The Navbharat Times line is again PTI-Bhasha reported speech. The video (Bharat Samachar, YouTube, kQ50-8RMh8M) has him say, verbatim in the captions, 'यह जो 4 करोड़ का गैप है, यह मिसिंग है। यह आपका विरोधी नहीं है। इसमें से 85 से 90% आपका मतदाता है। याद करना आपका मतदाता है'. So '85 to 90' is his figure and the Express's '90 per cent' is wrong. Translation: 'This gap of 4 crore is missing. It is not your opponent. 85 to 90 per cent of it is your voter.' Checked the HT article: it prints the English line in quotation marks, as its translation. Site figures right: urban 28.12 and rural 15.25 per 100 (analysis.json urban, a press source, HT), Lucknow 30.04 (summary.json top), NDA 19.14 and SP alliance 17.69 per 100 (analysis.json margins.alliances). The check says nothing about how anyone voted and calls the seat spread a difference in places, which is right."
+ },
+ {
+  "person": "Yogi Adityanath",
+  "claim_index": 2,
+  "status": "corrected",
+  "fix": {
+   "piece": "ya-bs-video-dec14",
+   "quote": "देखिए मैं अभी गया था एक जनपद में। वहां की मतदाता सूची में जो एसआईआर के फॉर्म भरे हैं बहुत सारी विरोधियों ने उसमें कुछ बांग्लादेशियों के भी नाम है। आप मुझे बताइए एक जगह तो यह भी मैंने देखा एक सज्जन का नाम था उसकी उम्र 20 साल। उसके पिता की उम्र 30 साल और उसके ग्रैंडफादर की उम्र 40 साल।",
+   "relies_on": "His own visit to an unnamed district, in his own words in the video of the speech. No figure given.",
+   "check": "No published figure counts removals by citizenship. The draft roll's reasons, as officers entered them, are dead, untraceable or absent, permanently shifted, enrolled more than once and others (summary.json, reasons). After the draft, 8,15,996 more names came off; the press reported 2,069 of them recorded as under age or not citizens (data/uttarpradesh/raw/sir_state_summary.csv, removed_after_draft_underage_or_noncitizen, from The New Indian Express of 11 April 2026). That is what an officer wrote down, and nobody checked it. Electors whose link to the old roll showed a mismatch were sent a 'logical discrepancy' notice; the site has found no Commission document defining the category (data/india/process.json, gaps), and the press reported 2.22 crore such notices in Uttar Pradesh (data/india/notices.json, discrepancy, press)."
+  },
+  "note": "The Navbharat Times passage mixes the paper's reported speech with a quoted fragment. The video (Bharat Samachar, YouTube, kQ50-8RMh8M) has the whole passage in his words; the new quote is from the captions with one repeated 'उसके' dropped. Translation: 'Look, I just went to a district. In the SIR forms filled in the roll there, many by opponents, there are names of some Bangladeshis too. Tell me, in one place I even saw a gentleman's name, his age 20, his father's age 30 and his grandfather's age 40.' He goes on to a voter from Nagaon in Assam enrolled in Sambhal. Corrected the check: 'age gaps between generations are the kind of mismatch the logical discrepancy check flags' is not in the site's files; process.json lists the Commission's definition of the category among the documents not found, and the Supreme Court order of 19 January 2026 describes it only as a mismatch in the link to the old roll. Other figures right: reasons 4623796 / 7952190 / 12977472 / 2547207 / 773402 (summary.json); removed after draft 815996 and 2069 under age or not citizens (analysis.json notices.removed_after, press); discrepancy 22200000 press in notices.json. The check makes no claim about anyone's citizenship."
+ },
+ {
+  "person": "Yogi Adityanath",
+  "claim_index": 3,
+  "status": "corrected",
+  "fix": {
+   "piece": "ya-x-oct5-post",
+   "quote": "सभी जागरूक मतदाता ध्यान रखें कि मतदाता सूची में अवैध रूप से दर्ज अपात्र नामों की पहचान कर उन्हें नियमानुसार हटाना भारत की सुरक्षा, एकता और अखंडता के लिए अनिवार्य है।",
+   "relies_on": "His own post on X of 5 October 2026. The same post says 'मृतक, स्थायी रूप से स्थानांतरित और डुप्लीकेट प्रविष्टियों का नियमानुसार सत्यापन आवश्यक है' (verification of dead, permanently shifted and duplicate entries according to the rules is necessary).",
+   "check": "The reasons officers wrote down at the draft are almost all about people who died, moved or are listed twice, and none is named as illegal inclusion. Dead were 16.0 per cent of the names left off, untraceable or absent 27.5, shifted 44.9, enrolled more than once 8.8 and others 2.7 (summary.json, shares). The one reason near his word 'illegally', under age or not a citizen, covered 2,069 names after the draft, as reported. The largest group of those who came off after the draft were people sent a notice who did not answer: 3,50,026 of 8,15,996, press (analysis.json, notices.removed_after.no_response)."
+  },
+  "note": "Opened the post itself: https://x.com/myogiadityanath/status/2106931616304230759, by @myogiadityanath, posted 2026-10-05T02:16:56Z (07:46 IST). The new quote is verbatim from it. Add a piece ya-x-oct5-post (Yogi Adityanath on X, 2026-10-05, that url); ThePrint/PTI can stay as a second reference. Translation: 'Every aware voter should keep in mind that identifying ineligible names illegally entered in the voter list and removing them according to the rules is essential for India's security, unity and integrity.' PTI's rendering ('Identifying ineligible names illegally included ... as per rules is essential for India's security, unity and integrity') is a fair translation but drops 'सभी जागरूक मतदाता ध्यान रखें'. ThePrint page opens, PTI, 05 October 2026 10:45 IST. Corrected the check: 3,50,026 of 8,15,996 is 43 per cent, not 'most'; it is the largest of the five groups (shifted 3,28,960 next). Shares 16.01/27.54/44.95/8.82/2.68 and notices.all 3,26,00,000 confirmed in summary.json and analysis.json."
+ },
+ {
+  "person": "Mamata Banerjee",
+  "claim_index": 0,
+  "status": "corrected",
+  "fix": {
+   "check": "The fact about the process held when she said it. Assam was given a 'Special Revision' with no forms and no link to an earlier roll, by the Commission's order of 17 November 2025, and never had an SIR (data/india/process.json, timeline 'Assam gets a different revision'; data/assam/summary.json). The North-East was added later: the order of 14 May 2026 put Manipur, Meghalaya, Mizoram, Nagaland, Arunachal Pradesh, Sikkim and Tripura in the third phase (process.json, schedules). Tripura's enumeration ran 15 September to 14 October 2026 and its draft is due on 21 October. Her claims about fake votes in Assam and about who crosses through Tripura are not things the site's records can test."
+  },
+  "note": "Opened the News18 Bangla page (Abir Ghoshal, 4 November 2025, 7:47 PM IST): the quote is verbatim and inside the paper's quotation marks as her words at the end of the anti-SIR march in Kolkata. Translation fair ('আসলে অসমে ভুয়ো ভোটে জেতেন' is 'in fact you win Assam on fake votes'). process.json: the 27 October 2025 order lists twelve states and UTs without Assam or the North-East; Assam timeline entry of 17 November 2025; all seven North-East states have 'Order of 14.05.2026' phase III schedules; Tripura enum 2026-09-15 to 2026-10-14, draft 2026-10-21. Assam flagged 1,056,291 in data/assam/summary.json. Only change: the Commission's instrument of 17 November is an order (as process.json and the Assam build describe it), not a letter. The check says nothing about anyone's citizenship."
+ },
+ {
+  "person": "Mamata Banerjee",
+  "claim_index": 1,
+  "status": "corrected",
+  "fix": {
+   "piece": "mb-nie-nov20",
+   "quote": "Several others have lost their lives since this process began. A revision that previously required three years is now being forcibly compressed into three months, subjecting BLOs and officials to inhuman working conditions and forcing common people under the shadow of fear and uncertainty.",
+   "relies_on": "Her letter to the Chief Election Commissioner of 20 November 2025, as quoted at length by The New Indian Express; the same wording ('A revision that previously required three years is now being forcibly ...') is in the agency copy carried by Big News Network. The letter itself is an image on her X post of 21 November 2025, which could not be read."
+  },
+  "note": "The Telegraph's line is not her wording: its 'a revision that earlier took three years is now being forced into three months' paraphrases the letter and its ellipsis joins two consecutive sentences. Opened The New Indian Express, 20 November 2025, Subhendu Maiti, 'Bengal CM Mamata blames SIR pressure for BLO deaths; urges EC to halt drive in Bengal' (https://www.newindianexpress.com/india/2025/Nov/20/bengal-cm-mamata-blames-sir-pressure-for-blo-deaths-urges-ec-to-halt-drive-in-bengal), which prints the letter: 'The human cost of this mismanagement is now unbearable. Several others have lost their lives since this process began. A revision that previously required three years is now being forcibly compressed into three months, subjecting BLOs ...'. Search excerpts from Big News Network (ANI), Deccan Chronicle and The Indian Express agree. Add piece mb-nie-nov20 with those details. Opened her X post (https://x.com/MamataOfficial/status/1991711174526922987, 2025-11-21T03:32Z): text only 'Sharing herewith my latest letter...', the image could not be extracted, and no AITC transcript was found. Check confirmed against process.json: first order enum 4 Nov to 4 Dec, final 7 Feb 2026; order of 30.11.2025 enum to 11 Dec, draft 16 Dec, final 14 Feb; published final 28 Feb 2026; 60,06,675 under adjudication (summary.json pn05.adjudication). Two West Bengal items in disputes.json deaths, dated 11 and 21 January 2026, both after the letter."
+ },
+ {
+  "person": "Mamata Banerjee",
+  "claim_index": 2,
+  "status": "corrected",
+  "fix": {
+   "relies_on": "No list given in the report. The figure rose over the weeks: on 2 December 2025, announcing Rs 2 lakh for each family, she gave 39 deaths (PTI, as carried by The Week and others).",
+   "check": "No official count of deaths linked to the revision has been published, so neither 110 nor three to four a day can be checked. The site's list of deaths reported during the revision has eight items across India, two of them about West Bengal: a 75-year-old man who died after falling ill in a hearing queue in Birbhum (the same report mentions an elderly man who died at a hearing in Howrah the day before), and an 82-year-old man in Purulia whose son filed an FIR after he died, allegedly by suicide, hours before a hearing (data/india/disputes.json, section deaths, 11 and 21 January 2026). Each is a press report of what a family alleged."
+  },
+  "note": "Opened The Hindu (PTI, 23 January 2026, 01:47 pm IST, Kolkata): body has, in quotation marks, 'More than 110 people have already died; every day, three to four people are dying out of SIR anxiety'; the page description has 'taking their own lives', as the first reader said. Quote verbatim, attribution right. The 39 figure in relies_on is confirmed by search excerpts of PTI (The Week, 2 December 2025), Times of India and Deccan Herald, all on the compensation announcement; reworded so it no longer says the pages were not opened. Check: the Birbhum item in disputes.json also reports a second death (Howrah), added so the check does not understate what the list holds. Site keeps no running count, confirmed."
+ },
+ {
+  "person": "Mamata Banerjee",
+  "claim_index": 3,
+  "status": "confirmed",
+  "note": "Opened The Indian Express (Express News Service, Kolkata, 27 September 2026, updated 08:04 IST): the two sentences are verbatim inside quotation marks as her words at a rally in Serampore, Hooghly, followed by 'The government should compensate for the loss of those whose names were struck off'. Likely spoken in Bengali; the English is the paper's. Arithmetic checked against data/westbengal/summary.json and raw/adjudication_state.csv: pn05.removed 58,20,899 + pn05.form7 5,46,053 + adj.found_not_eligible 27,16,393 = 90,83,345; with all 60,06,675 under adjudication instead, 1,23,73,627 (1.24 crore). found_eligible 32,68,119 and not eligible 27,16,393 are 'reported' in the CSV, which the check says. fall 77,58,998 = roll_2024 7,60,10,006 less election 6,82,51,008; over_margin 139, could_change 132 of 294. The check uses only the fall below the state, calls adjudication outcomes state totals as reported, says the removals could have decided a seat and never that they did, and makes no claim about intent."
+ }
 ]
