@@ -1,23 +1,23 @@
-<!--page {"title": "People, Bihar 2025", "description": "Who Bihar's SIR removed, with women set against their share of the roll in every district, religion guessed from names as a range against the census, and caste read from surnames under two classifications.", "place": "bihar"} -->
+<!--page {"title": "People, Bihar 2025", "description": "Who Bihar's SIR left off the draft or deleted after it, with women set against their share of the roll in every district, religion guessed from names as a range against the census, and caste read from surnames under two classifications.", "place": "bihar"} -->
 <main id="main">
 <div class="page-head"><h1>People</h1><ol class="summary" id="short"></ol></div>
   <h2>Gender</h2>
   <div class="kpis" id="kGender"></div>
   <div class="grid">
     <div class="panel">
-      <h3>Women among the removed, by district</h3>
-      <p>Each district's share of women among those removed, against women's share of its roll before the revision. The roll before is the draft roll plus the names removed in phase 1. A point above the line is a district where women were removed out of proportion.</p>
-      <div class="chart"><canvas id="cGender" aria-label="Women's share of removals against population share, by district"></canvas></div>
+      <h3 id="women-among-the-removed-by-district">Women among the names left off or deleted, by district</h3>
+      <p>Each district's share of women among the names left off or deleted, against women's share of its roll before the revision. The roll before is the draft roll plus the names left off it in phase 1. A point above the line is a district where women were left off or deleted out of proportion.</p>
+      <div class="chart"><canvas id="cGender" aria-label="Women's share of names left off or deleted against population share, by district"></canvas></div>
     </div>
     <div class="panel">
       <h3>By the alliance that won the seat in 2025</h3>
-      <p>Women's share of removals in each group of seats.</p>
-      <div class="chart"><canvas id="cGenderAl" aria-label="Women's share of removals by 2025 alliance"></canvas></div>
+      <p>Women's share of the names left off or deleted in each group of seats.</p>
+      <div class="chart"><canvas id="cGenderAl" aria-label="Women's share of names left off or deleted by 2025 alliance"></canvas></div>
     </div>
     <div class="panel wide">
       <h3>Women's share of each reason, by age</h3>
-      <p>Every phase 1 removal has one of four reasons against it, which is what the officer wrote down, and nobody checked it. For each reason and age group, the chart shows the share of those removed who were women. At 50% women and men would be removed equally.</p>
-      <div class="chart"><canvas id="cGenderReason" aria-label="Women's share of removals for each reason, by age group"></canvas></div>
+      <p>Every name left off the draft in phase 1 has one of four reasons against it, which is what the officer wrote down, and nobody checked it. For each reason and age group, the chart shows the share of those left off who were women. At 50% women and men would be left off equally.</p>
+      <div class="chart"><canvas id="cGenderReason" aria-label="Women's share of names left off the draft for each reason, by age group"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fGender"></p>
@@ -36,13 +36,13 @@
   <p class="finding" id="fMarr"></p>
 
   <h2>Religion</h2>
-  <p class="sub">The roll does not record religion, so it is guessed from names. The booth lists classify each removed elector's name as Hindu, Muslim or unclassified. An unclassified name could be either, so the Muslim share is given as a range, from counting none of them as Muslim to counting all of them.</p>
+  <p class="sub">The roll does not record religion, so it is guessed from names. The booth lists classify the name of each elector left off the draft as Hindu, Muslim or unclassified. An unclassified name could be either, so the Muslim share is given as a range, from counting none of them as Muslim to counting all of them.</p>
   <div class="kpis" id="kRel"></div>
   <div class="grid">
     <div class="panel wide">
-      <h3>Muslim share of removals against the 2011 census, by district</h3>
-      <p>The bar is the range guessed from names. The dark dot is the district's Muslim share of the population in 2011, and the open dot is that share carried forward to 2025. Where a dot sits inside the bar, the removals are in line with the population.</p>
-      <div class="chart rows"><canvas id="cRel" aria-label="Muslim share of removals, range, against census share by district"></canvas></div>
+      <h3 id="muslim-share-of-removals-against-the-2011-census-by-district">Muslim share of names left off the draft against the 2011 census, by district</h3>
+      <p>The bar is the range guessed from names. The dark dot is the district's Muslim share of the population in 2011, and the open dot is that share carried forward to 2025. Where a dot sits inside the bar, the names left off the draft are in line with the population.</p>
+      <div class="chart rows"><canvas id="cRel" aria-label="Muslim share of names left off the draft, range, against census share by district"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fRel"></p>
@@ -50,29 +50,29 @@
   <p class="note" style="margin-top:0;border:0;padding-top:0">The 2011 census is the most recent count of religion by district. The 2025 figures carry each district's 2011 share forward at the growth rates of its Muslim and total populations between the 2001 and 2011 censuses. Jehanabad and Arwal were one district in 2001, so both take their joint rate.</p>
 
   <h2>Caste</h2>
-  <p class="sub">The roll does not record caste. The lists give a surname for each removed elector and for the father or husband named beside them. The father's or husband's surname tells more, because most women are listed as Devi, Kumari or Khatun, which say nothing about caste. Surnames are classified in two ways. Classification A is a broad mapping of surnames to castes. Classification B is strict and counts only surnames that belong almost entirely to one group, setting aside names such as Singh, Prasad, Ray, Mahato, Mandal, Sharma, Thakur, Chaudhary and Manjhi, which several groups carry. Only findings that hold under both are reported.</p>
+  <p class="sub">The roll does not record caste. The lists give a surname for each elector left off the draft and for the father or husband named beside them. The father's or husband's surname tells more, because most women are listed as Devi, Kumari or Khatun, which say nothing about caste. Surnames are classified in two ways. Classification A is a broad mapping of surnames to castes. Classification B is strict and counts only surnames that belong almost entirely to one group, setting aside names such as Singh, Prasad, Ray, Mahato, Mandal, Sharma, Thakur, Chaudhary and Manjhi, which several groups carry. Only findings that hold under both are reported.</p>
   <div class="controls"><span class="pill">Surname of</span><div class="seg" role="group" aria-label="Surname of"><button type="button" data-who="guardian" aria-pressed="true">Guardian</button><button type="button" data-who="own" aria-pressed="false">Elector</button></div></div>
   <div class="grid">
     <div class="panel">
-      <h3>How many removals each classification can place</h3>
-      <p>The share of all removals each classification could place, and why the rest could not be placed.</p>
+      <h3 id="how-many-removals-each-classification-can-place">How many names left off the draft each classification can place</h3>
+      <p>The share of all names left off the draft each classification could place, and why the rest could not be placed.</p>
       <div class="chart"><canvas id="cCover" aria-label="Classification coverage"></canvas></div>
     </div>
     <div class="panel">
       <h3>Composition of the classified, against the 2023 survey</h3>
-      <p>Each group's share of the removals that could be classified, under A and B, beside its share of Bihar's population in the 2023 caste survey. Hindu castes are shown separately and Muslims as one group.</p>
-      <div class="chart"><canvas id="cComp" aria-label="Group shares of classified removals against survey"></canvas></div>
+      <p>Each group's share of the names left off the draft that could be classified, under A and B, beside its share of Bihar's population in the 2023 caste survey. Hindu castes are shown separately and Muslims as one group.</p>
+      <div class="chart"><canvas id="cComp" aria-label="Group shares of classified names left off the draft against survey"></canvas></div>
     </div>
     <div class="panel wide">
-      <h3>Each group's possible share of all removals</h3>
+      <h3 id="each-group-s-possible-share-of-all-removals">Each group's possible share of all names left off the draft</h3>
       <p>Under the strict classification B, the left end counts only names placed in the group and the right end adds every name that could not be placed.</p>
-      <div class="chart short"><canvas id="cBounds" aria-label="Bounds on group shares of all removals"></canvas></div>
+      <div class="chart short"><canvas id="cBounds" aria-label="Bounds on group shares of all names left off the draft"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fCaste"></p>
-  <h3 style="margin-top:18px">The 25 commonest surnames among the removed</h3>
+  <h3 style="margin-top:18px" id="the-25-commonest-surnames-among-the-removed">The 25 commonest surnames among the names left off the draft</h3>
   <div class="twrap" tabindex="0" role="region" aria-label="Commonest surnames"><table id="tSur"></table></div>
-  <p class="note" style="margin-top:12px">These are shares of the removed. To turn them into removal rates, the same surnames would have to be counted on the draft roll. Even a sample of booths would give each caste group its own removal rate, the share of its electors who were struck off.</p>
+  <p class="note" style="margin-top:12px">These are shares of the names left off the draft. To turn them into rates, the same surnames would have to be counted on the roll before the revision. Even a sample of booths would give each caste group its own rate, the share of its electors who were left off the draft.</p>
   <p class="note">The caste baseline is the Bihar caste-based survey released on 2 October 2023. It counted 13,07,25,310 people, of whom 36.01% were EBC, 27.12% BC, 19.65% SC, 1.68% ST and 15.52% unreserved, with Muslims at 17.70%. Muslim castes listed under EBC (10.29 points), BC (2.09) and unreserved (4.80) are moved to the Muslim group here, which leaves the Hindu castes at EBC 25.72, BC 25.03 and General 10.72. The strict classification gives a surname to a group only if almost everyone carrying it belongs to that group.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
@@ -87,35 +87,35 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
   // ---- gender
   var fs = 100 * t.female / (t.female + t.male), popF = t.female_share_roll;
   var above = D.filter(function (d) { return d.female_share_deleted > d.female_share_roll; }).length;
-  document.getElementById('kGender').innerHTML = [[SIR.pct(fs), L('of those removed were women')], [SIR.pct(popF, 2), L('women on the roll before the revision')],
-    [L('{a} of {b}', { a: above, b: D.length }), L('districts where women were removed out of proportion')], [SIR.n(t.female - t.male), L('more women than men removed, both phases')]]
+  document.getElementById('kGender').innerHTML = [[SIR.pct(fs), L('of those left off or deleted were women')], [SIR.pct(popF, 2), L('women on the roll before the revision')],
+    [L('{a} of {b}', { a: above, b: D.length }), L('districts where women were left off or deleted out of proportion')], [SIR.n(t.female - t.male), L('more women than men left off the draft or deleted after it')]]
     .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   SIR.chart('cGender', { type: 'scatter', data: { datasets: [
       { label: L('District'), data: D.map(function (d) { return { x: d.female_share_roll, y: d.female_share_deleted, n: d.district }; }), $token: '--female', pointRadius: 4 },
       { label: L('Equal share'), type: 'line', data: [{ x: 46, y: 46 }, { x: 51, y: 51 }], $token: '--fill-grey', pointRadius: 0, borderDash: [4, 4] }] },
-    options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n ? L('{n}: {y}% of removals, {x}% of population', { n: c.raw.n, y: c.raw.y, x: c.raw.x }) : ''; } } } },
-      scales: { x: { min: 46, max: 51, title: { display: true, text: L('Women, % of the roll before the revision') } }, y: { min: 46, max: 63, title: { display: true, text: L('Women, % of removals') } } } } });
+    options: { plugins: { tooltip: { callbacks: { label: function (c) { return c.raw.n ? L('{n}: {y}% of names left off or deleted, {x}% of population', { n: c.raw.n, y: c.raw.y, x: c.raw.x }) : ''; } } } },
+      scales: { x: { min: 46, max: 51, title: { display: true, text: L('Women, % of the roll before the revision') } }, y: { min: 46, max: 63, title: { display: true, text: L('Women, % of names left off or deleted') } } } } });
   var G = SIR.groupBy(acs, 'al2025'), als = ['NDA', 'INDIA', 'Other'], ALN = { Other: L('Other') };
   SIR.chart('cGenderAl', { type: 'bar', data: { labels: als.map(function (a) { return (ALN[a] || a) + ' (' + G[a].length + ')'; }), datasets: [{ label: L('Women %'), data: als.map(function (a) { return 100 * SIR.sum(G[a], 't_f') / (SIR.sum(G[a], 't_f') + SIR.sum(G[a], 't_m')); }), $tokens: als.map(function (a) { return SIR.alliance[a]; }) }] },
-    options: { plugins: { legend: { display: false } }, scales: { y: { min: 40, title: { display: true, text: L('Women, % of removals') } } } } });
+    options: { plugins: { legend: { display: false } }, scales: { y: { min: 40, title: { display: true, text: L('Women, % of names left off or deleted') } } } } });
   var RK = ['shifted', 'absent', 'already_enrolled', 'dead'], RN = { dead: L('Dead'), shifted: L('Shifted'), absent: L('Absent'), already_enrolled: L('Already enrolled') }, RC = { dead: '--muted', shifted: '--navy', absent: '--red', already_enrolled: '--amber' };
   SIR.chart('cGenderReason', { type: 'line', data: { labels: RS.bands, datasets: RK.map(function (k) { return { label: RN[k], data: RS.by_age[k].map(function (v, i) { return +(100 * RS.by_age_women[k][i] / v).toFixed(1); }), $token: RC[k], borderWidth: 2, pointRadius: 3, borderDash: k === 'dead' ? [4, 4] : undefined }; }) },
-    options: { scales: { x: { title: { display: true, text: L('Age') } }, y: { min: 40, max: 80, title: { display: true, text: L('Women, % of removals') } } } } });
+    options: { scales: { x: { title: { display: true, text: L('Age') } }, y: { min: 40, max: 80, title: { display: true, text: L('Women, % of names left off the draft') } } } } });
   var xsF = SIR.sum(RK, function (k) { return RS.by_sex[k].F - RS.by_sex[k].M; }), xsS = RS.by_sex.shifted.F - RS.by_sex.shifted.M;
   var yS = RS.by_age.shifted[0] + RS.by_age.shifted[1], yW = RS.by_age_women.shifted[0] + RS.by_age_women.shifted[1];
   var gaps = D.map(function (d) { return d.female_share_deleted - d.female_share_roll; });
-  document.getElementById('fGender').innerHTML = L('<b>Women were removed out of proportion in {a} of {b} districts</b>, by {lo} to {hi} points above their share of the roll they were removed from. The roll records sex, so this needs no guessing from names. Phase 1 removed {xs} more women than men, and {xs_shifted} of that difference were marked shifted. Among those marked shifted at ages 18 to 29, {young} are women. Marriage could account for that number. It does not account for where it falls, as the next section shows. The lists do not show whether any of these women were enrolled again where they now live.', { xs: SIR.n(xsF), xs_shifted: SIR.n(xsS), young: SIR.pct(100 * yW / yS), a: above, b: D.length, lo: SIR.d(Math.min.apply(null, gaps), 1), hi: SIR.d(Math.max.apply(null, gaps), 1) });
+  document.getElementById('fGender').innerHTML = L('<b>Women were left off or deleted out of proportion in {a} of {b} districts</b>, by {lo} to {hi} points above their share of the roll before the revision. The roll records sex, so this needs no guessing from names. {xs} more women than men were left off the draft in phase 1, and {xs_shifted} of that difference were marked shifted. Among those marked shifted at ages 18 to 29, {young} are women. Marriage could account for that number. It does not account for where it falls, as the next section shows. The lists do not show whether any of these women were enrolled again where they now live.', { xs: SIR.n(xsF), xs_shifted: SIR.n(xsS), young: SIR.pct(100 * yW / yS), a: above, b: D.length, lo: SIR.d(Math.min.apply(null, gaps), 1), hi: SIR.d(Math.max.apply(null, gaps), 1) });
 
   // ---- religion
   var cls = t.hindu + t.muslim + t.unknown, lo = 100 * t.muslim / cls, hi = 100 * (t.muslim + t.unknown) / cls;
-  document.getElementById('kRel').innerHTML = [[L('{lo} to {hi}', { lo: SIR.pct(lo), hi: SIR.pct(hi) }), L('Muslim-name share of removals')], ['16.87%', L('Muslim share of population, 2011')], ['17.70%', L('Muslim share, 2023 caste survey')], [SIR.pct(100 * t.unknown / cls), L('of removed names unclassified')]]
+  document.getElementById('kRel').innerHTML = [[L('{lo} to {hi}', { lo: SIR.pct(lo), hi: SIR.pct(hi) }), L('Muslim-name share of names left off the draft')], ['16.87%', L('Muslim share of population, 2011')], ['17.70%', L('Muslim share, 2023 caste survey')], [SIR.pct(100 * t.unknown / cls), L('of names left off the draft unclassified')]]
     .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   var Ds = D.slice().sort(function (a, b) { return b.muslim_share_population_2011 - a.muslim_share_population_2011; });
   SIR.chart('cRel', { type: 'bar', data: { labels: Ds.map(function (d) { return d.district; }), datasets: [
-      { type: 'bar', label: L('Muslim-name share of removals (range)'), data: Ds.map(function (d) { return [d.muslim_share_deleted_low, d.muslim_share_deleted_high]; }), $token: '--fill-other', barPercentage: 0.75, order: 2 },
+      { type: 'bar', label: L('Muslim-name share of names left off the draft (range)'), data: Ds.map(function (d) { return [d.muslim_share_deleted_low, d.muslim_share_deleted_high]; }), $token: '--fill-other', barPercentage: 0.75, order: 2 },
       { type: 'line', label: L('Muslim share of population, 2011'), data: Ds.map(function (d) { return d.muslim_share_population_2011; }), showLine: false, $token: '--ink', pointRadius: 4, pointHoverRadius: 5, order: 1 },
       { type: 'line', label: L('Muslim share of population, carried forward to 2025'), data: Ds.map(function (d) { return d.muslim_share_projected_2025; }), showLine: false, $token: '--ink', pointStyle: 'circle', pointRadius: 4, pointHoverRadius: 5, pointBackgroundColor: 'rgba(0,0,0,0)', borderWidth: 1.5, order: 0 }] },
-    options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('% of removals, and % of population') } } } } });
+    options: { indexAxis: 'y', scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('% of names left off the draft, and % of population') } } } } });
   var pin = D.filter(function (d) { return d.muslim_share_projected_2025 >= d.muslim_share_deleted_low && d.muslim_share_projected_2025 <= d.muslim_share_deleted_high; });
   var pclear = D.filter(function (d) { return d.muslim_share_deleted_low - d.muslim_share_projected_2025 > 1; });
   document.getElementById('fProj').innerHTML = L('<b>Carried forward to 2025, the census shares give much the same picture.</b> At each district\'s growth rates from 2001 to 2011, Bihar\'s Muslim share comes to {st} in 2025, close to the {sv} counted by the 2023 caste survey, and no district moves by more than {mx} points. On the 2025 shares the range holds the population share in {inside} of {n} districts, and the lowest estimate is more than a point above it in {clear} districts ({list}).', { st: SIR.pct(id.muslim_projected_2025), sv: SIR.pct(id.survey_baseline.Muslim), mx: SIR.d(Math.max.apply(null, D.map(function (d) { return Math.abs(d.muslim_share_projected_2025 - d.muslim_share_population_2011); })), 1), inside: pin.length, n: D.length, clear: pclear.length, list: pclear.map(function (d) { return d.district; }).join(', ') });
@@ -123,7 +123,7 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
   var over = D.filter(function (d) { return d.muslim_share_deleted_low > d.muslim_share_population_2011; });
   var clear = over.filter(function (d) { return d.muslim_share_deleted_low - d.muslim_share_population_2011 > 1; }).sort(function (a, b) { return (b.muslim_share_deleted_low / b.muslim_share_population_2011) - (a.muslim_share_deleted_low / a.muslim_share_population_2011); });
   var rr = clear.map(function (d) { return d.muslim_share_deleted_low / d.muslim_share_population_2011; });
-  document.getElementById('fRel').innerHTML = L('<b>For the state as a whole the range, {lo} to {hi}, includes the 2011 share of 16.87%. District by district it often does not.</b> The census share falls inside the range in {inside} of {n} districts. In the other {over}, more Muslim-name electors were removed than the 2011 share would predict, even if none of the unclassified names is counted. Most of those gaps are a point or less. <b>In {clear} districts the gap is more than a point.</b> They are {list}. All {clear} are in south and central Bihar, where Muslims are a small minority, and there even the low end of the range is {rmin} to {rmax}% above the population share. Muslims in Bihar are younger than average, so their share of <em>electors</em> is smaller than their share of the population, and that would make these gaps wider. Migration into Patna and mistakes in name classification could make them narrower.', { lo: SIR.pct(lo), hi: SIR.pct(hi), inside: inside.length, n: D.length, over: over.length, clear: clear.length, list: clear.map(function (d) { return L('{d} ({lo} at least, against {pop})', { d: d.district, lo: SIR.pct(d.muslim_share_deleted_low), pop: SIR.pct(d.muslim_share_population_2011) }); }).join(', '), rmin: Math.round(100 * (Math.min.apply(null, rr) - 1)), rmax: Math.round(100 * (Math.max.apply(null, rr) - 1)) });
+  document.getElementById('fRel').innerHTML = L('<b>For the state as a whole the range, {lo} to {hi}, includes the 2011 share of 16.87%. District by district it often does not.</b> The census share falls inside the range in {inside} of {n} districts. In the other {over}, more Muslim-name electors were left off the draft than the 2011 share would predict, even if none of the unclassified names is counted. Most of those gaps are a point or less. <b>In {clear} districts the gap is more than a point.</b> They are {list}. All {clear} are in south and central Bihar, where Muslims are a small minority, and there even the low end of the range is {rmin} to {rmax}% above the population share. Muslims in Bihar are younger than average, so their share of <em>electors</em> is smaller than their share of the population, and that would make these gaps wider. Migration into Patna and mistakes in name classification could make them narrower.', { lo: SIR.pct(lo), hi: SIR.pct(hi), inside: inside.length, n: D.length, over: over.length, clear: clear.length, list: clear.map(function (d) { return L('{d} ({lo} at least, against {pop})', { d: d.district, lo: SIR.pct(d.muslim_share_deleted_low), pop: SIR.pct(d.muslim_share_population_2011) }); }).join(', '), rmin: Math.round(100 * (Math.min.apply(null, rr) - 1)), rmax: Math.round(100 * (Math.max.apply(null, rr) - 1)) });
 
   // ---- caste
   var C = id.caste, who = 'guardian', GR = ['General', 'BC', 'EBC', 'SC', 'ST', 'Muslim'], charts = {};
@@ -137,17 +137,17 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
         { label: L('Spans groups'), data: [c.A.cross_pct, c.B.cross_pct], $token: '--fill-amber' },
         { label: L('No caste information (Devi, Kumar…)'), data: [c.A.no_information_pct, c.B.no_information_pct], $token: '--fill-grey' },
         { label: L('Not in either list'), data: [c.A.unmatched_pct, c.B.unmatched_pct], $token: '--fill-other' }] },
-      options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: L('% of all removals') } }, y: { stacked: true } } } });
+      options: { indexAxis: 'y', scales: { x: { stacked: true, max: 100, title: { display: true, text: L('% of all names left off the draft') } }, y: { stacked: true } } } });
     charts.comp = SIR.chart('cComp', { type: 'bar', data: { labels: GR.map(gl), datasets: [
         { label: L('A: project mapping'), data: GR.map(function (g) { return c.A.groups[g].share_of_classified; }), $token: '--fill-other' },
         { label: L('B: strict'), data: GR.map(function (g) { return c.B.groups[g].share_of_classified; }), $token: '--fill-navy' },
         { label: L('2023 survey'), data: GR.map(function (g) { return c.B.groups[g].survey_share; }), $token: '--fill-grey' }] },
-      options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% of classified removals') } } } } });
+      options: { scales: { y: { beginAtZero: true, title: { display: true, text: L('% of classified names left off the draft') } } } } });
     charts.bounds = SIR.chart('cBounds', { type: 'bar', data: { labels: GR.map(gl), datasets: [
-        { label: L('Share of all removals, B (low to high)'), data: GR.map(function (g) { return [c.B.groups[g].share_low, c.B.groups[g].share_high]; }), $token: '--fill-navy' }] },
-      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { min: 0, max: 100, title: { display: true, text: L('% of all removals') } } } } });
+        { label: L('Share of all names left off the draft, B (low to high)'), data: GR.map(function (g) { return [c.B.groups[g].share_low, c.B.groups[g].share_high]; }), $token: '--fill-navy' }] },
+      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { min: 0, max: 100, title: { display: true, text: L('% of all names left off the draft') } } } } });
     SIR.table(document.getElementById('tSur'), [
-      { k: 'surname', label: L('Surname (as romanised in the lists)'), left: true }, { k: 'deleted', label: L('Removed'), fmt: SIR.n },
+      { k: 'surname', label: L('Surname (as romanised in the lists)'), left: true }, { k: 'deleted', label: L('Left off the draft'), fmt: SIR.n },
       { k: 'mapping', label: L('A: project mapping'), left: true }, { k: 'strict', label: L('B: strict'), left: true }
     ], c.top_surnames.map(function (x) { var nm = { none: L('no caste information'), cross: L('spans groups'), unmatched: L('not listed') }; return { surname: x.surname, deleted: x.deleted, mapping: nm[x.mapping] || x.mapping, strict: nm[x.strict] || x.strict }; }), { sort: 'deleted' });
     document.getElementById('fCaste').innerHTML = (function () {
@@ -160,10 +160,10 @@ Promise.all([SIR.json('data/bihar/identity.json'), SIR.json('data/bihar/constitu
       };
       var and = function (list) { var a = list.map(gl); return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + L(' and ') + a[a.length - 1]; };
       var ratios = ratioList(up.concat(down));
-      return L('<b>Under both classifications, {up} families are removed at or above their share of Bihar\'s population, and {down} families below it.</b>', { up: and(up), down: and(down) }) + ' ' +
+      return L('<b>Under both classifications, {up} families are left off the draft at or above their share of Bihar\'s population, and {down} families below it.</b>', { up: and(up), down: and(down) }) + ' ' +
         (who === 'guardian' ? L('Using the surnames of fathers and husbands, the ratios to the 2023 survey share are {ratios}.', { ratios: ratios }) : L('Using the electors\' own surnames, the ratios to the 2023 survey share are {ratios}.', { ratios: ratios })) +
         (split.length ? ' ' + (split.length > 1 ? L('The two classifications disagree on {list}, with ratios of {ratios}, so no reading is offered for those groups.', { list: and(split), ratios: ratioList(split) }) : L('The two classifications disagree on {list}, with ratios of {ratios}, so no reading is offered for that group.', { list: and(split), ratios: ratioList(split) })) : '') +
-        ' ' + L('Surnames shared by several castes cannot be placed, so these are shares of the removals each classification could place, {a} under A and {b} under B.', { a: SIR.pct(c.A.coverage_pct, 0), b: SIR.pct(c.B.coverage_pct, 0) });
+        ' ' + L('Surnames shared by several castes cannot be placed, so these are shares of the names left off the draft each classification could place, {a} under A and {b} under B.', { a: SIR.pct(c.A.coverage_pct, 0), b: SIR.pct(c.B.coverage_pct, 0) });
     })();
   }
   drawCaste();
