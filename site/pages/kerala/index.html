@@ -3,7 +3,7 @@
 <div class="page-head"><h1>Overview</h1><ol class="summary" id="short"></ol></div>
 
   <h2>Find a constituency or district</h2>
-  <p class="sub">Each constituency, the area that elects one member of the state assembly, is shaded by how much smaller its roll was at the draft than in January 2025, for every 100 electors on the January roll. The draft roll is the roll the revision published once names had been taken off. This fall in the roll is a different count from the names removed, as the district section below explains. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
+  <p class="sub">Each constituency, the area that elects one member of the state assembly, is shaded by how much smaller its roll was at the draft than in January 2025, for every 100 electors on the January roll. The draft roll is the roll the revision published once names had been left off it. This fall in the roll is a different count from the names left off the draft, as the district section below explains. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
@@ -115,7 +115,7 @@ Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/distric
         [L('Roll of January 2025'), SIR.n(d.roll_2025)], [L('Draft roll'), SIR.n(d.draft)], [L('Fall to the draft'), SIR.n(d.roll_2025 - d.draft)],
         [L('Per 100 electors'), SIR.d(d.draft_per_100, 1)], [L('Women\'s share of the fall'), SIR.pct(d.women_fall_pct)],
         [L('Roll of March 2026'), SIR.n(d.election)], [L('Fall by March 2026, per 100'), SIR.d(d.per_100, 1)], [L('Constituencies'), SIR.n(d.acs)]]) + '<p class="note">' + L('Its constituencies') + '</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
-      share: function (d) { return L('{d} district, Kerala. The draft roll was {f} names smaller than the January 2025 roll, {p} of every 100 electors, across {n} constituencies. The fall also counts people who died or moved, so it is not the same as the names struck off. These are counts from the Chief Electoral Officer\'s published rolls.', { d: d.district, f: SIR.n(d.roll_2025 - d.draft), p: SIR.d(d.draft_per_100, 1), n: d.acs }); },
+      share: function (d) { return L('{d} district, Kerala. The draft roll was {f} names smaller than the January 2025 roll, {p} of every 100 electors, across {n} constituencies. The fall also counts people who died or moved, so it is not the same as the names left off the draft. These are counts from the Chief Electoral Officer\'s published rolls.', { d: d.district, f: SIR.n(d.roll_2025 - d.draft), p: SIR.d(d.draft_per_100, 1), n: d.acs }); },
       pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); } };
     var F = SIR.finder('finder', { seatPages: true, districtPages: true, rows: A, more: [DSET], prompt: L('Find a constituency or district'), placeholder: L('Type a name, a number or a district'), key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
       card: function (a) { return SIR.facts([
@@ -123,7 +123,7 @@ Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/distric
         [L('Per 100 electors'), SIR.d(a.draft_per_100, 1)], [L('Women\'s share of the fall'), SIR.pct(a.women_fall_pct)],
         [L('Roll of March 2026'), SIR.n(a.election)], [L('Fall by March 2026, per 100'), SIR.d(a.per_100, 1)],
         [L('Won in 2026'), a.winner + ' · ' + L('margin {m}', { m: SIR.n(a.margin) })]]); },
-      share: function (a) { return L('{n}, Kerala. The draft roll was {f} names smaller than the January 2025 roll, {p} of every 100 electors, and women were {w} of that fall. The seat was won in 2026 by {m} votes. The fall also counts people who died or moved, so it is not the same as the names struck off. These are counts from the Chief Electoral Officer\'s published rolls.', { n: a.name, f: SIR.n(a.fall_draft), p: SIR.d(a.draft_per_100, 1), w: SIR.pct(a.women_fall_pct), m: SIR.n(a.margin) }); },
+      share: function (a) { return L('{n}, Kerala. The draft roll was {f} names smaller than the January 2025 roll, {p} of every 100 electors, and women were {w} of that fall. The seat was won in 2026 by {m} votes. The fall also counts people who died or moved, so it is not the same as the names left off the draft. These are counts from the Chief Electoral Officer\'s published rolls.', { n: a.name, f: SIR.n(a.fall_draft), p: SIR.d(a.draft_per_100, 1), w: SIR.pct(a.women_fall_pct), m: SIR.n(a.margin) }); },
       pick: function (a) { var b = document.getElementById('vMap'); if (b.__select) b.__select(a.ac); } });
     VIZ.map('vMap', { geo: geo, label: L('Map of the fall in the roll per 100 electors, January 2025 to the draft, by constituency'), title: L('Fall per 100 electors'), 
       v: function (ac) { return byAc[ac] ? byAc[ac].draft_per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },

@@ -22,7 +22,7 @@
       <p id="pMl"></p>
     </div>
     <div class="panel wide">
-      <h3>Every state, if its removals were spread evenly over its Lok Sabha seats</h3>
+      <h3 id="every-state-if-its-removals-were-spread-evenly-over-its-lok">Every state, if its names left off were spread evenly over its Lok Sabha seats</h3>
       <div class="vizbox" id="vMe"></div>
       <p id="pMe"></p>
     </div>
@@ -128,8 +128,8 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   var LS14 = LS.rows.filter(function (r) { return r.election === '2014'; })[0], LS24 = LS.rows[LS.rows.length - 1], gain10 = LS24.electors - LS14.electors;
   SIR.inShort([
     'Before the Special Intensive Revision, about ' + Math.round(before / 1e7) + ' crore people were on the electoral rolls of the ' + T.states + ' states and union territories that have published figures. The draft rolls left off ' + cr(T.removed) + ' of them, or ' + Math.round(T.per_100) + ' in every 100.',
-    rising ? 'Each phase of the revision removed a larger share of its rolls than the one before, from ' + p1(d.by_phase[phases[0]].per_100) + ' per 100 in Bihar to ' + p1(d.by_phase[phases[phases.length - 1]].per_100) + ' in the last phase.' : '',
-    'In Bihar and Tamil Nadu, more names were removed than the winning margin in ' + M.removed.assembly_over + ' of ' + M.removed.assembly_seats + ' assembly seats. In West Bengal and Kerala, which publish no removals by seat, the roll fell by more than the margin in ' + M.fall.assembly_over + ' of ' + M.fall.assembly_seats + '.',
+    rising ? 'Each phase of the revision left a larger share of its rolls off the draft than the one before, from ' + p1(d.by_phase[phases[0]].per_100) + ' per 100 in Bihar to ' + p1(d.by_phase[phases[phases.length - 1]].per_100) + ' in the last phase.' : '',
+    'In Bihar and Tamil Nadu, more names were left off or deleted than the winning margin in ' + M.removed.assembly_over + ' of ' + M.removed.assembly_seats + ' assembly seats. In West Bengal and Kerala, which publish no count of names left off by seat, the roll fell by more than the margin in ' + M.fall.assembly_over + ' of ' + M.fall.assembly_seats + '.',
     'The ' + cr(T.removed) + ' left off are nearly as many as the whole roll gained in the ten years from 2014 to 2024, ' + cr(gain10) + '.',
     'Ten states account for ' + cr(topSum) + ' of the ' + cr(T.removed) + '. ' + high.state + ' lost the largest share of its roll, about one name in ' + share(high.per_100) + '.'
   ], 'The total adds up each state\'s own figures. The Election Commission has published no all-India table.');
@@ -155,28 +155,28 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
 
   // against the winning margins: three comparisons, each on its own count
   var KT = { removed: '--fill-red', fall: '--fill-grey' };
-  var KL = { removed: 'names removed', fall: 'fall in the roll' };
+  var KL = { removed: 'names left off or deleted', fall: 'fall in the roll' };
   VIZ.lollipop('vMa', { label: 'Share of assembly seats where the count is larger than the winning margin, four states', axis: 'Seats where the count is larger than the margin, %', max: 100,
-    rows: M.assembly.map(function (a) { return { name: a.state + ' ' + a.election + (a.kind === 'fall' ? ', roll fall' : ', removed'), v: 100 * a.over_margin / a.seats, text: a.over_margin + ' of ' + a.seats, tok: KT[a.kind], hi: true }; }) });
-  // Bihar's lists say who was removed, so only there can a flip be estimated
+    rows: M.assembly.map(function (a) { return { name: a.state + ' ' + a.election + (a.kind === 'fall' ? ', roll fall' : a.state === 'Bihar' ? ', left off or deleted' : ', left off'), v: 100 * a.over_margin / a.seats, text: a.over_margin + ' of ' + a.seats, tok: KT[a.kind], hi: true }; }) });
+  // Bihar's lists say whose names were left off or deleted, so only there can a flip be estimated
   var flips = ['booth_lower', 'booth_upper'].map(function (k) { return IM.summary[k].flips; });
   // the NDA's seats after each of the six estimates, from the 2025 result
   var ndaWon = BF.margin.won_by_alliance.NDA, ndaAfter = Object.keys(IM.summary).map(function (k) { return ndaWon + IM.summary[k].to_nda - IM.summary[k].to_india; });
-  document.getElementById('pMa').innerHTML = 'In Bihar and Tamil Nadu, where the names removed are counted seat by seat, they were more than the winning margin in ' + M.removed.assembly_over + ' of ' + M.removed.assembly_seats + ' seats. In West Bengal and Kerala the count is the fall in the roll, which also takes in ordinary deaths and moves, and it was more than the margin in ' + M.fall.assembly_over + ' of ' + M.fall.assembly_seats + '. The two are kept apart because they count different things. ' +
-    'Bihar is the one state whose lists show who was removed. Estimating how they would have voted from their own booths in 2024, ' + Math.min.apply(null, flips) + ' to ' + Math.max.apply(null, flips) + ' seats would have changed hands, in both directions. On every estimate the NDA keeps a majority, with ' + Math.min.apply(null, ndaAfter) + ' to ' + Math.max.apply(null, ndaAfter) + ' of ' + BF.margin.seats + ' seats. See <a href="../../bihar/results/">Bihar\'s elections page</a>.';
+  document.getElementById('pMa').innerHTML = 'In Bihar and Tamil Nadu, where the names left off or deleted are counted seat by seat, they were more than the winning margin in ' + M.removed.assembly_over + ' of ' + M.removed.assembly_seats + ' seats. In West Bengal and Kerala the count is the fall in the roll, which also takes in ordinary deaths and moves, and it was more than the margin in ' + M.fall.assembly_over + ' of ' + M.fall.assembly_seats + '. The two are kept apart because they count different things. ' +
+    'Bihar is the one state whose lists show whose names were left off or deleted. Estimating how they would have voted from their own booths in 2024, ' + Math.min.apply(null, flips) + ' to ' + Math.max.apply(null, flips) + ' seats would have changed hands, in both directions. On every estimate the NDA keeps a majority, with ' + Math.min.apply(null, ndaAfter) + ' to ' + Math.max.apply(null, ndaAfter) + ' of ' + BF.margin.seats + ' seats. See <a href="../../bihar/results/">Bihar\'s elections page</a>.';
 
   var LT = { 'Bihar': '--fill-red', 'Tamil Nadu': '--fill-amber', 'West Bengal': '--fill-navy', 'Kerala': '--fill-teal' };
   VIZ.scatter('vMl', { label: '2024 Lok Sabha seats in Bihar, Tamil Nadu, West Bengal and Kerala: the count in each seat against its 2024 margin', diag: true, diagLabel: 'count = margin', xMin: 0,
     xAxis: '2024 winning margin', yAxis: 'Count in the seat',
     points: M.ls_seat.map(function (x) { return { x: x.margin, y: x.count, tok: LT[x.state], label: x.name + ' (' + x.state + '): ' + n(x.count) + ' ' + KL[x.kind] + ', 2024 margin ' + n(x.margin) }; }) });
   document.getElementById('kMl').innerHTML = Object.keys(LT).map(function (k) { return '<span><i style="background:var(' + LT[k] + ');border-radius:50%;width:10px"></i>' + k + '</span>'; }).join('');
-  document.getElementById('pMl').textContent = 'Each dot is a Lok Sabha seat, its count added up from its assembly segments. Above the line, the count is larger than the margin that decided the seat in 2024. In Bihar and Tamil Nadu that is ' + M.removed.ls_over + ' of ' + M.removed.ls_seats + ' seats on the names removed, and in West Bengal and Kerala ' + M.fall.ls_over + ' of ' + M.fall.ls_seats + ' on the fall in the roll. The revision came after the 2024 election, so this measures how large the removals are against the votes that decide a seat. It does not say what happened in 2024.' + (M.ls_seat.some(function (x) { return x.count < 0; }) ? ' Below zero are seats whose roll grew.' : '');
+  document.getElementById('pMl').textContent = 'Each dot is a Lok Sabha seat, its count added up from its assembly segments. Above the line, the count is larger than the margin that decided the seat in 2024. In Bihar and Tamil Nadu that is ' + M.removed.ls_over + ' of ' + M.removed.ls_seats + ' seats on the names left off or deleted, and in West Bengal and Kerala ' + M.fall.ls_over + ' of ' + M.fall.ls_seats + ' on the fall in the roll. The revision came after the 2024 election, so this measures how large the exclusions are against the votes that decide a seat. It does not say what happened in 2024.' + (M.ls_seat.some(function (x) { return x.count < 0; }) ? ' Below zero are seats whose roll grew.' : '');
 
   var ev = M.even.slice().sort(function (a, b) { return b.over_margin / b.pcs - a.over_margin / a.pcs || b.pcs - a.pcs; });
-  VIZ.lollipop('vMe', { label: 'Share of each state\'s 2024 Lok Sabha seats won by fewer votes than its removals per seat', axis: 'Seats won by fewer votes than the removals per seat, %', max: 100,
+  VIZ.lollipop('vMe', { label: 'Share of each state\'s 2024 Lok Sabha seats won by fewer votes than its names left off per seat', axis: 'Seats won by fewer votes than the names left off per seat, %', max: 100,
     rows: ev.map(function (e) { return { name: e.state, v: 100 * e.over_margin / e.pcs, text: e.over_margin + ' of ' + e.pcs, tok: '--fill-navy', hi: e.pcs >= 10 }; }) });
   var tn = M.even_test.filter(function (t) { return t.state === 'Tamil Nadu'; })[0], bh = M.even_test.filter(function (t) { return t.state === 'Bihar'; })[0];
-  document.getElementById('pMe').textContent = 'No state has published its removals by Lok Sabha seat, so this spreads each state\'s removals evenly over its seats and counts the seats won in 2024 by fewer votes. On that assumption it is ' + M.even_total.over_margin + ' of ' + M.even_total.pcs + ' seats in ' + M.even_total.states + ' states and union territories. The assumption can be tested where seat counts exist. In Bihar it gives ' + bh.even + ' seats against ' + bh.actual + ' counted, and in Tamil Nadu ' + tn.even + ' against ' + tn.actual + '. Removals there were heaviest in the cities, so most seats lost fewer names than the state average. Spread evenly, ' + tn.even_only + ' seats are counted that in fact lost fewer names than their margin, and ' + tn.actual_only + ' are missed that lost more. Read it as a rough guide that can run high.';
+  document.getElementById('pMe').textContent = 'No state has published its names left off by Lok Sabha seat, so this spreads each state\'s names left off evenly over its seats and counts the seats won in 2024 by fewer votes. On that assumption it is ' + M.even_total.over_margin + ' of ' + M.even_total.pcs + ' seats in ' + M.even_total.states + ' states and union territories. The assumption can be tested where seat counts exist. In Bihar it gives ' + bh.even + ' seats against ' + bh.actual + ' counted, and in Tamil Nadu ' + tn.even + ' against ' + tn.actual + '. The names left off there were heaviest in the cities, so most seats lost fewer names than the state average. Spread evenly, ' + tn.even_only + ' seats are counted that in fact lost fewer names than their margin, and ' + tn.actual_only + ' are missed that lost more. Read it as a rough guide that can run high.';
   // Assembly seats: each state's names left off spread over its seats by electors
   var SP = M.spread;
   VIZ.lollipop('vMs', { label: 'Share of each state\'s Assembly seats won at its latest election by fewer votes than its names left off, spread over the seats by electors', axis: 'Seats won by fewer votes than the spread, %', max: 100,
@@ -235,7 +235,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
     fmt: function (v) { return v.toFixed(2) + ' crore'; }, axis: 'Names left off, crore',
     rows: top.map(function (s) { return { name: s.state, v: s.removed / 1e7, col: PT[s.phase] }; }).concat([{ name: 'The other ' + restN + ' together', v: (T.removed - topSum) / 1e7, col: '--fill-grey' }]) });
 
-  document.getElementById('pPhase').textContent = 'The revision ran in three phases.' + (rising ? ' Each later phase removed a larger share of its rolls.' : '');
+  document.getElementById('pPhase').textContent = 'The revision ran in three phases.' + (rising ? ' Each later phase left a larger share of its rolls off the draft.' : '');
   document.getElementById('tPhase').innerHTML = '<thead><tr><th scope="col" class="l">Phase</th><th scope="col" class="l">Ordered</th><th scope="col">States</th><th scope="col">Left off</th><th scope="col">Per 100</th></tr></thead><tbody>' +
     phases.map(function (k) {
       var P = d.by_phase[k];
@@ -248,7 +248,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
     ['deccanherald', 'Deccan Herald'], ['ceo.karnataka', 'CEO Karnataka'], ['elections.tn', 'CEO Tamil Nadu'], ['ceowestbengal', 'CEO West Bengal'],
     ['eci.gov', 'Election Commission'], ['ceoelection.maharashtra', 'CEO Maharashtra'], ['ceodelhi', 'CEO Delhi'], ['ndtv', 'NDTV'], ['scroll.in', 'Scroll'], ['thewire', 'The Wire'], ['newindianexpress', 'New Indian Express'], ['livemint', 'Mint'], ['tribuneindia', 'The Tribune']];
   var who = function (s) {
-    if (s.source === 'lists') return '<a href="../../bihar/">CEO Bihar deletion lists, counted</a>';
+    if (s.source === 'lists') return '<a href="../../bihar/">CEO Bihar lists of names left off, counted</a>';
     var h = HOSTS.filter(function (x) { return (s.source_url || '').indexOf(x[0]) >= 0; })[0];
     var name = h ? h[1] : (s.source === 'primary' ? 'Election office' : 'Press report');
     return s.source_url ? '<a href="' + E(s.source_url) + '" rel="noopener" target="_blank">' + name + '</a>' : name;
@@ -276,9 +276,9 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   document.getElementById('read').innerHTML = [
     'The draft roll kept only those electors whose forms came back. For every name left off, the officer wrote down a reason (dead, shifted, absent, or enrolled twice). Nobody checked those reasons before the draft was published.',
     'Some names came back later. In the ' + F.states + ' states with a final roll, people could file claims after the draft. The final rolls are ' + cr(F.net_after_draft) + ' larger than the drafts. That rise includes first-time voters, so it is the most that could have been put back.',
-    'Some names went later too. In ' + AD.states + ' states, another ' + lk(AD.removed) + ' were removed between the draft and the final roll' + (F.withheld ? '. West Bengal kept ' + lk(F.withheld) + ' names off its final roll for adjudication. As reported, ' + lk(WA.found_eligible) + ' were later found eligible and ' + lk(WA.found_not_eligible) + ' not, and appeals continue' : '') + '. None of these is in the total above.',
+    'Some names went later too. In ' + AD.states + ' states, another ' + lk(AD.removed) + ' were deleted between the draft and the final roll' + (F.withheld ? '. West Bengal kept ' + lk(F.withheld) + ' names off its final roll for adjudication. As reported, ' + lk(WA.found_eligible) + ' were later found eligible and ' + lk(WA.found_not_eligible) + ' not, and appeals continue' : '') + '. None of these is in the total above.',
     'Not every state is in the total. ' + (d.pending.length ? d.pending.join(' and ') + '\'s revision is still running. ' : '') + 'Assam had a different kind of revision. ' + outside.join(', ').replace(/, ([^,]*)$/, ' and $1') + ' were left out of it.',
-    'The sources are of two kinds. The figures of ' + primary.length + ' states come from the Chief Electoral Officer\'s or the Commission\'s own notes, and Bihar\'s are counted from its deletion lists. The other ' + press.length + ' come from press reports of the officers\' announcements, and they cover ' + cr(pressSum) + ' of the total. Each is linked from the state table.'
+    'The sources are of two kinds. The figures of ' + primary.length + ' states come from the Chief Electoral Officer\'s or the Commission\'s own notes, and Bihar\'s are counted from its lists of names left off the draft. The other ' + press.length + ' come from press reports of the officers\' announcements, and they cover ' + cr(pressSum) + ' of the total. Each is linked from the state table.'
   ].map(function (t) { return '<li>' + t + '</li>'; }).join('');
   document.getElementById('asof').textContent = SIR.date(d.as_of);
   SIR.showFaq('india', 'numbers');

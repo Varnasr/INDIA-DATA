@@ -42,7 +42,7 @@ Promise.all([SIR.json('data/india/cases.json'), SIR.json('data/uttarakhand/const
     tughlakabad: seat(r[2], 52, 'left_off', 'roll_before', 'names left off the draft per 100 on the roll before the revision'),
     danilimda: seat(r[3], 54, 'removed', 'before', 'names left off the draft per 100 on the roll before the revision'),
     'bhiwandi-east': seat(r[5], 137, 'left_off', 'before', 'names left off the draft per 100 on the roll before the revision'),
-    'anna-nagar': seat(r[6], 21, 'removed', 'before', 'names removed at the draft per 100 on the roll before the revision'),
+    'anna-nagar': seat(r[6], 21, 'removed', 'before', 'names left off the draft per 100 on the roll before the revision'),
     lucknow: district(r[7], 'Lucknow', 'total', 'roll_before', 'names left off the draft per 100 on the roll before the revision'),
     'bbmp-south': district(r[8], 'B.B.M.P (South)', 'removed', 'before', 'names left off the draft per 100 on the roll before the revision', 'election districts'),
     lakhimpur: seat(r[9], 76, 'fall', 'draft', 'fall in the roll from the draft to the final roll per 100 on the draft')
@@ -75,7 +75,7 @@ Promise.all([SIR.json('data/india/cases.json'), SIR.json('data/uttarakhand/const
         rows: [[s.a.name, s.v, '--fill-red']].concat(s.unit ? [] : [[s.a.district + ' district', s.dist, '--fill-navy']]).concat([[c.title.split(', ').pop(), s.state, '--fill-grey']]).map(function (x) { return { name: x[0], v: x[1], text: d1(x[1]), tok: x[2], hi: true }; }) });
       var lead = s.fall ? esc(s.a.name) + '\'s roll fell by ' + d1(s.v) + ' of every 100 names from the draft to the final roll, ' : esc(s.a.name) + ' lost ' + d1(s.v) + ' of every 100 names on its roll at the draft, ';
       var t = '<b>' + lead + (s.unit ? '' : cmp(s.v, s.dist) + ' its district\'s ' + d1(s.dist) + ' and ') + cmp(s.v, s.state) + ' the state\'s ' + d1(s.state) + '.</b>' + (s.rank === 1 ? ' No other of the state\'s ' + s.of + ' ' + s.kind + (s.fall ? ' had as large a fall.' : ' lost as large a share.') : ' It ranks ' + s.rank + ' of the state\'s ' + s.of + ' ' + s.kind + ', where 1 lost the most.');
-      if (c.id === 'lakhimpur') t += ' This is the net change, names removed less names added, and Assam\'s tables do not give the two apart.';
+      if (c.id === 'lakhimpur') t += ' This is the net change, names deleted less names added, and Assam\'s tables do not give the two apart.';
       if (c.id === 'anna-nagar') t += ' Its roll then rose by ' + n(s.a.added_net) + ' to the final roll, a rise that counts new voters as well as anyone put back.';
       if (c.id === 'danilimda') t += ' After the draft ' + n(s.a.added) + ' names were added and ' + n(s.a.deleted) + ' deleted, and its final roll of ' + n(s.a.final) + ' is smaller than its draft of ' + n(s.a.draft) + '. ' + (shrank.length === 1 ? 'It is the one seat of Ahmedabad\'s ' + GJ.length + ' whose final roll is smaller than its draft, by the press figures for after the draft.' : shrank.length + ' of Ahmedabad\'s ' + GJ.length + ' seats have a final roll smaller than their draft, by the press figures for after the draft.');
       if (c.id === 'tughlakabad') t += ' The 2025 winning margin was ' + n(s.a.margin) + ' votes.';
@@ -86,7 +86,7 @@ Promise.all([SIR.json('data/india/cases.json'), SIR.json('data/uttarakhand/const
       VIZ.lollipop('v-' + c.id, { label: 'Fall in the roll from the 2024 Lok Sabha roll to the roll of the 2026 election, per 100, four districts against West Bengal', axis: 'Per 100',
         rows: rows.map(function (x) { return { name: x.district, v: x.per_100, text: d1(x.per_100), tok: '--fill-red', hi: true }; }).concat([{ name: 'West Bengal', v: wRate(W), text: d1(wRate(W)), tok: '--fill-grey', hi: true }]) });
       var four = wRate(rows);
-      document.getElementById('f-' + c.id).innerHTML = '<b>Together the four districts\' roll fell by ' + d1(four) + ' of every 100 from the 2024 Lok Sabha roll to the roll the 2026 election was held on, against ' + d1(wRate(W)) + ' in the state.</b> West Bengal published no count of the names removed below the state, so this is the fall in the roll, which also takes in 18 months of ordinary changes. It is the measure the West Bengal pages use.';
+      document.getElementById('f-' + c.id).innerHTML = '<b>Together the four districts\' roll fell by ' + d1(four) + ' of every 100 from the 2024 Lok Sabha roll to the roll the 2026 election was held on, against ' + d1(wRate(W)) + ' in the state.</b> West Bengal published no count of the names left off below the state, so this is the fall in the roll, which also takes in 18 months of ordinary changes. It is the measure the West Bengal pages use.';
       short.push('The roll of Murshidabad, Malda and the two Dinajpurs fell by ' + d1(four) + ' of every 100 from the 2024 Lok Sabha roll to the 2026 election roll, against ' + d1(wRate(W)) + ' in the state.');
     }
   });

@@ -4,7 +4,7 @@
    district's slug, and everything is drawn from the published JSON when the
    page loads: the district's own districts.json row, and its NFHS-5
    circumstances from data/india/factors.json, read against the state's
-   other districts. A circumstance is set beside the removals, never named
+   other districts. A circumstance is set beside the names lost, never named
    as their cause. English only. */
 (function () {
   var n = SIR.n, d1 = function (v) { return SIR.d(v, 1); }, pct = function (v) { return SIR.pct(v); };
@@ -22,18 +22,18 @@
       after: { draft: 'draft', later: 'sep', what: 'the roll of 9 October 2026' },
       limits: 'Karnataka published its revision by its 34 election districts and none of it by constituency, and no split of the names left off by sex.' },
     bihar: { label: 'Bihar', state: 'Bihar', count: 'deleted', base: function (x) { return 100 * x.deleted / x.per_100; }, seats: true, page: 'bihar/districts/', anchor: false,
-      sub: 'Measured by the names removed in both phases of the revision, per 100 electors on the 2025 roll.',
-      noun: 'names removed', verb: 'were removed in the two phases of the revision', per: 'per 100 electors on the 2025 roll', identity: true,
+      sub: 'Measured by the names left off the draft or deleted after it in the two phases of the revision, per 100 electors on the 2025 roll.',
+      noun: 'names left off or deleted', verb: 'were left off the draft or deleted after it in the two phases of the revision', per: 'per 100 electors on the 2025 roll', identity: true,
       limits: 'The reasons were published for phase 1 only, and phase 2 carries none. Women\'s share is of the phase 1 list.' },
     tamilnadu: { label: 'Tamil Nadu', state: 'Tamil Nadu', count: 'removed', base: 'before', seats: true,
       reasons: [['shifted_absent', 'Shifted or absent'], ['dead', 'Dead'], ['multiple', 'Enrolled more than once']],
       after: { draft: function (x) { return x.before - x.removed; }, later: 'final', what: 'the final roll' },
-      limits: 'The Chief Electoral Officer has published no split of the names removed by sex or age. A seat\'s roll before is its draft plus its names removed.' },
+      limits: 'The Chief Electoral Officer has published no split of the names left off by sex or age. A seat\'s roll before is its draft plus its names left off.' },
     westbengal: { label: 'West Bengal', state: 'West Bengal', count: function (x) { return x.roll_2024 - x.draft; }, base: 'roll_2024', seats: true, fall: true,
-      sub: 'Measured by the fall in the roll from the 2024 Lok Sabha roll to the draft, per 100 on the 2024 roll. The fall takes in 18 months of ordinary deaths, moves and new voters, so it is a different count from the names struck off.',
+      sub: 'Measured by the fall in the roll from the 2024 Lok Sabha roll to the draft, per 100 on the 2024 roll. The fall takes in 18 months of ordinary deaths, moves and new voters, so it is a different count from the names left off the draft.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from the 2024 Lok Sabha roll to the draft', per: 'per 100 on the 2024 roll',
       women: function (d, nm) { return 'Women were ' + pct(d.women_fall_pct) + ' of the fall in ' + nm + '\'s roll from 2024 to the roll at the 2026 nominations, against ' + pct(d.women_2024_pct) + ' of the 2024 roll.'; },
-      limits: 'The Chief Electoral Officer published the names removed for the state only. Below the state this is the fall in the roll, which also takes in ordinary changes.' },
+      limits: 'The Chief Electoral Officer published the names left off the draft for the state only. Below the state this is the fall in the roll, which also takes in ordinary changes.' },
     kerala: { label: 'Kerala', state: 'Kerala', count: function (x) { return x.roll_2025 - x.draft; }, base: 'roll_2025', seats: true, fall: true,
       sub: 'Measured by the fall in the roll from the final roll of January 2025 to the draft, per 100 on the January 2025 roll. No table of the names left off has been published, even for the state.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from January 2025 to the draft', per: 'per 100 on the January 2025 roll',
@@ -52,7 +52,7 @@
       women: function (d, nm) { return 'Women were ' + pct(d.women_2023_pct) + ' of ' + nm + '\'s roll in 2023 and ' + pct(d.women_2026_pct) + ' of its final roll in 2026.'; },
       limits: 'The names left off were published for the state only. Below the state this is the change in the roll over more than two years.' },
     assam: { label: 'Assam', state: 'Assam', count: 'fall', base: 'draft', seats: true, fall: true, per: 'per 100 on the draft',
-      sub: 'Measured by the fall in the roll from the draft to the final roll of the Special Revision, per 100 on the draft. It is names removed less names added, and the tables do not give the two apart.',
+      sub: 'Measured by the fall in the roll from the draft to the final roll of the Special Revision, per 100 on the draft. It is the net fall, names deleted less names added, and the tables do not give the two apart.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from the draft to the final roll',
       women: function (d, nm) { return d.women_fall_pct == null ? 'Women were ' + pct(d.draft_women_pct) + ' of ' + nm + '\'s draft roll. Its roll rose after the draft, so there is no fall to divide by sex.' : 'Women were ' + pct(d.women_fall_pct) + ' of the fall in ' + nm + '\'s roll after the draft, against ' + pct(d.draft_women_pct) + ' of its draft roll.'; },
       limits: 'Assam held a Special Revision, which ran on different rules from the SIR. The names flagged for deletion were published for the state only, through the press.' },
@@ -60,31 +60,31 @@
       reasons: [['shifted_absent_other', 'Shifted, absent or other'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once']],
       limits: 'The split by sex of the names left off was published for the state only.' },
     manipur: { label: 'Manipur', state: 'Manipur', count: 'fall', base: 'before', seats: true, fall: true,
-      sub: 'Measured by the fall in the roll from the roll before the revision to the final roll, per 100 on the roll before. It takes in the names left off and everything added or removed after the draft together.',
+      sub: 'Measured by the fall in the roll from the roll before the revision to the final roll, per 100 on the roll before. It takes in the names left off and everything added or deleted after the draft together.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from the roll before the revision to the final roll', per: 'per 100 on the roll before the revision',
       women: function (d, nm) { return 'Women are ' + pct(100 * d.women / d.final) + ' of ' + nm + '\'s final roll. The names left off were split by sex for the state only.'; },
       limits: 'The reasons and the split by sex of the names left off were published for the state only.' },
     odisha: { label: 'Odisha', state: 'Odisha', count: function (x) { return x.before - x.draft; }, base: 'before', seats: true, fall: true,
       sub: 'Measured by the fall in the roll from the final roll of January 2025 to the draft, per 100 on the January 2025 roll. The revision started from the roll of 17 May 2026, so the fall takes in more than a year of ordinary changes as well as the names left off.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from January 2025 to the draft', per: 'per 100 on the January 2025 roll',
-      claims: function (d, nm) { return 'After the draft, ' + n(d.added) + ' names were added in ' + nm + ' and ' + n(d.removed) + ' removed, and the final roll is ' + n(d.final) + '. The additions count new voters too, so they are the most that could have been restored.'; },
+      claims: function (d, nm) { return 'After the draft, ' + n(d.added) + ' names were added in ' + nm + ' and ' + n(d.removed) + ' deleted, and the final roll is ' + n(d.final) + '. The additions count new voters too, so they are the most that could have been restored.'; },
       limits: 'The names left off the draft were published by district and for the state, and the reasons for the state only.' },
     andhrapradesh: { label: 'Andhra Pradesh', state: 'Andhra Pradesh', count: 'removed', base: 'before', womenDraft: 'draft_women_pct',
       limits: 'Andhra Pradesh published the names left off by district, with no reasons and no split by sex below the state.' },
     chhattisgarh: { label: 'Chhattisgarh', state: 'Chhattisgarh', count: function (x) { return x.final - x.draft; }, base: 'draft', fall: true, rise: true, per: 'per 100 on the draft',
-      sub: 'Measured by the rise in the roll from the draft to the final roll, per 100 on the draft. It is names added less names removed, and a district whose roll shrank shows a fall. The names left off the draft were published for the state only.',
+      sub: 'Measured by the rise in the roll from the draft to the final roll, per 100 on the draft. It is the net change, names added less names deleted, and a district whose roll shrank shows a fall. The names left off the draft were published for the state only.',
       noun: 'rise in the roll', verb: 'is the rise in the roll from the draft to the final roll',
-      claims: function (d, nm) { return 'After the draft, ' + n(d.added) + ' names were added in ' + nm + ' and ' + n(d.removed) + ' removed, and the final roll is ' + n(d.final) + '. The additions count new voters too, so they are the most that could have been restored.'; },
+      claims: function (d, nm) { return 'After the draft, ' + n(d.added) + ' names were added in ' + nm + ' and ' + n(d.removed) + ' deleted, and the final roll is ' + n(d.final) + '. The additions count new voters too, so they are the most that could have been restored.'; },
       limits: 'The names left off the draft, and their reasons, were published for the state only.' },
     mizoram: { label: 'Mizoram', state: 'Mizoram', count: function (x) { return x.final - x.draft; }, base: 'draft', fall: true, rise: true, per: 'per 100 on the draft',
-      sub: 'Measured by the rise in the roll from the draft to the final roll, per 100 on the draft. It is names added less names removed, and a district whose roll shrank shows a fall. The names left off the draft were published for the state only.',
+      sub: 'Measured by the rise in the roll from the draft to the final roll, per 100 on the draft. It is the net change, names added less names deleted, and a district whose roll shrank shows a fall. The names left off the draft were published for the state only.',
       noun: 'rise in the roll', verb: 'is the rise in the roll from the draft to the final roll',
       women: function (d, nm) { return 'Women are ' + pct(100 * d.women / d.final) + ' of ' + nm + '\'s final roll.'; },
       limits: 'The names left off the draft, and their reasons, were published for the state only.' },
     telangana: { label: 'Telangana', state: 'Telangana', file: 'hyderabad/telangana.json', rows: 'districts', count: 'removed', base: 'electors_pre', page: 'hyderabad/telangana/', anchor: false, method: 'hyderabad/method/',
       limits: 'Telangana\'s draft-roll totals are published by district and for Hyderabad\'s fifteen constituencies. The reasons and the split by sex are not.' },
     uttarakhand: { label: 'Uttarakhand', state: 'Uttarakhand', count: 'left_off', base: 'roll_before', seats: true,
-      women: function (d, nm) { return 'Women were ' + pct(d.women_draft_pct) + ' of ' + nm + '\'s draft roll, ' + pct(d.women_claims_pct) + ' of the claims admitted after it and ' + pct(d.women_objections_pct) + ' of the names removed after it.'; },
+      women: function (d, nm) { return 'Women were ' + pct(d.women_draft_pct) + ' of ' + nm + '\'s draft roll, ' + pct(d.women_claims_pct) + ' of the claims admitted after it and ' + pct(d.women_objections_pct) + ' of the names deleted after it.'; },
       claims: function (d, nm) { return 'After the draft, ' + nm + ' admitted ' + n(d.claims) + ' claims (' + d1(d.claims_per_1000) + ' per 1,000 on the draft) and ' + n(d.objections) + ' objections (' + d1(d.objections_per_1000) + ' per 1,000). ' + n(d.notices) + ' electors were sent a notice, ' + d1(d.notices_per_100) + ' per 100 on the draft.'; },
       limits: 'The reasons were published for the state only.' }
   };
@@ -152,7 +152,7 @@
         var w = I.districts.filter(function (x) { return x.district === d.district; })[0];
         if (!w) return;
         document.getElementById('sWomen').hidden = false;
-        document.getElementById('fWomen').innerHTML = 'Women were ' + pct(w.female_share_deleted) + ' of ' + SIR.esc(name) + '\'s phase 1 list of names removed, against ' + pct(w.female_share_roll) + ' of its roll before the revision.';
+        document.getElementById('fWomen').innerHTML = 'Women were ' + pct(w.female_share_deleted) + ' of ' + SIR.esc(name) + '\'s phase 1 list of names left off the draft, against ' + pct(w.female_share_roll) + ' of its roll before the revision.';
       });
       if (C.women) {
         document.getElementById('fWomen').innerHTML = C.women(d, SIR.esc(name));
@@ -171,7 +171,7 @@
       document.getElementById('dLinks').innerHTML = (CASE ? '<a class="btn" href="' + root + 'india/cases/#' + CASE + '">A case study of this district</a> ' : '') + '<a class="btn" href="' + stPage + (C.anchor === false ? '' : '#d-' + key) + '">' + C.label + (C.anchor === false ? ', every district' : ', with this district on the map') + '</a> <a class="btn" href="' + root + (C.method || st + '/method/') + '">Sources and method</a>';
       document.getElementById('others').innerHTML = all.filter(function (x) { return x !== d; }).map(function (x) { return '<a class="chip" href="../' + slug(x.district) + '/">' + SIR.esc(x.district) + '</a>'; }).join(' ');
       document.getElementById('pageFaq').innerHTML = '<div class="qa"><h3>Where do these figures come from?</h3><p>From the same tables as the <a href="' + stPage + '">' + C.label + '</a> pages, which give every source on their method page, and from the National Family Health Survey 2019-21 for the circumstances.</p></div>' +
-        '<div class="qa"><h3>Does a circumstance explain the removals?</h3><p>No. A district\'s schooling, fuel or sanitation figures sit beside its removals, and the correlations across districts say which districts lost more, never why.</p></div>';
+        '<div class="qa"><h3>Does a circumstance explain the names a district lost?</h3><p>No. A district\'s schooling, fuel or sanitation figures sit beside its count, and the correlations across districts say which districts lost more, never why.</p></div>';
       if (C.seats) SIR.json('data/' + st + '/constituencies.json').then(function (A) {
         var mine = A.filter(function (a) { return a.district === d.district; }).sort(function (a, b) { return a.ac - b.ac; });
         document.getElementById('dLinks').insertAdjacentHTML('beforeend', '<p class="note">Its ' + mine.length + ' constituencies, each with its own page</p><p class="golist">' +

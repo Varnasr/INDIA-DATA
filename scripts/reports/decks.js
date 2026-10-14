@@ -499,28 +499,28 @@ function hyderabad() {
 
   cover(pres, K, P, 'Special Intensive Revision · Hyderabad Old City 2026', 'The 2026 revision struck ' + lakh(t.deleted) + ' electors off five Old City rolls',
     'Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, polling part by polling part',
-    [[indian(t.deleted), 'electors struck off the rolls before the revision'], [pct(t.rate), 'of every elector on those rolls'], [pct(100 * t.deleted / valid), 'of the valid votes cast in 2023'], [indian(t.hearing), 'kept but summoned to a hearing']])
-    .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll. The lists cover every elector on the rolls of the five constituencies before the revision, so each group has a true removal rate, the share of its own members struck off. These are the September 2026 lists. The final roll is due on 9 November, so names put back after hearings are not in them.');
+    [[indian(t.deleted), 'electors on the rolls before the revision left off the draft'], [pct(t.rate), 'of every elector on those rolls'], [pct(100 * t.deleted / valid), 'of the valid votes cast in 2023'], [indian(t.hearing), 'kept but summoned to a hearing']])
+    .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll. The lists cover every elector on the rolls of the five constituencies before the revision, so each group has a true exclusion rate, the share of its own members left off. These are the September 2026 lists. The final roll is due on 9 November, so names put back after hearings are not in them.');
   const toc = contentsSlide(pres, K, P);
 
   // ---- Overview
-  let s = K.slide('Overview', pct(t.rate) + ' of electors were struck off, and ' + pct(100 * t.hearing / t.electors) + ' more summoned to hearings', 'What happened to each elector on the five rolls before the revision, as a % of the roll');
+  let s = K.slide('Overview', pct(t.rate) + ' of electors were left off the draft, and ' + pct(100 * t.hearing / t.electors) + ' more summoned to hearings', 'What happened to each elector on the five rolls before the revision, as a % of the roll');
   s.addChart(pres.charts.BAR, [
-    { name: 'Struck off', labels: names, values: A.map((a) => a.rate) },
+    { name: 'Left off', labels: names, values: A.map((a) => a.rate) },
     { name: 'Kept, summoned to a hearing', labels: names, values: A.map((a) => a.hearing_rate) },
     { name: 'Kept, not summoned', labels: names, values: A.map((a) => +(100 - a.rate - a.hearing_rate - 100 * a.unaccounted / a.electors).toFixed(1)) },
   ], K.chart(Object.assign({}, K.left, { w: 8.2, barDir: 'bar', barGrouping: 'stacked', chartColors: ['C0392B', 'D4AC0D', '1F618D'], showValue: true, dataLabelPosition: 'ctr', dataLabelFormatCode: '0.0', dataLabelColor: 'FFFFFF', showLegend: true, valAxisMaxVal: 100, valAxisHidden: true })));
   const sr = A.slice().sort((a, b) => b.rate - a.rate);
-  K.stats(s, [[indian(t.deleted), 'struck off, out of ' + indian(t.electors)], [indian(t.hearing), 'kept on the roll only if they attend a hearing'], [pct(sr[0].rate), sr[0].name + ' lost the most, ' + sr[4].name + ' the least (' + pct(sr[4].rate) + ')']], TOP, 1.45, 1, 9.15, W - M - 9.15);
+  K.stats(s, [[indian(t.deleted), 'left off, out of ' + indian(t.electors)], [indian(t.hearing), 'kept on the roll only if they attend a hearing'], [pct(sr[0].rate), sr[0].name + ' lost the most, ' + sr[4].name + ' the least (' + pct(sr[4].rate) + ')']], TOP, 1.45, 1, 9.15, W - M - 9.15);
 
-  s = K.slide('Overview', allWin ? 'In all five seats, more names were struck off than the 2023 winner received' : 'In all five seats, more names were struck off than the 2023 winning margin', 'Names struck off against the 2023 result');
-  K.table(s, ['Constituency', 'Won by (2023)', 'Winner\'s votes', 'Margin', 'Struck off', '× margin', '% of valid votes'],
+  s = K.slide('Overview', allWin ? 'In all five seats, more names were left off the draft than the 2023 winner received' : 'In all five seats, more names were left off the draft than the 2023 winning margin', 'Names left off against the 2023 result');
+  K.table(s, ['Constituency', 'Won by (2023)', 'Winner\'s votes', 'Margin', 'Left off', '× margin', '% of valid votes'],
     A.slice().sort((a, b) => b.e2023.deleted_over_valid - a.e2023.deleted_over_valid).map((a) => [a.name, a.e2023.winner, indian(a.e2023.winner_votes), indian(a.e2023.margin), indian(a.deleted), a.e2023.deleted_over_margin.toFixed(1) + '×', pct(a.e2023.deleted_over_valid)]),
     M, TOP - 0.2, W - 2 * M, [2.2, 3.0, 1.45, 1.2, 1.4, 1.1, 1.78], 13, [0, 1]);
-  K.box(s, 'In ' + andj(overV.map((a) => a.name)) + ' the names struck off exceed every valid vote cast in 2023. Yakutpura was won by ' + indian(yak.e2023.margin) + ' votes and lost ' + indian(yak.deleted) + ' names. Across the five, the names struck off equal ' + pct(100 * t.deleted / valid) + ' of the 2023 vote.', M, TOP + 2.3, W - 2 * M, 1.5, 15);
+  K.box(s, 'In ' + andj(overV.map((a) => a.name)) + ' the names left off the draft exceed every valid vote cast in 2023. Yakutpura was won by ' + indian(yak.e2023.margin) + ' votes and lost ' + indian(yak.deleted) + ' names. Across the five, the names left off the draft equal ' + pct(100 * t.deleted / valid) + ' of the 2023 vote.', M, TOP + 2.3, W - 2 * M, 1.5, 15);
   s.addNotes('The winning margin is the winner\'s votes less the runner-up\'s. No election has been held on the revised roll. The comparison is of size only, because the roll records nobody\'s vote.');
 
-  s = K.slide('Overview', pct(rsh('Permanently Shifted'), 0) + ' of removals were entered as "permanently shifted" and ' + pct(rsh('Untraceable/Absent'), 0) + ' as untraceable', 'Share of names struck off, by the reason the officer recorded');
+  s = K.slide('Overview', pct(rsh('Permanently Shifted'), 0) + ' of exclusions were entered as "permanently shifted" and ' + pct(rsh('Untraceable/Absent'), 0) + ' as untraceable', 'Share of names left off the draft, by the reason the officer recorded');
   s.addChart(pres.charts.BAR, S.reasons.map((k) => ({ name: RN[k] || k, labels: names, values: A.map((a) => +(100 * a.reasons[k] / a.deleted).toFixed(1)) })),
     K.chart(Object.assign({}, K.left, { w: 8.2, barDir: 'bar', barGrouping: 'percentStacked', chartColors: ['1F618D', 'C0392B', GREY, 'E0A526'], showLegend: true, valAxisHidden: true })));
   const ut = A.map((a) => 100 * a.reasons['Untraceable/Absent'] / a.deleted);
@@ -536,12 +536,12 @@ function hyderabad() {
     s = K.slide('Hyderabad and Telangana', 'Hyderabad lost ' + pct(TG.hyderabad.rate) + ' of its roll, ' + (TG.hyderabad.rate > 2 * TG.rest_of_state.rate ? 'more than twice the ' : 'against ') + pct(TG.rest_of_state.rate) + ' in the rest of Telangana', 'Share of each roll left off the state\'s draft of 17 August 2026; Old City seats in maroon');
     s.addChart(pres.charts.BAR, [{ name: '% left off', labels: seats.map((x) => x.name), values: seats.map((x) => x.rate) }],
       K.chart(Object.assign({}, K.left, { barDir: 'bar', chartColors: seats.map((x) => x.old_city ? '8B1E3F' : '1F618D'), showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', valAxisHidden: true, catAxisLabelFontSize: 10 })));
-    K.right(s, ['Hyderabad district lost ' + pct(TG.hyderabad.rate) + ' of its roll, and the rest of Telangana ' + pct(TG.rest_of_state.rate) + '.', 'The removals are heavy across the whole capital region.', 'Below the district the state publishes totals only, with no split by reason.'], 13.5);
+    K.right(s, ['Hyderabad district lost ' + pct(TG.hyderabad.rate) + ' of its roll, and the rest of Telangana ' + pct(TG.rest_of_state.rate) + '.', 'The exclusions are heavy across the whole capital region.', 'Below the district the state publishes totals only, with no split by reason.'], 13.5);
   }
 
   // ---- Age, sex, religion, 2002
-  s = K.slide('Age, sex, religion, 2002', pct(age[age.length - 1], 0) + ' of electors aged 80 and over were struck off, against ' + pct(age[0], 0) + ' of those aged 18 to 24', 'Share of each age band struck off, all five constituencies');
-  s.addChart(pres.charts.BAR, [{ name: '% struck off', labels: S.bands, values: age.map((v) => +v.toFixed(1)) }],
+  s = K.slide('Age, sex, religion, 2002', pct(age[age.length - 1], 0) + ' of electors aged 80 and over were left off the draft, against ' + pct(age[0], 0) + ' of those aged 18 to 24', 'Share of each age band left off, all five constituencies');
+  s.addChart(pres.charts.BAR, [{ name: '% left off', labels: S.bands, values: age.map((v) => +v.toFixed(1)) }],
     K.chart(Object.assign({}, K.left, { barDir: 'col', chartColors: [P.accent], showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0"%"', valAxisHidden: true })));
   K.right(s, [
     'The pattern holds in every constituency, from ' + pct(Math.min(...a80)) + ' to ' + pct(Math.max(...a80)) + ' of those aged 80 and over and ' + pct(Math.min(...a18)) + ' to ' + pct(Math.max(...a18)) + ' of those aged 18 to 24.',
@@ -549,29 +549,29 @@ function hyderabad() {
     'The rate roughly doubles between 18 to 24 and 30 to 39, ages at which few people die.',
   ]);
 
-  s = K.slide('Age, sex, religion, 2002', 'Electors with no link to the 2002 roll were struck off ' + (ul / lk).toFixed(1) + ' times as often', 'Share struck off, by whether the elector can be traced to the roll of the 2002 intensive revision. Malakpet\'s list carries no link.');
+  s = K.slide('Age, sex, religion, 2002', 'Electors with no link to the 2002 roll were left off the draft ' + (ul / lk).toFixed(1) + ' times as often', 'Share left off, by whether the elector can be traced to the roll of the 2002 intensive revision. Malakpet\'s list carries no link.');
   s.addChart(pres.charts.BAR, [
     { name: 'Linked to 2002', labels: LK.map((a) => a.name), values: LK.map((a) => a.linked_rate) },
     { name: 'No 2002 link', labels: LK.map((a) => a.name), values: LK.map((a) => a.unlinked_rate) },
   ], K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'clustered', chartColors: ['0E5E6F', 'C0392B'], showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', showLegend: true, valAxisHidden: true })));
   K.right(s, [
-    pct(lk) + ' of linked electors were struck off, and ' + pct(ul) + ' of those with no link.',
+    pct(lk) + ' of linked electors were left off the draft, and ' + pct(ul) + ' of those with no link.',
     'Inside the same polling part the gap is ' + Math.min(...UL.map((u) => u.diff_pp)).toFixed(0) + ' to ' + Math.max(...UL.map((u) => u.diff_pp)).toFixed(0) + ' points, and runs the same way in ' + indian(sum(UL, 'a_higher')) + ' of ' + indian(sum(UL, 'parts')) + ' parts.',
     'The revision asks every elector to show a link to the 2002 roll. Anyone who moved to the city after 2002, or whose family name is spelt differently on the old roll, starts behind.',
   ]);
 
-  s = K.slide('Age, sex, religion, 2002', pct(hin) + ' of Hindu-name electors were struck off, and ' + pct(mus) + ' of Muslim-name electors', 'Share struck off by religion guessed from names, constituency by constituency');
+  s = K.slide('Age, sex, religion, 2002', pct(hin) + ' of Hindu-name electors were left off the draft, and ' + pct(mus) + ' of Muslim-name electors', 'Share left off by religion guessed from names, constituency by constituency');
   s.addChart(pres.charts.BAR, [
     { name: 'Hindu-name electors', labels: names, values: A.map((a) => a.hindu_rate) },
     { name: 'Muslim-name electors', labels: names, values: A.map((a) => a.muslim_rate) },
   ], K.chart(Object.assign({}, K.left, { barDir: 'col', barGrouping: 'clustered', chartColors: ['E0A526', '1E8449'], showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', showLegend: true, valAxisHidden: true })));
   K.right(s, [
-    'Inside the same polling part, Hindu-name electors were struck off ' + Math.min(...HM.map((h) => h.diff_pp)).toFixed(1) + ' to ' + Math.max(...HM.map((h) => h.diff_pp)).toFixed(1) + ' points more often, in ' + sum(HM, 'a_higher') + ' of ' + sum(HM, 'parts') + ' parts large enough to compare.',
+    'Inside the same polling part, Hindu-name electors were left off the draft ' + Math.min(...HM.map((h) => h.diff_pp)).toFixed(1) + ' to ' + Math.max(...HM.map((h) => h.diff_pp)).toFixed(1) + ' points more often, in ' + sum(HM, 'a_higher') + ' of ' + sum(HM, 'parts') + ' parts large enough to compare.',
     'The lists give religion and age separately, so part of this gap may be an age gap.',
     'Religion is guessed from names, because the roll does not record it.',
   ]);
 
-  s = K.slide('Age, sex, religion, 2002', 'Women and men were struck off at similar rates, ' + pct(fr) + ' and ' + pct(mr), 'Share struck off by sex, constituency by constituency');
+  s = K.slide('Age, sex, religion, 2002', 'Women and men were left off the draft at similar rates, ' + pct(fr) + ' and ' + pct(mr), 'Share left off by sex, constituency by constituency');
   s.addChart(pres.charts.BAR, [
     { name: 'Women', labels: names, values: A.map((a) => a.female_rate) },
     { name: 'Men', labels: names, values: A.map((a) => a.male_rate) },
@@ -580,18 +580,18 @@ function hyderabad() {
 
   // ---- Polling parts
   const bins = [[10, 20], [20, 30], [30, 40], [40, 50], [50, 60], [60, 70], [70, 81]];
-  s = K.slide('Polling parts', 'Part removal rates ran from ' + Math.floor(Math.min(...P100.map((p) => p.rate))) + '% to ' + Math.round(Math.max(...P100.map((p) => p.rate))) + '%', 'Polling parts with at least 100 electors, by the share struck off. Malakpet has no part numbers');
+  s = K.slide('Polling parts', 'Part exclusion rates ran from ' + Math.floor(Math.min(...P100.map((p) => p.rate))) + '% to ' + Math.round(Math.max(...P100.map((p) => p.rate))) + '%', 'Polling parts with at least 100 electors, by the share left off. Malakpet has no part numbers');
   s.addChart(pres.charts.BAR, [{ name: 'Parts', labels: bins.map(([a, b]) => a + '–' + Math.min(b, 80) + '%'), values: bins.map(([a, b]) => P100.filter((p) => p.rate >= a && p.rate < b).length) }],
     K.chart(Object.assign({}, K.left, { w: 6.4, barDir: 'col', chartColors: bins.map(([a]) => a >= 60 ? P.accent : GREY), showValue: true, dataLabelPosition: 'outEnd', valAxisHidden: true })));
   K.table(s, ['Constituency', 'Lowest', 'Middle', 'Highest'], LK.map((a) => [a.name, pct(a.part_rate_quartiles[0]), pct(a.part_rate_quartiles[2]), pct(a.part_rate_quartiles[4])]), 7.3, TOP, W - M - 7.3, [2.2, 1.1, 1.1, 1.03], 13);
 
-  s = K.slide('Polling parts', 'Parts with more Muslim-name electors lost fewer names, in every constituency', 'Rank correlation across parts within each constituency, with the part\'s removal rate');
+  s = K.slide('Polling parts', 'Parts with more Muslim-name electors lost fewer names, in every constituency', 'Rank correlation across parts within each constituency, with the part\'s exclusion rate');
   K.table(s, ['Constituency', 'Muslim-name share', 'Share aged 80+', 'Share untraceable'], LK.map((a) => [a.name, a.part_correlations.muslim_share_vs_rate.toFixed(2), a.part_correlations.aged80_share_vs_rate.toFixed(2), a.part_correlations.untraceable_share_vs_rate.toFixed(2)]), M, TOP, 7.6, [2.35, 1.75, 1.75, 1.75], 14);
   s.addNotes('A polling part is the section of the roll served by one polling station. A rank correlation runs from -1 to 1 and measures how far two orderings of the parts agree.');
-  K.right(s, ['A negative figure means parts with more of that group lost fewer names.', 'The share of elderly electors and the share entered as untraceable barely move with a part\'s rate.', 'Parts with at least 100 electors, and for the untraceable share, parts with at least 20 removals.'], 13.5);
+  K.right(s, ['A negative figure means parts with more of that group lost fewer names.', 'The share of elderly electors and the share entered as untraceable barely move with a part\'s rate.', 'Parts with at least 100 electors, and for the untraceable share, parts with at least 20 exclusions.'], 13.5);
 
   s = K.slide('Polling parts', o60.length + ' polling parts lost more than 60% of their roll', 'The fifteen heaviest parts with 100 or more electors');
-  K.table(s, ['Constituency', 'Part', 'Locality', 'Electors', 'Struck off', '% struck off'],
+  K.table(s, ['Constituency', 'Part', 'Locality', 'Electors', 'Left off', '% left off'],
     P100.slice().sort((a, b) => b.rate - a.rate).slice(0, 15).map((p) => [p.ac, p.part, p.locality && p.locality !== 'nan' ? p.locality : '–', indian(p.electors), indian(p.deleted), pct(p.rate)]),
     M, TOP - 0.25, W - 2 * M, [2.4, 0.9, 4.2, 1.5, 1.5, 1.63], 11.5, [0, 2]);
 
@@ -615,20 +615,20 @@ function hyderabad() {
 
   // ---- Questions
   K.qa(K.slide('Questions put to this analysis', 'What the lists say about moves, religion, the 2002 roll and age'), [
-    ['Were most of those struck off people who had moved away?',
-      'The largest recorded reason is "permanently shifted", ' + pct(rsh('Permanently Shifted')) + ' of removals, and the Old City has a large moving population. But ' + pct(rsh('Untraceable/Absent')) + ' were entered as untraceable or absent, ' + pct(rsh('Death')) + ' as dead and ' + pct(rsh('Already enrolled')) + ' as enrolled elsewhere. Each is what the officer wrote down, and nobody checked it.'],
+    ['Were most of those left off the draft people who had moved away?',
+      'The largest recorded reason is "permanently shifted", ' + pct(rsh('Permanently Shifted')) + ' of exclusions, and the Old City has a large moving population. But ' + pct(rsh('Untraceable/Absent')) + ' were entered as untraceable or absent, ' + pct(rsh('Death')) + ' as dead and ' + pct(rsh('Already enrolled')) + ' as enrolled elsewhere. Each is what the officer wrote down, and nobody checked it.'],
     ['Was the revision aimed at Muslim electors?',
-      'The lists do not show that. Inside the same polling part, Hindu-name electors were struck off more often than Muslim-name electors. The lists do show who bore the removals, the old and those who could not be traced to the 2002 roll.'],
+      'The lists do not show that. Inside the same polling part, Hindu-name electors were left off the draft more often than Muslim-name electors. The lists do show who bore the exclusions, the old and those who could not be traced to the 2002 roll.'],
     ['Why does the 2002 roll matter so much?',
-      'The revision asks each elector to show a link to the 2002 intensive revision, through their own name or a parent\'s. Where the lists record it, electors with no link were struck off ' + Math.min(...UL.map((u) => u.diff_pp)).toFixed(0) + ' to ' + Math.max(...UL.map((u) => u.diff_pp)).toFixed(0) + ' points more often than linked electors in the same part.'],
-    ['Why are the old struck off so often?',
-      pct(age[age.length - 1]) + ' of electors aged 80 and over were struck off, against ' + pct(age[0]) + ' of those aged 18 to 24. Some of that is death. The rest falls on electors least able to answer a visit, attend a hearing or produce papers.'],
+      'The revision asks each elector to show a link to the 2002 intensive revision, through their own name or a parent\'s. Where the lists record it, electors with no link were left off the draft ' + Math.min(...UL.map((u) => u.diff_pp)).toFixed(0) + ' to ' + Math.max(...UL.map((u) => u.diff_pp)).toFixed(0) + ' points more often than linked electors in the same part.'],
+    ['Why are the old left off so often?',
+      pct(age[age.length - 1]) + ' of electors aged 80 and over were left off the draft, against ' + pct(age[0]) + ' of those aged 18 to 24. Some of that is death. The rest falls on electors least able to answer a visit, attend a hearing or produce papers.'],
   ]);
   K.qa(K.slide('Questions put to this analysis', 'What the lists say about hearings, results, reliability and coverage'), [
     ['Could the hearings be held properly?',
       indian(t.hearing) + ' electors kept on the draft roll were summoned. The busiest single slot listed ' + heavy.max_slot + ' cases, in ' + heavy.name + ', where the typical slot listed ' + heavy.median_slot + '. The lists do not record how long a slot was.'],
     ['Did this change an election result?',
-      'No election has been held on the revised roll. Every one of the five constituencies lost more names than its 2023 winning margin, and in ' + andj(overV.map((a) => a.name)) + ' the names struck off outnumber every valid vote cast in 2023. Only Yakutpura is close. Its runner-up would need ' + pct(HI.find((x) => x.name === 'Yakutpura').breakeven) + ' of the removed who would vote to overturn the 2023 margin.'],
+      'No election has been held on the revised roll. Every one of the five constituencies lost more names than its 2023 winning margin, and in ' + andj(overV.map((a) => a.name)) + ' the names left off the draft outnumber every valid vote cast in 2023. Only Yakutpura is close. Its runner-up would need ' + pct(HI.find((x) => x.name === 'Yakutpura').breakeven) + ' of those left off who would vote to overturn the 2023 margin.'],
     ['How reliable are the lists?',
       'For four constituencies the counts agree exactly with an independent count of the same lists, as do the recorded reasons and women\'s share. The Malakpet list used here is incomplete, with ' + indian(mal.deleted) + ' names against 1,47,799 in the published list and no part numbers or 2002 link.'],
     ['Why only five constituencies?',
@@ -637,24 +637,24 @@ function hyderabad() {
 
   // ---- Limits
   s = K.slide('Limits', 'What the lists show, and what they cannot show');
-  K.box(s, 'How many electors were struck off, from which parts, and who they were by age, sex, religion guessed from names, and link to the 2002 roll. Because the lists hold every elector, each group has a true removal rate.', M, TOP - 0.4, 5.95, 2.3, 15);
-  K.box(s, 'Whether any single removal was right. A household that moved out is rightly marked "shifted", and the lists cannot tell it apart from an elector who was at home when the officer missed them. Religion and age are given separately and never together.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
+  K.box(s, 'How many electors were left off the draft, from which parts, and who they were by age, sex, religion guessed from names, and link to the 2002 roll. Because the lists hold every elector, each group has a true exclusion rate.', M, TOP - 0.4, 5.95, 2.3, 15);
+  K.box(s, 'Whether any single exclusion was right. A household that moved out is rightly marked "shifted", and the lists cannot tell it apart from an elector who was at home when the officer missed them. Religion and age are given separately and never together.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
   K.body(s, 'These are the September lists. The final roll is due on 9 November, so restorations after hearings are not in these counts. Malakpet\'s list is read by polling-station name (' + mal.parts + ' stations) and ' + indian(mal.unaccounted) + ' electors on its roll appear in none of the three outcomes.', M, TOP + 2.2, W - 2 * M, 2.2, 16);
 
   s = K.slide('What the Election Commission should do', 'Before the final roll');
   K.numbered(s, [
-    'Record and publish the basis for every removal entered as "untraceable or absent", ' + indian(s_((a) => a.reasons['Untraceable/Absent'])) + ' names in all, including the visits made and the notice given.',
-    'Publish how removals of electors with no link to the 2002 roll were decided.',
+    'Record and publish the basis for every exclusion entered as "untraceable or absent", ' + indian(s_((a) => a.reasons['Untraceable/Absent'])) + ' names in all, including the visits made and the notice given.',
+    'Publish how exclusions of electors with no link to the 2002 roll were decided.',
     'Schedule hearings so that each case can be heard, rather than listing hundreds of cases in one slot.',
-    'Explain the removals in the ' + o60.length + ' parts that lost more than 60% of their roll.',
+    'Explain the exclusions in the ' + o60.length + ' parts that lost more than 60% of their roll.',
     'Publish restorations after hearings, part by part, so the final count can be set against these lists.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 17);
 
   // ---- Method
   s = K.slide('Method', 'Where the figures come from and how the rates are defined');
   K.bullets(s, [
-    'The source is the September 2026 SIR lists for the five constituencies, compiled for these five seats only. They record the outcome for every elector on the roll before the revision, whether struck off (with the officer\'s reason), kept but summoned to a hearing (with the rule), or kept.',
-    'The removal rate is the electors on the absent-shifted-dead list divided by the electors on the roll before the revision, for each group.',
+    'The source is the September 2026 SIR lists for the five constituencies, compiled for these five seats only. They record the outcome for every elector on the roll before the revision, whether left off (with the officer\'s reason), kept but summoned to a hearing (with the rule), or kept.',
+    'The exclusion rate is the electors on the absent-shifted-dead list divided by the electors on the roll before the revision, for each group.',
     'The within-part difference is one group\'s rate minus another\'s inside each polling part, pooled and weighted by the smaller group in each part. Parts with fewer than 20 of either group are left out. This holds the neighbourhood and the officer constant.',
     'Part correlations are Spearman rank correlations, which compare orderings only, across parts with at least 100 electors within each constituency.',
     'The 2023 results are the declared Assembly results. Only counts are published, never a name, EPIC number or address.',

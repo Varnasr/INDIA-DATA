@@ -29,8 +29,8 @@ OUT_JSON, OUT_CSV = D('india', 'margins.json'), D('india', 'margins_ls2024.csv')
 SOURCE = 'Election Commission of India, 2024 Lok Sabha results and statistical report 34 (assembly segments), through a published compilation of them'
 # state, election, page, file, the count used, what it is
 STATES = [
-    ('Bihar', '2025', 'bihar/results/', 'removed', 'names removed, both phases'),
-    ('Tamil Nadu', '2026', 'tamilnadu/elections/', 'removed', 'names removed'),
+    ('Bihar', '2025', 'bihar/results/', 'removed', 'names left off or deleted, both phases'),
+    ('Tamil Nadu', '2026', 'tamilnadu/elections/', 'removed', 'names left off the draft'),
     ('West Bengal', '2026', 'westbengal/elections/', 'fall', 'fall in the roll from 2024 to the 2026 election'),
     ('Kerala', '2026', 'kerala/elections/', 'fall', 'fall in the roll from January 2025 to the 2026 election'),
 ]
