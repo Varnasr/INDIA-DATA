@@ -11,7 +11,7 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/c
       scales: { x: { type: 'logarithmic', title: { display: true, text: L('Names left off the draft roll (log scale)') } }, y: { type: 'logarithmic', title: { display: true, text: L('2026 winning margin, votes (log scale)') } } } } });
   document.getElementById('fScatter').innerHTML = L('<b>In {k} of the {n} constituencies, more names were left off the draft roll than the 2026 winning margin.</b> The names left off and the margins rise together a little (rank correlation between the rate left off and the margin as a share of votes, {rho}, where 0 means the two are unrelated and 1 means they rise in step), so the seats that lost the most names were not the closest contests.', { k: S.over_margin, n: S.acs, rho: SIR.d(S.rho_rate_margin, 2) });
 
-  var counts = [[L('Left off the draft'), S.over_margin], [L('Net fall at the final roll'), S.net_over_margin], [L('Living left off, at turnout'), S.could_change]];
+  var counts = [[L('Left off the draft'), S.over_margin], [L('Net fall at the final roll'), S.net_over_margin], [L('Left off and living, at turnout'), S.could_change]];
   document.getElementById('cCounts').innerHTML = counts.map(function (c) {
     return '<div class="big"><b>' + c[1] + '</b><span class="of">' + L('of {n} seats', { n: S.acs }) + '</span><i style="--w:' + (100 * c[1] / S.acs).toFixed(1) + '%"></i><span>' + c[0] + '</span></div>';
   }).join('');
