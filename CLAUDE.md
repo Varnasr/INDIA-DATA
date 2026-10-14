@@ -1162,7 +1162,7 @@ with `--check`. Same rules as the disputes page: no private person named,
 nothing on what anyone intended. Replies sent through the share form join the
 research file with their filing date. English only.
 
-**Removed from the Roll? What to Do** (`help/`, on the front page's place, pinned on
+**Left Off the Roll? What to Do** (`help/`, on the front page's place, pinned on
 the front page, first under Start here and in every footer) sets out what the
 law and the Commission's orders let an elector do: Form 6, the inquiry before a
 deletion, the two appeals, the helpline and the drive after the revision, free
@@ -1466,7 +1466,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   finder that links to each state's own, and "How we know". The cards come
   in two grids: "Across India" (`.hubs.pins`), twelve pinned cards (`hub pin`,
   a red border and a pin icon drawn by CSS) in rows of three on a wide screen,
-  above a rule: Removed from the Roll? What to Do, Your Rights at a Protest
+  above a rule: Left Off the Roll? What to Do, Your Rights at a Protest
   (the rights section of the brief page), Protests and Disputes, RTI Replies,
   Every Constituency, All India, Women, The Cities, The SIR in Numbers, Case
   Studies, Where the Revision Stands and What's New. Keep the count a multiple
@@ -1834,6 +1834,22 @@ per slot, not the slot's length.
   folder in `PUBLIC_DIRS` or `PRIVATE`. The `_redirects` 404s stay as a second
   line. Do not link source files from a page, and describe
   sources without naming the people or organisations who compiled them.
+- **Left off and deleted are kept apart** (owner's rule, 14 October 2026,
+  from a reader who pointed out the legal difference). A name on the roll
+  before the revision whose form did not come back was **left off the draft**
+  (or excluded from it): no objection, notice or order touched it. Only a name
+  taken off after the draft, on a Form 7 objection or the officer's own
+  motion, with a hearing and an appealable order (RPA 1950 ss.22 and 24), is
+  **deleted**. Bihar's two phases together are **names left off or deleted**;
+  a difference between two rolls stays **the fall in the roll**; Assam's
+  10,56,291 stay **flagged**. The Supreme Court drew the same line (2026 INSC
+  564, paras 134 and 10.9). The sources and both readings are in
+  `data/india/raw/terms_research/`, and About the Data's "Words we use" sets
+  it out for readers. Quotations, titles and data keys keep their own words.
+  `check_writing.py` fails on "removed", "struck off" or "removals" in the
+  site's own words outside quotation marks (the corrections page excepted).
+  The disputes tag "Deletions" became "Names left off or deleted"; the page
+  script maps the old value so old filter links still work.
 - **Writing**: plain explanatory prose. Never refer to earlier versions of the
   analysis or to corrections on a public page, with one exception: the
   corrections page (`corrections/`, linked in every footer and from `terms/`,
