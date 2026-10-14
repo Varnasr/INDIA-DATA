@@ -1027,6 +1027,16 @@ Each seat's and district's own page links to its case (`CASE` in `seat.js` and
 repository: where a source's own address is dead, the item links to the site's
 page that carries the figure. English only.
 
+**About the Data** (`about-the-data/`, English only, in Start Here after How to
+Use This Site, in the search, and linked from the front page's "How we know",
+the guide and Downloads) says what each count means: names left off the draft,
+the reason beside a name, names removed, the fall in the roll, the change after
+the draft, notices, per 100 and why states are not ranked, women's share,
+religion and caste guessed from names, the winning margin, the typical district
+and rank correlations, and press and rounding. Its table of each state's
+constituency measure is read from `data/india/ac_finder.json`, so it follows
+`FINDER`. When a state's measure changes, change the prose there too.
+
 **What's New** (`updates/`, in every footer, in the search and linked from
 the front page's "Who made it") lists what was added to the site, by date,
 from `data/updates.json`, which is curated by hand: add an entry when
