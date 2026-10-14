@@ -1,0 +1,70 @@
+[
+ {
+  "id": "lko-01",
+  "status": "confirmed",
+  "evidence": "57 Lucknow 3994535 2794397 128242 3.21 427705 10.71 535855 13.41 49046 1.23 59290 1.48 1200138 30.04 (columns: total electors 27-10-2025, total electors 05-01-2026, death, untraceable/absent, permanently shifted, already enrolled, others, total, each with its %)",
+  "url": "https://getapi.indiatvnews.com/doc/pu.pdf",
+  "why": "The PDF is two photographs of the CEO's 'Status of Electors in Draft Roll as on 06-01-2026'; read by eye from page 2, row 57. The photograph is skewed, so the right-hand columns appear one row low, but the row is fixed by its own arithmetic: 39,94,535 less 27,94,397 = 12,00,138, the five reasons sum to it, and each printed % (13.41, 30.04) follows from the counts. The table's column order is death, untraceable/absent, shifted, already enrolled, others; the claim orders them by size, which is fine."
+ },
+ {
+  "id": "lko-02",
+  "status": "corrected",
+  "fix": {
+   "note": "The data were 'made available by district magistrate Vishak G' (HT, 7 January 2026). The percentages are right for all nine seats; the counts printed beside two of them are not. The pair 2,98,231 of 3,59,016 gives 16.93%, so it is Mohanlalganj's and was printed under Lucknow Cantonment as well. Lucknow Central's printed pair (2,22,598 of 3,72,000) gives 40.16%, not its 34.61%. Subtracting the eight other seats from the district totals gives Cantonment 3,65,590 before, and the two draft counts are swapped: Cantonment 3,65,590 to 2,22,598 is 39.11%, and Central 3,72,000 to 2,43,246 is 34.61%. That matches Dainik Bhaskar (Cantonment 3.65 lakh to 2.22 lakh, Central 3.72 lakh to 2.43 lakh). No CEO or DEO table by seat was found."
+  },
+  "evidence": "Among the state capital’s nine assembly constituencies, the steepest decline was recorded in Lucknow Cantonment at 39.11%, while Mohanlalganj saw the lowest drop at 16.93%. ... In Lucknow Central, 222,598 voters were mapped against 372,000, marking a decrease of 34.61%. In Lucknow Cantonment, 298,231 voters were mapped against 359,016, showing the steepest decline at 39.11%. In Mohanlalganj, 2,98,231 voters were mapped against 359,016, registering the lowest drop at 16.93%.",
+  "url": "https://www.hindustantimes.com/cities/lucknow-news/sir-in-state-capital-lko-cantt-sees-steepest-decline-of-39-11-mohanlalganj-least-at-1693-101767724684628.html",
+  "why": "Quote and all nine percentages verbatim (HT, Rajeev Mullick, published 7 January 2026 04:56 IST). The first reader's note had the slip backwards (it said Mohanlalganj repeats Cantonment's counts); the counts belong to Mohanlalganj, and Central and Cantonment have their draft counts swapped. The fix replaces the note. With the slips undone, HT and Bhaskar agree on Lucknow Cantonment (see the flag in lko-08)."
+ },
+ {
+  "id": "lko-08",
+  "status": "confirmed",
+  "evidence": "लखनऊ उत्तर में मतदाताओं की संख्या 4.99 लाख से घटकर 3.07 लाख रह गई, यानी करीब 1.91 लाख नाम कटे हैं। सरोजनीनगर में 6.02 लाख से घटकर 4.12 लाख मतदाता रह गए, यहां 1.89 लाख की कमी दर्ज हुई। ... लखनऊ कैंट सीट पर 3.65 लाख से घटकर 2.22 लाख मतदाता रह गए, यानी 1.43 लाख नाम कटे हैं। लखनऊ मध्य में भी 1.28 लाख नाम हटाए गए, जहां मतदाता संख्या 3.72 लाख से घटकर 2.43 लाख हो गई। ... अधिकारियों और चुनाव विश्लेषकों के मुताबिक, रोजगार, पढ़ाई, ट्रांसफर और शहरी पलायन इसकी बड़ी वजह माने जा रहे हैं।",
+  "url": "https://www.bhaskar.com/local/uttar-pradesh/lucknow/news/12-lakh-voters-in-lucknow-are-missing-from-the-sir-records-lucknow-uttar-pradesh-136875275.html",
+  "why": "Verbatim, Dainik Bhaskar, published 6 January 2026 17:35 IST. The errors the first reader lists are there ('27,94,397 पुरुष', '5,13,855'). FLAG, Lucknow Cantonment's two press figures: they do not disagree once HT's printing slips are undone. Bhaskar's 3.65 lakh to 2.22 lakh (39.2%) is the same seat as HT's 39.11%; HT printed Mohanlalganj's counts under Cantonment and swapped Cantonment's and Central's draft counts (worked in lko-02). The implied Cantonment figures are 3,65,590 before and 2,22,598 on the draft. Both are press figures; no official seat table was found, so the site should give the percentage and say the seat counts are from the press."
+ },
+ {
+  "id": "lko-03",
+  "status": "confirmed",
+  "evidence": "The highest number of “untraceable” voters were in Lucknow (4.27 lakh) ... The highest number of shifted voters were in Lucknow (5.35 lakh) ... “The number of absentees is higher in urban areas because impurities in the electoral rolls regarding the voters’ addresses and their personal details are maximum there,” the official said.",
+  "url": "https://indianexpress.com/article/cities/lucknow/as-up-sir-comes-to-an-end-predominantly-urban-districts-of-state-face-higher-voter-deletions-10442501/",
+  "why": "Verbatim, Indian Express (Lalmani Verma), 28 December 2025. Also: Lucknow 10.71% untraceable (one of three districts above 10%) and 13.41% permanently shifted, the highest. The anonymous BJP leader's paragraph rests on religion and stays out, as the first reader says."
+ },
+ {
+  "id": "lko-04",
+  "status": "confirmed",
+  "evidence": "Out of 4.78 lakh unmapped electors in Lucknow district’s nine assembly seats, notices have been generated for 3,98,749 voters and hearings completed for 45,000, and their data is being uploaded daily, said additional district magistrate (ADM) Shubhi Singh. ... “In Lucknow, 171 electoral registration officers (EROs) and assistant electoral registration officers (AEROs) are doing daily hearings ... relaxation is given to them to send their family members or any acquaintances with their authorised letter/documents”",
+  "url": "https://www.hindustantimes.com/cities/lucknow-news/sir-notices-generated-for-over-3-98-lakh-voters-in-lucknow-hearings-completed-for-45000-101769806457335.html",
+  "why": "Verbatim, Hindustan Times, published 31 January 2026 07:44 IST. The four urban seats' 2.94 lakh (61%) of 4.80 lakh unmapped and the 31 January campaign at 4,132 polling stations are in the story. Note the story gives both 4.78 lakh and 4.80 lakh unmapped."
+ },
+ {
+  "id": "lko-05",
+  "status": "corrected",
+  "fix": {
+   "claim": "ThePrint reported in August 2026 that, on the final roll published in April 2026, Lucknow again had the largest fall in Uttar Pradesh from the roll before the revision, 9.14 lakh or 22.89 per cent, which the paper called deletions. It is a net fall: it counts names added after the draft as well as names removed."
+  },
+  "evidence": "The final electoral roll for Uttar Pradesh also saw the highest deletions in Lucknow, percentage-wise (22.89 per cent) as well as in absolute numbers—9.14 lakh.",
+  "url": "https://theprint.in/india/governance/bengaluru-to-lucknow-why-urban-centres-are-seeing-high-electoral-roll-deletions-during-sir/3026124/",
+  "why": "Verbatim, ThePrint (Apoorva Mandhani), 28 August 2026. 9.14 lakh / 39.94 lakh = 22.9%, so the base is the roll before the revision and the figure is the net change to the final roll. The original claim called it 'the highest deletions' in the site's own voice; a net change must not be called names removed, so the fix attributes the word to the paper and says what it is."
+ },
+ {
+  "id": "lko-06",
+  "status": "corrected",
+  "fix": {
+   "claim": "The Times of India, in its own analysis of the revision's figures, put Lucknow Cantonment's fall at 34.18 per cent, over 1.24 lakh names, the highest rate in the state, and Lucknow Central's at 28.88 per cent, 1.07 lakh. Both are larger than the 2022 winning margins of 39,512 and 10,935. The paper does not say which roll its figures run to; they are lower than the draft's fall, so they appear to be the net fall to the final roll, which counts new voters too."
+  },
+  "evidence": "Ravidas Mehrotra’s Lucknow Central seat recorded a staggering 1.07 lakh deletions, accounting for 28.88% of the electorate, nearly 10 times his winning margin of 10,935 votes. Deputy chief minister Brajesh Pathak’s Lucknow Cantonment seat witnessed the highest deletion rate in the state at 34.18%, translating to over 1.24 lakh voters removed from rolls, far exceeding his victory margin of 39,512.",
+  "url": "https://timesofindia.indiatimes.com/city/lucknow/sir-voter-deletions-challenge-past-mandate-across-parties-constituencies-in-up/articleshow/130346929.cms",
+  "why": "Verbatim, Times of India (Arvind Chauhan), 18 April 2026. The story says 'A detailed analysis of the Special Intensive Revision (SIR) 2026 voter data' and never says 'after the final roll', so that phrase in the first claim is the first reader's inference. 34.18% of the implied 3,65,590 is 1,24,959, below the draft's 39.11%, consistent with a net fall to the final roll. Margins match data/uttarpradesh/raw/results_2022.csv. The source of the paper's seat figures is not stated; if it was compiled from the named lists it would fall under the case rules, and nothing in the story says either way."
+ },
+ {
+  "id": "lko-07",
+  "status": "corrected",
+  "fix": {
+   "claim": "The Lucknow district administration publishes the lists of electors whose enumeration forms were not collected, for each of the nine Assembly seats, and a page for the final roll of 10 April 2026 that links lists for three of the nine seats."
+  },
+  "evidence": "SIR 2026 Uncollectable Forms Electors List: 168 Malihabad ... 175 Lucknow Cantt. 176 Mohanlal Ganj, each with a Google Drive VIEW link. Final Publication Voter List 2026 (Date 10-04-2026): Malihabad, Bakhshi Ka Talab and Sarojni Nagar link Drive folders; the other six VIEW links point back to the page itself.",
+  "url": "https://lucknow.nic.in/sir-2026-uncollectable-forms-electors-list/",
+  "why": "Both pages reopened (Firecrawl, Indian location). The uncollectable-forms page has all nine; the final-roll page (https://lucknow.nic.in/final-publication-voter-list-2026-date-10-04-2026/) has working links for three seats only, so the original claim said more than the page. The linked lists carry electors' names: the site may point to the official index page, but must not count or quote from the lists."
+ }
+]

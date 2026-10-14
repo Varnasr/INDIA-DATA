@@ -1,0 +1,96 @@
+{
+  "place": "Lucknow district, Uttar Pradesh",
+  "context": "Site figure: 30.0 of every 100 names on the roll of 27 October 2025 left off the draft of 6 January 2026 (12,00,138 of 39,94,535), highest of 75 districts (state 18.7). Checked against data/uttarpradesh/districts.json. Nine Assembly seats (168 to 176). Searched 14 October 2026.",
+  "items": [
+    {
+      "id": "lko-01",
+      "claim": "The Chief Electoral Officer's district table of the draft gives Lucknow 39,94,535 electors before, 27,94,397 on the draft and 12,00,138 left off: 5,35,855 shifted, 4,27,705 untraceable or absent, 1,28,242 dead, 59,290 other and 49,046 enrolled more than once.",
+      "quote": "57,Lucknow,3994535,2794397,128242,427705,535855,49046,59290,1200138",
+      "outlet": "Chief Electoral Officer, Uttar Pradesh ('Status of Electors in Draft Roll as on 06-01-2026'), as photographed and published by India TV",
+      "date": "2026-01-06",
+      "url": "https://getapi.indiatvnews.com/doc/pu.pdf",
+      "kind": "primary",
+      "note": "The CEO's site cannot be reached from outside India; the table is the CEO's as carried in the press, transcribed into data/uttarpradesh/raw/asd_district.csv (columns: roll before, draft, dead, untraceable/absent, shifted, multiple, others, total). Every row satisfies before less draft equals total and the reasons sum to it."
+    },
+    {
+      "id": "lko-02",
+      "claim": "Hindustan Times reported the same figures as data made available by the District Magistrate, and gave the fall seat by seat: Lucknow Cantonment 39.11 per cent, Lucknow North 38.39, Lucknow East 36.77, Lucknow Central 34.61, Sarojininagar 31.42, Lucknow West 30.25, Bakshi Ka Talab 22.27, Malihabad 17.41 and Mohanlalganj 16.93.",
+      "quote": "Among the state capital’s nine assembly constituencies, the steepest decline was recorded in Lucknow Cantonment at 39.11%, while Mohanlalganj saw the lowest drop at 16.93%.",
+      "outlet": "Hindustan Times",
+      "date": "2026-01-07",
+      "url": "https://www.hindustantimes.com/cities/lucknow-news/sir-in-state-capital-lko-cantt-sees-steepest-decline-of-39-11-mohanlalganj-least-at-1693-101767724684628.html",
+      "kind": "press",
+      "note": "The story says the data were 'made available by district magistrate Vishak G'. Its Mohanlalganj counts repeat Lucknow Cantonment's (2,98,231 against 3,59,016), a printing slip; only the percentages are usable for those two seats, and the Cantonment counts themselves do not give 39.11%. No CEO table by constituency was found to check them."
+    },
+    {
+      "id": "lko-08",
+      "claim": "Dainik Bhaskar reported the largest falls by number in Lucknow North (4.99 lakh to 3.07 lakh) and Sarojininagar (6.02 lakh to 4.12 lakh), and wrote that officials and analysts put the shifting down to jobs, study, transfers and urban migration.",
+      "quote": "लखनऊ उत्तर में मतदाताओं की संख्या 4.99 लाख से घटकर 3.07 लाख रह गई, यानी करीब 1.91 लाख नाम कटे हैं। सरोजनीनगर में 6.02 लाख से घटकर 4.12 लाख मतदाता रह गए, यहां 1.89 लाख की कमी दर्ज हुई। ... अधिकारियों और चुनाव विश्लेषकों के मुताबिक, रोजगार, पढ़ाई, ट्रांसफर और शहरी पलायन इसकी बड़ी वजह माने जा रहे हैं।",
+      "outlet": "Dainik Bhaskar (Lucknow)",
+      "date": "2026-01-06",
+      "url": "https://www.bhaskar.com/local/uttar-pradesh/lucknow/news/12-lakh-voters-in-lucknow-are-missing-from-the-sir-records-lucknow-uttar-pradesh-136875275.html",
+      "kind": "press",
+      "note": "The explanation is not attributed to a named official. The story has errors elsewhere: it gives 27,94,397 'men' (the draft total) and 5,13,855 shifted (the CEO's 5,35,855). Its Lucknow Cantonment figures (3.65 lakh to 2.22 lakh) disagree with Hindustan Times (lko-02); neither can be checked against a CEO table by seat."
+    },
+    {
+      "id": "lko-03",
+      "claim": "The Indian Express reported, from officials, that Lucknow had the highest number of untraceable voters (4.27 lakh) and of shifted voters (5.35 lakh) in the state, and quoted an official saying absentees were higher in urban areas because the rolls' addresses and personal details were least accurate there.",
+      "quote": "“The number of absentees is higher in urban areas because impurities in the electoral rolls regarding the voters’ addresses and their personal details are maximum there,” the official said.",
+      "outlet": "The Indian Express",
+      "date": "2025-12-28",
+      "url": "https://indianexpress.com/article/cities/lucknow/as-up-sir-comes-to-an-end-predominantly-urban-districts-of-state-face-higher-voter-deletions-10442501/",
+      "kind": "press",
+      "note": "Official unnamed. Same story: Lucknow 10.71% untraceable, one of three districts above 10%; 13.41% permanently shifted, the highest share in the state. A later paragraph quoting an anonymous BJP leader rests on religion and is not used."
+    },
+    {
+      "id": "lko-04",
+      "claim": "After the draft, an Additional District Magistrate said notices had been generated for 3,98,749 of Lucknow's 4.78 lakh unmapped electors and hearings completed for 45,000, held daily by 171 EROs and AEROs, and that electors living elsewhere could send a family member with an authorisation letter.",
+      "quote": "Out of 4.78 lakh unmapped electors in Lucknow district’s nine assembly seats, notices have been generated for 3,98,749 voters and hearings completed for 45,000, and their data is being uploaded daily, said additional district magistrate (ADM) Shubhi Singh.",
+      "outlet": "Hindustan Times",
+      "date": "2026-01-31",
+      "url": "https://www.hindustantimes.com/cities/lucknow-news/sir-notices-generated-for-over-3-98-lakh-voters-in-lucknow-hearings-completed-for-45000-101769806457335.html",
+      "kind": "press",
+      "note": "Official named by role on the site. Same story: four urban seats (Lucknow East, West, North, Central) held 2.94 lakh (61%) of the district's 4.80 lakh unmapped voters; a special campaign at all 4,132 polling stations on 31 January."
+    },
+    {
+      "id": "lko-05",
+      "claim": "When the final roll was published in April 2026, ThePrint reported that Lucknow again had the highest deletions in Uttar Pradesh, 9.14 lakh or 22.89 per cent, against the roll before the revision.",
+      "quote": "The final electoral roll for Uttar Pradesh also saw the highest deletions in Lucknow, percentage-wise (22.89 per cent) as well as in absolute numbers—9.14 lakh.",
+      "outlet": "ThePrint",
+      "date": "2026-08-28",
+      "url": "https://theprint.in/india/governance/bengaluru-to-lucknow-why-urban-centres-are-seeing-high-electoral-roll-deletions-during-sir/3026124/",
+      "kind": "press",
+      "note": "Net of names added after the draft; it counts new voters too, so the rise from 12.00 lakh left off to 9.14 lakh net is not a count of names put back. No CEO district table of the final roll was found to check it. The story quotes former Election Commissioners on urban migration in general terms, not on Lucknow."
+    },
+    {
+      "id": "lko-06",
+      "claim": "The Times of India reported in April 2026 that Lucknow Cantonment had the highest deletion rate of any seat in Uttar Pradesh after the final roll, 34.18 per cent or over 1.24 lakh names, and Lucknow Central 28.88 per cent or 1.07 lakh, both larger than the 2022 winning margins.",
+      "quote": "Deputy chief minister Brajesh Pathak’s Lucknow Cantonment seat witnessed the highest deletion rate in the state at 34.18%, translating to over 1.24 lakh voters removed from rolls, far exceeding his victory margin of 39,512.",
+      "outlet": "The Times of India",
+      "date": "2026-04-18",
+      "url": "https://timesofindia.indiatimes.com/city/lucknow/sir-voter-deletions-challenge-past-mandate-across-parties-constituencies-in-up/articleshow/130346929.cms",
+      "kind": "press",
+      "note": "The paper's own analysis; the source of its constituency figures is not stated. Over the margin means large enough to decide a seat, never that it did."
+    },
+    {
+      "id": "lko-07",
+      "claim": "The Lucknow district administration publishes the lists of electors whose enumeration forms were not collected, by Assembly seat, and the final roll of 10 April 2026, by seat.",
+      "quote": "SIR 2026 Uncollectable Forms Electors List. S.N, AC Name, View. 1, 168 Malihabad, VIEW. 2, 169 Bakhshi Ka Talab, VIEW. 3, 170 Sarojni Nagar",
+      "outlet": "District Election Officer, Lucknow (lucknow.nic.in)",
+      "date": "2026",
+      "url": "https://lucknow.nic.in/sir-2026-uncollectable-forms-electors-list/",
+      "kind": "primary",
+      "note": "Quote from the search snippet of the index page. The lists themselves carry names and were not opened. Final roll page: https://lucknow.nic.in/final-publication-voter-list-2026-date-10-04-2026/."
+    }
+  ],
+  "not_found": [
+    "No CEO or DEO table of Lucknow's final roll by seat or by reason; the 9.14 lakh net figure (lko-05) is from the press only.",
+    "No official count of Form 6 and Form 7 applications, or of names removed after hearings, for Lucknow district.",
+    "No district-level split by sex of the names left off; the CEO's figures by sex reported in the press are for the state only.",
+    "No statement by the District Election Officer explaining why Lucknow's share was the state's highest beyond releasing the reasons (lko-02); the only explanation found is an unnamed official's general remark about urban rolls (lko-03).",
+    "No party allegation specific to Lucknow district's removals was found. A Congress leader's claim (ANI, 11 October 2026) about slum residents was made in Lucknow but concerns Uttar Pradesh generally and is not used.",
+    "No court case, FIR or protest specific to the SIR in Lucknow district was found.",
+    "The Aaj Tak district list (7 January 2026) was found in search but not opened; it repeats the CEO district figures already in lko-01.",
+    "No CEO or DEO table by Assembly seat for Lucknow was found; the seat figures in lko-02 and lko-08 come from two papers and disagree for Lucknow Cantonment."
+  ]
+}

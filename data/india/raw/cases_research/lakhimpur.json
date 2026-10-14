@@ -1,0 +1,86 @@
+{
+  "place": "Lakhimpur (AC 76), Lakhimpur district, Assam",
+  "context": "Site figure: the roll fell 56.7 per 1,000 from the draft of 27 December 2025 to the final roll of 10 February 2026 (1,73,362 to 1,63,526, a net fall of 9,836), the largest of 126 seats (state 9.7 per 1,000). This is a Special Revision, not an SIR, and the change is net: names added less names removed, never the names removed. Checked against data/assam/constituencies.json. Searched 14 October 2026.",
+  "items": [
+    {
+      "id": "lkp-01",
+      "claim": "The Chief Electoral Officer's table of the draft of the Special Revision gives Lakhimpur 210 polling stations and 1,73,362 electors: 85,283 men, 88,078 women and 1 third gender.",
+      "quote": "76 Lakhimpur 210 85283 88078 1 173362",
+      "outlet": "Chief Electoral Officer, Assam (Draft Electors, 27-12-2025)",
+      "date": "2025-12-27",
+      "url": "https://ceoassam.nic.in/summary/2026/Draft_Electors_27-12-2025.pdf",
+      "kind": "primary",
+      "note": "Read from the text layer of the copy in data/assam/raw/sources/ceo_draft_electors_20251227.pdf."
+    },
+    {
+      "id": "lkp-02",
+      "claim": "The Chief Electoral Officer's table of the final roll gives Lakhimpur 1,63,526 electors: 81,120 men, 82,402 women and 4 third gender. That is 9,836 fewer than the draft, of whom 5,676 were women (57.7 per cent) against 50.8 per cent of the draft.",
+      "quote": "76 Lakhimpur 210 81120 82402 4 163526",
+      "outlet": "Chief Electoral Officer, Assam (Final Electors, 10-02-2026)",
+      "date": "2026-02-10",
+      "url": "https://ceoassam.nic.in/summary/2026/Final%20Electors_10-02-2026.pdf",
+      "kind": "primary",
+      "note": "Read from data/assam/raw/sources/ceo_final_electors_20260210.pdf. The fall is net of names added; the table does not split additions from removals. Statewide, women were 62.9% of the net fall from draft to final."
+    },
+    {
+      "id": "lkp-03",
+      "claim": "The final roll of the previous summary revision, 8 February 2024, gave Lakhimpur 1,65,991 electors. The draft of the Special Revision rose above it by 7,371; the final roll of 2026 ended 2,465 below it.",
+      "quote": "76 Lakhimpur 82041 83949 1 165991",
+      "outlet": "Chief Electoral Officer, Assam (Final Elector, 08-02-2024)",
+      "date": "2024-02-08",
+      "url": "https://ceoassam.nic.in/summary/2024/Final%20Elector_08-02-2024.pdf",
+      "kind": "primary",
+      "note": "Read from data/assam/raw/sources/ceo_final_electors_20240208.pdf. Two years of ordinary changes lie between the 2024 roll and the 2026 draft."
+    },
+    {
+      "id": "lkp-04",
+      "claim": "Lakhimpur's fall is the largest of the five seats in Lakhimpur district, whose draft of 8,64,002 fell to 8,43,004 (a net fall of 20,998, or 24.3 per 1,000). Lakhimpur seat accounts for 47 per cent of the district's net fall.",
+      "quote": "21 Lakhimpur 73 Bihpuria 206 82991 83649 0 166640",
+      "outlet": "Chief Electoral Officer, Assam (Draft Electors, 27-12-2025, and Final Electors, 10-02-2026)",
+      "date": "2026-02-10",
+      "url": "https://ceoassam.nic.in/summary/2026/Final%20Electors_10-02-2026.pdf",
+      "kind": "primary",
+      "note": "District sums computed from the five seat rows in data/assam/raw/ac_rolls.csv (Bihpuria, Rongonadi, Nowboicha, Lakhimpur, Dhakuakhana); the quote shows the district's first row as printed. The Times of India (12 February 2026, lkp-05) reported Lakhimpur district at about 2.4%, which agrees."
+    },
+    {
+      "id": "lkp-05",
+      "claim": "The Times of India, from data it said it had accessed exclusively, reported that Lakhimpur was among the districts with the largest falls from draft to final roll, about 2.4 per cent, with Cachar and Kamrup Metro.",
+      "quote": "As per data exclusively accessed by the TOI, Udalgiri and Darrang district had 2.7% electors struck off, while the deletions in Lakhimpur, Cachar and Kamrup Metro districts were around 2.4% each.",
+      "outlet": "The Times of India",
+      "date": "2026-02-12",
+      "url": "https://timesofindia.indiatimes.com/india/assam-final-electoral-roll-shows-drop-in-voters-across-25-of-35-districts/articleshow/128234340.cms",
+      "kind": "press",
+      "note": "District figure, not the seat. The paper calls the net fall 'deletions'; it is net of additions."
+    },
+    {
+      "id": "lkp-06",
+      "claim": "The Indian Express reported that during the claims and objections period the district administrations of Nagaon, Lakhimpur and Goalpara issued notices warning that filing objections against many voters was not a valid practice and that action would follow against false, misleading or vexatious objections.",
+      "quote": "District administrations in multiple districts such as Nagaon, Lakhimpur, and Goalpara issued notices warning that individuals submitting multiple objections against multiple voters was not a valid practice. They said action would be initiated against those found to have filed “false, misleading, or vexatious” objections.",
+      "outlet": "The Indian Express",
+      "date": "2026-01-28",
+      "url": "https://indianexpress.com/article/political-pulse/poll-watch-assam-voter-roll-revision-unease-wave-objections-10498449/",
+      "kind": "press",
+      "note": "District-level, not specific to Lakhimpur seat. The notice itself was not found on lakhimpur.assam.gov.in. Other parts of the story concern another seat in the district and statements resting on religion; they are not used."
+    },
+    {
+      "id": "lkp-07",
+      "claim": "The Chief Electoral Officer said the final additions and deletions statewide were close to what BLOs found in their house-to-house visits, and that bulk Form 7 applications found invalid were summarily dismissed and not counted as received; he said the number dismissed was not counted.",
+      "quote": "“In many places, where we found that many bulk applications had been filed, the Election Registration Officers had been authorised to verify whether these were legitimate applications. In many cases, applicants were not even aware that complaints had been registered against their EPIC numbers… The applications found invalid were summarily dismissed, and these are not counted as applications received,” said Goel. When asked how many such applications were dismissed, he said that this was not enumerated.",
+      "outlet": "The Indian Express",
+      "date": "2026-02-12",
+      "url": "https://indianexpress.com/article/india/behind-assams-contentious-special-revision-why-over-10-lakh-names-have-been-deleted-from-voter-list-10527542/",
+      "kind": "press",
+      "note": "Statewide, not specific to Lakhimpur. Same story, from CEO data: 12.97 lakh Form 7 received statewide, 10.63 lakh accepted, 1.9 lakh rejected, 43,536 pending; 5.86 lakh Form 6 accepted of 7.6 lakh. The CEO is named as an official. A later paragraph about a minister's statement rests on religion and is not used."
+    }
+  ],
+  "not_found": [
+    "No count for Lakhimpur seat of names added (Form 6) and names removed (Form 7) after the draft; the CEO's tables give net rolls only, so the 9,836 cannot be split into additions and removals.",
+    "No count of Form 7 objections, notices or hearings in Lakhimpur seat. The CEO's Claims & Objections page (ceoassam.nic.in/summary/Claims&Objections_2026.html) lists applications by seat with names; it was not opened.",
+    "No statement by the Lakhimpur DEO or the ERO for AC 76 explaining the fall. A Sentinel post about the DEO Lakhimpur was found only on Facebook and could not be read.",
+    "The district administration's notice on multiple objections (lkp-06) was not found in its original form.",
+    "Reports of forged Form 7 objections in Lakhimpur district (Scroll, 24 January 2026) concern the Ranganadi and Nowboicha seats, not Lakhimpur seat, and rest on the religion of those objected to; not used. The Indian Express count of objections in Ronganodi seat is likewise another seat and not used.",
+    "No court case, FIR or protest specific to Lakhimpur seat was found. A protest list (Matrix News) names 'Lakhimpur' without saying which seat; not opened beyond the search snippet.",
+    "No 2026 Assembly result for Lakhimpur is held in the repo, so no comparison with the margin was made.",
+    "Assamese-language searches found no Lakhimpur-specific report."
+  ]
+}
