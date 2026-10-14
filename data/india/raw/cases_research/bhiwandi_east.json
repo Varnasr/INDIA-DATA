@@ -1,0 +1,127 @@
+{
+  "place": "Bhiwandi East (AC 137), Thane district, Maharashtra",
+  "context": "Site figure: 49.1 of every 100 names on the roll before the revision left off the draft of 31 August 2026 (1,84,692 of 3,76,138), highest of 288 (state 21.1; Thane district 38.4). Checked against data/maharashtra/constituencies.json. Searched 14 October 2026.",
+  "items": [
+    {
+      "id": "bhe-01",
+      "claim": "The Chief Electoral Officer's AC-wise statement enclosed with the press note of 16 September 2026 lists Bhiwandi East first of all 288 seats: 3,76,138 electors before the revision, 1,84,692 enumeration forms uncollected, 49.10 per cent.",
+      "quote": "| 1 | Thane | 137 | Bhiwandi East | 376138 | 184692 | 49.10 |",
+      "outlet": "Chief Electoral Officer, Maharashtra (press note of 16.9.2026, enclosed statement 'SIR-2026- Uncollectable EF electors as on 31-08-2026')",
+      "date": "2026-09-16",
+      "url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/16.9.2026%20IE%20Report%20Response.pdf",
+      "kind": "primary",
+      "note": "Read through Firecrawl's PDF parser (pages 1 to 3 of 8). Agrees with data/maharashtra/raw/ac_roll.csv. The press note itself is a reply to a newspaper report about the religious composition of seats; only the table row is used here."
+    },
+    {
+      "id": "bhe-02",
+      "claim": "The Chief Electoral Officer's AC-wise tables of 1 September 2026 split Bhiwandi East's 1,84,692 names by reason: 86,256 absent, 68,255 shifted, 15,662 duplicate, 8,744 dead and 5,775 other. Shifted and absent together are 83.7 per cent; dead are 4.7 per cent.",
+      "quote": "137,Bhiwandi East,Thane,15662,8744,68255,86256,5775,184692",
+      "outlet": "Chief Electoral Officer, Maharashtra (Marathi press note of 01.09.2026, AC-wise reasons table)",
+      "date": "2026-09-01",
+      "url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Pressnotemarathi01.09.2026.pdf",
+      "kind": "primary",
+      "note": "Quote is the row as transcribed in data/maharashtra/raw/ac_reasons.csv (columns: duplicate, dead, shifted, absent, other, total); the Marathi PDF was not re-read for this file. Read the row against the PDF before publishing."
+    },
+    {
+      "id": "bhe-03",
+      "claim": "The same tables give Bhiwandi East a draft roll of 1,91,446: 1,00,418 men, 90,968 women and 60 third gender. Women are 47.5 per cent of the draft. No split by sex of the names left off is published.",
+      "quote": "137,Bhiwandi East,Thane,100418,90968,60,191446",
+      "outlet": "Chief Electoral Officer, Maharashtra (Marathi press note of 01.09.2026, draft by sex)",
+      "date": "2026-09-01",
+      "url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Pressnotemarathi01.09.2026.pdf",
+      "kind": "primary",
+      "note": "Row as transcribed in data/maharashtra/raw/ac_draft_sex.csv; PDF not re-read for this file."
+    },
+    {
+      "id": "bhe-04",
+      "claim": "In the 2024 Assembly election the Samajwadi Party won Bhiwandi East by 52,015 votes over the Shiv Sena, on a roll of 3,73,659. The 1,84,692 names left off the draft are 3.6 times that margin.",
+      "quote": "137,BHIWANDI EAST,,373659,RAIS KASAM SHAIKH,SP,119687,SANTOSH MANJAYYA SHETTY,SHS,67672,52015,191691",
+      "outlet": "Election Commission of India, statistical report of the 2024 Maharashtra Assembly election (as held in data/india/raw/assembly/maharashtra_2024.csv)",
+      "date": "2024-11-23",
+      "url": "https://www.eci.gov.in/statistical-reports",
+      "kind": "primary",
+      "note": "Quote is the row of data/india/raw/assembly/maharashtra_2024.csv (ECI statistical report as held in the repo; candidate names are public office candidates). The report itself was not re-read. Over the margin means the count was large enough to decide the seat, never that it did."
+    },
+    {
+      "id": "bhe-05",
+      "claim": "Before the draft, the Free Press Journal reported that Bhiwandi East had the slowest digitisation of the three Bhiwandi seats, 48.20 per cent, and that officials said many migrant workers enrolled in Bhiwandi in 2002 had since moved back to their villages or to other cities.",
+      "quote": "Data from the election department shows that digitisation has been completed for 48.20 per cent of the electoral roll in Bhiwandi East Assembly constituency and 52.11 per cent in Bhiwandi West. ... Officials involved in the exercise said a sizeable number of migrant workers who were residing in Bhiwandi in 2002 have since moved back to their native villages or relocated to other cities.",
+      "outlet": "Free Press Journal",
+      "date": "2026-08-10",
+      "url": "https://www.freepressjournal.in/mumbai/bhiwandi-sir-exercise-urban-voter-digitisation-nears-50-migrant-population-poses-challenge",
+      "kind": "press",
+      "note": "Officials are unnamed in the story. Figures are progress during enumeration, not the final count."
+    },
+    {
+      "id": "bhe-06",
+      "claim": "The same report quoted a booth-level officer in Bhiwandi East saying tenants had moved without leaving word, that residents of buildings were reluctant to sign for people who no longer lived there, and that some workers were enrolled both in their home villages and in Bhiwandi.",
+      "quote": "A Booth Level Officer (BLO) working in Bhiwandi East said the movement of migrant workers and people engaged in business had made the verification process more complicated. Many tenants who had previously lived in rented accommodation have moved elsewhere, leaving little information about their current whereabouts. In some cases, officials are able to obtain information about voters who have moved out, but residents of the concerned buildings are often reluctant to sign forms related to people who no longer live there.",
+      "outlet": "Free Press Journal",
+      "date": "2026-08-10",
+      "url": "https://www.freepressjournal.in/mumbai/bhiwandi-sir-exercise-urban-voter-digitisation-nears-50-migrant-population-poses-challenge",
+      "kind": "press",
+      "note": "BLO unnamed. The duplicate-entry sentence in the story: 'Some workers are reportedly listed in both the electoral rolls of their native villages and Bhiwandi.' The story also says many BLOs were teachers doing the work after school hours."
+    },
+    {
+      "id": "bhe-07",
+      "claim": "The Times of India reported before the draft that Bhiwandi East had the highest share of uncollectable forms in the state, 49.1 per cent, against 6.11 per cent in Akole (ST), the lowest, and that officials said uncollectable status did not mean automatic disenfranchisement.",
+      "quote": "Akole (ST) in Ahmednagar at 6.11% recorded the state’s lowest uncollectable forms against Bhiwandi East’s 49.1% — underscoring the persistent urban-rural gap. Officials said uncollectable status didn’t mean automatic disenfranchisement.",
+      "outlet": "The Times of India (Pune)",
+      "date": "2026-08 (late August, before the 31 August draft; exact date not shown on the page read)",
+      "url": "https://timesofindia.indiatimes.com/city/pune/over-40-sir-forms-uncollectable-in-25-maharashtra-assembly-seats-parties-activists-demand-booth-wise-data/articleshow/133430863.cms",
+      "kind": "press",
+      "note": "The story also reports civil society groups (Maharashtra SIR Jagruti Abhiyan) and opposition parties demanding booth-wise data on uncollectable forms statewide; not Bhiwandi-specific."
+    },
+    {
+      "id": "bhe-08",
+      "claim": "The Hindu, reading the Commission's figures, named Bhiwandi East as the seat with the highest deletions in Maharashtra and reported that 'permanently shifted' and 'untraceable or absent' appeared to have been used as blanket categories across the state.",
+      "quote": "Bhiwandi East in Thane recorded the highest deletions (49.1%). Of the 3.76 lakh voters, 1.85 lakh names were deleted. “Permanently Shifted” and “Untraceable or Absent” seem to have been used as blanket categories to delete large number of names from the rolls.",
+      "outlet": "The Hindu",
+      "date": "2026-09-15",
+      "url": "https://www.thehindu.com/data/sir-glaring-oddities-in-maharashtras-deletion-patterns/article71467756.ece",
+      "kind": "press",
+      "note": "The 'blanket categories' sentence is the paper's statewide reading, illustrated with Kalyan Rural and Pune seats, not with Bhiwandi East. The paper also notes the CEO's FAQ defines 'Absent' as 'the elector was unavailable'."
+    },
+    {
+      "id": "bhe-09",
+      "claim": "The Chief Electoral Officer said the high share of uncollectable forms appears in urban seats because electors keep moving from one place to another, and that names in the shifted, absent or other categories could still be added through Form 6 during the claims period.",
+      "quote": "From the statement, it can be clearly seen that such trend of high uncollectable electors appears in Urban Assembly constituencies in Maharashtra State due to constant migration/shifting of electors from one place to another ... electors in sub-category “Shifted or Absent or others” have a fair chance to file Form 6 for their inclusion in Electoral Roll during ongoing claims and objection period (31.8.2026 to 30.9.2026), from their current native place.",
+      "outlet": "Chief Electoral Officer, Maharashtra (press note of 16.9.2026)",
+      "date": "2026-09-16",
+      "url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/16.9.2026%20IE%20Report%20Response.pdf",
+      "kind": "primary",
+      "note": "Statewide explanation, not specific to Bhiwandi East, though the enclosed table ranks it first. The elided part of the first sentence is a rebuttal of a newspaper report about religious composition; it is left out under the case rules. The claims period was later extended to 12 October 2026 (ECI press note of 26.09.2026, PIB release 2315309)."
+    },
+    {
+      "id": "bhe-10",
+      "claim": "On the day after the draft, the Samajwadi Party MLA for Bhiwandi East posted that over 50 per cent of names had been cut in the constituency, that 27,000 of the remaining electors showed discrepancies and 17,000 had no link to old records, and asked electors to file Form 6 through BLOs or the party's booth agents.",
+      "quote": "The newly published voter list shows a dangerous trend: over 50% of names have been cut in our constituency, giving us the lowest SIR percentage in Maharashtra. Out of the remaining 2 lakh votes, 27,000 show discrepancies and 17,000 lack linkage to old records.",
+      "outlet": "Samajwadi Party MLA for Bhiwandi East (post on X)",
+      "date": "2026-09-01",
+      "url": "https://x.com/rais_shk/status/2094721341866029081",
+      "kind": "party",
+      "note": "A party office-holder's own post, so a party claim. 'Over 50%' overstates the CEO's 49.10%. The 27,000 and 17,000 figures (discrepancy and no-mapping notices) were not found in any CEO table; no Commission reply found."
+    },
+    {
+      "id": "bhe-11",
+      "claim": "Shiv Sena (UBT) MLA Aaditya Thackeray, in a presentation on Mumbai's rolls, cited Bhiwandi East: 1,91,691 votes were cast there in 2024 while the draft roll held 1,91,446, fewer than the number who voted. Election Commission officials replied that differences in Maharashtra's voter counts came from removing duplicate registrations and that the lists had been published.",
+      "quote": "According to Thackeray, 1,91,691 voters had cast their votes in the 2024 Assembly election, while the 2026 SIR draft roll contained 1,91,446 voters, a difference of 245. ... ECI officials said the variation between voter counts before the SIR and those in the draft roll resulted from an exercise to identify and remove duplicate registrations.",
+      "outlet": "The Indian Express",
+      "date": "2026-10-10",
+      "url": "https://indianexpress.com/article/cities/mumbai/aaditya-thackeray-5-lakh-ghost-voters-mumbai-eci-shiv-sena-ubt-mla-10915295/",
+      "kind": "press",
+      "note": "Party claim (Shiv Sena UBT), with the Commission's reply as reported beside it. The ECI reply is general to Maharashtra and Mumbai, not specific to Bhiwandi East. The 1,91,691 equals the total votes polled in the repo's copy of the ECI 2024 result (data/india/raw/assembly/maharashtra_2024.csv). Comparing votes cast with a draft roll is the party's comparison."
+    }
+  ],
+  "not_found": [
+    "No statement by the Bhiwandi East ERO or the Thane District Election Officer explaining why this seat's share left off was the state's highest; the only official explanation found is the CEO's statewide one (bhe-09).",
+    "No count of notices (no-mapping or logical discrepancy), hearings, Form 6 or Form 7 applications for Bhiwandi East from any official source. The MLA's 27,000 and 17,000 (bhe-10) are unconfirmed.",
+    "No polling-station or ward-level breakdown for Bhiwandi East; the CEO table gives the seat total only.",
+    "No report of a court case, FIR or protest specific to the SIR in Bhiwandi East.",
+    "The MLA's Facebook and Instagram posts (visits to families whose names were removed; office help desk) could not be read: Facebook is not supported by the scraper.",
+    "The mid-day report of 22 August 2026 naming Bhiwandi East among seats with the most uncollectible forms loaded only its first paragraph; not cited.",
+    "Thane district's notice pages (thane.nic.in) for AC 137 carry lists of deleted electors with names; they were not opened.",
+    "Bhiwandi East does not appear in the CEO's list of 38 seats of 30 September 2026; that list's title selects seats by religious composition and it is not used here.",
+    "The final roll (due 16 November 2026 after the extension) is not yet published, so nothing after the draft can be measured for this seat."
+  ]
+}

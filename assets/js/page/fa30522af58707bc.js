@@ -1,5 +1,7 @@
 Promise.all([SIR.json('data/india/cases.json'), SIR.json('data/uttarakhand/constituencies.json'), SIR.json('data/delhi/constituencies.json'),
-  SIR.json('data/gujarat/constituencies.json'), SIR.json('data/westbengal/districts.json')]).then(function (r) {
+  SIR.json('data/gujarat/constituencies.json'), SIR.json('data/westbengal/districts.json'), SIR.json('data/maharashtra/constituencies.json'),
+  SIR.json('data/tamilnadu/constituencies.json'), SIR.json('data/uttarpradesh/districts.json'), SIR.json('data/karnataka/districts.json'),
+  SIR.json('data/assam/constituencies.json')]).then(function (r) {
   var C = r[0].cases, n = SIR.n, d1 = function (v) { return SIR.d(v, 1); }, esc = SIR.esc;
   var sum = function (rows, k) { return rows.reduce(function (t, x) { return t + (x[k] || 0); }, 0); };
   var cmp = function (v, ref) { return v > ref ? 'above' : 'below'; };
@@ -8,19 +10,33 @@ Promise.all([SIR.json('data/india/cases.json'), SIR.json('data/uttarakhand/const
     var a = A.filter(function (x) { return x.ac === no; })[0], D = A.filter(function (x) { return x.district === a.district; });
     var rate = function (rows) { return 100 * sum(rows, count) / sum(rows, base); };
     var ranked = A.slice().sort(function (x, y) { return y[count] / y[base] - x[count] / x[base]; });
-    return { a: a, v: 100 * a[count] / a[base], dist: rate(D), state: rate(A), rank: ranked.indexOf(a) + 1, of: A.length, what: what };
+    return { a: a, v: 100 * a[count] / a[base], dist: rate(D), state: rate(A), rank: ranked.indexOf(a) + 1, of: A.length, what: what, kind: 'constituencies' };
+  }
+  // a district, set against its state only
+  function district(A, name, count, base, what, kind) {
+    var a = A.filter(function (x) { return x.district === name; })[0];
+    var ranked = A.slice().sort(function (x, y) { return y[count] / y[base] - x[count] / x[base]; });
+    return { a: { name: a.district }, v: 100 * a[count] / a[base], state: 100 * sum(A, count) / sum(A, base), rank: ranked.indexOf(a) + 1, of: A.length, what: what, kind: kind || 'districts', unit: true };
   }
   var F = {
     kichha: seat(r[1], 67, 'left_off', 'roll_before', 'names left off the draft per 100 on the roll before the revision'),
     tughlakabad: seat(r[2], 52, 'left_off', 'roll_before', 'names left off the draft per 100 on the roll before the revision'),
-    danilimda: seat(r[3], 54, 'removed', 'before', 'names left off the draft per 100 on the roll before the revision')
+    danilimda: seat(r[3], 54, 'removed', 'before', 'names left off the draft per 100 on the roll before the revision'),
+    'bhiwandi-east': seat(r[5], 137, 'left_off', 'before', 'names left off the draft per 100 on the roll before the revision'),
+    'anna-nagar': seat(r[6], 21, 'removed', 'before', 'names removed at the draft per 100 on the roll before the revision'),
+    lucknow: district(r[7], 'Lucknow', 'total', 'roll_before', 'names left off the draft per 100 on the roll before the revision'),
+    'bbmp-south': district(r[8], 'B.B.M.P (South)', 'removed', 'before', 'names left off the draft per 100 on the roll before the revision', 'election districts'),
+    lakhimpur: seat(r[9], 76, 'fall', 'draft', 'fall in the roll from the draft to the final roll per 100 on the draft')
   };
+  F.lakhimpur.fall = true;
   var W = r[4], WB = ['Murshidabad', 'Malda', 'Uttar Dinajpur', 'Dakshin Dinajpur'];
   var wRate = function (rows) { return 100 * (sum(rows, 'roll_2024') - sum(rows, 'election')) / sum(rows, 'roll_2024'); };
   var GJ = r[3].filter(function (x) { return x.district === 'Ahmedabad' && x.final != null; });
   var shrank = GJ.filter(function (x) { return x.final < x.draft; });
 
-  var LINK = { kichha: '../../uttarakhand/seat/67/', tughlakabad: '../../delhi/seat/52/', danilimda: '../../gujarat/seat/54/', 'murshidabad-malda': '../../westbengal/#d-murshidabad' };
+  var LINK = { kichha: '../../uttarakhand/seat/67/', tughlakabad: '../../delhi/seat/52/', danilimda: '../../gujarat/seat/54/', 'murshidabad-malda': '../../westbengal/#d-murshidabad',
+    'bhiwandi-east': '../../maharashtra/seat/137/', 'anna-nagar': '../../tamilnadu/seat/21/', lucknow: '../../uttarpradesh/district/lucknow/',
+    'bbmp-south': '../../karnataka/district/b-b-m-p-south/', lakhimpur: '../../assam/seat/76/' };
   var HEAD = { records: 'What the official records show', reported: 'What was reported', said: 'What officials and parties said' };
   var box = document.getElementById('cases'), short = [];
   C.forEach(function (c) {
@@ -32,17 +48,20 @@ Promise.all([SIR.json('data/india/cases.json'), SIR.json('data/uttarakhand/const
     });
     h += '<h3>What we looked for and could not find</h3><ul class="plain">' + c.not_found.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
     if (c.left_out.length) h += '<p class="note">' + n(c.left_out.length) + (c.left_out.length === 1 ? ' item' : ' items') + ' found in the reporting on this place could not be confirmed or fall outside what this site publishes, and are left out.</p>';
-    h += '<p><a class="btn" href="' + LINK[c.id] + '">' + (c.id === 'murshidabad-malda' ? 'West Bengal, with these districts on the map' : 'This constituency\'s own page') + '</a></p>';
+    h += '<p><a class="btn" href="' + LINK[c.id] + '">' + (c.id === 'murshidabad-malda' ? 'West Bengal, with these districts on the map' : F[c.id] && F[c.id].unit ? 'This district\'s own page' : 'This constituency\'s own page') + '</a></p>';
     box.insertAdjacentHTML('beforeend', h);
     var s = F[c.id];
     if (s) {
       VIZ.lollipop('v-' + c.id, { label: s.a.name + ': ' + s.what + ', against its district and state', axis: 'Per 100',
-        rows: [[s.a.name, s.v, '--fill-red'], [s.a.district + ' district', s.dist, '--fill-navy'], [c.title.split(', ').pop(), s.state, '--fill-grey']].map(function (x) { return { name: x[0], v: x[1], text: d1(x[1]), tok: x[2], hi: true }; }) });
-      var t = '<b>' + esc(s.a.name) + ' lost ' + d1(s.v) + ' of every 100 names on its roll at the draft, ' + cmp(s.v, s.dist) + ' its district\'s ' + d1(s.dist) + ' and ' + cmp(s.v, s.state) + ' the state\'s ' + d1(s.state) + '.</b>' + (s.rank === 1 ? ' No other of the state\'s ' + s.of + ' constituencies lost as large a share.' : ' It ranks ' + s.rank + ' of the state\'s ' + s.of + ' constituencies, where 1 lost the most.');
+        rows: [[s.a.name, s.v, '--fill-red']].concat(s.unit ? [] : [[s.a.district + ' district', s.dist, '--fill-navy']]).concat([[c.title.split(', ').pop(), s.state, '--fill-grey']]).map(function (x) { return { name: x[0], v: x[1], text: d1(x[1]), tok: x[2], hi: true }; }) });
+      var lead = s.fall ? esc(s.a.name) + '\'s roll fell by ' + d1(s.v) + ' of every 100 names from the draft to the final roll, ' : esc(s.a.name) + ' lost ' + d1(s.v) + ' of every 100 names on its roll at the draft, ';
+      var t = '<b>' + lead + (s.unit ? '' : cmp(s.v, s.dist) + ' its district\'s ' + d1(s.dist) + ' and ') + cmp(s.v, s.state) + ' the state\'s ' + d1(s.state) + '.</b>' + (s.rank === 1 ? ' No other of the state\'s ' + s.of + ' ' + s.kind + (s.fall ? ' had as large a fall.' : ' lost as large a share.') : ' It ranks ' + s.rank + ' of the state\'s ' + s.of + ' ' + s.kind + ', where 1 lost the most.');
+      if (c.id === 'lakhimpur') t += ' This is the net change, names removed less names added, and Assam\'s tables do not give the two apart.';
+      if (c.id === 'anna-nagar') t += ' Its roll then rose by ' + n(s.a.added_net) + ' to the final roll, a rise that counts new voters as well as anyone put back.';
       if (c.id === 'danilimda') t += ' After the draft ' + n(s.a.added) + ' names were added and ' + n(s.a.deleted) + ' deleted, and its final roll of ' + n(s.a.final) + ' is smaller than its draft of ' + n(s.a.draft) + '. ' + (shrank.length === 1 ? 'It is the one seat of Ahmedabad\'s ' + GJ.length + ' whose final roll is smaller than its draft, by the press figures for after the draft.' : shrank.length + ' of Ahmedabad\'s ' + GJ.length + ' seats have a final roll smaller than their draft, by the press figures for after the draft.');
       if (c.id === 'tughlakabad') t += ' The 2025 winning margin was ' + n(s.a.margin) + ' votes.';
       document.getElementById('f-' + c.id).innerHTML = t;
-      short.push(esc(s.a.name) + ' lost ' + d1(s.v) + ' of every 100 names at the draft, ' + (s.rank === 1 ? 'the largest share of any of ' + c.title.split(', ').pop() + '\'s ' + s.of + ' constituencies' : 'against ' + d1(s.state) + ' in ' + c.title.split(', ').pop()) + '.');
+      short.push((s.fall ? esc(s.a.name) + '\'s roll fell by ' + d1(s.v) + ' of every 100 from the draft to the final roll, ' : esc(s.a.name) + ' lost ' + d1(s.v) + ' of every 100 names at the draft, ') + (s.rank === 1 ? 'the largest ' + (s.fall ? 'fall' : 'share') + ' of any of ' + c.title.split(', ').pop() + '\'s ' + s.of + ' ' + s.kind : 'against ' + d1(s.state) + ' in ' + c.title.split(', ').pop()) + '.');
     } else {
       var rows = WB.map(function (d) { return W.filter(function (x) { return x.district === d; })[0]; });
       VIZ.lollipop('v-' + c.id, { label: 'Fall in the roll from the 2024 Lok Sabha roll to the roll of the 2026 election, per 100, four districts against West Bengal', axis: 'Per 100',

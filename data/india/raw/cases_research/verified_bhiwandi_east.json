@@ -1,0 +1,95 @@
+[
+ {
+  "id": "bhe-01",
+  "status": "confirmed",
+  "evidence": "1 Thane 137 Bhiwandi East 376138 184692 49.10",
+  "url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/16.9.2026%20IE%20Report%20Response.pdf (read with pypdf from the repo copy data/maharashtra/raw/sources/resp_ie_20260916.pdf, page 3)",
+  "why": "The statement enclosed with the CEO's press note dated 16.9.2026 ('Total Elector before SIR', 'Uncollected', '% of Uncollected') lists Bhiwandi East at serial 1 of 288 with these figures. 1,84,692 / 3,76,138 = 49.10%."
+ },
+ {
+  "id": "bhe-02",
+  "status": "corrected",
+  "fix": {
+   "claim": "The Chief Electoral Officer's AC-wise tables of 1 September 2026 split Bhiwandi East's 1,84,692 names by reason: 86,256 untraceable or absent, 68,255 permanently shifted, 15,662 already enrolled elsewhere, 8,744 dead and 5,775 other. Shifted and absent together are 83.7 per cent; dead are 4.7 per cent.",
+   "quote": "137 Thane 137 Bhiwandi East 15,662 8,744 68,255 86,256 5,775 184,692"
+  },
+  "evidence": "Header: 'Already Enrolled | Dead | Permanently Shifted | Untraceable/Absent | Others | Total Uncollectable'. Row: 137 Thane 137 Bhiwandi East 15,662 8,744 68,255 86,256 5,775 184,692",
+  "url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Pressnotemarathi01.09.2026.pdf (read with pypdf from the repo copy data/maharashtra/raw/sources/pn_20260901_mr.pdf, page 16)",
+  "why": "Every figure matches the PDF row and 1,54,511 / 1,84,692 = 83.7%, 8,744 / 1,84,692 = 4.7%. The CEO's column is 'Already Enrolled', not 'duplicate'; the fix uses the CEO's label. The first reader's quote was the repo's CSV transcription; the fix quotes the PDF row."
+ },
+ {
+  "id": "bhe-03",
+  "status": "confirmed",
+  "evidence": "137 Thane 137 Bhiwandi East 100,418 90,968 60 191,446",
+  "url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Pressnotemarathi01.09.2026.pdf (repo copy, page 5; header Male | Female | Third Gender | Total)",
+  "why": "The PDF row matches. 90,968 / 1,91,446 = 47.5%. Nothing in the CEO's tables splits the names left off by sex."
+ },
+ {
+  "id": "bhe-04",
+  "status": "confirmed",
+  "evidence": "137,BHIWANDI EAST,,373659,RAIS KASAM SHAIKH,SP,119687,SANTOSH MANJAYYA SHETTY,SHS,67672,52015,191691,",
+  "url": "data/india/raw/assembly/maharashtra_2024.csv (ECI statistical report, tables 10 and 11, per data/india/raw/assembly/SOURCES.md)",
+  "why": "The repo's copy of the Commission's report gives SP over SHS by 52,015 on 3,73,659 electors. 1,84,692 / 52,015 = 3.55, so 3.6 times. eci.gov.in could not be reached from the sandbox, so this rests on the repo copy, which SOURCES.md says agrees with the report in every seat. The claim names no candidate.",
+  "fix": {
+   "outlet": "Election Commission of India, statistical report of the 2024 Maharashtra Assembly election"
+  }
+ },
+ {
+  "id": "bhe-05",
+  "status": "confirmed",
+  "evidence": "Data from the election department shows that digitisation has been completed for 48.20 per cent of the electoral roll in Bhiwandi East Assembly constituency and 52.11 per cent in Bhiwandi West. ... Officials involved in the exercise said a sizeable number of migrant workers who were residing in Bhiwandi in 2002 have since moved back to their native villages or relocated to other cities.",
+  "url": "https://www.freepressjournal.in/mumbai/bhiwandi-sir-exercise-urban-voter-digitisation-nears-50-migrant-population-poses-challenge",
+  "why": "Verbatim, Free Press Journal, Danish Azmi, updated 10 August 2026. Bhiwandi West (52.11%) and Bhiwandi Rural (75.34%) were further along, so 'slowest of the three' holds. Officials unnamed."
+ },
+ {
+  "id": "bhe-06",
+  "status": "corrected",
+  "fix": {
+   "claim": "The same report quoted a booth-level officer in Bhiwandi East saying tenants had moved without leaving word and that residents of buildings were reluctant to sign for people who no longer lived there. The paper itself reported that some workers were listed both in their home villages and in Bhiwandi."
+  },
+  "evidence": "A Booth Level Officer (BLO) working in Bhiwandi East said the movement of migrant workers and people engaged in business had made the verification process more complicated. ... residents of the concerned buildings are often reluctant to sign forms related to people who no longer live there. ... Some workers are reportedly listed in both the electoral rolls of their native villages and Bhiwandi.",
+  "url": "https://www.freepressjournal.in/mumbai/bhiwandi-sir-exercise-urban-voter-digitisation-nears-50-migrant-population-poses-challenge",
+  "why": "Verbatim across two paragraphs of the same story. The duplicate-entry sentence is the paper's own ('Some workers are reportedly listed...'), not the BLO's, so the fix separates it. BLO unnamed."
+ },
+ {
+  "id": "bhe-07",
+  "status": "corrected",
+  "fix": {
+   "date": "2026-08-23"
+  },
+  "evidence": "Akole (ST) in Ahmednagar at 6.11% recorded the state’s lowest uncollectable forms against Bhiwandi East’s 49.1% — underscoring the persistent urban-rural gap. Officials said uncollectable status didn’t mean automatic disenfranchisement.",
+  "url": "https://timesofindia.indiatimes.com/city/pune/over-40-sir-forms-uncollectable-in-25-maharashtra-assembly-seats-parties-activists-demand-booth-wise-data/articleshow/133430863.cms",
+  "why": "Quote verbatim. The page is dated 'Aug 23, 2026, 01:17 IST', so the date is fixed. The same story says 'Bhiwandi East constituency recorded the highest uncollectable forms in the state at 49.1%'."
+ },
+ {
+  "id": "bhe-08",
+  "status": "confirmed",
+  "evidence": "Bhiwandi East in Thane recorded the highest deletions (49.1%). Of the 3.76 lakh voters, 1.85 lakh names were deleted. “Permanently Shifted” and “Untraceable or Absent” seem to have been used as blanket categories to delete large number of names from the rolls.",
+  "url": "https://www.thehindu.com/data/sir-glaring-oddities-in-maharashtras-deletion-patterns/article71467756.ece",
+  "why": "Verbatim, The Hindu, 15 September 2026 (Pon Vasanth B.A., Nitika Francis). The 'blanket categories' sentence is illustrated with Kalyan Rural and Pune seats, as the first reader notes, so the site must not present it as a finding about Bhiwandi East."
+ },
+ {
+  "id": "bhe-09",
+  "status": "corrected",
+  "fix": {
+   "quote": "electors in sub-category “Shifted or Absent or others” have a fair chance to file Form 6 for their inclusion in Electoral Roll during ongoing claims and objection period (31.8.2026 to 30.9.2026), from their current native place. ... From the statement, it can be clearly seen that such trend of high uncollectable electors appears in Urban Assembly constituencies in Maharashtra State due to constant migration/shifting of electors from one place to another"
+  },
+  "evidence": "Page 2 of the press note: the Form 6 sentence comes first, then 'Assembly-wise detailed statement ... is enclosed herewith. From the statement, it can be clearly seen that such trend of high uncollectable electors appears in Urban Assembly constituencies in Maharashtra State due to constant migration/shifting of electors from one place to another and it is not based on any religious or community population.'",
+  "url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/16.9.2026%20IE%20Report%20Response.pdf",
+  "why": "Both passages are verbatim, but the first reader's quote put the second passage first behind an ellipsis, reversing the source's order. The fix keeps the source's order. The claim is accurate and statewide; the elided clause about religious composition stays out."
+ },
+ {
+  "id": "bhe-10",
+  "status": "confirmed",
+  "evidence": "The newly published voter list shows a dangerous trend: over 50% of names have been cut in our constituency, giving us the lowest SIR percentage in Maharashtra. Out of the remaining 2 lakh votes, 27,000 show discrepancies and 17,000 lack linkage to old records. ... Immediately submit Form 6 with your local BLO or our party BLAs to re-add your name.",
+  "url": "https://x.com/rais_shk/status/2094721341866029081",
+  "why": "Post read through Firecrawl's X reader, posted 2026-09-01T09:37:40Z by the account of the SP MLA for Bhiwandi East, a public office-holder; the claim attributes it to the party and names him by role only. FLAG, the MLA's figures: the CEO's own figures are 49.10% left off (not 'over 50%') and a draft of 1,91,446 (not '2 lakh'). The 27,000 discrepancies and 17,000 no-mapping cases appear in no CEO table found: the CEO published notices by district only (Thane 5,46,036 discrepancy and 7,71,148 no mapping, data/maharashtra/raw/district_notices.csv, release of 4 September 2026), and in Thane the no-mapping count is the larger of the two, whereas the MLA's split runs the other way. The sources neither confirm nor refute the two AC figures; the site may quote them only as the MLA's, unconfirmed. No Commission reply was found."
+ },
+ {
+  "id": "bhe-11",
+  "status": "confirmed",
+  "evidence": "According to Thackeray, 1,91,691 voters had cast their votes in the 2024 Assembly election, while the 2026 SIR draft roll contained 1,91,446 voters, a difference of 245. ... In response, ECI officials said the variation between voter counts before the SIR and those in the draft roll resulted from an exercise to identify and remove duplicate registrations. ... They said lists of identified entries had also been published on the Maharashtra Chief Electoral Officer’s website",
+  "url": "https://indianexpress.com/article/cities/mumbai/aaditya-thackeray-5-lakh-ghost-voters-mumbai-eci-shiv-sena-ubt-mla-10915295/",
+  "why": "Verbatim, Indian Express, 10 October 2026. The ECI reply answers Thackeray's statewide 9.86 crore to 9.78 crore point, not the Bhiwandi example, as the first reader says; the site must not present it as a reply about Bhiwandi East. 1,91,691 equals total votes (including NOTA) in the repo's ECI 2024 file; 1,91,446 equals the CEO's draft. The comparison of votes cast with a draft roll is the party's."
+ }
+]

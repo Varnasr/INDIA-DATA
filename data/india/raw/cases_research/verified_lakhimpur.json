@@ -1,0 +1,54 @@
+[
+ {
+  "id": "lkp-01",
+  "status": "confirmed",
+  "evidence": "76 Lakhimpur 210 85283 88078 1 173362",
+  "url": "https://ceoassam.nic.in/summary/2026/Draft_Electors_27-12-2025.pdf (data/assam/raw/sources/ceo_draft_electors_20251227.pdf, page 2, read with pypdf)",
+  "why": "Text-layer row matches."
+ },
+ {
+  "id": "lkp-02",
+  "status": "corrected",
+  "fix": {
+   "claim": "The Chief Electoral Officer's table of the final roll gives Lakhimpur 1,63,526 electors: 81,120 men, 82,402 women and 4 third gender. That is a net fall of 9,836 from the draft. The count of women fell by 5,676, which is 57.7 per cent of the net fall, against women's 50.8 per cent of the draft."
+  },
+  "evidence": "76 Lakhimpur 210 81120 82402 4 163526",
+  "url": "https://ceoassam.nic.in/summary/2026/Final%20Electors_10-02-2026.pdf (data/assam/raw/sources/ceo_final_electors_20260210.pdf, page 2)",
+  "why": "Row matches; 1,73,362 less 1,63,526 = 9,836; 88,078 less 82,402 = 5,676 = 57.7% of 9,836; 88,078 / 1,73,362 = 50.8%. The first claim said '9,836 fewer than the draft, of whom 5,676 were women', which treats a net change as a count of people. The fix words it as a fall in counts."
+ },
+ {
+  "id": "lkp-03",
+  "status": "confirmed",
+  "evidence": "76 Lakhimpur 82041 83949 1 165991",
+  "url": "https://ceoassam.nic.in/summary/2024/Final%20Elector_08-02-2024.pdf (data/assam/raw/sources/ceo_final_electors_20240208.pdf, page 2)",
+  "why": "Row matches. 1,73,362 less 1,65,991 = 7,371; 1,65,991 less 1,63,526 = 2,465."
+ },
+ {
+  "id": "lkp-04",
+  "status": "confirmed",
+  "evidence": "Draft: 73 Bihpuria 169049, 74 Rongonadi 180412, 75 Nowboicha (SC) 175813, 76 Lakhimpur 173362, 77 Dhakuakhana (ST) 165366. Final: 166640, 177324, 172811, 163526, 162703.",
+  "url": "https://ceoassam.nic.in/summary/2026/Final%20Electors_10-02-2026.pdf (and the draft table; repo copies read with pypdf)",
+  "why": "District 8,64,002 to 8,43,004, net fall 20,998 = 24.3 per 1,000. Seat falls: 2,409, 3,088, 3,002, 9,836, 2,663, so Lakhimpur's is the largest, 46.8% of the district's (the claim's 47% rounds it). All are net changes."
+ },
+ {
+  "id": "lkp-05",
+  "status": "confirmed",
+  "evidence": "As per data exclusively accessed by the TOI, Udalgiri and Darrang district had 2.7% electors struck off, while the deletions in Lakhimpur, Cachar and Kamrup Metro districts were around 2.4% each.",
+  "url": "https://timesofindia.indiatimes.com/india/assam-final-electoral-roll-shows-drop-in-voters-across-25-of-35-districts/articleshow/128234340.cms",
+  "why": "Verbatim. The page shows no dateline in the text read; it refers to the final roll 'published on Tuesday' (10 February) and its image is stamped 2026-02-12, consistent with 12 February. The paper's 'deletions' are net falls; the site must say fall, as the claim does."
+ },
+ {
+  "id": "lkp-06",
+  "status": "confirmed",
+  "evidence": "District administrations in multiple districts such as Nagaon, Lakhimpur, and Goalpara issued notices warning that individuals submitting multiple objections against multiple voters was not a valid practice. They said action would be initiated against those found to have filed “false, misleading, or vexatious” objections.",
+  "url": "https://indianexpress.com/article/political-pulse/poll-watch-assam-voter-roll-revision-unease-wave-objections-10498449/",
+  "why": "Verbatim, Indian Express (Sukrita Baruah), 28 January 2026. It concerns Lakhimpur district, not AC 76; the same story's Ronganodi count is another seat, and its Chief Minister quotation rests on religion; neither is used."
+ },
+ {
+  "id": "lkp-07",
+  "status": "confirmed",
+  "evidence": "“In many places, where we found that many bulk applications had been filed, the Election Registration Officers had been authorised to verify whether these were legitimate applications. In many cases, applicants were not even aware that complaints had been registered against their EPIC numbers… The applications found invalid were summarily dismissed, and these are not counted as applications received,” said Goel. When asked how many such applications were dismissed, he said that this was not enumerated. ... Goel said that the “final additions and deletions are not too different from the findings by BLOs during the house-to-house survey”",
+  "url": "https://indianexpress.com/article/india/behind-assams-contentious-special-revision-why-over-10-lakh-names-have-been-deleted-from-voter-list-10527542/",
+  "why": "Verbatim, Indian Express (Sukrita Baruah), 12 February 2026. Statewide figures (12.97 lakh Form 7 received, 10.63 lakh accepted, 1.9 lakh rejected, 43,536 pending; 5.86 lakh of 7.6 lakh Form 6 accepted) are 'according to the CEO data' in the story. Statewide, not about Lakhimpur seat. The Chief Minister's statement in the story is not used."
+ }
+]

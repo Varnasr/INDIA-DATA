@@ -1,0 +1,71 @@
+[
+ {
+  "id": "bbs-01",
+  "status": "confirmed",
+  "evidence": "Annexure-1: | 34 | B.B.M.P(SOUTH) | 21,44,784 | 50.67% | 10,86,756 | 10,58,028 | 49.33% |. Annexure-2: | B.B.M.P(South) | 21,44,784 | 2,66,552 | 6,19,986 | 69,448 | 10,939 | 91,103 | 10,58,028 | 49.33% | (Absent, Shifted, Dead, Duplicate, Other)",
+  "url": "https://ceo.karnataka.gov.in/uploads/PRESS%20NOTE%2024th%20Aug.pdf",
+  "why": "Press note No. DPAR 163 ChuMaPa 2026, dated 24/08/2026, read through Firecrawl's PDF parser. Every figure matches. 6,19,986 / 10,58,028 = 58.6%. The CEO's annexure labels the 10,939 'Duplicate' and the text calls it 'Already Enrolled (Duplicate)'."
+ },
+ {
+  "id": "bbs-02",
+  "status": "confirmed",
+  "evidence": "| 29 | B.B.M.P(SOUTH) | 1,895 | 4,18,213 | 4,17,945 | 268 | 99.94% | 3,52,610 | 65,335 | 84.37% |",
+  "url": "https://ceo.karnataka.gov.in/uploads/Press%20Note%20-%2009_1791527846.pdf",
+  "why": "Press note No. DPAR 172 ChuMaPa 2026, dated 09.10.2026, Annexure-2 ('as on 09.10.2026'), read through Firecrawl's PDF parser on 14 October 2026. This is the independent reading data/karnataka/raw/SOURCES.md says was missing; the row agrees with notices_20261009_district.csv. 4,18,213 / 10,86,756 = 38.5 per 100 digitised forms. The note also says the last hearing was on 12.10.2026."
+ },
+ {
+  "id": "bbs-03",
+  "status": "confirmed",
+  "evidence": "Annexure-1: | 21 | B.B.M.P(SOUTH) | 5,27,675 | 5,61,372 | 86 | 10,89,133 |. Forms 16.06.2026 to 08.10.2026: | 6 | B.B.M.P(SOUTH) | 41,885 | 384 | 2,245 | 63,040 | 1,07,554 |",
+  "url": "https://ceo.karnataka.gov.in/uploads/Press%20Note%20-%2009_1791527846.pdf",
+  "why": "Both rows match. 10,89,133 less the draft's 10,86,756 general electors = 2,377. The rise is net and counts new voters, as the claim says. The same note encloses the CEO's letter of 01.10.2026 (No. DPAR 477 CHUMAPA 2026) noting 'instances of filing of bulk applications in Form 7 before the EROs. It is also alleged that such forms are not genuine', and directing action under section 31 of the RP Act, 1950; relevant to bbs-09."
+ },
+ {
+  "id": "bbs-04",
+  "status": "confirmed",
+  "evidence": "Among the districts, BBMP South saw 4,18214 notices. Of the 3,87,667 hearings held, 4,162 have been rejected. ... “The verification will continue till October 22. The rejections are mostly due to failure to submit the necessary documents. The rejected voter can go for an appeal before the DEO or apply Form 6 afresh seeking inclusion, along with one of the 11 documents approved by ECI, besides Aadhaar card,” said a senior official.",
+  "url": "https://www.deccanherald.com/india/karnataka/karnataka-sir-post-4229-lakh-hearings-33547-voters-found-ineligible-final-voters-list-on-oct-27-4180318",
+  "why": "Verbatim, Deccan Herald (Prathima Nandakumar), published 12 October 2026. The paper prints 4,18,214 against the CEO's 4,18,213. The 26 September suspension of physical hearings is in the same story. The official is unnamed and speaks of the state, as the first reader says. A KPCC office-holder is quoted in the same story; that part is not used."
+ },
+ {
+  "id": "bbs-05",
+  "status": "corrected",
+  "fix": {
+   "claim": "Two weeks before the draft, Deccan Herald printed the constituency-wise ASDDO list the CEO had put online for Bengaluru. Of B.B.M.P (South)'s seats, Bommanahalli had 2,74,889 electors flagged, 56.68 per cent of its electorate and the highest share in the city, followed among those seats by Vijayanagar (1,70,583, 53.18 per cent) and B.T.M Layout (1,49,471, 53.00 per cent). Officials said the names had not yet been deleted."
+  },
+  "evidence": "By percentage of the constituency’s electorate, Bommanahalli ranks first, with 56.68 per cent of its electors flagged. It is followed by Dasarahalli (53.25 per cent), Vijayanagar (53.18 per cent), BTM. Layout (53.00 per cent) and CV Raman Nagar (52.77 per cent). Election officials clarified that the names have not been deleted yet ... Table: Govindarajanagar 1,52,327 1,54,159; Vijayanagar 1,50,210 1,70,583; Basavanagudi 1,18,942 1,18,219; Padmanabhanagar 1,61,365 1,31,784; BTM Layout 1,32,564 1,49,471; Jayanagar 1,21,585 98,602; Bommanahalli 2,10,084 2,74,889",
+  "url": "https://www.deccanherald.com/india/karnataka/bengaluru/karnataka-sir-nearly-every-second-voter-in-bengaluru-flagged-for-deletion-in-electoral-rolls-4102258",
+  "why": "Verbatim, Deccan Herald (Naveen Menezes), 6 August 2026. The ranking is by share. By number Govindarajanagar (1,54,159) is ahead of B.T.M Layout (1,49,471), so the first claim, which listed numbers after 'followed by', read as a ranking by number that the source does not make; the fix gives the shares. The seven seats sum to 10,97,707, as the first reader says, above the draft's 10,58,028."
+ },
+ {
+  "id": "bbs-06",
+  "status": "confirmed",
+  "evidence": "In a press statement, the GBA requested the recognised political parties to verify the details and counts contained in the ASDDO list. “If they have any observation to the ASDDO list, they may submit the same to the respective Electoral Registration Officers (EROs),” the statement reads.",
+  "url": "https://www.deccanherald.com/india/karnataka/bengaluru/karnataka-sir-nearly-every-second-voter-in-bengaluru-flagged-for-deletion-in-electoral-rolls-4102258",
+  "why": "Verbatim. City-wide, as noted."
+ },
+ {
+  "id": "bbs-07",
+  "status": "corrected",
+  "fix": {
+   "claim": "ThePrint reported that the districts with the most names left off also had the most electors with no mapping to the 2002 roll. The CEO's own Annexure-3 gives B.B.M.P (South) 3,04,948 with no mapping, 28.1 per cent of its digitised forms, against at most 5.69 per cent (Kodagu) in any district outside Bengaluru."
+  },
+  "evidence": "ThePrint: 'While the range for all the other districts under the ‘no mapping’ category lies between 0.03 per cent to 3.3 per cent, it is 34.9 per cent for BBMP (North), 32.9 per cent for Bangalore Urban, 28.1 per cent for BBMP (South) and 26.6 per cent for BBMP (Central).' CEO Annexure-3 (24 August 2026): '| 34 | B.B.M.P(SOUTH) | 21,44,784 | 3,04,948 | 28.1 |' and '| 21 | KODAGU | 4,68,657 | 23,083 | 5.69 |'",
+  "url": "https://theprint.in/india/governance/bengaluru-to-lucknow-why-urban-centres-are-seeing-high-electoral-roll-deletions-during-sir/3026124/",
+  "why": "ThePrint (28 August 2026) is quoted verbatim and its 28.1% for B.B.M.P (South) matches the CEO. But its range for the other districts is wrong: the CEO's Annexure-3 gives Kodagu 5.69%, above 3.3%. The fix takes the comparison from the CEO's annexure (also at https://ceo.karnataka.gov.in/uploads/PRESS%20NOTE%2024th%20Aug.pdf). The 6.19 lakh shifted line in the same story matches the CEO's 6,19,986."
+ },
+ {
+  "id": "bbs-08",
+  "status": "confirmed",
+  "evidence": "For instance, in Bommanahalli Assembly constituency, which has recorded the highest deletions during the draft stage (54%), the winning margin in 2023 was 24,215 votes, while more than 2.65 lakh names have been deleted ... — nearly 11 times the winning margin. ... In Bommanahalli, shifted and absent together account for 95% of the deletions, with 50.34% marked as shifted and 45.38% as absent.",
+  "url": "https://www.thehindu.com/news/cities/bangalore/sir-deletions-in-bengaluru-disproportionately-high-12-seats-cross-10-times-winning-margin-mark/article71487970.ece",
+  "why": "Verbatim, The Hindu (Rishita Khanna), published 20 September 2026, updated 21 September. Margins 24,215 (Bommanahalli) and 16 (Jayanagar) match data/karnataka/raw/results_2023.csv. The paper does not say where its seat figures come from, and its booth-level 'mass deletion' figures in the same story are from a consultancy (MAC Insights); those must not be used, and the seat figures must be called the paper's."
+ },
+ {
+  "id": "bbs-09",
+  "status": "confirmed",
+  "evidence": "Ramamurthy was reacting to a case booked by the Jayanagar police against BJP booth-level agents for submitting Form-7 applications seeking the deletion of 5,698 voters during the ongoing Special Intensive Revision (SIR). The complaint was filed by former MLA Sowmya Reddy of Congress. ... “We [BJP] lodged a complaint with the [election] authorities on September 23 that there were 7,650 duplicate voters in Jayanagar that needed an inquiry,” ... The BJP leader said his party workers had moved the court seeking quashing of the FIR.",
+  "url": "https://www.deccanherald.com/india/karnataka/bengaluru/12000-voters-must-be-removed-in-bengalurus-jayanagar-bjp-mla-ck-ramamurthy-4172730",
+  "why": "Verbatim, Deccan Herald (Bharath Joshi), 6 October 2026. Both sides are named office-holders and the claim attributes each to its party; no private person is named. FLAG, 5,698 against 2,245: the two counts are not the same thing and no source reconciles them. 5,698 is the number of voters the complaint says BJP agents' Form 7s sought to delete in one seat. 2,245 is the CEO's count of Form 7 applications received in the whole B.B.M.P (South) district from 16 June to 8 October 2026 (press note of 9 October, Annexure-3). The same press note encloses the CEO's letter of 1 October noting bulk Form 7 filings alleged to be not genuine. In Assam the CEO said bulk Form 7s found invalid were 'not counted as applications received' (lkp-07); no Karnataka source says the same, so it cannot be offered as the explanation. The site can state both figures, say what each counts, and say they are not reconciled. Jayanagar's 2023 margin was 16 votes (results_2023.csv)."
+ }
+]

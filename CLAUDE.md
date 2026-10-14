@@ -995,9 +995,12 @@ correlation for each; a circumstance is never named as a cause. Finders
 `--check`. English only, skipped by `i18n_collect.mjs` like the seat pages.
 
 **Case studies** (`india/cases/`, in the All India menu and tab row, Start
-Here and a front-page card) take four places whose figures stand out in their
+Here and a front-page card) take nine places whose figures stand out in their
 own state's measure: Kichha (Uttarakhand), Tughlakabad (Delhi), Danilimda
-(Gujarat) and Murshidabad, Malda and the two Dinajpurs (West Bengal). Each sets
+(Gujarat), Murshidabad, Malda and the two Dinajpurs (West Bengal), and since
+14 October 2026 Bhiwandi East (Maharashtra), Anna Nagar (Tamil Nadu), Lucknow
+district (Uttar Pradesh), B.B.M.P (South) (Karnataka) and Lakhimpur (Assam,
+the fall after the draft, always called net). Each sets
 the place's figure from the state's own files (worked out when the page loads)
 against its district and state, then what the official records show, what was
 reported, what officials and parties said, and what could not be found.
@@ -1013,7 +1016,10 @@ caste or citizenship (a Samserganj detention petition among them), or on an
 analysis of the named lists (the Sabar Institute's, SPECT's, the Civic Research
 Group's, Newslaundry's Form 7 count), and items about another place (the
 Haldwani FIR is in Nainital). The places are never compared with each other.
-The three seats' own pages link to their case. English only.
+Each seat's and district's own page links to its case (`CASE` in `seat.js` and
+`district.js`). An item's outlet and link never name a file in this
+repository: where a source's own address is dead, the item links to the site's
+page that carries the figure. English only.
 
 **What's New** (`updates/`, in every footer, in the search and linked from
 the front page's "Who made it") lists what was added to the site, by date,

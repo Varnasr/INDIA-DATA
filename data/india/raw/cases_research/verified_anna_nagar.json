@@ -1,0 +1,66 @@
+[
+ {
+  "id": "an-01",
+  "status": "confirmed",
+  "evidence": "| 21-Anna Nagar | 8819 | 108829 | 639 | 118287 | (columns Deceased | Shifted/ Absent | Enrolled at multiple places | Total); Chennai Total 156555 | 1249691 | 18772 | 1425018",
+  "url": "https://www.elections.tn.gov.in/ACwise_ASD.aspx",
+  "why": "Page reopened through Firecrawl with an Indian location on 14 October 2026; the row matches. 1,08,829 / 1,18,287 = 92.0%. The page carries one combined 'Shifted/ Absent' column. Its title tag reads 'AC wise Electors as on Electoral Roll (19/12/2025)'."
+ },
+ {
+  "id": "an-02",
+  "status": "confirmed",
+  "evidence": "Final roll (23/02/2026): | 21 | Anna Nagar | 87325 | 94029 | 48 | 181402 |. Draft roll (19/12/2025): | 21 | Anna Nagar | 78287 | 83802 | 46 | 162135 |",
+  "url": "https://www.elections.tn.gov.in/ACwise_Gendercount_23022026.aspx",
+  "why": "Both CEO pages reopened (the draft at https://www.elections.tn.gov.in/ACwise_Gendercount_19122025.aspx). 1,81,402 less 1,62,135 = 19,267, a net rise. The claim already says it counts new voters too and is not names put back; keep that."
+ },
+ {
+  "id": "an-03",
+  "status": "corrected",
+  "fix": {
+   "outlet": "Election Commission of India, 2026 Assembly results and the 2021 statistical report, as this site holds them on Anna Nagar's own page",
+   "url": "../../tamilnadu/seat/21/"
+  },
+  "evidence": "results_2026.csv: 21,ANNA NAGAR,V.K.RAMKUMAR,Tamilaga Vettri Kazhagam,71375,N.CHITRARASU,Dravida Munnetra Kazhagam,50012,21363,... results_2021.csv: 21,Anna Nagar,...,DMK,80054,...,ADMK,52609,27445,... election_roll_20260406_ac.csv: 2,Chennai,21,Anna Nagar,90834,97979,48,188861",
+  "url": "https://results.eci.gov.in/ResultAcGenMay2026/ConstituencywiseS2221.htm",
+  "why": "The figures match the repo. 1,18,287 / 21,363 = 5.54, so 5.5 times. But the ECI URL now answers 404 (checked by curl and Firecrawl on 14 October 2026), so the item cannot be reopened at its address, and the 2021 margin of 27,445 does not come from that page at all but from the TCPD compilation of the ECI report (per data/tamilnadu/raw/SOURCES.md). The outlet is fixed to say so; the editor should either find a live ECI address or present the figures as the repo's record of the result.",
+  "editor": "The Commission's results address answers 404, so the item links to the site's own Anna Nagar page, which carries the same figures (14 October 2026)."
+ },
+ {
+  "id": "an-04",
+  "status": "confirmed",
+  "evidence": "Percentage-wise, Dr. Radhakrishnan Nagar saw the lowest deletions at 24.19% (56,916), while Anna Nagar recorded the highest at 42.18% (1,18,287).",
+  "url": "https://www.thehindu.com/news/cities/chennai/tn-assembly-elections-2026-chennai-district-draft-electoral-roll-sees-3558-deletions-special-camps-for-new-voters-on-december-20-and-21/article70416598.ece",
+  "why": "Verbatim, The Hindu Bureau, published 20 December 2025 01:09 IST, attributing the release to the Greater Chennai Corporation ('according to a press release'). 1,18,287 / 2,80,422 = 42.18% agrees with the CEO's table."
+ },
+ {
+  "id": "an-05",
+  "status": "confirmed",
+  "evidence": "Chennai: Chennai city has suffered the maximum voter deletion because of heavy migration and shifting of residences, said the Greater Chennai Corporation commissioner J Kumaragurubaran on Friday.\"Somebody may still live within the city, but in another constituency. These people can use Form 6 and apply through the booth level officers (BLOs) or online and get enrolled,\" he said.",
+  "url": "https://timesofindia.indiatimes.com/city/chennai/migration-residence-change-within-city-are-reasons-for-largescale-deletions-in-chennai/articleshow/126080556.cms",
+  "why": "Verbatim, Times of India, dated 'Dec 19, 2025, 21:39 IST'. District-wide explanation; the official is named by role on the site. The same story's Anna Nagar line ('Anna Nagar saw 42% deletion, with 1.18 lakh being removed out of the 2.8 lakh') and the 2,37,619 notice figure are present."
+ },
+ {
+  "id": "an-06",
+  "status": "corrected",
+  "fix": {
+   "claim": "At the same release, the AIADMK said a single family had been split across four booths, the DMK said 14 lakh names had gone with no explanation of how 12 lakh had shifted, and the BJP questioned how removed electors could sign Form 6's declaration that they hold no voter card. The commissioner told the BJP he would verify the point with the Election Commission."
+  },
+  "evidence": "\"People are confused as one family falls in four different booths. Officials should ensure this confusion is not there when people get enrolled again,\" he said.DMK's legal wing joint secretary K Chandru, who represented the party for Chennai's draft roll release, said 14 lakh voters have been deleted without any explanation on how at least 12 lakhs have shifted. ... I've raised this to the commissioner, who said he will verify with the ECI and get back,\" he said.",
+  "url": "https://timesofindia.indiatimes.com/city/chennai/migration-residence-change-within-city-are-reasons-for-largescale-deletions-in-chennai/articleshow/126080556.cms",
+  "why": "Quote verbatim and adjacent in the source. 'Split across up to four booths' says more than the source ('one family falls in four different booths'), so the fix keeps the source's wording, and it adds the commissioner's reply, which the source reports and the rules require beside the party claim. All three are about Chennai district, not Anna Nagar."
+ },
+ {
+  "id": "an-07",
+  "status": "confirmed",
+  "evidence": "The help desks set-up by Chennai Corporation at the polling booths in the city till Nov. 25 proved beneficial to voters, especially to those who could not get their Special Intensive Revision forms during the door-to-door distribution carried out by the booth level officers (BLO). ... BLOs resume home visits to collect forms",
+  "url": "https://mambalamtimes.in/admin/pdf/1765032603.07.12.2025.pdf",
+  "why": "Anna Nagar Times, Vol. 33 No. 13 & 14, issue of December 7 to 13, 2025 (PDF hosted on mambalamtimes.in). The story names the resident who had moved house; the site's claim does not, and must not. City-wide, and before the draft; it says nothing about Anna Nagar's figure."
+ },
+ {
+  "id": "an-08",
+  "status": "confirmed",
+  "evidence": "Anna Nagar registered the lowest number of forms submitted with officials receiving just 48 applications in Form 6 from residents for inclusion of names.",
+  "url": "https://www.thehindu.com/news/cities/chennai/1854-voters-submit-form-6-for-inclusion-of-names-in-assembly-constituencies-of-chennai-district/article71572193.ece",
+  "why": "Verbatim, The Hindu Bureau, published 12 October 2026 02:40 IST, citing the Chennai District Election Office. The seat list repeats Virugambakkam (294 and 200) as the first reader says, and its Form 6 figures sum to more than the headline 1,854; only the Anna Nagar figure is used."
+ }
+]
