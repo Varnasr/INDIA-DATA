@@ -1741,9 +1741,10 @@ header and kept in the address (`?lang=hi`) and in the reader's browser.
 - **The menu is on** (`MENU` in `assets/i18n.js`), in every page's header,
   and a reader's choice is remembered. No native reader has signed off the
   translations yet, so every translated page carries a notice that the
-  English page governs. `scripts/i18n_workbook.py` writes the review
-  workbook; fold the reviewer's corrections into `assets/i18n/<lang>.js`, and
-  only then take the notice out.
+  English page governs. The owner decided on 14 October 2026 that nobody will
+  review them, so the notice says the page was translated by machine and stays
+  for good. `scripts/i18n_workbook.py` still writes a review workbook if that
+  ever changes.
 
 ## Reports
 
