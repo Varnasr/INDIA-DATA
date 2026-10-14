@@ -141,11 +141,11 @@
         var rows = F.factors.filter(function (f) { return f.source === 'nfhs' && u[f.key] != null; }).map(function (f) {
           var v = U.map(function (x) { return x[f.key]; }).filter(function (x) { return x != null; }), sorted = v.slice().sort(function (a, b) { return b - a; });
           var cor = S && S.survey && S.survey[f.key];
-          return '<tr><td>' + f.label + '</td><td class="num">' + (f.key === 'sex_ratio' ? n(u[f.key]) : d1(u[f.key])) + '</td><td class="num">' + (f.key === 'sex_ratio' ? n(median(v)) : d1(median(v))) + '</td><td class="num">' + (sorted.indexOf(u[f.key]) + 1) + ' of ' + v.length + '</td><td class="num">' + (cor ? SIR.d(cor.rho, 2) + (cor.clear ? '' : ' (could be chance)') : '') + '</td></tr>';
+          return [f.label, f.key === 'sex_ratio' ? n(u[f.key]) : d1(u[f.key]), f.key === 'sex_ratio' ? n(median(v)) : d1(median(v)), (sorted.indexOf(u[f.key]) + 1) + ' of ' + v.length, cor ? SIR.d(cor.rho, 2) + (cor.clear ? '' : ' (could be chance)') : null];
         });
-        document.getElementById('tFactors').innerHTML = '<thead><tr><th scope="col">NFHS-5, 2019-21</th><th class="num" scope="col">' + SIR.esc(u.unit) + '</th><th class="num" scope="col">Typical district</th><th class="num" scope="col">Rank, highest first</th><th class="num" scope="col">Across the districts, with the share left off</th></tr></thead><tbody>' + rows.join('') + '</tbody>';
+        SIR.table('tFactors', [{ h: 'NFHS-5, 2019-21' }, { h: SIR.esc(u.unit), num: true }, { h: 'Typical district', num: true }, { h: 'Rank, highest first', num: true }, { h: 'Link with the share left off', num: true }], rows);
         document.getElementById('fFactors').innerHTML = (u.districts.length > 1 ? 'The survey counts ' + SIR.esc(u.unit) + ' as one district, ' + u.districts.map(SIR.esc).join(', ') + '. ' : '') +
-          'The last column is the rank correlation, across all of ' + C.label + '\'s districts, between each circumstance and the share of names left off, where 0 means unrelated. Circumstances move together, so none of them can be named as a cause, and a district\'s own figure says nothing about why its names were left off. Sex ratio is women per 1,000 men. The <a href="' + root + 'india/factors/">district factors page</a> has every state.';
+          'The last column, the link with the share left off, is the rank correlation, across all of ' + C.label + '\'s districts, between each circumstance and the share of names left off, where 0 means unrelated. Circumstances move together, so none of them can be named as a cause, and a district\'s own figure says nothing about why its names were left off. Sex ratio is women per 1,000 men. The <a href="' + root + 'india/factors/">district factors page</a> has every state.';
       } else document.getElementById('sFactors').hidden = true;
 
       if (C.identity) SIR.json('data/bihar/identity.json').then(function (I) {
