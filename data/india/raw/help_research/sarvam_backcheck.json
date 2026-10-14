@@ -1,0 +1,1170 @@
+{
+ "date": "2026-10-14",
+ "how": "Each Hindi and Bengali string was translated back into English with Sarvam AI (sarvam-translate:v1) and read against the English by a separate reader. Only the four items in flagged were changed, plus bn 28 and bn 35, reworded to remove an ambiguity. The English line about 500 camps a day was reworded to name the camps, which the source does.",
+ "flagged": [
+  {
+   "lang": "hi",
+   "index": 85,
+   "problem": "The English says 'about 500 a day' without naming the unit (most likely people helped), but the Hindi says 500 camps a day, which adds a claim the source does not make and is implausible.",
+   "kind": "meaning",
+   "fix": "गणना के दौरान मुस्लिम-बहुल इलाक़ों में फ़ॉर्म और दस्तावेज़ समझाने के लिए शिविर लगाए, अपनी गिनती के अनुसार रोज़ लगभग 500।"
+  },
+  {
+   "lang": "bn",
+   "index": 85,
+   "problem": "The classifier in 'দিনে প্রায় 500টি' attaches the number to শিবির, so it reads as 500 camps a day, a claim the English does not make.",
+   "kind": "meaning",
+   "fix": "গণনা পর্বে মুসলমান-প্রধান এলাকাগুলিতে ফর্ম ও নথি বোঝানোর জন্য শিবির করেছে, তাদের নিজেদের হিসেবে দিনে প্রায় 500।"
+  },
+  {
+   "lang": "bn",
+   "index": 10,
+   "problem": "Uses the same 'নাম তোলার' phrasing as the known index 28 issue, which a reader can take as taking a name off rather than adding it; this is the label beside Form 6.",
+   "kind": "ambiguity",
+   "fix": "আবার তালিকায় নাম যোগ করার জন্য"
+  },
+  {
+   "lang": "bn",
+   "index": 27,
+   "problem": "Step heading for Form 6 uses the same ambiguous 'নাম তোলার' as known index 28, so the main instruction can be misread as applying to remove a name.",
+   "kind": "ambiguity",
+   "fix": "ফর্ম 6 দিয়ে আবার ভোটার তালিকায় নাম যোগ করার আবেদন করুন"
+  }
+ ],
+ "back": {
+  "hi": [
+   {
+    "en": "This page sets out what the law and the Election Commission's own orders give an elector whose name was left off the draft or the final roll, and where to get help. It is general information drawn from those documents, and it is not legal advice on any one case. The state's Chief Electoral Officer, the registration officer and the District Legal Services Authority can say how a step works in a particular state.",
+    "tr": "यह पृष्ठ बताता है कि जिस मतदाता का नाम प्रारूप मतदाता सूची या अंतिम मतदाता सूची से छूट गया, उसे क़ानून और चुनाव आयोग के अपने आदेश क्या देते हैं, और मदद कहाँ मिल सकती है। यह उन्हीं दस्तावेज़ों से ली गई सामान्य जानकारी है, और किसी एक मामले पर क़ानूनी सलाह नहीं है। राज्य के मुख्य निर्वाचन अधिकारी, निर्वाचक रजिस्ट्रीकरण अधिकारी (ERO) और ज़िला विधिक सेवा प्राधिकरण बता सकते हैं कि किसी ख़ास राज्य में कोई क़दम कैसे काम करता है।",
+    "back": "This page explains the laws and the Election Commission's orders regarding a voter whose name is missing from the draft voter list or final voter list, and where assistance can be obtained. This is general information taken from the same documents, and it is not legal advice on any single case. The State Chief Electoral Officer, Electoral Registration Officer (ERO), and District Legal Services Authority can explain how a particular step works in a specific state."
+   },
+   {
+    "en": "Listing an organisation here is not an endorsement, and leaving one out says nothing about it. If you know of an organisation that helped electors, or a listing is out of date, write to the address at the foot of the page with a link that shows it.",
+    "tr": "यहाँ किसी संगठन का नाम होना उसका समर्थन नहीं है, और किसी का नाम न होना उसके बारे में कुछ नहीं कहता। अगर आप किसी ऐसे संगठन को जानते हैं जिसने मतदाताओं की मदद की, या यहाँ दी गई कोई जानकारी पुरानी हो गई है, तो पृष्ठ के नीचे दिए पते पर लिखें, साथ में वह लिंक भेजें जिससे यह दिखता हो।",
+    "back": "The presence of an organization's name here does not imply its support, and the absence of a name does not indicate anything about it. If you know of an organization that has helped voters, or if any information provided here is outdated, please write to the address at the bottom of the page, along with the link that shows it."
+   },
+   {
+    "en": "Organisations that have helped electors",
+    "tr": "मतदाताओं की मदद करने वाले संगठन",
+    "back": "Organizations that help voters"
+   },
+   {
+    "en": "State",
+    "tr": "राज्य",
+    "back": "The state"
+   },
+   {
+    "en": "A name left off can be put back. Form 6 asks for it, during the revision and at any time after it, until ten days before the last date for nominations in an election.",
+    "tr": "छूटा हुआ नाम वापस जोड़ा जा सकता है। इसके लिए फ़ॉर्म 6 भरा जाता है, पुनरीक्षण के दौरान भी और उसके बाद किसी भी समय, किसी चुनाव में नामांकन की अंतिम तिथि से दस दिन पहले तक।",
+    "back": "The name Chhuta Hua can be added back. For this, form 6 is filled, even during revision, and at any time after that, up to ten days before the last date of nomination in any election."
+   },
+   {
+    "en": "In the revision, no name could be struck off the draft roll without an inquiry and a fair chance to be heard, followed by a written order with reasons.",
+    "tr": "पुनरीक्षण में प्रारूप मतदाता सूची से कोई भी नाम जाँच और सुनवाई के निष्पक्ष अवसर के बिना, और उसके बाद कारणों सहित लिखित आदेश के बिना, नहीं हटाया जा सकता था।",
+    "back": "In the review, no name could be deleted from the draft voter list without scrutiny and hearing, and then without a written order with reasons."
+   },
+   {
+    "en": "A decision can be appealed twice, first to the District Magistrate and then to the state's Chief Electoral Officer.",
+    "tr": "किसी फ़ैसले के ख़िलाफ़ दो बार अपील की जा सकती है, पहले ज़िला मजिस्ट्रेट के पास और फिर राज्य के मुख्य निर्वाचन अधिकारी के पास।",
+    "back": "An appeal from a judgment may be made to the District Magistrate and thereafter to the State Chief Electoral Officer."
+   },
+   {
+    "en": "The voter helpline is 1950, and the free legal aid helpline is 15100.",
+    "tr": "मतदाता हेल्पलाइन 1950 है, और मुफ़्त क़ानूनी सहायता हेल्पलाइन 15100 है।",
+    "back": "The voter helpline is 1950 and the legal help helpline is 15100."
+   },
+   {
+    "en": "{o} organisations in {s} states are listed with the help they gave, each with a report that shows it.",
+    "tr": "{s} राज्यों के {o} संगठनों की सूची दी गई है, साथ में यह कि उन्होंने क्या मदद की, और हर एक के साथ उसे दिखाने वाली एक रिपोर्ट।",
+    "back": "A list of {o}rganizations {s} from the {s}states is provided, along with what they helped with, and a report showing that with each one."
+   },
+   {
+    "en": "This page gives general information from the law and the Commission's orders. It is not legal advice on any one case, and the list of organisations is not complete.",
+    "tr": "यह पृष्ठ क़ानून और आयोग के आदेशों से सामान्य जानकारी देता है। यह किसी एक मामले पर क़ानूनी सलाह नहीं है, और संगठनों की सूची पूरी नहीं है।",
+    "back": "This page provides general information from the law and commission orders. It is not legal advice on any single case, and the list of organizations is not exhaustive."
+   },
+   {
+    "en": "to be added back",
+    "tr": "नाम वापस जोड़े जाने के लिए",
+    "back": "To add the name back."
+   },
+   {
+    "en": "2 appeals",
+    "tr": "2 अपीलें",
+    "back": "2 Appeals"
+   },
+   {
+    "en": "District Magistrate, then the CEO",
+    "tr": "ज़िला मजिस्ट्रेट, फिर मुख्य निर्वाचन अधिकारी",
+    "back": "District Magistrate, then Chief Electoral Officer"
+   },
+   {
+    "en": "voter helpline",
+    "tr": "मतदाता हेल्पलाइन",
+    "back": "Voter Helpline"
+   },
+   {
+    "en": "free legal aid helpline",
+    "tr": "मुफ़्त क़ानूनी सहायता हेल्पलाइन",
+    "back": "Free legal aid helpline"
+   },
+   {
+    "en": "Where this comes from",
+    "tr": "यह जानकारी कहाँ से है",
+    "back": "Where does this information come from?"
+   },
+   {
+    "en": "report",
+    "tr": "रिपोर्ट",
+    "back": "Report"
+   },
+   {
+    "en": "Groups that ran help desks, camps, helplines or legal help during the revision, {o} of them in {s} states, each with the report that shows the help it gave and when it was last reported active. The list leaves out political parties and anything led by a party office-holder. It is incomplete, and nothing was found that could be checked for the other states.",
+    "tr": "वे समूह जिन्होंने पुनरीक्षण के दौरान हेल्प डेस्क, शिविर, हेल्पलाइन या क़ानूनी मदद चलाई, {s} राज्यों में ऐसे {o} समूह, हर एक के साथ वह रिपोर्ट जो उसकी दी हुई मदद दिखाती है, और यह कि उसे आख़िरी बार कब सक्रिय बताया गया। इस सूची में राजनीतिक दल और किसी दल के पदाधिकारी के नेतृत्व वाला कोई भी समूह शामिल नहीं है। यह सूची अधूरी है, और बाक़ी राज्यों के लिए ऐसा कुछ नहीं मिला जिसकी जाँच की जा सके।",
+    "back": "Here is the translation of the given Hindi text into English:\n\nThe groups that ran helplines, camps, or legal aid during the review, {o} groups in {s} states, each with a report showing the assistance provided, and when it was last activated. This list does not include political parties or any group led by a party official. This list is incomplete, and nothing was found for the remaining states that could be verified.\n\nI have followed the guidelines to ensure accuracy, maintain the original tone, and restructure sentences for clarity and fluency in English. The translation is clear, coherent, and grammatically correct, without adding any information not present in the source sentence."
+   },
+   {
+    "en": "Across India",
+    "tr": "पूरे भारत में",
+    "back": "All over India"
+   },
+   {
+    "en": "Every state",
+    "tr": "हर राज्य",
+    "back": "Every state"
+   },
+   {
+    "en": "Last reported active {d}.",
+    "tr": "आख़िरी बार {d} को सक्रिय बताया गया।",
+    "back": "The last time {d} was said to be active."
+   },
+   {
+    "en": "Website",
+    "tr": "वेबसाइट",
+    "back": "Website"
+   },
+   {
+    "en": "Shown by",
+    "tr": "स्रोत",
+    "back": "Source"
+   },
+   {
+    "en": "One organisation in {p}.",
+    "tr": "{p} में एक संगठन।",
+    "back": "An organization in {p}."
+   },
+   {
+    "en": "more than one state",
+    "tr": "एक से अधिक राज्य",
+    "back": "More than one state"
+   },
+   {
+    "en": "{k} organisations in all.",
+    "tr": "कुल {k} संगठन।",
+    "back": "Total {k} organizations."
+   },
+   {
+    "en": "{k} organisations in {p}.",
+    "tr": "{p} में {k} संगठन।",
+    "back": "Organization {k} in {p}."
+   },
+   {
+    "en": "Ask to be put back on the roll with Form 6",
+    "tr": "फ़ॉर्म 6 भरकर मतदाता सूची में नाम वापस जोड़ने का आवेदन करें",
+    "back": "To add a name to the voter list, fill out Form 6."
+   },
+   {
+    "en": "If your name was left off the draft or the final roll, fill in Form 6, the application to be added to the roll. During the claims and objections period of the revision it goes with the declaration attached to it for the revision. Once the revision is over in your state you can still apply at any time under continuous updation, on the ordinary Form 6 of the 1960 Rules. Form 6A is for Indian citizens living abroad, and Form 8 is for a change of address or a mistake in your own entry.",
+    "tr": "अगर आपका नाम प्रारूप मतदाता सूची या अंतिम मतदाता सूची से छूट गया है, तो फ़ॉर्म 6 भरें, जो मतदाता सूची में नाम जोड़ने का आवेदन है। पुनरीक्षण में दावों और आपत्तियों की अवधि के दौरान इसके साथ वह घोषणा-पत्र लगता है जो पुनरीक्षण के लिए इसके साथ जोड़ा गया है। आपके राज्य में पुनरीक्षण पूरा हो जाने के बाद भी आप निरंतर अद्यतन (continuous updation) के तहत किसी भी समय, 1960 के नियमों के सामान्य फ़ॉर्म 6 पर आवेदन कर सकते हैं। फ़ॉर्म 6A विदेश में रहने वाले भारतीय नागरिकों के लिए है, और फ़ॉर्म 8 पता बदलने या आपकी अपनी प्रविष्टि में किसी ग़लती के लिए है।",
+    "back": "If your name is missing from the draft voter list or the final voter list, fill out Form 6, which is the application for adding a name to the voter list. It comes with the declaration attached for the period of claims and objections during the revision. Even after the revision is complete in your state, you can apply for continuous updation at any time on the general Form 6 of the 1960 rules. Form 6A is for Indian citizens living abroad, and Form 8 is for changing address or for any error in your own entry."
+   },
+   {
+    "en": "Get Form 6 from your booth level officer (BLO), the registration officer's office, voters.eci.gov.in or the ECINet app.",
+    "tr": "फ़ॉर्म 6 अपने बूथ स्तर अधिकारी (BLO), निर्वाचक रजिस्ट्रीकरण अधिकारी (ERO) के दफ़्तर, voters.eci.gov.in या ECINet ऐप से लें।",
+    "back": "Download the form from your Booth Level Officer (BLO), Electoral Registration Officer (ERO) office, voters.eci.gov.in or ECINet app."
+   },
+   {
+    "en": "During the revision, attach the declaration that goes with Form 6 for the revision.",
+    "tr": "पुनरीक्षण के दौरान, पुनरीक्षण के लिए फ़ॉर्म 6 के साथ लगने वाला घोषणा-पत्र भी लगाएँ।",
+    "back": "Attach the declaration form in Schedule A to the Application Form 6."
+   },
+   {
+    "en": "Hand it to the BLO or the registration officer, or file it online, and keep the reference number.",
+    "tr": "इसे BLO या निर्वाचक रजिस्ट्रीकरण अधिकारी को सौंपें, या ऑनलाइन जमा करें, और संदर्भ संख्या सँभालकर रखें।",
+    "back": "File it with the BLO or Registrar of Electors, or file it online, and keep the reference number."
+   },
+   {
+    "en": "Apply well before an election is called. No name can be added after the last date for nominations until that election is over.",
+    "tr": "चुनाव की घोषणा से काफ़ी पहले आवेदन करें। नामांकन की अंतिम तिथि के बाद, उस चुनाव के पूरा होने तक, कोई नाम नहीं जोड़ा जा सकता।",
+    "back": "Apply well before the election is announced. After the deadline for nominations, no name can be added until the election is complete."
+   },
+   {
+    "en": "Use Form 8 if you moved house, within the state or from another state, or if your entry has a mistake. Use Form 6A if you live abroad on an Indian passport.",
+    "tr": "अगर आपने घर बदला है, राज्य के भीतर या किसी दूसरे राज्य से, या आपकी प्रविष्टि में कोई ग़लती है, तो फ़ॉर्म 8 का इस्तेमाल करें। अगर आप भारतीय पासपोर्ट पर विदेश में रहते हैं, तो फ़ॉर्म 6A का इस्तेमाल करें।",
+    "back": "If you have moved within the state, from within the state, or from another state, or if there is an error in your entry, use Form 8. If you reside abroad on an Indian passport, use Form 6A."
+   },
+   {
+    "en": "Objections and the hearing before any deletion",
+    "tr": "आपत्तियाँ, और कोई भी नाम हटाने से पहले सुनवाई",
+    "back": "Apprehensions, and hearing before any name is removed."
+   },
+   {
+    "en": "Form 7 is the form for objecting to a name on the roll, or to a name proposed to be added. When someone objects to your name, the registration officer has to send you a notice and hear you before deciding. Before striking off a name on the ground that the person has moved away or is not entitled to be on the roll, the officer has to give that person a reasonable chance to be heard. In the revision no entry could be deleted from the draft without an inquiry and a fair chance to be heard, followed by a written order with reasons. If you get a notice, go to the hearing or send the documents asked for, and ask for the order in writing.",
+    "tr": "फ़ॉर्म 7 मतदाता सूची में दर्ज किसी नाम पर, या जोड़े जाने के लिए प्रस्तावित किसी नाम पर, आपत्ति करने का फ़ॉर्म है। जब कोई आपके नाम पर आपत्ति करता है, तो निर्वाचक रजिस्ट्रीकरण अधिकारी (ERO) को फ़ैसला करने से पहले आपको नोटिस भेजना और आपकी सुनवाई करनी होती है। इस आधार पर कोई नाम हटाने से पहले कि वह व्यक्ति कहीं और चला गया है या मतदाता सूची में रहने का हक़दार नहीं है, अधिकारी को उस व्यक्ति को सुनवाई का उचित अवसर देना होता है। पुनरीक्षण में प्रारूप मतदाता सूची से कोई भी प्रविष्टि जाँच और सुनवाई के निष्पक्ष अवसर के बिना, और उसके बाद कारणों सहित लिखित आदेश के बिना, नहीं हटाई जा सकती थी। अगर आपको नोटिस मिले, तो सुनवाई में जाएँ या माँगे गए दस्तावेज़ भेजें, और आदेश लिखित में माँगें।",
+    "back": "Form 7 is a form for objecting to a name on the voter list, or to a name proposed for inclusion. When someone objects to your name, the Electoral Registration Officer (ERO) is required to send you a notice and hear you before making a decision. Based on this, before removing a name, the official must give the person a fair opportunity to be heard, before the person has moved elsewhere or is no longer entitled to be on the voter list. In revision, no entry from the draft voter list could be removed without an investigation and a fair opportunity for hearing, and then without a written order with reasons. If you receive a notice, attend the hearing or send the requested documents, and request the order in writing."
+   },
+   {
+    "en": "Check the lists of claims and objections the registration officer puts up on the notice board and the Chief Electoral Officer's website.",
+    "tr": "दावों और आपत्तियों की वे सूचियाँ देखें जो निर्वाचक रजिस्ट्रीकरण अधिकारी नोटिस बोर्ड पर और मुख्य निर्वाचन अधिकारी की वेबसाइट पर लगाते हैं।",
+    "back": "Look for the lists of claims and objections that the Registrar of Electors posts on the notice board and on the Chief Electoral Officer's website."
+   },
+   {
+    "en": "If someone has objected to your name, you should get a notice with the date, time and place of the hearing.",
+    "tr": "अगर किसी ने आपके नाम पर आपत्ति की है, तो आपको सुनवाई की तारीख़, समय और जगह के साथ नोटिस मिलना चाहिए।",
+    "back": "If someone has filed a complaint, you should receive a notice with the date, time, and location of the hearing."
+   },
+   {
+    "en": "Attend in person or through someone you authorise where that is allowed, and take your documents.",
+    "tr": "ख़ुद जाएँ, या जहाँ इसकी अनुमति हो वहाँ अपने अधिकृत किसी व्यक्ति के ज़रिए, और अपने दस्तावेज़ साथ ले जाएँ।",
+    "back": "Go there in person or bring someone authorized to go there on your behalf, and bring your documents with you."
+   },
+   {
+    "en": "Ask for the registration officer's decision in writing. You need it for an appeal.",
+    "tr": "निर्वाचक रजिस्ट्रीकरण अधिकारी का फ़ैसला लिखित में माँगें। अपील के लिए आपको इसकी ज़रूरत होगी।",
+    "back": "Ask for the voter registration officer's decision in writing. You will need this for any appeals."
+   },
+   {
+    "en": "Appeal to the District Magistrate, then to the Chief Electoral Officer",
+    "tr": "ज़िला मजिस्ट्रेट के पास अपील, फिर मुख्य निर्वाचन अधिकारी के पास",
+    "back": "Appeal to the District Magistrate, then to the Chief Electoral Officer."
+   },
+   {
+    "en": "If the registration officer's decision goes against you, you can appeal to the District Magistrate under section 24 of the Representation of the People Act, 1950. If the District Magistrate's order also goes against you, a second appeal lies to the state's Chief Electoral Officer. The Commission's revision order kept both appeals and gave 30 days from the District Magistrate's order for the second. The Chief Electoral Officer of Goa, in the note on its final roll, gave 15 days from the registration officer's decision for the first.",
+    "tr": "अगर निर्वाचक रजिस्ट्रीकरण अधिकारी (ERO) का फ़ैसला आपके ख़िलाफ़ जाता है, तो आप लोक प्रतिनिधित्व अधिनियम, 1950 की धारा 24 के तहत ज़िला मजिस्ट्रेट के पास अपील कर सकते हैं। अगर ज़िला मजिस्ट्रेट का आदेश भी आपके ख़िलाफ़ जाता है, तो दूसरी अपील राज्य के मुख्य निर्वाचन अधिकारी के पास की जा सकती है। आयोग के पुनरीक्षण आदेश ने दोनों अपीलें बनाए रखीं और दूसरी अपील के लिए ज़िला मजिस्ट्रेट के आदेश से 30 दिन दिए। गोवा के मुख्य निर्वाचन अधिकारी ने अपनी अंतिम मतदाता सूची पर जारी नोट में पहली अपील के लिए निर्वाचक रजिस्ट्रीकरण अधिकारी के फ़ैसले से 15 दिन दिए।",
+    "back": "If the decision of the Electoral Registration Officer (ERO) is against you, you can appeal to the District Magistrate under Section 24 of the Representation of the People Act, 1950. If the District Magistrate's order is also against you, the second appeal can be made to the Chief Electoral Officer of the state. The Commission's revision order upheld both appeals and granted 30 days from the District Magistrate's order for the second appeal. In a note issued on its final voter list, the Chief Electoral Officer of Goa granted 15 days from the Electoral Registration Officer's decision for the first appeal."
+   },
+   {
+    "en": "Get a copy of the registration officer's order.",
+    "tr": "निर्वाचक रजिस्ट्रीकरण अधिकारी के आदेश की एक प्रति लें।",
+    "back": "Get a copy of the order from the Registrar of Electors."
+   },
+   {
+    "en": "Write a short appeal to the District Magistrate, signed by you, with the order attached, within 15 days of the registration officer's decision.",
+    "tr": "निर्वाचक रजिस्ट्रीकरण अधिकारी के फ़ैसले के 15 दिन के भीतर ज़िला मजिस्ट्रेट को एक छोटी अपील लिखें, जिस पर आपके हस्ताक्षर हों और जिसके साथ आदेश लगा हो।",
+    "back": "Within 15 days of the Election Registration Officer's decision, write a short appeal to the District Magistrate, signed by you and with the order attached."
+   },
+   {
+    "en": "If it is turned down, appeal to the Chief Electoral Officer within 30 days of the District Magistrate's order.",
+    "tr": "अगर वह ख़ारिज हो जाए, तो ज़िला मजिस्ट्रेट के आदेश के 30 दिन के भीतर मुख्य निर्वाचन अधिकारी के पास अपील करें।",
+    "back": "If it is rejected, he/she must appeal to the Chief Electoral Officer within 30 days of the order of the District Magistrate."
+   },
+   {
+    "en": "Keep copies and receipts of everything you hand in.",
+    "tr": "जो कुछ भी आप जमा करें, उस सबकी प्रतियाँ और रसीदें सँभालकर रखें।",
+    "back": "Keep all records and receipts of what you deposit."
+   },
+   {
+    "en": "The 1950 helpline, complaints, and the drive to find those left off",
+    "tr": "1950 हेल्पलाइन, शिकायतें, और छूटे हुए लोगों को ढूँढने का अभियान",
+    "back": "1950 Helpline, complaints, and search for missing persons Campaign"
+   },
+   {
+    "en": "You can call the voter helpline on 1950, or the national toll-free number 1800-11-1950 from 8 am to 8 pm, and every complaint is logged on the National Grievance Service Portal. The ECINet app has a Book-a-Call with BLO feature, and complaints can also be emailed to complaints@eci.gov.in. After the revision, the Commission ordered BLOs to compare the roll from before the revision with the present one, visit those missing, and help anyone still eligible fill in Form 6. The lists are to be shared with the parties' booth agents, and booth level camps are to be held. Special camps may also be held for people in night shelters and labour colonies and for the homeless.",
+    "tr": "आप मतदाता हेल्पलाइन 1950 पर, या राष्ट्रीय टोल-फ़्री नंबर 1800-11-1950 पर सुबह 8 बजे से रात 8 बजे तक फ़ोन कर सकते हैं, और हर शिकायत National Grievance Service Portal पर दर्ज होती है। ECINet ऐप में Book-a-Call with BLO की सुविधा है, और शिकायतें complaints@eci.gov.in पर ईमेल भी की जा सकती हैं। पुनरीक्षण के बाद चुनाव आयोग ने BLO को आदेश दिया कि वे पुनरीक्षण से पहले की मतदाता सूची की तुलना मौजूदा मतदाता सूची से करें, छूटे हुए लोगों के घर जाएँ, और जो अब भी पात्र हैं उन्हें फ़ॉर्म 6 भरने में मदद करें। ये सूचियाँ दलों के बूथ एजेंटों के साथ साझा की जानी हैं, और बूथ स्तर पर शिविर लगाए जाने हैं। रैन बसेरों और मज़दूर बस्तियों में रहने वालों और बेघर लोगों के लिए विशेष शिविर भी लगाए जा सकते हैं।",
+    "back": "You can call the Voter Helpline at 1950, or the national toll-free number 1800-11-1950, from 8 AM to 8 PM, and every complaint is registered on the National Grievance Service Portal. The ECINet app has the facility of Book-a-Call with BLO, and complaints can also be emailed to complaints@eci.gov.in. After the revision, the Election Commission ordered BLOs to compare the pre-revision voter list with the current voter list, visit the homes of those left out, and help those who are still eligible to fill out Form 6. These lists are to be shared with party booth agents, and camps are to be set up at the booth level. Special camps can also be set up for those living in night shelters and labor camps, and for the homeless."
+   },
+   {
+    "en": "Call 1950, or 1800-11-1950, and note the complaint number.",
+    "tr": "1950 या 1800-11-1950 पर फ़ोन करें, और शिकायत संख्या लिख लें।",
+    "back": "Call 1950 or 1800-11-1950, and take down the complaint number."
+   },
+   {
+    "en": "Use Book-a-Call with BLO on the ECINet app to ask your BLO to visit.",
+    "tr": "अपने BLO को घर बुलाने के लिए ECINet ऐप पर Book-a-Call with BLO का इस्तेमाल करें।",
+    "back": "Use the \"Book-a-Call with BLO\" feature on the ECINet app to call your BLO to your home."
+   },
+   {
+    "en": "If a BLO visits during the drive, fill in Form 6 then and there if you are eligible.",
+    "tr": "अभियान के दौरान BLO आपके घर आए और आप पात्र हों, तो उसी समय फ़ॉर्म 6 भर दें।",
+    "back": "If the BLO comes to your house during the campaign and you are eligible, fill out form 6 at the same time."
+   },
+   {
+    "en": "Look for booth level camps in your area, and special camps if you live in a night shelter or labour colony.",
+    "tr": "अपने इलाक़े में बूथ स्तर के शिविरों का पता करें, और अगर आप रैन बसेरे या मज़दूर बस्ती में रहते हैं तो विशेष शिविरों का भी।",
+    "back": "Look for camp-in-enclosures in your area, and if you live in a rural area, look for designated RV or camper parks."
+   },
+   {
+    "en": "Free legal help from the legal services authorities",
+    "tr": "विधिक सेवा प्राधिकरणों से मुफ़्त क़ानूनी मदद",
+    "back": "Free legal aid from legal service authorities."
+   },
+   {
+    "en": "Under section 12 of the Legal Services Authorities Act, 1987, women, children, members of Scheduled Castes and Scheduled Tribes, people with disabilities, industrial workers, victims of disaster and people below an income limit set by each state can get free legal help. Legal services include advice and help before any authority, so they can cover a claim, a hearing or an appeal about the roll. Ask at the District Legal Services Authority at the district court, or call the NALSA helpline on 15100. In Bihar in September 2025 the Supreme Court had the legal services authorities send para-legal volunteers to help voters file claims and objections online.",
+    "tr": "विधिक सेवा प्राधिकरण अधिनियम, 1987 की धारा 12 के तहत महिलाएँ, बच्चे, अनुसूचित जाति और अनुसूचित जनजाति के सदस्य, दिव्यांग लोग, औद्योगिक मज़दूर, आपदा पीड़ित, और हर राज्य द्वारा तय आय सीमा से नीचे के लोग मुफ़्त क़ानूनी मदद पा सकते हैं। विधिक सेवाओं में सलाह और किसी भी प्राधिकारी के सामने मदद शामिल है, इसलिए इनमें मतदाता सूची से जुड़ा दावा, सुनवाई या अपील आ सकती है। ज़िला अदालत में ज़िला विधिक सेवा प्राधिकरण से पूछें, या नालसा हेल्पलाइन 15100 पर फ़ोन करें। बिहार में सितंबर 2025 में सर्वोच्च न्यायालय ने विधिक सेवा प्राधिकरणों से पैरा-लीगल स्वयंसेवक भिजवाए, ताकि वे मतदाताओं को ऑनलाइन दावे और आपत्तियाँ दर्ज करने में मदद करें।",
+    "back": "Under Section 12 of the Legal Services Authorities Act, 1987, women, children, members of Scheduled Castes and Scheduled Tribes, persons with disabilities, industrial workers, disaster victims, and people below the income limit determined by each state are entitled to free legal aid. Legal services include advice and assistance before any authority, so these may include claims, hearings, or appeals related to the voter list. To find out about the District Legal Services Authority in the District Court, or call the NALSA helpline 15100. In Bihar, in September 2025, the Supreme Court directed the Legal Services Authorities to send para-legal volunteers to help voters file online claims and objections."
+   },
+   {
+    "en": "Call 15100 or visit the District Legal Services Authority office at the district court.",
+    "tr": "15100 पर फ़ोन करें या ज़िला अदालत में ज़िला विधिक सेवा प्राधिकरण के दफ़्तर जाएँ।",
+    "back": "Call 15100 or visit the District Legal Services Authority office in the district court."
+   },
+   {
+    "en": "Say that your name was left off the roll and what stage you are at (claim, hearing or appeal).",
+    "tr": "बताएँ कि आपका नाम मतदाता सूची से छूट गया है और आप किस चरण पर हैं (दावा, सुनवाई या अपील)।",
+    "back": "Mention that you have been left out of the voter list and which stage you are at (application, hearing, appeal)."
+   },
+   {
+    "en": "Take the notice or order you received and any documents you have.",
+    "tr": "आपको मिला नोटिस या आदेश और आपके पास जो भी दस्तावेज़ हों, साथ ले जाएँ।",
+    "back": "Take any notices or orders you receive, as well as any documentation you are given."
+   },
+   {
+    "en": "Ask for a para-legal volunteer or panel lawyer to help you fill in the form or the appeal.",
+    "tr": "फ़ॉर्म या अपील भरने में मदद के लिए पैरा-लीगल स्वयंसेवक या पैनल वकील माँगें।",
+    "back": "Ask for a paralegal or a panel lawyer to help fill out forms or appeals."
+   },
+   {
+    "en": "What the Supreme Court's orders give an elector",
+    "tr": "सर्वोच्च न्यायालय के आदेश मतदाता को क्या देते हैं",
+    "back": "What the Supreme Court's orders give to the voter"
+   },
+   {
+    "en": "In Bihar the Court had the roughly 65 lakh names left off the draft published booth by booth, with the reason for each, searchable by EPIC number and put up at panchayat and block offices. It allowed claims with a copy of Aadhaar and then made Aadhaar the twelfth document, as proof of identity. In West Bengal it let people flagged for discrepancies file through an authorised representative, gave them ten more days, and set up appellate tribunals of former judges for those whose claims judicial officers rejected. Its judgment of 27 May 2026 upheld the revision and said that people in Bihar wrongly deleted as absent, dead, shifted or duplicate may challenge the decision in court.",
+    "tr": "बिहार में न्यायालय ने प्रारूप मतदाता सूची से छूटे लगभग 65 लाख नाम बूथवार प्रकाशित करवाए, हर नाम के साथ उसका कारण, EPIC नंबर से खोजे जा सकने लायक़, और पंचायत और प्रखंड कार्यालयों में लगवाए। उसने आधार की प्रति के साथ दावे स्वीकार करने की अनुमति दी और फिर पहचान के प्रमाण के रूप में आधार को बारहवाँ दस्तावेज़ बनाया। पश्चिम बंगाल में उसने विसंगतियों के लिए चिह्नित लोगों को अधिकृत प्रतिनिधि के ज़रिए आवेदन करने दिया, उन्हें दस दिन और दिए, और जिनके दावे न्यायिक अधिकारियों ने ख़ारिज किए उनके लिए पूर्व न्यायाधीशों के अपीलीय न्यायाधिकरण बनवाए। 27 मई 2026 के अपने फ़ैसले में उसने पुनरीक्षण को सही ठहराया और कहा कि बिहार में जिन लोगों को अनुपस्थित, मृत, स्थानांतरित या दोहरी प्रविष्टि बताकर ग़लत तरीक़े से हटाया गया, वे अदालत में उस फ़ैसले को चुनौती दे सकते हैं।",
+    "back": "In Bihar, the court published approximately 6.5 million names missing from the draft voter list booth-wise, along with the reasons for each, searchable by EPIC number, and had them placed in Panchayat and Block offices. It allowed claims to be accepted with an Aadhaar copy and then made Aadhaar the twelfth document of proof of identity. In West Bengal, it allowed people identified for discrepancies to apply through authorized representatives, giving them ten more days, and for those whose claims were rejected by judicial authorities, it established appellate tribunals of former judges. In its May 27, 2026, ruling, it upheld the revision and stated that people in Bihar who were wrongly removed as absent, dead, transferred, or with double entries could challenge the decision in court."
+   },
+   {
+    "en": "Search the list of names left off by your EPIC number on the district or Chief Electoral Officer's website, or look at the panchayat or block notice board.",
+    "tr": "छूटे हुए नामों की सूची में अपना नाम ज़िले या मुख्य निर्वाचन अधिकारी की वेबसाइट पर अपने EPIC नंबर से खोजें, या पंचायत या प्रखंड कार्यालय का नोटिस बोर्ड देखें।",
+    "back": "To find your name on the list of missing names, search by EPIC number on the District or Chief Electoral Officer's website, or look at the notice board at the Panchayat or Block office."
+   },
+   {
+    "en": "Note the reason given against your name. It tells you what to answer.",
+    "tr": "अपने नाम के आगे लिखा कारण नोट करें। उससे पता चलता है कि आपको क्या जवाब देना है।",
+    "back": "Note the reason given before your name. It may determine what response you receive."
+   },
+   {
+    "en": "Aadhaar can be given as proof of identity. It is not accepted as proof of citizenship.",
+    "tr": "आधार पहचान के प्रमाण के रूप में दिया जा सकता है। इसे नागरिकता के प्रमाण के रूप में स्वीकार नहीं किया जाता।",
+    "back": "Aadhaar can be provided as proof of identity. It is not accepted as proof of citizenship."
+   },
+   {
+    "en": "In West Bengal, a rejected claim goes to the appellate tribunal. A pending appeal did not give a right to vote at the 2026 poll.",
+    "tr": "पश्चिम बंगाल में ख़ारिज हुआ दावा अपीलीय न्यायाधिकरण के पास जाता है। लंबित अपील से 2026 के चुनाव में वोट देने का अधिकार नहीं मिला।",
+    "back": "In West Bengal, a rejected claim goes to the appellate tribunal. The pending appeal has resulted in the loss of the right to vote in the 2026 elections."
+   },
+   {
+    "en": "Going to court",
+    "tr": "अदालत जाना",
+    "back": "Going to court"
+   },
+   {
+    "en": "An elector can ask the High Court, under Article 226 of the Constitution, to review a decision on the roll. The Supreme Court's judgment of 27 May 2026 says the Commission's enquiry into eligibility remains open to judicial review, and that people in Bihar wrongly deleted as absent, dead, shifted or duplicate may challenge the decision that way. On 11 November 2025, while it was hearing the challenges to the revision, the Supreme Court asked the High Courts to hold back cases on whether the revision was valid. That request did not cover an elector's own case about his or her own entry. The judgment of 27 May 2026 decided the petitions about Bihar, and the petition in which the request was made is not among the cases it lists.",
+    "tr": "कोई मतदाता संविधान के अनुच्छेद 226 के तहत उच्च न्यायालय से मतदाता सूची से जुड़े किसी फ़ैसले की समीक्षा करने को कह सकता है। सर्वोच्च न्यायालय का 27 मई 2026 का फ़ैसला कहता है कि पात्रता की आयोग की जाँच न्यायिक समीक्षा के लिए खुली रहती है, और बिहार में जिन लोगों को अनुपस्थित, मृत, स्थानांतरित या दोहरी प्रविष्टि बताकर ग़लत तरीक़े से हटाया गया, वे इसी रास्ते से उस फ़ैसले को चुनौती दे सकते हैं। 11 नवंबर 2025 को, जब सर्वोच्च न्यायालय पुनरीक्षण को दी गई चुनौतियों की सुनवाई कर रहा था, उसने उच्च न्यायालयों से अनुरोध किया कि वे पुनरीक्षण की वैधता से जुड़े मामलों को रोककर रखें। यह अनुरोध किसी मतदाता के अपनी प्रविष्टि से जुड़े अपने मामले पर लागू नहीं होता था। 27 मई 2026 के फ़ैसले ने बिहार से जुड़ी याचिकाओं का निपटारा किया, और जिस याचिका में यह अनुरोध किया गया था, वह उस फ़ैसले में सूचीबद्ध मामलों में शामिल नहीं है।",
+    "back": "A voter can request the High Court to review a decision related to the voter list under Article 226 of the Constitution. The Supreme Court's May 27, 2026, decision states that the Commission's examination of eligibility remains open for judicial review, and those in Bihar who were wrongly removed as absent, dead, transferred, or with double entries can challenge that decision through this route. On November 11, 2025, when the Supreme Court was hearing challenges to the review, it requested the High Courts to hold cases related to the validity of the review on hold. This request did not apply to a voter's case related to their own entry. The May 27, 2026, decision disposed of petitions related to Bihar, and the petition in which this request was made is not among the cases listed in that decision."
+   },
+   {
+    "en": "Use the claim, the hearing and both appeals first, and keep every order.",
+    "tr": "पहले दावा, सुनवाई और दोनों अपीलों का रास्ता अपनाएँ, और हर आदेश सँभालकर रखें।",
+    "back": "File your first claim, motion, and any cross-claims, and keep all orders."
+   },
+   {
+    "en": "If you still have no remedy, ask the District Legal Services Authority for a lawyer to file a writ petition in the High Court.",
+    "tr": "अगर फिर भी आपको कोई राहत नहीं मिलती, तो ज़िला विधिक सेवा प्राधिकरण से उच्च न्यायालय में रिट याचिका दायर करने के लिए वकील माँगें।",
+    "back": "If you still do not get relief, ask for a lawyer from the District Legal Services Authority to file a writ petition in the High Court."
+   },
+   {
+    "en": "During the Special Revision, used community volunteers and local meetings to help electors facing objections, took a memorandum and a list of affected electors to the Election Commission, and intervened when ration dealers demanded documents.",
+    "tr": "विशेष पुनरीक्षण के दौरान आपत्तियों का सामना कर रहे मतदाताओं की मदद के लिए सामुदायिक स्वयंसेवकों और स्थानीय बैठकों का सहारा लिया, चुनाव आयोग को एक ज्ञापन और प्रभावित मतदाताओं की सूची सौंपी, और जब राशन डीलरों ने दस्तावेज़ माँगे तो हस्तक्षेप किया।",
+    "back": "During the special audit, community volunteers and local meetings were enlisted to help voters who were facing challenges, a memorandum was submitted to the election commission, and a list of affected voters was provided. And when the ration dealers asked for the documents, they intervened."
+   },
+   {
+    "en": "A forum formed at PUCL Chhattisgarh's call to deal with SIR problems. It trained volunteers, ran awareness meetings and took specific problems to the Chief Electoral Officer, who ordered forms filled wrongly by one BLO to be redone.",
+    "tr": "PUCL Chhattisgarh के आह्वान पर SIR की समस्याओं से निपटने के लिए बना एक मंच। इसने स्वयंसेवकों को प्रशिक्षण दिया, जागरूकता बैठकें कीं और ख़ास समस्याएँ मुख्य निर्वाचन अधिकारी तक ले गया, जिन्होंने एक BLO के ग़लत भरे फ़ॉर्म दोबारा भरवाने का आदेश दिया।",
+    "back": "PUCL Chhattisgarh, on the call of the organization, formed a platform to deal with the problems of SIR. It provided training to volunteers, held awareness meetings, and took specific problems to the Chief Electoral Officer, who ordered the re-filling of incorrectly filled forms of a BLO."
+   },
+   {
+    "en": "A citizens' collective of groups working with workers and migrants that ran helplines and physical help desks in working-class localities across Delhi, helping electors with progeny mapping and forms and taking their cases to the Chief Electoral Officer.",
+    "tr": "मज़दूरों और प्रवासियों के साथ काम करने वाले समूहों का एक नागरिक मंच, जिसने दिल्ली भर की मेहनतकश बस्तियों में हेल्पलाइन और आमने-सामने के हेल्प डेस्क चलाए, मतदाताओं की प्रोजेनी मैपिंग और फ़ॉर्म में मदद की, और उनके मामले मुख्य निर्वाचन अधिकारी तक ले गया।",
+    "back": "A citizen forum for workers and migrant-related groups, which ran helplines and walk-in help desks in working-class neighbourhoods across Delhi, mapped and helped voters with forms, and took their cases to the Chief Electoral Officer."
+   },
+   {
+    "en": "During enumeration, parish pastoral council members were each put in charge of 35 to 40 households, visited them when the BLOs came, and checked the forms had been filled and the names kept on the roll. The councils said they would watch the draft roll's deletions and help get names restored.",
+    "tr": "गणना के दौरान पैरिश पास्टोरल काउंसिल के हर सदस्य को 35 से 40 घरों की ज़िम्मेदारी दी गई। BLO के आने पर वे उन घरों में गए, और जाँचा कि फ़ॉर्म भरे गए हैं और नाम मतदाता सूची में बने हुए हैं। काउंसिलों ने कहा कि वे प्रारूप मतदाता सूची से हटाए गए नामों पर नज़र रखेंगी और नाम वापस जुड़वाने में मदद करेंगी।",
+    "back": "During the census, each member of the Parish Pastoral Council was assigned responsibility for 35 to 40 houses. Upon the arrival of BLO, they visited these houses to verify that the forms had been filled out and that the names were on the voter list. The councils stated that they would monitor the names removed from the draft voter list and assist in adding the names back."
+   },
+   {
+    "en": "A coalition that trained volunteers to run an SIR helpline and help desks in Bengaluru, mainly for migrants, slum dwellers, trans people, Muslims, Dalits and Adivasis, helping with the 2002 mapping and forms. It also took complaints to the Chief Electoral Officer.",
+    "tr": "एक गठबंधन जिसने बेंगलुरु में SIR हेल्पलाइन और हेल्प डेस्क चलाने के लिए स्वयंसेवकों को प्रशिक्षण दिया, मुख्य रूप से प्रवासियों, झुग्गी-बस्ती निवासियों, ट्रांस लोगों, मुसलमानों, दलितों और आदिवासियों के लिए, और 2002 की मैपिंग और फ़ॉर्म में मदद की। इसने शिकायतें मुख्य निर्वाचन अधिकारी तक भी पहुँचाईं।",
+    "back": "An alliance that trained volunteers to run the SIR helpline and help desk in Bengaluru, primarily for migrants, slum dwellers, trans people, Muslims, Dalits, and tribals, and helped with the 2002 mapping and forms. It also forwarded complaints to the Chief Electoral Officer."
+   },
+   {
+    "en": "Helped people in Haveri district trace their 2002 roll details for the enumeration form, through a WhatsApp group, and held workshops on what to do if a name is missing from the draft roll.",
+    "tr": "हावेरी ज़िले में लोगों को एक WhatsApp ग्रुप के ज़रिए गणना फ़ॉर्म के लिए 2002 की मतदाता सूची में अपना ब्योरा ढूँढने में मदद की, और इस पर कार्यशालाएँ कीं कि प्रारूप मतदाता सूची में नाम न हो तो क्या करें।",
+    "back": "In the Haveri district, people were helped to find their details in the 2002 voter list for the census form via a WhatsApp group, and workshops were held on what to do if their name is not on the draft voter list."
+   },
+   {
+    "en": "After the SIR, began a door-to-door drive by trained youth volunteers to find people left off the roll or never enrolled among the diocese's 40,750 families in four Assembly constituencies, starting in one parish. Church leaders said at least 3,000 such people had been identified.",
+    "tr": "SIR के बाद, चार विधानसभा क्षेत्रों में डायोसीज़ के 40,750 परिवारों में उन लोगों को ढूँढने के लिए, जो मतदाता सूची से छूट गए या कभी दर्ज ही नहीं हुए, प्रशिक्षित युवा स्वयंसेवकों का घर-घर अभियान शुरू किया, जिसकी शुरुआत एक पैरिश से हुई। चर्च के नेताओं ने कहा कि ऐसे कम से कम 3,000 लोगों की पहचान की गई थी।",
+    "back": "Following SIR, a door-to-door campaign was launched by trained youth volunteers in four assembly constituencies to find people from 40,750 families in the diocese who were either left out of the voter list or never registered, starting from one parish. Church leaders stated that at least 3,000 such individuals had been identified."
+   },
+   {
+    "en": "Ran an SIR help desk during the revision, one of the earliest by the committee's own account. The Cochin Diocese later cited the Mahallu committees' help desks as the model for its own drive.",
+    "tr": "पुनरीक्षण के दौरान SIR हेल्प डेस्क चलाया, समिति के अपने कहे अनुसार सबसे पहले हेल्प डेस्कों में से एक। बाद में Cochin Diocese ने अपने अभियान के लिए Mahallu समितियों के हेल्प डेस्कों को मिसाल बताया।",
+    "back": "During the revision, the SIR help desk was run, one of the first help desks according to the committee's own statement. Later, the Cochin Diocese cited the help desks of the Mahallu committees as an example for their campaign."
+   },
+   {
+    "en": "Followed Vallakkadavu in setting up teams of volunteers to help the public complete the SIR enumeration form.",
+    "tr": "Vallakkadavu की तर्ज़ पर लोगों को SIR गणना फ़ॉर्म भरने में मदद के लिए स्वयंसेवकों की टीमें बनाईं।",
+    "back": "Following the lead of Vallakkadavu, people formed teams of volunteers to help fill out the SIR calculation form."
+   },
+   {
+    "en": "Set up one of the first SIR help desks in Kerala in the first week of November 2025, open to the public as well as its own members, and filled in enumeration forms after finding people's names in the 2002 roll. Hundreds had used it within two weeks.",
+    "tr": "नवंबर 2025 के पहले हफ़्ते में केरल के सबसे पहले SIR हेल्प डेस्कों में से एक बनाया, जो अपने सदस्यों के साथ आम लोगों के लिए भी खुला था, और 2002 की मतदाता सूची में लोगों के नाम ढूँढकर गणना फ़ॉर्म भरे। दो हफ़्तों के भीतर सैकड़ों लोग इसका इस्तेमाल कर चुके थे।",
+    "back": "In the first week of November 2025, Kerala's first SIR help desks were set up, which were open to the general public along with its members, and people filled out the calculation form by searching for people's names in the 2002 voter list. Within two weeks, hundreds of people had used it."
+   },
+   {
+    "en": "Ran SIR training and awareness sessions in Mumbai with community groups, covering documents, the 2002 roll linkage, notices, hearings and appeals.",
+    "tr": "मुंबई में सामुदायिक समूहों के साथ SIR पर प्रशिक्षण और जागरूकता सत्र चलाए, जिनमें दस्तावेज़, 2002 की मतदाता सूची से जुड़ाव, नोटिस, सुनवाई और अपील शामिल थे।",
+    "back": "In Mumbai, training and awareness sessions were conducted with community groups on SIR, including paperwork, connecting with the 2002 voter list, notices, hearings, and appeals."
+   },
+   {
+    "en": "Held form-filling camps with booth-level officers in Jaipur during enumeration and set up a response team for SIR problems across Rajasthan.",
+    "tr": "गणना के दौरान जयपुर में बूथ स्तर अधिकारियों के साथ फ़ॉर्म भरने के शिविर लगाए और पूरे राजस्थान में SIR की समस्याओं के लिए एक रिस्पॉन्स टीम बनाई।",
+    "back": "During the survey, camps for filling out the forms were set up in Jaipur with booth-level officers, and a response team was created throughout Rajasthan to address the issues of SIR."
+   },
+   {
+    "en": "Ran SIR help camps on weekday evenings and full days at weekends in five Coimbatore localities (Podanur, Karumbukadai, GM Nagar, Saramedu and Kuniyamuthur) during enumeration.",
+    "tr": "गणना के दौरान कोयंबटूर के पाँच इलाक़ों (Podanur, Karumbukadai, GM Nagar, Saramedu और Kuniyamuthur) में हफ़्ते के दिनों में शाम को और सप्ताहांत में पूरे दिन SIR सहायता शिविर लगाए।",
+    "back": "During the census, SIR assistance camps were set up in five regions of Coimbatore (Podanur, Karumbukadai, GM Nagar, Saramedu, and Kuniyamuthur) for weekdays evening and full days on weekends."
+   },
+   {
+    "en": "Ran SIR help camps in at least 30 mosques in Tiruchy during enumeration. Volunteers searched the 2002 and 2005 rolls, checked people's details and helped them fill their forms. The Madurai branches trained office-bearers across 36 units.",
+    "tr": "गणना के दौरान तिरुचि की कम से कम 30 मस्जिदों में SIR सहायता शिविर लगाए। स्वयंसेवकों ने 2002 और 2005 की मतदाता सूचियों में खोज की, लोगों का ब्योरा जाँचा और उन्हें फ़ॉर्म भरने में मदद की। मदुरै की शाखाओं ने 36 इकाइयों के पदाधिकारियों को प्रशिक्षण दिया।",
+    "back": "During the census, SIR set up aid camps in at least 30 mosques in Tiruchirappalli. Volunteers searched through voter lists from 2002 and 2005, verified people's details, and helped them fill out the forms. The Madurai branches trained 36 unit officers."
+   },
+   {
+    "en": "Among the church bodies that organised help desks in Hyderabad to help voters complete enumeration forms.",
+    "tr": "उन चर्च संस्थाओं में से एक जिन्होंने हैदराबाद में मतदाताओं को गणना फ़ॉर्म भरने में मदद के लिए हेल्प डेस्क लगाए।",
+    "back": "One of the churches in Hyderabad provided a help desk to assist voters with their application forms."
+   },
+   {
+    "en": "Among the church bodies that set up help desks across Hyderabad, staffed by trained volunteers, to help voters complete enumeration forms.",
+    "tr": "उन चर्च संस्थाओं में से एक जिन्होंने पूरे हैदराबाद में प्रशिक्षित स्वयंसेवकों वाले हेल्प डेस्क लगाए, ताकि मतदाताओं को गणना फ़ॉर्म भरने में मदद मिले।",
+    "back": "One of the church organization that set up help desks throughout Hyderabad, with volunteers trained to assist voters with their applications."
+   },
+   {
+    "en": "Volunteers at the mosque and its madrasa filled and uploaded SIR applications online for residents, free of charge, where internet centres were charging Rs 100 to 200 a form.",
+    "tr": "मस्जिद और उसके मदरसे के स्वयंसेवकों ने निवासियों के SIR आवेदन मुफ़्त में भरकर ऑनलाइन अपलोड किए, जबकि इंटरनेट केंद्र एक फ़ॉर्म के रु. 100 से 200 ले रहे थे।",
+    "back": "Volunteers from the mosque and its madrasa were stuffing residents' forms for the SIR online, uploading them for free, while internet cafes charged between 100 and 200 per form."
+   },
+   {
+    "en": "Held camps in Muslim-majority areas during enumeration to explain the forms and documents, about 500 a day by its own count.",
+    "tr": "गणना के दौरान मुस्लिम-बहुल इलाक़ों में फ़ॉर्म और दस्तावेज़ समझाने के लिए शिविर लगाए, अपनी गिनती के अनुसार रोज़ लगभग 500 शिविर।",
+    "back": "During the census, camps were set up in Muslim-majority areas to explain the forms and documents, with around 500 camps every day according to their count."
+   },
+   {
+    "en": "A community organisation of trans people in Uttar Dinajpur that said it had been focused on the SIR and on supporting its community through it, though that work had slowed by April 2026.",
+    "tr": "उत्तर दिनाजपुर में ट्रांस लोगों का एक सामुदायिक संगठन, जिसने कहा कि उसका ध्यान SIR पर और उसके दौरान अपने समुदाय की मदद पर था, हालाँकि अप्रैल 2026 तक यह काम धीमा पड़ गया था।",
+    "back": "In North Dinajpur, a community association for transgender people, stated that their focus was on helping their community during the pandemic, though this work had slowed since April 2026."
+   },
+   {
+    "en": "Held daily training sessions and help desks at the mosque to guide people through the enumeration form.",
+    "tr": "लोगों को गणना फ़ॉर्म भरने में मार्गदर्शन देने के लिए मस्जिद में रोज़ प्रशिक्षण सत्र और हेल्प डेस्क चलाए।",
+    "back": "The mosque also held daily orientation and help desk sessions to guide people through the census form."
+   },
+   {
+    "en": "Worked for sex workers in Kolkata alongside two other NGOs during the revision. It had urged the Chief Electoral Officer's office to reach these women, welcomed the assistance camps held in red-light areas, and asked the Commission to accept documents issued by their cooperative society.",
+    "tr": "पुनरीक्षण के दौरान कोलकाता में दो अन्य ग़ैर-सरकारी संगठनों के साथ यौनकर्मियों के लिए काम किया। इसने मुख्य निर्वाचन अधिकारी के दफ़्तर से इन महिलाओं तक पहुँचने का आग्रह किया था, रेड-लाइट इलाक़ों में लगाए गए सहायता शिविरों का स्वागत किया, और आयोग से उनकी सहकारी समिति के जारी किए दस्तावेज़ स्वीकार करने को कहा।",
+    "back": "During the review, she worked with two other non-governmental organizations in Kolkata for sex workers. It urged the Chief Electoral Officer's office to reach out to these women, welcomed the aid camps set up in red-light areas, and asked the commission to accept the documents issued by their cooperative society."
+   },
+   {
+    "en": "Worked with a partner organisation on a team that drafted appeals for electors removed from the roll and filed them online, or on paper for those who could not use the portal.",
+    "tr": "एक साझेदार संगठन के साथ मिलकर एक टीम में काम किया, जिसने मतदाता सूची से हटाए गए मतदाताओं की अपीलें तैयार कीं और उन्हें ऑनलाइन दाख़िल किया, या जो पोर्टल का इस्तेमाल नहीं कर सकते थे उनके लिए काग़ज़ पर।",
+    "back": "Working with a partner organisation, a team of volunteers drafted and filed voter lists with the Election Commission of India, either online or by hand, for voters who could not access the portal."
+   },
+   {
+    "en": "Put together a team of lawyers and peer counsellors to support queer and trans electors facing exclusion during the revision.",
+    "tr": "पुनरीक्षण के दौरान बाहर किए जाने का सामना कर रहे क्वीयर और ट्रांस मतदाताओं की मदद के लिए वकीलों और साथी परामर्शदाताओं की एक टीम बनाई।",
+    "back": "A team of lawyers and peer counsellors worked with gay and trans voters who felt excluded during the review."
+   },
+   {
+    "en": "Published a guide explaining SIR notices and what an elector should do on receiving one, and a training manual (with Vote for Democracy) on notices, hearings, documents and appeals.",
+    "tr": "SIR नोटिस क्या होते हैं और नोटिस मिलने पर मतदाता को क्या करना चाहिए, यह समझाने वाली एक गाइड प्रकाशित की, और (Vote for Democracy के साथ) नोटिस, सुनवाई, दस्तावेज़ों और अपीलों पर एक प्रशिक्षण पुस्तिका भी।",
+    "back": "A guide explaining what the SIR notice is and what voters should do upon receiving it was published, along with a training booklet on notices, hearings, documentation, and appeals (with Vote for Democracy)."
+   },
+   {
+    "en": "Assam",
+    "tr": "असम",
+    "back": "Assam"
+   },
+   {
+    "en": "Chhattisgarh",
+    "tr": "छत्तीसगढ़",
+    "back": "Chhattisgarh"
+   },
+   {
+    "en": "Delhi",
+    "tr": "दिल्ली",
+    "back": "Delhi"
+   },
+   {
+    "en": "Goa",
+    "tr": "गोवा",
+    "back": "Goa"
+   },
+   {
+    "en": "Karnataka",
+    "tr": "कर्नाटक",
+    "back": "Karnataka"
+   },
+   {
+    "en": "Kerala",
+    "tr": "केरल",
+    "back": "Kerala"
+   },
+   {
+    "en": "Maharashtra",
+    "tr": "महाराष्ट्र",
+    "back": "Maharashtra"
+   },
+   {
+    "en": "Rajasthan",
+    "tr": "राजस्थान",
+    "back": "Rajasthan"
+   },
+   {
+    "en": "Tamil Nadu",
+    "tr": "तमिलनाडु",
+    "back": "Tamil Nadu"
+   },
+   {
+    "en": "Telangana",
+    "tr": "तेलंगाना",
+    "back": "Telangana"
+   },
+   {
+    "en": "West Bengal",
+    "tr": "पश्चिम बंगाल",
+    "back": "West Bengal"
+   },
+   {
+    "en": "Ran SIR training sessions in Maharashtra jointly with CJP and co-published a training manual on enumeration, notices, hearings and appeals.",
+    "tr": "महाराष्ट्र में CJP के साथ मिलकर SIR प्रशिक्षण सत्र चलाए और गणना, नोटिस, सुनवाई और अपील की प्रक्रिया समझाने वाली एक प्रशिक्षण पुस्तिका सह-प्रकाशित की।",
+    "back": "In Maharashtra, in association with CJP, conducted SIR training sessions and co-published a training manual explaining the calculation, notice, hearing, and appeal process."
+   },
+   {
+    "en": "Ran SIR help camps at 22 places in Muzaffarnagar district during enumeration, where people were helped to fill their enumeration forms. One was at a madrasa in Sadar tehsil, where a BLO was also posted to take the forms. The unit said it had trained 544 young people to fill the forms. A few days later the unit's president put the number of camps at 35 and said they were open to everyone whatever their religion.",
+    "tr": "गणना के दौरान मुज़फ़्फ़रनगर ज़िले में 22 जगहों पर SIR सहायता शिविर लगाए, जहाँ लोगों को गणना प्रपत्र भरने में मदद दी गई। एक शिविर सदर तहसील के एक मदरसे में था, जहाँ प्रपत्र लेने के लिए एक BLO भी तैनात था। इकाई ने कहा कि उसने प्रपत्र भरने के लिए 544 युवाओं को प्रशिक्षित किया है। कुछ दिन बाद इकाई के अध्यक्ष ने शिविरों की संख्या 35 बताई और कहा कि वे हर धर्म के लोगों के लिए खुले हैं।",
+    "back": "During the census, SIR assistance camps were set up in 22 locations in Muzaffarnagar district, where people were helped to fill out the census forms. One camp was at a madrasa in Sadar Tehsil, where a BLO was also stationed to collect forms. The unit stated that it had trained 544 young people to fill out the forms. A few days later, the unit's president stated that the number of camps was 35 and that they were open to people of all religions."
+   },
+   {
+    "en": "Ran an eight-day drive in Afzalgarh town, Bijnor district, to fill and submit enumeration forms. On its fourth day, at a camp near the Jama Masjid, about 157 forms were handed to the BLO. The unit also ran an awareness drive for the town's residents.",
+    "tr": "बिजनौर ज़िले के अफ़ज़लगढ़ कस्बे में गणना प्रपत्र भरने और जमा करने के लिए आठ दिन का अभियान चलाया। चौथे दिन जामा मस्जिद के पास लगे शिविर में लगभग 157 प्रपत्र BLO को सौंपे गए। इकाई ने कस्बे के लोगों के लिए जागरूकता अभियान भी चलाया।",
+    "back": "An eight-day campaign was conducted in Afzalgarh town of Bijnor district to fill and submit the census forms. On the fourth day, approximately 157 forms were submitted to the BLO at the camp near Jama Masjid. The unit also ran an awareness campaign for the people of the town."
+   },
+   {
+    "en": "Ran three SIR help centres in Aligarh city during enumeration and asked educated young people to volunteer. The district president said the unit had been helping people for two weeks by late November 2025.",
+    "tr": "गणना के दौरान अलीगढ़ शहर में तीन SIR सहायता केंद्र चलाए और पढ़े-लिखे युवाओं से स्वयंसेवक बनने को कहा। ज़िला अध्यक्ष ने बताया कि नवंबर 2025 के आख़िर तक इकाई दो हफ़्ते से लोगों की मदद कर रही थी।",
+    "back": "During the survey, three SIR (Student Resource Center) assistance centers were run in Aligarh city, and educated youth were asked to volunteer. The district president stated that the unit had been helping people for two weeks until the end of November 2025."
+   },
+   {
+    "en": "Uttar Pradesh",
+    "tr": "उत्तर प्रदेश",
+    "back": "Uttar Pradesh"
+   },
+   {
+    "en": "Ran an SIR call centre with SPECT from 4 to 30 November 2025 that guided callers on forms, documents, missing names and corrections. Its own annual report says it also held camps in Uttar Pradesh, Madhya Pradesh, Gujarat and Uttarakhand where volunteers helped people fill forms and checked their documents. The report names no place or date in Uttar Pradesh.",
+    "tr": "नवंबर 2025 में 4 से 30 तारीख़ तक SPECT के साथ SIR कॉल सेंटर चलाया, जिसमें फ़ोन करने वालों को प्रपत्रों, दस्तावेज़ों, छूटे नामों और सुधारों पर मार्गदर्शन दिया गया। उसकी अपनी वार्षिक रिपोर्ट के अनुसार उसने उत्तर प्रदेश, मध्य प्रदेश, गुजरात और उत्तराखंड में शिविर भी लगाए, जहाँ स्वयंसेवकों ने लोगों को प्रपत्र भरने में मदद की और उनके दस्तावेज़ जाँचे। रिपोर्ट उत्तर प्रदेश की कोई जगह या तारीख़ नहीं बताती।",
+    "back": "From November 2025 to 30th, he ran the SIR call center with SPECT, guiding callers on forms, documents, missing names, and corrections. According to his annual report, he also organized camps in Uttar Pradesh, Madhya Pradesh, Gujarat, and Uttarakhand, where volunteers helped people fill out forms and verified their documents. The report does not specify a location or date in Uttar Pradesh."
+   },
+   {
+    "en": "Contact",
+    "tr": "संपर्क",
+    "back": "Contact"
+   },
+   {
+    "en": "Contact, through the main office",
+    "tr": "संपर्क, मुख्य कार्यालय के ज़रिए",
+    "back": "Contact through the head office."
+   },
+   {
+    "en": "Where this is printed",
+    "tr": "यह कहाँ छपा है",
+    "back": "Where is it printed?"
+   },
+   {
+    "en": "This page was translated by machine, and where it differs from the English page, the English page is correct. Every step links to the document it rests on, and the quotations from those documents are in their own words.",
+    "tr": "इस पृष्ठ का अनुवाद मशीन से किया गया है, और जहाँ यह अंग्रेज़ी पृष्ठ से अलग हो, वहाँ अंग्रेज़ी पृष्ठ सही है। हर क़दम उस दस्तावेज़ से जुड़ा है जिस पर वह आधारित है, और उन दस्तावेज़ों के उद्धरण उन्हीं के शब्दों में हैं।",
+    "back": "This page has been translated by a machine, and where it differs from the English page, the English page is correct. Every step is linked to the document it is based on, and the references to those documents are in their own words."
+   }
+  ],
+  "bn": [
+   {
+    "en": "This page sets out what the law and the Election Commission's own orders give an elector whose name was left off the draft or the final roll, and where to get help. It is general information drawn from those documents, and it is not legal advice on any one case. The state's Chief Electoral Officer, the registration officer and the District Legal Services Authority can say how a step works in a particular state.",
+    "tr": "কোনো ভোটারের নাম খসড়া ভোটার তালিকা বা চূড়ান্ত ভোটার তালিকা থেকে বাদ পড়লে আইন এবং নির্বাচন কমিশনের নিজের আদেশ তাঁকে কী কী সুযোগ দেয়, এবং কোথায় সাহায্য পাওয়া যায়, এই পাতায় তা বলা হয়েছে। এটি ওই নথিগুলি থেকে নেওয়া সাধারণ তথ্য, কোনো একটি নির্দিষ্ট মামলার জন্য আইনি পরামর্শ নয়। কোনো নির্দিষ্ট রাজ্যে একটি ধাপ কীভাবে কাজ করে, তা সেই রাজ্যের মুখ্য নির্বাচনী আধিকারিক, ইলেক্টোরাল রেজিস্ট্রেশন অফিসার (ERO) এবং জেলা আইনি পরিষেবা কর্তৃপক্ষ বলতে পারবেন।",
+    "back": "This page explains the opportunities and assistance available to a voter whose name is missing from the draft voter list or final voter list, as well as the laws and the Election Commission's own orders. It provides general information taken from those documents, not legal advice for a specific case. How a particular step works in a specific state can be determined by the Chief Electoral Officer, Electoral Registration Officer (ERO), and the District Legal Services Authority of that state."
+   },
+   {
+    "en": "Listing an organisation here is not an endorsement, and leaving one out says nothing about it. If you know of an organisation that helped electors, or a listing is out of date, write to the address at the foot of the page with a link that shows it.",
+    "tr": "এখানে কোনো সংগঠনের নাম থাকার মানে তাকে সমর্থন করা নয়, আর কোনো সংগঠনের নাম না থাকা তার সম্পর্কে কিছুই বোঝায় না। আপনি যদি এমন কোনো সংগঠনের কথা জানেন যারা ভোটারদের সাহায্য করেছে, অথবা এখানকার কোনো তথ্য পুরোনো হয়ে গিয়ে থাকে, তাহলে তা দেখায় এমন একটি লিঙ্ক সহ পাতার নিচে দেওয়া ঠিকানায় লিখুন।",
+    "back": "The presence of an organization's name here does not imply support for it, and the absence of an organization's name does not indicate anything about it. If you are aware of any organizations that have helped voters, or if any information here is outdated, please write to the address given at the bottom of the page along with a link that shows it."
+   },
+   {
+    "en": "Organisations that have helped electors",
+    "tr": "যে সংগঠনগুলি ভোটারদের সাহায্য করেছে",
+    "back": "Organizations that have helped voters"
+   },
+   {
+    "en": "State",
+    "tr": "রাজ্য",
+    "back": "The state"
+   },
+   {
+    "en": "A name left off can be put back. Form 6 asks for it, during the revision and at any time after it, until ten days before the last date for nominations in an election.",
+    "tr": "বাদ পড়া নাম আবার তালিকায় তোলা যায়। এর জন্য ফর্ম 6-এ আবেদন করতে হয়, সংশোধনের সময়ে এবং তার পরে যে কোনো সময়ে, কোনো নির্বাচনে মনোনয়ন জমার শেষ তারিখের দশ দিন আগে পর্যন্ত।",
+    "back": "A name that has been deleted can be re-added to the list. To do this, an application must be made in Form 6, during the correction period and at any time thereafter, up to ten days before the last date for submitting nominations for any election."
+   },
+   {
+    "en": "In the revision, no name could be struck off the draft roll without an inquiry and a fair chance to be heard, followed by a written order with reasons.",
+    "tr": "সংশোধনের সময়ে তদন্ত এবং শুনানির ন্যায্য সুযোগ না দিয়ে, এবং তার পরে কারণ সহ লিখিত আদেশ না দিয়ে, খসড়া ভোটার তালিকা থেকে কোনো নাম বাদ দেওয়া যেত না।",
+    "back": "No name could be deleted from the draft electoral roll without an inquiry and hearing, and then an order in writing, with the reasons."
+   },
+   {
+    "en": "A decision can be appealed twice, first to the District Magistrate and then to the state's Chief Electoral Officer.",
+    "tr": "কোনো সিদ্ধান্তের বিরুদ্ধে দুবার আপিল করা যায়, প্রথমে জেলাশাসকের (ডিস্ট্রিক্ট ম্যাজিস্ট্রেট) কাছে, তারপর রাজ্যের মুখ্য নির্বাচনী আধিকারিকের কাছে।",
+    "back": "Any decision can be appealed first to the District Magistrate and then finally to the State Chief Electoral Officer."
+   },
+   {
+    "en": "The voter helpline is 1950, and the free legal aid helpline is 15100.",
+    "tr": "ভোটার হেল্পলাইন নম্বর 1950, এবং বিনামূল্যে আইনি সহায়তার হেল্পলাইন নম্বর 15100।",
+    "back": "The voter helpline number is 1950, and the free legal aid helpline number is 15100."
+   },
+   {
+    "en": "{o} organisations in {s} states are listed with the help they gave, each with a report that shows it.",
+    "tr": "{s}টি রাজ্যের {o}টি সংগঠনের নাম তারা কী সাহায্য করেছে তা সহ দেওয়া হয়েছে। প্রতিটির সঙ্গে আছে তা দেখায় এমন একটি প্রতিবেদন।",
+    "back": "The names of the {o} organizations in {s} states are given along with what they have helped. Each has a report showing what it has done."
+   },
+   {
+    "en": "This page gives general information from the law and the Commission's orders. It is not legal advice on any one case, and the list of organisations is not complete.",
+    "tr": "এই পাতায় আইন এবং কমিশনের আদেশ থেকে সাধারণ তথ্য দেওয়া হয়েছে। এটি কোনো একটি নির্দিষ্ট মামলার জন্য আইনি পরামর্শ নয়, এবং সংগঠনের তালিকাটি সম্পূর্ণ নয়।",
+    "back": "This page provides general information from the law and the commission's orders. It is not legal advice for a specific case, and the list of organizations is not complete."
+   },
+   {
+    "en": "to be added back",
+    "tr": "আবার তালিকায় নাম তোলার জন্য",
+    "back": "To be added to the list again."
+   },
+   {
+    "en": "2 appeals",
+    "tr": "2টি আপিল",
+    "back": "2. Appeal"
+   },
+   {
+    "en": "District Magistrate, then the CEO",
+    "tr": "জেলাশাসক, তারপর মুখ্য নির্বাচনী আধিকারিক",
+    "back": "The District Magistrate, then the Chief Electoral Officer."
+   },
+   {
+    "en": "voter helpline",
+    "tr": "ভোটার হেল্পলাইন",
+    "back": "Voter Helpline"
+   },
+   {
+    "en": "free legal aid helpline",
+    "tr": "বিনামূল্যে আইনি সহায়তার হেল্পলাইন",
+    "back": "Free legal aid helpline"
+   },
+   {
+    "en": "Where this comes from",
+    "tr": "এই তথ্য কোথা থেকে নেওয়া",
+    "back": "Where is this information taken from?"
+   },
+   {
+    "en": "report",
+    "tr": "প্রতিবেদন",
+    "back": "Report"
+   },
+   {
+    "en": "Groups that ran help desks, camps, helplines or legal help during the revision, {o} of them in {s} states, each with the report that shows the help it gave and when it was last reported active. The list leaves out political parties and anything led by a party office-holder. It is incomplete, and nothing was found that could be checked for the other states.",
+    "tr": "সংশোধনের সময়ে যে গোষ্ঠীগুলি হেল্প ডেস্ক, শিবির, হেল্পলাইন বা আইনি সহায়তা চালিয়েছে, {s}টি রাজ্যে এমন {o}টি গোষ্ঠী। প্রতিটির সঙ্গে আছে সেই প্রতিবেদন, যা দেখায় তারা কী সাহায্য করেছে এবং শেষ কবে তাদের সক্রিয় থাকার খবর পাওয়া গেছে। রাজনৈতিক দল এবং কোনো দলের পদাধিকারীর নেতৃত্বে চলা কোনো কিছুই এই তালিকায় রাখা হয়নি। তালিকাটি অসম্পূর্ণ, এবং অন্য রাজ্যগুলির ক্ষেত্রে যাচাই করা যায় এমন কিছু পাওয়া যায়নি।",
+    "back": "During the revision, {o} groups in {s} states were identified that operated helplines, camps, or legal aid services. Each group is accompanied by the report showing what assistance they provided and when they were last reported to be active. Political parties and anything led by a party official were not included in this list. The list is incomplete, and nothing that can be verified in other states has been found."
+   },
+   {
+    "en": "Across India",
+    "tr": "সারা ভারতে",
+    "back": "All over India"
+   },
+   {
+    "en": "Every state",
+    "tr": "সব রাজ্য",
+    "back": "All the states"
+   },
+   {
+    "en": "Last reported active {d}.",
+    "tr": "সর্বশেষ সক্রিয় থাকার খবর: {d}।",
+    "back": "The latest active news: {d}."
+   },
+   {
+    "en": "Website",
+    "tr": "ওয়েবসাইট",
+    "back": "Website"
+   },
+   {
+    "en": "Shown by",
+    "tr": "সূত্র",
+    "back": "Source"
+   },
+   {
+    "en": "One organisation in {p}.",
+    "tr": "{p}: একটি সংগঠন।",
+    "back": "{p}: An organization."
+   },
+   {
+    "en": "more than one state",
+    "tr": "একাধিক রাজ্য",
+    "back": "Multiple States"
+   },
+   {
+    "en": "{k} organisations in all.",
+    "tr": "মোট {k}টি সংগঠন।",
+    "back": "There are a total of {k} organizations."
+   },
+   {
+    "en": "{k} organisations in {p}.",
+    "tr": "{p}: {k}টি সংগঠন।",
+    "back": "{p}: {k} organizations."
+   },
+   {
+    "en": "Ask to be put back on the roll with Form 6",
+    "tr": "ফর্ম 6 দিয়ে আবার ভোটার তালিকায় নাম তোলার আবেদন করুন",
+    "back": "File a voter registration application using Form 6."
+   },
+   {
+    "en": "If your name was left off the draft or the final roll, fill in Form 6, the application to be added to the roll. During the claims and objections period of the revision it goes with the declaration attached to it for the revision. Once the revision is over in your state you can still apply at any time under continuous updation, on the ordinary Form 6 of the 1960 Rules. Form 6A is for Indian citizens living abroad, and Form 8 is for a change of address or a mistake in your own entry.",
+    "tr": "আপনার নাম খসড়া ভোটার তালিকা বা চূড়ান্ত ভোটার তালিকা থেকে বাদ পড়ে থাকলে ফর্ম 6 পূরণ করুন। এটি ভোটার তালিকায় নাম তোলার আবেদনপত্র। সংশোধনের দাবি ও আপত্তির সময়ে এর সঙ্গে সংশোধনের জন্য যুক্ত ঘোষণাপত্রটি দিতে হয়। আপনার রাজ্যে সংশোধন শেষ হয়ে যাওয়ার পরেও আপনি নিরন্তর হালনাগাদ (continuous updation) ব্যবস্থায় যে কোনো সময়ে 1960 সালের বিধির সাধারণ ফর্ম 6-এ আবেদন করতে পারেন। ফর্ম 6A বিদেশে বসবাসকারী ভারতীয় নাগরিকদের জন্য, আর ঠিকানা বদল বা আপনার নিজের তথ্যে ভুলের জন্য ফর্ম 8।",
+    "back": "If your name is missing from the draft voter list or final voter list, please fill out Form 6. This is the application form for removing your name from the voter list. During the correction period, you must also submit the declaration attached for correction. Even after the correction process is complete in your state, you can apply for continuous updation at any time using the general Form 6 of the 1960 Rules. Form 6A is for Indian citizens residing abroad, and Form 8 is for changes of address or errors in your own information."
+   },
+   {
+    "en": "Get Form 6 from your booth level officer (BLO), the registration officer's office, voters.eci.gov.in or the ECINet app.",
+    "tr": "ফর্ম 6 পাবেন আপনার বুথ লেভেল অফিসার (BLO), ইলেক্টোরাল রেজিস্ট্রেশন অফিসারের (ERO) অফিস, voters.eci.gov.in অথবা ECINet অ্যাপ থেকে।",
+    "back": "You can get Form 6 from your Booth Level Officer (BLO), Electoral Registration Officer (ERO) office, voters.eci.gov.in or ECINet app."
+   },
+   {
+    "en": "During the revision, attach the declaration that goes with Form 6 for the revision.",
+    "tr": "সংশোধনের সময়ে ফর্ম 6-এর সঙ্গে সংশোধনের জন্য যুক্ত ঘোষণাপত্রটি জুড়ে দিন।",
+    "back": "Enclose the declaration for amendment along with Form 6 when filing the amendment."
+   },
+   {
+    "en": "Hand it to the BLO or the registration officer, or file it online, and keep the reference number.",
+    "tr": "এটি BLO বা ইলেক্টোরাল রেজিস্ট্রেশন অফিসারের (ERO) কাছে জমা দিন, অথবা অনলাইনে জমা দিন, এবং রেফারেন্স নম্বরটি রেখে দিন।",
+    "back": "File it with the BLO or Electoral Registration Officer (ERO), or online, and keep the reference number."
+   },
+   {
+    "en": "Apply well before an election is called. No name can be added after the last date for nominations until that election is over.",
+    "tr": "নির্বাচন ঘোষণার অনেক আগেই আবেদন করুন। মনোনয়ন জমার শেষ তারিখের পর থেকে সেই নির্বাচন শেষ না হওয়া পর্যন্ত কোনো নাম যোগ করা যায় না।",
+    "back": "Apply well before the election is announced. No names can be added until the election is over, after the deadline for submitting nominations."
+   },
+   {
+    "en": "Use Form 8 if you moved house, within the state or from another state, or if your entry has a mistake. Use Form 6A if you live abroad on an Indian passport.",
+    "tr": "আপনি যদি বাড়ি বদলে থাকেন, রাজ্যের ভিতরে বা অন্য রাজ্য থেকে, অথবা আপনার তথ্যে কোনো ভুল থাকে, তাহলে ফর্ম 8 ব্যবহার করুন। আপনি যদি ভারতীয় পাসপোর্ট নিয়ে বিদেশে থাকেন, তাহলে ফর্ম 6A ব্যবহার করুন।",
+    "back": "If you are changing your residence, whether within the state or from another state, or if there is any error in your information, use Form 8. If you are traveling abroad with an Indian passport, use Form 6A."
+   },
+   {
+    "en": "Objections and the hearing before any deletion",
+    "tr": "আপত্তি, এবং কোনো নাম বাদ দেওয়ার আগে শুনানি",
+    "back": "Objection, and hearing before removing any name."
+   },
+   {
+    "en": "Form 7 is the form for objecting to a name on the roll, or to a name proposed to be added. When someone objects to your name, the registration officer has to send you a notice and hear you before deciding. Before striking off a name on the ground that the person has moved away or is not entitled to be on the roll, the officer has to give that person a reasonable chance to be heard. In the revision no entry could be deleted from the draft without an inquiry and a fair chance to be heard, followed by a written order with reasons. If you get a notice, go to the hearing or send the documents asked for, and ask for the order in writing.",
+    "tr": "ফর্ম 7 হল ভোটার তালিকায় থাকা কোনো নামের বিরুদ্ধে, বা যোগ করার জন্য প্রস্তাবিত কোনো নামের বিরুদ্ধে আপত্তি জানানোর ফর্ম। কেউ আপনার নামের বিরুদ্ধে আপত্তি জানালে ইলেক্টোরাল রেজিস্ট্রেশন অফিসারকে (ERO) সিদ্ধান্ত নেওয়ার আগে আপনাকে নোটিস পাঠাতে হবে এবং আপনার বক্তব্য শুনতে হবে। কোনো ব্যক্তি অন্যত্র চলে গেছেন বা তালিকায় থাকার অধিকারী নন, এই কারণে তাঁর নাম কাটার আগে অফিসারকে সেই ব্যক্তিকে শুনানির যুক্তিসঙ্গত সুযোগ দিতে হবে। সংশোধনের সময়ে তদন্ত এবং শুনানির ন্যায্য সুযোগ না দিয়ে, এবং তার পরে কারণ সহ লিখিত আদেশ না দিয়ে, খসড়া ভোটার তালিকা থেকে কোনো নাম বাদ দেওয়া যেত না। নোটিস পেলে শুনানিতে যান অথবা যে নথি চাওয়া হয়েছে তা পাঠান, এবং আদেশটি লিখিতভাবে চান।",
+    "back": "Form 7 is a form to object to any name on the voter list, or to a proposed name to be added. If someone objects to your name, you must send a notice to the Electoral Registration Officer (ERO) before they can make a decision and listen to your statement. The officer must give the person a reasonable opportunity to be heard before striking their name off the list, if the person has moved elsewhere or is not entitled to be on the list. A name cannot be removed from the draft voter list without an investigation and a fair hearing at the time of correction, and without a written order with reasons. Upon receiving the notice, attend the hearing or send the required documents, and request the order in writing."
+   },
+   {
+    "en": "Check the lists of claims and objections the registration officer puts up on the notice board and the Chief Electoral Officer's website.",
+    "tr": "ইলেক্টোরাল রেজিস্ট্রেশন অফিসার (ERO) নোটিস বোর্ডে এবং মুখ্য নির্বাচনী আধিকারিকের ওয়েবসাইটে দাবি ও আপত্তির যে তালিকা প্রকাশ করেন, সেগুলি দেখে নিন।",
+    "back": "Check the list of claims and objections that the Electoral Registration Officer (ERO) has posted on the notice board and on the Chief Electoral Officer's website."
+   },
+   {
+    "en": "If someone has objected to your name, you should get a notice with the date, time and place of the hearing.",
+    "tr": "কেউ আপনার নামের বিরুদ্ধে আপত্তি জানিয়ে থাকলে আপনার একটি নোটিস পাওয়ার কথা, যাতে শুনানির তারিখ, সময় ও স্থান লেখা থাকবে।",
+    "back": "If someone has filed a grievance, you will receive a letter providing the date, time, and location of your hearing."
+   },
+   {
+    "en": "Attend in person or through someone you authorise where that is allowed, and take your documents.",
+    "tr": "নিজে উপস্থিত হোন, অথবা যেখানে অনুমতি আছে সেখানে আপনার অনুমোদিত কোনো ব্যক্তির মাধ্যমে, এবং নিজের নথিপত্র সঙ্গে নিয়ে যান।",
+    "back": "Appear in person, or have someone authorized to appear for you at the location where the lien is to be satisfied, and bring any documents you can to support your claim."
+   },
+   {
+    "en": "Ask for the registration officer's decision in writing. You need it for an appeal.",
+    "tr": "ইলেক্টোরাল রেজিস্ট্রেশন অফিসারের (ERO) সিদ্ধান্ত লিখিতভাবে চেয়ে নিন। আপিল করতে এটি লাগবে।",
+    "back": "Seek the Electoral Registration Officer's (ERO) decision in writing. This will be required to appeal."
+   },
+   {
+    "en": "Appeal to the District Magistrate, then to the Chief Electoral Officer",
+    "tr": "জেলাশাসকের (ডিস্ট্রিক্ট ম্যাজিস্ট্রেট) কাছে আপিল, তারপর মুখ্য নির্বাচনী আধিকারিকের কাছে",
+    "back": "Appeal to District Magistrate, then to Chief Electoral Officer"
+   },
+   {
+    "en": "If the registration officer's decision goes against you, you can appeal to the District Magistrate under section 24 of the Representation of the People Act, 1950. If the District Magistrate's order also goes against you, a second appeal lies to the state's Chief Electoral Officer. The Commission's revision order kept both appeals and gave 30 days from the District Magistrate's order for the second. The Chief Electoral Officer of Goa, in the note on its final roll, gave 15 days from the registration officer's decision for the first.",
+    "tr": "ইলেক্টোরাল রেজিস্ট্রেশন অফিসারের (ERO) সিদ্ধান্ত আপনার বিপক্ষে গেলে জনপ্রতিনিধিত্ব আইন, 1950-এর 24 নম্বর ধারা অনুযায়ী আপনি জেলাশাসকের (ডিস্ট্রিক্ট ম্যাজিস্ট্রেট) কাছে আপিল করতে পারেন। জেলাশাসকের আদেশও আপনার বিপক্ষে গেলে রাজ্যের মুখ্য নির্বাচনী আধিকারিকের কাছে দ্বিতীয় আপিল করা যায়। কমিশনের সংশোধন-আদেশে দুটি আপিলই বহাল রাখা হয়, এবং দ্বিতীয়টির জন্য জেলাশাসকের আদেশ থেকে 30 দিন সময় দেওয়া হয়। গোয়ার মুখ্য নির্বাচনী আধিকারিক চূড়ান্ত ভোটার তালিকা নিয়ে তাঁর নোটে প্রথম আপিলের জন্য ইলেক্টোরাল রেজিস্ট্রেশন অফিসারের সিদ্ধান্ত থেকে 15 দিন সময় দিয়েছিলেন।",
+    "back": "If the decision of the Electoral Registration Officer (ERO) is against you, you can appeal to the District Magistrate under Section 24 of the Representation of the People Act, 1950. If the District Magistrate's order is also against you, a second appeal can be made to the Chief Electoral Officer of the state. In the Commission's order of correction, both appeals are upheld, and a 30-day period is given for the second appeal from the District Magistrate's order. The Chief Electoral Officer of Goa, in his note with the final voter list, had given 15 days from the decision of the Electoral Registration Officer for the first appeal."
+   },
+   {
+    "en": "Get a copy of the registration officer's order.",
+    "tr": "ইলেক্টোরাল রেজিস্ট্রেশন অফিসারের (ERO) আদেশের একটি প্রতিলিপি সংগ্রহ করুন।",
+    "back": "Collect a copy of the order from the Electoral Registration Officer (ERO)."
+   },
+   {
+    "en": "Write a short appeal to the District Magistrate, signed by you, with the order attached, within 15 days of the registration officer's decision.",
+    "tr": "ইলেক্টোরাল রেজিস্ট্রেশন অফিসারের সিদ্ধান্তের 15 দিনের মধ্যে জেলাশাসকের কাছে একটি ছোট আপিল লিখুন, তাতে নিজে সই করুন এবং আদেশটি সঙ্গে জুড়ে দিন।",
+    "back": "Within 15 days of the electoral registration officer's decision, write a short appeal to the district governor, sign it personally, and attach the order."
+   },
+   {
+    "en": "If it is turned down, appeal to the Chief Electoral Officer within 30 days of the District Magistrate's order.",
+    "tr": "আপিল খারিজ হলে জেলাশাসকের আদেশের 30 দিনের মধ্যে মুখ্য নির্বাচনী আধিকারিকের কাছে আপিল করুন।",
+    "back": "If the appeal is rejected, you can appeal to the Chief Electoral Officer within 30 days of the District Collector's order."
+   },
+   {
+    "en": "Keep copies and receipts of everything you hand in.",
+    "tr": "যা কিছু জমা দেবেন, তার সবকিছুর প্রতিলিপি ও প্রাপ্তিস্বীকারপত্র রেখে দিন।",
+    "back": "Keep all receipts and any other documentation you submit."
+   },
+   {
+    "en": "The 1950 helpline, complaints, and the drive to find those left off",
+    "tr": "1950 হেল্পলাইন, অভিযোগ, এবং বাদ পড়া মানুষদের খুঁজে বের করার অভিযান",
+    "back": "1950 Campaign to identify missing persons, complaints and assistance."
+   },
+   {
+    "en": "You can call the voter helpline on 1950, or the national toll-free number 1800-11-1950 from 8 am to 8 pm, and every complaint is logged on the National Grievance Service Portal. The ECINet app has a Book-a-Call with BLO feature, and complaints can also be emailed to complaints@eci.gov.in. After the revision, the Commission ordered BLOs to compare the roll from before the revision with the present one, visit those missing, and help anyone still eligible fill in Form 6. The lists are to be shared with the parties' booth agents, and booth level camps are to be held. Special camps may also be held for people in night shelters and labour colonies and for the homeless.",
+    "tr": "আপনি ভোটার হেল্পলাইন 1950-এ ফোন করতে পারেন, অথবা সকাল 8টা থেকে রাত 8টা পর্যন্ত জাতীয় টোল-ফ্রি নম্বর 1800-11-1950-এ, এবং প্রতিটি অভিযোগ ন্যাশনাল গ্রিভ্যান্স সার্ভিস পোর্টালে নথিভুক্ত হয়। ECINet অ্যাপে Book-a-Call with BLO নামে একটি সুবিধা আছে, এবং complaints@eci.gov.in ঠিকানায় ইমেল করেও অভিযোগ জানানো যায়। সংশোধনের পরে কমিশন বুথ লেভেল অফিসারদের (BLO) নির্দেশ দেয় সংশোধনের আগের ভোটার তালিকার সঙ্গে বর্তমান তালিকা মিলিয়ে দেখতে, যাঁদের নাম নেই তাঁদের কাছে যেতে, এবং যাঁরা এখনও যোগ্য তাঁদের ফর্ম 6 পূরণে সাহায্য করতে। এই তালিকাগুলি রাজনৈতিক দলগুলির বুথ এজেন্টদের দিতে হবে, এবং বুথ স্তরে শিবির করতে হবে। রাতের আশ্রয়কেন্দ্র (নাইট শেল্টার) ও শ্রমিক কলোনির বাসিন্দা এবং গৃহহীনদের জন্য বিশেষ শিবিরও করা যেতে পারে।",
+    "back": "You can call the Voter Helpline at 1950, or the national toll-free number 1800-11-1950 from 8 AM to 8 PM. Each complaint is registered on the National Grievance Service Portal. The ECINet app has a feature called \"Book-a-Call with BLO,\" and complaints can also be submitted via email to complaints@eci.gov.in. After the revision, the Commission instructs Booth Level Officers (BLO) to compare the current voter list with the pre-revision voter list, approach those whose names are missing, and assist those who are still eligible to fill out Form 6. These lists must be provided to the political parties' booth agents and camped at the booth level. Special camps can also be organized for residents of night shelters, labor colonies, and the homeless."
+   },
+   {
+    "en": "Call 1950, or 1800-11-1950, and note the complaint number.",
+    "tr": "1950 বা 1800-11-1950-এ ফোন করুন, এবং অভিযোগ নম্বরটি লিখে রাখুন।",
+    "back": "Dial 1950 or 1800-11-1950 and write down the complaint number."
+   },
+   {
+    "en": "Use Book-a-Call with BLO on the ECINet app to ask your BLO to visit.",
+    "tr": "আপনার BLO-কে আপনার কাছে আসতে বলার জন্য ECINet অ্যাপের Book-a-Call with BLO ব্যবহার করুন।",
+    "back": "Use the ECINet app's Book-a-Call with BLO to request your BLO to come to you."
+   },
+   {
+    "en": "If a BLO visits during the drive, fill in Form 6 then and there if you are eligible.",
+    "tr": "অভিযানের সময়ে BLO আপনার কাছে এলে, আপনি যোগ্য হলে তখনই ফর্ম 6 পূরণ করে ফেলুন।",
+    "back": "If the BLO comes to you during the campaign, fill out Form 6 as soon as you are eligible."
+   },
+   {
+    "en": "Look for booth level camps in your area, and special camps if you live in a night shelter or labour colony.",
+    "tr": "আপনার এলাকায় বুথ স্তরের শিবিরের খোঁজ রাখুন, আর আপনি রাতের আশ্রয়কেন্দ্রে বা শ্রমিক কলোনিতে থাকলে বিশেষ শিবিরের খোঁজ করুন।",
+    "back": "Check for camp shelters in your area, and if you're in a community park or a housing development, look for places you can set up your tent."
+   },
+   {
+    "en": "Free legal help from the legal services authorities",
+    "tr": "আইনি পরিষেবা কর্তৃপক্ষের কাছ থেকে বিনামূল্যে আইনি সহায়তা",
+    "back": "Free legal assistance from the Legal Services Authority."
+   },
+   {
+    "en": "Under section 12 of the Legal Services Authorities Act, 1987, women, children, members of Scheduled Castes and Scheduled Tribes, people with disabilities, industrial workers, victims of disaster and people below an income limit set by each state can get free legal help. Legal services include advice and help before any authority, so they can cover a claim, a hearing or an appeal about the roll. Ask at the District Legal Services Authority at the district court, or call the NALSA helpline on 15100. In Bihar in September 2025 the Supreme Court had the legal services authorities send para-legal volunteers to help voters file claims and objections online.",
+    "tr": "আইনি পরিষেবা কর্তৃপক্ষ আইন, 1987-এর 12 নম্বর ধারা অনুযায়ী মহিলা, শিশু, তফসিলি জাতি ও তফসিলি উপজাতির সদস্য, প্রতিবন্ধী ব্যক্তি, শিল্প শ্রমিক, দুর্যোগে ক্ষতিগ্রস্ত মানুষ এবং প্রতিটি রাজ্যের নির্ধারিত আয়সীমার নিচে থাকা মানুষ বিনামূল্যে আইনি সহায়তা পেতে পারেন। আইনি পরিষেবার মধ্যে পরামর্শ এবং যে কোনো কর্তৃপক্ষের সামনে সহায়তা পড়ে, তাই ভোটার তালিকা নিয়ে দাবি, শুনানি বা আপিলের ক্ষেত্রেও তা পাওয়া যেতে পারে। জেলা আদালতে জেলা আইনি পরিষেবা কর্তৃপক্ষের অফিসে খোঁজ করুন, অথবা NALSA-র হেল্পলাইন 15100-এ ফোন করুন। 2025 সালের সেপ্টেম্বরে বিহারে সুপ্রিম কোর্ট আইনি পরিষেবা কর্তৃপক্ষগুলিকে দিয়ে প্যারা-লিগ্যাল স্বেচ্ছাসেবক পাঠিয়েছিল, যাতে তাঁরা ভোটারদের অনলাইনে দাবি ও আপত্তি জমা দিতে সাহায্য করেন।",
+    "back": "According to Section 12 of the Legal Services Authorities Act, 1987, women, children, members of Scheduled Castes and Scheduled Tribes, persons with disabilities, industrial workers, people affected by disasters, and people below the prescribed income limit in each state can receive free legal aid. Legal services include counseling and assistance before any authority, including claims, hearings, or appeals related to voter lists. Visit the District Legal Services Authority office in the District Court, or call NALSA's helpline at 15100. In September 2025, the Supreme Court in Bihar sent para-legal volunteers through the Legal Services Authorities to help voters submit claims and objections online."
+   },
+   {
+    "en": "Call 15100 or visit the District Legal Services Authority office at the district court.",
+    "tr": "15100-এ ফোন করুন, অথবা জেলা আদালতে জেলা আইনি পরিষেবা কর্তৃপক্ষের অফিসে যান।",
+    "back": "Call 15100, or go to the District Legal Services Authority office in the district court."
+   },
+   {
+    "en": "Say that your name was left off the roll and what stage you are at (claim, hearing or appeal).",
+    "tr": "জানান যে আপনার নাম ভোটার তালিকা থেকে বাদ পড়েছে, এবং আপনি কোন পর্যায়ে আছেন (দাবি, শুনানি বা আপিল)।",
+    "back": "Let them know that your name is being removed from the voter list and what stage you are at (claim, hearing, or appeal)."
+   },
+   {
+    "en": "Take the notice or order you received and any documents you have.",
+    "tr": "যে নোটিস বা আদেশ পেয়েছেন সেটি, এবং আপনার কাছে থাকা যে কোনো নথি সঙ্গে নিয়ে যান।",
+    "back": "Take notes and a copy of any paperwork you're able to find."
+   },
+   {
+    "en": "Ask for a para-legal volunteer or panel lawyer to help you fill in the form or the appeal.",
+    "tr": "ফর্ম বা আপিল পূরণে সাহায্যের জন্য একজন প্যারা-লিগ্যাল স্বেচ্ছাসেবক বা প্যানেল আইনজীবী চান।",
+    "back": "A paralegal or a panel lawyer is someone who helps fill out forms or appeals."
+   },
+   {
+    "en": "What the Supreme Court's orders give an elector",
+    "tr": "সুপ্রিম কোর্টের আদেশ একজন ভোটারকে কী দেয়",
+    "back": "What the Supreme Court order means for a voter"
+   },
+   {
+    "en": "In Bihar the Court had the roughly 65 lakh names left off the draft published booth by booth, with the reason for each, searchable by EPIC number and put up at panchayat and block offices. It allowed claims with a copy of Aadhaar and then made Aadhaar the twelfth document, as proof of identity. In West Bengal it let people flagged for discrepancies file through an authorised representative, gave them ten more days, and set up appellate tribunals of former judges for those whose claims judicial officers rejected. Its judgment of 27 May 2026 upheld the revision and said that people in Bihar wrongly deleted as absent, dead, shifted or duplicate may challenge the decision in court.",
+    "tr": "বিহারে সুপ্রিম কোর্ট খসড়া ভোটার তালিকা থেকে বাদ পড়া প্রায় 65 লক্ষ নাম বুথ ধরে ধরে, প্রত্যেকটির কারণ সহ প্রকাশ করিয়েছিল, যা EPIC নম্বর দিয়ে খোঁজা যায় এবং পঞ্চায়েত ও ব্লক অফিসে টাঙানো হয়। আদালত আধারের প্রতিলিপি দিয়ে দাবি জমা দেওয়ার অনুমতি দেয়, এবং পরে আধারকে পরিচয়ের প্রমাণ হিসেবে দ্বাদশ নথি করে। পশ্চিমবঙ্গে আদালত তথ্যে অমিলের জন্য চিহ্নিত মানুষদের একজন অনুমোদিত প্রতিনিধির মাধ্যমে আবেদন জমা দেওয়ার সুযোগ দেয়, তাঁদের আরও দশ দিন সময় দেয়, এবং বিচারবিভাগীয় আধিকারিকেরা যাঁদের দাবি খারিজ করেছেন তাঁদের জন্য প্রাক্তন বিচারকদের নিয়ে আপিল ট্রাইব্যুনাল গঠন করে। 27 মে 2026-এর রায়ে আদালত সংশোধন বহাল রাখে এবং বলে যে বিহারে যাঁদের অনুপস্থিত, মৃত, স্থানান্তরিত বা ডুপ্লিকেট বলে ভুলভাবে বাদ দেওয়া হয়েছে, তাঁরা আদালতে সেই সিদ্ধান্তকে চ্যালেঞ্জ করতে পারেন।",
+    "back": "In Bihar, the Supreme Court published approximately 6.5 million names excluded from the draft voter list booth-by-booth, along with the reasons for each, which can be searched by EPIC number and displayed at the Panchayat and Block offices. The court allowed people to submit claims with copies of their Aadhaar, and later made Aadhaar the twelfth document of proof of identity. In West Bengal, the court allowed people identified for discrepancies in their information to submit applications through an authorized representative, giving them an additional ten days, and formed an appeal tribunal of former judges for those whose claims were rejected by judicial officers. In its verdict on May 27, 2026, the court upheld the amendment and stated that those who were incorrectly excluded in Bihar as absent, deceased, transferred, or duplicate could challenge the decision in court."
+   },
+   {
+    "en": "Search the list of names left off by your EPIC number on the district or Chief Electoral Officer's website, or look at the panchayat or block notice board.",
+    "tr": "জেলা বা মুখ্য নির্বাচনী আধিকারিকের ওয়েবসাইটে আপনার EPIC নম্বর দিয়ে বাদ পড়া নামের তালিকায় খোঁজ করুন, অথবা পঞ্চায়েত বা ব্লকের নোটিস বোর্ড দেখুন।",
+    "back": "Check the District or Chief Electoral Officer's website for the list of excluded names with your EPIC number or check the notice board of the Panchayat or Block."
+   },
+   {
+    "en": "Note the reason given against your name. It tells you what to answer.",
+    "tr": "আপনার নামের পাশে যে কারণ দেওয়া আছে তা লিখে রাখুন। কী উত্তর দিতে হবে, তা এ থেকেই বোঝা যাবে।",
+    "back": "Write down the reason next to your name. This will help you remember what you are supposed to answer."
+   },
+   {
+    "en": "Aadhaar can be given as proof of identity. It is not accepted as proof of citizenship.",
+    "tr": "পরিচয়ের প্রমাণ হিসেবে আধার দেওয়া যায়। নাগরিকত্বের প্রমাণ হিসেবে এটি গ্রহণ করা হয় না।",
+    "back": "Aadhaar can be provided as proof of identity. It is not accepted as proof of citizenship."
+   },
+   {
+    "en": "In West Bengal, a rejected claim goes to the appellate tribunal. A pending appeal did not give a right to vote at the 2026 poll.",
+    "tr": "পশ্চিমবঙ্গে খারিজ হওয়া দাবি আপিল ট্রাইব্যুনালে যায়। কোনো আপিল বিচারাধীন থাকলেও তা থেকে 2026-এর নির্বাচনে ভোট দেওয়ার অধিকার জন্মায়নি।",
+    "back": "In West Bengal, the rejected claim went to the Appellate Tribunal. Even if an appeal was pending, it did not entitle them to vote in the 2026 elections."
+   },
+   {
+    "en": "Going to court",
+    "tr": "আদালতে যাওয়া",
+    "back": "Going to Court"
+   },
+   {
+    "en": "An elector can ask the High Court, under Article 226 of the Constitution, to review a decision on the roll. The Supreme Court's judgment of 27 May 2026 says the Commission's enquiry into eligibility remains open to judicial review, and that people in Bihar wrongly deleted as absent, dead, shifted or duplicate may challenge the decision that way. On 11 November 2025, while it was hearing the challenges to the revision, the Supreme Court asked the High Courts to hold back cases on whether the revision was valid. That request did not cover an elector's own case about his or her own entry. The judgment of 27 May 2026 decided the petitions about Bihar, and the petition in which the request was made is not among the cases it lists.",
+    "tr": "ভোটার তালিকা সংক্রান্ত কোনো সিদ্ধান্ত পুনর্বিবেচনার জন্য একজন ভোটার সংবিধানের 226 অনুচ্ছেদ অনুযায়ী হাইকোর্টে আবেদন করতে পারেন। সুপ্রিম কোর্টের 27 মে 2026-এর রায় বলছে, যোগ্যতা নিয়ে কমিশনের তদন্ত বিচারবিভাগীয় পর্যালোচনার আওতায় থাকে, এবং বিহারে যাঁদের অনুপস্থিত, মৃত, স্থানান্তরিত বা ডুপ্লিকেট বলে ভুলভাবে বাদ দেওয়া হয়েছে, তাঁরা এই পথে সিদ্ধান্তটিকে চ্যালেঞ্জ করতে পারেন। 11 নভেম্বর 2025-এ, সংশোধনের বিরুদ্ধে মামলাগুলির শুনানি চলাকালীন, সুপ্রিম কোর্ট হাইকোর্টগুলিকে সংশোধন বৈধ কি না সেই প্রশ্নে মামলাগুলি আপাতত না শুনতে বলেছিল। সেই অনুরোধ কোনো ভোটারের নিজের নাম নিয়ে তাঁর নিজের মামলার ক্ষেত্রে প্রযোজ্য ছিল না। 27 মে 2026-এর রায় বিহার সংক্রান্ত আবেদনগুলির নিষ্পত্তি করেছে, এবং যে আবেদনে ওই অনুরোধ করা হয়েছিল সেটি রায়ে তালিকাভুক্ত মামলাগুলির মধ্যে নেই।",
+    "back": "A voter can appeal to the High Court under Article 226 of the Constitution to review any decision related to the voter list. The Supreme Court's May 27, 2026, ruling states that the Commission's investigation into eligibility is subject to judicial review, and those who were wrongly excluded in Bihar as absent, deceased, transferred, or duplicate can challenge the decision through this route. On November 11, 2025, during the hearing of cases against the amendment, the Supreme Court told the High Courts not to hear cases for the time being on the question of whether the amendment is valid. That request did not apply to any voter's own case with their own name. The May 27, 2026, ruling resolved the petitions related to Bihar, and the petition that made the request was not among the cases listed in the ruling."
+   },
+   {
+    "en": "Use the claim, the hearing and both appeals first, and keep every order.",
+    "tr": "আগে দাবি, শুনানি এবং দুটি আপিলের পথ ব্যবহার করুন, এবং প্রতিটি আদেশ রেখে দিন।",
+    "back": "Use the process of discovery, hearing, and two appeals, and reserve each order."
+   },
+   {
+    "en": "If you still have no remedy, ask the District Legal Services Authority for a lawyer to file a writ petition in the High Court.",
+    "tr": "তার পরেও কোনো প্রতিকার না পেলে, হাইকোর্টে রিট পিটিশন দায়ের করার জন্য জেলা আইনি পরিষেবা কর্তৃপক্ষের কাছে একজন আইনজীবী চান।",
+    "back": "Still, if no remedy is available, then a lawyer is required to approach the District Legal Services Authority to file a writ petition in the High Court."
+   },
+   {
+    "en": "During the Special Revision, used community volunteers and local meetings to help electors facing objections, took a memorandum and a list of affected electors to the Election Commission, and intervened when ration dealers demanded documents.",
+    "tr": "বিশেষ সংশোধনের সময়ে আপত্তির মুখে পড়া ভোটারদের সাহায্য করতে স্থানীয় সম্প্রদায়ের স্বেচ্ছাসেবক ও এলাকার সভাকে কাজে লাগিয়েছে, নির্বাচন কমিশনের কাছে একটি স্মারকলিপি এবং ক্ষতিগ্রস্ত ভোটারদের একটি তালিকা নিয়ে গেছে, এবং রেশন ডিলাররা নথি চাইলে হস্তক্ষেপ করেছে।",
+    "back": "Local community volunteers and neighbourhood assembly were used to assist voters who objected to the special period, took a memorandum to the Electoral Commission and a list of affected voters, and ration dealers intervened when required."
+   },
+   {
+    "en": "A forum formed at PUCL Chhattisgarh's call to deal with SIR problems. It trained volunteers, ran awareness meetings and took specific problems to the Chief Electoral Officer, who ordered forms filled wrongly by one BLO to be redone.",
+    "tr": "PUCL ছত্তিশগড়ের আহ্বানে SIR-এর সমস্যা মোকাবিলার জন্য গঠিত একটি মঞ্চ। এটি স্বেচ্ছাসেবকদের প্রশিক্ষণ দিয়েছে, সচেতনতা সভা করেছে এবং নির্দিষ্ট সমস্যাগুলি মুখ্য নির্বাচনী আধিকারিকের কাছে নিয়ে গেছে, যিনি একজন BLO-র ভুলভাবে পূরণ করা ফর্মগুলি আবার পূরণ করার নির্দেশ দেন।",
+    "back": "PUCL Chhattisgarh is a platform formed to address the problem of SIRs. It has trained volunteers, held awareness meetings, and taken specific issues to the Chief Electoral Officer, who has instructed the BLOs to re-fill the incorrectly filled forms."
+   },
+   {
+    "en": "A citizens' collective of groups working with workers and migrants that ran helplines and physical help desks in working-class localities across Delhi, helping electors with progeny mapping and forms and taking their cases to the Chief Electoral Officer.",
+    "tr": "শ্রমিক ও পরিযায়ীদের নিয়ে কাজ করা বিভিন্ন গোষ্ঠীর একটি নাগরিক সমষ্টি, যা দিল্লি জুড়ে শ্রমজীবী মহল্লাগুলিতে হেল্পলাইন ও সরাসরি হেল্প ডেস্ক চালিয়েছে, ভোটারদের বংশসূত্রে মিলকরণ (progeny mapping) ও ফর্ম পূরণে সাহায্য করেছে, এবং তাঁদের সমস্যা মুখ্য নির্বাচনী আধিকারিকের কাছে নিয়ে গেছে।",
+    "back": "A citizen collective working with labourers and migrants, it has set up helplines and physical help desks in working-class neighbourhoods across Delhi, helped voters with their mapping and forms, and taken their issues to the Chief Electoral Officer."
+   },
+   {
+    "en": "During enumeration, parish pastoral council members were each put in charge of 35 to 40 households, visited them when the BLOs came, and checked the forms had been filled and the names kept on the roll. The councils said they would watch the draft roll's deletions and help get names restored.",
+    "tr": "গণনা পর্বে প্যারিশ পাস্টোরাল কাউন্সিলের প্রত্যেক সদস্যকে 35 থেকে 40টি পরিবারের দায়িত্ব দেওয়া হয়েছিল। BLO-রা এলে তাঁরা ওই পরিবারগুলিতে যেতেন, এবং ফর্ম পূরণ হয়েছে কি না ও নামগুলি তালিকায় রয়ে গেছে কি না তা দেখতেন। কাউন্সিলগুলি জানিয়েছিল, তারা খসড়া ভোটার তালিকা থেকে বাদ পড়া নামগুলির উপর নজর রাখবে এবং নাম ফিরিয়ে আনতে সাহায্য করবে।",
+    "back": "During the census, each member of the parish pastoral council was assigned responsibility for 35 to 40 families. When the BLOs arrived, they would visit these families to check if the forms had been completed and if the names were on the list. The councils stated that they would monitor the names missing from the draft voter list and help to ensure the names were added."
+   },
+   {
+    "en": "A coalition that trained volunteers to run an SIR helpline and help desks in Bengaluru, mainly for migrants, slum dwellers, trans people, Muslims, Dalits and Adivasis, helping with the 2002 mapping and forms. It also took complaints to the Chief Electoral Officer.",
+    "tr": "একটি জোট, যা বেঙ্গালুরুতে SIR হেল্পলাইন ও হেল্প ডেস্ক চালানোর জন্য স্বেচ্ছাসেবকদের প্রশিক্ষণ দিয়েছে, মূলত পরিযায়ী, বস্তিবাসী, রূপান্তরকামী (ট্রান্স) মানুষ, মুসলমান, দলিত ও আদিবাসীদের জন্য, যাতে 2002-এর মিলকরণ ও ফর্ম পূরণে সাহায্য করা যায়। এটি মুখ্য নির্বাচনী আধিকারিকের কাছে অভিযোগও জানিয়েছে।",
+    "back": "An alliance that trained volunteers to run the SIR helpline and help desk in Bangalore, primarily for migrants, slum dwellers, transgender people, Muslims, Dalits, and Adivasis, to assist in the 2002 reconciliation and completion of forms. It has also filed a complaint with the Chief Electoral Officer."
+   },
+   {
+    "en": "Helped people in Haveri district trace their 2002 roll details for the enumeration form, through a WhatsApp group, and held workshops on what to do if a name is missing from the draft roll.",
+    "tr": "হাভেরি জেলায় একটি হোয়াটসঅ্যাপ গোষ্ঠীর মাধ্যমে মানুষকে গণনা ফর্মের জন্য তাঁদের 2002-এর ভোটার তালিকার তথ্য খুঁজে পেতে সাহায্য করেছে, এবং খসড়া ভোটার তালিকায় নাম না থাকলে কী করতে হবে তা নিয়ে কর্মশালা করেছে।",
+    "back": "In Haveri district, a WhatsApp group helped people find their 2002 voter list entries for the census form, and also provided a workshop on what to do if their name was not on the draft voter list."
+   },
+   {
+    "en": "After the SIR, began a door-to-door drive by trained youth volunteers to find people left off the roll or never enrolled among the diocese's 40,750 families in four Assembly constituencies, starting in one parish. Church leaders said at least 3,000 such people had been identified.",
+    "tr": "SIR-এর পরে, চারটি বিধানসভা কেন্দ্রে ধর্মপ্রদেশের (ডায়োসিস) 40,750টি পরিবারের মধ্যে যাঁরা তালিকা থেকে বাদ পড়েছেন বা কখনও নাম তোলেননি, তাঁদের খুঁজে বের করতে প্রশিক্ষিত যুব স্বেচ্ছাসেবকদের দিয়ে বাড়ি বাড়ি অভিযান শুরু করেছে, প্রথমে একটি প্যারিশ থেকে। চার্চের নেতারা জানান, এমন অন্তত 3,000 জনকে চিহ্নিত করা হয়েছে।",
+    "back": "Following SIR, the diocese has launched a door-to-door campaign in four assembly constituencies, starting with one parish, using trained youth volunteers to identify the 40,750 families who are either excluded from the list or have never registered. Church leaders say that at least 3,000 such individuals have been identified."
+   },
+   {
+    "en": "Ran an SIR help desk during the revision, one of the earliest by the committee's own account. The Cochin Diocese later cited the Mahallu committees' help desks as the model for its own drive.",
+    "tr": "সংশোধনের সময়ে একটি SIR হেল্প ডেস্ক চালিয়েছে, কমিটির নিজের কথায় যা ছিল একেবারে প্রথম দিকের হেল্প ডেস্কগুলির একটি। পরে কোচিন ডায়োসিস নিজেদের অভিযানের আদর্শ হিসেবে মহল্লু কমিটিগুলির হেল্প ডেস্কের উল্লেখ করে।",
+    "back": "During the reform, an SIR help desk was operated, which, according to the committee's own words, was one of the earliest help desks. Later, the Cochin Diocese mentioned the help desks of the Mahallu Committees as the model for their own campaign."
+   },
+   {
+    "en": "Followed Vallakkadavu in setting up teams of volunteers to help the public complete the SIR enumeration form.",
+    "tr": "ভাল্লাক্কাডাভুর পথ অনুসরণ করে স্বেচ্ছাসেবকদের দল গঠন করেছে, যারা সাধারণ মানুষকে SIR গণনা ফর্ম পূরণে সাহায্য করেছে।",
+    "back": "Vallakkadavoor has formed a volunteer team to guide the general public to fill up the SIR calculation form."
+   },
+   {
+    "en": "Set up one of the first SIR help desks in Kerala in the first week of November 2025, open to the public as well as its own members, and filled in enumeration forms after finding people's names in the 2002 roll. Hundreds had used it within two weeks.",
+    "tr": "2025 সালের নভেম্বরের প্রথম সপ্তাহে কেরলের প্রথম দিকের SIR হেল্প ডেস্কগুলির একটি চালু করে, যা নিজেদের সদস্যদের পাশাপাশি সাধারণ মানুষের জন্যও খোলা ছিল, এবং 2002-এর ভোটার তালিকায় মানুষের নাম খুঁজে বের করে গণনা ফর্ম পূরণ করে দেয়। দুই সপ্তাহের মধ্যে শত শত মানুষ এর সাহায্য নিয়েছিলেন।",
+    "back": "In the first week of November 2025, Kerala launched one of the first SIR help desks, which was open to its own members as well as the general public, and filled out the counting form by finding people's names in the 2002 voter list. Within two weeks, hundreds of people took advantage of its help."
+   },
+   {
+    "en": "Ran SIR training and awareness sessions in Mumbai with community groups, covering documents, the 2002 roll linkage, notices, hearings and appeals.",
+    "tr": "মুম্বইয়ে বিভিন্ন সামাজিক গোষ্ঠীর সঙ্গে SIR নিয়ে প্রশিক্ষণ ও সচেতনতা সভা করেছে, যাতে নথি, 2002-এর ভোটার তালিকার সঙ্গে সংযোগ, নোটিস, শুনানি ও আপিলের বিষয় ছিল।",
+    "back": "In Mumbai, there have been various community outreach activities conducted by SIR including training and awareness meetings, document-related assistance, linkage to the 2002 voter list, notices, hearings and appeals."
+   },
+   {
+    "en": "Held form-filling camps with booth-level officers in Jaipur during enumeration and set up a response team for SIR problems across Rajasthan.",
+    "tr": "গণনা পর্বে জয়পুরে বুথ লেভেল অফিসারদের সঙ্গে ফর্ম পূরণের শিবির করেছে, এবং সারা রাজস্থানে SIR-এর সমস্যা মোকাবিলায় একটি দল গঠন করেছে।",
+    "back": "In the run-up to the polls, there were reports of booth level officers in Jaipur filling up the forms, and a team in place to handle the issue of SIRs throughout Rajasthan."
+   },
+   {
+    "en": "Ran SIR help camps on weekday evenings and full days at weekends in five Coimbatore localities (Podanur, Karumbukadai, GM Nagar, Saramedu and Kuniyamuthur) during enumeration.",
+    "tr": "গণনা পর্বে কোয়েম্বাটুরের পাঁচটি এলাকায় (পোদানুর, করুম্বুকাডাই, জিএম নগর, সারামেডু ও কুনিয়ামুথুর) সপ্তাহের কাজের দিনে সন্ধ্যায় এবং সপ্তাহান্তে সারা দিন SIR সহায়তা শিবির চালিয়েছে।",
+    "back": "During the census, SIR conducted camps in five locations in Coimbatore (Podanur, Karambukkadai, GM Nagar, Saramedu, and Kuniyamuthur) for a weekend and a weekday evening."
+   },
+   {
+    "en": "Ran SIR help camps in at least 30 mosques in Tiruchy during enumeration. Volunteers searched the 2002 and 2005 rolls, checked people's details and helped them fill their forms. The Madurai branches trained office-bearers across 36 units.",
+    "tr": "গণনা পর্বে তিরুচির অন্তত 30টি মসজিদে SIR সহায়তা শিবির চালিয়েছে। স্বেচ্ছাসেবকেরা 2002 ও 2005-এর ভোটার তালিকায় খোঁজ করেছেন, মানুষের তথ্য যাচাই করেছেন এবং তাঁদের ফর্ম পূরণে সাহায্য করেছেন। মাদুরাই শাখাগুলি 36টি ইউনিটের পদাধিকারীদের প্রশিক্ষণ দিয়েছে।",
+    "back": "During the census, SIR conducted assistance camps in at least 30 mosques in Tiruchirappalli. Volunteers searched the 2002 and 2005 voter lists, verified people's information, and helped them fill out their forms. The Madurai branches trained 36 units of office bearers."
+   },
+   {
+    "en": "Among the church bodies that organised help desks in Hyderabad to help voters complete enumeration forms.",
+    "tr": "হায়দরাবাদে ভোটারদের গণনা ফর্ম পূরণে সাহায্য করতে যে চার্চ সংগঠনগুলি হেল্প ডেস্কের আয়োজন করেছিল, এটি তাদের অন্যতম।",
+    "back": "This was one of the many churches that set up temporary counting tables in Hyderabad to help voters fill out their forms."
+   },
+   {
+    "en": "Among the church bodies that set up help desks across Hyderabad, staffed by trained volunteers, to help voters complete enumeration forms.",
+    "tr": "যে চার্চ সংগঠনগুলি ভোটারদের গণনা ফর্ম পূরণে সাহায্য করতে প্রশিক্ষিত স্বেচ্ছাসেবকদের নিয়ে হায়দরাবাদ জুড়ে হেল্প ডেস্ক খুলেছিল, এটি তাদের অন্যতম।",
+    "back": "This was among the many help desks set up throughout Hyderabad by the church, who recruited volunteers to go around and help fill out voter registration forms."
+   },
+   {
+    "en": "Volunteers at the mosque and its madrasa filled and uploaded SIR applications online for residents, free of charge, where internet centres were charging Rs 100 to 200 a form.",
+    "tr": "যেখানে ইন্টারনেট কেন্দ্রগুলি প্রতিটি ফর্মের জন্য 100 থেকে 200 টাকা নিচ্ছিল, সেখানে মসজিদ ও তার মাদ্রাসার স্বেচ্ছাসেবকেরা বাসিন্দাদের SIR আবেদন বিনামূল্যে পূরণ করে অনলাইনে আপলোড করে দিয়েছেন।",
+    "back": "While internet cafes charged between 100 and 200 for each form, volunteers from the mosque and its madrasa have been filling out the SIR form for residents, uploading it online for free."
+   },
+   {
+    "en": "Held camps in Muslim-majority areas during enumeration to explain the forms and documents, about 500 a day by its own count.",
+    "tr": "গণনা পর্বে মুসলমান-প্রধান এলাকাগুলিতে ফর্ম ও নথি বোঝানোর জন্য শিবির করেছে, তাদের নিজেদের হিসেবে দিনে প্রায় 500টি।",
+    "back": "In the Muslim-dominated areas, Muslims set up camp to show their forms and documents, about 500 per day."
+   },
+   {
+    "en": "A community organisation of trans people in Uttar Dinajpur that said it had been focused on the SIR and on supporting its community through it, though that work had slowed by April 2026.",
+    "tr": "উত্তর দিনাজপুরের রূপান্তরকামী (ট্রান্স) মানুষদের একটি সামাজিক সংগঠন, যারা জানিয়েছিল তারা SIR-এর উপর এবং এর মধ্য দিয়ে নিজেদের সম্প্রদায়ের পাশে দাঁড়ানোর উপর মনোযোগ দিয়েছিল, যদিও 2026 সালের এপ্রিলের মধ্যে সেই কাজের গতি কমে আসে।",
+    "back": "A social organization of transgender people in North Dinajpur, who had stated that they were focused on standing by their community through the SIR, although the pace of that work slowed down by April 2026."
+   },
+   {
+    "en": "Held daily training sessions and help desks at the mosque to guide people through the enumeration form.",
+    "tr": "মসজিদে প্রতিদিন প্রশিক্ষণ সভা ও হেল্প ডেস্ক চালিয়ে মানুষকে গণনা ফর্ম পূরণের পথ দেখিয়েছে।",
+    "back": "The mosque paid daily visits to people with forms to fill out and to run helplines."
+   },
+   {
+    "en": "Worked for sex workers in Kolkata alongside two other NGOs during the revision. It had urged the Chief Electoral Officer's office to reach these women, welcomed the assistance camps held in red-light areas, and asked the Commission to accept documents issued by their cooperative society.",
+    "tr": "সংশোধনের সময়ে অন্য দুটি এনজিও-র সঙ্গে কলকাতায় যৌনকর্মীদের জন্য কাজ করেছে। এটি মুখ্য নির্বাচনী আধিকারিকের দপ্তরকে এই মহিলাদের কাছে পৌঁছনোর আর্জি জানিয়েছিল, যৌনপল্লিগুলিতে আয়োজিত সহায়তা শিবিরকে স্বাগত জানিয়েছিল, এবং তাঁদের সমবায় সমিতির দেওয়া নথি গ্রহণ করার জন্য কমিশনের কাছে আবেদন করেছিল।",
+    "back": "During the revision, it worked with two other NGOs in Kolkata for sex workers. It requested the Chief Electoral Officer's office to reach out to these women, welcomed the assistance camps organized in the sexপল্লী (sexপল্লী is a Bengali term for red-light districts), and appealed to the commission to accept the documents provided by their cooperative association."
+   },
+   {
+    "en": "Worked with a partner organisation on a team that drafted appeals for electors removed from the roll and filed them online, or on paper for those who could not use the portal.",
+    "tr": "একটি সহযোগী সংগঠনের সঙ্গে মিলে এমন একটি দলে কাজ করেছে, যারা তালিকা থেকে বাদ পড়া ভোটারদের আপিলের খসড়া তৈরি করে অনলাইনে জমা দিয়েছে, আর যাঁরা পোর্টাল ব্যবহার করতে পারেননি তাঁদের আপিল কাগজে জমা দিয়েছে।",
+    "back": "A team working with an advocacy organisation has drafted appeals for voters who missed their chance to be on the list, submitting these online, and for those who were unable to access the portal and submitting them by post."
+   },
+   {
+    "en": "Put together a team of lawyers and peer counsellors to support queer and trans electors facing exclusion during the revision.",
+    "tr": "সংশোধনের সময়ে বাদ পড়ার মুখে থাকা কুইয়ার ও ট্রান্স ভোটারদের পাশে দাঁড়াতে আইনজীবী ও নিজেদের সম্প্রদায়েরই পরামর্শদাতাদের (পিয়ার কাউন্সেলর) একটি দল তৈরি করেছে।",
+    "back": "Advocates and their community created a coalition of peer mentors to help disenfranchised queer and trans voters."
+   },
+   {
+    "en": "Published a guide explaining SIR notices and what an elector should do on receiving one, and a training manual (with Vote for Democracy) on notices, hearings, documents and appeals.",
+    "tr": "SIR-এর নোটিস কী এবং তা পেলে একজন ভোটারের কী করা উচিত, তা ব্যাখ্যা করে একটি নির্দেশিকা প্রকাশ করেছে, এবং (Vote for Democracy-র সঙ্গে) নোটিস, শুনানি, নথি ও আপিল নিয়ে একটি প্রশিক্ষণ পুস্তিকাও।",
+    "back": "SER has published guidance on what a notice of objection is, and what a voter should do if they receive one, and a training manual on notices, hearings, documentation and appeals (with Vote for Democracy)."
+   },
+   {
+    "en": "Assam",
+    "tr": "অসম",
+    "back": "Assam"
+   },
+   {
+    "en": "Chhattisgarh",
+    "tr": "ছত্তিশগড়",
+    "back": "Chhattisgarh"
+   },
+   {
+    "en": "Delhi",
+    "tr": "দিল্লি",
+    "back": "Delhi"
+   },
+   {
+    "en": "Goa",
+    "tr": "গোয়া",
+    "back": "Goa"
+   },
+   {
+    "en": "Karnataka",
+    "tr": "কর্ণাটক",
+    "back": "Karnataka"
+   },
+   {
+    "en": "Kerala",
+    "tr": "কেরল",
+    "back": "Kerala"
+   },
+   {
+    "en": "Maharashtra",
+    "tr": "মহারাষ্ট্র",
+    "back": "Maharashtra"
+   },
+   {
+    "en": "Rajasthan",
+    "tr": "রাজস্থান",
+    "back": "Rajasthan"
+   },
+   {
+    "en": "Tamil Nadu",
+    "tr": "তামিলনাড়ু",
+    "back": "Tamil Nadu"
+   },
+   {
+    "en": "Telangana",
+    "tr": "তেলঙ্গানা",
+    "back": "Telangana"
+   },
+   {
+    "en": "West Bengal",
+    "tr": "পশ্চিমবঙ্গ",
+    "back": "West Bengal"
+   },
+   {
+    "en": "Ran SIR training sessions in Maharashtra jointly with CJP and co-published a training manual on enumeration, notices, hearings and appeals.",
+    "tr": "CJP-র সঙ্গে যৌথভাবে মহারাষ্ট্রে SIR প্রশিক্ষণ সভা করেছে, এবং গণনা, নোটিস, শুনানি ও আপিল নিয়ে একটি প্রশিক্ষণ পুস্তিকা যৌথভাবে প্রকাশ করেছে।",
+    "back": "In association with CJP, SIR has jointly conducted training workshops in Maharashtra and has jointly published a training manual on tabulation, notice, hearing and appeals."
+   },
+   {
+    "en": "Ran SIR help camps at 22 places in Muzaffarnagar district during enumeration, where people were helped to fill their enumeration forms. One was at a madrasa in Sadar tehsil, where a BLO was also posted to take the forms. The unit said it had trained 544 young people to fill the forms. A few days later the unit's president put the number of camps at 35 and said they were open to everyone whatever their religion.",
+    "tr": "গণনার সময় মুজফফরনগর জেলার 22টি জায়গায় SIR সহায়তা শিবির চালিয়েছে, যেখানে মানুষকে গণনা ফর্ম পূরণে সাহায্য করা হয়েছে। একটি শিবির ছিল সদর তহসিলের একটি মাদ্রাসায়, যেখানে ফর্ম নেওয়ার জন্য একজন BLO-ও ছিলেন। সংগঠনের এই শাখা জানিয়েছে, ফর্ম পূরণের জন্য তারা 544 জন তরুণকে প্রশিক্ষণ দিয়েছে। কয়েক দিন পরে শাখার সভাপতি শিবিরের সংখ্যা 35 বলেন এবং জানান যে সেগুলি সব ধর্মের মানুষের জন্য খোলা।",
+    "back": "During the census, the SIR (Scheme of Assistance to Rural Indebtedness) camp was conducted in 22 locations across Muzaffarnagar district, assisting people in filling out the census forms. One camp was held at a madrasa in Sadar Tehsil, where a BLO (Block Level Officer) was also present to collect forms. This branch of the organization reported that they had trained 544 young people to fill out the forms. A few days later, the branch president stated that the number of camps was 35, and they were open to people of all religions."
+   },
+   {
+    "en": "Ran an eight-day drive in Afzalgarh town, Bijnor district, to fill and submit enumeration forms. On its fourth day, at a camp near the Jama Masjid, about 157 forms were handed to the BLO. The unit also ran an awareness drive for the town's residents.",
+    "tr": "বিজনৌর জেলার আফজলগড় শহরে গণনা ফর্ম পূরণ ও জমা দেওয়ার জন্য আট দিনের অভিযান চালিয়েছে। চতুর্থ দিনে জামা মসজিদের কাছের শিবিরে প্রায় 157টি ফর্ম BLO-র হাতে দেওয়া হয়। শাখাটি শহরের বাসিন্দাদের জন্য একটি সচেতনতা অভিযানও চালিয়েছে।",
+    "back": "The Afzalgarh town of Bijnor district conducted an eight-day campaign for filling and submitting the census form. On the fourth day, approximately 157 forms were handed over to the BLOs at the camp near Jama Masjid. The branch also conducted an awareness campaign for the residents of the town."
+   },
+   {
+    "en": "Ran three SIR help centres in Aligarh city during enumeration and asked educated young people to volunteer. The district president said the unit had been helping people for two weeks by late November 2025.",
+    "tr": "গণনার সময় আলিগড় শহরে তিনটি SIR সহায়তা কেন্দ্র চালিয়েছে এবং শিক্ষিত তরুণদের স্বেচ্ছাসেবক হতে আহ্বান জানিয়েছে। জেলা সভাপতি জানান, নভেম্বর 2025-এর শেষ পর্যন্ত শাখাটি দুই সপ্তাহ ধরে মানুষকে সাহায্য করছিল।",
+    "back": "During the census, Aligarh city ran three SIR assistance centers and called upon educated young people to volunteer. The district president stated that the branch had been helping people for two weeks until the end of November 2025."
+   },
+   {
+    "en": "Uttar Pradesh",
+    "tr": "উত্তর প্রদেশ",
+    "back": "Uttar Pradesh"
+   },
+   {
+    "en": "Ran an SIR call centre with SPECT from 4 to 30 November 2025 that guided callers on forms, documents, missing names and corrections. Its own annual report says it also held camps in Uttar Pradesh, Madhya Pradesh, Gujarat and Uttarakhand where volunteers helped people fill forms and checked their documents. The report names no place or date in Uttar Pradesh.",
+    "tr": "SPECT-এর সঙ্গে 2025 সালের 4 থেকে 30 নভেম্বর একটি SIR কল সেন্টার চালিয়েছে, যেখানে ফোনকারীদের ফর্ম, নথি, বাদ পড়া নাম ও সংশোধন নিয়ে পরামর্শ দেওয়া হয়েছে। সংগঠনটির নিজস্ব বার্ষিক প্রতিবেদন অনুযায়ী তারা উত্তরপ্রদেশ, মধ্যপ্রদেশ, গুজরাট ও উত্তরাখণ্ডে শিবিরও চালিয়েছে, যেখানে স্বেচ্ছাসেবকরা মানুষকে ফর্ম পূরণে সাহায্য করেছেন এবং নথি যাচাই করেছেন। প্রতিবেদনে উত্তরপ্রদেশের কোনো জায়গা বা তারিখের উল্লেখ নেই।",
+    "back": "From November 4th to 30th, 2025, SPECT ran an SIR call center, advising callers on forms, documents, missing names, and corrections. According to the organization's own annual report, they also conducted camps in Uttar Pradesh, Madhya Pradesh, Gujarat, and Uttarakhand, where volunteers helped people fill out forms and verify documents. The report does not mention any specific location or date in Uttar Pradesh."
+   },
+   {
+    "en": "Contact",
+    "tr": "যোগাযোগ",
+    "back": "Contact"
+   },
+   {
+    "en": "Contact, through the main office",
+    "tr": "যোগাযোগ, প্রধান কার্যালয়ের মাধ্যমে",
+    "back": "Contact through the head office."
+   },
+   {
+    "en": "Where this is printed",
+    "tr": "এটি কোথায় ছাপা আছে",
+    "back": "Where it is printed."
+   },
+   {
+    "en": "This page was translated by machine, and where it differs from the English page, the English page is correct. Every step links to the document it rests on, and the quotations from those documents are in their own words.",
+    "tr": "এই পৃষ্ঠাটি যন্ত্রের সাহায্যে অনুবাদ করা হয়েছে, এবং যেখানে এটি ইংরেজি পৃষ্ঠা থেকে আলাদা, সেখানে ইংরেজি পৃষ্ঠাটিই সঠিক। প্রতিটি ধাপ যে নথির উপর ভিত্তি করে তার সঙ্গে যুক্ত, এবং সেই নথিগুলির উদ্ধৃতি তাদের নিজেদের ভাষাতেই রাখা হয়েছে।",
+    "back": "This page has been translated using a machine, and where it differs from the English page, the English page is correct. Each step is linked to the document it is based on, and the references to those documents are kept in their own language."
+   }
+  ]
+ }
+}
