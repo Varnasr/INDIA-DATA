@@ -93,7 +93,7 @@ def build():
         if '—' in it['shows']:
             sys.exit('FAIL - em dash in the summary of %r' % it['title'])
         out.append({'group': g, 'title': it['title'], 'outlet': OUTLET.get(it['outlet'], it['outlet']), 'authors': it.get('authors') or '',
-                    'date': it['date'], 'url': it['url'], 'video': it['type'].startswith('video'), 'duration': it.get('duration') or '',
+                    'date': it['date'], 'url': it['url'], 'video': it['type'].startswith('video'), 'duration': it.get('duration') or '', 'subscription': bool(it.get('subscription')),
                     'shows': it['shows']})
     out.sort(key=lambda x: (GROUPS.index(x['group']), x['date']), reverse=False)
     return {'groups': GROUPS, 'items': out, 'dropped': dropped,

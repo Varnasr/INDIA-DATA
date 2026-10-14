@@ -42,7 +42,7 @@ Promise.all([SIR.json('data/india/reads.json'), SIR.json('data/india/panels.json
   var li = function (i) {
     return '<li><p><a href="' + esc(i.url) + '" rel="noopener"><b>' + esc(i.title) + '</b></a></p>' +
       '<p class="nsrc">' + esc(i.outlet) + (i.authors && i.outlet.indexOf(i.authors) < 0 ? ', ' + esc(i.authors) : '') + ', ' + SIR.date(i.date) +
-      (i.video ? ' <span class="tag press">video' + (i.duration ? ', ' + esc(i.duration) : '') + '</span>' : '') + '</p>' +
+      (i.video ? ' <span class="tag press">video' + (i.duration ? ', ' + esc(i.duration) : '') + '</span>' : '') + (i.subscription ? ' <span class="tag">subscription</span>' : '') + '</p>' +
       '<p>' + esc(i.shows) + '</p></li>';
   };
   var WB = ['newslaundry.com', 'caravanmagazine.in', 'debrajray', 'theindiaforum.in', 'K5qUfsPBSvQ'];

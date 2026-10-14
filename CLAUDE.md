@@ -1571,9 +1571,13 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   quotations, applies the corrections, drops what `plain.json` drops with a
   reason, fails on the site's own text if it breaks the writing rules, and
   fails if a figure listed under `uses` is no longer in the published file;
-  `check_data.py` runs it with `--check`. Party office-holders are never
-  quoted, including in clips inside someone else's episode (Ravish Kumar's
-  Karnataka Form 7 line is dropped for that reason). Keep the panels
+  `check_data.py` runs it with `--check`. **This page is different from the
+  rest of the site** (owner's rule, 14 October 2026): it exists to check what
+  politicians and the media say, so the reading list and the panels may link
+  to and quote party office-holders, pieces that quote them, and pieces behind
+  a subscription (marked `subscription`). A relayed figure says whose it is
+  (Ravish Kumar's Karnataka Form 7 line names the minister). The site's own
+  sentences still name no private person. Keep the panels
   respectful: a panel says where an argument goes further than the figures,
   never that the person is wrong. When a site figure a panel quotes changes,
   rewrite the sentence in `plain.json` and its `uses` entry together.

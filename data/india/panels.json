@@ -2,7 +2,7 @@
  "checked": "2026-10-09",
  "counts": {
   "people": 7,
-  "quotes": 33
+  "quotes": 34
  },
  "people": [
   {
@@ -182,8 +182,8 @@
    "id": "ravish-kumar",
    "name": "Ravish Kumar",
    "role": "Journalist and broadcaster, formerly of NDTV India, who publishes daily commentary in Hindi on his own YouTube channel.",
-   "intro": "His episodes of 23 September and 1 October 2026 follow the Express investigation closely. The quotations are from YouTube's Hindi captions and the translations are the site's. Clips of party leaders inside his episodes are left out, so every line here is his own.",
-   "note": "One more line, on Form 7 objections in Karnataka, relays a minister's figures. The site leaves out party office-holders, so the line is not shown.",
+   "intro": "His episodes of 23 September and 1 October 2026 follow the Express investigation closely. The quotations are from YouTube's Hindi captions and the translations are the site's. Where he relays a party leader's figures, the panel says whose they are.",
+   "note": "",
    "pieces": [
     {
      "id": "rk-express",
@@ -264,6 +264,18 @@
      "rests": "This matches the state totals as reported. Of the 60,06,675 names held for adjudication, 27,16,393 were found not eligible.",
      "site": "The West Bengal page also gives 32,68,119 found eligible and 37,05,235 appeals pending, as reported. Only 1,607 names were restored before the poll.",
      "stops": "These are state totals as reported. With most appeals still pending, the site cannot say how many of the 27 lakh were eligible."
+    },
+    {
+     "quote": "20 अगस्त से 24 सितंबर के बीच 29,000 से ज्यादा फॉर्म सेवन भरे गए हैं। इनमें से 93% आम लोगों ने भरे हैं।",
+     "lang": "hi",
+     "translation": "Between 20 August and 24 September more than 29,000 Form 7s were filed [in Karnataka], 93% of them by ordinary people.",
+     "when": "~12:00",
+     "kind": "A count from official figures",
+     "piece": "rk-form7",
+     "outlet": "",
+     "rests": "He gives these as the figures of Rizwan Arshad, a Karnataka minister, from the minister's letter to the Chief Electoral Officer.",
+     "site": "The Disputes page lists the bulk Form 7 objections reported in Karnataka, each with its source. Karnataka's own pages carry the Chief Electoral Officer's district figures only.",
+     "stops": "The Chief Electoral Officer has published no count of Form 7s by who filed them, so the 93 per cent cannot be set against an official figure."
     },
     {
      "quote": "नए वोटर और बहुत से पुराने वोटर के लिए इसका प्रमाण देना मुश्किल होने लगा और उनका नाम वोटर लिस्ट से कटने लगा।",
@@ -640,11 +652,5 @@
    ]
   }
  ],
- "dropped": [
-  {
-   "person": "Ravish Kumar",
-   "quote": "20 अगस्त से 24 सितंबर के बीच 29,000 से ज्यादा फॉर्म सेवन भरे गए हैं। इनमें से 93% आम लोगों ने भरे हैं।",
-   "why": "Relays a Karnataka minister's figures. The site leaves out party office-holders, and the second reading recommended dropping it."
-  }
- ]
+ "dropped": []
 }
