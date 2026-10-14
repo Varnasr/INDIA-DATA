@@ -203,7 +203,7 @@ def shell(out, meta, content, scripts):
     # each, so a place is always where the reader found it last time. The 13
     # with a full analysis of their own are in bold; the 20 on the shared page
     # are not. Telangana carries the Old City study beneath it.
-    FULL = {'bihar', 'hyd', 'tn', 'ka', 'wb', 'kl', 'rj', 'up', 'dl', 'mh', 'gj', 'uk', 'as'}
+    FULL = {'bihar', 'hyd', 'tn', 'ka', 'wb', 'kl', 'rj', 'up', 'dl', 'mh', 'gj', 'uk', 'as', 'od', 'ap', 'cg', 'mn', 'ml'}
     ZONES = ['Northern', 'Central', 'Eastern', 'Western', 'Southern', 'North-East']
 
     def link(p, href=None, label=None, cls=''):

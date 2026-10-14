@@ -19,8 +19,53 @@
   };
   var LEVEL = { district: ['district', 'districts'], region: ['region', 'regions'], ac: ['constituency', 'constituencies'], pc: ['parliamentary constituency', 'parliamentary constituencies'], island: ['island', 'islands'], tehsil: ['tehsil', 'tehsils'], ward: ['ward', 'wards'] };
   var SEATED = ['meghalaya', 'manipur', 'odisha'];
-  // states with a page per district and none per constituency
-  var DISTRICTED = ['andhrapradesh', 'chhattisgarh', 'mizoram'];
+  // the deeper sections of a full analysis, for a state with complete district
+  // (and, where SEATED, constituency) tables: each in the state's own measure
+  var MEASURE = {
+    meghalaya: { d: { c: function (x) { return x.removed; }, b: 'before', per: 100, what: 'names left off the draft, per 100 on the roll before the revision' },
+      s: { c: function (x) { return x.removed; }, what: 'names left off the draft', are: 'are', year: 2023 } },
+    manipur: { d: { c: function (x) { return x.fall; }, b: 'before', per: 100, what: 'fall in the roll from the roll before the revision to the final roll, per 100 on the roll before' },
+      s: { c: function (x) { return x.fall; }, what: 'fall in the roll from the roll before to the final roll', year: 2022 } },
+    odisha: { d: { c: function (x) { return x.before - x.draft; }, b: 'before', per: 100, what: 'fall in the roll from January 2025 to the draft, per 100 on the January 2025 roll' },
+      s: { c: function (x) { return x.removed; }, what: 'names removed after the draft', are: 'are', year: 2024 } },
+    andhrapradesh: { d: { c: function (x) { return x.removed; }, b: 'before', per: 100, what: 'names left off the draft, per 100 on the roll before the revision' } },
+    chhattisgarh: { d: { c: function (x) { return x.final - x.draft; }, b: 'draft', per: 100, what: 'rise in the roll from the draft to the final roll, per 100 on the draft' } },
+    mizoram: { d: { c: function (x) { return x.final - x.draft; }, b: 'draft', per: 100, what: 'rise in the roll from the draft to the final roll, per 100 on the draft' } }
+  };
+  function deeper(d, box) {
+    var M = MEASURE[S.slug], seated = SEATED.indexOf(S.slug) >= 0;
+    Promise.all([SIR.json('data/' + S.slug + '/districts.json'), seated ? SIR.json('data/' + S.slug + '/constituencies.json') : null]).then(function (r) {
+      var D = r[0], A = r[1], m = M.d, rate = function (x) { return m.per * m.c(x) / x[m.b]; };
+      var st = m.per * D.reduce(function (t, x) { return t + m.c(x); }, 0) / D.reduce(function (t, x) { return t + x[m.b]; }, 0);
+      var srt = D.slice().sort(function (a, b) { return rate(b) - rate(a); }), hi = srt[0], lo = srt[srt.length - 1];
+      var el = document.createElement('section');
+      el.innerHTML = '<h2 id="by-district">By district</h2><p class="sub">Measured by the ' + m.what + '.</p>' +
+        '<div class="grid"><div class="panel wide" id="pDist"><div class="vizbox" id="vDist"></div></div></div><p class="finding" id="fDist"></p>' +
+        '<details class="figs"><summary>Every district, in figures</summary><div class="twrap fit"><table id="tDist"></table></div></details>' +
+        '<p class="golist"><span class="note">Every district has its own page:</span> ' + D.map(function (x) { return '<a class="chip" href="district/' + SIR.slug(x.district).slice(2) + '/">' + SIR.esc(x.district) + '</a>'; }).join(' ') + '</p>';
+      box.appendChild(el);
+      VIZ.lollipop('vDist', { label: d.state + ': the ' + m.what + ', by district', axis: 'Per ' + n(m.per),
+        rows: srt.map(function (x) { var v = rate(x); return { name: x.district, v: Math.max(v, 0), text: d1(v), tok: '--fill-navy', hi: true }; }) });
+      var sv = function (v) { return v < 0 ? 'minus ' + d1(-v) : d1(v); };
+      document.getElementById('fDist').innerHTML = '<b>' + SIR.esc(hi.district) + ' is highest at ' + sv(rate(hi)) + ' per ' + n(m.per) + ' and ' + SIR.esc(lo.district) + ' lowest at ' + sv(rate(lo)) + ', against ' + sv(st) + ' for ' + SIR.esc(d.state) + '.</b>' + (rate(lo) < 0 ? ' A negative figure is a change the other way.' : '');
+      SIR.table(document.getElementById('tDist'), [{ k: 'district', label: 'District', left: true }, { k: '_c', label: 'Count', fmt: n }, { k: '_b', label: 'Out of', fmt: n }, { k: '_r', label: 'Per ' + n(m.per), fmt: d1 }],
+        D.map(function (x) { return { district: x.district, _c: m.c(x), _b: x[m.b], _r: rate(x) }; }), { sort: '_r' });
+      if (!A) return;
+      var s = M.s, over = A.filter(function (a) { return a.margin != null && s.c(a) > a.margin; });
+      var es = document.createElement('section');
+      es.innerHTML = '<h2 id="against-the-winning-margins">Against the winning margins</h2><p class="sub">Each constituency\'s ' + s.what + ' against the winning margin at its ' + s.year + ' Assembly election, from the Election Commission\'s results.</p>' +
+        '<div class="grid"><div class="panel wide" id="pMargin"><div class="vizbox" id="vMargin"></div></div></div><p class="finding" id="fMargin"></p>' +
+        '<details class="figs"><summary>Every constituency, in figures</summary><div class="twrap fit"><table id="tSeats"></table></div></details>';
+      box.appendChild(es);
+      VIZ.scatter('vMargin', { label: 'The ' + s.what + ' in each constituency against its ' + s.year + ' winning margin', diag: true, xMin: 0, yMin: 0,
+        xAxis: s.year + ' winning margin', yAxis: s.what.charAt(0).toUpperCase() + s.what.slice(1), diagLabel: 'equal to the margin',
+        points: A.filter(function (a) { return a.margin != null; }).map(function (a) { return { x: a.margin, y: Math.max(s.c(a), 0), tok: s.c(a) > a.margin ? '--fill-red' : '--fill-navy', label: a.name + ' (' + a.winner + '): ' + n(s.c(a)) + ', margin ' + n(a.margin) }; }) });
+      document.getElementById('fMargin').innerHTML = '<b>In ' + over.length + ' of ' + A.length + ' constituencies the ' + s.what + ' ' + (s.are || 'is') + ' larger than the ' + s.year + ' winning margin.</b> Larger than the margin means large enough to decide a seat, never that it did, and the figures cannot show how anyone would have voted.';
+      SIR.table(document.getElementById('tSeats'), [{ k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', left: true }, { k: 'district', label: 'District', left: true }, { k: '_c', label: 'Count', fmt: n }, { k: 'winner', label: 'Won ' + s.year, left: true }, { k: 'margin', label: 'Margin', fmt: n }],
+        A.map(function (a) { return { ac: a.ac, name: a.name, district: a.district, _c: s.c(a), winner: a.winner || '', margin: a.margin }; }), { sort: '_c' });
+      SIR.tools();
+    });
+  }
   var hyph = function (s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
 
   function load() {
@@ -150,12 +195,7 @@
         aName: 'Share of the roll before', aTok: '--fill-grey', bName: 'Share of the names left off', bTok: '--fill-red', rows: [{ name: d.state, a: R.women_before_pct, b: R.women_removed_pct }] });
     }
     d.tables.forEach(function (t, i) { table(t, i, d); });
-    if (DISTRICTED.indexOf(S.slug) >= 0) SIR.json('data/' + S.slug + '/districts.json').then(function (D) {
-      var el = document.createElement('section');
-      el.innerHTML = '<h2 id="every-district-on-its-own-page">Every district on its own page</h2><p class="sub">Each district is set against every other district of ' + SIR.esc(d.state) + '.</p><p class="golist">' +
-        D.map(function (x) { return '<a class="chip" href="district/' + SIR.slug(x.district).slice(2) + '/">' + SIR.esc(x.district) + '</a>'; }).join(' ') + '</p>';
-      box.appendChild(el);
-    });
+    if (MEASURE[S.slug]) deeper(d, box);
     if (seated) Promise.all([SIR.json('data/' + S.slug + '/constituencies.json'), SIR.json('data/' + S.slug + '/districts.json')]).then(function (r) {
       var A = r[0], D = r[1];
       var facts = function (x) {
