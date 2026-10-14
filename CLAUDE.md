@@ -1037,6 +1037,16 @@ and rank correlations, and press and rounding. Its table of each state's
 constituency measure is read from `data/india/ac_finder.json`, so it follows
 `FINDER`. When a state's measure changes, change the prose there too.
 
+**Page not found** (`404.html` at the root, from `site/404.html`, which sits
+outside `site/pages` so it gets no folder of its own). Netlify serves it at
+whatever address was asked for, so `build_site.py` renders it through the same
+shell and then makes every link and file absolute, sets `data-root="/"`, drops
+the canonical link and adds `noindex`. Its script reads `data/search.json` and
+offers the pages whose name or address matches the words of the missing one
+(Khurdha finds Khurda, a state folder finds that state's overview), and its
+Feedback link carries the address that failed. Edit `site/404.html`, never the
+built file.
+
 **What's New** (`updates/`, in every footer, in the search and linked from
 the front page's "Who made it") lists what was added to the site, by date,
 from `data/updates.json`, which is curated by hand: add an entry when

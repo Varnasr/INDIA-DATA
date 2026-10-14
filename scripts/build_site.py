@@ -445,6 +445,16 @@ def build():
             put(os.path.join(ROOT, rel), externalise(shell(out, meta, heading_ids(content), scripts), rel))
             if out not in NOINDEX:
                 pages.append(out)
+    # the 404 page is served at whatever address was asked for, so every link
+    # and file in it is made absolute, and it is kept out of search engines
+    meta, content, scripts = read_source(os.path.join(ROOT, 'site', '404.html'))
+    page = externalise(shell('404.html', meta, heading_ids(content), scripts), '404.html')
+    page = re.sub(r'(\s(?:href|src)=")(?!https?:|/|#|mailto:|data:|upi:|tel:)', r'\1/', page)
+    page = page.replace('data-root=""', 'data-root="/"')
+    page = re.sub(r'<link rel="canonical"[^>]*>\n?', '', page)
+    if 'name="robots"' not in page:
+        page = page.replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n<meta name="robots" content="noindex">', 1)
+    put(os.path.join(ROOT, '404.html'), page)
     # every page for search engines, and where to find the list
     put(os.path.join(ROOT, 'sitemap.xml'), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + ''.join('<url><loc>%s%s</loc></url>\n' % (CFG['url'], html.escape(o)) for o in sorted(pages)) + '</urlset>\n', compare_unstamped=False)
@@ -508,6 +518,9 @@ def search_index():
         rows.append(['hyd', 'd', d['district'], '', 'hyderabad/telangana/district/' + slug(d['district'])[2:] + '/'])
     for d in J('uttarpradesh/districts.json'):
         rows.append(['up', 'd', d['district'], '', 'uttarpradesh/district/' + slug(d['district'])[2:] + '/'])
+    # Maharashtra's constituencies, each with its own page (its districts follow)
+    for a in J('maharashtra/constituencies.json'):
+        rows.append(['mh', 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], 'maharashtra/seat/%d/' % a['ac']])
     for d in J('maharashtra/districts.json'):
         # the press note keeps three old names; a reader may type the new one,
         # and Bombay for Mumbai
