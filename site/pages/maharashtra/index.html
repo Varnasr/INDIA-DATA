@@ -174,7 +174,7 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
     rows: DN.map(function (d) { return { name: d.district, v: d.notices_per_100, text: d1(d.notices_per_100), tok: tok(d), hi: innerWidth >= 600 }; }) });
   document.getElementById('fNotice').innerHTML = '<b>' + cr(S.notices) + ' electors still on the draft roll were in line for a notice, ' + d1(S.notices_per_100) + ' of every 100.</b> ' +
     lk(S.no_mapping) + ' could not be linked to the last intensive revision and ' + lk(S.discrepancy) + ' had an anomaly in their entry. ' + DN[0].district + ' had the most for its size, ' + d1(DN[0].notices_per_100) + ' of every 100 on its draft, and ' + DN[DN.length - 1].district + ' the fewest, ' + d1(DN[DN.length - 1].notices_per_100) + '. ' +
-    'Districts that left off more names also sent more notices (rank correlation ' + SIR.d(S.rho_notices_left, 2) + '). How many names have been struck off after a hearing has not been published. The counts are from the CEO\'s release of 4 September 2026.';
+    'Districts that left off more names also sent more notices (rank correlation ' + SIR.d(S.rho_notices_left, 2) + '). How many names have been deleted after a hearing has not been published. The counts are from the CEO\'s release of 4 September 2026.';
 
   VIZ.scatter('vMargin', { label: 'Names left off each constituency\'s draft against its 2024 winning margin', diag: true, xMin: 0,
     xAxis: '2024 winning margin', yAxis: 'Names left off the draft', diagLabel: 'left off = margin',
