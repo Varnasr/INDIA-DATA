@@ -32,7 +32,7 @@
    "/hyderabad/"
   ]
  },
- "\"Summoned\" counts the Election Commission's discrepancy list and the no-mapping list together. The Commission extended the calendar on 7 September, as Telangana Today reported, with claims to 7 October, hearings to 5 November and the final roll on 9 November. The schedules shown here are the ones in the September exports. Telangana Today reported on 9 October that the Commission had done away with in-person hearings, which would be held preferably online. The <a href=\"../telangana/\">Statewide</a> page gives the hearing figures the paper reported.": {
+ "\"Summoned\" counts the Election Commission's discrepancy list and the no-mapping list together. The Commission extended the calendar on 7 September, as Telangana Today reported, with claims to 7 October, hearings to 5 November and the final roll on 9 November. The schedules shown here are the ones in the September lists. Telangana Today reported on 9 October that the Commission had done away with in-person hearings, which would be held preferably online. The <a href=\"../telangana/\">Statewide</a> page gives the hearing figures the paper reported.": {
   "kind": "markup",
   "pages": [
    "/hyderabad/hearings/"
@@ -1071,7 +1071,7 @@
    "/"
   ]
  },
- "<b>What these figures cannot show.</b> Each counts what officers wrote down, and nobody has checked the entries. A person marked shifted may have been away for work, and a person marked absent may have been at home. The Commission has published no state table of its own, so outside Bihar the figures are the Chief Electoral Officers', taken from their press notes where those could be read and from press reports otherwise. {rounded} states published theirs rounded to the lakh. States also drew the categories a little differently. Some counted refusals or \"others\" separately and some counted them as absent, so the page uses the three groups that every state reports.": {
+ "<b>What these figures cannot show.</b> Each counts what officers wrote down, and nobody has checked the entries. A person marked shifted may have been away for work, and a person marked absent may have been at home. The Commission has published no state table of its own, so outside Bihar the figures are the Chief Electoral Officers', taken from their press notes and, for some states, from press reports. {rounded} states published theirs rounded to the lakh. States also drew the categories a little differently. Some counted refusals or \"others\" separately and some counted them as absent, so the page uses the three groups that every state reports.": {
   "kind": "script",
   "pages": [
    "/india/"
@@ -1233,7 +1233,7 @@
    "/bihar/"
   ]
  },
- "A constituency counts as a border seat when its district touches Nepal, West Bengal, Jharkhand or Uttar Pradesh. The shares of Muslim names come from the name classification in the booth files. The low figure counts only names classified Muslim, and the high figure adds every name left unclassified.": {
+ "A constituency counts as a border seat when its district touches Nepal, West Bengal, Jharkhand or Uttar Pradesh. The shares of Muslim names come from the name classification in the booth lists. The low figure counts only names classified Muslim, and the high figure adds every name left unclassified.": {
   "kind": "markup",
   "pages": [
    "/bihar/border/"
@@ -1245,7 +1245,7 @@
    "/assets/faq/hyd.js"
   ]
  },
- "A household that moved out of the Old City is rightly marked \"shifted\", and the files cannot tell it apart from an elector who was at home when the officer missed them.": {
+ "A household that moved out of the Old City is rightly marked \"shifted\", and the lists cannot tell it apart from an elector who was at home when the officer missed them.": {
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
@@ -2184,6 +2184,12 @@
    "/bihar/results/"
   ]
  },
+ "All three tables have the same 34 districts, each district's reasons add up to its removals, each district's draft roll equals its roll before less its removals, men, women and third gender add up, and the state totals equal the figures in the Chief Electoral Officer's press notes.": {
+  "kind": "markup",
+  "pages": [
+   "/karnataka/method/"
+  ]
+ },
  "All {count} parts": {
   "kind": "script",
   "pages": [
@@ -2648,12 +2654,6 @@
   "kind": "markup",
   "pages": [
    "/india/rti/"
-  ]
- },
- "Are the files internally consistent?": {
-  "kind": "script",
-  "pages": [
-   "/hyderabad/method/"
   ]
  },
  "Are the names entered as dead plausible?": {
@@ -3311,7 +3311,7 @@
    "/bihar/method/"
   ]
  },
- "Bihar has two seats called Kalyanpur (16 and 131) and two called Pipra (17 and 42), so every match between tables uses the constituency number. Minapur (90) belongs to the Vaishali Lok Sabha seat.": {
+ "Bihar has two seats called Kalyanpur (16 and 131) and two called Pipra (17 and 42), and the constituency number tells them apart. Minapur (90) belongs to the Vaishali Lok Sabha seat.": {
   "kind": "markup",
   "pages": [
    "/bihar/method/"
@@ -3381,7 +3381,8 @@
   "kind": "script",
   "pages": [
    "/bihar/",
-   "/bihar/explorer/"
+   "/bihar/explorer/",
+   "/bihar/method/"
   ]
  },
  "Booths by the number of names removed in phase 1. Most lost fewer than a hundred. {n} lost 200 or more.": {
@@ -3800,7 +3801,7 @@
    "/bihar/method/"
   ]
  },
- "Caste is read from surnames in two ways, set out on the <a href=\"../people/#caste\">People</a> page. The dataset of official caste lists by Jolad, Kalyani and Baharadia of FLAME University, published on Harvard Dataverse (<a href=\"https://doi.org/10.7910/DVN/WT5VIY\">doi:10.7910/DVN/WT5VIY</a>) under a CC0 licence, was used to check and correct the classification of a few surnames against the Bihar lists of Scheduled Castes, Scheduled Tribes and Other Backward Classes.": {
+ "Caste is read from surnames in two ways, set out on the <a href=\"../people/#caste\">People</a> page. The dataset of official caste lists by Jolad, Kalyani and Baharadia of FLAME University, published on Harvard Dataverse (<a href=\"https://doi.org/10.7910/DVN/WT5VIY\">doi:10.7910/DVN/WT5VIY</a>) under a CC0 licence, is the source for the classification of a few surnames, from the Bihar lists of Scheduled Castes, Scheduled Tribes and Other Backward Classes.": {
   "kind": "markup",
   "pages": [
    "/bihar/method/"
@@ -4196,10 +4197,7 @@
  "Checks": {
   "kind": "markup",
   "pages": [
-   "/karnataka/method/",
-   "/kerala/method/",
-   "/tamilnadu/method/",
-   "/westbengal/method/"
+   "/karnataka/method/"
   ]
  },
  "Chennai": {
@@ -4977,12 +4975,6 @@
    "/bihar/"
   ]
  },
- "Constituencies are joined by number": {
-  "kind": "markup",
-  "pages": [
-   "/bihar/method/"
-  ]
- },
  "Constituencies by names removed as a multiple of the 2025 winning margin.": {
   "kind": "script",
   "pages": [
@@ -5029,7 +5021,7 @@
    "/hyderabad/explorer/"
   ]
  },
- "Constituency boundaries are from DataMeet's assembly constituency map, licensed CC BY 2.5 India, and are simplified for the web. They are the boundaries of the 2008 delimitation, which this roll uses.": {
+ "Constituency boundaries are from DataMeet's assembly constituency map, licensed CC BY 2.5 India. They are the boundaries of the 2008 delimitation, which this roll uses.": {
   "kind": "markup",
   "pages": [
    "/kerala/method/",
@@ -5037,7 +5029,7 @@
    "/westbengal/method/"
   ]
  },
- "Constituency boundaries from DataMeet's assembly constituency map (CC BY 2.5 India), simplified.": {
+ "Constituency boundaries from DataMeet's assembly constituency map (CC BY 2.5 India).": {
   "kind": "markup",
   "pages": [
    "/bihar/results/",
@@ -5858,7 +5850,7 @@
    "/hyderabad/explorer/"
   ]
  },
- "Deleted means on the Absent-Shifted-Dead list and missing from the draft roll, the roll published after the removals, in the September 2026 exports. The Commission extended the schedule on 7 September, as Telangana Today reported, with claims to 7 October, hearings to 5 November and the final roll on 9 November, so the count will change. Malakpet is read by polling-station name because its export has no part numbers. \"At hearing\" counts the Election Commission's discrepancy list and the no-mapping list together. The no-mapping list holds electors who could not be traced to the last intensive revision, and the discrepancy list holds mismatches in names, ages and family links. Ages come from the draft and ASD files. Religion is guessed from names, and a separate classification agrees on 99% of them. The 2023 comparison uses each seat's result as the Election Commission declared it.": {
+ "Deleted means on the Absent-Shifted-Dead list and missing from the draft roll, the roll published after the removals, on the September 2026 lists. The Commission extended the schedule on 7 September, as Telangana Today reported, with claims to 7 October, hearings to 5 November and the final roll on 9 November, so the count will change. Malakpet is shown by polling-station name because its list has no part numbers. \"At hearing\" counts the Election Commission's discrepancy list and the no-mapping list together. The no-mapping list holds electors who could not be traced to the last intensive revision, and the discrepancy list holds mismatches in names, ages and family links. Ages come from the draft roll and the ASD list. Religion is guessed from names, and a separate classification agrees on 99% of them. The 2023 comparison uses each seat's result as the Election Commission declared it.": {
   "kind": "markup",
   "pages": [
    "/hyderabad/explorer/"
@@ -5908,7 +5900,7 @@
    "/hyderabad/people/"
   ]
  },
- "Deletion rate within each group. Religion is guessed from names because the Election Commission does not record it. An elector is linked to 2002 when they can be traced to the roll of the last intensive revision. Malakpet's file does not record the link.": {
+ "Deletion rate within each group. Religion is guessed from names because the Election Commission does not record it. An elector is linked to 2002 when they can be traced to the roll of the last intensive revision. Malakpet's list does not record the link.": {
   "kind": "markup",
   "pages": [
    "/hyderabad/explorer/"
@@ -6606,7 +6598,7 @@
    "/india/factors/"
   ]
  },
- "District boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), simplified, with each constituency placed in its election district as the Election Commission lists it.": {
+ "District boundaries drawn from DataMeet's assembly constituency map (CC BY 2.5 India), with each constituency placed in its election district as the Election Commission lists it.": {
   "kind": "markup",
   "pages": [
    "/karnataka/"
@@ -6709,6 +6701,12 @@
   "kind": "script",
   "pages": [
    "/assets/faq/tamilnadu.js"
+  ]
+ },
+ "Do the lists add up?": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/method/"
   ]
  },
  "Do the reasons alone exceed the margins?": {
@@ -7090,7 +7088,7 @@
    "/hyderabad/method/"
   ]
  },
- "Each analysis names its sources, the checks its figures pass and what they cannot show.": {
+ "Each analysis names its sources and what its figures cannot show.": {
   "kind": "markup",
   "pages": [
    "/"
@@ -7115,12 +7113,6 @@
   ]
  },
  "Each bar runs from the names classified Muslim to that share plus every unclassified name. The census share lies inside the bar in {inside} of {districts} districts. The open dots carry each district's share forward to 2025 at its growth rates from 2001 to 2011, and they lie inside it in {pin}.": {
-  "kind": "script",
-  "pages": [
-   "/bihar/"
-  ]
- },
- "Each booth is counted once. Party names in the booth results were matched to the declared seat results, and the booth totals add up to the declared result in all 40 Lok Sabha seats. Religion and caste are guessed from names. Religion is therefore given as a range, and caste under two classifications, with only what holds under both reported. A second program, written separately, recomputes every headline figure from the lists before anything is published.": {
   "kind": "script",
   "pages": [
    "/bihar/"
@@ -7358,6 +7350,12 @@
   "kind": "markup",
   "pages": [
    "/bihar/method/"
+  ]
+ },
+ "Each roll's total and its count of women equal the figures printed with it, men, women and third gender add up in every seat and every margin equals the winner's votes less the runner-up's.": {
+  "kind": "markup",
+  "pages": [
+   "/kerala/method/"
   ]
  },
  "Each row is one way of asking whether seats that lost more names moved further towards the NDA from 2020 to 2025. The square is the estimate, in points of NDA lead for each extra name removed per 100 electors. The line is its 95% interval, the range the true value most likely lies in. A line that crosses zero cannot rule out no effect. The red row is the comparison that allows for each seat's 2020 lead, which the others leave out.": {
@@ -7732,7 +7730,7 @@
    "/hyderabad/hearings/"
   ]
  },
- "Electors on the Absent-Shifted-Dead list divided by electors on the roll before the revision, for the group in question. The files cover every elector, so no sample is involved and each rate is exact for its group.": {
+ "Electors on the Absent-Shifted-Dead list divided by electors on the roll before the revision, for the group in question. The lists cover every elector, so no sample is involved and each rate is exact for its group.": {
   "kind": "markup",
   "pages": [
    "/hyderabad/method/"
@@ -7962,13 +7960,13 @@
    "/bihar/people/"
   ]
  },
- "Every rate, within-part comparison and correlation on these pages is computed from the part-level counts shown in the explorer. No name, EPIC number or address is published.": {
+ "Every rate, within-part comparison and correlation on these pages comes from the part-level counts shown in the explorer. No name, EPIC number or address is published.": {
   "kind": "markup",
   "pages": [
    "/hyderabad/method/"
   ]
  },
- "Every roll adds up to the total printed with it. Polling stations barely changed between the 2024 roll and the draft, so the build also fails if any seat's polling stations or roll move in a way that would mean a row was read against the wrong seat.": {
+ "Every roll adds up to the total printed with it.": {
   "kind": "markup",
   "pages": [
    "/westbengal/method/"
@@ -10608,10 +10606,12 @@
    "/bihar/results/"
   ]
  },
- "How the Bihar SIR figures are built, where they come from, how the lists were prepared, and the questions the analysis answers.": {
+ "How the figures add up": {
   "kind": "markup",
   "pages": [
-   "/bihar/method/"
+   "/kerala/method/",
+   "/tamilnadu/method/",
+   "/westbengal/method/"
   ]
  },
  "How the figures are built": {
@@ -10621,7 +10621,7 @@
    "/hyderabad/"
   ]
  },
- "How the lists were prepared": {
+ "How the lists are counted": {
   "kind": "markup",
   "pages": [
    "/bihar/method/"
@@ -13888,7 +13888,7 @@
    "/hyderabad/"
   ]
  },
- "More than any other attribute in the files.": {
+ "More than any other attribute in the lists.": {
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
@@ -16179,12 +16179,6 @@
    "/assets/faq/tamilnadu.js"
   ]
  },
- "One count per booth": {
-  "kind": "markup",
-  "pages": [
-   "/bihar/method/"
-  ]
- },
  "One elector can carry more than one rule, so the flags sum to more than the people summoned.": {
   "kind": "script",
   "pages": [
@@ -16514,7 +16508,7 @@
    "/hyderabad/parts/"
   ]
  },
- "Part counts sum exactly to the constituency totals for all five (the build script asserts it).": {
+ "Part counts sum exactly to the constituency totals for all five.": {
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
@@ -16702,13 +16696,13 @@
    "/bihar/method/"
   ]
  },
- "Party names matched": {
+ "Party names in the booth results": {
   "kind": "markup",
   "pages": [
    "/bihar/method/"
   ]
  },
- "Party names matched to the declared result": {
+ "Party names matched": {
   "kind": "markup",
   "pages": [
    "/bihar/method/"
@@ -18947,7 +18941,7 @@
    "/hyderabad/"
   ]
  },
- "Religion is guessed from names because the roll does not record it, and a separate classification agrees on 99% of names. Electors whose names were classified as neither Hindu nor Muslim are left out of both religion rates. An elector counts as linked when the export matches them to the 2002 intensive revision roll.": {
+ "Religion is guessed from names because the roll does not record it, and a separate classification agrees on 99% of names. Electors whose names were classified as neither Hindu nor Muslim are left out of both religion rates. An elector counts as linked when the list ties them to the 2002 intensive revision roll.": {
   "kind": "markup",
   "pages": [
    "/hyderabad/people/"
@@ -20543,6 +20537,12 @@
   "kind": "script",
   "pages": [
    "/bihar/"
+  ]
+ },
+ "Seats that share a name": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
   ]
  },
  "Seats the NDA held in 2020": {
@@ -23197,7 +23197,7 @@
    "/assets/faq/karnataka.js"
   ]
  },
- "The Chief Electoral Officer's 34 election districts are not the state's revenue districts, so no district map draws them. The map joins the constituency boundaries of DataMeet's assembly constituency map (CC BY 2.5 India) by the district each constituency belongs to in the Election Commission's own list of constituencies by district. Bengaluru's three B.B.M.P districts are drawn that way, and Harapanahalli sits in Vijayanagara.": {
+ "The Chief Electoral Officer's 34 election districts are not the state's revenue districts, so no district map draws them. The map draws each district as the constituencies the Election Commission's own list places in it, from DataMeet's assembly constituency map (CC BY 2.5 India). Bengaluru's three B.B.M.P districts are drawn that way, and Harapanahalli sits in Vijayanagara.": {
   "kind": "markup",
   "pages": [
    "/karnataka/method/"
@@ -23840,16 +23840,10 @@
    "/hyderabad/"
   ]
  },
- "The booth list covers every one of Bihar's {booths} polling booths and adds up to {p1b} phase 1 removals, {p1} women and men and {tg} third-gender electors. The constituency totals for both phases match the Chief Electoral Officer's table. Votes added up from the booths give the declared winner and runner-up in all 40 Lok Sabha seats. A second program, written separately, recomputes every headline figure from the lists before anything is published.": {
+ "The booth list covers every one of Bihar's {booths} polling booths and adds up to {p1b} phase 1 removals, {p1} women and men and {tg} third-gender electors. The constituency totals for both phases match the Chief Electoral Officer's table. Votes added up from the booths give the declared winner and runner-up in all 40 Lok Sabha seats.": {
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
-  ]
- },
- "The booth list repeats each booth three times, once for each of its three leading parties in 2024, with the same removal count on every row. Counting each booth once gives 77,837 booths and 65,59,626 phase 1 removals, which is the Chief Electoral Officer's total.": {
-  "kind": "markup",
-  "pages": [
-   "/bihar/method/"
   ]
  },
  "The booth lists cover all {booths} polling booths and add up to the official totals in every constituency.": {
@@ -23858,22 +23852,10 @@
    "/assets/faq/bihar.js"
   ]
  },
- "The build fails unless all three tables have the same 34 districts, each district's reasons add up to its removals, each district's draft roll equals its roll before less its removals, men, women and third gender add up, and the state totals equal the figures in the Chief Electoral Officer's press notes.": {
-  "kind": "markup",
+ "The booth totals add up to the declared result in all 40 Lok Sabha seats. Religion and caste are guessed from names. Religion is therefore given as a range, and caste under two classifications, with only what holds under both reported.": {
+  "kind": "script",
   "pages": [
-   "/karnataka/method/"
-  ]
- },
- "The build fails unless every roll has each of the 140 constituencies once, each roll's total and its count of women equal the figures printed with it, men, women and third gender add up in every seat, every margin equals the winner's votes less the runner-up's, and no seat's rolls move in an order that would mean a row was misread.": {
-  "kind": "markup",
-  "pages": [
-   "/kerala/method/"
-  ]
- },
- "The build fails unless every table has each of the 234 constituencies once, the three reasons add up to each seat's removals, each roll's men, women and third gender add up to its total, every margin equals the winner's votes less the runner-up's, and the state totals equal the figures the Chief Electoral Officer published.": {
-  "kind": "markup",
-  "pages": [
-   "/tamilnadu/method/"
+   "/bihar/"
   ]
  },
  "The busiest day, {day}, listed {cases} cases across the five constituencies.": {
@@ -23969,7 +23951,7 @@
    "/bihar/"
   ]
  },
- "The data for this page did not load ({msg}). If you opened the file directly, serve the folder with <code>python3 -m http.server</code> and open it from there.": {
+ "The data for this page did not load ({msg}). Reload the page and try again.": {
   "kind": "script",
   "pages": [
    "/assets/sir.js"
@@ -24119,12 +24101,6 @@
   "kind": "markup",
   "pages": [
    "/share/"
-  ]
- },
- "The files cannot rule out that this comes from age, or from people who did move out (see the limits above).": {
-  "kind": "script",
-  "pages": [
-   "/hyderabad/method/"
   ]
  },
  "The final roll": {
@@ -24297,6 +24273,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "The lists cannot rule out that this comes from age, or from people who did move out (see the limits above).": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/method/"
   ]
  },
  "The lists cannot show how anyone removed would have voted, or whether each removal was right.": {
@@ -24548,6 +24530,12 @@
    "/bihar/results/"
   ]
  },
+ "The phase 1 lists cover 77,837 booths and 65,59,626 removals, which is the Chief Electoral Officer's total.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
+  ]
+ },
  "The pinned cards lead to the pages most readers look for, among them the disputes, every constituency and women.": {
   "kind": "script",
   "pages": [
@@ -24789,13 +24777,13 @@
    "/assets/faq/tamilnadu.js"
   ]
  },
- "The roll does not record caste. The lists give a surname for each removed elector and for the father or husband named beside them. The father's or husband's surname tells more, because most women are listed as Devi, Kumari or Khatun, which say nothing about caste. Surnames are classified in two ways. Classification A uses the project's mapping of surnames to castes. Classification B is strict and counts only surnames that belong almost entirely to one group, setting aside names such as Singh, Prasad, Ray, Mahato, Mandal, Sharma, Thakur, Chaudhary and Manjhi, which several groups carry. Only findings that hold under both are reported.": {
+ "The roll does not record caste. The lists give a surname for each removed elector and for the father or husband named beside them. The father's or husband's surname tells more, because most women are listed as Devi, Kumari or Khatun, which say nothing about caste. Surnames are classified in two ways. Classification A is a broad mapping of surnames to castes. Classification B is strict and counts only surnames that belong almost entirely to one group, setting aside names such as Singh, Prasad, Ray, Mahato, Mandal, Sharma, Thakur, Chaudhary and Manjhi, which several groups carry. Only findings that hold under both are reported.": {
   "kind": "markup",
   "pages": [
    "/bihar/people/"
   ]
  },
- "The roll does not record religion, so it is guessed from names. The booth files classify each removed elector's name as Hindu, Muslim or unclassified. An unclassified name could be either, so the Muslim share is given as a range, from counting none of them as Muslim to counting all of them.": {
+ "The roll does not record religion, so it is guessed from names. The booth lists classify each removed elector's name as Hindu, Muslim or unclassified. An unclassified name could be either, so the Muslim share is given as a range, from counting none of them as Muslim to counting all of them.": {
   "kind": "markup",
   "pages": [
    "/bihar/people/"
@@ -25044,6 +25032,12 @@
    "/bihar/"
   ]
  },
+ "The three reasons add up to each seat's removals, each roll's men, women and third gender add up to its total, every margin equals the winner's votes less the runner-up's, and the state totals equal the figures the Chief Electoral Officer published.": {
+  "kind": "markup",
+  "pages": [
+   "/tamilnadu/method/"
+  ]
+ },
  "The three reasons, by phase": {
   "kind": "markup",
   "pages": [
@@ -25182,6 +25176,12 @@
    "/help/"
   ]
  },
+ "This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it comes from the press, the page says so.": {
+  "kind": "markup",
+  "pages": [
+   "/india/progress/"
+  ]
+ },
  "This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.": {
   "kind": "markup",
   "pages": [
@@ -25214,7 +25214,6 @@
    "/haryana/",
    "/haryana/faq/",
    "/haryana/method/",
-   "/india/progress/",
    "/jharkhand/",
    "/jharkhand/faq/",
    "/jharkhand/method/",
@@ -26357,7 +26356,7 @@
    "/hyderabad/"
   ]
  },
- "Vote shares added up from the booths, beside the declared figures. This is the check on the party names described above.": {
+ "Vote shares added up from the booths, beside the declared figures.": {
   "kind": "markup",
   "pages": [
    "/bihar/method/"
@@ -26369,7 +26368,7 @@
    "/"
   ]
  },
- "Votes added up from the booths match the declared 2024 result in every Lok Sabha seat. In nine seats, though, a column of votes carried a party name that differed from the declared result. Those columns were matched to the declared result, and the evidence for each is below. After matching, the first and second parties in all 40 seats are the declared winner and runner-up.": {
+ "Votes added up from the booths match the declared 2024 result in every Lok Sabha seat. In nine seats the booth results gave a party name that differs from the declared result, and the evidence for each correction is below. With those corrected, the first and second parties in all 40 seats are the declared winner and runner-up.": {
   "kind": "markup",
   "pages": [
    "/bihar/method/"
@@ -27359,67 +27358,73 @@
    "/share/"
   ]
  },
- "Where the Andaman and Nicobar Islands figures come from, how they were checked, and what they cannot show.": {
+ "Where the Andaman and Nicobar Islands figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/andaman/method/"
   ]
  },
- "Where the Andhra Pradesh figures come from, how they were checked, and what they cannot show.": {
+ "Where the Andhra Pradesh figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/andhrapradesh/method/"
   ]
  },
- "Where the Arunachal Pradesh figures come from, how they were checked, and what they cannot show.": {
+ "Where the Arunachal Pradesh figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/arunachal/method/"
   ]
  },
- "Where the Assam figures come from, how they were checked, and what they cannot show.": {
+ "Where the Assam figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/assam/method/"
   ]
  },
- "Where the Chandigarh figures come from, how they were checked, and what they cannot show.": {
+ "Where the Bihar SIR figures come from, how the lists are counted, and the questions the analysis answers.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/"
+  ]
+ },
+ "Where the Chandigarh figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/chandigarh/method/"
   ]
  },
- "Where the Chhattisgarh figures come from, how they were checked, and what they cannot show.": {
+ "Where the Chhattisgarh figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/chhattisgarh/method/"
   ]
  },
- "Where the Dadra and Nagar Haveli and Daman and Diu figures come from, how they were checked, and what they cannot show.": {
+ "Where the Dadra and Nagar Haveli and Daman and Diu figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/dnhdd/method/"
   ]
  },
- "Where the Delhi figures come from, how they were checked, and what they cannot show.": {
+ "Where the Delhi figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/delhi/method/"
   ]
  },
- "Where the Goa figures come from, how they were checked, and what they cannot show.": {
+ "Where the Goa figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/goa/method/"
   ]
  },
- "Where the Gujarat figures come from, how the Chief Electoral Officer's tables were checked, and what they cannot show.": {
+ "Where the Gujarat figures come from, how the Chief Electoral Officer's tables add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/gujarat/method/"
   ]
  },
- "Where the Haryana figures come from, how they were checked, and what they cannot show.": {
+ "Where the Haryana figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/haryana/method/"
@@ -27431,13 +27436,13 @@
    "/hyderabad/method/"
   ]
  },
- "Where the Jharkhand figures come from, how they were checked, and what they cannot show.": {
+ "Where the Jharkhand figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/jharkhand/method/"
   ]
  },
- "Where the Karnataka figures come from, how they are checked, and what they cannot show.": {
+ "Where the Karnataka figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/karnataka/method/"
@@ -27449,61 +27454,61 @@
    "/kerala/method/"
   ]
  },
- "Where the Lakshadweep figures come from, how they were checked, and what they cannot show.": {
+ "Where the Lakshadweep figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/lakshadweep/method/"
   ]
  },
- "Where the Madhya Pradesh figures come from, how they were checked, and what they cannot show.": {
+ "Where the Madhya Pradesh figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/madhyapradesh/method/"
   ]
  },
- "Where the Maharashtra figures come from, how the district and constituency tables were checked, and what they cannot show.": {
+ "Where the Maharashtra figures come from, how the district and constituency tables add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/maharashtra/method/"
   ]
  },
- "Where the Manipur figures come from, how they were checked, and what they cannot show.": {
+ "Where the Manipur figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/manipur/method/"
   ]
  },
- "Where the Meghalaya figures come from, how they were checked, and what they cannot show.": {
+ "Where the Meghalaya figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/meghalaya/method/"
   ]
  },
- "Where the Mizoram figures come from, how they were checked, and what they cannot show.": {
+ "Where the Mizoram figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/mizoram/method/"
   ]
  },
- "Where the Nagaland figures come from, how they were checked, and what they cannot show.": {
+ "Where the Nagaland figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/nagaland/method/"
   ]
  },
- "Where the Odisha figures come from, how they were checked, and what they cannot show.": {
+ "Where the Odisha figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/odisha/method/"
   ]
  },
- "Where the Puducherry figures come from, how they were checked, and what they cannot show.": {
+ "Where the Puducherry figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/puducherry/method/"
   ]
  },
- "Where the Punjab figures come from, how they were checked, and what they cannot show.": {
+ "Where the Punjab figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/punjab/method/"
@@ -27515,7 +27520,7 @@
    "/rajasthan/method/"
   ]
  },
- "Where the Sikkim figures come from, how they were checked, and what they cannot show.": {
+ "Where the Sikkim figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/sikkim/method/"
@@ -27527,25 +27532,25 @@
    "/india/progress/"
   ]
  },
- "Where the Tamil Nadu figures come from, how they are joined, and what they cannot show.": {
+ "Where the Tamil Nadu figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/tamilnadu/method/"
   ]
  },
- "Where the Tripura figures come from, how they were checked, and what they cannot show.": {
+ "Where the Tripura figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/tripura/method/"
   ]
  },
- "Where the Uttar Pradesh figures come from, how the district table was checked, and what it cannot show.": {
+ "Where the Uttar Pradesh figures come from, how the district table adds up, and what it cannot show.": {
   "kind": "markup",
   "pages": [
    "/uttarpradesh/method/"
   ]
  },
- "Where the Uttarakhand figures come from, how they were checked, and what they cannot show.": {
+ "Where the Uttarakhand figures come from, how they add up, and what they cannot show.": {
   "kind": "markup",
   "pages": [
    "/uttarakhand/method/"
@@ -27999,19 +28004,19 @@
    "/hyderabad/"
   ]
  },
- "Winner, runner-up and margin for every seat are from the Election Commission's constituency result pages, checked against its state-wise pages. Falta's figures are from its re-poll. Turnout is votes over the roll at the nominations.": {
+ "Winner, runner-up and margin for every seat are from the Election Commission's constituency result pages. Falta's figures are from its re-poll. Turnout is votes over the roll at the nominations.": {
   "kind": "markup",
   "pages": [
    "/westbengal/method/"
   ]
  },
- "Winner, runner-up and margin for every seat are from the Election Commission's constituency result pages, checked against its state-wise pages. Turnout is the votes polled over the roll of 6 April 2026, the roll the election was held on, which the Chief Electoral Officer published by constituency and sex. It is larger than the final roll in every constituency, because names were added after the final roll.": {
+ "Winner, runner-up and margin for every seat are from the Election Commission's constituency result pages. Turnout is the votes polled over the roll of 6 April 2026, the roll the election was held on, which the Chief Electoral Officer published by constituency and sex. It is larger than the final roll in every constituency, because names were added after the final roll.": {
   "kind": "markup",
   "pages": [
    "/tamilnadu/method/"
   ]
  },
- "Winner, runner-up and margin for every seat are from the Election Commission's constituency result pages, checked against its state-wise pages. Turnout is votes over the roll of 23 March 2026.": {
+ "Winner, runner-up and margin for every seat are from the Election Commission's constituency result pages. Turnout is votes over the roll of 23 March 2026.": {
   "kind": "markup",
   "pages": [
    "/kerala/method/"
