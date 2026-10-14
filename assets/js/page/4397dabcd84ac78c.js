@@ -1,0 +1,126 @@
+Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharashtra/districts.json'), SIR.json('data/maharashtra/constituencies.json')]).then(function (r) {
+  var S = r[0], D = r[1], A = r[2], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
+  var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return SIR.lk(x, 1); };
+  var C = S.city, R = S.rest, nRest = S.districts - S.city_names.length;
+  var tok = function (d) { return d.city ? '--fill-red' : '--fill-navy'; };
+  var list = function (a) { return a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; };
+  var DL = function (iso) { var p = iso.split('-'); return +p[2] + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][+p[1] - 1] + ' ' + p[0]; };
+  var PARTY = { BJP: 'BJP', SHS: 'Shiv Sena', NCP: 'NCP', SHSUBT: 'Shiv Sena (UBT)', INC: 'Congress', NCPSP: 'NCP (SP)', SP: 'Samajwadi Party' };
+  var party = function (c) { return PARTY[c] || c; };
+
+  VIZ.waterfall('vWater', { label: 'Maharashtra: the roll before the revision and the draft roll of 31 August 2026', from: Math.floor(S.draft * 0.8 / 1e7) * 1e7, steps: [
+    { name: 'Roll before the revision', v: S.before, kind: 'total' }, { name: 'Left off the draft', v: S.left_off, kind: 'down' }, { name: 'Draft roll', v: S.draft, kind: 'total' }] });
+  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + cr(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors.</b> The roll before the revision held ' + cr(S.before) + ' names and the draft holds ' + cr(S.draft) + '. One crore is ten million.';
+
+  VIZ.lollipop('vDist', { label: 'Names left off the draft roll per 100 electors, every district', axis: 'Left off per 100 electors on the roll before the revision', ref: S.per_100,
+    rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: d1(d.per_100), tok: tok(d), hi: (d.city || d.per_100 > S.per_100) && innerWidth >= 600 }; }) });
+  var notCity = D.filter(function (d) { return !d.city; }), last = D[D.length - 1];
+  document.getElementById('fDist').innerHTML = '<b>' + D[0].district + ' left off ' + d1(D[0].per_100) + ' of every 100 electors, the highest rate of any district, ' + lk(D[0].left_off) + ' names in all.</b> ' + list(D.slice(1, 5).map(function (d) { return d.district; })) + ' come next. ' +
+    'Outside the five city districts the highest is ' + notCity[0].district + ', at ' + d1(notCity[0].per_100) + '. ' + S.above_state + ' of the ' + S.districts + ' districts left off more than the state\'s ' + d1(S.per_100) + ', and ' + S.under_15 + ' left off fewer than 15. ' + last.district + ' left off the fewest, ' + d1(last.per_100) + '.';
+
+  VIZ.strip('vAcs', { label: 'Names left off per 100 electors, every constituency by district', axis: 'Left off per 100 electors on the roll before the revision', r: 4,
+    key: [['Five city districts', '--fill-red'], ['Other districts', '--fill-navy']],
+    rows: D.map(function (d) { return { name: d.district, tok: tok(d),
+      points: A.filter(function (a) { return a.district === d.district; }).map(function (a) { return { v: a.per_100, label: a.name + ' (' + a.district + '): ' + d1(a.per_100) + ' per 100' }; }) }; }) });
+  var TA = S.top_acs;
+  document.getElementById('fAcs').innerHTML = '<b>' + TA[0].name + ' in ' + TA[0].district + ' lost ' + d1(TA[0].per_100) + ' of every 100 names, the most of the ' + S.acs_n + ' constituencies, and ' + S.ac_min + ' the fewest, ' + d1(S.ac_min_v) + '.</b> ' +
+    S.acs_over_30 + ' constituencies lost 30 or more of every 100 and ' + S.acs_under_10 + ' fewer than 10. After ' + TA[0].name + ' come ' + list(TA.slice(1, 5).map(function (a) { return a.name + ' (' + d1(a.per_100) + ')'; })) + '.';
+
+  var RS = [['shifted', 'Shifted for good'], ['absent', 'Untraceable or absent'], ['dead', 'Dead'], ['duplicate', 'Enrolled at another place'], ['other', 'Other']];
+  VIZ.lollipop('vReason', { label: 'Names left off the draft, by the reason entered, Maharashtra', axis: 'Names',
+    rows: RS.map(function (k) { return { name: k[1], v: S.reasons[k[0]], text: lk(S.reasons[k[0]]) + ' (' + SIR.pct(S.reason_shares[k[0]]) + ')', tok: '--fill-navy', hi: true }; }) });
+  document.getElementById('fReason').innerHTML = '<b>' + SIR.pct(S.reason_shares.shifted) + ' of the names left off were entered as shifted for good and ' + SIR.pct(S.reason_shares.absent) + ' as untraceable or absent, ' + SIR.pct(S.reason_shares.shifted + S.reason_shares.absent) + ' together.</b> ' +
+    SIR.pct(S.reason_shares.dead) + ' were entered as dead, ' + SIR.pct(S.reason_shares.duplicate) + ' as enrolled at another place and ' + SIR.pct(S.reason_shares.other) + ' under another reason. The five add up to the ' + cr(S.left_off) + ' left off exactly. A reason is what the officer wrote down, and nobody checked it.';
+  VIZ.scatter('vReasonAc', { label: 'Names left off per 100 against the share entered as shifted or absent, every constituency', xMin: 0,
+    xAxis: 'Left off per 100 on the roll before', yAxis: 'Share entered as shifted or absent, %',
+    points: A.map(function (a) { return { x: a.per_100, y: a.shifted_absent_pct, tok: a.city ? '--fill-red' : '--fill-navy', label: a.name + ': ' + d1(a.per_100) + ' per 100, ' + SIR.pct(a.shifted_absent_pct) + ' shifted or absent' }; }) });
+  var hiA = A.filter(function (a) { return a.per_100 >= 30; }), loA = A.filter(function (a) { return a.per_100 < 10; });
+  var sa = function (L) { return 100 * L.reduce(function (t, a) { return t + a.shifted + a.absent; }, 0) / L.reduce(function (t, a) { return t + a.left_off; }, 0); };
+  var dd = function (L) { return 100 * L.reduce(function (t, a) { return t + a.dead; }, 0) / L.reduce(function (t, a) { return t + a.left_off; }, 0); };
+  document.getElementById('fReasonAc').innerHTML = '<b>Where more names were left off, more of them were entered as shifted or absent.</b> In the ' + hiA.length + ' constituencies that lost 30 or more of every 100, ' + SIR.pct(sa(hiA)) + ' of the names left off were shifted or absent and ' + SIR.pct(dd(hiA)) + ' dead. In the ' + loA.length + ' that lost fewer than 10, it was ' + SIR.pct(sa(loA)) + ' and ' + SIR.pct(dd(loA)) + '. Red dots are constituencies in the five city districts. The entries cannot tell an elector who moved from one who was out when the officer called.';
+
+  var tiles = [[SIR.pct(C.share_of_roll), 'of the state\'s roll before the revision', C.share_of_roll],
+    [SIR.pct(C.share_of_left_off), 'of the names left off', C.share_of_left_off],
+    [d1(C.per_100), 'left off per 100 electors, against ' + d1(R.per_100) + ' in the other ' + nRest + ' districts', C.per_100]];
+  document.getElementById('cCity').innerHTML = tiles.map(function (t) {
+    return '<div class="big"><b>' + t[0] + '</b><i style="--w:' + t[2].toFixed(1) + '%"></i><span>' + t[1] + '</span></div>';
+  }).join('');
+  var city = D.filter(function (d) { return d.city; }).sort(function (a, b) { return b.left_off - a.left_off; });
+  VIZ.dots('vCity', { label: 'Each city district\'s share of the state\'s roll before the revision and of the names left off', axis: 'Share of the state, %', cats: city.map(function (d) { return d.district; }),
+    series: [{ name: 'Share of the roll before', col: '--fill-navy', vals: city.map(function (d) { return 100 * d.before / S.before; }) },
+      { name: 'Share of the names left off', col: '--fill-red', vals: city.map(function (d) { return 100 * d.left_off / S.left_off; }) }] });
+  var lt = city.filter(function (d) { return d.left_off / S.left_off > d.before / S.before; });
+  document.getElementById('fCity').innerHTML = '<b>The five districts hold ' + SIR.pct(C.share_of_roll) + ' of Maharashtra\'s roll and ' + SIR.pct(C.share_of_left_off) + ' of the names left off, ' + cr(C.left_off) + ' names in all.</b> They lost ' + d1(C.per_100) + ' of every 100 electors, against ' + d1(R.per_100) + ' in the other ' + nRest + ' districts. ' +
+    (lt.length === city.length ? 'Each of the five lost a larger share of the names than its share of the roll. ' : lt.length + ' of the five lost a larger share of the names than its share of the roll. ') +
+    city[0].district + ' and ' + city[1].district + ' together account for ' + SIR.pct(100 * (city[0].left_off + city[1].left_off) / S.left_off) + ' of every name left off in the state.';
+
+  var dev = function (d) { return +(d.women_draft_pct - S.women_draft_pct).toFixed(2); };
+  VIZ.strip('vWomen', { label: 'Women\'s share of each district\'s draft roll, above or below the state\'s share', axis: 'Points above or below the state\'s ' + SIR.pct(S.women_draft_pct), r: 4.5, step: 1,
+    key: [['Five city districts', '--fill-red'], ['Other districts', '--fill-navy']],
+    rows: [[true, 'Five city districts', '--fill-red'], [false, 'Other ' + nRest + ' districts', '--fill-navy']].map(function (g) {
+      return { name: g[1], tok: g[2], points: D.filter(function (d) { return d.city === g[0]; }).map(function (d) { return { v: dev(d), label: d.district + ': women ' + SIR.pct(d.women_draft_pct) + ' of the draft' }; }) }; }) });
+  document.getElementById('fWomen').innerHTML = '<b>Women are ' + SIR.pct(S.women_draft_pct) + ' of Maharashtra\'s draft roll, ' + n(S.draft_women) + ' women against ' + n(S.draft_men) + ' men and ' + n(S.draft_third) + ' third-gender electors.</b> ' +
+    'Their share runs from ' + SIR.pct(S.women_low.pct) + ' in ' + S.women_low.district + ' to ' + SIR.pct(S.women_high.pct) + ' in ' + S.women_high.district + '. In the five city districts it is ' + SIR.pct(C.women_draft_pct) + ' and in the rest ' + SIR.pct(R.women_draft_pct) + '. ' +
+    'Without the roll before the revision by sex, these shares cannot show whether women were left off more often than men.';
+
+  var DN = D.slice().sort(function (a, b) { return b.notices_per_100 - a.notices_per_100; });
+  VIZ.lollipop('vNotice', { label: 'Notices per 100 electors on the draft roll, every district', axis: 'Notices per 100 on the draft roll', ref: S.notices_per_100,
+    rows: DN.map(function (d) { return { name: d.district, v: d.notices_per_100, text: d1(d.notices_per_100), tok: tok(d), hi: innerWidth >= 600 }; }) });
+  document.getElementById('fNotice').innerHTML = '<b>' + cr(S.notices) + ' electors still on the draft roll were in line for a notice, ' + d1(S.notices_per_100) + ' of every 100.</b> ' +
+    lk(S.no_mapping) + ' could not be linked to the last intensive revision and ' + lk(S.discrepancy) + ' had an anomaly in their entry. ' + DN[0].district + ' had the most for its size, ' + d1(DN[0].notices_per_100) + ' of every 100 on its draft, and ' + DN[DN.length - 1].district + ' the fewest, ' + d1(DN[DN.length - 1].notices_per_100) + '. ' +
+    'Districts that left off more names also sent more notices (rank correlation ' + SIR.d(S.rho_notices_left, 2) + '). How many names have been deleted after a hearing has not been published. The counts are from the CEO\'s release of 4 September 2026.';
+
+  VIZ.scatter('vMargin', { label: 'Names left off each constituency\'s draft against its 2024 winning margin', diag: true, xMin: 0,
+    xAxis: '2024 winning margin', yAxis: 'Names left off the draft', diagLabel: 'left off = margin',
+    points: A.map(function (a) { return { x: a.margin, y: a.left_off, tok: a.city ? '--fill-red' : '--fill-navy', label: a.name + ' (' + party(a.winner_party) + '): left off ' + n(a.left_off) + ', margin ' + n(a.margin) }; }) });
+  var W = {}; S.winners.forEach(function (w) { W[w.party] = w; });
+  var wl = ['BJP', 'SHS', 'NCP', 'SHSUBT', 'INC', 'NCPSP'].filter(function (p) { return W[p]; });
+  document.getElementById('fMargin').innerHTML = '<b>In ' + S.over_margin + ' of the 288 constituencies more names were left off the draft than the 2024 winner\'s margin.</b> Not everyone on a roll votes, so scaled down by each seat\'s 2024 turnout it is ' + S.turnout_over_margin + '. ' +
+    'By the party that won the seat in 2024, the names left off per 100 were ' + wl.map(function (p) { return d1(W[p].per_100) + ' in the ' + party(p) + '\'s ' + W[p].seats; }).join(', ').replace(/, ([^,]*)$/, ' and $1') + '. Set against each seat\'s own district, the six parties run from ' + d1(Math.min.apply(null, wl.map(function (p) { return W[p].vs_district; }))) + ' to ' + d1(Math.max.apply(null, wl.map(function (p) { return W[p].vs_district; }))) + ' points, so most of the difference comes from where each party\'s seats are. Red dots are constituencies in the five city districts.';
+
+  document.getElementById('fAfter').innerHTML = '<b>The final roll is due on ' + DL(S.final_due) + ' and is not out yet.</b> ' +
+    'After the draft, an elector asks to be added with Form 6, and an objection to a name already on the roll is made with Form 7. The press note set ' + DL(S.claims_to_note) + ' as the last day for claims and objections and ' + DL(S.final_due_note) + ' for the final roll. The Commission has since moved them to ' + DL(S.claims_to) + ' and ' + DL(S.final_due) + ', with notices heard until ' + DL(S.notices_to) + '. ' +
+    'Until the final roll is out, nobody can say how many of the names left off will be put back.';
+
+  var T38 = S.top38;
+  document.getElementById('t38sub').innerHTML = 'On ' + DL(T38.file_date) + ' the CEO published a list of 38 constituencies with a high share of forms not collected. Its title reads, in full, "' + SIR.esc(T38.title) + '". The CEO chose the seats in answer to a newspaper\'s report. Every figure in it agrees with the CEO\'s statement for all 288 constituencies, which this page uses everywhere else, and it is kept here as printed. <a href="' + T38.url + '">The CEO\'s list</a>.';
+  SIR.table(document.getElementById('t38'), [
+    { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', bottom: true }, { k: 'district', label: 'District' },
+    { k: 'electors', label: 'Total electors', fmt: n }, { k: 'uncollected', label: 'Forms not collected', fmt: n }, { k: 'pct', label: 'Per 100', fmt: d1 }
+  ], T38.rows, { sort: 'pct' });
+
+  SIR.table(document.getElementById('tDist'), [
+    { k: 'district', label: 'District', bottom: true }, { k: 'before', label: 'Roll before', fmt: n }, { k: 'draft', label: 'Draft roll', fmt: n },
+    { k: 'left_off', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 }, { k: 'shifted_absent_pct', label: 'Shifted or absent %', fmt: d1 },
+    { k: 'notices_per_100', label: 'Notices per 100', fmt: d1 }, { k: 'women_draft_pct', label: 'Women % of draft', fmt: d1 }
+  ], D, { sort: 'per_100' });
+  SIR.table(document.getElementById('tAc'), [
+    { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', bottom: true }, { k: 'district', label: 'District' },
+    { k: 'before', label: 'Roll before', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 },
+    { k: 'shifted_absent_pct', label: 'Shifted or absent %', fmt: d1 }, { k: 'pw', label: 'Won 2024' }, { k: 'margin', label: 'Margin 2024', fmt: n }
+  ], A.map(function (a) { var o = Object.assign({}, a); o.pw = party(a.winner_party); return o; }), { sort: 'per_100' });
+
+  var seatsOf = function (d) { return A.filter(function (a) { return a.district === d.district; }); };
+  var DSET = { rows: D, key: function (d) { return SIR.slug(d.district); }, label: function (d) { return d.district + ' district' + (d.now ? ', now ' + d.now : ''); },
+    card: function (d) { return SIR.facts([['Roll before the revision', n(d.before)], ['Draft roll', n(d.draft)], ['Left off', n(d.left_off)], ['Per 100 electors', d1(d.per_100)],
+      ['Shifted or absent', SIR.pct(d.shifted_absent_pct)], ['Notices', n(d.notices) + ' (' + d1(d.notices_per_100) + ' per 100)'], ['Women in the draft roll', SIR.pct(d.women_draft_pct)]]) + '<p class="note">Its constituencies</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
+    pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); },
+    share: function (d) { return d.district + ' district, Maharashtra. The SIR draft roll of 31 August 2026 left off ' + n(d.left_off) + ' names, ' + d1(d.per_100) + ' of every 100 electors on the roll before the revision, ' + SIR.pct(d.shifted_absent_pct) + ' of them entered as shifted or absent. These are the Chief Electoral Officer\'s counts. A reason is what the officer wrote down, and nobody checked it.'; } };
+  var F = SIR.finder('finder', { seatPages: true, districtPages: true, rows: A, more: [DSET], pick: function (a) { var b = document.getElementById('vMap'); if (b.__select) b.__select(a.ac); },
+    prompt: 'Find a constituency or district', placeholder: 'Type a name, a number or a district', key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
+    card: function (a) { return SIR.facts([['Roll before the revision', n(a.before)], ['Draft roll', n(a.draft)], ['Left off', n(a.left_off)], ['Per 100 electors', d1(a.per_100)],
+      ['Shifted or absent', SIR.pct(a.shifted_absent_pct)], ['Dead', SIR.pct(a.dead_pct)], ['Won in 2024', party(a.winner_party) + ' · margin ' + n(a.margin)]]); },
+    share: function (a) { return a.name + ', Maharashtra. The SIR draft roll of 31 August 2026 left off ' + n(a.left_off) + ' names, ' + d1(a.per_100) + ' of every 100 electors on the roll before the revision. The seat was won in 2024 by ' + n(a.margin) + ' votes. These are the Chief Electoral Officer\'s counts. A reason is what the officer wrote down, and nobody checked it.'; } });
+  SIR.json('data/geo/maharashtra_ac.json').then(function (geo) {
+    var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });
+    VIZ.map('vMap', { geo: geo, label: 'Map of names left off the draft per 100 electors, by constituency', title: 'Left off per 100 electors',
+      v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
+      // on a phone the state fills the frame and an inset would cover the
+      // south-east, so Mumbai is enlarged on wider screens only
+      inset: innerWidth < 600 ? null : { name: 'Mumbai', acs: A.filter(function (a) { return /^Mumbai/.test(a.district); }).map(function (a) { return a.ac; }), bottom: true },
+      pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });
+    var it = F.item[SIR.hashId()]; if (it && it.s.pick) it.s.pick(it.r);
+    SIR.tools();
+  });
+  SIR.showFaq('mh', 'main');
+}).catch(SIR.fail);
