@@ -264,9 +264,15 @@ read, ten years of school, married before 18, clean cooking fuel, sanitation,
 deaths registered, sex ratio) are NFHS-5 2019-21, read from the district
 pages of each state's IIPS compendium into `data/india/raw/nfhs5_districts.csv`
 with file and page (see `FACTORS_SOURCES.md`; the PDFs came from OpenCity's
-copies because rchiips.org fails TLS here, and are not committed). Twelve
+copies because rchiips.org fails TLS here, and are not committed). Nineteen
 states: Bihar, Gujarat, Karnataka, Kerala, Maharashtra, Telangana, West
-Bengal, Tamil Nadu, Uttar Pradesh, Rajasthan, Uttarakhand, Delhi. The build
+Bengal, Tamil Nadu, Uttar Pradesh, Rajasthan, Uttarakhand, Delhi, and since
+14 October 2026 Andhra Pradesh, Assam, Chhattisgarh, Manipur, Meghalaya,
+Mizoram and Odisha (Andhra Pradesh and Chhattisgarh from the Internet
+Archive's copies of the Institute's files; their district matches are in
+`raw/nfhs5_alias/`, each row with its parents and source; Chhattisgarh and
+Mizoram are measured by the rise after the draft, so their signs run the
+other way; `SHARED` in `build_cities.py` gives these seven their rows). The build
 fails unless Bihar's values agree with Bihar's own reading of the same
 compendium. Rates come from `build_cities.rows()`, except Rajasthan (fall in
 the roll 2023 to 2026), Uttarakhand (names left off, from the CEO's table of
