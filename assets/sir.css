@@ -1219,4 +1219,15 @@ html.dyslexic-font .pull .pq .tr{font-style:normal}
 /* printing a page (and the PDF reports made from the pages): no buttons,
    no search box, no floating buttons, nothing a reader cannot press on paper */
 @media print{.tools,.finder,.fabs,.anchor,.tour,.toc,#tally{display:none!important}.vizbox,.panel{break-inside:avoid}}
-h1,h2{overflow-wrap:break-word;hyphens:auto}
+/* headings wrap between words and never hyphenate: automatic hyphenation
+   split "every" as "ev-ery" in the front page's headline on a phone. A word
+   too long for the line still breaks, without a hyphen */
+h1,h2{overflow-wrap:break-word;hyphens:manual}
+/* Start Here on a phone: thirteen links in one column ran past the screen,
+   so they sit two to a row as compact tiles, and About This Site keeps its
+   own row under the rule */
+@media (max-width:700px){
+  .start .menu .ql{display:grid;grid-template-columns:1fr 1fr;gap:.3rem}
+  .start .menu .ql a{padding:.5rem .6rem;font-size:.84rem;line-height:1.25;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;min-height:2.75rem}
+  .start .menu .about a{padding:.5rem .6rem;font-size:.84rem}
+}
