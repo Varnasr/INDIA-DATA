@@ -497,7 +497,7 @@ function hyderabad() {
   const byAge = A.map((a) => a.age_rate), a80 = byAge.map((r) => r[r.length - 1]), a18 = byAge.map((r) => r[0]);
   const RN = { 'Permanently Shifted': 'Permanently shifted', 'Untraceable/Absent': 'Untraceable or absent', 'Death': 'Dead', 'Already enrolled': 'Enrolled elsewhere' };
 
-  cover(pres, K, P, 'Special Intensive Revision · Hyderabad Old City 2026', 'The 2026 revision struck ' + lakh(t.deleted) + ' electors off five Old City rolls',
+  cover(pres, K, P, 'Special Intensive Revision · Hyderabad Old City 2026', 'The 2026 revision left ' + lakh(t.deleted) + ' electors in five Old City seats off the draft roll',
     'Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, polling part by polling part',
     [[indian(t.deleted), 'electors on the rolls before the revision left off the draft'], [pct(t.rate), 'of every elector on those rolls'], [pct(100 * t.deleted / valid), 'of the valid votes cast in 2023'], [indian(t.hearing), 'kept but summoned to a hearing']])
     .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll. The lists cover every elector on the rolls of the five constituencies before the revision, so each group has a true exclusion rate, the share of its own members left off. These are the September 2026 lists. The final roll is due on 9 November, so names put back after hearings are not in them.');

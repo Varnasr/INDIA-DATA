@@ -1,11 +1,11 @@
-<!--page {"title": "Comparisons, All India", "description": "Seats reserved for Scheduled Castes and Scheduled Tribes against general seats, how much of each state's draft cut the final roll made up, and the Government of India's border districts against the rest of their state.", "place": "india"} -->
+<!--page {"title": "Comparisons, All India", "description": "Seats reserved for Scheduled Castes and Scheduled Tribes against general seats, how much of the names left off each state's draft the final roll made up, and the Government of India's border districts against the rest of their state.", "place": "india"} -->
 <main id="main">
 <div class="page-head" data-no-i18n><h1>Comparisons</h1><ol class="summary" id="short"></ol></div>
 <p class="report-lang">This page is in English only. Every figure on it comes from the state pages and the All India table, which link each figure to its source.</p>
 
 <article class="compare" lang="en" dir="ltr" data-no-i18n>
   <h2>Seats reserved for Scheduled Castes and Scheduled Tribes</h2>
-  <p class="sub">Every assembly seat is either general or reserved for a Scheduled Caste or Scheduled Tribe candidate, under the Delimitation Order of 2008. This section compares the two kinds of seat in the six states that published their figures by constituency. A seat is reserved because more of its people belong to that group than elsewhere in the state, but most of its electors usually do not belong to it. So the comparison says how hard the revision fell on the places, and nothing about which electors in them were removed.</p>
+  <p class="sub">Every assembly seat is either general or reserved for a Scheduled Caste or Scheduled Tribe candidate, under the Delimitation Order of 2008. This section compares the two kinds of seat in the six states that published their figures by constituency. A seat is reserved because more of its people belong to that group than elsewhere in the state, but most of its electors usually do not belong to it. So the comparison says how hard the revision fell on the places, and nothing about which electors in them were left off or deleted.</p>
   <div class="grid">
     <div class="panel wide" id="pRes">
       <h3>General, SC and ST seats, names lost per 100 electors in each state's own measure</h3>
@@ -121,7 +121,7 @@ Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.j
   VIZ.rank('vBorder', { label: 'The border districts\' rate against the rest of the state', axis: 'Per cent higher or lower than the rest of the state', fmt: function (v) { return (v > 0 ? '+' : '') + SIR.d(v, 1) + '%'; },
     rows: bs.slice().sort(function (a, b) { return b.ratio - a.ratio; }).map(function (s) { return { name: s.state, v: pct(s.border.rate, s.interior.rate), col: s.ratio > 1 ? '--fill-red' : '--fill-grey' }; }) });
   var wb = bs.filter(function (s) { return s.state === 'West Bengal'; })[0];
-  document.getElementById('nBorder').innerHTML = 'Each state is measured as its own page measures it. Uttar Pradesh, Gujarat and Uttarakhand by the names left off, Bihar by the names removed in both phases, and West Bengal by the fall in the roll. The large cities lost the most names and none of them is on the border. Leave Kolkata out and West Bengal\'s border districts fell by ' + p1(wb.border.rate) + ' per 100, against ' + p1(wb.interior_without_city.rate) + ' in the rest of the state.';
+  document.getElementById('nBorder').innerHTML = 'Each state is measured as its own page measures it. Uttar Pradesh, Gujarat and Uttarakhand by the names left off, Bihar by the names left off or deleted in both phases, and West Bengal by the fall in the roll. The large cities lost the most names and none of them is on the border. Leave Kolkata out and West Bengal\'s border districts fell by ' + p1(wb.border.rate) + ' per 100, against ' + p1(wb.interior_without_city.rate) + ' in the rest of the state.';
   VIZ.strip('vBorderD', { label: 'Each border district against the rest of its state', axis: 'Per cent higher or lower than the rest of the state', step: 20,
     rows: bs.map(function (s) { return { name: s.state, points: s.districts.map(function (x) { var v = pct(x.rate, s.interior.rate); return { v: v, tok: v > 0 ? '--fill-red' : '--fill-grey', label: x.district + ', ' + s.state + ': ' + (v > 0 ? '+' : '') + SIR.d(v, 0) + '%' }; }) }; }) });
   document.getElementById('nBorderD').textContent = 'Each dot is one border district. The number that lost more than the rest of their state was ' + list(bs.map(function (s) { return s.above + ' of ' + s.districts.length + ' in ' + s.state; })) + '.';
@@ -142,7 +142,7 @@ Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.j
     'Part of the gap comes from where the seats are. Against the general seats of their own district, SC seats were lower on average in ' + dist('SC') + ' of ' + distN('SC') + ' states, by a smaller margin.',
     pooled + ' By state the share runs from ' + SIR.pct(fin[0].made_up_pct) + ' in ' + fin[0].state + ' to below zero in ' + neg.length + ', where the roll shrank again.',
     'On the Government of India\'s own list of border districts, the border lost more names than the rest of its state in ' + list(up.map(function (s) { return s.state; })) + ', about the same in ' + list(even.map(function (s) { return s.state; })) + ' and fewer in ' + list(down.map(function (s) { return s.state; })) + '.'
-  ], 'A reserved seat describes a place, and says nothing about which electors were removed from it. The rise to the final roll includes new voters, so the share made up is a ceiling. A border district\'s rate says nothing about any elector\'s citizenship.');
+  ], 'A reserved seat describes a place, and says nothing about which electors there were left off or deleted. The rise to the final roll includes new voters, so the share made up is a ceiling. A border district\'s rate says nothing about any elector\'s citizenship.');
   SIR.showFaq('india', 'compare');
 }).catch(SIR.fail);
 </script>

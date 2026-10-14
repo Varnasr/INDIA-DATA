@@ -71,8 +71,8 @@ def build():
         dist.append(dict(state='Uttarakhand', district=r['district'], share_roll=r['women_draft_pct'], share=r['women_objections_pct']))
     for d in dist:
         d['gap'] = r1(d['share'] - d['share_roll'])
-    MEASURE = {'Bihar': 'names removed in both phases', 'West Bengal': 'fall in the roll, 2024 roll to the 2026 election roll',
-               'Kerala': 'fall in the roll, January 2025 roll to the draft', 'Uttarakhand': 'names removed after the draft'}
+    MEASURE = {'Bihar': 'names left off or deleted in both phases', 'West Bengal': 'fall in the roll, 2024 roll to the 2026 election roll',
+               'Kerala': 'fall in the roll, January 2025 roll to the draft', 'Uttarakhand': 'names deleted after the draft'}
     districts = []
     for st, m in MEASURE.items():
         rs = [d for d in dist if d['state'] == st]

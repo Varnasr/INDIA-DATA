@@ -61,7 +61,7 @@ def rows(state):
 
 STATES = [('Uttar Pradesh', 'names left off per 100 on the roll before', 100, 'uttarpradesh/'),
           ('Gujarat', 'names left off per 100 on the roll before', 100, 'gujarat/'),
-          ('Bihar', 'names removed in both phases per 100 on the 2025 roll', 100, 'bihar/border/'),
+          ('Bihar', 'names left off or deleted in both phases per 100 on the 2025 roll', 100, 'bihar/border/'),
           ('West Bengal', 'fall in the roll per 100, 2024 roll to the draft', 100, 'westbengal/'),
           ('Uttarakhand', 'names left off per 100 on the roll before', 100, 'uttarakhand/')]
 

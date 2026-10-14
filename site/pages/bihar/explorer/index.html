@@ -1,11 +1,11 @@
-<!--page {"title": "Explorer, Bihar 2025", "description": "Every name Bihar's Special Intensive Revision struck off the roll, counted down to the polling booth and set against the margin by which each seat was won. Only totals are shown, never names.", "place": "bihar"} -->
+<!--page {"title": "Explorer, Bihar 2025", "description": "Every name Bihar's Special Intensive Revision left off the draft or deleted after it, counted down to the polling booth and set against the margin by which each seat was won. Only totals are shown, never names.", "place": "bihar"} -->
 <div class="xhead-wrap"><div class="page-head xhead"><h1>Explorer</h1><ol class="summary" id="short"></ol></div>
 </div>
 <div class="xp">
 <aside aria-label="Constituencies">
   <input id="q" type="search" placeholder="Search constituency or district" aria-label="Search constituencies">
-  <div class="legend"><span>Removed per 100 electors:</span><i style="background:#c9d6e3"></i>under 7<i style="background:#7fa1c0"></i>7 to 10<i style="background:#c0504d"></i>10 to 13<i style="background:#7a1f1c"></i>13 and over</div>
-  <div class="xstrip" id="strip" role="group" aria-label="Constituencies by removals per 100 electors"></div>
+  <div class="legend"><span>Left off or deleted per 100 electors:</span><i style="background:#c9d6e3"></i>under 7<i style="background:#7fa1c0"></i>7 to 10<i style="background:#c0504d"></i>10 to 13<i style="background:#7a1f1c"></i>13 and over</div>
+  <div class="xstrip" id="strip" role="group" aria-label="Constituencies by names left off or deleted per 100 electors"></div>
   <ul class="xlist" id="list"></ul>
 </aside>
 <main id="main">
@@ -14,17 +14,17 @@
   <h2 id="title"></h2>
   <p class="sub" id="sub"></p>
   <div class="fate" id="fate" role="img"></div>
-  <div class="fatekey"><span><i style="background:var(--fill-red)"></i>Removed in phase 1</span><span><i style="background:#7a1f1c"></i>Removed in phase 2</span><span><i style="background:var(--fill-navy)"></i>On the 2025 roll</span></div>
+  <div class="fatekey"><span><i style="background:var(--fill-red)"></i>Left off the draft (phase 1)</span><span><i style="background:#7a1f1c"></i>Deleted after the draft (phase 2)</span><span><i style="background:var(--fill-navy)"></i>On the 2025 roll</span></div>
   <div class="kpis" id="kpis"></div>
   <div id="claimsWrap"><h2 style="font-size:22px">What the lists show</h2><ul class="claims" id="claims"></ul></div>
   <div class="grid">
     <div class="panel"><h3>How many names each booth lost</h3><p id="p1p"></p><div class="chart"><canvas id="c1" aria-label="Booths by the number of names they lost"></canvas></div></div>
-    <div class="panel"><h3 id="p2t"></h3><p id="p2p"></p><div class="chart"><canvas id="c2" aria-label="Names removed against winning margins"></canvas></div></div>
-    <div class="panel"><h3>Who was removed</h3><p>Women's share of the removed, and the religion the booth lists guess from each name. A name left unclassified could belong to either group.</p><div class="chart"><canvas id="c3" aria-label="Share of removals by sex and name-classified religion"></canvas></div></div>
-    <div class="panel"><h3 id="p4t"></h3><p id="p4p"></p><div class="chart"><canvas id="c4" aria-label="Distribution of removals"></canvas></div></div>
+    <div class="panel"><h3 id="p2t"></h3><p id="p2p"></p><div class="chart"><canvas id="c2" aria-label="Names left off or deleted against winning margins"></canvas></div></div>
+    <div class="panel"><h3 id="who-was-removed">Who was left off or deleted</h3><p>Women's share of the names left off or deleted, and the religion the booth lists guess from each name left off the draft. A name left unclassified could belong to either group.</p><div class="chart"><canvas id="c3" aria-label="Share of names left off or deleted by sex, and of names left off the draft by name-classified religion"></canvas></div></div>
+    <div class="panel"><h3 id="p4t"></h3><p id="p4p"></p><div class="chart"><canvas id="c4" aria-label="Distribution of names left off or deleted"></canvas></div></div>
     <div class="panel wide"><h3 id="tblTitle"></h3><p>Click a column to sort, a row to open it.</p><div class="twrap" tabindex="0" role="region" aria-labelledby="tblTitle"><table id="tbl"></table></div></div>
   </div>
-  <p class="note">Removals come from the deletion lists of the Special Intensive Revision (SIR), published by the Chief Electoral Officer, Bihar. Phase 1 was published with the draft roll of 1 August 2025, and phase 2 before the final roll. Booth figures cover phase 1 only, because only phase 1 was listed by booth. Constituency figures include both phases. Removals per 100 electors are the names removed divided by the constituency's electors on the 2025 roll. A winning margin is the winner's votes less the runner-up's, from the declared 2025 Assembly results. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA is the RJD, INC, the Left parties, VIP and IIP. Only totals are published, never names or EPIC numbers. <a href="../faq/">FAQ</a> · <a href="../method/">Method</a>.</p>
+  <p class="note">The figures come from the lists of the Special Intensive Revision (SIR) published by the Chief Electoral Officer, Bihar. The phase 1 lists, of names left off the draft, were published with the draft roll of 1 August 2025, and the phase 2 lists, of names deleted after the draft, before the final roll. Booth figures cover phase 1 only, because only phase 1 was listed by booth. Constituency figures include both phases. The rate per 100 electors is the names left off or deleted divided by the constituency's electors on the 2025 roll. A winning margin is the winner's votes less the runner-up's, from the declared 2025 Assembly results. The NDA here is the BJP, JD(U), LJP(RV), HAM(S) and RLM, and INDIA is the RJD, INC, the Left parties, VIP and IIP. Only totals are published, never names or EPIC numbers. <a href="../faq/">FAQ</a> · <a href="../method/">Method</a>.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 </main>
@@ -56,7 +56,7 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     var tot = p1 + p2 + roll, parts = [[p1, 'var(--fill-red)', '#ffffff', 'Phase 1'], [p2, '#7a1f1c', '#ffffff', 'Phase 2'], [roll, 'var(--fill-navy)', '#ffffff', 'On the roll']];
     var el = document.getElementById('fate');
     el.innerHTML = parts.map(function (p) { var w = 100 * p[0] / tot; return w > 0 ? '<div style="width:' + w + '%;background:' + p[1] + ';color:' + p[2] + '">' + (w > 14 ? SIR.n(p[0]) + ' (' + SIR.d(w, 1) + '%)' : w > 4 ? SIR.d(w, 1) + '%' : '') + '</div>' : ''; }).join('');
-    el.setAttribute('aria-label', L('Removed in phase 1 {p1}, removed in phase 2 {p2}, on the 2025 roll {roll}', { p1: SIR.n(p1), p2: SIR.n(p2), roll: SIR.n(roll) }));
+    el.setAttribute('aria-label', L('Left off the draft in phase 1 {p1}, deleted after the draft in phase 2 {p2}, on the 2025 roll {roll}', { p1: SIR.n(p1), p2: SIR.n(p2), roll: SIR.n(roll) }));
   }
   function kpis(k) { document.getElementById('kpis').innerHTML = k.map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join(''); }
   function select(ac) {
@@ -64,8 +64,8 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     list.querySelectorAll('button').forEach(function (b) { b.classList.toggle('sel', +b.getAttribute('data-ac') === ac); });
   }
   function who(fem, rel) {
-    SIR.redraw('c3', { type: 'bar', data: { labels: [L('Women'), L('Hindu names'), L('Muslim names'), L('Unclassified')], datasets: [{ label: L('% of removed'), data: [fem, rel.hin, rel.lo, rel.unk], $tokens: ['--female', '--fill-amber', '--fill-india', '--fill-grey'] }] },
-      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, max: 100, title: { display: true, text: L('% of those removed') } } } } });
+    SIR.redraw('c3', { type: 'bar', data: { labels: [L('Women'), L('Hindu names'), L('Muslim names'), L('Unclassified')], datasets: [{ label: L('Share (%)'), data: [fem, rel.hin, rel.lo, rel.unk], $tokens: ['--female', '--fill-amber', '--fill-india', '--fill-grey'] }] },
+      options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, max: 100, title: { display: true, text: L('% of the names counted') } } } } });
   }
 
   // ------------------------------------------------------- all Bihar
@@ -78,10 +78,10 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
   var gap = dz.map(function (d) { return d.female_share_deleted - d.female_share_roll; });
   var b200 = SIR.sum(acs, 'booths_200'), I = s.intensity, b400 = I.bins[I.bins.length - 1].booths;
   var claims = [
-    [SIR.lakh(t.total), L('names removed from Bihar\'s roll: {p1} before the draft roll of 1 August 2025 and {p2} more before the final roll. That is {rate} for every 100 electors on the 2025 roll, and as many as {max} in a single constituency.', { p1: SIR.n(t.p1), p2: SIR.n(t.p2), rate: SIR.d(100 * t.total / t.electorate_2025, 2), max: SIR.d(Math.max.apply(null, acs.map(function (a) { return a.per_100; })), 1) })],
+    [SIR.lakh(t.total), L('names left off Bihar\'s draft roll of 1 August 2025 or deleted after it: {p1} left off the draft and {p2} more deleted before the final roll. That is {rate} for every 100 electors on the 2025 roll, and as many as {max} in a single constituency.', { p1: SIR.n(t.p1), p2: SIR.n(t.p2), rate: SIR.d(100 * t.total / t.electorate_2025, 2), max: SIR.d(Math.max.apply(null, acs.map(function (a) { return a.per_100; })), 1) })],
     [L('{a} of {b}', { a: overAll.length, b: withM.length }), L('constituencies lost more names in the revision than the margin by which they were won in 2025. That includes {a} of the {b} seats the NDA won.', { a: ndaOver.length, b: nda.length })],
-    [L('{a} of {b}', { a: tookOver.length, b: took.length }), L('seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA\'s winning margin. In the middle seat of that group, the removals were {x} times the margin.', { x: SIR.d(tookMed, 1) })],
-    [SIR.pct(100 * t.female / (t.female + t.male)), L('of those removed were women, against {roll}% of the roll before the revision. Women\'s share of the removed exceeds their share of the roll in {a} of {b} districts, by up to {gap} points.', { roll: SIR.d(t.female_share_roll, 1), a: fOver.length, b: dz.length, gap: SIR.d(Math.max.apply(null, gap), 1) })],
+    [L('{a} of {b}', { a: tookOver.length, b: took.length }), L('seats that INDIA held in 2020 and the NDA won in 2025 lost more names than the NDA\'s winning margin. In the middle seat of that group, the names left off or deleted were {x} times the margin.', { x: SIR.d(tookMed, 1) })],
+    [SIR.pct(100 * t.female / (t.female + t.male)), L('of those left off or deleted were women, against {roll}% of the roll before the revision. Women\'s share of those names exceeds their share of the roll in {a} of {b} districts, by up to {gap} points.', { roll: SIR.d(t.female_share_roll, 1), a: fOver.length, b: dz.length, gap: SIR.d(Math.max.apply(null, gap), 1) })],
     [SIR.n(b200), L('polling booths lost 200 or more names each, and {n} lost 400 or more.', { n: SIR.n(b400) })]
   ];
   document.getElementById('claims').innerHTML = claims.map(function (c) { return '<li><b>' + c[0] + '</b><span>' + c[1] + '</span></li>'; }).join('');
@@ -91,34 +91,34 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     document.getElementById('claimsWrap').hidden = false;
     document.getElementById('crumb').textContent = L('Whole state');
     document.getElementById('title').textContent = L('All Bihar, 243 constituencies');
-    document.getElementById('sub').textContent = L('{total} names removed across both phases, set beside the {electors} electors on the 2025 roll.', { total: SIR.n(t.total), electors: SIR.n(t.electorate_2025) });
+    document.getElementById('sub').textContent = L('{total} names left off the draft or deleted after it, set beside the {electors} electors on the 2025 roll.', { total: SIR.n(t.total), electors: SIR.n(t.electorate_2025) });
     fate(t.p1, t.p2, t.electorate_2025);
     var rel = relShare(t.hindu, t.muslim, t.unknown);
-    kpis([[SIR.n(t.total), L('names removed, both phases')], [SIR.d(100 * t.total / t.electorate_2025, 2), L('per 100 electors on the 2025 roll')],
-      [SIR.pct(100 * t.female / (t.female + t.male)), L('of the removed are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among the removed, by name classification')],
+    kpis([[SIR.n(t.total), L('names left off the draft or deleted after it')], [SIR.d(100 * t.total / t.electorate_2025, 2), L('per 100 electors on the 2025 roll')],
+      [SIR.pct(100 * t.female / (t.female + t.male)), L('of those left off or deleted are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among those left off the draft, by name classification')],
       [L('{a} of {b}', { a: overAll.length, b: withM.length }), L('seats lost more names than their 2025 margin')], [SIR.n(t.booths), L('polling booths')]]);
     var hk = Object.keys(s.booth_histogram);
-    document.getElementById('p1p').textContent = L('Booths by the number of names removed in phase 1. Most lost fewer than a hundred. {n} lost 200 or more.', { n: SIR.n(b200) });
+    document.getElementById('p1p').textContent = L('Booths by the number of names left off the draft in phase 1. Most lost fewer than a hundred. {n} lost 200 or more.', { n: SIR.n(b200) });
     SIR.redraw('c1', { type: 'bar', data: { labels: hk, datasets: [{ label: L('Booths'), data: hk.map(function (k) { return s.booth_histogram[k]; }), $token: '--fill-navy' }] },
-      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names removed in the booth') } }, y: { title: { display: true, text: L('Booths') } } } } });
+      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names left off the draft in the booth') } }, y: { title: { display: true, text: L('Booths') } } } } });
     var cuts = [0, 1, 2, 5, 10, 20, Infinity], lab = [L('under 1×'), L('{a} to {b}×', { a: 1, b: 2 }), L('{a} to {b}×', { a: 2, b: 5 }), L('{a} to {b}×', { a: 5, b: 10 }), L('{a} to {b}×', { a: 10, b: 20 }), L('20× or more')];
     var ratio = withM.map(function (a) { return a.total / a.margin2025; });
-    document.getElementById('p2t').textContent = L('Removals against the 2025 margin');
-    document.getElementById('p2p').textContent = L('Constituencies by names removed as a multiple of the 2025 winning margin.');
+    document.getElementById('p2t').textContent = L('Names left off or deleted against the 2025 margin');
+    document.getElementById('p2p').textContent = L('Constituencies by names left off or deleted as a multiple of the 2025 winning margin.');
     SIR.redraw('c2', { type: 'bar', data: { labels: lab, datasets: [{ label: L('Constituencies'), data: lab.map(function (l, i) { return ratio.filter(function (x) { return x >= cuts[i] && x < cuts[i + 1]; }).length; }), $tokens: lab.map(function (l, i) { return i === 0 ? '--fill-grey' : '--fill-red'; }) }] },
-      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names removed ÷ winning margin') } }, y: { beginAtZero: true, title: { display: true, text: L('Constituencies') } } } } });
+      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names left off or deleted ÷ winning margin') } }, y: { beginAtZero: true, title: { display: true, text: L('Constituencies') } } } } });
     who(100 * t.female / (t.female + t.male), rel);
     var rc = [4, 6, 8, 10, 12, 14, 16, 25], rl = ['4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16+'];
-    document.getElementById('p4t').textContent = L('Constituencies by removals per 100 electors');
-    document.getElementById('p4p').textContent = L('How many of the 243 constituencies fall at each level of removals, from the lightest to the heaviest.');
+    document.getElementById('p4t').textContent = L('Constituencies by names left off or deleted per 100 electors');
+    document.getElementById('p4p').textContent = L('How many of the 243 constituencies fall at each level of names left off or deleted, from the lightest to the heaviest.');
     SIR.redraw('c4', { type: 'bar', data: { labels: rl, datasets: [{ label: L('Constituencies'), data: rl.map(function (l, i) { return acs.filter(function (a) { return a.per_100 >= rc[i] && a.per_100 < rc[i + 1]; }).length; }), $token: '--fill-red' }] },
-      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Removed per 100 electors') } }, y: { beginAtZero: true, title: { display: true, text: L('Constituencies') } } } } });
+      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Left off or deleted per 100 electors') } }, y: { beginAtZero: true, title: { display: true, text: L('Constituencies') } } } } });
     document.getElementById('tblTitle').textContent = L('All 243 constituencies');
     SIR.table(document.getElementById('tbl'), [
       { k: 'name', label: L('Constituency'), left: true, fmt: function (v, a) { return SIR.esc(a.ac + ' ' + v); } }, { k: 'district', label: L('District'), left: true },
-      { k: 'total', label: L('Removed'), fmt: SIR.n }, { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 2); } },
+      { k: 'total', label: L('Left off or deleted'), fmt: SIR.n }, { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 2); } },
       { k: 'fem', label: L('Women %'), fmt: function (v) { return SIR.d(v, 1); } }, { k: 'win2025', label: L('2025 winner'), left: true, fmt: function (v, a) { return SIR.esc(v) + ' ' + tag(a.al2025); } },
-      { k: 'margin2025', label: L('2025 margin'), fmt: SIR.n }, { k: 'xm', label: L('Removed ÷ margin'), fmt: function (v) { return SIR.d(v, 1); } },
+      { k: 'margin2025', label: L('2025 margin'), fmt: SIR.n }, { k: 'xm', label: L('Left off or deleted ÷ margin'), fmt: function (v) { return SIR.d(v, 1); } },
       { k: 'r_absent', label: L('Marked absent'), fmt: SIR.n }, { k: 'r_enrolled', label: L('Marked already enrolled'), fmt: SIR.n }],
       acs.map(function (a) { return Object.assign({}, a, { fem: 100 * a.t_f / (a.t_f + a.t_m), xm: a.margin2025 ? a.total / a.margin2025 : null }); }),
       { sort: 'xm', id: 'ac', onRow: function (id) { go(+id); } });
@@ -132,32 +132,32 @@ Promise.all([SIR.json('data/bihar/summary.json'), SIR.json('data/bihar/constitue
     document.getElementById('back').addEventListener('click', function () { go(0); });
     document.getElementById('title').textContent = a.ac + ' ' + a.name + (a.reserved !== 'GEN' ? ' (' + a.reserved + ')' : '');
     var sv = { district: SIR.esc(a.district), pc: SIR.esc(a.pc), booths: SIR.n(a.booths), total: SIR.n(a.total), rate: SIR.d(a.per_100, 2), winner: SIR.esc(a.win2025) + ' ' + tag(a.al2025), margin: a.margin2025 != null ? SIR.n(a.margin2025) : '', times: a.margin2025 != null ? SIR.d(a.total / a.margin2025, 1) : '' };
-    document.getElementById('sub').innerHTML = a.margin2025 == null ? L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner}.', sv)
-      : a.total > a.margin2025 ? L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes, and {times} times as many names were removed.', sv)
-      : L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names removed, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes.', sv);
+    document.getElementById('sub').innerHTML = a.margin2025 == null ? L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names left off or deleted, {rate} per 100 electors. Won in 2025 by {winner}.', sv)
+      : a.total > a.margin2025 ? L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names left off or deleted, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes, and {times} times as many names were left off or deleted.', sv)
+      : L('{district} district, {pc} Lok Sabha seat, {booths} booths. {total} names left off or deleted, {rate} per 100 electors. Won in 2025 by {winner} by {margin} votes.', sv);
     fate(a.p1, a.p2, a.electorate_2025);
     var rel = relShare(a.hindu, a.muslim, a.unknown);
-    kpis([[SIR.n(a.total), L('names removed, both phases')], [SIR.d(a.per_100, 2), L('per 100 electors on the 2025 roll')],
-      [SIR.pct(100 * a.t_f / (a.t_f + a.t_m)), L('of the removed are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among the removed')],
+    kpis([[SIR.n(a.total), L('names left off the draft or deleted after it')], [SIR.d(a.per_100, 2), L('per 100 electors on the 2025 roll')],
+      [SIR.pct(100 * a.t_f / (a.t_f + a.t_m)), L('of those left off or deleted are women')], [L('{lo} to {hi}', { lo: SIR.pct(rel.lo), hi: SIR.pct(rel.hi) }), L('Muslim names among those left off the draft')],
       [SIR.d(a.per_booth, 1), L('names per booth, and {n} booths lost 200 or more', { n: a.booths_200 })],
       [a.margin2025 ? SIR.times(a.total / a.margin2025) : '', L('the 2025 winning margin')]]);
     var edges = [0, 50, 100, 150, 200, 250, 300, 400, Infinity], lab = ['0-49', '50-99', '100-149', '150-199', '200-249', '250-299', '300-399', '400+'];
-    document.getElementById('p1p').textContent = L('Booths in {name} by the number of names removed in phase 1.', { name: a.name });
+    document.getElementById('p1p').textContent = L('Booths in {name} by the number of names left off the draft in phase 1.', { name: a.name });
     SIR.redraw('c1', { type: 'bar', data: { labels: lab, datasets: [{ label: L('Booths'), data: lab.map(function (l, i) { return rows.filter(function (b) { return b.deleted >= edges[i] && b.deleted < edges[i + 1]; }).length; }), $token: '--fill-navy' }] },
-      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names removed in the booth') } }, y: { beginAtZero: true, title: { display: true, text: L('Booths') } } } } });
-    document.getElementById('p2t').textContent = L('Names removed against the margins');
-    document.getElementById('p2p').textContent = L('Names removed in both phases, beside the winning margins in 2020 and 2025.');
-    SIR.redraw('c2', { type: 'bar', data: { labels: [L('Names removed'), L('2025 margin'), L('2020 margin')], datasets: [{ label: L('Names or votes'), data: [a.total, a.margin2025, a.margin2020], $tokens: ['--fill-red', '--fill-navy', '--fill-grey'] }] },
+      options: { plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: L('Names left off the draft in the booth') } }, y: { beginAtZero: true, title: { display: true, text: L('Booths') } } } } });
+    document.getElementById('p2t').textContent = L('Names left off or deleted against the margins');
+    document.getElementById('p2p').textContent = L('Names left off the draft or deleted after it, beside the winning margins in 2020 and 2025.');
+    SIR.redraw('c2', { type: 'bar', data: { labels: [L('Names left off or deleted'), L('2025 margin'), L('2020 margin')], datasets: [{ label: L('Names or votes'), data: [a.total, a.margin2025, a.margin2020], $tokens: ['--fill-red', '--fill-navy', '--fill-grey'] }] },
       options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: L('Names or votes') } } } } });
     who(100 * a.t_f / (a.t_f + a.t_m), rel);
     var sorted = rows.slice().sort(function (x, y) { return y.deleted - x.deleted; });
-    document.getElementById('p4t').textContent = L('Every booth, from most to fewest names removed');
+    document.getElementById('p4t').textContent = L('Every booth, from most to fewest names left off the draft');
     document.getElementById('p4p').textContent = L('Each bar is one booth in {name}. Open the table below for booth numbers.', { name: a.name });
-    SIR.redraw('c4', { type: 'bar', data: { labels: sorted.map(function (b) { return L('Booth {n}', { n: b.booth }); }), datasets: [{ label: L('Names removed'), data: sorted.map(function (b) { return b.deleted; }), $token: '--fill-red', barPercentage: 1, categoryPercentage: 1 }] },
-      options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { display: false }, grid: { display: false } }, y: { beginAtZero: true, title: { display: true, text: L('Names removed') } } } } });
+    SIR.redraw('c4', { type: 'bar', data: { labels: sorted.map(function (b) { return L('Booth {n}', { n: b.booth }); }), datasets: [{ label: L('Names left off the draft'), data: sorted.map(function (b) { return b.deleted; }), $token: '--fill-red', barPercentage: 1, categoryPercentage: 1 }] },
+      options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { display: false }, grid: { display: false } }, y: { beginAtZero: true, title: { display: true, text: L('Names left off the draft') } } } } });
     document.getElementById('tblTitle').textContent = L('All {n} booths in {name}', { n: rows.length, name: a.name });
     SIR.table(document.getElementById('tbl'), [
-      { k: 'booth', label: L('Booth'), left: true }, { k: 'deleted', label: L('Removed'), fmt: SIR.n }, { k: 'female', label: L('Women'), fmt: SIR.n },
+      { k: 'booth', label: L('Booth'), left: true }, { k: 'deleted', label: L('Left off the draft'), fmt: SIR.n }, { k: 'female', label: L('Women'), fmt: SIR.n },
       { k: 'muslim', label: L('Muslim names'), fmt: SIR.n }, { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'shifted', label: L('Shifted'), fmt: SIR.n }, { k: 'absent', label: L('Absent'), fmt: SIR.n }, { k: 'already_enrolled', label: L('Already enrolled'), fmt: SIR.n },
       { k: 'lead2024', label: L('2024 leader'), left: true, fmt: function (v) { return v ? SIR.esc(v) : ''; } },
       { k: 'lead_margin_pp', label: L('Lead, points'), fmt: function (v) { return SIR.d(v, 1); } }], rows, { sort: 'deleted' });

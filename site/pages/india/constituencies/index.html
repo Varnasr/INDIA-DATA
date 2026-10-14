@@ -23,13 +23,13 @@
   </div>
 
   <h2>After the draft</h2>
-  <p class="sub">The change from the draft to the later roll, for every 100 electors on the draft. In Tamil Nadu, Kerala and West Bengal it is a net figure, which counts new voters as well as names put back and subtracts names removed after the draft. It is the most that could have come back, and it cannot say who did.</p>
+  <p class="sub">The change from the draft to the later roll, for every 100 electors on the draft. In Tamil Nadu, Kerala and West Bengal it is a net figure, which counts new voters as well as names put back and subtracts names deleted after the draft. It is the most that could have come back, and it cannot say who did.</p>
   <div class="grid">
     <div class="panel wide" id="pAfter"><div class="vizbox" id="vAfter"></div><p id="nAfter"></p></div>
   </div>
 
-  <h2>Uttarakhand, names added and removed</h2>
-  <p class="sub">Uttarakhand is the one state that published, for each constituency, how many names were added after the draft and how many were removed. A dot above the line is a constituency that removed more than it added.</p>
+  <h2 id="uttarakhand-names-added-and-removed">Uttarakhand, names added and deleted</h2>
+  <p class="sub">Uttarakhand is the one state that published, for each constituency, how many names were added after the draft and how many were deleted. A dot above the line is a constituency that deleted more than it added.</p>
   <div class="grid">
     <div class="panel wide" id="pUk"><div class="vizbox" id="vUk"></div><p id="nUk"></p></div>
   </div>
@@ -74,14 +74,14 @@ Promise.all([SIR.json('data/india/ac_change.json'), SIR.json('data/india/ac_find
     'Tamil Nadu left ' + lk(tn.left_off) + ' names off its draft roll. Its final roll grew from the draft in all ' + tn.acs + ' constituencies, and stayed below the roll before the revision in all ' + tn.below_earlier + '.',
     'Kerala\'s final roll grew from the draft in all ' + kl.acs + ' constituencies, and stayed below the January 2025 roll in ' + kl.below_earlier + ' of them.',
     'West Bengal\'s roll at the 2026 nominations was smaller than its draft in ' + wb.fell + ' of ' + wb.acs + ' constituencies, and smaller than the 2024 Lok Sabha roll in all ' + wb.below_earlier + '.',
-    'Uttarakhand is the one state with names added and removed after the draft, constituency by constituency. It added ' + n(uk.added) + ' and removed ' + n(uk.removed) + ', and its final roll was smaller than the draft in ' + uk.fell + ' of ' + uk.acs + ' constituencies.'
+    'Uttarakhand is the one state with names added and deleted after the draft, constituency by constituency. It added ' + n(uk.added) + ' and deleted ' + n(uk.removed) + ', and its final roll was smaller than the draft in ' + uk.fell + ' of ' + uk.acs + ' constituencies.'
   ], 'The change from the draft to a later roll is a net figure everywhere but Uttarakhand. It counts new voters as well as names put back, so it cannot say how many of those left off came back.');
 
   document.getElementById('kpis').innerHTML = [
     [n(tn.acs + kl.acs + wb.acs + uk.acs), 'constituencies in four states'],
     [lk(tn.left_off), 'names left off Tamil Nadu\'s draft'],
     [wb.fell + ' of ' + wb.acs, 'West Bengal constituencies smaller at the nominations than at the draft'],
-    [n(uk.removed), 'names removed after the draft in Uttarakhand']
+    [n(uk.removed), 'names deleted after the draft in Uttarakhand']
   ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
 
   // the finder: every constituency on the site, each in its own state's measure
@@ -121,14 +121,14 @@ Promise.all([SIR.json('data/india/ac_change.json'), SIR.json('data/india/ac_find
   document.getElementById('nAfter').textContent = 'Red dots are constituencies whose later roll was smaller than the draft. In West Bengal that is ' + wb.fell + ' of ' + wb.acs + ', because the names held back for adjudication came off after the draft. In Tamil Nadu and Kerala the roll grew everywhere, by new voters and names put back together.';
 
   var U = rowsOf('Uttarakhand');
-  VIZ.scatter('vUk', { label: 'Uttarakhand, names added and removed after the draft per 1,000 on the draft roll, every constituency', diag: true, diagLabel: 'added equals removed', xMin: 0, yMin: 0,
-    xAxis: 'Added after the draft, per 1,000 on the draft', yAxis: 'Removed, per 1,000',
-    points: U.map(function (r) { var a = 1000 * r[I.add] / r[I.draft], b = 1000 * r[I.rem] / r[I.draft]; return { x: a, y: b, tok: b > a ? '--fill-red' : '--fill-navy', label: r[I.nm] + ', ' + r[I.dist] + ': ' + n(r[I.add]) + ' added, ' + n(r[I.rem]) + ' removed' }; }) });
+  VIZ.scatter('vUk', { label: 'Uttarakhand, names added and deleted after the draft per 1,000 on the draft roll, every constituency', diag: true, diagLabel: 'added equals deleted', xMin: 0, yMin: 0,
+    xAxis: 'Added after the draft, per 1,000 on the draft', yAxis: 'Deleted, per 1,000',
+    points: U.map(function (r) { var a = 1000 * r[I.add] / r[I.draft], b = 1000 * r[I.rem] / r[I.draft]; return { x: a, y: b, tok: b > a ? '--fill-red' : '--fill-navy', label: r[I.nm] + ', ' + r[I.dist] + ': ' + n(r[I.add]) + ' added, ' + n(r[I.rem]) + ' deleted' }; }) });
   var more = U.filter(function (r) { return r[I.rem] > r[I.add]; });
-  document.getElementById('nUk').textContent = 'In ' + more.length + ' of ' + U.length + ' constituencies more names were removed after the draft than were added. Across the state ' + n(uk.added) + ' were added and ' + n(uk.removed) + ' removed. The table gives no reason for a removal.';
+  document.getElementById('nUk').textContent = 'In ' + more.length + ' of ' + U.length + ' constituencies more names were deleted after the draft than were added. Across the state ' + n(uk.added) + ' were added and ' + n(uk.removed) + ' deleted. The table gives no reason for a deletion.';
 
   var lab = function (s, k) { return S[s].labels[k]; };
-  SIR.table('tStates', [{ h: 'State' }, { h: 'Constituencies', num: true }, { h: 'Earlier roll' }, { h: 'Names left off the draft' }, { h: 'Draft' }, { h: 'Later roll' }, { h: 'Added and removed after the draft' }],
+  SIR.table('tStates', [{ h: 'State' }, { h: 'Constituencies', num: true }, { h: 'Earlier roll' }, { h: 'Names left off the draft' }, { h: 'Draft' }, { h: 'Later roll' }, { h: 'Added and deleted after the draft' }],
     Object.keys(S).map(function (s) {
       var x = S[s];
       return ['<a href="../../' + PAGE[s] + '">' + s + '</a>', x.acs,
@@ -136,7 +136,7 @@ Promise.all([SIR.json('data/india/ac_change.json'), SIR.json('data/india/ac_find
         x.left_off ? lk(x.left_off) : esc(lab(s, 'left_off')),
         esc(lab(s, 'draft')) + ' (' + lk(x.draft) + ')',
         esc(lab(s, 'after')) + ' (' + lk(x.later) + ')',
-        x.added != null ? n(x.added) + ' added, ' + n(x.removed) + ' removed' : esc(lab(s, 'gross'))];
+        x.added != null ? n(x.added) + ' added, ' + n(x.removed) + ' deleted' : esc(lab(s, 'gross'))];
     }));
 
   // the table: a few columns on a phone, all of them on a wide screen, and
@@ -155,7 +155,7 @@ Promise.all([SIR.json('data/india/ac_change.json'), SIR.json('data/india/ac_find
     if (x.earlier) cols.push(['Earlier roll', 'num', 0]);
     if (x.left_off) cols.push(['Left off the draft', 'num', 0]);
     cols.push(['Draft', 'num', 0]);
-    if (x.added != null) cols.push(['Added after', 'num', 0], ['Removed after', 'num', 0]);
+    if (x.added != null) cols.push(['Added after', 'num', 0], ['Deleted after', 'num', 0]);
     cols.push([cur === 'West Bengal' ? 'At the nominations' : 'Final roll', 'num', 0], ['Change from the draft', 'num', 1]);
     if (x.earlier) cols.push(['Per 100 against the earlier roll', 'num', 1]);
     var t = document.getElementById('tAcs');

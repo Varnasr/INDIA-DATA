@@ -43,7 +43,7 @@
 
   <h2>How the districts were placed</h2>
   <p>Many of today's districts did not exist in 2011. Each one is counted under the 2011 district it was mostly made from, and districts made from the same 2011 district are added together, so the units here are the districts of 2011. Palghar, for example, is counted with Thane, and Telangana's 33 districts under the ten it had in 2011. The source for each one is a district website, a government order or the Census's own lists of tehsils. The urban share is for the district as it was in 2011, and it will have changed since.</p>
-  <p>Each state is read in its own measure. In Uttar Pradesh, Maharashtra, Tamil Nadu, Gujarat, Karnataka, Telangana and Uttarakhand it is the names left off the draft per 100 on the roll before. Telangana's district figures are the state's as reported in the press. In Bihar it is both phases per 100 on the 2025 roll. West Bengal and Kerala published no removals below the state, so there it is the fall in the roll, which takes in ordinary deaths and moves too. Delhi is left out because it is a single, almost wholly urban unit. Rajasthan is left out because its district figure is a change over two years across a split of districts.</p>
+  <p>Each state is read in its own measure. In Uttar Pradesh, Maharashtra, Tamil Nadu, Gujarat, Karnataka, Telangana and Uttarakhand it is the names left off the draft per 100 on the roll before. Telangana's district figures are the state's as reported in the press. In Bihar it is both phases per 100 on the 2025 roll. West Bengal and Kerala published no count of names left off below the state, so there it is the fall in the roll, which takes in ordinary deaths and moves too. Delhi is left out because it is a single, almost wholly urban unit. Rajasthan is left out because its district figure is a change over two years across a split of districts.</p>
   <p class="note">The tables behind this page download as <a href="../../data/india/urban.csv" download>CSV</a>. The 2011 parent of every district, with its source, is <a href="../../data/india/district_2011_parent.csv" download>here</a>.</p>
 
   <p class="note limits" id="shortNote" hidden></p>
@@ -65,7 +65,7 @@ SIR.json('data/india/urban.json').then(function (d) {
   var keep = S.filter(function (s) { return s.rho_no_urban >= 0.2; });
   var lose = S.filter(function (s) { return s.rho >= 0.2 && s.rho_no_urban < 0.2; });
   var none = S.filter(function (s) { return s.rho < 0.2; });
-  var MEAS = { left_off: 'names left off per 100 on the roll before', roll_2025: 'names removed per 100 on the 2025 roll', fall: 'fall in the roll per 100' };
+  var MEAS = { left_off: 'names left off per 100 on the roll before', roll_2025: 'names left off or deleted per 100 on the 2025 roll', fall: 'fall in the roll per 100' };
 
   SIR.inShort([
     'In ' + up.length + ' of the ' + both.length + ' states with both kinds of district, urban districts lost more names for their size than rural ones. In ' + top.state + ' the urban districts\' rate was ' + p1(top.urban_over_rural) + ' times the rural districts\'.',
