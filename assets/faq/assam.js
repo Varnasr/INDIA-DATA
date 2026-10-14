@@ -24,7 +24,7 @@
       ];
       var short = {
         main: [[kind, flag, seat, dv, det], 'The draft and final rolls by constituency are the Chief Electoral Officer\'s own tables, and the count of names flagged is the officer\'s as reported in the press. The constituency tables give the net change only. A reason for deletion is what the officer wrote down, and nobody checked it. The detention figures are from 2019 and 2020.'],
-        method: [[kind, 'Every count on the Assam pages is checked against its parts, the draft with and without D-voters, the final roll by sex, the detention centres against their totals and the tribunals\' yearly decisions against theirs.'], ''],
+        method: [[kind, 'Every count on the Assam pages agrees with its parts. That holds for the draft with and without D-voters, the final roll by sex, the detention centres and their totals, and the tribunals\' yearly decisions and theirs.'], ''],
         faq: [[kind, flag, dv], '']
       };
       return { qa: QA, short: short };

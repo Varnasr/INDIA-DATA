@@ -466,7 +466,7 @@ function bihar() {
     'Party names matched to the declared result. In nine Lok Sabha seats a party name in the booth file differed from the declared result and was matched to it, with evidence. After matching, the top two in all 40 seats are the declared winner and runner-up.',
     'Titles are not surnames. Devi, Kumari and Khatun say nothing about caste and are set aside, and caste is read from the father\'s or husband\'s surname.',
     'Seats are joined by number, because Bihar has two Kalyanpurs and two Pipras.',
-    'A second program, written separately, recomputes every headline figure from the raw files before publication. Only counts are published, never a name, EPIC number or address.',
+    'Only counts are published, never a name, EPIC number or address.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
   closing(pres, K, P, 'The full analysis', ['The dashboard, the booth explorer for every constituency and booth, and the full report with a chapter for each of the 38 districts, are published online alongside this deck.', 'ImpactMojo']);
@@ -638,7 +638,7 @@ function hyderabad() {
   // ---- Limits
   s = K.slide('Limits', 'What the lists show, and what they cannot show');
   K.box(s, 'How many electors were struck off, from which parts, and who they were by age, sex, religion guessed from names, and link to the 2002 roll. Because the lists hold every elector, each group has a true removal rate.', M, TOP - 0.4, 5.95, 2.3, 15);
-  K.box(s, 'Whether any single removal was right. A household that moved out is rightly marked "shifted", and the files cannot tell it apart from an elector who was at home when the officer missed them. Religion and age are given separately and never together.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
+  K.box(s, 'Whether any single removal was right. A household that moved out is rightly marked "shifted", and the lists cannot tell it apart from an elector who was at home when the officer missed them. Religion and age are given separately and never together.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
   K.body(s, 'These are the September lists. The final roll is due on 9 November, so restorations after hearings are not in these counts. Malakpet\'s list is read by polling-station name (' + mal.parts + ' stations) and ' + indian(mal.unaccounted) + ' electors on its roll appear in none of the three outcomes.', M, TOP + 2.2, W - 2 * M, 2.2, 16);
 
   s = K.slide('What the Election Commission should do', 'Before the final roll');

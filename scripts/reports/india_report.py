@@ -352,7 +352,7 @@ PR = J('india', 'process.json')
 R.h2('How the revision was run')
 moves = lambda r: len([st for st in r['steps'] if st.get('kind') != 'published']) - 1
 R.p('The rules changed while the revision was under way. The site\'s page on how the revision was run lists %d orders, letters and judgments in date order, %d of them from the Supreme Court, each linked to its document, '
-    'and draws every state\'s schedule as it was set and as it was moved. Across %d states and union territories, dates were changed %d times in the orders and notes that could be read.'
+    'and draws every state\'s schedule as it was set and as it was moved. Across %d states and union territories, dates were changed %d times in the published orders and notes.'
     % (len(PR['timeline']), len([t for t in PR['timeline'] if t['who'] == 'sc']), len(PR['schedules']), sum(moves(r) for r in PR['schedules'])))
 R.p('What made it harder to stay on the roll, each point resting on an order or a judgment:')
 # the burdens carry {placeholders} for counts taken from the schedules
@@ -379,7 +379,7 @@ R.numbered([
 ])
 
 R.h1('Method and sources')
-R.p('Each state\'s Chief Electoral Officer, the Election Commission\'s officer in charge of its rolls, published figures when the draft roll came out, and the All India figures are those officers\' own. They are taken from the press notes where those could be read (%s) and from press reports otherwise. Bihar\'s row is counted from the deletion lists. '
+R.p('Each state\'s Chief Electoral Officer, the Election Commission\'s officer in charge of its rolls, published figures when the draft roll came out, and the All India figures are those officers\' own. They are taken from the press notes of (%s) and from press reports for the other states. Bihar\'s row is counted from the deletion lists. '
     'The reasons are grouped into the three every state reported. The state rows add up to %s removed, against the %s reported nationally on 30 September 2026, and the difference is rounding. Each row\'s source is listed on the method page of the site and in the downloadable table.'
     % (andj([s['state'] for s in S if s['source'] == 'primary']), crore(T['removed']), 'about 13.3 crore'))
 R.p('No name, EPIC number or address is published.')

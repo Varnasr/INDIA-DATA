@@ -470,10 +470,10 @@ R.bullets([
     'Religion and surnames of the removed are counted by booth from the same lists, with no individual records kept.',
     'The reason, sex and age of every phase 1 removal are counted by constituency and booth from the deletion list, with no individual records kept.',
     'Deaths come from the Sample Registration System Statistical Report 2024 and the Civil Registration System 2024, and marriage migration from Census of India 2011, table D-3.',
-    'The 2025 Assembly results give the winner, runner-up and turnout for each constituency, checked across two separate tables. Where they disagreed, the figure matching the reported result was used.',
+    'The 2025 Assembly results give the winner, runner-up and turnout for each constituency.',
     'The 2024 Lok Sabha result by booth is from Form 20. The other sources are the Census of India 2001 and 2011 for religion by district, the National Family Health Survey 2019-20 for women\'s literacy, schooling and marriage before 18 by district, the Bihar caste-based survey of 2 October 2023, and the Bihar Economic Survey.',
 ])
-R.p('Each booth is counted once. A second program, written separately, recomputes every headline figure from the lists before publication. Votes polled are the turnout applied to the 2025 roll. No name, EPIC number or address is published.')
+R.p('Votes polled are the turnout applied to the 2025 roll. No name, EPIC number or address is published.')
 
 out = sys.argv[1] if len(sys.argv) > 1 else '/home/user/reports/Bihar_SIR_2025_Report.docx'
 R.save(out)

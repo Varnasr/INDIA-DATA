@@ -41,6 +41,10 @@ PATTERNS = [
     ('"not only"', r'\bnot only\b'),
     ('an "X, not Y" turn', r',\s+not (a|an|the)\b'),
     ('a banned word', r'\b(' + BANNED + r')\b'),
+    # the owner's rule: a page is about the revision, never about how the site
+    # was made, so no reader is told how pages are built or how sources were read
+    ('talk about how the site works', r"\b(read twice|opened and read|a second reader|second reading|two readers|one researcher|"
+     r"when (?:the|this) page loads|the build|the site is not built|auto-captions|YouTube's (?:English|Hindi) captions)\b"),
 ]
 SEMI = ('a semicolon between words', r'[a-z]; [a-z]')
 QUOTED = {'quote', 'quotes', 'title', 'title_en', 'headline', 'url', 'source', 'src', 'outlet', 'evidence', 'law',

@@ -5,9 +5,9 @@
 
 <article class="disp cases" lang="en" dir="ltr" data-no-i18n>
   <h2>Why these places</h2>
-  <p>Each of these places stands out in its own state's figures. Kichha lost the largest share of its roll of any constituency in Uttarakhand, and Tughlakabad the largest in Delhi. Danilimda is the one Ahmedabad seat whose roll shrank again after the draft. Murshidabad and Malda had the most names sent for adjudication in West Bengal. Bhiwandi East, Anna Nagar, Lucknow and B.B.M.P (South) lost the largest share of their roll at the draft in Maharashtra, Tamil Nadu, Uttar Pradesh and Karnataka. Lakhimpur's roll fell further after the draft than any other seat's in Assam's Special Revision. A figure alone cannot say why. So for each place this page sets out its figures from the site's own tables, then what the official records say, what was reported, what officials and parties said, and what we looked for and could not find. Every item was found by one researcher and opened again by a second, and only what the second confirmed is here. The states measure different things, so the places are never compared with each other.</p>
+  <p>Each of these places stands out in its own state's figures. Kichha lost the largest share of its roll of any constituency in Uttarakhand, and Tughlakabad the largest in Delhi. Danilimda is the one Ahmedabad seat whose roll shrank again after the draft. Murshidabad and Malda had the most names sent for adjudication in West Bengal. Bhiwandi East, Anna Nagar, Lucknow and B.B.M.P (South) lost the largest share of their roll at the draft in Maharashtra, Tamil Nadu, Uttar Pradesh and Karnataka. Lakhimpur's roll fell further after the draft than any other seat's in Assam's Special Revision. A figure alone cannot say why. So for each place this page sets out its figures, then what the official records say, what was reported, what officials and parties said, and what could not be found. The states measure different things, so the places are never compared with each other.</p>
   <div id="cases"></div>
-  <p class="note">Items that named or identified a private person, rested on anyone's religion, caste or citizenship, or came from an analysis of the named lists were left out, as everywhere on this site. The figures for each place are worked out from the state's own published data when the page loads. <a href="../constituencies/">Find any constituency</a>.</p>
+  <p class="note">Items that named or identified a private person, rested on anyone's religion, caste or citizenship, or came from an analysis of the named lists were left out, as everywhere on this site. <a href="../constituencies/">Find any constituency</a>.</p>
 </article>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
@@ -65,7 +65,7 @@ Promise.all([SIR.json('data/india/cases.json'), SIR.json('data/uttarakhand/const
       h += '<h3>' + HEAD[g] + '</h3><ul class="plain items">' + c.items[g].map(function (i) {
         return '<li>' + esc(i.text) + ' <a href="' + esc(i.url) + '" rel="noopener">' + esc(i.outlet) + (i.date ? ', ' + SIR.date(i.date) : '') + '</a></li>'; }).join('') + '</ul>';
     });
-    h += '<h3>What we looked for and could not find</h3><ul class="plain">' + c.not_found.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+    h += '<h3>What could not be found</h3><ul class="plain">' + c.not_found.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
     if (c.left_out.length) h += '<p class="note">' + n(c.left_out.length) + (c.left_out.length === 1 ? ' item' : ' items') + ' found in the reporting on this place could not be confirmed or fall outside what this site publishes, and are left out.</p>';
     h += '<p><a class="btn" href="' + LINK[c.id] + '">' + (c.id === 'murshidabad-malda' ? 'West Bengal, with these districts on the map' : F[c.id] && F[c.id].unit ? 'This district\'s own page' : 'This constituency\'s own page') + '</a></p>';
     box.insertAdjacentHTML('beforeend', h);

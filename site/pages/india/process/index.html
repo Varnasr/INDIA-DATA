@@ -70,10 +70,10 @@
   <div id="reported" aria-live="polite"></div>
 
   <h2>What we could not verify</h2>
-  <p class="sub">These documents could not be found or opened, so what they say is left out of the sections that rest on documents.</p>
+  <p class="sub">These documents could not be found, so what they say is left out of the sections that rest on documents.</p>
   <ul class="plain" id="gaps"></ul>
   <p class="note">The timeline and every state's dates can be downloaded as <a href="../../data/india/process_timeline.csv">process_timeline.csv</a> and <a href="../../data/india/process_schedules.csv">process_schedules.csv</a>, each row with the link to its document.</p>
-  <p class="note">Checked against the documents on <span id="asof"></span>. If you have one of these documents, write to <a href="mailto:info@impactmojo.in">info@impactmojo.in</a>.</p>
+  <p class="note">Covers the documents published up to <span id="asof"></span>. If you have one of these documents, write to <a href="mailto:info@impactmojo.in">info@impactmojo.in</a>.</p>
 </article>
 
   <p class="note limits" id="shortNote" hidden></p>
@@ -96,7 +96,7 @@ SIR.json('data/india/process.json').then(function (P) {
   var bySC = T.filter(function (t) { return t.who === 'sc'; }).length;
   SIR.inShort([
     'The revision began in Bihar on 24 June 2025 and by 14 May 2026 had been ordered everywhere except Himachal Pradesh, Jammu and Kashmir and Ladakh. Assam was given a different kind of revision.',
-    'In Phase II, all ' + p2.length + ' states and union territories had their dates moved a week, and the Commission named ' + p2twice + ' of them for a second move. In Phase III, the dates of ' + p3moved + ' of ' + p3.length + ' states and union territories moved by orders and notes we could read.',
+    'In Phase II, all ' + p2.length + ' states and union territories had their dates moved a week, and the Commission named ' + p2twice + ' of them for a second move. In Phase III, the dates of ' + p3moved + ' of ' + p3.length + ' states and union territories moved by the orders and notes on this page.',
     'What an elector had to show changed as the revision went on. In June 2025 it was one of eleven documents, and Aadhaar was added for identity on the Supreme Court\'s order in September. In Phase II no documents were asked for while forms were filled in. From 26 September 2026, documents were collected at home from those sent notices.',
     bySC + ' of the ' + T.length + ' entries below are orders or the judgment of the Supreme Court. In West Bengal it had judges decide the claims, and 60,06,675 names were marked under adjudication on the final roll.',
     'The Indian Express reported that two of the three Election Commissioners objected on record at least 14 times in 10 months to decisions taken in the Commission\'s name without them, on Form 6, on who controls the roll software, and on appeals in West Bengal. Three days after calling the notes part of its decision-making, the Commission announced nine decisions that met several of them. <a href="#inside-the-commission">Inside the Commission</a> sets the account out by date.'
@@ -105,8 +105,8 @@ SIR.json('data/india/process.json').then(function (P) {
   document.getElementById('kpis').innerHTML = [
     [T.length, 'rule and schedule changes, each with its document'],
     [P.schedules.length, 'states and union territories with dates drawn'],
-    [P.schedules.reduce(function (n, r) { return n + moves(r); }, 0), 'times a state\'s dates were changed, in the orders and notes we read'],
-    [P.gaps.length, 'documents or questions we could not settle']
+    [P.schedules.reduce(function (n, r) { return n + moves(r); }, 0), 'times a state\'s dates were changed, in the orders and notes on this page'],
+    [P.gaps.length, 'documents that could not be found or questions still open']
   ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
 
   // the timeline
@@ -221,7 +221,7 @@ SIR.json('data/india/process.json').then(function (P) {
     var how = function (r) { return r.how === 'sum' ? 'sum of the two lists' : r.how ? 'published total' : ''; };
     document.getElementById('tNotices').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Notices</th><th scope="col">Per 100 on the draft</th><th scope="col">No mapping</th><th scope="col">Discrepancy list</th><th scope="col">Deleted after a notice</th><th scope="col" class="l">Total is</th><th scope="col" class="l">Source</th></tr></thead><tbody>' +
       T.states.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.state) + '</th><td>' + N(r.notices) + (r.rounded ? '*' : '') + '</td><td>' + (r.per_100 == null ? '' : r.per_100.toFixed(1)) + '</td><td>' + N(r.no_mapping) + '</td><td>' + N(r.discrepancy) + '</td><td>' + N(r.deleted_after_notice) + (r.deleted_kind === 'press' && r.kind === 'primary' ? '†' : '') + '</td><td class="l">' + how(r) + '</td><td class="l">' + (r.source_url ? '<a href="' + E(r.source_url) + '">' + (r.kind === 'primary' ? 'document' : 'press') + '</a>' : (r.lists_source ? '<a href="' + E(r.lists_source) + '">press</a>' : '')) + '</td></tr>'; }).join('') + '</tbody>';
-    document.getElementById('nNotices').innerHTML = 'An asterisk marks a figure published rounded, in lakh or crore. Most phase 3 figures are running counts, taken while notices were still being heard. An elector can be on both lists, so the two need not add up to the total. In Uttar Pradesh two press reports split the same 3.26 crore differently, and the split used here, from The Times of India, is the one that adds up. West Bengal\'s total is the Supreme Court\'s reading of the record on 19 January 2026. The court\'s order gives only the discrepancy list, and the two lists are always taken from one source, so West Bengal\'s come from an earlier Commission breakdown reported by the press. A dagger marks a figure in a row whose total rests on a document but which came through the press. West Bengal\'s deletions are the adjudication outcome as The Indian Express reported it on 7 April 2026. A state with only one list, or two reports that disagree, has no total here. Deleted after a notice counts names struck off for not answering or for failing the hearing, where a state reported it, and many of these are interim. In Hyderabad\'s Old City the two lists can be told apart polling part by polling part, on the <a href="../../hyderabad/hearings/">hearings page</a>. Every figure, its date and the sentence it was taken from are in the download.';
+    document.getElementById('nNotices').innerHTML = 'An asterisk marks a figure published rounded, in lakh or crore. Most phase 3 figures are running counts, taken while notices were still being heard. An elector can be on both lists, so the two need not add up to the total. In Uttar Pradesh two press reports split the same 3.26 crore differently, and the split used here, from The Times of India, is the one that adds up. West Bengal\'s total is the Supreme Court\'s reading of the record on 19 January 2026. The court\'s order gives only the discrepancy list, and the two lists are always taken from one source, so West Bengal\'s come from an earlier Commission breakdown reported by the press. A dagger marks a figure in a row whose total rests on a document but which came through the press. West Bengal\'s deletions are the adjudication outcome as The Indian Express reported it on 7 April 2026. A state with only one list, or two reports that disagree, has no total here. Deleted after a notice counts names struck off for not answering or for failing the hearing, where a state reported it, and many of these are interim. In Hyderabad\'s Old City the two lists can be told apart polling part by polling part, on the <a href="../../hyderabad/hearings/">hearings page</a>. The download gives every figure with its date and source.';
     SIR.tools();
   }).catch(function () {});
 

@@ -82,10 +82,10 @@ def main():
             head=HEAD, pid=pid, slug=slug))
         write(os.path.join(PAGES, slug, 'faq', 'index.html'), SUB.format(
             meta=meta('Questions, ' + label, 'Questions and answers on the Special Intensive Revision in %s.' % st), h1='Questions', head=HEAD,
-            box='qas', foot='<p class="note">Every figure on this page is computed from the published data when the page loads. <a href="../method/">Sources and method</a>.</p>',
+            box='qas', foot='',
             pid=pid, slug=slug, page='faq'))
         write(os.path.join(PAGES, slug, 'method', 'index.html'), SUB.format(
-            meta=meta('Method, ' + label, 'Where the %s figures come from, how they were checked, and what they cannot show.' % st), h1='Method', head=HEAD,
+            meta=meta('Method, ' + label, 'Where the %s figures come from, how they add up, and what they cannot show.' % st), h1='Method', head=HEAD,
             box='sp', foot='<section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>',
             pid=pid, slug=slug, page='method'))
         if pid not in have:

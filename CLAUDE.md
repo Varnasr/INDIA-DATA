@@ -264,9 +264,15 @@ read, ten years of school, married before 18, clean cooking fuel, sanitation,
 deaths registered, sex ratio) are NFHS-5 2019-21, read from the district
 pages of each state's IIPS compendium into `data/india/raw/nfhs5_districts.csv`
 with file and page (see `FACTORS_SOURCES.md`; the PDFs came from OpenCity's
-copies because rchiips.org fails TLS here, and are not committed). Twelve
+copies because rchiips.org fails TLS here, and are not committed). Nineteen
 states: Bihar, Gujarat, Karnataka, Kerala, Maharashtra, Telangana, West
-Bengal, Tamil Nadu, Uttar Pradesh, Rajasthan, Uttarakhand, Delhi. The build
+Bengal, Tamil Nadu, Uttar Pradesh, Rajasthan, Uttarakhand, Delhi, and since
+14 October 2026 Andhra Pradesh, Assam, Chhattisgarh, Manipur, Meghalaya,
+Mizoram and Odisha (Andhra Pradesh and Chhattisgarh from the Internet
+Archive's copies of the Institute's files; their district matches are in
+`raw/nfhs5_alias/`, each row with its parents and source; Chhattisgarh and
+Mizoram are measured by the rise after the draft, so their signs run the
+other way; `SHARED` in `build_cities.py` gives these seven their rows). The build
 fails unless Bihar's values agree with Bihar's own reading of the same
 compendium. Rates come from `build_cities.rows()`, except Rajasthan (fall in
 the roll 2023 to 2026), Uttarakhand (names left off, from the CEO's table of
@@ -1827,6 +1833,15 @@ per slot, not the slot's length.
   ", not a/an/the", a semicolon in a page's prose, or a word on the owner's
   banned list. A term of art goes in `ALLOWED` with its reason. It cannot see a
   colon-hinged sentence, a fragment or a flourish, so read what you write.
+- **The site talks about the revision, never about itself** (the owner's rule
+  for every website, 14 October 2026). No page, panel, FAQ answer or method note
+  tells a reader how the site was built or how its research was done: no "read
+  twice", "a second reader", "worked out when the page loads", "the build fails
+  unless", "from YouTube's captions" or "transcribed by hand". Say what a figure
+  is, whose it is, which document it comes from and what it cannot show. The
+  two-reader checks, builds and assertions stay; they are described here and in
+  the research files, never on a page. `check_writing.py` fails on the phrases a
+  regex can catch, so read what you write for the rest.
 - **Bihar and Hyderabad are never compared** with each other, on a page,
   in a report or in a deck, except as rows of the cities page
   (`india/cities/`), which the owner allowed in October 2026. Each analysis

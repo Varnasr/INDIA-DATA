@@ -213,7 +213,7 @@ R.bullets([
 
 R.h2('What this shows and what it does not')
 R.p('The lists show how many electors were struck off, from which parts, and who they were by age, sex, religion guessed from names, and the link to the 2002 roll. They do not show whether any individual removal was right. '
-    'A reason code cannot settle that. A household that moved out of the Old City is rightly marked "shifted", and the files cannot tell it apart from an elector who was at home when the officer missed them. '
+    'A reason code cannot settle that. A household that moved out of the Old City is rightly marked "shifted", and the lists cannot tell it apart from an elector who was at home when the officer missed them. '
     'Religion and age are counted separately, so a gap by religion may partly be a gap by age. The Malakpet list used here is incomplete. These are the September lists. The Commission extended the calendar on 7 September, as Telangana Today reported, with hearings to 5 November and the final roll on 9 November, so names put back after hearings are not in these counts.')
 
 # ============================================================ PART II
@@ -257,7 +257,7 @@ R.p('In five constituencies the revision struck off %s of the electors on the ro
 R.p('What the Election Commission should do before the final roll:')
 R.numbered([
     'Record and publish the basis for every removal entered as "untraceable or absent", %s names in all, including the visits made and the notice given.' % indian(s(lambda a: a['reasons']['Untraceable/Absent'])),
-    'Publish how removals of electors with no link to the 2002 roll were decided, since the link is the revision\'s own test and the gap it produces is the largest in the files.',
+    'Publish how removals of electors with no link to the 2002 roll were decided, since the link is the revision\'s own test and the gap it produces is the largest in the lists.',
     'Give each elector served a notice enough time to be heard, online or in person. Some slots in the September lists carried several hundred cases.',
     'Explain the removals in the %d parts that lost more than 60%% of their roll.' % len(o60),
     'Publish restorations after hearings, part by part, so that the final count can be set against these lists.',

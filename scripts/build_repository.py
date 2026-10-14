@@ -31,7 +31,7 @@ FIXED = (2026, 10, 1, 0, 0, 0)
 # tables follow in EXTRA. Wording follows the site's rules.
 PUBLISHED = {
     'data/india/states.csv': ('The names left off each state\'s draft roll, with the reasons each Chief Electoral Officer gave', 'state',
-                              'Reasons are what the officers wrote down, and nobody checked them. Some states printed their figures in lakh, flagged in the figures column.'),
+                              'Reasons are what the officers wrote down, and nobody checked them. Some states printed their figures in lakh, and the figures column says which.'),
     'data/india/final_rolls.csv': ('Each final roll set against the draft, with names added and removed after it', 'state',
                                    'Several states gave only the net rise from draft to final. The rise counts new voters too, so it is the most that could have been restored.'),
     'data/india/women_removed.csv': ('Women\'s share of the names left off against their share of the roll', 'state',

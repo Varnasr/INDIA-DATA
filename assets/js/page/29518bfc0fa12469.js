@@ -40,18 +40,18 @@ Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.js
 
   SIR.inShort([
     done + ' of the ' + rows.length + ' states and union territories in the revision had published a final roll by ' + SIR.date(asof) + '.',
-    late.length ? late.length + ' had passed the date their latest schedule set for the final roll without one that we could find: ' + late.map(function (x) { return x.state; }).join(', ') + '.' : '',
+    late.length ? late.length + ' had passed the date their latest schedule set for the final roll with no final roll found: ' + late.map(function (x) { return x.state; }).join(', ') + '.' : '',
     now ? now + ' had published a draft roll and were still taking claims, hearing notices or waiting for the final roll on a later date.' : '',
     wait ? wait + ' had not yet published a draft roll.' : '',
     'Assam had a different kind of revision, and Himachal Pradesh, Jammu and Kashmir and Ladakh have no schedule yet.'
-  ], 'A stage is worked out from the latest schedule we could read and the rolls we could find. A state may have published a roll that has not reached us, so a late stage means the roll was not found, and says nothing about why.');
+  ], 'A stage follows the latest schedule on record and the rolls found published. A state may have published a roll that has not been found, so a late stage means only that the roll was not found, and says nothing about why.');
 
   document.getElementById('kpis').innerHTML = [
     [done, 'final rolls published'], [late.length, 'final rolls past their latest date'], [now, 'drafts out, final roll still to come'], [wait, 'no draft roll yet']
   ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   [].forEach.call(document.querySelectorAll('.asof'), function (e) { e.textContent = SIR.date(asof); });
 
-  VIZ.gantt('vCal', { label: 'Every state on its latest schedule, with the date this page was checked', single: true, today: asof, todayLabel: 'Checked ' + SIR.date(asof),
+  VIZ.gantt('vCal', { label: 'Every state on its latest schedule, with the date the stages describe', single: true, today: asof, todayLabel: 'As of ' + SIR.date(asof),
     rows: rows.map(function (x) { return { name: x.state, steps: [{ label: x.pub ? (x.pubDate ? 'Final roll published ' + SIR.date(x.pubDate) : 'Final roll published, day not found') : 'Latest schedule', enum: x.m.enum, draft: x.m.draft, claims: x.m.claims, claims_end: x.m.claims_end, final: x.m.final }] }; }) });
   document.getElementById('nCal').textContent = P.notes.p3later;
   // days from the first house visit to the final roll, published or due
@@ -73,6 +73,6 @@ Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.js
         (x.pub ? (x.pubDate ? SIR.date(x.pubDate) : 'published, day not found') : x.rp ? 'reported for ' + SIR.date(x.rp.final) + ' (press)' : x.m.final ? 'due ' + SIR.date(x.m.final) : '') + '</td><td class="l"><span class="stage ' + x.cls + '">' + E(x.stage) + '</span></td></tr>';
     }).join('') + '</tbody>';
   var reps = rows.filter(function (x) { return x.rp && !x.pub; });
-  document.getElementById('nOut').innerHTML = (reps.length ? 'The final roll dates for ' + reps.map(function (x) { return '<a href="' + E(x.rp.url) + '" rel="noopener" target="_blank">' + E(x.state) + '</a> (' + E(x.rp.outlet) + ', ' + SIR.date(x.rp.date) + ')'; }).reduce(function (a, t, i, all) { return a + (i === 0 ? '' : i === all.length - 1 ? ' and ' : ', ') + t; }, '') + ' are as the press reported them, and are marked press. No order or note we could read confirms them, so the calendar keeps the last dates a document set. ' : '') + 'Assam, which was given a special revision in place of an intensive one, and Himachal Pradesh, Jammu and Kashmir and Ladakh, whose dates the Commission said it would announce later, are not in the table.';
+  document.getElementById('nOut').innerHTML = (reps.length ? 'The final roll dates for ' + reps.map(function (x) { return '<a href="' + E(x.rp.url) + '" rel="noopener" target="_blank">' + E(x.state) + '</a> (' + E(x.rp.outlet) + ', ' + SIR.date(x.rp.date) + ')'; }).reduce(function (a, t, i, all) { return a + (i === 0 ? '' : i === all.length - 1 ? ' and ' : ', ') + t; }, '') + ' are as the press reported them, and are marked press. No order or note confirms them, so the calendar keeps the last dates a document set. ' : '') + 'Assam, which was given a special revision in place of an intensive one, and Himachal Pradesh, Jammu and Kashmir and Ladakh, whose dates the Commission said it would announce later, are not in the table.';
   SIR.tools();
 }).catch(SIR.fail);

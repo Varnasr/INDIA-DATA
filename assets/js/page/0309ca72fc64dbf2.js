@@ -3,11 +3,11 @@ Promise.all([SIR.json('data/india/reads.json'), SIR.json('data/india/panels.json
   var n = SIR.n, esc = SIR.esc, C = D.counts;
   var by = function (g) { return D.items.filter(function (i) { return i.group === g; }); };
   SIR.inShort([
-    n(C.items) + ' pieces from ' + n(C.outlets) + ' outlets and authors, ' + n(C.videos) + ' of them videos, each opened and read twice.',
+    n(C.items) + ' pieces from ' + n(C.outlets) + ' outlets and authors, ' + n(C.videos) + ' of them videos.',
     'Investigations of how the revision was run, data analyses of who was removed, research on the effect on results, court reporting, and the Election Commission\'s own account.',
     'On whether the deletions changed West Bengal\'s result, the pieces disagree, and the page sets them side by side.',
-    n(PN.counts.people) + ' panels set ' + n(PN.counts.quotes) + ' quotations from commentators beside the site\'s own figures, and say where those figures stop.'
-  ], 'A listed piece is checked for its title, outlet, date and what it shows. Its arguments are its own, and the site does not endorse them.');
+    n(PN.counts.people) + ' panels set ' + n(PN.counts.quotes) + ' quotations from politicians, officials and commentators beside the site\'s own figures, and say where those figures stop.'
+  ], 'A listed piece is there because it adds evidence or argument about the revision. Its arguments are its own, the pieces disagree with each other in places, and listing one does not mean the site agrees with it.');
 
   var li = function (i) {
     return '<li><p><a href="' + esc(i.url) + '" rel="noopener"><b>' + esc(i.title) + '</b></a></p>' +

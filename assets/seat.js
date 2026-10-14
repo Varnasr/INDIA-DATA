@@ -60,7 +60,7 @@
     meghalaya: { label: 'Meghalaya', faq: 'ml', lead: { count: 'removed', base: 'before', per: 100, what: 'names left off the draft roll', of: 'the roll before the revision' },
       reasons: [['shifted_absent_other', 'Shifted, absent or other'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once']],
       election: { year: 2023, count: 'removed', turnout: 'turnout' },
-      limits: 'The Chief Electoral Officer published the names left off and their reasons for every constituency, and the split by sex for the state only. The table names no district, so each constituency\'s district is taken from the published list of constituencies and checked by adding the constituencies up to the Chief Electoral Officer\'s district table, which they match exactly.' },
+      limits: 'The Chief Electoral Officer published the names left off and their reasons for every constituency, and the split by sex for the state only. The table names no district. Each constituency\'s district comes from the published list of constituencies, and the constituencies add up exactly to the Chief Electoral Officer\'s district table.' },
     manipur: { label: 'Manipur', faq: 'mn', lead: { count: 'fall', base: 'before', per: 100, what: 'fall in the roll from the roll before the revision to the final roll', of: 'the roll before the revision', to: 'the final roll' },
       election: { year: 2022, count: 'fall', turnout: 'turnout' },
       limits: 'The Chief Electoral Officer published the roll before the revision and the final roll for every constituency, so the change takes in the names left off and everything added or removed after the draft together. The reasons and the split by sex of the names left off were published for the state only.' },
@@ -198,7 +198,7 @@
 
       var CASE = { 'uttarakhand-67': 'kichha', 'delhi-52': 'tughlakabad', 'gujarat-54': 'danilimda', 'maharashtra-137': 'bhiwandi-east', 'tamilnadu-21': 'anna-nagar', 'assam-76': 'lakhimpur' }[st + '-' + a.ac];
       document.getElementById('seatLinks').innerHTML = (CASE ? '<a class="btn" href="' + root + 'india/cases/#' + CASE + '">A case study of this constituency</a> ' : '') + (C.booths ? '<a class="btn" href="' + stPage + 'explorer/#ac' + ('00' + a.ac).slice(-3) + '">Its polling booths</a> ' : '') + '<a class="btn" href="' + stPage + (st === 'bihar' ? 'results/' : '') + '#ac-' + a.ac + '">' + C.label + ', with this constituency on the map</a> <a class="btn" href="' + stPage + 'method/">Sources and method</a> <a class="btn" href="' + root + 'india/constituencies/">Find another constituency</a>';
-      document.getElementById('pageFaq').innerHTML = '<div class="qa"><h3>Where do these figures come from?</h3><p>From the same tables as the <a href="' + stPage + '">' + C.label + '</a> pages, which give every source on their method page. Every figure here is worked out from them when the page loads.</p></div>' +
+      document.getElementById('pageFaq').innerHTML = '<div class="qa"><h3>Where do these figures come from?</h3><p>From the same tables as the <a href="' + stPage + '">' + C.label + '</a> pages, which give every source on their method page.</p></div>' +
         '<div class="qa"><h3>Can this page say who was left off, or why?</h3><p>No. The site publishes counts only, never a name. ' + (C.reasons ? 'A reason on the list is ' + OFFICER + '. ' : '') + 'Nothing here says whether any person should have been on the roll.</p></div>';
       SIR.tools();
     }).catch(SIR.fail);

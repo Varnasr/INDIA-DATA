@@ -64,6 +64,6 @@ SIR.json('data/india/factors.json').then(function (d) {
   var fmt = function (v) { return v ? p2(v.rho) + (v.clear ? ' *' : '') : '–'; };
   SIR.table('tAll', [{ h: 'State' }, { h: 'Districts', num: true }].concat(keys.map(function (k) { return { h: FL[k], num: true }; })).concat([{ h: 'Measure' }]),
     S.map(function (s) { return [SIR.esc(s.state), s.units].concat(keys.map(function (k) { return fmt(s.survey[k]); })).concat([MEAS[s.measure]]); }));
-  document.getElementById('mChecked').textContent = 'The ' + X.bihar_checked + ' Bihar values that were read from the same compendium for the Bihar pages agree exactly. A star in the table marks a correlation clear of chance.';
+  document.getElementById('mChecked').textContent = 'A star in the table marks a correlation clear of chance.';
   SIR.showFaq('india', 'factors');
 }).catch(SIR.fail);

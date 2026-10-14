@@ -38,7 +38,7 @@ Promise.all([SIR.json('data/india/ac_change.json'), SIR.json('data/india/ac_find
     if (t.length < 2) { document.getElementById('fRes').innerHTML = ''; out.textContent = n(F.rows.length) + ' constituencies in ' + F.places.length + ' places. Type two letters or more.'; return; }
     var hit = F.rows.filter(function (r) { return (r[2] + ' ' + r[3]).toLowerCase().indexOf(t) >= 0; });
     hit.sort(function (a, b) { var x = a[2].toLowerCase().indexOf(t) === 0, y = b[2].toLowerCase().indexOf(t) === 0; return x === y ? 0 : x ? -1 : 1; });
-    out.textContent = hit.length ? n(hit.length) + (hit.length === 1 ? ' constituency found.' : ' constituencies found.') + (hit.length > 40 ? ' The first 40 are shown.' : '') : 'No constituency matches. A state that published nothing by constituency is not here, and its page works by district.';
+    out.textContent = hit.length ? n(hit.length) + (hit.length === 1 ? ' constituency found.' : ' constituencies found.') + (hit.length > 40 ? ' The first 40 are shown.' : '') : 'No constituency matches. A state that published nothing by constituency is not here, and its page gives figures by district.';
     document.getElementById('fRes').innerHTML = hit.slice(0, 40).map(function (r) {
       return '<li><a href="../../' + esc(r[6]) + '"><b>' + (r[1] != null ? '<span class="acno">' + r[1] + '</span> ' : '') + esc(r[2]) + '</b><span>' + esc(r[3]) + ', ' + esc(FP[r[0]].state) + '</span></a><p>' + figure(r) + '</p></li>';
     }).join('');
