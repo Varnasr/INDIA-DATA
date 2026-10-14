@@ -252,7 +252,7 @@ def shell(out, meta, content, scripts):
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="ql" data-i18n-each>%s</div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('guide/', 'How to Use This Site'), ('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a Constituency'), ('help/', 'Removed from the Roll? What to Do'), ('india/disputes/', 'Protests and Disputes'), ('india/rti/', 'RTI Replies'), ('india/cases/', 'Case Studies'), ('india/reading/', 'Further Reading and Viewing'),
+        (('guide/', 'How to Use This Site'), ('about-the-data/', 'About the Data'), ('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a Constituency'), ('help/', 'Removed from the Roll? What to Do'), ('india/disputes/', 'Protests and Disputes'), ('india/rti/', 'RTI Replies'), ('india/cases/', 'Case Studies'), ('india/reading/', 'Further Reading and Viewing'),
          ('india/women/', 'Women'), ('india/numbers/', 'The SIR in Numbers'), ('support/', 'Support Our Work')))
     # "Start Here" is its own menu beside Places, so Places holds only places
     about = ''.join(i for i in items if i.startswith('<div class="about"'))
@@ -489,7 +489,7 @@ def search_index():
             if h not in seen:
                 pages.append([p['id'], label, h])
     # the front page's own pages, which no tab row lists
-    pages += [['home', 'Removed from the Roll? What to Do', 'help/', 'check my name removed deleted left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'Share a List with Us', 'share/'], ['home', 'Support Our Work', 'support/', 'donate contribute upi support fund'], ['home', 'How to Use This Site', 'guide/', 'help guide how to use navigate tour start'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/'], ['home', 'Feedback and Corrections', 'feedback/', 'feedback suggestion error mistake wrong figure report correction contact'], ['home', "What's New", 'updates/', 'new latest added changelog timeline updates']]
+    pages += [['home', 'Removed from the Roll? What to Do', 'help/', 'check my name removed deleted left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'About the Data', 'about-the-data/', 'definitions glossary what counts mean names left off fall in the roll net change notices no-mapping discrepancy reasons per 100 margin lakh crore'], ['home', 'Share a List with Us', 'share/'], ['home', 'Support Our Work', 'support/', 'donate contribute upi support fund'], ['home', 'How to Use This Site', 'guide/', 'help guide how to use navigate tour start'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/'], ['home', 'Feedback and Corrections', 'feedback/', 'feedback suggestion error mistake wrong figure report correction contact'], ['home', "What's New", 'updates/', 'new latest added changelog timeline updates']]
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),
