@@ -89,7 +89,7 @@
     <li><a href="../#every-state-and-union-territory">Every state and union territory</a>, with each state's figure and the link to its source. The same table can be downloaded as <a href="../../data/india/states.csv">states.csv</a>.</li>
     <li><a href="../#after-the-final-rolls">After the final rolls</a>, the draft and final roll of each state that has published one.</li>
     <li><a href="../process/">How the revision was run</a>, the orders and dates of the revision with a link to each document.</li>
-    <li><a href="../method/">Sources and method</a>, how each state's figures were read and counted.</li>
+    <li><a href="../method/">Sources and method</a>, where each state's figures come from and how they are counted.</li>
   </ul>
   <p class="note">Figures as of <span id="asof"></span>.</p>
 </article>
@@ -143,7 +143,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
 
   document.getElementById('nTotal').textContent = 'Each state\'s "before" figure is its roll on the day its revision began, so the total adds up rolls taken between June 2025 and mid-2026. ' +
     (noBefore.length ? noBefore.map(function (s) { return s.state; }).join(' and ') + ' published no roll before the revision, so ' + (noBefore.length > 1 ? 'their ' : 'its ') + n(noBefore.reduce(function (a, s) { return a + s.removed; }, 0)) + ' names count in the total and not in the rate. ' : '') +
-    'We found no single all-India figure from the Election Commission.';
+    'The Election Commission has published no single all-India figure.';
 
 
   // the roll before, the names left off, the draft: states with both figures
@@ -190,7 +190,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/lok_sabha_
   document.getElementById('pMt').textContent = 'The spread can be tested where the seats\' own counts exist. ' + tests.slice(0, -1).join(', ') + ', and ' + tests[tests.length - 1] + '. The totals come within ' + gap + ' seats of the counted ones, but the spread puts ' + Math.min.apply(null, miss) + ' to ' + Math.max.apply(null, miss) + ' seats on the wrong side of their margin in each state, so it says how many seats, never which ones. In Odisha the press printed counts for six seats, three that lost many names and three that lost far fewer. Against the 2024 Assembly margin the spread puts ' + sixWrong + ' of the 6 on the wrong side, which is what an even spread does to seats far from the state\'s average.';
   SIR.table('tMo', [{ h: 'Seat' }, { h: 'Names left off, as reported', num: true }, { h: 'On the spread', num: true }, { h: '2024 Assembly margin', num: true }],
     six.map(function (x) { return [x.name, n(x.press), n(x.spread), n(x.margin)]; }));
-  document.getElementById('nM').innerHTML = 'Assembly margins are from each state\'s own election pages on this site. 2024 margins are the winner\'s votes less the runner-up candidate\'s, from the ' + E(M.source) + ', checked against the published margin in every seat and against a second table for Bihar\'s 40. NOTA is not counted as a runner-up. Surat was won unopposed and is left out. In 2024, ' + M.ls_close.under_50000 + ' of ' + M.ls_close.contested + ' contested seats were won by fewer than 50,000 votes and ' + M.ls_close.under_100000 + ' by fewer than 1,00,000. The seat-by-seat figures can be downloaded as <a href="../../data/india/margins_ls2024.csv">margins_ls2024.csv</a>.';
+  document.getElementById('nM').innerHTML = 'Assembly margins are from each state\'s own election pages on this site. 2024 margins are the winner\'s votes less the runner-up candidate\'s, from the ' + E(M.source) + '. NOTA is not counted as a runner-up. Surat was won unopposed and is left out. In 2024, ' + M.ls_close.under_50000 + ' of ' + M.ls_close.contested + ' contested seats were won by fewer than 50,000 votes and ' + M.ls_close.under_100000 + ' by fewer than 1,00,000. The seat-by-seat figures can be downloaded as <a href="../../data/india/margins_ls2024.csv">margins_ls2024.csv</a>.';
 
   // the roll in every Lok Sabha election since 1984-85, years spaced to scale
   var LR = LS.rows, first = LR[0], last = LR[LR.length - 1];

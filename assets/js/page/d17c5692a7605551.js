@@ -46,7 +46,7 @@ Promise.all([SIR.json('data/india/cases.json'), SIR.json('data/uttarakhand/const
       h += '<h3>' + HEAD[g] + '</h3><ul class="plain items">' + c.items[g].map(function (i) {
         return '<li>' + esc(i.text) + ' <a href="' + esc(i.url) + '" rel="noopener">' + esc(i.outlet) + (i.date ? ', ' + SIR.date(i.date) : '') + '</a></li>'; }).join('') + '</ul>';
     });
-    h += '<h3>What we looked for and could not find</h3><ul class="plain">' + c.not_found.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+    h += '<h3>What could not be found</h3><ul class="plain">' + c.not_found.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
     if (c.left_out.length) h += '<p class="note">' + n(c.left_out.length) + (c.left_out.length === 1 ? ' item' : ' items') + ' found in the reporting on this place could not be confirmed or fall outside what this site publishes, and are left out.</p>';
     h += '<p><a class="btn" href="' + LINK[c.id] + '">' + (c.id === 'murshidabad-malda' ? 'West Bengal, with these districts on the map' : F[c.id] && F[c.id].unit ? 'This district\'s own page' : 'This constituency\'s own page') + '</a></p>';
     box.insertAdjacentHTML('beforeend', h);
