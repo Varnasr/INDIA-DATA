@@ -409,7 +409,7 @@ writes `data/bihar/final.json` and fails unless every seat adds up and the
 totals equal the press note of 30 September 2025. A seat's roll before is its
 draft plus its phase 1 list, because the June roll exists only as a state
 total. Findings: the net fall still exceeds the 2025 margin in 124 of 243
-seats (174 on the draft removals); women were 55.5% of those removed at the
+seats (174 on every name left off or deleted, both phases); women were 55.5% of those removed at the
 draft and 47.9% of those added.
 
 `scripts/build_bihar_tests.py` sets two reasons against outside records and
@@ -467,8 +467,8 @@ against 7,566) and its percentages are rounded to whole points.
 `scripts/build_robust.py` puts each headline Bihar finding through the
 checks that could undo it (Simpson's paradox included) and writes
 `data/bihar/robust.json`, shown as "How sure are we?" on the Elections page,
-in the report and in the deck. Results: removals exceed the margin on the
-draft count (174) and on the final roll (124); women are over-represented in
+in the report and in the deck. Results: names left off or deleted (both
+phases) exceed the margin in 174 seats, and the net fall to the final roll in 124; women are over-represented in
 38 of 38 districts and 242 of 243 seats; more removals on NDA ground holds
 inside seats (NDA-led booths higher in 150 of 237) but between seats in the
 same district the gap (+0.46 per 100, -0.17 to +1.10) is too small to be sure
@@ -1773,8 +1773,8 @@ Hyderabad: overview, age/sex/religion/2002, polling parts, hearings, the FAQ,
 limits, method), named in a small label above every title, and a contents
 slide numbered from the sections. **Titles are plain sentences stating the
 finding, computed from the data**, never a slogan: "In 174 of 243 seats, more
-names were removed than the 2025 winning margin", not "Where the removals
-dwarfed the margin". A title that makes a claim checks it first (the
+names were left off or deleted than the 2025 winning margin", not "Where the
+names left off dwarfed the margin". A title that makes a claim checks it first (the
 Hyderabad margin slide checks every seat lost more names than its winner
 polled; the districts slide names the factor with the largest rank
 correlation and lists those under 0.2 as unrelated). The decks state no site
