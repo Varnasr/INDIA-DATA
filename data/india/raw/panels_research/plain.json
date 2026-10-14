@@ -1,6 +1,14 @@
 {
  "about": "The site's own wording for the panels on the reading page. claims.json holds each quotation verbatim with the first reading's notes, verified.json the second reading's verdict and corrections. This file holds only what the page says around a quotation: what it rests on (rests), the site's own figures (site) and where those figures stop (stops), plus a short role, an introduction and the strongest points and overreach for each person, reworded into the site's writing rules. 'uses' lists figures the text quotes, each checked against the published file by scripts/build_panels.py.",
- "order": ["prannoy-roy", "indian-express", "ravish-kumar", "yogendra-yadav", "debraj-ray", "newslaundry", "lokniti-csds"],
+ "order": [
+  "prannoy-roy",
+  "indian-express",
+  "ravish-kumar",
+  "yogendra-yadav",
+  "debraj-ray",
+  "newslaundry",
+  "lokniti-csds"
+ ],
  "kinds": {
   "count from official data": "A count from official figures",
   "inference about effect on results": "A reading of the effect on results",
@@ -20,13 +28,43 @@
      "rests": "He does not name the data behind the two swing figures. The comparison sets the 25 seats with the most deletions against the 25 with the fewest, with nothing to allow for other ways those seats differ, and the episode does not define the deletion rate.",
      "site": "West Bengal's own figures show why other differences matter. Measured by the fall in the roll, the most affected districts are Kolkata North at 27.98 per 100 and Kolkata South at 24.54, and the least affected is Purbo Medinipur at 1.64. By seat the range runs from 39.74 in Chowrangee to 0.34 in Patashpur, so the seats at either end sit in different parts of the state with different histories of voting. In Bihar, the one state where the site has fitted a model of the swing, leaving out each seat's lead at the previous election turns a slope of +0.31 into -0.83.",
      "stops": "The site has not fitted a swing model for West Bengal. A vote count also cannot show whether the removals moved votes from one party to another.",
-     "uses": [["data/westbengal/summary.json", "27.98"], ["data/westbengal/summary.json", "1.64"], ["data/westbengal/summary.json", "39.74"], ["data/westbengal/constituencies.json", "0.34"]]
+     "uses": [
+      [
+       "data/westbengal/summary.json",
+       "27.98"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "1.64"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "39.74"
+      ],
+      [
+       "data/westbengal/constituencies.json",
+       "0.34"
+      ]
+     ]
     },
     "1": {
      "rests": "The figure matches the Sabar Institute's count as BehanBox reported it, 61.8 per cent. That count takes names deleted and names held for adjudication together.",
      "site": "The Chief Electoral Officer's own counts give smaller shares. Women were 53.5 per cent of the 58.2 lakh names left off the draft, against 49.2 per cent of the roll, and 52.6 per cent of the fall from the 2024 roll to the roll at the 2026 nominations. They were over-represented in 21 of 24 districts.",
      "stops": "The Chief Electoral Officer has published no split by sex of the adjudication outcomes, so the site cannot check the larger figure.",
-     "uses": [["data/westbengal/summary.json", "53.53"], ["data/westbengal/summary.json", "52.59"], ["data/westbengal/summary.json", "5820899"]]
+     "uses": [
+      [
+       "data/westbengal/summary.json",
+       "53.53"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "52.59"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "5820899"
+      ]
+     ]
     },
     "2": {
      "rests": "He does not say how the religion of deleted electors was found. It can only be guessed from names, as the Sabar Institute did. His rate comparison is consistent with his own figures, 30 lakh against 19.8 lakh. The word targeted is a claim about purpose drawn from a pattern.",
@@ -63,19 +101,50 @@
      "rests": "The paper does not say which measure of deletions it used. Its figures match Newslaundry's third test, which used the deletions under adjudication from the Sabar Institute's data. In the line before, the paper says there was no evidence of the revision's role in the outcome.",
      "site": "The Chief Electoral Officer published no removals below the state, so the site measures the fall in the roll from 2024 instead. On that measure the fall exceeds the 2026 margin in 139 of 294 seats. Seats the AITC won lost 12.38 per 100 and seats the BJP won lost 9.41, and set against their own districts the gap shrinks to 0.23 against 0.03.",
      "stops": "A fall larger than the margin shows that it could have decided the seat. It cannot show that it did.",
-     "uses": [["data/westbengal/summary.json", "12.38"], ["data/westbengal/summary.json", "9.41"], ["data/westbengal/summary.json", "0.23"]]
+     "uses": [
+      [
+       "data/westbengal/summary.json",
+       "12.38"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "9.41"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "0.23"
+      ]
+     ]
     },
     "3": {
      "rests": "The totals match the official figures as reported.",
      "site": "In West Bengal 60,06,675 names were held for adjudication and 27,16,393 were found not eligible. Of the appeals, 16,10,311, or 49.3 per cent, were against a name's inclusion.",
      "stops": "Who filed the 16 lakh appeals against inclusion is not public. The paper says the Commission did not say.",
-     "uses": [["data/westbengal/summary.json", "6006675"], ["data/westbengal/summary.json", "2716393"], ["data/westbengal/summary.json", "1610311"]]
+     "uses": [
+      [
+       "data/westbengal/summary.json",
+       "6006675"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "2716393"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "1610311"
+      ]
+     ]
     },
     "4": {
      "rests": "Documents as the paper reports them.",
      "site": "The process page carries the Goa sequence from the special issue, marked as press. Goa left 1,00,042 names off its draft, 8.44 for every 100 electors.",
      "stops": "The 97 are the paper's count, and the site holds no list of them.",
-     "uses": [["data/india/states.json", "100042"]]
+     "uses": [
+      [
+       "data/india/states.json",
+       "100042"
+      ]
+     ]
     }
    },
    "strongest": [
@@ -89,8 +158,7 @@
   "ravish-kumar": {
    "name": "Ravish Kumar",
    "role": "Journalist and broadcaster, formerly of NDTV India, who publishes daily commentary in Hindi on his own YouTube channel.",
-   "intro": "His episodes of 23 September and 1 October 2026 follow the Express investigation closely. The quotations are from YouTube's Hindi captions and the translations are the site's. Clips of party leaders inside his episodes are left out, so every line here is his own.",
-   "dropped_note": "One more line, on Form 7 objections in Karnataka, relays a minister's figures. The site leaves out party office-holders, so the line is not shown.",
+   "intro": "His episodes of 23 September and 1 October 2026 follow the Express investigation closely. The quotations are from YouTube's Hindi captions and the translations are the site's. Where he relays a party leader's figures, the panel says whose they are.",
    "claims": {
     "0": {
      "rests": "The count of 14 matches the Express. The paper describes them as objections to decisions taken and orders issued without the two Commissioners' knowledge, which is narrower than disagreement with the Chief Election Commissioner.",
@@ -106,28 +174,56 @@
      "rests": "This matches the Express account of Goa.",
      "site": "The process page carries the Goa sequence from the special issue, marked as press. Goa left 1,00,042 names off its draft, 8.44 for every 100 electors.",
      "stops": "The 97 are the paper's count, and the site holds no list of them.",
-     "uses": [["data/india/states.json", "100042"]]
+     "uses": [
+      [
+       "data/india/states.json",
+       "100042"
+      ]
+     ]
     },
     "3": {
      "rests": "He names no source in this line. The figure matches the Express, which says the revision struck more than 13 crore names off the draft rolls.",
      "site": "The site's own sum across the 31 states and union territories with a draft is 13,39,03,307 names left off. In the states that published a full split by reason, about a fifth were entered as dead. In several states the final roll is larger than the draft.",
      "stops": "The 13 crore are names left off draft rolls before anything was put back, and they include the dead and the duplicates. The site cannot say how many of them were eligible electors.",
-     "uses": [["data/india/states.json", "133903307"]]
+     "uses": [
+      [
+       "data/india/states.json",
+       "133903307"
+      ]
+     ]
     },
     "4": {
      "rests": "This matches the state totals as reported. Of the 60,06,675 names held for adjudication, 27,16,393 were found not eligible.",
      "site": "The West Bengal page also gives 32,68,119 found eligible and 37,05,235 appeals pending, as reported. Only 1,607 names were restored before the poll.",
      "stops": "These are state totals as reported. With most appeals still pending, the site cannot say how many of the 27 lakh were eligible.",
-     "uses": [["data/westbengal/summary.json", "3268119"], ["data/westbengal/summary.json", "3705235"], ["data/westbengal/summary.json", "1607"]]
+     "uses": [
+      [
+       "data/westbengal/summary.json",
+       "3268119"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "3705235"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "1607"
+      ]
+     ]
     },
     "6": {
      "kind": "A reading of the effect on the rolls",
      "rests": "Form 6 is the application for new enrolment. The declaration could delay or block an application, and the Express says applicants could not submit without answering it. No source found shows it removing names already on the roll.",
      "site": "The section on Form 6 on the process page sets out the declaration and the Commissioners' objections.",
      "stops": "No count exists of Form 6 applications refused because of the declaration."
+    },
+    "5": {
+     "rests": "He gives these as the figures of Rizwan Arshad, a Karnataka minister, from the minister's letter to the Chief Electoral Officer.",
+     "site": "The Disputes page lists the bulk Form 7 objections reported in Karnataka, each with its source. Karnataka's own pages carry the Chief Electoral Officer's district figures only.",
+     "stops": "The Chief Electoral Officer has published no count of Form 7s by who filed them, so the 93 per cent cannot be set against an official figure.",
+     "uses": []
     }
    },
-   "drop": {"5": "Relays a Karnataka minister's figures. The site leaves out party office-holders, and the second reading recommended dropping it."},
    "strongest": [
     "He follows the Express documents closely, and the figures he relays from them are right as reported.",
     "The West Bengal adjudication figure he uses, 27 lakh, is the reported official one.",
@@ -147,19 +243,42 @@
      "rests": "His oral submission in the Supreme Court, as LiveLaw reported it.",
      "site": "The site uses the same kind of projection. It puts Bihar's adults at about 8.30 crore on 1 March 2026, against 7.90 crore on the roll before the revision and 7.24 crore on the draft. Across 19 states the rolls held 98.3 per cent of projected adults before the revision and 84.4 per cent on the drafts.",
      "stops": "A projection counts residents. In a state that sends workers elsewhere it counts adults who may be registered where they came from, and the site says so beside the figure.",
-     "uses": [["data/india/states.json", "83027000"]]
+     "uses": [
+      [
+       "data/india/states.json",
+       "83027000"
+      ]
+     ]
     },
     "1": {
      "rests": "His calculation as The Wire set it out. The arithmetic holds, and the ratio of electors to adults falls from 97 to 88 per cent.",
      "site": "The site's figures move the same way. Bihar's draft held 7,24,05,756 names after 65,59,626 were left off in the first phase.",
      "stops": "Part of the gap is young adults not yet enrolled and part is error in the projection, so the site does not call the whole of it disenfranchisement.",
-     "uses": [["data/bihar/final.json", "72405756"], ["data/india/states.json", "6559626"]]
+     "uses": [
+      [
+       "data/bihar/final.json",
+       "72405756"
+      ],
+      [
+       "data/india/states.json",
+       "6559626"
+      ]
+     ]
     },
     "2": {
      "rests": "His figures as LiveLaw reported them, with no source given. His reason, that more men migrate and die, is his own inference.",
      "site": "The share matches the site's count closely, though the totals differ. The first-phase lists hold 36,39,976 women and 29,19,433 men, so women are 55.5 per cent of the names against 47.9 per cent of the roll. They are over-represented in all 38 districts and in 242 of 243 seats.",
      "stops": "The lists do not say why. Moves on marriage account for about half a year's worth of the excess, and the district pattern runs against that explanation.",
-     "uses": [["data/india/states.json", "3639976"], ["data/india/states.json", "2919433"]]
+     "uses": [
+      [
+       "data/india/states.json",
+       "3639976"
+      ],
+      [
+       "data/india/states.json",
+       "2919433"
+      ]
+     ]
     },
     "3": {
      "rests": "Said in reply to a question about 2003, when he asked the Commission to produce the 2003 order, which he said was not public.",
@@ -170,7 +289,16 @@
      "rests": "A forecast made in August 2025.",
      "site": "The final roll did not bear the forecast out as stated. After the draft 3,66,742 more names were removed and 21,53,343 added, and the final roll of 7,41,92,357 was 47,72,808 below the roll before the revision.",
      "stops": "Disenfranchisement turns on who was eligible, and the lists record only the reason an officer wrote down.",
-     "uses": [["data/bihar/final.json", "74192357"], ["data/bihar/final.json", "4772808"]]
+     "uses": [
+      [
+       "data/bihar/final.json",
+       "74192357"
+      ],
+      [
+       "data/bihar/final.json",
+       "4772808"
+      ]
+     ]
     },
     "5": {
      "rests": "The Wire's account of his presentation to the Court. The article does not give his adult base, and 81 lakh plus the final roll implies about 8.23 crore.",
@@ -203,7 +331,16 @@
      "rests": "An upper bound under assumptions he states. It agrees with Newslaundry's count and with The Wire's, which reached 25.",
      "site": "His state totals come from the same press note the site uses. They give 7,66,37,529 electors before the revision, 58,20,899 left off the draft, 60,06,675 held for adjudication and 27,16,393 found not eligible.",
      "stops": "The Chief Electoral Officer has published no adjudication outcomes by constituency, so the site does not compute this bound.",
-     "uses": [["data/westbengal/summary.json", "76637529"], ["data/westbengal/summary.json", "5820899"]]
+     "uses": [
+      [
+       "data/westbengal/summary.json",
+       "76637529"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "5820899"
+      ]
+     ]
     },
     "1": {
      "rests": "His widest bound, which counts the shifted and absent as well, flips 69 seats and leaves the BJP ten short of a majority. He argues it would need about 92 per cent turnout among the removed and about 95 per cent of them voting against the BJP.",

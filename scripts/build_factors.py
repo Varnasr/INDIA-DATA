@@ -51,7 +51,12 @@ CHECK = '--check' in sys.argv
 SURVEY_STATES = [('Bihar', 'roll_2025'), ('Gujarat', 'left_off'), ('Karnataka', 'left_off'), ('Maharashtra', 'left_off'),
                  ('Telangana', 'left_off'), ('Tamil Nadu', 'left_off'), ('Uttar Pradesh', 'left_off'),
                  ('Delhi', 'left_off'), ('West Bengal', 'fall'), ('Kerala', 'fall'), ('Rajasthan', 'change_2023'),
-                 ('Uttarakhand', 'left_off')]
+                 ('Uttarakhand', 'left_off'), ('Andhra Pradesh', 'left_off'), ('Meghalaya', 'left_off'),
+                 ('Manipur', 'fall'), ('Odisha', 'fall'), ('Assam', 'fall_after_draft'),
+                 ('Chhattisgarh', 'rise_after_draft'), ('Mizoram', 'rise_after_draft')]
+# for these, today's districts against the survey's are in raw/nfhs5_alias, each row with its parents and source
+ALIAS_FILES = {'Andhra Pradesh': 'andhrapradesh', 'Assam': 'assam', 'Chhattisgarh': 'chhattisgarh', 'Manipur': 'manipur',
+               'Meghalaya': 'meghalaya', 'Mizoram': 'mizoram', 'Odisha': 'odisha'}
 NFHS_STATE = {'Delhi': 'NCT Delhi'}  # as the compendium names it
 # key, NFHS-5 indicator number, label, source
 FACTORS = [
@@ -266,6 +271,9 @@ def build():
     states, units_out = [], []
     for state, measure in SURVEY_STATES:
         al = ALIAS.get(state, {})
+        if state in ALIAS_FILES:
+            al = {r['district']: r['nfhs_district'] for r in csv.DictReader(
+                open(os.path.join(RAW, 'nfhs5_alias', 'alias_%s.csv' % ALIAS_FILES[state]), encoding='utf-8'))}
         units = {}
         for d in state_rows(state):
             name = al.get(d['district'], d['district'])

@@ -9,7 +9,7 @@ SIR.json('data/india/factors.json').then(function (d) {
   var urbUp = cl('urban_pct', 1), denUp = cl('density', 1);
   var none = S.filter(function (s) { return !Object.keys(s.survey).some(function (k) { return k !== 'sex_ratio' && s.survey[k] && s.survey[k].clear; }); }).map(function (s) { return s.state; });
   var big = S.filter(function (s) { return s.units >= 20; }), cols = big.map(function (s) { return s.school_fuel; }), lo = Math.min.apply(null, cols), hi = Math.max.apply(null, cols);
-  var MEAS = { left_off: 'names left off per 100 on the roll before', roll_2025: 'names removed per 100 on the 2025 roll', fall: 'fall in the roll per 100', change_2023: 'fall in the roll from 2023 per 100', after_draft: 'names removed after the draft per 100 on the draft' };
+  var MEAS = { left_off: 'names left off per 100 on the roll before', roll_2025: 'names removed per 100 on the 2025 roll', fall: 'fall in the roll per 100', change_2023: 'fall in the roll from 2023 per 100', after_draft: 'names removed after the draft per 100 on the draft', fall_after_draft: 'fall in the roll after the draft per 100 on the draft', rise_after_draft: 'rise in the roll after the draft per 100 on the draft' };
   var I = d.income, incUp = I.filter(function (s) { return s.income.clear && s.income.rho > 0; }).map(function (s) { return s.state; }),
     incDn = I.filter(function (s) { return s.income.rho < 0; }).map(function (s) { return s.state; });
 

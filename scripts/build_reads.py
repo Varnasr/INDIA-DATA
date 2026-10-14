@@ -72,8 +72,12 @@ def build():
     # a third round, 15 September to 10 October 2026, found and read twice
     third = json.loads((RAW / 'round3.json').read_text(encoding='utf-8'))
     ver.update({v['url']: v for v in json.loads((RAW / 'round3_verified.json').read_text(encoding='utf-8'))})
+    # a fourth round, to 14 October 2026, found and read twice
+    fourth = json.loads((RAW / 'round4.json').read_text(encoding='utf-8')) if (RAW / 'round4.json').exists() else []
+    if fourth:
+        ver.update({v['url']: v for v in json.loads((RAW / 'round4_verified.json').read_text(encoding='utf-8'))})
     out, dropped = [], []
-    for i, it in enumerate(items + EXTRA + sabar + third):
+    for i, it in enumerate(items + EXTRA + sabar + third + fourth):
         v = ver.get(it['url'])
         if not v or v['status'] not in ('confirmed', 'corrected'):
             dropped.append({'title': it['title'], 'outlet': it['outlet'], 'why': (v or {}).get('note', 'not read a second time')})
@@ -83,13 +87,13 @@ def build():
             it['authors'] = ', '.join(it['authors'])
         if i in PLAIN:
             it['shows'] = PLAIN[i]
-        g = BY_URL.get(it['url']) or TYPE.get(it['type'])
+        g = BY_URL.get(it['url']) or it.get('group') or TYPE.get(it['type'])
         if g not in GROUPS:
             sys.exit('FAIL - no group for %r (%s)' % (it['title'], it['type']))
         if '—' in it['shows']:
             sys.exit('FAIL - em dash in the summary of %r' % it['title'])
         out.append({'group': g, 'title': it['title'], 'outlet': OUTLET.get(it['outlet'], it['outlet']), 'authors': it.get('authors') or '',
-                    'date': it['date'], 'url': it['url'], 'video': it['type'] == 'video', 'duration': it.get('duration') or '',
+                    'date': it['date'], 'url': it['url'], 'video': it['type'].startswith('video'), 'duration': it.get('duration') or '', 'subscription': bool(it.get('subscription')),
                     'shows': it['shows']})
     out.sort(key=lambda x: (GROUPS.index(x['group']), x['date']), reverse=False)
     return {'groups': GROUPS, 'items': out, 'dropped': dropped,

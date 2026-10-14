@@ -44,6 +44,18 @@ def load(*p):
     return json.load(open(os.path.join(ROOT, 'data', *p), encoding='utf-8'))
 
 
+# states drawn by district in each one's own measure, as on its district pages
+SHARED = {
+    'Andhra Pradesh': ('andhrapradesh', lambda r: r['removed'], 'before'),
+    'Meghalaya': ('meghalaya', lambda r: r['removed'], 'before'),
+    'Manipur': ('manipur', lambda r: r['before'] - r['final'], 'before'),
+    'Odisha': ('odisha', lambda r: r['before'] - r['draft'], 'before'),
+    'Assam': ('assam', lambda r: r['draft'] - r['final'], 'draft'),
+    'Chhattisgarh': ('chhattisgarh', lambda r: r['final'] - r['draft'], 'draft'),
+    'Mizoram': ('mizoram', lambda r: r['final'] - r['draft'], 'draft'),
+}
+
+
 def rows(state):
     """District rows for a state as [{district, before, removed, reasons}]."""
     if state == 'Karnataka':
@@ -77,6 +89,9 @@ def rows(state):
     if state == 'Uttarakhand':
         # the CEO's table of the draft: names left off by district
         return [dict(district=r['district'], before=r['roll_before'], removed=r['left_off']) for r in load('uttarakhand', 'districts.json')]
+    if state in SHARED:
+        slug, count, base = SHARED[state]
+        return [dict(district=r['district'], before=r[base], removed=count(r)) for r in load(slug, 'districts.json')]
     raise SystemExit('no rows for ' + state)
 
 
