@@ -906,7 +906,10 @@ set out in `scripts/state_schema.md`.
 - A state here whose constituency table is complete gets a page per
   constituency and per district (`SEATS` in `build_states.py`, `SEATED` in
   `statepage.js`, which adds a finder): Meghalaya, Manipur and Odisha since
-  13 October 2026. The tables name no district, so each carries
+  13 October 2026. `MEASURE` in `statepage.js` adds a district chart and table
+  and, for those three, the winning-margin chart and every constituency; with
+  Andhra Pradesh, Chhattisgarh and Mizoram (district only) the five with seats
+  or full district tables are in `FULL` since 14 October. The tables name no district, so each carries
   `raw/ac_district.csv`, and the build fails unless every district's
   constituencies add up exactly to the state's own district table. Puducherry
   has only its final roll by constituency, nothing to measure a change by,
