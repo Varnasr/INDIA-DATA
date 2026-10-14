@@ -409,7 +409,7 @@ writes `data/bihar/final.json` and fails unless every seat adds up and the
 totals equal the press note of 30 September 2025. A seat's roll before is its
 draft plus its phase 1 list, because the June roll exists only as a state
 total. Findings: the net fall still exceeds the 2025 margin in 124 of 243
-seats (174 on the draft removals); women were 55.5% of those removed at the
+seats (174 on every name left off or deleted, both phases); women were 55.5% of those removed at the
 draft and 47.9% of those added.
 
 `scripts/build_bihar_tests.py` sets two reasons against outside records and
@@ -467,8 +467,8 @@ against 7,566) and its percentages are rounded to whole points.
 `scripts/build_robust.py` puts each headline Bihar finding through the
 checks that could undo it (Simpson's paradox included) and writes
 `data/bihar/robust.json`, shown as "How sure are we?" on the Elections page,
-in the report and in the deck. Results: removals exceed the margin on the
-draft count (174) and on the final roll (124); women are over-represented in
+in the report and in the deck. Results: names left off or deleted (both
+phases) exceed the margin in 174 seats, and the net fall to the final roll in 124; women are over-represented in
 38 of 38 districts and 242 of 243 seats; more removals on NDA ground holds
 inside seats (NDA-led booths higher in 150 of 237) but between seats in the
 same district the gap (+0.46 per 100, -0.17 to +1.10) is too small to be sure
@@ -1027,6 +1027,26 @@ Each seat's and district's own page links to its case (`CASE` in `seat.js` and
 repository: where a source's own address is dead, the item links to the site's
 page that carries the figure. English only.
 
+**About the Data** (`about-the-data/`, English only, in Start Here after How to
+Use This Site, in the search, and linked from the front page's "How we know",
+the guide and Downloads) says what each count means: names left off the draft,
+the reason beside a name, names removed, the fall in the roll, the change after
+the draft, notices, per 100 and why states are not ranked, women's share,
+religion and caste guessed from names, the winning margin, the typical district
+and rank correlations, and press and rounding. Its table of each state's
+constituency measure is read from `data/india/ac_finder.json`, so it follows
+`FINDER`. When a state's measure changes, change the prose there too.
+
+**Page not found** (`404.html` at the root, from `site/404.html`, which sits
+outside `site/pages` so it gets no folder of its own). Netlify serves it at
+whatever address was asked for, so `build_site.py` renders it through the same
+shell and then makes every link and file absolute, sets `data-root="/"`, drops
+the canonical link and adds `noindex`. Its script reads `data/search.json` and
+offers the pages whose name or address matches the words of the missing one
+(Khurdha finds Khurda, a state folder finds that state's overview), and its
+Feedback link carries the address that failed. Edit `site/404.html`, never the
+built file.
+
 **What's New** (`updates/`, in every footer, in the search and linked from
 the front page's "Who made it") lists what was added to the site, by date,
 from `data/updates.json`, which is curated by hand: add an entry when
@@ -1142,7 +1162,7 @@ with `--check`. Same rules as the disputes page: no private person named,
 nothing on what anyone intended. Replies sent through the share form join the
 research file with their filing date. English only.
 
-**Removed from the Roll? What to Do** (`help/`, on the front page's place, pinned on
+**Left Off the Roll? What to Do** (`help/`, on the front page's place, pinned on
 the front page, first under Start here and in every footer) sets out what the
 law and the Commission's orders let an elector do: Form 6, the inquiry before a
 deletion, the two appeals, the helpline and the drive after the revision, free
@@ -1446,7 +1466,7 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
   finder that links to each state's own, and "How we know". The cards come
   in two grids: "Across India" (`.hubs.pins`), twelve pinned cards (`hub pin`,
   a red border and a pin icon drawn by CSS) in rows of three on a wide screen,
-  above a rule: Removed from the Roll? What to Do, Your Rights at a Protest
+  above a rule: Left Off the Roll? What to Do, Your Rights at a Protest
   (the rights section of the brief page), Protests and Disputes, RTI Replies,
   Every Constituency, All India, Women, The Cities, The SIR in Numbers, Case
   Studies, Where the Revision Stands and What's New. Keep the count a multiple
@@ -1721,9 +1741,10 @@ header and kept in the address (`?lang=hi`) and in the reader's browser.
 - **The menu is on** (`MENU` in `assets/i18n.js`), in every page's header,
   and a reader's choice is remembered. No native reader has signed off the
   translations yet, so every translated page carries a notice that the
-  English page governs. `scripts/i18n_workbook.py` writes the review
-  workbook; fold the reviewer's corrections into `assets/i18n/<lang>.js`, and
-  only then take the notice out.
+  English page governs. The owner decided on 14 October 2026 that nobody will
+  review them, so the notice says the page was translated by machine and stays
+  for good. `scripts/i18n_workbook.py` still writes a review workbook if that
+  ever changes.
 
 ## Reports
 
@@ -1752,8 +1773,8 @@ Hyderabad: overview, age/sex/religion/2002, polling parts, hearings, the FAQ,
 limits, method), named in a small label above every title, and a contents
 slide numbered from the sections. **Titles are plain sentences stating the
 finding, computed from the data**, never a slogan: "In 174 of 243 seats, more
-names were removed than the 2025 winning margin", not "Where the removals
-dwarfed the margin". A title that makes a claim checks it first (the
+names were left off or deleted than the 2025 winning margin", not "Where the
+names left off dwarfed the margin". A title that makes a claim checks it first (the
 Hyderabad margin slide checks every seat lost more names than its winner
 polled; the districts slide names the factor with the largest rank
 correlation and lists those under 0.2 as unrelated). The decks state no site
@@ -1813,6 +1834,22 @@ per slot, not the slot's length.
   folder in `PUBLIC_DIRS` or `PRIVATE`. The `_redirects` 404s stay as a second
   line. Do not link source files from a page, and describe
   sources without naming the people or organisations who compiled them.
+- **Left off and deleted are kept apart** (owner's rule, 14 October 2026,
+  from a reader who pointed out the legal difference). A name on the roll
+  before the revision whose form did not come back was **left off the draft**
+  (or excluded from it): no objection, notice or order touched it. Only a name
+  taken off after the draft, on a Form 7 objection or the officer's own
+  motion, with a hearing and an appealable order (RPA 1950 ss.22 and 24), is
+  **deleted**. Bihar's two phases together are **names left off or deleted**;
+  a difference between two rolls stays **the fall in the roll**; Assam's
+  10,56,291 stay **flagged**. The Supreme Court drew the same line (2026 INSC
+  564, paras 134 and 10.9). The sources and both readings are in
+  `data/india/raw/terms_research/`, and About the Data's "Words we use" sets
+  it out for readers. Quotations, titles and data keys keep their own words.
+  `check_writing.py` fails on "removed", "struck off" or "removals" in the
+  site's own words outside quotation marks (the corrections page excepted).
+  The disputes tag "Deletions" became "Names left off or deleted"; the page
+  script maps the old value so old filter links still work.
 - **Writing**: plain explanatory prose. Never refer to earlier versions of the
   analysis or to corrections on a public page, with one exception: the
   corrections page (`corrections/`, linked in every footer and from `terms/`,

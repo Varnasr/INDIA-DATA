@@ -45,10 +45,15 @@ PATTERNS = [
     # was made, so no reader is told how pages are built or how sources were read
     ('talk about how the site works', r"\b(read twice|opened and read|a second reader|second reading|two readers|one researcher|"
      r"when (?:the|this) page loads|the build|the site is not built|auto-captions|YouTube's (?:English|Hindi) captions)\b"),
+    # the owner's rule of 14 October 2026: a name not carried into the draft was
+    # left off it, and only an order after the draft deletes one, so the site's
+    # own words never call either "removed" or "struck off" (quotations aside)
+    ('a word for names that blurs left off and deleted', r'\b(struck off|removals|names? (?:were |was |are |is )?removed|removed (?:from|after) the (?:draft|roll))\b'),
 ]
+QUOTES = re.compile(r'"[^"]*"|\u201c[^\u201d]*\u201d|\u2018[^\u2019]*\u2019')
 SEMI = ('a semicolon between words', r'[a-z]; [a-z]')
 QUOTED = {'quote', 'quotes', 'title', 'title_en', 'headline', 'url', 'source', 'src', 'outlet', 'evidence', 'law',
-          'contact', 'state', 'place', 'places', 'activity', 'para', 'name', 'href', 'issue', 'verbatim', 'text_quote'}
+          'contact', 'state', 'place', 'places', 'activity', 'para', 'name', 'href', 'issue', 'verbatim', 'text_quote', 'translation'}
 # a banned word used as a term of art, allowed by its whole phrase
 ALLOWED = {
     'specially empowered Executive Magistrate': 'the words of BNSS section 163, quoted in a legal point',
@@ -110,8 +115,11 @@ def main():
             t = t.replace(phrase, '')
         checks = PATTERNS + ([SEMI] if prose else [])
         for what, rx in checks:
-            for m in re.finditer(rx, t, flags=re.I if what == 'a banned word' else 0):
-                ctx = ' '.join(t[max(0, m.start() - 50):m.end() + 50].split())
+            if what.startswith('a word for names') and '/corrections/' in p:
+                continue  # the corrections page records what pages used to say
+            tt = QUOTES.sub(' ', t) if what.startswith('a word for names') else t
+            for m in re.finditer(rx, tt, flags=re.I if what != 'an em dash' else 0):
+                ctx = ' '.join(tt[max(0, m.start() - 50):m.end() + 50].split())
                 bad.append('%s: %s in "...%s..."' % (os.path.relpath(p.split(' (')[0], ROOT), what, ctx))
     if bad:
         print('\n'.join(bad[:60]))

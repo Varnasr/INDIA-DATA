@@ -252,7 +252,7 @@ def shell(out, meta, content, scripts):
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="ql" data-i18n-each>%s</div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('guide/', 'How to Use This Site'), ('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a Constituency'), ('help/', 'Removed from the Roll? What to Do'), ('india/disputes/', 'Protests and Disputes'), ('india/rti/', 'RTI Replies'), ('india/cases/', 'Case Studies'), ('india/reading/', 'Further Reading and Viewing'),
+        (('guide/', 'How to Use This Site'), ('about-the-data/', 'About the Data'), ('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a Constituency'), ('help/', 'Left Off the Roll? What to Do'), ('india/disputes/', 'Protests and Disputes'), ('india/rti/', 'RTI Replies'), ('india/cases/', 'Case Studies'), ('india/reading/', 'Further Reading and Viewing'),
          ('india/women/', 'Women'), ('india/numbers/', 'The SIR in Numbers'), ('support/', 'Support Our Work')))
     # "Start Here" is its own menu beside Places, so Places holds only places
     about = ''.join(i for i in items if i.startswith('<div class="about"'))
@@ -308,7 +308,7 @@ def shell(out, meta, content, scripts):
         fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
     fab = '<div class="fabs">%s</div>' % fab if fab else ''
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Removed from the Roll? What to Do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%ssupport/">Support Our Work</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%supdates/">What\'s New</a> · <a href="%scorrections/">Corrections</a> · <a href="%sfeedback/?from=%s">Feedback</a>'
+              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Left Off the Roll? What to Do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%ssupport/">Support Our Work</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%supdates/">What\'s New</a> · <a href="%scorrections/">Corrections</a> · <a href="%sfeedback/?from=%s">Feedback</a>'
               ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, root, root, urllib.parse.quote(here or 'home', safe=''), CFG['email'], CFG['email']))
     # On a phone the header's Downloads button is inside the menu, and the
     # footer link opened the downloads page at its top, where the first button
@@ -445,6 +445,16 @@ def build():
             put(os.path.join(ROOT, rel), externalise(shell(out, meta, heading_ids(content), scripts), rel))
             if out not in NOINDEX:
                 pages.append(out)
+    # the 404 page is served at whatever address was asked for, so every link
+    # and file in it is made absolute, and it is kept out of search engines
+    meta, content, scripts = read_source(os.path.join(ROOT, 'site', '404.html'))
+    page = externalise(shell('404.html', meta, heading_ids(content), scripts), '404.html')
+    page = re.sub(r'(\s(?:href|src)=")(?!https?:|/|#|mailto:|data:|upi:|tel:)', r'\1/', page)
+    page = page.replace('data-root=""', 'data-root="/"')
+    page = re.sub(r'<link rel="canonical"[^>]*>\n?', '', page)
+    if 'name="robots"' not in page:
+        page = page.replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n<meta name="robots" content="noindex">', 1)
+    put(os.path.join(ROOT, '404.html'), page)
     # every page for search engines, and where to find the list
     put(os.path.join(ROOT, 'sitemap.xml'), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + ''.join('<url><loc>%s%s</loc></url>\n' % (CFG['url'], html.escape(o)) for o in sorted(pages)) + '</urlset>\n', compare_unstamped=False)
@@ -489,7 +499,7 @@ def search_index():
             if h not in seen:
                 pages.append([p['id'], label, h])
     # the front page's own pages, which no tab row lists
-    pages += [['home', 'Removed from the Roll? What to Do', 'help/', 'check my name removed deleted left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'Share a List with Us', 'share/'], ['home', 'Support Our Work', 'support/', 'donate contribute upi support fund'], ['home', 'How to Use This Site', 'guide/', 'help guide how to use navigate tour start'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/'], ['home', 'Feedback and Corrections', 'feedback/', 'feedback suggestion error mistake wrong figure report correction contact'], ['home', "What's New", 'updates/', 'new latest added changelog timeline updates']]
+    pages += [['home', 'Left Off the Roll? What to Do', 'help/', 'check my name removed deleted excluded left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'About the Data', 'about-the-data/', 'definitions glossary what counts mean names left off fall in the roll net change notices no-mapping discrepancy reasons per 100 margin lakh crore'], ['home', 'Share a List with Us', 'share/'], ['home', 'Support Our Work', 'support/', 'donate contribute upi support fund'], ['home', 'How to Use This Site', 'guide/', 'help guide how to use navigate tour start'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/'], ['home', 'Feedback and Corrections', 'feedback/', 'feedback suggestion error mistake wrong figure report correction contact'], ['home', "What's New", 'updates/', 'new latest added changelog timeline updates']]
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),
@@ -508,6 +518,9 @@ def search_index():
         rows.append(['hyd', 'd', d['district'], '', 'hyderabad/telangana/district/' + slug(d['district'])[2:] + '/'])
     for d in J('uttarpradesh/districts.json'):
         rows.append(['up', 'd', d['district'], '', 'uttarpradesh/district/' + slug(d['district'])[2:] + '/'])
+    # Maharashtra's constituencies, each with its own page (its districts follow)
+    for a in J('maharashtra/constituencies.json'):
+        rows.append(['mh', 'ac', '%d. %s' % (a['ac'], a['name']), a['district'], 'maharashtra/seat/%d/' % a['ac']])
     for d in J('maharashtra/districts.json'):
         # the press note keeps three old names; a reader may type the new one,
         # and Bombay for Mumbai

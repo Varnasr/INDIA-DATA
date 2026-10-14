@@ -3,7 +3,7 @@
 <div class="page-head"><h1>Overview</h1><ol class="summary" id="short"></ol></div>
 
   <h2>Find a constituency or district</h2>
-  <p class="sub">Each constituency, the area that elects one member of the state assembly, is shaded by the names left off the draft roll for every 100 electors on the roll before the revision. The draft roll is the roll the revision published once those names had been taken off, and counting per 100 electors lets a small seat be set beside a large one. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
+  <p class="sub">Each constituency, the area that elects one member of the state assembly, is shaded by the names left off the draft roll for every 100 electors on the roll before the revision. The draft roll is the roll the revision published once those names had been left off it, and counting per 100 electors lets a small seat be set beside a large one. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
@@ -30,7 +30,7 @@
   <p class="finding" id="fDist"></p>
 
   <h2>The reasons, district by district</h2>
-  <p class="sub">Each district's removals split by the reason entered against the name, which is dead, shifted or absent, or enrolled in more than one place. Districts are in the same order as above.</p>
+  <p class="sub">Each district's names left off the draft, split by the reason entered against the name, which is dead, shifted or absent, or enrolled in more than one place. Districts are in the same order as above.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="vizbox" id="cMix"></div>
@@ -39,16 +39,16 @@
   <p class="finding" id="fMix"></p>
 
   <h2>Chennai</h2>
-  <p class="sub">The city's sixteen constituencies, by names removed per 100 electors and by reason.</p>
+  <p class="sub">The city's sixteen constituencies, by names left off per 100 electors and by reason.</p>
   <div class="grid">
     <div class="panel wide">
-      <div class="chart tall"><canvas id="cChennai" aria-label="Names removed per 100 electors in Chennai's constituencies, by reason"></canvas></div>
+      <div class="chart tall"><canvas id="cChennai" aria-label="Names left off per 100 electors in Chennai's constituencies, by reason"></canvas></div>
     </div>
   </div>
   <p class="finding" id="fChennai"></p>
 
   <h2>Women</h2>
-  <p class="sub">The Chief Electoral Officer has published no split of the names left off by sex. The nearest count is the fall from the final roll of 6 January 2025, which the Chief Electoral Officer published by sex for every constituency, to the draft. It also counts ten months of ordinary deaths, moves and new names, so it is not the names removed. In the first chart each district's grey dot is women's share of the January 2025 roll and the red dot their share of the fall. The second chart shows the change after the draft, with women's share of the draft roll and of the net rise to the final roll.</p>
+  <p class="sub">The Chief Electoral Officer has published no split of the names left off by sex. The nearest count is the fall from the final roll of 6 January 2025, which the Chief Electoral Officer published by sex for every constituency, to the draft. It also counts ten months of ordinary deaths, moves and new names, so it is not the names left off the draft. In the first chart each district's grey dot is women's share of the January 2025 roll and the red dot their share of the fall. The second chart shows the change after the draft, with women's share of the draft roll and of the net rise to the final roll.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWomenJan"></div></div>
   </div>
@@ -59,7 +59,7 @@
   <p class="finding" id="fWomen"></p>
 
   <h2>After the draft</h2>
-  <p class="sub">Each line is a district. Its left end is the names left off the draft roll for every 100 electors on the roll before the revision. Its right end is the fall that still remains on the final roll, after the names added and removed on claims and objections. The flatter the line, the less was made up. Chennai is in red. Hover or tap a line for its district.</p>
+  <p class="sub">Each line is a district. Its left end is the names left off the draft roll for every 100 electors on the roll before the revision. Its right end is the fall that still remains on the final roll, after the names added on claims and deleted on objections. The flatter the line, the less was made up. Chennai is in red. Hover or tap a line for its district.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vFinal"></div></div>
   </div>
@@ -85,23 +85,23 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
   var S = r[0], D = r[1], A = r[2];
   var RS = [['dead', L('Dead'), '--fill-grey'], ['shifted_absent', L('Shifted or absent'), '--fill-navy'], ['multiple', L('Enrolled in more than one place'), '--fill-amber']];
   var labels = D.map(function (d) { return d.district; });
-  VIZ.lollipop('cDist', { label: L('Names removed per 100 electors, by district'), axis: L('Removed per 100 electors'),
+  VIZ.lollipop('cDist', { label: L('Names left off per 100 electors, by district'), axis: L('Left off per 100 electors'),
     rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: SIR.d(d.per_100, 1), tok: d.district === 'Chennai' ? '--fill-red' : '--fill-navy', hi: d.district === 'Chennai' }; }) });
   var low = D[D.length - 1];
   document.getElementById('fDist').innerHTML = L('<b>Chennai lost {c} of every 100 electors, against {s} for the state.</b> The next four are {next}. {lo} lost the fewest, {lov}.', {
     c: SIR.d(D[0].per_100, 1), s: SIR.d(S.per_100, 1), lo: low.district, lov: SIR.d(low.per_100, 1),
     next: D.slice(1, 5).map(function (d) { return L('{s} ({v})', { s: d.district, v: SIR.d(d.per_100, 1) }); }).join(', ') });
 
-  VIZ.heat('cMix', { label: L('Share of each district\'s removals by reason'), cols: RS.map(function (k) { return k[1]; }), tok: ['--fill-purple', '--fill-navy', '--fill-amber'], unit: '%',
+  VIZ.heat('cMix', { label: L('Share of each district\'s names left off, by reason'), cols: RS.map(function (k) { return k[1]; }), tok: ['--fill-purple', '--fill-navy', '--fill-amber'], unit: '%',
     rows: D.map(function (d) { return { name: d.district, v: RS.map(function (k) { return 100 * d[k[0]] / d.removed; }) }; }) });
   var byDead = D.slice().sort(function (a, b) { return b.dead_share - a.dead_share; });
-  document.getElementById('fMix').innerHTML = L('<b>Across the state, {sh} of the names were entered as shifted or absent and {dead} as dead.</b> In Chennai the share entered as shifted or absent is {csh}. Where fewer names were removed, more of them were entered as dead, up to {dmax} in {dmaxn}. A reason on the list is what the officer wrote down, and nobody checked it.', {
+  document.getElementById('fMix').innerHTML = L('<b>Across the state, {sh} of the names were entered as shifted or absent and {dead} as dead.</b> In Chennai the share entered as shifted or absent is {csh}. Where fewer names were left off, more of them were entered as dead, up to {dmax} in {dmaxn}. A reason on the list is what the officer wrote down, and nobody checked it.', {
     sh: SIR.pct(S.shares.shifted_absent), dead: SIR.pct(S.shares.dead), csh: SIR.pct(S.chennai.shifted_share), dmax: SIR.pct(byDead[0].dead_share), dmaxn: byDead[0].district });
 
   var C = A.filter(function (a) { return a.district === 'Chennai'; }).sort(function (a, b) { return b.per_100 - a.per_100; });
   SIR.chart('cChennai', { type: 'bar', data: { labels: C.map(function (a) { return a.name; }), datasets: RS.map(function (k) { return { label: k[1], data: C.map(function (a) { return +(100 * a[k[0]] / a.before).toFixed(1); }), $token: k[2] }; }) },
-    options: { indexAxis: 'y', scales: { y: { stacked: true, ticks: { autoSkip: false } }, x: { stacked: true, beginAtZero: true, title: { display: true, text: L('Removed per 100 electors') } } } } });
-  document.getElementById('fChennai').innerHTML = L('<b>Every one of Chennai\'s {n} constituencies lost more than {min} of every 100 electors.</b> {hi} lost {hiv}, the most of any seat in the state. Chennai holds {roll} of the state\'s roll and {rem} of the names removed.', {
+    options: { indexAxis: 'y', scales: { y: { stacked: true, ticks: { autoSkip: false } }, x: { stacked: true, beginAtZero: true, title: { display: true, text: L('Left off per 100 electors') } } } } });
+  document.getElementById('fChennai').innerHTML = L('<b>Every one of Chennai\'s {n} constituencies lost more than {min} of every 100 electors.</b> {hi} lost {hiv}, the most of any seat in the state. Chennai holds {roll} of the state\'s roll and {rem} of the names left off the draft.', {
     n: C.length, min: Math.floor(C[C.length - 1].per_100), hi: C[0].name, hiv: SIR.d(C[0].per_100, 1), roll: SIR.pct(S.chennai_share_of_roll), rem: SIR.pct(S.chennai_share_of_removed) });
 
   VIZ.waterfall('vWater', { label: L('Tamil Nadu: the roll from before the revision to the final roll'), from: Math.floor(S.draft * 0.8 / 1e5) * 1e5, steps: [
@@ -109,15 +109,15 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
     { name: L('Shifted or absent'), v: S.shifted_absent, kind: 'down' }, { name: L('Enrolled in more than one place'), v: S.multiple, kind: 'down' },
     { name: L('Draft roll'), v: S.draft, kind: 'total' }, { name: L('Net change after the draft'), v: S.added_net, kind: 'up' },
     { name: L('Final roll'), v: S.final, kind: 'total' }] });
-  VIZ.slope('vFinal', { label: L('Names removed per 100 electors at the draft and the net fall at the final roll, by district'),
+  VIZ.slope('vFinal', { label: L('Names left off per 100 electors at the draft and the net fall at the final roll, by district'),
     aName: L('At the draft'), bName: L('At the final roll'),
     rows: D.map(function (d, i) { return { name: d.district, a: d.per_100, b: d.net_per_100, hi: d.district === 'Chennai', lab: i > 0 && i < 4 }; }) });
-  document.getElementById('fFinal').innerHTML = L('<b>The final roll is {a} larger than the draft, and still {f} smaller than the roll before the revision.</b> That is a fall of {p} of every 100 electors. The rise from the draft is at most {m} of the names removed, and it includes new voters. Chennai\'s roll is {c} per 100 smaller than before.', {
+  document.getElementById('fFinal').innerHTML = L('<b>The final roll is {a} larger than the draft, and still {f} smaller than the roll before the revision.</b> That is a fall of {p} of every 100 electors. The rise from the draft is at most {m} of the names left off, and it includes new voters. Chennai\'s roll is {c} per 100 smaller than before.', {
     a: SIR.lakh(S.added_net), f: SIR.lakh(S.net_fall), p: SIR.d(S.net_per_100, 1), m: SIR.pct(S.made_up_pct), c: SIR.d(S.chennai.net_per_100, 1) });
 
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: L('No.') }, { k: 'name', label: L('Constituency'), left: true }, { k: 'district', label: L('District'), left: true },
-    { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Removed'), fmt: SIR.n },
+    { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Left off'), fmt: SIR.n },
     { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
     { k: 'shifted_absent', label: L('Shifted or absent'), fmt: SIR.n }, { k: 'dead', label: L('Dead'), fmt: SIR.n },
     { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
@@ -128,7 +128,7 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
   var WJR = Object.keys(WJ).map(function (k) { var w = WJ[k]; return { name: w.name, a: 100 * w.jw / w.j, b: 100 * w.fw / w.f }; }).sort(function (x, y) { return (y.b - y.a) - (x.b - x.a); });
   VIZ.dumbbell('vWomenJan', { label: L('Women\'s share of the January 2025 roll and of the fall from it to the draft, by district'), min: 46, step: 2, ref: 50,
     aName: L('Women\'s share of the January 2025 roll, %'), aTok: '--fill-grey', bName: L('Women\'s share of the fall to the draft, %'), bTok: '--fill-red', rows: WJR });
-  document.getElementById('fWomenJan').innerHTML = L('<b>From the final roll of January 2025 to the draft, the roll fell by {f}, and women were {w} of that fall against {r} of the January roll.</b> {pw} of every 100 women on that roll and {pm} of every 100 men were not on the draft. Women\'s share of the fall was above their share of the roll in {k} of the {n} constituencies, most of all in {x}, at {xw}. The fall also counts ten months of ordinary deaths, moves and new names, so it is not the names removed.',
+  document.getElementById('fWomenJan').innerHTML = L('<b>From the final roll of January 2025 to the draft, the roll fell by {f}, and women were {w} of that fall against {r} of the January roll.</b> {pw} of every 100 women on that roll and {pm} of every 100 men were not on the draft. Women\'s share of the fall was above their share of the roll in {k} of the {n} constituencies, most of all in {x}, at {xw}. The fall also counts ten months of ordinary deaths, moves and new names, so it is not the names left off the draft.',
     { f: SIR.lakh(S.fall_jan), w: SIR.pct(S.fall_jan_women_pct), r: SIR.pct(S.jan2025_women_pct), pw: SIR.d(S.fall_jan_per_100_women, 1), pm: SIR.d(S.fall_jan_per_100_men, 1), k: S.acs_women_fall_over, n: S.acs, x: S.women_fall_max, xw: SIR.pct(S.women_fall_max_pct) });
 
   // women after the draft, summed from the constituency rolls
@@ -144,7 +144,7 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: L('District'), left: true }, { k: 'acs', label: L('Seats') },
-    { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Removed'), fmt: SIR.n },
+    { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Left off'), fmt: SIR.n },
     { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
     { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'shifted_absent', label: L('Shifted or absent'), fmt: SIR.n }, { k: 'multiple', label: L('Enrolled in more than one place'), fmt: SIR.n },
     { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
@@ -165,10 +165,10 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
         [L('Entered as dead'), SIR.n(a.dead)], [L('Not entered as dead'), SIR.n(a.removed - a.dead)],
         [L('Shifted or absent'), SIR.n(a.shifted_absent)], [L('Enrolled in more than one place'), SIR.n(a.multiple)],
         [L('Fall at the final roll, per 100'), SIR.d(a.net_per_100, 1)], [L('Won in 2026'), a.winner + ' · ' + L('margin {m}', { m: SIR.n(a.margin) })],
-        [L('Removed more than the margin'), a.over_margin ? L('Yes') : L('No')]]); },
+        [L('Left off more than the margin'), a.over_margin ? L('Yes') : L('No')]]); },
       share: function (a) { return L('{n}, Tamil Nadu. {r} names were left off the draft roll here, {p} of every 100 electors. {nd} of them were not entered as dead. The seat was won in 2026 by {m} votes. These are counts from the Chief Electoral Officer\'s published tables. A reason on the list is what the officer wrote down, and nobody checked it.', { n: a.name, r: SIR.n(a.removed), p: SIR.d(a.per_100, 1), nd: SIR.n(a.removed - a.dead), m: SIR.n(a.margin) }); },
       pick: function (a) { var b = document.getElementById('vMap'); if (b.__select) b.__select(a.ac); } });
-    VIZ.map('vMap', { geo: geo, label: L('Map of names removed per 100 electors, by constituency'), title: L('Removed per 100 electors'),
+    VIZ.map('vMap', { geo: geo, label: L('Map of names left off per 100 electors, by constituency'), title: L('Left off per 100 electors'),
       v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },
       inset: { name: L('Chennai'), acs: A.filter(function (a) { return a.district === 'Chennai'; }).map(function (a) { return a.ac; }), left: true },
       pick: function (ac) { if (byAc[ac]) F.select(byAc[ac]); } });

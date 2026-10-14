@@ -79,7 +79,7 @@ def rows():
 FINDER = [
     # place id, state, page, file, count field, base field, per, what the count is, what the base is
     ('bihar', 'Bihar', 'bihar/results/', 'bihar/constituencies.json', 'total', 'electorate_2025', 100,
-     'names removed in both phases', 'the 2025 roll'),
+     'names left off or deleted in both phases', 'the 2025 roll'),
     ('tn', 'Tamil Nadu', 'tamilnadu/', 'tamilnadu/constituencies.json', 'removed', 'before', 100,
      'names left off the draft', 'the roll before the revision'),
     ('wb', 'West Bengal', 'westbengal/', 'westbengal/constituencies.json', 'fall_draft', 'roll_2024', 100,
@@ -97,13 +97,13 @@ FINDER = [
     ('mh', 'Maharashtra', 'maharashtra/', 'maharashtra/constituencies.json', 'left_off', 'before', 100,
      'names left off the draft', 'the roll before the revision'),
     ('as', 'Assam', 'assam/', 'assam/constituencies.json', 'fall', 'draft', 1000,
-     'fall in the roll from the draft to the final roll of the Special Revision, names removed less names added', 'the draft'),
+     'net fall in the roll from the draft to the final roll of the Special Revision', 'the draft'),
     ('ml', 'Meghalaya', 'meghalaya/', 'meghalaya/constituencies.json', 'removed', 'before', 100,
      'names left off the draft', 'the roll before the revision'),
     ('mn', 'Manipur', 'manipur/', 'manipur/constituencies.json', 'fall', 'before', 100,
      'fall in the roll from the roll before the revision to the final roll', 'the roll before the revision'),
     ('od', 'Odisha', 'odisha/', 'odisha/constituencies.json', 'removed', 'draft', 1000,
-     'names removed after the draft', 'the draft'),
+     'names deleted after the draft', 'the draft'),
 ]
 
 
@@ -119,7 +119,7 @@ def finder():
             href = f.split('/')[0] + '/seat/%d/' % r['ac'] if pid in ('tn', 'wb', 'kl', 'dl', 'uk', 'gj', 'rj', 'mh', 'bihar', 'as', 'ml', 'mn', 'od') else page + '#ac-%d' % r['ac']
             rows.append([pid, r['ac'], r['name'], r['district'], r[cnt], round(per * r[cnt] / r[base], 4), href])
     h = J('hyderabad/summary.json')['acs']
-    places.append({'id': 'hyd', 'state': 'Telangana (Hyderabad Old City)', 'page': 'hyderabad/explorer/', 'what': 'names removed from the lists',
+    places.append({'id': 'hyd', 'state': 'Telangana (Hyderabad Old City)', 'page': 'hyderabad/explorer/', 'what': 'names left off the draft, from the lists',
                    'of': 'the roll before the revision', 'per': 100, 'acs': len(h)})
     for a in h:
         rows.append(['hyd', None, a['name'], 'Hyderabad', a['deleted'], round(100 * a['deleted'] / a['electors'], 4), 'hyderabad/explorer/#' + a['name']])

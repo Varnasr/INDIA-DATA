@@ -129,11 +129,12 @@
         var u = new URL(location.href); u.searchParams.set('lang', this.value); location.href = u.toString();
       });
     }
-    // A translation is shown with a notice until a reviewer has read it.
+    // Every translation is made by machine and carries this notice for good:
+    // the English page governs.
     if (lang !== 'en' && !document.getElementById('i18n-note')) {
       var m = document.querySelector('main') || document.body;
       var en = new URL(location.href); en.searchParams.set('lang', 'en');
-      m.insertAdjacentHTML('beforebegin', '<p id="i18n-note" class="i18n-note" role="note">' + L('This translation is awaiting review. Where it differs from the English page, the English page is correct.') + ' <a href="' + en.toString() + '" lang="en" dir="ltr">English</a></p>');
+      m.insertAdjacentHTML('beforebegin', '<p id="i18n-note" class="i18n-note" role="note">' + L('This page was translated by machine. Where it differs from the English page, the English page is correct.') + ' <a href="' + en.toString() + '" lang="en" dir="ltr">English</a></p>');
     }
     // Keep the chosen language when following a link to another page here.
     if (lang !== 'en') document.addEventListener('click', function (e) {

@@ -56,11 +56,11 @@ ruleTot = {k: s(lambda a: a['rules'].get(k, 0)) for k in S['rules']}
 valid = s(lambda a: a['e2023']['valid'])
 
 # ------------------------------------------------------------ cover
-R.cover('Special Intensive Revision 2026', 'Four in ten struck off in Hyderabad\'s Old City',
+R.cover('Special Intensive Revision 2026', 'Four in ten left off the draft in Hyderabad\'s Old City',
         'Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, polling part by polling part',
-        [('electors struck off the five pre-revision rolls', indian(t['deleted'])),
+        [('electors on the five pre-revision rolls left off the draft', indian(t['deleted'])),
          ('of all electors on those rolls', pct(t['rate'])),
-         ('constituencies where more names were struck off than the 2023 margin', '%d of %d' % (len(overM), len(A))),
+         ('constituencies where more names were left off the draft than the 2023 margin', '%d of %d' % (len(overM), len(A))),
          ('kept on the roll but summoned to a hearing', indian(t['hearing']))])
 R.h1('Contents')
 R.toc()
@@ -68,27 +68,27 @@ R.toc()
 # ============================================================ PART I
 R.h1('Part I: The five constituencies')
 R.h2('In short')
-R.stats([(indian(t['deleted']), 'electors struck off'), (pct(t['rate']), 'of the pre-revision rolls'),
-         ('%d of %d' % (len(overM), len(A)), 'seats where the names struck off exceed the 2023 margin'), (indian(t['hearing']), 'kept but summoned to a hearing')])
+R.stats([(indian(t['deleted']), 'electors left off the draft'), (pct(t['rate']), 'of the pre-revision rolls'),
+         ('%d of %d' % (len(overM), len(A)), 'seats where the names left off the draft exceed the 2023 margin'), (indian(t['hearing']), 'kept but summoned to a hearing')])
 R.p('The Special Intensive Revision, a fresh check of every name on the electoral roll, reached Hyderabad in 2026. The pre-revision rolls of five Old City constituencies, the rolls as they stood before the revision began, held %s electors. '
-    'The September lists struck %s of them off, %s. They kept %s more on the draft roll, the first published version of the revised roll, only on condition that they attend a hearing. '
-    'These lists hold every elector, so the rate for any group, the share of that group struck off, is a count over everyone in it and involves no sampling.'
+    'The September lists left %s of them off the draft, %s. They kept %s more on the draft roll, the first published version of the revised roll, only on condition that they attend a hearing. '
+    'These lists hold every elector, so the rate for any group, the share of that group left off, is a count over everyone in it and involves no sampling.'
     % (indian(t['electors']), indian(t['deleted']), pct(t['rate']), indian(t['hearing'])))
-R.p('A seat\'s winning margin is the number of votes by which its winner beat the runner-up. Every one of the five lost more names than its 2023 winning margin. In %s the names struck off exceed every valid vote cast in 2023. Yakutpura was won by %s votes and lost %s names. '
-    'The heaviest burden fell on the oldest electors and on those who could not be traced to the 2002 roll, the roll of the last intensive revision. %s of electors aged 80 and over were struck off, and electors with no 2002 link were struck off at twice the rate of those with one.'
+R.p('A seat\'s winning margin is the number of votes by which its winner beat the runner-up. Every one of the five lost more names than its 2023 winning margin. In %s the names left off the draft exceed every valid vote cast in 2023. Yakutpura was won by %s votes and lost %s names. '
+    'The heaviest burden fell on the oldest electors and on those who could not be traced to the 2002 roll, the roll of the last intensive revision. %s of electors aged 80 and over were left off the draft, and electors with no 2002 link were left off the draft at twice the rate of those with one.'
     % (andj([a['name'] for a in overV]), indian(yak['e2023']['margin']), indian(yak['deleted']), pct(age[-1])))
 
-R.h2('Deletions and coverage')
-R.table(['Constituency', 'Electors', 'Struck off', '% struck off', 'Summoned', '% summoned', 'Parts'],
+R.h2('Exclusions and coverage')
+R.table(['Constituency', 'Electors', 'Left off', '% left off', 'Summoned', '% summoned', 'Parts'],
         [[a['name'], indian(a['electors']), indian(a['deleted']), pct(a['rate']), indian(a['hearing']), pct(a['hearing_rate']), a['parts']] for a in A] +
         [['All five', indian(t['electors']), indian(t['deleted']), pct(t['rate']), indian(t['hearing']), pct(100 * t['hearing'] / t['electors']), indian(t['parts'])]],
         widths=[3.4, 2.4, 2.3, 2, 2.3, 2, 1.5], right={1, 2, 3, 4, 5, 6})
-R.p('A polling part is the section of a constituency\'s roll that votes at one polling station, and it is the smallest unit the lists can be added up by. Malakpet\'s list is read by polling-station name, which gives %d stations instead of parts, and it is incomplete. It holds %s names struck off, while a separate count of the published Malakpet list finds %s. For the other four constituencies the two counts agree exactly.'
+R.p('A polling part is the section of a constituency\'s roll that votes at one polling station, and it is the smallest unit the lists can be added up by. Malakpet\'s list is read by polling-station name, which gives %d stations instead of parts, and it is incomplete. It holds %s names left off the draft, while a separate count of the published Malakpet list finds %s. For the other four constituencies the two counts agree exactly.'
     % (mal['parts'], indian(mal['deleted']), '1,47,799'))
 
-R.h2('Deletions against the margin and the votes polled')
-R.p('Each constituency\'s names struck off are compared with two figures from the 2023 Assembly election, the margin by which the seat was won and the valid votes cast. The comparison makes no claim that these electors would have voted, or how. It measures the size of the revision next to the vote that decided the seat.')
-R.table(['Constituency', 'Won by (2023)', 'Margin', 'Struck off', 'Struck off − margin', '× margin', 'Valid votes 2023', '% of valid votes'],
+R.h2('Exclusions against the margin and the votes polled')
+R.p('Each constituency\'s names left off the draft are compared with two figures from the 2023 Assembly election, the margin by which the seat was won and the valid votes cast. The comparison makes no claim that these electors would have voted, or how. It measures the size of the revision next to the vote that decided the seat.')
+R.table(['Constituency', 'Won by (2023)', 'Margin', 'Left off', 'Left off − margin', '× margin', 'Valid votes 2023', '% of valid votes'],
         [[a['name'], a['e2023']['winner'], indian(a['e2023']['margin']), indian(a['deleted']), '+' + indian(a['deleted'] - a['e2023']['margin']),
           '%.1f×' % a['e2023']['deleted_over_margin'], indian(a['e2023']['valid']), pct(a['e2023']['deleted_over_valid'])] for a in sorted(A, key=lambda a: -a['e2023']['deleted_over_valid'])],
         widths=[2.6, 3.2, 1.6, 1.8, 2.1, 1.5, 2.1, 1.8], right={2, 3, 4, 5, 6, 7}, size=7.5)
@@ -96,25 +96,25 @@ fig, ax = plt.subplots(figsize=(8, 3.2))
 srt = sorted(A, key=lambda a: -a['e2023']['deleted_over_valid'])
 ax.barh([a['name'] for a in srt][::-1], [a['e2023']['deleted_over_valid'] for a in srt][::-1], color=['#C0392B' if a['e2023']['deleted_over_valid'] > 100 else '#E0A526' for a in srt][::-1])
 ax.axvline(100, ls='--', color='#1C2833', lw=1)
-ax.set_xlabel('Names struck off as % of valid votes cast in 2023', fontsize=8)
-style_axes(ax, 'Names struck off against the whole 2023 vote')
-R.figure(fig, 'Figure 1. Past the dashed line, more names were struck off than there were valid votes in 2023.')
-R.p('Across the five constituencies the names struck off equal %s of the valid votes cast in 2023. In every constituency more names were struck off than the winning candidate received.'
+ax.set_xlabel('Names left off as % of valid votes cast in 2023', fontsize=8)
+style_axes(ax, 'Names left off against the whole 2023 vote')
+R.figure(fig, 'Figure 1. Past the dashed line, more names were left off the draft than there were valid votes in 2023.')
+R.p('Across the five constituencies the names left off the draft equal %s of the valid votes cast in 2023. In every constituency more names were left off the draft than the winning candidate received.'
     % pct(100 * t['deleted'] / valid) if all(a['deleted'] > a['e2023']['winner_votes'] for a in A) else
-    'Across the five constituencies the names struck off equal %s of the valid votes cast in 2023.' % pct(100 * t['deleted'] / valid))
+    'Across the five constituencies the names left off the draft equal %s of the valid votes cast in 2023.' % pct(100 * t['deleted'] / valid))
 
 hy = [x for x in HI if x['name'] == 'Yakutpura'][0]
 mid = [x for x in HI if 55 <= x['breakeven'] <= 100]
 none = [x for x in HI if x['breakeven'] > 100]
 gap = [x['muslim_share_roll'] - x['muslim_share_removed'] for x in HI]
-R.p('No election has been held on the revised roll, so no result has been changed. Against the 2023 margins, only Yakutpura is close. There the runner-up would need %s of the removed electors who would vote, at 2023 turnout and leaving out those entered as dead, to overturn a margin of %s. '
-    'In %s the runner-up would need %s to %s, and in %s no split of the removed would be enough. '
-    'Muslim names are a smaller share of those struck off than of the roll in all five seats, by %.1f to %.1f points, so where Muslim electors lean to AIMIM, the removals take fewer of its voters than of its opponents\'.'
+R.p('No election has been held on the revised roll, so no result has been changed. Against the 2023 margins, only Yakutpura is close. There the runner-up would need %s of the electors left off who would vote, at 2023 turnout and leaving out those entered as dead, to overturn a margin of %s. '
+    'In %s the runner-up would need %s to %s, and in %s no split of those left off would be enough. '
+    'Muslim names are a smaller share of those left off than of the roll in all five seats, by %.1f to %.1f points, so where Muslim electors lean to AIMIM, the exclusions take fewer of its voters than of its opponents\'.'
     % (pct(hy['breakeven']), indian(hy['margin']), andj([x['name'] for x in mid]), pct(min(x['breakeven'] for x in mid)), pct(max(x['breakeven'] for x in mid)),
        andj([x['name'] for x in none]), min(gap), max(gap)))
 
 R.h2('The reasons recorded')
-R.p('The list of electors entered as absent, shifted, dead or duplicate, known as the ASDD list, holds every elector struck off and the reason an officer wrote against each name. %s of removals were entered as "permanently shifted", %s as "untraceable or absent", %s as dead and %s as enrolled elsewhere. Each is what the officer wrote down after a visit, or after failing to find the elector, and nobody checked it.'
+R.p('The list of electors entered as absent, shifted, dead or duplicate, known as the ASDD list, holds every elector left off the draft and the reason an officer wrote against each name. %s of exclusions were entered as "permanently shifted", %s as "untraceable or absent", %s as dead and %s as enrolled elsewhere. Each is what the officer wrote down after a visit, or after failing to find the elector, and nobody checked it.'
     % tuple(pct(rsh[k]) for k in ['Permanently Shifted', 'Untraceable/Absent', 'Death', 'Already enrolled']))
 R.table(['Constituency'] + ['Shifted', 'Untraceable or absent', 'Dead', 'Enrolled elsewhere'],
         [[a['name']] + [pct(100 * a['reasons'][k] / a['deleted']) for k in S['reasons']] for a in A], widths=[3.4, 2.6, 3.4, 2, 3], right={1, 2, 3, 4})
@@ -126,42 +126,42 @@ R.h2('Age')
 fig, ax = plt.subplots(figsize=(8, 3.4))
 for i, a in enumerate(A):
     ax.plot(S['bands'], a['age_rate'], marker='o', ms=3, color=ACC[i], label=a['name'])
-ax.set_ylabel('% struck off', fontsize=8)
+ax.set_ylabel('% left off', fontsize=8)
 ax.legend(fontsize=7, frameon=False, ncol=5, loc='upper left')
-style_axes(ax, 'Share of each age band struck off')
-R.figure(fig, 'Figure 2. Deletion rate by age band, each constituency.')
+style_axes(ax, 'Share of each age band left off')
+R.figure(fig, 'Figure 2. Exclusion rate by age band, each constituency.')
 a80 = [a['age_rate'][-1] for a in A]
 a18 = [a['age_rate'][0] for a in A]
-R.p('In every constituency, the older the elector, the likelier the removal. Between %s and %s of electors aged 80 and over were struck off, and %s to %s of those aged 18 to 24. '
-    'Death explains part of the removals at the oldest ages, and %s deaths were recorded. But the rate roughly doubles between ages 18 to 24 and 30 to 39, when almost nobody dies, so death does not explain it all.'
+R.p('In every constituency, the older the elector, the likelier the exclusion. Between %s and %s of electors aged 80 and over were left off the draft, and %s to %s of those aged 18 to 24. '
+    'Death explains part of the exclusions at the oldest ages, and %s deaths were recorded. But the rate roughly doubles between ages 18 to 24 and 30 to 39, when almost nobody dies, so death does not explain it all.'
     % (pct(min(a80)), pct(max(a80)), pct(min(a18)), pct(max(a18)), indian(s(lambda a: a['reasons']['Death']))))
 
 R.h2('Women and men')
 fm = [a['within_part']['female_minus_male']['diff_pp'] for a in A]
-R.p('Women and men were struck off at similar rates, %s of women and %s of men. Inside the same polling part the gap runs from %.1f to %.1f points, one way in some constituencies and the other way in others.'
+R.p('Women and men were left off the draft at similar rates, %s of women and %s of men. Inside the same polling part the gap runs from %.1f to %.1f points, one way in some constituencies and the other way in others.'
     % (pct(fr), pct(mr), min(fm), max(fm)))
 
 R.h2('Religion')
-R.p('The roll does not record religion, so it is guessed from each elector\'s name, and a separate classification agrees on 99%% of names. Across the five constituencies %s of Hindu-name electors were struck off and %s of Muslim-name electors. '
-    'Inside the same polling part, where the booth officer, the street and the housing are the same for everyone, Hindu-name electors were struck off %.1f to %.1f points more often, in %d of %d parts large enough to compare. '
+R.p('The roll does not record religion, so it is guessed from each elector\'s name, and a separate classification agrees on 99%% of names. Across the five constituencies %s of Hindu-name electors were left off the draft and %s of Muslim-name electors. '
+    'Inside the same polling part, where the booth officer, the street and the housing are the same for everyone, Hindu-name electors were left off the draft %.1f to %.1f points more often, in %d of %d parts large enough to compare. '
     'The lists give religion and age separately and never together, so part of this gap may be a gap by age.'
     % (pct(hin), pct(mus), min(h['diff_pp'] for h in HM), max(h['diff_pp'] for h in HM), sum(h['a_higher'] for h in HM), sum(h['parts'] for h in HM)))
-R.table(['Constituency', 'Muslim names, % of roll', 'Hindu names struck off', 'Muslim names struck off', 'Gap inside parts (points)'],
+R.table(['Constituency', 'Muslim names, % of roll', 'Hindu names left off the draft', 'Muslim names left off the draft', 'Gap inside parts (points)'],
         [[a['name'], pct(a['muslim_share_roll']), pct(a['hindu_rate']), pct(a['muslim_rate']), '%+.1f' % a['within_part']['hindu_minus_muslim']['diff_pp']] for a in A],
         widths=[3.4, 3, 3, 3, 3], right={1, 2, 3, 4})
 
 R.h2('The 2002 roll')
-R.p('The revision asks each elector to show a link to the roll of the 2002 intensive revision, the last one held, through their own name or a parent\'s. Where the lists record it, %s of electors with no link were struck off against %s of those with one. '
-    'Inside the same polling part unlinked electors were struck off %.0f to %.0f points more often, in %s of %s parts. Anyone who moved to the city after 2002, or whose family name is spelt differently on the old roll, starts at a disadvantage. Malakpet\'s list carries no linkage.'
+R.p('The revision asks each elector to show a link to the roll of the 2002 intensive revision, the last one held, through their own name or a parent\'s. Where the lists record it, %s of electors with no link were left off the draft against %s of those with one. '
+    'Inside the same polling part unlinked electors were left off the draft %.0f to %.0f points more often, in %s of %s parts. Anyone who moved to the city after 2002, or whose family name is spelt differently on the old roll, starts at a disadvantage. Malakpet\'s list carries no linkage.'
     % (pct(ul), pct(lk), min(u['diff_pp'] for u in UL), max(u['diff_pp'] for u in UL), indian(sum(u['a_higher'] for u in UL)), indian(sum(u['parts'] for u in UL))))
 fig, ax = plt.subplots(figsize=(8, 3))
 x = range(len(LK))
 ax.bar([i - 0.2 for i in x], [a['linked_rate'] for a in LK], 0.4, color='#0E5E6F', label='Linked to 2002')
 ax.bar([i + 0.2 for i in x], [a['unlinked_rate'] for a in LK], 0.4, color='#C0392B', label='No 2002 link')
 ax.set_xticks(list(x), [a['name'] for a in LK])
-ax.set_ylabel('% struck off', fontsize=8)
+ax.set_ylabel('% left off', fontsize=8)
 ax.legend(fontsize=8, frameon=False)
-style_axes(ax, 'Linked and unlinked electors struck off')
+style_axes(ax, 'Linked and unlinked electors left off the draft')
 R.figure(fig, 'Figure 3. The four constituencies whose lists record the 2002 link.')
 
 R.h2('Hearings')
@@ -175,11 +175,11 @@ R.table(['Rule that sent the elector to a hearing'] + names + ['All five'],
         widths=[4.4, 1.9, 1.9, 1.9, 2.2, 1.9, 1.9], right={1, 2, 3, 4, 5, 6}, size=7.5)
 
 R.h2('Polling parts')
-R.p('Part removal rates run from %.0f%% to %.0f%%, and %d parts lost more than 60%% of their roll (%s). Across parts, the Muslim-name share of the roll and the removal rate move in opposite directions in every constituency.'
+R.p('Part exclusion rates run from %.0f%% to %.0f%%, and %d parts lost more than 60%% of their roll (%s). Across parts, the Muslim-name share of the roll and the exclusion rate move in opposite directions in every constituency.'
     % (min(p['rate'] for p in P100), max(p['rate'] for p in P100), len(o60),
        andj(['%d in %s' % (a['parts_over_60'], a['name']) for a in A if a['parts_over_60']])))
 top = sorted(P100, key=lambda p: -p['rate'])[:15]
-R.table(['Constituency', 'Part', 'Locality', 'Electors', 'Struck off', '% struck off', 'Muslim names %', 'Untraceable % of removals'],
+R.table(['Constituency', 'Part', 'Locality', 'Electors', 'Left off', '% left off', 'Muslim names %', 'Untraceable % of exclusions'],
         [[p['ac'], p['part'], p['locality'] or '–', indian(p['electors']), indian(p['deleted']), pct(p['rate']), '%.0f' % p['muslim_share_roll'] if p['muslim_share_roll'] is not None else '–',
           '%.0f' % p['untraceable_share_of_deleted'] if p['untraceable_share_of_deleted'] is not None else '–'] for p in top],
         widths=[2.4, 1.1, 3.4, 1.6, 1.6, 1.7, 1.9, 2.3], right={1, 3, 4, 5, 6, 7}, size=7.5)
@@ -194,25 +194,25 @@ ax.tick_params(axis='y', labelsize=7)
 style_axes(ax, 'The fifteen seats of Hyderabad district, with the Old City in maroon')
 R.figure(fig, 'Figure 4. The state\'s own draft-roll figures, which give totals only.', width=13)
 R.p('On the state\'s draft-roll figures, the five Old City seats lost %s of their roll and Hyderabad\'s other ten seats %s. Every seat in the district lost between %s and %s, and %d seats outside the Old City lost more than any Old City seat. '
-    'Across Hyderabad district the draft left off %s, and in the rest of Telangana %s. The removals are heavy across the whole capital region.'
+    'Across Hyderabad district the draft left off %s, and in the rest of Telangana %s. The exclusions are heavy across the whole capital region.'
     % (pct(TG['old_city']['rate']), pct(TG['other_hyderabad']['rate']), pct(seats[-1]['rate']), pct(seats[0]['rate']), sum(1 for x in seats if not x['old_city'] and x['rate'] > ocmax),
        pct(TG['hyderabad']['rate']), pct(TG['rest_of_state']['rate'])))
 
 R.h2('Main findings')
 R.bullets([
-    '%s electors were struck off, %s of the five pre-revision rolls, and %s more were summoned to a hearing.' % (indian(t['deleted']), pct(t['rate']), indian(t['hearing'])),
-    'More names were struck off than the 2023 margin in all %d constituencies, and more than all the valid votes cast in %s.' % (len(A), andj([a['name'] for a in overV])),
+    '%s electors were left off the draft, %s of the five pre-revision rolls, and %s more were summoned to a hearing.' % (indian(t['deleted']), pct(t['rate']), indian(t['hearing'])),
+    'More names were left off the draft than the 2023 margin in all %d constituencies, and more than all the valid votes cast in %s.' % (len(A), andj([a['name'] for a in overV])),
     'Yakutpura was won by %s votes and lost %s names, %.1f times the margin.' % (indian(yak['e2023']['margin']), indian(yak['deleted']), yak['e2023']['deleted_over_margin']),
     'The rest of the city lost as large a share. On the state\'s figures the five Old City seats lost %s of their roll, Hyderabad\'s other ten %s, and the rest of Telangana %s.' % (pct(TG['old_city']['rate']), pct(TG['other_hyderabad']['rate']), pct(TG['rest_of_state']['rate'])),
-    '%s of electors aged 80 and over were struck off, against %s of those aged 18 to 24.' % (pct(age[-1]), pct(age[0])),
-    'Electors with no link to the 2002 roll were about twice as likely to be struck off, %s against %s.' % (pct(ul), pct(lk)),
-    '%s of removals were entered as "untraceable or absent", ranging from %s to %s between constituencies.' % (pct(rsh['Untraceable/Absent']), pct(min(ut)), pct(max(ut))),
+    '%s of electors aged 80 and over were left off the draft, against %s of those aged 18 to 24.' % (pct(age[-1]), pct(age[0])),
+    'Electors with no link to the 2002 roll were about twice as likely to be left off the draft, %s against %s.' % (pct(ul), pct(lk)),
+    '%s of exclusions were entered as "untraceable or absent", ranging from %s to %s between constituencies.' % (pct(rsh['Untraceable/Absent']), pct(min(ut)), pct(max(ut))),
     '%s cases were listed for a single hearing slot in %s.' % (indian(heavy['max_slot']), heavy['name']),
     '%d polling parts lost more than 60%% of their roll.' % len(o60),
 ])
 
 R.h2('What this shows and what it does not')
-R.p('The lists show how many electors were struck off, from which parts, and who they were by age, sex, religion guessed from names, and the link to the 2002 roll. They do not show whether any individual removal was right. '
+R.p('The lists show how many electors were left off the draft, from which parts, and who they were by age, sex, religion guessed from names, and the link to the 2002 roll. They do not show whether any individual exclusion was right. '
     'A reason code cannot settle that. A household that moved out of the Old City is rightly marked "shifted", and the lists cannot tell it apart from an elector who was at home when the officer missed them. '
     'Religion and age are counted separately, so a gap by religion may partly be a gap by age. The Malakpet list used here is incomplete. These are the September lists. The Commission extended the calendar on 7 September, as Telangana Today reported, with hearings to 5 November and the final roll on 9 November, so names put back after hearings are not in these counts.')
 
@@ -222,44 +222,44 @@ R.h1('Part II: Constituency chapters')
 for i, a in enumerate(A):
     e = a['e2023']
     R.h2(a['name'])
-    R.stats([(indian(a['deleted']), 'struck off'), (pct(a['rate']), 'of the pre-revision roll'),
+    R.stats([(indian(a['deleted']), 'left off'), (pct(a['rate']), 'of the pre-revision roll'),
              ('%.1f×' % e['deleted_over_margin'], 'the 2023 margin'), (pct(e['deleted_over_valid']), 'of valid votes cast in 2023')])
     pr = [p for p in P100 if p['ac'] == a['name']]
     hi = max(pr, key=lambda p: p['rate'])
     lab = 'polling stations' if a['partlabel'] != 'part' else 'polling parts'
-    R.p('%s had %s electors on its pre-revision roll, in %d %s. The lists struck %s of them off, %s, and summoned %s more to a hearing, %s. '
-        'In 2023 %s won the seat with %s votes, by a margin of %s. The names struck off are %.1f times that margin and %s of the valid votes cast.'
+    R.p('%s had %s electors on its pre-revision roll, in %d %s. The lists left %s of them off the draft, %s, and summoned %s more to a hearing, %s. '
+        'In 2023 %s won the seat with %s votes, by a margin of %s. The names left off the draft are %.1f times that margin and %s of the valid votes cast.'
         % (a['name'], indian(a['electors']), a['parts'], lab, indian(a['deleted']), pct(a['rate']), indian(a['hearing']), pct(a['hearing_rate']),
            e['winner'], indian(e['winner_votes']), indian(e['margin']), e['deleted_over_margin'], pct(e['deleted_over_valid'])))
-    R.p('Officers entered %s of the removals as "permanently shifted" and %s as "untraceable or absent". %s of electors aged 80 and over were struck off, against %s of those aged 18 to 24. '
-        'Women were struck off at %s and men at %s. Hindu-name electors were struck off at %s and Muslim-name electors at %s, and inside the same part the gap is %+.1f points.'
+    R.p('Officers entered %s of the exclusions as "permanently shifted" and %s as "untraceable or absent". %s of electors aged 80 and over were left off the draft, against %s of those aged 18 to 24. '
+        'Women were left off the draft at %s and men at %s. Hindu-name electors were left off the draft at %s and Muslim-name electors at %s, and inside the same part the gap is %+.1f points.'
         % (pct(100 * a['reasons']['Permanently Shifted'] / a['deleted']), pct(100 * a['reasons']['Untraceable/Absent'] / a['deleted']),
            pct(a['age_rate'][-1]), pct(a['age_rate'][0]), pct(a['female_rate']), pct(a['male_rate']), pct(a['hindu_rate']), pct(a['muslim_rate']),
            a['within_part']['hindu_minus_muslim']['diff_pp']))
     if a['linked']:
-        R.p('Electors linked to the 2002 roll were struck off at %s and those with no link at %s. Inside the same part the gap is %+.1f points, and it runs that way in %d of %d parts.'
+        R.p('Electors linked to the 2002 roll were left off the draft at %s and those with no link at %s. Inside the same part the gap is %+.1f points, and it runs that way in %d of %d parts.'
             % (pct(a['linked_rate']), pct(a['unlinked_rate']), a['within_part']['unlinked_minus_linked']['diff_pp'], a['within_part']['unlinked_minus_linked']['a_higher'], a['within_part']['unlinked_minus_linked']['parts']))
     else:
         st = next(x for x in TG['seats'] if x['name'] == a['name'])
         R.p('Malakpet\'s list carries no 2002 linkage and no part numbers, and %s electors on its roll are in none of the three outcomes. The list is incomplete, so read its figures beside the state\'s own count for Malakpet, %s names left off the draft, %s of its roll.'
             % (indian(a['unaccounted']), indian(st['removed']), pct(st['rate'])))
-    R.p('Its hearings ran to %s slots, with %d cases in the typical slot and %s in the heaviest. The %s with the highest removal rate is %s, at %s.'
+    R.p('Its hearings ran to %s slots, with %d cases in the typical slot and %s in the heaviest. The %s with the highest exclusion rate is %s, at %s.'
         % (indian(a['slots']), a['median_slot'], indian(a['max_slot']), 'station' if a['partlabel'] != 'part' else 'part',
            (('%s (%s)' % (hi['part'], hi['locality'])) if hi['locality'] else str(hi['part'])) if a['partlabel'] == 'part' else (hi['locality'] or str(hi['part'])), pct(hi['rate'])))
-    R.table(['Age band'] + S['bands'], [['% struck off'] + ['%.1f' % v for v in a['age_rate']]], widths=[2.4] + [1.7] * 8, right=set(range(1, 9)), size=7.5)
+    R.table(['Age band'] + S['bands'], [['% left off'] + ['%.1f' % v for v in a['age_rate']]], widths=[2.4] + [1.7] * 8, right=set(range(1, 9)), size=7.5)
 
 # ============================================================ CONCLUSION
 R.page_break()
 R.h1('Conclusion and what the Election Commission should do')
-R.p('In five constituencies the revision struck off %s of the electors on the rolls, more names than the margin that decided every one of the five seats in 2023, and in %s of them more than every valid vote cast. '
+R.p('In five constituencies the draft left off %s of the electors on the rolls, more names than the margin that decided every one of the five seats in 2023, and in %s of them more than every valid vote cast. '
     'The burden fell on the old, and on those the process could not trace to a roll prepared 24 years earlier. The final roll has not yet been published, and the hearings are still being held.'
     % (pct(t['rate']), ['none', 'one', 'two', 'three', 'four', 'all five'][len(overV)]))
 R.p('What the Election Commission should do before the final roll:')
 R.numbered([
-    'Record and publish the basis for every removal entered as "untraceable or absent", %s names in all, including the visits made and the notice given.' % indian(s(lambda a: a['reasons']['Untraceable/Absent'])),
-    'Publish how removals of electors with no link to the 2002 roll were decided, since the link is the revision\'s own test and the gap it produces is the largest in the lists.',
+    'Record and publish the basis for every exclusion entered as "untraceable or absent", %s names in all, including the visits made and the notice given.' % indian(s(lambda a: a['reasons']['Untraceable/Absent'])),
+    'Publish how exclusions of electors with no link to the 2002 roll were decided, since the link is the revision\'s own test and the gap it produces is the largest in the lists.',
     'Give each elector served a notice enough time to be heard, online or in person. Some slots in the September lists carried several hundred cases.',
-    'Explain the removals in the %d parts that lost more than 60%% of their roll.' % len(o60),
+    'Explain the exclusions in the %d parts that lost more than 60%% of their roll.' % len(o60),
     'Publish restorations after hearings, part by part, so that the final count can be set against these lists.',
 ])
 
@@ -270,7 +270,7 @@ R.bullets([
     'Hearing schedules come from the same lists, 28 August to 12 October 2026.',
     '2023 Assembly result: Election Commission of India.',
 ])
-R.p('The deletion rate is the electors on the list of the absent, shifted and dead divided by the electors on the roll before the revision, for the group in question. The within-part difference is the rate of one group minus the other inside each part, pooled across parts with at least 20 of each and weighted by the smaller group. Part counts add up exactly to the constituency totals. No name, EPIC number or address is published.')
+R.p('The exclusion rate is the electors on the list of the absent, shifted and dead divided by the electors on the roll before the revision, for the group in question. The within-part difference is the rate of one group minus the other inside each part, pooled across parts with at least 20 of each and weighted by the smaller group. Part counts add up exactly to the constituency totals. No name, EPIC number or address is published.')
 
 out = sys.argv[1] if len(sys.argv) > 1 else '/home/user/reports/Hyderabad_OldCity_SIR_2026_Report.docx'
 R.save(out)

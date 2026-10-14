@@ -285,23 +285,23 @@ def tamilnadu(R):
     CH = sorted([a for a in A if a['district'] == 'Chennai'], key=lambda a: -a['per_100'])
 
     R.cover('Special Intensive Revision 2025-26', 'Tamil Nadu: %s names left off the draft roll' % lakh(S['removed']),
-            'Where the names were removed, on what recorded reason, what the final roll put back, and how the removals compare with the 2026 result',
+            'Where the names were left off, on what recorded reason, what the final roll put back, and how the names left off compare with the 2026 result',
             [('names left off the draft roll of 19 December 2025', indian(S['removed'])),
              ('of every 100 electors on the roll before the revision', d1(S['per_100'])),
              ('constituencies where more names were left off than the 2026 winning margin', '%d of %d' % (S['over_margin'], S['acs'])),
-             ('removed per 100 electors in Chennai', d1(C['per_100']))])
+             ('left off per 100 electors in Chennai', d1(C['per_100']))])
     R.h1('Contents')
     R.toc()
 
     R.h1('In short')
     R.numbered([
         'The revision left %s names off Tamil Nadu\'s draft roll, the list published on 19 December 2025 for electors to check and contest. That is %s of every 100 electors on the roll before the revision began.' % (lakh(S['removed']), d1(S['per_100'])),
-        'In %d of the %d assembly constituencies, the seats of the state legislature, more names were left off the draft roll than the 2026 winning margin, the votes by which the winner beat the runner-up. In those seats the removals were large enough to decide the result. If the names marked dead are left out and the rest are counted at each seat\'s own turnout, the removed voters still outnumber the margin in %d seats.' % (S['over_margin'], S['acs'], S['could_change']),
+        'In %d of the %d assembly constituencies, the seats of the state legislature, more names were left off the draft roll than the 2026 winning margin, the votes by which the winner beat the runner-up. In those seats the names left off were enough to decide the result. If the names marked dead are left out and the rest are counted at each seat\'s own turnout, the voters left off still outnumber the margin in %d seats.' % (S['over_margin'], S['acs'], S['could_change']),
         '%s were entered as shifted or absent, %s as dead and %s as enrolled in more than one place. %s' % (pct(S['shares']['shifted_absent']), pct(S['shares']['dead']), pct(S['shares']['multiple']), REASON),
-        'Chennai lost %s of every 100 electors, more than twice the state\'s rate. Its %d constituencies hold %s of the state\'s roll and %s of the names removed.' % (d1(C['per_100']), C['acs'], pct(S['chennai_share_of_roll']), pct(S['chennai_share_of_removed'])),
-        'The final roll of 23 February 2026 was %s larger than the draft. That rise includes new voters, so it comes to at most %s of the names removed. The roll is still %s smaller than before the revision.' % (lakh(S['added_net']), pct(S['made_up_pct']), lakh(S['net_fall'])),
+        'Chennai lost %s of every 100 electors, more than twice the state\'s rate. Its %d constituencies hold %s of the state\'s roll and %s of the names left off the draft.' % (d1(C['per_100']), C['acs'], pct(S['chennai_share_of_roll']), pct(S['chennai_share_of_removed'])),
+        'The final roll of 23 February 2026 was %s larger than the draft. That rise includes new voters, so it comes to at most %s of the names left off. The roll is still %s smaller than before the revision.' % (lakh(S['added_net']), pct(S['made_up_pct']), lakh(S['net_fall'])),
     ])
-    R.p('The Chief Electoral Officer, who keeps the state\'s rolls for the Election Commission, has published no split of the removals by sex or age. So the tables cannot show whether women, the old or the young were removed more often. They show where names were removed, and they cannot show why.', italic=True)
+    R.p('The Chief Electoral Officer, who keeps the state\'s rolls for the Election Commission, has published no split of the names left off by sex or age. So the tables cannot show whether women, the old or the young were left off more often. They show where names were left off, and they cannot show why.', italic=True)
 
     R.h1('The roll')
     R.stats([(lakh(S['removed']), 'left off the draft roll'), (d1(S['per_100']), 'per 100 electors'),
@@ -312,7 +312,7 @@ def tamilnadu(R):
     F.add(F.map(J('geo', 'tamilnadu.json'), lambda ac: byAc[ac]['per_100'] if ac in byAc else None, 'Names left off the draft roll per 100 electors',
                 inset=[a['ac'] for a in CH], inset_name='Chennai, enlarged'),
           'Each constituency shaded by the names left off the draft roll for every 100 electors on the roll before the revision, in five bins with equal numbers of seats. Boundaries from DataMeet\'s assembly constituency map (CC BY 2.5 India), simplified.', width=15)
-    R.p('Removals were heaviest in %s, then in %s. By constituency they run from %s per 100 electors in %s to %s in %s.' % (S['top_districts'][0], andj(S['top_districts'][1:]), d1(S['rate_min_v']), S['rate_min'], d1(S['rate_max_v']), S['rate_max']))
+    R.p('The most names were left off in %s, then in %s. By constituency they run from %s per 100 electors in %s to %s in %s.' % (S['top_districts'][0], andj(S['top_districts'][1:]), d1(S['rate_min_v']), S['rate_min'], d1(S['rate_max_v']), S['rate_max']))
 
     R.h2('The roll, step by step')
     F.add(F.waterfall([('Roll before the revision', S['before'], 'total'), ('Dead', S['dead'], 'down'), ('Shifted or absent', S['shifted_absent'], 'down'),
@@ -320,22 +320,22 @@ def tamilnadu(R):
                        ('Net change after the draft', S['added_net'], 'up'), ('Final roll', S['final'], 'total')],
                       math.floor(S['draft'] * 0.8 / 1e5) * 1e5, 'Tamil Nadu, from the roll before the revision to the final roll'),
           'The bars start above zero so that the changes can be seen. The figure on each bar is the count.')
-    R.p('The roll before the revision held %s names. %s were left off the draft roll of 19 December 2025, which held %s. Electors could then file claims, on Form 6, to add a name, and objections, on Form 7, to remove one. Together these raised the roll by a net %s to %s on the final roll of 23 February 2026, the roll that stands after the revision.'
+    R.p('The roll before the revision held %s names. %s were left off the draft roll of 19 December 2025, which held %s. Electors could then file claims, on Form 6, to add a name, and objections, on Form 7, to delete one. Together these raised the roll by a net %s to %s on the final roll of 23 February 2026, the roll that stands after the revision.'
         % (crore(S['before']), indian(S['removed']), crore(S['draft']), indian(S['added_net']), crore(S['final'])))
 
     R.h2('Per 100 electors, by district')
-    F.add(F.hbars([(d['district'], d['per_100']) for d in D], 'Names left off the draft roll per 100 electors, by district', 'Removed per 100 electors',
+    F.add(F.hbars([(d['district'], d['per_100']) for d in D], 'Names left off the draft roll per 100 electors, by district', 'Left off per 100 electors',
                   hi=lambda r: r[0] == 'Chennai'), 'Names left off the draft roll of 19 December 2025, for every 100 electors on the roll before the revision. Chennai in red.', width=14)
     R.p('Chennai lost %s of every 100 electors, against %s for the state. The next four are %s. %s lost the fewest, %s.'
         % (d1(D[0]['per_100']), d1(S['per_100']), andj(['%s (%s)' % (d['district'], d1(d['per_100'])) for d in D[1:5]]), low['district'], d1(low['per_100'])))
 
     R.h2('The reasons, district by district')
     F.add(F.heat([d['district'] for d in D], ['Dead', 'Shifted or absent', 'In more than one place'],
-                 [[100 * d[k] / d['removed'] for k in ('dead', 'shifted_absent', 'multiple')] for d in D], 'Share of each district\'s removals by reason, %'),
-          'Districts in the same order as the figure above, from the highest removal rate to the lowest.', width=13)
+                 [[100 * d[k] / d['removed'] for k in ('dead', 'shifted_absent', 'multiple')] for d in D], 'Share of each district\'s names left off, by reason, %'),
+          'Districts in the same order as the figure above, from the highest rate left off to the lowest.', width=13)
     R.p('Across the state, %s of the names were entered as shifted or absent and %s as dead. In Chennai the share entered as shifted or absent is %s. '
-        'Across the %d constituencies, the removal rate and the share entered as shifted or absent rise together. Their rank correlation, a measure that runs from -1 to 1 and comes near 1 when two things rise in step, is %.2f. So where many names were removed, most were marked as people who had moved or could not be found. '
-        'Where fewer names were removed, more of them were entered as dead, up to %s in %s. %s'
+        'Across the %d constituencies, the rate left off and the share entered as shifted or absent rise together. Their rank correlation, a measure that runs from -1 to 1 and comes near 1 when two things rise in step, is %.2f. So where many names were left off, most were marked as people who had moved or could not be found. '
+        'Where fewer names were left off, more of them were entered as dead, up to %s in %s. %s'
         % (pct(S['shares']['shifted_absent']), pct(S['shares']['dead']), pct(C['shifted_share']), S['acs'], S['rho_rate_shifted'], pct(byDead['dead_share']), byDead['district'], REASON))
 
     R.h2('Chennai')
@@ -348,12 +348,12 @@ def tamilnadu(R):
         left = [p + q for p, q in zip(left, v)]
     ax.set_yticks(y)
     ax.set_yticklabels([a['name'] for a in CH], fontsize=7.5)
-    ax.set_xlabel('Removed per 100 electors', fontsize=8)
+    ax.set_xlabel('Left off per 100 electors', fontsize=8)
     ax.legend(fontsize=7, frameon=False, loc='lower right')
-    style_axes(ax, 'Chennai\'s constituencies, removed per 100 electors by reason')
-    F.add(fig, 'The sixteen constituencies of Chennai district, by names removed per 100 electors on the roll before the revision.', width=14)
-    R.p('Every one of Chennai\'s %d constituencies lost more than %d of every 100 electors. %s lost %s, the most of any seat in the state. Chennai holds %s of the state\'s roll and %s of the names removed, %s names in all. '
-        '%s of Chennai\'s removals were entered as shifted or absent and %s as dead. At the final roll Chennai\'s roll was still %s per 100 smaller than before the revision.'
+    style_axes(ax, 'Chennai\'s constituencies, left off per 100 electors by reason')
+    F.add(fig, 'The sixteen constituencies of Chennai district, by names left off per 100 electors on the roll before the revision.', width=14)
+    R.p('Every one of Chennai\'s %d constituencies lost more than %d of every 100 electors. %s lost %s, the most of any seat in the state. Chennai holds %s of the state\'s roll and %s of the names left off the draft, %s names in all. '
+        '%s of Chennai\'s names left off were entered as shifted or absent and %s as dead. At the final roll Chennai\'s roll was still %s per 100 smaller than before the revision.'
         % (len(CH), math.floor(CH[-1]['per_100']), CH[0]['name'], d1(CH[0]['per_100']), pct(S['chennai_share_of_roll']), pct(S['chennai_share_of_removed']), indian(C['removed']),
            pct(C['shifted_share']), pct(C['dead_share']), d1(C['net_per_100'])))
 
@@ -365,7 +365,7 @@ def tamilnadu(R):
     WR = sorted([(k, 100 * w[0] / w[2], 100 * (w[1] - w[0]) / (w[3] - w[2])) for k, w in WD.items()], key=lambda r: -(r[2] - r[1]))
     tw = [sum(w[i] for w in WD.values()) for i in range(4)]
     kw = sum(r[2] > r[1] for r in WR)
-    R.p('The Chief Electoral Officer has published no split of the names left off by sex, and no roll by sex from before the revision, so women\'s share of the removals cannot be counted. What can be counted is the change after the draft.')
+    R.p('The Chief Electoral Officer has published no split of the names left off by sex, and no roll by sex from before the revision, so women\'s share of the names left off cannot be counted. What can be counted is the change after the draft.')
     F.add(F.dumbbell(WR, 'Women\'s share of the draft roll and of the net rise to the final roll, %', 'Share of the draft roll', 'Share of the net rise to the final roll'),
           'For each district, the grey dot is women\'s share of the draft roll and the red dot their share of the net rise from the draft to the final roll. The dashed line is half.', width=14)
     R.p('Women were %s of the draft roll and %s of the net rise to the final roll. Their share of the rise was higher than their share of the draft in %s of the %d districts. '
@@ -374,54 +374,54 @@ def tamilnadu(R):
 
     R.h2('After the draft')
     F.add(F.slope([(d['district'], d['per_100'], d['net_per_100'], d['district'] == 'Chennai', 0 < i < 4) for i, d in enumerate(D)],
-                  'Removed at the draft and the fall that remains at the final roll', 'At the draft', 'At the final roll', 'Per 100 electors on the roll before the revision'),
+                  'Left off at the draft and the fall that remains at the final roll', 'At the draft', 'At the final roll', 'Per 100 electors on the roll before the revision'),
           'Each line is a district. The flatter the line, the less the roll grew back after the draft. Chennai in red.', width=12)
-    R.p('The final roll is %s larger than the draft, and still %s smaller than the roll before the revision, a fall of %s of every 100 electors. The rise from the draft is at most %s of the names removed, and it includes new voters. '
+    R.p('The final roll is %s larger than the draft, and still %s smaller than the roll before the revision, a fall of %s of every 100 electors. The rise from the draft is at most %s of the names left off, and it includes new voters. '
         'Chennai\'s roll is %s per 100 smaller than before.' % (lakh(S['added_net']), lakh(S['net_fall']), d1(S['net_per_100']), pct(S['made_up_pct']), d1(C['net_per_100'])))
 
     R.h2('Every district')
-    R.table(['District', 'Seats', 'Roll before', 'Removed', 'Per 100', 'Dead', 'Shifted or absent', 'More than one place', 'Final roll', 'Net fall per 100'],
+    R.table(['District', 'Seats', 'Roll before', 'Left off', 'Per 100', 'Dead', 'Shifted or absent', 'More than one place', 'Final roll', 'Net fall per 100'],
             [[d['district'], str(d['acs']), indian(d['before']), indian(d['removed']), d1(d['per_100']), indian(d['dead']), indian(d['shifted_absent']), indian(d['multiple']), indian(d['final']), d1(d['net_per_100'])] for d in D],
             widths=[3.0, 1.0, 2.0, 1.8, 1.2, 1.6, 1.9, 1.6, 2.0, 1.4], size=7)
 
     # ---- the election
     R.h1('The 2026 election')
-    R.h2('Names removed against the winning margin')
+    R.h2('Names left off against the winning margin')
     G = [('TVK', AMBER), ('DMK', RED), ('AIADMK', NAVY)]
     groups = [(p, c, [(a['removed'], a['margin']) for a in A if a['winner'] == p]) for p, c in G] + [('Other parties', GREY, [(a['removed'], a['margin']) for a in A if a['winner'] not in ('TVK', 'DMK', 'AIADMK')])]
     F.add(F.margin_scatter(groups, 'Names left off the draft roll against the 2026 winning margin', 'Names left off the draft roll'),
           'Each dot is a constituency, coloured by the party that won it. Dots below the dashed line are seats where more names were left off than the winner won by.', width=14)
-    R.p('In %d of the %d constituencies, more names were left off the draft roll than the 2026 winning margin. In those seats the removals were large enough to decide the result. Whether they did depends on how those people would have voted, and the lists cannot show that. '
-        'The removal rate and the margin as a share of votes rise together a little (rank correlation %.2f). The seats that lost the most names were therefore not the closest contests.' % (S['over_margin'], S['acs'], S['rho_rate_margin']))
+    R.p('In %d of the %d constituencies, more names were left off the draft roll than the 2026 winning margin. In those seats the names left off were enough to decide the result. Whether they did depends on how those people would have voted, and the lists cannot show that. '
+        'The rate left off and the margin as a share of votes rise together a little (rank correlation %.2f). The seats that lost the most names were therefore not the closest contests.' % (S['over_margin'], S['acs'], S['rho_rate_margin']))
 
     R.h2('How many seats, on each count')
     R.stats([('%d of %d' % (S['over_margin'], S['acs']), 'every name left off the draft'), ('%d of %d' % (S['net_over_margin'], S['acs']), 'the net fall at the final roll'),
-             ('%d of %d' % (S['could_change'], S['acs']), 'the living removed, at the seat\'s turnout')])
-    R.p('Three counts set the removals against the margin, from the widest to the narrowest. The first counts every name left off the draft. The second counts the fall that remains on the final roll. '
-        'The third leaves out the names marked dead and counts the rest at the seat\'s own 2026 turnout. Even on the narrowest count the removed voters outnumber the margin in %d of the %d seats. '
-        'In the other %d, the runner-up could not have won even if every living person removed had voted, at the seat\'s turnout, for the runner-up.' % (S['could_change'], S['acs'], S['acs'] - S['could_change']))
+             ('%d of %d' % (S['could_change'], S['acs']), 'the living left off, at the seat\'s turnout')])
+    R.p('Three counts set the names left off against the margin, from the widest to the narrowest. The first counts every name left off the draft. The second counts the fall that remains on the final roll. '
+        'The third leaves out the names marked dead and counts the rest at the seat\'s own 2026 turnout. Even on the narrowest count the voters left off outnumber the margin in %d of the %d seats. '
+        'In the other %d, the runner-up could not have won even if every living person left off had voted, at the seat\'s turnout, for the runner-up.' % (S['could_change'], S['acs'], S['acs'] - S['could_change']))
 
-    R.h2('Removals by the party that won')
+    R.h2('Names left off, by the party that won')
     big = ['TVK', 'DMK', 'AIADMK']
     F.add(F.strip([('%s (%d seats)' % (p, W[p]['seats']), [(a['per_100'], a['district'] == 'Chennai') for a in A if a['winner'] == p]) for p in big]
                   + [('Other parties', [(a['per_100'], a['district'] == 'Chennai') for a in A if a['winner'] not in big])],
-                  'Removed per 100 electors in every seat, by the party that won it', 'Removed per 100 electors'),
+                  'Left off per 100 electors in every seat, by the party that won it', 'Left off per 100 electors'),
           'Each dot is a constituency. Chennai\'s sixteen seats are in red.', width=14)
-    winners_table(R, S['winners'], 'per_100', 'Removed per 100', 'Removed over margin')
+    winners_table(R, S['winners'], 'per_100', 'Left off per 100', 'Left off over margin')
     R.p('Seats won by TVK lost %s of every 100 electors, against %s in DMK seats and %s in AIADMK seats. Most of that gap comes from where the seats are. TVK won most of the city seats, and the city seats lost the most names. '
-        'To allow for that, each seat\'s rate can be set against the rate of its own district. On that measure each party\'s seats come out at %s for TVK, %s for the DMK and %s for the AIADMK, where a minus means fewer removals than the district as a whole. '
+        'To allow for that, each seat\'s rate can be set against the rate of its own district. On that measure each party\'s seats come out at %s for TVK, %s for the DMK and %s for the AIADMK, where a minus means fewer names left off than the district as a whole. '
         'TVK won %d seats, the DMK %d and the AIADMK %d, and %d of the %d seats changed hands from 2021.'
         % (d1(W['TVK']['per_100']), d1(W['DMK']['per_100']), d1(W['AIADMK']['per_100']), sg(W['TVK']['vs_district']), sg(W['DMK']['vs_district']), sg(W['AIADMK']['vs_district']),
            S['seats_2026']['TVK'], S['seats_2026']['DMK'], S['seats_2026']['AIADMK'], S['changed_hands'], S['acs']))
     limits_section(R, 'The tables show how many names were left off the draft in every constituency, on what recorded reason, what the final roll put back, and how those numbers compare with the 2026 margins.',
-                   ['Whether women, the old or the young were removed more often. The Chief Electoral Officer has not published the removals by sex or age.',
-                    'Whether each removal was right. %s' % REASON,
-                    'How anyone removed would have voted, or why the removals fell where they did. No list of removals can show intent.'])
+                   ['Whether women, the old or the young were left off more often. The Chief Electoral Officer has not published the names left off by sex or age.',
+                    'Whether each name was rightly left off. %s' % REASON,
+                    'How anyone left off would have voted, or why the names left off fell where they did. No list of names left off can show intent.'])
 
     R.h1('What the Election Commission should do')
-    R.p('%s names came off Tamil Nadu\'s draft roll, %s of them on an entry that the elector had moved or could not be found. The Election Commission should do five things.' % (lakh(S['removed']), lakh(S['shifted_absent'])))
+    R.p('%s names were left off Tamil Nadu\'s draft roll, %s of them on an entry that the elector had moved or could not be found. The Election Commission should do five things.' % (lakh(S['removed']), lakh(S['shifted_absent'])))
     R.numbered([
-        'Publish the names removed by sex and age for every constituency, with the roll before the revision by sex, so that it can be seen who was removed.',
+        'Publish the names left off by sex and age for every constituency, with the roll before the revision by sex, so that it can be seen who was left off.',
         'Publish the basis for the %s entries marked shifted or absent, including the visits made and the notice given.' % lakh(S['shifted_absent']),
         'Publish how many of those added for the final roll had been left off the draft, so that names restored can be told apart from new voters.',
         'Explain why Chennai lost %s of every 100 electors, more than twice the state\'s rate.' % d1(C['per_100']),
@@ -432,16 +432,16 @@ def tamilnadu(R):
     R.p('The names left off the draft roll of 19 December 2025 are the Chief Electoral Officer\'s table for each of the %d assembly constituencies, under three reasons, deceased, shifted or absent, and enrolled at more than one place. '
         'The constituency rows add up to the district totals and to the state total of %s. No constituency table of the roll the revision started from has been published, so the draft roll plus the names left off it is that roll, %s in all, and every figure per 100 is out of it. '
         'That sum equals the state total announced with the draft.' % (S['acs'], indian(S['removed']), indian(S['before'])))
-    R.p('The final roll of 23 February 2026, by constituency and by sex, is also the Chief Electoral Officer\'s table. The rise from the draft to the final roll is the names added on claims less those removed on objections, so it counts new voters as well as names put back, and it is the most that can have been restored.')
+    R.p('The final roll of 23 February 2026, by constituency and by sex, is also the Chief Electoral Officer\'s table. The rise from the draft to the final roll is the names added on claims less those deleted on objections, so it counts new voters as well as names put back, and it is the most that can have been restored.')
     R.p('The 2026 winner, runner-up and margin for every seat are from the Election Commission\'s constituency result pages, checked against its state-wise pages. Turnout is the votes polled over the final roll, because the result pages carry no electors. '
         'The 2021 result is from the Election Commission\'s statistical report, through a published compilation of it whose seat totals equal the declared result.')
     R.p('Three counts are set against the margin. A seat is counted on the first when the names left off the draft exceed the 2026 margin, and on the second when the fall from the roll before the revision to the final roll exceeds it. '
         'The third leaves out the names marked dead and multiplies the rest by the seat\'s turnout. It still assumes every one of those voters would have chosen the runner-up, which no one can know. '
-        'Each seat\'s removal rate is also set against the rate of its own district, and those differences are averaged for each party\'s seats, because Chennai and the districts around it removed far more names than the rest of the state and the parties did not win evenly across districts.')
+        'Each seat\'s rate of names left off is also set against the rate of its own district, and those differences are averaged for each party\'s seats, because Chennai and the districts around it lost far more names than the rest of the state and the parties did not win evenly across districts.')
     R.p('The map uses DataMeet\'s assembly constituency map, licensed CC BY 2.5 India. Only counts are published, never a name, EPIC number or address.')
 
     R.h1('Every constituency')
-    R.table(['No.', 'Constituency', 'District', 'Roll before', 'Removed', 'Per 100', 'Dead', 'Net fall per 100', 'Won 2026', 'Margin', 'Over margin'],
+    R.table(['No.', 'Constituency', 'District', 'Roll before', 'Left off', 'Per 100', 'Dead', 'Net fall per 100', 'Won 2026', 'Margin', 'Over margin'],
             [[str(a['ac']), a['name'], a['district'], indian(a['before']), indian(a['removed']), d1(a['per_100']), indian(a['dead']), d1(a['net_per_100']), a['winner'], indian(a['margin']), 'Yes' if a['over_margin'] else 'No'] for a in A],
             widths=[0.8, 2.6, 2.3, 1.7, 1.5, 1.1, 1.4, 1.3, 1.4, 1.4, 1.2], right={0, 3, 4, 5, 6, 7, 9}, size=6.5)
 
@@ -456,23 +456,23 @@ def karnataka(R):
     RK = [('absent', 'Absent'), ('shifted', 'Shifted'), ('dead', 'Dead'), ('duplicate', 'Already enrolled'), ('other', 'Other')]
 
     R.cover('Special Intensive Revision 2026', 'Karnataka: %s names left off the draft roll' % crore(S['removed']),
-            'Where the names were removed, district by district, on what recorded reason, and what the roll looked like while notices were still being heard',
+            'Where the names were left off, district by district, on what recorded reason, and what the roll looked like while notices were still being heard',
             [('names left off the draft roll of 24 August 2026', indian(S['removed'])),
              ('of every 100 electors on the roll of 16 June 2026', d1(S['per_100'])),
-             ('of the names removed were in Bengaluru\'s four districts', pct(B['share_of_removed'])),
-             ('of the names removed had come back by 9 October', pct(S['made_up_pct']))])
+             ('of the names left off were in Bengaluru\'s four districts', pct(B['share_of_removed'])),
+             ('of the names left off had come back by 9 October', pct(S['made_up_pct']))])
     R.h1('Contents')
     R.toc()
 
     R.h1('In short')
     R.numbered([
         'The revision left %s names off Karnataka\'s draft roll, the list published on 24 August 2026 for electors to check and contest. That is %s of every 100 electors on the roll of 16 June, before the revision began.' % (crore(S['removed']), d1(S['per_100'])),
-        'Bengaluru\'s four districts lost %s of every 100 electors. They hold %s of the state\'s roll and %s of the names removed.' % (d1(B['per_100']), pct(B['share_of_roll']), pct(B['share_of_removed'])),
+        'Bengaluru\'s four districts lost %s of every 100 electors. They hold %s of the state\'s roll and %s of the names left off the draft.' % (d1(B['per_100']), pct(B['share_of_roll']), pct(B['share_of_removed'])),
         '%s were entered as shifted, %s as absent, %s as dead and %s as already enrolled elsewhere. %s' % (pct(S['shares']['shifted']), pct(S['shares']['absent']), pct(S['shares']['dead']), pct(S['shares']['duplicate']), REASON),
-        'By 9 October the roll had risen by %s since the draft, %s of the names removed. In Bengaluru it rose by %s. The rise counts new voters as well as names put back.' % (indian(S['added_sep']), pct(S['made_up_pct']), indian(B['added_sep'])),
+        'By 9 October the roll had risen by %s since the draft, %s of the names left off. In Bengaluru it rose by %s. The rise counts new voters as well as names put back.' % (indian(S['added_sep']), pct(S['made_up_pct']), indian(B['added_sep'])),
     ])
-    R.p('The Chief Electoral Officer, who keeps the state\'s rolls for the Election Commission, published the revision by its 34 election districts only. So no figure here is by assembly constituency, and the removals cannot be set against the winning margins of the 2023 election. '
-        'The names removed are not split by sex. The final roll is due on 27 October 2026.', italic=True)
+    R.p('The Chief Electoral Officer, who keeps the state\'s rolls for the Election Commission, published the revision by its 34 election districts only. So no figure here is by assembly constituency, and the names left off cannot be set against the winning margins of the 2023 election. '
+        'The names left off are not split by sex. The final roll is due on 27 October 2026.', italic=True)
 
     R.h1('The roll')
     R.stats([(crore(S['removed']), 'left off the draft roll'), (d1(S['per_100']), 'per 100 electors'),
@@ -492,25 +492,25 @@ def karnataka(R):
                        ('Draft roll', S['draft'], 'total'), ('Net change after the draft', S['added_sep'], 'up'), ('Roll of 9 October', S['sep'], 'total')],
                       math.floor(S['draft'] * 0.8 / 1e6) * 1e6, 'Karnataka, from 16 June to 9 October 2026'),
           'The bars start above zero so that the changes can be seen. The figure on each bar is the count. The final roll is due on 27 October 2026.')
-    R.p('The roll of 16 June 2026 held %s names. %s were left off the draft roll of 24 August, which held %s. Electors could then file claims, on Form 6, to add a name, and objections, on Form 7, to remove one. By 9 October those had closed, notices were still being heard, and the roll stood at %s.'
+    R.p('The roll of 16 June 2026 held %s names. %s were left off the draft roll of 24 August, which held %s. Electors could then file claims, on Form 6, to add a name, and objections, on Form 7, to delete one. By 9 October those had closed, notices were still being heard, and the roll stood at %s.'
         % (crore(S['before']), indian(S['removed']), crore(S['draft']), crore(S['sep'])))
 
     R.h2('Per 100 electors, by district')
-    F.add(F.hbars([(d['district'], d['per_100']) for d in D], 'Names left off the draft roll per 100 electors, by district', 'Removed per 100 electors',
+    F.add(F.hbars([(d['district'], d['per_100']) for d in D], 'Names left off the draft roll per 100 electors, by district', 'Left off per 100 electors',
                   hi=lambda r: byN[r[0]]['bengaluru']), 'Names left off the draft roll of 24 August 2026, for every 100 electors on the roll of 16 June 2026. Bengaluru\'s four districts in red.', width=14)
     R.p('Bengaluru\'s four districts lost between %s and %s of every 100 electors, against %s for the state. The next highest is %s at %s. %s lost the fewest, %s.'
         % (d1(min(d['per_100'] for d in BL)), d1(D[0]['per_100']), d1(S['per_100']), nxt[0]['district'], d1(nxt[0]['per_100']), low['district'], d1(low['per_100'])))
 
     R.h2('The reasons, district by district')
-    F.add(F.heat([d['district'] for d in D], [k[1] for k in RK], [[d['shares'][k[0]] for k in RK] for d in D], 'Share of each district\'s removals by reason, %'),
-          'Districts in the same order as the figure above, from the highest removal rate to the lowest.', width=13)
-    R.p('Across the state, %s of the names were entered as shifted and %s as absent, %s as dead and %s as already enrolled elsewhere. The more names a district removed, the larger the share marked shifted or absent. Their rank correlation, a measure that runs from -1 to 1 and comes near 1 when two things rise in step, is %.2f. '
-        'Where fewer were removed, more were entered as dead, up to %s in %s. %s'
+    F.add(F.heat([d['district'] for d in D], [k[1] for k in RK], [[d['shares'][k[0]] for k in RK] for d in D], 'Share of each district\'s names left off, by reason, %'),
+          'Districts in the same order as the figure above, from the highest rate left off to the lowest.', width=13)
+    R.p('Across the state, %s of the names were entered as shifted and %s as absent, %s as dead and %s as already enrolled elsewhere. The more names a district lost, the larger the share marked shifted or absent. Their rank correlation, a measure that runs from -1 to 1 and comes near 1 when two things rise in step, is %.2f. '
+        'Where fewer were left off, more were entered as dead, up to %s in %s. %s'
         % (pct(S['shares']['shifted']), pct(S['shares']['absent']), pct(S['shares']['dead']), pct(S['shares']['duplicate']), S['rho_rate_shifted'], pct(S['dead_max']['share']), S['dead_max']['district'], REASON))
 
     R.h2('Bengaluru')
-    R.stats([(pct(B['share_of_roll']), 'of the roll before the revision'), (pct(B['share_of_removed']), 'of the names removed'),
-             (d1(B['per_100']), 'removed per 100, against %s elsewhere' % d1(RS['per_100']))])
+    R.stats([(pct(B['share_of_roll']), 'of the roll before the revision'), (pct(B['share_of_removed']), 'of the names left off the draft'),
+             (d1(B['per_100']), 'left off per 100, against %s elsewhere' % d1(RS['per_100']))])
     fig, ax = plt.subplots(figsize=(7, 2.4))
     for i, (lab, sa, dd) in enumerate([('Bengaluru', B['shifted_absent_share'], B['dead_share']), ('Rest of the state', RS['shifted_absent_share'], RS['dead_share'])]):
         ax.barh(1 - i, sa, color=NAVY, height=0.55, label='Shifted or absent' if i == 0 else None)
@@ -520,15 +520,15 @@ def karnataka(R):
     ax.set_yticks([1, 0])
     ax.set_yticklabels(['Bengaluru', 'Rest of the state'], fontsize=8)
     ax.set_xlim(0, 100)
-    ax.set_xlabel('% of names removed', fontsize=8)
+    ax.set_xlabel('% of names left off', fontsize=8)
     ax.legend(fontsize=7, frameon=False, ncol=3, loc='upper center', bbox_to_anchor=(0.5, -0.3))
     style_axes(ax, 'Reasons entered, Bengaluru and the rest of the state')
     F.add(fig, 'Bangalore Urban and the North, Central and South districts of the city corporation, B.B.M.P., against the other thirty districts.', width=13)
-    R.p('Bengaluru holds %s of Karnataka\'s roll and %s of the names removed, %s names in all. %s of them were entered as shifted or absent and %s as dead. In the rest of the state the figures are %s and %s. Bangalore Rural is outside these four.'
+    R.p('Bengaluru holds %s of Karnataka\'s roll and %s of the names left off the draft, %s names in all. %s of them were entered as shifted or absent and %s as dead. In the rest of the state the figures are %s and %s. Bangalore Rural is outside these four.'
         % (pct(B['share_of_roll']), pct(B['share_of_removed']), lakh(B['removed']), pct(B['shifted_absent_share']), pct(B['dead_share']), pct(RS['shifted_absent_share']), pct(RS['dead_share'])))
 
     R.h2('Women')
-    R.p('The roll of 16 June is published as a total only and the names left off are not split by sex, so women\'s share of the removals cannot be counted from the Chief Electoral Officer\'s tables. '
+    R.p('The roll of 16 June is published as a total only and the names left off are not split by sex, so women\'s share of the names left off cannot be counted from the Chief Electoral Officer\'s tables. '
         'Women were %s of the draft roll and %s of the roll of 9 October. The roll before the revision gives no count by sex, so these two figures cannot show whether women were left off more often than men.'
         % (pct(S['women_draft_pct']), pct(S['women_sep_pct'])))
 
@@ -536,24 +536,24 @@ def karnataka(R):
     F.add(F.multiples([(d['district'], [100, 100 * d['draft'] / d['before'], 100 * d['sep'] / d['before']], d['bengaluru']) for d in D],
                       ['16 June', 'the draft', '9 October'], 'Each district\'s roll, 16 June 2026 = 100'),
           'Each small chart follows one district\'s roll from 16 June to the draft and to 9 October, with 16 June set at 100. The dashed line is the June level. Bengaluru\'s four districts in red.', width=16)
-    R.p('By 9 October the roll had risen by %s since the draft, %s of the %s names removed. In Bengaluru it rose by %s, against %s names removed. Elsewhere the rise came to %s of the names removed. '
+    R.p('By 9 October the roll had risen by %s since the draft, %s of the %s names left off. In Bengaluru it rose by %s, against %s names left off. Elsewhere the rise came to %s of the names left off. '
         'The final roll may change this, and the rise includes new voters, so it is the most that could have been restored.'
         % (indian(S['added_sep']), pct(S['made_up_pct']), crore(S['removed']), indian(B['added_sep']), lakh(B['removed']), pct(RS['made_up_pct'])))
 
     R.h2('Every district')
-    R.table(['District', 'Roll before', 'Removed', 'Per 100', 'Shifted', 'Absent', 'Dead', 'Already enrolled', 'Other', 'Roll 9 Oct'],
+    R.table(['District', 'Roll before', 'Left off', 'Per 100', 'Shifted', 'Absent', 'Dead', 'Already enrolled', 'Other', 'Roll 9 Oct'],
             [[d['district'], indian(d['before']), indian(d['removed']), d1(d['per_100']), indian(d['shifted']), indian(d['absent']), indian(d['dead']), indian(d['duplicate']), indian(d['other']), indian(d['sep'])] for d in D],
             widths=[3.2, 2.0, 1.8, 1.2, 1.7, 1.6, 1.6, 1.6, 1.4, 2.0], size=7)
     limits_section(R, 'The tables show how many names were left off the draft in each of the 34 election districts, on what recorded reason, and how the roll stood on 9 October.',
-                   ['Which constituencies lost the most names, or how the removals compare with the margins of the 2023 election. Nothing has been published by assembly constituency.',
-                    'Whether women, the old or the young were removed more often.',
-                    'Whether each removal was right. %s' % REASON])
+                   ['Which constituencies lost the most names, or how the names left off compare with the margins of the 2023 election. Nothing has been published by assembly constituency.',
+                    'Whether women, the old or the young were left off more often.',
+                    'Whether each name was rightly left off. %s' % REASON])
 
     R.h1('What the Election Commission should do')
-    R.p('%s names came off Karnataka\'s draft roll, %s of them in Bengaluru. The Election Commission should do five things before the final roll.' % (crore(S['removed']), lakh(B['removed'])))
+    R.p('%s names were left off Karnataka\'s draft roll, %s of them in Bengaluru. The Election Commission should do five things before the final roll.' % (crore(S['removed']), lakh(B['removed'])))
     R.numbered([
-        'Publish the names removed by assembly constituency and polling station, with the reason, so that the removals can be set against the places they came from.',
-        'Publish the names removed by sex and age, with the roll of 16 June by sex.',
+        'Publish the names left off by assembly constituency and polling station, with the reason, so that they can be set against the places they came from.',
+        'Publish the names left off by sex and age, with the roll of 16 June by sex.',
         'Publish the basis for the %s entries marked shifted or absent, including the visits made and the notice given.' % lakh(S['reasons']['shifted'] + S['reasons']['absent']),
         'Explain why Bengaluru lost %s of every 100 electors, against %s in the rest of the state.' % (d1(B['per_100']), d1(RS['per_100'])),
         'Publish with the final roll how many of those added had been left off the draft, so that names restored can be told apart from new voters.',
@@ -561,9 +561,9 @@ def karnataka(R):
 
     R.h1('Method and sources')
     R.p('The Chief Electoral Officer, Karnataka, published the draft roll on 24 August 2026 with a table of the names left off it, by election district and under five reasons, absent, permanently shifted, dead, already enrolled and other. '
-        'The %d district rows add up to the state row, %s names out of %s, and in every district the names removed and the forms digitised add up to the roll of 16 June 2026.' % (S['districts'], indian(S['removed']), indian(S['before'])))
+        'The %d district rows add up to the state row, %s names out of %s, and in every district the names left off and the forms digitised add up to the roll of 16 June 2026.' % (S['districts'], indian(S['removed']), indian(S['before'])))
     R.p('The Chief Electoral Officer published every table of the revision by its 34 election districts and for the state, and none by assembly constituency. Bengaluru appears as four of those districts, Bangalore Urban and the North, Central and South districts of the city corporation, B.B.M.P.')
-    R.p('The final roll is due on 27 October 2026. Until then the latest figures are the roll of 9 October 2026, by district and sex. The rise from the draft to that roll is the names added less those removed since, so it counts new voters as well as names put back.')
+    R.p('The final roll is due on 27 October 2026. Until then the latest figures are the roll of 9 October 2026, by district and sex. The rise from the draft to that roll is the names added less those deleted since, so it counts new voters as well as names put back.')
     R.p('The map joins the constituency boundaries of DataMeet\'s assembly constituency map, licensed CC BY 2.5 India, by the district each constituency belongs to in the Election Commission\'s own list. Only counts are published, never a name, EPIC number or address.')
 
 
@@ -593,7 +593,7 @@ def westbengal(R):
         'The roll the 2026 election was held on was %s smaller than the 2024 roll, %s of every 100 electors. Kolkata North\'s fell by %s per 100.' % (lakh(S['fall']), d1(S['per_100']), d1(D[0]['per_100'])),
         '%s of the names left off the draft were entered as dead, %s as shifted and %s as absent. %s' % (pct(P['shares']['dead']), pct(P['shares']['shifted']), pct(P['shares']['absent']), REASON),
     ])
-    R.p('The Chief Electoral Officer, who keeps the state\'s rolls for the Election Commission, publishes no count of the names removed by district or constituency. So those figures measure the fall in the roll, how much smaller each roll was than in 2024. That fall takes in eighteen months of ordinary changes as well as the revision, and it is a different count from the names struck off.', italic=True)
+    R.p('The Chief Electoral Officer, who keeps the state\'s rolls for the Election Commission, publishes no count of the names left off the draft by district or constituency. So those figures measure the fall in the roll, how much smaller each roll was than in 2024. That fall takes in eighteen months of ordinary changes as well as the revision, and it is a different count from the names left off the draft.', italic=True)
 
     R.h1('The roll')
     R.stats([(lakh(P['removed']), 'left off the draft roll'), (lakh(P['adjudication']), 'held back for adjudication'),
@@ -609,11 +609,11 @@ def westbengal(R):
     R.h2('The roll, step by step')
     F.add(F.waterfall([('Roll of 27 October 2025', P['before'], 'total'), ('Dead', P['dead'], 'down'), ('Shifted', P['shifted'], 'down'), ('Absent', P['absent'], 'down'),
                        ('Already enrolled and other', P['duplicate'] + P['other'], 'down'), ('Draft roll', P['draft'], 'total'), ('Added on claims', P['added'], 'up'),
-                       ('Removed on objections', P['form7'], 'down'), ('Held back for adjudication', P['adjudication'], 'down'), ('Final roll', P['final'], 'total'),
+                       ('Deleted on objections', P['form7'], 'down'), ('Held back for adjudication', P['adjudication'], 'down'), ('Final roll', P['final'], 'total'),
                        ('Net change after the final roll', S['after_final'], 'up'), ('Roll at the 2026 nominations', S['election'], 'total')],
                       math.floor(P['final'] * 0.85 / 1e6) * 1e6, 'West Bengal, from October 2025 to the 2026 nominations'),
           'As the Chief Electoral Officer reported it in press note PN-05-2026, with the roll at the 2026 nominations. The bars start above zero so that the changes can be seen.', width=15.5)
-    R.p('%s names were left off the draft roll, %s of every 100 electors, and another %s were held back from the final roll for adjudication. %s were added on claims, filed on Form 6 to add a name, and %s removed on objections, filed on Form 7 to remove one. '
+    R.p('%s names were left off the draft roll, %s of every 100 electors, and another %s were held back from the final roll for adjudication. %s were added on claims, filed on Form 6 to add a name, and %s deleted on objections, filed on Form 7 to delete one. '
         'The final roll of 28 February 2026 held %s. By the 2026 nominations the roll had regained %s, and it was still %s smaller than in October 2025. %s'
         % (indian(P['removed']), d1(P['removed_per_100']), indian(P['adjudication']), indian(P['added']), indian(P['form7']), crore(P['final']), lakh(S['after_final']), lakh(S['fall_from_oct2025']), REASON))
 
@@ -636,12 +636,12 @@ def westbengal(R):
     R.stats([(lakh(AD['appeals_by_excluded']), 'appeals by those found not eligible'), (lakh(AD['appeals_against_inclusion']), 'appeals against names kept'),
              (indian(AD['restored_before_poll']), 'restored in time to vote, by press reports'), (pct(AD['pending_pct']), 'of appeals undecided on 16 September')])
     R.p('As reported, of the %s names held back, %s were found eligible and %s were found not eligible, %s of the cases. %s of those found not eligible appealed, and by press reports alone %s were restored in time to vote. '
-        'Another %s appeals asked the tribunals to remove names the judicial officers had kept. On 16 September %s of all %s appeals were still undecided. %s cases are not accounted for in the reported figures.'
+        'Another %s appeals asked the tribunals to delete names the judicial officers had kept. On 16 September %s of all %s appeals were still undecided. %s cases are not accounted for in the reported figures.'
         % (lakh(AD['under_adjudication']), lakh(AD['found_eligible']), lakh(AD['found_not_eligible']), pct(AD['not_eligible_pct']), lakh(AD['appeals_by_excluded']), indian(AD['restored_before_poll']),
            lakh(AD['appeals_against_inclusion']), pct(AD['pending_pct']), lakh(AD['appeals_total']), indian(AD['not_accounted'])))
 
     R.h2('Per 100 electors, by district')
-    R.p('The Chief Electoral Officer has published no count of the names removed by district or constituency. What is published for every constituency is the roll at the 2024 Lok Sabha nominations and the roll at the 2026 Assembly nominations. '
+    R.p('The Chief Electoral Officer has published no count of the names left off the draft by district or constituency. What is published for every constituency is the roll at the 2024 Lok Sabha nominations and the roll at the 2026 Assembly nominations. '
         'What follows is the fall between the two, for every 100 electors on the 2024 roll. It takes in eighteen months of ordinary additions and deletions as well as the revision. '
         'The 2024 roll was %s smaller than the roll of October 2025 the revision started from, so this fall understates the fall from that roll.' % lakh(S['growth_2024_to_oct2025']))
     F.add(F.hbars([(d['district'], d['per_100']) for d in D], 'Fall in the roll per 100 electors, 2024 to the 2026 election, by district', 'Fall per 100 electors on the 2024 roll',
@@ -717,17 +717,17 @@ def westbengal(R):
         'The fall exceeded the margin in %d of the BJP\'s seats and %d of the AITC\'s.'
         % (W['BJP']['seats'], W['AITC']['seats'], d1(W['BJP']['per_100']), d1(W['AITC']['per_100']), sg(W['BJP']['vs_district']), sg(W['AITC']['vs_district']), W['BJP']['over_margin'], W['AITC']['over_margin']))
     limits_section(R, 'The tables show the names left off the draft and the names held back for the state as a whole, and how much smaller every constituency\'s roll was at the 2026 election than in 2024.',
-                   ['How many names were removed in each district or constituency, or on what recorded reason.',
+                   ['How many names were left off the draft in each district or constituency, or on what recorded reason.',
                     'Where the names held back for adjudication were, or how many of them in each place were found eligible.',
-                    'Whether each removal was right. %s' % REASON,
-                    'How anyone missing from the roll would have voted. No list of removals can show intent.'])
+                    'Whether each name was rightly left off. %s' % REASON,
+                    'How anyone missing from the roll would have voted. No list of names left off or deleted can show intent.'])
 
     R.h1('What the Election Commission should do')
-    R.p('%s names came off West Bengal\'s draft roll and %s more were held back from the final roll. The Election Commission should do five things.' % (lakh(P['removed']), lakh(P['adjudication'])))
+    R.p('%s names were left off West Bengal\'s draft roll and %s more were held back from the final roll. The Election Commission should do five things.' % (lakh(P['removed']), lakh(P['adjudication'])))
     R.numbered([
-        'Publish the names removed by constituency and polling station, with the reason and the sex of each, so that the removals can be counted where they happened.',
+        'Publish the names left off by constituency and polling station, with the reason and the sex of each, so that they can be counted where they happened.',
         'Publish the outcome of adjudication by district and constituency, as its own table and in full.',
-        'Decide the %s appeals still pending, and publish how many names each decision restored or removed.' % lakh(AD['appeals_pending']),
+        'Decide the %s appeals still pending, and publish how many names each decision restored or deleted.' % lakh(AD['appeals_pending']),
         'Account for the %s cases missing from the reported outcome of adjudication.' % indian(AD['not_accounted']),
         'Publish how many of those added after the draft had been left off it, so that names restored can be told apart from new voters.',
     ])
@@ -736,7 +736,7 @@ def westbengal(R):
     R.p('The Chief Electoral Officer\'s press note PN-05-2026 gives the roll of 27 October 2025, the %s names left off the draft by reason, the claims and objections, the %s names held back for adjudication, and the final roll of 28 February 2026. '
         'Every one of those figures is for the state as a whole, and they add up step by step. The women and men on the roll before the revision, set against the draft roll by sex, give the share of women among the names left off.'
         % (indian(P['removed']), indian(P['adjudication'])))
-    R.p('No table of the names removed by district or constituency has been published. What is published for all %d constituencies, by sex, is three rolls, the roll at the 2024 Lok Sabha nominations, the draft roll of 16 December 2025, and the roll at the 2026 Assembly nominations. '
+    R.p('No table of the names left off the draft by district or constituency has been published. What is published for all %d constituencies, by sex, is three rolls, the roll at the 2024 Lok Sabha nominations, the draft roll of 16 December 2025, and the roll at the 2026 Assembly nominations. '
         'So the constituency figures measure the fall in the roll from 2024. That fall includes the revision, the names held back for adjudication and those not restored, and also eighteen months of ordinary additions and deletions before the revision began. '
         'The roll of October 2025 was %s larger than the 2024 roll, so the fall from 2024 is smaller than the fall from the roll the revision started from.' % (S['acs'], lakh(S['growth_2024_to_oct2025'])))
     R.p('The outcome of adjudication and the appeals are the Election Commission\'s figures as the press reported them, including its affidavit of 16 September, and they are given here as reported. The district of each constituency is the Chief Electoral Officer\'s, and district figures are the sums of their constituencies.')
@@ -775,7 +775,7 @@ def kerala(R):
         '%s fell most, by %s per 100, and %s least, by %s.' % (D[0]['district'], d1(D[0]['draft_per_100']), low['district'], d1(low['draft_per_100'])),
         'By the 2026 election the roll had risen %s from the draft, which counts new voters as well as names put back, and it was %s smaller than in January 2025.' % (lakh(S['election'] - S['draft']), lakh(S['fall'])),
     ])
-    R.p('No count of the names removed is published by constituency. So these figures measure the fall in the roll, how much smaller each roll was than in January 2025. That fall takes in ordinary changes as well as the revision, and it is a different count from the names struck off.', italic=True)
+    R.p('No count of the names left off the draft is published by constituency. So these figures measure the fall in the roll, how much smaller each roll was than in January 2025. That fall takes in ordinary changes as well as the revision, and it is a different count from the names left off the draft.', italic=True)
 
     R.h1('The roll')
     R.stats([(lakh(S['fall_draft']), 'smaller at the draft'), (d1(S['draft_per_100']), 'per 100 electors'),
@@ -858,9 +858,9 @@ def kerala(R):
         % (W['INC']['seats'], W['CPI(M)']['seats'], W['IUML']['seats'], d1(W['INC']['draft_per_100']), d1(W['CPI(M)']['draft_per_100']), d1(W['IUML']['draft_per_100']),
            sg(W['INC']['vs_district']), sg(W['CPI(M)']['vs_district']), sg(W['IUML']['vs_district'])))
     limits_section(R, 'The tables show how much smaller every constituency\'s roll was at the draft and at the election than in January 2025, by sex, and how that compares with the 2026 margins.',
-                   ['How many names were removed in each district or constituency, or on what recorded reason.',
+                   ['How many names were left off the draft in each district or constituency, or on what recorded reason.',
                     'How many of those left off were put back.',
-                    'Whether each removal was right, or how anyone missing from the roll would have voted. No list of removals can show intent.'])
+                    'Whether each name was rightly left off, or how anyone missing from the roll would have voted. No list of names left off can show intent.'])
 
     R.h1('What the Election Commission should do')
     R.p('Kerala\'s draft roll was %s smaller than its roll of January 2025, and no table of the names left off has been published. The Election Commission should do four things.' % lakh(S['fall_draft']))
@@ -874,9 +874,9 @@ def kerala(R):
     R.h1('Method and sources')
     R.p('The Chief Electoral Officer, Kerala, publishes every roll by assembly constituency and sex. These figures use four of them, the final roll of the 2025 summary revision (6 January 2025), the draft roll of the Special Intensive Revision (23 December 2025), its final roll (21 February 2026) and the roll of 23 March 2026, on which the election was held. Each adds up to its own district and state totals.')
     R.p('No table of the names left off the draft has been published, by constituency or for the state. The figures measure how much smaller each roll was at the draft than in January 2025. That fall, %s in all, takes in the ordinary changes of 2025 as well as the revision. '
-        'The count of names left off reported with the draft was %s. The draft plus that count comes to %s, which matches the roll frozen for the revision in October 2025 as the press reported it, a little more than the January roll. So for the state the fall and the removals are close. For a single constituency they may differ more.'
+        'The count of names left off reported with the draft was %s. The draft plus that count comes to %s, which matches the roll frozen for the revision in October 2025 as the press reported it, a little more than the January roll. So for the state the fall and the names left off are close. For a single constituency they may differ more.'
         % (indian(S['fall_draft']), indian(S['press_removed']), indian(S['frozen'])))
-    R.p('The rise from the draft to the final roll and to the roll of March 2026 is the names added less those removed. It counts new voters, including those who turned eighteen and those registered abroad, as well as names put back.')
+    R.p('The rise from the draft to the final roll and to the roll of March 2026 is the names added less those deleted. It counts new voters, including those who turned eighteen and those registered abroad, as well as names put back.')
     R.p('The 2026 winner, runner-up and margin are from the Election Commission\'s constituency result pages, checked against its state-wise pages. Turnout is votes over the roll of 23 March 2026. Party comparisons are by party, because the fronts of the independents are not in the data. '
         'Each seat\'s fall per 100 is also set against the fall of its own district, and those differences are averaged for each party\'s seats. The map uses DataMeet\'s assembly constituency map, licensed CC BY 2.5 India. Only counts are published, never a name, EPIC number or address.')
 

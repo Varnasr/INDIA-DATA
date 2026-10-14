@@ -3,7 +3,7 @@
 <div class="page-head"><h1>Overview</h1><ol class="summary" id="short"></ol></div>
 
   <h2>Find a constituency or district</h2>
-  <p class="sub">Each constituency, the area that elects one member of the state assembly, is shaded by how much smaller its roll was at the 2026 election than in 2024, for every 100 electors on the 2024 roll. This fall in the roll is a different count from the names removed, as the district section below explains. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
+  <p class="sub">Each constituency, the area that elects one member of the state assembly, is shaded by how much smaller its roll was at the 2026 election than in 2024, for every 100 electors on the 2024 roll. This fall in the roll is a different count from the names left off the draft, as the district section below explains. Tap a constituency on the map or type its name, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
@@ -14,7 +14,7 @@
 
 
   <h2>The roll, step by step</h2>
-  <p class="sub">The state's roll, step by step, as the Chief Electoral Officer, the official in charge of the state's electoral roll, reported it. The draft roll is the roll the revision published once names had been taken off. After it, people could file claims to be added and objections to names on it, and the final roll is the draft once those were decided. The chart shows the names left off the draft by reason, the claims and objections, the names held back for adjudication, and the change between the final roll and the roll at the 2026 nominations. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.</p>
+  <p class="sub">The state's roll, step by step, as the Chief Electoral Officer, the official in charge of the state's electoral roll, reported it. The draft roll is the roll the revision published once names had been left off it. After it, people could file claims to be added and objections to names on it, and the final roll is the draft once those were decided. The chart shows the names left off the draft by reason, the claims and objections, the names held back for adjudication, and the change between the final roll and the roll at the 2026 nominations. The bars start above zero so that the changes can be seen, and the figure on each bar is the count.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
@@ -32,7 +32,7 @@
   <p class="finding" id="fAdj"></p>
 
   <h2>Per 100 electors, by district</h2>
-  <p class="sub">The Chief Electoral Officer has published no count of the names removed by district or constituency. What is published for every constituency is the roll at the nominations for the 2024 Lok Sabha, the national parliament, and the roll at the 2026 Assembly nominations. This is the fall between the two, for every 100 electors on the 2024 roll. It takes in eighteen months of ordinary additions and deletions as well as the revision. Kolkata's two districts are marked in red.</p>
+  <p class="sub">The Chief Electoral Officer has published no count of the names left off the draft by district or constituency. What is published for every constituency is the roll at the nominations for the 2024 Lok Sabha, the national parliament, and the roll at the 2026 Assembly nominations. This is the fall between the two, for every 100 electors on the 2024 roll. It takes in eighteen months of ordinary additions and deletions as well as the revision. Kolkata's two districts are marked in red.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="cDist"></div></div>
   </div>
@@ -76,7 +76,7 @@ Promise.all([SIR.json('data/westbengal/summary.json'), SIR.json('data/westbengal
     { name: L('Shifted'), v: P.shifted, kind: 'down' }, { name: L('Absent'), v: P.absent, kind: 'down' },
     { name: L('Already enrolled and other'), v: P.duplicate + P.other, kind: 'down' },
     { name: L('Draft roll'), v: P.draft, kind: 'total' }, { name: L('Added on claims'), v: P.added, kind: 'up' },
-    { name: L('Removed on objections'), v: P.form7, kind: 'down' }, { name: L('Held back for adjudication'), v: P.adjudication, kind: 'down' },
+    { name: L('Deleted on objections'), v: P.form7, kind: 'down' }, { name: L('Held back for adjudication'), v: P.adjudication, kind: 'down' },
     { name: L('Final roll'), v: P.final, kind: 'total' }, { name: L('Net change after the final roll'), v: S.after_final, kind: 'up' },
     { name: L('Roll at the 2026 nominations'), v: S.election, kind: 'total' }] });
   document.getElementById('fWater').innerHTML = L('<b>{r} names were left off the draft roll, {p} of every 100 electors, and another {adj} were held back from the final roll for adjudication.</b> {dead} of those left off were entered as dead, {sh} as shifted and {ab} as absent. By the 2026 nominations the roll had grown by {back} since the final roll, and it was still {f} smaller than in October 2025. A reason on the list is what the officer wrote down, and nobody checked it.', {
@@ -95,7 +95,7 @@ Promise.all([SIR.json('data/westbengal/summary.json'), SIR.json('data/westbengal
   document.getElementById('cAppeal').innerHTML = tiles.map(function (t) {
     return '<div class="big"><b>' + t[0] + '</b><i style="--w:' + Math.max(t[2], 0.6).toFixed(1) + '%"></i><span>' + t[1] + '</span></div>';
   }).join('');
-  document.getElementById('fAdj').innerHTML = L('<b>Of the {u} names held back, {e} were found eligible and {n} were found not eligible, {p} of the cases.</b> {a} of those found not eligible appealed. Another {i} appeals asked the tribunals to remove names the judicial officers had kept. On 16 September {pp} of all {t} appeals were still undecided. These are the Election Commission\'s figures as reported. Press reports alone say that {r} were restored by the tribunals in time to vote. No table of these figures by district from the Commission itself has been found.', {
+  document.getElementById('fAdj').innerHTML = L('<b>Of the {u} names held back, {e} were found eligible and {n} were found not eligible, {p} of the cases.</b> {a} of those found not eligible appealed. Another {i} appeals asked the tribunals to delete names the judicial officers had kept. On 16 September {pp} of all {t} appeals were still undecided. These are the Election Commission\'s figures as reported. Press reports alone say that {r} were restored by the tribunals in time to vote. No table of these figures by district from the Commission itself has been found.', {
     u: SIR.lakh(AD.under_adjudication), e: SIR.lakh(AD.found_eligible), n: SIR.lakh(AD.found_not_eligible), p: SIR.pct(AD.not_eligible_pct), a: SIR.lakh(AD.appeals_by_excluded), r: SIR.n(AD.restored_before_poll), i: SIR.lakh(AD.appeals_against_inclusion), pp: SIR.pct(AD.pending_pct), t: SIR.lakh(AD.appeals_total) });
 
   VIZ.lollipop('cDist', { label: L('Fall in the roll from 2024 to the 2026 election, per 100 electors, by district'), axis: L('Fall per 100 electors on the 2024 roll'),
@@ -145,7 +145,7 @@ Promise.all([SIR.json('data/westbengal/summary.json'), SIR.json('data/westbengal
         [L('Fall since 2024'), SIR.n(d.roll_2024 - d.election)], [L('Per 100 electors'), SIR.d(d.per_100, 1)],
         [L('Women on the roll, 2024 and 2026'), SIR.pct(d.women_2024_pct) + ' · ' + SIR.pct(100 * d.women_election / d.election)],
         [L('Women\'s share of the fall'), SIR.pct(d.women_fall_pct)], [L('Constituencies'), SIR.n(d.acs)]]) + '<p class="note">' + L('Its constituencies') + '</p>' + SIR.goList(seatsOf(d), function (a) { return 'ac-' + a.ac; }, function (a) { return a.ac + '. ' + a.name; }); },
-      share: function (d) { return L('{d} district, West Bengal. The roll the 2026 election was held on was {f} names smaller than the 2024 roll, {p} of every 100 electors, across {n} constituencies. The fall also counts people who died or moved, so it is not the same as the names struck off. These are counts from the Chief Electoral Officer\'s published rolls.', { d: d.district, f: SIR.n(d.roll_2024 - d.election), p: SIR.d(d.per_100, 1), n: d.acs }); },
+      share: function (d) { return L('{d} district, West Bengal. The roll the 2026 election was held on was {f} names smaller than the 2024 roll, {p} of every 100 electors, across {n} constituencies. The fall also counts people who died or moved, so it is not the same as the names left off the draft or deleted after it. These are counts from the Chief Electoral Officer\'s published rolls.', { d: d.district, f: SIR.n(d.roll_2024 - d.election), p: SIR.d(d.per_100, 1), n: d.acs }); },
       pick: function (d) { var b = document.getElementById('vMap'); if (b.__select) b.__select(seatsOf(d).map(function (a) { return a.ac; })); } };
     var F = SIR.finder('finder', { seatPages: true, districtPages: true, rows: A, more: [DSET], prompt: L('Find a constituency or district'), placeholder: L('Type a name, a number or a district'), key: function (a) { return 'ac-' + a.ac; }, label: function (a) { return a.ac + '. ' + a.name + ' (' + a.district + ')'; },
       card: function (a) { return SIR.facts([
@@ -153,7 +153,7 @@ Promise.all([SIR.json('data/westbengal/summary.json'), SIR.json('data/westbengal
         [L('Fall since 2024'), SIR.n(a.fall)], [L('Per 100 electors'), SIR.d(a.per_100, 1)],
         [L('Women on the roll, 2024 and 2026'), SIR.pct(a.women_2024_pct) + ' · ' + SIR.pct(a.women_election_pct)],
         [L('Won in 2026'), a.winner + ' · ' + L('margin {m}', { m: SIR.n(a.margin) })], [L('Fall larger than the margin'), a.over_margin ? L('Yes') : L('No')]]); },
-      share: function (a) { return L('{n}, West Bengal. The roll the 2026 election was held on was {f} names smaller than the 2024 roll, {p} of every 100 electors. The seat was won by {m} votes. The fall also counts people who died or moved, so it is not the same as the names struck off. These are counts from the Chief Electoral Officer\'s published rolls.', { n: a.name, f: SIR.n(a.fall), p: SIR.d(a.per_100, 1), m: SIR.n(a.margin) }); },
+      share: function (a) { return L('{n}, West Bengal. The roll the 2026 election was held on was {f} names smaller than the 2024 roll, {p} of every 100 electors. The seat was won by {m} votes. The fall also counts people who died or moved, so it is not the same as the names left off the draft or deleted after it. These are counts from the Chief Electoral Officer\'s published rolls.', { n: a.name, f: SIR.n(a.fall), p: SIR.d(a.per_100, 1), m: SIR.n(a.margin) }); },
       pick: function (a) { var b = document.getElementById('vMap'); if (b.__select) b.__select(a.ac); } });
     VIZ.map('vMap', { geo: geo, label: L('Map of the fall in the roll per 100 electors, 2024 to the 2026 election, by constituency'), title: L('Fall per 100 electors'), inset: { name: L('Kolkata'), acs: A.filter(function (a) { return /^Kolkata/.test(a.district); }).map(function (a) { return a.ac; }), left: true },
       v: function (ac) { return byAc[ac] ? byAc[ac].per_100 : null; }, name: function (ac) { return byAc[ac] ? byAc[ac].name : ''; },

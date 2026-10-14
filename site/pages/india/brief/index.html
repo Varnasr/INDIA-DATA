@@ -19,14 +19,14 @@
 
   <h2>What the figures cannot show</h2>
   <ul class="plain">
-    <li>They cannot show why any name was removed, or what anyone intended. A reason on a list is what the officer wrote down, and nobody checked it.</li>
-    <li>They cannot show whether a person who was removed was entitled to stay on the roll. Some of the removed had died or moved, and the lists cannot say how many.</li>
-    <li id="cannotSeat">They cannot show that the removals decided an election.</li>
+    <li>They cannot show why any name was left off, or what anyone intended. A reason on a list is what the officer wrote down, and nobody checked it.</li>
+    <li>They cannot show whether a person who was left off was entitled to stay on the roll. Some of those left off had died or moved, and the lists cannot say how many.</li>
+    <li id="cannotSeat">They cannot show that the names left off or deleted decided an election.</li>
     <li>They say nothing about anyone's citizenship. The Supreme Court held in May 2026 that declining to enrol someone does not declare that person not to be a citizen. <a href="../nrc/">The NRC page</a> sets out what the law says.</li>
   </ul>
 
-  <h2>Removed from the Roll? What to Do</h2>
-  <p><a href="../../help/">Removed from the Roll? What to Do</a> sets out what the law lets an elector do, from Form 6 to the appeals, with the helpline and organisations that helped electors.</p>
+  <h2 id="removed-from-the-roll-what-to-do">Left Off the Roll? What to Do</h2>
+  <p><a href="../../help/">Left Off the Roll? What to Do</a> sets out what the law lets an elector do, from Form 6 to the appeals, with the helpline and organisations that helped electors.</p>
 
   <h2>Your rights at a protest</h2>
   <p>This section is general legal information about the law in force on <span id="asof"></span>. It is not legal advice, and the facts of a particular protest can change how the law applies. Rules on permission and on where a protest may be held are set locally and differ from place to place. Each point below quotes the act, the Constitution, the judgment or NALSA's own site.</p>
@@ -51,7 +51,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/process.js
     SIR.lk(T.removed) + ' names were left off the draft rolls of ' + T.states + ' states and union territories, ' + SIR.d(T.per_100, 1) + ' of every 100 electors.',
     'Taken together, the ' + F.states + ' final rolls made up at most ' + SIR.d(F.made_up_pct, 1) + '% of the names left off (' + SIR.d(F.made_up_pct_ex_withheld, 1) + '% without West Bengal\'s ' + SIR.lk(F.withheld, 0) + ' names held for adjudication), and that rise counts new voters too.',
     'Women were the larger share of the names left off in ' + W.over + ' of the ' + W.states + ' states that published a count by sex.',
-    'In ' + M.removed.states.join(' and ') + ', more names were removed than the winning margin in ' + n(over) + ' of ' + n(seats) + ' assembly seats. That means the removals could have decided those seats. It does not show that they did.'
+    'In ' + M.removed.states.join(' and ') + ', more names were left off or deleted than the winning margin in ' + n(over) + ' of ' + n(seats) + ' assembly seats. That means those names could have decided those seats. It does not show that they did.'
   ], 'This page gathers what the rest of the site holds and adds the law on protest. It is general information and is not legal advice. Nothing on it says what anyone intended.');
 
   document.getElementById('happened').innerHTML = [
@@ -59,7 +59,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/process.js
     SIR.lk(T.removed) + ' names were left off the drafts. The officers recorded ' + SIR.d(T.shares.shifted_absent_other, 1) + '% as shifted, absent or another reason, ' + SIR.d(T.shares.dead, 1) + '% as dead and ' + SIR.d(T.shares.duplicate, 1) + '% as enrolled more than once.',
     'Taken together, in the ' + F.states + ' states whose final rolls are out, the roll grew after the draft by at most ' + SIR.d(F.made_up_pct, 1) + '% of the names left off, or ' + SIR.d(F.made_up_pct_ex_withheld, 1) + '% without West Bengal\'s ' + SIR.lk(F.withheld, 0) + ' names held for adjudication. State by state the share ran much higher in some places, and <a href="../compare/#how-much-the-final-roll-made-up">Comparisons</a> gives each one. That rise counts new electors as well as names put back, so the share put back is no larger and may be smaller.',
     'Women were the larger share of the names left off in ' + W.over + ' of ' + W.states + ' states and ' + W.district_over + ' of ' + W.district_n + ' districts with a count by sex. <a href="../women/">Women</a> has every count.',
-    'In ' + M.removed.states.join(' and ') + ', more names were removed than the winning margin in ' + n(over) + ' of ' + n(seats) + ' assembly seats. <a href="../numbers/#against-the-winning-margins">Against the winning margins</a> sets out every comparison.'
+    'In ' + M.removed.states.join(' and ') + ', more names were left off or deleted than the winning margin in ' + n(over) + ' of ' + n(seats) + ' assembly seats. <a href="../numbers/#against-the-winning-margins">Against the winning margins</a> sets out every comparison.'
   ].map(function (t) { return '<li>' + t + '</li>'; }).join('');
 
   // the burdens carry {placeholders} for counts taken from the schedules
@@ -80,13 +80,13 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/process.js
 
   document.getElementById('reported').innerHTML = [
     '<b>Inside the Commission.</b> The Indian Express reported that two of the three Election Commissioners objected on record, at least 14 times, to decisions taken in the Commission\'s name. The Commission called the notes suggestions and said every decision was unanimous. <a href="../process/#inside-the-commission">Inside the Commission</a> sets out the account by date.',
-    '<b>Form 7 objections in bulk.</b> ' + n(sec('form7')) + ' reports of objections filed by a few people at once, some on forms with the elector\'s details already printed. An objection does not remove a name by itself. <a href="../disputes/#form7">The Form 7 section</a> lists each one.',
+    '<b>Form 7 objections in bulk.</b> ' + n(sec('form7')) + ' reports of objections filed by a few people at once, some on forms with the elector\'s details already printed. An objection does not delete a name by itself. <a href="../disputes/#form7">The Form 7 section</a> lists each one.',
     '<b>Changes to the software.</b> ' + n(sec('software') + sec('instructions')) + ' reports of changes to the Commission\'s software and of instructions given without a written order. <a href="../disputes/">Protests and disputes</a> lists each with its source.',
     '<b>Requests under the RTI Act.</b> ' + n(R.counts.items) + ' applications whose replies were reported, and in ' + n((R.by_outcome['no record held'] || 0)) + ' of them the authority said it held no record of what was asked. <a href="../rti/">RTI replies</a> lists each one.',
     '<b>Other reports.</b> ' + n(P.reported.length) + ' press reports on how the revision was run, each attributed to its outlet, are on <a href="../process/#reported-not-confirmed-by-a-document">How the revision was run</a>.'
   ].map(function (t) { return '<li>' + t + '</li>'; }).join('');
 
-  document.getElementById('cannotSeat').innerHTML = 'They cannot show that the removals decided an election. In Bihar, the one state where how the removed would have voted can be estimated, the estimates have ' + lo + ' to ' + hi + ' seats changing hands, in both directions. <a href="../../bihar/results/">Bihar\'s elections page</a> sets out how.';
+  document.getElementById('cannotSeat').innerHTML = 'They cannot show that the names left off or deleted decided an election. In Bihar, the one state where how those electors would have voted can be estimated, the estimates have ' + lo + ' to ' + hi + ' seats changing hands, in both directions. <a href="../../bihar/results/">Bihar\'s elections page</a> sets out how.';
 
   document.getElementById('asof').textContent = SIR.date(B.as_of);
   var html = '';

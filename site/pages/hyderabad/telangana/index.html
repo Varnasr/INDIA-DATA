@@ -6,7 +6,7 @@
   <div class="grid">
     <div class="panel">
       <h3>The fifteen seats of Hyderabad district</h3>
-      <p>Share of each seat's roll left off the draft roll, the roll published after the removals. The five Old City seats are in red.</p>
+      <p>Share of each seat's roll left off the draft roll, the roll published after the exclusions. The five Old City seats are in red.</p>
       <div class="chart tall"><canvas id="cSeats" aria-label="Share of the roll left off the draft, Hyderabad district's fifteen seats"></canvas></div>
     </div>
     <div class="panel">
@@ -33,7 +33,7 @@ SIR.json('data/hyderabad/telangana.json').then(function (d) {
   document.getElementById('kT').innerHTML = [[SIR.pct(OC.rate), L('left off the draft in the five Old City seats')], [SIR.pct(OH.rate), L('in Hyderabad\'s other ten seats')], [SIR.pct(H.rate), L('in Hyderabad district')], [SIR.pct(R.rate), L('in the rest of Telangana')]]
     .map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
   var seats = d.seats.slice().sort(function (a, b) { return b.rate - a.rate; }), above = seats.filter(function (x) { return !x.old_city && x.rate > Math.max.apply(null, seats.filter(function (y) { return y.old_city; }).map(function (y) { return y.rate; })); });
-  document.getElementById('fT').innerHTML = L('<b>Four in ten Old City electors were struck off, {oc} of the roll, and Hyderabad\'s other ten seats lost even more, {oh}.</b> Every seat in Hyderabad district lost between {lo} and {hi}, and {n} seats outside the Old City lost more than any Old City seat. The draft left off {h} across Hyderabad district and {r} in the rest of Telangana.', {
+  document.getElementById('fT').innerHTML = L('<b>Four in ten Old City electors were left off the draft, {oc} of the roll, and Hyderabad\'s other ten seats lost even more, {oh}.</b> Every seat in Hyderabad district lost between {lo} and {hi}, and {n} seats outside the Old City lost more than any Old City seat. The draft left off {h} across Hyderabad district and {r} in the rest of Telangana.', {
     oc: SIR.pct(OC.rate), oh: SIR.pct(OH.rate), lo: SIR.pct(seats[seats.length - 1].rate), hi: SIR.pct(seats[0].rate), n: above.length, h: SIR.pct(H.rate), r: SIR.pct(R.rate) });
   SIR.chart('cSeats', { type: 'bar', data: { labels: seats.map(function (x) { return x.name; }), datasets: [{ label: L('% of the roll left off the draft'), data: seats.map(function (x) { return +x.rate.toFixed(1); }), $tokens: seats.map(function (x) { return x.old_city ? '--fill-red' : '--fill-navy'; }) }] },
     options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('% of the roll left off the draft') } } } } });
@@ -42,7 +42,7 @@ SIR.json('data/hyderabad/telangana.json').then(function (d) {
   SIR.chart('cDist', { type: 'bar', data: { labels: ds.map(function (x) { return x.district; }), datasets: [{ label: L('% of the roll left off the draft'), data: ds.map(function (x) { return +x.rate.toFixed(1); }), $tokens: ds.map(function (x) { return x.district === 'Hyderabad' ? '--fill-red' : METRO.indexOf(x.district) >= 0 ? '--fill-amber' : '--fill-navy'; }) }] },
     options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { y: { ticks: { autoSkip: false } }, x: { beginAtZero: true, title: { display: true, text: L('% of the roll left off the draft') } } } } });
   var m = ds.filter(function (x) { return METRO.indexOf(x.district) >= 0; }), next = ds.filter(function (x) { return x.district !== 'Hyderabad' && METRO.indexOf(x.district) < 0; })[0];
-  document.getElementById('fD').innerHTML = L('<b>The three districts of the capital region lost far more than the rest of the state.</b> Hyderabad lost {h}, {m1} {v1} and {m2} {v2}, and no other district lost more than {nx} ({nd}). The removals are heavy across the whole capital region.', {
+  document.getElementById('fD').innerHTML = L('<b>The three districts of the capital region lost far more than the rest of the state.</b> Hyderabad lost {h}, {m1} {v1} and {m2} {v2}, and no other district lost more than {nx} ({nd}). The exclusions are heavy across the whole capital region.', {
     h: SIR.pct(H.rate), m1: m[0].district, v1: SIR.pct(m[0].rate), m2: m[1].district, v2: SIR.pct(m[1].rate), nx: SIR.pct(next.rate), nd: next.district });
   SIR.table(document.getElementById('tSeats'), [
     { k: 'name', label: L('Constituency'), left: true, fmt: function (v, x) { return SIR.esc(v) + (x.old_city ? ' <span class="muted">' + L('(Old City)') + '</span>' : ''); } },

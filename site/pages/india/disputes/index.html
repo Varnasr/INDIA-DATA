@@ -147,7 +147,9 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
     SIR.anchors && SIR.anchors();
   }
   var init = new URLSearchParams(location.search);
-  Object.keys(F).forEach(function (x) { var v = init.get(x), sel = document.getElementById(F[x]); if (v && [].some.call(sel.options, function (o) { return o.value === v; })) sel.value = v; });
+  // links shared before the issue was renamed still open on it
+  var OLD = { issue: { 'Deletions': 'Names left off or deleted' } };
+  Object.keys(F).forEach(function (x) { var v = init.get(x), sel = document.getElementById(F[x]); if (v && OLD[x] && OLD[x][v]) v = OLD[x][v]; if (v && [].some.call(sel.options, function (o) { return o.value === v; })) sel.value = v; });
   if (init.get('q')) document.getElementById('dq').value = init.get('q');
   document.getElementById('dfilter').addEventListener('input', render);
   document.getElementById('dfilter').addEventListener('change', render);

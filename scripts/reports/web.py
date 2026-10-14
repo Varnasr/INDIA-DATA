@@ -19,7 +19,7 @@ import sys
 ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
 META = {
     'india': ('Report, All India',
-              'The All India report on the Special Intensive Revision. It covers the reasons recorded for removals in each state and union territory, women among the removed, what goes with the removal rate, and what the Election Commission should do.',
+              'The All India report on the Special Intensive Revision. It covers the reasons recorded for the names left off the draft in each state and union territory, women among those left off, what goes with the rate of exclusion, and what the Election Commission should do.',
               'sir-india-report.pdf'),
     'bihar': ('Report, Bihar 2025',
               'The full report on the Bihar Special Intensive Revision of 2025. It covers Bihar as a whole, gives each of the 38 districts a chapter, sets out what the lists show and what they cannot, and ends with what the Election Commission should do.',

@@ -55,7 +55,7 @@ KEEP = ('id', 'section', 'state', 'place', 'date', 'kind', 'outlet', 'case', 'he
 # bodies that act, the constituencies or districts named, and the issues
 TAGS = ('court', 'actors', 'places', 'issues')
 ISSUES = {'Form 6', 'Form 7', 'Form 8', 'Pre-printed forms', 'Notices and hearings', 'Documents and declaration',
-          'Software (ECINET/ERONET)', 'Deletions', 'Living electors marked dead', 'Duplicates and errors', 'BLO workload',
+          'Software (ECINET/ERONET)', 'Names left off or deleted', 'Living electors marked dead', 'Duplicates and errors', 'BLO workload',
           'Deaths', 'Adjudication and appeals', 'Women', 'Migrants', 'Minorities', "Commission's independence",
           'Transparency of lists', 'Schedule and deadlines', 'Police and FIRs', 'Assembly resolution', 'Protest and march'}
 ALIAS = {'Hyderabad': 'Telangana', 'NCT of Delhi': 'Delhi', 'Orissa': 'Odisha'}

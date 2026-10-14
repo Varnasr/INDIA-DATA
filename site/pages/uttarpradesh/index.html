@@ -1,4 +1,4 @@
-<!--page {"title": "Uttar Pradesh 2026", "description": "How many names Uttar Pradesh's SIR draft roll left off in each of its 75 districts, for what recorded reason, in towns and villages, among women and men, against the 2022 winning margins, and what the notices and hearings after the draft removed.", "place": "up"} -->
+<!--page {"title": "Uttar Pradesh 2026", "description": "How many names Uttar Pradesh's SIR draft roll left off in each of its 75 districts, for what recorded reason, in towns and villages, among women and men, against the 2022 winning margins, and how many names were deleted after the notices and hearings.", "place": "up"} -->
 <main id="main">
 <div class="page-head"><h1>Overview</h1><ol class="summary" id="short"></ol></div>
 <p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
@@ -51,7 +51,7 @@
   <p class="finding" id="fUrban"></p>
 
   <h2>Against the 2022 winning margins</h2>
-  <p class="sub">No figure by assembly constituency has been published. So each district's names left off are spread over its constituencies in proportion to their electors in the 2022 Assembly election, and set against each seat's 2022 winning margin. That shows how many seats the removals were large enough to decide. It cannot show which seats, because the real count in a constituency can sit well above or below its district's rate, and it cannot show that any result would have changed. Each dot is one constituency. A dot above the line had more names left off on this spread than its winning margin.</p>
+  <p class="sub">No figure by assembly constituency has been published. So each district's names left off are spread over its constituencies in proportion to their electors in the 2022 Assembly election, and set against each seat's 2022 winning margin. That shows how many seats the names left off were large enough to decide. It cannot show which seats, because the real count in a constituency can sit well above or below its district's rate, and it cannot show that any result would have changed. Each dot is one constituency. A dot above the line had more names left off on this spread than its winning margin.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vMult"></div></div>
   </div>
@@ -97,7 +97,7 @@
   <p class="note" id="nWomen"></p>
 
   <h2>After the draft</h2>
-  <p class="sub">Electors kept on the draft roll were sent a notice when their form could not be linked to the roll of 2003 or when the Commission's software found a discrepancy in it, and were heard by an assistant registration officer. Names were then added on Form 6 claims and removed on Form 7 objections and after the hearings. Every figure here is the Chief Electoral Officer's, as the press reported it.</p>
+  <p class="sub">Electors kept on the draft roll were sent a notice when their form could not be linked to the roll of 2003 or when the Commission's software found a discrepancy in it, and were heard by an assistant registration officer. Names were then added on Form 6 claims and deleted on Form 7 objections and after the hearings. Every figure here is the Chief Electoral Officer's, as the press reported it.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vAfter"></div></div>
   </div>
@@ -131,7 +131,7 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
   VIZ.waterfall('vWater', { label: 'Uttar Pradesh: the roll from 27 October 2025 to the final roll of 10 April 2026', from: Math.floor(S.draft * 0.85 / 1e7) * 1e7, steps: [
     { name: 'Roll of 27 October 2025', v: S.roll_before, kind: 'total' }, { name: 'Left off the draft', v: S.left_off, kind: 'down' },
     { name: 'Draft roll', v: S.draft, kind: 'total' }, { name: 'Net change to the final roll', v: S.net_rise, kind: 'up' }, { name: 'Final roll', v: S.final, kind: 'total' }] });
-  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + cr(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors.</b> The final roll was ' + lk(S.net_rise) + ' larger than the draft, ' + SIR.pct(S.made_up_pct) + ' of what the draft left off. That rise counts new voters as well as names put back, so it is the most that can have been put back. A further ' + lk(S.removed_after) + ' were removed after the draft, as reported in the press.';
+  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + cr(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors.</b> The final roll was ' + lk(S.net_rise) + ' larger than the draft, ' + SIR.pct(S.made_up_pct) + ' of what the draft left off. That rise counts new voters as well as names put back, so it is the most that can have been put back. A further ' + lk(S.removed_after) + ' were deleted after the draft, as reported in the press.';
 
   VIZ.lollipop('vDist', { label: 'Names left off the draft roll per 100 electors, every district', axis: 'Left off per 100 electors on the roll of 27 October 2025', ref: S.per_100,
     rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: d1(d.per_100), tok: d.per_100 >= 20 ? '--fill-red' : '--fill-navy', hi: d.per_100 >= 20 }; }) });
@@ -192,7 +192,7 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
     key: [['Won by the NDA', '--fill-amber'], ['Won by the SP alliance', '--fill-red'], ['Won by another party', '--fill-grey']],
     points: M.seats.map(function (a) { return { x: a.margin, y: a.est, tok: a.alliance === 'NDA' ? '--fill-amber' : a.alliance === 'SP alliance' ? '--fill-red' : '--fill-grey',
       label: a.name + ' (' + a.district + '): margin ' + n(a.margin) + ', about ' + n(a.est) + ' left off' }; }) });
-  document.getElementById('fMargin').innerHTML = '<b>On this spread, the names left off were larger than the 2022 winning margin in ' + M.over + ' of the ' + M.n + ' constituencies.</b> In the typical seat the margin was ' + n(M.median_margin) + ' votes and the spread puts ' + n(M.median_est) + ' names left off. All ' + M.under_5000 + ' seats won by fewer than 5,000 votes are among them. Larger than the margin means the removals were large enough to decide the seat. It does not mean they did, since the people left off would not all have voted, nor all for one side. Spreading the state\'s total over the seats without the district split, as the All India margins page does, gives ' + M.state_even_over + '.';
+  document.getElementById('fMargin').innerHTML = '<b>On this spread, the names left off were larger than the 2022 winning margin in ' + M.over + ' of the ' + M.n + ' constituencies.</b> In the typical seat the margin was ' + n(M.median_margin) + ' votes and the spread puts ' + n(M.median_est) + ' names left off. All ' + M.under_5000 + ' seats won by fewer than 5,000 votes are among them. Larger than the margin means the names left off were large enough to decide the seat. It does not mean they did, since the people left off would not all have voted, nor all for one side. Spreading the state\'s total over the seats without the district split, as the All India margins page does, gives ' + M.state_even_over + '.';
   SIR.table(document.getElementById('tAll'), [{ k: 'a', label: 'Won in 2022 by', left: true }, { k: 'seats', label: 'Seats', fmt: n }, { k: 'over', label: 'Left off above the margin', fmt: n }, { k: 'per_100', label: 'Their districts\' rate per 100', fmt: d1 }],
     ['NDA', 'SP alliance', 'Other'].map(function (k) { return Object.assign({ a: k === 'Other' ? 'Another party' : k }, M.alliances[k]); }));
 
@@ -221,28 +221,28 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
 
   // ---- after the draft
   var N = A.notices, RA = N.removed_after;
-  VIZ.lollipop('vAfter', { label: 'After the draft: notices, hearings, claims and removals, in lakh', axis: 'Electors, lakh', rows: [
+  VIZ.lollipop('vAfter', { label: 'After the draft: notices, hearings, claims and deletions, in lakh', axis: 'Electors, lakh', rows: [
     { name: 'Notices sent', v: N.all / 1e5, text: lk(N.all), tok: '--fill-navy', hi: true },
     { name: 'Not linked to the 2003 roll', v: N.no_mapping / 1e5, text: lk(N.no_mapping), tok: '--fill-grey' },
     { name: 'A discrepancy in the form', v: N.discrepancy / 1e5, text: lk(N.discrepancy), tok: '--fill-grey' },
     { name: 'Heard by 7 March', v: N.held_by_7_march / 1e5, text: lk(N.held_by_7_march), tok: '--fill-grey' },
     { name: 'Form 6 claims to be added', v: N.form6 / 1e5, text: lk(N.form6), tok: '--fill-teal' },
     { name: 'Form 7 objections', v: N.form7 / 1e5, text: lk(N.form7), tok: '--fill-amber' },
-    { name: 'Removed after the draft', v: RA.total / 1e5, text: lk(RA.total), tok: '--fill-red' }] });
+    { name: 'Deleted after the draft', v: RA.total / 1e5, text: lk(RA.total), tok: '--fill-red' }] });
   document.getElementById('fAfter').innerHTML = '<b>Notices went to ' + cr(N.all) + ' electors kept on the draft, ' + d1(N.per_100_draft) + ' of every 100 on it.</b> ' + cr(N.no_mapping) + ' could not be linked to the roll of 2003 and ' + cr(N.discrepancy) + ' had a discrepancy the Commission\'s software found in their form, such as a name or a parent\'s name that did not match. They were heard by ' + n(N.aeros) + ' assistant registration officers under ' + n(N.eros) + ' registration officers, about ' + n(N.per_aero) + ' notices for each assistant officer, or about ' + n(N.per_aero_day) + ' for each of them every day from 21 January to 27 March. The Hindu reported the two groups as 1.4 crore and 2.02 crore, which add to more than the 3.26 crore total, so the split the Hindustan Times reported, which adds up, is used here.';
-  VIZ.lollipop('vRemoved', { label: 'The ' + lk(RA.total) + ' names removed after the draft, by the reason given', axis: 'Names removed, lakh', rows: [
+  VIZ.lollipop('vRemoved', { label: 'The ' + lk(RA.total) + ' names deleted after the draft, by the reason given', axis: 'Names deleted, lakh', rows: [
     { name: 'Did not answer a notice', v: RA.no_response / 1e5, text: lk(RA.no_response), tok: '--fill-red', hi: true },
     { name: 'Permanently shifted', v: RA.shifted / 1e5, text: lk(RA.shifted), tok: '--fill-navy' },
     { name: 'Already enrolled', v: RA.multiple / 1e5, text: lk(RA.multiple), tok: '--fill-amber' },
     { name: 'Dead', v: RA.dead / 1e5, text: lk(RA.dead), tok: '--fill-grey' },
     { name: 'Under age or not a citizen', v: RA.underage_or_noncitizen / 1e5, text: n(RA.underage_or_noncitizen), tok: '--fill-other' }] });
-  document.getElementById('fRemoved').innerHTML = '<b>' + lk(RA.no_response) + ' of the ' + lk(RA.total) + ' names removed after the draft were removed because the elector did not answer a notice.</b> That is ' + d1(N.no_response_per_100_notices) + ' of every 100 electors sent one. ' + n(RA.underage_or_noncitizen) + ' were removed as under age or not citizens. The reasons are the Chief Electoral Officer\'s, as The New Indian Express reported them, and the CEO did not say how many came through notices and how many through Form 7.';
+  document.getElementById('fRemoved').innerHTML = '<b>' + lk(RA.no_response) + ' of the ' + lk(RA.total) + ' names deleted after the draft were deleted because the elector did not answer a notice.</b> That is ' + d1(N.no_response_per_100_notices) + ' of every 100 electors sent one. ' + n(RA.underage_or_noncitizen) + ' were deleted as under age or not citizens. The reasons are the Chief Electoral Officer\'s, as The New Indian Express reported them, and the CEO did not say how many came through notices and how many through Form 7.';
 
   // ---- disputes and help
   var DI = [].concat.apply([], r[3].sections.map(function (x) { return x.items; })).filter(function (i) { return /Uttar Pradesh/.test(i.state); });
   var HO = r[4].orgs.filter(function (o) { return o.state === 'Uttar Pradesh'; });
   document.getElementById('fLinks').innerHTML = '<a href="../india/disputes/?state=' + encodeURIComponent('Uttar Pradesh') + '">' + n(DI.length) + ' court cases, Form 7 complaints, protests and reported deaths in Uttar Pradesh</a> are listed with their sources on Protests and Disputes. ' +
-    (HO.length ? '<a href="../help/?state=' + encodeURIComponent('Uttar Pradesh') + '">' + n(HO.length) + ' organisations that helped electors in Uttar Pradesh</a> are on Removed from the Roll? What to Do, with what the law lets an elector do.' : 'What the law lets an elector do is on <a href="../help/">Removed from the Roll? What to Do</a>.');
+    (HO.length ? '<a href="../help/?state=' + encodeURIComponent('Uttar Pradesh') + '">' + n(HO.length) + ' organisations that helped electors in Uttar Pradesh</a> are on Left Off the Roll? What to Do, with what the law lets an elector do.' : 'What the law lets an elector do is on <a href="../help/">Left Off the Roll? What to Do</a>.');
 
 
   SIR.table(document.getElementById('tDist'), [

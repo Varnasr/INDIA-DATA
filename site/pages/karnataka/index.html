@@ -3,7 +3,7 @@
 <div class="page-head"><h1>Overview</h1><ol class="summary" id="short"></ol></div>
 
   <h2>Find a district</h2>
-  <p class="sub">The revision was published by district only, so each district is shaded by the names left off the draft roll for every 100 electors on the roll of 16 June. The draft roll is the roll the revision published once those names had been taken off, and counting per 100 electors lets a small district be set beside a large one. Type a district's name, and its figures appear below with a link you can send.</p>
+  <p class="sub">The revision was published by district only, so each district is shaded by the names left off the draft roll for every 100 electors on the roll of 16 June. The draft roll is the roll the revision published once those names had been left off it, and counting per 100 electors lets a small district be set beside a large one. Type a district's name, and its figures appear below with a link you can send.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
@@ -30,7 +30,7 @@
   <p class="finding" id="fDist"></p>
 
   <h2>The reasons, district by district</h2>
-  <p class="sub">Each district's removals split by the reason entered against the name. Districts are in the same order as above.</p>
+  <p class="sub">Each district's names left off the draft, split by the reason entered against the name. Districts are in the same order as above.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="vizbox" id="cMix"></div>
@@ -48,7 +48,7 @@
   <p class="finding" id="fBlr"></p>
 
   <h2>Women</h2>
-  <p class="sub">The roll of 16 June is published as a total only and the names left off are not split by sex, so women's share of the removals cannot be counted from the Chief Electoral Officer's tables.</p>
+  <p class="sub">The roll of 16 June is published as a total only and the names left off are not split by sex, so women's share of the names left off cannot be counted from the Chief Electoral Officer's tables.</p>
   <p class="finding" id="fWomen"></p>
 
   <h2>After the draft</h2>
@@ -73,7 +73,7 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
   var S = r[0], D = r[1], B = S.bengaluru, R = S.rest;
   var RS = [['absent', L('Absent')], ['shifted', L('Shifted')], ['dead', L('Dead')], ['duplicate', L('Already enrolled')], ['other', L('Other')]];
   var tok = function (d) { return d.bengaluru ? '--fill-red' : '--fill-navy'; };
-  VIZ.lollipop('cDist', { label: L('Names removed per 100 electors, by district'), axis: L('Removed per 100 electors'),
+  VIZ.lollipop('cDist', { label: L('Names left off per 100 electors, by district'), axis: L('Left off per 100 electors'),
     rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: SIR.d(d.per_100, 1), tok: tok(d), hi: d.bengaluru }; }) });
   var low = D[D.length - 1], next = D.filter(function (d) { return !d.bengaluru; });
   document.getElementById('fDist').innerHTML = L('<b>Bengaluru\'s four districts lost between {lo} and {hi} of every 100 electors, against {s} for the state.</b> The next highest is {n1} at {n1v}. {low} lost the fewest, {lowv}.', {
@@ -81,17 +81,17 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
     hi: SIR.d(D[0].per_100, 1), s: SIR.d(S.per_100, 1), n1: next[0].district, n1v: SIR.d(next[0].per_100, 1), low: low.district, lowv: SIR.d(low.per_100, 1) });
 
   var tiles = [[SIR.pct(B.share_of_roll), L('of the roll before the revision'), B.share_of_roll],
-    [SIR.pct(B.share_of_removed), L('of the names removed'), B.share_of_removed],
-    [SIR.d(B.per_100, 1), L('removed per 100 electors, against {r} in the rest of the state', { r: SIR.d(R.per_100, 1) }), B.per_100]];
+    [SIR.pct(B.share_of_removed), L('of the names left off the draft'), B.share_of_removed],
+    [SIR.d(B.per_100, 1), L('left off per 100 electors, against {r} in the rest of the state', { r: SIR.d(R.per_100, 1) }), B.per_100]];
   document.getElementById('cBlr').innerHTML = tiles.map(function (t) {
     return '<div class="big"><b>' + t[0] + '</b><i style="--w:' + t[2].toFixed(1) + '%"></i><span>' + t[1] + '</span></div>';
   }).join('');
-  document.getElementById('fBlr').innerHTML = L('<b>Bengaluru holds {roll} of Karnataka\'s roll and {rem} of the names removed, {n} names in all.</b> {sa} of them were entered as shifted or absent and {dead} as dead. In the rest of the state the figures are {rsa} and {rdead}.', {
+  document.getElementById('fBlr').innerHTML = L('<b>Bengaluru holds {roll} of Karnataka\'s roll and {rem} of the names left off the draft, {n} names in all.</b> {sa} of them were entered as shifted or absent and {dead} as dead. In the rest of the state the figures are {rsa} and {rdead}.', {
     roll: SIR.pct(B.share_of_roll), rem: SIR.pct(B.share_of_removed), n: SIR.lakh(B.removed), sa: SIR.pct(B.shifted_absent_share), dead: SIR.pct(B.dead_share), rsa: SIR.pct(R.shifted_absent_share), rdead: SIR.pct(R.dead_share) });
 
-  VIZ.heat('cMix', { label: L('Share of each district\'s removals by reason'), cols: RS.map(function (k) { return k[1]; }), tok: ['--fill-amber', '--fill-navy', '--fill-purple', '--fill-red', '--fill-grey'], unit: '%',
+  VIZ.heat('cMix', { label: L('Share of each district\'s names left off, by reason'), cols: RS.map(function (k) { return k[1]; }), tok: ['--fill-amber', '--fill-navy', '--fill-purple', '--fill-red', '--fill-grey'], unit: '%',
     rows: D.map(function (d) { return { name: d.district, v: RS.map(function (k) { return d.shares[k[0]]; }) }; }) });
-  document.getElementById('fMix').innerHTML = L('<b>Across the state, {sh} of the names were entered as shifted and {ab} as absent, {dead} as dead and {dup} as already enrolled elsewhere.</b> The more names a district removed, the larger the share marked shifted or absent (rank correlation {rho}, where 0 means the two are unrelated and 1 means they rise in step). Where fewer were removed, more were entered as dead, up to {dm} in {dmn}. A reason on the list is what the officer wrote down, and nobody checked it.', {
+  document.getElementById('fMix').innerHTML = L('<b>Across the state, {sh} of the names were entered as shifted and {ab} as absent, {dead} as dead and {dup} as already enrolled elsewhere.</b> The more names a district lost, the larger the share marked shifted or absent (rank correlation {rho}, where 0 means the two are unrelated and 1 means they rise in step). Where fewer were left off, more were entered as dead, up to {dm} in {dmn}. A reason on the list is what the officer wrote down, and nobody checked it.', {
     sh: SIR.pct(S.shares.shifted), ab: SIR.pct(S.shares.absent), dead: SIR.pct(S.shares.dead), dup: SIR.pct(S.shares.duplicate), rho: SIR.d(S.rho_rate_shifted, 2), dm: SIR.pct(S.dead_max.share), dmn: S.dead_max.district });
 
   VIZ.waterfall('vWater', { label: L('Karnataka: the roll from 16 June to 9 October 2026'), from: Math.floor(S.draft * 0.8 / 1e6) * 1e6, steps: [
@@ -103,14 +103,14 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
   VIZ.multiples('vBack', { label: L('Each district\'s roll on 16 June, at the draft and on 9 October, 16 June = 100'), ref: 100,
     steps: [L('16 June'), L('Draft'), L('9 October')],
     panels: D.map(function (d) { return { name: d.district, hi: d.bengaluru, v: [100, 100 * d.draft / d.before, 100 * d.sep / d.before] }; }) });
-  document.getElementById('fBack').innerHTML = L('<b>By 9 October the roll had risen by {a} since the draft, {m} of the {r} names removed.</b> In Bengaluru it rose by {ba}, against {bn} names removed. Elsewhere the rise came to {rm} of the names removed. The final roll may change this, and the rise includes new voters.', {
+  document.getElementById('fBack').innerHTML = L('<b>By 9 October the roll had risen by {a} since the draft, {m} of the {r} names left off.</b> In Bengaluru it rose by {ba}, against {bn} names left off. Elsewhere the rise came to {rm} of the names left off. The final roll may change this, and the rise includes new voters.', {
     a: SIR.n(S.added_sep), m: SIR.pct(S.made_up_pct), r: SIR.lakh(S.removed), ba: SIR.n(B.added_sep), bn: SIR.lakh(B.removed), rm: SIR.pct(R.made_up_pct) });
 
   document.getElementById('fWomen').innerHTML = L('<b>Women were {d} of the draft roll and {s} of the roll of 9 October.</b> The roll before the revision gives no count by sex, so these two figures cannot show whether women were left off more often than men.', { d: SIR.pct(S.women_draft_pct), s: SIR.pct(S.women_sep_pct) });
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: L('District'), left: true },
-    { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Removed'), fmt: SIR.n },
+    { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Left off'), fmt: SIR.n },
     { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
     { k: 'shifted', label: L('Shifted'), fmt: SIR.n }, { k: 'absent', label: L('Absent'), fmt: SIR.n },
     { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'duplicate', label: L('Already enrolled'), fmt: SIR.n },
