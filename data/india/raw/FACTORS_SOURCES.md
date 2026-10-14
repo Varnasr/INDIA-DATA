@@ -73,3 +73,46 @@ Copies transcribed by OpenCity from each state's publication, as CSV. The page s
 
 These checks catch a misread GDDP figure, not a misread per capita figure. Only ranks inside a
 state are used, so the years and prices do not change a result.
+
+## Seven more states (14 October 2026)
+
+Andhra Pradesh, Assam, Chhattisgarh, Manipur, Meghalaya, Mizoram and Odisha: 131 survey
+districts, 917 rows, read the same way and appended to `nfhs5_districts.csv` (source_file AP,
+AS, CG, MN, ML, MZ, OR). Each compendium opens on the IIPS and Ministry cover.
+
+| state | source | sha256 |
+|---|---|---|
+| Andhra Pradesh | Internet Archive capture of rchiips.org/nfhs/NFHS-5_FCTS/COMPENDIUM/Andhra_Pradesh.pdf (2 Aug 2023) | f9c839cf1bc439444a5b29e290bd31f1c654b23f2767344f55a23303dc9c3c5a |
+| Assam | OpenCity, resource 6681e8f4-255f-427b-a6c2-e09ea56e77c0 | f52257d5139d39a53ee0b273111ec2a9ad23d11745a1db240e1ed86ff9a4cd59 |
+| Chhattisgarh | Internet Archive capture of rchiips.org/nfhs/NFHS-5_FCTS/COMPENDIUM/Chhattisgarh.pdf (28 Dec 2022) | e77c6ee4177081a6e8b6902c086fe8f08b7fb1b1a87f9be0378e29b327eb58fa |
+| Manipur | OpenCity, resource f713eb4a-1e28-4d50-ae0b-b8e5309c8fff | 8393d8617dda7f6075deeedd121bdb9bc808366eed7b1d3aad630c3d701bdbe9 |
+| Meghalaya | OpenCity, resource 82108b4a-9d18-4b14-b7c2-fdc9ebd9468e | 1ac6340c5433ee714990b093aaab490d4339ab7320c102fcb65902a3f36fca69 |
+| Mizoram | OpenCity, resource 88601ff5-bf3c-4622-bd61-7f8c4019ff1b | b3685cbfef7a1798faf72040a92af8786f72e6d76b55cfa4afe043429acd0bf8 |
+| Odisha | OpenCity, resource a2d37703-c7da-458c-bd34-e248bd5b379c | 7e078ed79b2b278f85e617c89f1bbcc8f4f11bfeea25e4f780409bfc23a1da18 |
+
+OpenCity holds no district compendium for Andhra Pradesh or Chhattisgarh, and rchiips.org
+fails TLS from the sandbox, so those two are the Internet Archive's raw (`id_`) captures of
+the Institute's own files.
+
+Eight values are bracketed, all deaths registered: Assam's Dima Hasao and Kamrup
+Metropolitan, Meghalaya's North, South and West Garo Hills, Mizoram's Lunglei, Mamit and
+Saiha. None is starred. 35 sheets print no NFHS-4 column.
+
+**Checks.** The five first-phase states' 518 values agree exactly with the pratapvardhan
+compilation. That file has no Chhattisgarh or Odisha. Odisha's Khordha was checked against
+OpenCity's CSV for that district, and the other 56 Chhattisgarh and Odisha districts have no
+independent check.
+
+**Matching.** `nfhs5_alias/alias_<state>.csv` maps each of today's districts to the survey
+district it was mostly made from, with every parent's share of the 2011 population and a
+source. Rows worth knowing: Annamayya maps to Chittoor (78%), because since 2025 it holds the
+Madanapalle and Pileru divisions; Bapatla is Guntur 58%, Prakasam 42%; Tirupati is Chittoor
+64%; Saitual (Mizoram) is about two-thirds Aizawl; Sarangarh-Bilaigarh is Raigarh about 63%;
+Bajali and Tamulpur map to Barpeta and Baksa; Sribhumi is the survey's Karimganj. The
+Andhra Pradesh shares join a list of mandals to Census 2011 sub-district rows, so they are
+approximate.
+
+**Measures.** Andhra Pradesh and Meghalaya: names left off. Manipur: the fall from the roll
+before to the final roll. Odisha: the fall from January 2025 to the draft. Assam: the fall
+after the draft. Chhattisgarh and Mizoram: the rise after the draft, so the sign of their
+correlations runs the other way.

@@ -1,7 +1,7 @@
 {
  "summary": {
-  "survey_states": 12,
-  "survey_units": 366,
+  "survey_states": 19,
+  "survey_units": 497,
   "census_states": 10,
   "bihar_checked": 148,
   "clear": {
@@ -17,7 +17,8 @@
    ],
    "married_18": [
     "Karnataka",
-    "West Bengal"
+    "West Bengal",
+    "Assam"
    ],
    "clean_fuel": [
     "Gujarat",
@@ -44,8 +45,8 @@
     "West Bengal"
    ]
   },
-  "lit_negative": 3,
-  "lit_positive": 9
+  "lit_negative": 6,
+  "lit_positive": 13
  },
  "factors": [
   {
@@ -820,6 +821,426 @@
      "rho": -0.478,
      "r": -0.4743,
      "chance": 0.5658,
+     "clear": false
+    }
+   }
+  },
+  {
+   "state": "Andhra Pradesh",
+   "measure": "left_off",
+   "units": 13,
+   "districts": 28,
+   "per_100": 10.7849,
+   "chance": 0.5658,
+   "school_fuel": -0.0989,
+   "survey": {
+    "women_literate": {
+     "n": 13,
+     "rho": -0.2088,
+     "r": -0.3086,
+     "chance": 0.5658,
+     "clear": false
+    },
+    "women_10yr": {
+     "n": 13,
+     "rho": -0.4945,
+     "r": -0.4902,
+     "chance": 0.5658,
+     "clear": false
+    },
+    "married_18": {
+     "n": 13,
+     "rho": 0.2562,
+     "r": 0.1877,
+     "chance": 0.5658,
+     "clear": false
+    },
+    "clean_fuel": {
+     "n": 13,
+     "rho": 0.0714,
+     "r": 0.2058,
+     "chance": 0.5658,
+     "clear": false
+    },
+    "sanitation": {
+     "n": 13,
+     "rho": 0.1209,
+     "r": 0.2066,
+     "chance": 0.5658,
+     "clear": false
+    },
+    "death_reg": {
+     "n": 13,
+     "rho": -0.2143,
+     "r": -0.158,
+     "chance": 0.5658,
+     "clear": false
+    },
+    "sex_ratio": {
+     "n": 13,
+     "rho": -0.1484,
+     "r": -0.0451,
+     "chance": 0.5658,
+     "clear": false
+    }
+   }
+  },
+  {
+   "state": "Meghalaya",
+   "measure": "left_off",
+   "units": 11,
+   "districts": 12,
+   "per_100": 7.6778,
+   "chance": 0.6198,
+   "school_fuel": 0.7608,
+   "survey": {
+    "women_literate": {
+     "n": 11,
+     "rho": 0.5273,
+     "r": 0.5062,
+     "chance": 0.6198,
+     "clear": false
+    },
+    "women_10yr": {
+     "n": 11,
+     "rho": 0.5239,
+     "r": 0.6275,
+     "chance": 0.6198,
+     "clear": false
+    },
+    "married_18": {
+     "n": 11,
+     "rho": -0.4273,
+     "r": -0.4418,
+     "chance": 0.6198,
+     "clear": false
+    },
+    "clean_fuel": {
+     "n": 11,
+     "rho": 0.4545,
+     "r": 0.6073,
+     "chance": 0.6198,
+     "clear": false
+    },
+    "sanitation": {
+     "n": 11,
+     "rho": -0.1273,
+     "r": 0.1916,
+     "chance": 0.6198,
+     "clear": false
+    },
+    "death_reg": {
+     "n": 11,
+     "rho": -0.3,
+     "r": -0.268,
+     "chance": 0.6198,
+     "clear": false
+    },
+    "sex_ratio": {
+     "n": 11,
+     "rho": 0.1321,
+     "r": -0.1108,
+     "chance": 0.6198,
+     "clear": false
+    }
+   }
+  },
+  {
+   "state": "Manipur",
+   "measure": "fall",
+   "units": 9,
+   "districts": 16,
+   "per_100": 6.3283,
+   "chance": 0.693,
+   "school_fuel": 0.5333,
+   "survey": {
+    "women_literate": {
+     "n": 9,
+     "rho": -0.6333,
+     "r": -0.6039,
+     "chance": 0.693,
+     "clear": false
+    },
+    "women_10yr": {
+     "n": 9,
+     "rho": -0.5333,
+     "r": -0.575,
+     "chance": 0.693,
+     "clear": false
+    },
+    "married_18": {
+     "n": 9,
+     "rho": -0.2333,
+     "r": -0.2936,
+     "chance": 0.693,
+     "clear": false
+    },
+    "clean_fuel": {
+     "n": 9,
+     "rho": -0.6167,
+     "r": -0.5647,
+     "chance": 0.693,
+     "clear": false
+    },
+    "sanitation": {
+     "n": 9,
+     "rho": 0.6333,
+     "r": 0.8089,
+     "chance": 0.693,
+     "clear": false
+    },
+    "death_reg": {
+     "n": 9,
+     "rho": 0.65,
+     "r": 0.4825,
+     "chance": 0.693,
+     "clear": false
+    },
+    "sex_ratio": {
+     "n": 9,
+     "rho": -0.15,
+     "r": 0.1337,
+     "chance": 0.693,
+     "clear": false
+    }
+   }
+  },
+  {
+   "state": "Odisha",
+   "measure": "fall",
+   "units": 30,
+   "districts": 30,
+   "per_100": 7.8823,
+   "chance": 0.364,
+   "school_fuel": 0.4182,
+   "survey": {
+    "women_literate": {
+     "n": 30,
+     "rho": 0.164,
+     "r": 0.1033,
+     "chance": 0.364,
+     "clear": false
+    },
+    "women_10yr": {
+     "n": 30,
+     "rho": 0.0294,
+     "r": 0.0516,
+     "chance": 0.364,
+     "clear": false
+    },
+    "married_18": {
+     "n": 30,
+     "rho": -0.0843,
+     "r": -0.0809,
+     "chance": 0.364,
+     "clear": false
+    },
+    "clean_fuel": {
+     "n": 30,
+     "rho": 0.2419,
+     "r": 0.1769,
+     "chance": 0.364,
+     "clear": false
+    },
+    "sanitation": {
+     "n": 30,
+     "rho": -0.018,
+     "r": -0.0108,
+     "chance": 0.364,
+     "clear": false
+    },
+    "death_reg": {
+     "n": 30,
+     "rho": 0.0487,
+     "r": 0.0087,
+     "chance": 0.364,
+     "clear": false
+    },
+    "sex_ratio": {
+     "n": 30,
+     "rho": -0.0745,
+     "r": -0.0344,
+     "chance": 0.364,
+     "clear": false
+    }
+   }
+  },
+  {
+   "state": "Assam",
+   "measure": "fall_after_draft",
+   "units": 33,
+   "districts": 35,
+   "per_100": 0.9661,
+   "chance": 0.3465,
+   "school_fuel": 0.2589,
+   "survey": {
+    "women_literate": {
+     "n": 33,
+     "rho": 0.1133,
+     "r": 0.1242,
+     "chance": 0.3465,
+     "clear": false
+    },
+    "women_10yr": {
+     "n": 33,
+     "rho": 0.1003,
+     "r": 0.1071,
+     "chance": 0.3465,
+     "clear": false
+    },
+    "married_18": {
+     "n": 33,
+     "rho": -0.3815,
+     "r": -0.4186,
+     "chance": 0.3465,
+     "clear": true
+    },
+    "clean_fuel": {
+     "n": 33,
+     "rho": 0.0316,
+     "r": 0.1785,
+     "chance": 0.3465,
+     "clear": false
+    },
+    "sanitation": {
+     "n": 33,
+     "rho": 0.1006,
+     "r": 0.1194,
+     "chance": 0.3465,
+     "clear": false
+    },
+    "death_reg": {
+     "n": 33,
+     "rho": -0.1773,
+     "r": -0.1683,
+     "chance": 0.3465,
+     "clear": false
+    },
+    "sex_ratio": {
+     "n": 33,
+     "rho": -0.1706,
+     "r": -0.1473,
+     "chance": 0.3465,
+     "clear": false
+    }
+   }
+  },
+  {
+   "state": "Chhattisgarh",
+   "measure": "rise_after_draft",
+   "units": 27,
+   "districts": 33,
+   "per_100": 1.2705,
+   "chance": 0.3844,
+   "school_fuel": 0.5484,
+   "survey": {
+    "women_literate": {
+     "n": 27,
+     "rho": -0.0046,
+     "r": -0.1421,
+     "chance": 0.3844,
+     "clear": false
+    },
+    "women_10yr": {
+     "n": 27,
+     "rho": 0.0217,
+     "r": 0.0759,
+     "chance": 0.3844,
+     "clear": false
+    },
+    "married_18": {
+     "n": 27,
+     "rho": -0.0031,
+     "r": -0.0227,
+     "chance": 0.3844,
+     "clear": false
+    },
+    "clean_fuel": {
+     "n": 27,
+     "rho": 0.0537,
+     "r": 0.173,
+     "chance": 0.3844,
+     "clear": false
+    },
+    "sanitation": {
+     "n": 27,
+     "rho": 0.0086,
+     "r": -0.0635,
+     "chance": 0.3844,
+     "clear": false
+    },
+    "death_reg": {
+     "n": 27,
+     "rho": -0.0369,
+     "r": -0.1543,
+     "chance": 0.3844,
+     "clear": false
+    },
+    "sex_ratio": {
+     "n": 27,
+     "rho": 0.1408,
+     "r": 0.1087,
+     "chance": 0.3844,
+     "clear": false
+    }
+   }
+  },
+  {
+   "state": "Mizoram",
+   "measure": "rise_after_draft",
+   "units": 8,
+   "districts": 11,
+   "per_100": 0.84,
+   "chance": 0.7408,
+   "school_fuel": 0.6667,
+   "survey": {
+    "women_literate": {
+     "n": 8,
+     "rho": 0.2143,
+     "r": 0.1545,
+     "chance": 0.7408,
+     "clear": false
+    },
+    "women_10yr": {
+     "n": 8,
+     "rho": 0.5238,
+     "r": 0.4138,
+     "chance": 0.7408,
+     "clear": false
+    },
+    "married_18": {
+     "n": 8,
+     "rho": -0.119,
+     "r": -0.0912,
+     "chance": 0.7408,
+     "clear": false
+    },
+    "clean_fuel": {
+     "n": 8,
+     "rho": 0.2143,
+     "r": 0.1394,
+     "chance": 0.7408,
+     "clear": false
+    },
+    "sanitation": {
+     "n": 8,
+     "rho": -0.2143,
+     "r": -0.3164,
+     "chance": 0.7408,
+     "clear": false
+    },
+    "death_reg": {
+     "n": 8,
+     "rho": -0.4762,
+     "r": -0.5986,
+     "chance": 0.7408,
+     "clear": false
+    },
+    "sex_ratio": {
+     "n": 8,
+     "rho": -0.0952,
+     "r": 0.0554,
+     "chance": 0.7408,
      "clear": false
     }
    }
@@ -9133,6 +9554,2398 @@
    "sex_ratio": 1024.0,
    "per_100": 7.5796,
    "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Anantapur",
+   "districts": [
+    "Ananthapuramu",
+    "Sri Sathya Sai"
+   ],
+   "before": 3462362,
+   "removed": 418671,
+   "women_literate": 63.6,
+   "women_10yr": 31.3,
+   "married_18": 37.3,
+   "clean_fuel": 86.4,
+   "sanitation": 71.3,
+   "death_reg": 87.2,
+   "sex_ratio": 1047.0,
+   "per_100": 12.0921,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Chittoor",
+   "districts": [
+    "Annamayya",
+    "Chittoor",
+    "Tirupati"
+   ],
+   "before": 4342003,
+   "removed": 572597,
+   "women_literate": 69.3,
+   "women_10yr": 40.3,
+   "married_18": 28.1,
+   "clean_fuel": 86.6,
+   "sanitation": 74.6,
+   "death_reg": 74.3,
+   "sex_ratio": 1024.0,
+   "per_100": 13.1874,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "East Godavari",
+   "districts": [
+    "Kakinada",
+    "Dr.B.R.Ambedkar Konaseema",
+    "East Godavari",
+    "Polavaram"
+   ],
+   "before": 5091059,
+   "removed": 519281,
+   "women_literate": 77.9,
+   "women_10yr": 43.2,
+   "married_18": 26.0,
+   "clean_fuel": 80.3,
+   "sanitation": 77.7,
+   "death_reg": 68.2,
+   "sex_ratio": 995.0,
+   "per_100": 10.1999,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Guntur",
+   "districts": [
+    "Guntur",
+    "Bapatla",
+    "Palnadu"
+   ],
+   "before": 4594477,
+   "removed": 539768,
+   "women_literate": 68.5,
+   "women_10yr": 32.6,
+   "married_18": 35.4,
+   "clean_fuel": 91.7,
+   "sanitation": 83.4,
+   "death_reg": 82.5,
+   "sex_ratio": 1055.0,
+   "per_100": 11.7482,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Krishna",
+   "districts": [
+    "Krishna",
+    "NTR"
+   ],
+   "before": 3256687,
+   "removed": 261376,
+   "women_literate": 76.9,
+   "women_10yr": 46.2,
+   "married_18": 25.3,
+   "clean_fuel": 89.8,
+   "sanitation": 79.1,
+   "death_reg": 86.3,
+   "sex_ratio": 1064.0,
+   "per_100": 8.0258,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Kurnool",
+   "districts": [
+    "Kurnool",
+    "Nandyal"
+   ],
+   "before": 3491562,
+   "removed": 453093,
+   "women_literate": 57.0,
+   "women_10yr": 33.4,
+   "married_18": 36.9,
+   "clean_fuel": 78.1,
+   "sanitation": 73.5,
+   "death_reg": 77.9,
+   "sex_ratio": 1045.0,
+   "per_100": 12.9768,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Prakasam",
+   "districts": [
+    "Prakasam",
+    "Markapuram"
+   ],
+   "before": 2307778,
+   "removed": 212829,
+   "women_literate": 62.8,
+   "women_10yr": 34.5,
+   "married_18": 37.3,
+   "clean_fuel": 90.8,
+   "sanitation": 78.4,
+   "death_reg": 88.9,
+   "sex_ratio": 1011.0,
+   "per_100": 9.2222,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Sri Potti Sriramulu Nellore",
+   "districts": [
+    "Sri Potti Sriramulu Nellore"
+   ],
+   "before": 1974240,
+   "removed": 290683,
+   "women_literate": 70.5,
+   "women_10yr": 38.7,
+   "married_18": 23.8,
+   "clean_fuel": 84.6,
+   "sanitation": 81.8,
+   "death_reg": 84.8,
+   "sex_ratio": 1049.0,
+   "per_100": 14.7238,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Srikakulam",
+   "districts": [
+    "Srikakulam"
+   ],
+   "before": 1897405,
+   "removed": 172509,
+   "women_literate": 64.3,
+   "women_10yr": 42.5,
+   "married_18": 25.4,
+   "clean_fuel": 74.7,
+   "sanitation": 71.6,
+   "death_reg": 71.0,
+   "sex_ratio": 1140.0,
+   "per_100": 9.0918,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Visakhapatnam",
+   "districts": [
+    "Alluri Sitharama Raju",
+    "Visakhapatnam",
+    "Anakapalli"
+   ],
+   "before": 3825150,
+   "removed": 412803,
+   "women_literate": 69.5,
+   "women_10yr": 46.0,
+   "married_18": 25.4,
+   "clean_fuel": 72.9,
+   "sanitation": 77.8,
+   "death_reg": 71.3,
+   "sex_ratio": 1066.0,
+   "per_100": 10.7918,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Vizianagaram",
+   "districts": [
+    "Vizianagaram",
+    "Parvathipuram Manyam"
+   ],
+   "before": 2369511,
+   "removed": 202996,
+   "women_literate": 58.3,
+   "women_10yr": 37.6,
+   "married_18": 33.7,
+   "clean_fuel": 60.3,
+   "sanitation": 61.7,
+   "death_reg": 81.7,
+   "sex_ratio": 1114.0,
+   "per_100": 8.567,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "West Godavari",
+   "districts": [
+    "West Godavari",
+    "Eluru"
+   ],
+   "before": 3119229,
+   "removed": 187987,
+   "women_literate": 77.0,
+   "women_10yr": 46.5,
+   "married_18": 22.1,
+   "clean_fuel": 86.8,
+   "sanitation": 80.8,
+   "death_reg": 90.1,
+   "sex_ratio": 999.0,
+   "per_100": 6.0267,
+   "measure": "left_off"
+  },
+  {
+   "state": "Andhra Pradesh",
+   "unit": "Y.S.R.",
+   "districts": [
+    "YSR"
+   ],
+   "before": 1896231,
+   "removed": 244919,
+   "women_literate": 63.8,
+   "women_10yr": 40.0,
+   "married_18": 25.6,
+   "clean_fuel": 94.3,
+   "sanitation": 85.4,
+   "death_reg": 86.1,
+   "sex_ratio": 1058.0,
+   "per_100": 12.9161,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "East Garo Hills",
+   "districts": [
+    "East Garo Hills"
+   ],
+   "before": 114767,
+   "removed": 9255,
+   "women_literate": 86.7,
+   "women_10yr": 40.5,
+   "married_18": 13.7,
+   "clean_fuel": 29.1,
+   "sanitation": 83.9,
+   "death_reg": 45.9,
+   "sex_ratio": 1026.0,
+   "per_100": 8.0642,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "East Jaintia Hills",
+   "districts": [
+    "East Jaintia Hills"
+   ],
+   "before": 104417,
+   "removed": 7626,
+   "women_literate": 76.0,
+   "women_10yr": 23.0,
+   "married_18": 25.3,
+   "clean_fuel": 26.5,
+   "sanitation": 83.6,
+   "death_reg": 43.5,
+   "sex_ratio": 1066.0,
+   "per_100": 7.3034,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "East Khasi Hills",
+   "districts": [
+    "East Khasi Hills"
+   ],
+   "before": 632146,
+   "removed": 69986,
+   "women_literate": 93.7,
+   "women_10yr": 43.5,
+   "married_18": 14.6,
+   "clean_fuel": 47.4,
+   "sanitation": 80.9,
+   "death_reg": 55.3,
+   "sex_ratio": 1049.0,
+   "per_100": 11.0712,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "North Garo Hills",
+   "districts": [
+    "North Garo Hills"
+   ],
+   "before": 143748,
+   "removed": 11735,
+   "women_literate": 86.1,
+   "women_10yr": 38.4,
+   "married_18": 13.2,
+   "clean_fuel": 24.4,
+   "sanitation": 84.9,
+   "death_reg": 43.8,
+   "sex_ratio": 1009.0,
+   "per_100": 8.1636,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "Ribhoi",
+   "districts": [
+    "Ri-Bhoi"
+   ],
+   "before": 205735,
+   "removed": 15669,
+   "women_literate": 89.5,
+   "women_10yr": 23.1,
+   "married_18": 20.3,
+   "clean_fuel": 21.0,
+   "sanitation": 85.3,
+   "death_reg": 51.1,
+   "sex_ratio": 998.0,
+   "per_100": 7.6161,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "South Garo Hills",
+   "districts": [
+    "South Garo Hills"
+   ],
+   "before": 110488,
+   "removed": 7839,
+   "women_literate": 88.6,
+   "women_10yr": 38.4,
+   "married_18": 10.2,
+   "clean_fuel": 22.3,
+   "sanitation": 88.4,
+   "death_reg": 53.8,
+   "sex_ratio": 984.0,
+   "per_100": 7.0949,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "South West Garo Hills",
+   "districts": [
+    "South West Garo Hills"
+   ],
+   "before": 108883,
+   "removed": 4212,
+   "women_literate": 82.6,
+   "women_10yr": 33.0,
+   "married_18": 15.3,
+   "clean_fuel": 33.9,
+   "sanitation": 71.4,
+   "death_reg": 71.4,
+   "sex_ratio": 995.0,
+   "per_100": 3.8684,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "South West Khasi Hills",
+   "districts": [
+    "South West Khasi Hills"
+   ],
+   "before": 80592,
+   "removed": 3468,
+   "women_literate": 85.9,
+   "women_10yr": 23.4,
+   "married_18": 21.6,
+   "clean_fuel": 11.6,
+   "sanitation": 89.6,
+   "death_reg": 49.5,
+   "sex_ratio": 1025.0,
+   "per_100": 4.3032,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "West Garo Hills",
+   "districts": [
+    "West Garo Hills"
+   ],
+   "before": 396914,
+   "removed": 29532,
+   "women_literate": 89.0,
+   "women_10yr": 45.1,
+   "married_18": 10.4,
+   "clean_fuel": 47.6,
+   "sanitation": 86.3,
+   "death_reg": 65.8,
+   "sex_ratio": 1025.0,
+   "per_100": 7.4404,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "West Jaintia Hills",
+   "districts": [
+    "West Jaintia Hills"
+   ],
+   "before": 220478,
+   "removed": 10570,
+   "women_literate": 80.0,
+   "women_10yr": 24.7,
+   "married_18": 19.9,
+   "clean_fuel": 20.7,
+   "sanitation": 75.1,
+   "death_reg": 55.7,
+   "sex_ratio": 1143.0,
+   "per_100": 4.7941,
+   "measure": "left_off"
+  },
+  {
+   "state": "Meghalaya",
+   "unit": "West Khasi Hills",
+   "districts": [
+    "West Khasi Hills",
+    "Eastern West Khasi Hills"
+   ],
+   "before": 231477,
+   "removed": 10510,
+   "women_literate": 87.4,
+   "women_10yr": 16.4,
+   "married_18": 30.3,
+   "clean_fuel": 8.6,
+   "sanitation": 87.8,
+   "death_reg": 49.0,
+   "sex_ratio": 1038.0,
+   "per_100": 4.5404,
+   "measure": "left_off"
+  },
+  {
+   "state": "Manipur",
+   "unit": "Bishnupur",
+   "districts": [
+    "Bishnupur"
+   ],
+   "before": 188054,
+   "removed": 2873,
+   "women_literate": 88.4,
+   "women_10yr": 48.7,
+   "married_18": 20.9,
+   "clean_fuel": 71.3,
+   "sanitation": 52.6,
+   "death_reg": 24.4,
+   "sex_ratio": 1094.0,
+   "per_100": 1.5278,
+   "measure": "fall"
+  },
+  {
+   "state": "Manipur",
+   "unit": "Chandel",
+   "districts": [
+    "Chandel",
+    "Tengnoupal"
+   ],
+   "before": 89884,
+   "removed": 10699,
+   "women_literate": 80.2,
+   "women_10yr": 43.3,
+   "married_18": 22.3,
+   "clean_fuel": 52.0,
+   "sanitation": 85.2,
+   "death_reg": 53.7,
+   "sex_ratio": 1077.0,
+   "per_100": 11.9031,
+   "measure": "fall"
+  },
+  {
+   "state": "Manipur",
+   "unit": "Churachandpur",
+   "districts": [
+    "Churachandpur",
+    "Pherzawl"
+   ],
+   "before": 228754,
+   "removed": 41821,
+   "women_literate": 84.2,
+   "women_10yr": 36.6,
+   "married_18": 10.5,
+   "clean_fuel": 62.3,
+   "sanitation": 81.2,
+   "death_reg": 52.5,
+   "sex_ratio": 1144.0,
+   "per_100": 18.2821,
+   "measure": "fall"
+  },
+  {
+   "state": "Manipur",
+   "unit": "Imphal East",
+   "districts": [
+    "Imphal East",
+    "Jiribam"
+   ],
+   "before": 363773,
+   "removed": 16047,
+   "women_literate": 90.0,
+   "women_10yr": 49.9,
+   "married_18": 15.2,
+   "clean_fuel": 79.0,
+   "sanitation": 59.5,
+   "death_reg": 32.8,
+   "sex_ratio": 1059.0,
+   "per_100": 4.4113,
+   "measure": "fall"
+  },
+  {
+   "state": "Manipur",
+   "unit": "Imphal West",
+   "districts": [
+    "Imphal West"
+   ],
+   "before": 390196,
+   "removed": 11613,
+   "women_literate": 92.5,
+   "women_10yr": 61.9,
+   "married_18": 15.3,
+   "clean_fuel": 88.6,
+   "sanitation": 58.7,
+   "death_reg": 49.6,
+   "sex_ratio": 1041.0,
+   "per_100": 2.9762,
+   "measure": "fall"
+  },
+  {
+   "state": "Manipur",
+   "unit": "Senapati",
+   "districts": [
+    "Senapati",
+    "Kangpokpi"
+   ],
+   "before": 260387,
+   "removed": 19496,
+   "women_literate": 81.9,
+   "women_10yr": 39.6,
+   "married_18": 15.5,
+   "clean_fuel": 50.0,
+   "sanitation": 84.4,
+   "death_reg": 75.4,
+   "sex_ratio": 1053.0,
+   "per_100": 7.4873,
+   "measure": "fall"
+  },
+  {
+   "state": "Manipur",
+   "unit": "Tamenglong",
+   "districts": [
+    "Tamenglong",
+    "Noney"
+   ],
+   "before": 109362,
+   "removed": 13735,
+   "women_literate": 76.8,
+   "women_10yr": 33.1,
+   "married_18": 19.9,
+   "clean_fuel": 30.5,
+   "sanitation": 77.9,
+   "death_reg": 51.8,
+   "sex_ratio": 1032.0,
+   "per_100": 12.5592,
+   "measure": "fall"
+  },
+  {
+   "state": "Manipur",
+   "unit": "Thoubal",
+   "districts": [
+    "Thoubal",
+    "Kakching"
+   ],
+   "before": 328888,
+   "removed": 3387,
+   "women_literate": 85.4,
+   "women_10yr": 40.7,
+   "married_18": 17.5,
+   "clean_fuel": 74.7,
+   "sanitation": 61.3,
+   "death_reg": 40.4,
+   "sex_ratio": 1095.0,
+   "per_100": 1.0298,
+   "measure": "fall"
+  },
+  {
+   "state": "Manipur",
+   "unit": "Ukhrul",
+   "districts": [
+    "Ukhrul",
+    "Kamjong"
+   ],
+   "before": 133778,
+   "removed": 12785,
+   "women_literate": 86.9,
+   "women_10yr": 49.7,
+   "married_18": 11.1,
+   "clean_fuel": 22.9,
+   "sanitation": 81.4,
+   "death_reg": 49.1,
+   "sex_ratio": 969.0,
+   "per_100": 9.5569,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Anugul",
+   "districts": [
+    "Angul"
+   ],
+   "before": 990760,
+   "removed": 81885,
+   "women_literate": 72.4,
+   "women_10yr": 33.7,
+   "married_18": 25.0,
+   "clean_fuel": 23.8,
+   "sanitation": 66.4,
+   "death_reg": 68.7,
+   "sex_ratio": 1027.0,
+   "per_100": 8.2649,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Balangir",
+   "districts": [
+    "Bolangir"
+   ],
+   "before": 1348257,
+   "removed": 103699,
+   "women_literate": 68.1,
+   "women_10yr": 31.4,
+   "married_18": 14.0,
+   "clean_fuel": 32.6,
+   "sanitation": 66.3,
+   "death_reg": 74.3,
+   "sex_ratio": 1056.0,
+   "per_100": 7.6913,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Baleshwar",
+   "districts": [
+    "Balasore"
+   ],
+   "before": 1911549,
+   "removed": 107921,
+   "women_literate": 73.8,
+   "women_10yr": 38.3,
+   "married_18": 26.4,
+   "clean_fuel": 28.4,
+   "sanitation": 70.9,
+   "death_reg": 70.5,
+   "sex_ratio": 1073.0,
+   "per_100": 5.6457,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Bargarh",
+   "districts": [
+    "Bargarh"
+   ],
+   "before": 1197754,
+   "removed": 90878,
+   "women_literate": 71.6,
+   "women_10yr": 37.4,
+   "married_18": 8.6,
+   "clean_fuel": 31.9,
+   "sanitation": 61.9,
+   "death_reg": 76.2,
+   "sex_ratio": 957.0,
+   "per_100": 7.5874,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Baudh",
+   "districts": [
+    "Boudh"
+   ],
+   "before": 341026,
+   "removed": 17632,
+   "women_literate": 68.8,
+   "women_10yr": 29.9,
+   "married_18": 25.3,
+   "clean_fuel": 30.9,
+   "sanitation": 52.9,
+   "death_reg": 66.0,
+   "sex_ratio": 1009.0,
+   "per_100": 5.1703,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Bhadrak",
+   "districts": [
+    "Bhadrak"
+   ],
+   "before": 1304089,
+   "removed": 87808,
+   "women_literate": 80.1,
+   "women_10yr": 37.0,
+   "married_18": 10.4,
+   "clean_fuel": 22.9,
+   "sanitation": 62.0,
+   "death_reg": 69.0,
+   "sex_ratio": 1150.0,
+   "per_100": 6.7333,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Cuttack",
+   "districts": [
+    "Cuttack"
+   ],
+   "before": 2185362,
+   "removed": 254747,
+   "women_literate": 80.1,
+   "women_10yr": 40.9,
+   "married_18": 14.2,
+   "clean_fuel": 45.1,
+   "sanitation": 60.2,
+   "death_reg": 69.8,
+   "sex_ratio": 1019.0,
+   "per_100": 11.657,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Debagarh",
+   "districts": [
+    "Deogarh"
+   ],
+   "before": 252077,
+   "removed": 18606,
+   "women_literate": 66.7,
+   "women_10yr": 31.3,
+   "married_18": 19.2,
+   "clean_fuel": 18.4,
+   "sanitation": 69.9,
+   "death_reg": 67.9,
+   "sex_ratio": 1053.0,
+   "per_100": 7.3811,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Dhenkanal",
+   "districts": [
+    "Dhenkanal"
+   ],
+   "before": 982174,
+   "removed": 77902,
+   "women_literate": 74.1,
+   "women_10yr": 33.3,
+   "married_18": 23.7,
+   "clean_fuel": 28.8,
+   "sanitation": 58.2,
+   "death_reg": 64.2,
+   "sex_ratio": 1047.0,
+   "per_100": 7.9316,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Gajapati",
+   "districts": [
+    "Gajapati"
+   ],
+   "before": 470283,
+   "removed": 38022,
+   "women_literate": 47.6,
+   "women_10yr": 22.5,
+   "married_18": 28.1,
+   "clean_fuel": 28.9,
+   "sanitation": 58.3,
+   "death_reg": 72.5,
+   "sex_ratio": 1087.0,
+   "per_100": 8.0849,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Ganjam",
+   "districts": [
+    "Ganjam"
+   ],
+   "before": 3026220,
+   "removed": 234062,
+   "women_literate": 69.5,
+   "women_10yr": 32.6,
+   "married_18": 22.3,
+   "clean_fuel": 63.7,
+   "sanitation": 72.9,
+   "death_reg": 72.8,
+   "sex_ratio": 1165.0,
+   "per_100": 7.7345,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Jagatsinghapur",
+   "districts": [
+    "Jagatsinghpur"
+   ],
+   "before": 974435,
+   "removed": 75090,
+   "women_literate": 84.8,
+   "women_10yr": 46.6,
+   "married_18": 12.0,
+   "clean_fuel": 30.5,
+   "sanitation": 60.1,
+   "death_reg": 57.7,
+   "sex_ratio": 1095.0,
+   "per_100": 7.706,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Jajapur",
+   "districts": [
+    "Jajpur"
+   ],
+   "before": 1563392,
+   "removed": 131305,
+   "women_literate": 75.8,
+   "women_10yr": 38.0,
+   "married_18": 11.4,
+   "clean_fuel": 28.4,
+   "sanitation": 47.4,
+   "death_reg": 61.9,
+   "sex_ratio": 1018.0,
+   "per_100": 8.3987,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Jharsuguda",
+   "districts": [
+    "Jharsugud"
+   ],
+   "before": 450202,
+   "removed": 40311,
+   "women_literate": 79.1,
+   "women_10yr": 40.9,
+   "married_18": 8.5,
+   "clean_fuel": 41.8,
+   "sanitation": 70.0,
+   "death_reg": 78.6,
+   "sex_ratio": 956.0,
+   "per_100": 8.954,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Kalahandi",
+   "districts": [
+    "Kalahandi"
+   ],
+   "before": 1220304,
+   "removed": 86205,
+   "women_literate": 61.8,
+   "women_10yr": 26.5,
+   "married_18": 16.3,
+   "clean_fuel": 28.9,
+   "sanitation": 64.4,
+   "death_reg": 66.5,
+   "sex_ratio": 1051.0,
+   "per_100": 7.0642,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Kandhamal",
+   "districts": [
+    "Kandhamal"
+   ],
+   "before": 580452,
+   "removed": 48553,
+   "women_literate": 68.5,
+   "women_10yr": 28.1,
+   "married_18": 20.0,
+   "clean_fuel": 24.1,
+   "sanitation": 52.4,
+   "death_reg": 74.4,
+   "sex_ratio": 1052.0,
+   "per_100": 8.3647,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Kendrapara",
+   "districts": [
+    "Kendrapara"
+   ],
+   "before": 1286801,
+   "removed": 95906,
+   "women_literate": 84.4,
+   "women_10yr": 42.5,
+   "married_18": 9.4,
+   "clean_fuel": 27.9,
+   "sanitation": 57.3,
+   "death_reg": 67.6,
+   "sex_ratio": 1127.0,
+   "per_100": 7.4531,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Kendujhar",
+   "districts": [
+    "Keonjhar"
+   ],
+   "before": 1398579,
+   "removed": 90303,
+   "women_literate": 64.6,
+   "women_10yr": 29.5,
+   "married_18": 29.0,
+   "clean_fuel": 27.9,
+   "sanitation": 47.6,
+   "death_reg": 61.1,
+   "sex_ratio": 1115.0,
+   "per_100": 6.4568,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Khordha",
+   "districts": [
+    "Khurda"
+   ],
+   "before": 1935210,
+   "removed": 122952,
+   "women_literate": 84.9,
+   "women_10yr": 43.2,
+   "married_18": 17.1,
+   "clean_fuel": 63.3,
+   "sanitation": 73.2,
+   "death_reg": 84.4,
+   "sex_ratio": 1024.0,
+   "per_100": 6.3534,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Koraput",
+   "districts": [
+    "Koraput"
+   ],
+   "before": 989547,
+   "removed": 85413,
+   "women_literate": 40.6,
+   "women_10yr": 17.6,
+   "married_18": 35.5,
+   "clean_fuel": 31.5,
+   "sanitation": 39.4,
+   "death_reg": 60.2,
+   "sex_ratio": 1079.0,
+   "per_100": 8.6315,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Malkangiri",
+   "districts": [
+    "Malkangiri"
+   ],
+   "before": 462179,
+   "removed": 47363,
+   "women_literate": 39.0,
+   "women_10yr": 14.0,
+   "married_18": 32.4,
+   "clean_fuel": 20.9,
+   "sanitation": 41.4,
+   "death_reg": 60.9,
+   "sex_ratio": 1137.0,
+   "per_100": 10.2478,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Mayurbhanj",
+   "districts": [
+    "Mayurbhanja"
+   ],
+   "before": 1951038,
+   "removed": 133358,
+   "women_literate": 58.6,
+   "women_10yr": 25.1,
+   "married_18": 31.3,
+   "clean_fuel": 16.1,
+   "sanitation": 54.4,
+   "death_reg": 65.5,
+   "sex_ratio": 1056.0,
+   "per_100": 6.8352,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Nabarangapur",
+   "districts": [
+    "Nabarangpur"
+   ],
+   "before": 865567,
+   "removed": 52975,
+   "women_literate": 38.5,
+   "women_10yr": 15.5,
+   "married_18": 39.4,
+   "clean_fuel": 19.0,
+   "sanitation": 44.1,
+   "death_reg": 60.4,
+   "sex_ratio": 1060.0,
+   "per_100": 6.1203,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Nayagarh",
+   "districts": [
+    "Nayagarh"
+   ],
+   "before": 814165,
+   "removed": 73581,
+   "women_literate": 80.4,
+   "women_10yr": 27.1,
+   "married_18": 35.7,
+   "clean_fuel": 42.3,
+   "sanitation": 67.1,
+   "death_reg": 71.8,
+   "sex_ratio": 1083.0,
+   "per_100": 9.0376,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Nuapada",
+   "districts": [
+    "Nuapada"
+   ],
+   "before": 503730,
+   "removed": 15283,
+   "women_literate": 53.5,
+   "women_10yr": 27.3,
+   "married_18": 15.6,
+   "clean_fuel": 23.2,
+   "sanitation": 58.4,
+   "death_reg": 63.2,
+   "sex_ratio": 1060.0,
+   "per_100": 3.034,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Puri",
+   "districts": [
+    "Puri"
+   ],
+   "before": 1426256,
+   "removed": 123488,
+   "women_literate": 86.4,
+   "women_10yr": 38.1,
+   "married_18": 10.2,
+   "clean_fuel": 34.4,
+   "sanitation": 67.3,
+   "death_reg": 82.8,
+   "sex_ratio": 1045.0,
+   "per_100": 8.6582,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Rayagada",
+   "districts": [
+    "Rayagada"
+   ],
+   "before": 720041,
+   "removed": 50834,
+   "women_literate": 42.0,
+   "women_10yr": 19.1,
+   "married_18": 33.2,
+   "clean_fuel": 30.2,
+   "sanitation": 50.5,
+   "death_reg": 68.8,
+   "sex_ratio": 1110.0,
+   "per_100": 7.0599,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Sambalpur",
+   "districts": [
+    "Sambalpur"
+   ],
+   "before": 842463,
+   "removed": 54438,
+   "women_literate": 71.1,
+   "women_10yr": 36.5,
+   "married_18": 7.4,
+   "clean_fuel": 42.6,
+   "sanitation": 62.4,
+   "death_reg": 83.7,
+   "sex_ratio": 1067.0,
+   "per_100": 6.4618,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Subarnapur",
+   "districts": [
+    "Subrnapur"
+   ],
+   "before": 478116,
+   "removed": 24329,
+   "women_literate": 76.1,
+   "women_10yr": 37.8,
+   "married_18": 16.9,
+   "clean_fuel": 41.6,
+   "sanitation": 66.7,
+   "death_reg": 78.3,
+   "sex_ratio": 974.0,
+   "per_100": 5.0885,
+   "measure": "fall"
+  },
+  {
+   "state": "Odisha",
+   "unit": "Sundargarh",
+   "districts": [
+    "Sundargarh"
+   ],
+   "before": 1600716,
+   "removed": 220861,
+   "women_literate": 70.8,
+   "women_10yr": 35.6,
+   "married_18": 12.9,
+   "clean_fuel": 40.2,
+   "sanitation": 65.5,
+   "death_reg": 69.7,
+   "sex_ratio": 1030.0,
+   "per_100": 13.7976,
+   "measure": "fall"
+  },
+  {
+   "state": "Assam",
+   "unit": "Baksa",
+   "districts": [
+    "Baksa",
+    "Tamulpur"
+   ],
+   "before": 834459,
+   "removed": 13118,
+   "women_literate": 74.8,
+   "women_10yr": 27.8,
+   "married_18": 24.9,
+   "clean_fuel": 35.2,
+   "sanitation": 68.9,
+   "death_reg": 50.1,
+   "sex_ratio": 1057.0,
+   "per_100": 1.572,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Barpeta",
+   "districts": [
+    "Bajali",
+    "Barpeta"
+   ],
+   "before": 1335061,
+   "removed": -29983,
+   "women_literate": 74.8,
+   "women_10yr": 31.7,
+   "married_18": 40.1,
+   "clean_fuel": 38.7,
+   "sanitation": 63.7,
+   "death_reg": 74.3,
+   "sex_ratio": 1027.0,
+   "per_100": -2.2458,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Biswanath",
+   "districts": [
+    "Biswanath"
+   ],
+   "before": 522174,
+   "removed": 8575,
+   "women_literate": 69.2,
+   "women_10yr": 23.0,
+   "married_18": 25.3,
+   "clean_fuel": 35.0,
+   "sanitation": 76.6,
+   "death_reg": 62.5,
+   "sex_ratio": 996.0,
+   "per_100": 1.6422,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Bongaigaon",
+   "districts": [
+    "Bongaigaon"
+   ],
+   "before": 583128,
+   "removed": -3714,
+   "women_literate": 75.8,
+   "women_10yr": 28.6,
+   "married_18": 41.7,
+   "clean_fuel": 49.8,
+   "sanitation": 72.5,
+   "death_reg": 69.1,
+   "sex_ratio": 998.0,
+   "per_100": -0.6369,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Cachar",
+   "districts": [
+    "Cachar"
+   ],
+   "before": 1415439,
+   "removed": 33536,
+   "women_literate": 77.2,
+   "women_10yr": 25.8,
+   "married_18": 29.9,
+   "clean_fuel": 43.0,
+   "sanitation": 57.6,
+   "death_reg": 72.4,
+   "sex_ratio": 1012.0,
+   "per_100": 2.3693,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Charaideo",
+   "districts": [
+    "Charaideo"
+   ],
+   "before": 324064,
+   "removed": 3515,
+   "women_literate": 71.9,
+   "women_10yr": 26.2,
+   "married_18": 22.6,
+   "clean_fuel": 27.3,
+   "sanitation": 75.9,
+   "death_reg": 50.6,
+   "sex_ratio": 1027.0,
+   "per_100": 1.0847,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Chirang",
+   "districts": [
+    "Chirang"
+   ],
+   "before": 403713,
+   "removed": 1724,
+   "women_literate": 71.5,
+   "women_10yr": 23.0,
+   "married_18": 30.9,
+   "clean_fuel": 44.5,
+   "sanitation": 77.1,
+   "death_reg": 72.7,
+   "sex_ratio": 1015.0,
+   "per_100": 0.427,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Darrang",
+   "districts": [
+    "Darrang"
+   ],
+   "before": 737316,
+   "removed": 19776,
+   "women_literate": 75.6,
+   "women_10yr": 27.5,
+   "married_18": 42.8,
+   "clean_fuel": 30.1,
+   "sanitation": 67.9,
+   "death_reg": 69.2,
+   "sex_ratio": 929.0,
+   "per_100": 2.6822,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Dhemaji",
+   "districts": [
+    "Dhemaji"
+   ],
+   "before": 583876,
+   "removed": 2028,
+   "women_literate": 81.5,
+   "women_10yr": 43.6,
+   "married_18": 32.0,
+   "clean_fuel": 21.6,
+   "sanitation": 70.8,
+   "death_reg": 47.2,
+   "sex_ratio": 1028.0,
+   "per_100": 0.3473,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Dhubri",
+   "districts": [
+    "Dhubri"
+   ],
+   "before": 1211468,
+   "removed": -6329,
+   "women_literate": 69.5,
+   "women_10yr": 20.4,
+   "married_18": 50.8,
+   "clean_fuel": 40.7,
+   "sanitation": 61.8,
+   "death_reg": 73.1,
+   "sex_ratio": 1000.0,
+   "per_100": -0.5224,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Dibrugarh",
+   "districts": [
+    "Dibrugarh"
+   ],
+   "before": 1043679,
+   "removed": 1744,
+   "women_literate": 76.6,
+   "women_10yr": 33.7,
+   "married_18": 23.0,
+   "clean_fuel": 44.7,
+   "sanitation": 75.3,
+   "death_reg": 72.3,
+   "sex_ratio": 1002.0,
+   "per_100": 0.1671,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Dima Hasao",
+   "districts": [
+    "Dima Hasao"
+   ],
+   "before": 158773,
+   "removed": 569,
+   "women_literate": 87.7,
+   "women_10yr": 42.4,
+   "married_18": 16.5,
+   "clean_fuel": 48.2,
+   "sanitation": 83.8,
+   "death_reg": 60.3,
+   "sex_ratio": 959.0,
+   "per_100": 0.3584,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Goalpara",
+   "districts": [
+    "Goalpara"
+   ],
+   "before": 802443,
+   "removed": -4372,
+   "women_literate": 74.1,
+   "women_10yr": 23.4,
+   "married_18": 41.8,
+   "clean_fuel": 36.3,
+   "sanitation": 75.3,
+   "death_reg": 73.3,
+   "sex_ratio": 1007.0,
+   "per_100": -0.5448,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Golaghat",
+   "districts": [
+    "Golaghat"
+   ],
+   "before": 922684,
+   "removed": 20027,
+   "women_literate": 75.1,
+   "women_10yr": 27.9,
+   "married_18": 20.7,
+   "clean_fuel": 33.1,
+   "sanitation": 73.1,
+   "death_reg": 55.2,
+   "sex_ratio": 1002.0,
+   "per_100": 2.1705,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Hailakandi",
+   "districts": [
+    "Hailakandi"
+   ],
+   "before": 494879,
+   "removed": -2083,
+   "women_literate": 82.2,
+   "women_10yr": 25.3,
+   "married_18": 32.9,
+   "clean_fuel": 35.2,
+   "sanitation": 60.0,
+   "death_reg": 60.3,
+   "sex_ratio": 1054.0,
+   "per_100": -0.4209,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Hojai",
+   "districts": [
+    "Hojai"
+   ],
+   "before": 765284,
+   "removed": 2862,
+   "women_literate": 83.2,
+   "women_10yr": 23.1,
+   "married_18": 30.9,
+   "clean_fuel": 52.0,
+   "sanitation": 63.1,
+   "death_reg": 79.7,
+   "sex_ratio": 986.0,
+   "per_100": 0.374,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Jorhat",
+   "districts": [
+    "Jorhat"
+   ],
+   "before": 723687,
+   "removed": 11940,
+   "women_literate": 85.1,
+   "women_10yr": 42.9,
+   "married_18": 24.9,
+   "clean_fuel": 48.3,
+   "sanitation": 80.4,
+   "death_reg": 57.2,
+   "sex_ratio": 1009.0,
+   "per_100": 1.6499,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Kamrup",
+   "districts": [
+    "Kamrup"
+   ],
+   "before": 1269750,
+   "removed": 25720,
+   "women_literate": 79.6,
+   "women_10yr": 39.2,
+   "married_18": 21.9,
+   "clean_fuel": 57.4,
+   "sanitation": 68.7,
+   "death_reg": 52.4,
+   "sex_ratio": 997.0,
+   "per_100": 2.0256,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Kamrup Metropolitan",
+   "districts": [
+    "Kamrup Metro"
+   ],
+   "before": 1075576,
+   "removed": 25932,
+   "women_literate": 86.0,
+   "women_10yr": 49.1,
+   "married_18": 21.9,
+   "clean_fuel": 85.1,
+   "sanitation": 65.2,
+   "death_reg": 77.4,
+   "sex_ratio": 946.0,
+   "per_100": 2.411,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Karbi Anglong",
+   "districts": [
+    "Karbi Anglong"
+   ],
+   "before": 540088,
+   "removed": 11092,
+   "women_literate": 78.8,
+   "women_10yr": 30.3,
+   "married_18": 26.1,
+   "clean_fuel": 33.4,
+   "sanitation": 75.2,
+   "death_reg": 60.7,
+   "sex_ratio": 994.0,
+   "per_100": 2.0537,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Karimganj",
+   "districts": [
+    "Sribhumi"
+   ],
+   "before": 971916,
+   "removed": 31267,
+   "women_literate": 80.7,
+   "women_10yr": 19.6,
+   "married_18": 27.7,
+   "clean_fuel": 39.6,
+   "sanitation": 61.5,
+   "death_reg": 72.6,
+   "sex_ratio": 1000.0,
+   "per_100": 3.217,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Kokrajhar",
+   "districts": [
+    "Kokrajhar"
+   ],
+   "before": 712609,
+   "removed": 8384,
+   "women_literate": 73.7,
+   "women_10yr": 27.5,
+   "married_18": 36.2,
+   "clean_fuel": 43.3,
+   "sanitation": 72.2,
+   "death_reg": 69.5,
+   "sex_ratio": 1025.0,
+   "per_100": 1.1765,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Lakhimpur",
+   "districts": [
+    "Lakhimpur"
+   ],
+   "before": 864002,
+   "removed": 20998,
+   "women_literate": 83.9,
+   "women_10yr": 42.1,
+   "married_18": 36.3,
+   "clean_fuel": 36.1,
+   "sanitation": 74.2,
+   "death_reg": 67.1,
+   "sex_ratio": 983.0,
+   "per_100": 2.4303,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Majuli",
+   "districts": [
+    "Majuli"
+   ],
+   "before": 144628,
+   "removed": -209,
+   "women_literate": 83.4,
+   "women_10yr": 41.7,
+   "married_18": 25.5,
+   "clean_fuel": 19.3,
+   "sanitation": 65.6,
+   "death_reg": 59.3,
+   "sex_ratio": 995.0,
+   "per_100": -0.1445,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Morigaon",
+   "districts": [
+    "Morigaon"
+   ],
+   "before": 761691,
+   "removed": -5224,
+   "women_literate": 78.7,
+   "women_10yr": 24.5,
+   "married_18": 39.1,
+   "clean_fuel": 37.6,
+   "sanitation": 62.3,
+   "death_reg": 74.3,
+   "sex_ratio": 1055.0,
+   "per_100": -0.6858,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Nagaon",
+   "districts": [
+    "Nagaon"
+   ],
+   "before": 1544011,
+   "removed": -7519,
+   "women_literate": 78.4,
+   "women_10yr": 22.1,
+   "married_18": 42.6,
+   "clean_fuel": 38.6,
+   "sanitation": 66.1,
+   "death_reg": 66.0,
+   "sex_ratio": 1050.0,
+   "per_100": -0.487,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Nalbari",
+   "districts": [
+    "Nalbari"
+   ],
+   "before": 635231,
+   "removed": 10840,
+   "women_literate": 83.9,
+   "women_10yr": 41.6,
+   "married_18": 28.1,
+   "clean_fuel": 51.1,
+   "sanitation": 68.1,
+   "death_reg": 55.0,
+   "sex_ratio": 1043.0,
+   "per_100": 1.7065,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Sivasagar",
+   "districts": [
+    "Sibsagar"
+   ],
+   "before": 572219,
+   "removed": 1657,
+   "women_literate": 86.6,
+   "women_10yr": 47.1,
+   "married_18": 27.9,
+   "clean_fuel": 45.5,
+   "sanitation": 82.3,
+   "death_reg": 57.9,
+   "sex_ratio": 989.0,
+   "per_100": 0.2896,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Sonitpur",
+   "districts": [
+    "Sonitpur"
+   ],
+   "before": 981823,
+   "removed": 22186,
+   "women_literate": 76.9,
+   "women_10yr": 24.3,
+   "married_18": 24.0,
+   "clean_fuel": 45.8,
+   "sanitation": 72.2,
+   "death_reg": 77.9,
+   "sex_ratio": 1027.0,
+   "per_100": 2.2597,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "South Salmara Mancachar",
+   "districts": [
+    "South Salmara"
+   ],
+   "before": 310020,
+   "removed": -212,
+   "women_literate": 63.5,
+   "women_10yr": 20.9,
+   "married_18": 44.7,
+   "clean_fuel": 28.5,
+   "sanitation": 59.0,
+   "death_reg": 71.1,
+   "sex_ratio": 968.0,
+   "per_100": -0.0684,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Tinsukia",
+   "districts": [
+    "Tinsukia"
+   ],
+   "before": 1008158,
+   "removed": 4668,
+   "women_literate": 70.5,
+   "women_10yr": 25.6,
+   "married_18": 19.8,
+   "clean_fuel": 40.9,
+   "sanitation": 66.7,
+   "death_reg": 64.3,
+   "sex_ratio": 1023.0,
+   "per_100": 0.463,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "Udalguri",
+   "districts": [
+    "Udalguri"
+   ],
+   "before": 714598,
+   "removed": 19750,
+   "women_literate": 70.0,
+   "women_10yr": 23.8,
+   "married_18": 32.0,
+   "clean_fuel": 34.0,
+   "sanitation": 73.8,
+   "death_reg": 51.2,
+   "sex_ratio": 1087.0,
+   "per_100": 2.7638,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Assam",
+   "unit": "West Karbi Anglong",
+   "districts": [
+    "West Karbi Anglong"
+   ],
+   "before": 233177,
+   "removed": 1222,
+   "women_literate": 73.9,
+   "women_10yr": 21.7,
+   "married_18": 21.3,
+   "clean_fuel": 17.7,
+   "sanitation": 76.7,
+   "death_reg": 43.5,
+   "sex_ratio": 959.0,
+   "per_100": 0.5241,
+   "measure": "fall_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Balod",
+   "districts": [
+    "Balod"
+   ],
+   "before": 642736,
+   "removed": 13565,
+   "women_literate": 78.6,
+   "women_10yr": 46.3,
+   "married_18": 3.3,
+   "clean_fuel": 33.3,
+   "sanitation": 83.8,
+   "death_reg": 83.8,
+   "sex_ratio": 988.0,
+   "per_100": 2.1105,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Baloda Bazar",
+   "districts": [
+    "Balodabazar-Bhatapara"
+   ],
+   "before": 823785,
+   "removed": 16876,
+   "women_literate": 73.4,
+   "women_10yr": 38.7,
+   "married_18": 11.4,
+   "clean_fuel": 24.9,
+   "sanitation": 78.9,
+   "death_reg": 68.9,
+   "sex_ratio": 1070.0,
+   "per_100": 2.0486,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Balrampur",
+   "districts": [
+    "Balrampur"
+   ],
+   "before": 415289,
+   "removed": 3051,
+   "women_literate": 65.4,
+   "women_10yr": 32.2,
+   "married_18": 24.6,
+   "clean_fuel": 13.2,
+   "sanitation": 57.3,
+   "death_reg": 78.4,
+   "sex_ratio": 980.0,
+   "per_100": 0.7347,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Bastar",
+   "districts": [
+    "Bastar (JAGDALPUR)"
+   ],
+   "before": 516126,
+   "removed": 4266,
+   "women_literate": 52.9,
+   "women_10yr": 25.3,
+   "married_18": 17.3,
+   "clean_fuel": 31.6,
+   "sanitation": 61.0,
+   "death_reg": 55.9,
+   "sex_ratio": 1068.0,
+   "per_100": 0.8265,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Bemetara",
+   "districts": [
+    "Bemetara"
+   ],
+   "before": 716635,
+   "removed": 8388,
+   "women_literate": 71.1,
+   "women_10yr": 33.0,
+   "married_18": 15.1,
+   "clean_fuel": 18.9,
+   "sanitation": 80.5,
+   "death_reg": 80.0,
+   "sex_ratio": 972.0,
+   "per_100": 1.1705,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Bijapur",
+   "districts": [
+    "Bijapur"
+   ],
+   "before": 153073,
+   "removed": 2107,
+   "women_literate": 44.7,
+   "women_10yr": 24.2,
+   "married_18": 18.3,
+   "clean_fuel": 18.5,
+   "sanitation": 30.6,
+   "death_reg": 67.4,
+   "sex_ratio": 1069.0,
+   "per_100": 1.3765,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Bilaspur",
+   "districts": [
+    "Bilaspur",
+    "Gaurela-Pendra-Marwahi"
+   ],
+   "before": 1497914,
+   "removed": 32195,
+   "women_literate": 72.8,
+   "women_10yr": 37.4,
+   "married_18": 11.2,
+   "clean_fuel": 42.2,
+   "sanitation": 80.5,
+   "death_reg": 63.5,
+   "sex_ratio": 1033.0,
+   "per_100": 2.1493,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Dantewada",
+   "districts": [
+    "Dakshin Bastar Dantewada"
+   ],
+   "before": 168569,
+   "removed": 4295,
+   "women_literate": 49.3,
+   "women_10yr": 24.2,
+   "married_18": 16.3,
+   "clean_fuel": 34.6,
+   "sanitation": 60.5,
+   "death_reg": 60.7,
+   "sex_ratio": 1098.0,
+   "per_100": 2.5479,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Dhamtari",
+   "districts": [
+    "Dhamtari"
+   ],
+   "before": 597789,
+   "removed": 8253,
+   "women_literate": 82.7,
+   "women_10yr": 40.9,
+   "married_18": 5.8,
+   "clean_fuel": 30.9,
+   "sanitation": 89.8,
+   "death_reg": 87.1,
+   "sex_ratio": 1057.0,
+   "per_100": 1.3806,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Durg",
+   "districts": [
+    "Durg"
+   ],
+   "before": 1104148,
+   "removed": 30913,
+   "women_literate": 80.3,
+   "women_10yr": 52.7,
+   "married_18": 4.3,
+   "clean_fuel": 76.3,
+   "sanitation": 89.5,
+   "death_reg": 81.9,
+   "sex_ratio": 957.0,
+   "per_100": 2.7997,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Gariyaband",
+   "districts": [
+    "Gariyaband"
+   ],
+   "before": 433247,
+   "removed": 4377,
+   "women_literate": 68.9,
+   "women_10yr": 27.8,
+   "married_18": 9.7,
+   "clean_fuel": 17.1,
+   "sanitation": 81.0,
+   "death_reg": 75.6,
+   "sex_ratio": 1048.0,
+   "per_100": 1.0103,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Janjgir - Champa",
+   "districts": [
+    "Janjgir-Champa",
+    "Sakti"
+   ],
+   "before": 1300330,
+   "removed": 15058,
+   "women_literate": 74.9,
+   "women_10yr": 37.3,
+   "married_18": 10.2,
+   "clean_fuel": 24.8,
+   "sanitation": 78.8,
+   "death_reg": 76.2,
+   "sex_ratio": 999.0,
+   "per_100": 1.158,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Jashpur",
+   "districts": [
+    "Jashpur"
+   ],
+   "before": 614509,
+   "removed": 7575,
+   "women_literate": 73.1,
+   "women_10yr": 34.9,
+   "married_18": 21.9,
+   "clean_fuel": 14.8,
+   "sanitation": 72.8,
+   "death_reg": 79.4,
+   "sex_ratio": 1038.0,
+   "per_100": 1.2327,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Kabeerdham",
+   "districts": [
+    "Kabirdham"
+   ],
+   "before": 603771,
+   "removed": 4146,
+   "women_literate": 66.2,
+   "women_10yr": 32.6,
+   "married_18": 15.3,
+   "clean_fuel": 25.0,
+   "sanitation": 80.3,
+   "death_reg": 84.1,
+   "sex_ratio": 983.0,
+   "per_100": 0.6867,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Kodagaon",
+   "districts": [
+    "Kondagaon"
+   ],
+   "before": 375409,
+   "removed": 3804,
+   "women_literate": 54.7,
+   "women_10yr": 24.7,
+   "married_18": 11.8,
+   "clean_fuel": 12.4,
+   "sanitation": 79.5,
+   "death_reg": 57.8,
+   "sex_ratio": 1033.0,
+   "per_100": 1.0133,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Korba",
+   "districts": [
+    "Korba"
+   ],
+   "before": 817410,
+   "removed": 600,
+   "women_literate": 73.2,
+   "women_10yr": 37.1,
+   "married_18": 7.2,
+   "clean_fuel": 35.5,
+   "sanitation": 73.3,
+   "death_reg": 72.4,
+   "sex_ratio": 1034.0,
+   "per_100": 0.0734,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Koriya",
+   "districts": [
+    "Koria",
+    "Manendragarh-Chirmiri-Bharatpur"
+   ],
+   "before": 447120,
+   "removed": 5295,
+   "women_literate": 74.8,
+   "women_10yr": 37.0,
+   "married_18": 22.9,
+   "clean_fuel": 30.2,
+   "sanitation": 73.3,
+   "death_reg": 87.0,
+   "sex_ratio": 987.0,
+   "per_100": 1.1842,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Mahasamund",
+   "districts": [
+    "Mahasamund"
+   ],
+   "before": 793722,
+   "removed": 3151,
+   "women_literate": 70.6,
+   "women_10yr": 31.2,
+   "married_18": 9.5,
+   "clean_fuel": 30.4,
+   "sanitation": 84.2,
+   "death_reg": 75.6,
+   "sex_ratio": 1057.0,
+   "per_100": 0.397,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Mungeli",
+   "districts": [
+    "Mungeli"
+   ],
+   "before": 436174,
+   "removed": 10132,
+   "women_literate": 66.5,
+   "women_10yr": 32.2,
+   "married_18": 20.5,
+   "clean_fuel": 22.9,
+   "sanitation": 80.7,
+   "death_reg": 83.3,
+   "sex_ratio": 1022.0,
+   "per_100": 2.3229,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Narayanpur",
+   "districts": [
+    "Narayanpur"
+   ],
+   "before": 179004,
+   "removed": 2732,
+   "women_literate": 52.0,
+   "women_10yr": 26.5,
+   "married_18": 11.1,
+   "clean_fuel": 19.5,
+   "sanitation": 52.8,
+   "death_reg": 71.7,
+   "sex_ratio": 1077.0,
+   "per_100": 1.5262,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Raigarh",
+   "districts": [
+    "Raigarh",
+    "Sarangarh-Bilaigarh"
+   ],
+   "before": 1365916,
+   "removed": 13122,
+   "women_literate": 74.9,
+   "women_10yr": 38.3,
+   "married_18": 11.5,
+   "clean_fuel": 29.8,
+   "sanitation": 66.3,
+   "death_reg": 81.7,
+   "sex_ratio": 1013.0,
+   "per_100": 0.9607,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Raipur",
+   "districts": [
+    "Raipur"
+   ],
+   "before": 1393446,
+   "removed": 521,
+   "women_literate": 79.6,
+   "women_10yr": 40.1,
+   "married_18": 8.8,
+   "clean_fuel": 60.5,
+   "sanitation": 84.0,
+   "death_reg": 78.3,
+   "sex_ratio": 983.0,
+   "per_100": 0.0374,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Rajnandgaon",
+   "districts": [
+    "Rajnandgaon",
+    "Khairagarh-Chhuikhadan-Gandai",
+    "Mohla-Manpur-Ambagarh Chouki"
+   ],
+   "before": 1148975,
+   "removed": 19087,
+   "women_literate": 80.6,
+   "women_10yr": 38.9,
+   "married_18": 3.8,
+   "clean_fuel": 27.4,
+   "sanitation": 79.2,
+   "death_reg": 81.4,
+   "sex_ratio": 1014.0,
+   "per_100": 1.6612,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Sukma",
+   "districts": [
+    "Sukma"
+   ],
+   "before": 151463,
+   "removed": 3076,
+   "women_literate": 39.8,
+   "women_10yr": 15.9,
+   "married_18": 18.9,
+   "clean_fuel": 14.4,
+   "sanitation": 35.5,
+   "death_reg": 53.2,
+   "sex_ratio": 1078.0,
+   "per_100": 2.0309,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Surajpur",
+   "districts": [
+    "Surajpur"
+   ],
+   "before": 665504,
+   "removed": 9682,
+   "women_literate": 66.9,
+   "women_10yr": 30.7,
+   "married_18": 34.3,
+   "clean_fuel": 24.0,
+   "sanitation": 75.4,
+   "death_reg": 84.4,
+   "sex_ratio": 950.0,
+   "per_100": 1.4548,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Surguja",
+   "districts": [
+    "Surguja"
+   ],
+   "before": 598492,
+   "removed": 3818,
+   "women_literate": 71.0,
+   "women_10yr": 37.7,
+   "married_18": 18.1,
+   "clean_fuel": 24.5,
+   "sanitation": 75.8,
+   "death_reg": 81.6,
+   "sex_ratio": 1036.0,
+   "per_100": 0.6379,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Chhattisgarh",
+   "unit": "Uttar Bastar Kanker",
+   "districts": [
+    "Uttar Bastar Kanker"
+   ],
+   "before": 535364,
+   "removed": 4909,
+   "women_literate": 77.2,
+   "women_10yr": 40.3,
+   "married_18": 5.4,
+   "clean_fuel": 25.9,
+   "sanitation": 80.5,
+   "death_reg": 89.7,
+   "sex_ratio": 1030.0,
+   "per_100": 0.9169,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Mizoram",
+   "unit": "Aizawl",
+   "districts": [
+    "Aizawl",
+    "Saitual"
+   ],
+   "before": 326359,
+   "removed": 6766,
+   "women_literate": 98.9,
+   "women_10yr": 60.7,
+   "married_18": 3.2,
+   "clean_fuel": 95.4,
+   "sanitation": 96.1,
+   "death_reg": 86.2,
+   "sex_ratio": 1052.0,
+   "per_100": 2.0732,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Mizoram",
+   "unit": "Champhai",
+   "districts": [
+    "Champhai",
+    "Khawzawl"
+   ],
+   "before": 73959,
+   "removed": 66,
+   "women_literate": 97.7,
+   "women_10yr": 47.8,
+   "married_18": 11.0,
+   "clean_fuel": 79.4,
+   "sanitation": 98.3,
+   "death_reg": 98.3,
+   "sex_ratio": 944.0,
+   "per_100": 0.0892,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Mizoram",
+   "unit": "Kolasib",
+   "districts": [
+    "Kolasib"
+   ],
+   "before": 61340,
+   "removed": -1397,
+   "women_literate": 96.9,
+   "women_10yr": 41.7,
+   "married_18": 13.7,
+   "clean_fuel": 87.5,
+   "sanitation": 96.8,
+   "death_reg": 96.3,
+   "sex_ratio": 1002.0,
+   "per_100": -2.2775,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Mizoram",
+   "unit": "Lawngtlai",
+   "districts": [
+    "Lawngtlai"
+   ],
+   "before": 90699,
+   "removed": 16,
+   "women_literate": 76.0,
+   "women_10yr": 32.2,
+   "married_18": 16.0,
+   "clean_fuel": 56.3,
+   "sanitation": 90.3,
+   "death_reg": 85.4,
+   "sex_ratio": 1051.0,
+   "per_100": 0.0176,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Mizoram",
+   "unit": "Lunglei",
+   "districts": [
+    "Lunglei",
+    "Hnahthial"
+   ],
+   "before": 114251,
+   "removed": -1557,
+   "women_literate": 91.6,
+   "women_10yr": 46.3,
+   "married_18": 4.8,
+   "clean_fuel": 79.9,
+   "sanitation": 95.6,
+   "death_reg": 86.6,
+   "sex_ratio": 1004.0,
+   "per_100": -1.3628,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Mizoram",
+   "unit": "Mamit",
+   "districts": [
+    "Mamit"
+   ],
+   "before": 64317,
+   "removed": 959,
+   "women_literate": 89.6,
+   "women_10yr": 40.0,
+   "married_18": 16.8,
+   "clean_fuel": 73.3,
+   "sanitation": 92.7,
+   "death_reg": 88.4,
+   "sex_ratio": 991.0,
+   "per_100": 1.4911,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Mizoram",
+   "unit": "Saiha",
+   "districts": [
+    "Siaha"
+   ],
+   "before": 43801,
+   "removed": 1374,
+   "women_literate": 95.1,
+   "women_10yr": 50.2,
+   "married_18": 11.8,
+   "clean_fuel": 83.7,
+   "sanitation": 91.5,
+   "death_reg": 75.3,
+   "sex_ratio": 994.0,
+   "per_100": 3.1369,
+   "measure": "rise_after_draft"
+  },
+  {
+   "state": "Mizoram",
+   "unit": "Serchhip",
+   "districts": [
+    "Serchhip"
+   ],
+   "before": 54180,
+   "removed": 736,
+   "women_literate": 99.7,
+   "women_10yr": 43.1,
+   "married_18": 7.2,
+   "clean_fuel": 81.8,
+   "sanitation": 98.2,
+   "death_reg": 93.4,
+   "sex_ratio": 981.0,
+   "per_100": 1.3584,
+   "measure": "rise_after_draft"
   }
  ]
 }
