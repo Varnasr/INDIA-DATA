@@ -60,7 +60,7 @@
     meghalaya: { label: 'Meghalaya', faq: 'ml', lead: { count: 'removed', base: 'before', per: 100, what: 'names left off the draft roll', of: 'the roll before the revision' },
       reasons: [['shifted_absent_other', 'Shifted, absent or other'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once']],
       election: { year: 2023, count: 'removed', turnout: 'turnout' },
-      limits: 'The Chief Electoral Officer published the names left off and their reasons for every constituency, and the split by sex for the state only. The table names no district, so each constituency\'s district is taken from the published list of constituencies and checked by adding the constituencies up to the Chief Electoral Officer\'s district table, which they match exactly.' },
+      limits: 'The Chief Electoral Officer published the names left off and their reasons for every constituency, and the split by sex for the state only. The table names no district. Each constituency\'s district comes from the published list of constituencies, and the constituencies add up exactly to the Chief Electoral Officer\'s district table.' },
     manipur: { label: 'Manipur', faq: 'mn', lead: { count: 'fall', base: 'before', per: 100, what: 'fall in the roll from the roll before the revision to the final roll', of: 'the roll before the revision', to: 'the final roll' },
       election: { year: 2022, count: 'fall', turnout: 'turnout' },
       limits: 'The Chief Electoral Officer published the roll before the revision and the final roll for every constituency, so the change takes in the names left off and everything added or removed after the draft together. The reasons and the split by sex of the names left off were published for the state only.' },

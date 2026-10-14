@@ -176,7 +176,7 @@
         '<details class="figs"><summary>Every ' + lv[0] + ', in figures</summary><div class="twrap fit" tabindex="0" role="region" aria-label="Every ' + lv[0] + ', in figures"><table id="tT' + i + '"></table></div></details>');
     });
     if (s.notices) h.push('<h2 id="notices">Notices</h2><p>' + s.notices + ' The counts for every state are on <a href="../india/process/#notices-the-no-mapping-list-and-the-discrepancy-list">How the revision was run</a>.</p>');
-    h.push('<p class="note">' + SIR.esc(poss(d, 1)) + ' dates are drawn beside every other state\'s on <a href="../india/process/#s-' + hyph(d.state) + '">How the revision was run</a>.' + (d.revision === 'no_draft' ? ' The <a href="method/">method page</a> lists each source.' : ' Every figure on this page is in the CSV on the Downloads page, and the <a href="method/">method page</a> lists each source.') + '</p>');
+    h.push('<p class="note">' + SIR.esc(poss(d, 1)) + ' dates are drawn beside every other state\'s on <a href="../india/process/#s-' + hyph(d.state) + '">How the revision was run</a>.' + (d.revision === 'no_draft' ? ' The <a href="method/">method page</a> lists each source.' : ' Every figure on this page can be downloaded from the Downloads page, and the <a href="method/">method page</a> lists each source.') + '</p>');
     box.innerHTML = h.join('');
 
     if (steps.length) {
@@ -277,7 +277,7 @@
       return '<li>' + (s.url ? '<a href="' + SIR.esc(s.url) + '" rel="noopener">' + SIR.esc(s.title) + '</a>' : SIR.esc(s.title)) + (s.primary ? '' : ' (press)') + '.</li>';
     }).join('') + '</ul>');
     if ((d.notes || []).length) h.push('<h2 id="notes-on-the-figures">Notes on the figures</h2>' + d.notes.map(function (t) { return '<p>' + SIR.esc(t) + '</p>'; }).join(''));
-    h.push('<h2 id="the-checks">The checks</h2><p>The page is not built unless the figures agree with each other wherever they can be compared. The roll before less the draft must equal the names left off, the reasons must add to the names left off where all were published, the draft plus the net change must equal the final roll, men, women and third gender must add to each total, and every full table must add to the state figure in each column it shares with it.</p>');
+    h.push('<h2 id="the-checks">How the figures fit together</h2><p>The figures agree with each other wherever they can be compared. The roll before less the draft equals the names left off, and the reasons add to the names left off where all were published. The draft plus the net change equals the final roll, and men, women and third gender add to each total. Every full table adds to the state figure in each column it shares with it.</p>');
     if ((d.cannot_show || []).length) h.push('<h2 id="what-these-figures-cannot-show">What these figures cannot show</h2><ul class="plain">' + d.cannot_show.map(function (t) { return '<li>' + SIR.esc(t) + '</li>'; }).join('') + '<li>Whether each removal was right.</li></ul>');
     box.innerHTML = h.join('');
     SIR.showFaq(S.id, 'method');
@@ -303,7 +303,7 @@
       else QA.push(['Is there a figure for each district or constituency?', below(d), ['main', 'faq']]);
       QA.push(['Where do the figures come from?', 'From ' + d.sources.length + (d.sources.length === 1 ? ' document' : ' documents') + ', ' + d.sources.filter(function (x) { return x.primary; }).length + ' of them the Election Commission\'s or the Chief Electoral Officer\'s own. The method page names each one.', ['method', 'faq']]);
       var pts = [s.scale, s.reasons, s.final, s.women].filter(Boolean);
-      return { qa: QA, short: { main: [pts, lim], method: [[s.scale, 'Every figure on these pages is checked against the others wherever they can be compared.'].filter(Boolean), ''], faq: [pts.slice(0, 3), ''] } };
+      return { qa: QA, short: { main: [pts, lim], method: [[s.scale, 'Every figure on these pages agrees with the others wherever they can be compared.'].filter(Boolean), ''], faq: [pts.slice(0, 3), ''] } };
     });
   });
 

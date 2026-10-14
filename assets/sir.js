@@ -448,7 +448,7 @@
   SIR.fail = function (e) {
     if (window.console) console.error(e && e.stack);
     var m = document.querySelector('main');
-    if (m) m.insertAdjacentHTML('afterbegin', '<p class="caveat">' + L('The data for this page did not load ({msg}). If you opened the file directly, serve the folder with <code>python3 -m http.server</code> and open it from there.', { msg: SIR.esc(e.message) }) + '</p>');
+    if (m) m.insertAdjacentHTML('afterbegin', '<p class="caveat">' + L('The data for this page did not load ({msg}). Reload the page and try again.', { msg: SIR.esc(e.message) }) + '</p>');
   };
 
   // ---- "In short" box: numbered plain sentences at the top of a page.
