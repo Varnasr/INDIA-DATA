@@ -477,5 +477,101 @@
   "claim_index": 3,
   "status": "confirmed",
   "note": "Opened The Indian Express (Express News Service, Kolkata, 27 September 2026, updated 08:04 IST): the two sentences are verbatim inside quotation marks as her words at a rally in Serampore, Hooghly, followed by 'The government should compensate for the loss of those whose names were struck off'. Likely spoken in Bengali; the English is the paper's. Arithmetic checked against data/westbengal/summary.json and raw/adjudication_state.csv: pn05.removed 58,20,899 + pn05.form7 5,46,053 + adj.found_not_eligible 27,16,393 = 90,83,345; with all 60,06,675 under adjudication instead, 1,23,73,627 (1.24 crore). found_eligible 32,68,119 and not eligible 27,16,393 are 'reported' in the CSV, which the check says. fall 77,58,998 = roll_2024 7,60,10,006 less election 6,82,51,008; over_margin 139, could_change 132 of 294. The check uses only the fall below the state, calls adjudication outcomes state totals as reported, says the removals could have decided a seat and never that they did, and makes no claim about intent."
+ },
+ {
+  "person": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+  "claim_index": 0,
+  "status": "confirmed",
+  "note": "Re-opened the Collective's report of 9 October 2026 with curl on 15 October (200; JSON-LD datePublished 'Oct 09, 2026'; bylines Sumedha Mittal, Ayushi Kar and Shubhangi Derhgawen, Furquan Ameen as editor). Quotation verbatim. 85,854 / 87,127 = 98.5%. The same paragraph gives 62 forms with only letters 'A, N, H, E' and 1,211 with 'absent/shifted'; the report says more than 4.3 lakh Form 7s were filed, and that all 87,127 came between 15 March and 2 April 2026. The CEO's office answered with 'misleading' and procedure (IANS, 13 Oct) and no outlet read reports a disputed count. Site figures checked against data/uttarpradesh/summary.json (roll_before 154430092, left_off 28874067, draft 125556025, final 133984792, net_rise 8428767, removed_after 815996, form7 268682) and analysis.json (no_response 350026); 18.7 per 100 is right. The Form 7 count of 2,68,682 is the Hindu-reported CEO figure for 6 January to 6 March in raw/sir_state_summary.csv."
+ },
+ {
+  "person": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+  "claim_index": 1,
+  "status": "confirmed",
+  "note": "Verbatim. The basis is as stated: 'We analysed the scraped data and spoke to four election officials at the assembly level', none named, and one ERO quoted ('it was bound to bear my signature'). The Collective publishes no document showing how ERONET generates the forms. The CEO's office statement (IANS, 13 Oct) speaks of notices, hearings, scrutiny and recorded orders and does not deny that the software produced the forms. The notices figures (3.26 crore, 1.04 crore no mapping, 2.22 crore discrepancies) are in the Times of India report of 19 February 2026 that data/india/notices.json cites for Uttar Pradesh; there they are notices 'to be issued'. The Bharat Samachar report named in the check was not re-opened and is not quoted."
+ },
+ {
+  "person": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Verbatim. The report never states the deadline it used. It calls the window from 6 January (draft) to 10 April (final) the claims and objections period in one paragraph and says all the officers' forms were filed 'after the legally mandated deadline' in another, though those forms are dated 15 March to 2 April, inside that window. The likeliest reading is that the deadline is the 6 March close of claims and objections, which the CEO's own statement (IANS, 13 Oct: pending cases 'decided after 6 March') and the site's Form 7 series (to 6 March) both use, but the paper does not say so. The check is right to leave it open."
+ },
+ {
+  "person": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+  "claim_index": 3,
+  "status": "rejected",
+  "note": "rests on religion guessed from names; left off the panel by rule. (The quotation is verbatim; the next sentence of the report names a private person, and the report does not say how religion was decided.)"
+ },
+ {
+  "person": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+  "claim_index": 4,
+  "status": "confirmed",
+  "note": "Verbatim from the report of 14 October 2026 (visible date 14 Oct; JSON-LD says 13 Oct). Kind 'framing' is right and the panel should present it as the paper's reading. The Collective quotes no sentence of the video in which Rinwa confirms the 85,854. It writes that he 'did not explain why' most forms carried no reason and 'did not address' the single-letter reasons, so 'confirmed' is its inference from his not disputing the count. Its own sequence matters for the panel: an X post 'minutes after' the 9 October report calling it riddled with 'falsehoods and inaccuracies', then the same evening a recorded video calling it a 'misleading report'. Siasat (14 Oct) repeats the claim and attributes it to the Collective ('According to the Collective'). The video itself was not opened."
+ },
+ {
+  "person": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+  "claim_index": 5,
+  "status": "corrected",
+  "fix": {
+   "check": "His 13.39 crore matches the final roll. The Collective sets the 4,700 against its finding that 'more than 200 attempts had been made to delete Muslim voters en masse in Uttar Pradesh', which is the bulk objections by individuals, and not against the 85,854 officers' forms. It sits close to the 4,336 deletions from third-party Form 7s he gave in February (claim from ceo-feb), though that was a count of deletions to 16 February and this is a count of names objected to. The video is dated by the Collective to the evening of 9 October 2026 and was not opened, so the words are the Collective's English rendering."
+  },
+  "note": "Quotation verbatim in the Collective's report of 14 October, brackets and all; Siasat (14 Oct) prints it word for word through the Collective. Corrected the check: the Collective introduces the 4,700 as his answer to its finding of 'more than 200 attempts' at en masse deletion across the state, so tying it to 'two constituencies' was narrower than the source. The 4,336 comparison is kept with the difference in what is counted stated. 13,39,84,792 is data/uttarpradesh/summary.json final."
+ },
+ {
+  "person": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+  "claim_index": 6,
+  "status": "corrected",
+  "fix": {
+   "check": "It denies the description, not the number: it does not say how many forms there were or why they carried no reason. 'Pending cases were decided after 6 March' agrees with the Collective's dates (15 March to 2 April) for the officers' forms. The date matters. IANS files this from Lucknow on Tuesday 13 October and The Hans India copy says the office 'on Tuesday rejected the claims', with infographics of a four-step process. The Collective describes a different, earlier answer: an X post 'minutes after' its report of Friday 9 October calling it full of 'falsehoods and inaccuracies', and a video that evening calling it 'misleading'. So this text is dated 13 October, as IANS reported it, and is not the post of 9 October. The original post was not opened. IANS's Hindi copy attributes the post loosely to 'चुनाव आयोग' while naming the Chief Electoral Officer's office in its first paragraph."
+  },
+  "note": "Quotation verbatim in Punjab Kesari's IANS copy (datePublished 2026-10-13T10:52 IST). The English IANS copy (The Hans India, 2026-10-13T10:43 IST) gives the first three sentences as 'the CEO's office said in a statement' and paraphrases the fourth ('The CEO urged the people to rely on official sources'). The translation is IANS's own and fair. Resolved the date question the first reader left open: the wording and the day differ from the 9 October post the Collective quotes, so the panel should give this as the office's statement of 13 October as IANS reported it. A search for the post itself found nothing."
+ },
+ {
+  "person": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+  "claim_index": 7,
+  "status": "confirmed",
+  "note": "Opened on 15 October 2026; body from the JSON-LD articleBody, datePublished 2026-02-19T10:33 IST, byline as given. The quotation is verbatim (the CEO spoke 'on Wednesday', 18 February). The breakdown is right: 14,388 after Form 8 transfers, 5,211 after a voter's own transfer request, 4,336 from third-party Form 7s; 1.35 lakh Form 7s from 6 January to 16 February, of which 47,684 were filed by another person. The same report gives 3.26 crore notices to be issued (1.04 crore no mapping, 2.22 crore discrepancies), which is the source data/india/notices.json names. Draft 12,55,56,025 and 8,15,996 deleted after it checked in summary.json."
+ },
+ {
+  "person": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+  "claim_index": 8,
+  "status": "corrected",
+  "fix": {
+   "check": "What each source says about the cap. PTI (ThePrint, dateline 'New Delhi, Oct 9', 'the Election Commission on Friday introduced specific caps') and News On AIR (10 October) both give 10 Form 7s per elector in the claims and objections period and five a month in continuous updation, online and offline alike, and Deccan Herald, Deccan Chronicle, DT Next and Outlook report the same 10. All of these are reports of the Commission's letter to Chief Electoral Officers. None prints the letter, so none is primary, and the letter itself was not found. The Collective's report of 14 October says the Commission ordered on 9 October that no person may file more than 30 objections a month, and its subheading says the cap came 'Two days later'. The 30 matches no other report and the Collective cites no document for it. The Collective also says the Commission had earlier removed a cap on bulk applications from the SIR protocol; that was not checked. PTI ties the order to bulk filing reported from Karnataka and Odisha, not to Uttar Pradesh."
+  },
+  "note": "Quotation verbatim in ThePrint's PTI copy (posted 2026-10-09T19:16 UTC, 00:46 IST on 10 October) and correctly marked as PTI's account rather than the letter's words. News On AIR re-opened: 'a maximum of 10 applications during the claims and objections period and five applications per month during the continuous updation'. Corrected the check to record what each source says and that no source is primary, and to note the Collective's own internal mismatch on timing (body 9 October, subheading two days later)."
+ },
+ {
+  "person": "The Bharatiya Janata Party (its own videos)",
+  "claim_index": 0,
+  "status": "confirmed",
+  "note": "Description read from YouTube's watch-next data on 15 October 2026 (date 'Oct 6, 2026'; oEmbed confirms the title and the @bjp channel). The three lines are verbatim with the line breaks as in the description, introduced by 'According to the Election Commission data cited in the ongoing SIR debate'. The site's totals (data/india/states.json total: 13,39,03,307 removed; 9,56,35,923, 2,79,69,558, 1,01,48,459; shares 71.5014, 20.9112, 7.5874) match to the precision given, 20.9% being rounded to 20%. The Bihar test figures (52.0% women against 43.4% of deaths, about 3.4 years of adult deaths) are in data/bihar/tests.json."
+ },
+ {
+  "person": "The Bharatiya Janata Party (its own videos)",
+  "claim_index": 1,
+  "status": "confirmed",
+  "note": "Verbatim, with the description's curly quotes. The next line of the description asks 'Should deceased and duplicate entries remain on electoral rolls, and how should eligible voters who were left out be restored?', which the check could mention but need not."
+ },
+ {
+  "person": "The Bharatiya Janata Party (its own videos)",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Verbatim. The Commission's letter No. 23/2025/ERS(Vol-II) of 01.10.2026 ordering a special drive is in data/india/process.json, five days before the video. No outcome published."
+ },
+ {
+  "person": "The Bharatiya Janata Party (its own videos)",
+  "claim_index": 3,
+  "status": "corrected",
+  "fix": {
+   "site_counts": "Bihar's roll fell from about 7.89 crore before the revision (7,89,69,844 in the Commission's June 2025 total) to 7,24,05,756 on the draft and 7,41,92,357 on the final roll of 30 September 2025, a net fall of 47,77,487 from that June total. 65,59,626 names were left off the draft and 3,66,742 deleted after it (data/india/states.json, Bihar electors_final, removed, removed_after_draft; data/bihar/final.json, totals before_press, net_fall_press, draft, final)."
+  },
+  "note": "Verbatim from the description of 1ZUF6kwLV7M (date 'Oct 4, 2026'), with the U+FFFC after 'process.' rightly left out. 7,41,92,357 rounds to 7.42 crore. Corrected site_counts: 7,89,69,844 less 7,41,92,357 is 47,77,487 (data/bihar/final.json net_fall_press), not 47,73,025. The site's net_fall of 47,73,025 in states.json is the names left off less the net rise after the draft, which starts from the lists' count and not from the June total, so the two figures cannot share a sentence."
+ },
+ {
+  "person": "The Bharatiya Janata Party (its own videos)",
+  "claim_index": 4,
+  "status": "confirmed",
+  "note": "Verbatim, the first line of the description. It lists seven topics for eight questions. Kind 'framing' is right; the spoken answers were not read."
  }
 ]

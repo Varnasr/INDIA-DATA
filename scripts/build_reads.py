@@ -67,6 +67,14 @@ PLAIN = {
     40: "Finds that shifted or absent made up 75% to 96.5% of the names left off in 85 Maharashtra constituencies, and that neighbouring seats in Pune used the two reasons very differently. It estimates that the draft roll falls about 1.92 crore short of the projected adult population.",
     53: 'Sets Odisha\'s net fall of 17.67 lakh (about 5.3 per cent) from the pre-SIR roll to the final roll of 21 September against other states. It gives a 94 per cent return of enumeration forms, few duplicates and mostly seasonal migration as the reasons, and explains how an elector left off or deleted can appeal or reapply.',
 }
+# round 7 (15 October 2026), keyed by the URL
+PLAIN_URL = {
+    'https://www.youtube.com/shorts/YIUQjAucz1U': (
+        "A BJP short on the 13 crore names left off the drafts. Its description splits them, citing the Commission's figures, into "
+        "absent, shifted or other (9.5 crore, 71%), dead (2.7 crore, 20%) and duplicate (1 crore, 7.6%), argues that, given that split, "
+        "the 13 crore cannot all be read as eligible voters deleted, and points to the Commission's drive to enrol eligible voters "
+        "who were left out."),
+}
 EXTRA = [{
     'title': 'More SIR Deletions, Bigger BJP Swing? Prannoy Roy DeKodes the Data | DeKoder',
     'outlet': 'DeKoder', 'authors': 'Prannoy Roy', 'date': '2026-10-08',
@@ -88,7 +96,7 @@ def build():
     ver.update({v['url']: v for v in json.loads((RAW / 'round3_verified.json').read_text(encoding='utf-8'))})
     # later rounds (fourth to 14 October 2026, fifth The Wire's RTI piece), each found and read twice
     fourth = []
-    for n in (4, 5, 6):
+    for n in (4, 5, 6, 7):
         if (RAW / ('round%d.json' % n)).exists():
             fourth += json.loads((RAW / ('round%d.json' % n)).read_text(encoding='utf-8'))
             ver.update({v['url']: v for v in json.loads((RAW / ('round%d_verified.json' % n)).read_text(encoding='utf-8'))})
@@ -103,6 +111,8 @@ def build():
             it['authors'] = ', '.join(it['authors'])
         if i in PLAIN:
             it['shows'] = PLAIN[i]
+        if it['url'] in PLAIN_URL:
+            it['shows'] = PLAIN_URL[it['url']]
         g = BY_URL.get(it['url']) or it.get('group') or TYPE.get(it['type'])
         if g not in GROUPS:
             sys.exit('FAIL - no group for %r (%s)' % (it['title'], it['type']))
