@@ -1423,6 +1423,148 @@
     "The spoken content and any on-screen text of both videos; captions could not be read from the sandbox.",
     "Who speaks in either video."
    ]
+  },
+  {
+   "id": "abhijeet-dipke",
+   "name": "Abhijeet Dipke (Cockroach Janta Party)",
+   "role": "Founder of the Cockroach Janta Party (CJP), which has led protests in Delhi and Mumbai since 2 October 2026 demanding the resignation of Chief Election Commissioner Gyanesh Kumar over the SIR. This panel sets his press conference of Thursday 15 October 2026 at the Press Club of India, New Delhi, held with AISA national president Neha Bora and others the day before the CJP's 'Lehra do Tiranga' march at Connaught Place, beside the site's figures. One line from his press conference of 24 September 2026 is added because it says what his '2 per cent' refers to.",
+   "role_note": "Office and party as PTI, IANS, National Herald and ETV Bharat give them. PTI lists Neha Bora (AISA national president), Aishe Ghosh (SFI), Viraaj Devang (AISF national president) and the actor Prakash Raj beside him; PTI's evening story and IANS add Prashant Bhushan, and PTI's evening story Anjali Bharadwaj and Nikhil Dey. All are public figures speaking in public. ETV Bharat's text is PTI's copy word for word, with an ANI photograph. Only Dipke's words are quoted as claims; Bora's and Ghosh's remarks are noted under speaker_note where they bear on his.",
+   "site_files": "data/india/states.json (total, final, states rows: removed, electors_before, electors_final, net_fall, removed_pct_votes24), data/india/raw/adults_ls2024.csv (votes_2024), data/india/margins.json (even_total, ls_close, even_test), data/bihar/impact.json (summary, comp_booth_all), data/india/process.json (timeline 2025-06-24), data/kerala/summary.json, data/kerala/constituencies.json (Dharmadam)",
+   "pieces": [
+    {
+     "id": "dk-pti-am",
+     "title": "Over 13 crore voters deleted, what is this if not a setting: Dipke",
+     "outlet": "ThePrint (PTI)",
+     "date": "2026-10-15",
+     "url": "https://theprint.in/india/over-13-crore-voters-deleted-what-is-this-if-not-a-setting-dipke/3072727/",
+     "how_read": "Fetched with curl on 15 October 2026; full text read from the page (PTI copy, filed 4:47 pm IST, slug 'PTI AO ZMN'). The same copy runs in DT Next, Deccan Chronicle, OrissaPOST, Eastern Mirror and Sahil Online (Sahil Online opened and identical in the quoted lines)."
+    },
+    {
+     "id": "dk-pti-pm",
+     "title": "CJP to hold Tiranga march at Connaught Place amid security curbs",
+     "outlet": "ThePrint (PTI)",
+     "date": "2026-10-15",
+     "url": "https://theprint.in/india/cjp-to-hold-tiranga-march-at-connaught-place-amid-security-curbs/3073103/",
+     "how_read": "Fetched with curl on 15 October 2026; full text read (PTI copy filed 8:46 pm IST). PTI's second story of the same press conference. It quotes the 13 crore line with 'around 14 percent' added, and gives PTI's own 2024 vote shares for the NDA (around 43 per cent) and the INDIA bloc parties (around 40.6 per cent)."
+    },
+    {
+     "id": "dk-etv",
+     "title": "Chaos After 'Band Karo' Shouts At Abhijeet Dipke-Neha Bora Press Meet; CJP Leader Claims Over 13 Crore Voters Deleted",
+     "outlet": "ETV Bharat (ETV Bharat English Team)",
+     "date": "2026-10-15",
+     "url": "https://www.etvbharat.com/en/bharat/over-13-crore-voters-deleted-what-is-this-if-not-a-setting-says-dipke-during-press-conference-along-with-neha-bora-aishe-ghosh-among-others-enn26101505556",
+     "how_read": "Fetched with curl on 15 October 2026; text read from the page's paragraphs and its JSON-LD (published 5:14 pm IST). The text is PTI's afternoon copy with a new opening paragraph on the disruption; the photograph is credited to ANI. A 1 minute 52 second Dailymotion clip (xbnu1tm, owner ETVBHARAT) is embedded; its title and description were read through the Dailymotion API and the clip itself was not watched."
+    },
+    {
+     "id": "dk-bhasha",
+     "title": "13 करोड़ से अधिक मतदाताओं के नाम हटाए गए, अगर यह 'मिलीभगत' नहीं है तो और क्या है : दीपके",
+     "title_en": "Names of more than 13 crore voters removed; if this is not 'collusion', what is it: Dipke",
+     "outlet": "Punjab Kesari (PTI-Bhasha)",
+     "date": "2026-10-15",
+     "url": "https://www.punjabkesari.in/national/news/more-than-130-million-voters--names-have-been-removed-if-this-isn-t--collusion-2390036",
+     "how_read": "Fetched with curl on 15 October 2026; full text read (updated 7:35 pm IST). The Hindi wire version of PTI's afternoon copy, paragraph for paragraph, so its Hindi is the agency's translation and cannot be taken as his own words. It renders 'setting' as 'मिलीभगत' (collusion)."
+    },
+    {
+     "id": "dk-nh",
+     "title": "‘Why is Gyanesh Kumar so important to Modi?’ CJP’s Dipke asks at press meet",
+     "outlet": "National Herald (NH Political Bureau)",
+     "date": "2026-10-15",
+     "url": "https://www.nationalheraldindia.com/politics/abhijeet-dipke-cjp-press-conference-gyanesh-kumar-tricolour-march",
+     "how_read": "Fetched with curl on 15 October 2026; body read from the page's JSON-LD (5:38 pm IST). Gives the two 13 crore lines in the same words as PTI's afternoon copy, and longer quotations on the police response."
+    },
+    {
+     "id": "dk-ians",
+     "title": "'Oppn leaders, students detained only to protect one man, Gyanesh Kumar': CJP's Dipke",
+     "outlet": "ap7am (IANS)",
+     "date": "2026-10-15",
+     "url": "https://www.ap7am.com/en/137773/oppn-leaders-students-detained-only-to-protect-one-man-gyanesh-kumar-cjps-dipke",
+     "how_read": "Fetched with curl on 15 October 2026; full text read (5:49 pm IST). IANS's account of the same press conference. It carries no line on 13 crore or on the 2 per cent margin, so it does not confirm or contradict those quotations."
+    },
+    {
+     "id": "dk-cjp-yt",
+     "title": "Cockroach Janta Party Ki Press Conference | Press Club of India, New Delhi",
+     "outlet": "Cockroach Janta Party Official (YouTube, @OfficialCJP2026)",
+     "date": "2026-10-15",
+     "url": "https://www.youtube.com/watch?v=j2RMPaFQark",
+     "how_read": "Title and channel from YouTube oEmbed; date (15 October 2026), length (43:51) and description from YouTube's watch-next data and search results, read 15 October 2026. Captions could not be read (YouTube asked the sandbox to sign in, and the transcript endpoint refused), and the video has no chapters. So the language he spoke in and his exact words are not known from the recording. The description says only that it is the full press conference at the Press Club of India."
+    },
+    {
+     "id": "dk-bt-sep24",
+     "title": "'If Gyanesh Kumar doesn't resign in 48 hours...': CJP's Abhijeet Dipke warns of nationwide protest",
+     "outlet": "Business Today (Business Today Desk)",
+     "date": "2026-09-24",
+     "url": "https://www.businesstoday.in/india/story/gyanesh-kumar-must-resign-immediately-cjps-abhijeet-dipke-says-voter-deletion-raises-serious-questions-557594-2026-09-24",
+     "how_read": "Fetched with curl on 15 October 2026; body read from the page's JSON-LD. An earlier press conference in Delhi. In reported speech, Business Today says 'He compared the figure with the 2024 Lok Sabha election, saying the NDA-opposition gap was about 2% and the deleted names amounted to roughly 13-14% of the electorate.' That is the paper's paraphrase, not his words, and it is the only source found that says what the 2 per cent is a gap between."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "dk-pti-pm",
+     "quote": "The margin of victory in 2024 was just 2 per cent. Over 13 crore voters deleted — around 14 percent.",
+     "speaker_note": "PTI's evening copy. PTI's afternoon copy (dk-pti-am), ETV Bharat and National Herald give the same sentence ending at 'Over 13 crore voters deleted.' PTI-Bhasha's Hindi (dk-bhasha): ''वर्ष 2024 में जीत का अंतर सिर्फ दो प्रतिशत था। तेरह करोड़ से ज़्यादा मतदाताओं के नाम हटा दिए गए।'' which is the agency's translation. In what language he said it is not known. Business Today (24 September) reports him calling the 2 per cent 'the NDA-opposition gap'.",
+     "timestamp": null,
+     "relies_on": "The Commission's state-by-state counts of names left off the draft rolls, and the 2024 Lok Sabha vote shares of the two alliances.",
+     "kind": "count from official data",
+     "check": "The count holds to the precision he gives. Across the 31 states and union territories with a draft, 13,39,03,307 names were left off, 14.08 per 100 on the rolls before, which is his 'over 13 crore' and 'around 14 percent'. The word 'deleted' does not fit them. These are names not carried into the drafts, with reasons officers recorded, and they include the dead and duplicate entries. In the 22 states with a final roll, part came back. The '2 per cent' is not checked by the site. PTI itself puts the NDA at around 43 per cent of the 2024 vote and the INDIA bloc parties at around 40.6 per cent, a gap of about 2.4 points, but the site holds no national party vote shares and has not checked those figures against the Commission's statistical report. The two percentages also have different bases: 2 per cent is of votes cast, 14 per cent of names on the roll.",
+     "site_counts": "13,39,03,307 names left off the drafts in 31 states, of 95,08,13,771 on the rolls before: 14.08 per 100 (data/india/states.json, total.removed, total.per_100). By recorded reason, 2,79,69,558 dead (20.9%), 9,56,35,923 shifted, absent or other (71.5%), 1,01,48,459 duplicate (7.6%) (total.shares). In the 22 states with a final roll, 7,77,48,303 were left off of 65,67,36,949 (11.84 per 100), and the net fall from the roll before to the final roll was 6,63,72,065 (10.11 per 100). The rise after the draft made up at most 14.6% of the names left off (states.json, final.per_100, final.net_per_100, final.made_up_pct; recomputed from the 22 rows with electors_final). The 13,39,03,307 equal 21.8 per 100 votes cast in those 31 states in the 2024 Lok Sabha election, 61,45,74,272 votes (data/india/raw/adults_ls2024.csv, votes_2024; states.json, removed_pct_votes24).",
+     "site_stops": "A reason is what the officer wrote down, and nobody checked it. Nine states have no final roll yet, so the 13 crore is still mostly a draft figure (states.json, final.waiting). The site counts names and cannot say how many of those left off were eligible electors, or how many would have voted.",
+     "site_files": "data/india/states.json, data/india/raw/adults_ls2024.csv"
+    },
+    {
+     "piece": "dk-pti-pm",
+     "quote": "Where 2 per cent is deciding the election, you are deleting 13 crore votes. What is this if not a setting?",
+     "speaker_note": "PTI's evening copy, ETV Bharat and National Herald end with a question mark; PTI's afternoon copy ends 'setting,” he asked.' PTI-Bhasha: ''जहां दो प्रतिशत वोट परिणाम तय कर रहे हों, वहां आप 13 करोड़ वोट हटा रहे हैं। अगर यह 'मिलीभगत' नहीं है, तो फिर क्या है?'' PTI's own lead says he 'accused the government of attempting to influence electoral outcomes through alleged voter deletions'. At the same press conference Aishe Ghosh said 'Gyanesh has helped them win the whole country' and Neha Bora 'When you drag common people, you are dragging those 13 crore people' (PTI).",
+     "timestamp": null,
+     "relies_on": "The size of the names left off set against a national vote-share gap from 2024.",
+     "kind": "inference about intent",
+     "check": "'Setting' is a claim about purpose, and the rolls cannot show purpose either way. The comparison under it does not hold as stated. The 2024 Lok Sabha election was held on the rolls before the revision, which the Commission ordered on 24 June 2025, so nothing left off in the SIR could have touched the 2024 result. A national vote-share gap does not decide an election under first past the post, seat margins do. Measured by seats, the site finds names left off large against close margins: spread evenly over each state's Lok Sabha seats, they exceed the 2024 margin in 373 of 516 seats, and 115 of the 542 contested seats were won by under 50,000 votes. The one place the site estimates an effect on a result is Bihar. There the names left off came more from booths that had voted NDA in 2024, and the estimates have 4 to 6 seats changing hands, in both directions, with no change in which alliance holds a majority.",
+     "site_counts": "The revision was ordered on 24 June 2025, starting with Bihar (data/india/process.json, timeline). 2024 Lok Sabha seats won by under 50,000 votes: 115, and under 1,00,000: 232, of 542 contested (data/india/margins.json, ls_close). With each state's names left off spread evenly over its Lok Sabha seats, more than the 2024 margin in 373 of 516 seats in 31 states (margins.json, even_total). That spread is an assumption: in Tamil Nadu it gives 27 seats over the margin against 19 counted from constituency tables, in Bihar 32 against 32 (margins.json, even_test). Bihar: those removed came from booths that voted 49.0% NDA and 37.8% INDIA in 2024; on the booth estimate 4 seats change hands on the low count (1 to the NDA, 3 to the INDIA bloc) and 6 on the high count (3 each way) (data/bihar/impact.json, comp_booth_all, summary.booth_lower, summary.booth_upper).",
+     "site_stops": "The rolls record names and reasons. They cannot show why the revision was run as it was, and no page of the site says what anyone intended. Over the margin means the names left off were large enough to decide a seat, never that they did. The site has no national vote shares and does not model a Lok Sabha election on the revised rolls, which has not been held.",
+     "site_files": "data/india/process.json, data/india/margins.json, data/bihar/impact.json"
+    },
+    {
+     "piece": "dk-bt-sep24",
+     "quote": "In total, more than 13 crore votes have been deleted. This is not a small number.",
+     "speaker_note": "His press conference of 24 September 2026, as Business Today quotes it. Business Today adds, in its own words, that more than 13 crore names had then been struck off the drafts across 30 states and union territories.",
+     "timestamp": null,
+     "relies_on": "The Commission's draft-roll figures.",
+     "kind": "count from official data",
+     "check": "The number holds and has grown a little since: 13,39,03,307 across 31 states as of 13 October 2026. It counts names, and calling them votes or deletions goes beyond what it is: names left off the drafts, by reasons officers recorded, some since restored.",
+     "site_counts": "13,39,03,307 names left off the drafts in 31 states, 14.08 per 100 on the rolls before (data/india/states.json, total; as_of 2026-10-13).",
+     "site_stops": "A reason is what the officer wrote down, and nobody checked it.",
+     "site_files": "data/india/states.json"
+    },
+    {
+     "piece": "dk-bt-sep24",
+     "quote": "Pinarayi Vijayan would have won, but due to the deletion of votes in Kerala, he did not become the Chief Minister.",
+     "speaker_note": "As Business Today quotes him on 24 September 2026. Business Today adds that he gave no evidence that the deletions decided the Kerala outcome.",
+     "timestamp": null,
+     "relies_on": "The fall in Kerala's roll during the revision.",
+     "kind": "inference about effect on results",
+     "check": "The site's figures do not carry the claim that far. Kerala published no count of names left off. The roll fell by 23,68,590 from January 2025 to the draft, but rose again after it, and by the 2026 election the fall was 6,67,990, 2.40 per 100. That fall exceeded the winning margin in 38 of the 140 seats, 30 when taken at each seat's turnout. In Vijayan's own seat, Dharmadam, the roll at the election was larger than in January 2025, and the CPI(M) held it by 19,247. Whether the names left off would have changed which front formed the government cannot be read from the rolls.",
+     "site_counts": "Kerala: roll of January 2025 2,78,10,942, draft 2,54,42,352, roll at the 2026 election 2,71,42,952. Fall to the draft 23,68,590 (8.52 per 100), fall to the election roll 6,67,990 (2.40 per 100). The fall exceeded the margin in 38 of 140 seats, and in 30 at the seat's turnout. Seats won in 2026: INC 63, CPI(M) 26, IUML 22, CPI 8 and others (data/kerala/summary.json). Dharmadam: roll of January 2025 1,98,819, roll at the election 2,06,000, won by the CPI(M) by 19,247 (data/kerala/constituencies.json, ac 12).",
+     "site_stops": "Kerala's measure is the fall in the roll, which takes in ordinary changes and new voters, and is never called the names removed. Over the margin means large enough to decide a seat, never that it did.",
+     "site_files": "data/kerala/summary.json, data/kerala/constituencies.json"
+    }
+   ],
+   "strongest_points": [
+    "His count is right to the precision he gives: 13,39,03,307 names were left off the drafts, 14.08 per 100 on the rolls before.",
+    "The names left off are large against close seat margins. Spread evenly, they exceed the 2024 Lok Sabha margin in 373 of 516 seats in the 31 states, and they equal 21.8 per 100 of the votes those states cast in 2024."
+   ],
+   "overreach": [
+    "The 2024 election was held on the rolls before the revision, so the names left off in the SIR could not have decided it.",
+    "'Deleted' overstates what the 13 crore are: names left off the drafts by recorded reason, including the dead and duplicate entries, part of which came back on the final rolls.",
+    "A national vote-share gap is the wrong yardstick for a Lok Sabha result, which is decided seat by seat, and it is a share of votes set against a share of names on the roll.",
+    "'Setting' is a claim of intent the rolls cannot show. In Bihar, the one state where the site estimates an effect on seats, the estimate is 4 to 6 seats changing hands in both directions.",
+    "The Kerala claim goes further than the fall in the roll, which by election day was 2.40 per 100 and exceeded the margin in 38 of 140 seats."
+   ],
+   "not_verified": [
+    "His exact words and the language he spoke in. Every English and Hindi text found is PTI's copy or a translation of it, and the recordings' captions could not be read.",
+    "The 2024 vote shares behind '2 per cent'. PTI's 'around 43 per cent' and 'around 40.6 per cent' were not checked against the Commission's statistical report, and the site holds no national vote shares.",
+    "Recordings of the press conference not watched: the CJP's own (j2RMPaFQark, 43:51), NDTV (c7gj7CbUlE4, eHaRwkNFAaI), The Hindu (pzoJzWK560k), The Indian Express (h33KxukxEiI), Indian Express Hindi (naUgI5-mV4M), BBC News Hindi (SPevVT4RXF8), ETV Bharat (vOsHQUM9qSk), DWS News (sqqHlEJMG5Q), all on YouTube, 15 October 2026.",
+    "Business Today's reported-speech account of his 24 September claims about Bhabanipur, Kolathur and New Delhi, which are the paper's words and not his.",
+    "The CJP's own posts on X and Instagram were not opened."
+   ]
   }
  ]
 }

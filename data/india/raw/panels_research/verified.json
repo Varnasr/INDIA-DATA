@@ -573,5 +573,32 @@
   "claim_index": 4,
   "status": "confirmed",
   "note": "Verbatim, the first line of the description. It lists seven topics for eight questions. Kind 'framing' is right; the spoken answers were not read."
+ },
+ {
+  "person": "Abhijeet Dipke (Cockroach Janta Party)",
+  "claim_index": 0,
+  "status": "corrected",
+  "fix": {
+   "site_counts": "13,39,03,307 names left off the drafts in 31 states, of 95,08,13,771 on the rolls before: 14.08 per 100 (data/india/states.json, total.removed, total.per_100). By recorded reason, 2,79,69,558 dead (20.9%), 9,56,35,923 shifted, absent or other (71.5%), 1,01,48,459 duplicate (7.6%) (total.shares). In the 22 states with a final roll, 7,77,48,303 were left off of 65,67,36,949 (11.84 per 100); the net rise after the draft was 1,13,76,238, so the names left off less that rise came to 6,63,72,065 (10.11 per 100), and the rise made up at most 14.6% of the names left off (states.json, final.removed, final.net_after_draft, final.net_per_100, final.made_up_pct; recomputed from the 22 rows with electors_final). The 13,39,03,307 equal 21.8 per 100 votes cast in those 31 states in the 2024 Lok Sabha election, 61,45,74,272 votes (data/india/raw/adults_ls2024.csv, votes_2024; states.json, removed_pct_votes24)."
+  },
+  "note": "Quote verbatim in PTI's evening copy on ThePrint (3073103, datePublished 2026-10-15T20:46:59+05:30, slug PTI AO BM VBH SAP), em dash and 'percent' as printed; PTI's afternoon copy (3072727, 16:47 IST, PTI AO ZMN), ETV Bharat (17:14 IST, ETV Bharat English Team, ANI photo, Dailymotion xbnu1tm embedded) and National Herald (17:38 IST, NH Political Bureau) give the first two sentences only, ending 'Over 13 crore voters deleted.' PTI-Bhasha Hindi on Punjab Kesari (19:35:58 IST) matches the speaker_note word for word. The 43 and 40.6 per cent are PTI's own sentence ('got around 43 per cent of the votes. The INDIA bloc parties put together polled around 40.6 per cent'), not attributed to Dipke; the same copy also paraphrases him as saying 'the nearly 13 crore deletions accounted for almost 14 per cent of the electorate'. Business Today of 24 September has him calling the 2 per cent 'the NDA-opposition gap'. Vote shares, checked outside the site: Wikipedia's results table (Results of the 2024 Indian general election, compiled from the ECI's party-wise results) gives the NDA 28,26,68,733 votes, 43.80%, and INDIA 26,77,11,232, 41.48%, a gap of 2.32 points, with the BJP at 36.56% as PTI says; the Lokniti-CSDS post-poll survey in The Hindu (6 June 2024) put it at 43% to 40%. The ECI's own statistical report could not be reached from the sandbox. So '2 per cent' is about right on any count, and PTI's 40.6 is lower than Wikipedia's INDIA total because the alliance's membership is drawn differently. Recomputed: 31 states with a draft (Tripura has none), removed 133903307, electors_before 950813771, 14.0830 per 100; 22 final-roll states removed 77748303, before 656736949 (11.8386), votes_2024 in the 31 states 614574272 (21.79). Corrected site_counts: 6,63,72,065 is the sum of net_fall, which build_india.py computes as names left off less the net rise after the draft. It is not the fall from the roll before to the final roll, which is 65,67,36,949 less 59,04,30,293 = 6,63,06,656; the 65,409 between them is Bihar (June roll held as the rounded 7,89,00,000, so 65,382) and Punjab (27). Check is right as written."
+ },
+ {
+  "person": "Abhijeet Dipke (Cockroach Janta Party)",
+  "claim_index": 1,
+  "status": "confirmed",
+  "note": "Verbatim in PTI's evening copy, ETV Bharat and National Herald, each ending with a question mark; PTI's afternoon copy ends 'setting,” he asked.' PTI-Bhasha as in the speaker_note. The Bora and Ghosh lines in the speaker_note are verbatim in PTI's afternoon copy; they are public figures. PTI's lead ('accused the government of attempting to influence electoral outcomes through alleged voter deletions') is PTI's paraphrase. Site figures recomputed: the revision ordered 24 June 2025 (process.json timeline, two entries of that date); ls_close 115 under 50,000 and 232 under 1,00,000 of 542 contested, recomputed from data/india/raw/ls2024_pc_results.csv (543 rows, Surat unopposed); even spread over the margin in 373 of 516 seats, recomputed from states.json removed and the same file (517 seats in the 31 states less Surat); even_test Tamil Nadu 27 against 19, Bihar 32 against 32; Bihar comp_booth_all NDA 49.0, INDIA 37.8; booth_lower 4 flips (1 to the NDA, 3 to INDIA), booth_upper 6 (3 each way), out of an NDA-INDIA total of 228 seats, so no change in majority. 'Kind' inference about intent is right, and the check says nothing about anyone's intent beyond that the rolls cannot show it."
+ },
+ {
+  "person": "Abhijeet Dipke (Cockroach Janta Party)",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Verbatim in Business Today (Business Today Desk), datePublished 2026-09-24T15:54:17+05:30, headline as in the entry: 'Referring to the deletions, Dipke said, “In total, more than 13 crore votes have been deleted. This is not a small number.”' The paper's own sentence 'More than 13 crore names had been struck off draft electoral rolls across 30 states and Union territories under SIR' is as the speaker_note gives it. 13,39,03,307 and 14.08 per 100 recomputed; states.json as_of is 2026-10-13. The 2 per cent and 13-14% line is reported speech and is rightly not quoted."
+ },
+ {
+  "person": "Abhijeet Dipke (Cockroach Janta Party)",
+  "claim_index": 3,
+  "status": "confirmed",
+  "note": "Verbatim in Business Today of 24 September 2026, followed by the paper's 'He provided no evidence that voter deletions determined the Kerala outcome.' Kerala figures recomputed from data/kerala/summary.json: roll_2025 27810942, draft 25442352, election 27142952, fall_draft 2368590 (8.5168), fall 667990 (2.4019), over_margin 38, could_change 30 (fall times the seat's turnout, against the margin), seats INC 63, CPI(M) 26, IUML 22, CPI 8. Dharmadam (ac 12): roll_2025 198819, election 206000, CPI(M) over INC by 19,247. That he was the CPI(M) candidate in Dharmadam is not in the site's files; ECI's 2026 results page for AC 12 and the press (Scroll, India.com, ETV Bharat, May 2026) have Pinarayi Vijayan winning it by 19,247, which matches. One nuance: summary.json carries press_removed 24,08,503, the figure reported with the draft, so 'Kerala published no count of names left off' is true of the CEO's tables only; the page should keep saying 'published' rather than 'there is no count'."
  }
 ]
