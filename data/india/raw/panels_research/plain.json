@@ -14,7 +14,8 @@
   "yogi-adityanath",
   "mamata-banerjee",
   "reporters-collective-up-ceo",
-  "bjp"
+  "bjp",
+  "abhijeet-dipke"
  ],
  "kinds": {
   "count from official data": "A count from official figures",
@@ -1337,6 +1338,132 @@
    "further": [
     "The split is offered as an answer to whether eligible electors were left off. The reasons are what officers wrote down, and the largest group, shifted, absent or other, cannot show whether those electors had moved.",
     "The Bihar sentence gives the final roll of 7.42 crore and leaves out the fall from about 7.89 crore before the revision."
+   ]
+  },
+  "abhijeet-dipke": {
+   "name": "Abhijeet Dipke",
+   "role": "Founder of the Cockroach Janta Party, which has led protests in Mumbai and Delhi since 2 October 2026 calling for the Chief Election Commissioner to resign.",
+   "intro": "The quotations come from his press conference at the Press Club of India in New Delhi on 15 October 2026, held with AISA's Neha Bora the day before the party's march at Connaught Place, as PTI reported it, and from an earlier press conference on 24 September 2026 as Business Today reported it. The party's own recording is on YouTube. PTI's Hindi service rendered his word 'setting' as मिलीभगत (collusion), and which language he spoke in is not recorded.",
+   "claims": {
+    "0": {
+     "rests": "The Commission's counts of names left off the drafts, set against the national gap in vote share between the two alliances in 2024. In the same report PTI put the NDA at around 43 per cent of the 2024 vote and the INDIA bloc at around 40.6 per cent.",
+     "site": "Across the 31 states with a draft roll, 13,39,03,307 names were left off the drafts, 14.08 per 100 of the 95,08,13,771 on the rolls before. By the reason recorded beside each, 2,79,69,558 (20.9%) were entered as dead, 1,01,48,459 (7.6%) as duplicates and 9,56,35,923 (71.5%) as shifted, absent or other. His 14 per cent is right to the precision he gives. In the 22 states whose final rolls are out, 7,77,48,303 names were left off of 65,67,36,949 (11.84 per 100), and the net rise after the draft brought back at most 14.6% of them.",
+     "stops": "A reason is what the officer wrote down, and nobody checked it. The site holds no party vote shares, so it does not check his 2 per cent. The 2024 election was held on the rolls from before the revision, which was ordered on 24 June 2025, so the names left off had no part in the 2024 result.",
+     "uses": [
+      [
+       "data/india/states.json",
+       "133903307"
+      ],
+      [
+       "data/india/states.json",
+       "27969558"
+      ],
+      [
+       "data/india/states.json",
+       "10148459"
+      ],
+      [
+       "data/india/states.json",
+       "95635923"
+      ],
+      [
+       "data/india/states.json",
+       "14.083"
+      ],
+      [
+       "data/india/process.json",
+       "2025-06-24"
+      ]
+     ]
+    },
+    "1": {
+     "rests": "The size of the count against a national gap in vote share. He offers no other evidence of purpose.",
+     "site": "Elections are decided seat by seat. Spread evenly over each state's Lok Sabha seats, the names left off exceed the 2024 winning margin in 373 of 516 seats in those 31 states, and 115 of the 542 contested seats were won by fewer than 50,000 votes. The even spread is an assumption, and in Tamil Nadu it gives 27 seats over the margin against 19 counted seat by seat. In Bihar the names left off came more from booths that voted NDA in 2024 (49.0% against 37.8% INDIA), and the estimate there is that 4 to 6 seats change hands, in both directions.",
+     "stops": "The rolls record names and reasons. They cannot show why anything was done, and the site makes no claim about purpose.",
+     "uses": [
+      [
+       "data/india/margins.json",
+       "373"
+      ],
+      [
+       "data/india/margins.json",
+       "516"
+      ],
+      [
+       "data/india/margins.json",
+       "115"
+      ],
+      [
+       "data/india/margins.json",
+       "542"
+      ],
+      [
+       "data/bihar/impact.json",
+       "49.0"
+      ],
+      [
+       "data/bihar/impact.json",
+       "37.8"
+      ]
+     ]
+    },
+    "2": {
+     "rests": "The Commission's counts of names left off the drafts, as he gave them on 24 September 2026.",
+     "site": "Across the 31 states with a draft roll, 13,39,03,307 names were left off the drafts, 14.08 per 100 of the 95,08,13,771 on the rolls before. By the reason recorded beside each, 2,79,69,558 (20.9%) were entered as dead, 1,01,48,459 (7.6%) as duplicates and 9,56,35,923 (71.5%) as shifted, absent or other.",
+     "stops": "These are names left off the drafts, and some came back afterwards. Most were never votes cast, since the count includes the dead and duplicate entries and the roll holds people who do not vote.",
+     "uses": [
+      [
+       "data/india/states.json",
+       "133903307"
+      ],
+      [
+       "data/india/states.json",
+       "27969558"
+      ],
+      [
+       "data/india/states.json",
+       "10148459"
+      ]
+     ]
+    },
+    "3": {
+     "rests": "No figures are given in the report, which adds that he provided no evidence for the claim.",
+     "site": "Kerala's Chief Electoral Officer published no table of names left off. Measured as the fall in the roll from January 2025, the roll fell by 6,67,990 by the election (2.40 per 100), and that fall was larger than the winning margin in 38 of 140 seats, or 30 when taken at each seat's turnout. In Dharmadam, his own seat, the roll at the election was larger than in January 2025, 2,06,000 against 1,98,819, and the CPI(M) held the seat by 19,247.",
+     "stops": "A fall larger than a margin shows that it could have decided a seat, never that it did. The site does not model how those left off would have voted in Kerala.",
+     "uses": [
+      [
+       "data/kerala/summary.json",
+       "667990"
+      ],
+      [
+       "data/kerala/summary.json",
+       "2.40"
+      ],
+      [
+       "data/kerala/constituencies.json",
+       "19247"
+      ],
+      [
+       "data/kerala/constituencies.json",
+       "198819"
+      ],
+      [
+       "data/kerala/constituencies.json",
+       "206000"
+      ]
+     ]
+    }
+   },
+   "strongest": [
+    "His count is right. 13,39,03,307 names were left off the drafts, 14.08 per 100 on the rolls before.",
+    "The names left off are large against close seat margins, which is the strongest form of his point."
+   ],
+   "further": [
+    "The 2024 election came before the revision, so the names left off could not have shaped its margin. The comparison works as a warning about the next election.",
+    "The 13 crore are names left off the drafts by recorded reason, among them the dead and duplicate entries, and some came back on the final rolls. Calling them votes deleted goes further than the figures.",
+    "A national gap in vote share is a share of votes cast, and the names left off are a share of the roll. Seats are the measure that decides results, and the seat figures here show the names left off large enough to decide many seats, never that they did.",
+    "Setting is a claim about purpose, which the rolls cannot show. In Bihar, where the site has modelled the effect, it runs both ways.",
+    "The Kerala claim goes further than the fall in the roll. Dharmadam's roll grew, and the CPI(M) held the seat."
    ]
   }
  }
