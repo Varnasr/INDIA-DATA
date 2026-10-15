@@ -12,7 +12,9 @@
   "gyanesh-kumar",
   "amit-shah",
   "yogi-adityanath",
-  "mamata-banerjee"
+  "mamata-banerjee",
+  "reporters-collective-up-ceo",
+  "bjp"
  ],
  "kinds": {
   "count from official data": "A count from official figures",
@@ -1108,6 +1110,233 @@
     "Saying the SIR was run to capture the state is a claim about purpose, and nothing in the records shows why it was run.",
     "Her count of more than 110 deaths, and three to four a day, rests on no published list. The site's own list of reported deaths has two items from West Bengal.",
     "Saying the BJP wins Assam on fake votes is something no record the site holds can test."
+   ]
+  },
+  "reporters-collective-up-ceo": {
+   "name": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+   "role": "The Reporters' Collective is an investigative newsroom that has reported on the SIR in several states. Navdeep Rinwa is the Chief Electoral Officer of Uttar Pradesh, the official responsible for the state's electoral roll.",
+   "intro": "The Collective reported on 9 October 2026 that the Commission's software produced 85,854 objections to delete Uttar Pradesh electors with no reason given, and followed it on 14 October with the Chief Electoral Officer's answers. This panel sets the two reports beside his answers, as the Collective and IANS printed them, beside his February count, and beside the Commission's order of 9 October capping objections as the press reported it. The Chief Electoral Officer's video and his first post on X were not available to the site, so his words are given as those outlets printed them.",
+   "claims": {
+    "0": {
+     "rests": "The Collective's own scrape of the Form 7s shown on the Chief Electoral Officer's website. The scraped file is not published.",
+     "site": "Uttar Pradesh's draft of 6 January 2026 left off 2,88,74,067 of the 15,44,30,092 names on the roll before it. After the draft, 8,15,996 names were deleted, as the press reported the Chief Electoral Officer's figures, and 3,50,026 of them were people who did not answer a notice. The site holds 2,68,682 Form 7s filed from 6 January to 6 March 2026.",
+     "stops": "The site has no count of Form 7s after 6 March and none of forms filed by officers, so it cannot check the 85,854. How many of the 8,15,996 deletions went through a Form 7 has not been published.",
+     "uses": [
+      [
+       "data/uttarpradesh/summary.json",
+       "28874067"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "154430092"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "815996"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "350026"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "268682"
+      ]
+     ]
+    },
+    "1": {
+     "rests": "Interviews with four election officials whom the Collective does not name, and the pattern in its scraped forms. No document from the software is published.",
+     "site": "Notices went to 3.26 crore of the electors on the draft, 1.04 crore with no link to the old roll and 2.22 crore for discrepancies, as the Chief Electoral Officer told The Times of India. Of those deleted after the draft, 3,50,026 had not answered their notice. The Chief Electoral Officer's office has said that notices, hearings and orders came before every deletion, and it has not denied that the software produced the forms.",
+     "stops": "The site has no record of how ERONET works or of who signed which form.",
+     "uses": [
+      [
+       "data/uttarpradesh/analysis.json",
+       "32600000"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "10400000"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "22200000"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "350026"
+      ]
+     ]
+    },
+    "2": {
+     "rests": "The same scrape, read against the end of the claims and objections period. The report does not say which date it took as the deadline, and the likeliest is 6 March 2026.",
+     "site": "The site's count of Form 7s in Uttar Pradesh is 2,68,682, from 6 January to 6 March 2026. The final roll came on 10 April 2026 with 13,39,84,792 electors.",
+     "stops": "The site cannot say which Form 7s were filed late or what became of them.",
+     "uses": [
+      [
+       "data/uttarpradesh/summary.json",
+       "268682"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "133984792"
+      ]
+     ]
+    },
+    "5": {
+     "rests": "His own count of names that drew more than one Form 7, with no source given. The words are from his recorded video of 9 October 2026 as the Collective quotes them, and the video was not available to the site.",
+     "site": "His 13.39 crore is the final roll, 13,39,84,792 electors. The Collective sets his 4,700 against its finding of more than 200 attempts to delete names in bulk across the state, which were objections filed by individuals and are a separate matter from the 85,854 forms. In February he gave 4,336 deletions from objections filed by other people, which counts deletions where this counts names objected to.",
+     "stops": "The site has no count of names that drew more than one Form 7.",
+     "uses": [
+      [
+       "data/uttarpradesh/summary.json",
+       "133984792"
+      ]
+     ]
+    },
+    "6": {
+     "rests": "The office's account of its own procedure, with no figures. IANS reported it from Lucknow on Tuesday 13 October 2026. The Collective describes an earlier post on X, minutes after its report of 9 October, which used different words, and that post was not available to the site.",
+     "site": "The statement answers how the forms were described and gives no count of them. After the draft, 8,15,996 names were deleted, as the press reported the office's figures. Of these, 3,50,026 did not answer a notice, 3,28,960 were entered as shifted, 79,076 as multiple entries, 55,865 as dead and 2,069 as under age or not citizens.",
+     "stops": "The office has not published how many of those deletions went through a Form 7 and how many through a notice, so the site cannot say.",
+     "uses": [
+      [
+       "data/uttarpradesh/analysis.json",
+       "815996"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "350026"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "328960"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "79076"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "55865"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "2069"
+      ]
+     ]
+    },
+    "7": {
+     "rests": "His running count to 16 February 2026, eight weeks before the final roll, as The Times of India quotes him.",
+     "site": "The draft held 12,55,56,025 electors. By the final roll, 8,15,996 names had been deleted after the draft, as the press reported his office's figures.",
+     "stops": "The site has the end figure only as the press reported it, and nothing between February and April.",
+     "uses": [
+      [
+       "data/uttarpradesh/summary.json",
+       "125556025"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "815996"
+      ]
+     ]
+    },
+    "8": {
+     "rests": "PTI's account of the Commission's letter of 9 October 2026 to Chief Electoral Officers. News On AIR, Deccan Herald, Deccan Chronicle, DT Next and Outlook report the same limit. None of them prints the letter, and it was not available to the site.",
+     "site": "Every report of the order found gives 10 objections per elector during a claims period and five a month at other times. The Collective's report of 14 October says the order allowed no more than 30 objections a month, which matches no other report and cites no document.",
+     "stops": "The site holds no count of Form 7s per objector.",
+     "uses": []
+    }
+   },
+   "strongest": [
+    "The count comes from the Chief Electoral Officer's own published forms, with a stated denominator (85,854 of 87,127) and dates, so anyone with the same pages could repeat it.",
+    "The Chief Electoral Officer's office answered how the forms were described, and no report found has it disputing the number."
+   ],
+   "further": [
+    "The Collective writes that he confirmed its finding. That rests on what he did not say in the video, since it quotes no sentence in which he confirms the count.",
+    "The limit of 30 objections a month in the follow-up matches no other report of the Commission's order, all of which give 10 per elector during a claims period and five a month afterwards.",
+    "The account of how the software produced the forms rests on four officials the Collective does not name."
+   ],
+   "drop": {
+    "3": "It rests on religion guessed from names."
+   }
+  },
+  "bjp": {
+   "name": "The Bharatiya Janata Party",
+   "role": "India's governing party. Its account of the SIR figures here comes from two videos on its official YouTube channel, posted in October 2026.",
+   "intro": "Only the videos' titles and descriptions were available to the site. What is said in them and shown on screen was not, so the quotations are from the descriptions, and no speaker is named in either.",
+   "claims": {
+    "0": {
+     "rests": "The Commission's counts of names left off the drafts, by the reason recorded beside each.",
+     "site": "Across 31 states, 13,39,03,307 names were left off the drafts. Of these, 9,56,35,923 (71.4%) were entered as shifted, absent or other, 2,79,69,558 (20.9%) as dead and 1,01,48,459 (7.6%) as duplicates. The party's figures agree with these to the precision it gives.",
+     "stops": "A reason is what the officer wrote down, and nobody checked it. In Bihar, set against death records, the names entered as dead come to about 3.4 years of adult deaths at the right ages, but 52.0% of them are women against 43.4% of deaths.",
+     "uses": [
+      [
+       "data/india/states.json",
+       "133903307"
+      ],
+      [
+       "data/india/states.json",
+       "95635923"
+      ],
+      [
+       "data/india/states.json",
+       "27969558"
+      ],
+      [
+       "data/india/states.json",
+       "10148459"
+      ],
+      [
+       "data/bihar/tests.json",
+       "52.0"
+      ],
+      [
+       "data/bihar/tests.json",
+       "43.4"
+      ]
+     ]
+    },
+    "2": {
+     "rests": "The Commission's letter of 1 October 2026 to every Chief Electoral Officer.",
+     "site": "The letter orders booth officers to compare the roll from before the revision with the current one, visit those missing from it at home and help those found eligible fill in Form 6.",
+     "stops": "No figures from the drive have been published, and the site has none.",
+     "uses": [
+      [
+       "data/india/process.json",
+       "2026-10-01"
+      ]
+     ]
+    },
+    "3": {
+     "rests": "The Commission's stated purpose for the revision, and Bihar's final roll.",
+     "site": "Bihar's final roll of 30 September 2025 held 7,41,92,357 electors, which rounds to 7.42 crore. The Commission's total for June 2025 was 7,89,69,844, so the roll fell by 47,77,487 over the revision. 65,59,626 names were left off the draft and 3,66,742 deleted after it.",
+     "stops": "The sentence gives the end figure and leaves out the fall. The site counts names on the roll and cannot say who among those left off was eligible.",
+     "uses": [
+      [
+       "data/bihar/final.json",
+       "74192357"
+      ],
+      [
+       "data/bihar/final.json",
+       "78969844"
+      ],
+      [
+       "data/bihar/final.json",
+       "4777487"
+      ],
+      [
+       "data/bihar/final.json",
+       "366742"
+      ]
+     ]
+    }
+   },
+   "strongest": [
+    "Its split of the 13 crore by recorded reason is the Commission's own and agrees with the site's totals.",
+    "It is right that the 13 crore are names left off the drafts by recorded reason, and some were restored afterwards."
+   ],
+   "further": [
+    "The split is offered as an answer to whether eligible electors were left off. The reasons are what officers wrote down, and the largest group, shifted, absent or other, cannot show whether those electors had moved.",
+    "The Bihar sentence gives the final roll of 7.42 crore and leaves out the fall from about 7.89 crore before the revision."
    ]
   }
  }

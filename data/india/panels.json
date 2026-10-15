@@ -1,8 +1,8 @@
 {
  "checked": "2026-10-14",
  "counts": {
-  "people": 12,
-  "quotes": 59
+  "people": 14,
+  "quotes": 72
  },
  "people": [
   {
@@ -1216,7 +1216,271 @@
     "Her count of more than 110 deaths, and three to four a day, rests on no published list. The site's own list of reported deaths has two items from West Bengal.",
     "Saying the BJP wins Assam on fake votes is something no record the site holds can test."
    ]
+  },
+  {
+   "id": "reporters-collective-up-ceo",
+   "name": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+   "role": "The Reporters' Collective is an investigative newsroom that has reported on the SIR in several states. Navdeep Rinwa is the Chief Electoral Officer of Uttar Pradesh, the official responsible for the state's electoral roll.",
+   "intro": "The Collective reported on 9 October 2026 that the Commission's software produced 85,854 objections to delete Uttar Pradesh electors with no reason given, and followed it on 14 October with the Chief Electoral Officer's answers. This panel sets the two reports beside his answers, as the Collective and IANS printed them, beside his February count, and beside the Commission's order of 9 October capping objections as the press reported it. The Chief Electoral Officer's video and his first post on X were not available to the site, so his words are given as those outlets printed them.",
+   "note": "",
+   "pieces": [
+    {
+     "id": "rc-oct9",
+     "title": "In UP SIR, ECI Software Auto-generated 85,854 Forms to Delete Voters Without a Reason",
+     "title_en": "",
+     "outlet": "The Reporters' Collective (Sumedha Mittal, Ayushi Kar, Shubhangi Derhgawen)",
+     "date": "2026-10-09",
+     "url": "https://www.reporters-collective.in/trc/eci-software-auto-generated-forms-to-delete-without-reason",
+     "length": ""
+    },
+    {
+     "id": "rc-oct14",
+     "title": "UP CEO Admits ECI Auto-generated 85,000+ Voter Deletion Forms Without a Reason, Confirms Mass Deletion Attempts Against Muslims",
+     "title_en": "",
+     "outlet": "The Reporters' Collective (Sumedha Mittal, Ayushi Kar)",
+     "date": "2026-10-14",
+     "url": "https://www.reporters-collective.in/trc/up-ceo-admits-eci-auto-generated-voter-deletion-forms",
+     "length": ""
+    },
+    {
+     "id": "ceo-x",
+     "title": "85,854 फॉर्म-7 स्वतः तैयार कर मतदाताओं के नाम काटने का दावा भ्रामक: यूपी चुनाव आयोग",
+     "title_en": "Claim that names were cut by preparing 85,854 Form 7s automatically is misleading: UP election office",
+     "outlet": "Punjab Kesari (IANS)",
+     "date": "2026-10-13",
+     "url": "https://www.punjabkesari.com/india-news/85854-form-7-swatah-taiyar-kar-matdataon-ke-naam-kaatne-ka-daava-bhramak-up-chunav-aayog",
+     "length": ""
+    },
+    {
+     "id": "ceo-feb",
+     "title": "'No mass deletion as claimed': Only 4,336 names removed via 3rd party Form 7 in SIR 2026, says UP chief electoral officer",
+     "title_en": "",
+     "outlet": "The Times of India (Arvind Chauhan)",
+     "date": "2026-02-19",
+     "url": "https://timesofindia.indiatimes.com/city/lucknow/no-mass-deletion-as-claimed-only-4336-names-removed-via-3rd-party-form-7-in-sir-2026-says-up-chief-electoral-officer/articleshow/128539836.cms",
+     "length": ""
+    },
+    {
+     "id": "eci-cap",
+     "title": "To curb misuse, EC caps 10 objection forms per person seeking voter removal from electoral rolls",
+     "title_en": "",
+     "outlet": "ThePrint (PTI)",
+     "date": "2026-10-09",
+     "url": "https://theprint.in/india/to-curb-misuse-ec-caps-10-objection-forms-per-person-seeking-voter-removal-from-electoral-rolls/3067243/",
+     "length": ""
+    }
+   ],
+   "claims": [
+    {
+     "quote": "Our analysis of the data scraped from the ECI’s website shows that 85,854 (98.5 percent) of the 87,127 requests filed by EROs and AEROs have no reason mentioned for deletion.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "A count from official figures",
+     "piece": "rc-oct9",
+     "outlet": "",
+     "rests": "The Collective's own scrape of the Form 7s shown on the Chief Electoral Officer's website. The scraped file is not published.",
+     "site": "Uttar Pradesh's draft of 6 January 2026 left off 2,88,74,067 of the 15,44,30,092 names on the roll before it. After the draft, 8,15,996 names were deleted, as the press reported the Chief Electoral Officer's figures, and 3,50,026 of them were people who did not answer a notice. The site holds 2,68,682 Form 7s filed from 6 January to 6 March 2026.",
+     "stops": "The site has no count of Form 7s after 6 March and none of forms filed by officers, so it cannot check the 85,854. How many of the 8,15,996 deletions went through a Form 7 has not been published."
+    },
+    {
+     "quote": "But the officers did not fill the forms. The ECI’s own software, ERONET automatically generated these forms, when officials deleted voters during the SIR hearings. The auto-generated forms came loaded with the officers’ digital signatures and were sent up for approval by their seniors.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "A fact about how the revision was run",
+     "piece": "rc-oct9",
+     "outlet": "",
+     "rests": "Interviews with four election officials whom the Collective does not name, and the pattern in its scraped forms. No document from the software is published.",
+     "site": "Notices went to 3.26 crore of the electors on the draft, 1.04 crore with no link to the old roll and 2.22 crore for discrepancies, as the Chief Electoral Officer told The Times of India. Of those deleted after the draft, 3,50,026 had not answered their notice. The Chief Electoral Officer's office has said that notices, hearings and orders came before every deletion, and it has not denied that the software produced the forms.",
+     "stops": "The site has no record of how ERONET works or of who signed which form."
+    },
+    {
+     "quote": "In our investigation, we also found that a total of 1,10,476 voter deletion requests were submitted by individuals and accepted by the ECI after the legally mandated deadline.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "A count from official figures",
+     "piece": "rc-oct9",
+     "outlet": "",
+     "rests": "The same scrape, read against the end of the claims and objections period. The report does not say which date it took as the deadline, and the likeliest is 6 March 2026.",
+     "site": "The site's count of Form 7s in Uttar Pradesh is 2,68,682, from 6 January to 6 March 2026. The final roll came on 10 April 2026 with 13,39,84,792 electors.",
+     "stops": "The site cannot say which Form 7s were filed late or what became of them."
+    },
+    {
+     "quote": "Yet, in his video, Rinwa confirmed our finding that the ECI software had forced election officers in UP to sign 85,854 forms to delete voters without stating a reason.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "How the question is framed",
+     "piece": "rc-oct14",
+     "outlet": "",
+     "rests": "",
+     "site": "",
+     "stops": ""
+    },
+    {
+     "quote": "“The total number of names against which [bulk] deletion complaints were made through these Form 7s was only about 4,700. In Uttar Pradesh, which has a population in crores and where we have 13.39 crore [voters]. They found only 4,700 such names where there were multiple Form 7s,” said Rinwa.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "A count from official figures",
+     "piece": "rc-oct14",
+     "outlet": "",
+     "rests": "His own count of names that drew more than one Form 7, with no source given. The words are from his recorded video of 9 October 2026 as the Collective quotes them, and the video was not available to the site.",
+     "site": "His 13.39 crore is the final roll, 13,39,84,792 electors. The Collective sets his 4,700 against its finding of more than 200 attempts to delete names in bulk across the state, which were objections filed by individuals and are a separate matter from the 85,854 forms. In February he gave 4,336 deletions from objections filed by other people, which counts deletions where this counts names objected to.",
+     "stops": "The site has no count of names that drew more than one Form 7."
+    },
+    {
+     "quote": "यूपी एसआईआर में 85,854 फार्म-7 स्वतः बनाकर बिना कारण मतदाताओं के नाम हटाने का दावा भ्रामक है। संबंधित मामलों में नोटिस, सुनवाई, जांच और आदेश के बाद कार्रवाई हुई। 6 मार्च के बाद लंबित मामलों पर निर्णय भी नियमानुसार हुए। सही जानकारी के लिए आधिकारिक स्रोतों पर भरोसा करें।",
+     "lang": "hi",
+     "translation": "\"Claims that 85,854 Form-7 entries were auto-generated to delete UP voters without reason during SIR are misleading. Notices, hearings, scrutiny and recorded orders preceded action. Pending cases were decided after 6 March as per procedure.\" (IANS's English, The Hans India, 13 Oct 2026, which omits the last sentence, 'Rely on official sources for correct information'.)",
+     "when": "",
+     "kind": "A fact about how the revision was run",
+     "piece": "ceo-x",
+     "outlet": "",
+     "rests": "The office's account of its own procedure, with no figures. IANS reported it from Lucknow on Tuesday 13 October 2026. The Collective describes an earlier post on X, minutes after its report of 9 October, which used different words, and that post was not available to the site.",
+     "site": "The statement answers how the forms were described and gives no count of them. After the draft, 8,15,996 names were deleted, as the press reported the office's figures. Of these, 3,50,026 did not answer a notice, 3,28,960 were entered as shifted, 79,076 as multiple entries, 55,865 as dead and 2,069 as under age or not citizens.",
+     "stops": "The office has not published how many of those deletions went through a Form 7 and how many through a notice, so the site cannot say."
+    },
+    {
+     "quote": "“Against a total of 12.55 crore voters during the claims and objections period (Jan 6–Feb 16), only 23,935 names have been deleted so far,” he said.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "A count from official figures",
+     "piece": "ceo-feb",
+     "outlet": "",
+     "rests": "His running count to 16 February 2026, eight weeks before the final roll, as The Times of India quotes him.",
+     "site": "The draft held 12,55,56,025 electors. By the final roll, 8,15,996 names had been deleted after the draft, as the press reported his office's figures.",
+     "stops": "The site has the end figure only as the press reported it, and nothing between February and April."
+    },
+    {
+     "quote": "During the special period designated for filing claims and objections – typically known as the Summary Revision period – an individual voter is allowed to submit a maximum of 10 Form 7 applications.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "A fact about how the revision was run",
+     "piece": "eci-cap",
+     "outlet": "",
+     "rests": "PTI's account of the Commission's letter of 9 October 2026 to Chief Electoral Officers. News On AIR, Deccan Herald, Deccan Chronicle, DT Next and Outlook report the same limit. None of them prints the letter, and it was not available to the site.",
+     "site": "Every report of the order found gives 10 objections per elector during a claims period and five a month at other times. The Collective's report of 14 October says the order allowed no more than 30 objections a month, which matches no other report and cites no document.",
+     "stops": "The site holds no count of Form 7s per objector."
+    }
+   ],
+   "strongest": [
+    "The count comes from the Chief Electoral Officer's own published forms, with a stated denominator (85,854 of 87,127) and dates, so anyone with the same pages could repeat it.",
+    "The Chief Electoral Officer's office answered how the forms were described, and no report found has it disputing the number."
+   ],
+   "further": [
+    "The Collective writes that he confirmed its finding. That rests on what he did not say in the video, since it quotes no sentence in which he confirms the count.",
+    "The limit of 30 objections a month in the follow-up matches no other report of the Commission's order, all of which give 10 per elector during a claims period and five a month afterwards.",
+    "The account of how the software produced the forms rests on four officials the Collective does not name."
+   ]
+  },
+  {
+   "id": "bjp",
+   "name": "The Bharatiya Janata Party",
+   "role": "India's governing party. Its account of the SIR figures here comes from two videos on its official YouTube channel, posted in October 2026.",
+   "intro": "Only the videos' titles and descriptions were available to the site. What is said in them and shown on screen was not, so the quotations are from the descriptions, and no speaker is named in either.",
+   "note": "",
+   "pieces": [
+    {
+     "id": "bjp-8q",
+     "title": "SIR: 8 Questions, 8 Clear Answers | Election Facts | BJP",
+     "title_en": "",
+     "outlet": "Bharatiya Janata Party (YouTube)",
+     "date": "2026-10-04",
+     "url": "https://www.youtube.com/watch?v=1ZUF6kwLV7M",
+     "length": ""
+    },
+    {
+     "id": "bjp-13cr",
+     "title": "“13 Crore Voters Deleted?”| The Real SIR Numbers Explained | #SIR | #BJP",
+     "title_en": "",
+     "outlet": "Bharatiya Janata Party (YouTube Shorts)",
+     "date": "2026-10-06",
+     "url": "https://www.youtube.com/shorts/YIUQjAucz1U",
+     "length": ""
+    }
+   ],
+   "claims": [
+    {
+     "quote": "9.5 Crore+ (71%) — Absent, shifted or other categories\n2.7 Crore+ (20%) — Deceased entries\n1 Crore+ (7.6%) — Multiple/duplicate entries",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "A count from official figures",
+     "piece": "bjp-13cr",
+     "outlet": "",
+     "rests": "The Commission's counts of names left off the drafts, by the reason recorded beside each.",
+     "site": "Across 31 states, 13,39,03,307 names were left off the drafts. Of these, 9,56,35,923 (71.4%) were entered as shifted, absent or other, 2,79,69,558 (20.9%) as dead and 1,01,48,459 (7.6%) as duplicates. The party's figures agree with these to the precision it gives.",
+     "stops": "A reason is what the officer wrote down, and nobody checked it. In Bihar, set against death records, the names entered as dead come to about 3.4 years of adult deaths at the right ages, but 52.0% of them are women against 43.4% of deaths."
+    },
+    {
+     "quote": "Presenting the entire figure simply as “13 crore genuine voters deleted” does not reflect the category-wise breakup of the draft electoral rolls.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "How the question is framed",
+     "piece": "bjp-13cr",
+     "outlet": "",
+     "rests": "",
+     "site": "",
+     "stops": ""
+    },
+    {
+     "quote": "The Election Commission has also ordered a special drive to identify and enrol eligible voters who may have been left out during SIR.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "A fact about how the revision was run",
+     "piece": "bjp-13cr",
+     "outlet": "",
+     "rests": "The Commission's letter of 1 October 2026 to every Chief Electoral Officer.",
+     "site": "The letter orders booth officers to compare the roll from before the revision with the current one, visit those missing from it at home and help those found eligible fill in Form 6.",
+     "stops": "No figures from the drive have been published, and the site has none."
+    },
+    {
+     "quote": "The Election Commission’s published material states that SIR is intended to ensure that eligible voters are included while ineligible entries are removed, with mechanisms for claims, objections and appeals. In Bihar’s 2025 SIR, the final roll included about 7.42 crore electors, after additions and deletions during the revision process.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "A count from official figures",
+     "piece": "bjp-8q",
+     "outlet": "",
+     "rests": "The Commission's stated purpose for the revision, and Bihar's final roll.",
+     "site": "Bihar's final roll of 30 September 2025 held 7,41,92,357 electors, which rounds to 7.42 crore. The Commission's total for June 2025 was 7,89,69,844, so the roll fell by 47,77,487 over the revision. 65,59,626 names were left off the draft and 3,66,742 deleted after it.",
+     "stops": "The sentence gives the end figure and leaves out the fall. The site counts names on the roll and cannot say who among those left off was eligible."
+    },
+    {
+     "quote": "From the alleged removal of 13 crore voters to questions around Form 6, ECINET, Gen Z voters, the role of Election Commissioners, Vote Chori and AI — this video examines eight major questions surrounding the Special Intensive Revision (SIR) and the electoral-roll process.",
+     "lang": "en",
+     "translation": "",
+     "when": "",
+     "kind": "How the question is framed",
+     "piece": "bjp-8q",
+     "outlet": "",
+     "rests": "",
+     "site": "",
+     "stops": ""
+    }
+   ],
+   "strongest": [
+    "Its split of the 13 crore by recorded reason is the Commission's own and agrees with the site's totals.",
+    "It is right that the 13 crore are names left off the drafts by recorded reason, and some were restored afterwards."
+   ],
+   "further": [
+    "The split is offered as an answer to whether eligible electors were left off. The reasons are what officers wrote down, and the largest group, shifted, absent or other, cannot show whether those electors had moved.",
+    "The Bihar sentence gives the final roll of 7.42 crore and leaves out the fall from about 7.89 crore before the revision."
+   ]
   }
  ],
- "dropped": []
+ "dropped": [
+  {
+   "person": "The Reporters' Collective and the Chief Electoral Officer of Uttar Pradesh",
+   "quote": "In Tarabganj and Pilibhit assembly constituencies, 90 percent of the deletion requests filed were against Muslims.",
+   "why": "It rests on religion guessed from names."
+  }
+ ]
 }
