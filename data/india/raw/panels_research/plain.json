@@ -15,7 +15,8 @@
   "mamata-banerjee",
   "reporters-collective-up-ceo",
   "bjp",
-  "abhijeet-dipke"
+  "abhijeet-dipke",
+  "s-y-quraishi"
  ],
  "kinds": {
   "count from official data": "A count from official figures",
@@ -1464,6 +1465,55 @@
     "A national gap in vote share is a share of votes cast, and the names left off are a share of the roll. Seats are the measure that decides results, and the seat figures here show the names left off large enough to decide many seats, never that they did.",
     "Setting is a claim about purpose, which the rolls cannot show. In Bihar, where the site has modelled the effect, it runs both ways.",
     "The Kerala claim goes further than the fall in the roll. Dharmadam's roll grew, and the CPI(M) held the seat."
+   ]
+  },
+  "s-y-quraishi": {
+   "name": "S.Y. Quraishi",
+   "role": "Chief Election Commissioner of India from July 2010 to June 2012.",
+   "intro": "The quotations come from one post of his on X, of 2 October 2026, about the Commission's letter of 1 October that sends booth level officers to help people no longer on the roll apply through Form 6. Free Press Journal reported the post the same day, and Newslaundry put the point to the Commission on 5 October.",
+   "claims": {
+    "0": {
+     "rests": "The 2022 amendment to the Registration of Electors Rules, 1960 (S.O. 2802(E) of 17 June 2022), which titled Form 6 “Application Form for New Voters” and made rule 13(1) speak of a claim “as new elector”.",
+     "site": "He is right that the Rules and the form are written for new electors. No document read says a person whose name was deleted or left off may not file it. Section 23(1) of the Representation of the People Act, 1950 lets any person whose name is not on the roll apply, Form 6 is the only form for that, and the Commission's Manual on Electoral Rolls of March 2023 says a person no longer on the roll has to apply again through Form 6. A Commission official told Newslaundry there is no other route. Across the 31 states with a draft roll, 13,39,03,307 names were left off the drafts, and Form 6 is the way back for all of them who were not restored by an appeal.",
+     "stops": "The site does not count how many people filed Form 6 after the revision.",
+     "uses": [
+      [
+       "data/india/states.json",
+       "133903307"
+      ]
+     ]
+    },
+    "1": {
+     "rests": "Item (iii) of the Form 6 declaration, “I am applying for inclusion in Electoral Roll for the first time”, which the form gives no way to strike out, read with section 31 of the 1950 Act.",
+     "site": "The form supports him on one line. A person who was on a roll before cannot truthfully say they are applying for the first time, and the Commission has published nothing on how such a person should answer it. Section 31 punishes only a statement the person knows or believes to be false, or does not believe to be true, and its penalty is up to one year in prison, a fine or both. No court ruling or prosecution for signing that line to get back on the roll has been found.",
+     "stops": "Whether anyone committed an offence is for a court. The site can set out the text of the form and the Act and nothing further.",
+     "uses": [
+      [
+       "data/india/process.json",
+       "2026-10-01"
+      ]
+     ]
+    },
+    "2": {
+     "rests": "The Commission's letter of 1 October 2026, which he calls a press note. It tells booth level officers to visit people who were on the roll before the revision and are not on it now, and to help them enrol through Form 6 where they are eligible.",
+     "site": "The letter does direct officers to help people file Form 6, and the direction is older than the revision. The Commission's Manual, from instructions of 2021, already told officers that a person whose name was wrongly deleted could submit a Form 6. The Commission's letter and its officers' role are set out on the process page.",
+     "stops": "Abetment needs an offence, and no document shows one was committed. The site makes no claim about anyone's purpose.",
+     "uses": [
+      [
+       "data/india/process.json",
+       "2026-10-01"
+      ]
+     ]
+    }
+   },
+   "strongest": [
+    "The form's own wording supports him. Since 2022 Form 6 is titled for new voters, and its declaration asks every applicant to say they are applying for the first time, with no way to strike the line out.",
+    "The Commission has published no guidance on how a person who was on the roll before should answer that line, while sending its officers to ask such people to fill the form."
+   ],
+   "further": [
+    "Section 23(1) of the 1950 Act lets anyone not on the roll apply, and Form 6 is the only form for it, so a deleted elector is not barred from filing it.",
+    "Section 31 needs a statement the person knows or believes to be false. Saying all who filled the form committed an offence goes further than the Act, and no court has ruled on it.",
+    "Calling officials abettors needs an offence to abet, which no document shows."
    ]
   }
  }
