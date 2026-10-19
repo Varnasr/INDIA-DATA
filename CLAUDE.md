@@ -1,5 +1,7 @@
 # INDIA-DATA
 
+Shared engineering standard: @.claude/engineering-standards.md. It applies to all work in this repository. This file adds what is specific to the project, and wins where the two disagree.
+
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
 Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi, Maharashtra, Gujarat and Uttarakhand (2026), Assam's Special Revision (2025-26), and every other state and union territory in the revision on one shared page.  Static HTML, Chart.js from cdnjs, one
