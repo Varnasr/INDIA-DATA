@@ -24,6 +24,8 @@ Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.js
     if (pub) { st = 'Final roll published'; cls = 'done'; }
     else if (rp && s.removed && rp.final >= asof) { st = 'Draft published, final roll reported for ' + SIR.date(rp.final); cls = 'now'; }
     else if (m.final && m.final < asof) { st = 'Final roll was due ' + SIR.date(m.final) + ', not yet found'; cls = 'late'; }
+    // a draft date reported after the order's (Tripura) replaces it for a state with no draft
+    else if (!s.removed && REP[sc.state] && REP[sc.state].draft && REP[sc.state].draft >= asof) { st = 'No draft roll yet, draft reported for ' + SIR.date(REP[sc.state].draft) + ' (press)'; cls = 'wait'; }
     else if (!s.removed && m.draft && m.draft < asof) { st = 'Draft roll was due ' + SIR.date(m.draft) + ', not yet found'; cls = 'late'; }
     // no draft yet: the order's own dates for such a state (Tripura) were not
     // kept, so no stage is read from them
