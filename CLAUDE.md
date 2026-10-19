@@ -940,7 +940,7 @@ where both rolls were published by sex. Jammu and Kashmir and Ladakh were not
 in the order and the page says so. It is English only.
 
 **Constituencies** (`india/constituencies/`) opens with a finder over every
-constituency with a figure anywhere on the site, in nine places, linked from
+constituency with a figure anywhere on the site, in 14 places, linked from
 every page by the floating "Find your constituency" button.
 `build_ac_change.py` writes `data/india/ac_finder.json` from `FINDER`: each
 place's lead count and its own measure (names removed, names left off, fall
@@ -958,8 +958,8 @@ added across states, and only Uttarakhand has gross additions and deletions by
 constituency. Everywhere else the change from the draft is net, counts new
 voters too, and is never called names restored. English only.
 
-**A page for every constituency** (`<state>/seat/<n>/`, 1,721 of them) in
-the nine states with constituency tables: Tamil Nadu, West Bengal, Kerala,
+**A page for every constituency** (`<state>/seat/<n>/`, 2,114 of them) in
+the 13 states with constituency tables (Assam, Meghalaya, Manipur and Odisha through the shared page and their own builds, and these nine): Tamil Nadu, West Bengal, Kerala,
 Delhi, Uttarakhand, Gujarat (press images of the CEO's tables), Rajasthan (the
 change in the roll since 2023), Maharashtra and Bihar (both phases, with a link to the
 seat's booths in the explorer). `scripts/make_seat_pages.py` writes a
