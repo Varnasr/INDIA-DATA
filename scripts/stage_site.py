@@ -25,7 +25,7 @@ PAGES = sorted(d for d in os.listdir(os.path.join(ROOT, 'site', 'pages'))
                if os.path.isdir(os.path.join(ROOT, 'site', 'pages', d)))
 PUBLIC_DIRS = set(PAGES) | {'assets', 'data', 'downloads', 'fonts', 'reports'}
 ROOT_FILES = {'index.html', '404.html', '_redirects', 'manifest.webmanifest', 'robots.txt', 'sitemap.xml', 'sw.js'}
-PRIVATE = {'archive', 'scripts', 'site', 'supabase', 'i18n', 'netlify', '_site', '.git', '.github', '.githooks',
+PRIVATE = {'archive', 'scripts', 'site', 'supabase', 'i18n', 'netlify', '_site', '.git', '.github', '.githooks', '.claude',
            'README.md', 'CLAUDE.md', 'CITATION.cff', 'LICENSE', 'netlify.toml', '.editorconfig', '.gitattributes',
            '.gitignore', '.gitmessage', '.netlify', '__pycache__', 'node_modules'}
 SKIP_EXT = ('.md', '.py', '.mjs', '.sh', '.pyc')

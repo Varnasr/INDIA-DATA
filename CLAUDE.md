@@ -1,5 +1,7 @@
 # INDIA-DATA
 
+Shared engineering standard: @.claude/engineering-standards.md. It applies to all work in this repository. This file adds what is specific to the project, and wins where the two disagree.
+
 The SIR analyses hub at offtheroll.in: All India (the reasons for
 removal, state by state), Bihar (2025), five Old City constituencies of
 Hyderabad (2026), Tamil Nadu, Karnataka, West Bengal, Kerala, Rajasthan, Uttar Pradesh, Delhi, Maharashtra, Gujarat and Uttarakhand (2026), Assam's Special Revision (2025-26), and every other state and union territory in the revision on one shared page.  Static HTML, Chart.js from cdnjs, one
@@ -1813,8 +1815,8 @@ per slot, not the slot's length.
   Gather a day's work on the branch and merge it once, or twice at most.
   Deploy previews cost nothing. Auto-publishing on this site is now locked: a
   merge builds but does not go live, and `tools/publish-locked.py` in the
-  Democracy-by-Design repository publishes the newest build at 07:47 and
-  19:47 IST (its "Publish locked sites" workflow, run by hand with
+  Democracy-by-Design repository publishes the newest build once a day at
+  20:00 IST (its "Publish locked sites" workflow, run by hand with
   `forindia`, publishes at once). A build that is never published costs
   nothing.
 - **The Sabar Institute link.** Every method page ends with "Analysis of the
