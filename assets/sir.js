@@ -15,6 +15,7 @@
       'draft-due': L('Figures as of {d}, when the draft roll was published. The final roll is due on {n}.', v),
       'draft-past': L('Figures as of {d}, when the draft roll was published. The final roll was due on {n}, and we have not found it published.', v),
       'latest-due': L('Figures as of {d}, a roll published after claims had closed, while notices were being heard. The final roll is due on {n}.', v),
+      'latest-past': L('Figures as of {d}, a roll published after claims had closed, while notices were being heard. The final roll was due on {n}, and we have not found it published.', v),
       'nodraft': L('No draft roll has been published yet. It is due on {n}.', v)
     }[p.getAttribute('data-k')];
     if (t) p.textContent = t;
