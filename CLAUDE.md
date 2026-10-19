@@ -1815,8 +1815,8 @@ per slot, not the slot's length.
   Gather a day's work on the branch and merge it once, or twice at most.
   Deploy previews cost nothing. Auto-publishing on this site is now locked: a
   merge builds but does not go live, and `tools/publish-locked.py` in the
-  Democracy-by-Design repository publishes the newest build at 07:47 and
-  19:47 IST (its "Publish locked sites" workflow, run by hand with
+  Democracy-by-Design repository publishes the newest build once a day at
+  20:00 IST (its "Publish locked sites" workflow, run by hand with
   `forindia`, publishes at once). A build that is never published costs
   nothing.
 - **The Sabar Institute link.** Every method page ends with "Analysis of the
