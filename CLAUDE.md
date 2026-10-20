@@ -1596,8 +1596,10 @@ check fails if any JSON under `data/bihar` carries an EPIC-like field.
 
   The same page carries **panels on what commentators say** (Prannoy Roy,
   The Indian Express, Ravish Kumar, Yogendra Yadav, Debraj Ray, Newslaundry,
-  Lokniti-CSDS), each quotation set beside the site's own figures and where
-  they stop. `data/india/raw/panels_research/` holds `claims.json` (the
+  Lokniti-CSDS and more), each quotation set beside the site's own figures and where
+  they stop. The panels run newest first, by the date of the latest piece
+  each quotes (the sort is in `build_panels.py`); `order` in `plain.json`
+  only breaks ties. `data/india/raw/panels_research/` holds `claims.json` (the
   quotations, verbatim, with the first reader's notes), `verified.json` (a
   second reading of every quotation) and `plain.json` (the site's own words
   around each one, its role line, introduction, strongest points and
