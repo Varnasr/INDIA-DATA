@@ -1,0 +1,10 @@
+[
+ {
+  "url": "https://www.hindustantimes.com/india-news/audit-finds-bengal-specific-access-curbs-in-ecinet-code-101792457867313.html",
+  "status": "corrected",
+  "note": "Opened with curl on 20 October 2026 (full articleBody in the page's JSON-LD, free to read). Title exact against the h1 and og:title. Byline Himanshi Dahiya; datePublished 2026-10-20T07:15:03+05:30, so 2026-10-20 is right. Both quotations verbatim with the paper's curly apostrophes, checked by string match against the body. Group 'Investigations' and type fit. One correction to 'shows': 'in West Bengal alone' stated as fact what the article gives only as the audit's finding (no such exclusion found in the code for any other state), so 'shows' now says the review found no such rule elsewhere, and 'excluding' became 'can bar', the article's word. The rest is in the article: front-end code served before login only, server-side enforcement not visible, whether the feature was used or when it was introduced not ascertained, HT could not verify, ECI did not respond to a questionnaire. The reviewer is given by role. The article's West Bengal totals are not carried. Passes the writing rules.",
+  "fix": {
+   "shows": "Reports a review of ECINET's publicly served code by Saurav Rajput, a data scientist at the civic-tech initiative Charchagram, which found a rule that can bar registration officers in West Bengal from the page that shows each enumeration form with its documents and from the notice-and-hearing dashboard, and found no such rule for any other state. The review read only the code a browser receives before login, so it cannot say whether the rule was used or enforced on the server, and the paper says it could not verify the review. The Commission did not answer the paper's questions."
+  }
+ }
+]
