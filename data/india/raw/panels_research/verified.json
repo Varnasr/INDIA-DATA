@@ -673,5 +673,119 @@
   "claim_index": 6,
   "status": "confirmed",
   "note": "Re-read on 19 October 2026: X's syndication endpoint for id 2110958206386377192 (created_at 2026-10-16T04:57:10Z, isEdited false, edit_tweet_ids holding only this id, screen_name PChidambaram_IN, text cut at 279 characters) and api.fxtwitter.com for the same id (full text, 617 characters, created_at Fri Oct 16 04:57:10 +0000 2026). Last paragraph verbatim. The News Mill quotes it with 'Mr.'. Siasat (PTI) calls the summary revision annual and says it will have no house-to-house BLO visits. No cost figure was looked for. Kind 'framing' is right."
+ },
+ {
+  "person": "Surjit S. Bhalla",
+  "claim_index": 0,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD of the Express page (headline 'Surjit Bhalla: An entitled generation and an Opposition that protests too much', datePublished 2026-10-16T17:08:58+05:30, dateModified 2026-10-17T07:17:20+05:30, isAccessibleForFree false, byline 'Bhalla is chairperson of the Technical Expert Group for the first official Household Income Survey of India. Views are personal'). Quotation found verbatim by string match against articleBody, curly apostrophes included. Recomputed from lok_sabha_electors.json: 2024 electors 97,97,51,847 against UN 18+ 1,01,76,59,624, 96.3 per 100, gap 3.79 crore; 8.5 per cent of adults less that gap is 4.86 crore (4.8 per 100). states.json nine states before 58,60,69,594 against 60,12,56,000 (97.47), 19 states 93,92,60,959 against 95,50,92,000 (98.3), Tamil Nadu 106.5, Kerala 100.4. terms.json rpa-s23 and rer-r25-2 and process.json 2025-06-24 as cited. plain.json edited: 'the 7.5 per cent' (a figure from the Substack, not in this quotation) became 'his 73 million'."
+ },
+ {
+  "person": "Surjit S. Bhalla",
+  "claim_index": 1,
+  "status": "corrected",
+  "fix": {
+   "check": "His 528 million (527.8 in the Substack's Table 5) is the site's nine final rolls, 52,45,53,415, with West Bengal counted at 67.7 million where the Chief Electoral Officer's final roll of 28 February 2026 is 6,44,52,609: 524.55 - 64.45 + 67.7 = 527.80. His 67.7 million, which Table 5 calls 'West Bengal after adjudication', matches the final roll plus the 32,68,119 found eligible (6,77,20,728). His clean roll does not start from the site's adults. Table 5 gives his own adults for the nine states, 590.4 million at 1 January 2026 (Bihar at 1 July 2025), Technical Group projections scaled to his national 1,008 million, against the site's 60,12,56,000. His 535.1 million is 90.6 per cent of his adults (9.4 per cent not registering). With a flat 8.5 per cent for every state, the nine final rolls fall short by about 1.25 crore net on his adults and his 527.8, and by about 2.56 crore net on the site's adults with the CEO's final roll for West Bengal (2.18 crore with West Bengal on the election roll, 2.88 crore counting only the states that fall short). So the step from 2.56 crore to his 73 lakh comes from three choices: his lower count of adults (with West Bengal after adjudication), state-specific young registration, and netting the surplus states (on his adults Bihar, Kerala, Tamil Nadu and Rajasthan) against the rest. He explains the netting by migrant workers registered at home, which the site cannot test."
+  },
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD of the Express page (headline 'Surjit Bhalla: An entitled generation and an Opposition that protests too much', datePublished 2026-10-16T17:08:58+05:30, dateModified 2026-10-17T07:17:20+05:30, isAccessibleForFree false, byline 'Bhalla is chairperson of the Technical Expert Group for the first official Household Income Survey of India. Views are personal'). Quotation found verbatim by string match against articleBody, curly apostrophes included. The first reading's check divided his 535.1 million clean roll by the site's 60,12,56,000 adults and read the result (89.0 per cent, 11.0 per cent not registering) as his implied non-registration. His Table 5, read from the Substack's images, puts the nine states' adults at 590.4 million, so his clean roll is 90.6 per cent of his own adults. Recomputed flat 8.5 per cent per state: on his Table 5 adults and finals, net 12.5 million, positive states only 17.8; on site adults_2026 and CEO finals 25.6 and 28.8 (22.3 with WB at 6,77,20,728, 21.8 on the election roll). Check corrected, and plain.json 'site' for this claim and 'further' item 0 rewritten to name the lower count of adults as one of his choices and to give both flat-rate figures, 1.25 crore on his adults and 2.6 crore on the site's."
+ },
+ {
+  "person": "Surjit S. Bhalla",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: Substack API (title 'Much Ado About (Almost) Nothing', post_date 2026-10-17T13:21:28Z, audience everyone), body_html read in full, and the 14 table images in it downloaded and read, including Table 3 (young registered, 2024: 293.7 million aged 18 to 29, 73.0 million not registered, 7.5 per cent of 979 million adults) and Table 5 (final rolls against a clean roll, by state: adults 590.4 million in all, scaled to his national 1,008 million, adults at 1 January 2026 and Bihar at 1 July 2025, clean roll 535.1, final 527.8, West Bengal 67.7 'after adjudication'). Quotation verbatim by string match. From the opening summary ('The numbers in brief'). states.json total: 31 states, removed 13,39,03,307, dead 2,79,69,558, duplicate 1,01,48,459; nine states 7,19,68,121. His section 'Why count again' attributes the 133.7 million to the ECI and his sources list Deccan Herald (draft removals, 30 September 2026), so 'as Deccan Herald reported it' stands. 133.7 / 7 = 19.1."
+ },
+ {
+  "person": "Surjit S. Bhalla",
+  "claim_index": 3,
+  "status": "corrected",
+  "fix": {
+   "check": "On the site's figures Uttar Pradesh's final roll of 10 April 2026 is 13,39,84,792 against 16,16,85,000 projected adults, 82.9 per cent. His Table 5 puts Uttar Pradesh's adults at 159.0 million (Technical Group scaled to his national total), so his final roll is 84 per cent of his adults and his clean roll 135.3 million, 85.1 per cent, 1.3 to 1.4 million above the final roll (Table 5 prints 1.4). The same 85 per cent of the site's adults is 13,74,32,250, 34.5 lakh above the final roll, so the difference from his 14 lakh is the count of adults. At his national 8.5 per cent of the site's adults the clean roll is 14,79,41,775 and the final roll is 1.40 crore short of it, which is Drèze and Yadav's 14 million (1.15 crore on his own 159.0 million). Before the revision Uttar Pradesh's roll held 15,44,30,092 names, 95.5 per cent of projected adults. For both his 60 per cent and that roll to be right, about 1.70 crore (on the site's adults) to 1.91 crore (on his) of the older names would have had to be the dead, duplicates or people who had moved. The draft-stage entries give 46,23,796 dead and 25,47,207 enrolled more than once, 72 lakh together, with 2,17,03,064 shifted, absent or other. The 40 per cent unregistered that Drèze and Yadav cite is the same figure seen from the other side."
+  },
+  "note": "Re-read on 20 October 2026: Substack API (title 'Much Ado About (Almost) Nothing', post_date 2026-10-17T13:21:28Z, audience everyone), body_html read in full, and the 14 table images in it downloaded and read, including Table 3 (young registered, 2024: 293.7 million aged 18 to 29, 73.0 million not registered, 7.5 per cent of 979 million adults) and Table 5 (final rolls against a clean roll, by state: adults 590.4 million in all, scaled to his national 1,008 million, adults at 1 January 2026 and Bihar at 1 July 2025, clean roll 535.1, final 527.8, West Bengal 67.7 'after adjudication'). Quotation verbatim by string match. Section 7 ('Bihar: mostly explained') carries the Uttar Pradesh paragraph. Table 5 row: Uttar Pradesh 159.0, 60, 135.3, 134.0, 1.4. The first reading set his 85 per cent against the site's adults and said 'he says 84 per cent, on adults at the roll's qualifying date' without noting that his adults are 2.7 million lower. Check corrected, and plain.json 'site' rewritten to give his own count (15.9 crore, clean roll 13.53 crore, 14 lakh as he says) beside the site's (34 lakh), and the 1.7 crore as 1.7 to 1.9 crore on the two counts. states.json Uttar Pradesh: before 15,44,30,092, removed 2,88,74,067, dead 46,23,796, duplicate 25,47,207, shifted, absent or other 2,17,03,064, final 13,39,84,792 on 2026-04-10, adults 16,16,85,000."
+ },
+ {
+  "person": "Surjit S. Bhalla",
+  "claim_index": 4,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD of the Express page (headline 'Surjit Bhalla: An entitled generation and an Opposition that protests too much', datePublished 2026-10-16T17:08:58+05:30, dateModified 2026-10-17T07:17:20+05:30, isAccessibleForFree false, byline 'Bhalla is chairperson of the Technical Expert Group for the first official Household Income Survey of India. Views are personal'). Quotation found verbatim by string match against articleBody, curly apostrophes included. 'Removed' is his word inside the quotation. Recomputed: nine states before 58,60,69,594, 586.07 - 535.1 = 50.97; 586.07 - 527.80 = 58.27; left off the drafts 7,19,68,121, dead 1,67,88,487, duplicate 51,02,375 (2.19 crore, 30.4 per cent), shifted, absent or other 5,00,71,360; 51 - 21.9 = 29.1 million. The Substack (section 3) says the same in its own words ('About 51 million of those had to go to reach a clean roll'), so the first reading's account of where the 51 million comes from is his own."
+ },
+ {
+  "person": "Surjit S. Bhalla",
+  "claim_index": 5,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD of the Express page (headline 'Surjit Bhalla: An entitled generation and an Opposition that protests too much', datePublished 2026-10-16T17:08:58+05:30, dateModified 2026-10-17T07:17:20+05:30, isAccessibleForFree false, byline 'Bhalla is chairperson of the Technical Expert Group for the first official Household Income Survey of India. Views are personal'). Quotation found verbatim by string match against articleBody, curly apostrophes included. lok_sabha_electors.json: 2004 67,14,87,930 against 67,86,93,381 (98.9), 2014 83,40,82,814 against 84,93,20,842 (98.2), 1999 103.4, 2024 96.3. His Substack Table 3 gives his own adults in 2024 as 979 million, against the UN's 1,017.7 million. plain.json 'site' edited to add that his own count puts the 2024 roll at about as many names as adults, so a reader sees what his 8.5 per cent rests on from his side as well."
+ },
+ {
+  "person": "Surjit S. Bhalla",
+  "claim_index": 6,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD of the Express page (headline 'Surjit Bhalla: An entitled generation and an Opposition that protests too much', datePublished 2026-10-16T17:08:58+05:30, dateModified 2026-10-17T07:17:20+05:30, isAccessibleForFree false, byline 'Bhalla is chairperson of the Technical Expert Group for the first official Household Income Survey of India. Views are personal'). Quotation found verbatim by string match against articleBody, curly apostrophes included. Cut before '; the citizenship-style adjudication fell disproportionately on Muslims...', as the first reader notes; the cut does not change the meaning of the part kept. Recomputed from westbengal/summary.json: pn05.final 6,44,52,609, adjudication 60,06,675, adj.found_eligible 32,68,119, found_not_eligible 27,16,393, appeals_by_excluded 22,21,118, appeals_decided 1,26,194, election 6,82,51,008; states.json adults 7,70,30,000; election roll 88.6 per cent (11.4 short), final roll 83.7 (16.3 short); 73.3 - 68.25 = 5.05 million. His Substack Table 5 puts West Bengal's adults at 75.7 million and the clean roll at 73.3."
+ },
+ {
+  "person": "Surjit S. Bhalla",
+  "claim_index": 7,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD of the Express page (headline 'Surjit Bhalla: An entitled generation and an Opposition that protests too much', datePublished 2026-10-16T17:08:58+05:30, dateModified 2026-10-17T07:17:20+05:30, isAccessibleForFree false, byline 'Bhalla is chairperson of the Technical Expert Group for the first official Household Income Survey of India. Views are personal'). Quotation found verbatim by string match against articleBody, curly apostrophes included. His own summary of his column of 24 September 2026, which was also opened (headline 'I have voted for three decades. Why is my SIR incomplete?', datePublished 2026-09-23T19:24:16+05:30). Kind concession is right. forms_primary.json carries Annexure IV. disputes.json carries the remark of 5 October. Note that process.json records the Commission's own statement that the Form 6 declaration 'had been upheld by the Supreme Court', so 'yet to decide' is his reading against the Commission's. No site wording is shown for this kind."
+ },
+ {
+  "person": "Surjit S. Bhalla",
+  "claim_index": 8,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD of the Express page (headline 'Surjit Bhalla: An entitled generation and an Opposition that protests too much', datePublished 2026-10-16T17:08:58+05:30, dateModified 2026-10-17T07:17:20+05:30, isAccessibleForFree false, byline 'Bhalla is chairperson of the Technical Expert Group for the first official Household Income Survey of India. Views are personal'). Quotation found verbatim by string match against articleBody, curly apostrophes included. 13,39,03,307 of 95,08,13,771 is 14.08 per 100. Kind framing is right."
+ },
+ {
+  "person": "Jean Drèze and Yogendra Yadav",
+  "claim_index": 0,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD articleBody (datePublished 2026-10-20T06:22:41+05:30, isAccessibleForFree true, authors Jean Dreze and Yogendra Yadav, foot line with both roles), and the print page photograph (headline 'Let us not be in denial, disenfranchisement is real', DESHKAAL, table 'Calculating missing voters in nine major states', rows as the first reader transcribed them, all nine 601.2, 530.6, 70.6, 11.7). Quotation verbatim by string match. Their adults equal adults_ls2024.csv for all nine states to the rounding printed (Gujarat 53.3, Uttar Pradesh 161.7, Chhattisgarh 21.5, Bihar 83, Madhya Pradesh 60.2, Rajasthan 56.6, West Bengal 77, Tamil Nadu 60.2, Kerala 27.7, total 601.2 against 60,12,56,000), same Technical Group report of July 2020. The ECI benchmarking claim was not read here."
+ },
+ {
+  "person": "Jean Drèze and Yogendra Yadav",
+  "claim_index": 1,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD articleBody (datePublished 2026-10-20T06:22:41+05:30, isAccessibleForFree true, authors Jean Dreze and Yogendra Yadav, foot line with both roles), and the print page photograph (headline 'Let us not be in denial, disenfranchisement is real', DESHKAAL, table 'Calculating missing voters in nine major states', rows as the first reader transcribed them, all nine 601.2, 530.6, 70.6, 11.7). Quotation verbatim by string match. Recomputed per state from states.json: shortfalls Gujarat 17.4, Uttar Pradesh 17.1, Chhattisgarh 12.8, Bihar 10.6, Madhya Pradesh 10.3, Rajasthan 9.0, West Bengal 16.3 on the CEO's final roll, Tamil Nadu 5.8, Kerala 2.8. West Bengal 70.5 = 6,44,52,609 + 60,06,675 = 7,04,59,284. Nine final rolls 52,45,53,415, gap 7,67,02,585 (12.76 per cent), 7.29 crore and 12.1 per cent on the election roll. Before 97.47 per cent."
+ },
+ {
+  "person": "Jean Drèze and Yogendra Yadav",
+  "claim_index": 2,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD articleBody (datePublished 2026-10-20T06:22:41+05:30, isAccessibleForFree true, authors Jean Dreze and Yogendra Yadav, foot line with both roles), and the print page photograph (headline 'Let us not be in denial, disenfranchisement is real', DESHKAAL, table 'Calculating missing voters in nine major states', rows as the first reader transcribed them, all nine 601.2, 530.6, 70.6, 11.7). Quotation verbatim by string match. 16,16,85,000 - 13,39,84,792 = 2,77,00,208, 17.13 per cent. Gujarat 5,33,01,000 - 4,40,30,725, 17.4 per cent."
+ },
+ {
+  "person": "Jean Drèze and Yogendra Yadav",
+  "claim_index": 3,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD articleBody (datePublished 2026-10-20T06:22:41+05:30, isAccessibleForFree true, authors Jean Dreze and Yogendra Yadav, foot line with both roles), and the print page photograph (headline 'Let us not be in denial, disenfranchisement is real', DESHKAAL, table 'Calculating missing voters in nine major states', rows as the first reader transcribed them, all nine 601.2, 530.6, 70.6, 11.7). Quotation verbatim by string match. 12 per cent of 101.6 crore is 12.19 crore. Nine states 60,12,56,000 of the 19 states' 95,50,92,000 (62.95 per cent). states.json adults draft_total/adults_total 84.45 per cent; final.made_up_pct 14.6 over 22 states. plain.json 'site' edited: the first wording said the rise 'was at most 14.6 per cent', when 14.6 is the rise itself and the ceiling is on names put back. It now says the rise came to 14.6 per cent and at most that share of names was put back."
+ },
+ {
+  "person": "Jean Drèze and Yogendra Yadav",
+  "claim_index": 4,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD articleBody (datePublished 2026-10-20T06:22:41+05:30, isAccessibleForFree true, authors Jean Dreze and Yogendra Yadav, foot line with both roles), and the print page photograph (headline 'Let us not be in denial, disenfranchisement is real', DESHKAAL, table 'Calculating missing voters in nine major states', rows as the first reader transcribed them, all nine 601.2, 530.6, 70.6, 11.7). Quotation verbatim by string match. 101.6 - 87.8 = 13.8. states.json total: before 95,08,13,771, left off 13,39,03,307, so about 81.69 crore on the drafts. Shastri's estimate was not seen. UN 1,01,76,59,624 for mid-2024. The column says drafts are out for all states except Himachal and J&K. The site's list of states not in the revision also includes Assam and Ladakh, as the check says."
+ },
+ {
+  "person": "Jean Drèze and Yogendra Yadav",
+  "claim_index": 5,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD articleBody (datePublished 2026-10-20T06:22:41+05:30, isAccessibleForFree true, authors Jean Dreze and Yogendra Yadav, foot line with both roles), and the print page photograph (headline 'Let us not be in denial, disenfranchisement is real', DESHKAAL, table 'Calculating missing voters in nine major states', rows as the first reader transcribed them, all nine 601.2, 530.6, 70.6, 11.7). Quotation verbatim by string match. Kind framing is right."
+ },
+ {
+  "person": "Jean Drèze and Yogendra Yadav",
+  "claim_index": 6,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD articleBody (datePublished 2026-10-20T06:22:41+05:30, isAccessibleForFree true, authors Jean Dreze and Yogendra Yadav, foot line with both roles), and the print page photograph (headline 'Let us not be in denial, disenfranchisement is real', DESHKAAL, table 'Calculating missing voters in nine major states', rows as the first reader transcribed them, all nine 601.2, 530.6, 70.6, 11.7). Quotation verbatim by string match. terms.json rpa-s23 ('may apply') and rer-r25-2 ('shall be prepared afresh') and process.json 2025-06-24 as cited. The 'not seen as common' sentence is their judgement."
+ },
+ {
+  "person": "Jean Drèze and Yogendra Yadav",
+  "claim_index": 7,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD articleBody (datePublished 2026-10-20T06:22:41+05:30, isAccessibleForFree true, authors Jean Dreze and Yogendra Yadav, foot line with both roles), and the print page photograph (headline 'Let us not be in denial, disenfranchisement is real', DESHKAAL, table 'Calculating missing voters in nine major states', rows as the first reader transcribed them, all nine 601.2, 530.6, 70.6, 11.7). Quotation verbatim by string match. No source for 5.2 per cent in the column. lok_sabha_electors.json 2014 98.2, 2024 96.3. Bhalla's Table 3 gives 7.5 per cent for 2024, the figure they compare against."
+ },
+ {
+  "person": "Jean Drèze and Yogendra Yadav",
+  "claim_index": 8,
+  "status": "confirmed",
+  "note": "Re-read on 20 October 2026: fetched afresh with curl, JSON-LD articleBody (datePublished 2026-10-20T06:22:41+05:30, isAccessibleForFree true, authors Jean Dreze and Yogendra Yadav, foot line with both roles), and the print page photograph (headline 'Let us not be in denial, disenfranchisement is real', DESHKAAL, table 'Calculating missing voters in nine major states', rows as the first reader transcribed them, all nine 601.2, 530.6, 70.6, 11.7). Quotation verbatim by string match. 16,16,85,000 x 0.915 = 14,79,41,775; less 13,39,84,792 = 1,39,56,983. The check's account of Bhalla's method is right as far as it goes, and the second reading adds that he also uses a lower count of adults (590.4 million for the nine states, 159.0 million for Uttar Pradesh, Substack Table 5). Flat 8.5 per cent per state: 12.5 million net on his adults, 25.6 million on the site's. plain.json 'site' edited to name his count of adults and to give both figures, 1.25 crore and 2.6 crore. 'Breakfast and lunch' sentence is in the column. The strongest point on the rolls before the revision was reworded in plain.json so it reads as the site's figures bearing on their side, since the 97.5 per cent is not in their column."
  }
 ]
