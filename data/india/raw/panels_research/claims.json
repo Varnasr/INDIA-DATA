@@ -1797,6 +1797,286 @@
     "His offices other than member of the Rajya Sabha and former Finance Minister were not re-read from a primary list.",
     "No power to surcharge a Chief Election Commissioner, and no figure for the cost of any revision, was looked for."
    ]
+  },
+  {
+   "id": "surjit-bhalla",
+   "name": "Surjit S. Bhalla",
+   "role": "Economist and columnist. Chairperson of the Technical Expert Group for the first official Household Income Survey of India, as his Indian Express byline of 17 October 2026 states. A former part-time member of the Economic Advisory Council to the Prime Minister, from which he resigned on 1 December 2018.",
+   "role_note": "The chairmanship is from the byline under the Indian Express column of 17 October 2026 (\"Bhalla is chairperson of the Technical Expert Group for the first official Household Income Survey of India. Views are personal\"). The request described him as a part-time member of the PM's Economic Advisory Council. That is a past role: The Hindu (article25716092) and The Indian Express (5487562) reported in December 2018 that he resigned as a part-time member of EAC-PM on 1 December 2018, and The News Mill (July 2026) and CEPR's profile call him a former member. No source found says he is a member now. His later post as India's Executive Director at the IMF (2019 to 2022) is common record and was not re-read from a primary source, so it is left out of the role.",
+   "site_files": "data/india/states.json (states rows for the nine states: electors_before, removed, dead, shifted_absent_other, duplicate, electors_final, final_date, adults_2026, roll_adult_pct; total.removed, total.dead), data/westbengal/summary.json (pn05.final, pn05.adjudication, adj.found_eligible, adj.found_not_eligible, election), data/india/lok_sabha_electors.json (2004, 2014 and 2024 rows), data/india/raw/adults_ls2024.csv (adults_2026, Technical Group), data/india/raw/terms_research/terms.json (rpa-s23, rer-r25-2), data/india/process.json (2025-06-24)",
+   "pieces": [
+    {
+     "id": "sb-ie",
+     "title": "An entitled generation and an Opposition that protests too much",
+     "outlet": "The Indian Express (column)",
+     "date": "2026-10-17",
+     "url": "https://indianexpress.com/article/opinion/columns/surjit-bhalla-sir-opposition-protest-eci-gyanesh-kumar-cjp-10924664/",
+     "subscription": true,
+     "how_read": "Saved text and HTML read in full on 20 October 2026. JSON-LD gives datePublished 2026-10-16T17:08:58+05:30 (online) and dateModified 2026-10-17T07:17:20+05:30; it is the column of 17 October in print, which is how Drèze and Yadav cite it. isAccessibleForFree is false, so it is behind the Express subscription. The online headline carries the prefix \"Surjit Bhalla: \", left off here."
+    },
+    {
+     "id": "sb-sub",
+     "title": "Much Ado About (Almost) Nothing",
+     "outlet": "Surjit S. Bhalla (Substack)",
+     "date": "2026-10-17",
+     "url": "https://ssbhalla.substack.com/p/much-ado-about-almost-nothing",
+     "how_read": "Saved text read in full on 20 October 2026 (published 2026-10-17T13:21:28Z, audience everyone, so free to read). Subtitle \"130 million names struck off. About 7 million eligible voters. What the numbers really say about the SIR.\" Sections 4 (Assam) and 9 and 10 (religion of those deleted, and the 2026 West Bengal result) are not quoted. The tables in section 3 and section 11 did not come through in the saved text, so the per-state clean rolls behind his 535.1 million could not be read."
+    },
+    {
+     "id": "sb-ie-sept",
+     "title": "I have voted for three decades. Why is my SIR incomplete?",
+     "outlet": "The Indian Express (column)",
+     "date": "2026-09-24",
+     "url": "https://indianexpress.com/article/opinion/columns/surjit-bhalla-i-have-voted-for-three-decades-why-is-my-sir-incomplete-10891009/",
+     "how_read": "Saved text read on 20 October 2026 (published online 2026-09-23T19:24:16+05:30, behind the subscription). Not quoted. It is the earlier column both of his October pieces cite for his criticism of how the revision was run, and the one Drèze and Yadav refer to."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "sb-ie",
+     "quote": "In India, registration is voluntary; you fill in Form 6 if you want to vote. The ECI’s own pre-SIR data showed that in the 2024 Lok Sabha election, one in four Indians aged 18 to 29, 73 million young people, were not registered. Add a small allowance for older adults who have never registered, or who dropped off after moving, and about 8.5 per cent of adults are legitimately not on the rolls.",
+     "timestamp": null,
+     "speaker_note": "The second step of his argument in the column, in one passage.",
+     "relies_on": "The ECI's count of electors aged 18 to 29 on the 2024 roll (ECI Atlas 2024, Table 7.1, and the PIB factsheet of the final roll of 8 February 2024, as his Substack sources list) against his own estimate of the young adult population, plus an allowance of 1 per cent of adults (range 0 to 2) for older adults, which is his judgement.",
+     "kind": "projection or survey",
+     "check": "Not recomputable from the site, which holds no roll or population by age. What the site holds sets bounds on it. On the UN's estimate the national roll of 2024 held 97,97,51,847 names against 1,01,76,59,624 adults, 96.3 per 100 (lok_sabha_electors.json), a total gap of 3.79 crore or 3.7 per 100. If 8.5 per 100 adults were not registered, about 4.86 crore names (4.8 per 100 adults) on the 2024 roll would have had to be the dead, duplicates or people registered in two places. Before the revision the nine states' rolls held 58,60,69,594 names against 60,12,56,000 projected adults, 97.5 per 100 (states.json), and across 19 states 98.3 per 100. Tamil Nadu (106.5) and Kerala (100.4) held more names than projected adults, which supports his point that some rolls carried names that should not be there. On voluntariness, section 23(1) of the 1950 Act does say a person not on the roll \"may apply\" (Form 6), but in an intensive revision the roll \"shall be prepared afresh\" under rule 25(2) of the 1960 Rules, and the SIR order of 24 June 2025 sent an enumeration form to every elector on the roll (terms.json rpa-s23, rer-r25-2; process.json 2025-06-24). His benchmark treats the young not on the roll in 2024 as a choice, which the data cannot show either way.",
+     "site_counts": "Roll of 2024 at 96.3 per 100 adults (UN). Nine states before the revision 97.5 per 100 projected adults (58,60,69,594 of 60,12,56,000). Tamil Nadu 106.5, Kerala 100.4.",
+     "site_stops": "The site holds no count by age and cannot say how many adults chose not to register."
+    },
+    {
+     "piece": "sb-ie",
+     "quote": "A clean roll for these states, built from each state’s adults less each state’s own non-registration, should hold about 535 million names; the final rolls hold 528 million. Allowing for the legitimate removal of non-citizens, the best estimate is that about 7 million eligible voters (range 1 to 13 million) have been excluded from the rolls without adequate explanation.",
+     "timestamp": null,
+     "speaker_note": "The third step of the column. \"These states\" are Bihar and the eight large states of phase II with final rolls (Uttar Pradesh, Tamil Nadu, Gujarat, West Bengal, Madhya Pradesh, Rajasthan, Chhattisgarh, Kerala), the same nine as Drèze and Yadav's table.",
+     "relies_on": "Each state's projected adults (Technical Group, July 2020) less that state's own unregistered 18 to 29 year olds in 2024 and 1 per cent of adults, against the final SIR rolls, netting the states above the clean roll against those below, less about 0.5 million for non-citizens.",
+     "kind": "projection or survey",
+     "check": "His 528 million (527.8 in the Substack) is the site's nine final rolls, 52,45,53,415, with West Bengal counted at 67.7 million where the Chief Electoral Officer's final roll of 28 February 2026 is 6,44,52,609: 524.55 - 64.45 + 67.7 = 527.80. His 67.7 million matches the final roll plus the 32,68,119 found eligible at adjudication (6,77,20,728), close to the 6,82,51,008 on the roll the 2026 election was held on. His 535.1 million clean roll is 89.0 per cent of the site's 60,12,56,000 projected adults, so it implies 11.0 per cent non-registration across these nine, above his national 8.5, because Uttar Pradesh and Bihar registered only 60 per cent of their young (his figure, not held by the site). With a flat 8.5 per cent for every state, the same final rolls fall short of a clean roll by about 2.56 crore net (2.18 crore with West Bengal on the election roll), and by about 2.88 crore counting only the states that fall short. So the 7 million depends on two choices, state-specific young registration and netting Bihar's, Tamil Nadu's and Kerala's surplus names against shortfalls elsewhere. He explains the netting by migrant workers registered at home, which the site cannot test.",
+     "site_counts": "Nine states, final rolls 52,45,53,415 against 60,12,56,000 projected adults, 87.2 per 100, a gap of 7,67,02,585 (12.8 per cent).",
+     "site_stops": "The site holds no registration by age and no count of non-citizens, so it cannot rebuild his clean roll state by state."
+    },
+    {
+     "piece": "sb-sub",
+     "quote": "The 130 million in the headlines counts every draft removal, in all three phases, before appeals. It is nearly twenty times the number of eligible voters removed.",
+     "timestamp": null,
+     "speaker_note": "From the opening summary of the Substack. \"Eligible voters removed\" is his 7 million (range 1 to 13).",
+     "relies_on": "The ECI's draft-stage total of 133.7 million names (as Deccan Herald reported it on 30 September 2026) against his 7 million.",
+     "kind": "projection or survey",
+     "check": "The site counts 13,39,03,307 names left off the drafts in 31 states (states.json total.removed), against his 133.7 million. 133.7 / 7 = 19.1, so \"nearly twenty times\" follows from his own two numbers. The two do not cover the same ground. His 7 million is for nine states with final rolls and nets surpluses against shortfalls. The 13.39 crore covers 31 states, ten of them without a final roll, and is a draft-stage count before claims. Of the 13.39 crore, 2,79,69,558 were entered as dead and 1,01,48,459 as enrolled more than once.",
+     "site_counts": "13,39,03,307 left off the drafts in 31 states. Dead 2,79,69,558. Enrolled more than once 1,01,48,459. Nine states 7,19,68,121.",
+     "site_stops": "Neither count says how many of those left off were entitled to stay."
+    },
+    {
+     "piece": "sb-sub",
+     "quote": "But with only 60% of its young registered, a clean UP roll is about 85% of adults, and the final roll is within about 1.4 million of it.",
+     "timestamp": null,
+     "speaker_note": "Section 7 of the Substack, on Uttar Pradesh. This is the higher threshold Drèze and Yadav object to.",
+     "relies_on": "His figure that only 60 per cent of Uttar Pradesh's 18 to 29 year olds were on the roll in 2024 (ECI Atlas 2024, Table 7.1, as he cites it).",
+     "kind": "projection or survey",
+     "check": "On the site's figures Uttar Pradesh's final roll of 10 April 2026 is 13,39,84,792 against 16,16,85,000 projected adults, 82.9 per cent (he says 84 per cent, on adults at the roll's qualifying date). A clean roll at 85 per cent of the site's adults is 13,74,32,250, 34.5 lakh above the final roll (he says within about 14 lakh). At his national 8.5 per cent the clean roll is 14,79,41,775 and the final roll is 1.40 crore short of it, which is Drèze and Yadav's 14 million. Before the revision Uttar Pradesh's roll held 15,44,30,092 names, 95.5 per cent of projected adults. For both his 60 per cent and that roll to be right, about 1.70 crore names (15,44,30,092 less a clean roll of 13,74,32,250) among older adults would have had to be the dead, duplicates or people who had moved. The draft-stage entries give 46,23,796 dead and 25,47,207 enrolled more than once, 72 lakh together, with 2,17,03,064 shifted, absent or other. The 40 per cent unregistered that Drèze and Yadav cite is the same figure seen from the other side.",
+     "site_counts": "Uttar Pradesh final 13,39,84,792, adults 16,16,85,000 (82.9 per cent). Roll before 15,44,30,092 (95.5 per cent). Left off the draft 2,88,74,067, of them 46,23,796 dead and 25,47,207 enrolled more than once.",
+     "site_stops": "The site holds no registration by age for Uttar Pradesh."
+    },
+    {
+     "piece": "sb-ie",
+     "quote": "Of the 58 million names removed in these states, 51 million had to go: The dead, the duplicates, those who had moved away for good. Seven of every eight removals were justified.",
+     "timestamp": null,
+     "speaker_note": "\"Removed\" here is the net fall from the rolls before the revision (586 million) to the final rolls (528 million on his West Bengal figure).",
+     "relies_on": "His clean roll (535.1 million) against the rolls before the revision (586 million).",
+     "kind": "projection or survey",
+     "check": "The 586 million is the site's 58,60,69,594 for the nine rolls before the revision. 586.07 - 527.80 = 58.27 million net fall on his West Bengal figure (61.5 million on the CEO's final roll). His 51 million is 586.07 - 535.1 = 50.97, the gap between the old rolls and his clean roll, so it follows from the benchmark and is not a count of reasons. The officers' entries at the draft stage in the nine states give 7,19,68,121 names left off, 1,67,88,487 entered as dead and 51,02,375 as enrolled more than once (2.19 crore together, 30.4 per cent), and 5,00,71,360 as shifted, absent or other. For 51 million to be names that had to go, about 2.9 crore of the shifted, absent or other entries would have to be people who moved away for good or were not real, which the entries cannot show. An officer's reason was written down and no one checked it.",
+     "site_counts": "Nine states, rolls before 58,60,69,594, left off the drafts 7,19,68,121, dead 1,67,88,487, enrolled more than once 51,02,375, shifted, absent or other 5,00,71,360.",
+     "site_stops": "The lists record the officer's reason, and no one has checked it against the person."
+    },
+    {
+     "piece": "sb-ie",
+     "quote": "In 2004, after the last nationwide intensive revision, the roll held 4.4 per cent more names than there were adults, 28 million phantom voters. It was 3.1 per cent too high in 2014.",
+     "timestamp": null,
+     "relies_on": "The Lok Sabha rolls of 2004 and 2014 against his census-based adult estimates.",
+     "kind": "count from official data",
+     "check": "The site's own series (ECI Atlas 2024 electors against the UN World Population Prospects 2024, 18 and over, 1 July of the election year) gives the opposite sign. 2004, 67,14,87,930 electors against 67,86,93,381 adults, 98.9 per 100. 2014, 83,40,82,814 against 84,93,20,842, 98.2 per 100. On the UN figures the roll last exceeded the adult population in 1999 (103.4). His 4.4 and 3.1 per cent excess come from his own adult estimate, census carried forward and corrected for a 2 per cent overshoot. The roll counts are the same, so the difference is entirely in the adult denominator, which is also the quantity his 7 million rests on. \"Phantom voters\" is his word.",
+     "site_counts": "2004, 98.9 electors per 100 adults. 2014, 98.2. 2024, 96.3 (UN WPP 2024).",
+     "site_stops": "The site uses one population estimate, the UN's, and says the comparison holds only if the estimate is right."
+    },
+    {
+     "piece": "sb-ie",
+     "quote": "in West Bengal, 6 to 7 per cent of adults (about 5 million eligible citizens) appear to have been removed without adequate explanation",
+     "timestamp": null,
+     "speaker_note": "The sentence continues \"; the citizenship-style adjudication fell disproportionately on Muslims in Murshidabad and Malda, and on Matua Hindus.\" That part is left out because it rests on press analyses of religion that the site does not use.",
+     "relies_on": "A clean West Bengal roll of 73.3 million (92 per cent of 18 to 29 year olds registered in 2024) against a final roll of 67.7 million, less about 0.5 million non-citizens.",
+     "kind": "projection or survey",
+     "check": "The final roll he uses, 67.7 million, is close to the CEO's final roll of 28 February 2026 (6,44,52,609) plus the 32,68,119 found eligible at adjudication (6,77,20,728). The 60,06,675 names held under adjudication were not on the final roll, and 27,16,393 were found not eligible (summary.json adj, as reported). The roll the 2026 election was held on was 6,82,51,008. Against the site's 7,70,30,000 projected adults the election roll is 11.4 per cent short and the CEO's final roll 16.3 per cent. His clean roll of 73.3 million less the election roll gives about 50 lakh, which agrees with his 5 million. The appeals point: 22,21,118 appeals by those excluded, 1,26,194 decided, matches his 2.22 million and 0.13 million.",
+     "site_counts": "West Bengal final roll 6,44,52,609, under adjudication 60,06,675, found eligible 32,68,119, found not eligible 27,16,393, election roll 6,82,51,008, projected adults 7,70,30,000.",
+     "site_stops": "The site holds no count of non-citizens and does not use religion splits of those deleted."
+    },
+    {
+     "piece": "sb-ie",
+     "quote": "the process was hasty, demanded paperwork the poor and the migrant do not keep, and added a new declaration to Form 6 without a change in the rules, a move whose legality the Supreme Court has yet to decide.",
+     "timestamp": null,
+     "speaker_note": "His summary of his own column of 24 September 2026.",
+     "relies_on": "His own experience of the revision and the court and Commission record.",
+     "kind": "concession",
+     "check": "The declaration added to Form 6 is in the site's documents (forms_primary.json, Annexure IV of 27 October 2025), and the Supreme Court's remark of 5 October that it \"had not approved any modified version of the form\" is reported in disputes.json. Stands as his concession.",
+     "site_counts": "",
+     "site_stops": ""
+    },
+    {
+     "piece": "sb-ie",
+     "quote": "But criticising the administration of an exercise is very different from claiming that it disenfranchised a seventh of the electorate. The evidence says the ECI has been much more right than wrong.",
+     "timestamp": null,
+     "relies_on": "His estimate of 7 million against the 13.3 crore cited by critics. \"A seventh of the electorate\" is 133.7 million over about 950 million.",
+     "kind": "framing",
+     "check": "How he frames the question. 13,39,03,307 of 95,08,13,771 on the rolls before is 14.08 per 100, about one in seven, so \"a seventh\" matches the draft-stage count.",
+     "site_counts": "",
+     "site_stops": ""
+    }
+   ],
+   "strongest_points": [
+    "He separates the draft-stage count of names left off from a count of eligible people kept off, which the site also keeps apart.",
+    "His nine final rolls are the site's, his 586 million before the revision is the site's 58.61 crore, and his West Bengal appeals figures match the Commission's affidavit as reported.",
+    "He is right that some rolls held more names than projected adults before the revision, Tamil Nadu (106.5 per 100) and Kerala (100.4) among them, so part of any fall was names that should not have been there.",
+    "He concedes the process was hasty and that the Form 6 declaration was added without a change in the Rules, and asks the Commission to publish deletions by reason, state and booth."
+   ],
+   "overreach": [
+    "His 7 million rests on two choices, a state-specific allowance for young adults not registered and netting surplus states against short ones. With his own national 8.5 per cent applied to each state the nine final rolls are about 2.6 crore short.",
+    "His 51 million that \"had to go\" is the gap between the old rolls and his clean roll. The officers recorded 2.19 crore as dead or duplicate, and the rest would have to come from the shifted, absent or other entries, which no one checked.",
+    "He treats the young adults off the 2024 roll as a choice. In an intensive revision the Rules have the roll prepared afresh by the officers.",
+    "His 2004 and 2014 excess rolls come from his own adult estimate. On the UN's estimate both rolls held fewer names than adults.",
+    "West Bengal is set at 67.7 million, which counts the 32.7 lakh found eligible after the CEO's final roll."
+   ],
+   "not_verified": [
+    "His adult total of 1,008 million for mid-2026 and the claim that the UN, the SRS and the Technical Group all land within 1.5 per cent of it. The site holds the UN's 1,017.66 million for mid-2024, already above his mid-2026 figure, and does not hold the UN's 2026 figure.",
+    "The 73 million unregistered 18 to 29 year olds in 2024 and the 60 per cent registration in Uttar Pradesh and Bihar (ECI Atlas 2024, Table 7.1), which the site does not hold.",
+    "His per-state clean rolls: the Substack tables did not come through in the saved text.",
+    "The religion figures in his West Bengal section and his seat estimates for the 2026 West Bengal election (not quoted).",
+    "The Canada, Britain and United States registration comparisons."
+   ]
+  },
+  {
+   "id": "jean-dreze-yogendra-yadav",
+   "name": "Jean Drèze and Yogendra Yadav",
+   "role": "Jean Drèze is visiting professor, Department of Economics, Ranchi University. Yogendra Yadav is member, Swaraj India, and national convenor, Bharat Jodo Abhiyan; a psephologist and a petitioner in the Supreme Court challenge to the Bihar SIR (his own panel carries his earlier statements). This panel is their joint column of 20 October 2026, written in reply to Surjit Bhalla.",
+   "role_note": "Both roles as printed at the foot of the column, online and in print (\"Drèze is visiting professor, Department of Economics, Ranchi University. Yadav is member, Swaraj India, and national convenor, Bharat Jodo Abhiyan.\"). Yadav's petitioner role is from his own panel (LiveLaw, 12 Aug 2025). The column runs under the Express's DESHKAAL heading, which is Yadav's regular column.",
+   "site_files": "data/india/states.json (states rows for the nine states: electors_before, electors_final, adults_2026, roll_adult_pct; total.removed), data/india/raw/adults_ls2024.csv (adults_2026, Technical Group, July 2020 report), data/westbengal/summary.json (pn05.final, pn05.adjudication, adj, election), data/india/lok_sabha_electors.json (2014 and 2024 rows), data/india/raw/terms_research/terms.json (rpa-s23, rer-r25-2), data/india/process.json (2025-06-24)",
+   "pieces": [
+    {
+     "id": "dy-ie",
+     "title": "Let’s not be in denial — disenfranchisement in real",
+     "outlet": "The Indian Express (column)",
+     "date": "2026-10-20",
+     "url": "https://indianexpress.com/article/opinion/columns/sir-voter-disenfranchisement-india-election-commission-gyanesh-kumar-10928657/",
+     "how_read": "Saved text and HTML read in full on 20 October 2026 (datePublished 2026-10-20T06:22:41+05:30, isAccessibleForFree true). The online headline is kept as published, including \"in real\". The print edition of the same day, read from a photograph of the page, is headed \"Let us not be in denial, disenfranchisement is real\" and carries a table the online text does not, \"Calculating missing voters in nine major states\", with sources \"Adult population figures from the report of the Technical Group on Population Projections, July 2020. Final roll figures from ECI press notes and press conferences.\" Its rows (projected adults 2026, voters on the SIR final list, absolute shortfall in millions, shortfall per cent): Gujarat 53.3, 44, 9.3, 17.4. Uttar Pradesh 161.7, 134, 27.7, 17.1. Chhattisgarh 21.5, 18.7, 2.8, 13.0. Bihar 83, 74.2, 8.8, 10.6. Madhya Pradesh 60.2, 54, 6.2, 10.3. Rajasthan 56.6, 51.5, 5.1, 9.0. West Bengal 77, 70.5, 6.5, 8.4. Tamil Nadu 60.2, 56.7, 3.5, 5.8. Kerala 27.7, 27, 0.7, 2.5. All nine 601.2, 530.6, 70.6, 11.7. The print pull-quote says \"well over 10 crore\" where the text says \"about 14 crore\"."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "dy-ie",
+     "quote": "We can compare the size of the post-SIR voter lists with official estimates of the adult population that is eligible to vote. Indeed, the ECI itself has been using these population estimates as a benchmark to evaluate its voter lists.",
+     "timestamp": null,
+     "relies_on": "The Technical Group on Population Projections (July 2020) for adults in early 2026, against the final SIR rolls.",
+     "kind": "projection or survey",
+     "check": "The site uses the same projections (adults_ls2024.csv, the same report) and the same comparison on its All India page. Their adults equal the site's for all nine states. That the ECI uses population estimates as a benchmark (the elector-population ratio of its roll manual) was not read here.",
+     "site_counts": "Nine states, 60,12,56,000 projected adults.",
+     "site_stops": "A projection counts residents. It counts migrants where they live, and it counts adults who are not citizens."
+    },
+    {
+     "piece": "dy-ie",
+     "quote": "For these nine states combined, the voter list falls short of the adult population by more than 7 crore. Almost 12 per cent of the adult population is excluded.",
+     "timestamp": null,
+     "relies_on": "The print table: 601.2 million adults, 530.6 million on the final lists, 70.6 million short, 11.7 per cent.",
+     "kind": "projection or survey",
+     "check": "Eight of the nine final lists in the table equal the site's final rolls to the rounding printed (Bihar 7,41,92,357, Uttar Pradesh 13,39,84,792, Tamil Nadu 5,67,07,380, Gujarat 4,40,30,725, Madhya Pradesh 5,39,81,065, Rajasthan 5,15,19,929, Chhattisgarh 1,87,30,914, Kerala 2,69,53,644). West Bengal's 70.5 million is the CEO's final roll of 28 February 2026 (6,44,52,609) plus all 60,06,675 names then held under adjudication, 7,04,59,284. Of those, 27,16,393 were later found not eligible, and the roll the 2026 election was held on was 6,82,51,008. So the table understates West Bengal's shortfall by its own method, 8.4 per cent where the election roll gives 11.4 and the final roll 16.3. On the site's figures the nine final rolls hold 52,45,53,415 names against 60,12,56,000 adults, a shortfall of 7.67 crore or 12.8 per cent (7.29 crore and 12.1 per cent with West Bengal on the election roll). Small differences in the table, Chhattisgarh 13.0 per cent against 12.8, Kerala 2.5 per cent against 2.8, come from rounding the final list. Before the revision the same nine rolls held 58,60,69,594 names, 97.5 per cent of projected adults.",
+     "site_counts": "Nine states, final rolls 52,45,53,415 against 60,12,56,000 projected adults, 12.8 per cent short. Rolls before the revision 97.5 per cent.",
+     "site_stops": "The gap mixes people wrongly left off with adults never on the roll, and the projection counts residents."
+    },
+    {
+     "piece": "dy-ie",
+     "quote": "In Uttar Pradesh alone, 2.8 crore are excluded —more than 17 per cent of the adult population.",
+     "timestamp": null,
+     "relies_on": "The print table: 161.7 million adults, 134 million on the final list.",
+     "kind": "projection or survey",
+     "check": "Site: 16,16,85,000 adults, final roll 13,39,84,792 (10 April 2026), short 2,77,00,208, 17.1 per cent. Agrees. Before the revision Uttar Pradesh's roll held 95.5 per cent of projected adults. Gujarat's shortfall is about as large (17.4 per cent, final 4,40,30,725 of 5,33,01,000), and Gujarat receives migrants, whom the projection counts where they live.",
+     "site_counts": "Uttar Pradesh final 13,39,84,792, adults 16,16,85,000, 17.1 per cent short.",
+     "site_stops": "As above."
+    },
+    {
+     "piece": "dy-ie",
+     "quote": "If the average exclusion rate of 12 per cent for these nine states is representative of the whole country, then the total number of excluded adults or “missing voters” would be around 12 crore.",
+     "timestamp": null,
+     "relies_on": "An extrapolation of the nine-state rate to the whole country.",
+     "kind": "projection or survey",
+     "check": "12 per cent of 101.6 crore is 12.2 crore. A conditional extrapolation, stated as such. The nine states hold about 63 per cent of the projected adults in the 19 states the site compares (60,12,56,000 of 95,50,92,000). On the site, the drafts held 84.4 per cent of projected adults across 19 states, and the 22 states with a final roll recovered at most 14.6 per cent of the names left off between draft and final (a ceiling, since it counts new voters).",
+     "site_counts": "19 states, drafts 84.4 per cent of projected adults. Final rolls made up at most 14.6 per cent of names left off.",
+     "site_stops": "The site gives no national figure for adults off the final rolls, because ten states have no final roll yet."
+    },
+    {
+     "piece": "dy-ie",
+     "quote": "Assuming that these draft lists will undergo the same level of corrections as the first two phases, Rahul Shastri estimates that the final post-SIR voter list for the entire country will be around 87.8 crore. (This estimate does not take into account any corrective action the ECI may undertake from now on to undo the damage). Compare this to India’s current adult population of about 101.6 crore. We are staring at a staggering figure of about 14 crore “missing voters” — adult Indians eligible to vote but excluded from the final electoral rolls.",
+     "timestamp": null,
+     "relies_on": "Rahul Shastri's projection of the final rolls from the phase III drafts, and an adult population of 101.6 crore.",
+     "kind": "projection or survey",
+     "check": "101.6 - 87.8 = 13.8 crore, \"about 14\". Shastri's estimate was not seen. The site holds 95,08,13,771 names on the rolls before the revision in 31 states and 13,39,03,307 left off the drafts, so the drafts held about 81.69 crore, before Assam, Himachal Pradesh, Jammu and Kashmir and Ladakh and before claims. 87.8 crore is in a plausible range on those figures. The adult figure is close to the UN's 1,01,76,59,624 for mid-2024 (lok_sabha_electors.json); the site holds no national Technical Group figure for 2026.",
+     "site_counts": "31 states, rolls before 95,08,13,771, left off the drafts 13,39,03,307.",
+     "site_stops": "A projection of final rolls not yet published."
+    },
+    {
+     "piece": "dy-ie",
+     "quote": "These disenfranchised voters comprise those eligible voters who featured on the pre-SIR list and were wrongfully removed during the SIR, as well as persons who should have been added to the voter list but were not.",
+     "timestamp": null,
+     "relies_on": "Their definition of the gap.",
+     "kind": "framing",
+     "check": "An important qualification of their own figures: the gap includes adults never on the roll, so \"disenfranchised\" here covers both people wrongly left off and people not enrolled. The site keeps the two apart and cannot divide the gap between them. Their \"wrongfully removed\" is their word.",
+     "site_counts": "",
+     "site_stops": ""
+    },
+    {
+     "piece": "dy-ie",
+     "quote": "Voluntary non-registration is not seen as a common phenomenon by the media, political parties or the ECI. Second, voter registration in India has been state initiated. Therefore, non-registration is a failure of the electoral officials that can be rectified, rather than a shortfall to be accepted.",
+     "timestamp": null,
+     "relies_on": "Their reading of how registration works in India.",
+     "kind": "fact about process (documentary)",
+     "check": "Both readings have support in the law. Section 23(1) of the 1950 Act says a person not on the roll \"may apply\" (Form 6), which is Bhalla's point. Rule 25(2) of the 1960 Rules says that in an intensive revision the roll \"shall be prepared afresh\", with rules 4 to 23 applied as at first preparation, and the SIR order of 24 June 2025 had enumeration forms carried to every elector on the roll, which is theirs (terms.json rpa-s23, rer-r25-2; process.json 2025-06-24). That voluntary non-registration is not seen as common is their judgement and was not checked.",
+     "site_counts": "",
+     "site_stops": "The site holds no measure of how many adults chose not to register."
+    },
+    {
+     "piece": "dy-ie",
+     "quote": "Indeed, in some earlier years, the enrolment gap among the young was much lower than 7.5 per cent — for example, it was 5.2 per cent of the total adult population in 2014.",
+     "timestamp": null,
+     "relies_on": "A count of the young not on the 2014 roll; no source given.",
+     "kind": "count from official data",
+     "check": "Not verifiable from the site, which holds no roll by age. The site's series does show the roll closer to the adult population in 2014 (98.2 per 100) than in 2024 (96.3), which fits a smaller gap then. Bhalla puts 2014 at 3.1 per cent above adults on his own estimate.",
+     "site_counts": "2014, 98.2 electors per 100 adults. 2024, 96.3 (UN WPP 2024).",
+     "site_stops": "The site holds no count by age."
+    },
+    {
+     "piece": "dy-ie",
+     "quote": "Even if we were to accept Bhalla’s inflated benchmark of 8.5 per cent for voluntary non-registration, there would still be 14 million unfairly excluded voters in Uttar Pradesh alone. This clearly jars with Bhalla’s claim that only 7 million were excluded in the nine states combined.",
+     "timestamp": null,
+     "relies_on": "Uttar Pradesh adults (161.7 million) less 8.5 per cent, against the final list (134 million).",
+     "kind": "projection or survey",
+     "check": "16,16,85,000 x 0.915 = 14,79,41,775. Less the final roll 13,39,84,792 gives 1,39,56,983, about 14 million. Arithmetic right. Bhalla's 7 million is not a sum of uniform 8.5 per cent gaps: he uses each state's own registration of the young (60 per cent in Uttar Pradesh), which gives Uttar Pradesh a clean roll at 85 per cent of adults, and he nets Bihar's, Tamil Nadu's and Kerala's surplus names against the shortfalls. Their \"breakfast and lunch\" point is about the first of these choices. With a flat 8.5 per cent in every state the nine rolls are about 2.56 crore short net, about 2.88 crore counting only the states that fall short.",
+     "site_counts": "Uttar Pradesh final 13,39,84,792, adults 16,16,85,000. At 91.5 per cent of adults the clean roll is 14,79,41,775.",
+     "site_stops": "The site holds no count by age and cannot say what share of the young chose not to register."
+    }
+   ],
+   "strongest_points": [
+    "Their method is the site's own: the final rolls against projected adults from the Technical Group, and eight of their nine state figures match the site's.",
+    "Their Uttar Pradesh arithmetic is right on Bhalla's own benchmark: 1.40 crore short at 91.5 per cent of adults.",
+    "They state plainly that their gap counts both people wrongly left off and adults never enrolled.",
+    "Before the revision the same nine rolls held 97.5 per cent of projected adults, which tells against a normal shortfall as large as 8.5 per cent."
+   ],
+   "overreach": [
+    "\"Disenfranchised\" and \"excluded\" for the whole gap: the gap includes adults never on the roll, and projections count residents, including migrants where they live and non-citizens.",
+    "The national 12 and 14 crore are extrapolations, the second from another analyst's projection of final rolls not yet out.",
+    "Tamil Nadu and Kerala held more names than projected adults before the revision, so part of their falls was names that should not have been there.",
+    "Their own West Bengal figure counts the 27 lakh later found not eligible as on the list, so it understates West Bengal."
+   ],
+   "not_verified": [
+    "The 5.2 per cent young enrolment gap in 2014 (no source given).",
+    "Rahul Shastri's estimate of 87.8 crore for the final rolls, and the 101.6 crore adults.",
+    "That the ECI uses population estimates as a benchmark for its rolls.",
+    "That 40 per cent of 18 to 29 year olds in Uttar Pradesh were not registered in 2024 (it is Bhalla's figure, from the ECI Atlas, which the site does not hold)."
+   ]
   }
  ]
 }
