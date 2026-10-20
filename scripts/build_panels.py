@@ -113,6 +113,9 @@ def build():
         people.append({'id': pid, 'name': pl['name'], 'role': pl['role'], 'intro': pl['intro'],
                        'note': pl.get('dropped_note', ''), 'pieces': ps, 'claims': claims,
                        'strongest': pl['strongest'], 'further': pl['further']})
+    # newest first: a panel's date is that of the latest piece it quotes, and
+    # panels of the same date keep the order of plain.json
+    people.sort(key=lambda p: max(x['date'] for x in p['pieces']), reverse=True)
     n = sum(len(p['claims']) for p in people)
     return {'checked': C['generated'], 'counts': {'people': len(people), 'quotes': n}, 'people': people, 'dropped': dropped}
 
