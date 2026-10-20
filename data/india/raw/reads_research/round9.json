@@ -1,0 +1,19 @@
+[
+ {
+  "title": "Audit finds Bengal-specific access curbs in ECINET code",
+  "outlet": "Hindustan Times",
+  "authors": "Himanshi Dahiya",
+  "date": "2026-10-20",
+  "url": "https://www.hindustantimes.com/india-news/audit-finds-bengal-specific-access-curbs-in-ecinet-code-101792457867313.html",
+  "subscription": false,
+  "shows": "Reports a review of ECINET's publicly served code by the civic-tech initiative Charchagram, which found a rule excluding registration officers in West Bengal alone from the page that shows each enumeration form with its documents and from the notice-and-hearing dashboard. The review read only the code a browser receives before login, so it cannot say whether the rule was applied or enforced on the server, and the paper says it could not verify the review. The Commission did not answer the paper's questions.",
+  "type": "article (report)",
+  "group": "Investigations",
+  "verified_by_opening": true,
+  "quote": [
+   "The Election Commission of India’s (ECI) portal, ECINET, carries a feature that can bar Electoral Registration Officers (EROs) and Assistant EROs (AEROs) only in West Bengal from reviewing voters’ enumeration forms and viewing the notice-and-hearing dashboard, according to a third-party audit of the portal’s publicly served code.",
+   "HT couldn’t independently verify the audit. The exercise couldn’t ascertain whether the feature was used or when it was introduced. ECI did not respond to a questionnaire sent by HT."
+  ],
+  "note": "Opened on 20 October 2026 with curl (articleBody in the page, free). Published 20 October 2026, 7:15 am IST. Also entered as soft-33 in disputes_research/software.json. The article's own West Bengal totals are left out of 'shows'."
+ }
+]
