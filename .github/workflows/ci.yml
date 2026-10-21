@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [main]
 
+
+# A newer commit on a pull request cancels the run still going for the older one.
+# Runs on the default branch are never cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read
 
