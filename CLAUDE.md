@@ -47,6 +47,11 @@ python3 -m http.server 8000
   `scripts/check_contrast.py` measures them; run it when you touch colour.
 - **Every merge to `main` is a production deploy**, and a deploy costs money.
   Batch work and merge once.
+- **Publishing is separate from building.** Auto-publishing is locked, so a
+  merge builds and nothing goes live until a build is published, once a day at
+  20:00 IST from the Democracy-by-Design repository. `.github/workflows/publish.yml`
+  is the fallback at 21:17 IST and needs the `NETLIFY_TOKEN` Actions secret; it
+  publishes only a build newer than the live one. Run it by hand to publish at once.
 
 ## Writing
 
