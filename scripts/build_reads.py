@@ -34,8 +34,7 @@ BY_URL = {
     'https://thewire.in/business/the-link-between-tcs-sirs-digital-stack-and-the-noel-tata-n-chandrasekaran-tussle': 'Data and analysis',
     'https://indianexpress.com/article/india/decisions-unanimous-election-commission-response-sir-vote-express-investigation-gyanesh-kumar-10890491/': "The Commission's account",
 }
-# the Hyderabad lists' compiler is never named or pointed to (CLAUDE.md), so
-# a report on Hyderabad that names its co-author stays off the page
+# Addresses that stay off the reading list, matched by prefix
 EXCLUDE = {'https://sabarinstitute.org/research-and-publications/hyderabad-sir-'}
 OUTLET = {
     'Personal research note (debrajray.com)': 'Debraj Ray, research note',
