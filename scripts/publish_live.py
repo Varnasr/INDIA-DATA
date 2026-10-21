@@ -3,11 +3,10 @@
 Auto-publishing on the Netlify site is locked to save credits: every merge to
 main builds, and nothing goes live until a build is published. The daily
 publish for every locked site on the team runs from the private
-Democracy-by-Design repository (tools/publish-locked.py). Actions minutes for a
-private repository are billed, and on 20 and 21 October 2026 GitHub refused to
-start three of its runs because of the account's billing. This repository is
-public, so its Actions minutes are free, and this script is the fallback for
-this one site.
+Democracy-by-Design repository (tools/publish-locked.py) on a 20:00 IST
+schedule. GitHub starts scheduled runs late, often by hours, and on
+21 October 2026 it did not start that one at all. This script is the fallback
+for this one site, on a schedule of its own in this repository.
 
 It publishes only a build newer than the live one, so running it after the main
 publish has already gone through changes nothing.

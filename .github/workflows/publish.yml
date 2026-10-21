@@ -1,11 +1,10 @@
 name: Publish offtheroll.in
 
 # Fallback for the daily publish. The publish for every locked site runs from
-# the private Democracy-by-Design repository at 20:00 IST, and GitHub refuses
-# to start a private repository's runs when the account's billing fails. This
-# repository is public, so this runs free. It publishes only a build newer than
-# the live one, so it does nothing on a day the main publish went through.
-# Scheduled runs often start late. Run it by hand to publish at once.
+# the Democracy-by-Design repository at 20:00 IST, and GitHub starts scheduled
+# runs late or, as on 21 October 2026, not at all. This publishes only a build
+# newer than the live one, so it does nothing on a day the main publish went
+# through. It can start late too. Run it by hand to publish at once.
 on:
   schedule:
     - cron: '47 15 * * *'   # 21:17 IST
