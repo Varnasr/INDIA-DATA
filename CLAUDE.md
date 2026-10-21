@@ -49,9 +49,9 @@ python3 -m http.server 8000
   Batch work and merge once.
 - **Publishing is separate from building.** Auto-publishing is locked, so a
   merge builds and nothing goes live until a build is published, once a day at
-  20:00 IST from the Democracy-by-Design repository. `.github/workflows/publish.yml`
-  is the fallback at 21:17 IST and needs the `NETLIFY_TOKEN` Actions secret; it
-  publishes only a build newer than the live one. Run it by hand to publish at once.
+  20:00 IST, by `tools/publish-locked.py` in the Democracy-by-Design repository,
+  which publishes every locked site on the Netlify team. A Claude scheduled task
+  starts it at 20:01 IST, because GitHub starts its own scheduled runs hours late.
 
 ## Writing
 
