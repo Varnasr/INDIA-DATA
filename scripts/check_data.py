@@ -353,6 +353,11 @@ def _disputes():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
+def _events():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_events.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+
+
 def _migration():
     # The two migration measures in covariates.csv are Census 2011 D-01 counts
     # over the state's own enumerated population, both of them. Held to the
@@ -463,6 +468,7 @@ for name, fn in [
     ('the share form is wired for Netlify and the terms page describes it', _share),
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
+    ('the events page carries only events read twice and is current', _events),
     ('the RTI page carries only checked applications and is current', _rti),
     ('the case studies carry only checked items and are current', _cases),
     ('the site\'s own words keep the writing rules', _writing),

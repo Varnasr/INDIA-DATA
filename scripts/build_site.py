@@ -253,7 +253,7 @@ def shell(out, meta, content, scripts):
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="ql" data-i18n-each>%s</div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('guide/', 'How to Use This Site'), ('about-the-data/', 'About the Data'), ('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a Constituency'), ('help/', 'Left Off the Roll? What to Do'), ('india/disputes/', 'Protests and Disputes'), ('india/rti/', 'RTI Replies'), ('india/cases/', 'Case Studies'), ('india/reading/', 'Further Reading and Viewing'),
+        (('guide/', 'How to Use This Site'), ('about-the-data/', 'About the Data'), ('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a Constituency'), ('help/', 'Left Off the Roll? What to Do'), ('india/disputes/', 'Protests and Disputes'), ('india/events/', 'Events'), ('india/rti/', 'RTI Replies'), ('india/cases/', 'Case Studies'), ('india/reading/', 'Further Reading and Viewing'),
          ('india/women/', 'Women'), ('india/numbers/', 'The SIR in Numbers'), ('support/', 'Support Our Work')))
     # "Start Here" is its own menu beside Places, so Places holds only places
     about = ''.join(i for i in items if i.startswith('<div class="about"'))

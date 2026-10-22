@@ -1,0 +1,65 @@
+<!--page {"title": "ECINET, All India", "description": "Everything reported about ECINET, the Election Commission's software for the revision, in date order: its launch, the outages, the officials' complaints, the Commission's statements, the court cases and the review of its publicly served code.", "place": "india"} -->
+<main id="main">
+<div class="page-head" data-no-i18n><h1>ECINET, in date order</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only. Every item quotes the report it comes from and links to it.</p>
+
+<article class="disp ecinet" lang="en" dir="ltr" data-no-i18n>
+  <div class="kpis" id="kpis"></div>
+
+  <h2>What ECINET is</h2>
+  <p>ECINET is the Election Commission's platform for its election officials and other users. The Commission announced it in May 2025 as one platform bringing together more than 40 of its apps and websites, among them ERONET, and launched it on 22 January 2026, saying a trial version had been used in Bihar's revision. The revision's enumeration forms and its notice and hearing dashboard are on it. This page gathers every item on the <a href="../disputes/">disputes page</a> that concerns ECINET or ERONET, whatever section it sits in, so the record can be read in order.</p>
+
+  <h2>Reports by month</h2>
+  <p class="sub">Items about ECINET or ERONET on the disputes page, by the month of the report.</p>
+  <div class="grid"><div class="panel wide"><div class="vizbox" id="vMonth"></div></div></div>
+
+  <h2>Every item, oldest first</h2>
+  <p class="sub">Each item says what was reported or decided, quotes its source, and gives any response. The same item, with its number, is on the disputes page.</p>
+  <ol class="nfacts" id="list"></ol>
+
+  <h2>What this record cannot show</h2>
+  <p>The review of ECINET's code read only what the site serves before login, on the dates it gives, and cannot say whether any control it found was used, by whom or how often. Nothing here says who designed a feature or why. The Commission's own statements are listed beside the reports wherever they were made.</p>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</article>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/india.js"></script>
+<script src="../../assets/viz.js"></script>
+<script>
+SIR.json('data/india/disputes.json').then(function (D) {
+  var n = SIR.n, esc = SIR.esc, its = [], secs = {};
+  D.sections.forEach(function (s) {
+    secs[s.id] = s.title;
+    s.items.forEach(function (i) { if ((i.issues || []).some(function (x) { return /ECINET/.test(x); })) its.push(i); });
+  });
+  its.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+  var prim = its.filter(function (i) { return i.kind === 'primary'; }).length, months = {};
+  its.forEach(function (i) { var m = i.date.slice(0, 7); months[m] = (months[m] || 0) + 1; });
+  var first = its[0], last = its[its.length - 1];
+  SIR.inShort([
+    n(its.length) + ' items about ECINET or ERONET on the disputes page, from ' + SIR.date(first.date) + ' to ' + SIR.date(last.date) + '.',
+    n(prim) + ' of them are official documents, the press notes of the Commission or of a Chief Electoral Officer, and the rest are reports.',
+    'They sit in ' + n(Object.keys(its.reduce(function (a, i) { a[i.section] = 1; return a; }, {})).length) + ' sections of the disputes page.'
+  ], 'Each item is what its source says. The review of ECINET\'s code cannot say whether any control it found was used.');
+  document.getElementById('kpis').innerHTML = [
+    [n(its.length), 'items'], [n(prim), 'official documents'], [SIR.date(first.date), 'first item'], [SIR.date(last.date), 'latest item']
+  ].map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('');
+  var ms = Object.keys(months).sort();
+  VIZ.lollipop('vMonth', { label: 'Items about ECINET or ERONET, by month of report', axis: 'Items',
+    rows: ms.map(function (m) { return { name: SIR.date(m + '-01').replace(/^1 /, ''), v: months[m], text: n(months[m]), tok: '--fill-navy', hi: true }; }) });
+  document.getElementById('list').innerHTML = its.map(function (i) {
+    return '<li id="e-' + esc(i.id) + '"><p><b>' + SIR.date(i.date) + '</b>, ' + esc(i.state || 'All India') + '. <span class="tag">' + esc(secs[i.section] || '') + '</span></p>' +
+      '<p>' + esc(i.claim) + '</p>' + (i.response ? '<p class="nresp">' + esc(i.response) + '</p>' : '') +
+      '<p class="nsrc"><a href="' + esc(i.url) + '" rel="noopener">' + esc(i.outlet) + '</a>, "' + esc(i.headline) + '". ' +
+      (i.kind === 'primary' ? '<span class="tag primary">document</span>' : '<span class="tag press">report</span>') +
+      ' <a href="../disputes/#d-' + esc(i.id) + '">On the disputes page</a>.</p>' +
+      (i.quote ? '<details><summary>The words of the source</summary><blockquote>' + esc(i.quote) + '</blockquote></details>' : '') + '</li>';
+  }).join('');
+  SIR.anchors && SIR.anchors();
+  SIR.toc && SIR.toc();
+  SIR.showFaq('india', 'ecinet');
+  SIR.jump && SIR.jump();
+}).catch(SIR.fail);
+</script>
