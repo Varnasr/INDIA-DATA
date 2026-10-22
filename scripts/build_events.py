@@ -11,8 +11,9 @@ data/india/raw/events_research/ holds two files.
 Only events the second reading confirmed or corrected are kept, and its
 corrections are applied. Whether an event is coming up or past is decided
 by the page on the reader's own date, so the file never goes stale on that
-count. Events organised by political parties are left out; their protests
-are on the disputes page. The build fails on any of the site's own text
+count. Events organised by political parties are listed and carry
+party: true, which the page marks. Government and Election Commission events
+are left out; their dates are on the Rules page. The build fails on any of the site's own text
 that breaks the writing rules. Writes data/india/events.json.
 
     python3 scripts/build_events.py [--check]
@@ -25,7 +26,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / 'data' / 'india' / 'raw' / 'events_research'
 OUT = ROOT / 'data' / 'india' / 'events.json'
-KINDS = {'hearing', 'march', 'protest', 'press conference', 'official camp', 'convention', 'meeting', 'webinar'}
+KINDS = {'hearing', 'march', 'protest', 'rally', 'press conference', 'convention', 'meeting', 'webinar'}
 
 
 def rules(text, where):
@@ -56,7 +57,7 @@ def build():
         if not e.get('url') or not e.get('quote'):
             sys.exit('FAIL - %s has no source or no line from it' % e['id'])
         rules(e['what'], '%s what' % e['id'])
-        out.append({k: e.get(k, '') for k in ('id', 'title', 'organiser', 'start', 'end', 'time', 'place', 'kind', 'states', 'url', 'source_kind', 'quote', 'what')})
+        out.append(dict({k: e.get(k, '') for k in ('id', 'title', 'organiser', 'start', 'end', 'time', 'place', 'kind', 'states', 'url', 'source_kind', 'quote', 'what')}, party=bool(e.get('party'))))
     out.sort(key=lambda e: (e['start'], e['id']))
     return {'checked': E['generated'], 'scope': E['scope'], 'counts': {'events': len(out)}, 'events': out, 'dropped': dropped}
 

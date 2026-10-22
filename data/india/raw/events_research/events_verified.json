@@ -66,36 +66,6 @@
    "status": "confirmed",
    "fix": {},
    "note": "Opened Oneindia (curl, 200), published 3 October 2026 9:42 am. Quote verbatim in the body ('has announced another protest at Delhi's Jantar Mantar on October 10, 2026', straight apostrophe). The announcement was conditional on the CEC not resigning, and the demand for his resignation is stated, so 'what' is supported. The same party-or-movement scope question as ev-06 applies."
-  },
-  {
-   "id": "ev-09",
-   "status": "corrected",
-   "fix": {
-    "start": "2026-10-18",
-    "end": "",
-    "time": "",
-    "url": "https://aninews.in/news/national/general-news/delhi-sir-2026-over-23-lakh-new-voter-registration-applications-received-between-august-31-and-october-1520261017120843/",
-    "source_kind": "report",
-    "quote": "Special camps will be organised at polling stations across Delhi on October 18 and October 25 to assist voters with registration and corrections.",
-    "what": "Camps at every polling station in Delhi, where electors can check their names and file claims, corrections and Form 6. Claims and objections in Delhi close on 30 October, and the final roll is due on 4 December.",
-    "note": "ANI, 17 October 2026, reporting the Chief Electoral Officer's figures. The Tribune, Hindustan Times and The Statesman give the same two days. The Chief Electoral Officer's own site, ceodelhi.gov.in, could not be reached from here on 22 October, so no official line is quoted. The claims period agrees with the CEO Delhi schedule of 27 September in process.json. Read 22 October 2026."
-   },
-   "note": "The start date of 20 September has no support in the cited NewsBytes summary, which says only that the CEO 'is now holding weekend camps'. ANI (17 Oct, opened, 200) says camps at polling stations across Delhi on October 18 and October 25, that claims and objections close on October 30, 2026, disposal by November 30, and the final roll on December 4. The Tribune ('SIR: Voter camps on October 18, 25 in Delhi', opened, 200) says the Delhi Election Office will hold camps at all polling station locations on those two days ahead of the October 30 deadline. process.json schedules[29] (CEO Delhi letter of 27.09.2026) gives claims 2026-08-31 to 2026-10-30 and the final roll 2026-12-04, which agrees. ceodelhi.gov.in failed from curl (connection reset on https, 503 on http) and Firecrawl timed out on both the press-release page and the PDFs, so the official notices were not read. Search results list CEO Delhi PDFs 'Special_camps_organised5Oct2026.pdf' and 'Electoral_Roll_Special_camps_for_enrolment9Oct2026.pdf', whose snippets say another round of camps was held on 11 October, and a CEO Delhi X post on the 18 October camps. Those suggest earlier camp days in October as well, but they were not opened and are not used. A district Facebook post gives hours of 10:00 AM to 5:00 PM for one constituency only, so time is left empty. Because 18 and 25 October are single days, the range should be read with what, or split into two entries. Entered as two events, 18 October (ev-09) and 25 October (ev-10), since the camps were on those two days only."
-  },
-  {
-   "id": "ev-10",
-   "status": "corrected",
-   "fix": {
-    "start": "2026-10-25",
-    "end": "",
-    "time": "",
-    "url": "https://aninews.in/news/national/general-news/delhi-sir-2026-over-23-lakh-new-voter-registration-applications-received-between-august-31-and-october-1520261017120843/",
-    "source_kind": "report",
-    "quote": "Special camps will be organised at polling stations across Delhi on October 18 and October 25 to assist voters with registration and corrections.",
-    "what": "Camps at every polling station in Delhi, where electors can check their names and file claims, corrections and Form 6. Claims and objections in Delhi close on 30 October, and the final roll is due on 4 December.",
-    "note": "ANI, 17 October 2026, reporting the Chief Electoral Officer's figures. The Tribune, Hindustan Times and The Statesman give the same two days. The Chief Electoral Officer's own site, ceodelhi.gov.in, could not be reached from here on 22 October, so no official line is quoted. The claims period agrees with the CEO Delhi schedule of 27 September in process.json. Read 22 October 2026."
-   },
-   "note": "Same source and checks as ev-09, the second of the two camp days. The start date of 20 September has no support in the cited NewsBytes summary, which says only that the CEO 'is now holding weekend camps'. ANI (17 Oct, opened, 200) says camps at polling stations across Delhi on October 18 and October 25, that claims and objections close on October 30, 2026, disposal by November 30, and the final roll on December 4. The Tribune ('SIR: Voter camps on October 18, 25 in Delhi', opened, 200) says the Delhi Election Office will hold camps at all polling station locations on those two days ahead of the October 30 deadline. process.json schedules[29] (CEO Delhi letter of 27.09.2026) gives claims 2026-08-31 to 2026-10-30 and the final roll 2026-12-04, which agrees. ceodelhi.gov.in failed from curl (connection reset on https, 503 on http) and Firecrawl timed out on both the press-release page and the PDFs, so the official notices were not read. Search results list CEO Delhi PDFs 'Special_camps_organised5Oct2026.pdf' and 'Electoral_Roll_Special_camps_for_enrolment9Oct2026.pdf', whose snippets say another round of camps was held on 11 October, and a CEO Delhi X post on the 18 October camps. Those suggest earlier camp days in October as well, but they were not opened and are not used. A district Facebook post gives hours of 10:00 AM to 5:00 PM for one constituency only, so time is left empty. Because 18 and 25 October are single days, the range should be read with what, or split into two entries."
   }
  ],
  "notes": "No new dated civil-society SIR event from 22 October 2026 onward was found apart from ev-01. Checked: countercurrents.org/author/people-against-sir (one post, the 18 October release), lafc.in/press-releases (latest 9 October, no further Commission hearing dated), napmindia.org (statement of 18 October, no event), pucl.org (no SIR event), cjp.org.in (report of a national consultation held 3 October), and web searches for Jan Sunwai, people's tribunal, convention, webinar and later Lokur Commission hearings. A 'No-SIR National Convention' organised as a public hearing by Bharat Jodo Abhiyaan, PUCL and NAPM was reported about 15 to 16 October and is past. Three things for the caller: (1) every quote now matches its source character for character, and two needed curly apostrophes restored (ev-01, ev-06). (2) Whether Cockroach Janta Party events (ev-06 to ev-08) belong in a list that excludes political parties is an editorial call. It is not registered with the ECI but calls itself a party. (3) ev-09 lost its 20 September start, which no source supported. Its official confirmation is still outstanding because ceodelhi.gov.in was unreachable from this sandbox. No private person's phone number or address is recorded."

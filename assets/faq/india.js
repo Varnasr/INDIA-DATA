@@ -55,7 +55,7 @@
         [L('How can a roll hold more names than the state has adults?'),
          L('When it still carries names of people who have died, moved away or been entered twice. Before the revision six states held more names than their projected adults, and part of their fall in the draft was those names.'), ['adults', 'faq']],
         [L('How does an event get on the events page?'),
-         L('An event is listed once its date has been read in the organiser\'s own announcement or in a named report, and read a second time. Events organised by registered political parties are left out. Organisers can <a href="../../share/">send us their announcements</a>.'), ['events', 'faq']],
+         L('An event is listed once its date has been read in the organiser\'s own announcement or in a named report, and read a second time. Events organised by political parties are listed and marked as such. Organisers can <a href="../../share/">send us their announcements</a>.'), ['events', 'faq']],
         [L('Does listing an event mean the site supports it?'),
          L('No. An event is listed because it concerns the revision and its date can be checked. The views of its organisers are their own.'), ['events', 'faq']],
         [L('What is ECINET?'),
