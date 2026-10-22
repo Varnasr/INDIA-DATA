@@ -93,6 +93,18 @@
     "answer": "The Reporters' Collective reported that more than 100 Electoral Registration Officers in Bihar replied. It reproduces two answers to the question whether a list had been compiled and referred, both 'No', and two replies to the question on numbers referred, from Brahampur (199) and Buxar (200). Those give the constituency's SIR figures by reason (death, permanently shifted, duplicate, other) and no count of anyone referred. Neither has a category for people found not to be citizens."
    },
    "note": "Second reading, 19 Oct 2026, from the same article and image. The image shows three reply extracts: one for queries 3 and 4 headed 'AC-199 Brahampur, Bihar', signed by the Public Information Officer (199-Brahampur) with a handwritten date that reads 10.9.26, a query 4 extract headed 'AC-200 Buxar, Bihar', and an unlabelled query 3 extract that answers part 1 'Bihar has been already Completed SIR in 2025' and part 2 'No'. That extract sits above the Buxar one and is probably Buxar's, but it carries no name, so 'answer' now says two answers of 'No' to query 3 and two replies to query 4, without tying the first to Buxar. Figures read from the image: Buxar death 6161, 'Parmenent Shifted' 15964, duplicate 1609, other 1840; Brahampur 8885, 12208, 1597, 1834, each headed 'SIR Delection'. Against data/bihar/raw/reasons_by_ac.csv.gz: AC 200 dead 6,161, shifted 15,949, already_enrolled 1,609, absent 1,840; AC 199 dead 8,885, shifted 12,207, already_enrolled 1,597, absent 1,834. So the first reader's match holds, with one correction to the note: the RTI's 'Other' matches the site's 'absent' category, and 'Duplicate' the site's 'already enrolled'; shifted differs by 15 (Buxar) and 1 (Brahampur). Quote verbatim from the article. Outcome: changed from 'supplied' to 'partly supplied' ('Answered in part' on the page). The officers answered query 3 ('No'), but to query 4, the number of people referred, they gave the constituency's names left off by reason, which is a different count from what was asked, and no count of referrals. 'No record held' does not fit, because no reply says the office holds no information. 'Replied' stays blank: only one reply is dated and the outlet reports more than 100. 'More than 100' is the outlet's count ('Over 100')."
+  },
+  "rti-16": {
+   "status": "corrected",
+   "fix": {
+    "applicant": "A national spokesperson of the Trinamool Congress and former Rajya Sabha MP",
+    "asked": "The order and the applicant's post do not say what was asked. The order records the Central Public Information Officer's statement that the information sought was spread across multiple files running to hundreds of pages."
+   },
+   "note": "Second reading, 22 October 2026: order image read in full (First Appeal No 3741, 12-10-2026, Sh. T C Kom, Principal Secretary and FAA), post text fetched. Quote verbatim, Section 7(9) right, outcome 'appeal' fits an appellate order that released nothing, and the order does not say what was asked (the CPIO's reply is an attachment that was not published). Corrected the applicant's role: his Rajya Sabha term ended on 2 April 2026 and he is the party's national spokesperson, so he is a former MP. 'Asked' rewritten as a full sentence."
+  },
+  "rti-17": {
+   "status": "confirmed",
+   "note": "Second reading, 22 October 2026: reply image read in full (No. 591/1/ICS/2026/RTI, 21 October 2026, Registration No. 37505 of 01.10.2026, signed by the Secretary and CPIO, naming the Principal Secretary as First Appellate Authority), post text fetched. Quote verbatim including the capital C, Section 7(9) right, 'refused' fits since no information was given. The applicant stays an individual, since a profile line is not enough to give a party role."
   }
  },
  "leads": [
