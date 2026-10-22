@@ -1954,7 +1954,7 @@
   {
    "id": "jean-dreze-yogendra-yadav",
    "name": "Jean Drèze and Yogendra Yadav",
-   "role": "Jean Drèze is visiting professor, Department of Economics, Ranchi University. Yogendra Yadav is member, Swaraj India, and national convenor, Bharat Jodo Abhiyan; a psephologist and a petitioner in the Supreme Court challenge to the Bihar SIR (his own panel carries his earlier statements). This panel is their joint column of 20 October 2026, written in reply to Surjit Bhalla.",
+   "role": "Jean Drèze is visiting professor, Department of Economics, Ranchi University. Yogendra Yadav is member, Swaraj India, and national convenor, Bharat Jodo Abhiyan; a psephologist and a petitioner in the Supreme Court challenge to the Bihar SIR (his own panel carries his earlier statements). This panel is their joint column of 20 October 2026, written in reply to Surjit Bhalla. Drèze's follow-up column in The Economic Times of 21 October 2026 has its own panel.",
    "role_note": "Both roles as printed at the foot of the column, online and in print (\"Drèze is visiting professor, Department of Economics, Ranchi University. Yadav is member, Swaraj India, and national convenor, Bharat Jodo Abhiyan.\"). Yadav's petitioner role is from his own panel (LiveLaw, 12 Aug 2025). The column runs under the Express's DESHKAAL heading, which is Yadav's regular column.",
    "site_files": "data/india/states.json (states rows for the nine states: electors_before, electors_final, adults_2026, roll_adult_pct; total.removed), data/india/raw/adults_ls2024.csv (adults_2026, Technical Group, July 2020 report), data/westbengal/summary.json (pn05.final, pn05.adjudication, adj, election), data/india/lok_sabha_electors.json (2014 and 2024 rows), data/india/raw/terms_research/terms.json (rpa-s23, rer-r25-2), data/india/process.json (2025-06-24)",
    "pieces": [
@@ -2076,6 +2076,111 @@
     "Rahul Shastri's estimate of 87.8 crore for the final rolls, and the 101.6 crore adults.",
     "That the ECI uses population estimates as a benchmark for its rolls.",
     "That 40 per cent of 18 to 29 year olds in Uttar Pradesh were not registered in 2024 (it is Bhalla's figure, from the ECI Atlas, which the site does not hold)."
+   ]
+  },
+  {
+   "id": "jean-dreze",
+   "name": "Jean Drèze",
+   "role": "Jean Drèze is visiting professor, Department of Economics, Ranchi University. This panel is his column of 21 October 2026 in The Economic Times, a follow-up to the joint column with Yogendra Yadav, which has its own panel.",
+   "role_note": "Role as printed under the byline of the column (\"Drèze is visiting professor, Department of Economics, Ranchi University\").",
+   "site_files": "data/india/states.json (adults, states rows: electors_before, removed, electors_final, adults_2026, roll_adult_pct; total), data/westbengal/summary.json (pn05), data/uttarpradesh/summary.json (reasons, shares), data/gujarat/summary.json (shares), data/rajasthan/summary.json (press.reasons_total), data/india/process.json (2025-06-24)",
+   "pieces": [
+    {
+     "id": "dz-et",
+     "title": "Long & short of SIR: What happens when exclusion is prioritised over inclusion",
+     "outlet": "The Economic Times (ET Commentary)",
+     "date": "2026-10-21",
+     "url": "https://economictimes.indiatimes.com/opinion/et-commentary/long-short-of-sir-what-happens-when-exclusion-is-prioritised-over-inclusion/articleshow/135097800.cms",
+     "how_read": "Fetched on 22 October 2026 and read in full from the page and its JSON-LD articleBody (datePublished 2026-10-21T23:17:33+05:30, full text served without login). The table is an image, \"Ratio of enrolled voters to adult population (%)\": all major states 99 before the revision, 85 in the draft lists, final NA. The 12 major states with final SIR lists 97, 86 and 88. Sources \"Report of the Technical Group on Population Projections, July 2020, for projected population in 2026; ECI press notes and press conferences for SIR lists. Figures exclude Assam and Himachal Pradesh.\""
+    }
+   ],
+   "claims": [
+    {
+     "piece": "dz-et",
+     "quote": "In a recent article in The Indian Express, Yogendra Yadav and I defended the view that the SIR process is leading to mass disenfranchisement - at least 12 cr eligible voters (12% of India's estimated adult population) are likely to be left out of the final SIR lists.",
+     "timestamp": null,
+     "relies_on": "The joint column's nine-state shortfall of almost 12 per cent, carried to the whole country.",
+     "kind": "projection or survey",
+     "check": "Restates the joint column's extrapolation (see that panel, claims 3 and 4). 12 per cent of 101.6 crore is 12.2 crore. On the site the twelve states with final rolls and projected adults hold 87.5 per cent of projected adults, 8.36 crore short (computed from states.json).",
+     "site_counts": "Twelve states with final rolls, 87.5 per cent of projected adults.",
+     "site_stops": "No national figure for adults off the final rolls, since several states have no final roll yet."
+    },
+    {
+     "piece": "dz-et",
+     "quote": "For all major states together, pre-SIR lists add up to 99% of the corresponding adult population (see table).",
+     "timestamp": null,
+     "relies_on": "His table, rolls before the revision against the Technical Group's projected adults for 2026, Assam and Himachal Pradesh left out.",
+     "kind": "projection or survey",
+     "check": "states.json adults: 19 states with projected adults, rolls before 93,92,60,959 against 95,50,92,000 adults, 98.3 per cent. Six held more names than projected adults (over_100: Telangana 115.2, Karnataka 106.8, Tamil Nadu 106.5, Odisha 101.7, Andhra Pradesh 100.7, Kerala 100.4).",
+     "site_counts": "19 states, 98.3 per cent.",
+     "site_stops": "A projection counts residents, so a migrant counts where they live."
+    },
+    {
+     "piece": "dz-et",
+     "quote": "13 cr is the official number of names on 'ASDD lists' - ASDD being 'absentee, shifted, duplicate or deceased' in EC lingo.",
+     "timestamp": null,
+     "relies_on": "The Commission's counts of names left off the drafts.",
+     "kind": "count from official data",
+     "check": "states.json total: 13,39,03,307 left off the drafts in 31 states, of which 2,79,69,558 dead, 9,56,35,923 shifted, absent or other, 1,01,48,459 duplicate. Agrees with 13 crore.",
+     "site_counts": "31 states, 13,39,03,307.",
+     "site_stops": "Reasons are what the officers wrote down, unchecked."
+    },
+    {
+     "piece": "dz-et",
+     "quote": "In fact, ground reports from several states (including a careful state-wide survey in Rajasthan) suggest that majority of ASDD deletions are legitimate.",
+     "timestamp": null,
+     "relies_on": "Ground reports and a Rajasthan survey the column does not name.",
+     "kind": "projection or survey",
+     "check": "The survey is not named and was not seen. Rajasthan's press note (rajasthan summary press.reasons_total): dead 4,61,159, shifted 12,91,846, absent 2,46,249, duplicate 1,53,617.",
+     "site_counts": "Rajasthan reasons as above.",
+     "site_stops": "Whether a reason was right needs a check at the door."
+    },
+    {
+     "piece": "dz-et",
+     "quote": "In India as a whole, the shortfall is as large as 15% (see table). The gap shrinks when final lists are prepared, but not much.",
+     "timestamp": null,
+     "relies_on": "His table: all major states 85 per cent in the draft. Twelve states with final lists 86 in the draft and 88 in the final lists.",
+     "kind": "projection or survey",
+     "check": "states.json adults: draft_total 80,65,69,819 of 95,50,92,000, 84.4 per cent, so 15.6 per cent short. Twelve states with final rolls: draft 85.7, final 87.5, or 88.4 with West Bengal's 60,06,675 under adjudication on the roll. The table covers the major states, which the text calls India as a whole.",
+     "site_counts": "19 states 84.4 per cent in the draft. Twelve states 85.7 then 87.5.",
+     "site_stops": "Major states only."
+    },
+    {
+     "piece": "dz-et",
+     "quote": "Pre-SIR lists were, in fact, far from inclusive. A significant fraction of the adult population was left out - up to 10% perhaps, judging from patchy evidence.",
+     "timestamp": null,
+     "relies_on": "Evidence he calls patchy and does not set out.",
+     "kind": "projection or survey",
+     "check": "Not checkable from rolls. Six states held more names than projected adults before the revision, which fits his account of surplus names.",
+     "site_counts": "Six states over 100 per cent before the revision.",
+     "site_stops": "The rolls cannot show adults who were never on them."
+    },
+    {
+     "piece": "dz-et",
+     "quote": "When a migrant worker is marked as 'Shifted', the largest category in ASDD lists, in their village of origin, there is no guarantee that they have been, or will be, enrolled at the destination point.",
+     "timestamp": null,
+     "relies_on": "The reasons officers gave, and the absence of any link between a shifted entry and a new enrolment.",
+     "kind": "fact about process (documentary)",
+     "check": "Shifted alone is the largest reason in Uttar Pradesh (1,29,77,472, 44.9 per cent), Gujarat (54.6 per cent), Rajasthan (12,91,846) and Bihar (26,55,900 against 22,32,586 dead). In West Bengal dead (24,16,852) exceeds shifted (19,88,076). Most states publish shifted, absent and other together.",
+     "site_counts": "As above.",
+     "site_stops": "The rolls do not show whether a person entered as shifted enrolled where they moved."
+    },
+    {
+     "piece": "dz-et",
+     "quote": "When the SIR exercise began in June 2025, the most important task was not to weed out surplus names but to include those left out in pre-SIR lists.",
+     "timestamp": null,
+     "relies_on": "His judgement of what the revision should have done first.",
+     "kind": "framing",
+     "check": "Bihar's order is dated 24 June 2025 (process.json). A judgement, stated as one.",
+     "site_counts": "",
+     "site_stops": ""
+    }
+   ],
+   "strongest_points": [],
+   "overreach": [],
+   "not_verified": [
+    "The Rajasthan survey, which the column does not name.",
+    "The evidence for up to 10 per cent missing before the revision."
    ]
   }
  ]

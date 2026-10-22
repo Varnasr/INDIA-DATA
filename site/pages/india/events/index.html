@@ -1,0 +1,61 @@
+<!--page {"title": "Events, All India", "description": "Hearings, marches, protests, press conferences and official camps about the Special Intensive Revision, coming up and past, each with the organiser's own announcement or the report that gives its date.", "place": "india"} -->
+<main id="main">
+<div class="page-head" data-no-i18n><h1>Events</h1><ol class="summary" id="short"></ol></div>
+<p class="report-lang">This page is in English only. Every event links to the announcement or report that gives its date.</p>
+
+<article class="disp events" lang="en" dir="ltr" data-no-i18n>
+  <div class="kpis" id="kpis"></div>
+
+  <h2>Coming up</h2>
+  <p class="sub">Events dated today or later, soonest first. Plans change, so check the organiser's own announcement before you go.</p>
+  <ol class="nfacts" id="next"></ol>
+
+  <h2>Past events</h2>
+  <p class="sub">Latest first.</p>
+  <ol class="nfacts" id="past"></ol>
+
+  <h2>What is listed here</h2>
+  <p id="scope"></p>
+  <p>Each event gives the line from its source that states the date. An event whose date was found in a single news report says so. Organisations that hold hearings or meetings on the revision can <a href="../../share/">send us their announcements</a>, and we list them once we have read the announcement itself.</p>
+  <p>Deadlines for claims and objections, and the dates of the final rolls, are on the <a href="../process/">Rules page</a>. Court hearings are in the <a href="../disputes/#courts">courts section of the disputes page</a>.</p>
+  <p class="note limits" id="shortNote" hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+</article>
+</main>
+<!--scripts-->
+<script src="../../assets/sir.js"></script>
+<script src="../../assets/faq/india.js"></script>
+<script>
+SIR.json('data/india/events.json').then(function (D) {
+  var n = SIR.n, esc = SIR.esc;
+  // today in India, whatever the reader's own clock says
+  var today = new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
+  var last = function (e) { return e.end || e.start; };
+  var next = D.events.filter(function (e) { return last(e) >= today; });
+  var past = D.events.filter(function (e) { return last(e) < today; }).reverse();
+  var when = function (e) { return SIR.date(e.start) + (e.end ? ' to ' + SIR.date(e.end) : '') + (e.time ? ', ' + esc(e.time) : ''); };
+  var li = function (e) {
+    return '<li id="ev-' + esc(e.id.replace(/^ev-/, '')) + '"><p><b>' + when(e) + '</b>. ' + esc(e.title) + ' <span class="tag">' + esc(e.kind) + '</span></p>' +
+      '<p>' + esc(e.organiser) + '. ' + esc(e.place) + '.</p><p>' + esc(e.what) + '</p>' +
+      '<p class="nsrc"><a href="' + esc(e.url) + '" rel="noopener">' + (e.source_kind === 'organiser' ? 'The organiser\'s announcement' : 'The report that gives the date') + '</a>. ' +
+      (e.source_kind === 'organiser' ? '<span class="tag primary">organiser</span>' : '<span class="tag press">report</span>') + '</p>' +
+      '<details><summary>The words of the source</summary><blockquote>' + esc(e.quote) + '</blockquote></details></li>';
+  };
+  SIR.inShort([
+    next.length ? n(next.length) + (next.length === 1 ? ' event is' : ' events are') + ' coming up, the next on ' + SIR.date(next[0].start) + '.' : 'No event coming up has been announced in a source we could read.',
+    n(past.length) + ' past events are listed, from ' + (past.length ? SIR.date(past[past.length - 1].start) : '') + '.',
+    'Events organised by registered political parties are left out.'
+  ], 'Each event links to the announcement or report that gives its date. Plans change, so check with the organiser.');
+  document.getElementById('kpis').innerHTML = [
+    [n(next.length), 'coming up'], [n(past.length), 'past'], [n(D.events.filter(function (e) { return e.kind === 'hearing'; }).length), 'public hearings'],
+    [n(D.events.filter(function (e) { return e.source_kind === 'organiser'; }).length), 'from the organiser\'s own announcement']
+  ].map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('');
+  document.getElementById('next').innerHTML = next.length ? next.map(li).join('') : '<li>No event coming up has been announced in a source we could read.</li>';
+  document.getElementById('past').innerHTML = past.map(li).join('');
+  document.getElementById('scope').textContent = D.scope;
+  SIR.anchors && SIR.anchors();
+  SIR.toc && SIR.toc();
+  SIR.showFaq('india', 'events');
+  SIR.jump && SIR.jump();
+}).catch(SIR.fail);
+</script>

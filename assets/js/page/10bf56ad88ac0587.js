@@ -1,0 +1,44 @@
+SIR.json('data/india/states.json').then(function (D) {
+  var n = SIR.n, d1 = function (x) { return SIR.d(x, 1); };
+  var R = D.states.filter(function (r) { return r.adults_2026; });
+  var sum = function (rows, f) { return rows.reduce(function (a, r) { return a + f(r); }, 0); };
+  var A = sum(R, function (r) { return r.adults_2026; }), B = sum(R, function (r) { return r.electors_before; }), Dr = sum(R, function (r) { return r.electors_before - r.removed; });
+  var F = R.filter(function (r) { return r.electors_final; });
+  var AF = sum(F, function (r) { return r.adults_2026; }), BF = sum(F, function (r) { return r.electors_before; }), DF = sum(F, function (r) { return r.electors_before - r.removed; }), EF = sum(F, function (r) { return r.electors_final; });
+  var over = R.filter(function (r) { return r.electors_before > r.adults_2026; });
+  SIR.inShort([
+    'Across the ' + n(R.length) + ' states with a projected adult population, the rolls before the revision held ' + d1(100 * B / A) + ' per cent of projected adults and the drafts ' + d1(100 * Dr / A) + ' per cent.',
+    'In the ' + n(F.length) + ' of them with a final roll, the rolls went from ' + d1(100 * BF / AF) + ' per cent before the revision to ' + d1(100 * DF / AF) + ' per cent in the draft and ' + d1(100 * EF / AF) + ' per cent in the final roll.',
+    n(over.length) + ' states held more names than projected adults before the revision.'
+  ], 'A projection counts residents, and the gap below it mixes adults never enrolled with names wrongly left off.');
+  document.getElementById('kpis').innerHTML = [
+    [d1(100 * B / A) + '%', 'before the revision, ' + n(R.length) + ' states'], [d1(100 * Dr / A) + '%', 'in the drafts'],
+    [d1(100 * EF / AF) + '%', 'in the final rolls, ' + n(F.length) + ' states'], [n(over.length), 'states above 100 per cent before']
+  ].map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('');
+
+  var rows = R.slice().sort(function (a, b) { return b.electors_before / b.adults_2026 - a.electors_before / a.adults_2026; });
+  var pc = function (v, r) { return v == null ? null : +(100 * v / r.adults_2026).toFixed(1); };
+  VIZ.dots('vStages', { label: 'Electors as a share of projected adults: before the revision, in the draft and in the final roll, by state', axis: 'Per cent of projected adults',
+    cats: rows.map(function (r) { return r.state; }),
+    series: [
+      { name: 'Before the revision', col: '--fill-grey', vals: rows.map(function (r) { return pc(r.electors_before, r); }) },
+      { name: 'Draft', col: '--fill-red', vals: rows.map(function (r) { return pc(r.electors_before - r.removed, r); }) },
+      { name: 'Final roll', col: '--fill-navy', vals: rows.map(function (r) { return pc(r.electors_final, r); }) }
+    ] });
+  document.getElementById('overNote').textContent = 'Above 100 per cent before the revision: ' + over.map(function (r) { return r.state + ' (' + d1(100 * r.electors_before / r.adults_2026) + ')'; }).join(', ') + '. No final roll yet: ' + R.filter(function (r) { return !r.electors_final; }).map(function (r) { return r.state; }).join(', ') + '.';
+
+  var back = D.states.filter(function (r) { return r.made_up_pct != null && r.removed; }).sort(function (a, b) { return b.made_up_pct - a.made_up_pct; });
+  // a dot plot: some final rolls were smaller than their drafts, and the
+  // lollipop cannot draw a value below zero
+  VIZ.dots('vBack', { label: 'Rise from the draft to the final roll, as a share of the names left off the draft, by state', axis: 'Per cent of names left off the draft (below zero, the final roll was smaller than the draft)',
+    cats: back.map(function (r) { return r.state; }),
+    series: [{ name: 'Rise from draft to final roll', col: '--fill-navy', vals: back.map(function (r) { return r.made_up_pct; }) }] });
+  var fin = D.final;
+  document.getElementById('backNote').textContent = 'Across the ' + n(fin.states) + ' states with a final roll, the rise from draft to final roll came to at most ' + d1(fin.made_up_pct) + ' per cent of the names left off the draft. ' +
+    (fin.shrank && fin.shrank.length ? 'In ' + fin.shrank.join(', ') + ' the final roll was smaller than the draft. ' : '') +
+    (fin.withheld ? 'West Bengal\'s final roll left out ' + n(fin.withheld) + ' names held for adjudication.' : '');
+  SIR.anchors && SIR.anchors();
+  SIR.toc && SIR.toc();
+  SIR.showFaq('india', 'adults');
+  SIR.jump && SIR.jump();
+}).catch(SIR.fail);
