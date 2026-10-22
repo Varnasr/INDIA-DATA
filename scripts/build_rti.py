@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""RTI applications about the SIR, for india/rti/.
+"""RTI applications about the SIR, and the Election Commission's other RTI
+replies during the revision, for india/rti/.
 
     python3 scripts/build_rti.py          # writes data/india/rti.json and .csv
     python3 scripts/build_rti.py --check  # fails if either is stale
@@ -18,6 +19,11 @@ page only if that reading confirmed or corrected it, and a correction
 replaces the field it names. Anything else is listed under "What we could
 not confirm". An applicant is an organisation or a role, never a person's
 name. Nothing here says what the Commission or anyone else intended.
+
+An item whose topic is "other" is an application to the Election Commission
+that is not shown to concern the revision. It goes to its own list, "other",
+and is left out of every count, so the counts stay a count of applications
+about the revision.
 """
 import csv
 import io
@@ -32,7 +38,7 @@ OUT = os.path.join(ROOT, 'data', 'india')
 
 # what became of each application, in the order the page shows them
 OUTCOMES = ['no record held', 'not supplied', 'refused', 'transferred', 'partly supplied', 'supplied', 'appeal', 'no reply in time', 'pending']
-KEEP = ('id', 'state', 'authority', 'filed', 'replied', 'applicant', 'asked', 'outcome', 'answer', 'quote', 'section',
+KEEP = ('id', 'topic', 'state', 'authority', 'filed', 'replied', 'applicant', 'asked', 'outcome', 'answer', 'quote', 'section',
         'kind', 'outlet', 'headline', 'url', 'published', 'doc_url', 'also')
 
 
@@ -59,6 +65,9 @@ def build():
         it = dict(it)
         it.update(v.get('fix') or {})
         it = {k: it.get(k, [] if k == 'also' else '') for k in KEEP}
+        it['topic'] = it['topic'] or 'revision'
+        if it['topic'] not in ('revision', 'other'):
+            raise SystemExit('FAIL - %s has a topic outside revision and other' % it['id'])
         if it['outcome'] not in OUTCOMES:
             raise SystemExit('FAIL - %s has an outcome outside the list: %r' % (it['id'], it['outcome']))
         if not (it['url'] and it['published'] and it['asked'] and it['answer']):
@@ -71,6 +80,8 @@ def build():
             raise SystemExit('FAIL - %s was answered before it was filed' % it['id'])
         items.append(it)
     order = {o: i for i, o in enumerate(OUTCOMES)}
+    other = sorted((i for i in items if i['topic'] == 'other'), key=lambda x: x['replied'] or x['published'])
+    items = [i for i in items if i['topic'] == 'revision']
     items.sort(key=lambda x: (order[x['outcome']], x['replied'] or x['published']))
     by_outcome = {o: sum(1 for i in items if i['outcome'] == o) for o in OUTCOMES}
     by_authority = {}
@@ -81,6 +92,7 @@ def build():
     dated = [i['days'] for i in items if i['days'] is not None]
     return {
         'items': [{k: v for k, v in i.items()} for i in items],
+        'other': other,
         'by_outcome': {o: c for o, c in by_outcome.items() if c},
         'by_authority': by_authority,
         'unconfirmed': sorted(unconfirmed, key=lambda u: u['date'] or ''),

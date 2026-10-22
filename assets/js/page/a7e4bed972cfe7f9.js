@@ -49,6 +49,8 @@ SIR.json('data/india/rti.json').then(function (D) {
   });
   document.getElementById('secEnd').insertAdjacentHTML('beforebegin', html);
 
+  var other = D.other || [];
+  document.getElementById('otherList').innerHTML = other.length ? other.map(li).join('') : '<li>None published yet.</li>';
   document.getElementById('unconfirmed').innerHTML = D.unconfirmed.length ? D.unconfirmed.map(function (u) {
     return '<li>' + esc(u.outlet || '') + (u.date ? ', ' + SIR.date(u.date) : '') + ', "' + esc(u.headline || '') + '". ' + esc(u.reason) + '</li>';
   }).join('') : '<li>Every report we found was matched to its source.</li>';
