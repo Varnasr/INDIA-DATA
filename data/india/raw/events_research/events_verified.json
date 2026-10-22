@@ -68,34 +68,166 @@
    "note": "Opened Oneindia (curl, 200), published 3 October 2026 9:42 am. Quote verbatim in the body ('has announced another protest at Delhi's Jantar Mantar on October 10, 2026', straight apostrophe). The announcement was conditional on the CEC not resigning, and the demand for his resignation is stated, so 'what' is supported. The same party-or-movement scope question as ev-06 applies."
   },
   {
-   "id": "ev-09",
+   "id": "ev-11",
    "status": "corrected",
    "fix": {
-    "start": "2026-10-18",
-    "end": "",
-    "time": "",
-    "url": "https://aninews.in/news/national/general-news/delhi-sir-2026-over-23-lakh-new-voter-registration-applications-received-between-august-31-and-october-1520261017120843/",
-    "source_kind": "report",
-    "quote": "Special camps will be organised at polling stations across Delhi on October 18 and October 25 to assist voters with registration and corrections.",
-    "what": "Camps at every polling station in Delhi, where electors can check their names and file claims, corrections and Form 6. Claims and objections in Delhi close on 30 October, and the final roll is due on 4 December.",
-    "note": "ANI, 17 October 2026, reporting the Chief Electoral Officer's figures. The Tribune, Hindustan Times and The Statesman give the same two days. The Chief Electoral Officer's own site, ceodelhi.gov.in, could not be reached from here on 22 October, so no official line is quoted. The claims period agrees with the CEO Delhi schedule of 27 September in process.json. Read 22 October 2026."
+    "place": "BJP Central Office, New Delhi",
+    "what": "BJP MP Sambit Patra held a press conference at which he defended the Election Commission after reports that two Election Commissioners had objected to decisions on the electoral rolls. He said the correspondence among the three commissioners was a sign of a healthy democracy.",
+    "note": "Read by curl on 22 October 2026. The quote is verbatim in the Times of India report (updated 23 September 2026), which says 'on Wednesday'. The date is stated outright elsewhere. The BJP's own release at bjp.org (pressreleases/salient-points-press-conference-bjp-national-spokesperson-dr-sambit-patra-mp-40) is dated 23-09-2026 and says Patra 'addressed a press conference at the party's Central Office in New Delhi on Wednesday'. Deccan Herald's report says 'today (September 23)'. The BJP release was read through Firecrawl only."
    },
-   "note": "The start date of 20 September has no support in the cited NewsBytes summary, which says only that the CEO 'is now holding weekend camps'. ANI (17 Oct, opened, 200) says camps at polling stations across Delhi on October 18 and October 25, that claims and objections close on October 30, 2026, disposal by November 30, and the final roll on December 4. The Tribune ('SIR: Voter camps on October 18, 25 in Delhi', opened, 200) says the Delhi Election Office will hold camps at all polling station locations on those two days ahead of the October 30 deadline. process.json schedules[29] (CEO Delhi letter of 27.09.2026) gives claims 2026-08-31 to 2026-10-30 and the final roll 2026-12-04, which agrees. ceodelhi.gov.in failed from curl (connection reset on https, 503 on http) and Firecrawl timed out on both the press-release page and the PDFs, so the official notices were not read. Search results list CEO Delhi PDFs 'Special_camps_organised5Oct2026.pdf' and 'Electoral_Roll_Special_camps_for_enrolment9Oct2026.pdf', whose snippets say another round of camps was held on 11 October, and a CEO Delhi X post on the 18 October camps. Those suggest earlier camp days in October as well, but they were not opened and are not used. A district Facebook post gives hours of 10:00 AM to 5:00 PM for one constituency only, so time is left empty. Because 18 and 25 October are single days, the range should be read with what, or split into two entries. Entered as two events, 18 October (ev-09) and 25 October (ev-10), since the camps were on those two days only."
+   "note": "Second reading, 22 October 2026: Opened TOI by curl. The quote matches character for character. The date of 23 September is now stated directly by the BJP release (dated 23-09-2026) and by Deccan Herald ('today (September 23)'), so it is no longer inferred. Venue added from the BJP release: the party's Central Office, New Delhi. Description reworded because 'in support of the Election Commission's conduct of the SIR' went beyond the report, which is about the commissioners' correspondence."
   },
   {
-   "id": "ev-10",
+   "id": "ev-12",
    "status": "corrected",
    "fix": {
-    "start": "2026-10-25",
-    "end": "",
-    "time": "",
-    "url": "https://aninews.in/news/national/general-news/delhi-sir-2026-over-23-lakh-new-voter-registration-applications-received-between-august-31-and-october-1520261017120843/",
-    "source_kind": "report",
-    "quote": "Special camps will be organised at polling stations across Delhi on October 18 and October 25 to assist voters with registration and corrections.",
-    "what": "Camps at every polling station in Delhi, where electors can check their names and file claims, corrections and Form 6. Claims and objections in Delhi close on 30 October, and the final roll is due on 4 December.",
-    "note": "ANI, 17 October 2026, reporting the Chief Electoral Officer's figures. The Tribune, Hindustan Times and The Statesman give the same two days. The Chief Electoral Officer's own site, ceodelhi.gov.in, could not be reached from here on 22 October, so no official line is quoted. The claims period agrees with the CEO Delhi schedule of 27 September in process.json. Read 22 October 2026."
+    "place": "Congress headquarters, New Delhi",
+    "url": "https://www.thehindu.com/news/national/rahul-gandhi-press-meet-chief-election-commissioner-gyanesh-kumar-narendra-modi-amit-shah-september-24-2026/article71504109.ece",
+    "quote": "Leader of Opposition (LoP) in the Lok Sabha Rahul Gandhi addresses the media on CEC Gyanesh Kumar row at the Congress Headquarters in New Delhi on September 24, 2026.",
+    "what": "Rahul Gandhi held a press conference after a news report that two of the three Election Commissioners had formally objected at least 14 times in 10 months to decisions on the electoral rolls. He demanded the resignation of Chief Election Commissioner Gyanesh Kumar.",
+    "note": "Read by curl on 22 October 2026. The Hindu, 24 September 2026. The quote is the photo caption, which states the date and the place. The Hindu's live page of the same day says 'on Thursday (September 24, 2026)'. Deccan Herald reported that Gandhi had announced the press conference for 4 pm, but the start time was not confirmed in a report of the event."
    },
-   "note": "Same source and checks as ev-09, the second of the two camp days. The start date of 20 September has no support in the cited NewsBytes summary, which says only that the CEO 'is now holding weekend camps'. ANI (17 Oct, opened, 200) says camps at polling stations across Delhi on October 18 and October 25, that claims and objections close on October 30, 2026, disposal by November 30, and the final roll on December 4. The Tribune ('SIR: Voter camps on October 18, 25 in Delhi', opened, 200) says the Delhi Election Office will hold camps at all polling station locations on those two days ahead of the October 30 deadline. process.json schedules[29] (CEO Delhi letter of 27.09.2026) gives claims 2026-08-31 to 2026-10-30 and the final roll 2026-12-04, which agrees. ceodelhi.gov.in failed from curl (connection reset on https, 503 on http) and Firecrawl timed out on both the press-release page and the PDFs, so the official notices were not read. Search results list CEO Delhi PDFs 'Special_camps_organised5Oct2026.pdf' and 'Electoral_Roll_Special_camps_for_enrolment9Oct2026.pdf', whose snippets say another round of camps was held on 11 October, and a CEO Delhi X post on the 18 October camps. Those suggest earlier camp days in October as well, but they were not opened and are not used. A district Facebook post gives hours of 10:00 AM to 5:00 PM for one constituency only, so time is left empty. Because 18 and 25 October are single days, the range should be read with what, or split into two entries."
+   "note": "Second reading, 22 October 2026: Found a source that states the date itself. The Hindu's report of the press conference (article71504109) carries a caption dating it to 24 September 2026 at the Congress headquarters in New Delhi, and the Hindu live page says 'on Thursday (September 24, 2026)'. Al Jazeera's Reuters and EPA captions also give 24 September 2026. The url and quote are switched to that report, and the caption was checked verbatim by curl. The description dropped 'on record' and 'during the SIR', which the first url did not support."
+  },
+  {
+   "id": "ev-13",
+   "status": "corrected",
+   "fix": {
+    "what": "Congress workers held street protests in several states demanding the resignation of Chief Election Commissioner Gyanesh Kumar. Police used water cannons in Patna, Lucknow and Punjab and detained protesters in Assam, Jammu, Odisha, Manipur, Delhi and other states."
+   },
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches. The page text shows a space before the comma after 'Gyanesh Kumar', which is a tag boundary in the HTML and not part of the sentence. Date, places and organisers match. The description said the demand was 'over decisions taken during the SIR'. The report says only that Venugopal wanted all of Kumar's decisions, including the SIR ones, revoked, so the phrase is removed."
+  },
+  {
+   "id": "ev-14",
+   "status": "confirmed",
+   "fix": {},
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches character for character. The Hindu says the hearing was on Thursday 1 October 2026 in Patna, 'organised by the Bihar State CPI (ML) Liberation', with about 20 voters testifying before a five-member jury and a survey covering seven named districts and ten constituencies. The venue within Patna is not given."
+  },
+  {
+   "id": "ev-15",
+   "status": "corrected",
+   "fix": {
+    "what": "The INDIA bloc announced 'save democracy' marches in every district from 2 to 8 October, ending in demonstrations outside district magistrates' offices. Reports show some were held, including a protest by INDIA bloc parties outside the Collectorate in Hyderabad on 6 October and a march by the RJD, Congress and Left in Patna on 7 October.",
+    "note": "Read by curl on 22 October 2026. BusinessLine, 30 September 2026, announcing the programme. Whether the marches were held was checked in other reports. The Indian Express live blog of 6 October quotes ANI on an INDIA bloc protest outside the Collectorate in Hyderabad that day, and its live blog of 7 October reports an INDIA bloc march in Patna on Wednesday 7 October and a 'Vote Bachao, Desh Bachao' march by the SP, Congress and CPI(M) to a Collectorate on 5 October (PTI, town not named in the excerpt). No count of districts where marches were held was found."
+   },
+   "note": "Second reading, 22 October 2026: Opened BusinessLine by curl. The quote matches. The source is an announcement. Searched for reports that the marches happened and found some: the Indian Express live blogs of 6 and 7 October (both opened by curl) report a protest outside the Hyderabad Collectorate on 6 October, an INDIA bloc march in Patna on 7 October, and an SP, Congress and CPI(M) march to a Collectorate on 5 October. Arunachal Pradesh and Andaman Congress posts and local reports show more, but no national count exists. Kept, with the description saying it was announced and that some marches were reported held."
+  },
+  {
+   "id": "ev-16",
+   "status": "corrected",
+   "fix": {
+    "organiser": "Shiv Sena (UBT) and Maharashtra Navnirman Sena, with state leaders of the Congress and NCP (SP)",
+    "what": "A march in Mumbai led by Uddhav Thackeray and Raj Thackeray against Chief Election Commissioner Gyanesh Kumar. Participants demanded his removal or resignation over alleged irregularities in the SIR. Party flags were not allowed and marchers carried the national flag.",
+    "note": "Read by curl on 22 October 2026. The Hindu (PTI), 4 October 2026. The figure of about 6,000 and the police statement on permission come from a second Hindu report of the same day that was not opened in this check. MNS is not an INDIA bloc member."
+   },
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches. The report says state leaders of the Congress and NCP (SP) took part, not their workers, and it says the demand was the CEC's removal or resignation over alleged irregularities in the SIR. It does not mention scrapping the SIR in Maharashtra or the 6,000 figure, so both are removed from the description."
+  },
+  {
+   "id": "ev-17",
+   "status": "corrected",
+   "fix": {
+    "organiser": "INDIA bloc (Congress, Samajwadi Party, Trinamool Congress, CPI(M) and other parties), with BJD leaders",
+    "time": "",
+    "place": "Parliament House towards Nirvachan Sadan, New Delhi",
+    "what": "Opposition MPs marched from Parliament House towards the Election Commission's headquarters. Police stopped the march at barricades and detained about 260 people, including 10 MPs. Rahul Gandhi, Priyanka Gandhi Vadra and other Congress leaders were detained after they began a sit-in inside the Akashvani Bhawan premises.",
+    "note": "Read by curl and Firecrawl on 22 October 2026. The Hindu live page, 6 October 2026, gives the date, the 260 detentions and the Akashvani Bhawan sit-in. ANI's report of 6 October says BJD leaders supported the march. A planned start of 10.30 am was reported in advance by The New Indian Express and was not confirmed in a report of the day, so it is left out. The Quint's figure of 237 MPs from 19 parties was not checked."
+   },
+   "note": "Second reading, 22 October 2026: Opened the Hindu live page by curl and Firecrawl. The quote matches. The page does not say the march was stopped on Parliament Street or half a kilometre short, and it does not name the Shiv Sena (UBT) or the BJD. ANI (opened by curl) says the march had 'the support of the BJD leaders' and was stopped by barricading. Place, organiser and description are reduced to what was read. The 10.30 am time came from a pre-event plan and is removed."
+  },
+  {
+   "id": "ev-18",
+   "status": "corrected",
+   "fix": {
+    "title": "Lok Bhavan March",
+    "organiser": "INDIA bloc (Mahagathbandhan) in Bihar, led by RJD's Tejashwi Yadav, with the Congress, VIP, CPI, CPI(ML) Liberation and Indian Inclusive Party",
+    "place": "From the Seven Martyrs statue in front of the Bihar Vidhan Sabha towards Lok Bhavan, Patna. Stopped at the third barricade",
+    "what": "A march in Patna by INDIA bloc parties towards Lok Bhavan demanding the resignation of Chief Election Commissioner Gyanesh Kumar. Police stopped it at the third barricade and detained several leaders. A delegation led by Tejashwi Yadav then gave the Governor of Bihar a memorandum addressed to the President."
+   },
+   "note": "Second reading, 22 October 2026: Opened by curl (the full article, not only an excerpt). The quote matches. The leaders named are from the RJD, Congress, VIP, CPI, CPI(ML) Liberation and the Indian Inclusive Party. The CPI(M) is not named in the article, so it is removed from the organiser. The slogan 'Gyanesh Hatao, Loktantra Bachao' rested on an Instagram snippet and is dropped from the title. The Indian Express live blog uses the same slogan for a separate INDIA bloc march in Patna on 7 October, which may belong under event 5."
+  },
+  {
+   "id": "ev-19",
+   "status": "confirmed",
+   "fix": {},
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches character for character, as one sentence in The Hindu's report of 14 October on the Kolkata procession. No places or numbers are given."
+  },
+  {
+   "id": "ev-20",
+   "status": "corrected",
+   "fix": {
+    "organiser": "INDIA bloc (Congress, Samajwadi Party, RJD, Shiv Sena (UBT), Trinamool Congress, CPI(M), CPI(ML) Liberation, CPI and others), with the student bodies AISA, SFI and AISF",
+    "place": "Constitution Club towards the Supreme Court, New Delhi, through central Delhi and back via Mandi House. Stopped by police near the Supreme Court",
+    "what": "A march through central Delhi from the Constitution Club towards the Supreme Court, where Rahul Gandhi and other INDIA bloc leaders filed a petition over alleged large-scale voter deletions and irregularities in the SIR. Police stopped the procession near the court. The Congress said 2.5 lakh people took part."
+   },
+   "note": "Second reading, 22 October 2026: Opened by curl. The caption quote matches. The article gives the 1.30 pm start at the Constitution Club and names leaders of the Congress, SP, RJD, Shiv Sena (UBT), Trinamool, CPI(M), CPI(ML) and CPI on the lead bus, and AISA, SFI and AISF flags. It does not name the NCP (SP), JMM or IUML, or Bhagwan Das Road, a 600 m distance, a request to suspend the SIR, an independent audit, or 'ten other' leaders. Those are removed."
+  },
+  {
+   "id": "ev-21",
+   "status": "corrected",
+   "fix": {
+    "organiser": "Trinamool Congress (the faction led by Mamata Banerjee), with Dola Sen, Sobhandeb Chattopadhyay and Kunal Ghosh",
+    "place": "Rajabazar, Kolkata",
+    "what": "Leaders and supporters of the Trinamool Congress faction led by Mamata Banerjee gathered at Rajabazar in Kolkata for a procession against the Chief Election Commissioner and the SIR. Police did not allow them to march, saying no permission had been sought, and the crowd dispersed."
+   },
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches. The site names the party 'Trinamool Congress' throughout data/india/disputes.csv (including the 20 October 2026 entry) and data/india/panels.json, and never uses 'Mamata All India Trinamool Congress', 'AITC' or 'faction'. The Hindu reports a split ('the Mamata faction of the Trinamool Congress', 'the Mamata Banerjee-led faction'), so the organiser uses the site's name with the faction stated. The Rajabazar to Park Circus route came from a Facebook snippet and is dropped."
+  },
+  {
+   "id": "ev-22",
+   "status": "confirmed",
+   "fix": {},
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches. The page text shows spaces before two commas after linked party names, which are tag boundaries and not part of the sentence. Date, route (Gandhi Maidan towards Raj Bhavan), detentions and the designated site at Gardanibagh match. AISA is named in the photo caption. The organisers are student and youth wings plus the Bheem Army, which the editor may want to place outside the party category."
+  },
+  {
+   "id": "ev-23",
+   "status": "corrected",
+   "fix": {
+    "place": "District headquarters across Assam. Rallies were reported in Nalbari on 13 October, Guwahati and Jorhat on 14 October, and Silchar",
+    "what": "A series of BJP rallies at district headquarters in Assam backing the Prime Minister and the SIR of electoral rolls. In Guwahati the state party chief Dilip Saikia led a 'Jana Jagaran Samadal' rally from Khanapara.",
+    "note": "Read by curl on 22 October 2026. The Assam Tribune, 14 October 2026. The Silchar rally is dated Tuesday in the text and Wednesday in a photo caption, so its date is not given. The 13 to 31 October period is from Chief Minister Himanta Biswa Sarma's announcement on behalf of the party, reported in the same article. The rallies are party events."
+   },
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches. The article says the Silchar rally was held 'on Tuesday' in its text and on Wednesday in a caption, and that a rally was held in Nalbari on Tuesday. The rally name 'Jana Jagaran Samadal' is in the article. The events are organised by the BJP, so they are in scope even though the Chief Minister announced them."
+  },
+  {
+   "id": "ev-24",
+   "status": "corrected",
+   "fix": {
+    "what": "The Congress announced block-level marches from 10 to 20 October, ending at Sub Divisional Magistrates' offices, as part of its 'Vote bachao, Desh bachao' campaign. The campaign also asks the party's booth agents to find voters deleted unfairly and help them re-enrol.",
+    "note": "Read by curl on 22 October 2026. The Hindu, 5 October 2026, and ETV Bharat of the same day give the same dates. This is an announcement. No press report of a block march held in that period was found. PTI (ThePrint, 13 October) reports that the Haryana unit moved its block marches to 14 to 24 October. Social media posts show local 'Vote Bachao, Desh Bachao' protests by INDIA bloc parties in Anantnag on 17 and 19 October, which were not checked further."
+   },
+   "note": "Second reading, 22 October 2026: Opened The Hindu and ETV Bharat by curl. The quote matches apart from a tag-boundary space before the closing quotation mark. Searched for reports that the marches were held and found only the plan and a Haryana rescheduling to 14 to 24 October (ThePrint/PTI, opened by curl). Kept as announced, with the description saying so."
+  },
+  {
+   "id": "ev-25",
+   "status": "confirmed",
+   "fix": {},
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches character for character. The Hindu (PTI) gives the date, the Gandhi statue in Parliament Square, Dhruv Rathee as keynote speaker, the organiser line 'organised by the Indian Overseas Congress Youth wing' and the supporting groups, and the smaller counter-protest. It is a diaspora event in London, which the editor may want to mark as outside India."
+  },
+  {
+   "id": "ev-26",
+   "status": "confirmed",
+   "fix": {},
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches character for character. Hindustan Times, 20 October 2026, gives 22 October to 5 November, the 15-day plan of press conferences, foot marches, district public meetings and constituency discussions, and the participation of Chief Minister Saini and state president Archana Gupta. It is announced and organised by the party. Whether it began today was not checked."
+  },
+  {
+   "id": "ev-27",
+   "status": "confirmed",
+   "fix": {},
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches character for character. India Today, 17 October 2026, says the NOC is for a one-day Congress rally at Ramlila Maidan on 1 November, as part of the INDIA bloc's campaign against the SIR, with the ground booked from 25 October to 3 November."
+  },
+  {
+   "id": "ev-28",
+   "status": "confirmed",
+   "fix": {},
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches character for character. The Hans India says the decision was taken at a meeting chaired by KPCC president B.K. Hariprasad on Friday at the Legislators' House, names the coordination committee parties, and says district and taluk demonstrations will follow. The venue and time of the 5 November protest are not given."
+  },
+  {
+   "id": "ev-29",
+   "status": "corrected",
+   "fix": {
+    "what": "The Congress announced six Delhi Chalo marches from Rajasthan, Haryana and Uttar Pradesh on 25 November, ending in an event in Delhi on Constitution Day, 26 November, as the last stage of its 'Vote bachao, Desh bachao' campaign.",
+    "note": "Read by curl on 22 October 2026. The Hindu, 5 October 2026. ETV Bharat, UNI and Deccan Chronicle reports of the 5 October announcement all give 25 to 26 November with the Delhi event on 26 November. ETV Bharat of 17 October, citing party insiders, says a major Congress event is 'likely' in Delhi on 27 November after a two-day Chalo Delhi campaign on 25 and 26 November. Sources differ on the date of the Delhi event, 26 or 27 November, and the party has not confirmed a change on record."
+   },
+   "note": "Second reading, 22 October 2026: Opened The Hindu (5 October) and ETV Bharat (5 and 17 October) by curl. The quote matches. Every report of the announcement gives 26 November for the Delhi event, and only the 17 October report, from unnamed insiders and with 'likely', gives 27 November. Not settled. Dates kept as announced, with the note stating both dates."
   }
  ],
  "notes": "No new dated civil-society SIR event from 22 October 2026 onward was found apart from ev-01. Checked: countercurrents.org/author/people-against-sir (one post, the 18 October release), lafc.in/press-releases (latest 9 October, no further Commission hearing dated), napmindia.org (statement of 18 October, no event), pucl.org (no SIR event), cjp.org.in (report of a national consultation held 3 October), and web searches for Jan Sunwai, people's tribunal, convention, webinar and later Lokur Commission hearings. A 'No-SIR National Convention' organised as a public hearing by Bharat Jodo Abhiyaan, PUCL and NAPM was reported about 15 to 16 October and is past. Three things for the caller: (1) every quote now matches its source character for character, and two needed curly apostrophes restored (ev-01, ev-06). (2) Whether Cockroach Janta Party events (ev-06 to ev-08) belong in a list that excludes political parties is an editorial call. It is not registered with the ECI but calls itself a party. (3) ev-09 lost its 20 September start, which no source supported. Its official confirmation is still outstanding because ceodelhi.gov.in was unreachable from this sandbox. No private person's phone number or address is recorded."

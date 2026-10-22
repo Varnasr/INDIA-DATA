@@ -1,8 +1,8 @@
 {
  "checked": "2026-10-22",
- "scope": "Hearings, marches, protests, press conferences and official camps about the revision, organised by civil-society groups, independent commissions, youth groups and election offices. Events organised by registered political parties are left out, and their protests are in the disputes page's section on protests. The Cockroach Janta Party calls itself a party and is a youth movement that is not registered with the Election Commission, so its events are listed.",
+ "scope": "Jan Sunwais, marches, protests, rallies, conventions and press conferences about the revision, organised by civil-society groups, independent commissions, youth groups and political parties of every side. Events organised by a political party are marked. The Election Commission's and the Chief Electoral Officers' own camps are left out, and their dates are on the Rules page.",
  "counts": {
-  "events": 10
+  "events": 27
  },
  "events": [
   {
@@ -20,7 +20,62 @@
    "url": "https://m.thewire.in/article/rights/a-jan-sunwai-in-delhi-shows-the-way-only-public-audit-can-purify-sir-electoral-rolls",
    "source_kind": "report",
    "quote": "The findings were presented at a public hearing, or Jan Sunwai, held in Mangolpuri on September 5, 2026.",
-   "what": "The findings of a door-to-door audit of Y Block were presented at a public hearing."
+   "what": "The findings of a door-to-door audit of Y Block were presented at a public hearing.",
+   "party": false
+  },
+  {
+   "id": "ev-11",
+   "title": "BJP press conference on the Election Commission and SIR row",
+   "organiser": "Bharatiya Janata Party (national spokesperson Sambit Patra)",
+   "start": "2026-09-23",
+   "end": "",
+   "time": "",
+   "place": "BJP Central Office, New Delhi",
+   "kind": "press conference",
+   "states": [
+    "Delhi"
+   ],
+   "url": "https://timesofindia.indiatimes.com/india/deliberations-sign-of-pure-democracy-bjp-reacts-to-ec-sir-split-row-targets-congress/articleshow/134432747.cms",
+   "source_kind": "report",
+   "quote": "NEW DELHI: The BJP on Wednesday defended the election commission over the row surrounding an alleged split among the poll panel's commissioners, with party MP Sambit Patra saying that internal deliberations between the three election commissioners were a sign of a healthy democracy.",
+   "what": "BJP MP Sambit Patra held a press conference at which he defended the Election Commission after reports that two Election Commissioners had objected to decisions on the electoral rolls. He said the correspondence among the three commissioners was a sign of a healthy democracy.",
+   "party": true
+  },
+  {
+   "id": "ev-12",
+   "title": "Rahul Gandhi press conference on the Election Commissioners' objections to SIR decisions",
+   "organiser": "Indian National Congress (Leader of the Opposition Rahul Gandhi)",
+   "start": "2026-09-24",
+   "end": "",
+   "time": "",
+   "place": "Congress headquarters, New Delhi",
+   "kind": "press conference",
+   "states": [
+    "All India"
+   ],
+   "url": "https://www.thehindu.com/news/national/rahul-gandhi-press-meet-chief-election-commissioner-gyanesh-kumar-narendra-modi-amit-shah-september-24-2026/article71504109.ece",
+   "source_kind": "report",
+   "quote": "Leader of Opposition (LoP) in the Lok Sabha Rahul Gandhi addresses the media on CEC Gyanesh Kumar row at the Congress Headquarters in New Delhi on September 24, 2026.",
+   "what": "Rahul Gandhi held a press conference after a news report that two of the three Election Commissioners had formally objected at least 14 times in 10 months to decisions on the electoral rolls. He demanded the resignation of Chief Election Commissioner Gyanesh Kumar.",
+   "party": true
+  },
+  {
+   "id": "ev-13",
+   "title": "Congress nationwide protests demanding the CEC's resignation",
+   "organiser": "Indian National Congress, with state units, the Delhi Congress and the Indian Youth Congress",
+   "start": "2026-09-25",
+   "end": "",
+   "time": "",
+   "place": "Several states, including marches in Patna, Lucknow, Assam (towards the Chief Electoral Officer's office), Jammu, Imphal and Delhi (Delhi Congress office towards Nirvachan Sadan)",
+   "kind": "protest",
+   "states": [
+    "All India"
+   ],
+   "url": "https://www.thehindu.com/news/national/congress-leads-protests-demanding-cecs-resignation-arrest/article71509581.ece",
+   "source_kind": "report",
+   "quote": "The Congress on Friday (September 25, 2026) led nationwide protests demanding the resignation of Chief Election Commissioner (CEC) Gyanesh Kumar, accusing him of compromising the integrity of India’s electoral process, with the party’s general secretary (organisation), K.C. Venugopal, seeking Mr. Kumar’s resignation and arrest for alleged electoral malpractice.",
+   "what": "Congress workers held street protests in several states demanding the resignation of Chief Election Commissioner Gyanesh Kumar. Police used water cannons in Patna, Lucknow and Punjab and detained protesters in Assam, Jammu, Odisha, Manipur, Delhi and other states.",
+   "party": true
   },
   {
    "id": "ev-05",
@@ -37,7 +92,26 @@
    "url": "https://x.com/the_hindu/status/2104552315898519641/photo/2",
    "source_kind": "report",
    "quote": "Members of Voter Adhikar Manch addresses a press conference on SIR in New Delhi on September 28, 2026.",
-   "what": "A press conference on the revision."
+   "what": "A press conference on the revision.",
+   "party": false
+  },
+  {
+   "id": "ev-14",
+   "title": "Jan Sunwai (public hearing) on wrongful SIR deletions in Bihar",
+   "organiser": "CPI(ML) Liberation, Bihar State unit",
+   "start": "2026-10-01",
+   "end": "",
+   "time": "",
+   "place": "Patna",
+   "kind": "hearing",
+   "states": [
+    "Bihar"
+   ],
+   "url": "https://www.thehindu.com/news/national/election-commission-making-a-mockery-of-the-constitution-dipankar/article71533826.ece",
+   "source_kind": "report",
+   "quote": "Communist Party of India (Marxist-Leninist) Liberation General Secretary Dipankar Bhattacharya on Thursday (October 1, 2026) slammed the Election Commission of India (ECI) over alleged illegalities in the Special Intensive Revision (SIR).",
+   "what": "A public hearing in Patna where about 20 voters whose names were allegedly deleted gave testimony before a five-member jury. It was based on a voter verification survey the party ran in seven Bihar districts.",
+   "party": true
   },
   {
    "id": "ev-06",
@@ -54,7 +128,62 @@
    "url": "https://www.thehindu.com/news/cities/mumbai/cjp-to-protest-against-cec-in-mumbai-on-october-2-dipke-challenges-cm-fadnavis/article71533827.ece",
    "source_kind": "report",
    "quote": "the group will hold a protest at Mumbai’s Shivaji Park, a no-sound or silence zone, on Friday (October 2, 2026)",
-   "what": "A protest calling for the Chief Election Commissioner to resign. The police had not granted permission when it was announced."
+   "what": "A protest calling for the Chief Election Commissioner to resign. The police had not granted permission when it was announced.",
+   "party": false
+  },
+  {
+   "id": "ev-15",
+   "title": "'Save Democracy' marches in all districts",
+   "organiser": "INDIA bloc",
+   "start": "2026-10-02",
+   "end": "2026-10-08",
+   "time": "",
+   "place": "District headquarters across India, ending in demonstrations before district magistrates' offices",
+   "kind": "march",
+   "states": [
+    "All India"
+   ],
+   "url": "https://www.thehindubusinessline.com/news/india-bloc-announces-nation-wide-protest-from-oct-2-demands-cec-gyanesh-kumars-ouster/article71529420.ece",
+   "source_kind": "report",
+   "quote": "Under that “save democracy” marches will be taken out in all districts from October 2-8 and demonstrations will be held before the district magistrate’s office, the Congress President stated, adding that youth and NGOs would also be invited for the event.",
+   "what": "The INDIA bloc announced 'save democracy' marches in every district from 2 to 8 October, ending in demonstrations outside district magistrates' offices. Reports show some were held, including a protest by INDIA bloc parties outside the Collectorate in Hyderabad on 6 October and a march by the RJD, Congress and Left in Patna on 7 October.",
+   "party": true
+  },
+  {
+   "id": "ev-16",
+   "title": "Virat Garjana Morcha (Grand Roar March)",
+   "organiser": "Shiv Sena (UBT) and Maharashtra Navnirman Sena, with state leaders of the Congress and NCP (SP)",
+   "start": "2026-10-04",
+   "end": "",
+   "time": "",
+   "place": "Metro Cinema to the Brihanmumbai Municipal Corporation headquarters, south Mumbai",
+   "kind": "march",
+   "states": [
+    "Maharashtra"
+   ],
+   "url": "https://www.thehindu.com/news/national/raj-uddhav-thackeray-lead-morcha-in-mumbai-against-cec/article71543129.ece",
+   "source_kind": "report",
+   "quote": "Shiv Sena (UBT) chief Uddhav Thackeray and Maharashtra Navnirman Sena (MNS) boss Raj Thackeray on Sunday (October 4, 2026) led a protest march in Mumbai against Chief Election Commissioner Gyanesh Kumar.",
+   "what": "A march in Mumbai led by Uddhav Thackeray and Raj Thackeray against Chief Election Commissioner Gyanesh Kumar. Participants demanded his removal or resignation over alleged irregularities in the SIR. Party flags were not allowed and marchers carried the national flag.",
+   "party": true
+  },
+  {
+   "id": "ev-17",
+   "title": "INDIA bloc MPs' march from Parliament to the Election Commission",
+   "organiser": "INDIA bloc (Congress, Samajwadi Party, Trinamool Congress, CPI(M) and other parties), with BJD leaders",
+   "start": "2026-10-06",
+   "end": "",
+   "time": "",
+   "place": "Parliament House towards Nirvachan Sadan, New Delhi",
+   "kind": "march",
+   "states": [
+    "Delhi"
+   ],
+   "url": "https://www.thehindu.com/news/national/cec-row-protest-against-gyanesh-kumar-india-bloc-march-election-commission-sir-issue-live-updates-october-6-2026/article71549790.ece",
+   "source_kind": "report",
+   "quote": "The Delhi Police on Tuesday (October 6, 2026) detained around 260 people, including 10 Members of Parliament, during a protest march by the INDIA bloc from Parliament House towards the Election Commission of India (ECI) office.",
+   "what": "Opposition MPs marched from Parliament House towards the Election Commission's headquarters. Police stopped the march at barricades and detained about 260 people, including 10 MPs. Rahul Gandhi, Priyanka Gandhi Vadra and other Congress leaders were detained after they began a sit-in inside the Akashvani Bhawan premises.",
+   "party": true
   },
   {
    "id": "ev-07",
@@ -71,7 +200,26 @@
    "url": "https://www.outlookindia.com/art-entertainment/prakash-raj-anti-sir-protest-actor-urges-people-to-join-bengaluru-tribunal",
    "source_kind": "report",
    "quote": "The Bengaluru protest is scheduled for October 8 at 10:30 am at Freedom Park.",
-   "what": "A protest against the revision with a people's tribunal."
+   "what": "A protest against the revision with a people's tribunal.",
+   "party": false
+  },
+  {
+   "id": "ev-18",
+   "title": "Lok Bhavan March",
+   "organiser": "INDIA bloc (Mahagathbandhan) in Bihar, led by RJD's Tejashwi Yadav, with the Congress, VIP, CPI, CPI(ML) Liberation and Indian Inclusive Party",
+   "start": "2026-10-08",
+   "end": "",
+   "time": "",
+   "place": "From the Seven Martyrs statue in front of the Bihar Vidhan Sabha towards Lok Bhavan, Patna. Stopped at the third barricade",
+   "kind": "march",
+   "states": [
+    "Bihar"
+   ],
+   "url": "https://www.thehindu.com/news/national/bihar/india-bloc-leaders-submit-memorandum-to-bihar-governor-demand-cec-removal-and-re-election-in-state/article71559445.ece",
+   "source_kind": "report",
+   "quote": "The INDIA bloc (Indian National Developmental Inclusive Alliance) leaders, led by Rashtriya Janata Dal (RJD) National Working President Tejashwi Yadav, on Thursday (October 8, 2026) took out a massive Lok Bhavan March in Patna.",
+   "what": "A march in Patna by INDIA bloc parties towards Lok Bhavan demanding the resignation of Chief Election Commissioner Gyanesh Kumar. Police stopped it at the third barricade and detained several leaders. A delegation led by Tejashwi Yadav then gave the Governor of Bihar a memorandum addressed to the President.",
+   "party": true
   },
   {
    "id": "ev-08",
@@ -88,7 +236,116 @@
    "url": "https://www.oneindia.com/new-delhi/if-gyanesh-kumar-doesn-t-resign-cjp-announces-october-10-jantar-mantar-protest-2-0-8223463.html",
    "source_kind": "report",
    "quote": "has announced another protest at Delhi's Jantar Mantar on October 10, 2026",
-   "what": "A protest calling for the Chief Election Commissioner to resign. The disputes page carries the report of the day itself."
+   "what": "A protest calling for the Chief Election Commissioner to resign. The disputes page carries the report of the day itself.",
+   "party": false
+  },
+  {
+   "id": "ev-24",
+   "title": "'Vote Bachao, Desh Bachao' block-level marches",
+   "organiser": "Indian National Congress",
+   "start": "2026-10-10",
+   "end": "2026-10-20",
+   "time": "",
+   "place": "Block level across India, ending at Sub Divisional Magistrates' offices",
+   "kind": "march",
+   "states": [
+    "All India"
+   ],
+   "url": "https://www.thehindu.com/news/national/congress-campaign-against-vote-chori-to-help-re-enroll-voters-whose-names-were-deleted-in-sir/article71548466.ece",
+   "source_kind": "report",
+   "quote": "From October 10 to 20, block-level marches will be held, culminating at Sub Divisional Magistrates offices under the ‘Vote bachao, Desh bachao’ umbrella.",
+   "what": "The Congress announced block-level marches from 10 to 20 October, ending at Sub Divisional Magistrates' offices, as part of its 'Vote bachao, Desh bachao' campaign. The campaign also asks the party's booth agents to find voters deleted unfairly and help them re-enrol.",
+   "party": true
+  },
+  {
+   "id": "ev-19",
+   "title": "Left Front protests across West Bengal",
+   "organiser": "Left Front and student organisations of the Left parties",
+   "start": "2026-10-11",
+   "end": "",
+   "time": "",
+   "place": "Across West Bengal (places not specified)",
+   "kind": "protest",
+   "states": [
+    "West Bengal"
+   ],
+   "url": "https://www.thehindu.com/news/cities/kolkata/mamata-led-aitc-rally-against-cec-sir-stopped-in-kolkata-over-lack-of-police-permission/article71580118.ece",
+   "source_kind": "report",
+   "quote": "The Left Front and student organisations associated with the Left parties staged protests across the State on October 11, demanding the resignation of the CEC and the scrapping of SIR.",
+   "what": "Protests across West Bengal by the Left Front and Left student organisations demanding the Chief Election Commissioner's resignation and the scrapping of the SIR.",
+   "party": true
+  },
+  {
+   "id": "ev-20",
+   "title": "March for Democracy",
+   "organiser": "INDIA bloc (Congress, Samajwadi Party, RJD, Shiv Sena (UBT), Trinamool Congress, CPI(M), CPI(ML) Liberation, CPI and others), with the student bodies AISA, SFI and AISF",
+   "start": "2026-10-12",
+   "end": "",
+   "time": "1.30 pm start",
+   "place": "Constitution Club towards the Supreme Court, New Delhi, through central Delhi and back via Mandi House. Stopped by police near the Supreme Court",
+   "kind": "march",
+   "states": [
+    "Delhi"
+   ],
+   "url": "https://www.thehindu.com/news/national/india-bloc-marches-through-delhi-takes-sir-protest-to-sc/article71576536.ece",
+   "source_kind": "report",
+   "quote": "Lok Sabha Leader of Opposition Rahul Gandhi, with Priyanka Gandhi Vadra and other leaders from the INDIA bloc during the march from Barakhamba to Supreme Court in New Delhi on October 12, 2026",
+   "what": "A march through central Delhi from the Constitution Club towards the Supreme Court, where Rahul Gandhi and other INDIA bloc leaders filed a petition over alleged large-scale voter deletions and irregularities in the SIR. Police stopped the procession near the court. The Congress said 2.5 lakh people took part.",
+   "party": true
+  },
+  {
+   "id": "ev-21",
+   "title": "Procession against the CEC and SIR (stopped by police)",
+   "organiser": "Trinamool Congress (the faction led by Mamata Banerjee), with Dola Sen, Sobhandeb Chattopadhyay and Kunal Ghosh",
+   "start": "2026-10-13",
+   "end": "",
+   "time": "",
+   "place": "Rajabazar, Kolkata",
+   "kind": "march",
+   "states": [
+    "West Bengal"
+   ],
+   "url": "https://www.thehindu.com/news/cities/kolkata/mamata-led-aitc-rally-against-cec-sir-stopped-in-kolkata-over-lack-of-police-permission/article71580118.ece",
+   "source_kind": "report",
+   "quote": "Leaders and supporters of Mamata All India Trinamool Congress, who had gathered in Kolkata on Tuesday (October 13, 2026) to hold a procession in protest against Chief Election Commissioner Gyanesh Kumar and Special Intensive Revision (SIR), were not allowed to march as the police said that no permission was obtained for the event.",
+   "what": "Leaders and supporters of the Trinamool Congress faction led by Mamata Banerjee gathered at Rajabazar in Kolkata for a procession against the Chief Election Commissioner and the SIR. Police did not allow them to march, saying no permission had been sought, and the crowd dispersed.",
+   "party": true
+  },
+  {
+   "id": "ev-22",
+   "title": "Lok Bhawan March by Left students' and youth wings",
+   "organiser": "Students' and youth wings of Left parties, including AISA and RYA (CPI(ML) Liberation) and the CPI's student wing, with the Bheem Army",
+   "start": "2026-10-13",
+   "end": "",
+   "time": "",
+   "place": "Gandhi Maidan towards Raj Bhavan (Lok Bhawan), Patna",
+   "kind": "march",
+   "states": [
+    "Bihar"
+   ],
+   "url": "https://www.thehindu.com/news/national/bihar/young-protesters-in-patna-seek-resignation-of-cec-pm/article71579349.ece",
+   "source_kind": "report",
+   "quote": "Young protesters and members of the students’ wings of Left parties, including the Communist Party of India-Marxist-Leninist (CPI-M-L), the Communist Party of India (CPI), the Revolutionary Youth Association (RYA), and the Bheem Army took out a protest march in Patna on Tuesday (October 13, 2026), seeking the resignation of Chief Election Commissioner (CEC) Gyanesh Kumar, Prime Minister Narendra Modi, and re-elections in Bihar and West Bengal, where, they alleged “vote chori (theft) through the SIR (Special Intensive Revision)” had taken place.",
+   "what": "Student and youth activists marched from Gandhi Maidan towards Raj Bhavan in Patna over the SIR. Police stopped them near Dak Bungalow roundabout and detained many.",
+   "party": true
+  },
+  {
+   "id": "ev-23",
+   "title": "BJP district rallies backing the SIR (statewide mass awareness campaign)",
+   "organiser": "Bharatiya Janata Party, Assam unit",
+   "start": "2026-10-13",
+   "end": "2026-10-31",
+   "time": "",
+   "place": "District headquarters across Assam. Rallies were reported in Nalbari on 13 October, Guwahati and Jorhat on 14 October, and Silchar",
+   "kind": "rally",
+   "states": [
+    "Assam"
+   ],
+   "url": "https://assamtribune.com/assam/assam-bjp-rallies-across-districts-to-defend-sir-counter-opposition-protests-1620261",
+   "source_kind": "report",
+   "quote": "The mobilisation followed Chief Minister Himanta Biswa Sarma’s announcement on Monday that the BJP would hold peaceful rallies at district headquarters across Assam from October 13 to 31.",
+   "what": "A series of BJP rallies at district headquarters in Assam backing the Prime Minister and the SIR of electoral rolls. In Guwahati the state party chief Dilip Saikia led a 'Jana Jagaran Samadal' rally from Khanapara.",
+   "party": true
   },
   {
    "id": "ev-02",
@@ -105,7 +362,26 @@
    "url": "https://www.livelaw.in/pdf_upload/2026/10/14/press-release-14102026-1-706409.pdf",
    "source_kind": "organiser",
    "quote": "Date: Thursday, 15 October 2026",
-   "what": "Voters gave testimony to a panel of retired judges. The release calls it the first of a series of hearings across the country. No later date had been announced by 22 October."
+   "what": "Voters gave testimony to a panel of retired judges. The release calls it the first of a series of hearings across the country. No later date had been announced by 22 October.",
+   "party": false
+  },
+  {
+   "id": "ev-25",
+   "title": "'Stop Vote Chori' protest at Parliament Square",
+   "organiser": "Indian Overseas Congress Youth wing, supported by Save Democracy, SFI U.K. and South Asia Solidarity Group",
+   "start": "2026-10-17",
+   "end": "",
+   "time": "",
+   "place": "Mahatma Gandhi statue, Parliament Square, London",
+   "kind": "protest",
+   "states": [
+    "United Kingdom (diaspora)"
+   ],
+   "url": "https://www.thehindu.com/news/international/indian-student-groups-in-london-protest-against-cec-gyanesh-kumar-sir-govt-supporters-hold-counter-protest/article71597243.ece",
+   "source_kind": "report",
+   "quote": "Hundreds gathered at Mahatma Gandhi’s statue at Parliament Square in London on Saturday (October 17, 2026) for a protest organised by the Opposition Congress and UK-based Indian students’ groups against Chief Election Commissioner Gyanesh Kumar and the Special Intensive Revision (SIR) of electoral rolls.",
+   "what": "A protest in London against the Chief Election Commissioner and the SIR, with Dhruv Rathee as keynote speaker. A smaller group of government supporters held a counter-protest nearby.",
+   "party": true
   },
   {
    "id": "ev-03",
@@ -122,24 +398,26 @@
    "url": "https://www.thehindu.com/news/cities/Delhi/delhi-sir-public-audit-in-two-booths-find-over-100-voters-wrongly-marked-absent-shifted-or-dead/article71600683.ece",
    "source_kind": "report",
    "quote": "held in the Batla House area of the national capital on Sunday (October 18, 2026)",
-   "what": "A public hearing on a door-to-door audit of the roll in two polling booths. More than 150 voters registered to put their cases to a panel of advocates and activists."
+   "what": "A public hearing on a door-to-door audit of the roll in two polling booths. More than 150 voters registered to put their cases to a panel of advocates and activists.",
+   "party": false
   },
   {
-   "id": "ev-09",
-   "title": "Special camps at polling stations",
-   "organiser": "Chief Electoral Officer, Delhi",
-   "start": "2026-10-18",
-   "end": "",
+   "id": "ev-26",
+   "title": "'Save democracy, end mob rule' campaign",
+   "organiser": "Bharatiya Janata Party, Haryana unit (Chief Minister Nayab Singh Saini and state president Archana Gupta)",
+   "start": "2026-10-22",
+   "end": "2026-11-05",
    "time": "",
-   "place": "Polling stations across Delhi",
-   "kind": "official camp",
+   "place": "Across Haryana. Public meetings at district level and foot marches in assembly constituencies",
+   "kind": "march",
    "states": [
-    "Delhi"
+    "Haryana"
    ],
-   "url": "https://aninews.in/news/national/general-news/delhi-sir-2026-over-23-lakh-new-voter-registration-applications-received-between-august-31-and-october-1520261017120843/",
+   "url": "https://www.hindustantimes.com/cities/chandigarh-news/haryana-bjp-to-launch-save-democracy-end-mob-rule-campaign-from-october-22-101792439542664.html",
    "source_kind": "report",
-   "quote": "Special camps will be organised at polling stations across Delhi on October 18 and October 25 to assist voters with registration and corrections.",
-   "what": "Camps at every polling station in Delhi, where electors can check their names and file claims, corrections and Form 6. Claims and objections in Delhi close on 30 October, and the final roll is due on 4 December."
+   "quote": "The Bharatiya Janata Party (BJP) in Haryana will launch “save democracy, end mob rule” campaign from October 22 to November 5 to counter opposition political parties’ “repeated attempts” to question the credibility of constitutional institutions and undermine public confidence in the democratic system.",
+   "what": "A 15-day BJP campaign in Haryana of press conferences, foot marches, district public meetings and constituency discussions presenting the party's case on the Election Commission and the SIR.",
+   "party": true
   },
   {
    "id": "ev-01",
@@ -156,24 +434,65 @@
    "url": "https://countercurrents.org/2026/10/peoples-march-to-reclaim-democracy-on-october-23rd-in-every-hand-tiranga-every-street-jantar-mantar/",
    "source_kind": "organiser",
    "quote": "join People’s March to Reclaim Democracy on 23rd October 2026",
-   "what": "A march across the country on one day, announced by the alliance's media wing. No time or route in New Delhi is given in the announcement."
+   "what": "A march across the country on one day, announced by the alliance's media wing. No time or route in New Delhi is given in the announcement.",
+   "party": false
   },
   {
-   "id": "ev-10",
-   "title": "Special camps at polling stations",
-   "organiser": "Chief Electoral Officer, Delhi",
-   "start": "2026-10-25",
+   "id": "ev-27",
+   "title": "INDIA bloc rally at Ramlila Maidan",
+   "organiser": "Indian National Congress, hosting INDIA bloc parties, with student bodies and civil society organisations",
+   "start": "2026-11-01",
    "end": "",
    "time": "",
-   "place": "Polling stations across Delhi",
-   "kind": "official camp",
+   "place": "Ramlila Maidan, New Delhi",
+   "kind": "rally",
    "states": [
     "Delhi"
    ],
-   "url": "https://aninews.in/news/national/general-news/delhi-sir-2026-over-23-lakh-new-voter-registration-applications-received-between-august-31-and-october-1520261017120843/",
+   "url": "https://www.indiatoday.in/india/story/delhi-police-issues-noc-congress-rally-ramlila-maidan-november-1-india-bloc-sir-protest-gyanesh-kumar-rahul-gandhi-3019706-2026-10-17",
    "source_kind": "report",
-   "quote": "Special camps will be organised at polling stations across Delhi on October 18 and October 25 to assist voters with registration and corrections.",
-   "what": "Camps at every polling station in Delhi, where electors can check their names and file claims, corrections and Form 6. Claims and objections in Delhi close on 30 October, and the final roll is due on 4 December."
+   "quote": "The Delhi Police has issued a no-objection certificate (NOC) allowing the Congress to hold a one-day rally at Ramlila Maidan in Delhi on November 1, a senior police officer said on Saturday.",
+   "what": "A one-day rally in Delhi organised by the Congress as part of the INDIA bloc's campaign against the SIR. Delhi Police have issued a no-objection certificate.",
+   "party": true
+  },
+  {
+   "id": "ev-28",
+   "title": "INDIA bloc protest against SIR in Bengaluru",
+   "organiser": "INDIA bloc Karnataka unit (KPCC president B.K. Hariprasad), with Congress, CPI, CPI(M), CPI(ML) Liberation, Samajwadi Party and Forward Bloc",
+   "start": "2026-11-05",
+   "end": "",
+   "time": "",
+   "place": "Bengaluru (venue not stated)",
+   "kind": "protest",
+   "states": [
+    "Karnataka"
+   ],
+   "url": "https://www.thehansindia.com/news/cities/bengaluru/massive-protest-against-sir-planned-on-november-5-1133177",
+   "source_kind": "report",
+   "quote": "November 5 has been fixed for the Bengaluru protest.",
+   "what": "A planned protest in Bengaluru by INDIA bloc parties in Karnataka demanding the scrapping of the SIR and restoration of eligible voters' names. District and taluk demonstrations are to follow.",
+   "party": true
+  },
+  {
+   "id": "ev-29",
+   "title": "Delhi Chalo marches and Constitution Day event",
+   "organiser": "Indian National Congress (state units)",
+   "start": "2026-11-25",
+   "end": "2026-11-26",
+   "time": "",
+   "place": "Six marches from Rajasthan, Haryana and Uttar Pradesh to Delhi",
+   "kind": "march",
+   "states": [
+    "Rajasthan",
+    "Haryana",
+    "Uttar Pradesh",
+    "Delhi"
+   ],
+   "url": "https://www.thehindu.com/news/national/congress-campaign-against-vote-chori-to-help-re-enroll-voters-whose-names-were-deleted-in-sir/article71548466.ece",
+   "source_kind": "report",
+   "quote": "The Congress will then take out six Delhi Chalo rallies from locations in Rajasthan, Haryana, and Uttar Pradesh on November 25, culminating in an event in Delhi on Constitution Day, November 26.",
+   "what": "The Congress announced six Delhi Chalo marches from Rajasthan, Haryana and Uttar Pradesh on 25 November, ending in an event in Delhi on Constitution Day, 26 November, as the last stage of its 'Vote bachao, Desh bachao' campaign.",
+   "party": true
   }
  ],
  "dropped": []
