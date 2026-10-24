@@ -241,8 +241,8 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
   // ---- disputes and help
   var DI = [].concat.apply([], r[3].sections.map(function (x) { return x.items; })).filter(function (i) { return /Uttar Pradesh/.test(i.state); });
   var HO = r[4].orgs.filter(function (o) { return o.state === 'Uttar Pradesh'; });
-  document.getElementById('fLinks').innerHTML = '<a href="../india/disputes/?state=' + encodeURIComponent('Uttar Pradesh') + '">' + n(DI.length) + ' court cases, Form 7 complaints, protests and reported deaths in Uttar Pradesh</a> are listed with their sources on Protests and Disputes. ' +
-    (HO.length ? '<a href="../help/?state=' + encodeURIComponent('Uttar Pradesh') + '">' + n(HO.length) + ' organisations that helped electors in Uttar Pradesh</a> are on Left Off the Roll? What to Do, with what the law lets an elector do.' : 'What the law lets an elector do is on <a href="../help/">Left Off the Roll? What to Do</a>.');
+  document.getElementById('fLinks').innerHTML = '<a href="../india/disputes/?state=' + encodeURIComponent('Uttar Pradesh') + '">' + n(DI.length) + ' court cases, Form 7 complaints, protests and reported deaths in Uttar Pradesh</a> are listed with their sources on Protests and disputes. ' +
+    (HO.length ? '<a href="../help/?state=' + encodeURIComponent('Uttar Pradesh') + '">' + n(HO.length) + ' organisations that helped electors in Uttar Pradesh</a> are on Left off the roll? What to do, with what the law lets an elector do.' : 'What the law lets an elector do is on <a href="../help/">Left off the roll? What to do</a>.');
 
 
   SIR.table(document.getElementById('tDist'), [

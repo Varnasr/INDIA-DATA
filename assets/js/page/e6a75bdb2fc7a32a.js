@@ -4,7 +4,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.js
   // the share as "one in every k", rounded to the nearest whole elector, so
   // the headline says how many of the roll that count was
   document.getElementById('headline').innerHTML = L('{r} names were <em>left off</em> India\'s draft rolls, one in every {k} electors.', { r: cr(T.removed), k: Math.round(100 / T.per_100) });
-  document.getElementById('lede').innerHTML = L('The Election Commission revised the electoral rolls of {s} states and union territories house by house. This site counts whose names were left off, where, and the reason written against each name.', { s: T.states });
+  document.getElementById('lede').innerHTML = L('The Election Commission revised the electoral rolls of {s} states and union territories house by house. The counts below show whose names were left off, where, and the reason written against each name.', { s: T.states });
   document.getElementById('hIndia').innerHTML = L('{r} names left off the draft rolls in {s} states and union territories, and the reasons each one recorded.', { r: cr(T.removed), s: T.states });
   document.getElementById('hBihar').innerHTML = L('{n} names left off or deleted across {acs} constituencies and {booths} booths, set against the 2025 election result.', { n: SIR.lakh(B.total), acs: B.acs, booths: SIR.n(B.booths) });
   document.getElementById('hHyd').innerHTML = L('{d} of {e} electors left off the draft in {k} constituencies, counted elector by elector.', { d: SIR.n(H.deleted), e: SIR.n(H.electors), k: r[2].acs.length });

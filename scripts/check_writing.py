@@ -74,10 +74,7 @@ SELF = ('the site talking about itself', r"\b(this site|this site's|the site's o
 SELF_EXEMPT = {'site/pages/terms/index.html', 'site/pages/share/index.html', 'site/pages/feedback/index.html',
                'site/pages/support/index.html', 'site/pages/guide/index.html', 'site/pages/about-the-data/index.html',
                'site/pages/corrections/index.html', 'site/pages/downloads/index.html', 'site/pages/updates/index.html',
-               'data/updates.json',
-               # pending: the front page and the shared script were being reworded
-               # separately on 24 October 2026; drop these two once that lands
-               'site/pages/index.html', 'assets/sir.js'}
+               'data/updates.json'}
 # A reading-list summary opens on a full sentence ("It reports ...", never "Reports ...").
 READS_FRAGMENT = re.compile(r'^(Argues|Checks|Compares|Describes|Draws|Examines|Finds|Follows|Gives|Reads|Records|Reports|Runs|'
                             r'Sets|Tabulates|Tallies|Traces|Uses|Walks|Shows|Counts|Explains|Lists|Maps|Documents|Tracks|'
@@ -89,6 +86,7 @@ QUOTED = {'quote', 'quotes', 'title', 'title_en', 'headline', 'url', 'source', '
 # a banned word used as a term of art, allowed by its whole phrase
 ALLOWED = {
     'specially empowered Executive Magistrate': 'the words of BNSS section 163, quoted in a legal point',
+    'How to use this site': 'the name of the guide page, used as the label of a link to it',
 }
 
 
