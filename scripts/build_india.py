@@ -241,6 +241,14 @@ def build():
                 assert abs(dr - f['electors_draft']) <= 0.005 * dr or x['figures'] == 'rounded' or x['state'] in ('Kerala', 'Bihar'), (x['state'], dr, f['electors_draft'])
             x['net_after_draft'] = f['electors_final'] - f['electors_draft']
             x['net_fall'] = x['removed'] - x['net_after_draft']
+            # Where the draft the final-roll source gives differs from the roll
+            # before less the names left off by a handful of names (Punjab: 27,
+            # the enumeration count against the count at the draft), the fall
+            # is measured from the roll before to the final roll, so the two
+            # figures agree. Bihar's larger gap is two different bases and is
+            # explained on its own page.
+            if dr is not None and 0 < abs(dr - f['electors_draft']) <= 100 and x['figures'] == 'exact':
+                x['net_fall'] = x['electors_before'] - f['electors_final']
             x['made_up_pct'] = round(100 * x['net_after_draft'] / x['removed'], 1)
             if x['electors_before']:
                 x['net_fall_per_100'] = round(100 * x['net_fall'] / x['electors_before'], 4)

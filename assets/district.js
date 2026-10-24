@@ -30,11 +30,13 @@
       after: { draft: function (x) { return x.before - x.removed; }, later: 'final', what: 'the final roll' },
       limits: 'The Chief Electoral Officer has published no split of the names left off by sex or age. A seat\'s roll before is its draft plus its names left off.' },
     westbengal: { label: 'West Bengal', state: 'West Bengal', count: function (x) { return x.roll_2024 - x.draft; }, base: 'roll_2024', seats: true, fall: true,
+      second: { count: function (x) { return x.roll_2024 - x.election; }, what: 'from the 2024 roll to the roll the 2026 election was held on' },
       sub: 'Measured by the fall in the roll from the 2024 Lok Sabha roll to the draft, per 100 on the 2024 roll. The fall takes in 18 months of ordinary deaths, moves and new voters, so it is a different count from the names left off the draft.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from the 2024 Lok Sabha roll to the draft', per: 'per 100 on the 2024 roll',
       women: function (d, nm) { return 'Women were ' + pct(d.women_fall_pct) + ' of the fall in ' + nm + '\'s roll from 2024 to the roll at the 2026 nominations, against ' + pct(d.women_2024_pct) + ' of the 2024 roll.'; },
       limits: 'The Chief Electoral Officer published the names left off the draft for the state only. Below the state this is the fall in the roll, which also takes in ordinary changes.' },
     kerala: { label: 'Kerala', state: 'Kerala', count: function (x) { return x.roll_2025 - x.draft; }, base: 'roll_2025', seats: true, fall: true,
+      second: { count: function (x) { return x.roll_2025 - x.election; }, what: 'from the January 2025 roll to the roll the 2026 election was held on' },
       sub: 'Measured by the fall in the roll from the final roll of January 2025 to the draft, per 100 on the January 2025 roll. No table of the names left off has been published, even for the state.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from January 2025 to the draft', per: 'per 100 on the January 2025 roll',
       women: function (d, nm) { return 'Women were ' + pct(d.women_fall_pct) + ' of the fall in ' + nm + '\'s roll, against ' + pct(d.women_2025_pct) + ' of the January 2025 roll.'; },
@@ -116,6 +118,11 @@
         : 'In ' + SIR.esc(name) + ' ' + n(val(d, C.count)) + ' names ' + (C.verb || 'were left off the draft roll') + ', ' + d1(rate(d)) + ' ' + per + ', against ' + d1(stR) + ' in ' + C.label + '.';
       var pts = [first,
         'It ranks ' + rk + ' of ' + D.length + ' districts, where 1 is the highest. ' + C.label + '\'s districts run from ' + sv(rate(all[all.length - 1])) + ' in ' + SIR.esc(all[all.length - 1].district) + ' to ' + sv(rate(all[0])) + ' in ' + SIR.esc(all[0].district) + '.'];
+      if (C.second) {
+        var S2 = C.second, r2 = function (x) { return 100 * val(x, S2.count) / val(x, C.base); };
+        var st2 = 100 * D.reduce(function (t, x) { return t + val(x, S2.count); }, 0) / D.reduce(function (t, x) { return t + val(x, C.base); }, 0);
+        pts.splice(1, 0, 'Measured ' + S2.what + ', the roll ' + (val(d, S2.count) < 0 ? 'grew by ' + n(-val(d, S2.count)) + ', a rise of ' + d1(-r2(d)) : 'fell by ' + n(val(d, S2.count)) + ', ' + d1(r2(d))) + ' ' + per + ', against ' + (st2 < 0 ? 'a rise of ' : 'a fall of ') + d1(Math.abs(st2)) + ' in ' + C.label + '. This second count takes in the names added after the draft as well.');
+      }
       if (C.reasons) {
         var top = C.reasons.slice().sort(function (x, y) { return d[y[0]] - d[x[0]]; })[0];
         pts.push(pct(100 * d[top[0]] / val(d, C.count)) + ' were entered as ' + top[1].toLowerCase() + '. A reason is ' + OFFICER + '.');

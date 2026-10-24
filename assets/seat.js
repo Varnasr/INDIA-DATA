@@ -103,7 +103,13 @@
 
       var pts = [];
       pts.push('In ' + SIR.esc(a.name) + ' ' + (falls ? 'the roll ' + (a[L.count] < 0 ? 'rose by ' + n(-a[L.count]) : 'fell by ' + n(a[L.count])) + ' from ' + L.of + ' to ' + (L.to || 'the draft') : n(a[L.count]) + ' ' + (L.say || 'names were left off the draft roll')) + ', ' + d1(seatR) + ' of every ' + n(L.per) + ' on ' + L.of + '.');
+      if (C.second) {
+        var S2 = C.second, s2 = function (rows) { return L.per * sum(rows, S2.count) / sum(rows, S2.base); };
+        var fr = function (v) { return (v < 0 ? 'a rise of ' : 'a fall of ') + d1(Math.abs(v)); };
+        var second2 = ('Measured ' + S2.what.replace(/^fall to/, 'to') + ', the roll ' + (a[S2.count] < 0 ? 'grew by ' + n(-a[S2.count]) + ', a rise of ' + d1(-s2([a])) : 'fell by ' + n(a[S2.count]) + ', ' + d1(s2([a]))) + ' of every ' + n(L.per) + ' on ' + L.of + ', against ' + fr(s2(D)) + ' in ' + SIR.esc(a.district) + ' district and ' + fr(s2(A)) + ' in ' + C.label + '. This second count takes in the names added after the draft as well.');
+      }
       pts.push('That is ' + cmp(seatR, distR) + ' ' + SIR.esc(a.district) + ' district (' + d1(distR) + ') and ' + cmp(seatR, stR) + ' ' + C.label + ' (' + d1(stR) + '). It ranks ' + rank + ' of ' + A.length + ' in the state, where 1 ' + (falls ? 'fell' : 'lost') + ' the most, and ' + drank + ' of ' + D.length + ' in its district.');
+      if (C.second) pts.push(second2);
       if (C.reasons) {
         var top = C.reasons.slice().sort(function (x, y) { return a[y[0]] - a[x[0]]; })[0];
         var RO = C.reasonsOf || L.count;
