@@ -390,7 +390,7 @@ R.bullets([
     'The final roll made up %s of the names left off the draft, and the fall that remained still exceeded the margin in %d of %d seats. Women were %s of those added after the draft.' % (pct(FT['made_up_pct']), FM['net'], FM['seats'], pct(FT['women_share_added'])),
 ])
 
-R.h2('How sure are we?')
+R.h2('How sure are the findings?')
 iv = lambda x: '%s%.2f (%.2f to %.2f)' % ('+' if x['est'] > 0 else '', x['est'], x['lo'], x['hi'])
 M_, W_, G_, S_ = RB['margins'], RB['women'], RB['ground'], RB['swing']
 R.p('A pattern seen across all seats can weaken or turn round once seats are compared only with seats like them. Each finding was measured again within each district, within each seat, and with Seemanchal left out.')

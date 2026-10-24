@@ -16,7 +16,7 @@
 
   <h2>What is listed here</h2>
   <p id="scope"></p>
-  <p>Each event gives the line from its source that states the date. An event whose date was found in a single news report says so. Organisations that hold hearings or meetings on the revision can <a href="../../share/">send us their announcements</a>, and we list them once we have read the announcement itself.</p>
+  <p>Each event gives the line from its source that states the date. An event whose date was found in a single news report says so. Organisations that hold hearings or meetings on the revision can <a href="../../share/">send their announcements through the sharing form</a>, and an event is listed once its announcement has been read.</p>
   <p>The Election Commission's own camps, deadlines for claims and objections, and the dates of the final rolls are on the <a href="../process/">Rules page</a>. Court hearings are in the <a href="../disputes/#courts">courts section of the disputes page</a>.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
@@ -45,7 +45,7 @@ SIR.json('data/india/events.json').then(function (D) {
     (function () {
       var on = next.filter(function (e) { return e.start < today; }), up = next.filter(function (e) { return e.start >= today; });
       return (on.length ? n(on.length) + (on.length === 1 ? ' event is' : ' events are') + ' under way. ' : '') +
-        (up.length ? n(up.length) + (up.length === 1 ? ' event is' : ' events are') + ' coming up, the next on ' + SIR.date(up[0].start) + '.' : 'No event still to come has been announced in a source we could read.');
+        (up.length ? n(up.length) + (up.length === 1 ? ' event is' : ' events are') + ' coming up, the next on ' + SIR.date(up[0].start) + '.' : 'No event still to come has been announced in any source found.');
     })(),
     n(past.length) + ' past events are listed, from ' + (past.length ? SIR.date(past[past.length - 1].start) : '') + '.',
     n(D.events.filter(function (e) { return e.party; }).length) + ' of the events were organised by political parties, and each is marked.'
@@ -54,7 +54,7 @@ SIR.json('data/india/events.json').then(function (D) {
     [n(next.length), 'coming up or under way'], [n(past.length), 'past'], [n(D.events.filter(function (e) { return e.kind === 'hearing'; }).length), 'public hearings'],
     [n(D.events.filter(function (e) { return e.party; }).length), 'by political parties']
   ].map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('');
-  document.getElementById('next').innerHTML = next.length ? next.map(li).join('') : '<li>No event coming up has been announced in a source we could read.</li>';
+  document.getElementById('next').innerHTML = next.length ? next.map(li).join('') : '<li>No event coming up has been announced in any source found.</li>';
   document.getElementById('past').innerHTML = past.map(li).join('');
   document.getElementById('scope').textContent = D.scope;
   SIR.anchors && SIR.anchors();

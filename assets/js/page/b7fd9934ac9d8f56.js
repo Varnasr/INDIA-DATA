@@ -53,7 +53,7 @@ SIR.json('data/india/rti.json').then(function (D) {
   document.getElementById('otherList').innerHTML = other.length ? other.map(li).join('') : '<li>None published yet.</li>';
   document.getElementById('unconfirmed').innerHTML = D.unconfirmed.length ? D.unconfirmed.map(function (u) {
     return '<li>' + esc(u.outlet || '') + (u.date ? ', ' + SIR.date(u.date) : '') + ', "' + esc(u.headline || '') + '". ' + esc(u.reason) + '</li>';
-  }).join('') : '<li>Every report we found was matched to its source.</li>';
+  }).join('') : '<li>Every report found was matched to its source.</li>';
 
   SIR.anchors && SIR.anchors();
   SIR.toc && SIR.toc();

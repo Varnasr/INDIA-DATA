@@ -467,7 +467,7 @@
    "/hyderabad/telangana/"
   ]
  },
- "<b>Across all states the rate of exclusion goes most with the {top} ({r}), and that comes from phase 3 ({r3}). In phase 2 it is {r2}.</b> In phase 3, {p3} all go with the rate of exclusion, because the big states that draw migrants were revised in the same phase as the North-East, and they differ from it on all of these at once. With only {n3} states in the phase, there is no telling these apart. {both} The Muslim share of households has no consistent relationship, {m1} across all states, {m2} in phase 2 and {m3} in phase 3. Among the larger states, the share entered as enrolled more than once goes most with {dup} ({rd}). None of this says whose names were left off inside a state, because a pattern across states tells us nothing about individuals.": {
+ "<b>Across all states the rate of exclusion goes most with the {top} ({r}), and that comes from phase 3 ({r3}). In phase 2 it is {r2}.</b> In phase 3, {p3} all go with the rate of exclusion, because the big states that draw migrants were revised in the same phase as the North-East, and they differ from it on all of these at once. With only {n3} states in the phase, there is no telling these apart. {both} The Muslim share of households has no consistent relationship, {m1} across all states, {m2} in phase 2 and {m3} in phase 3. Among the larger states, the share entered as enrolled more than once goes most with {dup} ({rd}). None of this says whose names were left off inside a state, because a pattern across states says nothing about individuals.": {
   "kind": "script",
   "pages": [
    "/india/"
@@ -1229,10 +1229,16 @@
    "/bihar/explorer/"
   ]
  },
- "A <b>press note</b> is the Chief Electoral Officer's own document. A <b>press report</b> gives the Chief Electoral Officer's figures as a newspaper or agency reported them, with a link. <b>Lists</b> means counted on this site.": {
+ "A <b>press note</b> is the Chief Electoral Officer's own document. A <b>press report</b> gives the Chief Electoral Officer's figures as a newspaper or agency reported them, with a link. <b>Lists</b> means counted name by name from the lists.": {
   "kind": "markup",
   "pages": [
    "/india/method/"
+  ]
+ },
+ "A city is counted by its districts, because no state published its figures by city boundary. Each city's districts and its suburbs are listed at the foot of the page. Kolkata and Kochi are measured by the fall in the roll, because their states published no names left off below the state.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
   ]
  },
  "A constituency counts as a border constituency when its district touches Nepal, West Bengal, Jharkhand or Uttar Pradesh.": {
@@ -1253,22 +1259,10 @@
    "/bihar/border/"
   ]
  },
- "A great deal. Part rates run from {lo}% to {hi}%, and {over} parts lost more than 60% of their roll. The <a href=\"../parts/\">polling parts page</a> sets each part against the typical part in its own constituency.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/hyd.js"
-  ]
- },
  "A household that moved out of the Old City is rightly marked \"shifted\", and the lists cannot tell it apart from an elector who was at home when the officer missed them.": {
   "kind": "script",
   "pages": [
    "/hyderabad/method/"
-  ]
- },
- "A larger share, yes. Names the lists classify as Muslim are {lo} to {hi} of the names left off the draft in border seats and {ilo} to {ihi} in the interior. Several border belts, Seemanchal above all, have large Muslim populations, so some of that difference follows from who lives there. The page on women, religion and caste compares each district with its own population.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/bihar.js"
   ]
  },
  "A pattern seen across all seats can weaken, or even reverse, once each seat is compared only with seats like it. So each finding here was measured again within each district, within each seat, and with Seemanchal left out.": {
@@ -1353,6 +1347,12 @@
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
+  ]
+ },
+ "A roll does so when it still carries names of people who have died, moved away or been entered twice. Before the revision six states held more names than their projected adults, and part of their fall in the draft was those names.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
   ]
  },
  "A seat is counted on the first measure when the names left off the draft exceed the 2026 margin, and on the second when the fall from the roll before the revision to the final roll exceeds it. The third leaves out the names marked dead and multiplies the rest by the seat's turnout. It is the most cautious of the three, and it still assumes every one of those voters would have chosen the runner-up, which no one can know.": {
@@ -2466,7 +2466,7 @@
    "/"
   ]
  },
- "An event is listed once its date has been read in the organiser's own announcement or in a named report, and read a second time. Events organised by political parties are listed and marked as such. Organisers can <a href=\"../../share/\">send us their announcements</a>.": {
+ "An event is listed once its date has been read in the organiser's own announcement or in a named report, and read a second time. Events organised by political parties are listed and marked as such. Organisers can <a href=\"../../share/\">send their announcements through the sharing form</a>.": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -3561,7 +3561,7 @@
    "/bihar/method/"
   ]
  },
- "Bihar's row is counted on this site from the phase 1 lists of names left off the draft: <span id=\"bihar\"></span>": {
+ "Bihar's row is counted from the phase 1 lists of names left off the draft: <span id=\"bihar\"></span>": {
   "kind": "markup",
   "pages": [
    "/india/method/"
@@ -3744,12 +3744,6 @@
   "kind": "markup",
   "pages": [
    "/bihar/results/"
-  ]
- },
- "By the share of its people living in towns at the 2011 Census, the last count by district. Under 20 in every 100 is rural, 20 to 50 is mixed and above 50 is urban. A district made after 2011 is counted under the district it was mostly made from.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
   ]
  },
  "By the surname of the father or husband, {up} families are left off the draft at or above their share in the caste survey under both classifications.": {
@@ -6933,6 +6927,12 @@
    "/bihar/"
   ]
  },
+ "Do these figures say the revision was meant to keep voters off the rolls?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
  "Do women make up most of those left off or deleted in each region?": {
   "kind": "script",
   "pages": [
@@ -6946,12 +6946,6 @@
   ]
  },
  "Does a case study say why the names were left off?": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
-  ]
- },
- "Does a piece listed under further reading have the site's agreement?": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -7003,12 +6997,6 @@
    "/bihar/"
   ]
  },
- "Does listing an event mean the site supports it?": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
-  ]
- },
  "Does not add up": {
   "kind": "script",
   "pages": [
@@ -7049,12 +7037,6 @@
   ]
  },
  "Does this show that the names were left off to change results?": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
-  ]
- },
- "Does this site say the revision was meant to keep voters off the rolls?": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -9153,7 +9135,7 @@
    "/feedback/"
   ]
  },
- "Few of them.": {
+ "Few of them were put back.": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -9415,16 +9397,16 @@
    "/hyderabad/"
   ]
  },
- "Find any constituency with a figure on this site, in 14 places, each in its own state's measure. Then every constituency's roll through the revision in Tamil Nadu, Kerala, West Bengal and Uttarakhand, in one table and one download.": {
-  "kind": "markup",
-  "pages": [
-   "/india/constituencies/"
-  ]
- },
  "Find any constituency with a figure on this site.": {
   "kind": "script",
   "pages": [
    "/assets/sir.js"
+  ]
+ },
+ "Find any constituency with a published figure, in 14 places, each in its own state's measure. Then every constituency's roll through the revision in Tamil Nadu, Kerala, West Bengal and Uttarakhand, in one table and one download.": {
+  "kind": "markup",
+  "pages": [
+   "/india/constituencies/"
   ]
  },
  "Find your constituency": {
@@ -9612,7 +9594,7 @@
    "/hyderabad/"
   ]
  },
- "For Bihar the figures are counted on this site from the lists of names left off the draft.": {
+ "For Bihar the figures are counted from the lists of names left off the draft.": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -9694,36 +9676,6 @@
   "kind": "script",
   "pages": [
    "/assets/faq/westbengal.js"
-  ]
- },
- "From each state's Chief Electoral Officer, as announced with the draft and final rolls. The Election Commission has published no national table. For Bihar they are counted from the lists of names left off the draft.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
-  ]
- },
- "From the Election Commission's orders and the states' own press notes, each listed with its document on the page about <a href=\"../process/\">how the revision was run</a>. Where a state has published its final roll, the date it came out replaces the date it was due.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
-  ]
- },
- "From the National Family Health Survey 2019-21, which published a fact sheet for every district, and from the 2011 Census for urban share and density. A district made after the survey is counted under the district it was made from.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
-  ]
- },
- "From the courts' own orders, the Assemblies' records, the Commission's own documents and named press reports. Each item links to its source and quotes it. A report that could not be matched to its source is left off and named at the foot of <a href=\"../disputes/\">the disputes page</a>.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
-  ]
- },
- "From the state's own draft-roll totals for its {d} districts and for the 15 seats of Hyderabad district. They give the roll before the revision and the names left off the draft, and nothing about who was left off or why.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/hyd.js"
   ]
  },
  "Full": {
@@ -11243,16 +11195,16 @@
    "/hyderabad/"
   ]
  },
+ "How sure are the findings?": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/results/"
+  ]
+ },
  "How sure are these findings?": {
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
-  ]
- },
- "How sure are we?": {
-  "kind": "markup",
-  "pages": [
-   "/bihar/results/"
   ]
  },
  "How the electors left off or deleted might have voted, estimated three ways, and one figure that needs no estimate at all. Each estimate starts from the seat's names still off the final roll, less those entered as dead, and assumes they would have voted at the seat's 2025 turnout. That count is on the low side, because the names added after the draft include new electors. So every estimate is also run on all the names left off or deleted, with nothing added back.": {
@@ -11769,7 +11721,7 @@
    "/hyderabad/"
   ]
  },
- "In number, yes. They equal about {y} years of Bihar's adult deaths at 2024 death rates, and their ages are close to those of registered deaths. By sex, no. Women are {wd} of those entered as dead but {we} of adult deaths. Either women's deaths, which are registered less often, stayed on the roll longer, or women still alive were entered as dead. <a href=\"../people/\">Women, religion and caste</a>.": {
+ "In number they are. They equal about {y} years of Bihar's adult deaths at 2024 death rates, and their ages are close to those of registered deaths. By sex they are not. Women are {wd} of those entered as dead but {we} of adult deaths. Either women's deaths, which are registered less often, stayed on the roll longer, or women still alive were entered as dead. <a href=\"../people/\">Women, religion and caste</a>.": {
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
@@ -12126,10 +12078,22 @@
    "/bihar/"
   ]
  },
- "Investigations, data analyses, research, court reporting, the Election Commission's own account and videos about the Special Intensive Revision, with one line on what each shows, and what politicians and commentators say set beside the site's own figures.": {
+ "Investigations, data analyses, research, court reporting, the Election Commission's own account and videos about the Special Intensive Revision, with one line on what each shows, and what politicians and commentators say set beside the official figures.": {
   "kind": "markup",
   "pages": [
    "/india/reading/"
+  ]
+ },
+ "Is a listed event endorsed?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
+ "Is a piece listed under further reading endorsed?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
   ]
  },
  "Is marriage why so many young women were marked shifted?": {
@@ -12156,10 +12120,22 @@
    "/assets/faq/india.js"
   ]
  },
+ "It can be read only partly. That is why two classifications are used and only results that hold under both are reported. Going by the surname of the father or husband, {up} families are left off the draft at or above their share in the 2023 caste survey under both, and {down} families below it.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/bihar.js"
+  ]
+ },
  "It can explain the number but not the places. The {x} more young women than young men marked shifted come to about {yrs} of one year's marriage moves at 2011 census rates. But districts where more women had moved on marriage do not have more women among the young marked shifted (rank correlation {r}).": {
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
+  ]
+ },
+ "It is classed by the share of its people living in towns at the 2011 Census, the last count by district. Under 20 in every 100 is rural, 20 to 50 is mixed and above 50 is urban. A district made after 2011 is counted under the district it was mostly made from.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
   ]
  },
  "It is read by polling-station name, which gives {stations} stations instead of parts, and {unaccounted} electors on its roll are in none of the three outcomes, compared with {others} across the other four seats together.": {
@@ -12168,7 +12144,13 @@
    "/hyderabad/method/"
   ]
  },
- "It is the Government of India's list of Border Guarding Districts, printed in the Staff Selection Commission's notice of 1 December 2025 for constables in the Home Ministry's armed police forces. No district on it was picked by this site. Its seven Bihar districts are the seven Nepal-border districts the Bihar pages use.": {
+ "It is the Government of India's list of Border Guarding Districts, printed in the Staff Selection Commission's notice of 1 December 2025 for constables in the Home Ministry's armed police forces. None of its districts was picked for this comparison. Its seven Bihar districts are the seven Nepal-border districts the Bihar pages use.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
+ "It means that the latest schedule found set a date for the final roll, the date has passed, and no published final roll has been found. The Commission may have moved the date in an order not yet found, or the state may have published the roll somewhere not yet searched. It says nothing about why a roll is late.": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -12199,12 +12181,6 @@
    "/kerala/",
    "/tamilnadu/",
    "/westbengal/"
-  ]
- },
- "Its districts, because no state published its figures by city boundary. Each city's districts and its suburbs are listed at the foot of the page. Kolkata and Kochi are measured by the fall in the roll, because their states published no names left off below the state.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
   ]
  },
  "Its list has no part numbers and no link to the 2002 roll. It is read by polling-station name instead, {n} stations, and it is given no linked or unlinked rate.": {
@@ -13377,6 +13353,12 @@
   "kind": "script",
   "pages": [
    "/india/"
+  ]
+ },
+ "Left off the roll? What to do": {
+  "kind": "markup",
+  "pages": [
+   "/help/"
   ]
  },
  "Left off ÷ margin": {
@@ -14983,7 +14965,7 @@
    "/bihar/method/"
   ]
  },
- "Mostly not. Across the {n} states with population projections, the rolls held {pre} of adults before the revision, and only {k} had more names on the roll than adults.": {
+ "Mostly they were not. Across the {n} states with population projections, the rolls held {pre} of adults before the revision, and only {k} had more names on the roll than adults.": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -16374,7 +16356,7 @@
    "/assets/faq/hyd.js"
   ]
  },
- "No. Only counts are published on this site. To check your own entry, use the Election Commission's voter search.": {
+ "No. Only counts are published, never a name. To check your own entry, use the Election Commission's voter search.": {
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js",
@@ -16398,7 +16380,7 @@
    "/assets/faq/india.js"
   ]
  },
- "No. The counts show how many names were left off, where, and the reason an officer wrote against each. They cannot show what anyone intended, and the site does not claim to know. <a href=\"../brief/\">The SIR in brief</a> separates what is documented from what has been reported and from what the figures cannot show.": {
+ "No. The counts show how many names were left off, where, and the reason an officer wrote against each. They cannot show what anyone intended. <a href=\"../brief/\">The SIR in brief</a> separates what is documented from what has been reported and from what the figures cannot show.": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -16758,12 +16740,6 @@
    "/westbengal/"
   ]
  },
- "Not as a rule. In several states with survey figures by district, the districts where women had more years of school and more homes cooked with gas lost more names, and those are mostly the more urban districts. The district factors page gives every state, including those that run the other way, and it cannot say why, because these circumstances move together.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
-  ]
- },
  "Not eligible, appealed": {
   "kind": "script",
   "pages": [
@@ -16780,12 +16756,6 @@
   "kind": "script",
   "pages": [
    "/tamilnadu/"
-  ]
- },
- "Not in any one way. On the Government of India's own list of border districts, they lost more than the rest of their state in Bihar and Uttarakhand, about the same in Uttar Pradesh, and fewer in Gujarat and West Bengal. A border district's rate says nothing about any elector's citizenship.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
   ]
  },
  "Not in either list": {
@@ -17471,23 +17441,47 @@
    "/"
   ]
  },
+ "Only counts are published, never a name. For analysis that looks at named voters in Delhi, see the Sabar Institute's <a href=\"https://sabarinstitute.org/research-and-publications/sir-delhi-2026\">report on the Delhi revision</a>.": {
+  "kind": "markup",
+  "pages": [
+   "/delhi/"
+  ]
+ },
+ "Only counts are published, never a name. For analysis that looks at named voters in Uttarakhand, see the Sabar Institute's <a href=\"https://sabarinstitute.org/research-and-publications/compr\">analysis of the names left off in Uttarakhand</a>.": {
+  "kind": "markup",
+  "pages": [
+   "/uttarakhand/"
+  ]
+ },
+ "Only counts are published, never a name. For analysis that looks at named voters in West Bengal, see the Sabar Institute's <a href=\"https://sabarinstitute.org/research-and-publications/west-bengal-factsheet\">factsheet on the West Bengal revision</a>.": {
+  "kind": "markup",
+  "pages": [
+   "/westbengal/",
+   "/westbengal/method/"
+  ]
+ },
+ "Only counts are published, never a name. For analysis that looks at named voters, see the <a href=\"https://sabarinstitute.org/\">Sabar Institute</a>.": {
+  "kind": "markup",
+  "pages": [
+   "/bihar/method/",
+   "/hyderabad/method/",
+   "/india/method/",
+   "/karnataka/method/",
+   "/kerala/method/",
+   "/tamilnadu/method/"
+  ]
+ },
  "Only counts are published. If a list carries names, EPIC numbers or addresses, the totals are counted from it and the list itself never goes on the site.": {
   "kind": "markup",
   "pages": [
    "/share/"
   ]
  },
- "Only counts are published. No name, EPIC number or address appears anywhere on this site.": {
+ "Only counts are published. No name, EPIC number or address of any elector is shown.": {
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js",
    "/assets/faq/hyd.js"
-  ]
- },
- "Only partly. That is why two classifications are used and only results that hold under both are reported. Going by the surname of the father or husband, {up} families are left off the draft at or above their share in the 2023 caste survey under both, and {down} families below it.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/bihar.js"
   ]
  },
  "Only some states have published their names left off by sex, or their roll by sex before and after the draft. For each of them, women's share of the names left off beside women's share of the roll.": {
@@ -22388,7 +22382,7 @@
    "/sikkim/method/"
   ]
  },
- "Six of the eight. Delhi, Chandigarh, Puducherry, Lakshadweep, Andaman and Nicobar, and Dadra and Nagar Haveli and Daman and Diu were revised. Jammu and Kashmir and Ladakh were left out of the order, which said their dates would be announced later. Each territory has its own page.": {
+ "Six of the eight were. Delhi, Chandigarh, Puducherry, Lakshadweep, Andaman and Nicobar, and Dadra and Nagar Haveli and Daman and Diu were revised. Jammu and Kashmir and Ladakh were left out of the order, which said their dates would be announced later. Each territory has its own page.": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -22599,16 +22593,10 @@
    "/assets/faq/india.js"
   ]
  },
- "Some use data the site does not hold, such as the outcomes of West Bengal's adjudication seat by seat. Some compare groups of seats without allowing for the other ways those seats differ. Some read a purpose into a pattern in the figures, which the lists cannot show. The panels on <a href=\"../reading/#what-others-say\">the reading page</a> set each claim beside the site's own figures and say where those figures stop.": {
+ "Some use data that is not in the official counts, such as the outcomes of West Bengal's adjudication seat by seat. Some compare groups of seats without allowing for the other ways those seats differ. Some read a purpose into a pattern in the figures, which the lists cannot show. The panels on <a href=\"../reading/#what-others-say\">the reading page</a> set each claim beside the official figures and say where those figures stop.": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
-  ]
- },
- "Somewhat more. The {n} seats on a border lost {b} names per 100 electors, and the {i} interior seats {in}. Border seats hold {el} of Bihar's electors and account for {sh} of the names left off or deleted. The heaviest belt was the seats bordering {top}, at {topr} per 100.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/bihar.js"
   ]
  },
  "Sorted by names left off or deleted as a multiple of the 2025 margin. Click a column heading to sort by it, or a constituency to open its booths in the explorer.": {
@@ -24083,12 +24071,6 @@
    "/assets/faq/karnataka.js"
   ]
  },
- "That the latest schedule we could read set a date for the final roll, the date has passed, and we have not found the roll published. The Commission may have moved the date in an order we have not read, or the state may have published the roll where we have not looked. It says nothing about why a roll is late.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
-  ]
- },
  "The 2002 roll": {
   "kind": "script",
   "pages": [
@@ -24212,7 +24194,7 @@
    "/assets/faq/kerala.js"
   ]
  },
- "The Chief Electoral Officer published every table of the revision by its 34 election districts and for the state, and none by assembly constituency. Bengaluru appears as four of those districts, which are Bangalore Urban and the North, Central and South districts of the city corporation, B.B.M.P. A count by constituency could be made only by tallying the named lists, which this site does not do in Karnataka.": {
+ "The Chief Electoral Officer published every table of the revision by its 34 election districts and for the state, and none by assembly constituency. Bengaluru appears as four of those districts, which are Bangalore Urban and the North, Central and South districts of the city corporation, B.B.M.P. A count by constituency could be made only by tallying the named lists, and the Karnataka figures make no such tally.": {
   "kind": "markup",
   "pages": [
    "/karnataka/method/"
@@ -26185,6 +26167,36 @@
    "/hyderabad/"
   ]
  },
+ "They come from each state's Chief Electoral Officer, as announced with the draft and final rolls. The Election Commission has published no national table. For Bihar they are counted from the lists of names left off the draft.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
+ "They come from the Election Commission's orders and the states' own press notes, each listed with its document on the page about <a href=\"../process/\">how the revision was run</a>. Where a state has published its final roll, the date it came out replaces the date it was due.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
+ "They come from the National Family Health Survey 2019-21, which published a fact sheet for every district, and from the 2011 Census for urban share and density. A district made after the survey is counted under the district it was made from.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
+ "They come from the courts' own orders, the Assemblies' records, the Commission's own documents and named press reports. Each item links to its source and quotes it. A report that could not be matched to its source is left off and named at the foot of <a href=\"../disputes/\">the disputes page</a>.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
+ "They come from the state's own draft-roll totals for its {d} districts and for the 15 seats of Hyderabad district. They give the roll before the revision and the names left off the draft, and nothing about who was left off or why.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
+  ]
+ },
  "They did, with a rank correlation of {rho}. A rank correlation compares the order of the seats on two measures. It runs from −1 to 1, and a value near 0 means no link. So the large totals do not come from large constituencies alone.": {
   "kind": "script",
   "pages": [
@@ -26197,16 +26209,46 @@
    "/assets/faq/bihar.js"
   ]
  },
+ "They differ a great deal. Part rates run from {lo}% to {hi}%, and {over} parts lost more than 60% of their roll. The <a href=\"../parts/\">polling parts page</a> sets each part against the typical part in its own constituency.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
+  ]
+ },
+ "They do not as a rule. In several states with survey figures by district, the districts where women had more years of school and more homes cooked with gas lost more names, and those are mostly the more urban districts. The district factors page gives every state, including those that run the other way, and it cannot say why, because these circumstances move together.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
  "They do, in every border region and in the interior.": {
   "kind": "script",
   "pages": [
    "/bihar/"
   ]
  },
+ "They lost somewhat more. The {n} seats on a border lost {b} names per 100 electors, and the {i} interior seats {in}. Border seats hold {el} of Bihar's electors and account for {sh} of the names left off or deleted. The heaviest belt was the seats bordering {top}, at {topr} per 100.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/bihar.js"
+  ]
+ },
+ "They show no single pattern. On the Government of India's own list of border districts, they lost more than the rest of their state in Bihar and Uttarakhand, about the same in Uttar Pradesh, and fewer in Gujarat and West Bengal. A border district's rate says nothing about any elector's citizenship.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
  "They were more than their share in {k} of the {acs} constituencies. Of the rise after the draft, women were {wa}.": {
   "kind": "script",
   "pages": [
    "/assets/faq/kerala.js"
+  ]
+ },
+ "They were summoned under seven Election Commission rules. The commonest were {r1} ({p1}), {r2} ({p2}) and {r3} ({p3}). A flag says the paperwork did not line up, and says nothing about whether the elector was entitled to vote.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/hyd.js"
   ]
  },
  "Thiruvananthapuram": {
@@ -26242,12 +26284,6 @@
  "This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it comes from the press, the page says so.": {
   "kind": "markup",
   "pages": [
-   "/india/progress/"
-  ]
- },
- "This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.": {
-  "kind": "markup",
-  "pages": [
    "/andaman/",
    "/andaman/faq/",
    "/andaman/method/",
@@ -26277,6 +26313,7 @@
    "/haryana/",
    "/haryana/faq/",
    "/haryana/method/",
+   "/india/progress/",
    "/jharkhand/",
    "/jharkhand/faq/",
    "/jharkhand/method/",
@@ -26321,7 +26358,7 @@
    "/uttarpradesh/method/"
   ]
  },
- "This page is in English only for now. Every figure on it comes from the Election Commission, the Chief Electoral Officer or the Ministry of Home Affairs, and where it reached us through the press, the page says so.": {
+ "This page is in English only for now. Every figure on it comes from the Election Commission, the Chief Electoral Officer or the Ministry of Home Affairs, and where it comes from the press, the page says so.": {
   "kind": "markup",
   "pages": [
    "/assam/",
@@ -26461,36 +26498,6 @@
   "kind": "markup",
   "pages": [
    "/terms/"
-  ]
- },
- "This site publishes counts only, never a name. For analysis that looks at named voters in Delhi, see the Sabar Institute's <a href=\"https://sabarinstitute.org/research-and-publications/sir-delhi-2026\">report on the Delhi revision</a>.": {
-  "kind": "markup",
-  "pages": [
-   "/delhi/"
-  ]
- },
- "This site publishes counts only, never a name. For analysis that looks at named voters in Uttarakhand, see the Sabar Institute's <a href=\"https://sabarinstitute.org/research-and-publications/compr\">analysis of the names left off in Uttarakhand</a>.": {
-  "kind": "markup",
-  "pages": [
-   "/uttarakhand/"
-  ]
- },
- "This site publishes counts only, never a name. For analysis that looks at named voters in West Bengal, see the Sabar Institute's <a href=\"https://sabarinstitute.org/research-and-publications/west-bengal-factsheet\">factsheet on the West Bengal revision</a>.": {
-  "kind": "markup",
-  "pages": [
-   "/westbengal/",
-   "/westbengal/method/"
-  ]
- },
- "This site publishes counts only, never a name. For analysis that looks at named voters, see the <a href=\"https://sabarinstitute.org/\">Sabar Institute</a>.": {
-  "kind": "markup",
-  "pages": [
-   "/bihar/method/",
-   "/hyderabad/method/",
-   "/india/method/",
-   "/karnataka/method/",
-   "/kerala/method/",
-   "/tamilnadu/method/"
   ]
  },
  "This site reads those lists and figures and turns them into counts. It shows where the most names were left off, whether women were left off more often than men, and what reason was written against the names. A reason on a list is what the officer wrote down, and nobody checked it. The counts can show where the exclusions fell and on whom. They cannot show why any one name was left off, or whether leaving it off was right.": {
@@ -26807,12 +26814,6 @@
   "kind": "script",
   "pages": [
    "/bihar/"
-  ]
- },
- "Under seven Election Commission rules. The commonest were {r1} ({p1}), {r2} ({p2}) and {r3} ({p3}). A flag says the paperwork did not line up, and says nothing about whether the elector was entitled to vote.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/hyd.js"
   ]
  },
  "Under the strict classification B, the left end counts only names placed in the group and the right end adds every name that could not be placed.": {
@@ -28363,12 +28364,6 @@
    "/assets/sir.js"
   ]
  },
- "When it still carries names of people who have died, moved away or been entered twice. Before the revision six states held more names than their projected adults, and part of their fall in the draft was those names.": {
-  "kind": "script",
-  "pages": [
-   "/assets/faq/india.js"
-  ]
- },
  "Where a reason was given, {dead} were entered as dead, {sao} as shifted, absent or other, and {dup} as enrolled more than once. States reported their reasons in different ways, and the method page sets out how each was counted.": {
   "kind": "script",
   "pages": [
@@ -28436,7 +28431,7 @@
    "/assets/faq/india.js"
   ]
  },
- "Where do the protests and disputes on this site come from?": {
+ "Where do the listed protests and disputes come from?": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -29017,7 +29012,7 @@
    "/karnataka/method/"
   ]
  },
- "Why do some commentators say more than this site does?": {
+ "Why do some commentators say more than these figures do?": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -29922,6 +29917,12 @@
    "/westbengal/"
   ]
  },
+ "Yes, a larger share was. Names the lists classify as Muslim are {lo} to {hi} of the names left off the draft in border seats and {ilo} to {ihi} in the interior. Several border belts, Seemanchal above all, have large Muslim populations, so some of that difference follows from who lives there. The page on women, religion and caste compares each district with its own population.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/bihar.js"
+  ]
+ },
  "Yes, in {over} of {seats} constituencies. Of the {took} seats INDIA held in 2020 and the NDA won in 2025, {took_over} lost more names than the NDA's winning margin. That does not mean those results would have gone the other way. It means the roll changed by more than the vote that decided the seat, so the names left off or deleted could have decided it. Nobody outside the Election Commission can say whose names they were.": {
   "kind": "script",
   "pages": [
@@ -29946,7 +29947,7 @@
    "/assets/faq/karnataka.js"
   ]
  },
- "Yes. Send it through <a href=\"../../share/\">the form for sharing a list</a>, with the date you filed the application. We publish what was asked and what came back, and we name you only if you ask us to.": {
+ "Yes. Send it through <a href=\"../../share/\">the form for sharing a list</a>, with the date you filed the application. What was asked and what came back are published, and you are named only if you ask to be.": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"

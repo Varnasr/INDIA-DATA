@@ -20,7 +20,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGES = os.path.join(ROOT, 'site', 'pages')
 PLACES = os.path.join(ROOT, 'site', 'places.json')
 
-HEAD = '<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>'
+HEAD = '<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it comes from the press, the page says so.</p>'
 
 MAIN = '''<!--page {meta} -->
 <main id="main">

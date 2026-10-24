@@ -33,7 +33,7 @@
         [L('Does this show that names were left off to change results?'),
          L('No list of names left off can show intent. The tables show where the roll fell and how that compares with the margins. They cannot show whose votes these were or whether each name was rightly left off.'), ['elections', 'method']],
         [L('Can I look up my own name here?'),
-         L('No. Only counts are published on this site. To check your own entry, use the Election Commission\'s voter search.'), ['main']]
+         L('No. Only counts are published, never a name. To check your own entry, use the Election Commission\'s voter search.'), ['main']]
       ];
       var limits = L('No count of the names left off the draft is published by constituency, so these pages measure the fall in the roll from January 2025, which takes in ordinary changes as well as the revision.');
       var SHORT = {

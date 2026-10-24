@@ -10,7 +10,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/process.js
     'Taken together, the ' + F.states + ' final rolls made up at most ' + SIR.d(F.made_up_pct, 1) + '% of the names left off (' + SIR.d(F.made_up_pct_ex_withheld, 1) + '% without West Bengal\'s ' + SIR.lk(F.withheld, 0) + ' names held for adjudication), and that rise counts new voters too.',
     'Women were the larger share of the names left off in ' + W.over + ' of the ' + W.states + ' states that published a count by sex.',
     'In ' + M.removed.states.join(' and ') + ', more names were left off or deleted than the winning margin in ' + n(over) + ' of ' + n(seats) + ' assembly seats. That means those names could have decided those seats. It does not show that they did.'
-  ], 'This page gathers what the rest of the site holds and adds the law on protest. It is general information and is not legal advice. Nothing on it says what anyone intended.');
+  ], 'This page gathers the findings of the other pages and adds the law on protest. It is general information and is not legal advice. Nothing on it says what anyone intended.');
 
   document.getElementById('happened').innerHTML = [
     'The Election Commission revised the electoral rolls of ' + T.states + ' states and union territories house by house, in three phases from June 2025. Every elector on the roll had to fill in and return a fresh form, and a name whose form did not come back was left off the draft roll.',

@@ -36,7 +36,7 @@
     [L('So was the revision clean?'),
      L('The lists give every reason to doubt it. {total} names came off the roll, women were left off or deleted out of proportion in every district, women were a larger share of those entered as dead than of the state\'s adult deaths, and the final roll put back at most {m} of those left off the draft. A voter wrongly left off the roll has lost a vote whichever way it would have gone. What the election results cannot show is whether leaving names off or deleting them moved votes between the alliances. <a href="../results/#swing">Elections</a>.', { total: SIR.lakh(t.total), m: SIR.pct(FT.made_up_pct) })],
     [L('Are the names entered as dead plausible?'),
-     L('In number, yes. They equal about {y} years of Bihar\'s adult deaths at 2024 death rates, and their ages are close to those of registered deaths. By sex, no. Women are {wd} of those entered as dead but {we} of adult deaths. Either women\'s deaths, which are registered less often, stayed on the roll longer, or women still alive were entered as dead. <a href="../people/">Women, religion and caste</a>.', { y: SIR.d(TD.years_of_deaths, 1), wd: SIR.pct(TD.women_share_dead), we: SIR.pct(TD.women_share_expected) })],
+     L('In number they are. They equal about {y} years of Bihar\'s adult deaths at 2024 death rates, and their ages are close to those of registered deaths. By sex they are not. Women are {wd} of those entered as dead but {we} of adult deaths. Either women\'s deaths, which are registered less often, stayed on the roll longer, or women still alive were entered as dead. <a href="../people/">Women, religion and caste</a>.', { y: SIR.d(TD.years_of_deaths, 1), wd: SIR.pct(TD.women_share_dead), we: SIR.pct(TD.women_share_expected) })],
     [L('Is marriage why so many young women were marked shifted?'),
      L('It can explain the number but not the places. The {x} more young women than young men marked shifted come to about {yrs} of one year\'s marriage moves at 2011 census rates. But districts where more women had moved on marriage do not have more women among the young marked shifted (rank correlation {r}).', { x: SIR.n(TM.excess), yrs: SIR.d(TM.excess_years, 2), r: SIR.d(TM.rho_share, 2) })],
     [L('Were the names left off the draft put back?'),
@@ -48,7 +48,7 @@
     [L('Were Muslims left off the draft out of proportion?'),
      L('Names the booth lists classify as Muslim are {low} of the names left off the draft, and {high} if every unclassified name were Muslim, against 16.87% of the population in 2011 and 17.70% in the 2023 caste survey. The census share lies inside that range in {inside} of {districts} districts. In {above} districts the classified Muslim share alone is more than a point above the census share. They are {above_list}. <a href="../people/">Women, religion and caste</a>.', { low: SIR.pct(100 * t.muslim / cls), high: SIR.pct(100 * (t.muslim + t.unknown) / cls), inside: inside, districts: D.length, above: above.length, above_list: AND0(above) })],
     [L('How can caste be read from surnames?'),
-     L('Only partly. That is why two classifications are used and only results that hold under both are reported. Going by the surname of the father or husband, {up} families are left off the draft at or above their share in the 2023 caste survey under both, and {down} families below it.', { up: AND0(up.map(GN)), down: AND0(down.map(GN)) })],
+     L('It can be read only partly. That is why two classifications are used and only results that hold under both are reported. Going by the surname of the father or husband, {up} families are left off the draft at or above their share in the 2023 caste survey under both, and {down} families below it.', { up: AND0(up.map(GN)), down: AND0(down.map(GN)) })],
     [L('How reliable are the lists?'),
      L('The booth list covers every one of Bihar\'s {booths} polling booths and adds up to {p1b} names left off the draft, {p1} women and men and {tg} third-gender electors. The constituency totals for both phases match the Chief Electoral Officer\'s table. Votes added up from the booths give the declared winner and runner-up in all 40 Lok Sabha seats.', { booths: SIR.n(t.booths), p1b: SIR.n(t.p1_booths), p1: SIR.n(t.p1), tg: SIR.n(t.p1_booths - t.p1) })],
     [L('Does this show that names were left off or deleted to change results?'),
@@ -68,11 +68,11 @@
   var BG = SIR.groupBy(bor, 'border'), belts = Object.keys(BG).sort(function (x, y) { return rt(BG[y]) - rt(BG[x]); });
   var beltName = function (k) { return k.split(';').join(L(' and ')); };
   QA.push([L('Did seats on the border lose more names?'),
-    L('Somewhat more. The {n} seats on a border lost {b} names per 100 electors, and the {i} interior seats {in}. Border seats hold {el} of Bihar\'s electors and account for {sh} of the names left off or deleted. The heaviest belt was the seats bordering {top}, at {topr} per 100.', {
+    L('They lost somewhat more. The {n} seats on a border lost {b} names per 100 electors, and the {i} interior seats {in}. Border seats hold {el} of Bihar\'s electors and account for {sh} of the names left off or deleted. The heaviest belt was the seats bordering {top}, at {topr} per 100.', {
       n: bor.length, b: SIR.d(rt(bor), 2), i: inn.length, in: SIR.d(rt(inn), 2), el: SIR.pct(100 * SIR.sum(bor, 'electorate_2025') / SIR.sum(acs, 'electorate_2025')),
       sh: SIR.pct(100 * SIR.sum(bor, 'total') / SIR.sum(acs, 'total')), top: beltName(belts[0]), topr: SIR.d(rt(BG[belts[0]]), 2) }), ['border']]);
   QA.push([L('Were more Muslim names left off the draft near the border?'),
-    L('A larger share, yes. Names the lists classify as Muslim are {lo} to {hi} of the names left off the draft in border seats and {ilo} to {ihi} in the interior. Several border belts, Seemanchal above all, have large Muslim populations, so some of that difference follows from who lives there. The page on women, religion and caste compares each district with its own population.', {
+    L('Yes, a larger share was. Names the lists classify as Muslim are {lo} to {hi} of the names left off the draft in border seats and {ilo} to {ihi} in the interior. Several border belts, Seemanchal above all, have large Muslim populations, so some of that difference follows from who lives there. The page on women, religion and caste compares each district with its own population.', {
       lo: SIR.pct(ms(bor, false)), hi: SIR.pct(ms(bor, true)), ilo: SIR.pct(ms(inn, false)), ihi: SIR.pct(ms(inn, true)) }), ['border']]);
   QA.push([L('Does this show that people not entitled to vote were left off the draft near the border?'),
     L('No. The lists give one of four reasons for each name, dead, shifted, absent or already enrolled elsewhere. None of them is a finding that a person was not entitled to vote, and the lists have no category for it.'), ['border', 'method']]);
@@ -96,7 +96,7 @@
     L('Most booths lost fewer than 100 names, but {n} of {all} lost 200 or more. The lists record a reason for each name but not why one officer entered so many more than another. The more names a booth had left off the draft, the more likely it was to have been led by the NDA in 2024, {lo} of the lightest booths against {hi} of the heaviest.', {
       n: SIR.n(b200), all: SIR.n(t.booths), lo: SIR.pct(BI[0].nda_pct), hi: SIR.pct(BI[BI.length - 1].nda_pct) }), ['explorer', 'results']]);
   QA.push([L('Can I look up my own name here?'),
-    L('No. Only counts are published on this site. To check your own entry, use the Election Commission\'s voter search.'), ['explorer', 'dash']]);
+    L('No. Only counts are published, never a name. To check your own entry, use the Election Commission\'s voter search.'), ['explorer', 'dash']]);
 
   var RB = r[9];
   QA.push([L('How sure are these findings?'),
@@ -148,7 +148,7 @@
       L('The figures come from the Chief Electoral Officer\'s lists of names left off the draft and deleted after it, the return for the final roll, and the Election Commission\'s results.'),
       L('The booth lists cover all {booths} polling booths and add up to the official totals in every constituency.', { booths: SIR.n(t.booths) }),
       L('Sex is recorded on the roll. Religion and caste are guessed from names and given as ranges.'),
-      L('Only counts are published. No name, EPIC number or address appears anywhere on this site.')], NOTE_REASON]
+      L('Only counts are published. No name, EPIC number or address of any elector is shown.')], NOTE_REASON]
   };
   return { qa: QA, short: SHORT };
   }));

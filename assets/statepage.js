@@ -132,7 +132,7 @@
 
   function limits(d) {
     var parts = [];
-    if (anyPress(d)) parts.push('Figures marked as press reached us through newspapers, broadcasters or state government releases and were not read from a document of the Election Commission or the Chief Electoral Officer.');
+    if (anyPress(d)) parts.push('Figures marked as press come from newspapers, broadcasters or state government releases and were not read from a document of the Election Commission or the Chief Electoral Officer.');
     if (d.v.dead != null) parts.push('A reason is what the officer wrote down, and nobody checked it.');
     return parts.join(' ');
   }
@@ -170,7 +170,7 @@
     if (v.dead != null || v.shifted_absent_other != null) h.push('<h2 id="the-reasons">The reasons</h2><p class="sub">The reason entered against each name left off, as the Chief Electoral Officer published it' + (press(d, 'dead') ? ', through the press' : '') + '. A reason is what the officer wrote down, and nobody checked it.</p><div class="grid"><div class="panel wide" id="pReason"><div class="vizbox" id="vReason"></div><p id="nReason"></p></div></div>');
     if (s.women) h.push('<h2 id="women">Women</h2><p>' + s.women + '</p>' + (R.women_removed_pct != null ? '<div class="grid"><div class="panel wide" id="pWomen"><div class="vizbox" id="vWomen"></div></div></div>' : ''));
     d.tables.forEach(function (t, i) {
-      var lv = LEVEL[t.level], tag = (t.press ? ' The figures reached us through the press.' : '') + (t.partial ? ' Only some ' + lv[1] + ' were published, so the rows do not add up to the state.' : '');
+      var lv = LEVEL[t.level], tag = (t.press ? ' The figures come from the press.' : '') + (t.partial ? ' Only some ' + lv[1] + ' were published, so the rows do not add up to the state.' : '');
       h.push('<h2 id="' + hyph(t.title) + '">' + SIR.esc(t.title) + '</h2>' + (t.note ? '<p class="sub">' + SIR.esc(t.note) + tag + '</p>' : tag ? '<p class="sub">' + tag.trim() + '</p>' : '') +
         '<div class="grid"><div class="panel wide" id="pT' + i + '"><div class="vizbox" id="vT' + i + '"></div><p id="nT' + i + '"></p></div></div>' +
         '<details class="figs"><summary>Every ' + lv[0] + ', in figures</summary><div class="twrap fit" tabindex="0" role="region" aria-label="Every ' + lv[0] + ', in figures"><table id="tT' + i + '"></table></div></details>');

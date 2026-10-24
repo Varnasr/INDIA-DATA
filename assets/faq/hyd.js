@@ -51,18 +51,18 @@
   var rules = s.rules.map(function (k) { return [k, SIR.sum(A, function (a) { return a.rules[k]; })]; }).sort(function (x, y) { return y[1] - x[1]; }), rAll = SIR.sum(rules, function (x) { return x[1]; });
   var medSlot = SIR.median(A.map(function (a) { return a.median_slot; }));
   QA.push([L('How much do polling parts differ?'),
-    L('A great deal. Part rates run from {lo}% to {hi}%, and {over} parts lost more than 60% of their roll. The <a href="../parts/">polling parts page</a> sets each part against the typical part in its own constituency.', { lo: SIR.d(plo, 1), hi: SIR.d(phi, 1), over: over60 }), ['parts', 'explorer']]);
+    L('They differ a great deal. Part rates run from {lo}% to {hi}%, and {over} parts lost more than 60% of their roll. The <a href="../parts/">polling parts page</a> sets each part against the typical part in its own constituency.', { lo: SIR.d(plo, 1), hi: SIR.d(phi, 1), over: over60 }), ['parts', 'explorer']]);
   if (Math.max.apply(null, MS) < 0) QA.push([L('Were parts with more Muslim electors hit harder?'),
     L('No. In every constituency, parts with a larger share of Muslim names on the roll had lower exclusion rates (rank correlations {a} to {b}).', { a: SIR.d(Math.min.apply(null, MS), 2), b: SIR.d(Math.max.apply(null, MS), 2) }), ['parts']]);
   QA.push([L('On what grounds were electors summoned to a hearing?'),
-    L('Under seven Election Commission rules. The commonest were {r1} ({p1}), {r2} ({p2}) and {r3} ({p3}). A flag says the paperwork did not line up, and says nothing about whether the elector was entitled to vote.', {
+    L('They were summoned under seven Election Commission rules. The commonest were {r1} ({p1}), {r2} ({p2}) and {r3} ({p3}). A flag says the paperwork did not line up, and says nothing about whether the elector was entitled to vote.', {
       r1: rules[0][0], p1: SIR.pct(100 * rules[0][1] / rAll), r2: rules[1][0], p2: SIR.pct(100 * rules[1][1] / rAll), r3: rules[2][0], p3: SIR.pct(100 * rules[2][1] / rAll) }), ['hearings']]);
   QA.push([L('Can I look up my own name here?'),
-    L('No. Only counts are published on this site. To check your own entry, use the Election Commission\'s voter search.'), ['explorer', 'dash']]);
+    L('No. Only counts are published, never a name. To check your own entry, use the Election Commission\'s voter search.'), ['explorer', 'dash']]);
   QA.push([L('Why does Malakpet look different in the explorer?'),
     L('Its list has no part numbers and no link to the 2002 roll. It is read by polling-station name instead, {n} stations, and it is given no linked or unlinked rate.', { n: mal.parts }), ['explorer', 'method']]);
   QA.push([L('Where do the Telangana figures come from?'),
-    L('From the state\'s own draft-roll totals for its {d} districts and for the 15 seats of Hyderabad district. They give the roll before the revision and the names left off the draft, and nothing about who was left off or why.', { d: TG.districts.length }), ['telangana', 'method']]);
+    L('They come from the state\'s own draft-roll totals for its {d} districts and for the 15 seats of Hyderabad district. They give the roll before the revision and the names left off the draft, and nothing about who was left off or why.', { d: TG.districts.length }), ['telangana', 'method']]);
 
   // ---- "In short" for each page.
   var FR = 100 * sum(function (a) { return a.counts.f_asd; }) / sum(function (a) { return a.counts.f_all; }), MR = 100 * sum(function (a) { return a.counts.m_asd; }) / sum(function (a) { return a.counts.m_all; });
@@ -111,7 +111,7 @@
       L('The figures come from the lists of names left off the draft and of electors summoned to hearings in the five constituencies, and from the state\'s draft-roll totals.'),
       L('The lists cover every elector on the roll before the revision, so each group has its own rate.'),
       L('Religion is guessed from names. Age and sex come from the roll.'),
-      L('Only counts are published. No name, EPIC number or address appears anywhere on this site.')], NOTE_REASON]
+      L('Only counts are published. No name, EPIC number or address of any elector is shown.')], NOTE_REASON]
   };
   return { qa: QA, short: SHORT };
   }));

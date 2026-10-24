@@ -1,7 +1,7 @@
 <!--page {"title": "Assam 2026", "description": "Assam's Special Revision of the roll in 2025-26, how its rules differed from the SIR, the names flagged for deletion, and the record on D-voters, Foreigners Tribunals, detention centres and the 2019 NRC.", "place": "as"} -->
 <main id="main">
 <div class="page-head"><h1>Overview</h1><ol class="summary" id="short"></ol></div>
-<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission, the Chief Electoral Officer or the Ministry of Home Affairs, and where it reached us through the press, the page says so.</p>
+<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission, the Chief Electoral Officer or the Ministry of Home Affairs, and where it comes from the press, the page says so.</p>
 
 <article class="state" lang="en" dir="ltr" data-no-i18n>
   <div class="kpis" id="kpis"></div>
@@ -43,14 +43,14 @@
   </div>
 
   <h2>Foreigners Tribunals</h2>
-  <p class="sub">Foreigners Tribunals are quasi-judicial bodies that decide whether a person referred to them is a foreigner. Cases come from two places, the D-voter list and the Border Police. These are the figures the Ministry of Home Affairs gave the Lok Sabha up to 2021, and the figures the Chief Minister gave the Assam Assembly in July 2026, which reached us through the press.</p>
+  <p class="sub">Foreigners Tribunals are quasi-judicial bodies that decide whether a person referred to them is a foreigner. Cases come from two places, the D-voter list and the Border Police. These are the figures the Ministry of Home Affairs gave the Lok Sabha up to 2021, and the figures the Chief Minister gave the Assam Assembly in July 2026, as the press reported them.</p>
   <div class="grid">
     <div class="panel wide" id="pFt"><h3>Cases decided by the tribunals each year, 2016 to 2020</h3><div class="vizbox" id="vFt"></div><p id="nFt"></p></div>
     <div class="panel wide" id="pFt26"><h3>What became of the D-voter cases, as told to the Assembly in July 2026</h3><div class="vizbox" id="vFt26"></div><p id="nFt26"></p></div>
   </div>
 
   <h2>Detention centres</h2>
-  <p class="sub">People declared foreigners by a tribunal, and foreigners convicted of an offence, are held in detention centres. The latest figures for each centre that we could find in a primary source are the Ministry of Home Affairs' answers to the Lok Sabha of December 2019 and March 2020.</p>
+  <p class="sub">People declared foreigners by a tribunal, and foreigners convicted of an offence, are held in detention centres. The latest figures for each centre in a primary source are the Ministry of Home Affairs' answers to the Lok Sabha of December 2019 and March 2020.</p>
   <div class="grid">
     <div class="panel wide" id="pDet"><div class="vizbox" id="vDet"></div><p id="nDet"></p></div>
   </div>
@@ -129,7 +129,7 @@ SIR.json('data/assam/summary.json').then(function (d) {
 
   VIZ.lollipop('vFlag', { label: 'Names flagged for deletion with the draft roll, by the reason entered', axis: 'Lakh',
     rows: [['Shifted', S.flagged_shifted], ['Dead', S.flagged_dead], ['Entered more than once, or entries alike', S.flagged_multiple]].map(function (x) { return { name: x[0], v: x[1] / 1e5, text: lk(x[1]), tok: '--fill-navy', hi: true }; }) });
-  document.getElementById('nFlag').textContent = 'The Chief Electoral Officer gave ' + n(S.flagged) + ' names under these three reasons, ' + d1(S.flagged_per_100_draft) + ' for every 100 on the draft. Most reports called them names identified or flagged for deletion. No figure from the Chief Electoral Officer says how many of them were off the published draft, and the draft is larger than the roll of January 2025, so this page calls them flagged. The count reached us through the press, and no split by district, constituency or sex was found.';
+  document.getElementById('nFlag').textContent = 'The Chief Electoral Officer gave ' + n(S.flagged) + ' names under these three reasons, ' + d1(S.flagged_per_100_draft) + ' for every 100 on the draft. Most reports called them names identified or flagged for deletion. No figure from the Chief Electoral Officer says how many of them were off the published draft, and the draft is larger than the roll of January 2025, so this page calls them flagged. The count comes from the press, and no split by district, constituency or sex was found.';
 
   VIZ.lollipop('vDv', { label: 'D-voters on Assam\'s roll, from 1997 to July 2026', axis: 'Thousand',
     rows: d.d_voters.map(function (r) { return { name: (r.as_of === '1997' ? '1997' : r.as_of === '2019-10' ? 'October 2019' : r.as_of === '2025-12-27' ? 'Draft roll, December 2025' : 'July 2026') + (r.primary ? '' : ' (press)'), v: r.value / 1e3, text: n(r.value), tok: r.primary ? '--fill-red' : '--fill-grey', hi: true }; }) });

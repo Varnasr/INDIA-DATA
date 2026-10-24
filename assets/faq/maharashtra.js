@@ -29,7 +29,7 @@
         ['Have the names been put back?', after + (notices ? ' ' + notices : ''), ['main', 'faq']],
         ['Where do the constituency figures come from?', 'The Chief Electoral Officer published every one of the 288 constituencies in two tables. A statement enclosed with its press note of 16 September 2026 gives the roll before the revision and the names left off, and its tables of 1 September 2026 give the five reasons and the draft roll by sex. Every constituency adds up within itself and to its district, and the districts add up to the state.', ['main', 'method', 'faq']],
         ['Where do the figures come from?', 'The draft roll by district and sex, and the names left off by district, are from the Chief Electoral Officer\'s press note of ' + DL(s.draft_date) + '. The constituency figures and the reasons are from its tables of 1 and 16 September 2026, and the notices from its release of 4 September. Every figure adds up to the state figures in the note. The <a href="../method/">method page</a> gives each source.', ['method', 'faq']],
-        ['Can I look up my own name here?', 'No. Only counts are published on this site. To check your own entry, use the Election Commission\'s voter search.', ['main']]
+        ['Can I look up my own name here?', 'No. Only counts are published, never a name. To check your own entry, use the Election Commission\'s voter search.', ['main']]
       ];
       var limits = 'The Chief Electoral Officer published no split of the names left off by sex, and a reason is what the officer wrote down, so these pages show where names were left off and what was entered, and cannot show why.';
       var short = {
