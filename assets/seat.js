@@ -18,18 +18,18 @@
   var CFG = {
     tamilnadu: { label: 'Tamil Nadu', faq: 'tn', lead: { count: 'removed', base: 'before', per: 100, what: 'names left off the draft roll', of: 'the roll before the revision', press: false },
       reasons: [['shifted_absent', 'Shifted or absent'], ['dead', 'Dead'], ['multiple', 'Enrolled at more than one place']],
-      women: { share: 'fall_jan_women_pct', roll: 'jan2025_women_pct', what: 'the fall from the final roll of January 2025 to the draft', of: 'the January 2025 roll' },
+      women: { share: 'fall_jan_women_pct', roll: 'jan2025_women_pct', what: 'the fall from the final roll of January 2025 to the draft', of: 'the January 2025 roll', rollLabel: 'the January 2025 roll' },
       after: { draft: 'draft', final: 'final' },
       election: { year: 2026, count: 'removed', voters: 'removed_voters', votersWhat: 'living names left off, at the seat\'s turnout', turnout: 'turnout', prev: 'winner_2021' },
       limits: 'The Chief Electoral Officer published the names left off by reason for every constituency, and no split of them by sex or age.' },
     westbengal: { label: 'West Bengal', faq: 'wb', lead: { count: 'fall_draft', base: 'roll_2024', per: 100, what: 'fall in the roll from the 2024 Lok Sabha roll to the draft', of: 'the 2024 roll' },
       second: { count: 'fall', base: 'roll_2024', what: 'fall to the roll the 2026 election was held on' },
-      women: { count: 'women_fall', of: 'fall', roll: 'women_2024_pct', what: 'the fall from the 2024 roll to the election roll' },
+      women: { count: 'women_fall', of: 'fall', roll: 'women_2024_pct', what: 'the fall from the 2024 roll to the election roll', rollLabel: 'the 2024 roll' },
       election: { year: 2026, count: 'fall', voters: 'fall_voters', votersWhat: 'fall in the roll, at the seat\'s turnout', turnout: 'turnout' },
       limits: 'West Bengal published the names left off the draft for the state only, so every constituency figure is the fall in the roll, which takes in 18 months of ordinary deaths, moves and new names as well. It is a different count from the names left off the draft.' },
     kerala: { label: 'Kerala', faq: 'kl', lead: { count: 'fall_draft', base: 'roll_2025', per: 100, what: 'fall in the roll from the January 2025 roll to the draft', of: 'the January 2025 roll' },
       second: { count: 'fall', base: 'roll_2025', what: 'fall to the roll the 2026 election was held on' },
-      women: { share: 'women_fall_pct', roll: 'women_2025_pct', what: 'the fall from the January 2025 roll to the draft' },
+      women: { share: 'women_fall_pct', roll: 'women_2025_pct', what: 'the fall from the January 2025 roll to the draft', rollLabel: 'the January 2025 roll' },
       election: { year: 2026, count: 'fall', voters: 'fall_voters', votersWhat: 'fall in the roll, at the seat\'s turnout', turnout: 'turnout' },
       limits: 'No table of the names left off has been published for Kerala, even for the state, so every constituency figure is the fall in the roll, which also takes in ordinary deaths, moves and new names. It is a different count from the names left off the draft.' },
     delhi: { label: 'Delhi', faq: 'dl', lead: { count: 'left_off', base: 'roll_before', per: 100, what: 'names left off the draft roll (forms not collected)', of: 'the roll before the revision' },
@@ -55,7 +55,7 @@
       election: { year: 2024, count: 'left_off', voters: 'at_turnout', votersWhat: 'names left off, at the seat\'s 2024 turnout', turnout: 'turnout_2024' },
       limits: 'The Chief Electoral Officer published no split of the names left off by sex, at any level. The draft roll by sex is published, and the roll before the revision only as a total.' },
     assam: { label: 'Assam', faq: 'as', lead: { count: 'fall', base: 'draft', per: 1000, what: 'fall in the roll from the draft to the final roll', of: 'the draft', to: 'the final roll' },
-      women: { count: 'fall_women', of: 'fall', roll: 'draft_women_pct', what: 'the fall from the draft to the final roll' },
+      women: { count: 'fall_women', of: 'fall', roll: 'draft_women_pct', what: 'the fall from the draft to the final roll', rollLabel: 'the draft' },
       limits: 'Assam held a Special Revision, which ran on different rules from the SIR. The Chief Electoral Officer published each constituency\'s draft and final roll by sex, so its change is the net change, names added less names deleted, and the two cannot be told apart. The names flagged for deletion were published for the state only, through the press.' },
     meghalaya: { label: 'Meghalaya', faq: 'ml', lead: { count: 'removed', base: 'before', per: 100, what: 'names left off the draft roll', of: 'the roll before the revision' },
       reasons: [['shifted_absent_other', 'Shifted, absent or other'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once']],
@@ -93,7 +93,7 @@
       var ranked = A.slice().sort(function (x, y) { return y[L.count] / y[L.base] - x[L.count] / x[L.base]; });
       var rank = ranked.indexOf(a) + 1, drank = D.slice().sort(function (x, y) { return y[L.count] / y[L.base] - x[L.count] / x[L.base]; }).indexOf(a) + 1;
       var stPage = root + st + '/';
-      var cmp = function (v, ref) { return v > ref ? 'above' : v < ref ? 'below' : 'the same as'; };
+      var cmp = function (v, ref) { var x = Math.round(v * 10), y = Math.round(ref * 10); return x > y ? 'above' : x < y ? 'below' : 'the same as'; };
       var falls = L.what.indexOf('fall') === 0;
 
       document.querySelector('.page-head h1').textContent = a.name + ' (' + a.ac + ')';
@@ -112,11 +112,13 @@
       if (C.notices) pts.push(n(a.notices) + ' electors on its draft, ' + d1(100 * a.notices / a.draft) + ' of every 100, were in line for a notice to prove their entry, against ' + d1(100 * sum(A, 'notices') / sum(A, 'draft')) + ' in the state.');
       if (C.election) {
         var E = C.election;
-        var big = a[E.count] > a.margin, what = falls ? 'The fall in the roll' : 'The ' + (L.short || 'names left off');
-        pts.push('The ' + E.year + ' winner was ' + SIR.esc(a.winner) + ', by ' + n(a.margin) + ' votes over ' + SIR.esc(a.runner_up) + '. ' + what + (big
+        var big = a[E.count] > a.margin, what = falls ? (C.second ? 'The ' + C.second.what + ', ' + n(a[E.count]) + ',' : 'The fall in the roll') : 'The ' + (L.short || 'names left off');
+        pts.push('The ' + E.year + ' winner was ' + SIR.esc(a.winner) + ', by ' + n(a.margin) + ' votes over ' + SIR.esc(a.runner_up) + '. ' + (falls && a[E.count] < 0
+          ? (C.second ? 'The roll the ' + E.year + ' election was held on was ' + n(-a[E.count]) + ' larger than ' + L.of + ', so there is no fall in the roll to set against that margin.' : 'The roll rose by ' + n(-a[E.count]) + ', so there is no fall in the roll to set against that margin.')
+          : what + (big
           ? (falls ? ' is larger than that margin' : ' outnumber that margin') + ', large enough to decide the seat, which says nothing about whether it did.'
           : falls ? ' is smaller than that margin. The names left off or deleted may be more than the fall, because the fall nets out names added.'
-            : ' are fewer than that margin, so the runner-up could not have won even if every one of them had voted for the runner-up.'));
+            : ' are fewer than that margin, so the runner-up could not have won even if every one of them had voted for the runner-up.')));
       }
       if (C.claims) pts.push('After the draft, ' + n(a.claims) + ' names were added and ' + n(a.objections) + ' deleted' + (a.women_objections_pct != null ? ', and women were ' + pct(a.women_objections_pct) + ' of those deleted against ' + pct(a.women_draft_pct) + ' of the draft.' : '. The names added include people enrolling for the first time.'));
       var Pr = C.press && a.press;
@@ -164,8 +166,8 @@
       if (W) {
         var ws = W.share ? a[W.share] : (a[W.of] > 0 ? 100 * a[W.count] / a[W.of] : null);
         if (ws != null) {
-          VIZ.lollipop('vWomen', { label: a.name + ': women\'s share of ' + W.of + ' and of ' + W.what, axis: 'Per cent', max: 100, step: 20, ref: 50,
-            rows: [['Women, share of ' + (W.of || 'the roll'), a[W.roll], '--fill-grey'], ['Women, share of the fall', ws, '--fill-red']].map(function (r) { return { name: r[0], v: r[1], text: pct(r[1]), tok: r[2], hi: true }; }) });
+          VIZ.lollipop('vWomen', { label: a.name + ': women\'s share of ' + (W.rollLabel || 'the roll') + ' and of ' + W.what, axis: 'Per cent', max: 100, step: 20, ref: 50,
+            rows: [['Women, share of ' + (W.rollLabel || 'the roll'), a[W.roll], '--fill-grey'], ['Women, share of the fall', ws, '--fill-red']].map(function (r) { return { name: r[0], v: r[1], text: pct(r[1]), tok: r[2], hi: true }; }) });
           document.getElementById('fWomen').innerHTML = '<b>Women were ' + pct(ws) + ' of ' + W.what + ' in ' + SIR.esc(a.name) + ', against ' + pct(a[W.roll]) + ' of the roll.</b> The fall counts ordinary changes too, so it is a different count from the names left off or deleted, and it cannot say why anyone left the roll.';
         } else document.getElementById('sWomen').hidden = true;
       } else if (C.claims && a.women_objections_pct != null) {

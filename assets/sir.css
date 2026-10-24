@@ -1018,6 +1018,7 @@ footer{padding-bottom:5rem}
   footer{padding-bottom:4.5rem}
   .tour{bottom:calc(8rem + env(safe-area-inset-bottom,0px))}
 }
+body:has(.fabs.fabs-off) .tour{bottom:calc(.75rem + env(safe-area-inset-bottom,0px))}
 @media print{.fabs{display:none!important}}
 /* the front page's usage figures */
 .tally{max-width:var(--measure);margin:1.5rem 0 0}

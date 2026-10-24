@@ -223,3 +223,32 @@ and checked by a second reader. All are press.
   less the eligible and the ineligible come to 18,12,367, which Telangana
   Today prints, and they are 10,76,982 not yet heard plus 7,35,385 heard and
   not decided.
+
+## Update of 2026-10-24
+
+Sixteen rows were added and nine changed, each opened again with curl on
+2026-10-24 and checked against the page or the PDF. All figures are
+aggregates.
+
+- **Meghalaya**: the CEO's numbered press notes on meghalaya.gov.in
+  (EL.63/2026/76, 83, 87, 88 and 96, of 15 and 29 September and 1, 6 and 12
+  October) carry every figure that the rows of 1, 6 and 12 October took from
+  Syllad, Northeast Now and India Today NE. Those nine rows now cite the notes
+  and are primary, and each note names the outlet that reported the figure
+  first. Notes 83, 87 and 88 are scans, so their figures were read off the page
+  images. Four rows add the hearings and the electors found ineligible on 15
+  and 29 September from notes 76 and 83.
+- **Delhi**: five counts of notices decided, from 10.28 lakh on 6 October to
+  29.5 lakh on 23 October (The Indian Express and PTI). The sources say
+  "disposed of", "verified", "resolved" and "parked for the final roll". Since
+  30 September an ERO can decide a notice without a hearing, so these rows
+  count decisions with or without one. The CEO's office has not said how many
+  of the decided cases were rejected.
+- **Telangana**: hearings and electors found ineligible on 12, 13 and 18
+  October (Deccan Chronicle, Telangana Today, The Hans India). Ineligible rose
+  from 12,969 on 8 October to 30,407 on 18 October. The reports give the
+  notice total three ways, 92,88,180 (Siasat, 30 September), 92,88,187 (8 to
+  13 October) and 92,88,188 (18 and 19 October). No document of the Chief
+  Electoral Officer giving the total was found, and no total row was added.
+- **Andhra Pradesh**: hearings in 44.27 lakh of 44.28 lakh notices by 29
+  September (Deccan Chronicle).

@@ -465,7 +465,7 @@
     var n = o.rows.length, W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 112 : 210), lc = chars(lw - 8), rh = rowH(o.rows.map(function (r) { return SIR.short(r.name); }), lc, phone() ? 26 : 22), top = 6;
     var rr = Math.max(60, 18 + 6.8 * Math.max.apply(null, o.rows.map(function (r) { return String(r.text != null ? r.text : r.v).length; })));
     var H = top + n * rh + 40, s = svgIn(box, W, H, o.label);
-    var max = o.max || Math.max.apply(null, o.rows.map(function (r) { return r.v; }));
+    var max = o.max || Math.max.apply(null, o.rows.map(function (r) { return r.v; })) || 1;
     var step = o.step || (max > 60 ? 20 : max > 25 ? 10 : 5); max = Math.ceil(max / step) * step;
     var rm = roomy(step, 0, max, W - lw - rr, true); step = rm.step; max = rm.hi;
     var x = function (v) { return lw + 8 + (W - lw - rr) * Math.max(v, 0) / max; };
