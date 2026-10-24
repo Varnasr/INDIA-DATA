@@ -29,7 +29,7 @@
         [L('Where do these figures come from?'),
          L('The names left off by district and reason, and the draft roll by district and sex, are from the Chief Electoral Officer\'s press note of 24 August 2026. The roll of 9 October is from the press note of that date. The <a href="../method/">method page</a> gives each source.'), ['method', 'faq']],
         [L('Can I look up my own name here?'),
-         L('No. Only counts are published on this site. To check your own entry, use the Election Commission\'s voter search.'), ['main']]
+         L('No. Only counts are published, never a name. To check your own entry, use the Election Commission\'s voter search.'), ['main']]
       ];
       var limits = L('A reason on the list is what the officer wrote down, and nobody checked it. The tables show where names were left off and cannot show why.');
       var SHORT = {

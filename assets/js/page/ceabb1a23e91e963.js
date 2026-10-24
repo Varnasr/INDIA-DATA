@@ -1,9 +1,10 @@
   // one state is featured each day, in the large card, and the other states
-  // follow in an order that changes every day. Only a state with an analysis
-  // of its own is featured, so the large card always carries a figure.
+  // follow in alphabetical order, so a reader can find a state in the same
+  // place every day. Only a state with an analysis of its own is featured,
+  // so the large card always carries a figure.
   (function () {
     var box = document.querySelector('.hubs.states'), st = [].slice.call(box.querySelectorAll('a.hub.st'));
-    // a fresh order every day: a shuffle seeded by the day, so every visitor
+    // the featured state changes every day, by a shuffle seeded by the day, so every visitor
     // sees the same order on the same day
     var seed = SIR.day() >>> 0, rnd = function () { seed = (seed + 0x6D2B79F5) >>> 0; var t = seed; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
     var order = st.slice();
@@ -12,6 +13,7 @@
     order.splice(order.indexOf(big), 1);
     big.classList.add('big');
     box.appendChild(big);
+    order.sort(function (a, b) { return a.querySelector('b').textContent.localeCompare(b.querySelector('b').textContent); });
     order.forEach(function (a) { box.appendChild(a); });
   })();
 // The all-India map: names left off per 100 electors, from data/india/states.json

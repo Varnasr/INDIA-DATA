@@ -121,6 +121,26 @@ def heading_ids(content):
     return re.sub(r'<(h[23])(\s[^>]*)?>(.*?)</\1>', one, content, flags=re.S)
 
 
+def contents(content):
+    """The contents list under the head of a long page, in the markup the full
+    reports use (nav.toc, a "Contents" heading, a list of links). A page asks
+    for it with <!--contents--> where the list goes. It lists the page's fixed
+    h2 sections by id, and sir.js (SIR.contents) keeps it in step with the
+    sections a page's script adds or a filter hides, in the reader's language."""
+    if '<!--contents-->' not in content:
+        return content
+    body = re.sub(r'<script\b.*?</script>', '', content, flags=re.S)
+    items = []
+    for m in re.finditer(r'<h2\b[^>]*?\sid="([^"]+)"[^>]*>(.*?)</h2>', body, flags=re.S):
+        text = ' '.join(html.unescape(re.sub(r'<[^>]+>', '', m.group(2))).split())
+        items.append('<li class="l2"><a href="#%s">%s</a></li>' % (m.group(1), html.escape(text, quote=False)))
+    if not items:
+        raise SystemExit('FAIL - a page asks for a contents list and has no h2 with an id')
+    nav = ('<nav class="toc page-toc" aria-labelledby="contents" data-no-i18n><h2 id="contents">Contents</h2><ol>%s</ol></nav>'
+           % ''.join(items))
+    return content.replace('<!--contents-->', nav, 1)
+
+
 # Which roll a state's figures come from, and when the next one is due, for
 # the line under the kicker on every page of that state. The roll is read
 # from data/india/states.json (a final roll only when its electors are held),
@@ -232,7 +252,7 @@ def shell(out, meta, content, scripts):
             items.append(fold(p['label'], subs, p['id'] == place['id']))
         else:
             # the front page's place is About this site, which opens on why the
-            # site exists rather than reloading the page a reader is on
+            # revision matters, so the link does not reload the page a reader is on
             items.append(link(p, '#why-this-site-exists' if p['id'] == 'home' else None))
     subs = ['<p class="lg">Names in bold have a full analysis of their own. The others share one summary page.</p>']
     # each zone is its own block, so a wide screen can set the zones in columns
@@ -245,7 +265,7 @@ def shell(out, meta, content, scripts):
             else:
                 zl.append(link(p))
         subs.append('<div class="zn" data-i18n-each>%s</div>' % ''.join(zl))
-    items.append(fold('All States and Union Territories', subs, bool(place.get('zone')), ' states'))
+    items.append(fold('All states and union territories', subs, bool(place.get('zone')), ' states'))
     # the front page closes the menu, under a rule, rather than sitting
     # between the pages most readers come for and the places
     about = [i for i in items if i.startswith('<a ')]
@@ -253,12 +273,12 @@ def shell(out, meta, content, scripts):
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="ql" data-i18n-each>%s</div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('guide/', 'How to Use This Site'), ('about-the-data/', 'About the Data'), ('india/brief/', 'The SIR in Brief'), ('india/constituencies/', 'Find a Constituency'), ('help/', 'Left Off the Roll? What to Do'), ('india/disputes/', 'Protests and Disputes'), ('india/events/', 'Events'), ('india/rti/', 'RTI Replies'), ('india/cases/', 'Case Studies'), ('india/reading/', 'Further Reading and Viewing'),
-         ('india/women/', 'Women'), ('india/numbers/', 'The SIR in Numbers'), ('support/', 'Support Our Work')))
-    # "Start Here" is its own menu beside Places, so Places holds only places
+        (('guide/', 'How to use this site'), ('about-the-data/', 'About the data'), ('india/brief/', 'The SIR in brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'Left off the roll? What to do'), ('india/disputes/', 'Protests and disputes'), ('india/events/', 'Events'), ('india/rti/', 'RTI replies'), ('india/cases/', 'Case studies'), ('india/reading/', 'Further reading and viewing'),
+         ('india/women/', 'Women'), ('india/numbers/', 'The SIR in numbers'), ('support/', 'Support our work')))
+    # "Start here" is its own menu beside Places, so Places holds only places
     about = ''.join(i for i in items if i.startswith('<div class="about"'))
     items = [i for i in items if not i.startswith('<div class="about"')]
-    start = ('<details class="dl start"><summary class="btn" aria-label="Start Here">%s <span class="lbl">Start Here</span></summary>'
+    start = ('<details class="dl start"><summary class="btn" aria-label="Start here">%s <span class="lbl">Start here</span></summary>'
              '<div class="menu"><div data-i18n-each>%s%s</div></div></details>' % (STAR, quick, about))
     current = place['label'] if place['id'] != 'home' else 'Places'
     places = ('<details class="dl places"><summary class="btn">%s <span class="vh">Places, </span><span class="lbl-place">%s</span></summary>'
@@ -309,7 +329,7 @@ def shell(out, meta, content, scripts):
         fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
     fab = '<div class="fabs">%s</div>' % fab if fab else ''
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s#why-this-site-exists">About This Site</a> · <a href="%shelp/">Left Off the Roll? What to Do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a List with Us</a> · <a href="%ssupport/">Support Our Work</a> · <a href="%sterms/">Terms and Privacy</a> · <a href="%supdates/">What\'s New</a> · <a href="%scorrections/">Corrections</a> · <a href="%sfeedback/?from=%s">Feedback</a>'
+              ' · <a href="%s#why-this-site-exists">About this site</a> · <a href="%shelp/">Left off the roll? What to do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a list</a> · <a href="%ssupport/">Support our work</a> · <a href="%sterms/">Terms and privacy</a> · <a href="%supdates/">What\'s new</a> · <a href="%scorrections/">Corrections</a> · <a href="%sfeedback/?from=%s">Feedback</a>'
               ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, root, root, urllib.parse.quote(here or 'home', safe=''), CFG['email'], CFG['email']))
     # On a phone the header's Downloads button is inside the menu, and the
     # footer link opened the downloads page at its top, where the first button
@@ -443,13 +463,13 @@ def build():
             rel = os.path.relpath(src, SRC).replace(os.sep, '/')
             out = rel[:-len('index.html')]
             meta, content, scripts = read_source(src)
-            put(os.path.join(ROOT, rel), externalise(shell(out, meta, heading_ids(content), scripts), rel))
+            put(os.path.join(ROOT, rel), externalise(shell(out, meta, contents(heading_ids(content)), scripts), rel))
             if out not in NOINDEX:
                 pages.append(out)
     # the 404 page is served at whatever address was asked for, so every link
     # and file in it is made absolute, and it is kept out of search engines
     meta, content, scripts = read_source(os.path.join(ROOT, 'site', '404.html'))
-    page = externalise(shell('404.html', meta, heading_ids(content), scripts), '404.html')
+    page = externalise(shell('404.html', meta, contents(heading_ids(content)), scripts), '404.html')
     page = re.sub(r'(\s(?:href|src)=")(?!https?:|/|#|mailto:|data:|upi:|tel:)', r'\1/', page)
     page = page.replace('data-root=""', 'data-root="/"')
     page = re.sub(r'<link rel="canonical"[^>]*>\n?', '', page)
@@ -500,7 +520,7 @@ def search_index():
             if h not in seen:
                 pages.append([p['id'], label, h])
     # the front page's own pages, which no tab row lists
-    pages += [['home', 'Left Off the Roll? What to Do', 'help/', 'check my name removed deleted excluded left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All Downloads, Explained', 'downloads/'], ['home', 'About the Data', 'about-the-data/', 'definitions glossary what counts mean names left off fall in the roll net change notices no-mapping discrepancy reasons per 100 margin lakh crore'], ['home', 'Share a List with Us', 'share/'], ['home', 'Support Our Work', 'support/', 'donate contribute upi support fund'], ['home', 'How to Use This Site', 'guide/', 'help guide how to use navigate tour start'], ['home', 'Terms and Privacy', 'terms/'], ['home', 'Corrections', 'corrections/'], ['home', 'Feedback and Corrections', 'feedback/', 'feedback suggestion error mistake wrong figure report correction contact'], ['home', "What's New", 'updates/', 'new latest added changelog timeline updates']]
+    pages += [['home', 'Left off the roll? What to do', 'help/', 'check my name removed deleted excluded left off struck off missing name voter list appeal helpline legal aid form 6 add back नाम हटाया मदद নাম বাদ সাহায্য'], ['home', 'All downloads, explained', 'downloads/'], ['home', 'About the data', 'about-the-data/', 'definitions glossary what counts mean names left off fall in the roll net change notices no-mapping discrepancy reasons per 100 margin lakh crore'], ['home', 'Share a list', 'share/'], ['home', 'Support our work', 'support/', 'donate contribute upi support fund'], ['home', 'How to use this site', 'guide/', 'help guide how to use navigate tour start'], ['home', 'Terms and privacy', 'terms/'], ['home', 'Corrections', 'corrections/'], ['home', 'Feedback and corrections', 'feedback/', 'feedback suggestion error mistake wrong figure report correction contact'], ['home', "What's new", 'updates/', 'new latest added changelog timeline updates']]
     rows = []
     for pid, folder, page in (('bihar', 'bihar', 'bihar/results/'), ('tn', 'tamilnadu', 'tamilnadu/'),
                               ('wb', 'westbengal', 'westbengal/'), ('kl', 'kerala', 'kerala/'), ('rj', 'rajasthan', 'rajasthan/'), ('dl', 'delhi', 'delhi/'),

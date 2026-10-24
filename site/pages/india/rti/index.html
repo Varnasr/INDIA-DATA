@@ -25,11 +25,11 @@
   <p class="sub">Replies from the Election Commission to applications that are not shown to concern the revision, published by their applicants while it was under way. They show how the Commission answers applications under the Act in this period. They are left out of every count above.</p>
   <ol class="nfacts" id="otherList"></ol>
 
-  <h2>Send us an RTI reply</h2>
-  <p>If you filed an application about the revision and have the reply, or the refusal, please <a href="../../share/">send it to us</a> with the date you filed it. We publish what was asked and what came back, and we name the applicant only if they ask us to.</p>
+  <h2>Share an RTI reply</h2>
+  <p>If you filed an application about the revision and have the reply, or the refusal, please <a href="../../share/">send it through the sharing form</a> with the date you filed it. What was asked and what came back are published, and the applicant is named only on request.</p>
 
-  <h2>What we could not confirm</h2>
-  <p class="sub">Reports we could not match to their source. They are left off the page above.</p>
+  <h2>What could not be confirmed</h2>
+  <p class="sub">Reports that could not be matched to their source. They are left off the page above.</p>
   <ul id="unconfirmed"></ul>
 
   <p class="note limits" id="shortNote" hidden></p>
@@ -96,7 +96,7 @@ SIR.json('data/india/rti.json').then(function (D) {
   document.getElementById('otherList').innerHTML = other.length ? other.map(li).join('') : '<li>None published yet.</li>';
   document.getElementById('unconfirmed').innerHTML = D.unconfirmed.length ? D.unconfirmed.map(function (u) {
     return '<li>' + esc(u.outlet || '') + (u.date ? ', ' + SIR.date(u.date) : '') + ', "' + esc(u.headline || '') + '". ' + esc(u.reason) + '</li>';
-  }).join('') : '<li>Every report we found was matched to its source.</li>';
+  }).join('') : '<li>Every report found was matched to its source.</li>';
 
   SIR.anchors && SIR.anchors();
   SIR.toc && SIR.toc();

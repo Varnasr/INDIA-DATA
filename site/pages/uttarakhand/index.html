@@ -1,7 +1,7 @@
 <!--page {"title": "Uttarakhand 2026", "description": "How many names Uttarakhand's SIR draft roll left off, how many came back by the final roll, and where names were added and deleted after the draft in each of its 70 constituencies.", "place": "uk"} -->
 <main id="main">
 <div class="page-head"><h1>Overview</h1><ol class="summary" id="short"></ol></div>
-<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it reached us through the press, the page says so.</p>
+<p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it comes from the press, the page says so.</p>
 
 <article class="state" lang="en" dir="ltr" data-no-i18n>
   <h2>Find a constituency or district</h2>
@@ -82,7 +82,7 @@
   <p class="sub">Tap or click a column name to sort by it. On a phone each row is a card.</p>
   <div class="twrap scroll" tabindex="0" role="region" aria-label="Every constituency"><table id="tAc"></table></div>
 </article>
-  <p class="note">This site publishes counts only, never a name. For analysis that looks at named voters in Uttarakhand, see the Sabar Institute's <a href="https://sabarinstitute.org/research-and-publications/compr">analysis of the names left off in Uttarakhand</a>.</p>
+  <p class="note">Only counts are published, never a name. For analysis that looks at named voters in Uttarakhand, see the Sabar Institute's <a href="https://sabarinstitute.org/research-and-publications/compr">analysis of the names left off in Uttarakhand</a>.</p>
   <p class="note limits" id="shortNote" hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
 </main>
@@ -139,7 +139,7 @@ Promise.all([SIR.json('data/uttarakhand/summary.json'), SIR.json('data/uttarakha
     xAxis: 'Notices, per 100 on the draft roll', yAxis: 'Deleted after the draft, per 1,000',
     key: [['Plains districts', '--fill-red'], ['Hill districts', '--fill-navy']],
     points: A.map(function (a) { return { x: a.notices_per_100, y: a.objections_per_1000, tok: PL(a), label: a.name + ': ' + n(a.notices) + ' notices, ' + n(a.objections) + ' deleted after the draft' }; }) });
-  document.getElementById('fNotice').innerHTML = '<b>' + lk(S.notices) + ' electors on the draft, ' + d1(S.notices_per_100) + ' of every 100, were in line for a notice: ' + lk(S.no_mapping) + ' with no mapping to the 2003 roll and ' + lk(S.anomalies) + ' with an anomaly.</b> The constituencies with more notices deleted more names after the draft (rank correlation ' + SIR.d(S.rho_notices_objections, 2) + '), and the notices tie the two counts together more closely than the names left off do (' + SIR.d(S.rho_lo_objections, 2) + '). The plains districts had ' + d1(S.plains.notices_per_100) + ' notices per 100 on the draft and the hills ' + d1(S.hills.notices_per_100) + '. The table does not say how many notices were served or heard in each constituency. The Indian Express reported on 3 October, from the Chief Electoral Officer\'s presentation, that 97,186 of the 1,04,708 names deleted after the draft were electors found ineligible after a notice, and that would explain the link. The site has not seen that presentation.';
+  document.getElementById('fNotice').innerHTML = '<b>' + lk(S.notices) + ' electors on the draft, ' + d1(S.notices_per_100) + ' of every 100, were in line for a notice: ' + lk(S.no_mapping) + ' with no mapping to the 2003 roll and ' + lk(S.anomalies) + ' with an anomaly.</b> The constituencies with more notices deleted more names after the draft (rank correlation ' + SIR.d(S.rho_notices_objections, 2) + '), and the notices tie the two counts together more closely than the names left off do (' + SIR.d(S.rho_lo_objections, 2) + '). The plains districts had ' + d1(S.plains.notices_per_100) + ' notices per 100 on the draft and the hills ' + d1(S.hills.notices_per_100) + '. The table does not say how many notices were served or heard in each constituency. The Indian Express reported on 3 October, from the Chief Electoral Officer\'s presentation, that 97,186 of the 1,04,708 names deleted after the draft were electors found ineligible after a notice, and that would explain the link. The presentation itself has not been found.';
 
   document.getElementById('fNext').innerHTML = 'With the final roll, the Chief Electoral Officer told booth officers to compare it with the roll from before the revision, visit the people missing from it, help those still eligible fill in Form 6, and share the lists with the parties\' booth agents. The steps are on <a href="../india/process/#t-2026-10-03">How the revision was run</a>.';
 

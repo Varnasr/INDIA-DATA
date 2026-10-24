@@ -162,7 +162,9 @@ def as_csv(d):
 def main():
     d = build()
     files = {os.path.join(OUT, 'disputes.json'): json.dumps(d, ensure_ascii=False, separators=(',', ':')) + '\n',
-             os.path.join(OUT, 'disputes.csv'): as_csv(d)}
+             os.path.join(OUT, 'disputes.csv'): as_csv(d),
+             # the counts alone, for pages that show the count and not the items
+             os.path.join(OUT, 'disputes_counts.json'): json.dumps({'counts': d['counts']}, ensure_ascii=False, separators=(',', ':')) + '\n'}
     if '--check' in sys.argv:
         stale = [p for p, t in files.items() if not os.path.exists(p) or open(p, encoding='utf-8').read() != t]
         if stale:

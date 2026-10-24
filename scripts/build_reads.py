@@ -74,6 +74,52 @@ PLAIN_URL = {
         "the 13 crore cannot all be read as eligible voters deleted, and points to the Commission's drive to enrol eligible voters "
         "who were left out."),
 }
+# summaries with a colon hinge, reworded, keyed by the URL
+PLAIN_URL.update({
+    'https://theprint.in/india/governance/bengaluru-to-lucknow-why-urban-centres-are-seeing-high-electoral-roll-deletions-during-sir/3026124/': (
+        "It compares the district with the highest share of names left off in several states, which are the Bengaluru districts in "
+        "Karnataka (43 to 49 per cent), Lucknow in Uttar Pradesh, Surat in Gujarat, Chennai in Tamil Nadu, Bhopal in Madhya Pradesh, "
+        "Gurugram and Hyderabad. A former Chief Election Commissioner and a former Election Commissioner put the pattern down to "
+        "migration, and the second says that deleting electors for failing to map to the 2002-03 roll would be unfair."),
+    'https://www.youtube.com/watch?v=Sfkv8gFBRFk': (
+        "The editor who led the paper's investigation into the two Commissioners' objections answers readers' questions on how the "
+        "software-made 'logical discrepancy' category works, why objections on file by two of three members matter under the law, and "
+        "what the Commission's reply did and did not deny."),
+    'https://www.youtube.com/watch?v=aZkmNCLLChs': (
+        "It walks through Kerala's figures. The final roll is 8,97,211 below the 2024 roll (3.24 per cent), more than 98 per cent of "
+        "the 36.89 lakh unmapped or discrepant electors were kept after hearings, and 92.7 per cent of 14.57 lakh Form 6 applications "
+        "were accepted. Booth-level officers told the channel they were asked to include as many voters as possible."),
+})
+# Every summary opens on a full sentence. One that opens on a verb with no
+# subject ("Reports that ...") is given "It", one that opens on a bare noun
+# phrase ("The Commission's own announcement ...") is given "It is", and one
+# that opens "From X, finds ..." gets "it" before the verb.
+VERB_OPEN = {'Argues', 'Checks', 'Compares', 'Describes', 'Draws', 'Examines', 'Finds', 'Follows', 'Gives', 'Reads',
+             'Records', 'Reports', 'Runs', 'Sets', 'Tabulates', 'Tallies', 'Traces', 'Uses', 'Walks', 'Shows', 'Counts',
+             'Explains', 'Lists', 'Maps', 'Documents', 'Tracks', 'Analyses', 'Estimates', 'Covers', 'Looks', 'Reviews'}
+NOUN_OPEN = ("The Commission's own", "The Commission's letter", "The longer version", "A follow-up", "A reply to",
+             "A Hindi video", "The paper's video", "The BJP's own account", "A BJP short", "A conversation with",
+             "A lawyer's essay", "An economist's counterfactual", "An arithmetic test", "Saurav Rajput's review",
+             "Companion piece")
+LEAD_VERB = r'(shows|finds|counts|reports|sets|argues)'
+
+
+def full_sentence(s):
+    import re
+    first = s.split(' ', 1)[0]
+    if first in VERB_OPEN:
+        return 'It ' + first.lower() + s[len(first):]
+    if s.startswith('Companion piece showing'):
+        return 'It is a companion piece, and it shows' + s[len('Companion piece showing'):]
+    if s.startswith(NOUN_OPEN):
+        first = s.split(' ', 1)[0]
+        return 'It is ' + (first.lower() if first in ('The', 'A', 'An') else first) + s[len(first):]
+    m = re.match(r'(From|Using) (.*?), ' + LEAD_VERB + r'\b', s)
+    if m:
+        return s[:m.start(3)] + 'it ' + s[m.start(3):]
+    return s
+
+
 EXTRA = [{
     'title': 'More SIR Deletions, Bigger BJP Swing? Prannoy Roy DeKodes the Data | DeKoder',
     'outlet': 'DeKoder', 'authors': 'Prannoy Roy', 'date': '2026-10-08',
@@ -112,6 +158,7 @@ def build():
             it['shows'] = PLAIN[i]
         if it['url'] in PLAIN_URL:
             it['shows'] = PLAIN_URL[it['url']]
+        it['shows'] = full_sentence(it['shows'])
         g = BY_URL.get(it['url']) or it.get('group') or TYPE.get(it['type'])
         if g not in GROUPS:
             sys.exit('FAIL - no group for %r (%s)' % (it['title'], it['type']))

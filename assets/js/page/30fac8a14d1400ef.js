@@ -6,8 +6,8 @@ Promise.all([SIR.json('data/india/reads.json'), SIR.json('data/india/panels.json
     n(C.items) + ' pieces from ' + n(C.outlets) + ' outlets and authors, ' + n(C.videos) + ' of them videos.',
     'Investigations of how the revision was run, data analyses of whose names were left off or deleted, research on the effect on results, court reporting, and the Election Commission\'s own account.',
     'On whether the names left off or deleted changed West Bengal\'s result, the pieces disagree, and the page sets them side by side.',
-    n(PN.counts.people) + ' panels set ' + n(PN.counts.quotes) + ' quotations from politicians, officials and commentators beside the site\'s own figures, and say where those figures stop.'
-  ], 'A listed piece is there because it adds evidence or argument about the revision. Its arguments are its own, the pieces disagree with each other in places, and listing one does not mean the site agrees with it.');
+    n(PN.counts.people) + ' panels set ' + n(PN.counts.quotes) + ' quotations from politicians, officials and commentators beside the official figures, and say where those figures stop.'
+  ], 'A listed piece is there because it adds evidence or argument about the revision. Its arguments are its own, the pieces disagree with each other in places, and a listing is not an endorsement.');
 
   var li = function (i) {
     return '<li><p><a href="' + esc(i.url) + '" rel="noopener"><b>' + esc(i.title) + '</b></a></p>' +
@@ -36,17 +36,24 @@ Promise.all([SIR.json('data/india/reads.json'), SIR.json('data/india/panels.json
         return '<li><blockquote lang="' + c.lang + '">' + esc(c.quote) + '</blockquote>' +
           (c.translation ? '<p class="tr">' + esc(c.translation) + '</p>' : '') +
           '<p class="meta">' + esc(c.kind) + '. ' + esc(c.outlet || pc.outlet) + ', ' + SIR.date(pc.date) + (c.when ? ', at about ' + esc(c.when.replace(/~/g, '')) : '') + '.</p>' +
-          (c.rests || c.site || c.stops ? '<dl>' + row('What it rests on', c.rests) + row("This site's figures", c.site) + row('Where the figures stop', c.stops) + '</dl>' : '') + '</li>';
+          (c.rests || c.site || c.stops ? '<dl>' + row('What it rests on', c.rests) + row('The official figures', c.site) + row('Where the figures stop', c.stops) + '</dl>' : '') + '</li>';
       }).join('') + '</ol>' +
       '<div class="sides"><div><h4>Where the argument is strongest</h4><ul>' + p.strongest.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>' +
       '<div><h4>Where it goes further than the figures</h4><ul>' + p.further.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div></div>' +
       (p.note ? '<p class="pnote">' + esc(p.note) + '</p>' : '') + '</section>';
   }).join('');
 
-  var html = '';
+  // each group's heading carries an id made the way build_site.py makes one,
+  // so the contents list and a copied link can open on it
+  var html = '', taken = {};
+  var gid = function (g) {
+    var base = g.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60).replace(/-+$/, '') || 'group', k = base, i = 2;
+    while (taken[k] || document.getElementById(k)) k = base + '-' + i++;
+    taken[k] = 1; return k;
+  };
   D.groups.forEach(function (g) {
     var its = by(g); if (!its.length) return;
-    html += '<h2>' + esc(g) + '</h2><ol class="nfacts reads">' + its.map(li).join('') + '</ol>';
+    html += '<h2 id="' + gid(g) + '">' + esc(g) + '</h2><ol class="nfacts reads">' + its.map(li).join('') + '</ol>';
   });
   document.getElementById('secEnd').insertAdjacentHTML('beforebegin', html);
 

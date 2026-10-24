@@ -67,7 +67,7 @@ SIR.json('data/india/states.json').then(function (I) {
   ], (function () {
     // which territories' figures came through the press, and which published no reasons, from the state table
     var press = U.filter(function (s) { return s.source === 'press'; }).map(function (s) { return s.state; }), none = U.filter(function (s) { return !s.shares; }).map(function (s) { return s.state; });
-    return 'Jammu and Kashmir and Ladakh were not in the revision.' + (press.length ? ' The figures for ' + list(press) + ' reached us through press reports of the official figures.' : '') +
+    return 'Jammu and Kashmir and Ladakh were not in the revision.' + (press.length ? ' The figures for ' + list(press) + ' come from press reports of the official figures.' : '') +
       (none.length ? ' ' + list(none) + ' published no count of the reasons.' : '');
   })());
 

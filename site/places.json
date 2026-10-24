@@ -7,7 +7,7 @@
   "places": [
     {
       "id": "home",
-      "label": "About This Site",
+      "label": "About this site",
       "subtitle": "Names taken off the electoral rolls, counted from the published lists",
       "band": "motifs",
       "color": "1f4e79",
@@ -20,20 +20,23 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "india",
-      "nav_label": "All India Pages", "menu": [["india/constituencies/", "Constituencies"], ["india/disputes/", "Disputes"], ["india/events/", "Events"], ["india/ecinet/", "ECINET"], ["india/rti/", "RTI Replies"], ["india/cases/", "Case Studies"], ["india/women/", "Women"], ["india/cities/", "Cities"], ["india/numbers/", "Numbers"], ["india/adults/", "Rolls Against Adults"], ["india/compare/", "Comparisons"], ["india/urban/", "Urban"], ["india/factors/", "District Factors"], ["india/uts/", "Territories"], ["india/process/", "Rules"],
-        ["india/progress/", "Progress"], ["india/nrc/", "The NRC"], ["india/reading/", "Further Reading and Viewing"], ["india/brief/", "In Brief"]],
+      "nav_label": "All India pages", "menu": [["india/brief/", "In brief"], ["india/constituencies/", "Constituencies"], ["india/disputes/", "Disputes"], ["india/events/", "Events"], ["india/ecinet/", "ECINET"], ["india/rti/", "RTI replies"],
+        ["india/women/", "Women"], ["india/cities/", "Cities"], ["india/numbers/", "The SIR in numbers"], ["india/adults/", "Rolls against adults"], ["india/compare/", "Reserved seats, final rolls and borders"],
+        ["india/cases/", "Case studies"], ["india/urban/", "Urban"], ["india/factors/", "District factors"], ["india/uts/", "Territories"], ["india/process/", "How the revision was run"],
+        ["india/progress/", "Where the revision stands"], ["india/nrc/", "The NRC"], ["india/reading/", "Further reading and viewing"]],
       "pages": [
-        ["india/", "Overview", "i0"],
-        ["india/constituencies/", "Constituencies", "i23"], ["india/disputes/", "Disputes", "i15"], ["india/events/", "Events", "i17"], ["india/ecinet/", "ECINET", "i18"], ["india/rti/", "RTI Replies", "i13"],
+        ["india/", "Overview", "i0"], ["india/brief/", "In brief", "i13"],
+        ["india/constituencies/", "Constituencies", "i23"], ["india/disputes/", "Disputes", "i15"], ["india/events/", "Events", "i17"], ["india/ecinet/", "ECINET", "i18"], ["india/rti/", "RTI replies", "i13"],
         ["india/women/", "Women", "i3"],
         ["india/cities/", "Cities", "i17"],
-        ["india/numbers/", "Numbers", "i11"], ["india/adults/", "Rolls Against Adults", "i11"],
-        ["india/compare/", "Comparisons", "i22"],
-        ["india/cases/", "Case Studies", "i23"],
+        ["india/numbers/", "The SIR in numbers", "i11"], ["india/adults/", "Rolls against adults", "i11"],
+        ["india/compare/", "Reserved seats, final rolls and borders", "i22"],
+        ["india/cases/", "Case studies", "i23"],
         ["india/urban/", "Urban", "i7"],
-        ["india/factors/", "District Factors", "i22"],
+        ["india/factors/", "District factors", "i22"],
         ["india/uts/", "Territories", "i21"],
-        ["india/process/", "Rules", "i15"], ["india/progress/", "Progress", "i18"], ["india/nrc/", "The NRC", "i16"], ["india/method/", "Method", "i10"],
+        ["india/process/", "How the revision was run", "i15"], ["india/progress/", "Where the revision stands", "i18"], ["india/nrc/", "The NRC", "i16"],
+        ["india/reading/", "Further reading and viewing", "i9"], ["india/method/", "Method", "i10"],
         ["india/faq/", "Questions", "i12"],
         ["india/report/", "Report", "i13"]
       ],
@@ -54,9 +57,9 @@
       "band": "madhubani",
       "color": "1f4e79",
       "class": "bihar",
-      "nav_label": "Bihar Pages",
+      "nav_label": "Bihar pages",
       "dash": "bihar/",
-      "tabs": [["overview", "Overview", "i0"], ["deletions", "Left Off or Deleted", "i1"], ["reasons", "Reasons", "i16"], ["phases", "Phases", "i2"], ["gender", "Women", "i3"], ["caste", "Caste", "i4"], ["religion", "Religion", "i5"], ["electoral", "Elections", "i6"], ["geographic", "Geography", "i7"], ["economic", "District Factors", "i8"], ["research", "Research", "i9"], ["methodology", "Method", "i10"]],
+      "tabs": [["overview", "Overview", "i0"], ["deletions", "Left off or deleted", "i1"], ["reasons", "Reasons", "i16"], ["phases", "Phases", "i2"], ["gender", "Women", "i3"], ["caste", "Caste", "i4"], ["religion", "Religion", "i5"], ["electoral", "Elections", "i6"], ["geographic", "Geography", "i7"], ["economic", "District factors", "i8"], ["research", "Research", "i9"], ["methodology", "Method", "i10"]],
       "pages": [
         ["bihar/", "Overview", "i0"],
         ["bihar/explorer/", "Explorer", "i19"],
@@ -84,7 +87,7 @@
       "band": "ikat",
       "color": "b13b38",
       "class": "hyd",
-      "nav_label": "Hyderabad Pages",
+      "nav_label": "Hyderabad pages",
       "dash": "hyderabad/",
       "tabs": [["overview", "Overview", "i0"], ["deletions", "Exclusions", "i1"], ["age", "Age", "i3"], ["religion", "Religion", "i5"], ["link", "Linkage", "i14"], ["hearings", "Hearings", "i15"], ["parts", "Parts", "i11"], ["electoral", "Elections", "i6"], ["research", "Research", "i9"], ["methodology", "Method", "i10"]],
       "pages": [
@@ -114,7 +117,7 @@
       "band": "kolam",
       "color": "8a2a1b",
       "class": "tn",
-      "nav_label": "Tamil Nadu Pages",
+      "nav_label": "Tamil Nadu pages",
       "pages": [
         ["tamilnadu/", "Overview", "i0"],
         ["tamilnadu/elections/", "Elections", "i6"],
@@ -136,7 +139,7 @@
       "band": "kasuti",
       "color": "1f5c3a",
       "class": "ka",
-      "nav_label": "Karnataka Pages",
+      "nav_label": "Karnataka pages",
       "pages": [
         ["karnataka/", "Overview", "i0"],
         ["karnataka/faq/", "Questions", "i12"],
@@ -156,7 +159,7 @@
       "band": "alpana",
       "color": "7a1f1f",
       "class": "wb",
-      "nav_label": "West Bengal Pages",
+      "nav_label": "West Bengal pages",
       "pages": [
         ["westbengal/", "Overview", "i0"],
         ["westbengal/elections/", "Elections", "i6"],
@@ -178,7 +181,7 @@
       "band": "kasavu",
       "color": "8a5a12",
       "class": "kl",
-      "nav_label": "Kerala Pages",
+      "nav_label": "Kerala pages",
       "pages": [
         ["kerala/", "Overview", "i0"],
         ["kerala/elections/", "Elections", "i6"],
@@ -200,7 +203,7 @@
       "band": "bandhani",
       "color": "9b2d20",
       "class": "rj",
-      "nav_label": "Rajasthan Pages",
+      "nav_label": "Rajasthan pages",
       "pages": [
         ["rajasthan/", "Overview", "i0"],
         ["rajasthan/faq/", "Questions", "i12"],
@@ -221,7 +224,7 @@
       "band": "chikan",
       "color": "1d5b57",
       "class": "up",
-      "nav_label": "Uttar Pradesh Pages",
+      "nav_label": "Uttar Pradesh pages",
       "pages": [
         ["uttarpradesh/", "Overview", "i0"],
         ["uttarpradesh/faq/", "Questions", "i12"],
@@ -242,7 +245,7 @@
       "band": "jaali",
       "color": "8a4b2a",
       "class": "delhi",
-      "nav_label": "Delhi Pages",
+      "nav_label": "Delhi pages",
       "pages": [
         ["delhi/", "Overview", "i0"],
         ["delhi/faq/", "Questions", "i12"],
@@ -263,7 +266,7 @@
       "band": "paithani",
       "color": "6a1b4d",
       "class": "mh",
-      "nav_label": "Maharashtra Pages",
+      "nav_label": "Maharashtra pages",
       "pages": [
         ["maharashtra/", "Overview", "i0"],
         ["maharashtra/faq/", "Questions", "i12"],
@@ -283,7 +286,7 @@
       "band": "patola",
       "color": "8e1b2c",
       "class": "gj",
-      "nav_label": "Gujarat Pages",
+      "nav_label": "Gujarat pages",
       "pages": [
         ["gujarat/", "Overview", "i0"],
         ["gujarat/elections/", "Elections", "i6"],
@@ -305,7 +308,7 @@
       "band": "aipan",
       "color": "8a2c1d",
       "class": "uk",
-      "nav_label": "Uttarakhand Pages",
+      "nav_label": "Uttarakhand pages",
       "pages": [
         ["uttarakhand/", "Overview", "i0"],
         ["uttarakhand/faq/", "Questions", "i12"],
@@ -326,7 +329,7 @@
       "band": "gamosa",
       "color": "9b1c1c",
       "class": "as",
-      "nav_label": "Assam Pages",
+      "nav_label": "Assam pages",
       "pages": [
         ["assam/", "Overview", "i0"],
         ["assam/faq/", "Questions", "i12"],
@@ -346,7 +349,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "cg",
-      "nav_label": "Chhattisgarh Pages",
+      "nav_label": "Chhattisgarh pages",
       "pages": [
         ["chhattisgarh/", "Overview", "i0"],
         ["chhattisgarh/faq/", "Questions", "i12"],
@@ -364,7 +367,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "mp",
-      "nav_label": "Madhya Pradesh Pages",
+      "nav_label": "Madhya Pradesh pages",
       "pages": [
         ["madhyapradesh/", "Overview", "i0"],
         ["madhyapradesh/faq/", "Questions", "i12"],
@@ -382,7 +385,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "ap",
-      "nav_label": "Andhra Pradesh Pages",
+      "nav_label": "Andhra Pradesh pages",
       "pages": [
         ["andhrapradesh/", "Overview", "i0"],
         ["andhrapradesh/faq/", "Questions", "i12"],
@@ -400,7 +403,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "od",
-      "nav_label": "Odisha Pages",
+      "nav_label": "Odisha pages",
       "pages": [
         ["odisha/", "Overview", "i0"],
         ["odisha/faq/", "Questions", "i12"],
@@ -418,7 +421,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "jh",
-      "nav_label": "Jharkhand Pages",
+      "nav_label": "Jharkhand pages",
       "pages": [
         ["jharkhand/", "Overview", "i0"],
         ["jharkhand/faq/", "Questions", "i12"],
@@ -436,7 +439,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "hr",
-      "nav_label": "Haryana Pages",
+      "nav_label": "Haryana pages",
       "pages": [
         ["haryana/", "Overview", "i0"],
         ["haryana/faq/", "Questions", "i12"],
@@ -454,7 +457,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "pb",
-      "nav_label": "Punjab Pages",
+      "nav_label": "Punjab pages",
       "pages": [
         ["punjab/", "Overview", "i0"],
         ["punjab/faq/", "Questions", "i12"],
@@ -472,7 +475,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "ga",
-      "nav_label": "Goa Pages",
+      "nav_label": "Goa pages",
       "pages": [
         ["goa/", "Overview", "i0"],
         ["goa/faq/", "Questions", "i12"],
@@ -490,7 +493,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "mn",
-      "nav_label": "Manipur Pages",
+      "nav_label": "Manipur pages",
       "pages": [
         ["manipur/", "Overview", "i0"],
         ["manipur/faq/", "Questions", "i12"],
@@ -508,7 +511,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "ml",
-      "nav_label": "Meghalaya Pages",
+      "nav_label": "Meghalaya pages",
       "pages": [
         ["meghalaya/", "Overview", "i0"],
         ["meghalaya/faq/", "Questions", "i12"],
@@ -526,7 +529,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "mz",
-      "nav_label": "Mizoram Pages",
+      "nav_label": "Mizoram pages",
       "pages": [
         ["mizoram/", "Overview", "i0"],
         ["mizoram/faq/", "Questions", "i12"],
@@ -544,7 +547,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "nl",
-      "nav_label": "Nagaland Pages",
+      "nav_label": "Nagaland pages",
       "pages": [
         ["nagaland/", "Overview", "i0"],
         ["nagaland/faq/", "Questions", "i12"],
@@ -562,7 +565,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "sk",
-      "nav_label": "Sikkim Pages",
+      "nav_label": "Sikkim pages",
       "pages": [
         ["sikkim/", "Overview", "i0"],
         ["sikkim/faq/", "Questions", "i12"],
@@ -580,7 +583,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "ar",
-      "nav_label": "Arunachal Pradesh Pages",
+      "nav_label": "Arunachal Pradesh pages",
       "pages": [
         ["arunachal/", "Overview", "i0"],
         ["arunachal/faq/", "Questions", "i12"],
@@ -598,7 +601,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "tripura",
-      "nav_label": "Tripura Pages",
+      "nav_label": "Tripura pages",
       "pages": [
         ["tripura/", "Overview", "i0"],
         ["tripura/faq/", "Questions", "i12"],
@@ -616,7 +619,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "py",
-      "nav_label": "Puducherry Pages",
+      "nav_label": "Puducherry pages",
       "pages": [
         ["puducherry/", "Overview", "i0"],
         ["puducherry/faq/", "Questions", "i12"],
@@ -634,7 +637,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "ch",
-      "nav_label": "Chandigarh Pages",
+      "nav_label": "Chandigarh pages",
       "pages": [
         ["chandigarh/", "Overview", "i0"],
         ["chandigarh/faq/", "Questions", "i12"],
@@ -652,7 +655,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "ld",
-      "nav_label": "Lakshadweep Pages",
+      "nav_label": "Lakshadweep pages",
       "pages": [
         ["lakshadweep/", "Overview", "i0"],
         ["lakshadweep/faq/", "Questions", "i12"],
@@ -670,7 +673,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "an",
-      "nav_label": "Andaman and Nicobar Islands Pages",
+      "nav_label": "Andaman and Nicobar Islands pages",
       "pages": [
         ["andaman/", "Overview", "i0"],
         ["andaman/faq/", "Questions", "i12"],
@@ -688,7 +691,7 @@
       "band": "motifs",
       "color": "1f4e79",
       "class": "dd",
-      "nav_label": "Dadra and Nagar Haveli and Daman and Diu Pages",
+      "nav_label": "Dadra and Nagar Haveli and Daman and Diu pages",
       "pages": [
         ["dnhdd/", "Overview", "i0"],
         ["dnhdd/faq/", "Questions", "i12"],
