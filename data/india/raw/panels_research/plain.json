@@ -1486,7 +1486,7 @@
   "s-y-quraishi": {
    "name": "S.Y. Quraishi",
    "role": "Chief Election Commissioner of India from July 2010 to June 2012.",
-   "intro": "The quotations come from one post of his on X, of 2 October 2026, about the Commission's letter of 1 October that sends booth level officers to help people no longer on the roll apply through Form 6. Free Press Journal reported the post the same day, and Newslaundry put the point to the Commission on 5 October.",
+   "intro": "The quotations come from one post of his on X, of 2 October 2026, about the Commission's letter of 1 October that sends booth level officers to help people no longer on the roll apply through Form 6, and from his interview in Hindi with Dhruv Rathee on YouTube, published on 22 October 2026. Free Press Journal reported the post the same day, and Newslaundry put the point to the Commission on 5 October. In the interview he returns to Form 6 and speaks of the revision's counts, the Commission's decisions and West Bengal's appeals.",
    "claims": {
     "0": {
      "rests": "It rests on the 2022 amendment to the Registration of Electors Rules, 1960 (S.O. 2802(E) of 17 June 2022), which titled Form 6 “Application Form for New Voters” and made rule 13(1) speak of a claim “as new elector”.",
@@ -1520,17 +1520,228 @@
        "2026-10-01"
       ]
      ]
+    },
+    "3": {
+     "rests": "He takes 103 crore as the adult population the census of 2026 will find, allows that 1 to 3 crore adults may be on no roll, and sets the 100 crore that leaves beside 88 crore, a figure he does not source. Just before this he says 30 years of summary revision had brought the rolls to 99 per cent accuracy.",
+     "site": "No official projection gives India's adults for 2026 in one figure. The UN puts India's adults at 1,01,76,59,624 in mid-2024. The Technical Group on Population Projections expects 95,50,92,000 adults in 2026 in the 19 states it covers. Before the revision those states' rolls held 93,92,60,959 names and their drafts 80,65,69,819. Telangana's roll before the revision held 115.2 names for every 100 projected adults, and a roll above its adults holds names of people who have died, moved or been entered twice. Across the 31 states with a draft, 13,39,03,307 names were left off. In the 22 states with a final roll, the rise from draft to final came to 14.6 per cent of the names left off there.",
+     "stops": "Nine states with a draft have no final roll yet, so no national total of the final rolls exists to set against his 88 crore. A projection counts residents, and the gap below it mixes adults never enrolled with names wrongly left off.",
+     "uses": [
+      [
+       "data/india/lok_sabha_electors.json",
+       "1017659624"
+      ],
+      [
+       "data/india/states.json",
+       "955092000"
+      ],
+      [
+       "data/india/states.json",
+       "939260959"
+      ],
+      [
+       "data/india/states.json",
+       "806569819"
+      ],
+      [
+       "data/india/states.json",
+       "115.2"
+      ],
+      [
+       "data/india/states.json",
+       "133903307"
+      ],
+      [
+       "data/india/states.json",
+       "14.6"
+      ]
+     ]
+    },
+    "4": {
+     "rests": "He relies on the rule that the Commission decides unanimously where it can and by majority otherwise, which he says the 2023 Act kept from the law of 1993. He names no decision that the Chief Election Commissioner took alone.",
+     "site": "A Cabinet Secretariat note released under the RTI Act, as The Wire reported it, records that the Commission's business is decided unanimously where possible and by majority otherwise under Section 18 of the 2023 Act. The Indian Express reported at least 14 objections by Election Commissioners Sukhbir Singh Sandhu and Vivek Joshi in 10 months to decisions and orders they say were taken without their knowledge. Among them is Sandhu's note of 13 August 2026 calling the change to the online Form 6 unauthorised and illegal. The paper reported that the full Commission met on 9 September 2026 for the first time in four months, which matches his four months. The Commission's press note 119 of 23 September said every decision of the past year was unanimous. On 5 October the Supreme Court heard a petition against decisions said to have been taken by the Chief Election Commissioner alone.",
+     "stops": "The notes are known from press reports and have not been published. No record shows who took which decision, so whether any decision was the Chief Election Commissioner's alone, and whether it was lawful, is for the Court.",
+     "uses": [
+      [
+       "data/india/process.json",
+       "2026-09-09"
+      ],
+      [
+       "data/india/process.json",
+       "2026-08-13"
+      ],
+      [
+       "data/india/rti.json",
+       "Section 18"
+      ]
+     ]
+    },
+    "5": {
+     "rests": "He gives the figure of 500 foreigners as one he read in a newspaper he does not name. He goes on to split it into 150 from Bangladesh and 350 women from Nepal who married into Bihar, whom he says were there lawfully. The Commission has published no count of foreigners found in Bihar.",
+     "site": "Bihar's roll before the revision held 7,89,69,844 names by the Commission's count for June 2025, close to his 8 crore. Its draft left off 65,59,626, which officers entered as 22,32,586 dead, 26,55,900 shifted, 9,70,081 absent and 7,01,059 already enrolled. None of these reasons is citizenship. After the draft 3,66,742 more were deleted for death, shifting, repetition or with no reason stated. The Reporters' Collective reported on 16 October 2026 that Bihar's replies to its RTI applications answer No to whether any list was referred under the Citizenship Act.",
+     "stops": "No published figure counts anyone in Bihar as a foreigner, so his 500 can be neither confirmed nor refuted. A recorded reason is what an officer wrote down, and nobody checked it.",
+     "uses": [
+      [
+       "data/bihar/final.json",
+       "78969844"
+      ],
+      [
+       "data/bihar/reasons.json",
+       "6559626"
+      ],
+      [
+       "data/bihar/reasons.json",
+       "2232586"
+      ],
+      [
+       "data/bihar/reasons.json",
+       "2655900"
+      ],
+      [
+       "data/bihar/reasons.json",
+       "970081"
+      ],
+      [
+       "data/bihar/reasons.json",
+       "701059"
+      ],
+      [
+       "data/bihar/final.json",
+       "366742"
+      ]
+     ]
+    },
+    "6": {
+     "rests": "His 27 lakh matches the names West Bengal's judicial officers found not eligible, as reported, and his 1 lakh matches the appeals decided by mid-September. His 93 per cent is close to the share of decided appeals that ended in inclusion in an RTI reply The Wire reported. From these he concludes that the roll was illegal and the election should be held again.",
+     "site": "Of 60,06,675 names held for adjudication, 32,68,119 were found eligible and 27,16,393 not eligible, as reported. The Commission's affidavit of 16 September 2026, as reported, counts 38,31,429 appeals, 22,21,118 of them by people who were excluded and 16,10,311 against inclusion, with 1,26,194 decided and 37,05,235 pending. The Chief Electoral Officer's RTI reply, as The Wire reported it, shows 82,782 appeals decided by 7 August 2026, 75,443 of them ending in inclusion, and says the totals mix appeals against inclusion and against exclusion. Only 1,607 names were restored before the poll.",
+     "stops": "A decided appeal that ended in inclusion may be one the Commission brought against inclusion and lost, so the 93 per cent is no count of excluded people found eligible. Whether the roll was unlawful and the election should be held again is for a court, and no figure measures what the names left off did to the result.",
+     "uses": [
+      [
+       "data/westbengal/summary.json",
+       "6006675"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "3268119"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "2716393"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "3831429"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "2221118"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "1610311"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "126194"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "3705235"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "1607"
+      ],
+      [
+       "data/india/rti.json",
+       "82,782"
+      ],
+      [
+       "data/india/rti.json",
+       "75,443"
+      ]
+     ]
+    },
+    "7": {
+     "rests": "He calls the 13 crore deleted. The count is the sum of the names left off the draft rolls.",
+     "site": "Across the 31 states and union territories with a draft, 13,39,03,307 names were left off. Officers entered 2,79,69,558 of them, or 20.9 per cent, as dead, 9,56,35,923, or 71.5 per cent, as shifted, absent or other, and 1,01,48,459, or 7.6 per cent, as duplicates. A name left off a draft can come back through a claim before the final roll, and a deletion is an order made after the draft. In the 20 states that report it, 33,65,116 names were deleted after the draft. In the 22 states with a final roll, the rise from draft to final came to 14.6 per cent of the names left off there.",
+     "stops": "The 13 crore count names before any claim was heard, and they include the dead and the duplicates. No published figure says how many of them were eligible electors.",
+     "uses": [
+      [
+       "data/india/states.json",
+       "133903307"
+      ],
+      [
+       "data/india/states.json",
+       "27969558"
+      ],
+      [
+       "data/india/states.json",
+       "20.9"
+      ],
+      [
+       "data/india/states.json",
+       "95635923"
+      ],
+      [
+       "data/india/states.json",
+       "71.5"
+      ],
+      [
+       "data/india/states.json",
+       "10148459"
+      ],
+      [
+       "data/india/states.json",
+       "7.6"
+      ],
+      [
+       "data/india/states.json",
+       "3365116"
+      ],
+      [
+       "data/india/states.json",
+       "14.6"
+      ]
+     ]
+    },
+    "8": {
+     "rests": "He repeats his post of 2 October that Form 6 is for new voters and that its declaration exposes a deleted elector to a charge of a false statement. He proposes a new form for such electors, which he calls 6X, approved by the Law Ministry in two hours. Just before, he says the two Commissioners had objected that Form 6 is part of the Rules and cannot be changed by a word.",
+     "site": "The Indian Express reported that Vivek Joshi recorded on 16 May 2026 that Form 6 is set by the Registration of Electors Rules, 1960 and cannot be changed without the government amending them, and that Sandhu agreed on 19 May. The Central Government makes those Rules under section 28 of the 1950 Act, and the Form 6 now in force came by the amendment notification S.O. 2802(E) of 2022. The Commission's letter of 29 September 2026 ordered a drive to enrol people left out on the statutory Form 6 and kept the added declaration for the revision period only. Two transparency activists have asked the Supreme Court to let electors left off Delhi's draft apply on Form 8 or on some other form. On 12 October the bench said it had neither approved nor disapproved the modified Form 6 and listed that challenge for 27 October.",
+     "stops": "No form for people deleted or left off has been notified, and how long an amendment of the Rules would take is not on record. Whether filing Form 6 is unlawful for such a person is for a court.",
+     "uses": [
+      [
+       "data/india/process.json",
+       "2026-05-16"
+      ],
+      [
+       "data/india/process.json",
+       "2026-09-29"
+      ],
+      [
+       "data/india/help.json",
+       "2802(E)"
+      ]
+     ]
     }
    },
    "strongest": [
     "The form's own wording supports him. Since 2022 Form 6 is titled for new voters, and its declaration asks every applicant to say they are applying for the first time, with no way to strike the line out.",
-    "The Commission has published no guidance on how a person who was on the roll before should answer that line, while sending its officers to ask such people to fill the form."
+    "The Commission has published no guidance on how a person who was on the roll before should answer that line, while sending its officers to ask such people to fill the form.",
+    "His account of decisions taken without the two Election Commissioners matches the objections The Indian Express reported, and the paper reports that the full Commission met on 9 September 2026 for the first time in four months.",
+    "His West Bengal figures are close to the official ones as reported. 27,16,393 names were found not eligible, 1,26,194 appeals had been decided by 16 September, and an RTI reply showed 75,443 of 82,782 decided appeals ending in inclusion."
    ],
    "further": [
     "Section 23(1) of the 1950 Act lets anyone not on the roll apply, and Form 6 is the only form for it, so a deleted elector is not barred from filing it.",
     "Section 31 needs a statement the person knows or believes to be false. Saying all who filled the form committed an offence goes further than the Act, and no court has ruled on item (iii). The Delhi High Court has called one elector's fear of a false-declaration charge misplaced where the Commission's counsel had suggested he file Form 6.",
-    "Calling officials abettors needs an offence to abet, which no document shows."
-   ]
+    "Calling officials abettors needs an offence to abet, which no document shows.",
+    "He calls 13 crore names deleted. They were left off the draft rolls, and in the 22 states with a final roll the rise from draft to final came to 14.6 per cent of the names left off there.",
+    "His 103 crore adults and 88 crore electors are not official figures, and no national total of the final rolls exists yet.",
+    "His 500 foreigners in Bihar come from a newspaper he does not name, and no published record counts anyone in Bihar as a foreigner.",
+    "Holding West Bengal's election again follows from his reading that the roll was illegal, which is for a court to decide."
+   ],
+   "drop": {
+    "5": "Left out because the passage turns on how many foreigners were found, a question of citizenship that the published rolls do not answer."
+   }
   },
   "p-chidambaram": {
    "name": "P. Chidambaram",
