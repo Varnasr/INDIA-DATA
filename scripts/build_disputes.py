@@ -23,6 +23,7 @@ import csv
 import io
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -159,12 +160,19 @@ def as_csv(d):
     return b.getvalue()
 
 
+def by_state(d):
+    # items naming each state, as a state page counts them
+    items = [i for s in d['sections'] for i in s['items']]
+    names = sorted({x.strip() for i in items for x in re.split(r',| and ', i.get('state') or '') if x.strip()})
+    return {n: sum(1 for i in items if n in (i.get('state') or '')) for n in names}
+
+
 def main():
     d = build()
     files = {os.path.join(OUT, 'disputes.json'): json.dumps(d, ensure_ascii=False, separators=(',', ':')) + '\n',
              os.path.join(OUT, 'disputes.csv'): as_csv(d),
              # the counts alone, for pages that show the count and not the items
-             os.path.join(OUT, 'disputes_counts.json'): json.dumps({'counts': d['counts']}, ensure_ascii=False, separators=(',', ':')) + '\n'}
+             os.path.join(OUT, 'disputes_counts.json'): json.dumps({'counts': d['counts'], 'by_state': by_state(d)}, ensure_ascii=False, separators=(',', ':')) + '\n'}
     if '--check' in sys.argv:
         stale = [p for p, t in files.items() if not os.path.exists(p) or open(p, encoding='utf-8').read() != t]
         if stale:

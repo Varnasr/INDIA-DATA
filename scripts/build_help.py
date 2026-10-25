@@ -106,13 +106,24 @@ def build():
             'counts': {'remedies': len(rem), 'orgs': len(orgs), 'states': len(states), 'dropped': len(dropped)}}
 
 
+COUNTS = os.path.join(ROOT, 'data', 'india', 'help_counts.json')
+
+
 def main():
-    text = json.dumps(build(), ensure_ascii=False, separators=(',', ':')) + '\n'
+    H = build()
+    text = json.dumps(H, ensure_ascii=False, separators=(',', ':')) + '\n'
+    # the organisations per state, for pages that show the count and not the list
+    by = {}
+    for o in H['orgs']:
+        by[o['state']] = by.get(o['state'], 0) + 1
+    counts = json.dumps({'counts': H['counts'], 'orgs_by_state': dict(sorted(by.items()))}, ensure_ascii=False, separators=(',', ':')) + '\n'
     if '--check' in sys.argv:
-        if not os.path.exists(OUT) or open(OUT, encoding='utf-8').read() != text:
-            raise SystemExit('FAIL - stale: data/india/help.json')
+        for p, t in ((OUT, text), (COUNTS, counts)):
+            if not os.path.exists(p) or open(p, encoding='utf-8').read() != t:
+                raise SystemExit('FAIL - stale: ' + os.path.relpath(p, ROOT))
         print('help current')
         return
+    open(COUNTS, 'w', encoding='utf-8').write(counts)
     open(OUT, 'w', encoding='utf-8').write(text)
     c = json.loads(text)['counts']
     print('%d remedies, %d organisations in %d states (%d left out)' % (c['remedies'], c['orgs'], c['states'], c['dropped']))
