@@ -342,16 +342,27 @@ def as_csv(d):
     return buf.getvalue()
 
 
+def fslug(s):
+    return re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
+
+
 def main():
     d = build()
     files = {os.path.join(OUT, 'factors.json'): json.dumps(d, ensure_ascii=False, indent=1) + '\n',
              os.path.join(OUT, 'factors.csv'): as_csv(d)}
+    # one small file per state for the district pages, which read only their
+    # own state's rows: data/india/factors/<state>.json
+    for st in sorted({u['state'] for u in d['units']}):
+        part = {'factors': d['factors'], 'states': [x for x in d['states'] if x['state'] == st],
+                'units': [u for u in d['units'] if u['state'] == st]}
+        files[os.path.join(OUT, 'factors', fslug(st) + '.json')] = json.dumps(part, ensure_ascii=False, separators=(',', ':')) + '\n'
     stale = [p for p, t in files.items() if not os.path.exists(p) or open(p, encoding='utf-8').read() != t]
     if CHECK:
         if stale:
             raise SystemExit('FAIL - stale: ' + ', '.join(os.path.relpath(p, ROOT) for p in stale))
         print('OK: district factors up to date')
         return
+    os.makedirs(os.path.join(OUT, 'factors'), exist_ok=True)
     for p, t in files.items():
         open(p, 'w', encoding='utf-8').write(t)
     print(json.dumps(d['summary']))

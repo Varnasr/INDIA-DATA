@@ -762,16 +762,16 @@ footer{background:var(--bg);margin-top:2rem}
 }
 
 /* "On this page": the sections in the left margin of a wide screen */
-nav.toc:not(.page-toc){display:none}
+nav.toc:not(.page-toc):not(.report .toc){display:none}
 @media (min-width:1240px){
   body.has-toc main{max-width:calc(var(--page) + 15rem);padding-inline-start:calc(15rem + 1.25rem)}
-  nav.toc:not(.page-toc){display:block;position:fixed;z-index:50;top:calc(var(--hh,0px) + 84px);inset-inline-start:max(1.25rem,calc((100vw - var(--page) - 15rem) / 2 + 1.25rem));width:13rem;max-height:calc(100vh - var(--hh,0px) - 110px);overflow:auto;font-size:.84rem;line-height:1.35;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
-  nav.toc:not(.page-toc).on{opacity:1;visibility:visible}
+  nav.toc:not(.page-toc):not(.report .toc){display:block;position:fixed;z-index:50;top:calc(var(--hh,0px) + 84px);inset-inline-start:max(1.25rem,calc((100vw - var(--page) - 15rem) / 2 + 1.25rem));width:13rem;max-height:calc(100vh - var(--hh,0px) - 110px);overflow:auto;font-size:.84rem;line-height:1.35;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+  nav.toc:not(.page-toc):not(.report .toc).on{opacity:1;visibility:visible}
   .toc-h{margin:0 0 .6rem;font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  nav.toc:not(.page-toc) ol{list-style:none;margin:0;padding:0;border-inline-start:1px solid var(--line)}
-  nav.toc:not(.page-toc) a{display:block;padding:.35rem .8rem;margin-inline-start:-1px;border-inline-start:2px solid transparent;color:var(--muted);text-decoration:none}
-  nav.toc:not(.page-toc) a:hover{color:var(--ink)}
-  nav.toc:not(.page-toc) a[aria-current]{color:var(--ink);font-weight:600;border-inline-start-color:var(--red)}
+  nav.toc:not(.page-toc):not(.report .toc) ol{list-style:none;margin:0;padding:0;border-inline-start:1px solid var(--line)}
+  nav.toc:not(.page-toc):not(.report .toc) a{display:block;padding:.35rem .8rem;margin-inline-start:-1px;border-inline-start:2px solid transparent;color:var(--muted);text-decoration:none}
+  nav.toc:not(.page-toc):not(.report .toc) a:hover{color:var(--ink)}
+  nav.toc:not(.page-toc):not(.report .toc) a[aria-current]{color:var(--ink);font-weight:600;border-inline-start-color:var(--red)}
 }
 
 /* the contents list under the head of a long page, as the full reports have */

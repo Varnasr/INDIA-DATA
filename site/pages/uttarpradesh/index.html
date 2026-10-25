@@ -123,7 +123,7 @@
 <script src="../assets/faq/uttarpradesh.js"></script>
 <script>
 Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpradesh/districts.json'), SIR.json('data/uttarpradesh/analysis.json'),
-  SIR.json('data/india/disputes.json'), SIR.json('data/india/help.json')]).then(function (r) {
+  SIR.json('data/india/disputes_counts.json'), SIR.json('data/india/help_counts.json')]).then(function (r) {
   var S = r[0], D = r[1], A = r[2], n = SIR.n, d1 = function (v) { return SIR.d(v, 1); };
   var cr = function (x) { return (x / 1e7).toFixed(2) + ' crore'; }, lk = function (x) { return SIR.lk(x, 1); };
   var RN = { dead: 'Dead', untraceable_absent: 'Untraceable or absent', shifted: 'Permanently shifted', multiple: 'Already enrolled', others: 'Other' };
@@ -239,8 +239,7 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
   document.getElementById('fRemoved').innerHTML = '<b>' + lk(RA.no_response) + ' of the ' + lk(RA.total) + ' names deleted after the draft were deleted because the elector did not answer a notice.</b> That is ' + d1(N.no_response_per_100_notices) + ' of every 100 electors sent one. ' + n(RA.underage_or_noncitizen) + ' were deleted as under age or not citizens. The reasons are the Chief Electoral Officer\'s, as The New Indian Express reported them, and the CEO did not say how many came through notices and how many through Form 7.';
 
   // ---- disputes and help
-  var DI = [].concat.apply([], r[3].sections.map(function (x) { return x.items; })).filter(function (i) { return /Uttar Pradesh/.test(i.state); });
-  var HO = r[4].orgs.filter(function (o) { return o.state === 'Uttar Pradesh'; });
+  var DI = { length: r[3].by_state['Uttar Pradesh'] || 0 }, HO = { length: r[4].orgs_by_state['Uttar Pradesh'] || 0 };
   document.getElementById('fLinks').innerHTML = '<a href="../india/disputes/?state=' + encodeURIComponent('Uttar Pradesh') + '">' + n(DI.length) + ' court cases, Form 7 complaints, protests and reported deaths in Uttar Pradesh</a> are listed with their sources on Protests and disputes. ' +
     (HO.length ? '<a href="../help/?state=' + encodeURIComponent('Uttar Pradesh') + '">' + n(HO.length) + ' organisations that helped electors in Uttar Pradesh</a> are on Left off the roll? What to do, with what the law lets an elector do.' : 'What the law lets an elector do is on <a href="../help/">Left off the roll? What to do</a>.');
 

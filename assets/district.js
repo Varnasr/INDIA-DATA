@@ -97,7 +97,7 @@
   SIR.districtPage = function () {
     var st = document.body.getAttribute('data-district-state'), key = document.body.getAttribute('data-district'), C = CFG[st];
     var root = document.body.getAttribute('data-root') || '';
-    return Promise.all([SIR.json('data/' + (C.file || st + '/districts.json')), SIR.json('data/india/factors.json')]).then(function (r) {
+    return Promise.all([SIR.json('data/' + (C.file || st + '/districts.json')), SIR.json('data/india/factors/' + C.state.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.json')]).then(function (r) {
       var D = C.rows ? r[0][C.rows] : r[0], F = r[1], d = D.filter(function (x) { return slug(x.district) === key; })[0];
       if (!d) throw new Error('no district ' + key + ' in ' + st);
       var rate = function (x) { return 100 * val(x, C.count) / val(x, C.base); };
