@@ -1569,9 +1569,9 @@
   {
    "id": "s-y-quraishi",
    "name": "S.Y. Quraishi",
-   "role": "Chief Election Commissioner of India from July 2010 to June 2012. This panel sets one post of his on X, of 2 October 2026, about the Commission's use of Form 6 to put back on the roll people whose names were deleted or left off during the SIR, beside the text of the law and the forms.",
+   "role": "Chief Election Commissioner of India from July 2010 to June 2012. This panel sets one post of his on X, of 2 October 2026, about the Commission's use of Form 6 to put back on the roll people whose names were deleted or left off during the SIR, beside the text of the law and the forms, and passages from his Hindi interview with Dhruv Rathee of 22 October 2026 beside the official counts and the Commission's own record.",
    "role_note": "Office from the Commission's own list of former Chief Election Commissioners as Wikipedia reproduces it (30 July 2010 to 10 June 2012); not re-read from eci.gov.in, which refuses the sandbox. A public figure speaking in public on his own verified account (@DrSYQuraishi, X user id 505694805). The panel was asked for on the strength of a card posted by foej.media (Foundation for Ethical Journalism) on Instagram and Threads quoting the same words. That card was not opened. The post itself was read, so the card is not needed as a source.",
-   "site_files": "data/india/process.json (timeline 2026-09-26 and 2026-10-01), data/india/raw/help_research/remedies.json (remedy form6), data/india/raw/process_research/forms_primary.json (topic form6 and declaration), data/india/raw/process_research/reported.json (Changes to Form 6 without Gazette amendment), data/india/states.json (total.removed, final)",
+   "site_files": "data/india/process.json (timeline 2026-09-26 and 2026-10-01), data/india/raw/help_research/remedies.json (remedy form6), data/india/raw/process_research/forms_primary.json (topic form6 and declaration), data/india/raw/process_research/reported.json (Changes to Form 6 without Gazette amendment), data/india/states.json (total.removed, final), data/india/lok_sabha_electors.json, data/india/rti.json (rti-10, rti-18), data/india/disputes.json (court-49), data/india/reads.json, data/bihar/reasons.json, data/bihar/final.json, data/westbengal/summary.json",
    "pieces": [
     {
      "id": "syq-x",
@@ -1596,6 +1596,15 @@
      "date": "2026-10-05",
      "url": "https://www.newslaundry.com/2026/10/05/goa-case-of-97-voters-one-day-after-express-report-deleted-voters-asked-to-submit-form-6",
      "how_read": "Fetched with curl on 16 October 2026 and read in full. It embeds the post and carries the only reply from the Commission found, from an unnamed official. Scroll (3 October 2026) reports the post and the drive and was also read; it carries no reply."
+    },
+    {
+     "id": "syq-dr",
+     "title": "Dhruv Rathee Interviews Former Chief Election Commissioner | Dr. S.Y. Quraishi",
+     "outlet": "Dhruv Rathee (YouTube)",
+     "date": "2026-10-22",
+     "url": "https://www.youtube.com/watch?v=foEYL-ElhTc",
+     "length": "1:17:01",
+     "how_read": "YouTube refuses the sandbox. Title, channel (Dhruv Rathee, @dhruvrathee, UC-CSyyi47VX1lD9zyeABW3w), publication time (2026-10-22T17:44:17Z, 11:14 pm IST), length (4,621 seconds) and caption tracks (Hindi, auto-generated, the only one) from Firecrawl's youtube-com videos/video_details capability on 25 October 2026. The interview is in Hindi. Its timed Hindi auto-captions were read through Firecrawl's videos/video_transcript capability the same day (request 4b2403e8-08da-45c1-b8d9-300032b429b5, 2,062 segments), from 5:36 to 15:07, 15:01 to 18:30 and 43:44 to 53:46 in full. Read as text only; on-screen graphics and the speakers' faces not seen, so a line is given to Quraishi only where the exchange makes the speaker plain. The opening trailer repeats the West Bengal line at 0:00."
     }
    ],
    "claims": [
@@ -1634,18 +1643,108 @@
      "site_counts": "",
      "site_stops": "",
      "site_files": "data/india/process.json"
+    },
+    {
+     "piece": "syq-dr",
+     "quote": "103 करोड़ 18 साल की आबादी तो है ना उसमें से आप 1 करोड़ निकाल दीजिए 2 करोड़ निकाल दीजिए 3 करोड़ निकाल दीजिए 100 करोड़ तो वोटर होने चाहिए। हमारे पास सिर्फ 88 करोड़ रह जाएंगे।",
+     "translation": "An adult population of 103 crore, isn't it? Take 1 crore out of it, take out 2 crore, take out 3 crore, there should still be 100 crore voters. We will be left with only 88 crore.",
+     "speaker_note": "From YouTube's Hindi auto-generated captions at that timestamp, joined across caption lines without other change; the captions garble some words, and the translation is ours. Just before (14:09) he gives the 103 crore as the 18-and-over population the census of 2026 will find. Earlier (12:54) he says 30 years of summary revision had brought the rolls to 99% accuracy. The lines between (13:46 to 14:03), where he gives the present adult population and its share on the roll, are garbled ('दो 98 करोड़', '97 के करीब') and are not quoted.",
+     "timestamp": "14:22 to 14:31",
+     "timestamp_note": "Timed: the start of the caption segments in YouTube's Hindi auto-generated caption track (kind asr), read through Firecrawl's youtube-com videos/video_transcript capability on 25 October 2026 (request 4b2403e8-08da-45c1-b8d9-300032b429b5, 2,062 segments). Exact to about 2 seconds.",
+     "relies_on": "His own figure of 103 crore adults in 2026 and an unsourced 88 crore electors after the revision.",
+     "kind": "projection or survey",
+     "check": "No single official projection of India's adults for 2026 is on the site. The UN estimate of adults in mid-2024 is 1,01,76,59,624 (lok_sabha_electors.json). The Technical Group's July 2020 projection covers 19 states: 95,50,92,000 adults in 2026, rolls before the revision 93,92,60,959 and drafts 80,65,69,819 (states.json, adults). Telangana's roll before was 115.2 per 100 projected adults. Across 31 states 13,39,03,307 names were left off the drafts, leaving about 81.7 crore on them. In the 22 states with a final roll the net rise from draft to final was 14.6 per cent of the names left off there. No national final total exists, since nine states with a draft have no final roll. His 88 crore matches no official figure and he gives no source for it.",
+     "site_counts": "Adults 95,50,92,000 in 19 states; rolls before 93,92,60,959; drafts 80,65,69,819; left off 13,39,03,307 across 31 states; final.made_up_pct 14.6.",
+     "site_stops": "No national final roll; projections count residents.",
+     "site_files": "data/india/states.json, data/india/lok_sabha_electors.json"
+    },
+    {
+     "piece": "syq-dr",
+     "quote": "और यहां पर तो ऑलमोस्ट सारे डिसीजंस अब ज्ञानेश कुमार के अंडर ऐसे हैं जो मेजोरिटी भी नहीं है। उनका अकेले का वो था। तो वो डिसीजन जो है वो लीगल डिसीजन ही नहीं है। ... प्रोटेस्ट से तंग आके इन्होंने आखिरी चार महीने में तो मीटिंग बुलानी भी बंद कर दी।",
+     "translation": "And here almost all decisions under Gyanesh Kumar now are such that there is not even a majority. It was his alone. So that decision is not a legal decision at all. ... Fed up with the protests, in the last four months he even stopped calling meetings.",
+     "speaker_note": "From YouTube's Hindi auto-generated captions at that timestamp, joined across caption lines without other change; the captions garble some words, and the translation is ours. The omitted lines (16:22 to 16:37) say the Chief Election Commissioner alone is not the Commission, that the majority is on the other side and is writing protest after protest. Just before (15:52 to 16:11) he states the rule of the 1993 law kept in 2023, unanimous as far as possible and otherwise by majority.",
+     "timestamp": "16:12 to 16:41",
+     "timestamp_note": "Timed: the start of the caption segments in YouTube's Hindi auto-generated caption track (kind asr), read through Firecrawl's youtube-com videos/video_transcript capability on 25 October 2026 (request 4b2403e8-08da-45c1-b8d9-300032b429b5, 2,062 segments). Exact to about 2 seconds.",
+     "relies_on": "Section 18 of the 2023 Act (and the 1991 Act as amended in 1993), and the two Commissioners' objections as The Indian Express reported them.",
+     "kind": "fact about process (documentary)",
+     "check": "The rule matches the Cabinet Secretariat note released under RTI as The Wire reported it (rti.json, rti-18): business decided unanimously where possible and by majority otherwise under Section 18 of the 2023 Act. The Indian Express reported at least 14 objections in 10 months by Sandhu and Joshi to decisions and orders they say were taken without their knowledge (process.json, inside), including Sandhu's note of 13 August 2026 calling the online Form 6 change unauthorised/illegal. The paper reported the full Commission met on 9 September 2026 for the first time in four months, which matches his 'last four months'. Press note 119 of 23 September says every decision of the past year was unanimous. On 5 October the Supreme Court heard a petition against decisions said to have been taken by the CEC alone. He names no decision taken alone, and 'almost all decisions' is not supported by any record; whether any such decision is unlawful is for the Court. The Act's text itself was not re-read (indiacode timed out, egazette failed TLS from the sandbox).",
+     "site_counts": "",
+     "site_stops": "The notes are press accounts and unpublished.",
+     "site_files": "data/india/process.json, data/india/rti.json"
+    },
+    {
+     "piece": "syq-dr",
+     "quote": "आज तक उन्होंने नहीं बताया 8 करोड़ बिहारियों को दौड़ाने के बाद कि कितने घुस बैठिए पकड़े। ... मैंने एक अखबार में कहीं पढ़ा था जो मैंने कई बार मेंशन किया जिसको कंट्रोवर्ट किसी ने नहीं किया कि सिर्फ 500 फॉरेनर पाए गए थे बिहार में।",
+     "translation": "To this day they have not said, after making 8 crore Biharis run around, how many infiltrators were caught. ... I read somewhere in a newspaper, which I have mentioned many times and which nobody has controverted, that only 500 foreigners were found in Bihar.",
+     "speaker_note": "From YouTube's Hindi auto-generated captions at that timestamp, joined across caption lines without other change; the captions garble some words, and the translation is ours. 'घुस बैठिए' is the captions' rendering of घुसपैठिए (infiltrators). The quote starts inside a caption line that opens 'लेकिन बैठिए पकड़िए तो ठीक लोगों को ना', which is garbled and left out. The omitted lines (45:26 to 45:40) say he has asked this 150 times in the media and that the Supreme Court could have asked too. He goes on (45:50 to 46:06) to split the 500 into 150 Bangladeshis and 350 women from Nepal who came by marriage and were there lawfully; that part is not quoted.",
+     "timestamp": "45:17 to 45:50",
+     "timestamp_note": "Timed: the start of the caption segments in YouTube's Hindi auto-generated caption track (kind asr), read through Firecrawl's youtube-com videos/video_transcript capability on 25 October 2026 (request 4b2403e8-08da-45c1-b8d9-300032b429b5, 2,062 segments). Exact to about 2 seconds.",
+     "relies_on": "A newspaper report he does not name, and the Commission's silence on any count of foreigners.",
+     "kind": "fact about process (documentary)",
+     "check": "The Commission has published no count of foreigners found in Bihar, which supports the first sentence. Bihar's roll before was 7,89,69,844 by the Commission's June 2025 total (bihar/final.json), close to his 8 crore. The draft left off 65,59,626, entered as dead 22,32,586, shifted 26,55,900, absent 9,70,081 and already enrolled 7,01,059 (bihar/reasons.json). After the draft 3,66,742 were deleted as expired, shifted, repeated or with no reason stated. No reason is citizenship. The Reporters' Collective (16 October 2026, reads.json) reports Bihar's RTI replies answer No to whether any list was referred under the Citizenship Act. The 500 figure is not in any official record on the site, so it can be neither confirmed nor refuted; the newspaper was not identified.",
+     "site_counts": "Bihar 65,59,626 left off by four reasons; 3,66,742 deleted after the draft.",
+     "site_stops": "No published count of foreigners.",
+     "site_files": "data/bihar/reasons.json, data/bihar/final.json, data/india/reads.json"
+    },
+    {
+     "piece": "syq-dr",
+     "quote": "और 27 लाख जिनके पिटीशन चल रहा है एजुडिकेशन उसमें से 1 लाख के करीब फैसले हो चुके थे। 93% उनमें से ठीक पाए गए थे। ... मैं तो समझता हूं कि ये जो वेस्ट बंगाल का इलेक्शन था ये इललीगल था क्योंकि इललीगल रोल के बेसिस पे हुआ और इसको दोबारा होना चाहिए",
+     "translation": "And of the 27 lakh whose petitions are under adjudication, decisions had been given in about 1 lakh. 93% of them were found to be in order. ... I think this West Bengal election was illegal, because it was held on the basis of an illegal roll, and it should be held again.",
+     "speaker_note": "From YouTube's Hindi auto-generated captions at that timestamp, joined across caption lines without other change; the captions garble some words, and the translation is ours. The omitted lines (46:44 to 46:51) are a short exchange, '91 या 93' and '93 हो गए', apparently the interviewer asking and Quraishi settling on 93, and the line that the people were thus kept from voting. The election line ends without a full stop in the captions. The trailer repeats it at 0:00.",
+     "timestamp": "46:32 to 47:02",
+     "timestamp_note": "Timed: the start of the caption segments in YouTube's Hindi auto-generated caption track (kind asr), read through Firecrawl's youtube-com videos/video_transcript capability on 25 October 2026 (request 4b2403e8-08da-45c1-b8d9-300032b429b5, 2,062 segments). Exact to about 2 seconds.",
+     "relies_on": "West Bengal's adjudication and appeal figures, without a named source.",
+     "kind": "count from official data",
+     "check": "27 lakh matches 27,16,393 found not eligible of 60,06,675 under adjudication (as reported; westbengal/summary.json). Appeals: 38,31,429 total, 22,21,118 by the excluded and 16,10,311 against inclusion, 1,26,194 decided and 37,05,235 pending, from the Commission's affidavit of 16 September 2026 as reported; his 'about 1 lakh' matches the decided count. His 27 lakh are names found not eligible; those who appealed are 22,21,118. The Wire's report of the CEO's RTI reply (rti.json, rti-10): 82,782 decided by 7 August 2026, 75,443 ending in inclusion (91.1 per cent), with a footnote that the totals mix appeals against inclusion and against exclusion. His 93% is close to that. 1,607 were restored before the poll. Calling the election illegal and asking for it to be held again is his conclusion; no court finding on it is recorded, and no figure measures the effect on results.",
+     "site_counts": "Under adjudication 60,06,675; not eligible 27,16,393; appeals 38,31,429; decided 1,26,194; pending 37,05,235; restored before poll 1,607; RTI 82,782 decided, 75,443 inclusion.",
+     "site_stops": "Inclusion outcomes mix both kinds of appeal; effect on results not measured.",
+     "site_files": "data/westbengal/summary.json, data/india/rti.json"
+    },
+    {
+     "piece": "syq-dr",
+     "quote": "यहां तो खुलेआम छूटते ही करोड़ों में 13 करोड़ लोगों को डिलीट कर दिया",
+     "translation": "Here, openly and from the very start, they deleted people in crores, 13 crore people.",
+     "speaker_note": "From YouTube's Hindi auto-generated captions at that timestamp, joined across caption lines without other change; the captions garble some words, and the translation is ours. He sets it against the 19 lakh the Assam NRC left out in six years (48:13 to 48:41), which is not quoted. The line ends without a full stop in the captions. The same 13 crore appears earlier (13:34) in a line about migrants not being added elsewhere, whose key word is garbled ('माइग्रेन').",
+     "timestamp": "48:43 to 48:47",
+     "timestamp_note": "Timed: the start of the caption segments in YouTube's Hindi auto-generated caption track (kind asr), read through Firecrawl's youtube-com videos/video_transcript capability on 25 October 2026 (request 4b2403e8-08da-45c1-b8d9-300032b429b5, 2,062 segments). Exact to about 2 seconds.",
+     "relies_on": "The national count of names left off the drafts.",
+     "kind": "count from official data",
+     "check": "The count matches 13,39,03,307 left off the drafts across 31 states and union territories (states.json, total), of which 2,79,69,558 (20.9%) were entered as dead, 9,56,35,923 (71.5%) as shifted, absent or other, and 1,01,48,459 (7.6%) as duplicates. They were left off the drafts; a deletion is an order made after the draft. In the 20 states that report it, 33,65,116 were deleted after the draft (after_draft). In the 22 states with a final roll the net rise from draft to final was 14.6 per cent of the names left off there.",
+     "site_counts": "Left off 13,39,03,307; dead 2,79,69,558; shifted, absent or other 9,56,35,923; duplicate 1,01,48,459; deleted after draft 33,65,116 in 20 states; made_up_pct 14.6.",
+     "site_stops": "No count of how many of them were eligible.",
+     "site_files": "data/india/states.json"
+    },
+    {
+     "piece": "syq-dr",
+     "quote": "लेकिन फॉर्म सिक्स के जरिए ना लाइए वो इललीगल हो जाएगा। आप 6 ए 6 बी 6 सी 6 डी मैंने बल्कि कहा 6x एक क्रिएट कर लीजिए और दो घंटे में लॉ मिनिस्ट्री से अप्रूव करा लीजिए",
+     "translation": "But do not bring them back through Form 6, that would be illegal. You could have a 6A, 6B, 6C, 6D. In fact I said, create a 6X and get the Law Ministry to approve it in two hours.",
+     "speaker_note": "From YouTube's Hindi auto-generated captions at that timestamp, joined across caption lines without other change; the captions garble some words, and the translation is ours. He opens the point at 50:57 with 'मैंने उस पे ट्वीट किया था कि फॉर्म सिक्स के जरिए पुराने वोटर को ले ही नहीं सकते', the post quoted above, and says (52:19 to 52:36) that the two Commissioners objected that Form 6 is in the Registration of Electors Rules and not a word or comma of it can be changed. The line ends without a full stop in the captions.",
+     "timestamp": "53:36 to 53:46",
+     "timestamp_note": "Timed: the start of the caption segments in YouTube's Hindi auto-generated caption track (kind asr), read through Firecrawl's youtube-com videos/video_transcript capability on 25 October 2026 (request 4b2403e8-08da-45c1-b8d9-300032b429b5, 2,062 segments). Exact to about 2 seconds.",
+     "relies_on": "His reading of Form 6's title and declaration (claims 0 and 1 above), and the Commissioners' notes of May 2026 as The Indian Express reported them.",
+     "kind": "fact about process (documentary)",
+     "check": "The Express reported Joshi's note of 16 May 2026 that Form 6 is set by the Rules and cannot be changed without the government amending them, and Sandhu's agreement of 19 May (process.json, inside). The Rules are made by the Central Government under section 28 of the 1950 Act (disputes.json, which carries the activists' petition asking that the added declaration be held to lack the force of law for not being made under section 28). The 2022 Form 6 came by S.O. 2802(E) (help.json). The Commission's letter of 29 September 2026 ordered a drive on the statutory Form 6 with the declaration kept for the revision only. Two activists asked the Supreme Court to let electors left off Delhi's draft apply on Form 8 or another form. On 12 October the bench said it had neither approved nor disapproved the modified Form 6 and listed the challenge for 27 October (court-49). No new form has been notified. His 'two hours' is not checkable. Form 6A already exists (overseas electors), so his '6 ए' is not a free name; the other letters were not checked against the Rules.",
+     "site_counts": "",
+     "site_stops": "No form for deleted or left-off electors has been notified.",
+     "site_files": "data/india/process.json, data/india/disputes.json"
     }
    ],
    "strongest_points": [
     "Declaration (iii) of the Form 6 in force since 1 August 2022 says 'I am applying for inclusion in Electoral Roll for the first time', item (v) warns that a false statement is punishable under section 31, and a deleted elector cannot truthfully sign the words 'for the first time'.",
     "Rule 13(1) as substituted in 2022 makes Form 6 the form for a claim 'as new elector', and the form is titled 'Application Form for New Voters'; a Commission official agreed the point is technically correct.",
-    "Outside the SIR the Commission said on 26 September 2026 that the Rules forms apply, so the special drive ordered on 1 October runs on that form."
+    "Outside the SIR the Commission said on 26 September 2026 that the Rules forms apply, so the special drive ordered on 1 October runs on that form.",
+    "His account of decisions taken without the two Commissioners matches the objections The Indian Express reported, and the paper reports the full Commission met on 9 September 2026 for the first time in four months.",
+    "His West Bengal figures are close to the official ones as reported: 27,16,393 found not eligible, 1,26,194 appeals decided by 16 September, and 75,443 of 82,782 decided appeals ending in inclusion by 7 August."
    ],
    "overreach": [
     "That a deleted voter 'can't' file Form 6: section 23(1) and rule 26(1) give anyone off the roll the right to apply, Form 6 is the only form that fits, and the Commission's orders of 24 June 2025 and 1 October 2026 direct it.",
     "That everyone who filled it 'committed' an offence carrying a year in prison: section 31 needs a statement known to be false, the year is a maximum with a fine as the alternative, and no court has ruled on a deleted elector signing the prescribed form.",
     "That officials 'forced' anyone and are 'abetters': the letter tells BLOs to facilitate and ensure filing, and abetment needs an offence that no document shows was committed.",
-    "He calls the attachment a press note. It is the Commission's letter of 1 October 2026."
+    "He calls the attachment a press note. It is the Commission's letter of 1 October 2026.",
+    "He calls the 13 crore deleted. They were left off the drafts, and in the 22 states with a final roll the rise from draft to final came to 14.6 per cent of them.",
+    "His 103 crore adults and 88 crore electors are not official figures.",
+    "His 500 foreigners in Bihar come from a newspaper he does not name.",
+    "That West Bengal's election was illegal and should be held again is his conclusion; no court has said so."
    ],
    "not_verified": [
     "FOEJ's card on Instagram and Threads was not opened; its wording is taken from the request, and it matches the post apart from the article 'a' and straight apostrophes.",
@@ -1654,7 +1753,10 @@
     "The online Form 6 on ECINET, as it stood during the special drive, was not opened; only the downloadable form and the Gazette form were read.",
     "eci.gov.in refused the sandbox (406), so Press Note 120 and the letter of 1 October were not re-opened today; the press note's words are from the repository's earlier reading (help_research/remedies.json, panels_research/verified.json), and the letter's from the screenshots in his post, which match the repository's earlier reading of it.",
     "The 1950 Act was read in the High Court of Tripura's copy, which predates the 2021 amendments; sections 22, 23(1) to (3), 24 and 31 were not changed by them.",
-    "No search of court records for a prosecution under section 31 was made beyond news searches."
+    "No search of court records for a prosecution under section 31 was made beyond news searches.",
+    "The interview was read only as YouTube's Hindi auto-generated captions; no human transcript or audio was checked, and speakers are inferred from the exchange.",
+    "The newspaper report of 500 foreigners in Bihar was not identified.",
+    "The text of Section 18 of the 2023 Act was not re-read (indiacode.nic.in timed out and egazette.gov.in failed TLS from the sandbox); the rule is taken from the Cabinet Secretariat note as The Wire reported it (rti.json, rti-18)."
    ]
   },
   {
