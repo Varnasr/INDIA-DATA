@@ -33,11 +33,16 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
 
-# The charts at /embed/ are made to be shown inside other sites' pages.
+# The charts at /embed/ are made to be shown inside other sites' pages. This
+# block repeats the whole sitewide policy, because measured on a deploy preview
+# on 26 October 2026 a Content-Security-Policy set here replaces the one from
+# "/*" on these paths. A policy holding only the framing rule left the embed
+# pages with no other rule. Off /embed/, the DENY header from _headers is what
+# stops framing.
 [[headers]]
   for = "/embed/*"
   [headers.values]
-    Content-Security-Policy = "frame-ancestors *"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://bivccpsnzzolxuqdvhfu.supabase.co; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; frame-ancestors *"
 
 # The What's new feed and the calendars, with the types feed readers and
 # calendar apps expect.

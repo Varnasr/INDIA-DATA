@@ -313,7 +313,7 @@ def _feeds():
     toml = open(os.path.join(ROOT, 'netlify.toml'), encoding='utf-8').read()
     star = re.search(r'for = "/\*"\s*\[headers.values\](.*?)(?=\[\[|\Z)', toml, re.S).group(1)
     assert 'frame-ancestors' not in star and 'X-Frame-Options' not in star, 'the rule for /* sets a frame rule, which Netlify joins onto /embed/'
-    assert re.search(r'for = "/embed/\*"\s*\[headers.values\]\s*Content-Security-Policy = "frame-ancestors \*"', toml), '/embed/ cannot be framed'
+    assert re.search(r'for = "/embed/\*"\s*\[headers.values\]\s*Content-Security-Policy = "default-src \'self\'[^"]*; frame-ancestors \*"', toml), '/embed/ cannot be framed, or carries no sitewide policy'
 
 
 def _ac_change():
