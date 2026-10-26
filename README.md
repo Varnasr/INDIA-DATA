@@ -44,7 +44,7 @@ rates for each group and compare groups inside the same polling part.
 ## Build and check
 
 ```bash
-pip install pandas==3.0.6 openpyxl==3.1.5
+pip install -r requirements.txt
 python3 scripts/build_bihar.py        # data/bihar/raw -> data/bihar/*.json
 python3 scripts/build_hyderabad.py    # hyderabad/explorer -> data/hyderabad/*.json
 python3 scripts/build_tamilnadu.py    # data/tamilnadu/raw -> data/tamilnadu/*

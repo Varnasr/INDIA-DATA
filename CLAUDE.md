@@ -12,7 +12,7 @@ repository are kept in a separate private repository; ask the maintainer.
 ## Commands
 
 ```bash
-pip install pandas==3.0.6 openpyxl==3.1.5
+pip install -r requirements.txt
 python3 scripts/check_data.py           # data checks, run by CI; rebuilds the data files with --check
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
 python3 scripts/build_site.py           # every page, from site/places.json and site/pages; --check in CI
