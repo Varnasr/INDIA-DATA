@@ -252,8 +252,9 @@ def shell(out, meta, content, scripts):
             items.append(fold(p['label'], subs, p['id'] == place['id']))
         else:
             # the front page's place is About this site, which opens on why the
-            # revision matters, so the link does not reload the page a reader is on
-            items.append(link(p, '#why-this-site-exists' if p['id'] == 'home' else None))
+            # revision matters, so the link does not reload the page a reader is on.
+            # The 404 page is built as the front page's place and needs a real link.
+            items.append(link(p, '#why-this-site-exists' if p['id'] == 'home' and here != '404.html' else None))
     subs = ['<p class="lg">Names in bold have a full analysis of their own. The others share one summary page.</p>']
     # each zone is its own block, so a wide screen can set the zones in columns
     for z in ZONES:
