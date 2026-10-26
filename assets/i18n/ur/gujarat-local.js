@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"انتخابات","Gujarat 2026 · the names left off, constituency by constituency":"گجرات 2026 · رہ جانے والے نام، حلقہ وار","Gujarat pages":"گجرات کے صفحات"});

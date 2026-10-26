@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Uttar Pradesh 2026 · the names left off, district by district":"ఉత్తర ప్రదేశ్ 2026 · వదిలేసిన పేర్లు, జిల్లా వారీగా","Uttar Pradesh pages":"ఉత్తర ప్రదేశ్ పేజీలు"});

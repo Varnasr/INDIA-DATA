@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Manipur 2026 · the Special Intensive Revision of the roll":"منی پور 2026 · ووٹر فہرست کی خصوصی گہری نظرثانی","Manipur pages":"منی پور کے صفحات"});

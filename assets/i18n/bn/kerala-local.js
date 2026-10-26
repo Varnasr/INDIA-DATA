@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"নির্বাচন","Kerala 2026 · every constituency, the roll from January 2025 to the election":"কেরল 2026 · প্রতিটি বিধানসভা কেন্দ্র, জানুয়ারি 2025 থেকে নির্বাচন পর্যন্ত ভোটার তালিকা","Kerala pages":"কেরলের পাতা"});

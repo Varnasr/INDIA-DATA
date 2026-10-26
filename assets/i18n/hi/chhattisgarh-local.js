@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Chhattisgarh 2026 · the Special Intensive Revision of the roll":"छत्तीसगढ़ 2026 · मतदाता सूची का विशेष गहन पुनरीक्षण","Chhattisgarh pages":"छत्तीसगढ़ के पृष्ठ"});

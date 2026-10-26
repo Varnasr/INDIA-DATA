@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Uttar Pradesh 2026 · the names left off, district by district":"اتر پردیش 2026 · رہ جانے والے نام، ضلع وار","Uttar Pradesh pages":"اتر پردیش کے صفحات"});

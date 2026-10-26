@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"নির্বাচন","Tamil Nadu 2026 · every constituency, every district":"তামিলনাড়ু 2026 · প্রতিটি বিধানসভা কেন্দ্র, প্রতিটি জেলা","Tamil Nadu pages":"তামিলনাড়ুর পাতা"});

@@ -12,10 +12,11 @@ repository are kept in a separate private repository; ask the maintainer.
 ## Commands
 
 ```bash
-pip install pandas==3.0.6 openpyxl==3.1.5
+pip install -r requirements.txt
 python3 scripts/check_data.py           # data checks, run by CI; rebuilds the data files with --check
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
 python3 scripts/build_site.py           # every page, from site/places.json and site/pages; --check in CI
+python3 scripts/build_i18n.py           # translation pieces, from i18n/<lang>.json; after build_site, before stamp
 python3 scripts/stamp.py                # cache busting; run on every deploy
 python3 -m http.server 8000
 ```
@@ -40,6 +41,10 @@ python3 -m http.server 8000
 - **`ac_name` is not a key.** Join constituencies on `ac_number`.
 - **Every file a page loads carries `?v=<hash>`**, written by `scripts/stamp.py`.
   A new `fetch` must go through `SIR.json`.
+- **Translations live in `i18n/<lang>.json`.** Pages never load them whole:
+  `scripts/build_i18n.py` splits each into a core, a file per shared script
+  with sentences, and a file per page group, and `check_i18n.py` fails if a
+  page shows a string that none of its files holds.
 - **Content-Security-Policy:** `script-src` has no `'unsafe-inline'`. Write page
   scripts inline in `site/pages` as before (the build moves them out) and bind
   events with `addEventListener`, never an inline handler.

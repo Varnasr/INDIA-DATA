@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Meghalaya 2026 · the Special Intensive Revision of the roll":"میگھالیہ 2026 · ووٹر فہرست کی خصوصی گہری نظرثانی","Meghalaya pages":"میگھالیہ کے صفحات"});

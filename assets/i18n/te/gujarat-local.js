@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"ఎన్నికలు","Gujarat 2026 · the names left off, constituency by constituency":"గుజరాత్ 2026 · వదిలేసిన పేర్లు, నియోజకవర్గం వారీగా","Gujarat pages":"గుజరాత్ పేజీలు"});

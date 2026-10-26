@@ -31,13 +31,18 @@ const SECTIONS = [...new Set(JSON.parse(fs.readFileSync(path.join(ROOT, 'site/pl
 // plus any top-level page of the front page's own (terms/), from site/pages
 const OWN = fs.readdirSync(path.join(ROOT, 'site/pages'), { withFileTypes: true })
   .filter((e) => e.isDirectory() && !SECTIONS.includes(e.name)).map((e) => e.name);
-// The constituency pages (<state>/seat/<n>/) are English only: their own
-// text carries data-no-i18n, and their shell is the same as every other
-// page's, so none of them is walked. Their titles name a seat and stay English.
+// The constituency and district pages (<state>/seat/<n>/, .../district/<name>/)
+// are English only: their own text carries data-no-i18n, and every page under
+// one folder carries the same shell, so only the first of each folder is
+// walked. scripts/build_i18n.py gives every page in the folder the strings
+// that one shows. Their titles name a seat and stay English.
 // The charts at embed/ are English only too, for showing on other sites.
+const LOCAL = /^(.*\/(?:seat|district)\/)[^/]+\/$/;
+const firstOfFolder = new Set();
 const PAGES = ['', ...SECTIONS.flatMap((d) => walk(d)), ...OWN.flatMap((d) => walk(d))]
-  .filter((p) => !/\/(seat\/\d+|district\/[a-z0-9-]+)\/$/.test(p) && !/^embed\//.test(p)).sort();
-const SOURCES = ['index.html', 'assets/sir.js', 'assets/dash.js', 'assets/i18n.js', ...fs.readdirSync(path.join(ROOT, 'assets/faq')).filter(f => f.endsWith('.js')).sort().map(f => 'assets/faq/' + f), ...PAGES.filter(Boolean).map(p => p + 'index.html')];
+  .filter((p) => !/^embed\//.test(p)).sort()
+  .filter((p) => { const m = p.match(LOCAL); if (!m) return true; if (firstOfFolder.has(m[1])) return false; firstOfFolder.add(m[1]); return true; });
+const SOURCES = ['index.html', 'assets/sir.js', 'assets/viz.js', 'assets/dash.js', 'assets/i18n.js', ...fs.readdirSync(path.join(ROOT, 'assets/faq')).filter(f => f.endsWith('.js')).sort().map(f => 'assets/faq/' + f), ...PAGES.filter(Boolean).map(p => p + 'index.html')];
 
 const cat = {};
 const add = (k, page, kind) => { const e = cat[k] || (cat[k] = { kind, pages: [] }); if (!e.pages.includes(page)) e.pages.push(page); if (kind === 'script') e.kind = 'script'; };
@@ -73,6 +78,11 @@ try {
 } finally {
   await browser.close();
   srv.kill();
+}
+// A constituency or district page is read for its shell alone: text found
+// on no other page is its own (its title names the seat) and stays English.
+for (const k of Object.keys(cat)) {
+  if (cat[k].kind === 'markup' && cat[k].pages.every((p) => LOCAL.test(p.slice(1)))) delete cat[k];
 }
 const sorted = Object.fromEntries(Object.keys(cat).sort().map(k => [k, cat[k]]));
 fs.mkdirSync(path.join(ROOT, 'i18n'), { recursive: true });

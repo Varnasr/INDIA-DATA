@@ -29,6 +29,7 @@ from urllib.parse import quote
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_feeds as BF  # noqa: E402  the feed, calendars, data index and _headers
+import build_i18n  # noqa: E402  which translation files each page loads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'site', 'pages')
@@ -313,7 +314,7 @@ def embed_shell(out, meta, content, scripts, place, root):
     """A chart alone, for another site's frame: no header, menus or footer,
     only the chart, its source and a link back (site/pages/embed)."""
     back = CFG['url'] + (place['pages'][0][0] if place['pages'] else '')
-    return (
+    page = (
         '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<meta name="robots" content="noindex">\n'
         '<script src="%sassets/i18n.js"></script>\n<title>%s</title>\n<meta name="description" content="%s">\n'
@@ -321,6 +322,7 @@ def embed_shell(out, meta, content, scripts, place, root):
         '<body class="embed %s" data-place="%s" data-root="%s" data-back="%s">\n%s\n%s\n</body>\n</html>\n'
     ) % (root, html.escape(meta['title'], quote=False), html.escape(meta['description']), back, root,
          place.get('class', place['id']), place['id'], root, back, content, scripts)
+    return i18n_files(out, page)
 
 
 def shell(out, meta, content, scripts):
@@ -509,7 +511,7 @@ def shell(out, meta, content, scripts):
         else:
             content += extra
     footer = cite_block(out, meta) + '\n' + footer
-    return (
+    page = (
         '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
         '<script src="%sassets/i18n.js"></script>\n<title>%s</title>\n<meta name="description" content="%s">\n'
@@ -520,6 +522,17 @@ def shell(out, meta, content, scripts):
     ) % (root, html.escape(meta['title'], quote=False), html.escape(meta['description']), favicon(place['color']), root, root, root, head_extra,
          cls, place['id'], root, ''.join(' %s="%s"' % (k, html.escape(v)) for k, v in sorted(meta.get('body', {}).items())),
          header, nav, content, footer, scripts, root)
+    return i18n_files(out, page)
+
+
+def i18n_files(out, page):
+    """Names on the page's i18n.js tag the translation files it loads besides
+    the core: its group and one for each shared script with sentences of its
+    own (scripts/build_i18n.py)."""
+    names = build_i18n.manifest(out, page)
+    if not names:
+        return page
+    return page.replace('assets/i18n.js"></script>', 'assets/i18n.js" data-i18n="%s"></script>' % names, 1)
 
 
 # Every inline script on a page is written to a file of its own, named by a

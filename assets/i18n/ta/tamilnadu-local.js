@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"தேர்தல்கள்","Tamil Nadu 2026 · every constituency, every district":"தமிழ்நாடு 2026 · ஒவ்வொரு தொகுதியும், ஒவ்வொரு மாவட்டமும்","Tamil Nadu pages":"தமிழ்நாடு பக்கங்கள்"});

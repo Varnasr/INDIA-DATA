@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"انتخابات","Tamil Nadu 2026 · every constituency, every district":"تمل ناڈو 2026 · ہر حلقہ، ہر ضلع","Tamil Nadu pages":"تمل ناڈو کے صفحات"});

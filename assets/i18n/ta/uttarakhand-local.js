@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Uttarakhand 2026 · the roll before and after the draft, constituency by constituency":"உத்தரகாண்ட் 2026 · வரைவுக்கு முன்னும் பின்னும் பட்டியல், தொகுதி வாரியாக","Uttarakhand pages":"உத்தரகாண்ட் பக்கங்கள்"});

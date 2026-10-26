@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"चुनाव","West Bengal 2026 · every constituency, the roll from 2024 to the election":"पश्चिम बंगाल 2026 · हर विधानसभा क्षेत्र, 2024 से चुनाव तक की सूची","West Bengal pages":"पश्चिम बंगाल के पृष्ठ"});
