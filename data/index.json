@@ -1,0 +1,7157 @@
+{
+ "title": "Off the Roll: index of the published data files",
+ "url": "https://offtheroll.in/data/index.json",
+ "built": "2026-10-26",
+ "licence": {
+  "name": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0/"
+ },
+ "licence_note": "The tables and the analysis may be reused under CC BY 4.0. Credit \"SIR analysis for India, ImpactMojo\" and link to the page used. Official data keeps the terms of whoever published it, and each file's source is named in its workbook and on its method page.",
+ "publisher": {
+  "name": "ImpactMojo",
+  "url": "https://www.impactmojo.in/"
+ },
+ "counts": {
+  "files": 460,
+  "bytes": 12372731
+ },
+ "files": [
+  {
+   "path": "data/downloads.json",
+   "description": "The downloads manifest: every workbook, sheet and column, with what each holds",
+   "format": "JSON",
+   "bytes": 200685,
+   "keys": [
+    "workbooks",
+    "zip",
+    "documents",
+    "counts"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/search.json",
+   "description": "Every page, constituency and district the search box finds",
+   "format": "JSON",
+   "bytes": 404881,
+   "keys": [
+    "places",
+    "pages",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/updates.json",
+   "description": "What has been added, by date, as on the What's new page",
+   "format": "JSON",
+   "bytes": 33209,
+   "keys": [
+    "note",
+    "entries"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/andaman/summary.json",
+   "description": "Andaman and Nicobar Islands: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 5801,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "article",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/andaman/tables.csv",
+   "description": "Every Andaman and Nicobar Islands figure with its source.",
+   "format": "CSV",
+   "bytes": 6337,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/andhrapradesh/districts.json",
+   "description": "Andhra Pradesh: one row for each district",
+   "format": "JSON",
+   "bytes": 3537,
+   "rows": 28,
+   "row_keys": [
+    "district",
+    "before",
+    "draft",
+    "removed",
+    "draft_women_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/andhrapradesh/summary.json",
+   "description": "Andhra Pradesh: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 12452,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/andhrapradesh/tables.csv",
+   "description": "Every Andhra Pradesh figure with its source.",
+   "format": "CSV",
+   "bytes": 15781,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/arunachal/summary.json",
+   "description": "Arunachal Pradesh: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 5730,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/arunachal/tables.csv",
+   "description": "Every Arunachal Pradesh figure with its source.",
+   "format": "CSV",
+   "bytes": 3834,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/assam/assam.csv",
+   "description": "Assam's Special Revision of 2025-26, every figure with its source",
+   "format": "CSV",
+   "bytes": 10535,
+   "columns": [
+    "section",
+    "item",
+    "as_of",
+    "value",
+    "source",
+    "primary"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/assam/constituencies.csv",
+   "description": "constituencies",
+   "format": "CSV",
+   "bytes": 11412,
+   "columns": [
+    "ac",
+    "name",
+    "reserved",
+    "district",
+    "polling_stations",
+    "roll_2024",
+    "draft",
+    "final",
+    "draft_men",
+    "draft_women",
+    "final_men",
+    "final_women",
+    "draft_vs_2024_per_1000",
+    "fall_per_1000"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/assam/constituencies.json",
+   "description": "Assam: one row for each assembly constituency",
+   "format": "JSON",
+   "bytes": 26943,
+   "rows": 126,
+   "row_keys": [
+    "ac",
+    "name",
+    "reserved",
+    "district",
+    "roll_2024",
+    "draft",
+    "final",
+    "fall",
+    "fall_women",
+    "draft_women_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/assam/districts.json",
+   "description": "Assam: one row for each district",
+   "format": "JSON",
+   "bytes": 7097,
+   "rows": 35,
+   "row_keys": [
+    "district",
+    "acs",
+    "roll_2024",
+    "draft",
+    "final",
+    "fall",
+    "fall_women",
+    "draft_women_pct",
+    "women_fall_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/assam/summary.json",
+   "description": "Assam: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 57150,
+   "keys": [
+    "state",
+    "seats",
+    "acs",
+    "d_voters",
+    "tribunals",
+    "detention",
+    "nrc",
+    "rules",
+    "schedule"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/constituencies.csv",
+   "description": "Every Bihar constituency, with names left off or deleted by phase, reason and sex, and the 2020 to 2025 results",
+   "format": "CSV",
+   "bytes": 51524,
+   "columns": [
+    "ac",
+    "name",
+    "district",
+    "pc",
+    "reserved",
+    "border",
+    "electorate_2025",
+    "booths",
+    "p1",
+    "p2",
+    "total",
+    "per_100",
+    "t_f",
+    "t_m",
+    "r_dead",
+    "r_shifted",
+    "r_absent",
+    "r_enrolled",
+    "hindu",
+    "muslim",
+    "unknown",
+    "win2020",
+    "al2020",
+    "margin2020",
+    "seg2024",
+    "al2024",
+    "win2025",
+    "al2025",
+    "margin2025",
+    "votes2025",
+    "draft_roll",
+    "added_after_draft",
+    "removed_after_draft",
+    "final_roll",
+    "final_less_draft",
+    "net_fall"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/constituencies.json",
+   "description": "Every Bihar constituency, with names left off or deleted by phase, reason and sex, and the 2020 to 2025 results. The same table as data/bihar/constituencies.csv, as JSON",
+   "format": "JSON",
+   "bytes": 201729,
+   "rows": 243,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "pc",
+    "reserved",
+    "border",
+    "is_border",
+    "electorate_2025",
+    "booths",
+    "p1",
+    "p2",
+    "total",
+    "p1_f",
+    "p1_m",
+    "t_f",
+    "t_m",
+    "per_booth",
+    "per_100",
+    "booth_median",
+    "booth_p90",
+    "booths_200",
+    "hindu",
+    "muslim",
+    "unknown",
+    "win2020",
+    "al2020",
+    "margin2020",
+    "margin2020_pct",
+    "seg2024",
+    "al2024",
+    "booths_nda",
+    "booths_india",
+    "booths_other",
+    "del_nda",
+    "del_india",
+    "del_other",
+    "win2025",
+    "ru2025",
+    "al2025",
+    "margin2025",
+    "margin2025_pct",
+    "votes2025",
+    "turnout2025",
+    "winner_votes2025",
+    "runner_up_votes2025",
+    "r_dead",
+    "r_shifted",
+    "r_absent",
+    "r_enrolled"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/districts.csv",
+   "description": "Every Bihar district, with names left off or deleted, the reasons, women's share and the range for Muslim names",
+   "format": "CSV",
+   "bytes": 2974,
+   "columns": [
+    "district",
+    "constituencies",
+    "removed",
+    "per_100",
+    "border",
+    "dead",
+    "shifted",
+    "absent",
+    "already_enrolled",
+    "women_pct_removed",
+    "muslim_pct_removed_low",
+    "muslim_pct_removed_high"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/districts.json",
+   "description": "Every Bihar district, with names left off or deleted, the reasons, women's share and the range for Muslim names. The same table as data/bihar/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 9348,
+   "rows": 38,
+   "row_keys": [
+    "district",
+    "acs",
+    "deleted",
+    "per_100",
+    "per_booth",
+    "electors_per_booth",
+    "density",
+    "urban_pct",
+    "women_literate",
+    "girls_schooled",
+    "child_marriage",
+    "gddp_pc",
+    "border"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/final.json",
+   "description": "Bihar: the final roll against the draft, by constituency",
+   "format": "JSON",
+   "bytes": 145564,
+   "keys": [
+    "as_of",
+    "source",
+    "totals",
+    "margin",
+    "seats"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/identity.json",
+   "description": "Bihar: the names left off by caste and religion group, as estimated from the lists",
+   "format": "JSON",
+   "bytes": 18212,
+   "keys": [
+    "caste",
+    "districts",
+    "survey_baseline",
+    "muslim_projected_2025"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/impact.json",
+   "description": "Bihar: estimates of how the names left off bear on the 2025 election",
+   "format": "JSON",
+   "bytes": 120796,
+   "keys": [
+    "as_of",
+    "poll_source",
+    "poll",
+    "muslim_share_used",
+    "non_muslim_derived",
+    "seats_total",
+    "seats_nda_vs_india",
+    "voters_lower",
+    "voters_upper",
+    "comp_booth_all",
+    "summary",
+    "breakeven_bands",
+    "close",
+    "seats"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/reasons.json",
+   "description": "Bihar: the names left off by the reason entered",
+   "format": "JSON",
+   "bytes": 4443,
+   "keys": [
+    "phase",
+    "total",
+    "totals",
+    "by_sex",
+    "bands",
+    "by_age",
+    "by_age_women",
+    "districts"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/robust.json",
+   "description": "Bihar: the robustness checks behind the findings",
+   "format": "JSON",
+   "bytes": 814,
+   "keys": [
+    "as_of",
+    "margins",
+    "women",
+    "ground",
+    "swing"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/summary.json",
+   "description": "Bihar: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 31081,
+   "keys": [
+    "totals",
+    "booth_histogram",
+    "by_alliance_label",
+    "by_booth_leader_2024",
+    "within_seat_2024",
+    "intensity",
+    "label_verification",
+    "label_fixes"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/swing.json",
+   "description": "Bihar: the swing from 2020 to 2025 against the names left off",
+   "format": "JSON",
+   "bytes": 41848,
+   "keys": [
+    "as_of",
+    "summary",
+    "seats"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/tests.json",
+   "description": "Bihar: the deaths and marriage tests against the census",
+   "format": "JSON",
+   "bytes": 8242,
+   "keys": [
+    "deaths",
+    "marriage"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_001.json",
+   "description": "Bihar: the polling booths of assembly constituency 1",
+   "format": "JSON",
+   "bytes": 16419,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_002.json",
+   "description": "Bihar: the polling booths of assembly constituency 2",
+   "format": "JSON",
+   "bytes": 15335,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_003.json",
+   "description": "Bihar: the polling booths of assembly constituency 3",
+   "format": "JSON",
+   "bytes": 12465,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_004.json",
+   "description": "Bihar: the polling booths of assembly constituency 4",
+   "format": "JSON",
+   "bytes": 14164,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_005.json",
+   "description": "Bihar: the polling booths of assembly constituency 5",
+   "format": "JSON",
+   "bytes": 12375,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_006.json",
+   "description": "Bihar: the polling booths of assembly constituency 6",
+   "format": "JSON",
+   "bytes": 12046,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_007.json",
+   "description": "Bihar: the polling booths of assembly constituency 7",
+   "format": "JSON",
+   "bytes": 12426,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_008.json",
+   "description": "Bihar: the polling booths of assembly constituency 8",
+   "format": "JSON",
+   "bytes": 12910,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_009.json",
+   "description": "Bihar: the polling booths of assembly constituency 9",
+   "format": "JSON",
+   "bytes": 12760,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_010.json",
+   "description": "Bihar: the polling booths of assembly constituency 10",
+   "format": "JSON",
+   "bytes": 12823,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_011.json",
+   "description": "Bihar: the polling booths of assembly constituency 11",
+   "format": "JSON",
+   "bytes": 12840,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_012.json",
+   "description": "Bihar: the polling booths of assembly constituency 12",
+   "format": "JSON",
+   "bytes": 13070,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_013.json",
+   "description": "Bihar: the polling booths of assembly constituency 13",
+   "format": "JSON",
+   "bytes": 12021,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_014.json",
+   "description": "Bihar: the polling booths of assembly constituency 14",
+   "format": "JSON",
+   "bytes": 12077,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_015.json",
+   "description": "Bihar: the polling booths of assembly constituency 15",
+   "format": "JSON",
+   "bytes": 12082,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_016.json",
+   "description": "Bihar: the polling booths of assembly constituency 16",
+   "format": "JSON",
+   "bytes": 11689,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_017.json",
+   "description": "Bihar: the polling booths of assembly constituency 17",
+   "format": "JSON",
+   "bytes": 16116,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_018.json",
+   "description": "Bihar: the polling booths of assembly constituency 18",
+   "format": "JSON",
+   "bytes": 12000,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_019.json",
+   "description": "Bihar: the polling booths of assembly constituency 19",
+   "format": "JSON",
+   "bytes": 14989,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_020.json",
+   "description": "Bihar: the polling booths of assembly constituency 20",
+   "format": "JSON",
+   "bytes": 13886,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_021.json",
+   "description": "Bihar: the polling booths of assembly constituency 21",
+   "format": "JSON",
+   "bytes": 13928,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_022.json",
+   "description": "Bihar: the polling booths of assembly constituency 22",
+   "format": "JSON",
+   "bytes": 14508,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_023.json",
+   "description": "Bihar: the polling booths of assembly constituency 23",
+   "format": "JSON",
+   "bytes": 15285,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_024.json",
+   "description": "Bihar: the polling booths of assembly constituency 24",
+   "format": "JSON",
+   "bytes": 14998,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_025.json",
+   "description": "Bihar: the polling booths of assembly constituency 25",
+   "format": "JSON",
+   "bytes": 15253,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_026.json",
+   "description": "Bihar: the polling booths of assembly constituency 26",
+   "format": "JSON",
+   "bytes": 15560,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_027.json",
+   "description": "Bihar: the polling booths of assembly constituency 27",
+   "format": "JSON",
+   "bytes": 15487,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_028.json",
+   "description": "Bihar: the polling booths of assembly constituency 28",
+   "format": "JSON",
+   "bytes": 13994,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_029.json",
+   "description": "Bihar: the polling booths of assembly constituency 29",
+   "format": "JSON",
+   "bytes": 13791,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_030.json",
+   "description": "Bihar: the polling booths of assembly constituency 30",
+   "format": "JSON",
+   "bytes": 13584,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_031.json",
+   "description": "Bihar: the polling booths of assembly constituency 31",
+   "format": "JSON",
+   "bytes": 13971,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_032.json",
+   "description": "Bihar: the polling booths of assembly constituency 32",
+   "format": "JSON",
+   "bytes": 13971,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_033.json",
+   "description": "Bihar: the polling booths of assembly constituency 33",
+   "format": "JSON",
+   "bytes": 14779,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_034.json",
+   "description": "Bihar: the polling booths of assembly constituency 34",
+   "format": "JSON",
+   "bytes": 15854,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_035.json",
+   "description": "Bihar: the polling booths of assembly constituency 35",
+   "format": "JSON",
+   "bytes": 15099,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_036.json",
+   "description": "Bihar: the polling booths of assembly constituency 36",
+   "format": "JSON",
+   "bytes": 16732,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_037.json",
+   "description": "Bihar: the polling booths of assembly constituency 37",
+   "format": "JSON",
+   "bytes": 16760,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_038.json",
+   "description": "Bihar: the polling booths of assembly constituency 38",
+   "format": "JSON",
+   "bytes": 15744,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_039.json",
+   "description": "Bihar: the polling booths of assembly constituency 39",
+   "format": "JSON",
+   "bytes": 16085,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_040.json",
+   "description": "Bihar: the polling booths of assembly constituency 40",
+   "format": "JSON",
+   "bytes": 16619,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_041.json",
+   "description": "Bihar: the polling booths of assembly constituency 41",
+   "format": "JSON",
+   "bytes": 14576,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_042.json",
+   "description": "Bihar: the polling booths of assembly constituency 42",
+   "format": "JSON",
+   "bytes": 14132,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_043.json",
+   "description": "Bihar: the polling booths of assembly constituency 43",
+   "format": "JSON",
+   "bytes": 14724,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_044.json",
+   "description": "Bihar: the polling booths of assembly constituency 44",
+   "format": "JSON",
+   "bytes": 13795,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_045.json",
+   "description": "Bihar: the polling booths of assembly constituency 45",
+   "format": "JSON",
+   "bytes": 15490,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_046.json",
+   "description": "Bihar: the polling booths of assembly constituency 46",
+   "format": "JSON",
+   "bytes": 15534,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_047.json",
+   "description": "Bihar: the polling booths of assembly constituency 47",
+   "format": "JSON",
+   "bytes": 16232,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_048.json",
+   "description": "Bihar: the polling booths of assembly constituency 48",
+   "format": "JSON",
+   "bytes": 15991,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_049.json",
+   "description": "Bihar: the polling booths of assembly constituency 49",
+   "format": "JSON",
+   "bytes": 14648,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_050.json",
+   "description": "Bihar: the polling booths of assembly constituency 50",
+   "format": "JSON",
+   "bytes": 13745,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_051.json",
+   "description": "Bihar: the polling booths of assembly constituency 51",
+   "format": "JSON",
+   "bytes": 13441,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_052.json",
+   "description": "Bihar: the polling booths of assembly constituency 52",
+   "format": "JSON",
+   "bytes": 14456,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_053.json",
+   "description": "Bihar: the polling booths of assembly constituency 53",
+   "format": "JSON",
+   "bytes": 14074,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_054.json",
+   "description": "Bihar: the polling booths of assembly constituency 54",
+   "format": "JSON",
+   "bytes": 14795,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_055.json",
+   "description": "Bihar: the polling booths of assembly constituency 55",
+   "format": "JSON",
+   "bytes": 12863,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_056.json",
+   "description": "Bihar: the polling booths of assembly constituency 56",
+   "format": "JSON",
+   "bytes": 15978,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_057.json",
+   "description": "Bihar: the polling booths of assembly constituency 57",
+   "format": "JSON",
+   "bytes": 13056,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_058.json",
+   "description": "Bihar: the polling booths of assembly constituency 58",
+   "format": "JSON",
+   "bytes": 13794,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_059.json",
+   "description": "Bihar: the polling booths of assembly constituency 59",
+   "format": "JSON",
+   "bytes": 14989,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_060.json",
+   "description": "Bihar: the polling booths of assembly constituency 60",
+   "format": "JSON",
+   "bytes": 14953,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_061.json",
+   "description": "Bihar: the polling booths of assembly constituency 61",
+   "format": "JSON",
+   "bytes": 15965,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_062.json",
+   "description": "Bihar: the polling booths of assembly constituency 62",
+   "format": "JSON",
+   "bytes": 15598,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_063.json",
+   "description": "Bihar: the polling booths of assembly constituency 63",
+   "format": "JSON",
+   "bytes": 13064,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_064.json",
+   "description": "Bihar: the polling booths of assembly constituency 64",
+   "format": "JSON",
+   "bytes": 13388,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_065.json",
+   "description": "Bihar: the polling booths of assembly constituency 65",
+   "format": "JSON",
+   "bytes": 16117,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_066.json",
+   "description": "Bihar: the polling booths of assembly constituency 66",
+   "format": "JSON",
+   "bytes": 14760,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_067.json",
+   "description": "Bihar: the polling booths of assembly constituency 67",
+   "format": "JSON",
+   "bytes": 14114,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_068.json",
+   "description": "Bihar: the polling booths of assembly constituency 68",
+   "format": "JSON",
+   "bytes": 13074,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_069.json",
+   "description": "Bihar: the polling booths of assembly constituency 69",
+   "format": "JSON",
+   "bytes": 13688,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_070.json",
+   "description": "Bihar: the polling booths of assembly constituency 70",
+   "format": "JSON",
+   "bytes": 16542,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_071.json",
+   "description": "Bihar: the polling booths of assembly constituency 71",
+   "format": "JSON",
+   "bytes": 14067,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_072.json",
+   "description": "Bihar: the polling booths of assembly constituency 72",
+   "format": "JSON",
+   "bytes": 14637,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_073.json",
+   "description": "Bihar: the polling booths of assembly constituency 73",
+   "format": "JSON",
+   "bytes": 15379,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_074.json",
+   "description": "Bihar: the polling booths of assembly constituency 74",
+   "format": "JSON",
+   "bytes": 15399,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_075.json",
+   "description": "Bihar: the polling booths of assembly constituency 75",
+   "format": "JSON",
+   "bytes": 17391,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_076.json",
+   "description": "Bihar: the polling booths of assembly constituency 76",
+   "format": "JSON",
+   "bytes": 17429,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_077.json",
+   "description": "Bihar: the polling booths of assembly constituency 77",
+   "format": "JSON",
+   "bytes": 14689,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_078.json",
+   "description": "Bihar: the polling booths of assembly constituency 78",
+   "format": "JSON",
+   "bytes": 12599,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_079.json",
+   "description": "Bihar: the polling booths of assembly constituency 79",
+   "format": "JSON",
+   "bytes": 11510,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_080.json",
+   "description": "Bihar: the polling booths of assembly constituency 80",
+   "format": "JSON",
+   "bytes": 12862,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_081.json",
+   "description": "Bihar: the polling booths of assembly constituency 81",
+   "format": "JSON",
+   "bytes": 12291,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_082.json",
+   "description": "Bihar: the polling booths of assembly constituency 82",
+   "format": "JSON",
+   "bytes": 13951,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_083.json",
+   "description": "Bihar: the polling booths of assembly constituency 83",
+   "format": "JSON",
+   "bytes": 13279,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_084.json",
+   "description": "Bihar: the polling booths of assembly constituency 84",
+   "format": "JSON",
+   "bytes": 11561,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_085.json",
+   "description": "Bihar: the polling booths of assembly constituency 85",
+   "format": "JSON",
+   "bytes": 13836,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_086.json",
+   "description": "Bihar: the polling booths of assembly constituency 86",
+   "format": "JSON",
+   "bytes": 13512,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_087.json",
+   "description": "Bihar: the polling booths of assembly constituency 87",
+   "format": "JSON",
+   "bytes": 14708,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_088.json",
+   "description": "Bihar: the polling booths of assembly constituency 88",
+   "format": "JSON",
+   "bytes": 14897,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_089.json",
+   "description": "Bihar: the polling booths of assembly constituency 89",
+   "format": "JSON",
+   "bytes": 14857,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_090.json",
+   "description": "Bihar: the polling booths of assembly constituency 90",
+   "format": "JSON",
+   "bytes": 13531,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_091.json",
+   "description": "Bihar: the polling booths of assembly constituency 91",
+   "format": "JSON",
+   "bytes": 12792,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_092.json",
+   "description": "Bihar: the polling booths of assembly constituency 92",
+   "format": "JSON",
+   "bytes": 11770,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_093.json",
+   "description": "Bihar: the polling booths of assembly constituency 93",
+   "format": "JSON",
+   "bytes": 14259,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_094.json",
+   "description": "Bihar: the polling booths of assembly constituency 94",
+   "format": "JSON",
+   "bytes": 14645,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_095.json",
+   "description": "Bihar: the polling booths of assembly constituency 95",
+   "format": "JSON",
+   "bytes": 15208,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_096.json",
+   "description": "Bihar: the polling booths of assembly constituency 96",
+   "format": "JSON",
+   "bytes": 14731,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_097.json",
+   "description": "Bihar: the polling booths of assembly constituency 97",
+   "format": "JSON",
+   "bytes": 15894,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_098.json",
+   "description": "Bihar: the polling booths of assembly constituency 98",
+   "format": "JSON",
+   "bytes": 15018,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_099.json",
+   "description": "Bihar: the polling booths of assembly constituency 99",
+   "format": "JSON",
+   "bytes": 16094,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_100.json",
+   "description": "Bihar: the polling booths of assembly constituency 100",
+   "format": "JSON",
+   "bytes": 14694,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_101.json",
+   "description": "Bihar: the polling booths of assembly constituency 101",
+   "format": "JSON",
+   "bytes": 16401,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_102.json",
+   "description": "Bihar: the polling booths of assembly constituency 102",
+   "format": "JSON",
+   "bytes": 17135,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_103.json",
+   "description": "Bihar: the polling booths of assembly constituency 103",
+   "format": "JSON",
+   "bytes": 17464,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_104.json",
+   "description": "Bihar: the polling booths of assembly constituency 104",
+   "format": "JSON",
+   "bytes": 15582,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_105.json",
+   "description": "Bihar: the polling booths of assembly constituency 105",
+   "format": "JSON",
+   "bytes": 14400,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_106.json",
+   "description": "Bihar: the polling booths of assembly constituency 106",
+   "format": "JSON",
+   "bytes": 12509,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_107.json",
+   "description": "Bihar: the polling booths of assembly constituency 107",
+   "format": "JSON",
+   "bytes": 15081,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_108.json",
+   "description": "Bihar: the polling booths of assembly constituency 108",
+   "format": "JSON",
+   "bytes": 13976,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_109.json",
+   "description": "Bihar: the polling booths of assembly constituency 109",
+   "format": "JSON",
+   "bytes": 14613,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_110.json",
+   "description": "Bihar: the polling booths of assembly constituency 110",
+   "format": "JSON",
+   "bytes": 14595,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_111.json",
+   "description": "Bihar: the polling booths of assembly constituency 111",
+   "format": "JSON",
+   "bytes": 15410,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_112.json",
+   "description": "Bihar: the polling booths of assembly constituency 112",
+   "format": "JSON",
+   "bytes": 14222,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_113.json",
+   "description": "Bihar: the polling booths of assembly constituency 113",
+   "format": "JSON",
+   "bytes": 13735,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_114.json",
+   "description": "Bihar: the polling booths of assembly constituency 114",
+   "format": "JSON",
+   "bytes": 13755,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_115.json",
+   "description": "Bihar: the polling booths of assembly constituency 115",
+   "format": "JSON",
+   "bytes": 14479,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_116.json",
+   "description": "Bihar: the polling booths of assembly constituency 116",
+   "format": "JSON",
+   "bytes": 14060,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_117.json",
+   "description": "Bihar: the polling booths of assembly constituency 117",
+   "format": "JSON",
+   "bytes": 13161,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_118.json",
+   "description": "Bihar: the polling booths of assembly constituency 118",
+   "format": "JSON",
+   "bytes": 14386,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_119.json",
+   "description": "Bihar: the polling booths of assembly constituency 119",
+   "format": "JSON",
+   "bytes": 13341,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_120.json",
+   "description": "Bihar: the polling booths of assembly constituency 120",
+   "format": "JSON",
+   "bytes": 12787,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_121.json",
+   "description": "Bihar: the polling booths of assembly constituency 121",
+   "format": "JSON",
+   "bytes": 12445,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_122.json",
+   "description": "Bihar: the polling booths of assembly constituency 122",
+   "format": "JSON",
+   "bytes": 12571,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_123.json",
+   "description": "Bihar: the polling booths of assembly constituency 123",
+   "format": "JSON",
+   "bytes": 15981,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_124.json",
+   "description": "Bihar: the polling booths of assembly constituency 124",
+   "format": "JSON",
+   "bytes": 16803,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_125.json",
+   "description": "Bihar: the polling booths of assembly constituency 125",
+   "format": "JSON",
+   "bytes": 16418,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_126.json",
+   "description": "Bihar: the polling booths of assembly constituency 126",
+   "format": "JSON",
+   "bytes": 13683,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_127.json",
+   "description": "Bihar: the polling booths of assembly constituency 127",
+   "format": "JSON",
+   "bytes": 13271,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_128.json",
+   "description": "Bihar: the polling booths of assembly constituency 128",
+   "format": "JSON",
+   "bytes": 16048,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_129.json",
+   "description": "Bihar: the polling booths of assembly constituency 129",
+   "format": "JSON",
+   "bytes": 14592,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_130.json",
+   "description": "Bihar: the polling booths of assembly constituency 130",
+   "format": "JSON",
+   "bytes": 13480,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_131.json",
+   "description": "Bihar: the polling booths of assembly constituency 131",
+   "format": "JSON",
+   "bytes": 16365,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_132.json",
+   "description": "Bihar: the polling booths of assembly constituency 132",
+   "format": "JSON",
+   "bytes": 16085,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_133.json",
+   "description": "Bihar: the polling booths of assembly constituency 133",
+   "format": "JSON",
+   "bytes": 13707,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_134.json",
+   "description": "Bihar: the polling booths of assembly constituency 134",
+   "format": "JSON",
+   "bytes": 13813,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_135.json",
+   "description": "Bihar: the polling booths of assembly constituency 135",
+   "format": "JSON",
+   "bytes": 13343,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_136.json",
+   "description": "Bihar: the polling booths of assembly constituency 136",
+   "format": "JSON",
+   "bytes": 12466,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_137.json",
+   "description": "Bihar: the polling booths of assembly constituency 137",
+   "format": "JSON",
+   "bytes": 12214,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_138.json",
+   "description": "Bihar: the polling booths of assembly constituency 138",
+   "format": "JSON",
+   "bytes": 12708,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_139.json",
+   "description": "Bihar: the polling booths of assembly constituency 139",
+   "format": "JSON",
+   "bytes": 16702,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_140.json",
+   "description": "Bihar: the polling booths of assembly constituency 140",
+   "format": "JSON",
+   "bytes": 15151,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_141.json",
+   "description": "Bihar: the polling booths of assembly constituency 141",
+   "format": "JSON",
+   "bytes": 11001,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_142.json",
+   "description": "Bihar: the polling booths of assembly constituency 142",
+   "format": "JSON",
+   "bytes": 13666,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_143.json",
+   "description": "Bihar: the polling booths of assembly constituency 143",
+   "format": "JSON",
+   "bytes": 12926,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_144.json",
+   "description": "Bihar: the polling booths of assembly constituency 144",
+   "format": "JSON",
+   "bytes": 15273,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_145.json",
+   "description": "Bihar: the polling booths of assembly constituency 145",
+   "format": "JSON",
+   "bytes": 11500,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_146.json",
+   "description": "Bihar: the polling booths of assembly constituency 146",
+   "format": "JSON",
+   "bytes": 14952,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_147.json",
+   "description": "Bihar: the polling booths of assembly constituency 147",
+   "format": "JSON",
+   "bytes": 12489,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_148.json",
+   "description": "Bihar: the polling booths of assembly constituency 148",
+   "format": "JSON",
+   "bytes": 12714,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_149.json",
+   "description": "Bihar: the polling booths of assembly constituency 149",
+   "format": "JSON",
+   "bytes": 13261,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_150.json",
+   "description": "Bihar: the polling booths of assembly constituency 150",
+   "format": "JSON",
+   "bytes": 15268,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_151.json",
+   "description": "Bihar: the polling booths of assembly constituency 151",
+   "format": "JSON",
+   "bytes": 15041,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_152.json",
+   "description": "Bihar: the polling booths of assembly constituency 152",
+   "format": "JSON",
+   "bytes": 11794,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_153.json",
+   "description": "Bihar: the polling booths of assembly constituency 153",
+   "format": "JSON",
+   "bytes": 12025,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_154.json",
+   "description": "Bihar: the polling booths of assembly constituency 154",
+   "format": "JSON",
+   "bytes": 16872,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_155.json",
+   "description": "Bihar: the polling booths of assembly constituency 155",
+   "format": "JSON",
+   "bytes": 16241,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_156.json",
+   "description": "Bihar: the polling booths of assembly constituency 156",
+   "format": "JSON",
+   "bytes": 15279,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_157.json",
+   "description": "Bihar: the polling booths of assembly constituency 157",
+   "format": "JSON",
+   "bytes": 16768,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_158.json",
+   "description": "Bihar: the polling booths of assembly constituency 158",
+   "format": "JSON",
+   "bytes": 16017,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_159.json",
+   "description": "Bihar: the polling booths of assembly constituency 159",
+   "format": "JSON",
+   "bytes": 14548,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_160.json",
+   "description": "Bihar: the polling booths of assembly constituency 160",
+   "format": "JSON",
+   "bytes": 15197,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_161.json",
+   "description": "Bihar: the polling booths of assembly constituency 161",
+   "format": "JSON",
+   "bytes": 12857,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_162.json",
+   "description": "Bihar: the polling booths of assembly constituency 162",
+   "format": "JSON",
+   "bytes": 12171,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_163.json",
+   "description": "Bihar: the polling booths of assembly constituency 163",
+   "format": "JSON",
+   "bytes": 15357,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_164.json",
+   "description": "Bihar: the polling booths of assembly constituency 164",
+   "format": "JSON",
+   "bytes": 15738,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_165.json",
+   "description": "Bihar: the polling booths of assembly constituency 165",
+   "format": "JSON",
+   "bytes": 15501,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_166.json",
+   "description": "Bihar: the polling booths of assembly constituency 166",
+   "format": "JSON",
+   "bytes": 15211,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_167.json",
+   "description": "Bihar: the polling booths of assembly constituency 167",
+   "format": "JSON",
+   "bytes": 15676,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_168.json",
+   "description": "Bihar: the polling booths of assembly constituency 168",
+   "format": "JSON",
+   "bytes": 17877,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_169.json",
+   "description": "Bihar: the polling booths of assembly constituency 169",
+   "format": "JSON",
+   "bytes": 12787,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_170.json",
+   "description": "Bihar: the polling booths of assembly constituency 170",
+   "format": "JSON",
+   "bytes": 10623,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_171.json",
+   "description": "Bihar: the polling booths of assembly constituency 171",
+   "format": "JSON",
+   "bytes": 14139,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_172.json",
+   "description": "Bihar: the polling booths of assembly constituency 172",
+   "format": "JSON",
+   "bytes": 18264,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_173.json",
+   "description": "Bihar: the polling booths of assembly constituency 173",
+   "format": "JSON",
+   "bytes": 14837,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_174.json",
+   "description": "Bihar: the polling booths of assembly constituency 174",
+   "format": "JSON",
+   "bytes": 15286,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_175.json",
+   "description": "Bihar: the polling booths of assembly constituency 175",
+   "format": "JSON",
+   "bytes": 16275,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_176.json",
+   "description": "Bihar: the polling booths of assembly constituency 176",
+   "format": "JSON",
+   "bytes": 15170,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_177.json",
+   "description": "Bihar: the polling booths of assembly constituency 177",
+   "format": "JSON",
+   "bytes": 15521,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_178.json",
+   "description": "Bihar: the polling booths of assembly constituency 178",
+   "format": "JSON",
+   "bytes": 12775,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_179.json",
+   "description": "Bihar: the polling booths of assembly constituency 179",
+   "format": "JSON",
+   "bytes": 13114,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_180.json",
+   "description": "Bihar: the polling booths of assembly constituency 180",
+   "format": "JSON",
+   "bytes": 12604,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_181.json",
+   "description": "Bihar: the polling booths of assembly constituency 181",
+   "format": "JSON",
+   "bytes": 19655,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_182.json",
+   "description": "Bihar: the polling booths of assembly constituency 182",
+   "format": "JSON",
+   "bytes": 17093,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_183.json",
+   "description": "Bihar: the polling booths of assembly constituency 183",
+   "format": "JSON",
+   "bytes": 16447,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_184.json",
+   "description": "Bihar: the polling booths of assembly constituency 184",
+   "format": "JSON",
+   "bytes": 15446,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_185.json",
+   "description": "Bihar: the polling booths of assembly constituency 185",
+   "format": "JSON",
+   "bytes": 12816,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_186.json",
+   "description": "Bihar: the polling booths of assembly constituency 186",
+   "format": "JSON",
+   "bytes": 15522,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_187.json",
+   "description": "Bihar: the polling booths of assembly constituency 187",
+   "format": "JSON",
+   "bytes": 15651,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_188.json",
+   "description": "Bihar: the polling booths of assembly constituency 188",
+   "format": "JSON",
+   "bytes": 17517,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_189.json",
+   "description": "Bihar: the polling booths of assembly constituency 189",
+   "format": "JSON",
+   "bytes": 17289,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_190.json",
+   "description": "Bihar: the polling booths of assembly constituency 190",
+   "format": "JSON",
+   "bytes": 13716,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_191.json",
+   "description": "Bihar: the polling booths of assembly constituency 191",
+   "format": "JSON",
+   "bytes": 14879,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_192.json",
+   "description": "Bihar: the polling booths of assembly constituency 192",
+   "format": "JSON",
+   "bytes": 14254,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_193.json",
+   "description": "Bihar: the polling booths of assembly constituency 193",
+   "format": "JSON",
+   "bytes": 15024,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_194.json",
+   "description": "Bihar: the polling booths of assembly constituency 194",
+   "format": "JSON",
+   "bytes": 15945,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_195.json",
+   "description": "Bihar: the polling booths of assembly constituency 195",
+   "format": "JSON",
+   "bytes": 13284,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_196.json",
+   "description": "Bihar: the polling booths of assembly constituency 196",
+   "format": "JSON",
+   "bytes": 15575,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_197.json",
+   "description": "Bihar: the polling booths of assembly constituency 197",
+   "format": "JSON",
+   "bytes": 15755,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_198.json",
+   "description": "Bihar: the polling booths of assembly constituency 198",
+   "format": "JSON",
+   "bytes": 15150,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_199.json",
+   "description": "Bihar: the polling booths of assembly constituency 199",
+   "format": "JSON",
+   "bytes": 15053,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_200.json",
+   "description": "Bihar: the polling booths of assembly constituency 200",
+   "format": "JSON",
+   "bytes": 13031,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_201.json",
+   "description": "Bihar: the polling booths of assembly constituency 201",
+   "format": "JSON",
+   "bytes": 14422,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_202.json",
+   "description": "Bihar: the polling booths of assembly constituency 202",
+   "format": "JSON",
+   "bytes": 14637,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_203.json",
+   "description": "Bihar: the polling booths of assembly constituency 203",
+   "format": "JSON",
+   "bytes": 12576,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_204.json",
+   "description": "Bihar: the polling booths of assembly constituency 204",
+   "format": "JSON",
+   "bytes": 12717,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_205.json",
+   "description": "Bihar: the polling booths of assembly constituency 205",
+   "format": "JSON",
+   "bytes": 13194,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_206.json",
+   "description": "Bihar: the polling booths of assembly constituency 206",
+   "format": "JSON",
+   "bytes": 15340,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_207.json",
+   "description": "Bihar: the polling booths of assembly constituency 207",
+   "format": "JSON",
+   "bytes": 14241,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_208.json",
+   "description": "Bihar: the polling booths of assembly constituency 208",
+   "format": "JSON",
+   "bytes": 16361,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_209.json",
+   "description": "Bihar: the polling booths of assembly constituency 209",
+   "format": "JSON",
+   "bytes": 16124,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_210.json",
+   "description": "Bihar: the polling booths of assembly constituency 210",
+   "format": "JSON",
+   "bytes": 13836,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_211.json",
+   "description": "Bihar: the polling booths of assembly constituency 211",
+   "format": "JSON",
+   "bytes": 14009,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_212.json",
+   "description": "Bihar: the polling booths of assembly constituency 212",
+   "format": "JSON",
+   "bytes": 13473,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_213.json",
+   "description": "Bihar: the polling booths of assembly constituency 213",
+   "format": "JSON",
+   "bytes": 15564,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_214.json",
+   "description": "Bihar: the polling booths of assembly constituency 214",
+   "format": "JSON",
+   "bytes": 12067,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_215.json",
+   "description": "Bihar: the polling booths of assembly constituency 215",
+   "format": "JSON",
+   "bytes": 12366,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_216.json",
+   "description": "Bihar: the polling booths of assembly constituency 216",
+   "format": "JSON",
+   "bytes": 14857,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_217.json",
+   "description": "Bihar: the polling booths of assembly constituency 217",
+   "format": "JSON",
+   "bytes": 12806,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_218.json",
+   "description": "Bihar: the polling booths of assembly constituency 218",
+   "format": "JSON",
+   "bytes": 11382,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_219.json",
+   "description": "Bihar: the polling booths of assembly constituency 219",
+   "format": "JSON",
+   "bytes": 15394,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_220.json",
+   "description": "Bihar: the polling booths of assembly constituency 220",
+   "format": "JSON",
+   "bytes": 16547,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_221.json",
+   "description": "Bihar: the polling booths of assembly constituency 221",
+   "format": "JSON",
+   "bytes": 14676,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_222.json",
+   "description": "Bihar: the polling booths of assembly constituency 222",
+   "format": "JSON",
+   "bytes": 13181,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_223.json",
+   "description": "Bihar: the polling booths of assembly constituency 223",
+   "format": "JSON",
+   "bytes": 15019,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_224.json",
+   "description": "Bihar: the polling booths of assembly constituency 224",
+   "format": "JSON",
+   "bytes": 16167,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_225.json",
+   "description": "Bihar: the polling booths of assembly constituency 225",
+   "format": "JSON",
+   "bytes": 14732,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_226.json",
+   "description": "Bihar: the polling booths of assembly constituency 226",
+   "format": "JSON",
+   "bytes": 13804,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_227.json",
+   "description": "Bihar: the polling booths of assembly constituency 227",
+   "format": "JSON",
+   "bytes": 15267,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_228.json",
+   "description": "Bihar: the polling booths of assembly constituency 228",
+   "format": "JSON",
+   "bytes": 15231,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_229.json",
+   "description": "Bihar: the polling booths of assembly constituency 229",
+   "format": "JSON",
+   "bytes": 15874,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_230.json",
+   "description": "Bihar: the polling booths of assembly constituency 230",
+   "format": "JSON",
+   "bytes": 11796,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_231.json",
+   "description": "Bihar: the polling booths of assembly constituency 231",
+   "format": "JSON",
+   "bytes": 15881,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_232.json",
+   "description": "Bihar: the polling booths of assembly constituency 232",
+   "format": "JSON",
+   "bytes": 14070,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_233.json",
+   "description": "Bihar: the polling booths of assembly constituency 233",
+   "format": "JSON",
+   "bytes": 14874,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_234.json",
+   "description": "Bihar: the polling booths of assembly constituency 234",
+   "format": "JSON",
+   "bytes": 15209,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_235.json",
+   "description": "Bihar: the polling booths of assembly constituency 235",
+   "format": "JSON",
+   "bytes": 14558,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_236.json",
+   "description": "Bihar: the polling booths of assembly constituency 236",
+   "format": "JSON",
+   "bytes": 17677,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_237.json",
+   "description": "Bihar: the polling booths of assembly constituency 237",
+   "format": "JSON",
+   "bytes": 15731,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_238.json",
+   "description": "Bihar: the polling booths of assembly constituency 238",
+   "format": "JSON",
+   "bytes": 14423,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_239.json",
+   "description": "Bihar: the polling booths of assembly constituency 239",
+   "format": "JSON",
+   "bytes": 15756,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_240.json",
+   "description": "Bihar: the polling booths of assembly constituency 240",
+   "format": "JSON",
+   "bytes": 14719,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_241.json",
+   "description": "Bihar: the polling booths of assembly constituency 241",
+   "format": "JSON",
+   "bytes": 15046,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_242.json",
+   "description": "Bihar: the polling booths of assembly constituency 242",
+   "format": "JSON",
+   "bytes": 16034,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/bihar/booths/ac_243.json",
+   "description": "Bihar: the polling booths of assembly constituency 243",
+   "format": "JSON",
+   "bytes": 15344,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/chandigarh/summary.json",
+   "description": "Chandigarh: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 4405,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/chandigarh/tables.csv",
+   "description": "Every Chandigarh figure with its source.",
+   "format": "CSV",
+   "bytes": 2510,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/chhattisgarh/districts.json",
+   "description": "Chhattisgarh: one row for each district",
+   "format": "JSON",
+   "bytes": 4138,
+   "rows": 33,
+   "row_keys": [
+    "district",
+    "draft",
+    "added",
+    "removed",
+    "net",
+    "final"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/chhattisgarh/summary.json",
+   "description": "Chhattisgarh: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 8991,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/chhattisgarh/tables.csv",
+   "description": "Every Chhattisgarh figure with its source.",
+   "format": "CSV",
+   "bytes": 7010,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/delhi/constituencies.csv",
+   "description": "Every Delhi constituency, with forms not collected and the 2025 margin",
+   "format": "CSV",
+   "bytes": 5845,
+   "columns": [
+    "ac",
+    "name",
+    "district",
+    "roll_before",
+    "draft",
+    "left_off",
+    "per_100",
+    "vs_district",
+    "winner",
+    "runner_up",
+    "margin",
+    "turnout_2025",
+    "over_margin",
+    "at_turnout_over_margin"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/delhi/constituencies.json",
+   "description": "Every Delhi constituency, with forms not collected and the 2025 margin. The same table as data/delhi/constituencies.csv, as JSON",
+   "format": "JSON",
+   "bytes": 21741,
+   "rows": 70,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "roll_before",
+    "draft",
+    "left_off",
+    "per_100",
+    "electors_2025",
+    "winner",
+    "runner_up",
+    "margin",
+    "turnout_2025",
+    "over_margin",
+    "at_turnout_over_margin",
+    "vs_district"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/delhi/districts.csv",
+   "description": "Every Delhi district",
+   "format": "CSV",
+   "bytes": 540,
+   "columns": [
+    "district",
+    "acs",
+    "roll_before",
+    "draft",
+    "left_off",
+    "per_100"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/delhi/districts.json",
+   "description": "Every Delhi district. The same table as data/delhi/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 1509,
+   "rows": 13,
+   "row_keys": [
+    "district",
+    "acs",
+    "roll_before",
+    "draft",
+    "left_off",
+    "per_100"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/delhi/summary.json",
+   "description": "Delhi: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 942,
+   "keys": [
+    "roll_before",
+    "draft",
+    "left_off",
+    "per_100",
+    "reasons",
+    "shares",
+    "women_before_pct",
+    "women_draft_pct",
+    "women_left_off_pct",
+    "women_left_per_100",
+    "men_left_per_100",
+    "electors_2025",
+    "acs",
+    "over_margin",
+    "at_turnout_over_margin",
+    "parties",
+    "acs_over_40",
+    "rate_max",
+    "rate_max_v",
+    "rate_min",
+    "rate_min_v",
+    "notices_issued",
+    "form6_to_0929",
+    "form7_to_0929"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/dnhdd/summary.json",
+   "description": "Dadra and Nagar Haveli and Daman and Diu: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 4042,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/dnhdd/tables.csv",
+   "description": "Every Dadra and Nagar Haveli and Daman and Diu figure with its source.",
+   "format": "CSV",
+   "bytes": 1058,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/geo/bihar.json",
+   "description": "Boundaries for the maps of Bihar, from DataMeet",
+   "format": "JSON",
+   "bytes": 71982,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/delhi.json",
+   "description": "Boundaries for the maps of Delhi, from DataMeet",
+   "format": "JSON",
+   "bytes": 15597,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/gujarat.json",
+   "description": "Boundaries for the maps of Gujarat, from DataMeet",
+   "format": "JSON",
+   "bytes": 21254,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/india.json",
+   "description": "Boundaries for the maps of India, from DataMeet",
+   "format": "JSON",
+   "bytes": 132749,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/karnataka.json",
+   "description": "Boundaries for the maps of Karnataka, from DataMeet",
+   "format": "JSON",
+   "bytes": 26495,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/kerala.json",
+   "description": "Boundaries for the maps of Kerala, from DataMeet",
+   "format": "JSON",
+   "bytes": 34546,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/maharashtra.json",
+   "description": "Boundaries for the maps of Maharashtra, from DataMeet",
+   "format": "JSON",
+   "bytes": 26974,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/maharashtra_ac.json",
+   "description": "Assembly constituency boundaries for the maps of Maharashtra, from DataMeet",
+   "format": "JSON",
+   "bytes": 86525,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/rajasthan.json",
+   "description": "Boundaries for the maps of Rajasthan, from DataMeet",
+   "format": "JSON",
+   "bytes": 63227,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/tamilnadu.json",
+   "description": "Boundaries for the maps of Tamil Nadu, from DataMeet",
+   "format": "JSON",
+   "bytes": 66847,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/uttarakhand.json",
+   "description": "Boundaries for the maps of Uttarakhand, from DataMeet",
+   "format": "JSON",
+   "bytes": 18928,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/uttarpradesh.json",
+   "description": "Boundaries for the maps of Uttar Pradesh, from DataMeet",
+   "format": "JSON",
+   "bytes": 42466,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/geo/westbengal.json",
+   "description": "Boundaries for the maps of West Bengal, from DataMeet",
+   "format": "JSON",
+   "bytes": 83313,
+   "keys": [
+    "type",
+    "features"
+   ],
+   "licence": "DataMeet's licence, as the terms page gives it"
+  },
+  {
+   "path": "data/goa/summary.json",
+   "description": "Goa: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 4861,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/goa/tables.csv",
+   "description": "Every Goa figure with its source.",
+   "format": "CSV",
+   "bytes": 2946,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/gujarat/constituencies.csv",
+   "description": "Every Gujarat constituency, with names left off by reason and the 2022 margin",
+   "format": "CSV",
+   "bytes": 18622,
+   "columns": [
+    "ac",
+    "name",
+    "district",
+    "before",
+    "removed",
+    "per_100",
+    "dead",
+    "absent",
+    "shifted",
+    "enrolled_elsewhere",
+    "other",
+    "draft",
+    "vs_district",
+    "winner_party",
+    "runner_up_party",
+    "margin",
+    "over_margin"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/gujarat/constituencies.json",
+   "description": "Every Gujarat constituency, with names left off by reason and the 2022 margin. The same table as data/gujarat/constituencies.csv, as JSON",
+   "format": "JSON",
+   "bytes": 114464,
+   "rows": 182,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "before",
+    "removed",
+    "draft",
+    "dead",
+    "absent",
+    "shifted",
+    "enrolled_elsewhere",
+    "other",
+    "per_100",
+    "winner_party",
+    "runner_up_party",
+    "margin",
+    "electors_2022",
+    "turnout_2022",
+    "women_2022_pct",
+    "dead_share",
+    "absent_share",
+    "shifted_share",
+    "enrolled_elsewhere_share",
+    "other_share",
+    "alive",
+    "not_elsewhere",
+    "over_margin",
+    "alive_over_margin",
+    "narrow_over_margin",
+    "at_turnout",
+    "turnout_over_margin",
+    "vs_district"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/gujarat/districts.csv",
+   "description": "Every Gujarat district, with the final roll",
+   "format": "CSV",
+   "bytes": 3509,
+   "columns": [
+    "district",
+    "acs",
+    "before",
+    "removed",
+    "per_100",
+    "dead",
+    "absent",
+    "shifted",
+    "enrolled_elsewhere",
+    "other",
+    "draft",
+    "added",
+    "deleted",
+    "net",
+    "final",
+    "final_gap",
+    "net_per_100"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/gujarat/districts.json",
+   "description": "Every Gujarat district, with the final roll. The same table as data/gujarat/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 17138,
+   "rows": 33,
+   "row_keys": [
+    "district",
+    "id",
+    "acs",
+    "city",
+    "before",
+    "removed",
+    "draft",
+    "dead",
+    "absent",
+    "shifted",
+    "enrolled_elsewhere",
+    "other",
+    "per_100",
+    "dead_share",
+    "absent_share",
+    "shifted_share",
+    "enrolled_elsewhere_share",
+    "other_share",
+    "over_margin",
+    "added",
+    "deleted",
+    "net",
+    "final",
+    "final_gap",
+    "added_per_100",
+    "deleted_per_100",
+    "net_fall",
+    "net_per_100",
+    "made_up_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/gujarat/final.json",
+   "description": "Gujarat: the final roll by district",
+   "format": "JSON",
+   "bytes": 3540,
+   "rows": 34,
+   "row_keys": [
+    "district",
+    "draft",
+    "added",
+    "deleted",
+    "net",
+    "final",
+    "gap"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/gujarat/summary.json",
+   "description": "Gujarat: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 8857,
+   "keys": [
+    "before_date",
+    "draft_date",
+    "final_date",
+    "before",
+    "removed",
+    "draft",
+    "per_100",
+    "reasons",
+    "shares",
+    "acs",
+    "districts",
+    "rate_max",
+    "rate_max_v",
+    "rate_max_district",
+    "rate_min",
+    "rate_min_v",
+    "rate_min_district",
+    "acs_over_25",
+    "acs_under_10",
+    "over_margin",
+    "alive_over_margin",
+    "narrow_over_margin",
+    "turnout_over_margin",
+    "turnout_2022",
+    "margins_source",
+    "closest",
+    "closest20_over",
+    "margin_median",
+    "seats_2022",
+    "winners",
+    "city_names",
+    "city",
+    "rest",
+    "final",
+    "added",
+    "deleted",
+    "net",
+    "final_gap",
+    "final_gap_districts",
+    "net_fall",
+    "net_per_100",
+    "made_up_pct",
+    "net_negative",
+    "vav_tharad",
+    "ahmedabad",
+    "ahd_rho_removed_deleted",
+    "ahd_rho_removed_added",
+    "final_districts_printed",
+    "rho_rate_shifted",
+    "rho_rate_dead",
+    "rho_rate_margin"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/haryana/summary.json",
+   "description": "Haryana: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 4749,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/haryana/tables.csv",
+   "description": "Every Haryana figure with its source.",
+   "format": "CSV",
+   "bytes": 1750,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/hyderabad/constituencies.csv",
+   "description": "The five Old City constituencies, with names left off the draft and summoned to hearings",
+   "format": "CSV",
+   "bytes": 652,
+   "columns": [
+    "constituency",
+    "electors",
+    "struck_off",
+    "pct_struck_off",
+    "summoned_to_hearing",
+    "pct_summoned",
+    "permanently_shifted",
+    "untraceable_absent",
+    "death",
+    "already_enrolled",
+    "women_pct_struck_off",
+    "men_pct_struck_off",
+    "margin_2023"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/hyderabad/impact.json",
+   "description": "The Old City of Hyderabad: estimates of how the names left off bear on its seats",
+   "format": "JSON",
+   "bytes": 1143,
+   "keys": [
+    "as_of",
+    "seats"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/hyderabad/parts.csv",
+   "description": "Every polling part of the five Old City constituencies",
+   "format": "CSV",
+   "bytes": 99147,
+   "columns": [
+    "ac",
+    "part",
+    "locality",
+    "electors",
+    "deleted",
+    "rate",
+    "muslim_share_roll",
+    "muslim_rate",
+    "hindu_rate",
+    "untraceable_share_of_deleted",
+    "hearing_rate"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/hyderabad/parts.json",
+   "description": "Every polling part of the five Old City constituencies. The same table as data/hyderabad/parts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 107234,
+   "keys": [
+    "fields",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/hyderabad/summary.json",
+   "description": "Telangana and the Old City of Hyderabad: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 12319,
+   "keys": [
+    "totals",
+    "bands",
+    "reasons",
+    "rules",
+    "acs"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/hyderabad/telangana.json",
+   "description": "Telangana: the draft roll by district, against the Old City of Hyderabad",
+   "format": "JSON",
+   "bytes": 8847,
+   "keys": [
+    "state",
+    "hyderabad",
+    "rest_of_state",
+    "old_city",
+    "other_hyderabad",
+    "districts",
+    "seats",
+    "source",
+    "hearings_press"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/ac_change.csv",
+   "description": "Every constituency of Tamil Nadu, Kerala, West Bengal and Uttarakhand in one table",
+   "format": "CSV",
+   "bytes": 60131,
+   "columns": [
+    "state",
+    "ac",
+    "constituency",
+    "district",
+    "earlier_roll",
+    "left_off_draft",
+    "draft",
+    "added_after_draft",
+    "removed_after_draft",
+    "later_roll",
+    "change_draft_to_later",
+    "change_earlier_to_later",
+    "change_earlier_to_later_per_100"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/ac_change.json",
+   "description": "Every constituency of Tamil Nadu, Kerala, West Bengal and Uttarakhand in one table. The same table as data/india/ac_change.csv, as JSON",
+   "format": "JSON",
+   "bytes": 85569,
+   "keys": [
+    "cols",
+    "rows",
+    "states"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/ac_finder.json",
+   "description": "Every constituency the constituency finder opens, with its state and page",
+   "format": "JSON",
+   "bytes": 147378,
+   "keys": [
+    "cols",
+    "places",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/border.csv",
+   "description": "Districts on the international border against the interior",
+   "format": "CSV",
+   "bytes": 5098,
+   "columns": [
+    "state",
+    "measure",
+    "part",
+    "districts",
+    "base",
+    "count",
+    "rate",
+    "dead_share",
+    "shifted_absent_share",
+    "enrolled_elsewhere_share"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/border.json",
+   "description": "Districts on the international border against the interior. The same table as data/india/border.csv, as JSON",
+   "format": "JSON",
+   "bytes": 7169,
+   "keys": [
+    "source",
+    "higher",
+    "states"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/brief.json",
+   "description": "The SIR in brief: the rules and rights, each with its source",
+   "format": "JSON",
+   "bytes": 42069,
+   "keys": [
+    "as_of",
+    "groups",
+    "rights",
+    "dropped"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/cases.json",
+   "description": "The case studies of single constituencies and places, with their sources",
+   "format": "JSON",
+   "bytes": 61101,
+   "keys": [
+    "cases"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/cities.csv",
+   "description": "Large cities set against their suburbs and the rest of their state",
+   "format": "CSV",
+   "bytes": 3536,
+   "columns": [
+    "city",
+    "state",
+    "measure",
+    "part",
+    "districts",
+    "base_roll",
+    "base_roll_is",
+    "names_left_off_or_fall",
+    "per_100",
+    "state_per_100",
+    "note"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/cities.json",
+   "description": "Large cities set against their suburbs and the rest of their state. The same table as data/india/cities.csv, as JSON",
+   "format": "JSON",
+   "bytes": 8486,
+   "keys": [
+    "summary",
+    "cities"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/disputes.csv",
+   "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
+   "format": "CSV",
+   "bytes": 191846,
+   "columns": [
+    "section",
+    "date",
+    "state",
+    "places",
+    "court",
+    "parties_and_bodies",
+    "issues",
+    "kind",
+    "source",
+    "what_happened",
+    "commission_reply",
+    "url"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/disputes.json",
+   "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
+   "format": "JSON",
+   "bytes": 321900,
+   "keys": [
+    "sections",
+    "by_state",
+    "by_month",
+    "unconfirmed",
+    "counts"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/disputes_counts.json",
+   "description": "Counts of the protests and disputes by state and month",
+   "format": "JSON",
+   "bytes": 495,
+   "keys": [
+    "counts",
+    "by_state"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/district_2011_parent.csv",
+   "description": "district 2011 parent",
+   "format": "CSV",
+   "bytes": 32047,
+   "columns": [
+    "state",
+    "district",
+    "district_2011",
+    "relation",
+    "note"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/events.json",
+   "description": "Jan Sunwais, marches, protests and press conferences about the revision, with dates and sources",
+   "format": "JSON",
+   "bytes": 41664,
+   "keys": [
+    "checked",
+    "scope",
+    "counts",
+    "events",
+    "dropped"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors.csv",
+   "description": "District circumstances from NFHS-5 beside the rate, inside each state",
+   "format": "CSV",
+   "bytes": 49502,
+   "columns": [
+    "state",
+    "measure",
+    "nfhs5_district",
+    "districts_today",
+    "roll_before",
+    "count",
+    "per_100",
+    "women_literate",
+    "women_10yr",
+    "married_18",
+    "clean_fuel",
+    "sanitation",
+    "death_reg",
+    "sex_ratio"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors.json",
+   "description": "District circumstances from NFHS-5 beside the rate, inside each state. The same table as data/india/factors.csv, as JSON",
+   "format": "JSON",
+   "bytes": 227181,
+   "keys": [
+    "summary",
+    "factors",
+    "states",
+    "census",
+    "income",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/final_rolls.csv",
+   "description": "Each final roll set against the draft, with names added and deleted after it",
+   "format": "CSV",
+   "bytes": 4446,
+   "columns": [
+    "state",
+    "phase",
+    "roll_before",
+    "left_off_draft",
+    "final_date",
+    "added_after_draft",
+    "removed_after_draft",
+    "withheld",
+    "final_roll",
+    "final_less_draft",
+    "net_fall",
+    "net_fall_per_100",
+    "reconciles",
+    "source"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/help.json",
+   "description": "What to do when a name is left off the roll: remedies, forms and organisations, with sources",
+   "format": "JSON",
+   "bytes": 194131,
+   "keys": [
+    "remedies",
+    "orgs",
+    "org_states",
+    "tr",
+    "counts"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/help_counts.json",
+   "description": "Counts behind the page on what to do when a name is left off",
+   "format": "JSON",
+   "bytes": 251,
+   "keys": [
+    "counts",
+    "orgs_by_state"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/lok_sabha_electors.csv",
+   "description": "Electors in every Lok Sabha election since 1984-85, with the population of voting age",
+   "format": "CSV",
+   "bytes": 2734,
+   "columns": [
+    "election",
+    "electors",
+    "electors_crore",
+    "voting_age",
+    "pop_voting_age",
+    "pop_voting_age_crore",
+    "electors_per_100_of_voting_age",
+    "note",
+    "electors_source",
+    "population_source"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/lok_sabha_electors.json",
+   "description": "Electors in every Lok Sabha election since 1984-85, with the population of voting age. The same table as data/india/lok_sabha_electors.csv, as JSON",
+   "format": "JSON",
+   "bytes": 2746,
+   "keys": [
+    "source",
+    "url",
+    "pop_source",
+    "pop_url",
+    "rows"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/margins.json",
+   "description": "Names left off against the 2024 Lok Sabha winning margins, constituency by constituency",
+   "format": "JSON",
+   "bytes": 49273,
+   "keys": [
+    "source",
+    "assembly",
+    "removed",
+    "fall",
+    "ls_seat",
+    "even",
+    "even_test",
+    "spread",
+    "spread_test",
+    "odisha_six",
+    "spread_total",
+    "even_total",
+    "ls_close"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/margins_ls2024.csv",
+   "description": "The names left off each Lok Sabha seat against its 2024 winning margin",
+   "format": "CSV",
+   "bytes": 39110,
+   "columns": [
+    "state",
+    "pc",
+    "lok_sabha_seat",
+    "count",
+    "what_is_counted",
+    "margin_2024",
+    "winner_party_2024",
+    "runner_up_party_2024",
+    "count_exceeds_margin",
+    "source"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/notices.csv",
+   "description": "Electors kept on a draft roll but sent a notice, by state",
+   "format": "CSV",
+   "bytes": 6995,
+   "columns": [
+    "state",
+    "phase",
+    "draft",
+    "notices",
+    "how",
+    "per_100",
+    "kind",
+    "rounded",
+    "date",
+    "no_mapping",
+    "discrepancy",
+    "deleted_after_notice",
+    "source_url",
+    "lists_source"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/notices.json",
+   "description": "Electors kept on a draft roll but sent a notice, by state. The same table as data/india/notices.csv, as JSON",
+   "format": "JSON",
+   "bytes": 15300,
+   "keys": [
+    "states",
+    "with_total",
+    "primary",
+    "notices_total",
+    "draft_total",
+    "per_100"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/nrc.json",
+   "description": "The National Register of Citizens, as set beside the revision, with sources",
+   "format": "JSON",
+   "bytes": 58647,
+   "keys": [
+    "sections",
+    "figures",
+    "nationwide",
+    "reported",
+    "unsettled",
+    "checked"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/panels.json",
+   "description": "Panels quoted on the reading page, with their figures",
+   "format": "JSON",
+   "bytes": 187900,
+   "keys": [
+    "checked",
+    "counts",
+    "people",
+    "dropped"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/process.json",
+   "description": "How the revision was run: the rules as they changed, and each state's dates",
+   "format": "JSON",
+   "bytes": 138102,
+   "keys": [
+    "as_of",
+    "timeline",
+    "schedules",
+    "notes",
+    "gaps",
+    "reported",
+    "forms",
+    "claims_note",
+    "claims_src",
+    "burdens",
+    "inside",
+    "reported_dates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/process_schedules.csv",
+   "description": "Each state's schedule as set and as moved",
+   "format": "CSV",
+   "bytes": 12709,
+   "columns": [
+    "state",
+    "phase",
+    "schedule",
+    "as_published",
+    "enumeration_from",
+    "enumeration_to",
+    "draft_roll",
+    "claims_from",
+    "claims_to",
+    "notices_from",
+    "notices_to",
+    "final_roll",
+    "document_link"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/process_timeline.csv",
+   "description": "Every order, letter, court order and judgment that changed how the revision was run",
+   "format": "CSV",
+   "bytes": 22906,
+   "columns": [
+    "date",
+    "who",
+    "phase",
+    "title",
+    "what_changed",
+    "documents",
+    "document_links"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/reads.json",
+   "description": "Further reading and viewing on the revision, with outlets, dates and summaries",
+   "format": "JSON",
+   "bytes": 77122,
+   "keys": [
+    "groups",
+    "items",
+    "dropped",
+    "counts"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/reserved.csv",
+   "description": "Seats reserved for Scheduled Castes and Scheduled Tribes against general seats",
+   "format": "CSV",
+   "bytes": 1201,
+   "columns": [
+    "state",
+    "measure",
+    "category",
+    "seats",
+    "rate",
+    "mean_gap_vs_general_seats_same_district",
+    "seats_above_their_district",
+    "seats_compared"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/reserved.json",
+   "description": "Seats reserved for Scheduled Castes and Scheduled Tribes against general seats. The same table as data/india/reserved.csv, as JSON",
+   "format": "JSON",
+   "bytes": 28480,
+   "keys": [
+    "states"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/rti.csv",
+   "description": "Every application under the Right to Information Act about the revision whose reply was published or reported, with what was asked and what came back",
+   "format": "CSV",
+   "bytes": 14592,
+   "columns": [
+    "state",
+    "authority",
+    "applicant",
+    "filed",
+    "replied",
+    "days",
+    "asked",
+    "outcome",
+    "answer",
+    "rti_section",
+    "kind",
+    "source",
+    "published",
+    "url"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/rti.json",
+   "description": "Every application under the Right to Information Act about the revision whose reply was published or reported, with what was asked and what came back. The same table as data/india/rti.csv, as JSON",
+   "format": "JSON",
+   "bytes": 29421,
+   "keys": [
+    "items",
+    "other",
+    "by_outcome",
+    "by_authority",
+    "unconfirmed",
+    "counts"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/states.csv",
+   "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave",
+   "format": "CSV",
+   "bytes": 16886,
+   "columns": [
+    "state",
+    "phase",
+    "draft_date",
+    "electors_before",
+    "removed",
+    "per_100",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "unsplit",
+    "split",
+    "figures",
+    "source",
+    "source_url",
+    "final_date",
+    "added_after_draft",
+    "removed_after_draft",
+    "withheld",
+    "electors_final",
+    "net_after_draft",
+    "net_fall",
+    "net_fall_per_100",
+    "made_up_pct",
+    "note",
+    "roll_adult_pct",
+    "draft_adult_pct",
+    "removed_pct_votes24",
+    "women_share_removed",
+    "women_share_roll",
+    "sex_split_quality",
+    "income_pc",
+    "mpce_rural",
+    "mpce_urban",
+    "urban_pct",
+    "literacy",
+    "female_literacy",
+    "muslim_pct",
+    "sc_pct",
+    "st_pct",
+    "sex_ratio",
+    "out_migration",
+    "in_migration",
+    "intl_border"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/states.json",
+   "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave. The same table as data/india/states.csv, as JSON",
+   "format": "JSON",
+   "bytes": 88073,
+   "keys": [
+    "as_of",
+    "adults",
+    "tiles",
+    "characteristics",
+    "robustness_2011",
+    "correlations",
+    "border",
+    "gender",
+    "reasons",
+    "total",
+    "by_phase",
+    "pending",
+    "after_draft",
+    "final",
+    "states"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/urban.csv",
+   "description": "Rural, mixed and urban districts inside each state",
+   "format": "CSV",
+   "bytes": 23382,
+   "columns": [
+    "state",
+    "measure",
+    "district_2011",
+    "census_code",
+    "districts_today",
+    "urban_pct_2011",
+    "band",
+    "roll_before",
+    "count",
+    "per_100"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/urban.json",
+   "description": "Rural, mixed and urban districts inside each state. The same table as data/india/urban.csv, as JSON",
+   "format": "JSON",
+   "bytes": 84576,
+   "keys": [
+    "summary",
+    "bands",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/women.csv",
+   "description": "Every count by sex the site holds, state and district",
+   "format": "CSV",
+   "bytes": 10516,
+   "columns": [
+    "level",
+    "state",
+    "district",
+    "measure",
+    "women_share_of_roll",
+    "women_share_of_count",
+    "gap_points",
+    "women_left_off_per_100_women",
+    "men_left_off_per_100_men",
+    "quality",
+    "source_url"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/women.json",
+   "description": "Every count by sex the site holds, state and district. The same table as data/india/women.csv, as JSON",
+   "format": "JSON",
+   "bytes": 16626,
+   "keys": [
+    "summary",
+    "states",
+    "districts",
+    "after",
+    "after_added_only",
+    "bihar"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/women_removed.csv",
+   "description": "Women's share of the names left off against their share of the roll",
+   "format": "CSV",
+   "bytes": 3389,
+   "columns": [
+    "state",
+    "phase",
+    "women_removed",
+    "men_removed",
+    "women_pct_of_removed",
+    "women_pct_of_roll",
+    "gap_points",
+    "quality",
+    "note",
+    "source"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/andhra-pradesh.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Andhra Pradesh",
+   "format": "JSON",
+   "bytes": 5390,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/assam.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Assam",
+   "format": "JSON",
+   "bytes": 10489,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/bihar.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Bihar",
+   "format": "JSON",
+   "bytes": 11572,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/chhattisgarh.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Chhattisgarh",
+   "format": "JSON",
+   "bytes": 9199,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/delhi.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Delhi",
+   "format": "JSON",
+   "bytes": 4431,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/gujarat.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Gujarat",
+   "format": "JSON",
+   "bytes": 10258,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/karnataka.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Karnataka",
+   "format": "JSON",
+   "bytes": 9671,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/kerala.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Kerala",
+   "format": "JSON",
+   "bytes": 5209,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/maharashtra.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Maharashtra",
+   "format": "JSON",
+   "bytes": 11190,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/manipur.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Manipur",
+   "format": "JSON",
+   "bytes": 3963,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/meghalaya.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Meghalaya",
+   "format": "JSON",
+   "bytes": 4674,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/mizoram.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Mizoram",
+   "format": "JSON",
+   "bytes": 3718,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/odisha.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Odisha",
+   "format": "JSON",
+   "bytes": 9311,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/rajasthan.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Rajasthan",
+   "format": "JSON",
+   "bytes": 10471,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/tamil-nadu.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Tamil Nadu",
+   "format": "JSON",
+   "bytes": 10311,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/telangana.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Telangana",
+   "format": "JSON",
+   "bytes": 10045,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/uttar-pradesh.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Uttar Pradesh",
+   "format": "JSON",
+   "bytes": 21962,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/uttarakhand.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for Uttarakhand",
+   "format": "JSON",
+   "bytes": 5085,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/factors/west-bengal.json",
+   "description": "District circumstances from NFHS-5 beside the rate, for West Bengal",
+   "format": "JSON",
+   "bytes": 7042,
+   "keys": [
+    "factors",
+    "states",
+    "units"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/jharkhand/summary.json",
+   "description": "Jharkhand: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 4076,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/jharkhand/tables.csv",
+   "description": "Every Jharkhand figure with its source.",
+   "format": "CSV",
+   "bytes": 1227,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/karnataka/districts.csv",
+   "description": "Every Karnataka election district, with names left off by reason",
+   "format": "CSV",
+   "bytes": 3016,
+   "columns": [
+    "district",
+    "roll_before",
+    "removed",
+    "removed_per_100",
+    "absent",
+    "shifted",
+    "dead",
+    "already_enrolled",
+    "other",
+    "draft_roll",
+    "roll_9_oct_2026",
+    "net_fall_per_100"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/karnataka/districts.json",
+   "description": "Every Karnataka election district, with names left off by reason. The same table as data/karnataka/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 13019,
+   "rows": 34,
+   "row_keys": [
+    "district",
+    "bengaluru",
+    "before",
+    "removed",
+    "absent",
+    "shifted",
+    "dead",
+    "duplicate",
+    "other",
+    "per_100",
+    "shares",
+    "draft",
+    "draft_women_pct",
+    "sep",
+    "sep_women_pct",
+    "added_sep",
+    "net_per_100"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/karnataka/summary.json",
+   "description": "Karnataka: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 1544,
+   "keys": [
+    "before",
+    "removed",
+    "draft",
+    "sep",
+    "per_100",
+    "reasons",
+    "shares",
+    "added_sep",
+    "made_up_pct",
+    "net_fall",
+    "net_per_100",
+    "women_draft_pct",
+    "women_sep_pct",
+    "districts",
+    "top",
+    "low",
+    "bengaluru",
+    "rest",
+    "rho_rate_shifted",
+    "dead_max"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/kerala/constituencies.csv",
+   "description": "Every Kerala constituency, with the fall in the roll from January 2025 by sex",
+   "format": "CSV",
+   "bytes": 19327,
+   "columns": [
+    "ac",
+    "name",
+    "district",
+    "roll_jan_2025",
+    "draft_roll_dec_2025",
+    "final_roll_feb_2026",
+    "roll_mar_2026",
+    "fall_to_draft",
+    "fall_to_draft_per_100",
+    "fall_to_election_roll",
+    "fall_to_election_roll_per_100",
+    "women_pct_2025",
+    "women_pct_of_fall_to_draft",
+    "winner_2026",
+    "runner_up_2026",
+    "margin_2026",
+    "votes_2026",
+    "turnout_2026",
+    "fall_over_margin",
+    "fall_at_turnout_over_margin"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/kerala/constituencies.json",
+   "description": "Every Kerala constituency, with the fall in the roll from January 2025 by sex. The same table as data/kerala/constituencies.csv, as JSON",
+   "format": "JSON",
+   "bytes": 63431,
+   "rows": 140,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "roll_2025",
+    "draft",
+    "final",
+    "election",
+    "fall_draft",
+    "fall",
+    "draft_per_100",
+    "per_100",
+    "restored_pct",
+    "women_2025_pct",
+    "women_fall_pct",
+    "winner",
+    "runner_up",
+    "margin",
+    "votes",
+    "turnout",
+    "fall_voters",
+    "draft_over_margin",
+    "over_margin",
+    "could_change",
+    "vs_district"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/kerala/districts.csv",
+   "description": "Every Kerala district",
+   "format": "CSV",
+   "bytes": 1218,
+   "columns": [
+    "district",
+    "acs",
+    "roll_jan_2025",
+    "draft_roll_dec_2025",
+    "final_roll_feb_2026",
+    "roll_mar_2026",
+    "fall_to_draft_per_100",
+    "fall_to_election_roll_per_100",
+    "women_pct_2025",
+    "women_pct_of_fall_to_draft"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/kerala/districts.json",
+   "description": "Every Kerala district. The same table as data/kerala/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 3641,
+   "rows": 14,
+   "row_keys": [
+    "district",
+    "acs",
+    "roll_2025",
+    "draft",
+    "final",
+    "election",
+    "women_2025",
+    "women_draft",
+    "draft_per_100",
+    "per_100",
+    "restored_pct",
+    "women_2025_pct",
+    "women_fall_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/kerala/summary.json",
+   "description": "Kerala: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 2899,
+   "keys": [
+    "roll_2025",
+    "frozen",
+    "press_removed",
+    "draft",
+    "final",
+    "election",
+    "fall_draft",
+    "draft_per_100",
+    "added_final",
+    "added_election",
+    "restored_pct",
+    "fall",
+    "per_100",
+    "women_2025_pct",
+    "women_fall_pct",
+    "women_added_pct",
+    "districts_women_over",
+    "acs_women_over",
+    "acs",
+    "districts",
+    "rate_min",
+    "rate_min_v",
+    "rate_max",
+    "rate_max_v",
+    "draft_over_margin",
+    "over_margin",
+    "could_change",
+    "votes",
+    "turnout",
+    "seats_2026",
+    "winners",
+    "rho_rate_margin",
+    "top_districts",
+    "low_districts"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/lakshadweep/summary.json",
+   "description": "Lakshadweep: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 5447,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/lakshadweep/tables.csv",
+   "description": "Every Lakshadweep figure with its source.",
+   "format": "CSV",
+   "bytes": 4025,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/madhyapradesh/summary.json",
+   "description": "Madhya Pradesh: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 6632,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/madhyapradesh/tables.csv",
+   "description": "Every Madhya Pradesh figure with its source.",
+   "format": "CSV",
+   "bytes": 4446,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/maharashtra/constituencies.csv",
+   "description": "constituencies",
+   "format": "CSV",
+   "bytes": 40528,
+   "columns": [
+    "ac",
+    "constituency",
+    "district",
+    "roll_before",
+    "draft_roll_31_aug_2026",
+    "left_off",
+    "left_off_per_100",
+    "dead",
+    "shifted",
+    "absent",
+    "enrolled_elsewhere",
+    "other",
+    "draft_men",
+    "draft_women",
+    "women_pct_of_draft",
+    "winner_2024",
+    "runner_up_2024",
+    "margin_2024",
+    "turnout_2024",
+    "left_off_over_margin",
+    "left_off_at_turnout_over_margin",
+    "per_100_less_district"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/maharashtra/constituencies.json",
+   "description": "Maharashtra: one row for each assembly constituency",
+   "format": "JSON",
+   "bytes": 146913,
+   "rows": 288,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "city",
+    "before",
+    "left_off",
+    "draft",
+    "per_100",
+    "dead",
+    "shifted",
+    "absent",
+    "duplicate",
+    "other",
+    "shifted_absent_pct",
+    "dead_pct",
+    "draft_men",
+    "draft_women",
+    "women_draft_pct",
+    "winner_party",
+    "runner_up_party",
+    "margin",
+    "electors_2024",
+    "turnout_2024",
+    "over_margin",
+    "at_turnout",
+    "turnout_over_margin",
+    "vs_district"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/maharashtra/districts.csv",
+   "description": "Every Maharashtra district, with names left off by reason and notices",
+   "format": "CSV",
+   "bytes": 4643,
+   "columns": [
+    "district",
+    "roll_before",
+    "draft_roll_31_aug_2026",
+    "left_off",
+    "left_off_per_100",
+    "draft_men",
+    "draft_women",
+    "draft_third_gender",
+    "women_pct_of_draft",
+    "dead",
+    "shifted",
+    "absent",
+    "enrolled_elsewhere",
+    "other",
+    "notices_discrepancy",
+    "notices_no_mapping",
+    "notices",
+    "notices_per_100_draft"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/maharashtra/districts.json",
+   "description": "Every Maharashtra district, with names left off by reason and notices. The same table as data/maharashtra/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 13533,
+   "rows": 36,
+   "row_keys": [
+    "sr",
+    "district",
+    "now",
+    "city",
+    "before",
+    "draft",
+    "left_off",
+    "per_100",
+    "men",
+    "women",
+    "third",
+    "women_draft_pct",
+    "dead",
+    "shifted",
+    "absent",
+    "duplicate",
+    "other",
+    "discrepancy",
+    "no_mapping",
+    "notices",
+    "notices_per_100",
+    "shifted_absent_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/maharashtra/summary.json",
+   "description": "Maharashtra: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 11228,
+   "keys": [
+    "before",
+    "draft",
+    "left_off",
+    "per_100",
+    "draft_men",
+    "draft_women",
+    "draft_third",
+    "women_draft_pct",
+    "districts",
+    "acs",
+    "top",
+    "low",
+    "most_names",
+    "over_30",
+    "under_15",
+    "above_state",
+    "city_names",
+    "city",
+    "rest",
+    "women_low",
+    "women_high",
+    "reasons",
+    "reason_shares",
+    "reasons_url",
+    "ac_url",
+    "notices",
+    "discrepancy",
+    "no_mapping",
+    "notices_per_100",
+    "acs_n",
+    "ac_max",
+    "ac_max_v",
+    "ac_min",
+    "ac_min_v",
+    "top_acs",
+    "acs_over_30",
+    "acs_under_10",
+    "over_margin",
+    "turnout_over_margin",
+    "winners",
+    "rho_notices_left",
+    "draft_date",
+    "claims_to_note",
+    "final_due_note",
+    "claims_to",
+    "notices_to",
+    "final_due",
+    "final_due_source",
+    "top38"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/maharashtra/top38.csv",
+   "description": "The 38 constituencies the CEO listed with a high share of forms not collected",
+   "format": "CSV",
+   "bytes": 1687,
+   "columns": [
+    "ac",
+    "constituency",
+    "district",
+    "total_electors",
+    "forms_not_collected",
+    "not_collected_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/manipur/constituencies.json",
+   "description": "Manipur: one row for each assembly constituency",
+   "format": "JSON",
+   "bytes": 14811,
+   "rows": 60,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "before",
+    "final",
+    "men",
+    "women",
+    "third",
+    "fall",
+    "winner",
+    "runner_up",
+    "margin",
+    "turnout"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/manipur/districts.json",
+   "description": "Manipur: one row for each district",
+   "format": "JSON",
+   "bytes": 2364,
+   "rows": 16,
+   "row_keys": [
+    "district",
+    "acs",
+    "before",
+    "final",
+    "men",
+    "women",
+    "third",
+    "fall"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/manipur/summary.json",
+   "description": "Manipur: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 17803,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/manipur/tables.csv",
+   "description": "Every Manipur figure with its source.",
+   "format": "CSV",
+   "bytes": 15369,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/meghalaya/constituencies.json",
+   "description": "Meghalaya: one row for each assembly constituency",
+   "format": "JSON",
+   "bytes": 16602,
+   "rows": 60,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "before",
+    "removed",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "draft",
+    "winner",
+    "runner_up",
+    "margin",
+    "turnout"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/meghalaya/districts.json",
+   "description": "Meghalaya: one row for each district",
+   "format": "JSON",
+   "bytes": 2158,
+   "rows": 12,
+   "row_keys": [
+    "district",
+    "acs",
+    "before",
+    "removed",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "draft"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/meghalaya/summary.json",
+   "description": "Meghalaya: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 18896,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/meghalaya/tables.csv",
+   "description": "Every Meghalaya figure with its source.",
+   "format": "CSV",
+   "bytes": 20586,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/mizoram/districts.json",
+   "description": "Mizoram: one row for each district",
+   "format": "JSON",
+   "bytes": 1270,
+   "rows": 11,
+   "row_keys": [
+    "district",
+    "draft",
+    "final",
+    "men",
+    "women",
+    "third"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/mizoram/summary.json",
+   "description": "Mizoram: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 7252,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/mizoram/tables.csv",
+   "description": "Every Mizoram figure with its source.",
+   "format": "CSV",
+   "bytes": 6332,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/nagaland/summary.json",
+   "description": "Nagaland: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 2628,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/nagaland/tables.csv",
+   "description": "Every Nagaland figure with its source.",
+   "format": "CSV",
+   "bytes": 1208,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/odisha/constituencies.json",
+   "description": "Odisha: one row for each assembly constituency",
+   "format": "JSON",
+   "bytes": 32476,
+   "rows": 147,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "draft",
+    "added",
+    "removed",
+    "final",
+    "winner",
+    "runner_up",
+    "margin",
+    "turnout"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/odisha/districts.json",
+   "description": "Odisha: one row for each district",
+   "format": "JSON",
+   "bytes": 4183,
+   "rows": 30,
+   "row_keys": [
+    "district",
+    "acs",
+    "draft",
+    "added",
+    "removed",
+    "final",
+    "before"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/odisha/summary.json",
+   "description": "Odisha: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 43395,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/odisha/tables.csv",
+   "description": "Every Odisha figure with its source.",
+   "format": "CSV",
+   "bytes": 49669,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/puducherry/summary.json",
+   "description": "Puducherry: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 9376,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/puducherry/tables.csv",
+   "description": "Every Puducherry figure with its source.",
+   "format": "CSV",
+   "bytes": 9175,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/punjab/summary.json",
+   "description": "Punjab: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 8597,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/punjab/tables.csv",
+   "description": "Every Punjab figure with its source.",
+   "format": "CSV",
+   "bytes": 4632,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/rajasthan/constituencies.csv",
+   "description": "Every Rajasthan constituency, with the change in the roll from 2023",
+   "format": "CSV",
+   "bytes": 24078,
+   "columns": [
+    "ac",
+    "name",
+    "district",
+    "general_electors_2023",
+    "final_roll_mar_2026",
+    "fall_in_roll",
+    "fall_per_100",
+    "women_pct_2023",
+    "women_pct_2026",
+    "women_pct_change",
+    "winner_2023",
+    "runner_up_2023",
+    "margin_2023",
+    "votes_2023",
+    "turnout_2023",
+    "fall_over_margin",
+    "fall_at_turnout_over_margin",
+    "revised_separately"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/rajasthan/constituencies.json",
+   "description": "Every Rajasthan constituency, with the change in the roll from 2023. The same table as data/rajasthan/constituencies.csv, as JSON",
+   "format": "JSON",
+   "bytes": 97251,
+   "rows": 200,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "roll_2023",
+    "final",
+    "fall",
+    "per_100",
+    "women_2023_pct",
+    "women_2026_pct",
+    "women_change",
+    "winner",
+    "runner_up",
+    "margin",
+    "votes",
+    "turnout",
+    "fall_voters",
+    "separate",
+    "over_margin",
+    "could_change",
+    "vs_district",
+    "press"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/rajasthan/districts.csv",
+   "description": "Every Rajasthan district",
+   "format": "CSV",
+   "bytes": 2690,
+   "columns": [
+    "district",
+    "acs",
+    "general_electors_2023",
+    "final_roll_mar_2026",
+    "fall_in_roll",
+    "fall_per_100",
+    "women_pct_2023",
+    "women_pct_2026",
+    "women_pct_change"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/rajasthan/districts.json",
+   "description": "Every Rajasthan district. The same table as data/rajasthan/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 6951,
+   "rows": 41,
+   "row_keys": [
+    "district",
+    "acs",
+    "roll_2023",
+    "final",
+    "fall",
+    "per_100",
+    "women_2023_pct",
+    "women_2026_pct",
+    "women_change"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/rajasthan/press_constituencies.csv",
+   "description": "press constituencies",
+   "format": "CSV",
+   "bytes": 9486,
+   "columns": [
+    "ac",
+    "name",
+    "district",
+    "roll_before_27_oct_2025",
+    "left_off_draft",
+    "left_off_per_100",
+    "draft_16_dec_2025",
+    "dead",
+    "shifted",
+    "absent",
+    "enrolled_elsewhere",
+    "other",
+    "no_mapping",
+    "adds_up_as_printed",
+    "newspaper"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/rajasthan/press_districts.csv",
+   "description": "press districts",
+   "format": "CSV",
+   "bytes": 4752,
+   "columns": [
+    "district",
+    "roll_before_27_oct_2025",
+    "left_off_draft",
+    "left_off_per_100",
+    "draft_16_dec_2025",
+    "dead",
+    "shifted",
+    "absent",
+    "enrolled_elsewhere",
+    "other",
+    "no_mapping",
+    "newspaper",
+    "source"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/rajasthan/summary.json",
+   "description": "Rajasthan: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 13896,
+   "keys": [
+    "scope_state",
+    "before",
+    "forms",
+    "draft",
+    "left_off",
+    "left_per_100",
+    "reasons_lakh",
+    "reasons_lakh_sum",
+    "added",
+    "deleted_after",
+    "final",
+    "made_up_pct",
+    "removed_by_final",
+    "draft_women_pct",
+    "final_women_pct",
+    "added_women_pct",
+    "deleted_women_pct",
+    "service_final",
+    "anta_draft",
+    "roll_2023",
+    "final_200",
+    "fall",
+    "per_100",
+    "women_2023_pct",
+    "women_2026_pct",
+    "acs",
+    "districts",
+    "acs_grew",
+    "acs_women_fell",
+    "rate_min",
+    "rate_min_v",
+    "rate_max",
+    "rate_max_v",
+    "over_margin",
+    "could_change",
+    "seats_2023",
+    "winners",
+    "rho_rate_margin",
+    "top_districts",
+    "low_districts",
+    "press"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/sikkim/summary.json",
+   "description": "Sikkim: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 3958,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/sikkim/tables.csv",
+   "description": "Every Sikkim figure with its source.",
+   "format": "CSV",
+   "bytes": 2707,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/tamilnadu/constituencies.csv",
+   "description": "Every Tamil Nadu constituency, with names left off by reason and the 2021 and 2026 results",
+   "format": "CSV",
+   "bytes": 44131,
+   "columns": [
+    "ac",
+    "name",
+    "district",
+    "before",
+    "removed",
+    "dead",
+    "shifted_absent",
+    "multiple",
+    "per_100",
+    "draft",
+    "final",
+    "net_fall",
+    "net_per_100",
+    "winner",
+    "runner_up",
+    "margin",
+    "votes",
+    "turnout",
+    "removed_voters",
+    "over_margin",
+    "net_over_margin",
+    "could_change",
+    "winner_2021",
+    "margin_2021",
+    "election_roll",
+    "jan2025",
+    "fall_jan",
+    "fall_jan_women_pct",
+    "jan2025_women_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/tamilnadu/constituencies.json",
+   "description": "Every Tamil Nadu constituency, with names left off by reason and the 2021 and 2026 results. The same table as data/tamilnadu/constituencies.csv, as JSON",
+   "format": "JSON",
+   "bytes": 180541,
+   "rows": 234,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "before",
+    "removed",
+    "dead",
+    "shifted_absent",
+    "multiple",
+    "per_100",
+    "draft",
+    "draft_women",
+    "final",
+    "final_women",
+    "added_net",
+    "net_fall",
+    "net_per_100",
+    "winner",
+    "runner_up",
+    "margin",
+    "votes",
+    "turnout",
+    "removed_voters",
+    "winner_2021",
+    "margin_2021",
+    "electors_2021",
+    "election_roll",
+    "after_final",
+    "reserved",
+    "jan2025",
+    "jan2025_women_pct",
+    "fall_jan",
+    "fall_jan_women",
+    "fall_jan_men",
+    "fall_jan_women_pct",
+    "women_fall_gap",
+    "over_margin",
+    "net_over_margin",
+    "could_change",
+    "changed_hands",
+    "vs_district"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/tamilnadu/districts.csv",
+   "description": "Every Tamil Nadu district",
+   "format": "CSV",
+   "bytes": 2680,
+   "columns": [
+    "district",
+    "acs",
+    "before",
+    "removed",
+    "dead",
+    "shifted_absent",
+    "multiple",
+    "per_100",
+    "final",
+    "net_per_100"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/tamilnadu/districts.json",
+   "description": "Every Tamil Nadu district. The same table as data/tamilnadu/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 8368,
+   "rows": 38,
+   "row_keys": [
+    "district",
+    "acs",
+    "before",
+    "removed",
+    "dead",
+    "shifted_absent",
+    "multiple",
+    "final",
+    "per_100",
+    "net_per_100",
+    "shifted_share",
+    "dead_share"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/tamilnadu/summary.json",
+   "description": "Tamil Nadu: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 3231,
+   "keys": [
+    "before",
+    "removed",
+    "draft",
+    "final",
+    "per_100",
+    "dead",
+    "shifted_absent",
+    "multiple",
+    "shares",
+    "added_net",
+    "net_fall",
+    "net_per_100",
+    "made_up_pct",
+    "women_draft_pct",
+    "women_final_pct",
+    "acs",
+    "districts",
+    "rate_min",
+    "rate_min_v",
+    "rate_max",
+    "rate_max_v",
+    "over_margin",
+    "net_over_margin",
+    "could_change",
+    "changed_hands",
+    "votes",
+    "turnout",
+    "turnout_on_final",
+    "election_roll",
+    "after_final",
+    "claims",
+    "jan2025",
+    "jan2025_women_pct",
+    "fall_jan",
+    "fall_jan_women",
+    "fall_jan_men",
+    "fall_jan_women_pct",
+    "acs_women_fall_over",
+    "acs_women_fall_over_5",
+    "women_fall_max",
+    "women_fall_max_pct",
+    "fall_jan_per_100_women",
+    "fall_jan_per_100_men",
+    "electors_2021",
+    "seats_2026",
+    "winners",
+    "rho_rate_shifted",
+    "rho_rate_margin",
+    "chennai",
+    "chennai_share_of_removed",
+    "chennai_share_of_roll",
+    "top_districts"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/tripura/summary.json",
+   "description": "Tripura: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 1499,
+   "keys": [
+    "state",
+    "slug",
+    "ut",
+    "revision",
+    "dates",
+    "figures",
+    "reasons_complete",
+    "tables",
+    "sources",
+    "notes",
+    "cannot_show",
+    "id",
+    "rates"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/tripura/tables.csv",
+   "description": "Every Tripura figure with its source.",
+   "format": "CSV",
+   "bytes": 133,
+   "columns": [
+    "table",
+    "level",
+    "name",
+    "value",
+    "before",
+    "draft",
+    "removed",
+    "added",
+    "net",
+    "final",
+    "men",
+    "women",
+    "third",
+    "dead",
+    "shifted_absent_other",
+    "duplicate",
+    "source",
+    "press",
+    "partial"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/uttarakhand/constituencies.csv",
+   "description": "Every Uttarakhand constituency, with names added and deleted after the draft by sex",
+   "format": "CSV",
+   "bytes": 8446,
+   "columns": [
+    "ac",
+    "name",
+    "district",
+    "roll_before",
+    "left_off",
+    "left_off_per_100",
+    "notices",
+    "notices_per_100",
+    "no_mapping",
+    "draft",
+    "claims",
+    "objections",
+    "final",
+    "net",
+    "claims_per_1000",
+    "objections_per_1000",
+    "net_per_1000",
+    "women_draft_pct",
+    "women_claims_pct",
+    "women_objections_pct",
+    "women_objections_gap"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/uttarakhand/constituencies.json",
+   "description": "Every Uttarakhand constituency, with names added and deleted after the draft by sex. The same table as data/uttarakhand/constituencies.csv, as JSON",
+   "format": "JSON",
+   "bytes": 46769,
+   "rows": 70,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "draft",
+    "draft_women",
+    "claims",
+    "claims_women",
+    "objections",
+    "objections_women",
+    "final",
+    "final_women",
+    "left_off",
+    "anomalies",
+    "no_mapping",
+    "net",
+    "claims_per_1000",
+    "objections_per_1000",
+    "net_per_1000",
+    "women_draft_pct",
+    "women_claims_pct",
+    "women_objections_pct",
+    "women_final_pct",
+    "roll_before",
+    "left_off_per_100",
+    "notices",
+    "notices_per_100",
+    "no_mapping_per_100",
+    "plains",
+    "women_objections_gap",
+    "objections_vs_district"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/uttarakhand/districts.csv",
+   "description": "Every Uttarakhand district",
+   "format": "CSV",
+   "bytes": 1527,
+   "columns": [
+    "district",
+    "acs",
+    "roll_before",
+    "left_off",
+    "left_off_per_100",
+    "notices",
+    "notices_per_100",
+    "no_mapping",
+    "draft",
+    "claims",
+    "objections",
+    "final",
+    "net",
+    "claims_per_1000",
+    "objections_per_1000",
+    "net_per_1000",
+    "women_draft_pct",
+    "women_objections_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/uttarakhand/districts.json",
+   "description": "Every Uttarakhand district. The same table as data/uttarakhand/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 7726,
+   "rows": 13,
+   "row_keys": [
+    "draft",
+    "draft_women",
+    "claims",
+    "claims_women",
+    "objections",
+    "objections_women",
+    "final",
+    "final_women",
+    "net",
+    "claims_per_1000",
+    "objections_per_1000",
+    "net_per_1000",
+    "women_draft_pct",
+    "women_claims_pct",
+    "women_objections_pct",
+    "women_final_pct",
+    "left_off",
+    "roll_before",
+    "left_off_per_100",
+    "anomalies",
+    "no_mapping",
+    "notices",
+    "notices_per_100",
+    "no_mapping_per_100",
+    "district",
+    "acs",
+    "plains"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/uttarakhand/summary.json",
+   "description": "Uttarakhand: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 1961,
+   "keys": [
+    "roll_before",
+    "draft",
+    "left_off",
+    "per_100",
+    "reasons",
+    "shares",
+    "claims",
+    "objections",
+    "final",
+    "net",
+    "claims_per_1000",
+    "objections_per_1000",
+    "net_per_1000",
+    "made_up_pct",
+    "final_vs_before",
+    "final_vs_before_per_100",
+    "women_draft_pct",
+    "women_claims_pct",
+    "women_objections_pct",
+    "women_final_pct",
+    "acs",
+    "acs_lost",
+    "acs_women_over",
+    "acs_women_over_10",
+    "obj_max",
+    "obj_max_v",
+    "obj_min",
+    "obj_min_v",
+    "gap_max",
+    "gap_max_pct",
+    "gap_max_n",
+    "plains",
+    "hills",
+    "notices",
+    "anomalies",
+    "no_mapping",
+    "notices_per_100",
+    "no_mapping_per_100",
+    "lo_max",
+    "lo_max_v",
+    "lo_max2",
+    "lo_max2_v",
+    "lo_min",
+    "lo_min_v",
+    "dist_lo_max",
+    "dist_lo_max_v",
+    "dist_lo_min",
+    "dist_lo_min_v",
+    "acs_lo_over_state",
+    "rho_lo_objections",
+    "rho_lo_notices",
+    "rho_notices_objections",
+    "electors_18_19",
+    "electors_80_plus"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/uttarpradesh/analysis.json",
+   "description": "Uttar Pradesh: the figures its analysis pages draw",
+   "format": "JSON",
+   "bytes": 97213,
+   "keys": [
+    "margins",
+    "rolls",
+    "factors",
+    "reason_rho",
+    "sex",
+    "urban",
+    "notices",
+    "schedule"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/uttarpradesh/districts.csv",
+   "description": "Every Uttar Pradesh district, with names left off by reason",
+   "format": "CSV",
+   "bytes": 8354,
+   "columns": [
+    "district",
+    "roll_27_oct_2025",
+    "draft_roll_6_jan_2026",
+    "left_off",
+    "left_off_per_100",
+    "dead",
+    "untraceable_absent",
+    "shifted",
+    "multiple",
+    "others",
+    "dead_pct_of_left_off",
+    "untraceable_absent_pct_of_left_off",
+    "shifted_pct_of_left_off",
+    "multiple_pct_of_left_off",
+    "others_pct_of_left_off"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/uttarpradesh/districts.json",
+   "description": "Every Uttar Pradesh district, with names left off by reason. The same table as data/uttarpradesh/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 22431,
+   "rows": 75,
+   "row_keys": [
+    "district",
+    "roll_before",
+    "draft",
+    "total",
+    "dead",
+    "untraceable_absent",
+    "shifted",
+    "multiple",
+    "others",
+    "per_100",
+    "dead_pct",
+    "untraceable_absent_pct",
+    "shifted_pct",
+    "multiple_pct",
+    "others_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/uttarpradesh/seats.csv",
+   "description": "Every Uttar Pradesh constituency, with its district's names left off spread by 2022 electors against the 2022 margin",
+   "format": "CSV",
+   "bytes": 24765,
+   "columns": [
+    "ac",
+    "ac_name",
+    "district",
+    "electors_2022",
+    "winner_party_2022",
+    "alliance_2022",
+    "margin_2022",
+    "district_left_off_per_100",
+    "left_off_spread_by_electors",
+    "spread_over_margin"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/uttarpradesh/summary.json",
+   "description": "Uttar Pradesh: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 1371,
+   "keys": [
+    "roll_before",
+    "draft",
+    "left_off",
+    "per_100",
+    "reasons",
+    "shares",
+    "final",
+    "final_date",
+    "net_rise",
+    "made_up_pct",
+    "removed_after",
+    "removed_after_kind",
+    "draft_women_pct",
+    "final_women_pct",
+    "rise_women_pct",
+    "form6",
+    "form6_women_pct",
+    "form7",
+    "form7_women_pct",
+    "forms_kind",
+    "districts",
+    "top",
+    "low",
+    "most_names",
+    "over_20"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/westbengal/constituencies.csv",
+   "description": "Every West Bengal constituency, with the fall in the roll from 2024 by sex",
+   "format": "CSV",
+   "bytes": 36479,
+   "columns": [
+    "ac",
+    "name",
+    "district",
+    "roll_2024_ls",
+    "draft_roll_2025",
+    "roll_2026_election",
+    "fall_to_draft",
+    "fall_to_election_roll",
+    "fall_per_100",
+    "women_pct_2024",
+    "women_pct_2026",
+    "winner_2026",
+    "runner_up_2026",
+    "margin_2026",
+    "votes_2026",
+    "turnout_2026",
+    "fall_over_margin",
+    "fall_at_turnout_over_margin"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/westbengal/constituencies.json",
+   "description": "Every West Bengal constituency, with the fall in the roll from 2024 by sex. The same table as data/westbengal/constituencies.csv, as JSON",
+   "format": "JSON",
+   "bytes": 135544,
+   "rows": 294,
+   "row_keys": [
+    "ac",
+    "name",
+    "district",
+    "roll_2024",
+    "draft",
+    "election",
+    "fall_draft",
+    "fall",
+    "draft_per_100",
+    "per_100",
+    "after_draft",
+    "women_2024_pct",
+    "women_election_pct",
+    "women_fall",
+    "winner",
+    "runner_up",
+    "margin",
+    "votes",
+    "turnout",
+    "fall_voters",
+    "draft_over_margin",
+    "over_margin",
+    "could_change",
+    "vs_district"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/westbengal/districts.csv",
+   "description": "Every West Bengal district",
+   "format": "CSV",
+   "bytes": 1784,
+   "columns": [
+    "district",
+    "acs",
+    "roll_2024_ls",
+    "draft_roll_2025",
+    "roll_2026_election",
+    "fall_to_draft_per_100",
+    "fall_to_election_roll_per_100",
+    "women_pct_2024",
+    "women_pct_of_fall"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/westbengal/districts.json",
+   "description": "Every West Bengal district. The same table as data/westbengal/districts.csv, as JSON",
+   "format": "JSON",
+   "bytes": 6120,
+   "rows": 24,
+   "row_keys": [
+    "district",
+    "acs",
+    "roll_2024",
+    "draft",
+    "election",
+    "women_2024",
+    "women_election",
+    "seats_bjp",
+    "seats_aitc",
+    "draft_per_100",
+    "per_100",
+    "women_2024_pct",
+    "women_fall_pct"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/westbengal/summary.json",
+   "description": "West Bengal: the figures its pages draw",
+   "format": "JSON",
+   "bytes": 2985,
+   "keys": [
+    "pn05",
+    "adj",
+    "roll_2024",
+    "draft",
+    "election",
+    "after_final",
+    "fall_draft",
+    "fall",
+    "draft_per_100",
+    "per_100",
+    "growth_2024_to_oct2025",
+    "fall_from_oct2025",
+    "women_2024_pct",
+    "women_election_pct",
+    "women_fall_pct",
+    "districts_women_over",
+    "acs",
+    "districts",
+    "grew",
+    "rate_min",
+    "rate_min_v",
+    "rate_max",
+    "rate_max_v",
+    "draft_over_margin",
+    "over_margin",
+    "could_change",
+    "votes",
+    "turnout",
+    "seats_2026",
+    "winners",
+    "rho_rate_margin",
+    "top_districts",
+    "low_districts"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/all-tables.zip",
+   "description": "Every table as CSV in one zip file",
+   "format": "ZIP",
+   "bytes": 640865,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/assam.xlsx",
+   "description": "Assam, Excel workbook",
+   "format": "Excel",
+   "bytes": 41235,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/bihar.xlsx",
+   "description": "Bihar 2025, Excel workbook",
+   "format": "Excel",
+   "bytes": 443440,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/delhi.xlsx",
+   "description": "Delhi, Excel workbook",
+   "format": "Excel",
+   "bytes": 28829,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/gujarat.xlsx",
+   "description": "Gujarat, Excel workbook",
+   "format": "Excel",
+   "bytes": 72140,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/india-all-states.xlsx",
+   "description": "All India, Excel workbook",
+   "format": "Excel",
+   "bytes": 271572,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/karnataka.xlsx",
+   "description": "Karnataka, Excel workbook",
+   "format": "Excel",
+   "bytes": 26392,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/kerala.xlsx",
+   "description": "Kerala, Excel workbook",
+   "format": "Excel",
+   "bytes": 58130,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/maharashtra.xlsx",
+   "description": "Maharashtra, Excel workbook",
+   "format": "Excel",
+   "bytes": 85207,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/other-states.xlsx",
+   "description": "Every other state and union territory, Excel workbook",
+   "format": "Excel",
+   "bytes": 83116,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/rajasthan.xlsx",
+   "description": "Rajasthan, Excel workbook",
+   "format": "Excel",
+   "bytes": 60785,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/tamil-nadu.xlsx",
+   "description": "Tamil Nadu, Excel workbook",
+   "format": "Excel",
+   "bytes": 117837,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/telangana-hyderabad.xlsx",
+   "description": "Telangana 2026 and the Old City of Hyderabad, Excel workbook",
+   "format": "Excel",
+   "bytes": 95539,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/uttar-pradesh.xlsx",
+   "description": "Uttar Pradesh, Excel workbook",
+   "format": "Excel",
+   "bytes": 50367,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/uttarakhand.xlsx",
+   "description": "Uttarakhand, Excel workbook",
+   "format": "Excel",
+   "bytes": 45752,
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "downloads/west-bengal.xlsx",
+   "description": "West Bengal, Excel workbook",
+   "format": "Excel",
+   "bytes": 95190,
+   "licence": "CC BY 4.0"
+  }
+ ]
+}

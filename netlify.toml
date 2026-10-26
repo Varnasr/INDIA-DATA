@@ -16,15 +16,48 @@
 # because every page carries its own; data: and blob: images are the charts'
 # PNG exports. If a page starts loading anything new from another service,
 # add it here and to the privacy section of terms/ in the same commit.
+#
+# Framing. Netlify applies every rule whose path matches and joins the values
+# of a header that two rules set, so a frame rule here under "/*" would reach
+# /embed/ as well, and a browser enforces every policy it is sent. This block
+# therefore says nothing about frames. _headers, which scripts/build_site.py
+# writes from the list of published folders, sends frame-ancestors 'none' and
+# X-Frame-Options DENY on every path except /embed/, and the /embed/ block
+# below lets any site show those charts.
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://bivccpsnzzolxuqdvhfu.supabase.co; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://bivccpsnzzolxuqdvhfu.supabase.co; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
     X-Content-Type-Options = "nosniff"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    X-Frame-Options = "DENY"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+
+# The charts at /embed/ are made to be shown inside other sites' pages. This
+# block repeats the whole sitewide policy, because measured on a deploy preview
+# on 26 October 2026 a Content-Security-Policy set here replaces the one from
+# "/*" on these paths. A policy holding only the framing rule left the embed
+# pages with no other rule. Off /embed/, the DENY header from _headers is what
+# stops framing.
+[[headers]]
+  for = "/embed/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://bivccpsnzzolxuqdvhfu.supabase.co; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; frame-ancestors *"
+
+# The What's new feed and the calendars, with the types feed readers and
+# calendar apps expect.
+[[headers]]
+  for = "/feed.xml"
+  [headers.values]
+    Content-Type = "application/atom+xml; charset=utf-8"
+[[headers]]
+  for = "/calendar.ics"
+  [headers.values]
+    Content-Type = "text/calendar; charset=utf-8"
+[[headers]]
+  for = "/calendar/*"
+  [headers.values]
+    Content-Type = "text/calendar; charset=utf-8"
 
 # Stylesheets, scripts, data and the dictionaries are fetched under a
 # ?v=<content hash> address that changes whenever the file does, so a copy can
@@ -38,3 +71,5 @@
   for = "/data/*"
   [headers.values]
     Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+    # the published tables may be read by any site (data/index.json lists them)
+    Access-Control-Allow-Origin = "*"
