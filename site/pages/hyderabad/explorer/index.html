@@ -92,6 +92,8 @@ buildTabs();
 (function(){const m=SIR.hashId().match(/^([A-Za-z]+)(?:-(\d+))?$/);
   if(m&&ACS.includes(m[1])){loadAC(m[1]);if(m[2]&&P.some(p=>p.part===+m[2]))go(+m[2]);}else loadAC(ACS[0]);})();
 document.addEventListener('sir-theme',()=>render());
+// the headings are filled only now, after the shared link buttons were added
+SIR.anchors(); SIR.jump();
 }).catch(SIR.fail);
 </script>
 <script src="../../assets/faq/hyd.js"></script>
