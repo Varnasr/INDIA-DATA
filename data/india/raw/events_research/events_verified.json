@@ -201,15 +201,15 @@
   },
   {
    "id": "ev-27",
-   "status": "confirmed",
+   "status": "corrected",
    "fix": {},
-   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches character for character. India Today, 17 October 2026, says the NOC is for a one-day Congress rally at Ramlila Maidan on 1 November, as part of the INDIA bloc's campaign against the SIR, with the ground booked from 25 October to 3 November."
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches character for character. India Today, 17 October 2026, says the NOC is for a one-day Congress rally at Ramlila Maidan on 1 November, as part of the INDIA bloc's campaign against the SIR, with the ground booked from 25 October to 3 November. Checked again, 26 October 2026 (first reader): PTI's report of 24 October in Business Standard read in full. The rally stands for 1 November, and the Mahila Congress chief said it would not be postponed or cancelled. Two sentences were added to the description from that report and await a second reading. Second reading, 26 October 2026 (second reader): PTI's report of 24 October in Business Standard (published 23:17 IST) read in full from the JSON-LD articleBody with curl. Venugopal's post on X ('a Dilli Chalo March against Vote Chori culminating at Ramleela Maidan on November 1st') and Alka Lamba's remark that there was no question of postponing or cancelling the rally are there. Corrected: the march was described as 'reaching Delhi', which the report does not say. It now ends at Ramlila Maidan on 1 November, as Venugopal put it."
   },
   {
    "id": "ev-28",
    "status": "confirmed",
    "fix": {},
-   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches character for character. The Hans India says the decision was taken at a meeting chaired by KPCC president B.K. Hariprasad on Friday at the Legislators' House, names the coordination committee parties, and says district and taluk demonstrations will follow. The venue and time of the 5 November protest are not given."
+   "note": "Second reading, 22 October 2026: Opened by curl. The quote matches character for character. The Hans India says the decision was taken at a meeting chaired by KPCC president B.K. Hariprasad on Friday at the Legislators' House, names the coordination committee parties, and says district and taluk demonstrations will follow. The venue and time of the 5 November protest are not given. Checked again, 26 October 2026 (first reader): no later report of the 5 November protest was found, and no change to it. The description was reworded in the past-safe form ('announced', 'would follow') with no change of fact. Second reading, 26 October 2026 (second reader): the rewording checked against The Hans India's text as read on 22 October. No change of fact and none needed."
   },
   {
    "id": "ev-29",
@@ -218,7 +218,7 @@
     "what": "The Congress announced six Delhi Chalo marches from Rajasthan, Haryana and Uttar Pradesh on 25 November, ending in an event in Delhi on Constitution Day, 26 November, as the last stage of its 'Vote bachao, Desh bachao' campaign.",
     "note": "Read by curl on 22 October 2026. The Hindu, 5 October 2026. ETV Bharat, UNI and Deccan Chronicle reports of the 5 October announcement all give 25 to 26 November with the Delhi event on 26 November. ETV Bharat of 17 October, citing party insiders, says a major Congress event is 'likely' in Delhi on 27 November after a two-day Chalo Delhi campaign on 25 and 26 November. Sources differ on the date of the Delhi event, 26 or 27 November, and the party has not confirmed a change on record."
    },
-   "note": "Second reading, 22 October 2026: Opened The Hindu (5 October) and ETV Bharat (5 and 17 October) by curl. The quote matches. Every report of the announcement gives 26 November for the Delhi event, and only the 17 October report, from unnamed insiders and with 'likely', gives 27 November. Not settled. Dates kept as announced, with the note stating both dates."
+   "note": "Second reading, 22 October 2026: Opened The Hindu (5 October) and ETV Bharat (5 and 17 October) by curl. The quote matches. Every report of the announcement gives 26 November for the Delhi event, and only the 17 October report, from unnamed insiders and with 'likely', gives 27 November. Not settled. Dates kept as announced, with the note stating both dates. Checked again, 26 October 2026 (first reader): Venugopal's post of 24 October puts a 'Dilli Chalo March' on 1 November (ev-27). Whether the 25 and 26 November marches still stand is not reported. Noted in the first reading's note. Second reading, 26 October 2026 (second reader): the added sentence on the 1 November Dilli Chalo March checked against PTI in Business Standard. It is in the first reading's note, which the published page does not show. No change."
   },
   {
    "id": "ev-30",
@@ -268,7 +268,7 @@
    "id": "ev-36",
    "status": "corrected",
    "fix": {},
-   "note": "Second reading, 25 October 2026: Sanmarg AMP page read with curl, JSON-LD articleBody (KD Parth, 24 October 2026, 11:14 pm IST). Date, 11 am, Orient Chowmuhani to the CEO's office, memorandum, the two announcing leaders and the Agartala Press Club checked. Quote exact. Corrected: of the four demands, the fourth is opposition to the provisions giving the CEC legal protection, which the earlier text folded into the review. Party event."
+   "note": "Second reading, 25 October 2026: Sanmarg AMP page read with curl, JSON-LD articleBody (KD Parth, 24 October 2026, 11:14 pm IST). Date, 11 am, Orient Chowmuhani to the CEO's office, memorandum, the two announcing leaders and the Agartala Press Club checked. Quote exact. Corrected: of the four demands, the fourth is opposition to the provisions giving the CEC legal protection, which the earlier text folded into the review. Party event. Checked again, 26 October 2026 (first reader): no later report found and no change. The description was reworded so that it reads correctly after the date, with no change of fact. Second reading, 26 October 2026 (second reader): the rewording ('ending with a memorandum') checked against the Sanmarg text read on 25 October. No change of fact."
   },
   {
    "id": "ev-37",
@@ -305,7 +305,31 @@
    "status": "confirmed",
    "fix": {},
    "note": "Second reading, 26 October 2026: data.js listing checked (Yadgir, Karnataka, 28 October, 11:00 AM, in front of the Deputy Commissioner's Office, no host). Quote exact. Not a party."
+  },
+  {
+   "id": "ev-43",
+   "status": "corrected",
+   "fix": {},
+   "note": "Second reading, 26 October 2026 (second reader): PTI in Business Standard (24 October 2026, 23:17 IST) read in full from the JSON-LD articleBody with curl. The date of 30 October, Hotel Ashok as 'it is learnt', the mock Parliament with opposition MPs and top leaders, Venugopal's post on X and the Dilli Chalo March on 1 November checked. Quote exact. ThePrint's copy was not re-read. Corrected: the verdict is Venugopal's description, so the description now attributes it to him, and the legal-effect sentence now names its basis. Party event. No private person is named."
+  },
+  {
+   "id": "ev-44",
+   "status": "confirmed",
+   "fix": {},
+   "note": "Second reading, 26 October 2026 (second reader): PTI in Siasat (26 October 2026, 15:47 IST) read in full from the JSON-LD articleBody with curl, and Oneindia (16:17 IST) the same way. The date of 2 November, the theme, Rao's announcement to reporters in Hyderabad on 26 October, Shah's attendance and the 'false narrative' wording checked. Quote exact. No route or time in either report. IND Today was not re-read. Party event."
+  },
+  {
+   "id": "ev-45",
+   "status": "corrected",
+   "fix": {},
+   "note": "Second reading, 26 October 2026 (second reader): Oneindia (26 October 2026, 16:17 IST) read in full with curl. A second report found and read: ANI of 25 October on Daily Prabhat, in which Haryana BJP president Archana Gupta says Shah will arrive in Karnal at 10 am on 5 November and join the foot march. Quote exact. Corrected: the 10 am is Shah's arrival, so it moved from the time field into the description. Sector 12 is the proposed venue in Oneindia alone, and the place now says so. The title no longer carries Oneindia's form of the theme, since ANI gives it differently. The event rests on two reports. Party event."
+  },
+  {
+   "id": "ev-46",
+   "status": "corrected",
+   "fix": {},
+   "note": "Second reading, 26 October 2026 (second reader): The Hindu (25 October 2026, 19:05 IST) read in full from the JSON-LD articleBody with curl. The march on 6 November, the public meeting after it, the nationwide campaign and the meeting of Sunday 25 October checked. Quote exact. Corrected in the note only: the report does not say the march was decided at that meeting, and the link to the other campaign events is now given as The Hindu's own words. Party event. The district president is a party office-holder."
   }
  ],
- "notes": "No new dated civil-society SIR event from 22 October 2026 onward was found apart from ev-01. Checked: countercurrents.org/author/people-against-sir (one post, the 18 October release), lafc.in/press-releases (latest 9 October, no further Commission hearing dated), napmindia.org (statement of 18 October, no event), pucl.org (no SIR event), cjp.org.in (report of a national consultation held 3 October), and web searches for Jan Sunwai, people's tribunal, convention, webinar and later Lokur Commission hearings. A 'No-SIR National Convention' organised as a public hearing by Bharat Jodo Abhiyaan, PUCL and NAPM was reported about 15 to 16 October and is past. Three things for the caller: (1) every quote now matches its source character for character, and two needed curly apostrophes restored (ev-01, ev-06). (2) Whether Cockroach Janta Party events (ev-06 to ev-08) belong in a list that excludes political parties is an editorial call. It is not registered with the ECI but calls itself a party. (3) ev-09 lost its 20 September start, which no source supported. Its official confirmation is still outstanding because ceodelhi.gov.in was unreachable from this sandbox. No private person's phone number or address is recorded."
+ "notes": "No new dated civil-society SIR event from 22 October 2026 onward was found apart from ev-01. Checked: countercurrents.org/author/people-against-sir (one post, the 18 October release), lafc.in/press-releases (latest 9 October, no further Commission hearing dated), napmindia.org (statement of 18 October, no event), pucl.org (no SIR event), cjp.org.in (report of a national consultation held 3 October), and web searches for Jan Sunwai, people's tribunal, convention, webinar and later Lokur Commission hearings. A 'No-SIR National Convention' organised as a public hearing by Bharat Jodo Abhiyaan, PUCL and NAPM was reported about 15 to 16 October and is past. Three things for the caller: (1) every quote now matches its source character for character, and two needed curly apostrophes restored (ev-01, ev-06). (2) Whether Cockroach Janta Party events (ev-06 to ev-08) belong in a list that excludes political parties is an editorial call. It is not registered with the ECI but calls itself a party. (3) ev-09 lost its 20 September start, which no source supported. Its official confirmation is still outstanding because ceodelhi.gov.in was unreachable from this sandbox. No private person's phone number or address is recorded. Check of 26 October 2026, 5:30 pm IST (first reader): People Against SIR's data.js re-read. Its listings from 24 October onward match ev-31 to ev-35 and ev-38 to ev-42, with no change of date, place, time or host, and it carries no new dated listing (Bhim, Rajasthan, is listed with no date and is not carried). Three new party events were read and added as ev-43 (INDIA bloc 'public impeachment', 30 October), ev-44 (BJP padayatra, Hyderabad, 2 November) ev-45 (BJP padayatra, Karnal, 5 November) and ev-46 (BJP march, Malappuram, 6 November). They were read a second time on 26 October 2026, and ev-45 now rests on two reports, Oneindia and ANI."
 }
