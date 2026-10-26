@@ -189,7 +189,7 @@
      "relies_on": "Census-based projection of Bihar's adult population (Report of the Technical Group on Population Projections) against the January 2025 roll.",
      "kind": "projection or survey",
      "check": "Quoted as reported by LiveLaw.",
-     "site_counts": "The site uses the same projection family: about 8.30 crore adults projected for 1 March 2026 against a roll of 7.90 crore before the revision (the Commission's June 2025 total, 7,89,69,844) and 7.24 crore on the draft. Across 19 states, rolls held 98.3% of projected adults before and 84.4% after the drafts.",
+     "site_counts": "The site uses the same projection family: about 8.30 crore adults projected for 1 March 2026 against a roll of 7.90 crore before the revision (the Commission's June 2025 total, 7,89,69,844) and 7.24 crore on the draft. Across 19 states, rolls held 98.3% of projected adults before and 84.5% after the drafts.",
      "site_stops": "Projections count residents, so a state that sends migrants out counts adults who may be registered at home; the site says so beside the figure."
     },
     {
@@ -1396,8 +1396,8 @@
      "timestamp": null,
      "relies_on": "The Commission's stated purpose, and Bihar's final roll.",
      "kind": "count from official data",
-     "check": "Bihar's final roll was 7,41,92,357, which rounds to 7.42 crore. The sentence gives the end figure and not the change: the roll before the revision was about 7.89 crore.",
-     "site_counts": "Bihar's roll fell from about 7.89 crore before the revision (7,89,69,844 in the Commission's June 2025 total) to 7,24,05,756 on the draft and 7,41,92,357 on the final roll of 30 September 2025, a net fall of 47,73,025. 65,59,626 names were left off the draft and 3,66,742 deleted after it (data/india/states.json, Bihar electors_final, net_fall, removed, removed_after_draft; data/bihar/final.json).",
+     "check": "Bihar's final roll was 7,41,92,357, which rounds to 7.42 crore. The sentence gives the end figure and not the change: the roll before the revision was about 7.90 crore.",
+     "site_counts": "Bihar's roll fell from about 7.90 crore before the revision (7,89,69,844 in the Commission's June 2025 total) to 7,24,05,756 on the draft and 7,41,92,357 on the final roll of 30 September 2025, a net fall of 47,73,025. 65,59,626 names were left off the draft and 3,66,742 deleted after it (data/india/states.json, Bihar electors_final, net_fall, removed, removed_after_draft; data/bihar/final.json).",
      "site_stops": "The site counts names, not who was eligible.",
      "site_files": "data/india/states.json, data/bihar/final.json"
     },
@@ -1506,7 +1506,7 @@
      "relies_on": "The Commission's state-by-state counts of names left off the draft rolls, and the 2024 Lok Sabha vote shares of the two alliances.",
      "kind": "count from official data",
      "check": "The count holds to the precision he gives. Across the 31 states and union territories with a draft, 13,39,03,307 names were left off, 14.08 per 100 on the rolls before, which is his 'over 13 crore' and 'around 14 percent'. The word 'deleted' does not fit them. These are names not carried into the drafts, with reasons officers recorded, and they include the dead and duplicate entries. In the 22 states with a final roll, part came back. The '2 per cent' is not checked by the site. PTI itself puts the NDA at around 43 per cent of the 2024 vote and the INDIA bloc parties at around 40.6 per cent, a gap of about 2.4 points, but the site holds no national party vote shares and has not checked those figures against the Commission's statistical report. The two percentages also have different bases: 2 per cent is of votes cast, 14 per cent of names on the roll.",
-     "site_counts": "13,39,03,307 names left off the drafts in 31 states, of 95,08,13,771 on the rolls before: 14.08 per 100 (data/india/states.json, total.removed, total.per_100). By recorded reason, 2,79,69,558 dead (20.9%), 9,56,35,923 shifted, absent or other (71.5%), 1,01,48,459 duplicate (7.6%) (total.shares). In the 22 states with a final roll, 7,77,48,303 were left off of 65,67,36,949 (11.84 per 100), and the net fall from the roll before to the final roll was 6,63,72,065 (10.11 per 100). The rise after the draft made up at most 14.6% of the names left off (states.json, final.per_100, final.net_per_100, final.made_up_pct; recomputed from the 22 rows with electors_final). The 13,39,03,307 equal 21.8 per 100 votes cast in those 31 states in the 2024 Lok Sabha election, 61,45,74,272 votes (data/india/raw/adults_ls2024.csv, votes_2024; states.json, removed_pct_votes24).",
+     "site_counts": "13,39,03,307 names left off the drafts in 31 states, of 95,08,83,615 on the rolls before: 14.08 per 100 (data/india/states.json, total.removed, total.per_100). By recorded reason, 2,79,69,558 dead (20.9%), 9,56,35,923 shifted, absent or other (71.5%), 1,01,48,459 duplicate (7.6%) (total.shares). In the 22 states with a final roll, 7,77,48,303 were left off of 65,68,06,793 (11.84 per 100), and the net fall from the roll before to the final roll was 6,63,72,065 (10.11 per 100). The rise after the draft made up at most 14.6% of the names left off (states.json, final.per_100, final.net_per_100, final.made_up_pct; recomputed from the 22 rows with electors_final). The 13,39,03,307 equal 21.8 per 100 votes cast in those 31 states in the 2024 Lok Sabha election, 61,45,74,272 votes (data/india/raw/adults_ls2024.csv, votes_2024; states.json, removed_pct_votes24).",
      "site_stops": "A reason is what the officer wrote down, and nobody checked it. Nine states have no final roll yet, so the 13 crore is still mostly a draft figure (states.json, final.waiting). The site counts names and cannot say how many of those left off were eligible electors, or how many would have voted.",
      "site_files": "data/india/states.json, data/india/raw/adults_ls2024.csv"
     },
@@ -1653,8 +1653,8 @@
      "timestamp_note": "Timed: the start of the caption segments in YouTube's Hindi auto-generated caption track (kind asr), read through Firecrawl's youtube-com videos/video_transcript capability on 25 October 2026 (request 4b2403e8-08da-45c1-b8d9-300032b429b5, 2,062 segments). Exact to about 2 seconds.",
      "relies_on": "His own figure of 103 crore adults in 2026 and an unsourced 88 crore electors after the revision.",
      "kind": "projection or survey",
-     "check": "No single official projection of India's adults for 2026 is on the site. The UN estimate of adults in mid-2024 is 1,01,76,59,624 (lok_sabha_electors.json). The Technical Group's July 2020 projection covers 19 states: 95,50,92,000 adults in 2026, rolls before the revision 93,92,60,959 and drafts 80,65,69,819 (states.json, adults). Telangana's roll before was 115.2 per 100 projected adults. Across 31 states 13,39,03,307 names were left off the drafts, leaving about 81.7 crore on them. In the 22 states with a final roll the net rise from draft to final was 14.6 per cent of the names left off there. No national final total exists, since nine states with a draft have no final roll. His 88 crore matches no official figure and he gives no source for it.",
-     "site_counts": "Adults 95,50,92,000 in 19 states; rolls before 93,92,60,959; drafts 80,65,69,819; left off 13,39,03,307 across 31 states; final.made_up_pct 14.6.",
+     "check": "No single official projection of India's adults for 2026 is on the site. The UN estimate of adults in mid-2024 is 1,01,76,59,624 (lok_sabha_electors.json). The Technical Group's July 2020 projection covers 19 states: 95,50,92,000 adults in 2026, rolls before the revision 93,93,30,803 and drafts 80,66,39,663 (states.json, adults). Telangana's roll before was 115.2 per 100 projected adults. Across 31 states 13,39,03,307 names were left off the drafts, leaving about 81.7 crore on them. In the 22 states with a final roll the net rise from draft to final was 14.6 per cent of the names left off there. No national final total exists, since nine states with a draft have no final roll. His 88 crore matches no official figure and he gives no source for it.",
+     "site_counts": "Adults 95,50,92,000 in 19 states; rolls before 93,93,30,803; drafts 80,66,39,663; left off 13,39,03,307 across 31 states; final.made_up_pct 14.6.",
      "site_stops": "No national final roll; projections count residents.",
      "site_files": "data/india/states.json, data/india/lok_sabha_electors.json"
     },
@@ -1848,7 +1848,7 @@
      "relies_on": "A count of the names left off the draft rolls across the SIR states; he gives no source.",
      "kind": "count from official data",
      "check": "The count is close and its scope is wider than his 20 states. Across the 31 states and union territories with a draft, 13,39,03,307 names were left off, 14.08 per 100 on the rolls before; his 13.30 crore is about 9 lakh below that. The 20 states he names account for 7.49 crore of it, and the other 5.9 crore are in the 11 states that had not finished by 26 September, nine of which were still awaiting a final roll on 24 October 2026. 'Including the dead' is right: 2,79,69,558, 20.9 per 100 of the names left off, were recorded as dead. 'Removed without Due Process' runs two things together. A name left off the draft has not been deleted: the Supreme Court held for Bihar that 'such non-inclusion is not tantamount to a final deletion, but is only a provisional step' (2026 INSC 564, para 134, and para 142). Deletion is an order of the registration officer under section 22 of the 1950 Act, which needs 'a reasonable opportunity of being heard' for anyone said to have moved or to be ineligible, with appeals under section 24. On Bihar the Court held that 'The deletions effected pursuant to the Impugned SIR exercise cannot be said to be contrary to the procedure prescribed under Rule 21A' and that 'The safeguards of notice and hearing are preserved in substance' (para 186(d)). That judgment is on Bihar's revision. Whether each officer gave a hearing in the later phases is what the petitions now pending ask, and the site's figures cannot answer it.",
-     "site_counts": "13,39,03,307 names left off the drafts in 31 states, of 95,08,13,771 on the rolls before (total.removed, total.per_100 14.083). Dead 2,79,69,558, shifted, absent or other 9,56,35,923, enrolled more than once 1,01,48,459. After the draft, 33,65,116 names were deleted in the 20 states that published gross figures (after_draft). In the 22 states with a final roll, the net rise from draft to final made up at most 14.6% of the names left off (final.made_up_pct).",
+     "site_counts": "13,39,03,307 names left off the drafts in 31 states, of 95,08,83,615 on the rolls before (total.removed, total.per_100 14.082). Dead 2,79,69,558, shifted, absent or other 9,56,35,923, enrolled more than once 1,01,48,459. After the draft, 33,65,116 names were deleted in the 20 states that published gross figures (after_draft). In the 22 states with a final roll, the net rise from draft to final made up at most 14.6% of the names left off (final.made_up_pct).",
      "site_stops": "The site counts names. It cannot say whether a hearing was given in any case, or how many of those left off were entitled to stay.",
      "site_files": "data/india/states.json, data/india/raw/terms_research/terms.json"
     },
@@ -2036,7 +2036,7 @@
      "timestamp": null,
      "relies_on": "His estimate of 7 million against the 13.3 crore cited by critics. \"A seventh of the electorate\" is 133.7 million over about 950 million.",
      "kind": "framing",
-     "check": "How he frames the question. 13,39,03,307 of 95,08,13,771 on the rolls before is 14.08 per 100, about one in seven, so \"a seventh\" matches the draft-stage count.",
+     "check": "How he frames the question. 13,39,03,307 of 95,08,83,615 on the rolls before is 14.08 per 100, about one in seven, so \"a seventh\" matches the draft-stage count.",
      "site_counts": "",
      "site_stops": ""
     },
@@ -2150,8 +2150,8 @@
      "timestamp": null,
      "relies_on": "An extrapolation of the nine-state rate to the whole country.",
      "kind": "projection or survey",
-     "check": "12 per cent of 101.6 crore is 12.2 crore. A conditional extrapolation, stated as such. The nine states hold about 63 per cent of the projected adults in the 19 states the site compares (60,12,56,000 of 95,50,92,000). On the site, the drafts held 84.4 per cent of projected adults across 19 states, and the 22 states with a final roll recovered at most 14.6 per cent of the names left off between draft and final (a ceiling, since it counts new voters).",
-     "site_counts": "19 states, drafts 84.4 per cent of projected adults. Final rolls made up at most 14.6 per cent of names left off.",
+     "check": "12 per cent of 101.6 crore is 12.2 crore. A conditional extrapolation, stated as such. The nine states hold about 63 per cent of the projected adults in the 19 states the site compares (60,12,56,000 of 95,50,92,000). On the site, the drafts held 84.5 per cent of projected adults across 19 states, and the 22 states with a final roll recovered at most 14.6 per cent of the names left off between draft and final (a ceiling, since it counts new voters).",
+     "site_counts": "19 states, drafts 84.5 per cent of projected adults. Final rolls made up at most 14.6 per cent of names left off.",
      "site_stops": "The site gives no national figure for adults off the final rolls, because ten states have no final roll yet."
     },
     {
@@ -2160,8 +2160,8 @@
      "timestamp": null,
      "relies_on": "Rahul Shastri's projection of the final rolls from the phase III drafts, and an adult population of 101.6 crore.",
      "kind": "projection or survey",
-     "check": "101.6 - 87.8 = 13.8 crore, \"about 14\". Shastri's estimate was not seen. The site holds 95,08,13,771 names on the rolls before the revision in 31 states and 13,39,03,307 left off the drafts, so the drafts held about 81.69 crore, before Assam, Himachal Pradesh, Jammu and Kashmir and Ladakh and before claims. 87.8 crore is in a plausible range on those figures. The adult figure is close to the UN's 1,01,76,59,624 for mid-2024 (lok_sabha_electors.json); the site holds no national Technical Group figure for 2026.",
-     "site_counts": "31 states, rolls before 95,08,13,771, left off the drafts 13,39,03,307.",
+     "check": "101.6 - 87.8 = 13.8 crore, \"about 14\". Shastri's estimate was not seen. The site holds 95,08,83,615 names on the rolls before the revision in 31 states and 13,39,03,307 left off the drafts, so the drafts held about 81.69 crore, before Assam, Himachal Pradesh, Jammu and Kashmir and Ladakh and before claims. 87.8 crore is in a plausible range on those figures. The adult figure is close to the UN's 1,01,76,59,624 for mid-2024 (lok_sabha_electors.json); the site holds no national Technical Group figure for 2026.",
+     "site_counts": "31 states, rolls before 95,08,83,615, left off the drafts 13,39,03,307.",
      "site_stops": "A projection of final rolls not yet published."
     },
     {
@@ -2257,7 +2257,7 @@
      "timestamp": null,
      "relies_on": "His table, rolls before the revision against the Technical Group's projected adults for 2026, Assam and Himachal Pradesh left out.",
      "kind": "projection or survey",
-     "check": "states.json adults: 19 states with projected adults, rolls before 93,92,60,959 against 95,50,92,000 adults, 98.3 per cent. Six held more names than projected adults (over_100: Telangana 115.2, Karnataka 106.8, Tamil Nadu 106.5, Odisha 101.7, Andhra Pradesh 100.7, Kerala 100.4).",
+     "check": "states.json adults: 19 states with projected adults, rolls before 93,93,30,803 against 95,50,92,000 adults, 98.3 per cent. Six held more names than projected adults (over_100: Telangana 115.2, Karnataka 106.8, Tamil Nadu 106.5, Odisha 101.7, Andhra Pradesh 100.7, Kerala 100.4).",
      "site_counts": "19 states, 98.3 per cent.",
      "site_stops": "A projection counts residents, so a migrant counts where they live."
     },
@@ -2287,8 +2287,8 @@
      "timestamp": null,
      "relies_on": "His table: all major states 85 per cent in the draft. Twelve states with final lists 86 in the draft and 88 in the final lists.",
      "kind": "projection or survey",
-     "check": "states.json adults: draft_total 80,65,69,819 of 95,50,92,000, 84.4 per cent, so 15.6 per cent short. Twelve states with final rolls: draft 85.7, final 87.5, or 88.4 with West Bengal's 60,06,675 under adjudication on the roll. The table covers the major states, which the text calls India as a whole.",
-     "site_counts": "19 states 84.4 per cent in the draft. Twelve states 85.7 then 87.5.",
+     "check": "states.json adults: draft_total 80,66,39,663 of 95,50,92,000, 84.5 per cent, so 15.5 per cent short. Twelve states with final rolls: draft 85.7, final 87.5, or 88.4 with West Bengal's 60,06,675 under adjudication on the roll. The table covers the major states, which the text calls India as a whole.",
+     "site_counts": "19 states 84.5 per cent in the draft. Twelve states 85.7 then 87.5.",
      "site_stops": "Major states only."
     },
     {
