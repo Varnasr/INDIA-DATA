@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Bihar 2025 · every booth, every constituency":"बिहार 2025 · हर बूथ, हर विधानसभा क्षेत्र","Bihar pages":"बिहार के पृष्ठ","Border":"सीमावर्ती","Districts":"ज़िले","Elections":"चुनाव","Explorer":"एक्सप्लोरर","People":"लोग"});

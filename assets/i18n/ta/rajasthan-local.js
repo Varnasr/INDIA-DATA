@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Rajasthan 2026 · the names left off the draft, and every constituency's roll from 2023":"ராஜஸ்தான் 2026 · வரைவில் விடுபட்ட பெயர்கள், 2023 முதல் ஒவ்வொரு தொகுதியின் பட்டியல்","Rajasthan pages":"ராஜஸ்தான் பக்கங்கள்"});

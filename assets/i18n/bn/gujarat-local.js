@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"নির্বাচন","Gujarat 2026 · the names left off, constituency by constituency":"গুজরাট 2026 · বাদ পড়া নাম, বিধানসভা কেন্দ্র ধরে","Gujarat pages":"গুজরাটের পাতা"});

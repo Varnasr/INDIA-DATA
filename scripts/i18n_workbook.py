@@ -8,11 +8,10 @@ Telugu, Tamil and Bengali translations side by side, for a native reader to chec
 One sheet per language plus a combined sheet, or with --lang the one
 language alone. Each row carries the pages the
 string appears on and an empty column for the reviewer's correction, so the
-corrections can be read back into assets/i18n/<lang>.js key by key. Needs
-openpyxl.
+corrections can be read back into i18n/<lang>.json key by key (then run
+scripts/build_i18n.py). Needs openpyxl.
 """
 import json
-import re
 import sys
 from pathlib import Path
 
@@ -24,8 +23,7 @@ NAMES = {'hi': 'Hindi', 'ur': 'Urdu', 'te': 'Telugu', 'ta': 'Tamil', 'bn': 'Beng
 
 
 def load(lang):
-    body = (ROOT / 'assets' / 'i18n' / (lang + '.js')).read_text(encoding='utf-8')
-    return json.loads(re.search(r'window\.SIR_DICT\s*=\s*(\{.*\})\s*;\s*$', body, re.S).group(1))
+    return json.loads((ROOT / 'i18n' / (lang + '.json')).read_text(encoding='utf-8'))
 
 
 def tier(pages):

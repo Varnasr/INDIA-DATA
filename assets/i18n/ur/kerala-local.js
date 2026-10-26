@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"انتخابات","Kerala 2026 · every constituency, the roll from January 2025 to the election":"کیرالہ 2026 · ہر حلقہ، جنوری 2025 سے انتخاب تک فہرست","Kerala pages":"کیرالہ کے صفحات"});

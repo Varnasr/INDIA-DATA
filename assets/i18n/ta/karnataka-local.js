@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Karnataka 2026 · every district, every recorded reason":"கர்நாடகா 2026 · ஒவ்வொரு மாவட்டமும், பதிவான ஒவ்வொரு காரணமும்","Karnataka pages":"கர்நாடகா பக்கங்கள்"});

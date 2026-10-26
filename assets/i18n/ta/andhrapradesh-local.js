@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Andhra Pradesh 2026 · the Special Intensive Revision of the roll":"ஆந்திரப் பிரதேசம் 2026 · வாக்காளர் பட்டியலின் சிறப்புத் தீவிரத் திருத்தம்","Andhra Pradesh pages":"ஆந்திரப் பிரதேசம் பக்கங்கள்"});

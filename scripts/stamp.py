@@ -14,9 +14,11 @@ Three kinds of reference:
 
   * `src` and `href` in every page, to a local script, stylesheet, image,
     download or data file;
-  * the data files the pages fetch through `SIR.json`, and the translation
-    dictionary `assets/i18n.js` loads: their hashes are written into
-    `assets/i18n.js` as `window.SIR_V`, which loads first on every page;
+  * the data files the pages fetch through `SIR.json`, and every piece of
+    the translation dictionaries under assets/i18n/<lang>/ that
+    `assets/i18n.js` loads (scripts/build_i18n.py writes them): their hashes
+    are written into `assets/i18n.js` as `window.SIR_V`, which loads first on
+    every page, and the loader asks only for a piece listed there;
   * the stamps in a page are taken after that, so the page's own reference
     to `i18n.js` changes when any data file does.
 
@@ -60,7 +62,8 @@ def put(path, text):
         open(path, 'w', encoding='utf-8').write(text)
 
 
-# 1. what the scripts fetch: every data file and every dictionary
+# 1. what the scripts fetch: every data file and every piece of every
+# dictionary, assets/i18n/<lang>/<name>.js, at any depth
 fetched = list(walk(os.path.join(ROOT, 'data'), ('.json',))) + list(walk(os.path.join(ROOT, 'assets', 'i18n'), ('.js',)))
 V = {os.path.relpath(p, ROOT).replace(os.sep, '/'): h(p) for p in fetched}
 src = open(I18N, encoding='utf-8').read()
