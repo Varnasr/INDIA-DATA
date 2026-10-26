@@ -141,7 +141,7 @@ def build():
     ver.update({v['url']: v for v in json.loads((RAW / 'round3_verified.json').read_text(encoding='utf-8'))})
     # later rounds (fourth to 14 October 2026, fifth The Wire's RTI piece, eighth to 19 October), each found and read twice
     fourth = []
-    for n in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20):
+    for n in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21):
         if (RAW / ('round%d.json' % n)).exists():
             fourth += json.loads((RAW / ('round%d.json' % n)).read_text(encoding='utf-8'))
             ver.update({v['url']: v for v in json.loads((RAW / ('round%d_verified.json' % n)).read_text(encoding='utf-8'))})

@@ -63,6 +63,10 @@ jobs:
       - name: Every string is translated, placeholders and links intact
         run: python3 scripts/check_i18n.py
 
+      # No dash, banned word or "X, not Y" turn in the site's own words.
+      - name: Writing rules
+        run: python3 scripts/check_writing.py
+
       - name: Every CSV parses and is rectangular
         run: |
           python3 - <<'PY'
