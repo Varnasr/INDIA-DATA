@@ -1,0 +1,161 @@
+# Written by scripts/build_site.py (build_feeds.headers). Every published
+# path but /embed/ may not be shown inside another site's frame.
+/
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/404.html
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/index.html
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/about-the-data/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/alerts/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/andaman/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/andhrapradesh/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/arunachal/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/assam/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/assets/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/bihar/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/calendar/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/chandigarh/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/chhattisgarh/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/corrections/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/data/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/delhi/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/dnhdd/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/downloads/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/feedback/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/fonts/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/goa/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/guide/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/gujarat/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/haryana/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/help/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/hyderabad/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/india/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/jharkhand/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/karnataka/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/kerala/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/lakshadweep/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/madhyapradesh/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/maharashtra/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/manipur/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/meghalaya/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/mizoram/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/nagaland/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/odisha/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/puducherry/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/punjab/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/rajasthan/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/reports/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/share/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/sikkim/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/support/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/tamilnadu/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/terms/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/tripura/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/updates/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/uttarakhand/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/uttarpradesh/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY
+/westbengal/*
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Frame-Options: DENY

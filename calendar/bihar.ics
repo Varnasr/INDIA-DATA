@@ -1,0 +1,56 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Off the Roll//SIR dates//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Off the Roll: Bihar
+X-WR-CALDESC:The dates of the Special Intensive Revision in Bihar\, from th
+ e Election Commission's orders\, and dates moved since as the press report
+ ed them.
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VEVENT
+UID:bihar-enumeration@offtheroll.in
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20250625
+DTEND;VALUE=DATE:20250727
+SUMMARY:Bihar: house visits and enumeration forms
+DESCRIPTION:House visits and enumeration forms. Set in: Order of 24.06.2025
+ . Source: https://www.ceo.kerala.gov.in/ceokerala/pdf/SIR/sir-12-states.pd
+ f. More: https://offtheroll.in/bihar/
+TRANSP:TRANSPARENT
+URL:https://offtheroll.in/bihar/
+END:VEVENT
+BEGIN:VEVENT
+UID:bihar-draft@offtheroll.in
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20250801
+DTEND;VALUE=DATE:20250802
+SUMMARY:Bihar: draft roll published
+DESCRIPTION:Draft roll published. More: https://offtheroll.in/bihar/
+TRANSP:TRANSPARENT
+URL:https://offtheroll.in/bihar/
+END:VEVENT
+BEGIN:VEVENT
+UID:bihar-claims@offtheroll.in
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20250801
+DTEND;VALUE=DATE:20250902
+SUMMARY:Bihar: claims and objections
+DESCRIPTION:Claims and objections. Set in: Order of 24.06.2025. Source: htt
+ ps://www.ceo.kerala.gov.in/ceokerala/pdf/SIR/sir-12-states.pdf. More: http
+ s://offtheroll.in/bihar/
+TRANSP:TRANSPARENT
+URL:https://offtheroll.in/bihar/
+END:VEVENT
+BEGIN:VEVENT
+UID:bihar-final@offtheroll.in
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20250930
+DTEND;VALUE=DATE:20251001
+SUMMARY:Bihar: final roll published
+DESCRIPTION:Final roll published. Source: http://ceoelection.bihar.gov.in/P
+ DF/Year_2025/Format1-8/Format_4B.pdf. More: https://offtheroll.in/bihar/
+TRANSP:TRANSPARENT
+URL:https://offtheroll.in/bihar/
+END:VEVENT
+END:VCALENDAR

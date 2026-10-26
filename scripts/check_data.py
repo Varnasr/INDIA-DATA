@@ -257,6 +257,65 @@ def _share():
     assert 'share/' in terms and 'Netlify' in terms and 'no forms' not in terms, 'terms/ does not describe the form'
 
 
+def _alerts():
+    # the final-roll alert form: Netlify must see it on every pending state's
+    # page and on the process page, with its honeypot and thanks page, the
+    # policy must still let it post, and the terms page must describe it
+    import glob
+    pages = [p for p in glob.glob(os.path.join(ROOT, '*', 'index.html')) + [os.path.join(ROOT, 'india', 'process', 'index.html')]
+             if 'name="roll-alert"' in open(p, encoding='utf-8').read()]
+    assert os.path.join(ROOT, 'india', 'process', 'index.html') in pages, 'india/process/ has no alert form'
+    assert len(pages) >= 2, 'no state page carries the alert form'
+    for p in pages:
+        page = open(p, encoding='utf-8').read()
+        f = re.search(r'<form[^>]*name="roll-alert"[^>]*>', page).group(0)
+        for a in ('data-netlify="true"', 'netlify-honeypot="company_website"', 'method="POST"', 'action="/alerts/thanks/"'):
+            assert a in f, '%s: alert form lacks %s' % (os.path.relpath(p, ROOT), a)
+        assert '<input type="hidden" name="form-name" value="roll-alert">' in page, '%s: alert form lacks its form-name field' % os.path.relpath(p, ROOT)
+        assert re.search(r'<input[^>]*name="company_website"', page), '%s: alert form lacks its honeypot' % os.path.relpath(p, ROOT)
+        assert re.search(r'<input[^>]*name="email"[^>]*required', page), '%s: the email field is not required' % os.path.relpath(p, ROOT)
+    assert os.path.exists(os.path.join(ROOT, 'alerts', 'thanks', 'index.html')), 'alerts/thanks/ is missing'
+    terms = open(os.path.join(ROOT, 'terms', 'index.html'), encoding='utf-8').read()
+    assert 'final roll is published' in terms and 'Netlify' in terms and 'info@impactmojo.in' in terms, 'terms/ does not describe the alert form'
+    toml = open(os.path.join(ROOT, 'netlify.toml'), encoding='utf-8').read()
+    assert "form-action 'self'" in toml, "the policy no longer lets forms post to the site"
+
+
+def _feeds():
+    # the feed parses, the calendars are well formed, the data index lists
+    # every published data file, and every published path but /embed/ refuses
+    # to be framed while /embed/ allows it
+    import xml.etree.ElementTree as ET
+    import glob
+    ns = '{http://www.w3.org/2005/Atom}'
+    feed = ET.parse(os.path.join(ROOT, 'feed.xml')).getroot()
+    assert feed.tag == ns + 'feed' and feed.findall(ns + 'entry'), 'feed.xml has no entries'
+    for f in [os.path.join(ROOT, 'calendar.ics')] + glob.glob(os.path.join(ROOT, 'calendar', '*.ics')):
+        t = open(f, encoding='utf-8', newline='').read()
+        rel = os.path.relpath(f, ROOT)
+        assert t.startswith('BEGIN:VCALENDAR\r\n') and t.endswith('END:VCALENDAR\r\n'), '%s is not a calendar' % rel
+        assert '\n' not in t.replace('\r\n', ''), '%s has a line not ended by CRLF' % rel
+        ev = t.split('BEGIN:VEVENT')[1:]
+        assert ev and len(ev) == t.count('END:VEVENT'), '%s has unclosed events' % rel
+        uids = re.findall(r'\r\nUID:([^\r]+)', t)
+        assert len(uids) == len(ev) == len(set(uids)), '%s: every event needs one UID of its own' % rel
+        assert all('DTSTART;VALUE=DATE:' in e and 'DTEND;VALUE=DATE:' in e for e in ev), '%s: an event is not all-day' % rel
+        assert all(len(x.encode('utf-8')) <= 75 for x in t.split('\r\n')), '%s has a line longer than 75 octets' % rel
+    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+    import stage_site
+    idx = {r['path'] for r in json.load(open(os.path.join(ROOT, 'data', 'index.json'), encoding='utf-8'))['files']}
+    pub = {f for f in stage_site.published() if f.startswith(('data/', 'downloads/')) and not f.endswith('.html') and f != 'data/index.json'}
+    assert idx == pub, 'data/index.json differs from the published data files: %s' % sorted(idx ^ pub)[:5]
+    hdr = open(os.path.join(ROOT, '_headers'), encoding='utf-8').read()
+    for d in stage_site.PUBLIC_DIRS - {'embed'}:
+        assert '\n/%s/*\n  Content-Security-Policy: frame-ancestors \'none\'\n  X-Frame-Options: DENY\n' % d in hdr, '/%s/ may be framed' % d
+    assert not re.search(r'^/embed', hdr, re.M), '_headers forbids framing /embed/'
+    toml = open(os.path.join(ROOT, 'netlify.toml'), encoding='utf-8').read()
+    star = re.search(r'for = "/\*"\s*\[headers.values\](.*?)(?=\[\[|\Z)', toml, re.S).group(1)
+    assert 'frame-ancestors' not in star and 'X-Frame-Options' not in star, 'the rule for /* sets a frame rule, which Netlify joins onto /embed/'
+    assert re.search(r'for = "/embed/\*"\s*\[headers.values\]\s*Content-Security-Policy = "frame-ancestors \*"', toml), '/embed/ cannot be framed'
+
+
 def _ac_change():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_ac_change.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -388,6 +447,8 @@ def _seat_pages():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'make_district_pages.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'make_embed_pages.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()
 
 
 def _page_with_scripts(path):
@@ -466,6 +527,8 @@ for name, fn in [
     ('both forms of SIR.table work', _tables),
     ('the help page is current, every remedy and organisation read twice', _help),
     ('the share form is wired for Netlify and the terms page describes it', _share),
+    ('the final-roll alert form is wired for Netlify and the terms page describes it', _alerts),
+    ('the feed, the calendars, the data index and the frame rules are sound', _feeds),
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
     ('the events page carries only events read twice and is current', _events),
