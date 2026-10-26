@@ -1303,3 +1303,8 @@ body.embed .emsrc{margin:.5rem 0 0;color:var(--muted);font-size:.85rem}
   body.brief .finding{margin:.15rem 0 .3rem;padding:0;font-size:9pt}
   body.brief #fSources{font-size:8.5pt;margin:.1rem 0}
 }
+/* What's new: the follow buttons sit in their own row, and each item's section name is its link */
+.follow{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 .4rem}
+.follow-note{font-size:.92rem;color:var(--muted)}
+#updates li{margin:.45rem 0}
+#updates .upd-sec{font-weight:600}

@@ -4,7 +4,8 @@
 <p class="report-lang">This page is in English only.</p>
 <article lang="en" dir="ltr" data-no-i18n>
 <p>What has been added to the site, by date, newest first. This page lists additions only. When a figure or a finding already on the site changes, the change is listed on <a href="../corrections/">Corrections</a>, with what the page said before and why.</p>
-<p><a class="btn" href="../feed.xml">Follow by feed</a> Paste the address of the feed, <code>https://offtheroll.in/feed.xml</code>, into any feed reader to see each day's additions there. The dates of each state's revision are in calendar files on the page on <a href="../india/process/">how the revision was run</a>.</p>
+<div class="follow"><a class="btn" href="../feed.xml">Follow by feed</a><a class="btn" href="../calendar.ics">Add the dates to a calendar</a></div>
+<p class="follow-note">To follow by feed, paste offtheroll.in/feed.xml into any feed reader. The calendar holds every state's draft and final roll dates and the Supreme Court's dated orders, and each state has its own calendar on the page on <a href="../india/process/">how the revision was run</a>.</p>
 <div id="updates"></div>
 </article>
 </main>
@@ -16,7 +17,12 @@ SIR.json('data/updates.json').then(function (U) {
   var fmt = function (d) { return new Date(d + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }); };
   document.getElementById('updates').innerHTML = U.entries.map(function (e) {
     return '<h2 id="d-' + e.date + '">' + fmt(e.date) + '</h2><ul>' + e.items.map(function (it) {
-      return '<li>' + (it[1] ? '<a href="' + root + SIR.esc(it[1]) + '">' + SIR.esc(it[0]) + '</a>' : SIR.esc(it[0])) + '</li>';
+      // the section name before the first colon is the link, and the rest
+      // reads as plain text, so a long item is not one long underline
+      var t = it[0], i = t.indexOf(': '), head = i > 0 ? t.slice(0, i) : '', rest = i > 0 ? t.slice(i + 2) : t;
+      if (!it[1]) return '<li>' + SIR.esc(t) + '</li>';
+      if (!head) return '<li><a href="' + root + SIR.esc(it[1]) + '">' + SIR.esc(t) + '</a></li>';
+      return '<li><a class="upd-sec" href="' + root + SIR.esc(it[1]) + '">' + SIR.esc(head) + '</a>. ' + SIR.esc(rest.charAt(0).toUpperCase() + rest.slice(1)) + (/[.?]$/.test(rest) ? '' : '.') + '</li>';
     }).join('') + '</ul>';
   }).join('');
 }).catch(SIR.fail);
