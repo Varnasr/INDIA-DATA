@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Assam 2026 · a special revision of the roll, and the record on D-voters, tribunals and detention":"असम 2026 · मतदाता सूची का विशेष पुनरीक्षण, और डी-वोटर, ट्रिब्यूनल और डिटेंशन का रिकॉर्ड","Assam pages":"असम के पेज"});

@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Maharashtra 2026 · the names left off, constituency by constituency":"مہاراشٹر 2026 · چھوٹے نام، حلقہ وار","Maharashtra pages":"مہاراشٹر کے صفحات"});

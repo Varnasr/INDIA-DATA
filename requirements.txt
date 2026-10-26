@@ -1,0 +1,6 @@
+# The build's two dependencies, pinned: a pandas that reads a sheet differently
+# would move the published figures without an error. Raise them together and
+# confirm check_data.py, verify_bihar.py and every builder's --check give the
+# same output before committing.
+pandas==3.1.0
+openpyxl==3.1.5

@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Mizoram 2026 · the Special Intensive Revision of the roll":"மிசோரம் 2026 · வாக்காளர் பட்டியலின் சிறப்புத் தீவிரத் திருத்தம்","Mizoram pages":"மிசோரம் பக்கங்கள்"});

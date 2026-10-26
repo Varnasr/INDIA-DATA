@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Build the Hyderabad Old City SIR figures from the explorer's own aggregates.
 
-    python3 scripts/build_hyderabad.py          # writes data/hyderabad/*.json
+    python3 scripts/build_hyderabad.py          # writes data/hyderabad/summary.json and parts.json
     python3 scripts/build_hyderabad.py --check  # fails if they are stale
 
 The explorer at hyderabad/explorer/ carries, per polling part, counts of every
 elector by fate, reason, age band, sex, name-estimated religion, 2002 linkage
 and hearing rule. Those counts were built from the CEO Telangana SIR exports
-by the HDCC data team; no row-level file is in this repository. This script
-reads the same object the explorer renders, so the two cannot disagree, and
+by the HDCC data team; no row-level file is in this repository. They are kept
+in data/hyderabad/explorer.json, which the explorer page fetches. This script
+reads the same file the explorer renders, so the two cannot disagree, and
 derives the analyses the Bihar pages carry: rates by group, and, because the
 Old City files cover every elector, comparisons *within* the same part.
 
@@ -21,22 +22,20 @@ group, removes that.
 import json
 import math
 import os
-import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# The explorer's source in site/pages; scripts/build_site.py writes the page from it.
-SRC = os.path.join(ROOT, 'site', 'pages', 'hyderabad', 'explorer', 'index.html')
+# The explorer's counts, which hyderabad/explorer/ fetches. Edited by hand
+# from the HDCC aggregates; nothing in this repository writes it.
+SRC = os.path.join(ROOT, 'data', 'hyderabad', 'explorer.json')
 OUT = os.path.join(ROOT, 'data', 'hyderabad')
 CHECK = '--check' in sys.argv
 STALE = []
 
 
 def load():
-    h = open(SRC, encoding='utf-8').read()
-    i = h.index('const D=') + len('const D=')
-    D, _ = json.JSONDecoder().raw_decode(h[i:])
-    return D
+    with open(SRC, encoding='utf-8') as fh:
+        return json.load(fh)
 
 
 def rate(a, b, k=4):

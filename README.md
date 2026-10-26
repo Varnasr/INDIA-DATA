@@ -44,9 +44,9 @@ rates for each group and compare groups inside the same polling part.
 ## Build and check
 
 ```bash
-pip install pandas==3.0.6 openpyxl==3.1.5
+pip install -r requirements.txt
 python3 scripts/build_bihar.py        # data/bihar/raw -> data/bihar/*.json
-python3 scripts/build_hyderabad.py    # hyderabad/explorer -> data/hyderabad/*.json
+python3 scripts/build_hyderabad.py    # data/hyderabad/explorer.json -> summary.json, parts.json
 python3 scripts/build_tamilnadu.py    # data/tamilnadu/raw -> data/tamilnadu/*
 python3 scripts/check_data.py         # 21 checks, run by CI
 python3 scripts/verify_bihar.py       # recomputes every Bihar figure from the raw files, run by CI

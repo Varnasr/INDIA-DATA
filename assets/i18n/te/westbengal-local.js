@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"ఎన్నికలు","West Bengal 2026 · every constituency, the roll from 2024 to the election":"పశ్చిమ బెంగాల్ 2026 · ప్రతి నియోజకవర్గం, 2024 నుండి ఎన్నికల వరకు జాబితా","West Bengal pages":"పశ్చిమ బెంగాల్ పేజీలు"});

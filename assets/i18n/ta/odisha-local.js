@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Odisha 2026 · the Special Intensive Revision of the roll":"ஒடிசா 2026 · வாக்காளர் பட்டியலின் சிறப்புத் தீவிரத் திருத்தம்","Odisha pages":"ஒடிசா பக்கங்கள்"});

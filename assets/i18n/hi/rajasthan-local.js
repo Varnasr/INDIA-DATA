@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Rajasthan 2026 · the names left off the draft, and every constituency's roll from 2023":"राजस्थान 2026 · मसौदे से छूटे नाम, और 2023 से हर विधानसभा क्षेत्र की सूची","Rajasthan pages":"राजस्थान के पृष्ठ"});

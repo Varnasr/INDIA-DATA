@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"انتخابات","West Bengal 2026 · every constituency, the roll from 2024 to the election":"مغربی بنگال 2026 · ہر حلقہ، 2024 سے انتخاب تک فہرست","West Bengal pages":"مغربی بنگال کے صفحات"});

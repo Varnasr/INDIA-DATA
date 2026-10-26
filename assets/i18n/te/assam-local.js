@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Assam 2026 · a special revision of the roll, and the record on D-voters, tribunals and detention":"అస్సాం 2026 · ఓటర్ల జాబితా ప్రత్యేక సవరణ, అలాగే డి-ఓటర్లు, ట్రిబ్యునళ్లు, నిర్బంధ కేంద్రాల రికార్డు","Assam pages":"అస్సాం పేజీలు"});

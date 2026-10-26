@@ -1,0 +1,1 @@
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Elections":"தேர்தல்கள்","West Bengal 2026 · every constituency, the roll from 2024 to the election":"மேற்கு வங்காளம் 2026 · ஒவ்வொரு தொகுதியும், 2024 முதல் தேர்தல் வரை வாக்காளர் பட்டியல்","West Bengal pages":"மேற்கு வங்காளப் பக்கங்கள்"});
