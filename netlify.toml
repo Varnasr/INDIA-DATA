@@ -59,14 +59,16 @@
   [headers.values]
     Content-Type = "text/calendar; charset=utf-8"
 
-# Stylesheets, scripts, data and the dictionaries are fetched under a
-# ?v=<content hash> address that changes whenever the file does, so a copy can
-# be kept for an hour and reused while it is refreshed. Pages themselves keep
-# Netlify's default, revalidated on every load.
+# Every page loads its stylesheets, scripts and dictionaries under a
+# ?v=<content hash> address that changes whenever the file does (checked over
+# every published page on 26 October 2026), so a browser may keep a copy of
+# anything under /assets/ for a year. The data files keep an hour, because the
+# open data index and the download links send other sites to them with no stamp.
+# Pages themselves keep Netlify's default, revalidated on every load.
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+    Cache-Control = "public, max-age=31536000, immutable"
 [[headers]]
   for = "/data/*"
   [headers.values]
