@@ -247,7 +247,7 @@ R.p('Across all states the rate of exclusion goes most with the %s (%.2f), and t
        ('The only characteristics that go with the rate of exclusion the same way in both phases are %s.' % andj(['%s (%.2f in phase 2, %.2f in phase 3)' % (CL[c['key']], c['per_100_phase2'], c['per_100_phase3']) for c in both])) if both else 'No characteristic goes with the rate of exclusion the same way in both phases.',
        mus['per_100_all'], mus['per_100_phase2'], mus['per_100_phase3'], CL[dupTop['key']], dupTop['duplicate_big'],
        andj([x['key'].replace('_pct', ' share').replace('_', ' ') for x in N['robustness_2011'] if x['rho_recent'] is not None and x['rho_2011'] is not None and ((abs(x['rho_recent']) >= 0.2) != (abs(x['rho_2011']) >= 0.2) or (abs(x['rho_recent']) >= 0.2 and (x['rho_recent'] > 0) != (x['rho_2011'] > 0)))]) or 'none of them'))
-R.p('States on an international border left fewer names off than interior states. The typical border state left off %.1f per 100 electors across %d states, and the typical interior state %.1f across %d. None of these relationships says whose names were left off inside a state, because a pattern across states tells us nothing about individuals.'
+R.p('States on an international border left fewer names off than interior states. The typical border state left off %.1f per 100 electors across %d states, and the typical interior state %.1f across %d. None of these relationships says whose names were left off inside a state, because a pattern across states says nothing about individuals.'
     % (B['per_100_yes'], B['n_per_100_yes'], B['per_100_no'], B['n_per_100_no']))
 
 R.h2('After the final rolls')
@@ -351,7 +351,7 @@ R.p('In the ten years from 2014 to 2024 the roll gained %s. The %s names left of
 PR = J('india', 'process.json')
 R.h2('How the revision was run')
 moves = lambda r: len([st for st in r['steps'] if st.get('kind') != 'published']) - 1
-R.p('The rules changed while the revision was under way. The site\'s page on how the revision was run lists %d orders, letters and judgments in date order, %d of them from the Supreme Court, each linked to its document, '
+R.p('The rules changed while the revision was under way. The page on how the revision was run lists %d orders, letters and judgments in date order, %d of them from the Supreme Court, each linked to its document, '
     'and draws every state\'s schedule as it was set and as it was moved. Across %d states and union territories, dates were changed %d times in the published orders and notes.'
     % (len(PR['timeline']), len([t for t in PR['timeline'] if t['who'] == 'sc']), len(PR['schedules']), sum(moves(r) for r in PR['schedules'])))
 R.p('What made it harder to stay on the roll, each point resting on an order or a judgment:')
@@ -380,7 +380,7 @@ R.numbered([
 
 R.h1('Method and sources')
 R.p('Each state\'s Chief Electoral Officer, the Election Commission\'s officer in charge of its rolls, published figures when the draft roll came out, and the All India figures are those officers\' own. They are taken from the press notes of (%s) and from press reports for the other states. Bihar\'s row is counted from the lists of names left off the draft. '
-    'The reasons are grouped into the three every state reported. The state rows add up to %s left off, against the %s reported nationally on 30 September 2026, and the difference is rounding. Each row\'s source is listed on the method page of the site and in the downloadable table.'
+    'The reasons are grouped into the three every state reported. The state rows add up to %s left off, against the %s reported nationally on 30 September 2026, and the difference is rounding. Each row\'s source is listed on the method page and in the downloadable table.'
     % (andj([s['state'] for s in S if s['source'] == 'primary']), crore(T['removed']), 'about 13.3 crore'))
 R.p('No name, EPIC number or address is published.')
 

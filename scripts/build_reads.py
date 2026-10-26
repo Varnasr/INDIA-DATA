@@ -18,10 +18,11 @@ RAW = ROOT / 'data' / 'india' / 'raw' / 'reads_research'
 OUT = ROOT / 'data' / 'india' / 'reads.json'
 
 # the groups the page shows, in order, and which group each item goes in
-GROUPS = ['Investigations', "The Commission's account", 'Data and analysis', 'Research', 'Law and the courts', 'Videos']
+GROUPS = ['Investigations', "The Commission's account", 'Party accounts', 'Data and analysis', 'Research', 'Law and the courts', 'Videos']
 TYPE = {
     'article (investigation)': 'Investigations',
     'report (official press note)': "The Commission's account",
+    'article (party account)': 'Party accounts',
     'analysis (data)': 'Data and analysis', 'article (data)': 'Data and analysis', 'report (analysis)': 'Data and analysis',
     'article (survey report)': 'Data and analysis',
     'academic (analysis)': 'Research', 'academic (working note)': 'Research',
@@ -141,7 +142,7 @@ def build():
     ver.update({v['url']: v for v in json.loads((RAW / 'round3_verified.json').read_text(encoding='utf-8'))})
     # later rounds (fourth to 14 October 2026, fifth The Wire's RTI piece, eighth to 19 October), each found and read twice
     fourth = []
-    for n in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21):
+    for n in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22):
         if (RAW / ('round%d.json' % n)).exists():
             fourth += json.loads((RAW / ('round%d.json' % n)).read_text(encoding='utf-8'))
             ver.update({v['url']: v for v in json.loads((RAW / ('round%d_verified.json' % n)).read_text(encoding='utf-8'))})
