@@ -1240,3 +1240,66 @@ h1,h2{overflow-wrap:break-word;hyphens:manual}
   .start .menu .ql a{padding:.5rem .6rem;font-size:.84rem;line-height:1.25;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;min-height:2.75rem}
   .start .menu .about a{padding:.5rem .6rem;font-size:.84rem}
 }
+
+/* The dates of a state's revision as calendar files, and the form asking for
+   one email when its final roll is published (build_site.py, dates_block). */
+.rollcal{margin:2rem 0 1rem;padding:1rem 0 .4rem;border-top:2px solid var(--line)}
+.rollcal .dlh{font-size:1.05rem;margin:0 0 .6rem}
+.rollcal-links{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.calstates{display:flex;flex-wrap:wrap;gap:.35rem .9rem;font-size:.9rem}
+.alertform{margin-top:1.2rem;padding:1rem;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.alertform h3{font-size:1rem;margin:0 0 .5rem}
+.alertform select,.cmpick select{width:100%;max-width:24rem;font:inherit;padding:.55rem .6rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+@media print{.rollcal,.embedbox,details.cite{display:none}}
+
+/* The code to embed a place's chart on another site (embed_block). */
+.embedbox{margin:1rem 0;max-width:var(--measure)}
+.embedbox>summary{display:inline-flex;cursor:pointer;list-style:none}
+.embedbox>summary::-webkit-details-marker{display:none}
+.embedcode{display:block;width:100%;box-sizing:border-box;font:.85rem/1.4 var(--mono);padding:.6rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);resize:vertical;margin:.5rem 0}
+.embedacts{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+
+/* "Cite this page", above the footer on every page (cite_block). */
+details.cite{max-width:var(--page);margin:1.5rem auto 0;padding:0 1rem;font-size:.9rem}
+details.cite>summary{cursor:pointer;color:var(--muted);font-weight:600}
+details.cite .citetext{margin:.5rem 0;padding:.6rem .8rem;border-inline-start:3px solid var(--line);background:var(--card);overflow-wrap:anywhere}
+
+/* A chart alone, for another site's frame (/embed/, embed_shell). */
+body.embed{background:var(--card)}
+body.embed .embedmain{max-width:none;margin:0;padding:.75rem 1rem 1rem}
+body.embed .emh{font-size:1.1rem;margin:0 0 .25rem}
+body.embed .emsub{margin:0 0 .5rem;color:var(--muted);font-size:.9rem}
+body.embed .emsrc{margin:.5rem 0 0;color:var(--muted);font-size:.85rem}
+
+/* Comparing constituencies within one state (india/compare-seats/). */
+.cmpick{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:.2rem 1rem;max-width:var(--page)}
+.cmpick p{margin:0 0 .7rem}
+.cmpick label{display:block;font-size:.92rem;font-weight:600;margin-bottom:.3rem}
+#tCmp th[scope=row]{text-align:start;font-weight:600}
+#tCmp td,#tCmp thead th{text-align:end}
+
+/* A seat page on one A4 page (seat.js, "Print this seat"): the summary, the
+   seat against its district and state, the margin and the sources. */
+.printonly{display:none}
+@media print{
+  body.brief .printonly{display:inline}
+  body.brief #sReasons,body.brief #sWomen,body.brief #sAfter,body.brief #sPress,body.brief .page-faq,body.brief .seatlinks,
+  body.brief .report-lang,body.brief #dLinks,body.brief .limits,body.brief .pageshare,body.brief footer,body.brief .tools,body.brief .i18n-note{display:none!important}
+  body.brief article.seat h2:nth-of-type(2),body.brief article.seat h2:nth-of-type(2)+.grid{display:none}
+  :root:has(body.brief){font-size:12px}
+  body.brief{font-size:9.5pt;line-height:1.35}
+  body.brief main{padding:0;margin:0}
+  body.brief main>.note{display:none}
+  body.brief .page-head{padding:0;margin:0 0 .3rem}
+  body.brief h1{font-size:15pt}
+  body.brief h2{font-size:11pt;margin:.45rem 0 .15rem}
+  body.brief ol.summary{margin:.15rem 0;font-size:9.5pt}
+  body.brief ol.summary li{padding:.2rem 0;padding-inline-start:1.6rem}
+  body.brief ol.summary li::before{font-size:11pt;top:.15rem}
+  body.brief article.seat>p{margin:.2rem 0;font-size:8.5pt}
+  body.brief .grid{margin:.15rem 0;gap:0}
+  body.brief .panel{padding:.3rem .5rem;border-radius:6px}
+  body.brief .vizbox svg{max-height:52mm;width:auto;max-width:100%}
+  body.brief .finding{margin:.15rem 0 .3rem;padding:0;font-size:9pt}
+  body.brief #fSources{font-size:8.5pt;margin:.1rem 0}
+}

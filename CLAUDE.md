@@ -53,6 +53,28 @@ python3 -m http.server 8000
   which publishes every locked site on the Netlify team. A Claude scheduled task
   starts it at 20:01 IST, because GitHub starts its own scheduled runs hours late.
 
+## Feeds, calendars, embeds and alerts
+
+- `scripts/build_site.py` also writes, through `scripts/build_feeds.py`,
+  `feed.xml` (from `data/updates.json`), `calendar.ics` and `calendar/<state>.ics`
+  (from `data/india/process.json`, `states.json` and `events.json`),
+  `data/index.json` (every published data file) and `_headers`. All are
+  committed, deterministic and covered by `--check`. Calendars are CRLF by
+  RFC 5545 (`.gitattributes`); read them with `newline=''`.
+- **Framing.** Netlify joins the values of a header that two matching rules set,
+  so the `/*` block in `netlify.toml` carries no frame rule. `_headers` sends
+  `frame-ancestors 'none'` and `X-Frame-Options: DENY` for every published
+  folder except `embed/`, which `netlify.toml` opens to any site.
+  `check_data.py` fails if either half drifts.
+- `/embed/<place>/` pages come from `scripts/make_embed_pages.py`; their shell has
+  no header or footer. A state's chart adds its constituency table up by district
+  in the measure `assets/seat.js` names, so it never sets one state against another.
+- The final-roll alert form (`roll-alert`) is written by `build_site.py` on every
+  pending state's overview and on `india/process/`. Nothing sends mail: the owner
+  sends each alert by hand. The terms page describes it; keep the two in step.
+- "Cite this page" carries the build hash `scripts/stamp.py` writes; the date
+  without a script is the latest date in `data/updates.json`.
+
 ## Writing
 
 Plain, full sentences with facts in them. No em dashes, no "X, not Y" turns, no

@@ -27,6 +27,9 @@ import re
 import sys
 from urllib.parse import quote
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import build_feeds as BF  # noqa: E402  the feed, calendars, data index and _headers
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'site', 'pages')
 CHECK = '--check' in sys.argv
@@ -53,7 +56,9 @@ for _p in CFG['places']:
         raise SystemExit('FAIL - place class %r is also a class sir.css styles; give the place a "class" of its own' % _c)
 SIRJS = os.path.join(ROOT, 'assets', 'sir.js')
 ICONS = json.loads(re.search(r'var ICONS = (\{.*?\});', open(SIRJS, encoding='utf-8').read()).group(1))
-STAMP = re.compile(r'\?v=[0-9a-f]{8}')
+# stamp.py adds ?v= to every reference and the build's hash to the citation
+# box, so a page is compared with both left out
+STAMP = re.compile(r'\?v=[0-9a-f]{8}|(?<=<span class="cite-build">)[0-9a-f]*(?=</span>)')
 stale = []
 
 
@@ -210,6 +215,114 @@ def asof_html(a):
     return '<p class="asof" data-no-i18n%s>%s</p>' % (attrs, html.escape(text))
 
 
+# ------------------------------------------------ feeds, alerts, citations
+# The calendars (scripts/build_feeds.py), keyed by place id, and the date of
+# the latest entry on What's new, which stands for the build's date wherever
+# a page has to name one without a script: nothing here reads the clock.
+CAL_FILES, CAL_STATE = BF.calendars(CFG)
+LATEST = BF.latest_update()
+_cff = open(os.path.join(ROOT, 'CITATION.cff'), encoding='utf-8').read()
+_fam = re.search(r'family-names:\s*(.+)', _cff)
+_giv = re.search(r'given-names:\s*(.+)', _cff)
+CITE_AUTHOR = ('%s, %s' % (_fam.group(1).strip(), _giv.group(1).strip())) if _fam and _giv else CFG['credit']
+# the states whose final roll is still to come, for the alert form
+PENDING = []
+for _p in CFG['places']:
+    if _p.get('zone') and _p['pages']:
+        _a = asof(_p)
+        if _a and _a['k'] != 'final':
+            PENDING.append((_p['id'], BF.state_name(_p)))
+PENDING.sort(key=lambda x: x[1])
+# charts another site may show in a frame (site/pages/embed, make_embed_pages.py)
+EMBEDS = {'india': 'india'}
+EMBEDS.update({pid: folder for pid, folder in SEAT_PAGES.items()})
+EMBEDS = {k: v for k, v in EMBEDS.items() if os.path.exists(os.path.join(SRC, 'embed', v, 'index.html'))}
+
+
+def alert_form(root, chosen=None):
+    """The Netlify form asking for one email when a state's final roll is out.
+    Netlify finds it in the built pages; nothing is sent automatically."""
+    opts = ('' if chosen else '<option value="">Choose a state</option>') + ''.join(
+        '<option data-no-i18n%s>%s</option>' % (' selected' if n == chosen else '', html.escape(n)) for _pid, n in PENDING)
+    return ('<form class="shareform alertform" name="roll-alert" method="POST" action="/alerts/thanks/" data-netlify="true" netlify-honeypot="company_website">'
+            '<h3>Get one email when the final roll is published</h3>'
+            '<input type="hidden" name="form-name" value="roll-alert">'
+            '<p class="hp" hidden data-no-i18n><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p>'
+            '<p>Leave an email address and pick a state. One email is sent, by hand, on the day that state\'s final roll is published. '
+            'The address is used for nothing else, and it is never published or shared.</p>'
+            '<p><label for="raState">State</label><select id="raState" name="state" required>%s</select></p>'
+            '<p><label for="raEmail">Email address</label><input id="raEmail" name="email" type="email" autocomplete="email" required></p>'
+            '<p><button type="submit" class="btn send">Ask for the email</button></p>'
+            '<p class="note" data-i18n-each><a href="%sterms/#privacy">How the address is kept, and how to have it deleted</a></p>'
+            '</form>' % (opts, root))
+
+
+def dates_block(out, place, root):
+    """Calendars and the alert form: on each state's overview, and on the
+    pages about the process and the events."""
+    if out in ('india/process/', 'india/events/'):
+        intro = ('<p>Every state\'s draft and final roll, the Supreme Court\'s dated orders and the events still to come can be added to any calendar app. '
+                 'Each state has a calendar of its own as well.</p>')
+        links = '<p class="rollcal-links" data-i18n-each><a class="btn" href="%scalendar.ics">Add the dates for all India to a calendar</a></p>' % root
+        states = ''.join(' <a href="%s%s">%s</a>' % (root, CAL_STATE[p['id']], html.escape(BF.state_name(p)))
+                         for p in sorted(CFG['places'], key=lambda q: BF.state_name(q)) if p['id'] in CAL_STATE)
+        links += '<p class="calstates" data-no-i18n lang="en" dir="ltr">%s</p>' % states
+        form = alert_form(root) if out == 'india/process/' and PENDING else ''
+    elif place.get('zone') and place['pages'] and out == place['pages'][0][0] and place['id'] in CAL_STATE:
+        intro = '<p>The dates of this state\'s revision, from the Election Commission\'s orders, can be added to any calendar app.</p>'
+        links = ('<p class="rollcal-links" data-i18n-each><a class="btn" href="%s%s">Add this state\'s dates to a calendar</a> '
+                 '<a class="btn" href="%scalendar.ics">Add the dates for all India to a calendar</a></p>' % (root, CAL_STATE[place['id']], root))
+        name = BF.state_name(place)
+        form = alert_form(root, name) if any(n == name for _p, n in PENDING) else ''
+    else:
+        return ''
+    return '<section class="rollcal"><h2 class="dlh">Dates of the revision</h2>%s%s%s</section>' % (intro, links, form)
+
+
+def embed_block(out, place, root):
+    """The code to show a place's chart on another site, on its overview."""
+    folder = EMBEDS.get(place['id'])
+    if not folder or not place['pages'] or out != place['pages'][0][0]:
+        return ''
+    src = CFG['url'] + 'embed/%s/' % folder
+    code = ('<iframe src="%s" title="%s" width="100%%" height="620" style="border:0" loading="lazy"></iframe>'
+            % (src, 'Off the Roll: ' + ('names left off per 100 electors, by state' if folder == 'india' else BF.state_name(place) + ', by district')))
+    what = ('The chart of names left off per 100 electors, state by state, can be shown on another website with the code below. It names its source and links back here.'
+            if folder == 'india' else
+            'A chart of this state\'s districts, in its own measure, can be shown on another website with the code below. It names its source and links back here.')
+    return ('<details class="embedbox"><summary class="btn">Embed this chart</summary><p>%s</p>'
+            '<textarea class="embedcode" readonly rows="3" aria-label="Code to embed the chart" data-no-i18n>%s</textarea>'
+            '<p class="embedacts" data-i18n-each><button type="button" class="btn embed-copy">Copy the code</button> '
+            '<a href="%sembed/%s/">See the chart on its own</a></p></details>' % (what, html.escape(code), root, folder))
+
+
+def cite_block(out, meta):
+    """How to cite the page: built here in English, with the build's hash
+    (scripts/stamp.py) and a date; sir.js puts today's date in its place."""
+    title = re.sub(r':\s*%s$' % re.escape(CFG['title']), '', meta['title'])
+    when = BF.long_date(LATEST)
+    ref = ('%s. "%s." <i>Off the Roll: %s</i>, %s. %s%s. Build <span class="cite-build"></span>, %s. Accessed <span class="cite-acc">%s</span>.'
+           % (html.escape(CITE_AUTHOR), html.escape(title), html.escape(CFG['title']), html.escape(CFG['credit']), CFG['url'],
+              html.escape(out if out != '404.html' else ''), when, when))
+    return ('<details class="cite"><summary>Cite this page</summary>'
+            '<p class="citetext" data-no-i18n lang="en" dir="ltr">%s</p>'
+            '<p><button type="button" class="btn cite-copy">Copy the reference</button></p></details>' % ref)
+
+
+def embed_shell(out, meta, content, scripts, place, root):
+    """A chart alone, for another site's frame: no header, menus or footer,
+    only the chart, its source and a link back (site/pages/embed)."""
+    back = CFG['url'] + (place['pages'][0][0] if place['pages'] else '')
+    return (
+        '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<meta name="robots" content="noindex">\n'
+        '<script src="%sassets/i18n.js"></script>\n<title>%s</title>\n<meta name="description" content="%s">\n'
+        '<link rel="canonical" href="%s">\n<link rel="stylesheet" href="%sassets/sir.css">\n</head>\n'
+        '<body class="embed %s" data-place="%s" data-root="%s" data-back="%s">\n%s\n%s\n</body>\n</html>\n'
+    ) % (root, html.escape(meta['title'], quote=False), html.escape(meta['description']), back, root,
+         place.get('class', place['id']), place['id'], root, back, content, scripts)
+
+
 def shell(out, meta, content, scripts):
     """The whole page for site path `out` (e.g. 'bihar/results/')."""
     depth = out.count('/')
@@ -330,8 +443,8 @@ def shell(out, meta, content, scripts):
         fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
     fab = '<div class="fabs">%s</div>' % fab if fab else ''
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
-              ' · <a href="%s#why-this-site-exists">About this site</a> · <a href="%shelp/">Left off the roll? What to do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a list</a> · <a href="%ssupport/">Support our work</a> · <a href="%sterms/">Terms and privacy</a> · <a href="%supdates/">What\'s new</a> · <a href="%scorrections/">Corrections</a> · <a href="%sfeedback/?from=%s">Feedback</a>'
-              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, root, root, urllib.parse.quote(here or 'home', safe=''), CFG['email'], CFG['email']))
+              ' · <a href="%s#why-this-site-exists">About this site</a> · <a href="%shelp/">Left off the roll? What to do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a list</a> · <a href="%ssupport/">Support our work</a> · <a href="%sterms/">Terms and privacy</a> · <a href="%supdates/">What\'s new</a> · <a href="%sfeed.xml">Follow by feed</a> · <a href="%scorrections/">Corrections</a> · <a href="%sfeedback/?from=%s">Feedback</a>'
+              ' · <a href="mailto:%s">%s</a></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, root, root, root, urllib.parse.quote(here or 'home', safe=''), CFG['email'], CFG['email']))
     # On a phone the header's Downloads button is inside the menu, and the
     # footer link opened the downloads page at its top, where the first button
     # is the zip of every table. So every page of a place with a workbook
@@ -354,6 +467,8 @@ def shell(out, meta, content, scripts):
     # dashboards hand ranked lists and side-by-side measures to it
     if 'assets/sir.js' in scripts and 'assets/viz.js' not in scripts:
         scripts = re.sub(r'(<script src="[^"]*assets/sir\.js"></script>)', lambda m: m.group(1) + '\n' + m.group(1).replace('sir.js', 'viz.js'), scripts, count=1)
+    if meta.get('embed'):
+        return embed_shell(out, meta, content, scripts, place, root)
     if place['id'] != 'home':
         content = re.sub(r'(<div class="page-head"[^>]*>)', lambda m: m.group(1) + '<p class="kicker">%s</p>' % html.escape(place['label']) + asof_html(asof(place)), content, count=1)
     head_extra = ('\n' + meta['head']) if meta.get('head') else ''
@@ -372,6 +487,8 @@ def shell(out, meta, content, scripts):
                   '<meta property="og:locale" content="en_IN">\n<link rel="canonical" href="%s%s">\n%s%s'
                   % (html.escape(CFG['title']), t, d, CFG['url'], out, og, og, t, d, CFG['url'], out, ldjson(out, meta, place),
                      '\n<meta name="robots" content="noindex">' if out in NOINDEX else '')) + head_extra
+    # the What's new feed, for a reader's feed reader to find (build_feeds.py)
+    head_extra += '\n<link rel="alternate" type="application/atom+xml" title="Off the Roll: what\'s new" href="%sfeed.xml">' % root
     cls = place.get('class', place['id'])
     # dashboards and explorers get the wider column (sir.css, body.wide)
     if meta.get('own_tabs') or out.endswith('explorer/'):
@@ -380,6 +497,18 @@ def shell(out, meta, content, scripts):
     # (sir.js builds it from the h2s; sir.css keeps the margin for it)
     elif len(re.findall(r'<h2[\s>]', content)) >= 4 and 'class="report' not in content and place['id'] != 'home':
         cls += ' has-toc'
+    # added after the column is chosen, so they do not change it: the dates and
+    # alert form, and the code to embed the place's chart, before the page's
+    # questions or its download strip
+    extra = dates_block(out, place, root) + embed_block(out, place, root)
+    if extra:
+        for mark in ('<section class="page-faq"', '<section class="dlstrip"', '</main>'):
+            if mark in content:
+                content = content.replace(mark, extra + '\n' + mark, 1)
+                break
+        else:
+            content += extra
+    footer = cite_block(out, meta) + '\n' + footer
     return (
         '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
@@ -418,18 +547,19 @@ def externalise(text, rel):
 
 
 def put(path, text, compare_unstamped=True):
-    old = open(path, encoding='utf-8').read() if os.path.exists(path) else None
+    # newline='' keeps a calendar's CRLF line ends as they are, both ways
+    old = open(path, encoding='utf-8', newline='').read() if os.path.exists(path) else None
     same = old is not None and (STAMP.sub('', old) == STAMP.sub('', text) if compare_unstamped else old == text)
     if same:
         return
     stale.append(os.path.relpath(path, ROOT))
     if not CHECK:
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        open(path, 'w', encoding='utf-8').write(text)
+        open(path, 'w', encoding='utf-8', newline='').write(text)
 
 
 # pages kept out of search: the form's thank-you page
-NOINDEX = {'share/thanks/', 'support/thanks/', 'feedback/thanks/'}
+NOINDEX = {'share/thanks/', 'support/thanks/', 'feedback/thanks/', 'alerts/thanks/'}
 
 
 def ldjson(out, meta, place):
@@ -465,7 +595,8 @@ def build():
             out = rel[:-len('index.html')]
             meta, content, scripts = read_source(src)
             put(os.path.join(ROOT, rel), externalise(shell(out, meta, contents(heading_ids(content)), scripts), rel))
-            if out not in NOINDEX:
+            # a chart for another site's frame is not a page to search for
+            if out not in NOINDEX and not out.startswith('embed/'):
                 pages.append(out)
     # the 404 page is served at whatever address was asked for, so every link
     # and file in it is made absolute, and it is kept out of search engines
@@ -495,6 +626,20 @@ def build():
         sys.exit('assets/sir.js has no /*sites*/ marker')
     put(SIRJS, js2, compare_unstamped=False)
     put(os.path.join(ROOT, 'data', 'search.json'), search_index(), compare_unstamped=False)
+    # the What's new feed, the calendars, the data index and the frame rules
+    put(os.path.join(ROOT, 'feed.xml'), BF.feed(CFG), compare_unstamped=False)
+    for path, text in sorted(CAL_FILES.items()):
+        put(os.path.join(ROOT, path), text, compare_unstamped=False)
+    caldir = os.path.join(ROOT, 'calendar')
+    for f in sorted(os.listdir(caldir)) if os.path.isdir(caldir) else []:
+        if 'calendar/' + f not in CAL_FILES:
+            stale.append('calendar/' + f)
+            if not CHECK:
+                os.remove(os.path.join(caldir, f))
+    import stage_site
+    pub = [f for f in stage_site.published() if f != 'data/index.json']
+    put(os.path.join(ROOT, 'data', 'index.json'), BF.data_index(CFG, pub, {f: os.path.getsize(os.path.join(ROOT, f)) for f in pub}), compare_unstamped=False)
+    put(os.path.join(ROOT, '_headers'), BF.headers(stage_site.PUBLIC_DIRS, stage_site.ROOT_FILES), compare_unstamped=False)
     for h, body in sorted(page_js.items()):
         put(os.path.join(PAGE_JS, h + '.js'), body.strip('\n') + '\n', compare_unstamped=False)
     # a script no page uses any more is removed, and --check reports it

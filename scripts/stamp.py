@@ -7,6 +7,9 @@ stamped with a short hash of the file's content (`sir.js?v=3f9a01c2`), so a
 changed file has a new address and cannot be served from a cache, while an
 unchanged one keeps its address and stays cached.
 
+It also writes the build's hash into `assets/i18n.js` (`window.SIR_BUILD`)
+and into every page's "Cite this page" box.
+
 Three kinds of reference:
 
   * `src` and `href` in every page, to a local script, stylesheet, image,
@@ -63,6 +66,16 @@ V = {os.path.relpath(p, ROOT).replace(os.sep, '/'): h(p) for p in fetched}
 src = open(I18N, encoding='utf-8').read()
 if not MARK.search(src):
     sys.exit('assets/i18n.js has no /*stamp*/ marker')
+# the build's hash, for the citation box on every page: one hash over every
+# data file, dictionary, script and stylesheet, so it changes with any of them
+ASSETS = {os.path.relpath(p, ROOT).replace(os.sep, '/'): h(p) for p in walk(os.path.join(ROOT, 'assets'), ('.js', '.css'))
+          if not p.endswith(os.sep + 'i18n.js')}
+BUILD = hashlib.sha256(json.dumps([V, ASSETS], sort_keys=True).encode('utf-8')).hexdigest()[:12]
+BMARK = re.compile(r'/\*build\*/.*?/\*build\*/', re.S)
+if not BMARK.search(src):
+    sys.exit('assets/i18n.js has no /*build*/ marker')
+src = BMARK.sub(lambda m: '/*build*/' + json.dumps(BUILD) + '/*build*/', src)
+CITE = re.compile(r'(<span class="cite-build">)[0-9a-f]*(</span>)')
 put(I18N, MARK.sub(lambda m: '/*stamp*/' + json.dumps(V, separators=(',', ':'), sort_keys=True) + '/*stamp*/', src))
 # 2. every page's own references, resolved against the page's folder
 for page in walk(ROOT, ('.html',)):
@@ -77,7 +90,7 @@ for page in walk(ROOT, ('.html',)):
         if not os.path.isfile(f):
             return m.group(0)
         return m.group(1) + ref + '?v=' + h(f) + m.group(3)
-    put(page, REF.sub(stamp, text))
+    put(page, CITE.sub(lambda m: m.group(1) + BUILD + m.group(2), REF.sub(stamp, text)))
 
 if CHECK:
     if changed:
