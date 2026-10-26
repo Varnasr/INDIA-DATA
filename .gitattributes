@@ -49,3 +49,6 @@
 # Lock files — exact merge to prevent conflicts
 package-lock.json merge=ours
 yarn.lock merge=ours
+
+# Calendar files are CRLF by RFC 5545
+*.ics  text eol=crlf

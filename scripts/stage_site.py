@@ -11,7 +11,7 @@ only a copy of what is meant to be public closes that for every spelling:
 a file that is not in the copy does not exist on the site.
 
 The copy holds the page folders (every folder in site/pages), assets, data,
-downloads, fonts and reports, and the root files in ROOT_FILES. Inside them it
+downloads, fonts, reports and the calendars, and the root files in ROOT_FILES. Inside them it
 leaves out every raw/ folder, notes and code (.md, .py, .mjs, .sh), and the
 working files in DATA_PRIVATE. A top-level entry in neither PUBLIC nor PRIVATE
 fails the check, so a new folder has to be named one or the other.
@@ -23,8 +23,10 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGES = sorted(d for d in os.listdir(os.path.join(ROOT, 'site', 'pages'))
                if os.path.isdir(os.path.join(ROOT, 'site', 'pages', d)))
-PUBLIC_DIRS = set(PAGES) | {'assets', 'data', 'downloads', 'fonts', 'reports'}
-ROOT_FILES = {'index.html', '404.html', '_redirects', 'manifest.webmanifest', 'robots.txt', 'sitemap.xml', 'sw.js'}
+PUBLIC_DIRS = set(PAGES) | {'assets', 'data', 'downloads', 'fonts', 'reports', 'calendar'}
+# feed.xml, calendar.ics, calendar/ and _headers are written by build_site.py (build_feeds.py)
+ROOT_FILES = {'index.html', '404.html', '_redirects', '_headers', 'manifest.webmanifest', 'robots.txt', 'sitemap.xml', 'sw.js',
+              'feed.xml', 'calendar.ics'}
 PRIVATE = {'archive', 'scripts', 'site', 'supabase', 'i18n', 'netlify', '_site', '.git', '.github', '.githooks', '.claude',
            'README.md', 'CLAUDE.md', 'CITATION.cff', 'LICENSE', 'netlify.toml', '.editorconfig', '.gitattributes',
            '.gitignore', '.gitmessage', '.netlify', '__pycache__', 'node_modules'}
