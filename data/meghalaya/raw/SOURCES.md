@@ -94,7 +94,9 @@ Claims and objections were received from 5 August to 18 September 2026 and decid
 17 October (s.7).
 
 `added_after` (23,970) is Form 6 and 6A with Form 8 shifting; `removed_after` (9,250) is Form 7
-with the deletions after hearing. The note does not add them up; the grouping is ours.
+with the deletions after hearing. The note does not add them up and does not say that a Form 8
+shifting adds a name to the state roll. The grouping is an inference: with the shiftings the
+figures reconcile exactly, and without them they fall 2,276 short.
 
 - PASS: men + women + third gender = 21,83,963
 - PASS: draft 21,69,243 + 14,720 = 21,83,963
