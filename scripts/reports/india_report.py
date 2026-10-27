@@ -274,16 +274,20 @@ R.p('The rise from draft to final counts new electors as well as names put back,
     'The final roll is smaller than the draft in %d states (%s). %s'
     % (len(FN['shrank']), andj(FN['shrank']), ('How many names a state left off the draft has no relationship with how much of that its final roll made up (rank correlation %.2f).' if abs(FN['rho_made_up']) < 0.2
                              else 'States that left more off the draft made up a different share of it at the final roll (rank correlation %.2f).') % FN['rho_made_up']))
+inferred = lambda s: bool(s.get('final_source') and 'is an inference' in (s['final_source'].get('note') or ''))
 RCN = {'exact': 'Adds up', 'rounded': 'Rounded', 'net only': 'Net only', 'no': 'Does not add up'}
 sn = lambda v: '–' if v is None else ('−' + indian(-v) if v < 0 else indian(v))
 R.table(['State or UT', 'Left off the draft', 'Added after', 'Deleted after', 'Final less draft', 'Made up', 'Net fall per 100', 'Figures'],
         [[s['state'], fmt(s['removed']), fmt(s['added_after_draft']), fmt(s['removed_after_draft']), sn(s['net_after_draft']), ('−' + pct(-s['made_up_pct'])) if s['made_up_pct'] is not None and s['made_up_pct'] < 0 else pct(s['made_up_pct']),
-          '%.1f' % s['net_fall_per_100'] if s['net_fall_per_100'] is not None else '–', RCN[s['reconciles']]]
+          '%.1f' % s['net_fall_per_100'] if s['net_fall_per_100'] is not None else '–', RCN[s['reconciles']] + (' *' if inferred(s) else '')]
          for s in sorted([s for s in S if s['electors_final'] is not None], key=lambda s: -s['removed'])],
         widths=[3.6, 2.2, 2.0, 2.0, 2.2, 1.5, 1.7, 2.0], right={1, 2, 3, 4, 5, 6}, size=7.5)
 R.p('Under Figures, adds up means the draft plus additions less deletions equals the final roll, net only means the state published the draft and final rolls but not the additions and deletions behind the difference, and does not add up means the published figures do not match (%s). '
     'Deletions after the draft carry no reason in any state except Bihar, so they are outside every figure by reason in this report. %s have not yet published a final roll.'
     % (andj([s['state'] for s in S if s['reconciles'] == 'no']), andj(FN['waiting'])))
+INF = [s['state'] for s in S if s['electors_final'] is not None and inferred(s)]
+if INF:
+    R.p('* For %s the press note gives the forms accepted after the draft without grouping them into additions and deletions. The grouping in the table is an inference from the arithmetic, and it is the grouping under which the figures add up.' % andj(INF))
 
 # ------------------------------------------------------------ against the winning margins
 M = J('india', 'margins.json')
