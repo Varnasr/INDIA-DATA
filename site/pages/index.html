@@ -48,7 +48,7 @@
   <a class="hub st" href="bihar/"><b>Bihar 2025</b><span id="hBihar">Every constituency and every booth, set against the 2025 election result.</span></a>
   <a class="hub st" href="hyderabad/"><b>Hyderabad Old City 2026</b><span id="hHyd">Five constituencies, elector by elector, from the lists of who was left off the draft and who was summoned.</span></a>
   <a class="hub st" href="tamilnadu/"><b>Tamil Nadu 2026</b><span id="hTn">Every constituency and district, with the reason recorded, set against the 2026 election result.</span></a>
-  <a class="hub st" href="karnataka/"><b>Karnataka 2026</b><span id="hKa">Every district, with the reason recorded and what had been put back by the end of September.</span></a>
+  <a class="hub st" href="karnataka/"><b>Karnataka 2026</b><span id="hKa">Every district, with the reason recorded, and the final roll of 27 October for the state.</span></a>
   <a class="hub st" href="kerala/"><b>Kerala 2026</b><span id="hKl">Every constituency, the roll from January 2025 to the draft and the election, and who was missing.</span></a>
   <a class="hub st" href="rajasthan/"><b>Rajasthan 2026</b><span>The names left off the state's draft and their reasons, and every constituency's roll from the 2023 election to the final roll.</span></a>
   <a class="hub st" href="uttarpradesh/"><b>Uttar Pradesh 2026</b><span>The names left off the draft roll in each of the 75 districts, and the reason entered against them.</span></a>
@@ -234,7 +234,7 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/bihar/summary.js
   document.getElementById('hBihar').innerHTML = L('{n} names left off or deleted across {acs} constituencies and {booths} booths, set against the 2025 election result.', { n: SIR.lakh(B.total), acs: B.acs, booths: SIR.n(B.booths) });
   document.getElementById('hHyd').innerHTML = L('{d} of {e} electors left off the draft in {k} constituencies, counted elector by elector.', { d: SIR.n(H.deleted), e: SIR.n(H.electors), k: r[2].acs.length });
   document.getElementById('hTn').innerHTML = L('{n} names left off the draft roll in {acs} constituencies, {p} of every 100 electors, set against the 2026 election result.', { n: SIR.lakh(r[3].removed), acs: r[3].acs, p: SIR.d(r[3].per_100, 1) });
-  document.getElementById('hKa').innerHTML = L('{n} names left off the draft roll in {d} districts, {p} of every 100 electors, and {b} in Bengaluru alone.', { n: SIR.lakh(r[4].removed), d: r[4].districts, p: SIR.d(r[4].per_100, 1), b: SIR.lakh(r[4].bengaluru.removed) });
+  document.getElementById('hKa').innerHTML = L('{n} names left off the draft roll in {d} districts, {p} of every 100 electors, and {b} in Bengaluru alone. The final roll of 27 October has {f} electors.', { n: SIR.lakh(r[4].removed), d: r[4].districts, p: SIR.d(r[4].per_100, 1), b: SIR.lakh(r[4].bengaluru.removed), f: SIR.lakh(r[4].final) });
   document.getElementById('hWb').innerHTML = L('{n} names left off the draft roll and {a} held back for adjudication, and in {k} of {acs} constituencies the roll fell by more than the 2026 margin.', { n: SIR.lakh(r[5].pn05.removed), a: SIR.lakh(r[5].pn05.adjudication), k: r[5].over_margin, acs: r[5].acs });
   document.getElementById('hKl').innerHTML = L('Kerala published no count of the names left off by constituency. The draft roll was {f} smaller than in January 2025, and women were {w} of that fall.', { f: SIR.lakh(r[6].fall_draft), w: SIR.pct(r[6].women_fall_pct) });
   // every card leads with a count of names, and beneath it that count as a

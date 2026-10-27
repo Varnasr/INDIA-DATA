@@ -469,14 +469,14 @@ def karnataka(R):
         'The revision left %s names off Karnataka\'s draft roll, the list published on 24 August 2026 for electors to check and contest. That is %s of every 100 electors on the roll of 16 June, before the revision began.' % (crore(S['removed']), d1(S['per_100'])),
         'Bengaluru\'s four districts lost %s of every 100 electors. They hold %s of the state\'s roll and %s of the names left off the draft.' % (d1(B['per_100']), pct(B['share_of_roll']), pct(B['share_of_removed'])),
         '%s were entered as shifted, %s as absent, %s as dead and %s as already enrolled elsewhere. %s' % (pct(S['shares']['shifted']), pct(S['shares']['absent']), pct(S['shares']['dead']), pct(S['shares']['duplicate']), REASON),
-        'By 9 October the roll had risen by %s since the draft, %s of the names left off. In Bengaluru it rose by %s. The rise counts new voters as well as names put back.' % (indian(S['added_sep']), pct(S['made_up_pct']), indian(B['added_sep'])),
+        'The final roll of 27 October 2026 has %s electors, %s more than the draft, which is %s of the names left off. The rise counts new voters as well as names put back.' % (indian(S['final']), indian(S['added_final']), pct(S['made_up_final_pct'])),
     ])
     R.p('The Chief Electoral Officer, who keeps the state\'s rolls for the Election Commission, published the revision by its 34 election districts only. So no figure here is by assembly constituency, and the names left off cannot be set against the winning margins of the 2023 election. '
-        'The names left off are not split by sex. The final roll is due on 27 October 2026.', italic=True)
+        'The names left off are not split by sex. The final roll was reported for the state only, so the district figures after the draft stop at the roll of 9 October.', italic=True)
 
     R.h1('The roll')
     R.stats([(crore(S['removed']), 'left off the draft roll'), (d1(S['per_100']), 'per 100 electors'),
-             (d1(B['per_100']), 'per 100 in Bengaluru'), (pct(S['made_up_pct']), 'back by 9 October')])
+             (d1(B['per_100']), 'per 100 in Bengaluru'), (pct(S['made_up_final_pct']), 'back by the final roll')])
 
     R.h2('District by district')
     byN = {d['district']: d for d in D}
@@ -489,11 +489,11 @@ def karnataka(R):
     R.h2('The roll, step by step')
     F.add(F.waterfall([('Roll of 16 June', S['before'], 'total'), ('Shifted', S['reasons']['shifted'], 'down'), ('Dead', S['reasons']['dead'], 'down'),
                        ('Absent', S['reasons']['absent'], 'down'), ('Already enrolled', S['reasons']['duplicate'], 'down'), ('Other', S['reasons']['other'], 'down'),
-                       ('Draft roll', S['draft'], 'total'), ('Net change after the draft', S['added_sep'], 'up'), ('Roll of 9 October', S['sep'], 'total')],
-                      math.floor(S['draft'] * 0.8 / 1e6) * 1e6, 'Karnataka, from 16 June to 9 October 2026'),
-          'The bars start above zero so that the changes can be seen. The figure on each bar is the count. The final roll is due on 27 October 2026.')
-    R.p('The roll of 16 June 2026 held %s names. %s were left off the draft roll of 24 August, which held %s. Electors could then file claims, on Form 6, to add a name, and objections, on Form 7, to delete one. By 9 October those had closed, notices were still being heard, and the roll stood at %s.'
-        % (crore(S['before']), indian(S['removed']), crore(S['draft']), crore(S['sep'])))
+                       ('Draft roll', S['draft'], 'total'), ('Net change after the draft', S['added_final'], 'up'), ('Final roll', S['final'], 'total')],
+                      math.floor(S['draft'] * 0.8 / 1e6) * 1e6, 'Karnataka, from 16 June to the final roll of 27 October 2026'),
+          'The bars start above zero so that the changes can be seen. The figure on each bar is the count. No count of names added or deleted after the draft was published, so the last step is the net change.')
+    R.p('The roll of 16 June 2026 held %s names. %s were left off the draft roll of 24 August, which held %s. Electors could then file claims, on Form 6, to add a name, and objections, on Form 7, to delete one. By 9 October those had closed, notices were still being heard, and the roll stood at %s. The final roll of 27 October holds %s, a fall in the roll of %s since 16 June.'
+        % (crore(S['before']), indian(S['removed']), crore(S['draft']), crore(S['sep']), crore(S['final']), indian(S['net_fall_final'])))
 
     R.h2('Per 100 electors, by district')
     F.add(F.hbars([(d['district'], d['per_100']) for d in D], 'Names left off the draft roll per 100 electors, by district', 'Left off per 100 electors',
@@ -550,20 +550,21 @@ def karnataka(R):
                     'Whether each name was rightly left off. %s' % REASON])
 
     R.h1('What the Election Commission should do')
-    R.p('%s names were left off Karnataka\'s draft roll, %s of them in Bengaluru. The Election Commission should do five things before the final roll.' % (crore(S['removed']), lakh(B['removed'])))
+    R.p('%s names were left off Karnataka\'s draft roll, %s of them in Bengaluru. The final roll of 27 October came with no count of names added or deleted after the draft. The Election Commission should do five things.' % (crore(S['removed']), lakh(B['removed'])))
     R.numbered([
         'Publish the names left off by assembly constituency and polling station, with the reason, so that they can be set against the places they came from.',
         'Publish the names left off by sex and age, with the roll of 16 June by sex.',
         'Publish the basis for the %s entries marked shifted or absent, including the visits made and the notice given.' % lakh(S['reasons']['shifted'] + S['reasons']['absent']),
         'Explain why Bengaluru lost %s of every 100 electors, against %s in the rest of the state.' % (d1(B['per_100']), d1(RS['per_100'])),
-        'Publish with the final roll how many of those added had been left off the draft, so that names restored can be told apart from new voters.',
+        'Publish how many names were added and deleted after the draft, and how many of those added had been left off it, so that names restored can be told apart from new voters.',
     ])
 
     R.h1('Method and sources')
     R.p('The Chief Electoral Officer, Karnataka, published the draft roll on 24 August 2026 with a table of the names left off it, by election district and under five reasons, absent, permanently shifted, dead, already enrolled and other. '
         'The %d district rows add up to the state row, %s names out of %s, and in every district the names left off and the forms digitised add up to the roll of 16 June 2026.' % (S['districts'], indian(S['removed']), indian(S['before'])))
     R.p('The Chief Electoral Officer published every table of the revision by its 34 election districts and for the state, and none by assembly constituency. Bengaluru appears as four of those districts, Bangalore Urban and the North, Central and South districts of the city corporation, B.B.M.P.')
-    R.p('The final roll is due on 27 October 2026. Until then the latest figures are the roll of 9 October 2026, by district and sex. The rise from the draft to that roll is the names added less those deleted since, so it counts new voters as well as names put back.')
+    R.p('The final roll was published on 27 October 2026. The Hindu and ETV Bharat reported the Chief Electoral Officer\'s figures for it that day, for the state only, as a total and by sex, so the district figures after the draft are the roll of 9 October 2026. The rise from the draft to either roll is the names added less those deleted since, so it counts new voters as well as names put back. '
+        'The draft counted general electors only, and the reports do not say whether the final total of %s includes service electors. Its men, women and third gender electors add up to %s fewer.' % (indian(S['final']), indian(S['final'] - S['final_by_sex'])))
     R.p('The map joins the constituency boundaries of DataMeet\'s assembly constituency map, licensed CC BY 2.5 India, by the district each constituency belongs to in the Election Commission\'s own list. Only counts are published, never a name, EPIC number or address.')
 
 

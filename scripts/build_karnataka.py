@@ -1,6 +1,7 @@
 """Karnataka: the names left off the draft roll of 24 August 2026, by
 election district and reason, with the draft roll and the roll during claims
-and objections (9 October 2026) by sex.
+and objections (9 October 2026) by sex, and the final roll of 27 October 2026
+for the state.
 
 Reads data/karnataka/raw (see SOURCES.md there) and writes
 data/karnataka/summary.json, districts.json and districts.csv.
@@ -10,10 +11,11 @@ data/karnataka/summary.json, districts.json and districts.csv.
 
 The CEO published the revision by its 34 election districts only, so there is
 no constituency table. Bengaluru is four of the 34: Bangalore Urban and the
-three B.B.M.P districts. The final roll is due on 27 October 2026; until then
-the latest roll is the one of 9 October, published while notices were
-being heard. The field is still called `sep`, after the roll of 25 September
-it first held.
+three B.B.M.P districts. The final roll was published on 27 October 2026,
+and it was reported for the state only, as a total and by sex, with no
+count of names added or deleted after the draft. So the district rows stop
+at the roll of 9 October, published while notices were being heard. The
+field is still called `sep`, after the roll of 25 September it first held.
 """
 import csv
 import io
@@ -31,6 +33,13 @@ REASONS = ('absent', 'shifted', 'dead', 'duplicate', 'other')
 STATE = {'before': 55432314, 'absent': 1517042, 'shifted': 6545679, 'dead': 1639864,
          'duplicate': 709870, 'other': 383884, 'removed': 10796339, 'draft': 44635975}
 SEP_TOTAL = 45161393   # the roll of 9 October 2026; 44,844,080 on 25 September
+DRAFT_SERVICE = 44176  # service electors on the draft, Annexure-10 of the same note
+# The final roll of 27 October 2026, for the state. No CEO note was on
+# ceo.karnataka.gov.in that day. The total is The Hindu's report, which gives the
+# rise from the draft as 8.64 lakh; the split by sex is ETV Bharat's, quoting the
+# CEO's office. The three sexes add up to 44,322 less than the total, and neither
+# report says whether the total includes service electors. See raw/SOURCES.md.
+FINAL = {'date': '2026-10-27', 'total': 45500011, 'men': 22540493, 'women': 22912355, 'third': 2841}
 BENGALURU = ('BANGALORE URBAN', 'B.B.M.P(NORTH)', 'B.B.M.P(CENTRAL)', 'B.B.M.P(SOUTH)')
 NAMES = {'B.B.M.P(NORTH)': 'B.B.M.P (North)', 'B.B.M.P(CENTRAL)': 'B.B.M.P (Central)',
          'B.B.M.P(SOUTH)': 'B.B.M.P (South)'}
@@ -91,6 +100,10 @@ def build():
     for k in ('before', 'removed', 'draft') + REASONS:
         assert T(k) == STATE[k], k
     assert T('sep') == SEP_TOTAL
+    # the reported rise from the draft, 8.64 lakh, and the fall from 5,54,32,314
+    assert round((FINAL['total'] - STATE['draft']) / 1e3) == 864 and STATE['before'] - FINAL['total'] == 9932303
+    # the three sexes as reported fall short of the total by 44,322, which the page states
+    assert FINAL['total'] - (FINAL['men'] + FINAL['women'] + FINAL['third']) == 44322
 
     blr = [r for r in dist if r['bengaluru']]
     rest = [r for r in dist if not r['bengaluru']]
@@ -108,6 +121,15 @@ def build():
         'women_draft_pct': round(100 * sum(int(r['women']) for r in draft.values()) / T('draft'), 4),
         'women_sep_pct': round(100 * sum(int(r['women']) for r in sep.values()) / sep_t, 4),
         'districts': len(dist),
+        'draft_service': DRAFT_SERVICE,
+        'final_date': FINAL['date'], 'final': FINAL['total'],
+        'final_men': FINAL['men'], 'final_women': FINAL['women'], 'final_third': FINAL['third'],
+        'final_by_sex': FINAL['men'] + FINAL['women'] + FINAL['third'],
+        'added_final': FINAL['total'] - T('draft'),
+        'made_up_final_pct': round(100 * (FINAL['total'] - T('draft')) / removed, 4),
+        'net_fall_final': before - FINAL['total'],
+        'net_per_100_final': round(100 * (before - FINAL['total']) / before, 4),
+        'women_final_pct': round(100 * FINAL['women'] / (FINAL['men'] + FINAL['women'] + FINAL['third']), 4),
         'top': [{'district': r['district'], 'per_100': r['per_100']} for r in dist[:5]],
         'low': [{'district': r['district'], 'per_100': r['per_100']} for r in dist[-3:]],
         'bengaluru': {
