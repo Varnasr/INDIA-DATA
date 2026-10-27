@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 461,
-  "bytes": 13082566
+  "bytes": 13086086
  },
  "files": [
   {
@@ -45,7 +45,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 36704,
+   "bytes": 37234,
    "keys": [
     "note",
     "entries"
@@ -4188,7 +4188,7 @@
    "path": "data/india/cases.json",
    "description": "The case studies of single constituencies and places, with their sources",
    "format": "JSON",
-   "bytes": 61101,
+   "bytes": 61211,
    "keys": [
     "cases"
    ],
@@ -4229,7 +4229,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 204885,
+   "bytes": 204946,
    "columns": [
     "section",
     "date",
@@ -4250,7 +4250,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 337833,
+   "bytes": 337892,
    "keys": [
     "sections",
     "by_state",
@@ -4341,7 +4341,7 @@
    "path": "data/india/final_rolls.csv",
    "description": "Each final roll set against the draft, with names added and deleted after it",
    "format": "CSV",
-   "bytes": 4446,
+   "bytes": 4660,
    "columns": [
     "state",
     "phase",
@@ -4516,7 +4516,7 @@
    "path": "data/india/panels.json",
    "description": "Panels quoted on the reading page, with their figures",
    "format": "JSON",
-   "bytes": 187900,
+   "bytes": 187902,
    "keys": [
     "checked",
     "counts",
@@ -4529,7 +4529,7 @@
    "path": "data/india/process.json",
    "description": "How the revision was run: the rules as they changed, and each state's dates",
    "format": "JSON",
-   "bytes": 139954,
+   "bytes": 140456,
    "keys": [
     "as_of",
     "timeline",
@@ -4550,7 +4550,7 @@
    "path": "data/india/process_schedules.csv",
    "description": "Each state's schedule as set and as moved",
    "format": "CSV",
-   "bytes": 12709,
+   "bytes": 12956,
    "columns": [
     "state",
     "phase",
@@ -4572,7 +4572,7 @@
    "path": "data/india/process_timeline.csv",
    "description": "Every order, letter, court order and judgment that changed how the revision was run",
    "format": "CSV",
-   "bytes": 22906,
+   "bytes": 22940,
    "columns": [
     "date",
     "who",
@@ -4666,7 +4666,7 @@
    "path": "data/india/states.csv",
    "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave",
    "format": "CSV",
-   "bytes": 16886,
+   "bytes": 16927,
    "columns": [
     "state",
     "phase",
@@ -4718,7 +4718,7 @@
    "path": "data/india/states.json",
    "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave. The same table as data/india/states.csv, as JSON",
    "format": "JSON",
-   "bytes": 88073,
+   "bytes": 88890,
    "keys": [
     "as_of",
     "adults",
@@ -5154,7 +5154,7 @@
    "path": "data/karnataka/summary.json",
    "description": "Karnataka: the figures its pages draw",
    "format": "JSON",
-   "bytes": 1544,
+   "bytes": 1858,
    "keys": [
     "before",
     "removed",
@@ -5170,6 +5170,18 @@
     "women_draft_pct",
     "women_sep_pct",
     "districts",
+    "draft_service",
+    "final_date",
+    "final",
+    "final_men",
+    "final_women",
+    "final_third",
+    "final_by_sex",
+    "added_final",
+    "made_up_final_pct",
+    "net_fall_final",
+    "net_per_100_final",
+    "women_final_pct",
     "top",
     "low",
     "bengaluru",
@@ -7058,7 +7070,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 644746,
+   "bytes": 644990,
    "licence": "CC BY 4.0"
   },
   {
@@ -7093,7 +7105,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 275793,
+   "bytes": 276138,
    "licence": "CC BY 4.0"
   },
   {

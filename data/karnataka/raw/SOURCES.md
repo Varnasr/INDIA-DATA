@@ -47,9 +47,10 @@ from this sandbox. They are the next place to look:
 https://ceo.karnataka.gov.in/uploads/media_to_upload1782732956.pdf (29.06) and
 https://ceo.karnataka.gov.in/uploads/DAILY_PRESS_NOTE_30.06.2026_06.00PM.pdf (30.06).
 
-**The final roll has not been published.** The CEO schedule in the 24.08.2026
-note sets its publication for 27 October 2026. Claims and objections closed on
-23.09.2026, and the notice phase runs to 22.10.2026.
+**The final roll was published on 27 October 2026, and only for the state.**
+The CEO schedule in the 24.08.2026 note set its publication for that day. Claims
+and objections closed on 23.09.2026, and the notice phase ran to 22.10.2026. No
+district or constituency table of the final roll was found (see the last section).
 
 ## asd_district.csv
 
@@ -240,3 +241,37 @@ The press note of 9 October 2026, the latest roll before the final one.
   hearings, the 1,10,654 Form 7s and the final roll of 27 October were
   matched to India Today and a PTI report of the same day. Read the district
   rows against the PDF when it opens.
+
+## The final roll of 27 October 2026 (in build_karnataka.py, no raw file)
+
+The figures are for the state only, so they are constants in
+`scripts/build_karnataka.py` (`FINAL`) and not a raw table.
+
+- Read on 27 October 2026. ceo.karnataka.gov.in refuses direct connections from
+  this sandbox. Through Firecrawl, the press releases page
+  (https://ceo.karnataka.gov.in/348/press-releases-/en) listed notes up to
+  "PRESS NOTE 23" (23.10.2026) and no note on the final roll, and the SIR page
+  (https://ceo.karnataka.gov.in/382/special-intensive-revision--2026/en) linked
+  "Final Electoral Roll-SIR-2026" to the Election Commission's part-wise rolls of
+  named electors (https://voters.eci.gov.in/download-eroll?stateCode=S10), which
+  were not opened.
+- Total 4,55,00,011 electors, against 5,54,32,314 before the revision, and a net
+  rise of 8.64 lakh over the draft: The Hindu, "SIR: Over 99.32 lakh names struck
+  off voter list in Karnataka", 27 October 2026, 11:32 am IST,
+  https://www.thehindu.com/news/national/karnataka/sir-over-9932-lakh-names-struck-off-voter-list-in-karnataka/article71629941.ece
+  (also its live page at 11:57 am IST,
+  https://www.thehindu.com/news/national/cec-row-sir-live-updates-supreme-court-hearing-gyanesh-kumar-oct-27-2026/article71629879.ece).
+  4,55,00,011 less the draft's 4,46,35,975 general electors is 8,64,036.
+- By sex, 2,25,40,493 men, 2,29,12,355 women and 2,841 third gender, "according
+  to the CEO's office": ETV Bharat, 27 October 2026, 2:24 PM IST,
+  https://www.etvbharat.com/en/state/karnataka-sir-final-voter-list-deleted-voters-special-intensive-revision-enn26102703563.
+  The Hindu gives the same in rounded form (2.25 crore, 2.29 crore, 2,841).
+- Odd: the three add up to 4,54,55,689, which is 44,322 less than the total.
+  Neither report says whether the total includes service electors. The draft
+  roll carried 44,176 service electors besides its general electors (above).
+  The rise from the draft is therefore measured as the reports measure it, from
+  the 4,46,35,975 general electors to the reported total.
+- Not published, in either report or on the CEO's site: names added or deleted
+  after the draft, the outcome of the hearings, and any table by district or
+  constituency. `build_karnataka.py` asserts the 8.64 lakh rise and the 44,322
+  gap.

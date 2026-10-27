@@ -23,19 +23,21 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
   document.getElementById('fMix').innerHTML = L('<b>Across the state, {sh} of the names were entered as shifted and {ab} as absent, {dead} as dead and {dup} as already enrolled elsewhere.</b> The more names a district lost, the larger the share marked shifted or absent (rank correlation {rho}, where 0 means the two are unrelated and 1 means they rise in step). Where fewer were left off, more were entered as dead, up to {dm} in {dmn}. A reason on the list is what the officer wrote down, and nobody checked it.', {
     sh: SIR.pct(S.shares.shifted), ab: SIR.pct(S.shares.absent), dead: SIR.pct(S.shares.dead), dup: SIR.pct(S.shares.duplicate), rho: SIR.d(S.rho_rate_shifted, 2), dm: SIR.pct(S.dead_max.share), dmn: S.dead_max.district });
 
-  VIZ.waterfall('vWater', { label: L('Karnataka: the roll from 16 June to 9 October 2026'), from: Math.floor(S.draft * 0.8 / 1e6) * 1e6, steps: [
+  VIZ.waterfall('vWater', { label: L('Karnataka: the roll from 16 June to the final roll of 27 October 2026'), from: Math.floor(S.draft * 0.8 / 1e6) * 1e6, steps: [
     { name: L('Roll of 16 June'), v: S.before, kind: 'total' }, { name: L('Shifted'), v: S.reasons.shifted, kind: 'down' },
     { name: L('Dead'), v: S.reasons.dead, kind: 'down' }, { name: L('Absent'), v: S.reasons.absent, kind: 'down' },
     { name: L('Already enrolled'), v: S.reasons.duplicate, kind: 'down' }, { name: L('Other'), v: S.reasons.other, kind: 'down' },
-    { name: L('Draft roll'), v: S.draft, kind: 'total' }, { name: L('Net change after the draft'), v: S.added_sep, kind: 'up' },
-    { name: L('Roll of 9 October'), v: S.sep, kind: 'total' }] });
+    { name: L('Draft roll'), v: S.draft, kind: 'total' }, { name: L('Net change after the draft'), v: S.added_final, kind: 'up' },
+    { name: L('Final roll'), v: S.final, kind: 'total' }] });
+  document.getElementById('fWater').innerHTML = L('<b>The final roll of 27 October has {f} electors, a fall in the roll of {nf} since 16 June.</b> It is {a} above the draft, which comes to {m} of the {r} names left off, and that rise counts new voters as well as names put back. The draft counted {d} general electors and listed {sv} service electors besides them. The reports of the final roll do not say whether its total includes service electors.', {
+    f: SIR.n(S.final), nf: SIR.n(S.net_fall_final), a: SIR.n(S.added_final), m: SIR.pct(S.made_up_final_pct), r: SIR.lakh(S.removed), d: SIR.n(S.draft), sv: SIR.n(S.draft_service) });
   VIZ.multiples('vBack', { label: L('Each district\'s roll on 16 June, at the draft and on 9 October, 16 June = 100'), ref: 100,
     steps: [L('16 June'), L('Draft'), L('9 October')],
     panels: D.map(function (d) { return { name: d.district, hi: d.bengaluru, v: [100, 100 * d.draft / d.before, 100 * d.sep / d.before] }; }) });
-  document.getElementById('fBack').innerHTML = L('<b>By 9 October the roll had risen by {a} since the draft, {m} of the {r} names left off.</b> In Bengaluru it rose by {ba}, against {bn} names left off. Elsewhere the rise came to {rm} of the names left off. The final roll may change this, and the rise includes new voters.', {
-    a: SIR.n(S.added_sep), m: SIR.pct(S.made_up_pct), r: SIR.lakh(S.removed), ba: SIR.n(B.added_sep), bn: SIR.lakh(B.removed), rm: SIR.pct(R.made_up_pct) });
+  document.getElementById('fBack').innerHTML = L('<b>By 9 October the roll had risen by {a} since the draft, {m} of the {r} names left off.</b> In Bengaluru it rose by {ba}, against {bn} names left off. Elsewhere the rise came to {rm} of the names left off. The rise includes new voters. By the final roll of 27 October the state\'s roll stood {fa} above the draft, {fm} of the names left off, and no district figures were given.', {
+    a: SIR.n(S.added_sep), m: SIR.pct(S.made_up_pct), r: SIR.lakh(S.removed), ba: SIR.n(B.added_sep), bn: SIR.lakh(B.removed), rm: SIR.pct(R.made_up_pct), fa: SIR.n(S.added_final), fm: SIR.pct(S.made_up_final_pct) });
 
-  document.getElementById('fWomen').innerHTML = L('<b>Women were {d} of the draft roll and {s} of the roll of 9 October.</b> The roll before the revision gives no count by sex, so these two figures cannot show whether women were left off more often than men.', { d: SIR.pct(S.women_draft_pct), s: SIR.pct(S.women_sep_pct) });
+  document.getElementById('fWomen').innerHTML = L('<b>Women were {d} of the draft roll, {s} of the roll of 9 October and {f} of the final roll.</b> The final roll\'s share is of the {n} electors the reports split by sex. The roll before the revision gives no count by sex, so these figures cannot show whether women were left off more often than men.', { d: SIR.pct(S.women_draft_pct), s: SIR.pct(S.women_sep_pct), f: SIR.pct(S.women_final_pct), n: SIR.n(S.final_by_sex) });
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: L('District'), left: true },

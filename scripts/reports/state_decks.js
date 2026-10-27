@@ -284,9 +284,9 @@ function karnataka() {
   const RK = [['shifted', 'Shifted', '1F618D'], ['absent', 'Absent', 'C0392B'], ['dead', 'Dead', GREY], ['duplicate', 'Already enrolled', 'D4AC0D'], ['other', 'Other', '8E7CC3']];
 
   cover(pres, K, P, 'Special Intensive Revision · Karnataka 2026', 'The revision left ' + crore(S.removed) + ' names off Karnataka\'s draft roll',
-    'District by district, on what recorded reason, and how the roll stood while notices were still being heard',
-    [[indian(S.removed), 'names left off the draft roll of 24 August 2026'], [d1(S.per_100), 'of every 100 electors on the roll of 16 June'], [pct(B.share_of_removed), 'of the names left off were in Bengaluru'], [pct(S.made_up_pct), 'of the names left off back by 9 October']])
-    .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll, the list of people entitled to vote. Every figure is computed from the Chief Electoral Officer\'s district tables. Nothing has been published by assembly constituency, so there is no comparison with election margins. The final roll is due on 27 October 2026.');
+    'District by district, on what recorded reason, and the final roll of 27 October 2026',
+    [[indian(S.removed), 'names left off the draft roll of 24 August 2026'], [d1(S.per_100), 'of every 100 electors on the roll of 16 June'], [pct(B.share_of_removed), 'of the names left off were in Bengaluru'], [pct(S.made_up_final_pct), 'of the names left off back by the final roll']])
+    .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll, the list of people entitled to vote. Every figure is computed from the Chief Electoral Officer\'s district tables. Nothing has been published by assembly constituency, so there is no comparison with election margins. The final roll of 27 October 2026 was reported for the state only.');
   const toc = contentsSlide(pres, K, P);
 
   let s = K.slide('In short', 'The revision left ' + d1(S.per_100) + ' of every 100 electors off the draft, and ' + d1(B.per_100) + ' in Bengaluru', 'Four findings, each computed from the published tables');
@@ -294,15 +294,15 @@ function karnataka() {
     crore(S.removed) + ' names were left off Karnataka\'s draft roll, ' + d1(S.per_100) + ' of every 100 electors on the roll before the revision.',
     'Bengaluru\'s four districts lost ' + d1(B.per_100) + ' of every 100 electors. They hold ' + pct(B.share_of_roll) + ' of the roll and ' + pct(B.share_of_removed) + ' of the names left off the draft.',
     pct(S.shares.shifted) + ' were entered as shifted, ' + pct(S.shares.absent) + ' as absent, ' + pct(S.shares.dead) + ' as dead and ' + pct(S.shares.duplicate) + ' as already enrolled elsewhere.',
-    'By 9 October the roll had risen by ' + indian(S.added_sep) + ' since the draft, ' + pct(S.made_up_pct) + ' of the names left off. In Bengaluru it rose by ' + indian(B.added_sep) + '.',
+    'The final roll of 27 October 2026 has ' + indian(S.final) + ' electors, ' + indian(S.added_final) + ' more than the draft, which is ' + pct(S.made_up_final_pct) + ' of the names left off.',
   ], M, TOP - 0.2, W - 2 * M, CH - 0.6, 17);
   K.body(s, 'Published by district only, with no split by sex. ' + REASON, M, TOP + CH - 0.5, W - 2 * M, 0.5, 12, MUTED);
-  s.addNotes('The draft roll is the roll published after the house-to-house check. Per 100 electors is the number left off for every 100 people on the roll of 16 June, which lets districts of different size be compared. Electors kept on the draft can still be sent a notice to appear at a hearing, and those hearings were under way on 9 October.');
+  s.addNotes('The draft roll is the roll published after the house-to-house check. Per 100 electors is the number left off for every 100 people on the roll of 16 June, which lets districts of different size be compared. Electors kept on the draft can still be sent a notice to appear at a hearing, and those hearings were to be decided by 22 October, before the final roll of 27 October.');
 
-  s = K.slide('The roll', 'The roll fell from ' + crore(S.before) + ' on 16 June to ' + crore(S.draft) + ' at the draft', 'The state\'s roll, step by step, to 9 October 2026, while notices were still being heard');
-  waterfall(pres, s, [['Roll of 16 June', S.before, 'total'], ['Shifted', S.reasons.shifted, 'down'], ['Dead', S.reasons.dead, 'down'], ['Absent', S.reasons.absent, 'down'], ['Already enrolled', S.reasons.duplicate, 'down'], ['Other', S.reasons.other, 'down'], ['Draft roll', S.draft, 'total'], ['Net change after the draft', S.added_sep, 'up'], ['Roll of 9 October', S.sep, 'total']],
+  s = K.slide('The roll', 'The roll fell from ' + crore(S.before) + ' on 16 June to ' + crore(S.draft) + ' at the draft', 'The state\'s roll, step by step, to the final roll of 27 October 2026');
+  waterfall(pres, s, [['Roll of 16 June', S.before, 'total'], ['Shifted', S.reasons.shifted, 'down'], ['Dead', S.reasons.dead, 'down'], ['Absent', S.reasons.absent, 'down'], ['Already enrolled', S.reasons.duplicate, 'down'], ['Other', S.reasons.other, 'down'], ['Draft roll', S.draft, 'total'], ['Net change after the draft', S.added_final, 'up'], ['Final roll', S.final, 'total']],
     Math.floor(S.draft * 0.8 / 1e6) * 1e6, { x: M, y: TOP, w: W - 2 * M, h: CH });
-  s.addNotes('The bars start above zero so that the changes can be seen. The final roll is due on 27 October 2026. ' + REASON);
+  s.addNotes('The bars start above zero so that the changes can be seen. No count of names added or deleted after the draft was published, so the last step is the net change. ' + REASON);
 
   s = K.slide('By district', 'Bengaluru\'s four districts lost between ' + d1(Math.min(...BL.map((d) => d.per_100))) + ' and ' + d1(D[0].per_100) + ' of every 100 electors', 'Names left off the draft roll per 100 electors on the roll of 16 June, by election district');
   s.addChart(pres.charts.BAR, [{ name: 'Per 100', labels: D.map((d) => d.district), values: D.map((d) => d.per_100) }],
@@ -321,32 +321,32 @@ function karnataka() {
   K.body(s, 'By 9 October Bengaluru\'s roll had risen by ' + indian(B.added_sep) + ' since the draft, against ' + lakh(B.removed) + ' names left off. In the rest of the state the rise came to ' + pct(R.made_up_pct) + ' of the names left off the draft.', M, TOP + 2.3, W - 2 * M, 1.8, 16);
 
   s = K.slide('Women', 'Women\'s share of the names left off cannot be counted, because the roll of 16 June has no count by sex', 'What can be counted is women\'s share of each later roll');
-  K.stats(s, [[pct(S.women_draft_pct), 'women\'s share of the draft roll'], [pct(S.women_sep_pct), 'women\'s share of the roll of 9 October']], TOP, 1.8);
-  K.body(s, 'The names left off are not split by sex. These two figures cannot show whether women were left off more often than men.', M, TOP + 2.2, W - 2 * M, 1.6, 16);
+  K.stats(s, [[pct(S.women_draft_pct), 'women\'s share of the draft roll'], [pct(S.women_sep_pct), 'women\'s share of the roll of 9 October'], [pct(S.women_final_pct), 'women\'s share of the final roll']], TOP, 1.8);
+  K.body(s, 'The names left off are not split by sex. These figures cannot show whether women were left off more often than men.', M, TOP + 2.2, W - 2 * M, 1.6, 16);
 
   s = K.slide('After the draft', 'By 9 October only ' + pct(S.made_up_pct) + ' of the names left off had come back, and ' + pct(B.made_up_pct, 2) + ' in Bengaluru', 'Left off at the draft and the fall left on 9 October, per 100 electors, the twelve districts with the highest rates');
   s.addChart(pres.charts.BAR, [{ name: 'At the draft', labels: t12.map((d) => d.district), values: t12.map((d) => d.per_100) }, { name: 'On 9 October', labels: t12.map((d) => d.district), values: t12.map((d) => d.net_per_100) }],
     K.chart(Object.assign({}, K.left, { barDir: 'bar', barGrouping: 'clustered', chartColors: ['AEB6BF', P.accent], showLegend: true, showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.0', dataLabelFontSize: 8, valAxisHidden: true, catAxisOrientation: 'maxMin', catAxisLabelFontSize: 10 })));
-  K.right(s, ['The roll rose by ' + indian(S.added_sep) + ' after the draft, against ' + crore(S.removed) + ' names left off.', 'The rise includes new voters, so it is the most that could have been restored.', 'The final roll is due on 27 October 2026 and may change this.']);
+  K.right(s, ['The roll rose by ' + indian(S.added_sep) + ' after the draft, against ' + crore(S.removed) + ' names left off.', 'The rise includes new voters, so it is the most that could have been restored.', 'By the final roll of 27 October the state\'s roll was ' + indian(S.added_final) + ' above the draft. No district figures were given for it.']);
 
   s = K.slide('Limits', 'What the tables show, and what they cannot show');
   K.box(s, 'How many names were left off the draft in each of the 34 election districts, on what recorded reason, and how the roll stood on 9 October.', M, TOP - 0.4, 5.95, 2.3, 15);
   K.box(s, 'Which constituencies lost the most names, or how the names left off compare with the 2023 margins, because nothing was published by constituency. Whether women, the old or the young were left off more often.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
   K.body(s, REASON + ' The tables show where names were left off and cannot show why.', M, TOP + 2.2, W - 2 * M, 1.5, 16);
 
-  s = K.slide('What the Election Commission should do', 'Publish the revision by constituency and by sex before the final roll');
+  s = K.slide('What the Election Commission should do', 'Publish the revision by constituency and by sex');
   K.numbered(s, [
     'Publish the names left off by assembly constituency and polling station, with the reason.',
     'Publish the names left off by sex and age, with the roll of 16 June by sex.',
     'Publish the basis for the ' + lakh(S.reasons.shifted + S.reasons.absent) + ' entries marked shifted or absent.',
     'Explain why Bengaluru lost ' + d1(B.per_100) + ' of every 100 electors, against ' + d1(R.per_100) + ' in the rest of the state.',
-    'Publish with the final roll how many of those added had been left off the draft.',
+    'Publish how many names were added and deleted after the draft, and how many of those added had been left off it.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 17);
 
   s = K.slide('Method', 'Where the figures come from');
   K.bullets(s, [
     'The names left off the draft roll of 24 August 2026, by election district and under five reasons, are the Chief Electoral Officer\'s table. The ' + S.districts + ' district rows add up to the state row, ' + indian(S.removed) + ' out of ' + indian(S.before) + '.',
-    'The roll of 9 October 2026, by district and sex, is from the press note of that date. The final roll is due on 27 October.',
+    'The roll of 9 October 2026, by district and sex, is from the press note of that date. The final roll of 27 October 2026, for the state only, is from The Hindu\'s and ETV Bharat\'s reports of the Chief Electoral Officer\'s figures.',
     'Bengaluru is four election districts, Bangalore Urban and the B.B.M.P. North, Central and South districts.',
     'Only counts are published, never a name, EPIC number or address.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 16);

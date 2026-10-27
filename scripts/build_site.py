@@ -154,7 +154,7 @@ def contents(content):
 # "today" is process.json's as_of, the day the schedules were last checked,
 # so the build stays the same from one run to the next. The English sentence
 # is in the markup, and sir.js swaps in its translation through L().
-ASOF_LATER = {'Karnataka': '2026-10-09'}   # a roll published after the draft and before the final
+ASOF_LATER = {}   # a roll published after the draft and before the final, by state (Karnataka's of 9 October until its final roll)
 ASOF_EXTRA = {'Assam': '2026-02-10'}       # the Special Revision's final roll; Assam is not in states.json
 
 

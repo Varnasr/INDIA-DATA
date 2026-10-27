@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-26",
+ "as_of": "2026-10-27",
  "adults": {
   "states": 19,
   "rho_rate": 0.0465,
@@ -1007,13 +1007,13 @@
   "removed": 3365116
  },
  "final": {
-  "states": 22,
-  "removed": 77748303,
-  "net_after_draft": 11376238,
+  "states": 23,
+  "removed": 88544642,
+  "net_after_draft": 12240274,
   "withheld": 6006675,
   "gross": 16,
-  "per_100": 11.8373,
-  "net_per_100": 10.1053,
+  "per_100": 12.4319,
+  "net_per_100": 10.7133,
   "shrank": [
    "West Bengal",
    "Goa",
@@ -1023,7 +1023,6 @@
   ],
   "waiting": [
    "Maharashtra",
-   "Karnataka",
    "Telangana",
    "Delhi",
    "Andhra Pradesh",
@@ -1032,10 +1031,10 @@
    "Meghalaya",
    "Nagaland"
   ],
-  "made_up_pct": 14.6,
-  "made_up_pct_ex_withheld": 22.4,
-  "net_per_100_ex_withheld": 9.1907,
-  "rho_made_up": -0.1462
+  "made_up_pct": 13.8,
+  "made_up_pct_ex_withheld": 20.6,
+  "net_per_100_ex_withheld": 9.87,
+  "rho_made_up": -0.1868
  },
  "states": [
   {
@@ -1996,14 +1995,18 @@
    "removed_after_draft": null,
    "added_after_draft": null,
    "withheld": null,
-   "electors_final": null,
-   "final_date": null,
-   "reconciles": null,
-   "net_after_draft": null,
-   "net_fall": null,
-   "net_fall_per_100": null,
-   "made_up_pct": null,
-   "final_source": null
+   "electors_final": 45500011,
+   "final_date": "2026-10-27",
+   "reconciles": "net only",
+   "net_after_draft": 864036,
+   "net_fall": 9932303,
+   "net_fall_per_100": 17.9179,
+   "made_up_pct": 8.0,
+   "final_source": {
+    "source": "press",
+    "url": "https://www.thehindu.com/news/national/karnataka/sir-over-9932-lakh-names-struck-off-voter-list-in-karnataka/article71629941.ece",
+    "note": "Published on 27 October 2026, as The Hindu and ETV Bharat reported the Chief Electoral Officer's figures. No final-roll press note was found on ceo.karnataka.gov.in when it was read that day. The draft is the 4,46,35,975 general electors of the CEO's press note of 24 August 2026, which also gave 44,176 service electors. The reports do not say whether the final total includes service electors. Additions and deletions after the draft were not published, only the net rise of 8,64,036. Final roll 2,25,40,493 men, 2,29,12,355 women and 2,841 third gender (ETV Bharat), which add up to 4,54,55,689, 44,322 fewer than the total."
+   }
   },
   {
    "state": "Telangana",
