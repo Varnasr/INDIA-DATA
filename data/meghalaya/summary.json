@@ -4,7 +4,8 @@
  "ut": false,
  "revision": "sir",
  "dates": {
-  "draft": "2026-08-05"
+  "draft": "2026-08-05",
+  "final": "2026-10-26"
  },
  "figures": {
   "roll_before": {
@@ -67,9 +68,37 @@
    "v": 2,
    "src": "s1"
   },
+  "added_after": {
+   "v": 23970,
+   "src": "s4"
+  },
+  "removed_after": {
+   "v": 9250,
+   "src": "s4"
+  },
+  "net_after": {
+   "v": 14720,
+   "src": "s4"
+  },
+  "final": {
+   "v": 2183963,
+   "src": "s4"
+  },
+  "men_final": {
+   "v": 1059743,
+   "src": "s4"
+  },
+  "women_final": {
+   "v": 1124216,
+   "src": "s4"
+  },
+  "third_final": {
+   "v": 4,
+   "src": "s4"
+  },
   "notices": {
    "v": 651735,
-   "src": "s3"
+   "src": "s4"
   }
  },
  "reasons_complete": true,
@@ -836,20 +865,29 @@
    "url": "https://meghalaya.gov.in/meghalaya/sites/default/files/press_release/EL_63_2026_87.pdf",
    "date": "2026-10-01",
    "primary": true
+  },
+  {
+   "id": "s4",
+   "title": "Election Department, Government of Meghalaya (Chief Electoral Officer), press note No. EL.63/2026/102 of 26 October 2026 on the final roll",
+   "url": "https://meghalaya.gov.in/meghalaya/sites/default/files/press_release/EL_63_2026_102.pdf",
+   "date": "2026-10-26",
+   "primary": true
   }
  ],
  "notes": [
-  "Every figure here is from the Chief Electoral Officer's press notes, chiefly the note of 5 August 2026 with its table of all 60 constituencies, and the note of 1 October 2026 for the notices.",
+  "Every figure here is from the Chief Electoral Officer's press notes, chiefly the note of 5 August 2026 with its table of all 60 constituencies, the note of 1 October 2026 for the notices, and the note of 26 October 2026 for the final roll.",
   "The table of the names left off gives five reasons. Untraceable or absent (45,011), shifted (42,532) and refused to fill a form (4,668) are counted together here, beside 81,490 dead and 6,701 enrolled more than once.",
   "The note of 5 August prints the roll before the revision and the draft by sex. The split by sex of the names left off is worked out from the two.",
   "The constituency rows add up to the printed district totals and to the state in every column. The district names are written out in full from the abbreviations in the table.",
-  "The notices count 2,22,786 electors who could not be linked to the earlier roll and 4,28,949 sent a notice over a discrepancy, as on 1 October 2026. By then 1,194 had been found ineligible, which is an interim count.",
-  "The final roll was due on 7 October 2026 and was moved to 26 October 2026."
+  "The notices count 2,22,786 electors who could not be linked to the earlier roll and 4,28,949 sent a notice over a discrepancy, 6,51,735 in all. The note of 26 October 2026 says every one of them was heard and 6,724 electors were deleted after notice and hearing.",
+  "The final roll was due on 7 October 2026 and was moved to 26 October 2026. It was published on 26 October with 21,83,963 electors, 10,59,743 men, 11,24,216 women and 4 third gender. That is 14,720 more than the draft and 1,65,682 fewer than the roll before the revision.",
+  "After the draft, the note of 26 October 2026 counts 21,694 Form 6 and 6A claims accepted, 2,276 Form 8 shiftings, 2,526 Form 7 objections and 6,724 electors deleted after notice. It does not add them up, and it does not say that a Form 8 shifting adds a name to the state's roll. The additions after the draft are taken to be the Form 6 and 6A claims with the Form 8 shiftings, 23,970, and the deletions the Form 7 objections with the deletions after notice, 9,250. That grouping is an inference from the arithmetic. Counted this way, the draft plus those added less those deleted is the final roll exactly, and without the shiftings the sum falls 2,276 short of the net rise of 14,720. The 12,860 Form 8 corrections changed details in entries already on the roll."
  ],
  "cannot_show": [
   "Women's share of the names left off in any district or constituency. The roll by sex was published for the state only.",
-  "Where the notices and hearings fell. They were published as state totals only.",
-  "The final roll, which was not out when these figures were read."
+  "Where the notices and hearings fell, and where names were added or deleted after the draft. They were published as state totals only.",
+  "The final roll by district or constituency. The note of 26 October 2026 gives it for the state only, so the district and constituency figures stop at the draft.",
+  "How many of the 21,694 electors added on Form 6 or 6A had been left off the draft and how many were new voters."
  ],
  "id": "ml",
  "rates": {
@@ -859,9 +897,12 @@
    "shifted_absent_other": 51.1,
    "duplicate": 3.7
   },
+  "made_up_pct": 8.2,
+  "final_vs_before": -165682,
   "women_before_pct": 50.6842,
   "women_draft_pct": 51.4557,
   "women_removed_pct": 41.407,
+  "women_final_pct": 51.476,
   "women_per_100": 6.3,
   "men_per_100": 9.1
  }

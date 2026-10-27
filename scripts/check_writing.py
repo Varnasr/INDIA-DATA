@@ -5,7 +5,9 @@ site wrote itself.
 
 Reads the text of every page source in site/pages (outside scripts and
 styles), the strings in every page script and in assets/*.js and
-assets/faq/*.js, and the string values of the published JSON under data/
+assets/faq/*.js, the sentences written into pages by the Python builders in
+TEMPLATES (string literals holding a full stop, so search keywords and markup
+are left out), and the string values of the published JSON under data/
 (raw/ folders excluded). Fails on an em dash, an en dash between words,
 "rather than", "not only", ", not a/an/the", a semicolon between words in the
 pages' own prose, and the owner's banned words.
@@ -87,7 +89,14 @@ QUOTED = {'quote', 'quotes', 'title', 'title_en', 'headline', 'url', 'source', '
 ALLOWED = {
     'specially empowered Executive Magistrate': 'the words of BNSS section 163, quoted in a legal point',
     'How to use this site': 'the name of the guide page, used as the label of a link to it',
+    'About this site': 'the label of the footer link to the section on why the site exists',
 }
+# Python builders whose string literals become sentences on a page. Until
+# 27 October 2026 these were read by nothing, and build_site.py carried "we
+# have not found it published" into every state page whose final roll was late.
+TEMPLATES = ('scripts/build_site.py', 'scripts/build_feeds.py', 'scripts/make_seat_pages.py',
+             'scripts/make_district_pages.py', 'scripts/make_embed_pages.py')
+SENTENCE = re.compile(r'[a-z0-9)]\.(?:\s|$)')
 
 
 def page_text(s):
@@ -101,6 +110,14 @@ def js_strings(s):
         t = (m.group(1) if m.group(1) is not None else m.group(2) or '').replace("\\'", "'")
         if len(t.split()) >= 4:
             yield re.sub(r'<[^>]+>', ' ', t)
+
+
+def py_sentences(s):
+    s = re.sub(r'(?m)^\s*#.*$', ' ', s)
+    s = re.sub(r'"""(?:.|\n)*?"""|\'\'\'(?:.|\n)*?\'\'\'', ' ', s)
+    for t in js_strings(s):
+        if SENTENCE.search(t):
+            yield t
 
 
 def walk(o, key=''):
@@ -125,6 +142,10 @@ def units():
         if os.path.basename(p) in ('i18n.js',):
             continue
         for t in js_strings(open(p, encoding='utf-8').read()):
+            yield p, t, False
+    for rel in TEMPLATES:
+        p = os.path.join(ROOT, rel)
+        for t in py_sentences(open(p, encoding='utf-8').read()):
             yield p, t, False
     for p in sorted(glob.glob(os.path.join(ROOT, 'data', '**', '*.json'), recursive=True)):
         rel = os.path.relpath(p, ROOT)

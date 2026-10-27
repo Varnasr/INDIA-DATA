@@ -351,8 +351,8 @@ R.p('In the ten years from 2014 to 2024 the roll gained %s. The %s names left of
 PR = J('india', 'process.json')
 R.h2('How the revision was run')
 moves = lambda r: len([st for st in r['steps'] if st.get('kind') != 'published']) - 1
-R.p('The rules changed while the revision was under way. The page on how the revision was run lists %d orders, letters and judgments in date order, %d of them from the Supreme Court, each linked to its document, '
-    'and draws every state\'s schedule as it was set and as it was moved. Across %d states and union territories, dates were changed %d times in the published orders and notes.'
+R.p('The rules changed while the revision was under way. It was governed by %d orders, letters and judgments, %d of them from the Supreme Court. '
+    'Across %d states and union territories, dates were changed %d times in the published orders and notes.'
     % (len(PR['timeline']), len([t for t in PR['timeline'] if t['who'] == 'sc']), len(PR['schedules']), sum(moves(r) for r in PR['schedules'])))
 R.p('What made it harder to stay on the roll, each point resting on an order or a judgment:')
 # the burdens carry {placeholders} for counts taken from the schedules
@@ -365,7 +365,7 @@ _fill.update({'claims_states': len(_cl), 'claims_fewer': len([s for s in _cl if 
 _fill['claims_lead'] = ('All %d states that published both counts' % _fill['claims_states'] if _fill['claims_fewer'] == _fill['claims_states']
                        else '%d of the %d states that published both counts' % (_fill['claims_fewer'], _fill['claims_states']))
 R.numbered(['%s. %s' % (b['title'], re.sub(r'\{(\w+)\}', lambda m: str(_fill[m.group(1)]), b['text'])) for b in PR['burdens']])
-R.p('The page also lists %d press reports of problems in the field, each attributed to its outlet and kept apart from the points above because no document confirms them.' % len(PR['reported']), italic=True)
+R.p('The press reported %d further problems in the field. No document confirms them, so they are not among the points above.' % len(PR['reported']), italic=True)
 
 # ============================================================ CONCLUSION
 R.h1('What the Election Commission should do')

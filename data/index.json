@@ -13,14 +13,14 @@
  },
  "counts": {
   "files": 461,
-  "bytes": 13086086
+  "bytes": 13093151
  },
  "files": [
   {
    "path": "data/downloads.json",
    "description": "The downloads manifest: every workbook, sheet and column, with what each holds",
    "format": "JSON",
-   "bytes": 200685,
+   "bytes": 200949,
    "keys": [
     "workbooks",
     "zip",
@@ -45,7 +45,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 37234,
+   "bytes": 37887,
    "keys": [
     "note",
     "entries"
@@ -4341,7 +4341,7 @@
    "path": "data/india/final_rolls.csv",
    "description": "Each final roll set against the draft, with names added and deleted after it",
    "format": "CSV",
-   "bytes": 4660,
+   "bytes": 4832,
    "columns": [
     "state",
     "phase",
@@ -4516,7 +4516,7 @@
    "path": "data/india/panels.json",
    "description": "Panels quoted on the reading page, with their figures",
    "format": "JSON",
-   "bytes": 187902,
+   "bytes": 187903,
    "keys": [
     "checked",
     "counts",
@@ -4529,7 +4529,7 @@
    "path": "data/india/process.json",
    "description": "How the revision was run: the rules as they changed, and each state's dates",
    "format": "JSON",
-   "bytes": 140456,
+   "bytes": 140893,
    "keys": [
     "as_of",
     "timeline",
@@ -4550,7 +4550,7 @@
    "path": "data/india/process_schedules.csv",
    "description": "Each state's schedule as set and as moved",
    "format": "CSV",
-   "bytes": 12956,
+   "bytes": 13185,
    "columns": [
     "state",
     "phase",
@@ -4572,7 +4572,7 @@
    "path": "data/india/process_timeline.csv",
    "description": "Every order, letter, court order and judgment that changed how the revision was run",
    "format": "CSV",
-   "bytes": 22940,
+   "bytes": 22973,
    "columns": [
     "date",
     "who",
@@ -4666,7 +4666,7 @@
    "path": "data/india/states.csv",
    "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave",
    "format": "CSV",
-   "bytes": 16927,
+   "bytes": 16973,
    "columns": [
     "state",
     "phase",
@@ -4718,7 +4718,7 @@
    "path": "data/india/states.json",
    "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave. The same table as data/india/states.csv, as JSON",
    "format": "JSON",
-   "bytes": 88890,
+   "bytes": 89747,
    "keys": [
     "as_of",
     "adults",
@@ -5775,7 +5775,7 @@
    "path": "data/meghalaya/summary.json",
    "description": "Meghalaya: the figures its pages draw",
    "format": "JSON",
-   "bytes": 18896,
+   "bytes": 21025,
    "keys": [
     "state",
     "slug",
@@ -5797,7 +5797,7 @@
    "path": "data/meghalaya/tables.csv",
    "description": "Every Meghalaya figure with its source.",
    "format": "CSV",
-   "bytes": 20586,
+   "bytes": 21908,
    "columns": [
     "table",
     "level",
@@ -7070,7 +7070,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 644990,
+   "bytes": 645273,
    "licence": "CC BY 4.0"
   },
   {
@@ -7084,7 +7084,7 @@
    "path": "downloads/bihar.xlsx",
    "description": "Bihar 2025, Excel workbook",
    "format": "Excel",
-   "bytes": 443441,
+   "bytes": 443440,
    "licence": "CC BY 4.0"
   },
   {
@@ -7105,7 +7105,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 276138,
+   "bytes": 276447,
    "licence": "CC BY 4.0"
   },
   {
@@ -7133,7 +7133,7 @@
    "path": "downloads/other-states.xlsx",
    "description": "Every other state and union territory, Excel workbook",
    "format": "Excel",
-   "bytes": 83117,
+   "bytes": 83450,
    "licence": "CC BY 4.0"
   },
   {
@@ -7147,14 +7147,14 @@
    "path": "downloads/tamil-nadu.xlsx",
    "description": "Tamil Nadu, Excel workbook",
    "format": "Excel",
-   "bytes": 117838,
+   "bytes": 117837,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/telangana-hyderabad.xlsx",
    "description": "Telangana 2026 and the Old City of Hyderabad, Excel workbook",
    "format": "Excel",
-   "bytes": 95540,
+   "bytes": 95539,
    "licence": "CC BY 4.0"
   },
   {

@@ -13,9 +13,9 @@
     var v = { d: f(p.getAttribute('data-d')), n: f(p.getAttribute('data-n')) }, t = {
       'final': L('Figures as of {d}, when the final roll was published.', v),
       'draft-due': L('Figures as of {d}, when the draft roll was published. The final roll is due on {n}.', v),
-      'draft-past': L('Figures as of {d}, when the draft roll was published. The final roll was due on {n}, and no published final roll has been found.', v),
+      'draft-past': L('Figures as of {d}, when the draft roll was published. The final roll was due on {n} and had not been found published when these figures were checked.', v),
       'latest-due': L('Figures as of {d}, a roll published after claims had closed, while notices were being heard. The final roll is due on {n}.', v),
-      'latest-past': L('Figures as of {d}, a roll published after claims had closed, while notices were being heard. The final roll was due on {n}, and no published final roll has been found.', v),
+      'latest-past': L('Figures as of {d}, a roll published after claims had closed, while notices were being heard. The final roll was due on {n} and had not been found published when these figures were checked.', v),
       'nodraft': L('No draft roll has been published yet. It is due on {n}.', v)
     }[p.getAttribute('data-k')];
     if (t) p.textContent = t;
