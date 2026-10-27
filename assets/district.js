@@ -60,7 +60,7 @@
       limits: 'Assam held a Special Revision, which ran on different rules from the SIR. The names flagged for deletion were published for the state only, through the press.' },
     meghalaya: { label: 'Meghalaya', state: 'Meghalaya', count: 'removed', base: 'before', seats: true,
       reasons: [['shifted_absent_other', 'Shifted, absent or other'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once']],
-      limits: 'The split by sex of the names left off was published for the state only.' },
+      limits: 'The split by sex of the names left off, and the final roll of 26 October 2026, were published for the state only, so each district\'s figures stop at the draft.' },
     manipur: { label: 'Manipur', state: 'Manipur', count: 'fall', base: 'before', seats: true, fall: true,
       sub: 'Measured by the fall in the roll from the roll before the revision to the final roll, per 100 on the roll before. It takes in the names left off and everything added or deleted after the draft together.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from the roll before the revision to the final roll', per: 'per 100 on the roll before the revision',

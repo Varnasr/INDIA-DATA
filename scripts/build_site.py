@@ -198,9 +198,9 @@ def asof(place):
 ASOF_EN = {
     'final': 'Figures as of {d}, when the final roll was published.',
     'draft-due': 'Figures as of {d}, when the draft roll was published. The final roll is due on {n}.',
-    'draft-past': 'Figures as of {d}, when the draft roll was published. The final roll was due on {n}, and we have not found it published.',
+    'draft-past': 'Figures as of {d}, when the draft roll was published. The final roll was due on {n} and had not been found published when these figures were checked.',
     'latest-due': 'Figures as of {d}, a roll published after claims had closed, while notices were being heard. The final roll is due on {n}.',
-    'latest-past': 'Figures as of {d}, a roll published after claims had closed, while notices were being heard. The final roll was due on {n}, and we have not found it published.',
+    'latest-past': 'Figures as of {d}, a roll published after claims had closed, while notices were being heard. The final roll was due on {n} and had not been found published when these figures were checked.',
     'nodraft': 'No draft roll has been published yet. It is due on {n}.',
 }
 

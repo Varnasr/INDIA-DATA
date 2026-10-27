@@ -27,8 +27,10 @@ assignment was compared by eye with the CEO's "Information on Assembly Constitue
 ## What is not published
 
 - **No split by sex of the names left off**, at any level. Draft by sex is a state figure only.
-- **The final roll is not out.** It was due 7 October 2026; ECI Press Note ECI/PN/121/2026 of
-  30 September moved it to 26 October 2026 (stated in EL.63/2026/87).
+- **The final roll is for the state only.** It was due 7 October 2026; ECI Press Note
+  ECI/PN/121/2026 of 30 September moved it to 26 October 2026 (stated in EL.63/2026/87), and it
+  was published that day. Press note EL.63/2026/102 gives it as a state total and by sex, with
+  no table by district or constituency (see the section below).
 - Notices, hearings and ineligible cases are state totals; EL.63/2026/83 says a district-wise
   review was held but prints no district table.
 - Notice counts moved: the discrepancy list was 4,28,858 (total 6,51,644) in the notes of
@@ -64,3 +66,37 @@ Wikipedia's list of constituencies of the Meghalaya Legislative Assembly, which 
 Chief Electoral Officer's constituency map. `build_states.py` accepts the map only because
 every district's constituencies add up exactly to the district table here in the roll before,
 the names left off, each reason and the draft. Ri Bhoi is spelt Ri-Bhoi to match that table.
+
+## Final roll (`normal.json`, 27 October 2026)
+
+Press note No. EL.63/2026/102 of 26 October 2026, "Final Publication of Electoral Rolls following
+Special Intensive Revision (SIR), 2026 in Meghalaya", signed by the Chief Electoral Officer,
+https://meghalaya.gov.in/meghalaya/sites/default/files/press_release/EL_63_2026_102.pdf
+(`sources/ceo_press_note_EL63_2026_102_final_20261026.pdf`, sha256 dce7ea0c...218b4). It is a
+scan with an OCR layer; every figure was read from the page images. The office's home page,
+https://ceomeghalaya.nic.in/, carries an image of the same figures,
+`img/slider/Final Publication-26th October 2026.jpeg` (read, not saved). It prints 6,51,736
+notices and hearings where the note prints 6,51,735; the note's figure is kept.
+
+| figure | value | where |
+|---|---|---|
+| final roll | 21,83,963 | s.8 table |
+| men, women, third gender | 10,59,743, 11,24,216, 4 | s.8 table |
+| net increase over the draft | 14,720 | s.8 table |
+| notices, hearings held | 6,51,735, 6,51,735 (100%) | s.6 table |
+| deleted after due process (notice and hearing) | 6,724 | s.6 table |
+| Form 6 and 6A accepted | 21,694 | s.7 table |
+| Form 8 shifting accepted | 2,276 | s.7 table |
+| Form 7 accepted | 2,526 | s.7 table |
+| Form 8 correction accepted | 12,860 | s.7 table |
+
+Claims and objections were received from 5 August to 18 September 2026 and decided by
+17 October (s.7).
+
+`added_after` (23,970) is Form 6 and 6A with Form 8 shifting; `removed_after` (9,250) is Form 7
+with the deletions after hearing. The note does not add them up; the grouping is ours.
+
+- PASS: men + women + third gender = 21,83,963
+- PASS: draft 21,69,243 + 14,720 = 21,83,963
+- PASS: 21,694 + 2,276 - 6,724 - 2,526 = 14,720
+- PASS: roll before and draft in the note agree with EL.63/2026/29 (23,49,645 and 21,69,243, by sex)
