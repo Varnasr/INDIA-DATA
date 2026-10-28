@@ -35,11 +35,13 @@ STATE = {'before': 55432314, 'absent': 1517042, 'shifted': 6545679, 'dead': 1639
 SEP_TOTAL = 45161393   # the roll of 9 October 2026; 44,844,080 on 25 September
 DRAFT_SERVICE = 44176  # service electors on the draft, Annexure-10 of the same note
 # The final roll of 27 October 2026, for the state. No CEO note was on
-# ceo.karnataka.gov.in that day. The total is The Hindu's report, which gives the
-# rise from the draft as 8.64 lakh; the split by sex is ETV Bharat's, quoting the
-# CEO's office. The three sexes add up to 44,322 less than the total, and neither
-# report says whether the total includes service electors. See raw/SOURCES.md.
-FINAL = {'date': '2026-10-27', 'total': 45500011, 'men': 22540493, 'women': 22912355, 'third': 2841}
+# ceo.karnataka.gov.in that day. The split by sex is ETV Bharat's, quoting the
+# CEO's office, and its sum is taken as the final roll of general electors, the
+# same footing as the draft. The Hindu's total of 4,55,00,011 is 44,322 larger,
+# close to the 44,176 service electors listed with the draft, so it is taken to
+# include them. The Times of India of 28 October gives 10.08 lakh added and 1.88
+# lakh deleted after the draft, which agree with this to the lakh.
+FINAL = {'date': '2026-10-27', 'total': 45455689, 'total_with_service': 45500011, 'men': 22540493, 'women': 22912355, 'third': 2841}
 BENGALURU = ('BANGALORE URBAN', 'B.B.M.P(NORTH)', 'B.B.M.P(CENTRAL)', 'B.B.M.P(SOUTH)')
 NAMES = {'B.B.M.P(NORTH)': 'B.B.M.P (North)', 'B.B.M.P(CENTRAL)': 'B.B.M.P (Central)',
          'B.B.M.P(SOUTH)': 'B.B.M.P (South)'}
@@ -100,10 +102,13 @@ def build():
     for k in ('before', 'removed', 'draft') + REASONS:
         assert T(k) == STATE[k], k
     assert T('sep') == SEP_TOTAL
-    # the reported rise from the draft, 8.64 lakh, and the fall from 5,54,32,314
-    assert round((FINAL['total'] - STATE['draft']) / 1e3) == 864 and STATE['before'] - FINAL['total'] == 9932303
-    # the three sexes as reported fall short of the total by 44,322, which the page states
-    assert FINAL['total'] - (FINAL['men'] + FINAL['women'] + FINAL['third']) == 44322
+    # the reported rise from the draft to the reported total, 8.64 lakh, and the fall of general electors from 5,54,32,314
+    assert round((FINAL['total_with_service'] - STATE['draft']) / 1e3) == 864 and STATE['before'] - FINAL['total'] == 9976625
+    assert FINAL['total'] == FINAL['men'] + FINAL['women'] + FINAL['third']
+    # The Times of India's 10.08 lakh added less 1.88 lakh deleted equals the rise to the lakh
+    assert round((FINAL['total'] - STATE['draft']) / 1e5, 1) == round((1008000 - 188000) / 1e5, 1)
+    # the three sexes as reported fall short of the reported total by 44,322, which the method page states
+    assert FINAL['total_with_service'] - (FINAL['men'] + FINAL['women'] + FINAL['third']) == 44322
 
     blr = [r for r in dist if r['bengaluru']]
     rest = [r for r in dist if not r['bengaluru']]
@@ -124,7 +129,8 @@ def build():
         'draft_service': DRAFT_SERVICE,
         'final_date': FINAL['date'], 'final': FINAL['total'],
         'final_men': FINAL['men'], 'final_women': FINAL['women'], 'final_third': FINAL['third'],
-        'final_by_sex': FINAL['men'] + FINAL['women'] + FINAL['third'],
+        'final_by_sex': FINAL['men'] + FINAL['women'] + FINAL['third'], 'final_with_service': FINAL['total_with_service'],
+        'added_after_draft_reported': 1008000, 'deleted_after_draft_reported': 188000,
         'added_final': FINAL['total'] - T('draft'),
         'made_up_final_pct': round(100 * (FINAL['total'] - T('draft')) / removed, 4),
         'net_fall_final': before - FINAL['total'],

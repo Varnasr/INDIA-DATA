@@ -252,3 +252,11 @@ aggregates.
   Electoral Officer giving the total was found, and no total row was added.
 - **Andhra Pradesh**: hearings in 44.27 lakh of 44.28 lakh notices by 29
   September (Deccan Chronicle).
+
+## Update of 2026-10-28
+
+- **Delhi**: a sixth count of notices decided, 31.2 lakh of 33.1 lakh by 26
+  October (The Times of India, Alok K N Mishra, 28 October 2026), read in full
+  with Firecrawl. The report says "disposed of and parked for inclusion in the
+  final electoral rolls". The same caveat as the five counts above applies, and
+  the report gives no count of cases rejected.
