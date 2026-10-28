@@ -269,9 +269,23 @@ The figures are for the state only, so they are constants in
 - Odd: the three add up to 4,54,55,689, which is 44,322 less than the total.
   Neither report says whether the total includes service electors. The draft
   roll carried 44,176 service electors besides its general electors (above).
-  The rise from the draft is therefore measured as the reports measure it, from
-  the 4,46,35,975 general electors to the reported total.
-- Not published, in either report or on the CEO's site: names added or deleted
-  after the draft, the outcome of the hearings, and any table by district or
-  constituency. `build_karnataka.py` asserts the 8.64 lakh rise and the 44,322
-  gap.
+- Corrected on 28 October 2026: the gap is close to the 44,176 service
+  electors, so the reported total is taken to include them, and the final roll
+  is now the sum by sex, 4,54,55,689 general electors, on the same footing as
+  the draft and the roll of 16 June (the draft plus the names left off). No
+  report says whether the total includes service electors.
+- Additions and deletions: The Times of India, "Karnataka SIR: 99.76 lakh
+  voters dropped, 10.08 lakh added to final rolls", 28 October 2026, 12:04 IST,
+  https://timesofindia.indiatimes.com/city/bengaluru/karnataka-sir-99-76-lakh-voters-dropped-10-08-lakh-added-to-final-rolls/articleshow/135254581.cms,
+  read in full with Firecrawl. It gives 10.08 lakh additions and 1.88 lakh
+  deletions during claims and objections, a net increase of 8.20 lakh, a fall
+  of 99.76 lakh from 5.54 crore, and 61,867 electors marked ineligible for the
+  final roll. The 8.20 lakh and 99.76 lakh agree with 4,54,55,689. The
+  reported total of 4,55,00,011 would give 8.64 lakh and 99.32 lakh. The report does not say
+  whether the 61,867 are among the 1.88 lakh, and it warns that the additions
+  and deletions should not be read as a complete explanation of the overall
+  change.
+- Not published, in any report or on the CEO's site: the outcome of the
+  hearings, and any table by district or constituency.
+  `build_karnataka.py` asserts the 8.64 lakh rise to the reported total, the
+  8.20 lakh rise to the sum by sex and the 44,322 gap.
