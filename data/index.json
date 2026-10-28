@@ -1,7 +1,7 @@
 {
  "title": "Off the Roll: index of the published data files",
  "url": "https://offtheroll.in/data/index.json",
- "built": "2026-10-27",
+ "built": "2026-10-28",
  "licence": {
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/"
@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 461,
-  "bytes": 13095764
+  "bytes": 13101095
  },
  "files": [
   {
@@ -33,7 +33,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 418830,
+   "bytes": 420759,
    "keys": [
     "places",
     "pages",
@@ -45,7 +45,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 38099,
+   "bytes": 38826,
    "keys": [
     "note",
     "entries"
@@ -4588,7 +4588,7 @@
    "path": "data/india/reads.json",
    "description": "Further reading and viewing on the revision, with outlets, dates and summaries",
    "format": "JSON",
-   "bytes": 82395,
+   "bytes": 84802,
    "keys": [
     "groups",
     "items",
@@ -4666,7 +4666,7 @@
    "path": "data/india/states.csv",
    "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave",
    "format": "CSV",
-   "bytes": 16973,
+   "bytes": 17107,
    "columns": [
     "state",
     "phase",
@@ -4718,7 +4718,7 @@
    "path": "data/india/states.json",
    "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave. The same table as data/india/states.csv, as JSON",
    "format": "JSON",
-   "bytes": 89747,
+   "bytes": 89881,
    "keys": [
     "as_of",
     "adults",
