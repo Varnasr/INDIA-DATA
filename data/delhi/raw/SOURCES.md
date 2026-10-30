@@ -231,7 +231,12 @@ decisions was found. ECI press note ECI/PN/120/2026 of 26.09.2026
 https://www.eci.gov.in/eci/public/api/document?id=17536, curl with browser
 headers) extends Delhi's claims and objections to 30 October 2026 and
 disposal to 30 November 2026, at the CEO's request; india.com reports the
-final roll moved to 4 December 2026.
+final roll moved to 4 December 2026. On 29 October 2026 the Commission moved
+claims and objections to 25 November, disposal to 15 December and the final
+roll to 22 December 2026, as PTI reported in ThePrint
+(https://theprint.in/india/delhi-sir-timelines-revised-claim-filing-till-nov-25-final-roll-on-dec-22/3085594/).
+No copy of the Commission's letter or a CEO note of it was found; ceodelhi.gov.in
+did not answer from the sandbox on 30 October 2026.
 
 ## Not used
 
