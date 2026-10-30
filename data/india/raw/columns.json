@@ -1217,5 +1217,18 @@
   "left_off_over_margin": "True when more names were left off than the 2024 margin. That makes them large enough to decide the seat, never that they did.",
   "left_off_at_turnout_over_margin": "True when the names left off, scaled down by the seat's 2024 turnout, exceed the margin.",
   "per_100_less_district": "The constituency's names left off per 100 less its district's."
+ },
+ "data/india/court_listings.csv": {
+  "date": "The date of the hearing or of the deadline, as the source states it or as worked out from the period the court gave.",
+  "date_kind": "exact if the source states the date, approximate if it was worked out from a period the court gave, tentative if the court listed the matter for the date tentatively.",
+  "computed_from": "For an approximate date, the date of the order and the period it was worked out from.",
+  "court": "The court.",
+  "state": "The state the case concerns, or India for one about the revision as a whole.",
+  "matter": "The case, in plain words. Private petitioners are given by role.",
+  "due": "What is due on the date, a hearing, a report or an affidavit.",
+  "disputes_entry": "The entry for the case on the disputes page.",
+  "source": "The outlet whose report gives the date.",
+  "url": "The address of the source.",
+  "quote": "The words of the source that give the date or the period."
  }
 }

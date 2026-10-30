@@ -12,15 +12,15 @@
   "url": "https://www.impactmojo.in/"
  },
  "counts": {
-  "files": 461,
-  "bytes": 13234873
+  "files": 462,
+  "bytes": 13266680
  },
  "files": [
   {
    "path": "data/downloads.json",
    "description": "The downloads manifest: every workbook, sheet and column, with what each holds",
    "format": "JSON",
-   "bytes": 200949,
+   "bytes": 202278,
    "keys": [
     "workbooks",
     "zip",
@@ -45,7 +45,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 45110,
+   "bytes": 45416,
    "keys": [
     "note",
     "entries"
@@ -4226,6 +4226,26 @@
    "licence": "CC BY 4.0"
   },
   {
+   "path": "data/india/court_listings.csv",
+   "description": "The hearings and deadlines ahead in the court cases on the revision, each with the report that gives its date",
+   "format": "CSV",
+   "bytes": 3255,
+   "columns": [
+    "date",
+    "date_kind",
+    "computed_from",
+    "court",
+    "state",
+    "matter",
+    "due",
+    "disputes_entry",
+    "source",
+    "url",
+    "quote"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
@@ -4250,8 +4270,9 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 360753,
+   "bytes": 382814,
    "keys": [
+    "listings",
     "sections",
     "by_state",
     "by_month",
@@ -7073,14 +7094,14 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 652162,
+   "bytes": 654077,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/assam.xlsx",
    "description": "Assam, Excel workbook",
    "format": "Excel",
-   "bytes": 41235,
+   "bytes": 41234,
    "licence": "CC BY 4.0"
   },
   {
@@ -7094,21 +7115,21 @@
    "path": "downloads/delhi.xlsx",
    "description": "Delhi, Excel workbook",
    "format": "Excel",
-   "bytes": 28829,
+   "bytes": 28828,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/gujarat.xlsx",
    "description": "Gujarat, Excel workbook",
    "format": "Excel",
-   "bytes": 72140,
+   "bytes": 72139,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 284071,
+   "bytes": 287020,
    "licence": "CC BY 4.0"
   },
   {
@@ -7129,21 +7150,21 @@
    "path": "downloads/maharashtra.xlsx",
    "description": "Maharashtra, Excel workbook",
    "format": "Excel",
-   "bytes": 85207,
+   "bytes": 85206,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/other-states.xlsx",
    "description": "Every other state and union territory, Excel workbook",
    "format": "Excel",
-   "bytes": 83449,
+   "bytes": 83448,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/rajasthan.xlsx",
    "description": "Rajasthan, Excel workbook",
    "format": "Excel",
-   "bytes": 60785,
+   "bytes": 60784,
    "licence": "CC BY 4.0"
   },
   {
@@ -7164,14 +7185,14 @@
    "path": "downloads/uttar-pradesh.xlsx",
    "description": "Uttar Pradesh, Excel workbook",
    "format": "Excel",
-   "bytes": 50367,
+   "bytes": 50366,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/uttarakhand.xlsx",
    "description": "Uttarakhand, Excel workbook",
    "format": "Excel",
-   "bytes": 45752,
+   "bytes": 45751,
    "licence": "CC BY 4.0"
   },
   {
