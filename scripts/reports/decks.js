@@ -500,7 +500,7 @@ function hyderabad() {
   cover(pres, K, P, 'Special Intensive Revision · Hyderabad Old City 2026', 'The 2026 revision left ' + lakh(t.deleted) + ' electors in five Old City seats off the draft roll',
     'Charminar, Yakutpura, Malakpet, Chandrayangutta and Bahadurpura, polling part by polling part',
     [[indian(t.deleted), 'electors on the rolls before the revision left off the draft'], [pct(t.rate), 'of every elector on those rolls'], [pct(100 * t.deleted / valid), 'of the valid votes cast in 2023'], [indian(t.hearing), 'kept but summoned to a hearing']])
-    .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll. The lists cover every elector on the rolls of the five constituencies before the revision, so each group has a true exclusion rate, the share of its own members left off. These are the September 2026 lists. The final roll is due on 9 November, so names put back after hearings are not in them.');
+    .addNotes('The Special Intensive Revision (SIR) is the Election Commission\'s house-to-house recheck of the electoral roll. The lists cover every elector on the rolls of the five constituencies before the revision, so each group has a true exclusion rate, the share of its own members left off. These are the September 2026 lists. The final roll is due on 30 November, so names put back after hearings are not in them.');
   const toc = contentsSlide(pres, K, P);
 
   // ---- Overview
@@ -611,7 +611,7 @@ function hyderabad() {
   ], K.chart({ x: M, y: TOP, w: 6.2, h: CH, barDir: 'col', barGrouping: 'clustered', chartColors: ['0E5E6F', P.accent], showValue: true, dataLabelPosition: 'outEnd', showLegend: true, valAxisHidden: true }));
   s.addChart(pres.charts.LINE, [{ name: 'Cases listed per day', labels: days, values: perDay }],
     K.chart({ x: 7.0, y: TOP, w: W - M - 7.0, h: CH, chartColors: [P.accent], lineSize: 2, lineDataSymbol: 'none', catAxisLabelFontSize: 9, showTitle: true, title: 'Cases listed per day, all five', valAxisLabelFormatCode: '#,##0' }));
-  s.addNotes('On 7 September the Commission extended the calendar, with claims to 7 October, hearings to 5 November and the final roll on 9 November. The schedules here are those in the September lists. The length of a slot is not recorded.');
+  s.addNotes('On 7 September the Commission extended the calendar, with claims to 7 October, and on 29 October it moved hearings to 26 November and the final roll to 30 November. The schedules here are those in the September lists. The length of a slot is not recorded.');
 
   // ---- Questions
   K.qa(K.slide('Questions put to this analysis', 'What the lists say about moves, religion, the 2002 roll and age'), [
@@ -639,7 +639,7 @@ function hyderabad() {
   s = K.slide('Limits', 'What the lists show, and what they cannot show');
   K.box(s, 'How many electors were left off the draft, from which parts, and who they were by age, sex, religion guessed from names, and link to the 2002 roll. Because the lists hold every elector, each group has a true exclusion rate.', M, TOP - 0.4, 5.95, 2.3, 15);
   K.box(s, 'Whether any single exclusion was right. A household that moved out is rightly marked "shifted", and the lists cannot tell it apart from an elector who was at home when the officer missed them. Religion and age are given separately and never together.', 6.78, TOP - 0.4, 5.95, 2.3, 15);
-  K.body(s, 'These are the September lists. The final roll is due on 9 November, so restorations after hearings are not in these counts. Malakpet\'s list is read by polling-station name (' + mal.parts + ' stations) and ' + indian(mal.unaccounted) + ' electors on its roll appear in none of the three outcomes.', M, TOP + 2.2, W - 2 * M, 2.2, 16);
+  K.body(s, 'These are the September lists. The final roll is due on 30 November, so restorations after hearings are not in these counts. Malakpet\'s list is read by polling-station name (' + mal.parts + ' stations) and ' + indian(mal.unaccounted) + ' electors on its roll appear in none of the three outcomes.', M, TOP + 2.2, W - 2 * M, 2.2, 16);
 
   s = K.slide('What the Election Commission should do', 'Before the final roll');
   K.numbered(s, [

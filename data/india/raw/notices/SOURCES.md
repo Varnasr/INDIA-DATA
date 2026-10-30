@@ -260,3 +260,28 @@ aggregates.
   with Firecrawl. The report says "disposed of and parked for inclusion in the
   final electoral rolls". The same caveat as the five counts above applies, and
   the report gives no count of cases rejected.
+
+## Update of 2026-10-30
+
+Four rows were added, each read in full with curl on 2026-10-30. All figures
+are aggregates.
+
+- **Telangana**: 92,88,188 notices generated and 92,81,189 delivered, hearings
+  concluded for 92,08,443, and 50,690 electors found ineligible, as of 29
+  October (Telangana Today, 30 October 2026, 00:24 IST). The News Minute of the
+  same morning gives the same figures, attributing the notice counts to the
+  Chief Electoral Officer's office and the 50,690 found ineligible to the
+  Commission. No total row was added at 92,88,188. It is one
+  more than the 92,88,187 row of 8 October, and adding it would move the
+  national total by one, which the reading page quotes. The same reports give
+  2,59,22,684 electors cleared for the final roll, which counts electors never
+  sent a notice, so it is not a row. The Commission moved the end of the notice
+  phase from 5 to 26 November and the final roll from 9 to 30 November 2026.
+- **Andhra Pradesh**: hearings concluded for 44,28,858 notices and 1,73,662
+  electors found ineligible (Telangana Today, IANS, 30 October 2026, 12:15
+  IST). The report gives no date and no source for these figures, so the rows
+  carry the report's date. The hearings exceed the 44,28,444 notices ETV
+  Bharat reported on 24 September by 414, and the 42,55,630 cleared and
+  1,73,662 ineligible in the same sentence add to 434 more than the hearings.
+  The report explains neither gap. Notices are now decided by 20 November and
+  the final roll is due on 30 November 2026.

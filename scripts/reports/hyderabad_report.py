@@ -214,7 +214,7 @@ R.bullets([
 R.h2('What this shows and what it does not')
 R.p('The lists show how many electors were left off the draft, from which parts, and who they were by age, sex, religion guessed from names, and the link to the 2002 roll. They do not show whether any individual exclusion was right. '
     'A reason code cannot settle that. A household that moved out of the Old City is rightly marked "shifted", and the lists cannot tell it apart from an elector who was at home when the officer missed them. '
-    'Religion and age are counted separately, so a gap by religion may partly be a gap by age. The Malakpet list used here is incomplete. These are the September lists. The Commission extended the calendar on 7 September, as Telangana Today reported, with hearings to 5 November and the final roll on 9 November, so names put back after hearings are not in these counts.')
+    'Religion and age are counted separately, so a gap by religion may partly be a gap by age. The Malakpet list used here is incomplete. These are the September lists. The Commission extended the calendar on 7 September, with claims to 7 October, and again on 29 October, with hearings to 26 November and the final roll on 30 November, as Telangana Today reported, so names put back after hearings are not in these counts.')
 
 # ============================================================ PART II
 R.page_break()

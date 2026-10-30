@@ -67,4 +67,7 @@ read.
 - No district or constituency table of the roll before, the draft or the
   names left off from the CEO; the ASDD list exists only as named lists.
 - No split of the names left off by sex; no draft by sex.
-- The final roll (due 6 November 2026) is not out.
+- The final roll is not out. It was due on 6 November 2026 and is now due on 30 November
+  2026, with notices decided by 20 November, per the Haryana Public Relations release of
+  30 October 2026 from the Jhajjar District Election Officer
+  (https://prms.prharyana.gov.in/press-release/10167).
