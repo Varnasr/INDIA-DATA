@@ -24,7 +24,7 @@ SIR.json('data/india/process.json').then(function (P) {
     'What an elector had to show changed as the revision went on. In June 2025 it was one of eleven documents, and Aadhaar was added for identity on the Supreme Court\'s order in September. In Phase II no documents were asked for while forms were filled in. From 26 September 2026, documents were collected at home from those sent notices.',
     bySC + ' of the ' + T.length + ' entries below are orders or the judgment of the Supreme Court. In West Bengal it had judges decide the claims, and 60,06,675 names were marked under adjudication on the final roll.',
     'The Indian Express reported that two of the three Election Commissioners objected on record at least 14 times in 10 months to decisions taken in the Commission\'s name without them, on Form 6, on who controls the roll software, and on appeals in West Bengal. Three days after calling the notes part of its decision-making, the Commission announced nine decisions that met several of them. <a href="#inside-the-commission">Inside the Commission</a> sets the account out by date.'
-  ], 'Every section rests on documents issued by the Election Commission, the Supreme Court and the states\' election officers, except the list of press reports, which is marked as such. Some orders could not be found, and they are listed at the foot of the page.');
+  ], 'Every section rests on documents issued by the Election Commission, the Supreme Court and the states\' election officers, except the census note, which rests on the Registrar General\'s notifications, and the list of press reports, which is marked as such. Some orders could not be found, and they are listed at the foot of the page.');
 
   document.getElementById('kpis').innerHTML = [
     [T.length, 'rule and schedule changes, each with its document'],
@@ -32,6 +32,12 @@ SIR.json('data/india/process.json').then(function (P) {
     [P.schedules.reduce(function (n, r) { return n + moves(r); }, 0), 'times a state\'s dates were changed, in the orders and notes on this page'],
     [P.gaps.length, 'documents that could not be found or questions still open']
   ].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join('');
+
+  // the census dates beside the summary revision, a dated note from the
+  // Registrar General's notifications
+  var C = P.census;
+  document.getElementById('nCensus').innerHTML = 'Census dates as notified by <time datetime="' + C.date + '">' + SIR.date(C.date) + '</time>. ' + E(C.text) + ' ' +
+    C.src.map(function (s) { return '<a href="' + E(s.url) + '" rel="noopener" target="_blank">' + E(s.name) + '</a>'; }).join(' · ');
 
   // the timeline
   // each entry has its own address, #t-<date>, so a link opens on it
