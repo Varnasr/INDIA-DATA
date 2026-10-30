@@ -439,6 +439,17 @@ def _reads():
 def _disputes():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_disputes.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+    # the court listings at the top of the page and in the calendars: each
+    # date parses, each points at an entry the page carries, and the calendar
+    # for all India holds every one of them
+    import datetime
+    D = json.load(open(os.path.join(ROOT, 'data', 'india', 'disputes.json'), encoding='utf-8'))
+    ids = {i['id'] for s in D['sections'] for i in s['items']}
+    cal = open(os.path.join(ROOT, 'calendar.ics'), encoding='utf-8', newline='').read()
+    for x in D.get('listings', []):
+        datetime.date.fromisoformat(x['date'])
+        assert x['disputes_id'] in ids, 'court listing %s points at %s, which is not on the disputes page' % (x['id'], x['disputes_id'])
+        assert 'UID:court-%s@offtheroll.in' % x['id'] in cal, 'court listing %s is not in calendar.ics' % x['id']
 
 
 def _events():

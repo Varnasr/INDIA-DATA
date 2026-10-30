@@ -954,6 +954,9 @@ html.dyslexic-font .disp .tag{text-transform:none}
 .dcount{font-weight:600}
 .disp .dtags{display:flex;flex-wrap:wrap;gap:.3rem;margin:.3rem 0 0}
 .disp .dtags span{font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.05rem .5rem}
+/* india/disputes/: the hearings and deadlines ahead, above the English-only part of the page */
+.nextcourt{margin:.5rem 0 1.5rem;padding-bottom:.6rem;border-bottom:2px solid var(--line)}
+.nextcourt .nfacts>li>p:first-child{margin-top:0}
 
 /* the places menu opens with the pages most readers come for */
 
