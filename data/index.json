@@ -12,8 +12,8 @@
   "url": "https://www.impactmojo.in/"
  },
  "counts": {
-  "files": 461,
-  "bytes": 13234873
+  "files": 462,
+  "bytes": 13258662
  },
  "files": [
   {
@@ -45,7 +45,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 45110,
+   "bytes": 45393,
    "keys": [
     "note",
     "entries"
@@ -4357,6 +4357,19 @@
     "net_fall_per_100",
     "reconciles",
     "source"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/form7_bulk.json",
+   "description": "Bulk Form 7 filings reported, state by state, each linked to its reports on the disputes page",
+   "format": "JSON",
+   "bytes": 23506,
+   "keys": [
+    "rows",
+    "status",
+    "context",
+    "counts"
    ],
    "licence": "CC BY 4.0"
   },

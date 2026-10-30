@@ -568,6 +568,13 @@ main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
 .process .rresp{font-size:.92rem;color:var(--muted)}
 .process .rresp span{font-weight:700;color:var(--ink)}
 .process .rresp span::after{content:"."}
+/* bulk Form 7 filings: a wide table that scrolls inside its own box */
+.process .bulk table{min-width:980px}
+.process .bulk td,.process .bulk th{vertical-align:top}
+.process .bulk td:nth-child(5),.process .bulk td:nth-child(6){min-width:15rem}
+.process .bulk .nw{white-space:nowrap}
+.process .bulk .btags{display:flex;flex-wrap:wrap;gap:.25rem;margin:0 0 .3rem}
+.process .bulk .btags span{font-size:.75rem;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:0 .45rem}
 /* tables on a phone: smaller type and padding, and the first column stays in
    view while the rest scrolls sideways */
 @media (max-width:600px){
