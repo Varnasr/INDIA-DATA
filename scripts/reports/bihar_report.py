@@ -84,7 +84,7 @@ dsum = lambda d: sum(d[k] for k in RK)
 andj = lambda xs: xs[0] if len(xs) == 1 else ', '.join(xs[:-1]) + ' and ' + xs[-1]
 
 # ------------------------------------------------------------ cover and contents
-R.cover('Special Intensive Revision 2025', 'Bihar: 69 lakh names left off or deleted',
+R.cover('Special Intensive Revision 2025', '69 lakh names left off Bihar\'s draft roll or deleted after it',
         'Names left off the draft roll or deleted after it, booth by booth, set against the margins and the votes that decided each seat',
         [('names left off the draft or deleted after it', indian(t['total'])),
          ('of the votes polled in the November 2025 election', pct(100 * t['total'] / polled)),
@@ -423,7 +423,7 @@ for d in rankD:
     dpol = sum(a['votes2025'] for a in rows)
     R.h2('%s' % d['district'])
     R.stats([(indian(d['deleted']), 'names left off or deleted'), ('%.2f' % d['per_100'], 'per 100 electors (#%d of 38)' % (rankD.index(d) + 1)),
-             (pct(100 * d['deleted'] / dpol), 'of votes polled in 2025'), ('%d of %d' % (len(dover), len(rows)), 'seats: names left off or deleted exceed margin')])
+             (pct(100 * d['deleted'] / dpol), 'of votes polled in 2025'), ('%d of %d' % (len(dover), len(rows)), 'seats where names left off or deleted exceed the margin')])
     heavy = max(rows, key=lambda a: a['per_100'])
     worst = max(rows, key=lambda a: ratio(a) if a['margin2025'] else 0)
     wins = defaultdict(int)
