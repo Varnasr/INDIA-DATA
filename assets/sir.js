@@ -1143,6 +1143,11 @@
     var rep = (P.reported_dates || []).filter(function (x) { return x.state === name && x.final; })
       .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }).pop();
     if (rep && rep.final !== r.f) { r.f = rep.final; r.rep = rep; } else if (fs) use(fs);
+    // a later claims date reported in the press (Jharkhand, 23 November) is
+    // shown as reported, so an elector is not told a window closed that may be open
+    if (rep && rep.claims_end && rep.claims_end >= draft && (!r.c1 || rep.claims_end > r.c1)) {
+      r.c0 = r.c0 || draft; r.c1 = rep.claims_end; r.rep = rep;
+    }
     if (r.c1 && r.c0 <= T && T <= r.c1) r.k = 'open';
     // the final roll's date has passed and no final roll is on record
     else if (r.f && r.f < T) r.k = 'due';
