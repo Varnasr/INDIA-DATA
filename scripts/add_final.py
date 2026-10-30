@@ -85,7 +85,8 @@ MONTHS = 'January February March April May June July August September October No
 
 
 def today_ist():
-    return (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=5, minutes=30)).date().isoformat()
+    # FINAL_CHECK_DAY=YYYY-MM-DD sets it, as in check_data.py, to rehearse a later day
+    return os.environ.get('FINAL_CHECK_DAY') or (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=5, minutes=30)).date().isoformat()
 
 
 def ind(n):
@@ -209,7 +210,9 @@ def validate(x, replace):
     # the draft the final-roll source gives must agree with the draft here, as build_india.py holds it
     if d0 != draft_here:
         if abs(d0 - draft_here) > 0.005 * draft_here and r['figures'] != 'rounded':
-            err.append('the source puts the draft at %s and data/india/raw/states.csv at %s, more than half a per cent apart' % (ind(d0), ind(draft_here)))
+            err.append('the source puts the draft at %s and data/india/raw/states.csv at %s, more than half a per cent apart, and build_india.py would stop on it. '
+                       'If the source counts the draft on another footing (with corrections made after it, or with service electors), leave electors_draft out, '
+                       'use figures net or no, and say in the note what the source prints' % (ind(d0), ind(draft_here)))
         else:
             warn.append('the source puts the draft at %s and data/india/raw/states.csv at %s, %s apart. The fall in the roll is measured from the roll before' % (ind(d0), ind(draft_here), ind(abs(d0 - draft_here))))
     if fig in ('exact', 'rounded'):
@@ -222,8 +225,8 @@ def validate(x, replace):
                 err.append('the draft %s plus %s added less %s deleted%s is %s, and the final roll is %s, %s apart. %s'
                            % (ind(d0), ind(x['added']), ind(x['deleted']), (' less %s withheld' % ind(x['withheld'])) if x.get('withheld') else '',
                               ind(d0 + x['added'] - x['deleted'] - (x.get('withheld') or 0)), ind(n), ind(abs(gap)),
-                              'Use figures no, with a note saying so, if the source prints it this way.' if fig == 'exact' else 'That is more than 0.1 per cent.'))
-    elif not x.get('note'):
+                              'Use figures no, with a note saying so, if the source prints it this way.' if fig == 'exact' else 'That is more than 0.1 per cent. Use figures no, with a note, if the source rounds them more coarsely.'))
+    if fig in ('rounded', 'net', 'no') and not x.get('note'):
         err.append('figures %s needs a note saying what was and was not published' % fig)
     if n and n > before:
         warn.append('the final roll is larger than the roll before the revision')
@@ -273,11 +276,16 @@ def new_normal(x, slug):
     n = x['electors_final']
     draft = F['draft']['v'] if 'draft' in F else x['electors_draft']
     new = {}
-    if x['figures'] == 'exact' and not x.get('withheld'):
-        if 'draft' in F and F['draft']['v'] + x['added'] - x['deleted'] != n:
-            raise SystemExit('normal.json puts the draft at %s, and with it the figures do not add to the final roll. Use figures no, or check the draft' % ind(F['draft']['v']))
+    # build_states.py holds the draft plus added less removed to the final roll,
+    # so the counts after the draft go in only where they add up from the
+    # page's own draft. Where the source prints a different draft (the counts
+    # still add up from that one, as validate() checked), the page gets the net
+    # change and the final roll, and final.csv keeps the counts.
+    if x['figures'] == 'exact' and not x.get('withheld') and draft + x['added'] - x['deleted'] == n:
         new.update(added_after=x['added'], removed_after=x['deleted'], net_after=x['added'] - x['deleted'], final=n)
     else:
+        if x['figures'] == 'exact' and not x.get('withheld'):
+            print('WARNING: the source\'s draft (%s) is not the page\'s (%s), so normal.json gets the net change and the final roll only, and final.csv keeps the counts added and deleted' % (ind(x['electors_draft']), ind(draft)))
         new.update(net_after=n - draft, final=n)
     if x.get('men') is not None:
         new.update(men_final=x['men'], women_final=x['women'], third_final=x['third'])
@@ -360,10 +368,16 @@ def new_process(x):
     if any(s.get('kind') == 'published' and s.get('final') == x['final_date'] for s in sched['steps']):
         step = None
     else:
-        # the draft and the claims period as the latest schedule that gives them
+        # The draft as it was published (data/india/raw/states.csv), which is
+        # often later than the order set it, and the claims period from that
+        # day to the latest end any schedule step or press report gives.
+        # todo() asks for the claims dates to be read against the source.
         steps = [s for s in sched['steps'] if s.get('kind') != 'published']
-        draft = next((s['draft'] for s in reversed(steps) if s.get('draft')), None)
-        claims = next((s['claims'] for s in reversed(steps) if s.get('claims')), None)
+        draft = x['_draft_date']
+        ends = [s['claims'][1] for s in steps if s.get('claims')] + \
+               [r['claims_end'] for r in D.get('reported_dates', []) if r['state'] == x['state'] and r.get('claims_end')]
+        end = max(ends) if ends else None
+        claims = [draft, end] if end and end >= draft else None
         label = x.get('label') or ('As published, ' + ('' if x['source_kind'] == 'primary' else 'reported in ') + x['source'])
         step = {'enum': None, 'draft': draft, 'claims': claims, 'notice': None, 'final': x['final_date'],
                 'label': label, 'src': x['source_url'], 'kind': 'published'}
@@ -426,10 +440,48 @@ def pipeline(x, kind, folder, no_site):
     return not bad
 
 
-def todo(x, kind, folder, page, note, step):
+PANEL_MOVES = re.compile(r'with a final roll|final rolls? (is|are) out|no final roll yet|\d+ states that (report|published)')
+
+
+def national():
+    """The national figures in data/india/states.json that move with every final roll."""
+    S = json.load(open(P('data', 'india', 'states.json'), encoding='utf-8'))
+    F, A = S['final'], S['after_draft']
+    return {'states': F['states'], 'no_final': sum(1 for r in S['states'] if r.get('removed') is not None) - F['states'],
+            'left_off': F['removed'], 'per_100': round(F['per_100'], 2),
+            'net': F['net_after_draft'], 'pct': F['made_up_pct'], 'deleted': A['removed'], 'deleted_states': A['states']}
+
+
+def panels(old):
+    """The reading page panels' sentences that quote the national figures a
+    final roll moves, and those figures before this run and now. check_data.py
+    (build_panels.py --check) catches only some of these: a figure such as 13.8
+    can still be found elsewhere in states.json after it has moved, and the
+    counts of states written as words are not checked at all."""
+    new = national()
+    print('7. The reading page panels (data/india/raw/panels_research/plain.json) quote national figures that move with every final roll.')
+    for k, label in (('states', 'states with a final roll (final.states)'), ('no_final', 'states with a draft and no final roll'),
+                     ('left_off', 'names left off in those states (final.removed)'), ('per_100', 'per 100 on their rolls before (final.per_100)'),
+                     ('net', 'net rise from draft to final (final.net_after_draft)'), ('pct', 'that rise per 100 names left off (final.made_up_pct)'),
+                     ('deleted', 'names deleted after the draft (after_draft.removed)'), ('deleted_states', 'states reporting them (after_draft.states)')):
+        f = (lambda v: ind(v)) if k in ('net', 'deleted', 'left_off') else str
+        print('   %s: %s before this run, %s now' % (label, f(old[k]), f(new[k])))
+    print('   Rewrite each of these sentences, change the matching value in its "uses" list (raw digits, as in states.json), then run python3 scripts/build_panels.py:')
+    figs = {ind(old['net']), str(old['pct']), ind(old['deleted']), ind(old['left_off']), str(old['per_100'])}
+    pl = json.load(open(P('data', 'india', 'raw', 'panels_research', 'plain.json'), encoding='utf-8'))
+    for pid, w in pl['people'].items():
+        for i, c in w['claims'].items():
+            for f in ('rests', 'site', 'stops'):
+                for s in re.split(r'(?<=\.) ', c.get(f) or ''):
+                    if PANEL_MOVES.search(s) or any(re.search(r'(?<![0-9.,])' + re.escape(v) + r'(?![0-9])', s) for v in figs):
+                        print('   - %s, claim %s, %s: %s' % (pid, i, f, s))
+
+
+def todo(x, kind, folder, page, note, step, old):
     st, n, d = x['state'], x['electors_final'], x['final_date']
     net = n - x['electors_draft']
-    fall = x['_before'] - n
+    # the fall in the roll as build_india.py counts it
+    fall = x['_removed'] - net if abs(x['_before'] - x['_removed'] - x['electors_draft']) > 100 else x['_before'] - n
     rel = ('It stands %s above the draft' % ind(net)) if net >= 0 else ('It stands %s below the draft' % ind(-net))
     parts = []
     if x.get('added') is not None and x.get('deleted') is not None:
@@ -468,13 +520,14 @@ def todo(x, kind, folder, page, note, step):
     if due or rep:
         print('6. data/india/process.json says the final roll is due in: %s. Say it was published.' % '; '.join(due + rep))
     if step:
-        print('   A schedule step "%s" was added to process.json.' % step['label'])
-    print('   The reading page panels quote national figures that move with every final roll. If check_data.py fails on them, change the figure and its sentence in data/india/raw/panels_research/plain.json (the failure names both), then run scripts/build_panels.py.')
+        print('   A schedule step "%s" was added to process.json, with the draft of %s and claims %s. Check the claims dates against the source.'
+              % (step['label'], step['draft'], ' to '.join(step['claims']) if step['claims'] else 'left empty, since no schedule gives them'))
+    panels(old)
     rep = {'mh': 'node scripts/reports/page_pack.mjs http://localhost:8000 mh', 'dl': 'node scripts/reports/page_pack.mjs http://localhost:8000 dl',
            'hyd': 'scripts/reports/build.sh (the Hyderabad report)', 'ka': 'scripts/reports/build.sh (the Karnataka report and deck)'}
     cmd = rep.get(OWN[st][3]) if kind == 'own' else 'node scripts/reports/page_pack.mjs http://localhost:8000 other' if kind == 'shared' else 'scripts/reports/build.sh (the India report)'
-    print('7. With the site served (python3 -m http.server 8000), the report and deck: %s. Then the link cards: node scripts/og_cards.mjs.' % cmd)
-    print('8. Commit only the sources (scripts/, site/pages/, data/ sources, i18n/), then open the pull request. To publish before 20:00 IST, the owner says "publish".')
+    print('8. With the site served (python3 -m http.server 8000), the report and deck: %s. Then the link cards: node scripts/og_cards.mjs.' % cmd)
+    print('9. Commit only the sources (scripts/, site/pages/, data/ sources, i18n/), then open the pull request. To publish before 20:00 IST, the owner says "publish".')
 
 
 def main():
@@ -523,6 +576,7 @@ def main():
     elif kind == 'own':
         p, t = new_own(x, folder)
         files[p] = t
+    national_before = national()
     ptext, step = new_process(x)
     files[PROCESS] = ptext
     changed = 0
@@ -538,7 +592,7 @@ def main():
         st, x['final_date'], ind(x['electors_final']), x['figures'], kind, x['source_kind'], changed, 'would change' if a.dry_run else 'changed'))
     if a.dry_run:
         print('DRY RUN: nothing written.')
-        todo(x, kind, folder, page, note, step)
+        todo(x, kind, folder, page, note, step, national_before)
         return
     for p, t in files.items():
         os.makedirs(os.path.dirname(p), exist_ok=True)
@@ -546,7 +600,7 @@ def main():
     ok = True
     if not a.no_build:
         ok = pipeline(x, kind, folder, a.no_site)
-    todo(x, kind, folder, page, note, step)
+    todo(x, kind, folder, page, note, step, national_before)
     sys.exit(0 if ok else 1)
 
 

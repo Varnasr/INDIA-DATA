@@ -20,7 +20,7 @@
     <li>Why the names in any place were left off. The reasons are what the officer wrote down, and an elector entered as absent may have moved or may have been out when the officer called.</li>
     <li>How many notices were sent in each constituency. The notices were published by district only.</li>
     <li>Whether women, the old or the young were left off more often. The names left off are not split by sex or age at any level.</li>
-    <li>How many of those left off will be put back. The final roll is not out.</li>
+    <li id="mPutBack">How many of those left off will be put back. The final roll is not out.</li>
     <li>Whether each exclusion was right. A reason is what the officer wrote down, and nobody checked it.</li>
   </ul>
 
@@ -45,6 +45,8 @@ SIR.json('data/maharashtra/summary.json').then(function (s) {
   document.getElementById('mLeft').textContent = SIR.n(s.left_off);
   document.getElementById('mClaims').textContent = DL(s.claims_to);
   document.getElementById('mFinal').textContent = DL(s.final_due);
+  // s.final is null until scripts/add_final.py records the final roll
+  if (s.final) document.getElementById('mPutBack').textContent = 'How many of those left off were put back. The names added after the draft count new voters with them, and no published count separates the two.';
   SIR.showFaq('mh', 'method');
 }).catch(SIR.fail);
 </script>

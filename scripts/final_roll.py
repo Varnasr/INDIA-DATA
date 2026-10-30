@@ -114,15 +114,23 @@ def block(F, name, before, draft, removed, draft_date):
     assert num(r['added_after_draft']) == F.get('added') and num(r['removed_after_draft']) == F.get('deleted'), \
         'final.json and data/india/raw/final.csv disagree on the names added or deleted'
     assert r['reconciles'] == FIGURES[F['figures']], 'final.json and data/india/raw/final.csv disagree on whether the figures add up'
-    net = n - draft
+    # As build_india.py counts them, so the page and the All India table agree:
+    # the rise after the draft from the draft the final-roll source gives, and
+    # the fall in the roll as the names left off less that rise, except where
+    # the two drafts differ by a handful of names, when it is the roll before
+    # less the final roll.
+    net = n - d0
+    fall = removed - net if removed is not None else before - n
+    if 0 < abs(draft - d0) <= 100:
+        fall = before - n
     out = {
         'date': F['date'], 'electors': n, 'men': F.get('men'), 'women': F.get('women'), 'third': F.get('third'),
         'service': F.get('service'), 'with_service': n + F['service'] if F.get('service') is not None else None,
         'added': F.get('added'), 'deleted': F.get('deleted'), 'withheld': F.get('withheld'), 'figures': F['figures'],
         'net_after': net,
         'made_up_pct': round(100 * net / removed, 4) if removed else None,
-        'net_fall': before - n,
-        'net_per_100': round(100 * (before - n) / before, 4),
+        'net_fall': fall,
+        'net_per_100': round(100 * fall / before, 4),
         'women_pct': round(100 * F['women'] / n, 4) if all(x is not None for x in sex) else None,
         'source': {'title': s['title'], 'url': s['url'], 'date': s.get('date'), 'primary': s['primary']},
     }

@@ -346,14 +346,18 @@ def _feeds():
 
 
 # A final roll that was due and is not recorded. Every state whose draft is
-# out and whose final roll was due before today (the date the line under its
-# pages gives, from scripts/final_roll.py) must carry electors_final in
-# data/india/states.json, or stand here with the reason it does not. So a
-# final roll that is missed fails CI the day after it was due, and an entry
-# here that no longer applies fails too. Today is the date in India;
-# FINAL_CHECK_DAY=YYYY-MM-DD sets it, to test the check against a later day.
+# out and whose final roll was due more than FINAL_GRACE_DAYS before today
+# (the date the line under its pages gives, from scripts/final_roll.py) must
+# carry electors_final in data/india/states.json, or stand here with a dated
+# reason. The grace is there because Chief Electoral Officers often publish
+# late in the evening or the next day, and the press a day after that. So a
+# final roll that is missed fails CI on the third day after it was due, and an
+# entry here whose roll is recorded, or whose date has not come, fails too.
+# Today is the date in India; FINAL_CHECK_DAY=YYYY-MM-DD sets it, to test the
+# check against a later day.
+FINAL_GRACE_DAYS = 2
 FINAL_PENDING = {
-    # 'State': 'why its final roll is not recorded although its date has passed',
+    # 'State': 'YYYY-MM-DD: why its final roll is not recorded although its date has passed',
 }
 
 
@@ -362,24 +366,30 @@ def _finals_due():
     sys.path.insert(0, os.path.join(ROOT, 'scripts'))
     import final_roll
     today = os.environ.get('FINAL_CHECK_DAY') or (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=5, minutes=30)).date().isoformat()
-    datetime.date.fromisoformat(today)
+    t = datetime.date.fromisoformat(today)
     P = json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))
     S = json.load(open(os.path.join(ROOT, 'data', 'india', 'states.json'), encoding='utf-8'))['states']
     late, stale = [], []
+    for name, why in FINAL_PENDING.items():
+        assert re.match(r'\d{4}-\d\d-\d\d: \S', why), 'FINAL_PENDING: the reason for %s must start with the date it was written, YYYY-MM-DD: ' % name
     for r in S:
         name, due = r['state'], final_roll.due(r['state'], P)
         if r.get('electors_final') is not None:
             assert r['final_date'] <= today, '%s has a final roll dated %s, after today (%s)' % (name, r['final_date'], today)
             assert r['final_date'] >= r['draft_date'], '%s has a final roll dated before its draft' % name
             if name in FINAL_PENDING:
-                stale.append(name)
-        elif r.get('removed') is not None and due and due < today:
+                stale.append('%s (its final roll is recorded)' % name)
+        elif r.get('removed') is not None and due and (t - datetime.date.fromisoformat(due)).days > FINAL_GRACE_DAYS:
             if name not in FINAL_PENDING:
                 late.append('%s (due %s)' % (name, due))
-        elif name in FINAL_PENDING:
-            stale.append(name)
-    assert not late, ('final roll due and not recorded: %s. Record it with scripts/add_final.py, or give the reason in FINAL_PENDING in scripts/check_data.py' % ', '.join(late))
-    assert not stale, 'FINAL_PENDING lists %s, whose final roll is recorded or not yet due' % ', '.join(stale)
+        elif name in FINAL_PENDING and not (r.get('removed') is not None and due and due < today):
+            stale.append('%s (its final roll is not yet due)' % name)
+    assert not late, ('final roll due more than %d days ago and not recorded: %s. Either record it, '
+                      'python3 scripts/add_final.py --json <file> (CLAUDE.md, Final-roll day), or, if it has not been '
+                      'published or its figures cannot be found, add the state to FINAL_PENDING in scripts/check_data.py '
+                      'with a dated reason, for example \'%s\': \'%s: no final-roll press note on the CEO\'s site, and no report in the press\''
+                      % (FINAL_GRACE_DAYS, ', '.join(late), late[0].split(' (')[0] if late else '', today))
+    assert not stale, 'FINAL_PENDING lists %s. Remove the entry' % ', '.join(stale)
 
 
 def _ac_change():

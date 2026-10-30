@@ -85,8 +85,10 @@ python3 -m http.server 8000
 `python3 scripts/add_final.py --due` lists every state whose final roll is not
 recorded and the date it is due, from `data/india/process.json` (the latest
 schedule step, or a later date reported in the press). `check_data.py` fails
-the day after a due date if the roll is not recorded and the state is not in
-`FINAL_PENDING` there with a reason.
+once a due date is more than two days past (`FINAL_GRACE_DAYS`, since CEOs
+often publish late or the next day) if the roll is not recorded and the state
+is not in `FINAL_PENDING` there with a reason that starts with its date.
+`FINAL_CHECK_DAY=YYYY-MM-DD` fakes the day for both scripts, to rehearse.
 
 Where each state's Chief Electoral Officer has published before, as the
 repository cites it. Look for the final-roll press note first, then the
@@ -116,17 +118,37 @@ python3 scripts/add_final.py --json mh.json             # write, rebuild, run ev
 ```
 
 It refuses a final roll at or below zero, dated before the draft or after
-today, whose sexes do not add to it, or whose draft plus additions less
-deletions misses it (exactly for `exact`, within 0.1 per cent for `rounded`;
-use `net` or `no` with a note otherwise). It warns when the source is not an
+today, whose sexes do not add to it, whose draft plus additions less
+deletions misses it (exactly for `exact`, within 0.1 per cent for `rounded`),
+or whose source puts the draft more than half a per cent from ours. Use `net`
+or `no` with a note otherwise, and leave `electors_draft` out if the source
+counts its draft on another footing. Five states in one day are five runs,
+one after another, each rebuilding everything (about two minutes each). It warns when the source is not an
 official site or a CEO's account. It writes `data/india/raw/final.csv`, the
 state's `normal.json` (shared page) or `raw/final.json` (Maharashtra, Delhi,
 Telangana, Karnataka), and a published step in `process.json`. The pages of
 Maharashtra, Delhi and Telangana switch from "due on" to "published on" by
 themselves. It leaves to a person, and prints with drafts: the What's New line
 (`data/updates.json`), `SOURCES.md`, a corrections entry if a recorded figure
-changed, the front-page card, process.json's prose, and the reading-page
-panel figures (`panels_research/plain.json`) that move with every final roll.
+changed, the front-page card, process.json's prose and the claims dates of
+the new schedule step, and the reading-page panel sentences.
+
+The panels are the step that breaks. `data/india/raw/panels_research/plain.json`
+quotes, in its own sentences, national figures from `data/india/states.json`
+that every final roll moves: the number of states with a final roll (24 on
+30 October), the states with a draft and none ("Seven states", "Eight states"
+in words), `final.removed` and `final.per_100` (8,87,25,044 and 12.42),
+`final.net_after_draft` (1,22,10,672), `final.made_up_pct` (13.8), and
+`after_draft.removed` and `after_draft.states` (35,62,366 in 22 states). They
+sit in s-y-quraishi claims 3 and 7, p-chidambaram claims 4 and 5,
+jean-dreze-yogendra-yadav claim 3, jean-dreze claim 0 and abhijeet-dipke
+claim 0. `check_data.py` fails on only some of them, through each claim's
+`uses` list. 13.8 still matches another figure in states.json after it has
+moved, and the counts of states and abhijeet-dipke's figures are in no `uses`
+list at all, so a green run does not mean they are current. `add_final.py`
+prints every such sentence with the figures before and after the run. Rewrite
+each sentence, change its `uses` value (raw digits, as in states.json) and run
+`python3 scripts/build_panels.py`.
 
 Commit the sources only, open the pull request and merge once for the day's
 states. Nothing goes live until the 20:00 IST publish. When the owner says

@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 463,
-  "bytes": 13323527
+  "bytes": 13323603
  },
  "files": [
   {
@@ -3454,7 +3454,7 @@
    "path": "data/delhi/summary.json",
    "description": "Delhi: the figures its pages draw",
    "format": "JSON",
-   "bytes": 998,
+   "bytes": 1014,
    "keys": [
     "roll_before",
     "draft",
@@ -3481,7 +3481,8 @@
     "form6_to_0929",
     "form7_to_0929",
     "claims_to",
-    "final_due"
+    "final_due",
+    "final"
    ],
    "licence": "CC BY 4.0"
   },
@@ -4082,8 +4083,10 @@
    "path": "data/hyderabad/telangana.json",
    "description": "Telangana: the draft roll by district, against the Old City of Hyderabad",
    "format": "JSON",
-   "bytes": 8847,
+   "bytes": 8891,
    "keys": [
+    "final_due",
+    "final",
     "state",
     "hyderabad",
     "rest_of_state",
@@ -5609,7 +5612,7 @@
    "path": "data/maharashtra/summary.json",
    "description": "Maharashtra: the figures its pages draw",
    "format": "JSON",
-   "bytes": 11270,
+   "bytes": 11286,
    "keys": [
     "before",
     "draft",
@@ -5659,7 +5662,8 @@
     "notices_to",
     "final_due",
     "final_due_source",
-    "top38"
+    "top38",
+    "final"
    ],
    "licence": "CC BY 4.0"
   },

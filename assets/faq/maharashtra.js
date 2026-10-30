@@ -19,7 +19,7 @@
       var F = s.final;
       var after = F
         ? 'The final roll was published on ' + DL(F.date) + ' with ' + cr(F.electors) + ' electors, a fall in the roll of ' + lk(F.net_fall) + ' since the roll before the revision. ' +
-          (F.net_after >= 0 ? 'It stands ' + SIR.n(F.net_after) + ' above the draft, which comes to ' + SIR.pct(F.made_up_pct) + ' of the names left off. That rise counts new voters as well as names put back, so it is the most that could have been restored.'
+          (F.net_after >= 0 ? 'It stands ' + SIR.n(F.net_after) + ' above the draft, which comes to ' + SIR.pct(F.made_up_pct) + ' of the names left off. That rise counts new voters as well as names put back, and the names deleted after the draft are taken off it.'
             : 'It stands ' + SIR.n(-F.net_after) + ' below the draft.')
         : (s.final_due < new Date().toISOString().slice(0, 10)
           ? 'Claims and objections ran to ' + DL(s.claims_to) + ', and the final roll was due on ' + DL(s.final_due) + '. It had not been found published when these figures were checked.'
