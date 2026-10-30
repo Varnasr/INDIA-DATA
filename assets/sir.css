@@ -1308,3 +1308,17 @@ body.embed .emsrc{margin:.5rem 0 0;color:var(--muted);font-size:.85rem}
 .follow-note{font-size:.92rem;color:var(--muted)}
 #updates li{margin:.45rem 0}
 #updates .upd-sec{font-weight:600}
+
+/* whether the revision still takes claims in a state, on the reader's date
+   (sir.js): under the head of every state's overview, and on the help page */
+.owin{display:block;background:var(--card);border:1px solid var(--line);border-inline-start:4px solid var(--fill-navy);border-radius:10px;padding:.75rem 1rem;margin:0 0 1.2rem;max-width:var(--measure);overflow-wrap:anywhere}
+.owin.open{border-inline-start-color:var(--fill-teal)}
+.owin[hidden],.owin-all[hidden]{display:none}
+.owin p{margin:.3rem 0}
+.owin .owin-t{font-weight:700;margin-top:0}
+.owin .owin-src{font-size:.85rem;color:var(--muted)}
+.owin .owin-src span{font-weight:600;margin-inline-end:.35rem}
+.owin-all{margin:1rem 0 1.6rem}
+.owin-all .owin-t{font-weight:700;margin:1rem 0 .3rem}
+.owin-pick label{font-weight:600;margin-inline-end:.4rem}
+.owin-pick select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.3rem .5rem;max-width:100%}

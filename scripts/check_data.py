@@ -281,6 +281,35 @@ def _alerts():
     assert "form-action 'self'" in toml, "the policy no longer lets forms post to the site"
 
 
+def _open_window():
+    # the claims box (sir.js, SIR.owin): the summary revision's dates and
+    # states, which the box states for a state whose final roll is out, must
+    # be the ones the timeline entry's own text gives, and every state's
+    # overview and the help page must carry the box
+    P = json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))
+    M = 'January February March April May June July August September October November December'.split()
+    long = lambda iso: '%d %s' % (int(iso[8:]), M[int(iso[5:7]) - 1])
+    ssr = [t for t in P['timeline'] if t.get('ssr')]
+    assert ssr, 'no timeline entry carries the summary revision\'s dates'
+    names = {s['state'] for s in P['schedules']} | {'Assam'}
+    for t in ssr:
+        q, text = t['ssr'], t['text']
+        for k in ('qualifying', 'draft', 'claims_end', 'decided', 'final'):
+            assert long(q[k]) in text, '%s: the summary revision\'s %s (%s) is not in the entry\'s text' % (t['date'], k, q[k])
+        assert len(q['states']) == len(set(q['states'])) and re.search(r'\bin %d states' % len(q['states']), text), '%s: the summary revision names a different number of states' % t['date']
+        first = text.split('They are ', 1)[1].split('.', 1)[0]
+        for s in q['states']:
+            assert s in names, '%s: %s is not a state the schedules know' % (t['date'], s)
+            assert s in first, '%s: %s is not among the states the entry names' % (t['date'], s)
+    cfg = json.load(open(os.path.join(ROOT, 'site', 'places.json'), encoding='utf-8'))
+    for pl in cfg['places']:
+        if pl.get('zone') and pl['pages']:
+            page = open(os.path.join(ROOT, pl['pages'][0][0], 'index.html'), encoding='utf-8').read()
+            assert re.search(r'<aside class="owin" data-owin="[^"]+"', page), '%s has no claims box' % pl['pages'][0][0]
+    helpp = open(os.path.join(ROOT, 'help', 'index.html'), encoding='utf-8').read()
+    assert re.search(r'id="owinAll" data-owin-pages="\{[^"]+\}"', helpp), 'help/ lacks the claims picker or its list of state pages'
+
+
 def _feeds():
     # the feed parses, the calendars are well formed, the data index lists
     # every published data file, and every published path but /embed/ refuses
@@ -529,6 +558,7 @@ for name, fn in [
     ('the share form is wired for Netlify and the terms page describes it', _share),
     ('the final-roll alert form is wired for Netlify and the terms page describes it', _alerts),
     ('the feed, the calendars, the data index and the frame rules are sound', _feeds),
+    ('the claims box is on every state\'s overview and the help page, and the summary revision\'s dates are its text\'s', _open_window),
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
     ('the events page carries only events read twice and is current', _events),

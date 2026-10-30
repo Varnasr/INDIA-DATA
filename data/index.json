@@ -13,14 +13,14 @@
  },
  "counts": {
   "files": 461,
-  "bytes": 13234873
+  "bytes": 13235408
  },
  "files": [
   {
    "path": "data/downloads.json",
    "description": "The downloads manifest: every workbook, sheet and column, with what each holds",
    "format": "JSON",
-   "bytes": 200949,
+   "bytes": 200951,
    "keys": [
     "workbooks",
     "zip",
@@ -45,7 +45,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 45110,
+   "bytes": 45173,
    "keys": [
     "note",
     "entries"
@@ -3454,7 +3454,7 @@
    "path": "data/delhi/summary.json",
    "description": "Delhi: the figures its pages draw",
    "format": "JSON",
-   "bytes": 942,
+   "bytes": 998,
    "keys": [
     "roll_before",
     "draft",
@@ -3479,7 +3479,9 @@
     "rate_min_v",
     "notices_issued",
     "form6_to_0929",
-    "form7_to_0929"
+    "form7_to_0929",
+    "claims_to",
+    "final_due"
    ],
    "licence": "CC BY 4.0"
   },
@@ -4529,7 +4531,7 @@
    "path": "data/india/process.json",
    "description": "How the revision was run: the rules as they changed, and each state's dates",
    "format": "JSON",
-   "bytes": 147762,
+   "bytes": 148177,
    "keys": [
     "as_of",
     "timeline",
@@ -7087,7 +7089,7 @@
    "path": "downloads/bihar.xlsx",
    "description": "Bihar 2025, Excel workbook",
    "format": "Excel",
-   "bytes": 443440,
+   "bytes": 443439,
    "licence": "CC BY 4.0"
   },
   {
@@ -7115,7 +7117,7 @@
    "path": "downloads/karnataka.xlsx",
    "description": "Karnataka, Excel workbook",
    "format": "Excel",
-   "bytes": 26392,
+   "bytes": 26394,
    "licence": "CC BY 4.0"
   },
   {
@@ -7150,14 +7152,14 @@
    "path": "downloads/tamil-nadu.xlsx",
    "description": "Tamil Nadu, Excel workbook",
    "format": "Excel",
-   "bytes": 117837,
+   "bytes": 117836,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/telangana-hyderabad.xlsx",
    "description": "Telangana 2026 and the Old City of Hyderabad, Excel workbook",
    "format": "Excel",
-   "bytes": 95539,
+   "bytes": 95538,
    "licence": "CC BY 4.0"
   },
   {

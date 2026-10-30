@@ -1097,3 +1097,150 @@
     }, 1500);
   }
 })();
+
+// ---- whether the revision still takes claims in a state, on the reader's
+// own date, counted in India, so the box changes with the day and needs no
+// rebuild. build_site.py writes an empty box under the head of every state's
+// overview (.owin[data-owin]) and gives the help page's picker (#owinAll)
+// every state's overview. The dates are process.json's: for each kind of
+// date, the latest step of the state's schedule that gives it, a final date
+// moved since in the press as the line under the kicker takes it
+// (build_site.py, asof), and states.json for a final roll already published.
+(function () {
+  var boxes = [].slice.call(document.querySelectorAll('.owin[data-owin]')), all = document.getElementById('owinAll');
+  if (!boxes.length && !all) return;
+  var SIR = window.SIR, E = SIR.esc, D = SIR.date, root = SIR.root;
+  var today = new Date(Date.now() + 5.5 * 36e5).toISOString().slice(0, 10);
+  var outlet = function (label) {
+    var m = /\bas (.+?) reported(?: in ([^:,]+))?/.exec(label || '');
+    return m ? (m[2] ? m[1] + ' in ' + m[2] : m[1]) : null;
+  };
+
+  // the stage of one state's revision on day T
+  function stage(P, S, name, T) {
+    var sc = P.schedules.filter(function (x) { return x.state === name; })[0];
+    if (!sc) return null;
+    var s = S[name] || {}, r = { state: name, T: T, src: [] };
+    var use = function (st) { if (st && r.src.indexOf(st) < 0) r.src.push(st); };
+    var ssr = P.timeline.filter(function (t) { return t.ssr && t.ssr.states.indexOf(name) >= 0; }).pop();
+    if (ssr) r.ssr = ssr;
+    if (s.electors_final != null) {
+      r.k = 'final'; r.pub = s.final_date || null; r.pubSrc = s.final_source || null;
+      return r;
+    }
+    // no draft roll yet: nothing can be claimed against it
+    if (!s.draft_date) return null;
+    var draft = s.draft_date, steps = sc.steps.slice().reverse();
+    // claims: the latest step that gives them, passing over a step whose
+    // claims opened before the draft was published, which a later step
+    // moved and which no longer describes the state
+    var cs = steps.filter(function (st) { return st.claims ? st.claims[0] >= draft : !!st.claims_end; })[0];
+    if (cs) { r.c0 = cs.claims ? cs.claims[0] : draft; r.c1 = cs.claims ? cs.claims[1] : cs.claims_end; use(cs); }
+    var ns = steps.filter(function (st) { return st.notice; })[0];
+    if (ns) { r.n1 = ns.notice[1]; use(ns); }
+    var fs = steps.filter(function (st) { return st.final; })[0];
+    if (fs) r.f = fs.final;
+    var rep = (P.reported_dates || []).filter(function (x) { return x.state === name && x.final; })
+      .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }).pop();
+    if (rep && rep.final !== r.f) { r.f = rep.final; r.rep = rep; } else if (fs) use(fs);
+    if (r.c1 && r.c0 <= T && T <= r.c1) r.k = 'open';
+    // the final roll's date has passed and no final roll is on record
+    else if (r.f && r.f < T) r.k = 'due';
+    else r.k = 'closed';
+    return r;
+  }
+
+  function anyTime() {
+    return L('Once the revision is over in the state, an elector who is not on the final roll can still apply on Form 6 at any time under continuous updation.');
+  }
+
+  function html(r, P) {
+    var p = [], links = [], T = r.T;
+    var finalDue = function () {
+      if (!r.f) return;
+      p.push(r.rep ? L('The final roll is due on {f}, as {o} reported on {r}.', { f: D(r.f), o: E(r.rep.outlet), r: D(r.rep.date) })
+        : L('The final roll is due on {f}.', { f: D(r.f) }));
+    };
+    var form6 = '<a href="' + root + 'help/#form6">' + L('How to ask to be added on Form 6, or to correct an entry on Form 8') + '</a>';
+    if (r.k === 'open') {
+      p.push(L('Claims and objections are open until {c}. Until that day an elector left off the draft can ask to be added on Form 6, and an elector can object to a name on Form 7 or ask for a correction to an entry on Form 8.', { c: D(r.c1) }));
+      finalDue();
+      links.push(form6, '<a href="' + root + 'help/#form7">' + L('How an objection on Form 7 is heard') + '</a>');
+    } else if (r.k === 'closed') {
+      if (r.c1 && r.c1 < T) p.push(L('Claims and objections closed on {c}.', { c: D(r.c1) }));
+      if (r.n1) p.push(r.n1 >= T ? L('Notices are being heard and decided until {n}.', { n: D(r.n1) }) : L('Notices were to be heard and decided by {n}.', { n: D(r.n1) }));
+      finalDue();
+      p.push(anyTime());
+      links.push(form6);
+    } else if (r.k === 'due') {
+      p.push(L('The final roll was due on {f}. When these dates were last checked, on {a}, it had not been found published.', { f: D(r.f), a: D(P.as_of) }));
+      p.push(anyTime());
+      links.push(form6);
+    } else {
+      p.push(r.pub ? L('The final roll was published on {d}.', { d: D(r.pub) }) : L('The final roll has been published.'));
+      p.push(L('An elector who is not on the final roll can still apply on Form 6 at any time under continuous updation.'));
+      links.push(form6);
+    }
+    if (r.ssr && (r.k === 'final' || r.k === 'due')) {
+      var q = r.ssr.ssr;
+      p.push(L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. It set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}.',
+        { l: D(r.ssr.date), s: E(r.state), q: D(q.qualifying), d: D(q.draft), c: D(q.claims_end), x: D(q.decided), f: D(q.final) }));
+    }
+    // where the dates come from: each step's own label, which names the
+    // outlet where the step is a press report
+    var press = [];
+    var src = r.src.map(function (st) {
+      var o = outlet(st.label); if (o && press.indexOf(o) < 0) press.push(o);
+      return st.src ? '<a href="' + E(st.src) + '" rel="noopener" lang="en">' + E(st.label) + '</a>' : '<span lang="en">' + E(st.label) + '</span>';
+    });
+    if (press.length) p.push(L('These dates are as reported by {o}.', { o: E(press.join(' and ')) }));
+    if (r.rep) src.push('<a href="' + E(r.rep.url) + '" rel="noopener" lang="en">' + E(r.rep.outlet) + ', ' + D(r.rep.date) + '</a>');
+    if (r.k === 'final' && r.pubSrc && r.pubSrc.url) src.push('<a href="' + E(r.pubSrc.url) + '" rel="noopener">' + (r.pubSrc.source === 'press' ? L('The final roll, as the press reported it') : L('The final roll, as published')) + '</a>');
+    if (r.ssr && (r.k === 'final' || r.k === 'due')) src = src.concat(r.ssr.src.map(function (s) { return '<a href="' + E(s.url) + '" rel="noopener" lang="en">' + E(s.name) + '</a>'; }));
+    return '<p class="owin-t">' + L('Where the revision in {s} stands on {t}', { s: E(r.state), t: D(T) }) + '</p>' +
+      p.map(function (x) { return '<p>' + x + '</p>'; }).join('') +
+      '<p class="owin-links">' + links.join(' · ') + '</p>' +
+      (src.length ? '<p class="owin-src"><span>' + L('Where these dates come from') + '</span> ' + src.join(' · ') + '</p>' : '');
+  }
+
+  Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.json')]).then(function (d) {
+    var P = d[0], S = {};
+    d[1].states.forEach(function (s) { S[s.state] = s; });
+    boxes.forEach(function (b) {
+      var r = stage(P, S, b.getAttribute('data-owin'), today);
+      if (!r) return;
+      b.className = 'owin ' + r.k;
+      b.setAttribute('aria-label', L('Claims and objections'));
+      b.innerHTML = html(r, P);
+      b.hidden = false;
+    });
+    if (!all) return;
+    // the help page: a state picker, and every state where something is open
+    var pages = JSON.parse(all.getAttribute('data-owin-pages') || '{}');
+    var names = P.schedules.map(function (x) { return x.state; }).filter(function (n) { return stage(P, S, n, today); }).sort();
+    var sel = document.getElementById('owinState'), one = document.getElementById('owinOne');
+    sel.innerHTML = '<option value="">' + L('Choose a state') + '</option>' + names.map(function (n) { return '<option value="' + E(n) + '">' + E(n) + '</option>'; }).join('');
+    var show = function () {
+      var r = sel.value && stage(P, S, sel.value, today);
+      one.innerHTML = r ? '<div class="owin ' + r.k + '">' + html(r, P) + '</div>' : '';
+    };
+    var want = new URLSearchParams(location.search).get('state');
+    if (want && names.indexOf(want) >= 0) sel.value = want;
+    sel.addEventListener('change', show);
+    show();
+    var rows = names.map(function (n) { return stage(P, S, n, today); }).filter(function (r) { return r.k === 'open' || r.k === 'closed'; });
+    var cell = function (r) {
+      if (r.k === 'open') return L('Open until {d}', { d: D(r.c1) });
+      return r.c1 && r.c1 < today ? L('Closed on {d}', { d: D(r.c1) }) : '–';
+    };
+    var link = function (n) { return pages[n] ? '<a href="' + root + E(pages[n]) + '">' + E(n) + '</a>' : E(n); };
+    document.getElementById('owinOpen').innerHTML = '<p class="owin-t">' + L('Where claims are open or notices are still being heard on {t}', { t: D(today) }) + '</p>' +
+      (rows.length ? '<div class="twrap" tabindex="0" role="region" aria-label="' + E(L('States where claims are open or notices are being heard')) + '"><table><thead><tr><th scope="col" class="l">' + L('State') + '</th><th scope="col" class="l">' + L('Claims and objections') + '</th><th scope="col" class="l">' + L('Notices heard until') + '</th><th scope="col" class="l">' + L('Final roll due') + '</th></tr></thead><tbody>' +
+        rows.map(function (r) {
+          return '<tr><th scope="row" class="l">' + link(r.state) + '</th><td class="l">' + cell(r) + '</td><td class="l">' + (r.n1 && r.n1 >= today ? D(r.n1) : '–') + '</td><td class="l">' +
+            (r.f ? (r.rep ? L('{d}, as reported', { d: D(r.f) }) : D(r.f)) : '–') + '</td></tr>';
+        }).join('') + '</tbody></table></div>'
+        : '<p>' + L('On {t}, no state on record is taking claims or hearing notices in the revision.', { t: D(today) }) + '</p>');
+    all.hidden = false;
+  }).catch(function () {});
+})();

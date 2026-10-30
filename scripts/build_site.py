@@ -280,6 +280,25 @@ def dates_block(out, place, root):
     return '<section class="rollcal"><h2 class="dlh">Dates of the revision</h2>%s%s%s</section>' % (intro, links, form)
 
 
+# Whether the revision still takes claims in a state, on the day the reader
+# opens the page. sir.js (SIR.owin) works the stage out in the browser from
+# data/india/process.json and states.json, so the box changes with the date
+# and needs no rebuild. Every state's overview gets an empty box under its
+# head, and the help page's box (#owinAll) is given the overview of every
+# state, so its table can link to them.
+def open_window(out, place, content):
+    if place.get('zone') and place['pages'] and out == place['pages'][0][0]:
+        box = '<aside class="owin" data-owin="%s" aria-live="polite" hidden></aside>' % html.escape(BF.state_name(place))
+        new, n = re.subn(r'(<div class="page-head"[^>]*>.*?</div>)', lambda m: m.group(1) + '\n' + box, content, count=1, flags=re.S)
+        if not n:
+            raise SystemExit('FAIL - %s has no page head to put the claims box under' % out)
+        return new
+    if 'id="owinAll"' in content:
+        pages = {BF.state_name(p): p['pages'][0][0] for p in CFG['places'] if p.get('zone') and p['pages']}
+        return content.replace('id="owinAll"', 'id="owinAll" data-owin-pages="%s"' % html.escape(json.dumps(pages, sort_keys=True, separators=(',', ':'))), 1)
+    return content
+
+
 def embed_block(out, place, root):
     """The code to show a place's chart on another site, on its overview."""
     folder = EMBEDS.get(place['id'])
@@ -473,6 +492,7 @@ def shell(out, meta, content, scripts):
         return embed_shell(out, meta, content, scripts, place, root)
     if place['id'] != 'home':
         content = re.sub(r'(<div class="page-head"[^>]*>)', lambda m: m.group(1) + '<p class="kicker">%s</p>' % html.escape(place['label']) + asof_html(asof(place)), content, count=1)
+    content = open_window(out, place, content)
     head_extra = ('\n' + meta['head']) if meta.get('head') else ''
     # link previews: a shared page shows its title, description and its
     # place's card (assets/og, written by scripts/og_cards.mjs). Previews
