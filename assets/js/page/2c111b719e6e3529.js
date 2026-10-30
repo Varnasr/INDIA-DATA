@@ -1,0 +1,38 @@
+SIR.json('data/updates.json').then(function (U) {
+  var root = document.body.getAttribute('data-root') || '';
+  var fmt = function (d) { return new Date(d + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }); };
+  // the weekly digest: the newest issue in full above the daily entries, and
+  // the earlier ones folded under it, each with an address of its own
+  SIR.json('data/digest.json').then(function (G) {
+    var box = document.getElementById('digest'), is = G.issues;
+    if (!is.length) return;
+    // 24 to 30 October 2026, or 26 September to 2 October 2026
+    var span = function (a, b) {
+      var A = fmt(a).split(' '), B = fmt(b);
+      return (a.slice(0, 7) === b.slice(0, 7) ? A[0] : A[0] + ' ' + A[1]) + ' to ' + B;
+    };
+    var one = function (i, h) {
+      return '<' + h + ' id="w-' + i.week_ending + '"' + (h === 'h2' ? ' class="digest-h"' : '') + '>' + SIR.esc(i.title) + '</' + h + '>' +
+        '<p class="digest-sub">' + SIR.esc(span(i.week_start, i.week_ending)) + '</p><ul>' +
+        i.paragraphs.map(function (p) {
+          return '<li><a class="upd-sec" href="' + root + SIR.esc(p.link) + '">' + SIR.esc(p.label) + '</a>. ' + SIR.esc(p.text) + '</li>';
+        }).join('') + '</ul>';
+    };
+    var html = '<p class="digest-kicker" id="digest-h">The week in brief</p>' + one(is[0], 'h2');
+    if (is.length > 1) html += '<details class="digest-past"><summary>Earlier weeks</summary>' + is.slice(1).map(function (i) { return one(i, 'h3'); }).join('') + '</details>';
+    box.innerHTML = html;
+    box.hidden = false;
+    var h = location.hash.slice(1), t = h && document.getElementById(h);
+    if (t) { var d = t.closest('details'); if (d) d.open = true; t.scrollIntoView(); }
+  }).catch(SIR.fail);
+  document.getElementById('updates').innerHTML = U.entries.map(function (e) {
+    return '<h2 id="d-' + e.date + '">' + fmt(e.date) + '</h2><ul>' + e.items.map(function (it) {
+      // the section name before the first colon is the link, and the rest
+      // reads as plain text, so a long item is not one long underline
+      var t = it[0], i = t.indexOf(': '), head = i > 0 ? t.slice(0, i) : '', rest = i > 0 ? t.slice(i + 2) : t;
+      if (!it[1]) return '<li>' + SIR.esc(t) + '</li>';
+      if (!head) return '<li><a href="' + root + SIR.esc(it[1]) + '">' + SIR.esc(t) + '</a></li>';
+      return '<li><a class="upd-sec" href="' + root + SIR.esc(it[1]) + '">' + SIR.esc(head) + '</a>. ' + SIR.esc(rest.charAt(0).toUpperCase() + rest.slice(1)) + (/[.?]$/.test(rest) ? '' : '.') + '</li>';
+    }).join('') + '</ul>';
+  }).join('');
+}).catch(SIR.fail);
