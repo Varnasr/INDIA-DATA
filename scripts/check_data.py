@@ -452,6 +452,34 @@ def _disputes():
         assert 'UID:court-%s@offtheroll.in' % x['id'] in cal, 'court listing %s is not in calendar.ics' % x['id']
 
 
+def _form7_bulk():
+    # The bulk Form 7 table on the process page: current, every row's links
+    # are items the disputes page carries, and every count is a figure in the
+    # checked claim of the entry it came from, written the way the claim
+    # writes it. Read here from the published files, apart from the builder.
+    import re
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_form7.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+    B = json.load(open(os.path.join(ROOT, 'data', 'india', 'form7_bulk.json'), encoding='utf-8'))
+    D = json.load(open(os.path.join(ROOT, 'data', 'india', 'disputes.json'), encoding='utf-8'))
+    items = {i['id']: i for s in D['sections'] for i in s['items']}
+    fmt = lambda n: re.sub(r'(\d)(?=(\d\d)+\d$)', r'\1,', str(n))
+    assert B['rows'], 'the bulk Form 7 table is empty'
+    assert B['context']['letter']['id'] in items, 'the report of the letter of 9 October is not on the disputes page'
+    for row in B['rows']:
+        for e in row['entries'] + row['outcomes']:
+            assert e['id'] in items, 'row %s links to %s, which the disputes page does not carry' % (row['id'], e['id'])
+        if row['count'] is None:
+            continue
+        assert row['count_from'] in [e['id'] for e in row['entries']], 'row %s takes its count from an entry it does not link' % row['id']
+        claim = items[row['count_from']]['claim']
+        for n in [row['count']] + ([row['count_to']] if row['count_to'] else []):
+            assert isinstance(n, int) and re.search(r'(?<![\d,])' + re.escape(fmt(n)) + r'(?![\d,])', claim), \
+                'row %s count %s is not a figure in %s' % (row['id'], n, row['count_from'])
+    page = open(os.path.join(ROOT, 'site', 'pages', 'india', 'process', 'index.html'), encoding='utf-8').read()
+    assert "SIR.json('data/india/form7_bulk.json')" in page and 'id="tBulk"' in page, 'the process page lost the bulk Form 7 table'
+
+
 def _events():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_events.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -572,6 +600,7 @@ for name, fn in [
     ('the claims box is on every state\'s overview and the help page, and the summary revision\'s dates are its text\'s', _open_window),
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
+    ('the bulk Form 7 table is current, links only to disputes items and takes every count from its entry', _form7_bulk),
     ('the events page carries only events read twice and is current', _events),
     ('the RTI page carries only checked applications and is current', _rti),
     ('the case studies carry only checked items and are current', _cases),
