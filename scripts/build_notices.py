@@ -44,6 +44,21 @@ NOT_ISSUED = {('Nagaland', 'all_notices'),
               ('Madhya Pradesh', 'discrepancy')}
 
 
+def series(R):
+    """The progress of the notice stage: one figure per category and date."""
+    best = {}
+    for r in R:
+        if r['category'] not in ('all_notices', 'hearings_held', 'deleted_after_notice'):
+            continue
+        k = (r['date'], r['category'])
+        rank = (r['kind'] == 'primary', r['rounded'] == 'no')
+        if k not in best or rank > best[k][0]:
+            best[k] = (rank, r)
+    return [{'date': r['date'], 'category': r['category'], 'count': r['count'], 'rounded': r['rounded'] == 'yes',
+             'kind': r['kind'], 'source_url': r['source_url']}
+            for _rank, r in (best[k] for k in sorted(best))]
+
+
 def main():
     rows = list(csv.DictReader(open(RAW, encoding='utf-8')))
     for r in rows:
@@ -87,7 +102,12 @@ def main():
                'lists_source': pair[0]['source_url'] if pair else ((nm or dc)[0]['source_url'] if len(nm) + len(dc) == 1 else None),
                'deleted_after_notice': max(by('deleted_after_notice'), key=lambda r: r['date'])['count'] if by('deleted_after_notice') else None,
                'deleted_kind': max(by('deleted_after_notice'), key=lambda r: r['date'])['kind'] if by('deleted_after_notice') else None,
-               'other_figures': len(R) - (1 if total and how == 'published' else 0) - (2 if pair else 0)}
+               'other_figures': len(R) - (1 if total and how == 'published' else 0) - (2 if pair else 0),
+               # every dated count of notices sent, hearings held and names
+               # deleted after a notice, in date order, so a page can show
+               # how the notice stage moved; one figure per category a day,
+               # a primary source preferred, then an exact figure
+               'series': series(R)}
         # the two lists can overlap, so together they may exceed the total,
         # but a total far above the two lists would mean a mismatched pair
         if pair and total and how == 'published' and pair[0]['source_url'] == total['source_url']:
