@@ -1318,7 +1318,15 @@ body.embed .emsrc{margin:.5rem 0 0;color:var(--muted);font-size:.85rem}
 .follow{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 .4rem}
 .follow-note{font-size:.92rem;color:var(--muted)}
 #updates li{margin:.45rem 0}
-#updates .upd-sec{font-weight:600}
+#updates .upd-sec,.digest .upd-sec{font-weight:600}
+.digest{background:var(--card);border:1px solid var(--line);border-inline-start:4px solid var(--fill-teal);border-radius:12px;padding:1rem 1.25rem;margin:1.25rem 0 1.5rem}
+.digest-kicker{margin:0;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.digest .digest-h,.digest h3{margin:.2rem 0 0}
+.digest-sub{margin:.15rem 0 .5rem;color:var(--muted);font-size:.9rem}
+.digest ul{margin:0;padding-inline-start:1.2rem}
+.digest li{margin:.35rem 0}
+.digest-past{margin-top:1rem}
+.digest-past summary{cursor:pointer;font-weight:600}
 
 /* whether the revision still takes claims in a state, on the reader's date
    (sir.js): under the head of every state's overview, and on the help page */

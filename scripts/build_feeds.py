@@ -7,7 +7,8 @@ Each function returns text; build_site.py writes it with its own put(), so
 the clock: every date comes from the data, so two builds of the same data
 write the same files.
 
-  feed.xml               Atom, one entry per day of data/updates.json
+  feed.xml               Atom, one entry per day of data/updates.json and one
+                         per weekly issue of data/digest.json
   calendar.ics           all India: each state's draft and final roll, the
                          Supreme Court's dated orders in the process timeline,
                          the events still to come in data/india/events.json,
@@ -51,8 +52,9 @@ def latest_update():
 # ------------------------------------------------------------------- feed
 def feed(cfg):
     U = J('data/updates.json')['entries']
+    G = J('data/digest.json')['issues']
     url = cfg['url']
-    newest = max(e['date'] for e in U)
+    newest = max([e['date'] for e in U] + [i['week_ending'] for i in G])
     out = ['<?xml version="1.0" encoding="utf-8"?>',
            '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">',
            '  <title>Off the Roll: what\'s new</title>',
@@ -63,7 +65,21 @@ def feed(cfg):
            '  <updated>%sT00:00:00Z</updated>' % newest,
            '  <author><name>%s</name><uri>%s</uri></author>' % (html.escape(cfg['credit']), html.escape(cfg['credit_url'])),
            '  <rights>CC BY 4.0</rights>']
-    for e in sorted(U, key=lambda e: e['date'], reverse=True):
+    # the week's issue comes before the day's own entry on the same date
+    rows = [(e['date'], 0, e) for e in U] + [(i['week_ending'], 1, i) for i in G]
+    for _, kind, e in sorted(rows, key=lambda r: (r[0], r[1]), reverse=True):
+        if kind == 1:
+            items = ''.join('<li><a href="%s%s">%s</a>. %s</li>' % (url, html.escape(p['link']), html.escape(p['label']), html.escape(p['text']))
+                            for p in e['paragraphs'])
+            out += ['  <entry>',
+                    '    <title>Week ending %s</title>' % long_date(e['week_ending']),
+                    '    <id>%supdates/#w-%s</id>' % (url, e['week_ending']),
+                    '    <link rel="alternate" type="text/html" href="%supdates/#w-%s"/>' % (url, e['week_ending']),
+                    '    <updated>%sT00:00:00Z</updated>' % e['week_ending'],
+                    '    <summary>%s</summary>' % html.escape(e['paragraphs'][0]['text'][:300]),
+                    '    <content type="html">%s</content>' % html.escape('<ul>%s</ul>' % items),
+                    '  </entry>']
+            continue
         items = ''.join('<li>%s</li>' % ('<a href="%s%s">%s</a>' % (url, html.escape(it[1]), html.escape(it[0])) if it[1] else html.escape(it[0]))
                         for it in e['items'])
         first = e['items'][0][0] if e['items'] else ''
@@ -314,6 +330,8 @@ def data_index(cfg, published, sizes):
                 d = '%s: one row for each district' % place
             elif f == 'data/search.json':
                 d = 'Every page, constituency and district the search box finds'
+            elif f == 'data/digest.json':
+                d = "The week in brief, one issue each Friday, as at the top of the What's new page"
             elif f == 'data/updates.json':
                 d = "What has been added, by date, as on the What's new page"
             elif f == 'data/downloads.json':

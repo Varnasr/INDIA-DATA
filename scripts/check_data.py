@@ -452,6 +452,69 @@ def _disputes():
         assert 'UID:court-%s@offtheroll.in' % x['id'] in cal, 'court listing %s is not in calendar.ics' % x['id']
 
 
+def _digest():
+    # The weekly digest at the top of What's new (data/digest.json), written
+    # by hand every Friday. Each issue ends on a Friday and covers the seven
+    # days to it, each sentence keeps the writing rules and links to a page
+    # the site has, under that page's own name, and every figure in a
+    # sentence is a figure in one of the What's new entries it draws on.
+    import datetime
+    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+    import check_writing
+    M = 'January February March April May June July August September October November December'.split()
+    D = json.load(open(os.path.join(ROOT, 'data', 'digest.json'), encoding='utf-8'))
+    U = {e['date']: e['items'] for e in json.load(open(os.path.join(ROOT, 'data', 'updates.json'), encoding='utf-8'))['entries']}
+    num = re.compile(r'\d+(?:[,.]\d+)*')
+    issues = D['issues']
+    assert issues, 'data/digest.json has no issue'
+    ends = [i['week_ending'] for i in issues]
+    assert ends == sorted(set(ends), reverse=True), 'the digest issues are not one per week, newest first'
+    for i in issues:
+        w = i['week_ending']
+        end = datetime.date.fromisoformat(w)
+        assert end.weekday() == 4, '%s: an issue ends on a Friday' % w
+        assert i['week_start'] == (end - datetime.timedelta(days=6)).isoformat(), '%s: the week starts six days before it ends' % w
+        assert i['title'] == 'Week ending %d %s %d' % (end.day, M[end.month - 1], end.year), '%s: the title is not "Week ending" and the date' % w
+        assert 5 <= len(i['paragraphs']) <= 8, '%s: an issue has five to eight sentences, this one %d' % (w, len(i['paragraphs']))
+        assert i['sources'] and i['sources'] == sorted(set(i['sources'])), '%s: sources are the dates drawn on, in order' % w
+        figures = set()
+        for d in i['sources']:
+            assert i['week_start'] <= d <= w, '%s: source %s is outside the week' % (w, d)
+            assert d in U, '%s: source %s has no What\'s new entry' % (w, d)
+            for it in U[d]:
+                figures |= set(num.findall(it[0]))
+        assert w in U and any('#w-' + w in (it[1] or '') for it in U[w]), '%s: the What\'s new entry of that Friday does not link to the issue' % w
+        for p in i['paragraphs']:
+            t = p['text']
+            assert re.match(r'[A-Z]', t) and t.endswith('.') and t.count('. ') == 0, '%s: one full sentence per item, in "%s"' % (w, t[:60])
+            for what, rx in check_writing.PATTERNS + [check_writing.SEMI, check_writing.SELF,
+                                                     ('a colon-hinged sentence', r'[a-z]: '), ('a dash', r'[\u2013\u2014]| - ')]:
+                m = re.search(rx, t, flags=re.I if what != 'an em dash' else 0)
+                assert not m, '%s: %s in "%s"' % (w, what, t[:80])
+            for f in num.findall(t):
+                assert f in figures, '%s: %s is in no What\'s new entry the issue draws on, in "%s"' % (w, f, t[:60])
+            path, _, frag = p['link'].partition('#')
+            path, _, query = path.partition('?')
+            src = os.path.join(ROOT, 'site', 'pages', path, 'index.html')
+            assert path.endswith('/') and os.path.exists(src), '%s: %s is not a page' % (w, p['link'])
+            title = json.loads(re.match(r'<!--page (\{.*?\}) -->', open(src, encoding='utf-8').read()).group(1))['title']
+            name = re.sub(r'(, All India|: SIR analysis for India)$', '', title)
+            assert p['label'] == name, '%s: %s is labelled "%s", and the page is "%s"' % (w, p['link'], p['label'], name)
+            if frag:
+                built = _page_with_scripts(os.path.join(ROOT, path, 'index.html'))
+                assert 'id="%s"' % frag in built, '%s: %s has no #%s' % (w, path, frag)
+            if query:
+                from urllib.parse import parse_qs
+                q = parse_qs(query).get('q', [''])[0]
+                assert path == 'india/disputes/' and q, '%s: only the disputes page takes a search, in %s' % (w, p['link'])
+                assert q in open(os.path.join(ROOT, 'data', 'india', 'disputes.json'), encoding='utf-8').read(), '%s: a search for %s finds nothing' % (w, q)
+    page = _page_with_scripts(os.path.join(ROOT, 'updates', 'index.html'))
+    assert 'data/digest.json' in page and 'id="digest"' in page, 'the What\'s new page lost the weekly digest'
+    feed = open(os.path.join(ROOT, 'feed.xml'), encoding='utf-8').read()
+    for i in issues:
+        assert '<id>%supdates/#w-%s</id>' % (json.load(open(os.path.join(ROOT, 'site', 'places.json')))['url'], i['week_ending']) in feed, 'feed.xml lacks the issue of %s' % i['week_ending']
+
+
 def _form7_bulk():
     # The bulk Form 7 table on the process page: current, every row's links
     # are items the disputes page carries, and every count is a figure in the
@@ -600,6 +663,7 @@ for name, fn in [
     ('the claims box is on every state\'s overview and the help page, and the summary revision\'s dates are its text\'s', _open_window),
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
+    ('the weekly digest keeps to its week, its entries\' figures, the writing rules and pages that exist', _digest),
     ('the bulk Form 7 table is current, links only to disputes items and takes every count from its entry', _form7_bulk),
     ('the events page carries only events read twice and is current', _events),
     ('the RTI page carries only checked applications and is current', _rti),

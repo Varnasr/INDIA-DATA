@@ -12,10 +12,21 @@
   "url": "https://www.impactmojo.in/"
  },
  "counts": {
-  "files": 463,
-  "bytes": 13323527
+  "files": 464,
+  "bytes": 13327099
  },
  "files": [
+  {
+   "path": "data/digest.json",
+   "description": "The week in brief, one issue each Friday, as at the top of the What's new page",
+   "format": "JSON",
+   "bytes": 3358,
+   "keys": [
+    "note",
+    "issues"
+   ],
+   "licence": "CC BY 4.0"
+  },
   {
    "path": "data/downloads.json",
    "description": "The downloads manifest: every workbook, sheet and column, with what each holds",
@@ -45,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 47085,
+   "bytes": 47299,
    "keys": [
     "note",
     "entries"
