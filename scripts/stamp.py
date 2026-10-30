@@ -34,7 +34,8 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHECK = '--check' in sys.argv
-SKIP_DIRS = {'.git', '.github', 'archive', 'scripts', 'node_modules', 'raw'}
+# .claude holds agents' worktrees: full copies of the site, each with its own assets
+SKIP_DIRS = {'.git', '.github', '.claude', 'archive', 'scripts', 'node_modules', 'raw'}
 EXT = ('.js', '.css', '.json', '.csv', '.pdf', '.pptx', '.png', '.svg', '.webp', '.jpg')
 I18N = os.path.join(ROOT, 'assets', 'i18n.js')
 MARK = re.compile(r'/\*stamp\*/.*?/\*stamp\*/', re.S)

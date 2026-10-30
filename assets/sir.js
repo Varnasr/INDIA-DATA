@@ -1158,7 +1158,7 @@
     var p = [], links = [], T = r.T;
     var finalDue = function () {
       if (!r.f) return;
-      p.push(r.rep ? L('The final roll is due on {f}, as {o} reported on {r}.', { f: D(r.f), o: E(r.rep.outlet), r: D(r.rep.date) })
+      p.push(r.rep ? L('The final roll is due on {f}, as {o} reported on {r}.', { f: D(r.f), o: E(r.rep.outlet) + (/,/.test(r.rep.outlet) ? ',' : ''), r: D(r.rep.date) })
         : L('The final roll is due on {f}.', { f: D(r.f) }));
     };
     var form6 = '<a href="' + root + 'help/#form6">' + L('How to ask to be added on Form 6, or to correct an entry on Form 8') + '</a>';
@@ -1228,7 +1228,7 @@
     if (want && names.indexOf(want) >= 0) sel.value = want;
     sel.addEventListener('change', show);
     show();
-    var rows = names.map(function (n) { return stage(P, S, n, today); }).filter(function (r) { return r.k === 'open' || r.k === 'closed'; });
+    var rows = names.map(function (n) { return stage(P, S, n, today); }).filter(function (r) { return r.k === 'open' || (r.k === 'closed' && r.n1 && r.n1 >= today); });
     var cell = function (r) {
       if (r.k === 'open') return L('Open until {d}', { d: D(r.c1) });
       return r.c1 && r.c1 < today ? L('Closed on {d}', { d: D(r.c1) }) : '–';
