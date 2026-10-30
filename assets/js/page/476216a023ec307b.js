@@ -1,5 +1,5 @@
-Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.json'), SIR.json('data/india/border.json')]).then(function (r) {
-  var R = r[0].states, S = r[1].states, F = r[1].final, B = r[2];
+Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.json'), SIR.json('data/india/border.json'), SIR.json('data/india/process.json')]).then(function (r) {
+  var R = r[0].states, S = r[1].states, F = r[1].final, B = r[2], PR = r[3];
   var p1 = function (x) { return x == null ? null : SIR.d(x, 1); };
   var sign = function (x) { return x == null ? '–' : (x > 0 ? '+' : '') + SIR.d(x, 1); };
   var list = function (a) { return a.join(', ').replace(/, ([^,]*)$/, ' and $1'); };
@@ -45,8 +45,39 @@ Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.j
   var under25 = fin.filter(function (s) { return s.made_up_pct < 25; }).length;
   var pooled = 'Taken together, the ' + F.states + ' final rolls made up at most ' + SIR.pct(F.made_up_pct) + ' of the names the drafts left off, or ' + SIR.pct(F.made_up_pct_ex_withheld) + ' leaving out West Bengal\'s ' + SIR.lk(F.withheld, 0) + ' names held for adjudication.';
   document.getElementById('fBack').innerHTML = '<b>' + pooled + '</b> By state the share runs from ' + SIR.pct(fin[0].made_up_pct) + ' in ' + fin[0].state + ' to below zero in ' + neg.length + ' (' + list(neg.map(function (s) { return s.state; })) + '), where the roll shrank again after the draft. In ' + under25 + ' of the ' + fin.length + ' it was under a quarter, those ' + neg.length + ' included. West Bengal\'s further fall is mostly the names held back for adjudication.';
-  SIR.table('tBack', [{ h: 'State' }, { h: 'Share made up', num: true }, { h: 'Caution' }],
-    fin.map(function (s) { return [SIR.esc(s.state), SIR.pct(s.made_up_pct), flag(s) || null]; }));
+  // each final roll beside its draft, in the order of the chart above; the
+  // draft is the final roll less its rise from the draft
+  var E = SIR.esc, N = function (v) { return v == null ? '' : SIR.n(v); };
+  var FIG = { exact: 'Adds up exactly', rounded: 'Rounded', 'net only': 'Net change only', no: 'Does not add up' };
+  var held = fin.some(function (s) { return s.withheld; });
+  var draftOf = function (s) { return s.net_after_draft != null ? s.electors_final - s.net_after_draft : s.electors_before - s.removed; };
+  document.getElementById('tBack').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Roll before the revision</th><th scope="col">Left off the draft</th><th scope="col">Draft roll</th><th scope="col">Added after the draft</th><th scope="col">Deleted after the draft</th>' +
+    (held ? '<th scope="col">Held for adjudication</th>' : '') + '<th scope="col">Final roll</th><th scope="col" class="l">Final roll published</th><th scope="col">Share made up</th><th scope="col" class="l">Figures</th></tr></thead><tbody>' +
+    fin.map(function (s) {
+      var src = s.final_source && s.final_source.url ? ' <a href="' + E(s.final_source.url) + '" rel="noopener" target="_blank">' + (s.final_source.source === 'primary' ? 'document' : 'press') + '</a>' : '';
+      return '<tr><th scope="row" class="l">' + E(s.state) + '</th><td>' + N(s.electors_before) + '</td><td>' + N(s.removed) + '</td><td>' + N(draftOf(s)) + '</td><td>' + N(s.added_after_draft) + '</td><td>' + N(s.removed_after_draft) + '</td>' +
+        (held ? '<td>' + N(s.withheld) + '</td>' : '') + '<td>' + N(s.electors_final) + '</td><td class="l">' + (s.final_date ? SIR.date(s.final_date) : '') + src + '</td><td>' + SIR.pct(s.made_up_pct) + '</td><td class="l">' + E(FIG[s.reconciles] || s.reconciles || '') + '</td></tr>';
+    }).join('') + '</tbody>';
+  var cnt = function (k) { return fin.filter(function (s) { return s.reconciles === k; }).length; };
+  document.getElementById('nBackT').textContent = 'Adds up exactly means the draft plus the names added, less the names deleted' + (held ? ' and those held for adjudication' : '') + ', is the final roll, as in ' + cnt('exact') + ' of the ' + fin.length + ' states. Rounded means the additions and deletions were published in lakh, as in ' + cnt('rounded') + '. Net change only means the state published the final roll and no additions or deletions, so only the rise from the draft is known, as in ' + cnt('net only') + '. Does not add up means the published figures leave a gap, as in ' + cnt('no') + ', and they are kept as published. A blank cell is a figure the state did not publish. The source of each final roll is linked beside its date.' +
+    (function () { var off = fin.filter(function (s) { return s.electors_before - s.removed !== draftOf(s); }); return off.length ? ' The draft is the one the final roll was counted from, and in ' + off.map(function (s) { return s.state + ' it differs from the roll before less the names left off by ' + SIR.n(Math.abs(s.electors_before - s.removed - draftOf(s))); }).join(' and in ') + '.' : ''; })();
+  // the states still waiting, each with the final roll date now set: the
+  // latest schedule's date, or a later one the press has reported
+  var waiting = S.filter(function (s) { return s.electors_final == null; }).map(function (s) {
+    var sc = PR.schedules.filter(function (x) { return x.state === s.state; })[0], last = sc ? sc.steps[sc.steps.length - 1] : null;
+    var due = last && last.final ? { d: last.final, label: last.label, url: last.src, press: !/^https?:\/\/[^\/]*\.(gov|nic)\.in(\/|$)/.test(last.src || '') } : null;
+    var rep = (PR.reported_dates || []).filter(function (x) { return x.state === s.state && x.final; }).sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+    var q = rep[rep.length - 1];
+    if (q && (!due || q.final !== due.d)) { due = { d: q.final, label: 'Reported on ' + SIR.date(q.date) + ' by ' + q.outlet, url: q.url, press: true }; }
+    return { s: s, due: due };
+  }).sort(function (a, b) { return (a.due ? a.due.d : '9') < (b.due ? b.due.d : '9') ? -1 : 1; });
+  document.getElementById('tWait').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col" class="l">Draft roll published</th><th scope="col">Left off the draft</th><th scope="col" class="l">Final roll due</th><th scope="col" class="l">Date set by</th></tr></thead><tbody>' +
+    waiting.map(function (w) {
+      var s = w.s, d = w.due;
+      return '<tr><th scope="row" class="l">' + E(s.state) + '</th><td class="l">' + (s.draft_date ? SIR.date(s.draft_date) : 'Not yet') + '</td><td>' + N(s.removed) + '</td><td class="l">' + (d ? SIR.date(d.d) + (d.d < PR.as_of ? ', passed with no final roll found' : '') : 'Not set') + '</td><td class="l">' +
+        (d ? (d.url ? '<a href="' + E(d.url) + '" rel="noopener" target="_blank">' + E(d.label) + '</a>' : E(d.label)) + (d.press ? ' (reported in the press)' : '') : '') + '</td></tr>';
+    }).join('') + '</tbody>';
+  document.getElementById('nWait').innerHTML = waiting.length + ' states and union territories had no final roll on ' + SIR.date(PR.as_of) + '. Each due date is the one in the latest schedule, or the latest date reported in the press where that differs. A state moves to the table above once its final roll is published. Every revision of each date is on <a href="../process/#final-moves">how the revision was run</a>.';
 
   // borders
   var bs = B.states, pct = function (a, b) { return 100 * (a / b - 1); };

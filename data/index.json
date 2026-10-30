@@ -12,15 +12,15 @@
   "url": "https://www.impactmojo.in/"
  },
  "counts": {
-  "files": 461,
-  "bytes": 13235408
+  "files": 462,
+  "bytes": 13294041
  },
  "files": [
   {
    "path": "data/downloads.json",
    "description": "The downloads manifest: every workbook, sheet and column, with what each holds",
    "format": "JSON",
-   "bytes": 200951,
+   "bytes": 202280,
    "keys": [
     "workbooks",
     "zip",
@@ -45,7 +45,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 45173,
+   "bytes": 46802,
    "keys": [
     "note",
     "entries"
@@ -4228,6 +4228,26 @@
    "licence": "CC BY 4.0"
   },
   {
+   "path": "data/india/court_listings.csv",
+   "description": "The hearings and deadlines ahead in the court cases on the revision, each with the report that gives its date",
+   "format": "CSV",
+   "bytes": 3288,
+   "columns": [
+    "date",
+    "date_kind",
+    "computed_from",
+    "court",
+    "state",
+    "matter",
+    "due",
+    "disputes_entry",
+    "source",
+    "url",
+    "quote"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
@@ -4252,8 +4272,9 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 360753,
+   "bytes": 383154,
    "keys": [
+    "listings",
     "sections",
     "by_state",
     "by_month",
@@ -4488,7 +4509,7 @@
    "path": "data/india/notices.json",
    "description": "Electors kept on a draft roll but sent a notice, by state. The same table as data/india/notices.csv, as JSON",
    "format": "JSON",
-   "bytes": 15300,
+   "bytes": 40389,
    "keys": [
     "states",
     "with_total",
@@ -7075,7 +7096,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 652162,
+   "bytes": 654094,
    "licence": "CC BY 4.0"
   },
   {
@@ -7089,7 +7110,7 @@
    "path": "downloads/bihar.xlsx",
    "description": "Bihar 2025, Excel workbook",
    "format": "Excel",
-   "bytes": 443439,
+   "bytes": 443440,
    "licence": "CC BY 4.0"
   },
   {
@@ -7110,7 +7131,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 284071,
+   "bytes": 287033,
    "licence": "CC BY 4.0"
   },
   {
@@ -7152,14 +7173,14 @@
    "path": "downloads/tamil-nadu.xlsx",
    "description": "Tamil Nadu, Excel workbook",
    "format": "Excel",
-   "bytes": 117836,
+   "bytes": 117837,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/telangana-hyderabad.xlsx",
    "description": "Telangana 2026 and the Old City of Hyderabad, Excel workbook",
    "format": "Excel",
-   "bytes": 95538,
+   "bytes": 95539,
    "licence": "CC BY 4.0"
   },
   {
