@@ -134,6 +134,40 @@ SIR.json('data/india/process.json').then(function (P) {
     SIR.tools();
   }).catch(function () {});
 
+  // bulk Form 7 filings, state by state, each row linked to its reports on the disputes page
+  SIR.json('data/india/form7_bulk.json').then(function (B) {
+    var C = B.counts, ST = {}, ctx = B.context;
+    B.status.forEach(function (s) { ST[s[0]] = s[1]; });
+    document.getElementById('nBulkRule').innerHTML = '<b>Two rules of the Commission apply to Form 7 filed in bulk.</b> ' + E(ctx.order.text.replace(/\.$/, '')) + ' (<a href="' + E(ctx.order.src.url) + '" rel="noopener" target="_blank">the Commission\'s letter of ' + SIR.date(ctx.order.date) + '</a>). ' +
+      E(ctx.letter.text.replace(/\.$/, '')) + ' (<a href="../disputes/#d-' + E(ctx.letter.id) + '">the report</a>).';
+    var count = function (r) {
+      if (r.count == null) return '';
+      return (r.count_q ? r.count_q + ' ' : '') + SIR.n(r.count) + (r.count_to ? ' to ' + SIR.n(r.count_to) : '') + ' ' + r.unit;
+    };
+    // one year is written once: 24 January to 11 February 2026
+    var when = function (r) {
+      if (r.first === r.last) return SIR.date(r.first);
+      var a = SIR.date(r.first);
+      return (r.first.slice(0, 4) === r.last.slice(0, 4) ? a.replace(/\s*\d{4}$/, '') : a) + ' to ' + SIR.date(r.last);
+    };
+    var row = function (r) {
+      var what = (r.status.length ? '<span class="btags">' + r.status.map(function (s) { return '<span>' + E(ST[s]) + '</span>'; }).join('') + '</span>' : '') +
+        (r.outcomes.length ? r.outcomes.map(function (o) { return E(o.text); }).join(' ') : (r.status.length ? '' : 'No outcome reported.'));
+      return '<tr id="b-' + E(r.id) + '"><th scope="row" class="l">' + E(r.state) + '</th><td class="l">' + E(r.place) + '</td><td class="l nw">' + when(r) + '</td><td class="nw">' + count(r) + '</td><td class="l">' + E(r.filer) + '</td><td class="l">' + what + '</td><td class="l">' +
+        r.entries.map(function (e) { return '<a href="../disputes/#d-' + E(e.id) + '">' + E(e.outlet) + ', ' + SIR.date(e.date) + '</a>'; }).join('<br>') + '</td></tr>';
+    };
+    var part = function (g, label) {
+      var rs = B.rows.filter(function (r) { return r.group === g; });
+      return rs.length ? '<tbody><tr class="bgroup"><th scope="colgroup" colspan="7" class="l">' + label + '</th></tr>' + rs.map(row).join('') + '</tbody>' : '';
+    };
+    document.getElementById('tBulk').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col" class="l">Place</th><th scope="col" class="l">Reported</th><th scope="col">How many</th><th scope="col" class="l">Filed by</th><th scope="col" class="l">What happened</th><th scope="col" class="l">Reports</th></tr></thead>' +
+      part('', 'Form 7 objections filed in bulk by people') +
+      part('officers', 'Form 7s generated in registration officers\' names, which no person filed as an objector');
+    document.getElementById('nBulk').textContent = 'The first part holds ' + C.rows + ' reports of bulk filing from ' + C.states + ' states and union territories, and ' + C.with_count + ' of them give a count. Of the ' + C.rows + ', ' +
+      C.police + ' led to a police case or FIR and ' + C.court + ' came before a court. The counts cannot be added up, because some count forms and some count the electors objected to. The ' + C.officers + ' counts of forms in officers\' names are set apart from the rest because the reports say the software produced them.';
+    SIR.tools();
+  }).catch(function () {});
+
   // notices: electors kept on the draft but sent a notice
   SIR.json('data/india/notices.json').then(function (T) {
     var N = function (v) { return v == null ? '' : SIR.n(v); }, lk = function (v) { return v >= 1e7 ? (v / 1e7).toFixed(2) + ' crore' : (v / 1e5).toFixed(1) + ' lakh'; };

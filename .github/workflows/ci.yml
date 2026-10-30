@@ -49,6 +49,13 @@ jobs:
       - name: Pages match their sources
         run: python3 scripts/build_site.py --check
 
+      # Every file a page loads carries the stamp of its current contents, and
+      # the translation bundles match i18n/<lang>.json. Either drifts silently.
+      - name: Stamps are current
+        run: python3 scripts/stamp.py --check
+      - name: Translation bundles are current
+        run: python3 scripts/build_i18n.py --check
+
       # Netlify publishes only _site, an allowlist. A new top-level folder
       # fails here until it is named published or kept back.
       - name: Every top-level entry is published or kept back
