@@ -281,6 +281,35 @@ def _alerts():
     assert "form-action 'self'" in toml, "the policy no longer lets forms post to the site"
 
 
+def _open_window():
+    # the claims box (sir.js, SIR.owin): the summary revision's dates and
+    # states, which the box states for a state whose final roll is out, must
+    # be the ones the timeline entry's own text gives, and every state's
+    # overview and the help page must carry the box
+    P = json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))
+    M = 'January February March April May June July August September October November December'.split()
+    long = lambda iso: '%d %s' % (int(iso[8:]), M[int(iso[5:7]) - 1])
+    ssr = [t for t in P['timeline'] if t.get('ssr')]
+    assert ssr, 'no timeline entry carries the summary revision\'s dates'
+    names = {s['state'] for s in P['schedules']} | {'Assam'}
+    for t in ssr:
+        q, text = t['ssr'], t['text']
+        for k in ('qualifying', 'draft', 'claims_end', 'decided', 'final'):
+            assert long(q[k]) in text, '%s: the summary revision\'s %s (%s) is not in the entry\'s text' % (t['date'], k, q[k])
+        assert len(q['states']) == len(set(q['states'])) and re.search(r'\bin %d states' % len(q['states']), text), '%s: the summary revision names a different number of states' % t['date']
+        first = text.split('They are ', 1)[1].split('.', 1)[0]
+        for s in q['states']:
+            assert s in names, '%s: %s is not a state the schedules know' % (t['date'], s)
+            assert s in first, '%s: %s is not among the states the entry names' % (t['date'], s)
+    cfg = json.load(open(os.path.join(ROOT, 'site', 'places.json'), encoding='utf-8'))
+    for pl in cfg['places']:
+        if pl.get('zone') and pl['pages']:
+            page = open(os.path.join(ROOT, pl['pages'][0][0], 'index.html'), encoding='utf-8').read()
+            assert re.search(r'<aside class="owin" data-owin="[^"]+"', page), '%s has no claims box' % pl['pages'][0][0]
+    helpp = open(os.path.join(ROOT, 'help', 'index.html'), encoding='utf-8').read()
+    assert re.search(r'id="owinAll" data-owin-pages="\{[^"]+\}"', helpp), 'help/ lacks the claims picker or its list of state pages'
+
+
 def _feeds():
     # the feed parses, the calendars are well formed, the data index lists
     # every published data file, and every published path but /embed/ refuses
@@ -410,6 +439,45 @@ def _reads():
 def _disputes():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_disputes.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+    # the court listings at the top of the page and in the calendars: each
+    # date parses, each points at an entry the page carries, and the calendar
+    # for all India holds every one of them
+    import datetime
+    D = json.load(open(os.path.join(ROOT, 'data', 'india', 'disputes.json'), encoding='utf-8'))
+    ids = {i['id'] for s in D['sections'] for i in s['items']}
+    cal = open(os.path.join(ROOT, 'calendar.ics'), encoding='utf-8', newline='').read()
+    for x in D.get('listings', []):
+        datetime.date.fromisoformat(x['date'])
+        assert x['disputes_id'] in ids, 'court listing %s points at %s, which is not on the disputes page' % (x['id'], x['disputes_id'])
+        assert 'UID:court-%s@offtheroll.in' % x['id'] in cal, 'court listing %s is not in calendar.ics' % x['id']
+
+
+def _form7_bulk():
+    # The bulk Form 7 table on the process page: current, every row's links
+    # are items the disputes page carries, and every count is a figure in the
+    # checked claim of the entry it came from, written the way the claim
+    # writes it. Read here from the published files, apart from the builder.
+    import re
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_form7.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
+    B = json.load(open(os.path.join(ROOT, 'data', 'india', 'form7_bulk.json'), encoding='utf-8'))
+    D = json.load(open(os.path.join(ROOT, 'data', 'india', 'disputes.json'), encoding='utf-8'))
+    items = {i['id']: i for s in D['sections'] for i in s['items']}
+    fmt = lambda n: re.sub(r'(\d)(?=(\d\d)+\d$)', r'\1,', str(n))
+    assert B['rows'], 'the bulk Form 7 table is empty'
+    assert B['context']['letter']['id'] in items, 'the report of the letter of 9 October is not on the disputes page'
+    for row in B['rows']:
+        for e in row['entries'] + row['outcomes']:
+            assert e['id'] in items, 'row %s links to %s, which the disputes page does not carry' % (row['id'], e['id'])
+        if row['count'] is None:
+            continue
+        assert row['count_from'] in [e['id'] for e in row['entries']], 'row %s takes its count from an entry it does not link' % row['id']
+        claim = items[row['count_from']]['claim']
+        for n in [row['count']] + ([row['count_to']] if row['count_to'] else []):
+            assert isinstance(n, int) and re.search(r'(?<![\d,])' + re.escape(fmt(n)) + r'(?![\d,])', claim), \
+                'row %s count %s is not a figure in %s' % (row['id'], n, row['count_from'])
+    page = open(os.path.join(ROOT, 'site', 'pages', 'india', 'process', 'index.html'), encoding='utf-8').read()
+    assert "SIR.json('data/india/form7_bulk.json')" in page and 'id="tBulk"' in page, 'the process page lost the bulk Form 7 table'
 
 
 def _events():
@@ -529,8 +597,10 @@ for name, fn in [
     ('the share form is wired for Netlify and the terms page describes it', _share),
     ('the final-roll alert form is wired for Netlify and the terms page describes it', _alerts),
     ('the feed, the calendars, the data index and the frame rules are sound', _feeds),
+    ('the claims box is on every state\'s overview and the help page, and the summary revision\'s dates are its text\'s', _open_window),
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
+    ('the bulk Form 7 table is current, links only to disputes items and takes every count from its entry', _form7_bulk),
     ('the events page carries only events read twice and is current', _events),
     ('the RTI page carries only checked applications and is current', _rti),
     ('the case studies carry only checked items and are current', _cases),

@@ -1,0 +1,64 @@
+{
+ "meta": {
+  "checked": "2026-10-30",
+  "by": "second reader",
+  "how": "Each source was opened again on 30 October 2026 and put to a separate reader (a fetch of the page answered by a different model, with no sight of the first reading), with a question for every field: the date, what the court gave the date for, the case, the bench, what is due, the author and the time of publication. Its answers were then set against the page text read with curl.",
+  "second_reading": "A second reading was done on 30 October 2026 by an independent agent, which opened every source again itself: The Hindu, LawBeat, LiveLaw and Times Now Navbharat with curl (JSON-LD articleBody and page text), and the three LawChakra pages with Firecrawl because LawChakra answered curl with 429. It checked each date and how it is derived, the court, the case and its number, what is due, the disputes entry each listing names in courts.json, and the five translations against the English, and it searched once per matter for a newer listing date. No newer date was found for any of the five."
+ },
+ "items": {
+  "list-01": {
+   "status": "confirmed",
+   "note": "LawChakra (Suresh Ajith, 26 October 2026, 2:23 pm) checked: 'listed it for November 5, 2026', heard on 26 October 2026 with notice issued to the Commission 'on Monday', the refusal to extend the claims and objections date or stop the final roll without hearing the Commission, and the bench of the Chief Justice, Justice Bagchi and Justice Mohana. The second reader found that LawChakra describes the petition as 'challenging the Special Intensive Revision' in Maharashtra, and The Hindu's articleBody gives 'a plea challenging the deletion of voters in the Maharashtra SIR', so 'against deletions' stands on The Hindu. Quote verbatim. The date is exact. The petitioner is named in both and is not named here.",
+   "second_reading": "Confirmed. LawChakra (Firecrawl, 30 October 2026, published 2:41 pm IST): 'heard Writ Petition (Civil) No. 1330 of 2026 on October 26, 2026, and listed it for November 5, 2026', with the notice to the Commission and the refusal to extend the claims date or stop the final roll without hearing the Commission. The Hindu articleBody: 'the court agreed to urgently take up in November 5, a plea challenging the deletion of voters in the Maharashtra SIR'. court-51 is the same matter. Translations agree. A search found no later date, and Business Standard also gives 5 November."
+  },
+  "list-02": {
+   "status": "confirmed",
+   "note": "LawBeat (Aishwarya Iyer, 28 October 2026, 4:20 pm IST) checked: 'ECI has said it will file a report in two weeks', hearing date 28 October 2026, the plea about electors missing from the draft being asked to file Form 6. The second reader found that LawBeat gives no next hearing date and no case number. The number W.P.(C) No. 1188 of 2026 comes from LiveLaw's report of the application (court-48), and the listing after two weeks from The Indian Express (court-54). So the date is the date the report is due, worked out as 28 October and two weeks, and is rightly approximate. Quote verbatim.",
+   "second_reading": "Confirmed. LawBeat articleBody (published 28 October 2026, 4:20 pm IST): 'ECI has said it will file a report in two weeks.' Hearing Date: October 28, 2026, Case Title: Anjali Bharadwaj vs ECI. 28 October and two weeks is 11 November, rightly approximate. court-54 is the same matter. Translations agree. A search found no later date."
+  },
+  "list-03": {
+   "status": "corrected",
+   "note": "LiveLaw (Debby Jain, 27 October 2026, 1:48 pm IST) checked: 'tentatively listed the matter on November 17', 10 days to file a rejoinder to the counter affidavit the Commission filed 'yesterday', the bench of the Chief Justice, Justice Bagchi and Justice Mohana. Corrected: the second reader found no case number and no writ of quo warranto in this report (both are in court-52 and court-53 from Bar and Bench), so the matter now says what LiveLaw says the petitions allege, that decisions of the Commission, those on the revision among them, were taken without the concurrence of the two Election Commissioners. The affidavit's date, which LiveLaw gives only as 'yesterday', is dropped from what is due. The date stays tentative. Quote verbatim.",
+   "matter": "The petitions alleging that decisions of the Election Commission, those on the revision among them, were taken without the agreement of the two Election Commissioners, led by W.P.(C) No. 1246 of 2026.",
+   "due": "On 27 October the petitioners were given 10 days to file a rejoinder to the Commission's counter affidavit. The bench listed the matter for this date tentatively.",
+   "t": {
+    "hi": {
+     "court": "सुप्रीम कोर्ट",
+     "matter": "वे याचिकाएँ जिनमें आरोप है कि निर्वाचन आयोग के फ़ैसले, पुनरीक्षण से जुड़े फ़ैसलों समेत, दोनों निर्वाचन आयुक्तों की सहमति के बिना लिए गए। मुख्य याचिका W.P.(C) No. 1246 of 2026 है।",
+     "due": "27 अक्टूबर को याचिकाकर्ताओं को आयोग के जवाबी हलफ़नामे पर प्रत्युत्तर दाखिल करने के लिए 10 दिन दिए गए। पीठ ने मामले को अस्थायी रूप से इस तारीख़ के लिए सूचीबद्ध किया।"
+    },
+    "ur": {
+     "court": "سپریم کورٹ",
+     "matter": "وہ درخواستیں جن میں الزام ہے کہ الیکشن کمیشن کے فیصلے، نظرثانی سے متعلق فیصلوں سمیت، دونوں الیکشن کمشنروں کی رضامندی کے بغیر کیے گئے۔ مرکزی درخواست W.P.(C) No. 1246 of 2026 ہے۔",
+     "due": "27 اکتوبر کو درخواست گزاروں کو کمیشن کے جوابی حلف نامے پر جواب الجواب داخل کرنے کے لیے 10 دن دیے گئے۔ بنچ نے معاملے کو عارضی طور پر اس تاریخ کے لیے فہرست میں رکھا۔"
+    },
+    "te": {
+     "court": "సుప్రీంకోర్టు",
+     "matter": "సవరణకు సంబంధించిన నిర్ణయాలతో సహా ఎన్నికల సంఘం నిర్ణయాలు ఇద్దరు ఎన్నికల కమిషనర్ల అంగీకారం లేకుండా తీసుకున్నారని ఆరోపించే పిటిషన్లు. ప్రధాన పిటిషన్ W.P.(C) No. 1246 of 2026.",
+     "due": "అక్టోబర్ 27న సంఘం కౌంటర్ అఫిడవిట్‌కు రిజాయిండర్ దాఖలు చేయడానికి పిటిషనర్లకు 10 రోజులు ఇచ్చారు. ధర్మాసనం ఈ కేసును తాత్కాలికంగా ఈ తేదీకి జాబితా చేసింది."
+    },
+    "ta": {
+     "court": "உச்ச நீதிமன்றம்",
+     "matter": "திருத்தம் தொடர்பான முடிவுகள் உட்பட தேர்தல் ஆணையத்தின் முடிவுகள் இரண்டு தேர்தல் ஆணையர்களின் ஒப்புதல் இல்லாமல் எடுக்கப்பட்டதாகக் கூறும் மனுக்கள். முதன்மை மனு W.P.(C) No. 1246 of 2026.",
+     "due": "ஆணையத்தின் எதிர் பிரமாணப் பத்திரத்துக்கு மறுமொழி தாக்கல் செய்ய அக்டோபர் 27 அன்று மனுதாரர்களுக்கு 10 நாள் வழங்கப்பட்டது. அமர்வு இந்த வழக்கை இந்தத் தேதிக்குத் தற்காலிகமாகப் பட்டியலிட்டது."
+    },
+    "bn": {
+     "court": "সুপ্রিম কোর্ট",
+     "matter": "যে আবেদনগুলিতে অভিযোগ, সংশোধন সংক্রান্ত সিদ্ধান্ত সহ নির্বাচন কমিশনের সিদ্ধান্ত দুই নির্বাচন কমিশনারের সম্মতি ছাড়াই নেওয়া হয়েছে। মূল আবেদন W.P.(C) No. 1246 of 2026।",
+     "due": "27 অক্টোবর আবেদনকারীদের কমিশনের পাল্টা হলফনামার জবাব দিতে 10 দিন দেওয়া হয়। বেঞ্চ মামলাটি অস্থায়ীভাবে এই তারিখে তালিকাভুক্ত করেছে।"
+    }
+   },
+   "second_reading": "Corrected again. The first correction (no quo warranto, which LiveLaw does not mention) stands. LawChakra (Suresh Ajith, 27 October 2026, 1:49 pm IST) gives 'Rakesh Kumar Singh v. Union of India and Others, W.P.(C) No. 1246/2026, heard with connected petitions' and 'Next Date: November 17, 2026', and LiveLaw calls that petition 'the lead case', so the case number goes back into the matter as the lead petition. LiveLaw: 'Adjourning the hearing, the bench tentatively listed the matter on November 17.' The date stays tentative. LawChakra gives two weeks for the rejoinder against LiveLaw's and Bar and Bench's 10 days. The listing keeps 10 days, which is in the order as Bar and Bench quotes it. court-53 is the same matter."
+  },
+  "list-04": {
+   "status": "confirmed",
+   "note": "Times Now Navbharat (Gaurav Srivastav and Shishupal Kumar, 30 October 2026, 1:17 pm IST) checked: four weeks for the Commission to file its counter affidavit, the Commission asked to answer the facts and questions in the note submitted for the petitioners by Senior Advocate Datar. The second reader found that this report does not say the Kerala petitions were heard with the Uttar Pradesh and Chhattisgarh matters and gives no next hearing. LawChakra (Sharleen Arora, 30 October 2026, 1:47 pm, https://lawchakra.in/supreme-court/form-7-up-sir/) says the bench was hearing 'SIR matters concerning Uttar Pradesh, Kerala and Chhattisgarh' and declined the Kerala extension in the same hearing, which supports the matter. The date is the date the affidavit is due, worked out as 30 October and four weeks, and is rightly approximate. Quote verbatim.",
+   "second_reading": "Confirmed. Times Now Navbharat articleBody (published 30 October 2026, 1:17 pm IST): 'सुप्रीम कोर्ट ने चुनाव आयोग को जवाबी हलफनामा दाखिल करने के लिए चार सप्ताह का समय दिया है।' and the Commission asked to answer 'तथ्यों और सवालों' in the petitioners' note. LawChakra (form-7-up-sir, 30 October 2026, 1:48 pm IST) supports the joint hearing with Uttar Pradesh and Chhattisgarh. 30 October and four weeks is 27 November, rightly approximate. court-56 is the same matter. Translations agree. A search found no next hearing date."
+  },
+  "list-05": {
+   "status": "confirmed",
+   "note": "LawChakra (Sharleen Arora, 26 October 2026, 4:39 pm) checked: the Bombay High Court fixed 1 December 2026 for the petitions challenging exclusions of voters in Maharashtra's revision, the Commission sought deferral relying on a Supreme Court order asking High Courts to keep such proceedings in abeyance, and the Court expressed no view on the merits. The second reader found that LawChakra gives the hearing of 5 October (court-34) as background only and does not say that petition is in the batch listed for 1 December, since the petitioners in the batch were not known when it wrote. court-34 is therefore the related entry and is not shown as the same petition. Quote verbatim.",
+   "second_reading": "Confirmed. LawChakra (Sharleen Arora, published 26 October 2026, 5:11 pm IST by the page metadata) carries the quote verbatim and 'Next Date of Hearing: December 1, 2026', the Commission's request for deferral relying on the Supreme Court's order, and 'the Court has expressed no view on the merits'. It gives the 5 October petition of court-34 as background and says the names of the petitioners in the batch were not available, so court-34 is the related entry, as the first reading said. Translations agree. A search found no later date."
+  }
+ }
+}

@@ -15,6 +15,13 @@ not confirm". The press reports the process page already carries, which were
 checked when they went on it, join the sections they belong to, so the two
 pages cannot disagree.
 
+listings.json holds the hearings and deadlines ahead that a source dates,
+for the "Next in court" list at the top of the page and for the calendars
+(scripts/build_feeds.py). A listing reaches the page only if its second
+reading, verified_listings.json, confirmed or corrected it, and only if the
+disputes entry it names is on the page. They are written into disputes.json
+under "listings" and into court_listings.csv.
+
 Nothing here says the revision was meant to exclude anyone. A party's claim
 is its allegation, attributed by name, and the Commission's reply sits beside
 it where one was reported.
@@ -59,6 +66,11 @@ ISSUES = {'Form 6', 'Form 7', 'Form 8', 'Pre-printed forms', 'Notices and hearin
           'Software (ECINET/ERONET)', 'Names left off or deleted', 'Living electors marked dead', 'Duplicates and errors', 'BLO workload',
           'Deaths', 'Adjudication and appeals', 'Women', 'Migrants', 'Minorities', "Commission's independence",
           'Transparency of lists', 'Schedule and deadlines', 'Police and FIRs', 'Assembly resolution', 'Protest and march'}
+# the court listings: what each carries onto the page, and the languages its
+# court, matter and what is due are translated into
+LKEEP = ('id', 'date', 'date_kind', 'computed_from', 'court', 'state', 'matter', 'due', 'disputes_id', 'source_name', 'source_url', 'quote', 't')
+LANGS = ('hi', 'ur', 'te', 'ta', 'bn')
+DATE_KINDS = ('exact', 'approximate', 'tentative')
 ALIAS = {'Hyderabad': 'Telangana', 'NCT of Delhi': 'Delhi', 'Orissa': 'Odisha'}
 
 
@@ -140,6 +152,7 @@ def build():
         by_month[m][it['section']] += 1
     sections = [{'id': s, 'title': t, 'items': [i for i in items if i['section'] == s]} for s, t in SECTIONS]
     return {
+        'listings': listings({i['id'] for i in items}),
         'sections': [s for s in sections if s['items']],
         'by_state': dict(sorted(by_state.items(), key=lambda kv: -kv[1])),
         'by_month': dict(sorted(by_month.items())),
@@ -147,6 +160,61 @@ def build():
         'counts': {'items': len(items), 'primary': sum(1 for i in items if i['kind'] == 'primary'),
                    'states': len(by_state), 'first': min(i['date'] for i in items), 'last': max(i['date'] for i in items)},
     }
+
+
+def listings(ids):
+    """The hearings and deadlines ahead, soonest first, each checked against
+    its source and tied to an entry on the page."""
+    import datetime
+    d = load('listings')
+    if not d:
+        return []
+    V = (load('verified_listings') or {}).get('items', {})
+    out, seen = [], set()
+    for it in d['items']:
+        if it['id'] in seen:
+            raise SystemExit('FAIL - duplicate listing ' + it['id'])
+        seen.add(it['id'])
+        v = V.get(it['id'], {})
+        if v.get('status') not in ('confirmed', 'corrected'):
+            continue
+        it = dict(it)
+        for k in ('date', 'date_kind', 'computed_from', 'court', 'state', 'matter', 'due', 'disputes_id', 'source_name', 'source_url', 'quote', 't'):
+            if v.get(k):
+                it[k] = v[k]
+        try:
+            datetime.date.fromisoformat(it['date'])
+        except (KeyError, TypeError, ValueError):
+            raise SystemExit('FAIL - listing %s has no date that parses' % it['id'])
+        if it.get('date_kind') not in DATE_KINDS:
+            raise SystemExit('FAIL - listing %s: date_kind must be one of %s' % (it['id'], ', '.join(DATE_KINDS)))
+        if it['date_kind'] == 'approximate' and not it.get('computed_from'):
+            raise SystemExit('FAIL - listing %s is approximate and does not say how the date was worked out' % it['id'])
+        if it.get('disputes_id') not in ids:
+            raise SystemExit('FAIL - listing %s names %r, which is not an entry on the disputes page' % (it['id'], it.get('disputes_id')))
+        if not (it.get('court') and it.get('matter') and it.get('due') and it.get('source_name') and str(it.get('source_url', '')).startswith('http')):
+            raise SystemExit('FAIL - listing %s lacks a court, matter, what is due or a source' % it['id'])
+        for lang in LANGS:
+            tr = (it.get('t') or {}).get(lang) or {}
+            if not all(tr.get(k) for k in ('court', 'matter', 'due')):
+                raise SystemExit('FAIL - listing %s has no %s translation of its court, matter and what is due' % (it['id'], lang))
+        text = ' '.join([it['court'], it['matter'], it['due']] + [x for tr in it['t'].values() for x in tr.values()])
+        if '—' in text or '–' in text:
+            raise SystemExit('FAIL - listing %s carries a dash the writing rules forbid' % it['id'])
+        if re.search('[০-৯०-९٠-٩۰-۹௦-௯౦-౯]', text):
+            raise SystemExit('FAIL - listing %s writes a figure in Indic digits, which the site writes in Western digits' % it['id'])
+        out.append({k: it.get(k, '') for k in LKEEP})
+    return sorted(out, key=lambda x: (x['date'], x['id']))
+
+
+def listings_csv(d):
+    b = io.StringIO()
+    w = csv.writer(b, lineterminator='\n')
+    w.writerow(['date', 'date_kind', 'computed_from', 'court', 'state', 'matter', 'due', 'disputes_entry', 'source', 'url', 'quote'])
+    for x in d['listings']:
+        w.writerow([x['date'], x['date_kind'], x['computed_from'], x['court'], x['state'], x['matter'], x['due'],
+                    'india/disputes/#d-' + x['disputes_id'], x['source_name'], x['source_url'], x['quote']])
+    return b.getvalue()
 
 
 def as_csv(d):
@@ -171,6 +239,7 @@ def main():
     d = build()
     files = {os.path.join(OUT, 'disputes.json'): json.dumps(d, ensure_ascii=False, separators=(',', ':')) + '\n',
              os.path.join(OUT, 'disputes.csv'): as_csv(d),
+             os.path.join(OUT, 'court_listings.csv'): listings_csv(d),
              # the counts alone, for pages that show the count and not the items
              os.path.join(OUT, 'disputes_counts.json'): json.dumps({'counts': d['counts'], 'by_state': by_state(d)}, ensure_ascii=False, separators=(',', ':')) + '\n'}
     if '--check' in sys.argv:
@@ -182,7 +251,7 @@ def main():
     for p, t in files.items():
         open(p, 'w', encoding='utf-8').write(t)
     c = d['counts']
-    print('%d items (%d primary) across %d states, %s to %s; %d not confirmed' % (c['items'], c['primary'], c['states'], c['first'], c['last'], len(d['unconfirmed'])))
+    print('%d items (%d primary) across %d states, %s to %s; %d not confirmed; %d court listings' % (c['items'], c['primary'], c['states'], c['first'], c['last'], len(d['unconfirmed']), len(d['listings'])))
 
 
 if __name__ == '__main__':

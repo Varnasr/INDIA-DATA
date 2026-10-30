@@ -111,6 +111,12 @@ def main():
     }
     co = {r['form']: int(r['applications']) for r in rd('claims_objections.csv') if r['area'] == 'Delhi' and r['period'] == 'up to 2026-09-29'}
     summ['form6_to_0929'] = co.get('Form 6'); summ['form7_to_0929'] = co.get('Form 7')
+    # The last day for claims and the final roll's date, from the latest step of
+    # Delhi's schedule in data/india/process.json, so a moved date reaches the
+    # page with the schedule and is never written into its prose.
+    sch = next(x for x in json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))['schedules'] if x['state'] == 'Delhi')
+    last = [x for x in sch['steps'] if x.get('final')][-1]
+    summ['claims_to'] = last['claims'][1]; summ['final_due'] = last['final']
 
     files = {}
     files['summary.json'] = json.dumps(summ, ensure_ascii=False, indent=1) + '\n'

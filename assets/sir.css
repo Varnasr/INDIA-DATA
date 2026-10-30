@@ -568,6 +568,14 @@ main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
 .process .rresp{font-size:.92rem;color:var(--muted)}
 .process .rresp span{font-weight:700;color:var(--ink)}
 .process .rresp span::after{content:"."}
+/* bulk Form 7 filings: a wide table that scrolls inside its own box */
+.process .bulk table{min-width:980px}
+.process .bulk td,.process .bulk th{vertical-align:top}
+.process .bulk td:nth-child(5),.process .bulk td:nth-child(6){min-width:15rem}
+.process .bulk .nw{white-space:nowrap}
+.process .bulk .btags{display:flex;flex-wrap:wrap;gap:.25rem;margin:0 0 .3rem}
+.process .bulk .btags span{font-size:.75rem;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:0 .45rem}
+.process .bulk tr.bgroup th{font-weight:700;padding-top:1rem;border-bottom:2px solid var(--line)}
 /* tables on a phone: smaller type and padding, and the first column stays in
    view while the rest scrolls sideways */
 @media (max-width:600px){
@@ -954,6 +962,9 @@ html.dyslexic-font .disp .tag{text-transform:none}
 .dcount{font-weight:600}
 .disp .dtags{display:flex;flex-wrap:wrap;gap:.3rem;margin:.3rem 0 0}
 .disp .dtags span{font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.05rem .5rem}
+/* india/disputes/: the hearings and deadlines ahead, above the English-only part of the page */
+.nextcourt{margin:.5rem 0 1.5rem;padding-bottom:.6rem;border-bottom:2px solid var(--line)}
+.nextcourt .nfacts>li>p:first-child{margin-top:0}
 
 /* the places menu opens with the pages most readers come for */
 
@@ -1308,3 +1319,17 @@ body.embed .emsrc{margin:.5rem 0 0;color:var(--muted);font-size:.85rem}
 .follow-note{font-size:.92rem;color:var(--muted)}
 #updates li{margin:.45rem 0}
 #updates .upd-sec{font-weight:600}
+
+/* whether the revision still takes claims in a state, on the reader's date
+   (sir.js): under the head of every state's overview, and on the help page */
+.owin{display:block;background:var(--card);border:1px solid var(--line);border-inline-start:4px solid var(--fill-navy);border-radius:10px;padding:.75rem 1rem;margin:0 0 1.2rem;max-width:var(--measure);overflow-wrap:anywhere}
+.owin.open{border-inline-start-color:var(--fill-teal)}
+.owin[hidden],.owin-all[hidden]{display:none}
+.owin p{margin:.3rem 0}
+.owin .owin-t{font-weight:700;margin-top:0}
+.owin .owin-src{font-size:.85rem;color:var(--muted)}
+.owin .owin-src span{font-weight:600;margin-inline-end:.35rem}
+.owin-all{margin:1rem 0 1.6rem}
+.owin-all .owin-t{font-weight:700;margin:1rem 0 .3rem}
+.owin-pick label{font-weight:600;margin-inline-end:.4rem}
+.owin-pick select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.3rem .5rem;max-width:100%}

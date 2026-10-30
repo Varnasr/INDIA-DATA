@@ -46,7 +46,14 @@
    "url": "https://www.siasat.com/telangana-sir-congress-alleges-vote-deletion-bid-in-musheerabad-3551155/",
    "claim": "Siasat reported that the Telangana Congress complained to the Chief Electoral Officer that a BJP booth agent in Musheerabad had filed about 30 Form 7 applications against a Congress booth agent and his family on forms that were printed in advance. This is the Congress's allegation.",
    "quote": "Kumar said that the applications were pre-printed and prepared in advance, rather than being individually and independently prepared by the concerned applicants. “The circumstances raise serious questions regarding the source from which these forms were obtained, who prepared them, who supplied the information contained in them, and whether the applications were submitted with the knowledge and consent of the persons shown as applicants.” the complaint stated.",
-   "response": "Siasat reported that the Congress asked for an investigation rather than for the allegations to be presumed true, including a forensic examination of whether the forms came from a common source."
+   "response": "Siasat reported that the Congress asked for an investigation rather than for the allegations to be presumed true, including a forensic examination of whether the forms came from a common source.",
+   "bulk": [
+    {
+     "row": "tg-musheerabad",
+     "place": "Hyderabad, Musheerabad, polling station 210",
+     "filer": "A BJP booth agent, as the Congress complaint and the police case describe him."
+    }
+   ]
   },
   {
    "id": "form7-04",
@@ -60,7 +67,14 @@
    "url": "https://thesouthfirst.com/telangana/after-musheerabad-telangana-congress-says-it-found-more-pre-printed-form-7s-aimed-at-deleting-muslim-voters-in-bahadurpura/",
    "claim": "The South First reported that it had seen a Form 7 from a polling station in Aliyabad, in Bahadurpura, with the voter's details printed and the objector's part left blank. The Congress alleged that such forms had been handed to BJP booth agents through the party's constituency in-charges.",
    "quote": "South First has seen one such pre-printed application seeking the deletion of a Muslim voter from a polling station in Aliyabad. It has the voter’s details and address pre-filled, but the applicant’s details are left blank.",
-   "response": "The South First reported that the Chief Electoral Officer, C. Sudharshan Reddy, said at a press briefing that officials would thoroughly verify all Form 7 applications before making any decision."
+   "response": "The South First reported that the Chief Electoral Officer, C. Sudharshan Reddy, said at a press briefing that officials would thoroughly verify all Form 7 applications before making any decision.",
+   "bulk": [
+    {
+     "row": "tg-bahadurpura",
+     "place": "Hyderabad, Bahadurpura (Aliyabad)",
+     "filer": "The Congress alleges the forms were handed to BJP booth agents through the party's constituency in-charges."
+    }
+   ]
   },
   {
    "id": "form7-05",
@@ -74,7 +88,20 @@
    "url": "https://www.deccanchronicle.com/southern-states/telangana/sir-15-pre-printed-form-7-now-appear-in-goshamahal-constituency-1993058",
    "claim": "Deccan Chronicle reported, citing Congress sources, that a BJP booth agent brought 15 pre-printed Form 7s to the booth officer at booth 173 in Goshamahal and that the booth officer refused to accept them.",
    "quote": "Hyderabad: After Musheerabad and Bahadurpura Assembly constituencies, 15-pre-printed Form 7, seeking deletion of Muslim names from voter lists surfaced in Goshamahal constituency. The issue came to light after the local booth level officer (BLO) refused to accept the forms allegedly submitted by BJP booth level agent (BLA).",
-   "response": "Deccan Chronicle reported that the District Election Officer had reportedly directed the Musheerabad ERO to file criminal cases against the booth agent there."
+   "response": "Deccan Chronicle reported that the District Election Officer had reportedly directed the Musheerabad ERO to file criminal cases against the booth agent there.",
+   "bulk": [
+    {
+     "row": "tg-goshamahal-173",
+     "place": "Hyderabad, Goshamahal, booth 173",
+     "count": 15,
+     "unit": "forms",
+     "filer": "A BJP booth agent, according to Congress sources.",
+     "status": [
+      "rejected"
+     ],
+     "outcome": "The booth officer refused the forms."
+    }
+   ]
   },
   {
    "id": "form7-06",
@@ -88,7 +115,16 @@
    "url": "https://www.thenewsminute.com/telangana/owaisi-says-hyderabad-will-see-massive-protests-if-eci-doesnt-act-on-form-7-misuse",
    "claim": "The News Minute reported that AIMIM president Asaduddin Owaisi alleged that Form 7s were being filed to have Muslim voters deleted and warned of protests, and that Congress leaders said the pre-printed forms found in Goshamahal and Bahadurpura were unsigned and were not accepted by booth officers.",
    "quote": "Following the Musheerabad incident, Congress leaders said they also found pre-printed forms seeking deletion of Muslim voters in Goshamahal and Bahadurpura constituencies, but these forms were unsigned and not accepted by the Booth Level Officers (BLOs).",
-   "response": ""
+   "response": "",
+   "bulk": [
+    {
+     "row": "tg-bahadurpura",
+     "status": [
+      "rejected"
+     ],
+     "outcome": "Congress leaders said the forms found in Goshamahal and Bahadurpura were unsigned and booth officers did not accept them."
+    }
+   ]
   },
   {
    "id": "form7-07",
@@ -102,7 +138,23 @@
    "url": "https://www.siasat.com/contested-form-7s-rejected-no-bulk-filings-telangana-deo-3552749/",
    "claim": "Siasat reported, citing PTI, that Hyderabad's District Election Officer R. V. Karnan said the Form 7s in Goshamahal and Musheerabad were not received in bulk and were rejected, the Goshamahal forms because they were unsigned and the Musheerabad ones because the electors were found living at the address.",
    "quote": "Greater Hyderabad Municipal Corporation (GHMC) Commissioner and District Election Officer R. V. Karnan told PTI that the Form 7 applications were not received in bulk but in much smaller numbers. In Goshamahal, the applicant did not sign the submitted forms, making them ineligible for consideration.",
-   "response": "Siasat reported that BJP state president N. Ramchander Rao said no BJP booth agents had submitted any such Form 7 applications, and that the Chief Electoral Officer had said bulk forms from a party had to be properly enquired into and verified."
+   "response": "Siasat reported that BJP state president N. Ramchander Rao said no BJP booth agents had submitted any such Form 7 applications, and that the Chief Electoral Officer had said bulk forms from a party had to be properly enquired into and verified.",
+   "bulk": [
+    {
+     "row": "tg-musheerabad",
+     "status": [
+      "rejected"
+     ],
+     "outcome": "The District Election Officer said the forms were rejected because the electors were found living at the address."
+    },
+    {
+     "row": "tg-goshamahal-173",
+     "status": [
+      "rejected"
+     ],
+     "outcome": "The District Election Officer said the Goshamahal forms were rejected because they were not signed."
+    }
+   ]
   },
   {
    "id": "form7-08",
@@ -130,7 +182,13 @@
    "url": "https://thesouthfirst.com/telangana/sir-telangana-ceo-orders-action-over-bulk-form-7-filings-congress-seeks-sit-probe/",
    "claim": "The South First reported that the Telangana Congress asked the Hyderabad Police Commissioner to register an FIR and set up a Special Investigation Team over pre-filled Form 7s in three constituencies, and to examine the BJP's role. These are the Congress's allegations.",
    "quote": "One such form seen by South First had the voter’s name and address pre-filled while the applicant’s details were blank. The Congress alleged that the forms had been printed in advance and asked the police to establish whether the persons named as applicants had actually signed them or even knew about the applications.",
-   "response": "The South First reported that the Congress said the Police Commissioner had assured it he would study the matter and take action."
+   "response": "The South First reported that the Congress said the Police Commissioner had assured it he would study the matter and take action.",
+   "bulk": [
+    {
+     "row": "tg-bahadurpura",
+     "outcome": "The Congress asked the Hyderabad Police Commissioner for an FIR and a special investigation team over the forms in three constituencies."
+    }
+   ]
   },
   {
    "id": "form7-10",
@@ -144,7 +202,20 @@
    "url": "https://www.deccanchronicle.com/southern-states/telangana/goshamahal-voter-deletion-row-owaisi-seeks-eci-action-1993544",
    "claim": "Deccan Chronicle reported that Asaduddin Owaisi alleged that pre-printed Form 7s against 122 electors, all Muslim, were brought to booth 28 in Goshamahal by a BJP supporter, and that the booth officer refused them. This is AIMIM's allegation.",
    "quote": "We are placing a specific example before the Election Commission from Booth Number 28 in the Goshamahal assembly segment. As part of a deliberate plan, pre-printed Form 7 applications were submitted to delete the names of 122 electors.",
-   "response": "Siasat reported the same day that the Telangana BJP had earlier rejected the allegations by the Congress and AIMIM that its workers submitted such forms."
+   "response": "Siasat reported the same day that the Telangana BJP had earlier rejected the allegations by the Congress and AIMIM that its workers submitted such forms.",
+   "bulk": [
+    {
+     "row": "tg-goshamahal-28",
+     "place": "Hyderabad, Goshamahal, booth 28",
+     "count": 122,
+     "unit": "electors",
+     "filer": "In the name of a BJP supporter, AIMIM alleges.",
+     "status": [
+      "rejected"
+     ],
+     "outcome": "The booth officer refused them, AIMIM said."
+    }
+   ]
   },
   {
    "id": "form7-11",
@@ -158,7 +229,18 @@
    "url": "https://www.deccanchronicle.com/southern-states/telangana/first-fir-related-to-form-7-1993718",
    "claim": "Deccan Chronicle reported that the Musheerabad ERO filed a police complaint, and Chikkadpally police registered a case, against a BJP booth agent who tried to submit 30 pre-printed Form 7s, the first such case in Telangana.",
    "quote": "The case was booked under BNS Sections 217 (giving false information to a public servant) and 318 (2) (cheating) and Section 31 of the Representation of People Act (making false declarations). “The BLO concerned and BLO supervisor collectively refused to receive the bulk forms in spite of repeated requests from the said BLA of BJP and have not given any acknowledgement in token of receipt…,” the FIR copy read.",
-   "response": "Deccan Chronicle reported that the Congress welcomed the case and asked the police to find who printed and supplied the forms."
+   "response": "Deccan Chronicle reported that the Congress welcomed the case and asked the police to find who printed and supplied the forms.",
+   "bulk": [
+    {
+     "row": "tg-musheerabad",
+     "count": 30,
+     "unit": "forms",
+     "status": [
+      "police"
+     ],
+     "outcome": "The registration officer complained to the police and Chikkadpally police registered a case against the booth agent."
+    }
+   ]
   },
   {
    "id": "form7-12",
@@ -172,7 +254,12 @@
    "url": "https://telanganatoday.com/police-probe-fake-form-7-applications-seeking-deletion-of-31-voters-in-musheerabad",
    "claim": "Telangana Today reported that Chikkadpally police were checking the forms, signatures and voter details in the Musheerabad case and whether similar forms were filed elsewhere, and that the forms had reportedly been rejected.",
    "quote": "Police officials are verifying the forms, signatures, and voter details and are also looking into who prepared and submitted the applications and whether others were involved. Officials are also checking whether similar applications were filed elsewhere. Meanwhile, the disputed applications have reportedly been rejected following scrutiny.",
-   "response": ""
+   "response": "",
+   "bulk": [
+    {
+     "row": "tg-musheerabad"
+    }
+   ]
   },
   {
    "id": "form7-13",
@@ -242,7 +329,18 @@
    "url": "https://www.nationalheraldindia.com/politics/form-7-flashpoint-bengal-sees-clashes-rival-claims-of-voter-roll-sabotage",
    "claim": "National Herald reported that Trinamool workers stopped a vehicle in Khatra, Bankura said to carry thousands of pre-filled Form 7s, that police seized it and began an inquiry, and that both parties traded allegations over bulk Form 7s on the last day for filing.",
    "quote": "The latest confrontations follow a flashpoint last week in Bankura’s Khatra subdivision, where TMC workers intercepted a vehicle said to be carrying thousands of pre-filled Form-7s. Police seized the vehicle and began an inquiry after TMC alleged the forms were intended to erase “legitimate voters” under cover of the SIR.",
-   "response": "National Herald reported that the BJP alleged its workers were attacked and prevented from filing forms inside government offices."
+   "response": "National Herald reported that the BJP alleged its workers were attacked and prevented from filing forms inside government offices.",
+   "bulk": [
+    {
+     "row": "wb-khatra",
+     "place": "Bankura, Khatra",
+     "filer": "The report does not say who filed them. Trinamool workers stopped the vehicle carrying them.",
+     "status": [
+      "police"
+     ],
+     "outcome": "Police seized the vehicle and began an inquiry."
+    }
+   ]
   },
   {
    "id": "form7-18",
@@ -270,7 +368,22 @@
    "url": "https://scroll.in/article/1090187/scroll_in",
    "claim": "Scroll reported that during Assam's Special Revision a booth officer in Karimganj North was handed objections against 133 voters on forms she described as half printed and half handwritten, and that hearings were suspended in three Nagaon constituencies after complaints of fake Form 7s.",
    "quote": "In several Muslim-majority districts and areas of Assam, bulk objections have been filed against voters, seeking to strike their names off the electoral roll. In Nagaon district, the hearing process has been suspended in three Assembly constituencies after complaints of fake Form 7 applications.",
-   "response": "Scroll quoted a senior Commission official in Guwahati saying a voter can file any number of objections but that an ERO reviews them individually when one person files more than five."
+   "response": "Scroll quoted a senior Commission official in Guwahati saying a voter can file any number of objections but that an ERO reviews them individually when one person files more than five.",
+   "bulk": [
+    {
+     "row": "as-karimganj",
+     "place": "Karimganj North",
+     "count": 133,
+     "unit": "electors",
+     "filer": "In the name of one elector, who told Scroll he had not filed them."
+    },
+    {
+     "row": "as-nagaon",
+     "place": "Nagaon, three constituencies",
+     "filer": "The report does not say who filed them.",
+     "outcome": "Hearings were suspended in three constituencies after complaints of fake Form 7s."
+    }
+   ]
   },
   {
    "id": "form7-20",
@@ -284,7 +397,13 @@
    "url": "https://scroll.in/article/1090212/bjp-workers-in-assam-say-their-names-used-to-seek-mass-voter-deletion-without-their-knowledge",
    "claim": "Scroll reported that at least seven people named as objectors on Form 7s in Assam, some of them BJP booth agents and members, said they had not filed the objections.",
    "quote": "Scroll found at least seven people who denied having filed the complaints, even when their names, voter identity cards and phone numbers had been used in the objection forms.",
-   "response": "Scroll quoted BJP MP Kamakhya Prasad Tasa as saying anyone can file objections and that it is for the Election Commission to take a final call."
+   "response": "Scroll quoted BJP MP Kamakhya Prasad Tasa as saying anyone can file objections and that it is for the Election Commission to take a final call.",
+   "bulk": [
+    {
+     "row": "as-state",
+     "outcome": "At least seven people named as objectors, some of them BJP booth agents and members, said they had not filed the objections."
+    }
+   ]
   },
   {
    "id": "form7-21",
@@ -298,7 +417,14 @@
    "url": "https://scroll.in/latest/1090322/nothing-to-hide-assam-cm-says-he-has-told-bjp-members-to-file-complaints-against-miya-voters",
    "claim": "Scroll reported, citing The Indian Express, that Assam Chief Minister Himanta Biswa Sarma said he had told BJP members to file Form 7s during the Special Revision.",
    "quote": "“There is nothing to hide about this,” he was quoted by the newspaper as saying. “I have held meetings, I have done video conferences, and I have told people that, wherever possible, they should fill Form 7s.",
-   "response": ""
+   "response": "",
+   "bulk": [
+    {
+     "row": "as-state",
+     "place": "Assam",
+     "filer": "BJP members, the Chief Minister said. He said he had told them to fill Form 7s wherever possible."
+    }
+   ]
   },
   {
    "id": "form7-22",
@@ -312,7 +438,16 @@
    "url": "https://scroll.in/latest/1090665/scroll_in",
    "claim": "Scroll reported, citing PTI, that after Assam's final roll the Chief Minister said several deletions had been made on complaints filed by BJP workers.",
    "quote": "“As far as possible, our party members filed complaints,” the BJP leader said. “Names have been struck off based on these.”",
-   "response": ""
+   "response": "",
+   "bulk": [
+    {
+     "row": "as-state",
+     "status": [
+      "deleted"
+     ],
+     "outcome": "The Chief Minister said after the final roll that several deletions had been made on complaints filed by BJP workers."
+    }
+   ]
   },
   {
    "id": "form7-23",
@@ -340,7 +475,15 @@
    "url": "https://www.thequint.com/elections/muslim-voters-alwar-rolls-ec-probe-avoidance",
    "claim": "The Quint reported that thousands of Form 7s in Alwar were filed in the names of BJP booth agents, several of whom said their signatures were forged, and that no FIR or inquiry had been announced a month later.",
    "quote": "As per copies of forms, seen by The Quint, they were overwhelmingly filed under the names of Booth Level Agents (BLAs) working for the Bharatiya Janata Party (BJP) and predominantly targeted Muslim voters in Rural Alwar. Yet no FIR, no administrative inquiry, no forensic audit of handwriting or digital origin has been announced in Alwar.",
-   "response": "The Quint reported that calls to the District Magistrate and Sub-Divisional Magistrate for comment went unanswered."
+   "response": "The Quint reported that calls to the District Magistrate and Sub-Divisional Magistrate for comment went unanswered.",
+   "bulk": [
+    {
+     "row": "rj-alwar",
+     "place": "Alwar",
+     "filer": "In the names of BJP booth agents, several of whom said their signatures were forged.",
+     "outcome": "No FIR or inquiry had been announced a month later."
+    }
+   ]
   },
   {
    "id": "form7-25",
@@ -354,7 +497,20 @@
    "url": "https://newslaundry.com/2026/02/11/inside-the-organised-attempt-to-delete-15000-voters-in-gujarats-somnath",
    "claim": "Newslaundry reported that 15,663 Form 7s in Somnath were filed by 269 people on forms with the voter's details printed and the objector's details handwritten, and that six named objectors filed affidavits saying they had not filed them.",
    "quote": "Of the 15,663 Form-7 applications, a staggering number appeared to be pre-filled and then submitted by just 269 people. Newslaundry has reviewed copies of Form-7s where voter details – such as name, mobile number, constituency, EPIC number, and booth number – are printed in English, while the objectors' details are handwritten in Gujarati.",
-   "response": "Newslaundry reported that the District Election Officer, V. N. Upadhyay, said he had deployed six AEROs to verify the objections and assured that no name would be deleted arbitrarily."
+   "response": "Newslaundry reported that the District Election Officer, V. N. Upadhyay, said he had deployed six AEROs to verify the objections and assured that no name would be deleted arbitrarily.",
+   "bulk": [
+    {
+     "row": "gj-somnath",
+     "place": "Gir Somnath, Somnath",
+     "count": 15663,
+     "unit": "forms",
+     "filer": "269 people, each filing 50 or more. Six of those named as objectors said in affidavits that they had not filed them.",
+     "status": [
+      "inquiry"
+     ],
+     "outcome": "The District Election Officer said he had deployed six assistant registration officers to verify the objections."
+    }
+   ]
   },
   {
    "id": "form7-26",
@@ -368,7 +524,32 @@
    "url": "https://www.deccanherald.com/india/gujarat/petitions-seek-investigation-into-thousands-of-fake-objection-pleas-during-sir-gujarat-high-court-issues-notice-3996966",
    "claim": "Deccan Herald reported that the Gujarat High Court issued notice to the Commission and the state on two petitions seeking a Special Investigation Team inquiry into Form 7 objections filed during the SIR.",
    "quote": "The petitions have sought investigation by the Special Investigation Team. They have claimed that as part of a \"larger conspiracy\" thousands of illegal objection applications under form-7 were filed seeking deletion of voters' names during the recently concluded Special Intensive Revision (SIR) in the state.",
-   "response": "Deccan Herald reported that the matter was posted for further hearing on 7 July."
+   "response": "Deccan Herald reported that the matter was posted for further hearing on 7 July.",
+   "bulk": [
+    {
+     "row": "gj-kodinar",
+     "place": "Gir Somnath, Kodinar",
+     "count": 6722,
+     "unit": "forms",
+     "filer": "About 47 people, the petition says.",
+     "status": [
+      "court"
+     ],
+     "outcome": "The High Court issued notice on the petition, which seeks a special investigation team."
+    },
+    {
+     "row": "gj-sidhpur",
+     "place": "Sidhpur",
+     "count": 140,
+     "count_q": "about",
+     "unit": "forms",
+     "filer": "One person, the petitioners say.",
+     "status": [
+      "court"
+     ],
+     "outcome": "The High Court issued notice on the petition, which seeks a special investigation team."
+    }
+   ]
   },
   {
    "id": "form7-27",
@@ -382,7 +563,18 @@
    "url": "https://www.etvbharat.com/en/state/fake-objections-filed-to-delete-voter-names-in-bhopal-probe-ordered-enn26013005659",
    "claim": "ETV Bharat reported that Bhopal's Collector ordered a probe after a man named as objector on Form 7s in Bhopal South-West denied filing them, and that officials found incorrect or fake objector details in several of the district's 9,037 Form 7s.",
    "quote": "District officials said that across seven Assembly constituencies, a total of 9,037 objections have been filed through Form 7 under the SIR process. While the number is relatively small compared to the total electorate, several cases have been found to involve incorrect or fake complainant details, prompting further scrutiny.",
-   "response": "ETV Bharat quoted District Election Officer Kaushlendra Vikram Singh saying no one's name would be deleted without verification."
+   "response": "ETV Bharat quoted District Election Officer Kaushlendra Vikram Singh saying no one's name would be deleted without verification.",
+   "bulk": [
+    {
+     "row": "mp-bhopal",
+     "place": "Bhopal South-West",
+     "filer": "In the name of one man, who denied filing the seven objections.",
+     "status": [
+      "inquiry"
+     ],
+     "outcome": "The Collector ordered a probe, and officials found incorrect or fake objector details in several of the district's forms."
+    }
+   ]
   },
   {
    "id": "form7-28",
@@ -396,7 +588,20 @@
    "url": "https://www.siasat.com/sir-544-muslim-voters-marked-for-deletion-in-up-village-leads-to-one-man-3438394/",
    "claim": "Siasat reported, citing The Indian Express, that Form 7s against 544 voters of a Shamli village were found with a booth officer, already printed with voters' EPIC numbers, and that the District Magistrate said the forms were fake and the probe found nothing.",
    "quote": "The forms were allegedly already printed with Electors’ Photo Identity Card (EPIC) numbers and other personal details. In the forms, the applicant cited relocation from the village as the reason for seeking their deletion from the electoral rolls.",
-   "response": "DM Arvind Kumar Chauhan ordered a probe and later said that the case “didn’t have any substance.” “We got an investigation done and found nothing,” he added."
+   "response": "DM Arvind Kumar Chauhan ordered a probe and later said that the case “didn’t have any substance.” “We got an investigation done and found nothing,” he added.",
+   "bulk": [
+    {
+     "row": "up-shamli",
+     "place": "Shamli, Louharipur",
+     "count": 544,
+     "unit": "electors",
+     "filer": "All the forms carried one applicant's name, and officials could not find him. They were found with a booth officer.",
+     "status": [
+      "inquiry"
+     ],
+     "outcome": "The District Magistrate said the forms were fake and the probe found nothing."
+    }
+   ]
   },
   {
    "id": "form7-29",
@@ -410,7 +615,18 @@
    "url": "https://dailypioneer.com/news/uttarakhand-congress-alleges-form-7-misuse-to-delete-voters-during-sir-approaches-ec",
    "claim": "The Pioneer reported that a Uttarakhand Congress delegation told the Chief Electoral Officer that one person had filed objections against about 6,400 voters and about 1,200 people had filed more than ten each. These are the Congress's figures.",
    "quote": "\"Our data analysis revealed that a single individual has filed objections against the names of approximately 6,400 people. There are about 1,200 individuals who have submitted more than 10 objections each. An objection has even been filed against the name of a sitting Congress MLA,\" Rawat said.",
-   "response": "The Pioneer reported that CEO V. V. R. C. Purushottam said the revision followed the rules and that observers had been sent to districts with many objections, and that Additional CEO Vijay Kumar Jogdande said an ERO must scrutinise cases where one person seeks the deletion of more than five names."
+   "response": "The Pioneer reported that CEO V. V. R. C. Purushottam said the revision followed the rules and that observers had been sent to districts with many objections, and that Additional CEO Vijay Kumar Jogdande said an ERO must scrutinise cases where one person seeks the deletion of more than five names.",
+   "bulk": [
+    {
+     "row": "uk-state",
+     "place": "Uttarakhand",
+     "count": 6400,
+     "count_q": "about",
+     "unit": "electors",
+     "filer": "One person, the Congress says. About 1,200 people filed more than ten each.",
+     "outcome": "The Chief Electoral Officer said observers had been sent to districts with many objections."
+    }
+   ]
   },
   {
    "id": "form7-30",
@@ -424,7 +640,20 @@
    "url": "https://www.newslaundry.com/2026/08/28/exclusive-bjp-agents-identities-misused-to-file-mass-objections-against-haridwars-muslim-voters",
    "claim": "Newslaundry reported that 35 people named as objectors on 1,657 Form 7s in Jhabrera, 31 of them BJP booth agents, said in affidavits that their names, EPIC numbers and signatures had been misused.",
    "quote": "In affidavits submitted to the Haridwar district administration on August 18 and 19, each of the 35 said an “unknown person” used their name, EPIC number and a forged signature to file Form 7 applications – which are requests seeking the deletion of voters.",
-   "response": "Newslaundry quoted Jhabrera ERO Devendra Singh Negi saying the objections were cancelled and the voters would not be deleted, and that the Election Commission would not order any investigation and those whose names were misused should file an FIR."
+   "response": "Newslaundry quoted Jhabrera ERO Devendra Singh Negi saying the objections were cancelled and the voters would not be deleted, and that the Election Commission would not order any investigation and those whose names were misused should file an FIR.",
+   "bulk": [
+    {
+     "row": "uk-jhabrera",
+     "place": "Haridwar, Jhabrera",
+     "count": 1657,
+     "unit": "forms",
+     "filer": "In the names of 35 people, 31 of them BJP booth agents, who said in affidavits that their names had been misused.",
+     "status": [
+      "withdrawn"
+     ],
+     "outcome": "The registration officer said the objections were cancelled after those named sought to withdraw them."
+    }
+   ]
   },
   {
    "id": "form7-31",
@@ -438,7 +667,15 @@
    "url": "https://m.thewire.in/article/rights/delhi-sir-bjp-agent-form-7-requests-ecinet-limit-10-objections",
    "claim": "The Wire reported, citing The Hindu, that Form 10 lists for 21 to 27 September showed four people in Delhi filing more than ten Form 7s a day through the Commission's ECINET portal, which does not enforce the limit of ten a day for booth agents.",
    "quote": "The report also shows that booth-level agents (BLAs) bypassed the Election Commission’s cap on submitting only 10 applications a day during the claims and objections phase by filing through the panel’s ECINET portal, which has no such restriction in place. The ECINET software has no mechanism to impose the prescribed limit of 10.",
-   "response": ""
+   "response": "",
+   "bulk": [
+    {
+     "row": "dl-ecinet",
+     "place": "Karol Bagh, Patel Nagar, Delhi Cantonment and Tri Nagar",
+     "filer": "Four people, each filing more than ten in a day through the ECINET portal. The report names one of them as a BJP booth agent.",
+     "outcome": "The portal does not enforce the limit of ten a day for booth agents."
+    }
+   ]
   },
   {
    "id": "form7-32",
@@ -452,7 +689,37 @@
    "url": "https://www.thenewsminute.com/karnataka/five-firs-filed-across-karnataka-over-alleged-misuse-of-form-7-bjp-threatens-protest",
    "claim": "The News Minute reported that five FIRs were registered in Belagavi, Bidar and Mysuru over Form 7s alleged to carry false information or forged signatures, and that in Belagavi the voters' details had been filled in beforehand with the objector's name handwritten or blank.",
    "quote": "The names and other details of voters had already been filled in, while the names of the persons shown as objectors were either handwritten or left blank. None of the five FIRs filed in connection with the Karnataka cases invokes the Representation of the People Act.",
-   "response": "The News Minute reported that Karnataka CEO V. Anbu Kumar said that although 84,900 Form 7s had been received, no one had been taken off the rolls."
+   "response": "The News Minute reported that Karnataka CEO V. Anbu Kumar said that although 84,900 Form 7s had been received, no one had been taken off the rolls.",
+   "bulk": [
+    {
+     "row": "ka-belagavi",
+     "place": "Belagavi North",
+     "status": [
+      "police"
+     ],
+     "outcome": "Police registered an FIR at the Belagavi Market police station on 30 September. The voters' details on the forms had been filled in beforehand."
+    },
+    {
+     "row": "ka-bidar",
+     "place": "Bidar",
+     "count": 3244,
+     "unit": "electors",
+     "filer": "The FIR names 32 people.",
+     "status": [
+      "police"
+     ],
+     "outcome": "Police registered an FIR on 1 October on a complaint that the forms carried forged signatures and falsely showed the voters as shifted or absent."
+    },
+    {
+     "row": "ka-mysuru",
+     "place": "Mysuru",
+     "filer": "The FIR names three people and others.",
+     "status": [
+      "police"
+     ],
+     "outcome": "Police at the Narasimharaja police station registered a case on a complaint that the forms carried false information."
+    }
+   ]
   },
   {
    "id": "form7-33",
@@ -510,7 +777,21 @@
    "quote": "विशेष गहन पुनरीक्षण (SIR) प्रक्रिया के दौरान 28 मतदाताओं के नाम मतदाता सूची से हटाने के लिए कथित तौर पर फर्जी तरीके से Form-7 दाखिल किए जाने के मामले में न्यायिक मजिस्ट्रेट प्रथम, हल्द्वानी ने थाना बनभूलपुरा पुलिस को एफआईआर दर्ज कर विवेचना करने के निर्देश दिए हैं। ... हालांकि, अदालत ने स्पष्ट किया कि मतदाता सूची में संशोधन से संबंधित यह उपचार और कथित अपराध की पुलिस जांच दो अलग-अलग विषय हैं।",
    "response": "Haldwani Express News reported that the police had told the court the complaint concerned SIR Form 7s and that the complainant could object before the assistant returning officer.",
    "second_url": "https://citynewsuttarakhand.com/allegation-of-removing-names-of-28-voters-from-fake-form-7-court-orders-fir/",
-   "note": "City News Uttarakhand (9 Oct) carries nearly identical text, so both probably come from one note by the petitioner's lawyers; it is not an independent second report. No Amar Ujala, Dainik Jagran or Hindustan report was found (those sites are not reachable by this agent's search). Both name the complainant, a BLA-2 of ward 31, Indranagar; the draft does not. The Form 7s were filed on 12 August 2026; police complaint 24 August; BNSS 175(3) application 15 September."
+   "note": "City News Uttarakhand (9 Oct) carries nearly identical text, so both probably come from one note by the petitioner's lawyers; it is not an independent second report. No Amar Ujala, Dainik Jagran or Hindustan report was found (those sites are not reachable by this agent's search). Both name the complainant, a BLA-2 of ward 31, Indranagar; the draft does not. The Form 7s were filed on 12 August 2026; police complaint 24 August; BNSS 175(3) application 15 September.",
+   "bulk": [
+    {
+     "row": "uk-haldwani",
+     "place": "Haldwani, part 134",
+     "count": 28,
+     "unit": "electors",
+     "filer": "Online, in the name of a party's booth agent who said he had not filed them.",
+     "status": [
+      "court",
+      "police"
+     ],
+     "outcome": "A magistrate ordered the Banbhoolpura police on 6 October to register an FIR and investigate."
+    }
+   ]
   },
   {
    "id": "form7-37",
@@ -569,7 +850,13 @@
    "url": "https://english.punjabkesari.com/india/sir-row-bjp-jds-delegation-visits-jayanagar-police-station-in-bengaluru-demands-withdrawal-of-fir-against-workers",
    "claim": "A BJP and JD(S) delegation led by Jayanagar MLA C K Ramamurthy went to Jayanagar police station in Bengaluru and demanded that the FIR against BJP workers over Form 7 applications be withdrawn, IANS reported. They warned of an intensified agitation if it was not, and alleged that applications meant to be confidential had been handed to Congress workers.",
    "quote": "The delegation demanded that the FIR be withdrawn immediately.",
-   "response": "No police response was reported."
+   "response": "No police response was reported.",
+   "bulk": [
+    {
+     "row": "ka-jayanagar",
+     "outcome": "A BJP and JD(S) delegation demanded that the FIR be withdrawn."
+    }
+   ]
   },
   {
    "id": "form7-41",
@@ -584,7 +871,20 @@
    "claim": "Police at Shanivarasanthe in Kodagu district registered a case against five BJP booth level workers on a complaint that they sought the deletion of 64 voters in Byadagutta village through Form 7 applications, IANS reported.",
    "quote": "Police have registered a case against the five persons and are investigating the allegations.",
    "response": "",
-   "note": "Date of the FIR not given; the date is the publication date. The page says Madikeri district, whose headquarters it is; the district is Kodagu. The complainant and the accused are private persons and are not named."
+   "note": "Date of the FIR not given; the date is the publication date. The page says Madikeri district, whose headquarters it is; the district is Kodagu. The complainant and the accused are private persons and are not named.",
+   "bulk": [
+    {
+     "row": "ka-kodagu",
+     "place": "Kodagu, Byadagutta village",
+     "count": 64,
+     "unit": "electors",
+     "filer": "Five BJP booth level workers, the complaint alleges.",
+     "status": [
+      "police"
+     ],
+     "outcome": "Police at Shanivarasanthe registered a case."
+    }
+   ]
   },
   {
    "id": "form7-42",
@@ -599,7 +899,20 @@
    "claim": "Jayanagar police in Bengaluru registered an FIR against two BJP booth level agents on a complaint by Karnataka Mahila Congress president Sowmya Reddy, alleging Form 7 applications with forged signatures to delete 5,698 voters by falsely claiming they had shifted.",
    "quote": "Sections 61(2)(b), 217(b), 319(2), 336(2), 340(2) r/w 3(5) of BNS, 2023",
    "response": "No response from the BJP, the Chief Electoral Officer or the Commission was reported.",
-   "note": "FIR registered on the night of 5 October; its period is 16 June to 5 October. The booth agents and two residents are named on the page and are left out."
+   "note": "FIR registered on the night of 5 October; its period is 16 June to 5 October. The booth agents and two residents are named on the page and are left out.",
+   "bulk": [
+    {
+     "row": "ka-jayanagar",
+     "place": "Bengaluru, Jayanagar",
+     "count": 5698,
+     "unit": "electors",
+     "filer": "Two BJP booth level agents and others, the complaint alleges.",
+     "status": [
+      "police"
+     ],
+     "outcome": "Jayanagar police registered an FIR on a complaint that the forms carried forged signatures."
+    }
+   ]
   },
   {
    "id": "form7-43",
@@ -627,7 +940,20 @@
    "claim": "A BJP leader in Koppa, Chikkamagaluru, wrote on 1 October to withdraw Form 7 objections seeking the deletion of 243 voters filed on 21 and 22 September, saying the voters were found on re-verification to live within the polling stations' areas, Free Press Journal reported.",
    "quote": "\"withdrawing the Form-7 objections submitted on September 21 and 22\"",
    "response": "No response from the election authorities was reported.",
-   "note": "The article describes the five who filed as BJP taluk leaders. None is named here. The religion of the 243 voters is reported as an allegation and is left out."
+   "note": "The article describes the five who filed as BJP taluk leaders. None is named here. The religion of the 243 voters is reported as an allegation and is left out.",
+   "bulk": [
+    {
+     "row": "ka-koppa",
+     "place": "Chikkamagaluru, Koppa",
+     "count": 243,
+     "unit": "electors",
+     "filer": "BJP taluk leaders, the report says. One of them wrote on 1 October to withdraw the objections.",
+     "status": [
+      "withdrawn"
+     ],
+     "outcome": "The BJP leader said the voters were found on re-verification to live within the polling stations' areas."
+    }
+   ]
   },
   {
    "id": "form7-45",
@@ -687,7 +1013,33 @@
    "quote": "The concerned officer will decide.",
    "response": "The State said the allegations of impersonation and forgery needed investigation and that the agents filed more applications than allowed. The complainant's counsel said the bulk filing was a conspiracy aimed at OBC and SC/ST voters.",
    "second_url": "https://www.livelaw.in/high-court/karnataka-high-court/karnataka-high-court-stays-fir-against-bjp-booth-level-agents-bulk-fake-form7-filings-554041",
-   "note": "Justice Anant Ramanath Hegde, Friday 9 October; next hearing 27 October 2026. The Vyalikaval FIR concerns 778 voters in Ward 64 and the Yeshwanthapura FIR 136 voters in Ward 45. The petitioners are named in the case titles and are given by role here."
+   "note": "Justice Anant Ramanath Hegde, Friday 9 October; next hearing 27 October 2026. The Vyalikaval FIR concerns 778 voters in Ward 64 and the Yeshwanthapura FIR 136 voters in Ward 45. The petitioners are named in the case titles and are given by role here.",
+   "bulk": [
+    {
+     "row": "ka-malleshwaram-64",
+     "place": "Bengaluru, Malleshwaram, ward 64",
+     "count": 778,
+     "unit": "electors",
+     "filer": "A BJP booth agent, the FIR alleges.",
+     "status": [
+      "court",
+      "police"
+     ],
+     "outcome": "The FIR was registered at Vyalikaval police station. The High Court stayed the proceedings because the registration officer had not yet decided the forms."
+    },
+    {
+     "row": "ka-malleshwaram-45",
+     "place": "Bengaluru, Malleshwaram, ward 45",
+     "count": 136,
+     "unit": "electors",
+     "filer": "A BJP booth agent, the FIR alleges.",
+     "status": [
+      "court",
+      "police"
+     ],
+     "outcome": "The FIR was registered at Yeshwanthapura police station. The High Court stayed the proceedings because the registration officer had not yet decided the forms."
+    }
+   ]
   },
   {
    "id": "form7-49",
@@ -704,7 +1056,20 @@
    "quote": "Till then, the respondent-police/IO shall not take any coercive steps against the petitioners.",
    "response": "The Government Pleader sought time to file objections and the latest investigation report.",
    "second_url": "https://www.barandbench.com/news/litigation/sir-karnataka-high-court-stays-probe-against-bjps-ravi-patil-booked-for-attempt-to-delete-muslim-voters",
-   "note": "Justice Venkatesh Naik T, sitting at Dharwad, made both orders. The protection of Thursday 8 October: LiveLaw (Sebin James, 8 October 2026, 9:28 pm IST) and Bar and Bench (Siddesh M S, 8 October 2026, 14:11 UTC), both of which name Justice Venkatesh Naik T. The stay of Tuesday 13 October: Bar and Bench (Siddesh M S, 14 October 2026, 03:18 UTC), and The News Minute (13 October 2026), which also names Justice Venkatesh Naik T and says the coordinate bench of 9 October sat in Bengaluru. All read in full from the JSON-LD articleBody with curl on 24 October 2026. Bar and Bench's report of 14 October says the protection of 8 October came from 'another bench'; its own report of 8 October and LiveLaw name the same judge, so that line is an error and is not followed. Continues the Belagavi FIR in form7-32. The petitioner is a BJP functionary and is named by role; the complainant, a private person, is not named."
+   "note": "Justice Venkatesh Naik T, sitting at Dharwad, made both orders. The protection of Thursday 8 October: LiveLaw (Sebin James, 8 October 2026, 9:28 pm IST) and Bar and Bench (Siddesh M S, 8 October 2026, 14:11 UTC), both of which name Justice Venkatesh Naik T. The stay of Tuesday 13 October: Bar and Bench (Siddesh M S, 14 October 2026, 03:18 UTC), and The News Minute (13 October 2026), which also names Justice Venkatesh Naik T and says the coordinate bench of 9 October sat in Bengaluru. All read in full from the JSON-LD articleBody with curl on 24 October 2026. Bar and Bench's report of 14 October says the protection of 8 October came from 'another bench'; its own report of 8 October and LiveLaw name the same judge, so that line is an error and is not followed. Continues the Belagavi FIR in form7-32. The petitioner is a BJP functionary and is named by role; the complainant, a private person, is not named.",
+   "bulk": [
+    {
+     "row": "ka-belagavi",
+     "count": 198,
+     "count_q": "about",
+     "unit": "forms",
+     "filer": "A BJP functionary and two supporters, the complaint alleges.",
+     "status": [
+      "court"
+     ],
+     "outcome": "The High Court told the police to take no coercive steps, and on 13 October stayed the investigation until the next hearing."
+    }
+   ]
   },
   {
    "id": "form7-50",
@@ -734,7 +1099,17 @@
    "claim": "The Wire reported that on 16 January 2026, during West Bengal's extended claims period, the Commission told the state's Chief Electoral Officer in writing that the law set no limit on the number of Form 7 objections one voter could file, and that on 9 October it capped them at ten per voter for a whole claims period, in an instruction to every state. The October instruction cites a paragraph of the Manual on Electoral Rolls, 2023 against entertaining objections presented in bulk by an individual, which the January letter did not mention. Reading the Chief Electoral Officer's daily bulletins, the report counts 3,143 objections from party agents by 20 January, 2,926 from BJP agents and 217 from Trinamool agents, and finds that 2,539 of them first appear in the bulletin dated the day after the extended window closed on 19 January.",
    "quote": "Currently, there are no such restrictions on number of Form 7 to be filled/submitted by an elector of that constituency to ERO/AERO as per law,",
    "response": "The report says the Commission has not said whether objections filed in January will be looked at again.",
-   "note": "By Aparna Bhattacharya, posted 22 October 2026, 6:38 pm IST, read in full on 23 October 2026 from The Wire's content API with curl. The quote is from the Commission's letter of 16 January as the report prints it. The report names private persons who received notices, and they are not named here. The report notes the late entries may have been received by 19 January and entered late."
+   "note": "By Aparna Bhattacharya, posted 22 October 2026, 6:38 pm IST, read in full on 23 October 2026 from The Wire's content API with curl. The quote is from the Commission's letter of 16 January as the report prints it. The report names private persons who received notices, and they are not named here. The report notes the late entries may have been received by 19 January and entered late.",
+   "bulk": [
+    {
+     "row": "wb-agents",
+     "place": "West Bengal",
+     "count": 3143,
+     "unit": "forms",
+     "filer": "Party agents, 2,926 of the objections from BJP agents and 217 from Trinamool agents.",
+     "outcome": "2,539 of them first appear in the bulletin dated the day after the extended window closed on 19 January. The Commission has not said whether objections filed in January will be looked at again."
+    }
+   ]
   },
   {
    "id": "form7-52",
@@ -781,7 +1156,20 @@
    "quote": "Of the 4,390 names missing from Kichha’s final electoral roll, 3,720 had no objections filed against them. The ERO deleted these voters on the basis of logical discrepancies, a mismatch in voter data that the ECI believes requires additional verification before the electoral roll is finalised.",
    "response": "The Kichha Electoral Registration Officer, Gaurav Pandey, neither confirmed nor denied the agent's account, would not say whether the Commission had directed him, and said the deletions followed the Commission's rules. Newslaundry said the Commission acknowledged its questions and did not answer them, and that it had asked the Chief Electoral Officer why objections were accepted after the deadline. The Congress MLA for Kichha, Tilak Raj Behar, said the objections rested on false information. The report does not say how it established the electors' religion.",
    "second_url": "https://www.newslaundry.com/2026/10/24/a-bjp-worker-in-uttarakhand-objected-voters-in-kichha-who-never-knew-him-are-off-the-roll",
-   "note": "By Ashwine Kumar Singh and Basant Kumar, published 24 October 2026, 2:41 pm IST, read in full from the page's JSON-LD articleBody with curl on 25 October 2026. The second URL is part two of the same investigation, published at 3:03 pm IST and also read in full, in which electors deleted after his objections say the notices they received gave other reasons, such as wrong mapping to the 2002-03 roll, and some were told to file Form 6. The reports name the agent and the electors, and the site does not. The 6,000 is the agent's own figure. The site's own Kichha case page carries the constituency's draft figures."
+   "note": "By Ashwine Kumar Singh and Basant Kumar, published 24 October 2026, 2:41 pm IST, read in full from the page's JSON-LD articleBody with curl on 25 October 2026. The second URL is part two of the same investigation, published at 3:03 pm IST and also read in full, in which electors deleted after his objections say the notices they received gave other reasons, such as wrong mapping to the 2002-03 roll, and some were told to file Form 6. The reports name the agent and the electors, and the site does not. The 6,000 is the agent's own figure. The site's own Kichha case page carries the constituency's draft figures.",
+   "bulk": [
+    {
+     "row": "uk-kichha",
+     "place": "Udham Singh Nagar, Kichha",
+     "count": 5359,
+     "unit": "forms",
+     "filer": "A BJP booth level agent. The count is of his objections that were accepted.",
+     "status": [
+      "deleted"
+     ],
+     "outcome": "About 670 of the 4,390 names on the draft and missing from the final roll had Form 7 objections against them, 509 of them his."
+    }
+   ]
   },
   {
    "id": "form7-55",
@@ -797,7 +1185,20 @@
    "claim": "The Dharavi police registered a case under Section 31 of the Representation of the People Act, 1950 against a resident who had submitted 24 Form 7 applications in one day in the 178-Dharavi constituency, above the Election Commission's limit of ten a day, the Brihanmumbai Municipal Corporation said on 24 October, The Hindu reported. The corporation alleged that the applications carried false and incorrect information. Mumbai's draft rolls were published on 31 August and claims and objections ran to 26 October.",
    "quote": "Under the ECI’s guidelines, an individual can submit a maximum of 10 Form 7 applications per day.",
    "response": "The report gives no account from the accused. Section 31 covers anyone who knowingly makes a false statement or declaration in connection with the roll.",
-   "note": "By Yohaan Varghese in The Hindu, published 25 October 2026, 12:25 am IST, read in full from the page's JSON-LD articleBody with curl on 25 October 2026. The report names the accused and his address, and the site does not. It does not say which voters the applications concerned or how many have been decided."
+   "note": "By Yohaan Varghese in The Hindu, published 25 October 2026, 12:25 am IST, read in full from the page's JSON-LD articleBody with curl on 25 October 2026. The report names the accused and his address, and the site does not. It does not say which voters the applications concerned or how many have been decided.",
+   "bulk": [
+    {
+     "row": "mh-dharavi",
+     "place": "Mumbai, Dharavi",
+     "count": 24,
+     "unit": "forms",
+     "filer": "A resident, in one day.",
+     "status": [
+      "police"
+     ],
+     "outcome": "Police registered a case under Section 31 of the Representation of the People Act, 1950."
+    }
+   ]
   },
   {
    "id": "form7-56",
@@ -813,7 +1214,22 @@
    "claim": "At least 61,059 Form 7 applications seeking deletions from Karnataka's rolls were filed by Electoral Registration Officers and Assistant Electoral Registration Officers themselves, and none gives a reason for the deletion, which the Registration of Electors Rules, 1960 require, The Hindu reported. Officers listed as the objectors said the system generated the forms with their digital signatures when electors sent notices for no mapping or logical discrepancies could not be reached at hearings and were marked ineligible. Only 192 such applications were filed between 24 August and 23 September, and more than 60,800 between 24 September and 22 October, including 10,105 on 22 October, the last day for disposal. The paper's chart puts more than 53,000 of the officers' applications in the week from 16 to 22 October, with the most on one day, 11,760, on 19 October. In every case the paper checked on the Commission's portal the elector had already been deleted, including electors against whom the application came after 23 September. In the Bruhat Bengaluru Mahanagara Palike South district officers filed 10,374 of 17,491 applications, and in at least 26 constituencies officers filed more than voters or third parties did.",
    "quote": "Electoral Registration Officers (EROs) and Assistant Electoral Registration Officers (AEROs), listed as the objectors in these applications, said the system “auto-generated” the forms with their digital signatures when voters could not be reached during hearings on notices issued for no mapping or logical discrepancies, and the voters were therefore marked as “ineligible”.",
    "response": "The officers said they had been told to file Form 7 for electors who had shifted, had a duplicate entry, were underage, had died or were not citizens. The report gives no reply from the Chief Electoral Officer. Rule 17 of the 1960 Rules says a claim or objection not lodged within the period or in the prescribed form and manner shall be rejected by the registration officer. The paper also found 13,808 fewer Form 7 applications for 24 September to 22 October in the Commission's Form 10 records than the Chief Electoral Officer's statements give.",
-   "note": "By Rishita Khanna and Pon Vasanth B.A. in The Hindu, published 26 October 2026, 6:01 am IST (updated 9:08 am), read in full from the page's JSON-LD articleBody with curl on 26 October 2026. Subscription. The counts are the paper's, from the consolidated Form 10 records on the Commission's website; the gap is 1,70,442 in the Chief Electoral Officer's statements against 1,56,634 in Form 10. form7-53 carries the state total of 2,28,917 to 22 October. In Bommanahalli the report gives 4,095 of 5,757 applications filed by officers. Karnataka's final roll is due on 27 October. The figure of more than 53,000 for 16 to 22 October is printed on the chart in the report, which is an image, and was read from that chart in a screenshot the owner sent on 26 October 2026. The text of the report gives the daily figures of 11,132 on 17 October, 11,760 on 19 October and 10,105 on 22 October."
+   "note": "By Rishita Khanna and Pon Vasanth B.A. in The Hindu, published 26 October 2026, 6:01 am IST (updated 9:08 am), read in full from the page's JSON-LD articleBody with curl on 26 October 2026. Subscription. The counts are the paper's, from the consolidated Form 10 records on the Commission's website; the gap is 1,70,442 in the Chief Electoral Officer's statements against 1,56,634 in Form 10. form7-53 carries the state total of 2,28,917 to 22 October. In Bommanahalli the report gives 4,095 of 5,757 applications filed by officers. Karnataka's final roll is due on 27 October. The figure of more than 53,000 for 16 to 22 October is printed on the chart in the report, which is an image, and was read from that chart in a screenshot the owner sent on 26 October 2026. The text of the report gives the daily figures of 11,132 on 17 October, 11,760 on 19 October and 10,105 on 22 October.",
+   "bulk": [
+    {
+     "row": "ka-officers",
+     "place": "Karnataka",
+     "count": 61059,
+     "count_q": "at least",
+     "unit": "forms",
+     "filer": "Registration officers and assistant registration officers. Officers said the system generated the forms with their digital signatures.",
+     "status": [
+      "deleted"
+     ],
+     "outcome": "In every case The Hindu checked, the elector had already been deleted. None of the forms gives a reason.",
+     "group": "officers"
+    }
+   ]
   },
   {
    "id": "form7-57",
@@ -830,6 +1246,57 @@
    "quote": "Over 4.54 lakh voters were deleted through filing of Form-7 even before the SIR exercise began.",
    "response": "Officials said the Form 7 deletions before the revision were entries sifted by an application on the ECINET software as Demographically Similar Entries and Photo Similar Entries. The paper says no explanation was given for the 47,303 Form 7 applications rejected in the same period.",
    "note": "By Swathi Vadlamudi in The Hindu, Hyderabad, published 29 October 2026 at 9:20 am IST (updated 1:45 pm), read in full from the page's JSON-LD articleBody with curl on 30 October 2026. Subscription. The end date of 28 October for the Form 6 total is the paper's last stated date (68,703 Form 6 applications came in from 8 to 28 October), and it gives no end date for the Form 7 total, so the claim gives none. The 73,39,235 agrees with Telangana's names left off the draft in data/india/states.json. The paper also gives 50,502 electors found ineligible for the final roll, 19,535 for logical discrepancies and 30,207 for not mapping to the 2002 roll, which add to 49,742, and 2,58,04,484 electors parked for the final roll, including 89,63,065 served notices. These are not carried. Telangana's notice figures are kept on the process page. Earlier Telangana Form 7 counts for the revision period are form7-02 and form7-47."
+  }
+ ],
+ "bulk_process": [
+  {
+   "url": "https://www.thehindu.com/news/national/uttar-pradesh/form-7-misuse-supreme-court-to-consider-congress-mps-plea-alleging-targeted-deletions-in-up/article71314187.ece",
+   "bulk": [
+    {
+     "row": "up-hata",
+     "place": "Kushinagar, Hata",
+     "count": 32,
+     "unit": "electors",
+     "filer": "One person, the application says.",
+     "status": [
+      "court"
+     ],
+     "outcome": "The Supreme Court agreed to consider a Congress MP's application on the objections."
+    },
+    {
+     "row": "up-khalilabad",
+     "place": "Khalilabad, four booths",
+     "count": 700,
+     "count_to": 800,
+     "unit": "forms",
+     "filer": "The report does not say who filed them. The Uttar Pradesh Congress gave the figure.",
+     "status": [
+      "court"
+     ],
+     "outcome": "The Supreme Court agreed to consider a Congress MP's application on the objections."
+    }
+   ]
+  },
+  {
+   "url": "https://www.thehindu.com/news/national/karnataka/civil-society-groups-congress-demand-firs-over-bulk-form-7s-seeking-deletion-of-names/article71524777.ece",
+   "bulk": [
+    {
+     "row": "ka-babaleshwar",
+     "place": "Babaleshwar",
+     "count": 1363,
+     "unit": "electors",
+     "filer": "Ten people, in one day.",
+     "outcome": "Civil society groups and the Karnataka Congress asked the Commission to lodge criminal complaints."
+    },
+    {
+     "row": "ka-bhalki",
+     "place": "Bidar, Bhalki",
+     "count": 1700,
+     "unit": "electors",
+     "filer": "30 people.",
+     "outcome": "The constituency's MLA asked Bidar's District Election Officer to hold an inquiry and report to the Commission."
+    }
+   ]
   }
  ]
 }

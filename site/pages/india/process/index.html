@@ -37,6 +37,11 @@
   <div class="grid"><div class="panel wide"><div class="vizbox" id="vClaims"></div></div></div>
   <div class="twrap" tabindex="0" role="region" aria-label="Claims and objections after the draft"><table id="tClaims"></table></div>
   <p class="note" id="nClaims"></p>
+  <h3 id="bulk-form-7">Bulk Form 7 filings reported, state by state</h3>
+  <p class="sub">Each row in the first part of the table is one report of Form 7 objections filed in numbers at one place or by one filer. The count is the one the report gives, of forms or of the electors objected to, and it is left blank where the report gives none. Who filed is given by role or party as the report gives it, and where a party made the allegation the row says so. The second part holds Form 7s generated in numbers in registration officers' names, which the officers or the Chief Electoral Officer said the Commission's software produced when an elector was not approved at a hearing. No person filed those as an objector. Every row links to the reports behind it on the <a href="../disputes/">protests and disputes page</a>, where the source is quoted.</p>
+  <p class="note brule" id="nBulkRule"></p>
+  <div class="twrap scroll bulk" tabindex="0" role="region" aria-label="Bulk Form 7 filings reported, by state"><table id="tBulk"></table></div>
+  <p class="note" id="nBulk"></p>
 
   <h2>Notices: the no-mapping list and the discrepancy list</h2>
   <p class="sub">Electors who stayed on the draft roll could still be sent a notice to prove their entry. Two lists produced the notices. No mapping means the elector could not be linked to the roll of the last intensive revision, 2002 to 2006 depending on the state. The logical discrepancy list is the Commission's list of mismatches in names, ages and family links, such as a parent fewer than 15 years older than the child. An elector can be on both lists. The chart sets each state's notices against its draft roll. Dark dots rest on a Chief Electoral Officer's or a court's document, light ones on a press report quoting the Chief Electoral Officer.</p>
@@ -44,6 +49,12 @@
   <p class="finding" id="fNotices"></p>
   <div class="twrap scroll" tabindex="0" role="region" aria-label="Notices by state"><table id="tNotices"></table></div>
   <p class="note" id="nNotices"></p>
+  <h3 class="ph" id="hearings">The hearings, state by state</h3>
+  <p class="sub">An elector sent a notice is called to a hearing, and from 26 September 2026 documents could also be collected at home. The officer then decides whether the name stays on the roll. The table gives each state's notices sent, its latest count of hearings held and its latest count of names deleted after a notice, each with its date and its source. The chart follows the states that published these counts on three dates or more. A filled point rests on a Chief Electoral Officer's document and a hollow one on a press report. The dashed line is the notices sent.</p>
+  <div class="grid"><div class="panel wide" id="pHear"><div class="vizbox" id="vHear"></div></div></div>
+  <p class="finding" id="fHear"></p>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="Hearings held and names deleted after a notice, by state"><table id="tHear"></table></div>
+  <p class="note" id="nHear"></p>
 
   <h2>Each state's dates, as set and as moved</h2>
   <p class="sub">One row for each state or union territory. The top line in a row is the first schedule the Election Commission set, and each line below it is a later change, with the last one drawn darkest. Hover over or tap a line for its dates and the document that set them.</p>
@@ -55,6 +66,13 @@
   <h3 class="ph">Phase III, the rest of the country</h3>
   <div class="grid"><div class="panel wide" id="pG3"><div class="vizbox" id="vG3"></div></div></div>
   <p class="note" id="nG3"></p>
+  <h3 class="ph" id="final-moves">How each state's final roll date moved</h3>
+  <p class="sub">One row for each state or union territory whose final roll date was moved, or whose final roll came out on another day than the last date set for it. Each point is the date one revision set for the final roll, numbered in order, and the line joins them. A filled red point rests on an order or a Chief Electoral Officer's note, a hollow one on a press report, and a navy square is the day the final roll was published. Hover over or tap a row for each revision. The table lists every state, with each revision and its source.</p>
+  <div class="grid"><div class="panel wide" id="pM2"><div class="vizbox" id="vM2"></div></div></div>
+  <div class="grid"><div class="panel wide" id="pM3"><div class="vizbox" id="vM3"></div></div></div>
+  <p class="finding" id="fMoves"></p>
+  <div class="twrap scroll" tabindex="0" role="region" aria-label="How each state's final roll date moved"><table id="tMoves"></table></div>
+  <p class="note" id="nMoves"></p>
 
   <h2 id="inside-the-commission">Inside the Commission, as The Indian Express reported it</h2>
   <p class="sub" id="iSub"></p>
@@ -85,6 +103,14 @@
 <script>
 SIR.json('data/india/process.json').then(function (P) {
   var T = P.timeline, E = SIR.esc;
+  // an SVG element, for the two charts drawn on this page alone
+  var mk = function (tag, attrs, parent, text) {
+    var e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in attrs) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  };
   var WHO = { eci: 'Election Commission', sc: 'Supreme Court', ceo: 'State election officer' };
   // In short: every count below is taken from the data
   // a state's schedule changes are its orders after the first; a line drawn
@@ -211,6 +237,40 @@ SIR.json('data/india/process.json').then(function (P) {
     SIR.tools();
   }).catch(function () {});
 
+  // bulk Form 7 filings, state by state, each row linked to its reports on the disputes page
+  SIR.json('data/india/form7_bulk.json').then(function (B) {
+    var C = B.counts, ST = {}, ctx = B.context;
+    B.status.forEach(function (s) { ST[s[0]] = s[1]; });
+    document.getElementById('nBulkRule').innerHTML = '<b>Two rules of the Commission apply to Form 7 filed in bulk.</b> ' + E(ctx.order.text.replace(/\.$/, '')) + ' (<a href="' + E(ctx.order.src.url) + '" rel="noopener" target="_blank">the Commission\'s letter of ' + SIR.date(ctx.order.date) + '</a>). ' +
+      E(ctx.letter.text.replace(/\.$/, '')) + ' (<a href="../disputes/#d-' + E(ctx.letter.id) + '">the report</a>).';
+    var count = function (r) {
+      if (r.count == null) return '';
+      return (r.count_q ? r.count_q + ' ' : '') + SIR.n(r.count) + (r.count_to ? ' to ' + SIR.n(r.count_to) : '') + ' ' + r.unit;
+    };
+    // one year is written once: 24 January to 11 February 2026
+    var when = function (r) {
+      if (r.first === r.last) return SIR.date(r.first);
+      var a = SIR.date(r.first);
+      return (r.first.slice(0, 4) === r.last.slice(0, 4) ? a.replace(/\s*\d{4}$/, '') : a) + ' to ' + SIR.date(r.last);
+    };
+    var row = function (r) {
+      var what = (r.status.length ? '<span class="btags">' + r.status.map(function (s) { return '<span>' + E(ST[s]) + '</span>'; }).join('') + '</span>' : '') +
+        (r.outcomes.length ? r.outcomes.map(function (o) { return E(o.text); }).join(' ') : (r.status.length ? '' : 'No outcome reported.'));
+      return '<tr id="b-' + E(r.id) + '"><th scope="row" class="l">' + E(r.state) + '</th><td class="l">' + E(r.place) + '</td><td class="l nw">' + when(r) + '</td><td class="nw">' + count(r) + '</td><td class="l">' + E(r.filer) + '</td><td class="l">' + what + '</td><td class="l">' +
+        r.entries.map(function (e) { return '<a href="../disputes/#d-' + E(e.id) + '">' + E(e.outlet) + ', ' + SIR.date(e.date) + '</a>'; }).join('<br>') + '</td></tr>';
+    };
+    var part = function (g, label) {
+      var rs = B.rows.filter(function (r) { return r.group === g; });
+      return rs.length ? '<tbody><tr class="bgroup"><th scope="colgroup" colspan="7" class="l">' + label + '</th></tr>' + rs.map(row).join('') + '</tbody>' : '';
+    };
+    document.getElementById('tBulk').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col" class="l">Place</th><th scope="col" class="l">Reported</th><th scope="col">How many</th><th scope="col" class="l">Filed by</th><th scope="col" class="l">What happened</th><th scope="col" class="l">Reports</th></tr></thead>' +
+      part('', 'Form 7 objections filed in bulk by people') +
+      part('officers', 'Form 7s generated in registration officers\' names, which no person filed as an objector');
+    document.getElementById('nBulk').textContent = 'The first part holds ' + C.rows + ' reports of bulk filing from ' + C.states + ' states and union territories, and ' + C.with_count + ' of them give a count. Of the ' + C.rows + ', ' +
+      C.police + ' led to a police case or FIR and ' + C.court + ' came before a court. The counts cannot be added up, because some count forms and some count the electors objected to. The ' + C.officers + ' counts of forms in officers\' names are set apart from the rest because the reports say the software produced them.';
+    SIR.tools();
+  }).catch(function () {});
+
   // notices: electors kept on the draft but sent a notice
   SIR.json('data/india/notices.json').then(function (T) {
     var N = function (v) { return v == null ? '' : SIR.n(v); }, lk = function (v) { return v >= 1e7 ? (v / 1e7).toFixed(2) + ' crore' : (v / 1e5).toFixed(1) + ' lakh'; };
@@ -223,6 +283,84 @@ SIR.json('data/india/process.json').then(function (P) {
     document.getElementById('tNotices').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Notices</th><th scope="col">Per 100 on the draft</th><th scope="col">No mapping</th><th scope="col">Discrepancy list</th><th scope="col">Deleted after a notice</th><th scope="col" class="l">Total is</th><th scope="col" class="l">Source</th></tr></thead><tbody>' +
       T.states.map(function (r) { return '<tr><th scope="row" class="l">' + E(r.state) + '</th><td>' + N(r.notices) + (r.rounded ? '*' : '') + '</td><td>' + (r.per_100 == null ? '' : r.per_100.toFixed(1)) + '</td><td>' + N(r.no_mapping) + '</td><td>' + N(r.discrepancy) + '</td><td>' + N(r.deleted_after_notice) + (r.deleted_kind === 'press' && r.kind === 'primary' ? '†' : '') + '</td><td class="l">' + how(r) + '</td><td class="l">' + (r.source_url ? '<a href="' + E(r.source_url) + '">' + (r.kind === 'primary' ? 'document' : 'press') + '</a>' : (r.lists_source ? '<a href="' + E(r.lists_source) + '">press</a>' : '')) + '</td></tr>'; }).join('') + '</tbody>';
     document.getElementById('nNotices').innerHTML = 'An asterisk marks a figure published rounded, in lakh or crore. Most phase 3 figures are running counts, taken while notices were still being heard. An elector can be on both lists, so the two need not add up to the total. In Uttar Pradesh two press reports split the same 3.26 crore differently, and the split used here, from The Times of India, is the one that adds up. West Bengal\'s total is the Supreme Court\'s reading of the record on 19 January 2026. The court\'s order gives only the discrepancy list, and the two lists are always taken from one source, so West Bengal\'s come from an earlier Commission breakdown reported by the press. A dagger marks a figure in a row whose total rests on a document but which came through the press. West Bengal\'s deletions are the adjudication outcome as The Indian Express reported it on 7 April 2026. A state with only one list, or two reports that disagree, has no total here. Deleted after a notice counts names deleted for not answering or for failing the hearing, where a state reported it, and many of these are interim. In Hyderabad\'s Old City the two lists can be told apart polling part by polling part, on the <a href="../../hyderabad/hearings/">hearings page</a>. The download gives every figure with its date and source.';
+
+    // the hearings: the latest counts by state, and how they moved where a
+    // state published them on three dates or more
+    var LATEST = function (r, c) { var a = r.series.filter(function (x) { return x.category === c; }); return a.length ? a[a.length - 1] : null; };
+    var src = function (u, kind) { return u ? ' <a href="' + E(u) + '" rel="noopener" target="_blank">' + (kind === 'primary' ? 'document' : 'press') + '</a>' : ''; };
+    var cnt = function (x) { return x ? SIR.n(x.count) + (x.rounded ? '*' : '') : ''; };
+    var HR = T.states.filter(function (r) { return LATEST(r, 'hearings_held') || LATEST(r, 'deleted_after_notice'); })
+      .sort(function (a, b) { return a.state < b.state ? -1 : 1; });
+    document.getElementById('tHear').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col">Notices sent</th><th scope="col" class="l">As of</th><th scope="col">Hearings held</th><th scope="col" class="l">As of</th><th scope="col">Deleted after a notice</th><th scope="col" class="l">As of</th></tr></thead><tbody>' +
+      HR.map(function (r) {
+        var h = LATEST(r, 'hearings_held'), d = LATEST(r, 'deleted_after_notice');
+        return '<tr><th scope="row" class="l">' + E(r.state) + '</th><td>' + N(r.notices) + (r.rounded ? '*' : '') + '</td><td class="l">' + (r.date ? SIR.date(r.date) + src(r.source_url, r.kind) : '') + '</td>' +
+          '<td>' + cnt(h) + '</td><td class="l">' + (h ? SIR.date(h.date) + src(h.source_url, h.kind) : '') + '</td>' +
+          '<td>' + cnt(d) + '</td><td class="l">' + (d ? SIR.date(d.date) + src(d.source_url, d.kind) : '') + '</td></tr>';
+      }).join('') + '</tbody>';
+    var ndates = function (r) { var o = {}; r.series.forEach(function (x) { if (x.category !== 'all_notices') o[x.date] = 1; }); return Object.keys(o).length; };
+    var TR = HR.filter(function (r) { return ndates(r) >= 3; });
+    // the finding: the latest counts against the notices sent
+    var per = function (x, r) { return x && r.notices ? 100 * x.count / r.notices : null; };
+    var withH = TR.filter(function (r) { return per(LATEST(r, 'hearings_held'), r) != null; });
+    var withD = TR.filter(function (r) { return per(LATEST(r, 'deleted_after_notice'), r) != null; });
+    var andList = function (a) { return a.join(', ').replace(/, ([^,]*)$/, ' and $1'); };
+    document.getElementById('fHear').innerHTML = '<b>By the latest counts, hearings had been held for ' + andList(withH.map(function (r, i) { var h = LATEST(r, 'hearings_held'); return Math.min(100, per(h, r)).toFixed(1) + (i ? '' : ' of every 100 electors sent a notice') + ' in ' + E(r.state) + ' by ' + SIR.date(h.date); })) + '.</b> ' +
+      'For every 100 electors sent a notice, the names deleted after it numbered ' + andList(withD.map(function (r) { var d = LATEST(r, 'deleted_after_notice'); return per(d, r).toFixed(2) + ' in ' + E(r.state) + ' by ' + SIR.date(d.date); })) + '.';
+    document.getElementById('nHear').innerHTML = 'An asterisk marks a figure published rounded, in lakh or crore, or as "about" or "over". Most of these are running counts, taken while notices were still being heard, and a later count replaces an earlier one. Where two reports give the same day, the one from a document is shown, or else the exact one. The word for a hearing varies. Karnataka counted house visits from 26 September, and the Delhi reports speak of electors verified or resolved. Deleted after a notice counts names deleted for not answering or for failing the hearing. Notices sent are the figures in the table above, and a hearing count can run a little past them when the two come from different reports. A share above 100 is shown as 100.';
+    drawTrack('vHear', TR, 'Hearings held and names deleted after a notice, by date, in the states that published them on three dates or more');
+    function drawTrack(id, rows, label) {
+      var box = document.getElementById(id); if (!box || !rows.length) return;
+      var cw = box.clientWidth || innerWidth, ph = cw < 600, W = ph ? Math.max(320, Math.min(cw, 599)) : Math.max(600, Math.min(cw, 1100));
+      var cols = ph ? 1 : 2, pw = (W - (cols - 1) * 24) / cols, plotH = ph ? 92 : 100, capH = 18, headH = 24, rgt = 74, lft = 6;
+      var MS = { hearings_held: ['Hearings held', '--fill-navy'], deleted_after_notice: ['Deleted after a notice', '--fill-red'] };
+      var D = function (iso) { return Date.parse(iso + 'T00:00:00Z'); };
+      var all = []; rows.forEach(function (r) { r.series.forEach(function (x) { if (x.category !== 'all_notices') all.push(D(x.date)); }); });
+      var t0 = Math.min.apply(null, all) - 2 * 864e5, t1 = Math.max.apply(null, all) + 2 * 864e5;
+      var block = cols === 2 ? headH + capH + plotH + 30 : headH + 2 * (capH + plotH + 30);
+      var H = 6 + rows.length * block, s = mk('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': label, class: 'viz', preserveAspectRatio: 'xMidYMid meet' });
+      box.innerHTML = ''; box.appendChild(s); mk('title', {}, s, label);
+      var mon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var csv = [['state', 'measure', 'date', 'count', 'rounded', 'source', 'url']];
+      rows.forEach(function (r, ri) {
+        var y0 = 6 + ri * block;
+        if (ri) mk('line', { x1: 0, x2: W, y1: y0 - 4, y2: y0 - 4, class: 'vgrid' }, s);
+        mk('text', { x: 0, y: y0 + 14, class: 'vname' }, s, r.state);
+        ['hearings_held', 'deleted_after_notice'].forEach(function (c, ci) {
+          var px = cols === 2 ? ci * (pw + 24) : 0, py = y0 + headH + (cols === 2 ? 0 : ci * (capH + plotH + 30));
+          var pts = r.series.filter(function (x) { return x.category === c; });
+          mk('text', { x: px, y: py + 12, class: 'vval' }, s, MS[c][0]);
+          var top = py + capH + 4, bot = top + plotH, x0 = px + lft, x1 = px + pw - rgt;
+          mk('rect', { x: px, y: top - 4, width: pw, height: plotH + 8, rx: 6, class: 'vpanel' }, s);
+          var ref = c === 'hearings_held' && r.notices ? r.notices : null;
+          var mx = Math.max.apply(null, pts.map(function (x) { return x.count; }).concat(ref ? [ref] : [1])) * 1.08;
+          var X = function (iso) { return x0 + (x1 - x0) * (D(iso) - t0) / (t1 - t0); }, Y = function (v) { return bot - (bot - top) * v / mx; };
+          // a tick on the first and the fifteenth of each month
+          for (var t = new Date(t0); t.getTime() <= t1; t = new Date(t.getTime() + 864e5)) {
+            if (t.getUTCDate() !== 1 && t.getUTCDate() !== 15) continue;
+            var tx = X(t.toISOString().slice(0, 10));
+            mk('line', { x1: tx, x2: tx, y1: top - 4, y2: bot + 4, class: 'vgrid' }, s);
+            mk('text', { x: tx, y: bot + 18, 'text-anchor': 'middle', class: 'vval small' }, s, t.getUTCDate() + ' ' + mon[t.getUTCMonth()]);
+          }
+          mk('line', { x1: x0, x2: x1, y1: bot, y2: bot, class: 'vzero' }, s);
+          if (ref) {
+            mk('line', { x1: x0, x2: x1, y1: Y(ref), y2: Y(ref), class: 'vgrid', 'stroke-dasharray': '5 4', style: 'stroke:var(--muted)' }, s);
+            mk('text', { x: x1 + 6, y: Y(ref), 'dominant-baseline': 'middle', class: 'vval small' }, s, 'sent ' + SIR.lk(ref));
+          }
+          if (!pts.length) { mk('text', { x: (x0 + x1) / 2, y: (top + bot) / 2, 'text-anchor': 'middle', 'dominant-baseline': 'middle', class: 'vval' }, s, 'No count published'); return; }
+          if (pts.length > 1) mk('path', { d: pts.map(function (x, k) { return (k ? 'L' : 'M') + X(x.date) + ',' + Y(x.count); }).join(' '), class: 'vline', style: 'stroke:var(' + MS[c][1] + ');stroke-width:2' }, s);
+          pts.forEach(function (x) {
+            var dot = mk('circle', { cx: X(x.date), cy: Y(x.count), r: 4, style: x.kind === 'primary' ? 'fill:var(' + MS[c][1] + ')' : 'fill:var(--card);stroke:var(' + MS[c][1] + ');stroke-width:2' }, s);
+            mk('title', {}, dot, r.state + ', ' + MS[c][0].toLowerCase() + ', ' + SIR.date(x.date) + ', ' + SIR.n(x.count) + (x.rounded ? ' (rounded)' : '') + (x.kind === 'primary' ? ', from a document' : ', from a press report'));
+            csv.push([r.state, MS[c][0], x.date, x.count, x.rounded ? 'yes' : 'no', x.kind, x.source_url]);
+          });
+          var last = pts[pts.length - 1], lv = last.count >= 1e5 ? SIR.lk(last.count) : SIR.n(last.count);
+          var ly = Y(last.count) + (ref && Math.abs(Y(last.count) - Y(ref)) < 12 ? 13 : 0);
+          mk('text', { x: x1 + 6, y: ly, 'dominant-baseline': 'middle', class: 'vval' }, s, lv);
+        });
+      });
+      box.__csv = csv;
+    }
     SIR.tools();
   }).catch(function () {});
 
@@ -245,7 +383,116 @@ SIR.json('data/india/process.json').then(function (P) {
   window.addEventListener('hashchange', drawG);
   document.getElementById('nG2').textContent = 'The release of 11 December 2025 names Gujarat both among the states moved to a draft on 19 December and among those keeping 16 December, and does not name Puducherry. ' + P.notes.p2final;
   document.getElementById('nG3').textContent = P.notes.p3later + ' ' + P.notes.tripura + ' ' + P.notes.uttarakhand;
-  document.getElementById('gaps').innerHTML = P.gaps.map(function (g) { return '<li>' + E(g) + '</li>'; }).join('');
+  // how each state's final roll date moved: every revision that set a final
+  // date, in order, the dates the press reported and no order confirms, and
+  // the day the final roll was published
+  SIR.json('data/india/states.json').then(function (SJ) {
+    var SS = {}; SJ.states.forEach(function (r) { SS[r.state] = r; });
+    var DOC = function (u) { return /^https?:\/\/[^\/]*\.(gov|nic)\.in(\/|$)/.test(u || ''); };
+    var on = function (lbl) { var m = /(\d\d)\.(\d\d)\.(\d{4})/.exec(lbl || ''); return m ? m[3] + '-' + m[2] + '-' + m[1] : null; };
+    var day = function (a, b) { return Math.round((Date.parse(b) - Date.parse(a)) / 864e5); };
+    var hist = P.schedules.map(function (sc) {
+      var pts = [], last = '';
+      sc.steps.forEach(function (st) {
+        if (st.kind === 'published') return;
+        last = on(st.label) || last;
+        if (st.final) pts.push({ on: last, final: st.final, label: st.label, url: st.src, press: !DOC(st.src) });
+      });
+      (P.reported_dates || []).filter(function (d) { return d.state === sc.state && d.final; }).sort(function (a, b) { return a.date < b.date ? -1 : 1; }).forEach(function (d) {
+        var at = 0; pts.forEach(function (p, k) { if (p.on <= d.date) at = k + 1; });
+        pts.splice(at, 0, { on: d.date, final: d.final, label: 'Reported on ' + SIR.date(d.date) + ' by ' + d.outlet, url: d.url, press: true });
+      });
+      // a revision that left the final date where it was is not a move
+      var kept = [];
+      pts.forEach(function (p) { if (!kept.length || p.final !== kept[kept.length - 1].final) kept.push(p); });
+      var s = SS[sc.state] || {}, pub = null;
+      if (s.electors_final != null && s.final_date) pub = { final: s.final_date, label: 'Final roll published', url: s.final_source && s.final_source.url, press: !(s.final_source && s.final_source.source === 'primary'), pub: true };
+      else sc.steps.forEach(function (st) { if (st.kind === 'published' && st.final) pub = { final: st.final, label: st.label, url: st.src, press: !DOC(st.src), pub: true }; });
+      var all = kept.concat(pub ? [pub] : []);
+      all.forEach(function (p, k) { p.n = k + 1; });
+      var end = all.length ? all[all.length - 1].final : null;
+      return { name: sc.state, phase: sc.phase, pts: all, moves: Math.max(0, kept.length - 1), first: kept.length ? kept[0].final : null, end: end,
+        days: kept.length && end ? day(kept[0].final, end) : 0, late: pub && kept.length ? day(kept[kept.length - 1].final, pub.final) : 0, done: !!pub };
+    });
+    var tag = function (p) { return p.press ? ' (reported in the press)' : ''; };
+    var shown = function (ph) { return hist.filter(function (h) { return h.phase === ph && (h.moves > 0 || h.late !== 0); }); };
+    drawMoves('vM2', shown('II'), 'Phase II, the final roll date set by each revision and the day the final roll was published');
+    drawMoves('vM3', shown('III'), 'Phase III, the final roll date set by each revision and the day the final roll was published');
+    var set = hist.filter(function (h) { return h.first; }), moved = set.filter(function (h) { return h.moves > 0; }), later = set.filter(function (h) { return h.late > 0; });
+    var most = set.filter(function (h) { return h.done; }).sort(function (a, b) { return b.days - a.days; })[0];
+    var open = set.filter(function (h) { return !h.done && h.moves > 0; }).sort(function (a, b) { return b.days - a.days; });
+    document.getElementById('fMoves').innerHTML = '<b>Of the ' + set.length + ' states and union territories with a final roll date set, ' + moved.length + ' had it moved at least once by an order, a note or a press report, and ' + later.length + ' published the final roll after the last date set for it.</b> ' +
+      'Among the final rolls already out, ' + E(most.name) + '\'s came the furthest after the date first set for it, ' + most.days + ' days. Of the states still waiting for a final roll, ' + open.length + ' have had the date moved, ' +
+      open.map(function (h) { return E(h.name) + ' ' + (h.moves === 1 ? 'once' : h.moves + ' times') + ' and ' + h.days + ' days in all'; }).join(', ').replace(/, ([^,]*)$/, ' and $1') + '.';
+    document.getElementById('tMoves').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col" class="l">Phase</th><th scope="col" class="l">First set for</th><th scope="col" class="l">Each revision of the final roll date, in order</th><th scope="col">Times moved</th><th scope="col">Days later than first set</th></tr></thead><tbody>' +
+      hist.map(function (h) {
+        return '<tr><th scope="row" class="l">' + E(h.name) + '</th><td class="l">' + h.phase + '</td><td class="l">' + (h.first ? SIR.date(h.first) : '') + '</td><td class="l">' +
+          h.pts.map(function (p) { return p.n + '. ' + SIR.date(p.final) + ', ' + (p.url ? '<a href="' + E(p.url) + '" rel="noopener" target="_blank">' + E(p.label) + '</a>' : E(p.label)) + tag(p); }).join('<br>') +
+          '</td><td>' + h.moves + '</td><td>' + (h.end ? h.days : '') + '</td></tr>';
+      }).join('') + '</tbody>';
+    document.getElementById('nMoves').innerHTML = 'Times moved counts the revisions that changed the final roll date. A revision that set no final date, or left it where it was, is not counted, and neither is the day the roll came out. Days later runs from the date first set to the day the final roll was published, or to the latest date set where it has not been. For most Phase II states the order that set the day the roll came out was not found. Dates reported in the press are given as reported, and no order on this page confirms them.';
+    SIR.tools();
+    function drawMoves(id, rows, label) {
+      var box = document.getElementById(id); if (!box) return;
+      if (!rows.length) { box.innerHTML = ''; return; }
+      var D = function (iso) { return Date.parse(iso + 'T00:00:00Z'); };
+      var cw = box.clientWidth || innerWidth, ph = cw < 600, W = ph ? Math.max(320, Math.min(cw, 599)) : Math.max(600, Math.min(cw, 1100));
+      var lw = ph ? 112 : 230, R = 5, leg = 30, all = [];
+      rows.forEach(function (r) { r.pts.forEach(function (p) { all.push(D(p.final)); }); });
+      var a = new Date(Math.min.apply(null, all)), b = new Date(Math.max.apply(null, all));
+      var m0 = Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), 1), m1 = Date.UTC(b.getUTCFullYear(), b.getUTCMonth() + 1, 1);
+      var X = function (t) { return lw + 14 + (W - lw - 30) * (t - m0) / (m1 - m0); };
+      // points that would touch are stacked within their row
+      rows.forEach(function (r) { var px = -99, lv = -1; r.lv = 0; r.pts.forEach(function (p) { var x = X(D(p.final)); lv = x - px < 2 * R + 8 ? lv + 1 : 0; p.lv = lv; px = x; r.lv = Math.max(r.lv, lv); }); r.h = 44 + 15 * r.lv; });
+      var H = leg + rows.reduce(function (t, r) { return t + r.h; }, 0) + 26;
+      var s = mk('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'group', 'aria-label': label, class: 'viz', preserveAspectRatio: 'xMidYMid meet' });
+      box.innerHTML = ''; box.appendChild(s); mk('title', {}, s, label);
+      var mon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var span = (m1 - m0) / 864e5;
+      for (var m = new Date(m0), i = 0; m.getTime() <= m1; m = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 1)), i++) {
+        mk('line', { x1: X(m.getTime()), x2: X(m.getTime()), y1: leg, y2: H - 22, class: 'vgrid' }, s);
+        if (m.getTime() < m1 && (!ph || span < 150 || i % 2 === 0)) mk('text', { x: X(m.getTime()) + 2, y: H - 6, class: 'vval' }, s, mon[m.getUTCMonth()] + (m.getUTCMonth() === 0 || i === 0 ? ' ' + m.getUTCFullYear() : ''));
+      }
+      function mark(kind, x, y) {
+        if (kind === 'pub') return mk('rect', { x: x - 4.5, y: y - 4.5, width: 9, height: 9, style: 'fill:var(--fill-navy)' }, s);
+        return mk('circle', { cx: x, cy: y, r: R, style: kind === 'doc' ? 'fill:var(--fill-red)' : 'fill:var(--card);stroke:var(--fill-red);stroke-width:2' }, s);
+      }
+      [['doc', 'Order or note'], ['press', 'Press report'], ['pub', 'Published']].forEach(function (k, j) {
+        var kx = 10 + j * (ph ? 104 : 150), ky = 12;
+        mark(k[0], kx, ky);
+        mk('text', { x: kx + 10, y: ky, 'dominant-baseline': 'middle', class: 'vval' }, s, k[1]);
+      });
+      var read = document.createElement('p');
+      read.className = 'vread'; read.setAttribute('aria-live', 'polite');
+      read.textContent = 'Hover over, tap or tab to a row for each revision.';
+      box.appendChild(read);
+      var hits = [], y = leg, csv = [['state', 'number', 'final roll date', 'set by', 'source', 'url']];
+      rows.forEach(function (r, ri) {
+        if (ri % 2) mk('rect', { x: 0, y: y, width: W, height: r.h, class: 'vband' }, s);
+        var mid = y + 16;
+        mk('text', { x: lw - 6, y: mid, 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vname' }, s, ph ? SIR.short(r.name) : r.name);
+        mk('text', { x: lw - 6, y: mid + 16, 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'vval small' }, s, r.moves + (r.moves === 1 ? ' move, ' : ' moves, ') + r.days + (r.days === 1 ? ' day' : ' days'));
+        var Q = r.pts.map(function (p) { return { p: p, x: X(D(p.final)), y: mid + 4 + p.lv * 15 }; });
+        if (Q.length > 1) mk('path', { d: Q.map(function (q, k) { return (k ? 'L' : 'M') + q.x + ',' + q.y; }).join(' '), style: 'stroke:var(--muted);stroke-width:1.5;fill:none' }, s);
+        Q.forEach(function (q) {
+          var g = mark(q.p.pub ? 'pub' : q.p.press ? 'press' : 'doc', q.x, q.y);
+          mk('title', {}, g, r.name + ', ' + q.p.n + '. ' + SIR.date(q.p.final) + ', ' + q.p.label + tag(q.p));
+          mk('text', q.p.lv ? { x: q.x + 9, y: q.y, 'dominant-baseline': 'middle', class: 'vval small' } : { x: q.x, y: q.y - 9, 'text-anchor': 'middle', class: 'vval small' }, s, q.p.n);
+          csv.push([r.name, q.p.n, q.p.final, q.p.label, q.p.press ? 'press' : 'document', q.p.url || '']);
+        });
+        var tt = r.name + ', final roll date. ' + r.pts.map(function (p) { return p.n + ', ' + SIR.date(p.final) + ', ' + p.label + tag(p); }).join('. ');
+        hits.push([mk('rect', { x: 0, y: y, width: W, height: r.h, class: 'vhit', tabindex: 0, role: 'button', 'aria-label': tt }, s), tt]);
+        y += r.h;
+      });
+      hits.forEach(function (hp) {
+        var show = function () { hits.forEach(function (o2) { o2[0].classList.toggle('on', o2 === hp); }); read.textContent = hp[1] + '.'; };
+        ['mouseenter', 'focus', 'click'].forEach(function (ev) { hp[0].addEventListener(ev, show); });
+        hp[0].addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(); } });
+      });
+      box.__csv = csv;
+    }
+  }).catch(function () {});
+  document.getElementById('gaps').innerHTML =P.gaps.map(function (g) { return '<li>' + E(g) + '</li>'; }).join('');
   document.getElementById('asof').textContent = SIR.date(P.as_of);
   SIR.tools();
 }).catch(SIR.fail);

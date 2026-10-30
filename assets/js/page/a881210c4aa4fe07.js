@@ -1,5 +1,24 @@
 Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json')]).then(function (r) {
   var D = r[0], geo = r[1], n = SIR.n, esc = SIR.esc, C = D.counts, k = 0;
+
+  // Next in court: hearings and deadlines from today in India onwards, in
+  // the reader's language, each linked to its source and to its entry below
+  (function () {
+    var box = document.getElementById('nextCourt'), lang = window.L && L.lang || 'en';
+    var today = new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
+    var MON = [L('January'), L('February'), L('March'), L('April'), L('May'), L('June'), L('July'), L('August'), L('September'), L('October'), L('November'), L('December')];
+    var day = function (iso) { var p = iso.split('-'); return L('{d} {m} {y}', { d: +p[2], m: MON[+p[1] - 1], y: p[0] }); };
+    var when = { exact: function (s) { return s; }, approximate: function (s) { return L('About {date}', { date: s }); }, tentative: function (s) { return L('{date}, listed tentatively', { date: s }); } };
+    var ahead = (D.listings || []).filter(function (x) { return x.date >= today; });
+    if (!ahead.length) { box.innerHTML = '<li><p>' + L('No hearing or deadline ahead has been dated.') + '</p></li>'; return; }
+    box.innerHTML = ahead.map(function (x) {
+      var tr = (x.t || {})[lang], own = lang === 'en' || !tr, f = own ? x : tr;
+      var txt = function (s) { return own && lang !== 'en' ? '<span lang="en" dir="ltr">' + esc(s) + '</span>' : esc(s); };
+      return '<li id="nc-' + esc(x.id) + '"><p><b>' + L('{date}, {court}', { date: (when[x.date_kind] || when.exact)(day(x.date)), court: txt(f.court) }) + '</b></p>' +
+        '<p>' + txt(f.matter) + '</p><p>' + txt(f.due) + '</p>' +
+        '<p class="nsrc">' + L('<a href="{src}">{outlet}</a> gives the date. <a href="{entry}">A related entry is below.</a>', { src: esc(x.source_url), outlet: esc(x.source_name), entry: '#d-' + esc(x.disputes_id) }) + '</p></li>';
+    }).join('');
+  })();
   var INTRO = {
     courts: 'Petitions in the Supreme Court and the High Courts, and what the courts ordered. Where the court\'s own order was found it is quoted. Otherwise the report is.',
     resolutions: 'Resolutions passed by state Assemblies about the revision.',

@@ -10,7 +10,9 @@ write the same files.
   feed.xml               Atom, one entry per day of data/updates.json
   calendar.ics           all India: each state's draft and final roll, the
                          Supreme Court's dated orders in the process timeline,
-                         and the events still to come in data/india/events.json
+                         the events still to come in data/india/events.json,
+                         and the court listings ahead in data/india/disputes.json
+                         (a state's own listings go in its calendar too)
   calendar/<state>.ics   one state's own dates, from its latest schedule
   data/index.json        every published data file, with its columns or keys
   _headers               frame protection for every published path except
@@ -167,12 +169,30 @@ KIND = {'enum': ('enumeration', 'house visits and enumeration forms'), 'draft': 
         'final': ('final', 'final roll')}
 
 
+def court_events(url, stamp):
+    """The court hearings and deadlines that a source dates, from the checked
+    listings in data/india/disputes.json, as (state, start, event). A date
+    worked out from a period the court gave says so in the summary."""
+    out = []
+    for x in J('data/india/disputes.json').get('listings', []):
+        mark = {'approximate': ' (date approximate)', 'tentative': ' (listed tentatively)'}.get(x['date_kind'], '')
+        first = re.split(r'(?<=[a-z)]\.) (?=[A-Z])', x['matter'])[0].rstrip('.')
+        summary = '%s%s: %s' % (x['court'], mark, first)
+        when = {'approximate': 'The date is approximate, worked out from %s. ' % x['computed_from'],
+                'tentative': 'The court listed the matter for this date tentatively. '}.get(x['date_kind'], '')
+        desc = '%s %s %s%s. Source: %s, %s More: %sindia/disputes/#d-%s' % (x['matter'], x['due'], when, 'Court: ' + x['court'],
+                                                                         x['source_name'], x['source_url'], url, x['disputes_id'])
+        out.append((x['state'], x['date'], _event('court-' + x['id'], x['date'], x['date'], summary, desc, url + 'india/disputes/', stamp)))
+    return out
+
+
 def calendars(cfg):
     P = J('data/india/process.json')
     stamp = P['as_of']
     url = cfg['url']
     files, per_state = {}, {}
     india = []
+    courts = court_events(url, stamp)
     for place in cfg['places']:
         if not place.get('zone') or not place['pages']:
             continue
@@ -193,6 +213,7 @@ def calendars(cfg):
             ev.append(e)
             if k in ('draft', 'final'):
                 india.append((a, e))
+        ev += [e for st, _a, e in sorted(courts, key=lambda c: c[1]) if st == name]
         path = 'calendar/%s.ics' % slug(name)
         files[path] = _calendar('Off the Roll: %s' % name, 'The dates of the Special Intensive Revision in %s, from the Election Commission\'s orders, and dates moved since as the press reported them.' % name, ev)
         per_state[place['id']] = path
@@ -213,9 +234,10 @@ def calendars(cfg):
             continue
         desc = '%s Organised by %s%s. Place: %s. Source: %s' % (e['what'], e['organiser'], ' (a political party)' if e.get('party') else '', e['place'], e['url'])
         india.append((e['start'], _event(e['id'], e['start'], end, e['title'], desc, url + 'india/events/', stamp)))
+    india += [(a, e) for _st, a, e in courts]
     india.sort(key=lambda x: x[0])
     files['calendar.ics'] = _calendar('Off the Roll: the revision across India',
-                                      'Each state\'s draft and final roll, the Supreme Court\'s dated orders, and events still to come on the Special Intensive Revision.',
+                                      'Each state\'s draft and final roll, the Supreme Court\'s dated orders, court hearings and deadlines ahead, and events still to come on the Special Intensive Revision.',
                                       [e for _, e in india])
     return files, per_state
 
@@ -228,6 +250,7 @@ NAMED = {
     'data/india/brief.json': 'The SIR in brief: the rules and rights, each with its source',
     'data/india/cases.json': 'The case studies of single constituencies and places, with their sources',
     'data/india/disputes_counts.json': 'Counts of the protests and disputes by state and month',
+    'data/india/form7_bulk.json': 'Bulk Form 7 filings reported, state by state, each linked to its reports on the disputes page',
     'data/india/events.json': 'Jan Sunwais, marches, protests and press conferences about the revision, with dates and sources',
     'data/india/help.json': 'What to do when a name is left off the roll: remedies, forms and organisations, with sources',
     'data/india/help_counts.json': 'Counts behind the page on what to do when a name is left off',
