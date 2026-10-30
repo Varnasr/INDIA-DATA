@@ -269,8 +269,9 @@ are aggregates.
 - **Telangana**: 92,88,188 notices generated and 92,81,189 delivered, hearings
   concluded for 92,08,443, and 50,690 electors found ineligible, as of 29
   October (Telangana Today, 30 October 2026, 00:24 IST). The News Minute of the
-  same morning gives the same figures and attributes them to the Chief
-  Electoral Officer's office. No total row was added at 92,88,188. It is one
+  same morning gives the same figures, attributing the notice counts to the
+  Chief Electoral Officer's office and the 50,690 found ineligible to the
+  Commission. No total row was added at 92,88,188. It is one
   more than the 92,88,187 row of 8 October, and adding it would move the
   national total by one, which the reading page quotes. The same reports give
   2,59,22,684 electors cleared for the final roll, which counts electors never

@@ -1,9 +1,11 @@
 # Nagaland: sources and checks
 
 Read on 2026-10-06. The draft was published on 20 September 2026; the final roll was due
-22 November 2026. The press reported on 29 October 2026 (ANI in the Free Press Journal,
-IANS) that the Commission moved it to 30 November 2026, with notices to be decided by
-25 November.
+22 November 2026. The Free Press Journal, carrying ANI, reported on 30 October 2026 that the
+Commission moved it on 29 October to 30 November 2026, with notices to be decided by
+25 November
+(https://www.freepressjournal.in/mumbai/ec-extends-sir-deadline-in-maharashtra-4-other-states-final-rolls-on-nov-30-delhis-on-dec-22).
+The News Minute and Business Today of 30 October report the same final date.
 
 ## Files
 
