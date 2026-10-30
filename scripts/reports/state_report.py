@@ -284,7 +284,7 @@ def tamilnadu(R):
     byDead = max(D, key=lambda d: d['dead_share'])
     CH = sorted([a for a in A if a['district'] == 'Chennai'], key=lambda a: -a['per_100'])
 
-    R.cover('Special Intensive Revision 2025-26', 'Tamil Nadu: %s names left off the draft roll' % lakh(S['removed']),
+    R.cover('Special Intensive Revision 2025-26', '%s names left off Tamil Nadu\'s draft roll' % lakh(S['removed']),
             'Where the names were left off, on what recorded reason, what the final roll put back, and how the names left off compare with the 2026 result',
             [('names left off the draft roll of 19 December 2025', indian(S['removed'])),
              ('of every 100 electors on the roll before the revision', d1(S['per_100'])),
@@ -455,7 +455,7 @@ def karnataka(R):
     low = D[-1]
     RK = [('absent', 'Absent'), ('shifted', 'Shifted'), ('dead', 'Dead'), ('duplicate', 'Already enrolled'), ('other', 'Other')]
 
-    R.cover('Special Intensive Revision 2026', 'Karnataka: %s names left off the draft roll' % crore(S['removed']),
+    R.cover('Special Intensive Revision 2026', '%s names left off Karnataka\'s draft roll' % crore(S['removed']),
             'Where the names were left off, district by district, on what recorded reason, and what the roll looked like while notices were still being heard',
             [('names left off the draft roll of 24 August 2026', indian(S['removed'])),
              ('of every 100 electors on the roll of 16 June 2026', d1(S['per_100'])),
@@ -576,7 +576,7 @@ def westbengal(R):
     kol = lambda name: name.startswith('Kolkata')
     low = D[-1]
 
-    R.cover('Special Intensive Revision 2025-26', 'West Bengal: %s names left off the draft roll and %s held back' % (lakh(P['removed']), lakh(P['adjudication'])),
+    R.cover('Special Intensive Revision 2025-26', '%s names left off West Bengal\'s draft roll and %s held back' % (lakh(P['removed']), lakh(P['adjudication'])),
             'The names left off by reason, the names held back for adjudication, how much smaller each roll was at the 2026 election than in 2024, and how that compares with the result',
             [('names left off the draft roll of 16 December 2025', indian(P['removed'])),
              ('more held back from the final roll for adjudication', indian(P['adjudication'])),
@@ -759,7 +759,7 @@ def kerala(R):
     low = D[-1]
     grew = [d['district'] for d in D if d['per_100'] < 0]
 
-    R.cover('Special Intensive Revision 2025-26', 'Kerala: the draft roll was %s smaller than in January 2025' % lakh(S['fall_draft']),
+    R.cover('Special Intensive Revision 2025-26', 'Kerala\'s draft roll was %s smaller than in January 2025' % lakh(S['fall_draft']),
             'How much smaller each district and constituency\'s roll was at the draft, who was missing, how much came back before the 2026 election, and how that compares with the result',
             [('fewer electors on the draft roll than in January 2025', indian(S['fall_draft'])),
              ('of every 100 electors on the January 2025 roll', d1(S['draft_per_100'])),

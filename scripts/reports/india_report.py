@@ -55,7 +55,7 @@ none = [s['state'] for s in S if s['split'] == 'none']
 AD = N['after_draft']
 
 # ------------------------------------------------------------ cover
-R.cover('Special Intensive Revision 2025-26', 'India: %s names left off the draft rolls' % crore(T['removed']),
+R.cover('Special Intensive Revision 2025-26', '%s names left off the draft rolls across India' % crore(T['removed']),
         'The reasons recorded for the names left off in each state, whose names were left off by sex where states published it, and what goes with the rate of exclusion',
         [('names left off the draft rolls in %d states and union territories' % T['states'], indian(T['removed'])),
          ('of those split by reason entered as shifted, absent or other', pct(T['shares']['shifted_absent_other'])),
