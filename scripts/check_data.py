@@ -345,6 +345,43 @@ def _feeds():
     assert re.search(r'for = "/embed/\*"\s*\[headers.values\]\s*Content-Security-Policy = "default-src \'self\'[^"]*; frame-ancestors \*"', toml), '/embed/ cannot be framed, or carries no sitewide policy'
 
 
+# A final roll that was due and is not recorded. Every state whose draft is
+# out and whose final roll was due before today (the date the line under its
+# pages gives, from scripts/final_roll.py) must carry electors_final in
+# data/india/states.json, or stand here with the reason it does not. So a
+# final roll that is missed fails CI the day after it was due, and an entry
+# here that no longer applies fails too. Today is the date in India;
+# FINAL_CHECK_DAY=YYYY-MM-DD sets it, to test the check against a later day.
+FINAL_PENDING = {
+    # 'State': 'why its final roll is not recorded although its date has passed',
+}
+
+
+def _finals_due():
+    import datetime
+    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+    import final_roll
+    today = os.environ.get('FINAL_CHECK_DAY') or (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=5, minutes=30)).date().isoformat()
+    datetime.date.fromisoformat(today)
+    P = json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))
+    S = json.load(open(os.path.join(ROOT, 'data', 'india', 'states.json'), encoding='utf-8'))['states']
+    late, stale = [], []
+    for r in S:
+        name, due = r['state'], final_roll.due(r['state'], P)
+        if r.get('electors_final') is not None:
+            assert r['final_date'] <= today, '%s has a final roll dated %s, after today (%s)' % (name, r['final_date'], today)
+            assert r['final_date'] >= r['draft_date'], '%s has a final roll dated before its draft' % name
+            if name in FINAL_PENDING:
+                stale.append(name)
+        elif r.get('removed') is not None and due and due < today:
+            if name not in FINAL_PENDING:
+                late.append('%s (due %s)' % (name, due))
+        elif name in FINAL_PENDING:
+            stale.append(name)
+    assert not late, ('final roll due and not recorded: %s. Record it with scripts/add_final.py, or give the reason in FINAL_PENDING in scripts/check_data.py' % ', '.join(late))
+    assert not stale, 'FINAL_PENDING lists %s, whose final roll is recorded or not yet due' % ', '.join(stale)
+
+
 def _ac_change():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_ac_change.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -576,6 +613,7 @@ for name, fn in [
     ('caste and religion figures are measured, not repeated', _caste_not_uniform),
     ('no individual records in published data', _no_people),
     ('All India table current, and Bihar row equal to the lists', _india),
+    ('every final roll that was due is recorded, or listed with the reason it is not', _finals_due),
     ('downloadable tables current', _downloads),
     ('Lok Sabha electors current and within range', _electors),
     ('Rajasthan data matches its raw tables', _rajasthan),

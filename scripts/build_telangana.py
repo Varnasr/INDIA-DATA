@@ -9,6 +9,9 @@ hyderabad_district_acs.csv (the 15 seats of Hyderabad district): electors on
 the roll before the revision, on the draft roll of 17 August 2026, and the
 names left off it, as the Chief Electoral Officer published them. Totals only;
 no split by reason is published below the district.
+
+The state's final roll, once published, is read from raw/final.json, which
+scripts/add_final.py writes (the shape is in scripts/final_roll.py).
 """
 import csv
 import json
@@ -16,6 +19,8 @@ import os
 import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+import final_roll  # noqa: E402
 RAW = os.path.join(ROOT, 'data', 'hyderabad', 'raw')
 OUT = os.path.join(ROOT, 'data', 'hyderabad', 'telangana.json')
 OLD_CITY = ['Charminar', 'Yakutpura', 'Malakpet', 'Chandrayangutta', 'Bahadurpura']
@@ -58,7 +63,15 @@ def build():
         a = next(x for x in A if x['name'] == n)
         assert (own[n]['electors'], own[n]['deleted']) == (a['electors_pre'], a['removed']), n
     rest = [x for x in D if x['district'] != 'Hyderabad']
+    # The final roll: the date it is due (the latest schedule step, or a later
+    # date reported in the press, as the line under every page gives it) and,
+    # once scripts/add_final.py has recorded it in raw/final.json, the roll
+    # itself, null until then. final_roll.block asserts that it adds up and
+    # that the All India table carries the same figures.
+    pre, rem = STATE['electors_pre'], STATE['removed']
+    final = final_roll.block(final_roll.read('hyderabad'), 'Telangana', pre, pre - rem, rem, final_roll.draft_date('Telangana'))
     return {
+        'final_due': final_roll.due('Telangana'), 'final': final,
         'state': group(D), 'hyderabad': group([hyd]), 'rest_of_state': group(rest),
         'old_city': group([x for x in A if x['old_city']]), 'other_hyderabad': group([x for x in A if not x['old_city']]),
         'districts': [{k: x[k] for k in ('district', 'electors_pre', 'electors_draft', 'removed', 'rate')} for x in D],

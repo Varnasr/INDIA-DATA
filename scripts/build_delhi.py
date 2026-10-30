@@ -18,6 +18,9 @@ constituencies.json, districts.json and the two CSVs.
   press note of 31 August 2026. A split by AC exists only as a third party's
   count of the named lists (secondary_reasons_ac.csv), and it is not used.
 - Districts are the 13 the CEO's table uses, the districts Delhi has now.
+- The final roll, once published, is read from raw/final.json, which
+  scripts/add_final.py writes (the shape is in scripts/final_roll.py). Until
+  then `final` in summary.json is null and the page gives the date it is due.
 """
 import math
 import csv
@@ -27,6 +30,8 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+import final_roll  # noqa: E402
 RAW = os.path.join(ROOT, 'data', 'delhi', 'raw')
 OUT = os.path.join(ROOT, 'data', 'delhi')
 CHECK = '--check' in sys.argv
@@ -115,8 +120,12 @@ def main():
     # Delhi's schedule in data/india/process.json, so a moved date reaches the
     # page with the schedule and is never written into its prose.
     sch = next(x for x in json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))['schedules'] if x['state'] == 'Delhi')
-    last = [x for x in sch['steps'] if x.get('final')][-1]
+    last = [x for x in sch['steps'] if x.get('final') and x.get('kind') != 'published'][-1]
     summ['claims_to'] = last['claims'][1]; summ['final_due'] = last['final']
+    # The final roll, from raw/final.json once scripts/add_final.py has
+    # recorded it, and null until then; final_roll.block asserts that it adds
+    # up and that the All India table carries the same figures.
+    summ['final'] = final_roll.block(final_roll.read('delhi'), 'Delhi', st['roll_before'], st['draft'], st['left_off'], final_roll.draft_date('Delhi'))
 
     files = {}
     files['summary.json'] = json.dumps(summ, ensure_ascii=False, indent=1) + '\n'

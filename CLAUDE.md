@@ -80,6 +80,59 @@ python3 -m http.server 8000
 - "Cite this page" carries the build hash `scripts/stamp.py` writes; the date
   without a script is the latest date in `data/updates.json`.
 
+## Final-roll day
+
+`python3 scripts/add_final.py --due` lists every state whose final roll is not
+recorded and the date it is due, from `data/india/process.json` (the latest
+schedule step, or a later date reported in the press). `check_data.py` fails
+the day after a due date if the roll is not recorded and the state is not in
+`FINAL_PENDING` there with a reason.
+
+Where each state's Chief Electoral Officer has published before, as the
+repository cites it. Look for the final-roll press note first, then the
+office's account on X, then the press.
+
+- Maharashtra: ceoelection.maharashtra.gov.in, Downloads, PDF, Notification (English and Marathi notes).
+- Haryana: ceoharyana.gov.in, and the state's releases at prms.prharyana.gov.in.
+- Andhra Pradesh: x.com/CEOAndhra, and the Commission's documents on eci.gov.in.
+- Telangana: x.com/CEO_Telangana. Telangana Today has carried its schedules.
+- Nagaland: ceo.nagaland.gov.in, media/sir2026.
+- Jharkhand: no CEO site is cited here. The draft came through ETV Bharat and
+  The Hindu, and the date of 30 November through Town Post quoting the CEO.
+- Delhi: ceodelhi.gov.in, PDFFolders/2026, and x.com/CeodelhiOffice.
+- The Commission's schedules are on pib.gov.in.
+
+Read in the note: the final roll of general electors, and service electors
+apart from it; men, women and third gender; the names added and deleted after
+the draft, by form; any names withheld; and the draft as the note prints it,
+which must agree with ours within half a per cent.
+
+Then write the figures to a small JSON file (the keys are in the docstring of
+`scripts/add_final.py`) and run, with `PLAYWRIGHT_CORE` set:
+
+```bash
+python3 scripts/add_final.py --json mh.json --dry-run   # refusals, warnings and the diff
+python3 scripts/add_final.py --json mh.json             # write, rebuild, run every check
+```
+
+It refuses a final roll at or below zero, dated before the draft or after
+today, whose sexes do not add to it, or whose draft plus additions less
+deletions misses it (exactly for `exact`, within 0.1 per cent for `rounded`;
+use `net` or `no` with a note otherwise). It warns when the source is not an
+official site or a CEO's account. It writes `data/india/raw/final.csv`, the
+state's `normal.json` (shared page) or `raw/final.json` (Maharashtra, Delhi,
+Telangana, Karnataka), and a published step in `process.json`. The pages of
+Maharashtra, Delhi and Telangana switch from "due on" to "published on" by
+themselves. It leaves to a person, and prints with drafts: the What's New line
+(`data/updates.json`), `SOURCES.md`, a corrections entry if a recorded figure
+changed, the front-page card, process.json's prose, and the reading-page
+panel figures (`panels_research/plain.json`) that move with every final roll.
+
+Commit the sources only, open the pull request and merge once for the day's
+states. Nothing goes live until the 20:00 IST publish. When the owner says
+"publish", run the "Publish locked sites" workflow in Democracy-by-Design for
+this site.
+
 ## Writing
 
 Plain, full sentences with facts in them. No em dashes, no "X, not Y" turns, no
