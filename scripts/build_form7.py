@@ -5,7 +5,10 @@
     python3 scripts/build_form7.py --check  # fails if it is stale or a row breaks a rule
 
 Each row is one reported bulk filing: Form 7 objections filed in numbers at one
-place or by one filer, or generated in numbers in an officer's name. The rows
+place or by one filer. Forms generated in numbers in registration officers'
+names, which the officers or the Chief Electoral Officer said the Commission's
+software produced, are rows of their own group ('officers'), shown apart,
+because no person filed them as an objector. The rows
 come from the `bulk` field on the entries in the disputes research
 (data/india/raw/disputes_research/form7.json, up.json and software.json) and,
 for two press reports the process page carries, from `bulk_process` in
@@ -20,7 +23,8 @@ Rules the build holds:
   at most;
 - who filed is given by role or party, as the claim states it;
 - a status is one of STATUS;
-- every entry in a row is about the same state.
+- every entry in a row is about the same state;
+- a row is in one group, '' for filings by people or 'officers'.
 
 The context line is not written here. It is the process page's own sentence
 on the order of 15 October 2026, and the first sentence of the disputes
@@ -48,6 +52,7 @@ STATUS = [
 ]
 UNITS = {'forms', 'electors'}
 QUAL = {'', 'about', 'more than', 'at least'}
+GROUPS = ['', 'officers']
 # the disputes item that reports the Commission's letter of 9 October 2026
 LETTER = 'form7-45'
 
@@ -92,7 +97,7 @@ def build():
             raise SystemExit('FAIL - %s carries a bulk field but is not on the disputes page' % iid)
         k = b['row']
         if k not in rows:
-            rows[k] = {'id': k, 'state': '', 'place': '', 'count': None, 'count_to': None, 'count_q': '', 'unit': '',
+            rows[k] = {'id': k, 'group': None, 'state': '', 'place': '', 'count': None, 'count_to': None, 'count_q': '', 'unit': '',
                        'count_from': '', 'filer': '', 'status': [], 'outcomes': [], 'entries': []}
             order.append(k)
         r = rows[k]
@@ -100,6 +105,10 @@ def build():
         if r['state'] and r['state'] != st:
             raise SystemExit('FAIL - row %s mixes %s and %s' % (k, r['state'], st))
         r['state'] = st
+        g = b.get('group', '')
+        if g not in GROUPS or (r['group'] is not None and r['group'] != g):
+            raise SystemExit('FAIL - row %s has an unknown group or two groups' % k)
+        r['group'] = g
         for f in ('place', 'filer'):
             if b.get(f):
                 if r[f]:
@@ -136,7 +145,7 @@ def build():
         r['status'] = [s for s, _ in STATUS if s in r['status']]
         r['first'], r['last'] = r['entries'][0]['date'], r['entries'][-1]['date']
         out.append(r)
-    out.sort(key=lambda r: (r['state'], r['first'], r['place']))
+    out.sort(key=lambda r: (GROUPS.index(r['group']), r['state'], r['first'], r['place']))
 
     # the context: the Commission's own limits, as the process page records them
     P = json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))
@@ -150,6 +159,7 @@ def build():
     if not letter or '9 October' not in letter['claim']:
         raise SystemExit('FAIL - %s, the report of the letter of 9 October, is not on the disputes page' % LETTER)
     first = re.split(r'(?<=\.)\s+', letter['claim'])[0]
+    people = [r for r in out if r['group'] == '']
     return {
         'rows': out,
         'status': [list(s) for s in STATUS],
@@ -157,9 +167,9 @@ def build():
             'order': {'date': '2026-10-15', 'text': sent[0], 'title': order15[0]['title'], 'src': order15[0]['src'][0]},
             'letter': {'date': letter['date'], 'text': first, 'id': LETTER},
         },
-        'counts': {'rows': len(out), 'states': len({r['state'] for r in out}), 'with_count': sum(1 for r in out if r['count'] is not None),
-                   'police': sum(1 for r in out if 'police' in r['status']), 'court': sum(1 for r in out if 'court' in r['status']),
-                   'entries': len({e['id'] for r in out for e in r['entries']})},
+        'counts': {'rows': len(people), 'states': len({r['state'] for r in people}), 'with_count': sum(1 for r in people if r['count'] is not None),
+                   'police': sum(1 for r in people if 'police' in r['status']), 'court': sum(1 for r in people if 'court' in r['status']),
+                   'officers': len(out) - len(people), 'entries': len({e['id'] for r in out for e in r['entries']})},
     }
 
 
@@ -172,7 +182,8 @@ def main():
         return
     open(OUT, 'w', encoding='utf-8').write(text)
     c = json.loads(text)['counts']
-    print('%d rows across %d states, %d with a count, from %d entries' % (c['rows'], c['states'], c['with_count'], c['entries']))
+    print('%d rows of filings across %d states, %d with a count, and %d rows of forms in officers\' names, from %d entries'
+          % (c['rows'], c['states'], c['with_count'], c['officers'], c['entries']))
 
 
 if __name__ == '__main__':

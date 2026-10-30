@@ -229,7 +229,7 @@ NAMED = {
     'data/india/cases.json': 'The case studies of single constituencies and places, with their sources',
     'data/india/disputes_counts.json': 'Counts of the protests and disputes by state and month',
     'data/india/form7_bulk.json': 'Bulk Form 7 filings reported, state by state, each linked to its reports on the disputes page',
-    'data/india/events.json':'Jan Sunwais, marches, protests and press conferences about the revision, with dates and sources',
+    'data/india/events.json': 'Jan Sunwais, marches, protests and press conferences about the revision, with dates and sources',
     'data/india/help.json': 'What to do when a name is left off the roll: remedies, forms and organisations, with sources',
     'data/india/help_counts.json': 'Counts behind the page on what to do when a name is left off',
     'data/india/margins.json': 'Names left off against the 2024 Lok Sabha winning margins, constituency by constituency',

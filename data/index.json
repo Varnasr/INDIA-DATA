@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 462,
-  "bytes": 13258662
+  "bytes": 13263924
  },
  "files": [
   {
@@ -33,7 +33,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 450253,
+   "bytes": 450984,
    "keys": [
     "places",
     "pages",
@@ -4229,7 +4229,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 222458,
+   "bytes": 223191,
    "columns": [
     "section",
     "date",
@@ -4250,7 +4250,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 360753,
+   "bytes": 361484,
    "keys": [
     "sections",
     "by_state",
@@ -4364,7 +4364,7 @@
    "path": "data/india/form7_bulk.json",
    "description": "Bulk Form 7 filings reported, state by state, each linked to its reports on the disputes page",
    "format": "JSON",
-   "bytes": 23506,
+   "bytes": 26492,
    "keys": [
     "rows",
     "status",
@@ -4542,7 +4542,7 @@
    "path": "data/india/process.json",
    "description": "How the revision was run: the rules as they changed, and each state's dates",
    "format": "JSON",
-   "bytes": 147762,
+   "bytes": 147843,
    "keys": [
     "as_of",
     "timeline",
