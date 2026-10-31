@@ -77,7 +77,7 @@
         [L('Does a case study say why the names were left off?'),
          L('No. It sets out what the official records say, what was reported and what officials and parties said, and lists what could not be found. None of the places has an official explanation of its figure, and the page does not supply one.'), ['cases', 'faq']],
         [L('Can I suggest a piece to read or watch?'),
-         L('Yes. Send it through <a href="../../share/">the form for sharing a list</a>. A piece is added once it has been read and its summary checked against it.'), ['reading', 'faq']],
+         L('Yes. Send it through <a href="../../share/">the form for sharing a list</a>.'), ['reading', 'faq']],
         [L('Why do some commentators say more than these figures do?'),
          L('Some use data that is not in the official counts, such as the outcomes of West Bengal\'s adjudication seat by seat. Some compare groups of seats without allowing for the other ways those seats differ. Some read a purpose into a pattern in the figures, which the lists cannot show. The panels on <a href="../reading/#what-others-say">the reading page</a> set each claim beside the official figures and say where those figures stop.'), ['reading', 'faq']],
         [L('Can I send you an RTI reply I received?'),
