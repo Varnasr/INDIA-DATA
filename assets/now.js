@@ -70,11 +70,15 @@
         return '<li><a href="' + E(c[1]) + '" rel="noopener">' + (c[0] === 'x' ? L('The Chief Electoral Officer\'s account on X') : L('The Chief Electoral Officer\'s website')) + '</a></li>';
       }).join('') + '</ul>' : '';
     var out = [], short = [];
+    // who may still be added, and when the Act stops it (section 23(3))
+    var tenDays = L('The Commission has said that an application can be submitted up to ten days before the last date for filing nominations for an election.'),
+      s233 = L('Under section 23(3) of the Representation of the People Act, 1950, no name can be added to the roll of a constituency after the last date for making nominations for an election in that constituency, or in the parliamentary constituency that contains it, until that election is completed.'),
+      addAfter = L('After the revision, Form 6 can still be filed at any time under continuous updation.') + ' ' + tenDays + ' ' + s233;
 
     if (kind === 'open') {
       out.push(sec('check-the-draft-roll', L('Check whether your name is on the draft roll'),
-        p(L('The Election Commission said in its release of {d} that after the draft, Chief Electoral Officers were to put online the lists of electors found absent, shifted, dead or enrolled twice, searchable by EPIC number, the number on the voter identity card.', { d: D(C.c_lists.date) })) +
-        p(L('Under the Commission\'s order of {d}, the claims and objections received are to be listed every working day on the notice board and on the Chief Electoral Officer\'s website.', { d: D(C.c_listed_daily.date) })) + ceo,
+        p(L('In the second phase of the revision, the Election Commission said in its release of {d} that after the draft, the lists of electors marked absent, shifted, dead or duplicate would be put on the district and Chief Electoral Officer websites, searchable by EPIC number, the number on the voter identity card.', { d: D(C.c_lists.date) })) +
+        p(L('Under the Commission\'s order of {d}, the registration officer is to put up the list of claims and objections received on the office notice board every working day, and the list is also to go on the Chief Electoral Officer\'s website.', { d: D(C.c_listed_daily.date) })) + ceo,
         ['c_lists', 'c_listed_daily']));
       var off = p(L('The Commission\'s order of {d} lets an elector whose enumeration form was not handed in on time file Form 6, with the declaration that goes with it, during the period for claims and objections.', { d: D(C.c_form6_late.date) }));
       if (decl === 'c_decl_III') off += p(L('For this phase of the revision, the Commission\'s letter of {d} keeps the same declaration, Annexure IV, with Form 6. It lets you link to your own or a relative\'s entry in the roll of the state\'s last intensive revision.', { d: D(C.c_decl_III.date) }));
@@ -97,11 +101,11 @@
       if (decl) {
         out.push(sec('documents', L('Documents'),
           p(L('Documents are asked for when the registration officer sends a notice because the details in the declaration are missing or do not match.')) +
-          p(L('The Commission\'s letter of {d} sets the list of documents that are accepted.', { d: D(C[decl].date) })), ['c_decl_II', decl]));
+          p(L('The Commission\'s letter of {d} gives an indicative list of the documents accepted, and says the list is not exhaustive.', { d: D(C[decl].date) })), ['c_decl_II', decl]));
       }
       out.push(sec('the-deadline', L('The deadline'),
-        p(L('The last day for claims and objections in {s} is {c}.', { s: s, c: D(r.c1) }) + (r.rep && r.rep.claims_end === r.c1 ? ' ' + L('That date is as {o} reported on {r}.', { o: E(r.rep.outlet), r: D(r.rep.date) }) : '')) +
-        p(L('After the revision, Form 6 can still be filed at any time under continuous updation, until ten days before the last date for nominations in an election. No name can be added after the last date for nominations until that election is over.')),
+        p(L('The last day for claims and objections in {s} is {c}.', { s: s, c: D(r.c1) }) + (r.rep && r.rep.claims_end === r.c1 ? ' ' + L('That date is as {o} reported on {r}.', { o: E(r.rep.outlet) + (/,/.test(r.rep.outlet) ? ',' : ''), r: D(r.rep.date) }) : '')) +
+        p(addAfter),
         ['c_h_anytime'], steps(r)));
       short = [L('Claims and objections in {s} are open until {c}.', { s: s, c: D(r.c1) }),
         L('Until that day an elector left off the draft can ask on Form 6 to be put back, an elector can object to a name on Form 7, and an entry can be corrected on Form 8.'),
@@ -112,7 +116,7 @@
         p(L('An elector who is on the draft roll can still be sent a notice to show that the entry is right. Notices go to electors who could not be linked to the roll of the last intensive revision, which is the no-mapping list, and to those whose link showed a discrepancy, which is the logical discrepancy list. An elector can be on both lists.')) +
         (decl === 'c_decl_III' ? p(L('The Commission\'s order of {d} said that the lists of those sent notices were to be published.', { d: D(C.c_notices_III.date) })) : '') +
         p('<a href="' + root + 'about-the-data/#notices">' + L('Notices, in About the data') + '</a>'),
-        [decl === 'c_decl_III' ? 'c_notices_III' : null]));
+        decl === 'c_decl_III' ? ['c_notices_III', 'c_decl_III'] : []));
       out.push(sec('the-hearing', L('The hearing'),
         p(L('The Commission said on {d} that booth level officers would collect at home the documents of electors sent a notice for no mapping or a discrepancy, and upload them for the registration officer, so that these electors need not come to the office. A hearing would be held only in exceptional cases, as the registration officer decides, preferably online, and a family member the elector authorises could attend.', { d: D(C.c_docs_home.date) })) +
         p(L('If someone has objected to your name on Form 7, you should get a notice with the date, time and place of the hearing. Take your documents, and ask for the registration officer\'s decision in writing, because an appeal needs it.')) +
@@ -129,16 +133,17 @@
         L('Once the revision is over in the state, an elector who is not on the final roll can still apply on Form 6 at any time under continuous updation.')];
     } else if (kind === 'final') {
       var fs = S[name] && S[name].final_source;
+      var goa = C.c_h_appeal.items.filter(function (it) { return /^CEO Goa/.test(it.name); })[0];
       out.push(sec('the-final-roll', L('The final roll'),
         (r.k === 'final' && fs && fs.url ? p('<a href="' + E(fs.url) + '" rel="noopener">' + (fs.source === 'press' ? L('The final roll, as the press reported it') : L('The final roll, as published')) + '</a>') : '') + ceo));
       out.push(sec('appealing-a-decision', L('Appealing a decision'),
-        p(L('If the registration officer\'s decision on your name goes against you, you can appeal to the District Magistrate under section 24(a) of the Representation of the People Act, 1950, read with rule 27 of the Registration of Electors Rules, 1960. Chief Electoral Officers\' notes on final rolls give 15 days from the registration officer\'s decision for this first appeal.')) +
+        p(L('If the registration officer\'s decision on your name goes against you, you can appeal to the District Magistrate under section 24(a) of the Representation of the People Act, 1950, read with rule 27 of the Registration of Electors Rules, 1960. The note of Goa\'s Chief Electoral Officer on that state\'s final roll, of {g}, gives 15 days from the registration officer\'s decision for this first appeal.', { g: D(goa.date) })) +
         p(L('If the District Magistrate\'s order also goes against you, a second appeal lies to the state\'s Chief Electoral Officer under section 24(b), within 30 days of the District Magistrate\'s order, under the Commission\'s order of {d}.', { d: D(C.c_h_appeal_order.date) })) +
-        p(L('The appeal is a memorandum you sign, with a copy of the order appealed from. Keep copies and receipts of everything you hand in.')),
+        p(L('Under rule 27, the appeal is a memorandum you sign, with a copy of the order appealed from and a fee of five rupees. Keep copies and receipts of everything you hand in.')),
         ['c_h_appeal', 'c_h_appeal_order']));
       out.push(sec('not-on-the-final-roll', L('If you are not on the final roll'),
         p(L('A person who is no longer on the roll applies again on Form 6 as a new elector, as paragraph 14.7.4.1 of the Commission\'s Manual on Electoral Rolls says. Section 23(1) of the Representation of the People Act, 1950 lets anyone whose name is not on the roll apply to be added.')) +
-        p(L('An elector who is not on the final roll can still apply on Form 6 at any time under continuous updation.') + ' ' + L('No name can be added after the last date for nominations in an election until that election is over, so apply well before one is called.')) +
+        p(L('An elector who is not on the final roll can still apply on Form 6 at any time under continuous updation.') + ' ' + tenDays + ' ' + s233) +
         p(L('In its letter of {d}, the Commission told booth level officers to compare the roll from before the revision with the present one, list the electors missing from it, and help those still eligible fill in Form 6.', { d: D(C.c_h_drive.date) })) +
         p('<a href="' + root + 'help/#form6">' + L('What the ordinary Form 6 asks an applicant to declare') + '</a>'),
         ['c_h_reapply', 'c_h_anytime', 'c_h_drive', 'c_h_drive_form6']));
@@ -228,7 +233,7 @@
         [L('What is the difference between a name left off the draft and a name deleted?'),
           L('A name on the roll before the revision whose enumeration form did not come back was left off the draft. A name taken off the roll by an officer\'s order after the draft, on an objection in Form 7 or on the officer\'s own motion, is deleted, and that order can be appealed. <a href="{u}">Words we use</a> sets out the difference.', { u: root + 'about-the-data/#words-we-use' })],
         [L('Can a name be added after the revision is over?'),
-          L('Form 6 can be filed at any time under continuous updation, until ten days before the last date for nominations in an election. No name can be added after the last date for nominations until that election is over.')],
+          addAfter],
         [L('Where are the steps set out in full?'),
           L('<a href="{u}">Left off the roll? What to do</a> sets out each step with the law or order it rests on, and lists organisations that have helped electors.', { u: root + 'help/' })]
       ],
