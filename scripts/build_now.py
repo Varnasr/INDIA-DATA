@@ -185,10 +185,10 @@ def build():
         for kind, url in row['ceo']:
             assert kind in ('site', 'x') and url.startswith('https://'), (name, url)
         orgs = sum(1 for o in H['orgs'] if o['state'] == name)
+        # the items the disputes page shows when filtered to the state and
+        # one court, counted the way its filter counts them
         courts = {}
         for sec in D['sections']:
-            if sec['id'] != 'courts':
-                continue
             for it in sec['items']:
                 if name in it['states'] and it['court']:
                     courts[it['court']] = courts.get(it['court'], 0) + 1

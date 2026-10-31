@@ -13106,12 +13106,6 @@
    "/india/disputes/"
   ]
  },
- "Hearings held": {
-  "kind": "script",
-  "pages": [
-   "/assets/now.js"
-  ]
- },
  "Hearings scheduled each day": {
   "kind": "markup",
   "pages": [
@@ -20530,6 +20524,12 @@
   ]
  },
  "Notices heard and decided": {
+  "kind": "script",
+  "pages": [
+   "/assets/now.js"
+  ]
+ },
+ "Notices heard or verified": {
   "kind": "script",
   "pages": [
    "/assets/now.js"
@@ -31862,7 +31862,7 @@
    "/hyderabad/"
   ]
  },
- "Until that day an elector left off the draft can ask on Form 6 to be put back, anyone can object to a name on Form 7, and an entry can be corrected on Form 8.": {
+ "Until that day an elector left off the draft can ask on Form 6 to be put back, an elector can object to a name on Form 7, and an entry can be corrected on Form 8.": {
   "kind": "script",
   "pages": [
    "/assets/now.js"
@@ -36819,7 +36819,8 @@
  "{d}, as reported": {
   "kind": "script",
   "pages": [
-   "/assets/sir.js"
+   "/assets/sir.js",
+   "/assets/now.js"
   ]
  },
  "{exshift} of the {excess} more women than men left off the draft were marked shifted. For dead, absent and already enrolled, women and men are close to even.": {

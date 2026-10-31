@@ -480,7 +480,9 @@ def shell(out, meta, content, scripts):
     # is the zip of every table. So every page of a place with a workbook
     # carries its own files at the foot of the page: the workbook and the
     # CSVs the pages draw, each one tap away.
-    wb = dl_book(book) if book and not here.startswith(('downloads/', 'share/', 'terms/', 'corrections/', 'updates/', 'help/')) and place['id'] != 'home' else None
+    # (a state's "What to do now" page is about the steps open to an elector,
+    # like the help page, so it carries no table downloads either)
+    wb = dl_book(book) if book and not here.startswith(('downloads/', 'share/', 'terms/', 'corrections/', 'updates/', 'help/')) and not here.endswith('/now/') and place['id'] != 'home' else None
     if wb:
         # the shared workbook of the twenty smaller places: only this place's own table
         own = 'data/%s/' % out.split('/')[0]

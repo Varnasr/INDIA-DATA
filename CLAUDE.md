@@ -80,6 +80,21 @@ python3 -m http.server 8000
 - "Cite this page" carries the build hash `scripts/stamp.py` writes; the date
   without a script is the latest date in `data/updates.json`.
 
+## "What to do now" pages
+
+Each state still in the revision has a page at `<state>/now/` (Telangana's is
+`hyderabad/telangana/now/`). The states are `PAGES` in `scripts/build_now.py`;
+`scripts/make_now_pages.py` writes their sources from one template, and
+`build_now.py` writes `data/india/now.json`, the sources each step cites (by
+key into help.json, process.json's forms and timeline, and the disputes) and
+each state's extras. `assets/now.js` decides the stage in the browser with
+`SIR.owin.stage`, the claims box's own code, so the page changes with the date.
+A step says only what its cited document says, and a step with no source is
+left out. A new state is a row in `PAGES`, a tab in `places.json`, a run of
+both scripts, then the usual build and translations. `check_data.py` fails on a
+state with no schedule, a cited key that does not resolve, or a page that does
+not link back to its overview.
+
 ## Final-roll day
 
 `python3 scripts/add_final.py --due` lists every state whose final roll is not

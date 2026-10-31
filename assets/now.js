@@ -157,6 +157,17 @@
           rows += '<tr><th scope="row" class="l">' + f[1] + '</th><td class="l">' + (typeof v === 'string' ? D(v) : L('{a} to {b}', { a: D(v[0]), b: D(v[1]) })) + '</td><td class="l" lang="en">' + E(st.label) + '</td></tr>';
           if (st.src && srcs.every(function (x) { return x.url !== st.src; })) srcs.push({ name: st.label, url: st.src });
         });
+        // a later draft or final date the press reported, as the box and the
+        // line under the kicker take it, marked as reported
+        var rep = (P.reported_dates || []).filter(function (x) { return x.state === name; })
+          .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }).pop();
+        if (rep) {
+          [['draft', L('Draft roll')], ['final', L('Final roll')]].forEach(function (f) {
+            if (!rep[f[0]]) return;
+            rows += '<tr><th scope="row" class="l">' + f[1] + '</th><td class="l">' + L('{d}, as reported', { d: D(rep[f[0]]) }) + '</td><td class="l" lang="en">' + E(rep.outlet) + ', ' + D(rep.date) + '</td></tr>';
+          });
+          srcs.push({ name: rep.outlet + ', ' + D(rep.date), url: rep.url });
+        }
       }
       out.push(sec('the-dates-on-record', L('The dates on record'),
         p(sc ? L('No draft roll of the revision in {s} is on record yet. The latest schedule on record sets these dates.', { s: s }) : L('No schedule for the revision in {s} is on record.', { s: s })) +
@@ -178,7 +189,7 @@
         row(L('Notices sent'), nt, nt.n, nt.date) +
         row(L('On the no-mapping list'), lists, nt.no_mapping, nt.lists_url === nt.url ? nt.date : null) +
         row(L('On the logical discrepancy list'), lists, nt.discrepancy, nt.lists_url === nt.url ? nt.date : null) +
-        (nt.hearings ? row(L('Hearings held'), nt.hearings, nt.hearings.n, nt.hearings.date) : '') +
+        (nt.hearings ? row(L('Notices heard or verified'), nt.hearings, nt.hearings.n, nt.hearings.date) : '') +
         (nt.deleted ? row(L('Deleted after a notice'), nt.deleted, nt.deleted.n, nt.deleted.date) : '') +
         '</tbody></table></div>' +
         '<p class="note">' + L('An asterisk marks a figure published rounded, or as about or over a number. An elector can be on both lists, so the two lists need not add up to the notices sent.') + '</p>';

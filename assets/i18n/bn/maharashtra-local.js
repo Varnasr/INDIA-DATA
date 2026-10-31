@@ -1,1 +1,1 @@
-Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Maharashtra 2026 · the names left off, constituency by constituency":"মহারাষ্ট্র 2026 · বাদ পড়া নাম, কেন্দ্র অনুযায়ী","Maharashtra pages":"মহারাষ্ট্রের পাতা"});
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Maharashtra 2026 · the names left off, constituency by constituency":"মহারাষ্ট্র 2026 · বাদ পড়া নাম, কেন্দ্র অনুযায়ী","Maharashtra pages":"মহারাষ্ট্রের পাতা","What to do now":"এখন কী করবেন"});
