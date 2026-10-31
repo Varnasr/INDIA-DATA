@@ -1,0 +1,16 @@
+{
+ "meta": {
+  "checked": "2026-10-31",
+  "by": "independent second reading",
+  "method": "The guide's English PDF downloaded afresh from part-three.org (sha256 3ea72362dd839293b5ba13d5b1e8c3e369d29d51860f6db59e9889820287f00a, 32 pages, created 30 October 2026) and read in full with pdftotext, layout and raw. The guide's post (part-three.org/guidebook-sir-special-intensive-revision/, published 26 October 2026, modified 30 October) and the Our Work page (part-three.org/our-work-2-2/) fetched with curl and read. The Hindi PDF answered HTTP 200. The quote compared with the credits page character by character. The entry judged against the bar set for organisations known only from their own account in verified.json (CJP in Maharashtra, Assam and India) and verified_orgs3.json (APCR). The Hindi and Bengali descriptions read against the English, and the contact against contacts.json.",
+  "files": [
+   "orgs4.json (1 entry with publish true)"
+  ]
+ },
+ "orgs": {
+  "dl-part-three": {
+   "status": "confirmed",
+   "note": "Quote found verbatim on the guide's credits page (PDF page 2): 'This guide is the result of our experience supporting DV survivors in applying for the SIR (Delhi).' The back cover says Part III has offices in New Delhi and Patna and that the guide has no affiliation with the Government of Delhi. Our Work says it is a collective of lawyers, researchers, social workers and community engagement fellows, based in Delhi and Bihar, that provides legal aid to survivors of identity- and gender-based violence. The post says the guidebook covers 'the full process of SIR (from enumeration to appeal)' and is in English and Hindi, and the Hindi PDF loads. Every clause of 'what' is in these. No party link found. As to the bar, APCR was rejected at second reading (and later published on the owner's decision) because its own report named Uttar Pradesh only in a list of four states, with no place, date, count or people helped. Own-account entries that passed (CJP in Maharashtra and Assam, and CJP for India on the strength of a published guide and manual) named places, dates or the people helped, or rested on a public resource that can be read. This entry names one state, Delhi, where the group has its office, and the people it helped, survivors of domestic violence, and the help is borne out by a guide written for Delhi's electors that anyone can read. It has no count and no date for the help, and 'what' marks that part 'by its own account', with confidence 'own report'. That meets the bar. The guide's Form 7 line for a wrongly deleted name differs from the site's help page, and the reading item says so; it does not bear on whether the group helped electors. Contact: contacts.json gives only the website and contact@part-three.org, which the guide's page prints for feedback and the credits page for correspondence; the office address and phone on the contact page are left out, as instructed. Hindi and Bengali: both say what the English says, sentence for sentence, including 'by its own account' (अपने ही कथन के अनुसार, সংগঠনটির নিজের কথায়), and the Bengali writes 2026 in Western digits. No dash in any of the three. Confirmed, no change."
+  }
+ }
+}

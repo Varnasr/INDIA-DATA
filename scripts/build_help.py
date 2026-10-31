@@ -6,7 +6,7 @@
 
 Reads data/india/raw/help_research/: remedies.json (the law, the Commission's
 orders and the Supreme Court's orders, each step with the document it rests
-on), orgs.json and orgs2.json (organisations that helped electors, each with
+on), orgs.json to orgs4.json (organisations that helped electors, each with
 the source showing the help it gave), and verified.json, an independent second
 reading of every remedy and every organisation. A remedy reaches the page only
 if that reading confirmed or corrected it. An organisation reaches the page
@@ -37,8 +37,10 @@ def dash(t):
 def build():
     V = load('verified') or {}
     VR, VO = V.get('remedies', {}), dict(V.get('orgs', {}))
-    # the Uttar Pradesh search (orgs3.json) was read again on its own
+    # the Uttar Pradesh search (orgs3.json) and the Delhi addition (orgs4.json)
+    # were each read again on their own
     VO.update((load('verified_orgs3') or {}).get('orgs', {}))
+    VO.update((load('verified_orgs4') or {}).get('orgs', {}))
     R = load('remedies')
     rem = []
     for it in sorted(R['items'], key=lambda x: ORDER.index(x['id'])):
@@ -59,7 +61,7 @@ def build():
     C = (load('contacts') or {}).get('contacts', {})
     HOLD = {'dl-vam', 'wb-nakhoda-masjid'}
     orgs, dropped = [], []
-    for f in ('orgs', 'orgs2', 'orgs3'):
+    for f in ('orgs', 'orgs2', 'orgs3', 'orgs4'):
         d = load(f)
         if not d:
             continue
