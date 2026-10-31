@@ -12,8 +12,8 @@
   "url": "https://www.impactmojo.in/"
  },
  "counts": {
-  "files": 465,
-  "bytes": 13365846
+  "files": 464,
+  "bytes": 13376827
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 453760,
+   "bytes": 459166,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 49186,
+   "bytes": 50672,
    "keys": [
     "note",
     "entries"
@@ -4265,7 +4265,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 224509,
+   "bytes": 228024,
    "columns": [
     "section",
     "date",
@@ -4286,7 +4286,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 385203,
+   "bytes": 389759,
    "keys": [
     "listings",
     "sections",
@@ -4326,7 +4326,7 @@
    "path": "data/india/events.json",
    "description": "Jan Sunwais, marches, protests and press conferences about the revision, with dates and sources",
    "format": "JSON",
-   "bytes": 53305,
+   "bytes": 57190,
    "keys": [
     "checked",
     "scope",
@@ -4536,7 +4536,7 @@
    "path": "data/india/notices.json",
    "description": "Electors kept on a draft roll but sent a notice, by state. The same table as data/india/notices.csv, as JSON",
    "format": "JSON",
-   "bytes": 40389,
+   "bytes": 40702,
    "keys": [
     "states",
     "with_total",
@@ -4544,17 +4544,6 @@
     "notices_total",
     "draft_total",
     "per_100"
-   ],
-   "licence": "CC BY 4.0"
-  },
-  {
-   "path": "data/india/now.json",
-   "description": "All India: now",
-   "format": "JSON",
-   "bytes": 21265,
-   "keys": [
-    "cite",
-    "pages"
    ],
    "licence": "CC BY 4.0"
   },
@@ -4590,7 +4579,7 @@
    "path": "data/india/process.json",
    "description": "How the revision was run: the rules as they changed, and each state's dates",
    "format": "JSON",
-   "bytes": 150570,
+   "bytes": 154418,
    "keys": [
     "as_of",
     "timeline",
@@ -4612,7 +4601,7 @@
    "path": "data/india/process_schedules.csv",
    "description": "Each state's schedule as set and as moved",
    "format": "CSV",
-   "bytes": 14841,
+   "bytes": 15545,
    "columns": [
     "state",
     "phase",
@@ -4634,7 +4623,7 @@
    "path": "data/india/process_timeline.csv",
    "description": "Every order, letter, court order and judgment that changed how the revision was run",
    "format": "CSV",
-   "bytes": 25399,
+   "bytes": 26813,
    "columns": [
     "date",
     "who",
@@ -4650,7 +4639,7 @@
    "path": "data/india/reads.json",
    "description": "Further reading and viewing on the revision, with outlets, dates and summaries",
    "format": "JSON",
-   "bytes": 103154,
+   "bytes": 106297,
    "keys": [
     "groups",
     "items",
@@ -4728,7 +4717,7 @@
    "path": "data/india/states.csv",
    "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave",
    "format": "CSV",
-   "bytes": 17528,
+   "bytes": 17570,
    "columns": [
     "state",
     "phase",
@@ -4780,7 +4769,7 @@
    "path": "data/india/states.json",
    "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave. The same table as data/india/states.csv, as JSON",
    "format": "JSON",
-   "bytes": 90936,
+   "bytes": 90978,
    "keys": [
     "as_of",
     "adults",
@@ -7136,112 +7125,112 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 654808,
+   "bytes": 656598,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/assam.xlsx",
    "description": "Assam, Excel workbook",
    "format": "Excel",
-   "bytes": 41235,
+   "bytes": 41233,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/bihar.xlsx",
    "description": "Bihar 2025, Excel workbook",
    "format": "Excel",
-   "bytes": 443440,
+   "bytes": 443439,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/delhi.xlsx",
    "description": "Delhi, Excel workbook",
    "format": "Excel",
-   "bytes": 28829,
+   "bytes": 28827,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/gujarat.xlsx",
    "description": "Gujarat, Excel workbook",
    "format": "Excel",
-   "bytes": 72140,
+   "bytes": 72138,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 287750,
+   "bytes": 289873,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/karnataka.xlsx",
    "description": "Karnataka, Excel workbook",
    "format": "Excel",
-   "bytes": 26394,
+   "bytes": 26393,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/kerala.xlsx",
    "description": "Kerala, Excel workbook",
    "format": "Excel",
-   "bytes": 58130,
+   "bytes": 58129,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/maharashtra.xlsx",
    "description": "Maharashtra, Excel workbook",
    "format": "Excel",
-   "bytes": 85207,
+   "bytes": 85205,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/other-states.xlsx",
    "description": "Every other state and union territory, Excel workbook",
    "format": "Excel",
-   "bytes": 83449,
+   "bytes": 83447,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/rajasthan.xlsx",
    "description": "Rajasthan, Excel workbook",
    "format": "Excel",
-   "bytes": 60785,
+   "bytes": 60784,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/tamil-nadu.xlsx",
    "description": "Tamil Nadu, Excel workbook",
    "format": "Excel",
-   "bytes": 117837,
+   "bytes": 117836,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/telangana-hyderabad.xlsx",
    "description": "Telangana 2026 and the Old City of Hyderabad, Excel workbook",
    "format": "Excel",
-   "bytes": 95539,
+   "bytes": 95538,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/uttar-pradesh.xlsx",
    "description": "Uttar Pradesh, Excel workbook",
    "format": "Excel",
-   "bytes": 50367,
+   "bytes": 50365,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/uttarakhand.xlsx",
    "description": "Uttarakhand, Excel workbook",
    "format": "Excel",
-   "bytes": 45752,
+   "bytes": 45750,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/west-bengal.xlsx",
    "description": "West Bengal, Excel workbook",
    "format": "Excel",
-   "bytes": 95190,
+   "bytes": 95189,
    "licence": "CC BY 4.0"
   }
  ]
