@@ -15,7 +15,7 @@
   </div>
 
   <h2>The roll, step by step</h2>
-  <p class="sub">Before the draft, every elector on the roll was given an enumeration form, a short form to fill in and hand back to the official for the polling station. The draft roll is the list published once the forms were collected, and a name whose form did not come back was left off it. Maharashtra's draft came out on 31 August 2026. Electors can now ask to be added or object to names on it, and only after that comes the final roll. The bars start above zero so that the changes can be seen.</p>
+  <p class="sub">Before the draft, every elector on the roll was given an enumeration form, a short form to fill in and hand back to the official for the polling station. The draft roll is the list published once the forms were collected, and a name whose form did not come back was left off it. Maharashtra's draft came out on 31 August 2026. <span id="sAfter">Electors can now ask to be added or object to names on it, and only after that comes the final roll.</span> The bars start above zero so that the changes can be seen.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vWater"></div></div>
   </div>
@@ -114,9 +114,17 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
   var PARTY = { BJP: 'BJP', SHS: 'Shiv Sena', NCP: 'NCP', SHSUBT: 'Shiv Sena (UBT)', INC: 'Congress', NCPSP: 'NCP (SP)', SP: 'Samajwadi Party' };
   var party = function (c) { return PARTY[c] || c; };
 
-  VIZ.waterfall('vWater', { label: 'Maharashtra: the roll before the revision and the draft roll of 31 August 2026', from: Math.floor(S.draft * 0.8 / 1e7) * 1e7, steps: [
-    { name: 'Roll before the revision', v: S.before, kind: 'total' }, { name: 'Left off the draft', v: S.left_off, kind: 'down' }, { name: 'Draft roll', v: S.draft, kind: 'total' }] });
-  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + cr(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors.</b> The roll before the revision held ' + cr(S.before) + ' names and the draft holds ' + cr(S.draft) + '. One crore is ten million.';
+  // The final roll (S.final) is null until scripts/add_final.py records it.
+  // Every sentence about it says "due on" until then and "published on" after.
+  var FN = S.final, steps = [{ name: 'Roll before the revision', v: S.before, kind: 'total' }, { name: 'Left off the draft', v: S.left_off, kind: 'down' }, { name: 'Draft roll', v: S.draft, kind: 'total' }];
+  if (FN) {
+    steps.push({ name: 'Net change after the draft', v: Math.abs(FN.net_after), kind: FN.net_after >= 0 ? 'up' : 'down' }, { name: 'Final roll', v: FN.electors, kind: 'total' });
+    document.getElementById('sAfter').textContent = 'After it, electors could ask to be added or object to names on it, and the final roll was published on ' + DL(FN.date) + '.';
+  } else if (S.claims_to < new Date().toISOString().slice(0, 10)) {
+    document.getElementById('sAfter').textContent = 'Claims and objections closed on ' + DL(S.claims_to) + ', and the final roll comes next.';
+  }
+  VIZ.waterfall('vWater', { label: 'Maharashtra: the roll before the revision and the draft roll of 31 August 2026' + (FN ? ', and the final roll of ' + DL(FN.date) : ''), from: Math.floor(Math.min(S.draft, FN ? FN.electors : S.draft) * 0.8 / 1e7) * 1e7, steps: steps });
+  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + cr(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors.</b> The roll before the revision held ' + cr(S.before) + ' names and the draft holds ' + cr(S.draft) + '.' + (FN ? ' The final roll of ' + DL(FN.date) + ' holds ' + cr(FN.electors) + '.' : '') + ' One crore is ten million.';
 
   VIZ.lollipop('vDist', { label: 'Names left off the draft roll per 100 electors, every district', axis: 'Left off per 100 electors on the roll before the revision', ref: S.per_100,
     rows: D.map(function (d) { return { name: d.district, v: d.per_100, text: d1(d.per_100), tok: tok(d), hi: (d.city || d.per_100 > S.per_100) && innerWidth >= 600 }; }) });
@@ -184,9 +192,21 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
   document.getElementById('fMargin').innerHTML = '<b>In ' + S.over_margin + ' of the 288 constituencies more names were left off the draft than the 2024 winner\'s margin.</b> Not everyone on a roll votes, so scaled down by each seat\'s 2024 turnout it is ' + S.turnout_over_margin + '. ' +
     'By the party that won the seat in 2024, the names left off per 100 were ' + wl.map(function (p) { return d1(W[p].per_100) + ' in the ' + party(p) + '\'s ' + W[p].seats; }).join(', ').replace(/, ([^,]*)$/, ' and $1') + '. Set against each seat\'s own district, the six parties run from ' + d1(Math.min.apply(null, wl.map(function (p) { return W[p].vs_district; }))) + ' to ' + d1(Math.max.apply(null, wl.map(function (p) { return W[p].vs_district; }))) + ' points, so most of the difference comes from where each party\'s seats are. Red dots are constituencies in the five city districts.';
 
-  document.getElementById('fAfter').innerHTML = '<b>The final roll is due on ' + DL(S.final_due) + ' and is not out yet.</b> ' +
-    'After the draft, an elector asks to be added with Form 6, and an objection to a name already on the roll is made with Form 7. The press note set ' + DL(S.claims_to_note) + ' as the last day for claims and objections and ' + DL(S.final_due_note) + ' for the final roll. The Commission has since moved them to ' + DL(S.claims_to) + ' and ' + DL(S.final_due) + ', with notices heard until ' + DL(S.notices_to) + '. ' +
-    'Until the final roll is out, nobody can say how many of the names left off will be put back.';
+  var big = function (x) { return FN && FN.figures === 'rounded' ? SIR.lk(x, 2) : n(x); };
+  var forms = 'After the draft, an elector asks to be added with Form 6, and an objection to a name already on the roll is made with Form 7. The press note set ' + DL(S.claims_to_note) + ' as the last day for claims and objections and ' + DL(S.final_due_note) + ' for the final roll. The Commission later moved them to ' + DL(S.claims_to) + ' and ' + DL(S.final_due) + ', with notices heard until ' + DL(S.notices_to) + '. ';
+  document.getElementById('fAfter').innerHTML = FN
+    ? '<b>The final roll was published on ' + DL(FN.date) + ' with ' + n(FN.electors) + ' electors, a fall in the roll of ' + n(FN.net_fall) + ' since the roll before the revision, ' + d1(FN.net_per_100) + ' of every 100.</b> ' +
+      (FN.net_after >= 0 ? 'It stands ' + n(FN.net_after) + ' above the draft, which comes to ' + SIR.pct(FN.made_up_pct) + ' of the ' + cr(S.left_off) + ' names left off, and that rise counts new voters as well as names put back. '
+        : 'It stands ' + n(-FN.net_after) + ' below the draft. ') +
+      (FN.added != null && FN.deleted != null ? 'After the draft, ' + big(FN.added) + ' names were added and ' + big(FN.deleted) + ' deleted' + (FN.withheld ? ', and ' + n(FN.withheld) + ' were withheld from the final roll' : '') + '. '
+        : 'No count of the names added and deleted after the draft was published with it. ') +
+      (FN.women != null ? 'It holds ' + n(FN.men) + ' men, ' + n(FN.women) + ' women and ' + n(FN.third) + ' third-gender electors, and women are ' + SIR.pct(FN.women_pct) + ' of it, against ' + SIR.pct(S.women_draft_pct) + ' of the draft. ' : '') +
+      (FN.service != null ? 'Besides them, ' + n(FN.service) + ' service electors were reported. ' : '') +
+      'The figures are from <a href="' + SIR.esc(FN.source.url) + '">' + SIR.esc(FN.source.title) + '</a>' + (FN.source.primary ? '' : ', as reported in the press') + '. ' + forms
+    : (S.final_due < new Date().toISOString().slice(0, 10)
+      ? '<b>The final roll was due on ' + DL(S.final_due) + ' and had not been found published when these figures were checked.</b> '
+      : '<b>The final roll is due on ' + DL(S.final_due) + ' and is not out yet.</b> ') + forms +
+      'Until the final roll is out, nobody can say how many of the names left off will be put back.';
 
   var T38 = S.top38;
   document.getElementById('t38sub').innerHTML = 'On ' + DL(T38.file_date) + ' the CEO published a list of 38 constituencies with a high share of forms not collected. Its title reads, in full, "' + SIR.esc(T38.title) + '". The CEO chose the seats in answer to a newspaper\'s report. Every figure in it agrees with the CEO\'s statement for all 288 constituencies, which this page uses everywhere else, and it is kept here as printed. <a href="' + T38.url + '">The CEO\'s list</a>.';

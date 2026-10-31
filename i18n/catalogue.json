@@ -1007,6 +1007,12 @@
    "/kerala/"
   ]
  },
+ "<b>The final roll is due on {d}.</b> Until it is published, nobody can say how many of the names left off the draft will be put back.": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/telangana/"
+  ]
+ },
  "<b>The final roll is {a} larger than the draft, and still {f} smaller than the roll before the revision.</b> That is a fall of {p} of every 100 electors. The rise from the draft is at most {m} of the names left off, and it includes new voters. Chennai's roll is {c} per 100 smaller than before.": {
   "kind": "script",
   "pages": [
@@ -1017,6 +1023,24 @@
   "kind": "script",
   "pages": [
    "/karnataka/"
+  ]
+ },
+ "<b>The final roll was due on {d} and had not been found published when these figures were checked.</b>": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/telangana/"
+  ]
+ },
+ "<b>The final roll was published on {d} with {f} electors, a fall in the roll of {nf} since the roll before the revision.</b> It stands {a} above the draft, which comes to {m} of the {r} names left off, and that rise counts new voters as well as names put back.": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/telangana/"
+  ]
+ },
+ "<b>The final roll was published on {d} with {f} electors, a fall in the roll of {nf} since the roll before the revision.</b> It stands {a} below the draft.": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/telangana/"
   ]
  },
  "<b>The final roll was {nf} names smaller than the roll before the revision, and smaller in every one of the {n} seats.</b> After the draft, {a} names were added on claims and {r} deleted on objections, a net rise of {na}, or {m} of the {p1} names left off the draft. New electors are part of that rise, and the Election Commission has not said how many of those added had been left off the draft. <b>In {net} of {seats} seats the fall that remained at the final roll was still larger than the 2025 winning margin</b>, compared with {tot} seats when every name left off or deleted is counted. Of those {net}, the NDA won {nda}, INDIA {india} and other parties {other}.": {
@@ -1997,6 +2021,12 @@
   "kind": "script",
   "pages": [
    "/india/"
+  ]
+ },
+ "After the draft, {ad} names were added and {de} deleted.": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/telangana/"
   ]
  },
  "After the final roll": {
@@ -14503,6 +14533,12 @@
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
+  ]
+ },
+ "It holds {m} men, {w} women and {t} third-gender electors.": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/telangana/"
   ]
  },
  "It is classed by the share of its people living in towns at the 2011 Census, the last count by district. Under 20 in every 100 is rural, 20 to 50 is mixed and above 50 is urban. A district made after 2011 is counted under the district it was mostly made from.": {
@@ -28736,6 +28772,18 @@
    "/india/compare-seats/"
   ]
  },
+ "The figures are from <a href=\"{u}\">{s}</a>, as reported in the press.": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/telangana/"
+  ]
+ },
+ "The figures are from <a href=\"{u}\">{s}</a>.": {
+  "kind": "script",
+  "pages": [
+   "/hyderabad/telangana/"
+  ]
+ },
  "The figures come from the Chief Electoral Officer's lists of names left off the draft and deleted after it, the return for the final roll, and the Election Commission's results.": {
   "kind": "script",
   "pages": [
@@ -28770,6 +28818,7 @@
   "kind": "script",
   "pages": [
    "/hyderabad/method/",
+   "/hyderabad/telangana/",
    "/tamilnadu/method/"
   ]
  },
