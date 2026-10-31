@@ -34,14 +34,20 @@ STATE = {'before': 55432314, 'absent': 1517042, 'shifted': 6545679, 'dead': 1639
          'duplicate': 709870, 'other': 383884, 'removed': 10796339, 'draft': 44635975}
 SEP_TOTAL = 45161393   # the roll of 9 October 2026; 44,844,080 on 25 September
 DRAFT_SERVICE = 44176  # service electors on the draft, Annexure-10 of the same note
-# The final roll of 27 October 2026, for the state. No CEO note was on
-# ceo.karnataka.gov.in that day. The split by sex is ETV Bharat's, quoting the
-# CEO's office, and its sum is taken as the final roll of general electors, the
-# same footing as the draft. The Hindu's total of 4,55,00,011 is 44,322 larger,
-# close to the 44,176 service electors listed with the draft, so it is taken to
-# include them. The Times of India of 28 October gives 10.08 lakh added and 1.88
-# lakh deleted after the draft, which agree with this to the lakh.
-FINAL = {'date': '2026-10-27', 'total': 45455689, 'total_with_service': 45500011, 'men': 22540493, 'women': 22912355, 'third': 2841}
+# The final roll of 27 October 2026, for the state, from raw/final.json, which
+# scripts/add_final.py writes (the shape is in scripts/final_roll.py). No CEO
+# note was on ceo.karnataka.gov.in that day. The split by sex is ETV Bharat's,
+# quoting the CEO's office, and its sum is taken as the final roll of general
+# electors, the same footing as the draft. The Hindu's total of 4,55,00,011 is
+# 44,322 larger, close to the 44,176 service electors listed with the draft, so
+# it is taken to include them (`service` in the file). The Times of India of 28
+# October gives 10.08 lakh added and 1.88 lakh deleted after the draft, which
+# agree with this to the lakh.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import final_roll  # noqa: E402
+_F = final_roll.read('karnataka')
+FINAL = {'date': _F['date'], 'total': _F['electors'], 'total_with_service': _F['electors'] + _F['service'],
+         'men': _F['men'], 'women': _F['women'], 'third': _F['third'], 'added': _F['added'], 'deleted': _F['deleted']}
 BENGALURU = ('BANGALORE URBAN', 'B.B.M.P(NORTH)', 'B.B.M.P(CENTRAL)', 'B.B.M.P(SOUTH)')
 NAMES = {'B.B.M.P(NORTH)': 'B.B.M.P (North)', 'B.B.M.P(CENTRAL)': 'B.B.M.P (Central)',
          'B.B.M.P(SOUTH)': 'B.B.M.P (South)'}
@@ -106,9 +112,11 @@ def build():
     assert round((FINAL['total_with_service'] - STATE['draft']) / 1e3) == 864 and STATE['before'] - FINAL['total'] == 9976625
     assert FINAL['total'] == FINAL['men'] + FINAL['women'] + FINAL['third']
     # The Times of India's 10.08 lakh added less 1.88 lakh deleted equals the rise to the lakh
-    assert round((FINAL['total'] - STATE['draft']) / 1e5, 1) == round((1008000 - 188000) / 1e5, 1)
+    assert round((FINAL['total'] - STATE['draft']) / 1e5, 1) == round((FINAL['added'] - FINAL['deleted']) / 1e5, 1)
     # the three sexes as reported fall short of the reported total by 44,322, which the method page states
     assert FINAL['total_with_service'] - (FINAL['men'] + FINAL['women'] + FINAL['third']) == 44322
+    # the identities every final roll is held to, and agreement with the All India table
+    final_roll.block(_F, 'Karnataka', STATE['before'], STATE['draft'], STATE['removed'], '2026-08-24')
 
     blr = [r for r in dist if r['bengaluru']]
     rest = [r for r in dist if not r['bengaluru']]
@@ -130,7 +138,7 @@ def build():
         'final_date': FINAL['date'], 'final': FINAL['total'],
         'final_men': FINAL['men'], 'final_women': FINAL['women'], 'final_third': FINAL['third'],
         'final_by_sex': FINAL['men'] + FINAL['women'] + FINAL['third'], 'final_with_service': FINAL['total_with_service'],
-        'added_after_draft_reported': 1008000, 'deleted_after_draft_reported': 188000,
+        'added_after_draft_reported': FINAL['added'], 'deleted_after_draft_reported': FINAL['deleted'],
         'added_final': FINAL['total'] - T('draft'),
         'made_up_final_pct': round(100 * (FINAL['total'] - T('draft')) / removed, 4),
         'net_fall_final': before - FINAL['total'],

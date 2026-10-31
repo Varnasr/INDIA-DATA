@@ -15,7 +15,15 @@
       var city = 'The five districts of Mumbai City, Mumbai Suburban, Thane, Palghar and Pune hold ' + SIR.pct(C.share_of_roll) + ' of the state\'s roll and ' + SIR.pct(C.share_of_left_off) + ' of the names left off. They lost ' + d1(C.per_100) + ' of every 100 electors, against ' + d1(R.per_100) + ' in the other ' + (s.districts - s.city_names.length) + ' districts.';
       var mostS = most.district + ' lost the most names of any district, ' + lk(most.left_off) + '.';
       var notices = NT && NT.notices ? 'Of the electors kept on the draft roll, ' + cr(NT.notices) + ' were sent a notice to prove their entry, according to the press, ' + d1(NT.per_100) + ' of every 100.' : '';
-      var after = 'Claims and objections run to ' + DL(s.claims_to) + ', and the final roll is due on ' + DL(s.final_due) + '. Until it is out, nobody can say how many of the names left off will be put back.';
+      // s.final is null until scripts/add_final.py records the final roll
+      var F = s.final;
+      var after = F
+        ? 'The final roll was published on ' + DL(F.date) + ' with ' + cr(F.electors) + ' electors, a fall in the roll of ' + lk(F.net_fall) + ' since the roll before the revision. ' +
+          (F.net_after >= 0 ? 'It stands ' + SIR.n(F.net_after) + ' above the draft, which comes to ' + SIR.pct(F.made_up_pct) + ' of the names left off. That rise counts new voters as well as names put back, and the names deleted after the draft are taken off it.'
+            : 'It stands ' + SIR.n(-F.net_after) + ' below the draft.')
+        : (s.final_due < new Date().toISOString().slice(0, 10)
+          ? 'Claims and objections ran to ' + DL(s.claims_to) + ', and the final roll was due on ' + DL(s.final_due) + '. It had not been found published when these figures were checked.'
+          : 'Claims and objections ' + (s.claims_to < new Date().toISOString().slice(0, 10) ? 'ran' : 'run') + ' to ' + DL(s.claims_to) + ', and the final roll is due on ' + DL(s.final_due) + '. Until it is out, nobody can say how many of the names left off will be put back.');
       var sh = s.reason_shares;
       var reasons = SIR.pct(sh.shifted) + ' of the names left off were entered as shifted for good, ' + SIR.pct(sh.absent) + ' as untraceable or absent, ' + SIR.pct(sh.dead) + ' as dead, ' + SIR.pct(sh.duplicate) + ' as enrolled at another place and ' + SIR.pct(sh.other) + ' under another reason, by the Chief Electoral Officer\'s own tables.';
       var seats = s.top_acs[0].name + ' lost ' + d1(s.top_acs[0].per_100) + ' of every 100 names, the most of the ' + s.acs_n + ' constituencies, and in ' + s.over_margin + ' of them more names were left off than the 2024 winning margin.';

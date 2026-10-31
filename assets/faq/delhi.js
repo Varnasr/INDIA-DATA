@@ -21,7 +21,9 @@
         ['Where do the figures come from?', 'The state figures are the press note of 31 August 2026 from the Chief Electoral Officer, who keeps Delhi\'s rolls. The constituency figures are the Chief Electoral Officer\'s own table of the draft, by district and constituency, and they add up exactly to the state figures. The 2025 result is the Election Commission\'s. The method page has every link.', ['method', 'faq']]
       ];
       var short = {
-        main: [[scale, margin, where, reasons, sex], 'The reasons and the split by sex are for Delhi as a whole, and there is no final roll yet.'],
+        // s.final is null until scripts/add_final.py records the final roll
+        main: [[scale, margin, where, reasons, sex].concat(s.final ? ['The final roll of ' + SIR.date(s.final.date) + ' holds ' + lk(s.final.electors) + ' names, a fall in the roll of ' + lk(s.final.net_fall) + ' since the roll before the revision.'] : []),
+          s.final ? 'The reasons and the split by sex of the names left off are for Delhi as a whole.' : 'The reasons and the split by sex are for Delhi as a whole, and there is no final roll yet.'],
         method: [[scale, 'The constituency figures add up exactly to the Chief Electoral Officer\'s state figures.'], ''],
         faq: [[scale, margin, where], '']
       };
