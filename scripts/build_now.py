@@ -22,7 +22,8 @@ fetches one small file in place of the five large ones it comes from:
     how many organisations the help page lists for it, its court matters by
     court on the disputes page, its notice figures (notices.json) and, for
     Delhi, the Supreme Court hearing of 28 October 2026 and The Hindu's count
-    of the names left off.
+    of the names left off, and, for West Bengal, the Supreme Court's orders
+    on the appellate tribunals.
 
 A new state is a row in PAGES, an entry in site/places.json, and a run of
 make_now_pages.py, this script, build_site.py and the translations.
@@ -56,6 +57,61 @@ PAGES = [
      'ceo': [['site', 'https://ceoharyana.gov.in/']]},
     {'state': 'Nagaland', 'place': 'nl', 'path': 'nagaland/now/',
      'ceo': [['site', 'https://ceo.nagaland.gov.in/']]},
+    # The states and union territories whose revision is over, and Tripura,
+    # whose draft is still to come. A Chief Electoral Officer's address is
+    # given only where states.json, process.json or the state's SOURCES.md
+    # names it as that office's own site or account. Punjab's and Tripura's
+    # SOURCES.md each name two hosts for the site and neither was reached, so
+    # neither is given; the Andaman account the repository cites is the
+    # Administration's. Assam, Himachal Pradesh, Jammu and Kashmir and Ladakh
+    # have no schedule of the revision in process.json and so no page.
+    {'state': 'Bihar', 'place': 'bihar', 'path': 'bihar/now/',
+     'ceo': [['site', 'https://ceoelection.bihar.gov.in/']]},
+    {'state': 'Uttar Pradesh', 'place': 'up', 'path': 'uttarpradesh/now/',
+     'ceo': [['site', 'https://ceouttarpradesh.nic.in/']]},
+    {'state': 'Tamil Nadu', 'place': 'tn', 'path': 'tamilnadu/now/',
+     'ceo': [['site', 'https://www.elections.tn.gov.in/']]},
+    {'state': 'Gujarat', 'place': 'gj', 'path': 'gujarat/now/',
+     'ceo': [['site', 'https://ceo.gujarat.gov.in/']]},
+    # "tribunal": the Supreme Court's orders on the appellate tribunals that
+    # hear appeals against the judicial officers' orders (the disputes page)
+    {'state': 'West Bengal', 'place': 'wb', 'path': 'westbengal/now/',
+     'ceo': [['site', 'https://ceowestbengal.wb.gov.in/']], 'tribunal': True},
+    {'state': 'Madhya Pradesh', 'place': 'mp', 'path': 'madhyapradesh/now/', 'ceo': []},
+    {'state': 'Rajasthan', 'place': 'rj', 'path': 'rajasthan/now/',
+     'ceo': [['site', 'https://election.rajasthan.gov.in/']]},
+    {'state': 'Chhattisgarh', 'place': 'cg', 'path': 'chhattisgarh/now/',
+     'ceo': [['site', 'https://ceochhattisgarh.nic.in/']]},
+    {'state': 'Kerala', 'place': 'kl', 'path': 'kerala/now/',
+     'ceo': [['site', 'https://www.ceo.kerala.gov.in/']]},
+    {'state': 'Puducherry', 'place': 'py', 'path': 'puducherry/now/',
+     'ceo': [['site', 'https://ceopuducherry.py.gov.in/'], ['x', 'https://x.com/ceopuducherry']]},
+    {'state': 'Goa', 'place': 'ga', 'path': 'goa/now/',
+     'ceo': [['site', 'https://ceogoa.nic.in/']]},
+    {'state': 'Andaman and Nicobar Islands', 'place': 'an', 'path': 'andaman/now/', 'ceo': []},
+    {'state': 'Lakshadweep', 'place': 'ld', 'path': 'lakshadweep/now/',
+     'ceo': [['site', 'https://ceolakshadweep.gov.in/']]},
+    {'state': 'Karnataka', 'place': 'ka', 'path': 'karnataka/now/',
+     'ceo': [['site', 'https://ceo.karnataka.gov.in/']]},
+    {'state': 'Punjab', 'place': 'pb', 'path': 'punjab/now/', 'ceo': []},
+    {'state': 'Odisha', 'place': 'od', 'path': 'odisha/now/',
+     'ceo': [['site', 'https://ceoodisha.nic.in/'], ['x', 'https://x.com/OdishaCeo']]},
+    {'state': 'Uttarakhand', 'place': 'uk', 'path': 'uttarakhand/now/',
+     'ceo': [['site', 'https://ceo.uk.gov.in/']]},
+    {'state': 'Meghalaya', 'place': 'ml', 'path': 'meghalaya/now/',
+     'ceo': [['site', 'https://ceomeghalaya.nic.in/']]},
+    {'state': 'Arunachal Pradesh', 'place': 'ar', 'path': 'arunachal/now/',
+     'ceo': [['site', 'https://ceoarunachal.nic.in/']]},
+    {'state': 'Manipur', 'place': 'mn', 'path': 'manipur/now/',
+     'ceo': [['site', 'https://ceomanipur.nic.in/']]},
+    {'state': 'Dadra and Nagar Haveli and Daman and Diu', 'place': 'dd', 'path': 'dnhdd/now/', 'ceo': []},
+    {'state': 'Chandigarh', 'place': 'ch', 'path': 'chandigarh/now/',
+     'ceo': [['site', 'https://ceochandigarh.gov.in/'], ['x', 'https://x.com/ceochandigarh']]},
+    {'state': 'Mizoram', 'place': 'mz', 'path': 'mizoram/now/',
+     'ceo': [['site', 'https://ceo.mizoram.gov.in/']]},
+    {'state': 'Sikkim', 'place': 'sk', 'path': 'sikkim/now/',
+     'ceo': [['site', 'https://ceo.sikkim.gov.in/']]},
+    {'state': 'Tripura', 'place': 'tr', 'path': 'tripura/now/', 'ceo': []},
 ]
 
 # Every source a step cites. ('help', remedy id, [doc prefixes]) takes those
@@ -89,8 +145,17 @@ CITE = {
                                     'Registration of Electors Rules, 1960, rule 27(1)(a)-(b)']),
     'c_h_appeal_order': ('help', 'appeal', ['ECI SIR Order No. 23/2025-ERS (Vol.II) of 24.06.2025, para 14']),
     'c_h_helpline': ('help', 'helpline_drive', ['ECI press release, PIB, 29.10.2025']),
-    'c_h_legal': ('help', 'legal_aid', ['NALSA, Legal Aid page (section 12', 'NALSA home page']),
+    'c_h_legal': ('help', 'legal_aid', ['Legal Services Authorities Act, 1987, section 12', 'NALSA, Legal Aid page (section 12', 'NALSA home page']),
     'c_bench': ('disputes', 'court-54'),
+    # the special summary revision of 15 October 2026 in 17 states and union
+    # territories, and the forms of the 1960 Rules used outside the revision
+    'c_ssr': ('timeline', '2026-10-15', 'A summary revision where the revision is over'),
+    'c_h_rules': ('help', 'form6', ['ECI Press Note ECI/PN/120/2026, 26.09.2026, decision iii',
+                                  'Form 6, Application Form for New Voters (ECI)',
+                                  'CEO Karnataka, Press Note on the SIR-2026 draft roll, 24.08.2026, para 6(b)']),
+    # West Bengal: appeals against the judicial officers' orders go to tribunals
+    'c_wb_tribunal': ('disputes', 'court-18'),
+    'c_wb_pending': ('disputes', 'court-20'),
 }
 
 
@@ -203,6 +268,8 @@ def build():
         page = {'path': row['path'], 'overview': pl['pages'][0][0], 'label': pl['label'], 'phase': sched[name]['phase'],
                 'ceo': row['ceo'], 'orgs': orgs, 'courts': [[c, k] for c, k in sorted(courts.items(), key=lambda x: (-x[1], x[0]))],
                 'notices': notices}
+        if row.get('tribunal'):
+            page['tribunal'] = True
         if row.get('bench'):
             if row['bench'] not in CITE:
                 raise SystemExit('FAIL - %s: its bench %r is not a source in CITE' % (name, row['bench']))

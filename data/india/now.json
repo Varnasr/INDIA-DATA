@@ -72,7 +72,7 @@
     {
      "date": "1950",
      "name": "Representation of the People Act, 1950, section 23(3), copy published by the High Court of Tripura",
-     "quote": "no direction for the inclusion of a name in the electoral roll of a constituency shall be given under this section, after the last date for making nominations for an election in that constituency",
+     "quote": "no direction for the inclusion of a name in the electoral roll of a constituency shall be given under this section, after the last date for making nominations for an election in that constituency or in the parliamentary constituency within which that constituency is comprised and before the completion of that election",
      "url": "https://www.thc.nic.in/Central%20Governmental%20Acts/Representation%20of%20the%20People%20Act,%201950.pdf"
     }
    ]
@@ -225,8 +225,14 @@
    ]
   },
   "c_h_legal": {
-   "date": null,
+   "date": "1987",
    "items": [
+    {
+     "date": "1987",
+     "name": "Legal Services Authorities Act, 1987, section 12, copy published by the High Court of Tripura",
+     "quote": "Every person who has to file or defend a case shall be entitled to legal services under this Act if that person is",
+     "url": "https://www.thc.nic.in/Central%20Governmental%20Acts/Legal%20Services%20Authorities%20Act,%201987.pdf"
+    },
     {
      "date": null,
      "name": "NALSA, Legal Aid page (section 12, Legal Services Authorities Act, 1987)",
@@ -255,6 +261,29 @@
      "name": "Representation of the People Act, 1950, section 23(1), copy published by the High Court of Tripura",
      "quote": "Any person whose name is not included in the electoral roll of a constituency may apply to the electoral registration officer for the inclusion of his name in that roll.",
      "url": "https://www.thc.nic.in/Central%20Governmental%20Acts/Representation%20of%20the%20People%20Act,%201950.pdf"
+    }
+   ]
+  },
+  "c_h_rules": {
+   "date": "2026-09-26",
+   "items": [
+    {
+     "date": "2026-09-26",
+     "name": "ECI Press Note ECI/PN/120/2026, 26.09.2026, decision iii",
+     "quote": "For non -SIR period, the Forms applicable as per Rules (the Registration of Electors Rules 1960) will be used.",
+     "url": "https://www.eci.gov.in/eci/public/api/document?id=17536"
+    },
+    {
+     "date": null,
+     "name": "Form 6, Application Form for New Voters (ECI)",
+     "quote": "I submit application for inclusion of my name in the electoral roll for the above constituency.",
+     "url": "https://voters.eci.gov.in/formspdf/Form_6_English.pdf"
+    },
+    {
+     "date": "2026-08-24",
+     "name": "CEO Karnataka, Press Note on the SIR-2026 draft roll, 24.08.2026, para 6(b)",
+     "quote": "Form 6A would be used for registration for overseas electors, iii. Form 7 would be used to get name deleted from the existing electoral roll and iv. Form 8 would be used for Correction of entries v. The above forms can be submitted online also using ECINET Mobile App or voters.eci.gov.in portal.",
+     "url": "https://ceo.karnataka.gov.in/uploads/PRESS%20NOTE%2024th%20Aug.pdf"
     }
    ]
   },
@@ -292,9 +321,48 @@
      "url": "https://cdn.s3waas.gov.in/s3ffeabd223de0d4eacb9a3e6e53e5448d/uploads/2026/05/17797105172741.pdf"
     }
    ]
+  },
+  "c_ssr": {
+   "date": "2026-10-15",
+   "items": [
+    {
+     "name": "ECI letter No. 23/2026-ERS of 15.10.2026 to the Chief Electoral Officers of 17 States/UTs, as published by CEO Kerala",
+     "url": "https://www.ceo.kerala.gov.in/ceokerala/ceo-cms/uploads/newsupdates/ssr-17-states-15102026-20261016104404514253.pdf"
+    }
+   ]
+  },
+  "c_wb_pending": {
+   "date": "2026-04-13",
+   "disputes": "india/disputes/#d-court-20",
+   "items": [
+    {
+     "name": "Supreme Court of India, A pending appeal gives no vote",
+     "url": "https://api.sci.gov.in/supremecourt/2025/64235/64235_2025_1_53_70166_Order_13-Apr-2026.pdf"
+    }
+   ]
+  },
+  "c_wb_tribunal": {
+   "date": "2026-03-10",
+   "disputes": "india/disputes/#d-court-18",
+   "items": [
+    {
+     "name": "Supreme Court of India, Appeals to tribunals of former judges",
+     "url": "https://api.sci.gov.in/supremecourt/2025/64235/64235_2025_1_42_69352_Order_10-Mar-2026.pdf"
+    }
+   ]
   }
  },
  "pages": {
+  "Andaman and Nicobar Islands": {
+   "ceo": [],
+   "courts": [],
+   "label": "Andaman and Nicobar Islands 2026",
+   "notices": null,
+   "orgs": 0,
+   "overview": "andaman/",
+   "path": "andaman/now/",
+   "phase": "II"
+  },
   "Andhra Pradesh": {
    "ceo": [
     [
@@ -336,6 +404,113 @@
    "orgs": 0,
    "overview": "andhrapradesh/",
    "path": "andhrapradesh/now/",
+   "phase": "III"
+  },
+  "Arunachal Pradesh": {
+   "ceo": [
+    [
+     "site",
+     "https://ceoarunachal.nic.in/"
+    ]
+   ],
+   "courts": [],
+   "label": "Arunachal Pradesh 2026",
+   "notices": {
+    "date": "2026-09-22",
+    "deleted": {
+     "date": "2026-09-22",
+     "kind": "primary",
+     "n": 28899,
+     "rounded": false,
+     "url": "https://ceoarunachal.nic.in/componenthelper/getcomponentfile/68"
+    },
+    "discrepancy": 133413,
+    "hearings": null,
+    "kind": "primary",
+    "lists_url": "https://ceoarunachal.nic.in/componenthelper/getcomponentfile/68",
+    "n": 218588,
+    "no_mapping": 85175,
+    "rounded": false,
+    "url": "https://ceoarunachal.nic.in/componenthelper/getcomponentfile/68"
+   },
+   "orgs": 0,
+   "overview": "arunachal/",
+   "path": "arunachal/now/",
+   "phase": "III"
+  },
+  "Bihar": {
+   "ceo": [
+    [
+     "site",
+     "https://ceoelection.bihar.gov.in/"
+    ]
+   ],
+   "courts": [
+    [
+     "Supreme Court",
+     10
+    ]
+   ],
+   "label": "Bihar 2025",
+   "notices": null,
+   "orgs": 0,
+   "overview": "bihar/",
+   "path": "bihar/now/",
+   "phase": "I"
+  },
+  "Chandigarh": {
+   "ceo": [
+    [
+     "site",
+     "https://ceochandigarh.gov.in/"
+    ],
+    [
+     "x",
+     "https://x.com/ceochandigarh"
+    ]
+   ],
+   "courts": [],
+   "label": "Chandigarh 2026",
+   "notices": {
+    "date": "2026-07-28",
+    "deleted": null,
+    "discrepancy": 68353,
+    "hearings": null,
+    "kind": "press",
+    "lists_url": "https://www.tribuneindia.com/news/chandigarh/sir-1-37-lakh-electors-to-get-notice-over-missing-linkage-discrepancies/",
+    "n": 137814,
+    "no_mapping": 69461,
+    "rounded": false,
+    "url": "https://www.tribuneindia.com/news/chandigarh/sir-1-37-lakh-electors-to-get-notice-over-missing-linkage-discrepancies/"
+   },
+   "orgs": 0,
+   "overview": "chandigarh/",
+   "path": "chandigarh/now/",
+   "phase": "III"
+  },
+  "Chhattisgarh": {
+   "ceo": [
+    [
+     "site",
+     "https://ceochhattisgarh.nic.in/"
+    ]
+   ],
+   "courts": [],
+   "label": "Chhattisgarh 2026",
+   "notices": null,
+   "orgs": 1,
+   "overview": "chhattisgarh/",
+   "path": "chhattisgarh/now/",
+   "phase": "II"
+  },
+  "Dadra and Nagar Haveli and Daman and Diu": {
+   "ceo": [],
+   "courts": [],
+   "label": "Dadra and Nagar Haveli and Daman and Diu 2026",
+   "notices": null,
+   "orgs": 0,
+   "overview": "dnhdd/",
+   "path": "dnhdd/now/",
    "phase": "III"
   },
   "Delhi": {
@@ -396,6 +571,74 @@
     "shifted": "31.59",
     "url": "https://ceodelhi.gov.in/PDFFolders/2026/Draft_PublicationSIR31Aug2026.pdf"
    }
+  },
+  "Goa": {
+   "ceo": [
+    [
+     "site",
+     "https://ceogoa.nic.in/"
+    ]
+   ],
+   "courts": [
+    [
+     "Bombay High Court at Goa",
+     3
+    ]
+   ],
+   "label": "Goa 2026",
+   "notices": {
+    "date": "2026-02-21",
+    "deleted": {
+     "date": "2026-02-21",
+     "kind": "primary",
+     "n": 35780,
+     "rounded": false,
+     "url": "https://ceogoa.nic.in/PDF/SIR2026/press-note-Final-publication.pdf"
+    },
+    "discrepancy": 58923,
+    "hearings": null,
+    "kind": "primary",
+    "lists_url": "https://ceogoa.nic.in/PDF/SIR2026/press-note-Final-publication.pdf",
+    "n": 241326,
+    "no_mapping": 182403,
+    "rounded": false,
+    "url": "https://ceogoa.nic.in/PDF/SIR2026/press-note-Final-publication.pdf"
+   },
+   "orgs": 1,
+   "overview": "goa/",
+   "path": "goa/now/",
+   "phase": "II"
+  },
+  "Gujarat": {
+   "ceo": [
+    [
+     "site",
+     "https://ceo.gujarat.gov.in/"
+    ]
+   ],
+   "courts": [
+    [
+     "Gujarat High Court",
+     2
+    ]
+   ],
+   "label": "Gujarat 2026",
+   "notices": {
+    "date": "2026-01-07",
+    "deleted": null,
+    "discrepancy": null,
+    "hearings": null,
+    "kind": "press",
+    "lists_url": null,
+    "n": 4400000,
+    "no_mapping": null,
+    "rounded": true,
+    "url": "https://timesofindia.indiatimes.com/city/ahmedabad/sir-44-lakh-voters-in-gujarat-to-get-eci-notices/articleshow/126380960.cms"
+   },
+   "orgs": 0,
+   "overview": "gujarat/",
+   "path": "gujarat/now/",
+   "phase": "II"
   },
   "Haryana": {
    "ceo": [
@@ -461,6 +704,121 @@
    "path": "jharkhand/now/",
    "phase": "III"
   },
+  "Karnataka": {
+   "ceo": [
+    [
+     "site",
+     "https://ceo.karnataka.gov.in/"
+    ]
+   ],
+   "courts": [
+    [
+     "Karnataka High Court",
+     2
+    ]
+   ],
+   "label": "Karnataka 2026",
+   "notices": {
+    "date": "2026-10-04",
+    "deleted": {
+     "date": "2026-10-12",
+     "kind": "press",
+     "n": 33547,
+     "rounded": false,
+     "url": "https://www.deccanherald.com/india/karnataka/karnataka-sir-post-4229-lakh-hearings-33547-voters-found-ineligible-final-voters-list-on-oct-27-4180318"
+    },
+    "discrepancy": 2035000,
+    "hearings": {
+     "date": "2026-10-23",
+     "kind": "press",
+     "n": 4382000,
+     "rounded": true,
+     "url": "https://indianexpress.com/article/cities/bangalore/karnataka-sir-form-7-submissions-data-10934404/"
+    },
+    "kind": "press",
+    "lists_url": "https://www.thehindu.com/news/national/karnataka/karnataka-sir-over-4380-lakh-voters-to-get-notice-over-20-lakh-flagged-for-logical-discrepancy/article71369088.ece",
+    "n": 4382313,
+    "no_mapping": 2345000,
+    "rounded": false,
+    "url": "https://www.etvbharat.com/en/state/karnataka-sir-news-ceo-v-anbukkumar-says-no-name-deleted-because-of-form-7-application-enn26100505446"
+   },
+   "orgs": 2,
+   "overview": "karnataka/",
+   "path": "karnataka/now/",
+   "phase": "III"
+  },
+  "Kerala": {
+   "ceo": [
+    [
+     "site",
+     "https://www.ceo.kerala.gov.in/"
+    ]
+   ],
+   "courts": [
+    [
+     "Supreme Court",
+     2
+    ],
+    [
+     "Kerala High Court",
+     1
+    ]
+   ],
+   "label": "Kerala 2026",
+   "notices": {
+    "date": "2026-02-14",
+    "deleted": {
+     "date": "2026-02-14",
+     "kind": "press",
+     "n": 40000,
+     "rounded": true,
+     "url": "https://www.thehindu.com/news/national/kerala/kerala-sir-hearings-phase-concludes/article70633050.ece"
+    },
+    "discrepancy": 1756000,
+    "hearings": {
+     "date": "2026-02-14",
+     "kind": "press",
+     "n": 3688948,
+     "rounded": false,
+     "url": "https://www.thehindu.com/news/national/kerala/kerala-sir-hearings-phase-concludes/article70633050.ece"
+    },
+    "kind": "press",
+    "lists_url": "https://indianexpress.com/article/india/kerala-final-electoral-roll-2026-sir-process-explained-10544998/",
+    "n": 3688948,
+    "no_mapping": 1932000,
+    "rounded": false,
+    "url": "https://www.thehindu.com/news/national/kerala/kerala-sir-hearings-phase-concludes/article70633050.ece"
+   },
+   "orgs": 4,
+   "overview": "kerala/",
+   "path": "kerala/now/",
+   "phase": "II"
+  },
+  "Lakshadweep": {
+   "ceo": [
+    [
+     "site",
+     "https://ceolakshadweep.gov.in/"
+    ]
+   ],
+   "courts": [],
+   "label": "Lakshadweep 2026",
+   "notices": null,
+   "orgs": 0,
+   "overview": "lakshadweep/",
+   "path": "lakshadweep/now/",
+   "phase": "II"
+  },
+  "Madhya Pradesh": {
+   "ceo": [],
+   "courts": [],
+   "label": "Madhya Pradesh 2026",
+   "notices": null,
+   "orgs": 0,
+   "overview": "madhyapradesh/",
+   "path": "madhyapradesh/now/",
+   "phase": "II"
+  },
   "Maharashtra": {
    "ceo": [
     [
@@ -496,6 +854,91 @@
    "path": "maharashtra/now/",
    "phase": "III"
   },
+  "Manipur": {
+   "ceo": [
+    [
+     "site",
+     "https://ceomanipur.nic.in/"
+    ]
+   ],
+   "courts": [],
+   "label": "Manipur 2026",
+   "notices": {
+    "date": "2026-09-06",
+    "deleted": {
+     "date": "2026-09-06",
+     "kind": "primary",
+     "n": 26362,
+     "rounded": false,
+     "url": "https://ceomanipur.nic.in/Documents/PressNote/2026-2027/PRESS%20NOTE%20SIR%20FINAL%20EROLL%202026.pdf"
+    },
+    "discrepancy": 1130655,
+    "hearings": null,
+    "kind": "primary",
+    "lists_url": "https://ceomanipur.nic.in/Documents/PressNote/2026-2027/PRESS%20NOTE%20SIR%20FINAL%20EROLL%202026.pdf",
+    "n": 1221833,
+    "no_mapping": 91178,
+    "rounded": false,
+    "url": "https://ceomanipur.nic.in/Documents/PressNote/2026-2027/PRESS%20NOTE%20SIR%20FINAL%20EROLL%202026.pdf"
+   },
+   "orgs": 0,
+   "overview": "manipur/",
+   "path": "manipur/now/",
+   "phase": "III"
+  },
+  "Meghalaya": {
+   "ceo": [
+    [
+     "site",
+     "https://ceomeghalaya.nic.in/"
+    ]
+   ],
+   "courts": [],
+   "label": "Meghalaya 2026",
+   "notices": {
+    "date": "2026-10-01",
+    "deleted": {
+     "date": "2026-10-26",
+     "kind": "primary",
+     "n": 6724,
+     "rounded": false,
+     "url": "https://meghalaya.gov.in/meghalaya/sites/default/files/press_release/EL_63_2026_102.pdf"
+    },
+    "discrepancy": 428949,
+    "hearings": {
+     "date": "2026-10-26",
+     "kind": "primary",
+     "n": 651735,
+     "rounded": false,
+     "url": "https://meghalaya.gov.in/meghalaya/sites/default/files/press_release/EL_63_2026_102.pdf"
+    },
+    "kind": "primary",
+    "lists_url": "https://meghalaya.gov.in/sites/default/files/press_release/EL_63_2026_87.pdf",
+    "n": 651735,
+    "no_mapping": 222786,
+    "rounded": false,
+    "url": "https://meghalaya.gov.in/sites/default/files/press_release/EL_63_2026_87.pdf"
+   },
+   "orgs": 0,
+   "overview": "meghalaya/",
+   "path": "meghalaya/now/",
+   "phase": "III"
+  },
+  "Mizoram": {
+   "ceo": [
+    [
+     "site",
+     "https://ceo.mizoram.gov.in/"
+    ]
+   ],
+   "courts": [],
+   "label": "Mizoram 2026",
+   "notices": null,
+   "orgs": 0,
+   "overview": "mizoram/",
+   "path": "mizoram/now/",
+   "phase": "III"
+  },
   "Nagaland": {
    "ceo": [
     [
@@ -510,6 +953,172 @@
    "overview": "nagaland/",
    "path": "nagaland/now/",
    "phase": "III"
+  },
+  "Odisha": {
+   "ceo": [
+    [
+     "site",
+     "https://ceoodisha.nic.in/"
+    ],
+    [
+     "x",
+     "https://x.com/OdishaCeo"
+    ]
+   ],
+   "courts": [],
+   "label": "Odisha 2026",
+   "notices": {
+    "date": "2026-09-22",
+    "deleted": {
+     "date": "2026-09-22",
+     "kind": "press",
+     "n": 24070,
+     "rounded": false,
+     "url": "https://www.newindianexpress.com/states/odisha/2026/Sep/22/1767-lakh-names-deleted-from-final-voter-list-in-odisha"
+    },
+    "discrepancy": 4537613,
+    "hearings": null,
+    "kind": "press",
+    "lists_url": "https://www.newindianexpress.com/states/odisha/2026/Sep/22/1767-lakh-names-deleted-from-final-voter-list-in-odisha",
+    "n": 5836392,
+    "no_mapping": 1298779,
+    "rounded": false,
+    "url": "https://www.newindianexpress.com/states/odisha/2026/Sep/22/1767-lakh-names-deleted-from-final-voter-list-in-odisha"
+   },
+   "orgs": 0,
+   "overview": "odisha/",
+   "path": "odisha/now/",
+   "phase": "III"
+  },
+  "Puducherry": {
+   "ceo": [
+    [
+     "site",
+     "https://ceopuducherry.py.gov.in/"
+    ],
+    [
+     "x",
+     "https://x.com/ceopuducherry"
+    ]
+   ],
+   "courts": [],
+   "label": "Puducherry 2026",
+   "notices": null,
+   "orgs": 0,
+   "overview": "puducherry/",
+   "path": "puducherry/now/",
+   "phase": "II"
+  },
+  "Punjab": {
+   "ceo": [],
+   "courts": [],
+   "label": "Punjab 2026",
+   "notices": {
+    "date": "2026-10-12",
+    "deleted": {
+     "date": "2026-10-12",
+     "kind": "press",
+     "n": 86038,
+     "rounded": false,
+     "url": "https://www.thehindu.com/news/national/punjab/1360-lakh-names-dropped-from-final-electoral-rolls-after-sir-in-punjab/article71575333.ece"
+    },
+    "discrepancy": 2269000,
+    "hearings": null,
+    "kind": "press",
+    "lists_url": "https://www.hindustantimes.com/cities/chandigarh-news/sir-punjab-clears-99-of-logical-discrepancy-cases-for-final-roll-101790103659947.html",
+    "n": 3549036,
+    "no_mapping": null,
+    "rounded": false,
+    "url": "https://www.thehindu.com/news/national/punjab/1360-lakh-names-dropped-from-final-electoral-rolls-after-sir-in-punjab/article71575333.ece"
+   },
+   "orgs": 0,
+   "overview": "punjab/",
+   "path": "punjab/now/",
+   "phase": "III"
+  },
+  "Rajasthan": {
+   "ceo": [
+    [
+     "site",
+     "https://election.rajasthan.gov.in/"
+    ]
+   ],
+   "courts": [],
+   "label": "Rajasthan 2026",
+   "notices": null,
+   "orgs": 1,
+   "overview": "rajasthan/",
+   "path": "rajasthan/now/",
+   "phase": "II"
+  },
+  "Sikkim": {
+   "ceo": [
+    [
+     "site",
+     "https://ceo.sikkim.gov.in/"
+    ]
+   ],
+   "courts": [],
+   "label": "Sikkim 2026",
+   "notices": {
+    "date": "2026-09-07",
+    "deleted": {
+     "date": "2026-09-07",
+     "kind": "primary",
+     "n": 16485,
+     "rounded": false,
+     "url": "https://www.sikkim.gov.in/media/news-announcement/news-info?name=Final+Electoral+Roll+under+SIR+2026+Published+in+Sikkim"
+    },
+    "discrepancy": 52384,
+    "hearings": null,
+    "kind": "primary",
+    "lists_url": "https://www.sikkim.gov.in/media/news-announcement/news-info?name=Final+Electoral+Roll+under+SIR+2026+Published+in+Sikkim",
+    "n": 124519,
+    "no_mapping": 72135,
+    "rounded": false,
+    "url": "https://www.sikkim.gov.in/media/news-announcement/news-info?name=Final+Electoral+Roll+under+SIR+2026+Published+in+Sikkim"
+   },
+   "orgs": 0,
+   "overview": "sikkim/",
+   "path": "sikkim/now/",
+   "phase": "III"
+  },
+  "Tamil Nadu": {
+   "ceo": [
+    [
+     "site",
+     "https://www.elections.tn.gov.in/"
+    ]
+   ],
+   "courts": [
+    [
+     "Madras High Court",
+     1
+    ]
+   ],
+   "label": "Tamil Nadu 2026",
+   "notices": {
+    "date": "2026-02-24",
+    "deleted": {
+     "date": "2026-02-24",
+     "kind": "press",
+     "n": 2000,
+     "rounded": true,
+     "url": "https://www.newindianexpress.com/states/tamil-nadu/2026/Feb/24/electorate-shrinks-by-over-10-per-cent-in-tamil-nadus-103-constituencies"
+    },
+    "discrepancy": 15800000,
+    "hearings": null,
+    "kind": "press",
+    "lists_url": "https://www.newindianexpress.com/states/tamil-nadu/2026/Feb/24/electorate-shrinks-by-over-10-per-cent-in-tamil-nadus-103-constituencies",
+    "n": 17100000,
+    "no_mapping": 1300000,
+    "rounded": true,
+    "url": "https://www.newindianexpress.com/states/tamil-nadu/2026/Feb/24/electorate-shrinks-by-over-10-per-cent-in-tamil-nadus-103-constituencies"
+   },
+   "orgs": 2,
+   "overview": "tamilnadu/",
+   "path": "tamilnadu/now/",
+   "phase": "II"
   },
   "Telangana": {
    "ceo": [
@@ -553,6 +1162,152 @@
    "overview": "hyderabad/",
    "path": "hyderabad/telangana/now/",
    "phase": "III"
+  },
+  "Tripura": {
+   "ceo": [],
+   "courts": [],
+   "label": "Tripura 2026",
+   "notices": null,
+   "orgs": 0,
+   "overview": "tripura/",
+   "path": "tripura/now/",
+   "phase": "III"
+  },
+  "Uttar Pradesh": {
+   "ceo": [
+    [
+     "site",
+     "https://ceouttarpradesh.nic.in/"
+    ]
+   ],
+   "courts": [
+    [
+     "Supreme Court",
+     4
+    ],
+    [
+     "Allahabad High Court",
+     1
+    ]
+   ],
+   "label": "Uttar Pradesh 2026",
+   "notices": {
+    "date": "2026-02-19",
+    "deleted": {
+     "date": "2026-04-11",
+     "kind": "press",
+     "n": 350026,
+     "rounded": false,
+     "url": "https://www.newindianexpress.com/india/2026/Apr/11/up-final-voter-list-at-1339-crore-after-revision-over-2-crore-names-deleted"
+    },
+    "discrepancy": 22200000,
+    "hearings": {
+     "date": "2026-03-07",
+     "kind": "press",
+     "n": 28000000,
+     "rounded": true,
+     "url": "https://www.thehindu.com/news/national/uttar-pradesh/uttar-pradesh-sir-forms-including-names-deletion-in-claims-objections-period/article70715531.ece"
+    },
+    "kind": "press",
+    "lists_url": "https://timesofindia.indiatimes.com/city/lucknow/no-mass-deletion-as-claimed-only-4336-names-removed-via-3rd-party-form-7-in-sir-2026-says-up-chief-electoral-officer/articleshow/128539836.cms",
+    "n": 32600000,
+    "no_mapping": 10400000,
+    "rounded": true,
+    "url": "https://timesofindia.indiatimes.com/city/lucknow/no-mass-deletion-as-claimed-only-4336-names-removed-via-3rd-party-form-7-in-sir-2026-says-up-chief-electoral-officer/articleshow/128539836.cms"
+   },
+   "orgs": 4,
+   "overview": "uttarpradesh/",
+   "path": "uttarpradesh/now/",
+   "phase": "II"
+  },
+  "Uttarakhand": {
+   "ceo": [
+    [
+     "site",
+     "https://ceo.uk.gov.in/"
+    ]
+   ],
+   "courts": [
+    [
+     "Magistrate's court",
+     1
+    ]
+   ],
+   "label": "Uttarakhand 2026",
+   "notices": {
+    "date": "2026-07-14",
+    "deleted": {
+     "date": "2026-10-03",
+     "kind": "press",
+     "n": 97186,
+     "rounded": false,
+     "url": "https://indianexpress.com/article/india/uttarakhand-sir-final-roll-out-voter-enrolment-exercise-10905065/"
+    },
+    "discrepancy": 1904380,
+    "hearings": null,
+    "kind": "primary",
+    "lists_url": "https://cdnbbsr.s3waas.gov.in/s3cbf8710b43df3f2c1553e649403426df/uploads/2026/07/202607152058741775.pdf",
+    "n": 2430608,
+    "no_mapping": 526228,
+    "rounded": false,
+    "url": "https://cdnbbsr.s3waas.gov.in/s3cbf8710b43df3f2c1553e649403426df/uploads/2026/07/202607152058741775.pdf"
+   },
+   "orgs": 0,
+   "overview": "uttarakhand/",
+   "path": "uttarakhand/now/",
+   "phase": "III"
+  },
+  "West Bengal": {
+   "ceo": [
+    [
+     "site",
+     "https://ceowestbengal.wb.gov.in/"
+    ]
+   ],
+   "courts": [
+    [
+     "Supreme Court",
+     9
+    ],
+    [
+     "Appellate tribunal (West Bengal)",
+     4
+    ],
+    [
+     "Calcutta High Court",
+     2
+    ]
+   ],
+   "label": "West Bengal 2026",
+   "notices": {
+    "date": "2026-01-19",
+    "deleted": {
+     "date": "2026-04-07",
+     "kind": "press",
+     "n": 2716393,
+     "rounded": false,
+     "url": "https://indianexpress.com/article/political-pulse/54-out-ec-releases-first-data-of-deletions-after-adjudication-10623077/"
+    },
+    "discrepancy": 9146000,
+    "hearings": {
+     "date": "2026-01-14",
+     "kind": "press",
+     "n": 930000,
+     "rounded": true,
+     "url": "https://timesofindia.indiatimes.com/city/kolkata/bengal-only-6-6-of-1-4cr-sir-hearings-over-ec-has-25-days-to-go-for-deadline/articleshow/126520570.cms"
+    },
+    "kind": "primary",
+    "lists_url": "https://www.nationalheraldindia.com/politics/bengal-sir-election-commission-releases-breakdown-of-9146-lakh-logical-discrepancy-cases",
+    "n": 14000000,
+    "no_mapping": 3000000,
+    "rounded": true,
+    "url": "https://api.sci.gov.in/supremecourt/2025/64235/64235_2025_1_30_67603_Order_19-Jan-2026.pdf"
+   },
+   "orgs": 6,
+   "overview": "westbengal/",
+   "path": "westbengal/now/",
+   "phase": "II",
+   "tribunal": true
   }
  }
 }
