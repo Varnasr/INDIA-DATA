@@ -640,6 +640,48 @@ def _page_with_scripts(path):
     return html
 
 
+def _now():
+    # each state's "What to do now" page (scripts/build_now.py, make_now_pages.py,
+    # assets/now.js): its data and its source are current, its state has a
+    # schedule for the stage to be worked out from, every source the page names
+    # exists, and the built page links back to the overview whose box links to it
+    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+    import build_now
+    for script in ('build_now.py', 'make_now_pages.py'):
+        r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', script), '--check'], capture_output=True, text=True)
+        assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+    P = json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))
+    X = json.load(open(os.path.join(ROOT, 'data', 'india', 'now.json'), encoding='utf-8'))
+    sched = {x['state'] for x in P['schedules']}
+    js = open(os.path.join(ROOT, 'assets', 'now.js'), encoding='utf-8').read()
+    named = set(re.findall(r"\bc_[A-Za-z0-9_]+", js)) | {pg['bench'] for pg in X['pages'].values() if pg.get('bench')}
+    for k in sorted(named):
+        assert k in X['cite'], 'assets/now.js names the source %s, which data/india/now.json does not hold' % k
+        assert X['cite'][k]['items'] and all(i['url'].startswith('https://') for i in X['cite'][k]['items']), 'source %s has no document with an address' % k
+    unused = sorted(set(X['cite']) - named)
+    assert not unused, 'data/india/now.json holds sources no page names: %s' % ', '.join(unused)
+    cfg = {pl['id']: pl for pl in json.load(open(os.path.join(ROOT, 'site', 'places.json'), encoding='utf-8'))['places']}
+    assert sorted(X['pages']) == sorted(r['state'] for r in build_now.PAGES), 'now.json and build_now.PAGES name different states'
+    for row in build_now.PAGES:
+        name, path = row['state'], row['path']
+        assert name in sched, '%s has a "What to do now" page and no schedule in process.json' % name
+        assert path in [x[0] for x in cfg[row['place']]['pages']], 'places.json does not list %s' % path
+        built = os.path.join(ROOT, path, 'index.html')
+        assert os.path.exists(built), '%s has not been built' % path
+        page = open(built, encoding='utf-8').read()
+        assert 'data-now="%s"' % name in page, '%s does not name %s' % (path, name)
+        overview = cfg[row['place']]['pages'][0][0]
+        back = os.path.relpath(overview, path).replace(os.sep, '/') + '/'
+        assert re.search(r'<p class="nowback"><a href="%s">' % re.escape(back), page), '%s does not link back to %s' % (path, overview)
+        ov = open(os.path.join(ROOT, overview, 'index.html'), encoding='utf-8').read()
+        assert re.search(r'<aside class="owin" data-owin="%s" data-owin-now="[^"]*%s' % (re.escape(name), re.escape(path)), ov), \
+            '%s: the claims box does not link to %s' % (overview, path)
+        for kind, url in row['ceo']:
+            assert re.match(r'https://(x\.com/\w+|[a-z.]+\.gov\.in/)$', url), '%s: %s is not an official address' % (name, url)
+    helpp = open(os.path.join(ROOT, 'help', 'index.html'), encoding='utf-8').read()
+    assert 'data-owin-now=' in helpp, 'the help page\'s state picker does not link to the "What to do now" pages'
+
+
 def _short_and_faq():
     # Every page but the full reports opens with an "In short" box and carries
     # questions and answers: its own (#pageFaq) or, on an FAQ tab, all (#qas).
@@ -709,6 +751,7 @@ for name, fn in [
     ('the final-roll alert form is wired for Netlify and the terms page describes it', _alerts),
     ('the feed, the calendars, the data index and the frame rules are sound', _feeds),
     ('the claims box is on every state\'s overview and the help page, and the summary revision\'s dates are its text\'s', _open_window),
+    ('every "What to do now" page is current, has a schedule, cites only sources that exist and links back to its overview', _now),
     ('the downloads manifest is current and every column is described', _repository),
     ('the disputes page carries only checked items and is current', _disputes),
     ('the weekly digest keeps to its week, its entries\' figures, the writing rules and pages that exist', _digest),

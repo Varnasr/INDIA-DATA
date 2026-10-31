@@ -42,7 +42,7 @@ const firstOfFolder = new Set();
 const PAGES = ['', ...SECTIONS.flatMap((d) => walk(d)), ...OWN.flatMap((d) => walk(d))]
   .filter((p) => !/^embed\//.test(p)).sort()
   .filter((p) => { const m = p.match(LOCAL); if (!m) return true; if (firstOfFolder.has(m[1])) return false; firstOfFolder.add(m[1]); return true; });
-const SOURCES = ['index.html', 'assets/sir.js', 'assets/viz.js', 'assets/dash.js', 'assets/i18n.js', ...fs.readdirSync(path.join(ROOT, 'assets/faq')).filter(f => f.endsWith('.js')).sort().map(f => 'assets/faq/' + f), ...PAGES.filter(Boolean).map(p => p + 'index.html')];
+const SOURCES = ['index.html', 'assets/sir.js', 'assets/viz.js', 'assets/dash.js', 'assets/now.js', 'assets/i18n.js', ...fs.readdirSync(path.join(ROOT, 'assets/faq')).filter(f => f.endsWith('.js')).sort().map(f => 'assets/faq/' + f), ...PAGES.filter(Boolean).map(p => p + 'index.html')];
 
 const cat = {};
 const add = (k, page, kind) => { const e = cat[k] || (cat[k] = { kind, pages: [] }); if (!e.pages.includes(page)) e.pages.push(page); if (kind === 'script') e.kind = 'script'; };

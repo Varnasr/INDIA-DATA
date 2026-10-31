@@ -31,6 +31,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_feeds as BF  # noqa: E402  the feed, calendars, data index and _headers
 import final_roll  # noqa: E402  when each state's final roll is due
 import build_i18n  # noqa: E402  which translation files each page loads
+import build_now  # noqa: E402  which states have a "What to do now" page
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'site', 'pages')
@@ -286,16 +287,24 @@ def dates_block(out, place, root):
 # and needs no rebuild. Every state's overview gets an empty box under its
 # head, and the help page's box (#owinAll) is given the overview of every
 # state, so its table can link to them.
+# Each state's "What to do now" page (scripts/build_now.py) is linked from
+# the box, so the box and the help page's picker are given the pages by state.
+NOW_PAGES = {r['state']: r['path'] for r in build_now.PAGES if os.path.exists(os.path.join(SRC, r['path'], 'index.html'))}
+NOW_ATTR = ' data-owin-now="%s"' % html.escape(json.dumps(NOW_PAGES, sort_keys=True, separators=(',', ':')))
+
+
 def open_window(out, place, content):
     if place.get('zone') and place['pages'] and out == place['pages'][0][0]:
-        box = '<aside class="owin" data-owin="%s" aria-live="polite" hidden></aside>' % html.escape(BF.state_name(place))
+        name = BF.state_name(place)
+        box = ('<aside class="owin" data-owin="%s"%s aria-live="polite" hidden></aside>'
+               % (html.escape(name), (' data-owin-now="%s"' % html.escape(json.dumps({name: NOW_PAGES[name]}, separators=(',', ':')))) if name in NOW_PAGES else ''))
         new, n = re.subn(r'(<div class="page-head"[^>]*>.*?</div>)', lambda m: m.group(1) + '\n' + box, content, count=1, flags=re.S)
         if not n:
             raise SystemExit('FAIL - %s has no page head to put the claims box under' % out)
         return new
     if 'id="owinAll"' in content:
         pages = {BF.state_name(p): p['pages'][0][0] for p in CFG['places'] if p.get('zone') and p['pages']}
-        return content.replace('id="owinAll"', 'id="owinAll" data-owin-pages="%s"' % html.escape(json.dumps(pages, sort_keys=True, separators=(',', ':'))), 1)
+        return content.replace('id="owinAll"', 'id="owinAll" data-owin-pages="%s"%s' % (html.escape(json.dumps(pages, sort_keys=True, separators=(',', ':'))), NOW_ATTR), 1)
     return content
 
 
