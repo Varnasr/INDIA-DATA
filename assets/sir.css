@@ -1066,6 +1066,11 @@ html.dyslexic-font main>h3.hubh,html:not([lang="en"]) main>h3.hubh{font-family:i
    with a page, kept small so the card stays short on a phone */
 .now-hub .chips{margin:.35rem 0 0;gap:.4rem;max-width:none}
 .now-hub .chips a{padding:.3rem .75rem;font-size:.85rem}
+/* on a phone the chips are two rows that scroll sideways, so the card stays
+   short however many states have a page; every chip is a link, so Tab
+   reaches each one and the browser scrolls it into view */
+@media (max-width:699px){.now-hub .chips{display:grid;grid-auto-flow:column;grid-template-rows:auto auto;grid-auto-columns:max-content;justify-content:start;overflow-x:auto;overscroll-behavior-x:contain;padding:.2rem .1rem .5rem;scroll-snap-type:x proximity}
+.now-hub .chips a{white-space:nowrap;scroll-snap-align:start}}
 .hub.pin{position:relative;padding-inline-end:2.6rem}
 .hub.pin::before{content:"";position:absolute;top:1rem;inset-inline-end:1rem;width:18px;height:18px;background:var(--red);
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 17v5'/%3E%3Cpath d='M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z'/%3E%3C/svg%3E") center/contain no-repeat;

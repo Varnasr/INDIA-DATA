@@ -1023,7 +1023,7 @@
   var STEPS = [
     ['.controls .find', L('Search finds any page, constituency, district or dispute. Press Ctrl or Command and K from any page.')],
     ['main .btn-ink[href*="constituencies"]', L('Constituencies opens a finder over every constituency with a published figure, each in its own state\'s measure.')],
-    ['#what-to-do-now', L('Each state still in the revision has a page of the steps open to an elector left off the draft or sent a notice, with the dates that apply.')],
+    ['#what-to-do-now', L('What to do now in your state links to the page for each state, with the steps open to an elector there on the day you read it.')],
     ['.controls .start > summary', L('Start here lists the pages most readers come for, from finding a constituency to what to do if a name was left off.')],
     ['.controls .places > summary', L('Places lists every analysis, from All India to each state and union territory.')],
     ['#vIndia', L('The map shows the names left off per 100 electors in each state. Tap a state to open its own page.')],

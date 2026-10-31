@@ -293,12 +293,11 @@ NOW_PAGES = {r['state']: r['path'] for r in build_now.PAGES if os.path.exists(os
 NOW_ATTR = ' data-owin-now="%s"' % html.escape(json.dumps(NOW_PAGES, sort_keys=True, separators=(',', ':')))
 
 
-# The front page's "What to do now in your state" card and the guide's step
-# list every state with a "What to do now" page, read from
-# data/india/now.json (scripts/build_now.py), so a state added there appears
-# on both with the next build. The card's links carry the state's place label
-# ("Delhi 2026"), which the Places menu already translates; the guide is in
-# English and names the states in a sentence.
+# The front page's "What to do now in your state" card lists every state
+# with a "What to do now" page, read from data/india/now.json
+# (scripts/build_now.py), so a state added there appears with the next build.
+# The links carry the state's place label ("Delhi 2026"), which the Places
+# menu already translates.
 def now_states(content, root):
     if '<!--now-states' not in content:
         return content
@@ -308,9 +307,7 @@ def now_states(content, root):
     if not rows:
         raise SystemExit('FAIL - data/india/now.json names no state with a "What to do now" page')
     chips = ''.join('<a href="%s%s">%s</a>' % (root, v['path'], html.escape(v['label'])) for k, v in rows)
-    links = ['<a href="%s%s">%s</a>' % (root, v['path'], html.escape(k)) for k, v in rows]
-    prose = links[0] if len(links) == 1 else ', '.join(links[:-1]) + ' and ' + links[-1]
-    return content.replace('<!--now-states-->', chips).replace('<!--now-states-prose-->', prose)
+    return content.replace('<!--now-states-->', chips)
 
 
 def open_window(out, place, content):
