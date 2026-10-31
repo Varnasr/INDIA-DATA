@@ -1000,6 +1000,12 @@ html.dyslexic-font .disp .tag{text-transform:none}
 .helpart .nsrc{font-size:.85rem;color:var(--muted)}
 .helpart .tag{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;border:1px solid var(--line);color:var(--muted);padding:0 .3rem;border-radius:4px}
 html.dyslexic-font .helpart :is(.hsrc>summary,.tag){text-transform:none}
+/* <place>/now/: a state's "What to do now" page (assets/now.js) */
+.nowart .nowlinks{max-width:var(--measure);margin:.3rem 0 1rem;padding-inline-start:1.1rem}
+.nowart .nowlinks li{margin:.25rem 0}
+.nowart .twrap{max-width:var(--measure);margin-block:.4rem .6rem}
+.nowart .nsrc{color:var(--muted);font-size:.85rem}
+.nowart h2{margin-top:1.8rem}
 .who{max-width:var(--measure);margin:0 0 1.2rem;padding:0;list-style:none;display:grid;gap:.55rem}
 .who li{padding-inline-start:.9rem;border-inline-start:3px solid var(--red)}
 /* the states fold: zonal headings, a line on what bold means, the full analyses in bold */
