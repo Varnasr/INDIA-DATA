@@ -60,11 +60,14 @@ PAGES = [
     # The states and union territories whose revision is over, and Tripura,
     # whose draft is still to come. A Chief Electoral Officer's address is
     # given only where states.json, process.json or the state's SOURCES.md
-    # names it as that office's own site or account. Punjab's and Tripura's
-    # SOURCES.md each name two hosts for the site and neither was reached, so
-    # neither is given; the Andaman account the repository cites is the
-    # Administration's. Assam, Himachal Pradesh, Jammu and Kashmir and Ladakh
-    # have no schedule of the revision in process.json and so no page.
+    # names it as that office's own site or account. The SOURCES.md of
+    # Punjab, Tripura and the Andaman and Nicobar Islands each name two hosts
+    # for the site and neither was reached, so neither is given, and the
+    # Andaman account the repository cites is the Administration's. The
+    # Dadra and Nagar Haveli and Daman and Diu SOURCES.md names
+    # ceodaman.nic.in without saying whose site it is. Assam, Himachal
+    # Pradesh, Jammu and Kashmir and Ladakh have no schedule of the revision
+    # in process.json and so no page.
     {'state': 'Bihar', 'place': 'bihar', 'path': 'bihar/now/',
      'ceo': [['site', 'https://ceoelection.bihar.gov.in/']]},
     {'state': 'Uttar Pradesh', 'place': 'up', 'path': 'uttarpradesh/now/',
@@ -77,7 +80,8 @@ PAGES = [
     # hear appeals against the judicial officers' orders (the disputes page)
     {'state': 'West Bengal', 'place': 'wb', 'path': 'westbengal/now/',
      'ceo': [['site', 'https://ceowestbengal.wb.gov.in/']], 'tribunal': True},
-    {'state': 'Madhya Pradesh', 'place': 'mp', 'path': 'madhyapradesh/now/', 'ceo': []},
+    {'state': 'Madhya Pradesh', 'place': 'mp', 'path': 'madhyapradesh/now/',
+     'ceo': [['site', 'https://ceoelection.mp.gov.in/']]},
     {'state': 'Rajasthan', 'place': 'rj', 'path': 'rajasthan/now/',
      'ceo': [['site', 'https://election.rajasthan.gov.in/']]},
     {'state': 'Chhattisgarh', 'place': 'cg', 'path': 'chhattisgarh/now/',
