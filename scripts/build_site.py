@@ -293,6 +293,23 @@ NOW_PAGES = {r['state']: r['path'] for r in build_now.PAGES if os.path.exists(os
 NOW_ATTR = ' data-owin-now="%s"' % html.escape(json.dumps(NOW_PAGES, sort_keys=True, separators=(',', ':')))
 
 
+# The front page's "What to do now in your state" card lists every state
+# with a "What to do now" page, read from data/india/now.json
+# (scripts/build_now.py), so a state added there appears with the next build.
+# The links carry the state's place label ("Delhi 2026"), which the Places
+# menu already translates.
+def now_states(content, root):
+    if '<!--now-states' not in content:
+        return content
+    with open(os.path.join(ROOT, 'data', 'india', 'now.json'), encoding='utf-8') as f:
+        pages = json.load(f)['pages']
+    rows = sorted((k, v) for k, v in pages.items() if os.path.exists(os.path.join(SRC, v['path'], 'index.html')))
+    if not rows:
+        raise SystemExit('FAIL - data/india/now.json names no state with a "What to do now" page')
+    chips = ''.join('<a href="%s%s">%s</a>' % (root, v['path'], html.escape(v['label'])) for k, v in rows)
+    return content.replace('<!--now-states-->', chips)
+
+
 def open_window(out, place, content):
     if place.get('zone') and place['pages'] and out == place['pages'][0][0]:
         name = BF.state_name(place)
@@ -417,7 +434,7 @@ def shell(out, meta, content, scripts):
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="ql" data-i18n-each>%s</div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('guide/', 'How to use this site'), ('about-the-data/', 'About the data'), ('india/brief/', 'The SIR in brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'Left off the roll? What to do'), ('india/disputes/', 'Protests and disputes'), ('india/events/', 'Events'), ('india/rti/', 'RTI replies'), ('india/cases/', 'Case studies'), ('india/reading/', 'Further reading and viewing'),
+        (('guide/', 'How to use this site'), ('about-the-data/', 'About the data'), ('india/brief/', 'The SIR in brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'Left off the roll? What to do'), ('help/#owinAll', 'What to do now in your state'), ('india/disputes/', 'Protests and disputes'), ('india/events/', 'Events'), ('india/rti/', 'RTI replies'), ('india/cases/', 'Case studies'), ('india/reading/', 'Further reading and viewing'),
          ('india/women/', 'Women'), ('india/numbers/', 'The SIR in numbers'), ('support/', 'Support our work')))
     # "Start here" is its own menu beside Places, so Places holds only places
     about = ''.join(i for i in items if i.startswith('<div class="about"'))
@@ -504,6 +521,7 @@ def shell(out, meta, content, scripts):
     if place['id'] != 'home':
         content = re.sub(r'(<div class="page-head"[^>]*>)', lambda m: m.group(1) + '<p class="kicker">%s</p>' % html.escape(place['label']) + asof_html(asof(place)), content, count=1)
     content = open_window(out, place, content)
+    content = now_states(content, root)
     head_extra = ('\n' + meta['head']) if meta.get('head') else ''
     # link previews: a shared page shows its title, description and its
     # place's card (assets/og, written by scripts/og_cards.mjs). Previews
