@@ -338,6 +338,9 @@ def cite_block(out, meta):
             '<p><button type="button" class="btn cite-copy">Copy the reference</button></p></details>' % ref)
 
 
+CREDIT_LINE = ('Built and maintained by Varna Sri Raman at Pinpoint Ventures, which also takes research and advisory work. Write to <a href="mailto:hello@pinpointventures.in?subject=Enquiry%20from%20offtheroll.in">hello@pinpointventures.in</a> or message on <a href="https://wa.me/919871777110?text=Hi%20Pinpoint%20Ventures%2C%20I%20found%20you%20through%20offtheroll.in.%20I%27d%20like%20to%20discuss%20a%20research%20or%20advisory%20engagement." target="_blank" rel="noopener">WhatsApp</a>.')
+
+
 def embed_shell(out, meta, content, scripts, place, root):
     """A chart alone, for another site's frame: no header, menus or footer,
     only the chart, its source and a link back (site/pages/embed)."""
@@ -347,9 +350,10 @@ def embed_shell(out, meta, content, scripts, place, root):
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<meta name="robots" content="noindex">\n'
         '<script src="%sassets/i18n.js"></script>\n<title>%s</title>\n<meta name="description" content="%s">\n'
         '<link rel="canonical" href="%s">\n<link rel="stylesheet" href="%sassets/sir.css">\n</head>\n'
-        '<body class="embed %s" data-place="%s" data-root="%s" data-back="%s">\n%s\n%s\n</body>\n</html>\n'
+        '<body class="embed %s" data-place="%s" data-root="%s" data-back="%s">\n%s\n<p class="emcredit" lang="en" dir="ltr" data-no-i18n>@@CREDIT@@</p>\n%s\n</body>\n</html>\n'
     ) % (root, html.escape(meta['title'], quote=False), html.escape(meta['description']), back, root,
          place.get('class', place['id']), place['id'], root, back, content, scripts)
+    page = page.replace('@@CREDIT@@', CREDIT_LINE)
     return i18n_files(out, page)
 
 
@@ -475,7 +479,8 @@ def shell(out, meta, content, scripts):
     footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
               ' · <a href="%s#why-this-site-exists">About this site</a> · <a href="%shelp/">Left off the roll? What to do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a list</a> · <a href="%ssupport/">Support our work</a> · <a href="%sterms/">Terms and privacy</a> · <a href="%supdates/">What\'s new</a> · <a href="%sfeed.xml">Follow by feed</a> · <a href="%scorrections/">Corrections</a> · <a href="%sfeedback/?from=%s">Feedback</a>'
               ' · <a href="mailto:%s">%s</a>'
-              '<p class="credit" lang="en" dir="ltr" data-no-i18n>Built and maintained by Varna Sri Raman at Pinpoint Ventures, which also takes research and advisory work. Write to <a href="mailto:hello@pinpointventures.in?subject=Enquiry%%20from%%20offtheroll.in">hello@pinpointventures.in</a> or message on <a href="https://wa.me/919871777110?text=Hi%%20Pinpoint%%20Ventures%%2C%%20I%%20found%%20you%%20through%%20offtheroll.in.%%20I%%27d%%20like%%20to%%20discuss%%20a%%20research%%20or%%20advisory%%20engagement." target="_blank" rel="noopener">WhatsApp</a>.</p></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, root, root, root, urllib.parse.quote(here or 'home', safe=''), CFG['email'], CFG['email']))
+              '<p class="credit" lang="en" dir="ltr" data-no-i18n>@@CREDIT@@</p></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, root, root, root, urllib.parse.quote(here or 'home', safe=''), CFG['email'], CFG['email']))
+    footer = footer.replace('@@CREDIT@@', CREDIT_LINE)
     # On a phone the header's Downloads button is inside the menu, and the
     # footer link opened the downloads page at its top, where the first button
     # is the zip of every table. So every page of a place with a workbook
