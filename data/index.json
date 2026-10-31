@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 464,
-  "bytes": 13343812
+  "bytes": 13343862
  },
  "files": [
   {
@@ -3465,7 +3465,7 @@
    "path": "data/delhi/summary.json",
    "description": "Delhi: the figures its pages draw",
    "format": "JSON",
-   "bytes": 998,
+   "bytes": 1014,
    "keys": [
     "roll_before",
     "draft",
@@ -3492,7 +3492,8 @@
     "form6_to_0929",
     "form7_to_0929",
     "claims_to",
-    "final_due"
+    "final_due",
+    "final"
    ],
    "licence": "CC BY 4.0"
   },
@@ -4093,8 +4094,10 @@
    "path": "data/hyderabad/telangana.json",
    "description": "Telangana: the draft roll by district, against the Old City of Hyderabad",
    "format": "JSON",
-   "bytes": 8847,
+   "bytes": 8891,
    "keys": [
+    "final_due",
+    "final",
     "state",
     "hyderabad",
     "rest_of_state",
@@ -5621,7 +5624,7 @@
    "path": "data/maharashtra/summary.json",
    "description": "Maharashtra: the figures its pages draw",
    "format": "JSON",
-   "bytes": 11270,
+   "bytes": 11286,
    "keys": [
     "before",
     "draft",
@@ -5671,7 +5674,8 @@
     "notices_to",
     "final_due",
     "final_due_source",
-    "top38"
+    "top38",
+    "final"
    ],
    "licence": "CC BY 4.0"
   },
@@ -7128,7 +7132,7 @@
    "path": "downloads/assam.xlsx",
    "description": "Assam, Excel workbook",
    "format": "Excel",
-   "bytes": 41234,
+   "bytes": 41232,
    "licence": "CC BY 4.0"
   },
   {
@@ -7142,14 +7146,14 @@
    "path": "downloads/delhi.xlsx",
    "description": "Delhi, Excel workbook",
    "format": "Excel",
-   "bytes": 28828,
+   "bytes": 28826,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/gujarat.xlsx",
    "description": "Gujarat, Excel workbook",
    "format": "Excel",
-   "bytes": 72139,
+   "bytes": 72137,
    "licence": "CC BY 4.0"
   },
   {
@@ -7163,70 +7167,70 @@
    "path": "downloads/karnataka.xlsx",
    "description": "Karnataka, Excel workbook",
    "format": "Excel",
-   "bytes": 26393,
+   "bytes": 26391,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/kerala.xlsx",
    "description": "Kerala, Excel workbook",
    "format": "Excel",
-   "bytes": 58129,
+   "bytes": 58127,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/maharashtra.xlsx",
    "description": "Maharashtra, Excel workbook",
    "format": "Excel",
-   "bytes": 85206,
+   "bytes": 85204,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/other-states.xlsx",
    "description": "Every other state and union territory, Excel workbook",
    "format": "Excel",
-   "bytes": 83448,
+   "bytes": 83446,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/rajasthan.xlsx",
    "description": "Rajasthan, Excel workbook",
    "format": "Excel",
-   "bytes": 60784,
+   "bytes": 60782,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/tamil-nadu.xlsx",
    "description": "Tamil Nadu, Excel workbook",
    "format": "Excel",
-   "bytes": 117836,
+   "bytes": 117834,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/telangana-hyderabad.xlsx",
    "description": "Telangana 2026 and the Old City of Hyderabad, Excel workbook",
    "format": "Excel",
-   "bytes": 95538,
+   "bytes": 95536,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/uttar-pradesh.xlsx",
    "description": "Uttar Pradesh, Excel workbook",
    "format": "Excel",
-   "bytes": 50366,
+   "bytes": 50364,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/uttarakhand.xlsx",
    "description": "Uttarakhand, Excel workbook",
    "format": "Excel",
-   "bytes": 45751,
+   "bytes": 45749,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/west-bengal.xlsx",
    "description": "West Bengal, Excel workbook",
    "format": "Excel",
-   "bytes": 95189,
+   "bytes": 95187,
    "licence": "CC BY 4.0"
   }
  ]
