@@ -1023,10 +1023,11 @@
   var STEPS = [
     ['.controls .find', L('Search finds any page, constituency, district or dispute. Press Ctrl or Command and K from any page.')],
     ['main .btn-ink[href*="constituencies"]', L('Constituencies opens a finder over every constituency with a published figure, each in its own state\'s measure.')],
+    ['#what-to-do-now', L('Each state still in the revision has a page of the steps open to an elector left off the draft or sent a notice, with the dates that apply.')],
     ['.controls .start > summary', L('Start here lists the pages most readers come for, from finding a constituency to what to do if a name was left off.')],
     ['.controls .places > summary', L('Places lists every analysis, from All India to each state and union territory.')],
     ['#vIndia', L('The map shows the names left off per 100 electors in each state. Tap a state to open its own page.')],
-    ['.hubs .hub.pin', L('The pinned cards lead to the pages most readers look for, among them the disputes, every constituency and women.')],
+    ['.hubs.pins .hub.pin', L('The pinned cards lead to the pages most readers look for, among them the disputes, every constituency and women.')],
     ['.controls .dlink', L('Every table behind these figures can be downloaded, with what each column means.')],
     ['.controls #lang', L('The pages read in English, Hindi, Urdu, Telugu, Tamil and Bengali.')]
   ];
@@ -1256,5 +1257,8 @@
         }).join('') + '</tbody></table></div>'
         : '<p>' + L('On {t}, no state on record is taking claims or hearing notices in the revision.', { t: D(today) }) + '</p>');
     all.hidden = false;
+    // the menu's "What to do now in your state" opens the help page at this
+    // picker, which is hidden until now, so the browser could not scroll to it
+    if (location.hash === '#owinAll') all.scrollIntoView();
   }).catch(function () {});
 })();
