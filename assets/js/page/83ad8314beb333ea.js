@@ -19,6 +19,22 @@ SIR.json('data/hyderabad/telangana.json').then(function (d) {
     { k: 'electors_pre', label: L('Electors before'), fmt: SIR.n }, { k: 'electors_draft', label: L('Draft roll'), fmt: SIR.n },
     { k: 'removed', label: L('Left off'), fmt: SIR.n }, { k: 'rate', label: L('% of roll'), fmt: function (v) { return SIR.d(v, 1); } }
   ], d.seats, { sort: 'rate' });
+  // The state's final roll: d.final is null until scripts/add_final.py
+  // records it, and the paragraph gives the date it is due until then.
+  var FN = d.final, S0 = d.state, big = function (x) { return FN.figures === 'rounded' ? SIR.lakh(x) : SIR.n(x); };
+  document.getElementById('fFinal').innerHTML = FN
+    ? (FN.net_after >= 0
+      ? L('<b>The final roll was published on {d} with {f} electors, a fall in the roll of {nf} since the roll before the revision.</b> It stands {a} above the draft, which comes to {m} of the {r} names left off, and that rise counts new voters as well as names put back.', {
+        d: SIR.date(FN.date), f: SIR.n(FN.electors), nf: SIR.n(FN.net_fall), a: SIR.n(FN.net_after), m: SIR.pct(FN.made_up_pct), r: SIR.lakh(S0.removed) })
+      : L('<b>The final roll was published on {d} with {f} electors, a fall in the roll of {nf} since the roll before the revision.</b> It stands {a} below the draft.', {
+        d: SIR.date(FN.date), f: SIR.n(FN.electors), nf: SIR.n(FN.net_fall), a: SIR.n(-FN.net_after) })) +
+      (FN.added != null && FN.deleted != null ? ' ' + L('After the draft, {ad} names were added and {de} deleted.', { ad: big(FN.added), de: big(FN.deleted) }) : '') +
+      (FN.women != null ? ' ' + L('It holds {m} men, {w} women and {t} third-gender electors.', { m: SIR.n(FN.men), w: SIR.n(FN.women), t: SIR.n(FN.third) }) : '') + ' ' +
+      (FN.source.primary ? L('The figures are from <a href="{u}">{s}</a>.', { u: SIR.esc(FN.source.url), s: SIR.esc(FN.source.title) })
+        : L('The figures are from <a href="{u}">{s}</a>, as reported in the press.', { u: SIR.esc(FN.source.url), s: SIR.esc(FN.source.title) }))
+    : d.final_due < new Date().toISOString().slice(0, 10)
+      ? L('<b>The final roll was due on {d} and had not been found published when these figures were checked.</b>', { d: SIR.date(d.final_due) })
+      : L('<b>The final roll is due on {d}.</b> Until it is published, nobody can say how many of the names left off the draft will be put back.', { d: SIR.date(d.final_due) });
   var HP = d.hearings_press;
   if (HP) document.getElementById('fHP').innerHTML = L('<a href="{u}">{outlet} reported on 9 October</a>, from the Chief Electoral Officer\'s information, that hearings of {heard} electors across Telangana had been completed. Of these, {eligible} were found eligible and {ineligible} ineligible, and the cases of {undecided} electors sent a notice had not yet been decided. The paper also reported that the Election Commission had done away with in-person hearings and house visits to collect documents, and that hearings would be held preferably online. These are press figures, and no table from the Chief Electoral Officer has been found to check them against.', { u: HP.url, outlet: SIR.esc(HP.outlet), heard: SIR.lakh(HP.heard), eligible: SIR.lakh(HP.eligible), ineligible: SIR.n(HP.ineligible), undecided: SIR.lakh(HP.undecided) });
   document.getElementById('nT').innerHTML = L('The source is the Chief Electoral Officer, Telangana\'s draft roll of 17 August 2026, by district and for Hyderabad district\'s seats, <a href="{u}">as tabulated in the press</a>. The state gives no split by reason below the district, and no seat figures outside Hyderabad district. The part-level lists used on the other pages were compiled for the five Old City seats only, so the district\'s other ten seats appear here as the state\'s totals. Malakpet\'s figures here are the state\'s own, because the part-level list used on the other pages holds only part of Malakpet.', { u: d.source });

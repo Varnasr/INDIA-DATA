@@ -29,6 +29,7 @@ from urllib.parse import quote
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_feeds as BF  # noqa: E402  the feed, calendars, data index and _headers
+import final_roll  # noqa: E402  when each state's final roll is due
 import build_i18n  # noqa: E402  which translation files each page loads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -173,11 +174,10 @@ def asof(place):
     if r.get('electors_final') and r.get('final_date'):
         return {'k': 'final', 'd': r['final_date'], 'c': today}
     sched = next((x for x in P['schedules'] if x['state'] == name), None)
-    due = sched['steps'][-1].get('final') if sched else None
-    # a date moved since the last order, as reported, replaces the order's
-    moved = sorted((x for x in P.get('reported_dates', []) if x['state'] == name and x.get('final')), key=lambda x: x['date'])
-    if moved:
-        due = moved[-1]['final']
+    # the latest step's date, or a date moved since the last order, as
+    # reported (scripts/final_roll.py, which check_data.py also uses to fail
+    # on a final roll that is overdue and not recorded)
+    due = final_roll.due(name, P)
     if not r.get('draft_date'):
         slug = place.get('slug')
         summ = None

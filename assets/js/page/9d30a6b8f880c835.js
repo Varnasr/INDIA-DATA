@@ -6,5 +6,7 @@ SIR.json('data/maharashtra/summary.json').then(function (s) {
   document.getElementById('mLeft').textContent = SIR.n(s.left_off);
   document.getElementById('mClaims').textContent = DL(s.claims_to);
   document.getElementById('mFinal').textContent = DL(s.final_due);
+  // s.final is null until scripts/add_final.py records the final roll
+  if (s.final) document.getElementById('mPutBack').textContent = 'How many of those left off were put back. The names added after the draft count new voters with them, and no published count separates the two.';
   SIR.showFaq('mh', 'method');
 }).catch(SIR.fail);

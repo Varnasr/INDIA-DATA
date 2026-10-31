@@ -22,6 +22,11 @@ sex, ac_draft_sex.csv), with the reasons and the notices by district beside
 them. Every constituency table is held to its own sums and to the district
 annexures, and the constituencies are set against the 2024 Assembly result.
 Nothing anywhere splits the names left off by sex.
+
+The final roll, once published, is read from raw/final.json, which
+scripts/add_final.py writes (the shape is in scripts/final_roll.py), and goes
+into summary.json as `final`. Until then `final` is null and the page gives
+the date it is due.
 """
 import csv
 import io
@@ -30,6 +35,8 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+import final_roll  # noqa: E402
 # the CEO's press note of 31 August 2026, which the All India row cites for its totals
 NOTE_URL = 'https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/Press%20Note%20English_31.08.2026%20Draft%20Roll.pdf'
 RAW = os.path.join(ROOT, 'data', 'maharashtra', 'raw')
@@ -186,7 +193,9 @@ def build():
     # the dates as last moved: the Commission's latest schedule for the state
     with open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8') as fh:
         sch = [x for x in json.load(fh)['schedules'] if x['state'] == 'Maharashtra'][0]['steps']
-    last = [x for x in sch if x.get('final')][-1]
+    # (a step marked as published records the final roll's own day, and the
+    # dates it was due by are the last schedule's before it)
+    last = [x for x in sch if x.get('final') and x.get('kind') != 'published'][-1]
 
     D.sort(key=lambda r: -r['per_100'])
     city, rest = [r for r in D if r['city']], [r for r in D if not r['city']]
@@ -239,6 +248,11 @@ def build():
                   'uncollected': int(r['uncollected']), 'pct': float(r['uncollected_pct_printed'])} for r in top],
     }
     assert summary['claims_to'] >= summary['claims_to_note'] and summary['final_due'] >= summary['final_due_note']
+    # The final roll, from raw/final.json once scripts/add_final.py has
+    # recorded it, and null until then. final_roll.block asserts that it adds
+    # up and that the All India table carries the same figures. The page and
+    # its questions say "due on" while this is null and "published on" after.
+    summary['final'] = final_roll.block(final_roll.read('maharashtra'), 'Maharashtra', S['before'], S['draft'], S['left_off'], st['draft_published'])
 
     out = {'summary.json': json.dumps(summary, ensure_ascii=False, indent=1) + '\n',
            'districts.json': json.dumps(D, ensure_ascii=False, separators=(',', ':')) + '\n',
