@@ -95,7 +95,7 @@ ALLOWED = {
 # 27 October 2026 these were read by nothing, and build_site.py carried "we
 # have not found it published" into every state page whose final roll was late.
 TEMPLATES = ('scripts/build_site.py', 'scripts/build_feeds.py', 'scripts/make_seat_pages.py',
-             'scripts/make_district_pages.py', 'scripts/make_embed_pages.py')
+             'scripts/make_district_pages.py', 'scripts/make_embed_pages.py', 'scripts/make_now_pages.py')
 SENTENCE = re.compile(r'[a-z0-9)]\.(?:\s|$)')
 
 
