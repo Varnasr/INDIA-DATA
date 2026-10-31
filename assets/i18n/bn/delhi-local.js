@@ -1,1 +1,1 @@
-Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Delhi 2026 · the names left off, constituency by constituency":"দিল্লি 2026 · বাদ পড়া নাম, প্রতিটি কেন্দ্রে","Delhi pages":"দিল্লির পাতা","What to do now":"এখন কী করবেন"});
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Delhi 2026 · the names left off, constituency by constituency":"দিল্লি 2026 · বাদ পড়া নাম, প্রতিটি কেন্দ্রে","Delhi pages":"দিল্লির পাতা"});

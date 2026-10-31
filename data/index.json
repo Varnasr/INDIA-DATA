@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 465,
-  "bytes": 13417744
+  "bytes": 13454962
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 463836,
+   "bytes": 467222,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 52088,
+   "bytes": 53985,
    "keys": [
     "note",
     "entries"
@@ -4265,7 +4265,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 232437,
+   "bytes": 235167,
    "columns": [
     "section",
     "date",
@@ -4286,7 +4286,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 395257,
+   "bytes": 399051,
    "keys": [
     "listings",
     "sections",
@@ -4414,7 +4414,7 @@
    "path": "data/india/help.json",
    "description": "What to do when a name is left off the roll: remedies, forms and organisations, with sources",
    "format": "JSON",
-   "bytes": 198409,
+   "bytes": 203525,
    "keys": [
     "remedies",
     "orgs",
@@ -4551,7 +4551,7 @@
    "path": "data/india/now.json",
    "description": "All India: now",
    "format": "JSON",
-   "bytes": 21268,
+   "bytes": 41563,
    "keys": [
     "cite",
     "pages"
