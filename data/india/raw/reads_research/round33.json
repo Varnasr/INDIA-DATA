@@ -1,0 +1,21 @@
+[
+ {
+  "title": "A Chinese state group backdoored ArcGIS for a year. It is now being used for Census 2027.",
+  "outlet": "Internet Freedom Foundation",
+  "authors": "Vikram Raj",
+  "date": "2026-10-31",
+  "url": "https://internetfreedom.in/a-chinese-state-group-backdoored-arcgis-for-a-year-it-is-now-being-used-for-census-2027/",
+  "subscription": false,
+  "shows": "From the bid papers on GeM, the Internet Freedom Foundation reports that the Office of the Registrar General bought 96 Esri ArcGIS licences for Census 2027 under a Proprietary Article Certificate, which rules out competition on the product, on a file numbered XII-027/23/2019-MAP and carried forward from 2019. It reports that the contract went on 10 June 2026 to Corporate Infotech Private Limited for ₹14,38,74,322, after four resellers of the same Esri India product bid within 0.95 per cent of each other in a reverse auction, and that the licences will run the Houselisting Block Creator, the Census Thematic Mapper and the Digital District Census Hand Book in every state. Citing a ReliaQuest report of October 2025, IFF says a group that ReliaQuest assessed with moderate confidence to be the Chinese state-sponsored Flax Typhoon kept a backdoor in an unnamed organisation's ArcGIS Server for over a year, and that Esri put the compromise down to the victim's configuration and issued no patch. IFF notes that the work in the bid covers boundaries, maps and tabulated data and does not route individual records or caste answers through Esri's software directly. It finds no public record of a security audit, of CERT-In clearance or of the reasons for passing over Bhuvan and open-source tools, and it has filed RTI applications. The piece concerns the Census mapping software and says nothing about the electoral rolls, the SIR or the National Population Register.",
+  "type": "article (investigation)",
+  "group": "Investigations",
+  "verified_by_opening": true,
+  "quote": [
+   "On 10 June 2026, the contract went to Corporate Infotech Private Limited at ₹14,38,74,322, after four Esri India resellers bid the same product within a 0.95 percent spread under a reverse auction with H1 elimination.",
+   "In October 2025, ReliaQuest documented a China state-sponsored actor assessed with moderate confidence to be Flax Typhoon running inside an ArcGIS Server as a covert web shell for over a year.",
+   "The ATC scope is boundaries, maps and tabulated data for dissemination. It does not route individual citizen records or caste responses through Esri's software directly, which is a distinction worth keeping straight.",
+   "The public record carries no independent cybersecurity oversight for this specific deployment, no CERT-In clearance, no NCIIPC designation, no independent security audit, and no Standard Operating Procedure for the ArcGIS Server service account."
+  ],
+  "note": "By Vikram Raj, for the Internet Freedom Foundation. The page gives 31 October 2026, and its article:published_time is 2026-10-31T12:36:56+05:30. Read in full from the page with curl on 1 November 2026. Free to read. Also read: the bid papers in the Google Drive folder the piece links (GeM bid GEM/2026/B/7370593 of 29 April 2026, closing 9 May 2026, Ministry of Home Affairs, 96 licences under PAC, CA approval XII-027/23/2019-Map; the Proprietary Article Certificate signed by V L N Sarma on 29 April 2026, giving Rs 8,75,02,463 a year, finance wing Note 411 of 24 April 2026 and a prior GeM contract of 12 February 2024 with CIPL; and the Additional Terms and Conditions, which list the HLB Creator, Boundary Management, the Census Thematic Mapper and the District Census Hand Book). The award record of 10 June 2026 is not in that folder and was not read. ReliaQuest's report (reliaquest.com/blog/threat-spotlight-inside-flax-typhoons-arcgis-compromise) and The Hacker News of 14 October 2025 were read and give the year-long access. Esri's trust blog refused the fetch (Access Denied), so IFF's account of Esri's response was not checked. The PIB release of the Registrar General's press conference (PRID 2246847) was read. The piece mentions Aadhaar numbers only in describing IFF's separate representation on the Census schedule. It says nothing about the electoral rolls, the SIR or the National Population Register."
+ }
+]
