@@ -1131,8 +1131,9 @@
     if (!sc) return null;
     var s = S[name] || {}, r = { state: name, T: T, src: [] };
     var use = function (st) { if (st && r.src.indexOf(st) < 0) r.src.push(st); };
-    var ssr = P.timeline.filter(function (t) { return t.ssr && t.ssr.states.indexOf(name) >= 0; }).pop();
-    if (ssr) r.ssr = ssr;
+    // the order is the first entry naming the state; a later one only moved its dates
+    var ssrs = P.timeline.filter(function (t) { return t.ssr && t.ssr.states.indexOf(name) >= 0; });
+    if (ssrs.length) { r.ssr = ssrs[ssrs.length - 1]; r.ssrOrder = ssrs[0]; }
     if (s.electors_final != null) {
       r.k = 'final'; r.pub = s.final_date || null; r.pubSrc = s.final_source || null;
       return r;
@@ -1197,9 +1198,10 @@
     }
     if (NOW[r.state]) links.unshift('<a href="' + root + E(NOW[r.state]) + '">' + L('What to do now in {s}', { s: E(r.state) }) + '</a>');
     if (r.ssr && (r.k === 'final' || r.k === 'due')) {
-      var q = r.ssr.ssr;
-      p.push(L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. It set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}.',
-        { l: D(r.ssr.date), s: E(r.state), q: D(q.qualifying), d: D(q.draft), c: D(q.claims_end), x: D(q.decided), f: D(q.final) }));
+      var q = r.ssr.ssr, qv = { l: D(r.ssr.date), o: D(r.ssrOrder.date), p: E(q.by || ''), s: E(r.state), q: D(q.qualifying), d: D(q.draft), c: D(q.claims_end), x: D(q.decided), f: D(q.final) };
+      p.push(r.ssr === r.ssrOrder
+        ? L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. It set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}.', qv)
+        : L('The Commission\'s letter of {o} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. A later letter, dated {l}, set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}, as {p} reported it.', qv));
     }
     // where the dates come from: each step's own label, which names the
     // outlet where the step is a press report
