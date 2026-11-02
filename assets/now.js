@@ -140,7 +140,9 @@
       // in 17 states and union territories, staged by its own dates
       var ssrShort = '';
       if (r.ssr && C.c_ssr) {
-        var q = r.ssr.ssr, sv = { l: D(r.ssr.date), s: s, q: D(q.qualifying), d: D(q.draft), c: D(q.claims_end), x: D(q.decided), f: D(q.final) };
+        // moved: the state's dates come from a later letter than the order
+        var moved = r.ssr !== r.ssrOrder;
+        var q = r.ssr.ssr, sv = { l: D(r.ssr.date), o: D(r.ssrOrder.date), p: E(q.by || ''), s: s, q: D(q.qualifying), d: D(q.draft), c: D(q.claims_end), x: D(q.decided), f: D(q.final) };
         var ssrStage = T < q.draft ? 'before' : T <= q.claims_end ? 'open' : T < q.final ? 'closed' : 'after';
         var ssrNow = ssrStage === 'before' ? L('The draft roll is to be published on {d}, claims and objections taken until {c} and decided by {x}, and the final roll published on {f}.', sv)
           : ssrStage === 'open' ? L('The draft roll was to be published on {d}. Claims and objections are open until {c}, to be decided by {x}, and the final roll is to be published on {f}.', sv)
@@ -148,13 +150,18 @@
             : L('Claims and objections closed on {c} and were to be decided by {x}. The final roll is to be published on {f}.', sv))
           : L('The final roll of the summary revision was to be published on {f}.', sv);
         out.push(sec('the-summary-revision', L('The special summary revision'),
-          p(L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', sv) + ' ' + ssrNow) +
+          p((moved
+            ? L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', { l: sv.o, s: s, q: sv.q }) + ' ' +
+              L('A later letter of the Commission, dated {l}, set the dates in {s}, as {p} reported it.', sv)
+            : L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', sv)) + ' ' + ssrNow) +
           (ssrStage === 'before' || ssrStage === 'open' ? p(L('Outside the intensive revision, the forms of the Registration of Electors Rules, 1960 are used. Form 6 is the application to be added to the roll, Form 7 the objection to a name and Form 8 the correction of an entry.')) +
-            p(L('The letter lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.')) : '') +
-          p(L('Under the letter, no claim may be refused, and no name deleted, because a person cannot give an Aadhaar number.')),
+            p(moved ? L('The letter of {o} lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.', sv)
+              : L('The letter lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.')) : '') +
+          p(moved ? L('Under the letter of {o}, no claim may be refused, and no name deleted, because a person cannot give an Aadhaar number.', sv)
+            : L('Under the letter, no claim may be refused, and no name deleted, because a person cannot give an Aadhaar number.')),
           ['c_ssr'].concat(ssrStage === 'before' || ssrStage === 'open' ? ['c_h_rules'] : []),
           // a later letter that moved this state's dates is cited beside the order
-          r.ssr.date !== C.c_ssr.date ? r.ssr.src.map(function (x) { return { name: x.name, url: x.url }; }) : null));
+          moved ? r.ssr.src.map(function (x) { return { name: x.name, url: x.url }; }) : null));
         ssrShort = ssrStage === 'open' ? L('In the special summary revision, claims and objections in {s} are open until {c}.', sv)
           : L('The Commission has ordered a special summary revision of the roll in {s}.', sv) + ' ' + ssrNow;
       }
