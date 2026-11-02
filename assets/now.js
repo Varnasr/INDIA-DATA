@@ -152,7 +152,9 @@
           (ssrStage === 'before' || ssrStage === 'open' ? p(L('Outside the intensive revision, the forms of the Registration of Electors Rules, 1960 are used. Form 6 is the application to be added to the roll, Form 7 the objection to a name and Form 8 the correction of an entry.')) +
             p(L('The letter lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.')) : '') +
           p(L('Under the letter, no claim may be refused, and no name deleted, because a person cannot give an Aadhaar number.')),
-          ['c_ssr'].concat(ssrStage === 'before' || ssrStage === 'open' ? ['c_h_rules'] : [])));
+          ['c_ssr'].concat(ssrStage === 'before' || ssrStage === 'open' ? ['c_h_rules'] : []),
+          // a later letter that moved this state's dates is cited beside the order
+          r.ssr.date !== C.c_ssr.date ? r.ssr.src.map(function (x) { return { name: x.name, url: x.url }; }) : null));
         ssrShort = ssrStage === 'open' ? L('In the special summary revision, claims and objections in {s} are open until {c}.', sv)
           : L('The Commission has ordered a special summary revision of the roll in {s}.', sv) + ' ' + ssrNow;
       }

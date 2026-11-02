@@ -296,6 +296,13 @@ def _open_window():
         q, text = t['ssr'], t['text']
         for k in ('qualifying', 'draft', 'claims_end', 'decided', 'final'):
             assert long(q[k]) in text, '%s: the summary revision\'s %s (%s) is not in the entry\'s text' % (t['date'], k, q[k])
+        # a later entry that moves one state's dates names that state in its
+        # first sentence; the order for many states counts and lists them
+        if len(q['states']) == 1:
+            first = text.split('. ', 1)[0]
+            assert q['states'][0] in first, '%s: the summary revision\'s one state is not named in the entry\'s first sentence' % t['date']
+            assert q['states'][0] in names, '%s: %s is not a state the schedules know' % (t['date'], q['states'][0])
+            continue
         assert len(q['states']) == len(set(q['states'])) and re.search(r'\bin %d states' % len(q['states']), text), '%s: the summary revision names a different number of states' % t['date']
         first = text.split('They are ', 1)[1].split('.', 1)[0]
         for s in q['states']:
