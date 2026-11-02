@@ -1,1 +1,1 @@
-Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Andhra Pradesh 2026 · the Special Intensive Revision of the roll":"অন্ধ্রপ্রদেশ 2026 · ভোটার তালিকার বিশেষ নিবিড় সংশোধন","Andhra Pradesh pages":"অন্ধ্রপ্রদেশ-এর পাতা","What to do now":"এখন কী করবেন"});
+Object.assign(window.SIR_DICT = window.SIR_DICT || {}, {"Andhra Pradesh 2026 · the Special Intensive Revision of the roll":"অন্ধ্রপ্রদেশ 2026 · ভোটার তালিকার বিশেষ নিবিড় সংশোধন","Andhra Pradesh pages":"অন্ধ্রপ্রদেশ-এর পাতা"});

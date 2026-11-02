@@ -677,7 +677,9 @@ def _now():
         assert re.search(r'<aside class="owin" data-owin="%s" data-owin-now="[^"]*%s' % (re.escape(name), re.escape(path)), ov), \
             '%s: the claims box does not link to %s' % (overview, path)
         for kind, url in row['ceo']:
-            assert re.match(r'https://(x\.com/\w+|[a-z.]+\.gov\.in/)$', url), '%s: %s is not an official address' % (name, url)
+            # a government site (gov.in, or nic.in, the National Informatics
+            # Centre's domain many Chief Electoral Officers use) or an X account
+            assert re.match(r'https://(x\.com/\w+|[a-z.]+\.(?:gov|nic)\.in/)$', url), '%s: %s is not an official address' % (name, url)
     helpp = open(os.path.join(ROOT, 'help', 'index.html'), encoding='utf-8').read()
     assert 'data-owin-now=' in helpp, 'the help page\'s state picker does not link to the "What to do now" pages'
 

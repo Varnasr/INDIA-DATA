@@ -72,7 +72,7 @@
     var out = [], short = [];
     // who may still be added, and when the Act stops it (section 23(3))
     var tenDays = L('The Commission has said that an application can be submitted up to ten days before the last date for filing nominations for an election.'),
-      s233 = L('Under section 23(3) of the Representation of the People Act, 1950, no name can be added to the roll of a constituency after the last date for making nominations for an election in that constituency, or in the parliamentary constituency that contains it, until that election is completed.'),
+      s233 = L('Under section 23(3) of the Representation of the People Act, 1950, no direction to include a name in the roll of a constituency can be given after the last date for making nominations for an election in that constituency, or in the parliamentary constituency that contains it, and before that election is completed.'),
       addAfter = L('After the revision, Form 6 can still be filed at any time under continuous updation.') + ' ' + tenDays + ' ' + s233;
 
     if (kind === 'open') {
@@ -136,11 +136,38 @@
       var goa = C.c_h_appeal.items.filter(function (it) { return /^CEO Goa/.test(it.name); })[0];
       out.push(sec('the-final-roll', L('The final roll'),
         (r.k === 'final' && fs && fs.url ? p('<a href="' + E(fs.url) + '" rel="noopener">' + (fs.source === 'press' ? L('The final roll, as the press reported it') : L('The final roll, as published')) + '</a>') : '') + ceo));
+      // the special summary revision the Commission ordered on 15 October 2026
+      // in 17 states and union territories, staged by its own dates
+      var ssrShort = '';
+      if (r.ssr && C.c_ssr) {
+        var q = r.ssr.ssr, sv = { l: D(r.ssr.date), s: s, q: D(q.qualifying), d: D(q.draft), c: D(q.claims_end), x: D(q.decided), f: D(q.final) };
+        var ssrStage = T < q.draft ? 'before' : T <= q.claims_end ? 'open' : T < q.final ? 'closed' : 'after';
+        var ssrNow = ssrStage === 'before' ? L('The draft roll is to be published on {d}, claims and objections taken until {c} and decided by {x}, and the final roll published on {f}.', sv)
+          : ssrStage === 'open' ? L('The draft roll was to be published on {d}. Claims and objections are open until {c}, to be decided by {x}, and the final roll is to be published on {f}.', sv)
+          : ssrStage === 'closed' ? (T <= q.decided ? L('Claims and objections closed on {c}. They are to be decided by {x}, and the final roll is to be published on {f}.', sv)
+            : L('Claims and objections closed on {c} and were to be decided by {x}. The final roll is to be published on {f}.', sv))
+          : L('The final roll of the summary revision was to be published on {f}.', sv);
+        out.push(sec('the-summary-revision', L('The special summary revision'),
+          p(L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', sv) + ' ' + ssrNow) +
+          (ssrStage === 'before' || ssrStage === 'open' ? p(L('Outside the intensive revision, the forms of the Registration of Electors Rules, 1960 are used. Form 6 is the application to be added to the roll, Form 7 the objection to a name and Form 8 the correction of an entry.')) +
+            p(L('The letter lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.')) : '') +
+          p(L('Under the letter, no claim may be refused, and no name deleted, because a person cannot give an Aadhaar number.')),
+          ['c_ssr'].concat(ssrStage === 'before' || ssrStage === 'open' ? ['c_h_rules'] : [])));
+        ssrShort = ssrStage === 'open' ? L('In the special summary revision, claims and objections in {s} are open until {c}.', sv)
+          : L('The Commission has ordered a special summary revision of the roll in {s}.', sv) + ' ' + ssrNow;
+      }
       out.push(sec('appealing-a-decision', L('Appealing a decision'),
         p(L('If the registration officer\'s decision on your name goes against you, you can appeal to the District Magistrate under section 24(a) of the Representation of the People Act, 1950, read with rule 27 of the Registration of Electors Rules, 1960. The note of Goa\'s Chief Electoral Officer on that state\'s final roll, of {g}, gives 15 days from the registration officer\'s decision for this first appeal.', { g: D(goa.date) })) +
         p(L('If the District Magistrate\'s order also goes against you, a second appeal lies to the state\'s Chief Electoral Officer under section 24(b), within 30 days of the District Magistrate\'s order, under the Commission\'s order of {d}.', { d: D(C.c_h_appeal_order.date) })) +
         p(L('Under rule 27, the appeal is a memorandum you sign, with a copy of the order appealed from and a fee of five rupees. Keep copies and receipts of everything you hand in.')),
         ['c_h_appeal', 'c_h_appeal_order']));
+      // West Bengal: the judicial officers' orders are appealed to tribunals
+      if (pg.tribunal && C.c_wb_tribunal && C.c_wb_pending) {
+        out.push('<h3 id="the-appellate-tribunals">' + L('Appeals to the tribunals in {s}', { s: s }) + '</h3>' +
+          p(L('In West Bengal, the Supreme Court assigned judicial officers to decide the objections in the revision. Its order of {d} says that the orders passed by the judicial officers will not be subjected to appeal before any executive or administrative officer, and it provided for former Chief Justices and judges of the High Court to be notified as appellate tribunals. The appeals it named are those of persons whose claims for inclusion the judicial officers rejected.', { d: D(C.c_wb_tribunal.date) })) +
+          p(L('Its order of {d} said that the mere pendency of an appeal before the tribunals does not entitle the person excluded to vote.', { d: D(C.c_wb_pending.date) })) +
+          src(['c_wb_tribunal', 'c_wb_pending']));
+      }
       out.push(sec('not-on-the-final-roll', L('If you are not on the final roll'),
         p(L('A person who is no longer on the roll applies again on Form 6 as a new elector, as paragraph 14.7.4.1 of the Commission\'s Manual on Electoral Rolls says. Section 23(1) of the Representation of the People Act, 1950 lets anyone whose name is not on the roll apply to be added.')) +
         p(L('An elector who is not on the final roll can still apply on Form 6 at any time under continuous updation.') + ' ' + tenDays + ' ' + s233) +
@@ -150,7 +177,9 @@
       short = [r.k === 'final' ? (r.pub ? L('The final roll was published on {d}.', { d: D(r.pub) }) : L('The final roll has been published.'))
         : L('The final roll was due on {f}. When these dates were last checked, on {a}, it had not been found published.', { f: D(r.f), a: D(P.as_of) }),
         L('A decision on your name can be appealed to the District Magistrate within 15 days, and then to the Chief Electoral Officer within 30 days of the District Magistrate\'s order.'),
-        L('An elector who is not on the final roll can still apply on Form 6 at any time under continuous updation.')];
+        pg.tribunal && C.c_wb_tribunal ? L('In West Bengal, an order of the judicial officers the Supreme Court assigned to the revision is appealed to the appellate tribunals of former judges.') : '',
+        L('An elector who is not on the final roll can still apply on Form 6 at any time under continuous updation.'),
+        ssrShort];
     } else {
       var rows = '', srcs = [];
       if (sc) {
@@ -212,7 +241,8 @@
     // where to get help, and the state in the courts
     var help = p(L('The voter helpline is {a}, and the toll-free number {b} answers from 8 am to 8 pm. Complaints are recorded on the National Grievance Service Portal, so note the complaint number.', { a: tel('1950'), b: tel('1800-11-1950') })) +
       p(L('The Book-a-Call with BLO feature of the ECINet app puts you in touch with your booth level officer.')) +
-      p(L('Under section 12 of the Legal Services Authorities Act, 1987, free legal help is open to women, children, members of Scheduled Castes and Scheduled Tribes, people with disabilities, industrial workers, victims of disaster and people below an income limit set by each state. Ask at the District Legal Services Authority at the district court, or call {c}.', { c: tel('15100') }));
+      p(L('Under section 12 of the Legal Services Authorities Act, 1987, free legal help is open to members of Scheduled Castes and Scheduled Tribes, victims of trafficking in human beings or begar, women and children, people with disabilities, people in undeserved want such as victims of a mass disaster, ethnic violence, caste atrocity, flood, drought, earthquake or industrial disaster, industrial workers, people in custody, and people whose annual income is below a limit set by the state government, or by the central government for a case in the Supreme Court.')) +
+      p(L('Ask at the District Legal Services Authority at the district court, or call {c}.', { c: tel('15100') }));
     if (pg.orgs) help += p('<a href="' + root + 'help/?state=' + encodeURIComponent(name) + '#organisations-that-have-helped-electors">' +
       (pg.orgs === 1 ? L('One organisation that has helped electors in {s}', { s: s }) : L('{k} organisations that have helped electors in {s}', { k: N(pg.orgs), s: s })) + '</a>');
     help += p('<a href="' + root + 'help/">' + L('Every step, with the law or order it rests on') + '</a>');

@@ -82,8 +82,13 @@ python3 -m http.server 8000
 
 ## "What to do now" pages
 
-Each state still in the revision has a page at `<state>/now/` (Telangana's is
-`hyderabad/telangana/now/`). The states are `PAGES` in `scripts/build_now.py`;
+Every state and union territory with a schedule of the revision in
+`process.json` has a page at `<state>/now/` (Telangana's is
+`hyderabad/telangana/now/`), 32 in all. Assam, Himachal Pradesh, Jammu and
+Kashmir and Ladakh have no schedule and no page. Where the Commission's special
+summary revision of 15 October 2026 covers a state, the page shows its dates
+by stage, and West Bengal's carries the Supreme Court's orders on the
+appellate tribunals. The states are `PAGES` in `scripts/build_now.py`;
 `scripts/make_now_pages.py` writes their sources from one template, and
 `build_now.py` writes `data/india/now.json`, the sources each step cites (by
 key into help.json, process.json's forms and timeline, and the disputes) and
