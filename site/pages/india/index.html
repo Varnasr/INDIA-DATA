@@ -201,10 +201,11 @@ SIR.json('data/india/states.json').then(function (d) {
   VIZ.dumbbell('cGender', { label: L('Women\'s share of the names left off and of the roll, by state'), min: 40, step: 5, ref: 50,
     aName: L('Women, % of the roll'), aTok: '--fill-grey', bName: L('Women, % of names left off'), bTok: '--fill-pink',
     rows: G.map(function (g) { return { name: g.state, a: g.women_share_roll, b: g.women_share_removed }; }) });
+  var and = function (a) { return a.length < 3 ? a.join(L(' and ')) : a.slice(0, -1).join(', ') + L(' and ') + a[a.length - 1]; };
   var gOver = G.filter(function (g) { return g.women_share_removed > g.women_share_roll; }), gUnder = G.filter(function (g) { return g.gap < -1; }), gEven = G.filter(function (g) { return Math.abs(g.gap) <= 1; });
-  document.getElementById('fGender').innerHTML = L('<b>In {over} of the {n} states with a split by sex, women are a larger share of the names left off than of the roll</b>, by up to {max} points in {maxs}. {even} are within a point of even, and in {under} it runs the other way, by {u} points. Most phase 3 states have published no split by sex, so this covers {n} of {all} states and does not describe the country as a whole.', {
-    over: gOver.length, n: G.length, max: SIR.d(G[0].gap, 1), maxs: G[0].state, even: gEven.map(function (g) { return g.state; }).join(L(' and ')),
-    under: gUnder.map(function (g) { return g.state; }).join(L(' and ')), u: gUnder.length ? SIR.d(-gUnder[0].gap, 1) : '0', all: T.states });
+  document.getElementById('fGender').innerHTML = L('<b>In {over} of the {n} states with a split by sex, women are a larger share of the names left off than of the roll</b>, by up to {max} points in {maxs}. {even} are within a point of even, and in {under} it runs the other way, by up to {u} points. Most phase 3 states have published no split by sex, so this covers {n} of {all} states and does not describe the country as a whole.', {
+    over: gOver.length, n: G.length, max: SIR.d(G[0].gap, 1), maxs: G[0].state, even: and(gEven.map(function (g) { return g.state; })),
+    under: and(gUnder.map(function (g) { return g.state; })), u: gUnder.length ? SIR.d(-gUnder[gUnder.length - 1].gap, 1) : '0', all: T.states });
   var GQ = { exact: L('Exact'), rounded: L('Rounded'), proxy: L('Earlier roll'), unverified: L('Unverified'), lists: L('Lists') };
   SIR.table(document.getElementById('tGender'), [
     { k: 'state', label: L('State or union territory'), left: true, fmt: function (v) { return SIR.esc(v); } },

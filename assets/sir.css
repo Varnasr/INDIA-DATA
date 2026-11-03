@@ -1357,3 +1357,12 @@ body.embed .emcredit{margin:0;padding:.5rem 1rem 1rem;color:var(--muted);font-si
 .owin-all .owin-t{font-weight:700;margin:1rem 0 .3rem}
 .owin-pick label{font-weight:600;margin-inline-end:.4rem}
 .owin-pick select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.3rem .5rem;max-width:100%}
+/* the front page: what the counts show, one linked line per finding */
+.strip{margin:0 0 1.25rem}
+.strip h2{margin:1.5rem 0 .75rem}
+.home .strip ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem 2rem;max-width:none}
+.strip li{border-inline-start:3px solid var(--red);padding-inline-start:.9rem;min-width:0;overflow-wrap:break-word}
+.strip a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:.2em;text-decoration-thickness:1px}
+.strip a:hover{text-decoration-color:var(--ink)}
+.strip small{display:block;color:var(--muted);font-size:.85rem;margin-top:.2rem}
+@media (max-width:700px){.home .strip ul{grid-template-columns:minmax(0,1fr)}}

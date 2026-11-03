@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 465,
-  "bytes": 13571713
+  "bytes": 13585048
  },
  "files": [
   {
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 61225,
+   "bytes": 62159,
    "keys": [
     "note",
     "entries"
@@ -4728,7 +4728,7 @@
    "path": "data/india/states.csv",
    "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave",
    "format": "CSV",
-   "bytes": 17570,
+   "bytes": 17646,
    "columns": [
     "state",
     "phase",
@@ -4780,7 +4780,7 @@
    "path": "data/india/states.json",
    "description": "The names left off each state's draft roll, with the reasons each Chief Electoral Officer gave. The same table as data/india/states.csv, as JSON",
    "format": "JSON",
-   "bytes": 90978,
+   "bytes": 93325,
    "keys": [
     "as_of",
     "adults",
@@ -4836,7 +4836,7 @@
    "path": "data/india/women.csv",
    "description": "Every count by sex the site holds, state and district",
    "format": "CSV",
-   "bytes": 10516,
+   "bytes": 11128,
    "columns": [
     "level",
     "state",
@@ -4856,14 +4856,15 @@
    "path": "data/india/women.json",
    "description": "Every count by sex the site holds, state and district. The same table as data/india/women.csv, as JSON",
    "format": "JSON",
-   "bytes": 16626,
+   "bytes": 24401,
    "keys": [
     "summary",
     "states",
     "districts",
     "after",
     "after_added_only",
-    "bihar"
+    "bihar",
+    "third"
    ],
    "licence": "CC BY 4.0"
   },
@@ -4871,7 +4872,7 @@
    "path": "data/india/women_removed.csv",
    "description": "Women's share of the names left off against their share of the roll",
    "format": "CSV",
-   "bytes": 3389,
+   "bytes": 4980,
    "columns": [
     "state",
     "phase",
