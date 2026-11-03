@@ -83,7 +83,8 @@ R.numbered([
        pct(bigS[-1]['shares']['shifted_absent_other']), bigS[-1]['state']),
     'Women were more likely to be left off. In %d of the %d states that report by sex, women are a bigger share of the names left off than of the roll.'
     % (len([g for g in GG0 if g['women_share_removed'] > g['women_share_roll']]), len(GG0)),
-    'Little has come back. In the %d states with a final roll, the roll published after claims and objections are heard, the rolls grew back by at most %s of what was left off, and that rise includes new voters.' % (FN0['states'], pct(FN0['made_up_pct'])),
+    'In the %d states and union territories with a final roll, the roll published after claims and objections are heard, the final rolls were %s larger than the drafts, which is %.1f for every 100 of the %s names left off. That rise is the names added after the draft, new voters among them, less the names deleted after it.'
+    % (FN0['states'], crore(FN0['net_after_draft']) if FN0['net_after_draft'] >= 1e7 else lakh(FN0['net_after_draft']), FN0['made_up_pct'], crore(FN0['removed'])),
 ])
 R.p('Two limits. The adult figures count people where they live, so states that draw migrants look short of electors who are registered in their home states. '
     'And these figures show what happened. They cannot show why it happened, or that anyone meant it to.', italic=True)
@@ -203,7 +204,7 @@ gOver = [g for g in G if g['women_share_removed'] > g['women_share_roll']]
 gEven = [g for g in G if abs(g['gap']) <= 1]
 gUnder = [g for g in G if g['gap'] < -1]
 QN = {'exact': 'exact', 'rounded': 'rounded', 'proxy': 'earlier roll', 'unverified': 'unverified', 'lists': 'lists'}
-fig, ax = plt.subplots(figsize=(7, 4.2))
+fig, ax = plt.subplots(figsize=(7, 1.2 + 0.32 * len(G)))
 ys = list(range(len(G)))[::-1]
 ax.barh([y + 0.2 for y in ys], [g['women_share_removed'] for g in G], height=0.4, color='#AF3B6E', label='Women, % of names left off')
 ax.barh([y - 0.2 for y in ys], [g['women_share_roll'] for g in G], height=0.4, color=C['dead'], label='Women, % of the roll')
@@ -213,13 +214,27 @@ ax.set_xlim(40, 60)
 ax.legend(fontsize=7, frameon=False, loc='lower right')
 style_axes(ax, 'Women\'s share of the names left off and of the roll')
 R.figure(fig, 'Figure 5. States that published a split by sex. Bihar\'s roll before the revision is its draft roll plus the names left off the draft, by sex.', width=14)
-R.p('Only %d states have published their names left off by sex, or their roll by sex before the revision and on the draft. In %d of the %d, women are a larger share of the names left off than of the roll, by up to %.1f points in %s. %s %s within a point of even, and %s runs the other way, by %.1f points. '
+_even = ('%s %s within a point of even. ' % (andj([g['state'] for g in gEven]), 'is' if len(gEven) == 1 else 'are')) if gEven else ''
+_under = ('In %s women are a smaller share of the names left off than of the roll by more than a point, and by %.1f points in %s. ' % (andj([g['state'] for g in gUnder]), -gUnder[-1]['gap'], gUnder[-1]['state'])) if gUnder else ''
+R.p('Only %d states and union territories have published their names left off by sex, or their roll by sex before the revision and on the draft. In %d of the %d, women are a larger share of the names left off than of the roll, by up to %.1f points in %s. %s%s'
     'Most phase 3 states have published no split by sex, so this is not the national picture.'
-    % (len(G), len(gOver), len(G), G[0]['gap'], G[0]['state'], andj([g['state'] for g in gEven]), 'is' if len(gEven) == 1 else 'are',
-       andj([g['state'] for g in gUnder]), -gUnder[0]['gap'] if gUnder else 0))
+    % (len(G), len(gOver), len(G), G[0]['gap'], G[0]['state'], _even, _under))
 R.table(['State', 'Women left off', 'Men left off', 'Women, % left off', 'Women, % of roll', 'Difference', 'Figures'],
         [[g['state'], indian(g['women_removed']), indian(g['men_removed']), '%.1f' % g['women_share_removed'], '%.1f' % g['women_share_roll'], '%+.1f' % g['gap'], QN[g['quality']]] for g in G],
         widths=[3.2, 2.4, 2.4, 2.1, 2.1, 1.8, 2.2], right={1, 2, 3, 4, 5}, size=8)
+
+TH = J('india', 'women.json')['third']
+thBig = [x for x in TH['rows'] if x['before'] >= TH['min_roll']]
+thLo = [x['state'] for x in thBig if x['per_100'] <= x['all_per_100']]
+KIND = {'official': 'official', 'press': 'press', 'derived': 'worked out', 'lists': 'counted from the lists'}
+R.h3('Third-gender electors')
+R.p('%d states and union territories published the third-gender electors on the roll before the revision and either the number left off the draft or the number on it, so the two can be set side by side. '
+    'In %d of the %d with at least %d third-gender electors on the roll before the revision, third-gender electors were left off at a higher rate than electors as a whole. %s'
+    'The counts are small, a few hundred or a few thousand people in a state, so a few names move the rate a long way. The figures for %s came through the press. States are listed alphabetically.'
+    % (TH['states'], TH['higher'], TH['big'], TH['min_roll'], ('In %s the rate was lower. ' % andj(thLo)) if thLo else '', andj(TH['press'])))
+R.table(['State', 'Third-gender electors on the roll before', 'Left off the draft', 'Per 100 third-gender electors', 'All electors left off, per 100', 'Roll before, left off'],
+        [[x['state'], indian(x['before']), indian(x['left_off']), '%.1f' % x['per_100'], '%.1f' % x['all_per_100'], '%s, %s' % (KIND[x['before_kind']], KIND[x['left_off_kind']])] for x in TH['rows']],
+        widths=[3.2, 2.6, 2.0, 2.4, 2.4, 3.4], right={1, 2, 3, 4}, size=8)
 
 R.h2('What goes with the rate of exclusion')
 CR = N['correlations']
@@ -270,14 +285,14 @@ R.p('In the %d states and union territories with a final roll, %s names were lef
     % (FN['states'], crore(FN['removed']), crore(FN['net_after_draft']), pct(FN['made_up_pct']), wb['state'], lakh(FN['withheld']),
        lakh(J('westbengal', 'summary.json')['adj']['found_eligible']), lakh(J('westbengal', 'summary.json')['adj']['found_not_eligible']),
        crore(FN['net_after_draft'] + FN['withheld']), pct(FN['made_up_pct_ex_withheld']), FN['net_per_100'], FN['per_100']))
-R.p('The rise from draft to final counts new electors as well as names put back, and no state has said how many of those added had been left off the draft, so it is the most that can have been put back. '
+R.p('The rise from draft to final is the names added after the draft, new voters among them, less the names deleted after it, and no state has said how many of those added had been left off the draft. '
     'The final roll is smaller than the draft in %d states (%s). %s'
     % (len(FN['shrank']), andj(FN['shrank']), ('How many names a state left off the draft has no relationship with how much of that its final roll made up (rank correlation %.2f).' if abs(FN['rho_made_up']) < 0.2
                              else 'States that left more off the draft made up a different share of it at the final roll (rank correlation %.2f).') % FN['rho_made_up']))
 inferred = lambda s: bool(s.get('final_source') and 'is an inference' in (s['final_source'].get('note') or ''))
 RCN = {'exact': 'Adds up', 'rounded': 'Rounded', 'net only': 'Net only', 'no': 'Does not add up'}
 sn = lambda v: '–' if v is None else ('−' + indian(-v) if v < 0 else indian(v))
-R.table(['State or UT', 'Left off the draft', 'Added after', 'Deleted after', 'Final less draft', 'Made up', 'Net fall per 100', 'Figures'],
+R.table(['State or UT', 'Left off the draft', 'Added after', 'Deleted after', 'Final less draft', 'As % of left off', 'Net fall per 100', 'Figures'],
         [[s['state'], fmt(s['removed']), fmt(s['added_after_draft']), fmt(s['removed_after_draft']), sn(s['net_after_draft']), ('−' + pct(-s['made_up_pct'])) if s['made_up_pct'] is not None and s['made_up_pct'] < 0 else pct(s['made_up_pct']),
           '%.1f' % s['net_fall_per_100'] if s['net_fall_per_100'] is not None else '–', RCN[s['reconciles']] + (' *' if inferred(s) else '')]
          for s in sorted([s for s in S if s['electors_final'] is not None], key=lambda s: -s['removed'])],

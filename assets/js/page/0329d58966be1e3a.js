@@ -63,7 +63,7 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/distr
     rows: D.map(function (d, i) { return { name: d.district, a: d.per_100, b: d.net_per_100, hi: d.city, lab: !d.city && i < 4 }; }) });
   var maxAdd = FD[0], maxDel = D.slice().sort(function (a, b) { return b.deleted - a.deleted; })[0];
   document.getElementById('fFinal').innerHTML = '<b>Between the draft and the final roll, ' + lk(S.added) + ' names were added and ' + lk(S.deleted) + ' deleted, a net rise of ' + lk(S.net) + '.</b> ' +
-    'That is at most ' + SIR.pct(S.made_up_pct) + ' of the names left off the draft, because the names added count new voters as well as names put back. The final roll is still ' + d1(S.net_per_100) + ' of every 100 electors smaller than the roll before the revision. ' +
+    'That is ' + SIR.pct(S.made_up_pct) + ' of the names left off the draft. It is the names added, new voters among them, less the names deleted. The final roll is still ' + d1(S.net_per_100) + ' of every 100 electors smaller than the roll before the revision. ' +
     maxAdd.district + ' added the most for its size, ' + d1(maxAdd.added_per_100) + ' per 100 on its draft. ' + maxDel.district + ' deleted the most names, ' + n(maxDel.deleted) + ', so its roll rose by ' + n(maxDel.net) + ' only. ' +
     (S.net_negative.length ? S.net_negative.join(' and ') + ' deleted more names than it added. ' : '') +
     'Ahmedabad\'s roll is ' + d1(D.filter(function (d) { return d.district === 'Ahmedabad'; })[0].net_per_100) + ' per 100 and Surat\'s ' + d1(sur.net_per_100) + ' per 100 smaller than before the revision.';

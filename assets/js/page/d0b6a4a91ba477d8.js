@@ -34,7 +34,7 @@ SIR.json('data/india/states.json').then(function (D) {
     cats: back.map(function (r) { return r.state; }),
     series: [{ name: 'Rise from draft to final roll', col: '--fill-navy', vals: back.map(function (r) { return r.made_up_pct; }) }] });
   var fin = D.final;
-  document.getElementById('backNote').textContent = 'Across the ' + n(fin.states) + ' states with a final roll, the rise from draft to final roll came to at most ' + d1(fin.made_up_pct) + ' per cent of the names left off the draft. ' +
+  document.getElementById('backNote').textContent = 'Across the ' + n(fin.states) + ' states with a final roll, the rise from draft to final roll came to ' + d1(fin.made_up_pct) + ' per cent of the names left off the draft. ' +
     (fin.shrank && fin.shrank.length ? 'In ' + fin.shrank.join(', ') + ' the final roll was smaller than the draft. ' : '') +
     (fin.withheld ? 'West Bengal\'s final roll left out ' + n(fin.withheld) + ' names held for adjudication.' : '');
   SIR.anchors && SIR.anchors();

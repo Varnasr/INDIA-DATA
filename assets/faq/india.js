@@ -11,7 +11,7 @@
       var wOver = GG.filter(function (g) { return g.women_share_removed > g.women_share_roll; }).length;
       var inc = d.correlations.filter(function (c) { return c.key === 'income_pc'; })[0];
       var fem = L('In {over} of the {n} states that report the names left off by sex, women are a bigger share of the names left off than of the roll.', { over: wOver, n: GG.length });
-      var back = L('In the {n} states with a final roll, the rolls grew back by at most {m} of what the drafts left off, and that rise includes new voters.', { n: F.states, m: SIR.pct(F.made_up_pct) });
+      var back = L('In the {n} states and union territories with a final roll, the final rolls were {x} larger than the drafts, which is {p} for every 100 of the {y} names left off. That rise is the names added after the draft, new voters among them, less the names deleted after it.', { n: F.states, x: SIR.lakh(F.net_after_draft), p: SIR.d(F.made_up_pct, 1), y: SIR.lakh(F.removed) });
       var QA = [
         [L('How many names did the revision leave off across India?'),
          L('{r} across {s} states and union territories when the draft rolls were published, {p} of every 100 electors on the rolls before the revision. Deletions after the draft add {a} more in the {k} states that have reported them.', { r: cr(T.removed), s: T.states, p: SIR.d(T.per_100, 1), a: SIR.lakh(AD.removed), k: AD.states }), ['numbers', 'main', 'faq']],
@@ -23,7 +23,7 @@
            L('Across all states the rate of exclusion rises with income per head (rank correlation {all}), but only among the states revised in 2026 ({p3}). Among those ordered in October 2025, with house visits from November, it is {p2}, which is no relationship. The figures show where the most names were left off, and cannot show why.', { all: SIR.d(inc.per_100_all, 2), p3: SIR.d(inc.per_100_phase3, 2), p2: SIR.d(inc.per_100_phase2, 2) }) :
            L('The figures show where the most names were left off, and cannot show why.')), ['main']],
         [L('Were women left off more than men?'), fem, ['main', 'faq']],
-        [L('Were the names put back on the final roll?'), L('Few of them were put back.') + ' ' + back, ['numbers', 'main', 'faq']],
+        [L('Were the names put back on the final roll?'), L('No state has said how many of the names added after the draft had been left off it.') + ' ' + back, ['numbers', 'main', 'faq']],
         [L('Why did the cities lose more names than their states?'),
          L('The lists do not say. In the cities most of the names left off were entered as shifted or absent. That fits people who had moved and were registered somewhere else, and it fits people who still live there and were out when the officer called. The count is the same either way.'), ['cities', 'faq']],
         [L('What counts as a city on the cities page?'),

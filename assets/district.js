@@ -171,7 +171,7 @@
         document.getElementById('fAfter').innerHTML = C.claims(d, SIR.esc(name));
       } else if (C.after) {
         var a0 = val(d, C.after.draft), a1 = val(d, C.after.later);
-        document.getElementById('fAfter').innerHTML = 'From the draft to ' + C.after.what + ', ' + SIR.esc(name) + '\'s roll ' + (a1 >= a0 ? 'rose by ' + n(a1 - a0) : 'fell by ' + n(a0 - a1)) + '. The rise counts new voters too, so it is the most that could have been restored.';
+        document.getElementById('fAfter').innerHTML = 'From the draft to ' + C.after.what + ', ' + SIR.esc(name) + '\'s roll ' + (a1 >= a0 ? 'rose by ' + n(a1 - a0) : 'fell by ' + n(a0 - a1)) + '. The change is the names added, new voters among them, less the names deleted.';
       } else document.getElementById('sAfter').hidden = true;
 
       var CASE = { 'uttarpradesh-lucknow': 'lucknow', 'karnataka-b-b-m-p-south': 'bbmp-south' }[st + '-' + key];

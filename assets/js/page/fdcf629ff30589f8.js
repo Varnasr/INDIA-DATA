@@ -29,7 +29,7 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
   VIZ.slope('vFinal', { label: L('Names left off per 100 electors at the draft and the net fall at the final roll, by district'),
     aName: L('At the draft'), bName: L('At the final roll'),
     rows: D.map(function (d, i) { return { name: d.district, a: d.per_100, b: d.net_per_100, hi: d.district === 'Chennai', lab: i > 0 && i < 4 }; }) });
-  document.getElementById('fFinal').innerHTML = L('<b>The final roll is {a} larger than the draft, and still {f} smaller than the roll before the revision.</b> That is a fall of {p} of every 100 electors. The rise from the draft is at most {m} of the names left off, and it includes new voters. Chennai\'s roll is {c} per 100 smaller than before.', {
+  document.getElementById('fFinal').innerHTML = L('<b>The final roll is {a} larger than the draft, and still {f} smaller than the roll before the revision.</b> That is a fall of {p} of every 100 electors. The rise from the draft is {m} of the names left off. It is the names added on claims, new voters among them, less the names deleted on objections. Chennai\'s roll is {c} per 100 smaller than before.', {
     a: SIR.lakh(S.added_net), f: SIR.lakh(S.net_fall), p: SIR.d(S.net_per_100, 1), m: SIR.pct(S.made_up_pct), c: SIR.d(S.chennai.net_per_100, 1) });
 
   SIR.table(document.getElementById('tAc'), [

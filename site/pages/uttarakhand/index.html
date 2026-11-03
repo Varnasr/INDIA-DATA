@@ -1,4 +1,4 @@
-<!--page {"title": "Uttarakhand 2026", "description": "How many names Uttarakhand's SIR draft roll left off, how many came back by the final roll, and where names were added and deleted after the draft in each of its 70 constituencies.", "place": "uk"} -->
+<!--page {"title": "Uttarakhand 2026", "description": "How many names Uttarakhand's SIR draft roll left off, how the roll changed by the final roll, and where names were added and deleted after the draft in each of its 70 constituencies.", "place": "uk"} -->
 <main id="main">
 <div class="page-head"><h1>Overview</h1><ol class="summary" id="short"></ol></div>
 <p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it comes from the press, the page says so.</p>
@@ -99,7 +99,7 @@ Promise.all([SIR.json('data/uttarakhand/summary.json'), SIR.json('data/uttarakha
   VIZ.waterfall('vWater', { label: 'Uttarakhand: the roll before the revision, the draft of 14 July and the final roll of 3 October 2026', from: Math.floor(S.draft * 0.85 / 1e6) * 1e6, steps: [
     { name: 'Roll before the revision', v: S.roll_before, kind: 'total' }, { name: 'Left off the draft', v: S.left_off, kind: 'down' }, { name: 'Draft roll', v: S.draft, kind: 'total' },
     { name: 'Added after the draft', v: S.claims, kind: 'up' }, { name: 'Deleted after the draft', v: S.objections, kind: 'down' }, { name: 'Final roll', v: S.final, kind: 'total' }] });
-  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + lk(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors, and the final roll is ' + lk(-S.final_vs_before) + ' smaller than the roll before the revision.</b> After the draft, ' + lk(S.claims) + ' names were added and ' + lk(S.objections) + ' deleted. The net rise of ' + n(S.net) + ' is ' + d1(S.made_up_pct) + ' for every 100 left off, and it counts people enrolling for the first time, so fewer than that were put back.';
+  document.getElementById('fWater').innerHTML = '<b>The draft roll left off ' + lk(S.left_off) + ' names, ' + d1(S.per_100) + ' of every 100 electors, and the final roll is ' + lk(-S.final_vs_before) + ' smaller than the roll before the revision.</b> After the draft, ' + lk(S.claims) + ' names were added and ' + lk(S.objections) + ' deleted. The net rise of ' + n(S.net) + ' is ' + d1(S.made_up_pct) + ' for every 100 left off, and it is the names added, people enrolling for the first time among them, less the names deleted.';
 
   VIZ.lollipop('vReason', { label: 'Names left off the draft, by the reason entered', axis: 'Lakh',
     rows: [['Absent or shifted', S.reasons.absent_or_shifted], ['Dead', S.reasons.dead], ['Enrolled at more than one place', S.reasons.duplicate], ['Other', S.reasons.other]].map(function (x) { return { name: x[0], v: x[1] / 1e5, text: lk(x[1]), tok: '--fill-navy', hi: true }; }) });

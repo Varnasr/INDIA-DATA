@@ -34,7 +34,7 @@ Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.j
         s.SC && s.SC.compared ? s.SC.above_district + ' of ' + s.SC.compared : null, s.ST && s.ST.compared ? s.ST.above_district + ' of ' + s.ST.compared : null];
     }));
 
-  // how much came back
+  // how much the roll rose after the draft
   var fin = S.filter(function (s) { return s.made_up_pct != null; }).sort(function (a, b) { return b.made_up_pct - a.made_up_pct; });
   var flag = function (s) { return s.reconciles === 'net only' ? 'net figure only' : s.reconciles === 'no' ? 'figures do not add up' : s.reconciles === 'rounded' ? 'rounded' : ''; };
   VIZ.rank('vBack', { label: 'The rise from the draft to the final roll as a share of the names the draft left off', axis: 'Per cent of the names left off at the draft', fmt: function (v) { return SIR.d(v, 1) + '%'; },
@@ -43,7 +43,7 @@ Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.j
   document.getElementById('nBack').textContent = 'Grey stems are states whose roll shrank again after the draft. Some figures carry a caution. ' + flagged.map(function (s) { return s.state + ' (' + flag(s) + ')'; }).join(', ') + '.';
   var neg = fin.filter(function (s) { return s.made_up_pct < 0; });
   var under25 = fin.filter(function (s) { return s.made_up_pct < 25; }).length;
-  var pooled = 'Taken together, the ' + F.states + ' final rolls made up at most ' + SIR.pct(F.made_up_pct) + ' of the names the drafts left off, or ' + SIR.pct(F.made_up_pct_ex_withheld) + ' leaving out West Bengal\'s ' + SIR.lk(F.withheld, 0) + ' names held for adjudication.';
+  var pooled = 'Taken together, the ' + F.states + ' final rolls were larger than their drafts by ' + SIR.pct(F.made_up_pct) + ' of the names the drafts left off, or ' + SIR.pct(F.made_up_pct_ex_withheld) + ' leaving out West Bengal\'s ' + SIR.lk(F.withheld, 0) + ' names held for adjudication.';
   document.getElementById('fBack').innerHTML = '<b>' + pooled + '</b> By state the share runs from ' + SIR.pct(fin[0].made_up_pct) + ' in ' + fin[0].state + ' to below zero in ' + neg.length + ' (' + list(neg.map(function (s) { return s.state; })) + '), where the roll shrank again after the draft. In ' + under25 + ' of the ' + fin.length + ' it was under a quarter, those ' + neg.length + ' included. West Bengal\'s further fall is mostly the names held back for adjudication.';
   // each final roll beside its draft, in the order of the chart above; the
   // draft is the final roll less its rise from the draft
@@ -107,6 +107,6 @@ Promise.all([SIR.json('data/india/reserved.json'), SIR.json('data/india/states.j
     'Part of the gap comes from where the seats are. Against the general seats of their own district, SC seats were lower on average in ' + dist('SC') + ' of ' + distN('SC') + ' states, by a smaller margin.',
     pooled + ' By state the share runs from ' + SIR.pct(fin[0].made_up_pct) + ' in ' + fin[0].state + ' to below zero in ' + neg.length + ', where the roll shrank again.',
     'On the Government of India\'s own list of border districts, the border lost more names than the rest of its state in ' + list(up.map(function (s) { return s.state; })) + ', about the same in ' + list(even.map(function (s) { return s.state; })) + ' and fewer in ' + list(down.map(function (s) { return s.state; })) + '.'
-  ], 'A reserved seat describes a place, and says nothing about which electors there were left off or deleted. The rise to the final roll includes new voters, so the share made up is a ceiling. A border district\'s rate says nothing about any elector\'s citizenship.');
+  ], 'A reserved seat describes a place, and says nothing about which electors there were left off or deleted. The rise to the final roll is the names added, new voters among them, less the names deleted. A border district\'s rate says nothing about any elector\'s citizenship.');
   SIR.showFaq('india', 'compare');
 }).catch(SIR.fail);

@@ -694,11 +694,11 @@ function india() {
       'Of the names left off with a reason given, only ' + pct(T.shares.dead) + ' were entered as dead. The rest were marked as moved, absent or on the roll twice, and nobody has checked those entries.',
       'The same rules applied in every state. ' + rated[0].state + ' left off ' + rated[0].per_100.toFixed(1) + ' of every 100 electors and ' + rated[rated.length - 1].state + ' ' + rated[rated.length - 1].per_100.toFixed(1) + '. Among big states, the share marked moved or not found runs from ' + pct(bigS[0].shares.shifted_absent_other) + ' in ' + bigS[0].state + ' to ' + pct(bigS[bigS.length - 1].shares.shifted_absent_other) + ' in ' + bigS[bigS.length - 1].state + '.',
       'Women were more likely to be left off. In ' + G0.filter((g) => g.women_share_removed > g.women_share_roll).length + ' of the ' + G0.length + ' states that report by sex, women are a bigger share of the names left off than of the roll.',
-      'Little has come back. In the ' + F0.states + ' states with a final roll, the rolls grew back by at most ' + pct(F0.made_up_pct) + ' of the names left off, and that rise includes new voters.'];
+      'In the ' + F0.states + ' states and union territories with a final roll, the final rolls were larger than the drafts by ' + pct(F0.made_up_pct) + ' of the names left off. That rise is the names added after the draft, new voters among them, less the names deleted after it.'];
     const s0 = K.slide('All India', 'The rolls held ' + pct(100 * A0.roll_total / A0.adults_total) + ' of adults before the revision, and it left ' + T.per_100.toFixed(1) + ' of every 100 electors off the draft', 'Six findings in short, each computed from the state figures');
     s0.addText(pts.map((t, i, a) => ({ text: t, options: { bullet: { type: 'number' }, breakLine: i < a.length - 1 } })), { x: M, y: TOP, w: W - 2 * M, h: CH - 0.7, fontFace: BODY, fontSize: 15, color: INK, margin: 0, isTextBox: true, valign: 'top', paraSpaceAfter: 9, fit: 'shrink' });
     K.body(s0, 'Two limits. The adult figures count people where they live, so states that draw migrants look short of electors registered at home. The figures show what happened. They cannot show why.', M, TOP + CH - 0.6, W - 2 * M, 0.6, 12);
-    s0.addNotes('The draft roll is the roll published after the house-to-house check, and the final roll the one published after claims and objections are decided. Per 100 electors is the number left off the draft for every 100 people on the roll before the revision. Point 1 covers the 19 states with projections by age, from the Technical Group on Population Projections. Point 6 is an upper bound on names put back, because the rise from draft to final includes new electors.');
+    s0.addNotes('The draft roll is the roll published after the house-to-house check, and the final roll the one published after claims and objections are decided. Per 100 electors is the number left off the draft for every 100 people on the roll before the revision. Point 1 covers the 19 states with projections by age, from the Technical Group on Population Projections. Point 6 is a net figure, the names added after the draft less the names deleted after it, and the names added include new electors.');
   }
   let s = K.slide('All India', crore(T.removed) + ' names left off the draft rolls, ' + T.per_100.toFixed(1) + ' for every 100 electors', 'All ' + T.states + ' states and union territories that have published a draft roll. Tripura is reported to publish in December');
   K.stats(s, [[crore(T.removed), 'names left off the draft rolls'], [crore(T.shifted_absent_other), 'entered as shifted, absent or other'], [crore(T.dead), 'entered as dead'], [crore(T.duplicate), 'entered as enrolled more than once']], TOP, 1.7);
@@ -791,7 +791,7 @@ function india() {
   ], 12.5);
 
   const FN = N.final, fS = S.filter((x) => x.electors_final != null && x.net_fall_per_100 != null).sort((a, b) => b.net_fall_per_100 - a.net_fall_per_100);
-  s = K.slide('All India', 'The final rolls made up ' + pct(FN.made_up_pct) + ' of the names left off the drafts in ' + FN.states + ' states', 'Left off the draft, and the fall that remains at the final roll, per 100 electors on the roll before');
+  s = K.slide('All India', 'The final rolls were larger than the drafts by ' + pct(FN.made_up_pct) + ' of the names left off in ' + FN.states + ' states', 'Left off the draft, and the fall that remains at the final roll, per 100 electors on the roll before');
   s.addChart(pres.charts.BAR, [
     { name: 'Left off the draft', labels: fS.map((x) => x.state), values: fS.map((x) => x.per_100) },
     { name: 'Net fall at the final roll', labels: fS.map((x) => x.state), values: fS.map((x) => x.net_fall_per_100) },
@@ -801,7 +801,7 @@ function india() {
     'The final rolls came out ' + crore(FN.net_after_draft) + ' larger than the drafts, against ' + crore(FN.removed) + ' left off them.',
     wbS.state + ' kept ' + lakh(FN.withheld) + ' names off its final roll for adjudication. As reported, ' + lakh(J('westbengal/summary.json').adj.found_eligible) + ' were later found eligible and ' + lakh(J('westbengal/summary.json').adj.found_not_eligible) + ' not. Leaving those out, the rise is ' + pct(FN.made_up_pct_ex_withheld) + ' of the fall.',
     'The final roll is smaller than the draft in ' + FN.shrank.length + ' states. The fall is ' + FN.net_per_100.toFixed(1) + ' per 100 electors at the final roll, from ' + FN.per_100.toFixed(1) + ' at the draft.',
-    'The rise counts new electors as well as names put back, so it is the most that can have been put back.',
+    'The rise is the names added, new electors among them, less the names deleted.',
   ], 12.5);
   s.addNotes('Still to publish a final roll: ' + FN.waiting.join(', ') + '. Deletions after the draft carry no reason in any state except Bihar. Rank correlation between the rate left off at the draft and the share made up: ' + FN.rho_made_up.toFixed(2) + (Math.abs(FN.rho_made_up) < 0.2 ? ', no relationship.' : '.'));
 

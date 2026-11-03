@@ -155,8 +155,8 @@ def main():
         'shares': {k: r1(100 * st[k] / st['left_off']) for k in ('absent_or_shifted', 'dead', 'duplicate', 'other')},
         'claims': S['claims'], 'objections': S['objections'], 'final': S['final'], 'net': S['net'],
         'claims_per_1000': S['claims_per_1000'], 'objections_per_1000': S['objections_per_1000'], 'net_per_1000': S['net_per_1000'],
-        # the net rise after the draft counts first-time electors too, so it is
-        # the most that could have been put back, as a share of those left off
+        # the net rise after the draft (claims less objections, first-time
+        # electors among the claims), as a share of those left off
         'made_up_pct': r1(100 * S['net'] / st['left_off']),
         'final_vs_before': st['final'] - st['roll_before'], 'final_vs_before_per_100': r1(100 * (st['final'] - st['roll_before']) / st['roll_before']),
         'women_draft_pct': S['women_draft_pct'], 'women_claims_pct': S['women_claims_pct'],
