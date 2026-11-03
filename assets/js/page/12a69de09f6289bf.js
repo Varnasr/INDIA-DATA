@@ -65,8 +65,8 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')
   var fixed = [
     line('india/#the-three-reasons-by-phase', L('Of the names left off the draft rolls whose reason was published, {x} in every 100 were entered as dead.', { x: SIR.d(X.shares.dead, 1) }),
       L('A reason on the list is what the officer wrote down, and nobody checked it.')),
-    line('india/#after-the-final-rolls', L('In the {n} states and union territories with a final roll, the final rolls came out {x} larger than the drafts, at most {p} in every 100 of the {y} names left off, and that rise includes new voters.', { n: F.states, x: SIR.lakh(F.net_after_draft), p: SIR.d(F.made_up_pct, 1), y: SIR.lakh(F.removed) })),
-    line('india/process/#notices-the-no-mapping-list-and-the-discrepancy-list', L('Across the {n} states with a published total, {x} electors on the draft rolls were sent a notice, {p} in every 100. A notice is not a deletion.', { n: NN.with_total, x: SIR.lakh(NN.notices_total), p: SIR.d(NN.per_100, 1) })),
+    line('india/#after-the-final-rolls', L('In the {n} states and union territories with a final roll, the final rolls were {x} larger than the drafts, which is {p} for every 100 of the {y} names left off. That rise is the names added after the draft, new voters among them, less the names deleted after it.', { n: F.states, x: SIR.lakh(F.net_after_draft), p: SIR.d(F.made_up_pct, 1), y: SIR.lakh(F.removed) })),
+    line('india/process/#notices-the-no-mapping-list-and-the-discrepancy-list', L('Across the {n} states and union territories with a published total, {x} electors on the draft rolls were sent a notice, {p} in every 100. A notice is not a deletion.', { n: NN.with_total, x: SIR.lakh(NN.notices_total), p: SIR.d(NN.per_100, 1) })),
     line('india/women/', L('In {o} of the {n} states and union territories that published the names left off by sex, women were a larger share of those names than of the roll.', { o: W.over, n: W.states }))
   ];
   var Ma = BT.marriage, De = BT.deaths, spool = [
@@ -74,10 +74,11 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/geo/india.json')
     line('bihar/people/#two-reasons-set-against-the-records', L('In Bihar, the {x} names left off the draft as dead equal about {y} years of the state\'s adult deaths.', { x: SIR.lakh(De.dead_removed), y: SIR.d(De.years_of_deaths, 1) }))
   ];
   // the cities measured by the names left off the draft against the roll
-  // before the revision, with a rest of the state, in alphabetical order
+  // before the revision, each set beside its whole state (a city that is
+  // its own state, Delhi, has no rest and is left out), in alphabetical order
   r[3].cities.filter(function (c) { return c.measure === 'left_off' && !c.roll_2025 && c.rest; })
     .sort(function (a, b) { return a.city.localeCompare(b.city); })
-    .forEach(function (c) { spool.push(line('india/cities/#each-city-against-its-state', L('In {city}, {a} of every 100 electors were left off the draft, against {b} in the rest of {state}.', { city: c.city, a: SIR.d(c.core.per_100, 1), b: SIR.d(c.rest.per_100, 1), state: c.state }))); });
+    .forEach(function (c) { spool.push(line('india/cities/#each-city-against-its-state', L('In {city}, {a} of every 100 electors were left off the draft, against {b} in {state} as a whole.', { city: c.city, a: SIR.d(c.core.per_100, 1), b: SIR.d(c.state_per_100, 1), state: c.state }))); });
   // margins: only the states whose count is of names left off, alphabetically
   var MW = { 'names left off the draft': function (v) { return L('In {state}, the names left off the draft outnumbered the {y} winning margin in {k} of {n} constituencies.', v); },
     'names left off or deleted, both phases': function (v) { return L('In {state}, the names left off the draft or deleted after it outnumbered the {y} winning margin in {k} of {n} constituencies.', v); } };

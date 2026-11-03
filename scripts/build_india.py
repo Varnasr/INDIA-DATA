@@ -286,6 +286,9 @@ def build():
     # States on the shared state page whose own figures (raw/normal.json) carry
     # the roll before and the names left off by sex as exact counts. A state
     # already in gender.csv keeps its curated row.
+    # Goa, Manipur and Meghalaya printed the roll before and the draft by sex,
+    # and their names left off by sex are the difference of the two.
+    LEFT_OFF_IS_DIFFERENCE = {'Goa', 'Manipur', 'Meghalaya'}
     have = {g['state'] for g in gender}
     for slug in sorted(os.listdir(os.path.join(ROOT, 'data'))):
         p = os.path.join(ROOT, 'data', slug, 'raw', 'normal.json')
@@ -303,7 +306,8 @@ def build():
                        'women_share_removed': round(100 * v['women_removed'] / (v['women_removed'] + v['men_removed']), 4),
                        'women_share_roll': round(100 * v['women_before'] / v['roll_before'], 4),
                        'quality': 'exact', 'source_url': SRC[F['women_removed']['src']]['url'],
-                       'note': 'The roll before the revision and the names left off the draft by sex are from %s.' % SRC[F['women_removed']['src']]['title']})
+                       'note': (('The roll before the revision and the draft by sex are from %s. The names left off by sex are the difference, and they add to the names left off exactly.' if N['state'] in LEFT_OFF_IS_DIFFERENCE
+                                 else 'The roll before the revision and the names left off the draft by sex are from %s. They add to the names left off exactly.') % SRC[F['women_removed']['src']]['title'])})
     for g in gender:
         g['gap'] = round(g['women_share_removed'] - g['women_share_roll'], 4)
         g['phase'] = next(x['phase'] for x in rows if x['state'] == g['state'])

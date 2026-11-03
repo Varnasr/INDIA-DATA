@@ -151,7 +151,7 @@ def build_third(by):
     tl = sum(v['T'] for v in rs['by_sex'].values())
     fb = list(csv.DictReader(open(os.path.join(ROOT, 'data', 'bihar', 'raw', 'final_roll_format4b.csv'), encoding='utf-8')))
     td = sum(int(x['draft_third_gender']) for x in fb)
-    rows.append(dict(state='Bihar', before=td + tl, left_off=tl, before_kind='derived', left_off_kind='official', source_url='',
+    rows.append(dict(state='Bihar', before=td + tl, left_off=tl, before_kind='derived', left_off_kind='lists', source_url='',
                      note='The names left off are counted from the phase 1 lists. The roll before is the draft in Format 4B plus those names.'))
     # Delhi: the Chief Electoral Officer's figures as quoted in the press
     dc = {x['measure']: x for x in csv.DictReader(open(os.path.join(ROOT, 'data', 'delhi', 'raw', 'state.csv'), encoding='utf-8'))}

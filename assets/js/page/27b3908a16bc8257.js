@@ -3,7 +3,7 @@ SIR.json('data/india/women.json').then(function (d) {
   var list = function (a) { return a.join(', ').replace(/, ([^,]*)$/, ' and $1'); };
   var over = S.filter(function (s) { return s.gap > 0; }), under = S.filter(function (s) { return s.gap < 0; });
   var big = S.filter(function (s) { return s.gap >= 1; });
-  var top = S[0], low = under.filter(function (s) { return s.gap <= -1; }), lo = S[S.length - 1];
+  var top = S[0], low = under.filter(function (s) { return s.gap <= -1; }).sort(function (a, b) { return a.state.localeCompare(b.state); }), lo = S[S.length - 1];
   var Q = { lists: 'counted from the lists', exact: 'official figures', rounded: 'official figures, rounded', proxy: 'an earlier roll as the base', unverified: 'a press analysis that names no source' };
 
   document.getElementById('sShareN').textContent = S.length + ' states and union territories published the names left off their draft rolls by sex, or published the roll by sex before and after so that the difference can be counted.';
@@ -64,7 +64,7 @@ SIR.json('data/india/women.json').then(function (d) {
 
   SIR.table('tQual', [{ h: 'State' }, { h: 'Women, share of the roll', num: true }, { h: 'Women, share left off', num: true }, { h: 'Gap, points', num: true }, { h: 'Source' }],
     S.map(function (s) { return [s.source_url ? '<a href="' + SIR.esc(s.source_url) + '" rel="noopener">' + SIR.esc(s.state) + '</a>' : SIR.esc(s.state), p1(s.share_roll) + '%', p1(s.share_removed) + '%', p1(s.gap), Q[s.quality] || s.quality]; }));
-  var TH = d.third, KIND = { official: 'an official figure', press: 'a figure from the press', derived: 'worked out from two published counts' };
+  var TH = d.third, KIND = { official: 'an official figure', press: 'a figure from the press', derived: 'worked out from two published counts', lists: 'counted from the published lists' };
   var thBig = TH.rows.filter(function (x) { return x.before >= TH.min_roll; });
   var thHi = thBig.filter(function (x) { return x.per_100 > x.all_per_100; }), thLo = thBig.filter(function (x) { return x.per_100 <= x.all_per_100; });
   document.getElementById('fThird').innerHTML = '<b>In ' + TH.higher + ' of the ' + TH.big + ' states and union territories with at least ' + TH.min_roll + ' third-gender electors on the roll before the revision, third-gender electors were left off at a higher rate than electors as a whole.</b> ' +
