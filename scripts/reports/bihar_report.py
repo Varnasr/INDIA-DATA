@@ -216,7 +216,7 @@ R.p('This asks only whether leaving names off or deleting them moved votes betwe
 R.h2('After the final roll')
 R.p('The final roll of 30 September 2025 was published after the claims and objections on the draft were heard. A claim asks for a name to be added or put back, and an objection asks for one to be deleted. Format 4B, the Election Commission\'s standard return for a final roll, gives seat by seat and by sex the names added and deleted after the draft and the final roll itself. It agrees with the press note of the Chief Electoral Officer, the Commission\'s officer in charge of the state\'s rolls. '
     'The roll of June 2025 is published only as a state total, so a seat\'s roll before the revision is taken here as its draft roll plus the names on its phase 1 list.')
-R.stats([(lakh(FT['added']), 'added after the draft'), (lakh(FT['removed_after']), 'deleted after the draft'), (pct(FT['made_up_pct']), 'of the names left off the draft made up'),
+R.stats([(lakh(FT['added']), 'added after the draft'), (lakh(FT['removed_after']), 'deleted after the draft'), (pct(FT['made_up_pct']), 'net rise after the draft, as a share of the names left off'),
          ('%d of %d' % (FM['net'], FM['seats']), 'seats where the net fall exceeds the margin')])
 fig, ax = plt.subplots(figsize=(8, 3.2))
 als = ['NDA', 'INDIA', 'Other']
@@ -231,7 +231,7 @@ ax.legend(fontsize=7, frameon=False)
 style_axes(ax, 'Seats where the names left off or deleted, and the net fall at the final roll, exceed the 2025 margin')
 R.figure(fig, 'Figure 4. By the alliance that won the seat in 2025.')
 R.p('After the draft, %s names were added on claims and %s deleted on objections, so the final roll rose by %s over the draft. That rise equals %s of the %s names left off the draft. '
-    'That rise counts new electors as well as names put back, and the Commission has not said how many of those added had been left off the draft, so it is the most that can have been put back. '
+    'That rise is the names added, new electors among them, less the names deleted, and the Commission has not said how many of those added had been left off the draft. '
     'The final roll was %s names smaller than the roll before the revision. This report calls that difference the net fall, and the roll fell in every one of the %d seats.'
     % (indian(FT['added']), indian(FT['removed_after']), indian(FT['net_after']), pct(FT['made_up_pct']), indian(FT['p1']), indian(FT['net_fall_press']), len(FB['seats'])))
 R.p('In %d of %d seats the fall that remained at the final roll was still larger than the 2025 winning margin, against %d when every name left off or deleted is counted. Of those %d, the NDA won %d, INDIA %d and others %d.'
@@ -387,7 +387,7 @@ R.bullets([
     '%s booths lost 200 names or more each.' % indian(b200),
     'In phase 1, %s of the names left off the draft were entered as shifted, %s as dead, %s as absent and %s as already enrolled. %s of the %s more women than men left off the draft were marked shifted.' % (pct(rsh('shifted')), pct(rsh('dead')), pct(rsh('absent')), pct(rsh('already_enrolled')), indian(xsS), indian(xsF)),
     'The names marked absent, taken alone, exceed the margin in %d seats, and the names marked already enrolled in %d.' % (rOver('r_absent'), rOver('r_enrolled')),
-    'The final roll made up %s of the names left off the draft, and the fall that remained still exceeded the margin in %d of %d seats. Women were %s of those added after the draft.' % (pct(FT['made_up_pct']), FM['net'], FM['seats'], pct(FT['women_share_added'])),
+    'The rise from the draft to the final roll, the names added less the names deleted, came to %s of the names left off the draft, and the fall that remained still exceeded the margin in %d of %d seats. Women were %s of those added after the draft.' % (pct(FT['made_up_pct']), FM['net'], FM['seats'], pct(FT['women_share_added'])),
 ])
 
 R.h2('How sure are the findings?')

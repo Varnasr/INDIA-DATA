@@ -1,4 +1,4 @@
-<!--page {"title": "Rolls against adults, All India", "description": "Each state's electoral roll set against its projected adult population at three points of the revision: the roll before it, the draft and the final roll. And how much of what the draft lost came back by the final roll.", "place": "india"} -->
+<!--page {"title": "Rolls against adults, All India", "description": "Each state's electoral roll set against its projected adult population at three points of the revision: the roll before it, the draft and the final roll. And how much each roll rose from the draft to the final roll.", "place": "india"} -->
 <main id="main">
 <div class="page-head" data-no-i18n><h1>Rolls against adults</h1><ol class="summary" id="short"></ol></div>
 <p class="report-lang">This page is in English only.</p>
@@ -11,8 +11,8 @@
   <div class="grid"><div class="panel wide"><div class="vizbox" id="vStages"></div></div></div>
   <p class="note" id="overNote"></p>
 
-  <h2>How much of what the draft lost came back</h2>
-  <p class="sub">The rise in the roll from the draft to the final roll, as a share of the names left off the draft, in each state with a final roll. The rise counts new voters who were never on the roll as well as people who were added back, so it is a ceiling.</p>
+  <h2>How much the roll rose after the draft</h2>
+  <p class="sub">The rise in the roll from the draft to the final roll, as a share of the names left off the draft, in each state with a final roll. The rise is the names added after the draft, new voters among them, less the names deleted after it.</p>
   <div class="grid"><div class="panel wide"><div class="vizbox" id="vBack"></div></div></div>
   <p class="note" id="backNote"></p>
 
@@ -64,7 +64,7 @@ SIR.json('data/india/states.json').then(function (D) {
     cats: back.map(function (r) { return r.state; }),
     series: [{ name: 'Rise from draft to final roll', col: '--fill-navy', vals: back.map(function (r) { return r.made_up_pct; }) }] });
   var fin = D.final;
-  document.getElementById('backNote').textContent = 'Across the ' + n(fin.states) + ' states with a final roll, the rise from draft to final roll came to at most ' + d1(fin.made_up_pct) + ' per cent of the names left off the draft. ' +
+  document.getElementById('backNote').textContent = 'Across the ' + n(fin.states) + ' states with a final roll, the rise from draft to final roll came to ' + d1(fin.made_up_pct) + ' per cent of the names left off the draft. ' +
     (fin.shrank && fin.shrank.length ? 'In ' + fin.shrank.join(', ') + ' the final roll was smaller than the draft. ' : '') +
     (fin.withheld ? 'West Bengal\'s final roll left out ' + n(fin.withheld) + ' names held for adjudication.' : '');
   SIR.anchors && SIR.anchors();

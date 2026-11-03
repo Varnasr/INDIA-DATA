@@ -120,7 +120,7 @@
       out.final = 'The final roll' + (d.dates.final ? ' of ' + DATE(d.dates.final) : '') + ' holds ' + lk(v.final) + ' electors' +
         (v.added_after != null && v.removed_after != null ? '. After the draft ' + lk(v.added_after) + ' names were added and ' + lk(v.removed_after) + ' deleted' : '') +
         (v.net_after != null && v.net_after < 0 ? (v.added_after != null && v.removed_after != null ? ', so the roll fell by a further ' : '. The roll fell by a further ') + lk(-v.net_after) + ' after the draft.' :
-         R.made_up_pct != null ? ', and the net rise is ' + d1(R.made_up_pct) + ' for every 100 left off. It counts people enrolling for the first time, so fewer than that were put back.' : '.');
+         R.made_up_pct != null ? ', and the net rise is ' + d1(R.made_up_pct) + ' for every 100 left off. It is the names added, people enrolling for the first time among them, less the names deleted.' : '.');
     }
     if (R.women_removed_pct != null && R.women_before_pct != null)
       out.women = 'Women were ' + pc(R.women_removed_pct) + ' of the names left off and ' + pc(R.women_before_pct) + ' of the roll before the revision' +
@@ -297,7 +297,7 @@
     return load().then(function (d) {
       var s = sentences(d), v = d.v, QA = [], lim = limits(d);
       if (s.scale) QA.push(['How many names were left off in ' + nm(d) + '?', s.scale + (s.reasons ? ' ' + s.reasons + ' ' + (gapNote(d) ? gapNote(d) + ' ' : '') + 'A reason is what the officer wrote down, and nobody checked it.' : ''), ['main', 'faq']]);
-      if (s.final) QA.push(['How many came back before the final roll?', s.final, ['main', 'faq']]);
+      if (s.final) QA.push(['What changed between the draft and the final roll?', s.final, ['main', 'faq']]);
       if (s.women) QA.push(['Were women left off more than men?', s.women, ['main', 'faq']]);
       if (d.tables.length) QA.push(['Is there a figure for each district or constituency?', d.tables.map(function (t) { return t.title + (t.partial ? ', for some ' + LEVEL[t.level][1] + ' only' : '') + (t.press ? ', from the press' : '') + '.'; }).join(' '), ['main', 'faq']]);
       else QA.push(['Is there a figure for each district or constituency?', below(d), ['main', 'faq']]);

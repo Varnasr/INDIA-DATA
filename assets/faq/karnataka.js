@@ -22,7 +22,7 @@
         [L('Were Bengaluru\'s names left off for different reasons?'),
          L('Yes. In Bengaluru {sa} of the names left off were entered as shifted or absent and {dead} as dead. In the rest of the state the figures are {rsa} and {rdead}. Across all 34 districts, the more names a district lost, the larger the share marked shifted or absent (rank correlation {rho}).', { sa: SIR.pct(B.shifted_absent_share), dead: SIR.pct(B.dead_share), rsa: SIR.pct(R.shifted_absent_share), rdead: SIR.pct(R.dead_share), rho: SIR.d(s.rho_rate_shifted, 2) }), ['main']],
         [L('Have the names been put back?'),
-         back + ' ' + fin + ' ' + L('The rise from the draft to the final roll is {m} of the names left off. It counts new voters too, so it is the most that could have been restored, and no count of names added or deleted after the draft was published.', { m: SIR.pct(s.made_up_final_pct) }), ['main', 'faq']],
+         back + ' ' + fin + ' ' + L('The rise from the draft to the final roll is {m} of the names left off. It is the names added, new voters among them, less the names deleted, and no count of names added or deleted after the draft was published.', { m: SIR.pct(s.made_up_final_pct) }), ['main', 'faq']],
         [L('Were women left off more than men?'),
          L('This cannot be counted from the Chief Electoral Officer\'s tables. The roll before the revision is published as a total only, and the names left off are not split by sex. Women were {d} of the draft roll, {f} of the roll of 9 October and {w} of the final roll.', { d: SIR.pct(s.women_draft_pct), f: SIR.pct(s.women_sep_pct), w: SIR.pct(s.women_final_pct) }), ['main', 'method', 'faq']],
         [L('Why is there no table by constituency?'),

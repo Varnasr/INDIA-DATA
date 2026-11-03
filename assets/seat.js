@@ -204,7 +204,7 @@
       } else if (C.after) {
         VIZ.lollipop('vAfter', { label: a.name + ': the draft and the final roll', axis: 'Electors',
           rows: [['Roll before the revision', a[L.base], '--fill-navy'], ['Draft roll', a.draft, '--fill-red'], ['Final roll', a.final, '--fill-navy']].map(function (r) { return { name: r[0], v: r[1], text: n(r[1]), tok: r[2], hi: true }; }) });
-        document.getElementById('fAfter').innerHTML = 'The final roll is ' + n(a.final - a.draft) + ' larger than the draft. That rise counts people enrolling for the first time as well as names put back, so it is the most that could have been put back.';
+        document.getElementById('fAfter').innerHTML = 'The final roll is ' + n(a.final - a.draft) + ' larger than the draft. That rise is the names added, people enrolling for the first time among them, less the names deleted.';
       } else document.getElementById('sAfter').hidden = true;
 
       var CASE = { 'uttarakhand-67': 'kichha', 'delhi-52': 'tughlakabad', 'gujarat-54': 'danilimda', 'maharashtra-137': 'bhiwandi-east', 'tamilnadu-21': 'anna-nagar', 'assam-76': 'lakhimpur' }[st + '-' + a.ac];

@@ -13,7 +13,7 @@
       var chen = L('Chennai lost {p} of every 100 electors, {x} times the state\'s rate of {sp}. Its {k} constituencies hold {roll} of the state\'s roll and {rem} of the names left off the draft.', { p: SIR.d(C.per_100, 1), x: SIR.d(C.per_100 / s.per_100, 1), sp: SIR.d(s.per_100, 1), k: C.acs, roll: SIR.pct(s.chennai_share_of_roll), rem: SIR.pct(s.chennai_share_of_removed) });
       var why = L('{sh} were entered as shifted or absent, {dead} as dead and {mult} as enrolled in more than one place.', { sh: SIR.pct(s.shares.shifted_absent), dead: SIR.pct(s.shares.dead), mult: SIR.pct(s.shares.multiple) });
       var margin = L('In {k} of the {n} constituencies, more names were left off the draft roll than the 2026 winning margin.', { k: s.over_margin, n: s.acs });
-      var back = L('The final roll of 23 February 2026 was {a} larger than the draft. That rise is at most {m} of the names left off, and it includes new voters.', { a: SIR.lakh(s.added_net), m: SIR.pct(s.made_up_pct) });
+      var back = L('The final roll of 23 February 2026 was {a} larger than the draft. That rise is {m} of the names left off. It is the names added on claims, new voters among them, less the names deleted on objections.', { a: SIR.lakh(s.added_net), m: SIR.pct(s.made_up_pct) });
       var QA = [
         [L('How many names did the revision leave off the draft in Tamil Nadu?'),
          scale + ' ' + L('The roll before the revision held {b} names and the draft roll {d}.', { b: cr(s.before), d: cr(s.draft) }), ['main', 'faq']],
