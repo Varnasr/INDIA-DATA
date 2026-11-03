@@ -283,6 +283,27 @@ def build():
             g[k] = float(g[k])
         assert abs(100 * g['women_removed'] / (g['women_removed'] + g['men_removed']) - g['women_share_removed']) < 0.01, x['state']
         gender.append(g)
+    # States on the shared state page whose own figures (raw/normal.json) carry
+    # the roll before and the names left off by sex as exact counts. A state
+    # already in gender.csv keeps its curated row.
+    have = {g['state'] for g in gender}
+    for slug in sorted(os.listdir(os.path.join(ROOT, 'data'))):
+        p = os.path.join(ROOT, 'data', slug, 'raw', 'normal.json')
+        if not os.path.exists(p):
+            continue
+        N = json.load(open(p, encoding='utf-8'))
+        F, SRC = N['figures'], {s['id']: s for s in N['sources']}
+        need = ('roll_before', 'removed', 'men_before', 'women_before', 'men_removed', 'women_removed')
+        if N['state'] in have or not all(k in F for k in need) or any(F[k].get('rounded') for k in need):
+            continue
+        assert N['state'] in names, N['state']
+        v = {k: F[k]['v'] for k in need}
+        assert v['men_removed'] + v['women_removed'] + F.get('third_removed', {'v': 0})['v'] == v['removed'], N['state'] + ': names left off by sex do not add up'
+        gender.append({'state': N['state'], 'women_removed': v['women_removed'], 'men_removed': v['men_removed'],
+                       'women_share_removed': round(100 * v['women_removed'] / (v['women_removed'] + v['men_removed']), 4),
+                       'women_share_roll': round(100 * v['women_before'] / v['roll_before'], 4),
+                       'quality': 'exact', 'source_url': SRC[F['women_removed']['src']]['url'],
+                       'note': 'The roll before the revision and the names left off the draft by sex are from %s.' % SRC[F['women_removed']['src']]['title']})
     for g in gender:
         g['gap'] = round(g['women_share_removed'] - g['women_share_roll'], 4)
         g['phase'] = next(x['phase'] for x in rows if x['state'] == g['state'])

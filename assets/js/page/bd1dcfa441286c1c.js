@@ -3,16 +3,17 @@ SIR.json('data/india/women.json').then(function (d) {
   var list = function (a) { return a.join(', ').replace(/, ([^,]*)$/, ' and $1'); };
   var over = S.filter(function (s) { return s.gap > 0; }), under = S.filter(function (s) { return s.gap < 0; });
   var big = S.filter(function (s) { return s.gap >= 1; });
-  var top = S[0], dl = S.filter(function (s) { return s.state === 'Delhi'; })[0];
+  var top = S[0], low = under.filter(function (s) { return s.gap <= -1; }), lo = S[S.length - 1];
   var Q = { lists: 'counted from the lists', exact: 'official figures', rounded: 'official figures, rounded', proxy: 'an earlier roll as the base', unverified: 'a press analysis that names no source' };
 
+  document.getElementById('sShareN').textContent = S.length + ' states and union territories published the names left off their draft rolls by sex, or published the roll by sex before and after so that the difference can be counted.';
   SIR.inShort([
     'In ' + over.length + ' of the ' + S.length + ' states and union territories that published the names left off by sex, women were a larger share of the names left off than of the roll. In ' + big.length + ' of them the gap was a point or more.',
     'The gap was widest in ' + top.state + ', ' + p1(top.gap) + ' points, where women were ' + p1(top.share_removed) + '% of the names left off and ' + p1(top.share_roll) + '% of the roll.' + (S[1] && top.gap - S[1].gap < 0.5 ? ' ' + S[1].state + ' came just behind, at ' + p1(S[1].gap) + ' points.' : '') + ' In ' + top.state + ' that is ' + p1(top.women_per_100) + ' of every 100 women against ' + p1(top.men_per_100) + ' of every 100 men.',
     'Below the state the pattern holds almost everywhere it can be followed. In ' + X.district_over + ' of ' + X.district_n + ' districts across Bihar, West Bengal, Kerala and Uttarakhand, women were a larger share of the district\'s count than of its roll.',
-    'Delhi is the exception. ' + p1(dl.men_per_100) + ' of every 100 men were left off its draft roll, against ' + p1(dl.women_per_100) + ' of every 100 women.',
+    'It ran the other way by a point or more in ' + list(low.map(function (s) { return s.state; })) + '. In ' + lo.state + ', ' + p1(lo.men_per_100) + ' of every 100 men were left off the draft roll, against ' + p1(lo.women_per_100) + ' of every 100 women.',
     'In Bihar women were ' + p1(d.bihar.dead_share) + '% of the names entered as dead. Their share of deaths in Bihar, from the death rates for women and men, would be about ' + p1(d.bihar.dead_expected) + '%.'
-  ], 'The figures come from eleven states, and the table at the foot of the page says how good each one is. A reason on a list is what the officer wrote down, and nobody checked it.');
+  ], 'The figures come from ' + S.length + ' states and union territories, and the table at the foot of the page says how good each one is. A reason on a list is what the officer wrote down, and nobody checked it.');
 
   document.getElementById('kpis').innerHTML = [
     [over.length + ' of ' + S.length, 'states where women were a larger share of the names left off than of the roll'],
@@ -31,7 +32,8 @@ SIR.json('data/india/women.json').then(function (d) {
     cats: S.map(function (s) { return s.state; }),
     series: [{ name: 'Per 100 men', col: '--fill-navy', vals: S.map(function (s) { return s.men_per_100; }) }, { name: 'Per 100 women', col: '--fill-red', vals: S.map(function (s) { return s.women_per_100; }) }] });
   var r13 = S.filter(function (s) { return s.ratio >= 1.3; });
-  document.getElementById('nRate').textContent = 'In ' + list(r13.map(function (s) { return s.state; })) + ' a woman on the roll was at least 1.3 times as likely as a man to be left off the draft. In Delhi a man was ' + p1(dl.men_per_100 / dl.women_per_100) + ' times as likely as a woman.';
+  var mlo = S.filter(function (s) { return s.men_per_100 / s.women_per_100 >= 1.1; }).sort(function (a, b) { return a.state.localeCompare(b.state); });
+  document.getElementById('nRate').textContent = 'In ' + list(r13.map(function (s) { return s.state; })) + ' a woman on the roll was at least 1.3 times as likely as a man to be left off the draft. ' + mlo.map(function (s) { return 'In ' + s.state + ' a man was ' + p1(s.men_per_100 / s.women_per_100) + ' times as likely as a woman.'; }).join(' ');
 
   var tokOf = function (v) { return v > 0 ? '--fill-red' : '--fill-grey'; };
   VIZ.strip('vDist', { label: "Women's share of each district's count less their share of its roll, in points", axis: 'Points above or below women\'s share of the roll', step: 5,
@@ -62,5 +64,16 @@ SIR.json('data/india/women.json').then(function (d) {
 
   SIR.table('tQual', [{ h: 'State' }, { h: 'Women, share of the roll', num: true }, { h: 'Women, share left off', num: true }, { h: 'Gap, points', num: true }, { h: 'Source' }],
     S.map(function (s) { return [s.source_url ? '<a href="' + SIR.esc(s.source_url) + '" rel="noopener">' + SIR.esc(s.state) + '</a>' : SIR.esc(s.state), p1(s.share_roll) + '%', p1(s.share_removed) + '%', p1(s.gap), Q[s.quality] || s.quality]; }));
+  var TH = d.third, KIND = { official: 'an official figure', press: 'a figure from the press', derived: 'worked out from two published counts' };
+  var thBig = TH.rows.filter(function (x) { return x.before >= TH.min_roll; });
+  var thHi = thBig.filter(function (x) { return x.per_100 > x.all_per_100; }), thLo = thBig.filter(function (x) { return x.per_100 <= x.all_per_100; });
+  document.getElementById('fThird').innerHTML = '<b>In ' + TH.higher + ' of the ' + TH.big + ' states and union territories with at least ' + TH.min_roll + ' third-gender electors on the roll before the revision, third-gender electors were left off at a higher rate than electors as a whole.</b> ' +
+    (thLo.length ? 'In ' + list(thLo.map(function (x) { return x.state; })) + ' the rate was lower. ' : '') +
+    'The counts are small, a few hundred or a few thousand people in a state, so a few names move the rate a long way. The figures for ' + list(TH.press) + ' came through the press.';
+  SIR.table('tThird', [{ h: 'State' }, { h: 'Third-gender electors on the roll before', num: true }, { h: 'Left off the draft', num: true }, { h: 'Per 100 third-gender electors', num: true }, { h: 'All electors left off, per 100', num: true }, { h: 'Figures' }],
+    TH.rows.map(function (x) {
+      var nm = x.source_url ? '<a href="' + SIR.esc(x.source_url) + '" rel="noopener">' + SIR.esc(x.state) + '</a>' : SIR.esc(x.state);
+      return [nm, SIR.n(x.before), SIR.n(x.left_off), p1(x.per_100), p1(x.all_per_100), 'The roll before is ' + KIND[x.before_kind] + ' and the number left off is ' + KIND[x.left_off_kind] + '. ' + SIR.esc(x.note)];
+    }));
   SIR.showFaq('india', 'women');
 }).catch(SIR.fail);

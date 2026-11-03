@@ -1,8 +1,8 @@
 {
  "summary": {
-  "states": 11,
-  "over": 8,
-  "over_1": 7,
+  "states": 15,
+  "over": 10,
+  "over_1": 8,
   "top": "Bihar",
   "top_gap": 7.6,
   "delhi_w": 29.9,
@@ -79,6 +79,19 @@
    "ratio": 1.1882
   },
   {
+   "state": "Manipur",
+   "quality": "exact",
+   "phase": "3",
+   "source_url": "https://ceomanipur.nic.in/Documents/PressNote/2026-2027/PRESS%20NOTE%20SIR%20FINAL%20EROLL%202026.pdf",
+   "note": "The roll before the revision and the names left off the draft by sex are from Chief Electoral Officer, Manipur, press note No. e-Roll-101/6/2025-ELEC-ED of 6 September 2026 on the final roll.",
+   "share_roll": 51.7162,
+   "share_removed": 55.9646,
+   "gap": 4.2,
+   "women_per_100": 8.2,
+   "men_per_100": 6.9,
+   "ratio": 1.1865
+  },
+  {
    "state": "Kerala",
    "quality": "proxy",
    "phase": "2",
@@ -118,6 +131,19 @@
    "ratio": 1.0128
   },
   {
+   "state": "Andhra Pradesh",
+   "quality": "exact",
+   "phase": "3",
+   "source_url": "https://x.com/CEOAndhra/status/2083150543489491157",
+   "note": "The roll before the revision and the names left off the draft by sex are from Chief Electoral Officer, Andhra Pradesh, press note of 31 July 2026 on the enumeration phase and its district statement, as posted by the office on X.",
+   "share_roll": 50.9938,
+   "share_removed": 51.2169,
+   "gap": 0.2,
+   "women_per_100": 10.8,
+   "men_per_100": 10.7,
+   "ratio": 1.009
+  },
+  {
    "state": "Karnataka",
    "quality": "exact",
    "phase": "3",
@@ -144,6 +170,19 @@
    "ratio": 0.9766
   },
   {
+   "state": "Goa",
+   "quality": "exact",
+   "phase": "2",
+   "source_url": "https://ceogoa.nic.in/PDF/SIR2026/press-note-Final-publication.pdf",
+   "note": "The roll before the revision and the names left off the draft by sex are from CEO Goa, press note on the final publication of the electoral roll.",
+   "share_roll": 51.5739,
+   "share_removed": 49.4702,
+   "gap": -2.1,
+   "women_per_100": 8.1,
+   "men_per_100": 8.8,
+   "ratio": 0.9193
+  },
+  {
    "state": "Delhi",
    "quality": "exact",
    "phase": "3",
@@ -155,6 +194,19 @@
    "women_per_100": 29.9,
    "men_per_100": 35.3,
    "ratio": 0.8477
+  },
+  {
+   "state": "Meghalaya",
+   "quality": "exact",
+   "phase": "3",
+   "source_url": "https://meghalaya.gov.in/meghalaya/sites/default/files/press_release/EL_63_2026_29.pdf",
+   "note": "The roll before the revision and the names left off the draft by sex are from Election Department, Government of Meghalaya (Chief Electoral Officer), press note No. EL.63/2026/29 of 5 August 2026 with the SIR status report by constituency.",
+   "share_roll": 50.6842,
+   "share_removed": 41.4074,
+   "gap": -9.3,
+   "women_per_100": 6.3,
+   "men_per_100": 9.1,
+   "ratio": 0.6876
   }
  ],
  "districts": [
@@ -776,5 +828,150 @@
   "removed_after": 53.9228,
   "added": 47.8606,
   "draft": 47.1666
+ },
+ "third": {
+  "min_roll": 100,
+  "states": 11,
+  "big": 7,
+  "higher": 6,
+  "press": [
+   "Delhi",
+   "Madhya Pradesh",
+   "Odisha"
+  ],
+  "rows": [
+   {
+    "state": "Andhra Pradesh",
+    "before": 3430,
+    "left_off": 694,
+    "before_kind": "official",
+    "left_off_kind": "official",
+    "source_url": "https://x.com/CEOAndhra/status/2083150543489491157",
+    "note": "Both counts are as published in Chief Electoral Officer, Andhra Pradesh, press note of 31 July 2026 on the enumeration phase and its district statement, as posted by the office on X.",
+    "per_100": 20.2332,
+    "all_per_100": 10.7849,
+    "press": false
+   },
+   {
+    "state": "Arunachal Pradesh",
+    "before": 2,
+    "left_off": 0,
+    "before_kind": "official",
+    "left_off_kind": "derived",
+    "source_url": "https://ceoarunachal.nic.in/componenthelper/getcomponentfile/68",
+    "note": "The figures are from Chief Electoral Officer, Arunachal Pradesh, press note EN/OP/SIR-01/2026 of 22 September 2026, and the names left off are the roll before less the draft.",
+    "per_100": 0.0,
+    "all_per_100": 19.0939,
+    "press": false
+   },
+   {
+    "state": "Bihar",
+    "before": 2043,
+    "left_off": 217,
+    "before_kind": "derived",
+    "left_off_kind": "official",
+    "source_url": "",
+    "note": "The names left off are counted from the phase 1 lists. The roll before is the draft in Format 4B plus those names.",
+    "per_100": 10.6216,
+    "all_per_100": 8.3065,
+    "press": false
+   },
+   {
+    "state": "Delhi",
+    "before": 1024,
+    "left_off": 577,
+    "before_kind": "press",
+    "left_off_kind": "derived",
+    "source_url": "",
+    "note": "The roll before is the Chief Electoral Officer's figure as the press quoted it, and the draft is from the Chief Electoral Officer's table. The names left off are the difference.",
+    "per_100": 56.3477,
+    "all_per_100": 32.7817,
+    "press": true
+   },
+   {
+    "state": "Goa",
+    "before": 13,
+    "left_off": 4,
+    "before_kind": "official",
+    "left_off_kind": "derived",
+    "source_url": "https://ceogoa.nic.in/PDF/SIR2026/press-note-Final-publication.pdf",
+    "note": "The figures are from CEO Goa, press note on the final publication of the electoral roll, and the names left off are the roll before less the draft.",
+    "per_100": 30.7692,
+    "all_per_100": 8.4421,
+    "press": false
+   },
+   {
+    "state": "Madhya Pradesh",
+    "before": 1233,
+    "left_off": 314,
+    "before_kind": "press",
+    "left_off_kind": "press",
+    "source_url": "https://www.jagran.com/madhya-pradesh/bhopal-mp-voter-list-draft-released-4274-lakh-names-removed-40082485.html",
+    "note": "Both counts are as published in Dainik Jagran, 23 December 2025, printing the Chief Electoral Officer's figures at the draft publication.",
+    "per_100": 25.4663,
+    "all_per_100": 7.4455,
+    "press": true
+   },
+   {
+    "state": "Manipur",
+    "before": 300,
+    "left_off": 7,
+    "before_kind": "official",
+    "left_off_kind": "derived",
+    "source_url": "https://ceomanipur.nic.in/Documents/PressNote/2026-2027/PRESS%20NOTE%20SIR%20FINAL%20EROLL%202026.pdf",
+    "note": "The figures are from Chief Electoral Officer, Manipur, press note No. e-Roll-101/6/2025-ELEC-ED of 6 September 2026 on the final roll, and the names left off are the roll before less the draft.",
+    "per_100": 2.3333,
+    "all_per_100": 7.581,
+    "press": false
+   },
+   {
+    "state": "Meghalaya",
+    "before": 7,
+    "left_off": 2,
+    "before_kind": "official",
+    "left_off_kind": "derived",
+    "source_url": "https://meghalaya.gov.in/meghalaya/sites/default/files/press_release/EL_63_2026_29.pdf",
+    "note": "The figures are from Election Department, Government of Meghalaya (Chief Electoral Officer), press note No. EL.63/2026/29 of 5 August 2026 with the SIR status report by constituency, and the names left off are the roll before less the draft.",
+    "per_100": 28.5714,
+    "all_per_100": 7.6778,
+    "press": false
+   },
+   {
+    "state": "Odisha",
+    "before": 3085,
+    "left_off": 310,
+    "before_kind": "press",
+    "left_off_kind": "press",
+    "source_url": "https://www.etvbharat.com/en/state/over-20-lakh-voter-names-deleted-after-completion-of-sir-in-odisha-enn26092107667",
+    "note": "Both counts are as published in ETV Bharat, 21 September 2026, reporting the Chief Electoral Officer's press conference on the final roll.",
+    "per_100": 10.0486,
+    "all_per_100": 6.0257,
+    "press": true
+   },
+   {
+    "state": "Sikkim",
+    "before": 2,
+    "left_off": 0,
+    "before_kind": "official",
+    "left_off_kind": "derived",
+    "source_url": "https://ceo.sikkim.gov.in/UploadedFiles/NewsTender/PRESS%20NOTE.pdf",
+    "note": "The figures are from Chief Electoral Officer, Sikkim, press note on the final roll of 6 September 2026, and the names left off are the roll before less the draft.",
+    "per_100": 0.0,
+    "all_per_100": 8.009,
+    "press": false
+   },
+   {
+    "state": "West Bengal",
+    "before": 1777,
+    "left_off": 375,
+    "before_kind": "official",
+    "left_off_kind": "derived",
+    "source_url": "https://ceowestbengal.wb.gov.in/Downloads/News/Final%20Press%20Note%20CEO-PN-05-2026.pdf",
+    "note": "The roll of 27 October 2025 is from press note PN-05-2026, and the draft is from the Chief Electoral Officer's AC-wise draft table. The names left off are the difference.",
+    "per_100": 21.103,
+    "all_per_100": 7.5954,
+    "press": false
+   }
+  ]
  }
 }

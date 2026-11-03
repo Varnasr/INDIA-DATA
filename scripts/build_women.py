@@ -21,6 +21,13 @@ final roll and tests.
 - After the draft: women's share of the names added and of the names removed
   after the draft, against their share of the draft, where a state published
   both by sex.
+- Third-gender electors: on the roll before the revision and left off the
+  draft, per 100, beside all electors left off per 100, for every state where
+  both counts are published. Read from each state's raw/normal.json, Bihar's
+  phase 1 lists and Format 4B, Delhi's raw/state.csv and, for West Bengal,
+  data/india/raw/third_gender.csv. Each figure says whether it is official,
+  came through the press, or is a difference worked out from two published
+  counts.
 """
 import csv
 import io
@@ -99,13 +106,79 @@ def build():
                  removed_draft=bf['women_share_p1'], roll_before=bf['women_share_before'],
                  removed_after=bf['women_share_removed_after'], added=bf['women_share_added'], draft=bf['women_share_draft'])
 
+    third = build_third(by)
+
     dl = load('delhi', 'summary.json')
     over = [s for s in states if s['gap'] > 0]
     summary = dict(states=len(states), over=len(over), over_1=sum(1 for s in states if s['gap'] >= 1),
                    top=states[0]['state'], top_gap=states[0]['gap'], delhi_w=dl['women_left_per_100'], delhi_m=dl['men_left_per_100'],
                    district_over=sum(d['over'] for d in districts), district_n=sum(d['districts'] for d in districts),
                    uk_acs_over=uk['acs_women_over'], kl_acs_over=kl['acs_women_over'])
-    return dict(summary=summary, states=states, districts=districts, after=after, after_added_only=after_added_only, bihar=bihar)
+    return dict(summary=summary, states=states, districts=districts, after=after, after_added_only=after_added_only, bihar=bihar, third=third)
+
+
+# The states whose own notes say the names left off by sex are the roll before
+# less the draft, so their third-gender count left off is a difference too.
+LEFT_OFF_IS_DIFFERENCE = {'Goa', 'Manipur', 'Meghalaya'}
+
+
+def build_third(by):
+    rows = []
+    for slug in sorted(os.listdir(os.path.join(ROOT, 'data'))):
+        p = os.path.join(ROOT, 'data', slug, 'raw', 'normal.json')
+        if not os.path.exists(p):
+            continue
+        N = json.load(open(p, encoding='utf-8'))
+        F, SRC = N['figures'], {x['id']: x for x in N['sources']}
+        if 'third_before' not in F or not ('third_removed' in F or 'third_draft' in F):
+            continue
+        kind = lambda f: 'press' if f.get('press') else 'official'
+        b = F['third_before']
+        if 'third_removed' in F and N['state'] not in LEFT_OFF_IS_DIFFERENCE:
+            r, rk = F['third_removed']['v'], kind(F['third_removed'])
+            how = 'Both counts are as published in %s.'
+        else:
+            d = F['third_draft']
+            r = b['v'] - d['v']
+            rk = 'derived' if not (b.get('press') or d.get('press')) else 'press'
+            how = 'The figures are from %s, and the names left off are the roll before less the draft.'
+            if 'third_removed' in F:
+                assert F['third_removed']['v'] == r, N['state']
+        rows.append(dict(state=N['state'], before=b['v'], left_off=r, before_kind=kind(b), left_off_kind=rk,
+                         source_url=SRC[b['src']]['url'], note=how % SRC[b['src']]['title']))
+    # Bihar: the draft from Format 4B, the names left off counted from the phase 1 lists
+    rs = load('bihar', 'reasons.json')
+    tl = sum(v['T'] for v in rs['by_sex'].values())
+    fb = list(csv.DictReader(open(os.path.join(ROOT, 'data', 'bihar', 'raw', 'final_roll_format4b.csv'), encoding='utf-8')))
+    td = sum(int(x['draft_third_gender']) for x in fb)
+    rows.append(dict(state='Bihar', before=td + tl, left_off=tl, before_kind='derived', left_off_kind='official', source_url='',
+                     note='The names left off are counted from the phase 1 lists. The roll before is the draft in Format 4B plus those names.'))
+    # Delhi: the Chief Electoral Officer's figures as quoted in the press
+    dc = {x['measure']: x for x in csv.DictReader(open(os.path.join(ROOT, 'data', 'delhi', 'raw', 'state.csv'), encoding='utf-8'))}
+    db, dd = int(dc['roll_before_third_gender']['value']), int(dc['draft_third_gender']['value'])
+    assert db - dd == int(dc['left_off_third_gender']['value'])
+    rows.append(dict(state='Delhi', before=db, left_off=db - dd, before_kind='press', left_off_kind='derived', source_url='',
+                     note="The roll before is the Chief Electoral Officer's figure as the press quoted it, and the draft is from the Chief Electoral Officer's table. The names left off are the difference."))
+    # West Bengal: the press note and the AC-wise draft table
+    for x in csv.DictReader(open(os.path.join(ROOT, 'data', 'india', 'raw', 'third_gender.csv'), encoding='utf-8')):
+        if x['state'] == 'West Bengal':
+            ac = sum(int(a['third']) for a in csv.DictReader(open(os.path.join(ROOT, 'data', 'westbengal', 'raw', 'draft_roll_ac.csv'), encoding='utf-8')))
+            assert int(x['third_draft']) == ac, 'West Bengal draft third gender differs from draft_roll_ac.csv'
+        b, d = int(x['third_before']), int(x['third_draft'])
+        rows.append(dict(state=x['state'], before=b, left_off=b - d, before_kind='official', left_off_kind='derived',
+                         source_url=x['source_url'], note=x['note']))
+    names = [x['state'] for x in rows]
+    assert len(names) == len(set(names)), 'a state twice in the third-gender table'
+    for x in rows:
+        if not 0 <= x['left_off'] <= x['before']:
+            raise SystemExit('FAIL - %s: third-gender names left off outside 0 to the roll' % x['state'])
+        x['per_100'] = round(100 * x['left_off'] / x['before'], 4)
+        x['all_per_100'] = by[x['state']]['per_100']
+        x['press'] = 'press' in (x['before_kind'], x['left_off_kind'])
+    rows.sort(key=lambda x: x['state'])
+    big = [x for x in rows if x['before'] >= 100]
+    return dict(min_roll=100, states=len(rows), big=len(big), higher=sum(1 for x in big if x['per_100'] > x['all_per_100']),
+                press=[x['state'] for x in rows if x['press']], rows=rows)
 
 
 def as_csv(d):
