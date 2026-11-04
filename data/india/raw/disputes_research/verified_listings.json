@@ -1,6 +1,6 @@
 {
  "meta": {
-  "checked": "2026-10-30",
+  "checked": "2026-11-04",
   "by": "second reader",
   "how": "Each source was opened again on 30 October 2026 and put to a separate reader (a fetch of the page answered by a different model, with no sight of the first reading), with a question for every field: the date, what the court gave the date for, the case, the bench, what is due, the author and the time of publication. Its answers were then set against the page text read with curl.",
   "second_reading": "A second reading was done on 30 October 2026 by an independent agent, which opened every source again itself: The Hindu, LawBeat, LiveLaw and Times Now Navbharat with curl (JSON-LD articleBody and page text), and the three LawChakra pages with Firecrawl because LawChakra answered curl with 429. It checked each date and how it is derived, the court, the case and its number, what is due, the disputes entry each listing names in courts.json, and the five translations against the English, and it searched once per matter for a newer listing date. No newer date was found for any of the five."
@@ -12,8 +12,8 @@
    "second_reading": "Confirmed. LawChakra (Firecrawl, 30 October 2026, published 2:41 pm IST): 'heard Writ Petition (Civil) No. 1330 of 2026 on October 26, 2026, and listed it for November 5, 2026', with the notice to the Commission and the refusal to extend the claims date or stop the final roll without hearing the Commission. The Hindu articleBody: 'the court agreed to urgently take up in November 5, a plea challenging the deletion of voters in the Maharashtra SIR'. court-51 is the same matter. Translations agree. A search found no later date, and Business Standard also gives 5 November."
   },
   "list-02": {
-   "status": "confirmed",
-   "note": "LawBeat (Aishwarya Iyer, 28 October 2026, 4:20 pm IST) checked: 'ECI has said it will file a report in two weeks', hearing date 28 October 2026, the plea about electors missing from the draft being asked to file Form 6. The second reader found that LawBeat gives no next hearing date and no case number. The number W.P.(C) No. 1188 of 2026 comes from LiveLaw's report of the application (court-48), and the listing after two weeks from The Indian Express (court-54). So the date is the date the report is due, worked out as 28 October and two weeks, and is rightly approximate. Quote verbatim.",
+   "status": "superseded",
+   "note": "LawBeat (Aishwarya Iyer, 28 October 2026, 4:20 pm IST) checked: 'ECI has said it will file a report in two weeks', hearing date 28 October 2026, the plea about electors missing from the draft being asked to file Form 6. The second reader found that LawBeat gives no next hearing date and no case number. The number W.P.(C) No. 1188 of 2026 comes from LiveLaw's report of the application (court-48), and the listing after two weeks from The Indian Express (court-54). So the date is the date the report is due, worked out as 28 October and two weeks, and is rightly approximate. Quote verbatim. Superseded, 4 November 2026 (second reader): Hindustan Times and The Hindu of 4 November report the Chief Justice saying the matter is listed on 19 November (court-61, list-06). The builder shows only a listing whose status is confirmed or corrected, so this status takes the approximate 11 November off the page and the calendars, and the record stays here.",
    "second_reading": "Confirmed. LawBeat articleBody (published 28 October 2026, 4:20 pm IST): 'ECI has said it will file a report in two weeks.' Hearing Date: October 28, 2026, Case Title: Anjali Bharadwaj vs ECI. 28 October and two weeks is 11 November, rightly approximate. court-54 is the same matter. Translations agree. A search found no later date."
   },
   "list-03": {
@@ -59,6 +59,69 @@
    "status": "confirmed",
    "note": "LawChakra (Sharleen Arora, 26 October 2026, 4:39 pm) checked: the Bombay High Court fixed 1 December 2026 for the petitions challenging exclusions of voters in Maharashtra's revision, the Commission sought deferral relying on a Supreme Court order asking High Courts to keep such proceedings in abeyance, and the Court expressed no view on the merits. The second reader found that LawChakra gives the hearing of 5 October (court-34) as background only and does not say that petition is in the batch listed for 1 December, since the petitioners in the batch were not known when it wrote. court-34 is therefore the related entry and is not shown as the same petition. Quote verbatim.",
    "second_reading": "Confirmed. LawChakra (Sharleen Arora, published 26 October 2026, 5:11 pm IST by the page metadata) carries the quote verbatim and 'Next Date of Hearing: December 1, 2026', the Commission's request for deferral relying on the Supreme Court's order, and 'the Court has expressed no view on the merits'. It gives the 5 October petition of court-34 as background and says the names of the petitioners in the batch were not available, so court-34 is the related entry, as the first reading said. Translations agree. A search found no later date."
+  },
+  "list-06": {
+   "status": "corrected",
+   "t": {
+    "hi": {
+     "court": "सुप्रीम कोर्ट",
+     "matter": "दिल्ली के पुनरीक्षण पर पारदर्शिता के लिए काम करने वाली दो कार्यकर्ताओं की याचिका, W.P.(C) No. 1188 of 2026, और फ़ॉर्म 6 पर आयोग के पत्र को लेकर वह आवेदन जिसे दाखिल करने को उनसे कहा गया।",
+     "due": "मामला सुनवाई के लिए सूचीबद्ध है। 4 नवंबर को अदालत ने तुरंत कोई आदेश देने से इनकार किया और याचिकाकर्ताओं से इस तारीख़ से पहले अपना आवेदन दाखिल करने को कहा।"
+    },
+    "ur": {
+     "court": "سپریم کورٹ",
+     "matter": "دہلی کی نظرثانی پر شفافیت کے لیے کام کرنے والی دو کارکنوں کی درخواست، W.P.(C) No. 1188 of 2026، اور فارم 6 کے بارے میں کمیشن کے خط پر وہ عرضی جو داخل کرنے کو ان سے کہا گیا۔",
+     "due": "معاملہ سماعت کے لیے فہرست میں ہے۔ 4 نومبر کو عدالت نے فوری حکم دینے سے انکار کیا اور درخواست گزاروں سے اس تاریخ سے پہلے اپنی عرضی داخل کرنے کو کہا۔"
+    },
+    "te": {
+     "court": "సుప్రీంకోర్టు",
+     "matter": "ఢిల్లీ సవరణపై పారదర్శకత కోసం పనిచేసే ఇద్దరు కార్యకర్తల పిటిషన్, W.P.(C) No. 1188 of 2026, ఫారం 6పై సంఘం లేఖ గురించి దాఖలు చేయమని వారికి చెప్పిన దరఖాస్తు.",
+     "due": "కేసు విచారణకు జాబితాలో ఉంది. నవంబర్ 4న కోర్టు అత్యవసర ఉత్తర్వులు ఇవ్వడానికి నిరాకరించి, ఈ తేదీకి ముందు దరఖాస్తు దాఖలు చేయమని పిటిషనర్లకు చెప్పింది."
+    },
+    "ta": {
+     "court": "உச்ச நீதிமன்றம்",
+     "matter": "தில்லி திருத்தம் குறித்து வெளிப்படைத்தன்மைக்காகச் செயல்படும் இரண்டு செயற்பாட்டாளர்களின் மனு, W.P.(C) No. 1188 of 2026, மற்றும் படிவம் 6 குறித்த ஆணையத்தின் கடிதம் பற்றித் தாக்கல் செய்யுமாறு அவர்களிடம் கூறப்பட்ட விண்ணப்பம்.",
+     "due": "வழக்கு விசாரணைக்குப் பட்டியலிடப்பட்டுள்ளது. நவம்பர் 4 அன்று நீதிமன்றம் அவசர உத்தரவு பிறப்பிக்க மறுத்து, இந்தத் தேதிக்கு முன் விண்ணப்பத்தைத் தாக்கல் செய்யுமாறு மனுதாரர்களிடம் கூறியது."
+    },
+    "bn": {
+     "court": "সুপ্রিম কোর্ট",
+     "matter": "দিল্লির সংশোধন নিয়ে স্বচ্ছতার জন্য কাজ করা দুই কর্মীর আবেদন, W.P.(C) No. 1188 of 2026, এবং ফর্ম 6 নিয়ে কমিশনের চিঠি সম্পর্কে যে আবেদন দাখিল করতে তাঁদের বলা হয়েছে।",
+     "due": "মামলাটি শুনানির জন্য তালিকাভুক্ত। 4 নভেম্বর আদালত জরুরি কোনো আদেশ দিতে অস্বীকার করে এবং আবেদনকারীদের এই তারিখের আগে তাঁদের আবেদন দাখিল করতে বলে।"
+    }
+   },
+   "note": "Second reading, 4 November 2026 (second reader): Hindustan Times (Abraham Thomas, 4 November 2026, 12:52 pm IST) and The Hindu (The Hindu Bureau, 12:17 pm IST) read in full with curl. Checked: 'The matter is already listed on November 19. We will hear it that day.' (verbatim, the Chief Justice), the refusal of urgent orders, the application the petitioners were told they could file, and the case W.P.(C) No. 1188 of 2026 as in court-54 and court-60. The date is exact. The translations were read against the English: Hindi, Urdu, Telugu and Tamil carry the matter and what is due. Corrected: the Bengali wrote Form 6 and 4 November in Bengali digits, which the builder rejects and the site does not use, and now writes them in Western digits as list-02 does. list-02 is marked superseded."
+  },
+  "list-07": {
+   "status": "corrected",
+   "state": "India",
+   "t": {
+    "hi": {
+     "court": "सुप्रीम कोर्ट",
+     "matter": "मुख्य चुनाव आयुक्त के ख़िलाफ़ 12 अक्टूबर को विपक्ष के मार्च के बाद, सुप्रीम कोर्ट के पास जुलूसों और प्रदर्शनों पर दिशानिर्देशों के लिए वकीलों के एक समूह की याचिका।",
+     "due": "3 नवंबर को अदालत ने मल्लिकार्जुन खड़गे, राहुल गांधी और केंद्र से जवाब माँगा, और केंद्र ने कहा कि वह इस तारीख़ तक जवाब देगा।"
+    },
+    "ur": {
+     "court": "سپریم کورٹ",
+     "matter": "چیف الیکشن کمشنر کے خلاف 12 اکتوبر کو اپوزیشن کے مارچ کے بعد، سپریم کورٹ کے قریب جلوسوں اور مظاہروں پر رہنما اصولوں کے لیے وکلا کے ایک گروپ کی درخواست۔",
+     "due": "3 نومبر کو عدالت نے ملکارجن کھڑگے، راہل گاندھی اور مرکز سے جواب طلب کیا، اور مرکز نے کہا کہ وہ اس تاریخ تک جواب دے گا۔"
+    },
+    "te": {
+     "court": "సుప్రీంకోర్టు",
+     "matter": "ప్రధాన ఎన్నికల కమిషనర్‌కు వ్యతిరేకంగా అక్టోబర్ 12న ప్రతిపక్షం చేసిన మార్చ్ తర్వాత, సుప్రీంకోర్టు సమీపంలో ఊరేగింపులు, నిరసనలపై మార్గదర్శకాల కోసం న్యాయవాదుల బృందం వేసిన పిటిషన్.",
+     "due": "నవంబర్ 3న కోర్టు మల్లికార్జున ఖర్గే, రాహుల్ గాంధీ, కేంద్రం నుంచి సమాధానాలు కోరింది. ఈ తేదీలోగా సమాధానం ఇస్తామని కేంద్రం చెప్పింది."
+    },
+    "ta": {
+     "court": "உச்ச நீதிமன்றம்",
+     "matter": "தலைமைத் தேர்தல் ஆணையருக்கு எதிராக அக்டோபர் 12 அன்று எதிர்க்கட்சிகள் நடத்திய பேரணிக்குப் பின், உச்ச நீதிமன்றம் அருகே ஊர்வலங்கள் மற்றும் போராட்டங்களுக்கான வழிகாட்டுதல்கள் கோரி வழக்கறிஞர்கள் குழு தாக்கல் செய்த மனு.",
+     "due": "நவம்பர் 3 அன்று நீதிமன்றம் மல்லிகார்ஜுன கார்கே, ராகுல் காந்தி மற்றும் மத்திய அரசிடம் பதில் கோரியது. இந்தத் தேதிக்குள் பதில் அளிப்பதாக மத்திய அரசு கூறியது."
+    },
+    "bn": {
+     "court": "সুপ্রিম কোর্ট",
+     "matter": "প্রধান নির্বাচন কমিশনারের বিরুদ্ধে 12 অক্টোবর বিরোধীদের মিছিলের পরে, সুপ্রিম কোর্টের কাছে শোভাযাত্রা ও বিক্ষোভ নিয়ে নির্দেশিকা চেয়ে আইনজীবীদের একটি দলের আবেদন।",
+     "due": "3 নভেম্বর আদালত মল্লিকার্জুন খাড়গে, রাহুল গান্ধী ও কেন্দ্রের কাছে জবাব চায়, এবং কেন্দ্র জানায় এই তারিখের মধ্যে জবাব দেবে।"
+    }
+   },
+   "note": "Second reading, 4 November 2026 (second reader): Hindustan Times (Abraham Thomas, 3 November 2026, 4:15 pm IST) read in full with curl. Checked: the listing for 23 November, replies sought from Kharge, Gandhi and the Centre, and the Solicitor General's statement that the Centre would respond by the next date. The quote is verbatim and is cut before the lead petitioner's name. The translations were read against the English and carry the matter and what is due. Corrected: the Bengali dates 12 October and 3 November were in Bengali digits and are now in Western digits, and the state is now India, as with court-44 and court-62, so the listing goes to the all-India calendar and not to Delhi's."
   }
  }
 }
