@@ -1,6 +1,6 @@
 {
  "meta": {
-  "checked": "2026-11-02",
+  "checked": "2026-11-04",
   "by": "second reader"
  },
  "items": {
@@ -145,6 +145,11 @@
   "up-30": {
    "status": "confirmed",
    "note": "Second reading, 2 November 2026: The Wire (The Wire Staff, post_date 2026-11-01 23:14:40, post_date_gmt 17:44:40) read in full through The Wire's CMS API (posts/detail) with curl, and PTI in ThePrint (datePublished 2026-11-01T13:45:23+05:30) read in full with curl. Checked: the Commission's letter of Saturday 31 October to the Chief Electoral Officer of Uttar Pradesh, the immediate suspension of EROs Mayank Goswami and Hemant Chaudhary, the chargesheets to be sent to the Commission for vetting, no reinstatement without its prior approval, Section 198 of the Bharatiya Nyaya Sanhita (The Wire glosses it as 'public servant disobeying the law with intent to cause injury') added to the existing FIR against the two officers and the computer operator, the cases to be pursued in court, the DEO's report on the rolls of all four constituencies within a week, the action taken report on the operator and five AEROs within three days, the FIR the Commission ordered on 22 October, and the inquiry's 13,779 Form 8 applications from 31 May to 29 August with 10,470 approved and no forms or documents in the office. The quote is verbatim. PTI carries the suspension, the vetting, the bar on reinstatement and Section 198, and not the four constituencies or the five AEROs, as the note says. The operator is named in both reports and is not named here. The item adds the suspensions and Section 198 to up-22 (the FIR), up-27 (the CEO's explanation sought) and up-29 (the login IDs) and repeats none of them. Confirmed, no change."
+  },
+  "up-31": {
+   "status": "corrected",
+   "claim": "Uttar Pradesh's Chief Electoral Officer, Navdeep Rinwa, directed all District Election Officers on 2 November to re-examine every rejected Form 6 application so that eligible people are included in the roll, and said electors missing from the roll should be added by matching the rolls of panchayats with those of Assembly constituencies, Hindustan Times reported. He spoke at a meeting in Meerut at which he and the Commission's Senior Deputy Election Commissioner, Maneesh Garg, reviewed preparations for the 2027 Assembly election in 18 districts of the Meerut, Saharanpur, Moradabad and Aligarh divisions. He repeated the direction to re-examine every Form 6, 7 and 8 entered by computer assistants since the revision ended on 10 April (up-24), asked officers to see that applicants enter their mobile number and full address correctly on Form 6, and asked that operators of public convenience centres be trained in the online Form 6 and prevent multiple entries. Garg asked officers to verify the electors on the lists of absent, shifted, dead and duplicate electors and to pay attention to enrolling young voters and women.",
+   "note": "Second reading, 4 November 2026 (second reader): Hindustan Times (Rajesh Kumar Singh, datePublished 2026-11-03T07:55:20+05:30) read in full from the JSON-LD articleBody with curl. Checked: the direction on Monday 2 November to re-examine all rejected Form 6 applications, the matching of panchayat and Assembly rolls, the review with the Senior Deputy Election Commissioner of 18 districts in four divisions, the re-examination of Forms 6, 7 and 8 submitted by computer assistants since 10 April (which up-24 records from the order of 25 October), mobile numbers and addresses on Form 6, training for operators of public convenience centres, and Garg's instructions on the ASDD lists and on young and women voters. The quote is verbatim. Corrected: the claim now spells the name Maneesh Garg, as the Commission's officers directory and process.json do. Hindustan Times spells it Manish, and the note says so. 'Public service centres' is now 'public convenience centres', the report's words. The section stays errors, as with up-24."
   }
  },
  "tags": {

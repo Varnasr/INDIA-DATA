@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 465,
-  "bytes": 13629825
+  "bytes": 13686652
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 496169,
+   "bytes": 508851,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 64094,
+   "bytes": 66180,
    "keys": [
     "note",
     "entries"
@@ -4245,7 +4245,7 @@
    "path": "data/india/court_listings.csv",
    "description": "The hearings and deadlines ahead in the court cases on the revision, each with the report that gives its date",
    "format": "CSV",
-   "bytes": 3288,
+   "bytes": 4095,
    "columns": [
     "date",
     "date_kind",
@@ -4265,7 +4265,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 265359,
+   "bytes": 280479,
    "columns": [
     "section",
     "date",
@@ -4286,7 +4286,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 438171,
+   "bytes": 461827,
    "keys": [
     "listings",
     "sections",
@@ -4326,7 +4326,7 @@
    "path": "data/india/events.json",
    "description": "Jan Sunwais, marches, protests and press conferences about the revision, with dates and sources",
    "format": "JSON",
-   "bytes": 66511,
+   "bytes": 69301,
    "keys": [
     "checked",
     "scope",
@@ -4536,7 +4536,7 @@
    "path": "data/india/notices.json",
    "description": "Electors kept on a draft roll but sent a notice, by state. The same table as data/india/notices.csv, as JSON",
    "format": "JSON",
-   "bytes": 41016,
+   "bytes": 40702,
    "keys": [
     "states",
     "with_total",
