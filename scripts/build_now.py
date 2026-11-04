@@ -151,6 +151,9 @@ CITE = {
     'c_h_helpline': ('help', 'helpline_drive', ['ECI press release, PIB, 29.10.2025']),
     'c_h_legal': ('help', 'legal_aid', ['Legal Services Authorities Act, 1987, section 12', 'NALSA, Legal Aid page (section 12', 'NALSA home page']),
     'c_bench': ('disputes', 'court-54'),
+    # the Commission's letter of 3 November 2026 on Form 6 from electors who
+    # were on an earlier roll, and section 31 of the 1950 Act
+    'c_form6_clar': ('timeline', '2026-11-03', 'Form 6 for electors who were on the roll before'),
     # the special summary revision of 15 October 2026 in 17 states and union
     # territories, and the forms of the 1960 Rules used outside the revision
     'c_ssr': ('timeline', '2026-10-15', 'A summary revision where the revision is over'),
