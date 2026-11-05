@@ -1343,6 +1343,9 @@ body.embed .emcredit{margin:0;padding:.5rem 1rem 1rem;color:var(--muted);font-si
 .digest li{margin:.35rem 0}
 .digest-past{margin-top:1rem}
 .digest-past summary{cursor:pointer;font-weight:600}
+.digest-folded{padding:.6rem 1rem;margin:1rem 0 1.5rem}
+.digest-folded>details>summary{cursor:pointer;font-weight:600}
+.digest-folded>details[open]>summary{margin-bottom:.5rem}
 
 /* whether the revision still takes claims in a state, on the reader's date
    (sir.js): under the head of every state's overview, and on the help page */

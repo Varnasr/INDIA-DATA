@@ -20,10 +20,24 @@ SIR.json('data/updates.json').then(function (U) {
     };
     var html = '<p class="digest-kicker" id="digest-h">The week in brief</p>' + one(is[0], 'h2');
     if (is.length > 1) html += '<details class="digest-past"><summary>Earlier weeks</summary>' + is.slice(1).map(function (i) { return one(i, 'h3'); }).join('') + '</details>';
+    // an issue is shown in full from the Friday its week ends to the Sunday
+    // after; from the Monday until the next issue it folds to one line below
+    // the newest day's entries, so last week's summary does not sit above
+    // this week's additions
+    var today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+    var last = new Date(is[0].week_ending + 'T00:00:00');
+    last.setDate(last.getDate() + 2);
+    var until = last.getFullYear() + '-' + ('0' + (last.getMonth() + 1)).slice(-2) + '-' + ('0' + last.getDate()).slice(-2);
+    if (today > until) {
+      box.classList.add('digest-folded');
+      html = '<details><summary id="digest-h">The week in brief, ' + SIR.esc(span(is[0].week_start, is[0].week_ending)) + '</summary>' + html.replace(' id="digest-h"', '') + '</details>';
+      var first = document.querySelector('#updates > ul');
+      if (first) first.parentNode.insertBefore(box, first.nextSibling);
+    }
     box.innerHTML = html;
     box.hidden = false;
     var h = location.hash.slice(1), t = h && document.getElementById(h);
-    if (t) { var d = t.closest('details'); if (d) d.open = true; t.scrollIntoView(); }
+    if (t) { for (var d = t.closest('details'); d; d = d.parentNode.closest('details')) d.open = true; t.scrollIntoView(); }
   }).catch(SIR.fail);
   document.getElementById('updates').innerHTML = U.entries.map(function (e) {
     return '<h2 id="d-' + e.date + '">' + fmt(e.date) + '</h2><ul>' + e.items.map(function (it) {
