@@ -1202,6 +1202,8 @@
       p.push(r.ssr === r.ssrOrder
         ? L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. It set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}.', qv)
         : L('The Commission\'s letter of {o} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. A later letter, dated {l}, set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}, as {p} reported it.', qv));
+      // an order known only from the press says whose dates these are
+      if (r.ssr === r.ssrOrder && q.by) p.push(L('These dates are as reported by {o}.', { o: qv.p }));
     }
     // where the dates come from: each step's own label, which names the
     // outlet where the step is a press report
