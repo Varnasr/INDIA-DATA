@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 465,
-  "bytes": 13737004
+  "bytes": 13736913
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 521134,
+   "bytes": 521148,
    "keys": [
     "places",
     "pages",
@@ -4265,7 +4265,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 292289,
+   "bytes": 292327,
    "columns": [
     "section",
     "date",
@@ -4286,7 +4286,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 476423,
+   "bytes": 476280,
    "keys": [
     "listings",
     "sections",
