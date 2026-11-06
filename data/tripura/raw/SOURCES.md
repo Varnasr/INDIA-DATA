@@ -8,9 +8,8 @@ roll 15 February 2027. On 29 October 2026, at the Chief Electoral Officer's
 request of 19 October, it put the revision back again because elections to 21
 urban local bodies are due. Under that letter, as Hindustan Times reported it
 on 30 October 2026, house visits run 26 December 2026 to 25 January 2027, the
-draft is due 1 February 2027, claims and objections run to 2 March 2027,
-notices and claims are to be decided by 1 April 2027 and the final roll is due
-7 April 2027. So there is no roll before (frozen), no draft, no names left off,
+draft is due 1 February 2027, claims and objections run to 2 March 2027 and
+are to be disposed of by 1 April 2027, and the final roll is due 7 April 2027. So there is no roll before (frozen), no draft, no names left off,
 no notices and no final roll to transcribe, at any level.
 
 Searched on 2026-10-06: the CEO's site (ceo.tripura.gov.in and ceotripura.nic.in

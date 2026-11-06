@@ -73,7 +73,11 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/process.js
   fill.claims_lead = fill.claims_fewer === fill.claims_states ? 'All ' + fill.claims_states + ' states that published both counts' : fill.claims_fewer + ' of the ' + fill.claims_states + ' states that published both counts';
   fill.claims_under10 = claims.filter(function (s) { return 100 * s.added_after_draft / s.removed < 10; }).length;
   var docs = P.burdens.map(function (b) {
-    return '<li><b>' + esc(b.title) + '.</b> ' + esc(b.text.replace(/\{(\w+)\}/g, function (m, k) { return fill[k]; })) + ' ' + b.src.map(function (s) { return '<a href="' + esc(s.url) + '" rel="noopener">' + esc(s.name) + '</a>'; }).join(', ') + '.</li>';
+    return '<li><b>' + esc(b.title) + '.</b> ' + esc(b.text.replace(/\{(\w+)\}/g, function (m, k) { return fill[k]; })) + ' ' + b.src.map(function (s) {
+      // a source on How the revision was run points at a section of that page
+      var own = s.url.charAt(0) === '#';
+      return '<a href="' + esc(own ? '../process/' + s.url : s.url) + '" rel="noopener">' + esc(own ? s.name.replace(' on this page', ' on How the revision was run') : s.name) + '</a>';
+    }).join(', ') + '.</li>';
   });
   docs.push('<li><b>In the courts.</b> ' + n(sec('courts')) + ' court orders and cases are listed on <a href="../disputes/">Protests and disputes</a>, each linked to the order or report.</li>');
   document.getElementById('documented').innerHTML = docs.join('');

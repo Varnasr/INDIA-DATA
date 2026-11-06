@@ -54,6 +54,23 @@ short = [s['state'] for s in S if s['split'] == 'short']
 none = [s['state'] for s in S if s['split'] == 'none']
 AD = N['after_draft']
 
+
+MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+
+def _pending():
+    """The states in the revision with no draft roll yet, each with the draft
+    date its latest schedule step sets, from data/india/process.json."""
+    out = []
+    for r in J('india', 'process.json')['schedules']:
+        if any(s['state'] == r['state'] and s['removed'] is not None for s in S):
+            continue
+        d = r['steps'][-1].get('draft')
+        if d:
+            y, m, dd = d.split('-')
+            out.append('%s is to publish its draft on %d %s %s.' % (r['state'], int(dd), MONTHS[int(m) - 1], y))
+    return ''.join(' ' + x for x in out)
+
 # ------------------------------------------------------------ cover
 R.cover('Special Intensive Revision 2025-26', '%s names left off the draft rolls across India' % crore(T['removed']),
         'The reasons recorded for the names left off in each state, whose names were left off by sex where states published it, and what goes with the rate of exclusion',
@@ -93,8 +110,8 @@ R.h2('In numbers')
 R.stats([(crore(T['removed']), 'left off the draft rolls'), (pct(T['shares']['shifted_absent_other']), 'shifted, absent or other'),
          (pct(T['shares']['dead']), 'dead'), ('%.1f' % T['per_100'], 'left off per 100 electors')])
 R.p('The Special Intensive Revision is a fresh check of every name on the electoral rolls, and it has been carried out in three phases. Bihar came first, in 2025, then twelve states and union territories ordered in October 2025, with house visits from November, and eighteen more in 2026. '
-    'In the %d that have published a draft roll, %s electors on the rolls before the revision were not carried onto it. That is %.1f for every 100. Tripura, the last, is reported to publish its draft in December.'
-    % (T['states'], indian(T['removed']), T['per_100']))
+    'In the %d that have published a draft roll, %s electors on the rolls before the revision were not carried onto it. That is %.1f for every 100.%s'
+    % (T['states'], indian(T['removed']), T['per_100'], _pending()))
 R.p('Every state' + (' but %s' % andj(none) if none else '') + ' gave a reason for most of the names it left off. Of the %s names split by reason, %s (%s) were entered as dead, %s (%s) as shifted, absent or other, and %s (%s) as enrolled more than once. '
     'Deaths are about one in five. The other four in five rest on an officer\'s entry that the elector was not where the roll placed them, or was on it twice.'
     % (crore(T['dead'] + T['shifted_absent_other'] + T['duplicate']), crore(T['dead']), pct(T['shares']['dead']), crore(T['shifted_absent_other']), pct(T['shares']['shifted_absent_other']),
