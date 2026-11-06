@@ -1105,7 +1105,7 @@
   "margin_2022": "The 2022 winning margin in votes.",
   "district_left_off_per_100": "Names left off the district's draft roll per 100 electors on its roll of 27 October 2025.",
   "left_off_spread_by_electors": "The district's names left off times the constituency's share of the district's 2022 electors. An estimate, not a count.",
-  "spread_over_margin": "1 if the spread figure is larger than the 2022 margin, else 0. It says the names left off were large enough to decide the seat, never that they did."
+  "spread_over_margin": "1 if the spread figure is larger than the 2022 margin, else 0. It says the names left off were large enough to have decided the seat. It does not show that they did."
  },
  "data/uttarakhand/raw/ac_draft_asdd.csv": {
   "level": "ac for a constituency, district for a district total, state for the grand total, as the table prints them.",
@@ -1214,7 +1214,7 @@
   "runner_up_2024": "The runner-up's party in 2024.",
   "margin_2024": "The winner's votes less the runner-up's in 2024.",
   "turnout_2024": "Votes polled as a share of electors in 2024.",
-  "left_off_over_margin": "True when more names were left off than the 2024 margin. That makes them large enough to decide the seat, never that they did.",
+  "left_off_over_margin": "True when more names were left off than the 2024 margin. That makes them large enough to have decided the seat. It does not show that they did.",
   "left_off_at_turnout_over_margin": "True when the names left off, scaled down by the seat's 2024 turnout, exceed the margin.",
   "per_100_less_district": "The constituency's names left off per 100 less its district's."
  },

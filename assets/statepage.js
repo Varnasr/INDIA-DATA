@@ -60,7 +60,7 @@
       VIZ.scatter('vMargin', { label: 'The ' + s.what + ' in each constituency against its ' + s.year + ' winning margin', diag: true, xMin: 0, yMin: 0,
         xAxis: s.year + ' winning margin', yAxis: s.what.charAt(0).toUpperCase() + s.what.slice(1), diagLabel: 'equal to the margin',
         points: A.filter(function (a) { return a.margin != null; }).map(function (a) { return { x: a.margin, y: Math.max(s.c(a), 0), tok: s.c(a) > a.margin ? '--fill-red' : '--fill-navy', label: a.name + ' (' + a.winner + '): ' + n(s.c(a)) + ', margin ' + n(a.margin) }; }) });
-      document.getElementById('fMargin').innerHTML = '<b>In ' + over.length + ' of ' + A.length + ' constituencies the ' + s.what + ' ' + (s.are || 'is') + ' larger than the ' + s.year + ' winning margin.</b> Larger than the margin means large enough to decide a seat, never that it did, and the figures cannot show how anyone would have voted.';
+      document.getElementById('fMargin').innerHTML = '<b>In ' + over.length + ' of ' + A.length + ' constituencies the ' + s.what + ' ' + (s.are || 'is') + ' larger than the ' + s.year + ' winning margin.</b> Larger than the margin means large enough to have decided a seat. The figures do not show that it did, and the lists do not say how anyone would have voted.';
       SIR.table(document.getElementById('tSeats'), [{ k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', left: true }, { k: 'district', label: 'District', left: true }, { k: '_c', label: 'Count', fmt: n }, { k: 'winner', label: 'Won ' + s.year, left: true }, { k: 'margin', label: 'Margin', fmt: n }],
         A.map(function (a) { return { ac: a.ac, name: a.name, district: a.district, _c: s.c(a), winner: a.winner || '', margin: a.margin }; }), { sort: '_c' });
       SIR.tools();

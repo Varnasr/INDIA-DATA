@@ -93,7 +93,7 @@ PUBLISHED = {
     'data/uttarpradesh/districts.csv': ('Every Uttar Pradesh district, with names left off by reason', 'district',
                                         'The Chief Electoral Officer\'s table as published in the press.'),
     'data/uttarpradesh/seats.csv': ('Every Uttar Pradesh constituency, with its district\'s names left off spread by 2022 electors against the 2022 margin', 'constituency',
-                                    'No count by constituency has been published. The spread is an estimate that gives how many seats, never which.'),
+                                    'No count by constituency has been published. The spread is an estimate of how many seats are over the margin. It cannot say which ones.'),
     'data/delhi/constituencies.csv': ('Every Delhi constituency, with forms not collected and the 2025 margin', 'constituency',
                                       'Reasons and sex are published for the state only.'),
     'data/delhi/districts.csv': ('Every Delhi district', 'district', ''),
