@@ -1,6 +1,7 @@
 {
  "about": "The site's own wording for the panels on the reading page. claims.json holds each quotation verbatim with the first reading's notes, verified.json the second reading's verdict and corrections. This file holds only what the page says around a quotation: what it rests on (rests), the site's own figures (site) and where those figures stop (stops), plus a short role, an introduction and the strongest points and overreach for each person, reworded into the site's writing rules. 'uses' lists figures the text quotes, each checked against the published file by scripts/build_panels.py.",
  "order": [
+  "praveen-chakravarty",
   "prannoy-roy",
   "indian-express",
   "ravish-kumar",
@@ -2384,6 +2385,160 @@
     },
     "7": {}
    }
+  },
+  "praveen-chakravarty": {
+   "name": "Praveen Chakravarty",
+   "role": "Member of Parliament and chairperson of the data analytics department of the Indian National Congress.",
+   "intro": "The quotations are from his column in The Indian Express of 6 November 2026 and his post on X of the same morning. The post carries his table for 14 states, which the column does not print. He sets UIDAI's count of adults with Aadhaar in each state against its roll after the revision and calls the difference missing voters. He takes up the exchange in the same paper between Surjit Bhalla and Jean Drèze and Yogendra Yadav, whose columns have panels on this page.",
+   "claims": {
+    "0": {
+     "rests": "It rests on UIDAI's saturation report of 30 June 2026 as his table cites it. His table calls the figure projected live Aadhaar holders aged 18 and above, and takes the share aged 18 and above from UIDAI's age tables of 31 July 2023.",
+     "site": "UIDAI's report gives Uttar Pradesh 24,23,25,590 Aadhaar numbers assigned and an estimated 22,64,15,488 live, against a projected population of 24,28,59,000. His 16.26 crore is 71.8 per cent of the live estimate. The Technical Group's projection of Uttar Pradesh's adults in 2026, used on the All India page, is 16,16,85,000, within 1 per cent of his figure. His 13.4 crore is the final roll of 10 April 2026, 13,39,84,792.",
+     "stops": "UIDAI's report says its live count is the numbers assigned adjusted for deaths estimated from the Registrar General's death rates, and that each holder is counted at the address on the Aadhaar record. It is an estimate, and the age tables of 2023 behind his share of adults are not at hand.",
+     "uses": [
+      [
+       "data/india/states.json",
+       "133984792"
+      ],
+      [
+       "data/india/states.json",
+       "161685000"
+      ]
+     ]
+    },
+    "1": {
+     "kind": "A claim about the Aadhaar count",
+     "rests": "It rests on Aadhaar's biometric enrolment, which he says keeps one person from holding two numbers.",
+     "site": "In a written answer in the Lok Sabha on 4 February 2026 the Minister of State for Electronics and Information Technology gave about 134 crore live Aadhaar holders and said that more than 2.5 crore Aadhaar numbers of people who had died had been deactivated. The answer adds that the state in a holder's Aadhaar address may differ from the state where the death was registered. UIDAI said on 26 November 2025 that it takes death records from the Registrar General of India, the states, the Public Distribution System and the National Social Assistance Programme among others, and that in 25 states and union territories a family can report a death through the myAadhaar portal, after which UIDAI checks the report and decides whether to deactivate the number. Its saturation report of 30 June 2026 gives 1,44,80,05,767 numbers assigned and an estimated 1,34,76,52,046 live, against a projected population of 1,42,46,96,577. In Kerala it estimates 3,80,24,123 live holders against a projected population of 3,62,07,000.",
+     "stops": "A death that no record reports leaves that number active, and the live count allows for such deaths only by estimate. Neither UIDAI source says how many holders have moved or live abroad, and neither counts the adults who live in a state.",
+     "uses": []
+    },
+    "2": {
+     "rests": "It rests on his table, which sets his count of adults with Aadhaar against the electors after the revision in 14 states, 72,38,65,341 against 63,32,96,548, and gives the difference as 12.5 per cent.",
+     "site": "His electors equal the final rolls for Goa, Punjab, Uttarakhand, Uttar Pradesh, Kerala, Gujarat, Odisha and Tamil Nadu, and agree to rounding for Chhattisgarh, Madhya Pradesh, Rajasthan and Bihar (7,42,00,000 against 7,41,92,357). For Karnataka he gives 4,55,00,011, the total The Hindu and ETV Bharat reported, which is 44,322 above the 4,54,55,689 general electors on the final roll and about the number of service electors the Chief Electoral Officer gave at the draft. For West Bengal he gives 6,77,40,000. The Chief Electoral Officer's final roll of 28 February 2026 holds 6,44,52,609. Business Standard reported on 20 July 2026 an electorate after adjudication of about 67.74 million, which is the final roll with the 60,06,675 names then held for adjudication, less the 27,16,393 later found not eligible. The roll the 2026 election was held on held 6,82,51,008. With the final roll of 6,44,52,609, the difference between his two counts for West Bengal is 1,44,90,626, or 18.4 per cent of his Aadhaar adults, where he gives 14.2 per cent. The 14 final rolls hold 62,99,59,100 names.",
+     "stops": "The difference between the two counts mixes names wrongly left off with adults never enrolled and holders counted at an old address. It also rests on UIDAI's estimate of how many holders have died while their numbers stay active. Neither count can separate these.",
+     "uses": [
+      [
+       "data/india/states.json",
+       "74192357"
+      ],
+      [
+       "data/india/states.json",
+       "45455689"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "64452609"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "6006675"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "2716393"
+      ],
+      [
+       "data/westbengal/summary.json",
+       "68251008"
+      ]
+     ]
+    },
+    "3": {
+     "rests": "It rests on his table, the difference between the two counts as a share of his Aadhaar adults in each state.",
+     "site": "The All India page sets the final rolls against the Technical Group's projection of adults in 2026. On that measure Uttar Pradesh's final roll is 17.1 per cent short, Punjab's 16.8, Uttarakhand's 18.9, Tamil Nadu's 5.8 and Odisha's 3.7. The projection has no figure for Goa. In total the two denominators are close. For the 13 states with a projection his Aadhaar adults come to 72,25,34,844 and the projected adults to 71,89,83,000, and the final rolls are 12.5 per cent short of the projection. State by state they part. In Kerala his count is 3,10,11,680 against 2,77,40,000 projected adults, so the final roll of 2,69,53,644 is 13.1 per cent short on his count and 2.8 per cent on the projection. In Gujarat his count of 5,01,99,726 is the lower one, and the final roll of 4,40,30,725 is 12.3 per cent short on his count and 17.4 per cent against 5,33,01,000 projected adults.",
+     "stops": "A projection counts residents and an Aadhaar count counts holders at their recorded address. Neither counts citizens, and neither says how many adults chose not to enrol.",
+     "uses": [
+      [
+       "data/india/states.json",
+       "24152000"
+      ],
+      [
+       "data/india/states.json",
+       "8822000"
+      ],
+      [
+       "data/india/states.json",
+       "27740000"
+      ],
+      [
+       "data/india/states.json",
+       "26953644"
+      ],
+      [
+       "data/india/states.json",
+       "53301000"
+      ],
+      [
+       "data/india/states.json",
+       "44030725"
+      ]
+     ]
+    },
+    "4": {
+     "kind": "An argument about migration",
+     "rests": "It rests on his table, in which no state has more electors than adults with Aadhaar.",
+     "site": "UIDAI's report counts each holder at the current address on the Aadhaar record and says the holder may or may not be domiciled in that state. A worker who has moved and kept a home address on Aadhaar is counted in the home state. Before the revision Karnataka's roll held 106.8 per cent of projected adults, Tamil Nadu's 106.5 and Gujarat's 95.4. In Bihar the final roll is 10.6 per cent short of projected adults, against his 8.3 per cent.",
+     "stops": "Neither count records where a person lives and works, so neither can show how much of the difference is migration.",
+     "uses": [
+      [
+       "data/india/states.json",
+       "106.8"
+      ],
+      [
+       "data/india/states.json",
+       "106.5"
+      ],
+      [
+       "data/india/states.json",
+       "83027000"
+      ],
+      [
+       "data/india/states.json",
+       "74192357"
+      ]
+     ]
+    },
+    "5": {
+     "rests": "It rests on the order of the states in his table and the dates of the next Assembly elections.",
+     "site": "Against projected adults the final rolls are 18.9 per cent short in Uttarakhand, 17.1 per cent in Uttar Pradesh and 16.8 per cent in Punjab. Gujarat's is 17.4 per cent short and West Bengal's 16.3 per cent. The projection has no figure for Goa.",
+     "stops": "The rolls record names and the reasons officers gave. They cannot show the purpose of the revision or of any officer's decision.",
+     "uses": [
+      [
+       "data/india/states.json",
+       "8822000"
+      ],
+      [
+       "data/india/states.json",
+       "161685000"
+      ],
+      [
+       "data/india/states.json",
+       "24152000"
+      ],
+      [
+       "data/india/states.json",
+       "53301000"
+      ],
+      [
+       "data/india/states.json",
+       "77030000"
+      ]
+     ]
+    }
+   },
+   "strongest": [
+    "His electors equal the official final rolls for 12 of the 14 states, exactly or to rounding.",
+    "Against the Technical Group's projection used on the All India page, the final rolls of the 13 states with a projection hold 12.5 per cent fewer names than projected adults, the same share as the difference he finds on Aadhaar.",
+    "He says some of the 16.3 crore adults with Aadhaar in Uttar Pradesh may have died, may be living abroad or are foreign citizens, and gives Uttar Pradesh's difference as a range of 2.5 to 3 crore after allowing for every exception."
+   ],
+   "further": [
+    "He calls the whole difference missing voters. It can include adults never enrolled and holders counted at an old address, and it rests on UIDAI's estimate of how many holders have died while their numbers stay active.",
+    "UIDAI's live count is an estimate, the numbers assigned less deaths estimated from death rates, and his share of adults comes from tables of 2023. His count is therefore an estimate too, made in a different way from the Technical Group's projection that he sets aside as one. The projection starts from the 2011 census and counts residents.",
+    "His West Bengal electors, 6,77,40,000, match the electorate after adjudication as Business Standard reported it. The Chief Electoral Officer's final roll holds 6,44,52,609, which would put the difference for West Bengal at 18.4 per cent.",
+    "In Kerala his count of adults with Aadhaar is 12 per cent above the projected adults, and the order of states in his table changes with the denominator.",
+    "Asking why the states that vote next come first is a claim about purpose, which the rolls cannot show."
+   ]
   }
  }
 }
