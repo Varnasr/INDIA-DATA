@@ -29,7 +29,7 @@
   </div>
 
   <h2 id="uttarakhand-names-added-and-removed">Uttarakhand, names added and deleted</h2>
-  <p class="sub">Uttarakhand is the one state that published, for each constituency, how many names were added after the draft and how many were deleted. A dot above the line is a constituency that deleted more than it added.</p>
+  <p class="sub">Of the four states in the table below, Uttarakhand is the one that published, for each constituency, how many names were added after the draft and how many were deleted. Bihar published the same counts for each of its 243 constituencies, and each Bihar constituency's page gives them. The finder at the top of this page opens any of them. A dot above the line is a constituency that deleted more than it added.</p>
   <div class="grid">
     <div class="panel wide" id="pUk"><div class="vizbox" id="vUk"></div><p id="nUk"></p></div>
   </div>
@@ -74,7 +74,7 @@ Promise.all([SIR.json('data/india/ac_change.json'), SIR.json('data/india/ac_find
     'Tamil Nadu left ' + lk(tn.left_off) + ' names off its draft roll. Its final roll grew from the draft in all ' + tn.acs + ' constituencies, and stayed below the roll before the revision in all ' + tn.below_earlier + '.',
     'Kerala\'s final roll grew from the draft in all ' + kl.acs + ' constituencies, and stayed below the January 2025 roll in ' + kl.below_earlier + ' of them.',
     'West Bengal\'s roll at the 2026 nominations was smaller than its draft in ' + wb.fell + ' of ' + wb.acs + ' constituencies, and smaller than the 2024 Lok Sabha roll in all ' + wb.below_earlier + '.',
-    'Uttarakhand is the one state with names added and deleted after the draft, constituency by constituency. It added ' + n(uk.added) + ' and deleted ' + n(uk.removed) + ', and its final roll was smaller than the draft in ' + uk.fell + ' of ' + uk.acs + ' constituencies.'
+    'Of these four states, Uttarakhand is the one with names added and deleted after the draft, constituency by constituency. It added ' + n(uk.added) + ' and deleted ' + n(uk.removed) + ', and its final roll was smaller than the draft in ' + uk.fell + ' of ' + uk.acs + ' constituencies.'
   ], 'The change from the draft to a later roll is a net figure everywhere but Uttarakhand. It counts new voters as well as names put back, so it cannot say how many of those left off came back.');
 
   document.getElementById('kpis').innerHTML = [
