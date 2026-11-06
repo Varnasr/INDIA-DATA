@@ -12,7 +12,7 @@ Promise.all([SIR.json('data/india/ac_change.json'), SIR.json('data/india/ac_find
     'Tamil Nadu left ' + lk(tn.left_off) + ' names off its draft roll. Its final roll grew from the draft in all ' + tn.acs + ' constituencies, and stayed below the roll before the revision in all ' + tn.below_earlier + '.',
     'Kerala\'s final roll grew from the draft in all ' + kl.acs + ' constituencies, and stayed below the January 2025 roll in ' + kl.below_earlier + ' of them.',
     'West Bengal\'s roll at the 2026 nominations was smaller than its draft in ' + wb.fell + ' of ' + wb.acs + ' constituencies, and smaller than the 2024 Lok Sabha roll in all ' + wb.below_earlier + '.',
-    'Uttarakhand is the one state with names added and deleted after the draft, constituency by constituency. It added ' + n(uk.added) + ' and deleted ' + n(uk.removed) + ', and its final roll was smaller than the draft in ' + uk.fell + ' of ' + uk.acs + ' constituencies.'
+    'Of these four states, Uttarakhand is the one with names added and deleted after the draft, constituency by constituency. It added ' + n(uk.added) + ' and deleted ' + n(uk.removed) + ', and its final roll was smaller than the draft in ' + uk.fell + ' of ' + uk.acs + ' constituencies.'
   ], 'The change from the draft to a later roll is a net figure everywhere but Uttarakhand. It counts new voters as well as names put back, so it cannot say how many of those left off came back.');
 
   document.getElementById('kpis').innerHTML = [

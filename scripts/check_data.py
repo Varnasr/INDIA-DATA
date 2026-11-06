@@ -661,7 +661,10 @@ def _now():
     X = json.load(open(os.path.join(ROOT, 'data', 'india', 'now.json'), encoding='utf-8'))
     sched = {x['state'] for x in P['schedules']}
     js = open(os.path.join(ROOT, 'assets', 'now.js'), encoding='utf-8').read()
-    named = set(re.findall(r"\bc_[A-Za-z0-9_]+", js)) | {pg['bench'] for pg in X['pages'].values() if pg.get('bench')}
+    # a page's own sources: the Delhi bench, and the steps one state carries
+    # (Delhi's Form 7, Goa's Form 8), named in build_now.PAGES
+    own = lambda pg: ([pg['bench']] if pg.get('bench') else []) + list(pg.get('form7') or []) + ([pg['form8']] if pg.get('form8') else [])
+    named = set(re.findall(r"\bc_[A-Za-z0-9_]+", js)) | {k for pg in X['pages'].values() for k in own(pg)}
     for k in sorted(named):
         assert k in X['cite'], 'assets/now.js names the source %s, which data/india/now.json does not hold' % k
         assert X['cite'][k]['items'] and all(i['url'].startswith('https://') for i in X['cite'][k]['items']), 'source %s has no document with an address' % k

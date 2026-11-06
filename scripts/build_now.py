@@ -45,7 +45,7 @@ MONTHS = 'January February March April May June July August September October No
 PAGES = [
     {'state': 'Delhi', 'place': 'dl', 'path': 'delhi/now/',
      'ceo': [['site', 'https://ceodelhi.gov.in/'], ['x', 'https://x.com/CeodelhiOffice']],
-     'bench': 'c_bench', 'split': True},
+     'bench': 'c_bench', 'split': True, 'form7': ['c_dl_form7', 'c_dl_form7_verify']},
     {'state': 'Maharashtra', 'place': 'mh', 'path': 'maharashtra/now/',
      'ceo': [['site', 'https://ceoelection.maharashtra.gov.in/']]},
     {'state': 'Jharkhand', 'place': 'jh', 'path': 'jharkhand/now/', 'ceo': []},
@@ -91,7 +91,7 @@ PAGES = [
     {'state': 'Puducherry', 'place': 'py', 'path': 'puducherry/now/',
      'ceo': [['site', 'https://ceopuducherry.py.gov.in/'], ['x', 'https://x.com/ceopuducherry']]},
     {'state': 'Goa', 'place': 'ga', 'path': 'goa/now/',
-     'ceo': [['site', 'https://ceogoa.nic.in/']]},
+     'ceo': [['site', 'https://ceogoa.nic.in/']], 'form8': 'c_goa_form8'},
     {'state': 'Andaman and Nicobar Islands', 'place': 'an', 'path': 'andaman/now/', 'ceo': []},
     {'state': 'Lakshadweep', 'place': 'ld', 'path': 'lakshadweep/now/',
      'ceo': [['site', 'https://ceolakshadweep.gov.in/']]},
@@ -163,6 +163,15 @@ CITE = {
     # West Bengal: appeals against the judicial officers' orders go to tribunals
     'c_wb_tribunal': ('disputes', 'court-18'),
     'c_wb_pending': ('disputes', 'court-20'),
+    # Goa: the Bombay High Court at Goa's judgment of 5 November 2026 in one
+    # family's petition, that Form 8 for a move within the constituency is to
+    # be decided while a revision is under way (paras 27, 29, 44 and 45)
+    'c_goa_form8': ('disputes', 'court-63'),
+    # Delhi: the Commission's directive of 9 October on false Form 7
+    # complaints, as The Hindu quotes it, and the North East Delhi District
+    # Election Officer on verifying every Form 7 in Mustafabad
+    'c_dl_form7': ('disputes', 'form7-60'),
+    'c_dl_form7_verify': ('disputes', 'form7-58'),
 }
 
 
@@ -270,6 +279,7 @@ def build():
             notices = {'n': nr['notices'], 'date': nr['date'], 'kind': nr['kind'], 'url': nr['source_url'], 'rounded': bool(nr.get('rounded')),
                        'no_mapping': nr.get('no_mapping'), 'discrepancy': nr.get('discrepancy'),
                        'lists_url': nr.get('lists_source') or (nr['source_url'] if nr.get('lists_same_source') else None),
+                       'lists_date': nr.get('lists_date'),
                        'hearings': latest(nr.get('series', []), 'hearings_held'),
                        'deleted': latest(nr.get('series', []), 'deleted_after_notice')}
         page = {'path': row['path'], 'overview': pl['pages'][0][0], 'label': pl['label'], 'phase': sched[name]['phase'],
@@ -277,6 +287,12 @@ def build():
                 'notices': notices}
         if row.get('tribunal'):
             page['tribunal'] = True
+        for k in ('form7', 'form8'):
+            if row.get(k):
+                for key in (row[k] if isinstance(row[k], list) else [row[k]]):
+                    if key not in CITE:
+                        raise SystemExit('FAIL - %s: its %s source %r is not in CITE' % (name, k, key))
+                page[k] = row[k]
         if row.get('bench'):
             if row['bench'] not in CITE:
                 raise SystemExit('FAIL - %s: its bench %r is not a source in CITE' % (name, row['bench']))

@@ -33,7 +33,9 @@
         li.push('<li><a href="' + E(it.url) + '" rel="noopener">' + E(it.name) + '</a>' +
           (it.quote ? '<blockquote>' + E(it.quote) + '</blockquote>' : '') + '</li>');
       });
-      if (c.disputes) li.push('<li lang="' + E(L.lang) + '" dir="auto"><a href="' + root + E(c.disputes) + '">' + L('The hearing, on the protests and disputes page') + '</a></li>');
+      // the bench's remarks were made at a hearing; any other item is an
+      // order, a judgment or a report
+      if (c.disputes) li.push('<li lang="' + E(L.lang) + '" dir="auto"><a href="' + root + E(c.disputes) + '">' + (k === 'c_bench' ? L('The hearing, on the protests and disputes page') : L('The entry on the protests and disputes page')) + '</a></li>');
     });
     (extra || []).forEach(function (it) { li.push('<li><a href="' + E(it.url) + '" rel="noopener">' + E(it.name) + '</a></li>'); });
     return li.length ? '<details class="hsrc"><summary>' + L('Where this comes from') + '</summary><ul lang="en" dir="ltr">' + li.join('') + '</ul></details>' : '';
@@ -95,6 +97,18 @@
         p(L('A person who has never been on the roll applies on Form 6, the application to be added to the roll. During the revision it goes with the same declaration.')), ['c_h_get_form6', decl]));
       out.push(sec('objecting-to-a-name', L('To object to a name on the roll'),
         p(L('Form 7 is the form for objecting to a name on the roll, or to a name proposed to be added. No entry can be deleted from the draft without an inquiry and a fair and reasonable chance for the person to be heard, and the registration officer has to pass a written order with reasons.')), ['c_h_form7']));
+      // Delhi: what the Commission's directive of 9 October and the North
+      // East Delhi District Election Officer said of Form 7, as The Hindu
+      // reported them
+      if (pg.form7 && C[pg.form7[0]] && C[pg.form7[1]]) {
+        var f7 = C[pg.form7[0]], f7v = C[pg.form7[1]];
+        out.push('<h3 id="a-form-7-against-you-or-in-your-name">' + L('If a Form 7 has been filed against your name, or in your name') + '</h3>' +
+          p(L('If someone has objected to your name on Form 7, you should get a notice with the date, time and place of the hearing. Take your documents, and ask for the registration officer\'s decision in writing, because an appeal needs it.')) +
+          p(L('The Commission\'s directive of 9 October 2026, as The Hindu quoted it on {d}, says that a registration officer who finds a Form 7 complaint false or fabricated shall act under the Representation of the People Act against an applicant who knowingly made a false statement in it. The paper reports that the same directive capped at ten the Form 7 applications one elector may file in the whole period of claims and objections.', { d: D(f7.date) })) +
+          p(L('In Mustafabad, the office of the North East Delhi District Election Officer said on {d} that election officers would visit every elector against whom a Form 7 had been filed, to check the claim before any name is deleted, and that it would act under the rules against objectors whose claims were found false or mischievous, as The Hindu reported.', { d: D(f7v.date) })) +
+          p(L('The Hindu counted the Form 7 applications in Mustafabad from the Chief Electoral Officer\'s public list of applications. It reported on {d} that 20 people registered with the Commission as the BJP\'s booth level agents were named as objectors in 787 of the 1,021 applications filed there, and that 16 of the 20 said they had not filed or signed any of the forms. One of them said the registration officer\'s office had called him on 3 November about the objections.', { d: D(f7.date) })) +
+          src(['c_h_hearing', 'c_h_form7', 'c_h_appeal', pg.form7[0], pg.form7[1]]));
+      }
       out.push(sec('correcting-an-entry', L('To correct an entry, or after a move'),
         p(L('Form 8 is for a mistake in your own entry and for a change of address within the state.')) +
         (decl === 'c_decl_III' ? p(L('Under the Commission\'s letter of {d}, anyone moving in from another state files Form 8 with the same declaration.', { d: D(C.c_decl_III.date) })) : ''),
@@ -170,8 +184,9 @@
           // a later letter that moved this state's dates is cited beside the
           // order, and an order known from the press is cited by its reports
           moved || press ? r.ssr.src.map(function (x) { return { name: x.name, url: x.url }; }) : null));
-        ssrShort = ssrStage === 'open' ? L('In the special summary revision, claims and objections in {s} are open until {c}.', sv)
-          : L('The Commission has ordered a special summary revision of the roll in {s}.', sv) + ' ' + ssrNow;
+        ssrShort = (ssrStage === 'open' ? L('In the special summary revision, claims and objections in {s} are open until {c}.', sv)
+          : L('The Commission has ordered a special summary revision of the roll in {s}.', sv) + ' ' + ssrNow) +
+          (q.by ? ' ' + L('These dates are as reported by {o}.', { o: E(q.by) }) : '');
       }
       out.push(sec('appealing-a-decision', L('Appealing a decision'),
         p(L('If the registration officer\'s decision on your name goes against you, you can appeal to the District Magistrate under section 24(a) of the Representation of the People Act, 1950, read with rule 27 of the Registration of Electors Rules, 1960. The note of Goa\'s Chief Electoral Officer on that state\'s final roll, of {g}, gives 15 days from the registration officer\'s decision for this first appeal.', { g: D(goa.date) })) +
@@ -228,6 +243,21 @@
       short = [L('No draft roll of the revision in {s} is on record yet.', { s: s })];
     }
 
+    // Goa: the High Court's judgment of 5 November 2026 on Form 8 during a
+    // revision, given in one family's case (the disputes page, court-63)
+    if (pg.form8 && C[pg.form8]) {
+      var g8 = C[pg.form8];
+      out.push(sec('if-you-moved-house', L('If you moved house within your constituency'),
+        p(L('On {d} the Bombay High Court at Goa held that section 22 of the Representation of the People Act, 1950 and rule 13 of the Registration of Electors Rules, 1960, under which an elector who has moved within a constituency asks on Form 8 for the entry to be shifted, stay in force while a revision of the roll is under way, whether the revision is intensive or summary. It held that a registration officer who receives Form 8 is bound to decide it.', { d: D(g8.date) })) +
+        p(L('The court held that an elector who had moved within the same constituency and filed Form 8 was not a new voter, and that the Form 8 could not be rejected on the ground that the elector should file Form 6 as a new voter. It also held that the registration officer had to give the elector a hearing before rejecting the Form 8.')) +
+        p(L('This is a judgment of the High Court, given in the case of one family. It binds registration officers in Maharashtra, Goa, and Dadra and Nagar Haveli and Daman and Diu, which the Bombay High Court covers. In other states an elector can cite it, and registration officers there are not bound by it. The Election Commission asked the court to stay it for at least two weeks so that it could challenge the judgment in the Supreme Court, and the court refused.')),
+        [pg.form8]));
+      short.push(L('On {d} the Bombay High Court at Goa held, in one family\'s case, that a registration officer must decide a Form 8 filed by an elector who moved within the constituency while a revision is under way, and cannot reject it because Form 6 should have been filed.', { d: D(g8.date) }));
+    }
+    if (pg.form7 && C[pg.form7[0]] && kind === 'open') {
+      short.push(L('The Commission\'s directive of 9 October 2026, as The Hindu quotes it, says that a registration officer who finds a Form 7 complaint false or fabricated shall act against the applicant.'));
+    }
+
     // the state's own figures
     var nt = pg.notices, fig = '';
     if (nt) {
@@ -239,8 +269,8 @@
       var lists = { url: nt.lists_url, kind: nt.lists_url === nt.url ? nt.kind : 'press' };
       fig += '<div class="twrap" tabindex="0" role="region" aria-label="' + E(L('Notices in {s}', { s: name })) + '"><table><thead><tr><th scope="col" class="l">' + L('Notices in {s}', { s: s }) + '</th><th scope="col">' + L('Count') + '</th><th scope="col" class="l">' + L('As of') + '</th><th scope="col" class="l">' + L('Source') + '</th></tr></thead><tbody>' +
         row(L('Notices sent'), nt, nt.n, nt.date) +
-        row(L('On the no-mapping list'), lists, nt.no_mapping, nt.lists_url === nt.url ? nt.date : null) +
-        row(L('On the logical discrepancy list'), lists, nt.discrepancy, nt.lists_url === nt.url ? nt.date : null) +
+        row(L('On the no-mapping list'), lists, nt.no_mapping, nt.lists_url === nt.url ? nt.date : nt.lists_date) +
+        row(L('On the logical discrepancy list'), lists, nt.discrepancy, nt.lists_url === nt.url ? nt.date : nt.lists_date) +
         (nt.hearings ? row(L('Notices heard or verified'), nt.hearings, nt.hearings.n, nt.hearings.date) : '') +
         (nt.deleted ? row(L('Deleted after a notice'), nt.deleted, nt.deleted.n, nt.deleted.date) : '') +
         '</tbody></table></div>' +
