@@ -505,7 +505,8 @@ def shell(out, meta, content, scripts):
     # CSVs the pages draw, each one tap away.
     # (a state's "What to do now" page is about the steps open to an elector,
     # like the help page, so it carries no table downloads either)
-    wb = dl_book(book) if book and not here.startswith(('downloads/', 'share/', 'terms/', 'corrections/', 'updates/', 'help/')) and not here.endswith('/now/') and place['id'] != 'home' else None
+    # (an embedded chart carries only the chart, its source and a link back)
+    wb = dl_book(book) if book and not meta.get('embed') and not here.startswith(('downloads/', 'share/', 'terms/', 'corrections/', 'updates/', 'help/')) and not here.endswith('/now/') and place['id'] != 'home' else None
     if wb:
         # the shared workbook of the twenty smaller places: only this place's own table
         own = 'data/%s/' % out.split('/')[0]
