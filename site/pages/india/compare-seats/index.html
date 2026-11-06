@@ -38,7 +38,7 @@
     L('Constituencies are set only beside others of the same state, because each state published its own count and is measured in its own measure.'),
     L('The table gives each constituency in that measure, with its district, its rank in the state and its last winning margin.'),
     L('A count of names larger than a winning margin was large enough to decide the seat, which says nothing about whether it did.')
-  ], L('Only counts are published, never a name.'));
+  ], L('Only counts are published. No name is.'));
 
   function rate(rows, Lm) { var c = 0, b = 0; rows.forEach(function (r) { c += r[Lm.count] || 0; b += r[Lm.base] || 0; }); return Lm.per * c / b; }
 

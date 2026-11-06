@@ -58,7 +58,7 @@
     L('They were summoned under seven Election Commission rules. The commonest were {r1} ({p1}), {r2} ({p2}) and {r3} ({p3}). A flag says the paperwork did not line up, and says nothing about whether the elector was entitled to vote.', {
       r1: rules[0][0], p1: SIR.pct(100 * rules[0][1] / rAll), r2: rules[1][0], p2: SIR.pct(100 * rules[1][1] / rAll), r3: rules[2][0], p3: SIR.pct(100 * rules[2][1] / rAll) }), ['hearings']]);
   QA.push([L('Can I look up my own name here?'),
-    L('No. Only counts are published, never a name. To check your own entry, use the Election Commission\'s voter search.'), ['explorer', 'dash']]);
+    L('No. Only counts are published. No name is. To check your own entry, use the Election Commission\'s voter search.'), ['explorer', 'dash']]);
   QA.push([L('Why does Malakpet look different in the explorer?'),
     L('Its list has no part numbers and no link to the 2002 roll. It is read by polling-station name instead, {n} stations, and it is given no linked or unlinked rate.', { n: mal.parts }), ['explorer', 'method']]);
   QA.push([L('Where do the Telangana figures come from?'),

@@ -91,7 +91,7 @@ Promise.all([SIR.json('data/india/cases.json'), SIR.json('data/uttarakhand/const
       short.push('The roll of Murshidabad, Malda and the two Dinajpurs fell by ' + d1(four) + ' of every 100 from the 2024 Lok Sabha roll to the 2026 election roll, against ' + d1(wRate(W)) + ' in the state.');
     }
   });
-  SIR.inShort(short, 'Each place is measured in its own state\'s terms, so the places are never compared with each other. A figure says how many names went, never why.');
+  SIR.inShort(short, 'Each place is measured in its own state\'s terms, so the places are never compared with each other. A figure says how many names went. It does not say why.');
   SIR.showFaq('india', 'cases');
   SIR.jump && SIR.jump();
 }).catch(SIR.fail);

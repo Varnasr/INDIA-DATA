@@ -96,7 +96,7 @@
     L('Most booths lost fewer than 100 names, but {n} of {all} lost 200 or more. The lists record a reason for each name but not why one officer entered so many more than another. The more names a booth had left off the draft, the more likely it was to have been led by the NDA in 2024, {lo} of the lightest booths against {hi} of the heaviest.', {
       n: SIR.n(b200), all: SIR.n(t.booths), lo: SIR.pct(BI[0].nda_pct), hi: SIR.pct(BI[BI.length - 1].nda_pct) }), ['explorer', 'results']]);
   QA.push([L('Can I look up my own name here?'),
-    L('No. Only counts are published, never a name. To check your own entry, use the Election Commission\'s voter search.'), ['explorer', 'dash']]);
+    L('No. Only counts are published. No name is. To check your own entry, use the Election Commission\'s voter search.'), ['explorer', 'dash']]);
 
   var RB = r[9];
   QA.push([L('How sure are these findings?'),
