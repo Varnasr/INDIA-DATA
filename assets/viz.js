@@ -374,13 +374,17 @@
         tips.push(tip);
       });
       var tt = tips.join('. ') || r.name;
-      hits.push([el('rect', { x: 0, y: y, width: W, height: h, class: 'vhit', tabindex: 0, role: 'button', 'aria-label': tt }, s), tt]);
+      // o.rowId: each row gets an address (india/process/#s-<state>)
+      var hr = el('rect', { x: 0, y: y, width: W, height: h, class: 'vhit', tabindex: 0, role: 'button', 'aria-label': tt }, s);
+      if (o.rowId) hr.id = o.rowId(r.name);
+      hits.push([hr, tt, o.mark && r.name === o.mark]);
       y += h;
     });
     hits.forEach(function (hp) {
       var show = function () { hits.forEach(function (o2) { o2[0].classList.toggle('on', o2 === hp); }); read.textContent = hp[1] + '.'; };
       ['mouseenter', 'focus', 'click'].forEach(function (ev) { hp[0].addEventListener(ev, show); });
       hp[0].addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(); } });
+      if (hp[2]) read.textContent = hp[1] + '.';
     });
   }
 

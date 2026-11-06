@@ -16,7 +16,7 @@
     maharashtra: { label: 'Maharashtra', state: 'Maharashtra', count: 'left_off', base: 'before',
       reasons: [['shifted', 'Shifted for good'], ['absent', 'Untraceable or absent'], ['dead', 'Dead'], ['duplicate', 'Enrolled at another place'], ['other', 'Other']],
       womenDraft: 'women_draft_pct', seats: true,
-      limits: 'The Chief Electoral Officer published no split of the names left off by sex. The final roll is still to come.' },
+      limits: 'The Chief Electoral Officer published no split of the names left off by sex.', pending: 'Maharashtra' },
     karnataka: { label: 'Karnataka', state: 'Karnataka', count: 'removed', base: 'before',
       reasons: [['shifted', 'Shifted'], ['absent', 'Absent'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once'], ['other', 'Other']],
       after: { draft: 'draft', later: 'sep', what: 'the roll of 9 October 2026' },
@@ -53,32 +53,32 @@
       noun: 'fall in the roll', verb: 'is the fall in the roll from the 2023 election roll to the final roll of March 2026', per: 'per 100 on the 2023 roll',
       women: function (d, nm) { return 'Women were ' + pct(d.women_2023_pct) + ' of ' + nm + '\'s roll in 2023 and ' + pct(d.women_2026_pct) + ' of its final roll in 2026.'; },
       limits: 'The names left off were published for the state only. Below the state this is the change in the roll over more than two years.' },
-    assam: { label: 'Assam', state: 'Assam', count: 'fall', base: 'draft', seats: true, fall: true, per: 'per 100 on the draft',
+    assam: { map: false, label: 'Assam', state: 'Assam', count: 'fall', base: 'draft', seats: true, fall: true, per: 'per 100 on the draft',
       sub: 'Measured by the fall in the roll from the draft to the final roll of the Special Revision, per 100 on the draft. It is the net fall, names deleted less names added, and the tables do not give the two apart.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from the draft to the final roll',
       women: function (d, nm) { return d.women_fall_pct == null ? 'Women were ' + pct(d.draft_women_pct) + ' of ' + nm + '\'s draft roll. Its roll rose after the draft, so there is no fall to divide by sex.' : 'Women were ' + pct(d.women_fall_pct) + ' of the fall in ' + nm + '\'s roll after the draft, against ' + pct(d.draft_women_pct) + ' of its draft roll.'; },
       limits: 'Assam held a Special Revision, which ran on different rules from the SIR. The names flagged for deletion were published for the state only, through the press.' },
-    meghalaya: { label: 'Meghalaya', state: 'Meghalaya', count: 'removed', base: 'before', seats: true,
+    meghalaya: { map: false, label: 'Meghalaya', state: 'Meghalaya', count: 'removed', base: 'before', seats: true,
       reasons: [['shifted_absent_other', 'Shifted, absent or other'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once']],
       limits: 'The split by sex of the names left off, and the final roll of 26 October 2026, were published for the state only, so each district\'s figures stop at the draft.' },
-    manipur: { label: 'Manipur', state: 'Manipur', count: 'fall', base: 'before', seats: true, fall: true,
+    manipur: { map: false, label: 'Manipur', state: 'Manipur', count: 'fall', base: 'before', seats: true, fall: true,
       sub: 'Measured by the fall in the roll from the roll before the revision to the final roll, per 100 on the roll before. It takes in the names left off and everything added or deleted after the draft together.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from the roll before the revision to the final roll', per: 'per 100 on the roll before the revision',
       women: function (d, nm) { return 'Women are ' + pct(100 * d.women / d.final) + ' of ' + nm + '\'s final roll. The names left off were split by sex for the state only.'; },
       limits: 'The reasons and the split by sex of the names left off were published for the state only.' },
-    odisha: { label: 'Odisha', state: 'Odisha', count: function (x) { return x.before - x.draft; }, base: 'before', seats: true, fall: true,
+    odisha: { map: false, label: 'Odisha', state: 'Odisha', count: function (x) { return x.before - x.draft; }, base: 'before', seats: true, fall: true,
       sub: 'Measured by the fall in the roll from the final roll of January 2025 to the draft, per 100 on the January 2025 roll. The revision started from the roll of 17 May 2026, so the fall takes in more than a year of ordinary changes as well as the names left off.',
       noun: 'fall in the roll', verb: 'is the fall in the roll from January 2025 to the draft', per: 'per 100 on the January 2025 roll',
       claims: function (d, nm) { return 'After the draft, ' + n(d.added) + ' names were added in ' + nm + ' and ' + n(d.removed) + ' deleted, and the final roll is ' + n(d.final) + '. The additions count new voters too, so they are the most that could have been restored.'; },
       limits: 'The names left off the draft were published by district and for the state, and the reasons for the state only.' },
-    andhrapradesh: { label: 'Andhra Pradesh', state: 'Andhra Pradesh', count: 'removed', base: 'before', womenDraft: 'draft_women_pct',
+    andhrapradesh: { anchor: false, label: 'Andhra Pradesh', state: 'Andhra Pradesh', count: 'removed', base: 'before', womenDraft: 'draft_women_pct',
       limits: 'Andhra Pradesh published the names left off by district, with no reasons and no split by sex below the state.' },
-    chhattisgarh: { label: 'Chhattisgarh', state: 'Chhattisgarh', count: function (x) { return x.final - x.draft; }, base: 'draft', fall: true, rise: true, per: 'per 100 on the draft',
+    chhattisgarh: { anchor: false, label: 'Chhattisgarh', state: 'Chhattisgarh', count: function (x) { return x.final - x.draft; }, base: 'draft', fall: true, rise: true, per: 'per 100 on the draft',
       sub: 'Measured by the rise in the roll from the draft to the final roll, per 100 on the draft. It is the net change, names added less names deleted, and a district whose roll shrank shows a fall. The names left off the draft were published for the state only.',
       noun: 'rise in the roll', verb: 'is the rise in the roll from the draft to the final roll',
       claims: function (d, nm) { return 'After the draft, ' + n(d.added) + ' names were added in ' + nm + ' and ' + n(d.removed) + ' deleted, and the final roll is ' + n(d.final) + '. The additions count new voters too, so they are the most that could have been restored.'; },
       limits: 'The names left off the draft, and their reasons, were published for the state only.' },
-    mizoram: { label: 'Mizoram', state: 'Mizoram', count: function (x) { return x.final - x.draft; }, base: 'draft', fall: true, rise: true, per: 'per 100 on the draft',
+    mizoram: { anchor: false, label: 'Mizoram', state: 'Mizoram', count: function (x) { return x.final - x.draft; }, base: 'draft', fall: true, rise: true, per: 'per 100 on the draft',
       sub: 'Measured by the rise in the roll from the draft to the final roll, per 100 on the draft. It is the net change, names added less names deleted, and a district whose roll shrank shows a fall. The names left off the draft were published for the state only.',
       noun: 'rise in the roll', verb: 'is the rise in the roll from the draft to the final roll',
       women: function (d, nm) { return 'Women are ' + pct(100 * d.women / d.final) + ' of ' + nm + '\'s final roll.'; },
@@ -90,6 +90,8 @@
       claims: function (d, nm) { return 'After the draft, ' + nm + ' admitted ' + n(d.claims) + ' claims (' + d1(d.claims_per_1000) + ' per 1,000 on the draft) and ' + n(d.objections) + ' objections (' + d1(d.objections_per_1000) + ' per 1,000). ' + n(d.notices) + ' electors were sent a notice, ' + d1(d.notices_per_100) + ' per 100 on the draft.'; },
       limits: 'The reasons were published for the state only.' }
   };
+  // anchor: false, the overview has no finder, so the button opens it plainly.
+  // map: false, the overview's finder opens on the district but it draws no map.
   var val = function (x, f) { return typeof f === 'function' ? f(x) : x[f]; };
   var slug = function (s) { return SIR.slug(s).slice(2); };
   var median = function (v) { v = v.slice().sort(function (a, b) { return a - b; }); var m = v.length >> 1; return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2; };
@@ -97,7 +99,12 @@
   SIR.districtPage = function () {
     var st = document.body.getAttribute('data-district-state'), key = document.body.getAttribute('data-district'), C = CFG[st];
     var root = document.body.getAttribute('data-root') || '';
-    return Promise.all([SIR.json('data/' + (C.file || st + '/districts.json')), SIR.json('data/india/factors/' + C.state.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.json')]).then(function (r) {
+    return Promise.all([SIR.json('data/' + (C.file || st + '/districts.json')), SIR.json('data/india/factors/' + C.state.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.json'),
+      C.pending ? SIR.json('data/india/states.json').catch(function () { return null; }) : null]).then(function (r) {
+      // pending: the limits line says the final roll is still to come only
+      // while data/india/states.json records none for the state
+      var PS = r[2] && r[2].states.filter(function (x) { return x.state === C.pending; })[0];
+      if (PS && PS.electors_final == null) C.limits += ' The final roll is still to come.';
       var D = C.rows ? r[0][C.rows] : r[0], F = r[1], d = D.filter(function (x) { return slug(x.district) === key; })[0];
       if (!d) throw new Error('no district ' + key + ' in ' + st);
       var rate = function (x) { return 100 * val(x, C.count) / val(x, C.base); };
@@ -175,13 +182,13 @@
       } else document.getElementById('sAfter').hidden = true;
 
       var CASE = { 'uttarpradesh-lucknow': 'lucknow', 'karnataka-b-b-m-p-south': 'bbmp-south' }[st + '-' + key];
-      document.getElementById('dLinks').innerHTML = (CASE ? '<a class="btn" href="' + root + 'india/cases/#' + CASE + '">A case study of this district</a> ' : '') + '<a class="btn" href="' + stPage + (C.anchor === false ? '' : '#d-' + key) + '">' + C.label + (C.anchor === false ? ', every district' : ', with this district on the map') + '</a> <a class="btn" href="' + root + (C.method || st + '/method/') + '">Sources and method</a>';
+      document.getElementById('dLinks').innerHTML = (CASE ? '<a class="btn" href="' + root + 'india/cases/#' + CASE + '">A case study of this district</a> ' : '') + '<a class="btn" href="' + stPage + (C.anchor === false ? '' : '#d-' + key) + '">' + C.label + (C.anchor === false ? ', every district' : C.map === false ? ', opened at this district' : ', with this district on the map') + '</a> <a class="btn" href="' + root + (C.method || st + '/method/') + '">Sources and method</a>';
       document.getElementById('others').innerHTML = all.filter(function (x) { return x !== d; }).map(function (x) { return '<a class="chip" href="../' + slug(x.district) + '/">' + SIR.esc(x.district) + '</a>'; }).join(' ');
       document.getElementById('pageFaq').innerHTML = '<div class="qa"><h3>Where do these figures come from?</h3><p>From the same tables as the <a href="' + stPage + '">' + C.label + '</a> pages, which give every source on their method page, and from the National Family Health Survey 2019-21 for the circumstances.</p></div>' +
         '<div class="qa"><h3>Does a circumstance explain the names a district lost?</h3><p>No. A district\'s schooling, fuel or sanitation figures sit beside its count, and the correlations across districts say which districts lost more, never why.</p></div>';
       if (C.seats) SIR.json('data/' + st + '/constituencies.json').then(function (A) {
         var mine = A.filter(function (a) { return a.district === d.district; }).sort(function (a, b) { return a.ac - b.ac; });
-        document.getElementById('dLinks').insertAdjacentHTML('beforeend', '<p class="note">Its ' + mine.length + ' constituencies, each with its own page</p><p class="golist">' +
+        document.getElementById('dLinks').insertAdjacentHTML('beforeend', '<p class="note">' + (mine.length === 1 ? 'It has one constituency, which has a page of its own.' : 'It has ' + mine.length + ' constituencies, and each has a page of its own.') + '</p><p class="golist">' +
           mine.map(function (a) { return '<a class="chip" href="' + root + st + '/seat/' + a.ac + '/">' + SIR.esc(a.ac + '. ' + a.name) + '</a>'; }).join(' ') + '</p>');
       });
       SIR.tools();

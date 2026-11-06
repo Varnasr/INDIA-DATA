@@ -22,7 +22,7 @@ STATES = [('tamilnadu', 'tn', 'Tamil Nadu 2026'), ('westbengal', 'wb', 'West Ben
 
 PAGE = '''<!--page {meta} -->
 <main id="main">
-<div class="page-head"><h1 data-no-i18n>{name}</h1><ol class="summary" id="short"></ol></div>
+<div class="page-head"><h1 lang="en" dir="ltr" data-no-i18n>{name}</h1><ol class="summary" id="short" lang="en" dir="ltr" data-no-i18n></ol></div>
 <p class="report-lang">This page is in English only for now. Every figure on it comes from the Election Commission or the Chief Electoral Officer, and where it comes from the press, the page says so.</p>
 
 <article class="state seat" lang="en" dir="ltr" data-no-i18n>
@@ -60,9 +60,9 @@ PAGE = '''<!--page {meta} -->
   <section id="sSources"><h2>Sources</h2>
   <p id="fSources"></p></section>
 </article>
-  <p class="note" data-no-i18n>Only counts are published, never a name.</p>
-  <p class="note limits" id="shortNote" hidden></p>
-  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
+  <p class="note" lang="en" dir="ltr" data-no-i18n>Only counts are published, never a name.</p>
+  <p class="note limits" id="shortNote" lang="en" dir="ltr" data-no-i18n hidden></p>
+  <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq" lang="en" dir="ltr" data-no-i18n></div></section>
 </main>
 <!--scripts-->
 <script src="../../../assets/sir.js"></script>
