@@ -100,6 +100,7 @@ def main():
                'discrepancy': pair[1]['count'] if pair else (dc[0]['count'] if len(dc) == 1 else None),
                'lists_same_source': bool(pair and total and pair[0]['source_url'] == total['source_url']),
                'lists_source': pair[0]['source_url'] if pair else ((nm or dc)[0]['source_url'] if len(nm) + len(dc) == 1 else None),
+               'lists_date': pair[0]['date'] if pair else ((nm or dc)[0]['date'] if len(nm) + len(dc) == 1 else None),
                'deleted_after_notice': max(by('deleted_after_notice'), key=lambda r: r['date'])['count'] if by('deleted_after_notice') else None,
                'deleted_kind': max(by('deleted_after_notice'), key=lambda r: r['date'])['kind'] if by('deleted_after_notice') else None,
                'other_figures': len(R) - (1 if total and how == 'published' else 0) - (2 if pair else 0),
