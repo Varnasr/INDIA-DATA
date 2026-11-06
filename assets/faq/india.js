@@ -118,7 +118,7 @@
         [L('Where do the dates come from?'),
          L('They come from the Election Commission\'s orders and the states\' own press notes, each listed with its document on the page about <a href="../process/">how the revision was run</a>. Where a state has published its final roll, the date it came out replaces the date it was due.'), ['progress', 'faq']],
         [L('Can I look up my own name here?'),
-         L('No. Only counts are published, never a name. To check your own entry, use the Election Commission\'s voter search.'), ['main']]
+         L('No. Only counts are published. No name is. To check your own entry, use the Election Commission\'s voter search.'), ['main']]
       ];
       var SHORT = {
         faq: [[

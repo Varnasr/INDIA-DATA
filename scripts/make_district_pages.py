@@ -61,7 +61,7 @@ PAGE = '''<!--page {meta} -->
   <h2>Every other district</h2>
   <p class="golist" id="others"></p>
 </article>
-  <p class="note" lang="en" dir="ltr" data-no-i18n>Only counts are published, never a name.</p>
+  <p class="note" lang="en" dir="ltr" data-no-i18n>Only counts are published. No name is.</p>
   <p class="note limits" id="shortNote" lang="en" dir="ltr" data-no-i18n hidden></p>
   <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq" lang="en" dir="ltr" data-no-i18n></div></section>
 </main>

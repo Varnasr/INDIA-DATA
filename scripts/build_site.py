@@ -493,7 +493,7 @@ def shell(out, meta, content, scripts):
     if not here.startswith(('share/', 'support/', 'feedback/')):
         fab = ('<a class="fab fab-share" href="%sshare/">%s<span>Share a list</span></a>' % (root, svg(ICONS['i24']))) + fab
     fab = '<div class="fabs">%s</div>' % fab if fab else ''
-    footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published, never names or EPIC numbers.</span>'
+    footer = ('<footer data-i18n-each><span>Research by <a href="%s">%s</a>. Only totals are published. No name or EPIC number is.</span>'
               ' · <a href="%s#why-this-site-exists">About this site</a> · <a href="%shelp/">Left off the roll? What to do</a> · <a href="%sdownloads/%s">Downloads</a> · <a href="%sshare/">Share a list</a> · <a href="%ssupport/">Support our work</a> · <a href="%sterms/">Terms and privacy</a> · <a href="%supdates/">What\'s new</a> · <a href="%sfeed.xml">Follow by feed</a> · <a href="%scorrections/">Corrections</a> · <a href="%sfeedback/?from=%s">Feedback</a>'
               ' · <a href="mailto:%s">%s</a>'
               '<p class="credit" lang="en" dir="ltr" data-no-i18n>@@CREDIT@@</p></footer>' % (CFG['credit_url'], html.escape(CFG['credit']), root or './', root, root, '#w-' + book if book else '', root, root, root, root, root, root, root, urllib.parse.quote(here or 'home', safe=''), CFG['email'], CFG['email']))

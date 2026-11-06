@@ -234,7 +234,7 @@
       // where the figures come from, on screen and on the one-page printout
       var here = location.origin + location.pathname, made = new Date();
       document.getElementById('fSources').innerHTML = (JW ? 'Every other figure' : 'Every figure') + ' on this page comes from ' + C.label + '\'s constituency table, <a href="' + root + 'data/' + st + '/constituencies.json">data/' + st + '/constituencies.json</a>, and the winning margins from the Election Commission\'s results.' + (JW ? ' The names added and deleted after the draft come from ' + JW + ', <a href="' + root + 'data/' + st + '/' + C.join.file + '">data/' + st + '/' + C.join.file + '</a>.' : '') + ' The <a href="' + stPage + 'method/">' + C.label + ' method page</a> names the source of every column. ' + C.limits +
-        ' <span class="printonly">Printed from ' + SIR.esc(here) + ' on ' + made.getDate() + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][made.getMonth()] + ' ' + made.getFullYear() + '. Only counts are published, never a name.</span>';
+        ' <span class="printonly">Printed from ' + SIR.esc(here) + ' on ' + made.getDate() + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][made.getMonth()] + ' ' + made.getFullYear() + '. Only counts are published. No name is.</span>';
       document.getElementById('seatLinks').innerHTML = (CASE ? '<a class="btn" href="' + root + 'india/cases/#' + CASE + '">A case study of this constituency</a> ' : '') + (C.booths ? '<a class="btn" href="' + stPage + 'explorer/#ac' + ('00' + a.ac).slice(-3) + '">Its polling booths</a> ' : '') + '<a class="btn" href="' + stPage + (st === 'bihar' ? 'results/' : '') + '#ac-' + a.ac + '">' + C.label + (/^(assam|manipur|meghalaya|odisha)$/.test(st) ? ', opened at this constituency' : st === 'gujarat' ? ', opened at this constituency, with its district on the map' : ', with this constituency on the map') + '</a> <a class="btn" href="' + stPage + 'method/">Sources and method</a> <a class="btn" href="' + root + 'india/constituencies/">Find another constituency</a>' +
         ' <a class="btn" href="' + root + 'india/compare-seats/?state=' + st + '&amp;seats=' + a.ac + '">Compare with other constituencies of ' + C.label + '</a>' +
         ' <button type="button" class="btn seat-print">Print this seat</button>';
@@ -245,7 +245,7 @@
       });
       window.addEventListener('afterprint', function () { document.body.classList.remove('brief'); });
       document.getElementById('pageFaq').innerHTML = '<div class="qa"><h3>Where do these figures come from?</h3><p>From the same tables as the <a href="' + stPage + '">' + C.label + '</a> pages, which give every source on their method page.</p></div>' +
-        '<div class="qa"><h3>Can this page say who was left off, or why?</h3><p>No. Only counts are published, never a name. ' + (C.reasons ? 'A reason on the list is ' + OFFICER + '. ' : '') + 'Nothing here says whether any person should have been on the roll.</p></div>';
+        '<div class="qa"><h3>Can this page say who was left off, or why?</h3><p>No. Only counts are published. No name is. ' + (C.reasons ? 'A reason on the list is ' + OFFICER + '. ' : '') + 'Nothing here says whether any person should have been on the roll.</p></div>';
       SIR.tools();
     }).catch(SIR.fail);
   };
