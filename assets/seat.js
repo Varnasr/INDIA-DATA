@@ -73,6 +73,8 @@
       reasons: [['r_shifted', 'Shifted'], ['r_dead', 'Dead'], ['r_absent', 'Absent'], ['r_enrolled', 'Already enrolled']], reasonsOf: 'p1', reasonsWhat: 'the first phase',
       election: { year: 2025, count: 'total', turnout: 'turnout2025', prev: 'win2020', prevYear: 2020 },
       booths: true,
+      // names added and deleted after the draft, seat by seat, from the final roll's table
+      join: { file: 'final.json', fields: { claims: 'added', objections: 'removed_after', draft: 'draft', final: 'final' } }, claims: true,
       limits: 'Reasons are counted for the first phase only, from the lists. Every rate is per 100 on the 2025 election roll.' }
   };
 
@@ -85,7 +87,14 @@
   SIR.seatPage = function () {
     var st = document.body.getAttribute('data-seat-state'), no = +document.body.getAttribute('data-seat-ac'), C = CFG[st];
     var root = document.body.getAttribute('data-root') || '';
-    return SIR.json('data/' + st + '/constituencies.json').then(function (A) {
+    return Promise.all([SIR.json('data/' + st + '/constituencies.json'), C && C.join ? SIR.json('data/' + st + '/' + C.join.file) : null]).then(function (R) {
+      var A = R[0];
+      // a second file keyed by constituency number, for figures constituencies.json does not hold
+      if (R[1]) {
+        var J = {};
+        R[1].seats.forEach(function (s) { J[s.ac] = s; });
+        A.forEach(function (r) { var s = J[r.ac]; if (s) Object.keys(C.join.fields).forEach(function (k) { r[k] = s[C.join.fields[k]]; }); });
+      }
       var a = A.filter(function (r) { return r.ac === no; })[0];
       if (!a || !C) throw new Error('no constituency ' + no + ' in ' + st);
       // a state's own field names for the winner, runner-up and margin
