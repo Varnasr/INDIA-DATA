@@ -28,6 +28,26 @@
     }
    ]
   },
+  "c_dl_form7": {
+   "date": "2026-11-04",
+   "disputes": "india/disputes/#d-form7-60",
+   "items": [
+    {
+     "name": "The Hindu, Who filed 77% of Form 7s in Delhi’s Mustafabad? BJP BLAs named as ‘objectors’ deny them",
+     "url": "https://www.thehindu.com/news/cities/Delhi/who-filed-77-of-form-7s-in-delhis-mustafabad-bjp-blas-named-as-objectors-deny-them/article71666702.ece"
+    }
+   ]
+  },
+  "c_dl_form7_verify": {
+   "date": "2026-10-31",
+   "disputes": "india/disputes/#d-form7-58",
+   "items": [
+    {
+     "name": "The Hindu, After voters found at Delhi addresses, DEO orders field verification of deletion claims",
+     "url": "https://www.thehindu.com/news/cities/Delhi/after-voters-found-at-delhi-addresses-deo-orders-field-verification-of-deletion-claims/article71650805.ece"
+    }
+   ]
+  },
   "c_docs_home": {
    "date": "2026-09-26",
    "items": [
@@ -64,6 +84,16 @@
     {
      "name": "CEO Bihar, press notes on the SIR, 2025",
      "url": "https://ceoelection.bihar.gov.in/PDF/Year_2025/PressRelease2025/All%20Press%20Notes%20Related%20To%20SIR-2025.pdf"
+    }
+   ]
+  },
+  "c_goa_form8": {
+   "date": "2026-11-05",
+   "disputes": "india/disputes/#d-court-63",
+   "items": [
+    {
+     "name": "Bombay High Court at Goa (judgment of 5.11.2026, as published by LiveLaw), Bombay High Court at Goa orders a Santa Cruz family of six onto the roll within ten days and refuses the Commission a stay",
+     "url": "https://www.livelaw.in/pdf_upload/2026/11/05/sir-710121.pdf"
     }
    ]
   },
@@ -408,6 +438,7 @@
      "url": "https://telanganatoday.com/telangana-andhra-pradesh-final-electoral-rolls-to-be-published-on-november-30"
     },
     "kind": "press",
+    "lists_date": null,
     "lists_url": null,
     "n": 4428444,
     "no_mapping": null,
@@ -440,6 +471,7 @@
     "discrepancy": 133413,
     "hearings": null,
     "kind": "primary",
+    "lists_date": "2026-09-22",
     "lists_url": "https://ceoarunachal.nic.in/componenthelper/getcomponentfile/68",
     "n": 218588,
     "no_mapping": 85175,
@@ -490,6 +522,7 @@
     "discrepancy": 68353,
     "hearings": null,
     "kind": "press",
+    "lists_date": "2026-07-28",
     "lists_url": "https://www.tribuneindia.com/news/chandigarh/sir-1-37-lakh-electors-to-get-notice-over-missing-linkage-discrepancies/",
     "n": 137814,
     "no_mapping": 69461,
@@ -548,6 +581,10 @@
      4
     ]
    ],
+   "form7": [
+    "c_dl_form7",
+    "c_dl_form7_verify"
+   ],
    "label": "Delhi 2026",
    "notices": {
     "date": "2026-09-21",
@@ -567,6 +604,7 @@
      "url": "https://www.thehindu.com/news/cities/Delhi/delhi-sir-poll-body-to-step-up-door-to-door-re-verification-of-475-lakh-deleted-voters/article71645651.ece"
     },
     "kind": "press",
+    "lists_date": "2026-09-21",
     "lists_url": "https://www.hindustantimes.com/india-news/why-did-jaishankar-rekha-gupta-kejriwal-get-sir-notices-full-list-of-prominent-names-in-delhi-electoral-row-101789967719972.html",
     "n": 3312919,
     "no_mapping": 1379785,
@@ -598,6 +636,7 @@
      4
     ]
    ],
+   "form8": "c_goa_form8",
    "label": "Goa 2026",
    "notices": {
     "date": "2026-02-21",
@@ -611,6 +650,7 @@
     "discrepancy": 58923,
     "hearings": null,
     "kind": "primary",
+    "lists_date": "2026-02-21",
     "lists_url": "https://ceogoa.nic.in/PDF/SIR2026/press-note-Final-publication.pdf",
     "n": 241326,
     "no_mapping": 182403,
@@ -642,6 +682,7 @@
     "discrepancy": null,
     "hearings": null,
     "kind": "press",
+    "lists_date": null,
     "lists_url": null,
     "n": 4400000,
     "no_mapping": null,
@@ -685,6 +726,7 @@
      "url": "https://prms.prharyana.gov.in/press-release/8134"
     },
     "kind": "primary",
+    "lists_date": null,
     "lists_url": null,
     "n": 4491691,
     "no_mapping": null,
@@ -706,6 +748,7 @@
     "discrepancy": 4549961,
     "hearings": null,
     "kind": "press",
+    "lists_date": "2026-11-04",
     "lists_url": "https://timesofindia.indiatimes.com/city/ranchi/sir-26-22-lakh-cases-pending-in-state-88-1-disposed-of/articleshow/135544514.cms",
     "n": 6324116,
     "no_mapping": 1404033,
@@ -749,6 +792,7 @@
      "url": "https://indianexpress.com/article/cities/bangalore/karnataka-sir-form-7-submissions-data-10934404/"
     },
     "kind": "press",
+    "lists_date": "2026-08-20",
     "lists_url": "https://www.thehindu.com/news/national/karnataka/karnataka-sir-over-4380-lakh-voters-to-get-notice-over-20-lakh-flagged-for-logical-discrepancy/article71369088.ece",
     "n": 4382313,
     "no_mapping": 2345000,
@@ -796,6 +840,7 @@
      "url": "https://www.thehindu.com/news/national/kerala/kerala-sir-hearings-phase-concludes/article70633050.ece"
     },
     "kind": "press",
+    "lists_date": "2026-02-21",
     "lists_url": "https://indianexpress.com/article/india/kerala-final-electoral-roll-2026-sir-process-explained-10544998/",
     "n": 3688948,
     "no_mapping": 1932000,
@@ -861,6 +906,7 @@
     "discrepancy": 6248281,
     "hearings": null,
     "kind": "primary",
+    "lists_date": "2026-09-04",
     "lists_url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%E0%A5%80%E0%A4%AA%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%95%20SIR%20Notice%20English%20-%2004%20Sep%202026.pdf",
     "n": 12224007,
     "no_mapping": 5975726,
@@ -893,6 +939,7 @@
     "discrepancy": 1130655,
     "hearings": null,
     "kind": "primary",
+    "lists_date": "2026-09-06",
     "lists_url": "https://ceomanipur.nic.in/Documents/PressNote/2026-2027/PRESS%20NOTE%20SIR%20FINAL%20EROLL%202026.pdf",
     "n": 1221833,
     "no_mapping": 91178,
@@ -931,6 +978,7 @@
      "url": "https://meghalaya.gov.in/meghalaya/sites/default/files/press_release/EL_63_2026_102.pdf"
     },
     "kind": "primary",
+    "lists_date": "2026-10-01",
     "lists_url": "https://meghalaya.gov.in/sites/default/files/press_release/EL_63_2026_87.pdf",
     "n": 651735,
     "no_mapping": 222786,
@@ -997,6 +1045,7 @@
     "discrepancy": 4537613,
     "hearings": null,
     "kind": "press",
+    "lists_date": "2026-09-22",
     "lists_url": "https://www.newindianexpress.com/states/odisha/2026/Sep/22/1767-lakh-names-deleted-from-final-voter-list-in-odisha",
     "n": 5836392,
     "no_mapping": 1298779,
@@ -1043,6 +1092,7 @@
     "discrepancy": 2269000,
     "hearings": null,
     "kind": "press",
+    "lists_date": "2026-09-23",
     "lists_url": "https://www.hindustantimes.com/cities/chandigarh-news/sir-punjab-clears-99-of-logical-discrepancy-cases-for-final-roll-101790103659947.html",
     "n": 3549036,
     "no_mapping": null,
@@ -1090,6 +1140,7 @@
     "discrepancy": 52384,
     "hearings": null,
     "kind": "primary",
+    "lists_date": "2026-09-07",
     "lists_url": "https://www.sikkim.gov.in/media/news-announcement/news-info?name=Final+Electoral+Roll+under+SIR+2026+Published+in+Sikkim",
     "n": 124519,
     "no_mapping": 72135,
@@ -1127,6 +1178,7 @@
     "discrepancy": 15800000,
     "hearings": null,
     "kind": "press",
+    "lists_date": "2026-02-24",
     "lists_url": "https://www.newindianexpress.com/states/tamil-nadu/2026/Feb/24/electorate-shrinks-by-over-10-per-cent-in-tamil-nadus-103-constituencies",
     "n": 17100000,
     "no_mapping": 1300000,
@@ -1170,6 +1222,7 @@
      "url": "https://telanganatoday.com/eci-extends-telangana-sir-claims-deadline-to-november-26-final-rolls-on-november-30"
     },
     "kind": "press",
+    "lists_date": "2026-09-29",
     "lists_url": "https://timesofindia.indiatimes.com/city/hyderabad/over-46-lakh-voters-clear-sir-scrutiny-lakhs-more-await-verification/articleshow/134571484.cms",
     "n": 9288187,
     "no_mapping": 3230000,
@@ -1227,6 +1280,7 @@
      "url": "https://www.thehindu.com/news/national/uttar-pradesh/uttar-pradesh-sir-forms-including-names-deletion-in-claims-objections-period/article70715531.ece"
     },
     "kind": "press",
+    "lists_date": "2026-02-19",
     "lists_url": "https://timesofindia.indiatimes.com/city/lucknow/no-mass-deletion-as-claimed-only-4336-names-removed-via-3rd-party-form-7-in-sir-2026-says-up-chief-electoral-officer/articleshow/128539836.cms",
     "n": 32600000,
     "no_mapping": 10400000,
@@ -1264,6 +1318,7 @@
     "discrepancy": 1904380,
     "hearings": null,
     "kind": "primary",
+    "lists_date": "2026-07-14",
     "lists_url": "https://cdnbbsr.s3waas.gov.in/s3cbf8710b43df3f2c1553e649403426df/uploads/2026/07/202607152058741775.pdf",
     "n": 2430608,
     "no_mapping": 526228,
@@ -1315,6 +1370,7 @@
      "url": "https://timesofindia.indiatimes.com/city/kolkata/bengal-only-6-6-of-1-4cr-sir-hearings-over-ec-has-25-days-to-go-for-deadline/articleshow/126520570.cms"
     },
     "kind": "primary",
+    "lists_date": "2026-01-03",
     "lists_url": "https://www.nationalheraldindia.com/politics/bengal-sir-election-commission-releases-breakdown-of-9146-lakh-logical-discrepancy-cases",
     "n": 14000000,
     "no_mapping": 3000000,
