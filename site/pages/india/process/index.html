@@ -376,13 +376,16 @@ SIR.json('data/india/process.json').then(function (P) {
   // #s-<state> (a link from a state's page) outlines that state's row, which
   // carries that id, and brings it into view. Charts above it draw from other
   // files and can arrive later, so the row is brought back into view as the
-  // page grows, until the reader scrolls or presses a key.
+  // page grows, until the reader touches, clicks, turns the wheel or presses
+  // a key. Every scroll a reader starts begins with one of those, and they
+  // fire before the page moves; a scroll event cannot be used, because the
+  // page's own scrolling fires it too.
   var key = function (n) { return 's-' + n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
   var G = function (id, rows, label, mark) {
     VIZ.gantt(id, { label: label, mark: mark, rowId: key, rows: rows.map(function (r) { return { name: r.state, steps: r.steps }; }) });
   };
   var still = true;
-  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { addEventListener(ev, function () { still = false; }, { once: true, passive: true }); });
+  ['wheel', 'touchstart', 'pointerdown', 'mousedown', 'keydown'].forEach(function (ev) { addEventListener(ev, function () { still = false; }, { once: true, passive: true }); });
   var toRow = function () {
     var h = SIR.hashId(), t = /^s-/.test(h) && document.getElementById(h);
     if (t) t.scrollIntoView({ block: 'center' });

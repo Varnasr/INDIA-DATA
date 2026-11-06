@@ -16,7 +16,7 @@
     maharashtra: { label: 'Maharashtra', state: 'Maharashtra', count: 'left_off', base: 'before',
       reasons: [['shifted', 'Shifted for good'], ['absent', 'Untraceable or absent'], ['dead', 'Dead'], ['duplicate', 'Enrolled at another place'], ['other', 'Other']],
       womenDraft: 'women_draft_pct', seats: true,
-      limits: 'The Chief Electoral Officer published no split of the names left off by sex. The final roll is still to come.' },
+      limits: 'The Chief Electoral Officer published no split of the names left off by sex.', pending: 'Maharashtra' },
     karnataka: { label: 'Karnataka', state: 'Karnataka', count: 'removed', base: 'before',
       reasons: [['shifted', 'Shifted'], ['absent', 'Absent'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once'], ['other', 'Other']],
       after: { draft: 'draft', later: 'sep', what: 'the roll of 9 October 2026' },
@@ -99,7 +99,12 @@
   SIR.districtPage = function () {
     var st = document.body.getAttribute('data-district-state'), key = document.body.getAttribute('data-district'), C = CFG[st];
     var root = document.body.getAttribute('data-root') || '';
-    return Promise.all([SIR.json('data/' + (C.file || st + '/districts.json')), SIR.json('data/india/factors/' + C.state.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.json')]).then(function (r) {
+    return Promise.all([SIR.json('data/' + (C.file || st + '/districts.json')), SIR.json('data/india/factors/' + C.state.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.json'),
+      C.pending ? SIR.json('data/india/states.json').catch(function () { return null; }) : null]).then(function (r) {
+      // pending: the limits line says the final roll is still to come only
+      // while data/india/states.json records none for the state
+      var PS = r[2] && r[2].states.filter(function (x) { return x.state === C.pending; })[0];
+      if (PS && PS.electors_final == null) C.limits += ' The final roll is still to come.';
       var D = C.rows ? r[0][C.rows] : r[0], F = r[1], d = D.filter(function (x) { return slug(x.district) === key; })[0];
       if (!d) throw new Error('no district ' + key + ' in ' + st);
       var rate = function (x) { return 100 * val(x, C.count) / val(x, C.base); };

@@ -108,6 +108,8 @@ def build_one(pid, slug):
             fail(slug, 'table %s is not in the schema' % t.get('id'))
         rows = t['rows']
         for r in rows:
+            if isinstance(r.get('name'), str):
+                r['name'] = reserved(r['name'])
             for k, x in r.items():
                 if k != 'name' and x is not None and not isinstance(x, int):
                     fail(slug, '%s, %s: %s is not an integer' % (t['id'], r.get('name'), k))
@@ -201,6 +203,12 @@ SEATS = {
 }
 
 
+def reserved(name):
+    """The reservation in capitals, as the Commission writes it. Odisha's
+    table prints "(St)" and "(Sc)"."""
+    return re.sub(r'\((sc|st)\)', lambda m: '(' + m.group(1).upper() + ')', name, flags=re.I)
+
+
 def seat_files(slug):
     cfg = SEATS[slug]
     N = json.load(open(os.path.join(ROOT, 'data', slug, 'raw', 'normal.json'), encoding='utf-8'))
@@ -210,9 +218,7 @@ def seat_files(slug):
     seats = []
     for i, r in enumerate(T[cfg['acs']]['rows']):
         no, name = (int(r['name'].split()[0]), r['name'].split(' ', 1)[1]) if r['name'][0].isdigit() else (i + 1, r['name'])
-        # the reservation in capitals, as the Commission writes it: Odisha's
-        # table prints "(St)" and "(Sc)"
-        name = re.sub(r'\((sc|st)\)', lambda m: '(' + m.group(1).upper() + ')', name, flags=re.I)
+        name = reserved(name)
         if no not in dist:
             fail(slug, 'constituency %d has no district in ac_district.csv' % no)
         x = dict(ac=no, name=name, district=dist[no])

@@ -34,7 +34,7 @@
       limits: 'No table of the names left off has been published for Kerala, even for the state, so every constituency figure is the fall in the roll, which also takes in ordinary deaths, moves and new names. It is a different count from the names left off the draft.' },
     delhi: { label: 'Delhi', faq: 'dl', lead: { count: 'left_off', base: 'roll_before', per: 100, what: 'names left off the draft roll (forms not collected)', of: 'the roll before the revision' },
       election: { year: 2025, count: 'left_off', turnout: 'turnout_2025', overTurnout: 'at_turnout_over_margin' },
-      limits: 'The reasons and the split by sex were published for Delhi as a whole only. The final roll is still to come.' },
+      limits: 'The reasons and the split by sex were published for Delhi as a whole only.', pending: 'Delhi' },
     uttarakhand: { label: 'Uttarakhand', faq: 'uk', lead: { count: 'left_off', base: 'roll_before', per: 100, what: 'names left off the draft roll', of: 'the roll before the revision' },
       notices: { count: 'notices', base: 'draft' },
       claims: { added: 'claims', removed: 'objections', draft: 'draft', final: 'final', womenRemoved: 'women_objections_pct', womenDraft: 'women_draft_pct' },
@@ -88,8 +88,13 @@
   SIR.seatPage = function () {
     var st = document.body.getAttribute('data-seat-state'), no = +document.body.getAttribute('data-seat-ac'), C = CFG[st];
     var root = document.body.getAttribute('data-root') || '';
-    return Promise.all([SIR.json('data/' + st + '/constituencies.json'), C && C.join ? SIR.json('data/' + st + '/' + C.join.file) : null]).then(function (R) {
+    return Promise.all([SIR.json('data/' + st + '/constituencies.json'), C && C.join ? SIR.json('data/' + st + '/' + C.join.file) : null,
+      C && C.pending ? SIR.json('data/india/states.json').catch(function () { return null; }) : null]).then(function (R) {
       var A = R[0];
+      // pending: the limits line says the final roll is still to come only
+      // while data/india/states.json records none for the state
+      var PS = R[2] && R[2].states.filter(function (x) { return x.state === C.pending; })[0];
+      if (PS && PS.electors_final == null) C.limits += ' The final roll is still to come.';
       // a second file keyed by constituency number, for figures constituencies.json does not hold
       if (R[1]) {
         var J = {};
@@ -121,7 +126,7 @@
         var fr = function (v) { return (v < 0 ? 'a rise of ' : 'a fall of ') + d1(Math.abs(v)); };
         var second2 = ('Measured ' + S2.what.replace(/^fall to/, 'to') + ', the roll ' + (a[S2.count] < 0 ? 'grew by ' + n(-a[S2.count]) + ', a rise of ' + d1(-s2([a])) : 'fell by ' + n(a[S2.count]) + ', ' + d1(s2([a]))) + ' of every ' + n(L.per) + ' on ' + L.of + ', against ' + fr(s2(D)) + ' in ' + SIR.esc(a.district) + ' district and ' + fr(s2(A)) + ' in ' + C.label + '. This second count takes in the names added after the draft as well.');
       }
-      pts.push('That is ' + cmp(seatR, distR) + ' ' + SIR.esc(a.district) + ' district (' + d1(distR) + ') and ' + cmp(seatR, stR) + ' ' + C.label + ' (' + d1(stR) + '). It ranks ' + rank + ' of ' + A.length + ' in the state, where 1 ' + (falls ? 'fell' : 'lost') + ' the most, and ' + drank + ' of ' + D.length + ' in its district.');
+      pts.push('That is ' + (D.length > 1 ? cmp(seatR, distR) + ' ' + SIR.esc(a.district) + ' district (' + d1(distR) + ') and ' : '') + cmp(seatR, stR) + ' ' + C.label + ' (' + d1(stR) + '). It ranks ' + rank + ' of ' + A.length + ' in the state, where 1 ' + (falls ? 'fell' : 'lost') + ' the most' + (D.length > 1 ? ', and ' + drank + ' of ' + D.length + ' in its district.' : ', and it is the only constituency of ' + SIR.esc(a.district) + ' district.'));
       if (C.second) pts.push(second2);
       if (C.reasons) {
         var top = C.reasons.slice().sort(function (x, y) { return a[y[0]] - a[x[0]]; })[0];
@@ -174,6 +179,12 @@
         rows: DS.map(function (r) { var v = L.per * r[L.count] / r[L.base]; return { name: r.name, v: Math.max(v, 0), text: d1(v), tok: r === a ? '--fill-red' : '--fill-navy', hi: r === a }; }) });
       document.getElementById('dLinks').innerHTML = '<p class="note">Open another constituency of ' + SIR.esc(a.district) + ' district:</p><p class="golist">' +
         DS.filter(function (r) { return r !== a; }).map(function (r) { return '<a class="chip" href="../' + r.ac + '/">' + SIR.esc(r.name) + '</a>'; }).join(' ') + '</p>';
+      // a district of one seat: no chart of one bar and no list of none
+      if (DS.length === 1) {
+        var vg = document.getElementById('vDistrict').closest('.grid');
+        vg.hidden = vg.previousElementSibling.hidden = true;
+        document.getElementById('dLinks').innerHTML = '<p class="note">It is the only constituency of ' + SIR.esc(a.district) + ' district.</p>';
+      }
 
       // what each state published beyond the lead count
       var more = [];
@@ -206,7 +217,7 @@
         var over = A.filter(function (r) { return r[E2.count] > r.margin; }).length;
         document.getElementById('fElection').innerHTML = '<b>' + SIR.esc(a.winner) + ' won ' + SIR.esc(a.name) + ' in ' + E2.year + ' by ' + n(a.margin) + ' votes' + (E2.turnout && a[E2.turnout] ? ', on a turnout of ' + d1(a[E2.turnout]) + ' per cent' : '') + '.</b> ' +
           (E2.prev && a[E2.prev] ? 'In ' + (E2.prevYear || 2021) + ' the seat was won by ' + SIR.esc(a[E2.prev]) + '. ' : '') +
-          'Across ' + C.label + ', the ' + (falls ? 'fall in the roll is larger than' : (L.short || 'names left off') + ' outnumber') + ' the margin in ' + over + ' of ' + A.length + ' seats. Larger than the margin means large enough to decide a seat, never that it did, and the lists cannot show how anyone left off would have voted.';
+          'Across ' + C.label + ', the ' + (falls ? 'fall in the roll is larger than' : (L.short || 'names left off') + ' outnumber') + ' the margin in ' + over + ' of ' + A.length + ' seats. Larger than the margin means large enough to have decided the seat. The figures do not show that it did, and the lists do not say how anyone left off would have voted.';
       } else document.getElementById('sElection').hidden = true;
 
       if (C.claims) {
@@ -224,7 +235,7 @@
       var here = location.origin + location.pathname, made = new Date();
       document.getElementById('fSources').innerHTML = (JW ? 'Every other figure' : 'Every figure') + ' on this page comes from ' + C.label + '\'s constituency table, <a href="' + root + 'data/' + st + '/constituencies.json">data/' + st + '/constituencies.json</a>, and the winning margins from the Election Commission\'s results.' + (JW ? ' The names added and deleted after the draft come from ' + JW + ', <a href="' + root + 'data/' + st + '/' + C.join.file + '">data/' + st + '/' + C.join.file + '</a>.' : '') + ' The <a href="' + stPage + 'method/">' + C.label + ' method page</a> names the source of every column. ' + C.limits +
         ' <span class="printonly">Printed from ' + SIR.esc(here) + ' on ' + made.getDate() + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][made.getMonth()] + ' ' + made.getFullYear() + '. Only counts are published, never a name.</span>';
-      document.getElementById('seatLinks').innerHTML = (CASE ? '<a class="btn" href="' + root + 'india/cases/#' + CASE + '">A case study of this constituency</a> ' : '') + (C.booths ? '<a class="btn" href="' + stPage + 'explorer/#ac' + ('00' + a.ac).slice(-3) + '">Its polling booths</a> ' : '') + '<a class="btn" href="' + stPage + (st === 'bihar' ? 'results/' : '') + '#ac-' + a.ac + '">' + C.label + (/^(assam|manipur|meghalaya|odisha)$/.test(st) ? ', opened at this constituency' : ', with this constituency on the map') + '</a> <a class="btn" href="' + stPage + 'method/">Sources and method</a> <a class="btn" href="' + root + 'india/constituencies/">Find another constituency</a>' +
+      document.getElementById('seatLinks').innerHTML = (CASE ? '<a class="btn" href="' + root + 'india/cases/#' + CASE + '">A case study of this constituency</a> ' : '') + (C.booths ? '<a class="btn" href="' + stPage + 'explorer/#ac' + ('00' + a.ac).slice(-3) + '">Its polling booths</a> ' : '') + '<a class="btn" href="' + stPage + (st === 'bihar' ? 'results/' : '') + '#ac-' + a.ac + '">' + C.label + (/^(assam|manipur|meghalaya|odisha)$/.test(st) ? ', opened at this constituency' : st === 'gujarat' ? ', opened at this constituency, with its district on the map' : ', with this constituency on the map') + '</a> <a class="btn" href="' + stPage + 'method/">Sources and method</a> <a class="btn" href="' + root + 'india/constituencies/">Find another constituency</a>' +
         ' <a class="btn" href="' + root + 'india/compare-seats/?state=' + st + '&amp;seats=' + a.ac + '">Compare with other constituencies of ' + C.label + '</a>' +
         ' <button type="button" class="btn seat-print">Print this seat</button>';
       // one A4 page: the figures, the margin and the sources (sir.css, body.brief)
