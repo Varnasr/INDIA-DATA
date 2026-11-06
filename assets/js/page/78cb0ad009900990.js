@@ -268,11 +268,25 @@ SIR.json('data/india/process.json').then(function (P) {
   }).catch(function () {});
 
   // the schedules
-  // #s-<state> (a link from a state's page) outlines that state's row
+  // #s-<state> (a link from a state's page) outlines that state's row, which
+  // carries that id, and brings it into view. Charts above it draw from other
+  // files and can arrive later, so the row is brought back into view as the
+  // page grows, until the reader scrolls or presses a key.
   var key = function (n) { return 's-' + n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
   var G = function (id, rows, label, mark) {
-    VIZ.gantt(id, { label: label, mark: mark, rows: rows.map(function (r) { return { name: r.state, steps: r.steps }; }) });
+    VIZ.gantt(id, { label: label, mark: mark, rowId: key, rows: rows.map(function (r) { return { name: r.state, steps: r.steps }; }) });
   };
+  var still = true;
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { addEventListener(ev, function () { still = false; }, { once: true, passive: true }); });
+  var toRow = function () {
+    var h = SIR.hashId(), t = /^s-/.test(h) && document.getElementById(h);
+    if (t) t.scrollIntoView({ block: 'center' });
+  };
+  if (window.ResizeObserver && /^s-/.test(SIR.hashId())) {
+    var ro = new ResizeObserver(function () { if (still) toRow(); else ro.disconnect(); });
+    ro.observe(document.querySelector('main'));
+    setTimeout(function () { ro.disconnect(); }, 8000);
+  }
   var drawG = function () {
     var h = SIR.hashId(), hit = null;
     P.schedules.forEach(function (r) { if (key(r.state) === h) hit = r; });
@@ -280,7 +294,7 @@ SIR.json('data/india/process.json').then(function (P) {
     G('vG1', P.schedules.filter(function (r) { return r.phase === 'I'; }), 'Bihar\'s schedule, from the order of 24 June 2025', m);
     G('vG2', p2, 'Phase II schedules, as set on 27 October 2025 and as moved', m);
     G('vG3', p3, 'Phase III schedules, as set on 14 May 2026 and as moved', m);
-    if (hit) { var pn = document.getElementById({ I: 'pG1', II: 'pG2', III: 'pG3' }[hit.phase]); if (pn) pn.scrollIntoView({ block: 'start' }); }
+    if (hit) toRow();
   };
   drawG();
   window.addEventListener('hashchange', drawG);

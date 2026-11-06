@@ -15,6 +15,7 @@ import csv
 import io
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -209,6 +210,9 @@ def seat_files(slug):
     seats = []
     for i, r in enumerate(T[cfg['acs']]['rows']):
         no, name = (int(r['name'].split()[0]), r['name'].split(' ', 1)[1]) if r['name'][0].isdigit() else (i + 1, r['name'])
+        # the reservation in capitals, as the Commission writes it: Odisha's
+        # table prints "(St)" and "(Sc)"
+        name = re.sub(r'\((sc|st)\)', lambda m: '(' + m.group(1).upper() + ')', name, flags=re.I)
         if no not in dist:
             fail(slug, 'constituency %d has no district in ac_district.csv' % no)
         x = dict(ac=no, name=name, district=dist[no])
