@@ -50,12 +50,11 @@ Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/process.js
 
   document.getElementById('cannotSeat').innerHTML = 'They cannot show that the names left off or deleted decided an election. In Bihar, the one state where how those electors would have voted can be estimated, the estimates have ' + lo + ' to ' + hi + ' seats changing hands, in both directions. <a href="../../bihar/results/">Bihar\'s elections page</a> sets out how.';
 
-  document.getElementById('asof').textContent = SIR.date(B.as_of);
   var html = '';
   B.groups.forEach(function (g) {
     var its = B.rights.filter(function (x) { return x.group === g; }); if (!its.length) return;
     html += '<h3>' + esc(g) + '</h3><ol class="nfacts rights">' + its.map(function (x) {
-      return '<li><p>' + esc(x.point) + '</p><p class="nsrc"><a href="' + esc(x.url) + '" rel="noopener">' + esc(x.law) + '</a></p>' +
+      return '<li><p>' + esc(x.point) + '</p><p class="nsrc"><a href="' + esc(x.url) + '" rel="noopener">' + esc(x.law) + '</a>. Last checked on ' + SIR.date(x.checked) + '.</p>' +
         '<details><summary>The words of the law</summary><blockquote>' + esc(x.quote) + '</blockquote></details></li>';
     }).join('') + '</ol>';
   });

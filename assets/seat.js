@@ -73,6 +73,9 @@
       reasons: [['r_shifted', 'Shifted'], ['r_dead', 'Dead'], ['r_absent', 'Absent'], ['r_enrolled', 'Already enrolled']], reasonsOf: 'p1', reasonsWhat: 'the first phase',
       election: { year: 2025, count: 'total', turnout: 'turnout2025', prev: 'win2020', prevYear: 2020 },
       booths: true,
+      // names added and deleted after the draft, seat by seat, from the final roll's table
+      join: { file: 'final.json', fields: { claims: 'added', objections: 'removed_after', draft: 'draft', final: 'final' },
+        what: 'the Chief Electoral Officer\'s table of the final roll', listed: 'p2' }, claims: true,
       limits: 'Reasons are counted for the first phase only, from the lists. Every rate is per 100 on the 2025 election roll.' }
   };
 
@@ -85,7 +88,14 @@
   SIR.seatPage = function () {
     var st = document.body.getAttribute('data-seat-state'), no = +document.body.getAttribute('data-seat-ac'), C = CFG[st];
     var root = document.body.getAttribute('data-root') || '';
-    return SIR.json('data/' + st + '/constituencies.json').then(function (A) {
+    return Promise.all([SIR.json('data/' + st + '/constituencies.json'), C && C.join ? SIR.json('data/' + st + '/' + C.join.file) : null]).then(function (R) {
+      var A = R[0];
+      // a second file keyed by constituency number, for figures constituencies.json does not hold
+      if (R[1]) {
+        var J = {};
+        R[1].seats.forEach(function (s) { J[s.ac] = s; });
+        A.forEach(function (r) { var s = J[r.ac]; if (s) Object.keys(C.join.fields).forEach(function (k) { r[k] = s[C.join.fields[k]]; }); });
+      }
       var a = A.filter(function (r) { return r.ac === no; })[0];
       if (!a || !C) throw new Error('no constituency ' + no + ' in ' + st);
       // a state's own field names for the winner, runner-up and margin
@@ -129,7 +139,9 @@
           : falls ? ' is smaller than that margin. The names left off or deleted may be more than the fall, because the fall nets out names added.'
             : ' are fewer than that margin, so the runner-up could not have won even if every one of them had voted for the runner-up.')));
       }
-      if (C.claims) pts.push('After the draft, ' + n(a.claims) + ' names were added and ' + n(a.objections) + ' deleted' + (a.women_objections_pct != null ? ', and women were ' + pct(a.women_objections_pct) + ' of those deleted against ' + pct(a.women_draft_pct) + ' of the draft.' : '. The names added include people enrolling for the first time.'));
+      // a joined table's deletions can differ from the lists behind the lead count, so both are named
+      var JW = C.join && C.join.what, JL = JW && C.join.listed && a[C.join.listed] != null && a[C.join.listed] !== a.objections ? a[C.join.listed] : null;
+      if (C.claims) pts.push('After the draft, ' + (JW ? 'by ' + JW + ', ' : '') + n(a.claims) + ' names were added and ' + n(a.objections) + ' deleted' + (a.women_objections_pct != null ? ', and women were ' + pct(a.women_objections_pct) + ' of those deleted against ' + pct(a.women_draft_pct) + ' of the draft.' : '. ' + (JL != null ? 'The phase 2 lists, counted in the first figure above, name ' + n(JL) + ' deleted after the draft, and both counts are given as published. ' : '') + 'The names added include people enrolling for the first time.'));
       var Pr = C.press && a.press;
       if (Pr) pts.splice(2, 0, 'By the District Election Officer\'s figures as ' + Pr.outlet + ' printed them, ' + n(Pr.left_off) + ' names were left off its draft' + (Pr.per_100 != null ? ', ' + d1(Pr.per_100) + ' of every 100 on the roll before the revision' : '') + '. ' + (Pr.left_off > a.margin ? 'That is more than the 2023 winning margin of ' + n(a.margin) + ', large enough to decide the seat, which says nothing about whether it would have.' : 'That is fewer than the 2023 winning margin of ' + n(a.margin) + '.'));
       SIR.inShort(pts, C.limits);
@@ -200,7 +212,7 @@
       if (C.claims) {
         VIZ.lollipop('vAfter', { label: a.name + ': names added and deleted after the draft', axis: 'Names',
           rows: [['Added after the draft', a.claims, '--fill-teal'], ['Deleted after the draft', a.objections, '--fill-red']].map(function (r) { return { name: r[0], v: r[1], text: n(r[1]), tok: r[2], hi: true }; }) });
-        document.getElementById('fAfter').innerHTML = 'The final roll holds ' + n(a.final) + ', ' + (a.final >= a.draft ? n(a.final - a.draft) + ' more' : n(a.draft - a.final) + ' fewer') + ' than the draft. The names added include people enrolling for the first time, so they say little about names put back.';
+        document.getElementById('fAfter').innerHTML = (JW ? 'These counts are from ' + JW + '. ' : '') + 'The final roll holds ' + n(a.final) + ', ' + (a.final >= a.draft ? n(a.final - a.draft) + ' more' : n(a.draft - a.final) + ' fewer') + ' than the draft. The names added include people enrolling for the first time, so they say little about names put back.';
       } else if (C.after) {
         VIZ.lollipop('vAfter', { label: a.name + ': the draft and the final roll', axis: 'Electors',
           rows: [['Roll before the revision', a[L.base], '--fill-navy'], ['Draft roll', a.draft, '--fill-red'], ['Final roll', a.final, '--fill-navy']].map(function (r) { return { name: r[0], v: r[1], text: n(r[1]), tok: r[2], hi: true }; }) });
@@ -210,7 +222,7 @@
       var CASE = { 'uttarakhand-67': 'kichha', 'delhi-52': 'tughlakabad', 'gujarat-54': 'danilimda', 'maharashtra-137': 'bhiwandi-east', 'tamilnadu-21': 'anna-nagar', 'assam-76': 'lakhimpur' }[st + '-' + a.ac];
       // where the figures come from, on screen and on the one-page printout
       var here = location.origin + location.pathname, made = new Date();
-      document.getElementById('fSources').innerHTML = 'Every figure on this page comes from ' + C.label + '\'s constituency table, <a href="' + root + 'data/' + st + '/constituencies.json">data/' + st + '/constituencies.json</a>, and the winning margins from the Election Commission\'s results. The <a href="' + stPage + 'method/">' + C.label + ' method page</a> names the source of every column. ' + C.limits +
+      document.getElementById('fSources').innerHTML = (JW ? 'Every other figure' : 'Every figure') + ' on this page comes from ' + C.label + '\'s constituency table, <a href="' + root + 'data/' + st + '/constituencies.json">data/' + st + '/constituencies.json</a>, and the winning margins from the Election Commission\'s results.' + (JW ? ' The names added and deleted after the draft come from ' + JW + ', <a href="' + root + 'data/' + st + '/' + C.join.file + '">data/' + st + '/' + C.join.file + '</a>.' : '') + ' The <a href="' + stPage + 'method/">' + C.label + ' method page</a> names the source of every column. ' + C.limits +
         ' <span class="printonly">Printed from ' + SIR.esc(here) + ' on ' + made.getDate() + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][made.getMonth()] + ' ' + made.getFullYear() + '. Only counts are published, never a name.</span>';
       document.getElementById('seatLinks').innerHTML = (CASE ? '<a class="btn" href="' + root + 'india/cases/#' + CASE + '">A case study of this constituency</a> ' : '') + (C.booths ? '<a class="btn" href="' + stPage + 'explorer/#ac' + ('00' + a.ac).slice(-3) + '">Its polling booths</a> ' : '') + '<a class="btn" href="' + stPage + (st === 'bihar' ? 'results/' : '') + '#ac-' + a.ac + '">' + C.label + (/^(assam|manipur|meghalaya|odisha)$/.test(st) ? ', opened at this constituency' : ', with this constituency on the map') + '</a> <a class="btn" href="' + stPage + 'method/">Sources and method</a> <a class="btn" href="' + root + 'india/constituencies/">Find another constituency</a>' +
         ' <a class="btn" href="' + root + 'india/compare-seats/?state=' + st + '&amp;seats=' + a.ac + '">Compare with other constituencies of ' + C.label + '</a>' +
