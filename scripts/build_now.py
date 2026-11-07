@@ -43,19 +43,19 @@ MONTHS = 'January February March April May June July August September October No
 # none. "bench" names the source in CITE, a disputes item, whose remarks the page states, and
 # "split" asks for The Hindu's count from the state's note in states.json.
 PAGES = [
-    {'state': 'Delhi', 'place': 'dl', 'path': 'delhi/now/',
+    {'state': 'Delhi', 'place': 'dl', 'path': 'delhi/now/', 'asdd': 'c_asdd_again',
      'ceo': [['site', 'https://ceodelhi.gov.in/'], ['x', 'https://x.com/CeodelhiOffice']],
      'bench': 'c_bench', 'split': True, 'form7': ['c_dl_form7', 'c_dl_form7_verify']},
-    {'state': 'Maharashtra', 'place': 'mh', 'path': 'maharashtra/now/',
+    {'state': 'Maharashtra', 'place': 'mh', 'path': 'maharashtra/now/', 'asdd': 'c_asdd_again',
      'ceo': [['site', 'https://ceoelection.maharashtra.gov.in/']]},
-    {'state': 'Jharkhand', 'place': 'jh', 'path': 'jharkhand/now/', 'ceo': []},
-    {'state': 'Andhra Pradesh', 'place': 'ap', 'path': 'andhrapradesh/now/',
+    {'state': 'Jharkhand', 'place': 'jh', 'path': 'jharkhand/now/', 'ceo': [], 'asdd': 'c_asdd_again'},
+    {'state': 'Andhra Pradesh', 'place': 'ap', 'path': 'andhrapradesh/now/', 'asdd': 'c_asdd_again',
      'ceo': [['x', 'https://x.com/CEOAndhra']]},
-    {'state': 'Telangana', 'place': 'hyd', 'path': 'hyderabad/telangana/now/',
+    {'state': 'Telangana', 'place': 'hyd', 'path': 'hyderabad/telangana/now/', 'asdd': 'c_asdd_again',
      'ceo': [['x', 'https://x.com/CEO_Telangana']]},
-    {'state': 'Haryana', 'place': 'hr', 'path': 'haryana/now/',
+    {'state': 'Haryana', 'place': 'hr', 'path': 'haryana/now/', 'asdd': 'c_asdd_again',
      'ceo': [['site', 'https://ceoharyana.gov.in/']]},
-    {'state': 'Nagaland', 'place': 'nl', 'path': 'nagaland/now/',
+    {'state': 'Nagaland', 'place': 'nl', 'path': 'nagaland/now/', 'asdd': 'c_asdd_again',
      'ceo': [['site', 'https://ceo.nagaland.gov.in/']]},
     # The states and union territories whose revision is over, and Tripura,
     # whose draft is still to come. A Chief Electoral Officer's address is
@@ -154,6 +154,10 @@ CITE = {
     # the Commission's letter of 3 November 2026 on Form 6 from electors who
     # were on an earlier roll, and section 31 of the 1950 Act
     'c_form6_clar': ('timeline', '2026-11-03', 'Form 6 for electors who were on the roll before'),
+    # the Commission's letter of 6 November 2026 to seven states: one more
+    # chance for electors left off the draft as absent, shifted, dead or
+    # duplicate, on the enumeration form
+    'c_asdd_again': ('timeline', '2026-11-06', 'One more chance for electors marked absent, shifted, dead or duplicate'),
     # the special summary revision of 15 October 2026 in 17 states and union
     # territories, and the forms of the 1960 Rules used outside the revision
     'c_ssr': ('timeline', '2026-10-15', 'A summary revision where the revision is over'),
@@ -287,7 +291,7 @@ def build():
                 'notices': notices}
         if row.get('tribunal'):
             page['tribunal'] = True
-        for k in ('form7', 'form8'):
+        for k in ('form7', 'form8', 'asdd'):
             if row.get(k):
                 for key in (row[k] if isinstance(row[k], list) else [row[k]]):
                     if key not in CITE:
