@@ -295,4 +295,7 @@ aggregate.
   November, from the office of the Delhi Chief Electoral Officer (PTI in the
   Daily Excelsior, dated New Delhi, 6 November 2026). The same caveat as the
   earlier Delhi counts applies, and the report gives no count of cases
-  rejected. It supersedes the 32 lakh of 30 October.
+  rejected. "Parked for the final roll" counts the electors cleared for it,
+  so a notice decided against an elector is left out and, as a count of
+  notices decided, the figure is a floor. The Times of India row of 26 October
+  used the same word. It supersedes the 32 lakh of 30 October.
