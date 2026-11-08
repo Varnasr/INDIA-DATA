@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 465,
-  "bytes": 13891697
+  "bytes": 13894657
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 539475,
+   "bytes": 540270,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 79738,
+   "bytes": 79751,
    "keys": [
     "note",
     "entries"
@@ -4265,7 +4265,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 309651,
+   "bytes": 310445,
    "columns": [
     "section",
     "date",
@@ -4286,7 +4286,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 504102,
+   "bytes": 504733,
    "keys": [
     "listings",
     "sections",
@@ -4401,7 +4401,7 @@
    "path": "data/india/form7_bulk.json",
    "description": "Bulk Form 7 filings reported, state by state, each linked to its reports on the disputes page",
    "format": "JSON",
-   "bytes": 27692,
+   "bytes": 27709,
    "keys": [
     "rows",
     "status",
@@ -4590,7 +4590,7 @@
    "path": "data/india/process.json",
    "description": "How the revision was run: the rules as they changed, and each state's dates",
    "format": "JSON",
-   "bytes": 167453,
+   "bytes": 167527,
    "keys": [
     "as_of",
     "timeline",
@@ -4634,7 +4634,7 @@
    "path": "data/india/process_timeline.csv",
    "description": "Every order, letter, court order and judgment that changed how the revision was run",
    "format": "CSV",
-   "bytes": 36505,
+   "bytes": 36579,
    "columns": [
     "date",
     "who",
@@ -4650,7 +4650,7 @@
    "path": "data/india/reads.json",
    "description": "Further reading and viewing on the revision, with outlets, dates and summaries",
    "format": "JSON",
-   "bytes": 120727,
+   "bytes": 120921,
    "keys": [
     "groups",
     "items",
@@ -7137,7 +7137,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 683986,
+   "bytes": 684180,
    "licence": "CC BY 4.0"
   },
   {
@@ -7172,7 +7172,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 320449,
+   "bytes": 320623,
    "licence": "CC BY 4.0"
   },
   {

@@ -299,3 +299,17 @@ aggregate.
   so a notice decided against an elector is left out and, as a count of
   notices decided, the figure is a floor. The Times of India row of 26 October
   used the same word. It supersedes the 32 lakh of 30 October.
+
+## Update of 2026-11-08
+
+One row was added, read in full with curl on 2026-11-08 and read again
+independently the same day. The figure is an aggregate.
+
+- **Telangana**: 54,418 electors found ineligible after a notice, from data
+  released by the Chief Electoral Officer, C. Sudarshan Reddy, on Friday 6
+  November (Siasat, News Desk, 7 November 2026, 17:49 IST, modified 19:42
+  IST). It is the same count as the earlier `deleted_after_notice` rows for
+  Telangana, electors found ineligible for inclusion in the final roll, and
+  it supersedes the 50,690 of 29 October. The report gives 92.8 lakh notices,
+  nearly 91 lakh cleared and about 1.3 lakh pending, all rounded, so no
+  notices or hearings row was added from it.
