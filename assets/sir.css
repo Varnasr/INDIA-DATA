@@ -609,6 +609,12 @@ main h2[id],main h3[id]{scroll-margin-top:calc(var(--hh,0px) + 70px)}
   .controls .theme .lbl,.controls .print .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .controls .theme,.controls .print{padding-inline:.7rem}
   .controls{margin-inline-start:auto;justify-content:flex-end}
+  /* script adds the 44px dyslexia-font button after first paint; reserve its height so the header and the page under it do not move */
+  header.top .controls{min-height:44px}
+  /* the brand name is wider in Fraunces (143px) than in its fallback (126px); without a floor the row wraps when the font arrives */
+  header.top .logo{min-width:9rem}
+  /* and its width: between 701 and about 1000px the row wraps once the button arrives, so hold a 44px slot until it does */
+  header.top .controls[data-dyslexia-slot]:not(:has(#dys-font-btn))::after{content:"";flex:none;width:44px;height:44px}
 }
 /* stage chips on india/progress/ */
 .stage{display:inline-block;font-size:.8rem;font-weight:600;padding:1px 8px;border-radius:4px;line-height:1.5}
@@ -1380,4 +1386,4 @@ body.embed .emcredit{margin:0;padding:.5rem 1rem 1rem;color:var(--muted);font-si
 @media (min-width:340px) and (max-width:419px){.home .hero h1{min-height:5lh}.home .hero .lead{min-height:6lh}}
 @media (min-width:420px) and (max-width:519px){.home .hero h1{min-height:4lh}.home .hero .lead{min-height:6lh}}
 @media (min-width:520px) and (max-width:639px){.home .hero .lead{min-height:4lh}}
-@media (min-width:1000px){.home .hero h1,.home .hero .lead{min-height:4lh}}
+@media (min-width:900px){.home .hero h1,.home .hero .lead{min-height:4lh}}
