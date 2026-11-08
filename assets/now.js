@@ -79,11 +79,11 @@
 
     // the Commission's letter of 6 November 2026 to seven states: electors
     // left off the draft as absent, shifted, dead or duplicate may submit the
-    // enumeration form again, as the press reported it
+    // enumeration form again, as the Commission's letter sets out
     var asdd = pg.asdd && C[pg.asdd] ? sec('marked-absent-shifted-dead-or-duplicate', L('If you were left off the draft as absent, shifted, dead or duplicate'),
-      p(L('The Commission\'s letter of {d} to the Chief Electoral Officers of seven states, {s} among them, gives one more opportunity to electors who were issued an enumeration form but were left off the draft roll because they were marked absent, shifted, dead or duplicate, as the press reported it. The lists of these electors, booth by booth and with the probable reason each was left off, are to be put up again at the polling stations, panchayat bhawans and urban local body offices and on the Chief Electoral Officer\'s website.', { d: D(C[pg.asdd].date), s: s })) +
-      p(L('As the press reported the letter, if you still live at the same address, submit the enumeration form with a statement of why it was not submitted earlier, to the registration officer, the assistant registration officer or the booth level officer, or online on ECINet with an e-sign. If you have moved within the state, you need not file Form 8. Submit the enumeration form with a statement of your new address and Assembly constituency and proof of address to the registration officer or the assistant registration officer of the constituency you have moved to. For a homeless elector with no address document, the booth level officer\'s field verification report serves as proof of residence.')) +
-      p(L('As the press reported it, the form can be downloaded and filled on the Commission\'s website or the ECINet app with the EPIC number you held before your name was left off. The registration officer examines each form under rule 21(1) of the Registration of Electors Rules, 1960, checking eligibility and ordinary residence, and a form accepted is kept apart for the final roll with your earlier EPIC number. If you have already filed Form 6 during the revision, you need not submit the enumeration form.')),
+      p(L('The Commission\'s letter of {d} to the Chief Electoral Officers of seven states, {s} among them, gives one more opportunity to electors who were issued an enumeration form but were left off the draft roll because they were marked absent, shifted, dead or duplicate. The lists of these electors, booth by booth and with the probable reason each was left off, are to be put up again at the polling stations, panchayat bhawans and urban local body offices and on the Chief Electoral Officer\'s website.', { d: D(C[pg.asdd].date), s: s })) +
+      p(L('If you still live at the same address, submit the enumeration form with a statement of why it was not submitted earlier, to the registration officer, the assistant registration officer or the booth level officer, or online on ECINet with an e-sign. If you have moved within the state, you need not file Form 8. Submit the enumeration form with a statement of your new address and Assembly constituency and proof of address to the registration officer or the assistant registration officer of the constituency you have moved to. For a homeless elector with no address document, the booth level officer\'s field verification report serves as proof of residence.')) +
+      p(L('The form can be downloaded and filled on the Commission\'s website or the ECINet app with the EPIC number you held before your name was left off. The registration officer examines each form under rule 21(1) of the Registration of Electors Rules, 1960, checking eligibility and ordinary residence, and a form accepted is kept apart for the final roll with your earlier EPIC number. If you have already filed Form 6 during the revision, you need not submit the enumeration form.')),
       [pg.asdd]) : '';
     if (kind === 'open') {
       out.push(sec('check-the-draft-roll', L('Check whether your name is on the draft roll'),
@@ -134,7 +134,7 @@
       short = [L('Claims and objections in {s} are open until {c}.', { s: s, c: D(r.c1) }),
         L('Until that day an elector left off the draft can ask on Form 6 to be put back, an elector can object to a name on Form 7, and an entry can be corrected on Form 8.'),
         pg.bench && C[pg.bench] ? L('On {d} the Supreme Court bench said at a hearing that Delhi electors left off the draft who had only been away for a time should be allowed to submit the enumeration form, and those who had moved within Delhi should be allowed Form 8. No written order was reported.', { d: D(C[pg.bench].date) }) : '',
-        pg.asdd && C[pg.asdd] ? L('Under the Commission\'s letter of {d}, an elector left off the draft as absent, shifted, dead or duplicate can submit the enumeration form again, as the press reported it.', { d: D(C[pg.asdd].date) }) : '',
+        pg.asdd && C[pg.asdd] ? L('Under the Commission\'s letter of {d}, an elector left off the draft as absent, shifted, dead or duplicate can submit the enumeration form again.', { d: D(C[pg.asdd].date) }) : '',
         L('The voter helpline is {a}, and the free legal aid helpline is {b}.', { a: tel('1950'), b: tel('15100') })];
     } else if (kind === 'closed') {
       if (asdd) out.push(asdd);
@@ -156,7 +156,7 @@
       short = [r.c1 && r.c1 < T ? L('Claims and objections in {s} closed on {c}.', { s: s, c: D(r.c1) }) : '',
         r.n1 ? (r.n1 >= T ? L('Notices are being heard and decided until {n}.', { n: D(r.n1) }) : L('Notices were to be heard and decided by {n}.', { n: D(r.n1) })) : '',
         r.f ? (r.rep ? L('The final roll is due on {f}, as {o} reported on {r}.', { f: D(r.f), o: E(r.rep.outlet) + (/,/.test(r.rep.outlet) ? ',' : ''), r: D(r.rep.date) }) : L('The final roll is due on {f}.', { f: D(r.f) })) : '',
-        pg.asdd && C[pg.asdd] ? L('Under the Commission\'s letter of {d}, an elector left off the draft as absent, shifted, dead or duplicate can submit the enumeration form again, as the press reported it.', { d: D(C[pg.asdd].date) }) : '',
+        pg.asdd && C[pg.asdd] ? L('Under the Commission\'s letter of {d}, an elector left off the draft as absent, shifted, dead or duplicate can submit the enumeration form again.', { d: D(C[pg.asdd].date) }) : '',
         L('Once the revision is over in the state, an elector who is not on the final roll can still apply on Form 6 at any time under continuous updation.')];
     } else if (kind === 'final') {
       var fs = S[name] && S[name].final_source;
