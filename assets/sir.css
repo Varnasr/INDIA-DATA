@@ -1369,3 +1369,15 @@ body.embed .emcredit{margin:0;padding:.5rem 1rem 1rem;color:var(--muted);font-si
 .strip a:hover{text-decoration-color:var(--ink)}
 .strip small{display:block;color:var(--muted);font-size:.85rem;margin-top:.2rem}
 @media (max-width:700px){.home .strip ul{grid-template-columns:minmax(0,1fr)}}
+
+/* The home page headline, its lede and the dot grid are written by script from the counts.
+   Each holds the room it will take, so the page below them does not move when the counts arrive.
+   Heights are in lines of the element's own line-height, by the width at which that many lines wrap. */
+.home .hero h1{min-height:3lh}
+.home .hero .lead{min-height:3lh}
+.dots:empty{aspect-ratio:4.1}
+@media (max-width:339px){.home .hero h1{min-height:6lh}.home .hero .lead{min-height:8lh}}
+@media (min-width:340px) and (max-width:419px){.home .hero h1{min-height:5lh}.home .hero .lead{min-height:6lh}}
+@media (min-width:420px) and (max-width:519px){.home .hero h1{min-height:4lh}.home .hero .lead{min-height:6lh}}
+@media (min-width:520px) and (max-width:639px){.home .hero .lead{min-height:4lh}}
+@media (min-width:1000px){.home .hero h1,.home .hero .lead{min-height:4lh}}
