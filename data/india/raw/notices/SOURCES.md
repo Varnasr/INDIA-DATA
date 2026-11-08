@@ -285,3 +285,17 @@ are aggregates.
   1,73,662 ineligible in the same sentence add to 434 more than the hearings.
   The report explains neither gap. Notices are now decided by 20 November and
   the final roll is due on 30 November 2026.
+
+## Update of 2026-11-07
+
+One row was added, read in full with curl on 2026-11-07. The figure is an
+aggregate.
+
+- **Delhi**: 32,35,212 of 33.1 lakh notices parked for the final roll as of 4
+  November, from the office of the Delhi Chief Electoral Officer (PTI in the
+  Daily Excelsior, dated New Delhi, 6 November 2026). The same caveat as the
+  earlier Delhi counts applies, and the report gives no count of cases
+  rejected. "Parked for the final roll" counts the electors cleared for it,
+  so a notice decided against an elector is left out and, as a count of
+  notices decided, the figure is a floor. The Times of India row of 26 October
+  used the same word. It supersedes the 32 lakh of 30 October.
