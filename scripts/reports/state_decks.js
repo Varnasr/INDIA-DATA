@@ -180,7 +180,7 @@ const band = ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'];
 function tamilnadu() {
   const S = J('tamilnadu/summary.json'), D = J('tamilnadu/districts.json'), A = J('tamilnadu/constituencies.json');
   const C = S.chennai, WN = Object.fromEntries(S.winners.map((w) => [w.party, w])), low = D[D.length - 1];
-  const P = { dark: '6E3420', darker: '552818', accent: '8E442B', light: 'F2DCCB', soft: 'FBEFE8', band, foot: 'Tamil Nadu SIR 2026 · ImpactMojo · totals only, never names or EPIC numbers' };
+  const P = { dark: '6E3420', darker: '552818', accent: '8E442B', light: 'F2DCCB', soft: 'FBEFE8', band, foot: 'Tamil Nadu SIR 2026 · ImpactMojo · totals only, no names or EPIC numbers' };
   const [pres, K] = deck('Tamil Nadu SIR 2026', P);
   const CHN = A.filter((a) => a.district === 'Chennai').sort((a, b) => b.per_100 - a.per_100);
 
@@ -267,7 +267,7 @@ function tamilnadu() {
     'The roll before the revision is the draft plus the names left off, ' + indian(S.before) + ' in all, because no constituency table of it was published.',
     'The 2026 result is from the Election Commission\'s result pages, and turnout is votes over the final roll. The 2021 result is from the Commission\'s statistical report, through a published compilation of it.',
     'Each seat\'s rate is also set against its own district\'s, because Chennai and the districts around it lost far more names than the rest of the state.',
-    'Only counts are published, never a name, EPIC number or address.',
+    'Only counts are published. No name, EPIC number or address appears in this deck.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
   closing(pres, K, P, 'The full analysis', ['The constituency map, every district and constituency, and the full report are published online alongside this deck.', 'ImpactMojo']);
@@ -278,7 +278,7 @@ function tamilnadu() {
 // ============================================================ KARNATAKA
 function karnataka() {
   const S = J('karnataka/summary.json'), D = J('karnataka/districts.json'), B = S.bengaluru, R = S.rest;
-  const P = { dark: '17533F', darker: '103D2E', accent: '1E6B52', light: 'CFE8DE', soft: 'EAF5F0', band, foot: 'Karnataka SIR 2026 · ImpactMojo · totals only, never names or EPIC numbers' };
+  const P = { dark: '17533F', darker: '103D2E', accent: '1E6B52', light: 'CFE8DE', soft: 'EAF5F0', band, foot: 'Karnataka SIR 2026 · ImpactMojo · totals only, no names or EPIC numbers' };
   const [pres, K] = deck('Karnataka SIR 2026', P);
   const BL = D.filter((d) => d.bengaluru), nxt = D.filter((d) => !d.bengaluru), low = D[D.length - 1];
   const RK = [['shifted', 'Shifted', '1F618D'], ['absent', 'Absent', 'C0392B'], ['dead', 'Dead', GREY], ['duplicate', 'Already enrolled', 'D4AC0D'], ['other', 'Other', '8E7CC3']];
@@ -348,7 +348,7 @@ function karnataka() {
     'The names left off the draft roll of 24 August 2026, by election district and under five reasons, are the Chief Electoral Officer\'s table. The ' + S.districts + ' district rows add up to the state row, ' + indian(S.removed) + ' out of ' + indian(S.before) + '.',
     'The roll of 9 October 2026, by district and sex, is from the press note of that date. The final roll of 27 October 2026, for the state only, is from The Hindu\'s and ETV Bharat\'s reports of the Chief Electoral Officer\'s figures.',
     'Bengaluru is four election districts, Bangalore Urban and the B.B.M.P. North, Central and South districts.',
-    'Only counts are published, never a name, EPIC number or address.',
+    'Only counts are published. No name, EPIC number or address appears in this deck.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 16);
 
   closing(pres, K, P, 'The full analysis', ['The district map, every district, and the full report are published online alongside this deck.', 'ImpactMojo']);
@@ -360,7 +360,7 @@ function karnataka() {
 function westbengal() {
   const S = J('westbengal/summary.json'), D = J('westbengal/districts.json'), A = J('westbengal/constituencies.json'), Pn = S.pn05, AD = S.adj;
   const WN = Object.fromEntries(S.winners.map((w) => [w.party, w])), kol = (n) => /^Kolkata/.test(n), low = D[D.length - 1];
-  const P = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band, foot: 'West Bengal SIR 2026 · ImpactMojo · totals only, never names or EPIC numbers' };
+  const P = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band, foot: 'West Bengal SIR 2026 · ImpactMojo · totals only, no names or EPIC numbers' };
   const [pres, K] = deck('West Bengal SIR 2026', P);
 
   cover(pres, K, P, 'Special Intensive Revision · West Bengal 2026', 'The revision left ' + lakh(Pn.removed) + ' names off West Bengal\'s draft roll and held back ' + lakh(Pn.adjudication) + ' more',
@@ -448,7 +448,7 @@ function westbengal() {
     'The rolls at the 2024 Lok Sabha nominations, the draft of 16 December 2025 and the 2026 nominations are the Chief Electoral Officer\'s tables by constituency and sex. The fall between them is never called the names left off.',
     'The adjudication outcomes and appeals are the Election Commission\'s figures as the press reported them.',
     'The 2026 result is from the Election Commission\'s result pages, with Falta\'s from its re-poll. Each seat\'s fall is also set against its own district\'s.',
-    'Only counts are published, never a name, EPIC number or address.',
+    'Only counts are published. No name, EPIC number or address appears in this deck.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
   closing(pres, K, P, 'The full analysis', ['The constituency map, every district and constituency, and the full report are published online alongside this deck.', 'ImpactMojo']);
@@ -460,7 +460,7 @@ function westbengal() {
 function kerala() {
   const S = J('kerala/summary.json'), D = J('kerala/districts.json'), A = J('kerala/constituencies.json');
   const WN = Object.fromEntries(S.winners.map((w) => [w.party, w])), low = D[D.length - 1], grew = D.filter((d) => d.per_100 < 0).map((d) => d.district);
-  const P = { dark: '0B4A57', darker: '083843', accent: '0E5E6F', light: 'CDE6EB', soft: 'E8F3F5', band, foot: 'Kerala SIR 2026 · ImpactMojo · totals only, never names or EPIC numbers' };
+  const P = { dark: '0B4A57', darker: '083843', accent: '0E5E6F', light: 'CDE6EB', soft: 'E8F3F5', band, foot: 'Kerala SIR 2026 · ImpactMojo · totals only, no names or EPIC numbers' };
   const [pres, K] = deck('Kerala SIR 2026', P);
 
   cover(pres, K, P, 'Special Intensive Revision · Kerala 2026', 'Kerala\'s draft roll was ' + lakh(S.fall_draft) + ' smaller than in January 2025',
@@ -531,7 +531,7 @@ function kerala() {
     'Four rolls by constituency and sex, all the Chief Electoral Officer\'s, are the final roll of the 2025 summary revision (6 January 2025), the draft (23 December 2025), the final roll (21 February 2026) and the roll of 23 March 2026, on which the election was held.',
     'No table of the names left off has been published, so the figures measure the fall in the roll. For the state it is ' + indian(S.fall_draft) + ', against ' + indian(S.press_removed) + ' names reported left off with the draft.',
     'The 2026 result is from the Election Commission\'s result pages. Each seat\'s fall is also set against its own district\'s.',
-    'Only counts are published, never a name, EPIC number or address.',
+    'Only counts are published. No name, EPIC number or address appears in this deck.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 16);
 
   closing(pres, K, P, 'The full analysis', ['The constituency map, every district and constituency, and the full report are published online alongside this deck.', 'ImpactMojo']);

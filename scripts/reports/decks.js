@@ -137,7 +137,7 @@ function closing(pres, K, P, head, lines) {
 function bihar() {
   const S = J('bihar/summary.json'), A = J('bihar/constituencies.json'), DS = J('bihar/districts.json'), ID = J('bihar/identity.json'), RS = J('bihar/reasons.json'), FB = J('bihar/final.json'), TS = J('bihar/tests.json'), IM = J('bihar/impact.json'), SW = J('bihar/swing.json').summary, RB = J('bihar/r' + 'obust.json'); // file name split so the prose check does not read it as a word
   const t = S.totals, DI = ID.districts;
-  const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · ImpactMojo · totals only, never names or EPIC numbers' };
+  const P = { dark: '8E2F25', darker: '6E231C', accent: 'B03A2E', light: 'F5D6C6', soft: 'FBEFE8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'Bihar SIR 2025 · ImpactMojo · totals only, no names or EPIC numbers' };
   const AL = { NDA: 'E67E22', INDIA: '1E8449', Other: '8E7CC3' };
   const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'ImpactMojo'; pres.title = 'Bihar SIR 2025';
   const K = kit(pres, P);
@@ -466,7 +466,7 @@ function bihar() {
     'Party names matched to the declared result. In nine Lok Sabha seats a party name in the booth file differed from the declared result and was matched to it, with evidence. After matching, the top two in all 40 seats are the declared winner and runner-up.',
     'Titles are not surnames. Devi, Kumari and Khatun say nothing about caste and are set aside, and caste is read from the father\'s or husband\'s surname.',
     'Seats are joined by number, because Bihar has two Kalyanpurs and two Pipras.',
-    'Only counts are published, never a name, EPIC number or address.',
+    'Only counts are published. No name, EPIC number or address appears in this deck.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
   closing(pres, K, P, 'The full analysis', ['The dashboard, the booth explorer for every constituency and booth, and the full report with a chapter for each of the 38 districts, are published online alongside this deck.', 'ImpactMojo']);
@@ -479,7 +479,7 @@ function hyderabad() {
   const S = J('hyderabad/summary.json'), PJ = J('hyderabad/parts.json'), HI = J('hyderabad/impact.json').seats;
   const PR = PJ.rows.map((r) => Object.fromEntries(PJ.fields.map((f, i) => [f, r[i]])));
   const A = S.acs, t = S.totals, names = A.map((a) => a.name);
-  const P = { dark: '6E1832', darker: '52101F', accent: '8B1E3F', light: 'F2D9B8', soft: 'F7ECEF', band: ['8B1E3F', '0E5E6F', 'E0A526', '0E5E6F'], foot: 'Hyderabad Old City SIR 2026 · ImpactMojo · totals only, never names or EPIC numbers' };
+  const P = { dark: '6E1832', darker: '52101F', accent: '8B1E3F', light: 'F2D9B8', soft: 'F7ECEF', band: ['8B1E3F', '0E5E6F', 'E0A526', '0E5E6F'], foot: 'Hyderabad Old City SIR 2026 · ImpactMojo · totals only, no names or EPIC numbers' };
   const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'ImpactMojo'; pres.title = 'Hyderabad Old City SIR 2026';
   const K = kit(pres, P);
   const s_ = (f) => sum(A, f);
@@ -657,7 +657,7 @@ function hyderabad() {
     'The exclusion rate is the electors on the absent-shifted-dead list divided by the electors on the roll before the revision, for each group.',
     'The within-part difference is one group\'s rate minus another\'s inside each polling part, pooled and weighted by the smaller group in each part. Parts with fewer than 20 of either group are left out. This holds the neighbourhood and the officer constant.',
     'Part correlations are Spearman rank correlations, which compare orderings only, across parts with at least 100 electors within each constituency.',
-    'The 2023 results are the declared Assembly results. Only counts are published, never a name, EPIC number or address.',
+    'The 2023 results are the declared Assembly results. Only counts are published. No name, EPIC number or address appears in this deck.',
   ], M, TOP - 0.3, W - 2 * M, CH + 0.3, 15);
 
   closing(pres, K, P, 'The full analysis', ['The dashboard, the part explorer for every polling part, and the full report with a chapter for each constituency, are published online alongside this deck.', 'ImpactMojo']);
@@ -668,7 +668,7 @@ function hyderabad() {
 // ============================================================ ALL INDIA
 function india() {
   const N = J('india/states.json'), T = N.total, S = N.states, P = N.by_phase;
-  const Pal = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'SIR 2025-26 · All India · ImpactMojo · totals only, never names or EPIC numbers' };
+  const Pal = { dark: '1F4E79', darker: '163A5C', accent: '1F618D', light: 'D6E4F0', soft: 'EAF1F8', band: ['C0392B', 'E67E22', '27AE60', '1F618D', '8E44AD'], foot: 'SIR 2025-26 · All India · ImpactMojo · totals only, no names or EPIC numbers' };
   const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE'; pres.author = 'ImpactMojo'; pres.title = 'SIR 2025-26: All India';
   const K = kit(pres, Pal);
   const RK = ['dead', 'shifted_absent_other', 'duplicate'], RN = { dead: 'Dead', shifted_absent_other: 'Shifted, absent or other', duplicate: 'Enrolled more than once' };

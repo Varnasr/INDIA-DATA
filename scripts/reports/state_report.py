@@ -438,7 +438,7 @@ def tamilnadu(R):
     R.p('Three counts are set against the margin. A seat is counted on the first when the names left off the draft exceed the 2026 margin, and on the second when the fall from the roll before the revision to the final roll exceeds it. '
         'The third leaves out the names marked dead and multiplies the rest by the seat\'s turnout. It still assumes every one of those voters would have chosen the runner-up, which no one can know. '
         'Each seat\'s rate of names left off is also set against the rate of its own district, and those differences are averaged for each party\'s seats, because Chennai and the districts around it lost far more names than the rest of the state and the parties did not win evenly across districts.')
-    R.p('The map uses DataMeet\'s assembly constituency map, licensed CC BY 2.5 India. Only counts are published, never a name, EPIC number or address.')
+    R.p('The map uses DataMeet\'s assembly constituency map, licensed CC BY 2.5 India. Only counts are published. No name, EPIC number or address appears in this report.')
 
     R.h1('Every constituency')
     R.table(['No.', 'Constituency', 'District', 'Roll before', 'Left off', 'Per 100', 'Dead', 'Net fall per 100', 'Won 2026', 'Margin', 'Over margin'],
@@ -565,7 +565,7 @@ def karnataka(R):
     R.p('The Chief Electoral Officer published every table of the revision by its 34 election districts and for the state, and none by assembly constituency. Bengaluru appears as four of those districts, Bangalore Urban and the North, Central and South districts of the city corporation, B.B.M.P.')
     R.p('The final roll was published on 27 October 2026. The Hindu and ETV Bharat reported the Chief Electoral Officer\'s figures for it that day, for the state only, as a total and by sex, so the district figures after the draft are the roll of 9 October 2026. The rise from the draft to either roll is the names added less those deleted since, so it counts new voters as well as names put back. '
         'The draft counted general electors only, and the reports do not say whether the final total of %s includes service electors. Its men, women and third gender electors add up to %s fewer.' % (indian(S['final']), indian(S['final'] - S['final_by_sex'])))
-    R.p('The map joins the constituency boundaries of DataMeet\'s assembly constituency map, licensed CC BY 2.5 India, by the district each constituency belongs to in the Election Commission\'s own list. Only counts are published, never a name, EPIC number or address.')
+    R.p('The map joins the constituency boundaries of DataMeet\'s assembly constituency map, licensed CC BY 2.5 India, by the district each constituency belongs to in the Election Commission\'s own list. Only counts are published. No name, EPIC number or address appears in this report.')
 
 
 # ============================================================ WEST BENGAL
@@ -742,7 +742,7 @@ def westbengal(R):
         'The roll of October 2025 was %s larger than the 2024 roll, so the fall from 2024 is smaller than the fall from the roll the revision started from.' % (S['acs'], lakh(S['growth_2024_to_oct2025'])))
     R.p('The outcome of adjudication and the appeals are the Election Commission\'s figures as the press reported them, including its affidavit of 16 September, and they are given here as reported. The district of each constituency is the Chief Electoral Officer\'s, and district figures are the sums of their constituencies.')
     R.p('The 2026 winner, runner-up and margin are from the Election Commission\'s constituency result pages, checked against its state-wise pages, with Falta\'s from its re-poll. Turnout is votes over the roll at the nominations. '
-        'Each seat\'s fall per 100 is also set against the fall of its own district, and those differences are averaged for each party\'s seats. The map uses DataMeet\'s assembly constituency map, licensed CC BY 2.5 India. Only counts are published, never a name, EPIC number or address.')
+        'Each seat\'s fall per 100 is also set against the fall of its own district, and those differences are averaged for each party\'s seats. The map uses DataMeet\'s assembly constituency map, licensed CC BY 2.5 India. Only counts are published. No name, EPIC number or address appears in this report.')
 
     R.h1('Every constituency')
     R.table(['No.', 'Constituency', 'District', 'Roll 2024', 'Draft roll', 'Roll 2026', 'Fall', 'Per 100', 'Won 2026', 'Margin', 'Over margin'],
@@ -879,7 +879,7 @@ def kerala(R):
         % (indian(S['fall_draft']), indian(S['press_removed']), indian(S['frozen'])))
     R.p('The rise from the draft to the final roll and to the roll of March 2026 is the names added less those deleted. It counts new voters, including those who turned eighteen and those registered abroad, as well as names put back.')
     R.p('The 2026 winner, runner-up and margin are from the Election Commission\'s constituency result pages, checked against its state-wise pages. Turnout is votes over the roll of 23 March 2026. Party comparisons are by party, because the fronts of the independents are not in the data. '
-        'Each seat\'s fall per 100 is also set against the fall of its own district, and those differences are averaged for each party\'s seats. The map uses DataMeet\'s assembly constituency map, licensed CC BY 2.5 India. Only counts are published, never a name, EPIC number or address.')
+        'Each seat\'s fall per 100 is also set against the fall of its own district, and those differences are averaged for each party\'s seats. The map uses DataMeet\'s assembly constituency map, licensed CC BY 2.5 India. Only counts are published. No name, EPIC number or address appears in this report.')
 
     R.h1('Every constituency')
     R.table(['No.', 'Constituency', 'District', 'Roll Jan 2025', 'Draft roll', 'Roll Mar 2026', 'Fall at draft', 'Per 100', 'Won 2026', 'Margin', 'Draft fall over margin'],
