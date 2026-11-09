@@ -14,6 +14,7 @@ repository are kept in a separate private repository; ask the maintainer.
 ```bash
 pip install -r requirements.txt
 python3 scripts/check_data.py           # data checks, run by CI; rebuilds the data files with --check
+python3 scripts/add_draft.py --due      # summary-revision drafts: due and recorded
 python3 scripts/check_contrast.py       # assets/sir.css tokens, both themes
 python3 scripts/build_site.py           # every page, from site/places.json and site/pages; --check in CI
 python3 scripts/build_i18n.py           # translation pieces, from i18n/<lang>.json; after build_site, before stamp
@@ -174,6 +175,28 @@ Commit the sources only, open the pull request and merge once for the day's
 states. Nothing goes live until the 20:00 IST publish. When the owner says
 "publish", run the "Publish locked sites" workflow in Democracy-by-Design for
 this site.
+
+## Summary-revision drafts
+
+The Commission's special summary revisions (1 January 2027 qualifying date)
+publish draft rolls on 12 November 2026 in 17 states and union territories,
+23 November in West Bengal and 30 November in six more. They are the
+`ssr` blocks of timeline steps in `data/india/process.json`, and a later
+block naming a state replaces an earlier one.
+
+`python3 scripts/add_draft.py --due` lists them and whether each is recorded.
+Read the CEO's draft-roll note (the same places as the final rolls above),
+put the figures in a small JSON file (keys in the script's docstring), run
+`python3 scripts/add_draft.py --json <file> --dry-run`, read the refusals and
+warnings, then run it without `--dry-run`. It writes one row of
+`data/india/raw/ssr_draft.csv`, with the intensive revision's final roll from
+`final.csv` beside it, and runs `check_data.py`. It refuses a draft whose
+sexes do not add up, one dated before the order or after today, and a state
+in no summary revision. It warns when the date differs from the schedule,
+when the source is not official, and when the draft is more than 3 per cent
+from the final roll before it. No page reads the file yet: the pages that
+show the summary revision are to be written once the first drafts are in.
+A second reader checks every figure before the merge, as for a final roll.
 
 ## Writing
 
