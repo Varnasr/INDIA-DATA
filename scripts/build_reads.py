@@ -142,10 +142,12 @@ def build():
     ver.update({v['url']: v for v in json.loads((RAW / 'round3_verified.json').read_text(encoding='utf-8'))})
     # later rounds (fourth to 14 October 2026, fifth The Wire's RTI piece, eighth to 19 October), each found and read twice
     fourth = []
-    for n in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37):
+    for n in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38):
         if (RAW / ('round%d.json' % n)).exists():
             fourth += json.loads((RAW / ('round%d.json' % n)).read_text(encoding='utf-8'))
-            ver.update({v['url']: v for v in json.loads((RAW / ('round%d_verified.json' % n)).read_text(encoding='utf-8'))})
+            # a round not yet read a second time has no verified file, and its items are dropped
+            if (RAW / ('round%d_verified.json' % n)).exists():
+                ver.update({v['url']: v for v in json.loads((RAW / ('round%d_verified.json' % n)).read_text(encoding='utf-8'))})
     out, dropped = [], []
     for i, it in enumerate(items + EXTRA + sabar + third + fourth):
         v = ver.get(it['url'])
