@@ -399,6 +399,42 @@ def _finals_due():
     assert not stale, 'FINAL_PENDING lists %s. Remove the entry' % ', '.join(stale)
 
 
+def _ssr_drafts():
+    """data/india/raw/ssr_draft.csv, written by scripts/add_draft.py: every row
+    names a state in a summary revision process.json records, adds up by sex
+    where it is exact, and follows the final roll final.csv gives it."""
+    import csv
+    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+    import add_draft
+    p = os.path.join(ROOT, 'data', 'india', 'raw', 'ssr_draft.csv')
+    with open(p, encoding='utf-8') as fh:
+        rd = csv.reader(fh)
+        head = next(rd)
+        body = list(rd)
+    assert head == add_draft.HEAD, 'ssr_draft.csv: the columns are not the ones add_draft.py writes'
+    S = add_draft.schedules()
+    seen = set()
+    for r in body:
+        x = dict(zip(head, r))
+        st = x['state']
+        assert (st, x['order_date']) not in seen, 'ssr_draft.csv: %s is there twice for the order of %s' % (st, x['order_date'])
+        seen.add((st, x['order_date']))
+        orders = {t['date'] for t in json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))['timeline'] if t.get('ssr') and st in t['ssr']['states']}
+        assert x['order_date'] in orders, 'ssr_draft.csv: %s has no summary revision ordered on %s in process.json' % (st, x['order_date'])
+        assert x['figures'] in add_draft.FIGS, 'ssr_draft.csv: %s has figures %r' % (st, x['figures'])
+        assert x['figures'] == 'exact' or x['note'], 'ssr_draft.csv: %s needs a note, since its figures are %s' % (st, x['figures'])
+        n = int(x['electors'])
+        assert n > 0, 'ssr_draft.csv: %s has no electors' % st
+        if x['men'] and x['figures'] == 'exact':
+            assert int(x['men']) + int(x['women']) + int(x['third']) == n, 'ssr_draft.csv: %s men, women and third do not add to electors' % st
+        base, base_date = add_draft.base_roll(st)
+        assert (x['base'] or None) == (str(base) if base is not None else None) and (x['base_date'] or None) == base_date, \
+            'ssr_draft.csv: %s records the roll before it as %s of %s, and final.csv gives %s of %s. Run add_draft.py again with --replace' % (st, x['base'], x['base_date'], base, base_date)
+        if base_date:
+            assert x['draft_date'] >= base_date, 'ssr_draft.csv: %s draft is dated before the final roll it follows' % st
+        assert x['source_url'].startswith(('http://', 'https://')), 'ssr_draft.csv: %s has no source address' % st
+
+
 def _ac_change():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_ac_change.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -744,6 +780,7 @@ for name, fn in [
     ('no individual records in published data', _no_people),
     ('All India table current, and Bihar row equal to the lists', _india),
     ('every final roll that was due is recorded, or listed with the reason it is not', _finals_due),
+    ('every summary-revision draft recorded adds up and follows its final roll', _ssr_drafts),
     ('downloadable tables current', _downloads),
     ('Lok Sabha electors current and within range', _electors),
     ('Rajasthan data matches its raw tables', _rajasthan),
