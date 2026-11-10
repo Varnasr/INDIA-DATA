@@ -872,7 +872,7 @@
   "yogi-adityanath": {
    "name": "Yogi Adityanath",
    "role": "Chief Minister of Uttar Pradesh, of the BJP.",
-   "intro": "Three of the quotations are from his speech to BJP workers in Lucknow on 14 December 2025, in his own words from the video of the speech. The fourth is from his own post on X of 5 October 2026. The translations are unofficial.",
+   "intro": "Three of the quotations are from his speech to BJP workers in Lucknow on 14 December 2025, in his own words from the video of the speech. The fourth is from his own post on X of 5 October 2026. The fifth is from his interview at Aaj Tak's Panchayat programme in Ayodhya on 8 November 2026, in his own words from Aaj Tak's video of the interview. The translations are unofficial.",
    "claims": {
     "0": {
      "rests": "It rests on his own arithmetic in the speech. He took a population of about 25 crore and a share of 64 to 65 per cent adults to reach 16 crore who should be on the roll, and set it against the 12 crore enumeration forms collected by mid-December 2025, three weeks before the draft. The 15 crore 44 lakh is the roll of January 2025.",
@@ -997,17 +997,59 @@
        "350026"
       ]
      ]
+    },
+    "4": {
+     "kind": "A count of voters by religion",
+     "rests": "It rests on his own account in the interview. Asked where the figure came from, he said everyone has the rolls from before and after the revision. He then said the people he means are on the panchayat roll, receive welfare schemes and were on the roll before. He names no document and does not say how a voter's religion was found. His three groups add to 1.255 crore, a little under his total, and he does not say whether they overlap. He puts the 1.65 per cent as a rise in the Muslim voters there were before the revision, and he gives no count of them before or after.",
+     "site": "The official figures are for the whole Assembly roll. It held 15,44,30,092 names before the revision and 13,39,84,792 on the final roll of 10 April 2026, a fall of 2,04,45,300. After the draft 70,69,810 claims on Form 6 to add names were reported, with no count by age. The gap he points to between the panchayat rolls and the Assembly roll is in the figures The Times of India reported on 5 November. The Chief Electoral Officer, Navdeep Rinwa, put the rural electors on the Assembly roll at about 10.20 crore, about 2.38 crore fewer than the 12.58 crore on the rural panchayat rolls of June 2026. By the paper's own totals, the panchayat rolls and the urban local body rolls of April 2023 together held about 3.45 crore more electors than the Assembly roll of October 2026. Rinwa told the paper that the difference cannot be taken as eligible people left off the roll, because the rolls may hold dead electors, people who have moved and duplicate entries. The Chief Electoral Officer has directed officers to match the rolls to find eligible people missing from the Assembly roll.",
+     "stops": "No published figure counts the roll by religion, so his 1.27 crore Hindu voters and his 1.65 per cent cannot be set against any count. The panchayat rolls and the Assembly roll are kept by different bodies on different dates. Nothing published says how many of the people on the panchayat rolls and off the Assembly roll are eligible for it or are on a roll in another place.",
+     "uses": [
+      [
+       "data/uttarpradesh/summary.json",
+       "154430092"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "133984792"
+      ],
+      [
+       "data/india/states.csv",
+       "20445300"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "7069810"
+      ],
+      [
+       "data/india/disputes.json",
+       "12.58"
+      ],
+      [
+       "data/india/disputes.json",
+       "10.20"
+      ],
+      [
+       "data/india/disputes.json",
+       "2.38"
+      ],
+      [
+       "data/india/disputes.json",
+       "3.45"
+      ]
+     ]
     }
    },
    "strongest": [
     "His figure for the roll before the revision, 15 crore 44 lakh, is right, and his 12 crore is close to the draft of 12,55,56,025.",
     "The roll did fall well short of the adult population. The draft held 77.65 electors per 100 projected adults, against 95.51 before the revision.",
-    "His post names the dead, the shifted and duplicate entries as what must be checked, and those are the reasons officers recorded for almost every name left off."
+    "His post names the dead, the shifted and duplicate entries as what must be checked, and those are the reasons officers recorded for almost every name left off.",
+    "The gap he points to between the panchayat rolls and the Assembly roll is in the Chief Electoral Officer's own figures, about 2.38 crore in rural Uttar Pradesh."
    ],
    "further": [
     "His gap of four crore sets the roll against a population projection, and the projection counts residents who are not all on the roll anywhere. Against the old roll the draft was 2.89 crore smaller.",
     "Saying 85 to 90 per cent of those missing are his party's voters goes beyond any record, since nothing published says how an elector left off or deleted votes.",
-    "Tying the exclusions to names entered illegally goes further than the officers' own records, which give under age or not a citizen as the reason for 2,069 names after the draft, as reported."
+    "Tying the exclusions to names entered illegally goes further than the officers' own records, which give under age or not a citizen as the reason for 2,069 names after the draft, as reported.",
+    "Counting the voters missing from the roll by religion goes beyond any published record, since no published figure counts the roll by religion."
    ]
   },
   "mamata-banerjee": {

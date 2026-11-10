@@ -313,3 +313,23 @@ independently the same day. The figure is an aggregate.
   it supersedes the 50,690 of 29 October. The report gives 92.8 lakh notices,
   nearly 91 lakh cleared and about 1.3 lakh pending, all rounded, so no
   notices or hearings row was added from it.
+
+## Update of 2026-11-10
+
+No row was added. One report was read in full with curl on 2026-11-10 and
+read again independently the same day.
+
+- **Maharashtra**: 97.16 per cent of the 12.22 million electors flagged after
+  enumeration had completed verification, 97.94 per cent of the 6.25 million
+  in the logical discrepancy list and 96.35 per cent of the 5.98 million
+  unmapped (5.97 million earlier in the same report), from the Election
+  Commission (Hindustan Times, Surendra P. Gangan, 4 November 2026, 1:31 pm
+  IST). The report gives shares only, with no count and no date for them, so
+  no count is recorded from the shares, as for Nagaland. Applied to the
+  1,22,24,007 notices in the Chief Electoral Officer's release of 4 September
+  the total share would come to about 1,18,77,000, and the two lists' shares
+  to 1,18,77,178 together, 333 more. The Wire of 5 November repeats the
+  figures from the Hindustan Times. The report's deadline of 25 November for
+  claims and documents is the date by which notices and claims are to be
+  decided under the schedule of 29 October in process.json, and no new
+  schedule step was added for it.
