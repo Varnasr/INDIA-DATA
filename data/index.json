@@ -1,7 +1,7 @@
 {
  "title": "Off the Roll: index of the published data files",
  "url": "https://offtheroll.in/data/index.json",
- "built": "2026-11-09",
+ "built": "2026-11-10",
  "licence": {
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/"
@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 465,
-  "bytes": 13921981
+  "bytes": 13942695
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 547059,
+   "bytes": 551106,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 80771,
+   "bytes": 81745,
    "keys": [
     "note",
     "entries"
@@ -4265,7 +4265,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 316848,
+   "bytes": 322372,
    "columns": [
     "section",
     "date",
@@ -4286,7 +4286,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 512396,
+   "bytes": 518890,
    "keys": [
     "listings",
     "sections",
@@ -7137,7 +7137,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 686049,
+   "bytes": 687818,
    "licence": "CC BY 4.0"
   },
   {
@@ -7172,7 +7172,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 322551,
+   "bytes": 324457,
    "licence": "CC BY 4.0"
   },
   {
