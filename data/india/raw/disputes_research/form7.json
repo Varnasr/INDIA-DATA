@@ -3,7 +3,7 @@
   "retrieved": "2026-10-09",
   "scope": "Form 7 and prefilled forms",
   "prefilled_meaning": "Two different things. (1) Enumeration forms: every SIR enumeration form is pre-printed by the Commission with the elector's name, EPIC number, address, part and photograph, and the elector adds a photograph, details and a signature (Bihar 'semi-filled' forms, Hyderabad DEO). Disputes about these are about who filled or uploaded them: BLOs uploading forms without voters (Bihar, ADR allegation), BLOs uploading blank backs (Serilingampally, BJP allegation), BLOs handing forms in bulk to AIMIM camps (Hyderabad, BJP allegation). (2) Form 7: in every state where the press describes a 'pre-printed' or 'pre-filled' Form 7, it means the part about the voter to be deleted (name, EPIC, address, booth) was printed in advance, and the objector's part was handwritten or left blank. Telangana: Musheerabad, Bahadurpura (Aliyabad) and Goshamahal, unsigned or with only the objector's name handwritten (Congress complaint, South First, Deccan Chronicle, FIR). Karnataka: Babaleshwar (The Hindu, already in process.json) and Belagavi (voter details filled, objector handwritten or blank). Gujarat Somnath: voter details printed in English, objector handwritten in Gujarati. Uttar Pradesh Shamli: printed with EPIC numbers. Assam Karimganj: 'half-printed and half-handwritten'. West Bengal Khatra: 'pre-filled' Form 7s seized in a vehicle, contents not described. Rajasthan: Congress alleges 'computerised' printed forms. No source found describes a party circulating blank pre-filled forms to voters for their own use.",
-  "not_found": "No Form 7 report specific to Charminar, Yakutpura, Malakpet, Chandrayangutta or Jubilee Hills. No Form 7 complaint by the BRS. The CEO Telangana memo of 5 October 2026 and the ECI clarification of January 2026 were found only as quoted in the press. No Maharashtra bulk Form 7 episode found (11,251 Form 7s statewide to 4 October per ThePrint)."
+  "not_found": "No Form 7 report specific to Charminar, Yakutpura, Malakpet, Chandrayangutta or Jubilee Hills. No Form 7 complaint by the BRS. The CEO Telangana memo of 5 October 2026 and the ECI clarification of January 2026 were found only as quoted in the press. The Maharashtra bulk Form 7 episodes found are Dharavi, where one resident filed 24 in a day (form7-55), and Bhiwandi East, where the registration officer reported 540 and rejected over 450 (form7-68). ETV Bharat counted 11,251 Form 7s statewide to 4 October, and the Hindustan Times more than 95,000 by 12 November."
  },
  "items": [
   {
@@ -1477,6 +1477,36 @@
     {
      "row": "dl-mustafabad",
      "outcome": "The Hindu found at least 87 of the electors named in the agents' applications living at their registered addresses."
+    }
+   ]
+  },
+  {
+   "id": "form7-68",
+   "section": "form7",
+   "state": "Maharashtra",
+   "place": "Thane, Bhiwandi East",
+   "date": "2026-11-12",
+   "kind": "press",
+   "outlet": "Hindustan Times",
+   "case": "",
+   "headline": "Form 7 withdrawals, rejections follow Maharashtra scrutiny on false objections",
+   "url": "https://www.hindustantimes.com/cities/mumbai-news/form-7-withdrawals-rejections-follow-maharashtra-scrutiny-on-false-objections-101794463264945.html",
+   "claim": "Amit Sanap, the electoral registration officer for Bhiwandi East, told the Hindustan Times that his office had received 540 Form 7 applications seeking deletions in the constituency and had rejected over 450 of them, because the electors the forms said were not living at their addresses were found living there. The paper reports that political parties' booth level agents filed 480 of the 540 and that some applicants could face criminal action for false information. Sanap said some applicants had withdrawn their applications and that action would begin once the formal orders were prepared. The paper reports that Form 7s filed by agents and private complainants have been withdrawn or rejected in large numbers on scrutiny in Mumbai and the constituencies around it, after Maharashtra's Chief Electoral Officer told registration officers to place the burden of proof on the objector, to summon objectors and verify their claims before acting, and to begin criminal action against false filings. A senior state election official told the paper that objectors are allowed to withdraw, and that withdrawals began once action started and the first FIR was registered in Dharavi three weeks earlier (form7-55). With claims and objections due to close on Friday, 13 November, the Commission had received over 23 lakh forms for additions, deletions and corrections in Maharashtra, more than 95,000 of them Form 7s, the paper reports.",
+   "quote": "We received 540 applications seeking deletions through Form 7, of which over 450 have been rejected. We will initiate action once the formal orders are prepared. We found that the people against whom Form 7 applications were filed, alleging that they did not live at the given addresses, were actually residing there,",
+   "response": "Rais Shaikh, the Samajwadi Party MLA for Bhiwandi East, alleged that agents of the BJP had filed objections in bulk against his party's supporters and withdrew them only when faced with police action. The BJP's Atul Deulgaonkar, who oversees the revision for the party, rejected the allegations of the Samajwadi Party and the Congress and said electors of opposition parties were not being targeted. He said anyone with credible information about an incorrect registration has the right to file a Form 7 and that the authorised officer decides whether it is correct. The report does not say which parties' agents filed the 480 applications in Bhiwandi East.",
+   "note": "First reading, 12 November 2026. Hindustan Times, by Surendra P Gangan, published 12 November 2026 at 11:31 am IST (datePublished 2026-11-12T11:31:04+05:30), read in full from the JSON-LD articleBody with curl on 12 November 2026. The registration officer acts in office and is named. The paper gives his rejections both as 80% of the 540 and as over 450, and 450 of 540 is 83.3%. It does not say how many applications were withdrawn or when the 540 were filed. The report does not name the district, and Bhiwandi East is in Thane district. The Chief Electoral Officer's instruction is reported from people familiar with the matter and the senior official, and its text was not found. The MLA's figures for the constituency's roll (3,76,000 electors before the revision, 1.84 lakh on the draft, 23,000 deleted as duplicates or dead, 42,430 flagged or unmapped) do not add up and are not carried. Also not carried are a Congress agent's remark from Kamathi and the MLA's account of a rule change of November 2025 that let agents object across a whole constituency. The cap on Form 7s and the Dharavi case are form7-55, and ETV Bharat's 11,251 Form 7s in Maharashtra to 4 October are in process.json. The 23 lakh and 95,000 are statewide counts of forms received and add no row to the bulk Form 7 table. Second reading, 12 November 2026: the 480 filed by party agents is the paper's statement and is no longer given as the registration officer's. The MLA's allegation is now given before the BJP's reply to it, and his allegation that the objections were filed to suppress minority turnout is not carried, as a claim about intent that the item does not need.",
+   "bulk": [
+    {
+     "row": "mh-bhiwandi-east",
+     "place": "Thane, Bhiwandi East",
+     "count": 540,
+     "unit": "forms",
+     "filer": "480 of them by political parties' booth agents, the paper reports.",
+     "status": [
+      "rejected",
+      "withdrawn"
+     ],
+     "outcome": "The registration officer said over 450 had been rejected because the electors were found living at their addresses, and that some applicants had withdrawn theirs."
     }
    ]
   }
