@@ -217,13 +217,13 @@ Promise.all([SIR.json('data/maharashtra/summary.json'), SIR.json('data/maharasht
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: 'District', bottom: true }, { k: 'before', label: 'Roll before', fmt: n }, { k: 'draft', label: 'Draft roll', fmt: n },
-    { k: 'left_off', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 }, { k: 'shifted_absent_pct', label: 'Shifted or absent %', fmt: d1 },
-    { k: 'notices_per_100', label: 'Notices per 100', fmt: d1 }, { k: 'women_draft_pct', label: 'Women % of draft', fmt: d1 }
+    { k: 'left_off', label: 'Left off', fmt: n }, { k: 'per_100', heat: true, label: 'Per 100', fmt: d1 }, { k: 'shifted_absent_pct', heat: true, label: 'Shifted or absent %', fmt: d1 },
+    { k: 'notices_per_100', heat: true, label: 'Notices per 100', fmt: d1 }, { k: 'women_draft_pct', heat: true, label: 'Women % of draft', fmt: d1 }
   ], D, { sort: 'per_100' });
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', bottom: true }, { k: 'district', label: 'District' },
-    { k: 'before', label: 'Roll before', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 },
-    { k: 'shifted_absent_pct', label: 'Shifted or absent %', fmt: d1 }, { k: 'pw', label: 'Won 2024' }, { k: 'margin', label: 'Margin 2024', fmt: n }
+    { k: 'before', label: 'Roll before', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'per_100', heat: true, label: 'Per 100', fmt: d1 },
+    { k: 'shifted_absent_pct', heat: true, label: 'Shifted or absent %', fmt: d1 }, { k: 'pw', label: 'Won 2024' }, { k: 'margin', label: 'Margin 2024', fmt: n }
   ], A.map(function (a) { var o = Object.assign({}, a); o.pw = party(a.winner_party); return o; }), { sort: 'per_100' });
 
   var seatsOf = function (d) { return A.filter(function (a) { return a.district === d.district; }); };

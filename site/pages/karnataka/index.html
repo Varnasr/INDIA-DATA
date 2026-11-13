@@ -114,10 +114,10 @@ Promise.all([SIR.json('data/karnataka/summary.json'), SIR.json('data/karnataka/d
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: L('District'), left: true },
     { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Left off'), fmt: SIR.n },
-    { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'per_100', heat: true, label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
     { k: 'shifted', label: L('Shifted'), fmt: SIR.n }, { k: 'absent', label: L('Absent'), fmt: SIR.n },
     { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'duplicate', label: L('Already enrolled'), fmt: SIR.n },
-    { k: 'sep', label: L('Roll of 9 Oct'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
+    { k: 'sep', label: L('Roll of 9 Oct'), fmt: SIR.n }, { k: 'net_per_100', heat: true, label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
   ], D, { sort: 'per_100' });
   var slugD = function (d) { return SIR.slug(d.district); };
   var byName = {}, idOf = {}; D.forEach(function (d) { byName[d.district] = d; });

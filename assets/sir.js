@@ -435,6 +435,20 @@
   SIR.table = function (el, cols, rows, opts) {
     opts = opts || {};
     var key = opts.sort || cols[0].k, dir = opts.dir || -1;
+    // heat: a column's cells shaded from its lowest figure to its highest,
+    // a tint of the red fill on the card, never dark enough to cost the ink
+    // its contrast in either theme. The figure stays written in the cell.
+    var span = {};
+    cols.forEach(function (c) {
+      if (!c.heat) return;
+      var v = rows.map(function (r) { return r[c.k]; }).filter(function (x) { return typeof x === 'number' && isFinite(x); });
+      if (v.length > 1) span[c.k] = [Math.min.apply(null, v), Math.max.apply(null, v)];
+    });
+    var tint = function (c, x) {
+      var m = span[c.k];
+      if (!m || typeof x !== 'number' || !isFinite(x) || m[1] <= m[0]) return '';
+      return ' style="background:color-mix(in srgb,var(--fill-red) ' + Math.round(4 + 30 * (x - m[0]) / (m[1] - m[0])) + '%,var(--card))"';
+    };
     function render() {
       var sorted = rows.slice().sort(function (a, b) {
         var x = a[key], y = b[key];
@@ -448,7 +462,7 @@
         return '<tr' + (opts.onRow ? ' class="link"' : '') + '>' + cols.map(function (c, i) {
           var v = c.fmt ? c.fmt(r[c.k], r) : SIR.esc(r[c.k]);
           if (i === 0 && opts.onRow) v = '<button type="button" class="open" data-id="' + SIR.esc(r[opts.id || c.k]) + '">' + v + '</button>';
-          return '<td class="' + (c.left ? 'l' : '') + '" data-label="' + SIR.esc(String(c.label).replace(/<[^>]+>/g, '')) + '">' + v + '</td>';
+          return '<td class="' + (c.left ? 'l' : '') + '" data-label="' + SIR.esc(String(c.label).replace(/<[^>]+>/g, '')) + '"' + tint(c, r[c.k]) + '>' + v + '</td>';
         }).join('') + '</tr>';
       }).join('') + '</tbody>';
       el.innerHTML = h;
@@ -1218,7 +1232,7 @@
       var q = r.ssr.ssr, qv = { l: D(r.ssr.date), o: D(r.ssrOrder.date), p: E(q.by || ''), s: E(r.state), q: D(q.qualifying), d: D(q.draft), c: D(q.claims_end), x: D(q.decided), f: D(q.final) };
       p.push(r.ssr === r.ssrOrder
         ? L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. It set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}.', qv)
-        : q.undated ? L('The Commission\'s letter of {o} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. The Commission later revised the dates, as {p} announced on {l}, and set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}.', qv)
+        : q.undated ? L('The Commission\'s letter of {o} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. The Commission later revised the dates, as {p} reported on {l}, and set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}.', qv)
         : L('The Commission\'s letter of {o} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. A later letter, dated {l}, set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}, as {p} reported it.', qv));
       // an order known only from the press says whose dates these are
       if (r.ssr === r.ssrOrder && q.by) p.push(L('These dates are as reported by {o}.', { o: qv.p }));
@@ -1328,4 +1342,35 @@
     sec.hidden = false;
   }
   window.SIR.amongBlock = amongBlock;
+})();
+
+// Names left off the draft, each square a fixed number of them, and the names
+// added after the draft filled in over them, on each state's overview
+// (build_site.py, units_block). The additions include new voters, so the
+// filled squares are the most that could have been put back.
+(function () {
+  var box = document.querySelector('.units[data-units]');
+  if (!box) return;
+  var SIR = window.SIR, name = box.getAttribute('data-units');
+  SIR.json('data/india/states.json').then(function (J) {
+    var st = J.states.filter(function (x) { return x.state === name; })[0];
+    if (!st || !st.removed || st.added_after_draft == null) return;
+    var r = st.removed, a = st.added_after_draft;
+    var U = [100, 200, 500, 1000, 2000, 5000, 10000, 20000, 25000, 50000, 100000].filter(function (u) { return r / u <= 400; })[0] || 100000;
+    var n = Math.ceil(r / U), f = Math.min(n, Math.round(Math.min(a, r) / U));
+    var cols = innerWidth < 600 ? 20 : 40, sz = 10, g = 3, rows = Math.ceil(n / cols), W = cols * (sz + g), H = rows * (sz + g);
+    var sq = '';
+    for (var i = 0; i < n; i++) {
+      sq += '<rect x="' + (i % cols) * (sz + g) + '" y="' + Math.floor(i / cols) * (sz + g) + '" width="' + sz + '" height="' + sz + '" class="' + (i < f ? 'u-on' : 'u-off') + '"/>';
+    }
+    var v = { s: SIR.esc(name), r: SIR.n(r), a: SIR.n(a), u: SIR.n(U), p: SIR.d(100 * a / r, 1) };
+    var label = L('{s}: {r} names left off the draft and {a} added after it, each square {u} names', v);
+    document.getElementById('vUnits').innerHTML = '<svg class="viz units-svg" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + label + '" style="max-width:' + (W * 1.6) + 'px"><title>' + label + '</title>' + sq + '</svg>' +
+      '<p class="ukey"><span class="u-off"></span>' + L('Each square is {u} names left off the draft.', v) + ' <span class="u-on"></span>' + L('A filled square is {u} names added after the draft.', v) + '</p>';
+    document.getElementById('fUnits').innerHTML = (a > r ? L('<b>{r} names were left off the draft roll in {s}, and more than that, {a}, were added after the draft.</b>', v)
+      : L('<b>{r} names were left off the draft roll in {s}, and {a} were added after the draft, {p} for every 100 left off.</b>', v)) + ' ' +
+      L('The names added include people enrolling for the first time, so they are the most that could have been put back, and fewer than that in fact.') + ' ' +
+      L('Both counts are the ones on the <a href="{h}">All India page</a>, where each is linked to its source.', { h: SIR.root + 'india/' });
+    box.hidden = false;
+  }).catch(function () {});
 })();

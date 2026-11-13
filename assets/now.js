@@ -197,7 +197,7 @@
         out.push(sec('the-summary-revision', L('The special summary revision'),
           p((moved
             ? L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', { l: sv.o, s: s, q: sv.q }) + ' ' +
-              (q.undated ? L('The Commission later revised the dates in {s}, as {p} announced on {l}.', sv) : L('A later letter of the Commission, dated {l}, set the dates in {s}, as {p} reported it.', sv))
+              (q.undated ? L('The Commission later revised the dates in {s}, as {p} reported on {l}.', sv) : L('A later letter of the Commission, dated {l}, set the dates in {s}, as {p} reported it.', sv))
             : L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', sv)) + ' ' + ssrNow +
             (press && !moved ? ' ' + L('These dates are as reported by {o}.', { o: sv.p }) : '')) +
           (dr ? p(dr.p + ' <a href="' + root + 'india/process/#ssr-drafts">' + L('The draft roll in every state, with a note on each figure') + '</a>') : '') +

@@ -83,7 +83,7 @@ Promise.all([SIR.json('data/westbengal/summary.json'), SIR.json('data/westbengal
 
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: L('No.') }, { k: 'name', label: L('Constituency'), left: true }, { k: 'district', label: L('District'), left: true },
-    { k: 'fall', label: L('Fall'), fmt: SIR.n }, { k: 'per_100', label: L('Fall per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'fall', label: L('Fall'), fmt: SIR.n }, { k: 'per_100', heat: true, label: L('Fall per 100'), fmt: function (v) { return SIR.d(v, 1); } },
     { k: 'winner', label: L('Won 2026'), left: true }, { k: 'runner_up', label: L('Second'), left: true },
     { k: 'margin', label: L('Margin'), fmt: SIR.n }, { k: 'turnout', label: L('Turnout %'), fmt: function (v) { return SIR.d(v, 1); } }
   ], A, { sort: 'fall' });

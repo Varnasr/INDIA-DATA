@@ -121,11 +121,11 @@ Promise.all([SIR.json('data/delhi/summary.json'), SIR.json('data/delhi/districts
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: 'District', left: true }, { k: 'acs', label: 'Seats' }, { k: 'roll_before', label: 'Roll before', fmt: n },
-    { k: 'draft', label: 'Draft roll', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 }], D, { sort: 'per_100' });
+    { k: 'draft', label: 'Draft roll', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'per_100', heat: true, label: 'Per 100', fmt: d1 }], D, { sort: 'per_100' });
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', left: true }, { k: 'district', label: 'District', left: true },
     { k: 'roll_before', label: 'Roll before', fmt: n }, { k: 'draft', label: 'Draft roll', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n },
-    { k: 'per_100', label: 'Per 100', fmt: d1 }, { k: 'winner', label: 'Won 2025', left: true }, { k: 'margin', label: 'Margin 2025', fmt: n }], A, { sort: 'per_100' });
+    { k: 'per_100', heat: true, label: 'Per 100', fmt: d1 }, { k: 'winner', label: 'Won 2025', left: true }, { k: 'margin', label: 'Margin 2025', fmt: n }], A, { sort: 'per_100' });
 
   var seatsOf = function (d) { return A.filter(function (a) { return a.district === d.district; }); };
   var DSET = { rows: D, key: function (d) { return SIR.slug(d.district); }, label: function (d) { return d.district + ' district'; },

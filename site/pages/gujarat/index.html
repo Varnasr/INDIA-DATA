@@ -167,15 +167,15 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/distr
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: 'District', left: true }, { k: 'acs', label: 'Seats' },
-    { k: 'before', label: 'Roll before', fmt: n }, { k: 'removed', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 },
+    { k: 'before', label: 'Roll before', fmt: n }, { k: 'removed', label: 'Left off', fmt: n }, { k: 'per_100', heat: true, label: 'Per 100', fmt: d1 },
     { k: 'dead', label: 'Dead', fmt: n }, { k: 'absent', label: 'Untraceable or absent', fmt: n }, { k: 'shifted', label: 'Shifted', fmt: n },
     { k: 'enrolled_elsewhere', label: 'Enrolled elsewhere', fmt: n }, { k: 'other', label: 'Other', fmt: n },
     { k: 'added', label: 'Added after draft', fmt: n }, { k: 'deleted', label: 'Deleted after draft', fmt: n },
-    { k: 'final', label: 'Final roll', fmt: n }, { k: 'net_per_100', label: 'Net fall per 100', fmt: d1 }
+    { k: 'final', label: 'Final roll', fmt: n }, { k: 'net_per_100', heat: true, label: 'Net fall per 100', fmt: d1 }
   ], D, { sort: 'per_100' });
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', left: true }, { k: 'district', label: 'District', left: true },
-    { k: 'before', label: 'Roll before', fmt: n }, { k: 'removed', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 },
+    { k: 'before', label: 'Roll before', fmt: n }, { k: 'removed', label: 'Left off', fmt: n }, { k: 'per_100', heat: true, label: 'Per 100', fmt: d1 },
     { k: 'dead', label: 'Dead', fmt: n }, { k: 'absent', label: 'Untraceable or absent', fmt: n }, { k: 'shifted', label: 'Shifted', fmt: n },
     { k: 'enrolled_elsewhere', label: 'Enrolled elsewhere', fmt: n }, { k: 'other', label: 'Other', fmt: n }, { k: 'draft', label: 'Draft roll', fmt: n }
   ], A, { sort: 'per_100' });

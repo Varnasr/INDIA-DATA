@@ -118,9 +118,9 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: L('No.') }, { k: 'name', label: L('Constituency'), left: true }, { k: 'district', label: L('District'), left: true },
     { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Left off'), fmt: SIR.n },
-    { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'per_100', heat: true, label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
     { k: 'shifted_absent', label: L('Shifted or absent'), fmt: SIR.n }, { k: 'dead', label: L('Dead'), fmt: SIR.n },
-    { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
+    { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', heat: true, label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
   ], A, { sort: 'per_100' });
 
   // women: the fall from the January 2025 roll to the draft, by district
@@ -145,9 +145,9 @@ Promise.all([SIR.json('data/tamilnadu/summary.json'), SIR.json('data/tamilnadu/d
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: L('District'), left: true }, { k: 'acs', label: L('Seats') },
     { k: 'before', label: L('Roll before'), fmt: SIR.n }, { k: 'removed', label: L('Left off'), fmt: SIR.n },
-    { k: 'per_100', label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'per_100', heat: true, label: L('Per 100'), fmt: function (v) { return SIR.d(v, 1); } },
     { k: 'dead', label: L('Dead'), fmt: SIR.n }, { k: 'shifted_absent', label: L('Shifted or absent'), fmt: SIR.n }, { k: 'multiple', label: L('Enrolled in more than one place'), fmt: SIR.n },
-    { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
+    { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'net_per_100', heat: true, label: L('Net fall per 100'), fmt: function (v) { return SIR.d(v, 1); } }
   ], D, { sort: 'per_100' });
   SIR.json('data/geo/tamilnadu.json').then(function (geo) {
     var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });

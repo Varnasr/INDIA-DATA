@@ -49,7 +49,7 @@ Promise.all([SIR.json('data/gujarat/summary.json'), SIR.json('data/gujarat/const
 
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', left: true }, { k: 'district', label: 'District', left: true },
-    { k: 'removed', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 }, { k: 'vs_district', label: 'Against district', fmt: sg },
+    { k: 'removed', label: 'Left off', fmt: n }, { k: 'per_100', heat: true, label: 'Per 100', fmt: d1 }, { k: 'vs_district', label: 'Against district', fmt: sg },
     { k: 'winner_party', label: 'Won 2022', left: true }, { k: 'runner_up_party', label: 'Second', left: true },
     { k: 'margin', label: 'Margin', fmt: n }, { k: 'over_margin', label: 'Left off over margin', fmt: function (v) { return v ? 'Yes' : 'No'; } }
   ], A, { sort: 'removed' });
