@@ -13,6 +13,13 @@ written beside it. The change from the final roll of the intensive revision is
 the draft less the roll the row records as its base, and is left out where the
 row has no base. Whether a draft is late is decided in the browser from the
 date, so the file does not change with the day.
+
+The special campaign days, on which booth level officers sit at the polling
+stations to take claims, come from data/india/raw/ssr_campaign.json, two
+readings each. The Commission left them to each Chief Electoral Officer, so a
+state has them only where a source gives them, and a source that speaks for
+one district is kept to that district. The build stops on a day outside the
+state's claims window or a state no summary revision covers.
 """
 import csv
 import json
@@ -25,6 +32,34 @@ sys.path.insert(0, os.path.join(ROOT, 'scripts'))
 import add_draft  # noqa: E402
 
 OUT = os.path.join(ROOT, 'data', 'india', 'ssr_draft.json')
+CAMPAIGN = os.path.join(ROOT, 'data', 'india', 'raw', 'ssr_campaign.json')
+
+
+def campaign(sched):
+    with open(CAMPAIGN, encoding='utf-8') as fh:
+        rows = json.load(fh)['days']
+    out = {}
+    for c in rows:
+        st = c['state']
+        if st not in sched:
+            raise SystemExit('FAIL - ssr_campaign.json: %s is in no summary revision' % st)
+        if st in out:
+            raise SystemExit('FAIL - ssr_campaign.json: %s is there twice' % st)
+        s = sched[st]
+        days = sorted(c['days'])
+        if not days or days != sorted(set(days)):
+            raise SystemExit('FAIL - ssr_campaign.json: %s has no days, or a day twice' % st)
+        for d in days:
+            if not (s['draft'] <= d <= s['claims_end']):
+                raise SystemExit('FAIL - ssr_campaign.json: %s day %s is outside the claims window %s to %s' % (st, d, s['draft'], s['claims_end']))
+        if c['scope'] not in ('state', 'district') or (c['scope'] == 'district') != bool(c.get('district')):
+            raise SystemExit('FAIL - ssr_campaign.json: %s scope %r and district %r do not agree' % (st, c['scope'], c.get('district')))
+        if c['kind'] not in ('primary', 'press') or (c['kind'] == 'press') != bool(c.get('by')):
+            raise SystemExit('FAIL - ssr_campaign.json: %s kind %r needs an outlet in "by" exactly when it is press' % (st, c['kind']))
+        if not c['url'].startswith('https://') or not c.get('quote'):
+            raise SystemExit('FAIL - ssr_campaign.json: %s needs an https source and the quotation that gives the days' % st)
+        out[st] = {'days': days, 'scope': c['scope'], 'district': c.get('district'), 'press': c['kind'] == 'press', 'by': c.get('by'), 'source': c['source'], 'url': c['url']}
+    return out
 
 
 def num(v):
@@ -39,6 +74,7 @@ def build():
         # only the draft of the revision that now governs the state is shown
         if s and r['order_date'] == s['order_date']:
             rec[r['state']] = r
+    camp = campaign(sched)
     out = []
     for st in sorted(sched):
         s = sched[st]
@@ -56,6 +92,8 @@ def build():
                 'figures': r['figures'], 'press': r['source'] != 'primary',
                 'url': r['source_url'], 'site': host[4:] if host.startswith('www.') else host,
                 'note': r['note'] or None}
+        if st in camp:
+            e['campaign'] = camp[st]
         out.append(e)
     return {'about': 'The draft rolls of the special summary revisions with 1 January 2027 as the qualifying date, from data/india/raw/ssr_draft.csv. Written by scripts/build_ssr_draft.py.',
             'states': out}

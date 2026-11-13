@@ -179,6 +179,15 @@
         var press = !!r.ssrOrder.ssr.by;
         var q = r.ssr.ssr, sv = { l: D(r.ssr.date), o: D(r.ssrOrder.date), p: E(q.by || ''), s: s, q: D(q.qualifying), d: D(q.draft), c: D(q.claims_end), x: D(q.decided), f: D(q.final) };
         var dr = SIR.owin.draft(G[name], T);
+        // the special campaign days (data/india/raw/ssr_campaign.json), where a source gives them
+        var cg = G[name] && G[name].campaign, camp = '';
+        if (cg) {
+          var dd = cg.days.map(D), dl = dd.length > 1 ? dd.slice(0, -1).join(', ') + L(' and ') + dd[dd.length - 1] : dd[0];
+          var cv = { d: dl, o: E(cg.by || ''), x: E(cg.district || '') };
+          camp = cg.scope === 'district' ? L('In {x} district, the special campaign days, when booth level officers are to sit at the polling stations to take claims and objections, are {d}, as {o} reported.', cv)
+            : cg.press ? L('The special campaign days, when booth level officers are to sit at the polling stations to take claims and objections, are {d}, as {o} reported.', cv)
+            : L('The special campaign days, when booth level officers are to sit at the polling stations to take claims and objections, are {d}.', cv);
+        }
         var ssrStage = T < q.draft ? 'before' : T <= q.claims_end ? 'open' : T < q.final ? 'closed' : 'after';
         var ssrNow = ssrStage === 'before' ? L('The draft roll is to be published on {d}, claims and objections taken until {c} and decided by {x}, and the final roll published on {f}.', sv)
           : ssrStage === 'open' ? L('The draft roll was to be published on {d}. Claims and objections are open until {c}, to be decided by {x}, and the final roll is to be published on {f}.', sv)
@@ -188,10 +197,11 @@
         out.push(sec('the-summary-revision', L('The special summary revision'),
           p((moved
             ? L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', { l: sv.o, s: s, q: sv.q }) + ' ' +
-              L('A later letter of the Commission, dated {l}, set the dates in {s}, as {p} reported it.', sv)
+              (q.undated ? L('The Commission later revised the dates in {s}, as {p} announced on {l}.', sv) : L('A later letter of the Commission, dated {l}, set the dates in {s}, as {p} reported it.', sv))
             : L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', sv)) + ' ' + ssrNow +
             (press && !moved ? ' ' + L('These dates are as reported by {o}.', { o: sv.p }) : '')) +
           (dr ? p(dr.p + ' <a href="' + root + 'india/process/#ssr-drafts">' + L('The draft roll in every state, with a note on each figure') + '</a>') : '') +
+          (camp && (ssrStage === 'before' || ssrStage === 'open') ? p(camp) : '') +
           (ssrStage === 'before' || ssrStage === 'open' ? p(L('Outside the intensive revision, the forms of the Registration of Electors Rules, 1960 are used. Form 6 is the application to be added to the roll, Form 7 the objection to a name and Form 8 the correction of an entry.')) +
             p(moved ? L('The letter of {o} lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.', sv)
               : L('The letter lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.')) : '') +
@@ -200,7 +210,7 @@
           (press ? [] : ['c_ssr']).concat(ssrStage === 'before' || ssrStage === 'open' ? ['c_h_rules'] : []),
           // a later letter that moved this state's dates is cited beside the
           // order, and an order known from the press is cited by its reports
-          (moved || press ? r.ssr.src.map(function (x) { return { name: x.name, url: x.url }; }) : []).concat(dr && G[name].draft ? [{ name: G[name].draft.press ? G[name].draft.site + ', the draft roll' : 'The draft roll, as published', url: G[name].draft.url }] : [])));
+          (moved || press ? r.ssr.src.map(function (x) { return { name: x.name, url: x.url }; }) : []).concat(dr && G[name].draft ? [{ name: G[name].draft.press ? G[name].draft.site + ', the draft roll' : 'The draft roll, as published', url: G[name].draft.url }] : []).concat(camp ? [{ name: cg.source, url: cg.url }] : [])));
         ssrShort = (ssrStage === 'open' ? L('In the special summary revision, claims and objections in {s} are open until {c}.', sv)
           : L('The Commission has ordered a special summary revision of the roll in {s}.', sv) + ' ' + ssrNow) +
           (q.by ? ' ' + L('These dates are as reported by {o}.', { o: E(q.by) }) : '') + (dr ? ' ' + dr.p : '');
