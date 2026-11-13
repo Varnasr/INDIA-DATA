@@ -433,6 +433,8 @@ def _ssr_drafts():
         if base_date:
             assert x['draft_date'] >= base_date, 'ssr_draft.csv: %s draft is dated before the final roll it follows' % st
         assert x['source_url'].startswith(('http://', 'https://')), 'ssr_draft.csv: %s has no source address' % st
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_ssr_draft.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
 def _ac_change():

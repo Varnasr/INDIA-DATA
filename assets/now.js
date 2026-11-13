@@ -15,7 +15,7 @@
   if (!main || !window.SIR) return;
   var SIR = window.SIR, E = SIR.esc, D = SIR.date, N = SIR.n, root = SIR.root;
   var name = main.getAttribute('data-now');
-  var ready = Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.json'), SIR.json('data/india/now.json')]);
+  var ready = Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.json'), SIR.json('data/india/now.json'), SIR.json('data/india/ssr_draft.json').catch(function () { return null; })]);
   var C = {};
   var p = function (x) { return x ? '<p>' + x + '</p>' : ''; };
   var tel = function (x) { return '<a href="tel:' + x.replace(/-/g, '') + '">' + x + '</a>'; };
@@ -54,6 +54,9 @@
     var P = d[0], S = {}, X = d[2], pg = X.pages[name], T = SIR.owin.today;
     C = X.cite;
     d[1].states.forEach(function (s) { S[s.state] = s; });
+    // the summary revision's draft rolls (scripts/build_ssr_draft.py), by state
+    var G = {};
+    if (d[3]) d[3].states.forEach(function (g) { G[g.state] = g; });
     if (!pg) throw new Error('data/india/now.json has no page for ' + name);
     var s = E(name), r = SIR.owin.stage(P, S, name, T);
     var sc = P.schedules.filter(function (x) { return x.state === name; })[0];
@@ -64,7 +67,7 @@
     if (r) {
       box.className = 'owin ' + r.k;
       box.setAttribute('aria-label', L('Claims and objections'));
-      box.innerHTML = SIR.owin.html(r, P);
+      box.innerHTML = SIR.owin.html(r, P, G);
       box.hidden = false;
     }
     var ceo = pg.ceo.length ? '<h3 id="the-chief-electoral-officer">' + L('The Chief Electoral Officer of {s}', { s: s }) + '</h3><ul class="nowlinks">' +
@@ -175,6 +178,7 @@
         // and its own sources are cited in place of the letter of 15 October
         var press = !!r.ssrOrder.ssr.by;
         var q = r.ssr.ssr, sv = { l: D(r.ssr.date), o: D(r.ssrOrder.date), p: E(q.by || ''), s: s, q: D(q.qualifying), d: D(q.draft), c: D(q.claims_end), x: D(q.decided), f: D(q.final) };
+        var dr = SIR.owin.draft(G[name], T);
         var ssrStage = T < q.draft ? 'before' : T <= q.claims_end ? 'open' : T < q.final ? 'closed' : 'after';
         var ssrNow = ssrStage === 'before' ? L('The draft roll is to be published on {d}, claims and objections taken until {c} and decided by {x}, and the final roll published on {f}.', sv)
           : ssrStage === 'open' ? L('The draft roll was to be published on {d}. Claims and objections are open until {c}, to be decided by {x}, and the final roll is to be published on {f}.', sv)
@@ -187,6 +191,7 @@
               L('A later letter of the Commission, dated {l}, set the dates in {s}, as {p} reported it.', sv)
             : L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', sv)) + ' ' + ssrNow +
             (press && !moved ? ' ' + L('These dates are as reported by {o}.', { o: sv.p }) : '')) +
+          (dr ? p(dr.p + ' <a href="' + root + 'india/process/#ssr-drafts">' + L('The draft roll in every state, with a note on each figure') + '</a>') : '') +
           (ssrStage === 'before' || ssrStage === 'open' ? p(L('Outside the intensive revision, the forms of the Registration of Electors Rules, 1960 are used. Form 6 is the application to be added to the roll, Form 7 the objection to a name and Form 8 the correction of an entry.')) +
             p(moved ? L('The letter of {o} lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.', sv)
               : L('The letter lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.')) : '') +
@@ -195,10 +200,10 @@
           (press ? [] : ['c_ssr']).concat(ssrStage === 'before' || ssrStage === 'open' ? ['c_h_rules'] : []),
           // a later letter that moved this state's dates is cited beside the
           // order, and an order known from the press is cited by its reports
-          moved || press ? r.ssr.src.map(function (x) { return { name: x.name, url: x.url }; }) : null));
+          (moved || press ? r.ssr.src.map(function (x) { return { name: x.name, url: x.url }; }) : []).concat(dr && G[name].draft ? [{ name: G[name].draft.press ? G[name].draft.site + ', the draft roll' : 'The draft roll, as published', url: G[name].draft.url }] : [])));
         ssrShort = (ssrStage === 'open' ? L('In the special summary revision, claims and objections in {s} are open until {c}.', sv)
           : L('The Commission has ordered a special summary revision of the roll in {s}.', sv) + ' ' + ssrNow) +
-          (q.by ? ' ' + L('These dates are as reported by {o}.', { o: E(q.by) }) : '');
+          (q.by ? ' ' + L('These dates are as reported by {o}.', { o: E(q.by) }) : '') + (dr ? ' ' + dr.p : '');
       }
       out.push(sec('appealing-a-decision', L('Appealing a decision'),
         p(L('If the registration officer\'s decision on your name goes against you, you can appeal to the District Magistrate under section 24(a) of the Representation of the People Act, 1950, read with rule 27 of the Registration of Electors Rules, 1960. The note of Goa\'s Chief Electoral Officer on that state\'s final roll, of {g}, gives 15 days from the registration officer\'s decision for this first appeal.', { g: D(goa.date) })) +

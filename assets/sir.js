@@ -1122,7 +1122,7 @@
     return m ? (m[2] ? m[1] + ' in ' + m[2] : m[1]) : null;
   };
   // a state's "What to do now" page works the stage out the same way
-  SIR.owin = { stage: stage, html: html, today: today };
+  SIR.owin = { stage: stage, html: html, today: today, draft: draft };
   if (!boxes.length && !all) return;
 
   // the stage of one state's revision on day T
@@ -1165,11 +1165,28 @@
     return r;
   }
 
+  // the draft roll of the special summary revision, from data/india/ssr_draft.json
+  // (scripts/build_ssr_draft.py): its count beside the final roll of the
+  // intensive revision, or that it was due and is not on record. g is the
+  // state's entry; returns the sentence and the link to its source, or null
+  // while the draft is still to come.
+  function draft(g, T) {
+    if (!g) return null;
+    var x = g.draft;
+    if (!x) return g.due < T ? { p: L('The draft roll of the special summary revision was due on {d}. No published count of it has been found.', { d: D(g.due) }), src: '' } : null;
+    var v = { d: D(x.date), n: SIR.n(x.electors), c: x.change == null ? '' : SIR.n(Math.abs(x.change)), b: D(x.base_date), o: E(x.site) };
+    var p = x.change == null ? L('The draft roll of the special summary revision, published on {d}, has {n} electors.', v)
+      : x.change >= 0 ? L('The draft roll of the special summary revision, published on {d}, has {n} electors, {c} more than the final roll of the intensive revision of {b}.', v)
+      : L('The draft roll of the special summary revision, published on {d}, has {n} electors, {c} fewer than the final roll of the intensive revision of {b}.', v);
+    if (x.press) p += ' ' + L('These figures are as {o} reported them.', v);
+    return { p: p, src: '<a href="' + E(x.url) + '" rel="noopener">' + (x.press ? L('The draft roll, as {o} reported it', v) : L('The draft roll, as published')) + '</a>' };
+  }
+
   function anyTime() {
     return L('Once the revision is over in the state, an elector who is not on the final roll can still apply on Form 6 at any time under continuous updation.');
   }
 
-  function html(r, P) {
+  function html(r, P, G) {
     var p = [], links = [], T = r.T;
     var finalDue = function () {
       if (!r.f) return;
@@ -1204,6 +1221,11 @@
         : L('The Commission\'s letter of {o} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. A later letter, dated {l}, set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}, as {p} reported it.', qv));
       // an order known only from the press says whose dates these are
       if (r.ssr === r.ssrOrder && q.by) p.push(L('These dates are as reported by {o}.', { o: qv.p }));
+      var dr = draft(G && G[r.state], T);
+      if (dr) {
+        p.push(dr.p);
+        links.push('<a href="' + root + 'india/process/#ssr-drafts">' + L('The draft roll in every state, with a note on each figure') + '</a>');
+      }
     }
     // where the dates come from: each step's own label, which names the
     // outlet where the step is a press report
@@ -1216,21 +1238,24 @@
     if (r.rep) src.push('<a href="' + E(r.rep.url) + '" rel="noopener" lang="en">' + E(r.rep.outlet) + ', ' + D(r.rep.date) + '</a>');
     if (r.k === 'final' && r.pubSrc && r.pubSrc.url) src.push('<a href="' + E(r.pubSrc.url) + '" rel="noopener">' + (r.pubSrc.source === 'press' ? L('The final roll, as the press reported it') : L('The final roll, as published')) + '</a>');
     if (r.ssr && (r.k === 'final' || r.k === 'due')) src = src.concat(r.ssr.src.map(function (s) { return '<a href="' + E(s.url) + '" rel="noopener" lang="en">' + E(s.name) + '</a>'; }));
+    if (dr && dr.src) src.push(dr.src);
     return '<p class="owin-t">' + L('Where the revision in {s} stands on {t}', { s: E(r.state), t: D(T) }) + '</p>' +
       p.map(function (x) { return '<p>' + x + '</p>'; }).join('') +
       '<p class="owin-links">' + links.join(' · ') + '</p>' +
       (src.length ? '<p class="owin-src"><span>' + L('Where these dates come from') + '</span> ' + src.join(' · ') + '</p>' : '');
   }
 
-  Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.json')]).then(function (d) {
-    var P = d[0], S = {};
+  // a missing drafts file leaves the box as it was, without the draft line
+  Promise.all([SIR.json('data/india/process.json'), SIR.json('data/india/states.json'), SIR.json('data/india/ssr_draft.json').catch(function () { return null; })]).then(function (d) {
+    var P = d[0], S = {}, G = {};
     d[1].states.forEach(function (s) { S[s.state] = s; });
+    if (d[2]) d[2].states.forEach(function (g) { G[g.state] = g; });
     boxes.forEach(function (b) {
       var r = stage(P, S, b.getAttribute('data-owin'), today);
       if (!r) return;
       b.className = 'owin ' + r.k;
       b.setAttribute('aria-label', L('Claims and objections'));
-      b.innerHTML = html(r, P);
+      b.innerHTML = html(r, P, G);
       b.hidden = false;
     });
     if (!all) return;
@@ -1241,7 +1266,7 @@
     sel.innerHTML = '<option value="">' + L('Choose a state') + '</option>' + names.map(function (n) { return '<option value="' + E(n) + '">' + E(n) + '</option>'; }).join('');
     var show = function () {
       var r = sel.value && stage(P, S, sel.value, today);
-      one.innerHTML = r ? '<div class="owin ' + r.k + '">' + html(r, P) + '</div>' : '';
+      one.innerHTML = r ? '<div class="owin ' + r.k + '">' + html(r, P, G) + '</div>' : '';
     };
     var want = new URLSearchParams(location.search).get('state');
     if (want && names.indexOf(want) >= 0) sel.value = want;
