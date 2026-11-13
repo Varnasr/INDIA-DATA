@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 466,
-  "bytes": 14259083
+  "bytes": 14270425
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 619479,
+   "bytes": 621251,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 93115,
+   "bytes": 94073,
    "keys": [
     "note",
     "entries"
@@ -4590,7 +4590,7 @@
    "path": "data/india/process.json",
    "description": "How the revision was run: the rules as they changed, and each state's dates",
    "format": "JSON",
-   "bytes": 170120,
+   "bytes": 171614,
    "keys": [
     "as_of",
     "timeline",
@@ -4634,7 +4634,7 @@
    "path": "data/india/process_timeline.csv",
    "description": "Every order, letter, court order and judgment that changed how the revision was run",
    "format": "CSV",
-   "bytes": 38190,
+   "bytes": 39281,
    "columns": [
     "date",
     "who",
@@ -4650,7 +4650,7 @@
    "path": "data/india/reads.json",
    "description": "Further reading and viewing on the revision, with outlets, dates and summaries",
    "format": "JSON",
-   "bytes": 142211,
+   "bytes": 144186,
    "keys": [
     "groups",
     "items",
@@ -4728,7 +4728,7 @@
    "path": "data/india/ssr_draft.json",
    "description": "All India: ssr draft",
    "format": "JSON",
-   "bytes": 13034,
+   "bytes": 16593,
    "keys": [
     "about",
     "states"
@@ -7148,7 +7148,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 706023,
+   "bytes": 706254,
    "licence": "CC BY 4.0"
   },
   {
@@ -7183,7 +7183,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 344719,
+   "bytes": 344981,
    "licence": "CC BY 4.0"
   },
   {
