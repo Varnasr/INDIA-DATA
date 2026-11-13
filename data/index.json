@@ -12,8 +12,8 @@
   "url": "https://www.impactmojo.in/"
  },
  "counts": {
-  "files": 465,
-  "bytes": 14244857
+  "files": 466,
+  "bytes": 14258766
  },
  "files": [
   {
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 91923,
+   "bytes": 92798,
    "keys": [
     "note",
     "entries"
@@ -4721,6 +4721,17 @@
     "by_authority",
     "unconfirmed",
     "counts"
+   ],
+   "licence": "CC BY 4.0"
+  },
+  {
+   "path": "data/india/ssr_draft.json",
+   "description": "All India: ssr draft",
+   "format": "JSON",
+   "bytes": 13034,
+   "keys": [
+    "about",
+    "states"
    ],
    "licence": "CC BY 4.0"
   },

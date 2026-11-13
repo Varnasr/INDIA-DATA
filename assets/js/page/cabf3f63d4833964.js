@@ -122,6 +122,30 @@ SIR.json('data/india/process.json').then(function (P) {
   });
   drawR();
 
+  // the draft rolls of the special summary revision (scripts/build_ssr_draft.py)
+  SIR.json('data/india/ssr_draft.json').then(function (G) {
+    var today = SIR.owin ? SIR.owin.today : new Date(Date.now() + 5.5 * 36e5).toISOString().slice(0, 10);
+    var L0 = G.states, got = L0.filter(function (g) { return g.draft; });
+    var late = L0.filter(function (g) { return !g.draft && g.due < today; });
+    var more = got.filter(function (g) { return g.draft.change != null && g.draft.change > 0; }).length;
+    var withBase = got.filter(function (g) { return g.draft.change != null; }).length;
+    var notes = [];
+    document.getElementById('fDrafts').innerHTML = '<b>On ' + SIR.date(today) + ', a draft roll count is on record for ' + got.length + ' of the ' + L0.length + ' states and union territories in the summary revision.</b> ' +
+      (withBase ? (more === withBase ? 'In each of the ' + withBase + ' that had a final roll in the intensive revision, the draft is larger than that final roll.' : 'In ' + more + ' of the ' + withBase + ' that had a final roll in the intensive revision, the draft is larger than that final roll.') + ' ' : '') +
+      (late.length ? 'For ' + late.length + ' more, the draft was due and no published count of it has been found: ' + late.map(function (g) { return E(g.state); }).join(', ') + '.' : '');
+    document.getElementById('tDrafts').innerHTML = '<thead><tr><th scope="col" class="l">State</th><th scope="col" class="l">Draft roll</th><th scope="col">Electors on the draft</th><th scope="col" class="l">Final roll of the intensive revision</th><th scope="col">Change</th><th scope="col" class="l">Source</th></tr></thead><tbody>' +
+      L0.map(function (g) {
+        var x = g.draft;
+        if (!x) return '<tr><th scope="row" class="l">' + E(g.state) + '</th><td class="l">' + (g.due < today ? 'Due on ' + SIR.date(g.due) + ', no count found' : 'Due on ' + SIR.date(g.due)) + '</td><td>–</td><td class="l">–</td><td>–</td><td class="l">–</td></tr>';
+        var k = '';
+        if (x.note) { notes.push('<li id="dn-' + notes.length + '"><b>' + E(g.state) + '.</b> ' + E(x.note) + '</li>'); k = ' <a href="#dn-' + (notes.length - 1) + '">note ' + notes.length + '</a>'; }
+        return '<tr><th scope="row" class="l">' + E(g.state) + '</th><td class="l">Published on ' + SIR.date(x.date) + k + '</td><td>' + SIR.n(x.electors) + '</td><td class="l">' + (x.base != null ? SIR.n(x.base) + ', ' + SIR.date(x.base_date) : 'none') + '</td><td>' +
+          (x.change == null ? '–' : (x.change > 0 ? '+' : x.change < 0 ? '−' : '') + SIR.n(Math.abs(x.change))) + '</td><td class="l"><a href="' + E(x.url) + '" rel="noopener" target="_blank">' + E(x.site) + '</a>' + (x.press ? ', press report' : ', official') + '</td></tr>';
+      }).join('') + '</tbody>';
+    document.getElementById('nDrafts').innerHTML = notes.join('');
+    SIR.tools();
+  }).catch(function () {});
+
   // claims and objections after the draft, from the All India figures
   SIR.json('data/india/states.json').then(function (S) {
     var N = function (v) { return v == null ? '' : SIR.n(v); };

@@ -14,7 +14,7 @@ state replaces an earlier one, so West Bengal's draft is due on 23 November.
 The input, as JSON (any key may also be given on the command line, with
 dashes for underscores, and the command line wins):
 
-    {"state": "Uttar Pradesh",            # as in data/india/raw/states.csv
+    {"state": "Uttar Pradesh",            # as in data/india/raw/states.csv, or a state a summary revision covers
      "draft_date": "2026-11-12",          # the day the draft roll was published
      "electors": 133000000,               # general electors on the draft
      "men": ..., "women": ..., "third": ...,   # if given, they must add to electors
@@ -29,8 +29,10 @@ dashes for underscores, and the command line wins):
 The row records, beside the draft, the roll it follows: the final roll of
 the intensive revision from data/india/raw/final.csv, where there is one.
 The change between the two is printed, never added to any figure the pages
-show. Nothing on the site reads the file yet: the pages that will show the
-summary revision are to be written once the first drafts are in hand.
+show. scripts/build_ssr_draft.py turns the file into data/india/ssr_draft.json,
+which the claims box on each state's overview, the summary-revision section of
+each "What to do now" page and the table on india/process/ read. This script
+runs it after writing a row.
 """
 import argparse
 import csv
@@ -116,7 +118,9 @@ def validate(x, replace):
     """Errors stop the run; warnings are printed and the run goes on."""
     err, warn = [], []
     st = x.get('state')
-    known = {r['state'] for r in rows(STATES_CSV)}
+    # a state the summary revision covers is known even outside the intensive
+    # revision (Assam, which had a special revision of its own)
+    known = {r['state'] for r in rows(STATES_CSV)} | set(schedules())
     S = schedules()
     if st not in known:
         return ['%r is not a state in data/india/raw/states.csv' % st], warn
@@ -271,6 +275,8 @@ def main():
         todo(x)
         return
     open(DRAFT_CSV, 'w', encoding='utf-8', newline='').write(new)
+    # the pages read the drafts from data/india/ssr_draft.json
+    subprocess.run([sys.executable, os.path.join('scripts', 'build_ssr_draft.py')], cwd=ROOT, check=True)
     ok = True
     if not a.no_check:
         r = subprocess.run([sys.executable, os.path.join('scripts', 'check_data.py')], cwd=ROOT, capture_output=True, text=True)
