@@ -440,6 +440,7 @@ html[data-lang="ur"] .nav-tab,html[data-lang="ur"] button,html[data-lang="ur"] .
 .pick select{max-width:100%;min-width:0;font:inherit;padding:.35rem .5rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
 @media (max-width:600px){.viz .vname{font-size:11px}.viz .vval{font-size:10.5px}.viz .vname.small{font-size:10px}}
 .viz .vname.light{font-weight:500}
+.viz .vamong-bg{fill:var(--soft);stroke:var(--line);stroke-width:1}.viz .vamong-me{fill:none;stroke:var(--ink);stroke-width:2}.viz .vamong-med{fill:var(--ink)}.viz .vtyp{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:3 2}
 .viz .vzero{stroke:var(--ink);stroke-width:1.5}
 .viz .vci{stroke:var(--fill-navy);stroke-width:2.5}
 .viz .vci.main{stroke:var(--fill-red);stroke-width:3.5}
