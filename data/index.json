@@ -13,14 +13,14 @@
  },
  "counts": {
   "files": 465,
-  "bytes": 14216320
+  "bytes": 14244857
  },
  "files": [
   {
    "path": "data/digest.json",
    "description": "The week in brief, one issue each Friday, as at the top of the What's new page",
    "format": "JSON",
-   "bytes": 7193,
+   "bytes": 10783,
    "keys": [
     "note",
     "issues"
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 614338,
+   "bytes": 619479,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 90182,
+   "bytes": 91923,
    "keys": [
     "note",
     "entries"
@@ -4265,7 +4265,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 376985,
+   "bytes": 383288,
    "columns": [
     "section",
     "date",
@@ -4286,7 +4286,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 595415,
+   "bytes": 603497,
    "keys": [
     "listings",
     "sections",
@@ -7137,7 +7137,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 704311,
+   "bytes": 706023,
    "licence": "CC BY 4.0"
   },
   {
@@ -7172,7 +7172,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 342751,
+   "bytes": 344719,
    "licence": "CC BY 4.0"
   },
   {
