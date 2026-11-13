@@ -31,7 +31,12 @@
       second: { count: 'fall', base: 'roll_2025', what: 'fall to the roll the 2026 election was held on' },
       women: { share: 'women_fall_pct', roll: 'women_2025_pct', what: 'the fall from the January 2025 roll to the draft', rollLabel: 'the January 2025 roll' },
       election: { year: 2026, count: 'fall', voters: 'fall_voters', votersWhat: 'fall in the roll, at the seat\'s turnout', turnout: 'turnout' },
-      limits: 'No table of the names left off has been published for Kerala, even for the state, so every constituency figure is the fall in the roll, which also takes in ordinary deaths, moves and new names. It is a different count from the names left off the draft.' },
+      limits: 'No table of the names left off has been published for Kerala, even for the state, so every constituency figure is the fall in the roll, which also takes in ordinary deaths, moves and new names. It is a different count from the names left off the draft.',
+      // among: each measure across every constituency; typical: each roll as a share of the first, against the median constituency
+      among: [{ name: 'Fall in the roll to the draft, per 100 on the January 2025 roll', fall: true, f: function (r) { return 100 * r.fall_draft / r.roll_2025; } },
+        { name: 'Fall to the roll of the 2026 election, per 100 on the January 2025 roll', fall: true, f: function (r) { return 100 * r.fall / r.roll_2025; } },
+        { name: 'Women\'s share of the fall to the draft', f: function (r) { return r.fall_draft > 0 ? r.women_fall_pct : null; }, pct: true }],
+      typical: { base: 'roll_2025', of: 'the January 2025 roll', steps: [['January 2025 roll', 'roll_2025'], ['Draft roll, December 2025', 'draft'], ['Final roll, February 2026', 'final'], ['Roll of the 2026 election, March 2026', 'election']] } },
     delhi: { label: 'Delhi', faq: 'dl', lead: { count: 'left_off', base: 'roll_before', per: 100, what: 'names left off the draft roll (forms not collected)', of: 'the roll before the revision' },
       election: { year: 2025, count: 'left_off', turnout: 'turnout_2025', overTurnout: 'at_turnout_over_margin' },
       limits: 'The reasons and the split by sex were published for Delhi as a whole only.', pending: 'Delhi' },
@@ -84,6 +89,7 @@
 
   function sum(rows, k) { return rows.reduce(function (t, r) { return t + (r[k] || 0); }, 0); }
   function rate(rows, c) { return c.per * sum(rows, c.count) / sum(rows, c.base); }
+
 
   SIR.seatPage = function () {
     var st = document.body.getAttribute('data-seat-state'), no = +document.body.getAttribute('data-seat-ac'), C = CFG[st];
@@ -172,6 +178,9 @@
       VIZ.lollipop('vCompare', { label: a.name + ': ' + L.what + ' per ' + n(L.per) + ', against its district and the state', axis: 'Per ' + L.per,
         rows: [[a.name, seatR, '--fill-red'], [a.district + ' district', distR, '--fill-navy'], [C.label, stR, '--fill-grey']].map(function (r) { return { name: r[0], v: r[1], text: d1(r[1]), tok: r[2], hi: true }; }) });
       document.getElementById('fCompare').innerHTML = '<b>' + SIR.esc(a.name) + ' ' + (falls ? 'fell by ' : 'lost ') + d1(seatR) + ' of every ' + n(L.per) + ', against ' + d1(distR) + ' in its district and ' + d1(stR) + ' in the state.</b> ' + C.label + '\'s constituencies run from ' + (function (v) { return v < 0 ? 'a rise of ' + d1(-v) : d1(v); })(L.per * ranked[ranked.length - 1][L.count] / ranked[ranked.length - 1][L.base]) + ' in ' + SIR.esc(ranked[ranked.length - 1].name) + ' to ' + d1(L.per * ranked[0][L.count] / ranked[0][L.base]) + ' in ' + SIR.esc(ranked[0].name) + '.';
+
+      // the seat among every constituency of the state, and against the median one
+      if (C.among) SIR.amongBlock(C, A, a, 'constituency', 'constituencies');
 
       // the district's seats
       var DS = D.slice().sort(function (x, y) { return y[L.count] / y[L.base] - x[L.count] / x[L.base]; });

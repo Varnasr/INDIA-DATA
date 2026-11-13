@@ -20,7 +20,13 @@
     karnataka: { label: 'Karnataka', state: 'Karnataka', count: 'removed', base: 'before',
       reasons: [['shifted', 'Shifted'], ['absent', 'Absent'], ['dead', 'Dead'], ['duplicate', 'Enrolled more than once'], ['other', 'Other']],
       after: { draft: 'draft', later: 'sep', what: 'the roll of 9 October 2026' },
-      limits: 'Karnataka published its revision by its 34 election districts and none of it by constituency, and no split of the names left off by sex.' },
+      limits: 'Karnataka published its revision by its 34 election districts and none of it by constituency, and no split of the names left off by sex.',
+      among: [{ name: 'Names left off the draft, per 100 on the roll before', f: function (r) { return r.per_100; } },
+        { name: 'Share of the names left off entered as shifted', f: function (r) { return r.shares.shifted; }, pct: true },
+        { name: 'Share entered as absent', f: function (r) { return r.shares.absent; }, pct: true },
+        { name: 'Share entered as dead', f: function (r) { return r.shares.dead; }, pct: true },
+        { name: 'Fall from the roll before to the roll of 9 October 2026, per 100', fall: true, f: function (r) { return r.net_per_100; } }],
+      typical: { base: 'before', of: 'the roll before the revision', steps: [['Roll before the revision', 'before'], ['Draft roll, 24 August 2026', 'draft'], ['Roll of 9 October 2026', 'sep']] } },
     bihar: { label: 'Bihar', state: 'Bihar', count: 'deleted', base: function (x) { return 100 * x.deleted / x.per_100; }, seats: true, page: 'bihar/districts/', anchor: false,
       sub: 'Measured by the names left off the draft or deleted after it in the two phases of the revision, per 100 electors on the 2025 roll.',
       noun: 'names left off or deleted', verb: 'were left off the draft or deleted after it in the two phases of the revision', per: 'per 100 electors on the 2025 roll', identity: true,
@@ -41,7 +47,11 @@
       noun: 'fall in the roll', verb: 'is the fall in the roll from January 2025 to the draft', per: 'per 100 on the January 2025 roll',
       women: function (d, nm) { return 'Women were ' + pct(d.women_fall_pct) + ' of the fall in ' + nm + '\'s roll, against ' + pct(d.women_2025_pct) + ' of the January 2025 roll.'; },
       after: { draft: 'draft', later: 'final', what: 'the final roll' },
-      limits: 'No table of the names left off has been published. The fall in the roll also takes in ordinary changes over ten months.' },
+      limits: 'No table of the names left off has been published. The fall in the roll also takes in ordinary changes over ten months.',
+      among: [{ name: 'Fall in the roll to the draft, per 100 on the January 2025 roll', fall: true, f: function (r) { return 100 * (r.roll_2025 - r.draft) / r.roll_2025; } },
+        { name: 'Fall to the roll of the 2026 election, per 100 on the January 2025 roll', fall: true, f: function (r) { return 100 * (r.roll_2025 - r.election) / r.roll_2025; } },
+        { name: 'Women\'s share of the fall to the draft', f: function (r) { return r.women_fall_pct; }, pct: true }],
+      typical: { base: 'roll_2025', of: 'the January 2025 roll', steps: [['January 2025 roll', 'roll_2025'], ['Draft roll, December 2025', 'draft'], ['Final roll, February 2026', 'final'], ['Roll of the 2026 election, March 2026', 'election']] } },
     delhi: { label: 'Delhi', state: 'Delhi', count: 'left_off', base: 'roll_before', seats: true,
       limits: 'The reasons and the split by sex were published for Delhi as a whole only.' },
     gujarat: { label: 'Gujarat', state: 'Gujarat', count: 'removed', base: 'before', seats: true,
@@ -136,6 +146,7 @@
       }
       SIR.inShort(pts, C.limits);
 
+      if (C.among) SIR.amongBlock(C, D, d, 'district', 'districts');
       VIZ.lollipop('vCompare', { label: name + ': ' + noun + ' ' + per + ', against every district of ' + C.label, axis: per.charAt(0).toUpperCase() + per.slice(1),
         rows: all.map(function (x) { return { name: x.district, v: rate(x), text: d1(rate(x)), tok: x === d ? '--fill-red' : '--fill-navy', hi: x === d }; }) });
       document.getElementById('fCompare').innerHTML = C.fall && rate(d) < 0 ? '<b>' + SIR.esc(name) + '\'s roll ' + other + ' by ' + d1(-rate(d)) + ' ' + per + ', while ' + C.label + '\'s roll ' + (stR >= 0 ? up : other) + ' by ' + d1(Math.abs(stR)) + '.</b> It is marked in red among all ' + D.length + ' districts.' : '<b>' + (C.fall ? 'The ' + noun + ' in ' + SIR.esc(name) + ' was ' + sv(rate(d)) + ' ' + per : SIR.esc(name) + ' lost ' + d1(rate(d)) + ' of every 100 names') + ', ' + (rate(d) > stR ? 'above' : 'below') + ' the state\'s ' + (C.fall ? sv(stR) : d1(stR)) + '.</b> It is marked in red among all ' + D.length + ' districts.';

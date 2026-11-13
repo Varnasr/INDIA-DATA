@@ -33,6 +33,12 @@ PAGE = '''<!--page {meta} -->
   <div class="grid"><div class="panel wide"><div class="vizbox" id="vCompare"></div></div></div>
   <p class="finding" id="fCompare"></p>
 
+  <section id="sAmong" hidden><h2>Among every constituency of the state</h2>
+  <p class="sub" id="aSub"></p>
+  <div class="grid"><div class="panel wide"><div class="vizbox" id="vAmong"></div></div></div>
+  <div class="grid"><div class="panel wide"><div class="vizbox" id="vTypical"></div></div></div>
+  <p class="finding" id="fAmong"></p></section>
+
   <h2>Every constituency of the district</h2>
   <div class="grid"><div class="panel wide"><div class="vizbox" id="vDistrict"></div></div></div>
   <div id="dLinks"></div>

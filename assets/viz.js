@@ -489,6 +489,65 @@
     if (o.axis) foot(s, lw + (W - lw) / 2, H - 8, o.axis, phone() ? 40 : 90);
   }
 
+  // ---- among: one row per measure, every place of the state as a thin bar
+  // at its value, the place the page is about outlined and the median marked.
+  // rows: [{name, values: [numbers], me: number, text: 'its value written',
+  // med: 'the median written'}]. A place is set only against its own state.
+  function among(box, o) {
+    measure(box);
+    // each row: its name above, the strip, and the place's value and the
+    // median below, so nothing competes for the same line at any width
+    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lc = chars(W - 16), bh = phone() ? 22 : 26, top = 4;
+    var lay = o.rows.map(function (r) { var ln = [].concat(SIR.wrap(String(r.name), lc)); return { r: r, ln: ln, h: ln.length * 15 + 14 + bh + 22 }; });
+    var H = top + lay.reduce(function (t, q) { return t + q.h + 10; }, 0);
+    var s = svgIn(box, W, H, o.label), x0 = 10, x1 = W - 10, y = top;
+    lay.forEach(function (q) {
+      var r = q.r;
+      q.ln.forEach(function (t, k) { el('text', { x: x0, y: y + 12 + 15 * k, class: 'vname' }, s, t); });
+      var yb = y + q.ln.length * 15 + 14;
+      var vs = r.values.concat([r.me]), lo = r.lo != null ? r.lo : Math.min(0, Math.min.apply(null, vs)), hi = r.hi != null ? r.hi : Math.max.apply(null, vs);
+      if (hi <= lo) hi = lo + 1;
+      var x = function (v) { return x0 + (x1 - x0) * (v - lo) / (hi - lo); };
+      el('rect', { x: x0, y: yb, width: x1 - x0, height: bh, class: 'vamong-bg' }, s);
+      r.values.forEach(function (v) {
+        var t = (v - lo) / (hi - lo);
+        el('rect', { x: x(v) - 0.75, y: yb + 1, width: 1.5, height: bh - 2, style: fill(o.tok || '--fill-red') + ';opacity:' + (0.25 + 0.75 * t).toFixed(2) }, s);
+      });
+      if (r.medV != null) el('path', { d: 'M' + (x(r.medV) - 5) + ' ' + (yb - 10) + 'h10l-5 7z', class: 'vamong-med' }, s);
+      el('rect', { x: x(r.me) - 2.5, y: yb - 3, width: 5, height: bh + 6, class: 'vamong-me' }, s);
+      el('text', { x: x0, y: yb + bh + 18, class: 'vval' }, s, r.text + ' · ' + r.med);
+      y += q.h + 10;
+    });
+  }
+
+  // ---- typical: the place against the typical (median) place of its state,
+  // one row per step, a filled bar for the place and a hollow one for the
+  // median. rows: [{name, v, typ, text, typText}], all on one axis 0..o.max
+  function typical(box, o) {
+    measure(box);
+    var W = phone() ? Math.max(320, Math.min(CUR, 599)) : WIDE(), lw = fitLw(o.rows.map(function (r) { return r.name; }), phone() ? 120 : 230), lc = chars(lw - 8);
+    var rr = phone() ? 92 : 250, rh = phone() ? 34 : 30, top = 6, H = top + o.rows.length * rh + (o.key ? 30 : 8);
+    var s = svgIn(box, W, H, o.label), max = o.max || Math.max.apply(null, o.rows.map(function (r) { return Math.max(r.v, r.typ); })) || 1;
+    var x = function (v) { return lw + 8 + (W - lw - rr - 16) * Math.max(v, 0) / max; };
+    o.rows.forEach(function (r, i) {
+      var y = top + i * rh, h = rh - 12;
+      label(s, lw - 4, y + h / 2 + 2, r.name, lc, 'end', 'vname light');
+      el('rect', { x: x(0), y: y + 2, width: Math.max(0, x(r.typ) - x(0)), height: h, class: 'vtyp' }, s);
+      var b = el('rect', { x: x(0), y: y + 5, width: Math.max(0, x(r.v) - x(0)), height: h - 6, style: fill(r.tok || '--fill-red') }, s);
+      el('title', {}, b, r.name + ': ' + r.text + ' (' + r.typText + ')');
+      el('text', { x: W - rr + 4, y: y + h / 2 + 2, 'dominant-baseline': 'middle', class: 'vval' }, s, phone() ? (r.short || r.text) : r.text + '  (' + r.typText + ')');
+      if (phone()) el('text', { x: W - rr + 4, y: y + h / 2 + 15, class: 'vval small' }, s, r.typText);
+    });
+    if (o.key) {
+      var ky = H - 14;
+      el('rect', { x: lw + 8, y: ky - 9, width: 14, height: 10, style: fill('--fill-red') }, s);
+      el('text', { x: lw + 28, y: ky, class: 'vval small' }, s, o.key[0]);
+      var kx = lw + 40 + 7 * o.key[0].length;
+      el('rect', { x: kx, y: ky - 9, width: 14, height: 10, class: 'vtyp' }, s);
+      el('text', { x: kx + 20, y: ky, class: 'vval small' }, s, o.key[1]);
+    }
+  }
+
   // ---- heatmap: rows x cols of shares, each cell shaded by its value and
   // written in an ink that clears contrast on its own shade
   function heat(box, o) {
@@ -818,6 +877,8 @@
     dumbbell: function (o) { return [['name', o.aName, o.bName]].concat(o.rows.map(function (r) { return [r.name, r.a, r.b]; })); },
     slope: function (o) { return [['name', o.aName, o.bName]].concat(o.rows.map(function (r) { return [r.name, r.a, r.b]; })); },
     forest: function (o) { return [['estimate', 'value', 'low', 'high']].concat(o.rows.map(function (r) { return [r.name, r.est, r.lo, r.hi]; })); },
+    among: function (o) { return [['measure', 'this place', 'median', 'lowest', 'highest']].concat(o.rows.map(function (r) { return [r.name, r.me, r.medV, Math.min.apply(null, r.values), Math.max.apply(null, r.values)]; })); },
+    typical: function (o) { return [['step', 'this place', 'median']].concat(o.rows.map(function (r) { return [r.name, r.v, r.typ]; })); },
     lollipop: function (o) { return [['name', o.axis || 'value']].concat(o.rows.map(function (r) { return [r.name, r.v]; })); },
     rank: function (o) { return [['name', o.axis || 'value']].concat(o.rows.map(function (r) { return [r.name, r.v]; })); },
     heat: function (o) { return [['name'].concat(o.cols)].concat(o.rows.map(function (r) { return [r.name].concat(r.v); })); },
@@ -854,7 +915,7 @@
   }
 
   var K = {};
-  var F = { gantt: gantt, lanes: lanes, multiples: multiples, slope: slope, scatter: scatter, sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, heat: heat, rank: rank, dots: dots, map: map };
+  var F = { gantt: gantt, lanes: lanes, multiples: multiples, slope: slope, scatter: scatter, sankey: sankey, waterfall: waterfall, strip: strip, dumbbell: dumbbell, forest: forest, lollipop: lollipop, among: among, typical: typical, heat: heat, rank: rank, dots: dots, map: map };
   Object.keys(F).forEach(function (k) { K[k] = keep(k, F[k]); });
   K.fromChart = function (box, cfg, label) { var ok = fromChart(box, cfg, label); if (ok) try { (typeof box === 'string' ? document.getElementById(box) : box).__csv = chartCsv(cfg); } catch (e) {} return ok; };
   K.png = png;

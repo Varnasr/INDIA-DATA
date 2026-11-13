@@ -1291,3 +1291,40 @@
     if (location.hash === '#owinAll') all.scrollIntoView();
   }).catch(function () {});
 })();
+
+// The place a page is about, among every place of its state, for the
+// constituency pages (assets/seat.js) and the district pages (assets/district.js).
+(function () {
+  var SIR = window.SIR;
+  var median = function (v) { v = v.slice().sort(function (x, y) { return x - y; }); var m = v.length >> 1; return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2; };
+  // the place among every place of its state (C.among), and its rolls against
+  // the median place's (C.typical). Used by the district pages as well.
+  function amongBlock(C, A, a, one, many) {
+    var sec = document.getElementById('sAmong');
+    if (!sec) return;
+    var fmt = function (m, v) { return m.pct ? window.SIR.pct(v) : m.fall && v < 0 ? 'a rise of ' + window.SIR.d(-v, 1) : window.SIR.d(v, 1); };
+    var rows = C.among.map(function (m) {
+      var vals = A.map(m.f).filter(function (v) { return v != null && isFinite(v); }), me = m.f(a);
+      if (me == null || !isFinite(me) || vals.length < 3) return null;
+      var md = median(vals), lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
+      return { name: m.name, values: vals, me: me, medV: md, lo: Math.min(0, lo), hi: hi,
+        text: (a.name || a.district) + ' ' + fmt(m, me), med: 'median ' + fmt(m, md), me1: fmt(m, me), md1: fmt(m, md), range: (m.fall && lo < 0 ? 'a rise of ' + window.SIR.d(-lo, 1) + ' to a fall of ' + window.SIR.d(hi, 1) : fmt(m, lo) + ' to ' + fmt(m, hi)), n: vals.length };
+    }).filter(Boolean);
+    if (!rows.length) return;
+    var nm = a.name || a.district;
+    VIZ.among('vAmong', { label: nm + ' among every ' + one + ' of ' + C.label + ': ' + rows.map(function (r) { return r.name + ', ' + r.me1 + ' against a median of ' + r.md1 + ' and a range of ' + r.range; }).join('. '), rows: rows });
+    var T = C.typical, b = function (r) { return r[T.base]; };
+    if (T) {
+      var trow = T.steps.map(function (st) {
+        var share = function (r) { return 100 * r[st[1]] / b(r); };
+        var md = median(A.map(share).filter(isFinite));
+        return { name: st[0], v: share(a), typ: md, text: SIR.n(a[st[1]]) + ', ' + SIR.d(share(a), 1) + ' per 100', short: SIR.d(share(a), 1) + ' per 100', typText: 'median ' + SIR.d(md, 1) };
+      });
+      VIZ.typical('vTypical', { label: nm + ': each roll per 100 on ' + T.of + ', against the median ' + one + ' of ' + C.label, rows: trow, max: Math.max.apply(null, trow.map(function (r) { return Math.max(r.v, r.typ); })) * 1.02, key: [nm, 'The median ' + one] });
+    } else document.getElementById('vTypical').closest('.grid').hidden = true;
+    document.getElementById('aSub').textContent = 'Each bar below is one of the ' + A.length + ' ' + many + ' of ' + C.label + ', placed by its value. ' + nm + ' is outlined, and the small triangle marks the median ' + one + ', the one in the middle when all are put in order. ' + (T ? 'The second chart sets each of its rolls, per 100 on ' + T.of + ', against the same rolls of the median ' + one + ', drawn as the dashed outline.' : '');
+    document.getElementById('fAmong').innerHTML = rows.map(function (r) { return SIR.esc(r.name.replace(/, per cent$/, '')) + ': ' + r.me1 + ' in ' + SIR.esc(nm) + ', against a median of ' + r.md1 + ', and from ' + r.range + ' across ' + C.label + '.'; }).join(' ') + ' The ' + many + ' are set against each other only within ' + C.label + '.';
+    sec.hidden = false;
+  }
+  window.SIR.amongBlock = amongBlock;
+})();
