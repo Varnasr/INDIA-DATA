@@ -123,18 +123,18 @@ Promise.all([SIR.json('data/westbengal/summary.json'), SIR.json('data/westbengal
     { k: 'ac', label: L('No.') }, { k: 'name', label: L('Constituency'), left: true }, { k: 'district', label: L('District'), left: true },
     { k: 'roll_2024', label: L('Roll 2024'), fmt: SIR.n }, { k: 'draft', label: L('Draft roll'), fmt: SIR.n },
     { k: 'election', label: L('Roll 2026'), fmt: SIR.n }, { k: 'fall', label: L('Fall'), fmt: SIR.n },
-    { k: 'per_100', label: L('Fall per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'women_2024_pct', label: L('Women 2024 %'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'women_election_pct', label: L('Women 2026 %'), fmt: function (v) { return SIR.d(v, 1); } }
+    { k: 'per_100', heat: true, label: L('Fall per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'women_2024_pct', heat: true, label: L('Women 2024 %'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'women_election_pct', heat: true, label: L('Women 2026 %'), fmt: function (v) { return SIR.d(v, 1); } }
   ], A, { sort: 'per_100' });
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: L('District'), left: true }, { k: 'acs', label: L('Seats') },
     { k: 'roll_2024', label: L('Roll 2024'), fmt: SIR.n }, { k: 'draft', label: L('Draft roll'), fmt: SIR.n }, { k: 'election', label: L('Roll 2026'), fmt: SIR.n },
-    { k: 'draft_per_100', label: L('Fall to the draft, per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'per_100', label: L('Fall to 2026, per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'women_2024_pct', label: L('Women 2024 %'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'women_fall_pct', label: L('Women in the fall %'), fmt: function (v) { return SIR.d(v, 1); } }
+    { k: 'draft_per_100', heat: true, label: L('Fall to the draft, per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'per_100', heat: true, label: L('Fall to 2026, per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'women_2024_pct', heat: true, label: L('Women 2024 %'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'women_fall_pct', heat: true, label: L('Women in the fall %'), fmt: function (v) { return SIR.d(v, 1); } }
   ], D, { sort: 'per_100' });
   SIR.json('data/geo/westbengal.json').then(function (geo) {
     var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });

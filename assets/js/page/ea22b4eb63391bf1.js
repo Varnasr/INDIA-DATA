@@ -122,8 +122,8 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: 'District', left: true }, { k: 'roll_before', label: 'Roll Oct 2025', fmt: n }, { k: 'draft', label: 'Draft roll', fmt: n },
-    { k: 'total', label: 'Left off', fmt: n }, { k: 'per_100', label: 'Per 100', fmt: d1 },
-    { k: 'shifted_pct', label: 'Shifted %', fmt: d1 }, { k: 'untraceable_absent_pct', label: 'Untraceable or absent %', fmt: d1 }, { k: 'dead_pct', label: 'Dead %', fmt: d1 }, { k: 'multiple_pct', label: 'Already enrolled %', fmt: d1 }
+    { k: 'total', label: 'Left off', fmt: n }, { k: 'per_100', heat: true, label: 'Per 100', fmt: d1 },
+    { k: 'shifted_pct', heat: true, label: 'Shifted %', fmt: d1 }, { k: 'untraceable_absent_pct', heat: true, label: 'Untraceable or absent %', fmt: d1 }, { k: 'dead_pct', heat: true, label: 'Dead %', fmt: d1 }, { k: 'multiple_pct', heat: true, label: 'Already enrolled %', fmt: d1 }
   ], D, { sort: 'per_100' });
 
   var F = SIR.finder('finder', { districtPages: true, rows: D, pick: function (d) { var b = document.getElementById('vMap'); if (b.__select && idOf[d.district]) b.__select(idOf[d.district]); }, prompt: 'Find a district', placeholder: 'Type a district\'s name', key: function (d) { return SIR.slug(d.district); }, label: function (d) { return d.district + ' district'; },

@@ -58,13 +58,13 @@ Promise.all([SIR.json('data/rajasthan/summary.json'), SIR.json('data/rajasthan/d
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', left: true }, { k: 'district', label: 'District', left: true },
     { k: 'roll_2023', label: 'Roll 2023', fmt: n }, { k: 'final', label: 'Final roll 2026', fmt: n }, { k: 'fall', label: 'Fall', fmt: n },
-    { k: 'per_100', label: 'Fall per 100', fmt: d1 }, { k: 'women_change', label: 'Women, change in points', fmt: function (v) { return SIR.d(v, 2); } },
+    { k: 'per_100', heat: true, label: 'Fall per 100', fmt: d1 }, { k: 'women_change', label: 'Women, change in points', fmt: function (v) { return SIR.d(v, 2); } },
     { k: 'winner', label: 'Won 2023', left: true }, { k: 'margin', label: 'Margin 2023', fmt: n }
   ], A, { sort: 'per_100' });
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: 'District', left: true }, { k: 'acs', label: 'Seats' },
     { k: 'roll_2023', label: 'Roll 2023', fmt: n }, { k: 'final', label: 'Final roll 2026', fmt: n }, { k: 'fall', label: 'Fall', fmt: n },
-    { k: 'per_100', label: 'Fall per 100', fmt: d1 }, { k: 'women_2023_pct', label: 'Women % 2023', fmt: d1 }, { k: 'women_2026_pct', label: 'Women % 2026', fmt: d1 }
+    { k: 'per_100', heat: true, label: 'Fall per 100', fmt: d1 }, { k: 'women_2023_pct', heat: true, label: 'Women % 2023', fmt: d1 }, { k: 'women_2026_pct', heat: true, label: 'Women % 2026', fmt: d1 }
   ], D, { sort: 'per_100' });
 
   var seatsOf = function (d) { return A.filter(function (a) { return a.district === d.district; }); };

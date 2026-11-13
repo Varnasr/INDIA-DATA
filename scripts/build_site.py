@@ -310,6 +310,16 @@ def now_states(content, root):
     return content.replace('<!--now-states-->', chips)
 
 
+# Names left off the draft against names added after it, as squares, on each
+# state's overview. sir.js (SIR.units) draws it from data/india/states.json
+# when the page loads, and leaves it hidden for a state without both counts.
+def units_block(out, place):
+    if place.get('zone') and place['pages'] and out == place['pages'][0][0]:
+        return ('<section class="units" data-units="%s" hidden><h2>Names left off the draft, and names added after it</h2>'
+                '<div class="unitbox" id="vUnits"></div><p class="finding" id="fUnits"></p></section>' % html.escape(BF.state_name(place)))
+    return ''
+
+
 def open_window(out, place, content):
     if place.get('zone') and place['pages'] and out == place['pages'][0][0]:
         name = BF.state_name(place)
@@ -558,7 +568,7 @@ def shell(out, meta, content, scripts):
     # added after the column is chosen, so they do not change it: the dates and
     # alert form, and the code to embed the place's chart, before the page's
     # questions or its download strip
-    extra = dates_block(out, place, root) + embed_block(out, place, root)
+    extra = units_block(out, place) + dates_block(out, place, root) + embed_block(out, place, root)
     if extra:
         for mark in ('<section class="page-faq"', '<section class="dlstrip"', '</main>'):
             if mark in content:

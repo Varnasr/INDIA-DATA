@@ -94,18 +94,18 @@ Promise.all([SIR.json('data/kerala/summary.json'), SIR.json('data/kerala/distric
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: L('No.') }, { k: 'name', label: L('Constituency'), left: true }, { k: 'district', label: L('District'), left: true },
     { k: 'roll_2025', label: L('Roll Jan 2025'), fmt: SIR.n }, { k: 'draft', label: L('Draft roll'), fmt: SIR.n },
-    { k: 'draft_per_100', label: L('Fall to draft per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'draft_per_100', heat: true, label: L('Fall to draft per 100'), fmt: function (v) { return SIR.d(v, 1); } },
     { k: 'election', label: L('Roll Mar 2026'), fmt: SIR.n },
-    { k: 'per_100', label: L('Fall to 2026 per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'women_fall_pct', label: L('Women % of fall'), fmt: function (v) { return SIR.d(v, 1); } }
+    { k: 'per_100', heat: true, label: L('Fall to 2026 per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'women_fall_pct', heat: true, label: L('Women % of fall'), fmt: function (v) { return SIR.d(v, 1); } }
   ], A, { sort: 'draft_per_100' });
 
   SIR.table(document.getElementById('tDist'), [
     { k: 'district', label: L('District'), left: true }, { k: 'acs', label: L('Seats') },
     { k: 'roll_2025', label: L('Roll Jan 2025'), fmt: SIR.n }, { k: 'draft', label: L('Draft roll'), fmt: SIR.n }, { k: 'final', label: L('Final roll'), fmt: SIR.n }, { k: 'election', label: L('Roll March 2026'), fmt: SIR.n },
-    { k: 'draft_per_100', label: L('Fall to the draft, per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'per_100', label: L('Fall to 2026, per 100'), fmt: function (v) { return SIR.d(v, 1); } },
-    { k: 'women_fall_pct', label: L('Women in the fall %'), fmt: function (v) { return SIR.d(v, 1); } }
+    { k: 'draft_per_100', heat: true, label: L('Fall to the draft, per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'per_100', heat: true, label: L('Fall to 2026, per 100'), fmt: function (v) { return SIR.d(v, 1); } },
+    { k: 'women_fall_pct', heat: true, label: L('Women in the fall %'), fmt: function (v) { return SIR.d(v, 1); } }
   ], D, { sort: 'draft_per_100' });
   SIR.json('data/geo/kerala.json').then(function (geo) {
     var byAc = {}; A.forEach(function (a) { byAc[a.ac] = a; });

@@ -51,15 +51,15 @@ Promise.all([SIR.json('data/uttarakhand/summary.json'), SIR.json('data/uttarakha
   document.getElementById('fNext').innerHTML = 'With the final roll, the Chief Electoral Officer told booth officers to compare it with the roll from before the revision, visit the people missing from it, help those still eligible fill in Form 6, and share the lists with the parties\' booth agents. The steps are on <a href="../india/process/#t-2026-10-03">How the revision was run</a>.';
 
   SIR.table(document.getElementById('tDist'), [
-    { k: 'district', label: 'District', left: true }, { k: 'acs', label: 'Seats' }, { k: 'roll_before', label: 'Roll before', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'left_off_per_100', label: 'Left off per 100', fmt: d1 }, { k: 'notices_per_100', label: 'Notices per 100 on draft', fmt: d1 }, { k: 'draft', label: 'Draft roll', fmt: n },
+    { k: 'district', label: 'District', left: true }, { k: 'acs', label: 'Seats' }, { k: 'roll_before', label: 'Roll before', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'left_off_per_100', heat: true, label: 'Left off per 100', fmt: d1 }, { k: 'notices_per_100', heat: true, label: 'Notices per 100 on draft', fmt: d1 }, { k: 'draft', label: 'Draft roll', fmt: n },
     { k: 'claims', label: 'Added', fmt: n }, { k: 'objections', label: 'Deleted', fmt: n }, { k: 'final', label: 'Final roll', fmt: n },
-    { k: 'objections_per_1000', label: 'Deleted per 1,000', fmt: d1 }, { k: 'women_objections_pct', label: 'Women, % of deleted', fmt: d1 }], D, { sort: 'left_off_per_100' });
+    { k: 'objections_per_1000', heat: true, label: 'Deleted per 1,000', fmt: d1 }, { k: 'women_objections_pct', heat: true, label: 'Women, % of deleted', fmt: d1 }], D, { sort: 'left_off_per_100' });
   SIR.table(document.getElementById('tAc'), [
     { k: 'ac', label: 'No.' }, { k: 'name', label: 'Constituency', left: true }, { k: 'district', label: 'District', left: true },
-    { k: 'roll_before', label: 'Roll before', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'left_off_per_100', label: 'Left off per 100', fmt: d1 }, { k: 'notices_per_100', label: 'Notices per 100 on draft', fmt: d1 },
+    { k: 'roll_before', label: 'Roll before', fmt: n }, { k: 'left_off', label: 'Left off', fmt: n }, { k: 'left_off_per_100', heat: true, label: 'Left off per 100', fmt: d1 }, { k: 'notices_per_100', heat: true, label: 'Notices per 100 on draft', fmt: d1 },
     { k: 'draft', label: 'Draft roll', fmt: n }, { k: 'claims', label: 'Added', fmt: n }, { k: 'objections', label: 'Deleted', fmt: n }, { k: 'final', label: 'Final roll', fmt: n },
-    { k: 'net_per_1000', label: 'Change per 1,000', fmt: d1 }, { k: 'objections_per_1000', label: 'Deleted per 1,000', fmt: d1 },
-    { k: 'women_objections_pct', label: 'Women, % of deleted', fmt: d1 }], A, { sort: 'left_off_per_100' });
+    { k: 'net_per_1000', heat: true, label: 'Change per 1,000', fmt: d1 }, { k: 'objections_per_1000', heat: true, label: 'Deleted per 1,000', fmt: d1 },
+    { k: 'women_objections_pct', heat: true, label: 'Women, % of deleted', fmt: d1 }], A, { sort: 'left_off_per_100' });
 
   var seatsOf = function (d) { return A.filter(function (a) { return a.district === d.district; }); };
   var DSET = { rows: D, key: function (d) { return SIR.slug(d.district); }, label: function (d) { return d.district + ' district'; },
