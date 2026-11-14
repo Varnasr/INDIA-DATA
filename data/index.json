@@ -1,7 +1,7 @@
 {
  "title": "Off the Roll: index of the published data files",
  "url": "https://offtheroll.in/data/index.json",
- "built": "2026-11-13",
+ "built": "2026-11-14",
  "licence": {
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/"
@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 466,
-  "bytes": 14275768
+  "bytes": 14315753
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 621251,
+   "bytes": 631067,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 94741,
+   "bytes": 96520,
    "keys": [
     "note",
     "entries"
@@ -4265,7 +4265,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 383288,
+   "bytes": 390912,
    "columns": [
     "section",
     "date",
@@ -4286,7 +4286,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 603497,
+   "bytes": 612748,
    "keys": [
     "listings",
     "sections",
@@ -4650,7 +4650,7 @@
    "path": "data/india/reads.json",
    "description": "Further reading and viewing on the revision, with outlets, dates and summaries",
    "format": "JSON",
-   "bytes": 144186,
+   "bytes": 148006,
    "keys": [
     "groups",
     "items",
@@ -4728,7 +4728,7 @@
    "path": "data/india/ssr_draft.json",
    "description": "All India: ssr draft",
    "format": "JSON",
-   "bytes": 16593,
+   "bytes": 19640,
    "keys": [
     "about",
     "states"
@@ -7148,7 +7148,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 706632,
+   "bytes": 708854,
    "licence": "CC BY 4.0"
   },
   {
@@ -7183,7 +7183,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 345398,
+   "bytes": 347824,
    "licence": "CC BY 4.0"
   },
   {
