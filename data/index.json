@@ -1,7 +1,7 @@
 {
  "title": "Off the Roll: index of the published data files",
  "url": "https://offtheroll.in/data/index.json",
- "built": "2026-11-14",
+ "built": "2026-11-15",
  "licence": {
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/"
@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 466,
-  "bytes": 14315753
+  "bytes": 14374902
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 631067,
+   "bytes": 643566,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 96520,
+   "bytes": 98510,
    "keys": [
     "note",
     "entries"
@@ -4265,7 +4265,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 390912,
+   "bytes": 405710,
    "columns": [
     "section",
     "date",
@@ -4286,7 +4286,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 612748,
+   "bytes": 629707,
    "keys": [
     "listings",
     "sections",
@@ -4326,7 +4326,7 @@
    "path": "data/india/events.json",
    "description": "Jan Sunwais, marches, protests and press conferences about the revision, with dates and sources",
    "format": "JSON",
-   "bytes": 75241,
+   "bytes": 79400,
    "keys": [
     "checked",
     "scope",
@@ -4728,7 +4728,7 @@
    "path": "data/india/ssr_draft.json",
    "description": "All India: ssr draft",
    "format": "JSON",
-   "bytes": 19640,
+   "bytes": 20071,
    "keys": [
     "about",
     "states"
@@ -7148,91 +7148,91 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 708854,
+   "bytes": 712864,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/assam.xlsx",
    "description": "Assam, Excel workbook",
    "format": "Excel",
-   "bytes": 41236,
+   "bytes": 41237,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/bihar.xlsx",
    "description": "Bihar 2025, Excel workbook",
    "format": "Excel",
-   "bytes": 443441,
+   "bytes": 443442,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/delhi.xlsx",
    "description": "Delhi, Excel workbook",
    "format": "Excel",
-   "bytes": 28830,
+   "bytes": 28831,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/gujarat.xlsx",
    "description": "Gujarat, Excel workbook",
    "format": "Excel",
-   "bytes": 72141,
+   "bytes": 72142,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 347824,
+   "bytes": 352114,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/karnataka.xlsx",
    "description": "Karnataka, Excel workbook",
    "format": "Excel",
-   "bytes": 26395,
+   "bytes": 26396,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/kerala.xlsx",
    "description": "Kerala, Excel workbook",
    "format": "Excel",
-   "bytes": 58131,
+   "bytes": 58132,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/maharashtra.xlsx",
    "description": "Maharashtra, Excel workbook",
    "format": "Excel",
-   "bytes": 85208,
+   "bytes": 85209,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/other-states.xlsx",
    "description": "Every other state and union territory, Excel workbook",
    "format": "Excel",
-   "bytes": 83450,
+   "bytes": 83451,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/rajasthan.xlsx",
    "description": "Rajasthan, Excel workbook",
    "format": "Excel",
-   "bytes": 60786,
+   "bytes": 60787,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/tamil-nadu.xlsx",
    "description": "Tamil Nadu, Excel workbook",
    "format": "Excel",
-   "bytes": 117838,
+   "bytes": 117839,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/telangana-hyderabad.xlsx",
    "description": "Telangana 2026 and the Old City of Hyderabad, Excel workbook",
    "format": "Excel",
-   "bytes": 95540,
+   "bytes": 95541,
    "licence": "CC BY 4.0"
   },
   {
@@ -7246,14 +7246,14 @@
    "path": "downloads/uttarakhand.xlsx",
    "description": "Uttarakhand, Excel workbook",
    "format": "Excel",
-   "bytes": 45753,
+   "bytes": 45754,
    "licence": "CC BY 4.0"
   },
   {
    "path": "downloads/west-bengal.xlsx",
    "description": "West Bengal, Excel workbook",
    "format": "Excel",
-   "bytes": 95191,
+   "bytes": 95192,
    "licence": "CC BY 4.0"
   }
  ]
