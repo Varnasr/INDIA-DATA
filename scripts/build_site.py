@@ -448,7 +448,7 @@ def shell(out, meta, content, scripts):
     # the pages most readers come for, at the top of the menu whatever the place
     quick = '<div class="ql" data-i18n-each>%s</div>' % ''.join(
         '<a href="%s%s"%s>%s</a>' % (root, h, ' aria-current="page"' if h == here else '', html.escape(t)) for h, t in
-        (('guide/', 'How to use this site'), ('about-the-data/', 'About the data'), ('india/brief/', 'The SIR in brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'Left off the roll? What to do'), ('help/#owinAll', 'What to do now in your state'), ('india/disputes/', 'Protests and disputes'), ('india/events/', 'Events'), ('india/rti/', 'RTI replies'), ('india/cases/', 'Case studies'), ('india/reading/', 'Further reading and viewing'),
+        (('guide/', 'How to use this site'), ('guide/deep-dive/', "Looking closer at a state's figures"), ('about-the-data/', 'About the data'), ('india/brief/', 'The SIR in brief'), ('india/constituencies/', 'Find a constituency'), ('help/', 'Left off the roll? What to do'), ('help/#owinAll', 'What to do now in your state'), ('india/disputes/', 'Protests and disputes'), ('india/events/', 'Events'), ('india/rti/', 'RTI replies'), ('india/cases/', 'Case studies'), ('india/reading/', 'Further reading and viewing'),
          ('india/women/', 'Women'), ('india/numbers/', 'The SIR in numbers'), ('support/', 'Support our work')))
     # "Start here" is its own menu beside Places, so Places holds only places
     about = ''.join(i for i in items if i.startswith('<div class="about"'))
