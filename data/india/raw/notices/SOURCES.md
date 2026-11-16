@@ -333,3 +333,22 @@ read again independently the same day.
   claims and documents is the date by which notices and claims are to be
   decided under the schedule of 29 October in process.json, and no new
   schedule step was added for it.
+
+## Update of 2026-11-16
+
+Two rows were added, read in full with curl on 2026-11-16 and read again
+independently the same day. The figures are aggregates.
+
+- **Telangana**: hearings completed for 92,78,967 electors and 54,863 found
+  ineligible after a notice, as of Saturday 14 November (Telangana Today,
+  Yuvraj Akula, 15 November 2026, 16:50 IST). The report attributes the 54,863
+  to the Commission and names no source for the hearings. It splits the 54,863
+  into 21,514 who did not submit documents for a logical discrepancy and 33,349
+  who could not be linked to the 2002 roll. They supersede the 92,08,443
+  hearings of 29 October and the 54,418 found ineligible on 6 November. The
+  same report gives 92,88,188 notices generated, 92,87,963 served and 9,221
+  hearings lapsed, and no total row was added at 92,88,188, for the reason
+  given under the update of 2026-10-30. Its 91,72,454 electors marked for
+  inclusion after a notice and the 54,863 found ineligible come to 92,27,317,
+  so 51,650 heard cases were not yet decided. Its count of 2,63,18,514 electors
+  in the state includes electors never sent a notice, so it is not a row.
