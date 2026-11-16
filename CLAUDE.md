@@ -203,3 +203,14 @@ A second reader checks every figure before the merge, as for a final roll.
 Plain, full sentences with facts in them. No em dashes, no "X, not Y" turns, no
 stock vocabulary, no emoji. `scripts/check_writing.py` catches what a pattern can;
 read what you write.
+
+## Private pages
+
+`/briefs/iycc/` is a page for one group, served by the edge function
+`netlify/edge-functions/iycc-brief.js` only after the password is entered. The
+repository is public, so the page sits in that file only as AES-GCM ciphertext.
+The key and the password are the Netlify environment variables `IYCC_KEY` and
+`IYCC_PASSWORD`, and neither is ever written to the repository. Changing either
+signs everyone out. The text is kept in the owner's Claude Docs note and is
+re-encrypted from there when it changes. Nothing links to the page, and it sends
+`noindex`.
