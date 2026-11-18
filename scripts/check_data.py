@@ -704,7 +704,7 @@ def _now():
     # electors marked absent, shifted, dead or duplicate), named in
     # build_now.PAGES
     own = lambda pg: ([pg['bench']] if pg.get('bench') else []) + list(pg.get('form7') or []) + \
-        [pg[k] for k in ('form8', 'asdd') if pg.get(k)]
+        [pg[k] for k in ('form8', 'asdd', 'asdd_dates', 'asdd_local') if pg.get(k)]
     named = set(re.findall(r"\bc_[A-Za-z0-9_]+", js)) | {k for pg in X['pages'].values() for k in own(pg)}
     for k in sorted(named):
         assert k in X['cite'], 'assets/now.js names the source %s, which data/india/now.json does not hold' % k

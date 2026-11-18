@@ -33,6 +33,23 @@
     }
    ]
   },
+  "c_asdd_dates": {
+   "date": "2026-11-17",
+   "items": [
+    {
+     "name": "Hindustan Times, 18.11.2026",
+     "url": "https://www.hindustantimes.com/india-news/eci-issues-fresh-timeline-for-asdd-voters-reenrolment-101794941744612.html"
+    },
+    {
+     "name": "Telangana Today, 17.11.2026",
+     "url": "https://telanganatoday.com/eci-extends-telangana-sir-deadline-to-december-15-final-voter-list-on-december-22"
+    },
+    {
+     "name": "Deccan Chronicle, 17.11.2026",
+     "url": "https://www.deccanchronicle.com/southern-states/telangana/eci-extends-telangana-voter-roll-revision-final-list-on-dec-22-2005362"
+    }
+   ]
+  },
   "c_bench": {
    "date": "2026-10-28",
    "disputes": "india/disputes/#d-court-54",
@@ -58,6 +75,23 @@
     {
      "name": "ECI letter of 14.05.2026, as published by CEO Maharashtra",
      "url": "https://ceoelection.maharashtra.gov.in/Downloads/PDF/Notification/ECI%20instructions%20140526.pdf"
+    }
+   ]
+  },
+  "c_dl_asdd": {
+   "date": "2026-11-17",
+   "items": [
+    {
+     "name": "Chief Electoral Officer, Delhi, press note of 17.11.2026, as posted on the office's Facebook page",
+     "url": "https://www.facebook.com/ceodelhioffice/posts/special-drive-to-enroll-left-out-electors-from-draft-electoralroll-on-being-mark/1566762255487291/"
+    },
+    {
+     "name": "Chief Electoral Officer, Delhi, press note of 31.08.2026",
+     "url": "https://ceodelhi.gov.in/PDFFolders/2026/Draft_PublicationSIR31Aug2026.pdf"
+    },
+    {
+     "name": "PTI in The Telegraph, 17.11.2026",
+     "url": "https://www.telegraphindia.com/india/delhi-sir-43-lakh-voters-marked-shifted-or-missing-can-file-fresh-forms-by-november-30/cid/2189974"
     }
    ]
   },
@@ -441,6 +475,7 @@
   },
   "Andhra Pradesh": {
    "asdd": "c_asdd_again",
+   "asdd_dates": "c_asdd_dates",
    "ceo": [
     [
      "x",
@@ -595,6 +630,8 @@
   },
   "Delhi": {
    "asdd": "c_asdd_again",
+   "asdd_dates": "c_asdd_dates",
+   "asdd_local": "c_dl_asdd",
    "bench": "c_bench",
    "ceo": [
     [
@@ -731,6 +768,7 @@
   },
   "Haryana": {
    "asdd": "c_asdd_again",
+   "asdd_dates": "c_asdd_dates",
    "ceo": [
     [
      "site",
@@ -776,6 +814,7 @@
   },
   "Jharkhand": {
    "asdd": "c_asdd_again",
+   "asdd_dates": "c_asdd_dates",
    "ceo": [],
    "courts": [],
    "label": "Jharkhand 2026",
@@ -925,6 +964,7 @@
   },
   "Maharashtra": {
    "asdd": "c_asdd_again",
+   "asdd_dates": "c_asdd_dates",
    "ceo": [
     [
      "site",
@@ -1049,6 +1089,7 @@
   },
   "Nagaland": {
    "asdd": "c_asdd_again",
+   "asdd_dates": "c_asdd_dates",
    "ceo": [
     [
      "site",
@@ -1235,6 +1276,7 @@
   },
   "Telangana": {
    "asdd": "c_asdd_again",
+   "asdd_dates": "c_asdd_dates",
    "ceo": [
     [
      "x",
