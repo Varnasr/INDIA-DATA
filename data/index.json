@@ -1,7 +1,7 @@
 {
  "title": "Off the Roll: index of the published data files",
  "url": "https://offtheroll.in/data/index.json",
- "built": "2026-11-17",
+ "built": "2026-11-18",
  "licence": {
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/"
@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 466,
-  "bytes": 14512761
+  "bytes": 14536264
  },
  "files": [
   {
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 104114,
+   "bytes": 104863,
    "keys": [
     "note",
     "entries"
@@ -4551,7 +4551,7 @@
    "path": "data/india/now.json",
    "description": "All India: now",
    "format": "JSON",
-   "bytes": 45823,
+   "bytes": 47458,
    "keys": [
     "cite",
     "pages"
@@ -4590,7 +4590,7 @@
    "path": "data/india/process.json",
    "description": "How the revision was run: the rules as they changed, and each state's dates",
    "format": "JSON",
-   "bytes": 177272,
+   "bytes": 187385,
    "keys": [
     "as_of",
     "timeline",
@@ -4612,7 +4612,7 @@
    "path": "data/india/process_schedules.csv",
    "description": "Each state's schedule as set and as moved",
    "format": "CSV",
-   "bytes": 15545,
+   "bytes": 17382,
    "columns": [
     "state",
     "phase",
@@ -4634,7 +4634,7 @@
    "path": "data/india/process_timeline.csv",
    "description": "Every order, letter, court order and judgment that changed how the revision was run",
    "format": "CSV",
-   "bytes": 43892,
+   "bytes": 49682,
    "columns": [
     "date",
     "who",
@@ -5647,7 +5647,7 @@
    "path": "data/maharashtra/summary.json",
    "description": "Maharashtra: the figures its pages draw",
    "format": "JSON",
-   "bytes": 11286,
+   "bytes": 11362,
    "keys": [
     "before",
     "draft",
@@ -7148,7 +7148,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 721755,
+   "bytes": 723273,
    "licence": "CC BY 4.0"
   },
   {
@@ -7183,7 +7183,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 361810,
+   "bytes": 363595,
    "licence": "CC BY 4.0"
   },
   {
