@@ -356,8 +356,9 @@ independently the same day. The figures are aggregates.
 ## Update of 2026-11-19
 
 One row was added, read in full with Firecrawl on 2026-11-19 because the page
-refuses curl. One more report was read in full with curl the same day and no
-row was taken from it. The figures are aggregates.
+refuses curl, and read again independently the same day. One more report was
+read in full with curl the same day, and again independently, and no row was
+taken from it. The figures are aggregates.
 
 - **Delhi**: more than 32.8 lakh of over 33 lakh notices addressed, from
   figures available with the Election Commission (NDTV, 18 November 2026,
