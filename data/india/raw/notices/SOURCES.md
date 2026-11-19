@@ -352,3 +352,25 @@ independently the same day. The figures are aggregates.
   inclusion after a notice and the 54,863 found ineligible come to 92,27,317,
   so 51,650 heard cases were not yet decided. Its count of 2,63,18,514 electors
   in the state includes electors never sent a notice, so it is not a row.
+
+## Update of 2026-11-19
+
+One row was added, read in full with Firecrawl on 2026-11-19 because the page
+refuses curl. One more report was read in full with curl the same day and no
+row was taken from it. The figures are aggregates.
+
+- **Delhi**: more than 32.8 lakh of over 33 lakh notices addressed, from
+  figures available with the Election Commission (NDTV, 18 November 2026,
+  23:39 IST). The report gives no date for the figure, so the row carries the
+  report's date. The word in the source is "addressed", and the same caveat
+  as the earlier Delhi counts applies. It supersedes the 32,35,212 of 4
+  November. The same report gives the forms received by the office of the
+  Chief Electoral Officer in its daily bulletin of 17 November, which are not
+  notices and are not rows here.
+- **Maharashtra**: 18,248 notices pending in 84 of the 288 Assembly
+  constituencies till Tuesday 17 November, 7,712 of them in Pune district,
+  from the pending-notice data on district election office websites, and
+  99.41 per cent of the 1.2 crore electors served notices cleared (The Times
+  of India, Nisha Nambiar, 19 November 2026, 00:55 IST). No row was added. The
+  file has no category for pending notices, the count covers 84
+  constituencies only, and the share gives no count.
