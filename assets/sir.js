@@ -495,13 +495,20 @@
     // the page's own share row, under its findings: WhatsApp opens with the
     // page's title and its first finding already written
     if (ol && ol.children.length && !document.querySelector('.pageshare')) {
-      var first = ol.children[0].innerText.replace(/\s+/g, ' ').trim(),
+      var pts = [].map.call(ol.children, function (li) { return li.innerText.replace(/\s+/g, ' ').trim(); }).filter(Boolean),
         h = document.querySelector('main h1'), k = document.querySelector('main .kicker'),
         title = (k ? k.textContent.trim() + ', ' : '') + (h ? h.textContent.trim() : document.title),
-        text = title + '. ' + first, bar = document.createElement('div');
+        // a "What to do now" page is the one a group forwards, so its
+        // message carries every step and date in the summary, numbered as
+        // the page numbers them; any other page sends its first finding
+        now = !!document.querySelector('main[data-now]'),
+        text = now ? title + '\n\n' + pts.map(function (t, i) { return (i + 1) + '. ' + t; }).join('\n') + '\n' : title + '. ' + pts[0],
+        bar = document.createElement('div');
       bar.className = 'tools pageshare';
-      bar.innerHTML = '<a class="btn" target="_blank" rel="noopener" href="' + SIR.esc(SIR.wa(text)) + '">' + L('Share on WhatsApp') + '</a><button type="button">' + L('Copy link') + '</button>';
-      bar.querySelector('button').addEventListener('click', function (e) { copy(SIR.pageUrl(), e.target); });
+      bar.innerHTML = '<a class="btn" target="_blank" rel="noopener" href="' + SIR.esc(SIR.wa(text)) + '">' + L('Share on WhatsApp') + '</a><button type="button" data-t="link">' + L('Copy link') + '</button>' +
+        (now ? '<button type="button" data-t="text">' + L('Copy the message') + '</button>' : '');
+      bar.querySelector('[data-t=link]').addEventListener('click', function (e) { copy(SIR.pageUrl(), e.target); });
+      if (now) bar.querySelector('[data-t=text]').addEventListener('click', function (e) { copy(text + '\n' + SIR.pageUrl(), e.target); });
       ol.parentNode.insertBefore(bar, ol.nextSibling);
     }
   };
