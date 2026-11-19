@@ -75,7 +75,7 @@ SELF = ('the site talking about itself', r"\b(this site|this site's|the site's o
         r"we could not|we have not found|that we (?:could )?find|that we found|how sure are we|tells us nothing|on this site)\b")
 SELF_EXEMPT = {'site/pages/terms/index.html', 'site/pages/share/index.html', 'site/pages/feedback/index.html',
                'site/pages/support/index.html', 'site/pages/guide/index.html', 'site/pages/about-the-data/index.html',
-               'site/pages/corrections/index.html', 'site/pages/downloads/index.html', 'site/pages/updates/index.html',
+               'site/pages/corrections/index.html', 'site/pages/downloads/index.html', 'site/pages/updates/index.html', 'site/pages/press/index.html',
                'data/updates.json'}
 # A reading-list summary opens on a full sentence ("It reports ...", never "Reports ...").
 READS_FRAGMENT = re.compile(r'^(Argues|Checks|Compares|Describes|Draws|Examines|Finds|Follows|Gives|Reads|Records|Reports|Runs|'
