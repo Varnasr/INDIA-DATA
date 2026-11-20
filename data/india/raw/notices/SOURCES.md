@@ -375,3 +375,23 @@ taken from it. The figures are aggregates.
   of India, Nisha Nambiar, 19 November 2026, 00:55 IST). No row was added. The
   file has no category for pending notices, the count covers 84
   constituencies only, and the share gives no count.
+
+## Update of 2026-11-20
+
+Two rows were added, read in full with curl on 2026-11-20 and read again
+independently the same day. The figures are aggregates.
+
+- **Jharkhand**: 45,49,961 logical discrepancy cases and 14,03,981 no-mapping
+  cases as of 19 November, from official figures (Amar Ujala, Ashutosh Pratap
+  Singh, 20 November 2026, 13:05 IST), with the same counts in Dainik Jagran
+  (Neeraj Ambastha, 19 November 2026, 18:09 IST) from the office of the Chief
+  Electoral Officer. 41,03,251 discrepancy cases (90.18 per cent) and 10,42,976
+  no-mapping cases (74.29 per cent) had been disposed of, and 4,46,710 and
+  3,61,005 were pending. They supersede the pair of 4 November, when 14,88,802
+  and 7,95,415 were pending. The no-mapping count is 52 fewer than the
+  14,04,033 of 4 November and neither paper says why. No hearings row was
+  added, because neither paper gives a total of cases disposed and this file
+  does not add the two. A third category, called other, with 1,61,65,853 cases
+  and 76,676 pending, is not a row, because neither paper says what it holds.
+  Amar Ujala's headline gives 41 lakh disposed and 8 lakh pending, and the
+  41 lakh is the discrepancy category alone.
