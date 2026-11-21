@@ -364,7 +364,7 @@ def data_index(cfg, published, sizes):
            'url': cfg['url'] + 'data/index.json',
            'built': latest_update(),
            'licence': LICENCE,
-           'licence_note': 'The tables and the analysis may be reused under CC BY 4.0. Credit "SIR analysis for India, ImpactMojo" and link to the page used. Official data keeps the terms of whoever published it, and each file\'s source is named in its workbook and on its method page.',
+           'licence_note': 'The tables and the analysis may be reused under CC BY 4.0. Credit "Off the Roll (offtheroll.in)" and link to the page used. Official data keeps the terms of whoever published it, and each file\'s source is named in its workbook and on its method page.',
            'publisher': {'name': cfg['credit'], 'url': cfg['credit_url']},
            'counts': {'files': len(rows), 'bytes': sum(r['bytes'] for r in rows)},
            'files': rows}
