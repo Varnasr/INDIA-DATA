@@ -292,8 +292,22 @@ def _open_window():
     ssr = [t for t in P['timeline'] if t.get('ssr')]
     assert ssr, 'no timeline entry carries the summary revision\'s dates'
     names = {s['state'] for s in P['schedules']} | {'Assam'}
-    for t in ssr:
+    dated = set()
+    for t in sorted(ssr, key=lambda t: t['date']):
         q, text = t['ssr'], t['text']
+        # a postponement carries no dates, and the pages say only that it was
+        # postponed: each state it names is named in the entry's first
+        # sentence, had a schedule before it, and the text says "postpone"
+        if q.get('postponed'):
+            assert not set(q) - {'states', 'postponed', 'by'}, '%s: a postponed summary revision carries dates (%s), which nothing reads' % (t['date'], ', '.join(sorted(set(q) - {'states', 'postponed', 'by'})))
+            assert q['postponed'] is True and q['states'], '%s: postponed must be true and name its states' % t['date']
+            assert 'postpone' in text, '%s: the entry for a postponed summary revision does not say it was postponed' % t['date']
+            first = text.split('. ', 1)[0]
+            for s in q['states']:
+                assert s in first, '%s: %s, whose summary revision was postponed, is not named in the entry\'s first sentence' % (t['date'], s)
+                assert s in dated, '%s: %s had no summary revision with dates before it was postponed' % (t['date'], s)
+            continue
+        dated.update(q['states'])
         for k in ('qualifying', 'draft', 'claims_end', 'decided', 'final'):
             assert long(q[k]) in text, '%s: the summary revision\'s %s (%s) is not in the entry\'s text' % (t['date'], k, q[k])
         # a later entry that moves one state's dates names that state in its
@@ -419,7 +433,8 @@ def _ssr_drafts():
         st = x['state']
         assert (st, x['order_date']) not in seen, 'ssr_draft.csv: %s is there twice for the order of %s' % (st, x['order_date'])
         seen.add((st, x['order_date']))
-        orders = {t['date'] for t in json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))['timeline'] if t.get('ssr') and st in t['ssr']['states']}
+        # a postponement is not an order a draft can belong to
+        orders = {t['date'] for t in json.load(open(os.path.join(ROOT, 'data', 'india', 'process.json'), encoding='utf-8'))['timeline'] if t.get('ssr') and not t['ssr'].get('postponed') and st in t['ssr']['states']}
         assert x['order_date'] in orders, 'ssr_draft.csv: %s has no summary revision ordered on %s in process.json' % (st, x['order_date'])
         assert x['figures'] in add_draft.FIGS, 'ssr_draft.csv: %s has figures %r' % (st, x['figures'])
         assert x['figures'] == 'exact' or x['note'], 'ssr_draft.csv: %s needs a note, since its figures are %s' % (st, x['figures'])

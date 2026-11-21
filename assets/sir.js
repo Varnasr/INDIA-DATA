@@ -1143,7 +1143,7 @@
     return m ? (m[2] ? m[1] + ' in ' + m[2] : m[1]) : null;
   };
   // a state's "What to do now" page works the stage out the same way
-  SIR.owin = { stage: stage, html: html, today: today, draft: draft };
+  SIR.owin = { stage: stage, html: html, today: today, draft: draft, postponed: postponed };
   if (!boxes.length && !all) return;
 
   // the stage of one state's revision on day T
@@ -1152,8 +1152,13 @@
     if (!sc) return null;
     var s = S[name] || {}, r = { state: name, T: T, src: [] };
     var use = function (st) { if (st && r.src.indexOf(st) < 0) r.src.push(st); };
-    // the order is the first entry naming the state; a later one only moved its dates
+    // the order is the first entry naming the state; a later one only moved its dates.
+    // A postponement (an ssr block marked postponed, with no dates) that is the
+    // latest entry is kept as r.post, and r.ssr stays the last entry with dates;
+    // a later entry with dates replaces it
     var ssrs = P.timeline.filter(function (t) { return t.ssr && t.ssr.states.indexOf(name) >= 0; });
+    if (ssrs.length && ssrs[ssrs.length - 1].ssr.postponed) r.post = ssrs[ssrs.length - 1];
+    ssrs = ssrs.filter(function (t) { return !t.ssr.postponed; });
     if (ssrs.length) { r.ssr = ssrs[ssrs.length - 1]; r.ssrOrder = ssrs[0]; }
     if (s.electors_final != null) {
       r.k = 'final'; r.pub = s.final_date || null; r.pubSrc = s.final_source || null;
@@ -1194,6 +1199,8 @@
   function draft(g, T) {
     if (!g) return null;
     var x = g.draft;
+    // a postponed revision has no draft due
+    if (!x && g.postponed) return null;
     if (!x) return g.due < T ? { p: L('The draft roll of the special summary revision was due on {d}. No published count of it has been found.', { d: D(g.due) }), src: '' } : null;
     var v = { d: D(x.date), n: SIR.n(x.electors), c: x.change == null ? '' : SIR.n(Math.abs(x.change)), b: D(x.base_date), o: E(x.site) };
     var p = x.change == null ? L('The draft roll of the special summary revision, published on {d}, has {n} electors.', v)
@@ -1201,6 +1208,14 @@
       : L('The draft roll of the special summary revision, published on {d}, has {n} electors, {c} fewer than the final roll of the intensive revision of {b}.', v);
     if (x.press) p += ' ' + L('These figures are as {o} reported them.', v);
     return { p: p, src: '<a href="' + E(x.url) + '" rel="noopener">' + (x.press ? L('The draft roll, as {o} reported it', v) : L('The draft roll, as published')) + '</a>' };
+  }
+
+  // the sentence that stands in place of a postponed summary revision's
+  // dates: who postponed it, on what day, and that no new dates were given
+  function postponed(r) {
+    var v = { s: E(r.state), d: D(r.post.date) };
+    return r.post.who === 'eci' ? L('The Commission postponed the special summary revision in {s} on {d} and gave no new dates.', v)
+      : L('The Chief Electoral Officer of {s} postponed the special summary revision on {d} and gave no new dates.', v);
   }
 
   function anyTime() {
@@ -1237,12 +1252,17 @@
     if (NOW[r.state]) links.unshift('<a href="' + root + E(NOW[r.state]) + '">' + L('What to do now in {s}', { s: E(r.state) }) + '</a>');
     if (r.ssr && (r.k === 'final' || r.k === 'due')) {
       var q = r.ssr.ssr, qv = { l: D(r.ssr.date), o: D(r.ssrOrder.date), p: E(q.by || ''), s: E(r.state), q: D(q.qualifying), d: D(q.draft), c: D(q.claims_end), x: D(q.decided), f: D(q.final) };
-      p.push(r.ssr === r.ssrOrder
+      // postponed: the order, then the postponement in place of the dates
+      if (r.post) {
+        p.push(L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', { l: qv.o, s: qv.s, q: qv.q }));
+        if (r.ssrOrder.ssr.by) p.push(L('These dates are as reported by {o}.', { o: E(r.ssrOrder.ssr.by) }));
+        p.push(postponed(r));
+      } else p.push(r.ssr === r.ssrOrder
         ? L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. It set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}.', qv)
         : q.undated ? L('The Commission\'s letter of {o} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. The Commission later revised the dates, as {p} reported on {l}, and set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}.', qv)
         : L('The Commission\'s letter of {o} ordered a special summary revision of the roll in {s}, with {q} as the qualifying date. A later letter, dated {l}, set the draft roll for {d}, claims and objections until {c}, decisions on them by {x}, and the final roll for {f}, as {p} reported it.', qv));
       // an order known only from the press says whose dates these are
-      if (r.ssr === r.ssrOrder && q.by) p.push(L('These dates are as reported by {o}.', { o: qv.p }));
+      if (!r.post && r.ssr === r.ssrOrder && q.by) p.push(L('These dates are as reported by {o}.', { o: qv.p }));
       var dr = draft(G && G[r.state], T);
       if (dr) {
         p.push(dr.p);
@@ -1259,7 +1279,7 @@
     if (press.length) p.push(L('These dates are as reported by {o}.', { o: E(press.join(' and ')) }));
     if (r.rep) src.push('<a href="' + E(r.rep.url) + '" rel="noopener" lang="en">' + E(r.rep.outlet) + ', ' + D(r.rep.date) + '</a>');
     if (r.k === 'final' && r.pubSrc && r.pubSrc.url) src.push('<a href="' + E(r.pubSrc.url) + '" rel="noopener">' + (r.pubSrc.source === 'press' ? L('The final roll, as the press reported it') : L('The final roll, as published')) + '</a>');
-    if (r.ssr && (r.k === 'final' || r.k === 'due')) src = src.concat(r.ssr.src.map(function (s) { return '<a href="' + E(s.url) + '" rel="noopener" lang="en">' + E(s.name) + '</a>'; }));
+    if (r.ssr && (r.k === 'final' || r.k === 'due')) src = src.concat((r.post || r.ssr).src.map(function (s) { return '<a href="' + E(s.url) + '" rel="noopener" lang="en">' + E(s.name) + '</a>'; }));
     if (dr && dr.src) src.push(dr.src);
     return '<p class="owin-t">' + L('Where the revision in {s} stands on {t}', { s: E(r.state), t: D(T) }) + '</p>' +
       p.map(function (x) { return '<p>' + x + '</p>'; }).join('') +

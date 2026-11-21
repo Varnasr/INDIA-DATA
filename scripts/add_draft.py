@@ -9,7 +9,10 @@ keep it in data/india/raw/ssr_draft.csv.
 The summary revisions are the ones data/india/process.json carries in a
 timeline step's "ssr" block (the 17 states of 15 October 2026, West Bengal's
 later dates of 28 October, the six of 4 November). A later block naming a
-state replaces an earlier one, so West Bengal's draft is due on 23 November.
+state replaces an earlier one, so Gujarat's draft is due on 27 November. A
+block marked "postponed", with no dates, stops the state's schedule until a
+later block gives new dates: West Bengal's Chief Electoral Officer postponed
+its revision on 20 November, and a draft for it is refused until then.
 
 The input, as JSON (any key may also be given on the command line, with
 dashes for underscores, and the command line wins):
@@ -65,7 +68,12 @@ WARN_SHARE = 0.03
 
 def schedules(process=None):
     """State -> the summary-revision schedule that governs it: the ssr block
-    of the latest timeline step naming it, with the step's date as the order."""
+    of the latest timeline step naming it, with the step's date as the order.
+
+    A block marked "postponed" (West Bengal's Chief Electoral Officer, 20
+    November 2026) carries no dates. It keeps the dates and the order of the
+    block before it, so a draft already recorded still matches, and adds
+    postponed=<the step's date>. The next block with dates replaces it."""
     D = process or json.load(open(PROCESS, encoding='utf-8'))
     out = {}
     for t in sorted(D['timeline'], key=lambda t: t['date']):
@@ -73,7 +81,12 @@ def schedules(process=None):
         if not s:
             continue
         for st in s['states']:
-            out[st] = dict(s, order_date=t['date'], title=t['title'])
+            if s.get('postponed'):
+                if st not in out:
+                    raise SystemExit('%s: a postponed summary revision in %s with no schedule before it' % (t['date'], st))
+                out[st] = dict(out[st], postponed=t['date'], postponed_title=t['title'])
+            else:
+                out[st] = dict(s, order_date=t['date'], title=t['title'])
     return out
 
 
@@ -127,6 +140,9 @@ def validate(x, replace):
     if st not in S:
         return ['%s is in no summary revision that data/india/process.json records. Add the Commission\'s order as a timeline step with an ssr block first' % st], warn
     s = S[st]
+    if s.get('postponed'):
+        return ['%s\'s summary revision was postponed on %s (%s) and no new dates are recorded. Add the new schedule to data/india/process.json as a timeline step with an ssr block first'
+                % (st, s['postponed'], s['postponed_title'])], warn
     x['_order'], x['_qualifying'], x['_due'] = s['order_date'], s['qualifying'], s['draft']
     for k in INT_KEYS:
         if x.get(k) is not None and x[k] < 0:
@@ -221,8 +237,9 @@ def due():
     out = []
     for st, s in schedules().items():
         got = (st, s['order_date']) in have
-        what = 'recorded' if got else 'OVERDUE' if s['draft'] < t else 'due today' if s['draft'] == t else 'due'
-        out.append((s['draft'], what, st))
+        what = 'recorded' if got else 'postponed' if s.get('postponed') else 'OVERDUE' if s['draft'] < t else 'due today' if s['draft'] == t else 'due'
+        # a postponed revision has no draft date, so it is listed by the day it was postponed
+        out.append((s['postponed'] if what == 'postponed' else s['draft'], what, st))
     for d, what, st in sorted(out):
         print('%-12s %-10s %s' % (d, what, st))
 

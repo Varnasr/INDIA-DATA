@@ -19,7 +19,12 @@ stations to take claims, come from data/india/raw/ssr_campaign.json, two
 readings each. The Commission left them to each Chief Electoral Officer, so a
 state has them only where a source gives them, and a source that speaks for
 one district is kept to that district. The build stops on a day outside the
-state's claims window or a state no summary revision covers.
+state's claims window, a state no summary revision covers, or a state whose
+revision is postponed.
+
+A state whose revision was postponed with no new dates (an "ssr" block marked
+"postponed") carries "postponed", the date of the step, beside the dates that
+were put off.
 """
 import csv
 import json
@@ -46,6 +51,8 @@ def campaign(sched):
         if st in out:
             raise SystemExit('FAIL - ssr_campaign.json: %s is there twice' % st)
         s = sched[st]
+        if s.get('postponed'):
+            raise SystemExit('FAIL - ssr_campaign.json: the summary revision in %s was postponed on %s, so its campaign days no longer stand' % (st, s['postponed']))
         days = sorted(c['days'])
         if not days or days != sorted(set(days)):
             raise SystemExit('FAIL - ssr_campaign.json: %s has no days, or a day twice' % st)
@@ -79,6 +86,10 @@ def build():
     for st in sorted(sched):
         s = sched[st]
         e = {'state': st, 'order_date': s['order_date'], 'due': s['draft'], 'claims_end': s['claims_end'], 'final_due': s['final']}
+        # postponed with no new dates: the dates above are the ones put off,
+        # and the pages show the postponement in their place
+        if s.get('postponed'):
+            e['postponed'] = s['postponed']
         r = rec.get(st)
         if r:
             n, base = int(r['electors']), num(r['base'])
