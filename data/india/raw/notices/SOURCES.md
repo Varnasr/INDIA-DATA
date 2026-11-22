@@ -395,3 +395,29 @@ independently the same day. The figures are aggregates.
   and 76,676 pending, is not a row, because neither paper says what it holds.
   Amar Ujala's headline gives 41 lakh disposed and 8 lakh pending, and the
   41 lakh is the discrepancy category alone.
+
+## Update of 2026-11-22
+
+One row was added, read in full with curl on 2026-11-22 and read again
+independently the same day. The figure is an aggregate.
+
+- **Jharkhand**: 16,919 cases marked ineligible for inclusion in the final
+  roll in the two notice categories, 9,153 logical discrepancy and 7,766 no
+  mapping, from the latest data of the office of the Chief Electoral Officer
+  (The Times of India, Saptarshi Banerjee, 21 November 2026, 21:59 IST), with
+  disposal figures as of 21 November. It is the first count of electors found
+  ineligible after notice for Jharkhand, and an interim one. The paper's total
+  is 18,425, and it also holds 1,506 cases in a category called other. Those
+  are left out of the row, because `deleted_after_notice` counts electors found
+  ineligible after the notice process, and the other category, with
+  1,61,65,853 cases on 19 November, is far larger than the 63,24,116 notices of
+  August. The paper says the two notice categories make up nearly 92 per cent
+  of the cases marked ineligible, and 16,919 is 91.83 per cent of 18,425. The
+  first reading carried the 18,425, and the second reading changed the row to
+  the two notice categories. The same data give 2,13,65,467 of 2,21,19,847
+  cases disposed of and 7,54,380 pending (3,71,970 logical discrepancy,
+  3,11,757 no mapping and 70,653 other). No hearings row was added, because
+  the disposed count includes the other category and the report gives no total
+  for each category. The category totals of 19 November add to 2,21,19,795, 52
+  fewer than this report's total, and with the no-mapping count of 4 November
+  (14,04,033) they add to it exactly.

@@ -117,6 +117,14 @@
   "rti-20": {
    "status": "corrected",
    "note": "Second reading, 29 October 2026: The Times of India (Ambika Pandit, datePublished 2026-10-28T02:22:00+05:30) read in full from the JSON-LD articleBody with curl, and The Wire from its content API (The Wire Staff, posted 28 October 2026, 15:59 IST), with both of its images viewed. The filing date of 25 September, the status page's '32 day' and 'in-progress', the records asked for, the letter of 26 October and the quote (verbatim) all match. The applicant is given by role and no private person is named. Corrected: the letter of 26 October is now attributed to The Wire in the answer, since The Times of India does not report it, the note now says the rti-18 documents were received on 22 October, as The Times of India puts it, that only The Wire links the objections to The Indian Express report, and that The Wire's two images are a photograph of security personnel and an illustration. 'No reply in time' fits. The Times of India also dates the rti-18 application to 24 September and its reply to 19 October, which rti-18 still gives as not reported."
+  },
+  "rti-21": {
+   "status": "corrected",
+   "fix": {
+    "authority": "CEO Telangana",
+    "note": "By Swathi Vadlamudi in The Hindu, Hyderabad, published 21 November 2026 at 8:23 pm IST (datePublished 2026-11-21T20:23:52+05:30, modified 8:28 pm), read with curl on 22 November 2026. Subscription. The JSON-LD marks the report isAccessibleForFree false, and its description repeats the headline, so only the headline, the dateline and the opening paragraph are used. The quote is that paragraph. The rest of the report is for subscribers and was not used, so the filing and reply dates and the section of the Act are left blank. The state is Telangana by the dateline and the section of the paper the report sits in. The authority is the Chief Electoral Officer's office, as the headline names it. The outcome is 'refused' because the report says the application was rejected. The applicant is given by role."
+   },
+   "note": "Second reading, 22 November 2026 (second reader): The Hindu (Swathi Vadlamudi, datePublished 2026-11-21T20:23:52+05:30, isAccessibleForFree false) fetched again with curl. Only the headline, the description, the dateline and the opening paragraph were read. The quote matches the opening paragraph character for character, and the outcome 'refused' follows its word 'rejected'. Corrected: the authority said the Public Information Officer, and the free opening says only 'the authorities' and the headline 'CEO office', so the authority is now CEO Telangana. The note described what the paragraphs behind the paywall contain, and it now says only that the rest of the report is for subscribers and was not used. The applicant is given by role and no private person is named."
   }
  },
  "leads": [
