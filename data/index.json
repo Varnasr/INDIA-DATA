@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 466,
-  "bytes": 15012116
+  "bytes": 15064993
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 768173,
+   "bytes": 781552,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 121339,
+   "bytes": 123122,
    "keys": [
     "note",
     "entries"
@@ -4265,7 +4265,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 520197,
+   "bytes": 530176,
    "columns": [
     "section",
     "date",
@@ -4286,7 +4286,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 812608,
+   "bytes": 824725,
    "keys": [
     "listings",
     "sections",
@@ -4301,7 +4301,7 @@
    "path": "data/india/disputes_counts.json",
    "description": "Counts of the protests and disputes by state and month",
    "format": "JSON",
-   "bytes": 540,
+   "bytes": 541,
    "keys": [
     "counts",
     "by_state"
@@ -4326,7 +4326,7 @@
    "path": "data/india/events.json",
    "description": "Jan Sunwais, marches, protests and press conferences about the revision, with dates and sources",
    "format": "JSON",
-   "bytes": 93441,
+   "bytes": 97431,
    "keys": [
     "checked",
     "scope",
@@ -4650,7 +4650,7 @@
    "path": "data/india/reads.json",
    "description": "Further reading and viewing on the revision, with outlets, dates and summaries",
    "format": "JSON",
-   "bytes": 175888,
+   "bytes": 181235,
    "keys": [
     "groups",
     "items",
@@ -7148,7 +7148,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 751865,
+   "bytes": 754833,
    "licence": "CC BY 4.0"
   },
   {
@@ -7183,7 +7183,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 395069,
+   "bytes": 398382,
    "licence": "CC BY 4.0"
   },
   {
