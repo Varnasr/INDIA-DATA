@@ -1306,6 +1306,18 @@
    "shows": "Joseph C. Mathew, a former IT adviser to the Government of Keralam, argues that the Commission's use of software needs to be reconsidered. He writes that under section 13B of the Representation of the People Act the sole authority for editing the voters' list is entrusted to local Electoral Registration Officers and Booth Level Officers, and that the Commission's centralised ECINet and ERONet software has effectively stripped them of their legally mandated powers. In his view the Commission appears in the process to have created its own Act and Rules. He recalls that in 2015 the Commission linked voter IDs with Aadhaar data under the National Electoral Roll Purification and Authentication Programme, which he describes as a mass elimination of voters using centralised software, until the Supreme Court put an end to it. Most of the piece concerns electronic voting machines, where he argues from two Supreme Court judgments that the safeguards the Commission has presented do not make the system foolproof. He closes by saying that a reconsideration is necessary at a time when the Commission is using software “to dictate addition in the electoral list itself”."
   },
   {
+   "group": "Data and analysis",
+   "title": "Uttar Pradesh voter rolls, 2024 to 2027",
+   "outlet": "s1d labs",
+   "authors": "s1d labs",
+   "date": "2026-11-24",
+   "url": "https://labs.s1d.me/up-eci",
+   "video": false,
+   "duration": "",
+   "subscription": false,
+   "shows": "s1d labs has read four of Uttar Pradesh's electoral rolls from the Election Commission's PDFs into tables, one file for each of the 403 assembly constituencies: the roll of the 2024 Lok Sabha election, the draft and final rolls of the Special Intensive Revision and the draft roll of the 2027 summary revision. It says it read about 6.8 lakh PDFs, most of them scanned images, with five optical character readers and no language model, and that the 2027 roll, the only one of the four with a text layer, was read directly. By its own count, leaving out entries with a deleted mark, the 2024 roll holds 15,36,26,796 entries, the SIR draft 12,28,31,737, the SIR final 13,11,70,043 and the 2027 draft 13,58,67,928. Its README says that about 4,015 newer parts of the two SIR rolls are missing from its files, which it estimates at about 2.5 million voters in each roll, and it asks readers not to compare its SIR totals with the Commission's state totals until that gap is closed. It reports that a hand check of 402 boxes found every field right in 96.77 per cent of SIR records. In the files it publishes, names, relatives' names, EPIC numbers and house numbers are replaced by keyed-hash tokens, so that one elector can be followed from roll to roll and counted by age and gender, and it says the tokens do not make a record anonymous. It sends the full text to journalists and researchers who apply. It says the Commission's PDFs remain the authority and its counts are not official figures."
+  },
+  {
    "group": "Research",
    "title": "SIR and the BJP's Bengal Majority",
    "outlet": "Debraj Ray, research note",
@@ -1902,8 +1914,8 @@
   }
  ],
  "counts": {
-  "items": 157,
-  "outlets": 41,
+  "items": 158,
+  "outlets": 42,
   "videos": 14
  }
 }
