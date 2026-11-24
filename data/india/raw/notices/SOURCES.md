@@ -421,3 +421,23 @@ independently the same day. The figure is an aggregate.
   for each category. The category totals of 19 November add to 2,21,19,795, 52
   fewer than this report's total, and with the no-mapping count of 4 November
   (14,04,033) they add to it exactly.
+
+## Update of 2026-11-24
+
+Two rows were added from one primary source, read on 2026-11-24 from the
+images posted with it. The figures are aggregates.
+
+- **Delhi**: 32,95,950 of 33,14,032 electors issued notices for no mapping or
+  logical discrepancies parked for inclusion in the final roll as on 23
+  November, from the press note of the office of the Delhi Chief Electoral
+  Officer dated 23 November 2026, posted on the office's account on X. It is
+  the first primary count of notices decided for Delhi in this file, and
+  exact. The same caveat as the earlier Delhi counts applies, and the note
+  gives no count of notices decided against electors. It supersedes the more
+  than 32.8 lakh of 18 November. The 33,14,032 is a second row, as a primary
+  total of notices issued. It is 1,113 more than the 33,12,919 that Hindustan
+  Times reported on 21 September with the two lists, and the build keeps that
+  total for Delhi, because its two lists add to it. Hindustan Times gave the
+  same exact counts on 24 November, PTI in the Deccan Chronicle gave them in
+  lakh on 23 November, and The Times of India gave them rounded on 24
+  November.
