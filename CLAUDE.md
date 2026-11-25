@@ -154,22 +154,22 @@ themselves. It leaves to a person, and prints with drafts: the What's New line
 changed, the front-page card, process.json's prose and the claims dates of
 the new schedule step, and the reading-page panel sentences.
 
-The panels are the step that breaks. `data/india/raw/panels_research/plain.json`
-quotes, in its own sentences, national figures from `data/india/states.json`
-that every final roll moves: the number of states with a final roll (24 on
-30 October), the states with a draft and none ("Seven states", "Eight states"
-in words), `final.removed` and `final.per_100` (8,87,25,044 and 12.42),
-`final.net_after_draft` (1,22,10,672), `final.made_up_pct` (13.8), and
-`after_draft.removed` and `after_draft.states` (35,62,366 in 22 states). They
-sit in s-y-quraishi claims 3 and 7, p-chidambaram claims 4 and 5,
-jean-dreze-yogendra-yadav claim 3, jean-dreze claim 0 and abhijeet-dipke
-claim 0. `check_data.py` fails on only some of them, through each claim's
-`uses` list. 13.8 still matches another figure in states.json after it has
-moved, and the counts of states and abhijeet-dipke's figures are in no `uses`
-list at all, so a green run does not mean they are current. `add_final.py`
-prints every such sentence with the figures before and after the run. Rewrite
-each sentence, change its `uses` value (raw digits, as in states.json) and run
-`python3 scripts/build_panels.py`.
+The reading-page panels take their national figures from
+`data/india/states.json` when `scripts/build_panels.py` runs, which
+`add_final.py` does. `data/india/raw/panels_research/plain.json` never writes
+one out. It names each in braces, such as `{final.removed}`,
+`{final.made_up_pct:1}`, `{n.no_final:Word}` or
+`{states.West Bengal.withheld}`, and the top of `build_panels.py` lists the
+forms. The build fails on a key states.json does not carry, on a count of a
+thousand or more that equals a national one, and on any count of states, rate
+or share written in the words that name a national set ("24 states with a
+final roll", "13.8 per cent of the names left off"), whatever its value. A
+figure that only looks national, such as a person's own set of states, goes
+in that person's `literal` list with the phrase and the reason. A count of
+states in words fails once it falls below two, because its sentence then
+needs rewriting. `add_final.py` prints each sentence whose figure moved, as it
+now reads, and the `literal` phrases. Read them once for sense. The figures
+need no editing.
 
 Commit the sources only, open the pull request and merge once for the day's
 states. Nothing goes live until the 20:00 IST publish. When the owner says

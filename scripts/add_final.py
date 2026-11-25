@@ -415,7 +415,7 @@ def pipeline(x, kind, folder, no_site):
     data = [S('build_india.py')]
     data.append(S(OWN[x['state']][1]) if kind == 'own' else S('build_states.py', folder) if kind == 'shared' else None)
     data += [S('build_women.py'), S('build_margins.py'), S('build_notices.py'), S('build_downloads.py'),
-             S('make_seat_pages.py'), S('make_district_pages.py'), S('make_embed_pages.py'), S('build_repository.py')]
+             S('make_seat_pages.py'), S('make_district_pages.py'), S('make_embed_pages.py'), S('build_repository.py'), S('build_panels.py')]
     for c in [c for c in data if c]:
         if not run(c):
             print('\nSTOPPED: %s failed. Fix the input or the builder, then run this again with --replace.' % c[1])
@@ -440,41 +440,47 @@ def pipeline(x, kind, folder, no_site):
     return not bad
 
 
-PANEL_MOVES = re.compile(r'with a final roll|final rolls? (is|are) out|no final roll yet|\d+ states that (report|published)')
-
-
 def national():
-    """The national figures in data/india/states.json that move with every final roll."""
-    S = json.load(open(P('data', 'india', 'states.json'), encoding='utf-8'))
-    F, A = S['final'], S['after_draft']
-    return {'states': F['states'], 'no_final': sum(1 for r in S['states'] if r.get('removed') is not None) - F['states'],
-            'left_off': F['removed'], 'per_100': round(F['per_100'], 2),
-            'net': F['net_after_draft'], 'pct': F['made_up_pct'], 'deleted': A['removed'], 'deleted_states': A['states']}
+    """The national figures in data/india/states.json that the reading page
+    panels may name, by key, as scripts/build_panels.py reads them."""
+    import build_panels
+    return build_panels.figures(json.load(open(P('data', 'india', 'states.json'), encoding='utf-8')))
 
 
 def panels(old):
-    """The reading page panels' sentences that quote the national figures a
-    final roll moves, and those figures before this run and now. check_data.py
-    (build_panels.py --check) catches only some of these: a figure such as 13.8
-    can still be found elsewhere in states.json after it has moved, and the
-    counts of states written as words are not checked at all."""
-    new = national()
-    print('7. The reading page panels (data/india/raw/panels_research/plain.json) quote national figures that move with every final roll.')
-    for k, label in (('states', 'states with a final roll (final.states)'), ('no_final', 'states with a draft and no final roll'),
-                     ('left_off', 'names left off in those states (final.removed)'), ('per_100', 'per 100 on their rolls before (final.per_100)'),
-                     ('net', 'net rise from draft to final (final.net_after_draft)'), ('pct', 'that rise per 100 names left off (final.made_up_pct)'),
-                     ('deleted', 'names deleted after the draft (after_draft.removed)'), ('deleted_states', 'states reporting them (after_draft.states)')):
-        f = (lambda v: ind(v)) if k in ('net', 'deleted', 'left_off') else str
-        print('   %s: %s before this run, %s now' % (label, f(old[k]), f(new[k])))
-    print('   Rewrite each of these sentences, change the matching value in its "uses" list (raw digits, as in states.json), then run python3 scripts/build_panels.py:')
-    figs = {ind(old['net']), str(old['pct']), ind(old['deleted']), ind(old['left_off']), str(old['per_100'])}
+    """The reading page panels name the national figures in braces in
+    plain.json, and build_panels.py fills them from states.json, so a final
+    roll moves them by itself. What it cannot move is the sentence around a
+    figure, so print each sentence whose figures changed in this run, as it
+    now reads, for a person to read once."""
+    import build_panels
+    S = json.load(open(P('data', 'india', 'states.json'), encoding='utf-8'))
+    new = build_panels.figures(S)
+    moved = sorted(k for k in new if old.get(k) != new[k])
+    print('7. The reading page panels fill their national figures from states.json when build_panels.py runs.')
     pl = json.load(open(P('data', 'india', 'raw', 'panels_research', 'plain.json'), encoding='utf-8'))
+    keep = [(pid, p, why) for pid, w in pl['people'].items() for p, why in w.get('literal', [])]
+    if keep:
+        print('   These phrases are kept as written on purpose. Check each reason still holds:')
+        for pid, p, why in keep:
+            print('   - %s, "%s": %s' % (pid, p, why))
+    if not moved:
+        print('   No national figure moved in this run, or this was a dry run, which rebuilds nothing.')
+        return
+    for k in moved:
+        print('   {%s}: %s before this run, %s now' % (k, old.get(k), new[k]))
+    print('   These sentences name a figure that moved. Read each as it now stands, and rewrite it in')
+    print('   data/india/raw/panels_research/plain.json if the words around the figure no longer fit:')
     for pid, w in pl['people'].items():
-        for i, c in w['claims'].items():
-            for f in ('rests', 'site', 'stops'):
-                for s in re.split(r'(?<=\.) ', c.get(f) or ''):
-                    if PANEL_MOVES.search(s) or any(re.search(r'(?<![0-9.,])' + re.escape(v) + r'(?![0-9])', s) for v in figs):
-                        print('   - %s, claim %s, %s: %s' % (pid, i, f, s))
+        texts = [('strongest', t) for t in w['strongest']] + [('further', t) for t in w['further']]
+        texts += [('claim %s %s' % (i, f), c[f]) for i, c in w['claims'].items() for f in ('rests', 'site', 'stops') if c.get(f)]
+        for where, t in texts:
+            for sen in re.split(r'(?<=\.) ', t):
+                if any(m.group(1) in moved for m in build_panels.KEY.finditer(sen)):
+                    try:
+                        print('   - %s, %s: %s' % (pid, where, build_panels.fill(sen, S, new, pid)))
+                    except SystemExit as e:
+                        print('   - %s, %s: REWRITE, %s' % (pid, where, e))
 
 
 def todo(x, kind, folder, page, note, step, old):
