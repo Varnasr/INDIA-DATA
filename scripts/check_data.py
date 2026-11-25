@@ -830,7 +830,7 @@ for name, fn in [
     ('the case studies carry only checked items and are current', _cases),
     ('the site\'s own words keep the writing rules', _writing),
     ('the reading page carries only items read twice and is current', _reads),
-    ('the reading page panels quote only what was read twice, and their figures are current', _panels),
+    ('the reading page panels quote only what was read twice, take their national figures from states.json, and their figures are current', _panels),
     ('the brief page carries only rights read twice and says it is not legal advice', _brief),
     ('migration shares equal Census D-01 over each state\'s population', _migration),
     ('the Assam figures add up and are current', _assam),
