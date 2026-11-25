@@ -132,6 +132,38 @@ if summ is not None:
           f"after draft {val['removed_after_draft']:,}, of which itemised exactly {after:,} "
           f"(remainder {val['removed_after_draft'] - after:,} reported as 3.28 lakh shifted)")
 
+# s1d_ac.csv and s1d_age_sex.csv ------------------------------------------------
+# Counts from s1d labs' digitised rolls (scripts/count_s1d_up.py). Counts only:
+# no column may name a token, a part, a serial number or a page.
+S1D_AC = ["ac", "ge2024_entries", "ge2024_stamped_deleted", "draft_entries", "draft_entries_in_added_parts",
+          "final_entries", "final_stamped_deleted", "ge2024_not_on_draft", "ge2024_not_on_draft_invalid_epic"]
+S1D_ROWS = {"2024-ge-final": 156925128, "2026-sir-draft": 125556003, "2026-sir-final": 134800792}  # README, version 2
+BANDS = ["18 to 24", "25 to 29", "30 to 34", "35 to 44", "45 to 54", "55 to 64", "65 to 79", "80 and over", "not read"]
+sac = load("s1d_ac.csv")
+if sac is not None:
+    check(list(sac[0]) == S1D_AC, f"s1d_ac: columns {list(sac[0])}")
+    check([int(r["ac"]) for r in sac] == list(range(1, N_AC + 1)), "s1d_ac: ACs are not exactly 1..403")
+    T = {k: sum(int(r[k]) for r in sac) for k in S1D_AC[1:]}
+    check(T["ge2024_entries"] + T["ge2024_stamped_deleted"] == S1D_ROWS["2024-ge-final"], "s1d_ac: 2024 roll does not add to the README's rows")
+    check(T["draft_entries"] == S1D_ROWS["2026-sir-draft"], "s1d_ac: draft does not add to the README's rows")
+    check(T["final_entries"] + T["final_stamped_deleted"] == S1D_ROWS["2026-sir-final"], "s1d_ac: final roll does not add to the README's rows")
+    check(abs(T["draft_entries"] - STATE_ROW["draft"]) <= 100, "s1d_ac: draft more than 100 from the CEO's")
+    for r in sac:
+        v = {k: int(r[k]) for k in S1D_AC}
+        check(v["ge2024_not_on_draft_invalid_epic"] <= v["ge2024_not_on_draft"] <= v["ge2024_entries"], f"s1d_ac AC {v['ac']}: not-found counts out of order")
+        check(v["draft_entries_in_added_parts"] <= v["draft_entries"], f"s1d_ac AC {v['ac']}: added parts exceed the draft")
+    sas = load("s1d_age_sex.csv")
+    if sas is not None:
+        check(list(sas[0]) == ["sex", "age_band", "ge2024_entries", "ge2024_not_on_draft"], f"s1d_age_sex: columns {list(sas[0])}")
+        check(sum(int(r["ge2024_entries"]) for r in sas) == T["ge2024_entries"], "s1d_age_sex: entries do not add to s1d_ac")
+        check(sum(int(r["ge2024_not_on_draft"]) for r in sas) == T["ge2024_not_on_draft"], "s1d_age_sex: not found does not add to s1d_ac")
+        check(all(r["age_band"] in BANDS and r["sex"] in ("women", "men", "third gender", "not read") for r in sas), "s1d_age_sex: unknown band or sex")
+        check(len({(r["sex"], r["age_band"]) for r in sas}) == len(sas), "s1d_age_sex: a sex and band appear twice")
+        check(all(0 <= int(r["ge2024_not_on_draft"]) <= int(r["ge2024_entries"]) for r in sas), "s1d_age_sex: not found exceeds entries")
+        for sx in ("women", "men"):
+            check([r["age_band"] for r in sas if r["sex"] == sx and r["age_band"] != "not read"] == BANDS[:-1], f"s1d_age_sex: {sx} bands not contiguous")
+    print(f"s1d_ac: {len(sac)} rows; " + ", ".join(f"{k} {v:,}" for k, v in T.items()))
+
 if fails:
     print("\nFAILED:")
     for m in fails:

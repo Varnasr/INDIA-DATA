@@ -5,7 +5,7 @@
 
 <article class="state" lang="en" dir="ltr" data-no-i18n>
   <h2>Find a district</h2>
-  <p class="sub">Type a district's name and its figures appear below with a link you can send. The revision's figures were published by district only, so this page has no assembly constituencies to find.</p>
+  <p class="sub">Type a district's name and its figures appear below with a link you can send. The Chief Electoral Officer published the revision's figures by district. Counts for every assembly constituency from the digitised rolls are in the download at the foot of the page.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
@@ -51,17 +51,19 @@
   <p class="finding" id="fUrban"></p>
 
   <h2>Against the 2022 winning margins</h2>
-  <p class="sub">No figure by assembly constituency has been published. So each district's names left off are spread over its constituencies in proportion to their electors in the 2022 Assembly election, and set against each seat's 2022 winning margin. That shows how many seats the names left off were large enough to decide. It cannot show which seats, because the real count in a constituency can sit well above or below its district's rate, and it cannot show that any result would have changed. Each dot is one constituency. A dot above the line had more names left off on this spread than its winning margin.</p>
+  <p class="sub">The Chief Electoral Officer's count of names left off by assembly constituency could not be reached. s1d labs read the Commission's roll files for Uttar Pradesh into tables and counted every entry on the 2024 Lok Sabha roll, the draft and the final roll, constituency by constituency. Its draft adds up in every district to within a few names of the Chief Electoral Officer's table, so its count of the draft in each seat is used here as a measurement. Its release does not hold the roll of 27 October 2025 that the revision started from. Two measured counts therefore stand in for the names left off in each seat. One is the fall in the roll from the 2024 Lok Sabha roll to the draft. The other is the entries of the 2024 roll whose card number appears nowhere on the draft. Each is set against the seat's 2022 winning margin. Each dot is one constituency, and a dot above the line had more entries of the 2024 roll not found on the draft than its winning margin.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vMult"></div></div>
   </div>
   <p class="finding" id="fMargin"></p>
-  <p class="sub">The same seats one by one. Each dot is a constituency, placed by its 2022 margin and by the names left off on the spread.</p>
+  <p class="sub">The same seats one by one. Each dot is a constituency, placed by its 2022 margin and by the entries of its 2024 roll not found on the draft.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vMargin"></div></div>
   </div>
   <div class="twrap fit" tabindex="0" role="region" aria-label="By the alliance that won in 2022"><table id="tAll"></table></div>
-  <p class="note">The 2022 results are the Election Commission's statistical report. The NDA is the BJP, Apna Dal (Soneylal) and the NISHAD party, and the SP's alliance is the SP, the RLD and the SBSP, as they contested in 2022. Every constituency's spread figure is in the download at the foot of this page.</p>
+  <p class="finding" id="fShare"></p>
+  <p class="finding" id="fCheck"></p>
+  <p class="note">The digitised rolls are s1d labs' own reading of the Commission's files, version 2 of 25 November 2026, and are not an official count. In s1d labs' own check by hand, every field was right in 96.77% of the entries of the 2026 rolls and in 97.35% of those of the 2024 roll. The 2022 results are the Election Commission's statistical report. The NDA is the BJP, Apna Dal (Soneylal) and the NISHAD party, and the SP's alliance is the SP, the RLD and the SBSP, as they contested in 2022. Every constituency's counts are in the download at the foot of the page.</p>
 
   <h2>The reasons</h2>
   <p class="sub">Every name left off the draft has one of five reasons entered against it. The chart runs from the five reasons on the left to the districts on the right, with the five districts that left off the most names shown on their own and every other district together. A reason is what the officer wrote down, and nobody checked it.</p>
@@ -95,6 +97,14 @@
   <p class="finding" id="fWomen"></p>
   <p class="finding" id="fFather"></p>
   <p class="note" id="nWomen"></p>
+
+  <h2>Women and men by age</h2>
+  <p class="sub">s1d labs' tables give the sex and age printed against each entry of the 2024 Lok Sabha roll. For each age band, the chart gives how many of every 100 entries of women and of men had a card number found nowhere on the draft. Age is as printed on the 2024 roll, which counts it on 1 January 2024, so each person was about two years older when the revision began. People who joined the roll after the 2024 election are not in these counts.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vAge"></div></div>
+  </div>
+  <p class="finding" id="fAge"></p>
+  <p class="note" id="nAge"></p>
 
   <h2>After the draft</h2>
   <p class="sub">Electors kept on the draft roll were sent a notice when their form could not be linked to the roll of 2003 or when the Commission's software found a discrepancy in it, and were heard by an assistant registration officer. Names were then added on Form 6 claims and deleted on Form 7 objections and after the hearings. Every figure here is the Chief Electoral Officer's, as the press reported it.</p>
@@ -181,20 +191,22 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
       return { name: { rural: 'Rural districts', mixed: 'Mixed districts', urban: 'Urban districts' }[b.band] + ' (' + b.units + ')', v: b.per_100, text: d1(b.per_100), tok: b.band === 'urban' ? '--fill-red' : '--fill-grey' }; })) });
   document.getElementById('fUrban').innerHTML = '<b>Urban areas lost ' + d1(U.urban_per_100) + ' names for every 100 electors and rural areas ' + d1(U.rural_per_100) + '.</b> Urban areas held ' + SIR.pct(U.urban_share_roll) + ' of the roll and ' + SIR.pct(U.urban_share_left) + ' of the names left off, ' + cr(U.urban_left) + ' of them. The five districts where most people lived in towns in 2011 lost ' + d1(UB[2].per_100) + ' per 100 and the ' + UB[0].units + ' most rural ' + d1(UB[0].per_100) + '. The Hindustan Times printed the rural fall as 1.27 crore, but its own two rural rolls, and the 15.23% it gives, put it at ' + cr(U.rural_left) + ', which is the figure used here.';
 
-  // ---- against the 2022 margins
-  var M = A.margins;
+  // ---- against the 2022 margins, from s1d labs' counts of the digitised rolls
+  var M = A.margins, MM = M.measured, MA = MM.alliances;
   var BINS = [['Less than the margin', 0, 1], ['1 to 2 times the margin', 1, 2], ['2 to 5 times', 2, 5], ['5 to 10 times', 5, 10], ['10 times or more', 10, Infinity]];
-  VIZ.lollipop('vMult', { label: 'Constituencies by how many times their 2022 margin the names left off came to', axis: 'Constituencies',
-    rows: BINS.map(function (b, i) { var k = M.seats.filter(function (a) { var m = a.est / a.margin; return m >= b[1] && m < b[2]; }).length;
+  VIZ.lollipop('vMult', { label: 'Constituencies by how many times their 2022 margin the 2024 entries not found on the draft came to', axis: 'Constituencies',
+    rows: BINS.map(function (b, i) { var k = M.seats.filter(function (a) { var m = a.nf / a.margin; return m >= b[1] && m < b[2]; }).length;
       return { name: b[0], v: k, text: n(k), tok: i === 0 ? '--fill-grey' : '--fill-red', hi: i === 4 }; }) });
-  VIZ.scatter('vMargin', { label: 'Each constituency: its 2022 winning margin against the names left off, spread from its district', diag: true, xMin: 0, yMin: 0,
-    xAxis: '2022 winning margin, votes', yAxis: 'Names left off, district spread by electors', diagLabel: 'left off = margin',
+  VIZ.scatter('vMargin', { label: 'Each constituency: its 2022 winning margin against the entries of its 2024 roll not found on the draft', diag: true, xMin: 0, yMin: 0,
+    xAxis: '2022 winning margin, votes', yAxis: '2024 entries not found on the draft (s1d labs)', diagLabel: 'not found = margin',
     key: [['Won by the NDA', '--fill-amber'], ['Won by the SP alliance', '--fill-red'], ['Won by another party', '--fill-grey']],
-    points: M.seats.map(function (a) { return { x: a.margin, y: a.est, tok: a.alliance === 'NDA' ? '--fill-amber' : a.alliance === 'SP alliance' ? '--fill-red' : '--fill-grey',
-      label: a.name + ' (' + a.district + '): margin ' + n(a.margin) + ', about ' + n(a.est) + ' left off' }; }) });
-  document.getElementById('fMargin').innerHTML = '<b>On this spread, the names left off were larger than the 2022 winning margin in ' + M.over + ' of the ' + M.n + ' constituencies.</b> In the typical seat the margin was ' + n(M.median_margin) + ' votes and the spread puts ' + n(M.median_est) + ' names left off. All ' + M.under_5000 + ' seats won by fewer than 5,000 votes are among them. Larger than the margin means the names left off were large enough to decide the seat. It does not mean they did, since the people left off would not all have voted, nor all for one side. Spreading the state\'s total over the seats without the district split, as the All India margins page does, gives ' + M.state_even_over + '.';
-  SIR.table(document.getElementById('tAll'), [{ k: 'a', label: 'Won in 2022 by', left: true }, { k: 'seats', label: 'Seats', fmt: n }, { k: 'over', label: 'Left off above the margin', fmt: n }, { k: 'per_100', label: 'Their districts\' rate per 100', fmt: d1 }],
-    ['NDA', 'SP alliance', 'Other'].map(function (k) { return Object.assign({ a: k === 'Other' ? 'Another party' : k }, M.alliances[k]); }));
+    points: M.seats.map(function (a) { return { x: a.margin, y: a.nf, tok: a.alliance === 'NDA' ? '--fill-amber' : a.alliance === 'SP alliance' ? '--fill-red' : '--fill-grey',
+      label: a.name + ' (' + a.district + '): margin ' + n(a.margin) + ', ' + n(a.nf) + ' entries of the 2024 roll not found on the draft, a fall of ' + n(a.fall) + ' from the 2024 roll to the draft' }; }) });
+  document.getElementById('fMargin').innerHTML = '<b>By s1d labs\' counts, the fall in the roll from the 2024 Lok Sabha roll to the draft was larger than the 2022 winning margin in ' + MM.fall_over + ' of the ' + M.n + ' constituencies, and the entries of the 2024 roll not found on the draft were larger than the margin in ' + MM.nf_over + '.</b> In the typical seat the margin was ' + n(M.median_margin) + ' votes, the fall ' + n(MM.median_fall) + ' and the entries not found ' + n(MM.median_nf) + '. The entries not found were larger than the margin in ' + (MM.under_5000_nf_over === M.under_5000 ? 'all ' + M.under_5000 : MM.under_5000_nf_over + ' of the ' + M.under_5000) + ' seats won by fewer than 5,000 votes. Larger than the margin means the names were large enough to decide the seat. It does not mean they did, since the people concerned would not all have voted, nor all for one side.';
+  SIR.table(document.getElementById('tAll'), [{ k: 'a', label: 'Won in 2022 by', left: true }, { k: 'seats', label: 'Seats', fmt: n }, { k: 'fall_over', label: 'Fall above the margin', fmt: n }, { k: 'nf_over', label: 'Not found above the margin', fmt: n }, { k: 'shared_over', label: 'Left off above the margin, shared', fmt: n }],
+    ['NDA', 'SP alliance', 'Other'].map(function (k) { return Object.assign({ a: k === 'Other' ? 'Another party' : k }, MA[k]); }));
+  document.getElementById('fShare').innerHTML = '<b>Sharing each district\'s names left off, the Chief Electoral Officer\'s count, over its seats in proportion to their entries not found puts the names left off above the 2022 margin in ' + MM.shared_over + ' seats.</b> Sharing them by the seats\' 2022 electors gives ' + M.over + ', and spreading the state\'s total without the district split, as the All India margins page does, gives ' + M.state_even_over + '. All three are estimates. The last column of the table above gives the first of them by alliance.';
+  document.getElementById('fCheck').innerHTML = '<b>The entries not found are a different count from the names left off.</b> They start from the 2024 roll, so they take in names deleted before the revision began and miss people who joined the roll after the 2024 election. An elector who was given a new card number after 2024 counts as not found, and so does a card number misread on either roll, and ' + lk(MM.nf_invalid_epic) + ' of the entries not found carry a card number in no valid form. Across the state they come to ' + SIR.d(MM.ratio_state, 2) + ' for every name the Chief Electoral Officer counted left off, and to between ' + SIR.d(MM.ratio_min, 2) + ' and ' + SIR.d(MM.ratio_max, 2) + ' in each district. District by district their rate follows the Chief Electoral Officer\'s with a rank correlation of ' + SIR.d(MM.rho_district, 2) + '. The seats differ widely, from ' + d1(MM.nf_per_100_min) + ' entries not found for every 100 on the 2024 roll in one seat to ' + d1(MM.nf_per_100_max) + ' in another.';
 
   // ---- the reasons against the rate
   var RH = A.reason_rho;
@@ -218,6 +230,13 @@ Promise.all([SIR.json('data/uttarpradesh/summary.json'), SIR.json('data/uttarpra
   document.getElementById('nWomen').textContent = 'The split by sex and the figures on women registered at their father\'s address are the Chief Electoral Officer\'s, given to the Hindustan Times (18 January 2026) in lakh and crore. The two parts he gave of the 71.18 lakh women checked add to 71.55 lakh. The draft and final rolls by sex are the CEO\'s own exact figures.';
   VIZ.lollipop('vWomen', { label: 'Names left off per 100 on the roll before the revision, women and men', axis: 'Left off per 100 on the roll of 27 October 2025', ref: S.per_100, rows: [
     { name: 'Women', v: A.sex.women_per_100, text: d1(A.sex.women_per_100), tok: '--fill-red', hi: true }, { name: 'Men', v: A.sex.men_per_100, text: d1(A.sex.men_per_100), tok: '--fill-navy' }] });
+
+  // ---- women and men by age, from s1d labs' counts of the 2024 roll
+  var G = A.age_sex, GB = G.bands, o55 = GB.slice(5), gap55 = Math.max.apply(null, o55.map(function (b) { return Math.abs(b.women - b.men); }));
+  VIZ.dots('vAge', { label: 'Entries of the 2024 roll not found on the draft, for every 100 entries, women and men by age', axis: 'Not found on the draft, per 100 entries of the 2024 roll',
+    cats: GB.map(function (b) { return b.band; }), series: [{ name: 'Women', col: '--fill-red', vals: GB.map(function (b) { return b.women; }) }, { name: 'Men', col: '--fill-navy', vals: GB.map(function (b) { return b.men; }) }] });
+  document.getElementById('fAge').innerHTML = '<b>Under 35, ' + d1(G.u35_women) + ' of every 100 entries of women on the 2024 roll were not found on the draft, against ' + d1(G.u35_men) + ' of every 100 entries of men, ' + SIR.d(G.u35_ratio, 1) + ' times the rate.</b> At 25 to 29 the rate for women was ' + SIR.d(G.ratio_25_29, 1) + ' times the rate for men. From 55 onward the two rates are within ' + SIR.d(gap55, 1) + ' points of each other in every band. Of the ' + n(G.third_n) + ' entries of third gender electors, ' + d1(G.third) + ' of every 100 were not found.';
+  document.getElementById('nAge').innerHTML = (function (C) { return '<a href="' + C.url + '">Diagram Chasing</a> (Aman Bhargava, ' + SIR.date(C.date) + ') read the same digitised rolls with the Commission\'s lists of names left off, and found women under 35 left off at ' + (C.u35_ratio === 2 ? 'twice' : C.u35_ratio + ' times') + ' the rate of men, ' + SIR.d(C.ratio_25_29, 1) + ' times at 25 to 29, and the two rates matching from ' + C.match_from + ' onward. The counts here agree in direction and come close in size, ' + SIR.d(G.u35_ratio, 1) + ' and ' + SIR.d(G.ratio_25_29, 1) + ' times. The counts here start from the card numbers of the 2024 roll, and Diagram Chasing\'s from the lists of names left off, so the two are different counts. The lists give a reason for each name, and Diagram Chasing found ' + SIR.d(C.shifted_19_34_women, 1) + ' per cent of women and ' + SIR.d(C.shifted_19_34_men, 1) + ' per cent of men aged 19 to 34 marked shifted. s1d labs\' tables carry no reason, so that figure could not be checked here.'; })(G.dc);
 
   // ---- after the draft
   var N = A.notices, RA = N.removed_after;

@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 467,
-  "bytes": 15382446
+  "bytes": 15518736
  },
  "files": [
   {
@@ -31,7 +31,7 @@
    "path": "data/downloads.json",
    "description": "The downloads manifest: every workbook, sheet and column, with what each holds",
    "format": "JSON",
-   "bytes": 202385,
+   "bytes": 205673,
    "keys": [
     "workbooks",
     "zip",
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 840490,
+   "bytes": 840401,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 129992,
+   "bytes": 130257,
    "keys": [
     "note",
     "entries"
@@ -4667,7 +4667,7 @@
    "path": "data/india/reads.json",
    "description": "Further reading and viewing on the revision, with outlets, dates and summaries",
    "format": "JSON",
-   "bytes": 192753,
+   "bytes": 192664,
    "keys": [
     "groups",
     "items",
@@ -6902,9 +6902,10 @@
    "path": "data/uttarpradesh/analysis.json",
    "description": "Uttar Pradesh: the figures its analysis pages draw",
    "format": "JSON",
-   "bytes": 97213,
+   "bytes": 152682,
    "keys": [
     "margins",
+    "age_sex",
     "rolls",
     "factors",
     "reason_rho",
@@ -6966,9 +6967,9 @@
   },
   {
    "path": "data/uttarpradesh/seats.csv",
-   "description": "Every Uttar Pradesh constituency, with its district's names left off spread by 2022 electors against the 2022 margin",
+   "description": "Every Uttar Pradesh constituency, with counts from the digitised rolls and two estimates of the names left off, against the 2022 margin",
    "format": "CSV",
-   "bytes": 24765,
+   "bytes": 40420,
    "columns": [
     "ac",
     "ac_name",
@@ -6979,7 +6980,15 @@
     "margin_2022",
     "district_left_off_per_100",
     "left_off_spread_by_electors",
-    "spread_over_margin"
+    "spread_over_margin",
+    "s1d_ge2024_entries",
+    "s1d_draft_entries",
+    "s1d_fall_2024_to_draft",
+    "s1d_ge2024_not_on_draft",
+    "left_off_shared_by_not_on_draft",
+    "fall_over_margin",
+    "not_on_draft_over_margin",
+    "shared_over_margin"
    ],
    "licence": "CC BY 4.0"
   },
@@ -7165,7 +7174,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 771723,
+   "bytes": 790796,
    "licence": "CC BY 4.0"
   },
   {
@@ -7256,7 +7265,7 @@
    "path": "downloads/uttar-pradesh.xlsx",
    "description": "Uttar Pradesh, Excel workbook",
    "format": "Excel",
-   "bytes": 50394,
+   "bytes": 93112,
    "licence": "CC BY 4.0"
   },
   {
