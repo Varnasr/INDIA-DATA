@@ -1318,6 +1318,18 @@
    "shows": "s1d labs has read four of Uttar Pradesh's electoral rolls from the Election Commission's PDFs into tables, one file for each of the 403 assembly constituencies: the roll of the 2024 Lok Sabha election, the draft and final rolls of the Special Intensive Revision and the draft roll of the 2027 summary revision. It says it read about 6.8 lakh PDFs, most of them scanned images, with five optical character readers and no language model, and that the 2027 roll, the only one of the four with a text layer, was read directly. By its own count, leaving out entries with a deleted mark, the 2024 roll holds 15,36,26,796 entries, the SIR draft 12,28,31,737, the SIR final 13,11,70,043 and the 2027 draft 13,58,67,928. Its README says that about 4,015 newer parts of the two SIR rolls are missing from its files, which it estimates at about 2.5 million voters in each roll, and it asks readers not to compare its SIR totals with the Commission's state totals until that gap is closed. It reports that a hand check of 402 boxes found every field right in 96.77 per cent of SIR records. In the files it publishes, names, relatives' names, EPIC numbers and house numbers are replaced by keyed-hash tokens, so that one elector can be followed from roll to roll and counted by age and gender, and it says the tokens do not make a record anonymous. It sends the full text to journalists and researchers who apply. It says the Commission's PDFs remain the authority and its counts are not official figures."
   },
   {
+   "group": "Data and analysis",
+   "title": "No eligible citizen is left out (?): Uttar Pradesh",
+   "outlet": "Diagram Chasing",
+   "authors": "Aman Bhargava",
+   "date": "2026-11-24",
+   "url": "https://diagramchasing.fun/2026/sir/uttar-pradesh",
+   "video": false,
+   "duration": "",
+   "subscription": false,
+   "shows": "Aman Bhargava of Diagram Chasing reads Uttar Pradesh's rolls, as digitised by s1d labs, against the Chief Electoral Officer's totals, constituency by constituency. In a section on who was left off the draft of January 2026 he finds that women under 35 were left off at twice the rate of men, 2.3 times at ages 25 to 29, and that the rates for women and men match from age 55 onward. Among electors aged 19 to 34, 15.0 per cent of women and 4.6 per cent of men were marked shifted. He counts 5.9 lakh more men than women aged 18 to 24 added on the final roll, which he says widened the gap under 35, and women per 1,000 men falling from 878 on the 2024 roll to 836 on the final roll, and by 122 among electors under 25. He finds 38 per cent of registered transgender electors 'removed', in the page's word, against 23 per cent of men and women, and a higher rate for them in 316 of 386 constituencies. He also finds that women were 62 per cent of the electors stamped disqualified on the final roll. The page also counts errors on the final roll, among them a word in place of a house number in 7,18,970 entries and a relative's name printed twice in 2,13,720, and says that some mistakes may have come in through character recognition and that every example it shows and a random sample of each kind were checked by hand against the original documents. Its counts are its own, from the digitised rolls."
+  },
+  {
    "group": "Research",
    "title": "SIR and the BJP's Bengal Majority",
    "outlet": "Debraj Ray, research note",
@@ -1914,7 +1926,7 @@
   }
  ],
  "counts": {
-  "items": 158,
+  "items": 159,
   "outlets": 42,
   "videos": 14
  }
