@@ -1,4 +1,4 @@
-<!--page {"title": "Women, All India", "description": "Women's share of the names left off the draft rolls against their share of the roll, per 100 women and per 100 men, district by district, after the draft, and Bihar's lists set against death and marriage records.", "place": "india"} -->
+<!--page {"title": "Women, All India", "description": "Women's share of the names left off the draft rolls against their share of the roll, per 100 women and per 100 men, district by district, after the draft, women per 1,000 men at each stage, Bihar's lists set against death and marriage records, women and men by age, and reports about women.", "place": "india"} -->
 <main id="main">
 <div class="page-head" data-no-i18n><h1>Women</h1><ol class="summary" id="short"></ol></div>
 <p class="report-lang">This page is in English only. Every figure on it comes from the state pages and the All India table, which link each figure to its source.</p>
@@ -47,6 +47,18 @@
     </div>
   </div>
 
+  <h2 id="women-per-1000-men">Women per 1,000 men at each stage</h2>
+  <p class="sub">For each state with the roll by sex at one stage or more, the number of women for every 1,000 men on the roll before the revision, on the draft, on the final roll and on the draft of the special summary revision that followed it. Where a state published only women's share of a roll, the men are taken as the rest, which counts its few third-gender electors with the men. Each state published different stages, so each is read on its own. States are listed alphabetically.</p>
+  <div class="grid">
+    <div class="panel wide" id="pRatio">
+      <h3>Women per 1,000 men on the roll, by stage</h3>
+      <div class="vizbox" id="vRatio"></div>
+      <p id="nRatio"></p>
+    </div>
+  </div>
+  <p class="finding" id="fRatio"></p>
+  <div class="twrap fit"><table id="tRatio"></table></div>
+
   <h2>Bihar, set against death and marriage records</h2>
   <p class="sub">Bihar is the one state whose lists of names left off were counted name by name, so it is the one state where the reasons written against women's names can be set against outside records.</p>
   <div class="grid">
@@ -59,10 +71,34 @@
   <p id="nMarriage"></p>
   <p>The lists record what happened to each entry and nothing about why. A woman who married and moved, a woman who went to work in another state, and a woman who was at her parents' house on the day the officer called can all end up with the same entry. So this page shows where and by how much women were left off or deleted more often than men, and it does not say why.</p>
 
+  <h2 id="women-and-men-by-age">Women and men by age</h2>
+  <p class="sub">Uttar Pradesh is the one state where a whole roll has been counted by age and sex against the draft. s1d labs read the Commission's roll files for the state into tables, which give the sex and age printed against each entry of the 2024 Lok Sabha roll. For each age band, the chart gives how many of every 100 entries of women and of men had a card number found nowhere on the draft.</p>
+  <div class="grid">
+    <div class="panel wide" id="pAge">
+      <h3>Uttar Pradesh, entries of the 2024 roll not found on the draft, per 100 entries, by age</h3>
+      <div class="vizbox" id="vAge"></div>
+      <p id="nAge"></p>
+    </div>
+  </div>
+  <p class="finding" id="fAge"></p>
+  <p id="nAgeDC"></p>
+  <p id="nAgeKA"></p>
+  <div class="grid">
+    <div class="panel wide" id="pBiharAge">
+      <h3>Bihar, women's share of the names left off the draft, by age, per cent</h3>
+      <div class="vizbox" id="vBiharAge"></div>
+      <p id="nBiharAge"></p>
+    </div>
+  </div>
+
   <h2 id="third-gender-electors">Third-gender electors</h2>
   <p class="sub">Some states published the third-gender electors on the roll before the revision and either the number left off the draft or the number on it, so the two can be set side by side. Each row sets the third-gender electors left off for every 100 on the roll beside the same rate for all electors in that state. States are listed alphabetically.</p>
   <p class="finding" id="fThird"></p>
   <div class="twrap fit"><table id="tThird"></table></div>
+
+  <h2 id="reports-about-women">Reports about women</h2>
+  <p class="sub">Items on the disputes page that concern women on the roll or women working on the revision, newest first. Each is the account of the outlet named, and each links to the item, which quotes its source.</p>
+  <ul class="plain" id="lReports"></ul>
 
   <h2>How good each figure is</h2>
   <div class="twrap fit"><table id="tQual"></table></div>
@@ -90,7 +126,11 @@ SIR.json('data/india/women.json').then(function (d) {
     'The gap was widest in ' + top.state + ', ' + p1(top.gap) + ' points, where women were ' + p1(top.share_removed) + '% of the names left off and ' + p1(top.share_roll) + '% of the roll.' + (S[1] && top.gap - S[1].gap < 0.5 ? ' ' + S[1].state + ' came just behind, at ' + p1(S[1].gap) + ' points.' : '') + ' In ' + top.state + ' that is ' + p1(top.women_per_100) + ' of every 100 women against ' + p1(top.men_per_100) + ' of every 100 men.',
     'Below the state the pattern holds almost everywhere it can be followed. In ' + X.district_over + ' of ' + X.district_n + ' districts across Bihar, West Bengal, Kerala and Uttarakhand, women were a larger share of the district\'s count than of its roll.',
     'It ran the other way by a point or more in ' + list(low.map(function (s) { return s.state; })) + '. In ' + lo.state + ', ' + p1(lo.men_per_100) + ' of every 100 men were left off the draft roll, against ' + p1(lo.women_per_100) + ' of every 100 women.',
-    'In Bihar women were ' + p1(d.bihar.dead_share) + '% of the names entered as dead. Their share of deaths in Bihar, from the death rates for women and men, would be about ' + p1(d.bihar.dead_expected) + '%.'
+    'In Bihar women were ' + p1(d.bihar.dead_share) + '% of the names entered as dead. Their share of deaths in Bihar, from the death rates for women and men, would be about ' + p1(d.bihar.dead_expected) + '%.',
+    (function (U) { return 'In Uttar Pradesh, counted from s1d labs\' digitised rolls, ' + p1(U.u35_women) + ' of every 100 entries of women under 35 on the 2024 roll were not found on the draft, against ' + p1(U.u35_men) + ' of every 100 entries of men of the same ages. From 55 onward the two rates were within ' + p1(Math.max.apply(null, U.bands.slice(5).map(function (b) { return Math.abs(b.women - b.men); }))) + ' points of each other in every band.'; })(d.age.up),
+    (function (R) { var f = function (x) { return x.ratio != null ? x.ratio : x.women != null ? 1000 * x.women / x.men : 1000 * x.women_pct / (100 - x.women_pct); };
+      var bd = R.rows.filter(function (r) { return r.before && r.draft && r.before.firm && r.draft.firm; }), lo = bd.filter(function (r) { return f(r.draft) < f(r.before); });
+      return 'In ' + lo.length + ' of the ' + bd.length + ' states with the roll before and the draft by sex, the draft held fewer women for every 1,000 men than the roll before.'; })(d.ratio)
   ], 'The figures come from ' + S.length + ' states and union territories, and the table at the foot of the page says how good each one is. A reason on a list is what the officer wrote down, and nobody checked it.');
 
   document.getElementById('kpis').innerHTML = [
@@ -153,6 +193,72 @@ SIR.json('data/india/women.json').then(function (d) {
       var nm = x.source_url ? '<a href="' + SIR.esc(x.source_url) + '" rel="noopener">' + SIR.esc(x.state) + '</a>' : SIR.esc(x.state);
       return [nm, SIR.n(x.before), SIR.n(x.left_off), p1(x.per_100), p1(x.all_per_100), 'The roll before is ' + KIND[x.before_kind] + ' and the number left off is ' + KIND[x.left_off_kind] + '. ' + SIR.esc(x.note)];
     }));
+  // ---- women per 1,000 men at each stage
+  var RT = d.ratio, STG = ['before', 'draft', 'final', 'ssr'];
+  var STN = { before: 'the roll before the revision', draft: 'the draft', final: 'the final roll', ssr: 'the draft of the summary revision' };
+  var per1000 = function (x) { return !x ? null : x.ratio != null ? x.ratio : x.women != null ? 1000 * x.women / x.men : 1000 * x.women_pct / (100 - x.women_pct); };
+  VIZ.dots('vRatio', { label: 'Women per 1,000 men on the roll before the revision, on the draft, on the final roll and on the draft of the summary revision, by state', axis: 'Women per 1,000 men',
+    cats: RT.rows.map(function (r) { return r.state; }),
+    series: [{ name: 'Roll before', col: '--fill-grey', vals: RT.rows.map(function (r) { return per1000(r.before); }) },
+             { name: 'Draft', col: '--fill-red', vals: RT.rows.map(function (r) { return per1000(r.draft); }) },
+             { name: 'Final roll', col: '--fill-navy', vals: RT.rows.map(function (r) { return per1000(r.final); }) },
+             { name: 'Summary revision draft', col: '--fill-teal', vals: RT.rows.map(function (r) { return per1000(r.ssr); }) }] });
+  var pair = function (a, b) { return RT.rows.filter(function (r) { return r[a] && r[b] && r[a].firm && r[b].firm; }); };
+  var bd = pair('before', 'draft'), bdLo = bd.filter(function (r) { return per1000(r.draft) < per1000(r.before); });
+  var df = pair('draft', 'final'), dfUp = df.filter(function (r) { return per1000(r.final) > per1000(r.draft); });
+  var fs = pair('final', 'ssr'), fsUp = fs.filter(function (r) { return per1000(r.ssr) > per1000(r.final); });
+  var big = bd.map(function (r) { return { r: r, c: per1000(r.draft) - per1000(r.before) }; }).sort(function (a, b) { return a.c - b.c; })[0];
+  document.getElementById('fRatio').innerHTML = '<b>In ' + bdLo.length + ' of the ' + bd.length + ' states with the roll before and the draft by sex, the draft held fewer women for every 1,000 men than the roll before.</b> The largest fall was in ' + big.r.state + ', from ' + SIR.n(per1000(big.r.before)) + ' to ' + SIR.n(per1000(big.r.draft)) + '. ' +
+    'The final roll held more women for every 1,000 men than the draft in ' + dfUp.length + ' of the ' + df.length + ' states with both by sex, and the draft of the summary revision held more than the final roll in ' + fsUp.length + ' of ' + fs.length + '.';
+  var miss = STG.slice(0, 3).map(function (k) {
+    var m = RT.rows.filter(function (r) { return !r[k] && !r.special; }).map(function (r) { return r.state; });
+    return m.length ? 'There is no figure by sex for ' + STN[k] + ' of ' + list(m) + '.' : '';
+  }).join(' ');
+  var due = {}; RT.ssr_missing.filter(function (x) { return !x.total_only; }).forEach(function (x) { (due[x.due] = due[x.due] || []).push(x.state); });
+  var tot = RT.ssr_missing.filter(function (x) { return x.total_only; }).map(function (x) { return x.state; });
+  var today = new Date(Date.now() + 5.5 * 36e5).toISOString().slice(0, 10);
+  document.getElementById('nRatio').textContent = 'All three stages of the intensive revision are shown by sex for ' + list(RT.all_three) + '. ' + miss + ' ' +
+    'There is no figure by sex at any stage for ' + list(RT.none) + '. ' +
+    (tot.length ? 'The draft of the summary revision of ' + list(tot) + ' is given as a total only. ' : '') +
+    (function () {
+      var ds = Object.keys(due).sort(), on = function (k) { return 'on ' + SIR.date(k) + ' in ' + list(due[k].sort()); };
+      var past = ds.filter(function (k) { return k < today; }).map(on), next = ds.filter(function (k) { return k >= today; }).map(on);
+      return ds.length ? 'The draft of the summary revision ' + (past.length ? 'was due ' + list(past) + (next.length ? ', and ' : '') : '') + (next.length ? 'is due ' + list(next) : '') + '.' : '';
+    })() + (RT.rows.some(function (r) { return r.special; }) ? ' ' + list(RT.rows.filter(function (r) { return r.special; }).map(function (r) { return r.state; })) + ' had a special revision and no intensive revision, so its final roll is that of the special revision.' : '');
+  SIR.table('tRatio', [{ h: 'State' }, { h: 'Roll before', num: true }, { h: 'Draft', num: true }, { h: 'Final roll', num: true }, { h: 'Summary revision draft', num: true }, { h: 'How each is counted' }],
+    RT.rows.map(function (r) {
+      var how = STG.filter(function (k) { return r[k]; }).map(function (k) {
+        var x = r[k], kind = x.ratio != null ? 'a ratio as published' : x.women != null ? 'women and men counted' : "women's share only";
+        return 'For ' + STN[k] + (k === 'ssr' ? ' of ' + SIR.date(x.date) : '') + ', ' + kind + ', ' + x.how + '.';
+      }).join(' ');
+      return [SIR.esc(r.state)].concat(STG.map(function (k) { return r[k] ? SIR.n(per1000(r[k])) : null; })).concat([SIR.esc(how.charAt(0).toUpperCase() + how.slice(1))]);
+    }));
+
+  // ---- women and men by age
+  var AG = d.age, U = AG.up, UB = U.bands, gap55 = Math.max.apply(null, UB.slice(5).map(function (b) { return Math.abs(b.women - b.men); }));
+  VIZ.dots('vAge', { label: 'Uttar Pradesh, entries of the 2024 roll not found on the draft, for every 100 entries, women and men by age', axis: 'Not found on the draft, per 100 entries of the 2024 roll',
+    cats: UB.map(function (b) { return b.band; }), series: [{ name: 'Women', col: '--fill-red', vals: UB.map(function (b) { return b.women; }) }, { name: 'Men', col: '--fill-navy', vals: UB.map(function (b) { return b.men; }) }] });
+  document.getElementById('nAge').textContent = 'The digitised rolls are s1d labs\' own reading of the Commission\'s files, version ' + U.s1d.version + ' of ' + SIR.date(U.s1d.date) + ', and are not an official count. In s1d labs\' own check by hand, every field was right in ' + SIR.d(U.s1d.check_2026, 2) + '% of the entries of the 2026 rolls and in ' + SIR.d(U.s1d.check_2024, 2) + '% of those of the 2024 roll. ' +
+    'The count starts from the 2024 roll, so it takes in names deleted before the revision began and leaves out people who joined the roll after the 2024 election. An entry not found on the draft can be a person who died or moved, an elector given a new card number after 2024, or a card number misread on either roll. Age is as printed on the 2024 roll, which counts it on 1 January 2024, so each person was about two years older when the revision began.';
+  document.getElementById('fAge').innerHTML = '<b>Under 35, ' + p1(U.u35_women) + ' of every 100 entries of women on the 2024 roll were not found on the draft, against ' + p1(U.u35_men) + ' of every 100 entries of men, ' + p1(U.u35_ratio) + ' times the rate.</b> At 25 to 29 the rate for women was ' + p1(U.ratio_25_29) + ' times the rate for men. From 55 onward the two rates are within ' + p1(gap55) + ' points of each other in every band. Of the ' + SIR.n(U.third_n) + ' entries of third-gender electors, ' + p1(U.third) + ' of every 100 were not found.';
+  var C = AG.dc_up, upF = RT.rows.filter(function (r) { return r.state === 'Uttar Pradesh'; })[0];
+  document.getElementById('nAgeDC').innerHTML = C.authors + ' of <a href="' + SIR.esc(C.url) + '" rel="noopener">' + SIR.esc(C.outlet) + '</a> (' + SIR.date(C.date) + ') read the same digitised rolls with the Commission\'s lists of names left off the draft. He found women under 35 left off at ' + (C.u35_ratio === 2 ? 'twice' : C.u35_ratio + ' times') + ' the rate of men, ' + p1(C.ratio_25_29) + ' times at 25 to 29, and the rates for women and men matching from ' + C.match_from + ' onward. Among electors aged 19 to 34 he found ' + p1(C.shifted_19_34_women) + ' per cent of women and ' + p1(C.shifted_19_34_men) + ' per cent of men marked shifted. ' +
+    'He counts ' + p1(C.added_18_24_gap_lakh) + ' lakh more men than women aged 18 to 24 added on the final roll, which he says widened the gap under 35, and women per 1,000 men falling from ' + C.ratio_2024 + ' on the 2024 roll to ' + C.ratio_final + ' on the final roll, and by ' + C.ratio_fall_under_25 + ' among electors under 25. The Chief Electoral Officer\'s figures for the final roll give ' + SIR.n(per1000(upF.final)) + '. ' +
+    'He finds ' + C.tg_pct + ' per cent of registered transgender electors "removed", in his word, against ' + C.all_pct + ' per cent of men and women, with a higher rate for them in ' + C.tg_seats + ' of ' + C.seats + ' constituencies, and he does not state the base of the ' + C.all_pct + ' per cent. He also finds that women were ' + C.q_women_pct + ' per cent of the electors stamped disqualified on the final roll. His counts are his own, from the digitised rolls.';
+  var K = AG.dc_ka;
+  document.getElementById('nAgeKA').innerHTML = 'In Karnataka, ' + K.authors + ' of <a href="' + SIR.esc(K.url) + '" rel="noopener">' + SIR.esc(K.outlet) + '</a> (' + SIR.date(K.date) + ') joined the final roll to the January 2025 roll and the list of names left off the draft. Of the ' + SIR.n(K.found_jan2025) + ' electors left off the draft whom he found on the January 2025 roll, about ' + SIR.n(K.back_about) + ' came back on the final roll in the same constituency with the same name, relative and age, and ' + SIR.n(K.old_back) + ' of ' + p1(K.old_lakh) + ' lakh aged 75 and over came back. He says his counts are minimums, because the rolls by themselves cannot establish identity.';
+  var BA = AG.bihar, sh = function (w, t) { return 100 * w / t; }, band = function (b) { return b.replace('-', ' to ').replace('+', ' and over'); };
+  VIZ.dots('vBiharAge', { label: "Bihar, women's share of the names left off the draft in phase 1, by age, for every reason and for those marked shifted and dead", axis: 'Per cent women',
+    cats: BA.bands.map(band), series: [{ name: 'Every reason', col: '--fill-grey', vals: BA.bands.map(function (b, i) { return sh(BA.all_women[i], BA.all[i]); }) },
+      { name: 'Marked shifted', col: '--fill-red', vals: BA.bands.map(function (b, i) { return sh(BA.shifted_women[i], BA.shifted[i]); }) },
+      { name: 'Entered as dead', col: '--fill-navy', vals: BA.bands.map(function (b, i) { return sh(BA.dead_women[i], BA.dead[i]); }) }] });
+  var o50 = BA.bands.map(function (b, i) { return sh(BA.all_women[i], BA.all[i]); }).slice(4);
+  document.getElementById('nBiharAge').textContent = 'Women were ' + p1(sh(BA.all_women[0], BA.all[0])) + '% of the names left off the draft in phase 1 at ages ' + band(BA.bands[0]) + ', ' + p1(sh(BA.all_women[1], BA.all[1])) + '% at ' + band(BA.bands[1]) + ' and ' + p1(sh(BA.shifted_women[0] + BA.shifted_women[1], BA.shifted[0] + BA.shifted[1])) + '% of those marked shifted at ' + BA.bands[0].split('-')[0] + ' to ' + BA.bands[1].split('-')[1] + '. At ' + BA.bands[4].split('-')[0] + ' and over they were between ' + p1(Math.min.apply(null, o50)) + '% and ' + p1(Math.max.apply(null, o50)) + '% of the names left off. The lists give each name\'s age and sex, so these are shares of the lists. They cannot show how many women of each age were on the roll.';
+
+  // ---- reports about women
+  document.getElementById('lReports').innerHTML = d.reports.map(function (r) {
+    return '<li>On ' + SIR.date(r.date) + ', ' + SIR.esc(r.outlet) + (r.kind === 'press' ? ' reported that ' : ' records that ') + SIR.esc(r.note) + ' (<a href="../disputes/#d-' + SIR.esc(r.id) + '">' + SIR.esc(r.headline) + '</a>)</li>';
+  }).join('');
   SIR.showFaq('india', 'women');
 }).catch(SIR.fail);
 </script>
