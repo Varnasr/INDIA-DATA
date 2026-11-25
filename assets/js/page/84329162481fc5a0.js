@@ -3,12 +3,13 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
 
   // Next in court: hearings and deadlines from today in India onwards, in
   // the reader's language, each linked to its source and to its entry below
+  var lang = window.L && L.lang || 'en';
+  var today = new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
+  var MON = [L('January'), L('February'), L('March'), L('April'), L('May'), L('June'), L('July'), L('August'), L('September'), L('October'), L('November'), L('December')];
+  var day = function (iso) { var p = iso.split('-'); return L('{d} {m} {y}', { d: +p[2], m: MON[+p[1] - 1], y: p[0] }); };
+  var when = { exact: function (s) { return s; }, approximate: function (s) { return L('About {date}', { date: s }); }, tentative: function (s) { return L('{date}, listed tentatively', { date: s }); } };
   (function () {
-    var box = document.getElementById('nextCourt'), lang = window.L && L.lang || 'en';
-    var today = new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
-    var MON = [L('January'), L('February'), L('March'), L('April'), L('May'), L('June'), L('July'), L('August'), L('September'), L('October'), L('November'), L('December')];
-    var day = function (iso) { var p = iso.split('-'); return L('{d} {m} {y}', { d: +p[2], m: MON[+p[1] - 1], y: p[0] }); };
-    var when = { exact: function (s) { return s; }, approximate: function (s) { return L('About {date}', { date: s }); }, tentative: function (s) { return L('{date}, listed tentatively', { date: s }); } };
+    var box = document.getElementById('nextCourt');
     var ahead = (D.listings || []).filter(function (x) { return x.date >= today; });
     if (!ahead.length) { box.innerHTML = '<li><p>' + L('No hearing or deadline ahead has been dated.') + '</p></li>'; return; }
     box.innerHTML = ahead.map(function (x) {
@@ -91,6 +92,118 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
       (it.issues.length ? '<p class="dtags">' + it.issues.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</p>' : '') +
       (it.quote ? '<details><summary>The words of the source</summary><blockquote>' + esc(it.quote) + '</blockquote></details>' : '') + '</li>';
   };
+
+  // Where things stand in the state chosen in the filter: the roll figures,
+  // the summary revision, the next date in court and the items about it, all
+  // computed from the data files, which are fetched only once a state is chosen
+  var SECNAME = { courts: L('In the courts'), resolutions: L('Resolutions in the Assemblies'), protests: L('Protests by parties and groups'),
+    boycotts: L('Booth officers\' protests'), form7: L('Form 7 objections and pre-printed forms'), software: L('Changes to the software'),
+    instructions: L('Instructions given without a written order'), errors: L('Wrong entries reported on the rolls'), deaths: L('Deaths reported during the revision') };
+  // the state pages whose address is not the one now.json gives as the overview
+  var OVERVIEW = { 'Telangana': 'hyderabad/telangana/', 'Assam': 'assam/' };
+  // a state that had another kind of revision, as Where the revision stands says
+  var SPECIAL = { 'Assam': 1 };
+  var sumBox = document.getElementById('stateSum'), sumAsk = 0;
+  // the first sentence of an item, which names what happened and who reported
+  // it; a full stop after an initial or a short title (V., G.N., No.) does not end one
+  var NOTEND = { Nos: 1, Mrs: 1, Smt: 1, Shri: 1, Sri: 1, Ltd: 1, Inc: 1, Hon: 1, Govt: 1, Art: 1, Sec: 1, Vol: 1, Ors: 1, Anr: 1 };
+  function first(t) {
+    var re = /([^\s.]{3,})\.\s+(?=[A-Z"'\u2018\u201c(])/g, m;
+    while ((m = re.exec(t))) if (!NOTEND[m[1]]) return t.slice(0, m.index + m[1].length + 1);
+    return t;
+  }
+  function stateSum(st) {
+    var ask = ++sumAsk;
+    if (!st || st === 'All India' || st === 'India') { sumBox.hidden = true; sumBox.innerHTML = ''; return; }
+    Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/ssr_draft.json'), SIR.json('data/india/now.json')]).then(function (r) {
+      if (ask !== sumAsk) return;
+      var S = r[0].states.filter(function (x) { return x.state === st; })[0], R = r[1].states.filter(function (x) { return x.state === st; })[0], NP = r[2].pages[st];
+      var nm = lang === 'en' ? esc(st) : '<span lang="en" dir="ltr">' + esc(st) + '</span>';
+      var en = function (t) { return lang === 'en' ? esc(t) : '<span lang="en" dir="ltr">' + esc(t) + '</span>'; };
+      var root = SIR.root, h = '<h2 id="ssH">' + L('Where things stand in {state}', { state: nm }) + '</h2>';
+      // the roll in the intensive revision
+      var roll = [];
+      if (S && S.electors_before != null && S.removed != null) {
+        // the draft as published: where the final roll is on record it is the
+        // final roll less the net change after the draft, which in Bihar is
+        // 4,462 fewer than the roll before less the names left off. A gap of a
+        // handful (Punjab, 27) is left as the states table gives it.
+        var fin = S.electors_final != null, draft = S.electors_before - S.removed,
+          gap = fin && S.net_after_draft != null ? draft - (S.electors_final - S.net_after_draft) : 0;
+        if (Math.abs(gap) > 100) draft -= gap; else gap = 0;
+        h += '<div class="kpis">' + [[n(S.electors_before), L('on the roll before the revision')], [n(draft), L('on the draft roll')],
+          [fin ? n(S.electors_final) : L('Not yet'), L('on the final roll')], [fin && S.net_fall_per_100 != null ? SIR.d(S.net_fall_per_100, 1) : L('Not yet'), L('fall in the roll for every 100 electors')]]
+          .map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>';
+        roll.push(L('The roll before the revision held {before} electors. The draft roll of {date} held {draft}, and {left} names were left off it, {per} for every 100.',
+          { before: n(S.electors_before), date: day(S.draft_date), draft: n(draft), left: n(S.removed), per: SIR.d(S.per_100, 1) }));
+        if (gap > 0) roll.push(L('The roll before the revision less the names left off is {g} more than the draft roll, because the two figures come from different counts.', { g: n(gap) }));
+        if (S.source === 'press') roll.push(L('The figures for the draft roll are as the press reported them.'));
+        if (fin) {
+          roll.push(S.final_date ? L('The final roll of {date} held {final} electors.', { date: day(S.final_date), final: n(S.electors_final) }) : L('The final roll held {final} electors. The day it was published was not found.', { final: n(S.electors_final) }));
+          if (S.net_fall != null) roll.push(S.net_fall === S.electors_before - S.electors_final
+            ? L('The fall in the roll, from the roll before the revision to the final roll, is {fall}, or {per} for every 100 electors.', { fall: n(S.net_fall), per: SIR.d(S.net_fall_per_100, 1) })
+            : L('The fall in the roll, the names left off less the net number added after the draft, is {fall}, or {per} for every 100 electors.', { fall: n(S.net_fall), per: SIR.d(S.net_fall_per_100, 1) }));
+          if (S.withheld) roll.push(L('Another {w} names were held for adjudication and are not on the final roll.', { w: n(S.withheld) }));
+          if (S.final_source && S.final_source.source === 'press') roll.push(L('The figures for the final roll are as the press reported them.'));
+        } else roll.push(L('No final roll has been found yet.'));
+      } else roll.push(SPECIAL[st] ? L('{state} was given a special revision in place of an intensive one.', { state: nm }) : L('No draft roll of the intensive revision has been found for {state}.', { state: nm }));
+      roll.push(L('<a href="{href}">Where the revision stands</a> gives the stage each state has reached.', { href: root + 'india/progress/' }));
+      h += '<h3>' + L('The intensive revision') + '</h3><p>' + roll.join(' ') + '</p>';
+      // the summary revision for 1 January 2027
+      if (R && R.postponed && !R.draft) {
+        // postponed with no new dates: the dates that were put off are not shown,
+        // as on the summary revision page
+        h += '<h3>' + L('The summary revision') + '</h3><p>' + L('The special summary revision in {s} was postponed on {d}, and no new dates have been given.', { s: nm, d: day(R.postponed) }) + '</p>';
+      } else if (R) {
+        var ss = [];
+        if (R.draft) {
+          ss.push(L('In the summary revision for 1 January 2027, the draft roll of {date} held {electors} electors.', { date: day(R.draft.date), electors: n(R.draft.electors) }));
+          if (R.draft.press) ss.push(L('The summary revision figures are as the press reported them.'));
+        } else ss.push(R.due < today ? L('The draft roll of the summary revision for 1 January 2027 was due on {date} and has not been found yet.', { date: day(R.due) }) : L('The draft roll of the summary revision for 1 January 2027 is due on {date}.', { date: day(R.due) }));
+        if (R.claims_end) ss.push(R.claims_end < today ? L('Claims and objections closed on {date}.', { date: day(R.claims_end) }) : L('Claims and objections close on {date}.', { date: day(R.claims_end) }));
+        if (R.final_due) ss.push(L('The final roll is due on {date}.', { date: day(R.final_due) }));
+        h += '<h3>' + L('The summary revision') + '</h3><p>' + ss.join(' ') + '</p>';
+      }
+      // the next date in court
+      var ahead = (D.listings || []).filter(function (x) { return x.date >= today; });
+      var mine = ahead.filter(function (x) { return x.state === st; }).sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }), mat = '', all = ahead.filter(function (x) { return x.state === 'India'; }).length, cs = [];
+      if (mine.length) {
+        var x = mine[0], tr = (x.t || {})[lang], own = lang === 'en' || !tr, f = own ? x : tr, txt = own ? en : esc;
+        cs.push(L('The next date in court for {state} is {date}, before the {court}.', { state: nm, date: (when[x.date_kind] || when.exact)(day(x.date)), court: txt(f.court) }));
+        // the matter is a description, so in English it goes into a sentence;
+        // in another language it stands on its own line, as in Next in court
+        var lead = own && /^(The|A|An|Petitions?|Applications?|Appeals?) /.exec(f.matter);
+        if (lead) cs.push(txt('It concerns ' + f.matter.charAt(0).toLowerCase() + f.matter.slice(1).replace(/\.$/, '') + '.'));
+        else mat = '<p>' + txt(f.matter) + '</p>';
+        cs.push(L('<a href="{href}">It is under Next in court, above.</a>', { href: '#nc-' + esc(x.id) }));
+        if (mine.length > 1) cs.push(mine.length === 2 ? L('One more date ahead concerns {state}.', { state: nm }) : L('{k} more dates ahead concern {state}.', { k: n(mine.length - 1), state: nm }));
+      } else cs.push(L('No hearing or deadline ahead has been dated for {state}.', { state: nm }));
+      if (all) cs.push(all === 1 ? L('Next in court also lists one date ahead in a matter that concerns the whole country.') : L('Next in court also lists {k} dates ahead in matters that concern the whole country.', { k: n(all) }));
+      h += '<h3>' + L('In court') + '</h3>' + (mat ? '<p>' + cs.shift() + '</p>' + mat : '') + '<p>' + cs.join(' ') + '</p>';
+      // the items about the state, by section, and the three most recent
+      var its = ALL.filter(function (a) { return a.it.states.indexOf(st) >= 0; });
+      if (its.length) {
+        var by = {};
+        its.forEach(function (a) { by[a.sec.id] = (by[a.sec.id] || 0) + 1; });
+        var link = function (id, label) { return document.getElementById(id) ? '<a href="#' + esc(id) + '">' + label + '</a>' : label; };
+        h += '<h3>' + L('Items about {state}', { state: nm }) + '</h3><p>' + (its.length === 1 ? L('One item concerns {state}.', { state: nm }) : L('{k} items concern {state}.', { k: n(its.length), state: nm })) + '</p>' +
+          '<ul class="sscount">' + D.sections.filter(function (sec) { return by[sec.id]; }).map(function (sec) { return '<li>' + link(sec.id, SECNAME[sec.id] || esc(sec.title)) + ' <b>' + n(by[sec.id]) + '</b></li>'; }).join('') + '</ul>';
+        var rec = its.slice().sort(function (a, b) { return b.it.date.localeCompare(a.it.date); }).slice(0, 3);
+        h += '<p>' + (rec.length === 1 ? L('The most recent item') : L('The {k} most recent items', { k: n(rec.length) })) + '</p><ul class="ssrecent">' + rec.map(function (a) {
+          return '<li><p>' + link('d-' + a.it.id, day(a.it.date)) + '</p><p lang="en" dir="ltr">' + esc(first(a.it.claim)) + '</p></li>';
+        }).join('') + '</ul>';
+      }
+      // the state's own pages
+      var pg = [];
+      if (NP && NP.path) pg.push('<a href="' + root + esc(NP.path) + '">' + L('What to do now in {state}', { state: nm }) + '</a>');
+      var ov = OVERVIEW[st] || (NP && NP.overview);
+      if (ov) pg.push('<a href="' + root + esc(ov) + '">' + L('The {state} overview', { state: nm }) + '</a>');
+      if (pg.length) h += '<ul class="sslinks">' + pg.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+      sumBox.innerHTML = h;
+      sumBox.lang = lang; sumBox.dir = document.documentElement.dir || 'ltr';
+      sumBox.hidden = false;
+    }).catch(function () { if (ask === sumAsk) { sumBox.hidden = true; } });
+  }
   // the sections go straight into the article, so they keep the reading column
   var end = document.getElementById('secEnd');
   function render() {
@@ -109,6 +222,7 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
       html += '<h2 class="dsec" id="' + sec.id + '">' + esc(sec.title) + '</h2><p class="sub dsec">' + INTRO[sec.id] + '</p><ol class="nfacts dsec" start="' + start + '">' + its.map(function (a) { return li(a.it); }).join('') + '</ol>';
     });
     end.insertAdjacentHTML('beforebegin', html);
+    stateSum(want.state);
     var on = toks.length || Object.keys(F).some(function (x) { return want[x]; });
     document.getElementById('dCount').textContent = on ? (keep.length ? n(keep.length) + ' of ' + n(ALL.length) + ' items match.' : 'No item matches. Clear a filter or change the search.') : n(ALL.length) + ' items in all.';
     // the address keeps the filters, so the list can be sent as a link
