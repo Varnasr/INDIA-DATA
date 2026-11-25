@@ -117,6 +117,14 @@
          L('Assam was given a special revision in place of an intensive one. Himachal Pradesh, Jammu and Kashmir and Ladakh were left out of the order, which said their dates would be announced later. Every other state and union territory is in it.'), ['progress', 'faq']],
         [L('Where do the dates come from?'),
          L('They come from the Election Commission\'s orders and the states\' own press notes, each listed with its document on the page about <a href="../process/">how the revision was run</a>. Where a state has published its final roll, the date it came out replaces the date it was due.'), ['progress', 'faq']],
+        [L('What is the special summary revision?'),
+         L('It is a revision of the roll the Commission ordered under section 21 of the Representation of the People Act, 1950, in the states and union territories where the revision of the roll had ended. The draft roll is published, claims and objections are taken on it and decided, and the final roll is published. The <a href="../summary-revision/">summary revision page</a> gives each state\'s dates and draft roll.'), ['ssr', 'faq']],
+        [L('Why is the change from the final roll only a net figure?'),
+         L('The draft is set against the final roll of the intensive revision. New electors and names deleted since that final roll are counted together in the difference, so it does not say how many names were added or deleted. Where a source gives the names added and deleted, the table gives them as reported.'), ['ssr']],
+        [L('Why is no change shown for some states?'),
+         L('Where no official count of the draft has been found and the press reported the draft as unchanged from the final roll, the draft is shown at the figure of the final roll as the reports describe it, and no change is worked out from it. Where a state was not in the intensive revision, there is no final roll of that revision to set the draft against.'), ['ssr']],
+        [L('Can a person whose name is not on the draft still be added?'),
+         L('Yes. Until the last day for claims and objections in the state, an elector can ask to be added on Form 6. The table gives that day for each state, and each state\'s page on what to do now, where there is one, gives the steps. The <a href="../../help/#form6">help page</a> explains Form 6.'), ['ssr', 'faq']],
         [L('Can I look up my own name here?'),
          L('No. Only counts are published. No name is. To check your own entry, use the Election Commission\'s voter search.'), ['main']]
       ];

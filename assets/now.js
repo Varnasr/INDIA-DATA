@@ -208,7 +208,7 @@
               (q.undated ? L('The Commission later revised the dates in {s}, as {p} reported on {l}.', sv) : L('A later letter of the Commission, dated {l}, set the dates in {s}, as {p} reported it.', sv))
             : L('The Commission\'s letter of {l} ordered a special summary revision of the roll in {s}, under section 21 of the Representation of the People Act, 1950, with {q} as the qualifying date.', { l: sv.o, s: s, q: sv.q })) + ' ' + ssrNow +
             (press && (!moved || r.post) ? ' ' + L('These dates are as reported by {o}.', { o: E(r.ssrOrder.ssr.by) }) : '')) +
-          (dr ? p(dr.p + ' <a href="' + root + 'india/process/#ssr-drafts">' + L('The draft roll in every state, with a note on each figure') + '</a>') : '') +
+          (dr ? p(dr.p + ' <a href="' + root + 'india/summary-revision/">' + L('The draft roll in every state, with a note on each figure') + '</a>') : '') +
           (camp && (ssrStage === 'before' || ssrStage === 'open') ? p(camp) : '') +
           (ssrStage === 'before' || ssrStage === 'open' ? p(L('Outside the intensive revision, the forms of the Registration of Electors Rules, 1960 are used. Form 6 is the application to be added to the roll, Form 7 the objection to a name and Form 8 the correction of an entry.')) +
             p(moved ? L('The letter of {o} lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.', sv)

@@ -194,8 +194,9 @@ warnings, then run it without `--dry-run`. It writes one row of
 sexes do not add up, one dated before the order or after today, and a state
 in no summary revision. It warns when the date differs from the schedule,
 when the source is not official, and when the draft is more than 3 per cent
-from the final roll before it. No page reads the file yet: the pages that
-show the summary revision are to be written once the first drafts are in.
+from the final roll before it. The page india/summary-revision/ reads
+data/india/ssr_draft.json, process.json and states.json in the browser and
+shows every draft against its final roll, so a new draft needs no edit to it.
 A second reader checks every figure before the merge, as for a final roll.
 
 ## Writing
