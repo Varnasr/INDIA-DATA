@@ -538,6 +538,15 @@ def _cases():
     assert "SIR.showFaq('india', 'cases')" in page and 'id="short"' in page, 'the case studies lost their findings or their questions'
 
 
+def _wbtrib():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_wbtrib.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+    page = open(os.path.join(ROOT, 'site', 'pages', 'westbengal', 'tribunals', 'index.html'), encoding='utf-8').read()
+    assert "SIR.showFaq('wb', 'tribunals')" in page and 'id="short"' in page and 'data/westbengal/tribunals.json' in page, 'the tribunals page lost its findings, its questions or its data'
+    ov = open(os.path.join(ROOT, 'site', 'pages', 'westbengal', 'index.html'), encoding='utf-8').read()
+    assert 'tribunals/' in ov, 'the West Bengal overview no longer links to the tribunals page'
+
+
 def _rti():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_rti.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
@@ -866,6 +875,7 @@ for name, fn in [
     ('the bulk Form 7 table is current, links only to disputes items and takes every count from its entry', _form7_bulk),
     ('the events page carries only events read twice and is current', _events),
     ('the RTI page carries only checked applications and is current', _rti),
+    ('every West Bengal tribunal figure names its source and a site item that cites it, and figures that differ are flagged', _wbtrib),
     ('the page on logical discrepancies cites only checked items, says what each says, and sends nothing', _flags),
     ('the case studies carry only checked items and are current', _cases),
     ('the site\'s own words keep the writing rules', _writing),
