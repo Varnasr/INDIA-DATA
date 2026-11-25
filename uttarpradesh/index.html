@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../assets/i18n.js?v=f0660c05" data-i18n="uttarpradesh"></script>
+<script src="../assets/i18n.js?v=0d6aa021" data-i18n="uttarpradesh"></script>
 <title>Uttar Pradesh 2026</title>
 <meta name="description" content="How many names Uttar Pradesh&#x27;s SIR draft roll left off in each of its 75 districts, for what recorded reason, in towns and villages, among women and men, against the 2022 winning margins, and how many names were deleted after the notices and hearings.">
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231d5b57'/><path d='M8 9h16M8 15h16M8 21h9' stroke='white' stroke-width='2.4' stroke-linecap='round'/></svg>">
@@ -53,7 +53,7 @@
 
 <article class="state" lang="en" dir="ltr" data-no-i18n>
   <h2 id="find-a-district">Find a district</h2>
-  <p class="sub">Type a district's name and its figures appear below with a link you can send. The revision's figures were published by district only, so this page has no assembly constituencies to find.</p>
+  <p class="sub">Type a district's name and its figures appear below with a link you can send. The Chief Electoral Officer published the revision's figures by district. Counts for every assembly constituency from the digitised rolls are in the download at the foot of the page.</p>
   <div class="grid">
     <div class="panel wide">
       <div class="finder" id="finder"></div>
@@ -99,17 +99,19 @@
   <p class="finding" id="fUrban"></p>
 
   <h2 id="against-the-2022-winning-margins">Against the 2022 winning margins</h2>
-  <p class="sub">No figure by assembly constituency has been published. So each district's names left off are spread over its constituencies in proportion to their electors in the 2022 Assembly election, and set against each seat's 2022 winning margin. That shows how many seats the names left off were large enough to decide. It cannot show which seats, because the real count in a constituency can sit well above or below its district's rate, and it cannot show that any result would have changed. Each dot is one constituency. A dot above the line had more names left off on this spread than its winning margin.</p>
+  <p class="sub">The Chief Electoral Officer's count of names left off by assembly constituency could not be reached. s1d labs read the Commission's roll files for Uttar Pradesh into tables and counted every entry on the 2024 Lok Sabha roll, the draft and the final roll, constituency by constituency. Its draft adds up in every district to within a few names of the Chief Electoral Officer's table, so its count of the draft in each seat is used here as a measurement. Its release does not hold the roll of 27 October 2025 that the revision started from. Two measured counts therefore stand in for the names left off in each seat. One is the fall in the roll from the 2024 Lok Sabha roll to the draft. The other is the entries of the 2024 roll whose card number appears nowhere on the draft. Each is set against the seat's 2022 winning margin. Each dot is one constituency, and a dot above the line had more entries of the 2024 roll not found on the draft than its winning margin.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vMult"></div></div>
   </div>
   <p class="finding" id="fMargin"></p>
-  <p class="sub">The same seats one by one. Each dot is a constituency, placed by its 2022 margin and by the names left off on the spread.</p>
+  <p class="sub">The same seats one by one. Each dot is a constituency, placed by its 2022 margin and by the entries of its 2024 roll not found on the draft.</p>
   <div class="grid">
     <div class="panel wide"><div class="vizbox" id="vMargin"></div></div>
   </div>
   <div class="twrap fit" tabindex="0" role="region" aria-label="By the alliance that won in 2022"><table id="tAll"></table></div>
-  <p class="note">The 2022 results are the Election Commission's statistical report. The NDA is the BJP, Apna Dal (Soneylal) and the NISHAD party, and the SP's alliance is the SP, the RLD and the SBSP, as they contested in 2022. Every constituency's spread figure is in the download at the foot of this page.</p>
+  <p class="finding" id="fShare"></p>
+  <p class="finding" id="fCheck"></p>
+  <p class="note">The digitised rolls are s1d labs' own reading of the Commission's files, version 2 of 25 November 2026, and are not an official count. In s1d labs' own check by hand, every field was right in 96.77% of the entries of the 2026 rolls and in 97.35% of those of the 2024 roll. The 2022 results are the Election Commission's statistical report. The NDA is the BJP, Apna Dal (Soneylal) and the NISHAD party, and the SP's alliance is the SP, the RLD and the SBSP, as they contested in 2022. Every constituency's counts are in the download at the foot of the page.</p>
 
   <h2 id="the-reasons">The reasons</h2>
   <p class="sub">Every name left off the draft has one of five reasons entered against it. The chart runs from the five reasons on the left to the districts on the right, with the five districts that left off the most names shown on their own and every other district together. A reason is what the officer wrote down, and nobody checked it.</p>
@@ -144,6 +146,14 @@
   <p class="finding" id="fFather"></p>
   <p class="note" id="nWomen"></p>
 
+  <h2 id="women-and-men-by-age">Women and men by age</h2>
+  <p class="sub">s1d labs' tables give the sex and age printed against each entry of the 2024 Lok Sabha roll. For each age band, the chart gives how many of every 100 entries of women and of men had a card number found nowhere on the draft. Age is as printed on the 2024 roll, which counts it on 1 January 2024, so each person was about two years older when the revision began. People who joined the roll after the 2024 election are not in these counts.</p>
+  <div class="grid">
+    <div class="panel wide"><div class="vizbox" id="vAge"></div></div>
+  </div>
+  <p class="finding" id="fAge"></p>
+  <p class="note" id="nAge"></p>
+
   <h2 id="after-the-draft">After the draft</h2>
   <p class="sub">Electors kept on the draft roll were sent a notice when their form could not be linked to the roll of 2003 or when the Commission's software found a discrepancy in it, and were heard by an assistant registration officer. Names were then added on Form 6 claims and deleted on Form 7 objections and after the hearings. Every figure here is the Chief Electoral Officer's, as the press reported it.</p>
   <div class="grid">
@@ -165,15 +175,15 @@
   <p class="note limits" id="shortNote" hidden></p>
   <section class="units" data-units="Uttar Pradesh" hidden><h2>Names left off the draft, and names added after it</h2><div class="unitbox" id="vUnits"></div><p class="finding" id="fUnits"></p></section><section class="rollcal"><h2 class="dlh">Dates of the revision</h2><p>The dates of this state's revision, from the Election Commission's orders, can be added to any calendar app.</p><p class="rollcal-links" data-i18n-each><a class="btn" href="../calendar/uttar-pradesh.ics">Add this state's dates to a calendar</a> <a class="btn" href="../calendar.ics">Add the dates for all India to a calendar</a></p></section>
 <section class="page-faq" aria-labelledby="faqH"><h2 id="faqH">Questions about this page</h2><div id="pageFaq"></div></section>
-<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Uttar Pradesh 2026</h2><p><a class="btn" href="../downloads/uttar-pradesh.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../downloads/#w-up">What each sheet holds</a></p><p class="csvs">CSV: <a href="../data/uttarpradesh/districts.csv?v=6569d365" download>districts.csv</a> <a href="../data/uttarpradesh/seats.csv?v=ddd3d54c" download>seats.csv</a></p></section>
+<section class="dlstrip" lang="en" dir="ltr" data-no-i18n aria-label="Download the figures"><h2 class="dlh">Download the figures for Uttar Pradesh 2026</h2><p><a class="btn" href="../downloads/uttar-pradesh.xlsx" download>Excel workbook, every table</a> <a class="btn" href="../downloads/#w-up">What each sheet holds</a></p><p class="csvs">CSV: <a href="../data/uttarpradesh/districts.csv?v=6569d365" download>districts.csv</a> <a href="../data/uttarpradesh/seats.csv?v=ee7eb47f" download>seats.csv</a></p></section>
 </main>
-<details class="cite"><summary>Cite this page</summary><p class="citetext" data-no-i18n lang="en" dir="ltr">Raman, Varna Sri. "Uttar Pradesh 2026." <i>Off the Roll: SIR analysis for India</i>, ImpactMojo. https://offtheroll.in/uttarpradesh/. Build <span class="cite-build">a9ea4745db7e</span>, 25 November 2026. Accessed <span class="cite-acc">25 November 2026</span>.</p><p><button type="button" class="btn cite-copy">Copy the reference</button></p></details>
+<details class="cite"><summary>Cite this page</summary><p class="citetext" data-no-i18n lang="en" dir="ltr">Raman, Varna Sri. "Uttar Pradesh 2026." <i>Off the Roll: SIR analysis for India</i>, ImpactMojo. https://offtheroll.in/uttarpradesh/. Build <span class="cite-build">97e4be4bdf30</span>, 25 November 2026. Accessed <span class="cite-acc">25 November 2026</span>.</p><p><button type="button" class="btn cite-copy">Copy the reference</button></p></details>
 <footer data-i18n-each><span>Research by <a href="https://www.impactmojo.in/">ImpactMojo</a>. Only totals are published. No name or EPIC number is.</span> · <a href="../#why-this-site-exists">About this site</a> · <a href="../help/">Left off the roll? What to do</a> · <a href="../downloads/#w-up">Downloads</a> · <a href="../share/">Share a list</a> · <a href="../support/">Support our work</a> · <a href="../terms/">Terms and privacy</a> · <a href="../updates/">What's new</a> · <a href="../feed.xml">Follow by feed</a> · <a href="../corrections/">Corrections</a> · <a href="../feedback/?from=uttarpradesh%2F">Feedback</a> · <a href="mailto:info@impactmojo.in">info@impactmojo.in</a><p class="credit" lang="en" dir="ltr" data-no-i18n>Built and maintained by Varna Sri Raman at Pinpoint Ventures, which also takes research and advisory work. Write to <a href="mailto:hello@pinpointventures.in?subject=Enquiry%20from%20offtheroll.in">hello@pinpointventures.in</a> or message on <a href="https://wa.me/919871777110?text=Hi%20Pinpoint%20Ventures%2C%20I%20found%20you%20through%20offtheroll.in.%20I%27d%20like%20to%20discuss%20a%20research%20or%20advisory%20engagement." target="_blank" rel="noopener">WhatsApp</a>.</p></footer>
 <div class="fabs"><a class="fab fab-share" href="../share/"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15V4m0 0-4 4m4-4 4 4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg><span>Share a list</span></a><a class="fab" href="../india/constituencies/#find-a-constituency"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-2.6-2.3-6-6.1-6-10a6 6 0 0 1 12 0c0 .8-.1 1.6-.4 2.4M12 12.8a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6m7.4 6.6 1.8 1.8m-1.2-4.2a2.7 2.7 0 1 1-5.4 0 2.7 2.7 0 0 1 5.4 0"/></svg><span>Find your constituency</span></a></div>
 <script src="../assets/sir.js?v=304102b6"></script>
 <script src="../assets/viz.js?v=40bdf064"></script>
-<script src="../assets/faq/uttarpradesh.js?v=93fda67e"></script>
-<script src="../assets/js/page/ea22b4eb63391bf1.js?v=6e49b21c"></script>
+<script src="../assets/faq/uttarpradesh.js?v=a3191e5d"></script>
+<script src="../assets/js/page/345a3937c33ff39a.js?v=cbab728c"></script>
 <script src="../assets/dyslexia-font.js?v=ee566817" data-accent="var(--fill-red)" data-radius="10px" defer></script>
 </body>
 </html>

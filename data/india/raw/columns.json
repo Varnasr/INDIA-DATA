@@ -1105,7 +1105,15 @@
   "margin_2022": "The 2022 winning margin in votes.",
   "district_left_off_per_100": "Names left off the district's draft roll per 100 electors on its roll of 27 October 2025.",
   "left_off_spread_by_electors": "The district's names left off times the constituency's share of the district's 2022 electors. The figure is an estimate. No list counts it.",
-  "spread_over_margin": "1 if the spread figure is larger than the 2022 margin, else 0. It says the names left off were large enough to have decided the seat. It does not show that they did."
+  "spread_over_margin": "1 if the spread figure is larger than the 2022 margin, else 0. It says the names left off were large enough to have decided the seat. It does not show that they did.",
+  "s1d_ge2024_entries": "Entries on the constituency's 2024 Lok Sabha roll without a deleted stamp, counted by s1d labs from its digitised copy of the Commission's rolls (version 2, 25 November 2026). Not an official count.",
+  "s1d_draft_entries": "Entries on the constituency's SIR draft roll of 6 January 2026, counted the same way. In every district these add to within a few names of the Chief Electoral Officer's draft.",
+  "s1d_fall_2024_to_draft": "The fall in the roll from the 2024 Lok Sabha roll to the draft, which is s1d_ge2024_entries less s1d_draft_entries.",
+  "s1d_ge2024_not_on_draft": "Entries of the 2024 roll whose card number's code appears nowhere on the state's draft. It is a different count from the names left off, which start from the roll of 27 October 2025, and it also counts card numbers misread on either roll.",
+  "left_off_shared_by_not_on_draft": "The district's names left off, the Chief Electoral Officer's count, times the constituency's share of the district's entries not found on the draft. The figure is an estimate.",
+  "fall_over_margin": "1 if the fall from the 2024 roll to the draft is larger than the 2022 margin, else 0.",
+  "not_on_draft_over_margin": "1 if the 2024 entries not found on the draft are larger than the 2022 margin, else 0.",
+  "shared_over_margin": "1 if the shared estimate of the names left off is larger than the 2022 margin, else 0. It says the names were large enough to have decided the seat. It does not show that they did."
  },
  "data/uttarakhand/raw/ac_draft_asdd.csv": {
   "level": "ac for a constituency, district for a district total, state for the grand total, as the table prints them.",
@@ -1230,5 +1238,21 @@
   "source": "The outlet whose report gives the date.",
   "url": "The address of the source.",
   "quote": "The words of the source that give the date or the period."
+ },
+ "data/uttarpradesh/raw/s1d_ac.csv": {
+  "ge2024_entries": "Entries on the 2024 Lok Sabha roll without a deleted stamp.",
+  "ge2024_stamped_deleted": "Boxes on the 2024 roll stamped deleted, with a letter code, still printed in the roll.",
+  "draft_entries": "Entries on the SIR draft roll of 6 January 2026.",
+  "draft_entries_in_added_parts": "Of those, entries in the 4,015 parts s1d labs added in version 2.",
+  "final_entries": "Entries on the SIR final roll of 10 April 2026 without a deleted stamp.",
+  "final_stamped_deleted": "Boxes on the final roll stamped deleted, with a letter code.",
+  "ge2024_not_on_draft": "Entries of the 2024 roll whose card number's code appears nowhere on the state's draft.",
+  "ge2024_not_on_draft_invalid_epic": "Of those, entries whose card number on the 2024 roll is in no valid form, most often a misreading."
+ },
+ "data/uttarpradesh/raw/s1d_age_sex.csv": {
+  "sex": "women, men, third gender, or not read, as printed on the 2024 roll.",
+  "age_band": "Age band, by the age printed on the 2024 roll, which counts it on 1 January 2024. Not read where no age could be read.",
+  "ge2024_entries": "Entries on the 2024 Lok Sabha roll without a deleted stamp, in the band.",
+  "ge2024_not_on_draft": "Of those, entries whose card number's code appears nowhere on the state's draft."
  }
 }

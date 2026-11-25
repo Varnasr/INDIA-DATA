@@ -80,9 +80,12 @@ def build():
         w.writerow([d[c] for c in cols])
     out['districts.csv'] = buf.getvalue()
     buf = io.StringIO(); w = csv.writer(buf, lineterminator='\n')
-    w.writerow(['ac', 'ac_name', 'district', 'electors_2022', 'winner_party_2022', 'alliance_2022', 'margin_2022', 'district_left_off_per_100', 'left_off_spread_by_electors', 'spread_over_margin'])
+    w.writerow(['ac', 'ac_name', 'district', 'electors_2022', 'winner_party_2022', 'alliance_2022', 'margin_2022', 'district_left_off_per_100', 'left_off_spread_by_electors', 'spread_over_margin',
+                's1d_ge2024_entries', 's1d_draft_entries', 's1d_fall_2024_to_draft', 's1d_ge2024_not_on_draft', 'left_off_shared_by_not_on_draft',
+                'fall_over_margin', 'not_on_draft_over_margin', 'shared_over_margin'])
     for r in A['margins']['seats']:
-        w.writerow([r['ac'], r['name'], r['district'], r['electors'], r['party'], r['alliance'], r['margin'], r['per_100'], r['est'], int(r['over'])])
+        w.writerow([r['ac'], r['name'], r['district'], r['electors'], r['party'], r['alliance'], r['margin'], r['per_100'], r['est'], int(r['over']),
+                    r['ge2024'], r['draft_s1d'], r['fall'], r['nf'], r['shared'], int(r['fall'] > r['margin']), int(r['nf'] > r['margin']), int(r['shared'] > r['margin'])])
     out['seats.csv'] = buf.getvalue()
     stale = []
     for name, text in out.items():
@@ -153,6 +156,7 @@ def analysis(D, S):
                'close40_over': sum(s['over'] for s in close), 'electors_2022': el22}
     # the state spread with no district split, as the All India margins page has it
     margins['state_even_over'] = sum(round(S['left_off'] * s['electors'] / el22) > s['margin'] for s in seats)
+    margins['measured'] = measured(seats, D, byd, acd)
     # ---- the rolls behind the revision: 2022 Assembly, 2024 Lok Sabha and the
     # projected population aged 18 and over on 1 March 2026
     ad = [r for r in csv.DictReader(open(os.path.join(IND, 'raw', 'adults_ls2024.csv'), encoding='utf-8')) if r['state'] == 'Uttar Pradesh'][0]
@@ -212,8 +216,86 @@ def analysis(D, S):
     sch = [x for x in pr['schedules'] if x['state'] == 'Uttar Pradesh'][0]['steps']
     done = {'label': 'As carried out', 'enum': ['2025-11-04', '2025-12-26'], 'draft': '2026-01-06', 'claims': ['2026-01-06', '2026-03-06'],
             'notice': ['2026-01-14', '2026-03-27'], 'final': '2026-04-10', 'src': 'https://www.instagram.com/p/DXEa2dkEuo7/'}
-    return {'margins': margins, 'rolls': rolls, 'factors': factors, 'reason_rho': reasons, 'sex': sex, 'urban': urban, 'notices': notices,
+    return {'margins': margins, 'age_sex': age_sex(S), 'rolls': rolls, 'factors': factors, 'reason_rho': reasons, 'sex': sex, 'urban': urban, 'notices': notices,
             'schedule': sch + [done]}
+
+
+# ---- s1d labs' digitised rolls (raw/s1d_ac.csv and raw/s1d_age_sex.csv,
+# counted by scripts/count_s1d_up.py from version 2 of 25 November 2026).
+# The draft is counted entry by entry, so its constituency figures are a
+# measurement. The roll of 27 October 2025 is not in the release, so the names
+# left off are not: the nearest measure is the 2024 roll's entries not found on
+# the draft, which also takes in names deleted before October 2025.
+S1D_DRAFT = 125556003      # s1d labs' README, version 2
+DRAFT_GAP = 10             # largest difference allowed in a district's draft, s1d against the CEO (4 on 25 November 2026)
+NF_RATIO = (1.0, 1.25)     # 2024 entries not found on the draft, for each name the CEO counts left off
+DC = {'url': 'https://diagramchasing.fun/2026/sir/uttar-pradesh', 'date': '2026-11-24', 'u35_ratio': 2, 'ratio_25_29': 2.3,
+      'match_from': 55, 'shifted_19_34_women': 15.0, 'shifted_19_34_men': 4.6}
+
+
+def measured(seats, D, byd, acd):
+    rows = list(csv.DictReader(open(os.path.join(RAW, 's1d_ac.csv'), encoding='utf-8')))
+    assert [int(r['ac']) for r in rows] == list(range(1, 404)), 's1d: 403 constituencies, 1 to 403'
+    X = {int(r['ac']): {k: int(v) for k, v in r.items()} for r in rows}
+    assert sum(x['draft_entries'] for x in X.values()) == S1D_DRAFT, 's1d: the draft adds to the README total'
+    assert all(x['ge2024_not_on_draft'] <= x['ge2024_entries'] and x['ge2024_not_on_draft_invalid_epic'] <= x['ge2024_not_on_draft'] for x in X.values())
+    dist = {}
+    for ac, x in X.items():
+        g = dist.setdefault(acd[ac], {'draft': 0, 'ge': 0, 'nf': 0})
+        g['draft'] += x['draft_entries']; g['ge'] += x['ge2024_entries']; g['nf'] += x['ge2024_not_on_draft']
+    gaps = {d: g['draft'] - byd[d]['draft'] for d, g in dist.items()}
+    assert max(abs(v) for v in gaps.values()) <= DRAFT_GAP, 's1d draft off the CEO\'s district draft: %s' % max(gaps.items(), key=lambda kv: abs(kv[1]))
+    ratios = {d: g['nf'] / byd[d]['total'] for d, g in dist.items()}
+    assert all(NF_RATIO[0] <= v <= NF_RATIO[1] for v in ratios.values()), 's1d not-found count strays from the CEO\'s names left off'
+    for s in seats:
+        x = X[s['ac']]; g = dist[s['district']]
+        s.update({'ge2024': x['ge2024_entries'], 'draft_s1d': x['draft_entries'], 'fall': x['ge2024_entries'] - x['draft_entries'],
+                  'nf': x['ge2024_not_on_draft'], 'nf_per_100': round(100 * x['ge2024_not_on_draft'] / x['ge2024_entries'], 4),
+                  'shared': round(byd[s['district']]['total'] * x['ge2024_not_on_draft'] / g['nf'])})
+    for d in D:
+        assert abs(sum(s['shared'] for s in seats if s['district'] == d['district']) - d['total']) < 40, 'the shares add back to the district'
+    nf = sum(x['ge2024_not_on_draft'] for x in X.values()); ge = sum(x['ge2024_entries'] for x in X.values())
+    al = {}
+    for a in ('NDA', 'SP alliance', 'Other'):
+        g = [s for s in seats if s['alliance'] == a]
+        al[a] = {'seats': len(g), 'fall_over': sum(s['fall'] > s['margin'] for s in g), 'nf_over': sum(s['nf'] > s['margin'] for s in g),
+                 'shared_over': sum(s['shared'] > s['margin'] for s in g)}
+    within = [s['nf_per_100'] for s in seats]
+    return {'ge2024': ge, 'draft': S1D_DRAFT, 'draft_ceo_gap': sum(d['draft'] for d in D) - S1D_DRAFT, 'draft_district_gap_max': max(abs(v) for v in gaps.values()),
+            'final': sum(x['final_entries'] for x in X.values()), 'nf': nf, 'nf_per_100': round(100 * nf / ge, 4),
+            'nf_invalid_epic': sum(x['ge2024_not_on_draft_invalid_epic'] for x in X.values()), 'fall': ge - S1D_DRAFT,
+            'ratio_min': round(min(ratios.values()), 4), 'ratio_max': round(max(ratios.values()), 4), 'ratio_state': round(nf / sum(d['total'] for d in D), 4),
+            'rho_district': rho([dist[d['district']]['nf'] / dist[d['district']]['ge'] for d in D], [d['per_100'] for d in D]),
+            'fall_over': sum(s['fall'] > s['margin'] for s in seats), 'nf_over': sum(s['nf'] > s['margin'] for s in seats),
+            'shared_over': sum(s['shared'] > s['margin'] for s in seats), 'alliances': al,
+            'nf_per_100_min': min(within), 'nf_per_100_max': max(within), 'nf_per_100_median': sorted(within)[201],
+            'under_5000_nf_over': sum(s['nf'] > s['margin'] for s in seats if s['margin'] < 5000),
+            'median_nf': sorted(s['nf'] for s in seats)[201], 'median_fall': sorted(s['fall'] for s in seats)[201]}
+
+
+def age_sex(S):
+    rows = list(csv.DictReader(open(os.path.join(RAW, 's1d_age_sex.csv'), encoding='utf-8')))
+    assert set(rows[0]) == {'sex', 'age_band', 'ge2024_entries', 'ge2024_not_on_draft'}, 's1d_age_sex: counts only'
+    X = list(csv.DictReader(open(os.path.join(RAW, 's1d_ac.csv'), encoding='utf-8')))
+    for k, j in (('ge2024_entries', 'ge2024_entries'), ('ge2024_not_on_draft', 'ge2024_not_on_draft')):
+        assert sum(int(r[k]) for r in rows) == sum(int(x[j]) for x in X), 's1d_age_sex %s does not add to the constituency table' % k
+    bands = [r['age_band'] for r in rows if r['sex'] == 'women' and r['age_band'] != 'not read']
+    assert bands == ['18 to 24', '25 to 29', '30 to 34', '35 to 44', '45 to 54', '55 to 64', '65 to 79', '80 and over'], 's1d_age_sex: bands'
+    T = {(r['sex'], r['age_band']): (int(r['ge2024_entries']), int(r['ge2024_not_on_draft'])) for r in rows}
+    assert len(T) == len(rows), 's1d_age_sex: one row per sex and band'
+    rate = lambda sx, bs: round(100 * sum(T[(sx, b)][1] for b in bs) / sum(T[(sx, b)][0] for b in bs), 4)
+    out = {'bands': [{'band': b, 'women': rate('women', [b]), 'men': rate('men', [b]), 'women_n': T[('women', b)][1], 'men_n': T[('men', b)][1],
+                      'ratio': round(rate('women', [b]) / rate('men', [b]), 4)} for b in bands]}
+    u35 = bands[:3]; o55 = bands[5:]
+    tg = [k for k in T if k[0] == 'third gender']
+    nr = sum(v[1] for k, v in T.items() if k[0] == 'not read' or k[1] == 'not read')
+    out.update({'women': rate('women', bands), 'men': rate('men', bands), 'u35_women': rate('women', u35), 'u35_men': rate('men', u35),
+                'u35_ratio': round(rate('women', u35) / rate('men', u35), 4), 'o55_women': rate('women', o55), 'o55_men': rate('men', o55),
+                'third': round(100 * sum(T[k][1] for k in tg) / sum(T[k][0] for k in tg), 4), 'third_n': sum(T[k][0] for k in tg),
+                'not_read': nr, 'dc': DC})
+    b2529 = [b for b in out['bands'] if b['band'] == '25 to 29'][0]
+    out['ratio_25_29'] = b2529['ratio']
+    return out
 
 
 if __name__ == '__main__':

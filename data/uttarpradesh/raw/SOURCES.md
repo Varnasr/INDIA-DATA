@@ -190,10 +190,63 @@ draft by reason (3,28,960 shifted is what the itemised figures leave of
 statistical report) against its 2022 margin, written to `seats.csv`, and the
 district circumstances read from the factors and urban pages' own files.
 
+## s1d_ac.csv and s1d_age_sex.csv (added 2026-11-25)
+
+Counts by assembly constituency, and by sex and age, from s1d labs' hashed
+Parquet copy of the Commission's Uttar Pradesh rolls, version 2 of 25 November
+2026: https://labs.s1d.me/up-eci, README https://data.s1d.me/eci-rolls/up/README.md.
+s1d labs read the Commission's roll PDFs by character recognition and replaced
+every name, relative's name, EPIC number and house number with a keyed hash.
+**It is not an official count**, and where it and the Commission's PDF differ
+the PDF is the authority. Its own hand check found every field right in
+96.77% of SIR records and 97.35% of the 2024 roll's records.
+
+- Downloaded on 2026-11-25: the 2024 Lok Sabha roll, the SIR draft and the SIR
+  final tar files, each streamed through `sha256sum` and extracted. All three
+  hashes equal SHA256SUMS.txt (recorded in `scripts/count_s1d_up.py`). The tar
+  files and the Parquet were kept outside the repository and deleted after
+  counting. The 2027 draft was not downloaded.
+- Counted by `scripts/count_s1d_up.py`, which needs duckdb and is run by hand.
+  Only counts leave it. No token, part, serial number or page is written.
+- An entry of the 2024 roll or the final roll is a row with no letter
+  (E, M, Q, R, S) in `status_code`, the README's mark of a box stamped
+  DELETED. An entry of the 2024 roll is "not on draft" when its `epic_token`
+  occurs nowhere on the state's draft (only 42,667 of the 3,20,12,991 not
+  found in their own constituency were found in another). A misread EPIC on
+  either roll counts as not found; 4,92,798 of the 3,19,70,324 not found carry
+  an EPIC in no valid form.
+- Version 1 lacked 4,015 parts and its README asked readers not to set its SIR
+  totals beside the Commission's. Version 2 adds them, and its draft holds
+  12,55,56,003 entries against the CEO's 12,55,56,025, 22 fewer. Summed to
+  districts (`ac_district.csv`), it is within 4 names of `asd_district.csv`'s
+  draft column in every one of the 75 districts. `build_uttarpradesh.py`
+  fails if any district is more than 10 off.
+- The release has no copy of the roll of 27 October 2025, so the names left
+  off cannot be counted by constituency from it. The 2024 entries not on the
+  draft come to 1.107 for each name the CEO counted left off (between 1.018
+  and 1.226 in each district, rank correlation of the district rates 0.98).
+  They include names deleted between the 2024 election and October 2025 and
+  electors given a new EPIC since 2024, and miss people added after the 2024
+  election. The build fails if a district's
+  ratio leaves 1.0 to 1.25.
+- The final roll counts 13,40,95,626 entries against the CEO's 13,39,84,792;
+  the README leaves '#' and digit codes as entries. Not used on any page.
+- Sex and age are as printed on the 2024 roll (age on 1 January 2024).
+- Diagram Chasing (Aman Bhargava, 24 November 2026,
+  https://diagramchasing.fun/2026/sir/uttar-pradesh, read in `data/india/raw/reads_research/round55.json`)
+  read the same rolls with the Commission's ASDDR lists: women under 35 left
+  off at twice the rate of men, 2.3 times at 25 to 29, matching from 55. Here,
+  from the 2024 roll: 1.90 times under 35, 2.18 at 25 to 29, within 0.8 of a
+  point in every band from 55. Its 15.0 against 4.6 per cent marked shifted at
+  19 to 34 rests on the reasons in the ASDDR lists, which the s1d tables do not
+  carry, and could not be checked.
+
 ## Not found
 
-- Any table by assembly constituency (roll before, draft, ASD, final). See
-  above.
+- Any official table by assembly constituency (roll before, draft, ASD,
+  final). See above. The ASD page (`ASD_SIR2026.aspx`) was tried again on
+  2026-11-25 with curl and Firecrawl (country IN): connection reset and
+  `ERR_TUNNEL_CONNECTION_FAILED`. The digitised counts above stand in.
 - The roll of 27.10.2025 by sex, at any level.
 - The names left off by sex below the state, or by age at any level. The
   state split by sex is the CEO's rounded figure in the press (above).

@@ -178,6 +178,29 @@ def _uttarpradesh():
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
 
 
+def _up_s1d():
+    # Uttar Pradesh's counts from s1d labs' digitised rolls: counts only, and
+    # every total reconciles with the README, the CEO's draft and each other.
+    R = os.path.join(ROOT, 'data', 'uttarpradesh', 'raw')
+    rd = lambda f: list(csv.DictReader(open(os.path.join(R, f), encoding='utf-8')))
+    ac, ag = rd('s1d_ac.csv'), rd('s1d_age_sex.csv')
+    bad = ('token', 'epic', 'part', 'serial', 'page', 'box', 'name', 'house', 'source')
+    for f, rows in (('s1d_ac.csv', ac), ('s1d_age_sex.csv', ag)):
+        cols = [c for c in rows[0] if c not in ('ge2024_not_on_draft_invalid_epic', 'draft_entries_in_added_parts')]
+        assert not [c for c in cols if any(b in c for b in bad)], '%s carries a row-level field' % f
+    assert [int(r['ac']) for r in ac] == list(range(1, 404)), 's1d_ac: 403 constituencies'
+    T = lambda rows, k: sum(int(r[k]) for r in rows)
+    assert T(ac, 'ge2024_entries') + T(ac, 'ge2024_stamped_deleted') == 156925128, 's1d_ac: the 2024 roll misses the README'
+    assert T(ac, 'draft_entries') == 125556003 and T(ac, 'final_entries') + T(ac, 'final_stamped_deleted') == 134800792, 's1d_ac: a SIR roll misses the README'
+    assert abs(T(ac, 'draft_entries') - 125556025) <= 100, 's1d_ac: the draft strays from the CEO\'s'
+    assert T(ag, 'ge2024_entries') == T(ac, 'ge2024_entries') and T(ag, 'ge2024_not_on_draft') == T(ac, 'ge2024_not_on_draft'), 's1d_age_sex does not add to s1d_ac'
+    bands = ['18 to 24', '25 to 29', '30 to 34', '35 to 44', '45 to 54', '55 to 64', '65 to 79', '80 and over']
+    for sx in ('women', 'men'):
+        assert [r['age_band'] for r in ag if r['sex'] == sx and r['age_band'] != 'not read'] == bands, 's1d_age_sex: %s bands' % sx
+    assert all(0 <= int(r['ge2024_not_on_draft']) <= int(r['ge2024_entries']) for r in ag)
+    assert all(int(r['ge2024_not_on_draft_invalid_epic']) <= int(r['ge2024_not_on_draft']) <= int(r['ge2024_entries']) for r in ac)
+
+
 def _maharashtra():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_maharashtra.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-300:]
@@ -817,6 +840,7 @@ for name, fn in [
     ('Lok Sabha electors current and within range', _electors),
     ('Rajasthan data matches its raw tables', _rajasthan),
     ('Uttar Pradesh data matches its raw tables', _uttarpradesh),
+    ('Uttar Pradesh counts from the digitised rolls are counts only and reconcile', _up_s1d),
     ('Maharashtra data matches its raw tables', _maharashtra),
     ('Gujarat data matches its raw tables, and the raw tables add up', _gujarat),
     ('Uttarakhand data matches its raw tables, and the raw tables add up', _uttarakhand),
