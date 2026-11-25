@@ -973,5 +973,922 @@
     "press": false
    }
   ]
- }
+ },
+ "age": {
+  "up": {
+   "bands": [
+    {
+     "band": "18 to 24",
+     "women": 23.9189,
+     "men": 11.087,
+     "ratio": 2.1574
+    },
+    {
+     "band": "25 to 29",
+     "women": 27.0038,
+     "men": 12.3811,
+     "ratio": 2.1811
+    },
+    {
+     "band": "30 to 34",
+     "women": 26.0546,
+     "men": 16.1878,
+     "ratio": 1.6095
+    },
+    {
+     "band": "35 to 44",
+     "women": 21.5474,
+     "men": 18.2038,
+     "ratio": 1.1837
+    },
+    {
+     "band": "45 to 54",
+     "women": 19.763,
+     "men": 19.1197,
+     "ratio": 1.0336
+    },
+    {
+     "band": "55 to 64",
+     "women": 20.3149,
+     "men": 20.6745,
+     "ratio": 0.9826
+    },
+    {
+     "band": "65 to 79",
+     "women": 28.9706,
+     "men": 28.9641,
+     "ratio": 1.0002
+    },
+    {
+     "band": "80 and over",
+     "women": 48.1855,
+     "men": 47.3912,
+     "ratio": 1.0168
+    }
+   ],
+   "women": 23.7364,
+   "men": 18.2351,
+   "u35_women": 25.8355,
+   "u35_men": 13.6208,
+   "u35_ratio": 1.8968,
+   "o55_women": 25.8174,
+   "o55_men": 25.3675,
+   "ratio_25_29": 2.1811,
+   "third": 35.7919,
+   "third_n": 6630,
+   "s1d": {
+    "url": "https://labs.s1d.me/up-eci",
+    "version": 2,
+    "date": "2026-11-25",
+    "check_2026": 96.77,
+    "check_2024": 97.35
+   }
+  },
+  "dc_up": {
+   "url": "https://diagramchasing.fun/2026/sir/uttar-pradesh",
+   "date": "2026-11-24",
+   "outlet": "Diagram Chasing",
+   "authors": "Aman Bhargava",
+   "added_18_24_gap_lakh": 5.9,
+   "ratio_2024": 878,
+   "ratio_final": 836,
+   "ratio_fall_under_25": 122,
+   "tg_pct": 38,
+   "all_pct": 23,
+   "tg_seats": 316,
+   "seats": 386,
+   "q_women_pct": 62,
+   "u35_ratio": 2,
+   "ratio_25_29": 2.3,
+   "match_from": 55,
+   "shifted_19_34_women": 15.0,
+   "shifted_19_34_men": 4.6
+  },
+  "dc_ka": {
+   "url": "https://diagramchasing.fun/2026/karnataka-sir",
+   "date": "2026-11-12",
+   "outlet": "Diagram Chasing",
+   "authors": "Aman Bhargava",
+   "old_back": 206,
+   "old_lakh": 8.9,
+   "back_about": 14900,
+   "found_jan2025": 10548148
+  },
+  "bihar": {
+   "bands": [
+    "18-24",
+    "25-29",
+    "30-39",
+    "40-49",
+    "50-59",
+    "60-69",
+    "70-79",
+    "80+"
+   ],
+   "all": [
+    468649,
+    665083,
+    1465877,
+    1206696,
+    876213,
+    766218,
+    695156,
+    415734
+   ],
+   "all_women": [
+    287607,
+    439941,
+    848597,
+    625505,
+    444651,
+    398552,
+    366416,
+    228707
+   ],
+   "dead": [
+    17847,
+    44406,
+    161705,
+    243927,
+    346829,
+    492300,
+    559862,
+    365710
+   ],
+   "shifted": [
+    246909,
+    384857,
+    787458,
+    604705,
+    345435,
+    175342,
+    82390,
+    28804
+   ],
+   "absent": [
+    100222,
+    129438,
+    286161,
+    213912,
+    120879,
+    65882,
+    37358,
+    16229
+   ],
+   "already_enrolled": [
+    103671,
+    106382,
+    230553,
+    144152,
+    63070,
+    32694,
+    15546,
+    4991
+   ],
+   "dead_women": [
+    9032,
+    22851,
+    78152,
+    117249,
+    178544,
+    259518,
+    295319,
+    199921
+   ],
+   "shifted_women": [
+    170933,
+    288020,
+    507697,
+    326505,
+    171672,
+    86929,
+    42209,
+    16155
+   ],
+   "absent_women": [
+    55706,
+    74827,
+    154960,
+    109341,
+    60671,
+    34450,
+    20425,
+    9612
+   ],
+   "already_enrolled_women": [
+    51936,
+    54243,
+    107788,
+    72410,
+    33764,
+    17655,
+    8463,
+    3019
+   ]
+  }
+ },
+ "ratio": {
+  "rows": [
+   {
+    "state": "Andaman and Nicobar Islands",
+    "draft": {
+     "how": "press",
+     "women": 121476,
+     "men": 124911,
+     "firm": true
+    },
+    "final": {
+     "how": "press",
+     "women": 127622,
+     "men": 130415,
+     "firm": true
+    },
+    "ssr": {
+     "how": "official",
+     "women": 129149,
+     "men": 131829,
+     "date": "2026-11-17",
+     "firm": true
+    }
+   },
+   {
+    "state": "Andhra Pradesh",
+    "before": {
+     "how": "official",
+     "women": 21227527,
+     "men": 20396737,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 18928492,
+     "men": 18206954,
+     "firm": true
+    }
+   },
+   {
+    "state": "Arunachal Pradesh",
+    "before": {
+     "how": "official",
+     "women": 452089,
+     "men": 435414,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 364079,
+     "men": 353965,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 352315,
+     "men": 343709,
+     "firm": true
+    }
+   },
+   {
+    "state": "Assam",
+    "final": {
+     "how": "the final roll of Assam's special revision, 10 February 2026, as the press reported it",
+     "women": 12475583,
+     "men": 12482213,
+     "firm": true
+    },
+    "ssr": {
+     "how": "press",
+     "women": 12588939,
+     "men": 12587650,
+     "date": "2026-11-12",
+     "firm": true
+    },
+    "special": true
+   },
+   {
+    "state": "Bihar",
+    "before": {
+     "how": "the draft in Format 4B plus the names on the phase 1 lists",
+     "women": 37791314,
+     "men": 41172025,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 34151338,
+     "men": 38252592,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 34982828,
+     "men": 39207804,
+     "firm": true
+    },
+    "ssr": {
+     "how": "press",
+     "women": 35671129,
+     "men": 39916747,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "Chandigarh",
+    "before": {
+     "how": "press",
+     "women": 252677,
+     "men": 263724,
+     "firm": true
+    },
+    "final": {
+     "how": "press",
+     "women": 225671,
+     "men": 234516,
+     "firm": true
+    }
+   },
+   {
+    "state": "Chhattisgarh",
+    "ssr": {
+     "how": "press",
+     "women": 9531721,
+     "men": 9484635,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "Dadra and Nagar Haveli and Daman and Diu",
+    "final": {
+     "how": "press",
+     "women": 150024,
+     "men": 145809,
+     "firm": true
+    }
+   },
+   {
+    "state": "Delhi",
+    "before": {
+     "how": "press",
+     "women": 6798142,
+     "men": 7711132,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 4764137,
+     "men": 4988993,
+     "firm": true
+    }
+   },
+   {
+    "state": "Goa",
+    "before": {
+     "how": "official",
+     "women": 611168,
+     "men": 573853,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 561679,
+     "men": 523304,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 546121,
+     "men": 511436,
+     "firm": true
+    },
+    "ssr": {
+     "how": "press",
+     "women": 562932,
+     "men": 526441,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "Gujarat",
+    "before": {
+     "how": "official, rounded",
+     "women_pct": 48.82,
+     "firm": true
+    }
+   },
+   {
+    "state": "Karnataka",
+    "draft": {
+     "how": "official, general electors",
+     "women": 22473864,
+     "men": 22159240,
+     "firm": true
+    },
+    "final": {
+     "how": "press",
+     "women": 22912355,
+     "men": 22540493,
+     "firm": true
+    },
+    "before": {
+     "how": "official",
+     "women_pct": 50.22,
+     "firm": true
+    }
+   },
+   {
+    "state": "Kerala",
+    "before": {
+     "how": "the January 2025 roll",
+     "women": 14369092,
+     "men": 13441490,
+     "firm": false
+    },
+    "draft": {
+     "how": "official",
+     "women": 13058731,
+     "men": 12383341,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 13827319,
+     "men": 13126048,
+     "firm": true
+    },
+    "ssr": {
+     "how": "official",
+     "women": 14038718,
+     "men": 13321267,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "Lakshadweep",
+    "draft": {
+     "how": "official",
+     "women": 27810,
+     "men": 28574,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 28385,
+     "men": 29222,
+     "firm": true
+    },
+    "ssr": {
+     "how": "official",
+     "women": 28428,
+     "men": 29273,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "Madhya Pradesh",
+    "before": {
+     "how": "press",
+     "women": 28013362,
+     "men": 29391548,
+     "firm": true
+    },
+    "draft": {
+     "how": "press",
+     "women": 25648831,
+     "men": 27482233,
+     "firm": true
+    },
+    "ssr": {
+     "how": "press",
+     "women": 26513547,
+     "men": 28285144,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "Maharashtra",
+    "draft": {
+     "how": "official",
+     "women": 37572570,
+     "men": 39589905,
+     "firm": true
+    }
+   },
+   {
+    "state": "Manipur",
+    "before": {
+     "how": "official",
+     "women": 1082459,
+     "men": 1010317,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 993660,
+     "men": 940446,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 1006962,
+     "men": 953350,
+     "firm": true
+    },
+    "ssr": {
+     "how": "press",
+     "women": 1024735,
+     "men": 969298,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "Meghalaya",
+    "before": {
+     "how": "official",
+     "women": 1190898,
+     "men": 1158740,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 1116199,
+     "men": 1053039,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 1124216,
+     "men": 1059743,
+     "firm": true
+    }
+   },
+   {
+    "state": "Mizoram",
+    "draft": {
+     "how": "official",
+     "women": 429881,
+     "men": 399025,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 432689,
+     "men": 403179,
+     "firm": true
+    }
+   },
+   {
+    "state": "Odisha",
+    "before": {
+     "how": "press",
+     "women": 16511223,
+     "men": 16885283,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 15365083,
+     "men": 16019176,
+     "firm": true
+    },
+    "final": {
+     "how": "press",
+     "women": 15499661,
+     "men": 16130319,
+     "firm": true
+    }
+   },
+   {
+    "state": "Puducherry",
+    "draft": {
+     "how": "official",
+     "women": 486673,
+     "men": 431301,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 500477,
+     "men": 443595,
+     "firm": true
+    },
+    "ssr": {
+     "how": "official",
+     "women": 507297,
+     "men": 449554,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "Punjab",
+    "before": {
+     "how": "press",
+     "women": 10283478,
+     "men": 11176866,
+     "firm": true
+    },
+    "final": {
+     "how": "press",
+     "women": 9724195,
+     "men": 10376026,
+     "firm": true
+    }
+   },
+   {
+    "state": "Rajasthan",
+    "draft": {
+     "how": "official",
+     "women": 24033633,
+     "men": 26437691,
+     "firm": true
+    },
+    "final": {
+     "how": "official, general electors",
+     "women": 24562048,
+     "men": 26957881,
+     "firm": true
+    },
+    "ssr": {
+     "how": "press",
+     "women": 25142052,
+     "men": 27524780,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "Sikkim",
+    "before": {
+     "how": "official",
+     "women": 235444,
+     "men": 235572,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 214785,
+     "men": 218507,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 205931,
+     "men": 212534,
+     "firm": true
+    }
+   },
+   {
+    "state": "Tamil Nadu",
+    "draft": {
+     "how": "official",
+     "women": 27706332,
+     "men": 26663233,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 28960838,
+     "men": 27738925,
+     "firm": true
+    },
+    "before": {
+     "how": "a press analysis that names no source",
+     "women_pct": 51.02,
+     "firm": false
+    },
+    "ssr": {
+     "how": "press",
+     "women": 29534734,
+     "men": 28203992,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "Uttar Pradesh",
+    "before": {
+     "how": "the Chief Electoral Officer's ratio as the press reported it",
+     "ratio": 877,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 56708747,
+     "men": 68843159,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 60909525,
+     "men": 73071061,
+     "firm": true
+    },
+    "ssr": {
+     "how": "press",
+     "women": 62006353,
+     "men": 73858510,
+     "date": "2026-11-17",
+     "firm": true
+    }
+   },
+   {
+    "state": "Uttarakhand",
+    "draft": {
+     "how": "official",
+     "women": 3409954,
+     "men": 3723614,
+     "firm": true
+    },
+    "final": {
+     "how": "official",
+     "women": 3421036,
+     "men": 3737701,
+     "firm": true
+    },
+    "ssr": {
+     "how": "press",
+     "women": 3484447,
+     "men": 3793373,
+     "date": "2026-11-12",
+     "firm": true
+    }
+   },
+   {
+    "state": "West Bengal",
+    "before": {
+     "how": "official",
+     "women": 37731887,
+     "men": 38903865,
+     "firm": true
+    },
+    "draft": {
+     "how": "official",
+     "women": 34615837,
+     "men": 36199391,
+     "firm": true
+    }
+   }
+  ],
+  "counts": {
+   "before": 18,
+   "draft": 22,
+   "final": 21,
+   "ssr": 14
+  },
+  "none": [
+   "Haryana",
+   "Jharkhand",
+   "Nagaland",
+   "Telangana",
+   "Tripura"
+  ],
+  "ssr_missing": [
+   {
+    "state": "Arunachal Pradesh",
+    "due": "2026-11-30",
+    "total_only": false
+   },
+   {
+    "state": "Chandigarh",
+    "due": "2026-11-30",
+    "total_only": false
+   },
+   {
+    "state": "Dadra and Nagar Haveli and Daman and Diu",
+    "due": "2026-11-30",
+    "total_only": false
+   },
+   {
+    "state": "Gujarat",
+    "due": "2026-11-27",
+    "total_only": false
+   },
+   {
+    "state": "Karnataka",
+    "due": "2026-12-01",
+    "total_only": false
+   },
+   {
+    "state": "Meghalaya",
+    "due": "2026-12-01",
+    "total_only": false
+   },
+   {
+    "state": "Mizoram",
+    "due": "2026-11-30",
+    "total_only": false
+   },
+   {
+    "state": "Odisha",
+    "due": "2026-11-30",
+    "total_only": false
+   },
+   {
+    "state": "Punjab",
+    "due": "2026-11-12",
+    "total_only": true
+   },
+   {
+    "state": "Sikkim",
+    "due": "2026-11-30",
+    "total_only": false
+   },
+   {
+    "state": "West Bengal",
+    "due": "2026-11-23",
+    "total_only": false
+   }
+  ],
+  "all_three": [
+   "Arunachal Pradesh",
+   "Bihar",
+   "Goa",
+   "Karnataka",
+   "Kerala",
+   "Manipur",
+   "Meghalaya",
+   "Odisha",
+   "Sikkim",
+   "Tamil Nadu",
+   "Uttar Pradesh"
+  ]
+ },
+ "reports": [
+  {
+   "id": "form7-105",
+   "date": "2026-11-25",
+   "state": "Maharashtra",
+   "outlet": "The Times of India",
+   "headline": "Missing links: Voter revision leaves Maharashtra sex workers in limbo",
+   "url": "https://timesofindia.indiatimes.com/city/pune/missing-links-voter-revision-leaves-maharashtra-sex-workers-in-limbo/articleshow/136141105.cms",
+   "kind": "press",
+   "note": "sex workers in Maharashtra said they could not link a parent's name to the 2002 roll, and the registration officer for Kasba Peth described the documents officials were accepting instead."
+  },
+  {
+   "id": "up-52",
+   "date": "2026-11-24",
+   "state": "Uttar Pradesh",
+   "outlet": "Hindustan Times",
+   "headline": "10.39 lakh Form 6 applications during 7 days of SSR in UP",
+   "url": "https://www.hindustantimes.com/cities/lucknow-news/1039-lakh-form-6-applications-during-7-days-of-ssr-in-up-101795548638125.html",
+   "kind": "press",
+   "note": "the district administration of Gautam Buddh Nagar plans to involve ASHA and anganwadi workers, auxiliary nurse midwives and Sakhi groups to find eligible women and help them apply on Form 6 in the summary revision."
+  },
+  {
+   "id": "up-43",
+   "date": "2026-11-17",
+   "state": "Uttar Pradesh",
+   "outlet": "Live Hindustan",
+   "headline": "यूपी में अब भी ढाई करोड़ से ज्यादा वोटरों का नाम गायब, एसएसआर की ड्राफ्ट मतदाता सूची जारी",
+   "url": "https://www.livehindustan.com/uttar-pradesh/over-25-million-voters-still-missing-from-electoral-rolls-in-up-draft-electoral-roll-for-ssr-released-201794899959712.html",
+   "kind": "press",
+   "note": "Uttar Pradesh's Chief Electoral Officer set the summary revision's draft, for women and for men, against the projected adult population of each."
+  },
+  {
+   "id": "up-35",
+   "date": "2026-11-04",
+   "state": "Uttar Pradesh",
+   "outlet": "The Times of India",
+   "headline": "UP has 1.21cr fewer women voters than men, CEO orders special enrolment drive",
+   "url": "https://timesofindia.indiatimes.com/city/lucknow/up-has-1-21cr-fewer-women-voters-than-men-ceo-orders-special-enrolment-drive/articleshow/135550725.cms",
+   "kind": "press",
+   "note": "Uttar Pradesh's Chief Electoral Officer ordered a special drive to find eligible women who are not on the roll and help them apply on Form 6 in the summary revision."
+  },
+  {
+   "id": "soft-56",
+   "date": "2026-11-03",
+   "state": "Telangana",
+   "outlet": "The Times of India",
+   "headline": "Voters marked absent despite signed forms: Forum; seeks SIR rollback",
+   "url": "https://timesofindia.indiatimes.com/city/hyderabad/voters-marked-absent-despite-signed-forms-forum-seeks-sir-rollback/articleshow/135510849.cms",
+   "kind": "press",
+   "note": "a member of the jury at the Telangana Voter Rights Forum's public hearings spoke of the difficulty married women have in linking themselves to their parents."
+  },
+  {
+   "id": "process-13",
+   "date": "2026-09-24",
+   "state": "India",
+   "outlet": "The Hindu",
+   "headline": "The many categories of SIR’s logical discrepancy list keep voters on toes",
+   "url": "https://www.thehindu.com/news/national/the-many-categories-of-sirs-logical-discrepancy-list-keep-voters-on-toes/article71504625.ece",
+   "kind": "press",
+   "note": "the rules for logical discrepancies include a marital mapping mismatch, where a woman is linked to her father on the old roll and to her husband on the new one."
+  },
+  {
+   "id": "process-28",
+   "date": "2025-11-22",
+   "state": "Gujarat",
+   "outlet": "The Indian Express",
+   "headline": "4 deaths in a week: 2 woman assistant BLOs die of ‘heart attack’ in Gujarat amid concerns on ‘SIR work pressure’",
+   "url": "https://indianexpress.com/article/cities/ahmedabad/blo-deaths-gujarat-sir-work-pressure-10380699/",
+   "kind": "press",
+   "note": "women working as assistant booth level officers died in Tapi and Vadodara districts of Gujarat, and the husband of one said she had asked to be excused from the duty, which the Vadodara Collector disputed."
+  }
+ ]
 }

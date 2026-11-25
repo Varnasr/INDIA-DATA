@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 468,
-  "bytes": 15573918
+  "bytes": 15592685
  },
  "files": [
   {
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 131006,
+   "bytes": 131239,
    "keys": [
     "note",
     "entries"
@@ -4884,7 +4884,7 @@
    "path": "data/india/women.json",
    "description": "Every count by sex the site holds, state and district. The same table as data/india/women.csv, as JSON",
    "format": "JSON",
-   "bytes": 24401,
+   "bytes": 42935,
    "keys": [
     "summary",
     "states",
@@ -4892,7 +4892,10 @@
     "after",
     "after_added_only",
     "bihar",
-    "third"
+    "third",
+    "age",
+    "ratio",
+    "reports"
    ],
    "licence": "CC BY 4.0"
   },
