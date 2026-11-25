@@ -214,6 +214,28 @@ covers only part of the whole (the Civic Research Group's portal counts) carries
 approx `part` and is read as a floor, so it is never flagged for being lower. Nothing is corrected: a new figure is a new row, read from its
 source, and the page shows each with its flag. `check_data.py` runs `--check`.
 
+## Court cases
+
+`india/courts/` sets the court cases on the revision out matter by matter, from
+`data/india/courts.json`, which `scripts/build_courts.py` writes from
+`data/india/disputes.json` (confirmed entries only) and its listings. The
+matters are `MATTERS` in that script. An entry joins a matter by a case number
+read from its case field, by a phrase the matter's entries use for themselves,
+or by a link the script accepts only when one entry cites the other before the
+same court. A second number joins a matter only through an entry named in
+`JOINED` that writes it beside the first. Anything looser is listed as related
+and never counted in the matter, and an entry naming an unknown number beside a
+matter's number fails the build, so a new entry that connects two cases is
+decided by a person. Everything else with a case field is under "Other cases",
+by court. Matter titles carry their own translations in the script.
+A matter that holds separate cases on one subject (West Bengal's appellate
+tribunals, the Karnataka High Court petitions against the Form 7 FIRs) carries
+a `note`, with translations, that the page prints beside it. A case title is
+shown only where the lead petition's parties are public, so the batch on the
+Commission's functioning has none.
+`check_data.py` runs it with `--check`. After adding disputes entries, run
+`build_disputes.py`, then `build_courts.py`.
+
 ## Writing
 
 Plain, full sentences with facts in them. No em dashes, no "X, not Y" turns, no

@@ -668,16 +668,34 @@
    "/hyderabad/method/"
   ]
  },
+ "<a href=\"{href}\">Every entry in this case</a> is on the page of court cases.": {
+  "kind": "script",
+  "pages": [
+   "/india/disputes/"
+  ]
+ },
  "<a href=\"{href}\">It is under Next in court, above.</a>": {
   "kind": "script",
   "pages": [
    "/india/disputes/"
   ]
  },
+ "<a href=\"{href}\">The page on West Bengal's appellate tribunals</a> sets their figures side by side, each with its source.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "<a href=\"{href}\">Where the revision stands</a> gives the stage each state has reached.": {
   "kind": "script",
   "pages": [
    "/india/disputes/"
+  ]
+ },
+ "<a href=\"{src}\">{outlet}</a> gives the date.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "<a href=\"{src}\">{outlet}</a> gives the date. <a href=\"{entry}\">A related entry is below.</a>": {
@@ -1630,6 +1648,12 @@
    "/india/flags/"
   ]
  },
+ "A matter is one case, or a batch of petitions an entry says are heard together. An entry is put in it when it names the matter's case number or says it belongs to it. <a href=\"../courts/\">The page of court cases</a> lists each matter with every entry about it in date order. Where a matter holds separate cases on one subject, a note in the matter says so.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
  "A name on the roll before the revision whose enumeration form did not come back was left off the draft. A name taken off the roll by an officer's order after the draft, on an objection in Form 7 or on the officer's own motion, is deleted, and that order can be appealed. <a href=\"{u}\">Words we use</a> sets out the difference.": {
   "kind": "script",
   "pages": [
@@ -1731,6 +1755,12 @@
   "pages": [
    "/assets/faq/karnataka.js",
    "/assets/faq/tamilnadu.js"
+  ]
+ },
+ "A related entry has a date ahead: {d}.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "A relationship across districts says nothing about why any one name was left off or deleted.": {
@@ -1907,6 +1937,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -2140,6 +2171,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -2275,6 +2307,7 @@
  "About {date}": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -2678,6 +2711,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -2821,6 +2855,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -2852,6 +2887,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -3033,6 +3069,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -3278,6 +3315,12 @@
    "/"
   ]
  },
+ "An entry that names the case numbers of two matters, or that cites an entry in a matter without saying it is the same case, is listed under related and is left out of the matter's count. The parties and bodies listed for a matter are those its entries name. A private person who brought a case is described by role.": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "An event is listed once its date has been read in the organiser's own announcement or in a named report, and read a second time. Events organised by political parties are listed and marked as such. Organisers can <a href=\"../../share/\">send their announcements through the sharing form</a>.": {
   "kind": "script",
   "pages": [
@@ -3397,6 +3440,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -3642,6 +3686,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -3906,6 +3951,7 @@
  "April": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -3913,6 +3959,12 @@
   "kind": "script",
   "pages": [
    "/assets/faq/bihar.js"
+  ]
+ },
+ "Are the next dates on the page of court cases certain?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
   ]
  },
  "Arunachal Pradesh 2026": {
@@ -4010,6 +4062,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -4276,6 +4329,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -4486,6 +4540,7 @@
  "August": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -4669,6 +4724,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -5154,6 +5210,12 @@
    "/bihar/results/"
   ]
  },
+ "Case numbers: {list}.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "Case studies": {
   "kind": "markup",
   "pages": [
@@ -5249,6 +5311,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -5385,6 +5448,12 @@
   "kind": "markup",
   "pages": [
    "/india/cases/"
+  ]
+ },
+ "Case title, as <a href=\"{href}\">an entry</a> gives it: {t}.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "Cases in the heaviest single slot": {
@@ -5593,6 +5662,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -5820,6 +5890,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -6163,6 +6234,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -6441,6 +6513,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -6668,6 +6741,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -7046,6 +7120,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -7306,6 +7381,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -7656,6 +7732,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -7883,6 +7960,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -8114,6 +8192,240 @@
    "/bihar/method/"
   ]
  },
+ "Court cases": {
+  "kind": "markup",
+  "pages": [
+   "/",
+   "/about-the-data/",
+   "/alerts/thanks/",
+   "/andaman/",
+   "/andaman/faq/",
+   "/andaman/method/",
+   "/andaman/now/",
+   "/andhrapradesh/",
+   "/andhrapradesh/district/alluri-sitharama-raju/",
+   "/andhrapradesh/faq/",
+   "/andhrapradesh/method/",
+   "/andhrapradesh/now/",
+   "/arunachal/",
+   "/arunachal/faq/",
+   "/arunachal/method/",
+   "/arunachal/now/",
+   "/assam/",
+   "/assam/district/bajali/",
+   "/assam/faq/",
+   "/assam/method/",
+   "/assam/seat/1/",
+   "/bihar/",
+   "/bihar/border/",
+   "/bihar/district/araria/",
+   "/bihar/districts/",
+   "/bihar/explorer/",
+   "/bihar/faq/",
+   "/bihar/method/",
+   "/bihar/now/",
+   "/bihar/people/",
+   "/bihar/report/",
+   "/bihar/results/",
+   "/bihar/seat/1/",
+   "/chandigarh/",
+   "/chandigarh/faq/",
+   "/chandigarh/method/",
+   "/chandigarh/now/",
+   "/chhattisgarh/",
+   "/chhattisgarh/district/balod/",
+   "/chhattisgarh/faq/",
+   "/chhattisgarh/method/",
+   "/chhattisgarh/now/",
+   "/delhi/",
+   "/delhi/district/central-north/",
+   "/delhi/faq/",
+   "/delhi/method/",
+   "/delhi/now/",
+   "/delhi/seat/1/",
+   "/dnhdd/",
+   "/dnhdd/faq/",
+   "/dnhdd/method/",
+   "/dnhdd/now/",
+   "/downloads/",
+   "/feedback/",
+   "/feedback/thanks/",
+   "/goa/",
+   "/goa/faq/",
+   "/goa/method/",
+   "/goa/now/",
+   "/guide/",
+   "/guide/deep-dive/",
+   "/gujarat/",
+   "/gujarat/district/ahmedabad/",
+   "/gujarat/elections/",
+   "/gujarat/faq/",
+   "/gujarat/method/",
+   "/gujarat/now/",
+   "/gujarat/seat/1/",
+   "/haryana/",
+   "/haryana/faq/",
+   "/haryana/method/",
+   "/haryana/now/",
+   "/help/",
+   "/hyderabad/",
+   "/hyderabad/explorer/",
+   "/hyderabad/faq/",
+   "/hyderabad/hearings/",
+   "/hyderabad/method/",
+   "/hyderabad/parts/",
+   "/hyderabad/people/",
+   "/hyderabad/report/",
+   "/hyderabad/telangana/",
+   "/hyderabad/telangana/district/adilabad/",
+   "/hyderabad/telangana/now/",
+   "/india/",
+   "/india/adults/",
+   "/india/brief/",
+   "/india/cases/",
+   "/india/cities/",
+   "/india/compare-seats/",
+   "/india/compare/",
+   "/india/constituencies/",
+   "/india/courts/",
+   "/india/disputes/",
+   "/india/ecinet/",
+   "/india/events/",
+   "/india/factors/",
+   "/india/faq/",
+   "/india/flags/",
+   "/india/method/",
+   "/india/nrc/",
+   "/india/numbers/",
+   "/india/process/",
+   "/india/progress/",
+   "/india/reading/",
+   "/india/report/",
+   "/india/rti/",
+   "/india/summary-revision/",
+   "/india/urban/",
+   "/india/uts/",
+   "/india/women/",
+   "/jharkhand/",
+   "/jharkhand/faq/",
+   "/jharkhand/method/",
+   "/jharkhand/now/",
+   "/karnataka/",
+   "/karnataka/district/b-b-m-p-central/",
+   "/karnataka/faq/",
+   "/karnataka/method/",
+   "/karnataka/now/",
+   "/kerala/",
+   "/kerala/district/alappuzha/",
+   "/kerala/elections/",
+   "/kerala/faq/",
+   "/kerala/method/",
+   "/kerala/now/",
+   "/kerala/seat/1/",
+   "/lakshadweep/",
+   "/lakshadweep/faq/",
+   "/lakshadweep/method/",
+   "/lakshadweep/now/",
+   "/madhyapradesh/",
+   "/madhyapradesh/faq/",
+   "/madhyapradesh/method/",
+   "/madhyapradesh/now/",
+   "/maharashtra/",
+   "/maharashtra/district/ahmednagar/",
+   "/maharashtra/faq/",
+   "/maharashtra/method/",
+   "/maharashtra/now/",
+   "/maharashtra/seat/1/",
+   "/manipur/",
+   "/manipur/district/bishnupur/",
+   "/manipur/faq/",
+   "/manipur/method/",
+   "/manipur/now/",
+   "/manipur/seat/1/",
+   "/meghalaya/",
+   "/meghalaya/district/east-garo-hills/",
+   "/meghalaya/faq/",
+   "/meghalaya/method/",
+   "/meghalaya/now/",
+   "/meghalaya/seat/1/",
+   "/mizoram/",
+   "/mizoram/district/aizawl/",
+   "/mizoram/faq/",
+   "/mizoram/method/",
+   "/mizoram/now/",
+   "/nagaland/",
+   "/nagaland/faq/",
+   "/nagaland/method/",
+   "/nagaland/now/",
+   "/odisha/",
+   "/odisha/district/angul/",
+   "/odisha/faq/",
+   "/odisha/method/",
+   "/odisha/now/",
+   "/odisha/seat/1/",
+   "/press/",
+   "/puducherry/",
+   "/puducherry/faq/",
+   "/puducherry/method/",
+   "/puducherry/now/",
+   "/punjab/",
+   "/punjab/faq/",
+   "/punjab/method/",
+   "/punjab/now/",
+   "/rajasthan/",
+   "/rajasthan/district/ajmer/",
+   "/rajasthan/faq/",
+   "/rajasthan/method/",
+   "/rajasthan/now/",
+   "/rajasthan/seat/1/",
+   "/share/",
+   "/share/thanks/",
+   "/sikkim/",
+   "/sikkim/faq/",
+   "/sikkim/method/",
+   "/sikkim/now/",
+   "/support/",
+   "/support/thanks/",
+   "/tamilnadu/",
+   "/tamilnadu/district/ariyalur/",
+   "/tamilnadu/elections/",
+   "/tamilnadu/faq/",
+   "/tamilnadu/method/",
+   "/tamilnadu/now/",
+   "/tamilnadu/seat/1/",
+   "/terms/",
+   "/tripura/",
+   "/tripura/faq/",
+   "/tripura/method/",
+   "/tripura/now/",
+   "/updates/",
+   "/uttarakhand/",
+   "/uttarakhand/district/almora/",
+   "/uttarakhand/faq/",
+   "/uttarakhand/method/",
+   "/uttarakhand/now/",
+   "/uttarakhand/seat/1/",
+   "/uttarpradesh/",
+   "/uttarpradesh/district/agra/",
+   "/uttarpradesh/faq/",
+   "/uttarpradesh/method/",
+   "/uttarpradesh/now/",
+   "/westbengal/",
+   "/westbengal/district/alipurduar/",
+   "/westbengal/elections/",
+   "/westbengal/faq/",
+   "/westbengal/method/",
+   "/westbengal/now/",
+   "/westbengal/seat/1/",
+   "/westbengal/tribunals/"
+  ]
+ },
+ "Court cases, All India": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "Ctrl K": {
   "kind": "markup",
   "pages": [
@@ -8209,6 +8521,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -8436,6 +8749,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -8682,6 +8996,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -8912,6 +9227,7 @@
  "December": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -9064,6 +9380,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -9489,6 +9806,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -9770,6 +10088,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -10273,6 +10592,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -10562,6 +10882,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -10886,6 +11207,12 @@
    "/hyderabad/method/"
   ]
  },
+ "Each entry is what the court's own document or the named report says. An entry is in a matter only where an entry says it is the same case. Nothing here says what anyone intended.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "Each estimate assumes something the lists cannot show. People marked shifted may be voting where they now live, people who moved may vote less than their neighbours, and an exit poll is a survey with its own error. The exit poll is the {src}. It found 6% of Muslims voting NDA and 79% Mahagathbandhan, women 45% and 40%, and men 41% and 42%. Seats where the winner or runner-up is outside the two alliances ({k} of them) get the break-even figure only, because both sources count every other party together.": {
   "kind": "script",
   "pages": [
@@ -10928,6 +11255,12 @@
    "/bihar/people/"
   ]
  },
+ "Each is the date a court order or a named report gives. A court can change its list, and a date worked out from a period the court gave, such as two weeks, is marked as approximate.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
  "Each is what an officer wrote down, and nobody has checked it.": {
   "kind": "script",
   "pages": [
@@ -10950,6 +11283,18 @@
   "kind": "markup",
   "pages": [
    "/tamilnadu/"
+  ]
+ },
+ "Each matter": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
+ "Each matter with its court, the number of entries about it and the next date listed in it, where a source gives one.": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "Each name on the phase 1 lists has the reason the officer gave for leaving it off the draft. That reason is what the officer wrote down, and nobody checked it. The four reasons are counted as written and none is regrouped. The counts agree with the booth list in all 77,837 booths, and the counts of women and men agree with the Chief Electoral Officer's phase 1 figures in every constituency. The phase 2 lists give no reasons.": {
@@ -11192,6 +11537,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -11621,6 +11967,12 @@
    "/tamilnadu/"
   ]
  },
+ "Entries about work the courts ordered, before no single court": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "Equal share": {
   "kind": "script",
   "pages": [
@@ -11729,6 +12081,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -11966,6 +12319,12 @@
   "kind": "markup",
   "pages": [
    "/hyderabad/explorer/"
+  ]
+ },
+ "Every entry in date order ({k})": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "Every figure": {
@@ -12300,6 +12659,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -12602,6 +12962,7 @@
  "February": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -12700,6 +13061,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -13044,6 +13406,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -13304,6 +13667,7 @@
    "/india/cities/",
    "/india/compare-seats/",
    "/india/compare/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -13567,6 +13931,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -13824,6 +14189,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -14172,6 +14538,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -14455,6 +14822,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -14736,6 +15104,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -14987,6 +15356,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -15943,6 +16313,12 @@
    "/bihar/results/"
   ]
  },
+ "How the entries are grouped": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "How the figures add up": {
   "kind": "markup",
   "pages": [
@@ -16071,6 +16447,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -16353,6 +16730,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -16781,6 +17159,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -17323,6 +17702,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -17649,6 +18029,7 @@
  "January": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -17753,6 +18134,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -17918,12 +18300,14 @@
  "July": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
  "June": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -18028,6 +18412,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -18323,6 +18708,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -18611,6 +18997,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -19064,6 +19451,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -19427,6 +19815,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -19660,6 +20049,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -19905,6 +20295,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -20150,6 +20541,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -20417,6 +20809,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -20610,6 +21003,7 @@
  "March": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -20674,6 +21068,7 @@
  "May": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -20796,6 +21191,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -21070,6 +21466,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -21506,6 +21903,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -22066,6 +22464,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -22341,6 +22740,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -23049,6 +23449,12 @@
    "/assets/sir.js"
   ]
  },
+ "Next date listed: {d}.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "Next in court": {
   "kind": "markup",
   "pages": [
@@ -23065,6 +23471,12 @@
   "kind": "script",
   "pages": [
    "/india/disputes/"
+  ]
+ },
+ "Next in this matter": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "Next section": {
@@ -23209,6 +23621,18 @@
    "/assets/now.js"
   ]
  },
+ "No entry in this matter gives a case number.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
+ "No entry says it is the same case. It may cite an entry in the matter, or name the case numbers of two matters, as a report of an affidavit can when outlets disagree about which petition it was filed in. Such an entry is listed beside the matter and left out of its count.": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
  "No final roll has been found yet.": {
   "kind": "script",
   "pages": [
@@ -23225,6 +23649,12 @@
   "kind": "script",
   "pages": [
    "/india/disputes/"
+  ]
+ },
+ "No hearing or deadline ahead has been dated in this matter.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "No hearing or deadline ahead has been dated.": {
@@ -23273,6 +23703,12 @@
   "kind": "script",
   "pages": [
    "/assets/sir.js"
+  ]
+ },
+ "No matter has a hearing or a deadline dated ahead.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "No name, EPIC number or address of any elector appears anywhere on this site. There are no accounts and no advertising, and the site sets no cookies.": {
@@ -23581,6 +24017,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -23808,6 +24245,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -24090,6 +24528,7 @@
  "November": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -24102,6 +24541,7 @@
  "October": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -24200,6 +24640,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -24533,6 +24974,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -24893,6 +25335,12 @@
    "/karnataka/"
   ]
  },
+ "Other cases in the courts": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "Other districts": {
   "kind": "script",
   "pages": [
@@ -25021,6 +25469,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -25283,6 +25732,12 @@
    "/hyderabad/explorer/"
   ]
  },
+ "Parties and bodies the entries name: {list}.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "Parties and candidates can compare the names left off in each constituency with its winning margin, and follow the Form 7 disputes.": {
   "kind": "markup",
   "pages": [
@@ -25512,6 +25967,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/people/"
+  ]
+ },
+ "Petitions and applications that no entry ties to a matter above, by court, newest first. Entries that describe their case in the same words are kept together.": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "Phase": {
@@ -25752,6 +26213,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -26083,6 +26545,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -26328,6 +26791,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -26573,6 +27037,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -26819,6 +27284,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -26993,6 +27459,7 @@
    "/india/",
    "/india/cases/",
    "/india/compare-seats/",
+   "/india/courts/",
    "/india/flags/",
    "/india/method/",
    "/india/numbers/",
@@ -27566,6 +28033,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -27799,6 +28267,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -28093,6 +28562,12 @@
    "/hyderabad/"
   ]
  },
+ "Related entries outside this case ({k})": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "Religion": {
   "kind": "script",
   "pages": [
@@ -28213,6 +28688,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -28371,6 +28847,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -28622,6 +29099,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -29003,6 +29481,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -29285,6 +29764,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -29549,6 +30029,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -29998,6 +30479,7 @@
  "September": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -30126,6 +30608,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -30552,6 +31035,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -30803,6 +31287,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -31125,6 +31610,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -31371,6 +31857,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -31741,6 +32228,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -32035,6 +32523,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -32310,6 +32799,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -32571,6 +33061,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -32804,6 +33295,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -33517,6 +34009,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -33762,6 +34255,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -33995,6 +34489,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -34358,6 +34853,18 @@
    "/"
   ]
  },
+ "The court cases on the Special Intensive Revision, matter by matter: the case numbers, the parties and bodies named, every entry in date order with its source, the next date listed and the latest order or report.": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
+ "The court cases on the revision, each matter with every entry about it in date order. An entry is in a matter when it names the matter's case number or says it belongs to it. An entry that is only connected to a matter is listed under related. Every entry links to its place on <a href=\"../disputes/\">the page of protests and disputes</a>, which quotes its source.": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "The court cases, Assembly resolutions, protests, Form 7 objections, changes to the Commission's software and instructions given without a written order during the Special Intensive Revision, each with its source and the Commission's reply where one was reported.": {
   "kind": "markup",
   "pages": [
@@ -34603,6 +35110,18 @@
   "kind": "markup",
   "pages": [
    "/alerts/thanks/"
+  ]
+ },
+ "The entries are in English and keep their sources' words. A document is the court's own order or record, and a report is a newspaper's account.": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
+ "The entry on the disputes page": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "The entry on the protests and disputes page": {
@@ -35058,6 +35577,18 @@
    "/assets/now.js"
   ]
  },
+ "The latest court document": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
+ "The latest entry": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "The letter lets claims with 1 April, 1 July or 1 October 2027 as the qualifying date be made in advance.": {
   "kind": "script",
   "pages": [
@@ -35215,6 +35746,18 @@
   "kind": "script",
   "pages": [
    "/assets/sir.js"
+  ]
+ },
+ "The matter with the most entries is {t}, with {e}.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
+ "The matters": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "The menu icons are Sargam Icons by Abhimanyu Rana, used under the MIT License.": {
@@ -35413,6 +35956,12 @@
   "kind": "markup",
   "pages": [
    "/"
+  ]
+ },
+ "The page of <a href=\"../courts/\">court cases</a> sets every entry about each case in date order, with its case numbers and the next date listed in it.": {
+  "kind": "markup",
+  "pages": [
+   "/india/disputes/"
   ]
  },
  "The pages can be read in English, Hindi, Urdu, Telugu, Tamil and Bengali from the menu at the top. The translations were made by machine. Where they differ, the English page is correct.": {
@@ -36087,6 +36636,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/ecinet/",
    "/india/events/",
    "/india/factors/",
@@ -36517,6 +37067,18 @@
   "kind": "script",
   "pages": [
    "/assets/faq/karnataka.js"
+  ]
+ },
+ "This entry cites an entry in this matter, or is cited by one, and no entry says they are the same case.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
+ "This entry names the case numbers of this matter and of another.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "This is a judgment of the High Court, given in the case of one family. It binds registration officers in Maharashtra, Goa, and Dadra and Nagar Haveli and Daman and Diu, which the Bombay High Court covers. In other states an elector can cite it, and registration officers there are not bound by it. The Election Commission asked the court to stay it for at least two weeks so that it could challenge the judgment in the Supreme Court, and the court refused.": {
@@ -36987,6 +37549,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -37149,6 +37712,12 @@
   "kind": "markup",
   "pages": [
    "/bihar/method/"
+  ]
+ },
+ "Two entries are put in one matter only where an entry says they are the same case, or that one is heard with, tagged with or connected to the other. A case number joins a matter only through an entry that names it beside a number the matter already has. An entry with no case number is in a matter when it describes itself in the words other entries in the matter use, or when it cites an entry in the matter, or is cited by one, and both are before the same court.": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "Two figures are marked where they cannot both be true. That is the same count given differently for the same date, or from the same document where one of the two is undated, the number of tribunals given differently within a week, or a count of appeals filed or decided, or of judges who resigned, that is lower than an earlier one. A count that its source says covers only part of the appeals is read as a floor. Each is kept as its source wrote it.": {
@@ -37443,6 +38012,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -37726,6 +38296,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -37973,6 +38544,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -38398,6 +38970,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -38669,6 +39242,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -39115,6 +39689,12 @@
   ]
  },
  "What is a logical discrepancy?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
+ "What is a matter on the page of court cases?": {
   "kind": "script",
   "pages": [
    "/assets/faq/india.js"
@@ -39579,6 +40159,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -40024,6 +40605,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -40166,6 +40748,12 @@
   "kind": "script",
   "pages": [
    "/assets/sir.js"
+  ]
+ },
+ "Where a matter holds separate cases on one subject, a note in the matter says so.": {
+  "kind": "markup",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "Where a reason was given, {dead} were entered as dead, {sao} as shifted, absent or other, and {dup} as enrolled more than once. States reported their reasons in different ways, and the method page sets out how each was counted.": {
@@ -40646,6 +41234,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -41199,6 +41788,12 @@
    "/assets/faq/india.js"
   ]
  },
+ "Why is an entry listed as related and not in the case?": {
+  "kind": "script",
+  "pages": [
+   "/assets/faq/india.js"
+  ]
+ },
  "Why is every relationship here called rough?": {
   "kind": "script",
   "pages": [
@@ -41465,6 +42060,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -42392,6 +42988,12 @@
    "/bihar/people/"
   ]
  },
+ "document": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "drafts due and not found": {
   "kind": "script",
   "pages": [
@@ -42432,6 +43034,12 @@
   "kind": "script",
   "pages": [
    "/"
+  ]
+ },
+ "entries in them": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "fall in the roll for every 100 electors": {
@@ -42572,6 +43180,7 @@
    "/india/compare-seats/",
    "/india/compare/",
    "/india/constituencies/",
+   "/india/courts/",
    "/india/disputes/",
    "/india/ecinet/",
    "/india/events/",
@@ -42765,6 +43374,12 @@
    "/kerala/",
    "/tamilnadu/",
    "/westbengal/"
+  ]
+ },
+ "matters": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "median hearing cases per part per slot": {
@@ -43026,6 +43641,12 @@
    "/india/disputes/"
   ]
  },
+ "other cases": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "over {x}": {
   "kind": "script",
   "pages": [
@@ -43102,6 +43723,12 @@
   "kind": "script",
   "pages": [
    "/bihar/districts/"
+  ]
+ },
+ "report": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "rules reported": {
@@ -43242,6 +43869,12 @@
   "kind": "script",
   "pages": [
    "/india/"
+  ]
+ },
+ "with a date ahead": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "women on the roll before the revision": {
@@ -43464,6 +44097,12 @@
    "/hyderabad/"
   ]
  },
+ "{court}. {e} entries, from {a} to {b}.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "{c} ({a} in phase 2, {b} in phase 3)": {
   "kind": "script",
   "pages": [
@@ -43476,15 +44115,23 @@
    "/india/method/"
   ]
  },
+ "{c} other cases before {k} courts are listed apart, because no entry ties them to a matter.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
+  ]
+ },
  "{date}, listed tentatively": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
  "{date}, {court}": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -43597,6 +44244,7 @@
  "{d} {m} {y}": {
   "kind": "script",
   "pages": [
+   "/india/courts/",
    "/india/disputes/"
   ]
  },
@@ -43689,6 +44337,12 @@
   "kind": "script",
   "pages": [
    "/india/disputes/"
+  ]
+ },
+ "{k} of the matters have a hearing or a deadline dated ahead.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "{k} of the {t} rules your answers could test match what you entered.": {
@@ -43806,6 +44460,12 @@
   "kind": "script",
   "pages": [
    "/hyderabad/"
+  ]
+ },
+ "{m} matters in the courts on the revision, holding {e} entries dated from {a} to {b}.": {
+  "kind": "script",
+  "pages": [
+   "/india/courts/"
   ]
  },
  "{name} {q1} to {q3}": {

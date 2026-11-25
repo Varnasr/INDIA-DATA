@@ -1,5 +1,5 @@
-Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json')]).then(function (r) {
-  var D = r[0], geo = r[1], n = SIR.n, esc = SIR.esc, C = D.counts, k = 0;
+Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json'), SIR.json('data/india/courts.json')]).then(function (r) {
+  var D = r[0], geo = r[1], CM = {}, n = SIR.n, esc = SIR.esc, C = D.counts, k = 0;
 
   // Next in court: hearings and deadlines from today in India onwards, in
   // the reader's language, each linked to its source and to its entry below
@@ -10,6 +10,7 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
   var when = { exact: function (s) { return s; }, approximate: function (s) { return L('About {date}', { date: s }); }, tentative: function (s) { return L('{date}, listed tentatively', { date: s }); } };
   (function () {
     var box = document.getElementById('nextCourt');
+    r[2].matters.forEach(function (m) { m.items.forEach(function (i) { CM[i] = m.id; }); });
     var ahead = (D.listings || []).filter(function (x) { return x.date >= today; });
     if (!ahead.length) { box.innerHTML = '<li><p>' + L('No hearing or deadline ahead has been dated.') + '</p></li>'; return; }
     box.innerHTML = ahead.map(function (x) {
@@ -17,7 +18,8 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
       var txt = function (s) { return own && lang !== 'en' ? '<span lang="en" dir="ltr">' + esc(s) + '</span>' : esc(s); };
       return '<li id="nc-' + esc(x.id) + '"><p><b>' + L('{date}, {court}', { date: (when[x.date_kind] || when.exact)(day(x.date)), court: txt(f.court) }) + '</b></p>' +
         '<p>' + txt(f.matter) + '</p><p>' + txt(f.due) + '</p>' +
-        '<p class="nsrc">' + L('<a href="{src}">{outlet}</a> gives the date. <a href="{entry}">A related entry is below.</a>', { src: esc(x.source_url), outlet: esc(x.source_name), entry: '#d-' + esc(x.disputes_id) }) + '</p></li>';
+        '<p class="nsrc">' + L('<a href="{src}">{outlet}</a> gives the date. <a href="{entry}">A related entry is below.</a>', { src: esc(x.source_url), outlet: esc(x.source_name), entry: '#d-' + esc(x.disputes_id) }) +
+        (CM[x.disputes_id] ? ' ' + L('<a href="{href}">Every entry in this case</a> is on the page of court cases.', { href: '../courts/#m-' + esc(CM[x.disputes_id]) }) : '') + '</p></li>';
     }).join('');
   })();
   var INTRO = {
