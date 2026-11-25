@@ -1087,7 +1087,7 @@
      "translation": "In UP, the Muslim voters there were before the SIR have risen by 1.65% after the SIR. … I am talking about those 1 crore 27 lakh Hindu voters whose names are in Uttar Pradesh's panchayat election, but whose names are not on the voter list of the Election Commission of India. How have they gone missing? Who was behind this? 66 lakh are those voters. 55 lakh are those Hindu voters who receive the government's welfare schemes, but their names are missing from the voter list. There are 4.5 lakh such voters of 18 and 19 years whose names are missing from the voter list.",
      "relies_on": "His own account in the interview. Asked how he got the figure, he said the rolls from before and after the SIR are with everyone (सबके पास है), and later that the people he means are on the panchayat roll, in the welfare schemes and were on the roll before. He names no document and does not say how a voter's religion was found. 66, 55 and 4.5 lakh make 1.255 crore, 1.5 lakh short of 1.27 crore, and he does not say whether the groups overlap. His words put the 1.65% as a rise in the Muslim voters there were before the SIR, and he gives no count of them before or after. The Indian Express gives the same figures (romanised Hindi for the 1.65% line, English for the rest); ThePrint has 1.63 per cent. Disputes item up-34 records the same remarks.",
      "kind": "count from official data",
-     "check": "No published figure counts the roll by religion, so neither the 1.27 crore Hindu voters nor the 1.65% can be checked. The site's figures are for the Assembly roll as a whole: 15,44,30,092 before the revision and 13,39,84,792 on the final roll of 10 April 2026 (summary.json, roll_before, final), a fall of 2,04,45,300 (data/india/states.csv, Uttar Pradesh, net_fall). After the draft 70,69,810 Form 6 claims to add names were reported (summary.json, form6, press), with no split by age. The gap between the panchayat rolls and the Assembly roll is in The Times of India of 5 November (disputes up-33): the Chief Electoral Officer put the rural electors on the Assembly roll at about 10.20 crore, about 2.38 crore fewer than the 12.58 crore on the rural panchayat rolls of 10 June 2026, and by the paper's own totals the panchayat and urban local body rolls (April 2023) held about 3.45 crore more than the Assembly roll of 7 October 2026. He told the paper the difference cannot be taken as eligible people left off, since the rolls may hold dead electors, people who have moved and duplicate entries. He has directed officers to match the rolls (up-31, up-32).",
+     "check": "No published figure counts the roll by religion, so neither the 1.27 crore Hindu voters nor the 1.65% can be checked. The site's figures are for the Assembly roll as a whole: 15,44,30,092 before the revision and 13,39,84,792 on the final roll of 10 April 2026 (summary.json, roll_before, final), a fall of 2,04,45,300 (data/india/states.csv, Uttar Pradesh, net_fall). After the draft 70,69,810 Form 6 claims to add names were reported (summary.json, form6, press), with no split by age. The gap between the panchayat rolls and the Assembly roll is in The Times of India of 5 November (disputes up-33): the Chief Electoral Officer put the rural electors on the Assembly roll at about 10.20 crore, about 2.38 crore fewer than the 12.58 crore on the rural panchayat rolls of 10 June 2026, and by the paper's own totals the panchayat and urban local body rolls (April 2023) held about 3.45 crore more than the Assembly roll of 7 October 2026. He told the paper the difference cannot be taken as eligible people left off, since the rolls may hold dead electors, people who have moved and duplicate entries. He has directed officers to match the rolls (up-31, up-32). Added 25 November 2026: the Chief Electoral Officer's answer of 17 November (disputes up-43, read twice, The Indian Express read again with curl, isAccessibleForFree true) and the Independent Commission's letter of 21 November (up-46, read twice). On 25 November LiveLaw's page marks the story premium (window.isPremiumContent 1, isAccessibleForFree False, the whole body inside a hidden paywall block), so only its headline and description are relied on. Its description does not name the chair. The letter, the Lawyers' Association for Constitution and Justice Madan B. Lokur as chair rest on Deccan Herald (Ashish Tripathi, datePublished 2026-11-21T12:29:28+05:30, isAccessibleForFree true, read in full), with The Hindu's free headline, standfirst and opening.",
      "site_counts": "Roll before 15,44,30,092 and final 13,39,84,792 (summary.json roll_before, final); net fall 2,04,45,300 (states.csv net_fall); Form 6 after the draft 70,69,810, press (summary.json form6). Panchayat and local body rolls against the Assembly roll, 12.58 against 10.20 crore rural, 2.38 crore apart, as the CEO gave them, and 3.45 crore in all by the paper's totals (disputes.json up-33, The Times of India, 5 November 2026).",
      "site_stops": "The site holds no count of electors by religion and none of the panchayat rolls themselves. The two rolls are kept by different bodies on different dates, and nothing published says how many people on the panchayat rolls and off the Assembly roll are eligible for it or on a roll elsewhere.",
      "timestamp": "35:42 to 36:51"
@@ -2454,6 +2454,149 @@
      "site_counts": "Gujarat 17.4, Uttar Pradesh 17.1, West Bengal 16.3 per cent short of projected adults (states.json).",
      "site_stops": "The rolls record names and reasons, never purpose.",
      "site_files": "data/india/states.json"
+    }
+   ]
+  },
+  {
+   "id": "samajwadi-party",
+   "name": "The Samajwadi Party and Akhilesh Yadav",
+   "role": "The Samajwadi Party, in opposition in Uttar Pradesh. Its president is Akhilesh Yadav, a former Chief Minister of the state, and its state president is Shyamlal Pal.",
+   "role_note": "ANI of 12 October 2026 calls Akhilesh Yadav 'Samajwadi Party (SP) chief' and 'the former Uttar Pradesh Chief Minister'. PTI of 23 November 2026 calls Shyamlal Pal 'SP state president' (Hindustan Times spells it Shyam Lal Pal). Both items are already on the site, up-13 and up-50, each read twice.",
+   "site_files": "data/uttarpradesh/summary.json (left_off, final, reasons.multiple, shares.multiple), data/uttarpradesh/analysis.json (notices.removed_after.total, notices.removed_after.multiple), data/india/ssr_draft.json (Uttar Pradesh draft of 17 November 2026: electors, base)",
+   "pieces": [
+    {
+     "id": "sp-ani-oct12",
+     "title": "\"Fraud across the 403 seats\": Akhilesh Yadav threatens to release proof of SIR fraud",
+     "outlet": "ANI",
+     "date": "2026-10-12",
+     "url": "https://www.aninews.in/news/national/politics/fraud-across-the-403-seats-akhilesh-yadav-threatens-to-release-proof-of-sir-fraud20261012121505/",
+     "how_read": "Fetched with curl on 25 November 2026 (a plain 'Mozilla/5.0' User-Agent got 403, a browser User-Agent got 200) and read in full from the page text. Lucknow, October 12 (ANI). The quote is verbatim, his words to reporters. The rest of the report is on Ram Manohar Lohia's death anniversary and the opposition's march in Delhi and is not used. Disputes item up-13 carries the same quote and was read twice (second reading: 'Opened ANI (12 Oct 2026). Quote verbatim.')."
+    },
+    {
+     "id": "sp-pti-nov23",
+     "title": "Samajwadi Party claims to have identified 1 lakh duplicate voters in UP, demands cash reward",
+     "outlet": "ThePrint (PTI)",
+     "date": "2026-11-23",
+     "url": "https://theprint.in/india/samajwadi-party-claims-to-have-identified-1-lakh-duplicate-voters-in-up-demands-cash-reward/3106829/",
+     "how_read": "ThePrint answered 403 to curl on 25 November 2026 and was read in full through Firecrawl the same day (datePublished 2026-11-23T19:50:45+05:30, PTI, Lucknow, no subscriber marker). The quote is PTI's sentence, verbatim. Hindustan Times (HT Correspondent, datePublished 2026-11-23T20:48:19+05:30, isAccessibleForFree True) was read in full from the JSON-LD articleBody with curl the same day and agrees on the memorandum, 1,73,730 polling booths, 403 constituencies, about 13.58 crore electors and the announcement of 11 November. Its examples name electors and are not carried. Disputes item up-50 carries the same quote and was read twice."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "sp-ani-oct12",
+     "quote": "There are lakhs of fake votes in Uttar Pradesh. A single person has as many as ten votes registered. We have identified such fake votes in several assembly constituencies... we will release the list.",
+     "relies_on": "His own account to reporters in Lucknow. He names no constituency, gives no count beyond lakhs and says the party will release the list.",
+     "kind": "count from official data",
+     "check": "No published figure counts duplicate entries on the final roll of 10 April 2026. At the draft of 6 January 2026, 25,47,207 of the 2,88,74,067 names left off were entered as enrolled more than once (summary.json reasons.multiple, left_off), 8.82 per cent (shares.multiple). After the draft 8,15,996 names were deleted, 79,076 of them as enrolled more than once, as reported (analysis.json notices.removed_after).",
+     "site_counts": "Left off 2,88,74,067, enrolled more than once 25,47,207 (8.82 per cent), final roll 13,39,84,792 (summary.json). Deleted after the draft 8,15,996, of which 79,076 enrolled more than once, press (analysis.json).",
+     "site_stops": "No count of duplicates on the final roll has been published.",
+     "timestamp": null
+    },
+    {
+     "piece": "sp-pti-nov23",
+     "quote": "The party claimed its verification exercise had uncovered around one lakh duplicate entries in the draft electoral rolls (mother roll) published on November 17, 2026.",
+     "relies_on": "The party's own reading of the draft roll of the summary revision, in a memorandum to the Chief Electoral Officer signed by its state president. It counts as duplicates entries with the same name, relative's name, address, age and other details and different EPIC numbers.",
+     "kind": "count from official data",
+     "check": "The draft of 17 November holds 13,58,68,905 electors (ssr_draft.json, from PTI), 18,84,113 more than the final roll of 10 April. The party's total of electors matches it. Around one lakh is about 7 in every 10,000 entries. The party's count is not checked and its list is not public. The Chief Electoral Officer's announcement of a reward on 11 November was not found (up-50).",
+     "site_counts": "Draft of 17 November 13,58,68,905; final roll of 10 April 13,39,84,792 (ssr_draft.json). Enrolled more than once among the names left off the intensive revision's draft, 25,47,207 (summary.json).",
+     "site_stops": "The Commission has published no count of duplicates on the draft of 17 November.",
+     "timestamp": null
+    }
+   ]
+  },
+  {
+   "id": "sabar-institute",
+   "name": "The Sabar Institute",
+   "role": "A research institute in Kolkata. Its preliminary report on Uttar Pradesh is by Sabir Ahamed, Ashin Chakraborty and Souptik Halder.",
+   "role_note": "The report's cover names the three authors and its last page gives the institute's address in Kolkata. The institute's earlier reports are on the reading list (reads_research/sabar.json).",
+   "site_files": "data/uttarpradesh/summary.json (roll_before, left_off, per_100, reasons, shares), data/uttarpradesh/analysis.json (margins.n, margins.over, margins.measured.fall_over, nf_over, shared_over), data/uttarpradesh/seats.csv",
+   "pieces": [
+    {
+     "id": "sab-up-report",
+     "title": "Uttar Pradesh SIR-2026 Draft Roll Analysis: Preliminary Report",
+     "outlet": "Sabar Institute (report)",
+     "date": "2026-11-20",
+     "url": "https://sabarinstitute.org/research-and-publications/uttar-pradesh-sir-2026-draft-roll-analysis-preliminary-report-or-sir-uttar-pradesh-preliminary-report-2026",
+     "length": "420 pages",
+     "how_read": "The page answered 200 with curl on 25 November 2026. The institute's CMS record (admin.sabarinstitute.org/api/research-and-publications) gives the title 'Uttar Pradesh SIR-2026 Draft Roll Analysis: Preliminary Report (or SIR Uttar Pradesh: Preliminary Report 2026)', published 2026-11-20T12:26:28Z, and links the report (admin.sabarinstitute.org/api/media/file/SIR_Uttar_Pradesh_Preliminary_Report_SABAR.pdf, 9,72,746 bytes, 420 pages, PDF title 'SIR Uttar Pradesh — Preliminary Report', authors on the cover Sabir Ahamed, Ashin Chakraborty and Souptik Halder). The PDF was read with pdftotext, the executive summary, the key insights, Deletions & Coverage, State-wide Summary, Alliance, Turnout & Margin, Findings in Numbers and the conclusion in full. Both quotations are verbatim from the executive summary. The report counts 28,871,423 names on the ASD lists of all 403 constituencies, 2,644 short of the Chief Electoral Officer's 28,874,067, from the part-wise reports, with 21 of 177,512 parts having no published report, and divides by the roll of 27 October 2025 (154,430,092). Its seat pages use the 2022 roll. Its reasons are permanently shifted 44.9, untraceable or absent 30.2, already enrolled 8.8 and death 16.0 per cent, so it has no 'others' and its absent share is the official untraceable or absent and others together (27.54 and 2.68 in summary.json). It also counts by sex and estimates religion from names, which the report says is no ECI record. Neither is carried. The image Prashant Kanojia posted on X on 20 November, which disputes item up-48 describes, is a redrawing of pages 4, 5 and 9 that prints 2,89,71,423 where the PDF has 28,871,423 (2,88,71,423), and the panel quotes the PDF. Disputes item up-48, read twice, carries the 359 of 403 and the 16 in every 100 from the institute's post and that image."
+    },
+    {
+     "id": "sab-x-nov20",
+     "title": "NEW from SABAR Institute (thread on Uttar Pradesh's draft roll)",
+     "outlet": "Sabar Institute on X (@SabarInstitute_)",
+     "date": "2026-11-20",
+     "url": "https://x.com/SabarInstitute_/status/2123801037501030440",
+     "how_read": "Read through api.fxtwitter.com on 25 November 2026, created Fri Nov 20 15:30:00 +0000 2026. It gives 2.89 crore, 18.7%, 16%, 84% and 359 of 403, as the report does."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "sab-up-report",
+     "quote": "Non-death deletions exceed the 2022 winning margin in 359 of 403 seats.",
+     "relies_on": "The institute's count of the ASD lists for each seat, the names not marked dead set against each seat's 2022 winning margin.",
+     "kind": "inference about effect on results",
+     "check": "The Chief Electoral Officer's count by constituency could not be reached. By s1d labs' counts of the digitised rolls, the fall from the 2024 Lok Sabha roll to the draft exceeds the 2022 margin in 371 of 403 seats and the 2024 entries not found on the draft in 383 (analysis.json margins.measured.fall_over, nf_over). The estimates give 378 (district names left off shared by entries not found, shared_over) and 377 (shared by 2022 electors, margins.over). Each takes in the dead.",
+     "site_counts": "fall_over 371, nf_over 383, shared_over 378, over 377, n 403 (analysis.json margins).",
+     "site_stops": "A count above the margin cannot say that any result changed.",
+     "timestamp": null
+    },
+    {
+     "piece": "sab-up-report",
+     "quote": "Deaths account for only 16.0% of deletions. The other 24,248,090 people (84%) were marked permanently shifted, untraceable or absent, or already enrolled elsewhere.",
+     "relies_on": "The reason recorded against each name on the ASD lists, as the institute counted them.",
+     "kind": "count from official data",
+     "check": "summary.json reasons: dead 46,23,796 of 2,88,74,067, 16.01 per cent. Shifted 44.95, untraceable or absent 27.54, enrolled more than once 8.82, others 2.68 (shares). The institute's 30.2 for untraceable or absent equals the official untraceable or absent and others together, 30.22.",
+     "site_counts": "Reasons and shares at the draft (summary.json).",
+     "site_stops": "A reason is what an officer wrote down, and nobody checked it.",
+     "timestamp": null
+    }
+   ]
+  },
+  {
+   "id": "human-rights-watch",
+   "name": "Human Rights Watch",
+   "role": "An international human rights organisation.",
+   "role_note": "The report and its news release are on the reading list (reads_research/round53.json, read twice).",
+   "site_files": "data/india/states.json (total.removed, total.states, after_draft.removed, after_draft.states), data/india/women.json (summary.states, summary.over)",
+   "pieces": [
+    {
+     "id": "hrw-report",
+     "title": "“So What’s This Democracy We’re Talking About?”: Modi’s Authoritarian Playbook in India",
+     "outlet": "Human Rights Watch (report)",
+     "date": "2026-11-23",
+     "url": "https://www.hrw.org/report/2026/11/23/so-whats-this-democracy-were-talking-about/modis-authoritarian-playbook-in-india",
+     "length": "95 pages",
+     "how_read": "The report page (datePublished 2026-11-23T20:30:00-0500) and the PDF (hrw.org/sites/default/files/media_2026/11/india1126web.pdf) fetched again with curl on 25 November 2026, the PDF read with pdftotext. The quotation is verbatim from the summary. The section on the Election Commission says the same in other words ('by October 2026, the process had removed over 130 million names from voter lists'), and its endnote 207 cites Human Rights Watch's release of 28 October 2026. The report gives no count by state or by step."
+    },
+    {
+     "id": "hrw-release",
+     "title": "India: Modi Rule Has Weakened Democratic Institutions",
+     "outlet": "Human Rights Watch (news release)",
+     "date": "2026-11-23",
+     "url": "https://www.hrw.org/news/2026/11/23/india-modi-rule-has-weakened-democratic-institutions",
+     "how_read": "Fetched again with curl on 25 November 2026 and read in full. The quotation is verbatim."
+    }
+   ],
+   "claims": [
+    {
+     "piece": "hrw-report",
+     "quote": "By October 2026, it had deleted over 130 million names —disproportionately excluding women, people living in poverty, religious minorities, particularly Muslims, and other marginalized communities —in a deeply flawed, arbitrary, and opaque process.",
+     "relies_on": "Human Rights Watch's own finding, with its earlier release of 28 October 2026 as the source of the figure.",
+     "kind": "count from official data",
+     "check": "states.json: 13,39,03,307 names left off the drafts in 31 states and union territories (total.removed, total.states), 13.39 crore. 35,62,366 deleted after the draft in 22 states, as reported (after_draft). Of 15 states with the names left off by sex, women were a larger share of them than of the roll in 10 (women.json summary). No roll records religion, and the Uttar Pradesh CEO said on 17 November that the Commission's database holds no details of religion or caste (up-43).",
+     "site_counts": "total.removed, total.states, after_draft.removed, after_draft.states (states.json); summary.states 15, summary.over 10 (women.json).",
+     "site_stops": "Names left off a draft are a different step from deletion after it. No count by religion exists.",
+     "timestamp": null
+    },
+    {
+     "piece": "hrw-release",
+     "quote": "The commission is currently facing a massive crisis of credibility amid concerns over its ability to function independent of the executive.",
+     "relies_on": "Human Rights Watch's own judgement.",
+     "kind": "framing",
+     "check": "A judgement on the Commission, which no figure can test.",
+     "site_counts": "",
+     "site_stops": "",
+     "timestamp": null
     }
    ]
   }
