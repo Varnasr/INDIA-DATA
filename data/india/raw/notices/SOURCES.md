@@ -441,3 +441,22 @@ images posted with it. The figures are aggregates.
   same exact counts on 24 November, PTI in the Deccan Chronicle gave them in
   lakh on 23 November, and The Times of India gave them rounded on 24
   November.
+
+## Update of 2026-11-25
+
+One row was added, read in full with curl on 2026-11-25. The figure is an
+aggregate.
+
+- **Telangana**: 57,819 electors marked ineligible in the two notice
+  categories, 35,934 unmapped and 21,885 with logical discrepancies (The Times
+  of India, U Sudhakar Reddy, 25 November 2026, 00:17 IST), from the office of
+  the Chief Electoral Officer and district reports. The paper puts its notice
+  figures as of 20 November and gives no separate date for the ineligible
+  counts, and the row carries 20 November. The same report gives 58,772 marked
+  ineligible of the 2,64,87,213 electors on the draft, 953 more than the two
+  categories, and does not say what the 953 are. They are left out of the row,
+  as Jharkhand's other category was on 2026-11-22. It is an interim count and
+  supersedes the 54,863 of 14 November. The report's 92.8 lakh notices and
+  92 lakh cleared are rounded, so no hearings row was added. Its 2,63,96,341
+  electors marked for inclusion include electors never sent a notice, so they
+  are not a row, and its 32,100 pending cases have no category here.
