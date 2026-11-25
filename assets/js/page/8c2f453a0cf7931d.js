@@ -1,0 +1,152 @@
+SIR.json('data/india/flags.json').then(function (D) {
+  var n = SIR.n, esc = SIR.esc, S = D.sources, C = D.counts;
+  var R = {};
+  D.rules.forEach(function (r) { R[r.id] = r; });
+  var v = function (id) { return R[id].test[2]; };
+  // the label of each rule, with its threshold from the data
+  var LABEL = {
+    parent_young: L('The parent named is less than {n} years older than the elector.', { n: v('parent_young') }),
+    parent_old45: L('The parent named is more than {n} years older than the elector.', { n: v('parent_old45') }),
+    parent_old50: L('The parent named is more than {n} years older than the elector.', { n: v('parent_old50') }),
+    grand_young: L('The grandparent named is less than {n} years older than the elector.', { n: v('grand_young') }),
+    kids_more6: L('More than {n} electors are linked to the same parent as children.', { n: v('kids_more6') }),
+    kids_six: L('{n} or more electors are linked to the same parent as children.', { n: v('kids_six') }),
+    sibling: L('A sibling linked to the same parent was born less than nine months before or after the elector.'),
+    name_own: L('The elector\'s name is spelt differently from the old roll.'),
+    name_parent: L('The parent\'s name is spelt differently from the old roll.'),
+    marital: L('A woman is linked to her father on the old roll and to her husband on the new form.'),
+    gender: L('The sex recorded for the elector does not match the name.'),
+    no_mapping: L('Neither the elector nor a parent or grandparent could be linked to the roll of the last intensive revision.')
+  };
+  var NOTE = {
+    no_mapping: L('This is the no-mapping list, the second list that produced notices, for electors who could not be linked at all.'),
+    gender: L('The check asks nothing that could test this rule.'),
+    sibling: L('{h} gives the gap as nine months or less, and the other sources as less than nine months.', { h: S[R.sibling.src[1]].outlet })
+  };
+  // each outlet once, linked to its first source for the rule
+  var by = function (ids) {
+    var seen = {};
+    return ids.filter(function (k) { var o = S[k].outlet; if (seen[o]) return false; seen[o] = 1; return true; })
+      .map(function (k) { var s = S[k]; return '<a href="' + esc(s.url) + '" rel="noopener" lang="en" dir="ltr">' + esc(s.outlet) + '</a>'; }).join(', ');
+  };
+  var states = function (ids) {
+    var o = {}; ids.forEach(function (k) { var st = S[k].state; if (st && st !== 'All India') o[st] = 1; }); return Object.keys(o).sort();
+  };
+  var and = function (xs) { return xs.length < 2 ? xs.join('') : xs.slice(0, -1).join(', ') + L(' and ') + xs[xs.length - 1]; };
+
+  // ---- In short, from the rules and their sources
+  // the two reports that count names deleted after such notices, by state
+  var after = D.after, del = [after[4], after[5]];
+  // the discrepancy rules, leaving out the no-mapping list, which is the other list
+  var ld = D.rules.filter(function (r) { return r.id !== 'no_mapping'; });
+  var rs = {}; ld.forEach(function (r) { r.src.forEach(function (k) { rs[k] = 1; }); });
+  var nsrc = Object.keys(rs).length, rdoc = Object.keys(rs).filter(function (k) { return S[k].kind === 'primary'; }).length;
+  SIR.inShort([
+    L('Reports and a court application say that the rules the Commission\'s software used to flag electors for logical discrepancies have not been published or defined. Asked under the RTI Act for the definition of the term in any official document, the Commission replied that the information was not available with it and might be with the Chief Electoral Officers.'),
+    L('{n} rules have been reported, counting each reading of a disputed threshold as a rule of its own, in {d} official documents and {p} reports. They test the ages of an elector, a parent and a grandparent, the number of children linked to one parent, the gap between siblings and the spelling of names.', { n: ld.length, d: rdoc, p: nsrc - rdoc }),
+    L('The sources disagree in places. One gives the gap between parent and child as {a} to {b} years where the others give {a} to {c}, and {w} reads {k} children linked to a parent as enough for a flag where both official documents say more than {k}.', { a: v('parent_young'), b: v('parent_old45'), c: v('parent_old50'), k: v('kids_six'), w: S[R.kids_six.src[0]].outlet }),
+    L('A flag led to a notice, and the registration officer then decided the entry. Reports from {s} count names deleted after a flag for a discrepancy or for no mapping.', { s: and(states(del)) })
+  ], L('Each rule is given as its source gives it. The check lists which reported rules match what you enter, and it cannot say whether an entry was flagged.'));
+
+  document.getElementById('kpis').innerHTML = [
+    [n(ld.length), L('rules reported')], [n(nsrc), L('sources that state a rule')], [n(rdoc), L('official documents')], [SIR.date(C.last), L('latest source')]
+  ].map(function (x) { return '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('');
+
+  // ---- a source, as the disputes and ECINET pages show it
+  var item = function (k) {
+    var s = S[k], on = s.from === 'disputes' ? ' <a href="../disputes/#d-' + esc(s.id) + '">On the disputes page</a>.' : s.from === 'rti' ? ' <a href="../rti/">On the RTI page</a>.' : s.from === 'reads' ? ' <a href="../reading/">On the reading list</a>.' : ' <a href="../process/">On the page on how the revision was run</a>.';
+    return '<li><p><b>' + SIR.date(s.date) + '</b>' + (s.state ? ', ' + esc(s.state) : '') + '.</p><p>' + esc(s.text) + '</p>' +
+      (s.response ? '<p class="nresp">' + esc(s.response) + '</p>' : '') +
+      '<p class="nsrc">' + (s.url ? '<a href="' + esc(s.url) + '" rel="noopener">' + esc(s.outlet) + '</a>' : esc(s.outlet)) + ', "' + esc(s.headline) + '". ' +
+      (s.kind === 'primary' ? '<span class="tag primary">document</span>' : '<span class="tag press">report</span>') + (s.subscription ? ' Subscription.' : '') + on + '</p>' +
+      (s.quote ? '<details><summary>The words of the source</summary><blockquote>' + esc(s.quote) + '</blockquote></details>' : '') + '</li>';
+  };
+  document.getElementById('afterList').innerHTML = after.map(item).join('');
+  document.getElementById('unpubList').innerHTML = D.unpublished.map(item).join('');
+  document.getElementById('madeList').innerHTML = D.made.map(item).join('');
+
+  // ---- the rules, each with its sources
+  var Cat = D.categories;
+  document.getElementById('rules').innerHTML =
+    '<p>' + L('The Hindu reported that the number of rules grew from {f}, when the check began in West Bengal, to up to {n} in the third phase, so a list of the reported rules may be short of the rules applied.', { f: Cat.first, n: Cat.phase3 }) + '</p>' +
+    D.rules.map(function (r) {
+      return '<h3 id="rule-' + esc(r.id) + '">' + LABEL[r.id] + '</h3>' + (NOTE[r.id] ? '<p class="sub">' + NOTE[r.id] + '</p>' : '') +
+        '<ol class="nfacts" lang="en" dir="ltr" data-no-i18n>' + r.src.map(function (k) {
+          var s = S[k];
+          return '<li><p class="nsrc"><b>' + SIR.date(s.date) + '</b>' + (s.state ? ', ' + esc(s.state) : '') + '. <a href="' + esc(s.url) + '" rel="noopener">' + esc(s.outlet) + '</a>, "' + esc(s.headline) + '". ' +
+            (s.kind === 'primary' ? '<span class="tag primary">document</span>' : '<span class="tag press">report</span>') + (s.subscription ? ' Subscription.' : '') + '</p>' +
+            '<details><summary>What the source says</summary><blockquote>' + esc(s.quote || s.text) + '</blockquote></details></li>';
+        }).join('') + '</ol>';
+    }).join('');
+
+  // ---- what a match meant, and what to do
+  var first = S[after[0]], home = S[after[1]], dl = S[after[3]], mh = S[after[2]];
+  document.getElementById('meant').innerHTML =
+    '<p>' + L('A flag put an elector on the list of those to be sent a notice. The Commission\'s press note of {d} said notices would go to the electors on the no-mapping list and on the discrepancy list, and that the lists of those sent notices would be published.', { d: SIR.date(first.date) }) + ' ' +
+    L('An official in {a} told the press that a name on a notice list did not mean the name had been deleted, and a senior official in {b} said that neither list affects whether an elector is eligible.', { a: mh.state, b: dl.state }) + ' ' +
+    L('Names were deleted all the same. A report from {u} counts electors deleted on the ground of logical discrepancies, and reports from {k} count electors deleted after a notice, among them electors who could not be reached for their hearings.', { u: S[del[1]].state, k: S[del[0]].state }) + '</p>' +
+    '<p>' + L('Justice Joymalya Bagchi of the Supreme Court said in court on {d} that the Court had permitted the exercise in West Bengal as an interim arrangement and had not finally decided whether it is lawful, as Bar and Bench reported. The sources are below.', { d: SIR.date(S[after[7]].date) }) + '</p>';
+  document.getElementById('todo').innerHTML =
+    '<p>' + L('If you were sent a notice, answer it. From {d}, by the Commission\'s note, booth level officers were to collect the documents at home, and a hearing was to be held only in exceptional cases.', { d: SIR.date(home.date) }) + ' ' +
+    L('The steps for a notice, a hearing and an appeal against a decision are on the <a href="../../help/#form7">page for those left off the roll</a>, each with the law or order it rests on.') + '</p>' +
+    '<p>' + L('Each state\'s page on what to do now gives the stage its revision has reached and the forms that are open. Pick your state.') + '</p>';
+  var sel = document.getElementById('fState'), out = document.getElementById('fNowLink'), root = document.body.getAttribute('data-root') || '';
+  sel.innerHTML = '<option value="">' + esc(L('Pick a state')) + '</option>' + D.now.map(function (p, i) { return '<option value="' + i + '">' + esc(p[0]) + '</option>'; }).join('');
+  sel.addEventListener('change', function () {
+    var p = D.now[sel.value];
+    out.innerHTML = p ? '<a href="' + esc(root + p[1]) + '">' + esc(L('What to do now in {s}', { s: p[0] })) + '</a>' : '';
+  });
+
+  // ---- the check: read the answers, test every rule, list the matches
+  var F = function (id) { return document.getElementById(id); };
+  var num = function (id) { var x = F(id).value.trim(); return x === '' || isNaN(+x) ? null : +x; };
+  var OPS = { lt: function (a, b) { return a < b; }, gt: function (a, b) { return a > b; }, ge: function (a, b) { return a >= b; }, is: function (a, b) { return a === b; } };
+  function answers() {
+    var you = num('fYou'), par = num('fParent'), gr = num('fGrand');
+    return {
+      pgap: you != null && par != null ? par - you : null,
+      ggap: you != null && gr != null ? gr - you : null,
+      kids: num('fKids'),
+      sib: F('fSib').checked || null,
+      wed: F('fWed').checked || null,
+      own: F('fOwn').value || null, par: F('fPar').value || null, map: F('fMap').value || null
+    };
+  }
+  function check() {
+    var A = answers(), given = Object.keys(A).filter(function (k) { return A[k] != null; });
+    var testable = D.rules.filter(function (r) { return r.test; });
+    var tried = testable.filter(function (r) { return A[r.test[0]] != null; });
+    var hit = tried.filter(function (r) { return OPS[r.test[1]](A[r.test[0]], r.test[2]); });
+    var o = F('fOut');
+    if (!given.length) { o.innerHTML = '<p class="note">' + L('Answer any of the questions above and the reported rules that match will be listed here.') + '</p>'; return; }
+    var head = tried.length === 1 ?
+      (hit.length ? L('The one rule your answers could test matches what you entered.') : L('The one rule your answers could test does not match what you entered.')) :
+      hit.length === 1 ? L('One of the {t} rules your answers could test matches what you entered.', { t: tried.length }) :
+      hit.length ? L('{k} of the {t} rules your answers could test match what you entered.', { k: hit.length, t: tried.length }) :
+      L('None of the {t} rules your answers could test matches what you entered.', { t: tried.length });
+    var gap = A.pgap != null && A.pgap > v('parent_old45') && A.pgap <= v('parent_old50') ?
+      '<p>' + L('A gap of {g} years matches the rule only where the range is read as {a} to {b} years.', { g: A.pgap, a: v('parent_young'), b: v('parent_old45') }) + '</p>' : '';
+    var six = A.kids === v('kids_six') ? '<p>' + L('{k} children linked to one parent matches the rule only where it is read as {k} or more.', { k: A.kids }) + '</p>' : '';
+    o.innerHTML = '<p class="finding"><b>' + head + '</b></p>' +
+      (hit.length ? '<ul class="fhits">' + hit.map(function (r) {
+        return '<li><a href="#rule-' + esc(r.id) + '">' + LABEL[r.id] + '</a> <span class="fsrc">' + esc(L('Stated by')) + ' ' + by(r.src) + '.</span>' +
+          (NOTE[r.id] ? ' ' + NOTE[r.id] : '') + '</li>';
+      }).join('') + '</ul>' : '') + gap + six +
+      '<p>' + L('A match is a reason a notice could be sent. The registration officer then decided the entry, after the notice and, where one was held, a hearing. The rules were reported in different states at different times, so a rule listed here may not have been used in your state, and a notice could come for a reason not listed here.') + '</p>';
+  }
+  ['fYou', 'fParent', 'fGrand', 'fKids'].forEach(function (id) { F(id).addEventListener('input', check); });
+  ['fMap', 'fOwn', 'fPar', 'fSib', 'fWed'].forEach(function (id) { F(id).addEventListener('change', check); });
+  F('fClear').addEventListener('click', function () {
+    ['fYou', 'fParent', 'fGrand', 'fKids'].forEach(function (id) { F(id).value = ''; });
+    ['fMap', 'fOwn', 'fPar'].forEach(function (id) { F(id).value = ''; });
+    F('fSib').checked = F('fWed').checked = false;
+    check(); F('fYou').focus();
+  });
+  check();
+
+  document.getElementById('cannot').innerHTML = L('The rules here are those that officials, a court and the press reported, and they do not all agree. None of the sources gives the number of electors each rule flagged across India, or says how the software weighed one rule against another. The check uses the ages you enter, and the software read the ages on the rolls.');
+  SIR.anchors && SIR.anchors();
+  SIR.toc && SIR.toc();
+  SIR.showFaq('india', 'flags');
+  SIR.jump && SIR.jump();
+}).catch(SIR.fail);
