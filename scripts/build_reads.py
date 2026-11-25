@@ -45,7 +45,6 @@ OUTLET = {
 # summaries reworded into the site's rules (no colon hinges, no "X, not Y")
 PLAIN = {
     2: "Reports the Election Commission's first response to the investigation. The Commission calls the 14 notes suggestions and says every decision was unanimous, and the paper sets out what the response does not address.",
-    5: "Using the list of about 65 lakh Bihar electors left off the draft, which the Supreme Court made the Commission publish, shows women far outnumbered men among those marked 'permanently shifted', most of all below age 40.",
     6: "The Hindu's data team sets the gender gap among the names left off Bihar's draft against census migration records and the ages of those left off.",
     8: "Compares Bihar's January 2025 roll with the final SIR roll and finds women were close to 59% of the fall in the roll and the gender ratio of the roll fell in 230 of 243 seats.",
     9: 'Checks booth-level results in villages where many names were left off or deleted, the 28 close contests and late additions to the roll, and finds no anomaly that stands out. The NDA won exactly half the close contests.',
@@ -63,9 +62,6 @@ PLAIN = {
     28: "Reading 91 lakh elector records, it finds women were 53.6% of the 58 lakh names left off the draft in December 2025 and that in Nandigram, where Muslims are about a quarter of the population, they were 95% of the names deleted from the supplementary lists.",
     29: "It finds the names left off or deleted in West Bengal's revision outnumbered the winning margin in 161 of 293 Assembly seats, and still did so in 124 seats once deaths are left out.",
     32: 'Of the 1,58,677 names left off the draft in Manipur, the 20 hill seats account for 66.4% and women for 55.96%, and women are the majority of those left off in all 60 seats.',
-    39: "Finds that the 17 phase 3 states and territories with draft rolls left off 6.15 crore names, 17.1%, against 12.3% in the first two phases, with a larger share marked shifted or absent. It also finds that the full lists of names left off for Delhi, Maharashtra, Karnataka and Telangana mark no one as 'Others', though the Chief Electoral Officers' press notes put 9.73 lakh names left off in phase 3 under that reason.",
-    40: "Finds that shifted or absent made up 75% to 96.5% of the names left off in 85 Maharashtra constituencies, and that neighbouring seats in Pune used the two reasons very differently. It estimates that the draft roll falls about 1.92 crore short of the projected adult population.",
-    53: 'Sets Odisha\'s net fall of 17.67 lakh (about 5.3 per cent) from the pre-SIR roll to the final roll of 21 September against other states. It gives a 94 per cent return of enumeration forms, few duplicates and mostly seasonal migration as the reasons, and explains how an elector left off or deleted can appeal or reapply.',
 }
 # round 7 (15 October 2026), keyed by the URL
 PLAIN_URL = {
@@ -77,6 +73,12 @@ PLAIN_URL = {
 }
 # summaries with a colon hinge, reworded, keyed by the URL
 PLAIN_URL.update({
+    # keyed by address since 25 November 2026: as a position in PLAIN it had
+    # slipped onto the item before this one when sabar.json grew on 2 November
+    'https://www.hindustantimes.com/india-news/explainer-why-fewer-voters-were-deleted-in-odisha-compared-to-several-other-states-101790165837377.html': (
+        "Sets Odisha's net fall of 17.67 lakh (about 5.3 per cent) from the pre-SIR roll to the final roll of 21 September against other states. "
+        "It gives a 94 per cent return of enumeration forms, few duplicates and mostly seasonal migration as the reasons, and explains how an "
+        "elector left off or deleted can appeal or reapply."),
     'https://theprint.in/india/governance/bengaluru-to-lucknow-why-urban-centres-are-seeing-high-electoral-roll-deletions-during-sir/3026124/': (
         "It compares the district with the highest share of names left off in several states, which are the Bengaluru districts in "
         "Karnataka (43 to 49 per cent), Lucknow in Uttar Pradesh, Surat in Gujarat, Chennai in Tamil Nadu, Bhopal in Madhya Pradesh, "
