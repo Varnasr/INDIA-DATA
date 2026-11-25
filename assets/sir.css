@@ -1402,3 +1402,19 @@ body.embed .emcredit{margin:0;padding:.5rem 1rem 1rem;color:var(--muted);font-si
 @media (min-width:900px){.home .hero h1,.home .hero .lead{min-height:4lh}}
 .units .unitbox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem}.units-svg{width:100%;height:auto;display:block}.units-svg .u-off{fill:none;stroke:var(--muted);stroke-width:1}.units-svg .u-on{fill:var(--fill-navy)}
 .ukey{font-size:.85rem;color:var(--muted);margin:.6rem 0 0}.ukey span{display:inline-block;width:10px;height:10px;margin-inline-end:.35rem;vertical-align:-1px}.ukey .u-off{border:1px solid var(--muted)}.ukey .u-on{background:var(--fill-navy);margin-inline-start:.6rem}
+/* the disputes page: where things stand in the state chosen in the filter */
+.statesum{max-width:var(--measure);margin:.4rem 0 1.4rem;padding:.9rem 1.1rem 1rem;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:6px;background:var(--card)}
+.statesum h2{margin-top:0}
+.statesum h3{margin:1rem 0 .3rem;font-size:1rem}
+.statesum .kpis{margin:.6rem 0 .4rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+.statesum .kpis b{font-size:1.7rem;overflow-wrap:anywhere}
+@media (max-width:700px){.statesum .kpis b{font-size:1.4rem}}
+@media (max-width:460px){.statesum .kpis b{font-size:1.15rem}}
+@media (max-width:380px){.statesum .kpis{grid-template-columns:minmax(0,1fr)}}
+.statesum ul{margin:.3rem 0;padding-left:1.1rem}
+.statesum .sscount{display:flex;flex-wrap:wrap;gap:.3rem .9rem;list-style:none;padding:0}
+.statesum .ssrecent li p{margin:.1rem 0}
+.statesum .ssrecent li p:first-child{font-weight:600;font-size:.9rem}
+.statesum .ssrecent li{margin-bottom:.5rem}
+.statesum .sslinks{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;list-style:none;padding:0;margin-top:.8rem}
+[dir="rtl"] .statesum{border-left:1px solid var(--line);border-right:4px solid var(--navy)}
