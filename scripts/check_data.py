@@ -522,6 +522,21 @@ def _rti():
     assert "SIR.showFaq('india', 'rti')" in page and 'id="short"' in page, 'the RTI page lost its findings or its questions'
 
 
+def _flags():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_flags.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+    page = open(os.path.join(ROOT, 'site', 'pages', 'india', 'flags', 'index.html'), encoding='utf-8').read()
+    assert "SIR.showFaq('india', 'flags')" in page and 'id="short"' in page, 'the page on logical discrepancies lost its findings or its questions'
+    # the check sends nothing: no form to submit, no request, nothing stored
+    m = re.search(r'<!--scripts-->(.*)', page, re.S)
+    script = m.group(1) if m else ''
+    assert '<form' not in page and not re.search(r'\b(fetch|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|document\.cookie)\b', script), \
+        'the check on the page on logical discrepancies must not submit, send or store what a reader enters'
+    for p in ('process', 'ecinet'):
+        assert 'href="../flags/"' in open(os.path.join(ROOT, 'site', 'pages', 'india', p, 'index.html'), encoding='utf-8').read(), \
+            'india/%s/ no longer links to the page on logical discrepancies' % p
+
+
 def _brief():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_brief.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
@@ -827,6 +842,7 @@ for name, fn in [
     ('the bulk Form 7 table is current, links only to disputes items and takes every count from its entry', _form7_bulk),
     ('the events page carries only events read twice and is current', _events),
     ('the RTI page carries only checked applications and is current', _rti),
+    ('the page on logical discrepancies cites only checked items, says what each says, and sends nothing', _flags),
     ('the case studies carry only checked items and are current', _cases),
     ('the site\'s own words keep the writing rules', _writing),
     ('the reading page carries only items read twice and is current', _reads),

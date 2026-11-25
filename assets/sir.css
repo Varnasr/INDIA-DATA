@@ -1310,6 +1310,18 @@ body.embed .emcredit{margin:0;padding:.5rem 1rem 1rem;color:var(--muted);font-si
 .cmpick p{margin:0 0 .7rem}
 .cmpick label{display:block;font-size:.92rem;font-weight:600;margin-bottom:.3rem}
 #tCmp th[scope=row]{text-align:start;font-weight:600}
+
+/* The check on india/flags/: number boxes, yes-or-no questions and ticks, in
+   the same grid as the constituency picker, and the matching rules below. */
+.flagcheck input[type=number]{width:100%;max-width:12rem;box-sizing:border-box;font:inherit;padding:.55rem .6rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.flagcheck select{max-width:100%}
+.flagcheck .chk{grid-column:1/-1;display:flex;align-items:flex-start;gap:.55rem}
+.flagcheck .chk label{display:inline;font-weight:400;margin:0}
+.flagcheck .chk input{width:1.15rem;height:1.15rem;margin:.2rem 0 0;flex:none;accent-color:var(--fill-navy)}
+.flagout{max-width:var(--measure);margin:0 0 1rem}
+.flagout .fhits{padding-inline-start:1.2rem}
+.flagout .fhits li{margin:0 0 .6rem}
+.flagout .fsrc{display:block;font-size:.85rem;color:var(--muted)}
 #tCmp td,#tCmp thead th{text-align:end}
 
 /* A seat page on one A4 page (seat.js, "Print this seat"): the summary, the
