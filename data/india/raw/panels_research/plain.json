@@ -1,6 +1,9 @@
 {
  "about": "The site's own wording for the panels on the reading page. claims.json holds each quotation verbatim with the first reading's notes, verified.json the second reading's verdict and corrections. This file holds only what the page says around a quotation: what it rests on (rests), the site's own figures (site) and where those figures stop (stops), plus a short role, an introduction and the strongest points and overreach for each person, reworded into the site's writing rules. 'uses' lists figures the text quotes, each checked against the published file by scripts/build_panels.py. National figures from data/india/states.json are not written out. They are named in braces, such as {final.removed} or {n.no_final:Word}, and the build fills them in (see the top of scripts/build_panels.py). 'literal' lists, for a person, a phrase whose figure looks like a national one and is not, with the reason.",
  "order": [
+  "samajwadi-party",
+  "sabar-institute",
+  "human-rights-watch",
   "praveen-chakravarty",
   "prannoy-roy",
   "indian-express",
@@ -838,7 +841,7 @@
   "yogi-adityanath": {
    "name": "Yogi Adityanath",
    "role": "Chief Minister of Uttar Pradesh, of the BJP.",
-   "intro": "Three of the quotations are from his speech to BJP workers in Lucknow on 14 December 2025, in his own words from the video of the speech. The fourth is from his own post on X of 5 October 2026. The fifth is from his interview at Aaj Tak's Panchayat programme in Ayodhya on 8 November 2026, in his own words from Aaj Tak's video of the interview. The translations are unofficial.",
+   "intro": "Three of the quotations are from his speech to BJP workers in Lucknow on 14 December 2025, in his own words from the video of the speech. The fourth is from his own post on X of 5 October 2026. The fifth is from his interview at Aaj Tak's Panchayat programme in Ayodhya on 8 November 2026, in his own words from Aaj Tak's video of the interview. The translations are unofficial. The Chief Electoral Officer's answer to the fifth, on 17 November, and a letter about it to the Chief Minister from the Independent Commission on the SIR, on 21 November, are set beside it.",
    "claims": {
     "0": {
      "rests": "It rests on his own arithmetic in the speech. He took a population of about 25 crore and a share of 64 to 65 per cent adults to reach 16 crore who should be on the roll, and set it against the 12 crore enumeration forms collected by mid-December 2025, three weeks before the draft. The 15 crore 44 lakh is the roll of January 2025.",
@@ -967,8 +970,8 @@
     "4": {
      "kind": "A count of voters by religion",
      "rests": "It rests on his own account in the interview. Asked where the figure came from, he said everyone has the rolls from before and after the revision. He then said the people he means are on the panchayat roll, receive welfare schemes and were on the roll before. He names no document and does not say how a voter's religion was found. His three groups add to 1.255 crore, a little under his total, and he does not say whether they overlap. He puts the 1.65 per cent as a rise in the Muslim voters there were before the revision, and he gives no count of them before or after.",
-     "site": "The official figures are for the whole Assembly roll. It held 15,44,30,092 names before the revision and 13,39,84,792 on the final roll of 10 April 2026, a fall of 2,04,45,300. After the draft 70,69,810 claims on Form 6 to add names were reported, with no count by age. The gap he points to between the panchayat rolls and the Assembly roll is in the figures The Times of India reported on 5 November. The Chief Electoral Officer, Navdeep Rinwa, put the rural electors on the Assembly roll at about 10.20 crore, about 2.38 crore fewer than the 12.58 crore on the rural panchayat rolls of June 2026. By the paper's own totals, the panchayat rolls and the urban local body rolls of April 2023 together held about 3.45 crore more electors than the Assembly roll of October 2026. Rinwa told the paper that the difference cannot be taken as eligible people left off the roll, because the rolls may hold dead electors, people who have moved and duplicate entries. The Chief Electoral Officer has directed officers to match the rolls to find eligible people missing from the Assembly roll.",
-     "stops": "No published figure counts the roll by religion, so his 1.27 crore Hindu voters and his 1.65 per cent cannot be set against any count. The panchayat rolls and the Assembly roll are kept by different bodies on different dates. Nothing published says how many of the people on the panchayat rolls and off the Assembly roll are eligible for it or are on a roll in another place.",
+     "site": "The official figures are for the whole Assembly roll. It held 15,44,30,092 names before the revision and 13,39,84,792 on the final roll of 10 April 2026, a fall of 2,04,45,300. After the draft 70,69,810 claims on Form 6 to add names were reported, with no count by age. The gap he points to between the panchayat rolls and the Assembly roll is in the figures The Times of India reported on 5 November. The Chief Electoral Officer, Navdeep Rinwa, put the rural electors on the Assembly roll at about 10.20 crore, about 2.38 crore fewer than the 12.58 crore on the rural panchayat rolls of June 2026. By the paper's own totals, the panchayat rolls and the urban local body rolls of April 2023 together held about 3.45 crore more electors than the Assembly roll of October 2026. Rinwa told the paper that the difference cannot be taken as eligible people left off the roll, because the rolls may hold dead electors, people who have moved and duplicate entries. The Chief Electoral Officer has directed officers to match the rolls to find eligible people missing from the Assembly roll. Asked about his figure on 17 November, the Chief Electoral Officer said the Commission's database holds no details of religion or caste and so it has no such data to release, The Indian Express reported. He said the roll records only an elector's name, the type of relation named, age, date of birth, house number and gender, and that software available on the market could be used to analyse the rolls for the religion of electors, which those making such claims might have used. The Commission said no names had been deleted on the basis of religion, caste, community, village or locality. On 21 November the Independent Commission on the SIR, formed by the Lawyers' Association for Constitution and chaired by the former Supreme Court judge Madan B. Lokur, wrote to the Chief Minister asking for material and data supporting his statement, Deccan Herald and The Hindu reported. No reply from him has been found.",
+     "stops": "No published figure counts the roll by religion, and the Commission says it holds no such data, so his 1.27 crore Hindu voters and his 1.65 per cent cannot be set against any count. The panchayat rolls and the Assembly roll are kept by different bodies on different dates. Nothing published says how many of the people on the panchayat rolls and off the Assembly roll are eligible for it or are on a roll in another place.",
      "uses": [
       [
        "data/uttarpradesh/summary.json",
@@ -1015,7 +1018,7 @@
     "His gap of four crore sets the roll against a population projection, and the projection counts residents who are not all on the roll anywhere. Against the old roll the draft was 2.89 crore smaller.",
     "Saying 85 to 90 per cent of those missing are his party's voters goes beyond any record, since nothing published says how an elector left off or deleted votes.",
     "Tying the exclusions to names entered illegally goes further than the officers' own records, which give under age or not a citizen as the reason for 2,069 names after the draft, as reported.",
-    "Counting the voters missing from the roll by religion goes beyond any published record, since no published figure counts the roll by religion."
+    "Counting the voters missing from the roll by religion goes beyond any published record. No published figure counts the roll by religion, and the Chief Electoral Officer says the Commission holds none."
    ]
   },
   "mamata-banerjee": {
@@ -2377,6 +2380,189 @@
      "13 states with a projection",
      "The states of his table of 14 that have a projection, which do not move with the national count."
     ]
+   ]
+  },
+  "samajwadi-party": {
+   "name": "The Samajwadi Party and Akhilesh Yadav",
+   "role": "A party in opposition in Uttar Pradesh. Its president is Akhilesh Yadav, a former Chief Minister of the state, and its state president is Shyamlal Pal.",
+   "intro": "The first quotation is Akhilesh Yadav's, to reporters in Lucknow on 12 October 2026, as ANI reported it. The second is PTI's account of the party's memorandum of 23 November 2026 to the Chief Electoral Officer, Navdeep Rinwa, on the draft roll of the summary revision.",
+   "claims": {
+    "0": {
+     "kind": "A count of entries on the roll",
+     "rests": "It rests on his own account to reporters. He names no constituency and gives no count beyond lakhs, and he said the party would release the list of the entries it had found.",
+     "site": "No published figure counts duplicate entries on the final roll of 10 April 2026, which held 13,39,84,792 names. In the intensive revision, names entered as enrolled more than once were left off the draft and deleted after it. Of the 2,88,74,067 names left off the draft of 6 January 2026, officers entered 25,47,207 as enrolled more than once, 8.82 per cent of them. After the draft 8,15,996 more names were deleted, 79,076 of them as enrolled more than once, as reported.",
+     "stops": "The counts of names enrolled more than once are of names left off the draft or deleted after it, so they say how many duplicates were found and leave open how many remain. Nothing published counts people listed several times on the final roll, or says how many entries one person holds.",
+     "uses": [
+      [
+       "data/uttarpradesh/summary.json",
+       "133984792"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "28874067"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "2547207"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "8.82"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "815996"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "79076"
+      ]
+     ]
+    },
+    "1": {
+     "kind": "A count of entries on the roll",
+     "rests": "It rests on the party's own reading of the draft roll of the summary revision, published on 17 November. The memorandum, signed by the state president, Shyamlal Pal, says the party read the names of all 13,58,68,905 electors in 1,73,730 polling booths of the 403 constituencies. It counts as duplicates the entries whose name, relative's name, address, age and other details are the same and whose EPIC numbers differ, and says it emailed the list to the Chief Election Commissioner and the Chief Electoral Officer. It claims a cash reward that it says the Chief Electoral Officer announced on 11 November for finding duplicates, and no such announcement was found. Hindustan Times reports the same memorandum.",
+     "site": "The draft of 17 November holds 13,58,68,905 electors by the Chief Electoral Officer's figures as PTI reported them, the same total the party gives, and 18,84,113 more than the final roll of 10 April 2026. The names added and deleted since April have not been reported. Around one lakh duplicates would be about 7 in every 10,000 entries on the draft. In the intensive revision, 25,47,207 of the names left off the draft of 6 January 2026 were entered as enrolled more than once.",
+     "stops": "The Commission has published no count of duplicates on the draft of 17 November, and the party's list is not public, so its one lakh cannot be checked against any figure. Two entries that agree on name, relative, address and age may still be two people, which only a check of each entry can settle.",
+     "uses": [
+      [
+       "data/india/ssr_draft.json",
+       "135868905"
+      ],
+      [
+       "data/india/ssr_draft.json",
+       "133984792"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "2547207"
+      ]
+     ]
+    }
+   },
+   "strongest": [
+    "The party gives the draft of 17 November as 13,58,68,905 electors, which is the Chief Electoral Officer's own total, and says it read every entry.",
+    "Duplicates on Uttar Pradesh's roll are on record. The intensive revision entered 25,47,207 of the names left off its draft as enrolled more than once."
+   ],
+   "further": [
+    "Neither count can be checked. No published figure counts the duplicates on the final roll of 10 April or on the draft of 17 November, and the party's list has not been published.",
+    "Calling the entries fake votes goes further than any record. A name listed twice shows that the roll holds two entries, and no figure shows that a second vote was cast."
+   ]
+  },
+  "sabar-institute": {
+   "name": "The Sabar Institute",
+   "role": "A research institute in Kolkata. Its report on Uttar Pradesh is by Sabir Ahamed, Ashin Chakraborty and Souptik Halder.",
+   "intro": "The quotations are from the institute's preliminary report on Uttar Pradesh, published on its website on 20 November 2026. It counts, seat by seat, the lists of names left off the draft roll of 6 January 2026, which it took from the Commission's reports for each polling part. The institute posted the same figures on X that day. A post on X carrying them drew a reply from the Chief Electoral Officer, Navdeep Rinwa, on 21 November. He wrote that errors may still be left in the roll after the revision, far fewer than before, and that his office was committed to correcting them during the summary revision. He did not take up the figures.",
+   "claims": {
+    "0": {
+     "kind": "A reading of the names left off against the 2022 results",
+     "rests": "It rests on the institute's own count of the lists of names left off for all 403 constituencies. It counts 2,88,71,423 names, 2,644 fewer than the Chief Electoral Officer's district table, and says 21 of 1,77,512 polling parts have no published report. For each seat it sets the names not marked dead against the winning margin in the 2022 Assembly election.",
+     "site": "The Chief Electoral Officer's own count by constituency could not be reached, so the figures by seat set against its count are other counts and estimates. By s1d labs' counts of the digitised rolls, the fall in the roll from the 2024 Lok Sabha roll to the draft was larger than the 2022 winning margin in 371 of the 403 seats, and the entries of the 2024 roll not found on the draft were larger than it in 383. Sharing each district's names left off over its seats in proportion to their entries not found puts them above the margin in 378 seats, and sharing them by the seats' 2022 electors in 377. Each of these counts takes in the names entered as dead, which the institute leaves out, and its 359 is below all of them.",
+     "stops": "A count larger than the margin sets the size of the change against the result of 2022. The people concerned would not all have voted, nor all for one side, and those left off could apply to be added again before the final roll, so no count of this kind can say that any result changed.",
+     "uses": [
+      [
+       "data/uttarpradesh/analysis.json",
+       "\"fall_over\": 371"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "\"nf_over\": 383"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "\"shared_over\": 378"
+      ],
+      [
+       "data/uttarpradesh/analysis.json",
+       "\"over\": 377"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "28874067"
+      ]
+     ]
+    },
+    "1": {
+     "rests": "It rests on the reason entered against each name on the lists, as the institute counted them. It groups the reasons as permanently shifted, 44.9 per cent, untraceable or absent, 30.2, already enrolled elsewhere, 8.8, and death, 16.0. Its report heads the finding 'Most of those removed are alive'.",
+     "site": "The Chief Electoral Officer's table gives the same split. Of the 2,88,74,067 names left off the draft, 18.70 for every 100 on the roll before, 46,23,796 were entered as dead, 16.01 per cent. 44.95 per cent were entered as shifted, 27.54 as untraceable or absent, 8.82 as enrolled more than once and 2.68 as others. The institute's 30.2 for untraceable or absent is close to the official untraceable or absent and others together.",
+     "stops": "A reason is what an officer wrote down, and nobody checked it. The figures cannot say how many of the people entered as shifted, absent or enrolled elsewhere are alive, still in the state or eligible to vote there. The institute says some of them will have applied again and may be on the final roll of 10 April 2026, which held 13,39,84,792 names.",
+     "uses": [
+      [
+       "data/uttarpradesh/summary.json",
+       "28874067"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "18.70"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "4623796"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "16.01"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "44.95"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "27.54"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "8.82"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "2.68"
+      ],
+      [
+       "data/uttarpradesh/summary.json",
+       "133984792"
+      ]
+     ]
+    }
+   },
+   "strongest": [
+    "Its count of the names left off, 2,88,71,423, is within 2,644 of the Chief Electoral Officer's, and its 18.7 per cent and its 16 in every 100 left off as dead agree with his table.",
+    "It counts the names left off seat by seat from the Commission's own lists. The other counts by seat, of the digitised rolls and of estimates by district, measure other things, and every one of them puts the change above the 2022 margin in more seats than its 359."
+   ],
+   "further": [
+    "Calling those not marked dead living voters goes further than the lists, which record what an officer entered and nothing about whether the person is alive.",
+    "Setting the names left off against the 2022 margins sizes the change, and no such count can say that any seat would have gone another way."
+   ]
+  },
+  "human-rights-watch": {
+   "name": "Human Rights Watch",
+   "role": "An international human rights organisation.",
+   "intro": "The quotations are from its report on India's institutions, published on 23 November 2026, and the news release that came with it. The report's section on the Election Commission takes up the revision.",
+   "claims": {
+    "0": {
+     "rests": "It rests on Human Rights Watch's own finding. The report's endnote for the figure cites its release of 28 October 2026, and the report gives no count by state or by step of the revision.",
+     "site": "The states' own figures count {total.removed} names left off the drafts in {total.states} states and union territories, {total.removed:crore2} crore, close to its 130 million, which is 13 crore. In the {after_draft.states} states that report it, {after_draft.removed} more names were deleted after the drafts. Of the 15 states and union territories whose figures give the names left off by sex, women were a larger share of the names left off than of the roll in 10.",
+     "stops": "Names left off a draft are a different step from names deleted by an order after it, and people left off a draft could apply to be added again before the final roll. No roll records religion, and Uttar Pradesh's Chief Electoral Officer said on 17 November that the Commission's database holds no details of religion or caste, so its finding on religious minorities cannot be set against any count. The figures hold nothing on income either.",
+     "uses": [
+      [
+       "data/india/women.json",
+       "\"states\": 15"
+      ],
+      [
+       "data/india/women.json",
+       "\"over\": 10"
+      ]
+     ]
+    }
+   },
+   "strongest": [
+    "Its 130 million is close to the {total.removed} names left off the drafts by the states' own figures.",
+    "Its finding on women fits the states that count the names left off by sex. In 10 of those 15, women were a larger share of the names left off than of the roll."
+   ],
+   "further": [
+    "Calling every name left off deleted runs two steps together. Most were left off a draft, and people left off could apply to be added again before a final roll.",
+    "Its finding that religious minorities were excluded more than others goes beyond any count, since no roll records religion."
    ]
   }
  }
