@@ -1,11 +1,12 @@
 /* Questions and answers for the West Bengal pages. The FAQ tab shows them all;
-   each page shows those tagged with its key (main, elections, method). The
+   each page shows those tagged with its key (main, elections, method,
+   tribunals). The
    "In short" points for each page are in SHORT. */
 (function () {
   var P;
   SIR.faq('wb', 'westbengal/faq/', function () {
-    return P || (P = Promise.all([SIR.json('data/westbengal/summary.json'), SIR.json('data/westbengal/districts.json')]).then(function (r) {
-      var s = r[0], D = r[1], p = s.pn05, W = {};
+    return P || (P = Promise.all([SIR.json('data/westbengal/summary.json'), SIR.json('data/westbengal/districts.json'), SIR.json('data/westbengal/tribunals.json').catch(function () { return null; })]).then(function (r) {
+      var s = r[0], D = r[1], p = s.pn05, W = {}, T = r[2];
       s.winners.forEach(function (w) { W[w.party] = w; });
       var cr = function (x) { return L('{x} crore', { x: (x / 1e7).toFixed(2) }); };
       var scale = L('The revision left {r} names off West Bengal\'s draft roll, {pp} of every 100 electors, and held back another {adj} from the final roll for adjudication.', { r: SIR.lakh(p.removed), pp: SIR.d(p.removed_per_100, 1), adj: SIR.lakh(p.adjudication) });
@@ -13,6 +14,12 @@
       var women = L('Women were {w} of the names left off the draft roll, against {wr} of the roll before it.', { w: SIR.pct(p.women_removed_pct), wr: SIR.pct(p.women_before_pct) });
       var why = L('{dead} of the names left off the draft were entered as dead, {sh} as shifted and {ab} as absent.', { dead: SIR.pct(p.shares.dead), sh: SIR.pct(p.shares.shifted), ab: SIR.pct(p.shares.absent) });
       var margin = L('In {k} of the {n} constituencies, the roll fell by more than the 2026 winning margin.', { k: s.over_margin, n: s.acs });
+      // the tribunals: the latest official counts and the orders, by key
+      var tl = {}, tb = {};
+      if (T) {
+        Object.keys(T.latest_official).forEach(function (k) { tl[k] = T.rows.filter(function (x) { return x.id === T.latest_official[k]; })[0]; });
+        T.orders.forEach(function (o) { tb[o.key] = o; });
+      }
       var QA = [
         [L('How many names did the revision leave off the draft in West Bengal?'),
          scale + ' ' + L('The roll of 27 October 2025 held {b}, the draft {d} and the final roll of 28 February 2026 {f}. By the 2026 nominations the roll had grown by {back}, to {e}.', { b: cr(p.before), d: cr(p.draft), f: cr(p.final), back: SIR.lakh(s.after_final), e: cr(s.election) }), ['main', 'faq']],
@@ -36,6 +43,14 @@
          L('The state\'s revision is from the Chief Electoral Officer\'s press note PN-05-2026. The three rolls by constituency are the Chief Electoral Officer\'s own tables, and the 2026 result is from the Election Commission\'s result pages. The <a href="../method/">method page</a> gives each source.'), ['method', 'faq']],
         [L('Does this show that names were left off or deleted to change results?'),
          L('No list of names left off or deleted can show intent. The tables show where the roll fell and how that compares with the margins. They cannot show whose votes these were or whether each name was rightly left off or deleted.'), ['elections', 'method']],
+        T ? [L('Who decides an appeal against an order of the judicial officers?'),
+         L('Tribunals of former Chief Justices and judges decide these appeals. The Supreme Court provided for them on {a}, and said again that no executive or administrative officer could hear such an appeal. The Court\'s order of {b} records that the tribunals were to begin work that day, and that an appeal still pending gives an excluded elector no right to vote. The <a href="../tribunals/">tribunals page</a> gives every order with its document.', { a: SIR.date(tb.ordered.date), b: SIR.date(tb.working.date) }), ['tribunals', 'faq']] : null,
+        T ? [L('How many appeals have the tribunals decided?'),
+         L('The Election Commission told the Supreme Court in an affidavit filed on {d} that {dec} of {f} appeals had been decided and {pe} were pending. Later counts come from counsel in court, from newspapers and from an independent count of the appeal portal, and they do not agree with each other. The tribunals page gives each count with who gave it.', { d: SIR.date(tl.filed.date), dec: SIR.n(tl.decided.value), f: SIR.n(tl.filed.value), pe: SIR.n(tl.pending.value) }), ['tribunals', 'faq']] : null,
+        T ? [L('Why do the figures on the appeals differ?'),
+         L('They come from different documents at different dates, and some are what counsel said in court or what a newspaper wrote without naming its source. Every pair of figures that cannot both be true is marked on the tribunals page, and each is kept as its source wrote it, with neither chosen over the other.'), ['tribunals']] : null,
+        T ? [L('Does an appeal decided in favour of the elector mean the deletion was wrong?'),
+         L('A tribunal\'s order says only how that appeal was decided. The appeals decided so far are a small part of those filed, and none of the sources shows that they are like the rest.'), ['tribunals']] : null,
         [L('Can I look up my own name here?'),
          L('No. Only counts are published. No name is. To check your own entry, use the Election Commission\'s voter search.'), ['main']]
       ];
@@ -53,7 +68,19 @@
           L('A reason on the list is what the officer wrote down, and nobody checked it.')],
         faq: [[scale, women, fall, margin], limits]
       };
-      return { qa: QA, short: SHORT };
+      if (T) {
+        var cs = T.rows.filter(function (x) { return x.basis === 'counsel' && x.measure === 'share_on_roll'; }).sort(function (a, b) { return a.date !== b.date ? (a.date < b.date ? 1 : -1) : (a.approx ? 1 : 0) - (b.approx ? 1 : 0); })[0];
+        var an = T.rows.filter(function (x) { return x.basis === 'official' && x.measure === 'on_roll' && x.appeals === 'all'; }).sort(function (a, b) { return a.date < b.date ? 1 : -1; })[0];
+        var off = an && T.rows.filter(function (x) { return x.measure === 'off_roll' && x.date === an.date && x.source === an.source; })[0];
+        SHORT.tribunals = [[
+          L('By the Election Commission\'s affidavit in the Supreme Court, filed on {d}, {f} appeals had been filed, {by} by deleted electors seeking to be restored and {ag} against the inclusion of names. {dec} had been decided.', { d: SIR.date(tl.filed.date), f: SIR.lakh(tl.filed.value), by: SIR.lakh(T.rows.filter(function (x) { return x.date === tl.filed.date && x.measure === 'filed' && x.appeals === 'by_deleted'; })[0].value), ag: SIR.lakh(T.rows.filter(function (x) { return x.date === tl.filed.date && x.measure === 'filed' && x.appeals === 'against_inclusion'; })[0].value), dec: SIR.n(tl.decided.value) }),
+          an && off ? L('In the Commission\'s report of {d}, {a} of the appeals decided ended with the name on the roll and {b} with it off.', { d: SIR.date(an.date), a: SIR.n(an.value), b: SIR.n(off.value) }) : '',
+          cs ? L('At the hearing of {d}, counsel for the petitioners told the Supreme Court that {p} per cent of the appeals decided had gone in favour of deleted electors, {src} reported. That is counsel\'s figure.', { d: SIR.date(cs.date), p: SIR.n(cs.value), src: cs.source }) : '',
+          tb.priority ? L('On {d} the Supreme Court directed the tribunals to hear the appeals of deleted electors first, and directed that their number be increased.', { d: SIR.date(tb.priority.date) }) : '',
+          L('{n} pairs of figures from different sources, or from one document, cannot both be true, and each is marked.', { n: T.counts.flags })],
+          L('Each figure is shown as its source wrote it, with who gave it. A figure from counsel, a newspaper or a source a newspaper does not name is a claim.')];
+      }
+      return { qa: QA.filter(Boolean), short: SHORT };
     }));
   });
 })();

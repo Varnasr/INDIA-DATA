@@ -199,6 +199,21 @@ data/india/ssr_draft.json, process.json and states.json in the browser and
 shows every draft against its final roll, so a new draft needs no edit to it.
 A second reader checks every figure before the merge, as for a final roll.
 
+## West Bengal's appellate tribunals
+
+`westbengal/tribunals/` reads `data/westbengal/tribunals.json`, which
+`scripts/build_wbtrib.py` writes from `data/westbengal/raw/tribunals.csv` (one
+row a dated figure: the words of its source, who gave it, its basis, its
+address and the site item that cites that address) and `tribunal_orders.csv`
+(the orders and events). A row with no source, an item the site does not show
+or an item that does not cite the row's address fails the build. Figures for
+the same measure and date, or from the same document where one is undated, that
+cannot both be true are flagged, and so is a count of appeals filed or decided,
+or of judges who resigned, lower than an earlier one. A count its source says
+covers only part of the whole (the Civic Research Group's portal counts) carries
+approx `part` and is read as a floor, so it is never flagged for being lower. Nothing is corrected: a new figure is a new row, read from its
+source, and the page shows each with its flag. `check_data.py` runs `--check`.
+
 ## Writing
 
 Plain, full sentences with facts in them. No em dashes, no "X, not Y" turns, no
