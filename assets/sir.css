@@ -855,6 +855,7 @@ table.stack th:not(.num),table.stack td:not(.num){text-align:start}
 table.stack .num{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}
 table.stack td:first-child{font-weight:600}
 table.stack td small{display:block;font-weight:400;color:var(--muted);font-size:.8rem;margin-top:.1rem}
+table.stack.prose .nsrc{white-space:normal;display:inline-block;max-width:14rem;font-size:.8rem;color:var(--muted);font-weight:400}
 details.figs{max-width:min(100%,52rem);margin:.4rem 0 1.4rem}
 details.figs>summary{cursor:pointer;font-family:var(--mono);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:.4rem 0}
 details.figs>summary:hover{color:var(--ink)}
@@ -872,6 +873,9 @@ details.upigate[open]>summary{margin-bottom:.6rem}
   table.stack td:first-child::before{content:none}
   table.stack td:first-child small{display:inline;margin-inline-start:.3rem}
   html.dyslexic-font table.stack td::before{font-size:.85rem}
+  /* a stacked table whose cells hold sentences: the text reads from the start under its label */
+  table.stack.prose td.l{display:block;text-align:start}
+  table.stack.prose td.l::before{display:block;margin-bottom:.15rem}
 }
 
 /* the places menu folds: a place's own pages and the 2026 states each sit

@@ -29,8 +29,12 @@
   },
   {
     "url": "https://www.thehindu.com/data/bihar-sir-latest-eci-data-raises-more-questions-over-higher-deletions-among-women/article69959830.ece",
-    "status": "confirmed",
-    "note": "Opened. Headline exact; byline Areena Arora, Srinivasan Ramani, Vignesh Radhakrishnan; 2025-08-21. Uses the ~65 lakh list released after the Supreme Court's direction; women outnumber men among 'permanently shifted', more so below 40."
+    "status": "corrected",
+    "note": "Opened. Headline exact; byline Areena Arora, Srinivasan Ramani, Vignesh Radhakrishnan; 2025-08-21. Uses the ~65 lakh list released after the Supreme Court's direction; women outnumber men among 'permanently shifted', more so below 40. Third reading, 25 November 2026 (second reader of the datasets page): the page fetched again with curl. Its JSON-LD now says isAccessibleForFree false, so it is subscription under the standing rule, and only the headline, the standfirst and the opening paragraph were used. The summary is cut to what those carry: the 'permanently shifted' category, women outnumbering men, more so below 40, and the standfirst on migrants. The list of about 65 lakh and the Supreme Court's direction are in the part for subscribers and are no longer carried. Subscription.",
+    "fix": {
+      "subscription": true,
+      "shows": "It finds that women far outnumbered men among the Bihar electors left off the draft roll as 'permanently shifted', and more so among electors below the age of 40. The paper's standfirst says far more women than men who had migrated were excluded from the rolls."
+    }
   },
   {
     "url": "https://www.thehindu.com/videos/watch-bihar-sir-the-mystery-behind-7-lakh-more-women-elector-deletions-data-point/article69967832.ece",
@@ -39,8 +43,12 @@
   },
   {
     "url": "https://www.thehindu.com/data/more-women-deleted-from-rolls-in-most-states-after-sir/article70727785.ece",
-    "status": "confirmed",
-    "note": "Opened. Headline exact (trailing space on the site); Devyanshi Bihani and Srinivasan Ramani; 2026-03-11. Compares 2024 Lok Sabha rolls with final SIR rolls; ratio fell in all major states, Tamil Nadu the exception."
+    "status": "corrected",
+    "note": "Opened. Headline exact (trailing space on the site); Devyanshi Bihani and Srinivasan Ramani; 2026-03-11. Compares 2024 Lok Sabha rolls with final SIR rolls; ratio fell in all major states, Tamil Nadu the exception. Third reading, 25 November 2026 (second reader of the datasets page): the page fetched again with curl. Its JSON-LD now says isAccessibleForFree false, so it is subscription under the standing rule, and only the headline, the standfirst and the opening paragraph were used. The summary is cut to what those carry: the headline, the 12 states and union territories and close to 51 crore voters, enumeration from November 2025, and the standfirst on Tamil Nadu. The comparison of women per 1,000 men on the 2024 Lok Sabha rolls is in the part for subscribers and is no longer carried. Subscription.",
+    "fix": {
+      "subscription": true,
+      "shows": "Its headline says more women were deleted from the rolls in most states after the revision, which then covered 12 states and union territories and close to 51 crore voters, with enumeration from November 2025. The paper says Tamil Nadu was the only major state where the gender ratio improved slightly, although it recorded one of the largest reductions in total electors."
+    }
   },
   {
     "url": "https://scroll.in/article/1087358/why-exclusion-of-women-voters-in-bihar-should-worry-nitish-kumar",

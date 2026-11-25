@@ -588,6 +588,20 @@ def _flags():
             'india/%s/ no longer links to the page on logical discrepancies' % p
 
 
+def _datasets():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_datasets.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+    page = open(os.path.join(ROOT, 'site', 'pages', 'india', 'datasets', 'index.html'), encoding='utf-8').read()
+    assert "SIR.showFaq('india', 'datasets')" in page and 'id="short"' in page, 'the page on other datasets lost its findings or its questions'
+    # aggregates only: no entry links a file of rows
+    D = json.load(open(os.path.join(ROOT, 'data', 'india', 'datasets.json'), encoding='utf-8'))
+    for e in D['entries']:
+        assert not re.search(r'\.(csv|tsv|parquet|tar|zip|gz|xlsx?|json)(\?|$)', e['url'], re.I), '%s links a file of rows' % e['id']
+    for p in ('reading', 'method'):
+        assert 'href="../datasets/"' in open(os.path.join(ROOT, 'site', 'pages', 'india', p, 'index.html'), encoding='utf-8').read(), \
+            'india/%s/ no longer links to the page on other datasets' % p
+
+
 def _brief():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_brief.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
@@ -897,6 +911,7 @@ for name, fn in [
     ('the RTI page carries only checked applications and is current', _rti),
     ('every West Bengal tribunal figure names its source and a site item that cites it, and figures that differ are flagged', _wbtrib),
     ('the page on logical discrepancies cites only checked items, says what each says, and sends nothing', _flags),
+    ('the page on other datasets cites only checked items, takes every figure from them and links no file of rows', _datasets),
     ('the case studies carry only checked items and are current', _cases),
     ('the site\'s own words keep the writing rules', _writing),
     ('the reading page carries only items read twice and is current', _reads),
