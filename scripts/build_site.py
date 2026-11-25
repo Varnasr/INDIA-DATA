@@ -794,6 +794,10 @@ def search_index():
                     facets[(k, v)] = facets.get((k, v), 0) + 1
     for (k, v), n in sorted(facets.items()):
         rows.append(['india', 'f', v, n, 'india/disputes/?%s=%s' % (k, quote(v))])
+    # the court cases page: every matter, by its title and case numbers
+    for m in J('india/courts.json')['matters']:
+        rows.append(['india', 'x', m['title'], '%s, %s' % (m['court'], m['last']), 'india/courts/#m-' + m['id'],
+                     ' '.join([m['case_title']] + [x['key'] for x in m['numbers']] + m['states'] + m['actors'])])
     # the RTI page: every application, by what was asked
     for it in J('india/rti.json')['items']:
         rows.append(['india', 'x', it['asked'][:100], '%s, %s' % (it['outlet'], it['published']),

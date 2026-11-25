@@ -547,6 +547,25 @@ def _wbtrib():
     assert 'tribunals/' in ov, 'the West Bengal overview no longer links to the tribunals page'
 
 
+def _courts():
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_courts.py'), '--check'], capture_output=True, text=True)
+    assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
+    page = open(os.path.join(ROOT, 'site', 'pages', 'india', 'courts', 'index.html'), encoding='utf-8').read()
+    assert "SIR.showFaq('india', 'courts')" in page and 'id="short"' in page and 'data/india/courts.json' in page, 'the court cases page lost its findings, its questions or its data'
+    # every entry the page shows is a confirmed entry of the disputes page, and
+    # every matter's listings point at entries in it
+    D = json.load(open(os.path.join(ROOT, 'data', 'india', 'disputes.json'), encoding='utf-8'))
+    C = json.load(open(os.path.join(ROOT, 'data', 'india', 'courts.json'), encoding='utf-8'))
+    ids = {i['id'] for s in D['sections'] for i in s['items']}
+    assert set(C['items']) <= ids, 'the court cases page shows entries the disputes page does not carry: %s' % ', '.join(sorted(set(C['items']) - ids))
+    for m in C['matters']:
+        assert m['items'] and set(m['items']) <= set(C['items']), 'matter %s has no entry, or one the page does not carry' % m['id']
+        assert all(C['listings'][x]['disputes_id'] in m['items'] for x in m['listings']), 'a listing of %s points outside it' % m['id']
+        assert not set(m['items']) & {r['id'] for r in m['related']}, 'matter %s lists an entry as both in the case and related' % m['id']
+    disp = open(os.path.join(ROOT, 'site', 'pages', 'india', 'disputes', 'index.html'), encoding='utf-8').read()
+    assert 'href="../courts/"' in disp, 'the disputes page no longer links to the court cases page'
+
+
 def _rti():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build_rti.py'), '--check'], capture_output=True, text=True)
     assert r.returncode == 0, (r.stdout + r.stderr).strip()[-400:]
@@ -874,6 +893,7 @@ for name, fn in [
     ('the weekly digest keeps to its week, its entries\' figures, the writing rules and pages that exist', _digest),
     ('the bulk Form 7 table is current, links only to disputes items and takes every count from its entry', _form7_bulk),
     ('the events page carries only events read twice and is current', _events),
+    ('the court cases page holds only confirmed entries, grouped by its rules, and is current', _courts),
     ('the RTI page carries only checked applications and is current', _rti),
     ('every West Bengal tribunal figure names its source and a site item that cites it, and figures that differ are flagged', _wbtrib),
     ('the page on logical discrepancies cites only checked items, says what each says, and sends nothing', _flags),
