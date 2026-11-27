@@ -14,8 +14,12 @@ figure is for (as_of), the date it was said in court or filed (said), or,
 where the source gives no date of its own, the date of the report (reported).
 The basis says who the figure comes from:
 
-    official  an official document: the Commission's affidavit or annexure,
-              or the Chief Electoral Officer's RTI reply
+    official  an official document the report identifies by its number,
+              date or paragraph: the Commission's affidavit or annexure, or
+              the Chief Electoral Officer's RTI reply
+    unidentified  a figure a newspaper attributes to an official document it
+              names without the document's date, number or paragraph; kept
+              apart from official, and never the latest official figure
     court     the Supreme Court's own order
     counsel   a submission by named counsel in court
     analysis  an independent group's count of the tribunals' appeal portal
@@ -48,7 +52,7 @@ MEASURES = {
     'tribunals': None, 'resigned': None, 'per_day': None,
 }
 APPEALS = {'all', 'by_deleted', 'against_inclusion'}
-BASIS = {'official', 'court', 'counsel', 'analysis', 'press', 'unnamed'}
+BASIS = {'official', 'unidentified', 'court', 'counsel', 'analysis', 'press', 'unnamed'}
 KINDS = {'as_of', 'said', 'reported'}
 APPROX = {'', 'over', 'at least', 'nearly', 'about', 'a little over', 'range', 'part'}
 # counts that can only grow: a later one below an earlier one is flagged
@@ -137,6 +141,10 @@ def build():
             fail('%s: %r appeals for %s' % (where, r['appeals'], r['measure']))
         if r['basis'] not in BASIS:
             fail('%s: basis %r' % (where, r['basis']))
+        # a document with no date of its own in the report is one the report
+        # does not identify, so it cannot stand as an official document
+        if r['basis'] == 'official' and r['date_kind'] == 'reported':
+            fail('%s: an official figure with no date of its own is basis unidentified' % where)
         if r['approx'] not in APPROX or (r['approx'] == 'range') != bool(r['value_hi']):
             fail('%s: approx %r with value_hi %r' % (where, r['approx'], r['value_hi']))
         for k in ('as_written', 'who', 'source', 'url', 'item'):

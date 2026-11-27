@@ -25,8 +25,9 @@ districts.json, final.json, constituencies.csv and districts.csv.
   (eci2022_ac.csv: report 10 for the candidates' votes, report 12 for the
   electors and votes polled). The published compilation used before
   (results_2022.csv) is kept as a record and checked against it: the parties
-  agree in all 182 seats and the margins in 180 (Viramgam and Wankaner are
-  one vote apart). Turnout is votes polled over the 2022 electors, and the
+  agree in all 182 seats and so do the margins (Viramgam's and Wankaner's,
+  one vote off in the compilation, were corrected to the report on
+  27 November 2026). Turnout is votes polled over the 2022 electors, and the
   names left off are set against the margin at that turnout too.
 - Ahmedabad's 21 constituencies after the draft (added, deleted, final) are
   from a graphic in Gujarat Samachar (17 February 2026), checked against the
@@ -90,7 +91,7 @@ def build():
     comp = {int(r['ac']): r for r in read('results_2022.csv')}
     off = sorted(n for n in res if res[n]['margin'] != comp[n]['margin'])
     assert all(res[n]['winner_party'] == comp[n]['winner_party'] and res[n]['runner_up_party'] == comp[n]['runner_up_party'] for n in res)
-    assert off == [39, 67] and all(abs(int(res[n]['margin']) - int(comp[n]['margin'])) == 1 for n in off), off
+    assert not off, off
     E = lambda k: sum(int(r[k]) for r in res.values())
     assert (E('electors_total'), E('voted_total'), E('valid_votes'), E('nota')) == (49163277, 31879194, 31326370, 501202)
     assert [int(r['ac']) for r in ac] == list(range(1, 183)) and sorted(res) == list(range(1, 183)), 'ACs 1 to 182 once'

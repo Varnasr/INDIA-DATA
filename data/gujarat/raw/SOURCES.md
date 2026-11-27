@@ -134,6 +134,11 @@ The general election to the Gujarat Legislative Assembly, 1 and 5 December
   electors (IndiaVotes "Voters"), votes_total (all candidates plus NOTA),
   nota_votes, source_slug. Winner and runner-up are the two highest
   candidates; NOTA is not a candidate and is never runner-up.
+- **Two rows corrected on 2026-11-27.** Viramgam (39) and Wankaner (67) now
+  carry the Commission's votes, margin and votes_total from its statistical
+  report, in place of IndiaVotes' (one to six votes apart). The comparison
+  with Wikipedia below was made before that, on IndiaVotes' figures. See "The
+  Election Commission's 2022 statistical report" below.
 - **Cross-checked against English Wikipedia**, "2022 Gujarat Legislative
   Assembly election", section "Results by constituency",
   https://en.wikipedia.org/w/index.php?title=2022_Gujarat_Legislative_Assembly_election&action=raw
@@ -246,8 +251,34 @@ votes plus NOTA; every column adds up to the printed state totals (electors
 4,91,63,277, voted 3,18,79,194, valid 3,13,26,370, NOTA 5,01,202); the seats by
 party are BJP 156, INC 17, AAP 5, IND 3, SP 1. Against `results_2022.csv`, the
 compilation used before, parties agree in all 182 seats and margins in 180;
-Viramgam (39) and Wankaner (67) differ by one vote, and the build asserts
-exactly that. Two names differ in spelling in report 12 (Savarkundia, Bansda)
+Viramgam (39) and Wankaner (67) differed by one vote. On 2026-11-27 those two
+rows of `results_2022.csv` were corrected to the Commission's figures, read
+from report 8 (Constituency Data Summary) of the same file 14750
+(https://old.eci.gov.in/files/file/14750-gujarat-general-legislative-election-2022/,
+download r=41192, 183 pages, one page per seat):
+
+| AC | column | was (IndiaVotes) | now (ECI report 8) |
+|---|---|---|---|
+| 39 Viramgam | winner_votes | 99,155 | 99,157 |
+| 39 Viramgam | runner_up_votes | 47,448 | 47,449 |
+| 39 Viramgam | margin | 51,707 | 51,708 |
+| 39 Viramgam | votes_total | 1,99,754 | 1,99,757 (valid 1,96,504 + NOTA 3,253) |
+| 67 Wankaner | winner_votes | 80,677 | 80,680 |
+| 67 Wankaner | runner_up_votes | 60,722 | 60,724 |
+| 67 Wankaner | margin | 19,955 | 19,956 |
+| 67 Wankaner | votes_total | 2,02,972 | 2,02,978 (valid 2,00,505 + NOTA 2,473) |
+
+A second reader read report 8 again on 27 November 2026 (through Firecrawl's
+PDF parser, from the same download) and found the same winner's votes,
+runner-up's votes, margin, valid votes and NOTA for both seats.
+
+The margins in the two files now agree in all 182 seats. The `electors`
+column was left as IndiaVotes gives it. It differs from the Commission's
+general electors in 157 seats, and the build does not read it. The site's
+margins were always taken from `eci2022_ac.csv`, so no figure on a page
+changed.
+
+Two names differ in spelling in report 12 (Savarkundia, Bansda)
 and keep report 10's.
 
 ## Ahmedabad after the draft (`ahmedabad_final_ac_press.csv`)

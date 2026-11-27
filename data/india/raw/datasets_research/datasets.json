@@ -2,7 +2,7 @@
  "entries": [
   {
    "id": "s1d-up",
-   "maker": "s1d labs",
+   "maker": "s1d labs (Sarthak Sidhant)",
    "kind": "dataset",
    "states": [
     "Uttar Pradesh"
@@ -11,10 +11,10 @@
    "url": "https://labs.s1d.me/up-eci",
    "first": "2026-11-24",
    "covers": "Four of Uttar Pradesh's rolls, one file for each of the 403 Assembly constituencies. They are the roll of the 2024 Lok Sabha election, the draft and final rolls of the intensive revision, and the draft roll of the 2027 summary revision. The first release came on 24 November 2026 and the second, which added 4,015 newer parts of the two rolls of the intensive revision, on 25 November.",
-   "how": "s1d labs says it read about 6.8 lakh of the Commission's PDFs, most of them scanned images, with five optical character readers and no language model. The 2027 roll, the only one of the four with a text layer, was read directly.",
+   "how": "Sarthak Sidhant says he and his team made the release. He announced it on X on 24 November 2026, and The Indian Express reported it with inputs from PTI. s1d labs says it read about 6.8 lakh of the Commission's PDFs, most of them scanned images, with five optical character readers and no language model. The 2027 roll, the only one of the four with a text layer, was read directly.",
    "access": "request",
    "access_text": "The files it publishes replace names, relatives' names, EPIC numbers and house numbers with keyed-hash tokens, so that one elector can be followed from roll to roll and counted by age and gender. It sends the full text to journalists and researchers who apply.",
-   "limits": "It says the Commission's PDFs remain the authority and its counts are not official figures. Hand checks found every field right in 96.77 per cent of records of the intensive revision, from 402 boxes, and in 97.35 per cent of records on the 2024 roll. It says the tokens do not make a record anonymous. The figures here follow the README of the second release. The landing page, read on 25 November, still carried the first release's warning that newer parts were missing from the two rolls of the intensive revision and that its totals should not be compared with the official ones.",
+   "limits": "It says the Commission's PDFs remain the authority and its counts are not official figures. A hand check of 402 boxes from 112 constituencies, each read blind twice, found every field right in 96.77 per cent of records of the intensive revision (95.74 per cent weighted to the roll). A separate set of 1,600 boxes from 32 constituencies, which no model had been trained on, found every field right in 97.35 per cent of records on the 2024 roll, weighted. It says the tokens do not make a record anonymous. The figures here follow the README of the second release. The landing page, read on 25 and 27 November, still carried the first release's warning that newer parts were missing from the two rolls of the intensive revision and that its totals should not be compared with the official ones.",
    "compare": [
     {
      "type": "file",
@@ -56,6 +56,10 @@
     [
      "https://diagramchasing.fun/2026/sir/uttar-pradesh",
      "as digitised by s1d labs"
+    ],
+    [
+     "https://indianexpress.com/article/education/cbse-osm-whistleblower-sarthak-sidhant-digitises-6-8-lakh-pdf-files-uttar-pradesh-sir-rolls-10978322/",
+     "Sarthak Sidhant"
     ]
    ],
    "pages": [

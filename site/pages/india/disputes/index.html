@@ -171,9 +171,21 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
   function stateSum(st) {
     var ask = ++sumAsk;
     if (!st || st === 'All India' || st === 'India') { sumBox.hidden = true; sumBox.innerHTML = ''; return; }
-    Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/ssr_draft.json'), SIR.json('data/india/now.json')]).then(function (r) {
+    Promise.all([SIR.json('data/india/states.json'), SIR.json('data/india/ssr_draft.json'), SIR.json('data/india/now.json'), SIR.json('data/india/process.json')]).then(function (r) {
       if (ask !== sumAsk) return;
       var S = r[0].states.filter(function (x) { return x.state === st; })[0], R = r[1].states.filter(function (x) { return x.state === st; })[0], NP = r[2].pages[st];
+      // the Commission's order of the third phase, where it leaves this state
+      // out: its text names the states after "the whole country except"
+      var OUT = r[3].timeline.filter(function (t) {
+        var i = t.who === 'eci' ? t.text.indexOf('the whole country except ') : -1;
+        return i >= 0 && t.text.slice(i, t.text.indexOf('.', i)).indexOf(st) >= 0 && t.src && t.src[0] && t.src[0].url;
+      })[0];
+      // a later sentence of the Commission's that names the state and does not
+      // say the revision has not begun there may be its order, and the
+      // sentence that it has not ordered one is then left out
+      if (OUT && r[3].timeline.some(function (t) {
+        return t.who === 'eci' && t.date > OUT.date && t.text.split(/\.\s+/).some(function (x) { return x.indexOf(st) >= 0 && x.indexOf('not begun') < 0; });
+      })) OUT = null;
       var nm = lang === 'en' ? esc(st) : '<span lang="en" dir="ltr">' + esc(st) + '</span>';
       var en = function (t) { return lang === 'en' ? esc(t) : '<span lang="en" dir="ltr">' + esc(t) + '</span>'; };
       var root = SIR.root, h = '<h2 id="ssH">' + L('Where things stand in {state}', { state: nm }) + '</h2>';
@@ -202,7 +214,9 @@ Promise.all([SIR.json('data/india/disputes.json'), SIR.json('data/geo/india.json
           if (S.withheld) roll.push(L('Another {w} names were held for adjudication and are not on the final roll.', { w: n(S.withheld) }));
           if (S.final_source && S.final_source.source === 'press') roll.push(L('The figures for the final roll are as the press reported them.'));
         } else roll.push(L('No final roll has been found yet.'));
-      } else roll.push(SPECIAL[st] ? L('{state} was given a special revision in place of an intensive one.', { state: nm }) : L('No draft roll of the intensive revision has been found for {state}.', { state: nm }));
+      } else roll.push(SPECIAL[st] ? L('{state} was given a special revision in place of an intensive one.', { state: nm }) :
+        OUT ? L('The Commission has not ordered the intensive revision in {state}. Its <a href="{href}">press note of {date}</a>, which ordered the revision in the rest of the country, says the schedule for {state} will be announced later.', { state: nm, href: esc(OUT.src[0].url), date: day(OUT.date) }) :
+        L('No draft roll of the intensive revision has been found for {state}.', { state: nm }));
       roll.push(L('<a href="{href}">Where the revision stands</a> gives the stage each state has reached.', { href: root + 'india/progress/' }));
       h += '<h3>' + L('The intensive revision') + '</h3><p>' + roll.join(' ') + '</p>';
       // the summary revision for 1 January 2027

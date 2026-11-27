@@ -1,0 +1,17 @@
+{
+ "note": "Passages quoted word for word from sources already on the reading list, where the reading-list summary does not carry the words of a rule. scripts/build_flags.py shows a passage under a rule only where the rule's phrase is in it. A passage is the source's own words, with a cut marked by an ellipsis, and nothing of the site's is added inside one.",
+ "sources": {
+  "https://diagramchasing.fun/2026/karnataka-sir": {
+   "state": "Karnataka",
+   "read": "2026-11-27",
+   "address_now": "https://diagramchasing.fun/2026/sir/karnataka",
+   "reading": "First reading, 27 November 2026, of the page rendered in headless Chromium and of its HTML. The address on the reading list now answers with a page that says 'Redirecting to /2026/sir/karnataka', and the page there carries the same byline (Aman Bhargava), the same JSON-LD date (12 November 2026) and the same text. The section after the twins heading lists the reasons printed on Karnataka's notices, and its table 'The nine-month rule was the most likely to get a voter struck off' (sources: CEO Karnataka, Mathakaavalu, Diagram Chasing) gives each reason on the notice beside a plain-English gloss of its own. Only the reasons as printed on the notices are quoted here. The Uttar Pradesh page of the same series (https://diagramchasing.fun/2026/sir/uttar-pradesh), rendered the same day, lists no rule the software applied: it counts errors on the final roll by its own tests, and says only 'Under the same rules' of the disqualifications. The rules are therefore taken from the Karnataka page.",
+   "second_reading": "Second reading, 27 November 2026, by a second reader, of the page rendered again in headless Chromium. The address on the reading list went to https://diagramchasing.fun/2026/sir/karnataka, and the JSON-LD gives the byline Aman Bhargava and the date 12 November 2026. Each part of the three passages between the ellipses was found word for word in the page's text. The conditions passage is from the paragraph after the twins heading, cut once after the word reasons. The names passage joins the caption of the table of notices by reason, its first column heading and two of its row labels. The unmapped passage is a whole sentence. The rule each passage is given to was read against it. Parent Age Difference <15, Parent Age difference >50 and Grandparent Age difference <40 match the three age rules, Progeny >= 6 matches the rule read as six or more children, Progeny Age Gap <9 Month matches the sibling rule, Self Name Mismatch and Parent Name Mismatch match the two name rules, and Unmapped with Last SIR matches the no-mapping list.",
+   "passages": {
+    "conditions": "The notices also list out the Commission’s “logical discrepancy” reasons … We encounter conditions like Parent Age Difference <15, Parent Age difference >50, Grandparent Age difference <40, Progeny >= 6, and my favourite, Progeny Age Gap <9 Month. That last one means two children of one parent can’t be born less than nine months apart, which is true unless they’re twins.",
+    "names": "Notices of voter disqualification in Karnataka between August and October 2026, categorized by reason … Reason on the notice … Self Name Mismatch … Parent Name Mismatch",
+    "unmapped": "If you could not be found, you got a notice saying you were “Unmapped with Last SIR”, and then you had to go to a hearing with documents and prove that you exist."
+   }
+  }
+ }
+}

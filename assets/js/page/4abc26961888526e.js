@@ -75,7 +75,7 @@ SIR.json('data/india/flags.json').then(function (D) {
           var s = S[k];
           return '<li><p class="nsrc"><b>' + SIR.date(s.date) + '</b>' + (s.state ? ', ' + esc(s.state) : '') + '. <a href="' + esc(s.url) + '" rel="noopener">' + esc(s.outlet) + '</a>, "' + esc(s.headline) + '". ' +
             (s.kind === 'primary' ? '<span class="tag primary">document</span>' : '<span class="tag press">report</span>') + (s.subscription ? ' Subscription.' : '') + '</p>' +
-            '<details><summary>What the source says</summary><blockquote>' + esc(s.quote || s.text) + '</blockquote></details></li>';
+            '<details><summary>What the source says</summary><blockquote>' + esc((r.quotes && r.quotes[k] && r.quotes[k].quote) || s.quote || s.text) + '</blockquote></details></li>';
         }).join('') + '</ol>';
     }).join('');
 
