@@ -943,7 +943,8 @@
    "video": false,
    "duration": "",
    "subscription": true,
-   "shows": "The Hindu read Delhi's draft roll of 97.54 lakh electors, matched it to the lists of the 33.12 lakh sent notices (13.79 lakh unmapped with the last SIR and 19.33 lakh for logical discrepancies), and guessed each elector's religion from their name and their relative's name. On that guess, Muslims were 13.6% of the draft roll, 7.6% of the unmapped and 20.3% of those flagged for logical discrepancies, and 30% of those flagged for the five reasons that turn on family size, such as six or more electors naming the same parent. The paper reports that ERONET, the Commission's software, decided who was flagged, that no SIR order mentioned notices for discrepancies before the Commission's direction of 14 May 2026, which still did not set out the reasons, and that the Commission had not answered its questions."
+   "shows": "The Hindu read Delhi's draft roll of 97.54 lakh electors, matched it to the lists of the 33.12 lakh sent notices (13.79 lakh unmapped with the last SIR and 19.33 lakh for logical discrepancies), and guessed each elector's religion from their name and their relative's name. On that guess, Muslims were 13.6% of the draft roll, 7.6% of the unmapped and 20.3% of those flagged for logical discrepancies, and 30% of those flagged for the five reasons that turn on family size, such as six or more electors naming the same parent. The paper reports that ERONET, the Commission's software, decided who was flagged, that no SIR order mentioned notices for discrepancies before the Commission's direction of 14 May 2026, which still did not set out the reasons, and that the Commission had not answered its questions.",
+   "archive": "https://archive.ph/jblRP"
   },
   {
    "group": "Data and analysis",
@@ -1315,7 +1316,7 @@
    "video": false,
    "duration": "",
    "subscription": false,
-   "shows": "s1d labs has read four of Uttar Pradesh's electoral rolls from the Election Commission's PDFs into tables, one file for each of the 403 assembly constituencies: the roll of the 2024 Lok Sabha election, the draft and final rolls of the Special Intensive Revision and the draft roll of the 2027 summary revision. It says it read about 6.8 lakh PDFs, most of them scanned images, with five optical character readers and no language model, and that the 2027 roll, the only one of the four with a text layer, was read directly. Its first release, of 24 November 2026, missed 4,015 newer parts of the two SIR rolls. Its second, of 25 November, adds them, and by its own count, leaving out entries with a deleted mark, the 2024 roll holds 15,36,26,796 entries, the SIR draft 12,55,56,003, the SIR final 13,40,95,626 and the 2027 draft 13,58,67,928. It reports that a hand check of 402 boxes found every field right in 96.77 per cent of SIR records and 97.35 per cent of records on the 2024 roll. In the files it publishes, names, relatives' names, EPIC numbers and house numbers are replaced by keyed-hash tokens, so that one elector can be followed from roll to roll and counted by age and gender, and it says the tokens do not make a record anonymous. It sends the full text to journalists and researchers who apply. It says the Commission's PDFs remain the authority and its counts are not official figures."
+   "shows": "s1d labs has read four of Uttar Pradesh's electoral rolls from the Election Commission's PDFs into tables, one file for each of the 403 assembly constituencies: the roll of the 2024 Lok Sabha election, the draft and final rolls of the Special Intensive Revision and the draft roll of the 2027 summary revision. It says it read about 6.8 lakh PDFs, most of them scanned images, with five optical character readers and no language model, and that the 2027 roll, the only one of the four with a text layer, was read directly. Its first release, of 24 November 2026, missed 4,015 newer parts of the two SIR rolls. Its second, of 25 November, adds them, and by its own count, leaving out entries with a deleted mark, the 2024 roll holds 15,36,26,796 entries, the SIR draft 12,55,56,003, the SIR final 13,40,95,626 and the 2027 draft 13,58,67,928. It reports two checks of its reading. A hand check of 402 boxes from 112 constituencies, each read blind twice, found every field right in 96.77 per cent of SIR records (95.74 per cent weighted to the roll). A separate set of 1,600 boxes from 32 constituencies, which no model had been trained on, found every field right in 97.35 per cent of records on the 2024 roll, weighted. In the files it publishes, names, relatives' names, EPIC numbers and house numbers are replaced by keyed-hash tokens, so that one elector can be followed from roll to roll and counted by age and gender, and it says the tokens do not make a record anonymous. It sends the full text to journalists and researchers who apply. It says the Commission's PDFs remain the authority and its counts are not official figures."
   },
   {
    "group": "Data and analysis",
@@ -1340,6 +1341,18 @@
    "duration": "",
    "subscription": false,
    "shows": "Abhijnan Rej, an Indian researcher and the founder of Tarqeq Research LLP, sets the revision beside a run of software outages in the United States in November, among them Microsoft's and a breakdown of the National Security Agency's internal communications. He writes that the opposition frames the revision as an exercise aimed at 'vote theft' and the disenfranchisement of Muslims, and that the accusations are undermined by the concern of Yogi Adityanath, the Chief Minister of Uttar Pradesh, about its effects on Hindu voters and by senior BJP figures, among them the foreign minister and Delhi's Chief Minister, being flagged as discrepant cases in Delhi. In his reading the trouble points to glitchy and poorly designed software. He cites rules that he says apparently require a nine-month gap between siblings, which raise red flags for twins, and electoral software that accepted made-up voter names ahead of local elections in an Uttar Pradesh constituency in October. He argues that consumer software designed to look slick leaves most people seeing very little of how it works, and that such societies are fertile ground for conspiracy theories. He writes that the government has struggled to clear the air on possible problems in the Commission's software. He closes by calling for a wider public conversation about the trade-offs of large-scale digitisation."
+  },
+  {
+   "group": "Data and analysis",
+   "title": "CBSE-OSM whistleblower Sarthak Sidhant digitises 6.8 lakh PDF files of UP SIR rolls",
+   "outlet": "The Indian Express",
+   "authors": "Education Desk, with inputs from PTI",
+   "date": "2026-11-25",
+   "url": "https://indianexpress.com/article/education/cbse-osm-whistleblower-sarthak-sidhant-digitises-6-8-lakh-pdf-files-uttar-pradesh-sir-rolls-10978322/",
+   "video": false,
+   "duration": "",
+   "subscription": false,
+   "shows": "The Indian Express reports that Sarthak Sidhant, a student from Jharkhand, says his team read about 6.8 lakh of the Commission's Uttar Pradesh roll PDFs, most of them scans, by optical character recognition, covering the 2024 Lok Sabha roll, both rolls of the intensive revision and the 2027 draft. The paper reports that the data hold 15.36 crore entries set out as 54.8 crore rows, in one table for each of the 403 constituencies, released free on 24 November. His post on X links to the s1d labs release. The paper notes that the Commission had put the rolls online in April mainly as scanned PDFs, and that the Commission had not responded to the claim."
   },
   {
    "group": "Data and analysis",
@@ -1962,7 +1975,7 @@
   }
  ],
  "counts": {
-  "items": 162,
+  "items": 163,
   "outlets": 44,
   "videos": 14
  }

@@ -20,6 +20,7 @@
 
   <h2>Every figure</h2>
   <p class="sub">The figures read on the appeals and the tribunals, with the words of its source, who gave it and where it was read. A figure from counsel, from a newspaper or from a source a newspaper does not name is a claim, and it is marked as such.</p>
+  <ul id="bases"></ul>
   <div class="twrap" tabindex="0" role="region" aria-label="Every figure on West Bengal's appellate tribunals"><table id="tObs"></table></div>
 
   <h2>Notes on each figure</h2>
@@ -40,13 +41,23 @@ SIR.json('data/westbengal/tribunals.json').then(function (T) {
   var E = SIR.esc, D = SIR.date, R = T.rows, byId = {};
   R.concat(T.derived).forEach(function (x) { byId[x.id] = x; });
   var BASIS = {
-    official: [L('Official document'), '--fill-navy'], court: [L('Supreme Court order'), '--fill-teal'], counsel: [L('Counsel in court'), '--fill-amber'],
+    official: [L('Official document'), '--fill-navy'], unidentified: [L('An official document named without its date or number'), '--fill-pink'], court: [L('Supreme Court order'), '--fill-teal'], counsel: [L('Counsel in court'), '--fill-amber'],
     analysis: [L('Independent count of the appeal portal'), '--fill-purple'], press: [L('The newspaper\'s own statement'), '--fill-grey'], unnamed: [L('A source the newspaper does not name'), '--fill-red']
   };
   var MEASURE = {
     filed: L('Appeals filed'), decided: L('Appeals decided'), pending: L('Appeals pending'), on_roll: L('Decided with the name on the roll'),
     off_roll: L('Decided with the name off the roll'), share_on_roll: L('Share of decided appeals in favour of the elector'),
     tribunals: L('Tribunals'), resigned: L('Tribunal judges who resigned'), per_day: L('Appeals a judge can hear in a day')
+  };
+  // what each basis means, shown above the table
+  var MEANS = {
+    official: L('The Commission\'s affidavit or its annexure, or the Chief Electoral Officer\'s reply under the RTI Act, which the report or copy that gives the figure identifies by its number, date or paragraph.'),
+    unidentified: L('A newspaper names the official document a figure comes from, such as the Commission\'s affidavit, and gives neither its date nor its number, so the document cannot be found from the report. It is kept apart from the official documents.'),
+    court: L('The Supreme Court\'s own order.'),
+    counsel: L('What a named lawyer told the Supreme Court at a hearing, as a report of the hearing gives it.'),
+    analysis: L('A count by the Civic Research Group, an independent group, of the appeals listed on the tribunals\' portal.'),
+    press: L('The newspaper states the figure and names no source for it.'),
+    unnamed: L('The newspaper gives the figure from a person it does not name.')
   };
   var KIND = { all: L('all appeals'), by_deleted: L('appeals by deleted electors'), against_inclusion: L('appeals against inclusion') };
   var fig = function (x) {
@@ -122,6 +133,8 @@ SIR.json('data/westbengal/tribunals.json').then(function (T) {
   });
   SIR.table('tObs', [{ h: L('Date') }, { h: L('What is counted') }, { h: L('Figure, and the words of the source') }, { h: L('Who gives it') }, { h: L('Where it was read') }], rows);
   document.getElementById('notes').innerHTML = notes.join('');
+  document.getElementById('bases').innerHTML = Object.keys(BASIS).filter(function (b) { return R.some(function (x) { return x.basis === b; }); })
+    .map(function (b) { return '<li><b>' + BASIS[b][0] + '.</b> ' + MEANS[b] + '</li>'; }).join('');
   SIR.showFaq('wb', 'tribunals');
 }).catch(SIR.fail);
 </script>

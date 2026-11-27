@@ -310,7 +310,10 @@ def build_ratio(S, by):
     put('Maharashtra', 'draft', 'official', **_acsum('maharashtra/raw/district_draft.csv'))
     put('Karnataka', 'draft', 'official, general electors', **_acsum('karnataka/raw/draft_roll_district.csv'))
     kf = load('karnataka', 'raw', 'final.json')
-    put('Karnataka', 'final', 'press', women=kf['women'], men=kf['men'])
+    # the split by sex is ETV Bharat's report of the Chief Electoral Officer's
+    # figures, and the page says so while no official split is on file
+    assert 'the split by sex from ETV Bharat' in kf['source']['title'] and not kf['source']['primary'], 'Karnataka: who gave the final roll by sex has changed'
+    put('Karnataka', 'final', 'press', women=kf['women'], men=kf['men'], by='ETV Bharat')
     put('Rajasthan', 'draft', 'official', **_acsum('rajasthan/raw/sir_state_summary.csv', where=lambda r: r['item'] == 'draft_roll' and r['scope'].startswith('199')))
     put('Rajasthan', 'final', 'official, general electors', **_acsum('rajasthan/raw/sir_state_summary.csv', where=lambda r: r['item'] == 'final_roll_general' and r['scope'].startswith('199')))
     ukst = lambda r: r['district'] == 'State'
