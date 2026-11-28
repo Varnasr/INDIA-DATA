@@ -1,7 +1,7 @@
 {
  "title": "Off the Roll: index of the published data files",
  "url": "https://offtheroll.in/data/index.json",
- "built": "2026-11-27",
+ "built": "2026-11-28",
  "licence": {
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/"
@@ -13,7 +13,7 @@
  },
  "counts": {
   "files": 470,
-  "bytes": 16247256
+  "bytes": 16328331
  },
  "files": [
   {
@@ -44,7 +44,7 @@
    "path": "data/search.json",
    "description": "Every page, constituency and district the search box finds",
    "format": "JSON",
-   "bytes": 891046,
+   "bytes": 905499,
    "keys": [
     "places",
     "pages",
@@ -56,7 +56,7 @@
    "path": "data/updates.json",
    "description": "What has been added, by date, as on the What's new page",
    "format": "JSON",
-   "bytes": 137475,
+   "bytes": 139851,
    "keys": [
     "note",
     "entries"
@@ -4265,7 +4265,7 @@
    "path": "data/india/courts.json",
    "description": "All India: courts",
    "format": "JSON",
-   "bytes": 379410,
+   "bytes": 393860,
    "keys": [
     "matters",
     "other",
@@ -4291,7 +4291,7 @@
    "path": "data/india/disputes.csv",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source",
    "format": "CSV",
-   "bytes": 638160,
+   "bytes": 655243,
    "columns": [
     "section",
     "date",
@@ -4312,7 +4312,7 @@
    "path": "data/india/disputes.json",
    "description": "Every court case, resolution, protest, Form 7 dispute and software change on the disputes page, with its source. The same table as data/india/disputes.csv, as JSON",
    "format": "JSON",
-   "bytes": 973392,
+   "bytes": 993955,
    "keys": [
     "listings",
     "sections",
@@ -4771,7 +4771,7 @@
    "path": "data/india/ssr_draft.json",
    "description": "All India: ssr draft",
    "format": "JSON",
-   "bytes": 26467,
+   "bytes": 28400,
    "keys": [
     "about",
     "states"
@@ -4910,7 +4910,7 @@
    "path": "data/india/women.json",
    "description": "Every count by sex the site holds, state and district. The same table as data/india/women.csv, as JSON",
    "format": "JSON",
-   "bytes": 42960,
+   "bytes": 42959,
    "keys": [
     "summary",
     "states",
@@ -7218,7 +7218,7 @@
    "path": "downloads/all-tables.zip",
    "description": "Every table as CSV in one zip file",
    "format": "ZIP",
-   "bytes": 805817,
+   "bytes": 810782,
    "licence": "CC BY 4.0"
   },
   {
@@ -7253,7 +7253,7 @@
    "path": "downloads/india-all-states.xlsx",
    "description": "All India, Excel workbook",
    "format": "Excel",
-   "bytes": 433479,
+   "bytes": 438732,
    "licence": "CC BY 4.0"
   },
   {

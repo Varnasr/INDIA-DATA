@@ -691,6 +691,14 @@
   "court-101": {
    "status": "confirmed",
    "note": "Second reading, 27 November 2026 (second reader). PTI in ThePrint (datePublished 2026-11-27T13:46:40+05:30, no isAccessibleForFree, no subscriber wall) fetched again with curl and read in full from the page text. The Telegraph (PTI, published 27.11.26, 02:07 PM) answered curl with 403 and was read through Firecrawl's scrape of the live page, with the same paragraphs. LawChakra (publishedTime 2026-11-27T14:28:13+05:30) answered curl with 429 and was read in full through Firecrawl. Bar and Bench's post on X (created_at Fri Nov 27 05:33:44 +0000 2026) fetched again through api.fxtwitter.com. The Hindu (datePublished 2026-11-27T12:18:18+05:30, isAccessibleForFree false) fetched again and only its headline, standfirst and first paragraph read. Confirmed: the bench, the order of 23 November in PTI against 'the 25th' in Bar and Bench and LawChakra, which the note resolves to court-95, the minor modification to cover the Kolkata Municipal Corporation and such other corporations where elections are due, seven in all, the six other corporations, the quote verbatim as Justice Bagchi's in PTI and Bar and Bench, about 1.30 lakh pending in Kolkata and about 75,000 in the other six, roughly two lakh, the suggestion that pending appellants be allowed to vote, Sankaranarayanan on the police visits, 29 November and the checklist handed to the bench, the Commission's disowning of the exercise as he reported it, Justice Bagchi on formal collection, passports in the area of the Kolkata Municipal Corporation and the High Court, the Chief Justice on deciding the appeals first, and the response's LawChakra sentences. 27 November 2026 is a Friday, as PTI and LawChakra say. Matter: the case field carries W.P.(C) No. 1089 of 2025, which case_numbers() in scripts/build_courts.py reads as WP(C) 1089/2025, the lead number of the west-bengal matter, the same as court-95, so the entry joins that matter. The claim, response and note stand."
+  },
+  "court-102": {
+   "status": "confirmed",
+   "note": "Second reading, 28 November 2026 (second reader). The Wire read in full again through its CMS API (post 1115110, 27 November 2026, 8:12 pm IST) and The Telegraph (PTI) through Firecrawl after curl was refused. Every point of the claim and response agrees with The Wire, and the quotation is verbatim. Filed under courts beside court-75 and court-82, which carry the earlier letters on the same cases."
+  },
+  "court-103": {
+   "status": "confirmed",
+   "note": "Second reading, 28 November 2026 (second reader). The Indian Express (isAccessibleForFree true) read in full again from its JSON-LD, with The Wire and The Telegraph (PTI). The amounts, the date of 20 November, the rates of 7 April, the Registrar General's letter and the quotation agree."
   }
  }
 }
